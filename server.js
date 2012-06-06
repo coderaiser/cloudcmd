@@ -136,7 +136,7 @@ var CloudFunc=CloudServer.Minimize.scripts?/* если стоит минифик
 CloudServer.init=(function(){
     /* Переменная в которой храниться кэш*/
     CloudServer.Cache.setAllowed(false);
-    CloudServer.Minimize.scriptSize=false;
+    CloudServer.Minimize.scriptSize=true;
     /* Если нужно минимизируем скрипты */
     CloudServer.Minify.scripts();
 });
@@ -427,6 +427,7 @@ CloudServer._readDir=function (pError, pFiles)
                  * меняем в index.html обычный client.js на
                  * минифицированый
                  */
+                lIndex=lIndex.toString();
                 CloudServer.Minimize.scriptSize?
                     lIndex=lIndex.replace('client.js','client.min.js'):'';
                 
