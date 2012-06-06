@@ -1,2 +1,2 @@
-Cloud-Commander v 0.0
+Cloud-Commander
 ===============
