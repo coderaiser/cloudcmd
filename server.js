@@ -113,9 +113,15 @@ CloudServer.Minify={
     scripts : function(){
         if(CloudServer.Minimize.scriptSize){
             var lMinify      = require('./minify');
-            lMinify.jsScripts();
+            var lResult_b=lMinify.jsScripts();
+            /* if we get false, files wasn't minified
+             * error ocured
+             */
+            CloudServer.Minify.done=(lResult_b===undefined?true:false);
         }
-    }
+    },
+    /* свойство показывающее случилась ли ошибка*/
+    done: false
 };
 
 //var DirContent;
@@ -428,7 +434,13 @@ CloudServer._readDir=function (pError, pFiles)
                  * минифицированый
                  */
                 lIndex=lIndex.toString();
-                CloudServer.Minimize.scriptSize?
+                
+                /* if scripts shoud be minified and
+                 * minification proceed sucessfully
+                 * we include minified version of
+                 * clien.js to index.html
+                 */
+                (CloudServer.Minimize.scriptSize && CloudServer.Minify.done)?
                     lIndex=lIndex.replace('client.js','client.min.js'):'';
                 
                 lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);

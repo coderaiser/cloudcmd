@@ -1,10 +1,14 @@
-/* Модуль сжатия js-скриптов*/
+/* Модуль сжатия js-скриптов и css*/
 /*
     https://github.com/GoalSmashers/clean-css
 */
-exports.jsScripts=jsScripts;
 
-function jsScripts(){
+
+
+/* функция сжимает js-скрипты 
+ * и сохраняет их с именем .min.js
+ */
+exports.jsScripts=function jsScripts(){
     'use strict';    
     
     /* подключаем модуль uglify-js
@@ -15,11 +19,12 @@ function jsScripts(){
         var jsp = require("uglify-js").parser;
         var pro = require("uglify-js").uglify;
     }catch(error){
-        return console.log('ERROR. error loading minificatoin js\n' +
+        console.log('ERROR. error loading minificatoin js\n' +
             'to use minification you need to install uglify-js\n'   +
                 'npm install uglify-js\n'                           +
                 'https://github.com/mishoo/UglifyJS\n'              +
                 error);
+        return false;
     }
     
     var fs = require('fs');
@@ -78,4 +83,11 @@ function jsScripts(){
             error?console.log(error):dataReaded();
         };
     }
+};
+
+/* функция сжимает css-стили 
+ * и сохраняет их с именем .min.css
+ */
+exports.cssStyles=function cssStyles(){
+    'use strict';       
 };
