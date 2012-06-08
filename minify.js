@@ -8,7 +8,7 @@ exports.jsScripts=function jsScripts(){
     
     /* подключаем модуль uglify-js
      * если его нет - дальнейшая 
-     * работа модуля не имеет смысла
+     * работа функции не имеет смысла
      */
     try{
         var jsp = require("uglify-js").parser;
@@ -48,12 +48,16 @@ exports.jsScripts=function jsScripts(){
                 
                 /*********************************/
                 /* сжимаем код через uglify-js */
-                var orig_code = data.toString();
-                var ast = jsp.parse(orig_code); // parse code and get the initial AST
-                ast = pro.ast_mangle(ast); // get a new AST with mangled names
-                ast = pro.ast_squeeze(ast); // get an AST with compression optimizations
-                var final_code = pro.gen_code(ast); // compressed code here
+                var uglify_js=function(pDdata){
+                    var orig_code = pDdata.toString();
+                    var ast = jsp.parse(orig_code); // parse code and get the initial AST
+                    ast = pro.ast_mangle(ast); // get a new AST with mangled names
+                    ast = pro.ast_squeeze(ast); // get an AST with compression optimizations
+                    var result_code = pro.gen_code(ast); // compressed code here
+                    return result_code;
+                };
                 /*********************************/
+                var final_code=uglify_js(data);
                 
                 var minFileName=pFileName.replace('.js','.min.js');
                 /* если мы сжимаем client.js -
@@ -90,6 +94,10 @@ exports.jsScripts=function jsScripts(){
 exports.cssStyles=function cssStyles(){
     'use strict';       
     
+     /* connecting cleanCSS,
+      * if we can't find it -
+      * return false
+      */
      var cleanCSS;
      try{
         cleanCSS = require('clean-css');
