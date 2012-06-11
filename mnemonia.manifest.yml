@@ -1,0 +1,13 @@
+---
+applications:
+  .:
+    url: 
+    framework:
+      name: node
+      runtime: node06
+      info:
+        mem: NaNG
+        description:  Node.JS Application
+        exec:
+    mem: NaNG
+    instances: 1

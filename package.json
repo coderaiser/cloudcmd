@@ -1,0 +1,6 @@
+{
+  "name": "cloudcmd",
+  "version": "0.0.1",
+  
+  "scripts":{"test":"test/test.js"}
+}
