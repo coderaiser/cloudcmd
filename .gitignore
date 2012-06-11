@@ -1,0 +1,13 @@
+#files, the will be ignored by git
+
+#minified scripts
+*.min.js
+
+#node modules folder
+node_modules
+
+#cloudfoundry info files
+cloudcmd.manifest.yml
+
+#herocu info file
+Procfile
