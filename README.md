@@ -17,7 +17,7 @@ definitely will can work cached copy of directory listings)*;
 - disabled js support *(working in limited mode)*.
 - automated minification *client js-files and onstart-reading Cloud manager files on server starting.*
 
-**Cloud Commander** using all benefits of js, so if js is disabled,
+**Cloud Commander** uses all benefits of js, so if js is disabled,
 we moves to *limited mode*.
 
 Limited-mode features:
