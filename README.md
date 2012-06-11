@@ -6,16 +6,16 @@ Cloud Commander - two-panels file manager, totally writed on js.
 
 Benefits
 ---------------
-- full browser compatibility (ie6+,chrome,safari,opera,firefox);
-- responsible design
-- one full page loading, and then just one-time json-dir-listings loading
+- full *browser compatibility* (ie6+,chrome,safari,opera,firefox);
+- *responsible design*
+- *one full page loading*, and then just one-time json-dir-listings loading
 (with refresh opportunity).
-- caching readed directorys to localStorage
+- *caching readed directories* to localStorage
 (so if network will disconnected or something heppen with a signal, we
 definitely will can work cached copy of directory listings);
-- key binding
-- support of working in limited mode if js is disabled
-- automated minification client js-files and onstart-reading Cloud manager files on server starting.
+- *key binding*
+- *disabled js support* (working in limited mode).
+- *automated minification* client js-files and onstart-reading Cloud manager files on server starting.
 
 Cloud Commander using all benefits of js, so if js is disabled,
 we moves to limited mode.
