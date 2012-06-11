@@ -2,7 +2,7 @@ Cloud Commander
 ===============
 
 **Cloud Commander** - two-panels file manager, totally writed on js.
-View [demo](http://cloudcmd.cloudfoundry.com/ "demo").
+View [demo](http://cloudcmddemo.cloudfoundry.com/ "demo").
 
 Benefits
 ---------------
