@@ -11,6 +11,8 @@ Benefits
 - one full page loading, and then just one-time json-dir-listings loading
 (with refresh opportunity).
 - caching readed directorys to localStorage
+(so if network will disconnected or something heppen with a signal, we
+definitely will can work cached copy of directory listings);
 - key binding
 - support of working in limited mode if js is disabled
 - automated minification client js-files and onstart-reading Cloud manager files on server starting.
