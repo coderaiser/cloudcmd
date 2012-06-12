@@ -12,3 +12,6 @@ cloudcmddemo.manifest.yml
 
 #herocu info file
 #Procfile
+
+#hide travis yml for nodejitsu working out
+.travis.yml
