@@ -194,7 +194,10 @@ CloudServer.generateHeaders = function(pName, pGzip){
     else lType='text/plain';
         
     return {
-        'Content-Type': lType+'; charset=UTF-8',
+        /* if type of file any, but img - 
+         * then we shoud specify charset 
+         */
+        'Content-Type': lType + (lType.indexOf('img')<0?'; charset=UTF-8':''),
         'cache-control': 'max-age='+(31337*21),
         'last-modified': new Date().toString(),
         'content-encoding': pGzip?'gzip':'',
