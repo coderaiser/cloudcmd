@@ -4,4 +4,5 @@
    - 0.6
    - 0.7 # development version of 0.8, may be unstable
 notifications:
-    webhooks: http://webhooks.jit.su/deploy
+  webhooks:
+    - http://webhooks.jit.su/deploy
