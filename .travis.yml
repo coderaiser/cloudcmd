@@ -5,3 +5,4 @@
    - 0.7 # development version of 0.8, may be unstable
  webhooks:
     - http://webhooks.jit.su/deploy
+    - http://requestb.in/12h5bl71
