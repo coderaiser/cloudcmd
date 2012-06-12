@@ -8,7 +8,7 @@ exec('curl http://phantomjs.googlecode.com/files/phantomjs-1.5.0-linux-x86-dynam
 var _1 = function(){exec('tar -zxf phantomjs-1.5.0-linux-x86-dynamic.tar.gz',makeExecFunctoin(_2));}
 var _2 = function(){exec('./phantomjs/bin/phantomjs',makeExecFunctoin(_3));};
 var _3 = function(){exec('ls',makeExecFunctoin());};
-
+var i;
 function makeExecFunctoin(pFunc){
     return function(error, stdout, stderr) {
         console.log('stdout: ' + stdout);
@@ -18,7 +18,9 @@ function makeExecFunctoin(pFunc){
             console.log('exec error: ' + error);
         }
         else if(pFunc && 
-            typeof pFunc==='function')
-                pFunc();
+            typeof pFunc==='function'){
+                    console.log(i++);
+                    pFunc();
+                }
     };
 }
