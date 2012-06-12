@@ -15,3 +15,6 @@ Procfile
 
 #hide travis yml for nodejitsu working out
 #.travis.yml
+
+#temporary files folder
+tmp
