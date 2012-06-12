@@ -99,8 +99,6 @@ ul{ margin: 1em 0; padding: 0 0 0 40px; }
 .clearfix:after { clear: both; }
 .clearfix { *zoom: 1; }
 
-
-
 /* ==|== print styles =======================================================
    Print styles.
    Inlined to avoid required HTTP connection: h5bp.com/r
