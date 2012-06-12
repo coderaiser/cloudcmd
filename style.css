@@ -122,13 +122,13 @@
   /* freeupex */
   .directory{
       /*list-style-image*/
-      background-image:url('//dl.dropbox.com/u/74212301/mnemonia/images/icons/dir.png');
+      background-image:url('images/dir.png');
       background-repeat: no-repeat;
       background-position: 0 0;
   }
   .text-file{
       /*list-style-image*/
-      background-image:url('//dl.dropbox.com/u/74212301/mnemonia/images/icons/txt.png');
+      background-image:url('images/txt.png');
       background-repeat: no-repeat;
       background-position: 0 0;
   }

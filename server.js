@@ -244,13 +244,15 @@ CloudServer._controller=function(pReq, pRes)
          * ни о том, что это корневой
          * каталог - загружаем файлы проэкта
          */
-         console.log(lFS_s+pathname);
         if(pathname.indexOf(lFS_s)<0 &&
             pathname.indexOf(lNoJS_s)<0 &&
             pathname!=='/'){
             /* если имена файлов проекта - загружаем их*/  
             /* убираем слеш и читаем файл с текущец директории*/
-            lName=Path.basename(pathname);
+            //lName=Path.basename(pathname);
+            
+            /* добавляем текующий каталог к пути */
+            lName='.'+pathname;
             console.log('reading '+lName);
             /* сохраняем указатель на responce и имя */
             CloudServer.Responses[lName]=pRes;
