@@ -1,5 +1,5 @@
 var util = require('util'),
-    exec = require('child_process').execFile,
+    exec = require('child_process').exec,
     child;
 
 child = exec('sh test/test.sh',
