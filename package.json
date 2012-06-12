@@ -1,6 +1,9 @@
 {
-  "name": "cloudcmd",
-  "version": "0.0.1",
-  
-  "scripts":{"test":"ls"}
+    "name": "cloudcmd",
+    "version": "0.0.1",
+    
+    "scripts":{"test":"ls","start": "server.js"},
+    
+    "engines": { node: '0.6.x' },
+    "subdomain": 'cloudcmd'
 }
