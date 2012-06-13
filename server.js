@@ -182,7 +182,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
         lType='text/javascript';
     /* загружаем картинки*/
     else if(CloudFunc.checkExtension(pName,'png'))
-        lType='img/png';
+        lType='image/png';
     /* загружаем json*/
     else if(CloudFunc.checkExtension(pName,'json'))
         lType='application/json';
