@@ -2,6 +2,8 @@
 
 #minified scripts
 *.min.js
+*.min.css
+*.min.html
 
 #node modules folder
 node_modules
