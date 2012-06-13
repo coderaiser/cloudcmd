@@ -478,10 +478,9 @@ CloudClient._setCurrent=(function(){
                     lCurrentFile[0].className='';
                     /* устанавливаем курсор на файл,
                     * на который нажали */
+                    this.className=CloudClient.CURRENT_FILE;
                 }
-            }
-            this.className=CloudClient.CURRENT_FILE;
-            
+            }            
                 /*
                     console.log('Error. Can\'t find current file.'+
                     ' (CloudClient._setCurrent)');                                                 

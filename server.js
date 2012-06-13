@@ -142,7 +142,7 @@ var CloudFunc=CloudServer.Minimize.scripts?/* если стоит минифик
 CloudServer.init=(function(){
     /* Переменная в которой храниться кэш*/
     CloudServer.Cache.setAllowed(false);
-    CloudServer.Minimize.scriptSize=true;
+    CloudServer.Minimize.scriptSize=false
     /* Если нужно минимизируем скрипты */
     CloudServer.Minify.scripts();
 });
