@@ -115,9 +115,11 @@ CloudClient.Cache.isAllowed=(function(){
              * если он не поддерживаеться браузером
              * https://gist.github.com/350433 
              */
+            /*
             CloudClient.jsload('https://raw.github.com/gist/350433/c9d3834ace63e5f5d7c8e1f6e3e2874d477cb9c1/gistfile1.js',
                 function(){CloudClient.Cache._allowed=true;
             });
+            */
         }
 });
  /* если доступен localStorage и

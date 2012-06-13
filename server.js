@@ -35,15 +35,7 @@ var CloudServer={
     
     /* ПЕРЕМЕННЫЕ */
     /* Поддержка браузером JS*/
-    NoJS            :true,
-    /* обьект содержит данные
-     * о необходимости сжатия
-     * данных и скриптов
-     */
-    Minimize        :{
-        scriptSize:false,
-        styleSize:false
-    },
+    NoJS            :true,    
     /* Поддержка gzip-сжатия
      * браузером
      */
@@ -108,32 +100,51 @@ CloudServer.Cache={
 };
 
 /* Обьект для сжатия скриптов и стилей
+ * по умолчанию - сжимаються
  */
 CloudServer.Minify={
+    /* приватный переключатель минимизации */
+    _styleAllowed            :true,
+    _jsAllowed               :true,
+    /* функция разрешает или запрещает
+     * минимизировать стили
+     */
+    setStyleAllowed          :(function(pAllowed){
+       this._styleAllowed=pAllowed;
+    }),
+    
+    /* функция разрешает или запрещает
+     * минимизировать скрипты
+     */
+    setJSAllowed          :(function(pAllowed){
+       this._jsAllowed=pAllowed;
+    }),
+    
     scripts : function(){
-        if(CloudServer.Minimize.scriptSize){
+        if(this._jsAllowed){
             var lMinify      = require('./minify');
             var lResult_b=lMinify.jsScripts();
             /* if we get false, files wasn't minified
              * error ocured
              */
-            CloudServer.Minify.done=(lResult_b===undefined?true:false);
+            this.done=(lResult_b===undefined?true:false);
         }
     },
     /* свойство показывающее случилась ли ошибка*/
     done: false
 };
 
-//var DirContent;
+
 var LeftDir='/';
 var RightDir=LeftDir;
-//var LPrevDir;
-//var RPrevDir;
 
 var Fs      = require('fs');    /* модуль для работы с файловой системой*/
-var Path    = require('path');   /* модуль для работы с путями*/
+/*
+    var Path    = require('path');
+*/   /* модуль для работы с путями*/
+
 var Zlib    = require('zlib');  /* модуль для сжатия данных gzip-ом*/
-var CloudFunc=CloudServer.Minimize.scripts?/* если стоит минификация*/
+var CloudFunc=CloudServer.Minify.done?/* если стоит минификация*/
         require('./cloudfunc.min'):/* добавляем сжатый - иначе обычный */
         require('./cloudfunc'); /* модуль с функциями */
 
@@ -141,8 +152,8 @@ var CloudFunc=CloudServer.Minimize.scripts?/* если стоит минифик
 /* конструктор*/
 CloudServer.init=(function(){
     /* Переменная в которой храниться кэш*/
-    CloudServer.Cache.setAllowed(false);
-    CloudServer.Minimize.scriptSize=false
+    CloudServer.Cache.setAllowed(true);
+    CloudServer.Minify.setJSAllowed(true);
     /* Если нужно минимизируем скрипты */
     CloudServer.Minify.scripts();
 });
@@ -445,7 +456,7 @@ CloudServer._readDir=function (pError, pFiles)
                  * we include minified version of
                  * clien.js to index.html
                  */
-                (CloudServer.Minimize.scriptSize && CloudServer.Minify.done)?
+                (CloudServer.Minify.done)?
                     lIndex=lIndex.replace('client.js','client.min.js'):'';
                 
                 lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
