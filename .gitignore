@@ -9,6 +9,7 @@ node_modules
 #cloudfoundry info files
 cloudcmd.manifest.yml
 cloudcmddemo.manifest.yml
+demo-cloudcmd.manifest.yml
 
 #herocu info file
 Procfile
