@@ -228,8 +228,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
     else if(CloudFunc.checkExtension(pName,'json'))
         lType='application/json';
     else if(CloudFunc.checkExtension(pName,'html'))
-        lType='text/html';
-        
+        lType='text/html';        
     else if(CloudFunc.checkExtension(pName,'appcache'))
         lType='text/cache-manifest';        
     /* если это неизвестный тип файла - 
@@ -378,7 +377,12 @@ CloudServer._controller=function(pReq, pRes)
             /* если это каталог - 
              * читаем его содержимое
              */
-            try{    
+            try{                    
+                /* если установлено сжатие
+                 * меняем название html-файла и
+                 * загружаем сжатый html-файл в дальнейшем
+                 */
+                CloudServer.INDEX=(CloudServer.Minify.done?'index.min.html':CloudServer.INDEX);
                 /*
                  * сохраним указатель на response
                  */            
@@ -456,11 +460,6 @@ CloudServer._readDir=function (pError, pFiles)
          * и прописываем соответствующие заголовки
          */
         
-        /* если установлено сжатие
-         * меняем название html-файла и
-         * загружаем сжатый html-файл в дальнейшем
-         */
-        CloudServer.INDEX=(CloudServer.Minify.done?'index.min.html':CloudServer.INDEX);
         if(CloudServer.NoJS){
             var lPanel=CloudFunc.buildFromJSON(lJSON);
             lList='<ul id=left class=panel>';
@@ -497,7 +496,7 @@ CloudServer._readDir=function (pError, pFiles)
                  */
                 (CloudServer.Minify.done)?function(){
                     lIndex=lIndex.replace('client.js','client.min.js');
-                    lIndex=lIndex.replace('<link rel=stylesheet href="/reset.css">','');
+                    lIndex=lIndex.replace('<link rel=stylesheet href=/reset.css>','');
                     lIndex=lIndex.replace('style.css','all.min.css');
                     }():'';
                 
