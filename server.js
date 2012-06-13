@@ -120,6 +120,9 @@ CloudServer.Minify={
     setJSAllowed          :(function(pAllowed){
        this._jsAllowed=pAllowed;
     }),
+    setHtmlAllowed          :(function(pAllowed){
+       this._htmlAllowed=pAllowed;
+    }),
     
     jsScripts : function(){
         if(this._jsAllowed){
@@ -177,6 +180,8 @@ CloudServer.init=(function(){
     /* Переменная в которой храниться кэш*/
     CloudServer.Cache.setAllowed(true);
     CloudServer.Minify.setJSAllowed(true);
+    CloudServer.Minify.setStyleAllowed(true);
+    CloudServer.Minify.setHtmlAllowed(true);
     /* Если нужно минимизируем скрипты */
     CloudServer.Minify.jsScripts();
     CloudServer.Minify.cssStyles();
@@ -224,6 +229,9 @@ CloudServer.generateHeaders = function(pName, pGzip){
         lType='application/json';
     else if(CloudFunc.checkExtension(pName,'html'))
         lType='text/html';
+        
+    else if(CloudFunc.checkExtension(pName,'appcache'))
+        lType='text/cache-manifest';        
     /* если это неизвестный тип файла - 
      * высылаем его просто как текст
      */
