@@ -4,5 +4,6 @@
     "laxbreak" : true,
     "boss"     : true,
     "expr"     : true,
-    "asi"      : true
+    "asi"      : true,
+    "devel"    : true
 }
