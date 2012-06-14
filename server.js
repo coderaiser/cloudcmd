@@ -104,60 +104,40 @@ CloudServer.Cache={
  */
 CloudServer.Minify={
     /* приватный переключатель минимизации */
-    _styleAllowed           :true,
-    _jsAllowed              :true,
-    _htmlAllowed            :true,
-    /* функция разрешает или запрещает
-     * минимизировать стили
+    _allowed               :{css:true,js:true,html:true},
+    
+    /* функция разрешает или 
+     * запрещает минимизировать
+     * css/js/html
+     * @pAllowed: - структура, в которой
+     *              передаються параметры
+     *              минификации, вида
+     *              {js:true,css:true,html:false}
      */
-    setStyleAllowed          :(function(pAllowed){
-       this._styleAllowed=pAllowed;
+    setAllowed              :(function(pAllowed){
+       if(pAllowed){
+           this._allowed.css=pAllowed.css; 
+           this._allowed.js=pAllowed.js; 
+           this._allowed.html=pAllowed.html; 
+       }
     }),
-    
-    /* функция разрешает или запрещает
-     * минимизировать скрипты
-     */
-    setJSAllowed          :(function(pAllowed){
-       this._jsAllowed=pAllowed;
-    }),
-    setHtmlAllowed          :(function(pAllowed){
-       this._htmlAllowed=pAllowed;
-    }),
-    
-    jsScripts : function(){
-        if(this._jsAllowed){
-            var lMinify      = require('./minify');
-            var lResult_b=lMinify.jsScripts();
-            /* if we get false, files wasn't minified
-             * error ocured
-             */
-            this.done=(lResult_b===undefined?true:false);
-        }
-    },
-    
-     cssStyles : function(){
-        if(this._styleAllowed){
-            var lMinify      = require('./minify');
-            var lResult_b=lMinify.cssStyles();
-            /* if we get false, files wasn't minified
-             * error ocured
-             */
-            this.done=(lResult_b===undefined?true:false);
-        }
-    },
         
-     html : function(){
-        if(this._htmlAllowed){
-            var lMinify      = require('./minify');
-            var lResult_b=lMinify.html();
-            /* if we get false, files wasn't minified
-             * error ocured
-             */
-            this.done=(lResult_b===undefined?true:false);
+    /*
+     * Функция минимизирует css/js/html
+     * если установлены параметры минимизации
+     */
+    doit                    :(function(){
+        if(this._allowed.css ||
+            this._allowed.js ||
+            this._allowed.html){
+                var lMinify      = require('./minify');
+                this.done.js=this._allowed.js?lMinify.jsScripts():false;
+                this.done.html=this._allowed.js?lMinify.html():false;
+                this.done.css=this._allowed.js?lMinify.cssStyles():false;
         }
-    },
+    }),
     /* свойство показывающее случилась ли ошибка*/
-    done: false
+    done:{js: false,css: false, html:false}
 };
 
 
@@ -170,7 +150,7 @@ var Fs      = require('fs');    /* модуль для работы с файл�
 */   /* модуль для работы с путями*/
 
 var Zlib    = require('zlib');  /* модуль для сжатия данных gzip-ом*/
-var CloudFunc=CloudServer.Minify.done?/* если стоит минификация*/
+var CloudFunc=CloudServer.Minify.done.js?/* если стоит минификация*/
         require('./cloudfunc.min'):/* добавляем сжатый - иначе обычный */
         require('./cloudfunc'); /* модуль с функциями */
 
@@ -179,13 +159,16 @@ var CloudFunc=CloudServer.Minify.done?/* если стоит минификац�
 CloudServer.init=(function(){
     /* Переменная в которой храниться кэш*/
     CloudServer.Cache.setAllowed(true);
-    CloudServer.Minify.setJSAllowed(true);
-    CloudServer.Minify.setStyleAllowed(true);
-    CloudServer.Minify.setHtmlAllowed(true);
+    /* Change default parameters of
+     * js/css/html minification
+     */
+    CloudServer.Minify.setAllowed({
+        js:true,
+        css:true,
+        html:true
+    });
     /* Если нужно минимизируем скрипты */
-    CloudServer.Minify.jsScripts();
-    CloudServer.Minify.cssStyles();
-    CloudServer.Minify.html();
+    CloudServer.Minify.doit();
 });
 
 
@@ -382,7 +365,7 @@ CloudServer._controller=function(pReq, pRes)
                  * меняем название html-файла и
                  * загружаем сжатый html-файл в дальнейшем
                  */
-                CloudServer.INDEX=(CloudServer.Minify.done?'index.min.html':CloudServer.INDEX);
+                CloudServer.INDEX=(CloudServer.Minify.done.html?'index.min.html':CloudServer.INDEX);
                 /*
                  * сохраним указатель на response
                  */            
@@ -494,11 +477,13 @@ CloudServer._readDir=function (pError, pFiles)
                  * we include minified version of
                  * clien.js to index.html
                  */
-                (CloudServer.Minify.done)?function(){
-                    lIndex=lIndex.replace('client.js','client.min.js');
-                    lIndex=lIndex.replace('<link rel=stylesheet href=/reset.css>','');
-                    lIndex=lIndex.replace('style.css','all.min.css');
-                    }():'';
+                console.log(CloudServer.Minify.done);
+                CloudServer.Minify.done.css?
+                    lIndex=lIndex.replace('<link rel=stylesheet href="/reset.css">','')
+                        .replace('style.css','all.min.css')
+                    :'';
+                CloudServer.Minify.done.js?
+                    lIndex=lIndex.replace('client.js','client.min.js'):'';
                 
                 lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
                 /* меняем title */
