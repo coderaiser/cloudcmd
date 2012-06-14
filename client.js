@@ -6,13 +6,14 @@
  */
 //var CloudCommander=(function(window,document){
 
-var document,window;
+//var document,window;
 
 var CloudCommander=(function(){
 "use strict";
 
 /* если функции console.log нет - создаём заглушку */
 
+/*
 var console;
 if(!window)window={console:{log:function(pParam){return pParam;}}};
 else if(window && !window.console){
@@ -22,7 +23,7 @@ else if(window && !window.console){
         }
     };
 }else console=window.console;
-
+*/
 /*
     window.jQuery || document.write('<script src="jquery.min.js"><\/script>');
 */
@@ -163,6 +164,7 @@ CloudClient.keyBinding=(function(){
              */             
             //console.log(event.keyCode);
             var lCurrentFile;
+            var lName;
             /* если клавиши можно обрабатывать*/
             if(CloudClient.keyBinded){
                 /* если нажали таб:
@@ -246,7 +248,7 @@ CloudClient.keyBinding=(function(){
                     if(!lCurrentFile.length)return;
                     lCurrentFile=lCurrentFile[0];
                     /* из него достаём спан с именем файла*/
-                    var lName=lCurrentFile.getElementsByClassName('name');
+                    lName=lCurrentFile.getElementsByClassName('name');
                     /* если нету (что вряд ли) - выходим*/
                     if(!lName)return false;
                     /* достаём все ссылки*/
@@ -324,7 +326,7 @@ CloudClient.keyBinding=(function(){
                              * 1 - это заголовок файловой таблицы
                              */
                             for(var i=2;i<lLi.length;i++){
-                                var lName=lLi[i].getElementsByTagName('a')[0].innerText;
+                                lName=lLi[i].getElementsByTagName('a')[0].innerText;
                                 if(lSelectedName.length===lName.length &&
                                     !lSelectedName.indexOf(lName)){
                                         lLi[i].className=CloudClient.CURRENT_FILE;
@@ -560,7 +562,7 @@ CloudClient.init=(function()
     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',function(){
         /* сохраняем переменную jQuery себе в область видимости */
         $=window.jQuery;
-        window.jQuery || CloudClient.jsload('jquery.min.js',
+        if(!window.jQuery)CloudClient.jsload('jquery.min.js',
             function(){
                $=window.jQuery;
             });
@@ -659,7 +661,7 @@ CloudClient._changeLinks = function(pPanelID)
         //       a[i].parentElement.parentElement.className='current-file';
         //    }
         /* если ссылка на папку, а не файл */
-        if(a[i].target!='_blank')
+        if(a[i].target!=='_blank')
         {
             /* убираем адрес хоста*/
                 var link='/'+a[i].href.replace(document.location.href,'');
@@ -953,7 +955,7 @@ CloudClient._getJSONfromFileTable=function()
             return $('.'+pClassName)[0];
         };
         $=window.jQuery;
-        window.jQuery || CloudClient.jsload('jquery.min.js',
+        if(!window.jQuery)CloudClient.jsload('jquery.min.js',
             function(){
                $=window.jQuery;
                document.getElementsByClassName=function(pClassName){
