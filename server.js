@@ -478,12 +478,12 @@ CloudServer._readDir=function (pError, pFiles)
                  * clien.js to index.html
                  */
 
-                CloudServer.Minify.done.css?
-                    lIndex=lIndex.replace('<link rel=stylesheet href="/reset.css">','')
+                lIndex = CloudServer.Minify.done.css?
+                    lIndex.replace('<link rel=stylesheet href="/reset.css">','')
                         .replace('style.css','all.min.css')
-                    :'';
-                CloudServer.Minify.done.js?
-                    lIndex=lIndex.replace('client.js','client.min.js'):'';
+                    :lIndex;
+                      
+                lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js','client.min.js'):lIndex;
                 
                 lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
                 /* меняем title */
