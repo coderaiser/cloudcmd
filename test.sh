@@ -1,3 +1,3 @@
 #!/bin/sh
-npm install jshint
-jshint *.js --config js/.jshintrc
+npm install -g jshint
+jshint *.js --config .jshintrc
