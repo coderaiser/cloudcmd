@@ -25,181 +25,181 @@
   src: local('Droid Sans Mono'), local('DroidSansMono'), url('http://themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
 }
 
-  body{
-      font:16px "Droid Sans Mono";
+body{
+  font:16px "Droid Sans Mono";
+}
+
+.menu{
+  font: 16px 'Octicons Regular';
+  margin-bottom: 0;
+}
+
+.path_icon{
+  font-family:'FoundationIconsGeneralEnclosed';
+  font-size:30px;
+  color: #46A4C3;/*#55BF3F; green*/
+  text-shadow:black 0 2px 1px;
+  /* размер иконки и позиция на png-файле*/
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  left: -4px;
+}
+.path_icon:hover{
+  /*
+      color:#45D827;
+  */
+  cursor:pointer;
+}
+.path_icon:active{
+  text-shadow:black 0 0 1px;
+  position: relative;
+  top: 4px;
+} 
+.icon{
+  font-family: 'Octicons Regular';
+  font-size:16px;
+  width:16px;
+  height:16px;
+  display:inline-block;
+  margin-left:0.5%;
+}
+.error::before{
+    content:'\f026';
+    cursor:default;
+    color:rgb(222, 41, 41);
+    position: relative;
+    top: -3px;
+}
+.loading{
+  background:url(/images/spinner.gif);
+  position:relative;
+  top:1px;
+}
+.error:hover{
+  color:rgba(222, 41, 41, 0.81);
+}
+.refresh-icon{
+  background:url(/images/panel_refresh.png) no-repeat;
+}
+.refresh-icon:active{
+  /*background-position-y: -15px;*/
+background:url(/images/panel_refresh.png) 0 -15px no-repeat;
+}
+.clear-cache{
+  background:url(/images/console_clear.png)  -4px -4px no-repeat;
+  margin-right: 6px;
+  margin-left: 7px;
+}
+.clear-cache:active{
+  /*
+      background-position-y: -25px;
+  */
+  top:5px;
+}            
+  
+.settings:before{
+  content:'k';
+}            
+.links{
+  color:red;                
   }
   
-  .menu{
-      font: 16px 'Octicons Regular';
-      margin-bottom: 0;
-  }
-  
-  .path_icon{
-      font-family:'FoundationIconsGeneralEnclosed';
-      font-size:30px;
-      color: #46A4C3;/*#55BF3F; green*/
-      text-shadow:black 0 2px 1px;
-      /* размер иконки и позиция на png-файле*/
-      width: 15px;
-      height: 15px;
-      display: inline-block;
-      position: relative;
-      top: 3px;
-      left: -4px;
-  }
-  .path_icon:hover{
-      /*
-          color:#45D827;
-      */
-      cursor:pointer;
-  }
-  .path_icon:active{
-      text-shadow:black 0 0 1px;
-      position: relative;
-      top: 4px;
-  } 
-  .icon{
-      font-family: 'Octicons Regular';
-      font-size:16px;
-      width:16px;
-      height:16px;
-      display:inline-block;
-      margin-left:0.5%;
-  }
-    .error::before{
-        content:'\f026';
-        cursor:default;
-        color:rgb(222, 41, 41);
-        position: relative;
-        top: -3px;
-    }
-  .loading{
-      background:url(/images/spinner.gif);
-      position:relative;
-      top:1px;
-  }
-  .error:hover{
-      color:rgba(222, 41, 41, 0.81);
-  }
-  .refresh-icon{
-      background:url(/images/panel_refresh.png) no-repeat;
-  }
-  .refresh-icon:active{
-      /*background-position-y: -15px;*/
-    background:url(/images/panel_refresh.png) 0 -15px no-repeat;
-  }
-  .clear-cache{
-      background:url(/images/console_clear.png)  -4px -4px no-repeat;
-      margin-right: 6px;
-      margin-left: 7px;
-  }
-  .clear-cache:active{
-      /*
-          background-position-y: -25px;
-      */
-      top:5px;
-  }            
-      
-  .settings:before{
-      content:'k';
-  }            
-  .links{
-      color:red;                
-      }
-      
-    .mini-icon {
-        float: left;        
-        height: 16px;
-        left: -5px;
-        margin-left: 6px;  
-        position: relative;
-        top: 2px;
-        width: 16px;
-      /* отступ перед картинкой 
-       * для нормального отображения
-       * рамки
-       */
-    }
-  /* freeupex */
-  .directory{
-      /*list-style-image*/
-      background-image:url('/images/dir.png');
-      background-repeat: no-repeat;
-      background-position: 0 0;
-  }
-  .text-file{
-      /*list-style-image*/
-      background-image:url('/images/txt.png');
-      background-repeat: no-repeat;
-      background-position: 0 0;
-  }
-  #fm{
-      height:90%;                
-      overflow-y: scroll;
-  }
-  .fm_header{
-      font-weight: bold;
-  }
-  #path{
-      margin-left:1.5%;                
-  }
-  #left{
-      float:left;
-      width:90%;
-  }
-  /* фон файла, на котором курсор*/
-    .current-file{
-        border: 2px solid rgba(49, 123, 249, .40);
-    }
-    .selected-file{
-        background-color: rgba(49, 123, 249, .40);
-        color:white;
-    }
-  #right{
-      float:right;
-  }
-  .panel{
-      display: table;
-      width:50%;
-  }
-  #keyspanel{
-      text-align: center;
-  }
-  /* информация о файлах и папках*/
-  .name{
-      float: left;
-      width: 37%;
-  }
-  .size{
-      float:left;
-      width:16%;
-      /* Ставим выравнивание,
-       * что бы размер был в
-       * одной ровной колонке
-       */
-      text-align: right;
-      /* Ставим отступ, что бы
-       * size не налазил на uid
-       * (owner)
-       */
-      margin-right: 27px;
-  }
-  .owner{
-  }
-  .mode{
-      float: right;
-      width: 25%;
-  }
-  
-  ul,li{list-style-type:none;}
-  button{
-      width:10%;
-  }
-  a{
-      text-decoration:none;                                
-  }
-  a:hover, a:active { cursor:pointer;outline: 0; color: #06e; }
-  a:focus { outline: thin dotted; }      
+.mini-icon {
+    float: left;        
+    height: 16px;
+    left: -5px;
+    margin-left: 6px;  
+    position: relative;
+    top: 2px;
+    width: 16px;
+  /* отступ перед картинкой 
+   * для нормального отображения
+   * рамки
+   */
+}
+/* freeupex */
+.directory{
+  /*list-style-image*/
+  background-image:url('/images/dir.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.text-file{
+  /*list-style-image*/
+  background-image:url('/images/txt.png');
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+#fm{
+  height:90%;                
+  overflow-y: scroll;
+}
+.fm_header{
+  font-weight: bold;
+}
+#path{
+  margin-left:1.5%;                
+}
+#left{
+  float:left;
+  width:90%;
+}
+/* фон файла, на котором курсор*/
+.current-file{
+    border: 2px solid rgba(49, 123, 249, .40);
+}
+.selected-file{
+    background-color: rgba(49, 123, 249, .40);
+    color:white;
+}
+#right{
+  float:right;
+}
+.panel{
+  display: table;
+  width:50%;
+}
+#keyspanel{
+  text-align: center;
+}
+/* информация о файлах и папках*/
+.name{
+  float: left;
+  width: 37%;
+}
+.size{
+  float:left;
+  width:16%;
+  /* Ставим выравнивание,
+   * что бы размер был в
+   * одной ровной колонке
+   */
+  text-align: right;
+  /* Ставим отступ, что бы
+   * size не налазил на uid
+   * (owner)
+   */
+  margin-right: 27px;
+}
+.owner{
+}
+.mode{
+  float: right;
+  width: 25%;
+}
+
+ul,li{list-style-type:none;}
+button{
+  width:10%;
+}
+a{
+  text-decoration:none;                                
+}
+a:hover, a:active { cursor:pointer;outline: 0; color: #06e; }
+a:focus { outline: thin dotted; }      
 
 /* Если размер окна очень маленький
  * располагаем имя и атрибуты файла
