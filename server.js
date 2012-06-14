@@ -336,8 +336,7 @@ CloudServer._controller=function(pReq, pRes)
             if(pathname==='')pathname='/';
             
             RightDir=pathname;
-            LeftDir=pathname;               
-            //DirContent=fs.readdirSync(LeftDir);
+            LeftDir=pathname;
             
             /* если встретиться пробел - 
              * меня код символа пробела на пробел
@@ -397,7 +396,7 @@ CloudServer._readDir=function (pError, pFiles)
             RightDir+='/';
             LeftDir+='/';
         }
-        //DirContent=
+
         pFiles=pFiles.sort();
                 
         lJSON[0]={path:LeftDir,size:'dir'};

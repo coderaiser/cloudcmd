@@ -12,6 +12,7 @@ node_modules
 cloudcmd.manifest.yml
 cloudcmddemo.manifest.yml
 demo-cloudcmd.manifest.yml
+cdn-cloudcmd.manifest.yml
 
 #herocu info file
 Procfile
