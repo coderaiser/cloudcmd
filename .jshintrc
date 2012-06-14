@@ -2,7 +2,6 @@
     "validthis": true,
     "laxcomma" : true,
     "laxbreak" : true,
-    "debug"    : true,
     "boss"     : true,
     "expr"     : true,
     "asi"      : true
