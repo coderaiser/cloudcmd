@@ -1,3 +1,3 @@
-test:
-    npm install jshint
-    jshint *.js --config js/.jshintrc
+ test:
+     npm install jshint
+     jshint *.js --config js/.jshintrc
