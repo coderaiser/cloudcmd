@@ -1,5 +1,5 @@
 {
-    "validthis": true,
+    //"validthis": true,
     "laxcomma" : true,
     "laxbreak" : true,
     "browser"  : true,
