@@ -67,6 +67,8 @@ exports.jsScripts=function jsScripts(){
     
     console.log('reading file ' + CLOUDFUNC_JS+'...');
     fs.readFile(CLOUDFUNC_JS,fileReaded(CLOUDFUNC_JS,dataReaded_f));    
+    
+    return true;
 };
 
 /* функция сжимает css-стили 
@@ -118,7 +120,7 @@ exports.cssStyles=function cssStyles(){
          * save all minimized css 
          * to one file all.min.css
          */
-        (lStyleCssDone && lStyleCssDone)?
+        (lStyleCssDone && lResetCssDone)?
             fs.writeFile('all.min.css', lAllStyle, fileWrited('all.min.css')):'';
          
          /* записываем сжатый css файл*/
@@ -130,10 +132,8 @@ exports.cssStyles=function cssStyles(){
     
     console.log('reading file ' + RESET_CSS+'...');
     fs.readFile(RESET_CSS,fileReaded(RESET_CSS,dataReaded_f));    
-    /*
-        var source = "a{font-weight:bold;font-color:red}";
-        var minimized = cleanCSS.process(source);
-    */
+    
+    return true;
 };
 
 /* функция сжимает css-стили 
@@ -201,6 +201,8 @@ exports.html=function(){
     
     console.log('reading file ' + INDEX_HTML+'...');
     fs.readFile(INDEX_HTML,fileReaded(INDEX_HTML,dataReaded_f));
+    
+    return true;
 };
 
 

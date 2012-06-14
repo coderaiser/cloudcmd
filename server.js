@@ -131,6 +131,7 @@ CloudServer.Minify={
             this._allowed.js ||
             this._allowed.html){
                 var lMinify      = require('./minify');
+                console.log(lMinify.jsScripts);
                 this.done.js=this._allowed.js?lMinify.jsScripts():false;
                 this.done.html=this._allowed.js?lMinify.html():false;
                 this.done.css=this._allowed.js?lMinify.cssStyles():false;
