@@ -317,7 +317,7 @@ CloudServer._controller=function(pReq, pRes)
              * длиннее
              */
             
-            if(pathname.indexOf(lNoJS_s)!=lFS_s.length && pathname!='/'){
+            if(pathname.indexOf(lNoJS_s)!==lFS_s.length && pathname!=='/'){
                 CloudServer.NoJS=false;
             }else pathname=pathname.replace(lNoJS_s,'');
             
@@ -392,7 +392,7 @@ CloudServer._readDir=function (pError, pFiles)
         var lJSON=[];
         var lJSONFile={};
         /* Если мы не в корне добавляем слеш к будующим ссылкам */       
-       if(LeftDir!='/')
+       if(LeftDir!=='/')
         {
             RightDir+='/';
             LeftDir+='/';
@@ -559,7 +559,7 @@ CloudServer.getReadFileFunc = function(pName){
         else
         {
             console.log(pError.path);
-            if(pError.path!='passwd.json')
+            if(pError.path!=='passwd.json')
             {
                 console.log(pError);
                 CloudServer.sendResponse('OK',pError.toString());
