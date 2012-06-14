@@ -567,7 +567,7 @@ CloudClient.init=(function()
     });
     
         /* загружаем общие функции для клиента и сервера*/
-        CloudClient.jsload('/cloudfunc.js',function(){
+        CloudClient.jsload('lib/cloudfunc.js',function(){
         /* берём из обьекта window общий с сервером функционал */
         CloudFunc=window.CloudFunc;
             

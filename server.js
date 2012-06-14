@@ -43,7 +43,9 @@ var CloudServer={
     
     /* КОНСТАНТЫ */
     /* index.html */
-    INDEX           :'index.html'
+    INDEX           :'index.html',
+    /* name of direcotory with libs */
+    LIBDIR          :'./lib'
 };
 
 /* 
@@ -130,8 +132,8 @@ CloudServer.Minify={
         if(this._allowed.css ||
             this._allowed.js ||
             this._allowed.html){
-                var lMinify      = require('./minify');
-                console.log(lMinify.jsScripts);
+                var lMinify      = require(CloudServer.LIBDIR+'/minify');
+
                 this.done.js=this._allowed.js?lMinify.jsScripts():false;
                 this.done.html=this._allowed.js?lMinify.html():false;
                 this.done.css=this._allowed.js?lMinify.cssStyles():false;
@@ -144,18 +146,16 @@ CloudServer.Minify={
 
 var LeftDir='/';
 var RightDir=LeftDir;
-
-var Fs      = require('fs');    /* модуль для работы с файловой системой*/
 /*
     var Path    = require('path');
 */   /* модуль для работы с путями*/
 
-var Zlib    = require('zlib');  /* модуль для сжатия данных gzip-ом*/
-var CloudFunc=CloudServer.Minify.done.js?/* если стоит минификация*/
-        require('./cloudfunc.min'):/* добавляем сжатый - иначе обычный */
-        require('./cloudfunc'); /* модуль с функциями */
-
-
+var Fs          = require('fs');    /* модуль для работы с файловой системой*/
+var Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
+var CloudFunc   = require(CloudServer.LIBDIR + 
+                (CloudServer.Minify.done.js?/* если стоит минификация*/
+                    '/cloudfunc.min':/* добавляем сжатый - иначе обычный */
+                    '/cloudfunc'));  /* модуль с функциями */
 /* конструктор*/
 CloudServer.init=(function(){
     /* Переменная в которой храниться кэш*/
@@ -477,7 +477,7 @@ CloudServer._readDir=function (pError, pFiles)
                  * we include minified version of
                  * clien.js to index.html
                  */
-                console.log(CloudServer.Minify.done);
+
                 CloudServer.Minify.done.css?
                     lIndex=lIndex.replace('<link rel=stylesheet href="/reset.css">','')
                         .replace('style.css','all.min.css')
