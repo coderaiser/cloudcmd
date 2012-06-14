@@ -5,7 +5,3 @@
    - 0.7 # development version of 0.8, may be unstable
  notifications:
     webhooks: http://requestb.in/12h5bl71   #http://webhooks.jit.su/deploy
-before_install: npm install html-minifier
-after_install:
-    - npm install jshint
-    - jshint *.js --config .jshintrc
