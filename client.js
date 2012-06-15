@@ -622,11 +622,9 @@ CloudClient.init=(function()
     var lRight=document.getElementById('right');
     if(lRight)lRight.className=lRight.className.replace('hidden','');
     
-    //var lLeft=document.getElementById('left');
-    //lLeft.style.cssText='width:50%';
     CloudClient.cssSet({id:'show_2panels',
         element:document.head,
-        inner:'#left{width:50%;}'
+        inner:'#left{width:45%;}'
     });        
 });
 

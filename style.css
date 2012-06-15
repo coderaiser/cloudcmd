@@ -160,7 +160,7 @@ background:url(/images/panel_refresh.png) 0 -15px no-repeat;
 }
 .panel{
   display: table;
-  width:50%;
+  width:45%;
 }
 #keyspanel{
   text-align: center;
