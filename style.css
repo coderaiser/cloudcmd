@@ -74,7 +74,7 @@ body{
     top: -3px;
 }
 .loading{
-  background:url(/images/spinner.gif);
+  background:url(/img/spinner.gif);
   position:relative;
   top:1px;
 }
@@ -82,14 +82,14 @@ body{
   color:rgba(222, 41, 41, 0.81);
 }
 .refresh-icon{
-  background:url(/images/panel_refresh.png) no-repeat;
+  background:url(/img/panel_refresh.png) no-repeat;
 }
 .refresh-icon:active{
   /*background-position-y: -15px;*/
-background:url(/images/panel_refresh.png) 0 -15px no-repeat;
+background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 .clear-cache{
-  background:url(/images/console_clear.png)  -4px -4px no-repeat;
+  background:url(/img/console_clear.png)  -4px -4px no-repeat;
   margin-right: 6px;
   margin-left: 7px;
 }
@@ -123,13 +123,13 @@ background:url(/images/panel_refresh.png) 0 -15px no-repeat;
 /* freeupex */
 .directory{
   /*list-style-image*/
-  background-image:url('/images/dir.png');
+  background-image:url('/img/dir.png');
   background-repeat: no-repeat;
   background-position: 0 0;
 }
 .text-file{
   /*list-style-image*/
-  background-image:url('/images/txt.png');
+  background-image:url('/img/txt.png');
   background-repeat: no-repeat;
   background-position: 0 0;
 }
