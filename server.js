@@ -135,8 +135,8 @@ CloudServer.Minify={
                 var lMinify      = require(CloudServer.LIBDIR+'/minify');
 
                 this.done.js=this._allowed.js?lMinify.jsScripts():false;
-                this.done.html=this._allowed.js?lMinify.html():false;
-                this.done.css=this._allowed.js?lMinify.cssStyles():false;
+                this.done.html=this._allowed.html?lMinify.html():false;
+                this.done.css=this._allowed.css?lMinify.cssStyles():false;
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
