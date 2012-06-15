@@ -45,7 +45,8 @@ var CloudServer={
     /* index.html */
     INDEX           :'index.html',
     /* name of direcotory with libs */
-    LIBDIR          :'./lib'
+    LIBDIR          :'./lib',
+    LIBDIRSERVER    :'./lib/server'
 };
 
 /* 
@@ -132,7 +133,7 @@ CloudServer.Minify={
         if(this._allowed.css ||
             this._allowed.js ||
             this._allowed.html){
-                var lMinify      = require(CloudServer.LIBDIR+'/minify');
+                var lMinify      = require(CloudServer.LIBDIRSERVER+'/minify');
 
                 this.done.js=this._allowed.js?lMinify.jsScripts():false;
                 this.done.html=this._allowed.html?lMinify.html():false;

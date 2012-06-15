@@ -58,7 +58,9 @@ var CloudClient={
      _images                :{},     
      /* КОНСТАНТЫ*/
      /* название css-класа текущего файла*/
-     CURRENT_FILE           :'current-file'
+     CURRENT_FILE           :'current-file',
+     LIBDIR                 :'/lib',
+     LIBDIRCLIENT           :'/lib/client'
 };
 
 /* 
@@ -150,7 +152,7 @@ CloudClient.Cache.clear=(function(){
 /* функция обработки нажатий клавишь */
 CloudClient.keyBinding=(function(){
     /* loading keyBinding module and start it */
-    CloudClient.jsload('keyBinding.js',function(){
+    CloudClient.jsload(CloudClient.LIBDIRCLIENT+'/keyBinding.js',function(){
         CloudCommander.keyBinding();
     });
 });
@@ -245,11 +247,7 @@ CloudClient._setCurrent=(function(){
                     * на который нажали */
                     this.className=CloudClient.CURRENT_FILE;
                 }
-            }            
-                /*
-                    console.log('Error. Can\'t find current file.'+
-                    ' (CloudClient._setCurrent)');                                                 
-                */
+            }
              /* если мы попали сюда с энтера*/
              if(pFromEnter===true){
                 this.ondblclick(this);               
@@ -330,7 +328,7 @@ CloudClient.init=(function()
     });
     
         /* загружаем общие функции для клиента и сервера*/
-        CloudClient.jsload('lib/cloudfunc.js',function(){
+        CloudClient.jsload(CloudClient.LIBDIR+'/cloudfunc.js',function(){
         /* берём из обьекта window общий с сервером функционал */
         CloudFunc=window.CloudFunc;
             
