@@ -107,7 +107,7 @@ CloudServer.Cache={
  */
 CloudServer.Minify={
     /* приватный переключатель минимизации */
-    _allowed               :{css:true,js:true,html:true},
+    _allowed               :{css:true,js:true,html:true, img: true},
     
     /* функция разрешает или 
      * запрещает минимизировать
@@ -115,13 +115,16 @@ CloudServer.Minify={
      * @pAllowed: - структура, в которой
      *              передаються параметры
      *              минификации, вида
-     *              {js:true,css:true,html:false}
+     *              {js:true,css:true,html:false; img:true}
+     * img отвечает за перевод картинок в base64
+     * и сохранение их в css-файл
      */
     setAllowed              :(function(pAllowed){
        if(pAllowed){
            this._allowed.css=pAllowed.css; 
            this._allowed.js=pAllowed.js; 
            this._allowed.html=pAllowed.html; 
+           this._allowed.img=pAllowed.img; 
        }
     }),
         
@@ -137,7 +140,7 @@ CloudServer.Minify={
 
                 this.done.js=this._allowed.js?lMinify.jsScripts():false;
                 this.done.html=this._allowed.html?lMinify.html():false;
-                this.done.css=this._allowed.css?lMinify.cssStyles():false;
+                this.done.css=this._allowed.css?lMinify.cssStyles(this._allowed.img):false;
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
