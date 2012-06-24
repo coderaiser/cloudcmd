@@ -170,7 +170,8 @@ CloudServer.init=(function(){
     CloudServer.Minify.setAllowed({
         js:true,
         css:true,
-        html:true
+        html:true,
+        img:true
     });
     /* Если нужно минимизируем скрипты */
     CloudServer.Minify.doit();
