@@ -30,7 +30,7 @@ Limited-mode features:
 
 Additional modules:
 ---------------
-Cloud Commander not using additional modules for main functionality.
+**Cloud Commander** not using additional modules for main functionality.
 But for minification and optimization tricks optional can be
 assingned (and installed) modules:
 - [UglifyJS] (https://github.com/mishoo/UglifyJS);
