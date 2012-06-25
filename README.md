@@ -27,3 +27,13 @@ Limited-mode features:
 - no keybinding
 - no local caching
 - full loading of all web page(with styles, js-scripts, html-page etc).
+
+Additional modules:
+---------------
+Cloudcmd not using additional modules for main functionality.
+But for minification and optimization tricks optional can be
+assingned (and installed) modules:
+- [UglifyJS] (https://github.com/mishoo/UglifyJS);
+- [clean-css] (https://github.com/GoalSmashers/clean-css)
+- [html-minifier] (https://github.com/kangax/html-minifier)
+- [css-b64-images] (https://github.com/Filirom1/css-base64-images)
