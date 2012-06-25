@@ -1,6 +1,6 @@
 {
     "bitwise" : true,
-    /* "browser" : true, */
+    "browser" : true,
     "devel" : true,
     "eqeqeq" : true,
     "es5" : true,
