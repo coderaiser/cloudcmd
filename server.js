@@ -155,7 +155,18 @@ var RightDir=LeftDir;
 */   /* модуль для работы с путями*/
 
 var Fs          = require('fs');    /* модуль для работы с файловой системой*/
-var Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
+
+var Zlib;
+/* node v0.4 not contains zlib 
+ */
+try{
+    Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
+}catch(error){
+    Zlib=undefined;
+    console.log('to use gzip-commpression' +
+        'you should install zlib module\n' +
+        'npm install zlib');
+}
 var CloudFunc   = require(CloudServer.LIBDIR + 
                 (CloudServer.Minify.done.js?/* если стоит минификация*/
                     '/cloudfunc.min':/* добавляем сжатый - иначе обычный */
@@ -256,10 +267,12 @@ CloudServer._controller=function(pReq, pRes)
      /* получаем поддерживаемые браузером кодировки*/
      var lAcceptEncoding = pReq.headers['accept-encoding'];
     /* запоминаем поддерживает ли браузер
-     * gzip-сжатие при первом заходе на сайт
+     * gzip-сжатие при каждом обращении к серверу
+     * и доступен ли нам модуль zlib
      */ 
     if (lAcceptEncoding && 
-        lAcceptEncoding.match(/\bgzip\b/)){
+        lAcceptEncoding.match(/\bgzip\b/) &&
+        Zlib){
         CloudServer.Gzip=true;
     }else 
         CloudServer.Gzip=false;
