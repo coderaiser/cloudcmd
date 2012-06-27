@@ -6,5 +6,5 @@
    - 0.8
  notifications:
    webhooks: 
-     http://requestb.in/12h5bl71
-   # http://webhooks.jit.su/deploy #
+   # http://requestb.in/12h5bl71
+     http://webhooks.jit.su/deploy #
