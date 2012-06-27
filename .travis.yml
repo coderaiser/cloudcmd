@@ -7,4 +7,5 @@
  notifications:
    webhooks: 
    # http://requestb.in/12h5bl71
-     http://webhooks.jit.su/deploy #
+     urls:
+       http://webhooks.jit.su/deploy #
