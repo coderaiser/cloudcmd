@@ -580,8 +580,8 @@ CloudClient._createFileTable = function(pElem,pJSON)
     while(i--){
         lElem.removeChild(lElem.lastChild);
     }
-    /* заполняем панель новыми элементами */
     
+    /* заполняем панель новыми элементами */    
     lElem.innerHTML=CloudFunc.buildFromJSON(pJSON,true);
 };
 
