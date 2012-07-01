@@ -46,7 +46,8 @@ var CloudServer={
     INDEX           :'index.html',
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
-    LIBDIRSERVER    :'./lib/server'
+    LIBDIRSERVER    :'./lib/server',
+    CSSDIR          :'./css'
 };
 
 /* 
@@ -498,7 +499,7 @@ CloudServer._readDir=function (pError, pFiles)
 
                 lIndex = CloudServer.Minify.done.css?
                     lIndex.replace('<link rel=stylesheet href="/reset.css">','')
-                        .replace('style.css','all.min.css')
+                        .replace('style.css',CloudServer.CSSDIR+'/all.min.css')
                     :lIndex;
                       
                 lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js','client.min.js'):lIndex;
