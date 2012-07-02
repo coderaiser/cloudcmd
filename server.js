@@ -427,10 +427,12 @@ CloudServer._readDir=function (pError, pFiles)
             try{
                 lStats=Fs.statSync(RightDir+pFiles[i]);
             }catch(err){
-                console.log(err);
+                /*
+                    console.log(err);
+                */
                 lStats={
-                    'mode':undefined,
-                    'size':undefined,
+                    'mode':0,
+                    'size':0,
                     'isDirectory':fReturnFalse
                 };
             }
