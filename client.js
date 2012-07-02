@@ -4,29 +4,9 @@
  * @CloudFunc - обьект содержащий общий функционал
  *              клиентский и серверный
  */
-//var CloudCommander=(function(window,document){
-
-//var document,window;
 
 var CloudCommander=(function(){
 "use strict";
-
-/* если функции console.log нет - создаём заглушку */
-
-/*
-var console;
-if(!window)window={console:{log:function(pParam){return pParam;}}};
-else if(window && !window.console){
-    console={
-        'log':function(param){
-            return param;
-        }
-    };
-}else console=window.console;
-*/
-/*
-    window.jQuery || document.write('<script src="jquery.min.js"><\/script>');
-*/
 
 /* Клиентский обьект, содержащий функциональную часть*/
 var CloudClient={        
