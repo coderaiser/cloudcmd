@@ -33,6 +33,7 @@ Hot keys:
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
 There is a short list:
 - Ctrl + r          - reload dir content
+- Ctrl + d          - clear local cache (wich contains dir contents)
 - Alt  + q          - disable key bindings
 - Alt  + s          - get all key bindings back
 - up, down, enter   - filesystem navigation
