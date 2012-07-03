@@ -390,7 +390,7 @@ CloudServer._controller=function(pReq, pRes)
                  */            
                 CloudServer.Responses[CloudServer.INDEX]=pRes;
                 if(lStat.isDirectory())                    
-                    Fs.readdir(LeftDir,CloudServer._readDir);                
+                    Fs.readdir(LeftDir,CloudServer._readDir);
                 /* отдаём файл */
                 else if(lStat.isFile()){
                     CloudServer.Responses[LeftDir]=pRes;
