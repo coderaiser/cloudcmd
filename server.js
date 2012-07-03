@@ -43,7 +43,7 @@ var CloudServer={
     
     /* КОНСТАНТЫ */
     /* index.html */
-    INDEX           :'index.html',
+    INDEX           :'./index.html',
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
     LIBDIRSERVER    :'./lib/server'
