@@ -642,4 +642,4 @@ process.argv.forEach(function (val, index, array){
 
 var fs=require('fs');
 console.log(fs.readdirSync('/app'));
-execSync('sh ls ');
+
