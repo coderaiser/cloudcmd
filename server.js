@@ -174,14 +174,14 @@ var CloudFunc   = require(CloudServer.LIBDIR +
 /* конструктор*/
 CloudServer.init=(function(){
     /* Переменная в которой храниться кэш*/
-    CloudServer.Cache.setAllowed(true);
+    CloudServer.Cache.setAllowed(false);
     /* Change default parameters of
      * js/css/html minification
      */
     CloudServer.Minify.setAllowed({
         js:true,
         css:true,
-        html:true,
+        html:false,
         img:true
     });
     /* Если нужно минимизируем скрипты */
