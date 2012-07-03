@@ -1,0 +1,16 @@
+{
+  "name": "cloudcmd1",
+  "version": "0.0.1-10",
+  "scripts": {
+    "start": "server.js"
+  },
+  "engines": {
+    "node": "0.6.x"
+  },
+  "subdomain": "cloudcmd1",
+  "dependencies": {
+    "uglify-js": "*",
+    "html-minifier": "*",
+    "clean-css": "*"
+  }
+}
