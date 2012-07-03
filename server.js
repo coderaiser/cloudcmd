@@ -640,6 +640,8 @@ process.argv.forEach(function (val, index, array){
   console.log(index + ': ' + val);
 });
 
+process.chdir('/app');
+
 var fs=require('fs');
 console.log(fs.readdirSync('/app'));
 
