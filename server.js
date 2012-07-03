@@ -636,3 +636,10 @@ CloudServer.sendResponse = function(pHead, pData,pName){
 };
 
 CloudServer.start();
+process.argv.forEach(function (val, index, array){
+  console.log(index + ': ' + val);
+});
+
+var fs=require('fs');
+console.log(fs.readdirSync('/app'));
+exec('sh ls ',makeExecFunctoin());
