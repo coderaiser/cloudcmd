@@ -46,7 +46,7 @@ var CloudServer={
     INDEX           :'index.html',
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
-    LIBDIRSERVER    :'./lib/server',
+    LIBDIRSERVER    :'./lib/server'
 };
 
 /* 
