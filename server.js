@@ -150,9 +150,8 @@ CloudServer.Minify={
 
 var LeftDir='/';
 var RightDir=LeftDir;
-/*
-    var Path    = require('path');
-*/   /* модуль для работы с путями*/
+/* модуль для работы с путями*/
+var Path    = require('path');
 
 var Fs          = require('fs');    /* модуль для работы с файловой системой*/
 
@@ -173,6 +172,16 @@ var CloudFunc   = require(CloudServer.LIBDIR +
                     '/cloudfunc'));  /* модуль с функциями */
 /* конструктор*/
 CloudServer.init=(function(){
+    /* Determining server.js directory
+     * and chang current process directory
+     * (usually /) to it.
+     * argv[1] - is always script name
+     */
+    var lServerDir = Path.dirname(process.argv[1]);
+    console.log('current dir: ' + process.cwd());
+    console.log('server dir:  ' + lServerDir);    
+    process.chdir(lServerDir);
+    
     /* Переменная в которой храниться кэш*/
     CloudServer.Cache.setAllowed(true);
     /* Change default parameters of
@@ -194,14 +203,22 @@ CloudServer.start=function()
 {
     CloudServer.init();
     
+    var lCloudFoundryPort   = process.env.VCAP_APP_PORT;
+    var lNodesterPort       = process.env.app_port;
+    var lC9Port             = process.env.PORT;
+    
     var http = require('http');    
-    http.createServer(CloudServer._controller).listen(process.env.PORT ||
-        process.env.VCAP_APP_PORT   /* cloudfoundry */      ||
-        process.env.app_port        /* nodester */          ||
+    http.createServer(CloudServer._controller).listen(lC9Port ||
+        lCloudFoundryPort   /* cloudfoundry */      ||
+        lNodesterPort        /* nodester */          ||
         31337,
         '0.0.0.0' || '127.0.0.1');
     console.log('Cloud Commander server running at http://127.0.0.1:'+
-        (process.env.PORT===undefined?31337:process.env.PORT));
+        (!lC9Port?
+            (!lCloudFoundryPort?
+                (!lNodesterPort?31337:lNodesterPort)
+            :lCloudFoundryPort)
+        :lC9Port));
 };
 
 
