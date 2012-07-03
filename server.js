@@ -203,17 +203,19 @@ CloudServer.start=function()
 {
     CloudServer.init();
     
+    /* constant ports of deployng servers */
     var lCloudFoundryPort   = process.env.VCAP_APP_PORT;
     var lNodesterPort       = process.env.app_port;
     var lC9Port             = process.env.PORT;
     
     var http = require('http');    
-    http.createServer(CloudServer._controller).listen(lC9Port ||
-        lCloudFoundryPort   /* cloudfoundry */      ||
-        lNodesterPort        /* nodester */          ||
+    http.createServer(CloudServer._controller).listen(
+        lC9Port             ||
+        lCloudFoundryPort   ||
+        lNodesterPort       ||
         31337,
         '0.0.0.0' || '127.0.0.1');
-    console.log('Cloud Commander server running at http://127.0.0.1:'+
+    console.log('Cloud Commander server running at http://127.0.0.1:' +
         (!lC9Port?
             (!lCloudFoundryPort?
                 (!lNodesterPort?31337:lNodesterPort)
