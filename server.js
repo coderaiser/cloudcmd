@@ -160,7 +160,7 @@ var Zlib;
 /* node v0.4 not contains zlib 
  */
 try{
-    Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
+    Zlib        = undefined; //require('zlib');  /* модуль для сжатия данных gzip-ом*/
 }catch(error){
     Zlib=undefined;
     console.log('to use gzip-commpression' +
