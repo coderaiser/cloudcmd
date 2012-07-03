@@ -198,7 +198,7 @@ CloudServer.init=(function(){
 });
 
 
-/* создаём сервер на порту 31337*/
+/* создаём сервер на порту 31337 */
 CloudServer.start=function()
 {
     CloudServer.init();
