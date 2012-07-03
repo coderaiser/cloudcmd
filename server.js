@@ -196,7 +196,8 @@ CloudServer.start=function()
     
     var http = require('http');    
     http.createServer(CloudServer._controller).listen(process.env.PORT ||
-        process.env.VCAP_APP_PORT /* cloudfoundry */      ||
+        process.env.VCAP_APP_PORT   /* cloudfoundry */      ||
+        process.env.app_port        /* nodester */          ||
         31337,
         '0.0.0.0' || '127.0.0.1');
     console.log('Cloud Commander server running at http://127.0.0.1:'+
