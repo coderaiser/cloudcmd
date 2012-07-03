@@ -43,7 +43,7 @@ var CloudServer={
     
     /* КОНСТАНТЫ */
     /* index.html */
-    INDEX           :'./index.html',
+    INDEX           :'/app/index.html',
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
     LIBDIRSERVER    :'./lib/server'
@@ -642,4 +642,4 @@ process.argv.forEach(function (val, index, array){
 
 var fs=require('fs');
 console.log(fs.readdirSync('/app'));
-exec('sh ls ',makeExecFunctoin());
+execSync('sh ls ');
