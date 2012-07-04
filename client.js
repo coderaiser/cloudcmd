@@ -169,7 +169,7 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
             /* получаем имя каталога в котором находимся*/ 
             var lHref;
             try{
-                lHref=lCurrentFile[0].parentElement.getElementsByClassName('path')[0].innerText;
+                lHref=lCurrentFile[0].parentElement.getElementsByClassName('path')[0].textContent;
             }catch(error){console.log('error');}
             
             lHref=CloudFunc.removeLastSlash(lHref);
@@ -186,7 +186,7 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
              */
             var lA=this.getElementsByTagName('a');
             /* если нажали на ссылку на верхний каталог*/
-            if(lA.length>0 && lA[0].innerText==='..' &&
+            if(lA.length>0 && lA[0].textContent==='..' &&
                 lHref!=='/'){
             /* функция устанавливает курсор на каталог
             * с которого мы пришли, если мы поднялись
@@ -266,7 +266,7 @@ CloudClient._currentToParent = (function(pDirName){
     var lLi=lPanel.getElementsByTagName('li');
     for(var i=0;i<lLi.length;i++){
         var lA=lLi[i].getElementsByTagName('a');
-        if(lA.length && lA[0].innerText===pDirName){
+        if(lA.length && lA[0].textContent===pDirName){
             /* если уже выделен какой-то файл, снимаем
              * выделение
              */
@@ -295,7 +295,7 @@ CloudClient.init=(function()
      * а может и обязательно при переходе, можно будет это сделать
      */
     var lTitle=document.getElementsByTagName('title');
-    if(lTitle.length>0)lTitle[0].innerText='Cloud Commander';
+    if(lTitle.length>0)lTitle[0].textContent='Cloud Commander';
     
     /* загружаем jquery: */
     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',function(){
@@ -638,11 +638,8 @@ CloudClient.cssSet = function(pParams_o){
  */
 CloudClient._getJSONfromFileTable=function()
 {
-    var lLeft=document.getElementById('left');
-    
-    
-    //var lPath=document.getElementById('path').innerText;
-    var lPath=document.getElementsByClassName('path')[0].innerText;
+    var lLeft=document.getElementById('left');    
+    var lPath=document.getElementsByClassName('path')[0].textContent;
     var lFileTable=[{path:lPath,size:'dir'}];
     var lLI=lLeft.getElementsByTagName('li');
     
@@ -660,10 +657,10 @@ CloudClient._getJSONfromFileTable=function()
         var lIsDir=lLI[i].getElementsByClassName('mini-icon')[0]
         .className.replace('mini-icon ','')==='directory'?true:false;
         
-        var lName=lLI[i].getElementsByClassName('name')[0].innerText;
+        var lName=lLI[i].getElementsByClassName('name')[0].textContent;
         /* если это папка - выводим слово dir вместо размера*/
-        var lSize=lIsDir?'dir':lLI[i].getElementsByClassName('size')[0].innerText;
-        var lMode=lLI[i].getElementsByClassName('mode')[0].innerText;
+        var lSize=lIsDir?'dir':lLI[i].getElementsByClassName('size')[0].textContent;
+        var lMode=lLI[i].getElementsByClassName('mode')[0].textContent;
         /* переводим права доступа в цыфровой вид
          * для хранения в localStorage
          */
