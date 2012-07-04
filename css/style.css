@@ -3,21 +3,24 @@
 */
 
 /* Foundation Icons General Enclosed */
+/*
 @font-face {
     font-family: 'FoundationIconsGeneralEnclosed';
     src: url('//dl.dropbox.com/u/78163899/mnemonia/fonts/foundation-icons-general-enclosed.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
-}    
+} 
+*/
 /* символьный шрифт от гитхаба*/
+/*
 @font-face {
   font-family: 'Octicons Regular';
   font-style: normal;
   font-weight: normal;
   src: local('Octicons Regular'), url('//dl.dropbox.com/u/78163899/mnemonia/fonts/octicons-regular-webfont.woff') format('woff');
 }
-
+*/
 @font-face {
   font-family: 'Droid Sans Mono';
   font-style: normal;
@@ -160,7 +163,7 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 .panel{
   display: table;
-  width:45%;
+  width:46%;
 }
 #keyspanel{
   text-align: center;
