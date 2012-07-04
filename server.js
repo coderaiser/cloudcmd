@@ -629,7 +629,7 @@ CloudServer.getReadFileFunc = function(pName){
             if(pError.path!=='passwd.json')
             {
                 console.log(pError);
-                CloudServer.sendResponse('OK',pError.toString());
+                CloudServer.sendResponse('OK',pError.toString(),pName);
             }else{
                 CloudServer.sendResponse('OK','passwd.json');
             }            
