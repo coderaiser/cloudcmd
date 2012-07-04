@@ -218,20 +218,20 @@ a:focus { outline: thin dotted; }
         display:none;
     }
     /* текущий файл под курсором */
-.current-file{
+    .current-file{
         background-color: rgba(49, 123, 249, .40);
         color:white;
     }
     /* делаем иконки под курсом белыми*/
-.current-file > .mini-icon{
+    .current-file > .mini-icon{
         color:white;
     }
-.current-file > .text-file::before{
+    .current-file > .text-file::before{
         color:white;
     }
     
 /* меняем иконки на шрифтовые*/
-   .mini-icon {
+    .mini-icon {
         font: 60px 'Octicons Regular';
         width: 40%;
         height: 0;
@@ -252,9 +252,7 @@ a:focus { outline: thin dotted; }
     .text-file{
         background-image:none;
     }
-    
-    
-
+        
     /* убираем заголовок*/
     .fm_header{
         display:none;
@@ -306,7 +304,7 @@ a:focus { outline: thin dotted; }
     }
 }
 
-@media only screen and (min-width:786px) and (max-width: 1060px){
+@media only screen and (min-width:786px) and (max-width: 1155px){
     #left{        
         width:90% !important;
     }
