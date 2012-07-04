@@ -297,7 +297,7 @@ a:focus { outline: thin dotted; }
         font-size: 18px;
     }
 }
-@media only screen and (min-width: 601px) and (max-width: 767px){
+@media only screen and (min-width: 601px) and (max-width: 785px){
     #left{        
         width:90% !important;
     }
@@ -306,7 +306,7 @@ a:focus { outline: thin dotted; }
     }
 }
 
-@media only screen and (min-width:767px) and (max-width: 1060px){
+@media only screen and (min-width:786px) and (max-width: 1060px){
     #left{        
         width:90% !important;
     }
