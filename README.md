@@ -38,7 +38,6 @@ There is a short list:
 - Alt  + s          - get all key bindings back
 - up, down, enter   - filesystem navigation
 
-
 Additional modules:
 ---------------
 **Cloud Commander** not using additional modules for main functionality.
