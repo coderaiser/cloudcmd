@@ -363,7 +363,7 @@ CloudClient.init=(function()
     
     CloudClient.cssSet({id:'show_2panels',
         element:document.head,
-        inner:'#left{width:45%;}'
+        inner:'#left{width:46%;}'
     });        
 });
 
