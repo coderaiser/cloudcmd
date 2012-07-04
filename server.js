@@ -194,11 +194,13 @@ CloudServer.init=(function(){
             }
         };
     try{
+        console.log('reading configureation file config.json...');
         lConfig=require('./config');
+        console.log('config.json readed');
     }catch(pError){
-        console.log('warning: configureation file not found...\n'   +
+        console.log('warning: configureation file config.json not found...\n'   +
                     'using default values...\n'                     +
-                    lConfig);
+                    JSON.stringify(lConfig));
     }
     
     /* Переменная в которой храниться кэш*/
