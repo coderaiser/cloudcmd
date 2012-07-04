@@ -184,17 +184,31 @@ CloudServer.init=(function(){
     console.log('server dir:  ' + lServerDir);    
     process.chdir(lServerDir);
     
+    var lConfig={
+            "cache" : {"allowed" : true},
+            "minification" : {
+                "js"    : true,
+                "css"   : true,
+                "html"  : true,
+                "img"   : true
+            }
+        };
+    try{
+        console.log('reading configureation file config.json...');
+        lConfig=require('./config');
+        console.log('config.json readed');
+    }catch(pError){
+        console.log('warning: configureation file config.json not found...\n'   +
+                    'using default values...\n'                     +
+                    JSON.stringify(lConfig));
+    }
+    
     /* Переменная в которой храниться кэш*/
-    CloudServer.Cache.setAllowed(true);
+    CloudServer.Cache.setAllowed(lConfig.cache.allowed);
     /* Change default parameters of
      * js/css/html minification
      */
-    CloudServer.Minify.setAllowed({
-        js:true,
-        css:true,
-        html:true,
-        img:true
-    });
+    CloudServer.Minify.setAllowed(lConfig.minification);
     /* Если нужно минимизируем скрипты */
     CloudServer.Minify.doit();
 });
@@ -615,7 +629,7 @@ CloudServer.getReadFileFunc = function(pName){
             if(pError.path!=='passwd.json')
             {
                 console.log(pError);
-                CloudServer.sendResponse('OK',pError.toString());
+                CloudServer.sendResponse('OK',pError.toString(),pName);
             }else{
                 CloudServer.sendResponse('OK','passwd.json');
             }            

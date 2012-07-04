@@ -35,7 +35,7 @@ a:focus { outline: thin dotted; }
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
 a:hover, a:active { outline: 0; }
 
-ul{ margin: 1em 0; padding: 0 0 0 40px; }
+ul{ margin: 1em 0; padding: 0 20px 0 20px; }
 
 /*
  * 1. Display hand cursor for clickable form elements

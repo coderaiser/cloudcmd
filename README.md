@@ -1,7 +1,7 @@
 Cloud Commander [![Build Status](https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master)](http://travis-ci.org/coderaiser/cloudcmd)
 =============== 
 **Cloud Commander** - two-panels file manager, totally writed on js.
-View [demo](http://demo-cloudcmd.cloudfoundry.com/ "demo").
+View [demo](http://demo-cloudcmd.cloudfoundry.com/ "demo"), [mirror](http://cloudcmd.nodester.com/ "mirror").
 
 Google PageSpeed Score : [100](https://developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fdemo-cloudcmd.cloudfoundry.com_2F&mobile=false "score") (out of 100).
 
@@ -38,7 +38,6 @@ There is a short list:
 - Alt  + s          - get all key bindings back
 - up, down, enter   - filesystem navigation
 
-
 Additional modules:
 ---------------
 **Cloud Commander** not using additional modules for main functionality.
@@ -48,3 +47,7 @@ assingned (and installed) modules:
 - [clean-css] (https://github.com/GoalSmashers/clean-css)
 - [html-minifier] (https://github.com/kangax/html-minifier)
 - [css-b64-images] (https://github.com/Filirom1/css-base64-images)
+
+Install addtitional modules:
+
+    npm i uglify-js clean-css html-minifier css-b64-images
