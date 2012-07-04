@@ -183,14 +183,14 @@ CloudServer.init=(function(){
     console.log('current dir: ' + process.cwd());
     console.log('server dir:  ' + lServerDir);    
     process.chdir(lServerDir);
-    
+    console.log(process.cwd());
     var lConfig={
             "cache" : {"allowed" : true},
             "minification" : {
-                "js"    : true,
-                "css"   : true,
-                "html"  : true,
-                "img"   : true
+                "js"    : false,
+                "css"   : false,
+                "html"  : false, 
+                "img"   : false
             }
         };
     try{
