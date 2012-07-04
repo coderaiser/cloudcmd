@@ -8,6 +8,6 @@
   "engines": {
     "node": "0.6.x"
   },
-  "node": "0.8",
+  "node": "0.8.1",
   "subdomain": "cloudcmd"
 }
