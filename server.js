@@ -43,10 +43,12 @@ var CloudServer={
     
     /* КОНСТАНТЫ */
     /* index.html */
-    INDEX           :'/app/index.html',
+    INDEX           :'index.html',
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
-    LIBDIRSERVER    :'./lib/server'
+    LIBDIRSERVER    :'./lib/server',
+    Port            :31337, /* server port */
+    IP              :'127.0.0.1'
 };
 
 /* 
@@ -150,9 +152,8 @@ CloudServer.Minify={
 
 var LeftDir='/';
 var RightDir=LeftDir;
-/*
-    var Path    = require('path');
-*/   /* модуль для работы с путями*/
+/* модуль для работы с путями*/
+var Path    = require('path');
 
 var Fs          = require('fs');    /* модуль для работы с файловой системой*/
 
@@ -160,7 +161,7 @@ var Zlib;
 /* node v0.4 not contains zlib 
  */
 try{
-    Zlib        = undefined; //require('zlib');  /* модуль для сжатия данных gzip-ом*/
+    Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
 }catch(error){
     Zlib=undefined;
     console.log('to use gzip-commpression' +
@@ -173,15 +174,25 @@ var CloudFunc   = require(CloudServer.LIBDIR +
                     '/cloudfunc'));  /* модуль с функциями */
 /* конструктор*/
 CloudServer.init=(function(){
+    /* Determining server.js directory
+     * and chang current process directory
+     * (usually /) to it.
+     * argv[1] - is always script name
+     */
+    var lServerDir = Path.dirname(process.argv[1]);
+    console.log('current dir: ' + process.cwd());
+    console.log('server dir:  ' + lServerDir);    
+    process.chdir(lServerDir);
+    
     /* Переменная в которой храниться кэш*/
-    CloudServer.Cache.setAllowed(false);
+    CloudServer.Cache.setAllowed(true);
     /* Change default parameters of
      * js/css/html minification
      */
     CloudServer.Minify.setAllowed({
         js:true,
         css:true,
-        html:false,
+        html:true,
         img:true
     });
     /* Если нужно минимизируем скрипты */
@@ -189,19 +200,40 @@ CloudServer.init=(function(){
 });
 
 
-/* создаём сервер на порту 31337*/
+/* создаём сервер на порту 31337 */
 CloudServer.start=function()
 {
     CloudServer.init();
     
+    /* constant ports of deployng servers 
+        var lCloudFoundryPort   = process.env.VCAP_APP_PORT;
+        var lNodesterPort       = process.env.app_port;
+        var lC9Port             = process.env.PORT;
+    */
+    CloudServer.Port = process.env.PORT            ||  /* c9           */
+                       process.env.app_port        ||  /* nodester     */
+                       process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
+                       CloudServer.Port;
+                     
+    CloudServer.IP   = process.env.IP             ||  /* c9           */
+                       CloudServer.IP;
+        
     var http = require('http');    
-    http.createServer(CloudServer._controller).listen(process.env.PORT ||
-        process.env.VCAP_APP_PORT   /* cloudfoundry */      ||
-        process.env.app_port        /* nodester */          ||
-        31337,
-        '0.0.0.0' || '127.0.0.1');
-    console.log('Cloud Commander server running at http://127.0.0.1:'+
-        (process.env.PORT===undefined?31337:process.env.PORT));
+    http.createServer(CloudServer._controller).listen(
+        CloudServer.Port,
+        CloudServer.IP);
+        
+    console.log('Cloud Commander server running at http://' +
+        CloudServer.IP +
+        ':' + 
+        CloudServer.Port);
+    /*
+        (!lC9Port?
+            (!lCloudFoundryPort?
+                (!lNodesterPort?31337:lNodesterPort)
+            :lCloudFoundryPort)
+        :lC9Port));
+    */
 };
 
 
@@ -390,7 +422,7 @@ CloudServer._controller=function(pReq, pRes)
                  */            
                 CloudServer.Responses[CloudServer.INDEX]=pRes;
                 if(lStat.isDirectory())                    
-                    Fs.readdir(LeftDir,CloudServer._readDir);                
+                    Fs.readdir(LeftDir,CloudServer._readDir);
                 /* отдаём файл */
                 else if(lStat.isFile()){
                     CloudServer.Responses[LeftDir]=pRes;
@@ -500,7 +532,7 @@ CloudServer._readDir=function (pError, pFiles)
                  */
 
                 lIndex = CloudServer.Minify.done.css?
-                    lIndex.replace('<link rel=stylesheet href="/reset.css">','')
+                    lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
                         .replace('style.css','all.min.css')
                     :lIndex;
                       
@@ -636,12 +668,3 @@ CloudServer.sendResponse = function(pHead, pData,pName){
 };
 
 CloudServer.start();
-process.argv.forEach(function (val, index, array){
-  console.log(index + ': ' + val);
-});
-
-process.chdir('/app');
-
-var fs=require('fs');
-console.log(fs.readdirSync('/app'));
-
