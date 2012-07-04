@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "0.0.1-11",
+  "version": "0.0.1-12",
   "scripts": {
     "test": "sh test/test.sh",
     "start": "server.js"
@@ -8,5 +8,11 @@
   "engines": {
     "node": "0.6.x"
   },
-  "subdomain": "cloudcmd"
+  "subdomain": "cloudcmd",
+  "dependencies": {
+    "zlib": "*",
+    "uglify-js": "*",
+    "html-minifier": "*",
+    "clean-css": "*"
+  }
 }
