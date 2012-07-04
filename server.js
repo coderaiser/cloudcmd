@@ -47,6 +47,8 @@ var CloudServer={
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
     LIBDIRSERVER    :'./lib/server'
+    Port            :31337, /* server port */
+    IP              :'127.0.0.1'
 };
 
 /* 
@@ -203,24 +205,34 @@ CloudServer.start=function()
 {
     CloudServer.init();
     
-    /* constant ports of deployng servers */
-    var lCloudFoundryPort   = process.env.VCAP_APP_PORT;
-    var lNodesterPort       = process.env.app_port;
-    var lC9Port             = process.env.PORT;
-    
+    /* constant ports of deployng servers 
+        var lCloudFoundryPort   = process.env.VCAP_APP_PORT;
+        var lNodesterPort       = process.env.app_port;
+        var lC9Port             = process.env.PORT;
+    */
+    CloudServer.Port =  process.env.PORT            /* c9           */
+                     || process.env.app_port        /* nodester     */
+                     || process.env.VCAP_APP_PORT   /* cloudfoundry */
+                     || CloudServer.Port;
+                     
+    CloudServer.IP   =  process.env.IP             /* c9            */
+                     || CloudServer.IP;
+        
     var http = require('http');    
     http.createServer(CloudServer._controller).listen(
-        lC9Port             ||
-        lCloudFoundryPort   ||
-        lNodesterPort       ||
-        31337,
-        '0.0.0.0' || '127.0.0.1');
-    console.log('Cloud Commander server running at http://127.0.0.1:' +
+        CloudServer.Port,
+        CloudServer.IP);
+        
+    console.log('Cloud Commander server running at http://' +
+          CloudServer.IP
+        + ':' + CloudServer.Port);
+    /*
         (!lC9Port?
             (!lCloudFoundryPort?
                 (!lNodesterPort?31337:lNodesterPort)
             :lCloudFoundryPort)
         :lC9Port));
+    */
 };
 
 
