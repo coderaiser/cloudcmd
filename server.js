@@ -46,7 +46,7 @@ var CloudServer={
     INDEX           :'index.html',
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
-    LIBDIRSERVER    :'./lib/server'
+    LIBDIRSERVER    :'./lib/server',
     Port            :31337, /* server port */
     IP              :'127.0.0.1'
 };
@@ -210,13 +210,13 @@ CloudServer.start=function()
         var lNodesterPort       = process.env.app_port;
         var lC9Port             = process.env.PORT;
     */
-    CloudServer.Port =  process.env.PORT            /* c9           */
-                     || process.env.app_port        /* nodester     */
-                     || process.env.VCAP_APP_PORT   /* cloudfoundry */
-                     || CloudServer.Port;
+    CloudServer.Port = process.env.PORT            ||  /* c9           */
+                       process.env.app_port        ||  /* nodester     */
+                       process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
+                       CloudServer.Port;
                      
-    CloudServer.IP   =  process.env.IP             /* c9            */
-                     || CloudServer.IP;
+    CloudServer.IP   = process.env.IP             ||  /* c9           */
+                       CloudServer.IP;
         
     var http = require('http');    
     http.createServer(CloudServer._controller).listen(
@@ -224,8 +224,9 @@ CloudServer.start=function()
         CloudServer.IP);
         
     console.log('Cloud Commander server running at http://' +
-          CloudServer.IP
-        + ':' + CloudServer.Port);
+        CloudServer.IP +
+        ':' + 
+        CloudServer.Port);
     /*
         (!lC9Port?
             (!lCloudFoundryPort?
