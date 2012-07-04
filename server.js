@@ -184,17 +184,29 @@ CloudServer.init=(function(){
     console.log('server dir:  ' + lServerDir);    
     process.chdir(lServerDir);
     
+    var lConfig={
+            "cache" : {"allowed" : true},
+            "minification" : {
+                "js"    : true,
+                "css"   : true,
+                "html"  : true,
+                "img"   : true
+            }
+        };
+    try{
+        lConfig=require('./config');
+    }catch(pError){
+        console.log('warning: configureation file not found...\n'   +
+                    'using default values...\n'                     +
+                    lConfig);
+    }
+    
     /* Переменная в которой храниться кэш*/
-    CloudServer.Cache.setAllowed(true);
+    CloudServer.Cache.setAllowed(lConfig.cache.allowed);
     /* Change default parameters of
      * js/css/html minification
      */
-    CloudServer.Minify.setAllowed({
-        js:true,
-        css:true,
-        html:true,
-        img:true
-    });
+    CloudServer.Minify.setAllowed(lConfig.minification);
     /* Если нужно минимизируем скрипты */
     CloudServer.Minify.doit();
 });
