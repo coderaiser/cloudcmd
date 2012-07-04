@@ -627,7 +627,7 @@ CloudClient.cssSet = function(pParams_o){
         pParams_o.style,
         pParams_o.id,
         pParams_o.element?pParams_o.element:document.body);
-    lElem.innerText=pParams_o.inner;
+    lElem.innerHTML=pParams_o.inner;
 };
 
 /* 
