@@ -144,8 +144,8 @@ CloudServer.Minify={
                 this.done.js=this._allowed.js?lMinify.jsScripts():false;
                 this.done.html=this._allowed.html?lMinify.html():false;
                 this.done.css=this._allowed.css?lMinify.cssStyles(this._allowed.img):false;
-                
-                this.MinFolder=lMinify.MinFolder;
+                                
+                this.MinFolder=lMinify.MinFolder;                
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
@@ -437,12 +437,13 @@ CloudServer._controller=function(pReq, pRes)
                  * загружаем сжатый html-файл в дальнейшем
                  */
                 CloudServer.INDEX=(CloudServer.Minify.done.html?
-                    CloudServer.Minify.FolderName+'index.min.html'
+                    CloudServer.Minify.MinFolder+'index.min.html'
                     :CloudServer.INDEX);
                 /*
                  * сохраним указатель на response
                  */            
                 CloudServer.Responses[CloudServer.INDEX]=pRes;
+                
                 if(lStat.isDirectory())                    
                     Fs.readdir(LeftDir,CloudServer._readDir);
                 /* отдаём файл */
@@ -555,10 +556,13 @@ CloudServer._readDir=function (pError, pFiles)
 
                 lIndex = CloudServer.Minify.done.css?
                     lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
-                        .replace('/css/style.css','all.min.css')
+                        .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
                     :lIndex;
                       
-                lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js','client.min.js'):lIndex;
+                lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js',
+                    CloudServer.Minify.MinFolder + 
+                        'client.min.js')
+                    :lIndex;
                 
                 lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
                 /* меняем title */
