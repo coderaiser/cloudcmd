@@ -1,9 +1,0 @@
-{
-    "cache" : {"allowed" : false},
-    "minification" : {
-        "js"    : false,
-        "css"   : false,
-        "html"  : true,
-        "img"   : false
-    }
-}
