@@ -183,19 +183,19 @@ CloudServer.init=(function(){
     console.log('current dir: ' + process.cwd());
     console.log('server dir:  ' + lServerDir);    
     process.chdir(lServerDir);
-    console.log(process.cwd());
+    
     var lConfig={
             "cache" : {"allowed" : true},
             "minification" : {
-                "js"    : false,
-                "css"   : false,
-                "html"  : false, 
-                "img"   : false
+                "js"    : true,
+                "css"   : true,
+                "html"  : true,
+                "img"   : true
             }
         };
     try{
         console.log('reading configureation file config.json...');
-        lConfig=require('./config.json');
+        lConfig=require('./config');
         console.log('config.json readed');
     }catch(pError){
         console.log('warning: configureation file config.json not found...\n'   +
