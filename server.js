@@ -187,10 +187,10 @@ CloudServer.init=(function(){
     var lConfig={
             "cache" : {"allowed" : true},
             "minification" : {
-                "js"    : true,
-                "css"   : true,
+                "js"    : false,
+                "css"   : false,
                 "html"  : true,
-                "img"   : true
+                "img"   : false
             }
         };
     try{
