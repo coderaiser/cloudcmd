@@ -2,8 +2,8 @@
     "cache" : {"allowed" : true},
     "minification" : {
         "js"    : true,
-        "css"   : false,
+        "css"   : true,
         "html"  : true,
-        "img"   : false
+        "img"   : true
     }
 }
