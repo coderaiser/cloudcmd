@@ -47,8 +47,9 @@ var CloudServer={
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
     LIBDIRSERVER    :'./lib/server',
+    
     Port            :31337, /* server port */
-    IP              :'127.0.0.1'
+    IP              :'127.0.0.1'    
 };
 
 /* 
@@ -143,10 +144,15 @@ CloudServer.Minify={
                 this.done.js=this._allowed.js?lMinify.jsScripts():false;
                 this.done.html=this._allowed.html?lMinify.html():false;
                 this.done.css=this._allowed.css?lMinify.cssStyles(this._allowed.img):false;
+                
+                this.MinFolder=lMinify.MinFolder;
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
-    done:{js: false,css: false, html:false}
+    done:{js: false,css: false, html:false},
+    
+    /* minification folder name */
+    MinFolder:''
 };
 
 
@@ -430,7 +436,9 @@ CloudServer._controller=function(pReq, pRes)
                  * меняем название html-файла и
                  * загружаем сжатый html-файл в дальнейшем
                  */
-                CloudServer.INDEX=(CloudServer.Minify.done.html?'index.min.html':CloudServer.INDEX);
+                CloudServer.INDEX=(CloudServer.Minify.done.html?
+                    CloudServer.Minify.FolderName+'index.min.html'
+                    :CloudServer.INDEX);
                 /*
                  * сохраним указатель на response
                  */            
