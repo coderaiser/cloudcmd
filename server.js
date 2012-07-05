@@ -547,7 +547,7 @@ CloudServer._readDir=function (pError, pFiles)
 
                 lIndex = CloudServer.Minify.done.css?
                     lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
-                        .replace('style.css','all.min.css')
+                        .replace('/css/style.css','all.min.css')
                     :lIndex;
                       
                 lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js','client.min.js'):lIndex;
