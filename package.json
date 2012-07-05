@@ -3,6 +3,6 @@
     "version"   : "0.0.1-5",    
     "scripts"   : {"test":"sh test/test.sh","start": "server.js"},
     "engines"   : {"node": "0.6.17"},
-    "node"      : "0.6.17", /* nodester */
+    "node"      : "0.6.17",
     "subdomain" : "cloudcmd"
 }
