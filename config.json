@@ -4,6 +4,6 @@
         "js"    : false,
         "css"   : false,
         "html"  : true,
-        "img"   : true
+        "img"   : false
     }
 }
