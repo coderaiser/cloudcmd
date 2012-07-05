@@ -22,3 +22,6 @@ tmp
 
 #file used by c9
 apache-status
+
+#file used by nodester
+.nodester.appconfig
