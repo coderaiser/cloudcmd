@@ -8,3 +8,4 @@ echo "jshint ./package.json ./config.json"
 jshint --config ./.jshintrc ./package.json ./config.json
 npm i uglify-js clean-css html-minifier css-b64-images
 node server.js testing
+ls ./min
