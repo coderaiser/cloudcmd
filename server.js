@@ -141,7 +141,11 @@ CloudServer.Minify={
             this._allowed.html){
                 var lMinify      = require(CloudServer.LIBDIRSERVER+'/minify');
 
-                this.done.js=this._allowed.js?lMinify.jsScripts():false;
+                this.done.js=this._allowed.js?lMinify.jsScripts(['client.js',
+                                                                'lib/cloudfunc.js',
+                                                                'lib/client/keyBinding.js'])                                                                
+                                                                :false;
+                                                                
                 this.done.html=this._allowed.html?lMinify.html():false;
                 this.done.css=this._allowed.css?lMinify.cssStyles(this._allowed.img):false;
                                 
