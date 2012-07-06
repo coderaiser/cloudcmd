@@ -163,7 +163,7 @@ CloudServer.Minify={
                 this.done.html=this._allowed.html?lMinify.html():false;
                 this.done.css=this._allowed.css?lMinify.cssStyles(this._allowed.img):false;
                                 
-                this.MinFolder=lMinify.MinFolder;                
+                this.MinFolder=lMinify.MinFolder;
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
@@ -589,7 +589,7 @@ CloudServer._readDir=function (pError, pFiles)
                       
                 lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js',
                     CloudServer.Minify.MinFolder + 
-                        'client.min.js')
+                        '/client.min.js')
                     :lIndex;
                 
                 lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
