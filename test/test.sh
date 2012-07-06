@@ -6,3 +6,4 @@ echo "jshint ./lib/cloudfunc.js ./lib/server/minify.js ./lib/client/keyBinding.j
 jshint --config ./.jshintrc ./lib/cloudfunc.js ./lib/server/minify.js ./lib/client/keyBinding.js
 echo "jshint ./package.json ./config.json"
 jshint --config ./.jshintrc ./package.json ./config.json
+node server.js testing

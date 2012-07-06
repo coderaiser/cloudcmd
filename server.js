@@ -4,6 +4,20 @@
  * серверной части Cloud Commander'а
  */
 var CloudServer={
+    /* main Cloud Commander configuration
+     * readed from config.json if it's
+     * exist
+     */
+    Config      : {
+                    "cache" : {"allowed" : true},
+                    "minification" : {
+                        "js"    : false,
+                        "css"   : false,
+                        "html"  : true,
+                        "img"   : false
+                    },
+                    "server"    : true
+    },
     /* функция, которая генерирует заголовки
      * файлов, отправляемые сервером клиенту
      */
@@ -194,33 +208,28 @@ CloudServer.init=(function(){
     console.log('server dir:  ' + lServerDir);    
     process.chdir(lServerDir);
     
-    var lConfig={
-            "cache" : {"allowed" : true},
-            "minification" : {
-                "js"    : false,
-                "css"   : false,
-                "html"  : true,
-                "img"   : false
-            }
-        };
     try{
         console.log('reading configureation file config.json...');
-        lConfig=require('./config');
+        CloudServer.Config = require('./config');
         console.log('config.json readed');
+        /* if command line parameter testing resolved 
+         * setting config to testing
+         */
+        if(process.argv[1]==='testing')CloudServer.Config.server=false;
     }catch(pError){
         console.log('warning: configureation file config.json not found...\n'   +
                     'using default values...\n'                     +
-                    JSON.stringify(lConfig));
-    }
+                    JSON.stringify(CloudServer.Config));
+    }        
     
     /* Переменная в которой храниться кэш*/
-    CloudServer.Cache.setAllowed(lConfig.cache.allowed);
+    CloudServer.Cache.setAllowed(CloudServer.Config.cache.allowed);
     /* Change default parameters of
      * js/css/html minification
      */
-    CloudServer.Minify.setAllowed(lConfig.minification);
+    CloudServer.Minify.setAllowed(CloudServer.Config.minification);
     /* Если нужно минимизируем скрипты */
-    CloudServer.Minify.doit();
+    CloudServer.Minify.doit();        
 });
 
 
@@ -242,15 +251,25 @@ CloudServer.start=function()
     CloudServer.IP   = process.env.IP             ||  /* c9           */
                        CloudServer.IP;
         
-    var http = require('http');    
-    http.createServer(CloudServer._controller).listen(
-        CloudServer.Port,
-        CloudServer.IP);
-        
-    console.log('Cloud Commander server running at http://' +
-        CloudServer.IP +
-        ':' + 
-        CloudServer.Port);
+    /* server mode or testing mode */
+    if(CloudServer.Config.server){
+        var http = require('http');
+        try{
+            http.createServer(CloudServer._controller).listen(
+                CloudServer.Port,
+                CloudServer.IP);
+                
+            console.log('Cloud Commander server running at http://' +
+                CloudServer.IP +
+                ':' + 
+                CloudServer.Port);
+        }catch(pError){
+            console.log('Cloud Commander server could not started');
+            console.log(pError);
+        }
+    }else{
+        console.log('Cloud Commander testing mode');
+    }
     /*
         (!lC9Port?
             (!lCloudFoundryPort?
