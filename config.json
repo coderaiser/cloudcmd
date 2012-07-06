@@ -6,5 +6,5 @@
         "html"  : true,
         "img"   : true
     },
-    "server"    : false
+    "server"    : true
 }
