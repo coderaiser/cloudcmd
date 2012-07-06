@@ -2,6 +2,12 @@
   "name": "cloudcmd",
   "version": "0.0.1",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "two-panels file manager, totally writed on js",
+  "homepage": "http://github.com/coderaiser/cloudcmd",
+  "repository": {
+    "type" : "git",
+    "url" : "http://github.com/coderaiser/cloudcmd.git"
+  },
   "scripts": {
     "test": "sh test/test.sh",
     "start": "server.js"
