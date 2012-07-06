@@ -594,7 +594,7 @@ CloudServer._readDir=function (pError, pFiles)
                       
                 lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js',
                     CloudServer.Minify.MinFolder + 
-                        '/client.min.js')
+                        'client.min.js')
                     :lIndex;
                 
                 lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
