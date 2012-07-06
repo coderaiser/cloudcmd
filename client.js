@@ -39,8 +39,8 @@ var CloudClient={
      /* КОНСТАНТЫ*/
      /* название css-класа текущего файла*/
      CURRENT_FILE           :'current-file',
-     LIBDIR                 :'/lib',
-     LIBDIRCLIENT           :'/lib/client'
+     LIBDIR                 :'/lib/',
+     LIBDIRCLIENT           :'/lib/client/'
 };
 
 /* 
@@ -132,7 +132,7 @@ CloudClient.Cache.clear=(function(){
 /* функция обработки нажатий клавишь */
 CloudClient.keyBinding=(function(){
     /* loading keyBinding module and start it */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT+'/keyBinding.js',function(){
+    CloudClient.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
         CloudCommander.keyBinding();
     });
 });
@@ -308,7 +308,7 @@ CloudClient.init=(function()
     });
     
         /* загружаем общие функции для клиента и сервера*/
-        CloudClient.jsload(CloudClient.LIBDIR+'/cloudfunc.js',function(){
+        CloudClient.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
         /* берём из обьекта window общий с сервером функционал */
         CloudFunc=window.CloudFunc;
             

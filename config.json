@@ -7,5 +7,5 @@
         "img"   : true
     },
     "server"    : true,
-    "logs"      : true
+    "logs"      : false
 }
