@@ -553,7 +553,6 @@ CloudServer._readDir=function (pError, pFiles)
                  * we include minified version of
                  * clien.js to index.html
                  */
-
                 lIndex = CloudServer.Minify.done.css?
                     lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
                         .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
