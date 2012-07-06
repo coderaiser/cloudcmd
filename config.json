@@ -5,5 +5,6 @@
         "css"   : true,
         "html"  : true,
         "img"   : true
-    }
+    },
+    "server"    : false
 }
