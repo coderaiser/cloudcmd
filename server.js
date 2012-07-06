@@ -216,6 +216,12 @@ CloudServer.init=(function(){
          * setting config to testing
          */
         if(process.argv[1]==='testing')CloudServer.Config.server=false;
+                
+        if(CloudServer.Config.logs){
+            console.log('log param setted up in config.json\n' +
+                'from now all logs will be writed to log.txt');
+            CloudServer.writeLogsToFile();            
+        }
     }catch(pError){
         console.log('warning: configureation file config.json not found...\n'   +
                     'using default values...\n'                     +
@@ -714,5 +720,16 @@ CloudServer.sendResponse = function(pHead, pData,pName){
         console.log(pName+' sended');
     }
 };
+
+/* function sets stdout to file log.txt */
+CloudServer.writeLogsToFile = function(){
+    var stdo = require('fs').createWriteStream('./log.txt');
+    
+    process.stdout.write = (function(write) {
+            return function(string, encoding, fd) {
+                    stdo.write(string);
+            }
+    })(process.stdout.write)
+}
 
 CloudServer.start();

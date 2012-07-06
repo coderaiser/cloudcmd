@@ -6,5 +6,6 @@
         "html"  : true,
         "img"   : true
     },
-    "server"    : true
+    "server"    : true,
+    "logs"      : true
 }

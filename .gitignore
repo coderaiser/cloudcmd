@@ -25,3 +25,6 @@ apache-status
 
 #file used by nodester
 .nodester.appconfig
+
+#log file
+log.txt
