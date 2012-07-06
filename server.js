@@ -213,9 +213,14 @@ CloudServer.init=(function(){
         CloudServer.Config = require('./config');
         console.log('config.json readed');
         /* if command line parameter testing resolved 
-         * setting config to testing
+         * setting config to testing, so server
+         * not created, just init and
+         * all logs writed to screen
          */
-        if(process.argv[1]==='testing')CloudServer.Config.server=false;
+        if(process.argv[1]==='testing'){
+            CloudServer.Config.server=false;
+            CloudServer.logs=true;
+        }
                 
         if(CloudServer.Config.logs){
             console.log('log param setted up in config.json\n' +
