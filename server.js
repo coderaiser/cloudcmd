@@ -217,9 +217,10 @@ CloudServer.init=(function(){
          * not created, just init and
          * all logs writed to screen
          */
-        if(process.argv[1]==='testing'){
+         console.log(process.argv[2]);
+        if(process.argv[2]==='test'){            
             CloudServer.Config.server=false;
-            CloudServer.logs=true;
+            CloudServer.Config.logs=true;
         }
                 
         if(CloudServer.Config.logs){
