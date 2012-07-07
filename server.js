@@ -58,7 +58,6 @@ var CloudServer={
     /* КОНСТАНТЫ */
     /* index.html */
     INDEX           :'index.html',
-    /* name of direcotory with libs */
     LIBDIR          :'./lib',
     LIBDIRSERVER    :'./lib/server',
     CSSDIR          :'./css',
@@ -163,7 +162,7 @@ CloudServer.Minify={
                         :false;
                                                                 
                 this.done.html=this._allowed.html?
-                    lMinify.html():false;
+                    lMinify.html(CloudServer.INDEX):false;
                 
                 this.done.css=this._allowed.css?
                     lMinify.cssStyles([CloudServer.CSSDIR + '/style.css',
@@ -742,8 +741,8 @@ CloudServer.writeLogsToFile = function(){
     process.stdout.write = (function(write) {
             return function(string, encoding, fd) {
                     stdo.write(string);
-            }
-    })(process.stdout.write)
-}
+            };
+    })(process.stdout.write);
+};
 
 CloudServer.start();
