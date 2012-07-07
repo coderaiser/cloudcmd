@@ -220,7 +220,7 @@ CloudServer.init=(function(){
          console.log(process.argv[2]);
         if(process.argv[2]==='test'){            
             CloudServer.Config.server=false;
-            CloudServer.Config.logs=true;
+            CloudServer.Config.logs=false;
         }
                 
         if(CloudServer.Config.logs){
