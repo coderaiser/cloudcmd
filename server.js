@@ -162,11 +162,34 @@ CloudServer.Minify={
                         'git submodule init\n'                              +
                         'git submodule update');
                 }
-
+                this.MinFolder = '/' + lMinify.MinFolder;
+                
                 this.done.js=this._allowed.js?
                     lMinify.jsScripts(['client.js',
                         'lib/cloudfunc.js',
-                        'lib/client/keyBinding.js'])                                                                
+                        'lib/client/keyBinding.js'],
+                        {Name: 'client.js',
+                         /*                            
+                         * temporary changed dir path,
+                         * becouse directory lib is write
+                         * protected by others by default
+                         * so if node process is started
+                         * from other user (root for example
+                         * in nodester) we can not write
+                         * minified versions
+                         */
+                         Func: function(pFinalCode){
+                            console.log('file name of ' +
+                                'cloudfunc.js'          +
+                                ' in '                  +
+                                'client.js'             +
+                                ' changed. size:',
+                                (pFinalCode = pFinalCode
+                                    .replace('cloudfunc.js','cloudfunc.min.js')
+                                        .replace('keyBinding.js','keyBinding.min.js')
+                                            .replace('/lib/', this.MinFolder)
+                                                .replace('/lib/client/', this.MinFolder)).length);
+                                                }})
                         :false;
                                                                 
                 this.done.html=this._allowed.html?
@@ -175,9 +198,7 @@ CloudServer.Minify={
                 this.done.css=this._allowed.css?
                     lMinify.cssStyles([CloudServer.CSSDIR + '/style.css',
                         CloudServer.CSSDIR + '/reset.css'],
-                        this._allowed.img):false;
-                                
-                this.MinFolder = '/' + lMinify.MinFolder;
+                        this._allowed.img):false;                                                
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
