@@ -264,8 +264,9 @@ CloudServer.start=function()
                        CloudServer.IP;
         
     /* server mode or testing mode */
-    if(CloudServer.Config.server && process.argv[2]!=='test'){
+    if(CloudServer.Config.server && process.argv[2]!=='test'){        
         var http = require('http');
+        
         try{
             http.createServer(CloudServer._controller).listen(
                 CloudServer.Port,
