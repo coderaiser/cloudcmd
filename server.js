@@ -153,10 +153,11 @@ CloudServer.Minify={
         if(this._allowed.css ||
             this._allowed.js ||
             this._allowed.html){
-                try
-                    var lMinify      = require(CloudServer.LIBDIRSERVER+'/minify');
-                catch(pError){
-                    console.log('Could not minify withou minify module\n    +
+                var lMinify;
+                try{
+                    lMinify      = require(CloudServer.LIBDIRSERVER+'/minify');
+                }catch(pError){
+                    console.log('Could not minify withou minify module\n'    +
                         'for fixing type:\n'                                +
                         'git submodule init\n'                              +
                         'git submodule update');
