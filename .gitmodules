@@ -1,0 +1,3 @@
+[submodule "minify"]
+	path = lib/server/minify
+	url = git@github.com:coderaiser/minify.git
