@@ -28,16 +28,6 @@ Limited-mode features:
 - no local caching
 - full loading of all web page(with styles, js-scripts, html-page etc).
 
-Installing
----------------
-**Cloud Commander** installing is very easy. All you need it's just clone
-repository from github. Install and start, just 3 commands:
-
-git clone git://github.com/coderaiser/cloudcmd.git
-cd cloudcmd
-node server.js
-
-
 Hot keys:
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
@@ -47,6 +37,22 @@ There is a short list:
 - Alt  + q          - disable key bindings
 - Alt  + s          - get all key bindings back
 - up, down, enter   - filesystem navigation
+
+Installing
+---------------
+**Cloud Commander** installing is very easy. All you need it's just clone
+repository from github. Install and start, just 3 commands:
+
+git clone git://github.com/coderaiser/cloudcmd.git
+cd cloudcmd
+node server.js
+
+Updating
+---------------
+**Cloud Commander** is very buggy and alfa so it's very often updated. For update
+you can just type in cloudcmd directory:
+
+    git pull
 
 Additional modules:
 ---------------
