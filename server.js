@@ -177,7 +177,7 @@ CloudServer.Minify={
                         CloudServer.CSSDIR + '/reset.css'],
                         this._allowed.img):false;
                                 
-                this.MinFolder=lMinify.MinFolder;
+                this.MinFolder = '/' + lMinify.MinFolder;
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
@@ -385,6 +385,7 @@ CloudServer._controller=function(pReq, pRes)
     var lNoJS_s=CloudFunc.NOJS;
     var lFS_s=CloudFunc.FS;
     
+    console.log(pathname);
     if(pathname!=='/favicon.ico')
     {    
         console.log("request for " + pathname + " received...");
@@ -487,7 +488,7 @@ CloudServer._controller=function(pReq, pRes)
                  * загружаем сжатый html-файл в дальнейшем
                  */
                 CloudServer.INDEX=(CloudServer.Minify.done.html?
-                    CloudServer.Minify.MinFolder+'index.min.html'
+                    '.' + CloudServer.Minify.MinFolder + 'index.min.html'
                     :CloudServer.INDEX);
                 /*
                  * сохраним указатель на response
