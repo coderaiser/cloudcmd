@@ -61,6 +61,7 @@ var CloudServer={
     /* name of direcotory with libs */
     LIBDIR          :'./lib',
     LIBDIRSERVER    :'./lib/server',
+    CSSDIR          :'./css',
     
     Port            :31337, /* server port */
     IP              :'127.0.0.1'    
@@ -155,13 +156,19 @@ CloudServer.Minify={
             this._allowed.html){
                 var lMinify      = require(CloudServer.LIBDIRSERVER+'/minify');
 
-                this.done.js=this._allowed.js?lMinify.jsScripts(['client.js',
-                                                                'lib/cloudfunc.js',
-                                                                'lib/client/keyBinding.js'])                                                                
-                                                                :false;
+                this.done.js=this._allowed.js?
+                    lMinify.jsScripts(['client.js',
+                        'lib/cloudfunc.js',
+                        'lib/client/keyBinding.js'])                                                                
+                        :false;
                                                                 
-                this.done.html=this._allowed.html?lMinify.html():false;
-                this.done.css=this._allowed.css?lMinify.cssStyles(this._allowed.img):false;
+                this.done.html=this._allowed.html?
+                    lMinify.html():false;
+                
+                this.done.css=this._allowed.css?
+                    lMinify.cssStyles([CloudServer.CSSDIR + '/style.css',
+                        CloudServer.CSSDIR + '/reset.css'],
+                        this._allowed.img):false;
                                 
                 this.MinFolder=lMinify.MinFolder;
         }
@@ -264,6 +271,10 @@ CloudServer.start=function()
                        CloudServer.IP;
         
     /* server mode or testing mode */
+    console.log(CloudServer.Config.server);
+    console.log(process.argv[2]);
+    console.log(CloudServer.Config.logs);
+    
     if(CloudServer.Config.server && process.argv[2]!=='test'){        
         var http = require('http');
         
@@ -480,7 +491,7 @@ CloudServer._controller=function(pReq, pRes)
                  */            
                 CloudServer.Responses[CloudServer.INDEX]=pRes;
                 
-                if(lStat.isDirectory())                    
+                if(lStat.isDirectory())
                     Fs.readdir(LeftDir,CloudServer._readDir);
                 /* отдаём файл */
                 else if(lStat.isFile()){
