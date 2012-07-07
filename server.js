@@ -270,12 +270,8 @@ CloudServer.start=function()
     CloudServer.IP   = process.env.IP             ||  /* c9           */
                        CloudServer.IP;
         
-    /* server mode or testing mode */
-    console.log(CloudServer.Config.server);
-    console.log(process.argv[2]);
-    console.log(CloudServer.Config.logs);
-    
-    if(CloudServer.Config.server && process.argv[2]!=='test'){        
+    /* server mode or testing mode */    
+    if(process.argv[2]!=='test' && CloudServer.Config.server){
         var http = require('http');
         
         try{
