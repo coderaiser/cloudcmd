@@ -28,6 +28,16 @@ Limited-mode features:
 - no local caching
 - full loading of all web page(with styles, js-scripts, html-page etc).
 
+Installing
+---------------
+**Cloud Commander** installing is very easy. All you need it's just clone
+repository from github. Install and start, just 3 commands:
+
+git clone git://github.com/coderaiser/cloudcmd.git
+cd cloudcmd
+node server.js
+
+
 Hot keys:
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
@@ -42,12 +52,9 @@ Additional modules:
 ---------------
 **Cloud Commander** not using additional modules for main functionality.
 But for minification and optimization tricks optional can be
-assingned (and installed) modules:
-- [UglifyJS] (https://github.com/mishoo/UglifyJS)
-- [clean-css] (https://github.com/GoalSmashers/clean-css)
-- [html-minifier] (https://github.com/kangax/html-minifier)
-- [css-b64-images] (https://github.com/Filirom1/css-base64-images)
+assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify "Minify")
 
 Install addtitional modules:
 
-    npm i uglify-js clean-css html-minifier css-b64-images
+    git submodule init
+    git submodule update
