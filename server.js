@@ -217,7 +217,7 @@ CloudServer.init=(function(){
          * not created, just init and
          * all logs writed to screen
          */
-         console.log(process.argv[2]);
+        console.log(process.argv[2]);
         if(process.argv[2]==='test'){            
             CloudServer.Config.server=false;
             CloudServer.Config.logs=false;
@@ -264,7 +264,7 @@ CloudServer.start=function()
                        CloudServer.IP;
         
     /* server mode or testing mode */
-    if(CloudServer.Config.server){
+    if(CloudServer.Config.server && process.argv[2]!=='test'){
         var http = require('http');
         try{
             http.createServer(CloudServer._controller).listen(
