@@ -133,7 +133,7 @@ CloudClient.Cache.clear=(function(){
 CloudClient.keyBinding=(function(){
     /* loading keyBinding module and start it */
     CloudClient.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
-        CloudCommander.keyBinding();
+            CloudCommander.keyBinding();
     });
 });
 
@@ -282,7 +282,6 @@ CloudClient._currentToParent = (function(pDirName){
 var LoadingImage;
 var ErrorImage;
 
-var $;
 var CloudFunc;
 /* Конструктор CloudClient, который
  * выполняет весь функционал по
@@ -298,28 +297,25 @@ CloudClient.init=(function()
     if(lTitle.length>0)lTitle[0].textContent='Cloud Commander';
     
     /* загружаем jquery: */
-    CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',function(){
-        /* сохраняем переменную jQuery себе в область видимости */
-        $=window.jQuery;
-        if(!window.jQuery)CloudClient.jsload('jquery.min.js',
-            function(){
-               $=window.jQuery;
-            });
+    CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+        onerror: function(){
+            CloudClient.jsload('lib/client/jquery.min.js');
+        }
     });
     
         /* загружаем общие функции для клиента и сервера*/
         CloudClient.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
-        /* берём из обьекта window общий с сервером функционал */
-        CloudFunc=window.CloudFunc;
+            /* берём из обьекта window общий с сервером функционал */
+            CloudFunc=window.CloudFunc;
             
-        /* меняем ссылки на ajax'овые*/
-        CloudClient._changeLinks(CloudFunc.LEFTPANEL);
-        CloudClient._changeLinks(CloudFunc.RIGHTPANEL);
-                
-        /* устанавливаем переменную доступности кэша*/
-        CloudClient.Cache.isAllowed();    
-        /* Устанавливаем кэш корневого каталога */    
-        if(!CloudClient.Cache.get('/'))CloudClient.Cache.set('/',CloudClient._getJSONfromFileTable());  
+            /* меняем ссылки на ajax'овые*/
+            CloudClient._changeLinks(CloudFunc.LEFTPANEL);
+            CloudClient._changeLinks(CloudFunc.RIGHTPANEL);
+                    
+            /* устанавливаем переменную доступности кэша*/
+            CloudClient.Cache.isAllowed();    
+            /* Устанавливаем кэш корневого каталога */    
+            if(!CloudClient.Cache.get('/'))CloudClient.Cache.set('/',CloudClient._getJSONfromFileTable());  
         }
     );                
     
@@ -570,7 +566,9 @@ CloudClient._createFileTable = function(pElem,pJSON)
  * загружает файл с src.
  * @pName       - название тэга
  * @pSrc        - путь к файлу
- * @pFunc       - функци
+ * @pFunc       - обьект, содержаий одну из функций
+ *                  или сразу две onload и onerror
+ *                  {onload: function(){}, onerror: function();}
  * @pStyle      - стиль
  * @pId         - id
  * @pElement    - элемент, дочерним которо будет этот
@@ -589,16 +587,24 @@ CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
     {
         var element = document.createElement(pName);
         element.src = pSrc;
-        element.id=lID;
+        element.id=lID;        
         if(arguments.length>=3){
-            element.onload=pFunc;
+            /* if passed arguments function
+             * then it's onload by default
+             */
+            if(typeof pFunc === 'function'){
+                element.onload=pFunc;
+            /* if object - then onload or onerror */
+            }else if (typeof pFunc === 'object'){
+                if(pFunc.onload)element.onload = pFunc.onload;
+                if(pFunc.onerror)element.onerror=pFunc.onerror;
+            }
             if(arguments.length>=4){
                 element.style.cssText=pStyle;
             }
-        }        
-        //document.body
-        pElement.appendChild(element);    
-        return element;//'elem '+src+' loaded';
+        }
+        pElement.appendChild(element);
+        return element;
     }
     /* если js-файл уже загружен 
      * запускаем функцию onload
@@ -683,20 +689,22 @@ CloudClient._getJSONfromFileTable=function()
      * можна заменить на любой другой код
      */ 
  if(!document.getElementsByClassName){
-     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',function(){
-        /* сохраняем переменную jQuery себе в область видимости */
-        document.getElementsByClassName=function(pClassName){
-            return $('.'+pClassName)[0];
-        };
-        $=window.jQuery;
-        if(!window.jQuery)CloudClient.jsload('jquery.min.js',
-            function(){
-               $=window.jQuery;
-               document.getElementsByClassName=function(pClassName){
-                    return $('.'+pClassName)[0];
-                };
-            });
-        });
+     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+         onload: function(){
+            /* сохраняем переменную jQuery себе в область видимости */
+            document.getElementsByClassName=function(pClassName){
+                return window.jQuery('.'+pClassName)[0];
+            };
+         },
+        onerror: function(){
+            CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'jquery.min.js',
+                function(){
+                   document.getElementsByClassName=function(pClassName){
+                        return window.jQuery('.'+pClassName)[0];
+                    };
+                });
+        }
+    });
 }
 
 return CloudClient;
