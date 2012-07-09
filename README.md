@@ -58,7 +58,7 @@ Additional modules:
 ---------------
 **Cloud Commander** not using additional modules for main functionality.
 But for minification and optimization tricks optional can be
-assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify "Minify")
+assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify "Minify").
 
 Install addtitional modules:
 
