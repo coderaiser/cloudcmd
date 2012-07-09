@@ -7,7 +7,5 @@ jshint --config ./.jshintrc ./lib/cloudfunc.js ./lib/server/minify/minify.js ./l
 echo "jshint ./package.json ./config.json"
 jshint --config ./.jshintrc ./package.json ./config.json
 npm i uglify-js clean-css html-minifier css-b64-images
-#linting css files
-npm i recess -g
 node server.js test
 ls ./min
