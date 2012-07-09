@@ -299,7 +299,7 @@ CloudClient.init=(function()
     /* загружаем jquery: */
     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
         onerror: function(){
-            CloudClient.jsload('lib/client/jquery.min.js');
+            CloudClient.jsload('lib/client/jquery.js');
         }
     });
     
@@ -697,7 +697,7 @@ CloudClient._getJSONfromFileTable=function()
             };
          },
         onerror: function(){
-            CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'jquery.min.js',
+            CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
                 function(){
                    document.getElementsByClassName=function(pClassName){
                         return window.jQuery('.'+pClassName)[0];
