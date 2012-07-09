@@ -56,7 +56,7 @@ you can just type in cloudcmd directory:
 
 Additional modules:
 ---------------
-**Cloud Commander** not using additional modules for main functionality.
+**Cloud Commander's Server Side** not using additional modules for main functionality.
 But for minification and optimization tricks optional can be
 assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify "Minify").
 
@@ -64,3 +64,13 @@ Install addtitional modules:
 
     git submodule init
     git submodule update
+    
+**Cloud Commander's Client Side** use module jquery for ajaxing.
+We could not use this module, but this way is fast:
+- google cdn
+- gzip
+- cache
+
+Perhaps in the future, it will not be used, but so far it has no effect on
+start loading of Cloud Commander Client Side and do things fast and stable
+it is using now.
