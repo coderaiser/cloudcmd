@@ -4,3 +4,6 @@ Cloud Commander v0.1.1
 js-script(or something other) has not loaded.
 - Added jquery file, so from now Cloud Commander can totaly work offline.
 - Added css-lint to travis ci.
+- fixed bug in object Minify, doit function, more processing function did not
+return final_code so changes was not saving, and clien side loaded keyBinding.js
+and cloudfunc.js full sized versions.
