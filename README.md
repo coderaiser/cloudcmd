@@ -43,10 +43,19 @@ Installing
 **Cloud Commander** installing is very easy. All you need it's just clone
 repository from github. Install and start, just 3 commands:
 
-    git clone git://github.com/coderaiser/cloudcmd.git
-    cd cloudcmd
-    node server.js
+    git clone git://github.com/coderaiser/cloudcmd.git --recursive
 
+Starting
+---------------
+To **Cloud Commander** only one command neaded:
+    node server.js
+After thet Cloud Commander reads config file **config.json** and start server
+on 31337 port, if none of port varibles(*cloud9*, *cloudfoundry* and *nodester*)
+isn't exist.
+Then type in browser
+    http://127.0.0.1:31337
+or
+    http://localhost:31337
 Updating
 ---------------
 **Cloud Commander** is very buggy and alfa so it's very often updated. For update
@@ -74,3 +83,10 @@ We could not use this module, but this way is fast:
 Perhaps in the future, it will not be used, but so far it has no effect on
 start loading of Cloud Commander Client Side and do things fast and stable
 it is using now.
+
+Contributing
+---------------
+If you would like to contribute - send pull request to dev branch.
+Getting dev version of **Cloud Commander**:
+    git clone cloudcmd --recursive
+    git checkout dev
