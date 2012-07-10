@@ -13,3 +13,5 @@ and cloudfunc.js full sized versions.
 
 * Changed the way Minify post-processing js-files so, from now in Minify object
 post-processing functions passed like this {'client.js': function(){}}
+
+* Added ability to read file data from Minify Cache, without writing to disk
