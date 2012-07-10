@@ -162,23 +162,22 @@ CloudServer.Minify={
                         'git submodule init\n'                              +
                         'git submodule update');
                 }
+                /*
+                 * temporary changed dir path,
+                 * becouse directory lib is write
+                 * protected by others by default
+                 * so if node process is started
+                 * from other user (root for example
+                 * in nodester) we can not write
+                 * minified versions
+                 */
                 this.MinFolder = '/' + lMinify.MinFolder;
                 var lMinFolder=this.MinFolder;
                 this.done.js=this._allowed.js?
                     lMinify.jsScripts(['client.js',
                         'lib/cloudfunc.js',
                         'lib/client/keyBinding.js'],
-                        {Name: 'client.js',
-                         /*                            
-                         * temporary changed dir path,
-                         * becouse directory lib is write
-                         * protected by others by default
-                         * so if node process is started
-                         * from other user (root for example
-                         * in nodester) we can not write
-                         * minified versions
-                         */
-                         Func: function(pFinalCode){
+                        {'client.js' : function(pFinalCode){
                             console.log('file name of ' +
                                 'cloudfunc.js'          +
                                 ' in '                  +
