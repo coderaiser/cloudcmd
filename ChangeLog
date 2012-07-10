@@ -1,9 +1,12 @@
-Cloud Commander v0.1.1
+Version 0.1.1
 
-- Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
+* Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
 js-script(or something other) has not loaded.
-- Added jquery file, so from now Cloud Commander can totaly work offline.
-- Added css-lint to travis ci.
-- fixed bug in object Minify, doit function, more processing function did not
+
+* Added jquery file, so from now Cloud Commander can totaly work offline.
+
+* Added css-lint to travis ci.
+
+* Fixed bug in object Minify, doit function, more processing function did not
 return final_code so changes was not saving, and clien side loaded keyBinding.js
 and cloudfunc.js full sized versions.
