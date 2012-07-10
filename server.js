@@ -163,7 +163,7 @@ CloudServer.Minify={
                         'git submodule update');
                 }
                 this.MinFolder = '/' + lMinify.MinFolder;
-                
+                var lMinFolder=this.MinFolder;
                 this.done.js=this._allowed.js?
                     lMinify.jsScripts(['client.js',
                         'lib/cloudfunc.js',
@@ -187,8 +187,9 @@ CloudServer.Minify={
                                 (pFinalCode = pFinalCode
                                     .replace('cloudfunc.js','cloudfunc.min.js')
                                         .replace('keyBinding.js','keyBinding.min.js')
-                                            .replace('/lib/', this.MinFolder)
-                                                .replace('/lib/client/', this.MinFolder)).length);
+                                            .replace('/lib/', lMinFolder)
+                                                .replace('/lib/client/', lMinFolder)).length);
+                                return pFinalCode;
                                                 }})
                         :false;
                                                                 
