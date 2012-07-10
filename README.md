@@ -86,7 +86,7 @@ it is using now.
 
 Contributing
 ---------------
-If you would like to contribute - send pull request to dev branch
+If you would like to contribute - send pull request to dev branch.
 Getting dev version of **Cloud Commander**:
 
     git clone cloudcmd --recursive
