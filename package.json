@@ -19,7 +19,7 @@
   },
   "devDependencies": {},
   "engines": {
-    "node": "0.6.17"
+    "node": "0.6.x"
   },
   "description": "Two-panels file manager, totally writed on js.",
   "homepage": "https://github.com/coderaiser/cloudcmd",
