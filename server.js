@@ -63,7 +63,7 @@ var CloudServer={
     CSSDIR          :'./css',
     
     Port            :31337, /* server port */
-    IP              :'127.0.0.1'    
+    IP              :'127.0.0.1'
 };
 
 /* 
@@ -173,24 +173,31 @@ CloudServer.Minify={
                  */
                 this.MinFolder = '/' + lMinify.MinFolder;
                 var lMinFolder=this.MinFolder;
+                
+                /* post processing function for file
+                 * client.js
+                 */
+                var lPostProcessing_f = function(pFinalCode){
+                    console.log('file name of ' +
+                        'cloudfunc.js'          +
+                        ' in '                  +
+                        'client.js'             +
+                        ' changed. size:',
+                    (pFinalCode = pFinalCode
+                        .replace('cloudfunc.js','cloudfunc.min.js')
+                            .replace('keyBinding.js','keyBinding.min.js')
+                                .replace('/lib/', lMinFolder)
+                                    .replace('/lib/client/', lMinFolder)).length);
+                    return pFinalCode;
+                };
+                
                 this.done.js=this._allowed.js?
-                    lMinify.jsScripts(['client.js',
+                    lMinify.jsScripts([{
+                        'client.js': lPostProcessing_f},
                         'lib/cloudfunc.js',
                         'lib/client/keyBinding.js'],
-                        {'client.js' : function(pFinalCode){
-                            console.log('file name of ' +
-                                'cloudfunc.js'          +
-                                ' in '                  +
-                                'client.js'             +
-                                ' changed. size:',
-                                (pFinalCode = pFinalCode
-                                    .replace('cloudfunc.js','cloudfunc.min.js')
-                                        .replace('keyBinding.js','keyBinding.min.js')
-                                            .replace('/lib/', lMinFolder)
-                                                .replace('/lib/client/', lMinFolder)).length);
-                                return pFinalCode;
-                                                }},true)
-                        :false;
+                        true)
+                :false;
                                                                 
                 this.done.html=this._allowed.html?
                     lMinify.html(CloudServer.INDEX):false;
@@ -409,7 +416,6 @@ CloudServer._controller=function(pReq, pRes)
     var lNoJS_s=CloudFunc.NOJS;
     var lFS_s=CloudFunc.FS;
     
-    console.log(pathname);
     if(pathname!=='/favicon.ico')
     {    
         console.log("request for " + pathname + " received...");
