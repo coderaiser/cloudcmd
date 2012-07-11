@@ -437,7 +437,6 @@ CloudServer._controller=function(pReq, pRes)
             pathname!=='/'){
             /* если имена файлов проекта - загружаем их*/  
             /* убираем слеш и читаем файл с текущец директории*/
-            //lName=Path.basename(pathname);
             
             /* добавляем текующий каталог к пути */
             lName='.'+pathname;
@@ -469,7 +468,7 @@ CloudServer._controller=function(pReq, pRes)
                     lFromCache_o.cache=false;
                     lFileData = CloudServer.Minify.Cache[
                         Path.basename(lName)];                    
-            }            
+            }
             var lReadFileFunc_f=CloudServer.getReadFileFunc(lName);
             /* если там что-то есть передаём данные в функцию
              * readFile
