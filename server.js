@@ -159,12 +159,14 @@ CloudServer.Minify={
                 }catch(pError){
                     try{
                         lMinify      = require('minify');
-                    }catch(pError){}
-                    
-                    return console.log('Could not minify withou minify module\n'    +
+                    }catch(pError){
+                        return console.log('Could not minify withou minify module\n'    +
                         'for fixing type:\n'                                +
                         'git submodule init\n'                              +
-                        'git submodule update');
+                        'git submodule update\n'                            +
+                        'or\n'                                              +
+                        'npm i minify');
+                    }
                 }
                 /*
                  * temporary changed dir path,
