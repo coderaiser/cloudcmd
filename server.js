@@ -63,7 +63,7 @@ var CloudServer={
     CSSDIR          :'./css',
     
     Port            :31337, /* server port */
-    IP              :'127.0.0.1'    
+    IP              :'127.0.0.1'
 };
 
 /* 
@@ -157,40 +157,47 @@ CloudServer.Minify={
                 try{
                     lMinify      = require(CloudServer.LIBDIRSERVER+'/minify');
                 }catch(pError){
-                    console.log('Could not minify withou minify module\n'    +
+                    return console.log('Could not minify withou minify module\n'    +
                         'for fixing type:\n'                                +
                         'git submodule init\n'                              +
                         'git submodule update');
                 }
+                /*
+                 * temporary changed dir path,
+                 * becouse directory lib is write
+                 * protected by others by default
+                 * so if node process is started
+                 * from other user (root for example
+                 * in nodester) we can not write
+                 * minified versions
+                 */
                 this.MinFolder = '/' + lMinify.MinFolder;
+                var lMinFolder=this.MinFolder;
+                
+                /* post processing function for file
+                 * client.js
+                 */
+                var lPostProcessing_f = function(pFinalCode){
+                    console.log('file name of ' +
+                        'cloudfunc.js'          +
+                        ' in '                  +
+                        'client.js'             +
+                        ' changed. size:',
+                    (pFinalCode = pFinalCode
+                        .replace('cloudfunc.js','cloudfunc.min.js')
+                            .replace('keyBinding.js','keyBinding.min.js')
+                                .replace('/lib/', lMinFolder)
+                                    .replace('/lib/client/', lMinFolder)).length);
+                    return pFinalCode;
+                };
                 
                 this.done.js=this._allowed.js?
-                    lMinify.jsScripts(['client.js',
+                    lMinify.jsScripts([{
+                        'client.js': lPostProcessing_f},
                         'lib/cloudfunc.js',
                         'lib/client/keyBinding.js'],
-                        {Name: 'client.js',
-                         /*                            
-                         * temporary changed dir path,
-                         * becouse directory lib is write
-                         * protected by others by default
-                         * so if node process is started
-                         * from other user (root for example
-                         * in nodester) we can not write
-                         * minified versions
-                         */
-                         Func: function(pFinalCode){
-                            console.log('file name of ' +
-                                'cloudfunc.js'          +
-                                ' in '                  +
-                                'client.js'             +
-                                ' changed. size:',
-                                (pFinalCode = pFinalCode
-                                    .replace('cloudfunc.js','cloudfunc.min.js')
-                                        .replace('keyBinding.js','keyBinding.min.js')
-                                            .replace('/lib/', this.MinFolder)
-                                                .replace('/lib/client/', this.MinFolder)).length);
-                                                }})
-                        :false;
+                        true)
+                :false;
                                                                 
                 this.done.html=this._allowed.html?
                     lMinify.html(CloudServer.INDEX):false;
@@ -198,14 +205,17 @@ CloudServer.Minify={
                 this.done.css=this._allowed.css?
                     lMinify.cssStyles([CloudServer.CSSDIR + '/style.css',
                         CloudServer.CSSDIR + '/reset.css'],
-                        this._allowed.img):false;                                                
+                        this._allowed.img):false;
+                        
+                this.Cache = lMinify.Cache;
         }
     }),
     /* свойство показывающее случилась ли ошибка*/
     done:{js: false,css: false, html:false},
     
     /* minification folder name */
-    MinFolder:''
+    MinFolder   :'',
+    Cache       :{}
 };
 
 
@@ -276,7 +286,7 @@ CloudServer.init=(function(){
      */
     CloudServer.Minify.setAllowed(CloudServer.Config.minification);
     /* Если нужно минимизируем скрипты */
-    CloudServer.Minify.doit();        
+    CloudServer.Minify.doit();
 });
 
 
@@ -406,7 +416,6 @@ CloudServer._controller=function(pReq, pRes)
     var lNoJS_s=CloudFunc.NOJS;
     var lFS_s=CloudFunc.FS;
     
-    console.log(pathname);
     if(pathname!=='/favicon.ico')
     {    
         console.log("request for " + pathname + " received...");
@@ -435,18 +444,43 @@ CloudServer._controller=function(pReq, pRes)
              * не сжатый - в обратном случае
              */
             var lFileData=CloudServer.Cache.get(CloudServer.Gzip?(lName+'_gzip'):lName);
-
+            console.log(Path.basename(lName));
+                        
+            var lMinify=CloudServer.Minify;
+            
+            /* object thet contains information
+             * about the source of file data
+             */
+            var lFromCache_o={'cache': true};
+            
+            /* if cache is empty and Cache allowed and Minify_allowed 
+             * and in Minifys cache is files, so save it to
+             * CloudServer cache
+             */
+            if(!lFileData &&  
+                lMinify._allowed){
+                    console.log('trying to read data from Minify.Cache');
+                    lFromCache_o.cache=false;
+                    lFileData = CloudServer.Minify.Cache[
+                        Path.basename(lName)];                    
+            }            
             var lReadFileFunc_f=CloudServer.getReadFileFunc(lName);
             /* если там что-то есть передаём данные в функцию
              * readFile
              */
-            if(lFileData){
-                console.log('readed from cache');
+            if(lFileData){                
+                /* if file readed not from cache - he readed from minified cache */
+                if(lFromCache_o.cache===false)
+                    lFromCache_o.minify=true;
+                else
+                    lFromCache_o.minify=false;
+                    
+                console.log(lName + ' readed from cache');
                 /* передаём данные с кэша,
                  * если gzip включен - сжатые
                  * в обратном случае - несжатые
                  */
-                lReadFileFunc_f(undefined,lFileData,true);
+                lReadFileFunc_f(undefined,lFileData,lFromCache_o);
             }
             else Fs.readFile(lName,lReadFileFunc_f);
             
@@ -674,11 +708,13 @@ CloudServer._readDir=function (pError, pFiles)
  */
 CloudServer.getReadFileFunc = function(pName){
 /*
- * @pError  - ошибка
- * @pData   - данные
- * @pFromFile - прочитано с файла bool
+ * @pError          - ошибка
+ * @pData           - данные
+ * @pFromCache_o    - прочитано с файла,
+ *                      или из одного из кешей
+ * Пример {cache: false, minify: true}
  */    
-    var lReadFile=function(pError,pData,pFromCache_b){
+    var lReadFile=function(pError, pData, pFromCache_o){
         if (!pError){
             console.log('file ' + pName + ' readed');
             
@@ -686,7 +722,7 @@ CloudServer.getReadFileFunc = function(pName){
              * если их нет в кэше - 
              * сохраняем
              */            
-            if(!pFromCache_b && CloudServer.Cache.isAllowed)
+            if(pFromCache_o && !pFromCache_o.cache && CloudServer.Cache.isAllowed)
                 CloudServer.Cache.set(pName,pData);
             /* если кэш есть
              * сохраняем его в переменную
@@ -697,7 +733,7 @@ CloudServer.getReadFileFunc = function(pName){
             
             var lHeader=CloudServer.generateHeaders(pName,CloudServer.Gzip);
             /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
-            if(CloudServer.Gzip &&!pFromCache_b){
+            if( CloudServer.Gzip && !(pFromCache_o && pFromCache_o.cache) ){
                 /* сжимаем содержимое */
                 Zlib.gzip(pData,CloudServer.getGzipDataFunc(lHeader,pName));                
             }
