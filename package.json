@@ -14,7 +14,9 @@
   },
   "node": "0.6.17",
   "subdomain": "cloudcmd",
-  "dependencies": {},
+  "dependencies": {
+   "minify": "0.1.1",
+  },
   "devDependencies": {},
   "engines": {
     "node": "*"
