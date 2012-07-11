@@ -1,4 +1,4 @@
-2012.07.11, Version 0.1.1, 32aeacbdddc7a22e3649ee275c3fbd8cfbfc1dea
+2012.07.11, Version 0.1.1
 
 * Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
 js-script(or something other) has not loaded.
