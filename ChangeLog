@@ -15,3 +15,6 @@ and cloudfunc.js full sized versions.
 post-processing functions passed like this {'client.js': function(){}}
 
 * Added ability to read file data from Minify Cache, without writing to disk
+
+* Changed the passing MoreProcessing agrument to jsScripts function Minify module, 
+no it passes with a file name, and js file name writing only once.
