@@ -312,6 +312,7 @@ CloudServer.start=function()
                      
     CloudServer.IP   = process.env.IP             ||  /* c9           */
                        CloudServer.IP;
+    
     /* if Cloud Server started on jitsu */
     if(!process.env.HOME.indexOf('/opt/haibu')){
         CloudServer.Port = '0.0.0.0';
