@@ -1,3 +1,8 @@
+2012.07.*, Version 0.1.2
+
+* Added suport of jitsu.
+
+
 2012.07.11, Version 0.1.1
 
 * Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
