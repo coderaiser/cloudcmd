@@ -48,13 +48,16 @@ repository from github. Install and start, just 3 commands:
 Starting
 ---------------
 To start **Cloud Commander** only one command neaded:
+    
     node server.js
 After thet Cloud Commander reads config file **config.json** and start server
 on 31337 port, if none of port varibles(*cloud9*, *cloudfoundry* and *nodester*)
 isn't exist.
 Then type in browser
+
     http://127.0.0.1:31337
 or
+
     http://localhost:31337
 Updating
 ---------------
