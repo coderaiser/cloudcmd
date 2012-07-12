@@ -60,169 +60,12 @@ var CloudServer={
     INDEX           :'index.html',
     LIBDIR          :'./lib',
     LIBDIRSERVER    :'./lib/server',
-    CSSDIR          :'./css',
     
     Port            :31337, /* server port */
     IP              :'127.0.0.1'
 };
 
-/* 
- * Обьект для работы с кэшем
- * аналог клиентского обьекта
- * с тем отличием, что в нём
- * будут храниться серверные
- * данные, такие как файлы
- * отдаваемые клиенту
- * (файлы проэкта по большому
- * счёту, для ускорения
- * первичной загрузки)
- */
-CloudServer.Cache={
-    _allowed            :true,     /* приватный переключатель возможности работы с кэшем */
-    /* данные в которых храняться файлы 
-     * в формате <поле> : <значение>
-     * _data[name]=pData;
-     * одному имени соответствуют 
-     * одни данные
-     */
-    _data               :{},
-    
-    /* функция говорит можно ли работать с кэшем */
-    isAllowed           :(function(){
-        return CloudServer.Cache._allowed;
-        }),
-    /* функция устанавливает возможность работать с кэшем */
-    setAllowed          :(function(pAllowed){
-       CloudServer.Cache._allowed=pAllowed;
-    }),
-    /* Если доступен кэш
-     * сохраняем в него данные
-     */
-    set                  :(function(pName, pData){
-        if(CloudServer.Cache._allowed && pName && pData){
-           CloudServer.Cache._data[pName]=pData;
-        }
-    }),
-    /* Если доступен Cache принимаем из него данные*/
-    get                 :(function(pName){
-        if(CloudServer.Cache._allowed && pName){
-            return CloudServer.Cache._data[pName];
-        }
-        else return null;
-    }),
-    
-    /* Функция очищает кэш*/
-    clear               :(function(){
-        if(CloudServer.Cache._allowed){
-            CloudServer.Cache._data={};
-        }
-    })
-};
 
-/* Обьект для сжатия скриптов и стилей
- * по умолчанию - сжимаються
- */
-CloudServer.Minify={
-    /* приватный переключатель минимизации */
-    _allowed               :{css:true,js:true,html:true, img: true},
-    
-    /* функция разрешает или 
-     * запрещает минимизировать
-     * css/js/html
-     * @pAllowed: - структура, в которой
-     *              передаються параметры
-     *              минификации, вида
-     *              {js:true,css:true,html:false; img:true}
-     * img отвечает за перевод картинок в base64
-     * и сохранение их в css-файл
-     */
-    setAllowed              :(function(pAllowed){
-       if(pAllowed){
-           this._allowed.css=pAllowed.css; 
-           this._allowed.js=pAllowed.js; 
-           this._allowed.html=pAllowed.html; 
-           this._allowed.img=pAllowed.img; 
-       }
-    }),
-        
-    /*
-     * Функция минимизирует css/js/html
-     * если установлены параметры минимизации
-     */
-    doit                    :(function(){
-        if(this._allowed.css ||
-            this._allowed.js ||
-            this._allowed.html){
-                var lMinify;
-                try{
-                    lMinify      = require(CloudServer.LIBDIRSERVER+'/minify');
-                }catch(pError){
-                    try{
-                        lMinify      = require('minify');
-                    }catch(pError){
-                        return console.log('Could not minify withou minify module\n'    +
-                        'for fixing type:\n'                                +
-                        'git submodule init\n'                              +
-                        'git submodule update\n'                            +
-                        'or\n'                                              +
-                        'npm i minify');
-                    }
-                }
-                /*
-                 * temporary changed dir path,
-                 * becouse directory lib is write
-                 * protected by others by default
-                 * so if node process is started
-                 * from other user (root for example
-                 * in nodester) we can not write
-                 * minified versions
-                 */
-                this.MinFolder = '/' + lMinify.MinFolder;
-                var lMinFolder=this.MinFolder;
-                
-                /* post processing function for file
-                 * client.js
-                 */
-                var lPostProcessing_f = function(pFinalCode){
-                    console.log('file name of ' +
-                        'cloudfunc.js'          +
-                        ' in '                  +
-                        'client.js'             +
-                        ' changed. size:',
-                    (pFinalCode = pFinalCode
-                        .replace('cloudfunc.js','cloudfunc.min.js')
-                            .replace('keyBinding.js','keyBinding.min.js')
-                                .replace('/lib/', lMinFolder)
-                                    .replace('/lib/client/', lMinFolder)).length);
-                    return pFinalCode;
-                };
-                
-                this.done.js=this._allowed.js?
-                    lMinify.jsScripts([{
-                        'client.js': lPostProcessing_f},
-                        'lib/cloudfunc.js',
-                        'lib/client/keyBinding.js'],
-                        true)
-                :false;
-                                                                
-                this.done.html=this._allowed.html?
-                    lMinify.html(CloudServer.INDEX):false;
-                
-                this.done.css=this._allowed.css?
-                    lMinify.cssStyles([CloudServer.CSSDIR + '/style.css',
-                        CloudServer.CSSDIR + '/reset.css'],
-                        this._allowed.img):false;
-                        
-                this.Cache = lMinify.Cache;
-        }
-    }),
-    /* свойство показывающее случилась ли ошибка*/
-    done:{js: false,css: false, html:false},
-    
-    /* minification folder name */
-    MinFolder   :'',
-    Cache       :{}
-};
 
 
 var LeftDir='/';
@@ -243,10 +86,16 @@ try{
         'you should install zlib module\n' +
         'npm install zlib');
 }
-var CloudFunc   = require(CloudServer.LIBDIR + 
-                (CloudServer.Minify.done.js?/* если стоит минификация*/
-                    '/cloudfunc.min':/* добавляем сжатый - иначе обычный */
-                    '/cloudfunc'));  /* модуль с функциями */
+ /* добавляем  модуль с функциями */
+var CloudFunc       = require(CloudServer.LIBDIR         +
+                        '/cloudfunc');
+                        
+CloudServer.Cache   = require(CloudServer.LIBDIRSERVER +
+                        '/object').Cache;
+                        
+CloudServer.Minify  = require(CloudServer.LIBDIRSERVER +
+                        '/object').Minify;
+
 /* конструктор*/
 CloudServer.init=(function(){
     /* Determining server.js directory
@@ -279,9 +128,9 @@ CloudServer.init=(function(){
             CloudServer.writeLogsToFile();            
         }
     }catch(pError){
-        console.log('warning: configureation file config.json not found...\n'   +
-                    'using default values...\n'                     +
-                    JSON.stringify(CloudServer.Config));
+        console.log('warning: configureation file config.json not found...\n' +
+            'using default values...\n'                     +
+            JSON.stringify(CloudServer.Config));
     }        
     
     /* Переменная в которой храниться кэш*/
@@ -388,7 +237,8 @@ CloudServer.generateHeaders = function(pName, pGzip){
         'cache-control': 'max-age='+(31337*21),
         'last-modified': new Date().toString(),
         'content-encoding': pGzip?'gzip':'',
-        /* https://developers.google.com/speed/docs/best-practices/caching?hl=ru#LeverageProxyCaching */
+        /* https://developers.google.com/speed/docs/best-practices
+            /caching?hl=ru#LeverageProxyCaching */
         'Vary': 'Accept-Encoding'
     };
 };
@@ -452,7 +302,8 @@ CloudServer._controller=function(pReq, pRes)
              * сжатый файл - если gzip-поддерживаеться браузером
              * не сжатый - в обратном случае
              */
-            var lFileData=CloudServer.Cache.get(CloudServer.Gzip?(lName+'_gzip'):lName);
+            var lFileData=CloudServer.Cache.get(
+                CloudServer.Gzip?(lName+'_gzip'):lName);
             console.log(Path.basename(lName));
                         
             var lMinify=CloudServer.Minify;
@@ -478,7 +329,9 @@ CloudServer._controller=function(pReq, pRes)
              * readFile
              */
             if(lFileData){                
-                /* if file readed not from cache - he readed from minified cache */
+                /* if file readed not from cache - 
+                 * he readed from minified cache 
+                 */
                 if(lFromCache_o.cache===false)
                     lFromCache_o.minify=true;
                 else
@@ -615,13 +468,21 @@ CloudServer._readDir=function (pError, pFiles)
             /* Если папка - выводим пиктограмму папки */
             if(lStats.isDirectory())
             {                
-                lJSONFile={'name':pFiles[i],'size':'dir','uid':lStats.uid,'mode':lMode};
+                lJSONFile={'name':pFiles[i],
+                    'size':'dir',
+                    'uid':lStats.uid,
+                    'mode':lMode};
+                
                 lJSON[i+1]=lJSONFile;            
             }
             /* В противоположном случае - файла */
             else
             {
-                lJSONFile={'name':pFiles[i],'uid':lStats.uid,'size':lStats.size,'mode':lMode};
+                lJSONFile={'name':pFiles[i],
+                'uid':lStats.uid,
+                'size':lStats.size,
+                'mode':lMode};
+                
                 lJSON[i+1]=lJSONFile;
             }
         }
