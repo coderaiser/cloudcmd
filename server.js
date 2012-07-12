@@ -518,12 +518,12 @@ CloudServer._readDir=function (pError, pFiles)
                  * с жатием или без, взависимости
                  * от настроек
                  */
-                var lFileData=this.Cache.get(this.INDEX);
+                var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
                 /* если их нет там - вычитываем из файла*/
                 if(!lFileData){
-                    lIndex=Fs.readFileSync(this.INDEX);
+                    lIndex=Fs.readFileSync(CloudServer.INDEX);
                     /* и сохраняем в кэш */
-                    this.Cache.set(this.INDEX,lIndex);
+                    CloudServer.Cache.set(CloudServer.INDEX,lIndex);
                 }else lIndex=lFileData;
                 
                 /* если выбрана опция минифизировать скрпиты
@@ -537,12 +537,12 @@ CloudServer._readDir=function (pError, pFiles)
                  * we include minified version of
                  * clien.js to index.html
                  */
-                lIndex = this.Minify.done.css?
+                lIndex = CloudServer.Minify.done.css?
                     lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
                         .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
                     :lIndex;
                       
-                lIndex = this.Minify.done.js?lIndex.replace('client.js',
+                lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js',
                     CloudServer.Minify.MinFolder + 
                         'client.min.js')
                     :lIndex;
