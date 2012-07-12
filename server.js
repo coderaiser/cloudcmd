@@ -87,15 +87,20 @@ try{
         'npm install zlib');
 }
  /* добавляем  модуль с функциями */
-var CloudFunc       = require(CloudServer.LIBDIR         +
-                        '/cloudfunc');
-                        
-CloudServer.Cache   = require(CloudServer.LIBDIRSERVER +
-                        '/object').Cache;
-                        
-CloudServer.Minify  = require(CloudServer.LIBDIRSERVER +
-                        '/object').Minify;
-
+var CloudFunc;
+try{
+    CloudFunc       = require(CloudServer.LIBDIR         +
+                            '/cloudfunc');
+                            
+    CloudServer.Cache   = require(CloudServer.LIBDIRSERVER +
+                            '/object').Cache;
+                            
+    CloudServer.Minify  = require(CloudServer.LIBDIRSERVER +
+                            '/object').Minify;
+}catch(pError){
+    console.log('could not found one of Cloud Commander SS files');
+    console.log(pError);
+}
 /* конструктор*/
 CloudServer.init=(function(){
     /* Determining server.js directory
@@ -104,28 +109,32 @@ CloudServer.init=(function(){
      * argv[1] - is always script name
      */
     var lServerDir = Path.dirname(process.argv[1]);
-    console.log('current dir: ' + process.cwd());
+    var lProcessDir = process.cwd();
+    console.log('current dir: ' + lProcessDir);
     console.log('server dir:  ' + lServerDir);    
-    process.chdir(lServerDir);
+    if(lProcessDir !== lServerDir)
+        process.chdir(lServerDir);
     
     try{
         console.log('reading configureation file config.json...');
-        CloudServer.Config = require('./config');
+        this.Config = require('./config');
         console.log('config.json readed');
+        
         /* if command line parameter testing resolved 
          * setting config to testing, so server
          * not created, just init and
          * all logs writed to screen
          */
-        if(process.argv[2]==='test'){            
-            CloudServer.Config.server=false;
-            CloudServer.Config.logs=false;
+        if(process.argv[2]==='test'){
+            console.log(process.argv);
+            this.Config.server=false;
+            this.Config.logs=false;
         }
                 
-        if(CloudServer.Config.logs){
+        if(this.Config.logs){
             console.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
-            CloudServer.writeLogsToFile();            
+            this.writeLogsToFile();            
         }
     }catch(pError){
         console.log('warning: configureation file config.json not found...\n' +
@@ -134,52 +143,51 @@ CloudServer.init=(function(){
     }        
     
     /* Переменная в которой храниться кэш*/
-    CloudServer.Cache.setAllowed(CloudServer.Config.cache.allowed);
+    this.Cache.setAllowed(CloudServer.Config.cache.allowed);
     /* Change default parameters of
      * js/css/html minification
      */
-    CloudServer.Minify.setAllowed(CloudServer.Config.minification);
+    this.Minify.setAllowed(CloudServer.Config.minification);
     /* Если нужно минимизируем скрипты */
-    CloudServer.Minify.doit();
+    this.Minify.doit();
 });
 
 
 /* создаём сервер на порту 31337 */
 CloudServer.start=function()
 {
-    CloudServer.init();
+    this.init();
     
     /* constant ports of deployng servers 
         var lCloudFoundryPort   = process.env.VCAP_APP_PORT;
         var lNodesterPort       = process.env.app_port;
         var lC9Port             = process.env.PORT;
     */
-    CloudServer.Port = process.env.PORT            ||  /* c9           */
+    this.Port = process.env.PORT            ||  /* c9           */
                        process.env.app_port        ||  /* nodester     */
                        process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
                        CloudServer.Port;
                      
-    CloudServer.IP   = process.env.IP             ||  /* c9           */
+    this.IP   = process.env.IP             ||  /* c9           */
                        CloudServer.IP;
     
     /* if Cloud Server started on jitsu */
     if(!process.env.HOME.indexOf('/opt/haibu')){
-        CloudServer.Port = '0.0.0.0';
+        this.IP = '0.0.0.0';
     }
-        
     /* server mode or testing mode */    
-    if(!process.argv[2] && CloudServer.Config.server){
+    if(this.Config.server){
         var http = require('http');
-        
+
         try{
-            http.createServer(CloudServer._controller).listen(
-                CloudServer.Port,
-                CloudServer.IP);
+            http.createServer(this._controller).listen(
+                this.Port,
+                this.IP);
                 
             console.log('Cloud Commander server running at http://' +
-                CloudServer.IP +
+                this.IP +
                 ':' + 
-                CloudServer.Port);
+                this.Port);
         }catch(pError){
             console.log('Cloud Commander server could not started');
             console.log(pError);
@@ -267,9 +275,9 @@ CloudServer._controller=function(pReq, pRes)
     if (lAcceptEncoding && 
         lAcceptEncoding.match(/\bgzip\b/) &&
         Zlib){
-        CloudServer.Gzip=true;
+        this.Gzip=true;
     }else 
-        CloudServer.Gzip=false;
+        this.Gzip=false;
     /* путь в ссылке, который говорит
      * что js отключен
      */
@@ -510,12 +518,12 @@ CloudServer._readDir=function (pError, pFiles)
                  * с жатием или без, взависимости
                  * от настроек
                  */
-                var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
+                var lFileData=this.Cache.get(this.INDEX);
                 /* если их нет там - вычитываем из файла*/
                 if(!lFileData){
-                    lIndex=Fs.readFileSync(CloudServer.INDEX);
+                    lIndex=Fs.readFileSync(this.INDEX);
                     /* и сохраняем в кэш */
-                    CloudServer.Cache.set(CloudServer.INDEX,lIndex);
+                    this.Cache.set(this.INDEX,lIndex);
                 }else lIndex=lFileData;
                 
                 /* если выбрана опция минифизировать скрпиты
@@ -529,12 +537,12 @@ CloudServer._readDir=function (pError, pFiles)
                  * we include minified version of
                  * clien.js to index.html
                  */
-                lIndex = CloudServer.Minify.done.css?
+                lIndex = this.Minify.done.css?
                     lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
                         .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
                     :lIndex;
                       
-                lIndex = CloudServer.Minify.done.js?lIndex.replace('client.js',
+                lIndex = this.Minify.done.js?lIndex.replace('client.js',
                     CloudServer.Minify.MinFolder + 
                         'client.min.js')
                     :lIndex;
