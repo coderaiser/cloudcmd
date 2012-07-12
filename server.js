@@ -134,7 +134,7 @@ CloudServer.init=(function(){
         if(this.Config.logs){
             console.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
-            this.writeLogsToFile();            
+            this.writeLogsToFile();
         }
     }catch(pError){
         console.log('warning: configureation file config.json not found...\n' +
