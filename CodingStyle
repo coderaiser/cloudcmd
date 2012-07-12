@@ -10,3 +10,6 @@ Varible types:
     varName_n - number
     varName_o - object
     varName_a - array
+
+SS - Server Side;
+CS - Client Side;
