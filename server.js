@@ -158,18 +158,13 @@ CloudServer.start=function()
 {
     this.init();
     
-    /* constant ports of deployng servers 
-        var lCloudFoundryPort   = process.env.VCAP_APP_PORT;
-        var lNodesterPort       = process.env.app_port;
-        var lC9Port             = process.env.PORT;
-    */
     this.Port = process.env.PORT            ||  /* c9           */
-                       process.env.app_port        ||  /* nodester     */
-                       process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
-                       CloudServer.Port;
+                process.env.app_port        ||  /* nodester     */
+                process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
+                CloudServer.Port;
                      
-    this.IP   = process.env.IP             ||  /* c9           */
-                       CloudServer.IP;
+    this.IP   = process.env.IP              ||  /* c9           */
+                CloudServer.IP;
     
     /* if Cloud Server started on jitsu */
     if(!process.env.HOME.indexOf('/opt/haibu')){
@@ -194,14 +189,7 @@ CloudServer.start=function()
         }
     }else{
         console.log('Cloud Commander testing mode');
-    }
-    /*
-        (!lC9Port?
-            (!lCloudFoundryPort?
-                (!lNodesterPort?31337:lNodesterPort)
-            :lCloudFoundryPort)
-        :lC9Port));
-    */
+    }    
 };
 
 
