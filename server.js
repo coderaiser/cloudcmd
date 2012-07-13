@@ -171,7 +171,7 @@ CloudServer.start=function()
         this.IP = '0.0.0.0';
     }
     /* server mode or testing mode */    
-    if(this.Config.server){
+    if(!process.argv[2] && this.Config.server){
         var http = require('http');
 
         try{
