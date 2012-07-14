@@ -167,8 +167,9 @@ CloudServer.start=function()
                 CloudServer.IP;
     
     /* if Cloud Server started on jitsu */
-    if(!process.env.HOME.indexOf('/opt/haibu')){
-        this.IP = '0.0.0.0';
+    if(process.env.HOME &&
+        !process.env.HOME.indexOf('/opt/haibu')){
+            this.IP = '0.0.0.0';
     }
     /* server mode or testing mode */    
     if(!process.argv[2] && this.Config.server){
