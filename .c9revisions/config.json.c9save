@@ -1,0 +1,2 @@
+{"ts":1341484928148,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"{\n    \"cache\" : {\"allowed\" : true},\n    \"minification\" : {\n        \"js\"    : false,\n        \"css\"   : false,\n        \"html\"  : true,\n        \"img\"   : false\n    }\n}"]],"start1":0,"start2":0,"length1":0,"length2":164}]],"length":164}
+{"contributors":[],"silentsave":false,"ts":1341485004232,"patch":[[{"diffs":[[0,"  \"js\"    : "],[-1,"fals"],[1,"tru"],[0,"e,\n        \""]],"start1":65,"start2":65,"length1":28,"length2":27}]],"length":163,"saved":false}
