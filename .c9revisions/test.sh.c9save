@@ -1,0 +1,1 @@
+{"ts":1340792515433,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"#!/bin/sh\nnpm i -g jshint\necho \"jshint server.js client.js lib/cloudfunc.js\"\njshint --config ./.jshintrc ./server.js ./client.js ./lib/cloudfunc.js ./lib/server/minify.js ./lib/client/keyBinding.js"]],"start1":0,"start2":0,"length1":0,"length2":197}]],"length":197}
