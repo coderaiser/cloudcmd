@@ -400,7 +400,7 @@ CloudServer._controller=function(pReq, pRes)
                  * меняем название html-файла и
                  * загружаем сжатый html-файл в дальнейшем
                  */
-                CloudServer.INDEX=(CloudServer.Minify._allow.html?
+                CloudServer.INDEX=(CloudServer.Minify._allowed.html?
                     '.' + CloudServer.Minify.MinFolder + 'index.min.html'
                     :CloudServer.INDEX);
                 /*
@@ -525,12 +525,12 @@ CloudServer._readDir=function (pError, pFiles)
                  * we include minified version of
                  * clien.js to index.html
                  */
-                lIndex = CloudServer.Minify._allow.css?
+                lIndex = CloudServer.Minify._allowed.css?
                     lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
                         .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
                     :lIndex;
                       
-                lIndex = CloudServer.Minify._allow.js?lIndex.replace('client.js',
+                lIndex = CloudServer.Minify._allowed.js?lIndex.replace('client.js',
                     CloudServer.Minify.MinFolder + 
                         'client.min.js')
                     :lIndex;
