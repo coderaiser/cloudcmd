@@ -1,8 +1,12 @@
-2012.07.*, Version 0.1.2
+2012.07.14, Version 0.1.2
 
 * Added suport of jitsu.
+
 * Added module objects.js, Minify and Cache objects moved there.
+
 * Module Minify moved to node_modules dir
+
+* Changed the minimize function calls accroding to Minify 0.1.2 changes.
 
 
 2012.07.11, Version 0.1.1
