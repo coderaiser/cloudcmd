@@ -1,5 +1,9 @@
 #files, the will be ignored by git
 
+#c9 files
+.c9revisions
+*tmp
+
 #minified scripts
 *.min.js
 *.min.css
