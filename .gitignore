@@ -33,3 +33,6 @@ log.txt
 !node_modules/
 node_modules/*
 !node_modules/minify
+
+#hashes file
+hashes.json
