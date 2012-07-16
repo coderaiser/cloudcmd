@@ -330,20 +330,7 @@ CloudClient.init=(function()
     /* устанавливаем размер высоты таблицы файлов
      * исходя из размеров разрешения экрана
      */ 
-     
-    /* формируем и округляем высоту экрана
-     * при разрешениии 1024x1280:
-     * 658 -> 700
-     */                            
-    
-    var lHeight=window.screen.height - (window.screen.height/3).toFixed();
-    lHeight=(lHeight/100).toFixed()*100;
-     
-    var lFm=document.getElementById('fm');
-    if(lFm)lFm.style.cssText='height:' +
-        lHeight +
-        'px';        
-        
+                 
     /* выделяем строку с первым файлом */
     var lFmHeader=document.getElementsByClassName('fm_header');
     if(lFmHeader && lFmHeader[0].nextSibling)
@@ -357,9 +344,24 @@ CloudClient.init=(function()
     var lRight=document.getElementById('right');
     if(lRight)lRight.className=lRight.className.replace('hidden','');
     
+    /* формируем и округляем высоту экрана
+     * при разрешениии 1024x1280:
+     * 658 -> 700
+     */                            
+    
+    var lHeight=window.screen.height - (window.screen.height/3).toFixed();
+    lHeight=(lHeight/100).toFixed()*100;
+     
+     /*
+    var lFm=document.getElementById('fm');
+    if(lFm)lFm.style.cssText='height:' +
+        lHeight +
+        'px';        
+    */
     CloudClient.cssSet({id:'show_2panels',
         element:document.head,
-        inner:'#left{width:46%;}'
+        inner:'#left{width:46%;}' +
+            '.panel{height:' + lHeight +'px'
     });        
 });
 
