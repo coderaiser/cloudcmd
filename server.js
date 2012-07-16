@@ -264,7 +264,7 @@ CloudServer._controller=function(pReq, pRes)
     if (lAcceptEncoding && 
         lAcceptEncoding.match(/\bgzip\b/) &&
         Zlib){
-        CloudCommander.Gzip=true;
+        CloudServer.Gzip=true;
     }
     /* путь в ссылке, который говорит
      * что js отключен
