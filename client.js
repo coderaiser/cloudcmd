@@ -338,7 +338,7 @@ CloudClient.init=(function()
     
     /* показываем элементы, которые будут работать только, если есть js */
     var lFM=document.getElementById('fm');
-    if(lFM)lFm.className='localstorage';
+    if(lFM)lFM.className='localstorage';
     
     /* если есть js - показываем правую панель*/
     var lRight=document.getElementById('right');
@@ -352,12 +352,6 @@ CloudClient.init=(function()
     var lHeight=window.screen.height - (window.screen.height/3).toFixed();
     lHeight=(lHeight/100).toFixed()*100;
      
-     /*
-    var lFm=document.getElementById('fm');
-    if(lFm)lFm.style.cssText='height:' +
-        lHeight +
-        'px';        
-    */
     CloudClient.cssSet({id:'show_2panels',
         element:document.head,
         inner:'#left{width:46%;}' +
