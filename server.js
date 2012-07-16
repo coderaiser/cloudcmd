@@ -125,22 +125,22 @@ CloudServer.init=(function(){
          * not created, just init and
          * all logs writed to screen
          */
-        if(process.argv[2]==='test'){
+        if (process.argv[2] === 'test') {
             console.log(process.argv);
-            this.Config.server=false;
-            this.Config.logs=false;
+            this.Config.server  = false;
+            this.Config.logs    = false;
         }
                 
-        if(this.Config.logs){
+        if (this.Config.logs) {
             console.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
             this.writeLogsToFile();
         }
-    }catch(pError){
+    } catch (pError) {
         console.log('warning: configureation file config.json not found...\n' +
             'using default values...\n'                     +
             JSON.stringify(CloudServer.Config));
-    }        
+    }
     
     /* Переменная в которой храниться кэш*/
     this.Cache.setAllowed(CloudServer.Config.cache.allowed);
@@ -154,8 +154,7 @@ CloudServer.init=(function(){
 
 
 /* создаём сервер на порту 31337 */
-CloudServer.start=function()
-{
+CloudServer.start = function () {
     this.init();
     
     this.Port = process.env.PORT            ||  /* c9           */
@@ -168,17 +167,16 @@ CloudServer.start=function()
     
     /* if Cloud Server started on jitsu */
     if(process.env.HOME &&
-        !process.env.HOME.indexOf('/opt/haibu')){
+        !process.env.HOME.indexOf('/opt/haibu')) {
             this.IP = '0.0.0.0';
     }
-    /* server mode or testing mode */    
-    if(!process.argv[2] && this.Config.server){
+    /* server mode or testing mode */
+    if (!process.argv[2] && this.Config.server) {
         var http = require('http');
 
-        try{
+        try {
             http.createServer(this._controller).listen(
-                this.Port,
-                this.IP);
+                this.Port, this.IP);
                 
             console.log('Cloud Commander server running at http://' +
                 this.IP +
