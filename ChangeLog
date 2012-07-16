@@ -3,7 +3,7 @@
 * Fixed bug with nodester (jitsu env.HOME make him go done).
 * Fixed bug: gzip do not working out, becouse accessible flag settet up to _controller object.
 * To every panel added scroll bars which is hiding if do not needed.
-* fixed bug with setting up flag in config.json: do not minimize js.
+* Fixed bug with setting up flag in config.json: do not minimize js.
 
 
 2012.07.14, Version 0.1.2
