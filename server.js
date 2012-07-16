@@ -3,92 +3,92 @@
 /* Обьект содержащий все функции и переменные 
  * серверной части Cloud Commander'а
  */
-var CloudServer={
+var CloudServer = {
     /* main Cloud Commander configuration
      * readed from config.json if it's
      * exist
      */
-    Config      : {
-                    "cache" : {"allowed" : true},
-                    "minification" : {
-                        "js"    : false,
-                        "css"   : false,
-                        "html"  : true,
-                        "img"   : false
-                    },
-                    "server"    : true
+    Config          : {
+        "cache" : {"allowed" : true},
+        "minification" : {
+            "js"    : false,
+            "css"   : false,
+            "html"  : true,
+            "img"   : false
+        },
+        "server"    : true
     },
     /* функция, которая генерирует заголовки
      * файлов, отправляемые сервером клиенту
      */
-    generateHeaders :function(){},
+    generateHeaders : function () {},
     /* функция высылает
      * данные клиенту
      */
-    sendResponse        :function(){},
+    sendResponse    : function () {},
     /* Структура содержащая функции,
      * и переменные, в которых
      * говориться о поддерживаемых
      * браузером технологиях
      */
-    BrowserSuport   :{},
+    BrowserSuport   : {},
      /* Обьект для работы с кэшем */
-    Cashe                   :{},
+    Cashe           : {},
     /* Обьект через который
      * выполняеться сжатие
      * скриптов и стилей
      */
-    Minify                  :{},
+    Minify          : {},
     /* Асоциативный масив обьектов для
      * работы с ответами сервера
      * высылаемыми на запрос о файле и
      * хранащий информацию в виде
      * Responces[name]=responce;
      */
-    Responses               :{},
+    Responses       : {},
     
     /* ПЕРЕМЕННЫЕ */
     /* Поддержка браузером JS*/
-    NoJS            :true,    
+    NoJS            : true,
     /* Поддержка gzip-сжатия
      * браузером
      */
-    Gzip            :undefined,
+    Gzip            : undefined,
     
     /* КОНСТАНТЫ */
     /* index.html */
-    INDEX           :'index.html',
-    LIBDIR          :'./lib',
-    LIBDIRSERVER    :'./lib/server',
+    INDEX           : 'index.html',
+    LIBDIR          : './lib',
+    LIBDIRSERVER    : './lib/server',
     
-    Port            :31337, /* server port */
-    IP              :'127.0.0.1'
+    Port            : 31337, /* server port */
+    IP              : '127.0.0.1'
 };
 
 
 
 
-var LeftDir='/';
-var RightDir=LeftDir;
+var LeftDir     = '/';
+var RightDir    = LeftDir;
 /* модуль для работы с путями*/
-var Path    = require('path');
+var Path        = require('path');
 
 var Fs          = require('fs');    /* модуль для работы с файловой системой*/
 
 var Zlib;
 /* node v0.4 not contains zlib 
  */
-try{
+try {
     Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
-}catch(error){
-    Zlib=undefined;
+} catch (error) {
+    Zlib        = undefined;
     console.log('to use gzip-commpression' +
         'you should install zlib module\n' +
         'npm install zlib');
 }
  /* добавляем  модуль с функциями */
 var CloudFunc;
-try{
+try {
     CloudFunc       = require(CloudServer.LIBDIR         +
                             '/cloudfunc');
                             
