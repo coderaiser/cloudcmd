@@ -137,8 +137,7 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
   background-position: 0 0;
 }
 #fm{
-  height:90%;                
-  overflow-y: scroll;
+  height:90%;
 }
 .fm_header{
   font-weight: bold;
@@ -161,9 +160,9 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 #right{
   float:right;
 }
-.panel{
-  display: table;
-  width:46%;
+.panel{  
+  width: 46%;
+  overflow-y: scroll;
 }
 #keyspanel{
   text-align: center;
