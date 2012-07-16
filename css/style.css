@@ -161,7 +161,7 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
   float:right;
 }
 .panel{
-  overflow-y: scroll;
+  overflow-y: auto;
   width:46%;
 }
 #keyspanel{
