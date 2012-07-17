@@ -4,6 +4,7 @@
 * Fixed bug: gzip do not working out, becouse accessible flag settet up to _controller object.
 * To every panel added scroll bars which is hiding if do not needed.
 * Fixed bug with setting up flag in config.json: do not minimize js.
+* Fixed bug with uninitialized function in anyload in client.js.
 
 
 2012.07.14, Version 0.1.2
