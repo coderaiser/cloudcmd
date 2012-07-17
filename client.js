@@ -17,6 +17,7 @@ var CloudClient={
     init                    :function(){},
     
     keyBinding              :function(){},/* функция нажатий обработки клавишь */
+    Editor                  :function(){},/* function loads and shows editor */
     keyBinded               :false,/* оброботка нажатий клавишь установлена*/
     _loadDir                 :function(){},
     /* 
@@ -137,7 +138,15 @@ CloudClient.keyBinding=(function(){
     });
 });
 
-
+/* function loads and shows editor */
+CloudClient.Editor = (function(){
+    /* loading CloudMirror plagin */
+    CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'editor.js',{
+        onload:(function(){
+            CloudCommander.Editor.Keys();
+        })
+    });
+}
 /* 
  * Функция привязываеться ко всем ссылкам и
  *  загружает содержимое каталогов
@@ -356,14 +365,7 @@ CloudClient.init=(function()
         element:document.head,
         inner:'#left{width:46%;}' +
             '.panel{height:' + lHeight +'px'
-    });
-    
-    /* loading CloudMirror plagin */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'editor.js',{
-        onload:(function(){
-            CloudCommander.Editor.Keys();
-        })
-    });
+    });       
 });
 
 /* функция меняет ссыки на ajax-овые */
@@ -748,6 +750,7 @@ try{
         CloudCommander.init();
         /* привязываем клавиши к функциям */
         CloudCommander.keyBinding();
+        CloudCommander.Editor();
     };
 }
 catch(err){}
