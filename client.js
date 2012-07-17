@@ -356,7 +356,14 @@ CloudClient.init=(function()
         element:document.head,
         inner:'#left{width:46%;}' +
             '.panel{height:' + lHeight +'px'
-    });        
+    });
+    
+    /* loading CloudMirror plagin */
+    CloudClient.jsload(CloudClient.LIBDIR+'editor.js',{
+        onload:(function(){
+            CloudCommander.Editor.CloudMirror.load();
+        })
+    });
 });
 
 /* функция меняет ссыки на ajax-овые */
