@@ -636,7 +636,9 @@ CloudClient.cssSet = function(pParams_o){
         pParams_o.style,
         pParams_o.id,
         pParams_o.element || document.head);
-    lElem.innerHTML=pParams_o.inner;
+    
+    pParams_o.inner &&
+        lElem.innerHTML = pParams_o.inner ;
 };
 /* Function loads external css files 
  * @pParams_o - структура параметров, заполняеться таким
