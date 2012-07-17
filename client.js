@@ -588,13 +588,14 @@ CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
             /* if passed arguments function
              * then it's onload by default
              */
-            if(typeof pFunc === 'function'){
-                element.onload=pFunc;
-            /* if object - then onload or onerror */
-            }else if (typeof pFunc === 'object'){
-                if(pFunc.onload)element.onload = pFunc.onload;
-                if(pFunc.onerror)element.onerror=pFunc.onerror;
-            }
+            if(pFunc)
+                if(typeof pFunc === 'function'){
+                    element.onload=pFunc;
+                /* if object - then onload or onerror */
+                }else if (typeof pFunc === 'object'){
+                    if(pFunc.onload)element.onload = pFunc.onload;
+                    if(pFunc.onerror)element.onerror=pFunc.onerror;
+                }
             if(arguments.length>=4){
                 element.style.cssText=pStyle;
             }
