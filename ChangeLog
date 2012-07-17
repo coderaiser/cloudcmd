@@ -12,6 +12,8 @@
 
 * Added function cssLoad to client.js
 
+* Added Client Side CodeMirror library.
+
 
 2012.07.14, Version 0.1.2
 
