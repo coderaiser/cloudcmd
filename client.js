@@ -361,7 +361,7 @@ CloudClient.init=(function()
     /* loading CloudMirror plagin */
     CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'editor.js',{
         onload:(function(){
-            CloudCommander.Editor.CloudMirror.load();
+            CloudCommander.Editor.Keys();
         })
     });
 });
