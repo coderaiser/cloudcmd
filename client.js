@@ -596,11 +596,11 @@ CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
                     if(pFunc.onload)element.onload = pFunc.onload;
                     if(pFunc.onerror)element.onerror=pFunc.onerror;
                 }
-            if(arguments.length>=4){
+            if(arguments.length >= 4 && pStyle){
                 element.style.cssText=pStyle;
             }
         }
-        pElement.appendChild(element);
+        (pElement || document.body).appendChild(element);
         return element;
     }
     /* если js-файл уже загружен 
@@ -629,7 +629,7 @@ CloudClient.cssSet = function(pParams_o){
         pParams_o.func,
         pParams_o.style,
         pParams_o.id,
-        pParams_o.element?pParams_o.element:document.body);
+        pParams_o.element || document.head);
     lElem.innerHTML=pParams_o.inner;
 };
 /* Function loads external css files 
