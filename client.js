@@ -582,7 +582,13 @@ CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
     if(!document.getElementById(lID))
     {
         var element = document.createElement(pName);
-        element.src = pSrc;
+        /* if working with external css
+         * using href in any other case
+         * using src
+         */
+        pName === 'link' ? 
+              element.href = pSrc
+            : element.src = pSrc;
         element.id=lID;        
         if(arguments.length>=3){
             /* if passed arguments function
