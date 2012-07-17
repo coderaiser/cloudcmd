@@ -653,6 +653,8 @@ CloudClient.cssLoad = function(pParams_o){
         pParams_o.id,
         pParams_o.element || document.head);
         
+    lElem.rel = "stylesheet";
+    
     pParams_o.inner &&
         (lElem.innerHTML = pParams_o.inner);
 };
