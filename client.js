@@ -632,6 +632,22 @@ CloudClient.cssSet = function(pParams_o){
         pParams_o.element?pParams_o.element:document.body);
     lElem.innerHTML=pParams_o.inner;
 };
+/* Function loads external css files 
+ * @pParams_o - структура параметров, заполняеться таким
+ * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
+ * все параметры опциональны
+ */
+CloudClient.cssLoad = function(pParams_o){
+    var lElem=CloudClient._anyload('link',        
+        pParams_o.src,
+        pParams_o.func,
+        pParams_o.style,
+        pParams_o.id,
+        pParams_o.element?pParams_o.element:document.body);
+    lElem.innerHTML=pParams_o.inner;
+};
+
+
 
 /* 
  * Функция генерирует JSON из html-таблицы файлов 
