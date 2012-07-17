@@ -146,7 +146,7 @@ CloudClient.Editor = (function(){
             CloudCommander.Editor.Keys();
         })
     });
-}
+});
 /* 
  * Функция привязываеться ко всем ссылкам и
  *  загружает содержимое каталогов
