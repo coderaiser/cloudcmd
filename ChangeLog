@@ -8,9 +8,9 @@
 
 * Fixed bug with setting up flag in config.json: do not minimize js.
 
-* Fixed bug with uninitialized function in _anyload in client.js.
+* Fixed bugs many bugs in _anyload function (client.js).
 
-* Fixed bug with empty pStyle and empty pElement in _anyload.
+* Added function cssLoad to client.js
 
 
 2012.07.14, Version 0.1.2
