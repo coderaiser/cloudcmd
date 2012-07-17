@@ -638,7 +638,7 @@ CloudClient.cssSet = function(pParams_o){
         pParams_o.element || document.head);
     
     pParams_o.inner &&
-        lElem.innerHTML = pParams_o.inner ;
+        (lElem.innerHTML = pParams_o.inner);
 };
 /* Function loads external css files 
  * @pParams_o - структура параметров, заполняеться таким
@@ -651,8 +651,10 @@ CloudClient.cssLoad = function(pParams_o){
         pParams_o.func,
         pParams_o.style,
         pParams_o.id,
-        pParams_o.element?pParams_o.element:document.body);
-    lElem.innerHTML=pParams_o.inner;
+        pParams_o.element || document.head);
+        
+    pParams_o.inner &&
+        (lElem.innerHTML = pParams_o.inner);
 };
 
 
