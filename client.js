@@ -707,7 +707,7 @@ CloudClient._getJSONfromFileTable=function()
          /* if short we got title 
          * if full - getting textConent
          */
-        (lName.length &&
+        lName.length &&
             (lName = lName[0])
         (lName.title &&
             (lName = lName.title)) ||
