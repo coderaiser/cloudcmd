@@ -1,6 +1,6 @@
 git checkout dev
-cd cloudcmd/node_modules
+cd node_modules
 git clone git://github.com/coderaiser/minify
-cd minify 
-cd ../../
+cd minify
 git checkout dev
+cd ../../
