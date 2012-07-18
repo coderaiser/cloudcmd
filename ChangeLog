@@ -21,7 +21,8 @@ If name of a file or directory is more then 16 charactes it shows
 like 'VERY-LONG-NAME..', so becaouse of on first came we load page
 like no js, so json building from file table thet was genereted on
 server. So if file to long we should take it's name from title
-parameter of <a> tag.
+parameter of <a> tag, it's wasn't, so folder navigation not every
+time was possible.
 
 
 2012.07.14, Version 0.1.2
