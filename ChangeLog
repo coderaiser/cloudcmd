@@ -24,6 +24,7 @@ server. So if file to long we should take it's name from title
 parameter of <a> tag, it's wasn't, so folder navigation not every
 time was possible.
 
+* Fixed bug with undefined size on root directory of Cloud Commander.
 
 2012.07.14, Version 0.1.2
 
