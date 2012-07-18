@@ -697,21 +697,21 @@ CloudClient._getJSONfromFileTable=function()
         var lIsDir=lLI[i].getElementsByClassName('mini-icon')[0]
         .className.replace('mini-icon ','')==='directory'?true:false;
         
-        var lName=lLI[i].getElementsByClassName('name')[0];      
+        var lName=lLI[i].getElementsByClassName('name')[0];        
         lName &&
             (lName = lName.getElementsByTagName('a'));
         /* if found link to folder 
          * cheking is it a full name
          * or short
-         */    
-        lName.length &&
-            lName[0].title &&
-                (lName = lName[0].title);
-        /* if short we got title 
+         */
+         /* if short we got title 
          * if full - getting textConent
          */
-        lName ||
-            (lName = lName.textContent);
+        (lName.length &&
+            lName[0].title &&
+                (lName = lName[0].title)) ||
+                    (lName = lName.textContent);        
+            
         /* если это папка - выводим слово dir вместо размера*/
         var lSize=lIsDir?'dir':lLI[i].getElementsByClassName('size')[0].textContent;
         var lMode=lLI[i].getElementsByClassName('mode')[0].textContent;
