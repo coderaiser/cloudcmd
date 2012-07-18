@@ -14,8 +14,6 @@
 
 * Added Client Side CodeMirror library with name Cloud Editor.
 
-* Fixed bug with processing key pressing of Cloud Editor if it's window is hidden
-
 
 2012.07.14, Version 0.1.2
 
