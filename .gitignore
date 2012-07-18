@@ -40,3 +40,6 @@ node_modules/*
 
 #hashes file
 hashes.json
+
+#hiding git modules for travis work out
+.gitignore
