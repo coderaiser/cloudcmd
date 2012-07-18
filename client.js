@@ -708,9 +708,10 @@ CloudClient._getJSONfromFileTable=function()
          * if full - getting textConent
          */
         (lName.length &&
-            lName[0].title &&
-                (lName = lName[0].title)) ||
-                    (lName = lName.textContent);        
+            (lName = lName[0])
+        (lName.title &&
+            (lName = lName.title)) ||
+                (lName = lName.textContent);        
             
         /* если это папка - выводим слово dir вместо размера*/
         var lSize=lIsDir?'dir':lLI[i].getElementsByClassName('size')[0].textContent;
