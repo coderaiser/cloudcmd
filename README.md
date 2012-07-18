@@ -42,9 +42,14 @@ There is a short list:
 Installing
 ---------------
 **Cloud Commander** installing is very easy. All you need it's just clone
-repository from github. Install and start, just 3 commands:
+repository from github. Just 2 commands:
 
-    git clone git://github.com/coderaiser/cloudcmd.git --recursive
+    git clone git://github.com/coderaiser/cloudcmd.git
+    cd cloudcmd
+or
+
+    npm i cloudcmd
+    mv node_modules/cloudcmd ./cloudcmd
 
 Starting
 ---------------
