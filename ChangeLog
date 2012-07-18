@@ -2,7 +2,8 @@
 
 * Fixed bug with nodester (jitsu env.HOME make him go done).
 
-* Fixed bug: gzip do not working out, becouse accessible flag settet up to _controller object.
+* Fixed bug: gzip do not working out, becouse accessible flag settet
+up to _controller object.
 
 * To every panel added scroll bars which is hiding if do not needed.
 
@@ -13,6 +14,14 @@
 * Added function cssLoad to client.js
 
 * Added Client Side CodeMirror library with name Cloud Editor.
+
+* Fixed bug with building file table from json data, when we go around
+and come back to root dir.
+If name of a file or directory is more then 16 charactes it shows 
+like 'VERY-LONG-NAME..', so becaouse of on first came we load page
+like no js, so json building from file table thet was genereted on
+server. So if file to long we should take it's name from title
+parameter of <a> tag.
 
 
 2012.07.14, Version 0.1.2
