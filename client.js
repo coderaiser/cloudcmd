@@ -697,9 +697,9 @@ CloudClient._getJSONfromFileTable=function()
         var lIsDir=lLI[i].getElementsByClassName('mini-icon')[0]
         .className.replace('mini-icon ','')==='directory'?true:false;
         
-        var lName=lLI[i].getElementsByClassName('name')[0]        
+        var lName=lLI[i].getElementsByClassName('name')[0];      
         lName &&
-            (lName = lName.getElementsByTagName('a')
+            (lName = lName.getElementsByTagName('a'));
         /* if found link to folder 
          * cheking is it a full name
          * or short
