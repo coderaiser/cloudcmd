@@ -1,3 +1,0 @@
-[submodule "minify"]
-	path = node_modules/minify
-	url = git://github.com/coderaiser/minify.git
