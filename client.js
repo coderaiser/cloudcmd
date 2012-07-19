@@ -439,7 +439,7 @@ CloudClient._changeLinks = function(pPanelID)
 CloudClient._ajaxLoad=function(path, pNeedRefresh)
 {                           
         /* Отображаем красивые пути */        
-        var lPath=path;
+        var lPath=CloudFunc.replaceSpaces(path);
         var lFS_s=CloudFunc.FS;
         if(lPath.indexOf(lFS_s)===0){
             lPath=lPath.replace(lFS_s,'');
