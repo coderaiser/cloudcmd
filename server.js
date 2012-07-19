@@ -250,7 +250,10 @@ CloudServer._controller=function(pReq, pRes)
     */
     var url = require("url");
     var pathname = url.parse(pReq.url).pathname;
-    console.log('pathname: '+pathname);
+    
+    /* added supporting of Russian language in directory names */
+    pathname = Querystring.unescape(pathname);
+    console.log('pathname: ' + pathname);
     
      /* получаем поддерживаемые браузером кодировки*/
      var lAcceptEncoding = pReq.headers['accept-encoding'];
@@ -368,9 +371,8 @@ CloudServer._controller=function(pReq, pRes)
              */                         
             if (pathname==='')
                 pathname = '/';
-            
-            /* added supporting of Russian language in directory names */
-            LeftDir  = Querystring.unescape(pathname);
+                        
+            LeftDir  = pathname;
             RightDir = LeftDir;
             
             /* Проверяем с папкой ли мы имеем дело */
