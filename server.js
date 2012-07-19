@@ -367,17 +367,12 @@ CloudServer._controller=function(pReq, pRes)
             /* если в итоге путь пустой
              * делаем его корневым
              */                         
-            if(pathname==='')pathname='/';
+            if (pathname==='')
+                pathname = '/';
             
-            RightDir=pathname;
-            LeftDir=pathname;
-            
-            /* если встретиться пробел - 
-             * меня код символа пробела на пробел
-             */
-            
-            LeftDir=CloudFunc.replaceSpaces(LeftDir);
-            RightDir=CloudFunc.replaceSpaces(RightDir);
+            /* added supporting of Russian language in directory names */
+            LeftDir  = querystring.unescape(pathname);
+            RightDir = LeftDir;
             
             /* Проверяем с папкой ли мы имеем дело */
             
