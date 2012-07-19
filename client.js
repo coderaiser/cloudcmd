@@ -440,7 +440,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
 {                                   
         /* Отображаем красивые пути */
         /* added supporting of russian  language */
-        var lPath=decodeUri(path);
+        var lPath=decodeURI(path);
         var lFS_s=CloudFunc.FS;
         if(lPath.indexOf(lFS_s)===0){
             lPath=lPath.replace(lFS_s,'');
