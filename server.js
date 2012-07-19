@@ -3,92 +3,91 @@
 /* Обьект содержащий все функции и переменные 
  * серверной части Cloud Commander'а
  */
-var CloudServer={
+var CloudServer = {
     /* main Cloud Commander configuration
      * readed from config.json if it's
      * exist
      */
-    Config      : {
-                    "cache" : {"allowed" : true},
-                    "minification" : {
-                        "js"    : false,
-                        "css"   : false,
-                        "html"  : true,
-                        "img"   : false
-                    },
-                    "server"    : true
+    Config          : {
+        "cache" : {"allowed" : true},
+        "minification" : {
+            "js"    : false,
+            "css"   : false,
+            "html"  : true,
+            "img"   : false
+        },
+        "server"    : true
     },
     /* функция, которая генерирует заголовки
      * файлов, отправляемые сервером клиенту
      */
-    generateHeaders :function(){},
+    generateHeaders : function () {},
     /* функция высылает
      * данные клиенту
      */
-    sendResponse        :function(){},
+    sendResponse    : function () {},
     /* Структура содержащая функции,
      * и переменные, в которых
      * говориться о поддерживаемых
      * браузером технологиях
      */
-    BrowserSuport   :{},
+    BrowserSuport   : {},
      /* Обьект для работы с кэшем */
-    Cashe                   :{},
+    Cashe           : {},
     /* Обьект через который
      * выполняеться сжатие
      * скриптов и стилей
      */
-    Minify                  :{},
+    Minify          : {},
     /* Асоциативный масив обьектов для
      * работы с ответами сервера
      * высылаемыми на запрос о файле и
      * хранащий информацию в виде
      * Responces[name]=responce;
      */
-    Responses               :{},
+    Responses       : {},
     
     /* ПЕРЕМЕННЫЕ */
     /* Поддержка браузером JS*/
-    NoJS            :true,    
+    NoJS            : true,
     /* Поддержка gzip-сжатия
      * браузером
      */
-    Gzip            :undefined,
+    Gzip            : undefined,
     
     /* КОНСТАНТЫ */
     /* index.html */
-    INDEX           :'index.html',
-    LIBDIR          :'./lib',
-    LIBDIRSERVER    :'./lib/server',
+    INDEX           : 'index.html',
+    LIBDIR          : './lib',
+    LIBDIRSERVER    : './lib/server',
     
-    Port            :31337, /* server port */
-    IP              :'127.0.0.1'
+    Port            : 31337, /* server port */
+    IP              : '127.0.0.1'
 };
 
 
 
 
-var LeftDir='/';
-var RightDir=LeftDir;
+var LeftDir     = '/';
+var RightDir    = LeftDir;
 /* модуль для работы с путями*/
-var Path    = require('path');
-
+var Path        = require('path');
 var Fs          = require('fs');    /* модуль для работы с файловой системой*/
-
+var Querystring = require('querystring');
 var Zlib;
 /* node v0.4 not contains zlib 
  */
-try{
+try {
     Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
-}catch(error){
-    Zlib=undefined;
+} catch (error) {
+    Zlib        = undefined;
     console.log('to use gzip-commpression' +
         'you should install zlib module\n' +
         'npm install zlib');
 }
  /* добавляем  модуль с функциями */
 var CloudFunc;
-try{
+try {
     CloudFunc       = require(CloudServer.LIBDIR         +
                             '/cloudfunc');
                             
@@ -125,22 +124,22 @@ CloudServer.init=(function(){
          * not created, just init and
          * all logs writed to screen
          */
-        if(process.argv[2]==='test'){
+        if (process.argv[2] === 'test') {
             console.log(process.argv);
-            this.Config.server=false;
-            this.Config.logs=false;
+            this.Config.server  = false;
+            this.Config.logs    = false;
         }
                 
-        if(this.Config.logs){
+        if (this.Config.logs) {
             console.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
             this.writeLogsToFile();
         }
-    }catch(pError){
+    } catch (pError) {
         console.log('warning: configureation file config.json not found...\n' +
             'using default values...\n'                     +
             JSON.stringify(CloudServer.Config));
-    }        
+    }
     
     /* Переменная в которой храниться кэш*/
     this.Cache.setAllowed(CloudServer.Config.cache.allowed);
@@ -154,8 +153,7 @@ CloudServer.init=(function(){
 
 
 /* создаём сервер на порту 31337 */
-CloudServer.start=function()
-{
+CloudServer.start = function () {
     this.init();
     
     this.Port = process.env.PORT            ||  /* c9           */
@@ -167,17 +165,17 @@ CloudServer.start=function()
                 CloudServer.IP;
     
     /* if Cloud Server started on jitsu */
-    if(!process.env.HOME.indexOf('/opt/haibu')){
-        this.IP = '0.0.0.0';
+    if(process.env.HOME &&
+        !process.env.HOME.indexOf('/opt/haibu')) {
+            this.IP = '0.0.0.0';
     }
-    /* server mode or testing mode */    
-    if(!process.argv[2] && this.Config.server){
+    /* server mode or testing mode */
+    if (!process.argv[2] && this.Config.server) {
         var http = require('http');
 
-        try{
+        try {
             http.createServer(this._controller).listen(
-                this.Port,
-                this.IP);
+                this.Port, this.IP);
                 
             console.log('Cloud Commander server running at http://' +
                 this.IP +
@@ -252,7 +250,10 @@ CloudServer._controller=function(pReq, pRes)
     */
     var url = require("url");
     var pathname = url.parse(pReq.url).pathname;
-    console.log('pathname: '+pathname);
+    
+    /* added supporting of Russian language in directory names */
+    pathname = Querystring.unescape(pathname);
+    console.log('pathname: ' + pathname);
     
      /* получаем поддерживаемые браузером кодировки*/
      var lAcceptEncoding = pReq.headers['accept-encoding'];
@@ -263,9 +264,8 @@ CloudServer._controller=function(pReq, pRes)
     if (lAcceptEncoding && 
         lAcceptEncoding.match(/\bgzip\b/) &&
         Zlib){
-        this.Gzip=true;
-    }else 
-        this.Gzip=false;
+        CloudServer.Gzip=true;
+    }
     /* путь в ссылке, который говорит
      * что js отключен
      */
@@ -369,17 +369,11 @@ CloudServer._controller=function(pReq, pRes)
             /* если в итоге путь пустой
              * делаем его корневым
              */                         
-            if(pathname==='')pathname='/';
-            
-            RightDir=pathname;
-            LeftDir=pathname;
-            
-            /* если встретиться пробел - 
-             * меня код символа пробела на пробел
-             */
-            
-            LeftDir=CloudFunc.replaceSpaces(LeftDir);
-            RightDir=CloudFunc.replaceSpaces(RightDir);
+            if (pathname==='')
+                pathname = '/';
+                        
+            LeftDir  = pathname;
+            RightDir = LeftDir;
             
             /* Проверяем с папкой ли мы имеем дело */
             
