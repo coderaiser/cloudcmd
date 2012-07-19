@@ -28,6 +28,8 @@ time was possible.
 Now Cloud Commander writes size 0, if can't get size, and besides will
 setted b char: "0b".
 
+* Added supporting of Russian language in directory names.
+
 
 2012.07.14, Version 0.1.2
 
