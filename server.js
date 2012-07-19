@@ -72,9 +72,8 @@ var LeftDir     = '/';
 var RightDir    = LeftDir;
 /* модуль для работы с путями*/
 var Path        = require('path');
-
 var Fs          = require('fs');    /* модуль для работы с файловой системой*/
-
+var Querystring = require('querystring');
 var Zlib;
 /* node v0.4 not contains zlib 
  */
@@ -371,7 +370,7 @@ CloudServer._controller=function(pReq, pRes)
                 pathname = '/';
             
             /* added supporting of Russian language in directory names */
-            LeftDir  = querystring.unescape(pathname);
+            LeftDir  = Querystring.unescape(pathname);
             RightDir = LeftDir;
             
             /* Проверяем с папкой ли мы имеем дело */
