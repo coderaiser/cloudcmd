@@ -25,6 +25,9 @@ parameter of <a> tag, it's wasn't, so folder navigation not every
 time was possible.
 
 * Fixed bug with undefined size on root directory of Cloud Commander.
+Now Cloud Commander writes size 0, if can't get size, and besides will
+setted b char: "0b".
+
 
 2012.07.14, Version 0.1.2
 
