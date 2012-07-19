@@ -17,6 +17,7 @@ var CloudClient={
     init                    :function(){},
     
     keyBinding              :function(){},/* функция нажатий обработки клавишь */
+    Editor                  :function(){},/* function loads and shows editor */
     keyBinded               :false,/* оброботка нажатий клавишь установлена*/
     _loadDir                 :function(){},
     /* 
@@ -137,7 +138,15 @@ CloudClient.keyBinding=(function(){
     });
 });
 
-
+/* function loads and shows editor */
+CloudClient.Editor = (function(){
+    /* loading CloudMirror plagin */
+    CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'editor.js',{
+        onload:(function(){
+            CloudCommander.Editor.Keys();
+        })
+    });
+});
 /* 
  * Функция привязываеться ко всем ссылкам и
  *  загружает содержимое каталогов
@@ -330,7 +339,20 @@ CloudClient.init=(function()
     /* устанавливаем размер высоты таблицы файлов
      * исходя из размеров разрешения экрана
      */ 
-     
+                 
+    /* выделяем строку с первым файлом */
+    var lFmHeader=document.getElementsByClassName('fm_header');
+    if(lFmHeader && lFmHeader[0].nextSibling)
+        lFmHeader[0].nextSibling.className=CloudClient.CURRENT_FILE;
+    
+    /* показываем элементы, которые будут работать только, если есть js */
+    var lFM=document.getElementById('fm');
+    if(lFM)lFM.className='localstorage';
+    
+    /* если есть js - показываем правую панель*/
+    var lRight=document.getElementById('right');
+    if(lRight)lRight.className=lRight.className.replace('hidden','');
+    
     /* формируем и округляем высоту экрана
      * при разрешениии 1024x1280:
      * 658 -> 700
@@ -339,28 +361,11 @@ CloudClient.init=(function()
     var lHeight=window.screen.height - (window.screen.height/3).toFixed();
     lHeight=(lHeight/100).toFixed()*100;
      
-    var lFm=document.getElementById('fm');
-    if(lFm)lFm.style.cssText='height:' +
-        lHeight +
-        'px';        
-        
-    /* выделяем строку с первым файлом */
-    var lFmHeader=document.getElementsByClassName('fm_header');
-    if(lFmHeader && lFmHeader[0].nextSibling)
-        lFmHeader[0].nextSibling.className=CloudClient.CURRENT_FILE;
-    
-    /* показываем элементы, которые будут работать только, если есть js */
-    var lFM=document.getElementById('fm');
-    if(lFM)lFm.className='localstorage';
-    
-    /* если есть js - показываем правую панель*/
-    var lRight=document.getElementById('right');
-    if(lRight)lRight.className=lRight.className.replace('hidden','');
-    
     CloudClient.cssSet({id:'show_2panels',
         element:document.head,
-        inner:'#left{width:46%;}'
-    });        
+        inner:'#left{width:46%;}' +
+            '.panel{height:' + lHeight +'px'
+    });       
 });
 
 /* функция меняет ссыки на ajax-овые */
@@ -432,9 +437,10 @@ CloudClient._changeLinks = function(pPanelID)
  * @pNeedRefresh - необходимость обновить данные о каталоге
  */
 CloudClient._ajaxLoad=function(path, pNeedRefresh)
-{                           
-        /* Отображаем красивые пути */        
-        var lPath=path;
+{                                   
+        /* Отображаем красивые пути */
+        /* added supporting of russian  language */
+        var lPath=decodeURI(path);
         var lFS_s=CloudFunc.FS;
         if(lPath.indexOf(lFS_s)===0){
             lPath=lPath.replace(lFS_s,'');
@@ -586,24 +592,31 @@ CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
     if(!document.getElementById(lID))
     {
         var element = document.createElement(pName);
-        element.src = pSrc;
+        /* if working with external css
+         * using href in any other case
+         * using src
+         */
+        pName === 'link' ? 
+              element.href = pSrc
+            : element.src = pSrc;
         element.id=lID;        
         if(arguments.length>=3){
             /* if passed arguments function
              * then it's onload by default
              */
-            if(typeof pFunc === 'function'){
-                element.onload=pFunc;
-            /* if object - then onload or onerror */
-            }else if (typeof pFunc === 'object'){
-                if(pFunc.onload)element.onload = pFunc.onload;
-                if(pFunc.onerror)element.onerror=pFunc.onerror;
-            }
-            if(arguments.length>=4){
+            if(pFunc)
+                if(typeof pFunc === 'function'){
+                    element.onload=pFunc;
+                /* if object - then onload or onerror */
+                }else if (typeof pFunc === 'object'){
+                    if(pFunc.onload)element.onload = pFunc.onload;
+                    if(pFunc.onerror)element.onerror=pFunc.onerror;
+                }
+            if(arguments.length >= 4 && pStyle){
                 element.style.cssText=pStyle;
             }
         }
-        pElement.appendChild(element);
+        (pElement || document.body).appendChild(element);
         return element;
     }
     /* если js-файл уже загружен 
@@ -632,9 +645,31 @@ CloudClient.cssSet = function(pParams_o){
         pParams_o.func,
         pParams_o.style,
         pParams_o.id,
-        pParams_o.element?pParams_o.element:document.body);
-    lElem.innerHTML=pParams_o.inner;
+        pParams_o.element || document.head);
+    
+    pParams_o.inner &&
+        (lElem.innerHTML = pParams_o.inner);
 };
+/* Function loads external css files 
+ * @pParams_o - структура параметров, заполняеться таким
+ * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
+ * все параметры опциональны
+ */
+CloudClient.cssLoad = function(pParams_o){
+    var lElem=CloudClient._anyload('link',        
+        pParams_o.src,
+        pParams_o.func,
+        pParams_o.style,
+        pParams_o.id,
+        pParams_o.element || document.head);
+        
+    lElem.rel = "stylesheet";
+    
+    pParams_o.inner &&
+        (lElem.innerHTML = pParams_o.inner);
+};
+
+
 
 /* 
  * Функция генерирует JSON из html-таблицы файлов 
@@ -663,7 +698,22 @@ CloudClient._getJSONfromFileTable=function()
         var lIsDir=lLI[i].getElementsByClassName('mini-icon')[0]
         .className.replace('mini-icon ','')==='directory'?true:false;
         
-        var lName=lLI[i].getElementsByClassName('name')[0].textContent;
+        var lName=lLI[i].getElementsByClassName('name')[0];        
+        lName &&
+            (lName = lName.getElementsByTagName('a'));
+        /* if found link to folder 
+         * cheking is it a full name
+         * or short
+         */
+         /* if short we got title 
+         * if full - getting textConent
+         */
+        lName.length &&
+            (lName = lName[0]);
+        lName.title &&
+            (lName = lName.title) ||
+            (lName = lName.textContent);        
+            
         /* если это папка - выводим слово dir вместо размера*/
         var lSize=lIsDir?'dir':lLI[i].getElementsByClassName('size')[0].textContent;
         var lMode=lLI[i].getElementsByClassName('mode')[0].textContent;
@@ -716,6 +766,7 @@ try{
         CloudCommander.init();
         /* привязываем клавиши к функциям */
         CloudCommander.keyBinding();
+        CloudCommander.Editor();
     };
 }
 catch(err){}

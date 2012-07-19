@@ -42,9 +42,14 @@ There is a short list:
 Installing
 ---------------
 **Cloud Commander** installing is very easy. All you need it's just clone
-repository from github. Install and start, just 3 commands:
+repository from github. Just 2 commands:
 
-    git clone git://github.com/coderaiser/cloudcmd.git --recursive
+    git clone git://github.com/coderaiser/cloudcmd.git
+    cd cloudcmd
+or
+
+    npm i cloudcmd
+    mv node_modules/cloudcmd ./cloudcmd
 
 Starting
 ---------------
@@ -75,8 +80,7 @@ assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify
 
 Install addtitional modules:
 
-    git submodule init
-    git submodule update
+    npm i
     
 **Cloud Commander's Client Side** use module jquery for ajaxing.
 We could not use this module, but this way is fast:
@@ -94,4 +98,12 @@ If you would like to contribute - send pull request to dev branch.
 Getting dev version of **Cloud Commander**:
 
     git clone cloudcmd --recursive
+    git checkout dev
+
+It is possible thet dev version Cloud Commander will needed dev version of Minify,
+so to get it you should type a couple more commands:
+
+    cd node_modules
+    rm -rf minify
+    git clone git://github.com/coderaiser/minify
     git checkout dev
