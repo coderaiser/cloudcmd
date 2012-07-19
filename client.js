@@ -437,9 +437,10 @@ CloudClient._changeLinks = function(pPanelID)
  * @pNeedRefresh - необходимость обновить данные о каталоге
  */
 CloudClient._ajaxLoad=function(path, pNeedRefresh)
-{                           
-        /* Отображаем красивые пути */        
-        var lPath=CloudFunc.replaceSpaces(path);
+{                                   
+        /* Отображаем красивые пути */
+        /* added supporting of russian  language */
+        var lPath=decodeUri(path);
         var lFS_s=CloudFunc.FS;
         if(lPath.indexOf(lFS_s)===0){
             lPath=lPath.replace(lFS_s,'');
