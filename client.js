@@ -309,6 +309,14 @@ CloudClient.init=(function()
     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
         onerror: function(){
             CloudClient.jsload('lib/client/jquery.js');
+            
+            CloudClient.cssSet({id:'local-droids-font',
+                element : document.head,
+                inner   :   '@font-face {font-family: "Droid Sans Mono";'           +
+                            'font-style: normal;font-weight: normal;'               +
+                            'src: local("Droid Sans Mono"), local("DroidSansMono"),'+
+                            ' url("font/DroidSansMono.woff") format("woff");}'
+            });                   
         }
     });
     
