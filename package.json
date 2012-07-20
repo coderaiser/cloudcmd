@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Two-panels file manager, totally writed on js.",
   "homepage": "https://github.com/coderaiser/cloudcmd",
