@@ -1,4 +1,3 @@
-
 /* =============================================================================
    Base
    ========================================================================== */
@@ -43,14 +42,6 @@ ul{ margin: 1em 0; padding: 0 20px 0 20px; }
  * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
  */
 
-
-/* =============================================================================
-   Chrome Frame Prompt
-   ========================================================================== */
-
-.chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
-
-
 /* ==== non-semantic helper classes ========================================
    Please define your styles before this section.
    ========================================================================== */
@@ -64,7 +55,9 @@ ul{ margin: 1em 0; padding: 0 20px 0 20px; }
    ========================================================================== */
 
 @media print {
-  * { background: transparent !important; color: black !important; box-shadow:none !important; text-shadow: none !important; filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
+  * { background: transparent !important;
+      color: black !important; box-shadow:none !important; text-shadow: none !important;
+      filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
   a, a:visited { text-decoration: underline; }
   a[href]:after { content: " (" attr(href) ")"; } 
   .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
