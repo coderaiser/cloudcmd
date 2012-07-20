@@ -43,14 +43,6 @@ ul{ margin: 1em 0; padding: 0 20px 0 20px; }
  * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
  */
 
-
-/* =============================================================================
-   Chrome Frame Prompt
-   ========================================================================== */
-
-.chromeframe { margin: 0.2em 0; background: #ccc; color: black; padding: 0.2em 0; }
-
-
 /* ==== non-semantic helper classes ========================================
    Please define your styles before this section.
    ========================================================================== */
