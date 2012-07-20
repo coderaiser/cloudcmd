@@ -22,14 +22,14 @@ definitely will can work cached copy of directory listings)*;
 **Cloud Commander** uses all benefits of js, so if js is disabled,
 we moves to *limited mode*.
 
-Limited-mode features:
+Limited-mode features
 ---------------
 - only 1 panel available
 - no keybinding
 - no local caching
 - full loading of all web page(with styles, js-scripts, html-page etc).
 
-Hot keys:
+Hot keys
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
 There is a short list:
@@ -72,7 +72,7 @@ you can just type in cloudcmd directory:
 
     git pull
 
-Additional modules:
+Additional modules
 ---------------
 **Cloud Commander's Server Side** not using additional modules for main functionality.
 But for minification and optimization tricks optional can be
