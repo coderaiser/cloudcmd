@@ -215,9 +215,11 @@ CloudServer.generateHeaders = function(pName, pGzip){
     else if(CloudFunc.checkExtension(pName,'json'))
         lType='application/json';
     else if(CloudFunc.checkExtension(pName,'html'))
-        lType='text/html';        
+        lType='text/html';
+    else if(CloudFunc.checkExtension(pName,'woff'))
+        lType='font/woff';
     else if(CloudFunc.checkExtension(pName,'appcache'))
-        lType='text/cache-manifest';        
+        lType='text/cache-manifest';
     /* если это неизвестный тип файла - 
      * высылаем его просто как текст
      */
