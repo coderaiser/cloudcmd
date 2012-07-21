@@ -68,8 +68,7 @@ var CloudServer = {
 
 
 
-var LeftDir     = '/';
-var RightDir    = LeftDir;
+var DirPath     = '/';
 /* модуль для работы с путями*/
 var Path        = require('path');
 var Fs          = require('fs');    /* модуль для работы с файловой системой*/
@@ -374,19 +373,18 @@ CloudServer._controller=function(pReq, pRes)
             if (pathname==='')
                 pathname = '/';
                         
-            LeftDir  = pathname;
-            RightDir = LeftDir;
+            DirPath  = pathname;
             
             /* Проверяем с папкой ли мы имеем дело */
             
             /* читаем сновные данные о файле */
             var lStat;
             try{
-                lStat=Fs.statSync(LeftDir);
+                lStat=Fs.statSync(DirPath);
             }catch(error){
                 console.log(error);
-                CloudServer.Responses[LeftDir]=pRes;
-                CloudServer.sendResponse('OK',error.toString(),LeftDir);
+                CloudServer.Responses[DirPath]=pRes;
+                CloudServer.sendResponse('OK',error.toString(),DirPath);
             }
             /* если это каталог - 
              * читаем его содержимое
@@ -405,12 +403,12 @@ CloudServer._controller=function(pReq, pRes)
                 CloudServer.Responses[CloudServer.INDEX]=pRes;
                 
                 if(lStat.isDirectory())
-                    Fs.readdir(LeftDir,CloudServer._readDir);
+                    Fs.readdir(DirPath,CloudServer._readDir);
                 /* отдаём файл */
                 else if(lStat.isFile()){
-                    CloudServer.Responses[LeftDir]=pRes;
-                    Fs.readFile(LeftDir,CloudServer.getReadFileFunc(LeftDir));
-                    console.log('reading file: '+LeftDir);
+                    CloudServer.Responses[DirPath]=pRes;
+                    Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
+                    console.log('reading file: '+DirPath);
                 }
             }catch(error){console.log(error);}
         }
@@ -426,22 +424,21 @@ CloudServer._readDir=function (pError, pFiles)
         var lJSON=[];
         var lJSONFile={};
         /* Если мы не в корне добавляем слеш к будующим ссылкам */       
-       if(LeftDir!=='/')
+       if(DirPath!=='/')
         {
-            RightDir+='/';
-            LeftDir+='/';
+            DirPath+='/';
         }
 
         pFiles=pFiles.sort();
                 
-        lJSON[0]={path:LeftDir,size:'dir'};
+        lJSON[0]={path:DirPath,size:'dir'};
         var fReturnFalse=function returnFalse(){return false;};        
         for(var i=0;i<pFiles.length;i++)
         {
             /* Получаем информацию о файле*/
             var lStats;
             try{
-                lStats=Fs.statSync(RightDir+pFiles[i]);
+                lStats=Fs.statSync(DirPath+pFiles[i]);
             }catch(err){
                 /*
                     console.log(err);
