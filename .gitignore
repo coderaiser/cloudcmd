@@ -12,6 +12,13 @@
 #node modules folder
 node_modules
 
+#moving out minify from cloudcmd submodules
+#minify module
+#!node_modules/
+#node_modules/*
+#!node_modules/minify
+
+
 #cloudfoundry info files
 cloudcmd.manifest.yml
 cloudcmddemo.manifest.yml
@@ -32,11 +39,6 @@ apache-status
 
 #log file
 log.txt
-
-#minify module
-!node_modules/
-node_modules/*
-!node_modules/minify
 
 #hashes file
 hashes.json
