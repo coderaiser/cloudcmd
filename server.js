@@ -81,8 +81,7 @@ try {
 } catch (error) {
     Zlib        = undefined;
     console.log('to use gzip-commpression' +
-        'you should install zlib module\n' +
-        'npm install zlib');
+        'you should use newer node version\n');
 }
  /* добавляем  модуль с функциями */
 var CloudFunc;
