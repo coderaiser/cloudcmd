@@ -79,7 +79,6 @@ var Zlib;
 try {
     Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
 } catch (error) {
-    Zlib        = undefined;
     console.log('to use gzip-commpression' +
         'you should use newer node version\n');
 }
