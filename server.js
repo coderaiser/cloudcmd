@@ -9,17 +9,17 @@ var CloudServer = {
      * exist
      */
     Config          : {
-        "cache" : {"allowed" : true},
-        "minification" : {
-            "js"    : false,
-            "css"   : false,
-            "html"  : true,
-            "img"   : false
+        cache : {allowed : true},
+        minification : {
+            js    : false,
+            css   : false,
+            html  : true,
+            img   : false
         },
-        "server"    : true,
-        "logs"      : false,
-        "port"      : 31337,
-        "ip"        : '127.0.0.1'
+        server    : true,
+        logs      : false,
+        port      : 31337,
+        ip        : '127.0.0.1'
     },
     
     /* функция, которая генерирует заголовки
@@ -59,9 +59,6 @@ var CloudServer = {
     LIBDIR          : './lib',
     LIBDIRSERVER    : './lib/server'        
 };
-
-
-
 
 var DirPath     = '/';
 /* модуль для работы с путями*/
