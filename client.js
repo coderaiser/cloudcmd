@@ -286,6 +286,8 @@ CloudClient._currentToParent = (function(pDirName){
             if(lCurrentFile.length>0)lCurrentFile[0].className='';
             
             lLi[i].className=CloudClient.CURRENT_FILE;
+            
+            break;
         }
     }
 }); 
