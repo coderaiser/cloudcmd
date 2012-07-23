@@ -7,7 +7,7 @@
         "img"   : false
     },
     "server"    : true,
-    "logs"      : false
+    "logs"      : false,
     "port"      : 31337,
     "ip"        : "127.0.0.1"
 }
