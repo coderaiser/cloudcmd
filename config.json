@@ -1,5 +1,5 @@
 {
-    "cache" : {"allowed" : true},
+    "cache" : {"allowed" : false},
     "minification" : {
         "js"    : false,
         "css"   : true,
