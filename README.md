@@ -126,7 +126,7 @@ Contributing
 If you would like to contribute - send pull request to dev branch.
 Getting dev version of **Cloud Commander**:
 
-    git clone cloudcmd
+    git clone git://github.com/coderaiser/cloudcmd.git
     git checkout dev
 
 It is possible thet dev version Cloud Commander will needed dev version of Minify,
