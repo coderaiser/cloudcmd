@@ -104,7 +104,7 @@ CloudServer.init=(function(){
         process.chdir(lServerDir);
     
     try{
-        console.log('reading configureation file config.json...');
+        console.log('reading configuretion file config.json...');
         this.Config = require('./config');
         console.log('config.json readed');
         
@@ -125,7 +125,7 @@ CloudServer.init=(function(){
             this.writeLogsToFile();
         }
     } catch (pError) {
-        console.log('warning: configureation file config.json not found...\n' +
+        console.log('warning: configuretion file config.json not found...\n' +
             'using default values...\n'                     +
             JSON.stringify(CloudServer.Config));
     }
