@@ -286,7 +286,7 @@ CloudClient._currentToParent = (function(pDirName){
              */
             if(pDirName.length >= CloudFunc.SHORTNAMELENGTH &&
                 lA[0].title !== pDirName)
-                    break;
+                    continue;
             /* если уже выделен какой-то файл, снимаем
              * выделение
              */
@@ -295,7 +295,7 @@ CloudClient._currentToParent = (function(pDirName){
             
             lLi[i].className=CloudClient.CURRENT_FILE;
             
-            return;
+            break;
         }
     }
 }); 
