@@ -41,7 +41,7 @@ There is a short list:
 
 Editor's hot keys
 ---------------
-- f4                - open CodeMirror editor
+- F4                - open CodeMirror editor
 - Esc               - close CodeMirror editor
 
 Installing
