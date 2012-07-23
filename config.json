@@ -2,10 +2,12 @@
     "cache" : {"allowed" : false},
     "minification" : {
         "js"    : false,
-        "css"   : true,
+        "css"   : false,
         "html"  : true,
-        "img"   : true
+        "img"   : false
     },
     "server"    : true,
     "logs"      : false
+    "port"      : 31337,
+    "ip"        : "127.0.0.1"
 }

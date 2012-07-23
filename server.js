@@ -16,28 +16,29 @@ var CloudServer = {
             "html"  : true,
             "img"   : false
         },
-        "server"    : true
+        "server"    : true,
+        "logs"      : false,
+        "port"      : 31337,
+        "ip"        : '127.0.0.1'
     },
+    
     /* функция, которая генерирует заголовки
      * файлов, отправляемые сервером клиенту
      */
     generateHeaders : function () {},
+    
     /* функция высылает
      * данные клиенту
      */
     sendResponse    : function () {},
-    /* Структура содержащая функции,
-     * и переменные, в которых
-     * говориться о поддерживаемых
-     * браузером технологиях
-     */
-    BrowserSuport   : {},
+
      /* Обьект для работы с кэшем */
     Cashe           : {},
     /* Обьект через который
      * выполняеться сжатие
      * скриптов и стилей
      */
+    
     Minify          : {},
     /* Асоциативный масив обьектов для
      * работы с ответами сервера
@@ -56,10 +57,7 @@ var CloudServer = {
     /* КОНСТАНТЫ */
     INDEX           : 'index.html',
     LIBDIR          : './lib',
-    LIBDIRSERVER    : './lib/server',
-    
-    Port            : 31337, /* server port */
-    IP              : '127.0.0.1'
+    LIBDIRSERVER    : './lib/server'        
 };
 
 
@@ -153,10 +151,10 @@ CloudServer.start = function () {
     this.Port = process.env.PORT            ||  /* c9           */
                 process.env.app_port        ||  /* nodester     */
                 process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
-                CloudServer.Port;
+                CloudServer.Config.port;
                      
     this.IP   = process.env.IP              ||  /* c9           */
-                CloudServer.IP;
+                CloudServer.Config.ip;
     
     /* if Cloud Server started on jitsu */
     if(process.env.HOME &&
