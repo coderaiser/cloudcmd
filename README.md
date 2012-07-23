@@ -69,7 +69,7 @@ All main configuration could be done thrue config.json.
         "img"   : false
     },
     "server"    : true,             /* server mode or testing mode              */
-    "logs"      : false             /* logs or console ouput                    */
+    "logs"      : false,            /* logs or console ouput                    */
     "port"      : 31338,            /* Cloud Commander port                     */
     "ip"        : "127.0.0.1"       /* Cloud Commander IP                       */
 }
