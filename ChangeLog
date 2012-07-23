@@ -5,6 +5,10 @@
 * Fixed bug with positioning of cursor when came back 
 from folder whith long name.
 
+* Fixed bug with setting up current file, if a couple of
+files was with the same name on 16-chars, after going
+up on folders, current file would be last.
+
 
 2012.07.19, Version 0.1.3
 
