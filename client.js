@@ -198,12 +198,9 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
             if(lA.length>0 && lA[0].textContent==='..' &&
                 lHref!=='/'){
             /* функция устанавливает курсор на каталог
-            * с которого мы пришли, если мы поднялись
-            * в верх по файловой структуре и если
-            * длина названия папки больше
-            * CloudFunc.SHORTNAMELENGTH уменьшает его
-            */              
-                lHref = CloudFunc.getShortedName(lHref);
+             * с которого мы пришли, если мы поднялись
+             * в верх по файловой структуре
+             */
                 CloudClient._currentToParent(lHref);
             }
             
@@ -276,9 +273,20 @@ CloudClient._currentToParent = (function(pDirName){
     if(!lPanel)return;
     
     var lLi=lPanel.getElementsByTagName('li');
+    
+    /* если длина названия папки больше
+     * CloudFunc.SHORTNAMELENGTH уменьшаем её
+     */                  
+    var pShortDirName = CloudFunc.getShortedName(pDirName);
     for(var i=0;i<lLi.length;i++){
         var lA=lLi[i].getElementsByTagName('a');
-        if(lA.length && lA[0].textContent===pDirName){
+        if(lA.length && lA[0].textContent === pShortDirName){
+            /* if name length is big
+             * then compare full names
+             */
+            if(lA.length >= CloudFunc.SHORTNAMELENGTH &&
+                lA[0].title !== pDirName)
+                    break;
             /* если уже выделен какой-то файл, снимаем
              * выделение
              */
@@ -287,7 +295,7 @@ CloudClient._currentToParent = (function(pDirName){
             
             lLi[i].className=CloudClient.CURRENT_FILE;
             
-            break;
+            return;
         }
     }
 }); 
