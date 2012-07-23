@@ -199,8 +199,11 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
                 lHref!=='/'){
             /* функция устанавливает курсор на каталог
             * с которого мы пришли, если мы поднялись
-            * в верх по файловой структуре
+            * в верх по файловой структуре и если
+            * длина названия папки больше
+            * CloudFunc.SHORTNAMELENGTH уменьшает его
             */              
+                lHref = CloudFunc.getShortedName(lHref);
                 CloudClient._currentToParent(lHref);
             }
             
