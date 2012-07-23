@@ -47,16 +47,13 @@ var CloudServer = {
      */
     Responses       : {},
     
-    /* ПЕРЕМЕННЫЕ */
-    /* Поддержка браузером JS*/
+    /* ПЕРЕМЕННЫЕ 
+     * Поддержка браузером JS */
     NoJS            : true,
-    /* Поддержка gzip-сжатия
-     * браузером
-     */
+    /* Поддержка gzip-сжатия браузером */
     Gzip            : undefined,
     
     /* КОНСТАНТЫ */
-    /* index.html */
     INDEX           : 'index.html',
     LIBDIR          : './lib',
     LIBDIRSERVER    : './lib/server',
