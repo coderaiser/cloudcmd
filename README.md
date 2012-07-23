@@ -14,7 +14,7 @@ Benefits
 (with refresh opportunity).*
 - caching readed directories *to localStorage (for now)
 (so if network will disconnected or something heppen with a signal, we
-definitely will can work cached copy of directory listings)*;
+definitely will can work with cached copy of directory listings)*;
 - key binding
 - disabled js support *(working in limited mode)*.
 - automated minification *client js-files and onstart-reading Cloud manager files on server starting.*
@@ -39,6 +39,11 @@ There is a short list:
 - Alt  + s          - get all key bindings back
 - up, down, enter   - filesystem navigation
 
+Editor's hot keys
+---------------
+- F4                - open CodeMirror editor
+- Esc               - close CodeMirror editor
+
 Installing
 ---------------
 **Cloud Commander** installing is very easy. All you need it's just clone
@@ -49,8 +54,26 @@ repository from github. Just 2 commands:
 or
 
     npm i cloudcmd
-    mv node_modules/cloudcmd ./cloudcmd
+    mv node_modules/cloudcmd ./
 
+Configuration
+---------------
+All main configuration could be done thrue config.json.
+```js
+{
+    "cache" : {"allowed" : true},   /* cashing of js and css files in memory    */
+    "minification" : {              /* minification of js,css,html and img      */
+        "js"    : false,            /* minify module neaded                     */
+        "css"   : false,            /* npm i minify                             */
+        "html"  : true,
+        "img"   : false
+    },
+    "server"    : true,             /* server mode or testing mode              */
+    "logs"      : false,            /* logs or console ouput                    */
+    "port"      : 31337,            /* Cloud Commander port                     */
+    "ip"        : "127.0.0.1"       /* Cloud Commander IP                       */
+}
+```
 Starting
 ---------------
 To start **Cloud Commander** only one command neaded:
@@ -71,6 +94,12 @@ Updating
 you can just type in cloudcmd directory:
 
     git pull
+or check new version on npm
+    npm info cloudcmd
+
+and then, if there is new version
+    npm r cloudcmd
+    npm i cloudcmd
 
 Additional modules
 ---------------
@@ -97,7 +126,7 @@ Contributing
 If you would like to contribute - send pull request to dev branch.
 Getting dev version of **Cloud Commander**:
 
-    git clone cloudcmd --recursive
+    git clone git://github.com/coderaiser/cloudcmd.git
     git checkout dev
 
 It is possible thet dev version Cloud Commander will needed dev version of Minify,
