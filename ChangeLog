@@ -2,6 +2,8 @@
 
 * Added local version of Droids font for offline mode
 
+* Fixed bug with positioning of cursor when came back 
+from folder whith long name.
 
 2012.07.19, Version 0.1.3
 
