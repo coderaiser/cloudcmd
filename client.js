@@ -284,7 +284,7 @@ CloudClient._currentToParent = (function(pDirName){
             /* if name length is big
              * then compare full names
              */
-            if(lA.length >= CloudFunc.SHORTNAMELENGTH &&
+            if(pDirName.length >= CloudFunc.SHORTNAMELENGTH &&
                 lA[0].title !== pDirName)
                     break;
             /* если уже выделен какой-то файл, снимаем
