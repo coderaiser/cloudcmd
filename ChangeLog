@@ -9,6 +9,9 @@ from folder whith long name.
 files was with the same name on 16-chars, after going
 up on folders, current file would be last.
 
+* Fixed bug with links and titles with spaces in Path of
+current directory.
+
 
 2012.07.19, Version 0.1.3
 
