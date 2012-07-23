@@ -58,20 +58,20 @@ or
 
 Configuration
 ---------------
-All main configuration gould be done thrue config.json
+All main configuration could be done thrue config.json.
 ```js
 {
-    "cache" : {"allowed" : true},   /* cashing of js and css files in memory*/
-    "minification" : {              /* minification of js,css and img       */
-        "js"    : false,            /* minify module neaded                 */
-        "css"   : false,            /* npm i minify                         */
+    "cache" : {"allowed" : true},   /* cashing of js and css files in memory    */
+    "minification" : {              /* minification of js,css,html and img      */
+        "js"    : false,            /* minify module neaded                     */
+        "css"   : false,            /* npm i minify                             */
         "html"  : true,
         "img"   : false
     },
-    "server"    : true,             /* server mode or testing mode          */
-    "logs"      : false             /* logs or console ouput                */
-    "port"      : 31338,            /* Cloud Commander port                 */
-    "ip"        : "127.0.0.1"       /* Cloud Commander IP                   */
+    "server"    : true,             /* server mode or testing mode              */
+    "logs"      : false             /* logs or console ouput                    */
+    "port"      : 31338,            /* Cloud Commander port                     */
+    "ip"        : "127.0.0.1"       /* Cloud Commander IP                       */
 }
 ```
 Starting
