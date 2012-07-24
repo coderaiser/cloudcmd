@@ -1,810 +1,249 @@
-/* Функция которая возвратит обьект CloudCommander
- * @window - обьект window
- * @document - обьект document
- * @CloudFunc - обьект содержащий общий функционал
- *              клиентский и серверный
- */
-
-var CloudCommander=(function(){
-"use strict";
-
-/* Клиентский обьект, содержащий функциональную часть*/
-var CloudClient={        
-    /* Конструктор CloudClient, который
-    * выполняет весь функционал по
-    * инициализации
-    */
-    init                    :function(){},
-    
-    keyBinding              :function(){},/* функция нажатий обработки клавишь */
-    Editor                  :function(){},/* function loads and shows editor */
-    keyBinded               :false,/* оброботка нажатий клавишь установлена*/
-    _loadDir                 :function(){},
-    /* 
-     * Функция привязываеться ко всем ссылкам и
-     *  загружает содержимое каталогов
-     */
-     /* Обьект для работы с кэшем */
-     Cashe                  :{},
-     
-     /* ПРИВАТНЫЕ ФУНКЦИИ */
-     /* функция загружает json-данные о файловой системе */
-     _ajaxLoad              :function(){},
-     /* Функция генерирует JSON из html-таблицы файлов */
-     _getJSONfromFileTable  :function(){},
-     /* функция меняет ссыки на ajax-овые */
-     _changeLinks           :function(){},     
-     /* ОБЬЕКТЫ */
-     /* обьект, который содержит функции для отображения картинок*/
-     _images                :{},     
-     /* КОНСТАНТЫ*/
-     /* название css-класа текущего файла*/
-     CURRENT_FILE           :'current-file',
-     LIBDIR                 :'/lib/',
-     LIBDIRCLIENT           :'/lib/client/',
-     /* height of Cloud Commander
-      * seting up in init()
-      */
-     HEIGHT                 :0
-};
-
-/* 
- * Обьект для работы с кэшем
- * в него будут включены функции для
- * работы с LocalStorage, webdb,
- * indexed db etc.
- */
-CloudClient.Cache={
-    _allowed     :true,     /* приватный переключатель возможности работы с кэшем */
-     /* функция проверяет возможно ли работать с кэшем каким-либо образом */
-    isAllowed   :function(){},
-    /* Тип кэша, который доступен*/
-    type        :{},
-    /* Функция устанавливает кэш, если выбранный вид поддерживаеться браузером*/
-    set         :function(){},
-    /* Функция достаёт кэш, если выбранный вид поддерживаеться браузером*/
-    get         :function(){},
-    /* функция чистит весь кэш для всех каталогов*/
-    clear       :function(){}
-};
-
-/* Обьект, который содержит
- * функции для отображения
- * картинок
- */
-CloudClient._images={
-    /* Функция создаёт картинку загрузки*/
-    loading     :function(){   
-        var e=document.createElement('span');
-    e.className='icon loading';
-    e.id='loading-image';
-    return e;
-},
-
-    /* Функция создаёт картинку ошибки загрузки*/
-    error       :function(){
-        var e=document.createElement('span');    
-        e.className='icon error';
-        e.id='error-image';
-        return e;
-    }
-};
-
-/* функция проверяет поддерживаеться ли localStorage */
-CloudClient.Cache.isAllowed=(function(){
-    if(window.localStorage && 
-        localStorage.setItem &&
-        localStorage.getItem){
-        CloudClient.Cache._allowed=true;
-    }else
-        {
-            CloudClient.Cache._allowed=false;
-            /* загружаем PolyFill для localStorage,
-             * если он не поддерживаеться браузером
-             * https://gist.github.com/350433 
-             */
-            /*
-            CloudClient.jsload('https://raw.github.com/gist/350433/c9d3834ace63e5f5d7c8e1f6e3e2874d477cb9c1/gistfile1.js',
-                function(){CloudClient.Cache._allowed=true;
-            });
-            */
-        }
-});
- /* если доступен localStorage и
-  * в нём есть нужная нам директория -
-  * записываем данные в него
-  */
-CloudClient.Cache.set=(function(pName, pData){
-    if(CloudClient.Cache._allowed && pName && pData){
-        localStorage.setItem(pName,pData);
-    }
-});
-/* Если доступен Cache принимаем из него данные*/
-CloudClient.Cache.get=(function(pName){
-    if(CloudClient.Cache._allowed  && pName){
-        return localStorage.getItem(pName);
-    }
-    else return null;
-});
-/* Функция очищает кэш*/
-CloudClient.Cache.clear=(function(){
-    if(CloudClient.Cache._allowed){
-        localStorage.clear();
-    }
-});
-
-
-/* функция обработки нажатий клавишь */
-CloudClient.keyBinding=(function(){
-    /* loading keyBinding module and start it */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
-            CloudCommander.keyBinding();
-    });
-});
-
-/* function loads and shows editor */
-CloudClient.Editor = (function(){
-    /* loading CloudMirror plagin */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'editor.js',{
-        onload:(function(){
-            CloudCommander.Editor.Keys();
-        })
-    });
-});
-/* 
- * Функция привязываеться ко всем ссылкам и
- *  загружает содержимое каталогов
- */
-CloudClient._loadDir=(function(pLink,pNeedRefresh){
-    /* @pElem - элемент, 
-     * для которого нужно
-     * выполнить загрузку
-     */
-        return function(){
-            /* показываем гиф загрузки возле пути папки сверху*/
-            LoadingImage.className='icon loading';/* показываем загрузку*/
-            ErrorImage.className='icon error hidden';/* прячем ошибку */
-            /* если элемент задан -
-             * работаем с ним
-             */
-             /* если мы попали сюда с таблицы файлов*/
-            try{
-                this.firstChild.nextSibling.appendChild(LoadingImage);
-            }catch(error){
-                /* если <ctrl>+<r>
-                 * кнопка обновления
+var CloudCommander;
+var CloudFunc;
+CloudCommander.keyBinding=(function(){   
+    "use strict";
+    var key_event=function(event){            
+            var lCurrentFile;
+            var lName, lTop;
+            /* если клавиши можно обрабатывать*/
+            if(CloudCommander.keyBinded){
+                /* если нажали таб:
+                 * переносим курсор на
+                 * правую панель, если
+                 * мы были на левой и
+                 * наоборот
                  */
-                try{this.firstChild.parentElement.appendChild(LoadingImage);}
-                catch(error){console.log(error);}
-                }
-            
-            var lCurrentFile=document.getElementsByClassName(CloudClient.CURRENT_FILE);
-            /* получаем имя каталога в котором находимся*/ 
-            var lHref;
-            try{
-                lHref=lCurrentFile[0].parentElement.getElementsByClassName('path')[0].textContent;
-            }catch(error){console.log('error');}
-            
-            lHref=CloudFunc.removeLastSlash(lHref);
-            var lSubstr=lHref.substr(lHref,lHref.lastIndexOf('/'));
-            lHref=lHref.replace(lSubstr+'/','');
-                                     
-            /* загружаем содержимое каталога*/
-            CloudClient._ajaxLoad(pLink, pNeedRefresh);
-            
-            /* получаем все элементы выделенной папки*/
-            /* при этом, если мы нажали обновить
-             * или <Ctrl>+R - ссылок мы ненайдём
-             * и заходить не будем
-             */
-            var lA=this.getElementsByTagName('a');
-            /* если нажали на ссылку на верхний каталог*/
-            if(lA.length>0 && lA[0].textContent==='..' &&
-                lHref!=='/'){
-            /* функция устанавливает курсор на каталог
-             * с которого мы пришли, если мы поднялись
-             * в верх по файловой структуре
-             */
-                CloudClient._currentToParent(lHref);
-            }
-            
-            /* что бы не переходить по ссылкам
-             * а грузить всё ajax'ом,
-             * возвращаем false на событие
-             * onclick
-             */                         
-            return false;
-            };
-    });
-    
-/* Функция устанавливает текущим файлом, тот
- * на который кликнули единожды
- */
-CloudClient._setCurrent=(function(){
-        /*
-         * @pFromEnter - если мы сюда попали 
-         * из события нажатия на энтер - 
-         * вызоветься _loadDir
-         */
-        return function(pFromEnter){
-            var lCurrentFile=document.getElementsByClassName(CloudClient.CURRENT_FILE);
-            if(lCurrentFile && lCurrentFile.length > 0){
-                /* если мы находимся не на 
-                 * пути и не на заголовках
-                 */
-                if(this.className!=='path' && 
-                    this.className!=='fm_header'){
-                        
-                    lCurrentFile[0].className='';
-                    /* устанавливаем курсор на файл,
-                    * на который нажали */
-                    this.className=CloudClient.CURRENT_FILE;
-                }
-            }
-             /* если мы попали сюда с энтера*/
-             if(pFromEnter===true){
-                this.ondblclick(this);               
-             }/* если мы попали сюда от клика мышки */
-             else{pFromEnter.returnValue=false;}
-                                       
-            /* что бы не переходить по ссылкам
-             * а грузить всё ajax'ом,
-             * возвращаем false на событие
-             * onclick
-             */
-            return false;
-        };
-    });
-    
-/* функция устанавливает курсор на каталог
- * с которого мы пришли, если мы поднялись
- * в верх по файловой структуре
- * @pDirName - имя каталога с которого мы пришли
- */
-CloudClient._currentToParent = (function(pDirName){                                              
-    /* опредиляем в какой мы панели:
-    * правой или левой
-    */
-    var lCurrentFile=document.getElementsByClassName(CloudClient.CURRENT_FILE);
-    var lPanel;
-    try{
-        lPanel=lCurrentFile[0].parentElement.id;
-    }catch(error){console.log("Current file not found\n"+error);}
-    /* убираем слэш с имени каталога*/
-    pDirName=pDirName.replace('/','');
-    /* ищем файл с таким именем*/
-    lPanel=document.getElementById(lPanel);
-    if(!lPanel)return;
-    
-    var lLi=lPanel.getElementsByTagName('li');
-    
-    /* если длина названия папки больше
-     * CloudFunc.SHORTNAMELENGTH уменьшаем её
-     */                  
-    var pShortDirName = CloudFunc.getShortedName(pDirName);
-    for(var i=0;i<lLi.length;i++){
-        var lA=lLi[i].getElementsByTagName('a');
-        if(lA.length && lA[0].textContent === pShortDirName){
-            /* if name length is big
-             * then compare full names
-             */
-            if(pDirName.length > CloudFunc.SHORTNAMELENGTH &&
-                lA[0].title !== pDirName)
-                    continue;
-            /* если уже выделен какой-то файл, снимаем
-             * выделение
-             */
-            lCurrentFile=lPanel.getElementsByClassName(CloudClient.CURRENT_FILE);
-            if(lCurrentFile.length>0)lCurrentFile[0].className='';
-            
-            lLi[i].className=CloudClient.CURRENT_FILE;
-            
-            break;
-        }
-    }
-}); 
-  
-/* глобальные переменные */
-var LoadingImage;
-var ErrorImage;
-
-var CloudFunc, $;
-/* Конструктор CloudClient, который
- * выполняет весь функционал по
- * инициализации
- */
-CloudClient.init=(function()
-{    
-    /* меняем title 
-     * если js включен - имена папок отображать необязательно...
-     * а может и обязательно при переходе, можно будет это сделать
-     */
-    var lTitle=document.getElementsByTagName('title');
-    if(lTitle.length>0)lTitle[0].textContent='Cloud Commander';
-    
-    /* загружаем jquery: */
-    CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
-        onload: function(){
-            $ = window.jQuery;
-        },
-        
-        onerror: function(){
-            CloudClient.jsload('lib/client/jquery.js');
-            
-            /*
-             * if could not load jquery from google server
-             * maybe we offline, load font from local
-             * directory
-             */
-            CloudClient.cssSet({id:'local-droids-font',
-                element : document.head,
-                inner   :   '@font-face {font-family: "Droid Sans Mono";'           +
-                            'font-style: normal;font-weight: normal;'               +
-                            'src: local("Droid Sans Mono"), local("DroidSansMono"),'+
-                            ' url("font/DroidSansMono.woff") format("woff");}'
-            });                   
-        }
-    });
-    
-        /* загружаем общие функции для клиента и сервера*/
-        CloudClient.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
-            /* берём из обьекта window общий с сервером функционал */
-            CloudFunc=window.CloudFunc;
-            
-            /* меняем ссылки на ajax'овые*/
-            CloudClient._changeLinks(CloudFunc.LEFTPANEL);
-            CloudClient._changeLinks(CloudFunc.RIGHTPANEL);
-                    
-            /* устанавливаем переменную доступности кэша*/
-            CloudClient.Cache.isAllowed();    
-            /* Устанавливаем кэш корневого каталога */    
-            if(!CloudClient.Cache.get('/'))CloudClient.Cache.set('/',CloudClient._getJSONfromFileTable());  
-        }
-    );                
-    
-    LoadingImage=CloudClient._images.loading();
-    /* загружаем иконку загрузки возле кнопки обновления дерева каталогов*/        
-    try{
-        document.getElementsByClassName('path')[0].getElementsByTagName('a')[0].appendChild(LoadingImage);
-        LoadingImage.className+=' hidden'; /* прячем её */
-    }catch(error){console.log(error);}
-    ErrorImage=CloudClient._images.error();      
-    
-    /* устанавливаем размер высоты таблицы файлов
-     * исходя из размеров разрешения экрана
-     */ 
-                 
-    /* выделяем строку с первым файлом */
-    var lFmHeader=document.getElementsByClassName('fm_header');
-    if(lFmHeader && lFmHeader[0].nextSibling)
-        lFmHeader[0].nextSibling.className=CloudClient.CURRENT_FILE;
-    
-    /* показываем элементы, которые будут работать только, если есть js */
-    var lFM=document.getElementById('fm');
-    if(lFM)lFM.className='localstorage';
-    
-    /* если есть js - показываем правую панель*/
-    var lRight=document.getElementById('right');
-    if(lRight)lRight.className=lRight.className.replace('hidden','');
-    
-    /* формируем и округляем высоту экрана
-     * при разрешениии 1024x1280:
-     * 658 -> 700
-     */                            
-    
-    var lHeight=window.screen.height - (window.screen.height/3).toFixed();
-    lHeight=(lHeight/100).toFixed()*100;
-     
-    CloudClient.HEIGHT = lHeight;
-     
-    CloudClient.cssSet({id:'show_2panels',
-        element:document.head,
-        inner:'#left{width:46%;}' +
-            '.panel{height:' + lHeight +'px'
-    });       
-});
-
-/* функция меняет ссыки на ajax-овые */
-CloudClient._changeLinks = function(pPanelID)
-{
-    /* назначаем кнопку очистить кэш и показываем её*/
-    var lClearcache=document.getElementById('clear-cache');
-    if(lClearcache)lClearcache.onclick=CloudClient.Cache.clear;    
-    
-    /* меняем ссылки на ajax-запросы */
-    var lPanel=document.getElementById(pPanelID);
-    var a=lPanel.getElementsByTagName('a');
-    
-      /* Если нажмут на кнопку перезагрузить страниц - её нужно будет обязательно
-     * перезагрузить
-     */
-    /* номер ссылки очистки кэша*/
-    /* номер ссылки иконки обновления страницы */
-    var lREFRESHICON=0;
-        
-     /* путь в ссылке, который говорит
-      * что js отключен
-      */
-    var lNoJS_s = CloudFunc.NOJS; 
-    var lFS_s   = CloudFunc.FS;
-    
-    for(var i=0;i<a.length;i++)
-    {        
-        /* если ссылка на папку, а не файл */
-        if(a[i].target!=='_blank')
-        {
-            /* убираем адрес хоста*/
-                var link='/'+a[i].href.replace(document.location.href,'');
-            /* убираем значения, которые говорят,
-             * об отсутствии js
-             */
-         
-            if(link.indexOf(lNoJS_s)===lFS_s.length){
-                link=link.replace(lNoJS_s,'');
-            }            
-            /* ставим загрузку гифа на клик*/
-            if(i===lREFRESHICON)
-                a[i].onclick=CloudClient._loadDir(link,true);            
-            /* устанавливаем обработчики на строку на одинарное и
-             * двойное нажатие на левую кнопку мышки
-             */
-            else{
-                try{
-                    a[i].parentElement.parentElement.onclick=CloudClient._setCurrent();
-                    a[i].parentElement.parentElement.ondblclick=CloudClient._loadDir(link);
-                }catch(error){console.log(error);}
-            }
-        }
-    }
-};
-
-/*
- * Функция загружает json-данные о Файловой Системе
- * через ajax-запрос.
- * @path - каталог для чтения
- * @pNeedRefresh - необходимость обновить данные о каталоге
- */
-CloudClient._ajaxLoad=function(path, pNeedRefresh)
-{                                   
-        /* Отображаем красивые пути */
-        /* added supporting of russian  language */
-        var lPath=decodeURI(path);
-        var lFS_s=CloudFunc.FS;
-        if(lPath.indexOf(lFS_s)===0){
-            lPath=lPath.replace(lFS_s,'');
-            if(lPath==='')lPath='/';
-        }
-        console.log ('reading dir: "'+lPath+'";');
-        
-         /* если доступен localStorage и
-         * в нём есть нужная нам директория -
-         * читаем данные с него и
-         * выходим
-         * если стоит поле обязательной перезагрузки - 
-         * перезагружаемся
-         */
-         
-         /* опредиляем в какой мы панели:
-          * правой или левой
-          */
-         var lPanel;
-         try{
-            lPanel=document.getElementsByClassName(CloudClient.CURRENT_FILE)[0].parentElement.id;
-         }catch(error){console.log("Current file not found\n"+error);}
-         
-        if(pNeedRefresh===undefined && lPanel){
-            var lJSON=CloudClient.Cache.get(lPath);
-            if (lJSON!==null){
-                /* переводим из текста в JSON */
-                if(window && !window.JSON){
+                if(event.keyCode===9){
+                    console.log('Tab pressed');
                     try{
-                        lJSON=eval('('+lJSON+')');
-                    }catch(err){
-                        console.log(err);
-                    }
-                }else lJSON=JSON.parse(lJSON);
-                CloudClient._createFileTable(lPanel,lJSON);
-                CloudClient._changeLinks(lPanel);
-                return;
-            }
-        }
-        
-        /* ######################## */
-        try{
-            $.ajax({
-                url: path,
-                error: function(jqXHR, textStatus, errorThrown){
-                    console.log(textStatus+' : '+errorThrown);
-                    var lLoading=document.getElementById('loading-image');
-                    ErrorImage.className='icon error';
-                    ErrorImage.title=errorThrown;
-                    lLoading.parentElement.appendChild(ErrorImage);
-                    lLoading.className='hidden';
-                    //document.getElementsByClassName('path')[0].appendChild(ErrorImage);
-                                        
-                },
-                success:function(data, textStatus, jqXHR){                                            
-                    /* если такой папки (или файла) нет
-                     * прячем загрузку и показываем ошибку
+                        lCurrentFile=document.getElementsByClassName(CloudCommander.CURRENT_FILE)[0];
+                    }catch(error){console.log(error);}
+                }                
+                /* навигация по таблице файлов*/
+                /* если нажали клавишу вверх*/
+                else if(event.keyCode===38){
+                    /* получаем выдленный файл*/
+                    lCurrentFile=document.getElementsByClassName(CloudCommander.CURRENT_FILE);
+                    /* если ненайдены выделенные файлы - выходим*/
+                    if(lCurrentFile.length===0)return;
+                    lCurrentFile=lCurrentFile[0];
+                    /* если это строка существет и
+                     * если она не заголовок
+                     * файловой таблицы
                      */
-                    /* для совместимости с firefox меняем data
-                     * на jqXHR, он воспринимает data к Document
-                     * когда возвращаеться ошибка, о том, что
-                     * нет файла или нет доступа
+                    if(lCurrentFile.previousSibling && 
+                       lCurrentFile.previousSibling.className!=='fm_header' ){
+                        /* убираем выделение с текущего элемента */
+                        lCurrentFile.className='';
+                        /* и выделяем предыдущую строку*/
+                        lCurrentFile.previousSibling.className = CloudCommander.CURRENT_FILE;
+                        
+                        /* if we on the top of
+                         * the screan then 
+                         * moving down the scroolbar
+                         */
+                        lTop = lCurrentFile.previousSibling.offsetTop;
+                        console.log(lTop);
+                        lTop % 
+                            (CloudCommander.HEIGHT - 
+                                CloudCommander.HEIGHT/10) < 70 &&
+                            lCurrentFile.parentElement.scrollByLines(-2);
+                        
+                        event.preventDefault();
+                    }
+                }
+                /* если нажали клавишу в низ*/
+                else if(event.keyCode===40){
+                    /* получаем выдленный файл*/
+                    lCurrentFile=document.getElementsByClassName(CloudCommander.CURRENT_FILE);                
+                    /* если ненайдены выделенные файлы - выходим*/
+                    if(lCurrentFile.length===0)return;
+                    lCurrentFile=lCurrentFile[0];
+                    /* если это не последняя строка */
+                    if(lCurrentFile.nextSibling){
+                        /* убираем с него выделение */
+                        lCurrentFile.className='';
+                        /* выделяем следующую строку*/
+                        lCurrentFile.nextSibling.className = CloudCommander.CURRENT_FILE;
+                        
+                        /* if we on the bottom of
+                         * the screan then 
+                         * moving down the scroolbar
+                         */
+                        lTop = lCurrentFile.previousSibling.offsetTop;
+                        var lHeight = CloudCommander.HEIGHT;
+                        var lMod    = lTop % (lHeight - lHeight/10) < 70;
+                        lTop > (lHeight/10) &&
+                                 lMod < 70 && lMod > 50 &&
+                            console.log(lCurrentFile
+                                .parentElement
+                                    .scrollByLines(2) || '!');
+                        
+                        event.preventDefault();
+                    }
+                }
+                /* если нажали клавишу page up или Home
+                 * переходим к самому верхнему
+                 * элементу
+                 */
+                else if(/*event.keyCode===33 ||*/ event.keyCode===36){
+                        lCurrentFile=document.getElementsByClassName(CloudCommander.CURRENT_FILE)[0];
+                        /* убираем выделение с текущего файла*/
+                        lCurrentFile.className='';
+                        /* получаем первый элемент*/
+                        lCurrentFile.parentElement.firstElementChild
+                        /* пропускаем путь и заголовки столбиков*/
+                            .nextElementSibling.nextElementSibling
+                            /* выделяем верхий файл */
+                            .className=CloudCommander.CURRENT_FILE;
+                }
+                /* если нажали клавишу page down или End
+                 * выделяем последний элемент
+                 */
+                else if(/*event.keyCode===34 ||*/ event.keyCode===35){
+                        lCurrentFile=document.getElementsByClassName(CloudCommander.CURRENT_FILE)[0];
+                        /* снимаем выделение с текущего файла*/
+                        lCurrentFile.className='';
+                        /* выделяем самый нижний файл */
+                        lCurrentFile.parentElement.lastElementChild.className=CloudCommander.CURRENT_FILE;
+                }
+                /* если нажали Enter - открываем папку*/
+                else if(event.keyCode===13){
+                    lCurrentFile=document.getElementsByClassName(CloudCommander.CURRENT_FILE);
+                    /* если ненайдены выделенные файлы - выходим*/
+                    if(!lCurrentFile.length)return;
+                    lCurrentFile=lCurrentFile[0];
+                    /* из него достаём спан с именем файла*/
+                    lName=lCurrentFile.getElementsByClassName('name');
+                    /* если нету (что вряд ли) - выходим*/
+                    if(!lName)return false;
+                    /* достаём все ссылки*/
+                    var lATag=lName[0].getElementsByTagName('a');
+                    /* если нету - выходим */
+                    if(!lATag)return false;
+                    
+                    /* вызываем ajaxload привязанный через changelinks
+                     * пробулем нажать на ссылку, если не получиться
+                     * (opera, ie), вызываем событие onclick,
+                     * которое пока не прописано у файлов
                      */
                      
-                     var lLoading;
-                    if(!jqXHR.responseText.indexOf('Error:')){
-                        /* если файла не существует*/
-                        if(!jqXHR.responseText.indexOf('Error: ENOENT, ')){
-                            ErrorImage.title = jqXHR.responseText.replace('Error: ENOENT, n','N');
-                        }
-                        /* если не хватает прав для чтения файла*/
-                        else if(!jqXHR.responseText.indexOf('Error: EACCES,')){
-                            ErrorImage.title = jqXHR.responseText.replace('Error: EACCES, p','P');
-                        } else
-                            ErrorImage.title        = jqXHR.responseText;
-                            ErrorImage.className    ='icon error';                                
-                            lLoading                = document.getElementById('loading-image');
-                            lLoading.parentElement.appendChild(ErrorImage);
-                            lLoading.className      = 'hidden';
-                            
-                            return;
-                    }                        
-                    CloudClient._createFileTable(lPanel,data);
-                    CloudClient._changeLinks(lPanel);
-                                                                
-                    /* Сохраняем структуру каталогов в localStorage,
-                     * если он поддерживаеться браузером
-                     */
-                    /* переводим таблицу файлов в строку, для
-                    * сохранения в localStorage
-                    */
-                    var lJSON_s=JSON.stringify(data);
-                    console.log(lJSON_s.length);
-                    
-                    /* если размер данных не очень бошьой
-                    * сохраняем их в кэше
-                    */
-                    if(lJSON_s.length<50000)
-                        CloudClient.Cache.set(lPath,lJSON_s);                        
+                     if(lCurrentFile.onclick)lCurrentFile.onclick(true);
+                     else try{
+                         lATag[0].click();                                                
+                     }
+                     catch(error){
+                         console.log(error);
+                     }
                 }
-            });
-        }catch(err){console.log(err);}
-};
-
-/*
- * Функция строит файловую таблицу
- * @pEleme - родительский элемент
- * @pJSON  - данные о файлах
- */
-CloudClient._createFileTable = function(pElem,pJSON)
-{    
-    var lElem=document.getElementById(pElem);
-    /* говорим построителю,
-     * что бы он в нужный момент
-     * выделил строку с первым файлом
-     */
+                /* если нажали <ctr>+r
+                 * обновляем страницу,
+                 * загружаем содержимое каталога
+                 * при этом данные берём всегда с
+                 * сервера, а не из кэша
+                 * (обновляем кэш)
+                 */
+                else if(event.keyCode===82 &&
+                    event.ctrlKey){
+                    console.log('<ctrl>+r pressed');
+                    console.log('reloading page...');
+                    console.log('press <alt>+q to remove all key-handlers');                                    
+                    /* Программно нажимаем на кнопку перезагрузки 
+                     * содержимого каталога
+                     */
+                    var lRefreshIcon=document.getElementsByClassName(CloudFunc.REFRESHICON);
+                    if(lRefreshIcon)lRefreshIcon=lRefreshIcon[0];
+                    if(lRefreshIcon){
+                        /* находим файл который сейчас выделен */
+                         lCurrentFile=document.getElementsByClassName(CloudCommander.CURRENT_FILE);
+                         if(lCurrentFile.length>0)lCurrentFile=lCurrentFile[0];
+                         /* получаем название файла*/
+                         var lSelectedName=lCurrentFile.getElementsByTagName('a')[0].textContent;
+                         /* если нашли элемент нажимаем него
+                          * а если не можем - нажимаем на 
+                          * ссылку, на которую повешен eventHandler
+                          * onclick
+                          */
+                        if(lRefreshIcon.click)lRefreshIcon.parentElement.click();
+                        else lRefreshIcon.parentElement.onclick();
+                        
+                        /* перебираем файлы левой панели
+                         * в поисках подсвеченого файла
+                         */
+                        var lLeft=document.getElementById('left');
+                        if(lLeft){
+                            /* перебираем все файлы в панели */
+                            var lLi=lLeft.getElementsByTagName('li');
+                            lCurrentFile.className='';
+                            /* начинаем с 2-ух, по скольку
+                             * 0 - это путь
+                             * 1 - это заголовок файловой таблицы
+                             */
+                            for(var i=2;i<lLi.length;i++){
+                                lName=lLi[i].getElementsByTagName('a')[0].textContent;
+                                if(lSelectedName.length===lName.length &&
+                                    !lSelectedName.indexOf(lName)){
+                                        lLi[i].className=CloudCommander.CURRENT_FILE;
+                                        break;
+                                }
+                            }                            
+                        }
+                                    
+                        event.preventDefault();//запрет на дальнейшее действие
+                    }
+                }
+                /* если нажали <ctrl>+d чистим кэш */
+                else if(event.keyCode===68 &&
+                    event.ctrlKey){
+                        console.log('<ctrl>+d pressed');
+                        console.log('clearing cache...');
+                        console.log('press <alt>+q to remove all key-handlers');
     
-    /* очищаем панель */
-    var i = lElem.childNodes.length;
-    while(i--){
-        lElem.removeChild(lElem.lastChild);
-    }
-    
-    /* заполняем панель новыми элементами */    
-    lElem.innerHTML=CloudFunc.buildFromJSON(pJSON,true);
-};
-
-/* 
- * Функция создаёт элемент и
- * загружает файл с src.
- * @pName       - название тэга
- * @pSrc        - путь к файлу
- * @pFunc       - обьект, содержаий одну из функций
- *                  или сразу две onload и onerror
- *                  {onload: function(){}, onerror: function();}
- * @pStyle      - стиль
- * @pId         - id
- * @pElement    - элемент, дочерним которо будет этот
- * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', element: ''}
- */
-//CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
-CloudClient._anyload = function(pParams_o)
-{         
-    /* убираем путь к файлу, оставляя только название файла */
-    var lID = pParams_o.id;    
-    var lSrc = pParams_o.src;
-    var lFunc = pParams_o.func;
-    
-    if(!lID){        
-        lID=lSrc.replace(lSrc.substr(lSrc,
-            lSrc.lastIndexOf('/')+1),
-            '');
-        /* убираем точку*/
-        lID=lID.replace('.','_');
-    }
-    /* если скрипт еще не загружен */
-    if(!document.getElementById(lID))
-    {
-        var element = document.createElement(pParams_o.name);
-        /* if working with external css
-         * using href in any other case
-         * using src
-         */
-        pParams_o.name === 'link' ? 
-              element.href = lSrc
-            : element.src  = lSrc;
-        element.id=lID;
-        
-
-        /* if passed arguments function
-         * then it's onload by default
-         */        
-        if(pParams_o.func)
-            if(typeof lFunc === 'function'){
-                element.onload = lFunc;
-            /* if object - then onload or onerror */
-            }else if (typeof lFunc === 'object') {
-                if(lFunc.onload)element.onload   = lFunc.onload;
-                if(lFunc.onerror)element.onerror = lFunc.onerror;
+                        var lClearCache=document.getElementById('clear-cache');
+                        if(lClearCache && lClearCache.onclick)lClearCache.onclick();
+                        
+                        event.preventDefault();//запрет на дальнейшее действие
+                }
+                /* если нажали <alt>+q 
+                 * убираем все обработчики
+                 * нажатий клавиш
+                 */             
+                else if(event.keyCode===81 &&
+                    event.altKey){
+                        //document.removeEventListener('keydown', key_event,false);
+                        console.log('<alt>+q pressed');
+                        console.log('<ctrl>+r reload key-handerl - removed');
+                        console.log('<ctrl>+s clear cache key-handler - removed');
+                        console.log('press <alt>+s to to set them');
+                        
+                        /* обработчик нажатий клавиш снят*/
+                        CloudCommander.keyBinded=false;
+                }
             }
-        
-        if(pParams_o.style){
-            element.style.cssText=pParams_o.style;
-        }
-
-        (pParams_o.element || document.body).appendChild(element);
-        
-        return element;
-    }
-    /* если js-файл уже загружен 
-     * запускаем функцию onload
-     */
-    else if(lFunc && typeof lFunc==='function'){
-        try{
-            lFunc();
-        }catch(error){console.log(error);}
-    }
-}
-
-/* Функция загружает js-файл */
-CloudClient.jsload = function(pSrc,pFunc,pStyle,pId)
-{
-    CloudClient._anyload({
-        name : 'script',
-        src  : pSrc,
-        func : pFunc,
-        stle : pStyle,
-        id   : pId        
-    });
-};
-/* Функция создаёт елемент style и записывает туда стили 
- * @pParams_o - структура параметров, заполняеться таким
- * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
- * все параметры опциональны
- */
-CloudClient.cssSet = function(pParams_o){
-    pParams_o.name      = 'style';
-    pParams_o.element   = pParams_o.element || document.head;
-    var lElem=CloudClient._anyload(pParams_o);
-    
-    pParams_o.inner &&
-        (lElem.innerHTML = pParams_o.inner);
-};
-/* Function loads external css files 
- * @pParams_o - структура параметров, заполняеться таким
- * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
- * все параметры опциональны
- */
-CloudClient.cssLoad = function(pParams_o){
-    pParams_o.name      = 'link';
-    pParams_o.element   = pParams_o.element || document.head;
-    var lElem=CloudClient._anyload(pParams_o);
-        
-    lElem.rel = "stylesheet";
-    
-    pParams_o.inner &&
-        (lElem.innerHTML = pParams_o.inner);
-};
-
-
-
-/* 
- * Функция генерирует JSON из html-таблицы файлов и
- * используеться при первом заходе в корень
- */
-CloudClient._getJSONfromFileTable=function()
-{
-    var lLeft=document.getElementById('left');    
-    var lPath=document.getElementsByClassName('path')[0].textContent;
-    var lFileTable=[{path:lPath,size:'dir'}];
-    var lLI=lLeft.getElementsByTagName('li');
-    
-    var j=1;/* счётчик реальных файлов */
-    var i=1;/* счётчик элементов файлов в DOM */
-    /* Если путь отличный от корневного
-     * второй элемент li - это ссылка на верхний
-     * каталог '..'
-     */
-    i=2; /* пропускам Path и Header*/
-
-    
-    for(;i<lLI.length;i++)
-    {
-        var lIsDir=lLI[i].getElementsByClassName('mini-icon')[0]
-        .className.replace('mini-icon ','')==='directory'?true:false;
-        
-        var lName=lLI[i].getElementsByClassName('name')[0];        
-        lName &&
-            (lName = lName.getElementsByTagName('a'));
-        /* if found link to folder 
-         * cheking is it a full name
-         * or short
-         */
-         /* if short we got title 
-         * if full - getting textConent
-         */
-        lName.length &&
-            (lName = lName[0]);
-        lName.title &&
-            (lName = lName.title) ||
-            (lName = lName.textContent);        
+            /* если нажали <alt>+s 
+             * устанавливаем все обработчики
+             * нажатий клавиш
+             */             
+            else if(event.keyCode===83 &&
+                event.altKey){
+                    /*
+                        document.addEventListener('keydown', key_event,false);
+                    */
+                    /* обрабатываем нажатия на клавиши*/
+                    CloudCommander.keyBinded=true;
+                    
+                    console.log('<alt>+s pressed');
+                    console.log('<ctrl>+r reload key-handerl - set');
+                    console.log('<ctrl>+s clear cache key-handler - set');
+                    console.log('press <alt>+q to remove them');
+            }            
             
-        /* если это папка - выводим слово dir вместо размера*/
-        var lSize=lIsDir?'dir':lLI[i].getElementsByClassName('size')[0].textContent;
-        var lMode=lLI[i].getElementsByClassName('mode')[0].textContent;
-        /* переводим права доступа в цыфровой вид
-         * для хранения в localStorage
-         */
-        lMode=CloudFunc.convertPermissionsToNumberic(lMode);
-        
-        lFileTable[j++]={
-            name:lName,
-            size:lSize,
-            mode:lMode
-        };
-    }
-    return JSON.stringify(lFileTable);
-};
-
-
-   /* если нет функции поиска по класам,
-     * а её нет в IE,
-     * - используем jquery
-     * при необходимости
-     * можна заменить на любой другой код
-     */ 
- if(!document.getElementsByClassName){
-     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
-         onload: function(){
-            /* сохраняем переменную jQuery себе в область видимости */
-            document.getElementsByClassName=function(pClassName){
-                return window.jQuery('.'+pClassName)[0];
-            };
-         },
-        onerror: function(){
-            CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
-                function(){
-                   document.getElementsByClassName=function(pClassName){
-                        return window.jQuery('.'+pClassName)[0];
-                    };
-                });
-        }
-    });
-}
-
-return CloudClient;
-})();
-
-try{
-    window.onload=function(){
-        'use strict';        
-        /* базовая инициализация*/
-        CloudCommander.init();
-        /* привязываем клавиши к функциям */
-        CloudCommander.keyBinding();
-        CloudCommander.Editor();
+         return false;
     };
-}
-catch(err){}
+    /* добавляем обработчик клавишь */
+    if(document.addEventListener)
+        document.addEventListener('keydown', key_event,false);
+    else document.onkeypress=key_event;
+    /* клавиши назначены*/
+    CloudCommander.keyBinded=true;
+});
