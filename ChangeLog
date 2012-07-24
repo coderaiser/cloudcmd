@@ -12,6 +12,8 @@ up on folders, current file would be last.
 * Fixed bug with links and titles with spaces in Path of
 current directory.
 
+* Added ability to send 404 response if file not found.
+
 
 2012.07.19, Version 0.1.3
 
