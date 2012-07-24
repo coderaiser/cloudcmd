@@ -292,7 +292,7 @@ CloudServer._controller=function(pReq, pRes)
             lName='.'+pathname;
             console.log('reading '+lName);
             
-            /* сохраняем указатель на responce и имя */
+            /* сохраняем указатель на response и имя */
             CloudServer.Responses[lName]=pRes;
             
             /* saving status OK for current file */
@@ -565,7 +565,7 @@ CloudServer._readDir=function (pError, pFiles)
     else
     {
         console.log(pError);
-        CloudServer.sendResponse('OK',pError.toString());
+        CloudServer.sendResponse('OK',pError.toString(), DirPath);
     }
 };
 
