@@ -378,6 +378,10 @@ CloudServer._controller=function(pReq, pRes)
                         
             DirPath  = pathname;
             
+            CloudServer.Responses[DirPath] = pRes;
+            
+            CloudServer.Statuses[DirPath]  = 200;
+            
             /* Проверяем с папкой ли мы имеем дело */
             
             /* читаем сновные данные о файле */
@@ -386,9 +390,7 @@ CloudServer._controller=function(pReq, pRes)
                 lStat=Fs.statSync(DirPath);
             }catch(error){
                 console.log(error);
-                
-                CloudServer.Responses[DirPath] = pRes;
-                
+                                
                 CloudServer.Statuses[DirPath]  = 404;
                 
                 CloudServer.sendResponse('OK',error.toString(),DirPath);
@@ -411,11 +413,13 @@ CloudServer._controller=function(pReq, pRes)
                 CloudServer.Responses[CloudServer.INDEX]=pRes;
                 CloudServer.Statuses[CloudServer.INDEX]  = 200;
                  
-                if(lStat.isDirectory())
+                if(lStat.isDirectory()){
                     Fs.readdir(DirPath,CloudServer._readDir);
+                    
+                }
                 /* отдаём файл */
                 else if(lStat.isFile()){
-                    CloudServer.Responses[DirPath]=pRes;
+                    
                     Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
                     console.log('reading file: '+DirPath);
                 }
@@ -565,7 +569,8 @@ CloudServer._readDir=function (pError, pFiles)
     else
     {
         console.log(pError);
-        CloudServer.sendResponse('OK',pError.toString(), DirPath);
+        CloudServer.sendResponse('OK',pError.toString(), 
+            CloudFunc.FS + DirPath);
     }
 };
 
@@ -666,7 +671,7 @@ CloudServer.sendResponse = function(pHead, pData,pName){
      */
     var lResponse   = CloudServer.Responses[pName];
     var lStatus     = CloudServer.Statuses[pName];
-
+    console.log(pName +' '+ lResponse);
     if(lResponse){
         lResponse.writeHead(
             lStatus,
