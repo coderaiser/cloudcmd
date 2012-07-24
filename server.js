@@ -44,7 +44,7 @@ var CloudServer = {
      * работы с ответами сервера
      * высылаемыми на запрос о файле и
      * хранащий информацию в виде
-     * Responces[name]=responce;
+     * Responses[name]=responce;
      */
     Responses       : {},
     
@@ -296,7 +296,7 @@ CloudServer._controller=function(pReq, pRes)
             CloudServer.Responses[lName]=pRes;
             
             /* saving status OK for current file */
-            CloudServer.Statuses[lName]=200;
+            CloudServer.Statuses[lName] = 200;
             
             /* Берём значение из кэша
              * сжатый файл - если gzip-поддерживаеться браузером
@@ -386,7 +386,11 @@ CloudServer._controller=function(pReq, pRes)
                 lStat=Fs.statSync(DirPath);
             }catch(error){
                 console.log(error);
-                CloudServer.Responses[DirPath]=pRes;
+                
+                CloudServer.Responses[DirPath] = pRes;
+                
+                CloudServer.Statuses[DirPath]  = 404;
+                
                 CloudServer.sendResponse('OK',error.toString(),DirPath);
             }
             /* если это каталог - 
@@ -402,9 +406,11 @@ CloudServer._controller=function(pReq, pRes)
                     :CloudServer.INDEX);
                 /*
                  * сохраним указатель на response
+                 * и на статус ответа
                  */            
                 CloudServer.Responses[CloudServer.INDEX]=pRes;
-                
+                CloudServer.Statuses[CloudServer.INDEX]  = 200;
+                 
                 if(lStat.isDirectory())
                     Fs.readdir(DirPath,CloudServer._readDir);
                 /* отдаём файл */
@@ -660,6 +666,7 @@ CloudServer.sendResponse = function(pHead, pData,pName){
      */
     var lResponse   = CloudServer.Responses[pName];
     var lStatus     = CloudServer.Statuses[pName];
+
     if(lResponse){
         lResponse.writeHead(
             lStatus,
