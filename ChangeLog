@@ -14,6 +14,7 @@ current directory.
 
 * Added ability to send 404 response if file not found.
 
+* Fixed bug which occurs when error reading directory happens.
 
 2012.07.19, Version 0.1.3
 
