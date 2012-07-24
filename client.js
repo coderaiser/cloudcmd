@@ -429,9 +429,9 @@ CloudClient._changeLinks = function(pPanelID)
     var lFS_s   = CloudFunc.FS;
     
     for(var i=0;i<a.length;i++)
-    {        
+    {                
         /* если ссылка на папку, а не файл */
-        if(a[i].target!=='_blank')
+        if(a[i].target !== '_blank')
         {
             /* убираем адрес хоста*/
                 var link='/'+a[i].href.replace(document.location.href,'');
@@ -450,11 +450,15 @@ CloudClient._changeLinks = function(pPanelID)
              */
             else{
                 try{
-                    a[i].parentElement.parentElement.onclick=CloudClient._setCurrent();
-                    a[i].parentElement.parentElement.ondblclick=CloudClient._loadDir(link);
+                    var lLi = a[i].parentElement.parentElement;
+                    
+                    lLi.onclick     = CloudClient._setCurrent();
+                    lLi.ondblclick  = CloudClient._loadDir(link);
+                    lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
+                        '_' + pPanelID;
                 }catch(error){console.log(error);}
             }
-        }
+        }        
     }
 };
 
