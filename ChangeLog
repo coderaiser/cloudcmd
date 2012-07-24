@@ -21,6 +21,10 @@ why error occurred.
 
 * Seted up default cursor on file attributes.
 
+* _currentToParent refactored, no more cicles again. Changed
+the way of searching of current root directory, now it shoud
+be more faster, DOM, short, simple and logical.
+
 
 2012.07.19, Version 0.1.3
 
