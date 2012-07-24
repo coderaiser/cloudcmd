@@ -48,6 +48,15 @@ var CloudServer = {
      */
     Responses       : {},
     
+    /*
+     * Асоциативный масив статусов
+     * ответов сервера
+     * высылаемыми на запрос о файле и
+     * хранащий информацию в виде
+     * Statuses[name] = 404;
+     */
+    Statuses        : {},
+    
     /* ПЕРЕМЕННЫЕ 
      * Поддержка браузером JS */
     NoJS            : true,
@@ -282,8 +291,12 @@ CloudServer._controller=function(pReq, pRes)
             /* добавляем текующий каталог к пути */
             lName='.'+pathname;
             console.log('reading '+lName);
+            
             /* сохраняем указатель на responce и имя */
             CloudServer.Responses[lName]=pRes;
+            
+            /* saving status OK for current file */
+            CloudServer.Statuses[lName]=200;
             
             /* Берём значение из кэша
              * сжатый файл - если gzip-поддерживаеться браузером
@@ -550,7 +563,7 @@ CloudServer._readDir=function (pError, pFiles)
     }
 };
 
-/* Функция генерирует функция считывания файла
+/* Функция генерирует функцию считывания файла
  * таким образом, что бы у нас было 
  * имя считываемого файла
  * @pName - полное имя файла
@@ -597,7 +610,11 @@ CloudServer.getReadFileFunc = function(pName){
             if(pError.path!=='passwd.json')
             {
                 console.log(pError);
-                CloudServer.sendResponse('OK',pError.toString(),pName);
+                
+                /* sending page not found */
+                CloudServer.Statuses[pName] = 404;
+                
+                CloudServer.sendResponse('file not found',pError.toString(),pName);
             }else{
                 CloudServer.sendResponse('OK','passwd.json');
             }            
@@ -641,10 +658,15 @@ CloudServer.sendResponse = function(pHead, pData,pName){
      * для соответствующего файла - 
      * высылаем его
      */
-    var lResponse=CloudServer.Responses[pName];
+    var lResponse   = CloudServer.Responses[pName];
+    var lStatus     = CloudServer.Statuses[pName];
     if(lResponse){
-        lResponse.writeHead(200,pHead);
+        lResponse.writeHead(
+            lStatus,
+            pHead);
+            
         lResponse.end(pData);
+        
         console.log(pName+' sended');
     }
 };
