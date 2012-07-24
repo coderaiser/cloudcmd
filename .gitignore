@@ -18,16 +18,6 @@ node_modules
 #node_modules/*
 #!node_modules/minify
 
-
-#cloudfoundry info files
-cloudcmd.manifest.yml
-cloudcmddemo.manifest.yml
-demo-cloudcmd.manifest.yml
-cdn-cloudcmd.manifest.yml
-
-#hide travis yml for nodejitsu working out
-#.travis.yml
-
 #temporary files folder
 tmp
 
@@ -42,6 +32,3 @@ log.txt
 
 #hashes file
 hashes.json
-
-#hiding git modules for travis work out
-.gitignore
