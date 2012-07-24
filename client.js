@@ -530,16 +530,17 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                     if(!jqXHR.responseText.indexOf('Error:')){
                         /* если файла не существует*/
                         if(!jqXHR.responseText.indexOf('Error: ENOENT, ')){
-                            ErrorImage.title=jqXHR.responseText.replace('Error: ENOENT, n','N');
+                            ErrorImage.title = jqXHR.responseText.replace('Error: ENOENT, n','N');
                         }
                         /* если не хватает прав для чтения файла*/
                         else if(!jqXHR.responseText.indexOf('Error: EACCES,')){
-                            ErrorImage.title=jqXHR.responseText.replace('Error: EACCES, p','P');
-                        }
-                            ErrorImage.className='icon error';                                
-                            lLoading=document.getElementById('loading-image');
+                            ErrorImage.title = jqXHR.responseText.replace('Error: EACCES, p','P');
+                        } else
+                            ErrorImage.title        = jqXHR.responseText;
+                            ErrorImage.className    ='icon error';                                
+                            lLoading                = document.getElementById('loading-image');
                             lLoading.parentElement.appendChild(ErrorImage);
-                            lLoading.className='hidden';
+                            lLoading.className      = 'hidden';
                             
                             return;
                     }                        
