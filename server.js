@@ -86,13 +86,13 @@ try {
  /* добавляем  модуль с функциями */
 var CloudFunc;
 try {
-    CloudFunc       = require(CloudServer.LIBDIR         +
+    CloudFunc           = require(CloudServer.LIBDIR        +
                             '/cloudfunc');
                             
-    CloudServer.Cache   = require(CloudServer.LIBDIRSERVER +
+    CloudServer.Cache   = require(CloudServer.LIBDIRSERVER  +
                             '/object').Cache;
                             
-    CloudServer.Minify  = require(CloudServer.LIBDIRSERVER +
+    CloudServer.Minify  = require(CloudServer.LIBDIRSERVER  +
                             '/object').Minify;
 }catch(pError){
     console.log('could not found one of Cloud Commander SS files');
