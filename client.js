@@ -665,7 +665,12 @@ CloudClient._anyload = function(pParams_o)
 /* Функция загружает js-файл */
 CloudClient.jsload = function(pSrc,pFunc,pStyle,pId)
 {
-    CloudClient._anyload('script',pSrc,pFunc,pStyle,pId,document.body);
+    CloudClient._anyload({
+        name : 'script',
+        src  : pSrc,
+        func : pFunc,
+        stle : pStyle,
+        id   : pId);
 };
 /* Функция создаёт елемент style и записывает туда стили 
  * @pParams_o - структура параметров, заполняеться таким
