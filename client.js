@@ -239,7 +239,6 @@ CloudClient._setCurrent=(function(){
                     /* устанавливаем курсор на файл,
                     * на который нажали */
                     this.className=CloudClient.CURRENT_FILE;
-                    console.log(this.offset);
                 }
             }
              /* если мы попали сюда с энтера*/
