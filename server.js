@@ -671,7 +671,7 @@ CloudServer.sendResponse = function(pHead, pData,pName){
      */
     var lResponse   = CloudServer.Responses[pName];
     var lStatus     = CloudServer.Statuses[pName];
-    console.log(pName +' '+ lResponse);
+    
     if(lResponse){
         lResponse.writeHead(
             lStatus,
