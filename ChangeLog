@@ -19,6 +19,8 @@ current directory.
 * Fixed bug: ErrorImage.title writes always for now, no matter
 why error occurred.
 
+* Seted up default cursor on file attributes.
+
 
 2012.07.19, Version 0.1.3
 
