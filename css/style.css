@@ -193,7 +193,13 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
   width: 25%;
 }
 
-ul,li{list-style-type:none;}
+ul,li{
+    /* making cursor just arrow, 
+     * not text editing cursor
+     */
+    cursor:default;
+    list-style-type:none;
+}
 button{
   width:10%;
 }
