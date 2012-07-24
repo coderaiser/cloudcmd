@@ -48,7 +48,7 @@ var CloudClient={
  * Обьект для работы с кэшем
  * в него будут включены функции для
  * работы с LocalStorage, webdb,
- * idexed db etc.
+ * indexed db etc.
  */
 CloudClient.Cache={
     _allowed     :true,     /* приватный переключатель возможности работы с кэшем */
@@ -304,7 +304,7 @@ CloudClient._currentToParent = (function(pDirName){
 var LoadingImage;
 var ErrorImage;
 
-var CloudFunc;
+var CloudFunc, $;
 /* Конструктор CloudClient, который
  * выполняет весь функционал по
  * инициализации
@@ -320,9 +320,18 @@ CloudClient.init=(function()
     
     /* загружаем jquery: */
     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+        onload: function(){
+            $ = window.jQuery;
+        },
+        
         onerror: function(){
             CloudClient.jsload('lib/client/jquery.js');
             
+            /*
+             * if could not load jquery from google server
+             * maybe we offline, load font from local
+             * directory
+             */
             CloudClient.cssSet({id:'local-droids-font',
                 element : document.head,
                 inner   :   '@font-face {font-family: "Droid Sans Mono";'           +
@@ -404,7 +413,6 @@ CloudClient._changeLinks = function(pPanelID)
      * перезагрузить
      */
     /* номер ссылки очистки кэша*/
-    //var lCLEARICON=0;
     /* номер ссылки иконки обновления страницы */
     var lREFRESHICON=0;
         
@@ -415,10 +423,7 @@ CloudClient._changeLinks = function(pPanelID)
     var lFS_s   = CloudFunc.FS;
     
     for(var i=0;i<a.length;i++)
-    {
-        //if(i===2){/*ставим рамку на первый с верху файл*/
-        //       a[i].parentElement.parentElement.className='current-file';
-        //    }
+    {        
         /* если ссылка на папку, а не файл */
         if(a[i].target!=='_blank')
         {
@@ -433,11 +438,7 @@ CloudClient._changeLinks = function(pPanelID)
             }            
             /* ставим загрузку гифа на клик*/
             if(i===lREFRESHICON)
-                a[i].onclick=CloudClient._loadDir(link,true);
-            /* если мы попали на кнопку обновления структуры каталогов */
-            /*
-                if(a[i].className && a[i].className===CloudFunc.REFRESHICON)
-            */
+                a[i].onclick=CloudClient._loadDir(link,true);            
             /* устанавливаем обработчики на строку на одинарное и
              * двойное нажатие на левую кнопку мышки
              */
@@ -644,7 +645,7 @@ CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
     /* если js-файл уже загружен 
      * запускаем функцию onload
      */
-    else if(pFunc){
+    else if(pFunc && typeof pFunc==='function'){
         try{
             pFunc();
         }catch(error){console.log(error);}
@@ -780,7 +781,8 @@ CloudClient._getJSONfromFileTable=function()
 }
 
 return CloudClient;
-})();//(this,this.document);
+})();
+
 try{
     window.onload=function(){
         'use strict';        
