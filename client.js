@@ -670,7 +670,8 @@ CloudClient.jsload = function(pSrc,pFunc,pStyle,pId)
         src  : pSrc,
         func : pFunc,
         stle : pStyle,
-        id   : pId);
+        id   : pId        
+    });
 };
 /* Функция создаёт елемент style и записывает туда стили 
  * @pParams_o - структура параметров, заполняеться таким
