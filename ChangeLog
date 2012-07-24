@@ -16,6 +16,10 @@ current directory.
 
 * Fixed bug which occurs when error reading directory happens.
 
+* Fixed bug: ErrorImage.title writes always for now, no matter
+why error occurred.
+
+
 2012.07.19, Version 0.1.3
 
 * Fixed bug with nodester (jitsu env.HOME make him go done).
