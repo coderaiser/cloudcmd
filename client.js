@@ -271,7 +271,7 @@ CloudClient._currentToParent = (function(pDirName){
     /* убираем слэш с имени каталога*/
     pDirName=pDirName.replace('/','');
     
-    var lRootDir = document.getElementById(pDirName + '_' + lPanel.id);
+    var lRootDir = document.getElementById(pDirName + '(' + lPanel.id + ')');
     
     /* if found li element with ID directory name
      * set it to current file
@@ -432,7 +432,7 @@ CloudClient._changeLinks = function(pPanelID)
                     lLi.onclick     = CloudClient._setCurrent();
                     lLi.ondblclick  = CloudClient._loadDir(link);
                     lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
-                        '_' + pPanelID;
+                        '(' + pPanelID + ')';
                 }catch(error){console.log(error);}
             }
         }        
