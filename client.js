@@ -601,56 +601,66 @@ CloudClient._createFileTable = function(pElem,pJSON)
  * @pStyle      - стиль
  * @pId         - id
  * @pElement    - элемент, дочерним которо будет этот
+ * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', element: ''}
  */
-CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
-{     
-    //если скрипт еще не загружен
+//CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
+CloudClient._anyload = function(pParams_o)
+{         
     /* убираем путь к файлу, оставляя только название файла */
-    var lID;
-    if(pId===undefined){
-        lID=pSrc.replace(pSrc.substr(pSrc,pSrc.lastIndexOf('/')+1),'');
+    var lID = pParams_o.id;    
+    var lSrc = pParams_o.src;
+    var lFunc = pParams_o.func;
+    
+    if(!lID){        
+        lID=lSrc.replace(lSrc.substr(lSrc,
+            lSrc.lastIndexOf('/')+1),
+            '');
         /* убираем точку*/
         lID=lID.replace('.','_');
-    }else lID=pId;
+    }
+    /* если скрипт еще не загружен */
     if(!document.getElementById(lID))
     {
-        var element = document.createElement(pName);
+        var element = document.createElement(pParams_o.name);
         /* if working with external css
          * using href in any other case
          * using src
          */
-        pName === 'link' ? 
-              element.href = pSrc
-            : element.src = pSrc;
-        element.id=lID;        
-        if(arguments.length>=3){
-            /* if passed arguments function
-             * then it's onload by default
-             */
-            if(pFunc)
-                if(typeof pFunc === 'function'){
-                    element.onload=pFunc;
-                /* if object - then onload or onerror */
-                }else if (typeof pFunc === 'object'){
-                    if(pFunc.onload)element.onload = pFunc.onload;
-                    if(pFunc.onerror)element.onerror=pFunc.onerror;
-                }
-            if(arguments.length >= 4 && pStyle){
-                element.style.cssText=pStyle;
+        pParams_o.name === 'link' ? 
+              element.href = lSrc
+            : element.src  = lSrc;
+        element.id=lID;
+        
+
+        /* if passed arguments function
+         * then it's onload by default
+         */        
+        if(pParams_o.func)
+            if(typeof lFunc === 'function'){
+                element.onload = lFunc;
+            /* if object - then onload or onerror */
+            }else if (typeof lFunc === 'object') {
+                if(lFunc.onload)element.onload   = lFunc.onload;
+                if(lFunc.onerror)element.onerror = lFunc.onerror;
             }
+        
+        if(pParams_o.style){
+            element.style.cssText=pParams_o.style;
         }
-        (pElement || document.body).appendChild(element);
+
+        (pParams_o.element || document.body).appendChild(element);
+        
         return element;
     }
     /* если js-файл уже загружен 
      * запускаем функцию onload
      */
-    else if(pFunc && typeof pFunc==='function'){
+    else if(lFunc && typeof lFunc==='function'){
         try{
-            pFunc();
+            lFunc();
         }catch(error){console.log(error);}
     }
-};
+}
 
 /* Функция загружает js-файл */
 CloudClient.jsload = function(pSrc,pFunc,pStyle,pId)
