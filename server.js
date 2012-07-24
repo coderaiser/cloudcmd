@@ -570,7 +570,7 @@ CloudServer._readDir=function (pError, pFiles)
     {
         console.log(pError);
         CloudServer.sendResponse('OK',pError.toString(), 
-            CloudFunc.FS + DirPath);
+            DirPath);
     }
 };
 
