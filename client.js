@@ -679,12 +679,9 @@ CloudClient.jsload = function(pSrc,pFunc,pStyle,pId)
  * все параметры опциональны
  */
 CloudClient.cssSet = function(pParams_o){
-    var lElem=CloudClient._anyload('style',
-        pParams_o.src,
-        pParams_o.func,
-        pParams_o.style,
-        pParams_o.id,
-        pParams_o.element || document.head);
+    pParams_o.name      = 'style';
+    pParams_o.element   = pParams_o.element || document.head;
+    var lElem=CloudClient._anyload(pParams_o);
     
     pParams_o.inner &&
         (lElem.innerHTML = pParams_o.inner);
@@ -695,12 +692,9 @@ CloudClient.cssSet = function(pParams_o){
  * все параметры опциональны
  */
 CloudClient.cssLoad = function(pParams_o){
-    var lElem=CloudClient._anyload('link',        
-        pParams_o.src,
-        pParams_o.func,
-        pParams_o.style,
-        pParams_o.id,
-        pParams_o.element || document.head);
+    pParams_o.name      = 'link';
+    pParams_o.element   = pParams_o.element || document.head;
+    var lElem=CloudClient._anyload(pParams_o);
         
     lElem.rel = "stylesheet";
     
@@ -711,10 +705,8 @@ CloudClient.cssLoad = function(pParams_o){
 
 
 /* 
- * Функция генерирует JSON из html-таблицы файлов 
- */
-/* 
- * Используеться при первом заходе в корень
+ * Функция генерирует JSON из html-таблицы файлов и
+ * используеться при первом заходе в корень
  */
 CloudClient._getJSONfromFileTable=function()
 {
@@ -729,7 +721,7 @@ CloudClient._getJSONfromFileTable=function()
      * второй элемент li - это ссылка на верхний
      * каталог '..'
      */
-    i=2;/* пропускам Path и Header*/
+    i=2; /* пропускам Path и Header*/
 
     
     for(;i<lLI.length;i++)
