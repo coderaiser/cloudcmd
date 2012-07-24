@@ -41,7 +41,11 @@ var CloudClient={
      /* название css-класа текущего файла*/
      CURRENT_FILE           :'current-file',
      LIBDIR                 :'/lib/',
-     LIBDIRCLIENT           :'/lib/client/'
+     LIBDIRCLIENT           :'/lib/client/',
+     /* height of Cloud Commander
+      * seting up in init()
+      */
+     HEIGHT                 :0
 };
 
 /* 
@@ -235,6 +239,7 @@ CloudClient._setCurrent=(function(){
                     /* устанавливаем курсор на файл,
                     * на который нажали */
                     this.className=CloudClient.CURRENT_FILE;
+                    console.log(this.offset);
                 }
             }
              /* если мы попали сюда с энтера*/
@@ -390,6 +395,8 @@ CloudClient.init=(function()
     
     var lHeight=window.screen.height - (window.screen.height/3).toFixed();
     lHeight=(lHeight/100).toFixed()*100;
+     
+    CloudClient.HEIGHT = lHeight;
      
     CloudClient.cssSet({id:'show_2panels',
         element:document.head,
