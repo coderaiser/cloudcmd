@@ -86,13 +86,13 @@ try {
  /* добавляем  модуль с функциями */
 var CloudFunc;
 try {
-    CloudFunc       = require(CloudServer.LIBDIR         +
+    CloudFunc           = require(CloudServer.LIBDIR        +
                             '/cloudfunc');
                             
-    CloudServer.Cache   = require(CloudServer.LIBDIRSERVER +
+    CloudServer.Cache   = require(CloudServer.LIBDIRSERVER  +
                             '/object').Cache;
                             
-    CloudServer.Minify  = require(CloudServer.LIBDIRSERVER +
+    CloudServer.Minify  = require(CloudServer.LIBDIRSERVER  +
                             '/object').Minify;
 }catch(pError){
     console.log('could not found one of Cloud Commander SS files');
@@ -541,13 +541,17 @@ CloudServer._readDir=function (pError, pFiles)
                         'client.min.js')
                     :lIndex;
                 
-                lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
+                lIndex=lIndex.toString().replace('<div id=fm class=no-js>',
+                    '<div id=fm class=no-js>'+lList);
+                
                 /* меняем title */
                 lIndex=lIndex.replace('<title>Cloud Commander</title>',
                     '<title>'+CloudFunc.setTitle()+'</title>');
+                
                 /* отображаем панель быстрых клавишь */
                 lList=lIndex;
-                 /* если браузер поддерживает gzip-сжатие*/
+                
+                /* если браузер поддерживает gzip-сжатие*/
                 lHeader=CloudServer.generateHeaders('text/html',CloudServer.Gzip);
             }catch(error){console.log(error);}
         }else{
