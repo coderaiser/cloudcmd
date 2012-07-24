@@ -265,43 +265,20 @@ CloudClient._currentToParent = (function(pDirName){
     /* опредиляем в какой мы панели:
     * правой или левой
     */
-    var lCurrentFile=document.getElementsByClassName(CloudClient.CURRENT_FILE);
-    var lPanel;
-    try{
-        lPanel=lCurrentFile[0].parentElement.id;
-    }catch(error){console.log("Current file not found\n"+error);}
+    var lCurrentFile = document.getElementsByClassName(CloudClient.CURRENT_FILE);
+    var lPanel       = lCurrentFile[0].parentElement;
+
     /* убираем слэш с имени каталога*/
     pDirName=pDirName.replace('/','');
-    /* ищем файл с таким именем*/
-    lPanel=document.getElementById(lPanel);
-    if(!lPanel)return;
     
-    var lLi=lPanel.getElementsByTagName('li');
+    var lRootDir = document.getElementById(pDirName + '_' + lPanel.id);
     
-    /* если длина названия папки больше
-     * CloudFunc.SHORTNAMELENGTH уменьшаем её
-     */                  
-    var pShortDirName = CloudFunc.getShortedName(pDirName);
-    for(var i=0;i<lLi.length;i++){
-        var lA=lLi[i].getElementsByTagName('a');
-        if(lA.length && lA[0].textContent === pShortDirName){
-            /* if name length is big
-             * then compare full names
-             */
-            if(pDirName.length > CloudFunc.SHORTNAMELENGTH &&
-                lA[0].title !== pDirName)
-                    continue;
-            /* если уже выделен какой-то файл, снимаем
-             * выделение
-             */
-            lCurrentFile=lPanel.getElementsByClassName(CloudClient.CURRENT_FILE);
-            if(lCurrentFile.length>0)lCurrentFile[0].className='';
-            
-            lLi[i].className=CloudClient.CURRENT_FILE;
-            
-            break;
-        }
-    }
+    /* if found li element with ID directory name
+     * set it to current file
+     */
+    lRootDir &&
+        !(lCurrentFile[0].className = '') &&
+        (lRootDir.className = CloudClient.CURRENT_FILE);
 }); 
   
 /* глобальные переменные */
