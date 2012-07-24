@@ -2,9 +2,9 @@
     "cache" : {"allowed" : false},
     "minification" : {
         "js"    : false,
-        "css"   : false,
+        "css"   : true,
         "html"  : true,
-        "img"   : false
+        "img"   : true
     },
     "server"    : true,
     "logs"      : false,
