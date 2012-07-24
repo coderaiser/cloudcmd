@@ -541,13 +541,17 @@ CloudServer._readDir=function (pError, pFiles)
                         'client.min.js')
                     :lIndex;
                 
-                lIndex=lIndex.toString().replace('<div id=fm class=no-js>','<div id=fm class=no-js>'+lList);
+                lIndex=lIndex.toString().replace('<div id=fm class=no-js>',
+                    '<div id=fm class=no-js>'+lList);
+                
                 /* меняем title */
                 lIndex=lIndex.replace('<title>Cloud Commander</title>',
                     '<title>'+CloudFunc.setTitle()+'</title>');
+                
                 /* отображаем панель быстрых клавишь */
                 lList=lIndex;
-                 /* если браузер поддерживает gzip-сжатие*/
+                
+                /* если браузер поддерживает gzip-сжатие*/
                 lHeader=CloudServer.generateHeaders('text/html',CloudServer.Gzip);
             }catch(error){console.log(error);}
         }else{
