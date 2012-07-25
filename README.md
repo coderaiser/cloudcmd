@@ -128,11 +128,10 @@ it is using now.
 
 Extensions
 ---------------
-**Cloud Commander** desinged to easily porting extensions and libraries.
-For for extend main functionality Cloud Commander use next modules:
-
-- [CodeMirror] (http://codemirror.net 'CodeMirror)
-- [FancyBox] (https://github.com/fancyapps/fancyBox 'FancyBox')
+**Cloud Commander** desinged to easily porting extensions.
+For extend main functionality Cloud Commander use next modules:
+- [CodeMirror] (http://codemirror.net "CodeMirror")
+- [FancyBox] (https://github.com/fancyapps/fancyBox "FancyBox")
 
 Contributing
 ---------------
