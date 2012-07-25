@@ -18,6 +18,7 @@ var CloudClient={
     
     keyBinding              :function(){},/* функция нажатий обработки клавишь */
     Editor                  :function(){},/* function loads and shows editor */
+    Viewer                  :function(){},/* function loads and shows viewer */
     keyBinded               :false,/* оброботка нажатий клавишь установлена*/
     _loadDir                 :function(){},
     /* 
@@ -150,6 +151,14 @@ CloudClient.Editor = (function(){
             CloudCommander.Editor.Keys();
         })
     });
+});
+
+/* function loads and shows viewer */
+CloudClient.Viewer = (function(){
+    CloudCommander.jsload('lib/client/viewer.js',
+        function(){
+            CloudCommander.Viewer.Keys();
+        });
 });
 /* 
  * Функция привязываеться ко всем ссылкам и
@@ -787,6 +796,7 @@ try{
         /* привязываем клавиши к функциям */
         CloudCommander.keyBinding();
         CloudCommander.Editor();
+        CloudCommander.Viewer();
     };
 }
 catch(err){}
