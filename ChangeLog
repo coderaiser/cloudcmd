@@ -25,6 +25,8 @@ why error occurred.
 the way of searching of current root directory, now it shoud
 be more faster, DOM, short, simple and logical.
 
+* Added ability to view images on F3 key pressed.
+
 
 2012.07.19, Version 0.1.3
 
