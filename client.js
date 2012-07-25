@@ -605,10 +605,11 @@ CloudClient._anyload = function(pParams_o)
         /* убираем точку*/
         lID=lID.replace('.','_');
     }
+    var element = document.getElementById(lID);
     /* если скрипт еще не загружен */
-    if(!document.getElementById(lID))
+    if(!element)
     {
-        var element = document.createElement(pParams_o.name);
+        element = document.createElement(pParams_o.name);
         /* if working with external css
          * using href in any other case
          * using src
@@ -635,9 +636,7 @@ CloudClient._anyload = function(pParams_o)
             element.style.cssText=pParams_o.style;
         }
 
-        (pParams_o.element || document.body).appendChild(element);
-        
-        return element;
+        (pParams_o.element || document.body).appendChild(element);        
     }
     /* если js-файл уже загружен 
      * запускаем функцию onload
@@ -647,7 +646,8 @@ CloudClient._anyload = function(pParams_o)
             lFunc();
         }catch(error){console.log(error);}
     }
-}
+    return element;
+};
 
 /* Функция загружает js-файл */
 CloudClient.jsload = function(pSrc,pFunc,pStyle,pId)
@@ -683,7 +683,8 @@ CloudClient.cssLoad = function(pParams_o){
     pParams_o.element   = pParams_o.element || document.head;
     var lElem=CloudClient._anyload(pParams_o);
         
-    lElem.rel = "stylesheet";
+    lElem &&
+        (lElem.rel = 'stylesheet');    
     
     pParams_o.inner &&
         (lElem.innerHTML = pParams_o.inner);
