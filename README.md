@@ -43,7 +43,7 @@ Viewer's hot keys
 ---------------
 - F3                - open viewer window (if current file is image)
 - Esc               - close viewer window
-                    - 
+
 Editor's hot keys
 ---------------
 - F4                - open CodeMirror editor
