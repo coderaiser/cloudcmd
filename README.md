@@ -39,6 +39,10 @@ There is a short list:
 - Alt  + s          - get all key bindings back
 - up, down, enter   - filesystem navigation
 
+Viewer's hot keys
+---------------
+- F3                - open viewer window (if current file is image)
+- Esc               - close viewer window
 Editor's hot keys
 ---------------
 - F4                - open CodeMirror editor
