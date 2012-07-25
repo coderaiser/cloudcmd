@@ -125,6 +125,13 @@ Perhaps in the future, it will not be used, but so far it has no effect on
 start loading of Cloud Commander Client Side and do things fast and stable
 it is using now.
 
+Extensions
+---------------
+**Cloud Commander** desinged to easily porting extensions and libraries.
+For for extend main functionality Cloud Commander use next modules:
+- [CodeMirror] (http://codemirror.net 'CodeMirror)
+- [FancyBox] (https://github.com/fancyapps/fancyBox 'FancyBox')
+
 Contributing
 ---------------
 If you would like to contribute - send pull request to dev branch.
