@@ -146,19 +146,21 @@ CloudClient.keyBinding=(function(){
 /* function loads and shows editor */
 CloudClient.Editor = (function(){
     /* loading CloudMirror plagin */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'editor.js',{
-        onload:(function(){
-            CloudCommander.Editor.Keys();
-        })
+    CloudClient.jsload(CloudClient.LIBDIRCLIENT +
+        'editor.js',{
+            onload:(function(){
+                CloudCommander.Editor.Keys();
+            })
     });
 });
 
 /* function loads and shows viewer */
 CloudClient.Viewer = (function(){
-    CloudCommander.jsload('lib/client/viewer.js',{
-        onload: (function(){
-            CloudCommander.Viewer.Keys();
-        })
+    CloudCommander.jsload(CloudClient.LIBDIRCLIENT + 
+        'lib/client/viewer.js',{
+            onload: (function(){
+                CloudCommander.Viewer.Keys();
+            })
     });
 });
 /* 
