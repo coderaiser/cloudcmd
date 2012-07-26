@@ -586,6 +586,19 @@ CloudClient._createFileTable = function(pElem,pJSON)
     lElem.innerHTML=CloudFunc.buildFromJSON(pJSON,true);
 };
 
+/*
+ * Function gets id by src
+ * from http://domain.com/1.js to
+ * 1_js
+ */
+CloudFunc._getIdBySrc = function(pSrc){
+    var lID=pSrc.replace(pSrc.substr(pSrc,
+                pSrc.lastIndexOf('/')+1),
+                '');
+    /* убираем точку*/
+    return lID.replace('.','_');
+};
+
 /* 
  * Функция создаёт элемент и
  * загружает файл с src.
@@ -608,7 +621,7 @@ CloudClient._anyload = function(pParams_o)
     var lFunc = pParams_o.func;
     
     if(!lID){        
-        lID = CloudFunc.getIdBySrc(lSrc);
+        lID = this.getIdBySrc(lSrc);
     }
     var element = document.getElementById(lID);
     /* если скрипт еще не загружен */
