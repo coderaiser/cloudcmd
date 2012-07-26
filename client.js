@@ -608,11 +608,7 @@ CloudClient._anyload = function(pParams_o)
     var lFunc = pParams_o.func;
     
     if(!lID){        
-        lID=lSrc.replace(lSrc.substr(lSrc,
-            lSrc.lastIndexOf('/')+1),
-            '');
-        /* убираем точку*/
-        lID=lID.replace('.','_');
+        lID = CloudFunc.getIdBySrc(lSrc);
     }
     var element = document.getElementById(lID);
     /* если скрипт еще не загружен */
