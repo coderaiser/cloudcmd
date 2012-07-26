@@ -157,7 +157,7 @@ CloudClient.Editor = (function(){
 /* function loads and shows viewer */
 CloudClient.Viewer = (function(){
     CloudCommander.jsload(CloudClient.LIBDIRCLIENT + 
-        'lib/client/viewer.js',{
+        'viewer.js',{
             onload: (function(){
                 CloudCommander.Viewer.Keys();
             })
