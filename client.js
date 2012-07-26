@@ -155,10 +155,11 @@ CloudClient.Editor = (function(){
 
 /* function loads and shows viewer */
 CloudClient.Viewer = (function(){
-    CloudCommander.jsload('lib/client/viewer.js',
-        function(){
+    CloudCommander.jsload('lib/client/viewer.js',{
+        onload: (function(){
             CloudCommander.Viewer.Keys();
-        });
+        })
+    });
 });
 /* 
  * Функция привязываеться ко всем ссылкам и
