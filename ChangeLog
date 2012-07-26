@@ -27,6 +27,10 @@ be more faster, DOM, short, simple and logical.
 
 * Added ability to view images on F3 key pressed.
 
+* Added ability to work view images offline.
+
+* Added async flag to anyload function.
+
 
 2012.07.19, Version 0.1.3
 
