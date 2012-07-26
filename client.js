@@ -610,15 +610,16 @@ CloudClient._getIdBySrc = function(pSrc){
  * @pStyle      - стиль
  * @pId         - id
  * @pElement    - элемент, дочерним которо будет этот
- * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', element: ''}
+ * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', element: '',
+    async: false}
  */
-//CloudClient._anyload = function(pName,pSrc,pFunc,pStyle,pId,pElement)
 CloudClient._anyload = function(pParams_o)
 {         
     /* убираем путь к файлу, оставляя только название файла */
     var lID = pParams_o.id;    
     var lSrc = pParams_o.src;
     var lFunc = pParams_o.func;
+    var lAsync = pParams_o.async;
     
     if(!lID){        
         lID = this._getIdBySrc(lSrc);
@@ -653,7 +654,10 @@ CloudClient._anyload = function(pParams_o)
         if(pParams_o.style){
             element.style.cssText=pParams_o.style;
         }
-
+        
+        if(lAsync || lAsync === undefined)
+            element.async = '';
+        
         (pParams_o.element || document.body).appendChild(element);        
     }
     /* если js-файл уже загружен 
