@@ -66,7 +66,7 @@ var CloudServer = {
     /* КОНСТАНТЫ */
     INDEX           : 'index.html',
     LIBDIR          : './lib',
-    LIBDIRSERVER    : './lib/server'      
+    LIBDIRSERVER    : './lib/server'
 };
 
 var DirPath     = '/';
