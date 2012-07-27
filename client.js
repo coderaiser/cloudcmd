@@ -822,8 +822,7 @@ try{
         CloudCommander.init();
         /* привязываем клавиши к функциям */
         CloudCommander.keyBinding();
-        CloudCommander.Editor();
-        CloudCommander.Viewer();
+        CloudCommander.Editor();        
     };
 }
 catch(err){}
