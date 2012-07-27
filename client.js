@@ -659,7 +659,7 @@ CloudClient._anyload = function(pParams_o)
                             element.onerror = (function(){
                                 lFunc.onerror();
                                 
-                                return false;
+                                event.preventDefault();
                             });
             }
         
