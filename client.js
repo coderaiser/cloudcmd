@@ -663,7 +663,7 @@ CloudClient._anyload = function(pParams_o)
             element.style.cssText=pParams_o.style;
         }
         
-        if(lAsync || lAsync === undefined)
+        if(lAsync)
             element.async = true;
         
         (pParams_o.element || document.body).appendChild(element);        
@@ -680,14 +680,15 @@ CloudClient._anyload = function(pParams_o)
 };
 
 /* Функция загружает js-файл */
-CloudClient.jsload = function(pSrc,pFunc,pStyle,pId)
+CloudClient.jsload = function(pSrc,pFunc,pStyle,pId,pAsync)
 {
     CloudClient._anyload({
         name : 'script',
         src  : pSrc,
         func : pFunc,
         stle : pStyle,
-        id   : pId        
+        id   : pId,
+        async: pAsync
     });
 };
 /* Функция создаёт елемент style и записывает туда стили 
