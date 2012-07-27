@@ -657,7 +657,9 @@ CloudClient._anyload = function(pParams_o)
                 if(lFunc.onerror &&
                     typeof lFunc.onerror === 'function')
                             element.onerror = (function(){
-                                document.removeChild(element);
+                                (pParams_o.element || document.body)
+                                    .removeChild(element);
+                                
                                 lFunc.onerror();
                             });
             }
