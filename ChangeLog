@@ -31,6 +31,8 @@ be more faster, DOM, short, simple and logical.
 
 * Added async flag to anyload function.
 
+* Added ability remove not loaded scripts from DOM.
+
 
 2012.07.19, Version 0.1.3
 
