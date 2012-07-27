@@ -667,7 +667,7 @@ CloudClient._anyload = function(pParams_o)
         }
         
         if(lAsync || lAsync === undefined)
-            element.async = '';
+            element.async = true;
         
         (pParams_o.element || document.body).appendChild(element);        
     }
