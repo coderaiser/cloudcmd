@@ -656,14 +656,18 @@ CloudClient._anyload = function(pParams_o)
                 
                 if(lFunc.onerror &&
                     typeof lFunc.onerror === 'function')
-                            element.onerror = lFunc.onerror;
+                            element.onerror = (function(){
+                                lFunc.onerror();
+                                
+                                return false;
+                            });
             }
         
         if(pParams_o.style){
             element.style.cssText=pParams_o.style;
         }
         
-        if(lAsync)
+        if(lAsync || lAsync === undefined)
             element.async = true;
         
         (pParams_o.element || document.body).appendChild(element);        
