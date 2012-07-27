@@ -650,8 +650,16 @@ CloudClient._anyload = function(pParams_o)
                 element.onload = lFunc;
             /* if object - then onload or onerror */
             }else if (typeof lFunc === 'object') {
-                if(lFunc.onload)element.onload   = lFunc.onload;
-                if(lFunc.onerror)element.onerror = lFunc.onerror;
+                if(lFunc.onload &&
+                    typeof lFunc.onload === 'function')
+                        element.onload   = lFunc.onload;
+                
+                if(lFunc.onerror &&
+                    typeof lFunc.onerror === 'function')
+                        element.onerror = (function(){
+                            lFunc.onerror();
+                            return false;
+                        });
             }
         
         if(pParams_o.style){
