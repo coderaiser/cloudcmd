@@ -461,8 +461,7 @@ CloudClient._changeLinks = function(pPanelID)
                 }catch(error){console.log(error);}
                 
                 /* if we in path changing onclick events*/
-                if (lLi.className === 'path'){                    
-                    a[i].onclick     = CloudClient._setCurrent();
+                if (lLi.className === 'path') {
                     a[i].ondblclick  = CloudClient._loadDir(link);                    
                 }
                 else {
