@@ -49,6 +49,15 @@ var CloudClient={
      HEIGHT                 :0
 };
 
+/* short names used all the time functions */
+var getByClass  = function(pClass){
+    return getByClass(pClass);
+};
+
+var getById     = function(pId){
+    return document.getElementById(pId);
+};
+
 /* 
  * Обьект для работы с кэшем
  * в него будут включены функции для
@@ -190,7 +199,7 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
                 catch(error){console.log(error);}
                 }
             
-            var lCurrentFile=document.getElementsByClassName(CloudClient.CURRENT_FILE);
+            var lCurrentFile=getByClass(CloudClient.CURRENT_FILE);
             /* получаем имя каталога в котором находимся*/ 
             var lHref;
             try{
@@ -239,7 +248,7 @@ CloudClient._setCurrent=(function(){
          * вызоветься _loadDir
          */
         return function(pFromEnter){
-            var lCurrentFile=document.getElementsByClassName(CloudClient.CURRENT_FILE);
+            var lCurrentFile=getByClass(CloudClient.CURRENT_FILE);
             if(lCurrentFile && lCurrentFile.length > 0){
                 /* если мы находимся не на 
                  * пути и не на заголовках
@@ -277,13 +286,13 @@ CloudClient._currentToParent = (function(pDirName){
     /* опредиляем в какой мы панели:
     * правой или левой
     */
-    var lCurrentFile = document.getElementsByClassName(CloudClient.CURRENT_FILE);
+    var lCurrentFile = getByClass(CloudClient.CURRENT_FILE);
     var lPanel       = lCurrentFile[0].parentElement;
 
     /* убираем слэш с имени каталога*/
     pDirName=pDirName.replace('/','');
     
-    var lRootDir = document.getElementById(pDirName + '(' + lPanel.id + ')');
+    var lRootDir = getById(pDirName + '(' + lPanel.id + ')');
     
     /* if found li element with ID directory name
      * set it to current file
@@ -354,7 +363,7 @@ CloudClient.init=(function()
     LoadingImage=CloudClient._images.loading();
     /* загружаем иконку загрузки возле кнопки обновления дерева каталогов*/        
     try{
-        document.getElementsByClassName('path')[0].getElementsByTagName('a')[0].appendChild(LoadingImage);
+        getByClass('path')[0].getElementsByTagName('a')[0].appendChild(LoadingImage);
         LoadingImage.className+=' hidden'; /* прячем её */
     }catch(error){console.log(error);}
     ErrorImage=CloudClient._images.error();      
@@ -364,16 +373,17 @@ CloudClient.init=(function()
      */ 
                  
     /* выделяем строку с первым файлом */
-    var lFmHeader=document.getElementsByClassName('fm_header');
+    var lFmHeader=getByClass('fm_header');
     if(lFmHeader && lFmHeader[0].nextSibling)
         lFmHeader[0].nextSibling.className=CloudClient.CURRENT_FILE;
     
     /* показываем элементы, которые будут работать только, если есть js */
-    var lFM=document.getElementById('fm');
-    if(lFM)lFM.className='localstorage';
+    var lFM = getById('fm');
+    if(lFM)
+        lFM.className='localstorage';
     
     /* если есть js - показываем правую панель*/
-    var lRight=document.getElementById('right');
+    var lRight=getById('right');
     if(lRight)lRight.className=lRight.className.replace('hidden','');
     
     /* формируем и округляем высоту экрана
@@ -381,7 +391,10 @@ CloudClient.init=(function()
      * 658 -> 700
      */                            
     
-    var lHeight=window.screen.height - (window.screen.height/3).toFixed();
+    var lHeight = 
+        window.screen.height - 
+        (window.screen.height/3).toFixed();
+        
     lHeight=(lHeight/100).toFixed()*100;
      
     CloudClient.HEIGHT = lHeight;
@@ -397,11 +410,11 @@ CloudClient.init=(function()
 CloudClient._changeLinks = function(pPanelID)
 {
     /* назначаем кнопку очистить кэш и показываем её*/
-    var lClearcache=document.getElementById('clear-cache');
+    var lClearcache=getById('clear-cache');
     if(lClearcache)lClearcache.onclick=CloudClient.Cache.clear;    
     
     /* меняем ссылки на ajax-запросы */
-    var lPanel=document.getElementById(pPanelID);
+    var lPanel=getById(pPanelID);
     var a=lPanel.getElementsByTagName('a');
     
       /* Если нажмут на кнопку перезагрузить страниц - её нужно будет обязательно
@@ -482,7 +495,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
           */
          var lPanel;
          try{
-            lPanel=document.getElementsByClassName(CloudClient.CURRENT_FILE)[0].parentElement.id;
+            lPanel=getByClass(CloudClient.CURRENT_FILE)[0].parentElement.id;
          }catch(error){console.log("Current file not found\n"+error);}
          
         if(pNeedRefresh===undefined && lPanel){
@@ -508,13 +521,11 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                 url: path,
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(textStatus+' : '+errorThrown);
-                    var lLoading=document.getElementById('loading-image');
+                    var lLoading=getById('loading-image');
                     ErrorImage.className='icon error';
                     ErrorImage.title=errorThrown;
                     lLoading.parentElement.appendChild(ErrorImage);
-                    lLoading.className='hidden';
-                    //document.getElementsByClassName('path')[0].appendChild(ErrorImage);
-                                        
+                    lLoading.className='hidden';                                        
                 },
                 success:function(data, textStatus, jqXHR){                                            
                     /* если такой папки (или файла) нет
@@ -538,7 +549,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                         } else
                             ErrorImage.title        = jqXHR.responseText;
                             ErrorImage.className    ='icon error';                                
-                            lLoading                = document.getElementById('loading-image');
+                            lLoading                = getById('loading-image');
                             lLoading.parentElement.appendChild(ErrorImage);
                             lLoading.className      = 'hidden';
                             
@@ -573,7 +584,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
  */
 CloudClient._createFileTable = function(pElem,pJSON)
 {    
-    var lElem=document.getElementById(pElem);
+    var lElem=getById(pElem);
     /* говорим построителю,
      * что бы он в нужный момент
      * выделил строку с первым файлом
@@ -627,7 +638,7 @@ CloudClient._anyload = function(pParams_o)
     if(!lID){        
         lID = this._getIdBySrc(lSrc);
     }
-    var element = document.getElementById(lID);
+    var element = getById(lID);
     /* если скрипт еще не загружен */
     if(!element)
     {
@@ -734,8 +745,8 @@ CloudClient.cssLoad = function(pParams_o){
  */
 CloudClient._getJSONfromFileTable=function()
 {
-    var lLeft=document.getElementById('left');    
-    var lPath=document.getElementsByClassName('path')[0].textContent;
+    var lLeft=getById('left');    
+    var lPath=getByClass('path')[0].textContent;
     var lFileTable=[{path:lPath,size:'dir'}];
     var lLI=lLeft.getElementsByTagName('li');
     
@@ -797,14 +808,14 @@ CloudClient._getJSONfromFileTable=function()
      CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
          onload: function(){
             /* сохраняем переменную jQuery себе в область видимости */
-            document.getElementsByClassName=function(pClassName){
+            document.getElementsByClassName = function(pClassName){
                 return window.jQuery('.'+pClassName)[0];
             };
          },
         onerror: function(){
             CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
                 function(){
-                   document.getElementsByClassName=function(pClassName){
+                   getByClass=function(pClassName){
                         return window.jQuery('.'+pClassName)[0];
                     };
                 });
