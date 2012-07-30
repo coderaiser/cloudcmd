@@ -51,7 +51,7 @@ var CloudClient={
 
 /* short names used all the time functions */
 var getByClass  = function(pClass){
-    return getByClass(pClass);
+    return document.getElementsByClassName(pClass);
 };
 
 var getById     = function(pId){
