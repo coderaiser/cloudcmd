@@ -454,14 +454,23 @@ CloudClient._changeLinks = function(pPanelID)
              * двойное нажатие на левую кнопку мышки
              */
             else{
+                var lLi;
+                
                 try{
-                    var lLi = a[i].parentElement.parentElement;
-                    
+                    lLi = a[i].parentElement.parentElement;
+                }catch(error){console.log(error);}
+                
+                /* if we in path changing onclick events*/
+                if (lLi.className === 'path'){                    
+                    a[i].onclick     = CloudClient._setCurrent();
+                    a[i].ondblclick  = CloudClient._loadDir(link);                    
+                }
+                else {
                     lLi.onclick     = CloudClient._setCurrent();
                     lLi.ondblclick  = CloudClient._loadDir(link);
                     lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
                         '(' + pPanelID + ')';
-                }catch(error){console.log(error);}
+                }
             }
         }        
     }
