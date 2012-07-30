@@ -8,6 +8,7 @@
 
 * Fixed bug with showing CodeMirror after first show.
 
+* Added ability to read files in CodeMirror.
 
 2012.07.27, Version 0.1.4
 
