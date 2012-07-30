@@ -362,13 +362,12 @@ CloudClient.init=(function()
     
     LoadingImage=CloudClient._images.loading();
     /* загружаем иконку загрузки возле кнопки обновления дерева каталогов*/        
-    try{
-        var lPath = getByClass('path')[0]
-        lPath.getElementsByTagName('a')[0]
-            .appendChild(LoadingImage);
-            
-        LoadingImage.className += ' hidden'; /* прячем её */
-    }catch(error){console.log(error);}
+    var lPath = getByClass('path')[0];
+    lPath.getElementsByTagName('a')[0]
+        .appendChild(LoadingImage);
+        
+    LoadingImage.className += ' hidden'; /* прячем её */
+
     ErrorImage=CloudClient._images.error();      
     
     /* устанавливаем размер высоты таблицы файлов
