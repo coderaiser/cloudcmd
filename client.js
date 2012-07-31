@@ -299,6 +299,8 @@ CloudClient._setCurrent=(function(){
                     this.className!=='fm_header'){
                         
                     if (this.className === CloudClient.CURRENT_FILE){
+                        var lParent = this;
+                        
                         setTimeout(function(){
                             /* waiting a few seconds
                              * and if classes still equal
@@ -306,7 +308,7 @@ CloudClient._setCurrent=(function(){
                              * in other case
                              * double click event happend
                              */
-                            if(this.className === CloudClient.CURRENT_FILE)
+                            if(lParent.className === CloudClient.CURRENT_FILE)
                                 CloudClient._editFileName();
                             },400);
                     }
