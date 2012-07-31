@@ -302,7 +302,7 @@ CloudClient._setCurrent=(function(){
                     this.className!=='fm_header'){
                         
                     if (this.className === CloudClient.CURRENT_FILE &&
-                        !pFromEnter){
+                        typeof pFromEnter !== 'boolean'){
                         var lParent = this;
                         
                         setTimeout(function(){
