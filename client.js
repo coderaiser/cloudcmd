@@ -254,21 +254,11 @@ var lA = pParent.getElementsByTagName('a');
             
             var lDocumentOnclick = document.onclick;
             
-            var lFirstClick = true;
             /* setting event handler onclick
              * if user clicks somewhere keyBinded
              * backs
              */
-            document.onclick = (function(){
-                /* exiting if it was
-                 * first click, because
-                 * we geetting here to
-                 * fast
-                 */
-                if (lFirstClick){
-                    lFirstClick = false;
-                    return;
-                }
+            document.onclick = (function(){                
                 CloudCommander.keyBinded = true;
                 
                 /* backs old document.onclick 
