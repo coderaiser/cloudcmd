@@ -256,10 +256,19 @@ CloudClient._setCurrent=(function(){
                 if(this.className!=='path' && 
                     this.className!=='fm_header'){
                         
-                    lCurrentFile[0].className='';
-                    /* устанавливаем курсор на файл,
-                    * на который нажали */
-                    this.className=CloudClient.CURRENT_FILE;
+                    if (this.className === CloudClient.CURRENT_FILE){
+                        var lA = this.getEgetElementsByTagName('a');
+                        if (lA.length){
+                            lA[0].contentEditable = true;
+                            CloudCommander.keyBinding = false;
+                        }
+                    }
+                    else{
+                        lCurrentFile[0].className='';
+                        /* устанавливаем курсор на файл,
+                        * на который нажали */                                        
+                        this.className = CloudClient.CURRENT_FILE;
+                    }
                 }
             }
              /* если мы попали сюда с энтера*/
