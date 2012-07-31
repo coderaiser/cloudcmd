@@ -202,22 +202,24 @@ CloudServer.generateHeaders = function(pName, pGzip){
      * загружаем стили
      */
     if(CloudFunc.checkExtension(pName,'css'))
-        lType='text/css';
+        lType = 'text/css';
     /* загружаем js */
     else if(CloudFunc.checkExtension(pName,'js'))
-        lType='text/javascript';
+        lType = 'text/javascript';
     /* загружаем картинки*/
     else if(CloudFunc.checkExtension(pName,'png'))
-        lType='image/png';
+        lType = 'image/png';
     /* загружаем json*/
     else if(CloudFunc.checkExtension(pName,'json'))
-        lType='application/json';
+        lType = 'application/json';
     else if(CloudFunc.checkExtension(pName,'html'))
-        lType='text/html';
+        lType = 'text/html';
     else if(CloudFunc.checkExtension(pName,'woff'))
-        lType='font/woff';
+        lType = 'font/woff';
     else if(CloudFunc.checkExtension(pName,'appcache'))
-        lType='text/cache-manifest';
+        lType = 'text/cache-manifest';
+    else if(CloudFunc.checkExtension(pName,'mp3'))
+        lType = 'audio/mpeg';
     /* если это неизвестный тип файла - 
      * высылаем его просто как текст
      */
