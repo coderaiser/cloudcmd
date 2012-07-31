@@ -260,7 +260,7 @@ CloudClient._setCurrent=(function(){
                         var lA = this.getElementsByTagName('a');
                         if (lA.length){
                             lA[0].contentEditable = true;
-                            CloudCommander.keyBinding = false;
+                            CloudCommander.keyBinded = false;
                         }
                     }
                     else{
