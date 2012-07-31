@@ -275,8 +275,10 @@ CloudClient._setCurrent=(function(){
                                  * we geetting here to
                                  * fast
                                  */
-                                if (lFirstClick)
+                                if (lFirstClick){
+                                    lFirstClick = false;
                                     return;
+                                }
                                 CloudCommander.keyBinded = true;
                                 
                                 /* backs old document.onclick 
