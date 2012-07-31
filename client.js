@@ -258,7 +258,8 @@ CloudClient._setCurrent=(function(){
                         
                     if (this.className === CloudClient.CURRENT_FILE){
                         var lA = this.getElementsByTagName('a');
-                        if (lA.length && lA.textContent !== '..'){
+                        if (lA.length && lA.textContent !== '..' &&
+                            event.keyCode !== 13/*enter*/){
                             lA[0].contentEditable = true;
                             CloudCommander.keyBinded = false;
                             
