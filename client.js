@@ -588,11 +588,13 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                 url: path,
                 error: function(jqXHR, textStatus, errorThrown){
                     console.log(textStatus+' : '+errorThrown);
+                    
                     var lLoading=getById('loading-image');
+                    
                     ErrorImage.className='icon error';
                     ErrorImage.title=errorThrown;
                     lLoading.parentElement.appendChild(ErrorImage);
-                    lLoading.className='hidden';                                        
+                    lLoading.className='hidden';
                 },
                 success:function(data, textStatus, jqXHR){                                            
                     /* если такой папки (или файла) нет
