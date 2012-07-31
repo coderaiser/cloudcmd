@@ -241,9 +241,11 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
 
 /*
  * Function edits file name
+ *
+ * @pParent - parent element
  */
-CloudClient._editFileName = (function(){
-var lA = this.getElementsByTagName('a');
+CloudClient._editFileName = (function(pParent){
+var lA = pParent.getElementsByTagName('a');
     if (lA.length && lA.textContent !== '..' &&
         event.keyCode !== 13/*enter*/){
         lA[0].contentEditable = true;
@@ -309,7 +311,7 @@ CloudClient._setCurrent=(function(){
                              * double click event happend
                              */
                             if(lParent.className === CloudClient.CURRENT_FILE)
-                                CloudClient._editFileName();
+                                CloudClient._editFileName(lParent);
                             },400);
                     }
                     else{
