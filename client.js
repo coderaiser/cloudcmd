@@ -261,6 +261,25 @@ CloudClient._setCurrent=(function(){
                         if (lA.length){
                             lA[0].contentEditable = true;
                             CloudCommander.keyBinded = false;
+                            
+                            var lDocumentOnclick = document.onclick;
+                            
+                            /* setting event handler onclick
+                             * if user clicks somewhere keyBinded
+                             * backs
+                             */
+                            document.onclick = (function(){
+                                CloudCommander.keyBinded = true;
+                                
+                                /* backs old document.onclick 
+                                 * and call it if it was
+                                 * setted up earlier
+                                 */
+                                document.onclick = lDocumentOnclick;
+                                if(typeof lDocumentOnclick === 'function')
+                                    lDocumentOnclick();
+                                
+                            });
                         }
                     }
                     else{
