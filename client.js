@@ -258,7 +258,11 @@ var lA = pParent.getElementsByTagName('a');
              * if user clicks somewhere keyBinded
              * backs
              */
-            document.onclick = (function(){                
+            document.onclick = (function(){
+                var lA = pParent.getElementsByTagName('a');
+                if (lA.length && lA.textContent !== '..')
+                    lA[0].contentEditable = false;
+                
                 CloudCommander.keyBinded = true;
                 
                 /* backs old document.onclick 
