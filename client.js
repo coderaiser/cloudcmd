@@ -257,7 +257,7 @@ CloudClient._setCurrent=(function(){
                     this.className!=='fm_header'){
                         
                     if (this.className === CloudClient.CURRENT_FILE){
-                        var lA = this.getEgetElementsByTagName('a');
+                        var lA = this.getElementsByTagName('a');
                         if (lA.length){
                             lA[0].contentEditable = true;
                             CloudCommander.keyBinding = false;
