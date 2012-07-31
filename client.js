@@ -238,6 +238,48 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
             };
     });
     
+
+/*
+ * Function edits file name
+ */
+CloudClient._editFileName = (function(){
+var lA = this.getElementsByTagName('a');
+    if (lA.length && lA.textContent !== '..' &&
+        event.keyCode !== 13/*enter*/){
+        lA[0].contentEditable = true;
+        CloudCommander.keyBinded = false;
+        
+        var lDocumentOnclick = document.onclick;
+        
+        var lFirstClick = true;
+        /* setting event handler onclick
+         * if user clicks somewhere keyBinded
+         * backs
+         */
+        document.onclick = (function(){
+            /* exiting if it was
+             * first click, because
+             * we geetting here to
+             * fast
+             */
+            if (lFirstClick){
+                lFirstClick = false;
+                return;
+            }
+            CloudCommander.keyBinded = true;
+            
+            /* backs old document.onclick 
+             * and call it if it was
+             * setted up earlier
+             */
+            document.onclick = lDocumentOnclick;
+            if(typeof lDocumentOnclick === 'function')
+                lDocumentOnclick();
+            
+        });
+    }
+});
+
 /* Функция устанавливает текущим файлом, тот
  * на который кликнули единожды
  */
@@ -257,41 +299,16 @@ CloudClient._setCurrent=(function(){
                     this.className!=='fm_header'){
                         
                     if (this.className === CloudClient.CURRENT_FILE){
-                        var lA = this.getElementsByTagName('a');
-                        if (lA.length && lA.textContent !== '..' &&
-                            event.keyCode !== 13/*enter*/){
-                            lA[0].contentEditable = true;
-                            CloudCommander.keyBinded = false;
-                            
-                            var lDocumentOnclick = document.onclick;
-                            
-                            var lFirstClick = true;
-                            /* setting event handler onclick
-                             * if user clicks somewhere keyBinded
-                             * backs
+                        setTimeout(function(){
+                            /* waiting a few seconds
+                             * and if classes still equal
+                             * make file name editable
+                             * in other case
+                             * double click event happend
                              */
-                            document.onclick = (function(){
-                                /* exiting if it was
-                                 * first click, because
-                                 * we geetting here to
-                                 * fast
-                                 */
-                                if (lFirstClick){
-                                    lFirstClick = false;
-                                    return;
-                                }
-                                CloudCommander.keyBinded = true;
-                                
-                                /* backs old document.onclick 
-                                 * and call it if it was
-                                 * setted up earlier
-                                 */
-                                document.onclick = lDocumentOnclick;
-                                if(typeof lDocumentOnclick === 'function')
-                                    lDocumentOnclick();
-                                
-                            });
-                        }
+                            if(this.className === CloudClient.CURRENT_FILE)
+                                CloudClient._editFileName();
+                            },400);
                     }
                     else{
                         lCurrentFile[0].className='';
