@@ -264,11 +264,19 @@ CloudClient._setCurrent=(function(){
                             
                             var lDocumentOnclick = document.onclick;
                             
+                            var lFirstClick = true;
                             /* setting event handler onclick
                              * if user clicks somewhere keyBinded
                              * backs
                              */
                             document.onclick = (function(){
+                                /* exiting if it was
+                                 * first click, because
+                                 * we geetting here to
+                                 * fast
+                                 */
+                                if (lFirstClick)
+                                    return;
                                 CloudCommander.keyBinded = true;
                                 
                                 /* backs old document.onclick 
