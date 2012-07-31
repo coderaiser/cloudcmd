@@ -243,41 +243,43 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
  * Function edits file name
  *
  * @pParent - parent element
+ * @pEvent
  */
 CloudClient._editFileName = (function(pParent){
 var lA = pParent.getElementsByTagName('a');
     if (lA.length && lA.textContent !== '..'){
-        lA[0].contentEditable = true;
-        CloudCommander.keyBinded = false;
-        
-        var lDocumentOnclick = document.onclick;
-        
-        var lFirstClick = true;
-        /* setting event handler onclick
-         * if user clicks somewhere keyBinded
-         * backs
-         */
-        document.onclick = (function(){
-            /* exiting if it was
-             * first click, because
-             * we geetting here to
-             * fast
-             */
-            if (lFirstClick){
-                lFirstClick = false;
-                return;
-            }
-            CloudCommander.keyBinded = true;
             
-            /* backs old document.onclick 
-             * and call it if it was
-             * setted up earlier
-             */
-            document.onclick = lDocumentOnclick;
-            if(typeof lDocumentOnclick === 'function')
-                lDocumentOnclick();
+            lA[0].contentEditable = true;
+            CloudCommander.keyBinded = false;
             
-        });
+            var lDocumentOnclick = document.onclick;
+            
+            var lFirstClick = true;
+            /* setting event handler onclick
+             * if user clicks somewhere keyBinded
+             * backs
+             */
+            document.onclick = (function(){
+                /* exiting if it was
+                 * first click, because
+                 * we geetting here to
+                 * fast
+                 */
+                if (lFirstClick){
+                    lFirstClick = false;
+                    return;
+                }
+                CloudCommander.keyBinded = true;
+                
+                /* backs old document.onclick 
+                 * and call it if it was
+                 * setted up earlier
+                 */
+                document.onclick = lDocumentOnclick;
+                if(typeof lDocumentOnclick === 'function')
+                    lDocumentOnclick();
+                
+            });
     }
 });
 
@@ -299,7 +301,8 @@ CloudClient._setCurrent=(function(){
                 if(this.className!=='path' && 
                     this.className!=='fm_header'){
                         
-                    if (this.className === CloudClient.CURRENT_FILE){
+                    if (this.className === CloudClient.CURRENT_FILE &&
+                        !pFromEnter){
                         var lParent = this;
                         
                         setTimeout(function(){
