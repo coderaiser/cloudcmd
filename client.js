@@ -246,8 +246,7 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
  */
 CloudClient._editFileName = (function(pParent){
 var lA = pParent.getElementsByTagName('a');
-    if (lA.length && lA.textContent !== '..' &&
-        event.keyCode !== 13/*enter*/){
+    if (lA.length && lA.textContent !== '..'){
         lA[0].contentEditable = true;
         CloudCommander.keyBinded = false;
         
