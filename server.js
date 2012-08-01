@@ -387,20 +387,8 @@ CloudServer._controller=function(pReq, pRes)
             /* Проверяем с папкой ли мы имеем дело */
             
             /* читаем сновные данные о файле */
-            var lStat;
-            try{
-                lStat=Fs.statSync(DirPath);
-            }catch(error){
-                console.log(error);
-                                
-                CloudServer.Statuses[DirPath]  = 404;
-                
-                CloudServer.sendResponse('OK',error.toString(),DirPath);
-            }
-            /* если это каталог - 
-             * читаем его содержимое
-             */
-        
+            Fs.stat(DirPath, CloudServer._stated);
+            
             /* если установлено сжатие
              * меняем название html-файла и
              * загружаем сжатый html-файл в дальнейшем
@@ -414,22 +402,39 @@ CloudServer._controller=function(pReq, pRes)
              */            
             CloudServer.Responses[CloudServer.INDEX]=pRes;
             CloudServer.Statuses[CloudServer.INDEX]  = 200;
+        }
+    }
+};
+
+/* 
+ * Function geted stat information about file
+ */
+CloudServer._stated = function(pError, pStat){
+    if(pError){
+        CloudServer.Statuses[DirPath]  = 404;
+        CloudServer.sendResponse('OK',pError.toString(),DirPath);
+        
+        return;
+    }
+
+    /* 
+     * если это каталог - 
+     * читаем его содержимое
+     */
              
-            if(lStat){
-                if(lStat.isDirectory())
-                    Fs.readdir(DirPath,CloudServer._readDir);                    
-                /* отдаём файл */
-                else if(lStat.isFile()){                        
-                    Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
-                    console.log('reading file: '+DirPath);
-                }
-            }
+    if(pStat){
+        if(pStat.isDirectory())
+            Fs.readdir(DirPath,CloudServer._readDir);                    
+        /* отдаём файл */
+        else if(pStat.isFile()){                        
+            Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
+            console.log('reading file: '+DirPath);
         }
     }
 };
 
 /* Функция читает ссылку или выводит информацию об ошибке*/
-CloudServer._readDir=function (pError, pFiles)
+CloudServer._readDir = function (pError, pFiles)
 {
     if(!pError)
     {
