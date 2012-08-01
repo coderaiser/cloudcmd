@@ -12,7 +12,9 @@
 
 * Added ability rename files.
 
-* Fixed bug with CodeMirror vertical scroll bar
+* Fixed bug with CodeMirror vertical scroll bar.
+
+* Added loading image when file going to be edited.
 
 
 2012.07.27, Version 0.1.4
