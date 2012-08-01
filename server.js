@@ -400,32 +400,30 @@ CloudServer._controller=function(pReq, pRes)
             /* если это каталог - 
              * читаем его содержимое
              */
-            try{                    
-                /* если установлено сжатие
-                 * меняем название html-файла и
-                 * загружаем сжатый html-файл в дальнейшем
-                 */
-                CloudServer.INDEX=(CloudServer.Minify._allowed.html?
-                    '.' + CloudServer.Minify.MinFolder + 'index.min.html'
-                    :CloudServer.INDEX);
-                /*
-                 * сохраним указатель на response
-                 * и на статус ответа
-                 */            
-                CloudServer.Responses[CloudServer.INDEX]=pRes;
-                CloudServer.Statuses[CloudServer.INDEX]  = 200;
-                 
-                if(lStat.isDirectory()){
-                    Fs.readdir(DirPath,CloudServer._readDir);
-                    
-                }
+        
+            /* если установлено сжатие
+             * меняем название html-файла и
+             * загружаем сжатый html-файл в дальнейшем
+             */
+            CloudServer.INDEX=(CloudServer.Minify._allowed.html?
+                '.' + CloudServer.Minify.MinFolder + 'index.min.html'
+                :CloudServer.INDEX);
+            /*
+             * сохраним указатель на response
+             * и на статус ответа
+             */            
+            CloudServer.Responses[CloudServer.INDEX]=pRes;
+            CloudServer.Statuses[CloudServer.INDEX]  = 200;
+             
+            if(lStat){
+                if(lStat.isDirectory())
+                    Fs.readdir(DirPath,CloudServer._readDir);                    
                 /* отдаём файл */
-                else if(lStat.isFile()){
-                    
+                else if(lStat.isFile()){                        
                     Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
                     console.log('reading file: '+DirPath);
                 }
-            }catch(error){console.log(error);}
+            }
         }
     }
 };
