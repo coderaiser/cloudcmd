@@ -587,12 +587,12 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
             $.ajax({
                 url: path,
                 error: function(jqXHR, textStatus, errorThrown){
-                    console.log(textStatus+' : '+errorThrown);
+                    console.log(jqXHR.responseText);
                     
                     var lLoading=getById('loading-image');
                     
                     ErrorImage.className='icon error';
-                    ErrorImage.title=errorThrown;
+                    ErrorImage.title = errorThrown;
                     lLoading.parentElement.appendChild(ErrorImage);
                     lLoading.className='hidden';
                 },
@@ -621,6 +621,8 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                             lLoading                = getById('loading-image');
                             lLoading.parentElement.appendChild(ErrorImage);
                             lLoading.className      = 'hidden';
+                            
+                            console.log(jqXHR.responseText);
                             
                             return;
                     }                        
