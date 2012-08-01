@@ -511,54 +511,21 @@ CloudServer._readDir = function (pError, pFiles)
             lList+='<ul id=right class="panel hidden">';
             lList+=lPanel;
             lList+='</ul>';
-            try{
-                var lIndex;
-                /* пробуем достать данные из кэша
-                 * с жатием или без, взависимости
-                 * от настроек
-                 */
-                var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
-                /* если их нет там - вычитываем из файла*/
-                if(!lFileData){
-                    lIndex=Fs.readFileSync(CloudServer.INDEX);
-                    /* и сохраняем в кэш */
-                    CloudServer.Cache.set(CloudServer.INDEX,lIndex);
-                }else lIndex=lFileData;
-                
-                /* если выбрана опция минифизировать скрпиты
-                 * меняем в index.html обычный client.js на
-                 * минифицированый
-                 */
-                lIndex=lIndex.toString();
-                
-                /* if scripts shoud be minified and
-                 * minification proceed sucessfully
-                 * we include minified version of
-                 * clien.js to index.html
-                 */
-                lIndex = CloudServer.Minify._allowed.css?
-                    lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
-                        .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
-                    :lIndex;
-                      
-                lIndex = CloudServer.Minify._allowed.js?lIndex.replace('client.js',
-                    CloudServer.Minify.MinFolder + 
-                        'client.min.js')
-                    :lIndex;
-                
-                lIndex=lIndex.toString().replace('<div id=fm class=no-js>',
-                    '<div id=fm class=no-js>'+lList);
-                
-                /* меняем title */
-                lIndex=lIndex.replace('<title>Cloud Commander</title>',
-                    '<title>'+CloudFunc.setTitle()+'</title>');
-                
-                /* отображаем панель быстрых клавишь */
-                lList=lIndex;
-                
-                /* если браузер поддерживает gzip-сжатие*/
-                lHeader=CloudServer.generateHeaders('text/html',CloudServer.Gzip);
-            }catch(error){console.log(error);}
+
+            var lIndex;
+            /* пробуем достать данные из кэша
+             * с жатием или без, взависимости
+             * от настроек
+             */
+            var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
+            /* если их нет там - вычитываем из файла*/
+            if(!lFileData) {
+                lIndex=Fs.readFile(CloudServer.INDEX,
+                    CloudServer.indexReaded(lList));
+            }else {
+                var lReaded_f = CloudServer.indexReaded(lList);
+                lReaded_f(false, lFileData);
+            }
         }else{
             /* в обычном режиме(когда js включен
              * высылаем json-структуру файлов
@@ -581,6 +548,60 @@ CloudServer._readDir = function (pError, pFiles)
         CloudServer.sendResponse('OK',pError.toString(), 
             DirPath);
     }
+};
+
+CloudServer.indexReaded = function(pList){
+    return function(pError, pIndex){
+        if(pError){
+          return console.log(pError);
+        }
+        
+          /* и сохраняем в кэш */
+        CloudServer.Cache.set(CloudServer.INDEX, pIndex);
+        
+                 /* если выбрана опция минифизировать скрпиты
+                 * меняем в index.html обычный client.js на
+                 * минифицированый
+                 */
+        pIndex=pIndex.toString();
+        
+        /* if scripts shoud be minified and
+         * minification proceed sucessfully
+         * we include minified version of
+         * clien.js to index.html
+         */
+        pIndex = CloudServer.Minify._allowed.css?
+            pIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
+                .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
+            :pIndex;
+              
+        pIndex = CloudServer.Minify._allowed.js?pIndex.replace('client.js',
+            CloudServer.Minify.MinFolder + 
+                'client.min.js')
+            :pIndex;
+        
+        pIndex=pIndex.toString().replace('<div id=fm class=no-js>',
+            '<div id=fm class=no-js>'+pList);
+        
+        /* меняем title */
+        pIndex=pIndex.replace('<title>Cloud Commander</title>',
+            '<title>'+CloudFunc.setTitle()+'</title>');
+        
+        /* отображаем панель быстрых клавишь */
+        pList=pIndex;
+        
+        var lHeader;
+        /* если браузер поддерживает gzip-сжатие*/
+        lHeader=CloudServer.generateHeaders('text/html',CloudServer.Gzip);
+        
+         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
+        if(CloudServer.Gzip){
+            Zlib.gzip(pList,CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
+        }
+        /* если не поддерживаеться - отсылаем данные без сжатия*/
+        else
+            CloudServer.sendResponse(lHeader,pList,CloudServer.INDEX);
+    };
 };
 
 /* Функция генерирует функцию считывания файла
