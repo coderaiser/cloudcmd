@@ -19,6 +19,7 @@ var CloudClient={
     keyBinding              :function(){},/* функция нажатий обработки клавишь */
     Editor                  :function(){},/* function loads and shows editor */
     Viewer                  :function(){},/* function loads and shows viewer */
+    Terminal                :function(){},/* function loads and shows terminal */
     keyBinded               :false,/* оброботка нажатий клавишь установлена*/
     _loadDir                 :function(){},
     /* 
@@ -172,6 +173,17 @@ CloudClient.Viewer = (function(){
             })
     });
 });
+
+/* function loads and shows terminal */
+CloudClient.Terminal = (function(){
+    CloudCommander.jsload(CloudClient.LIBDIRCLIENT + 
+        'terminal.js',{
+            onload: (function(){
+                CloudCommander.Terminal.Keys();
+            })
+    });
+});
+
 /* 
  * Функция привязываеться ко всем ссылкам и
  *  загружает содержимое каталогов
