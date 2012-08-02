@@ -433,121 +433,154 @@ CloudServer._stated = function(pError, pStat){
     }
 };
 
+
 /* Функция читает ссылку или выводит информацию об ошибке*/
 CloudServer._readDir = function (pError, pFiles)
 {
-    if(!pError)
+    if(pError){
+        console.log(pError);
+        CloudServer.sendResponse('OK',pError.toString(), 
+            DirPath);
+        return;
+    }
+    
+    /* Если мы не в корне добавляем слеш к будующим ссылкам */       
+   if(DirPath !== '/')
     {
-        /* данные о файлах в формате JSON*/
-        var lJSON=[];
-        var lJSONFile={};
-        /* Если мы не в корне добавляем слеш к будующим ссылкам */       
-       if(DirPath!=='/')
-        {
-            DirPath+='/';
-        }
+        DirPath += '/';
+    }
 
-        pFiles=pFiles.sort();
-                
-        lJSON[0]={path:DirPath,size:'dir'};
-        var fReturnFalse=function returnFalse(){return false;};        
-        for(var i=0;i<pFiles.length;i++)
-        {
-            /* Получаем информацию о файле*/
-            var lStats;
-            try{
-                lStats=Fs.statSync(DirPath+pFiles[i]);
-            }catch(err){
-                /*
-                    console.log(err);
-                */
-                lStats={
-                    'mode':0,
-                    'size':0,
-                    'isDirectory':fReturnFalse
-                };
-            }
-            /*
-             *Переводим права доступа в 8-ричную систему
-             */
-            var lMode=(lStats.mode-0).toString(8);            
-                        
-            /* Если папка - выводим пиктограмму папки */
-            if(lStats.isDirectory())
-            {                
-                lJSONFile={'name':pFiles[i],
-                    'size':'dir',
-                    'uid':lStats.uid,
-                    'mode':lMode};
-                
-                lJSON[i+1]=lJSONFile;            
-            }
-            /* В противоположном случае - файла */
-            else
-            {
-                lJSONFile={'name':pFiles[i],
-                'uid':lStats.uid,
-                'size':lStats.size,
-                'mode':lMode};
-                
-                lJSON[i+1]=lJSONFile;
-            }
-        }
-        
-        /* заголовок ответа сервера */        
-        var lHeader;        
-        var lList;
-        /* если js недоступен */
-        /* если javascript отключен вылылаем html-код
-         * и прописываем соответствующие заголовки
-         */
-        
-        if(CloudServer.NoJS){
-            var lPanel=CloudFunc.buildFromJSON(lJSON);
-            lList='<ul id=left class=panel>';
-            lList+=lPanel;
-            lList+='</ul>';
+    pFiles=pFiles.sort();
+    
+    var lCount = 0;
+    var lStats = {};
+    /* asyn getting file states
+     * and putting it to lStats object
+     */
+    var getFilesStat_f = function(pName){
+        return function(pError, pStat){                                    
+            var fReturnFalse = function returnFalse(){
+                return false;
+            };
             
-            lList+='<ul id=right class="panel hidden">';
-            lList+=lPanel;
-            lList+='</ul>';
+            if(pError)
+                lStats[pName] = {
+                            'mode':0,
+                            'size':0,
+                            'isDirectory':fReturnFalse
+                };
+                
+            else
+                lStats[pName] = pStat;
+            
+            /* if this file is last - moving next */
+            if(++lCount === pFiles.length)
+                CloudServer._fillJSON(lStats, pFiles);
+        };
+    };
+    
+    for(var i=0;i<pFiles.length;i++){
+        /* Получаем информацию о файле*/
+        Fs.stat(DirPath + pFiles[i],
+            getFilesStat_f(pFiles[i]));
+    }
+};
 
-            var lIndex;
-            /* пробуем достать данные из кэша
-             * с жатием или без, взависимости
-             * от настроек
-             */
-            var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
-            /* если их нет там - вычитываем из файла*/
-            if(!lFileData) {
-                lIndex=Fs.readFile(CloudServer.INDEX,
-                    CloudServer.indexReaded(lList));
-            }else {
-                var lReaded_f = CloudServer.indexReaded(lList);
-                lReaded_f(false, lFileData);
-            }
-        }else{
-            /* в обычном режиме(когда js включен
-             * высылаем json-структуру файлов
-             * с соответствующими заголовками
-             */
-            lList=JSON.stringify(lJSON);
-            lHeader=CloudServer.generateHeaders('application/json',CloudServer.Gzip);
+/*
+ * Function fill JSON by file stats
+ *
+ * @pStats - object, contain file stats.
+ *          example {'1.txt': stat}
+ *
+ * @pFiles - array of files of current directory
+ */
+CloudServer._fillJSON = function(pStats, pFiles){
+    /* данные о файлах в формате JSON*/
+    var lJSON=[];
+    var lJSONFile={};
+        
+    lJSON[0]={path:DirPath,size:'dir'};
+    
+    var fReturnFalse=function returnFalse(){return false;};
+    for(var i=0;i<pFiles.length;i++)
+    {
+        /*
+         *Переводим права доступа в 8-ричную систему
+         */
+        var lName = pFiles[i];
+        
+        var lMode=(pStats[lName].mode-0).toString(8);            
+                    
+        /* Если папка - выводим пиктограмму папки */
+        if(pStats[lName].isDirectory())
+        {                
+            lJSONFile={'name':pFiles[i],
+                'size'  : 'dir',
+                'uid'   : pStats[lName].uid,
+                'mode'  : lMode};
+            
+            lJSON[i+1]=lJSONFile;            
         }
+        /* В противоположном случае - файла */
+        else
+        {
+            lJSONFile={'name':pFiles[i],
+            'uid'   : pStats[lName].uid,
+            'size'  : pStats[lName].size,
+            'mode'  : lMode};
+            
+            lJSON[i+1]=lJSONFile;
+        }
+    }
+    
+    /* заголовок ответа сервера */        
+    var lHeader;        
+    var lList;
+    /* если js недоступен */
+    /* если javascript отключен вылылаем html-код
+     * и прописываем соответствующие заголовки
+     */
+    
+    if(CloudServer.NoJS){
+        var lPanel=CloudFunc.buildFromJSON(lJSON);
+        lList='<ul id=left class=panel>';
+        lList+=lPanel;
+        lList+='</ul>';
+        
+        lList+='<ul id=right class="panel hidden">';
+        lList+=lPanel;
+        lList+='</ul>';
+    
+        var lIndex;
+        /* пробуем достать данные из кэша
+         * с жатием или без, взависимости
+         * от настроек
+         */
+        var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
+        /* если их нет там - вычитываем из файла*/
+        if(!lFileData) {
+            lIndex=Fs.readFile(CloudServer.INDEX,
+                CloudServer.indexReaded(lList));
+        }else {
+            var lReaded_f = CloudServer.indexReaded(lList);
+            lReaded_f(false, lFileData);
+        }
+    }else{
+        /* в обычном режиме(когда js включен
+         * высылаем json-структуру файлов
+         * с соответствующими заголовками
+         */
+        lList=JSON.stringify(lJSON);
+        lHeader=CloudServer.generateHeaders('application/json',CloudServer.Gzip);
+        
         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
         if(CloudServer.Gzip){
             Zlib.gzip(lList,CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
         }
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
-            CloudServer.sendResponse(lHeader,lList,CloudServer.INDEX);
-    }
-    else
-    {
-        console.log(pError);
-        CloudServer.sendResponse('OK',pError.toString(), 
-            DirPath);
-    }
+            CloudServer.sendResponse(lHeader,lList,CloudServer.INDEX);  
+    }  
 };
 
 CloudServer.indexReaded = function(pList){
@@ -580,23 +613,24 @@ CloudServer.indexReaded = function(pList){
                 'client.min.js')
             :pIndex;
         
-        pIndex=pIndex.toString().replace('<div id=fm class=no-js>',
+        pIndex = pIndex.toString().replace('<div id=fm class=no-js>',
             '<div id=fm class=no-js>'+pList);
         
         /* меняем title */
-        pIndex=pIndex.replace('<title>Cloud Commander</title>',
+        pIndex = pIndex.replace('<title>Cloud Commander</title>',
             '<title>'+CloudFunc.setTitle()+'</title>');
         
         /* отображаем панель быстрых клавишь */
-        pList=pIndex;
+        pList = pIndex;
         
         var lHeader;
         /* если браузер поддерживает gzip-сжатие*/
-        lHeader=CloudServer.generateHeaders('text/html',CloudServer.Gzip);
+        lHeader = CloudServer.generateHeaders('text/html',CloudServer.Gzip);
         
          /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
-        if(CloudServer.Gzip){
-            Zlib.gzip(pList,CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
+        if(CloudServer.Gzip) {
+            Zlib.gzip(pList,
+                CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
         }
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
