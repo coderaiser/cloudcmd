@@ -495,7 +495,7 @@ CloudClient._changeLinks = function(pPanelID)
         if(a[i].target !== '_blank')
         {
             /* убираем адрес хоста*/
-                var link='/'+a[i].href.replace(document.location.href,'');
+            var link='/'+a[i].href.replace(document.location.href,'');
             /* убираем значения, которые говорят,
              * об отсутствии js
              */
@@ -635,7 +635,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                     /* переводим таблицу файлов в строку, для
                     * сохранения в localStorage
                     */
-                    var lJSON_s=JSON.stringify(data);
+                    var lJSON_s = JSON.stringify(data);
                     console.log(lJSON_s.length);
                     
                     /* если размер данных не очень бошьой
