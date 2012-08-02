@@ -18,6 +18,9 @@
 
 * All sync functions changed to async equivalents.
 
+* On f4 key pressed when current-file is folder
+CodeMirror opens json data of folder.
+
 
 2012.07.27, Version 0.1.4
 
