@@ -16,18 +16,18 @@ var CloudClient={
     */
     init                    :function(){},
     
-    keyBinding              :function(){},/* функция нажатий обработки клавишь */
-    Editor                  :function(){},/* function loads and shows editor */
-    Viewer                  :function(){},/* function loads and shows viewer */
-    Terminal                :function(){},/* function loads and shows terminal */
-    keyBinded               :false,/* оброботка нажатий клавишь установлена*/
-    _loadDir                 :function(){},
-    /* 
-     * Функция привязываеться ко всем ссылкам и
-     *  загружает содержимое каталогов
-     */
+    keyBinding              :function(){},/* функция нажатий обработки клавишь*/
+    Editor                  :function(){},/* function loads and shows editor  */
+    Viewer                  :function(){},/* function loads and shows viewer  */
+    Terminal                :function(){},/* function loads and shows terminal*/
+    keyBinded               :false,/* оброботка нажатий клавишь установлена   */
+    _loadDir                :function(){},/* Функция привязываеться ко всем
+                                           * ссылкам и
+                                           *  загружает содержимое каталогов  */
      /* Обьект для работы с кэшем */
      Cashe                  :{},
+     /* Object contain additional system functional */
+     Util                   :{},
      
      /* ПРИВАТНЫЕ ФУНКЦИИ */
      /* функция загружает json-данные о файловой системе */
@@ -115,7 +115,7 @@ CloudClient.Cache.isAllowed=(function(){
              * https://gist.github.com/350433 
              */
             /*
-            CloudClient.jsload('https://raw.github.com/gist/350433/c9d3834ace63e5f5d7c8e1f6e3e2874d477cb9c1/gistfile1.js',
+            Util.jsload('https://raw.github.com/gist/350433/c9d3834ace63e5f5d7c8e1f6e3e2874d477cb9c1/gistfile1.js',
                 function(){CloudClient.Cache._allowed=true;
             });
             */
@@ -125,30 +125,188 @@ CloudClient.Cache.isAllowed=(function(){
   * в нём есть нужная нам директория -
   * записываем данные в него
   */
-CloudClient.Cache.set=(function(pName, pData){
+CloudClient.Cache.set   = (function(pName, pData){
     if(CloudClient.Cache._allowed && pName && pData){
         localStorage.setItem(pName,pData);
     }
 });
 /* Если доступен Cache принимаем из него данные*/
-CloudClient.Cache.get=(function(pName){
+CloudClient.Cache.get   = (function(pName){
     if(CloudClient.Cache._allowed  && pName){
         return localStorage.getItem(pName);
     }
     else return null;
 });
 /* Функция очищает кэш*/
-CloudClient.Cache.clear=(function(){
+CloudClient.Cache.clear = (function(){
     if(CloudClient.Cache._allowed){
         localStorage.clear();
     }
 });
 
+/* Object contain additional system functional */
+CloudClient.Util        = (function(){
+    /*
+     * Function gets id by src
+     * from http://domain.com/1.js to
+     * 1_js
+     */
+    this.getIdBySrc  = function(pSrc){
+        var lID=pSrc.replace(pSrc.substr(pSrc,
+                    pSrc.lastIndexOf('/')+1),
+                    '');
+        /* убираем точку*/
+        return lID.replace('.','_');
+    },
+
+    /* 
+     * Функция создаёт элемент и
+     * загружает файл с src.
+     * @pName       - название тэга
+     * @pSrc        - путь к файлу
+     * @pFunc       - обьект, содержаий одну из функций
+     *                  или сразу две onload и onerror
+     *                  {onload: function(){}, onerror: function();}
+     * @pStyle      - стиль
+     * @pId         - id
+     * @pElement    - элемент, дочерним которо будет этот
+     * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', parent: '',
+        async: false, inner: 'id{color:red}'}
+     */
+    this.anyload     = function(pParams_o){         
+        /* убираем путь к файлу, оставляя только название файла */
+        var lID = pParams_o.id;    
+        var lSrc = pParams_o.src;
+        var lFunc = pParams_o.func;
+        var lAsync = pParams_o.async;
+        
+        if(!lID){        
+            lID = this.getIdBySrc(lSrc);
+        }
+        var element = getById(lID);
+        /* если скрипт еще не загружен */
+        if(!element)
+        {
+            element = document.createElement(pParams_o.name);
+            /* if working with external css
+             * using href in any other case
+             * using src
+             */
+            pParams_o.name === 'link' ? 
+                  element.href = lSrc
+                : element.src  = lSrc;
+            element.id=lID;
+            
+    
+            /* if passed arguments function
+             * then it's onload by default
+             */        
+            if(pParams_o.func)
+                if(typeof lFunc === 'function'){
+                    element.onload = lFunc;
+                /* if object - then onload or onerror */
+                }else if (typeof lFunc === 'object') {
+                    if(lFunc.onload &&
+                        typeof lFunc.onload === 'function')
+                            element.onload   = lFunc.onload;
+                    
+                    if(lFunc.onerror &&
+                        typeof lFunc.onerror === 'function')
+                                element.onerror = (function(){
+                                    (pParams_o.element || document.body)
+                                        .removeChild(element);
+                                    
+                                    lFunc.onerror();
+                                });
+                }
+            
+            if(pParams_o.style){
+                element.style.cssText=pParams_o.style;
+            }
+            
+            if(pParams_o.inner){
+                element.innerHTML = pParams_o.inner;
+            }
+            
+            if(lAsync || lAsync === undefined)
+                element.async = true;
+            
+            (pParams_o.parent || document.body).appendChild(element);        
+        }
+        /* если js-файл уже загружен 
+         * запускаем функцию onload
+         */
+        else if(lFunc && typeof lFunc==='function'){
+            try{
+                lFunc();
+            }catch(error){console.log(error);}
+        }
+        return element;
+    },
+
+    /* Функция загружает js-файл */
+    this.jsload      = function(pSrc, pFunc, pStyle, pId, pAsync, pInner){
+        this.anyload({
+            name : 'script',
+            src  : pSrc,
+            func : pFunc,
+            stle : pStyle,
+            id   : pId,
+            async: pAsync,
+            inner: pInner
+        });
+    },
+    
+    /* Функция создаёт елемент style и записывает туда стили 
+ * @pParams_o - структура параметров, заполняеться таким
+ * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
+ * все параметры опциональны
+ */
+    this.cssSet      = function(pParams_o){
+        pParams_o.name      = 'style';
+        pParams_o.parent    = pParams_o.parent || document.head;
+        
+        return this.anyload(pParams_o);
+            
+    },
+    /* Function loads external css files 
+     * @pParams_o - структура параметров, заполняеться таким
+     * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
+     * все параметры опциональны
+     */
+    this.cssLoad     = function(pParams_o){
+        pParams_o.name      = 'link';
+        pParams_o.element   = pParams_o.parent || document.head;
+        var lElem           = this.anyload(pParams_o);
+            
+        lElem &&
+            (lElem.rel = 'stylesheet');
+        
+        return lElem;
+    };
+    
+    this.getById     = function(pId){return document.getElementById(pId);},
+    
+    this.getByClass  = function(pClass){
+        return document.getElementsByClassName(pClass);
+    },
+    
+    this.getPanel    = function(){
+        var lCurrent = document.getElementsByClassName('current-file');
+        lCurrent.length &&
+            (lCurrent = lCurrent[0].parentElement);
+        
+        return lCurrent && lCurrent.id;
+    }
+    
+});
+
+
 
 /* функция обработки нажатий клавишь */
 CloudClient.keyBinding=(function(){
     /* loading keyBinding module and start it */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
+    Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
             CloudCommander.keyBinding();
     });
 });
@@ -156,7 +314,7 @@ CloudClient.keyBinding=(function(){
 /* function loads and shows editor */
 CloudClient.Editor = (function(){
     /* loading CloudMirror plagin */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT +
+    Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
             onload:(function(){
                 CloudCommander.Editor.Keys();
@@ -374,13 +532,15 @@ CloudClient._currentToParent = (function(pDirName){
 var LoadingImage;
 var ErrorImage;
 
-var CloudFunc, $;
+var CloudFunc, $, Util;
 /* Конструктор CloudClient, который
  * выполняет весь функционал по
  * инициализации
  */
 CloudClient.init=(function()
 {    
+    Util = new CloudClient.Util();
+    
     /* меняем title 
      * если js включен - имена папок отображать необязательно...
      * а может и обязательно при переходе, можно будет это сделать
@@ -389,20 +549,20 @@ CloudClient.init=(function()
     if(lTitle.length>0)lTitle[0].textContent='Cloud Commander';
     
     /* загружаем jquery: */
-    CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+    Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
         onload: function(){
             $ = window.jQuery;
         },
         
         onerror: function(){
-            CloudClient.jsload('lib/client/jquery.js');
+            Util.jsload('lib/client/jquery.js');
             
             /*
              * if could not load jquery from google server
              * maybe we offline, load font from local
              * directory
              */
-            CloudClient.cssSet({id:'local-droids-font',
+            Util.cssSet({id:'local-droids-font',
                 element : document.head,
                 inner   :   '@font-face {font-family: "Droid Sans Mono";'           +
                             'font-style: normal;font-weight: normal;'               +
@@ -413,7 +573,7 @@ CloudClient.init=(function()
     });
     
         /* загружаем общие функции для клиента и сервера*/
-        CloudClient.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
+        Util.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
             /* берём из обьекта window общий с сервером функционал */
             CloudFunc=window.CloudFunc;
             
@@ -470,7 +630,7 @@ CloudClient.init=(function()
      
     CloudClient.HEIGHT = lHeight;
      
-    CloudClient.cssSet({id:'show_2panels',
+    Util.cssSet({id:'show_2panels',
         element:document.head,
         inner:'#left{width:46%;}' +
             '.panel{height:' + lHeight +'px'
@@ -683,145 +843,6 @@ CloudClient._createFileTable = function(pElem,pJSON)
     lElem.innerHTML=CloudFunc.buildFromJSON(pJSON,true);
 };
 
-/*
- * Function gets id by src
- * from http://domain.com/1.js to
- * 1_js
- */
-CloudClient._getIdBySrc = function(pSrc){
-    var lID=pSrc.replace(pSrc.substr(pSrc,
-                pSrc.lastIndexOf('/')+1),
-                '');
-    /* убираем точку*/
-    return lID.replace('.','_');
-};
-
-/* 
- * Функция создаёт элемент и
- * загружает файл с src.
- * @pName       - название тэга
- * @pSrc        - путь к файлу
- * @pFunc       - обьект, содержаий одну из функций
- *                  или сразу две onload и onerror
- *                  {onload: function(){}, onerror: function();}
- * @pStyle      - стиль
- * @pId         - id
- * @pElement    - элемент, дочерним которо будет этот
- * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', element: '',
-    async: false}
- */
-CloudClient._anyload = function(pParams_o)
-{         
-    /* убираем путь к файлу, оставляя только название файла */
-    var lID = pParams_o.id;    
-    var lSrc = pParams_o.src;
-    var lFunc = pParams_o.func;
-    var lAsync = pParams_o.async;
-    
-    if(!lID){        
-        lID = this._getIdBySrc(lSrc);
-    }
-    var element = getById(lID);
-    /* если скрипт еще не загружен */
-    if(!element)
-    {
-        element = document.createElement(pParams_o.name);
-        /* if working with external css
-         * using href in any other case
-         * using src
-         */
-        pParams_o.name === 'link' ? 
-              element.href = lSrc
-            : element.src  = lSrc;
-        element.id=lID;
-        
-
-        /* if passed arguments function
-         * then it's onload by default
-         */        
-        if(pParams_o.func)
-            if(typeof lFunc === 'function'){
-                element.onload = lFunc;
-            /* if object - then onload or onerror */
-            }else if (typeof lFunc === 'object') {
-                if(lFunc.onload &&
-                    typeof lFunc.onload === 'function')
-                        element.onload   = lFunc.onload;
-                
-                if(lFunc.onerror &&
-                    typeof lFunc.onerror === 'function')
-                            element.onerror = (function(){
-                                (pParams_o.element || document.body)
-                                    .removeChild(element);
-                                
-                                lFunc.onerror();
-                            });
-            }
-        
-        if(pParams_o.style){
-            element.style.cssText=pParams_o.style;
-        }
-        
-        if(lAsync || lAsync === undefined)
-            element.async = true;
-        
-        (pParams_o.element || document.body).appendChild(element);        
-    }
-    /* если js-файл уже загружен 
-     * запускаем функцию onload
-     */
-    else if(lFunc && typeof lFunc==='function'){
-        try{
-            lFunc();
-        }catch(error){console.log(error);}
-    }
-    return element;
-};
-
-/* Функция загружает js-файл */
-CloudClient.jsload = function(pSrc,pFunc,pStyle,pId,pAsync)
-{
-    CloudClient._anyload({
-        name : 'script',
-        src  : pSrc,
-        func : pFunc,
-        stle : pStyle,
-        id   : pId,
-        async: pAsync
-    });
-};
-/* Функция создаёт елемент style и записывает туда стили 
- * @pParams_o - структура параметров, заполняеться таким
- * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
- * все параметры опциональны
- */
-CloudClient.cssSet = function(pParams_o){
-    pParams_o.name      = 'style';
-    pParams_o.element   = pParams_o.element || document.head;
-    var lElem=CloudClient._anyload(pParams_o);
-    
-    pParams_o.inner &&
-        (lElem.innerHTML = pParams_o.inner);
-};
-/* Function loads external css files 
- * @pParams_o - структура параметров, заполняеться таким
- * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
- * все параметры опциональны
- */
-CloudClient.cssLoad = function(pParams_o){
-    pParams_o.name      = 'link';
-    pParams_o.element   = pParams_o.element || document.head;
-    var lElem=CloudClient._anyload(pParams_o);
-        
-    lElem &&
-        (lElem.rel = 'stylesheet');    
-    
-    pParams_o.inner &&
-        (lElem.innerHTML = pParams_o.inner);
-};
-
-
-
 /* 
  * Функция генерирует JSON из html-таблицы файлов и
  * используеться при первом заходе в корень
@@ -888,7 +909,7 @@ CloudClient._getJSONfromFileTable=function()
      * можна заменить на любой другой код
      */ 
  if(!document.getElementsByClassName){
-     CloudClient.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+     Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
          onload: function(){
             /* сохраняем переменную jQuery себе в область видимости */
             document.getElementsByClassName = function(pClassName){
@@ -896,7 +917,7 @@ CloudClient._getJSONfromFileTable=function()
             };
          },
         onerror: function(){
-            CloudClient.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
+            Util.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
                 function(){
                    getByClass=function(pClassName){
                         return window.jQuery('.'+pClassName)[0];
