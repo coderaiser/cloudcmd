@@ -138,7 +138,7 @@ CloudClient.Cache.clear=(function(){
 /* функция обработки нажатий клавишь */
 CloudClient.keyBinding=(function(){
     /* loading keyBinding module and start it */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
+    Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
             CloudCommander.keyBinding();
     });
 });
@@ -146,7 +146,7 @@ CloudClient.keyBinding=(function(){
 /* function loads and shows editor */
 CloudClient.Editor = (function(){
     /* loading CloudMirror plagin */
-    CloudClient.jsload(CloudClient.LIBDIRCLIENT +
+    Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
             onload:(function(){
                 CloudCommander.Editor.Keys();
@@ -156,7 +156,7 @@ CloudClient.Editor = (function(){
 
 /* function loads and shows viewer */
 CloudClient.Viewer = (function(){
-    CloudCommander.jsload(CloudClient.LIBDIRCLIENT + 
+    Util.jsload(CloudClient.LIBDIRCLIENT + 
         'viewer.js',{
             onload: (function(){
                 CloudCommander.Viewer.Keys();
