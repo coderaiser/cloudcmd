@@ -85,19 +85,29 @@ CloudClient.Cache={
  */
 CloudClient._images={
     /* Функция создаёт картинку загрузки*/
-    loading     :function(){   
-        var e=document.createElement('span');
-    e.className='icon loading';
-    e.id='loading-image';
-    return e;
-},
+    loading : function(){
+        var lE = Util.getById('loading-image');
+        if (!lE)
+            lE = Util.anyload({
+                name    : 'span',
+                class   : 'icon loading',
+                id      : 'loading-image'
+            });
+        
+        return lE;
+    },
 
     /* Функция создаёт картинку ошибки загрузки*/
-    error       :function(){
-        var e=document.createElement('span');    
-        e.className='icon error';
-        e.id='error-image';
-        return e;
+    error : function(){
+        var lE = Util.getById('loading-image');
+        if (!lE)
+            lE = Util.anyload({
+                name    : 'span',
+                class   : 'icon error',
+                id      : 'error-image'
+            });
+            
+        return lE;
     }
 };
 
@@ -171,23 +181,28 @@ CloudClient.Util        = (function(){
      * @pId         - id
      * @pElement    - элемент, дочерним которо будет этот
      * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', parent: '',
-        async: false, inner: 'id{color:red}'}
+        async: false, inner: 'id{color:red, class:''}'}
      */
     this.anyload     = function(pParams_o){         
         /* убираем путь к файлу, оставляя только название файла */
-        var lID = pParams_o.id;    
-        var lSrc = pParams_o.src;
-        var lFunc = pParams_o.func;
-        var lAsync = pParams_o.async;
+        var lID     = pParams_o.id;
+        var lClass  = pParams_o.class;
+        var lSrc    = pParams_o.src;
+        var lFunc   = pParams_o.func;
+        var lAsync  = pParams_o.async;
         
-        if(!lID){        
+        if(!lID) {
             lID = this.getIdBySrc(lSrc);
         }
+        
         var element = getById(lID);
         /* если скрипт еще не загружен */
         if(!element)
         {
-            element = document.createElement(pParams_o.name);
+            element     = document.createElement(pParams_o.name);
+            element.id  = lID;
+            if(lClass)
+                element.className = lClass;
             /* if working with external css
              * using href in any other case
              * using src
@@ -195,9 +210,7 @@ CloudClient.Util        = (function(){
             pParams_o.name === 'link' ? 
                   element.href = lSrc
                 : element.src  = lSrc;
-            element.id=lID;
-            
-    
+                        
             /* if passed arguments function
              * then it's onload by default
              */        
