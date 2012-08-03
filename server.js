@@ -375,7 +375,7 @@ CloudServer._controller=function(pReq, pRes)
             /* если в итоге путь пустой
              * делаем его корневым
              */                         
-            if (pathname==='')
+            if (pathname === '')
                 pathname = '/';
                         
             DirPath  = pathname;
@@ -386,7 +386,7 @@ CloudServer._controller=function(pReq, pRes)
             
             /* Проверяем с папкой ли мы имеем дело */
             
-            /* читаем сновные данные о файле */
+            /* читаем основные данные о файле */
             Fs.stat(DirPath, CloudServer._stated);
             
             /* если установлено сжатие
@@ -396,11 +396,12 @@ CloudServer._controller=function(pReq, pRes)
             CloudServer.INDEX=(CloudServer.Minify._allowed.html?
                 '.' + CloudServer.Minify.MinFolder + 'index.min.html'
                 :CloudServer.INDEX);
+          
             /*
              * сохраним указатель на response
              * и на статус ответа
              */            
-            CloudServer.Responses[CloudServer.INDEX]=pRes;
+            CloudServer.Responses[CloudServer.INDEX] = pRes;
             CloudServer.Statuses[CloudServer.INDEX]  = 200;
         }
     }
