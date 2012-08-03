@@ -759,14 +759,15 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
             $.ajax({
                 url: path,
                 error: function(jqXHR, textStatus, errorThrown){
-                    console.log(jqXHR.responseText);
-                    
-                    var lLoading=getById('loading-image');
-                    
                     ErrorImage.className='icon error';
-                    ErrorImage.title = errorThrown;
+                    ErrorImage.title = jqXHR.responseText;
+                    
                     lLoading.parentElement.appendChild(ErrorImage);
-                    lLoading.className='hidden';
+                    
+                    var lLoading        = getById('loading-image');                                                            
+                    lLoading.className  ='hidden';
+                    
+                    console.log(jqXHR.responseText);                    
                 },
                 success:function(data, textStatus, jqXHR){                                            
                     /* если такой папки (или файла) нет
