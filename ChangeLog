@@ -21,6 +21,8 @@
 * On f4 key pressed when current-file is folder
 CodeMirror opens json data of folder.
 
+* Fixed bug with response when we have no rihgts read dir
+server sends 404 response for now, not 200 ok.
 
 2012.07.27, Version 0.1.4
 
