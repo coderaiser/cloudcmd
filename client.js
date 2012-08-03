@@ -25,7 +25,7 @@ var CloudClient={
                                            * ссылкам и
                                            *  загружает содержимое каталогов  */
      /* Обьект для работы с кэшем */
-     Cashe                  :{},
+     Cache                  :{},
      /* Object contain additional system functional */
      Util                   :{},
      
@@ -324,7 +324,7 @@ CloudClient.Editor = (function(){
 
 /* function loads and shows viewer */
 CloudClient.Viewer = (function(){
-    CloudCommander.jsload(CloudClient.LIBDIRCLIENT + 
+    Util.jsload(CloudClient.LIBDIRCLIENT + 
         'viewer.js',{
             onload: (function(){
                 CloudCommander.Viewer.Keys();
@@ -334,7 +334,7 @@ CloudClient.Viewer = (function(){
 
 /* function loads and shows terminal */
 CloudClient.Terminal = (function(){
-    CloudCommander.jsload(CloudClient.LIBDIRCLIENT + 
+    Util.jsload(CloudClient.LIBDIRCLIENT + 
         'terminal.js',{
             onload: (function(){
                 CloudCommander.Terminal.Keys();
