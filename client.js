@@ -91,7 +91,7 @@ CloudClient._images={
             lE = Util.anyload({
                 name        : 'span',
                 class       : 'icon loading',
-                id          : 'loading-image'
+                id          : 'loading-image',
                 not_append  : true,
             });
         
