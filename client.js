@@ -9,7 +9,7 @@ var CloudCommander=(function(){
 "use strict";
 
 /* Клиентский обьект, содержащий функциональную часть*/
-var CloudClient={        
+var CloudClient = {        
     /* Конструктор CloudClient, который
     * выполняет весь функционал по
     * инициализации
@@ -89,9 +89,10 @@ CloudClient._images={
         var lE = Util.getById('loading-image');
         if (!lE)
             lE = Util.anyload({
-                name    : 'span',
-                class   : 'icon loading',
-                id      : 'loading-image'
+                name        : 'span',
+                class       : 'icon loading',
+                id          : 'loading-image'
+                not_append  : true,
             });
         
         return lE;
@@ -102,9 +103,10 @@ CloudClient._images={
         var lE = Util.getById('error-image');
         if (!lE)
             lE = Util.anyload({
-                name    : 'span',
-                class   : 'icon error',
-                id      : 'error-image'
+                name        : 'span',
+                class       : 'icon error',
+                id          : 'error-image',
+                not_append  : true,
             });
             
         return lE;
@@ -181,7 +183,7 @@ CloudClient.Util        = (function(){
      * @pId         - id
      * @pElement    - элемент, дочерним которо будет этот
      * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', parent: '',
-        async: false, inner: 'id{color:red, class:''}'}
+        async: false, inner: 'id{color:red, }, class:'', not_append: false}
      */
     this.anyload     = function(pParams_o){         
         /* убираем путь к файлу, оставляя только название файла */
@@ -240,7 +242,8 @@ CloudClient.Util        = (function(){
             if(lAsync || lAsync === undefined)
                 element.async = true;
             
-            (pParams_o.parent || document.body).appendChild(element);
+            if(!pParams_o.not_append)
+                (pParams_o.parent || document.body).appendChild(element);
             
             if(pParams_o.inner){
                 element.innerHTML = pParams_o.inner;
