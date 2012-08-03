@@ -24,6 +24,10 @@ CodeMirror opens json data of folder.
 * Fixed bug with response when we have no rihgts read dir
 server sends 404 response for now, not 200 ok.
 
+* Fixed bug with forming error of loading dir.
+Was : "not found".
+Now : "Error: EACCES, readdir '/root'"
+
 
 2012.07.27, Version 0.1.4
 
