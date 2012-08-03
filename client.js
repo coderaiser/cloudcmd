@@ -340,7 +340,8 @@ CloudClient.keyBinding=(function(){
 });
 
 /* function loads and shows editor */
-CloudClient.Editor = (function(){              
+CloudClient.Editor = (function() {
+    Util.showLoad();
     /* loading CloudMirror plagin */
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
