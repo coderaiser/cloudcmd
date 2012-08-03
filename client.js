@@ -276,7 +276,7 @@ CloudClient.Util        = (function(){
      */
     this.cssLoad     = function(pParams_o){
         pParams_o.name      = 'link';
-        pParams_o.element   = pParams_o.parent || document.head;
+        pParams_o.parent   = pParams_o.parent || document.head;
         var lElem           = this.anyload(pParams_o);
             
         lElem &&
