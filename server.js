@@ -440,6 +440,8 @@ CloudServer._readDir = function (pError, pFiles)
 {
     if(pError){
         console.log(pError);
+        
+        CloudServer.Statuses[DirPath]  = 404;
         CloudServer.sendResponse('OK',pError.toString(), 
             DirPath);
         return;
