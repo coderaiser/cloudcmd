@@ -223,15 +223,15 @@ CloudClient.Util        = (function(){
             if(pParams_o.style){
                 element.style.cssText=pParams_o.style;
             }
+                        
+            if(lAsync || lAsync === undefined)
+                element.async = true;
+            
+            (pParams_o.parent || document.body).appendChild(element);
             
             if(pParams_o.inner){
                 element.innerHTML = pParams_o.inner;
             }
-            
-            if(lAsync || lAsync === undefined)
-                element.async = true;
-            
-            (pParams_o.parent || document.body).appendChild(element);        
         }
         /* если js-файл уже загружен 
          * запускаем функцию onload
