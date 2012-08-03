@@ -99,7 +99,7 @@ CloudClient._images={
 
     /* Функция создаёт картинку ошибки загрузки*/
     error : function(){
-        var lE = Util.getById('loading-image');
+        var lE = Util.getById('error-image');
         if (!lE)
             lE = Util.anyload({
                 name    : 'span',
