@@ -324,7 +324,7 @@ CloudClient.Util        = (function(){
              * if it not showed  */
             var lCurrent = lCurrent.firstChild.nextSibling;
             if(lCurrent !== lLoadingImage.parentElement)
-                appendChild(lLoadingImage);
+                document.appendChild(lLoadingImage);
         }
     }
 });
