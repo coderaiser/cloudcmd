@@ -310,8 +310,23 @@ CloudClient.Util        = (function(){
             (lCurrent = lCurrent[0].parentElement);
         
         return lCurrent && lCurrent.id;
-    }
+    },
     
+    this.showLoad = function(){
+        var lCurrent        = this.getByClass(CloudCommander.CURRENT_FILE);
+        if(lCurrent.length){
+            lCurrent = lCurrent[0];
+            
+            var lLoadingImage       = CloudCommander._images.loading();
+            lLoadingImage.className = 'icon loading';/* показываем загрузку*/
+            
+            /* show loading icon * 
+             * if it not showed  */
+            var lCurrent = lCurrent.firstChild.nextSibling;
+            if(lCurrent !== lLoadingImage.parentElement)
+                appendChild(lLoadingImage);
+        }
+    }
 });
 
 
@@ -325,7 +340,7 @@ CloudClient.keyBinding=(function(){
 });
 
 /* function loads and shows editor */
-CloudClient.Editor = (function(){
+CloudClient.Editor = (function(){              
     /* loading CloudMirror plagin */
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
