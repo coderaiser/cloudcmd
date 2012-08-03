@@ -762,9 +762,8 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                     ErrorImage.className='icon error';
                     ErrorImage.title = jqXHR.responseText;
                     
+                    var lLoading        = getById('loading-image');
                     lLoading.parentElement.appendChild(ErrorImage);
-                    
-                    var lLoading        = getById('loading-image');                                                            
                     lLoading.className  ='hidden';
                     
                     console.log(jqXHR.responseText);                    
