@@ -326,7 +326,8 @@ CloudClient.Util        = (function(){
             /* show loading icon * 
              * if it not showed  */
             var lCurrent = lCurrent.firstChild.nextSibling;
-            if(lCurrent !== lLoadingImage.parentElement)
+            var lParent = lLoadingImage.parentElement;
+            if(lParent && lParent !== lCurrent)
                 document.appendChild(lLoadingImage);
         }
     }
