@@ -322,6 +322,8 @@ CloudClient.Util        = (function(){
     
     this.showLoad = function(pElem){
         var lLoadingImage       = CloudCommander._images.loading();
+        var lErrorImage         = CloudCommander._images.error();
+        lErrorImage.className   = 'icon error hidden';
         
         var lCurrent;        
         if(pElem)
@@ -339,7 +341,32 @@ CloudClient.Util        = (function(){
             (lParent && lParent !== lCurrent))
                 lCurrent.appendChild(lLoadingImage);
         
-        lLoadingImage.className = 'icon loading'; /* показываем загрузку*/
+        lLoadingImage.className = 'icon loading'; /* показываем загрузку*/        
+    };
+    
+    this.showError = function(jqXHR, textStatus, errorThrown){
+        var lLoadingImage       = CloudCommander._images.loading();
+        var lErrorImage         = CloudCommander._images.error();
+        
+        var lText = jqXHR.responseText;
+        
+        /* если файла не существует*/
+        if(!lText.indexOf('Error: ENOENT, '))
+            lText = lText.replace('Error: ENOENT, n','N');        
+        /* если не хватает прав для чтения файла*/
+        else if(!lText.indexOf('Error: EACCES,'))
+            lText = lText.replace('Error: EACCES, p','P');                            
+        
+        lErrorImage.className='icon error';    
+        lErrorImage.title = lText;
+        
+        var lParent = lLoadingImage.parentElement;
+        if(lParent)
+            lParent.appendChild(lErrorImage);
+            
+        lLoadingImage.className  ='hidden';
+                
+        console.log(lText);
     };
 });
 
@@ -787,46 +814,15 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
         try{
             $.ajax({
                 url: path,
-                error: function(jqXHR, textStatus, errorThrown){
-                    ErrorImage.className='icon error';
-                    ErrorImage.title = jqXHR.responseText;
-                    
-                    var lLoading        = getById('loading-image');
-                    lLoading.parentElement.appendChild(ErrorImage);
-                    lLoading.className  ='hidden';
-                    
-                    console.log(jqXHR.responseText);                    
-                },
+                error: Util.showError,
+                
                 success:function(data, textStatus, jqXHR){                                            
                     /* если такой папки (или файла) нет
                      * прячем загрузку и показываем ошибку
-                     */
-                    /* для совместимости с firefox меняем data
-                     * на jqXHR, он воспринимает data к Document
-                     * когда возвращаеться ошибка, о том, что
-                     * нет файла или нет доступа
-                     */
-                     
-                     var lLoading;
-                    if(!jqXHR.responseText.indexOf('Error:')){
-                        /* если файла не существует*/
-                        if(!jqXHR.responseText.indexOf('Error: ENOENT, ')){
-                            ErrorImage.title = jqXHR.responseText.replace('Error: ENOENT, n','N');
-                        }
-                        /* если не хватает прав для чтения файла*/
-                        else if(!jqXHR.responseText.indexOf('Error: EACCES,')){
-                            ErrorImage.title = jqXHR.responseText.replace('Error: EACCES, p','P');
-                        } else
-                            ErrorImage.title        = jqXHR.responseText;
-                            ErrorImage.className    ='icon error';                                
-                            lLoading                = getById('loading-image');
-                            lLoading.parentElement.appendChild(ErrorImage);
-                            lLoading.className      = 'hidden';
-                            
-                            console.log(jqXHR.responseText);
-                            
-                            return;
-                    }                        
+                     */                 
+                    if(!jqXHR.responseText.indexOf('Error:'))
+                        return Util.showError(jqXHR);
+
                     CloudClient._createFileTable(lPanel,data);
                     CloudClient._changeLinks(lPanel);
                                                                 
