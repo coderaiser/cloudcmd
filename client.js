@@ -90,9 +90,9 @@ CloudClient._images={
         if (!lE)
             lE = Util.anyload({
                 name        : 'span',
-                class       : 'icon loading',
+                className   : 'icon loading',
                 id          : 'loading-image',
-                not_append  : true,
+                not_append  : true
             });
         
         return lE;
@@ -104,9 +104,9 @@ CloudClient._images={
         if (!lE)
             lE = Util.anyload({
                 name        : 'span',
-                class       : 'icon error',
+                className   : 'icon error',
                 id          : 'error-image',
-                not_append  : true,
+                not_append  : true
             });
             
         return lE;
@@ -188,7 +188,7 @@ CloudClient.Util        = (function(){
     this.anyload     = function(pParams_o){         
         /* убираем путь к файлу, оставляя только название файла */
         var lID     = pParams_o.id;
-        var lClass  = pParams_o.class;
+        var lClass  = pParams_o.className;
         var lSrc    = pParams_o.src;
         var lFunc   = pParams_o.func;
         var lAsync  = pParams_o.async;
@@ -315,23 +315,32 @@ CloudClient.Util        = (function(){
         return lCurrent && lCurrent.id;
     },
     
-    this.showLoad = function(){
-        var lCurrent        = this.getByClass(CloudCommander.CURRENT_FILE);
-        if(lCurrent.length){
-            lCurrent = lCurrent[0];
-            
-            var lLoadingImage       = CloudCommander._images.loading();
-            lLoadingImage.className = 'icon loading';/* показываем загрузку*/
-            
-            /* show loading icon * 
-             * if it not showed  */
-            var lCurrent = lCurrent.firstChild.nextSibling;
-            var lParent = lLoadingImage.parentElement;
-            if(!lParent ||
-                (lParent && lParent !== lCurrent))
-                    lCurrent.appendChild(lLoadingImage);
+    /* 
+     * Function shows loading spinner
+     * @pElem - top element of screen
+     */
+    
+    this.showLoad = function(pElem){
+        var lLoadingImage       = CloudCommander._images.loading();
+        
+        var lCurrent;        
+        if(pElem)
+            lCurrent = pElem;
+        else
+        {
+            lCurrent = this.getByClass(CloudCommander.CURRENT_FILE);
+            lCurrent = lCurrent[0].firstChild.nextSibling;
         }
-    }
+                             
+        /* show loading icon * 
+         * if it not showed  */
+        var lParent = lLoadingImage.parentElement;
+        if(!lParent ||
+            (lParent && lParent !== lCurrent))
+                lCurrent.appendChild(lLoadingImage);
+        
+        lLoadingImage.className = 'icon loading'; /* показываем загрузку*/
+    };
 });
 
 
@@ -345,8 +354,7 @@ CloudClient.keyBinding=(function(){
 });
 
 /* function loads and shows editor */
-CloudClient.Editor = (function() {
-    Util.showLoad();
+CloudClient.Editor = (function() {    
     /* loading CloudMirror plagin */
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
@@ -387,21 +395,8 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
      */
         return function(){
             /* показываем гиф загрузки возле пути папки сверху*/
-            LoadingImage.className='icon loading';/* показываем загрузку*/
-            ErrorImage.className='icon error hidden';/* прячем ошибку */
-            /* если элемент задан -
-             * работаем с ним
-             */
-             /* если мы попали сюда с таблицы файлов*/
-            try{
-                this.firstChild.nextSibling.appendChild(LoadingImage);
-            }catch(error){
-                /* если <ctrl>+<r>
-                 * кнопка обновления
-                 */
-                try{this.firstChild.parentElement.appendChild(LoadingImage);}
-                catch(error){console.log(error);}
-                }
+            /* ctrl+r нажата? */
+            Util.showLoad(pNeedRefresh ? this : null);
             
             var lCurrentFile=getByClass(CloudClient.CURRENT_FILE);
             /* получаем имя каталога в котором находимся*/ 
