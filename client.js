@@ -83,35 +83,55 @@ CloudClient.Cache={
  * функции для отображения
  * картинок
  */
-CloudClient._images={
+CloudClient._images = (function(){
+    /* private members */
+    var lLoadingImage = null,
+        lErrorImage   = null;
+        
     /* Функция создаёт картинку загрузки*/
-    loading : function(){
-        var lE = Util.getById('loading-image');
-        if (!lE)
-            lE = Util.anyload({
-                name        : 'span',
-                className   : 'icon loading',
-                id          : 'loading-image',
-                not_append  : true
-            });
+    this.loading = function(){
+        var lE;
+        
+        if(lLoadingImage)
+            lE = lLoadingImage;
+        else{
+            lE = Util.getById('loading-image');
+            if (!lE)
+                lE = Util.anyload({
+                    name        : 'span',
+                    className   : 'icon loading',
+                    id          : 'loading-image',
+                    not_append  : true
+                });
+            
+            lLoadingImage = lE;
+        }
         
         return lE;
     },
 
     /* Функция создаёт картинку ошибки загрузки*/
-    error : function(){
-        var lE = Util.getById('error-image');
-        if (!lE)
-            lE = Util.anyload({
-                name        : 'span',
-                className   : 'icon error',
-                id          : 'error-image',
-                not_append  : true
-            });
-            
+    this.error = function(){
+        var lE;
+        if(lErrorImage)
+            lE = lErrorImage;
+        else{
+            lE = Util.getById('error-image');
+            if (!lE)
+                lE = Util.anyload({
+                    name        : 'span',
+                    className   : 'icon error',
+                    id          : 'error-image',
+                    not_append  : true
+                });
+            lErrorImage = lE;
+        }
+        
         return lE;
-    }
-};
+    };
+})();
+CloudClient._images = new CloudClient._images();
+
 
 /* функция проверяет поддерживаеться ли localStorage */
 CloudClient.Cache.isAllowed=(function(){
@@ -314,12 +334,11 @@ CloudClient.Util        = (function(){
         
         return lCurrent && lCurrent.id;
     },
-    
+        
     /* 
      * Function shows loading spinner
      * @pElem - top element of screen
-     */
-    
+     */    
     this.showLoad = function(pElem){
         var lLoadingImage       = CloudCommander._images.loading();
         var lErrorImage         = CloudCommander._images.error();
@@ -585,10 +604,8 @@ CloudClient._currentToParent = (function(pDirName){
 }); 
   
 /* глобальные переменные */
-var LoadingImage;
-var ErrorImage;
-
 var CloudFunc, $, Util;
+
 /* Конструктор CloudClient, который
  * выполняет весь функционал по
  * инициализации
@@ -644,17 +661,16 @@ CloudClient.init=(function()
         }
     );                
     
-    LoadingImage=CloudClient._images.loading();
+    var lLoadingImage = CloudClient._images.loading();
     /* загружаем иконку загрузки возле кнопки обновления дерева каталогов*/        
     try{
         getByClass('path')[0]
             .getElementsByTagName('a')[0]
-                .appendChild(LoadingImage);
+                .appendChild(lLoadingImage);
                 
-        LoadingImage.className+=' hidden'; /* прячем её */
+        lLoadingImage.className += ' hidden'; /* прячем её */
     }catch(error){console.log(error);}
-    ErrorImage=CloudClient._images.error();      
-    
+        
     /* устанавливаем размер высоты таблицы файлов
      * исходя из размеров разрешения экрана
      */ 
