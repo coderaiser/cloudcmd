@@ -32,6 +32,8 @@ Now : "Error: EACCES, readdir '/root'"
 * Fixed bug with showing loading spinner, when f4 key
 pressed couple times and CodeMirror not loaded fully.
 
+* Setted readOnly mode, when directory opened in CodeMirror.
+
 
 2012.07.27, Version 0.1.4
 

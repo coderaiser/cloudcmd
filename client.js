@@ -22,32 +22,32 @@ var CloudClient = {
     Terminal                :function(){},/* function loads and shows terminal*/
     keyBinded               :false,/* оброботка нажатий клавишь установлена   */
     _loadDir                :function(){},/* Функция привязываеться ко всем
-                                           * ссылкам и
-                                           *  загружает содержимое каталогов  */
-     /* Обьект для работы с кэшем */
-     Cache                  :{},
-     /* Object contain additional system functional */
-     Util                   :{},
-     
-     /* ПРИВАТНЫЕ ФУНКЦИИ */
-     /* функция загружает json-данные о файловой системе */
-     _ajaxLoad              :function(){},
-     /* Функция генерирует JSON из html-таблицы файлов */
-     _getJSONfromFileTable  :function(){},
-     /* функция меняет ссыки на ajax-овые */
-     _changeLinks           :function(){},     
-     /* ОБЬЕКТЫ */
-     /* обьект, который содержит функции для отображения картинок*/
-     _images                :{},     
-     /* КОНСТАНТЫ*/
-     /* название css-класа текущего файла*/
-     CURRENT_FILE           :'current-file',
-     LIBDIR                 :'/lib/',
-     LIBDIRCLIENT           :'/lib/client/',
-     /* height of Cloud Commander
-      * seting up in init()
-      */
-     HEIGHT                 :0
+                                       * ссылкам и
+                                       *  загружает содержимое каталогов  */
+    
+    /* ОБЬЕКТЫ */
+    /* Обьект для работы с кэшем */
+    Cache                  :{},
+    /* Object contain additional system functional */
+    Util                   :{},
+    
+    /* ПРИВАТНЫЕ ФУНКЦИИ */
+    /* функция загружает json-данные о файловой системе */
+    _ajaxLoad              :function(){},
+    /* Функция генерирует JSON из html-таблицы файлов */
+    _getJSONfromFileTable  :function(){},
+    /* функция меняет ссыки на ajax-овые */
+    _changeLinks           :function(){},     
+    
+    /* КОНСТАНТЫ*/
+    /* название css-класа текущего файла*/
+    CURRENT_FILE           :'current-file',
+    LIBDIR                 :'/lib/',
+    LIBDIRCLIENT           :'/lib/client/',
+    /* height of Cloud Commander
+    * seting up in init()
+    */
+    HEIGHT                 :0
 };
 
 /* short names used all the time functions */
@@ -78,59 +78,6 @@ CloudClient.Cache={
     /* функция чистит весь кэш для всех каталогов*/
     clear       :function(){}
 };
-
-/* Обьект, который содержит
- * функции для отображения
- * картинок
- */
-CloudClient._images = (function(){
-    /* private members */
-    var lLoadingImage = null,
-        lErrorImage   = null;
-        
-    /* Функция создаёт картинку загрузки*/
-    this.loading = function(){
-        var lE;
-        
-        if(lLoadingImage)
-            lE = lLoadingImage;
-        else{
-            lE = Util.getById('loading-image');
-            if (!lE)
-                lE = Util.anyload({
-                    name        : 'span',
-                    className   : 'icon loading',
-                    id          : 'loading-image',
-                    not_append  : true
-                });
-            
-            lLoadingImage = lE;
-        }
-        
-        return lE;
-    },
-
-    /* Функция создаёт картинку ошибки загрузки*/
-    this.error = function(){
-        var lE;
-        if(lErrorImage)
-            lE = lErrorImage;
-        else{
-            lE = Util.getById('error-image');
-            if (!lE)
-                lE = Util.anyload({
-                    name        : 'span',
-                    className   : 'icon error',
-                    id          : 'error-image',
-                    not_append  : true
-                });
-            lErrorImage = lE;
-        }
-        
-        return lE;
-    };
-})();
-CloudClient._images = new CloudClient._images();
 
 
 /* функция проверяет поддерживаеться ли localStorage */
@@ -321,11 +268,11 @@ CloudClient.Util        = (function(){
         return lElem;
     };
     
-    this.getById     = function(pId){return document.getElementById(pId);},
+    this.getById     = function(pId){return document.getElementById(pId);};
     
     this.getByClass  = function(pClass){
         return document.getElementsByClassName(pClass);
-    },
+    };
     
     this.getPanel    = function(){
         var lCurrent = document.getElementsByClassName('current-file');
@@ -333,59 +280,115 @@ CloudClient.Util        = (function(){
             (lCurrent = lCurrent[0].parentElement);
         
         return lCurrent && lCurrent.id;
-    },
+    };
+        
+    /* private members */
+    var lLoadingImage;
+    var lErrorImage;
+    
+    /* Обьект, который содержит
+     * функции для отображения
+     * картинок
+     */
+    var LImages_o = {            
+        /* Функция создаёт картинку загрузки*/
+        loading : function(){    
+            var lE = Util.getById('loading-image');
+            if (!lE)
+                lE = Util.anyload({
+                    name        : 'span',
+                    className   : 'icon loading',
+                    id          : 'loading-image',
+                    not_append  : true
+                });
+            
+            lLoadingImage = lE;
+        
+            return lE;
+        },
+    
+        /* Функция создаёт картинку ошибки загрузки*/
+        error : function(){
+            var lE = Util.getById('error-image');
+            if (!lE)
+                lE = Util.anyload({
+                    name        : 'span',
+                    className   : 'icon error',
+                    id          : 'error-image',
+                    not_append  : true
+                });
+            
+            return lE;
+        }
+    };
+    
         
     /* 
      * Function shows loading spinner
      * @pElem - top element of screen
-     */    
-    this.showLoad = function(pElem){
-        var lLoadingImage       = CloudCommander._images.loading();
-        var lErrorImage         = CloudCommander._images.error();
-        lErrorImage.className   = 'icon error hidden';
-        
-        var lCurrent;        
-        if(pElem)
-            lCurrent = pElem;
-        else
-        {
-            lCurrent = this.getByClass(CloudCommander.CURRENT_FILE);
-            lCurrent = lCurrent[0].firstChild.nextSibling;
-        }
-                             
-        /* show loading icon * 
-         * if it not showed  */
-        var lParent = lLoadingImage.parentElement;
-        if(!lParent ||
-            (lParent && lParent !== lCurrent))
-                lCurrent.appendChild(lLoadingImage);
-        
-        lLoadingImage.className = 'icon loading'; /* показываем загрузку*/        
-    };
-    
-    this.showError = function(jqXHR, textStatus, errorThrown){
-        var lLoadingImage       = CloudCommander._images.loading();
-        var lErrorImage         = CloudCommander._images.error();
-        
-        var lText = jqXHR.responseText;
-        
-        /* если файла не существует*/
-        if(!lText.indexOf('Error: ENOENT, '))
-            lText = lText.replace('Error: ENOENT, n','N');        
-        /* если не хватает прав для чтения файла*/
-        else if(!lText.indexOf('Error: EACCES,'))
-            lText = lText.replace('Error: EACCES, p','P');                            
-        
-        lErrorImage.className='icon error';    
-        lErrorImage.title = lText;
-        
-        var lParent = lLoadingImage.parentElement;
-        if(lParent)
-            lParent.appendChild(lErrorImage);
+     */   
+    var lThis = this;
+    this.Images = {
+        showLoad        : function(pElem){
+            if(!lLoadingImage)
+                lLoadingImage = LImages_o.loading();
             
-        lLoadingImage.className  ='hidden';
+            if(!lErrorImage)
+                lErrorImage = LImages_o.error();
+            
+            lErrorImage.className   = 'icon error hidden';
+            
+            var lCurrent;        
+            if(pElem)
+                lCurrent = pElem;
+            else
+            {
+                lCurrent = lThis.getByClass(CloudCommander.CURRENT_FILE);
+                lCurrent = lCurrent[0].firstChild.nextSibling;
+            }
+                                 
+            /* show loading icon * 
+             * if it not showed  */
+            var lParent = lLoadingImage.parentElement;
+            if(!lParent ||
+                (lParent && lParent !== lCurrent))
+                    lCurrent.appendChild(lLoadingImage);
+            
+            lLoadingImage.className = 'icon loading'; /* показываем загрузку*/        
+        },
+    
+        hideLoad        : function(){
+            if(lLoadingImage)
+                lLoadingImage.className  ='hidden';
+        },
+        
+        showError       : function(jqXHR, textStatus, errorThrown){
+             if(!lLoadingImage)
+                lLoadingImage = LImages_o.loading();
+            
+            if(!lErrorImage)
+                lErrorImage = LImages_o.error();
+            
+            var lText = jqXHR.responseText;
+            
+            /* если файла не существует*/
+            if(!lText.indexOf('Error: ENOENT, '))
+                lText = lText.replace('Error: ENOENT, n','N');        
+            /* если не хватает прав для чтения файла*/
+            else if(!lText.indexOf('Error: EACCES,'))
+                lText = lText.replace('Error: EACCES, p','P');                            
+            
+            lErrorImage.className='icon error';    
+            lErrorImage.title = lText;
+            
+            var lParent = lLoadingImage.parentElement;
+            if(lParent)
+                lParent.appendChild(lErrorImage);
                 
-        console.log(lText);
+            lLoadingImage.className  ='hidden';
+                    
+            console.log(lText);
+        }
     };
 });
 
@@ -442,7 +445,7 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
         return function(){
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
-            Util.showLoad(pNeedRefresh ? this : null);
+            Util.Images.showLoad(pNeedRefresh ? this : null);
             
             var lCurrentFile=getByClass(CloudClient.CURRENT_FILE);
             /* получаем имя каталога в котором находимся*/ 
@@ -598,9 +601,10 @@ CloudClient._currentToParent = (function(pDirName){
     /* if found li element with ID directory name
      * set it to current file
      */
-    lRootDir &&
+    if(lRootDir){
         !(lCurrentFile[0].className = '') &&
         (lRootDir.className = CloudClient.CURRENT_FILE);
+    }
 }); 
   
 /* глобальные переменные */
@@ -660,17 +664,7 @@ CloudClient.init=(function()
             if(!CloudClient.Cache.get('/'))CloudClient.Cache.set('/',CloudClient._getJSONfromFileTable());  
         }
     );                
-    
-    var lLoadingImage = CloudClient._images.loading();
-    /* загружаем иконку загрузки возле кнопки обновления дерева каталогов*/        
-    try{
-        getByClass('path')[0]
-            .getElementsByTagName('a')[0]
-                .appendChild(lLoadingImage);
-                
-        lLoadingImage.className += ' hidden'; /* прячем её */
-    }catch(error){console.log(error);}
-        
+              
     /* устанавливаем размер высоты таблицы файлов
      * исходя из размеров разрешения экрана
      */ 
@@ -830,7 +824,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
         try{
             $.ajax({
                 url: path,
-                error: Util.showError,
+                error: Util.Images.showError,
                 
                 success:function(data, textStatus, jqXHR){                                            
                     /* если такой папки (или файла) нет
