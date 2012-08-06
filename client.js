@@ -330,11 +330,8 @@ CloudClient.Util        = (function(){
          * @pElem - top element of screen
          */   
         showLoad        : function(pElem){
-            if(!lLoadingImage)
-                lLoadingImage = LImages_o.loading();
-            
-            if(!lErrorImage)
-                lErrorImage = LImages_o.error();
+            lLoadingImage   = LImages_o.loading();
+            lErrorImage     = LImages_o.error();
             
             lErrorImage.className   = 'icon error hidden';
             
@@ -358,18 +355,14 @@ CloudClient.Util        = (function(){
         },
     
         hideLoad        : function(){
-             if(!lLoadingImage)
-                lLoadingImage = LImages_o.loading();
-                
-                lLoadingImage.className  ='hidden';
+            lLoadingImage = LImages_o.loading();                
+            lLoadingImage.className  ='hidden';
         },
         
         showError       : function(jqXHR, textStatus, errorThrown){
-             if(!lLoadingImage)
-                lLoadingImage = LImages_o.loading();
+            lLoadingImage = LImages_o.loading();
             
-            if(!lErrorImage)
-                lErrorImage = LImages_o.error();
+            lErrorImage = LImages_o.error();
             
             var lText = jqXHR.responseText;
             
