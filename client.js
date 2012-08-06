@@ -47,7 +47,8 @@ var CloudClient = {
     /* height of Cloud Commander
     * seting up in init()
     */
-    HEIGHT                 :0
+    HEIGHT                 :0,
+    MIN_ONE_PANEL_WIDTH    :1155
 };
 
 /* short names used all the time functions */
@@ -321,14 +322,13 @@ CloudClient.Util        = (function(){
             return lE;
         }
     };
-    
-        
-    /* 
-     * Function shows loading spinner
-     * @pElem - top element of screen
-     */   
+            
     var lThis = this;
     this.Images = {
+        /* 
+         * Function shows loading spinner
+         * @pElem - top element of screen
+         */   
         showLoad        : function(pElem){
             if(!lLoadingImage)
                 lLoadingImage = LImages_o.loading();
@@ -358,7 +358,9 @@ CloudClient.Util        = (function(){
         },
     
         hideLoad        : function(){
-            if(lLoadingImage)
+             if(!lLoadingImage)
+                lLoadingImage = LImages_o.loading();
+                
                 lLoadingImage.className  ='hidden';
         },
         
@@ -389,6 +391,56 @@ CloudClient.Util        = (function(){
                     
             console.log(lText);
         }
+    };
+    
+    this.getCurrentFile = function(){
+        var lCurrent = lThis.getByClass(CloudCommander.CURRENT_FILE)[0];
+        if(!lCurrent)
+            console.log('Error: Can not find Current File');
+        
+        return lCurrent;
+    };
+    
+    /* function getting panel active, or passive
+     * @pPanel_o = {active: true}
+      */
+    this.getPanel = function(pActive){
+        var lPanel;
+        
+        lPanel = lThis.getCurrentFile().parentElement;
+        
+        /* if two panels showed
+         * then always work with passive
+         * panel
+         */
+        if(window.innerWidth > CloudCommander.MIN_ONE_PANEL_WIDTH)
+            pActive = {active: false};
+                    
+        /* if {active : false} getting passive panel */
+        if(pActive && !pActive.active){
+            var lId = lPanel.id === 'left' ? 'right' : 'left';
+            lPanel = lThis.getById(lId);
+        }
+            
+        
+        if(!lPanel)
+            console.log('Error can not find Active Panel');
+        
+        return lPanel;
+    };
+    
+    this.showPanel = function(pActive){
+        var lPanel = lThis.getPanel(pActive);
+                        
+        if(lPanel)
+            lPanel.className = 'panel';
+    };
+    
+    this.hidePanel = function(pActive){
+        var lPanel = lThis.getPanel(pActive);
+        
+        if(lPanel)
+            lPanel.className = 'panel hidden';
     };
 });
 
