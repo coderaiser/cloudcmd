@@ -202,22 +202,24 @@ CloudServer.generateHeaders = function(pName, pGzip){
      * загружаем стили
      */
     if(CloudFunc.checkExtension(pName,'css'))
-        lType='text/css';
+        lType = 'text/css';
     /* загружаем js */
     else if(CloudFunc.checkExtension(pName,'js'))
-        lType='text/javascript';
+        lType = 'text/javascript';
     /* загружаем картинки*/
     else if(CloudFunc.checkExtension(pName,'png'))
-        lType='image/png';
+        lType = 'image/png';
     /* загружаем json*/
     else if(CloudFunc.checkExtension(pName,'json'))
-        lType='application/json';
+        lType = 'application/json';
     else if(CloudFunc.checkExtension(pName,'html'))
-        lType='text/html';
+        lType = 'text/html';
     else if(CloudFunc.checkExtension(pName,'woff'))
-        lType='font/woff';
+        lType = 'font/woff';
     else if(CloudFunc.checkExtension(pName,'appcache'))
-        lType='text/cache-manifest';
+        lType = 'text/cache-manifest';
+    else if(CloudFunc.checkExtension(pName,'mp3'))
+        lType = 'audio/mpeg';
     /* если это неизвестный тип файла - 
      * высылаем его просто как текст
      */
@@ -373,7 +375,7 @@ CloudServer._controller=function(pReq, pRes)
             /* если в итоге путь пустой
              * делаем его корневым
              */                         
-            if (pathname==='')
+            if (pathname === '')
                 pathname = '/';
                         
             DirPath  = pathname;
@@ -384,198 +386,259 @@ CloudServer._controller=function(pReq, pRes)
             
             /* Проверяем с папкой ли мы имеем дело */
             
-            /* читаем сновные данные о файле */
-            var lStat;
-            try{
-                lStat=Fs.statSync(DirPath);
-            }catch(error){
-                console.log(error);
-                                
-                CloudServer.Statuses[DirPath]  = 404;
-                
-                CloudServer.sendResponse('OK',error.toString(),DirPath);
-            }
-            /* если это каталог - 
-             * читаем его содержимое
+            /* читаем основные данные о файле */
+            Fs.stat(DirPath, CloudServer._stated);
+            
+            /* если установлено сжатие
+             * меняем название html-файла и
+             * загружаем сжатый html-файл в дальнейшем
              */
-            try{                    
-                /* если установлено сжатие
-                 * меняем название html-файла и
-                 * загружаем сжатый html-файл в дальнейшем
-                 */
-                CloudServer.INDEX=(CloudServer.Minify._allowed.html?
-                    '.' + CloudServer.Minify.MinFolder + 'index.min.html'
-                    :CloudServer.INDEX);
-                /*
-                 * сохраним указатель на response
-                 * и на статус ответа
-                 */            
-                CloudServer.Responses[CloudServer.INDEX]=pRes;
-                CloudServer.Statuses[CloudServer.INDEX]  = 200;
-                 
-                if(lStat.isDirectory()){
-                    Fs.readdir(DirPath,CloudServer._readDir);
-                    
-                }
-                /* отдаём файл */
-                else if(lStat.isFile()){
-                    
-                    Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
-                    console.log('reading file: '+DirPath);
-                }
-            }catch(error){console.log(error);}
+            CloudServer.INDEX=(CloudServer.Minify._allowed.html?
+                '.' + CloudServer.Minify.MinFolder + 'index.min.html'
+                :CloudServer.INDEX);
+          
+            /*
+             * сохраним указатель на response
+             * и на статус ответа
+             */            
+            CloudServer.Responses[CloudServer.INDEX] = pRes;
+            CloudServer.Statuses[CloudServer.INDEX]  = 200;
         }
     }
 };
 
-/* Функция читает ссылку или выводит информацию об ошибке*/
-CloudServer._readDir=function (pError, pFiles)
-{
-    if(!pError)
-    {
-        /* данные о файлах в формате JSON*/
-        var lJSON=[];
-        var lJSONFile={};
-        /* Если мы не в корне добавляем слеш к будующим ссылкам */       
-       if(DirPath!=='/')
-        {
-            DirPath+='/';
-        }
+/* 
+ * Function geted stat information about file
+ */
+CloudServer._stated = function(pError, pStat){
+    if(pError){
+        CloudServer.Statuses[DirPath]  = 404;
+        CloudServer.sendResponse('OK',pError.toString(),DirPath);
+        
+        return;
+    }
 
-        pFiles=pFiles.sort();
-                
-        lJSON[0]={path:DirPath,size:'dir'};
-        var fReturnFalse=function returnFalse(){return false;};        
-        for(var i=0;i<pFiles.length;i++)
-        {
-            /* Получаем информацию о файле*/
-            var lStats;
-            try{
-                lStats=Fs.statSync(DirPath+pFiles[i]);
-            }catch(err){
-                /*
-                    console.log(err);
-                */
-                lStats={
-                    'mode':0,
-                    'size':0,
-                    'isDirectory':fReturnFalse
-                };
-            }
-            /*
-             *Переводим права доступа в 8-ричную систему
-             */
-            var lMode=(lStats.mode-0).toString(8);            
-                        
-            /* Если папка - выводим пиктограмму папки */
-            if(lStats.isDirectory())
-            {                
-                lJSONFile={'name':pFiles[i],
-                    'size':'dir',
-                    'uid':lStats.uid,
-                    'mode':lMode};
-                
-                lJSON[i+1]=lJSONFile;            
-            }
-            /* В противоположном случае - файла */
-            else
-            {
-                lJSONFile={'name':pFiles[i],
-                'uid':lStats.uid,
-                'size':lStats.size,
-                'mode':lMode};
-                
-                lJSON[i+1]=lJSONFile;
-            }
+    /* 
+     * если это каталог - 
+     * читаем его содержимое
+     */
+             
+    if(pStat){
+        if(pStat.isDirectory())
+            Fs.readdir(DirPath,CloudServer._readDir);                    
+        /* отдаём файл */
+        else if(pStat.isFile()){                        
+            Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
+            console.log('reading file: '+DirPath);
         }
+    }
+};
+
+
+/* Функция читает ссылку или выводит информацию об ошибке*/
+CloudServer._readDir = function (pError, pFiles)
+{
+    if(pError){
+        console.log(pError);
         
-        /* заголовок ответа сервера */        
-        var lHeader;        
-        var lList;
-        /* если js недоступен */
-        /* если javascript отключен вылылаем html-код
-         * и прописываем соответствующие заголовки
-         */
-        
-        if(CloudServer.NoJS){
-            var lPanel=CloudFunc.buildFromJSON(lJSON);
-            lList='<ul id=left class=panel>';
-            lList+=lPanel;
-            lList+='</ul>';
+        CloudServer.Statuses[DirPath]  = 404;
+        CloudServer.sendResponse('OK',pError.toString(), 
+            DirPath);
+        return;
+    }
+    
+    /* Если мы не в корне добавляем слеш к будующим ссылкам */       
+   if(DirPath !== '/')
+    {
+        DirPath += '/';
+    }
+
+    pFiles=pFiles.sort();
+    
+    var lCount = 0;
+    var lStats = {};
+    /* asyn getting file states
+     * and putting it to lStats object
+     */
+    var getFilesStat_f = function(pName){
+        return function(pError, pStat){                                    
+            var fReturnFalse = function returnFalse(){
+                return false;
+            };
             
-            lList+='<ul id=right class="panel hidden">';
-            lList+=lPanel;
-            lList+='</ul>';
-            try{
-                var lIndex;
-                /* пробуем достать данные из кэша
-                 * с жатием или без, взависимости
-                 * от настроек
-                 */
-                var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
-                /* если их нет там - вычитываем из файла*/
-                if(!lFileData){
-                    lIndex=Fs.readFileSync(CloudServer.INDEX);
-                    /* и сохраняем в кэш */
-                    CloudServer.Cache.set(CloudServer.INDEX,lIndex);
-                }else lIndex=lFileData;
+            if(pError)
+                lStats[pName] = {
+                            'mode':0,
+                            'size':0,
+                            'isDirectory':fReturnFalse
+                };
                 
-                /* если выбрана опция минифизировать скрпиты
-                 * меняем в index.html обычный client.js на
-                 * минифицированый
-                 */
-                lIndex=lIndex.toString();
-                
-                /* if scripts shoud be minified and
-                 * minification proceed sucessfully
-                 * we include minified version of
-                 * clien.js to index.html
-                 */
-                lIndex = CloudServer.Minify._allowed.css?
-                    lIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
-                        .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
-                    :lIndex;
-                      
-                lIndex = CloudServer.Minify._allowed.js?lIndex.replace('client.js',
-                    CloudServer.Minify.MinFolder + 
-                        'client.min.js')
-                    :lIndex;
-                
-                lIndex=lIndex.toString().replace('<div id=fm class=no-js>',
-                    '<div id=fm class=no-js>'+lList);
-                
-                /* меняем title */
-                lIndex=lIndex.replace('<title>Cloud Commander</title>',
-                    '<title>'+CloudFunc.setTitle()+'</title>');
-                
-                /* отображаем панель быстрых клавишь */
-                lList=lIndex;
-                
-                /* если браузер поддерживает gzip-сжатие*/
-                lHeader=CloudServer.generateHeaders('text/html',CloudServer.Gzip);
-            }catch(error){console.log(error);}
-        }else{
-            /* в обычном режиме(когда js включен
-             * высылаем json-структуру файлов
-             * с соответствующими заголовками
-             */
-            lList=JSON.stringify(lJSON);
-            lHeader=CloudServer.generateHeaders('application/json',CloudServer.Gzip);
+            else
+                lStats[pName] = pStat;
+            
+            /* if this file is last - moving next */
+            if(++lCount === pFiles.length)
+                CloudServer._fillJSON(lStats, pFiles);
+        };
+    };
+    
+    for(var i=0;i<pFiles.length;i++){
+        /* Получаем информацию о файле*/
+        Fs.stat(DirPath + pFiles[i],
+            getFilesStat_f(pFiles[i]));
+    }
+};
+
+/*
+ * Function fill JSON by file stats
+ *
+ * @pStats - object, contain file stats.
+ *          example {'1.txt': stat}
+ *
+ * @pFiles - array of files of current directory
+ */
+CloudServer._fillJSON = function(pStats, pFiles){
+    /* данные о файлах в формате JSON*/
+    var lJSON=[];
+    var lJSONFile={};
+        
+    lJSON[0]={path:DirPath,size:'dir'};
+    
+    var fReturnFalse=function returnFalse(){return false;};
+    for(var i=0;i<pFiles.length;i++)
+    {
+        /*
+         *Переводим права доступа в 8-ричную систему
+         */
+        var lName = pFiles[i];
+        
+        var lMode=(pStats[lName].mode-0).toString(8);            
+                    
+        /* Если папка - выводим пиктограмму папки */
+        if(pStats[lName].isDirectory())
+        {                
+            lJSONFile={'name':pFiles[i],
+                'size'  : 'dir',
+                'uid'   : pStats[lName].uid,
+                'mode'  : lMode};
+            
+            lJSON[i+1]=lJSONFile;            
         }
+        /* В противоположном случае - файла */
+        else
+        {
+            lJSONFile={'name':pFiles[i],
+            'uid'   : pStats[lName].uid,
+            'size'  : pStats[lName].size,
+            'mode'  : lMode};
+            
+            lJSON[i+1]=lJSONFile;
+        }
+    }
+    
+    /* заголовок ответа сервера */        
+    var lHeader;        
+    var lList;
+    /* если js недоступен */
+    /* если javascript отключен вылылаем html-код
+     * и прописываем соответствующие заголовки
+     */
+    
+    if(CloudServer.NoJS){
+        var lPanel=CloudFunc.buildFromJSON(lJSON);
+        lList='<ul id=left class=panel>';
+        lList+=lPanel;
+        lList+='</ul>';
+        
+        lList+='<ul id=right class="panel hidden">';
+        lList+=lPanel;
+        lList+='</ul>';
+    
+        var lIndex;
+        /* пробуем достать данные из кэша
+         * с жатием или без, взависимости
+         * от настроек
+         */
+        var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
+        /* если их нет там - вычитываем из файла*/
+        if(!lFileData) {
+            lIndex=Fs.readFile(CloudServer.INDEX,
+                CloudServer.indexReaded(lList));
+        }else {
+            var lReaded_f = CloudServer.indexReaded(lList);
+            lReaded_f(false, lFileData);
+        }
+    }else{
+        /* в обычном режиме(когда js включен
+         * высылаем json-структуру файлов
+         * с соответствующими заголовками
+         */
+        lList=JSON.stringify(lJSON);
+        lHeader=CloudServer.generateHeaders('application/json',CloudServer.Gzip);
+        
         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
         if(CloudServer.Gzip){
             Zlib.gzip(lList,CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
         }
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
-            CloudServer.sendResponse(lHeader,lList,CloudServer.INDEX);
-    }
-    else
-    {
-        console.log(pError);
-        CloudServer.sendResponse('OK',pError.toString(), 
-            DirPath);
-    }
+            CloudServer.sendResponse(lHeader,lList,CloudServer.INDEX);  
+    }  
+};
+
+CloudServer.indexReaded = function(pList){
+    return function(pError, pIndex){
+        if(pError){
+          return console.log(pError);
+        }
+        
+          /* и сохраняем в кэш */
+        CloudServer.Cache.set(CloudServer.INDEX, pIndex);
+        
+                 /* если выбрана опция минифизировать скрпиты
+                 * меняем в index.html обычный client.js на
+                 * минифицированый
+                 */
+        pIndex=pIndex.toString();
+        
+        /* if scripts shoud be minified and
+         * minification proceed sucessfully
+         * we include minified version of
+         * clien.js to index.html
+         */
+        pIndex = CloudServer.Minify._allowed.css?
+            pIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
+                .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
+            :pIndex;
+              
+        pIndex = CloudServer.Minify._allowed.js?pIndex.replace('client.js',
+            CloudServer.Minify.MinFolder + 
+                'client.min.js')
+            :pIndex;
+        
+        pIndex = pIndex.toString().replace('<div id=fm class=no-js>',
+            '<div id=fm class=no-js>'+pList);
+        
+        /* меняем title */
+        pIndex = pIndex.replace('<title>Cloud Commander</title>',
+            '<title>'+CloudFunc.setTitle()+'</title>');
+        
+        /* отображаем панель быстрых клавишь */
+        pList = pIndex;
+        
+        var lHeader;
+        /* если браузер поддерживает gzip-сжатие*/
+        lHeader = CloudServer.generateHeaders('text/html',CloudServer.Gzip);
+        
+         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
+        if(CloudServer.Gzip) {
+            Zlib.gzip(pList,
+                CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
+        }
+        /* если не поддерживаеться - отсылаем данные без сжатия*/
+        else
+            CloudServer.sendResponse(lHeader,pList,CloudServer.INDEX);
+    };
 };
 
 /* Функция генерирует функцию считывания файла
