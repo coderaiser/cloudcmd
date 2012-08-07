@@ -146,7 +146,19 @@ CloudClient.Util        = (function(){
      * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', parent: '',
         async: false, inner: 'id{color:red, }, class:'', not_append: false}
      */
-    this.anyload     = function(pParams_o){         
+    this.anyload     = function(pParams_o){
+        /* if a couple of params was
+         * processing every of params
+         * and quit
+         */
+        if(Array.isArray(pParams_o)){
+            var lElements_a = [];
+            for(var i=0; i < pParams_o.length; i++)
+                lElements_a[i] = this.anyload(pParams_o[i]);
+            
+            return lElements_a;
+        }
+        
         /* убираем путь к файлу, оставляя только название файла */
         var lID     = pParams_o.id;
         var lClass  = pParams_o.className;
@@ -154,16 +166,21 @@ CloudClient.Util        = (function(){
         var lFunc   = pParams_o.func;
         var lAsync  = pParams_o.async;
         
-        if(!lID) {
+        if(!lID && lSrc)
             lID = this.getIdBySrc(lSrc);
-        }
         
         var element = getById(lID);
         /* если скрипт еще не загружен */
         if(!element)
         {
+            if(!pParams_o.name)
+                return {code: -1, text: 'name can not be empty'};
+            
             element     = document.createElement(pParams_o.name);
-            element.id  = lID;
+            
+            if(lID)
+                element.id  = lID;
+            
             if(lClass)
                 element.className = lClass;
             /* if working with external css
@@ -171,7 +188,7 @@ CloudClient.Util        = (function(){
              * using src
              */
             pParams_o.name === 'link' ? 
-                  element.href = lSrc
+                  ((element.href = lSrc) && (element.rel = 'stylesheet'))
                 : element.src  = lSrc;
                         
             /* if passed arguments function
@@ -222,15 +239,18 @@ CloudClient.Util        = (function(){
     },
 
     /* Функция загружает js-файл */
-    this.jsload      = function(pSrc, pFunc, pStyle, pId, pAsync, pInner){
+    this.jsload      = function(pSrc, pFunc){
+        if(Array.isArray(pSrc)){
+            for(var i=0; i < pSrc.length; i++)
+                pSrc[i].name = 'script';
+            
+            return this.anyload(pSrc);
+        }
+            
         this.anyload({
             name : 'script',
             src  : pSrc,
-            func : pFunc,
-            stle : pStyle,
-            id   : pId,
-            async: pAsync,
-            inner: pInner
+            func : pFunc
         });
     },
     
@@ -252,14 +272,19 @@ CloudClient.Util        = (function(){
      * все параметры опциональны
      */
     this.cssLoad     = function(pParams_o){
+         if(Array.isArray(pParams_o)){
+            for(var i=0; i < pParams_o.length; i++){
+                pParams_o[i].name = 'link';
+                pParams_o[i].parent   = pParams_o.parent || document.head;                
+            }
+            
+            return this.anyload(pParams_o);
+        }
+        
         pParams_o.name      = 'link';
         pParams_o.parent   = pParams_o.parent || document.head;
-        var lElem           = this.anyload(pParams_o);
-            
-        lElem &&
-            (lElem.rel = 'stylesheet');
-        
-        return lElem;
+
+        return this.anyload(pParams_o);
     };
     
     this.getById     = function(pId){return document.getElementById(pId);};
@@ -435,7 +460,7 @@ CloudClient.Util        = (function(){
 /* функция обработки нажатий клавишь */
 CloudClient.keyBinding=(function(){
     /* loading keyBinding module and start it */
-    Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js',function(){
+    Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js', function(){
             CloudCommander.keyBinding();
     });
 });
@@ -691,21 +716,20 @@ CloudClient.init=(function()
         }
     });
     
-        /* загружаем общие функции для клиента и сервера*/
-        Util.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
-            /* берём из обьекта window общий с сервером функционал */
-            CloudFunc=window.CloudFunc;
-            
-            /* меняем ссылки на ajax'овые*/
-            CloudClient._changeLinks(CloudFunc.LEFTPANEL);
-            CloudClient._changeLinks(CloudFunc.RIGHTPANEL);
-                    
-            /* устанавливаем переменную доступности кэша*/
-            CloudClient.Cache.isAllowed();    
-            /* Устанавливаем кэш корневого каталога */    
-            if(!CloudClient.Cache.get('/'))CloudClient.Cache.set('/',CloudClient._getJSONfromFileTable());  
-        }
-    );                
+    /* загружаем общие функции для клиента и сервера*/
+    Util.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
+        /* берём из обьекта window общий с сервером функционал */
+        CloudFunc=window.CloudFunc;
+        
+        /* меняем ссылки на ajax'овые*/
+        CloudClient._changeLinks(CloudFunc.LEFTPANEL);
+        CloudClient._changeLinks(CloudFunc.RIGHTPANEL);
+                
+        /* устанавливаем переменную доступности кэша*/
+        CloudClient.Cache.isAllowed();    
+        /* Устанавливаем кэш корневого каталога */    
+        if(!CloudClient.Cache.get('/'))CloudClient.Cache.set('/',CloudClient._getJSONfromFileTable());  
+    });
               
     /* устанавливаем размер высоты таблицы файлов
      * исходя из размеров разрешения экрана
