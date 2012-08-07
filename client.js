@@ -132,6 +132,33 @@ CloudClient.Util        = (function(){
         return lID.replace('.','_');
     },
 
+
+    this.loadOnload = function(pFunc_a){
+        if(Array.isArray(pFunc_a) && pFunc_a.length){
+            var lFunc_f = pFunc_a.pop();
+            
+            if(typeof lFunc_f === 'function')
+                lFunc_f();
+                
+            return this.loadOnload(pFunc_a);
+        }
+        else if(typeof pFunc_a === 'function')                    
+            return pFunc_a();
+    };
+    
+     this.anyLoadOnload = function(pParams_a){
+        if(Array.isArray(pParams_a) && pParams_a.length){
+            var lParams_o = pParams_a.pop();
+                        
+            if(!lParams_o.func)
+                lParams_o.func = function(){                    
+                    lThis.anyLoadOnload(pParams_a);  
+                };
+                                    
+            return this.anyload(lParams_o);
+        }
+    };
+    
     /* 
      * Функция создаёт элемент и
      * загружает файл с src.
