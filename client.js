@@ -17,13 +17,15 @@ var CloudClient = {
     init                    :function(){},
     
     keyBinding              :function(){},/* функция нажатий обработки клавишь*/
+    keyBinded               :false,  /* оброботка нажатий клавишь установлена */
+    
     Editor                  :function(){},/* function loads and shows editor  */
     Viewer                  :function(){},/* function loads and shows viewer  */
     Terminal                :function(){},/* function loads and shows terminal*/
-    keyBinded               :false,/* оброботка нажатий клавишь установлена   */
-    _loadDir                :function(){},/* Функция привязываеться ко всем
-                                       * ссылкам и
-                                       *  загружает содержимое каталогов  */
+            
+    _loadDir                :function(){}, /* Функция привязываеться ко всем
+                                            * ссылкам и
+                                            *  загружает содержимое каталогов */
     
     /* ОБЬЕКТЫ */
     /* Обьект для работы с кэшем */
@@ -49,15 +51,6 @@ var CloudClient = {
     */
     HEIGHT                 :0,
     MIN_ONE_PANEL_WIDTH    :1155
-};
-
-/* short names used all the time functions */
-var getByClass  = function(pClass){
-    return document.getElementsByClassName(pClass);
-};
-
-var getById     = function(pId){
-    return document.getElementById(pId);
 };
 
 /* 
@@ -653,7 +646,9 @@ CloudClient._currentToParent = (function(pDirName){
 }); 
   
 /* глобальные переменные */
-var CloudFunc, $, Util;
+var CloudFunc, $, Util,
+/* short names used all the time functions */
+    getByClass, getById;
 
 /* Конструктор CloudClient, который
  * выполняет весь функционал по
@@ -662,6 +657,8 @@ var CloudFunc, $, Util;
 CloudClient.init=(function()
 {    
     Util = new CloudClient.Util();
+    getByClass  = Util.getByClass;
+    getById     = Util.getById;
     
     /* меняем title 
      * если js включен - имена папок отображать необязательно...
@@ -715,7 +712,7 @@ CloudClient.init=(function()
      */ 
                  
     /* выделяем строку с первым файлом */
-    var lFmHeader=getByClass('fm_header');
+    var lFmHeader = getByClass('fm_header');
     if(lFmHeader && lFmHeader[0].nextSibling)
         lFmHeader[0].nextSibling.className=CloudClient.CURRENT_FILE;
     
@@ -845,7 +842,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
           */
          var lPanel;
          try{
-            lPanel=getByClass(CloudClient.CURRENT_FILE)[0].parentElement.id;
+            lPanel = getByClass(CloudClient.CURRENT_FILE)[0].parentElement.id;
          }catch(error){console.log("Current file not found\n"+error);}
          
         if(pNeedRefresh===undefined && lPanel){
@@ -929,9 +926,9 @@ CloudClient._createFileTable = function(pElem,pJSON)
  */
 CloudClient._getJSONfromFileTable=function()
 {
-    var lLeft=getById('left');    
-    var lPath=getByClass('path')[0].textContent;
-    var lFileTable=[{path:lPath,size:'dir'}];
+    var lLeft       = getById('left');    
+    var lPath       = getByClass('path')[0].textContent;
+    var lFileTable  = [{path:lPath,size:'dir'}];
     var lLI=lLeft.getElementsByTagName('li');
     
     var j=1;/* счётчик реальных файлов */
