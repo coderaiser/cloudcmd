@@ -815,42 +815,42 @@ CloudClient._changeLinks = function(pPanelID)
     var lFS_s   = CloudFunc.FS;
     
     for(var i=0;i<a.length;i++)
-    {                
-        /* если ссылка на папку, а не файл */
-        //if(a[i].target !== '_blank')
-        {
-            /* убираем адрес хоста*/
-            var link='/'+a[i].href.replace(document.location.href,'');
-            /* убираем значения, которые говорят,
-             * об отсутствии js
-             */
-         
-            if(link.indexOf(lNoJS_s)===lFS_s.length){
-                link=link.replace(lNoJS_s,'');
-            }            
-            /* ставим загрузку гифа на клик*/
-            if(i===lREFRESHICON)
-                a[i].onclick=CloudClient._loadDir(link,true);            
-            /* устанавливаем обработчики на строку на одинарное и
-             * двойное нажатие на левую кнопку мышки
-             */
-            else{
-                var lLi;
+    {        
+        /* убираем адрес хоста*/
+        var link='/'+a[i].href.replace(document.location.href,'');
+        /* убираем значения, которые говорят,
+         * об отсутствии js
+         */
+     
+        if(link.indexOf(lNoJS_s)===lFS_s.length){
+            link=link.replace(lNoJS_s,'');
+        }            
+        /* ставим загрузку гифа на клик*/
+        if(i===lREFRESHICON)
+            a[i].onclick=CloudClient._loadDir(link,true);            
+        /* устанавливаем обработчики на строку на одинарное и
+         * двойное нажатие на левую кнопку мышки
+         */
+        else{
+            var lLi;
+            
+            try{
+                lLi = a[i].parentElement.parentElement;
+            }catch(error){console.log(error);}
+            
+            /* if we in path changing onclick events*/
+            if (lLi.className === 'path') {
+                a[i].onclick  = CloudClient._loadDir(link);                    
+            }
+            else {
+                lLi.onclick   = CloudClient._setCurrent();
                 
-                try{
-                    lLi = a[i].parentElement.parentElement;
-                }catch(error){console.log(error);}
-                
-                /* if we in path changing onclick events*/
-                if (lLi.className === 'path') {
-                    a[i].onclick  = CloudClient._loadDir(link);                    
-                }
-                else {
-                    lLi.onclick     = CloudClient._setCurrent();
+                /* если ссылка на папку, а не файл */
+                if(a[i].target !== '_blank')
                     lLi.ondblclick  = CloudClient._loadDir(link);
-                    lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
-                        '(' + pPanelID + ')';
-                }
+                
+                lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
+                    '(' + pPanelID + ')';
             }
         }        
     }
