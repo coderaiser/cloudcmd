@@ -652,6 +652,12 @@ CloudClient._setCurrent=(function(){
              if(pFromEnter===true){
                 if(typeof this.ondblclick === 'function')
                     this.ondblclick(this);
+                    /*  enter pressed on file */
+                else{
+                    var lA = this.getElementsByTagNames('a');
+                    if(typeof lA.ondblclick === 'function')
+                        lA.ondblclick(this);
+                }
              }/* если мы попали сюда от клика мышки */
              else{pFromEnter.returnValue=false;}
                                        
@@ -849,7 +855,6 @@ CloudClient._changeLinks = function(pPanelID)
                 /* если ссылка на папку, а не файл */
                 if(a[i].target !== '_blank')
                     lLi.ondblclick  = CloudClient._loadDir(link);
-                else lLi.ondblclick = function(){return false;};
                 
                 lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
                     '(' + pPanelID + ')';
