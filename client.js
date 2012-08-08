@@ -798,8 +798,8 @@ CloudClient._changeLinks = function(pPanelID)
     if(lClearcache)lClearcache.onclick=CloudClient.Cache.clear;    
     
     /* меняем ссылки на ajax-запросы */
-    var lPanel=getById(pPanelID);
-    var a=lPanel.getElementsByTagName('a');
+    var lPanel = getById(pPanelID);
+    var a = lPanel.getElementsByTagName('a');
     
       /* Если нажмут на кнопку перезагрузить страниц - её нужно будет обязательно
      * перезагрузить
@@ -817,7 +817,7 @@ CloudClient._changeLinks = function(pPanelID)
     for(var i=0;i<a.length;i++)
     {                
         /* если ссылка на папку, а не файл */
-        if(a[i].target !== '_blank')
+        //if(a[i].target !== '_blank')
         {
             /* убираем адрес хоста*/
             var link='/'+a[i].href.replace(document.location.href,'');
