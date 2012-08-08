@@ -14,6 +14,7 @@ buttons.
 if parent directory not in view area, page will
 scroll to needed place.
 
+* Fixed bug with tab key pressed.
 
 2012.08.06, Version 0.1.5
 
