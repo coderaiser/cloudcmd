@@ -848,6 +848,7 @@ CloudClient._changeLinks = function(pPanelID)
                 /* если ссылка на папку, а не файл */
                 if(a[i].target !== '_blank')
                     lLi.ondblclick  = CloudClient._loadDir(link);
+                else lLi.ondblclick = function(){return false;};
                 
                 lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
                     '(' + pPanelID + ')';
