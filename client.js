@@ -654,7 +654,7 @@ CloudClient._setCurrent=(function(){
                     this.ondblclick(this);
                     /*  enter pressed on file */
                 else{
-                    var lA = this.getElementsByTagName('a');
+                    var lA = this.getElementsByTagName('a')[0];
                     if(typeof lA.ondblclick === 'function')
                         lA.ondblclick(this);
                 }
