@@ -446,19 +446,19 @@ CloudClient.Util        = (function(){
         var lPanel;
         
         lPanel = lThis.getCurrentFile().parentElement;
-        
-        /* if two panels showed
-         * then always work with passive
-         * panel
-         */
-        if(window.innerWidth > CloudCommander.MIN_ONE_PANEL_WIDTH)
-            pActive = {active: false};
-                    
+                            
         /* if {active : false} getting passive panel */
         if(pActive && !pActive.active){
             var lId = lPanel.id === 'left' ? 'right' : 'left';
             lPanel = lThis.getById(lId);
         }
+        
+        /* if two panels showed
+         * then always work with passive
+         * panel
+         */
+        if(window.innerWidth < CloudCommander.MIN_ONE_PANEL_WIDTH)
+            lPanel = lThis.getById('left');
             
         
         if(!lPanel)
