@@ -650,7 +650,8 @@ CloudClient._setCurrent=(function(){
             }
              /* если мы попали сюда с энтера*/
              if(pFromEnter===true){
-                this.ondblclick(this);               
+                if(typeof this.ondblclick === 'function')
+                    this.ondblclick(this);
              }/* если мы попали сюда от клика мышки */
              else{pFromEnter.returnValue=false;}
                                        
