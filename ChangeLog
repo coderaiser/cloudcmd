@@ -10,6 +10,11 @@ buttons.
 
 * Added moving scrolling by cursor ability.
 
+* Fixed bug with go to parent directory: from now,
+if parent directory not in view area, page will
+scroll to needed place.
+
+
 2012.08.06, Version 0.1.5
 
 * Added tab support.
