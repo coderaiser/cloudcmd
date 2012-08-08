@@ -680,11 +680,11 @@ CloudClient._currentToParent = (function(pDirName){
     /* опредиляем в какой мы панели:
     * правой или левой
     */
-    var lCurrentFile = getByClass(CloudClient.CURRENT_FILE);
-    var lPanel       = lCurrentFile[0].parentElement;
+    var lCurrentFile = Util.getCurrentFile();
+    var lPanel       = Util.getPanel();
 
     /* убираем слэш с имени каталога*/
-    pDirName=pDirName.replace('/','');
+    pDirName = pDirName.replace('/','');
     
     var lRootDir = getById(pDirName + '(' + lPanel.id + ')');
     
@@ -692,8 +692,10 @@ CloudClient._currentToParent = (function(pDirName){
      * set it to current file
      */
     if(lRootDir){
-        !(lCurrentFile[0].className = '') &&
-        (lRootDir.className = CloudClient.CURRENT_FILE);
+        lCurrentFile.className = '';
+        
+        lRootDir.className = CloudClient.CURRENT_FILE;
+        lRootDir.scrollIntoViewIfNeeded();
     }
 }); 
   
