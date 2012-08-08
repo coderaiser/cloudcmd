@@ -319,15 +319,7 @@ CloudClient.Util        = (function(){
     this.getByClass  = function(pClass){
         return document.getElementsByClassName(pClass);
     };
-    
-    this.getPanel    = function(){
-        var lCurrent = document.getElementsByClassName('current-file');
-        lCurrent.length &&
-            (lCurrent = lCurrent[0].parentElement);
-        
-        return lCurrent && lCurrent.id;
-    };
-        
+            
     /* private members */
     var lLoadingImage;
     var lErrorImage;
