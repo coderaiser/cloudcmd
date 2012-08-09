@@ -431,18 +431,28 @@ CloudClient.Util        = (function(){
         return lCurrent;
     };
     
+    this.setCurrentFile = function(pCurrentFile){
+        if(!pCurrentFile)
+            this.addCloudStatus({
+                code : -1,
+                msg  : 'Error pCurrentFile could not be none'
+            });
+        
+        return pCurrentFile.className = CloudCommander.CURRENT_FILE;
+    };
+    
     this.getCurrentLink = function(pCurrentFile){
         var lCurrent = this.getCurrentFile();
                 
-        var lLink;        
+        var lLink;
         lLink = (pCurrentFile ? pCurrentFile : lCurrent)
             .getElementsByTagName('a')[0];
             
         if(!lLink)
-            this.CloudStatus = {
+            this.addCloudStatus({
                 code : -1,
                 msg  : 'Error current element do not contain links'
-            };
+            });
         
         return lLink; 
     };
@@ -489,7 +499,11 @@ CloudClient.Util        = (function(){
             lPanel.className = 'panel hidden';
     };
     
-    this.CloudStatus = {};
+    this.CloudStatus = [];
+    
+    this.addCloudStatus = function(pStatus){
+        this.CloudStatus[this.CloudStatus.length] = pStatus;
+    };
 });
 
 
