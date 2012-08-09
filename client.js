@@ -754,9 +754,8 @@ CloudClient._currentToParent = (function(pDirName){
      * set it to current file
      */
     if(lRootDir){
-        lCurrentFile.className = '';
-        
-        lRootDir.className = CloudClient.CURRENT_FILE;
+        Util.unSetCurrentFile(lCurrentFile);
+        Util.SetCurrentFile(lRootDir);
         lRootDir.scrollIntoViewIfNeeded();
     }
 }); 
@@ -772,7 +771,7 @@ var CloudFunc, $, Util,
  */
 CloudClient.init=(function()
 {    
-    Util = new CloudClient.Util();
+    Util        = new CloudClient.Util();
     getByClass  = Util.getByClass;
     getById     = Util.getById;
     
