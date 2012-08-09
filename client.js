@@ -665,7 +665,7 @@ CloudClient._setCurrent=(function(){
          * вызоветься _loadDir
          */
         return function(pFromEnter){
-            var lCurrentFile = Util.getCurrent();
+            var lCurrentFile = Util.getCurrentFile();
             if(lCurrentFile){
                 /* если мы находимся не на 
                  * пути и не на заголовках
