@@ -431,6 +431,22 @@ CloudClient.Util        = (function(){
         return lCurrent;
     };
     
+    this.getCurrentLink = function(pCurrentFile){
+        var lCurrent = this.getCurrentFile();
+                
+        var lLink;        
+        lLink = (pCurrentFile ? pCurrentFile : lCurrent)
+            .getElementsByTagName('a')[0];
+            
+        if(!lLink)
+            this.CloudStatus = {
+                code : -1,
+                msg  : 'Error current element do not contain links'
+            };
+        
+        return lLink; 
+    };
+    
     /* function getting panel active, or passive
      * @pPanel_o = {active: true}
       */
@@ -472,6 +488,8 @@ CloudClient.Util        = (function(){
         if(lPanel)
             lPanel.className = 'panel hidden';
     };
+    
+    this.CloudStatus = {};
 });
 
 
@@ -576,10 +594,11 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
  * @pEvent
  */
 CloudClient._editFileName = (function(pParent){
-var lA = pParent.getElementsByTagName('a');
-    if (lA.length && lA.textContent !== '..'){
+    var lA = Util.getCurrentLink(pParent);
+    
+    if (lA && lA.textContent !== '..'){
             
-            lA[0].contentEditable = true;
+            lA.contentEditable = true;
             CloudCommander.keyBinded = false;
             
             var lDocumentOnclick = document.onclick;
@@ -589,9 +608,9 @@ var lA = pParent.getElementsByTagName('a');
              * backs
              */
             document.onclick = (function(){
-                var lA = pParent.getElementsByTagName('a');
-                if (lA.length && lA.textContent !== '..')
-                    lA[0].contentEditable = false;
+                var lA = Util.getCurrentLink(pParent);
+                if (lA && lA.textContent !== '..')
+                    lA.contentEditable = false;
                 
                 CloudCommander.keyBinded = true;
                 
