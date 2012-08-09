@@ -755,7 +755,7 @@ CloudClient._currentToParent = (function(pDirName){
      */
     if(lRootDir){
         Util.unSetCurrentFile(lCurrentFile);
-        Util.SetCurrentFile(lRootDir);
+        Util.setCurrentFile(lRootDir);
         lRootDir.scrollIntoViewIfNeeded();
     }
 }); 
