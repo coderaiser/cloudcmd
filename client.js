@@ -828,7 +828,7 @@ CloudClient.init=(function()
     /* выделяем строку с первым файлом */
     var lFmHeader = getByClass('fm_header');
     if(lFmHeader && lFmHeader[0].nextSibling)
-        lFmHeader[0].nextSibling.className=CloudClient.CURRENT_FILE;
+        Util.setCurrentFile(lFmHeader[0].nextSibling);
     
     /* показываем элементы, которые будут работать только, если есть js */
     var lFM = getById('fm');
@@ -837,7 +837,8 @@ CloudClient.init=(function()
     
     /* если есть js - показываем правую панель*/
     var lRight=getById('right');
-    if(lRight)lRight.className=lRight.className.replace('hidden','');
+    if(lRight)
+        lRight.className = lRight.className.replace('hidden','');
     
     /* формируем и округляем высоту экрана
      * при разрешениии 1024x1280:
@@ -863,8 +864,9 @@ CloudClient.init=(function()
 CloudClient._changeLinks = function(pPanelID)
 {
     /* назначаем кнопку очистить кэш и показываем её*/
-    var lClearcache=getById('clear-cache');
-    if(lClearcache)lClearcache.onclick=CloudClient.Cache.clear;    
+    var lClearcache = getById('clear-cache');
+    if(lClearcache)
+        lClearcache.onclick = CloudClient.Cache.clear;    
     
     /* меняем ссылки на ajax-запросы */
     var lPanel = getById(pPanelID);
@@ -935,11 +937,12 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
 {                                   
         /* Отображаем красивые пути */
         /* added supporting of russian  language */
-        var lPath=decodeURI(path);
-        var lFS_s=CloudFunc.FS;
-        if(lPath.indexOf(lFS_s)===0){
-            lPath=lPath.replace(lFS_s,'');
-            if(lPath==='')lPath='/';
+        var lPath = decodeURI(path);
+        var lFS_s = CloudFunc.FS;
+        if(lPath.indexOf(lFS_s) === 0){
+            lPath = lPath.replace(lFS_s,'');
+            if(lPath === '')
+                lPath='/';
         }
         console.log ('reading dir: "'+lPath+'";');
         
@@ -955,21 +958,23 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
           * правой или левой
           */
          var lPanel;
-         try{
-            lPanel = getByClass(CloudClient.CURRENT_FILE)[0].parentElement.id;
-         }catch(error){console.log("Current file not found\n"+error);}
+         try{            
+            lPanel = Util.getPanel().id;
+         }catch(error){console.log("Current panel not found\n"+error);}
          
-        if(pNeedRefresh===undefined && lPanel){
-            var lJSON=CloudClient.Cache.get(lPath);
-            if (lJSON!==null){
+        if(pNeedRefresh === undefined && lPanel){
+            var lJSON = CloudClient.Cache.get(lPath);
+            if (lJSON !== null){
+                
                 /* переводим из текста в JSON */
                 if(window && !window.JSON){
                     try{
-                        lJSON=eval('('+lJSON+')');
+                        lJSON = eval('('+lJSON+')');
                     }catch(err){
                         console.log(err);
                     }
-                }else lJSON=JSON.parse(lJSON);
+                }else lJSON = JSON.parse(lJSON);
+                
                 CloudClient._createFileTable(lPanel,lJSON);
                 CloudClient._changeLinks(lPanel);
                 return;
