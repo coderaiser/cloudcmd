@@ -441,6 +441,18 @@ CloudClient.Util        = (function(){
         return pCurrentFile.className = CloudCommander.CURRENT_FILE;
     };
     
+    this.isCurrentFile = function(pCurrentFile){
+        if(!pCurrentFile)
+            this.addCloudStatus({
+                code : -1,
+                msg  : 'Error pCurrentFile in'  + 
+                        'isCurrentFile'         +
+                        'could not be none'
+            });
+        
+        return (pCurrentFile.className === CloudCommander.CURRENT_FILE);
+    };
+    
     this.getCurrentLink = function(pCurrentFile){
         var lCurrent = this.getCurrentFile();
                 
@@ -561,16 +573,18 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
             /* ctrl+r нажата? */
             Util.Images.showLoad(pNeedRefresh ? this : null);
             
-            var lCurrentFile=getByClass(CloudClient.CURRENT_FILE);
+            var lCurrentFile = Util.getCurrentFile();
             /* получаем имя каталога в котором находимся*/ 
             var lHref;
             try{
-                lHref=lCurrentFile[0].parentElement.getElementsByClassName('path')[0].textContent;
+                lHref = lCurrentFile.parentElement
+                    .getElementsByClassName('path')[0].textContent;
+                    
             }catch(error){console.log('error');}
             
-            lHref=CloudFunc.removeLastSlash(lHref);
-            var lSubstr=lHref.substr(lHref,lHref.lastIndexOf('/'));
-            lHref=lHref.replace(lSubstr+'/','');
+            lHref       = CloudFunc.removeLastSlash(lHref);
+            var lSubstr = lHref.substr(lHref,lHref.lastIndexOf('/'));
+            lHref       = lHref.replace(lSubstr+'/','');
                                      
             /* загружаем содержимое каталога*/
             CloudClient._ajaxLoad(pLink, pNeedRefresh);
@@ -580,10 +594,11 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
              * или <Ctrl>+R - ссылок мы ненайдём
              * и заходить не будем
              */
-            var lA=this.getElementsByTagName('a');
+            var lA = Util.getCurrentLink(this);
+            
             /* если нажали на ссылку на верхний каталог*/
-            if(lA.length>0 && lA[0].textContent==='..' &&
-                lHref!=='/'){
+            if(lA && lA.textContent==='..' && lHref!=='/'){
+            
             /* функция устанавливает курсор на каталог
              * с которого мы пришли, если мы поднялись
              * в верх по файловой структуре
@@ -650,15 +665,15 @@ CloudClient._setCurrent=(function(){
          * вызоветься _loadDir
          */
         return function(pFromEnter){
-            var lCurrentFile=getByClass(CloudClient.CURRENT_FILE);
-            if(lCurrentFile && lCurrentFile.length > 0){
+            var lCurrentFile = Util.getCurrent();
+            if(lCurrentFile){
                 /* если мы находимся не на 
                  * пути и не на заголовках
                  */
                 if(this.className!=='path' && 
                     this.className!=='fm_header'){
                         
-                    if (this.className === CloudClient.CURRENT_FILE &&
+                    if (Util.isCurrentFile(this)  &&
                         typeof pFromEnter !== 'boolean'){
                         var lParent = this;
                         
@@ -669,15 +684,16 @@ CloudClient._setCurrent=(function(){
                              * in other case
                              * double click event happend
                              */
-                            if(lParent.className === CloudClient.CURRENT_FILE)
+                            if(Util.isCurrentFile(lParent))
                                 CloudClient._editFileName(lParent);
                             },400);
                     }
                     else{
-                        lCurrentFile[0].className='';
+                        lCurrentFile.className='';
+                        
                         /* устанавливаем курсор на файл,
-                        * на который нажали */                                        
-                        this.className = CloudClient.CURRENT_FILE;
+                        * на который нажали */
+                        Util.setCurrentFile(this);
                     }
                 }
             }
