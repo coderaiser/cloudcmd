@@ -435,10 +435,24 @@ CloudClient.Util        = (function(){
         if(!pCurrentFile)
             this.addCloudStatus({
                 code : -1,
-                msg  : 'Error pCurrentFile could not be none'
+                msg  : 'Error pCurrentFile in'  +
+                        'setCurrentFile'        +
+                        'could not be none'
             });
         
         return pCurrentFile.className = CloudCommander.CURRENT_FILE;
+    };
+    
+    this.unSetCurrentFile = function(pCurrentFile){
+        if(!pCurrentFile)
+            this.addCloudStatus({
+                code : -1,
+                msg  : 'Error pCurrentFile in'  +
+                        'setCurrentFile'        +
+                        'could not be none'
+            });
+        
+        return pCurrentFile.className = '';
     };
     
     this.isCurrentFile = function(pCurrentFile){
@@ -689,7 +703,7 @@ CloudClient._setCurrent=(function(){
                             },400);
                     }
                     else{
-                        lCurrentFile.className='';
+                        Util.unSetCurrentFile(lCurrentFile);
                         
                         /* устанавливаем курсор на файл,
                         * на который нажали */
