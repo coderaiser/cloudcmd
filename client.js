@@ -122,11 +122,7 @@ var PolyFills = {
     setDocumentHead : (function(){
         document.head = document.getElementsByTagName("head")[0];
     }),
-    
-    setDocumentBody : (function(){
-        document.body = document.getElementsByTagName("body")[0];
-    }),
-    
+        
     getElementsByClassName: (function(pFunc){
         var lThis = this;
         
@@ -149,7 +145,6 @@ var PolyFills = {
                      * doucment.body
                      */
                     lThis.setDocumentHead();
-                    lThis.setDocumentBody();
                     
                     if(typeof pFunc === 'function')
                         pFunc();
@@ -161,8 +156,7 @@ var PolyFills = {
                                 return window.jQuery('.'+pClassName)[0];
                             };
                             
-                        lThis.setDocumentHead();
-                        lThis.setDocumentBody();    
+                        lThis.setDocumentHead();  
                         
                         if(typeof pFunc === 'function')
                             pFunc();
@@ -316,10 +310,14 @@ CloudClient.Util        = (function(){
         /* если js-файл уже загружен 
          * запускаем функцию onload
          */
-        else if(lFunc && typeof lFunc==='function'){
-            try{
+        else if(lFunc){
+            if(typeof lFunc === 'function')
                 lFunc();
-            }catch(error){console.log(error);}
+            
+            else if(typeof lFunc === 'object' && 
+                typeof lFunc.onload === 'function')
+                    lFunc.onload();
+                
         }
         return element;
     },
