@@ -117,6 +117,43 @@ CloudClient.Cache.clear = (function(){
     }
 });
 
+/* object contain poyfills of functions */
+var PolyFills = {
+    getElementsByClassName: (function(pFunc){
+         /* если нет функции поиска по класам,
+         * а её нет в IE,
+         * - используем jquery
+         * при необходимости
+         * можна заменить на любой другой код
+         */ 
+         if(!document.getElementsByClassName){
+             Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+                 onload: function(){
+                    /* сохраняем переменную jQuery себе в область видимости */
+                    document.getElementsByClassName = function(pClassName){
+                        return window.jQuery('.'+pClassName)[0];                    
+                    };
+                    
+                    if(typeof pFunc === 'function')
+                        pFunc();
+                 },
+                onerror: function(){
+                    Util.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
+                        function(){
+                           getByClass=function(pClassName){
+                                return window.jQuery('.'+pClassName)[0];
+                            };
+                        
+                        if(typeof pFunc === 'function')
+                            pFunc();
+                    });
+                }
+            });
+        }
+    })
+    
+};
+
 /* Object contain additional system functional */
 CloudClient.Util        = (function(){
     /*
@@ -134,28 +171,32 @@ CloudClient.Util        = (function(){
 
 
     this.loadOnload = function(pFunc_a){
-        if(Array.isArray(pFunc_a) && pFunc_a.length){
-            var lFunc_f = pFunc_a.pop();
-            
-            if(typeof lFunc_f === 'function')
-                lFunc_f();
+        if(pFunc_a.length && Array.isArray &&
+            Array.isArray(pFunc_a)) {
                 
-            return this.loadOnload(pFunc_a);
+                var lFunc_f = pFunc_a.pop();
+                
+                if(typeof lFunc_f === 'function')
+                    lFunc_f();
+                    
+                return this.loadOnload(pFunc_a);
         }
         else if(typeof pFunc_a === 'function')                    
             return pFunc_a();
     };
     
      this.anyLoadOnload = function(pParams_a){
-        if(Array.isArray(pParams_a) && pParams_a.length){
-            var lParams_o = pParams_a.pop();
-                        
-            if(!lParams_o.func)
-                lParams_o.func = function(){                    
-                    lThis.anyLoadOnload(pParams_a);  
-                };
-                                    
-            return this.anyload(lParams_o);
+        if(pParams_a.length && Array.isArray &&
+            Array.isArray(pParams_a)) {
+                
+                var lParams_o = pParams_a.pop();
+                            
+                if(!lParams_o.func)
+                    lParams_o.func = function(){                    
+                        lThis.anyLoadOnload(pParams_a);  
+                    };
+                                        
+                return this.anyload(lParams_o);
         }
     };
     
@@ -178,7 +219,7 @@ CloudClient.Util        = (function(){
          * processing every of params
          * and quit
          */
-        if(Array.isArray(pParams_o)){
+        if(Array.isArray && Array.isArray(pParams_o)){
             var lElements_a = [];
             for(var i=0; i < pParams_o.length; i++)
                 lElements_a[i] = this.anyload(pParams_o[i]);
@@ -267,7 +308,7 @@ CloudClient.Util        = (function(){
 
     /* Функция загружает js-файл */
     this.jsload      = function(pSrc, pFunc){
-        if(Array.isArray(pSrc)){
+        if(Array.isArray && Array.isArray(pSrc)){
             for(var i=0; i < pSrc.length; i++)
                 pSrc[i].name = 'script';
             
@@ -299,7 +340,7 @@ CloudClient.Util        = (function(){
      * все параметры опциональны
      */
     this.cssLoad     = function(pParams_o){
-         if(Array.isArray(pParams_o)){
+         if(Array.isArray && Array.isArray(pParams_o)){
             for(var i=0; i < pParams_o.length; i++){
                 pParams_o[i].name = 'link';
                 pParams_o[i].parent   = pParams_o.parent || document.head;                
@@ -317,7 +358,12 @@ CloudClient.Util        = (function(){
     this.getById     = function(pId){return document.getElementById(pId);};
     
     this.getByClass  = function(pClass){
-        return document.getElementsByClassName(pClass);
+        if (document.getElementsByClassName)
+            return document.getElementsByClassName(pClass);
+            
+        else PolyFills.getElementsByClassName(function(){
+                return document.getElementsByClassName(pClass);
+            });
     };
             
     /* private members */
@@ -774,7 +820,7 @@ CloudClient.init=(function()
     Util        = new CloudClient.Util();
     getByClass  = Util.getByClass;
     getById     = Util.getById;
-    
+                
     /* меняем title 
      * если js включен - имена папок отображать необязательно...
      * а может и обязательно при переходе, можно будет это сделать
@@ -1096,32 +1142,6 @@ CloudClient._getJSONfromFileTable=function()
     }
     return JSON.stringify(lFileTable);
 };
-
-
-   /* если нет функции поиска по класам,
-     * а её нет в IE,
-     * - используем jquery
-     * при необходимости
-     * можна заменить на любой другой код
-     */ 
- if(!document.getElementsByClassName){
-     Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
-         onload: function(){
-            /* сохраняем переменную jQuery себе в область видимости */
-            document.getElementsByClassName = function(pClassName){
-                return window.jQuery('.'+pClassName)[0];
-            };
-         },
-        onerror: function(){
-            Util.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
-                function(){
-                   getByClass=function(pClassName){
-                        return window.jQuery('.'+pClassName)[0];
-                    };
-                });
-        }
-    });
-}
 
 return CloudClient;
 })();
