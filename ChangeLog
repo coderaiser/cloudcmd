@@ -24,6 +24,8 @@ scroll to needed place.
 
 * Fixed bug with Array.isArray and getElementsByClassName in IE.
 
+* Fixed bug with document.head and document.body in IE.
+
 
 2012.08.06, Version 0.1.5
 
