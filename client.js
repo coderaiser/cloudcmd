@@ -292,7 +292,7 @@ CloudClient.Util        = (function(){
                 (pParams_o.parent || document.body).appendChild(element);
             
             if(pParams_o.inner){
-                element.innerHTML = pParams_o.inner;
+                element.textContent = pParams_o.inner;
             }
         }
         /* если js-файл уже загружен 
@@ -1082,7 +1082,7 @@ CloudClient._createFileTable = function(pElem,pJSON)
     }
     
     /* заполняем панель новыми элементами */    
-    lElem.innerHTML=CloudFunc.buildFromJSON(pJSON,true);
+    lElem.innerHTML = CloudFunc.buildFromJSON(pJSON,true);
 };
 
 /* 
