@@ -119,7 +119,17 @@ CloudClient.Cache.clear = (function(){
 
 /* object contain poyfills of functions */
 var PolyFills = {
+    setDocumentHead : (function(){
+        document.head = document.getElementsByTagName("head")[0];
+    }),
+    
+    setDocumentBody : (function(){
+        document.body = document.getElementsByTagName("body")[0];
+    }),
+    
     getElementsByClassName: (function(pFunc){
+        var lThis = this;
+        
          /* если нет функции поиска по класам,
          * а её нет в IE,
          * - используем jquery
@@ -134,6 +144,13 @@ var PolyFills = {
                         return window.jQuery('.'+pClassName)[0];                    
                     };
                     
+                    /* if no getByClassName maybe 
+                     * we have no document.head and
+                     * doucment.body
+                     */
+                    lThis.setDocumentHead();
+                    lThis.setDocumentBody();
+                    
                     if(typeof pFunc === 'function')
                         pFunc();
                  },
@@ -143,6 +160,9 @@ var PolyFills = {
                            getByClass=function(pClassName){
                                 return window.jQuery('.'+pClassName)[0];
                             };
+                            
+                        lThis.setDocumentHead();
+                        lThis.setDocumentBody();    
                         
                         if(typeof pFunc === 'function')
                             pFunc();
@@ -171,8 +191,7 @@ CloudClient.Util        = (function(){
 
 
     this.loadOnload = function(pFunc_a){
-        if(pFunc_a.length && Array.isArray &&
-            Array.isArray(pFunc_a)) {
+        if(pFunc_a instanceof Array) {
                 
                 var lFunc_f = pFunc_a.pop();
                 
@@ -186,8 +205,7 @@ CloudClient.Util        = (function(){
     };
     
      this.anyLoadOnload = function(pParams_a){
-        if(pParams_a.length && Array.isArray &&
-            Array.isArray(pParams_a)) {
+        if(pParams_a instanceof Array) {
                 
                 var lParams_o = pParams_a.pop();
                             
@@ -219,7 +237,7 @@ CloudClient.Util        = (function(){
          * processing every of params
          * and quit
          */
-        if(Array.isArray && Array.isArray(pParams_o)){
+        if(pParams_o instanceof Array){
             var lElements_a = [];
             for(var i=0; i < pParams_o.length; i++)
                 lElements_a[i] = this.anyload(pParams_o[i]);
@@ -308,7 +326,7 @@ CloudClient.Util        = (function(){
 
     /* Функция загружает js-файл */
     this.jsload      = function(pSrc, pFunc){
-        if(Array.isArray && Array.isArray(pSrc)){
+        if(pSrc instanceof Array){
             for(var i=0; i < pSrc.length; i++)
                 pSrc[i].name = 'script';
             
@@ -340,7 +358,7 @@ CloudClient.Util        = (function(){
      * все параметры опциональны
      */
     this.cssLoad     = function(pParams_o){
-         if(Array.isArray && Array.isArray(pParams_o)){
+         if(pParams_o instanceof Array){
             for(var i=0; i < pParams_o.length; i++){
                 pParams_o[i].name = 'link';
                 pParams_o[i].parent   = pParams_o.parent || document.head;                
