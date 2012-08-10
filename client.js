@@ -304,7 +304,7 @@ CloudClient.Util        = (function(){
                 (pParams_o.parent || document.body).appendChild(element);
             
             if(pParams_o.inner){
-                element.textContent = pParams_o.inner;
+                element.innerHTML = pParams_o.inner;
             }
         }
         /* если js-файл уже загружен 
