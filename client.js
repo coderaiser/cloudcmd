@@ -315,7 +315,7 @@ CloudClient.Util        = (function(){
             if (pParams_o.inner)lElement      += '>' + pParams_o.inner;
             
             lElement +='</style>';
-            return $(lElement)
+            return window.jQuery(lElement)
                 .appendTo(pParams_o.parent || document.head);
                 
         }
@@ -349,12 +349,15 @@ CloudClient.Util        = (function(){
     
     this.getById     = function(pId){return document.getElementById(pId);};
     
-    this.getByClass  = function(pClass){
-        if (document.getElementsByClassName)
-            return document.getElementsByClassName(pClass);
-            
-        else return $('.'+pClass);
-    };
+    
+    this.getByClass  = (CloudCommander.OLD_BROWSER)?
+        function(pClass){
+            return window.jQuery('.'+pClass);
+        }
+        
+        :function(pClass){
+            return document.getElementsByClassName(pClass);            
+        };
             
     /* private members */
     var lLoadingImage;
