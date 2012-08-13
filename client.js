@@ -117,57 +117,6 @@ CloudClient.Cache.clear = (function(){
     }
 });
 
-/* object contain poyfills of functions */
-var PolyFills = {
-    setDocumentHead : (function(){
-        document.head = document.getElementsByTagName("head")[0];
-    }),
-        
-    getElementsByClassName: (function(pFunc){
-        var lThis = this;
-        
-         /* если нет функции поиска по класам,
-         * а её нет в IE,
-         * - используем jquery
-         * при необходимости
-         * можна заменить на любой другой код
-         */ 
-         if(!document.getElementsByClassName){
-             Util.jsload('//code.jquery.com/jquery-1.8.0.min.js',{
-                 onload: function(){
-                    /* сохраняем переменную jQuery себе в область видимости */
-                    document.getElementsByClassName = function(pClassName){
-                        return window.jQuery('.'+pClassName)[0];                    
-                    };
-                    
-                    /* if no getByClassName maybe 
-                     * we have no document.head and
-                     * doucment.body
-                     */
-                    lThis.setDocumentHead();
-                    
-                    if(typeof pFunc === 'function')
-                        pFunc();
-                 },
-                onerror: function(){
-                    Util.jsload(CloudClient.LIBDIRCLIENT + 'jquery.js',
-                        function(){
-                           getByClass=function(pClassName){
-                                return window.jQuery('.'+pClassName)[0];
-                            };
-                            
-                        lThis.setDocumentHead();  
-                        
-                        if(typeof pFunc === 'function')
-                            pFunc();
-                    });
-                }
-            });
-        }
-    })
-    
-};
-
 /* Object contain additional system functional */
 CloudClient.Util        = (function(){
     /*
@@ -377,9 +326,7 @@ CloudClient.Util        = (function(){
         if (document.getElementsByClassName)
             return document.getElementsByClassName(pClass);
             
-        else PolyFills.getElementsByClassName(function(){
-                return document.getElementsByClassName(pClass);
-            });
+        else return $('.'+pClass);
     };
             
     /* private members */
@@ -939,7 +886,7 @@ CloudClient._changeLinks = function(pPanelID)
      */
     /* номер ссылки очистки кэша*/
     /* номер ссылки иконки обновления страницы */
-    var lREFRESHICON=0;
+    var lREFRESHICON = 0;
         
      /* путь в ссылке, который говорит
       * что js отключен
@@ -947,20 +894,21 @@ CloudClient._changeLinks = function(pPanelID)
     var lNoJS_s = CloudFunc.NOJS; 
     var lFS_s   = CloudFunc.FS;
     
-    for(var i=0;i<a.length;i++)
+    for(var i=0; i < a.length ; i++)
     {        
         /* убираем адрес хоста*/
-        var link='/'+a[i].href.replace(document.location.href,'');
+        var link = '/'+a[i].href.replace(document.location.href,'');
         /* убираем значения, которые говорят,
          * об отсутствии js
          */
      
-        if(link.indexOf(lNoJS_s)===lFS_s.length){
-            link=link.replace(lNoJS_s,'');
+        if(link.indexOf(lNoJS_s) === lFS_s.length){
+            link = link.replace(lNoJS_s,'');
         }            
         /* ставим загрузку гифа на клик*/
-        if(i===lREFRESHICON)
-            a[i].onclick=CloudClient._loadDir(link,true);            
+        if(i === lREFRESHICON)
+            a[i].onclick = CloudClient._loadDir(link,true);
+            
         /* устанавливаем обработчики на строку на одинарное и
          * двойное нажатие на левую кнопку мышки
          */
@@ -1003,8 +951,8 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
         var lFS_s = CloudFunc.FS;
         if(lPath.indexOf(lFS_s) === 0){
             lPath = lPath.replace(lFS_s,'');
-            if(lPath === '')
-                lPath='/';
+            
+            if(lPath === '') lPath='/';
         }
         console.log ('reading dir: "'+lPath+'";');
         
