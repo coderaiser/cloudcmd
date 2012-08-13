@@ -231,11 +231,17 @@ CloudClient.Util        = (function(){
             if(pParams_o.func)
                 if(typeof lFunc === 'function'){
                     element.onload = lFunc;
+                    element.onreadystatechange = lFunc;
+                /*
+                    this.readyState
+                */
                 /* if object - then onload or onerror */
                 }else if (typeof lFunc === 'object') {
                     if(lFunc.onload &&
-                        typeof lFunc.onload === 'function')
-                            element.onload   = lFunc.onload;                    
+                        typeof lFunc.onload === 'function'){
+                            element.onload   = lFunc.onload;
+                            element.onreadystatechange = lFunc;
+                        }
                 }
                 
             /* if element (js/css) will not loaded
@@ -266,12 +272,7 @@ CloudClient.Util        = (function(){
             
             if(!pParams_o.not_append)
                 (pParams_o.parent || document.body).appendChild(element);
-            
-            
-            element.onreadystatechange = function(){
-                alert(this.readyState);
-            };
-            
+                                    
             if(pParams_o.inner){
                 element.innerHTML = pParams_o.inner;
             }
