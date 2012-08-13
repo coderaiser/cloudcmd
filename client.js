@@ -268,8 +268,8 @@ CloudClient.Util        = (function(){
                 (pParams_o.parent || document.body).appendChild(element);
             
             
-            element.onreadystatechange = function(state){
-                console.log(state);
+            element.onreadystatechange = function(){
+                alert(this.readystate);
             };
             
             if(pParams_o.inner){
