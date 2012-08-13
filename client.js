@@ -126,11 +126,15 @@ CloudClient.Util        = (function(){
      * 1_js
      */
     this.getIdBySrc  = function(pSrc){
-        var lID=pSrc.replace(pSrc.substr(pSrc,
+        var lID = pSrc.replace(pSrc.substr(pSrc,
                     pSrc.lastIndexOf('/')+1),
                     '');
-        /* убираем точку*/
-        return lID.replace('.','_');
+        
+        /* убираем точки */
+        while(lID.indexOf('.'))
+            lID.replace('.','_');
+        
+        return lID;
     },
 
 
