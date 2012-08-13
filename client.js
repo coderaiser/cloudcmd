@@ -1116,7 +1116,7 @@ CloudClient._getJSONfromFileTable=function()
     var lLeft       = getById('left');    
     var lPath       = getByClass('path')[0].textContent;
     var lFileTable  = [{path:lPath,size:'dir'}];
-    var lLI=lLeft.getElementsByTagName('li');
+    var lLI         = lLeft.getElementsByTagName('li');
     
     var j=1;/* счётчик реальных файлов */
     var i=1;/* счётчик элементов файлов в DOM */
@@ -1129,12 +1129,15 @@ CloudClient._getJSONfromFileTable=function()
     
     for(;i<lLI.length;i++)
     {
-        var lIsDir=lLI[i].getElementsByClassName('mini-icon')[0]
-        .className.replace('mini-icon ','')==='directory'?true:false;
+        /* mini-icon */
+        var lIsDir=lLI[i].children[0].className
+            .replace('mini-icon ','')==='directory'?true:false;
         
-        var lName=lLI[i].getElementsByClassName('name')[0];        
+        /* name */
+        var lName=lLI[i].children[1];
         lName &&
             (lName = lName.getElementsByTagName('a'));
+        
         /* if found link to folder 
          * cheking is it a full name
          * or short
