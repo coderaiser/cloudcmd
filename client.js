@@ -230,17 +230,23 @@ CloudClient.Util        = (function(){
                 }else if (typeof lFunc === 'object') {
                     if(lFunc.onload &&
                         typeof lFunc.onload === 'function')
-                            element.onload   = lFunc.onload;
+                            element.onload   = lFunc.onload;                    
+                }
+                
+            /* if element (js/css) will not loaded
+             * it would be removed from DOM tree
+             * and error image would be shown
+             */
+            element.onerror = (function(){
+                    (pParams_o.element || document.body)
+                        .removeChild(element);
+                    
+                    Util.Images.showError();
                     
                     if(lFunc.onerror &&
                         typeof lFunc.onerror === 'function')
-                                element.onerror = (function(){
-                                    (pParams_o.element || document.body)
-                                        .removeChild(element);
-                                    
-                                    lFunc.onerror();
-                                });
-                }
+                            lFunc.onerror();
+            });
             
             if(pParams_o.style){
                 element.style.cssText=pParams_o.style;
