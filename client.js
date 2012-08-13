@@ -133,7 +133,7 @@ var PolyFills = {
          * можна заменить на любой другой код
          */ 
          if(!document.getElementsByClassName){
-             Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+             Util.jsload('//code.jquery.com/jquery-1.8.0.min.js',{
                  onload: function(){
                     /* сохраняем переменную jQuery себе в область видимости */
                     document.getElementsByClassName = function(pClassName){
@@ -845,7 +845,7 @@ CloudClient.init=(function()
     if(lTitle.length>0)lTitle[0].textContent='Cloud Commander';
     
     /* загружаем jquery: */
-    Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js',{
+    Util.jsload('//code.jquery.com/jquery-1.8.0.min.js',{
         onload: function(){
             $ = window.jQuery;
         },

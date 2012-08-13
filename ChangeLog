@@ -26,6 +26,8 @@ scroll to needed place.
 
 * Fixed bug with document.head in IE.
 
+* JQuery 1.7.2 changed to 1.8.0
+
 
 2012.08.06, Version 0.1.5
 
