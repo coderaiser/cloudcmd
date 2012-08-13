@@ -131,7 +131,7 @@ CloudClient.Util        = (function(){
                     '');
         
         /* убираем точки */
-        while(lID.indexOf('.'))
+        while(lID.indexOf('.') > 0)
             lID = lID.replace('.','_');
         
         return lID;
