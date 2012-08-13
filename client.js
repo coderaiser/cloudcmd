@@ -1126,15 +1126,21 @@ CloudClient._getJSONfromFileTable=function()
      */
     i=2; /* пропускам Path и Header*/
 
+    /* file attributes */
+    var lAttr = {};
     
     for(;i<lLI.length;i++)
     {
-        /* mini-icon */
-        var lIsDir=lLI[i].children[0].className
-            .replace('mini-icon ','')==='directory'?true:false;
+        var lChildren = lLI[i].children;
         
-        /* name */
-        var lName=lLI[i].children[1];
+        /* getting all elements to lAttr object */        
+        for(var l = 0; l < lChildren.length; l++)
+            lAttr[lChildren[l].className] = lChildren[l];
+        
+        /* mini-icon */
+        var lIsDir = lAttr['mini-icon directory'] ? true : false;
+        
+        var lName = lAttr.name;
         lName &&
             (lName = lName.getElementsByTagName('a'));
         
@@ -1147,25 +1153,25 @@ CloudClient._getJSONfromFileTable=function()
          */
         lName.length &&
             (lName = lName[0]);
+            
         lName.title &&
             (lName = lName.title) ||
             (lName = lName.textContent);        
             
-        /* если это папка - выводим слово dir вместо размера*/
-        /* size */
-        var lSize=lIsDir?'dir':lLI[i].children[3].textContent;
+        /* если это папка - выводим слово dir вместо размера*/        
+        var lSize = lIsDir ? 'dir' : lAttr.size.textContent;
         
-        /* mode */
-        var lMode=lLI[i].children[4].textContent;
+        var lMode = lAttr.mode.textContent;
+        
         /* переводим права доступа в цыфровой вид
          * для хранения в localStorage
          */
-        lMode=CloudFunc.convertPermissionsToNumberic(lMode);
+        lMode = CloudFunc.convertPermissionsToNumberic(lMode);
         
         lFileTable[j++]={
-            name:lName,
-            size:lSize,
-            mode:lMode
+            name: lName,
+            size: lSize,
+            mode: lMode
         };
     }
     return JSON.stringify(lFileTable);
