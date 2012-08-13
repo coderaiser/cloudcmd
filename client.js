@@ -594,6 +594,7 @@ CloudClient._loadDir=(function(pLink,pNeedRefresh){
         return function(){
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
+                        
             Util.Images.showLoad(pNeedRefresh ? this : null);
             
             var lCurrentFile = Util.getCurrentFile();
@@ -893,7 +894,7 @@ CloudClient._changeLinks = function(pPanelID)
       */
     var lNoJS_s = CloudFunc.NOJS; 
     var lFS_s   = CloudFunc.FS;
-    
+        
     for(var i=0; i < a.length ; i++)
     {        
         /* убираем адрес хоста*/
@@ -925,10 +926,16 @@ CloudClient._changeLinks = function(pPanelID)
             }
             else {
                 lLi.onclick   = CloudClient._setCurrent();
-                
+                                                
                 /* если ссылка на папку, а не файл */
-                if(a[i].target !== '_blank')
+                if(a[i].target !== '_blank'){
                     lLi.ondblclick  = CloudClient._loadDir(link);
+                    
+                    document.addEventListener('touchend',
+                        CloudClient._loadDir(link),
+                        false);
+                    
+                }
                 
                 lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
                     '(' + pPanelID + ')';
