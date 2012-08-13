@@ -241,7 +241,11 @@ CloudClient.Util        = (function(){
                     (pParams_o.element || document.body)
                         .removeChild(element);
                     
-                    Util.Images.showError();
+                    Util.Images.showError({
+                        responseText: 'file ' +
+                        lSrc                  +
+                        ' could not be loaded'
+                    });
                     
                     if(lFunc.onerror &&
                         typeof lFunc.onerror === 'function')
