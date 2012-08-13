@@ -267,6 +267,11 @@ CloudClient.Util        = (function(){
             if(!pParams_o.not_append)
                 (pParams_o.parent || document.body).appendChild(element);
             
+            
+            element.onreadystatechange = function(state){
+                console.log(state);
+            };
+            
             if(pParams_o.inner){
                 element.innerHTML = pParams_o.inner;
             }
@@ -282,7 +287,7 @@ CloudClient.Util        = (function(){
                 typeof lFunc.onload === 'function')
                     lFunc.onload();
                 
-        }
+        }        
         return element;
     },
 
