@@ -931,9 +931,13 @@ CloudClient._changeLinks = function(pPanelID)
                 if(a[i].target !== '_blank'){
                     lLi.ondblclick  = CloudClient._loadDir(link);
                     
+                    /*
                     lLi.addEventListener('touchend',
                         CloudClient._loadDir(link),
                         false);
+                    */
+                    lLi.touchend = CloudClient._loadDir(link);
+                    
                     
                 }
                 
