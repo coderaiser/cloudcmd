@@ -28,6 +28,8 @@ scroll to needed place.
 
 * JQuery 1.7.2 changed to 1.8.0
 
+* Added support of mibile browsers and touch events.
+
 
 2012.08.06, Version 0.1.5
 
