@@ -936,7 +936,7 @@ CloudClient._changeLinks = function(pPanelID)
                         CloudClient._loadDir(link),
                         false);
                     */
-                    lLi.touchend = CloudClient._loadDir(link);
+                    lLi.ontouchend = CloudClient._loadDir(link);
                     
                     
                 }
