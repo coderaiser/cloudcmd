@@ -1152,8 +1152,11 @@ CloudClient._getJSONfromFileTable=function()
             (lName = lName.textContent);        
             
         /* если это папка - выводим слово dir вместо размера*/
-        var lSize=lIsDir?'dir':lLI[i].getElementsByClassName('size')[0].textContent;
-        var lMode=lLI[i].getElementsByClassName('mode')[0].textContent;
+        /* size */
+        var lSize=lIsDir?'dir':lLI[i].children[3].textContent;
+        
+        /* mode */
+        var lMode=lLI[i].children[4].textContent;
         /* переводим права доступа в цыфровой вид
          * для хранения в localStorage
          */
