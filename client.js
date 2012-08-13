@@ -269,7 +269,7 @@ CloudClient.Util        = (function(){
             
             
             element.onreadystatechange = function(){
-                alert(this.readystate);
+                alert(this.readyState);
             };
             
             if(pParams_o.inner){
