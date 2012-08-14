@@ -232,22 +232,22 @@ CloudClient.Util        = (function(){
             if(pParams_o.func)
                 if(typeof lFunc === 'function'){
                     element.onload = lFunc;
-                    
+                    /*
                     element.onreadystatechange = function(){
                         if(this.readyState === 'loaded')
                             lFunc();
-                    }; /* ie */
+                    };*/ /* ie */
 
                 /* if object - then onload or onerror */
                 }else if (typeof lFunc === 'object') {
                     if(lFunc.onload &&
                         typeof lFunc.onload === 'function'){
                             element.onload   = lFunc.onload;
-                            
+                            /*
                             element.onreadystatechange = function(){
                                 if(this.readyState === 'loaded')
                                 lFunc();
-                            }; /* ie */
+                            };*/ /* ie */                            
                         }
                 }
                 
