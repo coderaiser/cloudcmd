@@ -5,9 +5,7 @@
 *tmp
 
 #minified scripts
-*.min.js
-*.min.css
-*.min.html
+min
 
 #node modules folder
 node_modules
