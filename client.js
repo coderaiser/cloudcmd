@@ -995,7 +995,12 @@ CloudClient._changeLinks = function(pPanelID){
             else {
                 lLi.onclick   = CloudClient._setCurrent();
                 
-                lLi.oncontextmenu = CloudCommander.mouseBinding(lLi);
+                lLi.oncontextmenu = function(pEvent){
+                    if(typeof CloudCommander.Menu === 'function')
+                        CloudCommander.Menu(pEvent.x, pEvent.y);
+                    else
+                        CloudCommander.Menu.show();
+                }
                 
                 /* если ссылка на папку, а не файл */
                 if(a[i].target !== '_blank'){
