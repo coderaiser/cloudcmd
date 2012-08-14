@@ -495,6 +495,8 @@ CloudClient.Util        = (function(){
                         'could not be none'
             });
         
+        this.unSetCurrentFile(this.getCurrentFile());
+        
         return pCurrentFile.className = CloudCommander.CURRENT_FILE;
     };
     
@@ -503,7 +505,7 @@ CloudClient.Util        = (function(){
             this.addCloudStatus({
                 code : -1,
                 msg  : 'Error pCurrentFile in'  +
-                        'setCurrentFile'        +
+                        'unSetCurrentFile'        +
                         'could not be none'
             });
         
@@ -758,9 +760,7 @@ CloudClient._setCurrent=(function(){
                                 CloudClient._editFileName(lParent);
                             },400);
                     }
-                    else{
-                        Util.unSetCurrentFile(lCurrentFile);
-                        
+                    else{                        
                         /* устанавливаем курсор на файл,
                         * на который нажали */
                         Util.setCurrentFile(this);
@@ -810,7 +810,6 @@ CloudClient._currentToParent = (function(pDirName){
      * set it to current file
      */
     if(lRootDir){
-        Util.unSetCurrentFile(lCurrentFile);
         Util.setCurrentFile(lRootDir);
         lRootDir.scrollIntoViewIfNeeded();
     }
