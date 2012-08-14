@@ -495,7 +495,9 @@ CloudClient.Util        = (function(){
                         'could not be none'
             });
         
-        this.unSetCurrentFile(this.getCurrentFile());
+        var lCurrentFileWas = this.getCurrentFile();
+        if(lCurrentFileWas)        
+            this.unSetCurrentFile(lCurrentFileWas);
         
         return pCurrentFile.className = CloudCommander.CURRENT_FILE;
     };
