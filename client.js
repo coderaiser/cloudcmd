@@ -1125,15 +1125,14 @@ CloudClient._getJSONfromFileTable=function()
      * каталог '..'
      */
     i=2; /* пропускам Path и Header*/
-
-    /* file attributes */
-    var lAttr = {};
     
     for(;i<lLI.length;i++)
     {
         var lChildren = lLI[i].children;
         
-        /* getting all elements to lAttr object */        
+        /* file attributes */
+        var lAttr = {};
+        /* getting all elements to lAttr object */ 
         for(var l = 0; l < lChildren.length; l++)
             lAttr[lChildren[l].className] = lChildren[l];
         
