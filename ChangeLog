@@ -32,6 +32,10 @@ scroll to needed place.
 
 * Fixed bug with ignoring all browser defined keys.
 
+* Moved unSetCurrentfile to setCurrent file.
+All the time one of files must be current, so wen we setting up some file
+current, file that was previously current must be unset automatically. 
+
 
 2012.08.06, Version 0.1.5
 
