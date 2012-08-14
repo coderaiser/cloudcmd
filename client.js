@@ -481,7 +481,12 @@ CloudClient.Util        = (function(){
     this.getCurrentFile = function(){
         var lCurrent = lThis.getByClass(CloudCommander.CURRENT_FILE)[0];
         if(!lCurrent)
-            console.log('Error: Can not find Current File');
+            this.addCloudStatus({
+                code : -1,
+                msg  : 'Error: can not find '  +
+                        'CurrentFile '         +
+                        'in getCurrentFile'
+            });
         
         return lCurrent;
     };
