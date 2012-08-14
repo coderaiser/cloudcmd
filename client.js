@@ -22,6 +22,7 @@ var CloudClient = {
     Editor                  :function(){},/* function loads and shows editor  */
     Viewer                  :function(){},/* function loads and shows viewer  */
     Terminal                :function(){},/* function loads and shows terminal*/
+    Menu                    :function(){},/* function loads and shows menu    */
             
     _loadDir                :function(){}, /* Функция привязываеться ко всем
                                             * ссылкам и
@@ -633,6 +634,16 @@ CloudClient.Terminal = (function(){
         'terminal.js',{
             onload: (function(){
                 CloudCommander.Terminal.Keys();
+            })
+    });
+});
+
+/* function loads and shows menu */
+CloudClient.Menu = (function(){
+    Util.jsload(CloudClient.LIBDIRCLIENT + 
+        'menu.js',{
+            onload: (function(){
+                CloudCommander.Menu.Keys();
             })
     });
 });
