@@ -940,8 +940,7 @@ CloudClient.init=(function()
 });
 
 /* функция меняет ссыки на ajax-овые */
-CloudClient._changeLinks = function(pPanelID)
-{
+CloudClient._changeLinks = function(pPanelID){
     /* назначаем кнопку очистить кэш и показываем её*/
     var lClearcache = getById('clear-cache');
     if(lClearcache)
@@ -996,11 +995,7 @@ CloudClient._changeLinks = function(pPanelID)
             else {
                 lLi.onclick   = CloudClient._setCurrent();
                 
-                lLi.oncontextmenu = function(){
-                    CloudCommander.mouseBinding();
-                    
-                    return false;                    
-                }
+                lLi.oncontextmenu = CloudCommander.mouseBinding(lLi);
                 
                 /* если ссылка на папку, а не файл */
                 if(a[i].target !== '_blank'){
