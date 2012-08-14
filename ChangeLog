@@ -30,6 +30,8 @@ scroll to needed place.
 
 * Added support of mibile browsers and touch events.
 
+* Fixed bug with ignoring all browser defined keys.
+
 
 2012.08.06, Version 0.1.5
 
