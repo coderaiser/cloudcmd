@@ -1005,11 +1005,12 @@ CloudClient._changeLinks = function(pPanelID){
                             x: pEvent.x,
                             y: pEvent.y
                         });
-                        
+                        /* disabling browsers menu*/
                         return false;
                     }
                     
-                    Util.setCurrentFile(pEvent.currentTarget);
+                    var lTarget = pEvent.currentTarget || pEvent.Target;
+                    Util.setCurrentFile(lTarget);
                 }
                 
                 /* если ссылка на папку, а не файл */
