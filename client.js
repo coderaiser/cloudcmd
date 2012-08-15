@@ -999,17 +999,17 @@ CloudClient._changeLinks = function(pPanelID){
                 /* if right button clicked menu will
                  * loads and shows
                  */
-                lLi.oncontextmenu = function(){
+                lLi.oncontextmenu = function(pEvent){
                     if(typeof CloudCommander.Menu === 'function'){
                         CloudCommander.Menu({
-                            x: event.x,
-                            y: event.y
+                            x: pEvent.x,
+                            y: pEvent.y
                         });
                         
                         return false;
                     }
                     
-                    Util.setCurrentFile(event.currentTarget);
+                    Util.setCurrentFile(pEvent.currentTarget);
                 }
                 
                 /* если ссылка на папку, а не файл */
