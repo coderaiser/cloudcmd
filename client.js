@@ -998,10 +998,8 @@ CloudClient._changeLinks = function(pPanelID){
                 lLi.onclick   = CloudClient._setCurrent();
                 
                 lLi.oncontextmenu = function(pEvent){
-                    if(typeof CloudCommander.Menu === 'function'){                        
+                    if(typeof CloudCommander.Menu === 'function')
                         CloudCommander.Menu({pEvent.x, pEvent.y});
-                    }else
-                        CloudCommander.Menu.show();
                 }
                 
                 /* если ссылка на папку, а не файл */
