@@ -603,8 +603,7 @@ CloudClient.Util        = (function(){
 CloudClient.keyBinding=(function(){
     /* loading keyBinding module and start it */
     Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js', function(){
-            CloudCommander.keyBinding();
-            CloudCommander.mouseBinding();
+        CloudCommander.keyBinding();
     });
 });
 
