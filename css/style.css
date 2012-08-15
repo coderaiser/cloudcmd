@@ -123,6 +123,10 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
    * рамки
    */
 }
+
+.current-file.mini-icon{
+    left: -6.5px;
+}
 /* freeupex */
 .directory{
   /*list-style-image*/
