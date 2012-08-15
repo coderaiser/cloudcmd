@@ -1000,11 +1000,14 @@ CloudClient._changeLinks = function(pPanelID){
                  * loads and shows
                  */
                 lLi.oncontextmenu = function(){
-                    if(typeof CloudCommander.Menu === 'function')
+                    if(typeof CloudCommander.Menu === 'function'){
                         CloudCommander.Menu({
                             x: event.x,
-                            y: event.y        
+                            y: event.y
                         });
+                        
+                        return false;
+                    }
                 }
                 
                 /* если ссылка на папку, а не файл */
