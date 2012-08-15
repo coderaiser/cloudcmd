@@ -519,7 +519,7 @@ CloudClient.Util        = (function(){
                 msg  : 'Error pCurrentFile in'  +
                         'setCurrentFile'        +
                         'could not be '         +
-                        'path or fm_header';
+                        'path or fm_header'
             });
             
             lRet_b = false;
