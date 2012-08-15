@@ -5,7 +5,7 @@
  *              клиентский и серверный
  */
 
-var CloudCommander=(function(){
+var CloudCommander = (function(){
 "use strict";
 
 /* Клиентский обьект, содержащий функциональную часть*/
@@ -493,19 +493,39 @@ CloudClient.Util        = (function(){
     };
     
     this.setCurrentFile = function(pCurrentFile){
-        if(!pCurrentFile)
+        var lRet_b = true;
+        
+        if(!pCurrentFile){
             this.addCloudStatus({
                 code : -1,
                 msg  : 'Error pCurrentFile in'  +
                         'setCurrentFile'        +
                         'could not be none'
             });
-        
+            
+            lRet_b = false;
+        }
         var lCurrentFileWas = this.getCurrentFile();
         if(lCurrentFileWas)        
             this.unSetCurrentFile(lCurrentFileWas);
+                
+        var lClass = pCurrentFile.className;        
+        if (lClass !== 'path' &&
+            lClass !== 'fm_header'){
+                pCurrentFile.className = CloudCommander.CURRENT_FILE; 
+        } else {
+            this.addCloudStatus({
+                code : -2,
+                msg  : 'Error pCurrentFile in'  +
+                        'setCurrentFile'        +
+                        'could not be '         +
+                        'path or fm_header';
+            });
+            
+            lRet_b = false;
+        }
         
-        return pCurrentFile.className = CloudCommander.CURRENT_FILE;
+        return  lRet_b;
     };
     
     this.unSetCurrentFile = function(pCurrentFile){
@@ -758,33 +778,26 @@ CloudClient._setCurrent=(function(){
          */
         return function(pFromEnter){
             var lCurrentFile = Util.getCurrentFile();
-            if(lCurrentFile){
-                /* если мы находимся не на 
-                 * пути и не на заголовках
-                 */
-                if(this.className!=='path' && 
-                    this.className!=='fm_header'){
-                        
-                    if (Util.isCurrentFile(this)  &&
-                        typeof pFromEnter !== 'boolean'){
-                        var lParent = this;
-                        
-                        setTimeout(function(){
-                            /* waiting a few seconds
-                             * and if classes still equal
-                             * make file name editable
-                             * in other case
-                             * double click event happend
-                             */
-                            if(Util.isCurrentFile(lParent))
-                                CloudClient._editFileName(lParent);
-                            },400);
-                    }
-                    else{                        
-                        /* устанавливаем курсор на файл,
-                        * на который нажали */
-                        Util.setCurrentFile(this);
-                    }
+            if(lCurrentFile){                        
+                if (Util.isCurrentFile(this)  &&
+                    typeof pFromEnter !== 'boolean'){
+                    var lParent = this;
+                    
+                    setTimeout(function(){
+                        /* waiting a few seconds
+                         * and if classes still equal
+                         * make file name editable
+                         * in other case
+                         * double click event happend
+                         */
+                        if(Util.isCurrentFile(lParent))
+                            CloudClient._editFileName(lParent);
+                        },400);
+                }
+                else{                        
+                    /* устанавливаем курсор на файл,
+                    * на который нажали */
+                    Util.setCurrentFile(this);
                 }
             }
              /* если мы попали сюда с энтера*/
