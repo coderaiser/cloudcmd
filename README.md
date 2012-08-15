@@ -131,6 +131,8 @@ Extensions
 For extend main functionality Cloud Commander use next modules:
 - [CodeMirror] (http://codemirror.net "CodeMirror")
 - [FancyBox] (https://github.com/fancyapps/fancyBox "FancyBox")
+- [jQuery-contextMenu] (https://github.com/medialize/jQuery-contextMenu "jQuery-contextMenu")
+- [jq-console] (https://github.com/replit/jq-console "jq-console")
 
 Contributing
 ---------------
