@@ -151,7 +151,7 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 /* фон файла, на котором курсор*/
 .current-file{
-    border: 2px solid rgba(49, 123, 249, .40);
+    border: 1.5px solid rgba(49, 123, 249, .40);
 }
 .selected-file{
     background-color: rgba(49, 123, 249, .40);
