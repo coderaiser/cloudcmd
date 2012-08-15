@@ -639,12 +639,14 @@ CloudClient.Terminal = (function(){
     });
 });
 
-/* function loads and shows menu */
-CloudClient.Menu = (function(){
+/* function loads and shows menu 
+ * @pPosition - coordinates of menu {x, y}
+ */
+CloudClient.Menu = (function(pPosition){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'menu.js',{
             onload: (function(){
-                CloudCommander.Menu.Keys();
+                CloudCommander.Menu.Keys(pPosition);
             })
     });
 });
@@ -996,11 +998,8 @@ CloudClient._changeLinks = function(pPanelID){
                 lLi.onclick   = CloudClient._setCurrent();
                 
                 lLi.oncontextmenu = function(pEvent){
-                    if(typeof CloudCommander.Menu === 'function'){
-                        CloudCommander.Menu.x = pEvent.x;
-                        CloudCommander.Menu.y = pEvent.y;
-                        
-                        CloudCommander.Menu();
+                    if(typeof CloudCommander.Menu === 'function'){                        
+                        CloudCommander.Menu({pEvent.x, pEvent.y});
                     }else
                         CloudCommander.Menu.show();
                 }
