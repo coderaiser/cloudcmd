@@ -1002,8 +1002,8 @@ CloudClient._changeLinks = function(pPanelID){
                 lLi.oncontextmenu = function(){
                     if(typeof CloudCommander.Menu === 'function')
                         CloudCommander.Menu({
-                            x: pEvent.x,
-                            y: pEvent.y        
+                            x: event.x,
+                            y: event.y        
                         });
                 }
                 
