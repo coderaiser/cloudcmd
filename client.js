@@ -1000,13 +1000,14 @@ CloudClient._changeLinks = function(pPanelID){
                  * loads and shows
                  */
                 lLi.oncontextmenu = function(pEvent){
+                    var lRetern_b = true;
                     if(typeof CloudCommander.Menu === 'function'){
                         CloudCommander.Menu({
                             x: pEvent.x,
                             y: pEvent.y
                         });
                         /* disabling browsers menu*/
-                        return false;
+                        lReturn_b = false;
                     }
                     /* getting html element
                      * currentTarget - DOM event
@@ -1014,6 +1015,8 @@ CloudClient._changeLinks = function(pPanelID){
                      */
                     var lTarget = pEvent.currentTarget || pEvent.target;
                     Util.setCurrentFile(lTarget);
+                    
+                    return lReturn_b;
                 }
                 
                 /* если ссылка на папку, а не файл */
