@@ -1008,6 +1008,8 @@ CloudClient._changeLinks = function(pPanelID){
                         
                         return false;
                     }
+                    
+                    Util.setCurrentFile(event.currentTarget);
                 }
                 
                 /* если ссылка на папку, а не файл */
