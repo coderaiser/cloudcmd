@@ -123,9 +123,13 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
    * рамки
    */
 }
-
+/* уменьшаем отступ 
+ * между между иконкой и
+ * именем файла во время
+ * установления курсора
+ */
 .current-file > .mini-icon{
-    left: -6.5px;
+    left: -6px;
 }
 /* freeupex */
 .directory{
