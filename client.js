@@ -1008,8 +1008,11 @@ CloudClient._changeLinks = function(pPanelID){
                         /* disabling browsers menu*/
                         return false;
                     }
-                    
-                    var lTarget = pEvent.currentTarget || pEvent.Target;
+                    /* getting html element
+                     * currentTarget - DOM event
+                     * target        - jquery event
+                     */
+                    var lTarget = pEvent.currentTarget || pEvent.target;
                     Util.setCurrentFile(lTarget);
                 }
                 
