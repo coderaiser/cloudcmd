@@ -124,7 +124,7 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
    */
 }
 
-.current-file.mini-icon{
+.current-file > .mini-icon{
     left: -6.5px;
 }
 /* freeupex */
