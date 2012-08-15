@@ -433,8 +433,8 @@ CloudClient.Util        = (function(){
                 lCurrent = pElem;
             else
             {
-                lCurrent = lThis.getByClass(CloudCommander.CURRENT_FILE);
-                lCurrent = lCurrent[0].firstChild.nextSibling;
+                lCurrent = lThis.getCurrentFile;
+                lCurrent = lCurrent.firstChild.nextSibling;
             }
                                  
             /* show loading icon * 
@@ -976,6 +976,31 @@ CloudClient._changeLinks = function(pPanelID){
       */
     var lNoJS_s = CloudFunc.NOJS; 
     var lFS_s   = CloudFunc.FS;
+    
+    var lOnContextMenu_f = function(pEvent){
+        var lReturn_b = true;
+        if(typeof CloudCommander.Menu === 'function'){
+            var lRefreshIcon = Util
+                .getByClass(CloudFunc.REFRESHICON);
+                
+            Util.Images.showLoad(lRefreshIcon[0]);
+            
+            CloudCommander.Menu({
+                x: pEvent.x,
+                y: pEvent.y
+            });
+            /* disabling browsers menu*/
+            lReturn_b = false;
+        }
+        /* getting html element
+         * currentTarget - DOM event
+         * target        - jquery event
+         */
+        var lTarget = pEvent.currentTarget || pEvent.target;
+        Util.setCurrentFile(lTarget);
+        
+        return lReturn_b;
+    };
         
     for(var i=0; i < a.length ; i++)
     {        
@@ -1012,25 +1037,7 @@ CloudClient._changeLinks = function(pPanelID){
                 /* if right button clicked menu will
                  * loads and shows
                  */
-                lLi.oncontextmenu = function(pEvent){
-                    var lReturn_b = true;
-                    if(typeof CloudCommander.Menu === 'function'){
-                        CloudCommander.Menu({
-                            x: pEvent.x,
-                            y: pEvent.y
-                        });
-                        /* disabling browsers menu*/
-                        lReturn_b = false;
-                    }
-                    /* getting html element
-                     * currentTarget - DOM event
-                     * target        - jquery event
-                     */
-                    var lTarget = pEvent.currentTarget || pEvent.target;
-                    Util.setCurrentFile(lTarget);
-                    
-                    return lReturn_b;
-                }
+                lLi.oncontextmenu = lOnContextMenu_f;
                 
                 /* если ссылка на папку, а не файл */
                 if(a[i].target !== '_blank'){
