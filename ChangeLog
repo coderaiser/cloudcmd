@@ -40,6 +40,8 @@ current, file that was previously current must be unset automatically.
 
 * A little bit beautified css.
 
+* Added function getRefreshButton.
+
 
 2012.08.06, Version 0.1.5
 
