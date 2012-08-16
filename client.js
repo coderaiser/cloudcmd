@@ -444,10 +444,13 @@ CloudClient.Util        = (function(){
             lErrorImage.className   = 'icon error hidden';
             
             var lCurrent;        
-            if(pPosition && pPosition.top){                
-                lCurrent    = lThis.getRefreshButton();
-                if(!lCurrent)
-                    lRet_b  = false;
+            if(pPosition){
+                if(pPosition.top){
+                    lCurrent    = lThis.getRefreshButton();
+                    if(!lCurrent)
+                        lRet_b  = false;
+                }else
+                    lCurrent = pPosition.parentElement;
             }
             else
             {
@@ -725,7 +728,7 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
                         
-            Util.Images.showLoad(pNeedRefresh ? { top:true } : null);
+            Util.Images.showLoad(pNeedRefresh ? this : null);
             
             var lCurrentFile = Util.getCurrentFile();
             /* получаем имя каталога в котором находимся*/ 
