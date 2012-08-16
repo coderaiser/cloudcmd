@@ -980,10 +980,10 @@ CloudClient._changeLinks = function(pPanelID){
     var lOnContextMenu_f = function(pEvent){
         var lReturn_b = true;
         if(typeof CloudCommander.Menu === 'function'){
-            var lRefreshIcon = Util
-                .getByClass(CloudFunc.REFRESHICON);
+            //var lRefreshIcon = Util
+                //.getByClass(CloudFunc.REFRESHICON);
                 
-            Util.Images.showLoad(lRefreshIcon[0]);
+            //Util.Images.showLoad(lRefreshIcon[0]);
             
             CloudCommander.Menu({
                 x: pEvent.x,
@@ -998,6 +998,7 @@ CloudClient._changeLinks = function(pPanelID){
          */
         var lTarget = pEvent.currentTarget || pEvent.target;
         Util.setCurrentFile(lTarget);
+        Util.Images.showLoad();
         
         return lReturn_b;
     };
