@@ -364,7 +364,13 @@ CloudClient.Util        = (function(){
         return this.anyload(pParams_o);
     };
     
-    this.getById     = function(pId){return document.getElementById(pId);};
+    this.getByTag    = function(pTag, pElement){
+        return (pElement || document).getElementsByTagName(pTag);
+    };
+    
+    this.getById     = function(pId, pElement){
+        return (pElement || document).getElementById(pId);
+    };
     
     
     /*
@@ -675,7 +681,7 @@ CloudClient.keyBinding=(function(){
 
 /* function loads and shows editor */
 CloudClient.Editor = (function() {    
-    /* loading CloudMirror plagin */
+    /* loading CloudMirror plagin */    
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
             onload:(function(){
