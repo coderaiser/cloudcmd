@@ -450,7 +450,7 @@ CloudClient.Util        = (function(){
                     if(!lCurrent)
                         lRet_b  = false;
                 }else
-                    lCurrent = pPosition.parentElement;
+                    lCurrent = pPosition;
             }
             else
             {
