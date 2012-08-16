@@ -979,26 +979,22 @@ CloudClient._changeLinks = function(pPanelID){
     
     var lOnContextMenu_f = function(pEvent){
         var lReturn_b = true;
-        if(typeof CloudCommander.Menu === 'function'){
-            //var lRefreshIcon = Util
-                //.getByClass(CloudFunc.REFRESHICON);
-                
-            //Util.Images.showLoad(lRefreshIcon[0]);
-            
+        /* getting html element
+         * currentTarget - DOM event
+         * target        - jquery event
+         */
+        var lTarget = pEvent.currentTarget || pEvent.target;        
+        Util.setCurrentFile(lTarget);
+        
+        if(typeof CloudCommander.Menu === 'function'){            
             CloudCommander.Menu({
                 x: pEvent.x,
                 y: pEvent.y
             });
             /* disabling browsers menu*/
             lReturn_b = false;
-        }
-        /* getting html element
-         * currentTarget - DOM event
-         * target        - jquery event
-         */
-        var lTarget = pEvent.currentTarget || pEvent.target;
-        Util.setCurrentFile(lTarget);
-        Util.Images.showLoad();
+            Util.Images.showLoad();
+        }        
         
         return lReturn_b;
     };
