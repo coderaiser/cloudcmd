@@ -449,8 +449,7 @@ CloudClient.Util        = (function(){
                     lCurrent    = lThis.getRefreshButton();
                     if(!lCurrent)
                         lRet_b  = false;
-                }else
-                    lCurrent = pPosition.parentElement;
+                }
             }
             else
             {
@@ -728,7 +727,7 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
                         
-            Util.Images.showLoad(pNeedRefresh ? this : null);
+            Util.Images.showLoad(pNeedRefresh ? {top:true} : null);
             
             var lCurrentFile = Util.getCurrentFile();
             /* получаем имя каталога в котором находимся*/ 
