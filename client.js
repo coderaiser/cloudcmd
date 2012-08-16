@@ -433,7 +433,7 @@ CloudClient.Util        = (function(){
                 lCurrent = pElem;
             else
             {
-                lCurrent = lThis.getCurrentFile;
+                lCurrent = lThis.getCurrentFile();
                 lCurrent = lCurrent.firstChild.nextSibling;
             }
                                  
@@ -674,7 +674,7 @@ CloudClient.Menu = (function(pPosition){
  * Функция привязываеться ко всем ссылкам и
  *  загружает содержимое каталогов
  */
-CloudClient._loadDir=(function(pLink,pNeedRefresh){
+CloudClient._loadDir = (function(pLink,pNeedRefresh){
     /* @pElem - элемент, 
      * для которого нужно
      * выполнить загрузку
