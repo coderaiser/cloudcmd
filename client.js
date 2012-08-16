@@ -256,7 +256,7 @@ CloudClient.Util        = (function(){
              * and error image would be shown
              */
             element.onerror = (function(){
-                    (pParams_o.element || document.body)
+                    (pParams_o.parent || document.body)
                         .removeChild(element);
                     
                     Util.Images.showError({
