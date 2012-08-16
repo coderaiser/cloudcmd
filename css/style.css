@@ -18,7 +18,7 @@
   font-family: 'Octicons Regular';
   font-style: normal;
   font-weight: normal;
-  src: local('Octicons Regular'), url('font/Octicons.woff') format('woff');
+  src: local('Octicons Regular'), url('/font/Octicons.woff') format('woff');
 }
 
 @font-face {
