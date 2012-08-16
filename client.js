@@ -731,14 +731,10 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
                         
             Util.Images.showLoad(pNeedRefresh ? {top:true} : null);
             
-            var lCurrentFile = Util.getCurrentFile();
+            var lPanel = Util.getPanel();
             /* получаем имя каталога в котором находимся*/ 
-            var lHref;
-            try{
-                lHref = lCurrentFile.parentElement
-                    .getElementsByClassName('path')[0].textContent;
-                    
-            }catch(error){console.log('error');}
+            var lHref = Util.getByClass('path', lPanel);
+            lHref = lHref[0].textContent;
             
             lHref       = CloudFunc.removeLastSlash(lHref);
             var lSubstr = lHref.substr(lHref,lHref.lastIndexOf('/'));
@@ -755,7 +751,7 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
             var lA = Util.getCurrentLink(this);
             
             /* если нажали на ссылку на верхний каталог*/
-            if(lA && lA.textContent==='..' && lHref!=='/'){
+            //if(lA && lA.textContent==='..' && lHref!=='/'){
             
             /* функция устанавливает курсор на каталог
              * с которого мы пришли, если мы поднялись
