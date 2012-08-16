@@ -421,30 +421,51 @@ CloudClient.Util        = (function(){
         /* 
          * Function shows loading spinner
          * @pElem - top element of screen
+         * pPosition = {top: true};
          */   
-        showLoad        : function(pElem){
+        showLoad        : function(pPosition){
+            var lRet_b = true;
+            
             lLoadingImage   = LImages_o.loading();
             lErrorImage     = LImages_o.error();
             
             lErrorImage.className   = 'icon error hidden';
             
             var lCurrent;        
-            if(pElem)
-                lCurrent = pElem;
+            if(pPosition && pPosition.top){
+                lCurrent = Util.getByClass(CloudFunc.REFRESHICON);
+                        
+                if (lCurrent.length)                
+                    lCurrent = lCurrent[0].parentElement;                    
+                else {
+                    this.addCloudStatus({
+                        code : -3,
+                        msg  : 'Error Refresh icon not found'
+                        });
+                    
+                    lRet_b = false;
+                }
+            }
             else
             {
                 lCurrent = lThis.getCurrentFile();
                 lCurrent = lCurrent.firstChild.nextSibling;
             }
                                  
-            /* show loading icon * 
-             * if it not showed  */
+            /* show loading icon
+             * if it not showed  
+             * and if error was not
+             * heppen
+             */
+            if(lRet_b){
             var lParent = lLoadingImage.parentElement;
             if(!lParent ||
                 (lParent && lParent !== lCurrent))
                     lCurrent.appendChild(lLoadingImage);
             
-            lLoadingImage.className = 'icon loading'; /* показываем загрузку*/        
+            lLoadingImage.className = 'icon loading'; /* показываем загрузку*/
+            }
+            return lRet_b;
         },
     
         hideLoad        : function(){
@@ -683,7 +704,7 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
                         
-            Util.Images.showLoad(pNeedRefresh ? this : null);
+            Util.Images.showLoad(pNeedRefresh ? { top:true } : null);
             
             var lCurrentFile = Util.getCurrentFile();
             /* получаем имя каталога в котором находимся*/ 
@@ -964,10 +985,6 @@ CloudClient._changeLinks = function(pPanelID){
     var lPanel = getById(pPanelID);
     var a = lPanel.getElementsByTagName('a');
     
-      /* Если нажмут на кнопку перезагрузить страниц - её нужно будет обязательно
-     * перезагрузить
-     */
-    /* номер ссылки очистки кэша*/
     /* номер ссылки иконки обновления страницы */
     var lREFRESHICON = 0;
         
@@ -979,6 +996,7 @@ CloudClient._changeLinks = function(pPanelID){
     
     var lOnContextMenu_f = function(pEvent){
         var lReturn_b = true;
+        
         /* getting html element
          * currentTarget - DOM event
          * target        - jquery event
@@ -991,6 +1009,7 @@ CloudClient._changeLinks = function(pPanelID){
                 x: pEvent.x,
                 y: pEvent.y
             });
+            
             /* disabling browsers menu*/
             lReturn_b = false;
             Util.Images.showLoad();
@@ -1003,10 +1022,9 @@ CloudClient._changeLinks = function(pPanelID){
     {        
         /* убираем адрес хоста*/
         var link = '/'+a[i].href.replace(document.location.href,'');
-        /* убираем значения, которые говорят,
-         * об отсутствии js
-         */
-     
+        
+        /* убираем значения, которые говорят,   *
+         * об отсутствии js                     */     
         if(link.indexOf(lNoJS_s) === lFS_s.length){
             link = link.replace(lNoJS_s,'');
         }            
@@ -1014,9 +1032,8 @@ CloudClient._changeLinks = function(pPanelID){
         if(i === lREFRESHICON)
             a[i].onclick = CloudClient._loadDir(link,true);
             
-        /* устанавливаем обработчики на строку на одинарное и
-         * двойное нажатие на левую кнопку мышки
-         */
+        /* устанавливаем обработчики на строку на одинарное и   *
+         * двойное нажатие на левую кнопку мышки                */
         else{
             var lLi;
             
@@ -1024,7 +1041,7 @@ CloudClient._changeLinks = function(pPanelID){
                 lLi = a[i].parentElement.parentElement;
             }catch(error){console.log(error);}
             
-            /* if we in path changing onclick events*/
+            /* if we in path changing onclick events */
             if (lLi.className === 'path') {
                 a[i].onclick  = CloudClient._loadDir(link);                    
             }
