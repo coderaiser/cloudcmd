@@ -751,7 +751,7 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
             var lA = Util.getCurrentLink(this);
             
             /* если нажали на ссылку на верхний каталог*/
-            //if(lA && lA.textContent==='..' && lHref!=='/'){
+            if(lA && lA.textContent==='..' && lHref!=='/'){
             
             /* функция устанавливает курсор на каталог
              * с которого мы пришли, если мы поднялись
@@ -873,7 +873,6 @@ CloudClient._currentToParent = (function(pDirName){
     /* опредиляем в какой мы панели:
     * правой или левой
     */
-    var lCurrentFile = Util.getCurrentFile();
     var lPanel       = Util.getPanel();
 
     /* убираем слэш с имени каталога*/
@@ -1189,9 +1188,17 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
  * @pEleme - родительский элемент
  * @pJSON  - данные о файлах
  */
-CloudClient._createFileTable = function(pElem,pJSON)
+CloudClient._createFileTable = function(pElem, pJSON)
 {    
-    var lElem=getById(pElem);
+    var lElem = getById(pElem);
+    
+    /* getting current element if was refresh */
+    var lPath = getByClass('path', lElem);
+    var lWasRefresh_b = lPath[0].textContent === pJSON[0].path;
+    var lCurrent;    
+    if(lWasRefresh_b)
+        lCurrent = Util.getCurrentFile();
+            
     /* говорим построителю,
      * что бы он в нужный момент
      * выделил строку с первым файлом
@@ -1205,6 +1212,16 @@ CloudClient._createFileTable = function(pElem,pJSON)
     
     /* заполняем панель новыми элементами */    
     lElem.innerHTML = CloudFunc.buildFromJSON(pJSON,true);
+    
+    /* searching current file */
+    if(lWasRefresh_b && lCurrent){
+        for(i = 0; i < lElem.childNodes.length; i++)
+            if(lElem.childNodes[i].textContent === lCurrent.textContent){
+                lCurrent = lElem.childNodes[i];
+                break;
+            }
+        Util.setCurrentFile(lCurrent);
+    }
 };
 
 /* 
