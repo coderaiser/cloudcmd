@@ -1144,6 +1144,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                 
                 CloudClient._createFileTable(lPanel,lJSON);
                 CloudClient._changeLinks(lPanel);
+                
                 return;
             }
         }
@@ -1161,7 +1162,7 @@ CloudClient._ajaxLoad=function(path, pNeedRefresh)
                     if(!jqXHR.responseText.indexOf('Error:'))
                         return Util.showError(jqXHR);
 
-                    CloudClient._createFileTable(lPanel,data);
+                    CloudClient._createFileTable(lPanel, data);
                     CloudClient._changeLinks(lPanel);
                                                                 
                     /* Сохраняем структуру каталогов в localStorage,
