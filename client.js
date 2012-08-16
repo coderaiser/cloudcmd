@@ -446,11 +446,10 @@ CloudClient.Util        = (function(){
             var lCurrent;        
             if(pPosition){
                 if(pPosition.top){
-                    lCurrent    = lThis.getRefreshButton();
+                    lCurrent    = lThis.getRefreshButton();                    
                     if(!lCurrent)
                         lRet_b  = false;
                 }
-                else pPosition = lCurrent.parentElement;
             }
             else
             {
@@ -525,7 +524,7 @@ CloudClient.Util        = (function(){
         var lRefresh    = this.getByClass(CloudFunc.REFRESHICON, lPanel);
                         
         if (lRefresh.length)                
-            lRefresh = lRefresh[0];
+            lRefresh = lRefresh[0].parentElement;
         else {
             this.addCloudStatus({
                 code : -3,
