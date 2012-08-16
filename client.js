@@ -524,7 +524,7 @@ CloudClient.Util        = (function(){
         var lRefresh    = this.getByClass(CloudFunc.REFRESHICON, lPanel);
                         
         if (lRefresh.length)                
-            lRefresh = lRefresh[0].parentElement;
+            lRefresh = lRefresh[0];
         else {
             this.addCloudStatus({
                 code : -3,
