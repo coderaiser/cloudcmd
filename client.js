@@ -367,13 +367,25 @@ CloudClient.Util        = (function(){
     this.getById     = function(pId){return document.getElementById(pId);};
     
     
+    /*
+     * Function search element by class name
+     * @pClass - className
+     * @pElement - element
+     */
     this.getByClass  = (CloudCommander.OLD_BROWSER)?
-        function(pClass){
-            return window.jQuery('.'+pClass);
+        function(pClass, pElement){
+            var lClass = '.' + pClass;
+            var lResult;
+            
+            if(pElement)
+                lResult = pElement.find(lClass);
+            else lResult = $.find(lClass);
+            
+            return lResult;
         }
         
-        :function(pClass){
-            return document.getElementsByClassName(pClass);            
+        :function(pClass, pElement){
+            return (pElement || document).getElementsByClassName(pClass);            
         };
             
     /* private members */
@@ -433,18 +445,8 @@ CloudClient.Util        = (function(){
             
             var lCurrent;        
             if(pPosition && pPosition.top){
-                lCurrent = Util.getByClass(CloudFunc.REFRESHICON);
-                        
-                if (lCurrent.length)                
-                    lCurrent = lCurrent[0].parentElement;                    
-                else {
-                    this.addCloudStatus({
-                        code : -3,
-                        msg  : 'Error Refresh icon not found'
-                        });
-                    
-                    lRet_b = false;
-                }
+                lCurrent = this.getRefreshButton();
+                if(!lCurrent) lRet_b = false;
             }
             else
             {
@@ -458,13 +460,14 @@ CloudClient.Util        = (function(){
              * heppen
              */
             if(lRet_b){
-            var lParent = lLoadingImage.parentElement;
-            if(!lParent ||
-                (lParent && lParent !== lCurrent))
-                    lCurrent.appendChild(lLoadingImage);
-            
-            lLoadingImage.className = 'icon loading'; /* показываем загрузку*/
+                var lParent = lLoadingImage.parentElement;
+                if(!lParent ||
+                    (lParent && lParent !== lCurrent))
+                        lCurrent.appendChild(lLoadingImage);
+                
+                lLoadingImage.className = 'icon loading'; /* показываем загрузку*/
             }
+            
             return lRet_b;
         },
     
@@ -511,6 +514,23 @@ CloudClient.Util        = (function(){
             });
         
         return lCurrent;
+    };
+    
+    this.getRefreshButton = function(){                
+        var lPanel      = this.getPanel();
+        var lRefresh    = this.getByClassName(CloudFunc.REFRESHICON, lPanel);
+                        
+        if (lRefresh.length)                
+            lRefresh = lRefresh[0].parentElement;
+        else {
+            this.addCloudStatus({
+                code : -3,
+                msg  : 'Error Refresh icon not found'
+                });
+            lRefresh = false;
+        }
+        
+        return lRefresh;
     };
     
     this.setCurrentFile = function(pCurrentFile){
