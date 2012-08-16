@@ -444,14 +444,15 @@ CloudClient.Util        = (function(){
             lErrorImage.className   = 'icon error hidden';
             
             var lCurrent;        
-            if(pPosition && pPosition.top){
-                lCurrent = this.getRefreshButton();
-                if(!lCurrent) lRet_b = false;
+            if(pPosition && pPosition.top){                
+                lCurrent    = lThis.getRefreshButton();
+                if(!lCurrent)
+                    lRet_b  = false;
             }
             else
             {
-                lCurrent = lThis.getCurrentFile();
-                lCurrent = lCurrent.firstChild.nextSibling;
+                lCurrent    = lThis.getCurrentFile();
+                lCurrent    = lCurrent.firstChild.nextSibling;
             }
                                  
             /* show loading icon
