@@ -1053,8 +1053,11 @@ CloudClient._changeLinks = function(pPanelID){
             link = link.replace(lNoJS_s,'');
         }            
         /* ставим загрузку гифа на клик*/
-        if(i === lREFRESHICON)
+        if(i === lREFRESHICON){
             a[i].onclick = CloudClient._loadDir(link,true);
+            
+            a[i].parentElement.onclick = a[i].onclick;
+        }
             
         /* устанавливаем обработчики на строку на одинарное и   *
          * двойное нажатие на левую кнопку мышки                */
