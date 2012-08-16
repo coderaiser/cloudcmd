@@ -447,7 +447,9 @@ CloudClient.Util        = (function(){
             if(pPosition){
                 if(pPosition.top){
                     lCurrent    = lThis.getRefreshButton();                    
-                    if(!lCurrent)
+                    if(lCurrent)
+                        lCurrent = lCurrent.parentElement;
+                    else
                         lRet_b  = false;
                 }
             }
