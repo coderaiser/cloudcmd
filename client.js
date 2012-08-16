@@ -518,7 +518,7 @@ CloudClient.Util        = (function(){
     
     this.getRefreshButton = function(){                
         var lPanel      = this.getPanel();
-        var lRefresh    = this.getByClassName(CloudFunc.REFRESHICON, lPanel);
+        var lRefresh    = this.getByClass(CloudFunc.REFRESHICON, lPanel);
                         
         if (lRefresh.length)                
             lRefresh = lRefresh[0].parentElement;
