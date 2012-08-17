@@ -49,6 +49,9 @@ ul{ margin: 1em 0; padding: 0 20px 0 20px; }
 /* Hide from both screenreaders and browsers: h5bp.com/u */
 .hidden { display: none !important; visibility: hidden; }
 
+/* preformatted text */
+.pre {white-space:pre}
+
 /* ==== print styles =======================================================
    Print styles.
    Inlined to avoid required HTTP connection: h5bp.com/r
