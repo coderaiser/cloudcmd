@@ -46,6 +46,9 @@ current, file that was previously current must be unset automatically.
 
 * Added ability to view any file.
 
+* Moved error message a little bit lower.
+
+
 2012.08.06, Version 0.1.5
 
 * Added tab support.

@@ -74,7 +74,6 @@ body{
     cursor:default;
     color:rgb(222, 41, 41);
     position: relative;
-    top: -3px;
 }
 .loading{
   background:url(/img/spinner.gif);
