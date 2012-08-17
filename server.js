@@ -59,6 +59,12 @@ var CloudServer = {
      */
     Statuses        : {},
     
+    
+    /*
+     * queries of file params
+     * example: ?download
+     */
+    Queries         : {},
     /* ПЕРЕМЕННЫЕ 
      * Поддержка браузером JS */
     NoJS            : true,
@@ -223,16 +229,23 @@ CloudServer.generateHeaders = function(pName, pGzip){
         lType = 'text/cache-manifest';
     else if(CloudFunc.checkExtension(pName,'mp3'))
         lType = 'audio/mpeg';
+        
     /* если это неизвестный тип файла - 
      * высылаем его просто как текст
      */
     else lType='text/plain';
+    
+    var lQuery = CloudServer.Queries[pName];
+    if(lQuery)
+        if(lQuery === 'download')
+            lType = 'application/octet-stream';
+    console.log(pName + lQuery);
         
     return {
         /* if type of file any, but img - 
          * then we shoud specify charset 
          */
-        'Content-Type': lType + (lType.indexOf('img')<0?'; charset=UTF-8':''),
+        'Content-Type': lType + (lType.indexOf('img') < 0 ? '; charset=UTF-8' : ''),
         'cache-control': 'max-age='+(31337*21),
         'last-modified': new Date().toString(),
         'content-encoding': pGzip?'gzip':'',
@@ -254,12 +267,16 @@ CloudServer._controller=function(pReq, pRes)
         переданное в url
     */
     var url = require("url");
-    var pathname = url.parse(pReq.url).pathname;
-    
+    var lParsedUrl = url.parse(pReq.url);
+    var pathname = lParsedUrl.pathname;
+    var lQuery = lParsedUrl.query;
+    if(lQuery)
+        console.log('query= ' + lQuery);
+        
     /* added supporting of Russian language in directory names */
     pathname = Querystring.unescape(pathname);
     console.log('pathname: ' + pathname);
-    
+        
      /* получаем поддерживаемые браузером кодировки*/
      var lAcceptEncoding = pReq.headers['accept-encoding'];
     /* запоминаем поддерживает ли браузер
@@ -309,14 +326,15 @@ CloudServer._controller=function(pReq, pRes)
              */
             var lFileData=CloudServer.Cache.get(
                 CloudServer.Gzip?(lName+'_gzip'):lName);
+            
             console.log(Path.basename(lName));
                         
-            var lMinify=CloudServer.Minify;
+            var lMinify = CloudServer.Minify;
             
             /* object thet contains information
              * about the source of file data
              */
-            var lFromCache_o={'cache': true};
+            var lFromCache_o = {'cache': true};
             
             /* if cache is empty and Cache allowed and Minify_allowed 
              * and in Minifys cache is files, so save it to
@@ -337,10 +355,10 @@ CloudServer._controller=function(pReq, pRes)
                 /* if file readed not from cache - 
                  * he readed from minified cache 
                  */
-                if(lFromCache_o.cache===false)
-                    lFromCache_o.minify=true;
+                if(lFromCache_o.cache === false)
+                    lFromCache_o.minify = true;
                 else
-                    lFromCache_o.minify=false;
+                    lFromCache_o.minify = false;
                     
                 console.log(lName + ' readed from cache');
                 /* передаём данные с кэша,
@@ -367,7 +385,7 @@ CloudServer._controller=function(pReq, pRes)
             
             /* убираем индекс файловой системы */
             if(pathname.indexOf(lFS_s)===0){
-                pathname=pathname.replace(lFS_s,'');
+                pathname = pathname.replace(lFS_s,'');
                 /* если посетитель только зашел на сайт
                  * no-js будет пустым, как и fs
                  */                       
@@ -386,6 +404,9 @@ CloudServer._controller=function(pReq, pRes)
             CloudServer.Responses[DirPath] = pRes;
             
             CloudServer.Statuses[DirPath]  = 200;
+            
+            /* saving query of current file */
+            CloudServer.Queries[DirPath] = lQuery;
             
             /* Проверяем с папкой ли мы имеем дело */
             
@@ -416,7 +437,7 @@ CloudServer._controller=function(pReq, pRes)
 CloudServer._stated = function(pError, pStat){
     if(pError){
         CloudServer.Statuses[DirPath]  = 404;
-        CloudServer.sendResponse('OK',pError.toString(),DirPath);
+        CloudServer.sendResponse('OK',pError.toString(), DirPath);
         
         return;
     }
@@ -428,10 +449,10 @@ CloudServer._stated = function(pError, pStat){
              
     if(pStat){
         if(pStat.isDirectory())
-            Fs.readdir(DirPath,CloudServer._readDir);                    
+            Fs.readdir(DirPath, CloudServer._readDir);                    
         /* отдаём файл */
         else if(pStat.isFile()){                        
-            Fs.readFile(DirPath,CloudServer.getReadFileFunc(DirPath));
+            Fs.readFile(DirPath, CloudServer.getReadFileFunc(DirPath));
             console.log('reading file: '+DirPath);
         }
     }
@@ -576,8 +597,8 @@ CloudServer._fillJSON = function(pStats, pFiles){
          * высылаем json-структуру файлов
          * с соответствующими заголовками
          */
-        lList=JSON.stringify(lJSON);
-        lHeader=CloudServer.generateHeaders('application/json',CloudServer.Gzip);
+        lList   = JSON.stringify(lJSON);
+        lHeader = CloudServer.generateHeaders('application/json',CloudServer.Gzip);
         
         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
         if(CloudServer.Gzip){
@@ -674,7 +695,7 @@ CloudServer.getReadFileFunc = function(pName){
              * сами, ведь файл уже вычитан
              */
             
-            var lHeader=CloudServer.generateHeaders(pName,CloudServer.Gzip);
+            var lHeader = CloudServer.generateHeaders(pName, CloudServer.Gzip);
             /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
             if( CloudServer.Gzip && !(pFromCache_o && pFromCache_o.cache) ){
                 /* сжимаем содержимое */
