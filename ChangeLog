@@ -48,6 +48,8 @@ current, file that was previously current must be unset automatically.
 
 * Moved error message a little bit lower.
 
+* Added ability to download files.
+
 
 2012.08.06, Version 0.1.5
 
