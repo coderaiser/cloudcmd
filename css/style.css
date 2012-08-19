@@ -70,10 +70,11 @@ body{
   margin-left:0.5%;
 }
 .error::before{
+    bottom : 4px;
     content:'\f026';
     cursor:default;
     color:rgb(222, 41, 41);
-    position: relative;
+    position: relative;    
 }
 .loading{
   background:url(/img/spinner.gif);
