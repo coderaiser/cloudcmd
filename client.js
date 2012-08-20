@@ -127,7 +127,7 @@ CloudClient.Cache.clear = (function(){
 });
 
 /* Object contain additional system functional */
-CloudClient.Util        = (function(){
+CloudClient.Utils        = (function(){
     /*
      * Function gets id by src
      * from http://domain.com/1.js to
@@ -328,28 +328,12 @@ CloudClient.Util        = (function(){
  * все параметры опциональны
  */
         
-    this.cssSet      = (CloudCommander.OLD_BROWSER)?
-    /* if browser is old - make in diferen way */
-        function(pParams_o){     
-            var lElement = '<style ';
-            
-            if (pParams_o.id) lElement        += 'id='    + pParams_o.id    + ' ';        
-            if (pParams_o.style) lElement     += 'style=' + pParams_o.style + ' ';        
-            if (pParams_o.className) lElement += 'class=' + pParams_o.className;        
-            if (pParams_o.inner)lElement      += '>' + pParams_o.inner;
-            
-            lElement +='</style>';
-            return window.jQuery(lElement)
-                .appendTo(pParams_o.parent || document.head);
-                
-        }
-        :function(pParams_o){
-            pParams_o.name      = 'style';
-            pParams_o.parent    = pParams_o.parent || document.head;
-            
-            return this.anyload(pParams_o);
-                
-        },
+    this.cssSet      = function(pParams_o){
+        pParams_o.name      = 'style';
+        pParams_o.parent    = pParams_o.parent || document.head;
+        
+        return this.anyload(pParams_o);                
+    },
     /* Function loads external css files 
      * @pParams_o - структура параметров, заполняеться таким
      * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
@@ -385,21 +369,9 @@ CloudClient.Util        = (function(){
      * @pClass - className
      * @pElement - element
      */
-    this.getByClass  = (CloudCommander.OLD_BROWSER)?
-        function(pClass, pElement){
-            var lClass = '.' + pClass;
-            var lResult;
-            
-            if(pElement)
-                lResult = pElement.find(lClass);
-            else lResult = $.find(lClass);
-            
-            return lResult;
-        }
-        
-        :function(pClass, pElement){
-            return (pElement || document).getElementsByClassName(pClass);            
-        };
+    this.getByClass  = function(pClass, pElement){
+        return (pElement || document).getElementsByClassName(pClass);            
+    };
             
     /* private members */
     var lLoadingImage;
@@ -676,7 +648,7 @@ CloudClient.Util        = (function(){
     };
 });
 
-
+CloudClient.Util       = new CloudClient.Utils();
 
 /* функция обработки нажатий клавишь */
 CloudClient.keyBinding=(function(){
