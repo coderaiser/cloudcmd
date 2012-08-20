@@ -1030,6 +1030,8 @@ CloudClient._changeLinks = function(pPanelID){
     var lOnContextMenu_f = function(pEvent){
         var lReturn_b = true;
         
+        CloudCommander.keyBinded = false;
+        
         /* getting html element
          * currentTarget - DOM event
          * target        - jquery event
