@@ -585,11 +585,11 @@ CloudServer._fillJSON = function(pStats, pFiles){
     /* заголовок ответа сервера */        
     var lHeader;        
     var lList;
-    /* если js недоступен */
-    /* если javascript отключен вылылаем html-код
-     * и прописываем соответствующие заголовки
-     */
     
+    /* если js недоступен
+     * или отключен выcылаем html-код
+     * и прописываем соответствующие заголовки
+     */    
     if(CloudServer.NoJS){
         var lPanel=CloudFunc.buildFromJSON(lJSON);
         lList='<ul id=left class=panel>';
