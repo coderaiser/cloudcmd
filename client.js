@@ -14,45 +14,47 @@ var CloudClient = {
     * выполняет весь функционал по
     * инициализации
     */
-    init                    :function(){},
+    init                    : function(){},
     
-    keyBinding              :function(){},/* функция нажатий обработки клавишь*/
-    keyBinded               :false,  /* оброботка нажатий клавишь установлена */
+    keyBinding              : function(){},/* функция нажатий обработки клавишь*/
+    keyBinded               : false,  /* оброботка нажатий клавишь установлена */
     
-    Editor                  :function(){},/* function loads and shows editor  */
-    Viewer                  :function(){},/* function loads and shows viewer  */
-    Terminal                :function(){},/* function loads and shows terminal*/
-    Menu                    :function(){},/* function loads and shows menu    */
+    Editor                  : function(){},/* function loads and shows editor  */
+    Viewer                  : function(){},/* function loads and shows viewer  */
+    Terminal                : function(){},/* function loads and shows terminal*/
+    Menu                    : function(){},/* function loads and shows menu    */
             
-    _loadDir                :function(){}, /* Функция привязываеться ко всем
+    _loadDir                : function(){}, /* Функция привязываеться ко всем
                                             * ссылкам и
                                             *  загружает содержимое каталогов */
     
     /* ОБЬЕКТЫ */
     /* Обьект для работы с кэшем */
-    Cache                  :{},
+    Cache                  : {},
     /* Object contain additional system functional */
-    Util                   :{},
+    Util                   : {},
     
     /* ПРИВАТНЫЕ ФУНКЦИИ */
     /* функция загружает json-данные о файловой системе */
-    _ajaxLoad              :function(){},
+    _ajaxLoad              : function(){},
+    
     /* Функция генерирует JSON из html-таблицы файлов */
-    _getJSONfromFileTable  :function(){},
+    _getJSONfromFileTable  : function(){},
+    
     /* функция меняет ссыки на ajax-овые */
-    _changeLinks           :function(){},     
+    _changeLinks           : function(){},     
     
     /* КОНСТАНТЫ*/
     /* название css-класа текущего файла*/
-    CURRENT_FILE           :'current-file',
-    LIBDIR                 :'/lib/',
-    LIBDIRCLIENT           :'/lib/client/',
+    CURRENT_FILE           : 'current-file',
+    LIBDIR                 : '/lib/',
+    LIBDIRCLIENT           : '/lib/client/',
     /* height of Cloud Commander
     * seting up in init()
     */
-    HEIGHT                 :0,
-    MIN_ONE_PANEL_WIDTH    :1155,
-    OLD_BROWSER            :false
+    HEIGHT                 : 0,
+    MIN_ONE_PANEL_WIDTH    : 1155,
+    OLD_BROWSER            : false
 };
 
 /* 
@@ -61,24 +63,29 @@ var CloudClient = {
  * работы с LocalStorage, webdb,
  * indexed db etc.
  */
-CloudClient.Cache={
-    _allowed     :true,     /* приватный переключатель возможности работы с кэшем */
-     /* функция проверяет возможно ли работать с кэшем каким-либо образом */
-    isAllowed   :function(){},
+CloudClient.Cache = {
+    _allowed     : true,     /* приватный переключатель возможности работы с кэшем */
+    
+    /* функция проверяет возможно ли работать с кэшем каким-либо образом */
+    isAllowed   : function(){},
+    
     /* Тип кэша, который доступен*/
-    type        :{},
+    type        : {},
+    
     /* Функция устанавливает кэш, если выбранный вид поддерживаеться браузером*/
     set         :function(){},
+    
     /* Функция достаёт кэш, если выбранный вид поддерживаеться браузером*/
-    get         :function(){},
+    get         : function(){},
+    
     /* функция чистит весь кэш для всех каталогов*/
-    clear       :function(){}
+    clear       : function(){}
 };
 
 
 /* функция проверяет поддерживаеться ли localStorage */
-CloudClient.Cache.isAllowed=(function(){
-    if(window.localStorage && 
+CloudClient.Cache.isAllowed = (function(){
+    if(window.localStorage   && 
         localStorage.setItem &&
         localStorage.getItem){
         CloudClient.Cache._allowed=true;

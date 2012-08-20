@@ -271,6 +271,17 @@ CloudServer._controller=function(pReq, pRes)
     var url = require("url");
     var lParsedUrl = url.parse(pReq.url);
     var pathname = lParsedUrl.pathname;
+    
+    /* varible contain one of queris:
+     * download - change content-type for
+     *              make downloading process
+     *              from client js
+     * json     - /no-js/ will be removed, and
+     *              if we will wont get directory
+     *              content wi will set json
+     *              query like this
+     *              ?json
+     */
     var lQuery = lParsedUrl.query;
     if(lQuery)
         console.log('query = ' + lQuery);
@@ -288,7 +299,7 @@ CloudServer._controller=function(pReq, pRes)
     if (lAcceptEncoding && 
         lAcceptEncoding.match(/\bgzip\b/) &&
         Zlib){
-        CloudServer.Gzip=true;
+        CloudServer.Gzip = true;
     }
     /* путь в ссылке, который говорит
      * что js отключен
@@ -299,28 +310,28 @@ CloudServer._controller=function(pReq, pRes)
     if(pathname!=='/favicon.ico')
     {    
         console.log("request for " + pathname + " received...");
-        var lName;
                         
         /* если в пути нет информации ни о ФС,
          * ни об отсутствии js,
          * ни о том, что это корневой
          * каталог - загружаем файлы проэкта
          */
-        if(pathname.indexOf(lFS_s) < 0 &&
-            pathname.indexOf(lNoJS_s) < 0 &&
-            pathname!=='/'){
+        if(pathname.indexOf(lFS_s) < 0      &&
+            pathname.indexOf(lNoJS_s) < 0   &&
+            pathname!=='/'                  &&
+            lQuery !=='json'){
             /* если имена файлов проекта - загружаем их*/  
             /* убираем слеш и читаем файл с текущец директории*/
             
             /* добавляем текующий каталог к пути */
-            lName='.'+pathname;
+            var lName = '.' + pathname;
             console.log('reading '+lName);
             
             /* сохраняем указатель на response и имя */
-            CloudServer.Responses[lName]=pRes;
+            CloudServer.Responses[lName]    = pRes;
             
             /* saving status OK for current file */
-            CloudServer.Statuses[lName] = 200;
+            CloudServer.Statuses[lName]     = 200;
             
             /* Берём значение из кэша
              * сжатый файл - если gzip-поддерживаеться браузером
@@ -381,20 +392,29 @@ CloudServer._controller=function(pReq, pRes)
              * длиннее
              */
             
-            if(pathname.indexOf(lNoJS_s)!==lFS_s.length && pathname!=='/'){
-                CloudServer.NoJS=false;
-            }else pathname=pathname.replace(lNoJS_s,'');
+            if(pathname.indexOf(lNoJS_s) !== lFS_s.length &&
+                pathname !== '/'){
+                    CloudServer.NoJS = false;
+                    
+            }else pathname = pathname.replace(lNoJS_s,'');
             
             /* убираем индекс файловой системы */
-            if(pathname.indexOf(lFS_s)===0){
+            if(pathname.indexOf(lFS_s) === 0){
                 pathname = pathname.replace(lFS_s,'');
-                /* если посетитель только зашел на сайт
-                 * no-js будет пустым, как и fs
-                 */                       
-            /* если в пути нету fs - посетитель только зашел на сайт
+            
+            /* if query json setted up
+             * load json data, no-js false.
+             */
+            if(lQuery === 'json'){
+                CloudServer.NoJS = false;
+            }
+            
+            /* если посетитель только зашел на сайт
+             * no-js будет пустым, как и fs.
+             * Если в пути нету fs - посетитель только зашел на сайт
              * загружаем его полностью.
              */
-            }else CloudServer.NoJS=true;
+            } else CloudServer.NoJS = true;
             /* если в итоге путь пустой
              * делаем его корневым
              */                         
@@ -403,12 +423,12 @@ CloudServer._controller=function(pReq, pRes)
                         
             DirPath  = pathname;
             
-            CloudServer.Responses[DirPath] = pRes;
+            CloudServer.Responses[DirPath]  = pRes;
             
-            CloudServer.Statuses[DirPath]  = 200;
+            CloudServer.Statuses[DirPath]   = 200;
             
             /* saving query of current file */
-            CloudServer.Queries[DirPath] = lQuery;
+            CloudServer.Queries[DirPath]    = lQuery;
             
             /* Проверяем с папкой ли мы имеем дело */
             
@@ -419,16 +439,16 @@ CloudServer._controller=function(pReq, pRes)
              * меняем название html-файла и
              * загружаем сжатый html-файл в дальнейшем
              */
-            CloudServer.INDEX=(CloudServer.Minify._allowed.html?
+            CloudServer.INDEX = (CloudServer.Minify._allowed.html ?
                 '.' + CloudServer.Minify.MinFolder + 'index.min.html'
-                :CloudServer.INDEX);
+                : CloudServer.INDEX);
           
             /*
              * сохраним указатель на response
              * и на статус ответа
              */            
             CloudServer.Responses[CloudServer.INDEX] = pRes;
-            CloudServer.Statuses[CloudServer.INDEX]  = 200;
+            CloudServer.Statuses [CloudServer.INDEX] = 200;
         }
     }
 };
