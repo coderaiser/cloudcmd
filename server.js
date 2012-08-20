@@ -271,7 +271,7 @@ CloudServer._controller=function(pReq, pRes)
     var pathname = lParsedUrl.pathname;
     var lQuery = lParsedUrl.query;
     if(lQuery)
-        console.log('query= ' + lQuery);
+        console.log('query = ' + lQuery);
         
     /* added supporting of Russian language in directory names */
     pathname = Querystring.unescape(pathname);
@@ -291,8 +291,8 @@ CloudServer._controller=function(pReq, pRes)
     /* путь в ссылке, который говорит
      * что js отключен
      */
-    var lNoJS_s=CloudFunc.NOJS;
-    var lFS_s=CloudFunc.FS;
+    var lNoJS_s = CloudFunc.NOJS;
+    var lFS_s   = CloudFunc.FS;
     
     if(pathname!=='/favicon.ico')
     {    
@@ -304,8 +304,8 @@ CloudServer._controller=function(pReq, pRes)
          * ни о том, что это корневой
          * каталог - загружаем файлы проэкта
          */
-        if(pathname.indexOf(lFS_s)<0 &&
-            pathname.indexOf(lNoJS_s)<0 &&
+        if(pathname.indexOf(lFS_s) < 0 &&
+            pathname.indexOf(lNoJS_s) < 0 &&
             pathname!=='/'){
             /* если имена файлов проекта - загружаем их*/  
             /* убираем слеш и читаем файл с текущец директории*/
