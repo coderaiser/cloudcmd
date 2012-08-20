@@ -883,7 +883,7 @@ var CloudFunc, $, Util,
  * выполняет весь функционал по
  * инициализации
  */
-CloudClient.init=(function()
+CloudClient.init = (function()
 {    
     if(!document.head){
         this.OLD_BROWSER = true;
