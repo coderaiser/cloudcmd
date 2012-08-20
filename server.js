@@ -9,7 +9,9 @@ var CloudServer = {
      * exist
      */
     Config          : {
-        cache : {allowed : true},
+        cache : {
+            allowed : true
+        },
         minification : {
             js    : false,
             css   : false,
