@@ -890,7 +890,7 @@ CloudClient.init=(function()
         document.head = document.getElementsByTagName("head")[0];
     }
     
-    Util        = new CloudClient.Util();
+    Util        = new CloudClient.Utils();
     getByClass  = Util.getByClass;
     getById     = Util.getById;
                 
