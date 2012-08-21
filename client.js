@@ -128,6 +128,18 @@ CloudClient.Cache.clear = (function(){
 
 /* Object contain additional system functional */
 CloudClient.Utils        = (function(){
+    
+    /* Should be used Util version 
+     * jquery could be droped out
+     */
+    this.ajax = function(pParams){
+        $.ajax(pParams);
+    };
+    
+    this.bind = function(pFunction, pObject){
+        return pFunction.bind(pObject);
+    };
+    
     /*
      * Function gets id by src
      * from http://domain.com/1.js to
@@ -1086,7 +1098,7 @@ CloudClient._changeLinks = function(pPanelID){
  * @path - каталог для чтения
  * @pNeedRefresh - необходимость обновить данные о каталоге
  */
-CloudClient._ajaxLoad=function(path, pNeedRefresh)
+CloudClient._ajaxLoad = function(path, pNeedRefresh)
 {                                   
         /* Отображаем красивые пути */
         /* added supporting of russian  language */
