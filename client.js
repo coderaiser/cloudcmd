@@ -23,6 +23,7 @@ var CloudClient = {
     Viewer                  : function(){},/* function loads and shows viewer  */
     Terminal                : function(){},/* function loads and shows terminal*/
     Menu                    : function(){},/* function loads and shows menu    */
+    GoogleAnalytics         : function(){},
             
     _loadDir                : function(){}, /* Функция привязываеться ко всем
                                             * ссылкам и
@@ -284,7 +285,7 @@ CloudClient.Utils        = (function(){
                         ' could not be loaded'
                     });
                     
-                    if(lFunc.onerror &&
+                    if(lFunc && lFunc.onerror &&
                         typeof lFunc.onerror === 'function')
                             lFunc.onerror();
             });
@@ -679,6 +680,21 @@ CloudClient.Editor = (function(pIsReadOnly) {
                 CloudCommander.Editor.Keys(pIsReadOnly);
             })
     });
+});
+
+CloudClient.GoogleAnalytics = (function(){
+   /* google analytics */
+   var lFunc = document.onmousemove;
+   document.onmousemove = function(){       
+        setTimeout(function(){
+            Util.jsload('lib/client/google_analytics.js');
+        },5000);
+        
+        if(typeof lFunc === 'function')
+            lFunc();
+        
+        document.onmousemove = lFunc;
+   };
 });
 
 /* function loads and shows viewer */
@@ -1296,12 +1312,17 @@ return CloudClient;
 })();
 
 try{
-    window.onload=function(){
+    window.onload = function(){
         'use strict';        
+        
         /* базовая инициализация*/
         CloudCommander.init();
+        
         /* привязываем клавиши к функциям */
         CloudCommander.keyBinding();
+        
+        /* загружаем Google Analytics */
+        CloudCommander.GoogleAnalytics();
     };
 }
 catch(err){}
