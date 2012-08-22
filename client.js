@@ -137,8 +137,9 @@ CloudClient.Utils        = (function(){
         $.ajax(pParams);
     };
     
-    this.bind = function(pFunction, pObject){
-        return pFunction.bind(pObject);
+    /* setting function context (this) */
+    this.bind = function(pFunction, pContext){
+        return pFunction.bind(pContext);
     };
     
     /*
