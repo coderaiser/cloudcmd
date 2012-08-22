@@ -1166,7 +1166,7 @@ CloudClient._ajaxLoad = function(path, pNeedRefresh)
         
         /* ######################## */
         try{
-            $.ajax({
+            Util.ajax({
                 url: path,
                 error: Util.Images.showError,
                 
