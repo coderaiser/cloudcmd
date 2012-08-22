@@ -672,12 +672,12 @@ CloudClient.keyBinding=(function(){
 });
 
 /* function loads and shows editor */
-CloudClient.Editor = (function(pIsReadOnly) {    
+CloudClient.Editor = (function(pCurrentFile, pIsReadOnly) {    
     /* loading CloudMirror plagin */    
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
             onload:(function(){
-                CloudCommander.Editor.Keys(pIsReadOnly);
+                CloudCommander.Editor.Keys(pCurrentFile, pIsReadOnly);
             })
     });
 });
@@ -698,11 +698,11 @@ CloudClient.GoogleAnalytics = (function(){
 });
 
 /* function loads and shows viewer */
-CloudClient.Viewer = (function(){
+CloudClient.Viewer = (function(pCurrentFile){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'viewer.js',{
             onload: (function(){
-                CloudCommander.Viewer.Keys();
+                CloudCommander.Viewer.Keys(pCurrentFile);
             })
     });
 });
