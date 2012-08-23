@@ -40,11 +40,12 @@ There is a short list:
 
 Viewer's hot keys
 ---------------
-- F3                - open viewer window (if current file is image)
+- <shift> + F3      - open viewer window
 - Esc               - close viewer window
 
 Editor's hot keys
 ---------------
+- F3                - open CodeMirror editor in read only mode
 - F4                - open CodeMirror editor
 - Esc               - close CodeMirror editor
 
