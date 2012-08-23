@@ -59,8 +59,7 @@ var CloudServer = {
      * хранащий информацию в виде
      * Statuses[name] = 404;
      */
-    Statuses        : {},
-    
+    Statuses        : {},    
     
     /*
      * queries of file params
@@ -72,6 +71,9 @@ var CloudServer = {
     NoJS            : true,
     /* Поддержка gzip-сжатия браузером */
     Gzip            : undefined,
+    
+    /* server varible */
+    Server          :{},
     
     /* КОНСТАНТЫ */
     INDEX           : 'index.html',
@@ -183,7 +185,8 @@ CloudServer.start = function () {
         var http = require('http');
 
         try {
-            http.createServer(this._controller).listen(
+            this.Server =  http.createServer(this._controller);
+            this.Server.listen(
                 this.Port, this.IP);
                 
             console.log('Cloud Commander server running at http://' +
