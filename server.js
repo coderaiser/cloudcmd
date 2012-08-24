@@ -391,6 +391,7 @@ CloudServer._controller=function(pReq, pRes)
              */
             else if(lName.indexOf('min') < 0 &&
                 CloudServer.Minify){
+                var lMin_o = CloudServer.Config.minification;
                 
                 var lCheck_f = function(pExt){
                     return CloudFunc.checkExtension(lName,pExt);
