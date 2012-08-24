@@ -411,7 +411,8 @@ CloudServer._controller=function(pReq, pRes)
                 }
                 else 
                     lResult = false;
-            }
+            } else
+                lResult = false;
             
             if(!lResult)
                 Fs.readFile(lName, lReadFileFunc_f);
