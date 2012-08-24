@@ -551,12 +551,13 @@ CloudClient.Utils        = (function(){
             lRet_b = false;
         }
         var lCurrentFileWas = this.getCurrentFile();
-        if(lCurrentFileWas)        
-            this.unSetCurrentFile(lCurrentFileWas);
-                
+                        
         var lClass = pCurrentFile.className;        
         if (lClass !== 'path' &&
             lClass !== 'fm_header'){
+                if(lCurrentFileWas)        
+                    this.unSetCurrentFile(lCurrentFileWas);
+                    
                 pCurrentFile.className = CloudCommander.CURRENT_FILE; 
         } else {
             this.addCloudStatus({
@@ -581,12 +582,11 @@ CloudClient.Utils        = (function(){
                         'unSetCurrentFile'        +
                         'could not be none'
             });
+        var lRet_b = this.isCurrentFile(pCurrentFile);
+        if(lRet_b)
+            pCurrentFile.className = '';    
         
-        if(this.isCurrentFile(pCurrentFile))
-            pCurrentFile.className = '';
-        
-        else return false;
-        
+        return lRet_b;
     };
     
     this.isCurrentFile = function(pCurrentFile){
