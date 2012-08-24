@@ -40,7 +40,7 @@ There is a short list:
 
 Viewer's hot keys
 ---------------
-- <shift> + F3      - open viewer window
+- Shift + F3      - open viewer window
 - Esc               - close viewer window
 
 Editor's hot keys
