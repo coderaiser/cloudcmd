@@ -389,14 +389,26 @@ CloudServer._controller=function(pReq, pRes)
              * and minimizing setted then minimize it
              */
             else if(lName.indexOf('min') < 0 &&
-                CloudFunc.checkExtension(lName, ['js','css','html']) &&
                 CloudServer.Minify)
-                CloudServer.Minify.optimize(lName, {
-                    cache: true,
-                    callback: function(pFileData){
-                        lReadFileFunc_f(undefined, pFileData, false);
-                    }
-                });
+                
+                var lMin_o = CloudServer.Config.minification;
+                var isAllowd_b = false;
+                if(CloudFunc.checkExtension(lName, 'js') && lMin_o.js)
+                    isAllowd_b = true;
+                
+                else if(CloudFunc.checkExtension(lName, 'css') && lMin_o.css)
+                    isAllowd_b = true;
+                
+                else if(CloudFunc.checkExtension(lName, 'html') && lMin_o.html)
+                    isAllowd_b = true;
+                    
+                if(isAllowd_b)
+                    CloudServer.Minify.optimize(lName, {
+                        cache: true,
+                        callback: function(pFileData){
+                            lReadFileFunc_f(undefined, pFileData, false);
+                        }
+                    });
             
             else Fs.readFile(lName, lReadFileFunc_f);
             
