@@ -19,7 +19,7 @@
   },
   "devDependencies": {},
   "engines": {
-    "node": "0.6.x"
+    "node": ">=0.4.x"
   },
   "main": "server.js"
 }
