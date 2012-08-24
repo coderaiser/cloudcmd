@@ -3,6 +3,9 @@
 * Changed name of menu files, fixed npm and jitsu
 problem with menu showing.
 
+* Fixed bug with empty directorys. If directory
+was empty, we could not go in.
+
 
 2012.08.24, Version 0.1.6
  

@@ -534,7 +534,7 @@ CloudServer._readDir = function (pError, pFiles)
         DirPath += '/';
     }
 
-    pFiles=pFiles.sort();
+    pFiles = pFiles.sort();
     
     var lCount = 0;
     var lStats = {};
@@ -542,16 +542,16 @@ CloudServer._readDir = function (pError, pFiles)
      * and putting it to lStats object
      */
     var getFilesStat_f = function(pName){
-        return function(pError, pStat){                                    
-            var fReturnFalse = function returnFalse(){
+        return function(pError, pStat){
+            var fReturnFalse = function(){
                 return false;
             };
             
             if(pError)
                 lStats[pName] = {
-                            'mode':0,
-                            'size':0,
-                            'isDirectory':fReturnFalse
+                    'mode':0,
+                    'size':0,
+                    'isDirectory':fReturnFalse
                 };
                 
             else
@@ -563,11 +563,13 @@ CloudServer._readDir = function (pError, pFiles)
         };
     };
     
-    for(var i=0;i<pFiles.length;i++){
-        /* Получаем информацию о файле*/
-        Fs.stat(DirPath + pFiles[i],
-            getFilesStat_f(pFiles[i]));
-    }
+    if(pFiles.length)
+        for(var i = 0; i < pFiles.length; i++){
+            /* Получаем информацию о файле*/
+            Fs.stat(DirPath + pFiles[i],
+                getFilesStat_f(pFiles[i]));
+        }
+    else CloudServer._fillJSON(null, pFiles);
 };
 
 /*
@@ -580,41 +582,34 @@ CloudServer._readDir = function (pError, pFiles)
  */
 CloudServer._fillJSON = function(pStats, pFiles){
     /* данные о файлах в формате JSON*/
-    var lJSON=[];
-    var lJSONFile={};
+    var lJSON       = [];
+    var lJSONFile   = {};
         
-    lJSON[0]={path:DirPath,size:'dir'};
+    lJSON[0]        = {
+        path:DirPath,
+        size:'dir'
+    };
     
     var fReturnFalse=function returnFalse(){return false;};
-    for(var i=0;i<pFiles.length;i++)
+    for(var i = 0; i < pFiles.length; i++)
     {
         /*
          *Переводим права доступа в 8-ричную систему
          */
         var lName = pFiles[i];
         
-        var lMode=(pStats[lName].mode-0).toString(8);            
-                    
-        /* Если папка - выводим пиктограмму папки */
-        if(pStats[lName].isDirectory())
-        {                
-            lJSONFile={'name':pFiles[i],
-                'size'  : 'dir',
-                'uid'   : pStats[lName].uid,
-                'mode'  : lMode};
-            
-            lJSON[i+1]=lJSONFile;            
-        }
-        /* В противоположном случае - файла */
-        else
-        {
-            lJSONFile={'name':pFiles[i],
-            'uid'   : pStats[lName].uid,
-            'size'  : pStats[lName].size,
-            'mode'  : lMode};
-            
-            lJSON[i+1]=lJSONFile;
-        }
+        var lMode = (pStats[lName].mode-0).toString(8);            
+        var lStats = pStats[lName];
+        var lIsDir  = lStats.isDirectory();
+        
+        /* Если папка - выводим пиктограмму папки   *
+         * В противоположном случае - файла         */
+        lJSONFile = {'name':pFiles[i],
+            'size'  : (lIsDir?'dir':lStats.size),
+            'uid'   : lStats.uid,
+            'mode'  : lMode};        
+        
+        lJSON[i+1] = lJSONFile;
     }
     
     /* заголовок ответа сервера */        
@@ -626,24 +621,24 @@ CloudServer._fillJSON = function(pStats, pFiles){
      * и прописываем соответствующие заголовки
      */    
     if(CloudServer.NoJS){
-        var lPanel=CloudFunc.buildFromJSON(lJSON);
-        lList='<ul id=left class=panel>';
-        lList+=lPanel;
-        lList+='</ul>';
+        var lPanel  = CloudFunc.buildFromJSON(lJSON);
+        lList       = '<ul id=left class=panel>';
+        lList       += lPanel;
+        lList       += '</ul>';
         
-        lList+='<ul id=right class="panel hidden">';
-        lList+=lPanel;
-        lList+='</ul>';
+        lList       += '<ul id=right class="panel hidden">';
+        lList       += lPanel;
+        lList       += '</ul>';
     
         var lIndex;
         /* пробуем достать данные из кэша
          * с жатием или без, взависимости
          * от настроек
          */
-        var lFileData=CloudServer.Cache.get(CloudServer.INDEX);
+        var lFileData = CloudServer.Cache.get(CloudServer.INDEX);
         /* если их нет там - вычитываем из файла*/
         if(!lFileData) {
-            lIndex=Fs.readFile(CloudServer.INDEX,
+            lIndex = Fs.readFile(CloudServer.INDEX,
                 CloudServer.indexReaded(lList));
         }else {
             var lReaded_f = CloudServer.indexReaded(lList);
@@ -680,7 +675,7 @@ CloudServer.indexReaded = function(pList){
                  * меняем в index.html обычный client.js на
                  * минифицированый
                  */
-        pIndex=pIndex.toString();
+        pIndex = pIndex.toString();
         
         /* if scripts shoud be minified and
          * minification proceed sucessfully
