@@ -241,10 +241,12 @@ CloudServer.generateHeaders = function(pName, pGzip){
     else lType='text/plain';
     
     var lQuery = CloudServer.Queries[pName];
-    if(lQuery)
+    if(lQuery){
         if(lQuery === 'download')
             lType = 'application/octet-stream';
-    console.log(pName + lQuery);
+        
+        console.log(pName + lQuery);
+    }
         
     return {
         /* if type of file any, but img - 
@@ -363,7 +365,7 @@ CloudServer._controller=function(pReq, pRes)
                     lFileData = CloudServer.Minify.Cache[
                         Path.basename(lName)];                    
             }
-            var lReadFileFunc_f=CloudServer.getReadFileFunc(lName);
+            var lReadFileFunc_f = CloudServer.getReadFileFunc(lName);
             /* если там что-то есть передаём данные в функцию
              * readFile
              */
@@ -381,9 +383,20 @@ CloudServer._controller=function(pReq, pRes)
                  * если gzip включен - сжатые
                  * в обратном случае - несжатые
                  */
-                lReadFileFunc_f(undefined,lFileData,lFromCache_o);
+                lReadFileFunc_f(undefined, lFileData, lFromCache_o);
             }
-            else Fs.readFile(lName,lReadFileFunc_f);
+            /* if file not in one of caches
+             * and minimizing setted then minimize it
+             */
+            else if(CloudServer.Minify)
+                CloudServer.Minify.optimize(lName, {
+                    cache: true,
+                    callback: function(pFileData){
+                        lReadFileFunc_f(undefined, pFileData, false);
+                    }
+                });
+            
+            else Fs.readFile(lName, lReadFileFunc_f);
             
         }else{/* если мы имеем дело с файловой системой*/
             /* если путь не начинаеться с no-js - значит 
@@ -718,9 +731,9 @@ CloudServer.getReadFileFunc = function(pName){
              * которая до этого будет пустая
              * по скольку мы будем вызывать этот метод
              * сами, ведь файл уже вычитан
-             */
-            
+             */            
             var lHeader = CloudServer.generateHeaders(pName, CloudServer.Gzip);
+            
             /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
             if( CloudServer.Gzip && !(pFromCache_o && pFromCache_o.cache) ){
                 /* сжимаем содержимое */
@@ -753,7 +766,7 @@ CloudServer.getReadFileFunc = function(pName){
 /* Функция получает сжатые данные
  * @pHeader - заголовок файла
  */
-CloudServer.getGzipDataFunc=function(pHeader,pName){
+CloudServer.getGzipDataFunc = function(pHeader,pName){
     return function(error,pResult){
                     if(!error){
                         /* отправляем сжатые данные
