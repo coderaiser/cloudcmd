@@ -1,3 +1,9 @@
+2012.08.*, Version 0.1.7
+
+* Changed name of menu files, fixed npm and jitsu
+problem with menu showing.
+
+
 2012.08.24, Version 0.1.6
  
 * From now jsload, cssload and anyload suport arrays.
