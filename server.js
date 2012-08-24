@@ -388,7 +388,7 @@ CloudServer._controller=function(pReq, pRes)
             /* if file not in one of caches
              * and minimizing setted then minimize it
              */
-            else if(lName !== 'all.min.css' &&
+            else if(lName.indexOf('min') < 0 &&
                 CloudServer.Minify)
                 CloudServer.Minify.optimize(lName, {
                     cache: true,
