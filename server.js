@@ -369,6 +369,7 @@ CloudServer._controller=function(pReq, pRes)
             /* если там что-то есть передаём данные в функцию
              * readFile
              */
+            var lResult = true;
             if(lFileData){                
                 /* if file readed not from cache - 
                  * he readed from minified cache 
@@ -391,27 +392,28 @@ CloudServer._controller=function(pReq, pRes)
             else if(lName.indexOf('min') < 0 &&
                 CloudServer.Minify){
                 
-                var lMin_o = CloudServer.Config.minification;
-                var isAllowd_b = false;
-                if(CloudFunc.checkExtension(lName, 'js') && lMin_o.js)
-                    isAllowd_b = true;
-                
-                else if(CloudFunc.checkExtension(lName, 'css') && lMin_o.css)
-                    isAllowd_b = true;
-                
-                else if(CloudFunc.checkExtension(lName, 'html') && lMin_o.html)
-                    isAllowd_b = true;
+                var lCheck_f = function(pExt){
+                    return CloudFunc.checkExtension(lName,pExt);
+                }
+
+                var isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
+                                 (lCheck_f('css') && lMin_o.css) ||                
+                                 (lCheck_f('html') && lMin_o.html);
                     
-                if(isAllowd_b)
-                    CloudServer.Minify.optimize(lName, {
+                if(isAllowd_b){
+                    lResult = CloudServer.Minify.optimize(lName, {
                         cache: true,
                         callback: function(pFileData){
                             lReadFileFunc_f(undefined, pFileData, false);
                         }
                     });
-                else Fs.readFile(lName, lReadFileFunc_f);
+                }
+                else 
+                    lResult = false;
             }
-            else Fs.readFile(lName, lReadFileFunc_f);
+            
+            if(!lResult)
+                Fs.readFile(lName, lReadFileFunc_f);
             
         }else{/* если мы имеем дело с файловой системой*/
             /* если путь не начинаеться с no-js - значит 
