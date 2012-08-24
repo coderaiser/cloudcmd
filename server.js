@@ -389,6 +389,7 @@ CloudServer._controller=function(pReq, pRes)
              * and minimizing setted then minimize it
              */
             else if(lName.indexOf('min') < 0 &&
+                CloudFunc.checkExtension(['js','css','html']) &&
                 CloudServer.Minify)
                 CloudServer.Minify.optimize(lName, {
                     cache: true,
