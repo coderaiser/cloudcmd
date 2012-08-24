@@ -409,6 +409,7 @@ CloudServer._controller=function(pReq, pRes)
                             lReadFileFunc_f(undefined, pFileData, false);
                         }
                     });
+                else Fs.readFile(lName, lReadFileFunc_f);
             }
             else Fs.readFile(lName, lReadFileFunc_f);
             
