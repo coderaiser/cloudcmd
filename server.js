@@ -35,7 +35,7 @@ var CloudServer = {
     sendResponse    : function () {},
 
      /* Обьект для работы с кэшем */
-    Cashe           : {},
+    Cache           : {},
     
     /* Обьект через который
      * выполняеться сжатие
@@ -389,7 +389,7 @@ CloudServer._controller=function(pReq, pRes)
              * and minimizing setted then minimize it
              */
             else if(lName.indexOf('min') < 0 &&
-                CloudServer.Minify)
+                CloudServer.Minify){
                 
                 var lMin_o = CloudServer.Config.minification;
                 var isAllowd_b = false;
@@ -409,7 +409,7 @@ CloudServer._controller=function(pReq, pRes)
                             lReadFileFunc_f(undefined, pFileData, false);
                         }
                     });
-            
+            }
             else Fs.readFile(lName, lReadFileFunc_f);
             
         }else{/* если мы имеем дело с файловой системой*/
