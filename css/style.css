@@ -15,6 +15,13 @@
 /* символьный шрифт от гитхаба*/
 
 @font-face {
+  font-family: 'Fontello';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/font/fontello.woff') format('woff');
+}
+
+@font-face {
   font-family: 'Octicons Regular';
   font-style: normal;
   font-weight: normal;
