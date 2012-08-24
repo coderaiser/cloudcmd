@@ -582,7 +582,11 @@ CloudClient.Utils        = (function(){
                         'could not be none'
             });
         
-        return pCurrentFile.className = '';
+        if(this.isCurrentFile(pCurrentFile))
+            pCurrentFile.className = '';
+        
+        else return false;
+        
     };
     
     this.isCurrentFile = function(pCurrentFile){
