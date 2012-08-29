@@ -112,7 +112,7 @@ try {
     console.log(pError);
 }
 /* конструктор*/
-CloudServer.init=(function(){
+CloudServer.init = (function(){
     /* Determining server.js directory
      * and chang current process directory
      * (usually /) to it.
@@ -171,7 +171,7 @@ CloudServer.start = function () {
                 process.env.app_port        ||  /* nodester     */
                 process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
                 CloudServer.Config.port;
-                     
+    
     this.IP   = process.env.IP              ||  /* c9           */
                 CloudServer.Config.ip;
     
@@ -268,7 +268,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
  * @req - запрос клиента (Request)
  * @res - ответ сервера (Response)
  */
-CloudServer._controller=function(pReq, pRes)
+CloudServer._controller = function(pReq, pRes)
 {
     /* Читаем содержимое папки,
         переданное в url
