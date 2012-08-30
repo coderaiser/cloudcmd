@@ -688,6 +688,16 @@ CloudClient.Editor = (function(pCurrentFile, pIsReadOnly) {
     });
 });
 
+
+CloudClient.Config = (function() {
+    Util.jsload(CloudClient.LIBDIRCLIENT +
+        'config.js',{
+        onload: function(){
+            CloudCommander.Config.Keys();
+        }
+    });
+});
+
 CloudClient.GoogleAnalytics = (function(){
    /* google analytics */
    var lFunc = document.onmousemove;
