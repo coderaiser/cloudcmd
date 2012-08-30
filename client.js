@@ -14,18 +14,19 @@ var CloudClient = {
     * выполняет весь функционал по
     * инициализации
     */
-    init                    : function(){},
+    init                    : null, /* start initialization*/
     
-    keyBinding              : function(){},/* функция нажатий обработки клавишь*/
-    keyBinded               : false,  /* оброботка нажатий клавишь установлена */
+    keyBinding              : null, /* функция нажатий обработки клавишь*/
+    keyBinded               : false,/* оброботка нажатий клавишь установлена */
     
-    Editor                  : function(){},/* function loads and shows editor  */
-    Viewer                  : function(){},/* function loads and shows viewer  */
-    Terminal                : function(){},/* function loads and shows terminal*/
-    Menu                    : function(){},/* function loads and shows menu    */
-    GoogleAnalytics         : function(){},
+    Config                  : null, /* function loads and shows config  */
+    Editor                  : null, /* function loads and shows editor  */
+    Viewer                  : null, /* function loads and shows viewer  */
+    Terminal                : null, /* function loads and shows terminal*/
+    Menu                    : null, /* function loads and shows menu    */
+    GoogleAnalytics         : null,
             
-    _loadDir                : function(){}, /* Функция привязываеться ко всем
+    _loadDir                : null, /* Функция привязываеться ко всем
                                             * ссылкам и
                                             *  загружает содержимое каталогов */
     
