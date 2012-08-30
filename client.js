@@ -38,13 +38,13 @@ var CloudClient = {
     
     /* ПРИВАТНЫЕ ФУНКЦИИ */
     /* функция загружает json-данные о файловой системе */
-    _ajaxLoad              : function(){},
+    _ajaxLoad              : null,
     
     /* Функция генерирует JSON из html-таблицы файлов */
-    _getJSONfromFileTable  : function(){},
+    _getJSONfromFileTable  : null,
     
     /* функция меняет ссыки на ajax-овые */
-    _changeLinks           : function(){},     
+    _changeLinks           : null,     
     
     /* КОНСТАНТЫ*/
     /* название css-класа текущего файла*/
