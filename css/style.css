@@ -208,7 +208,8 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
   width: 25%;
 }
 
-ul,li{
+/* changin ul to panel for high speed parsing*/
+.panel, li{
     /* making cursor just arrow, 
      * not text editing cursor
      */
