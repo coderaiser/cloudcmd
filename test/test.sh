@@ -12,6 +12,6 @@ npm i uglify-js clean-css html-minifier css-b64-images
 npm i recess -g
 echo "recess ./css/*.css"
 recess css/*.css
-node server.js test
 node ./test/test.js
+node server.js test
 ls ./min
