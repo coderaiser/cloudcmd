@@ -8,6 +8,8 @@ was empty, we could not go in.
 * Removed packed versions of files, uglifing
 would be doing on-a-fly
 
+* Added ability to use ajax without jquery.
+
 
 2012.08.24, Version 0.1.6
  

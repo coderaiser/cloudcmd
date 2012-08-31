@@ -135,7 +135,23 @@ CloudClient.Utils        = (function(){
      * jquery could be droped out
      */
     this.ajax = function(pParams){
-        $.ajax(pParams);
+        if($)
+            $.ajax(pParams);
+        else{
+            var xmlhttp;            
+            xmlhttp = new XMLHttpRequest();
+            
+            var lMethod = 'GET';
+            if(pParams.method)
+                lMethod = pParams.method;
+            
+            xmlhttp.onreadystatechange = function(){                
+                xmlhttp.open(lMethod, pParams.url, true);
+                xmlhttp.send(null);
+            };
+            
+        }        
+        
     };
     
     /* setting function context (this) */
