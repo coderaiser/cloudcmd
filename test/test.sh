@@ -13,4 +13,5 @@ npm i recess -g
 echo "recess ./css/*.css"
 recess css/*.css
 node server.js test
+node ./test/test.js
 ls ./min
