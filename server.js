@@ -120,10 +120,12 @@ CloudServer.init = (function(){
      */
     var lServerDir = Path.dirname(process.argv[1]);
     var lProcessDir = process.cwd();
-    console.log('current dir: ' + lProcessDir);
-    console.log('server dir:  ' + lServerDir);    
-    if(lProcessDir !== lServerDir)
+    
+    if(lProcessDir !== lServerDir){
+        console.log('current dir: ' + lProcessDir);
         process.chdir(lServerDir);
+    }
+    console.log('server dir:  ' + lServerDir);
     
     try{
         console.log('reading configuretion file config.json...');
