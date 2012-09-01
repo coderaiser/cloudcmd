@@ -131,27 +131,34 @@ CloudClient.Cache.clear = (function(){
 /* Object contain additional system functional */
 CloudClient.Utils        = (function(){
     
-    /* Should be used Util version 
-     * jquery could be droped out
+    /* Load file countent thrue ajax
      */
+    var lXMLHTTP;
     this.ajax = function(pParams){
-        if($)
-            $.ajax(pParams);
-        else{
-            var xmlhttp;            
-            xmlhttp = new XMLHttpRequest();
+        /* if on webkit
+         */
+        if(XMLHttpRequest){
+            if(!lXMLHTTP)
+                lXMLHTTP = new XMLHttpRequest();
             
             var lMethod = 'GET';
             if(pParams.method)
                 lMethod = pParams.method;
             
-            xmlhttp.onreadystatechange = function(){                
-                xmlhttp.open(lMethod, pParams.url, true);
-                xmlhttp.send(null);
-            };
+            lXMLHTTP.open(lMethod, pParams.url, true);
+            lXMLHTTP.send(null);
             
-        }        
-        
+            var lSuccess_f = pParams.success;
+            if(typeof lSuccess_f !== 'function')
+            console.log('error in Util.ajax onSuccess:', pParams);
+            
+            lXMLHTTP.onreadystatechange = function(jqXHR, textStatus, errorThrown){
+                if (lXMLHTTP.readyState === 4  /* Complete */ && 
+                    lXMLHTTP.status     === 200 /* OK */)
+                        lSuccess_f(jqXHR, textStatus, errorThrown);
+            };
+        }
+        else $.ajax(pParams);         
     };
     
     /* setting function context (this) */
@@ -785,7 +792,7 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
             var lSubstr = lHref.substr(lHref,lHref.lastIndexOf('/'));
             lHref       = lHref.replace(lSubstr+'/','');
                                      
-            /* загружаем содержимое каталога*/
+            /* загружаем содержимое каталога */
             CloudClient._ajaxLoad(pLink, pNeedRefresh);
             
             /* получаем все элементы выделенной папки*/
