@@ -137,7 +137,7 @@ CloudClient.Utils        = (function(){
     this.ajax = function(pParams){
         /* if on webkit
          */
-        if(document.XMLHttpRequest && 2 > 3){
+        if(document.XMLHttpRequest){
             if(!lXMLHTTP)
                 lXMLHTTP = new XMLHttpRequest();
             
