@@ -11,9 +11,9 @@ var CloudCommander = (function(){
 /* Клиентский обьект, содержащий функциональную часть*/
 var CloudClient = {        
     /* Конструктор CloudClient, который
-    * выполняет весь функционал по
-    * инициализации
-    */
+     * выполняет весь функционал по
+     * инициализации
+     */
     init                    : null, /* start initialization*/
     
     keyBinding              : null, /* функция нажатий обработки клавишь*/
@@ -137,7 +137,7 @@ CloudClient.Utils        = (function(){
     this.ajax = function(pParams){
         /* if on webkit
          */
-        if(XMLHttpRequest){
+        if(document.XMLHttpRequest && 2 > 3){
             if(!lXMLHTTP)
                 lXMLHTTP = new XMLHttpRequest();
             
