@@ -152,10 +152,12 @@ CloudClient.Utils        = (function(){
             if(typeof lSuccess_f !== 'function')
             console.log('error in Util.ajax onSuccess:', pParams);
             
-            lXMLHTTP.onreadystatechange = function(jqXHR, textStatus, errorThrown){
+            lXMLHTTP.onreadystatechange = function(pEvent){
                 if (lXMLHTTP.readyState === 4  /* Complete */ && 
-                    lXMLHTTP.status     === 200 /* OK */)
-                        lSuccess_f(jqXHR, textStatus, errorThrown);
+                    lXMLHTTP.status     === 200 /* OK */){
+                        var lJqXHR = pEvent.target;
+                        lSuccess_f(lJqXHR.response, lJqXHR.statusText, lJqXHR);
+                    }
             };
         }
         else $.ajax(pParams);         
