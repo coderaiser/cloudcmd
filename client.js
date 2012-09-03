@@ -737,6 +737,16 @@ CloudClient.Utils        = (function(){
             lPanel.className = 'panel hidden';
     };
     
+    this.scrollIntoViewIfNeeded = function(pElement){
+        var lOk = true;
+        if(pElement && pElement.scrollIntoViewIfNeeded)
+            pElement.scrollIntoViewIfNeeded();
+        else lOk = false;
+        
+        return lOk;
+    };
+    
+    
     this.CloudStatus = [];
     
     this.addCloudStatus = function(pStatus){
