@@ -129,7 +129,7 @@ CloudClient.Cache.clear = (function(){
 });
 
 /* Object contain additional system functional */
-CloudClient.Utils        = (function(){
+CloudClient.Util        = (function(){
     
     /* Load file countent thrue ajax
      */
@@ -756,7 +756,7 @@ CloudClient.Utils        = (function(){
     };
 });
 
-CloudClient.Util       = new CloudClient.Utils();
+CloudClient.Util       = new CloudClient.Util();
 
 /* функция обработки нажатий клавишь */
 CloudClient.keyBinding=(function(){
@@ -1017,7 +1017,7 @@ var CloudFunc, $, Util,
  * инициализации
  */
 CloudClient.init = (function(){    
-    Util        = new CloudClient.Utils();
+    Util        = CloudClient.Util;
     getByClass  = Util.getByClass;
     getById     = Util.getById;
     
