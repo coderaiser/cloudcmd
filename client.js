@@ -156,7 +156,26 @@ CloudClient.Utils        = (function(){
                 if (lXMLHTTP.readyState === 4  /* Complete */ && 
                     lXMLHTTP.status     === 200 /* OK */){
                         var lJqXHR = pEvent.target;
-                        lSuccess_f(lJqXHR.response, lJqXHR.statusText, lJqXHR);
+                        var lData = lJqXHR.response;
+                        
+                        /* If it's json - parse it as json */
+                        var lContentType = lXMLHTTP.getResponseHeader('content-type');                        
+                        if(lContentType &&
+                            lContentType.indexOf('application/json') === 0){
+                                try{
+                                    lData = JSON.parse(lJqXHR.response);
+                                }
+                                catch(pError) {
+                                    /* if could not parse */
+                                    console.log('Error: could not parse' +
+                                        'json from server from url: '    +
+                                        pParams.url);
+                                    
+                                    lData = lJqXHR.response;
+                                }
+                            }
+                        
+                        lSuccess_f(lData, lJqXHR.statusText, lJqXHR);
                     }
             };
         }
