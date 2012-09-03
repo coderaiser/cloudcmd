@@ -153,9 +153,10 @@ CloudClient.Utils        = (function(){
             console.log('error in Util.ajax onSuccess:', pParams);
             
             lXMLHTTP.onreadystatechange = function(pEvent){
-                if (lXMLHTTP.readyState === 4  /* Complete */ && 
-                    lXMLHTTP.status     === 200 /* OK */){
-                        var lJqXHR = pEvent.target;
+                var lJqXHR = pEvent.target;
+                if (lXMLHTTP.readyState === 4 /* Complete */){
+                    
+                    if (lXMLHTTP.status     === 200 /* OK */){                        
                         var lData = lJqXHR.response;
                         
                         /* If it's json - parse it as json */
@@ -177,9 +178,15 @@ CloudClient.Utils        = (function(){
                         
                         lSuccess_f(lData, lJqXHR.statusText, lJqXHR);
                     }
+                    else if(lXMLHTTP.status === 404 /* file not found */){
+                        var lError_f = pParams.error;
+                        if(typeof lError_f === 'function')
+                            lError_f(lJqXHR);
+                    }
+                }
             };
         }
-        else $.ajax(pParams);         
+        else $.ajax(pParams);
     };
     
     /* setting function context (this) */
