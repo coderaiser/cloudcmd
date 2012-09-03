@@ -421,6 +421,32 @@ CloudClient.Utils        = (function(){
         return this.anyload(pParams_o);
     };
     
+    this.jqueryLoad = function(){
+        /* загружаем jquery: */
+        Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',{
+            onload: function(){
+                $ = window.jQuery;
+            },
+            
+            onerror: function(){
+                Util.jsload('lib/client/jquery.js');
+                
+                /*
+                 * if could not load jquery from google server
+                 * maybe we offline, load font from local
+                 * directory
+                 */
+                Util.cssSet({id:'local-droids-font',
+                    element : document.head,
+                    inner   :   '@font-face {font-family: "Droid Sans Mono";'           +
+                                'font-style: normal;font-weight: normal;'               +
+                                'src: local("Droid Sans Mono"), local("DroidSansMono"),'+
+                                ' url("font/DroidSansMono.woff") format("woff");}'
+                });                   
+            }
+        });
+    };
+        
     this.getByTag    = function(pTag, pElement){
         return (pElement || document).getElementsByTagName(pTag);
     };
@@ -995,31 +1021,7 @@ CloudClient.init = (function()
      */
     var lTitle=document.getElementsByTagName('title');
     if(lTitle.length>0)lTitle[0].textContent='Cloud Commander';
-    
-    /* загружаем jquery: */
-    Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',{
-        onload: function(){
-            $ = window.jQuery;
-        },
-        
-        onerror: function(){
-            Util.jsload('lib/client/jquery.js');
-            
-            /*
-             * if could not load jquery from google server
-             * maybe we offline, load font from local
-             * directory
-             */
-            Util.cssSet({id:'local-droids-font',
-                element : document.head,
-                inner   :   '@font-face {font-family: "Droid Sans Mono";'           +
-                            'font-style: normal;font-weight: normal;'               +
-                            'src: local("Droid Sans Mono"), local("DroidSansMono"),'+
-                            ' url("font/DroidSansMono.woff") format("woff");}'
-            });                   
-        }
-    });
-    
+           
     /* загружаем общие функции для клиента и сервера*/
     Util.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
         /* берём из обьекта window общий с сервером функционал */
