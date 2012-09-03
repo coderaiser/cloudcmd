@@ -421,11 +421,13 @@ CloudClient.Utils        = (function(){
         return this.anyload(pParams_o);
     };
     
-    this.jqueryLoad = function(){
+    this.jqueryLoad = function(pCallBack){
         /* загружаем jquery: */
         Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',{
             onload: function(){
                 $ = window.jQuery;
+                if(typeof pCallBack === 'function')
+                    pCallBack();
             },
             
             onerror: function(){
@@ -1014,23 +1016,29 @@ var CloudFunc, $, Util,
  * выполняет весь функционал по
  * инициализации
  */
-CloudClient.init = (function()
-{    
-    if(!document.head){
-        this.OLD_BROWSER = true;
-        document.head = document.getElementsByTagName("head")[0];
-    }
-    
+CloudClient.init = (function(){    
     Util        = new CloudClient.Utils();
     getByClass  = Util.getByClass;
     getById     = Util.getById;
-                
+    
+    if(!document.body.scrollIntoViewIfNeeded){
+        this.OLD_BROWSER = true;
+            Util.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
+                function(){
+                    Util.jqueryLoad(CloudClient.baseInit);
+                });
+    }
+    else CloudClient.baseInit();
+});
+
+CloudClient.baseInit = (function(){
     /* меняем title 
      * если js включен - имена папок отображать необязательно...
      * а может и обязательно при переходе, можно будет это сделать
      */
-    var lTitle=document.getElementsByTagName('title');
-    if(lTitle.length>0)lTitle[0].textContent='Cloud Commander';
+    var lTitle = Util.getByTag('title');
+    if(lTitle.length > 0)
+        lTitle[0].textContent = 'Cloud Commander';
            
     /* загружаем общие функции для клиента и сервера*/
     Util.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
