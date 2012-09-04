@@ -8,6 +8,14 @@
 var CloudCommander = (function(){
 "use strict";
 
+var cloudcmd = this;
+
+/* глобальные переменные */
+var CloudFunc, $, Util, KeyBinding,
+/* short names used all the time functions */
+    getByClass, getById;
+
+
 /* Клиентский обьект, содержащий функциональную часть*/
 var CloudClient = {        
     /* Конструктор CloudClient, который
@@ -16,9 +24,7 @@ var CloudClient = {
      */
     init                    : null, /* start initialization*/
     
-    keyBinding              : null, /* функция нажатий обработки клавишь*/
-    keyBinded               : false,/* оброботка нажатий клавишь установлена */
-    
+    KeyBinding              : null, /* обьект обработки нажатий клавишь */
     Config                  : null, /* function loads and shows config  */
     Editor                  : null, /* function loads and shows editor  */
     Viewer                  : null, /* function loads and shows viewer  */
@@ -759,10 +765,10 @@ CloudClient.Util        = (function(){
 CloudClient.Util       = new CloudClient.Util();
 
 /* функция обработки нажатий клавишь */
-CloudClient.keyBinding=(function(){
+CloudClient.KeyBinding=(function(){
     /* loading keyBinding module and start it */
     Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js', function(){
-        CloudCommander.keyBinding();
+        CloudCommander.KeyBinding.init();
     });
 });
 
@@ -900,7 +906,7 @@ CloudClient._editFileName = (function(pParent){
     if (lA && lA.textContent !== '..'){
             
             lA.contentEditable = true;
-            CloudCommander.keyBinded = false;
+            KeyBinding.unSet();
             
             var lDocumentOnclick = document.onclick;
             
@@ -912,8 +918,8 @@ CloudClient._editFileName = (function(pParent){
                 var lA = Util.getCurrentLink(pParent);
                 if (lA && lA.textContent !== '..')
                     lA.contentEditable = false;
-                
-                CloudCommander.keyBinded = true;
+                                
+                KeyBinding.Set();
                 
                 /* backs old document.onclick 
                  * and call it if it was
@@ -1006,11 +1012,6 @@ CloudClient._currentToParent = (function(pDirName){
         lRootDir.scrollIntoViewIfNeeded();
     }
 }); 
-  
-/* глобальные переменные */
-var CloudFunc, $, Util,
-/* short names used all the time functions */
-    getByClass, getById;
 
 /* Конструктор CloudClient, который
  * выполняет весь функционал по
@@ -1117,7 +1118,7 @@ CloudClient._changeLinks = function(pPanelID){
     var lOnContextMenu_f = function(pEvent){
         var lReturn_b = true;
         
-        CloudCommander.keyBinded = false;
+        KeyBinding.unSet();
         
         /* getting html element
          * currentTarget - DOM event
@@ -1407,7 +1408,7 @@ try{
         CloudCommander.init();
         
         /* привязываем клавиши к функциям */
-        CloudCommander.keyBinding();
+        CloudCommander.KeyBinding();
         
         /* загружаем Google Analytics */
         CloudCommander.GoogleAnalytics();
