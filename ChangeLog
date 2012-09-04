@@ -17,7 +17,7 @@ loaded any time by any extension.
 * Fixed bug with getByClass IE version.
 
 * Fixed bug with keyboard not responding when go deeper
-in file tree.
+in file tree thrue mouse double click.
 
 
 2012.08.24, Version 0.1.6
