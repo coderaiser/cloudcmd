@@ -950,7 +950,7 @@ CloudClient._setCurrent=(function(){
                          * in other case
                          * double click event happend
                          */
-                        if(Util.isCurrentFile(lParent))
+                        if(Util.getCurrentFile() === lParent)
                             CloudClient._editFileName(lParent);
                         },400);
                 }
@@ -1323,6 +1323,7 @@ CloudClient._createFileTable = function(pElem, pJSON)
                 break;
             }
         Util.setCurrentFile(lCurrent);
+        //lCurrent.parentElement.focus();
     }
 };
 
