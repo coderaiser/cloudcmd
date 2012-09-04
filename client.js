@@ -8,14 +8,6 @@
 var CloudCommander = (function(){
 "use strict";
 
-var cloudcmd = this;
-
-/* глобальные переменные */
-var CloudFunc, $, Util, KeyBinding,
-/* short names used all the time functions */
-    getByClass, getById;
-
-
 /* Клиентский обьект, содержащий функциональную часть*/
 var CloudClient = {        
     /* Конструктор CloudClient, который
@@ -64,6 +56,15 @@ var CloudClient = {
     MIN_ONE_PANEL_WIDTH    : 1155,
     OLD_BROWSER            : false
 };
+
+
+
+var cloudcmd = CloudClient;
+
+/* глобальные переменные */
+var CloudFunc, $, Util, KeyBinding,
+/* short names used all the time functions */
+    getByClass, getById;
 
 /* 
  * Обьект для работы с кэшем
@@ -158,15 +159,15 @@ CloudClient.Util        = (function(){
             if(typeof lSuccess_f !== 'function')
             console.log('error in Util.ajax onSuccess:', pParams);
             
-            lXMLHTTP.onreadystatechange = function(pEvent){
-                var lJqXHR = pEvent.target;
+            lXMLHTTP.onreadystatechange = function(pEvent){                
                 if (lXMLHTTP.readyState === 4 /* Complete */){
+                    var lJqXHR = pEvent.target;
+                    var lContentType = lXMLHTTP.getResponseHeader('content-type');
                     
                     if (lXMLHTTP.status     === 200 /* OK */){                        
                         var lData = lJqXHR.response;
                         
-                        /* If it's json - parse it as json */
-                        var lContentType = lXMLHTTP.getResponseHeader('content-type');                        
+                        /* If it's json - parse it as json */                        
                         if(lContentType &&
                             lContentType.indexOf('application/json') === 0){
                                 try{
@@ -184,8 +185,17 @@ CloudClient.Util        = (function(){
                         
                         lSuccess_f(lData, lJqXHR.statusText, lJqXHR);
                     }
-                    else if(lXMLHTTP.status === 404 /* file not found */){
+                    else/* file not found or connection lost */{
                         var lError_f = pParams.error;
+                        
+                        /* if html given or something like it
+                         * getBack just status of result
+                         */
+                        if(lContentType &&
+                            lContentType.indexOf('text/plain') !== 0){
+                                lJqXHR.responseText = lJqXHR.statusText;
+                        }
+                        
                         if(typeof lError_f === 'function')
                             lError_f(lJqXHR);
                     }
@@ -570,8 +580,12 @@ CloudClient.Util        = (function(){
             lLoadingImage = LImages_o.loading();
             
             lErrorImage = LImages_o.error();
-            
-            var lText = jqXHR.responseText;
+                        
+            var lText;
+            if(jqXHR.status === 404)
+                lText = jqXHR.responseText;            
+            else
+                lText = jqXHR.statusText;
             
             /* если файла не существует*/
             if(!lText.indexOf('Error: ENOENT, '))
@@ -765,10 +779,11 @@ CloudClient.Util        = (function(){
 CloudClient.Util       = new CloudClient.Util();
 
 /* функция обработки нажатий клавишь */
-CloudClient.KeyBinding=(function(){
+CloudClient.KeyBinding = (function(){
     /* loading keyBinding module and start it */
     Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js', function(){
         CloudCommander.KeyBinding.init();
+        KeyBinding  = cloudcmd.KeyBinding;
     });
 });
 
@@ -1017,8 +1032,9 @@ CloudClient._currentToParent = (function(pDirName){
  * выполняет весь функционал по
  * инициализации
  */
-CloudClient.init = (function(){    
-    Util        = CloudClient.Util;
+CloudClient.init = (function(){
+    Util        = cloudcmd.Util;
+    KeyBinding  = cloudcmd.KeyBinding;
     getByClass  = Util.getByClass;
     getById     = Util.getById;
     
