@@ -1024,7 +1024,7 @@ CloudClient._currentToParent = (function(pDirName){
      */
     if(lRootDir){
         Util.setCurrentFile(lRootDir);
-        lRootDir.scrollIntoViewIfNeeded();
+        Util.scrollIntoViewIfNeeded(lRootDir);
     }
 }); 
 
