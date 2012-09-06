@@ -792,6 +792,7 @@ CloudClient.Editor = (function(pCurrentFile, pIsReadOnly) {
 
 
 CloudClient.Config = (function() {
+    Util.Images.showLoad({top: true});
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'config.js',{
         onload: function(){
