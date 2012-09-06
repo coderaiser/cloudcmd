@@ -934,7 +934,7 @@ CloudClient._editFileName = (function(pParent){
                 if (lA && lA.textContent !== '..')
                     lA.contentEditable = false;
                                 
-                KeyBinding.Set();
+                KeyBinding.set();
                 
                 /* backs old document.onclick 
                  * and call it if it was
@@ -1024,7 +1024,7 @@ CloudClient._currentToParent = (function(pDirName){
      */
     if(lRootDir){
         Util.setCurrentFile(lRootDir);
-        Util.scrollIntoViewIfNeeded(lRootDir);
+        Util.scrollIntoViewIfNeeded(lRootDir, true);
     }
 }); 
 
@@ -1038,7 +1038,7 @@ CloudClient.init = (function(){
     getByClass  = Util.getByClass;
     getById     = Util.getById;
     
-    if(!document.body.scrollIntoViewIfNeeded){
+    if(2===2 || !document.body.scrollIntoViewIfNeeded){
         this.OLD_BROWSER = true;
             Util.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
                 function(){
