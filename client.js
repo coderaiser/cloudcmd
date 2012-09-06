@@ -1030,7 +1030,7 @@ CloudClient.init = (function(){
     getByClass  = Util.getByClass;
     getById     = Util.getById;
     
-    if(2===2 || !document.body.scrollIntoViewIfNeeded){
+    if(!document.body.scrollIntoViewIfNeeded){
         this.OLD_BROWSER = true;
             Util.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
                 function(){
