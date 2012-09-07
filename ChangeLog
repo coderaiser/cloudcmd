@@ -25,6 +25,8 @@ member of KeyBinding class.
 * Fixed scrolling bug on non-webkit based browsers.
 Function scrollIntoViewIfNeeded was polyfilled.
 
+* Added classic borders to panels.
+
 
 2012.08.24, Version 0.1.6
  
