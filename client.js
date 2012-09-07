@@ -347,11 +347,12 @@ CloudClient.Util        = (function(){
             element.onerror = (function(){
                     (pParams_o.parent || document.body)
                         .removeChild(element);
-                    
+                                        
                     Util.Images.showError({
                         responseText: 'file ' +
                         lSrc                  +
-                        ' could not be loaded'
+                        ' could not be loaded',
+                        status : 404
                     });
                     
                     if(lFunc && lFunc.onerror &&
