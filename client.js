@@ -1051,26 +1051,27 @@ CloudClient.baseInit = (function(){
     if(lTitle.length > 0)
         lTitle[0].textContent = 'Cloud Commander';
            
-    /* загружаем общие функции для клиента и сервера*/
+    /* загружаем общие функции для клиента и сервера                    */
     Util.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
-        /* берём из обьекта window общий с сервером функционал */
+        /* берём из обьекта window общий с сервером функционал          */
         CloudFunc=window.CloudFunc;
         
-        /* меняем ссылки на ajax'овые*/
+        /* меняем ссылки на ajax'овые                                   */
         CloudClient._changeLinks(CloudFunc.LEFTPANEL);
         CloudClient._changeLinks(CloudFunc.RIGHTPANEL);
                 
-        /* устанавливаем переменную доступности кэша*/
+        /* устанавливаем переменную доступности кэша                    */
         CloudClient.Cache.isAllowed();    
-        /* Устанавливаем кэш корневого каталога */    
-        if(!CloudClient.Cache.get('/'))CloudClient.Cache.set('/',CloudClient._getJSONfromFileTable());  
+        /* Устанавливаем кэш корневого каталога                         */ 
+        if(!CloudClient.Cache.get('/'))
+            CloudClient.Cache.set('/', CloudClient._getJSONfromFileTable());
     });
               
     /* устанавливаем размер высоты таблицы файлов
      * исходя из размеров разрешения экрана
      */ 
                  
-    /* выделяем строку с первым файлом */
+    /* выделяем строку с первым файлом                                  */
     var lFmHeader = getByClass('fm_header');
     if(lFmHeader && lFmHeader[0].nextSibling)
         Util.setCurrentFile(lFmHeader[0].nextSibling);
@@ -1080,7 +1081,7 @@ CloudClient.baseInit = (function(){
     if(lFM)
         lFM.className='localstorage';
     
-    /* если есть js - показываем правую панель*/
+    /* если есть js - показываем правую панель                          */
     var lRight=getById('right');
     if(lRight)
         lRight.className = lRight.className.replace('hidden','');
