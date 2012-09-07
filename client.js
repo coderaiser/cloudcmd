@@ -14,7 +14,7 @@ var CloudClient = {
      * выполняет весь функционал по
      * инициализации
      */
-    init                    : null, /* start initialization*/
+    init                    : null, /* start initialization             */
     
     KeyBinding              : null, /* обьект обработки нажатий клавишь */
     Config                  : null, /* function loads and shows config  */
@@ -25,8 +25,8 @@ var CloudClient = {
     GoogleAnalytics         : null,
             
     _loadDir                : null, /* Функция привязываеться ко всем
-                                            * ссылкам и
-                                            *  загружает содержимое каталогов */
+                                     * ссылкам и
+                                     * загружает содержимое каталогов */
     
     /* ОБЬЕКТЫ */
     /* Обьект для работы с кэшем */
@@ -1107,7 +1107,7 @@ CloudClient.baseInit = (function(){
 
 /* функция меняет ссыки на ajax-овые */
 CloudClient._changeLinks = function(pPanelID){
-    /* назначаем кнопку очистить кэш и показываем её*/
+    /* назначаем кнопку очистить кэш и показываем её */
     var lClearcache = getById('clear-cache');
     if(lClearcache)
         lClearcache.onclick = CloudClient.Cache.clear;    
