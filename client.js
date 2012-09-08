@@ -1126,6 +1126,7 @@ CloudClient._changeLinks = function(pPanelID){
     var lNoJS_s = CloudFunc.NOJS; 
     var lFS_s   = CloudFunc.FS;
     
+    /* right mouse click function varible */
     var lOnContextMenu_f = function(pEvent){
         var lReturn_b = true;
         
@@ -1151,6 +1152,29 @@ CloudClient._changeLinks = function(pPanelID){
         
         return lReturn_b;
     };
+    
+    /* drag and drop function varible
+     * download file from browser to descktop
+     * in Chrome (HTML5)
+     */
+    var lOnDragStart_f = function(pEvent){
+        var lElement = pEvent.target;
+        
+        var lLink = lElement.href;
+        var lName = lElement.textContent;
+        
+        /* if it's directory - adding json extension */
+        var lType = lElement.parentElement.nextSibling;
+        if(lType && lType.textContent === '<dir>'){
+            lLink = lLink.replace(lNoJS_s,'');
+            lName += '.json';
+        }
+        
+        pEvent.dataTransfer.setData("DownloadURL",
+            'application/octet-stream'  + ':' +
+            lName                       + ':' + 
+            lLink);
+    };
         
     for(var i=0; i < a.length ; i++)
     {        
@@ -1161,7 +1185,7 @@ CloudClient._changeLinks = function(pPanelID){
          * об отсутствии js                     */     
         if(link.indexOf(lNoJS_s) === lFS_s.length){
             link = link.replace(lNoJS_s,'');
-        }            
+        }
         /* ставим загрузку гифа на клик*/
         if(i === lREFRESHICON){
             a[i].onclick = CloudClient._loadDir(link,true);
@@ -1180,10 +1204,12 @@ CloudClient._changeLinks = function(pPanelID){
             
             /* if we in path changing onclick events */
             if (lLi.className === 'path') {
-                a[i].onclick  = CloudClient._loadDir(link);                    
+                a[i].onclick  = CloudClient._loadDir(link);
             }
             else {
                 lLi.onclick   = CloudClient._setCurrent();
+                
+                a[i].ondragstart = lOnDragStart_f;
                 
                 /* if right button clicked menu will
                  * loads and shows
