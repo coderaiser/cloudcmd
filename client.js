@@ -1159,7 +1159,7 @@ CloudClient._changeLinks = function(pPanelID){
      */
     var lOnDragStart_f = function(pEvent){
         var lElement = pEvent.target;
-        
+                
         var lLink = lElement.href;
         var lName = lElement.textContent;
         
@@ -1174,6 +1174,19 @@ CloudClient._changeLinks = function(pPanelID){
             'application/octet-stream'  + ':' +
             lName                       + ':' + 
             lLink);
+    };
+    
+    var lSetCurrentFile_f = function(pEvent){
+        var pElement = pEvent.target;                
+        
+        var lTag = pElement.tagName;
+        if(lTag !== 'LI')
+            do{            
+                pElement = pElement.parentElement;
+                lTag = pElement.tagName;
+            }while(lTag !== 'LI');
+        
+        Util.setCurrentFile(pElement);
     };
         
     for(var i=0; i < a.length ; i++)
@@ -1208,6 +1221,8 @@ CloudClient._changeLinks = function(pPanelID){
             }
             else {
                 lLi.onclick   = CloudClient._setCurrent();
+                
+                lLi.onmousedown = lSetCurrentFile_f;
                 
                 a[i].ondragstart = lOnDragStart_f;
                 
