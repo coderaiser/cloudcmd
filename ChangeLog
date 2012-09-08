@@ -27,6 +27,9 @@ Function scrollIntoViewIfNeeded was polyfilled.
 
 * Added classic borders to panels.
 
+* Added ability to download files thrue drag'n'drop.
+
+* Fixed bug with setting current file when mouse down.
 
 2012.08.24, Version 0.1.6
  
