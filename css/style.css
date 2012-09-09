@@ -92,7 +92,7 @@ body{
   color:rgba(222, 41, 41, 0.81);
 }
 .refresh-icon{
-  background:url(/img/panel_refresh.png) no-repeat;
+    background:url(/img/panel_refresh.png) no-repeat;
 }
 .refresh-icon:active{
   /*background-position-y: -15px;*/
@@ -338,4 +338,4 @@ a:focus { outline: thin dotted; }
     #right{
         display:none;
     }
-}            
+}
