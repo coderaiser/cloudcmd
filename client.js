@@ -1100,8 +1100,11 @@ CloudClient.baseInit = (function(){
      
     Util.cssSet({id:'show_2panels',
         element:document.head,
-        inner:'#left{width:46%;}' +
-            '.panel{height:' + lHeight +'px'
+        inner:
+            '.panel{'                       +
+                'height:' + lHeight +'px;'   +
+                'width:46%;'                +
+            '}'
     });       
 });
 

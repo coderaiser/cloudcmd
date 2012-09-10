@@ -163,7 +163,6 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 #left{
   float:left;
-  width:90%;
 }
 /* фон файла, на котором курсор*/
 .current-file{
@@ -323,7 +322,7 @@ a:focus { outline: thin dotted; }
 }
 @media only screen and (min-width: 601px) and (max-width: 785px){
     .panel{        
-        width:90% !important;
+        width:94% !important;
     }
     #right{
         display:none;
@@ -332,7 +331,7 @@ a:focus { outline: thin dotted; }
 
 @media only screen and (min-width:786px) and (max-width: 1155px){
     .panel{        
-        width:90% !important;
+        width:94% !important;
     }
     /* если правая панель не помещаеться - прячем её */
     #right{
