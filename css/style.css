@@ -322,7 +322,7 @@ a:focus { outline: thin dotted; }
     }
 }
 @media only screen and (min-width: 601px) and (max-width: 785px){
-    #left{        
+    .panel{        
         width:90% !important;
     }
     #right{
@@ -331,7 +331,7 @@ a:focus { outline: thin dotted; }
 }
 
 @media only screen and (min-width:786px) and (max-width: 1155px){
-    #left{        
+    .panel{        
         width:90% !important;
     }
     /* если правая панель не помещаеться - прячем её */
