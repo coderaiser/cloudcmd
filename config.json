@@ -2,7 +2,7 @@
     "cache" : {"allowed" : false},
     "minification" : {
         "js"    : false,
-        "css"   : true,
+        "css"   : false,
         "html"  : true,
         "img"   : true
     },

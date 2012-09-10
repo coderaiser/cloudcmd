@@ -153,7 +153,7 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 #fm{
     height: 90%;
-    margin: 10px;
+    margin: 26px;
 }
 .fm_header{
   font-weight: bold;
@@ -177,6 +177,8 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 .panel{
     border: 1.5px solid rgba(49, 123, 249, .40);
+    /* remove default margins */
+    margin: 0 0 0 0;
     overflow-y: auto;
     width:46%;    
 }
