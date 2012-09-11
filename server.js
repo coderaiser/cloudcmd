@@ -99,14 +99,17 @@ try {
  /* добавляем  модуль с функциями */
 var CloudFunc;
 try {
-    CloudFunc           = require(CloudServer.LIBDIR        +
-                            '/cloudfunc');
+    CloudFunc               =   require(CloudServer.LIBDIR        +
+                                    '/cloudfunc');
                             
-    CloudServer.Cache   = require(CloudServer.LIBDIRSERVER  +
-                            '/object').Cache;
+    CloudServer.Cache       =   require(CloudServer.LIBDIRSERVER  +
+                                    '/object').Cache;
                             
-    CloudServer.Minify  = require(CloudServer.LIBDIRSERVER  +
-                            '/object').Minify;
+    CloudServer.Minify      =   require(CloudServer.LIBDIRSERVER  +
+                                    '/object').Minify;
+    
+    CloudServer.AppCache    =   require(CloudServer.LIBDIRSERVER  +
+                                    '/appcache');
 }catch(pError){
     console.log('could not found one of Cloud Commander SS files');
     console.log(pError);
@@ -333,6 +336,9 @@ CloudServer._controller = function(pReq, pRes)
             /* добавляем текующий каталог к пути */
             var lName = '.' + pathname;
             console.log('reading '+lName);
+            
+            /* watching is file changed */
+            CloudServer.AppCache.watch(lName);
             
             /* сохраняем указатель на response и имя */
             CloudServer.Responses[lName]    = pRes;
