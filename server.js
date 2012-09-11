@@ -108,8 +108,8 @@ try {
     CloudServer.Minify      =   require(CloudServer.LIBDIRSERVER  +
                                     '/object').Minify;
     
-    CloudServer.AppCache    =   require(CloudServer.LIBDIRSERVER  +
-                                    '/appcache');
+    //CloudServer.AppCache    =   require(CloudServer.LIBDIRSERVER  +
+    //                                '/appcache');
 }catch(pError){
     console.log('could not found one of Cloud Commander SS files');
     console.log(pError);
