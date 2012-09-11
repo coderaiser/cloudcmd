@@ -338,7 +338,7 @@ CloudServer._controller = function(pReq, pRes)
             console.log('reading '+lName);
             
             /* watching is file changed */
-            CloudServer.AppCache.watch(lName);
+            //CloudServer.AppCache.watch(lName);
             
             /* сохраняем указатель на response и имя */
             CloudServer.Responses[lName]    = pRes;
