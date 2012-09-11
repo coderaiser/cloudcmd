@@ -37,7 +37,10 @@ a:hover, a:active { outline: 0; }
 /* changed ul to panel, it using only in this case for now, and will css
  * processing cost 33% with name of tag, so it should be match faster
  */
-.panel{ margin: 1em 0; padding: 0 20px 0 20px; }
+.panel{     
+    /* removed default margins */
+    margin: 0 0 0 0;
+    padding: 0 20px 0 20px; }
 
 /*
  * 1. Display hand cursor for clickable form elements
