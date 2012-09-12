@@ -846,13 +846,13 @@ CloudServer.writeLogsToFile = function(){
 };
 
 /* function do safe require of needed module */
-var cloudRequire = function(pModule){
+function cloudRequire(pModule){
   try{
       return require(pModule);
   }
   catch(pError){
       return false;
   }
-};
+}
 
 CloudServer.start();
