@@ -661,7 +661,10 @@ CloudClient.Util        = (function(){
         if(lCurrentFileWas)
             this.unSetCurrentFile(lCurrentFileWas);
             
-        pCurrentFile.className = CloudCommander.CURRENT_FILE;        
+        pCurrentFile.className = CloudCommander.CURRENT_FILE;
+        
+        /* scrolling to current file */
+        Util.scrollIntoViewIfNeeded(pCurrentFile);
         
         return  lRet_b;
     };
