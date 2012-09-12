@@ -81,39 +81,34 @@ var CloudServer = {
     LIBDIRSERVER    : './lib/server'
 };
 
-var DirPath     = '/';
+var DirPath                 = '/';
 
 /* модуль для работы с путями*/
-var Path        = require('path');
-var Fs          = require('fs');    /* модуль для работы с файловой системой*/
-var Querystring = require('querystring');
-var Zlib;
+var Path                = require('path');
+var Fs                  = require('fs');    /* модуль для работы с файловой системой*/
+var Querystring         = require('querystring');
+
 /* node v0.4 not contains zlib 
  */
-try {
-    Zlib        = require('zlib');  /* модуль для сжатия данных gzip-ом*/
-} catch (error) {
+
+var Zlib                = cloudRequire('zlib');  /* модуль для сжатия данных gzip-ом*/
+if(!Zlib)
     console.log('to use gzip-commpression' +
         'you should use newer node version\n');
-}
+
  /* добавляем  модуль с функциями */
-var CloudFunc;
-try {
-    CloudFunc               =   require(CloudServer.LIBDIR        +
-                                    '/cloudfunc');
-                            
-    CloudServer.Cache       =   require(CloudServer.LIBDIRSERVER  +
-                                    '/object').Cache;
-                            
-    CloudServer.Minify      =   require(CloudServer.LIBDIRSERVER  +
-                                    '/object').Minify;
-    
-    //CloudServer.AppCache    =   require(CloudServer.LIBDIRSERVER  +
-    //                                '/appcache');
-}catch(pError){
-    console.log('could not found one of Cloud Commander SS files');
-    console.log(pError);
+var CloudFunc           =   cloudRequire(CloudServer.LIBDIR        +
+                                '/cloudfunc');
+CloudServer.Obj         =   cloudRequire(CloudServer.LIBDIRSERVER  +
+                                '/object');
+if(CloudServer.Obj){
+    CloudServer.Cache   =   CloudServer.Obj.Cache;                            
+    CloudServer.Minify  =   CloudServer.Obj.Minify;   
+    CloudServer.Minify  =   CloudServer.Obj.IsFileChanged;
 }
+
+    console.log('could not found one of Cloud Commander SS files');
+
 /* конструктор*/
 CloudServer.init = (function(){
     /* Determining server.js directory
@@ -165,6 +160,12 @@ CloudServer.init = (function(){
     this.Minify.setAllowed(CloudServer.Config.minification);
     /* Если нужно минимизируем скрипты */
     this.Minify.doit();
+    
+    /* Для скриптов, которые будут считываться и сжиматься по-ходу
+     * по-обращению устанавливам флаг "не обращаться внимание
+     * на изминение файла". Мы будем его контролировать сами.
+     */
+    this.Minify.force = true;
 });
 
 
@@ -367,7 +368,7 @@ CloudServer._controller = function(pReq, pRes)
              * CloudServer cache
              */
             if(!lFileData &&  
-                lMinify._allowed){
+                lMinify._allowed && !lMinify.force){
                     console.log('trying to read data from Minify.Cache');
                     lFromCache_o.cache=false;
                     lFileData = CloudServer.Minify.Cache[
@@ -399,32 +400,31 @@ CloudServer._controller = function(pReq, pRes)
              */
             else if(lName.indexOf('min') < 0 &&
                 CloudServer.Minify){
-                var lMin_o = CloudServer.Config.minification;
-                
-                var lCheck_f = function(pExt){
-                    return CloudFunc.checkExtension(lName,pExt);
-                }
-
-                var isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
-                                 (lCheck_f('css') && lMin_o.css) ||                
-                                 (lCheck_f('html') && lMin_o.html);
+                    var lMin_o = CloudServer.Config.minification;
                     
-                if(isAllowd_b){
-                    lResult = CloudServer.Minify.optimize(lName, {
-                        cache: true,
-                        callback: function(pFileData){
-                            lReadFileFunc_f(undefined, pFileData, false);
-                        }
-                    });
-                }
-                else 
+                    var lCheck_f = function(pExt){
+                        return CloudFunc.checkExtension(lName,pExt);
+                    }
+    
+                    var isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
+                                     (lCheck_f('css') && lMin_o.css) ||                
+                                     (lCheck_f('html') && lMin_o.html);
+                        
+                    if(isAllowd_b){
+                        lResult = CloudServer.Minify.optimize(lName, {
+                            cache: true,
+                            callback: function(pFileData){
+                                lReadFileFunc_f(undefined, pFileData, false);
+                            }
+                        });
+                    }
+                    else 
+                        lResult = false;
+                } else
                     lResult = false;
-            } else
-                lResult = false;
-            
+                
             if(!lResult)
-                Fs.readFile(lName, lReadFileFunc_f);
-            
+                Fs.readFile(lName, lReadFileFunc_f);            
         }else{/* если мы имеем дело с файловой системой*/
             /* если путь не начинаеться с no-js - значит 
              * js включен
@@ -843,6 +843,16 @@ CloudServer.writeLogsToFile = function(){
                     stdo.write(string);
             };
     })(process.stdout.write);
+};
+
+/* function do safe require of needed module */
+var cloudRequire = function(pModule){
+  try{
+      return require(pModule);
+  }
+  catch(pError){
+      return false;
+  }
 };
 
 CloudServer.start();
