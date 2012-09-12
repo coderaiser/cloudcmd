@@ -38,6 +38,8 @@ running
 
 * Moved calling api scrollIntoViewIfNeeded to setCurrentFile.
 
+* Added module is-file-changed.
+
 
 2012.08.24, Version 0.1.6
  
