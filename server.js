@@ -104,7 +104,7 @@ CloudServer.Obj         =   cloudRequire(CloudServer.LIBDIRSERVER  +
 if(CloudServer.Obj){
     CloudServer.Cache   =   CloudServer.Obj.Cache;                            
     CloudServer.Minify  =   CloudServer.Obj.Minify;   
-    CloudServer.Minify  =   CloudServer.Obj.IsFileChanged;
+    CloudServer.IsFileChanged  =   CloudServer.Obj.IsFileChanged;
 }
 
     console.log('could not found one of Cloud Commander SS files');
