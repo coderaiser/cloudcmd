@@ -165,7 +165,7 @@ CloudServer.init = (function(){
      * по-обращению устанавливам флаг "не обращаться внимание
      * на изминение файла". Мы будем его контролировать сами.
      */
-    this.Minify.force = true;
+    //this.Minify.force = true;
 });
 
 
