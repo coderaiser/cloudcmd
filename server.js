@@ -99,6 +99,8 @@ if(!Zlib)
  /* добавляем  модуль с функциями */
 var CloudFunc           =   cloudRequire(CloudServer.LIBDIR        +
                                 '/cloudfunc');
+CloudServer.AppCache    =   cloudRequire(CloudServer.LIBDIRSERVER  +
+                                '/appcache');
 CloudServer.Obj         =   cloudRequire(CloudServer.LIBDIRSERVER  +
                                 '/object');
 if(CloudServer.Obj){
@@ -160,11 +162,10 @@ CloudServer.init = (function(){
     /* Если нужно минимизируем скрипты */
     this.Minify.doit();
     
-    /* Для скриптов, которые будут считываться и сжиматься по-ходу
-     * по-обращению устанавливам флаг "не обращаться внимание
-     * на изминение файла". Мы будем его контролировать сами.
-     */
-    //this.Minify.force = true;
+    /* створюємо файл app cache */
+    var lAppCache = CloudServer.AppCache;
+    if(lAppCache)
+        lAppCache.createManifest();
 });
 
 
@@ -338,7 +339,7 @@ CloudServer._controller = function(pReq, pRes)
             console.log('reading '+lName);
             
             /* watching is file changed */
-            //CloudServer.AppCache.watch(lName);
+            CloudServer.AppCache.watch(lName);
             
             /* сохраняем указатель на response и имя */
             CloudServer.Responses[lName]    = pRes;
