@@ -84,9 +84,9 @@ var CloudServer = {
 var DirPath                 = '/';
 
 /* модуль для работы с путями*/
-var Path                = require('path');
-var Fs                  = require('fs');    /* модуль для работы с файловой системой*/
-var Querystring         = require('querystring');
+var Path                = cloudRequire('path'),
+    Fs                  = cloudRequire('fs'),    /* модуль для работы с файловой системой*/
+    Querystring         = cloudRequire('querystring');
 
 /* node v0.4 not contains zlib 
  */
@@ -404,7 +404,7 @@ CloudServer._controller = function(pReq, pRes)
                     
                     var lCheck_f = function(pExt){
                         return CloudFunc.checkExtension(lName,pExt);
-                    }
+                    };
     
                     var isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
                                      (lCheck_f('css') && lMin_o.css) ||                
@@ -637,8 +637,7 @@ CloudServer._fillJSON = function(pStats, pFiles){
         lList       += '<ul id=right class="panel hidden">';
         lList       += lPanel;
         lList       += '</ul>';
-    
-        var lIndex;
+        
         /* пробуем достать данные из кэша
          * с жатием или без, взависимости
          * от настроек
@@ -646,7 +645,7 @@ CloudServer._fillJSON = function(pStats, pFiles){
         var lFileData = CloudServer.Cache.get(CloudServer.INDEX);
         /* если их нет там - вычитываем из файла*/
         if(!lFileData) {
-            lIndex = Fs.readFile(CloudServer.INDEX,
+            Fs.readFile(CloudServer.INDEX,
                 CloudServer.indexReaded(lList));
         }else {
             var lReaded_f = CloudServer.indexReaded(lList);
@@ -706,22 +705,19 @@ CloudServer.indexReaded = function(pList){
         /* меняем title */
         pIndex = pIndex.replace('<title>Cloud Commander</title>',
             '<title>'+CloudFunc.setTitle()+'</title>');
-        
-        /* отображаем панель быстрых клавишь */
-        pList = pIndex;
-        
+                
         var lHeader;
         /* если браузер поддерживает gzip-сжатие*/
         lHeader = CloudServer.generateHeaders('text/html',CloudServer.Gzip);
         
          /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
         if(CloudServer.Gzip) {
-            Zlib.gzip(pList,
+            Zlib.gzip(pIndex,
                 CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
         }
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
-            CloudServer.sendResponse(lHeader,pList,CloudServer.INDEX);
+            CloudServer.sendResponse(lHeader, pIndex, CloudServer.INDEX);
     };
 };
 
