@@ -44,6 +44,7 @@ running
 in offline mode (if connection suddenly lost, all visited
 directories would be cached).
 
+* fixed bug with keyboard not responding when click on file.
 
 2012.08.24, Version 0.1.6
  

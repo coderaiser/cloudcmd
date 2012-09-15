@@ -222,6 +222,8 @@ CloudServer.start = function () {
  */
 CloudServer.generateHeaders = function(pName, pGzip){
     var lType='';
+    var lCacheControl = 0;
+    var lContentEncoding = '';
     /* высылаем заголовок в зависимости от типа файла */
     /* если расширение у файла css -
      * загружаем стили
@@ -241,8 +243,10 @@ CloudServer.generateHeaders = function(pName, pGzip){
         lType = 'text/html';
     else if(CloudFunc.checkExtension(pName,'woff'))
         lType = 'font/woff';
-    else if(CloudFunc.checkExtension(pName,'appcache'))
+    else if(CloudFunc.checkExtension(pName,'appcache')){
         lType = 'text/cache-manifest';
+        lCacheControl = 1;
+    }
     else if(CloudFunc.checkExtension(pName,'mp3'))
         lType = 'audio/mpeg';
         
@@ -258,13 +262,19 @@ CloudServer.generateHeaders = function(pName, pGzip){
         
         console.log(pName + lQuery);
     }
-        
+
+    if(!lCacheControl)
+        lCacheControl = 31337 * 21;
+    
+    if(lType.indexOf('img') < 0)
+        lContentEncoding =  '; charset=UTF-8';
+    
     return {
         /* if type of file any, but img - 
          * then we shoud specify charset 
          */
-        'Content-Type': lType + (lType.indexOf('img') < 0 ? '; charset=UTF-8' : ''),
-        'cache-control': 'max-age='+(31337*21),
+        'Content-Type': lType + lContentEncoding,
+        'cache-control': 'max-age=' + lCacheControl,
         'last-modified': new Date().toString(),
         'content-encoding': pGzip?'gzip':'',
         /* https://developers.google.com/speed/docs/best-practices
