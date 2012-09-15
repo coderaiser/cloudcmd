@@ -40,7 +40,9 @@ running
 
 * Added module is-file-changed.
 
-* Added suport of AppCache.
+* Added suport of AppCache. So CloudCommander can work totaly
+in offline mode (if connection suddenly lost, all visited
+directories would be cached).
 
 
 2012.08.24, Version 0.1.6
