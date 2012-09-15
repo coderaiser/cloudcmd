@@ -368,9 +368,9 @@ CloudServer._controller = function(pReq, pRes)
              * CloudServer cache
              */
             if(!lFileData &&  
-                lMinify._allowed && !lMinify.force){
+                lMinify._allowed){
                     console.log('trying to read data from Minify.Cache');
-                    lFromCache_o.cache=false;
+                    lFromCache_o.cache = false;
                     lFileData = CloudServer.Minify.Cache[
                         Path.basename(lName)];                    
             }
@@ -657,15 +657,15 @@ CloudServer._fillJSON = function(pStats, pFiles){
          * с соответствующими заголовками
          */
         lList   = JSON.stringify(lJSON);
-        lHeader = CloudServer.generateHeaders('application/json',CloudServer.Gzip);
+        lHeader = CloudServer.generateHeaders('application/json', CloudServer.Gzip);
         
-        /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
+        /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
         if(CloudServer.Gzip){
             Zlib.gzip(lList,CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
         }
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
-            CloudServer.sendResponse(lHeader,lList,CloudServer.INDEX);  
+            CloudServer.sendResponse(lHeader, lList, CloudServer.INDEX);
     }  
 };
 
@@ -675,45 +675,34 @@ CloudServer.indexReaded = function(pList){
           return console.log(pError);
         }
         
-          /* и сохраняем в кэш */
+        /* и сохраняем в кэш */
         CloudServer.Cache.set(CloudServer.INDEX, pIndex);
-        
-                 /* если выбрана опция минифизировать скрпиты
-                 * меняем в index.html обычный client.js на
-                 * минифицированый
-                 */
+                
         pIndex = pIndex.toString();
         
-        /* if scripts shoud be minified and
-         * minification proceed sucessfully
-         * we include minified version of
-         * clien.js to index.html
+        /* если выбрана опция минифизировать скрпиты
+         * меняем в index.html обычные css на
+         * минифицированый
          */
-        pIndex = CloudServer.Minify._allowed.css?
-            pIndex.replace('<link rel=stylesheet href="/css/reset.css">','')
-                .replace('/css/style.css',CloudServer.Minify.MinFolder + 'all.min.css')
-            :pIndex;
-              
-        pIndex = CloudServer.Minify._allowed.js?pIndex.replace('client.js',
-            CloudServer.Minify.MinFolder + 
-                'client.min.js')
-            :pIndex;
+        if(CloudServer.Minify._allowed.css)
+            pIndex = pIndex.replace('<link rel=stylesheet href="/css/reset.css">', '')
+                .replace('/css/style.css', CloudServer.Minify.MinFolder + 'all.min.css');
         
         pIndex = pIndex.toString().replace('<div id=fm class=no-js>',
             '<div id=fm class=no-js>'+pList);
         
         /* меняем title */
         pIndex = pIndex.replace('<title>Cloud Commander</title>',
-            '<title>'+CloudFunc.setTitle()+'</title>');
+            '<title>' + CloudFunc.setTitle() + '</title>');
                 
         var lHeader;
         /* если браузер поддерживает gzip-сжатие*/
-        lHeader = CloudServer.generateHeaders('text/html',CloudServer.Gzip);
+        lHeader = CloudServer.generateHeaders('text/html', CloudServer.Gzip);
         
          /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
         if(CloudServer.Gzip) {
             Zlib.gzip(pIndex,
-                CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
+                CloudServer.getGzipDataFunc(lHeader, CloudServer.INDEX));
         }
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
@@ -743,7 +732,7 @@ CloudServer.getReadFileFunc = function(pName){
              * сохраняем
              */            
             if(pFromCache_o && !pFromCache_o.cache && CloudServer.Cache.isAllowed)
-                CloudServer.Cache.set(pName,pData);
+                CloudServer.Cache.set(pName, pData);
             /* если кэш есть
              * сохраняем его в переменную
              * которая до этого будет пустая
@@ -755,26 +744,26 @@ CloudServer.getReadFileFunc = function(pName){
             /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
             if( CloudServer.Gzip && !(pFromCache_o && pFromCache_o.cache) ){
                 /* сжимаем содержимое */
-                Zlib.gzip(pData,CloudServer.getGzipDataFunc(lHeader,pName));                
+                Zlib.gzip(pData,CloudServer.getGzipDataFunc(lHeader, pName));                
             }
             else{
                 /* высылаем несжатые данные */
-                CloudServer.sendResponse(lHeader,pData,pName);
+                CloudServer.sendResponse(lHeader, pData, pName);
             }
         }
         else
         {
             console.log(pError.path);
-            if(pError.path!=='passwd.json')
+            if(pError.path !== 'passwd.json')
             {
                 console.log(pError);
                 
                 /* sending page not found */
                 CloudServer.Statuses[pName] = 404;
                 
-                CloudServer.sendResponse('file not found',pError.toString(),pName);
+                CloudServer.sendResponse('file not found', pError.toString(), pName);
             }else{
-                CloudServer.sendResponse('OK','passwd.json');
+                CloudServer.sendResponse('OK', 'passwd.json');
             }            
         }
     };
@@ -784,8 +773,8 @@ CloudServer.getReadFileFunc = function(pName){
 /* Функция получает сжатые данные
  * @pHeader - заголовок файла
  */
-CloudServer.getGzipDataFunc = function(pHeader,pName){
-    return function(error,pResult){
+CloudServer.getGzipDataFunc = function(pHeader, pName){
+    return function(error, pResult){
         if(!error){
             /* отправляем сжатые данные
              * вместе с заголовком
@@ -796,13 +785,13 @@ CloudServer.getGzipDataFunc = function(pHeader,pName){
             if(CloudServer.Cache.isAllowed){
                 /* устанавливаем кєш */
                 console.log(pName+' gziped');
-                CloudServer.Cache.set(pName+'_gzip',pResult);
+                CloudServer.Cache.set(pName+'_gzip', pResult);
             }
-            CloudServer.sendResponse(pHeader,pResult,pName);                        
+            CloudServer.sendResponse(pHeader, pResult, pName);                        
         }
         else{
             console.log(error);
-            CloudServer.sendResponse(pHeader,error);
+            CloudServer.sendResponse(pHeader, error);
         }
     };
 };
@@ -811,7 +800,7 @@ CloudServer.getGzipDataFunc = function(pHeader,pName){
  * @pData       - данные
  * @pName       - имя отсылаемого файла
  */
-CloudServer.sendResponse = function(pHead, pData,pName){
+CloudServer.sendResponse = function(pHead, pData, pName){
     /* если у нас есть указатель на responce
      * для соответствующего файла - 
      * высылаем его
@@ -826,13 +815,13 @@ CloudServer.sendResponse = function(pHead, pData,pName){
             
         lResponse.end(pData);
         
-        console.log(pName+' sended');
+        console.log(pName + ' sended');
     }
 };
 
 /* function sets stdout to file log.txt */
 CloudServer.writeLogsToFile = function(){
-    var stdo = require('fs').createWriteStream('./log.txt');
+    var stdo = Fs.createWriteStream('./log.txt');
     
     process.stdout.write = (function(write) {
             return function(string, encoding, fd) {
