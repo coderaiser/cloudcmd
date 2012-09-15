@@ -166,7 +166,7 @@ CloudServer.init = (function(){
     var lAppCache = CloudServer.AppCache;
     if(lAppCache){
         lAppCache.addFiles(
-            ['./lib/jquery.js', './font/DroidSansMono.woff','./min/all.min.css']);
+            ['./lib/client/jquery.js', './font/DroidSansMono.woff','./min/all.min.css']);
         lAppCache.createManifest();
     }
 });
