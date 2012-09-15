@@ -1104,11 +1104,11 @@ CloudClient.baseInit = (function(){
     Util.cssSet({id:'show_2panels',
         element:document.head,
         inner:
-            '.panel{'                       +
-                'height:' + lHeight +'px;'   +
-                'width:46%;'                +
+            '.panel{'                           +
+                'height:' + lHeight +'px;'      +
+                'width:46%;'                    +
             '}'
-    });       
+    });
 });
 
 /* функция меняет ссыки на ajax-овые */
