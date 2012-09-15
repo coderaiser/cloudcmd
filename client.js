@@ -969,7 +969,7 @@ CloudClient._setCurrent=(function(){
                          */
                         if(Util.getCurrentFile() === lParent)
                             CloudClient._editFileName(lParent);
-                        },400);
+                        },1000);
                 }
                 else{                        
                     /* устанавливаем курсор на файл,
