@@ -734,7 +734,7 @@ CloudServer.getReadFileFunc = function(pName){
  *                      или из одного из кешей
  * Пример {cache: false, minify: true}
  */    
-    var lReadFile=function(pError, pData, pFromCache_o){
+    var lReadFile = function(pError, pData, pFromCache_o){
         if (!pError){
             console.log('file ' + pName + ' readed');
             
@@ -786,24 +786,24 @@ CloudServer.getReadFileFunc = function(pName){
  */
 CloudServer.getGzipDataFunc = function(pHeader,pName){
     return function(error,pResult){
-                    if(!error){
-                        /* отправляем сжатые данные
-                         * вместе с заголовком
-                         */                            
-                         /* если установлена работа с кэшем
-                          * сохраняем сжатые данные
-                          */
-                        if(CloudServer.Cache.isAllowed){
-                            /* устанавливаем кєш */
-                            console.log(pName+' gziped');
-                            CloudServer.Cache.set(pName+'_gzip',pResult);
-                        }
-                        CloudServer.sendResponse(pHeader,pResult,pName);                        
-                    }
-                    else{
-                        console.log(error);
-                        CloudServer.sendResponse(pHeader,error);
-                    }
+        if(!error){
+            /* отправляем сжатые данные
+             * вместе с заголовком
+             */                            
+             /* если установлена работа с кэшем
+              * сохраняем сжатые данные
+              */
+            if(CloudServer.Cache.isAllowed){
+                /* устанавливаем кєш */
+                console.log(pName+' gziped');
+                CloudServer.Cache.set(pName+'_gzip',pResult);
+            }
+            CloudServer.sendResponse(pHeader,pResult,pName);                        
+        }
+        else{
+            console.log(error);
+            CloudServer.sendResponse(pHeader,error);
+        }
     };
 };
 /* Функция высылает ответ серверу 
