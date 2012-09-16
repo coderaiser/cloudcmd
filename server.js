@@ -162,7 +162,7 @@ CloudServer.init = (function(){
     /* Если нужно минимизируем скрипты */
     this.Minify.doit();
     
-    /* створюємо файл app cache */
+    /* создаём файл app cache */
     var lAppCache = CloudServer.AppCache;
     if(lAppCache && this.Config.server){
         lAppCache.addFiles(
