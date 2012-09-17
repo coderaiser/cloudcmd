@@ -203,26 +203,22 @@ CloudServer.generateHeaders = function(pName, pGzip){
      */
          
     var lExt = CloudFunc.getExtension(pName);
-    console.log(lExt);
-    lType = CloudServer.Extensions[lExt] || 'text/plain';
-    console.log(lType);
-
     if(lExt === '.appcache')
         lCacheControl = 1;
+    
+    lType = CloudServer.Extensions[lExt] || 'text/plain';
+    if(lType.indexOf('img') < 0)
+        lContentEncoding =  '; charset=UTF-8';
 
     var lQuery = CloudServer.Queries[pName];
     if(lQuery){
         if(lQuery === 'download')
             lType = 'application/octet-stream';
-        
         console.log(pName + lQuery);
     }
 
     if(!lCacheControl)
-        lCacheControl = 31337 * 21;
-    
-    if(lType.indexOf('img') < 0)
-        lContentEncoding =  '; charset=UTF-8';
+        lCacheControl = 31337 * 21;    
     
     return {
         /* if type of file any, but img - 
