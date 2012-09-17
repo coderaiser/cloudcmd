@@ -21,10 +21,10 @@ try{
     var lResult = CloudFunc.buildFromJSON(lJSON);
     var lExpect =
         '<li class=path>'                                                   +
-            '<span class="path_icon clear-cache"'                           +
+            '<span class="path-icon clear-cache"'                           +
                 'id=clear-cache title="clear cache (Ctrl+D)">'              +
             '</span>'                                                       +
-            '<span class="path_icon refresh-icon" title="refresh (Ctrl+R)">'+
+            '<span class="path-icon refresh-icon" title="refresh (Ctrl+R)">'+
                 '<a href="/fs/no-js/etc/X11"></a></span>'                   +
             '<span>'                                                        +
                 '<a class=links href="/fs/no-js" title=""/"">/</a>'         +
