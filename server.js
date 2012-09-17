@@ -627,7 +627,7 @@ CloudServer._fillJSON = function(pStats, pFiles){
          * с соответствующими заголовками
          */
         lList   = JSON.stringify(lJSON);
-        lHeader = CloudServer.generateHeaders('application/json', CloudServer.Gzip);
+        lHeader = CloudServer.generateHeaders('fs.json', CloudServer.Gzip);
         
         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
         if(CloudServer.Gzip){
@@ -667,7 +667,7 @@ CloudServer.indexReaded = function(pList){
                 
         var lHeader;
         /* если браузер поддерживает gzip-сжатие*/
-        lHeader = CloudServer.generateHeaders('text/html', CloudServer.Gzip);
+        lHeader = CloudServer.generateHeaders('index.html', CloudServer.Gzip);
         
          /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
         if(CloudServer.Gzip) {
