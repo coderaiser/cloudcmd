@@ -34,7 +34,7 @@ function readConfig(){
          * not created, just init and
          * all logs writed to screen
          */
-        if (process.argv[process.argv] === 'test') {
+        if (process.argv[process.argv.length - 1] === 'test') {
             console.log(process.argv);
             lConfig.server  = false;
             lConfig.logs    = false;
