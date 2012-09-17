@@ -284,182 +284,178 @@ CloudServer._controller = function(pReq, pRes)
      */
     var lNoJS_s = CloudFunc.NOJS;
     var lFS_s   = CloudFunc.FS;
-    
-    if(pathname!=='/favicon.ico')
-    {    
-        console.log("request for " + pathname + " received...");
-                        
-        /* если в пути нет информации ни о ФС,
-         * ни об отсутствии js,
-         * ни о том, что это корневой
-         * каталог - загружаем файлы проэкта
+    console.log("request for " + pathname + " received...");
+                    
+    /* если в пути нет информации ни о ФС,
+     * ни об отсутствии js,
+     * ни о том, что это корневой
+     * каталог - загружаем файлы проэкта
+     */
+    if(pathname.indexOf(lFS_s) < 0      &&
+        pathname.indexOf(lNoJS_s) < 0   &&
+        pathname!=='/'                  &&
+        lQuery !=='json'){
+        /* если имена файлов проекта - загружаем их*/  
+        /* убираем слеш и читаем файл с текущец директории*/
+        
+        /* добавляем текующий каталог к пути */
+        var lName = '.' + pathname;
+        console.log('reading '+lName);
+        
+        /* watching is file changed */
+        CloudServer.AppCache.watch(lName);
+        
+        /* сохраняем указатель на response и имя */
+        CloudServer.Responses[lName]    = pRes;
+        
+        /* saving status OK for current file */
+        CloudServer.Statuses[lName]     = 200;
+        
+        /* Берём значение из кэша
+         * сжатый файл - если gzip-поддерживаеться браузером
+         * не сжатый - в обратном случае
          */
-        if(pathname.indexOf(lFS_s) < 0      &&
-            pathname.indexOf(lNoJS_s) < 0   &&
-            pathname!=='/'                  &&
-            lQuery !=='json'){
-            /* если имена файлов проекта - загружаем их*/  
-            /* убираем слеш и читаем файл с текущец директории*/
-            
-            /* добавляем текующий каталог к пути */
-            var lName = '.' + pathname;
-            console.log('reading '+lName);
-            
-            /* watching is file changed */
-            CloudServer.AppCache.watch(lName);
-            
-            /* сохраняем указатель на response и имя */
-            CloudServer.Responses[lName]    = pRes;
-            
-            /* saving status OK for current file */
-            CloudServer.Statuses[lName]     = 200;
-            
-            /* Берём значение из кэша
-             * сжатый файл - если gzip-поддерживаеться браузером
-             * не сжатый - в обратном случае
-             */
-            var lFileData=CloudServer.Cache.get(
-                CloudServer.Gzip?(lName+'_gzip'):lName);
-            
-            console.log(Path.basename(lName));
-                        
-            var lMinify = CloudServer.Minify;
-            
-            /* object thet contains information
-             * about the source of file data
-             */
-            var lFromCache_o = {'cache': true};
-            
-            /* if cache is empty and Cache allowed and Minify_allowed 
-             * and in Minifys cache is files, so save it to
-             * CloudServer cache
-             */
-            if(!lFileData &&  
-                lMinify._allowed){
-                    console.log('trying to read data from Minify.Cache');
-                    lFromCache_o.cache = false;
-                    lFileData = CloudServer.Minify.Cache[
-                        Path.basename(lName)];                    
-            }
-            var lReadFileFunc_f = CloudServer.getReadFileFunc(lName);
-            /* если там что-то есть передаём данные в функцию
-             * readFile
-             */
-            var lResult = true;
-            if(lFileData){                
-                /* if file readed not from cache - 
-                 * he readed from minified cache 
-                 */
-                if(lFromCache_o.cache === false)
-                    lFromCache_o.minify = true;
-                else
-                    lFromCache_o.minify = false;
+        var lFileData=CloudServer.Cache.get(
+            CloudServer.Gzip?(lName+'_gzip'):lName);
+        
+        console.log(Path.basename(lName));
                     
-                console.log(lName + ' readed from cache');
-                /* передаём данные с кэша,
-                 * если gzip включен - сжатые
-                 * в обратном случае - несжатые
-                 */
-                lReadFileFunc_f(undefined, lFileData, lFromCache_o);
-            }
-            /* if file not in one of caches
-             * and minimizing setted then minimize it
-             */
-            else if(lName.indexOf('min') < 0 &&
-                CloudServer.Minify){
-                    var lMin_o = CloudServer.Config.minification;
-                    
-                    var lCheck_f = function(pExt){
-                        return CloudFunc.checkExtension(lName,pExt);
-                    };
-    
-                    var isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
-                                     (lCheck_f('css') && lMin_o.css) ||                
-                                     (lCheck_f('html') && lMin_o.html);
-                        
-                    if(isAllowd_b){
-                        lResult = CloudServer.Minify.optimize(lName, {
-                            cache: true,
-                            callback: function(pFileData){
-                                lReadFileFunc_f(undefined, pFileData, false);
-                            }
-                        });
-                    }
-                    else 
-                        lResult = false;
-                } else
-                    lResult = false;
-                
-            if(!lResult)
-                Fs.readFile(lName, lReadFileFunc_f);            
-        }else{/* если мы имеем дело с файловой системой*/
-            /* если путь не начинаеться с no-js - значит 
-             * js включен
-             */
-            /* убираем пометку cloud, без которой c9.io
-             * не работает поскольку путь из двух слешей
-             * (/fs/no-js/) - очень короткий, нужно
-             * длиннее
-             */
-            
-            if(pathname.indexOf(lNoJS_s) !== lFS_s.length &&
-                pathname !== '/'){
-                    CloudServer.NoJS = false;
-                    
-            }else pathname = pathname.replace(lNoJS_s,'');
-            
-            /* убираем индекс файловой системы */
-            if(pathname.indexOf(lFS_s) === 0){
-                pathname = pathname.replace(lFS_s,'');
-            
-            /* if query json setted up
-             * load json data, no-js false.
-             */
-            if(lQuery === 'json'){
-                CloudServer.NoJS = false;
-            }
-            
-            /* если посетитель только зашел на сайт
-             * no-js будет пустым, как и fs.
-             * Если в пути нету fs - посетитель только зашел на сайт
-             * загружаем его полностью.
-             */
-            } else CloudServer.NoJS = true;
-            /* если в итоге путь пустой
-             * делаем его корневым
-             */                         
-            if (pathname === '')
-                pathname = '/';
-                        
-            DirPath  = pathname;
-            
-            CloudServer.Responses[DirPath]  = pRes;
-            
-            CloudServer.Statuses[DirPath]   = 200;
-            
-            /* saving query of current file */
-            CloudServer.Queries[DirPath]    = lQuery;
-            
-            /* Проверяем с папкой ли мы имеем дело */
-            
-            /* читаем основные данные о файле */
-            Fs.stat(DirPath, CloudServer._stated);
-            
-            /* если установлено сжатие
-             * меняем название html-файла и
-             * загружаем сжатый html-файл в дальнейшем
-             */
-            CloudServer.INDEX = (CloudServer.Minify._allowed.html ?
-                '.' + CloudServer.Minify.MinFolder + 'index.min.html'
-                : CloudServer.INDEX);
-          
-            /*
-             * сохраним указатель на response
-             * и на статус ответа
-             */            
-            CloudServer.Responses[CloudServer.INDEX] = pRes;
-            CloudServer.Statuses [CloudServer.INDEX] = 200;
+        var lMinify = CloudServer.Minify;
+        
+        /* object thet contains information
+         * about the source of file data
+         */
+        var lFromCache_o = {'cache': true};
+        
+        /* if cache is empty and Cache allowed and Minify_allowed 
+         * and in Minifys cache is files, so save it to
+         * CloudServer cache
+         */
+        if(!lFileData &&  
+            lMinify._allowed){
+                console.log('trying to read data from Minify.Cache');
+                lFromCache_o.cache = false;
+                lFileData = CloudServer.Minify.Cache[
+                    Path.basename(lName)];                    
         }
+        var lReadFileFunc_f = CloudServer.getReadFileFunc(lName);
+        /* если там что-то есть передаём данные в функцию
+         * readFile
+         */
+        var lResult = true;
+        if(lFileData){                
+            /* if file readed not from cache - 
+             * he readed from minified cache 
+             */
+            if(lFromCache_o.cache === false)
+                lFromCache_o.minify = true;
+            else
+                lFromCache_o.minify = false;
+                
+            console.log(lName + ' readed from cache');
+            /* передаём данные с кэша,
+             * если gzip включен - сжатые
+             * в обратном случае - несжатые
+             */
+            lReadFileFunc_f(undefined, lFileData, lFromCache_o);
+        }
+        /* if file not in one of caches
+         * and minimizing setted then minimize it
+         */
+        else if(lName.indexOf('min') < 0 &&
+            CloudServer.Minify){
+                var lMin_o = CloudServer.Config.minification;
+                
+                var lCheck_f = function(pExt){
+                    return CloudFunc.checkExtension(lName,pExt);
+                };
+
+                var isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
+                                 (lCheck_f('css') && lMin_o.css) ||                
+                                 (lCheck_f('html') && lMin_o.html);
+                    
+                if(isAllowd_b){
+                    lResult = CloudServer.Minify.optimize(lName, {
+                        cache: true,
+                        callback: function(pFileData){
+                            lReadFileFunc_f(undefined, pFileData, false);
+                        }
+                    });
+                }
+                else 
+                    lResult = false;
+            } else
+                lResult = false;
+            
+        if(!lResult)
+            Fs.readFile(lName, lReadFileFunc_f);            
+    }else{/* если мы имеем дело с файловой системой*/
+        /* если путь не начинаеться с no-js - значит 
+         * js включен
+         */
+        /* убираем пометку cloud, без которой c9.io
+         * не работает поскольку путь из двух слешей
+         * (/fs/no-js/) - очень короткий, нужно
+         * длиннее
+         */
+        
+        if(pathname.indexOf(lNoJS_s) !== lFS_s.length &&
+            pathname !== '/'){
+                CloudServer.NoJS = false;
+                
+        }else pathname = pathname.replace(lNoJS_s,'');
+        
+        /* убираем индекс файловой системы */
+        if(pathname.indexOf(lFS_s) === 0){
+            pathname = pathname.replace(lFS_s,'');
+        
+        /* if query json setted up
+         * load json data, no-js false.
+         */
+        if(lQuery === 'json'){
+            CloudServer.NoJS = false;
+        }
+        
+        /* если посетитель только зашел на сайт
+         * no-js будет пустым, как и fs.
+         * Если в пути нету fs - посетитель только зашел на сайт
+         * загружаем его полностью.
+         */
+        } else CloudServer.NoJS = true;
+        /* если в итоге путь пустой
+         * делаем его корневым
+         */                         
+        if (pathname === '')
+            pathname = '/';
+                    
+        DirPath  = pathname;
+        
+        CloudServer.Responses[DirPath]  = pRes;
+        
+        CloudServer.Statuses[DirPath]   = 200;
+        
+        /* saving query of current file */
+        CloudServer.Queries[DirPath]    = lQuery;
+        
+        /* Проверяем с папкой ли мы имеем дело */
+        
+        /* читаем основные данные о файле */
+        Fs.stat(DirPath, CloudServer._stated);
+        
+        /* если установлено сжатие
+         * меняем название html-файла и
+         * загружаем сжатый html-файл в дальнейшем
+         */
+        CloudServer.INDEX = (CloudServer.Minify._allowed.html ?
+            '.' + CloudServer.Minify.MinFolder + 'index.min.html'
+            : CloudServer.INDEX);
+      
+        /*
+         * сохраним указатель на response
+         * и на статус ответа
+         */            
+        CloudServer.Responses[CloudServer.INDEX] = pRes;
+        CloudServer.Statuses [CloudServer.INDEX] = 200;
     }
 };
 
