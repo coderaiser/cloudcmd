@@ -2,7 +2,7 @@
 #linting js files
 npm i jshint
 echo "jshint server.js client.js cloudcmd.js"
-./node_modules/jshint/bin/hint --config .jshintrc ./server.js ./client.js ./cloudcmd.js
+./node_modules/jshint/bin/hint --config ./test/.jshintrc ./server.js ./client.js ./cloudcmd.js
 echo "jshint lib/cloudfunc.js lib/client/keyBinding.js"
 ./node_modules/jshint/bin/hint --config ./test/.jshintrc ./lib/cloudfunc.js ./node_modules/minify/minify.js ./lib/client/keyBinding.js
 echo "jshint ./package.json ./config.json"
