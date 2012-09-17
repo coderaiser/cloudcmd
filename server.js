@@ -78,7 +78,17 @@ var CloudServer = {
     /* КОНСТАНТЫ */
     INDEX           : 'index.html',
     LIBDIR          : './lib',
-    LIBDIRSERVER    : './lib/server'
+    LIBDIRSERVER    : './lib/server',
+    Extensions      :{
+            '.css'      : 'text/css',
+            '.js'       : 'text/javascript',
+            '.png'      : 'image/png',
+            '.json'     : 'application/json',
+            '.html'     : 'text/html',
+            '.woff'     : 'font/woff',
+            '.appcache' : 'text/cache-manifest',
+            '.mp3'      : 'audio/mpeg'
+    }
 };
 
 var DirPath                 = '/';
@@ -191,33 +201,15 @@ CloudServer.generateHeaders = function(pName, pGzip){
     /* если расширение у файла css -
      * загружаем стили
      */
-    if(CloudFunc.checkExtension(pName,'css'))
-        lType = 'text/css';
-    /* загружаем js */
-    else if(CloudFunc.checkExtension(pName,'js'))
-        lType = 'text/javascript';
-    /* загружаем картинки*/
-    else if(CloudFunc.checkExtension(pName,'png'))
-        lType = 'image/png';
-    /* загружаем json*/
-    else if(CloudFunc.checkExtension(pName,'json'))
-        lType = 'application/json';
-    else if(CloudFunc.checkExtension(pName,'html'))
-        lType = 'text/html';
-    else if(CloudFunc.checkExtension(pName,'woff'))
-        lType = 'font/woff';
-    else if(CloudFunc.checkExtension(pName,'appcache')){
-        lType = 'text/cache-manifest';
+         
+    var lExt = CloudFunc.getExtension(pName);
+    console.log(lExt);
+    lType = CloudServer.Extensions[lExt] || 'text/plain';
+    console.log(lType);
+
+    if(lExt === '.appcache')
         lCacheControl = 1;
-    }
-    else if(CloudFunc.checkExtension(pName,'mp3'))
-        lType = 'audio/mpeg';
-        
-    /* если это неизвестный тип файла - 
-     * высылаем его просто как текст
-     */
-    else lType='text/plain';
-    
+
     var lQuery = CloudServer.Queries[pName];
     if(lQuery){
         if(lQuery === 'download')
