@@ -111,48 +111,7 @@ else
     console.log('could not found one of Cloud Commander SS files');
 
 /* конструктор*/
-CloudServer.init = (function(){
-    /* Determining server.js directory
-     * and chang current process directory
-     * (usually /) to it.
-     * argv[1] - is always script name
-     */
-    var lServerDir = Path.dirname(process.argv[1]);
-    var lProcessDir = process.cwd();
-    
-    if(lProcessDir !== lServerDir){
-        console.log('current dir: ' + lProcessDir);
-        process.chdir(lServerDir);
-    }
-    console.log('server dir:  ' + lServerDir);
-    
-    try{
-        console.log('reading configuretion file config.json...');
-        this.Config = require('./config');
-        console.log('config.json readed');
-        
-        /* if command line parameter testing resolved 
-         * setting config to testing, so server
-         * not created, just init and
-         * all logs writed to screen
-         */
-        if (process.argv[2] === 'test') {
-            console.log(process.argv);
-            this.Config.server  = false;
-            this.Config.logs    = false;
-        }
-                
-        if (this.Config.logs) {
-            console.log('log param setted up in config.json\n' +
-                'from now all logs will be writed to log.txt');
-            this.writeLogsToFile();
-        }
-    } catch (pError) {
-        console.log('warning: configuretion file config.json not found...\n' +
-            'using default values...\n'                     +
-            JSON.stringify(CloudServer.Config));
-    }
-    
+CloudServer.init = (function(){    
     /* Переменная в которой храниться кэш*/
     this.Cache.setAllowed(CloudServer.Config.cache.allowed);
     /* Change default parameters of
@@ -175,16 +134,23 @@ CloudServer.init = (function(){
 
 
 /* создаём сервер на порту 31337 */
-CloudServer.start = function () {
+CloudServer.start = function (pConfig) {
+    if(pConfig)
+        this.Config = pConfig;
+    else
+        console.log('warning: configuretion file config.json not found...\n' +
+            'using default values...\n'                     +
+            JSON.stringify(this.Config));
+            
     this.init();
     
     this.Port = process.env.PORT            ||  /* c9           */
                 process.env.app_port        ||  /* nodester     */
                 process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
-                CloudServer.Config.port;
+                this.Config.port;
     
     this.IP   = process.env.IP              ||  /* c9           */
-                CloudServer.Config.ip;
+                this.Config.ip;
     
     /* if Cloud Server started on jitsu */
     if(process.env.HOME &&
@@ -197,13 +163,10 @@ CloudServer.start = function () {
 
         try {
             this.Server =  http.createServer(this._controller);
-            this.Server.listen(
-                this.Port, this.IP);
+            this.Server.listen(this.Port, this.IP);
                 
             console.log('Cloud Commander server running at http://' +
-                this.IP +
-                ':' + 
-                this.Port);
+                this.IP + ':' + this.Port);
         }catch(pError){
             console.log('Cloud Commander server could not started');
             console.log(pError);
@@ -834,17 +797,6 @@ CloudServer.sendResponse = function(pHead, pData, pName){
     }
 };
 
-/* function sets stdout to file log.txt */
-CloudServer.writeLogsToFile = function(){
-    var stdo = Fs.createWriteStream('./log.txt');
-    
-    process.stdout.write = (function(write) {
-            return function(string, encoding, fd) {
-                    stdo.write(string);
-            };
-    })(process.stdout.write);
-};
-
 /* function do safe require of needed module */
 function cloudRequire(pModule){
   try{
@@ -855,4 +807,6 @@ function cloudRequire(pModule){
   }
 }
 
-CloudServer.start();
+exports.start = function(pConfig){
+    CloudServer.start(pConfig);
+};
