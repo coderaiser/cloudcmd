@@ -152,6 +152,7 @@ CloudServer.start = function (pConfig) {
             'using default values...\n'                     +
             JSON.stringify(this.Config));
             
+    console.log(pConfig);
     this.init();
     
     this.Port = process.env.PORT            ||  /* c9           */
