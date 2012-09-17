@@ -655,7 +655,7 @@ CloudClient.Util        = (function(){
         if (pCurrentFile.className === 'path')
             pCurrentFile = pCurrentFile.nextSibling;
         
-        if (pCurrentFile.className == 'fm_header')
+        if (pCurrentFile.className === 'fm_header')
             pCurrentFile = pCurrentFile.nextSibling;
         
         if(lCurrentFileWas)

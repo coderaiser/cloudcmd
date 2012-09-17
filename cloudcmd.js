@@ -1,3 +1,4 @@
+"use strict";
 var Server  = cloudRequire('./server'),
     path    = cloudRequire('path'),
     fs      = cloudRequire('fs');
