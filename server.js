@@ -120,8 +120,8 @@ if(CloudServer.Obj){
 else
     console.log('could not found one of Cloud Commander SS files');
 
-/* конструктор */
-CloudServer.init = (function(){    
+/* базовая инициализация  */
+CloudServer.init        = (function(){    
     /* Переменная в которой храниться кэш*/
     this.Cache.setAllowed(CloudServer.Config.cache.allowed);
     /* Change default parameters of
