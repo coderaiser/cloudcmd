@@ -51,7 +51,7 @@ Start file is - cloudcmd.js
 
 * Refactored and fixed old bugs in function generateHeaders (server.js).
 
-* Added ability to remove files.
+* Added ability to remove files (on the surface, not for real).
 
 
 2012.08.24, Version 0.1.6
