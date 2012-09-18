@@ -91,7 +91,7 @@ var CloudServer = {
     }
 };
 
-var DirPath                 = '/';
+var DirPath             = '/';
 
 /* модуль для работы с путями*/
 var Path                = cloudRequire('path'),
@@ -120,7 +120,7 @@ if(CloudServer.Obj){
 else
     console.log('could not found one of Cloud Commander SS files');
 
-/* конструктор*/
+/* конструктор */
 CloudServer.init = (function(){    
     /* Переменная в которой храниться кэш*/
     this.Cache.setAllowed(CloudServer.Config.cache.allowed);
@@ -143,7 +143,10 @@ CloudServer.init = (function(){
 });
 
 
-/* создаём сервер на порту 31337 */
+/**
+ * Функция создаёт сервер
+ * @param pConfig
+ */
 CloudServer.start = function (pConfig) {
     if(pConfig)
         this.Config = pConfig;
@@ -187,11 +190,12 @@ CloudServer.start = function (pConfig) {
 };
 
 
-/* Функция создаёт заголовки файлов
+/**
+ * Функция создаёт заголовки файлов
  * в зависимости от расширения файла
  * перед отправкой их клиенту
- * @pName - имя файла
- * @pGzip - данные сжаты gzip'ом
+ * @param pName - имя файла
+ * @param pGzip - данные сжаты gzip'ом
  */
 CloudServer.generateHeaders = function(pName, pGzip){
     var lType               = '';
@@ -233,11 +237,11 @@ CloudServer.generateHeaders = function(pName, pGzip){
     };
 };
 
-/*
+/**
  * Главная функция, через которую проихсодит
  * взаимодействие, обмен данными с клиентом
- * @req - запрос клиента (Request)
- * @res - ответ сервера (Response)
+ * @param req - запрос клиента (Request)
+ * @param res - ответ сервера (Response)
  */
 CloudServer._controller = function(pReq, pRes)
 {
@@ -456,8 +460,10 @@ CloudServer._controller = function(pReq, pRes)
     }
 };
 
-/* 
+/**
  * Function geted stat information about file
+ * @param pError
+ * @param pStat
  */
 CloudServer._stated = function(pError, pStat){
     if(pError){
@@ -484,7 +490,11 @@ CloudServer._stated = function(pError, pStat){
 };
 
 
-/* Функция читает ссылку или выводит информацию об ошибке*/
+/**
+ * Функция читает ссылку или выводит информацию об ошибке
+ * @param pError
+ * @param pFiles
+ */
 CloudServer._readDir = function (pError, pFiles)
 {
     if(pError){
@@ -540,13 +550,13 @@ CloudServer._readDir = function (pError, pFiles)
     else CloudServer._fillJSON(null, pFiles);
 };
 
-/*
+/**
  * Function fill JSON by file stats
  *
- * @pStats - object, contain file stats.
+ * @param pStats - object, contain file stats.
  *          example {'1.txt': stat}
  *
- * @pFiles - array of files of current directory
+ * @param pFiles - array of files of current directory
  */
 CloudServer._fillJSON = function(pStats, pFiles){
     /* данные о файлах в формате JSON*/
@@ -629,6 +639,9 @@ CloudServer._fillJSON = function(pStats, pFiles){
     }  
 };
 
+/**
+ *@param pList
+ */
 CloudServer.indexReaded = function(pList){
     return function(pError, pIndex){
         if(pError){
@@ -670,10 +683,11 @@ CloudServer.indexReaded = function(pList){
     };
 };
 
-/* Функция генерирует функцию считывания файла
+/** 
+ * Функция генерирует функцию считывания файла
  * таким образом, что бы у нас было 
  * имя считываемого файла
- * @pName - полное имя файла
+ * @param pName - полное имя файла
  */
 CloudServer.getReadFileFunc = function(pName){
 /*
@@ -730,8 +744,10 @@ CloudServer.getReadFileFunc = function(pName){
     return lReadFile;
 };
 
-/* Функция получает сжатые данные
- * @pHeader - заголовок файла
+/**
+ * Функция получает сжатые данные
+ * @param pHeader - заголовок файла
+ * @pName
  */
 CloudServer.getGzipDataFunc = function(pHeader, pName){
     return function(error, pResult){
@@ -755,10 +771,11 @@ CloudServer.getGzipDataFunc = function(pHeader, pName){
         }
     };
 };
-/* Функция высылает ответ серверу 
- * @pHead       - заголовок
- * @pData       - данные
- * @pName       - имя отсылаемого файла
+/**
+ * Функция высылает ответ серверу 
+ * @param pHead       - заголовок
+ * @param Data       - данные
+ * @param pName       - имя отсылаемого файла
  */
 CloudServer.sendResponse = function(pHead, pData, pName){
     /* если у нас есть указатель на responce
@@ -779,7 +796,10 @@ CloudServer.sendResponse = function(pHead, pData, pName){
     }
 };
 
-/* function do safe require of needed module */
+/**
+ * function do safe require of needed module
+ * @param pModule
+ */
 function cloudRequire(pModule){
   try{
       return require(pModule);
