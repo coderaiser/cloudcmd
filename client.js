@@ -661,7 +661,10 @@ CloudClient.Util        = (function(){
         if(lCurrentFileWas)
             this.unSetCurrentFile(lCurrentFileWas);
             
-        pCurrentFile.className = CloudCommander.CURRENT_FILE;
+        var lSpaceChar = '';
+        if(pCurrentFile.className)
+            lSpaceChar = ' ';
+        pCurrentFile.className += lSpaceChar + CloudCommander.CURRENT_FILE;
         
         /* scrolling to current file */
         Util.scrollIntoViewIfNeeded(pCurrentFile);
@@ -678,8 +681,14 @@ CloudClient.Util        = (function(){
                         'could not be none'
             });
         var lRet_b = this.isCurrentFile(pCurrentFile);
-        if(lRet_b)
-            pCurrentFile.className = '';    
+        var lCurrentClass = CloudCommander.CURRENT_FILE;        
+        var lCurrentFileClass = pCurrentFile.className;
+        if(lRet_b){
+            if(lCurrentFileClass.length > lCurrentClass.length)
+                pCurrentFile.className = lCurrentFileClass.replace(lCurrentClass);
+            else
+                pCurrentFile.className = '';
+        }
         
         return lRet_b;
     };
@@ -693,7 +702,10 @@ CloudClient.Util        = (function(){
                         'could not be none'
             });
         
-        return (pCurrentFile.className === CloudCommander.CURRENT_FILE);
+        var lCurrentClass       = CloudCommander.CURRENT_FILE;
+        var lCurrentFileClass   = pCurrentFile.className;
+        
+        return ( lCurrentFileClass.indexOf(lCurrentClass) >= 0 );
     };
     
     this.getCurrentLink = function(pCurrentFile){
@@ -708,6 +720,22 @@ CloudClient.Util        = (function(){
                 code : -1,
                 msg  : 'Error current element do not contain links'
             });
+        
+        return lLink; 
+    };
+    
+    this.getCurrentName = function(pCurrentFile){
+        var lCurrent = this.getCurrentFile();
+                
+        var lLink;
+        lLink = this.getCurrentLink(pCurrentFile ? pCurrentFile : lCurrent);
+            
+        if(!lLink)
+            this.addCloudStatus({
+                code : -1,
+                msg  : 'Error current element do not contain links'
+            });
+        else lLink = lLink.textContent;
         
         return lLink; 
     };
@@ -752,6 +780,39 @@ CloudClient.Util        = (function(){
         
         if(lPanel)
             lPanel.className = 'panel hidden';
+    };
+    
+    this.removeCurrent = function(pCurrent){
+        var lParent = pCurrent.parentElement;
+        
+        if(!pCurrent)
+            pCurrent = this.getCurrentFile();
+        var lName = this.getCurrentName(pCurrent);
+        
+        if(pCurrent && lParent){
+            if(lName !== '..'){
+                var lNext       = pCurrent.nextSibling;
+                var lPrevious   = pCurrent.previousSibling;
+                if(lNext)
+                    Util.setCurrentFile(lNext);
+                else if(lPrevious)
+                    Util.setCurrentFile(lPrevious);
+                            
+                lParent.removeChild(pCurrent);
+            }
+            else 
+                this.addCloudStatus({
+                    code : -1,
+                    msg  : 'Could not remove parrent dir'
+                });
+        }
+        else
+            this.addCloudStatus({
+                code : -1,
+                msg  : 'Current file (or parent of current) could not be empty'
+            });
+            
+        return pCurrent;
     };
     
     this.scrollIntoViewIfNeeded = function(pElement){
