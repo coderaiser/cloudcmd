@@ -195,21 +195,20 @@ CloudServer.start = function (pConfig) {
  * @pGzip - данные сжаты gzip'ом
  */
 CloudServer.generateHeaders = function(pName, pGzip){
-    var lType='';
-    var lCacheControl = 0;
-    var lContentEncoding = '';
-    /* высылаем заголовок в зависимости от типа файла */
-    /* если расширение у файла css -
-     * загружаем стили
-     */
-         
-    var lExt = CloudFunc.getExtension(pName);
+    var lType               = '';
+    var lCacheControl       = 0;
+    var lContentEncoding    = '';
+    
+    /* высылаем заголовок в зависимости от типа файла */         
+    var lDot = pName.lastIndexOf('.');    
+    var lExt =  pName.substr(lDot);
+    
     if(lExt === '.appcache')
         lCacheControl = 1;
     
     lType = CloudServer.Extensions[lExt] || 'text/plain';
     if(lType.indexOf('img') < 0)
-        lContentEncoding =  '; charset=UTF-8';
+        lContentEncoding = '; charset=UTF-8';
 
     var lQuery = CloudServer.Queries[pName];
     if(lQuery){
@@ -243,8 +242,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
  */
 CloudServer._controller = function(pReq, pRes)
 {
-    /* Читаем содержимое папки,
-        переданное в url
+    /* Читаем содержимое папки, переданное в url
     */
     var url = require("url");
     var lParsedUrl = url.parse(pReq.url);
