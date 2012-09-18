@@ -53,6 +53,9 @@ Start file is - cloudcmd.js
 
 * Added ability to remove files (on the surface, not for real).
 
+* From now right panel would be always shown no matter js enabled or
+disabled in browsers.
+
 
 2012.08.24, Version 0.1.6
  
