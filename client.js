@@ -838,7 +838,8 @@ CloudClient.Util       = new CloudClient.Util();
 CloudClient.KeyBinding = (function(){
     /* loading keyBinding module and start it */
     Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js', function(){
-        CloudCommander.KeyBinding.init();
+        cloudcmd.KeyBinding.init();
+        
         KeyBinding  = cloudcmd.KeyBinding;
     });
 });
@@ -849,7 +850,7 @@ CloudClient.Editor = (function(pCurrentFile, pIsReadOnly) {
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
             onload:(function(){
-                CloudCommander.Editor.Keys(pCurrentFile, pIsReadOnly);
+                cloudcmd.Editor.Keys(pCurrentFile, pIsReadOnly);
             })
     });
 });
@@ -860,7 +861,7 @@ CloudClient.Config = (function() {
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'config.js',{
         onload: function(){
-            CloudCommander.Config.Keys();
+            cloudcmd.Config.Keys();
         }
     });
 });
@@ -885,7 +886,7 @@ CloudClient.Viewer = (function(pCurrentFile){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'viewer.js',{
             onload: (function(){
-                CloudCommander.Viewer.Keys(pCurrentFile);
+                cloudcmd.Viewer.Keys(pCurrentFile);
             })
     });
 });
@@ -895,7 +896,7 @@ CloudClient.Terminal = (function(){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'terminal.js',{
             onload: (function(){
-                CloudCommander.Terminal.Keys();
+                cloudcmd.Terminal.Keys();
             })
     });
 });
@@ -907,7 +908,7 @@ CloudClient.Menu = (function(pPosition){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'menu.js',{
             onload: (function(){
-                CloudCommander.Menu.Keys(pPosition);
+                cloudcmd.Menu.Keys(pPosition);
             })
     });
 });
