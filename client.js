@@ -1020,18 +1020,18 @@ CloudClient._setCurrent=(function(){
             if(lCurrentFile){                        
                 if (Util.isCurrentFile(this)  &&
                     typeof pFromEnter !== 'boolean'){
-                    var lParent = this;
+                    //var lParent = this;
                     
-                    setTimeout(function(){
+                    //setTimeout(function(){
                         /* waiting a few seconds
                          * and if classes still equal
                          * make file name editable
                          * in other case
                          * double click event happend
                          */
-                        if(Util.getCurrentFile() === lParent)
-                            CloudClient._editFileName(lParent);
-                        },1000);
+                    //    if(Util.getCurrentFile() === lParent)
+                     //       CloudClient._editFileName(lParent);
+                     //   },1000);
                 }
                 else{                        
                     /* устанавливаем курсор на файл,
