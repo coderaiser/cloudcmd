@@ -767,6 +767,13 @@ CloudClient.Util        = (function(){
         
         return lPanel;
     };
+        
+    this.show = function(pElement){
+        if(pElement.className)
+            pElement.className = pElement.className.replace(' hidden', '');
+        else
+            pElement.className = '';
+    };
     
     this.showPanel = function(pActive){
         var lPanel = lThis.getPanel(pActive);
@@ -781,6 +788,13 @@ CloudClient.Util        = (function(){
         if(lPanel)
             lPanel.className = 'panel hidden';
     };
+    
+    this.hide = function(pElement){
+        var lSpaceChar = '';
+        if(pElement.className)
+            lSpaceChar = ' ';
+        pElement.className += lSpaceChar + 'hidden';
+    };    
     
     this.removeCurrent = function(pCurrent){
         var lParent = pCurrent.parentElement;
