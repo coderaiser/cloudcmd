@@ -1,0 +1,17 @@
+<script src="jquery-1.7.1.min.js"></script>
+<script src="jquery.mousewheel-min.js"></script>
+<script src="http://terminal.jcubic.pl/js/jquery.terminal-0.4.17.js"></script>
+<link href="jquery.terminal.css" rel="stylesheet">
+
+<div id='terminal'></div>
+<script>
+jQuery(function($, undefined) {
+    $('#terminal').terminal(function(command, term) {              
+       term.echo('');
+    }, {
+        greetings: 'Javascript Interpreter',
+        name: 'js_demo',
+        height: 200,
+        prompt: 'js>'});
+});
+</script>
