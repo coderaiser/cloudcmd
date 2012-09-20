@@ -58,6 +58,8 @@ disabled in browsers.
 
 * Added plagin terminal ( ` button under TAB).
 
+* Added ability to execute commands on server thrue terminal.
+
 
 2012.08.24, Version 0.1.6
  

@@ -111,6 +111,9 @@ var CloudFunc           =   cloudRequire(CloudServer.LIBDIR        +
                                 '/cloudfunc');
 CloudServer.AppCache    =   cloudRequire(CloudServer.LIBDIRSERVER  +
                                 '/appcache');
+CloudServer.Socket      =   cloudRequire(CloudServer.LIBDIRSERVER  +
+                                '/socket');
+                                
 CloudServer.Obj         =   cloudRequire(CloudServer.LIBDIRSERVER  +
                                 '/object');
 if(CloudServer.Obj){
@@ -177,6 +180,9 @@ CloudServer.start = function (pConfig) {
         try {
             this.Server =  http.createServer(this._controller);
             this.Server.listen(this.Port, this.IP);
+            
+            if(CloudServer.Socket)
+                CloudServer.Socket.listen(this.Server);
                 
             console.log('Cloud Commander server running at http://' +
                 this.IP + ':' + this.Port);
