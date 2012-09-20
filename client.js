@@ -1121,6 +1121,15 @@ CloudClient.init = (function(){
 });
 
 CloudClient.baseInit = (function(){
+    if(applicationCache){
+        var lFunc = applicationCache.onupdateready;
+        applicationCache.onupdateready = function(){
+            console.log('app cacheed');
+            location.reload();
+            if(typeof lFunc === 'function')
+                lFunc();
+        };
+    }
     /* меняем title 
      * если js включен - имена папок отображать необязательно...
      * а может и обязательно при переходе, можно будет это сделать
