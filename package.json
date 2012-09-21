@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "sh test/test.sh",
-    "start": "server.js"
+    "start": "cloudcmd.js"
   },
   "node": "0.6.17",
   "subdomain": "cloudcmd",
