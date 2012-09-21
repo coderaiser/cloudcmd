@@ -110,7 +110,8 @@ Additional modules
 ---------------
 **Cloud Commander's Server Side** not using additional modules for main functionality.
 But for minification and optimization tricks optional can be
-assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify "Minify").
+assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify "Minify")
+and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
 
 Install addtitional modules:
 
@@ -133,7 +134,7 @@ For extend main functionality Cloud Commander use next modules:
 - [CodeMirror] (http://codemirror.net "CodeMirror")
 - [FancyBox] (https://github.com/fancyapps/fancyBox "FancyBox")
 - [jQuery-contextMenu] (https://github.com/medialize/jQuery-contextMenu "jQuery-contextMenu")
-- [jq-console] (https://github.com/replit/jq-console "jq-console")
+- [jquery.terminal] (https://github.com/jcubic/jquery.terminal "jquery.terminal")
 
 Contributing
 ---------------
