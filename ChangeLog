@@ -62,6 +62,8 @@ disabled in browsers.
 
 * Added appcache paramter to config.json
 
+* Added ability convert charset from win to unicode on win32.
+
 
 2012.08.24, Version 0.1.6
  
