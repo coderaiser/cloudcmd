@@ -83,7 +83,7 @@ Starting
 ---------------
 To start **Cloud Commander** only one command neaded:
     
-    node cloudcmd.js
+    node cloudcmd
 After thet Cloud Commander reads config file **config.json** and start server
 on 31337 port, if none of port varibles(*cloud9*, *cloudfoundry* and *nodester*)
 isn't exist.
