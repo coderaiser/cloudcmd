@@ -1,6 +1,6 @@
 {
     "cache" : {"allowed" : false},
-    "appcache"  : true,
+    "appcache"  : false,
     "minification" : {
         "js"    : false,
         "css"   : true,
