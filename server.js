@@ -678,7 +678,7 @@ CloudServer.indexReaded = function(pList){
             '<title>' + CloudFunc.setTitle() + '</title>');
         
         if(!CloudServer.Config.appcache)
-            pIndex = pIndex.replace('/cloudcmd.appcache', '');
+            pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
         
         var lHeader;
         /* если браузер поддерживает gzip-сжатие*/
