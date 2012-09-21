@@ -12,6 +12,7 @@ var CloudServer = {
         cache : {
             allowed : true
         },
+        appcache  : false,
         minification : {
             js    : false,
             css   : false,
@@ -134,9 +135,10 @@ CloudServer.init        = (function(){
     /* Если нужно минимизируем скрипты */
     this.Minify.doit();
     
-    /* создаём файл app cache */
+    
     var lAppCache = CloudServer.AppCache;
-    if(lAppCache && this.Config.server){
+    /* создаём файл app cache */    
+    if(this.Config.appcache && lAppCache && this.Config.server){
         lAppCache.addFiles(
             [{'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
             {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'},
@@ -310,7 +312,8 @@ CloudServer._controller = function(pReq, pRes)
         console.log('reading '+lName);
         
         /* watching is file changed */
-        CloudServer.AppCache.watch(lName);
+        if(CloudServer.Config.appcache)        
+            CloudServer.AppCache.watch(lName);
         
         /* сохраняем указатель на response и имя */
         CloudServer.Responses[lName]    = pRes;
@@ -673,7 +676,10 @@ CloudServer.indexReaded = function(pList){
         /* меняем title */
         pIndex = pIndex.replace('<title>Cloud Commander</title>',
             '<title>' + CloudFunc.setTitle() + '</title>');
-                
+        
+        if(!CloudServer.Config.appcache)
+            pIndex = pIndex.replace('/cloudcmd.appcache', '');
+        
         var lHeader;
         /* если браузер поддерживает gzip-сжатие*/
         lHeader = CloudServer.generateHeaders('index.html', CloudServer.Gzip);
