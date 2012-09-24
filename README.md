@@ -110,7 +110,7 @@ Additional modules
 ---------------
 **Cloud Commander's Server Side** not using additional modules for main functionality.
 But for minification and optimization tricks optional can be
-assingned (and installed) module: [Minify] (https://github.com/coderaiser/minify "Minify")
+assingned (and installed) modules: [Minify] (https://github.com/coderaiser/minify "Minify")
 and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
 
 Install addtitional modules:
