@@ -29,14 +29,15 @@ function readConfig(){
     var lConfig = cloudRequire('./config');
     if(lConfig){
         console.log('config.json readed');
-        console.log(process.argv);
+        
         /* if command line parameter testing resolved 
          * setting config to testing, so server
          * not created, just init and
          * all logs writed to screen
          */
-         var lArg = process.argv[process.argv.length - 1];
+        var lArg = process.argv[process.argv.length - 1];
         if ( lArg === 'test' ||  lArg === 'test\r') {
+            console.log(process.argv);
             lConfig.server  = false;
             lConfig.logs    = false;
         }
