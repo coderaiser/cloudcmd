@@ -64,7 +64,8 @@ disabled in browsers.
 
 * Added ability convert charset from win to unicode on win32.
 
-* From now on disconnecting - trying to do new connection.
+* Added ability to freeze terminal screen on connection lost
+
 
 2012.08.24, Version 0.1.6
  
