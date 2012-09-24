@@ -66,6 +66,8 @@ disabled in browsers.
 
 * Added ability to freeze terminal screen on connection lost
 
+* Added serialisation to socket connection.
+
 
 2012.08.24, Version 0.1.6
  
