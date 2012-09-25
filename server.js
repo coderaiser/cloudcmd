@@ -60,7 +60,7 @@ var CloudServer = {
      * хранащий информацию в виде
      * Statuses[name] = 404;
      */
-    Statuses        : {},    
+    Statuses        : {},
     
     /*
      * queries of file params
@@ -253,8 +253,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
  */
 CloudServer._controller = function(pReq, pRes)
 {
-    /* Читаем содержимое папки, переданное в url
-    */
+    /* Читаем содержимое папки, переданное в url */
     var url = require("url");
     var lParsedUrl = url.parse(pReq.url);
     var pathname = lParsedUrl.pathname;
