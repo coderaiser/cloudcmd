@@ -68,6 +68,8 @@ disabled in browsers.
 
 * Added serialisation to socket connection.
 
+* Added ability to work with terminal to any number of clients
+
 
 2012.08.24, Version 0.1.6
  
