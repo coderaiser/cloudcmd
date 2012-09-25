@@ -70,6 +70,8 @@ disabled in browsers.
 
 * Added ability to work with terminal to any number of clients
 
+* Fixed bug with jquery load in viewer. Jquery could be loaded to late.
+
 
 2012.08.24, Version 0.1.6
  
