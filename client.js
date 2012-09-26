@@ -536,7 +536,7 @@ CloudClient.Util        = (function(){
             lLoadingImage   = LImages_o.loading();
             lErrorImage     = LImages_o.error();
             
-            lErrorImage.className   = 'icon error hidden';
+            Util.hide(lErrorImage);
             
             var lCurrent;        
             if(pPosition){
@@ -565,7 +565,7 @@ CloudClient.Util        = (function(){
                     (lParent && lParent !== lCurrent))
                         lCurrent.appendChild(lLoadingImage);
                 
-                lLoadingImage.className = 'icon loading'; /* показываем загрузку*/
+                Util.show(lLoadingImage); /* показываем загрузку*/
             }
             
             return lRet_b;
@@ -573,7 +573,7 @@ CloudClient.Util        = (function(){
     
         hideLoad        : function(){
             lLoadingImage = LImages_o.loading();                
-            lLoadingImage.className  ='hidden';
+            Util.hide(lLoadingImage);
         },
         
         showError       : function(jqXHR, textStatus, errorThrown){
@@ -594,14 +594,14 @@ CloudClient.Util        = (function(){
             else if(!lText.indexOf('Error: EACCES,'))
                 lText = lText.replace('Error: EACCES, p','P');                            
             
-            lErrorImage.className='icon error';    
+            Util.show(lErrorImage);
             lErrorImage.title = lText;
             
             var lParent = lLoadingImage.parentElement;
             if(lParent)
                 lParent.appendChild(lErrorImage);
                 
-            lLoadingImage.className  ='hidden';
+            Util.hide(lLoadingImage);
                     
             console.log(lText);
         }
@@ -767,34 +767,44 @@ CloudClient.Util        = (function(){
         
         return lPanel;
     };
-        
+    
     this.show = function(pElement){
-        if(pElement.className)
-            pElement.className = pElement.className.replace(' hidden', '');
-        else
-            pElement.className = '';
+        var lClassList = pElement.classList;
+        if(lClassList)
+            lClassList.remove('hidden');
+        else{
+            if(pElement.className)
+                pElement.className = pElement.className.replace(' hidden', '');
+            else
+                pElement.className = '';
+        }
     };
     
     this.showPanel = function(pActive){
         var lPanel = lThis.getPanel(pActive);
                         
         if(lPanel)
-            lPanel.className = 'panel';
+            this.show(lPanel);
     };
     
     this.hidePanel = function(pActive){
         var lPanel = lThis.getPanel(pActive);
         
         if(lPanel)
-            lPanel.className = 'panel hidden';
+            this.hide(lPanel);
     };
     
     this.hide = function(pElement){
-        var lSpaceChar = '';
-        if(pElement.className)
-            lSpaceChar = ' ';
-        pElement.className += lSpaceChar + 'hidden';
-    };    
+        var lClassList = pElement.classList;
+        if(lClassList)
+            lClassList.add('hidden');
+        else{
+            var lSpaceChar = '';
+            if(pElement.className)
+                lSpaceChar = ' ';
+            pElement.className += lSpaceChar + 'hidden';
+        }
+    };
     
     this.removeCurrent = function(pCurrent){
         var lParent = pCurrent.parentElement;
@@ -1167,12 +1177,7 @@ CloudClient.baseInit = (function(){
     var lFM = getById('fm');
     if(lFM)
         lFM.className='localstorage';
-    
-    /* если есть js - показываем правую панель                          */
-    var lRight=getById('right');
-    if(lRight)
-        lRight.className = lRight.className.replace('hidden','');
-    
+        
     /* формируем и округляем высоту экрана
      * при разрешениии 1024x1280:
      * 658 -> 700
