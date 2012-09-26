@@ -72,6 +72,8 @@ disabled in browsers.
 
 * Fixed bug with jquery load in viewer. Jquery could be loaded to late.
 
+* Changed version of FuncyBox to 2.1.0.
+
 
 2012.08.24, Version 0.1.6
  
