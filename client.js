@@ -1192,12 +1192,11 @@ CloudClient.baseInit = (function(){
      
     CloudClient.HEIGHT = lHeight;
      
-    Util.cssSet({id:'show_2panels',
+    Util.cssSet({id:'cloudcmd',
         element:document.head,
         inner:
             '.panel{'                           +
                 'height:' + lHeight +'px;'      +
-                'width:46%;'                    +
             '}'
     });
 });
