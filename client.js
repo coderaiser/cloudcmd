@@ -717,12 +717,14 @@ CloudClient.Util        = (function(){
         return ( lCurrentFileClass.indexOf(lCurrentClass) >= 0 );
     };
     
-    this.getCurrentLink         = function(pCurrentFile){
-        var lCurrent = this.getCurrentFile();
-                
+    this.getCurrentLink         = function(pCurrentFile){                
         var lLink;
-        lLink = (pCurrentFile ? pCurrentFile : lCurrent)
-            .getElementsByTagName('a')[0];
+        if(pCurrentFile)
+            lLink = this.getByTag('a', pCurrentFile)[0];
+        else{
+            var lCurrentFile = this.getCurrentFile();
+            lLink = this.getByTag('a', lCurrentFile)[0];
+        }
             
         if(!lLink)
             this.addCloudStatus({
