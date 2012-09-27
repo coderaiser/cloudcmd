@@ -395,8 +395,8 @@ CloudClient.Util        = (function(){
             else if(typeof lFunc === 'object' && 
                 typeof lFunc.onload === 'function')
                     lFunc.onload();
-                
-        }        
+        
+        }
         return element;
     },
 
@@ -409,7 +409,7 @@ CloudClient.Util        = (function(){
             return this.anyload(pSrc);
         }
             
-        this.anyload({
+        return this.anyload({
             name : 'script',
             src  : pSrc,
             func : pFunc
@@ -876,6 +876,7 @@ CloudClient.Editor = (function(pCurrentFile, pIsReadOnly) {
     /* loading CloudMirror plagin */    
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor.js',{
+        //'editor/ace_editor.js',{
             onload:(function(){
                 cloudcmd.Editor.Keys(pCurrentFile, pIsReadOnly);
             })
@@ -1458,9 +1459,8 @@ CloudClient._createFileTable = function(pElem, pJSON)
     
     /* очищаем панель */
     var i = lElem.childNodes.length;
-    while(i--){
+    while(i--)
         lElem.removeChild(lElem.lastChild);
-    }
     
     /* заполняем панель новыми элементами */    
     lElem.innerHTML = CloudFunc.buildFromJSON(pJSON,true);
