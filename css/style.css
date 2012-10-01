@@ -238,10 +238,7 @@ a:focus { outline: thin dotted; }
 @media only screen and (max-width: 600px){
     #left{
         width:90% !important;
-    }
-    .panel >li{
-        margin:10px;
-    }
+    }    
     /* если правая панель не помещаеться - прячем её */
     #right{
         display:none;
