@@ -1,2 +1,1 @@
-node cloudcmd
-chcp 866
+node cloudcmd || chcp 866
