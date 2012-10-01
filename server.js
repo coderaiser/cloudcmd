@@ -99,9 +99,7 @@ var Path                = cloudRequire('path'),
     Fs                  = cloudRequire('fs'),    /* модуль для работы с файловой системой*/
     Querystring         = cloudRequire('querystring');
 
-/* node v0.4 not contains zlib 
- */
-
+/* node v0.4 not contains zlib  */
 var Zlib                = cloudRequire('zlib');  /* модуль для сжатия данных gzip-ом*/
 if(!Zlib)
     console.log('to use gzip-commpression' +
