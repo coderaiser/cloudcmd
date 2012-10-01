@@ -78,6 +78,10 @@ disabled in browsers.
 
 * Little bit changed styles. Fixed margins in responsive view.
 
+* Fixed bug with minifying, if file do not minimized so allowed set to none.
+
+* Added fix of 866 charset.
+
 
 2012.08.24, Version 0.1.6
  
