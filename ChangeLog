@@ -80,6 +80,8 @@ disabled in browsers.
 
 * Fixed bug with minifying, if file do not minimized so allowed set to none.
 
+* Added fix of 866 charset.
+
 
 2012.08.24, Version 0.1.6
  
