@@ -22,5 +22,5 @@
   "engines": {
     "node": ">=0.4.x"
   },
-  "main": "server.js"
+  "main": "cloudcmd.js"
 }
