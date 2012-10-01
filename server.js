@@ -137,10 +137,13 @@ CloudServer.init        = (function(){
     var lAppCache = CloudServer.AppCache;
     /* создаём файл app cache */    
     if(this.Config.appcache && lAppCache && this.Config.server){
-        lAppCache.addFiles(
-            [{'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
-            {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'},
-            './min/all.min.css']);
+        var lFiles = [{'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
+            {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'}];
+        
+        if(this.Minify._allowed.css)
+            lFiles.push('./min/all.min.css');
+        
+        lAppCache.addFiles(lFiles);
         lAppCache.createManifest();
     }
 });
