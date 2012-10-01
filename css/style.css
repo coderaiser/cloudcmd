@@ -236,9 +236,9 @@ a:focus { outline: thin dotted; }
 */
 /* responsive design */
 @media only screen and (max-width: 600px){
-    #left{
-        width:90% !important;
-    }    
+    .panel{
+        width:94% !important;
+    }
     /* если правая панель не помещаеться - прячем её */
     #right{
         display:none;
