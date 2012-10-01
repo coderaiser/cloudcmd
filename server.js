@@ -131,7 +131,7 @@ CloudServer.init        = (function(){
      */
     this.Minify.setAllowed(CloudServer.Config.minification);
     /* Если нужно минимизируем скрипты */
-    this.Minify.doit();
+    this.Minify._allowed = this.Minify.doit();
     
     
     var lAppCache = CloudServer.AppCache;
