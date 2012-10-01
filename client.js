@@ -875,8 +875,8 @@ CloudClient.KeyBinding = (function(){
 CloudClient.Editor = (function(pCurrentFile, pIsReadOnly) {    
     /* loading CloudMirror plagin */    
     Util.jsload(CloudClient.LIBDIRCLIENT +
-        'editor.js',{
-        //'editor/ace_editor.js',{
+        'editor/_codemirror.js',{
+        //'editor/_ace.js',{
             onload:(function(){
                 cloudcmd.Editor.Keys(pCurrentFile, pIsReadOnly);
             })
