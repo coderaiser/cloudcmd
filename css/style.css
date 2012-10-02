@@ -36,7 +36,8 @@
 }
 
 body{
-  font:16px "Droid Sans Mono";
+    font:16px "Droid Sans Mono";
+    background-color:white;
 }
 
 .menu{
