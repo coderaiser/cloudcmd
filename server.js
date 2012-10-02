@@ -656,12 +656,13 @@ CloudServer.indexReaded = function(pList){
         if(pError){
           return console.log(pError);
         }
-        
-        var lWin32 = process.platform === 'win32';
+                
         /* и сохраняем в кэш */
         CloudServer.Cache.set(CloudServer.INDEX, pIndex);
                 
         pIndex = pIndex.toString();
+        
+        var lWin32 = process.platform === 'win32';
         
         /* если выбрана опция минифизировать скрпиты
          * меняем в index.html обычные css на
@@ -672,7 +673,7 @@ CloudServer.indexReaded = function(pList){
             if(lWin32)
                 lReplace_s = lReplace_s + '/css/reset.css>';
             else
-                lReplace_s = lReplace_s + '"/css/reset.css>"';
+                lReplace_s = lReplace_s + '"/css/reset.css">';
             
             pIndex = pIndex.replace(lReplace_s, '');
             pIndex = pIndex.replace('/css/style.css', CloudServer.Minify.MinFolder + 'all.min.css');
@@ -686,7 +687,7 @@ CloudServer.indexReaded = function(pList){
             '<title>' + CloudFunc.setTitle() + '</title>');
         
         if(!CloudServer.Config.appcache){
-            if(!lWin32)
+            if(lWin32)
                 pIndex = pIndex.replace(' manifest=/cloudcmd.appcache', '');
             else
                 pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
