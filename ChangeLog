@@ -1,7 +1,13 @@
 2012.10.*, Version 0.1.8
 
-* Fixed bug with appcache config. Windows reads file
-not just like Linux.
+* Added ability to shutdown Cloud Commander
+thrue terminal command: "cloudcmd exit"
+
+* Fixed bug with showing terminal and viewer
+at the same time.
+
+* Fixed bug with appcache config. Windows reads
+file not just like Linux.
 
 
 2012.10.01, Version 0.1.7
