@@ -677,8 +677,11 @@ CloudServer.indexReaded = function(pList){
         pIndex = pIndex.replace('<title>Cloud Commander</title>',
             '<title>' + CloudFunc.setTitle() + '</title>');
         
-        if(!CloudServer.Config.appcache)
-            pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
+        if(!CloudServer.Config.appcache){
+            if(process.platform === 'win32')
+                pIndex = pIndex.replace(' manifest=/cloudcmd.appcache', '');
+            else pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
+        }
         
         var lHeader;
         /* если браузер поддерживает gzip-сжатие*/
