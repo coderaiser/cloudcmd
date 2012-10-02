@@ -142,15 +142,26 @@ CloudClient.Util        = (function(){
     var lXMLHTTP;
     
     this.addClass               = function(pElement, pClass){
+        var lRet_b = true;
+        
         var lClassList = pElement.classList;
-        if(lClassList)
-            lClassList.add(pClass);
+        if(lClassList){
+            if( !lClassList.contains(pClass) )
+                lClassList.add(pClass);
+            else
+                lRet_b = false;
+        }
         else{
             var lSpaceChar = '';
             if(pElement.className)
                 lSpaceChar = ' ';
-            pElement.className += lSpaceChar + 'hidden';
+            if( !pElement.contains(pClass) )
+                pElement.className += lSpaceChar + pClass;
+            else
+                lRet_b = false;
         }
+        
+        return lRet_b;
     };
     
     this.ajax                   = function(pParams){
@@ -584,7 +595,7 @@ CloudClient.Util        = (function(){
         },
     
         hideLoad        : function(){
-            lLoadingImage = LImages_o.loading();                
+            lLoadingImage = LImages_o.loading();
             Util.hide(lLoadingImage);
         },
         
@@ -791,14 +802,17 @@ CloudClient.Util        = (function(){
     };
     
     this.hidePanel              = function(pActive){
+        var lRet_b = false;
         var lPanel = lThis.getPanel(pActive);
         
         if(lPanel)
-            this.hide(lPanel);
+            lRet_b = this.hide(lPanel);
+        
+        return lRet_b;
     };
     
     this.hide                   = function(pElement){
-        return this.addClass(pElement, 'hidden');   
+        return this.addClass(pElement, 'hidden');
     };
     
     this.removeClass            = function(pElement, pClass){
