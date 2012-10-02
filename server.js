@@ -657,6 +657,7 @@ CloudServer.indexReaded = function(pList){
           return console.log(pError);
         }
         
+        var lWin32 = process.platform === 'win32';
         /* и сохраняем в кэш */
         CloudServer.Cache.set(CloudServer.INDEX, pIndex);
                 
@@ -666,9 +667,16 @@ CloudServer.indexReaded = function(pList){
          * меняем в index.html обычные css на
          * минифицированый
          */
-        if(CloudServer.Minify._allowed.css)
-            pIndex = pIndex.replace('<link rel=stylesheet href="/css/reset.css">', '')
-                .replace('/css/style.css', CloudServer.Minify.MinFolder + 'all.min.css');
+        if(CloudServer.Minify._allowed.css){
+            var lReplace_s = '<link rel=stylesheet href=';
+            if(lWin32)
+                lReplace_s = lReplace_s + '/css/reset.css>';
+            else
+                lReplace_s = lReplace_s + '"/css/reset.css>"';
+            
+            pIndex = pIndex.replace(lReplace_s, '');
+            pIndex = pIndex.replace('/css/style.css', CloudServer.Minify.MinFolder + 'all.min.css');
+        }
         
         pIndex = pIndex.toString().replace('<div id=fm class=no-js>',
             '<div id=fm class=no-js>'+pList);
@@ -678,9 +686,10 @@ CloudServer.indexReaded = function(pList){
             '<title>' + CloudFunc.setTitle() + '</title>');
         
         if(!CloudServer.Config.appcache){
-            if(process.platform === 'win32')
+            if(!lWin32)
                 pIndex = pIndex.replace(' manifest=/cloudcmd.appcache', '');
-            else pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
+            else
+                pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
         }
         
         var lHeader;
