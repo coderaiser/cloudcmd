@@ -9,6 +9,8 @@ at the same time.
 * Fixed bug with appcache config. Windows reads
 file not just like Linux.
 
+* Added ability to update thrue git.
+
 
 2012.10.01, Version 0.1.7
 
