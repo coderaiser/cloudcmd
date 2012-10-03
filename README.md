@@ -49,6 +49,10 @@ Editor's hot keys
 - F4                - open CodeMirror editor
 - Esc               - close CodeMirror editor
 
+Documentation
+---------------
+JS Doc documentation could be found in [http://jsdoc.info/coderaiser/cloudcmd/](http://jsdoc.info/coderaiser/cloudcmd/)
+
 Installing
 ---------------
 **Cloud Commander** installing is very easy. All you need it's just clone
