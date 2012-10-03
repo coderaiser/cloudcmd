@@ -11,6 +11,9 @@ file not just like Linux.
 
 * Added ability to update thrue git.
 
+* Added ability to change charset on terminal only if
+it's build in command on win32.
+
 
 2012.10.01, Version 0.1.7
 
