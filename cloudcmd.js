@@ -69,7 +69,10 @@ function writeLogsToFile(){
     })(process.stdout.write);
 }
 
-/* function do safe require of needed module */
+/**
+ * function do safe require of needed module
+ * @param pModule
+ */
 function cloudRequire(pModule){
   try{
       return require(pModule);
