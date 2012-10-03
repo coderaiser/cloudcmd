@@ -10,7 +10,8 @@ var Config = readConfig();
 
 Config ? Server.start(Config) : Server.start();
 
-update.get();
+if(update)
+    update.get();
 
 
 function readConfig(){
