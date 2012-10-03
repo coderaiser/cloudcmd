@@ -350,9 +350,9 @@ CloudClient.Util        = (function(){
                     };*/ /* ie */
 
                 /* if object - then onload or onerror */
-                }else if (typeof lFunc === 'object') {
+                }else if ( this.isObject(lFunc) ) {
                     if(lFunc.onload &&
-                        typeof lFunc.onload === 'function'){
+                        this.isFunction(lFunc.onload)){
                             element.onload   = lFunc.onload;
                             /*
                             element.onreadystatechange = function(){
@@ -403,9 +403,8 @@ CloudClient.Util        = (function(){
             if(typeof lFunc === 'function')
                 lFunc();
             
-            else if(typeof lFunc === 'object' && 
-                typeof lFunc.onload === 'function')
-                    lFunc.onload();
+            else if( this.isObject(lFunc) && this.isFunction(lFunc.onload) )
+                lFunc.onload();
         
         }
         return element;
@@ -726,6 +725,22 @@ CloudClient.Util        = (function(){
         var lCurrentFileClass   = pCurrentFile.className;
         
         return ( lCurrentFileClass.indexOf(lCurrentClass) >= 0 );
+    };
+    
+    /**
+     * functions check is pObject is object
+     * @param pObject
+     */
+    this.isObject               = function(pObject){
+        return typeof pObject === 'object';
+    };
+    
+    /**
+     * functions check is pFunction is function
+     * @param pFunction
+     */
+    this.isFunction             = function(pFunction){
+        return typeof pFunction === 'function';
     };
     
     this.getCurrentLink         = function(pCurrentFile){                
@@ -1510,7 +1525,7 @@ CloudClient._getJSONfromFileTable=function()
      */
     i=2; /* пропускам Path и Header*/
     
-    for(;i<lLI.length;i++)
+    for(; i <lLI.length;i++)
     {
         var lChildren = lLI[i].children;
         
