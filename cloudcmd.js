@@ -1,11 +1,16 @@
 "use strict";
-var Server  = cloudRequire('./server'),
+
+var LIBDIRSERVER = './lib/server/',
+    Server  = cloudRequire('./server'),
     path    = cloudRequire('path'),
-    fs      = cloudRequire('fs');
+    fs      = cloudRequire('fs'),
+    update  = cloudRequire(LIBDIRSERVER + 'update');
 
 var Config = readConfig();
 
 Config ? Server.start(Config) : Server.start();
+
+update.get();
 
 
 function readConfig(){
