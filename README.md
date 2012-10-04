@@ -26,7 +26,6 @@ we moves to *limited mode*.
 
 Limited-mode features
 ---------------
-- only 1 panel available
 - no keybinding
 - no local caching
 - full loading of all web page(with styles, js-scripts, html-page etc).
