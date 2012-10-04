@@ -18,6 +18,9 @@ it's build in command on win32.
 Cloud Commander works in testing mode and server do not
 started.
 
+* Added more demo mirrors to readme (appfog, cloudfoundry).
+
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
