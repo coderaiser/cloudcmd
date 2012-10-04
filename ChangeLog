@@ -22,6 +22,8 @@ started.
 
 * Removed resing event from jquery-terminal.
 
+* Fixed bug with error code of program execution in terminal.
+
 
 2012.10.01, Version 0.1.7
 
