@@ -14,6 +14,9 @@ file not just like Linux.
 * Added ability to change charset on terminal only if
 it's build in command on win32.
 
+* Fixed bug with testing mode. If was same arguments,
+Cloud Commander works in testing mode and server do not
+started.
 
 2012.10.01, Version 0.1.7
 

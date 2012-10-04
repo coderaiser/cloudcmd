@@ -176,8 +176,12 @@ CloudServer.start = function (pConfig) {
         !process.env.HOME.indexOf('/opt/haibu')) {
             this.IP = '0.0.0.0';
     }
+    
+    
+    console.log(process.argv);
+    console.log(this.Config);
     /* server mode or testing mode */
-    if (!process.argv[2] && this.Config.server) {
+    if (this.Config.server) {
         var http = require('http');
 
         try {
@@ -193,9 +197,8 @@ CloudServer.start = function (pConfig) {
             console.log('Cloud Commander server could not started');
             console.log(pError);
         }
-    }else{
+    }else
         console.log('Cloud Commander testing mode');
-    }    
 };
 
 
