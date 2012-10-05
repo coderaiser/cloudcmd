@@ -179,7 +179,7 @@ CloudServer.start = function (pConfig) {
     
     
     console.log(process.argv);
-    console.log(this.Config);
+
     /* server mode or testing mode */
     if (this.Config.server) {
         var http = require('http');

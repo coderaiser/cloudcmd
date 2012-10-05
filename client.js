@@ -728,19 +728,35 @@ CloudClient.Util        = (function(){
     };
     
     /**
-     * functions check is pObject is object
-     * @param pObject
+     * functions check is pVarible is boolean
+     * @param pVarible
      */
-    this.isObject               = function(pObject){
-        return typeof pObject === 'object';
+    this.isBoolean               = function(pVarible){
+        return this.isType(pVarible, 'boolean');
     };
     
     /**
-     * functions check is pFunction is function
-     * @param pFunction
+     * functions check is pVarible is object
+     * @param pVarible
      */
-    this.isFunction             = function(pFunction){
-        return typeof pFunction === 'function';
+    this.isObject               = function(pVarible){
+        return this.isType(pVarible, 'object');
+    };
+    
+    /**
+     * functions check is pVarible is function
+     * @param pVarible
+     */
+    this.isFunction             = function(pVarible){
+        return this.isType(pVarible, 'function');
+    };
+    /**
+     * functions check is pVarible is pType
+     * @param pVarible
+     * @param pType
+     */    
+    this.isType                 = function(pVarible, pType){
+        return typeof pVarible === pType;
     };
     
     this.getCurrentLink         = function(pCurrentFile){                
@@ -901,13 +917,13 @@ CloudClient.KeyBinding = (function(){
 });
 
 /* function loads and shows editor */
-CloudClient.Editor = (function(pCurrentFile, pIsReadOnly) {    
+CloudClient.Editor = (function(pIsReadOnly) {    
     /* loading CloudMirror plagin */    
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor/_codemirror.js',{
         //'editor/_ace.js',{
             onload:(function(){
-                cloudcmd.Editor.Keys(pCurrentFile, pIsReadOnly);
+                cloudcmd.Editor.Keys(pIsReadOnly);
             })
     });
 });
@@ -931,7 +947,7 @@ CloudClient.GoogleAnalytics = (function(){
             Util.jsload('lib/client/google_analytics.js');
         },5000);
         
-        if(typeof lFunc === 'function')
+        if( Util.isFunction(lFunc) )
             lFunc();
         
         document.onmousemove = lFunc;
@@ -1056,7 +1072,7 @@ CloudClient._editFileName = (function(pParent){
                  * setted up earlier
                  */
                 document.onclick = lDocumentOnclick;
-                if(typeof lDocumentOnclick === 'function')
+                if( Util.isFunction(lDocumentOnclick) )
                     lDocumentOnclick();
                 
             });
@@ -1098,12 +1114,12 @@ CloudClient._setCurrent=(function(){
             }
              /* если мы попали сюда с энтера*/
              if(pFromEnter===true){
-                if(typeof this.ondblclick === 'function')
+                if( Util.isFunction(this.ondblclick) )
                     this.ondblclick(this);
                     /*  enter pressed on file */
                 else{
                     var lA = this.getElementsByTagName('a')[0];
-                    if(typeof lA.ondblclick === 'function')
+                    if( Util.isFunction(lA.ondblclick) )
                         lA.ondblclick(this);
                 }
              }/* если мы попали сюда от клика мышки */
@@ -1169,7 +1185,7 @@ CloudClient.baseInit = (function(){
         applicationCache.onupdateready = function(){
             console.log('app cacheed');
             location.reload();
-            if(typeof lFunc === 'function')
+            if( Util.isFunction(lFunc) )
                 lFunc();
         };
     }
@@ -1266,8 +1282,8 @@ CloudClient._changeLinks = function(pPanelID){
         var lTarget = pEvent.currentTarget || pEvent.target;        
         Util.setCurrentFile(lTarget);
         
-        if(typeof CloudCommander.Menu === 'function'){            
-            CloudCommander.Menu({
+        if(Util.isFunction(cloudcmd.Menu) ){            
+            cloudcmd.Menu({
                 x: pEvent.x,
                 y: pEvent.y
             });
