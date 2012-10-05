@@ -34,6 +34,7 @@ problem with menu showing.
 
 * Fixed bug with empty directorys. If directory
 was empty, we could not go in.
+
 * Removed packed versions of files, uglifing
 would be doing on-a-fly
 
