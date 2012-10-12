@@ -26,6 +26,9 @@ started.
 
 * Fixed bug with menu itmes edit and view.
 
+* Added function jsLoadOnLoad, thet loads js files
+one-by-one, and then calls callback if needed.
+
 
 2012.10.01, Version 0.1.7
 
