@@ -1,8 +1,6 @@
 /* Функция которая возвратит обьект CloudCommander
- * @window - обьект window
- * @document - обьект document
  * @CloudFunc - обьект содержащий общий функционал
- *              клиентский и серверный
+ *  клиентский и серверный
  */
 
 var CloudCommander = (function(){
@@ -165,8 +163,7 @@ CloudClient.Util        = (function(){
     };
     
     this.ajax                   = function(pParams){
-        /* if on webkit
-         */
+        /* if on webkit */
         if(window.XMLHttpRequest){
             if(!lXMLHTTP)
                 lXMLHTTP = new XMLHttpRequest();
@@ -177,7 +174,7 @@ CloudClient.Util        = (function(){
             
             lXMLHTTP.open(lMethod, pParams.url, true);
             lXMLHTTP.send(null);
-            
+                        
             var lSuccess_f = pParams.success;
             if(typeof lSuccess_f !== 'function')
             console.log('error in Util.ajax onSuccess:', pParams);
@@ -251,7 +248,7 @@ CloudClient.Util        = (function(){
     },
     
     this.loadOnload             = function(pFunc_a){
-        if(pFunc_a instanceof Array) {
+        if( this.isArray(pFunc_a) ) {
                 
                 var lFunc_f = pFunc_a.pop();
                 
@@ -265,16 +262,36 @@ CloudClient.Util        = (function(){
     };
     
     this.anyLoadOnload          = function(pParams_a){
-        if(pParams_a instanceof Array) {
+        if( this.isArray(pParams_a) ) {
+            var lParam = pParams_a.pop();
+                        
+            if(lParam && !lParam.func)
+                lParam.func = function(){
+                    lThis.anyLoadOnload(pParams_a);
+                };
                 
-                var lParams_o = pParams_a.pop();
-                            
-                if(!lParams_o.func)
-                    lParams_o.func = function(){                    
-                        lThis.anyLoadOnload(pParams_a);  
-                    };
-                                        
-                return this.anyload(lParams_o);
+            this.anyload(lParam);
+        }
+    };
+    
+    /**
+     * function loads a couple js files one-by-one
+     * @pSrc_a ([String1, ..., StringN])
+     * @pCallBack (functin)
+     */
+    this.jsLoadOnLoad           = function (pSrc_a, pCallBack){
+        if( this.isArray(pSrc_a) ) {
+            var n = pSrc_a.length;
+            
+            for(var i=0; i<n; i++)
+                pSrc_a[i] = {
+                    name: 'script',
+                    src : pSrc_a[i]
+                };
+            
+            pSrc_a[n-1].func = pCallBack;
+            
+            this.anyLoadOnload(pSrc_a);
         }
     };
     
@@ -293,11 +310,14 @@ CloudClient.Util        = (function(){
         async: false, inner: 'id{color:red, }, class:'', not_append: false}
      */
     this.anyload                = function(pParams_o){
+        
+        if( !pParams_o ) return;
+        
         /* if a couple of params was
          * processing every of params
          * and quit
          */
-        if(pParams_o instanceof Array){
+        if( this.isArray(pParams_o) ){
             var lElements_a = [];
             for(var i=0; i < pParams_o.length; i++)
                 lElements_a[i] = this.anyload(pParams_o[i]);
@@ -427,17 +447,18 @@ CloudClient.Util        = (function(){
     },
     
     /* Функция создаёт елемент style и записывает туда стили 
- * @pParams_o - структура параметров, заполняеться таким
- * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
- * все параметры опциональны
- */
-        
+     * @pParams_o - структура параметров, заполняеться таким
+     * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
+     * все параметры опциональны
+     */
+    
     this.cssSet                 = function(pParams_o){
         pParams_o.name      = 'style';
         pParams_o.parent    = pParams_o.parent || document.head;
         
         return this.anyload(pParams_o);                
     },
+    
     /* Function loads external css files 
      * @pParams_o - структура параметров, заполняеться таким
      * образом: {src: ' ',func: '', id: '', element: '', inner: ''}
@@ -725,6 +746,14 @@ CloudClient.Util        = (function(){
         var lCurrentFileClass   = pCurrentFile.className;
         
         return ( lCurrentFileClass.indexOf(lCurrentClass) >= 0 );
+    };
+    
+    /**
+     * functions check is pVarible is array
+     * @param pVarible
+     */
+    this.isArray                = function(pVarible){
+        return pVarible instanceof Array;
     };
     
     /**
