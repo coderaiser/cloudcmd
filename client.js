@@ -279,7 +279,7 @@ CloudClient.Util        = (function(){
      * @pSrc_a ([String1, ..., StringN])
      * @pCallBack (functin)
      */
-    this.jsLoadOnLoad           = function (pSrc_a, pCallBack){
+    this.jsloadOnLoad           = function (pSrc_a, pCallBack){
         if( this.isArray(pSrc_a) ) {
             var n = pSrc_a.length;
             
@@ -289,7 +289,7 @@ CloudClient.Util        = (function(){
                     src : pSrc_a[i]
                 };
             
-            pSrc_a[n-1].func = pCallBack;
+            pSrc_a[0].func = pCallBack;
             
             this.anyLoadOnload(pSrc_a);
         }
