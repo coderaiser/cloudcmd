@@ -282,27 +282,6 @@ CloudClient.Util        = (function(){
     };
     
     /**
-     * function loads a couple js files one-by-one
-     * @pSrc_a ([String1, ..., StringN])
-     * @pCallBack (functin)
-     */
-    this.jsloadOnLoad           = function (pSrc_a, pCallBack){        
-        if( this.isArray(pSrc_a) ) {
-            var n = pSrc_a.length;
-            
-            for(var i=0; i<n; i++)
-                pSrc_a[i] = {
-                    name: 'script',
-                    src : pSrc_a[i]
-                };
-            
-            pSrc_a[0].func = pCallBack;
-            
-            this.anyLoadOnload(pSrc_a);
-        }        
-    };
-    
-    /* 
      * Функция создаёт элемент и
      * загружает файл с src.
      * @pName       - название тэга
@@ -313,7 +292,7 @@ CloudClient.Util        = (function(){
      * @pStyle      - стиль
      * @pId         - id
      * @pElement    - элемент, дочерним которо будет этот
-     * @pParams_o = {name: '', src: ' ',func: '', style: '', id: '', parent: '',
+     * @param pParams_o = {name: '', src: ' ',func: '', style: '', id: '', parent: '',
         async: false, inner: 'id{color:red, }, class:'', not_append: false}
      */
     this.anyload                = function(pParams_o){
@@ -326,21 +305,23 @@ CloudClient.Util        = (function(){
          */
         if( this.isArray(pParams_o) ){
             var lElements_a = [];
-            for(var i=0; i < pParams_o.length; i++)
+            for(var i=0, n = pParams_o.length; i < n ; i++)
                 lElements_a[i] = this.anyload(pParams_o[i]);
             
             return lElements_a;
         }        
         
         /* убираем путь к файлу, оставляя только название файла */
-        var lName   = pParams_o.name,
-            lID     = pParams_o.id,
-            lClass  = pParams_o.className,
-            lSrc    = pParams_o.src,
-            lFunc   = pParams_o.func,
-            lAsync  = pParams_o.async,
-            lParent = pParams_o.parent;
-                
+        var lName       = pParams_o.name,
+            lID         = pParams_o.id,
+            lClass      = pParams_o.className,
+            lSrc        = pParams_o.src,
+            lFunc       = pParams_o.func,
+            lAsync      = pParams_o.async,
+            lParent     = pParams_o.parent,
+            lInner      = pParams_o.inner,
+            lNotAppend  = pParams_o.not_append;
+        
         if(!lID && lSrc)
             lID = this.getIdBySrc(lSrc);
         
@@ -371,6 +352,7 @@ CloudClient.Util        = (function(){
             
             if(lClass)
                 element.className = lClass;
+            
             /* if working with external css
              * using href in any other case
              * using src
@@ -427,11 +409,11 @@ CloudClient.Util        = (function(){
             if(lAsync || lAsync === undefined)
                 element.async = true;
             
-            if(!pParams_o.not_append)
+            if(!lNotAppend)
                 (lParent || document.body).appendChild(element);
                                     
-            if(pParams_o.inner){
-                element.innerHTML = pParams_o.inner;
+            if(lInner){
+                element.innerHTML = lInner;
             }
         }
         /* если js-файл уже загружен 
@@ -442,9 +424,9 @@ CloudClient.Util        = (function(){
                 lFunc();
             
             else if( this.isObject(lFunc) && this.isFunction(lFunc.onload) )
-                lFunc.onload();
-        
+                lFunc.onload();        
         }
+        
         return element;
     },
 
@@ -456,7 +438,7 @@ CloudClient.Util        = (function(){
             
             return this.anyload(pSrc);
         }
-            
+        
         return this.anyload({
             name : 'script',
             src  : pSrc,
