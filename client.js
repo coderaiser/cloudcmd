@@ -257,20 +257,25 @@ CloudClient.Util        = (function(){
                     
                 return this.loadOnload(pFunc_a);
         }
-        else if(typeof pFunc_a === 'function')                    
+        else if(typeof pFunc_a === 'function')
             return pFunc_a();
     };
     
-    this.anyLoadOnload          = function(pParams_a){
+    this.anyLoadOnload          = function(pParams_a, pFunc){        
         if( this.isArray(pParams_a) ) {
             var lParam = pParams_a.pop();
-                        
-            if(lParam && !lParam.func)
+            
+            if(Util.isString(lParam) )
+                lParam = { src : lParam };
+            
+            if(lParam && !lParam.func){
                 lParam.func = function(){
-                    lThis.anyLoadOnload(pParams_a);
+                    Util.anyLoadOnload(pParams_a, pFunc);
                 };
-                
-            this.anyload(lParam);
+                this.anyload(lParam);
+            
+            }else if( this.isFunction(pFunc) )
+                pFunc();
         }
     };
     
@@ -279,7 +284,7 @@ CloudClient.Util        = (function(){
      * @pSrc_a ([String1, ..., StringN])
      * @pCallBack (functin)
      */
-    this.jsloadOnLoad           = function (pSrc_a, pCallBack){
+    this.jsloadOnLoad           = function (pSrc_a, pCallBack){        
         if( this.isArray(pSrc_a) ) {
             var n = pSrc_a.length;
             
@@ -292,7 +297,7 @@ CloudClient.Util        = (function(){
             pSrc_a[0].func = pCallBack;
             
             this.anyLoadOnload(pSrc_a);
-        }
+        }        
     };
     
     /* 
@@ -323,15 +328,17 @@ CloudClient.Util        = (function(){
                 lElements_a[i] = this.anyload(pParams_o[i]);
             
             return lElements_a;
-        }
+        }        
         
         /* убираем путь к файлу, оставляя только название файла */
-        var lID     = pParams_o.id;
-        var lClass  = pParams_o.className;
-        var lSrc    = pParams_o.src;
-        var lFunc   = pParams_o.func;
-        var lAsync  = pParams_o.async;
-        
+        var lName   = pParams_o.name,
+            lID     = pParams_o.id,
+            lClass  = pParams_o.className,
+            lSrc    = pParams_o.src,
+            lFunc   = pParams_o.func,
+            lAsync  = pParams_o.async,
+            lParent = pParams_o.parent;
+                
         if(!lID && lSrc)
             lID = this.getIdBySrc(lSrc);
         
@@ -339,10 +346,23 @@ CloudClient.Util        = (function(){
         /* если скрипт еще не загружен */
         if(!element)
         {
-            if(!pParams_o.name)
-                return {code: -1, text: 'name can not be empty'};
-            
-            element     = document.createElement(pParams_o.name);
+            if(!lName && lSrc){
+                
+                var lDot = lSrc.lastIndexOf('.');
+                var lExt =  lSrc.substr(lDot);
+                switch(lExt){
+                    case '.js':
+                        lName = 'script';
+                        break;
+                    case '.css':
+                        lName = 'link';
+                        lParent = document.head;
+                        break;
+                    default:
+                        return {code: -1, text: 'name can not be empty'};
+                }
+            }
+            element     = document.createElement(lName);
             
             if(lID)
                 element.id  = lID;
@@ -353,15 +373,15 @@ CloudClient.Util        = (function(){
              * using href in any other case
              * using src
              */
-            pParams_o.name === 'link' ? 
+            lName === 'link' ? 
                   ((element.href = lSrc) && (element.rel = 'stylesheet'))
                 : element.src  = lSrc;
                         
             /* if passed arguments function
              * then it's onload by default
              */        
-            if(pParams_o.func)
-                if(typeof lFunc === 'function'){
+            if(lFunc){
+                if( Util.isFunction(lFunc) )
                     element.onload = lFunc;
                     /*
                     element.onreadystatechange = function(){
@@ -370,18 +390,15 @@ CloudClient.Util        = (function(){
                     };*/ /* ie */
 
                 /* if object - then onload or onerror */
-                }else if ( this.isObject(lFunc) ) {
-                    if(lFunc.onload &&
-                        this.isFunction(lFunc.onload)){
+                else if ( this.isObject(lFunc) )
+                    if(lFunc.onload && this.isFunction(lFunc.onload))
                             element.onload   = lFunc.onload;
                             /*
                             element.onreadystatechange = function(){
                                 if(this.readyState === 'loaded')
                                 lFunc();
-                            };*/ /* ie */                            
-                        }
-                }
-                
+                            };*/ /* ie */
+            }
             /* if element (js/css) will not loaded
              * it would be removed from DOM tree
              * and error image would be shown
@@ -397,20 +414,19 @@ CloudClient.Util        = (function(){
                         status : 404
                     });
                     
-                    if(lFunc && lFunc.onerror &&
-                        typeof lFunc.onerror === 'function')
-                            lFunc.onerror();
+                    if(lFunc && lFunc.onerror && Util.isFunction(lFunc.onerror) )
+                        lFunc.onerror();
             });
             
             if(pParams_o.style){
-                element.style.cssText=pParams_o.style;
+                element.style.cssText = pParams_o.style;
             }
                         
             if(lAsync || lAsync === undefined)
                 element.async = true;
             
             if(!pParams_o.not_append)
-                (pParams_o.parent || document.body).appendChild(element);
+                (lParent || document.body).appendChild(element);
                                     
             if(pParams_o.inner){
                 element.innerHTML = pParams_o.inner;
@@ -420,7 +436,7 @@ CloudClient.Util        = (function(){
          * запускаем функцию onload
          */
         else if(lFunc){
-            if(typeof lFunc === 'function')
+            if( this.isFunction(lFunc) )
                 lFunc();
             
             else if( this.isObject(lFunc) && this.isFunction(lFunc.onload) )
@@ -771,7 +787,13 @@ CloudClient.Util        = (function(){
     this.isObject               = function(pVarible){
         return this.isType(pVarible, 'object');
     };
-    
+    /**
+     * functions check is pVarible is string
+     * @param pVarible
+     */
+     this.isString               = function(pVarible){
+        return this.isType(pVarible, 'string');
+    };
     /**
      * functions check is pVarible is function
      * @param pVarible
