@@ -268,10 +268,12 @@ CloudClient.Util        = (function(){
             if(Util.isString(lParam) )
                 lParam = { src : lParam };
             
+            
             if(lParam && !lParam.func){
                 lParam.func = function(){
                     Util.anyLoadOnload(pParams_a, pFunc);
-                };
+                };            
+                
                 this.anyload(lParam);
             
             }else if( this.isFunction(pFunc) )
