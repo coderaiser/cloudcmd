@@ -465,17 +465,20 @@ CloudClient.Util        = (function(){
      * все параметры опциональны
      */
     this.cssLoad                = function(pParams_o){
-         if(pParams_o instanceof Array){
-            for(var i=0; i < pParams_o.length; i++){
+         if( this.isArray(pParams_o) ){
+            for(var i = 0, n = pParams_o.length; i < n; i++){
                 pParams_o[i].name = 'link';
                 pParams_o[i].parent   = pParams_o.parent || document.head;                
             }
             
             return this.anyload(pParams_o);
-        }
+        } 
         
+        else if( this.isString(pParams_o) )
+            pParams_o = { src: pParams_o };
+                
         pParams_o.name      = 'link';
-        pParams_o.parent   = pParams_o.parent || document.head;
+        pParams_o.parent    = pParams_o.parent || document.head;
 
         return this.anyload(pParams_o);
     };
@@ -1631,7 +1634,7 @@ return CloudClient;
 
 try{
     window.onload = function(){
-        'use strict';        
+        'use strict';
         
         /* базовая инициализация*/
         CloudCommander.init();
