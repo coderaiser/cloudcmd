@@ -214,8 +214,8 @@ CloudServer.generateHeaders = function(pName, pGzip){
     var lCacheControl       = 0;
     var lContentEncoding    = '';
     
-    /* высылаем заголовок в зависимости от типа файла */         
-    var lDot = pName.lastIndexOf('.');    
+    /* высылаем заголовок в зависимости от типа файла */
+    var lDot = pName.lastIndexOf('.');
     var lExt =  pName.substr(lDot);
     
     if(lExt === '.appcache')
