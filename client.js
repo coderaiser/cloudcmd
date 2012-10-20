@@ -510,6 +510,10 @@ CloudClient.Util        = (function(){
             }
         });
     };
+    
+    this.socketLoad             = function(){
+        Util.jsload('lib/client/socket.js');
+    };
         
     this.getByTag               = function(pTag, pElement){
         return (pElement || document).getElementsByTagName(pTag);
@@ -1206,6 +1210,9 @@ CloudClient.init = (function(){
     KeyBinding  = cloudcmd.KeyBinding;
     getByClass  = Util.getByClass;
     getById     = Util.getById;
+    
+    
+    Util.socketLoad();
     
     if(!document.body.scrollIntoViewIfNeeded){
         this.OLD_BROWSER = true;
