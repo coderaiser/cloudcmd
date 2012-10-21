@@ -3,7 +3,7 @@
 /* Обьект содержащий все функции и переменные 
  * серверной части Cloud Commander'а
  */
-var CloudServer = {
+var CloudServer         = {
     /* main Cloud Commander configuration
      * readed from config.json if it's
      * exist
@@ -90,17 +90,17 @@ var CloudServer = {
             '.appcache' : 'text/cache-manifest',
             '.mp3'      : 'audio/mpeg'
     }
-};
+},
 
-var DirPath             = '/';
+    DirPath             = '/',
 
 /* модуль для работы с путями*/
-var Path                = cloudRequire('path'),
+    Path                = cloudRequire('path'),
     Fs                  = cloudRequire('fs'),    /* модуль для работы с файловой системой*/
-    Querystring         = cloudRequire('querystring');
+    Querystring         = cloudRequire('querystring'),
 
 /* node v0.4 not contains zlib  */
-var Zlib                = cloudRequire('zlib');  /* модуль для сжатия данных gzip-ом*/
+    Zlib                = cloudRequire('zlib');  /* модуль для сжатия данных gzip-ом*/
 if(!Zlib)
     console.log('to use gzip-commpression' +
         'you should use newer node version\n');
