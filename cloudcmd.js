@@ -8,7 +8,7 @@ var LIBDIRSERVER = './lib/server/',
 
 var Config = readConfig();
 
-Config ? Server.start(Config) : Server.start();
+Server.start(Config);
 
 if(update)
     update.get();
@@ -52,11 +52,10 @@ function readConfig(){
             console.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
             writeLogsToFile();
-        }
-        
-        return lConfig;
+        }        
     }
-    else return false;
+        
+    return lConfig;
 }
 
 /* function sets stdout to file log.txt */
