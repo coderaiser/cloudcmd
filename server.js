@@ -706,6 +706,7 @@ CloudServer.indexReaded = function(pList){
             Zlib.gzip(pIndex,
                 CloudServer.getGzipDataFunc(lHeader, CloudServer.INDEX));
         }
+        
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
             CloudServer.sendResponse(lHeader, pIndex, CloudServer.INDEX);
