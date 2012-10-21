@@ -134,9 +134,6 @@ CloudClient.Cache.clear = (function(){
 
 /* Object contain additional system functional */
 CloudClient.Util        = (function(){
-    
-    /* Load file countent thrue ajax
-     */
     var lXMLHTTP;
     
     this.addClass               = function(pElement, pClass){
@@ -162,6 +159,7 @@ CloudClient.Util        = (function(){
         return lRet_b;
     };
     
+    /* Load file countent thrue ajax */
     this.ajax                   = function(pParams){
         /* if on webkit */
         if(window.XMLHttpRequest){
@@ -311,7 +309,6 @@ CloudClient.Util        = (function(){
             return lElements_a;
         }        
         
-        /* убираем путь к файлу, оставляя только название файла */
         var lName       = pParams_o.name,
             lID         = pParams_o.id,
             lClass      = pParams_o.className,
@@ -322,17 +319,19 @@ CloudClient.Util        = (function(){
             lInner      = pParams_o.inner,
             lNotAppend  = pParams_o.not_append;
         
+        /* убираем путь к файлу, оставляя только название файла */
         if(!lID && lSrc)
             lID = this.getIdBySrc(lSrc);
         
         var element = getById(lID);
+        
         /* если скрипт еще не загружен */
         if(!element)
         {
             if(!lName && lSrc){
                 
-                var lDot = lSrc.lastIndexOf('.');
-                var lExt =  lSrc.substr(lDot);
+                var lDot = lSrc.lastIndexOf('.'),
+                    lExt =  lSrc.substr(lDot);
                 switch(lExt){
                     case '.js':
                         lName = 'script';
@@ -345,7 +344,7 @@ CloudClient.Util        = (function(){
                         return {code: -1, text: 'name can not be empty'};
                 }
             }
-            element     = document.createElement(lName);
+            element         = document.createElement(lName);
             
             if(lID)
                 element.id  = lID;

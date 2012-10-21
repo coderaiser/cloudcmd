@@ -210,13 +210,12 @@ CloudServer.start = function (pConfig) {
  * @param pGzip - данные сжаты gzip'ом
  */
 CloudServer.generateHeaders = function(pName, pGzip){
-    var lType               = '';
-    var lCacheControl       = 0;
-    var lContentEncoding    = '';
-    
-    /* высылаем заголовок в зависимости от типа файла */
-    var lDot = pName.lastIndexOf('.');
-    var lExt =  pName.substr(lDot);
+    var lType               = '',
+        lCacheControl       = 0,
+        lContentEncoding    = '',
+        
+        lDot                = pName.lastIndexOf('.'),
+        lExt                =  pName.substr(lDot);
     
     if(lExt === '.appcache')
         lCacheControl = 1;
@@ -234,7 +233,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
 
     if(!lCacheControl)
         lCacheControl = 31337 * 21;    
-    
+        
     return {
         /* if type of file any, but img - 
          * then we shoud specify charset 
@@ -697,7 +696,9 @@ CloudServer.indexReaded = function(pList){
         }
         
         var lHeader;
-        /* если браузер поддерживает gzip-сжатие*/
+        /* если браузер поддерживает gzip-сжатие
+         * высылаем заголовок в зависимости от типа файла
+         */
         lHeader = CloudServer.generateHeaders('index.html', CloudServer.Gzip);
         
          /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
