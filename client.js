@@ -513,17 +513,28 @@ CloudClient.Util        = (function(){
     this.socketLoad             = function(){
         Util.jsload('lib/client/socket.js');
     };
-        
+    
+    /* DOM */
+    
+    /**
+     * Function search element by tag
+     * @pTag - className
+     * @pElement - element
+     */
     this.getByTag               = function(pTag, pElement){
         return (pElement || document).getElementsByTagName(pTag);
     };
     
+    /**
+     * Function search element by id
+     * @Id - className
+     * @pElement - element
+     */
     this.getById                = function(pId, pElement){
         return (pElement || document).getElementById(pId);
     };
     
-    
-    /*
+    /**
      * Function search element by class name
      * @pClass - className
      * @pElement - element
@@ -531,7 +542,38 @@ CloudClient.Util        = (function(){
     this.getByClass             = function(pClass, pElement){
         return (pElement || document).getElementsByClassName(pClass);            
     };
-            
+    
+    /* STRINGS */
+    
+    /**
+     * function check is strings are equal
+     * @param pStr1
+     * @param pStr2
+     */
+    this.strCmp                 = function (pStr1, pStr2){
+        return  isContainStr(pStr1, pStr2) &&
+                pStr1.length == pStr2.length;
+    }
+    /**
+     * function returns is pStr1 contains pStr2
+     * @param pStr1
+     * @param pStr2
+     */
+    function isContainStr(pStr1, pStr2){
+        return  str1                        &&
+                str2                        && 
+                str1.indexOf(str2) === 0;
+    }
+    
+    /**
+     * function remove substring from string
+     * @param pStr
+     * @param pSubStr
+     */
+    function removeStr(pStr, pSubStr){
+        return pStr.replace(pSubStr,'');
+    }
+    
     /* private members */
     var lLoadingImage;
     var lErrorImage;
