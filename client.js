@@ -560,9 +560,9 @@ CloudClient.Util        = (function(){
      * @param pStr2
      */
     function isContainStr(pStr1, pStr2){
-        return  str1                        &&
-                str2                        && 
-                str1.indexOf(str2) === 0;
+        return  pStr1                &&
+                pStr2                && 
+                pStr1.indexOf(pStr2) > 0;
     }
     
     /**
