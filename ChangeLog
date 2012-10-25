@@ -29,6 +29,12 @@ started.
 * Added function jsLoadOnLoad, thet loads js files
 one-by-one, and then calls callback if needed.
 
+* Added function anyloadOnLoad thet loads any files or
+elements one-by-one.
+
+* Added function loadModule thet make it easier to connect
+new module.
+
 
 2012.10.01, Version 0.1.7
 
