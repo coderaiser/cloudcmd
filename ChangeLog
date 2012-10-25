@@ -35,6 +35,8 @@ elements one-by-one.
 * Added function loadModule thet make it easier to connect
 new module.
 
+* Fixed bug with context menu hiding (on Esc). Keys was unbinded.
+
 
 2012.10.01, Version 0.1.7
 
