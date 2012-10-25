@@ -65,6 +65,71 @@ var CloudFunc, $, Util, KeyBinding,
 /* short names used all the time functions */
     getByClass, getById;
 
+
+/**
+ * function load modules
+ * @pParams = {name, path, func, dobefore, arg}
+ */
+var loadModule                      = function(pParams){    
+    if(!pParams) return;
+    
+    var lName       = pParams.name,
+        lPath       = pParams.path,
+        lFunc       = pParams.func,
+        lDoBefore   = pParams.dobefore;
+    
+    if( Util.isString(pParams) )
+        lPath = pParams;
+    
+    if(lPath && !lName){
+        lName = lPath[0].toUpperCase() + lPath.substring(1);
+        lName = lName.replace('.js', '');
+        
+        var lSlash = lName.indexOf('/');
+        if(lSlash > 0){
+            var lAfterSlash = lName.substr(lSlash);
+            lName = lName.replace(lAfterSlash, '');
+        }
+    }
+    
+    if( !Util.isContainStr(lPath, '.js') )
+        lPath += '.js';
+    
+    cloudcmd[lName] = function(pArg){
+        if( Util.isFunction(lDoBefore) )
+            lDoBefore();
+        
+        Util.jsload(CloudClient.LIBDIRCLIENT + lPath, lFunc ||
+            function(){
+                cloudcmd[lName].Keys(pArg);
+            });
+    };
+};
+
+var Modules = [{
+        path  : 'keyBinding.js',
+        func : function(){
+            KeyBinding  = cloudcmd.KeyBinding;        
+            KeyBinding.init();
+        }
+    },
+    'editor/_codemirror',
+    'viewer',
+    'storage/_github',
+    'terminal',
+    'menu',
+    {
+        path      : 'config',
+        dobefore : function(){
+            Util.Images.showLoad({top: true});
+        }
+    }
+];
+
+
+
+
+
 /* 
  * Обьект для работы с кэшем
  * в него будут включены функции для
@@ -556,28 +621,29 @@ CloudClient.Util                    = (function(){
      * @param pStr2
      */
     this.strCmp                 = function (pStr1, pStr2){
-        return  isContainStr(pStr1, pStr2) &&
+        return  this.isContainStr(pStr1, pStr2) &&
                 pStr1.length == pStr2.length;
-    }
+    };
+    
     /**
      * function returns is pStr1 contains pStr2
      * @param pStr1
      * @param pStr2
      */
-    function isContainStr(pStr1, pStr2){
+    this.isContainStr           = function(pStr1, pStr2){
         return  pStr1                &&
                 pStr2                && 
                 pStr1.indexOf(pStr2) > 0;
-    }
+    };
     
     /**
      * function remove substring from string
      * @param pStr
      * @param pSubStr
      */
-    function removeStr(pStr, pSubStr){
+    this.removeStr              = function(pStr, pSubStr){
         return pStr.replace(pSubStr,'');
-    }
+    };
     
     /* private members */
     var lLoadingImage;
@@ -995,78 +1061,6 @@ CloudClient.Util                    = (function(){
 CloudClient.Util                    = new CloudClient.Util();
 
 
-/**
- * function load modules
- * @pParams = {name, src, func, dobefore, arg}
- */
-var loadModule                      = function(pParams){
-    var lName       = pParams.name,
-        lSrc        = pParams.src,
-        lFunc       = pParams.func,
-        lDoBefore   = pParams.dobefore;
-    
-    return function(pArg){
-        if( Util.isFunction(lDoBefore) )
-            lDoBefore();
-        
-        Util.jsload(CloudClient.LIBDIRCLIENT + lSrc, lFunc ||
-            function(){
-                cloudcmd[lName].Keys(pArg);
-            });
-    };
-};
-
-/** функция обработки нажатий клавишь */
-CloudClient.KeyBinding              = loadModule({
-    name : 'KeyBinding',
-    src  : 'keyBinding.js',
-    func : function(){
-        KeyBinding  = cloudcmd.KeyBinding;        
-        KeyBinding.init();
-    }
-});
-
-/** function loads and shows editor */
-CloudClient.Editor                  = loadModule({
-    name : 'Editor',
-    src  :'editor/_codemirror.js'
-});
-
-
-/** function loads and shows viewer */
-CloudClient.Viewer                  = loadModule({
-    name : 'Viewer',
-    src  : 'viewer.js'
-});
-
-/** function loads and shows storage */
-CloudClient.Storage                 = loadModule({
-    name : 'Storage',
-    src  : 'storage/_github.js'
-});
-
-/** function loads and shows terminal */
-CloudClient.Terminal                = loadModule({
-    name : 'Terminal',
-    src  : 'terminal.js'
-});
-
-/** function loads and shows menu 
- * @param Position - coordinates of menu {x, y}
- */
-CloudClient.Menu                    = loadModule({
-    name : 'Menu',
-    src  : 'menu.js'
-});    
-
-CloudClient.Config                  = loadModule({
-    name     : 'Config',
-    src      : 'config.js',
-    dobefore : function(){
-        Util.Images.showLoad({top: true});
-    }
-});
-
 CloudClient.GoogleAnalytics         = function(){
    /* google analytics */
    var lFunc = document.onmousemove;
@@ -1347,6 +1341,12 @@ CloudClient.baseInit                = function(){
                 'height:' + lHeight +'px;'      +
             '}'
     });
+    
+    
+    for(var i = 0, n = Modules.length; i < n ; i++){
+        loadModule(Modules[i]);
+    }
+    
 };
 
 /* функция меняет ссыки на ajax-овые */
