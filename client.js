@@ -997,14 +997,18 @@ CloudClient.Util                    = new CloudClient.Util();
 
 /**
  * function load modules
- * @pParams = {name, src, callback, arg}
+ * @pParams = {name, src, func, dobefore, arg}
  */
 var loadModule                      = function(pParams){
     var lName       = pParams.name,
         lSrc        = pParams.src,
-        lFunc       = pParams.func;
+        lFunc       = pParams.func,
+        lDoBefore   = pParams.dobefore;
     
     return function(pArg){
+        if( Util.isFunction(lDoBefore) )
+            lDoBefore();
+        
         Util.jsload(CloudClient.LIBDIRCLIENT + lSrc, lFunc ||
             function(){
                 cloudcmd[lName].Keys(pArg);
@@ -1017,9 +1021,8 @@ CloudClient.KeyBinding              = loadModule({
     name : 'KeyBinding',
     src  : 'keyBinding.js',
     func : function(){
-        cloudcmd.KeyBinding.init();
-        
-        KeyBinding  = cloudcmd.KeyBinding;
+        KeyBinding  = cloudcmd.KeyBinding;        
+        KeyBinding.init();
     }
 });
 
@@ -1057,21 +1060,17 @@ CloudClient.Menu                    = loadModule({
 });    
 
 CloudClient.Config                  = loadModule({
-    src  : 'config.js',
-    func : function(){
+    name     : 'Config',
+    src      : 'config.js',
+    dobefore : function(){
         Util.Images.showLoad({top: true});
-        Util.jsload(CloudClient.LIBDIRCLIENT +
-            'config.js',{
-            onload: function(){
-                cloudcmd.Config.Keys();
-            }
-        });
     }
 });
 
 CloudClient.GoogleAnalytics         = function(){
    /* google analytics */
    var lFunc = document.onmousemove;
+   
    document.onmousemove = function(){
         setTimeout(function(){
             Util.jsload('lib/client/google_analytics.js');
