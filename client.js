@@ -16,6 +16,7 @@ var CloudClient = {
     KeyBinding              : null, /* обьект обработки нажатий клавишь */
     Config                  : null, /* function loads and shows config  */
     Editor                  : null, /* function loads and shows editor  */
+    Storage                 : null, /* function loads storage           */
     Viewer                  : null, /* function loads and shows viewer  */
     Terminal                : null, /* function loads and shows terminal*/
     Menu                    : null, /* function loads and shows menu    */
@@ -60,6 +61,7 @@ var cloudcmd = CloudClient;
 
 /* глобальные переменные */
 var CloudFunc, $, Util, KeyBinding,
+
 /* short names used all the time functions */
     getByClass, getById;
 
@@ -69,7 +71,7 @@ var CloudFunc, $, Util, KeyBinding,
  * работы с LocalStorage, webdb,
  * indexed db etc.
  */
-CloudClient.Cache = {
+CloudClient.Cache                   = {
     _allowed     : true,     /* приватный переключатель возможности работы с кэшем */
     
     /* функция проверяет возможно ли работать с кэшем каким-либо образом */
@@ -89,8 +91,8 @@ CloudClient.Cache = {
 };
 
 
-/* функция проверяет поддерживаеться ли localStorage */
-CloudClient.Cache.isAllowed = (function(){
+/** функция проверяет поддерживаеться ли localStorage */
+CloudClient.Cache.isAllowed         = (function(){
     if(window.localStorage   && 
         localStorage.setItem &&
         localStorage.getItem){
@@ -109,31 +111,34 @@ CloudClient.Cache.isAllowed = (function(){
             */
         }
 });
- /* если доступен localStorage и
+ 
+ /** если доступен localStorage и
   * в нём есть нужная нам директория -
   * записываем данные в него
   */
-CloudClient.Cache.set   = (function(pName, pData){
+CloudClient.Cache.set               = function(pName, pData){
     if(CloudClient.Cache._allowed && pName && pData){
         localStorage.setItem(pName,pData);
     }
-});
-/* Если доступен Cache принимаем из него данные*/
-CloudClient.Cache.get   = (function(pName){
+};
+
+/** Если доступен Cache принимаем из него данные*/
+CloudClient.Cache.get               = function(pName){
     if(CloudClient.Cache._allowed  && pName){
         return localStorage.getItem(pName);
     }
     else return null;
-});
-/* Функция очищает кэш*/
-CloudClient.Cache.clear = (function(){
+};
+
+/** Функция очищает кэш */
+CloudClient.Cache.clear             = function(){
     if(CloudClient.Cache._allowed){
         localStorage.clear();
     }
-});
+};
 
 /* Object contain additional system functional */
-CloudClient.Util        = (function(){
+CloudClient.Util                    = (function(){
     var lXMLHTTP;
     
     this.addClass               = function(pElement, pClass){
@@ -987,20 +992,20 @@ CloudClient.Util        = (function(){
     };
 });
 
-CloudClient.Util       = new CloudClient.Util();
+CloudClient.Util                    = new CloudClient.Util();
 
-/* функция обработки нажатий клавишь */
-CloudClient.KeyBinding = (function(){
+/** функция обработки нажатий клавишь */
+CloudClient.KeyBinding              = function(){
     /* loading keyBinding module and start it */
     Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js', function(){
         cloudcmd.KeyBinding.init();
         
         KeyBinding  = cloudcmd.KeyBinding;
     });
-});
+};
 
-/* function loads and shows editor */
-CloudClient.Editor = (function(pIsReadOnly) {    
+/** function loads and shows editor */
+CloudClient.Editor                  = function(pIsReadOnly) {    
     /* loading CloudMirror plagin */    
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'editor/_codemirror.js',{
@@ -1009,10 +1014,10 @@ CloudClient.Editor = (function(pIsReadOnly) {
                 cloudcmd.Editor.Keys(pIsReadOnly);
             })
     });
-});
+};
 
 
-CloudClient.Config = (function() {
+CloudClient.Config                  = function() {
     Util.Images.showLoad({top: true});
     Util.jsload(CloudClient.LIBDIRCLIENT +
         'config.js',{
@@ -1020,9 +1025,9 @@ CloudClient.Config = (function() {
             cloudcmd.Config.Keys();
         }
     });
-});
+};
 
-CloudClient.GoogleAnalytics = (function(){
+CloudClient.GoogleAnalytics         = function(){
    /* google analytics */
    var lFunc = document.onmousemove;
    document.onmousemove = function(){       
@@ -1035,45 +1040,53 @@ CloudClient.GoogleAnalytics = (function(){
         
         document.onmousemove = lFunc;
    };
-});
+};
 
-/* function loads and shows viewer */
-CloudClient.Viewer = (function(pCurrentFile){
+/** function loads and shows viewer */
+CloudClient.Viewer                  = function(pCurrentFile){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'viewer.js',{
             onload: (function(){
                 cloudcmd.Viewer.Keys(pCurrentFile);
             })
     });
-});
+};
 
-/* function loads and shows terminal */
-CloudClient.Terminal = (function(){
+/** function loads and shows storage */
+CloudClient.Storage                 = function(){
+    Util.jsload(CloudClient.LIBDIRCLIENT + 'storage/_github.js',
+        function(){
+            cloudcmd.Storage.Keys();
+        });
+};
+
+/** function loads and shows terminal */
+CloudClient.Terminal                = function(){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'terminal.js',{
             onload: (function(){
                 cloudcmd.Terminal.Keys();
             })
     });
-});
+};
 
-/* function loads and shows menu 
- * @pPosition - coordinates of menu {x, y}
+/** function loads and shows menu 
+ * @param Position - coordinates of menu {x, y}
  */
-CloudClient.Menu = (function(pPosition){
+CloudClient.Menu                    = function(pPosition){
     Util.jsload(CloudClient.LIBDIRCLIENT + 
         'menu.js',{
             onload: (function(){
                 cloudcmd.Menu.Keys(pPosition);
             })
     });
-});
+};
 
-/* 
+/**
  * Функция привязываеться ко всем ссылкам и
  *  загружает содержимое каталогов
  */
-CloudClient._loadDir = (function(pLink,pNeedRefresh){
+CloudClient._loadDir                = function(pLink,pNeedRefresh){
     /* @pElem - элемент, 
      * для которого нужно
      * выполнить загрузку
@@ -1120,16 +1133,16 @@ CloudClient._loadDir = (function(pLink,pNeedRefresh){
              */                         
             return false;
             };
-    });
-    
+    };
 
-/*
+
+/**
  * Function edits file name
  *
- * @pParent - parent element
- * @pEvent
+ * @param pParent - parent element
+ * @param pEvent
  */
-CloudClient._editFileName = (function(pParent){
+CloudClient._editFileName           = function(pParent){
     var lA = Util.getCurrentLink(pParent);
     
     if (lA && lA.textContent !== '..'){
@@ -1160,12 +1173,12 @@ CloudClient._editFileName = (function(pParent){
                 
             });
     }
-});
+};
 
 /* Функция устанавливает текущим файлом, тот
  * на который кликнули единожды
  */
-CloudClient._setCurrent=(function(){
+CloudClient._setCurrent             = function(){
         /*
          * @pFromEnter - если мы сюда попали 
          * из события нажатия на энтер - 
@@ -1215,14 +1228,14 @@ CloudClient._setCurrent=(function(){
              */
             return false;
         };
-    });
+    };
     
-/* функция устанавливает курсор на каталог
+/** функция устанавливает курсор на каталог
  * с которого мы пришли, если мы поднялись
  * в верх по файловой структуре
- * @pDirName - имя каталога с которого мы пришли
+ * @param pDirName - имя каталога с которого мы пришли
  */
-CloudClient._currentToParent = (function(pDirName){                                              
+CloudClient._currentToParent        = function(pDirName){                                              
     /* опредиляем в какой мы панели:
     * правой или левой
     */
@@ -1240,13 +1253,13 @@ CloudClient._currentToParent = (function(pDirName){
         Util.setCurrentFile(lRootDir);
         Util.scrollIntoViewIfNeeded(lRootDir, true);
     }
-}); 
+};
 
-/* Конструктор CloudClient, который
+/** Конструктор CloudClient, который
  * выполняет весь функционал по
  * инициализации
  */
-CloudClient.init = (function(){
+CloudClient.init                    = function(){
     Util        = cloudcmd.Util;
     KeyBinding  = cloudcmd.KeyBinding;
     getByClass  = Util.getByClass;
@@ -1263,9 +1276,9 @@ CloudClient.init = (function(){
                 });
     }
     else CloudClient.baseInit();
-});
+};
 
-CloudClient.baseInit = (function(){
+CloudClient.baseInit                = function(){
     if(applicationCache){
         var lFunc = applicationCache.onupdateready;
         applicationCache.onupdateready = function(){
@@ -1333,10 +1346,10 @@ CloudClient.baseInit = (function(){
                 'height:' + lHeight +'px;'      +
             '}'
     });
-});
+};
 
 /* функция меняет ссыки на ajax-овые */
-CloudClient._changeLinks = function(pPanelID){
+CloudClient._changeLinks            = function(pPanelID){
     /* назначаем кнопку очистить кэш и показываем её */
     var lClearcache = getById('clear-cache');
     if(lClearcache)
@@ -1477,14 +1490,13 @@ CloudClient._changeLinks = function(pPanelID){
     }
 };
 
-/*
+/**
  * Функция загружает json-данные о Файловой Системе
  * через ajax-запрос.
- * @path - каталог для чтения
- * @pNeedRefresh - необходимость обновить данные о каталоге
+ * @param path - каталог для чтения
+ * @param pNeedRefresh - необходимость обновить данные о каталоге
  */
-CloudClient._ajaxLoad = function(path, pNeedRefresh)
-{                                   
+CloudClient._ajaxLoad               = function(path, pNeedRefresh){                                   
         /* Отображаем красивые пути */
         /* added supporting of russian  language */
         var lPath = decodeURI(path);
@@ -1567,13 +1579,12 @@ CloudClient._ajaxLoad = function(path, pNeedRefresh)
         }catch(err){console.log(err);}
 };
 
-/*
+/**
  * Функция строит файловую таблицу
- * @pEleme - родительский элемент
- * @pJSON  - данные о файлах
+ * @param pEleme - родительский элемент
+ * @param pJSON  - данные о файлах
  */
-CloudClient._createFileTable = function(pElem, pJSON)
-{    
+CloudClient._createFileTable        = function(pElem, pJSON){    
     var lElem = getById(pElem);
     
     /* getting current element if was refresh */
@@ -1608,12 +1619,11 @@ CloudClient._createFileTable = function(pElem, pJSON)
     }
 };
 
-/* 
+/**
  * Функция генерирует JSON из html-таблицы файлов и
  * используеться при первом заходе в корень
  */
-CloudClient._getJSONfromFileTable=function()
-{
+CloudClient._getJSONfromFileTable   = function(){
     var lLeft       = getById('left');    
     var lPath       = getByClass('path')[0].textContent;
     var lFileTable  = [{path:lPath,size:'dir'}];
