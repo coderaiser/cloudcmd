@@ -609,7 +609,7 @@ CloudClient.Util                    = (function(){
     this.isContainStr           = function(pStr1, pStr2){
         return  pStr1                &&
                 pStr2                && 
-                pStr1.indexOf(pStr2) > 0;
+                pStr1.indexOf(pStr2) >= 0;
     };
     
     /**
