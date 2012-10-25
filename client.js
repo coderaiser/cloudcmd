@@ -264,7 +264,7 @@ CloudClient.Util                    = (function(){
             return pFunc_a();
     };
     
-    this.anyLoadOnload          = function(pParams_a, pFunc){        
+    this.anyLoadOnLoad          = function(pParams_a, pFunc){        
         if( this.isArray(pParams_a) ) {
             var lParam = pParams_a.pop();
             
@@ -274,7 +274,7 @@ CloudClient.Util                    = (function(){
             
             if(lParam && !lParam.func){
                 lParam.func = function(){
-                    Util.anyLoadOnload(pParams_a, pFunc);
+                    Util.anyLoadOnLoad(pParams_a, pFunc);
                 };            
                 
                 this.anyload(lParam);
