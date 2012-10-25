@@ -1243,13 +1243,13 @@ CloudClient.init                    = function(){
         this.OLD_BROWSER = true;
             Util.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
                 function(){
-                    Util.jqueryLoad( CloudClient.initModules );
+                    Util.jqueryLoad( initModules );
                 });
     }
-    else CloudClient.initModules();
+    else initModules();
 };
 
-CloudClient.initModules             = function(){
+function initModules(){
     
     loadModule({
         path  : 'keyBinding.js',
@@ -1266,14 +1266,14 @@ CloudClient.initModules             = function(){
                 for(var i = 0, n = pModules.length; i < n ; i++)
                     loadModule(pModules[i]);                    
                 
-            CloudClient.baseInit();
+            baseInit();
         },
             
-        error: CloudClient.baseInit
+        error: baseInit
     });
-};
+}
 
-CloudClient.baseInit                = function(){
+function baseInit(){
     if(applicationCache){
         var lFunc = applicationCache.onupdateready;
         applicationCache.onupdateready = function(){
@@ -1341,7 +1341,7 @@ CloudClient.baseInit                = function(){
                 'height:' + lHeight +'px;'      +
             '}'
     });    
-};
+}
 
 /* функция меняет ссыки на ajax-овые */
 CloudClient._changeLinks            = function(pPanelID){
