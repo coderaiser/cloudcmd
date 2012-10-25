@@ -106,30 +106,6 @@ var loadModule                      = function(pParams){
     };
 };
 
-var Modules = [{
-        path  : 'keyBinding.js',
-        func : function(){
-            KeyBinding  = cloudcmd.KeyBinding;        
-            KeyBinding.init();
-        }
-    },
-    'editor/_codemirror',
-    'viewer',
-    'storage/_github',
-    'terminal',
-    'menu',
-    {
-        path      : 'config',
-        dobefore : function(){
-            Util.Images.showLoad({top: true});
-        }
-    }
-];
-
-
-
-
-
 /* 
  * Обьект для работы с кэшем
  * в него будут включены функции для
@@ -1267,10 +1243,34 @@ CloudClient.init                    = function(){
         this.OLD_BROWSER = true;
             Util.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
                 function(){
-                    Util.jqueryLoad(CloudClient.baseInit);
+                    Util.jqueryLoad( CloudClient.initModules );
                 });
     }
-    else CloudClient.baseInit();
+    else CloudClient.initModules();
+};
+
+CloudClient.initModules             = function(){
+    
+    loadModule({
+        path  : 'keyBinding.js',
+        func : function(){
+            KeyBinding  = cloudcmd.KeyBinding;        
+            KeyBinding.init();
+        }
+     });
+    
+    Util.ajax({
+        url:'/modules.json',
+        success: function(pModules){
+            if( Util.isArray(pModules) )
+                for(var i = 0, n = pModules.length; i < n ; i++)
+                    loadModule(pModules[i]);                    
+                
+            CloudClient.baseInit();
+        },
+            
+        error: CloudClient.baseInit
+    });
 };
 
 CloudClient.baseInit                = function(){
@@ -1340,13 +1340,7 @@ CloudClient.baseInit                = function(){
             '.panel{'                           +
                 'height:' + lHeight +'px;'      +
             '}'
-    });
-    
-    
-    for(var i = 0, n = Modules.length; i < n ; i++){
-        loadModule(Modules[i]);
-    }
-    
+    });    
 };
 
 /* функция меняет ссыки на ajax-овые */
