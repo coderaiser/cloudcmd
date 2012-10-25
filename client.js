@@ -994,43 +994,85 @@ CloudClient.Util                    = (function(){
 
 CloudClient.Util                    = new CloudClient.Util();
 
+
+/**
+ * function load modules
+ * @pParams = {name, src, callback, arg}
+ */
+var loadModule                      = function(pParams){
+    var lName       = pParams.name,
+        lSrc        = pParams.src,
+        lFunc       = pParams.func;
+    
+    return function(pArg){
+        Util.jsload(CloudClient.LIBDIRCLIENT + lSrc, lFunc ||
+            function(){
+                cloudcmd[lName].Keys(pArg);
+            });
+    };
+};
+
 /** функция обработки нажатий клавишь */
-CloudClient.KeyBinding              = function(){
-    /* loading keyBinding module and start it */
-    Util.jsload(CloudClient.LIBDIRCLIENT+'keyBinding.js', function(){
+CloudClient.KeyBinding              = loadModule({
+    name : 'KeyBinding',
+    src  : 'keyBinding.js',
+    func : function(){
         cloudcmd.KeyBinding.init();
         
         KeyBinding  = cloudcmd.KeyBinding;
-    });
-};
+    }
+});
 
 /** function loads and shows editor */
-CloudClient.Editor                  = function(pIsReadOnly) {    
-    /* loading CloudMirror plagin */    
-    Util.jsload(CloudClient.LIBDIRCLIENT +
-        'editor/_codemirror.js',{
-        //'editor/_ace.js',{
-            onload:(function(){
-                cloudcmd.Editor.Keys(pIsReadOnly);
-            })
-    });
-};
+CloudClient.Editor                  = loadModule({
+    name : 'Editor',
+    src  :'editor/_codemirror.js'
+});
 
 
-CloudClient.Config                  = function() {
-    Util.Images.showLoad({top: true});
-    Util.jsload(CloudClient.LIBDIRCLIENT +
-        'config.js',{
-        onload: function(){
-            cloudcmd.Config.Keys();
-        }
-    });
-};
+/** function loads and shows viewer */
+CloudClient.Viewer                  = loadModule({
+    name : 'Viewer',
+    src  : 'viewer.js'
+});
+
+/** function loads and shows storage */
+CloudClient.Storage                 = loadModule({
+    name : 'Storage',
+    src  : 'storage/_github.js'
+});
+
+/** function loads and shows terminal */
+CloudClient.Terminal                = loadModule({
+    name : 'Terminal',
+    src  : 'terminal.js'
+});
+
+/** function loads and shows menu 
+ * @param Position - coordinates of menu {x, y}
+ */
+CloudClient.Menu                    = loadModule({
+    name : 'Menu',
+    src  : 'menu.js'
+});    
+
+CloudClient.Config                  = loadModule({
+    src  : 'config.js',
+    func : function(){
+        Util.Images.showLoad({top: true});
+        Util.jsload(CloudClient.LIBDIRCLIENT +
+            'config.js',{
+            onload: function(){
+                cloudcmd.Config.Keys();
+            }
+        });
+    }
+});
 
 CloudClient.GoogleAnalytics         = function(){
    /* google analytics */
    var lFunc = document.onmousemove;
-   document.onmousemove = function(){       
+   document.onmousemove = function(){
         setTimeout(function(){
             Util.jsload('lib/client/google_analytics.js');
         },5000);
@@ -1040,46 +1082,6 @@ CloudClient.GoogleAnalytics         = function(){
         
         document.onmousemove = lFunc;
    };
-};
-
-/** function loads and shows viewer */
-CloudClient.Viewer                  = function(pCurrentFile){
-    Util.jsload(CloudClient.LIBDIRCLIENT + 
-        'viewer.js',{
-            onload: (function(){
-                cloudcmd.Viewer.Keys(pCurrentFile);
-            })
-    });
-};
-
-/** function loads and shows storage */
-CloudClient.Storage                 = function(){
-    Util.jsload(CloudClient.LIBDIRCLIENT + 'storage/_github.js',
-        function(){
-            cloudcmd.Storage.Keys();
-        });
-};
-
-/** function loads and shows terminal */
-CloudClient.Terminal                = function(){
-    Util.jsload(CloudClient.LIBDIRCLIENT + 
-        'terminal.js',{
-            onload: (function(){
-                cloudcmd.Terminal.Keys();
-            })
-    });
-};
-
-/** function loads and shows menu 
- * @param Position - coordinates of menu {x, y}
- */
-CloudClient.Menu                    = function(pPosition){
-    Util.jsload(CloudClient.LIBDIRCLIENT + 
-        'menu.js',{
-            onload: (function(){
-                cloudcmd.Menu.Keys(pPosition);
-            })
-    });
 };
 
 /**
