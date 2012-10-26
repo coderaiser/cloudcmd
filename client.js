@@ -1237,7 +1237,7 @@ CloudClient.init                    = function(){
     getById     = Util.getById;
     
     
-    Util.socketLoad();
+    //Util.socketLoad();
     
     if(!document.body.scrollIntoViewIfNeeded){
         this.OLD_BROWSER = true;

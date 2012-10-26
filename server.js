@@ -68,7 +68,7 @@ var CloudServer         = {
      * example: ?download
      */
     Queries         : {},
-    /* ПЕРЕМЕННЫЕ 
+    /* ПЕРЕМЕННЫЕ
      * Поддержка браузером JS */
     NoJS            : true,
     /* Поддержка gzip-сжатия браузером */
@@ -79,8 +79,8 @@ var CloudServer         = {
     
     /* КОНСТАНТЫ */
     INDEX           : 'index.html',
-    LIBDIR          : './lib',
-    LIBDIRSERVER    : './lib/server',
+    LIBDIR          : './lib/',
+    LIBDIRSERVER    : './lib/server/',
     Extensions      :{
             '.css'      : 'text/css',
             '.js'       : 'text/javascript',
@@ -108,14 +108,14 @@ if(!Zlib)
 
  /* добавляем  модуль с функциями */
 var CloudFunc           =   cloudRequire(CloudServer.LIBDIR        +
-                                '/cloudfunc');
+                                'cloudfunc');
 CloudServer.AppCache    =   cloudRequire(CloudServer.LIBDIRSERVER  +
-                                '/appcache');
+                                'appcache');
 CloudServer.Socket      =   cloudRequire(CloudServer.LIBDIRSERVER  +
-                                '/socket');
+                                'socket');
                                 
 CloudServer.Obj         =   cloudRequire(CloudServer.LIBDIRSERVER  +
-                                '/object');
+                                'object');
 if(CloudServer.Obj){
     CloudServer.Cache   =   CloudServer.Obj.Cache;                            
     CloudServer.Minify  =   CloudServer.Obj.Minify;
@@ -455,10 +455,16 @@ CloudServer._controller = function(pReq, pRes)
         /* saving query of current file */
         CloudServer.Queries[DirPath]    = lQuery;
         
-        /* Проверяем с папкой ли мы имеем дело */
-                
         /* читаем основные данные о файле */
-        Fs.stat(DirPath, CloudServer._stated);
+        if( lQuery && lQuery.indexOf('code=') === 0){
+            var lAuth = cloudRequire(CloudServer.LIBDIRSERVER + 'auth');
+
+            if(lAuth) lAuth.auth(lQuery, function(){
+                    Fs.stat(DirPath, CloudServer._stated);
+                });
+            console.log('***********');
+        }else            
+            Fs.stat(DirPath, CloudServer._stated);
         
         /* если установлено сжатие
          * меняем название html-файла и
