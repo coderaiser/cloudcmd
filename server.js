@@ -21,6 +21,7 @@ var CloudServer         = {
         },
         server    : true,
         logs      : false,
+        socket    : true,
         port      : 31337,
         ip        : '127.0.0.1'
     },
@@ -188,9 +189,13 @@ CloudServer.start = function (pConfig) {
             this.Server =  http.createServer(this._controller);
             this.Server.listen(this.Port, this.IP);
             
-            if(CloudServer.Socket)
+            if(this.Config.socket && CloudServer.Socket){
                 CloudServer.Socket.listen(this.Server);
-                
+                console.log('sockets running');                
+            }
+            else
+                console.log('sockets disabled');
+            
             console.log('Cloud Commander server running at http://' +
                 this.IP + ':' + this.Port);
         }catch(pError){
@@ -296,7 +301,8 @@ CloudServer._controller = function(pReq, pRes)
     var lNoJS_s = CloudFunc.NOJS;
     var lFS_s   = CloudFunc.FS;
     console.log("request for " + pathname + " received...");
-                    
+    
+    
     /* если в пути нет информации ни о ФС,
      * ни об отсутствии js,
      * ни о том, что это корневой
@@ -450,7 +456,7 @@ CloudServer._controller = function(pReq, pRes)
         CloudServer.Queries[DirPath]    = lQuery;
         
         /* Проверяем с папкой ли мы имеем дело */
-        
+                
         /* читаем основные данные о файле */
         Fs.stat(DirPath, CloudServer._stated);
         
