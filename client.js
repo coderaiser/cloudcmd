@@ -1243,10 +1243,10 @@ CloudClient.init                    = function(){
         this.OLD_BROWSER = true;
             Util.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
                 function(){
-                    Util.jqueryLoad( initModules );
+                    Util.jqueryLoad( baseInit );
                 });
     }
-    else initModules();
+    else baseInit();
 };
 
 function initModules(){
@@ -1264,9 +1264,7 @@ function initModules(){
         success: function(pModules){
             if( Util.isArray(pModules) )
                 for(var i = 0, n = pModules.length; i < n ; i++)
-                    loadModule(pModules[i]);                    
-                
-            baseInit();
+                    loadModule(pModules[i]);
         },
             
         error: baseInit
@@ -1340,7 +1338,9 @@ function baseInit(){
             '.panel{'                           +
                 'height:' + lHeight +'px;'      +
             '}'
-    });    
+    });
+    
+    initModules();
 }
 
 /* функция меняет ссыки на ajax-овые */

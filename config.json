@@ -9,6 +9,7 @@
     },
     "server"    : true,
     "logs"      : false,
+    "socket"    : true,
     "port"      : 31337,
     "ip"        : "127.0.0.1"
 }
