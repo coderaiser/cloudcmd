@@ -35,9 +35,16 @@ elements one-by-one.
 * Added function loadModule thet make it easier to connect
 new module.
 
-* Fixed bug with context menu hiding (on Esc). Keys was unbinded.
+* Fixed bug with context menu hiding (on Esc).
+Keys was unbinded.
 
 * Added ability to disable web sockets.
+
+* Moved cloudRequire to srvfunc.js file.
+
+* Fixed bug with directory pathes detection
+(used document.location.href, now using 
+document.location.origin)
 
 
 2012.10.01, Version 0.1.7
