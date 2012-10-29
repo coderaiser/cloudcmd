@@ -79,8 +79,6 @@ var CloudServer         = {
     
     /* КОНСТАНТЫ */
     INDEX           : 'index.html',
-    LIBDIR          : './lib/',
-    SRVDIR          : './lib/server/',
     Extensions      :{
             '.css'      : 'text/css',
             '.js'       : 'text/javascript',
