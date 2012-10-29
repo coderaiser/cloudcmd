@@ -1,12 +1,15 @@
 "use strict";
 
-var LIBDIRSERVER = './lib/server/',
-    Server  = cloudRequire('./server'),
-    path    = cloudRequire('path'),
-    fs      = cloudRequire('fs'),
-    update  = cloudRequire(LIBDIRSERVER + 'update');
-
-var Config = readConfig();
+var DIR     = process.cwd() + '/',
+    SRVDIR  = DIR + 'lib/server/',
+        
+    srvfunc = require(SRVDIR + 'srvfunc'),
+    path    = require('path'),
+    fs      = require('fs'),
+    Server  = srvfunc.require(DIR + 'server'),
+    update  = srvfunc.require(SRVDIR + 'update'),
+    
+    Config = readConfig();
 
 Server.start(Config);
 
@@ -32,7 +35,7 @@ function readConfig(){
     console.log('server dir:  ' + lServerDir);
     
     console.log('reading configuretion file config.json...');
-    var lConfig = cloudRequire('./config');
+    var lConfig = srvfunc.require(DIR + 'config');
     if(lConfig){
         console.log('config.json readed');
         
@@ -67,17 +70,4 @@ function writeLogsToFile(){
                     stdo.write(string);
             };
     })(process.stdout.write);
-}
-
-/**
- * function do safe require of needed module
- * @param pModule
- */
-function cloudRequire(pModule){
-  try{
-      return require(pModule);
-  }
-  catch(pError){
-      return false;
-  }
 }
