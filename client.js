@@ -57,10 +57,10 @@ var CloudClient = {
 
 
 
-var cloudcmd = CloudClient;
+var cloudcmd = CloudClient,
 
 /* глобальные переменные */
-var CloudFunc, $, Util, KeyBinding,
+CloudFunc, $, Util, KeyBinding,
 
 /* short names used all the time functions */
     getByClass, getById;
@@ -1290,9 +1290,9 @@ function baseInit(){
         lTitle[0].textContent = 'Cloud Commander';
            
     /* загружаем общие функции для клиента и сервера                    */
-    Util.jsload(CloudClient.LIBDIR+'cloudfunc.js',function(){
+    Util.jsload(CloudClient.LIBDIR + 'cloudfunc.js',function(){
         /* берём из обьекта window общий с сервером функционал          */
-        CloudFunc=window.CloudFunc;
+        CloudFunc = window.CloudFunc;
         
         /* меняем ссылки на ajax'овые                                   */
         CloudClient._changeLinks(CloudFunc.LEFTPANEL);
@@ -1328,7 +1328,7 @@ function baseInit(){
         window.screen.height - 
         (window.screen.height/3).toFixed();
         
-    lHeight=(lHeight/100).toFixed()*100;
+    lHeight = (lHeight/100).toFixed()*100;
      
     CloudClient.HEIGHT = lHeight;
      
@@ -1351,85 +1351,84 @@ CloudClient._changeLinks            = function(pPanelID){
         lClearcache.onclick = CloudClient.Cache.clear;    
     
     /* меняем ссылки на ajax-запросы */
-    var lPanel = getById(pPanelID);
-    var a = lPanel.getElementsByTagName('a');
+    var lPanel = getById(pPanelID),
+        a = lPanel.getElementsByTagName('a'),
     
     /* номер ссылки иконки обновления страницы */
-    var lREFRESHICON = 0;
+        lREFRESHICON = 0,
         
      /* путь в ссылке, который говорит
       * что js отключен
       */
-    var lNoJS_s = CloudFunc.NOJS; 
-    var lFS_s   = CloudFunc.FS;
-    
+        lNoJS_s = CloudFunc.NOJS,
+        lFS_s   = CloudFunc.FS,
+        
     /* right mouse click function varible */
-    var lOnContextMenu_f = function(pEvent){
-        var lReturn_b = true;
-        
-        KeyBinding.unSet();
-        
-        /* getting html element
-         * currentTarget - DOM event
-         * target        - jquery event
-         */
-        var lTarget = pEvent.currentTarget || pEvent.target;        
-        Util.setCurrentFile(lTarget);
-        
-        if(Util.isFunction(cloudcmd.Menu) ){            
-            cloudcmd.Menu({
-                x: pEvent.x,
-                y: pEvent.y
-            });
+        lOnContextMenu_f = function(pEvent){
+            var lReturn_b = true;
             
-            /* disabling browsers menu*/
-            lReturn_b = false;
-            Util.Images.showLoad();
-        }        
+            KeyBinding.unSet();
+            
+            /* getting html element
+             * currentTarget - DOM event
+             * target        - jquery event
+             */
+            var lTarget = pEvent.currentTarget || pEvent.target;        
+            Util.setCurrentFile(lTarget);
+            
+            if(Util.isFunction(cloudcmd.Menu) ){            
+                cloudcmd.Menu({
+                    x: pEvent.x,
+                    y: pEvent.y
+                });
+                
+                /* disabling browsers menu*/
+                lReturn_b = false;
+                Util.Images.showLoad();
+            }        
+            
+            return lReturn_b;
+        },
         
-        return lReturn_b;
-    };
-    
     /* drag and drop function varible
      * download file from browser to descktop
      * in Chrome (HTML5)
      */
-    var lOnDragStart_f = function(pEvent){
-        var lElement = pEvent.target;
-                
-        var lLink = lElement.href;
-        var lName = lElement.textContent;
+        lOnDragStart_f = function(pEvent){
+            var lElement = pEvent.target,
+                lLink = lElement.href,
+                lName = lElement.textContent,        
+                /* if it's directory - adding json extension */
+                lType = lElement.parentElement.nextSibling;
+            
+            if(lType && lType.textContent === '<dir>'){
+                lLink = lLink.replace(lNoJS_s,'');
+                lName += '.json';
+            }
+            
+            pEvent.dataTransfer.setData("DownloadURL",
+                'application/octet-stream'  + ':' +
+                lName                       + ':' + 
+                lLink);
+        },
         
-        /* if it's directory - adding json extension */
-        var lType = lElement.parentElement.nextSibling;
-        if(lType && lType.textContent === '<dir>'){
-            lLink = lLink.replace(lNoJS_s,'');
-            lName += '.json';
-        }
-        
-        pEvent.dataTransfer.setData("DownloadURL",
-            'application/octet-stream'  + ':' +
-            lName                       + ':' + 
-            lLink);
-    };
-    
-    var lSetCurrentFile_f = function(pEvent){
-        var pElement = pEvent.target;                
-        
-        var lTag = pElement.tagName;
-        if(lTag !== 'LI')
-            do{            
-                pElement = pElement.parentElement;
+        lSetCurrentFile_f = function(pEvent){
+            var pElement = pEvent.target,
                 lTag = pElement.tagName;
-            }while(lTag !== 'LI');
+            
+            if(lTag !== 'LI')
+                do{            
+                    pElement = pElement.parentElement;
+                    lTag = pElement.tagName;
+                }while(lTag !== 'LI');
+            
+            Util.setCurrentFile(pElement);
+        };
         
-        Util.setCurrentFile(pElement);
-    };
-        
-    for(var i=0; i < a.length ; i++)
+    for(var i = 0, n = a.length; i < n ; i++)
     {        
         /* убираем адрес хоста*/
-        var link = '/'+a[i].href.replace(document.location.href,'');
+        var link = a[i].href.replace(document.location.origin,'');
         
         /* убираем значения, которые говорят,   *
          * об отсутствии js                     */     
