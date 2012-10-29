@@ -80,7 +80,7 @@ var CloudServer         = {
     /* КОНСТАНТЫ */
     INDEX           : 'index.html',
     LIBDIR          : './lib/',
-    LIBDIRSERVER    : './lib/server/',
+    SRVDIR          : './lib/server/',
     Extensions      :{
             '.css'      : 'text/css',
             '.js'       : 'text/javascript',
@@ -95,27 +95,30 @@ var CloudServer         = {
 
     DirPath             = '/',
 
+    DIR                 = process.cwd() + '/',
+    LIBDIR              = DIR + 'lib/',
+    SRVDIR              = LIBDIR + 'server/',
+
 /* модуль для работы с путями*/
-    Path                = cloudRequire('path'),
-    Fs                  = cloudRequire('fs'),    /* модуль для работы с файловой системой*/
-    Querystring         = cloudRequire('querystring'),
+    Path                = require('path'),
+    Fs                  = require('fs'),    /* модуль для работы с файловой системой*/
+    Querystring         = require('querystring'),
+    
+    srvfunc             = require(SRVDIR + 'srvfunc'),
 
 /* node v0.4 not contains zlib  */
-    Zlib                = cloudRequire('zlib');  /* модуль для сжатия данных gzip-ом*/
+    Zlib                = srvfunc.require('zlib');  /* модуль для сжатия данных gzip-ом*/
 if(!Zlib)
     console.log('to use gzip-commpression' +
         'you should use newer node version\n');
 
  /* добавляем  модуль с функциями */
-var CloudFunc           =   cloudRequire(CloudServer.LIBDIR        +
-                                'cloudfunc');
-CloudServer.AppCache    =   cloudRequire(CloudServer.LIBDIRSERVER  +
-                                'appcache');
-CloudServer.Socket      =   cloudRequire(CloudServer.LIBDIRSERVER  +
-                                'socket');
+var CloudFunc           =   srvfunc.require(LIBDIR + 'cloudfunc');
+CloudServer.AppCache    =   srvfunc.require(SRVDIR + 'appcache');
+CloudServer.Socket      =   srvfunc.require(SRVDIR + 'socket');
                                 
-CloudServer.Obj         =   cloudRequire(CloudServer.LIBDIRSERVER  +
-                                'object');
+CloudServer.Obj         =   srvfunc.require(SRVDIR + 'object');
+
 if(CloudServer.Obj){
     CloudServer.Cache   =   CloudServer.Obj.Cache;                            
     CloudServer.Minify  =   CloudServer.Obj.Minify;
@@ -457,7 +460,7 @@ CloudServer._controller = function(pReq, pRes)
         
         /* читаем основные данные о файле */
         if( lQuery && lQuery.indexOf('code=') === 0){
-            var lAuth = cloudRequire(CloudServer.LIBDIRSERVER + 'auth');
+            var lAuth = srvfunc.require(SRVDIR + 'auth');
 
             if(lAuth) lAuth.auth(lQuery, function(){
                     Fs.stat(DirPath, CloudServer._stated);
@@ -837,19 +840,6 @@ CloudServer.sendResponse = function(pHead, pData, pName){
         console.log(pName + ' sended');
     }
 };
-
-/**
- * function do safe require of needed module
- * @param pModule
- */
-function cloudRequire(pModule){
-  try{
-      return require(pModule);
-  }
-  catch(pError){
-      return false;
-  }
-}
 
 exports.start = function(pConfig){
     CloudServer.start(pConfig);
