@@ -1423,11 +1423,13 @@ CloudClient._changeLinks            = function(pPanelID){
             
             Util.setCurrentFile(pElement);
         };
-        
+            
+    var lLocation = document.location,
+        lUrl = lLocation.protocol + '//' + lLocation.host;
     for(var i = 0, n = a.length; i < n ; i++)
     {        
         /* убираем адрес хоста*/
-        var link = a[i].href.replace(document.location.origin,'');
+        var link = a[i].href.replace(lUrl,'');
         
         /* убираем значения, которые говорят,   *
          * об отсутствии js                     */     
