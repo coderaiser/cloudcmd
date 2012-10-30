@@ -49,7 +49,10 @@ document.location.origin)
 * Fixed bug with keybinding in FireFox
 (removed KeyBinding call on window load).
 
-* Fixed bug with getting url in Firefox.
+* Fixed bug with getting current url in Firefox.
+
+* Util cleaned up (addClass and removeClass
+moved to ie.js).
 
 
 2012.10.01, Version 0.1.7
