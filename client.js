@@ -882,28 +882,23 @@ CloudClient.Util                    = (function(){
     };
     
     this.getCurrentLink         = function(pCurrentFile){                
-        var lLink;
-        if(pCurrentFile)
-            lLink = this.getByTag('a', pCurrentFile)[0];
-        else{
-            var lCurrentFile = this.getCurrentFile();
-            lLink = this.getByTag('a', lCurrentFile)[0];
-        }
+        var lLink = this.getByTag('a',
+            pCurrentFile || this.getCurrentFile()),
             
-        if(!lLink)
+            lRet = lLink.length > 0 ? lLink : -1;
+        
+        if(!lRet)
             this.addCloudStatus({
                 code : -1,
                 msg  : 'Error current element do not contain links'
             });
         
-        return lLink; 
+        return lRet; 
     };
     
     this.getCurrentName         = function(pCurrentFile){
-        var lCurrent = this.getCurrentFile();
-                
-        var lLink;
-        lLink = this.getCurrentLink(pCurrentFile ? pCurrentFile : lCurrent);
+        var lLink    = this.getCurrentLink(
+            pCurrentFile || this.getCurrentFile());
             
         if(!lLink)
             this.addCloudStatus({
@@ -918,10 +913,8 @@ CloudClient.Util                    = (function(){
     /* function getting panel active, or passive
      * @pPanel_o = {active: true}
       */
-    this.getPanel               = function(pActive){
-        var lPanel;
-        
-        lPanel = lThis.getCurrentFile().parentElement;
+    this.getPanel               = function(pActive){        
+        var lPanel = lThis.getCurrentFile().parentElement;
                             
         /* if {active : false} getting passive panel */
         if(pActive && !pActive.active){
@@ -955,8 +948,8 @@ CloudClient.Util                    = (function(){
     };
     
     this.hidePanel              = function(pActive){
-        var lRet_b = false;
-        var lPanel = lThis.getPanel(pActive);
+        var lRet_b = false,
+            lPanel = lThis.getPanel(pActive);
         
         if(lPanel)
             lRet_b = this.hide(lPanel);
@@ -969,8 +962,16 @@ CloudClient.Util                    = (function(){
     };
     
     this.removeClass            = function(pElement, pClass){
-        if(pElement.classList)
-           pElement.classList.remove(pClass);
+        var lRet_b = true,
+            lClassList = pElement.classList;
+        
+        if(pElement && lClassList)
+           lClassList.remove(pClass);
+        
+        else
+            lRet_b = false;
+        
+        return lRet_b;
     };
     
     this.removeCurrent          = function(pCurrent){
