@@ -29,6 +29,7 @@ var CloudClient = {
     /* ОБЬЕКТЫ */
     /* Обьект для работы с кэшем */
     Cache                  : {},
+    
     /* Object contain additional system functional */
     Util                   : {},
     
@@ -99,7 +100,7 @@ var loadModule                      = function(pParams){
         if( Util.isFunction(lDoBefore) )
             lDoBefore();
         
-        Util.jsload(CloudClient.LIBDIRCLIENT + lPath, lFunc ||
+        Util.jsload(cloudcmd.LIBDIRCLIENT + lPath, lFunc ||
             function(){
                 cloudcmd[lName].Keys(pArg);
             });
@@ -191,16 +192,7 @@ CloudClient.Util                    = (function(){
                 lClassList.add(pClass);
             else
                 lRet_b = false;
-        }
-        else{
-            var lSpaceChar = '';
-            if(pElement.className)
-                lSpaceChar = ' ';
-            if( !pElement.contains(pClass) )
-                pElement.className += lSpaceChar + pClass;
-            else
-                lRet_b = false;
-        }
+        }        
         
         return lRet_b;
     };
@@ -979,9 +971,6 @@ CloudClient.Util                    = (function(){
     this.removeClass            = function(pElement, pClass){
         if(pElement.classList)
            pElement.classList.remove(pClass);
-           
-        else if(pElement.className.length > pClass.length)
-            pElement.className = pElement.className.replace(pClass, '');
     };
     
     this.removeCurrent          = function(pCurrent){
@@ -1494,30 +1483,28 @@ CloudClient._changeLinks            = function(pPanelID){
 CloudClient._ajaxLoad               = function(path, pNeedRefresh){                                   
         /* Отображаем красивые пути */
         /* added supporting of russian  language */
-        var lPath = decodeURI(path);
-        var lFS_s = CloudFunc.FS;
+        var lPath = decodeURI(path),
+            lFS_s = CloudFunc.FS;
+        
         if(lPath.indexOf(lFS_s) === 0){
             lPath = lPath.replace(lFS_s,'');
             
-            if(lPath === '') lPath='/';
+            if(lPath === '') lPath = '/';
         }
-        console.log ('reading dir: "'+lPath+'";');
+        console.log ('reading dir: "' + lPath + '";');
         
          /* если доступен localStorage и
-         * в нём есть нужная нам директория -
-         * читаем данные с него и
-         * выходим
-         * если стоит поле обязательной перезагрузки - 
-         * перезагружаемся
-         */
+          * в нём есть нужная нам директория -
+          * читаем данные с него и
+          * выходим
+          * если стоит поле обязательной перезагрузки - 
+          * перезагружаемся
+          */
          
          /* опредиляем в какой мы панели:
           * правой или левой
           */
-         var lPanel;
-         try{            
-            lPanel = Util.getPanel().id;
-         }catch(error){console.log("Current panel not found\n"+error);}
+        var lPanel = Util.getPanel().id;
          
         if(pNeedRefresh === undefined && lPanel){
             var lJSON = CloudClient.Cache.get(lPath);
@@ -1532,7 +1519,7 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
                     }
                 }else lJSON = JSON.parse(lJSON);
                 
-                CloudClient._createFileTable(lPanel,lJSON);
+                CloudClient._createFileTable(lPanel, lJSON);
                 CloudClient._changeLinks(lPanel);
                 
                 return;
