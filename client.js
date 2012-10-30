@@ -1288,19 +1288,19 @@ function baseInit(){
         lTitle[0].textContent = 'Cloud Commander';
            
     /* загружаем общие функции для клиента и сервера                    */
-    Util.jsload(CloudClient.LIBDIR + 'cloudfunc.js',function(){
+    Util.jsload(cloudcmd.LIBDIR + 'cloudfunc.js',function(){
         /* берём из обьекта window общий с сервером функционал          */
         CloudFunc = window.CloudFunc;
         
         /* меняем ссылки на ajax'овые                                   */
-        CloudClient._changeLinks(CloudFunc.LEFTPANEL);
-        CloudClient._changeLinks(CloudFunc.RIGHTPANEL);
+        cloudcmd._changeLinks(CloudFunc.LEFTPANEL);
+        cloudcmd._changeLinks(CloudFunc.RIGHTPANEL);
                 
         /* устанавливаем переменную доступности кэша                    */
-        CloudClient.Cache.isAllowed();    
+        cloudcmd.Cache.isAllowed();    
         /* Устанавливаем кэш корневого каталога                         */ 
-        if(!CloudClient.Cache.get('/'))
-            CloudClient.Cache.set('/', CloudClient._getJSONfromFileTable());
+        if(!cloudcmd.Cache.get('/'))
+            cloudcmd.Cache.set('/', cloudcmd._getJSONfromFileTable());
     });
               
     /* устанавливаем размер высоты таблицы файлов
@@ -1320,15 +1320,14 @@ function baseInit(){
     /* формируем и округляем высоту экрана
      * при разрешениии 1024x1280:
      * 658 -> 700
-     */                            
+     */
     
-    var lHeight = 
-        window.screen.height - 
-        (window.screen.height/3).toFixed();
+    var lHeight = window.screen.height;
+        lHeight = lHeight - (lHeight/3).toFixed();
         
     lHeight = (lHeight/100).toFixed()*100;
      
-    CloudClient.HEIGHT = lHeight;
+    cloudcmd.HEIGHT = lHeight;
      
     Util.cssSet({id:'cloudcmd',
         element:document.head,
@@ -1426,6 +1425,7 @@ CloudClient._changeLinks            = function(pPanelID){
             
     var lLocation = document.location,
         lUrl = lLocation.protocol + '//' + lLocation.host;
+    
     for(var i = 0, n = a.length; i < n ; i++)
     {        
         /* убираем адрес хоста*/
