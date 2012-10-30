@@ -185,7 +185,7 @@ CloudClient.Util                    = (function(){
     var lXMLHTTP,
         lLoadingImage,
         lErrorImage,
-        lCURRENT_FILE = CloudCommander.CURRENT_FILE,
+        lCURRENT_FILE = cloudcmd.CURRENT_FILE,
         
         /* Обьект, который содержит
          * функции для отображения
@@ -678,7 +678,7 @@ CloudClient.Util                    = (function(){
             }
             else
             {
-                lCurrent    = lThis.getCurrentFile();
+                lCurrent    = Util.getCurrentFile();
                 lCurrent    = lCurrent.firstChild.nextSibling;
             }
                                  
@@ -880,7 +880,7 @@ CloudClient.Util                    = (function(){
         var lLink = this.getByTag('a',
             pCurrentFile || this.getCurrentFile()),
             
-            lRet = lLink.length > 0 ? lLink : -1;
+            lRet = lLink.length > 0 ? lLink[0] : -1;
         
         if(!lRet)
             this.addCloudStatus({
@@ -1008,12 +1008,14 @@ CloudClient.Util                    = (function(){
     };
     
     this.scrollIntoViewIfNeeded = function(pElement){
-        var lOk = true;
+        var lRet = true;
+        
         if(pElement && pElement.scrollIntoViewIfNeeded)
             pElement.scrollIntoViewIfNeeded();
-        else lOk = false;
+        else
+            lRet = false;
         
-        return lOk;
+        return lRet;
     };
     
     
@@ -1058,9 +1060,10 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
                         
             Util.Images.showLoad(pNeedRefresh ? {top:true} : null);
             
-            var lPanel = Util.getPanel();
+            var lPanel = Util.getPanel(),
             /* получаем имя каталога в котором находимся*/ 
-            var lHref = Util.getByClass('path', lPanel);
+                lHref = Util.getByClass('path', lPanel);
+            
             lHref = lHref[0].textContent;
             
             lHref       = CloudFunc.removeLastSlash(lHref);
@@ -1175,12 +1178,14 @@ CloudClient._setCurrent             = function(){
                     this.ondblclick(this);
                     /*  enter pressed on file */
                 else{
-                    var lA = this.getElementsByTagName('a')[0];
+                    var lA = Util.getCurrentLink(this);
+                    
                     if( Util.isFunction(lA.ondblclick) )
                         lA.ondblclick(this);
                 }
              }/* если мы попали сюда от клика мышки */
-             else{pFromEnter.returnValue=false;}
+             else
+                pFromEnter.returnValue=false;
                                        
             /* что бы не переходить по ссылкам
              * а грузить всё ajax'ом,
