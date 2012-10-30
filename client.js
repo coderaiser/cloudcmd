@@ -1232,7 +1232,6 @@ CloudClient._currentToParent        = function(pDirName){
  */
 CloudClient.init                    = function(){
     Util        = cloudcmd.Util;
-    KeyBinding  = cloudcmd.KeyBinding;
     getByClass  = Util.getByClass;
     getById     = Util.getById;
     
@@ -1252,22 +1251,21 @@ CloudClient.init                    = function(){
 function initModules(){
     
     loadModule({
+        /* привязываем клавиши к функциям */
         path  : 'keyBinding.js',
-        func : function(){
-            KeyBinding  = cloudcmd.KeyBinding;        
+        func : function(){            
+            KeyBinding  = cloudcmd.KeyBinding;
             KeyBinding.init();
         }
      });
-    
+        
     Util.ajax({
         url:'/modules.json',
         success: function(pModules){
             if( Util.isArray(pModules) )
                 for(var i = 0, n = pModules.length; i < n ; i++)
                     loadModule(pModules[i]);
-        },
-            
-        error: baseInit
+        }
     });
 }
 
@@ -1341,6 +1339,7 @@ function baseInit(){
     });
     
     initModules();
+    cloudcmd.KeyBinding();
 }
 
 /* функция меняет ссыки на ajax-овые */
@@ -1690,9 +1689,6 @@ try{
         
         /* базовая инициализация*/
         CloudCommander.init();
-        
-        /* привязываем клавиши к функциям */
-        CloudCommander.KeyBinding();
         
         /* загружаем Google Analytics */
         CloudCommander.GoogleAnalytics();
