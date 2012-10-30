@@ -181,7 +181,47 @@ CloudClient.Cache.clear             = function(){
 
 /* Object contain additional system functional */
 CloudClient.Util                    = (function(){
-    var lXMLHTTP;
+    /* private members */
+    var lXMLHTTP,
+        lLoadingImage,
+        lErrorImage,
+        lCURRENT_FILE = CloudCommander.CURRENT_FILE,
+        
+        /* Обьект, который содержит
+         * функции для отображения
+         * картинок
+         */
+        LImages_o               = {            
+            /* Функция создаёт картинку загрузки*/
+            loading : function(){    
+                var lE = Util.getById('loading-image');
+                if (!lE)
+                    lE = Util.anyload({
+                        name        : 'span',
+                        className   : 'icon loading',
+                        id          : 'loading-image',
+                        not_append  : true
+                    });
+                
+                lLoadingImage = lE;
+            
+                return lE;
+            },
+        
+            /* Функция создаёт картинку ошибки загрузки*/
+            error : function(){
+                var lE = Util.getById('error-image');
+                if (!lE)
+                    lE = Util.anyload({
+                        name        : 'span',
+                        className   : 'icon error',
+                        id          : 'error-image',
+                        not_append  : true
+                    });
+                
+                return lE;
+            }
+        };
     
     this.addClass               = function(pElement, pClass){
         var lRet_b = true;
@@ -284,16 +324,15 @@ CloudClient.Util                    = (function(){
     },
     
     this.loadOnload             = function(pFunc_a){
-        if( this.isArray(pFunc_a) ) {
+        if( this.isArray(pFunc_a) ) {                
+            var lFunc_f = pFunc_a.pop();
+            
+            if(typeof lFunc_f === 'function')
+                lFunc_f();
                 
-                var lFunc_f = pFunc_a.pop();
-                
-                if(typeof lFunc_f === 'function')
-                    lFunc_f();
-                    
-                return this.loadOnload(pFunc_a);
+            return this.loadOnload(pFunc_a);
         }
-        else if(typeof pFunc_a === 'function')
+        else if( this.isFunction(pFunc_a) )
             return pFunc_a();
     };
     
@@ -341,7 +380,7 @@ CloudClient.Util                    = (function(){
          */
         if( this.isArray(pParams_o) ){
             var lElements_a = [];
-            for(var i=0, n = pParams_o.length; i < n ; i++)
+            for(var i = 0, n = pParams_o.length; i < n ; i++)
                 lElements_a[i] = this.anyload(pParams_o[i]);
             
             return lElements_a;
@@ -613,47 +652,6 @@ CloudClient.Util                    = (function(){
         return pStr.replace(pSubStr,'');
     };
     
-    /* private members */
-    var lLoadingImage;
-    var lErrorImage;
-    
-    /* Обьект, который содержит
-     * функции для отображения
-     * картинок
-     */
-    var LImages_o               = {            
-        /* Функция создаёт картинку загрузки*/
-        loading : function(){    
-            var lE = Util.getById('loading-image');
-            if (!lE)
-                lE = Util.anyload({
-                    name        : 'span',
-                    className   : 'icon loading',
-                    id          : 'loading-image',
-                    not_append  : true
-                });
-            
-            lLoadingImage = lE;
-        
-            return lE;
-        },
-    
-        /* Функция создаёт картинку ошибки загрузки*/
-        error : function(){
-            var lE = Util.getById('error-image');
-            if (!lE)
-                lE = Util.anyload({
-                    name        : 'span',
-                    className   : 'icon error',
-                    id          : 'error-image',
-                    not_append  : true
-                });
-            
-            return lE;
-        }
-    };
-            
-    var lThis = this;
     this.Images                 = {
         /* 
          * Function shows loading spinner
@@ -671,7 +669,7 @@ CloudClient.Util                    = (function(){
             var lCurrent;        
             if(pPosition){
                 if(pPosition.top){
-                    lCurrent    = lThis.getRefreshButton();                    
+                    lCurrent    = Util.getRefreshButton();
                     if(lCurrent)
                         lCurrent = lCurrent.parentElement;
                     else
@@ -737,9 +735,9 @@ CloudClient.Util                    = (function(){
             console.log(lText);
         }
     };
-    
+        
     this.getCurrentFile         = function(){
-        var lCurrent = lThis.getByClass(CloudCommander.CURRENT_FILE)[0];
+        var lCurrent = Util.getByClass(lCURRENT_FILE)[0];
         if(!lCurrent)
             this.addCloudStatus({
                 code : -1,
@@ -752,8 +750,8 @@ CloudClient.Util                    = (function(){
     };
     
     this.getRefreshButton       = function(){                
-        var lPanel      = this.getPanel();
-        var lRefresh    = this.getByClass(CloudFunc.REFRESHICON, lPanel);
+        var lPanel      = this.getPanel(),
+            lRefresh    = this.getByClass(CloudFunc.REFRESHICON, lPanel);
                         
         if (lRefresh.length)                
             lRefresh = lRefresh[0];
@@ -791,10 +789,8 @@ CloudClient.Util                    = (function(){
         
         if(lCurrentFileWas)
             lUnSetCurrentFile(lCurrentFileWas);
-            
-        var lCurrentClass = CloudCommander.CURRENT_FILE;
 
-        this.addClass(pCurrentFile, lCurrentClass);
+        this.addClass(pCurrentFile, lCURRENT_FILE);
         
         /* scrolling to current file */
         Util.scrollIntoViewIfNeeded(pCurrentFile);
@@ -812,10 +808,9 @@ CloudClient.Util                    = (function(){
             });
         
         var lRet_b = Util.isCurrentFile(pCurrentFile);
-        var lCurrentClass = CloudCommander.CURRENT_FILE;        
 
         if(lRet_b)            
-            Util.removeClass(pCurrentFile, lCurrentClass);                    
+            Util.removeClass(pCurrentFile, lCURRENT_FILE);                    
         
         return lRet_b;
     };
@@ -829,10 +824,10 @@ CloudClient.Util                    = (function(){
                         'could not be none'
             });
         
-        var lCurrentClass       = CloudCommander.CURRENT_FILE;
-        var lCurrentFileClass   = pCurrentFile.className;
-        
-        return ( lCurrentFileClass.indexOf(lCurrentClass) >= 0 );
+        var lCurrentFileClass   = pCurrentFile.className,
+            lIsCurrent          = lCurrentFileClass.indexOf(lCURRENT_FILE) >= 0;
+            
+        return lIsCurrent;
     };
     
     /**
@@ -914,12 +909,12 @@ CloudClient.Util                    = (function(){
      * @pPanel_o = {active: true}
       */
     this.getPanel               = function(pActive){        
-        var lPanel = lThis.getCurrentFile().parentElement;
+        var lPanel = this.getCurrentFile().parentElement;
                             
         /* if {active : false} getting passive panel */
         if(pActive && !pActive.active){
             var lId = lPanel.id === 'left' ? 'right' : 'left';
-            lPanel = lThis.getById(lId);
+            lPanel = this.getById(lId);
         }
         
         /* if two panels showed
@@ -927,7 +922,7 @@ CloudClient.Util                    = (function(){
          * panel
          */
         if(window.innerWidth < CloudCommander.MIN_ONE_PANEL_WIDTH)
-            lPanel = lThis.getById('left');
+            lPanel = this.getById('left');
             
         
         if(!lPanel)
@@ -941,20 +936,25 @@ CloudClient.Util                    = (function(){
     };
     
     this.showPanel              = function(pActive){
-        var lPanel = lThis.getPanel(pActive);
+        var lRet = true,
+            lPanel = this.getPanel(pActive);
                         
         if(lPanel)
             this.show(lPanel);
+        else
+            lRet = false;
+        
+        return lRet;
     };
     
     this.hidePanel              = function(pActive){
-        var lRet_b = false,
-            lPanel = lThis.getPanel(pActive);
+        var lRet = false,
+            lPanel = this.getPanel(pActive);
         
         if(lPanel)
-            lRet_b = this.hide(lPanel);
+            lRet = this.hide(lPanel);
         
-        return lRet_b;
+        return lRet;
     };
     
     this.hide                   = function(pElement){
