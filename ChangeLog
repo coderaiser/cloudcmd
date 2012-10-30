@@ -46,6 +46,9 @@ Keys was unbinded.
 (used document.location.href, now using 
 document.location.origin)
 
+* Fixed bug with keybinding in FireFox
+(removed KeyBinding call on window load).
+
 
 2012.10.01, Version 0.1.7
 
