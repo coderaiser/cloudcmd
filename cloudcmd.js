@@ -1,20 +1,58 @@
 "use strict";
 
-var DIR     = process.cwd() + '/',
-    SRVDIR  = DIR + 'lib/server/',
+var DIR         = process.cwd() + '/',
+    LIBDIR      = DIR + 'lib/',
+    SRVDIR      = LIBDIR + 'server/',
         
-    srvfunc = require(SRVDIR + 'srvfunc'),
-    path    = require('path'),
-    fs      = require('fs'),
-    Server  = srvfunc.require(DIR + 'server'),
-    update  = srvfunc.require(SRVDIR + 'update'),
+    srvfunc     = require(SRVDIR + 'srvfunc'),
+    path        = require('path'),
+    fs          = require('fs'),
+    Server      = srvfunc.require(DIR + 'server'),
+    CloudFunc   = srvfunc.require(LIBDIR +'cloudfunc'),
+    update      = srvfunc.require(SRVDIR + 'update'),
     
     Config = readConfig();
 
-Server.start(Config);
+Server.start(Config, indexProcessing);
 
 if(update)
     update.get();
+
+function indexProcessing(pIndex, pList){    
+    var lWin32 = process.platform === 'win32';
+    
+    /* если выбрана опция минифизировать скрпиты
+     * меняем в index.html обычные css на
+     * минифицированый
+     */
+    if(Server.CloudServer.Minify._allowed.css){       
+        var lReplace_s = '<link rel=stylesheet href=';
+        if(lWin32)
+            lReplace_s = lReplace_s + '/css/reset.css>';
+        else
+            lReplace_s = lReplace_s + '"/css/reset.css">';
+        
+        pIndex = pIndex.replace(lReplace_s, '');
+        pIndex = pIndex.replace('/css/style.css', Server.CloudServer.Minify.MinFolder + 'all.min.css');
+    }
+    
+    pIndex = pIndex.replace('<div id=fm class=no-js>',
+        '<div id=fm class=no-js>'+ pList);
+    
+    /* меняем title */
+    pIndex = pIndex.replace('<title>Cloud Commander</title>',
+        '<title>' + CloudFunc.setTitle() + '</title>');
+    
+    if(!Server.CloudServer.Config.appcache){
+        if(lWin32)
+            pIndex = pIndex.replace(' manifest=/cloudcmd.appcache', '');
+        else
+            pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
+    }
+    
+    return pIndex;
+    
+}
 
 
 function readConfig(){
