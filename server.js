@@ -155,14 +155,16 @@ CloudServer.init        = (function(){
  * Функция создаёт сервер
  * @param pConfig
  */
-CloudServer.start = function (pConfig) {
+CloudServer.start = function (pConfig, pIndexProcessing) {    
     if(pConfig)
         this.Config = pConfig;
     else
         console.log('warning: configuretion file config.json not found...\n' +
             'using default values...\n'                     +
             JSON.stringify(this.Config));
-            
+        
+    CloudServer.indexProcessing = pIndexProcessing;
+    
     this.init();
     
     this.Port = process.env.PORT            ||  /* c9           */
@@ -675,37 +677,7 @@ CloudServer.indexReaded = function(pList){
                 
         pIndex = pIndex.toString();
         
-        var lWin32 = process.platform === 'win32';
-        
-        /* если выбрана опция минифизировать скрпиты
-         * меняем в index.html обычные css на
-         * минифицированый
-         */
-        if(CloudServer.Minify._allowed.css){
-            var lReplace_s = '<link rel=stylesheet href=';
-            if(lWin32)
-                lReplace_s = lReplace_s + '/css/reset.css>';
-            else
-                lReplace_s = lReplace_s + '"/css/reset.css">';
-            
-            pIndex = pIndex.replace(lReplace_s, '');
-            pIndex = pIndex.replace('/css/style.css', CloudServer.Minify.MinFolder + 'all.min.css');
-        }
-        
-        pIndex = pIndex.toString().replace('<div id=fm class=no-js>',
-            '<div id=fm class=no-js>'+pList);
-        
-        /* меняем title */
-        pIndex = pIndex.replace('<title>Cloud Commander</title>',
-            '<title>' + CloudFunc.setTitle() + '</title>');
-        
-        if(!CloudServer.Config.appcache){
-            if(lWin32)
-                pIndex = pIndex.replace(' manifest=/cloudcmd.appcache', '');
-            else
-                pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
-        }
-        
+        pIndex = CloudServer.indexProcessing(pIndex, pList);        
         /* 
          * если браузер поддерживает gzip-сжатие
          * высылаем заголовок в зависимости от типа файла 
@@ -830,6 +802,7 @@ CloudServer.sendResponse = function(pHead, pData, pName){
     }
 };
 
-exports.start = function(pConfig){
-    CloudServer.start(pConfig);
+exports.start = function(pConfig, pIndexProcessing){
+    CloudServer.start(pConfig, pIndexProcessing);
 };
+exports.CloudServer = CloudServer;
