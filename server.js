@@ -111,7 +111,9 @@ if(!Zlib)
         'you should use newer node version\n');
 
  /* добавляем  модуль с функциями */
-var CloudFunc           =   srvfunc.require(LIBDIR + 'cloudfunc');
+var CloudFunc           =   srvfunc.require(LIBDIR + 'cloudfunc'),
+    Util                =   srvfunc.require(LIBDIR + 'util');
+
 CloudServer.AppCache    =   srvfunc.require(SRVDIR + 'appcache');
 CloudServer.Socket      =   srvfunc.require(SRVDIR + 'socket');
                                 
@@ -223,19 +225,21 @@ CloudServer.generateHeaders = function(pName, pGzip){
         lContentEncoding    = '',
         
         lDot                = pName.lastIndexOf('.'),
-        lExt                =  pName.substr(lDot);
+        lExt                = pName.substr(lDot);
     
-    if(lExt === '.appcache')
+    if( Util.strCmp(lExt, '.appcache') )
         lCacheControl = 1;
     
     lType = CloudServer.Extensions[lExt] || 'text/plain';
-    if(lType.indexOf('img') < 0)
+    
+    if( !Util.isContainStr(lType, 'img') )
         lContentEncoding = '; charset=UTF-8';
 
     var lQuery = CloudServer.Queries[pName];
     if(lQuery){
-        if(lQuery === 'download')
+        if( Util.strCmp(lQuery, 'download') )
             lType = 'application/octet-stream';
+        
         console.log(pName + lQuery);
     }
 
@@ -249,7 +253,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
         'Content-Type': lType + lContentEncoding,
         'cache-control': 'max-age=' + lCacheControl,
         'last-modified': new Date().toString(),
-        'content-encoding': pGzip?'gzip':'',
+        'content-encoding': pGzip? 'gzip' : '',
         /* https://developers.google.com/speed/docs/best-practices
             /caching?hl=ru#LeverageProxyCaching */
         'Vary': 'Accept-Encoding'
@@ -311,10 +315,13 @@ CloudServer._controller = function(pReq, pRes)
      * ни о том, что это корневой
      * каталог - загружаем файлы проэкта
      */
-    if(pathname.indexOf(lFS_s) < 0      &&
-        pathname.indexOf(lNoJS_s) < 0   &&
-        pathname!=='/'                  &&
-        lQuery !=='json'){
+
+         
+    
+    if ( !Util.isContainStr(pathname, lFS_s)    &&
+         !Util.isContainStr(pathname, lNoJS_s)  &&
+         !Util.strCmp(pathname, '/')            &&
+         !Util.strCmp(lQuery, 'json') ) {
         /* если имена файлов проекта - загружаем их*/  
         /* убираем слеш и читаем файл с текущец директории*/
         
@@ -678,8 +685,11 @@ CloudServer.indexReaded = function(pList){
         pIndex = pIndex.toString();
         
         
-        if(typeof CloudServer.indexProcessing === 'function')
-            pIndex = CloudServer.indexProcessing(pIndex, pList);        
+        var lProccessed = Util.exec(function(){
+            return CloudServer.indexProcessing(pIndex, pList);
+        });
+            if(lProccessed)
+                pIndex = lProccessed;
         /* 
          * если браузер поддерживает gzip-сжатие
          * высылаем заголовок в зависимости от типа файла 
