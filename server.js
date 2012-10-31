@@ -677,7 +677,9 @@ CloudServer.indexReaded = function(pList){
                 
         pIndex = pIndex.toString();
         
-        pIndex = CloudServer.indexProcessing(pIndex, pList);        
+        
+        if(typeof CloudServer.indexProcessing === 'function')
+            pIndex = CloudServer.indexProcessing(pIndex, pList);        
         /* 
          * если браузер поддерживает gzip-сжатие
          * высылаем заголовок в зависимости от типа файла 
