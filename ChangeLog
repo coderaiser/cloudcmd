@@ -54,6 +54,9 @@ document.location.origin)
 * Util cleaned up (addClass and removeClass
 moved to ie.js).
 
+* Index processing function moved out from
+server.js to cloudcmd.js.
+
 
 2012.10.01, Version 0.1.7
 
