@@ -56,18 +56,16 @@ function indexProcessing(pIndex, pList){
 }
 
 function appCacheProcessing(){
-    var lAppCache = srv.AppCache;
-    /* создаём файл app cache */    
-    if(srv.Config.appcache && lAppCache && srv.Config.server){
-        var lFiles = [{'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
-            {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'}];
-        
-        if(srv.Minify._allowed.css)
-            lFiles.push('./min/all.min.css');
-        
-        lAppCache.addFiles(lFiles);
-        lAppCache.createManifest();
-    }
+    var lAppCache = srv.AppCache,
+
+        lFiles = [{'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
+        {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'}];
+    
+    if(srv.Minify._allowed.css)
+        lFiles.push('./min/all.min.css');
+    
+    lAppCache.addFiles(lFiles);
+    lAppCache.createManifest();
 }
 
 function readConfig(){
