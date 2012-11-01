@@ -218,6 +218,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
     var lType               = '',
         lCacheControl       = 0,
         lContentEncoding    = '',
+        lRet,
         
         lDot                = pName.lastIndexOf('.'),
         lExt                = pName.substr(lDot);
@@ -231,6 +232,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
         lContentEncoding = '; charset=UTF-8';
 
     var lQuery = CloudServer.Queries[pName];
+    console.log(lQuery);
     if(lQuery){
         if( Util.strCmp(lQuery, 'download') )
             lType = 'application/octet-stream';
@@ -241,18 +243,24 @@ CloudServer.generateHeaders = function(pName, pGzip){
     if(!lCacheControl)
         lCacheControl = 31337 * 21;    
         
-    return {
+    lRet = {
         /* if type of file any, but img - 
          * then we shoud specify charset 
          */
         'Content-Type': lType + lContentEncoding,
         'cache-control': 'max-age=' + lCacheControl,
-        'last-modified': new Date().toString(),
-        'content-encoding': pGzip? 'gzip' : '',
+        'last-modified': new Date().toString(),        
         /* https://developers.google.com/speed/docs/best-practices
             /caching?hl=ru#LeverageProxyCaching */
         'Vary': 'Accept-Encoding'
     };
+    
+    if(pGzip)
+        lRet['content-encoding'] = 'gzip';
+    
+    console.log(lRet);
+    
+    return lRet;
 };
 
 /**
@@ -338,8 +346,8 @@ CloudServer._controller = function(pReq, pRes)
          * сжатый файл - если gzip-поддерживаеться браузером
          * не сжатый - в обратном случае
          */
-        var lFileData=CloudServer.Cache.get(
-            CloudServer.Gzip?(lName+'_gzip'):lName);
+        var lFileData = CloudServer.Cache.get(
+            CloudServer.Gzip?(lName+'_gzip') : lName);
         
         console.log(Path.basename(lName));
                     
@@ -458,6 +466,8 @@ CloudServer._controller = function(pReq, pRes)
         
         /* saving query of current file */
         CloudServer.Queries[DirPath]    = lQuery;
+        console.log(lQuery);
+        console.log(DirPath);
         
         /* читаем основные данные о файле */
         if( lQuery && lQuery.indexOf('code=') === 0){
