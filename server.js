@@ -138,7 +138,13 @@ CloudServer.init        = (function(pAppCachProcessing){
     this.Minify._allowed = this.Minify.doit();
     
     
-    Util.exec( pAppCachProcessing );
+    var lAppCache = CloudServer.AppCache;
+    
+    /* создаём файл app cache */    
+    if( CloudServer.Config.appcache  &&
+        lAppCache                   &&
+        CloudServer.Config.server )
+            Util.exec( pAppCachProcessing );
 });
 
 
