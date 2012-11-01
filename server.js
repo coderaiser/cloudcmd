@@ -127,7 +127,7 @@ else
     console.log('could not found one of Cloud Commander SS files');
 
 /* базовая инициализация  */
-CloudServer.init        = (function(){    
+CloudServer.init        = (function(pAppCachProcessing){    
     /* Переменная в которой храниться кэш*/
     this.Cache.setAllowed(CloudServer.Config.cache.allowed);
     /* Change default parameters of
@@ -138,18 +138,7 @@ CloudServer.init        = (function(){
     this.Minify._allowed = this.Minify.doit();
     
     
-    var lAppCache = CloudServer.AppCache;
-    /* создаём файл app cache */    
-    if(this.Config.appcache && lAppCache && this.Config.server){
-        var lFiles = [{'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
-            {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'}];
-        
-        if(this.Minify._allowed.css)
-            lFiles.push('./min/all.min.css');
-        
-        lAppCache.addFiles(lFiles);
-        lAppCache.createManifest();
-    }
+    Util.exec( pAppCachProcessing );
 });
 
 
@@ -157,7 +146,7 @@ CloudServer.init        = (function(){
  * Функция создаёт сервер
  * @param pConfig
  */
-CloudServer.start = function (pConfig, pIndexProcessing) {    
+CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {    
     if(pConfig)
         this.Config = pConfig;
     else
@@ -167,7 +156,7 @@ CloudServer.start = function (pConfig, pIndexProcessing) {
         
     CloudServer.indexProcessing = pIndexProcessing;
     
-    this.init();
+    this.init(pAppCachProcessing);
     
     this.Port = process.env.PORT            ||  /* c9           */
                 process.env.app_port        ||  /* nodester     */
@@ -814,7 +803,7 @@ CloudServer.sendResponse = function(pHead, pData, pName){
     }
 };
 
-exports.start = function(pConfig, pIndexProcessing){
-    CloudServer.start(pConfig, pIndexProcessing);
+exports.start = function(pConfig, pIndexProcessing, pAppCachProcessing){
+    CloudServer.start(pConfig, pIndexProcessing, pAppCachProcessing);
 };
 exports.CloudServer = CloudServer;
