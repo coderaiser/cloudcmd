@@ -7,9 +7,11 @@
         "html"  : true,
         "img"   : true
     },
+    "oauth_client_id"       : "891c251b925e4e967fa9",
+    "oauth_client_secret"   : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545",
     "server"    : true,
     "logs"      : false,
     "socket"    : true,
     "port"      : 31337,
-    "ip"        : "127.0.0.1"
+    "ip"        : "127.0.0.1"    
 }
