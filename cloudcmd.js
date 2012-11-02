@@ -1,8 +1,8 @@
 "use strict";
 
-var main        = require('./lib/server/main'),
-
-    DIR         = main.DIR,
+var DIR         = process.cwd() + '/',
+    main        = require(DIR + 'lib/server/main'),
+    
     LIBDIR      = main.LIBDIR,
     SRVDIR      = main.SRVDIR,
     
