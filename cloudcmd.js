@@ -1,19 +1,21 @@
 "use strict";
 
-var DIR         = process.cwd()             + '/',
-    LIBDIR      = DIR                       + 'lib/',
-    SRVDIR      = LIBDIR                    + 'server/',
+var main        = require('./lib/server/main.js');
+
+var DIR         = main.Dir,
+    LIBDIR      = DIR       + 'lib/',
+    SRVDIR      = LIBDIR    + 'server/',
         
-    srvfunc     = require(SRVDIR            + 'srvfunc'),
-    path        = require('path'),
-    fs          = require('fs'),
-    Server      = srvfunc.require(DIR       + 'server'),
-    CloudFunc   = srvfunc.require(LIBDIR    + 'cloudfunc'),
-    Util        = srvfunc.require(LIBDIR    + 'util'),
-    update      = srvfunc.require(SRVDIR    + 'update'),    
+    srvfunc     = main.srvfunc,
+    path        = main.path,
+    fs          = main.path,
+    Server      = main.server,
+    CloudFunc   = main.cloudfunc,
+    Util        = main.util,
+    update      = main.update,
     
-    srv         = Server.CloudServer,
-    Config      = srvfunc.require(DIR + 'config');
+    srv         = main.srv,
+    Config      = main.config;
 
 
 readConfig();
