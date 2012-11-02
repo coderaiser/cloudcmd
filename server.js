@@ -98,7 +98,7 @@ var CloudServer         = {
     
     DIR                 = main.DIR,
     LIBDIR              = main.LIBDIR,
-    SRVDIR              = main.LIBDIR,
+    SRVDIR              = main.SRVDIR,
 
 /* модуль для работы с путями*/
     Path                = main.path,
@@ -472,7 +472,7 @@ CloudServer._controller = function(pReq, pRes)
         
         /* читаем основные данные о файле */
         if( lQuery && lQuery.indexOf('code=') === 0){
-            var lAuth = srvfunc.require(SRVDIR + 'auth');
+            var lAuth = main.auth;
 
             if(lAuth) lAuth.auth(lQuery, function(){
                     Fs.stat(DirPath, CloudServer._stated);
