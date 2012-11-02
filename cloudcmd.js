@@ -1,39 +1,38 @@
 "use strict";
 
-var DIR         = process.cwd() + '/',
-    LIBDIR      = DIR + 'lib/',
-    SRVDIR      = LIBDIR + 'server/',
+var DIR         = process.cwd()             + '/',
+    LIBDIR      = DIR                       + 'lib/',
+    SRVDIR      = LIBDIR                    + 'server/',
         
-    srvfunc     = require(SRVDIR + 'srvfunc'),
+    srvfunc     = require(SRVDIR            + 'srvfunc'),
     path        = require('path'),
     fs          = require('fs'),
-    Server      = srvfunc.require(DIR + 'server'),
-    CloudFunc   = srvfunc.require(LIBDIR +'cloudfunc'),
-    update      = srvfunc.require(SRVDIR + 'update'),
+    Server      = srvfunc.require(DIR       + 'server'),
+    CloudFunc   = srvfunc.require(LIBDIR    + 'cloudfunc'),
+    Util        = srvfunc.require(LIBDIR    + 'util'),
+    update      = srvfunc.require(SRVDIR    + 'update'),    
     
-    srv         = Server.CloudServer,    
-    Config      = readConfig();
+    srv         = Server.CloudServer,
+    Config      = srvfunc.require(DIR + 'config');
 
-Server.start(Config, indexProcessing);
+
+readConfig();
+Server.start(Config, indexProcessing, appCacheProcessing);
 
 if(update)
     update.get();
 
-function indexProcessing(pIndex, pList){    
-    var lWin32 = process.platform === 'win32';
-    
+
+function indexProcessing(pIndex, pList){
     /* если выбрана опция минифизировать скрпиты
      * меняем в index.html обычные css на
      * минифицированый
      */
     if(srv.Minify._allowed.css){       
-        var lReplace_s = '<link rel=stylesheet href=';
-        if(lWin32)
-            lReplace_s = lReplace_s + '/css/reset.css>';
-        else
-            lReplace_s = lReplace_s + '"/css/reset.css">';
+        var lReplace_s = '<link rel=stylesheet href=' + 
+            (srvfunc.isWin32 ? '/css/reset.css>' : '"/css/reset.css">');
         
-        pIndex = pIndex.replace(lReplace_s, '');
+        pIndex = Util.removeStr(pIndex, lReplace_s);
         pIndex = pIndex.replace('/css/style.css', srv.Minify.MinFolder + 'all.min.css');
     }
     
@@ -44,12 +43,10 @@ function indexProcessing(pIndex, pList){
     pIndex = pIndex.replace('<title>Cloud Commander</title>',
         '<title>' + CloudFunc.setTitle() + '</title>');
     
-    if(!srv.Config.appcache){
-        if(lWin32)
-            pIndex = pIndex.replace(' manifest=/cloudcmd.appcache', '');
-        else
-            pIndex = pIndex.replace(' manifest="/cloudcmd.appcache"', '');
-    }
+    if(!srv.Config.appcache)
+        pIndex = srvfunc.isWin32 ?
+            Util.removeStr(pIndex, ' manifest=/cloudcmd.appcache') :
+            Util.removeStr(pIndex, ' manifest="/cloudcmd.appcache"');
     
     return pIndex;
     
@@ -75,41 +72,37 @@ function readConfig(){
      * (usually /) to it.
      * argv[1] - is always script name
      */
-    var lServerDir = path.dirname(process.argv[1]),
-        lProcessDir = process.cwd();
-        lConfig     = {};
+    var lServerDir = path.dirname(process.argv[1]);
     
-    if(lProcessDir !== lServerDir){
+    if( DIR !== lServerDir ){
         console.log('current dir: ' + lProcessDir);
         process.chdir(lServerDir);
     }
-    console.log('server dir:  ' + lServerDir);
+    console.log('server dir:  ' + lServerDir + '\n' +
+        'reading configuretion file config.json...');
     
-    console.log('reading configuretion file config.json...');
-    var lConfig = srvfunc.require(DIR + 'config');
-    if(lConfig){
+    if(Config){
         console.log('config.json readed');
         
         /* if command line parameter testing resolved 
          * setting config to testing, so server
          * not created, just init and
          * all logs writed to screen
-         */
-        var lArg = process.argv[process.argv.length - 1];
+         */        
+        var lArg = process.argv;
+            lArg = lArg[lArg.length - 1];
         if ( lArg === 'test' ||  lArg === 'test\r') {
             console.log(process.argv);
-            lConfig.server  = false;
-            lConfig.logs    = false;
+            Config.server  = 
+            Config.logs    = false;
         }
                     
-        if (lConfig.logs) {
+        if (Config.logs) {
             console.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
             writeLogsToFile();
         }        
     }
-        
-    return lConfig;
 }
 
 /* function sets stdout to file log.txt */
