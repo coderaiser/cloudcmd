@@ -35,16 +35,6 @@ var CloudServer         = {
      * данные клиенту
      */
     sendResponse    : function () {},
-
-     /* Обьект для работы с кэшем */
-    Cache           : {},
-    
-    /* Обьект через который
-     * выполняеться сжатие
-     * скриптов и стилей
-     */
-    
-    Minify          : {},
     
     /* Асоциативный масив обьектов для
      * работы с ответами сервера
@@ -88,7 +78,7 @@ var CloudServer         = {
             '.woff'     : 'font/woff',
             '.appcache' : 'text/cache-manifest',
             '.mp3'      : 'audio/mpeg'
-    }
+    },
 },
 
     DirPath             = '/',
@@ -114,16 +104,19 @@ if(!Zlib)
  /* добавляем  модуль с функциями */
 var CloudFunc           =   main.cloudfunc,
     Util                =   main.util;
+    
+/* Обьект для работы с кэшем */
+CloudServer.Cache       =   main.cache,
+    
+/* Обьект через который
+ * выполняеться сжатие
+ * скриптов и стилей
+ */
+CloudServer.Minify      = main.minify,
+    
+CloudServer.AppCache    = main.appcache,
 
-CloudServer.AppCache    =   main.appcache;
 CloudServer.Socket      =   main.socket;
-
-if(main.object){
-    CloudServer.Cache   =   main.object.Cache;
-    CloudServer.Minify  =   main.object.Minify;
-}
-else
-    console.log('could not found one of Cloud Commander SS files');
 
 /* базовая инициализация  */
 CloudServer.init        = (function(pAppCachProcessing){
