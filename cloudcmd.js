@@ -1,22 +1,21 @@
 "use strict";
 
-var main        = require('./lib/server/main.js'),
+var main        = require('./lib/server/main'),
 
     DIR         = main.DIR,
     LIBDIR      = main.LIBDIR,
     SRVDIR      = main.SRVDIR,
-        
-    srvfunc     = main.srvfunc,
+    
     path        = main.path,
     fs          = main.path,    
     CloudFunc   = main.cloudfunc,
     Util        = main.util,
     update      = main.update,
     
-    Server      = srvfunc.require(DIR + 'server'),
+    Server      = main.require(DIR + 'server'),
     srv         = Server.CloudServer,
     Config      = main.config,
-    WIN32       = srvfunc.isWin32;
+    WIN32       = main.WIN32;
 
 readConfig();
 Server.start(Config, indexProcessing, appCacheProcessing);

@@ -104,8 +104,6 @@ var CloudServer         = {
     Path                = main.path,
     Fs                  = main.fs,    /* модуль для работы с файловой системой*/
     Querystring         = main.querystring,
-    
-    srvfunc             = main.srvfunc,
 
 /* node v0.4 not contains zlib  */
     Zlib                = main.zlib;  /* модуль для сжатия данных gzip-ом*/
