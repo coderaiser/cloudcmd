@@ -92,58 +92,59 @@ var CloudServer         = {
 },
 
     DirPath             = '/',
-
+    
     DIR                 = process.cwd() + '/',
-    LIBDIR              = DIR + 'lib/',
-    SRVDIR              = LIBDIR + 'server/',
+    main                = require(DIR + 'lib/server/main.js'),
+    
+    DIR                 = main.DIR,
+    LIBDIR              = main.LIBDIR,
+    SRVDIR              = main.LIBDIR,
 
 /* модуль для работы с путями*/
-    Path                = require('path'),
-    Fs                  = require('fs'),    /* модуль для работы с файловой системой*/
-    Querystring         = require('querystring'),
+    Path                = main.path,
+    Fs                  = main.fs,    /* модуль для работы с файловой системой*/
+    Querystring         = main.querystring,
     
-    srvfunc             = require(SRVDIR + 'srvfunc'),
+    srvfunc             = main.srvfunc,
 
 /* node v0.4 not contains zlib  */
-    Zlib                = srvfunc.require('zlib');  /* модуль для сжатия данных gzip-ом*/
+    Zlib                = main.zlib;  /* модуль для сжатия данных gzip-ом*/
 if(!Zlib)
     console.log('to use gzip-commpression' +
         'you should use newer node version\n');
 
  /* добавляем  модуль с функциями */
-var CloudFunc           =   srvfunc.require(LIBDIR + 'cloudfunc'),
-    Util                =   srvfunc.require(LIBDIR + 'util');
+var CloudFunc           =   main.cloudfunc,
+    Util                =   main.util;
 
-CloudServer.AppCache    =   srvfunc.require(SRVDIR + 'appcache');
-CloudServer.Socket      =   srvfunc.require(SRVDIR + 'socket');
-                                
-CloudServer.Obj         =   srvfunc.require(SRVDIR + 'object');
+CloudServer.AppCache    =   main.appcache;
+CloudServer.Socket      =   main.socket;
 
-if(CloudServer.Obj){
-    CloudServer.Cache   =   CloudServer.Obj.Cache;                            
-    CloudServer.Minify  =   CloudServer.Obj.Minify;
+if(main.object){
+    CloudServer.Cache   =   main.object.Cache;
+    CloudServer.Minify  =   main.object.Minify;
 }
 else
     console.log('could not found one of Cloud Commander SS files');
 
 /* базовая инициализация  */
-CloudServer.init        = (function(pAppCachProcessing){    
+CloudServer.init        = (function(pAppCachProcessing){
     /* Переменная в которой храниться кэш*/
-    this.Cache.setAllowed(CloudServer.Config.cache.allowed);
+    this.Cache.setAllowed(this.Config.cache.allowed);
     /* Change default parameters of
      * js/css/html minification
      */
-    this.Minify.setAllowed(CloudServer.Config.minification);
+    this.Minify.setAllowed(this.Config.minification);
     /* Если нужно минимизируем скрипты */
     this.Minify._allowed = this.Minify.doit();
     
     
-    var lAppCache = CloudServer.AppCache;
+    var lAppCache = this.AppCache;
     
     /* создаём файл app cache */    
-    if( CloudServer.Config.appcache  &&
+    if( this.Config.appcache  &&
         lAppCache                   &&
-        CloudServer.Config.server )
+        this.Config.server )
             Util.exec( pAppCachProcessing );
 });
 
