@@ -1,22 +1,22 @@
 "use strict";
 
-var main        = require('./lib/server/main.js');
+var main        = require('./lib/server/main.js'),
 
-var DIR         = main.Dir,
-    LIBDIR      = DIR       + 'lib/',
-    SRVDIR      = LIBDIR    + 'server/',
+    DIR         = main.DIR,
+    LIBDIR      = main.LIBDIR,
+    SRVDIR      = main.SRVDIR,
         
     srvfunc     = main.srvfunc,
     path        = main.path,
-    fs          = main.path,
-    Server      = main.server,
+    fs          = main.path,    
     CloudFunc   = main.cloudfunc,
     Util        = main.util,
     update      = main.update,
     
-    srv         = main.srv,
-    Config      = main.config;
-
+    Server      = srvfunc.require(DIR + 'server'),
+    srv         = Server.CloudServer,
+    Config      = main.config,
+    WIN32       = srvfunc.isWin32;
 
 readConfig();
 Server.start(Config, indexProcessing, appCacheProcessing);
@@ -32,7 +32,7 @@ function indexProcessing(pIndex, pList){
      */
     if(srv.Minify._allowed.css){       
         var lReplace_s = '<link rel=stylesheet href=' + 
-            (srvfunc.isWin32 ? '/css/reset.css>' : '"/css/reset.css">');
+            (WIN32 ? '/css/reset.css>' : '"/css/reset.css">');
         
         pIndex = Util.removeStr(pIndex, lReplace_s);
         pIndex = pIndex.replace('/css/style.css', srv.Minify.MinFolder + 'all.min.css');
@@ -46,7 +46,7 @@ function indexProcessing(pIndex, pList){
         '<title>' + CloudFunc.setTitle() + '</title>');
     
     if(!srv.Config.appcache)
-        pIndex = srvfunc.isWin32 ?
+        pIndex = WIN32 ?
             Util.removeStr(pIndex, ' manifest=/cloudcmd.appcache') :
             Util.removeStr(pIndex, ' manifest="/cloudcmd.appcache"');
     
