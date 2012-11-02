@@ -75,7 +75,7 @@ function readConfig(){
     var lServerDir = path.dirname(process.argv[1]);
     
     if( DIR !== lServerDir ){
-        console.log('current dir: ' + lProcessDir);
+        console.log('current dir: ' + DIR);
         process.chdir(lServerDir);
     }
     console.log('server dir:  ' + lServerDir + '\n' +
