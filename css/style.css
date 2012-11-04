@@ -186,8 +186,15 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 /* информация о файлах и папках*/
 .name{
-  float: left;
-  width: 37%;
+    float: left;
+    width: 37%;
+    /* если длина имени файла больше 16 символов
+     * отрезаем лишнее, оставляя лишь 16,
+     * и добавляем две точки и тайтл
+     */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .size{
     float:left;

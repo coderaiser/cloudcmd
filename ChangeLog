@@ -59,6 +59,9 @@ server.js to cloudcmd.js.
 
 * Added ability of authorithation in GitHub.
 
+* Rewrited sizing of names if they are to 
+long thrue css, from JavaScript.
+
 
 2012.10.01, Version 0.1.7
 
