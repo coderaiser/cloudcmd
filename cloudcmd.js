@@ -15,8 +15,7 @@
         
         Server      = main.require(DIR + 'server'),
         srv         = Server.CloudServer,
-        Config      = main.config,
-        WIN32       = main.WIN32;
+        Config      = main.config;
     
     readConfig();
     Server.start(Config, indexProcessing, appCacheProcessing);
@@ -31,8 +30,7 @@
          * минифицированый
          */
         if(srv.Minify._allowed.css){       
-            var lReplace_s = '<link rel=stylesheet href=' + 
-                (WIN32 ? '/css/reset.css>' : '"/css/reset.css">');
+            var lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             
             pIndex = Util.removeStr(pIndex, lReplace_s);
             pIndex = pIndex.replace('/css/style.css', srv.Minify.MinFolder + 'all.min.css');
