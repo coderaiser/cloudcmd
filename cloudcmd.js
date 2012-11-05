@@ -46,9 +46,7 @@
             '<title>' + CloudFunc.setTitle() + '</title>');
         
         if(!srv.Config.appcache)
-            pIndex = WIN32 ?
-                Util.removeStr(pIndex, ' manifest=/cloudcmd.appcache') :
-                Util.removeStr(pIndex, ' manifest="/cloudcmd.appcache"');
+            pIndex = Util.removeStr(pIndex, ' manifest="/cloudcmd.appcache"');
         
         return pIndex;
         

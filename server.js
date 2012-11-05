@@ -718,6 +718,7 @@ CloudServer.getReadFileFunc = function(pName){
             if(pFromCache_o && !pFromCache_o.cache && 
                 CloudServer.Cache.isAllowed)
                     CloudServer.Cache.set(pName, pData);
+            
             /* если кэш есть
              * сохраняем его в переменную
              * которая до этого будет пустая
@@ -736,8 +737,7 @@ CloudServer.getReadFileFunc = function(pName){
         }
         else{
             console.log(pError.path);
-            if(pError.path !== 'passwd.json')
-            {
+            if(pError.path !== 'passwd.json'){
                 console.log(pError);
                 
                 /* sending page not found */

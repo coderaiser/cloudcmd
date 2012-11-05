@@ -62,6 +62,8 @@ server.js to cloudcmd.js.
 * Rewrited sizing of names if they are to 
 long thrue css, from JavaScript.
 
+* Fixed bug with application cahe forming on windows
+and linux.
 
 2012.10.01, Version 0.1.7
 
