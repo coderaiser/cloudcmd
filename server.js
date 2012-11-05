@@ -183,7 +183,7 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
             
             if(this.Config.socket && CloudServer.Socket){
                 CloudServer.Socket.listen(this.Server);
-                console.log('sockets running');                
+                console.log('sockets running');
             }
             else
                 console.log('sockets disabled');
@@ -293,15 +293,15 @@ CloudServer._controller = function(pReq, pRes)
      * и доступен ли нам модуль zlib
      */ 
     if (lAcceptEncoding && 
-        lAcceptEncoding.match(/\bgzip\b/) &&
-        Zlib){
-        CloudServer.Gzip = true;
-    }
+        lAcceptEncoding.match(/\bgzip\b/) && Zlib)
+            CloudServer.Gzip = true;
+
     /* путь в ссылке, который говорит
      * что js отключен
      */
     var lNoJS_s = CloudFunc.NOJS,
         lFS_s   = CloudFunc.FS;
+    
     console.log("request for " + pathname + " received...");
     
     
@@ -310,80 +310,75 @@ CloudServer._controller = function(pReq, pRes)
      * ни о том, что это корневой
      * каталог - загружаем файлы проэкта
      */
-
-         
-    
     if ( !Util.isContainStr(pathname, lFS_s)    &&
          !Util.isContainStr(pathname, lNoJS_s)  &&
          !Util.strCmp(pathname, '/')            &&
          !Util.strCmp(lQuery, 'json') ) {
-        /* если имена файлов проекта - загружаем их*/  
-        /* убираем слеш и читаем файл с текущец директории*/
-        
-        /* добавляем текующий каталог к пути */
-        var lName = '.' + pathname;
-        console.log('reading '+lName);
-        
-        /* watching is file changed */
-        if(CloudServer.Config.appcache)        
-            CloudServer.AppCache.watch(lName);
-        
-        /* сохраняем указатель на response и имя */
-        CloudServer.Responses[lName]    = pRes;
-        
-        /* saving status OK for current file */
-        CloudServer.Statuses[lName]     = 200;
-        
-        /* Берём значение из кэша
-         * сжатый файл - если gzip-поддерживаеться браузером
-         * не сжатый - в обратном случае
-         */
-        var lFileData = CloudServer.Cache.get(
-            CloudServer.Gzip?(lName+'_gzip') : lName);
-        
-        console.log(Path.basename(lName));
-                    
-        var lMinify = CloudServer.Minify;
-        
-        /* object thet contains information
-         * about the source of file data
-         */
-        var lFromCache_o = {'cache': true};
-        
-        /* if cache is empty and Cache allowed and Minify_allowed 
-         * and in Minifys cache is files, so save it to
-         * CloudServer cache
-         */
-        if(!lFileData &&  
-            lMinify._allowed){
-                console.log('trying to read data from Minify.Cache');
-                lFromCache_o.cache = false;
-                lFileData = CloudServer.Minify.Cache[
-                    Path.basename(lName)];                    
-        }
-        var lReadFileFunc_f = CloudServer.getReadFileFunc(lName),
-        /* если там что-то есть передаём данные в функцию readFile */
-            lResult = true;
-        
-        if(lFileData){
-            /* if file readed not from cache - 
-             * he readed from minified cache 
+            /* если имена файлов проекта - загружаем их*/  
+            /* убираем слеш и читаем файл с текущец директории*/
+            
+            /* добавляем текующий каталог к пути */
+            var lName = '.' + pathname;
+            console.log('reading '+lName);
+            
+            /* watching is file changed */
+            if(CloudServer.Config.appcache)        
+                CloudServer.AppCache.watch(lName);
+            
+            /* сохраняем указатель на response и имя */
+            CloudServer.Responses[lName]    = pRes;
+            
+            /* saving status OK for current file */
+            CloudServer.Statuses[lName]     = 200;
+            
+            /* Берём значение из кэша
+             * сжатый файл - если gzip-поддерживаеться браузером
+             * не сжатый - в обратном случае
              */
-            if(lFromCache_o.cache === false)
-                lFromCache_o.minify = true;
-            else
-                lFromCache_o.minify = false;
+            var lFileData = CloudServer.Cache.get(
+                CloudServer.Gzip?(lName+'_gzip') : lName);
+            
+            console.log(Path.basename(lName));
+                        
+            var lMinify = CloudServer.Minify;
+            
+            /* object thet contains information
+             * about the source of file data
+             */
+            var lFromCache_o = {'cache': true};
+            
+            /* if cache is empty and Cache allowed and Minify_allowed 
+             * and in Minifys cache is files, so save it to
+             * CloudServer cache
+             */
+            if(!lFileData &&  
+                lMinify._allowed){
+                    console.log('trying to read data from Minify.Cache');
+                    lFromCache_o.cache = false;
+                    lFileData = CloudServer.Minify.Cache[
+                        Path.basename(lName)];                    
+            }
+            var lReadFileFunc_f = CloudServer.getReadFileFunc(lName),
+            /* если там что-то есть передаём данные в функцию readFile */
+                lResult = true;
+            
+            if(lFileData){
+                /* if file readed not from cache - 
+                 * he readed from minified cache 
+                 */
+                lFromCache_o.minify = !lFromCache_o.cache;
+                                    
+                console.log(lName + ' readed from cache');
                 
-            console.log(lName + ' readed from cache');
-            /* передаём данные с кэша,
-             * если gzip включен - сжатые
-             * в обратном случае - несжатые
+                /* передаём данные с кэша,
+                 * если gzip включен - сжатые
+                 * в обратном случае - несжатые
+                 */
+                lReadFileFunc_f(undefined, lFileData, lFromCache_o);
+            }
+            /* if file not in one of caches
+             * and minimizing setted then minimize it
              */
-            lReadFileFunc_f(undefined, lFileData, lFromCache_o);
-        }
-        /* if file not in one of caches
-         * and minimizing setted then minimize it
-         */
         else if(lName.indexOf('min') < 0 &&
             CloudServer.Minify){
                 var lMin_o = CloudServer.Config.minification,
@@ -421,29 +416,30 @@ CloudServer._controller = function(pReq, pRes)
          * длиннее
          */
         
-        if(pathname.indexOf(lNoJS_s) !== lFS_s.length &&
-            pathname !== '/'){
-                CloudServer.NoJS = false;
+        if(pathname.indexOf(lNoJS_s) !== lFS_s.length && pathname !== '/'){
+            CloudServer.NoJS = false;
                 
-        }else pathname = pathname.replace(lNoJS_s,'');
+        }else
+            pathname = Util.removeStr(pathname, lNoJS_s);
         
         /* убираем индекс файловой системы */
         if(pathname.indexOf(lFS_s) === 0){
-            pathname = pathname.replace(lFS_s,'');
+            pathname = Util.removeStr(pathname, lFS_s);
+            /* if query json setted up
+             * load json data, no-js false.
+             */
+            
+            if(lQuery === 'json')
+                CloudServer.NoJS = false;
+            
+            /* если посетитель только зашел на сайт
+             * no-js будет пустым, как и fs.
+             * Если в пути нету fs - посетитель только зашел на сайт
+             * загружаем его полностью.
+             */
+        }else
+            CloudServer.NoJS = true;
         
-        /* if query json setted up
-         * load json data, no-js false.
-         */
-        if(lQuery === 'json'){
-            CloudServer.NoJS = false;
-        }
-        
-        /* если посетитель только зашел на сайт
-         * no-js будет пустым, как и fs.
-         * Если в пути нету fs - посетитель только зашел на сайт
-         * загружаем его полностью.
-         */
-        } else CloudServer.NoJS = true;
         /* если в итоге путь пустой
          * делаем его корневым
          */                         
@@ -501,19 +497,15 @@ CloudServer._stated = function(pError, pStat){
         
         return;
     }
-
-    /* 
-     * если это каталог - 
-     * читаем его содержимое
-     */
-             
+    
+    /* если это каталог - читаем его содержимое */
     if(pStat){
         if(pStat.isDirectory())
-            Fs.readdir(DirPath, CloudServer._readDir);                    
+            Fs.readdir(DirPath, CloudServer._readDir);
         /* отдаём файл */
-        else if(pStat.isFile()){                        
+        else if(pStat.isFile()){
             Fs.readFile(DirPath, CloudServer.getReadFileFunc(DirPath));
-            console.log('reading file: '+DirPath);
+            console.log('reading file: '+ DirPath);
         }
     }
 };
@@ -537,19 +529,19 @@ CloudServer._readDir = function (pError, pFiles)
     
     /* Если мы не в корне добавляем слеш к будующим ссылкам */       
    if(DirPath !== '/')
-    {
         DirPath += '/';
-    }
 
     pFiles = pFiles.sort();
     
-    var lCount = 0;
-    var lStats = {};
+    var lCount = 0,
+        lStats = {};
+    
     /* asyn getting file states
      * and putting it to lStats object
      */
     var getFilesStat_f = function(pName){
         return function(pError, pStat){
+            
             var fReturnFalse = function(){
                 return false;
             };
@@ -571,12 +563,12 @@ CloudServer._readDir = function (pError, pFiles)
     };
     
     if(pFiles.length)
-        for(var i = 0; i < pFiles.length; i++){
-            /* Получаем информацию о файле*/
-            Fs.stat(DirPath + pFiles[i],
-                getFilesStat_f(pFiles[i]));
-        }
-    else CloudServer._fillJSON(null, pFiles);
+        for(var i = 0; i < pFiles.length; i++)
+            /* Получаем информацию о файле */
+            Fs.stat(DirPath + pFiles[i], getFilesStat_f(pFiles[i]));
+                
+    else
+        CloudServer._fillJSON(null, pFiles);
 };
 
 /**
@@ -601,8 +593,7 @@ CloudServer._fillJSON = function(pStats, pFiles){
     
     var fReturnFalse = function returnFalse(){return false;};
     
-    for(var i = 0; i < pFiles.length; i++)
-    {
+    for(var i = 0; i < pFiles.length; i++){
         /*
          *Переводим права доступа в 8-ричную систему
          */
@@ -614,8 +605,9 @@ CloudServer._fillJSON = function(pStats, pFiles){
         
         /* Если папка - выводим пиктограмму папки   *
          * В противоположном случае - файла         */
-        lJSONFile = {'name':pFiles[i],
-            'size'  : (lIsDir?'dir':lStats.size),
+        lJSONFile = {
+            'name':pFiles[i],
+            'size'  : (lIsDir ? 'dir' : lStats.size),
             'uid'   : lStats.uid,
             'mode'  : lMode};        
         
@@ -628,13 +620,8 @@ CloudServer._fillJSON = function(pStats, pFiles){
      */    
     if(CloudServer.NoJS){
         var lPanel  = CloudFunc.buildFromJSON(lJSON);
-        lList       = '<ul id=left class=panel>';
-        lList       += lPanel;
-        lList       += '</ul>';
-        
-        lList       += '<ul id=right class="panel">';
-        lList       += lPanel;
-        lList       += '</ul>';
+        lList       = '<ul id=left class=panel>'  + lPanel + '</ul>' +
+                      '<ul id=right class=panel>' + lPanel + '</ul>';
         
         /* пробуем достать данные из кэша
          * с жатием или без, взависимости
@@ -685,8 +672,9 @@ CloudServer.indexReaded = function(pList){
         var lProccessed = Util.exec(function(){
             return CloudServer.indexProcessing(pIndex, pList);
         });
-            if(lProccessed)
-                pIndex = lProccessed;
+        
+        if(lProccessed)
+            pIndex = lProccessed;
         /* 
          * если браузер поддерживает gzip-сжатие
          * высылаем заголовок в зависимости от типа файла 
@@ -726,9 +714,10 @@ CloudServer.getReadFileFunc = function(pName){
             /* берём из кэша данные файла
              * если их нет в кэше - 
              * сохраняем
-             */            
-            if(pFromCache_o && !pFromCache_o.cache && CloudServer.Cache.isAllowed)
-                CloudServer.Cache.set(pName, pData);
+             */
+            if(pFromCache_o && !pFromCache_o.cache && 
+                CloudServer.Cache.isAllowed)
+                    CloudServer.Cache.set(pName, pData);
             /* если кэш есть
              * сохраняем его в переменную
              * которая до этого будет пустая
@@ -738,14 +727,12 @@ CloudServer.getReadFileFunc = function(pName){
             var lHeader = CloudServer.generateHeaders(pName, CloudServer.Gzip);
             
             /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
-            if( CloudServer.Gzip && !(pFromCache_o && pFromCache_o.cache) ){
+            if( CloudServer.Gzip && !(pFromCache_o && pFromCache_o.cache) )
                 /* сжимаем содержимое */
-                Zlib.gzip(pData,CloudServer.getGzipDataFunc(lHeader, pName));                
-            }
-            else{
+                Zlib.gzip(pData,CloudServer.getGzipDataFunc(lHeader, pName));
+            else
                 /* высылаем несжатые данные */
                 CloudServer.sendResponse(lHeader, pData, pName);
-            }
         }
         else{
             console.log(pError.path);
@@ -760,6 +747,7 @@ CloudServer.getReadFileFunc = function(pName){
                 CloudServer.sendResponse('OK', 'passwd.json');        
         }
     };
+    
     return lReadFile;
 };
 
