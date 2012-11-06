@@ -637,6 +637,7 @@ CloudServer._fillJSON = function(pStats, pFiles){
         }
     }else{
         var lQuyery = CloudServer.Queries[DirPath];
+        DirPath = DirPath.substr( DirPath.lastIndexOf('/') );
         DirPath += '.json';        
         CloudServer.Queries[DirPath] = lQuyery;
         /* в обычном режиме(когда js включен
