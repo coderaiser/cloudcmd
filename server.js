@@ -107,15 +107,9 @@ var CloudFunc           =   main.cloudfunc,
     
 /* Обьект для работы с кэшем */
 CloudServer.Cache       =   main.cache,
-    
-/* Обьект через который
- * выполняеться сжатие
- * скриптов и стилей
- */
-CloudServer.Minify      = main.minify,
-    
-CloudServer.AppCache    = main.appcache,
 
+CloudServer.Minify      = main.minify,
+CloudServer.AppCache    = main.appcache,
 CloudServer.Socket      = main.socket;
 
 /* базовая инициализация  */
@@ -146,14 +140,17 @@ CloudServer.init        = (function(pAppCachProcessing){
  * Функция создаёт сервер
  * @param pConfig
  */
-CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {    
+CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
     if(pConfig)
         this.Config = pConfig;
+    
     else
         console.log('warning: configuretion file config.json not found...\n' +
             'using default values...\n'                     +
             JSON.stringify(this.Config));
-        
+    
+    var lConfig = this.Config;
+    
     CloudServer.indexProcessing = pIndexProcessing;
     
     this.init(pAppCachProcessing);
@@ -161,7 +158,7 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
     this.Port = process.env.PORT            ||  /* c9           */
                 process.env.app_port        ||  /* nodester     */
                 process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
-                this.Config.port;
+                lConfig.port;
     
     this.IP   = process.env.IP              ||  /* c9           */
                 this.Config.ip;
@@ -172,18 +169,15 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
             this.IP = '0.0.0.0';
     }
     
-    
-    console.log(process.argv);
-
     /* server mode or testing mode */
-    if (this.Config.server) {
+    if (lConfig.server) {
         var http = require('http');
 
         try {
             this.Server =  http.createServer(this._controller);
             this.Server.listen(this.Port, this.IP);
             
-            if(this.Config.socket && CloudServer.Socket){
+            if(lConfig.socket && CloudServer.Socket){
                 CloudServer.Socket.listen(this.Server);
                 console.log('sockets running');
             }
