@@ -82,7 +82,7 @@ All main configuration could be done thrue config.json.
     },
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
-    "port"      : 31337,            /* Cloud Commander port                     */
+    "port"      : 80,               /* Cloud Commander port                     */
     "ip"        : "127.0.0.1"       /* Cloud Commander IP                       */
 }
 ```
@@ -95,14 +95,14 @@ or on win platform just
 
     cloudcmd
 After thet Cloud Commander reads config file **config.json** and start server
-on 31337 port, if none of port varibles(*cloud9*, *cloudfoundry* and *nodester*)
+on 80 port, if none of port varibles(*cloud9*, *cloudfoundry* and *nodester*)
 isn't exist.
 Then type in browser
 
-    http://127.0.0.1:31337
+    http://127.0.0.1
 or
 
-    http://localhost:31337
+    http://localhost
 Updating
 ---------------
 **Cloud Commander** is very buggy and alfa so it's very often updated. For update
