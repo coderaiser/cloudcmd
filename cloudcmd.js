@@ -25,19 +25,20 @@
     
     
     function indexProcessing(pIndex, pList){
+        var lReplace_s;
         /* если выбрана опция минифизировать скрпиты
          * меняем в index.html обычные css на
          * минифицированый
          */
         if(srv.Minify._allowed.css){       
-            var lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
+            lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             
             pIndex = Util.removeStr(pIndex, lReplace_s);
             pIndex = pIndex.replace('/css/style.css', srv.Minify.MinFolder + 'all.min.css');
         }
         
-        pIndex = pIndex.replace('<div id=fm class=no-js>',
-            '<div id=fm class=no-js>'+ pList);
+        lReplace_s = '<div id=fm class=no-js>';
+        pIndex = pIndex.replace(lReplace_s, lReplace_s + pList);
         
         /* меняем title */
         pIndex = pIndex.replace('<title>Cloud Commander</title>',
@@ -71,7 +72,7 @@
          * (usually /) to it.
          * argv[1] - is always script name
          */
-        var lServerDir = path.dirname(process.argv[1]);
+        var lServerDir = path.dirname(process.argv[1]) + '/';
         
         if( DIR !== lServerDir ){
             console.log('current dir: ' + DIR);
