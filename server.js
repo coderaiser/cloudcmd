@@ -224,7 +224,6 @@ CloudServer.generateHeaders = function(pName, pGzip){
         lContentEncoding = '; charset=UTF-8';
 
     var lQuery = CloudServer.Queries[pName];
-    console.log(lQuery);
     if(lQuery){
         if( Util.strCmp(lQuery, 'download') )
             lType = 'application/octet-stream';
