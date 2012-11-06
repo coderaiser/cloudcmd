@@ -324,7 +324,7 @@ CloudClient.Util                    = (function(){
     },
     
     this.loadOnload             = function(pFunc_a){
-        if( this.isArray(pFunc_a) ) {                
+        if( Util.isArray(pFunc_a) ) {                
             var lFunc_f = pFunc_a.pop();
             
             if(typeof lFunc_f === 'function')
@@ -332,12 +332,12 @@ CloudClient.Util                    = (function(){
                 
             return this.loadOnload(pFunc_a);
         }
-        else if( this.isFunction(pFunc_a) )
+        else if( Util.isFunction(pFunc_a) )
             return pFunc_a();
     };
     
     this.anyLoadOnLoad          = function(pParams_a, pFunc){        
-        if( this.isArray(pParams_a) ) {
+        if( Util.isArray(pParams_a) ) {
             var lParam = pParams_a.pop();
             
             if(Util.isString(lParam) )
@@ -351,7 +351,7 @@ CloudClient.Util                    = (function(){
                 
                 this.anyload(lParam);
             
-            }else if( this.isFunction(pFunc) )
+            }else if( Util.isFunction(pFunc) )
                 pFunc();
         }
     };
@@ -378,13 +378,13 @@ CloudClient.Util                    = (function(){
          * processing every of params
          * and quit
          */
-        if( this.isArray(pParams_o) ){
+        if( Util.isArray(pParams_o) ){
             var lElements_a = [];
             for(var i = 0, n = pParams_o.length; i < n ; i++)
                 lElements_a[i] = this.anyload(pParams_o[i]);
             
             return lElements_a;
-        }        
+        }
         
         var lName       = pParams_o.name,
             lID         = pParams_o.id,
@@ -397,15 +397,18 @@ CloudClient.Util                    = (function(){
             lInner      = pParams_o.inner,
             lNotAppend  = pParams_o.not_append,
         
+        if ( Util.isObject(lFunc) ){
+            lOnError = lFunc.onerror;
+            lFunc  = lFunc.onload,
+        }
         /* убираем путь к файлу, оставляя только название файла */
         if(!lID && lSrc)
             lID = this.getIdBySrc(lSrc);
-        
+                
         var element = getById(lID);
         
         /* если скрипт еще не загружен */
-        if(!element)
-        {
+        if(!element){
             if(!lName && lSrc){
                 
                 var lDot = lSrc.lastIndexOf('.'),
@@ -446,10 +449,6 @@ CloudClient.Util                    = (function(){
              *
              * if object - then onload and onerror
              */
-            if ( this.isObject(lFunc) ){
-                lOnError = lFunc.onerror;
-                lFunc  = lFunc.onload,
-            }
             
             if( Util.isFunction(lFunc) )
                 element.onload = lFunc;
@@ -490,13 +489,7 @@ CloudClient.Util                    = (function(){
         /* если js-файл уже загружен 
          * запускаем функцию onload
          */
-        else if(lFunc){
-            if( this.isFunction(lFunc) )
-                lFunc();
-            
-            else if( this.isObject(lFunc) && this.isFunction(lFunc.onload) )
-                lFunc.onload();        
-        }
+        else if( Util.isFunction(lFunc) ) lFunc();
         
         return element;
     },
@@ -536,7 +529,7 @@ CloudClient.Util                    = (function(){
      * все параметры опциональны
      */
     this.cssLoad                = function(pParams_o){
-         if( this.isArray(pParams_o) ){
+         if( Util.isArray(pParams_o) ){
             for(var i = 0, n = pParams_o.length; i < n; i++){
                 pParams_o[i].name = 'link';
                 pParams_o[i].parent   = pParams_o.parent || document.head;                
@@ -545,7 +538,7 @@ CloudClient.Util                    = (function(){
             return this.anyload(pParams_o);
         } 
         
-        else if( this.isString(pParams_o) )
+        else if( Util.isString(pParams_o) )
             pParams_o = { src: pParams_o };
                 
         pParams_o.name      = 'link';
