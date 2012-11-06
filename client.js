@@ -395,11 +395,11 @@ CloudClient.Util                    = (function(){
             lAsync      = pParams_o.async,
             lParent     = pParams_o.parent,
             lInner      = pParams_o.inner,
-            lNotAppend  = pParams_o.not_append,
+            lNotAppend  = pParams_o.not_append;
         
         if ( Util.isObject(lFunc) ){
             lOnError = lFunc.onerror;
-            lFunc  = lFunc.onload,
+            lFunc  = lFunc.onload;
         }
         /* убираем путь к файлу, оставляя только название файла */
         if(!lID && lSrc)
