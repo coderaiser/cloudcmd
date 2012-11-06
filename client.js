@@ -391,10 +391,11 @@ CloudClient.Util                    = (function(){
             lClass      = pParams_o.className,
             lSrc        = pParams_o.src,
             lFunc       = pParams_o.func,
+            lOnError,
             lAsync      = pParams_o.async,
             lParent     = pParams_o.parent,
             lInner      = pParams_o.inner,
-            lNotAppend  = pParams_o.not_append;
+            lNotAppend  = pParams_o.not_append,
         
         /* убираем путь к файлу, оставляя только название файла */
         if(!lID && lSrc)
@@ -436,29 +437,21 @@ CloudClient.Util                    = (function(){
             lName === 'link' ? 
                   ((element.href = lSrc) && (element.rel = 'stylesheet'))
                 : element.src  = lSrc;
-                        
-            /* if passed arguments function
+            
+            /*
+             * if passed arguments function
              * then it's onload by default
-             */        
-            if(lFunc){
-                if( Util.isFunction(lFunc) )
-                    element.onload = lFunc;
-                    /*
-                    element.onreadystatechange = function(){
-                        if(this.readyState === 'loaded')
-                            lFunc();
-                    };*/ /* ie */
-
-                /* if object - then onload or onerror */
-                else if ( this.isObject(lFunc) )
-                    if(lFunc.onload && this.isFunction(lFunc.onload))
-                            element.onload   = lFunc.onload;
-                            /*
-                            element.onreadystatechange = function(){
-                                if(this.readyState === 'loaded')
-                                lFunc();
-                            };*/ /* ie */
+             *
+             * if object - then onload and onerror
+             */
+            if ( this.isObject(lFunc) ){
+                lOnError = lFunc.onerror;
+                lFunc  = lFunc.onload,
             }
+            
+            if( Util.isFunction(lFunc) )
+                element.onload = lFunc;
+            
             /* if element (js/css) will not loaded
              * it would be removed from DOM tree
              * and error image would be shown
@@ -474,8 +467,8 @@ CloudClient.Util                    = (function(){
                         status : 404
                     });
                     
-                    if(lFunc && lFunc.onerror && Util.isFunction(lFunc.onerror) )
-                        lFunc.onerror();
+                    if( Util.isFunction(lOnError) )
+                        lFunc();
             });
             
             if(pParams_o.style){
