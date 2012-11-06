@@ -22,7 +22,7 @@ var CloudServer         = {
         server    : true,
         logs      : false,
         socket    : true,
-        port      : 31337,
+        port      : 80,
         ip        : '127.0.0.1'
     },
     
