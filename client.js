@@ -434,9 +434,11 @@ CloudClient.Util                    = (function(){
              * using href in any other case
              * using src
              */
-            lName === 'link' ? 
-                  ((element.href = lSrc) && (element.rel = 'stylesheet'))
-                : element.src  = lSrc;
+            if(lName === 'link'){
+                  element.href = lSrc;
+                  element.rel = 'stylesheet';
+            }else
+                element.src  = lSrc;
             
             /*
              * if passed arguments function
