@@ -70,6 +70,8 @@ and linux.
 * Fixed bug with downloading directory
 listing in json from menu.
 
+* Changed default port to 80.
+
 
 2012.10.01, Version 0.1.7
 
