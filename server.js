@@ -248,9 +248,7 @@ CloudServer.generateHeaders = function(pName, pGzip){
     
     if(pGzip)
         lRet['content-encoding'] = 'gzip';
-    
-    console.log(lRet);
-    
+        
     return lRet;
 };
 
@@ -635,9 +633,9 @@ CloudServer._fillJSON = function(pStats, pFiles){
             var lReaded_f = CloudServer.indexReaded(lList);
             lReaded_f(false, lFileData);
         }
-    }else{
+    }else{        
+        DirPath = DirPath.substr(DirPath, DirPath.lastIndexOf('/') );
         var lQuyery = CloudServer.Queries[DirPath];
-        DirPath = DirPath.substr( DirPath.lastIndexOf('/') );
         DirPath += '.json';        
         CloudServer.Queries[DirPath] = lQuyery;
         /* в обычном режиме(когда js включен
