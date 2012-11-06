@@ -636,12 +636,13 @@ CloudServer._fillJSON = function(pStats, pFiles){
             lReaded_f(false, lFileData);
         }
     }else{
+        DirPath += '.json';
         /* в обычном режиме(когда js включен
          * высылаем json-структуру файлов
          * с соответствующими заголовками
          */
         lList   = JSON.stringify(lJSON);
-        lHeader = CloudServer.generateHeaders('fs.json', CloudServer.Gzip);
+        lHeader = CloudServer.generateHeaders(DirPath, CloudServer.Gzip);
         
         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
         if(CloudServer.Gzip){
