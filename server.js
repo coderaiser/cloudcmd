@@ -226,9 +226,9 @@ CloudServer.generateHeaders = function(pName, pGzip){
         
         console.log(pName + lQuery);
     }
-
+    
     if(!lCacheControl)
-        lCacheControl = 31337 * 21;    
+        lCacheControl = 31337 * 21;
         
     lRet = {
         /* if type of file any, but img - 
