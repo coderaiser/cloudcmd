@@ -94,8 +94,7 @@ var loadModule                      = function(pParams){
         lPath += '.js';
     
     cloudcmd[lName] = function(pArg){
-        if( Util.isFunction(lDoBefore) )
-            lDoBefore();
+        Util.exec(lDoBefore);
         
         DOM.jsload(cloudcmd.LIBDIRCLIENT + lPath, lFunc ||
             function(){
@@ -185,8 +184,7 @@ CloudClient.GoogleAnalytics         = function(){
             DOM.jsload('lib/client/google_analytics.js');
         },5000);
         
-        if( Util.isFunction(lFunc) )
-            lFunc();
+        Util.exec(lFunc);
         
         document.onmousemove = lFunc;
    };
@@ -242,8 +240,8 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
              * возвращаем false на событие
              * onclick
              */                         
-            return false;
-            };
+            return true;
+        };
     };
 
 
@@ -279,8 +277,8 @@ CloudClient._editFileName           = function(pParent){
                  * setted up earlier
                  */
                 document.onclick = lDocumentOnclick;
-                if( Util.isFunction(lDocumentOnclick) )
-                    lDocumentOnclick();
+                
+                Util.exec(lDocumentOnclick);
                 
             });
     }
@@ -321,25 +319,22 @@ CloudClient._setCurrent             = function(){
             }
              /* если мы попали сюда с энтера*/
              if(pFromEnter===true){
-                if( Util.isFunction(this.ondblclick) )
-                    this.ondblclick(this);
+                var lResult = Util.exec( DOM.bind(this.ondblclick, this) );
                     /*  enter pressed on file */
-                else{
+                if(!lResult){
                     var lA = DOM.getCurrentLink(this);
-                    
-                    if( Util.isFunction(lA.ondblclick) )
-                        lA.ondblclick(this);
+                    Util.exec( DOM.bind(lA.ondblclick, this) );
                 }
              }/* если мы попали сюда от клика мышки */
              else
-                pFromEnter.returnValue=false;
+                pFromEnter.returnValue = false;
                                        
             /* что бы не переходить по ссылкам
              * а грузить всё ajax'ом,
              * возвращаем false на событие
              * onclick
              */
-            return false;
+            return true;
         };
     };
     
@@ -416,8 +411,8 @@ function baseInit(){
         applicationCache.onupdateready = function(){
             console.log('app cacheed');
             location.reload();
-            if( Util.isFunction(lFunc) )
-                lFunc();
+            
+            Util.exec(lFunc);
         };
     }
     /* меняем title 
