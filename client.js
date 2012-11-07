@@ -3,7 +3,7 @@
  *  клиентский и серверный
  */
 
-var CloudCommander = (function(){
+var Util, DOM, CloudCommander = (function(){
 "use strict";
 
 /* Клиентский обьект, содержащий функциональную часть*/
@@ -28,10 +28,7 @@ var CloudClient = {
     
     /* ОБЬЕКТЫ */
     /* Обьект для работы с кэшем */
-    Cache                  : {},
-    
-    /* Object contain additional system functional */
-    Util                   : {},
+    Cache                  : {},    
     
     /* ПРИВАТНЫЕ ФУНКЦИИ */
     /* функция загружает json-данные о файловой системе */
@@ -61,7 +58,7 @@ var CloudClient = {
 var cloudcmd = CloudClient,
 
 /* глобальные переменные */
-CloudFunc, $, Util, KeyBinding,
+CloudFunc, $, KeyBinding,
 
 /* short names used all the time functions */
     getByClass, getById;
@@ -100,7 +97,7 @@ var loadModule                      = function(pParams){
         if( Util.isFunction(lDoBefore) )
             lDoBefore();
         
-        Util.jsload(cloudcmd.LIBDIRCLIENT + lPath, lFunc ||
+        DOM.jsload(cloudcmd.LIBDIRCLIENT + lPath, lFunc ||
             function(){
                 cloudcmd[lName].Keys(pArg);
             });
@@ -147,7 +144,7 @@ CloudClient.Cache.isAllowed         = (function(){
              * https://gist.github.com/350433 
              */
             /*
-            Util.jsload('https://raw.github.com/gist/350433/c9d3834ace63e5f5d7c8e1f6e3e2874d477cb9c1/gistfile1.js',
+            DOM.jsload('https://raw.github.com/gist/350433/c9d3834ace63e5f5d7c8e1f6e3e2874d477cb9c1/gistfile1.js',
                 function(){CloudClient.Cache._allowed=true;
             });
             */
@@ -194,9 +191,9 @@ CloudClient.Util                    = (function(){
         LImages_o               = {            
             /* Функция создаёт картинку загрузки*/
             loading : function(){    
-                var lE = Util.getById('loading-image');
+                var lE = DOM.getById('loading-image');
                 if (!lE)
-                    lE = Util.anyload({
+                    lE = DOM.anyload({
                         name        : 'span',
                         className   : 'icon loading',
                         id          : 'loading-image',
@@ -549,7 +546,7 @@ CloudClient.Util                    = (function(){
     
     this.jqueryLoad             = function(pCallBack){
         /* загружаем jquery: */
-        Util.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',{
+        DOM.jsload('//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',{
             onload: function(){
                 $ = window.jQuery;
                 if(typeof pCallBack === 'function')
@@ -557,14 +554,14 @@ CloudClient.Util                    = (function(){
             },
             
             onerror: function(){
-                Util.jsload('lib/client/jquery.js');
+                DOM.jsload('lib/client/jquery.js');
                 
                 /*
                  * if could not load jquery from google server
                  * maybe we offline, load font from local
                  * directory
                  */
-                Util.cssSet({id:'local-droids-font',
+                DOM.cssSet({id:'local-droids-font',
                     element : document.head,
                     inner   :   '@font-face {font-family: "Droid Sans Mono";'           +
                                 'font-style: normal;font-weight: normal;'               +
@@ -576,7 +573,7 @@ CloudClient.Util                    = (function(){
     };
     
     this.socketLoad             = function(){
-        Util.jsload('lib/client/socket.js');
+        DOM.jsload('lib/client/socket.js');
     };
     
     /* DOM */
@@ -652,12 +649,12 @@ CloudClient.Util                    = (function(){
             lLoadingImage   = LImages_o.loading();
             lErrorImage     = LImages_o.error();
             
-            Util.hide(lErrorImage);
+            DOM.hide(lErrorImage);
             
             var lCurrent;        
             if(pPosition){
                 if(pPosition.top){
-                    lCurrent    = Util.getRefreshButton();
+                    lCurrent    = DOM.getRefreshButton();
                     if(lCurrent)
                         lCurrent = lCurrent.parentElement;
                     else
@@ -666,7 +663,7 @@ CloudClient.Util                    = (function(){
             }
             else
             {
-                lCurrent    = Util.getCurrentFile();
+                lCurrent    = DOM.getCurrentFile();
                 lCurrent    = lCurrent.firstChild.nextSibling;
             }
                                  
@@ -681,7 +678,7 @@ CloudClient.Util                    = (function(){
                     (lParent && lParent !== lCurrent))
                         lCurrent.appendChild(lLoadingImage);
                 
-                Util.show(lLoadingImage); /* показываем загрузку*/
+                DOM.show(lLoadingImage); /* показываем загрузку*/
             }
             
             return lRet_b;
@@ -689,7 +686,7 @@ CloudClient.Util                    = (function(){
     
         hideLoad        : function(){
             lLoadingImage = LImages_o.loading();
-            Util.hide(lLoadingImage);
+            DOM.hide(lLoadingImage);
         },
         
         showError       : function(jqXHR, textStatus, errorThrown){
@@ -711,21 +708,21 @@ CloudClient.Util                    = (function(){
             else if(!lText.indexOf('Error: EACCES,'))
                 lText = lText.replace('Error: EACCES, p','P');                            
             
-            Util.show(lErrorImage);
+            DOM.show(lErrorImage);
             lErrorImage.title = lText;
             
             var lParent = lLoadingImage.parentElement;
             if(lParent)
                 lParent.appendChild(lErrorImage);
             
-            Util.hide(lLoadingImage);
+            DOM.hide(lLoadingImage);
             
             console.log(lText);
         }
     };
         
     this.getCurrentFile         = function(){
-        var lCurrent = Util.getByClass(lCURRENT_FILE)[0];
+        var lCurrent = DOM.getByClass(lCURRENT_FILE)[0];
         if(!lCurrent)
             this.addCloudStatus({
                 code : -1,
@@ -781,24 +778,24 @@ CloudClient.Util                    = (function(){
         this.addClass(pCurrentFile, lCURRENT_FILE);
         
         /* scrolling to current file */
-        Util.scrollIntoViewIfNeeded(pCurrentFile);
+        DOM.scrollIntoViewIfNeeded(pCurrentFile);
         
         return  lRet_b;
     };
     
     var lUnSetCurrentFile       = function(pCurrentFile){
         if(!pCurrentFile)
-            Util.addCloudStatus({
+            DOM.addCloudStatus({
                 code : -1,
                 msg  : 'Error pCurrentFile in'  +
                         'unSetCurrentFile'        +
                         'could not be none'
             });
         
-        var lRet_b = Util.isCurrentFile(pCurrentFile);
+        var lRet_b = DOM.isCurrentFile(pCurrentFile);
 
         if(lRet_b)            
-            Util.removeClass(pCurrentFile, lCURRENT_FILE);                    
+            DOM.removeClass(pCurrentFile, lCURRENT_FILE);                    
         
         return lRet_b;
     };
@@ -920,7 +917,7 @@ CloudClient.Util                    = (function(){
     };
     
     this.show                   = function(pElement){
-        Util.removeClass(pElement, 'hidden');
+        DOM.removeClass(pElement, 'hidden');
     };
     
     this.showPanel              = function(pActive){
@@ -974,9 +971,9 @@ CloudClient.Util                    = (function(){
                 var lNext       = pCurrent.nextSibling;
                 var lPrevious   = pCurrent.previousSibling;
                 if(lNext)
-                    Util.setCurrentFile(lNext);
+                    DOM.setCurrentFile(lNext);
                 else if(lPrevious)
-                    Util.setCurrentFile(lPrevious);
+                    DOM.setCurrentFile(lPrevious);
                             
                 lParent.removeChild(pCurrent);
             }
@@ -1014,7 +1011,7 @@ CloudClient.Util                    = (function(){
     };
 });
 
-CloudClient.Util                    = new CloudClient.Util();
+var Util = CloudClient.Util                    = new CloudClient.Util();
 
 
 CloudClient.GoogleAnalytics         = function(){
@@ -1023,7 +1020,7 @@ CloudClient.GoogleAnalytics         = function(){
    
    document.onmousemove = function(){
         setTimeout(function(){
-            Util.jsload('lib/client/google_analytics.js');
+            DOM.jsload('lib/client/google_analytics.js');
         },5000);
         
         if( Util.isFunction(lFunc) )
@@ -1046,11 +1043,11 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
                         
-            Util.Images.showLoad(pNeedRefresh ? {top:true} : null);
+            DOM.Images.showLoad(pNeedRefresh ? {top:true} : null);
             
-            var lPanel = Util.getPanel(),
+            var lPanel = DOM.getPanel(),
             /* получаем имя каталога в котором находимся*/ 
-                lHref = Util.getByClass('path', lPanel);
+                lHref = DOM.getByClass('path', lPanel);
             
             lHref = lHref[0].textContent;
             
@@ -1066,7 +1063,7 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
              * или <Ctrl>+R - ссылок мы ненайдём
              * и заходить не будем
              */
-            var lA = Util.getCurrentLink(this);
+            var lA = DOM.getCurrentLink(this);
             
             /* если нажали на ссылку на верхний каталог*/
             if(lA && lA.textContent==='..' && lHref!=='/'){
@@ -1095,7 +1092,7 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
  * @param pEvent
  */
 CloudClient._editFileName           = function(pParent){
-    var lA = Util.getCurrentLink(pParent);
+    var lA = DOM.getCurrentLink(pParent);
     
     if (lA && lA.textContent !== '..'){
             
@@ -1109,7 +1106,7 @@ CloudClient._editFileName           = function(pParent){
              * backs
              */
             document.onclick = (function(){
-                var lA = Util.getCurrentLink(pParent);
+                var lA = DOM.getCurrentLink(pParent);
                 if (lA && lA.textContent !== '..')
                     lA.contentEditable = false;
                                 
@@ -1137,9 +1134,9 @@ CloudClient._setCurrent             = function(){
          * вызоветься _loadDir
          */
         return function(pFromEnter){
-            var lCurrentFile = Util.getCurrentFile();
+            var lCurrentFile = DOM.getCurrentFile();
             if(lCurrentFile){                        
-                if (Util.isCurrentFile(this)  &&
+                if (DOM.isCurrentFile(this)  &&
                     typeof pFromEnter !== 'boolean'){
                     //var lParent = this;
                     
@@ -1150,14 +1147,14 @@ CloudClient._setCurrent             = function(){
                          * in other case
                          * double click event happend
                          */
-                    //    if(Util.getCurrentFile() === lParent)
+                    //    if(DOM.getCurrentFile() === lParent)
                      //       CloudClient._editFileName(lParent);
                      //   },1000);
                 }
                 else{                        
                     /* устанавливаем курсор на файл,
                     * на который нажали */
-                    Util.setCurrentFile(this);
+                    DOM.setCurrentFile(this);
                 }
             }
              /* если мы попали сюда с энтера*/
@@ -1166,7 +1163,7 @@ CloudClient._setCurrent             = function(){
                     this.ondblclick(this);
                     /*  enter pressed on file */
                 else{
-                    var lA = Util.getCurrentLink(this);
+                    var lA = DOM.getCurrentLink(this);
                     
                     if( Util.isFunction(lA.ondblclick) )
                         lA.ondblclick(this);
@@ -1193,7 +1190,7 @@ CloudClient._currentToParent        = function(pDirName){
     /* опредиляем в какой мы панели:
     * правой или левой
     */
-    var lPanel       = Util.getPanel();
+    var lPanel       = DOM.getPanel();
 
     /* убираем слэш с имени каталога*/
     pDirName = pDirName.replace('/','');
@@ -1204,8 +1201,8 @@ CloudClient._currentToParent        = function(pDirName){
      * set it to current file
      */
     if(lRootDir){
-        Util.setCurrentFile(lRootDir);
-        Util.scrollIntoViewIfNeeded(lRootDir, true);
+        DOM.setCurrentFile(lRootDir);
+        DOM.scrollIntoViewIfNeeded(lRootDir, true);
     }
 };
 
@@ -1214,18 +1211,17 @@ CloudClient._currentToParent        = function(pDirName){
  * инициализации
  */
 CloudClient.init                    = function(){
-    Util        = cloudcmd.Util;
-    getByClass  = Util.getByClass;
-    getById     = Util.getById;
+    getByClass  = DOM.getByClass;
+    getById     = DOM.getById;
     
     
     //Util.socketLoad();
     
     if(!document.body.scrollIntoViewIfNeeded){
         this.OLD_BROWSER = true;
-            Util.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
+            DOM.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
                 function(){
-                    Util.jqueryLoad( baseInit );
+                    DOM.jqueryLoad( baseInit );
                 });
     }
     else baseInit();
@@ -1242,7 +1238,7 @@ function initModules(){
         }
      });
         
-    Util.ajax({
+    DOM.ajax({
         url:'/modules.json',
         success: function(pModules){
             if( Util.isArray(pModules) )
@@ -1266,12 +1262,12 @@ function baseInit(){
      * если js включен - имена папок отображать необязательно...
      * а может и обязательно при переходе, можно будет это сделать
      */
-    var lTitle = Util.getByTag('title');
+    var lTitle = DOM.getByTag('title');
     if(lTitle.length > 0)
         lTitle[0].textContent = 'Cloud Commander';
            
     /* загружаем общие функции для клиента и сервера                    */
-    Util.jsload(cloudcmd.LIBDIR + 'cloudfunc.js',function(){
+    DOM.jsload(cloudcmd.LIBDIR + 'cloudfunc.js',function(){
         /* берём из обьекта window общий с сервером функционал          */
         CloudFunc = window.CloudFunc;
         
@@ -1293,7 +1289,7 @@ function baseInit(){
     /* выделяем строку с первым файлом                                  */
     var lFmHeader = getByClass('fm_header');
     if(lFmHeader && lFmHeader[0].nextSibling)
-        Util.setCurrentFile(lFmHeader[0].nextSibling);
+        DOM.setCurrentFile(lFmHeader[0].nextSibling);
     
     /* показываем элементы, которые будут работать только, если есть js */
     var lFM = getById('fm');
@@ -1312,7 +1308,7 @@ function baseInit(){
      
     cloudcmd.HEIGHT = lHeight;
      
-    Util.cssSet({id:'cloudcmd',
+    DOM.cssSet({id:'cloudcmd',
         element:document.head,
         inner:
             '.panel{'                           +
@@ -1355,7 +1351,7 @@ CloudClient._changeLinks            = function(pPanelID){
              * target        - jquery event
              */
             var lTarget = pEvent.currentTarget || pEvent.target;        
-            Util.setCurrentFile(lTarget);
+            DOM.setCurrentFile(lTarget);
             
             if(Util.isFunction(cloudcmd.Menu) ){            
                 cloudcmd.Menu({
@@ -1365,7 +1361,7 @@ CloudClient._changeLinks            = function(pPanelID){
                 
                 /* disabling browsers menu*/
                 lReturn_b = false;
-                Util.Images.showLoad();
+                DOM.Images.showLoad();
             }        
             
             return lReturn_b;
@@ -1403,7 +1399,7 @@ CloudClient._changeLinks            = function(pPanelID){
                     lTag = pElement.tagName;
                 }while(lTag !== 'LI');
             
-            Util.setCurrentFile(pElement);
+            DOM.setCurrentFile(pElement);
         };
             
     var lLocation = document.location,
@@ -1498,7 +1494,7 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
          /* опредиляем в какой мы панели:
           * правой или левой
           */
-        var lPanel = Util.getPanel().id;
+        var lPanel = DOM.getPanel().id;
          
         if(pNeedRefresh === undefined && lPanel){
             var lJSON = CloudClient.Cache.get(lPath);
@@ -1522,16 +1518,16 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
         
         /* ######################## */
         try{
-            Util.ajax({
+            DOM.ajax({
                 url: path,
-                error: Util.Images.showError,
+                error: DOM.Images.showError,
                 
                 success:function(data, textStatus, jqXHR){                                            
                     /* если такой папки (или файла) нет
                      * прячем загрузку и показываем ошибку
                      */                 
                     if(!jqXHR.responseText.indexOf('Error:'))
-                        return Util.showError(jqXHR);
+                        return DOM.showError(jqXHR);
 
                     CloudClient._createFileTable(lPanel, data);
                     CloudClient._changeLinks(lPanel);
@@ -1568,7 +1564,7 @@ CloudClient._createFileTable        = function(pElem, pJSON){
     var lWasRefresh_b = lPath[0].textContent === pJSON[0].path;
     var lCurrent;    
     if(lWasRefresh_b)
-        lCurrent = Util.getCurrentFile();
+        lCurrent = DOM.getCurrentFile();
             
     /* говорим построителю,
      * что бы он в нужный момент
@@ -1590,7 +1586,7 @@ CloudClient._createFileTable        = function(pElem, pJSON){
                 lCurrent = lElem.childNodes[i];
                 break;
             }
-        Util.setCurrentFile(lCurrent);
+        DOM.setCurrentFile(lCurrent);
         //lCurrent.parentElement.focus();
     }
 };
