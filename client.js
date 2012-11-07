@@ -200,6 +200,7 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
      * выполнить загрузку
      */
         return function(){
+            var lRet = true;
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
                         
@@ -240,7 +241,7 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
              * возвращаем false на событие
              * onclick
              */                         
-            return true;
+            return lRet;
         };
     };
 
@@ -297,7 +298,7 @@ CloudClient._setCurrent             = function(){
             var lCurrentFile = DOM.getCurrentFile();
             if(lCurrentFile){                        
                 if (DOM.isCurrentFile(this)  &&
-                    typeof pFromEnter !== 'boolean'){
+                    !Util.isBoolean(pFromEnter)){
                     //var lParent = this;
                     
                     //setTimeout(function(){
@@ -312,18 +313,17 @@ CloudClient._setCurrent             = function(){
                      //   },1000);
                 }
                 else{                        
-                    /* устанавливаем курсор на файл,
-                    * на который нажали */
+                    /* устанавливаем курсор на файл, на который нажали */
                     DOM.setCurrentFile(this);
                 }
             }
-             /* если мы попали сюда с энтера*/
+             /* если мы попали сюда с энтера */
              if(pFromEnter===true){
-                var lResult = Util.exec( DOM.bind(this.ondblclick, this) );
+                var lResult = Util.exec( Util.bind(this.ondblclick, this) );
                     /*  enter pressed on file */
                 if(!lResult){
                     var lA = DOM.getCurrentLink(this);
-                    Util.exec( DOM.bind(lA.ondblclick, this) );
+                    Util.exec( Util.bind(lA.ondblclick, this) );
                 }
              }/* если мы попали сюда от клика мышки */
              else
