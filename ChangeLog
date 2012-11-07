@@ -72,6 +72,9 @@ listing in json from menu.
 
 * Changed default port to 80.
 
+* Util object moved from client.js to modules
+dom.js and util.js.
+
 
 2012.10.01, Version 0.1.7
 
