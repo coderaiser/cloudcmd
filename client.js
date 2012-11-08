@@ -406,8 +406,9 @@ function initModules(){
 }
 
 function baseInit(){
-    if(applicationCache){
+    if(applicationCache){        
         var lFunc = applicationCache.onupdateready;
+        
         applicationCache.onupdateready = function(){
             console.log('app cacheed');
             location.reload();
@@ -466,7 +467,6 @@ function baseInit(){
     cloudcmd.HEIGHT = lHeight;
      
     DOM.cssSet({id:'cloudcmd',
-        element:document.head,
         inner:
             '.panel{'                           +
                 'height:' + lHeight +'px;'      +
