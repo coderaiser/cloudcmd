@@ -172,7 +172,7 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
     /* server mode or testing mode */
     if (lConfig.server) {
         var http = main.http,
-        lError = Util.tryCatchLog(function(){
+        lError = Util.tryCatchLog(Util.bind(function(){
             this.Server =  http.createServer(this._controller);
             this.Server.listen(this.Port, this.IP);
             
@@ -185,7 +185,7 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
             
             console.log('Cloud Commander server running at http://' +
                 this.IP + ':' + this.Port);
-        });
+        }, this));
         if(lError)
             console.log('Cloud Commander server could not started');
     }else
@@ -444,8 +444,9 @@ CloudServer._controller = function(pReq, pRes)
         CloudServer.Statuses[DirPath]   = 200;
         
         /* saving query of current file */
-        CloudServer.Queries[DirPath]    = lQuery;
-        console.log(lQuery);
+        CloudServer.Queries[DirPath]    = lQuery;        
+        Util.log(lQuery);
+        
         console.log(DirPath);
         
         /* читаем основные данные о файле */
