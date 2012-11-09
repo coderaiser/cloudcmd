@@ -75,6 +75,8 @@ listing in json from menu.
 * Util object moved from client.js to modules
 dom.js and util.js.
 
+* Fixed bug with navigation thrue path panel.
+
 
 2012.10.01, Version 0.1.7
 
