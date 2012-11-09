@@ -490,17 +490,17 @@ CloudClient._changeLinks            = function(pPanelID){
     /* меняем ссылки на ajax-запросы */
     var lPanel = getById(pPanelID),
         a = lPanel.getElementsByTagName('a'),
-    
-    /* номер ссылки иконки обновления страницы */
+        
+        /* номер ссылки иконки обновления страницы */
         lREFRESHICON = 0,
         
-     /* путь в ссылке, который говорит
-      * что js отключен
-      */
+        /* путь в ссылке, который говорит
+        * что js отключен
+        */
         lNoJS_s = CloudFunc.NOJS,
         lFS_s   = CloudFunc.FS,
         
-    /* right mouse click function varible */
+        /* right mouse click function varible */
         lOnContextMenu_f = function(pEvent){
             var lReturn_b = true;
             
@@ -510,10 +510,10 @@ CloudClient._changeLinks            = function(pPanelID){
              * currentTarget - DOM event
              * target        - jquery event
              */
-            var lTarget = pEvent.currentTarget || pEvent.target;        
+            var lTarget = pEvent.currentTarget || pEvent.target;
             DOM.setCurrentFile(lTarget);
             
-            if(Util.isFunction(cloudcmd.Menu) ){            
+            if(Util.isFunction(cloudcmd.Menu) ){
                 cloudcmd.Menu({
                     x: pEvent.x,
                     y: pEvent.y
