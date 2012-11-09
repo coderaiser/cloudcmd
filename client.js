@@ -242,7 +242,11 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
              * onclick
              */
              
-             pEvent.returnValue = false;
+             Util.setValue({
+                object  : pEvent,
+                property: 'returnValue',
+                value   : false
+            });
              
             return lRet;
         };
@@ -585,11 +589,7 @@ CloudClient._changeLinks            = function(pPanelID){
         /* устанавливаем обработчики на строку на одинарное и   *
          * двойное нажатие на левую кнопку мышки                */
         else{
-            var lLi;
-            
-            try{
-                lLi = a[i].parentElement.parentElement;
-            }catch(error){console.log(error);}
+            var lLi = a[i].parentElement.parentElement;
             
             /* if we in path changing onclick events */
             if (lLi.className === 'path') {
@@ -597,9 +597,7 @@ CloudClient._changeLinks            = function(pPanelID){
             }
             else {
                 lLi.onclick   = CloudClient._setCurrent();
-                
                 lLi.onmousedown = lSetCurrentFile_f;
-                
                 a[i].ondragstart = lOnDragStart_f;
                 
                 /* if right button clicked menu will
@@ -611,10 +609,11 @@ CloudClient._changeLinks            = function(pPanelID){
                 if(a[i].target !== '_blank'){
                     lLi.ondblclick  = CloudClient._loadDir(link);
                     
-                    if(lLi.addEventListener)
+                    var lListener = lLi.addEventListener;
+                    if(lListener)
                         lLi.addEventListener('touchend',
                             CloudClient._loadDir(link),
-                            false);                                        
+                            false);
                 }
                 
                 lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
@@ -654,20 +653,21 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
          /* опредиляем в какой мы панели:
           * правой или левой
           */
-        var lPanel = DOM.getPanel().id;
+        var lPanel = DOM.getPanel().id,
+            lError;
          
         if(pNeedRefresh === undefined && lPanel){
             var lJSON = CloudClient.Cache.get(lPath);
+            
             if (lJSON !== null){
-                
                 /* переводим из текста в JSON */
                 if(window && !window.JSON){
-                    try{
+                    lError = Util.tryCatchLog(function(){
                         lJSON = eval('('+lJSON+')');
-                    }catch(err){
-                        console.log(err);
-                    }
-                }else lJSON = JSON.parse(lJSON);
+                    });
+                    
+                }else
+                    lJSON = JSON.parse(lJSON);
                 
                 CloudClient._createFileTable(lPanel, lJSON);
                 CloudClient._changeLinks(lPanel);
@@ -677,7 +677,7 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
         }
         
         /* ######################## */
-        try{
+        Util.tryCatchLog(function(){
             DOM.ajax({
                 url: path,
                 error: DOM.Images.showError,
@@ -708,7 +708,7 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
                         CloudClient.Cache.set(lPath,lJSON_s);                        
                 }
             });
-        }catch(err){console.log(err);}
+        });
 };
 
 /**
@@ -771,18 +771,18 @@ CloudClient._getJSONfromFileTable   = function(){
     
     for(; i <lLI.length;i++)
     {
-        var lChildren = lLI[i].children;
+        var lChildren = lLI[i].children,        
+            /* file attributes */
+            lAttr = {};
         
-        /* file attributes */
-        var lAttr = {};
         /* getting all elements to lAttr object */ 
         for(var l = 0; l < lChildren.length; l++)
             lAttr[lChildren[l].className] = lChildren[l];
         
         /* mini-icon */
-        var lIsDir = lAttr['mini-icon directory'] ? true : false;
+        var lIsDir = lAttr['mini-icon directory'] ? true : false,
         
-        var lName = lAttr.name;
+        lName = lAttr.name;
         lName &&
             (lName = lName.getElementsByTagName('a'));
         
@@ -800,10 +800,9 @@ CloudClient._getJSONfromFileTable   = function(){
             (lName = lName.title) ||
             (lName = lName.textContent);        
             
-        /* если это папка - выводим слово dir вместо размера*/        
-        var lSize = lIsDir ? 'dir' : lAttr.size.textContent;
-        
-        var lMode = lAttr.mode.textContent;
+        /* если это папка - выводим слово dir вместо размера*/
+        var lSize = lIsDir ? 'dir' : lAttr.size.textContent,
+            lMode = lAttr.mode.textContent;
         
         /* переводим права доступа в цыфровой вид
          * для хранения в localStorage
@@ -822,15 +821,12 @@ CloudClient._getJSONfromFileTable   = function(){
 return CloudClient;
 })();
 
-try{
-    window.onload = function(){
-        'use strict';
-        
-        /* базовая инициализация*/
-        CloudCommander.init();
-        
-        /* загружаем Google Analytics */
-        CloudCommander.GoogleAnalytics();
-    };
-}
-catch(err){}
+window.onload = function(){
+    'use strict';
+    
+    /* базовая инициализация*/
+    CloudCommander.init();
+    
+    /* загружаем Google Analytics */
+    CloudCommander.GoogleAnalytics();
+};

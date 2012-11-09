@@ -171,9 +171,8 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
     
     /* server mode or testing mode */
     if (lConfig.server) {
-        var http = require('http');
-
-        try {
+        var http = main.http,
+        lError = Util.tryCatchLog(function(){
             this.Server =  http.createServer(this._controller);
             this.Server.listen(this.Port, this.IP);
             
@@ -186,10 +185,9 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
             
             console.log('Cloud Commander server running at http://' +
                 this.IP + ':' + this.Port);
-        }catch(pError){
+        });
+        if(lError)
             console.log('Cloud Commander server could not started');
-            console.log(pError);
-        }
     }else
         console.log('Cloud Commander testing mode');
 };
