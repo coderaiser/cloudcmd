@@ -199,7 +199,7 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
      * для которого нужно
      * выполнить загрузку
      */
-        return function(){
+        return function(pEvent){
             var lRet = true;
             /* показываем гиф загрузки возле пути папки сверху*/
             /* ctrl+r нажата? */
@@ -240,7 +240,10 @@ CloudClient._loadDir                = function(pLink,pNeedRefresh){
              * а грузить всё ajax'ом,
              * возвращаем false на событие
              * onclick
-             */                         
+             */
+             
+             pEvent.returnValue = false;
+             
             return lRet;
         };
     };
