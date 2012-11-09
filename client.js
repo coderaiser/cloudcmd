@@ -96,7 +96,7 @@ var loadModule                      = function(pParams){
     cloudcmd[lName] = function(pArg){
         Util.exec(lDoBefore);
         
-        DOM.jsload(cloudcmd.LIBDIRCLIENT + lPath, lFunc ||
+        return DOM.jsload(cloudcmd.LIBDIRCLIENT + lPath, lFunc ||
             function(){
                 cloudcmd[lName].Keys(pArg);
             });
