@@ -2,7 +2,7 @@ Cloud Commander [![Build Status](https://secure.travis-ci.org/coderaiser/cloudcm
 =============== 
 **Cloud Commander** - two-panels file manager, totally writed on js.
 View demo on [jitsu](http://cloudcmd.jit.su/ "jitsu"), 
-[cloudfoundry] (http://cloudcmd.cloudfoundry.com "cloudfoundry"), 
+[cloudfoundry] (http://cloudcmd.cloudfoundry.com "cloudfoundry"),
 [appfog] (http://cloudcmd.aws.af.cm "appfog"),
 [nodester](http://cloudcmd.nodester.com/ "nodester").
 
