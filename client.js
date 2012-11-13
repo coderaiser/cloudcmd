@@ -635,11 +635,11 @@ CloudClient._changeLinks            = function(pPanelID){
                 if(a[i].target !== '_blank'){
                     lLi.ondblclick  = CloudClient._loadDir(link);
                     
-                    var lListener = lLi.addEventListener;
-                    if(lListener)
-                        lLi.addEventListener('touchend',
-                            CloudClient._loadDir(link),
-                            false);
+                    DOM.addListener('touchend',
+                        CloudClient._loadDir(link),
+                        false,
+                        lLi
+                    );
                 }
                 
                 lLi.id = (a[i].title ? a[i].title : a[i].textContent) +
