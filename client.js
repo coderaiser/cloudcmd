@@ -50,7 +50,12 @@ var CloudClient = {
     */
     HEIGHT                 : 0,
     MIN_ONE_PANEL_WIDTH    : 1155,
-    OLD_BROWSER            : false
+    OLD_BROWSER            : false,
+    
+    HOST                    :  (function(){
+        var lLocation = document.location;        
+        return lLocation.protocol + '//' + lLocation.host;
+    })()
 };
 
 
@@ -586,10 +591,9 @@ CloudClient._changeLinks            = function(pPanelID){
                 }while(lTag !== 'LI');
             
             DOM.setCurrentFile(pElement);
-        };
-            
-    var lLocation = document.location,
-        lUrl = lLocation.protocol + '//' + lLocation.host;
+        },
+    
+        lUrl = cloudcmd.HOST;
     
     for(var i = 0, n = a.length; i < n ; i++)
     {        
