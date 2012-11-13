@@ -379,7 +379,7 @@ CloudServer._controller = function(pReq, pRes)
                     },
 
                     isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
-                                 (lCheck_f('css') && lMin_o.css) ||                
+                                 (lCheck_f('css') && lMin_o.css) ||
                                  (lCheck_f('html') && lMin_o.html);
                     
                 if(isAllowd_b){
