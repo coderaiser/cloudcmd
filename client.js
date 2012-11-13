@@ -494,7 +494,7 @@ function baseInit(pCallBack){
             '}'
     });
     
-    Util.exec(pCallBack || initModules);
+    Util.exec(pCallBack);
     cloudcmd.KeyBinding();
 }
 
