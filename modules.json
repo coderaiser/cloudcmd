@@ -3,6 +3,5 @@
     "viewer",
     "storage/_github",
     "terminal",
-    "menu",
-    "config"
+    "menu"
 ]

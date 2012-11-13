@@ -375,6 +375,13 @@ CloudClient._currentToParent        = function(pDirName){
  * инициализации
  */
 CloudClient.init                    = function(){
+    var lFunc = function(){
+        Util.loadOnLoad([
+            initModules,
+            baseInit
+        ]);
+    };
+    
     getByClass  = DOM.getByClass;
     getById     = DOM.getById;
     
@@ -385,13 +392,13 @@ CloudClient.init                    = function(){
         this.OLD_BROWSER = true;
             DOM.jsload(CloudClient.LIBDIRCLIENT + 'ie.js',
                 function(){
-                    DOM.jqueryLoad( baseInit );
+                    DOM.jqueryLoad( lFunc );
                 });
-    }
-    else baseInit();
+    }else
+        lFunc();
 };
 
-function initModules(){
+function initModules(pCallBack){
     
     loadModule({
         /* привязываем клавиши к функциям */
@@ -408,11 +415,13 @@ function initModules(){
             if( Util.isArray(pModules) )
                 for(var i = 0, n = pModules.length; i < n ; i++)
                     loadModule(pModules[i]);
+            
+            Util.exec(pCallBack);
         }
     });
 }
 
-function baseInit(){
+function baseInit(pCallBack){
     if(applicationCache){        
         var lFunc = applicationCache.onupdateready;
         
@@ -480,9 +489,22 @@ function baseInit(){
             '}'
     });
     
-    initModules();
+    Util.exec(pCallBack || initModules);
     cloudcmd.KeyBinding();
 }
+
+CloudClient.loadConfig              = function(pCallBack){
+    if(!cloudcmd.Config)
+        return DOM.ajax({
+            url:'/config.json',
+            success: function(pConfig){
+                cloudcmd.Config = pConfig;
+                
+                Util.exec(pCallBack, pConfig);
+            }
+        });
+};
+
 
 /* функция меняет ссыки на ajax-овые */
 CloudClient._changeLinks            = function(pPanelID){
