@@ -14,6 +14,7 @@ var CloudClient = {
     init                    : null, /* start initialization             */
     
     KeyBinding              : null, /* обьект обработки нажатий клавишь */
+    KeysPanel               : null, /* panel with key buttons f1-f8     */
     Config                  : null, /* function loads and shows config  */
     Editor                  : null, /* function loads and shows editor  */
     Storage                 : null, /* function loads storage           */
@@ -382,7 +383,7 @@ CloudClient._currentToParent        = function(pDirName){
 CloudClient.init                    = function(){
     var lFunc = function(){
         Util.loadOnLoad([
-            initCmdButtons,
+            initKeysPanel,
             initModules,
             baseInit
         ]);
@@ -439,8 +440,10 @@ function initModules(pCallBack){
     });
 }
 
-function initCmdButtons(pCallBack){
-    var lFuncs =[
+function initKeysPanel(pCallBack){
+    var lKeysPanel = {},
+    
+        lFuncs =[
         null,
         null,               /* f1 */
         null,               /* f2 */
@@ -451,9 +454,16 @@ function initCmdButtons(pCallBack){
         null,               /* f7 */
         null,               /* f8 */
     ];
-    for(var i = 1; i <= 8; i++)
-        getById('f' + i).onclick = lFuncs[i];
     
+    for(var i = 1; i <= 8; i++){
+        var lButton         = 'f' + i,
+            lEl             = getById('f' + i);
+        
+        lEl.onclick         = lFuncs[i];
+        lKeysPanel[lButton] = lEl;
+    }
+    
+    cloudcmd.KeysPanel = lKeysPanel;
     Util.exec(pCallBack);
 }
 
