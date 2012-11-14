@@ -432,8 +432,8 @@ function initCmdButtons(pCallBack){
         null,
         null,           /* f1 */
         null,           /* f2 */
-        cloudcmd.view,  /* f3 */
-        cloudcmd.edit,  /* f4 */
+        cloudcmd.Viewer,  /* f3 */
+        cloudcmd.Editor,  /* f4 */
         null,           /* f5 */
         null,           /* f6 */
         null,           /* f7 */
