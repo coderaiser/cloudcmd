@@ -73,7 +73,7 @@ CloudFunc, $, KeyBinding,
  * function load modules
  * @pParams = {name, path, func, dobefore, arg}
  */
-var loadModule                      = function(pParams){    
+var loadModule                      = function(pParams){
     if(!pParams) return;
     
     var lName       = pParams.name,
@@ -98,7 +98,7 @@ var loadModule                      = function(pParams){
     if( !Util.isContainStr(lPath, '.js') )
         lPath += '.js';
     
-    cloudcmd[lName] = function(pArg){
+    cloudcmd[lName] = function(pArg){        
         Util.exec(lDoBefore);
         
         return DOM.jsload(cloudcmd.LIBDIRCLIENT + lPath, lFunc ||
@@ -418,9 +418,21 @@ function initModules(pCallBack){
     DOM.ajax({
         url:'/modules.json',
         success: function(pModules){
+            var lFunc = Util.retFunc( DOM.Images.showLoad ),
+                lDoBefore = {
+                    'viewer'                : lFunc,
+                    "editor/_codemirror"    : lFunc
+                };
+            
             if( Util.isArray(pModules) )
-                for(var i = 0, n = pModules.length; i < n ; i++)
-                    loadModule(pModules[i]);
+                for(var i = 0, n = pModules.length; i < n ; i++){
+                    var lModule = pModules[i];
+                    
+                    loadModule({
+                        path: lModule,
+                        dobefore: lDoBefore[lModule]
+                    });
+                }
             
             Util.exec(pCallBack);
         }
@@ -430,14 +442,14 @@ function initModules(pCallBack){
 function initCmdButtons(pCallBack){
     var lFuncs =[
         null,
-        null,           /* f1 */
-        null,           /* f2 */
-        cloudcmd.Viewer,  /* f3 */
-        cloudcmd.Editor,  /* f4 */
-        null,           /* f5 */
-        null,           /* f6 */
-        null,           /* f7 */
-        null,           /* f8 */
+        null,               /* f1 */
+        null,               /* f2 */
+        cloudcmd.Viewer,    /* f3 */
+        cloudcmd.Editor,    /* f4 */
+        null,               /* f5 */
+        null,               /* f6 */
+        null,               /* f7 */
+        null,               /* f8 */
     ];
     for(var i = 1; i <= 8; i++)
         getById('f' + i).onclick = lFuncs[i];
