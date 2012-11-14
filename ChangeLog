@@ -85,6 +85,8 @@ dom.js and util.js.
 
 * Added ability to hide keys panel thru config option.
 
+* CodeMirror upgraded to version 2.35.0.
+
 
 2012.10.01, Version 0.1.7
 
