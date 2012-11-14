@@ -81,6 +81,8 @@ dom.js and util.js.
 
 * Added buttons panel.
 
+* Fixed bug with config file, when no need to minification.
+
 
 2012.10.01, Version 0.1.7
 
