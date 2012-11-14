@@ -382,6 +382,7 @@ CloudClient._currentToParent        = function(pDirName){
 CloudClient.init                    = function(){
     var lFunc = function(){
         Util.loadOnLoad([
+            initCmdButtons,
             initModules,
             baseInit
         ]);
@@ -424,6 +425,24 @@ function initModules(pCallBack){
             Util.exec(pCallBack);
         }
     });
+}
+
+function initCmdButtons(pCallBack){
+    var lFuncs =[
+        null,
+        null,           /* f1 */
+        null,           /* f2 */
+        cloudcmd.view,  /* f3 */
+        cloudcmd.edit,  /* f4 */
+        null,           /* f5 */
+        null,           /* f6 */
+        null,           /* f7 */
+        null,           /* f8 */
+    ];
+    for(var i = 1; i <= 8; i++)
+        getById('f' + i).onclick = lFuncs[i];
+    
+    Util.exec(pCallBack);
 }
 
 function baseInit(pCallBack){
