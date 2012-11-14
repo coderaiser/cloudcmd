@@ -47,6 +47,11 @@
         if(!srv.Config.appcache)
             pIndex = Util.removeStr(pIndex, ' manifest=/cloudcmd.appcache');
         
+        if(!srv.Config.show_keys_panel){
+            var lKeysPanel = '<div id=keyspanel';
+            pIndex = pIndex.replace(lKeysPanel, lKeysPanel +' class=hidden');
+        }
+        
         return pIndex;
         
     }

@@ -1,7 +1,7 @@
 2012.10.*, Version 0.1.8
 
 * Added ability to shutdown Cloud Commander
-thrue terminal command: "cloudcmd exit"
+thru terminal command: "cloudcmd exit"
 
 * Fixed bug with showing terminal and viewer
 at the same time.
@@ -9,7 +9,7 @@ at the same time.
 * Fixed bug with appcache config. Windows reads
 file not just like Linux.
 
-* Added ability to update thrue git.
+* Added ability to update thru git.
 
 * Added ability to change charset on terminal only if
 it's build in command on win32.
@@ -60,7 +60,7 @@ server.js to cloudcmd.js.
 * Added ability of authorithation in GitHub.
 
 * Rewrited sizing of names if they are to 
-long thrue css, from JavaScript.
+long thru css, from JavaScript.
 
 * Fixed bug with application cahe forming on windows
 and linux.
@@ -75,13 +75,15 @@ listing in json from menu.
 * Util object moved from client.js to modules
 dom.js and util.js.
 
-* Fixed bug with navigation thrue path panel.
+* Fixed bug with navigation thru path panel.
 
 * Added functions DOM.addKeyListener and Util.loadOnLoad
 
 * Added buttons panel.
 
 * Fixed bug with config file, when no need to minification.
+
+* Added ability to hide keys panel thru config option.
 
 
 2012.10.01, Version 0.1.7
@@ -104,7 +106,7 @@ loaded any time by any extension.
 * Fixed bug with getByClass IE version.
 
 * Fixed bug with keyboard not responding when go deeper
-in file tree thrue mouse double click.
+in file tree thru mouse double click.
 
 * Removed property keyBinded. From not it's private
 member of KeyBinding class.
@@ -114,11 +116,11 @@ Function scrollIntoViewIfNeeded was polyfilled.
 
 * Added classic borders to panels.
 
-* Added ability to download files thrue drag'n'drop.
+* Added ability to download files thru drag'n'drop.
 
 * Fixed bug with setting current file when mouse down.
 
-* Improved borders over CodeMirror and panels thrue css.
+* Improved borders over CodeMirror and panels thru css.
 
 * Added ability to watch is file changed wile server is
 running
@@ -145,7 +147,7 @@ disabled in browsers.
 
 * Added plagin terminal ( ` button under TAB).
 
-* Added ability to execute commands on server thrue terminal.
+* Added ability to execute commands on server thru terminal.
 
 * Added appcache paramter to config.json
 
