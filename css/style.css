@@ -90,15 +90,36 @@ body{
     background:url(/img/spinner.gif);
 }
 .error:hover{
-  color:rgba(222, 41, 41, 0.81);
+    color:rgb(222, 41, 41);
+    color:rgba(222, 41, 41, 0.81);
 }
 .refresh-icon{
     background:url(/img/panel_refresh.png) no-repeat;
 }
 .refresh-icon:active{
   /*background-position-y: -15px;*/
-background:url(/img/panel_refresh.png) 0 -15px no-repeat;
+    background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
+
+.cmd-button{
+    border: 1.5px solid rgba(49,123,249,.40);
+    background-color: white;
+    color: rgb(49,123,249);
+    margin: 20px 2px 0 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 10%;
+    white-space: nowrap;
+}
+.cmd-button:hover{
+    border: 1.5px solid rgb(0,0,0);
+}
+
+.cmd-button:active{
+    background-color: rgb(49,123,249);
+    color: white;
+}
+
 .clear-cache{
     margin-right: 6px;
     margin-left: 7px;
