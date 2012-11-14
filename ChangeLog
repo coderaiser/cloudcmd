@@ -79,6 +79,8 @@ dom.js and util.js.
 
 * Added functions DOM.addKeyListener and Util.loadOnLoad
 
+* Added buttons panel.
+
 
 2012.10.01, Version 0.1.7
 
