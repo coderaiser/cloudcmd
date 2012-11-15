@@ -84,7 +84,6 @@
      * @pConnectionData {request, responce}
      */
     function rest(pConnectionData){
-        console.log('rest');
         return Util.exec(main.rest, pConnectionData);
     }
     
