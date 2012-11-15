@@ -87,7 +87,10 @@ dom.js and util.js.
 
 * CodeMirror upgraded to version 2.35.0.
 
-* Fixed bug with keys panel and fm bottom margin.
+* Fixed bug with keys panel and fm bottom margin,
+when CodeMirror is open on the right panel.
+
+* Fixed bug with positioning of CodeMirror on the right panel.
 
 2012.10.01, Version 0.1.7
 
