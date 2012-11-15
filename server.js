@@ -102,11 +102,11 @@ if(!Zlib)
         'you should use newer node version\n');
 
  /* добавляем  модуль с функциями */
-var CloudFunc           =   main.cloudfunc,
-    Util                =   main.util;
+var CloudFunc           = main.cloudfunc,
+    Util                = main.util;
     
 /* Обьект для работы с кэшем */
-CloudServer.Cache       =   main.cache,
+CloudServer.Cache       = main.cache,
 
 CloudServer.Minify      = main.minify,
 CloudServer.AppCache    = main.appcache,
@@ -665,9 +665,13 @@ CloudServer.indexReaded = function(pList){
         pIndex = pIndex.toString();
         
         
-        var lProccessed = Util.exec(function(){
-            return CloudServer.indexProcessing(pIndex, pList);
-        });
+        var lProccessed,
+            lIndexProccessing = CloudServer.indexProcessing;
+         
+         lProccessed = Util.exec(lIndexProccessing, {
+             data       : pIndex,
+             additional : pList
+            });
         
         if(lProccessed)
             pIndex = lProccessed;

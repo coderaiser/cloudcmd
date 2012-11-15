@@ -23,9 +23,14 @@
     if(update)
         update.get();
     
-    
-    function indexProcessing(pIndex, pList){
-        var lReplace_s;
+    /**
+     * additional processing of index file
+     * 
+     */
+    function indexProcessing(pData){
+        var lReplace_s,
+            lData = pData.data,
+            lAdditional = pData.additional;
         /* если выбрана опция минифизировать скрпиты
          * меняем в index.html обычные css на
          * минифицированый
@@ -33,26 +38,26 @@
         if(srv.Minify._allowed.css){       
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             
-            pIndex = Util.removeStr(pIndex, lReplace_s);
-            pIndex = pIndex.replace('/css/style.css', srv.Minify.MinFolder + 'all.min.css');
+            lData = Util.removeStr(lData, lReplace_s);
+            lData = lData.replace('/css/style.css', srv.Minify.MinFolder + 'all.min.css');
         }
         
         lReplace_s = '<div id=fm class=no-js>';
-        pIndex = pIndex.replace(lReplace_s, lReplace_s + pList);
+        lData = lData.replace(lReplace_s, lReplace_s + lAdditional);
         
         /* меняем title */
-        pIndex = pIndex.replace('<title>Cloud Commander</title>',
+        lData = lData.replace('<title>Cloud Commander</title>',
             '<title>' + CloudFunc.setTitle() + '</title>');
         
         if(!srv.Config.appcache)
-            pIndex = Util.removeStr(pIndex, ' manifest=/cloudcmd.appcache');
+            lData = Util.removeStr(lData, ' manifest=/cloudcmd.appcache');
         
         if(!srv.Config.show_keys_panel){
             var lKeysPanel = '<div id=keyspanel';
-            pIndex = pIndex.replace(lKeysPanel, lKeysPanel +' class=hidden');
+            lData = lData.replace(lKeysPanel, lKeysPanel +' class=hidden');
         }
         
-        return pIndex;
+        return lData;
         
     }
     
@@ -101,12 +106,12 @@
                 Config.server  = 
                 Config.logs    = false;
             }
-                        
+            
             if (Config.logs) {
                 console.log('log param setted up in config.json\n' +
                     'from now all logs will be writed to log.txt');
                 writeLogsToFile();
-            }        
+            }
         }
     }
     
