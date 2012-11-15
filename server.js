@@ -299,19 +299,23 @@ CloudServer._controller = function(pReq, pRes)
         lFS_s   = CloudFunc.FS;
     
     console.log("request for " + pathname + " received...");
-    
-    if( lConfig.rest )
-        Util.exec(CloudServer.rest, {
+        
+    if( lConfig.rest ){
+        var lRestWas = Util.exec(CloudServer.rest, {
             request     : pReq,
             response    : pRes
         });
+        
+        if(lRestWas)
+            return;
+    }
     
     /* если в пути нет информации ни о ФС,
      * ни об отсутствии js,
      * ни о том, что это корневой
      * каталог - загружаем файлы проэкта
      */
-    else if ( !Util.isContainStr(pathname, lFS_s)    &&
+    if ( !Util.isContainStr(pathname, lFS_s)    &&
               !Util.isContainStr(pathname, lNoJS_s)  &&
               !Util.strCmp(pathname, '/')            &&
               !Util.strCmp(lQuery, 'json') ) {
