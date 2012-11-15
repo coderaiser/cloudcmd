@@ -85,7 +85,7 @@
      */
     function rest(pConnectionData){
         console.log('rest');
-        Util.exec(main.rest, pConnectionData);
+        return Util.exec(main.rest, pConnectionData);
     }
     
     function readConfig(){
