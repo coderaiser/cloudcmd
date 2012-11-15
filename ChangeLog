@@ -94,6 +94,7 @@ when CodeMirror is open on the right panel.
 
 * Function generateHeaders moved to main module.
 
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
