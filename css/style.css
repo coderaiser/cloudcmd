@@ -175,7 +175,7 @@ body{
 }
 #fm{
     height: 90%;
-    margin: 26px;
+    margin: 26px 26px 0 26px;
 }
 .fm_header{
   font-weight: bold;
