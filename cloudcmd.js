@@ -18,7 +18,11 @@
         Config      = main.config;
     
     readConfig();
-    Server.start(Config, indexProcessing, appCacheProcessing);
+    Server.start(Config, {
+        index       : indexProcessing,
+        appcache    : appCacheProcessing,
+        rest        : rest
+    });
     
     if(update)
         update.get();
@@ -73,6 +77,15 @@
         
         lAppCache.addFiles(lFiles);
         lAppCache.createManifest();
+    }
+    
+    /**
+     * rest interface
+     * @pConnectionData {request, responce}
+     */
+    function rest(pConnectionData){
+        console.log('rest');
+        Util.exec(main.rest, pConnectionData);
     }
     
     function readConfig(){

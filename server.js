@@ -140,7 +140,10 @@ CloudServer.init        = (function(pAppCachProcessing){
  * Функция создаёт сервер
  * @param pConfig
  */
-CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
+CloudServer.start = function (pConfig, pProcessing) {
+    if(!pProcessing)
+        pProcessing = {};
+    
     if(pConfig)
         this.Config = pConfig;
     
@@ -151,9 +154,10 @@ CloudServer.start = function (pConfig, pIndexProcessing, pAppCachProcessing) {
     
     var lConfig = this.Config;
     
-    CloudServer.indexProcessing = pIndexProcessing;
+    CloudServer.indexProcessing = pProcessing.index;
+    CloudServer.rest            = pProcessing.rest;
     
-    this.init(pAppCachProcessing);
+    this.init(pProcessing.appcache);
     
     this.Port = process.env.PORT            ||  /* c9           */
                 process.env.app_port        ||  /* nodester     */
@@ -255,10 +259,11 @@ CloudServer.generateHeaders = function(pName, pGzip){
 CloudServer._controller = function(pReq, pRes)
 {
     /* Читаем содержимое папки, переданное в url */
-    var url = require("url"),
-        lParsedUrl = url.parse(pReq.url),
-        pathname = lParsedUrl.pathname,
-    
+    var lConfig     = CloudServer.Config,
+        url         = main.url,
+        lParsedUrl  = url.parse(pReq.url),
+        pathname    = lParsedUrl.pathname,
+        
         /* varible contain one of queris:
          * download - change content-type for
          *              make downloading process
@@ -269,7 +274,7 @@ CloudServer._controller = function(pReq, pRes)
          *              query like this
          *              ?json
          */
-        lQuery = lParsedUrl.query;
+        lQuery = lParsedUrl.query;        
     if(lQuery)
         console.log('query = ' + lQuery);
         
@@ -295,16 +300,21 @@ CloudServer._controller = function(pReq, pRes)
     
     console.log("request for " + pathname + " received...");
     
+    if( lConfig.rest )
+        Util.exec(CloudServer.rest, {
+            request     : pReq,
+            response    : pRes
+        });
     
     /* если в пути нет информации ни о ФС,
      * ни об отсутствии js,
      * ни о том, что это корневой
      * каталог - загружаем файлы проэкта
      */
-    if ( !Util.isContainStr(pathname, lFS_s)    &&
-         !Util.isContainStr(pathname, lNoJS_s)  &&
-         !Util.strCmp(pathname, '/')            &&
-         !Util.strCmp(lQuery, 'json') ) {
+    else if ( !Util.isContainStr(pathname, lFS_s)    &&
+              !Util.isContainStr(pathname, lNoJS_s)  &&
+              !Util.strCmp(pathname, '/')            &&
+              !Util.strCmp(lQuery, 'json') ) {
             /* если имена файлов проекта - загружаем их*/  
             /* убираем слеш и читаем файл с текущец директории*/
             
@@ -313,7 +323,7 @@ CloudServer._controller = function(pReq, pRes)
             console.log('reading '+lName);
             
             /* watching is file changed */
-            if(CloudServer.Config.appcache)        
+            if(lConfig.appcache)        
                 CloudServer.AppCache.watch(lName);
             
             /* сохраняем указатель на response и имя */
@@ -372,7 +382,7 @@ CloudServer._controller = function(pReq, pRes)
              */
         else if(lName.indexOf('min') < 0 &&
             CloudServer.Minify){
-                var lMin_o = CloudServer.Config.minification,
+                var lMin_o = lConfig.minification,
                 
                     lCheck_f = function(pExt){
                         return CloudFunc.checkExtension(lName,pExt);
@@ -799,7 +809,12 @@ CloudServer.sendResponse = function(pHead, pData, pName){
     }
 };
 
-exports.start = function(pConfig, pIndexProcessing, pAppCachProcessing){
-    CloudServer.start(pConfig, pIndexProcessing, pAppCachProcessing);
+/**
+ * start server function
+ * @param pConfig
+ * @param pProcessing {index, appcache, rest}
+ */
+exports.start = function(pConfig, pProcessing){
+    CloudServer.start(pConfig, pProcessing);
 };
 exports.CloudServer = CloudServer;
