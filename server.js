@@ -68,17 +68,7 @@ var CloudServer         = {
     Server          :{},
     
     /* КОНСТАНТЫ */
-    INDEX           : 'index.html',
-    Extensions      :{
-            '.css'      : 'text/css',
-            '.js'       : 'text/javascript',
-            '.png'      : 'image/png',
-            '.json'     : 'application/json',
-            '.html'     : 'text/html',
-            '.woff'     : 'font/woff',
-            '.appcache' : 'text/cache-manifest',
-            '.mp3'      : 'audio/mpeg'
-    },
+    INDEX           : 'index.html'
 },
 
     DirPath             = '/',
@@ -196,59 +186,6 @@ CloudServer.start = function (pConfig, pProcessing) {
         console.log('Cloud Commander testing mode');
 };
 
-
-/**
- * Функция создаёт заголовки файлов
- * в зависимости от расширения файла
- * перед отправкой их клиенту
- * @param pName - имя файла
- * @param pGzip - данные сжаты gzip'ом
- */
-CloudServer.generateHeaders = function(pName, pGzip){
-    var lType               = '',
-        lCacheControl       = 0,
-        lContentEncoding    = '',
-        lRet,
-        
-        lDot                = pName.lastIndexOf('.'),
-        lExt                = pName.substr(lDot);
-    
-    if( Util.strCmp(lExt, '.appcache') )
-        lCacheControl = 1;
-    
-    lType = CloudServer.Extensions[lExt] || 'text/plain';
-    
-    if( !Util.isContainStr(lType, 'img') )
-        lContentEncoding = '; charset=UTF-8';
-
-    var lQuery = CloudServer.Queries[pName];
-    if(lQuery){
-        if( Util.strCmp(lQuery, 'download') )
-            lType = 'application/octet-stream';
-        
-        console.log(pName + lQuery);
-    }
-    
-    if(!lCacheControl)
-        lCacheControl = 31337 * 21;
-        
-    lRet = {
-        /* if type of file any, but img - 
-         * then we shoud specify charset 
-         */
-        'Content-Type': lType + lContentEncoding,
-        'cache-control': 'max-age=' + lCacheControl,
-        'last-modified': new Date().toString(),        
-        /* https://developers.google.com/speed/docs/best-practices
-            /caching?hl=ru#LeverageProxyCaching */
-        'Vary': 'Accept-Encoding'
-    };
-    
-    if(pGzip)
-        lRet['content-encoding'] = 'gzip';
-        
-    return lRet;
-};
 
 /**
  * Главная функция, через которую проихсодит
@@ -644,15 +581,17 @@ CloudServer._fillJSON = function(pStats, pFiles){
         }
     }else{        
         DirPath = DirPath.substr(DirPath, DirPath.lastIndexOf('/') );
+        
         var lQuyery = CloudServer.Queries[DirPath];
-        DirPath += '.json';        
+        DirPath += '.json';
         CloudServer.Queries[DirPath] = lQuyery;
+        
         /* в обычном режиме(когда js включен
          * высылаем json-структуру файлов
          * с соответствующими заголовками
          */        
         lList   = JSON.stringify(lJSON);
-        lHeader = CloudServer.generateHeaders(DirPath, CloudServer.Gzip);
+        lHeader = main.generateHeaders(DirPath, CloudServer.Gzip, lQuyery);
         
         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
         if(CloudServer.Gzip){
@@ -670,17 +609,20 @@ CloudServer._fillJSON = function(pStats, pFiles){
 CloudServer.indexReaded = function(pList){
     return function(pError, pIndex){
         if(pError){
-          return console.log(pError);
+            return console.log(pError);
         }
-                
+        
+        var lSrv        = CloudServer,
+            lIndexName  = lSrv.INDEX;
+        
         /* и сохраняем в кэш */
-        CloudServer.Cache.set(CloudServer.INDEX, pIndex);
+        lSrv.Cache.set(lIndexName, pIndex);
                 
         pIndex = pIndex.toString();
         
         
         var lProccessed,
-            lIndexProccessing = CloudServer.indexProcessing;
+            lIndexProccessing = lSrv.indexProcessing;
          
          lProccessed = Util.exec(lIndexProccessing, {
              data       : pIndex,
@@ -691,19 +633,20 @@ CloudServer.indexReaded = function(pList){
             pIndex = lProccessed;
         /* 
          * если браузер поддерживает gzip-сжатие
-         * высылаем заголовок в зависимости от типа файла 
-         */
-        var lHeader = CloudServer.generateHeaders('index.html', CloudServer.Gzip);
+         * высылаем заголовок в зависимости от типа файла
+        */
+        var lQuery = lSrv.Queries[lIndexName],
+            lHeader = main.generateHeaders(lIndexName, lSrv.Gzip, lQuery);
         
-         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/                
-        if(CloudServer.Gzip) {
+         /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
+        if(lSrv.Gzip) {
             Zlib.gzip(pIndex,
-                CloudServer.getGzipDataFunc(lHeader, CloudServer.INDEX));
+                lSrv.getGzipDataFunc(lHeader, lIndexName));
         }
         
         /* если не поддерживаеться - отсылаем данные без сжатия*/
         else
-            CloudServer.sendResponse(lHeader, pIndex, CloudServer.INDEX);
+            lSrv.sendResponse(lHeader, pIndex, lIndexName);
     };
 };
 
@@ -722,6 +665,7 @@ CloudServer.getReadFileFunc = function(pName){
  * Пример {cache: false, minify: true}
  */    
     var lReadFile = function(pError, pData, pFromCache_o){
+        var lSrv = CloudServer;
         if (!pError){
             console.log('file ' + pName + ' readed');
             
@@ -730,8 +674,8 @@ CloudServer.getReadFileFunc = function(pName){
              * сохраняем
              */
             if(pFromCache_o && !pFromCache_o.cache && 
-                CloudServer.Cache.isAllowed)
-                    CloudServer.Cache.set(pName, pData);
+                lSrv.Cache.isAllowed)
+                    lSrv.Cache.set(pName, pData);
             
             /* если кэш есть
              * сохраняем его в переменную
@@ -739,15 +683,16 @@ CloudServer.getReadFileFunc = function(pName){
              * по скольку мы будем вызывать этот метод
              * сами, ведь файл уже вычитан
              */            
-            var lHeader = CloudServer.generateHeaders(pName, CloudServer.Gzip);
+            var lQuery  = lSrv.Queries[pName],
+                lHeader = main.generateHeaders(pName, lSrv.Gzip, lQuery);
             
             /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
-            if( CloudServer.Gzip && !(pFromCache_o && pFromCache_o.cache) )
+            if( lSrv.Gzip && !(pFromCache_o && pFromCache_o.cache) )
                 /* сжимаем содержимое */
-                Zlib.gzip(pData,CloudServer.getGzipDataFunc(lHeader, pName));
+                Zlib.gzip(pData,lSrv.getGzipDataFunc(lHeader, pName));
             else
                 /* высылаем несжатые данные */
-                CloudServer.sendResponse(lHeader, pData, pName);
+                lSrv.sendResponse(lHeader, pData, pName);
         }
         else{
             console.log(pError.path);
@@ -755,10 +700,10 @@ CloudServer.getReadFileFunc = function(pName){
                 console.log(pError);
                 
                 /* sending page not found */
-                CloudServer.Statuses[pName] = 404;                
-                CloudServer.sendResponse('file not found', pError.toString(), pName);
+                lSrv.Statuses[pName] = 404;                
+                lSrv.sendResponse('file not found', pError.toString(), pName);
             }else
-                CloudServer.sendResponse('OK', 'passwd.json');        
+                lSrv.sendResponse('OK', 'passwd.json');        
         }
     };
     
