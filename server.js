@@ -806,7 +806,7 @@ CloudServer.sendResponse = function(pHead, pData, pName){
         lStatus     = CloudServer.Statuses[pName];
     
     if(lResponse){
-        lResponse.writeHead(lStatus, pHead);        
+        lResponse.writeHead(lStatus, pHead);
         lResponse.end(pData);
         
         console.log(pName + ' sended');
@@ -821,4 +821,4 @@ CloudServer.sendResponse = function(pHead, pData, pName){
 exports.start = function(pConfig, pProcessing){
     CloudServer.start(pConfig, pProcessing);
 };
-exports.CloudServer = CloudServer;
+exports.CloudServer         = CloudServer;
