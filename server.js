@@ -401,17 +401,9 @@ CloudServer._controller = function(pReq, pRes)
         
         console.log(DirPath);
         
+        
         /* читаем основные данные о файле */
-        if( lQuery && lQuery.indexOf('code=') === 0){
-            var lAuth = main.auth;
-            
-            if( Util.isFunction(lAuth) )
-                lAuth(lQuery, function(){
-                    Fs.stat(DirPath, CloudServer._stated);
-                });
-            console.log('***********');
-        }else
-            Fs.stat(DirPath, CloudServer._stated);
+        Fs.stat(DirPath, CloudServer._stated);
         
         /* если установлено сжатие
          * меняем название html-файла и
