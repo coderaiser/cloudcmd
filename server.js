@@ -70,9 +70,10 @@ var CloudServer         = {
     /* КОНСТАНТЫ */
     INDEX           : 'index.html'
 },
-
+    
     DirPath             = '/',
     
+    OK                  = 200,
     DIR                 = process.cwd() + '/',
     main                = require(DIR + 'lib/server/main.js'),
     
@@ -271,7 +272,7 @@ CloudServer._controller = function(pReq, pRes)
             CloudServer.Responses[lName]    = pRes;
             
             /* saving status OK for current file */
-            CloudServer.Statuses[lName]     = 200;
+            CloudServer.Statuses[lName]     = OK;
             
             /* Берём значение из кэша
              * сжатый файл - если gzip-поддерживаеться браузером
@@ -347,7 +348,7 @@ CloudServer._controller = function(pReq, pRes)
                 lResult = false;
             
         if(!lResult)
-            Fs.readFile(lName, lReadFileFunc_f);            
+            Fs.readFile(lName, lReadFileFunc_f);
     }else{/* если мы имеем дело с файловой системой*/
         /* если путь не начинаеться с no-js - значит 
          * js включен
@@ -384,7 +385,7 @@ CloudServer._controller = function(pReq, pRes)
         
         /* если в итоге путь пустой
          * делаем его корневым
-         */                         
+         */
         if (pathname === '')
             pathname = '/';
                     
@@ -392,10 +393,10 @@ CloudServer._controller = function(pReq, pRes)
         
         CloudServer.Responses[DirPath]  = pRes;
         
-        CloudServer.Statuses[DirPath]   = 200;
+        CloudServer.Statuses[DirPath]   = OK;
         
         /* saving query of current file */
-        CloudServer.Queries[DirPath]    = lQuery;        
+        CloudServer.Queries[DirPath]    = lQuery;
         Util.log(lQuery);
         
         console.log(DirPath);
@@ -403,12 +404,13 @@ CloudServer._controller = function(pReq, pRes)
         /* читаем основные данные о файле */
         if( lQuery && lQuery.indexOf('code=') === 0){
             var lAuth = main.auth;
-
-            if(lAuth) lAuth.auth(lQuery, function(){
+            
+            if( Util.isFunction(lAuth) )
+                lAuth(lQuery, function(){
                     Fs.stat(DirPath, CloudServer._stated);
                 });
             console.log('***********');
-        }else            
+        }else
             Fs.stat(DirPath, CloudServer._stated);
         
         /* если установлено сжатие
@@ -418,13 +420,13 @@ CloudServer._controller = function(pReq, pRes)
         CloudServer.INDEX = (CloudServer.Minify._allowed.html ?
             '.' + CloudServer.Minify.MinFolder + 'index.min.html'
             : CloudServer.INDEX);
-      
+        
         /*
          * сохраним указатель на response
          * и на статус ответа
          */            
         CloudServer.Responses[CloudServer.INDEX] = pRes;
-        CloudServer.Statuses [CloudServer.INDEX] = 200;
+        CloudServer.Statuses [CloudServer.INDEX] = OK;
     }
 };
 
