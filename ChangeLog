@@ -100,6 +100,10 @@ right panel.
 * Fixed bug with context menu. Now it disabled 
 before load menu module to.
 
+* Throw out jquery from github module, moved Cache
+object from client to DOM module, 
+refactored Cache object and added polyfill.
+
 
 2012.10.01, Version 0.1.7
 
