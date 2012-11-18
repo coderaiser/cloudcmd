@@ -90,11 +90,15 @@ dom.js and util.js.
 * Fixed bug with keys panel and fm bottom margin,
 when CodeMirror is open on the right panel.
 
-* Fixed bug with positioning of CodeMirror on the right panel.
+* Fixed bug with positioning of CodeMirror on the 
+right panel.
 
 * Function generateHeaders moved to main module.
 
 * Setted up auth on GitHub thru rest.
+
+* Fixed bug with context menu. Now it disabled 
+before load menu module to.
 
 
 2012.10.01, Version 0.1.7

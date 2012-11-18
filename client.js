@@ -7,7 +7,7 @@ var Util, DOM, CloudCommander = (function(){
 "use strict";
 
 /* Клиентский обьект, содержащий функциональную часть*/
-var CloudClient = {        
+var CloudClient = {
     /* Конструктор CloudClient, который выполняет
      * весь функционал по инициализации
      */
@@ -109,7 +109,7 @@ var loadModule                      = function(pParams){
     };
 };
 
-/* 
+/**
  * Обьект для работы с кэшем
  * в него будут включены функции для
  * работы с LocalStorage, webdb,
@@ -298,7 +298,8 @@ CloudClient._editFileName           = function(pParent){
     }
 };
 
-/* Функция устанавливает текущим файлом, тот
+/**
+ * Функция устанавливает текущим файлом, тот
  * на который кликнули единожды
  */
 CloudClient._setCurrent             = function(){
@@ -419,11 +420,22 @@ function initModules(pCallBack){
     DOM.ajax({
         url:'/modules.json',
         success: function(pModules){
-            var lFunc = Util.retFunc( DOM.Images.showLoad ),
-                lDoBefore = {
-                    'viewer'                : lFunc,
-                    "editor/_codemirror"    : lFunc
+            var lShowLoadFunc       = Util.retFunc( DOM.Images.showLoad ),
+                lDisableMenuFunc    = function(){
+                    var lFunc = document.oncontextmenu;
+                    document.oncontextmenu = function(){
+                        Util.exec(lFunc);
+                        return cloudcmd.Menu.ENABLED || false;
+                    };
+                },
+                
+                lDoBefore           = {
+                    'viewer'                : lShowLoadFunc,
+                    'editor/_codemirror'    : lShowLoadFunc,
+                    'menu'                  : lDisableMenuFunc
                 };
+            
+            lDisableMenuFunc();
             
             if( Util.isArray(pModules) )
                 for(var i = 0, n = pModules.length; i < n ; i++){
