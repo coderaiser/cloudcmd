@@ -105,10 +105,10 @@ CloudServer.Socket      = main.socket;
 
 /* базовая инициализация  */
 CloudServer.init        = (function(pAppCachProcessing){
-    var lConfig     = this.Config,
-        lMinify     = this.Minify,
-        lCache      = this.Cache,
-        lAppCache   = this.AppCache;
+    var lConfig         = this.Config,
+        lMinify         = this.Minify,
+        lCache          = this.Cache,
+        lAppCache       = this.AppCache;
     
     /* Переменная в которой храниться кэш*/
     lCache.setAllowed(lConfig.cache.allowed);
@@ -121,7 +121,7 @@ CloudServer.init        = (function(pAppCachProcessing){
     /* Если нужно минимизируем скрипты */
     lMinify._allowed = lMinify.doit();
     
-    /* создаём файл app cache */    
+    /* создаём файл app cache */
     if( lConfig.appcache  && lAppCache && lConfig.server )
         Util.exec( pAppCachProcessing );
 });
