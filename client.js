@@ -28,8 +28,6 @@ var CloudClient = {
                                      * загружает содержимое каталогов */
     
     /* ОБЬЕКТЫ */
-    /* Обьект для работы с кэшем */
-    Cache                  : {},    
     
     /* ПРИВАТНЫЕ ФУНКЦИИ */
     /* функция загружает json-данные о файловой системе */
@@ -107,78 +105,6 @@ var loadModule                      = function(pParams){
                 cloudcmd[lName].Keys(pArg);
             });
     };
-};
-
-/**
- * Обьект для работы с кэшем
- * в него будут включены функции для
- * работы с LocalStorage, webdb,
- * indexed db etc.
- */
-CloudClient.Cache                   = {
-    _allowed     : true,     /* приватный переключатель возможности работы с кэшем */
-    
-    /* функция проверяет возможно ли работать с кэшем каким-либо образом */
-    isAllowed   : function(){},
-    
-    /* Тип кэша, который доступен*/
-    type        : {},
-    
-    /* Функция устанавливает кэш, если выбранный вид поддерживаеться браузером*/
-    set         :function(){},
-    
-    /* Функция достаёт кэш, если выбранный вид поддерживаеться браузером*/
-    get         : function(){},
-    
-    /* функция чистит весь кэш для всех каталогов*/
-    clear       : function(){}
-};
-
-
-/** функция проверяет поддерживаеться ли localStorage */
-CloudClient.Cache.isAllowed         = (function(){
-    if(window.localStorage   && 
-        localStorage.setItem &&
-        localStorage.getItem){
-        CloudClient.Cache._allowed=true;
-    }else
-        {
-            CloudClient.Cache._allowed=false;
-            /* загружаем PolyFill для localStorage,
-             * если он не поддерживаеться браузером
-             * https://gist.github.com/350433 
-             */
-            /*
-            DOM.jsload('https://raw.github.com/gist/350433/c9d3834ace63e5f5d7c8e1f6e3e2874d477cb9c1/gistfile1.js',
-                function(){CloudClient.Cache._allowed=true;
-            });
-            */
-        }
-});
- 
- /** если доступен localStorage и
-  * в нём есть нужная нам директория -
-  * записываем данные в него
-  */
-CloudClient.Cache.set               = function(pName, pData){
-    if(CloudClient.Cache._allowed && pName && pData){
-        localStorage.setItem(pName,pData);
-    }
-};
-
-/** Если доступен Cache принимаем из него данные*/
-CloudClient.Cache.get               = function(pName){
-    if(CloudClient.Cache._allowed  && pName){
-        return localStorage.getItem(pName);
-    }
-    else return null;
-};
-
-/** Функция очищает кэш */
-CloudClient.Cache.clear             = function(){
-    if(CloudClient.Cache._allowed){
-        localStorage.clear();
-    }
 };
 
 CloudClient.GoogleAnalytics         = function(){
@@ -480,7 +406,7 @@ function initKeysPanel(pCallBack){
 }
 
 function baseInit(pCallBack){
-    if(applicationCache){        
+    if(applicationCache){
         var lFunc = applicationCache.onupdateready;
         
         applicationCache.onupdateready = function(){
@@ -508,10 +434,10 @@ function baseInit(pCallBack){
         cloudcmd._changeLinks(CloudFunc.RIGHTPANEL);
                 
         /* устанавливаем переменную доступности кэша                    */
-        cloudcmd.Cache.isAllowed();    
+        DOM.Cache.isAllowed();
         /* Устанавливаем кэш корневого каталога                         */ 
-        if(!cloudcmd.Cache.get('/'))
-            cloudcmd.Cache.set('/', cloudcmd._getJSONfromFileTable());
+        if( !DOM.Cache.get('/') )
+            DOM.Cache.set('/', cloudcmd._getJSONfromFileTable());
     });
               
     /* устанавливаем размер высоты таблицы файлов
@@ -536,7 +462,7 @@ function baseInit(pCallBack){
     var lHeight = window.screen.height;
         lHeight = lHeight - (lHeight/3).toFixed();
         
-    lHeight = (lHeight/100).toFixed()*100;
+    lHeight = (lHeight / 100).toFixed() * 100;
      
     cloudcmd.HEIGHT = lHeight;
      
@@ -569,7 +495,7 @@ CloudClient._changeLinks            = function(pPanelID){
     /* назначаем кнопку очистить кэш и показываем её */
     var lClearcache = getById('clear-cache');
     if(lClearcache)
-        lClearcache.onclick = CloudClient.Cache.clear;    
+        lClearcache.onclick = DOM.Cache.clear;
     
     /* меняем ссылки на ajax-запросы */
     var lPanel = getById(pPanelID),
@@ -736,9 +662,9 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
             lError;
          
         if(pNeedRefresh === undefined && lPanel){
-            var lJSON = CloudClient.Cache.get(lPath);
+            var lJSON = DOM.Cache.get(lPath);
             
-            if (lJSON !== null){
+            if (lJSON){
                 /* переводим из текста в JSON */
                 if(window && !window.JSON){
                     lError = Util.tryCatchLog(function(){
@@ -784,7 +710,7 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
                     * сохраняем их в кэше
                     */
                     if(lJSON_s.length<50000)
-                        CloudClient.Cache.set(lPath,lJSON_s);                        
+                        DOM.Cache.set(lPath,lJSON_s);                        
                 }
             });
         });
