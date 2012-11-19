@@ -80,9 +80,9 @@ body{
 .error::before{
     position: relative;
     bottom : 4px;
-    content:'\f026';
+    color:rgb(222, 41, 41);
     cursor:default;
-    color:rgb(222, 41, 41);    
+    content:'\f026';
 }
 .loading{
     position:relative;
@@ -102,22 +102,22 @@ body{
 }
 
 .cmd-button{
-    border: 1.5px solid rgba(49,123,249,.40);
-    background-color: white;
-    color: rgb(49,123,249);
+    width: 10%;
     margin: 20px 2px 0 2px;
     overflow: hidden;
+    color: rgb(49,123,249);
     text-overflow: ellipsis;
-    width: 10%;
     white-space: nowrap;
+    background-color: white;
+    border: 1.5px solid rgba(49,123,249,.40);
 }
 .cmd-button:hover{
     border: 1.5px solid rgb(0,0,0);
 }
 
 .cmd-button:active{
-    background-color: rgb(49,123,249);
     color: white;
+    background-color: rgb(49,123,249);    
 }
 
 .clear-cache{

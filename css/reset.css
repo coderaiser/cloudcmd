@@ -7,7 +7,13 @@
  * 2. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
  */
 
-html { font-size: 100%; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; font-family: sans-serif; color: #222;}
+html{
+    font-family: sans-serif;
+    font-size: 100%;
+    color: #222;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
 body { margin: 0; font-size: 1em; line-height: 1.4; }
 
 /*
@@ -26,7 +32,10 @@ body { margin: 0; font-size: 1em; line-height: 1.4; }
    Links
    ========================================================================== */
 
-a {text-decoration:none; color: #00e; }
+a{
+    color: #00e;
+    text-decoration:none;
+}
 a:visited { color: #551a8b; }
 a:hover { color: #06e; }
 a:focus { outline: thin dotted; }
@@ -37,11 +46,11 @@ a:hover, a:active { outline: 0; }
 /* changed ul to panel, it using only in this case for now, and will css
  * processing cost 33% with name of tag, so it should be match faster
  */
-.panel{     
+.panel{
     /* removed default margins */
-    margin: 0;
     padding: 20px;
-    }
+    margin: 0;
+}
 
 /*
  * 1. Display hand cursor for clickable form elements
