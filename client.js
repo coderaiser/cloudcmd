@@ -236,9 +236,10 @@ CloudClient._setCurrent             = function(){
          */
         return function(pFromEnter){
             var lCurrentFile = DOM.getCurrentFile();
-            if(lCurrentFile){                        
-                if (DOM.isCurrentFile(this)  &&
-                    !Util.isBoolean(pFromEnter)){
+            if(lCurrentFile){/* устанавливаем курсор на файл, на который нажали */
+                DOM.setCurrentFile(this);
+                //if (DOM.isCurrentFile(this)  &&
+                //    !Util.isBoolean(pFromEnter)){
                     //var lParent = this;
                     
                     //setTimeout(function(){
@@ -251,11 +252,7 @@ CloudClient._setCurrent             = function(){
                     //    if(DOM.getCurrentFile() === lParent)
                      //       CloudClient._editFileName(lParent);
                      //   },1000);
-                }
-                else{                        
-                    /* устанавливаем курсор на файл, на который нажали */
-                    DOM.setCurrentFile(this);
-                }
+                //}
             }
              /* если мы попали сюда с энтера */
              if(pFromEnter===true){
@@ -788,8 +785,8 @@ CloudClient._getJSONfromFileTable   = function(){
         var lIsDir = lAttr['mini-icon directory'] ? true : false,
         
         lName = lAttr.name;
-        lName &&
-            (lName = lName.getElementsByTagName('a'));
+        if(lName)
+            lName = DOM.getByTag(lName, 'a');
         
         /* if found link to folder 
          * cheking is it a full name
@@ -798,12 +795,10 @@ CloudClient._getJSONfromFileTable   = function(){
          /* if short we got title 
          * if full - getting textConent
          */
-        lName.length &&
-            (lName = lName[0]);
+        if(lName.length)
+            lName = lName[0];
             
-        lName.title &&
-            (lName = lName.title) ||
-            (lName = lName.textContent);        
+        lName = lName.title || lName.textContent;
             
         /* если это папка - выводим слово dir вместо размера*/
         var lSize = lIsDir ? 'dir' : lAttr.size.textContent,
