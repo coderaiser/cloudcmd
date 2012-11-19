@@ -104,6 +104,12 @@ before load menu module to.
 object from client to DOM module, 
 refactored Cache object and added polyfill.
 
+* Added ability to connect github development id,
+to Cloud Commander instance working in any host,
+for this all the needed to be done is:
+set enveronment varibles "oauth_client_id" and 
+"oauth_client_secret" values from github profile.
+
 
 2012.10.01, Version 0.1.7
 
