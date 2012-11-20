@@ -158,10 +158,15 @@ Extensions
 ---------------
 **Cloud Commander** desinged to easily porting extensions.
 For extend main functionality Cloud Commander use next modules:
-- [CodeMirror] (http://codemirror.net "CodeMirror")
-- [FancyBox] (https://github.com/fancyapps/fancyBox "FancyBox")
-- [jQuery-contextMenu] (https://github.com/medialize/jQuery-contextMenu "jQuery-contextMenu")
-- [jquery.terminal] (https://github.com/jcubic/jquery.terminal "jquery.terminal")
+- [CodeMirror]              [CodeMirrorURL]
+- [FancyBox]                [FancyBoxURL]
+- [jQuery-contextMenu]      [jQuery-contextMenuURL]
+- [jquery.terminal]         [jquery.terminalURL]
+
+[CodeMirrorURL]:            https://github.com/marijnh/CodeMirror "CodeMirror"
+[FancyBoxURL]:              https://github.com/fancyapps/fancyBox "FancyBox"
+[jQuery-contextMenuURL]:    https://github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
+[jquery.terminalURL]:       https://github.com/jcubic/jquery.terminal "jquery.terminal"
 
 Contributing
 ---------------
