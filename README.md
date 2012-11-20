@@ -34,23 +34,23 @@ Hot keys
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
 There is a short list:
-- Ctrl + r          - reload dir content
-- Ctrl + d          - clear local cache (wich contains dir contents)
-- Alt  + q          - disable key bindings
-- Alt  + s          - get all key bindings back
-- up, down, enter   - filesystem navigation
-- Alt + g           - authorization
+- **Ctrl + r**          - reload dir content
+- **Ctrl + d**          - clear local cache (wich contains dir contents)
+- **Alt  + q**          - disable key bindings
+- **Alt  + s**          - get all key bindings back
+- **up, down, enter**   - filesystem navigation
+- **Alt + g**           - authorization
 
 Viewer's hot keys
 ---------------
-- Shift + F3      - open viewer window
-- Esc               - close viewer window
+- **Shift + F3**      - open viewer window
+- **Esc**               - close viewer window
 
 Editor's hot keys
 ---------------
-- F3                - open CodeMirror editor in read only mode
-- F4                - open CodeMirror editor
-- Esc               - close CodeMirror editor
+- **F3**                - open CodeMirror editor in read only mode
+- **F4**                - open CodeMirror editor
+- **Esc**               - close CodeMirror editor
 
 Documentation
 ---------------
@@ -119,14 +119,17 @@ or
     http://localhost
 Updating
 ---------------
-**Cloud Commander** is very buggy and alfa so it's very often updated. For update
-you can just type in cloudcmd directory:
+**Cloud Commander** is very alfa and it's very often updatings.
+Update is doing automagically but it could be done also manualy
+by typing a few commands in cloudcmd directory:
 
     git pull
 or check new version on npm
+
     npm info cloudcmd
 
 and then, if there is new version
+
     npm r cloudcmd
     npm i cloudcmd
 
@@ -141,7 +144,7 @@ Install addtitional modules:
 
     npm i
     
-**Cloud Commander's Client Side** use module jquery for ajaxing.
+**Cloud Commander's Client Side** use module jquery for ajaxing. But only for old browsers.
 We could not use this module, but this way is fast:
 - google cdn
 - gzip
