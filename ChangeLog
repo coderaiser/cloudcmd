@@ -110,6 +110,8 @@ for this all the needed to be done is:
 set enveronment varibles "oauth_client_id" and 
 "oauth_client_secret" values from github profile.
 
+* Changed funcyBox version to 2.1.3.
+
 
 2012.10.01, Version 0.1.7
 

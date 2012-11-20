@@ -786,7 +786,7 @@ CloudClient._getJSONfromFileTable   = function(){
         
         lName = lAttr.name;
         if(lName)
-            lName = DOM.getByTag(lName, 'a');
+            lName = DOM.getByTag('a', lName);
         
         /* if found link to folder 
          * cheking is it a full name
