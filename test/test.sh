@@ -6,7 +6,7 @@ node_modules/jshint/bin/hint --config test/.jshintrc lib/util.js lib/cloudfunc.j
 echo "lib/client/dom.js lib/client/ie.js lib/client/menu.js lib/client/socket.js ./lib/client/terminal.js lib/client/viewer.js lib/client/storage/_github.js lib/client/menu.js lib/client/editor/_codemirror.js"
 node_modules/jshint/bin/hint --config test/.jshintrc lib/client/dom.js lib/client/ie.js lib/client/menu.js lib/client/socket.js ./lib/client/terminal.js lib/client/viewer.js lib/client/storage/_github.js lib/client/menu.js lib/client/editor/_codemirror.js
 echo "jshint ./package.json ./config.json"
-jshint ./package.json ./config.json
+node_modules/jshint/bin/hint --config test/.jshintrc ./package.json ./config.json
 #linting css files
 npm i recess
 echo "recess css/*.css"
