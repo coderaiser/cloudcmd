@@ -1,6 +1,6 @@
 Cloud Commander [![Build Status](https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master)](http://travis-ci.org/coderaiser/cloudcmd)
 =============== 
-**Cloud Commander** - two-panels file manager, totally writed on js.
+**Cloud Commander** - user friendly cloud file manager.
 DEMO:
 [cloudfoundry] (http://cloudcmd.cloudfoundry.com "cloudfoundry"),
 [appfog] (http://cloudcmd.aws.af.cm "appfog").
@@ -80,12 +80,25 @@ All main configuration could be done thrue config.json.
         "html"  : true,
         "img"   : false
     },
+    "oauth_client_id"       : "891c251b925e4e967fa9",                       /* github app id */
+    "oauth_client_secret"   : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545", /* github app secret */
+    "show_keys_panel"       : true, /* show classic panel with buttons of keys  */
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
+    "socket"    : true              /* enable web sockets                       */
     "port"      : 80,               /* Cloud Commander port                     */
-    "ip"        : "127.0.0.1"       /* Cloud Commander IP                       */
+    "ip"        : "127.0.0.1",      /* Cloud Commander IP                       */
+    "rest"      : true              /* enable rest interface                    */
 }
 ```
+Authorization
+---------------
+Thru openID Cloud Commander could Authorize clients.
+All things that should be done is must be added id and secret of application
+from github settings page and added to config.json or env varibles with names:
+"oauth_client_id" and "oauth_client_secret" that is more secure way.
+
+
 Starting
 ---------------
 To start **Cloud Commander** only one command neaded:

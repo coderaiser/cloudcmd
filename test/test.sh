@@ -1,4 +1,5 @@
 #!/bin/sh
+npm i recess jshint
 echo "jshint server.js client.js cloudcmd.js"
 node_modules/jshint/bin/hint --config test/.jshintrc server.js client.js cloudcmd.js
 echo "jshint lib/cloudfunc.js lib/client/keyBinding.js"
@@ -8,7 +9,6 @@ node_modules/jshint/bin/hint --config test/.jshintrc lib/client/dom.js lib/clien
 echo "jshint ./package.json ./config.json"
 node_modules/jshint/bin/hint --config test/.jshintrc ./package.json ./config.json
 #linting css files
-npm i recess
 echo "recess css/*.css"
 ./node_modules/recess/bin/recess css/*.css
 node test/test.js
