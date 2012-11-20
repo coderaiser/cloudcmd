@@ -39,6 +39,7 @@ There is a short list:
 - Alt  + q          - disable key bindings
 - Alt  + s          - get all key bindings back
 - up, down, enter   - filesystem navigation
+- Alt + g           - authorization
 
 Viewer's hot keys
 ---------------
@@ -93,10 +94,10 @@ All main configuration could be done thrue config.json.
 ```
 Authorization
 ---------------
-Thru openID Cloud Commander could Authorize clients.
-All things that should be done is must be added id and secret of application
-from github settings page and added to config.json or env varibles with names:
-"oauth_client_id" and "oauth_client_secret" that is more secure way.
+Thru openID Cloud Commander could authorize clients on GitHub.
+All things that should be done is must be added **id** and **secret** of application
+from github settings page and added to **config.json** or env varibles with names:
+*oauth_client_id* and *oauth_client_secret* that is more secure way.
 
 
 Starting
