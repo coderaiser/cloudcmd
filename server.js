@@ -606,11 +606,11 @@
             
             var lProccessed,
                 lIndexProccessing = lSrv.indexProcessing;
-             
-             lProccessed = Util.exec(lIndexProccessing, {
+            
+            lProccessed = Util.exec(lIndexProccessing, {
                  data       : pIndex,
                  additional : pList
-                });
+            });
             
             if(lProccessed)
                 pIndex = lProccessed;
