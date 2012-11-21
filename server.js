@@ -327,7 +327,7 @@ CloudServer._controller = function(pReq, pRes)
                 var lMin_o = lConfig.minification,
                 
                     lCheck_f = function(pExt){
-                        return CloudFunc.checkExtension(lName,pExt);
+                        return Util.checkExtension(lName,pExt);
                     },
 
                     isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
