@@ -53,7 +53,6 @@
         lData = lData.replace('<title>Cloud Commander</title>',
             '<title>' + CloudFunc.setTitle() + '</title>');
         
-        console.log(lData);
         if(!srv.Config.appcache)
             lData = Util.removeStr(lData, ' manifest="/cloudcmd.appcache"');
         
