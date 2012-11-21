@@ -8,7 +8,7 @@
         SRVDIR      = main.SRVDIR,
         
         path        = main.path,
-        fs          = main.path,    
+        fs          = main.fs,
         CloudFunc   = main.cloudfunc,
         Util        = main.util,
         update      = main.update,
