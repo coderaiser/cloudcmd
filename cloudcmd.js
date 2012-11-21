@@ -1,8 +1,10 @@
 (function(){
     "use strict";
     
-    var DIR         = process.cwd() + '/',
-        main        = require(DIR + 'lib/server/main'),
+    global.cloudcmd = {};
+    
+    var DIR         = __dirname     + '/',
+        main        = require(DIR   + 'lib/server/main'),
         
         LIBDIR      = main.LIBDIR,
         SRVDIR      = main.SRVDIR,

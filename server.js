@@ -1,6 +1,6 @@
 (function(){
     "use strict";
-    
+        
     /* Обьект содержащий все функции и переменные 
      * серверной части Cloud Commander'а
      */
@@ -62,8 +62,10 @@
         DirPath             = '/',
         
         OK                  = 200,
-        DIR                 = process.cwd() + '/',
-        main                = require(DIR + 'lib/server/main.js'),
+                
+        DIR         = process.cwd() + '/',
+        
+        main        = require(DIR   + 'lib/server/main'),
         
         LIBDIR              = main.LIBDIR,
         SRVDIR              = main.SRVDIR,
