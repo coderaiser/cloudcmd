@@ -39,7 +39,7 @@
          * меняем в index.html обычные css на
          * минифицированый
          */
-        if(srv.Minify._allowed.css){       
+        if(srv.Minify._allowed.css){
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             
             lData = Util.removeStr(lData, lReplace_s);
@@ -53,8 +53,9 @@
         lData = lData.replace('<title>Cloud Commander</title>',
             '<title>' + CloudFunc.setTitle() + '</title>');
         
+        console.log(lData);
         if(!srv.Config.appcache)
-            lData = Util.removeStr(lData, ' manifest=/cloudcmd.appcache');
+            lData = Util.removeStr(lData, ' manifest="/cloudcmd.appcache"');
         
         if(!srv.Config.show_keys_panel){
             var lKeysPanel = '<div id=keyspanel';
