@@ -299,7 +299,7 @@ CloudServer._controller = function(pReq, pRes)
                     console.log('trying to read data from Minify.Cache');
                     lFromCache_o.cache = false;
                     lFileData = CloudServer.Minify.Cache[
-                        Path.basename(lName)];                    
+                        Path.basename(lName)];
             }
             var lReadFileFunc_f = CloudServer.getReadFileFunc(lName),
             /* если там что-то есть передаём данные в функцию readFile */
