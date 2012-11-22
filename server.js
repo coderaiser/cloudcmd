@@ -246,12 +246,13 @@
                   !Util.isContainStr(pathname, lNoJS_s)  &&
                   !Util.strCmp(pathname, '/')            &&
                   !Util.strCmp(lQuery, 'json') ) {
-                /* если имена файлов проекта - загружаем их*/  
-                /* убираем слеш и читаем файл с текущец директории*/
+                
+                /* если имена файлов проекта - загружаем их         *
+                 * убираем слеш и читаем файл с текущец директории  */
                 
                 /* добавляем текующий каталог к пути */
                 var lName = '.' + pathname;
-                console.log('reading '+lName);
+                console.log('reading ' + lName);
                 
                 /* watching is file changed */
                 if(lConfig.appcache)        
@@ -283,20 +284,21 @@
                  * and in Minifys cache is files, so save it to
                  * CloudServer cache
                  */
-                if(!lFileData &&  
-                    lMinify._allowed){
-                        console.log('trying to read data from Minify.Cache');
-                        lFromCache_o.cache = false;
-                        lFileData = CloudServer.Minify.Cache[
-                            Path.basename(lName)];
+                if(!lFileData && lMinify._allowed){
+                    console.log('trying to read data from Minify.Cache');
+                    
+                    lFromCache_o.cache = false;
+                    
+                    lFileData = CloudServer.Minify.Cache[
+                        Path.basename(lName)];
                 }
                 var lReadFileFunc_f = CloudServer.getReadFileFunc(lName),
                 /* если там что-то есть передаём данные в функцию readFile */
-                    lResult = true;
+                    lResult = lFileData;
                 
-                if(lFileData){
-                    /* if file readed not from cache - 
-                     * he readed from minified cache 
+                if(lResult){
+                    /* if file readed not from cache -
+                     * he readed from minified cache
                      */
                     lFromCache_o.minify = !lFromCache_o.cache;
                                         
@@ -311,33 +313,34 @@
                 /* if file not in one of caches
                  * and minimizing setted then minimize it
                  */
-            else if(lName.indexOf('min') < 0 &&
-                CloudServer.Minify){
-                    var lMin_o = lConfig.minification,
+            else if(lName.indexOf('min') < 0 && CloudServer.Minify){
+                var lMin_o = lConfig.minification,
                     
-                        lCheck_f = function(pExt){
-                            return Util.checkExtension(lName,pExt);
-                        },
-    
-                        isAllowd_b = (lCheck_f('js') && lMin_o.js)   ||
-                                     (lCheck_f('css') && lMin_o.css) ||
-                                     (lCheck_f('html') && lMin_o.html);
-                        
-                    if(isAllowd_b){
-                        lResult = CloudServer.Minify.optimize(lName, {
-                            cache: true,
-                            callback: function(pFileData){
-                                lReadFileFunc_f(undefined, pFileData, false);
-                            }
-                        });
-                    }
-                    else 
-                        lResult = false;
-                } else
-                    lResult = false;
+                    lCheck_f = function(pExt){
+                        return Util.checkExtension(lName,pExt);
+                    };
+                    
+                    lResult = (lCheck_f('js') && lMin_o.js)   ||
+                                 (lCheck_f('css') && lMin_o.css) ||
+                                 (lCheck_f('html') && lMin_o.html);
                 
+                if(lResult){
+                    lResult = CloudServer.Minify.optimize(lName, {
+                        cache: true,
+                        callback: function(pFileData){
+                            lReadFileFunc_f(undefined, pFileData, false);
+                        }
+                    });
+                }
+            } 
+            
             if(!lResult)
-                Fs.readFile(lName, lReadFileFunc_f);
+                main.sendFile({
+                    name: lName,
+                    request: pReq,
+                    response: pRes
+                });
+            
         }else{/* если мы имеем дело с файловой системой*/
             /* если путь не начинаеться с no-js - значит 
              * js включен
