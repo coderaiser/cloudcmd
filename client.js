@@ -758,22 +758,27 @@ CloudClient._createFileTable        = function(pElem, pJSON){
  * используеться при первом заходе в корень
  */
 CloudClient._getJSONfromFileTable   = function(){
-    var lLeft       = getById('left');    
-    var lPath       = getByClass('path')[0].textContent;
-    var lFileTable  = [{path:lPath,size:'dir'}];
-    var lLI         = lLeft.getElementsByTagName('li');
+    var lLeft       = getById('left'),
+        lPath       = getByClass('path')[0].textContent,
+        
+        lFileTable  = [{
+            path:lPath,
+            size:'dir'
+        }],
+        
+        lLI         = lLeft.getElementsByTagName('li'),
     
-    var j=1;/* счётчик реальных файлов */
-    var i=1;/* счётчик элементов файлов в DOM */
+        j = 1;      /* счётчик реальных файлов */
+    
+    /* счётчик элементов файлов в DOM */
     /* Если путь отличный от корневного
      * второй элемент li - это ссылка на верхний
      * каталог '..'
      */
-    i=2; /* пропускам Path и Header*/
-    
-    for(; i <lLI.length;i++)
-    {
-        var lChildren = lLI[i].children,        
+     
+    /* пропускам Path и Header*/
+    for(var i = 2, n = lLI.length; i < n; i++){
+        var lChildren = lLI[i].children,
             /* file attributes */
             lAttr = {};
         
@@ -809,7 +814,7 @@ CloudClient._getJSONfromFileTable   = function(){
          */
         lMode = CloudFunc.convertPermissionsToNumberic(lMode);
         
-        lFileTable[j++]={
+        lFileTable[ j++ ]={
             name: lName,
             size: lSize,
             mode: lMode
