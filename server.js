@@ -422,7 +422,7 @@
     CloudServer._stated = function(pError, pStat){
         if(pError){
             CloudServer.Statuses[DirPath]  = 404;
-            CloudServer.sendResponse('OK',pError.toString(), DirPath);
+            CloudServer.sendResponse('OK', pError.toString(), DirPath);
             
             return;
         }
