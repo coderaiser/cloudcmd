@@ -114,6 +114,11 @@ set enveronment varibles "oauth_client_id" and
 
 * Improved reading file with streams.
 
+* Improved download speed of js and css files by
+adding DOM.anyLoadInParallel function that is
+loading files in parallel and then execute
+callback function.
+
 
 2012.10.01, Version 0.1.7
 
