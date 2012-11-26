@@ -119,6 +119,9 @@ adding DOM.anyLoadInParallel function that is
 loading files in parallel and then execute
 callback function.
 
+* Added ability to load a couple scripts after one main,
+in any position in anyLoadOnLoad function.
+
 
 2012.10.01, Version 0.1.7
 
