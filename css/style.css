@@ -181,10 +181,10 @@ body{
   font-weight: bold;
 }
 #path{
-  margin-left:1.5%;                
+  margin-left:1.5%;
 }
-#left{
-  float:left;
+.left, #left{
+    float:left;
 }
 /* фон файла, на котором курсор*/
 .current-file{
@@ -192,9 +192,11 @@ body{
 }
 .selected-file{
     color:white;
+    background-color: rgb(49, 123, 249);
     background-color: rgba(49, 123, 249, .40);
 }
-#right{
+
+.right, #right{
     float:right;
 }
 .panel{
