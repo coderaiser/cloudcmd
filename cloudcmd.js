@@ -40,10 +40,12 @@
          * минифицированый
          */
         if(srv.Minify._allowed.css){
+            var lPath = srv.Minify.MinFolder.replace(DIR, '');
+            
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             
             lData = Util.removeStr(lData, lReplace_s);
-            lData = lData.replace('/css/style.css', srv.Minify.MinFolder + 'all.min.css');
+            lData = lData.replace('/css/style.css', lPath + 'all.min.css');
         }
         
         lReplace_s = '<div id=fm class=no-js>';

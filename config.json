@@ -2,8 +2,8 @@
     "cache" : {"allowed" : false},
     "appcache"  : false,
     "minification" : {
-        "js"    : false,
-        "css"   : false,
+        "js"    : true,
+        "css"   : true,
         "html"  : true,
         "img"   : true
     },
