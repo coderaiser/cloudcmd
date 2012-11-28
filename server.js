@@ -56,17 +56,15 @@
         Server          :{},
         
         /* КОНСТАНТЫ */
-        INDEX           : 'index.html'
+        INDEX           : __dirname + '/' + 'index.html'
     },
-        
         DirPath             = '/',
         
         OK                  = 200,
-                
-        DIR         = process.cwd() + '/',
         
-        main        = require(DIR   + 'lib/server/main'),
+        main                = global.cloudcmd.main,
         
+        DIR                 = main.Dir,
         LIBDIR              = main.LIBDIR,
         SRVDIR              = main.SRVDIR,
     
@@ -402,7 +400,7 @@
              * загружаем сжатый html-файл в дальнейшем
              */
             CloudServer.INDEX = (CloudServer.Minify._allowed.html ?
-                '.' + CloudServer.Minify.MinFolder + 'index.min.html'
+                CloudServer.Minify.MinFolder + 'index.min.html'
                 : CloudServer.INDEX);
             
             /*
@@ -581,7 +579,9 @@
             
             /* если браузер поддерживает gzip-сжатие - сжимаем данные*/
             if(CloudServer.Gzip){
-                Zlib.gzip(lList,CloudServer.getGzipDataFunc(lHeader,CloudServer.INDEX));
+                var lGzipCB = CloudServer.getGzipDataFunc(lHeader, CloudServer.INDEX);
+                
+                Zlib.gzip(lList, lGzipCB);
             }
             /* если не поддерживаеться - отсылаем данные без сжатия*/
             else
