@@ -52,7 +52,7 @@ var CloudClient = {
     OLD_BROWSER            : false,
     
     HOST                    :  (function(){
-        var lLocation = document.location;        
+        var lLocation = document.location;
         return lLocation.protocol + '//' + lLocation.host;
     })()
 };

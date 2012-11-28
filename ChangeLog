@@ -124,6 +124,9 @@ in any position in anyLoadOnLoad function.
 
 * Added chainable to Cache object in DOM.
 
+* Changed default ip to null so IP would be geted from
+config.json only if it setted up.
+
 
 2012.10.01, Version 0.1.7
 
