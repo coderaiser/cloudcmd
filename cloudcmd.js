@@ -1,8 +1,6 @@
 (function(){
     "use strict";
     
-    global.cloudcmd = {};
-    
     var DIR         = __dirname     + '/',
         main        = require(DIR   + 'lib/server/main'),
         
