@@ -16,7 +16,11 @@
         Server      = main.require(DIR + 'server'),
         srv         = Server.CloudServer,
         Config      = main.config;
-    
+        
+        /* reinit main dir os if we on 
+         * Win32 should be backslashes */
+        DIR         = main.DIR;
+        
     readConfig();
     Server.start(Config, {
         index       : indexProcessing,
