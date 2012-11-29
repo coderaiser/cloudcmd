@@ -1,6 +1,6 @@
 (function(){
     "use strict";
-    
+
     var DIR         = __dirname     + '/',
         main        = require(DIR   + 'lib/server/main'),
         
@@ -46,7 +46,7 @@
          * минифицированый
          */
         if(srv.Minify._allowed.css){
-            var lPath = srv.Minify.MinFolder.replace(DIR, '');
+            var lPath = '/' + srv.Minify.MinFolder.replace(DIR, '');
             
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             
