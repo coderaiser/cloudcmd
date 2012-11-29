@@ -39,7 +39,9 @@
         var lReplace_s,
             lData = pData.data,
             lAdditional = pData.additional;
-        /* если выбрана опция минифизировать скрпиты
+        
+        /*
+         * если выбрана опция минимизировать скрипты
          * меняем в index.html обычные css на
          * минифицированый
          */
