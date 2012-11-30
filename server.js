@@ -349,29 +349,31 @@
              * длиннее
              */
             
-            if(pathname.indexOf(lNoJS_s) !== lFS_s.length && pathname !== '/'){
-                CloudServer.NoJS = false;
-                    
-            }else
-                pathname = Util.removeStr(pathname, lNoJS_s);
+            if(pathname.indexOf(lNoJS_s) !== lFS_s.length && pathname !== '/')
+                CloudServer.NoJS = false;            
+            else{
+                CloudServer.NoJS = true;
+                pathname = Util.removeStr(pathname, lNoJS_s);                
+            }
             
             /* убираем индекс файловой системы */
             if(pathname.indexOf(lFS_s) === 0){
                 pathname = Util.removeStr(pathname, lFS_s);
-                /* if query json setted up
-                 * load json data, no-js false.
-                 */
-                
-                if(lQuery === 'json')
-                    CloudServer.NoJS = false;
-                
+           
                 /* если посетитель только зашел на сайт
                  * no-js будет пустым, как и fs.
                  * Если в пути нету fs - посетитель только зашел на сайт
                  * загружаем его полностью.
                  */
-            }else
-                CloudServer.NoJS = true;
+            }
+            
+            /* if query json setted up
+             * load json data, no-js false.
+             */
+            
+            if(lQuery === 'json')
+                CloudServer.NoJS = false;
+                
             
             /* если в итоге путь пустой
              * делаем его корневым

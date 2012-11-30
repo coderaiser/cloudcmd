@@ -135,6 +135,9 @@ config.json only if it setted up.
 
 * Added url change on folder changing.
 
+* Fixed bug with traveling in directories with
+Javascript dissabled.
+
 
 2012.10.01, Version 0.1.7
 
