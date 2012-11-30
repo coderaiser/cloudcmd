@@ -113,7 +113,7 @@ CloudClient.GoogleAnalytics         = function(){
    
    document.onmousemove = function(){
         setTimeout(function(){
-            DOM.jsload('lib/client/google_analytics.js');
+            DOM.jsload(cloudcmd.LIBDIRCLIENT + 'google_analytics.js');
         },5000);
         
         Util.exec(lFunc);
@@ -505,7 +505,6 @@ CloudClient._changeLinks            = function(pPanelID){
         * что js отключен
         */
         lNoJS_s = CloudFunc.NOJS,
-        lFS_s   = CloudFunc.FS,
         
         /* right mouse click function varible */
         lOnContextMenu_f = function(pEvent){
@@ -576,14 +575,9 @@ CloudClient._changeLinks            = function(pPanelID){
         /* убираем адрес хоста*/
         var link = a[i].href.replace(lUrl,'');
         
-        /* убираем значения, которые говорят,   *
-         * об отсутствии js                     */     
-        if(link.indexOf(lNoJS_s) === lFS_s.length){
-            link = link.replace(lNoJS_s,'');
-        }
         /* ставим загрузку гифа на клик*/
         if(i === lREFRESHICON){
-            a[i].onclick = CloudClient._loadDir(link,true);
+            a[i].onclick = CloudClient._loadDir(link, true);
             
             a[i].parentElement.onclick = a[i].onclick;
         }
@@ -631,17 +625,31 @@ CloudClient._changeLinks            = function(pPanelID){
  * @param path - каталог для чтения
  * @param pNeedRefresh - необходимость обновить данные о каталоге
  */
-CloudClient._ajaxLoad               = function(path, pNeedRefresh){                                   
+CloudClient._ajaxLoad               = function(pFullPath, pNeedRefresh){
         /* Отображаем красивые пути */
+        
         /* added supporting of russian  language */
-        var lPath = decodeURI(path),
-            lFS_s = CloudFunc.FS;
+        pFullPath = decodeURI(pFullPath);
+        
+        var lPath   = pFullPath,
+            lFSPath,
+            lFS_s   = CloudFunc.FS,
+            lNoJS_s = CloudFunc.NOJS;
+        /* 
+         * убираем значения, которые,
+         * говорят об отсутствии js
+         */          
+        if(lPath.indexOf(lNoJS_s) === lFS_s.length){
+            lPath = lFSPath =  Util.removeStr(lPath, lNoJS_s);
+        }
         
         if(lPath.indexOf(lFS_s) === 0){
             lPath = lPath.replace(lFS_s,'');
             
-            if(lPath === '') lPath = '/';
+            if(lPath === '/')
+                pFullPath = '/';
         }
+        
         console.log ('reading dir: "' + lPath + '";');
         
          /* если доступен localStorage и
@@ -674,42 +682,43 @@ CloudClient._ajaxLoad               = function(path, pNeedRefresh){
                 CloudClient._createFileTable(lPanel, lJSON);
                 CloudClient._changeLinks(lPanel);
                 
+                DOM.setHistory(lPath, 'Cloud Commander', pFullPath);
+                
                 return;
             }
         }
         
-        /* ######################## */
-        Util.tryCatchLog(function(){
-            DOM.ajax({
-                url: path,
-                error: DOM.Images.showError,
-                
-                success:function(data, textStatus, jqXHR){                                            
-                    /* если такой папки (или файла) нет
-                     * прячем загрузку и показываем ошибку
-                     */                 
-                    if(!jqXHR.responseText.indexOf('Error:'))
-                        return DOM.showError(jqXHR);
+        DOM.ajax({
+            url: lFSPath,
+            error: DOM.Images.showError,
+            
+            success:function(data, textStatus, jqXHR){                                            
+                /* если такой папки (или файла) нет
+                 * прячем загрузку и показываем ошибку
+                 */                 
+                if(!jqXHR.responseText.indexOf('Error:'))
+                    return DOM.showError(jqXHR);
 
-                    CloudClient._createFileTable(lPanel, data);
-                    CloudClient._changeLinks(lPanel);
-                                                                
-                    /* Сохраняем структуру каталогов в localStorage,
-                     * если он поддерживаеться браузером
-                     */
-                    /* переводим таблицу файлов в строку, для
-                    * сохранения в localStorage
-                    */
-                    var lJSON_s = JSON.stringify(data);
-                    console.log(lJSON_s.length);
-                    
-                    /* если размер данных не очень бошьой
-                    * сохраняем их в кэше
-                    */
-                    if(lJSON_s.length<50000)
-                        DOM.Cache.set(lPath,lJSON_s);                        
-                }
-            });
+                CloudClient._createFileTable(lPanel, data);
+                CloudClient._changeLinks(lPanel);
+                                                            
+                /* Сохраняем структуру каталогов в localStorage,
+                 * если он поддерживаеться браузером
+                 */
+                /* переводим таблицу файлов в строку, для
+                * сохранения в localStorage
+                */
+                var lJSON_s = JSON.stringify(data);
+                console.log(lJSON_s.length);
+                
+                /* если размер данных не очень бошьой
+                * сохраняем их в кэше
+                */
+                if(lJSON_s.length < 50000 )
+                    DOM.Cache.set(lPath, lJSON_s);
+                
+                DOM.setHistory(lPath, 'Cloud Commander', pFullPath);
+            }
         });
 };
 
