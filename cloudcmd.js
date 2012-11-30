@@ -13,7 +13,7 @@
         Util        = main.util,
         update      = main.update,
         
-        Server      = main.require(DIR + 'server'),
+        Server      = main.require(LIBDIR + 'server'),
         srv         = Server.CloudServer,
         Config      = main.config;
         
