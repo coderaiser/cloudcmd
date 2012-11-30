@@ -131,6 +131,8 @@ config.json only if it setted up.
 
 * Fixed bug with slashes on win32.
 
+* Fixed bug with editor close, when started from menu.
+
 
 2012.10.01, Version 0.1.7
 
