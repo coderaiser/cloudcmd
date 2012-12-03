@@ -150,6 +150,8 @@ Javascript dissabled.
 oauth_client_secre to github_id and github_secret.
 Added dropbox_id option.
 
+* Fixed bug in github show function.
+
 
 2012.10.01, Version 0.1.7
 
