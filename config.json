@@ -4,7 +4,7 @@
     "minification" : {
         "js"    : false,
         "css"   : true,
-        "html"  : true,
+        "html"  : false,
         "img"   : true
     },
     "oauth_client_id"       : "891c251b925e4e967fa9",

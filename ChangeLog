@@ -142,6 +142,7 @@ Javascript dissabled.
 
 * Improved work with browsers history api.
 
+* Fixed bug with setting path of index.html.
 
 2012.10.01, Version 0.1.7
 
