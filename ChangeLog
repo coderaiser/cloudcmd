@@ -146,6 +146,11 @@ Javascript dissabled.
 
 * Added dropbox module.
 
+* Renamed config options ouath_client_id and
+oauth_client_secre to github_id and github_secret.
+Added dropbox_id option.
+
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
