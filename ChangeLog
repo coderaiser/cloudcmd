@@ -144,6 +144,8 @@ Javascript dissabled.
 
 * Fixed bug with setting path of index.html.
 
+* Added dropbox module.
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
