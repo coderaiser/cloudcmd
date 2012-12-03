@@ -81,8 +81,9 @@ All main configuration could be done thrue config.json.
         "html"  : true,
         "img"   : false
     },
-    "oauth_client_id"       : "891c251b925e4e967fa9",                       /* github app id */
-    "oauth_client_secret"   : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545", /* github app secret */
+    "github_id"       : "891c251b925e4e967fa9",                       /* github app id */
+    "github_secret"   : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545", /* github app secret */
+    "dropbox_id"      : "o7d6llji052vijk",
     "show_keys_panel"       : true, /* show classic panel with buttons of keys  */
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
@@ -97,7 +98,7 @@ Authorization
 Thru openID Cloud Commander could authorize clients on GitHub.
 All things that should be done is must be added **id** and **secret** of application
 from github settings page and added to **config.json** or env varibles with names:
-*oauth_client_id* and *oauth_client_secret* that is more secure way.
+*github_id* and *github_secret* that is more secure way.
 
 
 Starting
