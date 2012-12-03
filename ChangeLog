@@ -140,6 +140,8 @@ Javascript dissabled.
 
 * client.js and server.js moved to lib directory.
 
+* Improved work with browsers history api.
+
 
 2012.10.01, Version 0.1.7
 
