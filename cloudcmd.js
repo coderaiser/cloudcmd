@@ -59,7 +59,7 @@
         
         /* меняем title */
         lData = lData.replace('<title>Cloud Commander</title>',
-            '<title>' + CloudFunc.setTitle() + '</title>');
+            '<title>' + CloudFunc.getTitle() + '</title>');
         
         if(!srv.Config.appcache)
             lData = Util.removeStr(lData, ' manifest="/cloudcmd.appcache"');
