@@ -152,6 +152,8 @@ Added dropbox_id option.
 
 * Fixed bug in github show function.
 
+* Added ability to call dropbox chooser on <ctr> + <d>.
+
 
 2012.10.01, Version 0.1.7
 
