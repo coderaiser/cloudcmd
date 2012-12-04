@@ -189,4 +189,4 @@ so to get it you should type a couple more commands:
     
 Special Thanks
 ---------------
-Elena Zalitok  for logo.
+[Elena Zalitok](http://vk.com/politilena "Elena Zalitok")  for logo.
