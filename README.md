@@ -187,6 +187,6 @@ so to get it you should type a couple more commands:
     git clone git://github.com/coderaiser/minify
     git checkout dev
     
-End credits
+Special Thanks
 ---------------
-Logo made by Elena Zalitok.
+Elena Zalitok  for logo.
