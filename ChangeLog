@@ -154,6 +154,8 @@ Added dropbox_id option.
 
 * Added ability to call dropbox chooser on <ctr> + <d>.
 
+* Added ability to read dropbox key from config.
+
 
 2012.10.01, Version 0.1.7
 
