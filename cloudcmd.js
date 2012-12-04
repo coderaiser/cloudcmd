@@ -33,7 +33,6 @@
     
     /**
      * additional processing of index file
-     * 
      */
     function indexProcessing(pData){
         var lReplace_s,
