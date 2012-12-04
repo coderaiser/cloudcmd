@@ -186,3 +186,7 @@ so to get it you should type a couple more commands:
     rm -rf minify
     git clone git://github.com/coderaiser/minify
     git checkout dev
+    
+End credits
+---------------
+Logo made by Elena Zalitok.
