@@ -156,6 +156,8 @@ Added dropbox_id option.
 
 * Added ability to read dropbox key from config.
 
+* Fixed bug with menu load, when dir other then root.
+
 
 2012.10.01, Version 0.1.7
 
