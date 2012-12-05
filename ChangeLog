@@ -164,6 +164,9 @@ Added dropbox_id option.
 
 * Added getCurrentPath function to Util module.
 
+* GitHub and DropBox secret's moved out from
+config.json to env.
+
 
 2012.10.01, Version 0.1.7
 
