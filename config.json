@@ -1,5 +1,5 @@
 {    
-    "api_url"               :"/api/v1",
+    "api_url"               : "/api/v1",
     "appcache"              : false,
     "cache" : {"allowed" : false},
     "minification" : {
@@ -8,7 +8,9 @@
         "html"  : false,
         "img"   : false
     },
-    "github_id"             : "ec1f2e74b35a361e10bc",
+    "github_key"            : "ec1f2e74b35a361e10bc",
+    "dropbox_key"           : "0nd3ssnp5fp7tqs",
+    "dropbox_chooser_key"   : "o7d6llji052vijk",
     "logs"                  : false,
     "show_keys_panel"       : true,
     "server"                : true,
