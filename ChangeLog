@@ -158,6 +158,8 @@ Added dropbox_id option.
 
 * Fixed bug with menu load, when dir other then root.
 
+* Added confirmation before (not real) deleting file.
+
 
 2012.10.01, Version 0.1.7
 
