@@ -75,17 +75,18 @@ Configuration
 All main configuration could be done thrue config.json.
 ```js
 {
-    "cache" : {"allowed" : true},   /* cashing of js and css files in memory    */
-    "appcache"  : false,            /* html5 feature appcache                   */
+    "api_url"   :"/api/v1",
+    "appcache"  : false,            /* html5 feature appcache                   */    
+    "cache" : {"allowed" : true},   /* cashing of js and css files in memory    */    
     "minification" : {              /* minification of js,css,html and img      */
         "js"    : false,            /* minify module neaded                     */
         "css"   : false,            /* npm i minify                             */
         "html"  : true,
         "img"   : false
     },
-    "github_id"       : "891c251b925e4e967fa9",                       /* github app id */
-    "github_secret"   : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545", /* github app secret */
-    "dropbox_id"      : "o7d6llji052vijk",
+    "github_key"            : "ec1f2e74b35a361e10bc",
+    "dropbox_key"           : "0nd3ssnp5fp7tqs",
+    "dropbox_chooser_key"   : "o7d6llji052vijk"
     "show_keys_panel"       : true, /* show classic panel with buttons of keys  */
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
