@@ -6,4 +6,4 @@
 :: 866 charset to Unicode 65001 sometime
 :: when it's neaded.
 :: -------------------------------------
-node cloudcmd || chcp 866
+node ../cloudcmd || chcp 866
