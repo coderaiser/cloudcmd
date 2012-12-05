@@ -160,6 +160,8 @@ Added dropbox_id option.
 
 * Added confirmation before (not real) deleting file.
 
+* Added ability to upload file to gists on github thru menu.
+
 
 2012.10.01, Version 0.1.7
 
