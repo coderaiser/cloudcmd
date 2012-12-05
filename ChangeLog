@@ -162,6 +162,8 @@ Added dropbox_id option.
 
 * Added ability to upload file to gists on github thru menu.
 
+* Added getCurrentPath function to Util module.
+
 
 2012.10.01, Version 0.1.7
 
