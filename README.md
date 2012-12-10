@@ -102,8 +102,8 @@ Thru openID Cloud Commander could authorize clients on GitHub.
 All things that should be done is must be added **id** and **secret** of application
 from github settings page and added to **config.json** (id just) and env varible (secret)
 with names: *github_id*, *github_secret*, *dropbox_key*, *dropbox_secret* etc.
-For more information see *config.json* and *shell/seret.bat* (**on win32**)
-or **shell/secret.sh** (**on *nix**).
+For more information see **config.json** and **shell/seret.bat** *(on win32)*
+or **shell/secret.sh** *(on nix)*.
 
 
 Starting
