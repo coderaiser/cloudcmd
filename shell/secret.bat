@@ -8,4 +8,5 @@
 # for using just add %-symbol on start and end of name
 # like %github_secret%
 
-github_secret=e21b3724d84f0f7570d2d04d8e055f3cc3be3071
+set github_key=435c670f44320e287ad6
+set github_secret=a8b49e8c8c1a6253b149d224149a076270d8d614
