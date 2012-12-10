@@ -1,3 +1,4 @@
+cd ..
 echo 'appfog'
 af update
 echo 'http://cloudcmd.aws.af.cm/'
@@ -8,3 +9,4 @@ echo 'nodester'
 git push nodester master
 echo 'heroku'
 git push heroku master
+cd shell
