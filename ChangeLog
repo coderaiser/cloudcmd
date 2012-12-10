@@ -176,6 +176,10 @@ Editor window could not be cloused.
 
 * Fixed IP on windows.
 
+* Added ability to delete files (not for real for now)
+thru keys panel (F8).
+
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
