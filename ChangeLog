@@ -167,6 +167,7 @@ Added dropbox_id option.
 * GitHub and DropBox secret's moved out from
 config.json to env.
 
+* Fixed bug with auth in github.
 
 2012.10.01, Version 0.1.7
 

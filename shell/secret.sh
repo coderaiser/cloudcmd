@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # part of Cloud Commander
 # *nix version
@@ -8,4 +9,4 @@
 # for using just add $-symbol on start of name
 # like $github_secret
 
-export github_secret=e21b3724d84f0f7570d2d04d8e055f3cc3be3071
+export github_secret=afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545
