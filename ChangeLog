@@ -169,6 +169,10 @@ config.json to env.
 
 * Fixed bug with auth in github.
 
+* Fixed bug with opening empty files in CodeMiror.
+Editor window could not be cloused.
+
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
