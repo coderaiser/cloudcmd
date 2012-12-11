@@ -80,7 +80,7 @@
                 {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'}];
         
         if(srv.Minify._allowed.css)
-            lFiles.push('./min/all.min.css');
+            lFiles.push('node_modules/minify/min/all.min.css');
         
         lAppCache.addFiles(lFiles);
         lAppCache.createManifest();
