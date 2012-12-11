@@ -181,6 +181,9 @@ thru keys panel (F8).
 
 * Changed "Upload" menu item to "Upload to".
 
+* Fixed bug with minified styles.
+
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu

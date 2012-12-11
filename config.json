@@ -4,9 +4,9 @@
     "cache" : {"allowed" : false},
     "minification" : {
         "js"    : false,
-        "css"   : false,
+        "css"   : true,
         "html"  : false,
-        "img"   : true
+        "img"   : false
     },
     "github_key"            : "891c251b925e4e967fa9",
     "github_secret"         : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545",
