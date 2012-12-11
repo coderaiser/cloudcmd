@@ -4,8 +4,8 @@
     "cache" : {"allowed" : false},
     "minification" : {
         "js"    : false,
-        "css"   : true,
-        "html"  : false,
+        "css"   : false,
+        "html"  : true,
         "img"   : false
     },
     "github_key"            : "891c251b925e4e967fa9",
