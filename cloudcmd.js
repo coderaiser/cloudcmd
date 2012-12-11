@@ -49,16 +49,16 @@
             
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             
-            lData = Util.removeStr(lData, lReplace_s);
-            lData = lData.replace('/css/style.css', lPath + 'all.min.css');
+            lData = Util.removeStr(lData, lReplace_s)
+                    .replace('/css/style.css', lPath + 'all.min.css');
         }
         
         lReplace_s = '<div id=fm class=no-js>';
-        lData = lData.replace(lReplace_s, lReplace_s + lAdditional);
         
         /* меняем title */
-        lData = lData.replace('<title>Cloud Commander</title>',
-            '<title>' + CloudFunc.getTitle() + '</title>');
+        lData = lData.replace(lReplace_s, lReplace_s + lAdditional)
+                .replace('<title>Cloud Commander</title>', 
+                    '<title>' + CloudFunc.getTitle() + '</title>');
         
         if(!srv.Config.appcache)
             lData = Util.removeStr(lData, ' manifest="/cloudcmd.appcache"');
