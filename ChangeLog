@@ -183,6 +183,9 @@ thru keys panel (F8).
 
 * Fixed bug with minified styles.
 
+* If git not installed do not show error.
+Just propose install git and clone from github repo.
+
 
 2012.10.01, Version 0.1.7
 
