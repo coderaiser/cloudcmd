@@ -5,10 +5,10 @@
    - 0.8
    - 0.9
  notifications:
-   webhooks: 
-     #http://requestb.in/12h5bl71
+   #webhooks: 
+      #http://requestb.in/12h5bl71
   email:
-    recipients:
-        - cloudcmd.coderaiser@gmail.com
+    #recipients:
+    #    - cloudcmd.coderaiser@gmail.com
     on_success: change
     on_failure: change
