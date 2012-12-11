@@ -7,5 +7,5 @@ notifications:
     #webhooks:
         #http://requestb.in/12h5bl71
     email:
-        on_success: change
+        on_success: never
         on_failure: change
