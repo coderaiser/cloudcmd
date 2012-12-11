@@ -188,6 +188,8 @@ Just propose install git and clone from github repo.
 
 * Fixed bug with client.js minifying.
 
+* Fixed bug with appcache.
+
 
 2012.10.01, Version 0.1.7
 
