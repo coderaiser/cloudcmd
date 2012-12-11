@@ -8,5 +8,7 @@
    webhooks: 
      #http://requestb.in/12h5bl71
   email:
+    recipients:
+        - cloudcmd.coderaiser@gmail.com
     on_success: change
     on_failure: change
