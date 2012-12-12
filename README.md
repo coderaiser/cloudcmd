@@ -190,7 +190,7 @@ so to get it you should type a couple more commands:
     rm -rf minify
     git clone git://github.com/coderaiser/minify
     git checkout dev
-    
+
 Special Thanks
 ---------------
 [Elena Zalitok](http://vk.com/politilena "Elena Zalitok")  for logo.
