@@ -1,12 +1,11 @@
- language: node_js
- node_js:
-  #- 0.4 #jshint fails to install (no gzip, jshint test not working out)
-   - 0.6
-   - 0.8
-   - 0.9
- notifications:
-   webhooks: 
-     #http://requestb.in/12h5bl71
-     urls:
-     #  http://webhooks.jit.su/deploy ##
-      - http://webhooks.nodejitsu.com/1/deploy
+language: node_js
+node_js:
+    - 0.6
+    - 0.8
+    - 0.9
+notifications:
+    #webhooks:
+        #http://requestb.in/12h5bl71
+    email:
+        on_success: never
+        on_failure: change
