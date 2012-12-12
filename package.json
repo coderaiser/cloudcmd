@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Two-panels file manager, totally writed on js.",
   "homepage": "https://github.com/coderaiser/cloudcmd",
@@ -15,7 +15,7 @@
   "node": "0.6.17",
   "subdomain": "cloudcmd",
   "dependencies": {
-    "minify": "0.1.7",
+    "minify": "0.1.8",
     "socket.io": "0.9.10"
   },
   "devDependencies": {},
