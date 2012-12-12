@@ -36,7 +36,8 @@
 }
 
 body{
-  font:16px "Droid Sans Mono";
+    font:16px "Droid Sans Mono";
+    background-color:white;
 }
 
 .menu{
@@ -79,9 +80,9 @@ body{
 .error::before{
     position: relative;
     bottom : 4px;
-    content:'\f026';
+    color:rgb(222, 41, 41);
     cursor:default;
-    color:rgb(222, 41, 41);    
+    content:'\f026';
 }
 .loading{
     position:relative;
@@ -89,15 +90,36 @@ body{
     background:url(/img/spinner.gif);
 }
 .error:hover{
-  color:rgba(222, 41, 41, 0.81);
+    color:rgb(222, 41, 41);
+    color:rgba(222, 41, 41, 0.81);
 }
 .refresh-icon{
     background:url(/img/panel_refresh.png) no-repeat;
 }
 .refresh-icon:active{
   /*background-position-y: -15px;*/
-background:url(/img/panel_refresh.png) 0 -15px no-repeat;
+    background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
+
+.cmd-button{
+    width: 10%;
+    margin: 20px 2px 0 2px;
+    overflow: hidden;
+    color: rgb(49,123,249);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: white;
+    border: 1.5px solid rgba(49,123,249,.40);
+}
+.cmd-button:hover{
+    border: 1.5px solid rgb(0,0,0);
+}
+
+.cmd-button:active{
+    color: white;
+    background-color: rgb(49,123,249);    
+}
+
 .clear-cache{
     margin-right: 6px;
     margin-left: 7px;
@@ -153,16 +175,16 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 #fm{
     height: 90%;
-    margin: 26px;
+    margin: 26px 26px 0 26px;
 }
 .fm_header{
   font-weight: bold;
 }
 #path{
-  margin-left:1.5%;                
+  margin-left:1.5%;
 }
-#left{
-  float:left;
+.left, #left{
+    float:left;
 }
 /* фон файла, на котором курсор*/
 .current-file{
@@ -170,9 +192,11 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 .selected-file{
     color:white;
+    background-color: rgb(49, 123, 249);
     background-color: rgba(49, 123, 249, .40);
 }
-#right{
+
+.right, #right{
     float:right;
 }
 .panel{
@@ -185,8 +209,15 @@ background:url(/img/panel_refresh.png) 0 -15px no-repeat;
 }
 /* информация о файлах и папках*/
 .name{
-  float: left;
-  width: 37%;
+    float: left;
+    width: 37%;
+    /* если длина имени файла больше 16 символов
+     * отрезаем лишнее, оставляя лишь 16,
+     * и добавляем две точки и тайтл
+     */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .size{
     float:left;

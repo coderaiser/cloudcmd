@@ -1,3 +1,196 @@
+2012.10.*, Version 0.1.8
+
+* Added ability to shutdown Cloud Commander
+thru terminal command: "cloudcmd exit"
+
+* Fixed bug with showing terminal and viewer
+at the same time.
+
+* Fixed bug with appcache config. Windows reads
+file not just like Linux.
+
+* Added ability to update thru git.
+
+* Added ability to change charset on terminal only if
+it's build in command on win32.
+
+* Fixed bug with testing mode. If was same arguments,
+Cloud Commander works in testing mode and server do not
+started.
+
+* Added more demo mirrors to readme (appfog, cloudfoundry).
+
+* Removed resize event from jquery-terminal.
+
+* Fixed bug with error code of program execution in terminal.
+
+* Fixed bug with menu itmes edit and view.
+
+* Added function jsLoadOnLoad, thet loads js files
+one-by-one, and then calls callback if needed.
+
+* Added function anyloadOnLoad thet loads any files or
+elements one-by-one.
+
+* Added function loadModule thet make it easier to connect
+new module.
+
+* Fixed bug with context menu hiding (on Esc).
+Keys was unbinded.
+
+* Added ability to disable web sockets.
+
+* Moved cloudRequire to srvfunc.js file.
+
+* Fixed bug with directory pathes detection
+(used document.location.href, now using 
+document.location.origin)
+
+* Fixed bug with keybinding in FireFox
+(removed KeyBinding call on window load).
+
+* Fixed bug with getting current url in Firefox.
+
+* Util cleaned up (addClass and removeClass
+moved to ie.js).
+
+* Index processing function moved out from
+server.js to cloudcmd.js.
+
+* Added ability of authorithation in GitHub.
+
+* Rewrited sizing of names if they are to 
+long thru css, from JavaScript.
+
+* Fixed bug with application cahe forming on windows
+and linux.
+
+* Removed unneeded windows check.
+
+* Fixed bug with downloading directory
+listing in json from menu.
+
+* Changed default port to 80.
+
+* Util object moved from client.js to modules
+dom.js and util.js.
+
+* Fixed bug with navigation thru path panel.
+
+* Added functions DOM.addKeyListener and Util.loadOnLoad
+
+* Added buttons panel.
+
+* Fixed bug with config file, when no need to minification.
+
+* Added ability to hide keys panel thru config option.
+
+* CodeMirror upgraded to version 2.35.0.
+
+* Fixed bug with keys panel and fm bottom margin,
+when CodeMirror is open on the right panel.
+
+* Fixed bug with positioning of CodeMirror on the 
+right panel.
+
+* Function generateHeaders moved to main module.
+
+* Setted up auth on GitHub thru rest.
+
+* Fixed bug with context menu. Now it disabled 
+before load menu module to.
+
+* Throw out jquery from github module, moved Cache
+object from client to DOM module, 
+refactored Cache object and added polyfill.
+
+* Added ability to connect github development id,
+to Cloud Commander instance working in any host,
+for this all the needed to be done is:
+set enveronment varibles "oauth_client_id" and 
+"oauth_client_secret" values from github profile.
+
+* Changed funcyBox version to 2.1.3.
+
+* Improved reading file with streams.
+
+* Improved download speed of js and css files by
+adding DOM.anyLoadInParallel function that is
+loading files in parallel and then execute
+callback function.
+
+* Added ability to load a couple scripts after one main,
+in any position in anyLoadOnLoad function.
+
+* Added chainable to Cache object in DOM.
+
+* Changed default ip to null so IP would be geted from
+config.json only if it setted up.
+
+* Fixed bug with starting node from other then projects dir.
+
+* Fixed bug with slashes on win32.
+
+* Fixed bug with editor close, when started from menu.
+
+* Added url change on folder changing.
+
+* Fixed bug with traveling in directories with
+Javascript dissabled.
+
+* client.js and server.js moved to lib directory.
+
+* Improved work with browsers history api.
+
+* Fixed bug with setting path of index.html.
+
+* Added dropbox module.
+
+* Renamed config options ouath_client_id and
+oauth_client_secre to github_id and github_secret.
+Added dropbox_id option.
+
+* Fixed bug in github show function.
+
+* Added ability to call dropbox chooser on <ctr> + <d>.
+
+* Added ability to read dropbox key from config.
+
+* Fixed bug with menu load, when dir other then root.
+
+* Added confirmation before (not real) deleting file.
+
+* Added ability to upload file to gists on github thru menu.
+
+* Added getCurrentPath function to Util module.
+
+* GitHub and DropBox secret's moved out from
+config.json to env.
+
+* Fixed bug with auth in github.
+
+* Fixed bug with opening empty files in CodeMiror.
+Editor window could not be cloused.
+
+* Added windows support on terminal command: "cloudcmd exit".
+
+* Fixed IP on windows.
+
+* Added ability to delete files (not for real for now)
+thru keys panel (F8).
+
+* Changed "Upload" menu item to "Upload to".
+
+* Fixed bug with minified styles.
+
+* If git not installed do not show error.
+Just propose install git and clone from github repo.
+
+* Fixed bug with client.js minifying.
+
+* Fixed bug with appcache.
+
+
 2012.10.01, Version 0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
@@ -5,6 +198,7 @@ problem with menu showing.
 
 * Fixed bug with empty directorys. If directory
 was empty, we could not go in.
+
 * Removed packed versions of files, uglifing
 would be doing on-a-fly
 
@@ -17,7 +211,7 @@ loaded any time by any extension.
 * Fixed bug with getByClass IE version.
 
 * Fixed bug with keyboard not responding when go deeper
-in file tree thrue mouse double click.
+in file tree thru mouse double click.
 
 * Removed property keyBinded. From not it's private
 member of KeyBinding class.
@@ -27,11 +221,11 @@ Function scrollIntoViewIfNeeded was polyfilled.
 
 * Added classic borders to panels.
 
-* Added ability to download files thrue drag'n'drop.
+* Added ability to download files thru drag'n'drop.
 
 * Fixed bug with setting current file when mouse down.
 
-* Improved borders over CodeMirror and panels thrue css.
+* Improved borders over CodeMirror and panels thru css.
 
 * Added ability to watch is file changed wile server is
 running
@@ -58,7 +252,7 @@ disabled in browsers.
 
 * Added plagin terminal ( ` button under TAB).
 
-* Added ability to execute commands on server thrue terminal.
+* Added ability to execute commands on server thru terminal.
 
 * Added appcache paramter to config.json
 
