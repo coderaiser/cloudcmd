@@ -4,5 +4,6 @@
     "viewer",
     "storage/_github",
     "storage/_dropbox",
+    "storage/_gdrive",
     "terminal"
 ]

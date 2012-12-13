@@ -3,6 +3,7 @@
 * Changed the way of getting github application id
 (now it's just from config, rest api removed).
 
+* Added ability to upload files to GDrive.
 
 2012.12.12, Version 0.1.8
 
