@@ -5,6 +5,9 @@
 
 * Added ability to upload files to GDrive.
 
+* Added functions DOM.getCurrentFileContent(pCallBack [, pCurrentFile])
+and Util.setTimeout(pFunction [, pCallBack, pTime])
+
 2012.12.12, Version 0.1.8
 
 * Added ability to shutdown Cloud Commander
