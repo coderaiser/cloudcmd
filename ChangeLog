@@ -12,6 +12,8 @@ and Util.setTimeout(pFunction [, pCallBack, pTime])
 
 * Added function getCurrentDir to DOM module.
 
+* Fixed bug with terminal load
+
 
 2012.12.12, Version 0.1.8
 
