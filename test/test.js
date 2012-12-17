@@ -39,7 +39,7 @@
                 '</a>/X11/'                                                 +
             '</span>'                                                       +
         '</li>'                                                             +
-            '<li class=fm_header>'                                          +
+            '<li class=fm-header>'                                          +
             '<span class=mini-icon></span>'                                 +
             '<span class=name>name</span>'                                  +
             '<span class=size>size</span>'                                  +

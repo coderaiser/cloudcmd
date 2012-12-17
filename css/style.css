@@ -59,9 +59,6 @@ body{
     text-shadow:black 0 2px 1px;
 }
 .path-icon:hover{
-  /*
-      color:#45D827;
-  */
   cursor:pointer;
 }
 .path-icon:active{
@@ -111,13 +108,14 @@ body{
     background-color: white;
     border: 1.5px solid rgba(49,123,249,.40);
 }
+
 .cmd-button:hover{
     border: 1.5px solid rgb(0,0,0);
 }
 
 .cmd-button:active{
     color: white;
-    background-color: rgb(49,123,249);    
+    background-color: rgb(49,123,249);
 }
 
 .clear-cache{
@@ -126,19 +124,13 @@ body{
     background:url(/img/console_clear.png)  -4px -4px no-repeat;
 }
 .clear-cache:active{
-  /*
-      background-position-y: -25px;
-  */
-  top:5px;
-}            
-  
-.settings:before{
-  content:'k';
-}            
+    top:5px;
+}
+
 .links{
     color:red;
 }
-  
+
 .mini-icon {
     position: relative;
     top: 2px;
@@ -177,7 +169,7 @@ body{
     height: 90%;
     margin: 26px 26px 0 26px;
 }
-.fm_header{
+.fm-header{
   font-weight: bold;
 }
 #path{
@@ -233,8 +225,6 @@ body{
      */
     text-align: right;
 }
-.owner{
-}
 .mode{
   float: right;
   width: 25%;
@@ -252,14 +242,12 @@ button{
   width:10%;
 }
 a{
-  text-decoration:none;                                
+  text-decoration:none;
 }
 a:hover, a:active {
     color: #06e;
     cursor:pointer;
-    outline: 0;    
 }
-a:focus { outline: thin dotted; }      
 
 /* Если размер окна очень маленький
  * располагаем имя и атрибуты файла
@@ -276,6 +264,7 @@ a:focus { outline: thin dotted; }
     }
     /* текущий файл под курсором */
     .current-file{
+        background-color: rgb(49, 123, 249);
         background-color: rgba(49, 123, 249, .40);
         color:white;
     }
@@ -297,12 +286,14 @@ a:focus { outline: thin dotted; }
         position: relative;
         top: -17px;
         
+        color: rgb(246, 224, 124);
         color: rgba(246, 224, 124, 0.56);
     }
     .directory::before{
         content: '\f216';
     }
      .text-file::before{
+        color: rgb(26, 224, 124);
         color: rgba(26, 224, 124, 0.56);
         content: '\f211';
     }
@@ -353,7 +344,7 @@ a:focus { outline: thin dotted; }
     }
 }
 @media only screen and (min-width: 601px) and (max-width: 785px){
-    .panel{        
+    .panel{
         width:94% !important;
     }
     #right{
@@ -362,7 +353,7 @@ a:focus { outline: thin dotted; }
 }
 
 @media only screen and (min-width:786px) and (max-width: 1155px){
-    .panel{        
+    .panel{
         width:94% !important;
     }
     /* если правая панель не помещаеться - прячем её */

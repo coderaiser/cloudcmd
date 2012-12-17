@@ -16,6 +16,9 @@ and Util.setTimeout(pFunction [, pCallBack, pTime])
 
 * From now api url on client readed from config.json.
 
+* If choosen upload to -> Gist, and file in json have
+not '.json' extension, it's added to the and of filename.
+
 
 2012.12.12, Version 0.1.8
 
