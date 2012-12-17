@@ -19,6 +19,9 @@ and Util.setTimeout(pFunction [, pCallBack, pTime])
 * If choosen upload to -> Gist, and file in json have
 not '.json' extension, it's added to the and of filename.
 
+* Fixed bug in not fully functional browsers,
+jquery loaded after ie.js, should be before.
+
 
 2012.12.12, Version 0.1.8
 
