@@ -11,6 +11,8 @@
     "github_key"            : "891c251b925e4e967fa9",
     "github_secret"         : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545",
     "dropbox_key"           : "0nd3ssnp5fp7tqs",
+    "dropbox_secret"        : "r61lxpchmk8l06o",
+    "dropbox_encoded_key"   : "DkMz4FYHQTA=|GW6pf2dONkrGvckMwBsl1V1vysrCPktPiUWN7UpDjw==",
     "dropbox_chooser_key"   : "o7d6llji052vijk",
     "logs"                  : false,
     "show_keys_panel"       : true,

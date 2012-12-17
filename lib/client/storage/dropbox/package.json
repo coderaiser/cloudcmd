@@ -1,0 +1,46 @@
+{
+  "name": "dropbox",
+  "version": "0.7.2",
+  "description": "Client library for the Dropbox API",
+  "keywords": ["dropbox", "filesystem", "storage"],
+  "homepage": "http://github.com/dropbox/dropbox-js",
+  "author": "Victor Costan <victor@costan.us> (http://www.costan.us)",
+  "license": "MIT",
+  "contributors": [
+    "Aakanksha Sarda <aaki@mit.edu>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dropbox/dropbox-js.git"
+  },
+  "engines": {
+    "node": ">= 0.6"
+  },
+  "dependencies": {
+    "open": ">= 0.0.2",
+    "xmlhttprequest": ">= 1.5.0"
+  },
+  "devDependencies": {
+    "async": ">= 0.1.22",
+    "chai": ">= 1.4.0",
+    "codo": ">= 1.5.2",
+    "coffee-script": ">= 1.4.0",
+    "express": ">= 3.0.4",
+    "mocha": ">= 1.7.4",
+    "remove": ">= 0.1.5",
+    "sinon": ">= 1.5.2",
+    "sinon-chai": ">= 2.2.0",
+    "uglify-js": ">= 2.2.2"
+  },
+  "main": "lib/dropbox.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib",
+    "src": "src",
+    "test": "test"
+  },
+  "scripts": {
+    "prepublish": "cake build",
+    "test": "cake test"
+  }
+}
