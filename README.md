@@ -169,11 +169,14 @@ For extend main functionality Cloud Commander use next modules:
 - [FancyBox]                [FancyBoxURL]
 - [jQuery-contextMenu]      [jQuery-contextMenuURL]
 - [jquery.terminal]         [jquery.terminalURL]
+- [dropbox-js]              [dropbox-jsURL]
 
 [CodeMirrorURL]:            https://github.com/marijnh/CodeMirror "CodeMirror"
 [FancyBoxURL]:              https://github.com/fancyapps/fancyBox "FancyBox"
 [jQuery-contextMenuURL]:    https://github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
 [jquery.terminalURL]:       https://github.com/jcubic/jquery.terminal "jquery.terminal"
+[githubURL]:                https://github.com/michael/github
+[dropbox-jsURL]:            https://github.com/dropbox/dropbox-js
 
 Contributing
 ---------------
