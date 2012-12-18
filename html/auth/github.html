@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head></head>
+    <body>
+        <script>
+        (function(){
+            "use strict";
+            if(window.opener){
+                var cloudcmd = window.opener.CloudCommander;
+                
+                cloudcmd.getConfig(function(pConfig){
+                    var GitHub_ID       = pConfig.github_key;
+                    
+                    window.location = 
+                        'https://github.com/login/oauth/authorize?client_id=' + 
+                        GitHub_ID + '&&scope=repo,user,gist';
+                });
+            }
+        })();
+        </script>
+    </body>
+</html>
