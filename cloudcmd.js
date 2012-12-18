@@ -6,6 +6,7 @@
         
         LIBDIR      = main.LIBDIR,
         SRVDIR      = main.SRVDIR,
+        CLIENTDIR   = LIBDIR + 'client',
         
         path        = main.path,
         fs          = main.fs,
@@ -23,9 +24,10 @@
         
     readConfig();
     Server.start(Config, {
-        index       : indexProcessing,
         appcache    : appCacheProcessing,
-        rest        : rest
+        index       : indexProcessing,
+        rest        : rest,
+        route       : route
     });
     
     if(update)
@@ -133,6 +135,25 @@
             }
         }
     }
+    
+    /**
+     * routing of server queries
+     */
+    function route(pParams){
+        Util.log('* Routing');
+        var lRet,
+            lName = pParams.name;
+        
+        if( Util.strCmp(lName, '/auth') ){
+            Util.log('-> auth');
+            pParams.name = main.HTMLDIR + lName + '.html';
+            main.sendFile(pParams);
+            lRet = true;
+        }
+        
+        return lRet;
+    }
+    
     
     /* function sets stdout to file log.txt */
     function writeLogsToFile(){
