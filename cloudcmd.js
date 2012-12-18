@@ -149,6 +149,11 @@
             pParams.name = main.HTMLDIR + lName + '.html';
             main.sendFile(pParams);
             lRet = true;
+        }else if( Util.strCmp(lName, '/auth/github') ){
+            Util.log('-> github');            
+            pParams.name = main.HTMLDIR + lName + '.html';
+            main.sendFile(pParams);
+            lRet = true;
         }
         
         return lRet;
