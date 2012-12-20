@@ -140,19 +140,24 @@
      * routing of server queries
      */
     function route(pParams){
-        Util.log('* Routing');
         var lRet,
             lName = pParams.name;
         
         if( Util.strCmp(lName, '/auth') ){
-            Util.log('-> auth');
+            Util.log('* Routing' +
+                '-> auth');
+            
             pParams.name = main.HTMLDIR + lName + '.html';
             main.sendFile(pParams);
+            
             lRet = true;
         }else if( Util.strCmp(lName, '/auth/github') ){
-            Util.log('-> github');            
+            Util.log('* Routing' +
+                '-> github');
+                
             pParams.name = main.HTMLDIR + lName + '.html';
             main.sendFile(pParams);
+            
             lRet = true;
         }
         
