@@ -32,6 +32,9 @@ inside event function varible called event do not exist
 changed redirecting url to /auth and added rout function
 to cloudcmd.js
 
+* DropBox, GDrive and GitHub modules now look the same.
+
+
 2012.12.12, Version 0.1.8
 
 * Added ability to shutdown Cloud Commander
