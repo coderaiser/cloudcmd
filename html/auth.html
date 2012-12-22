@@ -7,8 +7,8 @@
                 "use strict";
                 
                 if(window.opener){
-                    var lGitHub = window.opener.CloudCommander.Github;
-                    lGitHub.init(lGitHub.getUserData, window.location.search);
+                    var lGitHub = window.opener.CloudCommander.GitHub;
+                    lGitHub.autorize(lGitHub.callback, window.location.search);
                     window.close();
                 }
                 
