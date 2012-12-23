@@ -37,6 +37,16 @@ to cloudcmd.js
 * Fixed bug with pressing Esc when menu showed.
 We could not to now, when key was pressed becaouse of
 stopPropogation function in jquery.contextMenu module.
+Commented stopPropogration.
+```
+keyStop: function(e, opt) {
+    if (!opt.isInput) {
+        e.preventDefault();
+    }
+        
+    //e.stopPropagation();
+}
+```
 
 
 2012.12.12, Version 0.1.8
