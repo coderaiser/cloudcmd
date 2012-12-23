@@ -47,6 +47,7 @@ keyStop: function(e, opt) {
     //e.stopPropagation();
 }
 ```
+* Updated socket.io to v0.9.13.
 
 
 2012.12.12, Version 0.1.8

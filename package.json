@@ -16,7 +16,7 @@
   "subdomain": "cloudcmd",
   "dependencies": {
     "minify": "0.1.8",
-    "socket.io": "0.9.10"
+    "socket.io": "0.9.13"
   },
   "devDependencies": {},
   "engines": {
