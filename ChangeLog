@@ -34,6 +34,10 @@ to cloudcmd.js
 
 * DropBox, GDrive and GitHub modules now look the same.
 
+* Fixed bug with pressing Esc when menu showed.
+We could not to now, when key was pressed becaouse of
+stopPropogation function in jquery.contextMenu module.
+
 
 2012.12.12, Version 0.1.8
 
