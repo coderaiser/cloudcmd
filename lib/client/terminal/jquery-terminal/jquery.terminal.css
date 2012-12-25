@@ -22,15 +22,17 @@
 }
 .terminal .terminal-output div div, .terminal .prompt {
     display: block;
-    line-height: 9px;
+    /* line-height: 9px; */
     height: 14px;
 }
 .terminal {
     font-family: FreeMono, monospace;
     color: #aaa;
     background-color: #000;
-    font-size: 12px;
-    line-height: 14px;
+    /* font-size: 12px; */
+    /* line-height: 14px; */
+       line-height: 16px;
+    /* removing breaking the lines */
 }
 .terminal .terminal-output div span {
     display: inline-block;
