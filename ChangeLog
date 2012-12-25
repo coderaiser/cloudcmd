@@ -49,6 +49,8 @@ keyStop: function(e, opt) {
 ```
 * Updated socket.io to v0.9.13.
 
+* Updated jquery-terminal to v0.4.22.
+
 
 2012.12.12, Version 0.1.8
 
