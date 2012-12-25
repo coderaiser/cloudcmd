@@ -51,6 +51,14 @@ keyStop: function(e, opt) {
 
 * Updated jquery-terminal to v0.4.22.
 
+* Refactore viewer module.
+
+* Removed loading spinner by commenting jquery.fancybox.css block
+#fancybox-loading div {
+    width: 44px;
+	height: 44px;
+	background: url('fancybox_loading.gif') center center no-repeat;
+}
 
 2012.12.12, Version 0.1.8
 
