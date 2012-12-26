@@ -60,6 +60,9 @@ keyStop: function(e, opt) {
 	background: url('fancybox_loading.gif') center center no-repeat;
 }
 
+* Updated CodeMirror to v2.37.01.
+
+
 2012.12.12, Version 0.1.8
 
 * Added ability to shutdown Cloud Commander
