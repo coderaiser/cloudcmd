@@ -99,7 +99,11 @@
             lResetCSS   = DIR + 'css/reset.css',
             lIndex      = DIR + 'html/index.html',
             
-            lMinify     = Server.CloudServer.Minify;
+            lMinify     = Server.CloudServer.Minify,
+            lCSSOptions = {
+                img     : pAllowed.img,
+                merge   : true
+            };
             
         if (pAllowed.js) {
             lOptimizeParams.push(LIBDIR + 'client.js');
@@ -112,9 +116,9 @@
             var lStyles = [];
             
             lStyles[0] = {};
-            lStyles[0][lStyleCSS]   = pAllowed.img;
+            lStyles[0][lStyleCSS]   = lCSSOptions;
             lStyles[1] = {};
-            lStyles[1][lResetCSS]   = pAllowed.img;
+            lStyles[1][lResetCSS]   = lCSSOptions;
             
             lOptimizeParams.push(lStyles[0]);
             lOptimizeParams.push(lStyles[1]);
