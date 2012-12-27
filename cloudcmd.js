@@ -123,7 +123,7 @@
         if (lOptimizeParams.length)
             lMinify.optimize(lOptimizeParams);
     }
-        
+    
     /**
      * rest interface
      * @pConnectionData {request, responce}
