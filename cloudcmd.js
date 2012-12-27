@@ -99,7 +99,7 @@
             lResetCSS   = DIR + 'css/reset.css',
             lIndex      = DIR + 'html/index.html',
             
-            lMinify     = Server.Minify;
+            lMinify     = Server.CloudServer.Minify;
             
         if (pAllowed.js) {
             lOptimizeParams.push(LIBDIR + 'client.js');

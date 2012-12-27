@@ -3,9 +3,9 @@
     "appcache"              : false,
     "cache" : {"allowed" : false},
     "minification" : {
-        "js"    : false,
-        "css"   : false,
-        "html"  : false,
+        "js"    : true,
+        "css"   : true,
+        "html"  : true,
         "img"   : false
     },
     "github_key"            : "891c251b925e4e967fa9",
