@@ -26,6 +26,7 @@
     Server.start(Config, {
         appcache    : appCacheProcessing,
         index       : indexProcessing,
+        minimize    : minimize,
         rest        : rest,
         route       : route
     });
@@ -38,7 +39,7 @@
      */
     function indexProcessing(pData){
         var lReplace_s,
-            lData = pData.data,
+            lData       = pData.data,
             lAdditional = pData.additional;
         
         /*
@@ -88,6 +89,41 @@
         lAppCache.createManifest();
     }
     
+    /**
+     * Функция минимизирует css/js/html
+     * если установлены параметры минимизации
+     */
+    function minimize(pAllowed){
+        var lOptimizeParams = [],
+            lStyleCSS   = DIR + 'css/style.css',
+            lResetCSS   = DIR + 'css/reset.css',
+            lIndex      = DIR + 'html/index.html',
+            
+            lMinify     = Server.Minify;
+            
+        if (pAllowed.js) {
+            lOptimizeParams.push(LIBDIR + 'client.js');
+        }
+        
+        if (pAllowed.html)
+            lOptimizeParams.push(lIndex);
+        
+        if (pAllowed.css) {
+            var lStyles = [];
+            
+            lStyles[0] = {};
+            lStyles[0][lStyleCSS]   = pAllowed.img;
+            lStyles[1] = {};
+            lStyles[1][lResetCSS]   = pAllowed.img;
+            
+            lOptimizeParams.push(lStyles[0]);
+            lOptimizeParams.push(lStyles[1]);
+        }
+        
+        if (lOptimizeParams.length)
+            lMinify.optimize(lOptimizeParams);
+    }
+        
     /**
      * rest interface
      * @pConnectionData {request, responce}
