@@ -207,9 +207,9 @@
         var stdo = fs.createWriteStream('./log.txt');
         
         process.stdout.write = (function(write) {
-                return function(string, encoding, fd) {
-                        stdo.write(string);
-                };
+            return function(string, encoding, fd) {
+                    stdo.write(string);
+            };
         })(process.stdout.write);
     }
 })();
