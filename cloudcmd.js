@@ -49,16 +49,13 @@
          */
         if(srv.Minify._allowed.css){
             var lPath = '/' + srv.Minify.MinFolder.replace(DIR, '');
-            
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
-            
             lData = Util.removeStr(lData, lReplace_s)
                     .replace('/css/style.css', lPath + 'all.min.css');
         }
         
-        lReplace_s = '<div id=fm class=no-js>';
-        
         /* меняем title */
+        lReplace_s = '<div id=fm class=no-js>';
         lData = lData.replace(lReplace_s, lReplace_s + lAdditional)
                 .replace('<title>Cloud Commander</title>', 
                     '<title>' + CloudFunc.getTitle() + '</title>');
@@ -75,6 +72,9 @@
         
     }
     
+    /**
+     * init and process of appcache if it allowed in config
+     */
     function appCacheProcessing(){
         var lAppCache = srv.AppCache,
         
