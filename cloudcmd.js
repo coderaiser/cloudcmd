@@ -113,11 +113,8 @@
             lOptimizeParams.push(lIndex);
         
         if (pAllowed.css) {
-            var lStyles = [];
-            
-            lStyles[0] = {};
+            var lStyles = [{}, {}];
             lStyles[0][lStyleCSS]   = lCSSOptions;
-            lStyles[1] = {};
             lStyles[1][lResetCSS]   = lCSSOptions;
             
             lOptimizeParams.push(lStyles[0]);
