@@ -1,5 +1,5 @@
 (function(){
-    "use strict";
+    'use strict';
     
     var DIR         = __dirname     + '/',
         main        = require(DIR   + 'lib/server/main'),
