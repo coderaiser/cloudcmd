@@ -66,6 +66,8 @@ keyStop: function(e, opt) {
 
 * Improved optimizing size of menu.js from 2539 to 2444.
 
+* Fixed bug with height of terminal.
+
 
 2012.12.12, Version 0.1.8
 
