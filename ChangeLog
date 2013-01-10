@@ -70,7 +70,7 @@ keyStop: function(e, opt) {
 
 * Added ability to read gdrive key from config.
 
-* Fixed bug with setting curent cursor when 
+* Fixed bug with setting curent cursor when
 clicked on menu item.
 
 
