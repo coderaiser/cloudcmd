@@ -14,7 +14,7 @@
     "dropbox_secret"        : "r61lxpchmk8l06o",
     "dropbox_encoded_key"   : "DkMz4FYHQTA=|GW6pf2dONkrGvckMwBsl1V1vysrCPktPiUWN7UpDjw==",
     "dropbox_chooser_key"   : "o7d6llji052vijk",
-    "gdrive_key"            : "255175681917",
+    "gdrive_id"            : "255175681917",
     "logs"                  : false,
     "show_keys_panel"       : true,
     "server"                : true,
