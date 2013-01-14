@@ -12,7 +12,7 @@ This section describes how to get the library hooked up into your application.
 To get started right away, place this snippet in your page's `<head>`.
 
 ```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.7.1/dropbox.min.js">
+<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.8.1/dropbox.min.js">
 </script>
 ```
 
@@ -152,24 +152,20 @@ client.authenticate(function(error, client) {
 
 ## Error Handlng
 
-When Dropbox API calls fail, dropbox.js methods pass a `Dropbox.Error` instance
-as the first parameter in their callbacks. This parameter is named `error` in
-all the code snippets on this page.
+When Dropbox API calls fail, dropbox.js methods pass a `Dropbox.ApiError`
+instance as the first parameter in their callbacks. This parameter is named
+`error` in all the code snippets on this page.
 
 If `error` is a truthy value, you should either recover from the error, or
 notify the user that an error occurred. The `status` field in the
-`Dropbox.Error` instance contains the HTTP error code, which should be one of
-the
+`Dropbox.ApiError` instance contains the HTTP error code, which should be one
+of the
 [error codes in the REST API](https://www.dropbox.com/developers/reference/api#error-handling).
 
 The snippet below is a template for an extensive error handler.
 
 ```javascript
 var showError = function(error) {
-  if (window.console) {  // Skip the "if" in node.js code.
-    console.error(error);
-  }
-
   switch (error.status) {
   case 401:
     // If you're using dropbox.js, the only cause behind this error is that
@@ -200,6 +196,18 @@ var showError = function(error) {
     // Tell the user an error occurred, ask them to refresh the page.
   }
 };
+```
+
+`Dropbox.Client` also supports a DOM event-like API for receiving all errors.
+This can be used to log API errors, or to upload them to your server for
+further analysis.
+
+```javascript
+client.onError.addListener(function(error) {
+  if (window.console) {  // Skip the "if" in node.js code.
+    console.error(error);
+  }
+});
 ```
 
 

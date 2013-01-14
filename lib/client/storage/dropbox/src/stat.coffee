@@ -48,15 +48,15 @@ class Dropbox.Stat
   #   folder contents twice
   versionTag: null
 
-  # @property {String} a guess of the MIME type representing the file or folder's
-  #   contents
+  # @property {String} a guess of the MIME type representing the file or
+  #   folder's contents
   mimeType: null
 
   # @property {Number} the size of the file, in bytes; null for folders
   size: null
 
-  # @property {String} the size of the file, in a human-readable format, such as
-  #   "225.4KB"; the format of this string is influenced by the API client's
+  # @property {String} the size of the file, in a human-readable format, such
+  #   as "225.4KB"; the format of this string is influenced by the API client's
   #   locale
   humanSize: null
 
@@ -73,6 +73,13 @@ class Dropbox.Stat
   #   does not report any time
   clientModifiedAt: null
 
+  # JSON representation of this file / folder's metadata
+  #
+  # @return {Object} conforms to the JSON restrictions; can be passed to
+  #   Dropbox.Stat#parse to obtain an identical Stat instance
+  json: ->
+    @_json
+
   # Creates a Stat instance from a raw "metadata" response.
   #
   # @private
@@ -82,6 +89,7 @@ class Dropbox.Stat
   # @param {Object} metadata the result of parsing JSON API responses that are
   #   called "metadata" in the API documentation
   constructor: (metadata) ->
+    @_json = metadata
     @path = metadata.path
     # Ensure there is a trailing /, to make path processing reliable.
     @path = '/' + @path if @path.substring(0, 1) isnt '/'

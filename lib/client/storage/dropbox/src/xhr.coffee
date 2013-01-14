@@ -30,28 +30,41 @@ else
 #     https://code.google.com/p/chromium/issues/detail?id=60449
 if typeof Uint8Array is 'undefined'
   DropboxXhrArrayBufferView = null
+  DropboxXhrSendArrayBufferView = false
 else
-  DropboxXhrArrayBufferView =
-      (new Uint8Array(0)).__proto__.__proto__.constructor
+  if Object.getPrototypeOf
+    DropboxXhrArrayBufferView = Object.getPrototypeOf(
+        Object.getPrototypeOf(new Uint8Array(0))).constructor
+  else if Object.__proto__
+    DropboxXhrArrayBufferView =
+        (new Uint8Array(0)).__proto__.__proto__.constructor
+
+  # Browsers that haven't implemented XHR#send(ArrayBufferView) also don't
+  # have a real ArrayBufferView prototype. (Safari, Firefox)
+  DropboxXhrSendArrayBufferView = DropboxXhrArrayBufferView isnt Object
 
 # Dispatches low-level AJAX calls (XMLHttpRequests).
 class Dropbox.Xhr
   # The object used to perform AJAX requests (XMLHttpRequest).
   @Request = DropboxXhrRequest
   # Set to true when using the XDomainRequest API.
-  @ieMode = DropboxXhrIeMode
+  @ieXdr = DropboxXhrIeMode
   # Set to true if the platform has proper support for FormData.
   @canSendForms = DropboxXhrCanSendForms
   # Set to true if the platform performs CORS preflight checks.
   @doesPreflight = DropboxXhrDoesPreflight
+  # Superclass for all ArrayBufferView objects.
   @ArrayBufferView = DropboxXhrArrayBufferView
+  # Set to true if we think we can send ArrayBufferView objects via XHR.
+  @sendArrayBufferView = DropboxXhrSendArrayBufferView
+
 
   # Sets up an AJAX request.
   #
   # @param {String} method the HTTP method used to make the request ('GET',
-  #     'POST', 'PUT', etc.)
+  #   'POST', 'PUT', etc.)
   # @param {String} baseUrl the URL that receives the request; this URL might
-  #     be modified, e.g. by appending parameters for GET requests
+  #   be modified, e.g. by appending parameters for GET requests
   constructor: (@method, baseUrl) ->
     @isGet = @method is 'GET'
     @url = baseUrl
@@ -63,6 +76,17 @@ class Dropbox.Xhr
     @responseType = null
     @callback = null
     @xhr = null
+    @onError = null
+
+  # @property {?XMLHttpRequest} the raw XMLHttpRequest object used to make the
+  #   request; null until Dropbox.Xhr#prepare is called
+  xhr: null
+
+  # @property {?Dropbox.EventSource<Dropbox.ApiError>} if the XHR fails and
+  #   this property is set, the Dropbox.ApiError instance that will be passed
+  #   to the callback will be dispatched through the Dropbox.EventSource; the
+  #   EventSource should be configured for non-cancelable events
+  onError: null
 
   # Sets the parameters (form field values) that will be sent with the request.
   #
@@ -100,11 +124,22 @@ class Dropbox.Xhr
   # headers) might result in a valid signature that is applied in a sub-optimal
   # fashion. For best results, call this right before Dropbox.Xhr#prepare.
   #
-  signWithOauth: (oauth) ->
-    if Dropbox.Xhr.ieMode or (Dropbox.Xhr.doesPreflight and (not @preflight))
+  # @param {Dropbox.Oauth} oauth OAuth instance whose key and secret will be
+  #   used to sign the request
+  # @param {Boolean} cacheFriendly if true, the signing process choice will be
+  #   biased towards allowing the HTTP cache to work; by default, the choice
+  #   attempts to avoid the CORS preflight request whenever possible
+  # @return {Dropbox.Xhr} this, for easy call chaining
+  signWithOauth: (oauth, cacheFriendly) ->
+    if Dropbox.Xhr.ieXdr
       @addOauthParams oauth
-    else
+    else if @preflight or !Dropbox.Xhr.doesPreflight
       @addOauthHeader oauth
+    else
+      if @isGet and cacheFriendly
+        @addOauthHeader oauth
+      else
+        @addOauthParams oauth
 
   # Ammends the request parameters to include an OAuth signature.
   #
@@ -112,7 +147,7 @@ class Dropbox.Xhr
   # the signing process.
   #
   # @param {Dropbox.Oauth} oauth OAuth instance whose key and secret will be
-  #     used to sign the request
+  #   used to sign the request
   # @return {Dropbox.Xhr} this, for easy call chaining
   addOauthParams: (oauth) ->
     if @signed
@@ -129,7 +164,7 @@ class Dropbox.Xhr
   # the signing process.
   #
   # @param {Dropbox.Oauth} oauth OAuth instance whose key and secret will be
-  #     used to sign the request
+  #   used to sign the request
   # @return {Dropbox.Xhr} this, for easy call chaining
   addOauthHeader: (oauth) ->
     if @signed
@@ -142,7 +177,7 @@ class Dropbox.Xhr
   # Sets the body (piece of data) that will be sent with the request.
   #
   # @param {String, Blob, ArrayBuffer} body the body to be sent in a request;
-  #     GET requests cannot have a body
+  #   GET requests cannot have a body
   # @return {Dropbox.Xhr} this, for easy call chaining
   setBody: (body) ->
     if @isGet
@@ -150,9 +185,13 @@ class Dropbox.Xhr
     if @body isnt null
       throw new Error 'Request already has a body'
 
-    unless @preflight
-      unless (typeof FormData isnt 'undefined') and (body instanceof FormData)
-        @preflight = true
+    if typeof body is 'string'
+      # Content-Type will be set automatically.
+    else if (typeof FormData isnt 'undefined') and (body instanceof FormData)
+      # Content-Type will be set automatically.
+    else
+      @headers['Content-Type'] = 'application/octet-stream'
+      @preflight = true
 
     @body = body
     @
@@ -191,26 +230,37 @@ class Dropbox.Xhr
   # Simulates having an <input type="file"> being sent with the request.
   #
   # @param {String} fieldName the name of the form field / parameter (not of
-  #     the uploaded file)
+  #   the uploaded file)
   # @param {String} fileName the name of the uploaded file (not the name of the
-  #     form field / parameter)
+  #   form field / parameter)
   # @param {String, Blob, File} fileData contents of the file to be uploaded
   # @param {?String} contentType the MIME type of the file to be uploaded; if
-  #     fileData is a Blob or File, its MIME type is used instead
+  #   fileData is a Blob or File, its MIME type is used instead
   setFileField: (fieldName, fileName, fileData, contentType) ->
     if @body isnt null
       throw new Error 'Request already has a body'
 
     if @isGet
-      throw new Error 'paramsToBody cannot be called on GET requests'
+      throw new Error 'setFileField cannot be called on GET requests'
 
     if typeof(fileData) is 'object' and typeof Blob isnt 'undefined'
-      if ArrayBuffer? and fileData instanceof ArrayBuffer
-        fileData = new Uint8Array fileData
-      if Dropbox.Xhr.ArrayBufferView and
-          fileData instanceof Dropbox.Xhr.ArrayBufferView
-        contentType or= 'application/octet-stream'
-        fileData = new Blob [fileData], type: contentType
+      if typeof ArrayBuffer isnt 'undefined'
+        if fileData instanceof ArrayBuffer
+          # Convert ArrayBuffer -> ArrayBufferView on standard-compliant
+          # browsers, to avoid warnings from the Blob constructor.
+          if Dropbox.Xhr.sendArrayBufferView
+            fileData = new Uint8Array fileData
+        else
+          # Convert ArrayBufferView -> ArrayBuffer on older browsers, to avoid
+          # having a Blob that contains "[object Uint8Array]" instead of the
+          # actual data.
+          if !Dropbox.Xhr.sendArrayBufferView and fileData.byteOffset is 0 and
+             fileData.buffer instanceof ArrayBuffer
+            fileData = fileData.buffer
+
+      contentType or= 'application/octet-stream'
+      fileData = new Blob [fileData], type: contentType
+
       # Workaround for http://crbug.com/165095
       if typeof File isnt 'undefined' and fileData instanceof File
         fileData = new Blob [fileData], type: fileData.type
@@ -236,7 +286,7 @@ class Dropbox.Xhr
 
   # @private
   # @return {String} a nonce suitable for use as a part boundary in a multipart
-  #     MIME message
+  #   MIME message
   multipartBoundary: ->
     [Date.now().toString(36), Math.random().toString(36)].join '----'
 
@@ -276,8 +326,8 @@ class Dropbox.Xhr
   #
   # @return {Dropbox.Xhr} this, for easy call chaining
   prepare: ->
-    ieMode = Dropbox.Xhr.ieMode
-    if @isGet or @body isnt null or ieMode
+    ieXdr = Dropbox.Xhr.ieXdr
+    if @isGet or @body isnt null or ieXdr
       @paramsToUrl()
       if @body isnt null and typeof @body is 'string'
         @headers['Content-Type'] = 'text/plain; charset=utf8'
@@ -285,14 +335,18 @@ class Dropbox.Xhr
       @paramsToBody()
 
     @xhr = new Dropbox.Xhr.Request()
-    if ieMode
-      @xhr.onload = => @onLoad()
-      @xhr.onerror = => @onError()
+    if ieXdr
+      @xhr.onload = => @onXdrLoad()
+      @xhr.onerror = => @onXdrError()
+      @xhr.ontimeout = => @onXdrError()
+      # NOTE: there are reports that XHR somtimes fails if onprogress doesn't
+      #       have any handler
+      @xhr.onprogress = ->
     else
       @xhr.onreadystatechange = => @onReadyStateChange()
     @xhr.open @method, @url, true
 
-    unless ieMode
+    unless ieXdr
       for own header, value of @headers
         @xhr.setRequestHeader header, value
 
@@ -321,16 +375,15 @@ class Dropbox.Xhr
     if @body isnt null
       body = @body
       # send() in XHR doesn't like naked ArrayBuffers
-      if Dropbox.Xhr.ArrayBufferView and body instanceof ArrayBuffer
+      if Dropbox.Xhr.sendArrayBufferView and body instanceof ArrayBuffer
         body = new Uint8Array body
 
       try
         @xhr.send body
       catch e
-        # Firefox doesn't support sending ArrayBufferViews.
         # Node.js doesn't implement Blob.
-        if typeof Blob isnt 'undefined' and Dropbox.Xhr.ArrayBufferView and
-            body instanceof Dropbox.Xhr.ArrayBufferView
+        if !Dropbox.Xhr.sendArrayBufferView and typeof Blob isnt 'undefined'
+          # Firefox doesn't support sending ArrayBufferViews.
           body = new Blob [body], type: 'application/octet-stream'
           @xhr.send body
         else
@@ -381,6 +434,7 @@ class Dropbox.Xhr
 
     if @xhr.status < 200 or @xhr.status >= 300
       apiError = new Dropbox.ApiError @xhr, @method, @url
+      @onError.dispatch apiError if @onError
       @callback apiError
       return true
 
@@ -432,7 +486,7 @@ class Dropbox.Xhr
     true
 
   # Handles the XDomainRequest onload event. (IE 8, 9)
-  onLoad: ->
+  onXdrLoad: ->
     text = @xhr.responseText
     switch @xhr.contentType
      when 'application/x-www-form-urlencoded'
@@ -444,7 +498,8 @@ class Dropbox.Xhr
     true
 
   # Handles the XDomainRequest onload event. (IE 8, 9)
-  onError: ->
+  onXdrError: ->
     apiError = new Dropbox.ApiError @xhr, @method, @url
+    @onError.dispatch apiError if @onError
     @callback apiError
     return true

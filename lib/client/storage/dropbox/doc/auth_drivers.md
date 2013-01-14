@@ -100,7 +100,8 @@ their Dropbox. This behavior is unintuitive to users. A reasonable compromise
 for apps that use `rememberUser` is to provide a `Sign out` button that calls
 the `signOut` method on the app's `Dropbox.Client` instance.
 
-The
+The driver's constructor takes a `receiverPath` option t
+
 [checkbox.js](https://github.com/dropbox/dropbox-js/tree/master/samples/checkbox.js)
 sample application uses `rememberUser`, and implements signing off as described
 above.
@@ -123,10 +124,12 @@ Chrome, Firefox and IE10+.
 If the drawbacks above are more acceptable than restructuring your application
 to handle redirects, create a page on your site that contains the
 [receiver code](https://github.com/dropbox/dropbox-js/blob/master/test/html/oauth_receiver.html),
-and point the `Dropbox.Drivers.Popup` constructor to it.
+change the code to reflect the location of `dropbox.js` on your site, and point
+the `Dropbox.Drivers.Popup` constructor to it.
 
 ```javascript
-client.authDriver(new Dropbox.Drivers.Popup({receiverUrl: "https://url.to/receiver.html"}));
+client.authDriver(new Dropbox.Drivers.Popup({
+    receiverUrl: "https://url.to/oauth_receiver.html"}));
 ```
 
 The popup driver adds a `#` (fragment hash) to the receiver URL if necessary,
@@ -138,8 +141,41 @@ If you have a good reason to disable the behavior above, set the `noFragment`
 option to true.
 
 ```javascript
-client.authDriver(new Dropbox.Drivers.Popup({receiverUrl: "https://url.to/receiver.html", noFragment: true}));
+client.authDriver(new Dropbox.Drivers.Popup({
+    receiverUrl: "https://url.to/receiver.html", noFragment: true}));
 ```
+
+The popup driver implements the `rememberUser` option with the same semantics
+and caveats as the redirecting driver.
+
+
+### Dropbox.Drivers.Chrome
+
+Google Chrome [extensions](http://developer.chrome.com/extensions/) and
+[applications](developer.chrome.com/apps/) are supported by a driver that opens
+a new browser tab (in the case of extensions and legacy applications) or
+an application window (for new applications) to complete the OAuth
+authorization.
+
+To use this driver, first add the following files to your extension.
+
+* the [receiver script](https://github.com/dropbox/dropbox-js/blob/master/test/src/chrome_oauth_receiver.coffee);
+the file is both valid JavaScript and valid CoffeeScript
+* the [receiver page](https://github.com/dropbox/dropbox-js/blob/master/test/html/chrome_oauth_receiver.html);
+change the page to reflect the paths to `dropbox.js` and to the receiver script
+file
+
+Point the driver constructor to the receiver page:
+
+```javascript
+client.authDriver(new Dropbox.Drivers.Chrome({
+  receiverPath: "path/to/chrome_oauth_receiver.html"}));
+```
+
+This driver caches the user's credentials so that users don't have to authorize
+applications / extensions on every browser launch. Applications and extensions'
+UI should include a method for the user to sign out of Dropbox, which can be
+implemented by calling the `signOut` instance method of `Dropbox.Client`.
 
 
 ### Dropbox.Drivers.NodeServer

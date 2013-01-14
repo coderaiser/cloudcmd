@@ -1,12 +1,13 @@
 async = require 'async'
 {spawn, exec} = require 'child_process'
 fs = require 'fs'
+glob = require 'glob'
 log = console.log
+path = require 'path'
 remove = require 'remove'
 
 # Node 0.6 compatibility hack.
 unless fs.existsSync
-  path = require 'path'
   fs.existsSync = (filePath) -> path.existsSync filePath
 
 
@@ -26,8 +27,7 @@ task 'webtest', ->
     build ->
       ssl_cert ->
         tokens ->
-          webFileServer = require './test/js/web_file_server.js'
-          webFileServer.openBrowser()
+          webtest()
 
 task 'cert', ->
   remove.removeSync 'test/ssl', ignoreMissing: true
@@ -50,13 +50,33 @@ task 'extension', ->
   run 'node_modules/coffee-script/bin/coffee ' +
       '--compile test/chrome_extension/*.coffee'
 
+task 'chrome', ->
+  vendor ->
+    build ->
+      # The v2 Chrome App API isn't supported yet.
+      buildChromeApp 'app_v1'
+
+task 'chrometest', ->
+  vendor ->
+    build ->
+      # The v2 Chrome App API isn't supported yet.
+      buildChromeApp 'app_v1', ->
+        testChromeApp()
+
 build = (callback) ->
   commands = []
+
+  # Ignoring ".coffee" when sorting.
+  # We want "driver.coffee" to sort before "driver-browser.coffee"
+  source_files = glob.sync 'src/*.coffee'
+  source_files.sort (a, b) ->
+    a.replace(/\.coffee$/, '').localeCompare b.replace(/\.coffee$/, '')
+
   # Compile without --join for decent error messages.
   commands.push 'node_modules/coffee-script/bin/coffee --output tmp ' +
-                '--compile src/*.coffee'
+                "--compile #{source_files.join(' ')}"
   commands.push 'node_modules/coffee-script/bin/coffee --output lib ' +
-                '--compile --join dropbox.js src/*.coffee'
+                "--compile --join dropbox.js #{source_files.join(' ')}"
   # Minify the javascript, for browser distribution.
   commands.push 'node_modules/uglify-js/bin/uglifyjs --compress --mangle ' +
                 '--output lib/dropbox.min.js lib/dropbox.js'
@@ -64,6 +84,18 @@ build = (callback) ->
                 '--compile test/src/*.coffee'
   async.forEachSeries commands, run, ->
     callback() if callback
+
+webtest = (callback) ->
+  webFileServer = require './test/js/web_file_server.js'
+  if 'BROWSER' of process.env
+    if process.env['BROWSER'] is 'false'
+      url = webFileServer.testUrl()
+      console.log "Please open the URL below in your browser:\n    #{url}"
+    else
+      webFileServer.openBrowser process.env['BROWSER']
+  else
+    webFileServer.openBrowser()
+  callback() if callback?
 
 ssl_cert = (callback) ->
   fs.mkdirSync 'test/ssl' unless fs.existsSync 'test/ssl'
@@ -100,6 +132,58 @@ vendor = (callback) ->
   ]
   async.forEachSeries downloads, download, ->
     callback() if callback
+
+testChromeApp = (callback) ->
+  # Clean up the profile.
+  fs.mkdirSync 'test/chrome_profile' unless fs.existsSync 'test/chrome_profile'
+
+  command = "\"#{chromeCommand()}\" --load-extension=test/chrome_app " +
+      '--user-data-dir=test/chrome_profile --no-default-browser-check ' +
+      '--no-first-run --no-service-autorun --disable-default-apps ' +
+      '--homepage=about:blank --v=-1'
+
+  run command, ->
+    callback() if callback
+
+buildChromeApp = (manifestFile, callback) ->
+  unless fs.existsSync 'test/chrome_app/test'
+    fs.mkdirSync 'test/chrome_app/test'
+  unless fs.existsSync 'test/chrome_app/node_modules'
+    fs.mkdirSync 'test/chrome_app/node_modules'
+
+  links = [
+    ['lib', 'test/chrome_app/lib'],
+    ['node_modules/mocha', 'test/chrome_app/node_modules/mocha'],
+    ['node_modules/sinon-chai', 'test/chrome_app/node_modules/sinon-chai'],
+    ['test/.token', 'test/chrome_app/test/.token'],
+    ['test/binary', 'test/chrome_app/test/binary'],
+    ['test/html', 'test/chrome_app/test/html'],
+    ['test/js', 'test/chrome_app/test/js'],
+    ['test/vendor', 'test/chrome_app/test/vendor'],
+  ]
+  commands = [
+    "cp test/chrome_app/manifests/#{manifestFile}.json " +
+        'test/chrome_app/manifest.json'
+  ]
+  for link in links
+  #   fs.symlinkSync(path.resolve(link[0]), link[1]) unless fs.existsSync link[1]
+    commands.push "cp -r #{link[0]} #{path.dirname(link[1])}"
+  async.forEachSeries commands, run, ->
+    callback() if callback
+
+chromeCommand = ->
+  paths = [
+    '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary',
+    '/Applications/Chromium.app/MacOS/Contents/Chromium',
+  ]
+  for path in paths
+    return path if fs.existsSync path
+
+  if 'process.platform' is 'win32'
+    'chrome'
+  else
+    'google-chrome'
 
 tokens = (callback) ->
   TokenStash = require './test/js/token_stash.js'
