@@ -27,7 +27,8 @@ class Dropbox.UserInfo
   #   returned by the authentication process
   uid: null
 
-  # @property {String}
+  # @property {String} the user's referral link; the user might benefit if
+  #   others use the link to sign up for Dropbox
   referralUrl: null
 
   # Specific to applications whose access type is "public app folder".
@@ -49,15 +50,23 @@ class Dropbox.UserInfo
   #   shared with other users
   sharedBytes: null
 
+  # JSON representation of this user's information.
+  #
+  # @return {Object} conforms to the JSON restrictions; can be passed to
+  #   Dropbox.UserInfo#parse to obtain an identical UserInfo instance
+  json: ->
+    @_json
+
   # Creates a UserInfo instance from a raw API response.
   #
   # @private
   # This constructor is used by Dropbox.UserInfo.parse, and should not be
   # called directly.
   #
-  # @param {?Object} userInfo the result of parsing a JSON API response that
+  # @param {Object} userInfo the result of parsing a JSON API response that
   #   describes a user
   constructor: (userInfo) ->
+    @_json = userInfo
     @name = userInfo.display_name
     @email = userInfo.email
     @countryCode = userInfo.country or null

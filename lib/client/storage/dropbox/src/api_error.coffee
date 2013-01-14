@@ -27,9 +27,19 @@ class Dropbox.ApiError
   constructor: (xhr, @method, @url) ->
     @status = xhr.status
     if xhr.responseType
-      text = xhr.response or xhr.responseText
+      try
+        text = xhr.response or xhr.responseText
+      catch e
+        try
+          text = xhr.responseText
+        catch e
+          text = null
     else
-      text = xhr.responseText
+      try
+        text = xhr.responseText
+      catch e
+        text = null
+
     if text
       try
         @responseText = text.toString()
