@@ -75,6 +75,8 @@ clicked on menu item.
 
 * Updated dropbox library to v.0.8.1.
 
+* Added ability to authorize on dropbox thru popup.
+
 
 2012.12.12, Version 0.1.8
 
