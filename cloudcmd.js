@@ -142,14 +142,14 @@
         var lServerDir = path.dirname(process.argv[1]) + '/';
         
         if( DIR !== lServerDir ){
-            console.log('current dir: ' + DIR);
+            Util.log('current dir: ' + DIR);
             process.chdir(lServerDir);
         }
-        console.log('server dir:  ' + lServerDir + '\n' +
+        Util.log('server dir:  ' + lServerDir + '\n' +
             'reading configuretion file config.json...');
         
         if(Config){
-            console.log('config.json readed');
+            Util.log('config.json readed');
             
             /* if command line parameter testing resolved 
              * setting config to testing, so server
@@ -159,13 +159,13 @@
             var lArg = process.argv;
                 lArg = lArg[lArg.length - 1];
             if ( lArg === 'test' ||  lArg === 'test\r') {
-                console.log(process.argv);
+                Util.log(process.argv);
                 Config.server  = 
                 Config.logs    = false;
             }
             
             if (Config.logs) {
-                console.log('log param setted up in config.json\n' +
+                Util.log('log param setted up in config.json\n' +
                     'from now all logs will be writed to log.txt');
                 writeLogsToFile();
             }
