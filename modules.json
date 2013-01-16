@@ -6,5 +6,6 @@
     "storage/_dropbox",
     "storage/_dropbox_chooser",
     "storage/_gdrive",
+    "storage/_vk",
     "terminal"
 ]
