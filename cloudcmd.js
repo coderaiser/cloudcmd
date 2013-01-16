@@ -145,8 +145,8 @@
             Util.log('current dir: ' + DIR);
             process.chdir(lServerDir);
         }
-        Util.log('server dir:  ' + lServerDir + '\n' +
-            'reading configuretion file config.json...');
+        Util.log('server dir:  ' + lServerDir);
+        Util.log('reading configuretion file config.json...');
         
         if(Config){
             Util.log('config.json readed');
