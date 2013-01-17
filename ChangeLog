@@ -85,6 +85,8 @@ clicked on menu item.
 
 * Updated jquery to v1.9.0.
 
+* Improved modules.json format and parsing.
+
 
 2012.12.12, Version 0.1.8
 
