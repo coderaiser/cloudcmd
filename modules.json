@@ -2,10 +2,24 @@
     "editor/_codemirror",
     "menu",
     "viewer",
-    "storage/_github",
-    "storage/_dropbox",
-    "storage/_dropbox_chooser",
-    "storage/_gdrive",
-    "storage/_vk",
-    "terminal"
+    "terminal",{
+        "storage":[
+            {
+                "name":"DropBox",
+                "path":"_dropbox"
+            },
+            {
+                "name":"GitHub",
+                "path":"_github"
+            },
+            {
+                "name":"GDrive",
+                "path":"_gdrive"
+            },
+            {
+                "name":"VK",
+                "path":"_vk"
+            }
+        ]
+    }
 ]
