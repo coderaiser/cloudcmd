@@ -1,4 +1,4 @@
-/*! fancyBox v2.1.3 fancyapps.com | fancyapps.com/fancybox/#license */
+/*! fancyBox v2.1.4 fancyapps.com | fancyapps.com/fancybox/#license */
 .fancybox-wrap,
 .fancybox-skin,
 .fancybox-outer,
@@ -90,13 +90,13 @@
 	cursor: pointer;
 	z-index: 8060;
 }
-/*
+
 #fancybox-loading div {
 	width: 44px;
 	height: 44px;
 	background: url('fancybox_loading.gif') center center no-repeat;
 }
-*/
+
 .fancybox-close {
 	position: absolute;
 	top: -18px;
