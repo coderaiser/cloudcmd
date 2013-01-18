@@ -4,22 +4,11 @@
     "viewer",
     "terminal",{
         "storage":[
-            {
-                "name":"DropBox",
-                "path":"_dropbox"
-            },
-            {
-                "name":"GitHub",
-                "path":"_github"
-            },
-            {
-                "name":"GDrive",
-                "path":"_gdrive"
-            },
-            {
-                "name":"VK",
-                "path":"_vk"
-            }
+            "DropBox",
+            "GitHub",
+            "GDrive",
+            "VK",
+            "SkyDrive"
         ]
     }
 ]
