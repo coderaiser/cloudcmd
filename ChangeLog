@@ -91,6 +91,8 @@ clicked on menu item.
 
 * Added easy template renderrer system Util.render.
 
+* Added functions DOM.parseJSON and DOM.stringifyJSON
+
 
 2012.12.12, Version 0.1.8
 
