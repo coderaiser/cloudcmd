@@ -97,6 +97,8 @@ clicked on menu item.
 
 * Added migrate plugin for jquery.
 
+* Removed getting data from Minify cache.
+
 
 2012.12.12, Version 0.1.8
 
