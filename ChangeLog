@@ -99,6 +99,8 @@ clicked on menu item.
 
 * Removed getting data from Minify cache.
 
+* Moved jsons to json folder.
+
 
 2012.12.12, Version 0.1.8
 
