@@ -101,6 +101,9 @@ clicked on menu item.
 
 * Moved jsons to json folder.
 
+* Fixed bug with working links in path panel and
+with clicks on files.
+
 
 2012.12.12, Version 0.1.8
 
