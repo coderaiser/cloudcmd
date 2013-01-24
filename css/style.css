@@ -13,6 +13,13 @@
 } 
 */
 /* символьный шрифт от гитхаба*/
+@font-face {
+  font-family: "GeneralFoundicons";
+  src: url('http://github.com/zurb/foundation-icons/blob/master/foundation_icons_general/fonts/general_foundicons.woff?raw=true') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 @font-face {
   font-family: 'Fontello';
@@ -71,7 +78,8 @@ body{
     width:16px;
     height:16px;
     margin-left:0.5%;
-    font-family: 'Octicons Regular';
+    /* font-family: 'Octicons Regular'; */
+    font-family: 'GeneralFoundicons';
     font-size:16px;
 }
 .error::before{
@@ -79,7 +87,8 @@ body{
     bottom : 4px;
     color:rgb(222, 41, 41);
     cursor:default;
-    content:'\f026';
+    /* content:'\f026'; */
+    /* content:'\f013'; */
 }
 .loading{
     position:relative;
