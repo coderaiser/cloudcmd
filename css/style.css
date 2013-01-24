@@ -2,16 +2,6 @@
 @import url(//fonts.googleapis.com/css?family=Droid+Sans+Mono);
 */
 
-/* Foundation Icons General Enclosed */
-/*
-@font-face {
-    font-family: 'FoundationIconsGeneralEnclosed';
-    src: url('//dl.dropbox.com/u/78163899/mnemonia/fonts/foundation-icons-general-enclosed.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-} 
-*/
 /* символьный шрифт от гитхаба*/
 @font-face {
   font-family: "GeneralFoundicons";
@@ -20,7 +10,7 @@
   font-style: normal;
 }
 
-
+/* http://fontello.com/ */
 @font-face {
   font-family: 'Fontello';
   font-style: normal;
@@ -49,7 +39,7 @@ body{
 
 .menu{
     margin-bottom: 0;
-    font: 16px 'Octicons Regular';  
+    font: 16px 'Octicons Regular';
 }
 
 .path-icon{
@@ -78,13 +68,16 @@ body{
     width:16px;
     height:16px;
     margin-left:0.5%;
-    font-family: 'GeneralFoundicons';
+    /* font-family: 'GeneralFoundicons'; */
+    font-family: 'Fontello';
 }
 .error::before{
     position: relative;
     color:rgb(222, 41, 41);
     cursor:default;
-    content:'\f013'; 
+    /* content:'\f013'; */
+    content: '\2757';
+    font-size:14px;
 }
 .loading{
     position:relative;
