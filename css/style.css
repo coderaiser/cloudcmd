@@ -13,16 +13,10 @@
 /* http://fontello.com/ */
 @font-face {
   font-family: 'Fontello';
-  font-style: normal;
+  src: url("/font/fontello.eot");
+  src: url("/font/fontello.eot?#iefix") format('embedded-opentype'), url("/font/fontello.woff") format('woff'), url("/font/fontello.ttf") format('truetype'), url("/font/fontello.svg#cloudcmd") format('svg');
   font-weight: normal;
-  src: url('/font/fontello.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Octicons Regular';
   font-style: normal;
-  font-weight: normal;
-  src: local('Octicons Regular'), url('/font/Octicons.woff') format('woff');
 }
 
 @font-face {
@@ -35,11 +29,6 @@
 body{
     font:16px "Droid Sans Mono";
     background-color:white;
-}
-
-.menu{
-    margin-bottom: 0;
-    font: 16px 'Octicons Regular';
 }
 
 .path-icon{
@@ -148,7 +137,7 @@ body{
  * установления курсора
  */
 .current-file > .mini-icon{
-    left: -6px;
+     left: -6px;
 }
 /* freeupex */
 .directory{
@@ -274,26 +263,29 @@ a:hover, a:active {
         color:white;
     }
     
-/* меняем иконки на шрифтовые*/
+    .fm-header{
+        display:none;
+    }
+    
+    /* меняем иконки на шрифтовые*/
     .mini-icon {
-        font: 60px 'Octicons Regular';
+        color: rgb(246, 224, 124);
+        color: rgba(246, 224, 124, 0.56);
+        font: 60px 'Fontello';
         width: 40%;
         height: 0;
         margin-left: 0;
         float: right;
         position: relative;
-        top: -17px;
-        
-        color: rgb(246, 224, 124);
-        color: rgba(246, 224, 124, 0.56);
+        top: 10px
     }
     .directory::before{
-        content: '\f216';
+        content: '\1f4c1';
     }
      .text-file::before{
         color: rgb(26, 224, 124);
         color: rgba(26, 224, 124, 0.56);
-        content: '\f211';
+        content: '\1f4c4';
     }
     .text-file{
         background-image:none;
