@@ -5,11 +5,13 @@
         <script>
         (function(){
             "use strict";
+            
             if(window.opener){
                 var cloudcmd = window.opener.CloudCommander;
                 
                 cloudcmd.getConfig(function(pConfig){
-                    var GitHub_ID       = pConfig.github_key;
+                    var lGitHub     = pConfig.github,
+                    GitHub_ID       = lGitHub && lGitHub.key;
                     
                     window.location = 
                         'https://github.com/login/oauth/authorize?client_id=' + 
