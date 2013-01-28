@@ -8,8 +8,6 @@
         "html"  : true,
         "img"   : true
     },
-    "gdrive_id"             : "255175681917",
-    "vk_id"                 : "3336188",
     "logs"                  : false,
     "show_keys_panel"       : true,
     "server"                : true,
