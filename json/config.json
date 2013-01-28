@@ -8,14 +8,6 @@
         "html"  : true,
         "img"   : true
     },
-    "github":{
-        "key"            : "891c251b925e4e967fa9",
-        "secret"         : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545"
-    },
-    "dropbox_key"           : "0nd3ssnp5fp7tqs",
-    "dropbox_secret"        : "r61lxpchmk8l06o",
-    "dropbox_encoded_key"   : "DkMz4FYHQTA=|GW6pf2dONkrGvckMwBsl1V1vysrCPktPiUWN7UpDjw==",
-    "dropbox_chooser_key"   : "o7d6llji052vijk",
     "gdrive_id"             : "255175681917",
     "vk_id"                 : "3336188",
     "logs"                  : false,

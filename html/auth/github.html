@@ -3,22 +3,25 @@
     <head></head>
     <body>
         <script>
-        (function(){
+        
+        var Util;
+        (function(Util){
             "use strict";
             
             if(window.opener){
                 var cloudcmd = window.opener.CloudCommander;
                 
-                cloudcmd.getConfig(function(pConfig){
-                    var lGitHub     = pConfig.github,
-                    GitHub_ID       = lGitHub && lGitHub.key;
+                cloudcmd.getModules(function(pModules){
+                    var lStorage    = Util.findObjByNameInArr(pModules, 'storage'),
+                        lGitHub     = Util.findObjByNameInArr(lStorage.data, 'GitHub'),
+                        GitHub_ID   = lGitHub && lGitHub.key;
                     
                     window.location = 
                         'https://github.com/login/oauth/authorize?client_id=' + 
                         GitHub_ID + '&&scope=repo,user,gist';
                 });
             }
-        })();
+        })(Util);
         </script>
     </body>
 </html>
