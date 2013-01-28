@@ -7,10 +7,10 @@
         "data": [{
                 "name": "DropBox",
                 "data":{
-                    "key"           : "0nd3ssnp5fp7tqs",
-                    "secret"        : "r61lxpchmk8l06o",
-                    "encodedKey"   : "DkMz4FYHQTA=|GW6pf2dONkrGvckMwBsl1V1vysrCPktPiUWN7UpDjw==",
-                    "chooserKey"   : "o7d6llji052vijk"
+                    "key"       : "0nd3ssnp5fp7tqs",
+                    "secret"    : "r61lxpchmk8l06o",
+                    "encodedKey": "DkMz4FYHQTA=|GW6pf2dONkrGvckMwBsl1V1vysrCPktPiUWN7UpDjw==",
+                    "chooserKey": "o7d6llji052vijk"
                 }
             }, {
                 "name": "GitHub",
@@ -18,9 +18,17 @@
                     "key"       : "891c251b925e4e967fa9",
                     "secret"    : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545"
                 }
+            }, {
+                "name": "GDrive",
+                "data": {
+                    "id"        : "255175681917"
+                }
+            }, {
+                "name": "VK",
+                "data": {
+                    "id"        : "3336188"
+                }
             },
-            "GDrive",
-            "VK",
             "SkyDrive"
         ]
     }
