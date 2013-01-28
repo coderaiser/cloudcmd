@@ -104,9 +104,8 @@
                 merge   : true
             };
             
-        if (pAllowed.js) {
+        if (pAllowed.js)
             lOptimizeParams.push(LIBDIR + 'client.js');
-        }
         
         if (pAllowed.html)
             lOptimizeParams.push(lIndex);
@@ -121,7 +120,7 @@
         }
         
         if (lOptimizeParams.length)
-            lMinify.optimize(lOptimizeParams);
+            lMinify.optimize(lOptimizeParams,{cache:true});
     }
     
     /**
