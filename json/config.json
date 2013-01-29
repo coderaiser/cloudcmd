@@ -1,7 +1,7 @@
 {
     "api_url"               : "/api/v1",
     "appcache"              : false,
-    "cache" : {"allowed" : false},
+    "cache"                 : false,
     "minification" : {
         "js"    : false,
         "css"   : false,
