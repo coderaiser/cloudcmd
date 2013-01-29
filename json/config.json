@@ -5,8 +5,8 @@
     "minification" : {
         "js"    : false,
         "css"   : false,
-        "html"  : true,
-        "img"   : true
+        "html"  : false,
+        "img"   : false
     },
     "logs"                  : false,
     "show_keys_panel"       : true,

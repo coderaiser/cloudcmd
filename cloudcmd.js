@@ -108,7 +108,8 @@
             lOptimizeParams.push(LIBDIR + 'client.js');
         
         if (pAllowed.html)
-            lOptimizeParams.push(lIndex);
+            //lOptimizeParams.push(lIndex);
+            lOptimizeParams = lIndex;
         
         if (pAllowed.css) {
             var lStyles = [{}, {}];
@@ -119,8 +120,8 @@
             lOptimizeParams.push(lStyles[1]);
         }
         
-        if (lOptimizeParams.length)
-            lMinify.optimize(lOptimizeParams,{cache:true});
+        //if (lOptimizeParams.length)
+            //lMinify.optimize(lOptimizeParams);
     }
     
     /**
