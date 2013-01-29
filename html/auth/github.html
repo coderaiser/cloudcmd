@@ -13,7 +13,7 @@
                 
                 cloudcmd.getModules(function(pModules){
                     var lStorage    = Util.findObjByNameInArr(pModules, 'storage'),
-                        lGitHub     = Util.findObjByNameInArr(lStorage.data, 'GitHub'),
+                        lGitHub     = Util.findObjByNameInArr(lStorage, 'GitHub'),
                         GitHub_ID   = lGitHub && lGitHub.key;
                     
                     window.location = 
