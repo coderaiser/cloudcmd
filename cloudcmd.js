@@ -23,7 +23,6 @@
          * Win32 should be backslashes */
         DIR         = main.DIR;
         
-    console.log(main);
     readConfig();
     Server.start(Config, {
         appcache    : appCacheProcessing,
