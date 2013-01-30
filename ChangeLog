@@ -118,6 +118,8 @@ no storage modules setted up in modules.json.
 * From now any file minifying only if last modified
 time was changed.
 
+* Removed ability to cache files in memory.
+
 
 2012.12.12, Version 0.1.8
 
