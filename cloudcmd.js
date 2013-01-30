@@ -23,6 +23,7 @@
          * Win32 should be backslashes */
         DIR         = main.DIR;
         
+    console.log(main);
     readConfig();
     Server.start(Config, {
         appcache    : appCacheProcessing,
@@ -49,7 +50,7 @@
          * минифицированый
          */
         if(Minify._allowed.css){
-            var lPath = '/' + srv.Minify.MinFolder.replace(DIR, '');
+            var lPath = '/' + Minify.MinFolder.replace(DIR, '');
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             lData = Util.removeStr(lData, lReplace_s)
                     .replace('/css/style.css', lPath + 'all.min.css');
@@ -99,7 +100,6 @@
             lResetCSS   = DIR + 'css/reset.css',
             lIndex      = DIR + 'html/index.html',
             
-            lMinify     = Server.CloudServer.Minify,
             lCSSOptions = {
                 img     : pAllowed.img,
                 merge   : true
@@ -109,8 +109,8 @@
             lOptimizeParams.push(LIBDIR + 'client.js');
         
         if (pAllowed.html)
-            //lOptimizeParams.push(lIndex);
-            lOptimizeParams = lIndex;
+            lOptimizeParams.push(lIndex);
+            //lOptimizeParams = lIndex;
         
         if (pAllowed.css) {
             var lStyles = [{}, {}];
@@ -121,8 +121,10 @@
             lOptimizeParams.push(lStyles[1]);
         }
         
-        //if (lOptimizeParams.length)
-            //lMinify.optimize(lOptimizeParams);
+        if (lOptimizeParams.length)
+            Minify.optimize(lOptimizeParams, {
+                force:true
+            });
     }
     
     /**
