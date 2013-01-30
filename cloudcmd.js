@@ -15,6 +15,7 @@
         update      = main.update,
         
         Server      = main.require(LIBDIR + 'server'),
+        Minify      = Server.Minify,
         srv         = Server.CloudServer,
         Config      = main.config;
         
@@ -47,7 +48,7 @@
          * меняем в index.html обычные css на
          * минифицированый
          */
-        if(srv.Minify._allowed.css){
+        if(Minify._allowed.css){
             var lPath = '/' + srv.Minify.MinFolder.replace(DIR, '');
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             lData = Util.removeStr(lData, lReplace_s)
