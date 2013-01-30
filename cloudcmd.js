@@ -109,7 +109,6 @@
         
         if (pAllowed.html)
             lOptimizeParams.push(lIndex);
-            //lOptimizeParams = lIndex;
         
         if (pAllowed.css) {
             var lStyles = [{}, {}];
@@ -122,7 +121,7 @@
         
         if (lOptimizeParams.length)
             Minify.optimize(lOptimizeParams, {
-                force:true
+                force: true
             });
     }
     
