@@ -1,12 +1,11 @@
 {
     "api_url"               : "/api/v1",
     "appcache"              : false,
-    "cache"                 : false,
     "minification" : {
         "js"    : true,
-        "css"   : false,
-        "html"  : false,
-        "img"   : false
+        "css"   : true,
+        "html"  : true,
+        "img"   : true
     },
     "logs"                  : false,
     "show_keys_panel"       : true,
