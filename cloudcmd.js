@@ -48,7 +48,7 @@
          * меняем в index.html обычные css на
          * минифицированый
          */
-        if(Minify._allowed.css){
+        if(Minify.allowed.css){
             var lPath = '/' + Minify.MinFolder.replace(DIR, '');
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             lData = Util.removeStr(lData, lReplace_s)
