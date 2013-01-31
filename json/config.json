@@ -3,7 +3,7 @@
     "appcache"              : false,
     "minification" : {
         "js"    : true,
-        "css"   : true,
+        "css"   : false,
         "html"  : true,
         "img"   : true
     },
