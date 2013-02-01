@@ -2,7 +2,7 @@
 /* c9.io kill active node process */
 
 (function(){
-    "use strict";
+    'use strict';
     
     var exec    = require('child_process').exec,
         lCmd    = 'kill -9'             +   ' ' + /* kill finded process */
