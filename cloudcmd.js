@@ -17,11 +17,14 @@
         Server      = main.require(LIBDIR + 'server'),
         Minify      = Server.Minify,
         srv         = Server.CloudServer,
-        Config      = main.config;
+        Config      = main.config,
+        
+        REQUEST     = 'request',
+        RESPONSE    = 'response';
         
         /* reinit main dir os if we on 
          * Win32 should be backslashes */
-        DIR         = main.DIR;
+        DIR         = main.DIR,
         
     readConfig();
     Server.start(Config, {
@@ -199,14 +202,12 @@
         }else if( Util.isContainStr(lName, [CloudFunc.Fs, CloudFunc.NoJS] ) ||
             Util.strCmp(lName, '/') ||
             Util.strCmp(lName, 'json') ) {
-                main.commander.sendContent({
-                    request           : pParams.request,
-                    response          : pParams.response,
-                    indexProcessing   : indexProcessing
+                lRet = main.commander.sendContent({
+                    request     : pParams[REQUEST],
+                    response    : pParams[RESPONSE],
+                    processing  : indexProcessing
                 });
-                      
-                      lRet = true;
-                  }
+        }
         
         return lRet;
     }
