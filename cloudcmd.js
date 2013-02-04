@@ -196,8 +196,8 @@
             main.sendFile(pParams);
             
             lRet = true;
-        }else if( Util.isContainStr(lName, [CloudFunc.Fs, CloudFunc.NoJS] ) &&
-            Util.strCmp(lName, '/') &&
+        }else if( Util.isContainStr(lName, [CloudFunc.Fs, CloudFunc.NoJS] ) ||
+            Util.strCmp(lName, '/') ||
             Util.strCmp(lName, 'json') ) {
                 main.commander({
                     request           : pParams.request,
