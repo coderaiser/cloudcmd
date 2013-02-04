@@ -199,7 +199,7 @@
         }else if( Util.isContainStr(lName, [CloudFunc.Fs, CloudFunc.NoJS] ) ||
             Util.strCmp(lName, '/') ||
             Util.strCmp(lName, 'json') ) {
-                main.commander({
+                main.commander.sendContent({
                     request           : pParams.request,
                     response          : pParams.response,
                     indexProcessing   : indexProcessing
