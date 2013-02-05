@@ -199,15 +199,17 @@
             main.sendFile(pParams);
             
             lRet = true;
-        }else if( Util.isContainStr(lName, [CloudFunc.Fs, CloudFunc.NoJS] ) ||
-            Util.strCmp(lName, '/') ||
-            Util.strCmp(lName, 'json') ) {
-                lRet = main.commander.sendContent({
-                    request     : pParams[REQUEST],
-                    response    : pParams[RESPONSE],
-                    processing  : indexProcessing,
-                    index       : Minify.allowed.html ? Minify.getName(INDEX) : INDEX
-                });
+        }else if(   Util.isContainStr(lName, CloudFunc.FS)      ||
+                    Util.isContainStr(lName, CloudFunc.NO_JS )  ||
+                    Util.strCmp(lName, '/')                     ||
+                    Util.strCmp(lName, 'json') ){
+                        
+                        lRet = main.commander.sendContent({
+                            request     : pParams[REQUEST],
+                            response    : pParams[RESPONSE],
+                            processing  : indexProcessing,
+                            index       : Minify.allowed.html ? Minify.getName(INDEX) : INDEX
+                        });
         }
         
         return lRet;
