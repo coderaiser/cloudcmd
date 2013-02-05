@@ -122,6 +122,8 @@ time was changed.
 
 * Moved extensions from main.js to json/ext.json.
 
+* Commander functions moved out to commander.js from server.js
+
 
 2012.12.12, Version 0.1.8
 
