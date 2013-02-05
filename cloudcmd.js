@@ -21,7 +21,7 @@
         
         REQUEST     = 'request',
         RESPONSE    = 'response',
-        INDEX       = DIR + 'html/index.html';
+        INDEX       = DIR + 'html' + main.SLASH + 'index.html';
         
         /* reinit main dir os if we on 
          * Win32 should be backslashes */
