@@ -20,11 +20,12 @@
         Config      = main.config,
         
         REQUEST     = 'request',
-        RESPONSE    = 'response';
+        RESPONSE    = 'response',
+        INDEX       = DIR + 'html/index.html';
         
         /* reinit main dir os if we on 
          * Win32 should be backslashes */
-        DIR         = main.DIR,
+        DIR         = main.DIR;
         
     readConfig();
     Server.start(Config, {
@@ -100,7 +101,6 @@
         var lOptimizeParams = [],
             lStyleCSS   = DIR + 'css/style.css',
             lResetCSS   = DIR + 'css/reset.css',
-            lIndex      = DIR + 'html/index.html',
             
             lCSSOptions = {
                 img     : pAllowed.img,
@@ -111,7 +111,7 @@
             lOptimizeParams.push(LIBDIR + 'client.js');
         
         if (pAllowed.html)
-            lOptimizeParams.push(lIndex);
+            lOptimizeParams.push(INDEX);
         
         if (pAllowed.css) {
             var lStyles = [{}, {}];
@@ -205,7 +205,8 @@
                 lRet = main.commander.sendContent({
                     request     : pParams[REQUEST],
                     response    : pParams[RESPONSE],
-                    processing  : indexProcessing
+                    processing  : indexProcessing,
+                    index       : Minify.allowed.html ? Minify.getName(INDEX) : INDEX
                 });
         }
         
