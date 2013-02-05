@@ -15,7 +15,7 @@
         Util        = main.util,
         update      = main.update,
         
-        server      = main.server,
+        server      = main.librequire('server'),
         Minify      = main.minify,
         Config      = main.config,
         
@@ -186,13 +186,13 @@
                 '-> auth');
             
             pParams.name = main.HTMLDIR + lName + '.html';
-            lRet = server.sendFile(pParams);
+            lRet = main.sendFile(pParams);
         }else if( Util.strCmp(lName, '/auth/github') ){
             Util.log('* Routing' +
                 '-> github');
                 
             pParams.name = main.HTMLDIR + lName + '.html';
-            lRet = server.sendFile(pParams);
+            lRet = main.sendFile(pParams);
         }else if(   Util.isContainStr(lName, CloudFunc.FS)      ||
                     Util.isContainStr(lName, CloudFunc.NO_JS )  ||
                     Util.strCmp(lName, '/')                     ||
