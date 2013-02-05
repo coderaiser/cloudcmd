@@ -84,10 +84,6 @@ All main configuration could be done thrue config.json.
         "html"  : true,
         "img"   : false
     },
-    "github_key"            : "891c251b925e4e967fa9",
-    "github_secret"         : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545",
-    "dropbox_key"           : "0nd3ssnp5fp7tqs",
-    "dropbox_chooser_key"   : "o7d6llji052vijk"
     "show_keys_panel"       : true, /* show classic panel with buttons of keys  */
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
