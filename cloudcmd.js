@@ -15,7 +15,7 @@
         Util        = main.util,
         update      = main.update,
         
-        Server      = main.require(LIBDIR + 'server'),
+        server      = main.server,
         Minify      = main.minify,
         Config      = main.config,
         
@@ -28,7 +28,7 @@
         DIR         = main.DIR;
         
     readConfig();
-    Server.start(Config, {
+    server.start(Config, {
         appcache    : appCacheProcessing,
         minimize    : minimize,
         rest        : rest,
@@ -186,13 +186,13 @@
                 '-> auth');
             
             pParams.name = main.HTMLDIR + lName + '.html';
-            lRet = main.sendFile(pParams);
+            lRet = server.sendFile(pParams);
         }else if( Util.strCmp(lName, '/auth/github') ){
             Util.log('* Routing' +
                 '-> github');
                 
             pParams.name = main.HTMLDIR + lName + '.html';
-            lRet = main.sendFile(pParams);
+            lRet = server.sendFile(pParams);
         }else if(   Util.isContainStr(lName, CloudFunc.FS)      ||
                     Util.isContainStr(lName, CloudFunc.NO_JS )  ||
                     Util.strCmp(lName, '/')                     ||
