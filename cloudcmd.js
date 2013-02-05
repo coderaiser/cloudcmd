@@ -65,10 +65,10 @@
                 .replace('<title>Cloud Commander</title>', 
                     '<title>' + CloudFunc.getTitle() + '</title>');
         
-        if(!srv.Config.appcache)
+        if(!Config.appcache)
             lData = Util.removeStr(lData, ' manifest="/cloudcmd.appcache"');
         
-        if(!srv.Config.show_keys_panel){
+        if(!Config.show_keys_panel){
             var lKeysPanel = '<div id=keyspanel';
             lData = lData.replace(lKeysPanel, lKeysPanel +' class=hidden');
         }
