@@ -8,7 +8,7 @@ DEMO:
 Google PageSpeed Score : [100](//developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.cloudfoundry.com_2F&mobile=false "score") (out of 100)
 (or 96 if js or css minification disabled in config.json).
 
-![Cloud Commander](//raw.github.com/coderaiser/cloudcmd/dev/img/logo/cloudcmd.png "Cloud Commander")
+![Cloud Commander](img/logo/cloudcmd.png "Cloud Commander")
 
 Benefits
 ---------------
