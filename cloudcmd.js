@@ -23,8 +23,7 @@
         REQUEST     = 'request',
         RESPONSE    = 'response',
         INDEX       = HTMLDIR + 'index.html',
-        FS          = CloudFunc.FS,
-        NO_JS       = CloudFunc.NO_JS;
+        FS          = CloudFunc.FS;
         
         /* reinit main dir os if we on 
          * Win32 should be backslashes */
@@ -190,7 +189,7 @@
             pParams.name = main.HTMLDIR + lName + '.html';
             lRet = main.sendFile(pParams);
         }
-        else if( Util.isContainStr(lName, [FS, NO_JS]) || 
+        else if( Util.isContainStr(lName, FS) || 
                  Util.strCmp( lName, ['/', 'json']) ){
                         
                         lRet = main.commander.sendContent({
