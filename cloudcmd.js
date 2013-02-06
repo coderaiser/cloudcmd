@@ -22,7 +22,9 @@
         
         REQUEST     = 'request',
         RESPONSE    = 'response',
-        INDEX       = HTMLDIR + 'index.html';
+        INDEX       = HTMLDIR + 'index.html',
+        FS          = CloudFunc.FS,
+        NO_JS       = CloudFunc.NO_JS;
         
         /* reinit main dir os if we on 
          * Win32 should be backslashes */
@@ -182,22 +184,14 @@
         var lRet,
             lName = pParams.name;
         
-        if( Util.strCmp(lName, '/auth') ){
+        if( Util.strCmp(lName, ['/auth', '/auth/github']) ){
             Util.log('* Routing' +
-                '-> auth');
-            
+                '-> ' + lName);
             pParams.name = main.HTMLDIR + lName + '.html';
             lRet = main.sendFile(pParams);
-        }else if( Util.strCmp(lName, '/auth/github') ){
-            Util.log('* Routing' +
-                '-> github');
-                
-            pParams.name = main.HTMLDIR + lName + '.html';
-            lRet = main.sendFile(pParams);
-        }else if(   Util.isContainStr(lName, CloudFunc.FS)      ||
-                    Util.isContainStr(lName, CloudFunc.NO_JS )  ||
-                    Util.strCmp(lName, '/')                     ||
-                    Util.strCmp(lName, 'json') ){
+        }
+        else if( Util.isContainStr(lName, [FS, NO_JS]) || 
+                 Util.strCmp( lName, ['/', 'json']) ){
                         
                         lRet = main.commander.sendContent({
                             request     : pParams[REQUEST],
