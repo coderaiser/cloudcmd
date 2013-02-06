@@ -7,6 +7,7 @@
         LIBDIR      = main.LIBDIR,
         SRVDIR      = main.SRVDIR,
         CLIENTDIR   = LIBDIR + 'client',
+        HTMLDIR     = main.HTMLDIR,
         
         path        = main.path,
         fs          = main.fs,
@@ -21,7 +22,7 @@
         
         REQUEST     = 'request',
         RESPONSE    = 'response',
-        INDEX       = DIR + 'html' + main.SLASH + 'index.html';
+        INDEX       = HTMLDIR + 'index.html';
         
         /* reinit main dir os if we on 
          * Win32 should be backslashes */
