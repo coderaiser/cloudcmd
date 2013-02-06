@@ -1,4 +1,4 @@
-
+#!/usr/bin/env node
 /* c9.io kill active node process */
 
 (function(){
