@@ -136,8 +136,6 @@ while menu is showing now.
 * Added ability to remove /fs/no-js when go up to root
 directory.
 
-* Removed reflows maded by js.
-
 
 2012.12.12, Version 0.1.8
 
