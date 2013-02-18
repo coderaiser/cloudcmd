@@ -2,17 +2,17 @@
 <html>
     <head></head>
     <body>
-        <script src=/lib/util.js>
-        
-        var Util;
-        (function(Util){
+        <script>
+        (function(){
             "use strict";
             
-            if(window.opener){
-                var cloudcmd = window.opener.CloudCommander;
+            var lOpener = window.opener;
+            if(lOpener){
+                var cloudcmd = lOpener.CloudCommander;
                 
                 cloudcmd.getModules(function(pModules){
-                    var lStorage    = Util.findObjByNameInArr(pModules, 'storage'),
+                    var Util        = lOpener.Util,
+                        lStorage    = Util.findObjByNameInArr(pModules, 'storage'),
                         lGitHub     = Util.findObjByNameInArr(lStorage, 'GitHub'),
                         GitHub_ID   = lGitHub && lGitHub.key;
                     
@@ -21,7 +21,7 @@
                         GitHub_ID + '&&scope=repo,user,gist';
                 });
             }
-        })(Util);
+        })();
         </script>
     </body>
 </html>
