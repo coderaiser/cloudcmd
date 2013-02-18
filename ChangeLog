@@ -133,6 +133,9 @@ time was changed.
 * Added ability show context menu on right click
 while menu is showing now.
 
+* Added ability to remove /fs/no-js when go up to root
+directory.
+
 
 2012.12.12, Version 0.1.8
 
