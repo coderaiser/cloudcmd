@@ -192,8 +192,8 @@
                 lRet = main.sendFile( pParams );
             }
             else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
-                if(main.getQuery() === '')
-                    p.request.url += '?html';
+                //if( !main.getQuery(p.request) )
+                    //p.request.url += '?html';
                 
                 var lName = Minify.allowed.html ? 
                     Minify.getName(INDEX) : INDEX;
