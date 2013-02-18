@@ -180,24 +180,33 @@
      * routing of server queries
      */
     function route(pParams){
-        var lRet,
-            lName = pParams.name;
+        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
         
-        if( Util.strCmp(lName, ['/auth', '/auth/github']) ){
-            Util.log('* Routing' +
-                '-> ' + lName);
-            pParams.name = main.HTMLDIR + lName + '.html';
-            lRet = main.sendFile(pParams);
-        }
-        else if( Util.isContainStr(lName, FS) || 
-                 Util.strCmp( lName, ['/', 'json']) ){
-                        
-                        lRet = main.commander.sendContent({
-                            request     : pParams[REQUEST],
-                            response    : pParams[RESPONSE],
-                            processing  : indexProcessing,
-                            index       : Minify.allowed.html ? Minify.getName(INDEX) : INDEX
-                        });
+        if(lRet){
+            var p = pParams;
+            
+            if( Util.strCmp(p.name, ['/auth', '/auth/github']) ){
+                Util.log('* Routing' +
+                    '-> ' + p.name);
+                pParams.name = main.HTMLDIR + p.name + '.html';
+                lRet = main.sendFile( pParams );
+            }
+            else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
+                if(main.getQuery() === '')
+                    p.request.url += '?html';
+                
+                var lName = Minify.allowed.html ? 
+                    Minify.getName(INDEX) : INDEX;
+                
+                lRet = main.commander.sendContent({
+                    request     : p.request,
+                    response    : p.response,
+                    processing  : indexProcessing,
+                    index       : lName
+                });
+            }
+            else
+                lRet = false;
         }
         
         return lRet;
