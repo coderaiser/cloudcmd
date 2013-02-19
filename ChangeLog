@@ -138,6 +138,9 @@ directory.
 
 * Removed reflows maded by js.
 
+* Fixed bug with setting current file
+after refresh and refreshing dir content.
+
 
 2012.12.12, Version 0.1.8
 
