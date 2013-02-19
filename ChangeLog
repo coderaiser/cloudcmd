@@ -151,6 +151,8 @@ would not be supported anymore.
 * Added ability not to change url if we have no rights
 for reading.
 
+* Fixed bug with pressing enter on file.
+
 
 2012.12.12, Version 0.1.8
 
