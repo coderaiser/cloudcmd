@@ -148,6 +148,9 @@ would not be supported anymore.
 
 * Added ability to add ?json flag only if we work with dir.
 
+* Added ability not to change url if we have no rights
+for reading.
+
 
 2012.12.12, Version 0.1.8
 
