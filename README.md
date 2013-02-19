@@ -56,7 +56,7 @@ Editor's hot keys
 
 Documentation
 ---------------
-JS Doc documentation could be found in [http://jsdoc.info/coderaiser/cloudcmd/](//jsdoc.info/coderaiser/cloudcmd/)
+JS Doc documentation could be found in [http://jsdoc.info/coderaiser/cloudcmd/](http://jsdoc.info/coderaiser/cloudcmd/)
 
 Installing
 ---------------
