@@ -141,6 +141,11 @@ directory.
 * Fixed bug with setting current file
 after refresh and refreshing dir content.
 
+* Removed part of url thet says that js is disabled, from
+now json data of file structure would be getted from 
+click event with ?json flag. "no-js" part of url
+would not be supported anymore.
+
 
 2012.12.12, Version 0.1.8
 
