@@ -155,6 +155,8 @@ for reading.
 
 * Updated jquery jQuery-contextMenu to v1.6.5.
 
+* Fixed bug with getting showed menu in firefox.
+
 
 2012.12.12, Version 0.1.8
 
