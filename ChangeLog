@@ -160,6 +160,9 @@ for reading.
 * Commented e.stopImmediatePropagation() of function layerClick
 in contextmenu file, for correct work of context menu.
 
+* Added temporary redirection for old no-js urls.
+
+
 2012.12.12, Version 0.1.8
 
 * Added ability to shutdown Cloud Commander
