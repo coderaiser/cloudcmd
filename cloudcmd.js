@@ -192,6 +192,9 @@
                 lRet = main.sendFile( pParams );
             }
             else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
+                if( Util.isContainStr(p.name, 'no-js/') )
+                    return noJSTMPRedirection(pParams);
+                
                 var lQuery  = main.getQuery(p.request),
                     lName   = Minify.allowed.html ?
                                 Minify.getName(INDEX) : INDEX;
@@ -206,11 +209,22 @@
                     index       : lName
                 });
             }
+            /* termporary redirect for old urls */
             else
                 lRet = false;
         }
         
         return lRet;
+    }
+    
+    function noJSTMPRedirection(pParams){
+        var MOVED_PERMANENTLY = 301,
+            lPath = Util.removeStr(pParams.name, 'no-js/');
+        
+        pParams.response.writeHead(MOVED_PERMANENTLY, {'Location': lPath});
+        pParams.response.end();
+        
+        return true;
     }
     
     
