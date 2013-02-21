@@ -157,10 +157,10 @@ for reading.
 
 * Fixed bug with getting showed menu in firefox.
 
-* Commented e.stopImmediatePropagation() of function layerClick
-in contextmenu file, for correct work of context menu.
-
 * Added temporary redirection for old no-js urls.
+
+* Changed the way clickProcessing of menu works,
+for now it's much simplier.
 
 
 2012.12.12, Version 0.1.8
