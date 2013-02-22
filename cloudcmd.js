@@ -8,6 +8,7 @@
         SRVDIR      = main.SRVDIR,
         CLIENTDIR   = LIBDIR + 'client',
         HTMLDIR     = main.HTMLDIR,
+        JSONDIR     = main.JSONDIR,
         
         path        = main.path,
         fs          = main.fs,
@@ -18,7 +19,7 @@
         
         server      = main.librequire('server'),
         Minify      = main.minify,
-        Config      = main.config,
+        Config,
         
         REQUEST     = 'request',
         RESPONSE    = 'response',
@@ -29,16 +30,8 @@
          * Win32 should be backslashes */
         DIR         = main.DIR;
         
-    readConfig();
-    server.start(Config, {
-        appcache    : appCacheProcessing,
-        minimize    : minimize,
-        rest        : rest,
-        route       : route
-    });
+    readConfig(init);
     
-    if(update)
-        update.get();
     
     /**
      * additional processing of index file
@@ -136,7 +129,16 @@
         return Util.exec(main.rest, pConnectionData);
     }
     
-    function readConfig(){
+    function init(){
+        server.start(Config, {
+            appcache    : appCacheProcessing,
+            minimize    : minimize,
+            rest        : rest,
+            route       : route
+        });
+    
+        if(update)
+            update.get();
         
         /* Determining server.js directory
          * and chang current process directory
@@ -174,6 +176,36 @@
                 writeLogsToFile();
             }
         }
+    }
+    
+    function readConfig(pCallBack){
+        var lConfPath   = JSONDIR + 'config.json',
+            lReaded;
+        
+        fs.readFile(lConfPath, function(pError, pData){
+            if(!pError){
+                Util.log('config: readed');
+                var lStr = pData.toString();
+                Util.log( lStr );
+                main.config = Config = JSON.parse(lStr);
+            }
+            else
+                Util.log(pError);
+            
+            Util.exec(pCallBack);
+        });
+        
+        if(!Config)
+            fs.watch(lConfPath, function(){
+                if(!lReaded){
+                    lReaded = true;
+                    readConfig();
+                   }
+                
+                setTimeout(function() {
+                    lReaded = false;
+                }, 10000);
+            });
     }
     
     /**
