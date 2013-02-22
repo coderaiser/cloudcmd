@@ -179,8 +179,7 @@
     }
     
     function readConfig(pCallBack){
-        var lConfPath   = JSONDIR + 'config.json',
-            lReaded;
+        var lConfPath   = JSONDIR + 'config.json';
         
         fs.readFile(lConfPath, function(pError, pData){
             if(!pError){
@@ -197,14 +196,10 @@
         
         if(!Config)
             fs.watch(lConfPath, function(){
-                if(!lReaded){
-                    lReaded = true;
-                    readConfig();
-                   }
-                
+                /* every catch up - calling twice */
                 setTimeout(function() {
-                    lReaded = false;
-                }, 10000);
+                    readConfig();
+                }, 1000);
             });
     }
     
