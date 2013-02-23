@@ -195,7 +195,7 @@
                 main.config = Config = JSON.parse(lStr);
                 
                 Util.tryCatchLog(function(){
-                    Minify.setAllowed(main.config.minify);
+                    Minify.setAllowed(main.config.minification);
                 });
             }
             else
