@@ -169,6 +169,8 @@ for now it's much simplier.
 * Added ability to change configs without restart
 (works for js minification only).
 
+* Added ability to disable browser cache from config.json.
+
 
 2012.12.12, Version 0.1.8
 

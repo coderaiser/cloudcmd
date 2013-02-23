@@ -197,8 +197,12 @@
                 if(!Config.minification)
                     main.config = Config = lReadedConf;
                 
+                console.log(Config);
+                
                 Util.tryCatchLog(function(){
-                    Config.minification.js = lReadedConf.minification.js;
+                    Config.minification.js  = lReadedConf.minification.js;
+                    Config.cache            = lReadedConf.cache;
+                    
                     Minify.setAllowed(Config.minification);
                 });
             }
