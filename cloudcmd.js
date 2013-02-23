@@ -24,6 +24,7 @@
         REQUEST     = 'request',
         RESPONSE    = 'response',
         INDEX       = HTMLDIR + 'index.html',
+        CONFIG_PATH = JSONDIR + 'config.json',
         FS          = CloudFunc.FS;
         
         /* reinit main dir os if we on 
@@ -130,7 +131,14 @@
     }
     
     function init(){
-        server.start(Config, {
+        fs.watch(CONFIG_PATH, function(){
+            /* every catch up - calling twice */
+            setTimeout(function() {
+                readConfig();
+            }, 1000);
+        });
+            
+        server.start({
             appcache    : appCacheProcessing,
             minimize    : minimize,
             rest        : rest,
@@ -179,28 +187,22 @@
     }
     
     function readConfig(pCallBack){
-        var lConfPath   = JSONDIR + 'config.json';
-        
-        fs.readFile(lConfPath, function(pError, pData){
+        fs.readFile(CONFIG_PATH, function(pError, pData){
             if(!pError){
                 Util.log('config: readed');
+                
                 var lStr = pData.toString();
-                Util.log( lStr );
                 main.config = Config = JSON.parse(lStr);
+                
+                Util.tryCatchLog(function(){
+                    Minify.setAllowed(main.config.minify);
+                });
             }
             else
                 Util.log(pError);
             
             Util.exec(pCallBack);
         });
-        
-        if(!Config)
-            fs.watch(lConfPath, function(){
-                /* every catch up - calling twice */
-                setTimeout(function() {
-                    readConfig();
-                }, 1000);
-            });
     }
     
     /**
