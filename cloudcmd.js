@@ -23,7 +23,7 @@
         
         REQUEST     = 'request',
         RESPONSE    = 'response',
-        INDEX       = HTMLDIR + 'index.html',
+        INDEX       = main.INDEX,
         CONFIG_PATH = JSONDIR + 'config.json',
         FS          = CloudFunc.FS;
         
@@ -196,8 +196,6 @@
                 
                 if(!Config.minification)
                     main.config = Config = lReadedConf;
-                
-                console.log(Config);
                 
                 Util.tryCatchLog(function(){
                     Config.minification.js  = lReadedConf.minification.js;
