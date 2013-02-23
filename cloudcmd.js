@@ -19,7 +19,7 @@
         
         server      = main.librequire('server'),
         Minify      = main.minify,
-        Config,
+        Config      = main.config,
         
         REQUEST     = 'request',
         RESPONSE    = 'response',
@@ -160,7 +160,7 @@
             process.chdir(lServerDir);
         }
         Util.log('server dir:  ' + lServerDir);
-        Util.log('reading configuretion file config.json...');
+        Util.log('reading configuration file config.json...');
         
         if(Config){
             Util.log('config.json readed');
@@ -191,11 +191,15 @@
             if(!pError){
                 Util.log('config: readed');
                 
-                var lStr = pData.toString();
-                main.config = Config = JSON.parse(lStr);
+                var lStr            = pData.toString(),
+                    lReadedConf     = Util.parseJSON(lStr);
+                
+                if(!Config.minification)
+                    main.config = Config = lReadedConf;
                 
                 Util.tryCatchLog(function(){
-                    Minify.setAllowed(main.config.minification);
+                    Config.minification.js = lReadedConf.minification.js;
+                    Minify.setAllowed(Config.minification);
                 });
             }
             else
