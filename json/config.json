@@ -10,7 +10,7 @@
     "logs"                  : false,
     "show_keys_panel"       : true,
     "server"                : true,
-    "socket"                : true,
+    "socket"                : false,
     "port"                  : 80,
     "ip"                    : null,
     "rest"                  : true
