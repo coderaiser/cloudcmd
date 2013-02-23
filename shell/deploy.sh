@@ -1,3 +1,4 @@
+cd ..
 echo 'appfog'
 af update
 echo 'http://cloudcmd.aws.af.cm/'
