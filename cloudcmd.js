@@ -215,7 +215,7 @@
      * routing of server queries
      */
     function route(pParams){
-        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
+        var lRet = checkParams(pParams);
         
         if(lRet){
             var p = pParams;
@@ -229,7 +229,7 @@
             else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
                 if( Util.isContainStr(p.name, 'no-js/') )
                     return noJSTMPRedirection(pParams);
-                    
+                
                 lRet = sendCommanderContent(p);
             }
             /* termporary redirect for old urls */
@@ -241,7 +241,7 @@
     }
     
     function sendCommanderContent(pParams){
-        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
+        var lRet = checkParams(pParams);
         if(lRet){
             var p  = pParams;
             p.name = Util.removeStr(p.name, CloudFunc.FS) || main.SLASH;
@@ -262,7 +262,7 @@
     }
     
     function processCommanderContent(pParams){
-        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
+        var lRet = checkParams(pParams);
         if(lRet){
             var p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON){
@@ -297,6 +297,12 @@
                     main.sendError(pParams, pError);
             });
         }
+    }
+    
+    function checkParams(pParams){
+        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
+        
+        return lRet;
     }
     
     function noJSTMPRedirection(pParams){
