@@ -282,7 +282,7 @@
                                 
                                 p.data = indexProcessing({
                                     additional  : lList,
-                                    data        : pData,
+                                    data        : pData.toString(),
                                 });
                                 
                                 main.sendResponse(p);
