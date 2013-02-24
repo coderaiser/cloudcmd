@@ -171,6 +171,9 @@ for now it's much simplier.
 
 * Added ability to disable browser cache from config.json.
 
+* Totaly refactored and leave in commander.js just
+generation of json of directory listing.
+
 
 2012.12.12, Version 0.1.8
 
