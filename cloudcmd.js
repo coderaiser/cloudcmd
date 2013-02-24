@@ -23,7 +23,7 @@
         
         REQUEST     = 'request',
         RESPONSE    = 'response',
-        INDEX       = main.INDEX,
+        INDEX       = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
         FS          = CloudFunc.FS;
         
