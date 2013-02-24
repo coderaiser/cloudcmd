@@ -229,20 +229,8 @@
             else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
                 if( Util.isContainStr(p.name, 'no-js/') )
                     return noJSTMPRedirection(pParams);
-                
-                var lQuery  = main.getQuery(p.request),
-                    lName   = Minify.allowed.html ?
-                                Minify.getName(INDEX) : INDEX;
-                
-                if( !lQuery )
-                    p.request.url += '?html';
-                
-                lRet = main.commander.sendContent({
-                    request     : p.request,
-                    response    : p.response,
-                    processing  : indexProcessing,
-                    index       : lName
-                });
+                    
+                lRet = sendCommanderContent(p);
             }
             /* termporary redirect for old urls */
             else
@@ -250,6 +238,76 @@
         }
         
         return lRet;
+    }
+    
+    function sendCommanderContent(pParams){
+        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
+        if(lRet){
+            var p  = pParams;
+            p.name = Util.removeStr(p.name, CloudFunc.FS) || main.SLASH;
+            
+            fs.stat(p.name, function(pError, pStat){
+                if(!pError)
+                    if( pStat.isDirectory() )
+                        processCommanderContent(pParams);
+                    else
+                        main.sendFile(p);
+                else
+                    sendError(pParams, pError);
+            
+           });
+        }
+    }
+    
+    function processCommanderContent(pParams){
+        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
+        if(lRet){
+            var p = pParams;
+            main.commander.getDirContent(p.name, function(pError, pJSON){
+                if(!pError){
+                    var lQuery = main.getQuery(p.request);
+                    if(lQuery === 'json'){
+                        p.data  = Util.stringifyJSON(pJSON);
+                        p.name +='.json';
+                        main.sendResponse(p);
+                    }
+                    else if(!lQuery){ /* get back html*/
+                        var lName   = Minify.allowed.html ?
+                            Minify.getName(INDEX) : INDEX;
+                        fs.readFile(lName, function(pError, pData){
+                            if(!pError){
+                                var lPanel  = CloudFunc.buildFromJSON(pJSON),
+                                    lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
+                                              '<ul id=right class=panel>' + lPanel + '</ul>';
+                                
+                                p.data = indexProcessing({
+                                    additional  : lList,
+                                    data        : pData,
+                                });
+                                
+                                main.sendResponse(p);
+                            }
+                            else
+                                sendError(pParams, pError);
+                        });
+                    }
+                }
+                else
+                    sendError(pParams, pError);
+            });
+        }
+    }
+    
+    function sendError(pParams, pError){
+        var lRet = Util.checkObjTrue(pParams,
+            ['name', 'data', 'request', 'response']);
+        
+        if(lRet){
+            var p       = pParams;
+            p.status    = main.FILE_NOT_FOUND;
+            p.data      = pError;
+            main.sendResponse(p);
+        }
     }
     
     function noJSTMPRedirection(pParams){
