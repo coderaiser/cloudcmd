@@ -253,10 +253,12 @@
                     else
                         main.sendFile(p);
                 else
-                    sendError(pParams, pError);
+                    main.sendError(pParams, pError);
             
            });
         }
+        
+        return lRet;
     }
     
     function processCommanderContent(pParams){
@@ -287,25 +289,13 @@
                                 main.sendResponse(p);
                             }
                             else
-                                sendError(pParams, pError);
+                                main.sendError(pParams, pError);
                         });
                     }
                 }
                 else
-                    sendError(pParams, pError);
+                    main.sendError(pParams, pError);
             });
-        }
-    }
-    
-    function sendError(pParams, pError){
-        var lRet = Util.checkObjTrue(pParams,
-            ['name', 'data', 'request', 'response']);
-        
-        if(lRet){
-            var p       = pParams;
-            p.status    = main.FILE_NOT_FOUND;
-            p.data      = pError;
-            main.sendResponse(p);
         }
     }
     
