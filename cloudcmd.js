@@ -272,9 +272,8 @@
                         main.sendResponse(p);
                     }
                     else if(!lQuery){ /* get back html*/
-                        var lName   = Minify.allowed.html ?
-                            Minify.getName(INDEX) : INDEX;
-                        fs.readFile(lName, function(pError, pData){
+                        p.name   = Minify.allowed.html ? Minify.getName(INDEX) : INDEX;
+                        fs.readFile(p.name, function(pError, pData){
                             if(!pError){
                                 var lPanel  = CloudFunc.buildFromJSON(pJSON),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
