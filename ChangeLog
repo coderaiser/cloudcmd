@@ -176,6 +176,8 @@ generation of json of directory listing.
 
 * Added ability to upload files.
 
+* Added ability save files on Ctrl+S in CodeMirror.
+
 
 2012.12.12, Version 0.1.8
 
