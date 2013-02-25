@@ -21,8 +21,6 @@
         Minify      = main.minify,
         Config      = main.config,
         
-        REQUEST     = 'request',
-        RESPONSE    = 'response',
         INDEX       = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
         FS          = CloudFunc.FS;
@@ -215,7 +213,7 @@
      * routing of server queries
      */
     function route(pParams){
-        var lRet = checkParams(pParams);
+        var lRet = main.checkParams(pParams);
         
         if(lRet){
             var p = pParams;
@@ -241,7 +239,7 @@
     }
     
     function sendCommanderContent(pParams){
-        var lRet = checkParams(pParams);
+        var lRet = main.checkParams(pParams);
         if(lRet){
             var p  = pParams;
             p.name = Util.removeStr(p.name, CloudFunc.FS) || main.SLASH;
@@ -262,7 +260,7 @@
     }
     
     function processCommanderContent(pParams){
-        var lRet = checkParams(pParams);
+        var lRet = main.checkParams(pParams);
         if(lRet){
             var p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON){
@@ -281,12 +279,10 @@
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
                                               '<ul id=right class=panel>' + lPanel + '</ul>';
                                 
-                                p.data = indexProcessing({
+                                main.sendResponse(p, indexProcessing({
                                     additional  : lList,
                                     data        : pData.toString(),
-                                });
-                                
-                                main.sendResponse(p);
+                                }));
                             }
                             else
                                 main.sendError(pParams, pError);
@@ -297,12 +293,6 @@
                     main.sendError(pParams, pError);
             });
         }
-    }
-    
-    function checkParams(pParams){
-        var lRet = Util.checkObjTrue( pParams, ['name', REQUEST, RESPONSE] );
-        
-        return lRet;
     }
     
     function noJSTMPRedirection(pParams){
