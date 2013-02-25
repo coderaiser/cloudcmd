@@ -174,6 +174,8 @@ for now it's much simplier.
 * Totaly refactored and leave in commander.js just
 generation of json of directory listing.
 
+* Added ability to upload files.
+
 
 2012.12.12, Version 0.1.8
 
