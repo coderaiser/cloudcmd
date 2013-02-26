@@ -46,17 +46,16 @@
          * минифицированый
          */
         if(Minify.allowed.css){
-            var lPath = '/' + Minify.MinFolder.replace(DIR, '');
+            var lPath = '/' + Util.removeStr(Minify.MinFolder, DIR);
             lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
             lData = Util.removeStr(lData, lReplace_s)
                     .replace('/css/style.css', lPath + 'all.min.css');
         }
         
-        /* меняем title */
-        lReplace_s = '<div id=fm class=no-js>';
-        lData = lData.replace(lReplace_s, lReplace_s + lAdditional)
-                .replace('<title>Cloud Commander</title>', 
-                    '<title>' + CloudFunc.getTitle() + '</title>');
+        lData = Util.render(lData, {
+            title   : CloudFunc.getTitle(),
+            fm      : lAdditional
+        });
         
         if(!Config.appcache)
             lData = Util.removeStr(lData, ' manifest="/cloudcmd.appcache"');
