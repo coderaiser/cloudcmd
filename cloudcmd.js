@@ -134,13 +134,6 @@
                 readConfig();
             }, 1000);
         });
-            
-        server.start({
-            appcache    : appCacheProcessing,
-            minimize    : minimize,
-            rest        : rest,
-            route       : route
-        });
         
         if(update)
             update.get();
@@ -171,8 +164,7 @@
                 lArg = lArg[lArg.length - 1];
             if ( lArg === 'test' ||  lArg === 'test\r') {
                 Util.log(process.argv);
-                Config.server  = 
-                Config.logs    = false;
+                Config.server  = false;
             }
             
             if (Config.logs) {
@@ -181,6 +173,13 @@
                 writeLogsToFile();
             }
         }
+        
+        server.start({
+            appcache    : appCacheProcessing,
+            minimize    : minimize,
+            rest        : rest,
+            route       : route
+        });
     }
     
     function readConfig(pCallBack){
