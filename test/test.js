@@ -46,7 +46,7 @@
             '<span class=owner>owner</span>'                                +
             '<span class=mode>mode</span>'                                  +
         '</li>'                                                             +
-        '<li draggable class'                                               +
+        '<li draggable class>'                                              +
             '<span class="mini-icon directory"></span>'                     +
             '<span class=name>'                                             +
                 '<a href="/fs/etc" draggable=true>..</a>'                   +
