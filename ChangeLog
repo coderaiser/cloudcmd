@@ -1,4 +1,4 @@
-2012.*.*, Version 0.1.9
+2012.03.01, Version 0.1.9
 
 * Changed the way of getting github application id
 (now it's just from config, rest api removed).
@@ -185,6 +185,9 @@ generation of json of directory listing.
 * Added to html templating.
 
 * Added ability to rename files.
+
+* Added RESTfull object to DOM for easy work with
+CloudCmd REST API.
 
 
 2012.12.12, Version 0.1.8
