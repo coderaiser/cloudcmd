@@ -41,7 +41,12 @@ There is a short list:
 - **Alt  + q**          - disable key bindings
 - **Alt  + s**          - get all key bindings back
 - **up, down, enter**   - filesystem navigation
-- **Alt + g**           - authorization
+- **Tab**               - move thru panels
+- **Page Up**           - up on one page
+- **Page Down**         - down on one page
+- **Home**              - to begin of list
+- **End**               - to end of list
+- **Alt + g**           - authorization in GitHub
 
 Viewer's hot keys
 ---------------
@@ -52,6 +57,7 @@ Editor's hot keys
 ---------------
 - **F3**                - open CodeMirror editor in read only mode
 - **F4**                - open CodeMirror editor
+- **Ctrl + s**          - save file
 - **Esc**               - close CodeMirror editor
 
 Documentation
@@ -76,15 +82,15 @@ All main configuration could be done thrue config.json.
 ```js
 {
     "api_url"   :"/api/v1",
-    "appcache"  : false,            /* html5 feature appcache                   */    
-    "cache" : {"allowed" : true},   /* cashing of js and css files in memory    */    
+    "appcache"  : false,            /* html5 feature appcache                   */
+    "cache"     : true,             /* cashing on a client                      */
     "minification" : {              /* minification of js,css,html and img      */
         "js"    : false,            /* minify module neaded                     */
         "css"   : false,            /* npm i minify                             */
         "html"  : true,
         "img"   : false
     },
-    "show_keys_panel"       : true, /* show classic panel with buttons of keys  */
+    "show_keys_panel" : true,       /* show classic panel with buttons of keys  */
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
     "socket"    : true              /* enable web sockets                       */
