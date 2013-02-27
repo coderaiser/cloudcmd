@@ -1,5 +1,5 @@
 (function(){
-    "use strict";
+    'use strict';
     
     var DIR             = process.cwd() + '/',
         main            = require(DIR + 'lib/server/main'),
@@ -31,10 +31,10 @@
                 'id=clear-cache title="clear cache (Ctrl+D)">'              +
             '</span>'                                                       +
             '<span class="path-icon refresh-icon" title="refresh (Ctrl+R)">'+
-                '<a href="/fs/no-js/etc/X11"></a></span>'                   +
+                '<a href="/fs/etc/X11"></a></span>'                         +
             '<span>'                                                        +
-                '<a class=links href="/fs/no-js" title="/">/</a>'           +
-                '<a class=links href="/fs/no-js/etc" title="/etc">'         +
+                '<a class=links href="/fs" title="/">/</a>'                 +
+                '<a class=links href="/fs/etc" title="/etc">'               +
                     'etc'                                                   +
                 '</a>/X11/'                                                 +
             '</span>'                                                       +
@@ -46,10 +46,10 @@
             '<span class=owner>owner</span>'                                +
             '<span class=mode>mode</span>'                                  +
         '</li>'                                                             +
-        '<li draggable class=current-file>'                                 +
+        '<li draggable class'                                               +
             '<span class="mini-icon directory"></span>'                     +
             '<span class=name>'                                             +
-                '<a href="/fs/no-js/etc" draggable=true>..</a>'             +
+                '<a href="/fs/etc" draggable=true>..</a>'                   +
             '</span>'                                                       +
             '<span class=size>&lt;dir&gt;</span>'                           +
             '<span class=owner>.</span>'                                    +
@@ -58,7 +58,7 @@
         '<li draggable class>'                                              +
             '<span draggable class="mini-icon directory"></span>'           +
             '<span draggable class=name>'                                   +
-                '<a href="/fs/no-js/etc/X11/applnk" '                       +
+                '<a href="/fs/etc/X11/applnk" '                             +
                     'title="applnk" draggable=true>applnk</a>'              +
             '</span>'                                                       +
             '<span draggable class=size>&lt;dir&gt;</span>'                 +
@@ -68,7 +68,7 @@
         '<li draggable class>'                                              +
             '<span draggable class="mini-icon text-file"></span>'           +
             '<span draggable class=name>'                                   +
-                '<a href="/fs/no-js/etc/X11/prefdm" '                       +
+                '<a href="/fs/etc/X11/prefdm" '                             +
                     'target="_blank" title="prefdm" draggable=true>'        +
                         'prefdm'                                            +
                 '</a>'                                                      +
