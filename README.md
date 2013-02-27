@@ -46,6 +46,8 @@ There is a short list:
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
 - **End**               - to end of list
+- **Shift + F10**       - show context menu
+- **F2**                - rename current file
 - **Alt + g**           - authorization in GitHub
 
 Viewer's hot keys
@@ -59,6 +61,17 @@ Editor's hot keys
 - **F4**                - open CodeMirror editor
 - **Ctrl + s**          - save file
 - **Esc**               - close CodeMirror editor
+
+Menu
+---------------
+Right mouse click button show context menu with items:
+- View
+- Edit
+- Rename
+- Delete
+- Upload to (Dropbox, Github, GDrive)
+- Downloud
+
 
 Documentation
 ---------------
