@@ -189,6 +189,8 @@ generation of json of directory listing.
 * Added RESTfull object to DOM for easy work with
 CloudCmd REST API.
 
+* Added help screen (on F1 after viewer loads).
+
 
 2012.12.12, Version 0.1.8
 
