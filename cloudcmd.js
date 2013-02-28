@@ -265,7 +265,7 @@
             main.commander.getDirContent(p.name, function(pError, pJSON){
                 if(!pError){
                     var lQuery = main.getQuery(p.request);
-                    if(lQuery === 'json'){
+                    if( Util.isContainStr(lQuery, 'json') ){
                         p.data  = Util.stringifyJSON(pJSON);
                         p.name +='.json';
                         main.sendResponse(p);
