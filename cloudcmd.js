@@ -128,13 +128,6 @@
     }
     
     function init(){
-        fs.watch(CONFIG_PATH, function(){
-            /* every catch up - calling twice */
-            setTimeout(function() {
-                readConfig();
-            }, 1000);
-        });
-        
         if(update)
             update.get();
         
@@ -173,6 +166,14 @@
                 writeLogsToFile();
             }
         }
+        
+        if(Config.server)
+            fs.watch(CONFIG_PATH, function(){
+                /* every catch up - calling twice */
+                setTimeout(function() {
+                    readConfig();
+                }, 1000);
+            });
         
         server.start({
             appcache    : appCacheProcessing,
