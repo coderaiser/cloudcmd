@@ -124,7 +124,7 @@ time was changed.
 
 * Commander functions moved out to commander.js from server.js
 
-* Fixed bug with old browsers suport.
+* Fixed bug with old browsers support.
 
 * Fixed bug with scrolling in opera and firefox.
 
