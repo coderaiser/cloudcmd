@@ -70,7 +70,7 @@ Right mouse click button show context menu with items:
 - Rename
 - Delete
 - Upload to (Dropbox, Github, GDrive)
-- Downloud
+- Download
 
 
 Documentation
