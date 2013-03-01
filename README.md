@@ -1,14 +1,14 @@
 Cloud Commander [![Build Status](https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master)](http://travis-ci.org/coderaiser/cloudcmd)
-=============== 
+===============
 **Cloud Commander** - user friendly cloud file manager.
 DEMO:
 [cloudfoundry] (http://cloudcmd.cloudfoundry.com "cloudfoundry"),
 [appfog] (http://cloudcmd.aws.af.cm "appfog").
 
-Google PageSpeed Score : [100](https://developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.cloudfoundry.com_2F&mobile=false "score") (out of 100)
+Google PageSpeed Score : [100](http://developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.cloudfoundry.com_2F&mobile=false "score") (out of 100)
 (or 96 if js or css minification disabled in config.json).
 
-![Cloud Commander](https://raw.github.com/coderaiser/cloudcmd/dev/img/logo/cloudcmd.png)
+![Cloud Commander](img/logo/cloudcmd.png "Cloud Commander")
 
 Benefits
 ---------------
@@ -41,18 +41,37 @@ There is a short list:
 - **Alt  + q**          - disable key bindings
 - **Alt  + s**          - get all key bindings back
 - **up, down, enter**   - filesystem navigation
-- **Alt + g**           - authorization
+- **Tab**               - move thru panels
+- **Page Up**           - up on one page
+- **Page Down**         - down on one page
+- **Home**              - to begin of list
+- **End**               - to end of list
+- **Shift + F10**       - show context menu
+- **F2**                - rename current file
+- **Alt + g**           - authorization in GitHub
 
 Viewer's hot keys
 ---------------
-- **Shift + F3**      - open viewer window
+- **Shift + F3**        - open viewer window
 - **Esc**               - close viewer window
 
 Editor's hot keys
 ---------------
 - **F3**                - open CodeMirror editor in read only mode
 - **F4**                - open CodeMirror editor
+- **Ctrl + s**          - save file
 - **Esc**               - close CodeMirror editor
+
+Menu
+---------------
+Right mouse click button show context menu with items:
+- View
+- Edit
+- Rename
+- Delete
+- Upload to (Dropbox, Github, GDrive)
+- Downloud
+
 
 Documentation
 ---------------
@@ -76,19 +95,15 @@ All main configuration could be done thrue config.json.
 ```js
 {
     "api_url"   :"/api/v1",
-    "appcache"  : false,            /* html5 feature appcache                   */    
-    "cache" : {"allowed" : true},   /* cashing of js and css files in memory    */    
+    "appcache"  : false,            /* html5 feature appcache                   */
+    "cache"     : true,             /* cashing on a client                      */
     "minification" : {              /* minification of js,css,html and img      */
         "js"    : false,            /* minify module neaded                     */
         "css"   : false,            /* npm i minify                             */
         "html"  : true,
         "img"   : false
     },
-    "github_key"            : "891c251b925e4e967fa9",
-    "github_secret"         : "afe9bed1e810c5dc44c4c2a953fc6efb1e5b0545",
-    "dropbox_key"           : "0nd3ssnp5fp7tqs",
-    "dropbox_chooser_key"   : "o7d6llji052vijk"
-    "show_keys_panel"       : true, /* show classic panel with buttons of keys  */
+    "show_keys_panel" : true,       /* show classic panel with buttons of keys  */
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
     "socket"    : true              /* enable web sockets                       */
@@ -169,11 +184,15 @@ For extend main functionality Cloud Commander use next modules:
 - [FancyBox]                [FancyBoxURL]
 - [jQuery-contextMenu]      [jQuery-contextMenuURL]
 - [jquery.terminal]         [jquery.terminalURL]
+- [github]                  [githubURL]
+- [dropbox-js]              [dropbox-jsURL]
 
-[CodeMirrorURL]:            https://github.com/marijnh/CodeMirror "CodeMirror"
-[FancyBoxURL]:              https://github.com/fancyapps/fancyBox "FancyBox"
-[jQuery-contextMenuURL]:    https://github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
-[jquery.terminalURL]:       https://github.com/jcubic/jquery.terminal "jquery.terminal"
+[CodeMirrorURL]:            //github.com/marijnh/CodeMirror "CodeMirror"
+[FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
+[jQuery-contextMenuURL]:    //github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
+[jquery.terminalURL]:       //github.com/jcubic/jquery.terminal "jquery.terminal"
+[githubURL]:                //github.com/michael/github
+[dropbox-jsURL]:            //github.com/dropbox/dropbox-js
 
 Contributing
 ---------------

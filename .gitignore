@@ -10,12 +10,6 @@ min
 #node modules folder
 node_modules
 
-#moving out minify from cloudcmd submodules
-#minify module
-#!node_modules/
-#node_modules/*
-#!node_modules/minify
-
 #temporary files folder
 tmp
 
@@ -28,5 +22,5 @@ apache-status
 #log file
 log.txt
 
-#hashes file
-hashes.json
+#cloudfoundry file
+manifest.yml

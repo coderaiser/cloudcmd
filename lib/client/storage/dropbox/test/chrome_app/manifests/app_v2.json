@@ -1,0 +1,22 @@
+{
+  "name": "dropbox.js Test Suite",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Test suite for Chrome applications and extensions.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ],
+  "app": {
+    "background": {
+      "scripts": [
+        "test/js/chrome_app_background.js"
+      ]
+    }
+  }
+}

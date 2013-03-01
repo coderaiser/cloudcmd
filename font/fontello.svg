@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>
+Created by FontForge 20100429 at Thu Jan 24 11:50:44 2013
+ By root
+Copyright (C) 2012 by original authors @ fontello.com
+</metadata>
+<defs>
+<font id="cloudcmd" horiz-adv-x="364" >
+  <font-face 
+    font-family="cloudcmd"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1000"
+    panose-1="2 0 6 3 0 0 0 0 0 0"
+    ascent="850"
+    descent="-150"
+    bbox="14.6522 -100 1015.35 800"
+    underline-thickness="50"
+    underline-position="-100"
+    unicode-range="U+2757-1F4C4"
+  />
+<missing-glyph 
+d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
+    <glyph glyph-name=".notdef" 
+d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
+    <glyph glyph-name=".null" horiz-adv-x="0" 
+ />
+    <glyph glyph-name="nonmarkingreturn" horiz-adv-x="333" 
+ />
+    <glyph glyph-name="uni2757" unicode="&#x2757;" horiz-adv-x="887" 
+d="M15 350q0 123 60 219.5t153 151.5q101 58 216 58q123 0 219.5 -60t151.5 -154q57 -99 57 -215q0 -123 -60 -219.5t-153 -151.5q-101 -58 -215 -58q-123 0 -220 60t-152 154q-57 99 -57 215zM382 636q-7 0 -13 -4.5t-6 -10.5l10 -346q0 -6 6 -10t13 -4h103q17 0 19 14
+l10 346q0 6 -6 10.5t-13 4.5h-123zM372 83q0 -7 6 -13t13 -6h107q7 0 12 5.5t5 13.5v106q0 18 -17 18h-107q-8 0 -13.5 -5.5t-5.5 -12.5v-106z" />
+    <glyph glyph-name="u1F4C1" unicode="&#x1f4c1;" horiz-adv-x="1031" 
+d="M969 500q29 0 38.5 -10.5t7.5 -37.5l-42 -452q-2 -27 -13.5 -38.5t-40.5 -11.5h-806q-51 0 -56 50l-42 452q-2 27 7.5 37.5t38.5 10.5h908zM935 610l10 -40h-846l14 132q4 19 20 33.5t36 14.5h164q52 0 86 -34l30 -30q31 -36 86 -36h340q20 0 38 -12t22 -28z" />
+    <glyph glyph-name="u1F4C4" unicode="&#x1f4c4;" horiz-adv-x="730" 
+d="M227 398h280v-90h-280v90zM615 800q42 0 71 -29t29 -71v-700q0 -41 -29.5 -70.5t-70.5 -29.5h-500q-40 0 -70 30t-30 70v700q0 41 29.5 70.5t70.5 29.5h500zM615 700h-500v-700h500v700zM505 504h-280v88h280v-88zM505 200v-88h-280v88h280z" />
+  </font>
+</defs></svg>

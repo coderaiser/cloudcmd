@@ -1,8 +1,0 @@
-[
-    "editor/_codemirror",
-    "menu",
-    "viewer",
-    "storage/_github",
-    "storage/_dropbox",
-    "terminal"
-]
