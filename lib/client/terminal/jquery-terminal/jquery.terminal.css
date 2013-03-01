@@ -11,6 +11,7 @@
     position: fixed;
 }
 .terminal {
+    padding: 10px;
     position: relative;
     overflow: hidden;
 }
@@ -19,30 +20,36 @@
     margin: 0;
     height: 1.3em;
 }
-.terminal .terminal-output div {
+.terminal .terminal-output div div, .terminal .prompt {
     display: block;
+    /* line-height: 9px; */
+    height: 14px;
 }
 .terminal {
     font-family: FreeMono, monospace;
     color: #aaa;
     background-color: #000;
-    line-height: 16px;
+    /* font-size: 12px; */
+    /* line-height: 14px; */
+       line-height: 16px;
     /* removing breaking the lines */
-    white-space: nowrap;
-    overflow:hidden;
+}
+.terminal .terminal-output div span {
+    display: inline-block;
 }
 .terminal .cmd span {
-    float: left;
+    display: inline-block;
 }
 .terminal .cmd span.inverted {
     background-color: #aaa;
     color: #000;
 }
-.terminal div::-moz-selection, .terminal span::-moz-selection {
+.terminal .terminal-output div div::-moz-selection, .terminal .terminal-output div span::-moz-selection {
     background-color: #aaa;
     color: #000;
 }
-.terminal div::selection, .terminal span::selection {
+.terminal .terminal-output div div::selection, .terminal .terminal-output div span::selection,
+.terminal .cmd > span::selection, .terminal .prompt span::selection {
     background-color: #aaa;
     color: #000;
 }

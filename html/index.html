@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html manifest="/cloudcmd.appcache">
+    <head>
+        <meta charset="utf-8">
+        <!-- mobile first design -->
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <title>{title}</title>
+        
+        <link rel=stylesheet href="/css/reset.css">
+        <link rel=stylesheet href="/css/style.css">
+    </head>
+    <body>
+    
+    <div id=fm class=no-js>{fm}</div>
+    <div id=keyspanel>
+        <button id=f1 class=cmd-button>F1 - help</button>
+        <button id=f2 class=cmd-button>F2 - rename</button>
+        <button id=f3 class=cmd-button>F3 - view</button>
+        <button id=f4 class=cmd-button>F4 - edit</button>
+        <button id=f5 class=cmd-button>F5 - copy</button>
+        <button id=f6 class=cmd-button>F6 - move</button>
+        <button id=f7 class=cmd-button>F7 - make dir</button>
+        <button id=f8 class=cmd-button>F8 - delete</button>
+    </div>
+    <script src=/lib/util.js></script>
+    <script src=/lib/client/dom.js></script>
+    <!--[if lt IE]>
+    <script src=//ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js></script>
+    <script src=//code.jquery.com/jquery-1.9.0.min.js id=jquery-1_9_0_min_js ></script>
+    <script src=/lib/client/ie.js id=ie_js ></script>
+    <script src=//getfirebug.com/firebug-lite-debug.js></script>
+    <![endif]-->
+    <script src=/lib/client.js></script>
+    </body>
+</html>

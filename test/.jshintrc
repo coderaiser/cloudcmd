@@ -6,7 +6,7 @@
     "es5" : true,
     "forin" : true,
     "globalstrict" : true,
-    "jquery" : true,
+    "jquery" : false,
     "newcap" : true,
     "noarg" : true,
     "node" : true,

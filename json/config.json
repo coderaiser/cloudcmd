@@ -1,0 +1,18 @@
+{
+    "api_url"               : "/api/v1",
+    "appcache"              : false,
+    "minification" : {
+        "js"    : true,
+        "css"   : true,
+        "html"  : true,
+        "img"   : true
+    },
+    "cache"                 : true,
+    "logs"                  : false,
+    "show_keys_panel"       : true,
+    "server"                : true,
+    "socket"                : true,
+    "port"                  : 80,
+    "ip"                    : null,
+    "rest"                  : true
+}

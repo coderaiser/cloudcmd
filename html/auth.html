@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+    <head></head>
+    <body>
+        <script>
+            (function(){
+                'use strict';
+                
+                if(window.opener){
+                    var lGitHub = window.opener.CloudCommander.GitHub;
+                    lGitHub.autorize(lGitHub.callback, window.location.search);
+                    window.close();
+                }
+            })();
+        
+        </script>
+    </body>
+</html>

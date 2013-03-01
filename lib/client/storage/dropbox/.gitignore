@@ -1,0 +1,37 @@
+# Vim.
+*.swp
+
+# OSX
+.DS_Store
+
+# Npm modules.
+node_modules
+
+# Vendored javascript modules.
+test/vendor
+
+# Build output.
+lib/dropbox.js
+lib/dropbox.min.js
+test/chrome_app/lib
+test/chrome_app/manifest.json
+test/chrome_app/node_modules
+test/chrome_app/test
+test/chrome_extension/*.js
+test/chrome_profile
+test/js
+tmp/*.js
+
+# Documentation output.
+doc/*.html
+doc/assets
+doc/classes
+doc/files
+
+# Node packaging output.
+dropbox-*.tgz
+
+# Potentially sensitive credentials and keys used during testing.
+test/.token
+test/ssl
+
