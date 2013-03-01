@@ -1,0 +1,48 @@
+{
+  "name": "dropbox",
+  "version": "0.8.1",
+  "description": "Client library for the Dropbox API",
+  "keywords": ["dropbox", "filesystem", "storage"],
+  "homepage": "http://github.com/dropbox/dropbox-js",
+  "author": "Victor Costan <victor@costan.us> (http://www.costan.us)",
+  "license": "MIT",
+  "contributors": [
+    "Aakanksha Sarda <aaki@mit.edu>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dropbox/dropbox-js.git"
+  },
+  "engines": {
+    "node": ">= 0.6"
+  },
+  "dependencies": {
+    "open": ">= 0.0.2",
+    "xmlhttprequest": ">= 1.5.0"
+  },
+  "devDependencies": {
+    "async": ">= 0.1.22",
+    "chai": ">= 1.4.0",
+    "codo": ">= 1.5.4",
+    "coffee-script": ">= 1.4.0",
+    "express": ">= 3.0.6",
+    "glob": ">= 3.1.14",
+    "mocha": ">= 1.7.4",
+    "open": "https://github.com/pwnall/node-open/tarball/master",
+    "remove": ">= 0.1.5",
+    "sinon": ">= 1.5.2",
+    "sinon-chai": ">= 2.3.0",
+    "uglify-js": ">= 2.2.3"
+  },
+  "main": "lib/dropbox.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib",
+    "src": "src",
+    "test": "test"
+  },
+  "scripts": {
+    "prepublish": "node_modules/coffee-script/bin/cake build",
+    "test": "node_modules/coffee-script/bin/cake test"
+  }
+}

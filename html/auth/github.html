@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        <script>
+        (function(){
+            "use strict";
+            
+            var lOpener = window.opener;
+            if(lOpener){
+                var cloudcmd = lOpener.CloudCommander;
+                
+                cloudcmd.getModules(function(pModules){
+                    var Util        = lOpener.Util,
+                        lStorage    = Util.findObjByNameInArr(pModules, 'storage'),
+                        lGitHub     = Util.findObjByNameInArr(lStorage, 'GitHub'),
+                        GitHub_ID   = lGitHub && lGitHub.key;
+                    
+                    window.location = 
+                        'https://github.com/login/oauth/authorize?client_id=' + 
+                        GitHub_ID + '&&scope=repo,user,gist';
+                });
+            }
+        })();
+        </script>
+    </body>
+</html>
