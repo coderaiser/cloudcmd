@@ -11,7 +11,7 @@
     "logs"                  : false,
     "show_keys_panel"       : true,
     "server"                : true,
-    "socket"                : false,
+    "socket"                : true,
     "port"                  : 80,
     "ip"                    : null,
     "rest"                  : true
