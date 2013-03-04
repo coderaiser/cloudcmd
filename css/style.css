@@ -23,7 +23,7 @@
   font-family: 'Droid Sans Mono';
   font-style: normal;
   font-weight: normal;
-  src: local('Droid Sans Mono'), local('DroidSansMono'), url('http://themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
+  src: local('Droid Sans Mono'), local('DroidSansMono'), url('//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
 }
 
 body{
