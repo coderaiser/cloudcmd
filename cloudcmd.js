@@ -175,12 +175,20 @@
                 }, 1000);
             });
         
-        server.start({
+        var lParams = {
             appcache    : appCacheProcessing,
             minimize    : minimize,
             rest        : rest,
             route       : route
-        });
+        };
+        
+        if(Config.ssl)
+            lParams.ssl = {
+                key     : fs.readFileSync(__dirname + '/privatekey.pem'),
+                cert    : fs.readFileSync(__dirname + '/certificate.pem')
+            };
+        
+        server.start(lParams);
     }
     
     function readConfig(pCallBack){
