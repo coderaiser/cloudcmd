@@ -14,5 +14,6 @@
     "socket"                : true,
     "port"                  : 80,
     "ip"                    : null,
+    "ssl"                   : false,
     "rest"                  : true
 }

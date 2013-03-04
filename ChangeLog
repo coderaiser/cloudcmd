@@ -8,6 +8,12 @@
 
 * Added filepicker.
 
+* Added ability to load files to cloud 
+and get them out to file system.
+
+* Added SSL suport.
+
+
 2012.03.01, Version 0.1.9
 
 * Changed the way of getting github application id
