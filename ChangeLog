@@ -17,6 +17,8 @@ and get them out to file system.
 
 * Fixed bug with multiple click events on f3 and f4 buttons.
 
+* Added ability to move files.
+
 
 2012.03.01, Version 0.1.9
 
