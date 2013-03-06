@@ -9,7 +9,7 @@
     "url": "git://github.com/coderaiser/cloudcmd.git"
   },
   "scripts": {
-    "test": "sh test/test.sh",
+    "test": "sh ./test/test.sh",
     "start": "cloudcmd.js"
   },
   "node": "0.6.17",
