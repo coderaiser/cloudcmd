@@ -1,4 +1,6 @@
-Cloud Commander [![Build Status](https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master)](http://travis-ci.org/coderaiser/cloudcmd)
+Cloud Commander
+[![Build Status](https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master)](http://travis-ci.org/coderaiser/cloudcmd)
+[![Dependency Status](https://gemnasium.com/coderaiser/cloudcmd.png)](https://gemnasium.com/coderaiser/cloudcmd)
 ===============
 **Cloud Commander** - user friendly cloud file manager.
 DEMO:
