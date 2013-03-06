@@ -1,9 +1,9 @@
-Cloud Commander [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
-[BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
+Cloud Commander [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+===============
+[BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=dev
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
-===============
 **Cloud Commander** - user friendly cloud file manager.
 DEMO:
 [cloudfoundry] (http://cloudcmd.cloudfoundry.com "cloudfoundry"),
