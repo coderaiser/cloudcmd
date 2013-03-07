@@ -184,8 +184,9 @@
         
         if(Config.ssl)
             lParams.ssl = {
-                key     : fs.readFileSync(DIR + 'ssl/privatekey.pem'),
-                cert    : fs.readFileSync(DIR + 'ssl/certificate.pem')
+                ca      : fs.readFileSync(DIR + 'ssl/sub.class1.server.ca.pem'),
+                key     : fs.readFileSync(DIR + 'ssl/ssl.key'),
+                cert    : fs.readFileSync(DIR + 'ssl/ssl.crt')
             };
         
         server.start(lParams);
