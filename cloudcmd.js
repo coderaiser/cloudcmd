@@ -304,6 +304,7 @@
     }
     
     function noJSTMPRedirection(pParams){
+        Util.log(lPath);
         var MOVED_PERMANENTLY = 301,
             lPath = Util.removeStr(pParams.name, 'no-js/');
         
