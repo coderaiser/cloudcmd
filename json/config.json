@@ -15,6 +15,6 @@
     "port"                  : 80,
     "sslPort"               : 443,
     "ip"                    : null,
-    "ssl"                   : false,
+    "ssl"                   : true,
     "rest"                  : true
 }

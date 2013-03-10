@@ -233,8 +233,10 @@
                 lRet = main.sendFile( pParams );
             }
             else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
-                if( Util.isContainStr(p.name, 'no-js/') )
-                    return noJSTMPRedirection(pParams);
+                if( Util.isContainStr(p.name, 'no-js/') ){
+                    var lURL = Util.removeStr(pParams.name, 'no-js/');
+                    return main.redirect(pParams, lURL);
+                }
                 
                 lRet = sendCommanderContent(p);
             }
@@ -301,16 +303,6 @@
                     main.sendError(pParams, pError);
             });
         }
-    }
-    
-    function noJSTMPRedirection(pParams){
-        var MOVED_PERMANENTLY = 301,
-            lPath = Util.removeStr(pParams.name, 'no-js/');
-        
-        pParams.response.writeHead(MOVED_PERMANENTLY, {'Location': lPath});
-        pParams.response.end();
-        
-        return true;
     }
     
     
