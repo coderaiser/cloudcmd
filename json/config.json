@@ -13,6 +13,7 @@
     "server"                : true,
     "socket"                : true,
     "port"                  : 80,
+    "sslPort"               : 443,
     "ip"                    : null,
     "ssl"                   : false,
     "rest"                  : true
