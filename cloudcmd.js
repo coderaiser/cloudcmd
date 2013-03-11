@@ -165,31 +165,33 @@
                     'from now all logs will be writed to log.txt');
                 writeLogsToFile();
             }
-        }
         
-        if(Config.server)
-            fs.watch(CONFIG_PATH, function(){
-                /* every catch up - calling twice */
-                setTimeout(function() {
-                    readConfig();
-                }, 1000);
-            });
+            if(Config.server)
+                fs.watch(CONFIG_PATH, function(){
+                    /* every catch up - calling twice */
+                    setTimeout(function() {
+                        readConfig();
+                    }, 1000);
+                });
         
-        var lParams = {
-            appcache    : appCacheProcessing,
-            minimize    : minimize,
-            rest        : rest,
-            route       : route
-        };
-        
-        if(Config.ssl)
-            lParams.ssl = {
-                ca      : fs.readFileSync(DIR + 'ssl/sub.class1.server.ca.pem'),
-                key     : fs.readFileSync(DIR + 'ssl/ssl.key'),
-                cert    : fs.readFileSync(DIR + 'ssl/ssl.crt')
+            var lParams = {
+                appcache    : appCacheProcessing,
+                minimize    : minimize,
+                rest        : rest,
+                route       : route
             };
-        
-        server.start(lParams);
+            
+            if(Config.ssl)
+                lParams.ssl = {
+                    ca      : fs.readFileSync(DIR + 'ssl/sub.class1.server.ca.pem'),
+                    key     : fs.readFileSync(DIR + 'ssl/ssl.key'),
+                    cert    : fs.readFileSync(DIR + 'ssl/ssl.crt')
+                };
+            
+            server.start(lParams);
+        }
+        else
+            Util.log('read error: config.json');
     }
     
     function readConfig(pCallBack){
