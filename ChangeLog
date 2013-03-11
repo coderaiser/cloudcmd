@@ -23,6 +23,9 @@ and get them out to file system.
 
 * Fixed bug of multiple call of sockets.
 
+* If create directory command executed - loading spinner
+would be on top.
+
 
 2012.03.01, Version 0.1.9
 
