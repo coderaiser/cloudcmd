@@ -26,7 +26,9 @@ and get them out to file system.
 * If create directory command executed - loading spinner
 would be on top.
 
-* Refactored getShortSize
+* Refactored getShortSize.
+
+* Added update of size on file changing in editor.
 
 
 2012.03.01, Version 0.1.9
