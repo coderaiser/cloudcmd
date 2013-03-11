@@ -234,8 +234,9 @@
                 pParams.name = main.HTMLDIR + p.name + '.html';
                 lRet = main.sendFile( pParams );
             }
-            else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
-                if( Util.isContainStr(p.name, 'no-js/') ){
+            else if( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') ){
+                
+                if( Util.isContainStrAtBegin(p.name, FS + 'no-js/') ){
                     var lURL = Util.removeStr(pParams.name, 'no-js/');
                     return main.redirect(pParams, lURL);
                 }
@@ -254,7 +255,7 @@
         var lRet = main.checkParams(pParams);
         if(lRet){
             var p  = pParams;
-            p.name = Util.removeStr(p.name, CloudFunc.FS) || main.SLASH;
+            p.name = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
             
             fs.stat(p.name, function(pError, pStat){
                 if(!pError)
