@@ -30,6 +30,8 @@ would be on top.
 
 * Added update of size on file changing in editor.
 
+* Removed cache control of fs resour
+
 
 2012.03.01, Version 0.1.9
 

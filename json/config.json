@@ -7,7 +7,7 @@
         "html"  : true,
         "img"   : true
     },
-    "cache"                 : false,
+    "cache"                 : true,
     "logs"                  : false,
     "show_keys_panel"       : true,
     "server"                : true,
