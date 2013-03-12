@@ -76,6 +76,34 @@ Right mouse click button show context menu with items:
 - Upload to (Dropbox, Github, GDrive)
 - Download
 
+PORTS
+---------------
+Standard practices say no non-root process gets to talk to
+the Internet on a port less than 1024. Anyway I suggest you
+to start Cloud Commander as non-root. How it could be soulved?
+There is a couple easy and fast ways. One of them is port forwarding by iptables.
+```
+iptables -t nat -L # look rules before
+@:/tmp/cloudcmd (dev) $ iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+@:/tmp/cloudcmd (dev) $ iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+iptables -t nat -L # look reles after
+```
+You should see somethins like this (8000 and 4430 should be in config as port and sslPort)
+```
+target     prot opt source               destination
+REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
+REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
+
+```
+If you would want to get things back just clear rules (1 and 2 it's rules numbers,
+in your list they could differ).
+
+```
+iptables -t nat -D PREROUTING 1
+iptables -t nat -D PREROUTING 2
+```
+
+
 
 Documentation
 ---------------
@@ -111,8 +139,10 @@ All main configuration could be done thrue config.json.
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
     "socket"    : true              /* enable web sockets                       */
-    "port"      : 80,               /* Cloud Commander port                     */
+    "port"      : 80,               /* http port                                */
+    "sslPort"   : 443,              /* https port                               */
     "ip"        : "127.0.0.1",      /* Cloud Commander IP                       */
+    "ssl"       : true              /* should use https?                        */
     "rest"      : true              /* enable rest interface                    */
 }
 ```
