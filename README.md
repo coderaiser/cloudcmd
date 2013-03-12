@@ -76,35 +76,6 @@ Right mouse click button show context menu with items:
 - Upload to (Dropbox, Github, GDrive)
 - Download
 
-Server ports
----------------
-Standard practices say no non-root process gets to talk to
-the Internet on a port less than 1024. Anyway I suggest you
-to start Cloud Commander as non-root. How it could be soulved?
-There is a couple easy and fast ways. One of them is port forwarding by iptables.
-
-```sh
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look rules before
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look reles after
-```
-You should see somethins like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
-
-    target     prot opt source               destination
-    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
-    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
-
-If you would want to get things back just clear rules ( **1** and **2** it's rules numbers,
-in your list they could differ).
-
-```sh
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 1
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 2
-```
-
-
-
 Documentation
 ---------------
 JS Doc documentation could be found in [http://jsdoc.info/coderaiser/cloudcmd/](http://jsdoc.info/coderaiser/cloudcmd/)
@@ -146,6 +117,34 @@ All main configuration could be done thrue config.json.
     "rest"      : true              /* enable rest interface                    */
 }
 ```
+
+Server ports
+---------------
+Standard practices say no non-root process gets to talk to
+the Internet on a port less than 1024. Anyway I suggest you
+to start Cloud Commander as non-root. How it could be soulved?
+There is a couple easy and fast ways. One of them is port forwarding by iptables.
+
+```sh
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look rules before
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look reles after
+```
+You should see somethins like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
+
+    target     prot opt source               destination
+    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
+    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
+
+If you would want to get things back just clear rules ( **1** and **2** it's rules numbers,
+in your list they could differ).
+
+```sh
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 1
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 2
+```
+
 Authorization
 ---------------
 Thru openID Cloud Commander could authorize clients on GitHub.
