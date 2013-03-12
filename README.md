@@ -118,7 +118,7 @@ All main configuration could be done thrue config.json.
 }
 ```
 
-Server ports
+Server
 ---------------
 Standard practices say no non-root process gets to talk to
 the Internet on a port less than 1024. Anyway I suggest you
@@ -144,6 +144,11 @@ in your list they could differ).
 @:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 1
 @:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 2
 ```
+
+To run Cloud Commander as daemon in linux you could set **log** to true in config and
+do something like this:
+    
+    nohup node cloudcmd
 
 Authorization
 ---------------
