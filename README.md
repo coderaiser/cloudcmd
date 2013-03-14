@@ -1,4 +1,4 @@
-Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL][![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
 [BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=dev
