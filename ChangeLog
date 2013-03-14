@@ -30,7 +30,9 @@ would be on top.
 
 * Added update of size on file changing in editor.
 
-* Removed cache control of fs resour
+* Removed cache control of fs resour.
+
+* Added ability to copy files.
 
 
 2012.03.01, Version 0.1.9
