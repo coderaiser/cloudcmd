@@ -37,6 +37,8 @@ would be on top.
 * Fixed bug with saving json to localStorage, it's always
 writed root directory.
 
+* Moved out set current file from cloudfunc to client.js
+
 
 2012.03.01, Version 0.1.9
 
