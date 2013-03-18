@@ -28,7 +28,7 @@
         /* reinit main dir os if we on 
          * Win32 should be backslashes */
         DIR         = main.DIR;
-        
+    
     readConfig(init);
     
     
@@ -181,14 +181,27 @@
                 route       : route
             };
             
-            if(Config.ssl)
-                lParams.ssl = {
-                    ca      : fs.readFileSync(DIR + 'ssl/sub.class1.server.ca.pem'),
-                    key     : fs.readFileSync(DIR + 'ssl/ssl.key'),
-                    cert    : fs.readFileSync(DIR + 'ssl/ssl.crt')
-                };
-            
-            server.start(lParams);
+            if(Config.ssl){
+                var CA          = DIR + 'ssl/sub.class1.server.ca.pem',
+                    KEY         = DIR + 'ssl/ssl.key',
+                    CERT        = DIR + 'ssl/ssl.crt';
+                
+                readFiles([ CA, KEY, CERT ], function(pErrors, pFiles){
+                    if(pErrors)
+                        Util.log(pErrors);
+                    else{
+                        lParams.ssl = {
+                            ca      : pFiles[CA],
+                            key     : pFiles[KEY],
+                            cert    : pFiles[CERT]
+                        };
+                        
+                        server.start(lParams);
+                    }
+                });
+            }
+            else
+                server.start(lParams);
         }
         else
             Util.log('read error: config.json');
@@ -306,6 +319,46 @@
                     main.sendError(pParams, pError);
             });
         }
+    }
+    
+    function readFiles(pFiles, pCallBack){
+        var lDone = [],
+            lFiles,
+            lErrors,
+            lReadedFiles = {},
+            lDoneFunc = function (pParams){
+                var lRet =  Util.checkObj(pParams, ['error', 'data', 'params']);
+                
+                if(lRet){
+                    lDone.pop();
+                    var p       = pParams,
+                        lName   = p.params;
+                    
+                    if(p.error){
+                        if(!lErrors) lErrors = {};
+                        
+                        lErrors[lName] = p.error;
+                    }
+                    else
+                        lReadedFiles[lName] = p.data;
+                    
+                    if( !lDone.length )
+                        Util.exec(pCallBack, lErrors, lReadedFiles);
+                }
+            };
+        
+        if( Util.isArray(pFiles) )
+            lFiles = pFiles;
+        else
+            lFiles = [pFiles];
+        
+        for(var i = 0, n = lFiles.length; i < n; i++){
+            var lName = lFiles.pop();
+                lDone.push(lName);
+            
+            fs.readFile(lName, Util.call( lDoneFunc, lName ));
+        }
+        
     }
     
     
