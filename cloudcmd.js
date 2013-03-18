@@ -28,7 +28,9 @@
         CERT        = DIR + 'ssl/ssl.crt',
         TEMPLATEPATH= HTMLDIR + 'file.html',
         
-        Template,
+        PATHTEMPLATE_PATH = HTMLDIR + 'path.html',
+        
+        Template, PathTemplate,
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on 
@@ -187,7 +189,7 @@
                 route       : route
             };
             
-            var lFiles = [TEMPLATEPATH];
+            var lFiles = [TEMPLATEPATH, PATHTEMPLATE_PATH];
             
             if(Config.ssl)
                 lFiles.push(CA, KEY, CERT);
@@ -196,7 +198,9 @@
                 if(pErrors)
                     Util.log(pErrors);
                 else{
-                    Template = pFiles[TEMPLATEPATH].toString();
+                    Template        = pFiles[TEMPLATEPATH].toString();
+                    PathTemplate    =  pFiles[PATHTEMPLATE_PATH].toString();
+                    
                     if(Config.ssl)
                         lParams.ssl = {
                             ca      : pFiles[CA],
@@ -306,7 +310,7 @@
                         p.name   = Minify.allowed.html ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData){
                             if(!pError){
-                                var lPanel  = CloudFunc.buildFromJSON(pJSON, Template),
+                                var lPanel  = CloudFunc.buildFromJSON(pJSON, Template, PathTemplate),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
                                               '<ul id=right class=panel>' + lPanel + '</ul>';
                                 
