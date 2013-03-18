@@ -23,9 +23,11 @@
         
         INDEX       = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
+        
         CA          = DIR + 'ssl/sub.class1.server.ca.pem',
         KEY         = DIR + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
+        
         TEMPLATEPATH= HTMLDIR + 'file.html',
         
         PATHTEMPLATE_PATH = HTMLDIR + 'path.html',
