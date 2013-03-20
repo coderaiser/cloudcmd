@@ -43,6 +43,9 @@ writed root directory.
 
 * Changed sync reading of certs to async.
 
+* Updated dropbox to v0.9.2 and moved to packege.json
+from storage folder.
+
 
 2012.03.01, Version 0.1.9
 
