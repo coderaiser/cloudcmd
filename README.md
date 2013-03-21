@@ -9,7 +9,7 @@ Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 **Cloud Commander** - user friendly cloud file manager.
 DEMO:
 [cloudfoundry] (https://cloudcmd.cloudfoundry.com "cloudfoundry"),
-[appfog] (https://cloudcmd.aws.af.cm "appfog").
+[appfog] (https://cloudcmd.aws.af.cm "appfog"),
 [jitsu] (https://cloudcmd.jit.su "jitsu").
 
 Google PageSpeed Score : [100](http://developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.cloudfoundry.com_2F&mobile=false "score") (out of 100)
