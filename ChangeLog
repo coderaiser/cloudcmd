@@ -46,6 +46,8 @@ writed root directory.
 * Updated dropbox to v0.9.2 and moved to packege.json
 from storage folder.
 
+* Updated socket.io to v0.9.14.
+
 
 2012.03.01, Version 0.1.9
 
