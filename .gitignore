@@ -4,20 +4,11 @@
 .c9revisions
 *tmp
 
-#minified scripts
-min
-
 #node modules folder
 node_modules
 
 #temporary files folder
 tmp
-
-#file used by c9
-apache-status
-
-#file used by nodester
-.nodester.appconfig
 
 #log file
 log.txt
