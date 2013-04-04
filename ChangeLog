@@ -48,6 +48,8 @@ from storage folder.
 
 * Updated socket.io to v0.9.14.
 
+* Fixed Util.time and Util.timeEnd
+
 
 2012.03.01, Version 0.1.9
 
