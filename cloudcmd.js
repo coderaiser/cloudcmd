@@ -28,9 +28,9 @@
         KEY         = DIR + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
-        TEMPLATEPATH= HTMLDIR + 'file.html',
+        FILE_TMPL   = HTMLDIR + 'file.html',
         
-        PATHTEMPLATE_PATH = HTMLDIR + 'path.html',
+        PATH_TMPL   = HTMLDIR + 'path.html',
         
         Template, PathTemplate,
         
@@ -191,7 +191,7 @@
                 route       : route
             };
             
-            var lFiles = [TEMPLATEPATH, PATHTEMPLATE_PATH];
+            var lFiles = [FILE_TMPL, PATH_TMPL];
             
             if(Config.ssl)
                 lFiles.push(CA, KEY, CERT);
@@ -200,8 +200,8 @@
                 if(pErrors)
                     Util.log(pErrors);
                 else{
-                    Template        = pFiles[TEMPLATEPATH].toString();
-                    PathTemplate    =  pFiles[PATHTEMPLATE_PATH].toString();
+                    Template        = pFiles[FILE_TMPL].toString();
+                    PathTemplate    = pFiles[PATH_TMPL].toString();
                     
                     if(Config.ssl)
                         lParams.ssl = {
