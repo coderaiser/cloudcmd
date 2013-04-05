@@ -32,11 +32,10 @@
         
         PATH_TMPL   = HTMLDIR + 'path.html',
         
-        Template, PathTemplate,
+        FileTemplate, PathTemplate,
         
         FS          = CloudFunc.FS;
-        /* reinit main dir os if we on 
-         * Win32 should be backslashes */
+        /* reinit main dir os if we on Win32 should be backslashes */
         DIR         = main.DIR;
     
     readConfig(init);
@@ -46,8 +45,7 @@
      * additional processing of index file
      */
     function indexProcessing(pData){
-        var lReplace_s,
-            lData       = pData.data,
+        var lData       = pData.data,
             lAdditional = pData.additional;
         
         /*
@@ -56,9 +54,9 @@
          * минифицированый
          */
         if(Minify.allowed.css){
-            var lPath = '/' + Util.removeStr(Minify.MinFolder, DIR);
-            lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
-            lData = Util.removeStr(lData, lReplace_s)
+            var lPath       = '/' + Util.removeStr(Minify.MinFolder, DIR),
+                lReplace    = '<link rel=stylesheet href="/css/reset.css">';
+            lData = Util.removeStr(lData, lReplace)
                     .replace('/css/style.css', lPath + 'all.min.css');
         }
         
@@ -131,7 +129,7 @@
     
     /**
      * rest interface
-     * @pConnectionData {request, responce}
+     * @pParams pConnectionData {request, responce}
      */
     function rest(pConnectionData){
         return Util.exec(main.rest, pConnectionData);
@@ -200,7 +198,7 @@
                 if(pErrors)
                     Util.log(pErrors);
                 else{
-                    Template        = pFiles[FILE_TMPL].toString();
+                    FileTemplate        = pFiles[FILE_TMPL].toString();
                     PathTemplate    = pFiles[PATH_TMPL].toString();
                     
                     if(Config.ssl)
@@ -312,7 +310,7 @@
                         p.name   = Minify.allowed.html ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData){
                             if(!pError){
-                                var lPanel  = CloudFunc.buildFromJSON(pJSON, Template, PathTemplate),
+                                var lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
                                               '<ul id=right class=panel>' + lPanel + '</ul>';
                                 
