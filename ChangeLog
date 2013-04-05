@@ -50,6 +50,8 @@ from storage folder.
 
 * Fixed Util.time and Util.timeEnd
 
+* Added ability to select files with Insert key.
+
 
 2012.03.01, Version 0.1.9
 
