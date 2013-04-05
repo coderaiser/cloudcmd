@@ -52,6 +52,8 @@ from storage folder.
 
 * Added ability to select files with Insert key.
 
+* Added ability to delete selected files from DOM.
+
 
 2012.03.01, Version 0.1.9
 
