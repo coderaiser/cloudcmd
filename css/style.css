@@ -156,26 +156,22 @@ body{
     margin: 26px 26px 0 26px;
 }
 .fm-header{
-  font-weight: bold;
+    font-weight: bold;
 }
 #path{
-  margin-left:1.5%;
+    margin-left:1.5%;
 }
 .left, #left{
     float:left;
 }
+
 /* фон файла, на котором курсор*/
 .current-file{
     border: 1.5px solid rgba(49, 123, 249, .40);
 }
-.selected-file{
-    color:white;
-    background-color: rgb(49, 123, 249);
-    background-color: rgba(49, 123, 249, .40);
-}
 
-.selected-file .name > a{
-    color:white;
+.selected-file, .selected-file .name > a{
+    color: rgb(254,159,224);
 }
 
 .right, #right{
@@ -189,6 +185,7 @@ body{
 #keyspanel{
   text-align: center;
 }
+
 /* информация о файлах и папках*/
 .name{
     float: left;
