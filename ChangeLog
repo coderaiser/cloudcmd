@@ -54,6 +54,8 @@ from storage folder.
 
 * Added ability to delete selected files from DOM.
 
+* Added ability to recursivly get current folder size.
+
 
 2012.03.01, Version 0.1.9
 
