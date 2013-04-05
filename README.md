@@ -53,8 +53,11 @@ There is a short list:
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
 - **End**               - to end of list
-- **Shift + F10**       - show context menu
+- **Delete**            - remove current file
+- **Shift + Delete**    - remove without prompt
+- **Insert**            - select current file
 - **F2**                - rename current file
+- **Shift + F10**       - show context menu
 - **Alt + g**           - authorization in GitHub
 
 Viewer's hot keys
