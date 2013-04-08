@@ -59,6 +59,10 @@ from storage folder.
 * Added ability to get directory size, when space button
 is pressed and current file is directory.
 
+* Added ability to select all files on Ctrl + A
+
+* Fixed the href generation of renamed file.
+
 
 2012.03.01, Version 0.1.9
 
