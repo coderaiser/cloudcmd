@@ -1,5 +1,8 @@
 #files, the will be ignored by git
 
+#file with changes
+json/changes.json
+
 #c9 files
 .c9revisions
 *tmp
