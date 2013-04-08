@@ -56,6 +56,9 @@ from storage folder.
 
 * Added ability to recursivly get current folder size.
 
+* Added ability to get directory size, when space button
+is pressed and current file is directory.
+
 
 2012.03.01, Version 0.1.9
 
