@@ -67,6 +67,8 @@ is pressed and current file is directory.
 
 * Added function getSelectedNames.
 
+* Added ability to delete file when f8 key pressed.
+
 
 2012.03.01, Version 0.1.9
 
