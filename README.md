@@ -59,7 +59,6 @@ There is a short list:
 - **Insert**            - select current file
 - **F2**                - rename current file
 - **Shift + F10**       - show context menu
-- **Alt + g**           - authorization in GitHub
 
 Viewer's hot keys
 ---------------
