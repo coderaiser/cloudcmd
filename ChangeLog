@@ -65,6 +65,8 @@ is pressed and current file is directory.
 
 * Renamed promptNewFolder -> promptNewDir'.
 
+* Added function getSelectedNames.
+
 
 2012.03.01, Version 0.1.9
 
