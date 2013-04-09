@@ -54,7 +54,7 @@ There is a short list:
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
 - **End**               - to end of list
-- **Delete**            - remove current file
+- **F8, Delete**        - remove current file
 - **Shift + Delete**    - remove without prompt
 - **Insert**            - select current file
 - **F2**                - rename current file
