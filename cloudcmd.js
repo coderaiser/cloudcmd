@@ -299,6 +299,7 @@
     
     function processCommanderContent(pParams){
         var lRet = main.checkParams(pParams);
+        
         if(lRet){
             var p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON){
