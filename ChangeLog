@@ -69,6 +69,8 @@ is pressed and current file is directory.
 
 * Added ability to delete file when f8 key pressed.
 
+* Fixed bug with selectecting root directory with space
+
 
 2012.03.01, Version 0.1.9
 
