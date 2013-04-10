@@ -81,9 +81,13 @@
      * init and process of appcache if it allowed in config
      */
     function appCacheProcessing(){
-        var lFiles = [
-                {'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
-                {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'}];
+        var lFONT_REMOTE    = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
+            lFONT_LOCAL     = './font/DroidSansMono.woff',
+            lJQUERY_REMOTE  = '//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',
+            lJQUERY_LOCAL   = './lib/client/jquery.js',
+            lFiles = [
+                { lFONT_REMOTE   : lFONT_LOCAL   },
+                { lJQUERY_REMOTE : lJQUERY_LOCAL }];
         
         if(Config.minification.css)
             lFiles.push('node_modules/minify/min/all.min.css');
@@ -159,8 +163,7 @@
             /* if command line parameter testing resolved 
              * setting config to testing, so server
              * not created, just init and
-             * all logs writed to screen
-             */        
+             * all logs writed to screen */
             var lArg = process.argv;
                 lArg = lArg[lArg.length - 1];
             if ( lArg === 'test' ||  lArg === 'test\r') {
@@ -187,9 +190,8 @@
                 minimize    : minimize,
                 rest        : rest,
                 route       : route
-            };
-            
-            var lFiles = [FILE_TMPL, PATH_TMPL];
+            },
+                lFiles = [FILE_TMPL, PATH_TMPL];
             
             if(Config.ssl)
                 lFiles.push(CA, KEY, CERT);
@@ -253,8 +255,9 @@
             if( Util.strCmp(p.name, ['/auth', '/auth/github']) ){
                 Util.log('* Routing' +
                     '-> ' + p.name);
-                pParams.name = main.HTMLDIR + p.name + '.html';
-                lRet = main.sendFile( pParams );
+                
+                pParams.name    = main.HTMLDIR + p.name + '.html';
+                lRet            = main.sendFile( pParams );
             }
             else if( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') ){
                 
