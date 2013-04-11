@@ -73,6 +73,8 @@ is pressed and current file is directory.
 
 * Fixed bug with processing selected root directory.
 
+* Added ability to delete files.
+
 
 2012.03.01, Version 0.1.9
 
