@@ -85,9 +85,12 @@
             lFONT_LOCAL     = './font/DroidSansMono.woff',
             lJQUERY_REMOTE  = '//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js',
             lJQUERY_LOCAL   = './lib/client/jquery.js',
-            lFiles = [
-                { lFONT_REMOTE   : lFONT_LOCAL   },
-                { lJQUERY_REMOTE : lJQUERY_LOCAL }];
+            lFiles          = [];
+            
+            lFiles[0]                   = {};
+            lFiles[0][lFONT_REMOTE]     = lFONT_LOCAL;
+            lFiles[1]                   = {};
+            lFiles[1][lJQUERY_REMOTE]   = lJQUERY_LOCAL;
         
         if(Config.minification.css)
             lFiles.push('node_modules/minify/min/all.min.css');
