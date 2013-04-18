@@ -75,6 +75,8 @@ is pressed and current file is directory.
 
 * Added ability to delete files.
 
+* Removed modules cache.js.
+
 
 2012.03.01, Version 0.1.9
 
