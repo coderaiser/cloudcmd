@@ -77,6 +77,8 @@ is pressed and current file is directory.
 
 * Removed modules cache.js.
 
+* Fixed bug with writing new file.
+
 
 2012.03.01, Version 0.1.9
 
