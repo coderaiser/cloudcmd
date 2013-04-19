@@ -83,7 +83,7 @@
     function appCacheProcessing(){
         var lFONT_REMOTE    = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
             lFONT_LOCAL     = './font/DroidSansMono.woff',
-            lJQUERY_REMOTE  = '//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+            lJQUERY_REMOTE  = 'http://code.jquery.com/jquery-2.0.0.min.js',
             lJQUERY_LOCAL   = './lib/client/jquery.js',
             lFiles          = [{}, {}];
             
