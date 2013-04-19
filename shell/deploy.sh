@@ -1,7 +1,6 @@
-cd ..
 echo 'jitsu'
 cp package.json tmp/package.json
-jitsu deploy
+echo 'y'|jitsu deploy
 echo '://cloudcmd.jit.su'
 cp tmp/package.json package.json
 echo 'appfog'
