@@ -51,6 +51,7 @@
 - Переименована функция promptNewFolder -> promptNewDir.
 - Добавлена функция getSelectedNames.
 - Удален модуль Сache.
+- Оптимизирован модуль CloudFunc.
 
 2012.03.01, 0.1.9
 ===============
