@@ -1,4 +1,4 @@
-2012.04.22, Version 0.2.0
+2012.04.22, v0.2.0
 
 * Added alerting about errors.
 
@@ -84,7 +84,7 @@ is pressed and current file is directory.
 * Improved CloudFunc module.
 
 
-2012.03.01, Version 0.1.9
+2012.03.01, v0.1.9
 
 * Changed the way of getting github application id
 (now it's just from config, rest api removed).
@@ -278,7 +278,7 @@ CloudCmd REST API.
 * Added help screen (on F1 after viewer loads).
 
 
-2012.12.12, Version 0.1.8
+2012.12.12, v0.1.8
 
 * Added ability to shutdown Cloud Commander
 thru terminal command: "cloudcmd exit"
@@ -471,7 +471,7 @@ Just propose install git and clone from github repo.
 * Fixed bug with appcache.
 
 
-2012.10.01, Version 0.1.7
+2012.10.01, v0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
 problem with menu showing.
@@ -557,7 +557,7 @@ disabled in browsers.
 * Added fix of 866 charset.
 
 
-2012.08.24, Version 0.1.6
+2012.08.24, v0.1.6
  
 * From now jsload, cssload and anyload suport arrays.
 
@@ -610,7 +610,7 @@ current, file that was previously current must be unset automatically.
 * Added ability to download files.
 
 
-2012.08.06, Version 0.1.5
+2012.08.06, v0.1.5
 
 * Added tab support.
 
@@ -650,7 +650,7 @@ pressed couple times and CodeMirror not loaded fully.
 and passive panels and show/hide any of panels.
 
 
-2012.07.27, Version 0.1.4
+2012.07.27, v0.1.4
 
 * Added local version of Droids font for offline mode
 
@@ -686,7 +686,7 @@ be more faster, DOM, short, simple and logical.
 * Added ability remove not loaded scripts from DOM.
 
 
-2012.07.19, Version 0.1.3
+2012.07.19, v0.1.3
 
 * Fixed bug with nodester (jitsu env.HOME make him go done).
 
@@ -719,7 +719,7 @@ setted b char: "0b".
 * Added supporting of Russian language in directory names.
 
 
-2012.07.14, Version 0.1.2
+2012.07.14, v0.1.2
 
 * Added suport of jitsu.
 
@@ -730,7 +730,7 @@ setted b char: "0b".
 * Changed the minimize function calls accroding to Minify 0.1.2 changes.
 
 
-2012.07.11, Version 0.1.1
+2012.07.11, v0.1.1
 
 * Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
 js-script(or something other) has not loaded.
