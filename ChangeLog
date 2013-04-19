@@ -2,7 +2,7 @@
 
 * Added alerting about errors.
 
-* Removed addListener for DOM.
+* Removed Listeners array for DOM.
 
 * Added ability create folders.
 
