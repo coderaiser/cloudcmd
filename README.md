@@ -1,11 +1,15 @@
 Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
+[![Flattr][FlattrIMGURL]][FlattrURL]
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
 [BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=dev
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
+[FlattrIMGURL]:             http://api.flattr.com/button/flattr-badge-large.png
 [NPMURL]:                   http://badge.fury.io/js/cloudcmd
 [BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
+[FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software
+
 **Cloud Commander** - user friendly cloud file manager.
 DEMO:
 [cloudfoundry] (https://cloudcmd.cloudfoundry.com "cloudfoundry"),
