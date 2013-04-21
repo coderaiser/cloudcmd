@@ -311,7 +311,7 @@
                         p.name +='.json';
                         main.sendResponse(p);
                     }
-                    else if(!lQuery){ /* get back html*/
+                    else{ /* get back html*/
                         p.name   = Minify.allowed.html ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData){
                             if(!pError){
