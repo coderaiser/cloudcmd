@@ -85,6 +85,7 @@ Right mouse click button show context menu with items:
 - Delete
 - Upload to (Dropbox, Github, GDrive)
 - Download
+- New (File, Dir, from cloud)
 
 Installing
 ---------------
