@@ -87,6 +87,8 @@ is pressed and current file is directory.
 
 * Fixed header of api fs GET.
 
+* Fixed bug with setting query other then json on /fs url.
+
 
 2012.03.01, v0.1.9
 
