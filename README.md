@@ -1,11 +1,22 @@
-Cloud Commander [![Build Status](https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master)](http://travis-ci.org/coderaiser/cloudcmd)
+Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
+[![Flattr][FlattrIMGURL]][FlattrURL]
+[NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
+[BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
+[DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
+[FlattrIMGURL]:             http://api.flattr.com/button/flattr-badge-large.png
+[NPMURL]:                   http://badge.fury.io/js/cloudcmd
+[BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
+[DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
+[FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software
+
 **Cloud Commander** - user friendly cloud file manager.
 DEMO:
-[cloudfoundry] (http://cloudcmd.cloudfoundry.com "cloudfoundry"),
-[appfog] (http://cloudcmd.aws.af.cm "appfog").
+[cloudfoundry] (https://cloudcmd.cloudfoundry.com "cloudfoundry"),
+[appfog] (https://cloudcmd.aws.af.cm "appfog"),
+[jitsu] (https://cloudcmd.jit.su "jitsu").
 
-Google PageSpeed Score : [100](http://developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.cloudfoundry.com_2F&mobile=false "score") (out of 100)
+Google PageSpeed Score : [100](//developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.aws.af.cm_2F&mobile=false "score") (out of 100)
 (or 96 if js or css minification disabled in config.json).
 
 ![Cloud Commander](img/logo/cloudcmd.png "Cloud Commander")
@@ -40,15 +51,18 @@ There is a short list:
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
 - **Alt  + s**          - get all key bindings back
+- **Ctrl + A**          - select all files in a panel
 - **up, down, enter**   - filesystem navigation
 - **Tab**               - move thru panels
 - **Page Up**           - up on one page
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
 - **End**               - to end of list
-- **Shift + F10**       - show context menu
+- **F8, Delete**        - remove current file
+- **Shift + Delete**    - remove without prompt
+- **Insert**            - select current file
 - **F2**                - rename current file
-- **Alt + g**           - authorization in GitHub
+- **Shift + F10**       - show context menu
 
 Viewer's hot keys
 ---------------
@@ -70,12 +84,8 @@ Right mouse click button show context menu with items:
 - Rename
 - Delete
 - Upload to (Dropbox, Github, GDrive)
-- Downloud
-
-
-Documentation
----------------
-JS Doc documentation could be found in [http://jsdoc.info/coderaiser/cloudcmd/](http://jsdoc.info/coderaiser/cloudcmd/)
+- Download
+- New (File, Dir, from cloud)
 
 Installing
 ---------------
@@ -107,11 +117,46 @@ All main configuration could be done thrue config.json.
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
     "socket"    : true              /* enable web sockets                       */
-    "port"      : 80,               /* Cloud Commander port                     */
+    "port"      : 80,               /* http port                                */
+    "sslPort"   : 443,              /* https port                               */
     "ip"        : "127.0.0.1",      /* Cloud Commander IP                       */
+    "ssl"       : true              /* should use https?                        */
     "rest"      : true              /* enable rest interface                    */
 }
 ```
+
+Server
+---------------
+Standard practices say no non-root process gets to talk to
+the Internet on a port less than 1024. Anyway I suggest you
+to start Cloud Commander as non-root. How it could be solved?
+There is a couple easy and fast ways. One of them is port forwarding by iptables.
+
+```sh
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look rules before
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look reles after
+```
+You should see somethins like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
+
+    target     prot opt source               destination
+    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
+    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
+
+If you would want to get things back just clear rules ( **1** and **2** it's rules numbers,
+in your list they could differ).
+
+```sh
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 1
+@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 2
+```
+
+To run Cloud Commander as daemon in linux you could set **log** to true in config and
+do something like this:
+    
+    nohup node cloudcmd
+
 Authorization
 ---------------
 Thru openID Cloud Commander could authorize clients on GitHub.
@@ -209,6 +254,20 @@ so to get it you should type a couple more commands:
     rm -rf minify
     git clone git://github.com/coderaiser/minify
     git checkout dev
+
+Version history
+---------------
+- *2012.04.22*, **[v0.2.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.2.0.zip)**
+- *2012.03.01*, **[v0.1.9](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.9.zip)**
+- *2012.12.12*, **[v0.1.8](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.8.zip)**
+- *2012.10.01*, **[v0.1.7](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.7.zip)**
+- *2012.08.24*, **[v0.1.6](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.6.zip)**
+- *2012.08.06*, **[v0.1.5](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.5.zip)**
+- *2012.07.27*, **[v0.1.4](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.4.zip)**
+- *2012.07.19*, **[v0.1.3](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.3.zip)**
+- *2012.07.14*, **[v0.1.2](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.2.zip)**
+- *2012.07.11*, **[v0.1.1](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.1.zip)**
+- *2012.00.00*, **[v0.1.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.0.zip)**
 
 Special Thanks
 ---------------

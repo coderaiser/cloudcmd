@@ -34,6 +34,12 @@
                 "data": {
                     "id"        : "00000000440E696F"
                 }
+            },
+            {
+                "name": "FilePicker",
+                "data": {
+                    "key"        : "AACq5fTfzRY2E_Rw_4kyaz"
+                }
             }
         ]
     }
