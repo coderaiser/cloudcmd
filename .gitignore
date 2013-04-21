@@ -1,23 +1,17 @@
 #files, the will be ignored by git
 
+#file with changes
+json/changes.json
+
 #c9 files
 .c9revisions
 *tmp
-
-#minified scripts
-min
 
 #node modules folder
 node_modules
 
 #temporary files folder
 tmp
-
-#file used by c9
-apache-status
-
-#file used by nodester
-.nodester.appconfig
 
 #log file
 log.txt
