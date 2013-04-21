@@ -1,4 +1,100 @@
-2012.03.01, Version 0.1.9
+2012.04.22, v0.2.0
+
+* Added alerting about errors.
+
+* Removed Listeners array for DOM.
+
+* Added ability create folders.
+
+* Added filepicker.
+
+* Added ability to load files to cloud 
+and get them out to file system.
+
+* Added SSL suport.
+
+* jquery updated to v1.9.1.
+
+* Fixed bug with multiple click events on f3 and f4 buttons.
+
+* Added ability to move files.
+
+* Added ability to degradate to http from https.
+
+* Fixed bug of multiple call of sockets.
+
+* If create directory command executed - loading spinner
+would be on top.
+
+* Refactored getShortSize.
+
+* Added update of size on file changing in editor.
+
+* Removed cache control of fs resour.
+
+* Added ability to copy files.
+
+* Fixed bug with saving json to localStorage, it's always
+writed root directory.
+
+* Moved out set current file from cloudfunc to client.js.
+
+* Changed the way file table building. From now templating used.
+
+* Changed sync reading of certs to async.
+
+* Updated dropbox to v0.9.2 and moved to packege.json
+from storage folder.
+
+* Updated socket.io to v0.9.14.
+
+* Fixed Util.time and Util.timeEnd
+
+* Added ability to select files with Insert key.
+
+* Added ability to delete selected files from DOM.
+
+* Added ability to recursivly get current folder size.
+
+* Added ability to get directory size, when space button
+is pressed and current file is directory.
+
+* Added ability to select all files on Ctrl + A
+
+* Fixed the href generation of renamed file.
+
+* Renamed promptNewFolder -> promptNewDir'.
+
+* Added function getSelectedNames.
+
+* Added ability to delete file when f8 key pressed.
+
+* Fixed bug with selectecting root directory with space.
+
+* Fixed bug with processing selected root directory.
+
+* Added ability to delete files.
+
+* Removed modules cache.js.
+
+* Fixed bug with writing new file.
+
+* Updated jquery to v2.0.0.
+
+* Improved CloudFunc module.
+
+* Fixed selection style in opera.
+
+* Fixed header of api fs GET.
+
+* Fixed bug with sending response on
+query other then json on /fs url.
+
+* Fixed bug with getting back to
+directory where file was removed.
+
+
+2012.03.01, v0.1.9
 
 * Changed the way of getting github application id
 (now it's just from config, rest api removed).
@@ -192,7 +288,7 @@ CloudCmd REST API.
 * Added help screen (on F1 after viewer loads).
 
 
-2012.12.12, Version 0.1.8
+2012.12.12, v0.1.8
 
 * Added ability to shutdown Cloud Commander
 thru terminal command: "cloudcmd exit"
@@ -385,7 +481,7 @@ Just propose install git and clone from github repo.
 * Fixed bug with appcache.
 
 
-2012.10.01, Version 0.1.7
+2012.10.01, v0.1.7
 
 * Changed name of menu files, fixed npm and jitsu
 problem with menu showing.
@@ -471,7 +567,7 @@ disabled in browsers.
 * Added fix of 866 charset.
 
 
-2012.08.24, Version 0.1.6
+2012.08.24, v0.1.6
  
 * From now jsload, cssload and anyload suport arrays.
 
@@ -524,7 +620,7 @@ current, file that was previously current must be unset automatically.
 * Added ability to download files.
 
 
-2012.08.06, Version 0.1.5
+2012.08.06, v0.1.5
 
 * Added tab support.
 
@@ -564,7 +660,7 @@ pressed couple times and CodeMirror not loaded fully.
 and passive panels and show/hide any of panels.
 
 
-2012.07.27, Version 0.1.4
+2012.07.27, v0.1.4
 
 * Added local version of Droids font for offline mode
 
@@ -600,7 +696,7 @@ be more faster, DOM, short, simple and logical.
 * Added ability remove not loaded scripts from DOM.
 
 
-2012.07.19, Version 0.1.3
+2012.07.19, v0.1.3
 
 * Fixed bug with nodester (jitsu env.HOME make him go done).
 
@@ -633,7 +729,7 @@ setted b char: "0b".
 * Added supporting of Russian language in directory names.
 
 
-2012.07.14, Version 0.1.2
+2012.07.14, v0.1.2
 
 * Added suport of jitsu.
 
@@ -644,7 +740,7 @@ setted b char: "0b".
 * Changed the minimize function calls accroding to Minify 0.1.2 changes.
 
 
-2012.07.11, Version 0.1.1
+2012.07.11, v0.1.1
 
 * Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
 js-script(or something other) has not loaded.

@@ -2,7 +2,7 @@ language: node_js
 node_js:
     - 0.6
     - 0.8
-    - 0.9
+    - 0.10
 notifications:
     #webhooks:
         #http://requestb.in/12h5bl71

@@ -23,12 +23,21 @@
         
         INDEX       = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
+        
+        CA          = DIR + 'ssl/sub.class1.server.ca.pem',
+        KEY         = DIR + 'ssl/ssl.key',
+        CERT        = DIR + 'ssl/ssl.crt',
+        
+        FILE_TMPL   = HTMLDIR + 'file.html',
+        
+        PATH_TMPL   = HTMLDIR + 'path.html',
+        
+        FileTemplate, PathTemplate,
+        
         FS          = CloudFunc.FS;
-        
-        /* reinit main dir os if we on 
-         * Win32 should be backslashes */
+        /* reinit main dir os if we on Win32 should be backslashes */
         DIR         = main.DIR;
-        
+    
     readConfig(init);
     
     
@@ -36,8 +45,7 @@
      * additional processing of index file
      */
     function indexProcessing(pData){
-        var lReplace_s,
-            lData       = pData.data,
+        var lData       = pData.data,
             lAdditional = pData.additional;
         
         /*
@@ -46,9 +54,9 @@
          * минифицированый
          */
         if(Minify.allowed.css){
-            var lPath = '/' + Util.removeStr(Minify.MinFolder, DIR);
-            lReplace_s = '<link rel=stylesheet href="/css/reset.css">';
-            lData = Util.removeStr(lData, lReplace_s)
+            var lPath       = '/' + Util.removeStr(Minify.MinFolder, DIR),
+                lReplace    = '<link rel=stylesheet href="/css/reset.css">';
+            lData = Util.removeStr(lData, lReplace)
                     .replace('/css/style.css', lPath + 'all.min.css');
         }
         
@@ -73,9 +81,14 @@
      * init and process of appcache if it allowed in config
      */
     function appCacheProcessing(){
-        var lFiles = [
-                {'//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff' : './font/DroidSansMono.woff'},
-                {'//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js' : './lib/client/jquery.js'}];
+        var lFONT_REMOTE    = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
+            lFONT_LOCAL     = './font/DroidSansMono.woff',
+            lJQUERY_REMOTE  = 'http://code.jquery.com/jquery-2.0.0.min.js',
+            lJQUERY_LOCAL   = './lib/client/jquery.js',
+            lFiles          = [{}, {}];
+            
+            lFiles[0][lFONT_REMOTE]     = lFONT_LOCAL;
+            lFiles[1][lJQUERY_REMOTE]   = lJQUERY_LOCAL;
         
         if(Config.minification.css)
             lFiles.push('node_modules/minify/min/all.min.css');
@@ -121,7 +134,7 @@
     
     /**
      * rest interface
-     * @pConnectionData {request, responce}
+     * @pParams pConnectionData {request, responce}
      */
     function rest(pConnectionData){
         return Util.exec(main.rest, pConnectionData);
@@ -151,8 +164,7 @@
             /* if command line parameter testing resolved 
              * setting config to testing, so server
              * not created, just init and
-             * all logs writed to screen
-             */        
+             * all logs writed to screen */
             var lArg = process.argv;
                 lArg = lArg[lArg.length - 1];
             if ( lArg === 'test' ||  lArg === 'test\r') {
@@ -165,22 +177,46 @@
                     'from now all logs will be writed to log.txt');
                 writeLogsToFile();
             }
-        }
         
-        if(Config.server)
-            fs.watch(CONFIG_PATH, function(){
-                /* every catch up - calling twice */
-                setTimeout(function() {
-                    readConfig();
-                }, 1000);
+            if(Config.server)
+                fs.watch(CONFIG_PATH, function(){
+                    /* every catch up - calling twice */
+                    setTimeout(function() {
+                        readConfig();
+                    }, 1000);
+                });
+        
+            var lParams = {
+                appcache    : appCacheProcessing,
+                minimize    : minimize,
+                rest        : rest,
+                route       : route
+            },
+                lFiles = [FILE_TMPL, PATH_TMPL];
+            
+            if(Config.ssl)
+                lFiles.push(CA, KEY, CERT);
+            
+            main.readFiles(lFiles, function(pErrors, pFiles){
+                if(pErrors)
+                    Util.log(pErrors);
+                else{
+                    FileTemplate        = pFiles[FILE_TMPL].toString();
+                    PathTemplate    = pFiles[PATH_TMPL].toString();
+                    
+                    if(Config.ssl)
+                        lParams.ssl = {
+                            ca      : pFiles[CA],
+                            key     : pFiles[KEY],
+                            cert    : pFiles[CERT]
+                        };
+                    
+                    server.start(lParams);
+                }
             });
-        
-        server.start({
-            appcache    : appCacheProcessing,
-            minimize    : minimize,
-            rest        : rest,
-            route       : route
-        });
+        }
+        else
+            Util.log('read error: config.json');
     }
     
     function readConfig(pCallBack){
@@ -220,12 +256,16 @@
             if( Util.strCmp(p.name, ['/auth', '/auth/github']) ){
                 Util.log('* Routing' +
                     '-> ' + p.name);
-                pParams.name = main.HTMLDIR + p.name + '.html';
-                lRet = main.sendFile( pParams );
+                
+                pParams.name    = main.HTMLDIR + p.name + '.html';
+                lRet            = main.sendFile( pParams );
             }
-            else if( Util.isContainStr(p.name, FS) || Util.strCmp( p.name, '/') ){
-                if( Util.isContainStr(p.name, 'no-js/') )
-                    return noJSTMPRedirection(pParams);
+            else if( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') ){
+                
+                if( Util.isContainStrAtBegin(p.name, FS + 'no-js/') ){
+                    var lURL = Util.removeStr(pParams.name, 'no-js/');
+                    return main.redirect(pParams, lURL);
+                }
                 
                 lRet = sendCommanderContent(p);
             }
@@ -241,7 +281,7 @@
         var lRet = main.checkParams(pParams);
         if(lRet){
             var p  = pParams;
-            p.name = Util.removeStr(p.name, CloudFunc.FS) || main.SLASH;
+            p.name = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
             
             fs.stat(p.name, function(pError, pStat){
                 if(!pError)
@@ -260,6 +300,7 @@
     
     function processCommanderContent(pParams){
         var lRet = main.checkParams(pParams);
+        
         if(lRet){
             var p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON){
@@ -270,11 +311,11 @@
                         p.name +='.json';
                         main.sendResponse(p);
                     }
-                    else if(!lQuery){ /* get back html*/
+                    else{ /* get back html*/
                         p.name   = Minify.allowed.html ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData){
                             if(!pError){
-                                var lPanel  = CloudFunc.buildFromJSON(pJSON),
+                                var lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
                                               '<ul id=right class=panel>' + lPanel + '</ul>';
                                 
@@ -292,16 +333,6 @@
                     main.sendError(pParams, pError);
             });
         }
-    }
-    
-    function noJSTMPRedirection(pParams){
-        var MOVED_PERMANENTLY = 301,
-            lPath = Util.removeStr(pParams.name, 'no-js/');
-        
-        pParams.response.writeHead(MOVED_PERMANENTLY, {'Location': lPath});
-        pParams.response.end();
-        
-        return true;
     }
     
     
