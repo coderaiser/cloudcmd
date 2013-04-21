@@ -2,7 +2,7 @@ Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 ===============
 [![Flattr][FlattrIMGURL]][FlattrURL]
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
-[BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=dev
+[BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [FlattrIMGURL]:             http://api.flattr.com/button/flattr-badge-large.png
 [NPMURL]:                   http://badge.fury.io/js/cloudcmd
