@@ -1,3 +1,8 @@
+2012.*.*, v0.2.1
+
+* Changed jquery cdn to one with https suport jquery.com -> google cdn.
+
+
 2012.04.22, v0.2.0
 
 * Added alerting about errors.
