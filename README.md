@@ -14,7 +14,11 @@ Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 DEMO:
 [cloudfoundry] (https://cloudcmd.cloudfoundry.com "cloudfoundry"),
 [appfog] (https://cloudcmd.aws.af.cm "appfog"),
-[jitsu] (https://cloudcmd.jit.su "jitsu").
+[jitsu] (https://cloudcmd.jit.su "jitsu"),
+[nitrous](http://cloudcmd-5950.euw1.actionbox.io:3000/)
+([1](http://cloudcmd-5950.euw1.actionbox.io:8888/),
+[2](http://cloudcmd-5950.euw1.actionbox.io:8080/),
+[3](http://cloudcmd-5950.euw1.actionbox.io:4000/)).
 
 Google PageSpeed Score : [100](//developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.aws.af.cm_2F&mobile=false "score") (out of 100)
 (or 96 if js or css minification disabled in config.json).
