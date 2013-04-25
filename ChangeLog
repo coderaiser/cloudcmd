@@ -2,6 +2,8 @@
 
 * Changed jquery cdn to one with https suport jquery.com -> google cdn.
 
+* Added Access-Control-Allow-Origin header.
+
 
 2012.04.22, v0.2.0
 
