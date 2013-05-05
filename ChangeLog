@@ -4,6 +4,11 @@
 
 * Added Access-Control-Allow-Origin header.
 
+* Added functions in DOM module: createEvent
+(createKeyEvent, createClickEvent, createDblClickEvent),
+dispatch
+(dispatchKeyEvent, dispatchClickEvent, dispatchDblClickEvent)
+
 
 2012.04.22, v0.2.0
 
