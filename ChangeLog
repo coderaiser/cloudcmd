@@ -9,6 +9,10 @@
 dispatch
 (dispatchKeyEvent, dispatchClickEvent, dispatchDblClickEvent)
 
+* Changed object name CloudCommander -> CloudCmd
+
+* Moved loading functions to Loader object in DOM module.
+
 
 2012.04.22, v0.2.0
 
