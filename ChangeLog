@@ -13,6 +13,8 @@ dispatch
 
 * Moved loading functions to Loader object in DOM module.
 
+* Added addtables script'
+
 
 2012.04.22, v0.2.0
 
