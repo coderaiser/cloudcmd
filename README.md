@@ -137,10 +137,10 @@ to start Cloud Commander as non-root. How it could be solved?
 There is a couple easy and fast ways. One of them is port forwarding by iptables.
 
 ```sh
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look rules before
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look reles after
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look reles after
 ```
 You should see somethins like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
 
@@ -152,8 +152,8 @@ If you would want to get things back just clear rules ( **1** and **2** it's rul
 in your list they could differ).
 
 ```sh
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 1
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 2
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 2
 ```
 
 To run Cloud Commander as daemon in linux you could set **log** to true in config and
