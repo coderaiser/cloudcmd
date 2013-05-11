@@ -121,9 +121,9 @@ All main configuration could be done thrue config.json.
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
     "socket"    : true              /* enable web sockets                       */
-    "port"      : 80,               /* http port                                */
-    "sslPort"   : 443,              /* https port                               */
-    "ip"        : "127.0.0.1",      /* Cloud Commander IP                       */
+    "port"      : 80,               /* http port or null(default)               */
+    "sslPort"   : 443,              /* https port or null(default)              */
+    "ip"        : "127.0.0.1",      /* ip or null for null(default)             */
     "ssl"       : true              /* should use https?                        */
     "rest"      : true              /* enable rest interface                    */
 }
