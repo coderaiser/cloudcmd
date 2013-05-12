@@ -80,8 +80,7 @@ body{
     background:url(/img/panel_refresh.png) no-repeat;
 }
 .refresh-icon:active{
-  /*background-position-y: -15px;*/
-    background:url(/img/panel_refresh.png) 0 -15px no-repeat;
+    background-position: 0 -15px;
 }
 
 .cmd-button{
