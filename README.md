@@ -123,7 +123,7 @@ All main configuration could be done thrue config.json.
     "socket"    : true              /* enable web sockets                       */
     "port"      : 80,               /* http port or null(default)               */
     "sslPort"   : 443,              /* https port or null(default)              */
-    "ip"        : "127.0.0.1",      /* ip or null for null(default)             */
+    "ip"        : "127.0.0.1",      /* ip or null(default)                      */
     "ssl"       : true              /* should use https?                        */
     "rest"      : true              /* enable rest interface                    */
 }
