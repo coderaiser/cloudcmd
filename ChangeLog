@@ -21,6 +21,8 @@ dispatch
 
 * Changed the way of work with listeners (DOM.addListener to DOM.Events.add).
 
+* Added ability to add a couple events in Events.add.
+
 
 2012.04.22, v0.2.0
 
