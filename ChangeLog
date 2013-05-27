@@ -25,6 +25,8 @@ dispatch
 
 * Moved jqeuryLoader and socketLoader to CMD object in DOM.
 
+* Fixed bug with deletting in menu js.
+
 
 2012.04.22, v0.2.0
 
