@@ -23,6 +23,8 @@ dispatch
 
 * Added ability to add a couple events in Events.add.
 
+* Moved jqeuryLoader and socketLoader to CMD object in DOM.
+
 
 2012.04.22, v0.2.0
 
