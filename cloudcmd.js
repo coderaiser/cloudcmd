@@ -179,11 +179,13 @@
             }
         
             if (Config.server)
-                fs.watch(CONFIG_PATH, function(){
-                    /* every catch up - calling twice */
-                    setTimeout(function() {
-                        readConfig();
-                    }, 1000);
+                Util.tryCatchLog(function(){
+                    fs.watch(CONFIG_PATH, function(){
+                        /* every catch up - calling twice */
+                        setTimeout(function() {
+                            readConfig();
+                        }, 1000);
+                    });
                 });
         
             var lParams = {
