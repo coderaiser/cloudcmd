@@ -29,6 +29,8 @@ dispatch
 
 * Removed function _editFileName from client.js.
 
+* Removed linuxWatch function from main.js.
+
 
 2012.04.22, v0.2.0
 
