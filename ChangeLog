@@ -31,6 +31,8 @@ dispatch
 
 * Removed linuxWatch function from main.js.
 
+* Added tryCatch to fs.watch in cloudcmd.js.
+
 
 2012.04.22, v0.2.0
 
