@@ -27,6 +27,8 @@ dispatch
 
 * Fixed bug with deletting in menu js.
 
+* Removed function _editFileName from client.js.
+
 
 2012.04.22, v0.2.0
 
