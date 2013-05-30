@@ -33,6 +33,8 @@ dispatch
 
 * Added tryCatch to fs.watch in cloudcmd.js.
 
+* Set F3 to veiw.
+
 
 2012.04.22, v0.2.0
 
