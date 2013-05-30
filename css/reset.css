@@ -9,8 +9,6 @@
 
 html{
     color: #222;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
 }
 body { margin: 0; font-size: 1em; line-height: 1.4; }
 
