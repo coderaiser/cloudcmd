@@ -39,6 +39,9 @@ dispatch
 
 * Renamed: set -> setBinded, unSet -> unsetBinded, get -> isBinded.
 
+* Functions maked private: ajaxload, changeLinks, createFileTable,
+getJSONfromFileTable.
+
 
 2012.04.22, v0.2.0
 
