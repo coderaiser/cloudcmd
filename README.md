@@ -47,6 +47,14 @@ Hot keys
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
 There is a short list:
+- **F1**                - help
+- **F2**                - rename current file
+- **F3**                - view
+- **F4**                - edit
+- **F5**                - copy
+- **F6**                - rename/move
+- **F7**                - new dir
+- **F8, Delete**        - remove current file
 - **Ctrl + r**          - reload dir content
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
@@ -58,10 +66,8 @@ There is a short list:
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
 - **End**               - to end of list
-- **F8, Delete**        - remove current file
 - **Shift + Delete**    - remove without prompt
 - **Insert**            - select current file
-- **F2**                - rename current file
 - **Shift + F10**       - show context menu
 
 Viewer's hot keys
