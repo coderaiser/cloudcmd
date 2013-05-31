@@ -35,6 +35,8 @@ dispatch
 
 * Set F3 to veiw.
 
+* Renamed KeyBinding -> Key.
+
 
 2012.04.22, v0.2.0
 
