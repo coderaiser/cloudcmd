@@ -37,6 +37,8 @@ dispatch
 
 * Renamed KeyBinding -> Key.
 
+* Renamed: set -> setBinded, unSet -> unsetBinded, get -> isBinded.
+
 
 2012.04.22, v0.2.0
 
