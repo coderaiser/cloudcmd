@@ -10,7 +10,7 @@
 .fancybox-nav span,
 .fancybox-tmp
 {
-	padding: 0;
+    padding: 0;
 	margin: 0;
 	border: 0;
 	outline: none;
@@ -53,7 +53,7 @@
 }
 
 .fancybox-type-iframe .fancybox-inner {
-	-webkit-overflow-scrolling: touch;
+	overflow-scrolling: touch;
 }
 
 .fancybox-error {
