@@ -44,6 +44,8 @@ getJSONfromFileTable.
 
 * Moved CloudCmd.KEY object data to prototype of CloudCmd.Key.
 
+* Simpified plugins id's.
+
 
 2012.04.22, v0.2.0
 
