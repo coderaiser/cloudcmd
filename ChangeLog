@@ -46,6 +46,10 @@ getJSONfromFileTable.
 
 * Simpified plugins id's.
 
+* Rewrited _codemirror and view modules with prototypes.
+
+* Added hide method to view module.
+
 
 2012.04.22, v0.2.0
 
