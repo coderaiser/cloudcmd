@@ -52,6 +52,8 @@ getJSONfromFileTable.
 
 * Updated socket.io to v0.9.16.
 
+* Removed init property from view and edit.
+
 
 2012.04.22, v0.2.0
 
