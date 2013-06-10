@@ -54,6 +54,8 @@ getJSONfromFileTable.
 
 * Removed init property from view and edit.
 
+* FilePicker gets key from modules.json.
+
 
 2012.04.22, v0.2.0
 
