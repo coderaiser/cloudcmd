@@ -17,7 +17,7 @@
   "dependencies": {
     "dropbox": "0.9.2",
     "minify": "0.2.0",
-    "socket.io": "0.9.14"
+    "socket.io": "0.9.16"
   },
   "devDependencies": {},
   "engines": {

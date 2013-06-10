@@ -50,6 +50,8 @@ getJSONfromFileTable.
 
 * Added hide method to view module.
 
+* Updated socket.io to v0.9.16.
+
 
 2012.04.22, v0.2.0
 
