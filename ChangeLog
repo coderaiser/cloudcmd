@@ -58,6 +58,8 @@ getJSONfromFileTable.
 
 * Added ability to put callback to view.
 
+* Added help module.
+
 
 2012.04.22, v0.2.0
 
