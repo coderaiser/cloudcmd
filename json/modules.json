@@ -2,6 +2,7 @@
     "edit/_codemirror",
     "menu",
     "view",
+    "help",
     "terminal", {
         "name": "storage",
         "data": [{
