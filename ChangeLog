@@ -60,6 +60,8 @@ getJSONfromFileTable.
 
 * Added help module.
 
+* Added ability to show help on F1.
+
 
 2012.04.22, v0.2.0
 
