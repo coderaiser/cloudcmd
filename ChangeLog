@@ -62,6 +62,8 @@ getJSONfromFileTable.
 
 * Added ability to show help on F1.
 
+* Added ability to set attributes in Loader.anyload.
+
 
 2012.04.22, v0.2.0
 
