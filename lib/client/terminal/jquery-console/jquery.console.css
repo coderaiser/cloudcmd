@@ -1,0 +1,40 @@
+.console {
+    word-wrap: break-word;
+}
+
+.console {
+    font-size: 16px;
+}
+.jquery-console-inner {
+    width:900px;
+    height:200px;
+    padding:0.5em;
+    overflow:auto
+}
+.jquery-console-prompt-box {
+    color:black;
+    font-family:monospace;
+}
+.jquery-console-cursor {
+    color:#333;
+    font-weight:bold;
+}
+.jquery-console-message-error {
+    color:#ef0505;
+    font-family:sans-serif;
+    font-weight:bold;
+    padding:0.1em;
+}
+.jquery-console-message-value {
+    color:#1ad027;
+    font-family:monospace;
+    padding:0.1em;
+}
+.jquery-console-message-type {
+    color:#52666f;
+    font-family:monospace;
+    padding:0.1em;
+}
+.jquery-console-prompt-label {
+    font-weight:bold;
+}

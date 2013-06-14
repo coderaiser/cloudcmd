@@ -3,6 +3,7 @@
     "menu",
     "view",
     "help",
+    "console",
     "terminal", {
         "name": "storage",
         "data": [{
