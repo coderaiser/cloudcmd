@@ -64,6 +64,8 @@ getJSONfromFileTable.
 
 * Added ability to set attributes in Loader.anyload.
 
+* Fixed upload function of filepicker.
+
 
 2012.04.22, v0.2.0
 
