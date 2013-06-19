@@ -2,14 +2,8 @@
     word-wrap: break-word;
 }
 
-.console {
-    font-size: 16px;
-}
 .jquery-console-inner {
-    width:900px;
-    height:200px;
     padding:0.5em;
-    overflow:auto
 }
 .jquery-console-prompt-box {
     color:black;
