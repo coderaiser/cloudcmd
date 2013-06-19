@@ -66,6 +66,8 @@ getJSONfromFileTable.
 
 * Fixed upload function of filepicker.
 
+* fix(DOM) this.promptNewFile -> Cmd.promptNewFile 
+
 
 2012.04.22, v0.2.0
 
