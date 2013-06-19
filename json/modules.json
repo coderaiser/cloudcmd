@@ -3,7 +3,7 @@
     "menu",
     "view",
     "help",
-    "jq_console",
+    "console",
     "terminal", {
         "name": "storage",
         "data": [{
