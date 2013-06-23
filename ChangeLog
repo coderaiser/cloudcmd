@@ -70,6 +70,8 @@ getJSONfromFileTable.
 
 * feature(console) add jq-console
 
+* fix(style) .name{width}: 37% -> 35%
+
 
 2012.04.22, v0.2.0
 
