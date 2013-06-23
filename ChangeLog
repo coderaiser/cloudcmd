@@ -74,6 +74,8 @@ getJSONfromFileTable.
 
 * feature(view) show(pData) -> show(pData, pCallBack)
 
+* doc(license) add
+
 
 2012.04.22, v0.2.0
 

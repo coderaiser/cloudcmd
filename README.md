@@ -274,6 +274,10 @@ Version history
 - *2012.07.11*, **[v0.1.1](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.1.zip)**
 - *2012.00.00*, **[v0.1.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.0.zip)**
 
+License
+---------------
+MIT license
+
 Special Thanks
 ---------------
 [Elena Zalitok](http://vk.com/politilena "Elena Zalitok")  for logo.
