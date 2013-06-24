@@ -94,12 +94,12 @@ Right mouse click button show context menu with items:
 
 Installing
 ---------------
-**Cloud Commander** installing is very easy. All you need it's just clone
-repository from github. Just 2 commands:
+**Cloud Commander** installing is very easy. All you need is [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
+and unpack or just clone repository from github:
 
     git clone git://github.com/coderaiser/cloudcmd.git
     cd cloudcmd
-or
+or install in npm:
 
     npm i cloudcmd
     mv node_modules/cloudcmd ./
