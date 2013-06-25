@@ -78,6 +78,8 @@ getJSONfromFileTable.
 
 * doc(contribute) add commit message conventions
 
+* fix(socket) log level: debug -> info
+
 
 2012.04.22, v0.2.0
 
