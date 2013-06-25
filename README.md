@@ -136,6 +136,7 @@ Standard practices say no non-root process gets to talk to
 the Internet on a port less than 1024. Anyway I suggest you
 to start Cloud Commander as non-root. How it could be solved?
 There is a couple easy and fast ways. One of them is port forwarding by iptables.
+Just run [shell/addtables.sh](shell/addtables.sh) for default options.
 
 ```sh
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
