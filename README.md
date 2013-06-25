@@ -68,18 +68,19 @@ There is a short list:
 - **End**               - to end of list
 - **Shift + Delete**    - remove without prompt
 - **Insert**            - select current file
-- **Shift + F10**       - show context menu
+- **Shift + F10**       - context menu
+- **~**                 - console
 
 Viewer's hot keys
 ---------------
-- **F3**                - open viewer window
-- **Esc**               - close viewer window
+- **F3**                - open
+- **Esc**               - close
 
 Editor's hot keys
 ---------------
-- **F4**                - open CodeMirror editor
-- **Ctrl + s**          - save file
-- **Esc**               - close CodeMirror editor
+- **F4**                - open
+- **Ctrl + s**          - save
+- **Esc**               - close
 
 Menu
 ---------------
@@ -92,9 +93,9 @@ Right mouse click button show context menu with items:
 - Download
 - New (File, Dir, from cloud)
 
-Installing
+Install
 ---------------
-**Cloud Commander** installing is very easy. All you need is [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
+**Cloud Commander** install is very easy. All you need is [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
 and unpack or just clone repository from github:
 
     git clone git://github.com/coderaiser/cloudcmd.git
