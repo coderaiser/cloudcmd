@@ -80,6 +80,8 @@ getJSONfromFileTable.
 
 * fix(socket) log level: debug -> info
 
+* feature(console) jquery-terminal -> jq-console
+
 
 2012.04.22, v0.2.0
 
