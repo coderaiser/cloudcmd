@@ -3,8 +3,7 @@
     "menu",
     "view",
     "help",
-    "jq_console",
-    "terminal", {
+    "console", {
         "name": "storage",
         "data": [{
                 "name": "DropBox",
