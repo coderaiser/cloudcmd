@@ -7,7 +7,32 @@
     margin: 0 auto;
     margin-top: 50px;
 }
+
+.error-msg{
+    color: crimson;
+}
+
+.log-msg{
+    color: #444;
+}
+
+.error-msg, .log-msg{
+    background-color: #f5f5f5;
+    display: block;
+    font: monospace 16px "Droid Sans Mono";
+    white-space: pre-wrap;
+    word-break: normal;
+    word-wrap: normal;
+    margin: 10px;
+    padding: 10px;
+    background: beige;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
 .jqconsole {
+    background: #fffdf9;
     padding: 10px;
     padding-bottom: 10px;
 }
@@ -18,19 +43,13 @@
     background-color: #666;
 }
 .jqconsole-prompt {
-    color: #0d0;
+    color: #4a473a
 }
 .jqconsole-old-prompt {
-    color: #0b0;
+    color: #b7b4a8;
     font-weight: normal;
 }
-.jqconsole-input {
-    color: #dd0;
-}
-.jqconsole-old-input {
-    color: #bb0;
-    font-weight: normal;
-}
+
 .brace {
     color: #00FFFF;
 }
