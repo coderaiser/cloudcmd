@@ -82,6 +82,8 @@ getJSONfromFileTable.
 
 * feature(console) jquery-terminal -> jq-console
 
+* fix(console) remove outline on focus
+
 
 2012.04.22, v0.2.0
 
