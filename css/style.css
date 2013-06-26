@@ -31,6 +31,18 @@ body{
     background-color:white;
 }
 
+#fm::-moz-selection, #left>li::-moz-selection, #right>li::-moz-selection, .path::-moz-selection, .fm-header::-moz-selection,
+.mini-icon::-moz-selection, .name::-moz-selection, .size::-moz-selection, .owner::-moz-selection, .mode::-moz-selection {
+    text-shadow: none; opacity: 0;
+}
+
+#fm::selection, #left>li::selection, #right>li::selection, .path::selection, .fm-header::selection,
+.mini-icon::selection, .name::selection, .size::selection, .owner::selection, .mode::selection {
+    text-shadow: none;
+    opacity: 0;
+    background-color:white; /* opera */
+}
+
 .path-icon{
     position: relative;
     top: 3px;
