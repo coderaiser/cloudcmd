@@ -84,6 +84,8 @@ getJSONfromFileTable.
 
 * fix(help) remove pre
 
+* feature(socket) add disconect
+
 
 2012.04.22, v0.2.0
 
