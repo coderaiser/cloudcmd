@@ -141,6 +141,8 @@
     }
     
     function init(){
+        var lServerDir,  lArg, lParams, lFiles;
+        
         if (update)
             update.get();
         
@@ -149,24 +151,26 @@
          * (usually /) to it.
          * argv[1] - is always script name
          */
-        var lServerDir = path.dirname(process.argv[1]) + '/';
+        lServerDir = path.dirname(process.argv[1]) + '/';
         
-        if ( DIR !== lServerDir ){
+        if (DIR !== lServerDir) {
             Util.log('current dir: ' + DIR);
             process.chdir(lServerDir);
         }
+        
         Util.log('server dir:  ' + lServerDir);
         Util.log('reading configuration file config.json...');
         
-        if (Config){
+        if (Config) {
             Util.log('config.json readed');
             
             /* if command line parameter testing resolved 
              * setting config to testing, so server
              * not created, just init and
              * all logs writed to screen */
-            var lArg = process.argv;
-                lArg = lArg[lArg.length - 1];
+            lArg = process.argv;
+            lArg = lArg[lArg.length - 1];
+            
             if ( lArg === 'test' ||  lArg === 'test\r') {
                 Util.log(process.argv);
                 Config.server  = false;
@@ -177,7 +181,7 @@
                     'from now all logs will be writed to log.txt');
                 writeLogsToFile();
             }
-        
+            
             if (Config.server)
                 Util.tryCatchLog(function(){
                     fs.watch(CONFIG_PATH, function(){
@@ -187,14 +191,15 @@
                         }, 1000);
                     });
                 });
-        
-            var lParams = {
+            
+            lParams = {
                 appcache    : appCacheProcessing,
                 minimize    : minimize,
                 rest        : rest,
                 route       : route
             },
-                lFiles = [FILE_TMPL, PATH_TMPL];
+            
+            lFiles = [FILE_TMPL, PATH_TMPL];
             
             if (Config.ssl)
                 lFiles.push(CA, KEY, CERT);
@@ -202,7 +207,7 @@
             main.readFiles(lFiles, function(pErrors, pFiles){
                 if (pErrors)
                     Util.log(pErrors);
-                else{
+                else {
                     FileTemplate        = pFiles[FILE_TMPL].toString();
                     PathTemplate    = pFiles[PATH_TMPL].toString();
                     
