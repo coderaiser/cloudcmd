@@ -88,6 +88,8 @@ getJSONfromFileTable.
 
 * feature(socket) add minification and gzip
 
+* feature(socket) if id in use - reconnect
+
 
 2012.04.22, v0.2.0
 
