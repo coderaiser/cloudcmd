@@ -86,6 +86,8 @@ getJSONfromFileTable.
 
 * feature(socket) add disconect
 
+* feature(socket) add minification and gzip
+
 
 2012.04.22, v0.2.0
 
