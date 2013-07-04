@@ -90,6 +90,8 @@ getJSONfromFileTable.
 
 * feature(socket) if id in use - reconnect
 
+* chore(console) remove jquery-terminal
+
 
 2012.04.22, v0.2.0
 
