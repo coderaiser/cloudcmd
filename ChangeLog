@@ -98,6 +98,8 @@ getJSONfromFileTable.
 
 * feature(edit) codemirror -> ace
 
+* fix(rest) save file stream: write.on(open) -> read.on(end)
+
 
 2012.04.22, v0.2.0
 
