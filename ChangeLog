@@ -94,6 +94,8 @@ getJSONfromFileTable.
 
 * feature(favicon) add
 
+* fix(style) .mode width: 25% -> 23%
+
 
 2012.04.22, v0.2.0
 
