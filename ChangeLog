@@ -96,6 +96,8 @@ getJSONfromFileTable.
 
 * fix(style) .mode width: 25% -> 23%
 
+* feature(edit) codemirror -> ace
+
 
 2012.04.22, v0.2.0
 
