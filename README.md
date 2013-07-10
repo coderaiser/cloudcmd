@@ -276,7 +276,7 @@ Version history
 
 License
 ---------------
-MIT license
+MIT [license](LICENSE "license").
 
 Special Thanks
 ---------------
