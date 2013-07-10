@@ -1,0 +1,22 @@
+{
+  "name": "jqconsole",
+  "version": "2.7.7",
+  "title": "Feature complete web terminal.",
+  "author": {
+    "name": "Amjad Masad",
+    "email": "amjad.masad@gmail.com",
+    "url": "http://amasad.me"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "description": "A jQuery terminal plugin with raw input/output streams as well as input and output states and support for rich multi-line prompting and operation queueing.",
+  "keywords": ["terminal", "console", "emulator", "REPL", "repl.it"],
+  "demo": "http://repl.it/",
+  "dependencies": {
+    "jquery": ">=1.5"
+  }
+}
