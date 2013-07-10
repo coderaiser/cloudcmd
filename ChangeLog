@@ -104,6 +104,8 @@ getJSONfromFileTable.
 
 * feature(util) call log with any count of params
 
+* feature(util) add logArray
+
 
 2012.04.22, v0.2.0
 
