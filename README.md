@@ -95,15 +95,21 @@ Right mouse click button show context menu with items:
 
 Install
 ---------------
-**Cloud Commander** install is very easy. All you need is [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
+**Cloud Commander** install is very easy.
+All you need is 
+- install [node.js](//nodejs.org/ "node.js")
+- [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
 and unpack or just clone repository from github:
 
+```
     git clone git://github.com/coderaiser/cloudcmd.git
     cd cloudcmd
+```
 or install in npm:
-
+```
     npm i cloudcmd
     mv node_modules/cloudcmd ./
+```
 
 Configuration
 ---------------
@@ -174,7 +180,7 @@ For more information see **config.json** and **shell/seret.bat** *(on win32)*
 or **shell/secret.sh** *(on nix)*.
 
 
-Starting
+Start
 ---------------
 To start **Cloud Commander** only one command neaded:
     
@@ -191,9 +197,9 @@ Then type in browser
 or
 
     http://localhost
-Updating
+Update
 ---------------
-**Cloud Commander** is very alfa and it's very often updatings.
+**Cloud Commander** is very often updates.
 Update is doing automagically but it could be done also manualy
 by typing a few commands in cloudcmd directory:
 
@@ -214,37 +220,29 @@ But for minification and optimization tricks optional can be
 assingned (and installed) modules: [Minify] (https://github.com/coderaiser/minify "Minify")
 and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
 
-Install addtitional modules:
+Install addtitional modules (type in **Cloud Commander** directory):
 
     npm i
-    
-**Cloud Commander's Client Side** use module jquery for ajaxing. But only for old browsers.
-We could not use this module, but this way is fast:
-- google cdn
-- gzip
-- cache
-
-Perhaps in the future, it will not be used, but so far it has no effect on
-start loading of Cloud Commander Client Side and do things fast and stable
-it is using now.
 
 Extensions
 ---------------
 **Cloud Commander** desinged to easily porting extensions.
 For extend main functionality Cloud Commander use next modules:
-- [CodeMirror]              [CodeMirrorURL]
+- [Ace]                     [AceURL]
 - [FancyBox]                [FancyBoxURL]
 - [jQuery-contextMenu]      [jQuery-contextMenuURL]
-- [jquery.terminal]         [jquery.terminalURL]
+- [jq-console]              [jq-consoleURL]
 - [github]                  [githubURL]
 - [dropbox-js]              [dropbox-jsURL]
+- [jquery]                  [jqueryURL]
 
-[CodeMirrorURL]:            //github.com/marijnh/CodeMirror "CodeMirror"
+[AceURL]:                   //ace.ajax.org/ "Ace"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
 [jQuery-contextMenuURL]:    //github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
-[jquery.terminalURL]:       //github.com/jcubic/jquery.terminal "jquery.terminal"
-[githubURL]:                //github.com/michael/github
-[dropbox-jsURL]:            //github.com/dropbox/dropbox-js
+[jq-consoleURL]:            //github.com/replit/jq-console‎ "jq-console"
+[githubURL]:                //github.com/michael/github "github"
+[dropbox-jsURL]:            //github.com/dropbox/dropbox-js "dropbox-js"
+[jqueryURL]:                //jquery.com
 
 Contributing
 ---------------
@@ -282,4 +280,5 @@ MIT license
 
 Special Thanks
 ---------------
-[Elena Zalitok](http://vk.com/politilena "Elena Zalitok")  for logo.
+[Elena Zalitok](http://vk.com/politilena "Elena Zalitok") for
+[logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
