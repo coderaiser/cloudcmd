@@ -45,7 +45,8 @@
      * additional processing of index file
      */
     function indexProcessing(pData){
-        var lData       = pData.data,
+        var lPath, lReplace, lKeysPanel,
+            lData       = pData.data,
             lAdditional = pData.additional;
         
         /*
@@ -54,9 +55,9 @@
          * минифицированый
          */
         if (Minify.allowed.css){
-            var lPath       = '/' + Util.removeStr(Minify.MinFolder, DIR),
-                lReplace    = '<link rel=stylesheet href="/css/reset.css">';
-            lData = Util.removeStr(lData, lReplace)
+            lPath   = '/' + Util.removeStr(Minify.MinFolder, DIR);
+            lReplace = '<link rel=stylesheet href="/css/reset.css">';
+            lData   = Util.removeStr(lData, lReplace)
                     .replace('/css/style.css', lPath + 'all.min.css');
         }
         
@@ -69,8 +70,8 @@
             lData = Util.removeStr(lData, ' manifest="/cloudcmd.appcache"');
         
         if (!Config.show_keys_panel){
-            var lKeysPanel = '<div id=keyspanel';
-            lData = lData.replace(lKeysPanel, lKeysPanel +' class=hidden');
+            lKeysPanel  = '<div id=keyspanel';
+            lData       = lData.replace(lKeysPanel, lKeysPanel +' class=hidden');
         }
         
         return lData;
@@ -274,7 +275,7 @@
                     return main.redirect(pParams, lURL);
                 }
                 
-                lRet = sendCommanderContent(p);
+                lRet = sendCommanderContent( pParams );
             }
             /* termporary redirect for old urls */
             else
@@ -285,20 +286,20 @@
     }
     
     function sendCommanderContent(pParams){
-        var lRet = main.checkParams(pParams);
+        var p, lRet = main.checkParams(pParams);
+        
         if (lRet){
-            var p  = pParams;
-            p.name = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
+            p       = pParams;
+            p.name  = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
             
             fs.stat(p.name, function(pError, pStat){
                 if (!pError)
                     if ( pStat.isDirectory() )
                         processCommanderContent(pParams);
                     else
-                        main.sendFile(p);
+                        main.sendFile( pParams );
                 else
                     main.sendError(pParams, pError);
-            
            });
         }
         
