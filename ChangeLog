@@ -110,6 +110,8 @@ getJSONfromFileTable.
 
 * feature(dom) add events.add array
 
+* feauture(client) add unload event
+
 
 2012.04.22, v0.2.0
 
