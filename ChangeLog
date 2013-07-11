@@ -106,6 +106,8 @@ getJSONfromFileTable.
 
 * feature(util) add logArray
 
+* feature(socket) add chdir on cd
+
 
 2012.04.22, v0.2.0
 
