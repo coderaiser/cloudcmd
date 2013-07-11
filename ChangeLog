@@ -108,6 +108,8 @@ getJSONfromFileTable.
 
 * feature(socket) add chdir on cd
 
+* feature(dom) add events.add array
+
 
 2012.04.22, v0.2.0
 
