@@ -112,6 +112,8 @@ getJSONfromFileTable.
 
 * feauture(client) add unload event
 
+* feature(update) exec -> exec(cwd)
+
 
 2012.04.22, v0.2.0
 
