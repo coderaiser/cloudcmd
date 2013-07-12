@@ -104,11 +104,12 @@ and unpack or just clone repository from github:
 ```
     git clone git://github.com/coderaiser/cloudcmd.git
     cd cloudcmd
+    node cloudcmd
 ```
 or install in npm:
 ```
-    npm i cloudcmd
-    mv node_modules/cloudcmd ./
+    npm i cloudcmd -g
+    cloudcmd
 ```
 
 Configuration
