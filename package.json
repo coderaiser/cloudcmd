@@ -8,6 +8,9 @@
     "type": "git",
     "url": "git://github.com/coderaiser/cloudcmd.git"
   },
+  "bin": {
+    "cloudcmd": "./bin/cloudcmd"
+  },
   "scripts": {
     "test": "sh ./test/test.sh",
     "start": "cloudcmd.js"
