@@ -116,6 +116,8 @@ getJSONfromFileTable.
 
 * feature(cloudcmd) add bin
 
+* feature(rest) add put patch
+
 
 2012.04.22, v0.2.0
 
