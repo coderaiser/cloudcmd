@@ -118,6 +118,8 @@ getJSONfromFileTable.
 
 * feature(rest) add put patch
 
+* feature(edit) save file only if it was changed
+
 
 2012.04.22, v0.2.0
 
