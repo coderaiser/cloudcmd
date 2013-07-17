@@ -120,6 +120,8 @@ getJSONfromFileTable.
 
 * feature(edit) save file only if it was changed
 
+* fix(dom) rm array param from jsload
+
 
 2012.04.22, v0.2.0
 
