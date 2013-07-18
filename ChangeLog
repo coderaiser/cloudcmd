@@ -122,6 +122,7 @@ getJSONfromFileTable.
 
 * fix(dom) rm array param from jsload
 
+* feature(main) add to exports checkCallBackParams
 
 2012.04.22, v0.2.0
 
