@@ -124,6 +124,8 @@ getJSONfromFileTable.
 
 * feature(main) add to exports checkCallBackParams
 
+* feature(win) diskpart -> wmic
+
 2012.04.22, v0.2.0
 
 * Added alerting about errors.
