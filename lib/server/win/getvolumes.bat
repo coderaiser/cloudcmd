@@ -1,1 +1,0 @@
-diskpart /s getvolumes.txt
