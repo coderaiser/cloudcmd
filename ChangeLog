@@ -128,6 +128,8 @@ getJSONfromFileTable.
 
 * fix(diff) rm, work bad with win line ending
 
+* fix(dom) this -> Cmd
+
 
 2012.04.22, v0.2.0
 
