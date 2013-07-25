@@ -134,6 +134,8 @@ getJSONfromFileTable.
 
 * feature(index) add "~ - console" button
 
+* chore(css) .cmd-button {width: 10% -> 8%}
+
 
 2012.04.22, v0.2.0
 
