@@ -130,6 +130,8 @@ getJSONfromFileTable.
 
 * fix(dom) this -> Cmd
 
+* fix(css) .cmd-button: "outline:0"
+
 
 2012.04.22, v0.2.0
 
