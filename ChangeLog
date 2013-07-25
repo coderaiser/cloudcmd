@@ -132,6 +132,8 @@ getJSONfromFileTable.
 
 * fix(css) .cmd-button: "outline:0"
 
+* feature(index) add "~ - console" button
+
 
 2012.04.22, v0.2.0
 
