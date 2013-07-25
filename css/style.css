@@ -96,14 +96,15 @@ body{
 }
 
 .cmd-button{
-    width: 10%;
-    margin: 20px 2px 0 2px;
-    overflow: hidden;
-    color: rgb(49,123,249);
-    text-overflow: ellipsis;
-    white-space: nowrap;
     background-color: white;
     border: 1.5px solid rgba(49,123,249,.40);
+    color: rgb(49,123,249);
+    margin: 20px 2px 0 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    outline: 0;
+    white-space: nowrap;
+    width: 10%;
 }
 
 .cmd-button:hover{
