@@ -136,6 +136,8 @@ getJSONfromFileTable.
 
 * chore(css) .cmd-button {width: 10% -> 8%}
 
+* feature(index) add "f9 - menu" button
+
 
 2012.04.22, v0.2.0
 
