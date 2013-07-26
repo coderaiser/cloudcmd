@@ -344,6 +344,10 @@ a:hover, a:active {
         width:100%;
         font-size: 18px;
     }
+    
+    .cmd-button {
+        width: 20%;
+    }
 }
 @media only screen and (min-width: 601px) and (max-width: 785px){
     .panel{
@@ -351,6 +355,10 @@ a:hover, a:active {
     }
     #right{
         display:none;
+    }
+    
+    .cmd-button {
+        width: 15%;
     }
 }
 
@@ -361,5 +369,9 @@ a:hover, a:active {
     /* если правая панель не помещаеться - прячем её */
     #right{
         display:none;
+    }
+    
+    .cmd-button {
+        width: 10%;
     }
 }
