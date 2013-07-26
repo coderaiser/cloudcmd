@@ -140,6 +140,8 @@ getJSONfromFileTable.
 
 * feature(Events) dispatch: event -> event || eventName
 
+* feature(css) add media-query for .cmd-button
+
 
 2012.04.22, v0.2.0
 
