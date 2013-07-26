@@ -138,6 +138,8 @@ getJSONfromFileTable.
 
 * feature(index) add "f9 - menu" button
 
+* feature(Events) dispatch: event -> event || eventName
+
 
 2012.04.22, v0.2.0
 
