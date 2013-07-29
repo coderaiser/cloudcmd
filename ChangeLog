@@ -142,6 +142,8 @@ getJSONfromFileTable.
 
 * feature(css) add media-query for .cmd-button
 
+* fix(view) open on f3 cmd button click
+
 
 2012.04.22, v0.2.0
 
