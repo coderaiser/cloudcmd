@@ -144,6 +144,8 @@ getJSONfromFileTable.
 
 * fix(view) open on f3 cmd button click
 
+* fix(rest) save and create new file
+
 
 2012.04.22, v0.2.0
 
