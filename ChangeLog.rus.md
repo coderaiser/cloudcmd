@@ -33,6 +33,7 @@
 **Обновлены:**
 - socket.io до v0.9.16.
 - jquery до v2.0.3.
+- minify до v0.2.1.
 
 **Внутренние изминения:**
 - Изменена jquery cdn в пользу той, что поддерживает https (jquery.com -> google cdn).

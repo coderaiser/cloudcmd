@@ -146,6 +146,8 @@ getJSONfromFileTable.
 
 * fix(rest) save and create new file
 
+* chore(minify) v0.2.0 -> v0.2.1
+
 
 2012.04.22, v0.2.0
 
@@ -301,7 +303,7 @@ keyStop: function(e, opt) {
 * Removed loading spinner by commenting jquery.fancybox.css block
 #fancybox-loading div {
     width: 44px;
-	height: 44px;
+    height: 44px;
 	background: url('fancybox_loading.gif') center center no-repeat;
 }
 
