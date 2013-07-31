@@ -2,9 +2,9 @@
     "api_url"               : "/api/v1",
     "appcache"              : false,
     "minification" : {
-        "js"    : false,
-        "css"   : false,
-        "html"  : false,
+        "js"    : true,
+        "css"   : true,
+        "html"  : true,
         "img"   : true
     },
     "cache"                 : true,
