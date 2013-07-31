@@ -1,8 +1,9 @@
 [
-    "editor/_codemirror",
+    "edit",
     "menu",
-    "viewer",
-    "terminal", {
+    "view",
+    "help",
+    "console", {
         "name": "storage",
         "data": [{
                 "name": "DropBox",

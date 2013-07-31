@@ -1,3 +1,4 @@
+#!/bin/sh
 kill -9 `ps ax|grep node-openshift|grep -v grep|awk '{print $1}'`
 # print finded process
 ProcessList=`ps ax|grep node-openshift`
