@@ -1,30 +1,30 @@
 {
-  "name": "cloudcmd",
-  "version": "0.2.0",
-  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-  "description": "User friendly cloud file manager.",
-  "homepage": "https://github.com/coderaiser/cloudcmd",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/coderaiser/cloudcmd.git"
-  },
-  "bin": {
-    "cloudcmd": "./bin/cloudcmd"
-  },
-  "scripts": {
-    "test": "sh ./test/test.sh",
-    "start": "cloudcmd.js"
-  },
-  "node": "0.6.17",
-  "subdomain": "cloudcmd",
-  "dependencies": {
-    "dropbox": "0.10.0",
-    "minify": "0.2.0",
-    "socket.io": "0.9.16"
-  },
-  "devDependencies": {},
-  "engines": {
-    "node": ">=0.4.x"
-  },
-  "main": "cloudcmd.js"
+    "name": "cloudcmd",
+    "version": "0.3.0",
+    "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+    "description": "User friendly cloud file manager.",
+    "homepage": "https://github.com/coderaiser/cloudcmd",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/coderaiser/cloudcmd.git"
+    },
+    "bin": {
+        "cloudcmd": "./bin/cloudcmd"
+    },
+    "scripts": {
+        "test": "sh ./test/test.sh",
+        "start": "cloudcmd.js"
+    },
+    "node": "0.6.17",
+    "subdomain": "cloudcmd",
+    "dependencies": {
+        "dropbox": "0.10.0",
+        "minify": "0.2.0",
+        "socket.io": "0.9.16"
+    },
+    "devDependencies": {},
+    "engines": {
+        "node": ">=0.4.x"
+    },
+    "main": "cloudcmd.js"
 }
