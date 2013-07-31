@@ -1,3 +1,154 @@
+2012.07.01, v0.3.0
+
+* Changed jquery cdn to one with https suport jquery.com -> google cdn.
+
+* Added Access-Control-Allow-Origin header.
+
+* Added functions in DOM module: createEvent
+(createKeyEvent, createClickEvent, createDblClickEvent),
+dispatch
+(dispatchKeyEvent, dispatchClickEvent, dispatchDblClickEvent)
+
+* Changed object name CloudCommander -> CloudCmd
+
+* Moved loading functions to Loader object in DOM module.
+
+* Added addtables script'
+
+* Fixed typo in README.
+
+* Fixed same background declartion a couple times.
+
+* Changed the way of work with listeners (DOM.addListener to DOM.Events.add).
+
+* Added ability to add a couple events in Events.add.
+
+* Moved jqeuryLoader and socketLoader to CMD object in DOM.
+
+* Fixed bug with deletting in menu js.
+
+* Removed function _editFileName from client.js.
+
+* Removed linuxWatch function from main.js.
+
+* Added tryCatch to fs.watch in cloudcmd.js.
+
+* Set F3 to veiw.
+
+* Renamed KeyBinding -> Key.
+
+* Renamed: set -> setBinded, unSet -> unsetBinded, get -> isBinded.
+
+* Functions maked private: ajaxload, changeLinks, createFileTable,
+getJSONfromFileTable.
+
+* Moved CloudCmd.KEY object data to prototype of CloudCmd.Key.
+
+* Simpified plugins id's.
+
+* Rewrited _codemirror and view modules with prototypes.
+
+* Added hide method to view module.
+
+* Updated socket.io to v0.9.16.
+
+* Removed init property from view and edit.
+
+* FilePicker gets key from modules.json.
+
+* Added ability to put callback to view.
+
+* Added help module.
+
+* Added ability to show help on F1.
+
+* Added ability to set attributes in Loader.anyload.
+
+* Fixed upload function of filepicker.
+
+* fix(DOM) this promptNewFile -> Cmd.promptNewFile
+
+* feature(console) add jq-console
+
+* fix(style) .name{width}: 37% -> 35%
+
+* feature(view) show(pData) -> show(pData, pCallBack)
+
+* doc(license) add
+
+* doc(contribute) add commit message conventions
+
+* fix(socket) log level: debug -> info
+
+* feature(console) jquery-terminal -> jq-console
+
+* fix(help) remove pre
+
+* feature(socket) add disconect
+
+* feature(socket) add minification and gzip
+
+* feature(socket) if id in use - reconnect
+
+* chore(console) remove jquery-terminal
+
+* feature(favicon) add
+
+* fix(style) .mode width: 25% -> 23%
+
+* feature(edit) codemirror -> ace
+
+* feature(edit) add diff
+
+* chore(dom) jquery: v2.0.0 -> v2.0.3
+
+* feature(util) call log with any count of params
+
+* feature(util) add logArray
+
+* feature(socket) add chdir on cd
+
+* feature(dom) add events.add array
+
+* feauture(client) add unload event
+
+* feature(update) exec -> exec(cwd)
+
+* feature(cloudcmd) add bin
+
+* feature(rest) add put patch
+
+* feature(edit) save file only if it was changed
+
+* fix(dom) rm array param from jsload
+
+* feature(main) add to exports checkCallBackParams
+
+* feature(win) diskpart -> wmic
+
+* fix(diff) rm, work bad with win line ending
+
+* fix(dom) this -> Cmd
+
+* fix(css) .cmd-button: "outline:0"
+
+* feature(index) add "~ - console" button
+
+* chore(css) .cmd-button {width: 10% -> 8%}
+
+* feature(index) add "f9 - menu" button
+
+* feature(Events) dispatch: event -> event || eventName
+
+* feature(css) add media-query for .cmd-button
+
+* fix(view) open on f3 cmd button click
+
+* fix(rest) save and create new file
+
+* chore(minify) v0.2.0 -> v0.2.1
+
+
 2012.04.22, v0.2.0
 
 * Added alerting about errors.
@@ -152,7 +303,7 @@ keyStop: function(e, opt) {
 * Removed loading spinner by commenting jquery.fancybox.css block
 #fancybox-loading div {
     width: 44px;
-	height: 44px;
+    height: 44px;
 	background: url('fancybox_loading.gif') center center no-repeat;
 }
 

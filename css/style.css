@@ -26,12 +26,24 @@
   src: local('Droid Sans Mono'), local('DroidSansMono'), url('//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
 }
 
-body{
+body {
     font:16px "Droid Sans Mono";
     background-color:white;
 }
 
-.path-icon{
+#fm::-moz-selection, #left>li::-moz-selection, #right>li::-moz-selection, .path::-moz-selection, .fm-header::-moz-selection,
+.mini-icon::-moz-selection, .name::-moz-selection, .size::-moz-selection, .owner::-moz-selection, .mode::-moz-selection {
+    text-shadow: none; opacity: 0;
+}
+
+#fm::selection, #left>li::selection, #right>li::selection, .path::selection, .fm-header::selection,
+.mini-icon::selection, .name::selection, .size::selection, .owner::selection, .mode::selection {
+    text-shadow: none;
+    opacity: 0;
+    background-color:white; /* opera */
+}
+
+.path-icon {
     position: relative;
     top: 3px;
     left: -4px;
@@ -44,15 +56,15 @@ body{
     color: #46A4C3;/*#55BF3F; green*/
     text-shadow:black 0 2px 1px;
 }
-.path-icon:hover{
+.path-icon:hover {
   cursor:pointer;
 }
-.path-icon:active{
+.path-icon:active {
     position: relative;
     top: 4px;
     text-shadow:black 0 0 1px;
 } 
-.icon{
+.icon {
     display:inline-block;
     width:16px;
     height:16px;
@@ -60,60 +72,63 @@ body{
     /* font-family: 'GeneralFoundicons'; */
     font-family: 'Fontello';
 }
-.error::before{
+.error::before {
     position: relative;
     font-size: 14px;
     color: rgb(222, 41, 41);
     cursor :default;
     content: '\2757';
 }
-.loading{
+.loading {
     position:relative;
     top:1px;
     background:url(/img/spinner.gif);
 }
-.error:hover{
+
+.error:hover {
     color:rgb(222, 41, 41);
     color:rgba(222, 41, 41, 0.81);
 }
-.refresh-icon{
+
+.refresh-icon {
     background:url(/img/panel_refresh.png) no-repeat;
 }
-.refresh-icon:active{
-  /*background-position-y: -15px;*/
-    background:url(/img/panel_refresh.png) 0 -15px no-repeat;
+
+.refresh-icon:active {
+    background-position: 0 -15px;
 }
 
-.cmd-button{
-    width: 10%;
-    margin: 20px 2px 0 2px;
-    overflow: hidden;
-    color: rgb(49,123,249);
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.cmd-button {
     background-color: white;
     border: 1.5px solid rgba(49,123,249,.40);
+    color: rgb(49,123,249);
+    margin: 20px 2px 0 2px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    outline: 0;
+    white-space: nowrap;
+    width: 8%;
 }
 
-.cmd-button:hover{
+.cmd-button:hover {
     border: 1.5px solid rgb(0,0,0);
 }
 
-.cmd-button:active{
+.cmd-button:active {
     color: white;
     background-color: rgb(49,123,249);
 }
 
-.clear-cache{
+.clear-cache {
     margin-right: 6px;
     margin-left: 7px;
     background:url(/img/console_clear.png)  -4px -4px no-repeat;
 }
-.clear-cache:active{
+.clear-cache:active {
     top:5px;
 }
 
-.links{
+.links {
     color:red;
 }
 
@@ -135,17 +150,17 @@ body{
  * именем файла во время
  * установления курсора
  */
-.current-file > .mini-icon{
+.current-file > .mini-icon {
      left: -6px;
 }
 /* freeupex */
-.directory{
+.directory {
     /*list-style-image*/
     background-image:url('/img/dir.png');
     background-position: 0 0;
     background-repeat: no-repeat;  
 }
-.text-file{
+.text-file {
     /*list-style-image*/
     background-image:url('/img/txt.png');
     background-position: 0 0;
@@ -155,7 +170,7 @@ body{
     height: 90%;
     margin: 26px 26px 0 26px;
 }
-.fm-header{
+.fm-header {
     font-weight: bold;
 }
 #path{
@@ -166,7 +181,7 @@ body{
 }
 
 /* фон файла, на котором курсор*/
-.current-file{
+.current-file {
     border: 1.5px solid rgba(49, 123, 249, .40);
 }
 
@@ -187,9 +202,9 @@ body{
 }
 
 /* информация о файлах и папках*/
-.name{
+.name {
     float: left;
-    width: 37%;
+    width: 35%;
     /* если длина имени файла больше 16 символов
      * отрезаем лишнее, оставляя лишь 16,
      * и добавляем две точки и тайтл
@@ -198,7 +213,7 @@ body{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.size{
+.size {
     float:left;
     width:16%;
     /* Ставим отступ, что бы
@@ -212,9 +227,9 @@ body{
      */
     text-align: right;
 }
-.mode{
+.mode {
   float: right;
-  width: 25%;
+  width: 23%;
 }
 
 /* changin ul to panel for high speed parsing*/
@@ -250,7 +265,7 @@ a:hover, a:active {
         display:none;
     }
     /* текущий файл под курсором */
-    .current-file{
+    .current-file {
         background-color: rgb(49, 123, 249);
         background-color: rgba(49, 123, 249, .40);
         color:white;
@@ -259,11 +274,11 @@ a:hover, a:active {
     .current-file > .mini-icon{
         color:white;
     }
-    .current-file > .text-file::before{
+    .current-file > .text-file::before {
         color:white;
     }
     
-    .fm-header{
+    .fm-header {
         display:none;
     }
     
@@ -279,23 +294,23 @@ a:hover, a:active {
         position: relative;
         top: 10px
     }
-    .directory::before{
+    .directory::before {
         content: '\1f4c1';
     }
-     .text-file::before{
+     .text-file::before {
         color: rgb(26, 224, 124);
         color: rgba(26, 224, 124, 0.56);
         content: '\1f4c4';
     }
-    .text-file{
+    .text-file {
         background-image:none;
     }
         
     /* убираем заголовок*/
-    .fm_header{
+    .fm_header {
         display:none;
     }        
-    .mode,.size,.owner{
+    .mode,.size,.owner {
         /* располагаем элементы 
          * один под другим
          */
@@ -306,31 +321,35 @@ a:hover, a:active {
         text-align: left;
     }
     /* выводим заголовки рядом с полями */
-    .name::before{
+    .name::before {
         content: 'name:';
         font-weight: bold;
         font-size: 13px;
     }
-    .mode::before{
+    .mode::before {
         content: 'mode:';
         font-weight: bold;
         font-size: 13px;
     }
-    .size::before{
+    .size::before {
         content: 'size:';
         font-weight: bold;
         font-size: 13px;
     }
-    .owner::before{
+    .owner::before {
         content: 'owner:';
         font-weight: bold;
         font-size: 13px;
     }
     
-    .name{
+    .name {
         float: none;
         width:100%;
         font-size: 18px;
+    }
+    
+    .cmd-button {
+        width: 20%;
     }
 }
 @media only screen and (min-width: 601px) and (max-width: 785px){
@@ -339,6 +358,10 @@ a:hover, a:active {
     }
     #right{
         display:none;
+    }
+    
+    .cmd-button {
+        width: 15%;
     }
 }
 
@@ -349,5 +372,9 @@ a:hover, a:active {
     /* если правая панель не помещаеться - прячем её */
     #right{
         display:none;
+    }
+    
+    .cmd-button {
+        width: 10%;
     }
 }
