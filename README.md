@@ -1,4 +1,4 @@
-Cloud Commander v0.2.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+Cloud Commander v0.3.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
 [![Flattr][FlattrIMGURL]][FlattrURL]
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
@@ -19,7 +19,7 @@ DEMO:
 Google PageSpeed Score : [100](//developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.aws.af.cm_2F&mobile=false "score") (out of 100)
 (or 96 if js or css minification disabled in config.json).
 
-![Cloud Commander](img/logo/cloudcmd.png "Cloud Commander")
+![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
 Benefits
 ---------------
@@ -47,6 +47,15 @@ Hot keys
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
 There is a short list:
+- **F1**                - help
+- **F2**                - rename current file
+- **F3**                - view
+- **F4**                - edit
+- **F5**                - copy
+- **F6**                - rename/move
+- **F7**                - new dir
+- **F8, Delete**        - remove current file
+- **F9**                = menu
 - **Ctrl + r**          - reload dir content
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
@@ -58,23 +67,21 @@ There is a short list:
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
 - **End**               - to end of list
-- **F8, Delete**        - remove current file
 - **Shift + Delete**    - remove without prompt
 - **Insert**            - select current file
-- **F2**                - rename current file
-- **Shift + F10**       - show context menu
+- **Shift + F10**       - context menu
+- **~**                 - console
 
 Viewer's hot keys
 ---------------
-- **Shift + F3**        - open viewer window
-- **Esc**               - close viewer window
+- **F3**                - open
+- **Esc**               - close
 
 Editor's hot keys
 ---------------
-- **F3**                - open CodeMirror editor in read only mode
-- **F4**                - open CodeMirror editor
-- **Ctrl + s**          - save file
-- **Esc**               - close CodeMirror editor
+- **F4**                - open
+- **Ctrl + s**          - save
+- **Esc**               - close
 
 Menu
 ---------------
@@ -87,17 +94,24 @@ Right mouse click button show context menu with items:
 - Download
 - New (File, Dir, from cloud)
 
-Installing
+Install
 ---------------
-**Cloud Commander** installing is very easy. All you need it's just clone
-repository from github. Just 2 commands:
+**Cloud Commander** install is very easy.
+All you need is 
+- install [node.js](//nodejs.org/ "node.js")
+- [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
+and unpack or just clone repository from github:
 
+```
     git clone git://github.com/coderaiser/cloudcmd.git
     cd cloudcmd
-or
-
-    npm i cloudcmd
-    mv node_modules/cloudcmd ./
+    node cloudcmd
+```
+or install in npm:
+```
+    npm i cloudcmd -g
+    cloudcmd
+```
 
 Configuration
 ---------------
@@ -117,9 +131,9 @@ All main configuration could be done thrue config.json.
     "server"    : true,             /* server mode or testing mode              */
     "logs"      : false,            /* logs or console ouput                    */
     "socket"    : true              /* enable web sockets                       */
-    "port"      : 80,               /* http port                                */
-    "sslPort"   : 443,              /* https port                               */
-    "ip"        : "127.0.0.1",      /* Cloud Commander IP                       */
+    "port"      : 80,               /* http port or null(default)               */
+    "sslPort"   : 443,              /* https port or null(default)              */
+    "ip"        : "127.0.0.1",      /* ip or null(default)                      */
     "ssl"       : true              /* should use https?                        */
     "rest"      : true              /* enable rest interface                    */
 }
@@ -131,12 +145,13 @@ Standard practices say no non-root process gets to talk to
 the Internet on a port less than 1024. Anyway I suggest you
 to start Cloud Commander as non-root. How it could be solved?
 There is a couple easy and fast ways. One of them is port forwarding by iptables.
+Just run [shell/addtables.sh](shell/addtables.sh) for default options.
 
 ```sh
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look rules before
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -L # look reles after
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look reles after
 ```
 You should see somethins like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
 
@@ -148,8 +163,8 @@ If you would want to get things back just clear rules ( **1** and **2** it's rul
 in your list they could differ).
 
 ```sh
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 1
-@:/tmp/cloudcmd (dev) $ su iptables -t nat -D PREROUTING 2
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 2
 ```
 
 To run Cloud Commander as daemon in linux you could set **log** to true in config and
@@ -167,7 +182,7 @@ For more information see **config.json** and **shell/seret.bat** *(on win32)*
 or **shell/secret.sh** *(on nix)*.
 
 
-Starting
+Start
 ---------------
 To start **Cloud Commander** only one command neaded:
     
@@ -184,9 +199,9 @@ Then type in browser
 or
 
     http://localhost
-Updating
+Update
 ---------------
-**Cloud Commander** is very alfa and it's very often updatings.
+**Cloud Commander** is very often updates.
 Update is doing automagically but it could be done also manualy
 by typing a few commands in cloudcmd directory:
 
@@ -207,37 +222,29 @@ But for minification and optimization tricks optional can be
 assingned (and installed) modules: [Minify] (https://github.com/coderaiser/minify "Minify")
 and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
 
-Install addtitional modules:
+Install addtitional modules (type in **Cloud Commander** directory):
 
     npm i
-    
-**Cloud Commander's Client Side** use module jquery for ajaxing. But only for old browsers.
-We could not use this module, but this way is fast:
-- google cdn
-- gzip
-- cache
-
-Perhaps in the future, it will not be used, but so far it has no effect on
-start loading of Cloud Commander Client Side and do things fast and stable
-it is using now.
 
 Extensions
 ---------------
 **Cloud Commander** desinged to easily porting extensions.
 For extend main functionality Cloud Commander use next modules:
-- [CodeMirror]              [CodeMirrorURL]
+- [Ace]                     [AceURL]
 - [FancyBox]                [FancyBoxURL]
 - [jQuery-contextMenu]      [jQuery-contextMenuURL]
-- [jquery.terminal]         [jquery.terminalURL]
+- [jq-console]              [jq-consoleURL]
 - [github]                  [githubURL]
 - [dropbox-js]              [dropbox-jsURL]
+- [jquery]                  [jqueryURL]
 
-[CodeMirrorURL]:            //github.com/marijnh/CodeMirror "CodeMirror"
+[AceURL]:                   //ace.ajax.org/ "Ace"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
 [jQuery-contextMenuURL]:    //github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
-[jquery.terminalURL]:       //github.com/jcubic/jquery.terminal "jquery.terminal"
-[githubURL]:                //github.com/michael/github
-[dropbox-jsURL]:            //github.com/dropbox/dropbox-js
+[jq-consoleURL]:            //github.com/replit/jq-console‎ "jq-console"
+[githubURL]:                //github.com/michael/github "github"
+[dropbox-jsURL]:            //github.com/dropbox/dropbox-js "dropbox-js"
+[jqueryURL]:                //jquery.com
 
 Contributing
 ---------------
@@ -257,6 +264,7 @@ so to get it you should type a couple more commands:
 
 Version history
 ---------------
+- *2012.07.01*, **[v0.3.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.3.0.zip)**
 - *2012.04.22*, **[v0.2.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.2.0.zip)**
 - *2012.03.01*, **[v0.1.9](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.9.zip)**
 - *2012.12.12*, **[v0.1.8](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.8.zip)**
@@ -269,6 +277,11 @@ Version history
 - *2012.07.11*, **[v0.1.1](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.1.zip)**
 - *2012.00.00*, **[v0.1.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.0.zip)**
 
+License
+---------------
+MIT [license](LICENSE "license").
+
 Special Thanks
 ---------------
-[Elena Zalitok](http://vk.com/politilena "Elena Zalitok")  for logo.
+[Elena Zalitok](http://vk.com/politilena "Elena Zalitok") for
+[logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
