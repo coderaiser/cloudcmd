@@ -55,7 +55,7 @@ There is a short list:
 - **F6**                - rename/move
 - **F7**                - new dir
 - **F8, Delete**        - remove current file
-- **F9**                = menu
+- **F9**                - menu
 - **Ctrl + r**          - reload dir content
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
