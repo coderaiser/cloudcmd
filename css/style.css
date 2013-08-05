@@ -44,17 +44,16 @@ body {
 }
 
 .path-icon {
-    position: relative;
-    top: 3px;
-    left: -4px;
-    display: inline-block;
-    /* размер иконки и позиция на png-файле*/
-    width: 15px;
-    height: 15px;
-    font-family:'FoundationIconsGeneralEnclosed';
-    font-size:30px;
-    color: #46A4C3;/*#55BF3F; green*/
-    text-shadow:black 0 2px 1px;
+    position    : relative;
+    top         : 3px;
+    left        : -4px;
+    display     : inline-block;
+    width       : 15px;
+    height      : 15px;
+    font-family :'FoundationIconsGeneralEnclosed';
+    font-size   :30px;
+    color       : #46A4C3;/*#55BF3F; green*/
+    text-shadow :black 0 2px 1px;
 }
 .path-icon:hover {
   cursor:pointer;
