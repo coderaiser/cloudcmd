@@ -60,7 +60,7 @@ There is a short list:
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
 - **Alt  + s**          - get all key bindings back
-- **Ctrl + A**          - select all files in a panel
+- **Ctrl + a**          - select all files in a panel
 - **up, down, enter**   - filesystem navigation
 - **Tab**               - move thru panels
 - **Page Up**           - up on one page
