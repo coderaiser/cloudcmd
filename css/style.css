@@ -198,6 +198,8 @@ body {
     width: 46%;
     overflow-y: auto;
     border: 1.5px solid rgba(49, 123, 249, .40);
+    margin: 0;
+    padding: 20px;
 }
 #keyspanel{
   text-align: center;
