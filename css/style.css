@@ -62,12 +62,11 @@ body {
     text-shadow:black 0 0 1px;
 } 
 .icon {
-    display:inline-block;
-    width:16px;
-    height:16px;
-    margin-left:0.5%;
-    /* font-family: 'GeneralFoundicons'; */
-    font-family: 'Fontello';
+    display     : inline-block;
+    font-family : 'Fontello';
+    height      : 15.5px;
+    margin-left : 0.5%;
+    width       : 15.5px;
 }
 .error::before {
     position: relative;
