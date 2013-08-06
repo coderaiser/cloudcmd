@@ -181,7 +181,7 @@ body {
 
 /* фон файла, на котором курсор*/
 .current-file {
-    border: 1.5px solid rgba(49, 123, 249, .40);
+    box-shadow: inset 0 0 2px rgb(49, 123, 249);
 }
 
 .selected-file, .selected-file .name > a{
