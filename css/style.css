@@ -186,6 +186,7 @@ body {
 
 .current-file {
     box-shadow: inset 0 0 2px rgb(49, 123, 249);
+    transition: ease 0.05s;
 }
 
 .selected-file, .selected-file .name > a{
