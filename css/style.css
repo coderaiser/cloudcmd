@@ -53,14 +53,17 @@ body {
     color       : #46A4C3;/*#55BF3F; green*/
     text-shadow :black 0 2px 1px;
 }
+
 .path-icon:hover {
   cursor:pointer;
 }
+
 .path-icon:active {
     position: relative;
     top: 4px;
     text-shadow:black 0 0 1px;
-} 
+}
+
 .icon {
     display     : inline-block;
     font-family : 'Fontello';
@@ -68,6 +71,7 @@ body {
     margin-left : 0.5%;
     width       : 15.5px;
 }
+
 .error::before {
     position: relative;
     font-size: 14px;
@@ -75,6 +79,7 @@ body {
     cursor :default;
     content: '\2757';
 }
+
 .loading {
     position:relative;
     top:1px;
@@ -179,7 +184,6 @@ body {
     float:left;
 }
 
-/* фон файла, на котором курсор*/
 .current-file {
     box-shadow: inset 0 0 2px rgb(49, 123, 249);
 }
@@ -198,34 +202,23 @@ body {
     margin: 0;
     padding: 20px;
 }
+
 #keyspanel{
   text-align: center;
 }
 
-/* информация о файлах и папках*/
 .name {
     float: left;
     width: 35%;
-    /* если длина имени файла больше 16 символов
-     * отрезаем лишнее, оставляя лишь 16,
-     * и добавляем две точки и тайтл
-     */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .size {
     float:left;
     width:16%;
-    /* Ставим отступ, что бы
-     * size не налазил на uid
-     * (owner)
-     */
     margin-right: 27px;
-    /* Ставим выравнивание,
-     * что бы размер был в
-     * одной ровной колонке
-     */
     text-align: right;
 }
 .mode {
@@ -233,23 +226,21 @@ body {
   width: 23%;
 }
 
-/* changin ul to panel for high speed parsing*/
-.panel, li{
-    list-style-type:none;
-    /* making cursor just arrow, 
-     * not text editing cursor
-     */
-    cursor:default;    
+.panel, li {
+    list-style-type: none;
+    cursor: default;
 }
-button{
+
+button {
   width:10%;
 }
-a{
+
+a {
   text-decoration:none;
 }
 a:hover, a:active {
-    color: #06e;
-    cursor:pointer;
+    color : #06e;
+    cursor: pointer;
 }
 
 /* Если размер окна очень маленький
@@ -257,12 +248,12 @@ a:hover, a:active {
  * друг-под-другом
 */
 /* responsive design */
-@media only screen and (max-width: 600px){
-    .panel{
+@media only screen and (max-width: 600px) {
+    .panel {
         width:94%;
     }
     /* если правая панель не помещаеться - прячем её */
-    #right{
+    #right {
         display:none;
     }
     /* текущий файл под курсором */
@@ -310,7 +301,8 @@ a:hover, a:active {
     /* убираем заголовок*/
     .fm_header {
         display:none;
-    }        
+    }
+    
     .mode,.size,.owner {
         /* располагаем элементы 
          * один под другим
@@ -353,11 +345,11 @@ a:hover, a:active {
         width: 20%;
     }
 }
-@media only screen and (min-width: 601px) and (max-width: 785px){
-    .panel{
+@media only screen and (min-width: 601px) and (max-width: 785px) {
+    .panel {
         width:94%;
     }
-    #right{
+    #right {
         display:none;
     }
     
@@ -366,12 +358,12 @@ a:hover, a:active {
     }
 }
 
-@media only screen and (min-width:786px) and (max-width: 1155px){
-    .panel{
+@media only screen and (min-width:786px) and (max-width: 1155px) {
+    .panel {
         width:94%;
     }
     /* если правая панель не помещаеться - прячем её */
-    #right{
+    #right {
         display:none;
     }
     
