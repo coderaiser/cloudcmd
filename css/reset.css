@@ -37,15 +37,6 @@ a:focus { outline: thin dotted; }
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
 a:hover, a:active { outline: 0; }
 
-/* changed ul to panel, it using only in this case for now, and will css
- * processing cost 33% with name of tag, so it should be match faster
- */
-.panel{
-    /* removed default margins */
-    padding: 20px;
-    margin: 0;
-}
-
 /*
  * 1. Display hand cursor for clickable form elements
  * 2. Allow styling of clickable form elements in iOS
