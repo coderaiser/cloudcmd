@@ -98,7 +98,7 @@ Install
 ---------------
 **Cloud Commander** install is very easy.
 All you need is 
-- install [node.js](//nodejs.org/ "node.js")
+- install [node.js](http://nodejs.org/ "node.js")
 - [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
 and unpack or just clone repository from github:
 
