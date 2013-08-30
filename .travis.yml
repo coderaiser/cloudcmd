@@ -3,6 +3,12 @@ node_js:
     - 0.6
     - 0.8
     - 0.10
+    - 0.11
+
+matrix:
+  allow_failures:
+    - node_js: '0.11'
+
 notifications:
     #webhooks:
         #http://requestb.in/12h5bl71
