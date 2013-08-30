@@ -5,14 +5,12 @@ Cloud Commander v0.3.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [FlattrIMGURL]:             http://api.flattr.com/button/flattr-badge-large.png
-[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
+[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars
 [NPMURL]:                   http://badge.fury.io/js/cloudcmd
 [BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
 [FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software "flattr"
 [NPM_INFO_URL]:             https://npmjs.org/package/cloudcmd "npm"
-
-[![NPM_INFO][NPM_INFO_IMG]][NPM_INFO_URL]
 
 **Cloud Commander** - user friendly cloud file manager.
 DEMO:
@@ -100,6 +98,8 @@ Right mouse click button show context menu with items:
 
 Install
 ---------------
+[![NPM_INFO][NPM_INFO_IMG]][NPM_INFO_URL]
+
 **Cloud Commander** install is very easy.
 All you need is 
 - install [node.js](http://nodejs.org/ "node.js")
