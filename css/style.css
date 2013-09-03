@@ -180,7 +180,7 @@ body {
 #path{
     margin-left:1.5%;
 }
-.left, #left{
+.left, #left {
     float:left;
 }
 
@@ -189,14 +189,14 @@ body {
     transition: ease 0.05s;
 }
 
-.selected-file, .selected-file .name > a{
+.selected-file, .selected-file .name > a {
     color: rgb(254,159,224);
 }
 
-.right, #right{
+.right, #right {
     float:right;
 }
-.panel{
+.panel {
     width: 46%;
     overflow-y: auto;
     border: 1.5px solid rgba(49, 123, 249, .40);
@@ -204,7 +204,7 @@ body {
     padding: 20px;
 }
 
-#keyspanel{
+#keyspanel {
   text-align: center;
 }
 
