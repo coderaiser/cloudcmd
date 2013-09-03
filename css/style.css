@@ -204,6 +204,10 @@ body {
     padding: 20px;
 }
 
+.selected-panel {
+    border-color: rgba(254, 159, 224, .40);
+}
+
 #keyspanel {
   text-align: center;
 }
