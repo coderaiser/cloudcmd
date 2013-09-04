@@ -268,16 +268,9 @@
                 pParams.name    = main.HTMLDIR + p.name + '.html';
                 lRet            = main.sendFile( pParams );
             }
-            else if ( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') ){
-                
-                if ( Util.isContainStrAtBegin(p.name, FS + 'no-js/') ){
-                    var lURL = Util.removeStr(pParams.name, 'no-js/');
-                    return main.redirect(pParams, lURL);
-                }
-                
+            else if ( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') )
                 lRet = sendCommanderContent( pParams );
-            }
-            /* termporary redirect for old urls */
+            
             else
                 lRet = false;
         }
