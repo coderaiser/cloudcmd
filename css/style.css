@@ -67,9 +67,9 @@ body {
 .icon {
     display     : inline-block;
     font-family : 'Fontello';
-    height      : 15.5px;
+    height      : 15px;
     margin-left : 0.5%;
-    width       : 15.5px;
+    width       : 15px;
 }
 
 .error::before {
