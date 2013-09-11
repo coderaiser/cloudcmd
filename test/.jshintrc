@@ -4,7 +4,6 @@
     "devel" : true,
     "eqeqeq" : true,
     "es5" : true,
-    "forin" : true,
     "globalstrict" : true,
     "jquery" : false,
     "newcap" : true,
