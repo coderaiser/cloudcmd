@@ -13,6 +13,6 @@
     "nonew" : true,
     "strict" : true,
     "undef" : true,
-    "evil"  : true, /* using for JSON-parsing if brawser old and crappy */
+    "evil"  : true,
     "expr" : true
 }
