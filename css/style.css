@@ -251,13 +251,6 @@ a:hover, a:active {
 */
 /* responsive design */
 @media only screen and (max-width: 600px) {
-    .panel {
-        width:94%;
-    }
-    /* если правая панель не помещаеться - прячем её */
-    #right {
-        display:none;
-    }
     /* текущий файл под курсором */
     .current-file {
         background-color: rgb(49, 123, 249);
@@ -348,28 +341,23 @@ a:hover, a:active {
     }
 }
 @media only screen and (min-width: 601px) and (max-width: 785px) {
-    .panel {
-        width:94%;
-    }
-    #right {
-        display:none;
-    }
-    
     .cmd-button {
         width: 15%;
     }
 }
 
 @media only screen and (min-width:786px) and (max-width: 1155px) {
+    .cmd-button {
+        width: 10%;
+    }
+}
+
+@media only screen and (max-width: 1155px) {
     .panel {
         width:94%;
     }
     /* если правая панель не помещаеться - прячем её */
     #right {
         display:none;
-    }
-    
-    .cmd-button {
-        width: 10%;
     }
 }
