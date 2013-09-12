@@ -195,10 +195,10 @@ body {
 }
 .panel {
     width: 46%;
+    padding: 20px;
+    margin: 0;
     overflow-y: auto;
     border: 1.5px solid rgba(49, 123, 249, .40);
-    margin: 0;
-    padding: 20px;
 }
 
 .selected-panel {
