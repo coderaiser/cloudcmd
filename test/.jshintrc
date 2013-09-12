@@ -3,7 +3,6 @@
     "browser" : true,
     "devel" : true,
     "eqeqeq" : true,
-    "es5" : true,
     "globalstrict" : true,
     "jquery" : false,
     "newcap" : true,
