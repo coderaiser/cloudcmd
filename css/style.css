@@ -83,11 +83,6 @@ body {
     background:url(/img/spinner.gif);
 }
 
-.error:hover {
-    color:rgb(222, 41, 41);
-    color:rgba(222, 41, 41, 0.81);
-}
-
 .refresh-icon {
     background:url(/img/panel_refresh.png) no-repeat;
 }
