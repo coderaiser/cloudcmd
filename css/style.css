@@ -62,9 +62,6 @@ body {
 }
 
 .icon {
-    display     : inline-block;
-    width       : 15px;
-    height      : 14.8px;
     margin-left : 0.5%;
 }
 
@@ -78,6 +75,9 @@ body {
 }
 
 .loading {
+    display     : inline-block;
+    width       : 15px;
+    height      : 14.8px;
     position:relative;
     top:1px;
     background:url(/img/spinner.gif);
