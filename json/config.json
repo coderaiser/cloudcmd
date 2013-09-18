@@ -2,6 +2,7 @@
     "api_url"               : "/api/v1",
     "appcache"              : false,
     "analytics"             : true,
+    "localStorage"          : true,
     "minification" : {
         "js"    : true,
         "css"   : true,
