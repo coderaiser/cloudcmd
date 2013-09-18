@@ -19,7 +19,7 @@ so to get it you should type a couple more commands:
 
 Commit
 ---------------
-Format of the commit message: **type(scope): subject**
+Format of the commit message: **type(scope) subject**
 
 **Type**:
 - feature
