@@ -1,6 +1,7 @@
 {
     "api_url"               : "/api/v1",
     "appcache"              : false,
+    "analytics"             : true,
     "minification" : {
         "js"    : true,
         "css"   : true,
