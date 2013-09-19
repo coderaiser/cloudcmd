@@ -127,7 +127,7 @@ All main configuration could be done thrue config.json.
     "analytics"         : true,     /* google analytics suport                  */
     "localStorage"      : true,     /* cache directory data                     */
     "minification" : {              /* minification of js,css,html and img      */
-        "js"    : false,            /* minify module neaded                     */
+        "js"    : false,            /* minify module needed                     */
         "css"   : false,            /* npm i minify                             */
         "html"  : true,
         "img"   : false
@@ -190,7 +190,7 @@ or **shell/secret.sh** *(on nix)*.
 
 Start
 ---------------
-To start **Cloud Commander** only one command neaded:
+To start **Cloud Commander** only one command needed:
     
     node cloudcmd
 or on win platform just
