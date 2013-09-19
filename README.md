@@ -100,7 +100,7 @@ Install
 ---------------
 [![NPM_INFO][NPM_INFO_IMG]][NPM_INFO_URL]
 
-**Cloud Commander** install is very easy.
+Installing **Cloud Commander** is very simple.
 All you need is 
 - install [node.js](http://nodejs.org/ "node.js")
 - [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
