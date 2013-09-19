@@ -122,24 +122,26 @@ Configuration
 All main configuration could be done thrue config.json.
 ```js
 {
-    "api_url"   :"/api/v1",
-    "appcache"  : false,            /* html5 feature appcache                   */
-    "cache"     : true,             /* cashing on a client                      */
+    "api_url"           :"/api/v1",
+    "appcache"          : false,    /* cache files for offline use              */
+    "analytics"         : true,     /* google analytics suport                  */
+    "localStorage"      : true,     /* cache directory data                     */
     "minification" : {              /* minification of js,css,html and img      */
         "js"    : false,            /* minify module neaded                     */
         "css"   : false,            /* npm i minify                             */
         "html"  : true,
         "img"   : false
     },
-    "show_keys_panel" : true,       /* show classic panel with buttons of keys  */
-    "server"    : true,             /* server mode or testing mode              */
-    "logs"      : false,            /* logs or console ouput                    */
-    "socket"    : true              /* enable web sockets                       */
-    "port"      : 80,               /* http port or null(default)               */
-    "sslPort"   : 443,              /* https port or null(default)              */
-    "ip"        : "127.0.0.1",      /* ip or null(default)                      */
-    "ssl"       : true              /* should use https?                        */
-    "rest"      : true              /* enable rest interface                    */
+    "cache"             : true,
+    "logs"              : false,     /* logs or console ouput                    */
+    "show_keys_panel"   : true,      /* show classic panel with buttons of keys  */
+    "server"            : true,      /* server mode or testing mode              */
+    "socket"            : true       /* enable web sockets                       */
+    "port"              : 8000,      /* http port or null(default)               */
+    "sslPort"           : 443,       /* https port or null(default)              */
+    "ip"                : null,      /* ip or null(default)                      */
+    "ssl"               : false      /* should use https?                        */
+    "rest"              : true       /* enable rest interface                    */
 }
 ```
 
