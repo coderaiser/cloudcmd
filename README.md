@@ -194,15 +194,14 @@ To start **Cloud Commander** only one command neaded:
 or on win platform just
 
     cloudcmd
-After thet Cloud Commander reads config file **config.json** and start server
-on 80 port, if none of port varibles(*cloud9*, *cloudfoundry* and *nodester*)
-isn't exist.
+After thet Cloud Commander reads port information from config file [config.json](json/config.json#L17) and start server
+on this port ( **8000** by default ), if none of port varibles ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
 Then type in browser
 
-    http://127.0.0.1
+    http://127.0.0.1:8000
 or
 
-    http://localhost
+    http://localhost:8000
 Update
 ---------------
 **Cloud Commander** is very often updates.
