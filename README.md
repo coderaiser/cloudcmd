@@ -159,7 +159,7 @@ Just run [shell/addtables.sh](shell/addtables.sh) for default options.
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules after
 ```
-You should see somethins like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
+You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
 
     target     prot opt source               destination
     REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
