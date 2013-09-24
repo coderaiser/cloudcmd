@@ -169,8 +169,8 @@ If you would want to get things back just clear rules ( **1** and **2** it's rul
 in your list they could differ).
 
 ```sh
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 2
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
 ```
 
 To run Cloud Commander as daemon in linux you could set **log** to true in config and
