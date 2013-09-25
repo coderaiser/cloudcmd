@@ -12,7 +12,7 @@ Cloud Commander v0.3.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software "flattr"
 [NPM_INFO_URL]:             https://npmjs.org/package/cloudcmd "npm"
 
-**Cloud Commander** - user friendly cloud file manager.
+**Cloud Commander** - cloud file manager with console and editor.
 DEMO:
 [io](http://io.cloudcmd.io "io"),
 [cloudfoundry] (https://cloudcmd.cloudfoundry.com "cloudfoundry"),
