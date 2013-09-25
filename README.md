@@ -174,12 +174,12 @@ in your list they could differ).
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
 ```
 
-###ngynx
-Get [ngynx](http://nginx.org/ "ngynx"). On linux it could be done like that
+###nginx
+Get [nginx](http://nginx.org/ "nginx"). On linux it could be done like that
 ```sh
-sudo apt-get install ngynx #for ubuntu and debian
+sudo apt-get install nginx #for ubuntu and debian
 ```
-Than make host file **/etc/ngynx/sites-enabled/io.cloudcmd.io**
+Than make host file **/etc/nginx/sites-enabled/io.cloudcmd.io**
 ( *io.cloudcmd.io* is your domain name) with content:
 ```sh
 server {
@@ -194,7 +194,7 @@ server {
 ```sh
 # create symlink of this file
 ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
-# restart ngynx
+# restart nginx
 /etc/init.d/nginx restart
 ```
 
