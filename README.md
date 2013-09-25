@@ -220,7 +220,7 @@ To start **Cloud Commander** only one command needed:
 or on win platform just
 
     cloudcmd
-After thet Cloud Commander reads port information from config file [config.json](json/config.json#L17) and start server
+After that Cloud Commander reads port information from config file [config.json](json/config.json#L17) and start server
 on this port ( **8000** by default ), if none of port varibles ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
 Then type in browser
 
@@ -283,7 +283,7 @@ Getting dev version of **Cloud Commander**:
     git clone git://github.com/coderaiser/cloudcmd.git
     git checkout dev
 
-It is possible thet dev version of Cloud Commander will needed dev version of Minify,
+It is possible that dev version of Cloud Commander will needed dev version of Minify,
 so to get it you should type a couple more commands:
 
     cd node_modules
