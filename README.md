@@ -151,9 +151,9 @@ Server
 Standard practices say no non-root process gets to talk to
 the Internet on a port less than 1024. Anyway I suggest you
 to start Cloud Commander as non-root. How it could be solved?
-There is a couple easy and fast ways. One of them is port forwarding by iptables.
+There is a couple easy and fast ways. One of them is port forwarding.
+###Iptables
 Just run [shell/addtables.sh](shell/addtables.sh) for default options.
-
 ```sh
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
@@ -172,6 +172,30 @@ in your list they could differ).
 ```sh
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 2
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
+```
+
+###ngynx
+Get [ngynx](http://nginx.org/ "ngynx"). On linux it could be done like that
+```sh
+sudo apt-get install ngynx #for ubuntu and debian
+```
+Than make host file **/etc/ngynx/sites-enabled/io.cloudcmd.io**
+( *io.cloudcmd.io* is your domain name) with content:
+```sh
+server {
+    listen 80;
+    server_name io.cloudcmd.io;
+    access_log /var/log/nginx/io.cloudcmd.io.access.log;
+    location / {
+        proxy_pass    http://127.0.0.1:8000/;
+    }
+}
+```
+```sh
+# create symlink of this file
+ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
+# restart ngynx
+/etc/init.d/nginx restart
 ```
 
 To run Cloud Commander as daemon in linux you could set **log** to true in config and
