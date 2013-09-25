@@ -4,7 +4,7 @@
 # *nix version
 # secrets of github and dropbox
 # must not be shared
-# http://github.com/coderaiser/cloudcmd
+# http://cloudcmd.io
 #
 # for using just add $-symbol on start of name
 # like $github_secret
