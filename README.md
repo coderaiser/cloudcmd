@@ -287,5 +287,5 @@ MIT [license](LICENSE "license").
 
 Special Thanks
 ---------------
-[Elena Zalitok](http://vk.com/politilena "Elena Zalitok") for
-[logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
+- [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
+- [Elec-ua](https://github.com/elec-ua) for [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations.
