@@ -165,7 +165,7 @@ You should see something like this ( **8000** and **4430** should be in config a
     REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
     REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
 
-If you would want to get things back just clear rules ( **1** and **2** it's rules numbers,
+If you would want to get things back just clear rules ( **1** and **2** it's rule numbers,
 in your list they could differ).
 
 ```sh
