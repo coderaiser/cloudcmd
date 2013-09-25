@@ -88,7 +88,7 @@ Editor's hot keys
 
 Menu
 ---------------
-Right mouse click button show context menu with items:
+Right mouse click button shows context menu with items:
 - View
 - Edit
 - Rename
