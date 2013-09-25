@@ -65,7 +65,7 @@ There is a short list:
 - **Alt  + s**          - get all key bindings back
 - **Ctrl + a**          - select all files in a panel
 - **up, down, enter**   - filesystem navigation
-- **Tab**               - move thru panels
+- **Tab**               - move via panels
 - **Page Up**           - up on one page
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
@@ -120,7 +120,7 @@ or install in npm:
 
 Configuration
 ---------------
-All main configuration could be done thrue config.json.
+All main configuration could be done via config.json.
 ```js
 {
     "api_url"           :"/api/v1",
