@@ -1,5 +1,6 @@
 Cloud Commander v0.3.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
+###[Main][MainURL] [Blog][BlogURL] [Demo][DemoURL]
 [![Flattr][FlattrIMGURL]][FlattrURL]
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
 [BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
@@ -11,6 +12,9 @@ Cloud Commander v0.3.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
 [FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software "flattr"
 [NPM_INFO_URL]:             https://npmjs.org/package/cloudcmd "npm"
+[MainURL]:                  http://cloudcmd.io "Main"
+[BlogURL]:                  http://blog.cloudcmd.io "Blog"
+[DemoURL]:                  http://io.cloudcmd.io "Demo"
 
 **Cloud Commander** - cloud file manager with console and editor.
 DEMO:
