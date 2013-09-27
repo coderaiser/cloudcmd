@@ -1,6 +1,6 @@
 {
     "name": "cloudcmd",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
     "description": "User friendly cloud file manager.",
     "homepage": "https://github.com/coderaiser/cloudcmd",
@@ -18,7 +18,7 @@
     "node": "0.6.17",
     "subdomain": "cloudcmd",
     "dependencies": {
-        "dropbox": "0.10.0",
+        "dropbox": "0.10.1",
         "minify": "0.2.1",
         "socket.io": "0.9.16"
     },
