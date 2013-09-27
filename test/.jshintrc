@@ -3,8 +3,6 @@
     "browser" : true,
     "devel" : true,
     "eqeqeq" : true,
-    "es5" : true,
-    "forin" : true,
     "globalstrict" : true,
     "jquery" : false,
     "newcap" : true,
@@ -14,5 +12,6 @@
     "nonew" : true,
     "strict" : true,
     "undef" : true,
-    "evil"  : true /* using for JSON-parsing if brawser old and crappy */
+    "evil"  : true,
+    "expr" : true
 }
