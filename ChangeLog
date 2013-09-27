@@ -2,7 +2,6 @@
 
 feature:
 - (edit) add showMessage
-- (dom) DOMTreeProto: add DOM
 - (config) add localStorage
 - (config) add analytics
 - (socket) max reconnection attempts: 1000000 -> Math.pow- (2, 64)
@@ -49,6 +48,7 @@ fix:
 - (css) .icon: {width, height: 16px -> 15.5px}
 
 inside:
+- (dom) DOMTreeProto: add DOM
 - (util) add asyncCall
 - (listeners) appCache: add getConfig
 - (socket) add transports
@@ -103,7 +103,6 @@ inside:
 - (rest) add putFile
 - (css) rm !important
 - (css) path-icon: rm font-family, font-size
-- (rest) zip
 
 2012.07.01, v0.3.0
 
