@@ -31,63 +31,56 @@ body {
     background-color:white;
 }
 
-#fm::-moz-selection, #left>li::-moz-selection, #right>li::-moz-selection, .path::-moz-selection, .fm-header::-moz-selection,
-.mini-icon::-moz-selection, .name::-moz-selection, .size::-moz-selection, .owner::-moz-selection, .mode::-moz-selection {
-    text-shadow: none; opacity: 0;
-}
-
-#fm::selection, #left>li::selection, #right>li::selection, .path::selection, .fm-header::selection,
-.mini-icon::selection, .name::selection, .size::selection, .owner::selection, .mode::selection {
-    text-shadow: none;
-    opacity: 0;
-    background-color:white; /* opera */
+#fm, #left>li, #right>li, .path, .fm-header,
+.mini-icon, .name, .size, .owner, .mode, #keyspanel, .cmd-button {
+    -webkit-user-select : none;
+    -moz-user-select    : none;
+    -ms-user-select     : none;
+    -o-user-select      : none;
+    user-select         : none;
 }
 
 .path-icon {
-    position: relative;
-    top: 3px;
-    left: -4px;
-    display: inline-block;
-    /* размер иконки и позиция на png-файле*/
-    width: 15px;
-    height: 15px;
-    font-family:'FoundationIconsGeneralEnclosed';
-    font-size:30px;
-    color: #46A4C3;/*#55BF3F; green*/
-    text-shadow:black 0 2px 1px;
+    position    : relative;
+    top         : 3px;
+    left        : -4px;
+    display     : inline-block;
+    width       : 15px;
+    height      : 15px;
+    color       : #46A4C3;/*#55BF3F; green*/
+    text-shadow :black 0 2px 1px;
 }
+
 .path-icon:hover {
   cursor:pointer;
 }
+
 .path-icon:active {
     position: relative;
     top: 4px;
     text-shadow:black 0 0 1px;
-} 
-.icon {
-    display:inline-block;
-    width:16px;
-    height:16px;
-    margin-left:0.5%;
-    /* font-family: 'GeneralFoundicons'; */
-    font-family: 'Fontello';
 }
+
+.icon {
+    margin-left : 0.5%;
+}
+
 .error::before {
     position: relative;
     font-size: 14px;
+    font-family : 'Fontello';
     color: rgb(222, 41, 41);
     cursor :default;
     content: '\2757';
 }
+
 .loading {
+    display     : inline-block;
+    width       : 15px;
+    height      : 14.8px;
     position:relative;
     top:1px;
     background:url(/img/spinner.gif);
-}
-
-.error:hover {
-    color:rgb(222, 41, 41);
-    color:rgba(222, 41, 41, 0.81);
 }
 
 .refresh-icon {
@@ -99,24 +92,27 @@ body {
 }
 
 .cmd-button {
+    width: 8%;
+    margin: 20px 2px 0 2px;
+    overflow: hidden;
+    color: rgb(49,123,249);
+    text-overflow: ellipsis;
+    white-space: nowrap;
     background-color: white;
     border: 1.5px solid rgba(49,123,249,.40);
-    color: rgb(49,123,249);
-    margin: 20px 2px 0 2px;
-    text-overflow: ellipsis;
-    overflow: hidden;
     outline: 0;
-    white-space: nowrap;
-    width: 8%;
+    transition: ease 0.1s;
 }
 
 .cmd-button:hover {
     border: 1.5px solid rgb(0,0,0);
+    transition: ease 0.5s;
 }
 
 .cmd-button:active {
     color: white;
     background-color: rgb(49,123,249);
+    transition: ease 0.1s;
 }
 
 .clear-cache {
@@ -176,55 +172,50 @@ body {
 #path{
     margin-left:1.5%;
 }
-.left, #left{
+.left, #left {
     float:left;
 }
 
-/* фон файла, на котором курсор*/
 .current-file {
-    border: 1.5px solid rgba(49, 123, 249, .40);
+    box-shadow: inset 0 0 2px rgb(49, 123, 249);
+    transition: ease 0.05s;
 }
 
-.selected-file, .selected-file .name > a{
+.selected-file, .selected-file .name > a {
     color: rgb(254,159,224);
 }
 
-.right, #right{
+.right, #right {
     float:right;
 }
-.panel{
+.panel {
     width: 46%;
+    padding: 20px;
+    margin: 0;
     overflow-y: auto;
     border: 1.5px solid rgba(49, 123, 249, .40);
 }
-#keyspanel{
+
+.selected-panel {
+    border-color: rgba(254, 159, 224, .40);
+}
+
+#keyspanel {
   text-align: center;
 }
 
-/* информация о файлах и папках*/
 .name {
     float: left;
     width: 35%;
-    /* если длина имени файла больше 16 символов
-     * отрезаем лишнее, оставляя лишь 16,
-     * и добавляем две точки и тайтл
-     */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .size {
     float:left;
     width:16%;
-    /* Ставим отступ, что бы
-     * size не налазил на uid
-     * (owner)
-     */
     margin-right: 27px;
-    /* Ставим выравнивание,
-     * что бы размер был в
-     * одной ровной колонке
-     */
     text-align: right;
 }
 .mode {
@@ -232,23 +223,21 @@ body {
   width: 23%;
 }
 
-/* changin ul to panel for high speed parsing*/
-.panel, li{
-    list-style-type:none;
-    /* making cursor just arrow, 
-     * not text editing cursor
-     */
-    cursor:default;    
+.panel, li {
+    list-style-type: none;
+    cursor: default;
 }
-button{
+
+button {
   width:10%;
 }
-a{
+
+a {
   text-decoration:none;
 }
 a:hover, a:active {
-    color: #06e;
-    cursor:pointer;
+    color : #06e;
+    cursor: pointer;
 }
 
 /* Если размер окна очень маленький
@@ -256,14 +245,7 @@ a:hover, a:active {
  * друг-под-другом
 */
 /* responsive design */
-@media only screen and (max-width: 600px){
-    .panel{
-        width:94% !important;
-    }
-    /* если правая панель не помещаеться - прячем её */
-    #right{
-        display:none;
-    }
+@media only screen and (max-width: 600px) {
     /* текущий файл под курсором */
     .current-file {
         background-color: rgb(49, 123, 249);
@@ -309,7 +291,8 @@ a:hover, a:active {
     /* убираем заголовок*/
     .fm_header {
         display:none;
-    }        
+    }
+    
     .mode,.size,.owner {
         /* располагаем элементы 
          * один под другим
@@ -352,29 +335,24 @@ a:hover, a:active {
         width: 20%;
     }
 }
-@media only screen and (min-width: 601px) and (max-width: 785px){
-    .panel{
-        width:94% !important;
-    }
-    #right{
-        display:none;
-    }
-    
+@media only screen and (min-width: 601px) and (max-width: 785px) {
     .cmd-button {
-        width: 15%;
+        width: 13%;
     }
 }
 
-@media only screen and (min-width:786px) and (max-width: 1155px){
-    .panel{
-        width:94% !important;
-    }
-    /* если правая панель не помещаеться - прячем её */
-    #right{
-        display:none;
-    }
-    
+@media only screen and (min-width:786px) and (max-width: 1155px) {
     .cmd-button {
         width: 10%;
+    }
+}
+
+@media only screen and (max-width: 1155px) {
+    .panel {
+        width:94%;
+    }
+    /* если правая панель не помещаеться - прячем её */
+    #right, .cmd-button#f5, .cmd-button#f6 {
+        display: none;
     }
 }

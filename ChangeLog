@@ -1,3 +1,109 @@
+2012.09.27, v0.4.0
+
+feature:
+- (edit) add showMessage
+- (config) add localStorage
+- (config) add analytics
+- (socket) max reconnection attempts: 1000000 -> Math.pow- (2, 64)
+- (css) .cmd-button - (601px - 785px): 15% -> 13%
+- (css) hide f5, f6 on one-panel-view
+- (update) git pull -> git pull --rebase
+- (client) add ability to upload files on drag'n'drop
+- (client) add route
+- (socket) add reconnection delay, max attempts
+- (console) rm jquery-migrate
+- (edit) rm "nothing to save"
+- (menu, dom) add zipFile
+
+update:
+- (view) fancyBox v2.1.4 -> v2.1.5
+
+fix:
+- (client) ajaxLoad fs: removeStr -> removeStrOneTime
+- (cloudcmd) indexProcessing: appcache
+- (rest) onFS: lName -> p.name, p.name -> lName
+- (cloudfunc) ";" -> ","
+- (client) route -> CloudCmd.route
+- (dom) getCurrentFileContent: add dataType check
+- (dom) Loader ajax: add dataType
+- (rest) stream.createPipe -> pipe.create
+- (socket) Win32 -> WIN32
+- (socket) crash on win7
+- (main) add stream
+- (view) show: add createTextNode
+- (css) .icon height: 14.95 -> 14.8- (ie)
+- (css) .icon height: 15 -> 14.95- (ie)
+- (css) .icon height, width: 15.5 -> 15
+- (client) unload, beforeunload
+- (dom) jqueryLoad: pCallBack -> onload: pCallBack
+- (dom) jqueryLoad: add pCallBack
+- (dom) retJSLoad: this -> Loader
+- (test) keyBinding -> key, ie -> polyfill, viewer -> view, editor/_codemirror -> edit, terminal -> console
+- (edit) change ace to noconflict
+- (filepicker) add mimetype "", rm default ".txt" ext
+- (main) sendError
+- (socket) reconnect
+- (server) Dir + Name -> path.join- (Dir, Name)
+- (rest) add lReadStream.on- (error, lError)
+- (css) .icon: {width, height: 16px -> 15.5px}
+
+inside:
+- (dom) DOMTreeProto: add DOM
+- (util) add asyncCall
+- (listeners) appCache: add getConfig
+- (socket) add transports
+- (socket) add browser client etag
+- (socket) lListent: set -> enable
+- (css) rm .error:hover
+- (view,edit,console,menu) add Loading check
+- (index)  rm "if lt IE"
+- (jshint) rm es5:  ES5 option is now set per default
+- (dom) Loader: add xhr.upload progress
+- (jshint) rm forint - (should be wrapped in an if)
+- (dom) Images: add return img
+- (dom) Loader: add responseType
+- (jshint) add expr: "if ExpressionStatement should be allowed as Programs"
+- (clieant) multiple files load, readAsText -> readAsArrayBuffer
+- (util) add isArrayBuffer
+- (util) exec: any count of args
+- (shell) add log
+- (css) .cmd-button: add transition
+- (css) selection -> user-select
+- (cloudcmd) rm no-js redirect
+- (view) add minWidth, minHeight
+- (dom) {setSelected,unsetSelected}File -> toggleSelectedFile
+- (client) add panel backlight on drag
+- (dom) add toggleClass
+- (dom) add DOM.getCurrentFileByName
+- (util) add getStrBigFirst
+- (stream) putFile -> stream.createPipe
+- (css) .current-file: add transition
+- (rest) add zip
+- (cloudfunc) add format
+- (dom) Loader ajax: add TYPE_JSON
+- (client) mv Events.add to listeners
+- (client) google-analytics -> analytics
+- (stream) stream -> pipe
+- (css) display, width, height: .icon -> .loading
+- (css) font-family: .icon -> .error::before
+- (dom) Images showError: rm textStatus, errorThrown
+- (dom) Loader: mv percent, count, msg to if
+- (update) lStdout -> lMsg
+- (css) mv .panel, #right to max-width:1155px
+- (dom) ajax, global XMLHTTP -> local xhr
+- (dom) addClass, removeClass, toggleClass
+- (dom) removeClass: Events -> DOMTree
+- (edit) add initAce, worker condition
+- (dom) Events: process
+- (client) loadModule: getStrBigFirst
+- (rest) put: /fs/file?zip -> /zip
+- (rest) put cp: add putFile
+- (rest) putFile callback: pError, pMsg -> pError
+- (rest) main.sendResponse -> sendMsg
+- (rest) add putFile
+- (css) rm !important
+- (css) path-icon: rm font-family, font-size
+
 2012.07.01, v0.3.0
 
 * Changed jquery cdn to one with https suport jquery.com -> google cdn.

@@ -1,13 +1,9 @@
 #!/bin/sh
 npm i recess jshint
-echo "jshint server.js client.js cloudcmd.js"
-node_modules/jshint/bin/jshint --config test/.jshintrc lib/server.js lib/client.js cloudcmd.js
-echo "jshint lib/cloudfunc.js lib/client/keyBinding.js"
-node_modules/jshint/bin/jshint --config test/.jshintrc lib/util.js lib/cloudfunc.js lib/client/keyBinding.js
-echo "lib/client/dom.js lib/client/ie.js lib/client/menu.js lib/client/socket.js ./lib/client/terminal.js lib/client/viewer.js lib/client/storage/_github.js lib/client/menu.js lib/client/editor/_codemirror.js"
-node_modules/jshint/bin/jshint --config test/.jshintrc lib/client/dom.js lib/client/ie.js lib/client/menu.js lib/client/socket.js ./lib/client/terminal.js lib/client/viewer.js lib/client/storage/_github.js lib/client/menu.js lib/client/editor/_codemirror.js
-echo "jshint ./package.json ./json/config.json"
-node_modules/jshint/bin/jshint --config test/.jshintrc ./package.json ./json/config.json
+echo "jshint lib/*.js lib/client/*.js lib/client/storage/*.js lib/server/*.js"
+node_modules/jshint/bin/jshint --config test/.jshintrc lib/*.js `ls lib/client/*.js| grep -v jquery` lib/client/storage/*.js lib/server/*.js
+echo "jshint package.json json/*.json"
+node_modules/jshint/bin/jshint --config test/.jshintrc package.json json/*.json
 #linting css files
 echo "recess css/*.css"
 ./node_modules/recess/bin/recess css/*.css

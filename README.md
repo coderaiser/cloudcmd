@@ -1,23 +1,22 @@
-Cloud Commander v0.3.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+Cloud Commander v0.4.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
+###[Main][MainURL] [Blog][BlogURL] [Demo][DemoURL]
 [![Flattr][FlattrIMGURL]][FlattrURL]
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
 [BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [FlattrIMGURL]:             http://api.flattr.com/button/flattr-badge-large.png
+[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars
 [NPMURL]:                   http://badge.fury.io/js/cloudcmd
 [BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
-[FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software
+[FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software "flattr"
+[NPM_INFO_URL]:             https://npmjs.org/package/cloudcmd "npm"
+[MainURL]:                  http://cloudcmd.io "Main"
+[BlogURL]:                  http://blog.cloudcmd.io "Blog"
+[DemoURL]:                  http://io.cloudcmd.io "Demo"
 
-**Cloud Commander** - user friendly cloud file manager.
-DEMO:
-[cloudfoundry] (https://cloudcmd.cloudfoundry.com "cloudfoundry"),
-[appfog] (https://cloudcmd.aws.af.cm "appfog"),
-[jitsu] (https://cloudcmd.jit.su "jitsu").
-
-Google PageSpeed Score : [100](//developers.google.com/speed/pagespeed/insights#url=http_3A_2F_2Fcloudcmd.aws.af.cm_2F&mobile=false "score") (out of 100)
-(or 96 if js or css minification disabled in config.json).
+**Cloud Commander** - cloud file manager with console and editor.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
@@ -27,15 +26,15 @@ Benefits
 - responsible design
 - one full page loading, *and then just one-time json-dir-listings loading
 (with refresh opportunity).*
-- caching readed directories *to localStorage (for now)
-(so if network will disconnected or something heppen with a signal, we
+- caching read directories *to localStorage (for now)
+(so if network will disconnected or something happens with a signal, we
 definitely will can work with cached copy of directory listings)*;
 - key binding
 - disabled js support *(working in limited mode)*.
 - automated minification *client js-files and onstart-reading Cloud manager files on server starting.*
 
 **Cloud Commander** uses all benefits of js, so if js is disabled,
-we moves to *limited mode*.
+we go to *limited mode*.
 
 Limited-mode features
 ---------------
@@ -55,14 +54,14 @@ There is a short list:
 - **F6**                - rename/move
 - **F7**                - new dir
 - **F8, Delete**        - remove current file
-- **F9**                = menu
+- **F9**                - menu
 - **Ctrl + r**          - reload dir content
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
 - **Alt  + s**          - get all key bindings back
-- **Ctrl + A**          - select all files in a panel
+- **Ctrl + a**          - select all files in a panel
 - **up, down, enter**   - filesystem navigation
-- **Tab**               - move thru panels
+- **Tab**               - move via panels
 - **Page Up**           - up on one page
 - **Page Down**         - down on one page
 - **Home**              - to begin of list
@@ -72,20 +71,46 @@ There is a short list:
 - **Shift + F10**       - context menu
 - **~**                 - console
 
-Viewer's hot keys
+Edit
 ---------------
-- **F3**                - open
-- **Esc**               - close
+[Demo](http://io.cloudcmd.io/fs/etc#/edit/passwd "Edit")
+![Edit](/img/screenshot/edit.png "Edit")
 
-Editor's hot keys
----------------
+###Hot keys
 - **F4**                - open
 - **Ctrl + s**          - save
 - **Esc**               - close
 
+Console
+---------------
+[Demo](http://io.cloudcmd.io#/console "Console")
+![Console](/img/screenshot/console.png "Console")
+
+###Hot keys
+- **~**                 - open
+- **Esc**               - close
+
 Menu
 ---------------
-Right mouse click button show context menu with items:
+[Demo](http://io.cloudcmd.io#/menu "Menu")
+![Menu](/img/screenshot/menu.png "Menu")
+Right mouse click button shows context menu with items:
+- View
+- Edit
+- Rename
+- Delete
+- Zip file
+- Upload to (Dropbox, Github, GDrive)
+- Download
+- New (File, Dir, from cloud)
+
+###Hot keys
+- **F9**                - open
+- **Esc**               - close
+
+Menu
+---------------
+Right mouse click button shows context menu with items:
 - View
 - Edit
 - Rename
@@ -96,9 +121,11 @@ Right mouse click button show context menu with items:
 
 Install
 ---------------
-**Cloud Commander** install is very easy.
+[![NPM_INFO][NPM_INFO_IMG]][NPM_INFO_URL]
+
+Installing **Cloud Commander** is very simple.
 All you need is 
-- install [node.js](//nodejs.org/ "node.js")
+- install [node.js](http://nodejs.org/ "node.js")
 - [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
 and unpack or just clone repository from github:
 
@@ -115,27 +142,29 @@ or install in npm:
 
 Configuration
 ---------------
-All main configuration could be done thrue config.json.
+All main configuration could be done via config.json.
 ```js
 {
-    "api_url"   :"/api/v1",
-    "appcache"  : false,            /* html5 feature appcache                   */
-    "cache"     : true,             /* cashing on a client                      */
+    "api_url"           :"/api/v1",
+    "appcache"          : false,    /* cache files for offline use              */
+    "analytics"         : true,     /* google analytics suport                  */
+    "localStorage"      : true,     /* cache directory data                     */
     "minification" : {              /* minification of js,css,html and img      */
-        "js"    : false,            /* minify module neaded                     */
+        "js"    : false,            /* minify module needed                     */
         "css"   : false,            /* npm i minify                             */
         "html"  : true,
         "img"   : false
     },
-    "show_keys_panel" : true,       /* show classic panel with buttons of keys  */
-    "server"    : true,             /* server mode or testing mode              */
-    "logs"      : false,            /* logs or console ouput                    */
-    "socket"    : true              /* enable web sockets                       */
-    "port"      : 80,               /* http port or null(default)               */
-    "sslPort"   : 443,              /* https port or null(default)              */
-    "ip"        : "127.0.0.1",      /* ip or null(default)                      */
-    "ssl"       : true              /* should use https?                        */
-    "rest"      : true              /* enable rest interface                    */
+    "cache"             : true,
+    "logs"              : false,     /* logs or console ouput                    */
+    "show_keys_panel"   : true,      /* show classic panel with buttons of keys  */
+    "server"            : true,      /* server mode or testing mode              */
+    "socket"            : true       /* enable web sockets                       */
+    "port"              : 8000,      /* http port or null(default)               */
+    "sslPort"           : 443,       /* https port or null(default)              */
+    "ip"                : null,      /* ip or null(default)                      */
+    "ssl"               : false      /* should use https?                        */
+    "rest"              : true       /* enable rest interface                    */
 }
 ```
 
@@ -144,27 +173,51 @@ Server
 Standard practices say no non-root process gets to talk to
 the Internet on a port less than 1024. Anyway I suggest you
 to start Cloud Commander as non-root. How it could be solved?
-There is a couple easy and fast ways. One of them is port forwarding by iptables.
+There is a couple easy and fast ways. One of them is port forwarding.
+###Iptables
 Just run [shell/addtables.sh](shell/addtables.sh) for default options.
-
 ```sh
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look reles after
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules after
 ```
-You should see somethins like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
+You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
 
     target     prot opt source               destination
     REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
     REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
 
-If you would want to get things back just clear rules ( **1** and **2** it's rules numbers,
+If you would want to get things back just clear rules ( **1** and **2** it's rule numbers,
 in your list they could differ).
 
 ```sh
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 2
+@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
+```
+
+###nginx
+Get [nginx](http://nginx.org/ "nginx"). On linux it could be done like that
+```sh
+sudo apt-get install nginx #for ubuntu and debian
+```
+Than make host file **/etc/nginx/sites-enabled/io.cloudcmd.io**
+( *io.cloudcmd.io* is your domain name) with content:
+```sh
+server {
+    listen 80;
+    server_name io.cloudcmd.io;
+    access_log /var/log/nginx/io.cloudcmd.io.access.log;
+    location / {
+        proxy_pass    http://127.0.0.1:8000/;
+    }
+}
+```
+```sh
+# create symlink of this file
+ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
+# restart nginx
+/etc/init.d/nginx restart
 ```
 
 To run Cloud Commander as daemon in linux you could set **log** to true in config and
@@ -174,31 +227,29 @@ do something like this:
 
 Authorization
 ---------------
-Thru openID Cloud Commander could authorize clients on GitHub.
+Cloud Commander could authorize clients on GitHub via openID.
 All things that should be done is must be added **id** and **secret** of application
-from github settings page and added to **config.json** (id just) and env varible (secret)
-with names: *github_id*, *github_secret*, *dropbox_key*, *dropbox_secret* etc.
-For more information see **config.json** and **shell/seret.bat** *(on win32)*
-or **shell/secret.sh** *(on nix)*.
+from github settings page and added to [modules.json](json/modules.json) (id just) and env variable (secret)
+with names: *github_id*, *github_secret*, *dropbox_key*, *dropbox_secret* etc in
+[secret.bat](shell/secret.bat) *(on win32)* or [secret.sh](shell/secret.sh) *(on nix)*.
 
 
 Start
 ---------------
-To start **Cloud Commander** only one command neaded:
+To start **Cloud Commander** only one command needed:
     
     node cloudcmd
 or on win platform just
 
     cloudcmd
-After thet Cloud Commander reads config file **config.json** and start server
-on 80 port, if none of port varibles(*cloud9*, *cloudfoundry* and *nodester*)
-isn't exist.
+After that Cloud Commander reads port information from config file [config.json](json/config.json#L17) and start server
+on this port ( **8000** by default ), if none of port varibles ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
 Then type in browser
 
-    http://127.0.0.1
+    http://127.0.0.1:8000
 or
 
-    http://localhost
+    http://localhost:8000
 Update
 ---------------
 **Cloud Commander** is very often updates.
@@ -254,7 +305,7 @@ Getting dev version of **Cloud Commander**:
     git clone git://github.com/coderaiser/cloudcmd.git
     git checkout dev
 
-It is possible thet dev version Cloud Commander will needed dev version of Minify,
+It is possible that dev version of Cloud Commander will needed dev version of Minify,
 so to get it you should type a couple more commands:
 
     cd node_modules
@@ -264,9 +315,10 @@ so to get it you should type a couple more commands:
 
 Version history
 ---------------
-- *2012.07.01*, **[v0.3.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.3.0.zip)**
-- *2012.04.22*, **[v0.2.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.2.0.zip)**
-- *2012.03.01*, **[v0.1.9](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.9.zip)**
+- *2013.09.27*, **[v0.4.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.4.0.zip)**
+- *2013.07.01*, **[v0.3.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.3.0.zip)**
+- *2013.04.22*, **[v0.2.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.2.0.zip)**
+- *2013.03.01*, **[v0.1.9](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.9.zip)**
 - *2012.12.12*, **[v0.1.8](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.8.zip)**
 - *2012.10.01*, **[v0.1.7](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.7.zip)**
 - *2012.08.24*, **[v0.1.6](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.6.zip)**
@@ -283,5 +335,5 @@ MIT [license](LICENSE "license").
 
 Special Thanks
 ---------------
-[Elena Zalitok](http://vk.com/politilena "Elena Zalitok") for
-[logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
+- [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
+- [Elec-ua](https://github.com/elec-ua) for [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations.
