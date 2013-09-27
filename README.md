@@ -71,15 +71,41 @@ There is a short list:
 - **Shift + F10**       - context menu
 - **~**                 - console
 
-Viewer's hot keys
+Edit
 ---------------
-- **F3**                - open
-- **Esc**               - close
+[Demo](http://io.cloudcmd.io/fs/etc#/edit/passwd "Edit")
+![Edit](/img/screenshot/edit.png "Edit")
 
-Editor's hot keys
----------------
+###Hot keys
 - **F4**                - open
 - **Ctrl + s**          - save
+- **Esc**               - close
+
+Console
+---------------
+[Demo](http://io.cloudcmd.io#/console "Console")
+![Console](/img/screenshot/console.png "Console")
+
+###Hot keys
+- **~**                 - open
+- **Esc**               - close
+
+Menu
+---------------
+[Demo](http://io.cloudcmd.io#/menu "Menu")
+![Menu](/img/screenshot/menu.png "Menu")
+Right mouse click button shows context menu with items:
+- View
+- Edit
+- Rename
+- Delete
+- Zip file
+- Upload to (Dropbox, Github, GDrive)
+- Download
+- New (File, Dir, from cloud)
+
+###Hot keys
+- **F9**                - open
 - **Esc**               - close
 
 Menu
