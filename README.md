@@ -230,7 +230,7 @@ ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
 /etc/init.d/nginx restart
 ```
 
-If you will want to upload files, you should add next line in **http** section of **nginx.conf**:
+If you will want to upload files, you should add next line in **http** section of **/etc/nginx/nginx.conf**:
 ```
 #limit of uploading data
 client_max_body_size 100m;
