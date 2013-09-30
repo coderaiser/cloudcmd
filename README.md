@@ -259,7 +259,7 @@ or on win platform just
 
     cloudcmd
 After that Cloud Commander reads port information from config file [config.json](json/config.json#L17 "Config") and start server
-on this port ( **8000** by default ), if none of port varibles ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
+on this port ( **8000** by default ), if none of port variables ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
 Then type in browser
 
     http://127.0.0.1:8000
