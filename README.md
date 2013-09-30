@@ -168,6 +168,16 @@ All main configuration could be done via config.json.
 }
 ```
 
+If you had changed **config** and want to keep updating via git,
+you should execute next command in root directory of **Cloud Commander**:
+```
+git update-index --assume-unchanged json/config.json
+```
+To get back to tracking:
+```
+git update-index --no-assume-unchanged json/config.json
+```
+
 Server
 ---------------
 Standard practices say no non-root process gets to talk to
