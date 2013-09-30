@@ -142,7 +142,7 @@ or install in npm:
 
 Configuration
 ---------------
-All main configuration could be done via config.json.
+All main configuration could be done via [config.json](json/config.json "Config").
 ```js
 {
     "api_url"           :"/api/v1",
@@ -252,7 +252,7 @@ To start **Cloud Commander** only one command needed:
 or on win platform just
 
     cloudcmd
-After that Cloud Commander reads port information from config file [config.json](json/config.json#L17) and start server
+After that Cloud Commander reads port information from config file [config.json](json/config.json#L17 "Config") and start server
 on this port ( **8000** by default ), if none of port varibles ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
 Then type in browser
 
