@@ -343,13 +343,11 @@
     
     
     /* function sets stdout to file log.txt */
-    function writeLogsToFile(){
-        var stdo = fs.createWriteStream('./log.txt');
+    function writeLogsToFile() {
+        var stdout      = process.stdout,
+            writeFile   = fs.createWriteStream('log.txt'),
+            write       = writeFile.write.bind(writeFile);
         
-        process.stdout.write = (function(write) {
-            return function(string, encoding, fd) {
-                    stdo.write(string);
-            };
-        })(process.stdout.write);
+        stdout.write    = write;
     }
 })();
