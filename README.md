@@ -18,7 +18,9 @@ Cloud Commander v0.4.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 **Cloud Commander** - cloud file manager with console and editor.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
+
 [![Flattr][FlattrIMGURL]][FlattrURL]
+
 Benefits
 ---------------
 - full browser compatibility *(ie6+,chrome,safari,opera,firefox)*;
