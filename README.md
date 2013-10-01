@@ -32,7 +32,6 @@ Benefits
 definitely will can work with cached copy of directory listings)*;
 - key binding
 - disabled js support *(working in limited mode)*.
-- automated minification *client js-files and onstart-reading Cloud manager files on server starting.*
 
 **Cloud Commander** uses all benefits of js, so if js is disabled,
 we go to *limited mode*.
