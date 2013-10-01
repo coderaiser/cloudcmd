@@ -1,4 +1,4 @@
-2012.09.27, v0.4.0
+2013.09.27, v0.4.0
 
 feature:
 - (edit) add showMessage
@@ -104,7 +104,7 @@ inside:
 - (css) rm !important
 - (css) path-icon: rm font-family, font-size
 
-2012.07.01, v0.3.0
+2013.07.01, v0.3.0
 
 * Changed jquery cdn to one with https suport jquery.com -> google cdn.
 
@@ -255,7 +255,7 @@ getJSONfromFileTable.
 * chore(minify) v0.2.0 -> v0.2.1
 
 
-2012.04.22, v0.2.0
+2013.04.22, v0.2.0
 
 * Added alerting about errors.
 
@@ -351,7 +351,7 @@ query other then json on /fs url.
 directory where file was removed.
 
 
-2012.03.01, v0.1.9
+2013.03.01, v0.1.9
 
 * Changed the way of getting github application id
 (now it's just from config, rest api removed).
