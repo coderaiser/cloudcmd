@@ -9,6 +9,7 @@
         "html"  : true,
         "img"   : true
     },
+    "online"                : true,
     "cache"                 : true,
     "logs"                  : false,
     "show_keys_panel"       : true,
