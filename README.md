@@ -155,6 +155,7 @@ All main configuration could be done via [config.json](json/config.json "Config"
         "html"  : true,
         "img"   : false
     },
+    "online"            : true,      /* load js files from cdn or local path     */
     "cache"             : true,
     "logs"              : false,     /* logs or console ouput                    */
     "show_keys_panel"   : true,      /* show classic panel with buttons of keys  */
