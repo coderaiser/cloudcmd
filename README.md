@@ -46,6 +46,7 @@ Hot keys
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
 There is a short list:
+
 - **F1**                - help
 - **F2**                - rename current file
 - **F3**                - view
@@ -144,6 +145,7 @@ or install in npm:
 Configuration
 ---------------
 All main configuration could be done via [config.json](json/config.json "Config").
+
 ```js
 {
     "api_url"           :"/api/v1",
@@ -172,10 +174,13 @@ All main configuration could be done via [config.json](json/config.json "Config"
 
 If you had changed **config** and want to keep updating via git,
 you should execute next command in root directory of **Cloud Commander**:
+
 ```
 git update-index --assume-unchanged json/config.json
 ```
+
 To get back to tracking:
+
 ```
 git update-index --no-assume-unchanged json/config.json
 ```
@@ -188,12 +193,14 @@ to start Cloud Commander as non-root. How it could be solved?
 There is a couple easy and fast ways. One of them is port forwarding.
 ###Iptables
 Just run [shell/addtables.sh](shell/addtables.sh) for default options.
+
 ```sh
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
 @:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules after
 ```
+
 You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
 
     target     prot opt source               destination
@@ -210,11 +217,14 @@ in your list they could differ).
 
 ###nginx
 Get [nginx](http://nginx.org/ "nginx"). On linux it could be done like that
+
 ```sh
 sudo apt-get install nginx #for ubuntu and debian
 ```
+
 Than make host file **/etc/nginx/sites-enabled/io.cloudcmd.io**
 ( *io.cloudcmd.io* is your domain name) with content:
+
 ```sh
 server {
     listen 80;
@@ -225,6 +235,7 @@ server {
     }
 }
 ```
+
 ```sh
 # create symlink of this file
 ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
@@ -233,6 +244,7 @@ ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
 ```
 
 If you will want to upload files, you should add next line in **http** section of **/etc/nginx/nginx.conf**:
+
 ```
 #limit of uploading data
 client_max_body_size 100m;
