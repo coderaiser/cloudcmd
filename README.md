@@ -100,6 +100,7 @@ Right mouse click button shows context menu with items:
 - Rename
 - Delete
 - Zip file
+- (Un)Select All
 - Upload to (Dropbox, Github, GDrive)
 - Download
 - New (File, Dir, from cloud)
