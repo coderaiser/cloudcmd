@@ -82,6 +82,8 @@ Edit
 - **Ctrl + s**          - save
 - **Esc**               - close
 
+For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").
+
 Console
 ---------------
 [Demo](http://io.cloudcmd.io#/console "Console")
