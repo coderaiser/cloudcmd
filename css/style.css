@@ -66,12 +66,12 @@ body {
 }
 
 .error::before {
-    position: relative;
-    font-size: 14px;
+    position    : relative;
     font-family : 'Fontello';
-    color: rgb(222, 41, 41);
-    cursor :default;
-    content: '\2757';
+    font-size   : 14px;
+    color       : rgb(222, 41, 41);
+    cursor      : default;
+    content     : '\2757';
 }
 
 .loading {
