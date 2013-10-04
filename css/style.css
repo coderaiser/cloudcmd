@@ -75,12 +75,12 @@ body {
 }
 
 .loading {
+    position    : relative;
+    top         : 1px;
     display     : inline-block;
     width       : 15px;
     height      : 14.8px;
-    position:relative;
-    top:1px;
-    background:url(/img/spinner.gif);
+    background  : url(/img/spinner.gif);
 }
 
 .refresh-icon {
