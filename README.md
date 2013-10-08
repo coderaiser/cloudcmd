@@ -230,6 +230,7 @@ Than make host file **/etc/nginx/sites-enabled/io.cloudcmd.io**
 ```sh
 server {
     listen 80;
+    client_max_body_size 100m;
     server_name io.cloudcmd.io;
     access_log /var/log/nginx/io.cloudcmd.io.access.log;
     location / {
@@ -243,13 +244,6 @@ server {
 ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
 # restart nginx
 /etc/init.d/nginx restart
-```
-
-If you will want to upload files, you should add next line in **http** section of **/etc/nginx/nginx.conf**:
-
-```
-#limit of uploading data
-client_max_body_size 100m;
 ```
 
 To run Cloud Commander as daemon in linux you could set **log** to true in config and
