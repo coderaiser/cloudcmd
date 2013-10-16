@@ -122,6 +122,7 @@ Right mouse click button shows context menu with items:
 Menu
 ---------------
 Right mouse click button shows context menu with items:
+
 - View
 - Edit
 - Rename
