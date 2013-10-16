@@ -3,12 +3,7 @@
     "appcache": false,
     "analytics": true,
     "localStorage": true,
-    "minification": {
-        "js": true,
-        "css": true,
-        "html": true,
-        "img": true
-    },
+    "minify": true,
     "online": true,
     "cache": true,
     "logs": false,

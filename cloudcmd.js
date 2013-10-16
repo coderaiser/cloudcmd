@@ -44,7 +44,7 @@
     /**
      * additional processing of index file
      */
-    function indexProcessing(pData){
+    function indexProcessing(pData) {
         var lPath, lReplace, lKeysPanel,
             lData       = pData.data,
             lAdditional = pData.additional;
@@ -54,30 +54,30 @@
          * меняем в index.html обычные css на
          * минифицированый
          */
-        if (Minify.allowed.css){
+        if (Minify.allowed) {
             lPath   = '/' + Util.removeStr(Minify.MinFolder, DIR);
             lReplace = '<link rel=stylesheet href="/css/reset.css">';
             lData   = Util.removeStr(lData, lReplace)
                     .replace('/css/style.css', lPath + 'all.min.css');
         }
         
+        if (!Config.appcache)
+            lData = Util.removeStr(lData, [
+                /* min */
+                'manifest=/cloudcmd.appcache',
+                /* normal */
+                'manifest="/cloudcmd.appcache"'
+            ]);
+        
+        if (!Config.show_keys_panel) {
+            lKeysPanel  = '<div id=keyspanel';
+            lData       = lData.replace(lKeysPanel, lKeysPanel +' class=hidden');
+        }
+        
         lData = Util.render(lData, {
             title   : CloudFunc.getTitle(),
             fm      : lAdditional
         });
-        
-        if (!Config.appcache)
-            lData = Util.removeStr(lData, [
-                /* min */
-                ' manifest=/cloudcmd.appcache',
-                /* normal */
-                ' manifest="/cloudcmd.appcache"'
-            ]);
-        
-        if (!Config.show_keys_panel){
-            lKeysPanel  = '<div id=keyspanel';
-            lData       = lData.replace(lKeysPanel, lKeysPanel +' class=hidden');
-        }
         
         return lData;
         
@@ -96,7 +96,7 @@
             lFiles[0][lFONT_REMOTE]     = lFONT_LOCAL;
             lFiles[1][lJQUERY_REMOTE]   = lJQUERY_LOCAL;
         
-        if (Config.minification.css)
+        if (Config.minify)
             lFiles.push('node_modules/minify/min/all.min.css');
         
         AppCache.addFiles(lFiles);
@@ -109,22 +109,19 @@
      */
     function minimize(pAllowed){
         var lOptimizeParams = [],
-            lStyleCSS   = DIR + 'css/style.css',
-            lResetCSS   = DIR + 'css/reset.css',
+            lStyles         = [{}, {}],
+            lStyleCSS       = DIR + 'css/style.css',
+            lResetCSS       = DIR + 'css/reset.css',
             
-            lCSSOptions = {
-                img     : pAllowed.img,
+            lCSSOptions     = {
+                img     : true,
                 merge   : true
             };
             
-        if (pAllowed.js)
+        if (pAllowed) {
             lOptimizeParams.push(LIBDIR + 'client.js');
-        
-        if (pAllowed.html)
             lOptimizeParams.push(INDEX);
-        
-        if (pAllowed.css) {
-            var lStyles = [{}, {}];
+            
             lStyles[0][lStyleCSS]   = lCSSOptions;
             lStyles[1][lResetCSS]   = lCSSOptions;
             
@@ -240,14 +237,14 @@
                 var lStr            = pData.toString(),
                     lReadedConf     = Util.parseJSON(lStr);
                 
-                if (!Config.minification)
+                if (!Config.minify)
                     main.config = Config = lReadedConf;
                 
                 Util.tryCatchLog(function(){
-                    Config.minification.js  = lReadedConf.minification.js;
-                    Config.cache            = lReadedConf.cache;
+                    Config.minify   = lReadedConf.minify;
+                    Config.cache    = lReadedConf.cache;
                     
-                    Minify.setAllowed(Config.minification);
+                    Minify.setAllowed(Config.minify);
                 });
             }
             else
@@ -318,9 +315,9 @@
                         main.sendResponse(p);
                     }
                     else{ /* get back html*/
-                        p.name   = Minify.allowed.html ? Minify.getName(INDEX) : INDEX;
+                        p.name   = Minify.allowed ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData){
-                            if (!pError){
+                            if (!pError) {
                                 var lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
                                               '<ul id=right class=panel>' + lPanel + '</ul>';
