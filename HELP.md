@@ -53,8 +53,6 @@ or install in npm:
 
 Hot keys
 ---------------
-In all modern web browsers (but not in IE, becouse he special) hot keys works.
-There is a short list:
 
 - **F1**                - help
 - **F2**                - rename current file
