@@ -15,7 +15,7 @@
     "show_keys_panel": true,
     "server": true,
     "socket": true,
-    "port": 31337,
+    "port": 8000,
     "sslPort": 4430,
     "ip": null,
     "ssl": false,
