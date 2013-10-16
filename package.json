@@ -2,7 +2,7 @@
     "name": "cloudcmd",
     "version": "0.4.0",
     "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-    "description": "User friendly cloud file manager.",
+    "description": "Cloud Commander - file manager with console and editor",
     "homepage": "https://github.com/coderaiser/cloudcmd",
     "repository": {
         "type": "git",
