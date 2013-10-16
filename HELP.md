@@ -30,6 +30,27 @@ Benefits
 - Has nice console and editor.
 - Writed on JavaScript/Node.js.
 
+Install
+---------------
+[![NPM_INFO][NPM_INFO_IMG]][NPM_INFO_URL]
+
+Installing **Cloud Commander** is very simple.
+All you need is 
+- install [node.js](http://nodejs.org/ "node.js")
+- [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
+and unpack or just clone repository from github:
+
+```
+    git clone git://github.com/coderaiser/cloudcmd.git
+    cd cloudcmd
+    node cloudcmd
+```
+or install in npm:
+```
+    npm i cloudcmd -g
+    cloudcmd
+```
+
 Hot keys
 ---------------
 In all modern web browsers (but not in IE, becouse he special) hot keys works.
@@ -110,27 +131,6 @@ Right mouse click button shows context menu with items:
 - Upload to (Dropbox, Github, GDrive)
 - Download
 - New (File, Dir, from cloud)
-
-Install
----------------
-[![NPM_INFO][NPM_INFO_IMG]][NPM_INFO_URL]
-
-Installing **Cloud Commander** is very simple.
-All you need is 
-- install [node.js](http://nodejs.org/ "node.js")
-- [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
-and unpack or just clone repository from github:
-
-```
-    git clone git://github.com/coderaiser/cloudcmd.git
-    cd cloudcmd
-    node cloudcmd
-```
-or install in npm:
-```
-    npm i cloudcmd -g
-    cloudcmd
-```
 
 Configuration
 ---------------
