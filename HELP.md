@@ -140,12 +140,7 @@ All main configuration could be done via [config.json](json/config.json "Config"
     "appcache"          : false,    /* cache files for offline use              */
     "analytics"         : true,     /* google analytics suport                  */
     "localStorage"      : true,     /* cache directory data                     */
-    "minification" : {              /* minification of js,css,html and img      */
-        "js"    : false,            /* minify module needed                     */
-        "css"   : false,            /* npm i minify                             */
-        "html"  : true,
-        "img"   : false
-    },
+    "minify" : true                 /* minification of js,css,html and img      */
     "online"            : true,      /* load js files from cdn or local path     */
     "cache"             : true,
     "logs"              : false,     /* logs or console ouput                    */
