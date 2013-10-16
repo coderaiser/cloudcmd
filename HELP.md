@@ -23,24 +23,12 @@ Cloud Commander v0.4.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 
 Benefits
 ---------------
-- full browser compatibility *(ie6+,chrome,safari,opera,firefox)*;
-- responsible design
-- one full page loading, *and then just one-time json-dir-listings loading
-(with refresh opportunity).*
-- caching read directories *to localStorage (for now)
-(so if network will disconnected or something happens with a signal, we
-definitely will can work with cached copy of directory listings)*;
-- key binding
-- disabled js support *(working in limited mode)*.
-
-**Cloud Commander** uses all benefits of js, so if js is disabled,
-we go to *limited mode*.
-
-Limited-mode features
----------------
-- no keybinding
-- no local caching
-- full loading of all web page(with styles, js-scripts, html-page etc).
+- Open Source.
+- Has 2 classic ortodox panels.
+- Works on Windows, Linux and Mac OS.
+- Could be used local or remotly.
+- Has nice console and editor.
+- Writed on JavaScript/Node.js.
 
 Hot keys
 ---------------
