@@ -64,9 +64,9 @@
         if (!Config.appcache)
             lData = Util.removeStr(lData, [
                 /* min */
-                'manifest=/cloudcmd.appcache',
+                ' manifest=/cloudcmd.appcache',
                 /* normal */
-                'manifest="/cloudcmd.appcache"'
+                ' manifest="/cloudcmd.appcache"'
             ]);
         
         if (!Config.show_keys_panel) {
