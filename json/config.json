@@ -1,22 +1,18 @@
 {
-    "api_url"               : "/api/v1",
-    "appcache"              : false,
-    "analytics"             : true,
-    "localStorage"          : true,
-    "minification" : {
-        "js"    : true,
-        "css"   : true,
-        "html"  : true,
-        "img"   : true
-    },
-    "cache"                 : true,
-    "logs"                  : false,
-    "show_keys_panel"       : true,
-    "server"                : true,
-    "socket"                : true,
-    "port"                  : 8000,
-    "sslPort"               : 4430,
-    "ip"                    : null,
-    "ssl"                   : false,
-    "rest"                  : true
+    "api_url": "/api/v1",
+    "appcache": false,
+    "analytics": true,
+    "localStorage": true,
+    "minify": true,
+    "online": true,
+    "cache": true,
+    "logs": false,
+    "show_keys_panel": true,
+    "server": true,
+    "socket": true,
+    "port": 8000,
+    "sslPort": 4430,
+    "ip": null,
+    "ssl": false,
+    "rest": true
 }
