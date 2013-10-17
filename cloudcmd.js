@@ -325,7 +325,7 @@
                                 main.sendResponse(p, indexProcessing({
                                     additional  : lList,
                                     data        : pData.toString(),
-                                }));
+                                }), true);
                             }
                             else
                                 main.sendError(pParams, pError);
