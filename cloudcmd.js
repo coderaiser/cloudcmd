@@ -312,7 +312,7 @@
                     if ( Util.isContainStr(lQuery, 'json') ){
                         p.data  = Util.stringifyJSON(pJSON);
                         p.name +='.json';
-                        main.sendResponse(p);
+                        main.sendResponse(p, null, true);
                     }
                     else{ /* get back html*/
                         p.name   = Minify.allowed ? Minify.getName(INDEX) : INDEX;
