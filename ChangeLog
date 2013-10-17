@@ -1,3 +1,40 @@
+2013.10.16, v0.5.0
+
+feature:
+- (view) rm fancybox spinner
+- (util) ownRedner: { } -> {{ }}
+- (util) render: rm param, it is default
+- (util) replaceStr: add pNotEscape
+- (index) robots: add noindex, nofollow
+- (config) minification -> minify: {} -> true
+- (json) rm " "
+- (util) retExec: add any count of params
+- (util) retFunc: add any count of params
+- (css) rm button width:10%
+- (menu) add "(Un)Select All"
+- (dom) Cmd jqueryLoad: add navigator.onLine
+- (config) add online
+
+upadate:
+- minify: v0.2.1 -> v0.2.2* 
+
+fix:
+- (util) retExec: if param was - use it
+- (util) copyObj
+- (socket) max reconnection attempts: Math.pow(2, 64) -> Math.pow(2, 32)
+- (appcache) addFiles: pFilesNames -> pFileNames
+- (listeners) pop: ajaxLoad -> CloudCmd.ajaxLoad
+- (key) current -> current && current.parent;
+- (dom) Loader: this -> Loader
+- (util) retExec if: "n" -> "n > 1"
+
+refactor:
+- (pipe) create: add ifExec
+- (main) MOVED_PERMANENTLY
+- (key) Tab: add " "
+- (dom) mv set font to listeners
+- (cloudcmd) writeLogsToFile
+
 2013.09.27, v0.4.0
 
 feature:
