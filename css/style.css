@@ -66,21 +66,21 @@ body {
 }
 
 .error::before {
-    position: relative;
-    font-size: 14px;
+    position    : relative;
     font-family : 'Fontello';
-    color: rgb(222, 41, 41);
-    cursor :default;
-    content: '\2757';
+    font-size   : 14px;
+    color       : rgb(222, 41, 41);
+    cursor      : default;
+    content     : '\2757';
 }
 
 .loading {
+    position    : relative;
+    top         : 1px;
     display     : inline-block;
     width       : 15px;
     height      : 14.8px;
-    position:relative;
-    top:1px;
-    background:url(/img/spinner.gif);
+    background  : url(/img/spinner.gif);
 }
 
 .refresh-icon {
@@ -226,10 +226,6 @@ body {
 .panel, li {
     list-style-type: none;
     cursor: default;
-}
-
-button {
-  width:10%;
 }
 
 a {
