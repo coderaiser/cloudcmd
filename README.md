@@ -14,7 +14,7 @@ Cloud Commander v0.5.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [IOURL]:                    http://io.cloudcmd.io "IO"
-[jitSuURL]:                 http://cloudcmd.jit.su "JitSu"
+[JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 
 **Cloud Commander** - cloud file manager with console and editor.
