@@ -161,7 +161,7 @@
             process.chdir(lServerDir);
         }
         
-        Util.log('server dir:  ' + lServerDir);
+        Util.log('server dir: ' + lServerDir);
         
         /* if command line parameter testing resolved 
          * setting config to testing, so server
