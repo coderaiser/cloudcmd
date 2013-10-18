@@ -162,71 +162,64 @@
         }
         
         Util.log('server dir:  ' + lServerDir);
-        Util.log('reading configuration file config.json...');
         
-        if (Config) {
-            Util.log('config.json readed');
-            
-            /* if command line parameter testing resolved 
-             * setting config to testing, so server
-             * not created, just init and
-             * all logs writed to screen */
-            lArg = process.argv;
-            lArg = lArg[lArg.length - 1];
-            
-            if ( lArg === 'test' ||  lArg === 'test\r') {
-                Util.log(process.argv);
-                Config.server  = false;
-            }
-            
-            if (Config.logs) {
-                Util.log('log param setted up in config.json\n' +
-                    'from now all logs will be writed to log.txt');
-                writeLogsToFile();
-            }
-            
-            if (Config.server)
-                Util.tryCatchLog(function(){
-                    fs.watch(CONFIG_PATH, function(){
-                        /* every catch up - calling twice */
-                        setTimeout(function() {
-                            readConfig();
-                        }, 1000);
-                    });
-                });
-            
-            lParams = {
-                appcache    : appCacheProcessing,
-                minimize    : minimize,
-                rest        : rest,
-                route       : route
-            },
-            
-            lFiles = [FILE_TMPL, PATH_TMPL];
-            
-            if (Config.ssl)
-                lFiles.push(CA, KEY, CERT);
-            
-            main.readFiles(lFiles, function(pErrors, pFiles){
-                if (pErrors)
-                    Util.log(pErrors);
-                else {
-                    FileTemplate        = pFiles[FILE_TMPL].toString();
-                    PathTemplate    = pFiles[PATH_TMPL].toString();
-                    
-                    if (Config.ssl)
-                        lParams.ssl = {
-                            ca      : pFiles[CA],
-                            key     : pFiles[KEY],
-                            cert    : pFiles[CERT]
-                        };
-                    
-                    server.start(lParams);
-                }
-            });
+        /* if command line parameter testing resolved 
+         * setting config to testing, so server
+         * not created, just init and
+         * all logs writed to screen */
+        lArg = process.argv;
+        lArg = lArg[lArg.length - 1];
+        
+        if ( lArg === 'test' ||  lArg === 'test\r') {
+            Util.log(process.argv);
+            Config.server  = false;
         }
-        else
-            Util.log('read error: config.json');
+        
+        if (Config.logs) {
+            Util.log('log param setted up in config.json\n' +
+                'from now all logs will be writed to log.txt');
+            writeLogsToFile();
+        }
+        
+        if (Config.server)
+            Util.tryCatchLog(function(){
+                fs.watch(CONFIG_PATH, function(){
+                    /* every catch up - calling twice */
+                    setTimeout(function() {
+                        readConfig();
+                    }, 1000);
+                });
+            });
+        
+        lParams = {
+            appcache    : appCacheProcessing,
+            minimize    : minimize,
+            rest        : rest,
+            route       : route
+        },
+        
+        lFiles = [FILE_TMPL, PATH_TMPL];
+        
+        if (Config.ssl)
+            lFiles.push(CA, KEY, CERT);
+        
+        main.readFiles(lFiles, function(pErrors, pFiles){
+            if (pErrors)
+                Util.log(pErrors);
+            else {
+                FileTemplate        = pFiles[FILE_TMPL].toString();
+                PathTemplate    = pFiles[PATH_TMPL].toString();
+                
+                if (Config.ssl)
+                    lParams.ssl = {
+                        ca      : pFiles[CA],
+                        key     : pFiles[KEY],
+                        cert    : pFiles[CERT]
+                    };
+                
+                server.start(lParams);
+            }
+        });
     }
     
     function readConfig(pCallBack){
