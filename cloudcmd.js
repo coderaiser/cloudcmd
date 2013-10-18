@@ -224,8 +224,9 @@
     
     function readConfig(pCallBack){
         fs.readFile(CONFIG_PATH, function(pError, pData){
+            var msg, status;
             if (!pError){
-                Util.log('config: readed');
+                status = 'ok';
                 
                 var lStr            = pData.toString(),
                     lReadedConf     = Util.parseJSON(lStr);
@@ -241,7 +242,10 @@
                 });
             }
             else
-                Util.log(pError);
+                status = 'error';
+                
+            msg = CloudFunc.formatMsg('read', 'config', status);
+            Util.log(msg);
             
             Util.exec(pCallBack);
         });
