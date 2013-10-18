@@ -15,7 +15,6 @@
         "test": "sh ./test/test.sh",
         "start": "cloudcmd.js"
     },
-    "node": "0.6.17",
     "subdomain": "cloudcmd",
     "dependencies": {
         "dropbox": "0.10.1",
