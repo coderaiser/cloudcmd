@@ -203,7 +203,7 @@ in your list they could differ).
 ```
 
 ###nginx
-Get [nginx](http://nginx.org/ "nginx"). On linux it could be done like that
+Get [nginx](http://nginx.org/ "nginx"). On linux it could be done this way:
 
 ```sh
 sudo apt-get install nginx #for ubuntu and debian
