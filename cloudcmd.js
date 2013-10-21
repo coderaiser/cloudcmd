@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
     
     var DIR         = __dirname     + '/',
@@ -86,7 +86,7 @@
     /**
      * init and process of appcache if it allowed in config
      */
-    function appCacheProcessing(){
+    function appCacheProcessing() {
         var lFONT_REMOTE    = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
             lFONT_LOCAL     = './font/DroidSansMono.woff',
             lJQUERY_REMOTE  = '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
@@ -107,7 +107,7 @@
      * Функция минимизирует css/js/html
      * если установлены параметры минимизации
      */
-    function minimize(pAllowed){
+    function minimize(pAllowed) {
         var lOptimizeParams = [],
             lStyles         = [{}, {}],
             lStyleCSS       = DIR + 'css/style.css',
@@ -139,11 +139,11 @@
      * rest interface
      * @pParams pConnectionData {request, responce}
      */
-    function rest(pConnectionData){
+    function rest(pConnectionData) {
         return Util.exec(main.rest, pConnectionData);
     }
     
-    function init(){
+    function init() {
         var lServerDir,  lArg, lParams, lFiles;
         
         if (update)
@@ -182,8 +182,8 @@
         }
         
         if (Config.server)
-            Util.tryCatchLog(function(){
-                fs.watch(CONFIG_PATH, function(){
+            Util.tryCatchLog(function() {
+                fs.watch(CONFIG_PATH, function() {
                     /* every catch up - calling twice */
                     setTimeout(function() {
                         readConfig();
@@ -203,7 +203,7 @@
         if (Config.ssl)
             lFiles.push(CA, KEY, CERT);
         
-        main.readFiles(lFiles, function(pErrors, pFiles){
+        main.readFiles(lFiles, function(pErrors, pFiles) {
             if (pErrors)
                 Util.log(pErrors);
             else {
@@ -222,10 +222,10 @@
         });
     }
     
-    function readConfig(pCallBack){
-        fs.readFile(CONFIG_PATH, function(pError, pData){
+    function readConfig(pCallBack) {
+        fs.readFile(CONFIG_PATH, function(pError, pData) {
             var msg, status;
-            if (!pError){
+            if (!pError) {
                 status = 'ok';
                 
                 var lStr            = pData.toString(),
@@ -234,7 +234,7 @@
                 if (!Config.minify)
                     main.config = Config = lReadedConf;
                 
-                Util.tryCatchLog(function(){
+                Util.tryCatchLog(function() {
                     Config.minify   = lReadedConf.minify;
                     Config.cache    = lReadedConf.cache;
                     
@@ -254,13 +254,13 @@
     /**
      * routing of server queries
      */
-    function route(pParams){
+    function route(pParams) {
         var lRet = main.checkParams(pParams);
         
-        if (lRet){
+        if (lRet) {
             var p = pParams;
             
-            if ( Util.strCmp(p.name, ['/auth', '/auth/github']) ){
+            if ( Util.strCmp(p.name, ['/auth', '/auth/github']) ) {
                 Util.log('* Routing' +
                     '-> ' + p.name);
                 
@@ -277,14 +277,14 @@
         return lRet;
     }
     
-    function sendCommanderContent(pParams){
+    function sendCommanderContent(pParams) {
         var p, lRet = main.checkParams(pParams);
         
-        if (lRet){
+        if (lRet) {
             p       = pParams;
             p.name  = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
             
-            fs.stat(p.name, function(pError, pStat){
+            fs.stat(p.name, function(pError, pStat) {
                 if (!pError)
                     if ( pStat.isDirectory() )
                         processCommanderContent(pParams);
@@ -298,22 +298,22 @@
         return lRet;
     }
     
-    function processCommanderContent(pParams){
+    function processCommanderContent(pParams) {
         var lRet = main.checkParams(pParams);
         
-        if (lRet){
+        if (lRet) {
             var p = pParams;
-            main.commander.getDirContent(p.name, function(pError, pJSON){
-                if (!pError){
+            main.commander.getDirContent(p.name, function(pError, pJSON) {
+                if (!pError) {
                     var lQuery = main.getQuery(p.request);
-                    if ( Util.isContainStr(lQuery, 'json') ){
+                    if ( Util.isContainStr(lQuery, 'json') ) {
                         p.data  = Util.stringifyJSON(pJSON);
                         p.name +='.json';
                         main.sendResponse(p, null, true);
                     }
                     else{ /* get back html*/
                         p.name   = Minify.allowed ? Minify.getName(INDEX) : INDEX;
-                        fs.readFile(p.name, function(pError, pData){
+                        fs.readFile(p.name, function(pError, pData) {
                             if (!pError) {
                                 var lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
