@@ -22,7 +22,7 @@
         "socket.io": "0.9.16"
     },
     "devDependencies": {},
-    "license" : "MIT",
+    "license": "MIT",
     "engines": {
         "node": ">=0.4.x"
     },
