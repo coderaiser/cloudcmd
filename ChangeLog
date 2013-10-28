@@ -578,7 +578,7 @@ generation of json of directory listing.
 
 * Added ability to rename files.
 
-* Added RESTfull object to DOM for easy work with
+* Added RESTful object to DOM for easy work with
 CloudCmd REST API.
 
 * Added help screen (on F1 after viewer loads).
