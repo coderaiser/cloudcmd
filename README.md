@@ -1,6 +1,6 @@
 Cloud Commander v0.5.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
-###[Main][MainURL] [Blog][BlogURL] Live([IO][IOURL], [JitSu][JitSuURL], [Heroku][HerokuURL])
+###[Main][MainURL] [Blog][BlogURL] Live(![IO][IO_LIVE_IMG] [IO][IOURL], ![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
 [BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
@@ -16,6 +16,9 @@ Cloud Commander v0.5.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [IOURL]:                    http://io.cloudcmd.io "IO"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
+[IO_LIVE_IMG]:              http://status-ok.cloudcmd.io/io.cloudcmd.io "IO"
+[JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/cloudcmd.jit.su "JitSu"
+[HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/cloudcmd.herokuapp.com "Heroku"
 
 **Cloud Commander** - cloud file manager with console and editor.
 
