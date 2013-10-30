@@ -22,7 +22,6 @@
         "socket.io": "0.9.16",
         "express": "3.4.x"
     },
-    "devDependencies": {},
     "license": "MIT",
     "engines": {
         "node": ">=0.4.x"
