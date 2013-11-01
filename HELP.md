@@ -52,6 +52,7 @@ and unpack or just clone repository from github:
     node cloudcmd
 ```
 or install in npm:
+
 ```
     npm i cloudcmd -g
     cloudcmd
