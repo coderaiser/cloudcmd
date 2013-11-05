@@ -89,38 +89,6 @@
     }
     
     /**
-     * Функция минимизирует css/js/html
-     * если установлены параметры минимизации
-     */
-    function minimize(pAllowed) {
-        var lOptimizeParams = [],
-            lStyles         = [{}, {}],
-            lStyleCSS       = DIR + 'css/style.css',
-            lResetCSS       = DIR + 'css/reset.css',
-            
-            lCSSOptions     = {
-                img     : true,
-                merge   : true
-            };
-            
-        if (pAllowed) {
-            lOptimizeParams.push(LIBDIR + 'client.js');
-            lOptimizeParams.push(INDEX);
-            
-            lStyles[0][lStyleCSS]   = lCSSOptions;
-            lStyles[1][lResetCSS]   = lCSSOptions;
-            
-            lOptimizeParams.push(lStyles[0]);
-            lOptimizeParams.push(lStyles[1]);
-        }
-        
-        if (lOptimizeParams.length)
-            Minify.optimize(lOptimizeParams, {
-                force: true
-            });
-    }
-    
-    /**
      * rest interface
      * @pParams pConnectionData {request, responce}
      */
@@ -178,7 +146,6 @@
         
         lParams = {
             appcache    : appCacheProcessing,
-            minimize    : minimize,
             rest        : rest,
             route       : route
         },
