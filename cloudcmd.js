@@ -49,18 +49,6 @@
             lData       = pData.data,
             lAdditional = pData.additional;
         
-        /*
-         * если выбрана опция минимизировать скрипты
-         * меняем в index.html обычные css на
-         * минифицированый
-         */
-        if (Minify.allowed) {
-            lPath   = '/' + Util.removeStr(Minify.MinFolder, DIR);
-            lReplace = '<link rel=stylesheet href="/css/reset.css">';
-            lData   = Util.removeStr(lData, lReplace)
-                    .replace('/css/style.css', lPath + 'all.min.css');
-        }
-        
         if (!Config.appcache)
             lData = Util.removeStr(lData, [
                 /* min */
@@ -95,9 +83,6 @@
             
             lFiles[0][lFONT_REMOTE]     = lFONT_LOCAL;
             lFiles[1][lJQUERY_REMOTE]   = lJQUERY_LOCAL;
-        
-        if (Config.minify)
-            lFiles.push('node_modules/minify/min/all.min.css');
         
         AppCache.addFiles(lFiles);
         AppCache.createManifest();
