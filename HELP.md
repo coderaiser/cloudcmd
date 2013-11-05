@@ -352,5 +352,7 @@ MIT [license](LICENSE "license").
 
 Special Thanks
 ---------------
-- [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
-- [Elec-ua](https://github.com/elec-ua) for [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations.
+- [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon");
+- [Elec-ua](https://github.com/elec-ua)
+    - [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations;
+    - config [template](html/config.html) and [style](css/config.css);
