@@ -134,16 +134,6 @@
             writeLogsToFile();
         }
         
-        if (Config.server)
-            Util.tryCatchLog(function() {
-                fs.watch(CONFIG_PATH, function() {
-                    /* every catch up - calling twice */
-                    setTimeout(function() {
-                        readConfig();
-                    }, 1000);
-                });
-            });
-        
         lParams = {
             appcache    : appCacheProcessing,
             rest        : rest,
