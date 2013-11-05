@@ -166,25 +166,17 @@
     
     function readConfig(pCallBack) {
         fs.readFile(CONFIG_PATH, function(pError, pData) {
-            var msg, status;
-            if (!pError) {
-                status = 'ok';
-                
-                var lStr            = pData.toString(),
-                    lReadedConf     = Util.parseJSON(lStr);
-                
-                if (!Config.minify)
-                    main.config = Config = lReadedConf;
-                
-                Util.tryCatchLog(function() {
-                    Config.minify   = lReadedConf.minify;
-                    Config.cache    = lReadedConf.cache;
-                    
-                    Minify.setAllowed(Config.minify);
-                });
-            }
-            else
+            var msg, status, str, readed;
+            
+            if (pError) 
                 status = 'error';
+            else {
+                status = 'ok';
+                str    = pData.toString(),
+                readed = Util.parseJSON(str);
+                
+                main.config = Config = readed;
+            }
                 
             msg = CloudFunc.formatMsg('read', 'config', status);
             Util.log(msg);
