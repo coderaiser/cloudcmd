@@ -10,7 +10,10 @@
 html{
     color: #222;
 }
-body { margin: 0; font-size: 1em; line-height: 1.4; }
+
+body { 
+    margin: 0;
+}
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
