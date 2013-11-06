@@ -47,8 +47,8 @@
 }
 
 .config .list {
-    text-align:left;
-    margin: 5%;
+    margin      : 5%;
+    text-align  : left;
 }
 
 .config .border{
