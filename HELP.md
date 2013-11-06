@@ -16,9 +16,9 @@ Cloud Commander v0.5.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [IOURL]:                    http://io.cloudcmd.io "IO"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
-[IO_LIVE_IMG]:              http://status-ok.cloudcmd.io/io.cloudcmd.io "IO"
-[JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/cloudcmd.jit.su "JitSu"
-[HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/cloudcmd.herokuapp.com "Heroku"
+[IO_LIVE_IMG]:              http://status-ok.cloudcmd.io/host/io.cloudcmd.io "IO"
+[JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/host/cloudcmd.jit.su "JitSu"
+[HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com "Heroku"
 
 **Cloud Commander** - cloud file manager with console and editor.
 
