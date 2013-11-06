@@ -51,7 +51,7 @@
     margin: 5%;
 }
 
-#config #DivBorder{
+#config .border{
     width   : 300px;
     margin  : 10% auto;
 }
