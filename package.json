@@ -1,9 +1,9 @@
 {
     "name": "cloudcmd",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
     "description": "Cloud Commander - file manager with console and editor",
-    "homepage": "https://github.com/coderaiser/cloudcmd",
+    "homepage": "http://cloudcmd.io",
     "repository": {
         "type": "git",
         "url": "git://github.com/coderaiser/cloudcmd.git"
@@ -15,14 +15,14 @@
         "test": "sh ./test/test.sh",
         "start": "cloudcmd.js"
     },
-    "node": "0.6.17",
     "subdomain": "cloudcmd",
     "dependencies": {
-        "dropbox": "0.10.1",
-        "minify": "0.2.2",
-        "socket.io": "0.9.16"
+        "dropbox": "0.10.2",
+        "minify": "0.2.3",
+        "socket.io": "0.9.16",
+        "express": "3.4.x"
     },
-    "devDependencies": {},
+    "license": "MIT",
     "engines": {
         "node": ">=0.4.x"
     },

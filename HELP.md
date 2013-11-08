@@ -1,19 +1,25 @@
-Cloud Commander v0.5.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+Cloud Commander v0.6.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
-###[Main][MainURL] [Blog][BlogURL] [Demo][DemoURL]
+###[Main][MainURL] [Blog][BlogURL] Live(![IO][IO_LIVE_IMG] [IO][IOURL], ![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL] ![RunKite][RunKite_LIVE_IMG] [RunKite][RunKiteURL])
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
 [BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [FlattrIMGURL]:             http://api.flattr.com/button/flattr-badge-large.png
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars
-[NPMURL]:                   https://npmjs.org/package/cloudcmd
+[NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
 [FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software "flattr"
-[NPM_INFO_URL]:             https://npmjs.org/package/cloudcmd "npm"
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[DemoURL]:                  http://io.cloudcmd.io "Demo"
+[IOURL]:                    http://io.cloudcmd.io "IO"
+[JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
+[HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
+[RunKiteURL]:               http://cloudcmd.apps.runkite.com/ "RunKite"
+[IO_LIVE_IMG]:              http://status-ok.cloudcmd.io/host/io.cloudcmd.io "IO"
+[JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/host/cloudcmd.jit.su "JitSu"
+[HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com "Heroku"
+[RunKite_LIVE_IMG]:         http://status-ok.cloudcmd.io/host/cloudcmd.apps.runkite.com/ "RunKite"
 
 **Cloud Commander** - cloud file manager with console and editor.
 
@@ -32,10 +38,11 @@ Benefits
 
 Install
 ---------------
-[![NPM_INFO][NPM_INFO_IMG]][NPM_INFO_URL]
+[![NPM_INFO][NPM_INFO_IMG]][NPMURL]
 
 Installing **Cloud Commander** is very simple.
 All you need is 
+
 - install [node.js](http://nodejs.org/ "node.js")
 - [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
 and unpack or just clone repository from github:
@@ -46,6 +53,7 @@ and unpack or just clone repository from github:
     node cloudcmd
 ```
 or install in npm:
+
 ```
     npm i cloudcmd -g
     cloudcmd
@@ -63,6 +71,7 @@ Hot keys
 - **F7**                - new dir
 - **F8, Delete**        - remove current file
 - **F9**                - menu
+- **F10**               - config
 - **Ctrl + r**          - reload dir content
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
@@ -82,7 +91,7 @@ Hot keys
 Edit
 ---------------
 [Demo](http://io.cloudcmd.io/fs/etc#/edit/passwd "Edit")
-![Edit](/img/screenshot/edit.png "Edit")
+![Edit](/img/screen/edit.png "Edit")
 
 ###Hot keys
 - **F4**                - open
@@ -94,16 +103,25 @@ For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wik
 Console
 ---------------
 [Demo](http://io.cloudcmd.io#/console "Console")
-![Console](/img/screenshot/console.png "Console")
+![Console](/img/screen/console.png "Console")
 
 ###Hot keys
 - **~**                 - open
 - **Esc**               - close
 
+Config
+---------------
+[Demo](http://io.cloudcmd.io#/config "Config")
+![Console](/img/screen/config.png "Config")
+
+###Hot keys
+- **F10**               - open
+- **Esc**               - close
+
 Menu
 ---------------
 [Demo](http://io.cloudcmd.io#/menu "Menu")
-![Menu](/img/screenshot/menu.png "Menu")
+![Menu](/img/screen/menu.png "Menu")
 Right mouse click button shows context menu with items:
 - View
 - Edit
@@ -200,7 +218,7 @@ in your list they could differ).
 ```
 
 ###nginx
-Get [nginx](http://nginx.org/ "nginx"). On linux it could be done like that
+Get [nginx](http://nginx.org/ "nginx"). On linux it could be done this way:
 
 ```sh
 sudo apt-get install nginx #for ubuntu and debian
@@ -324,6 +342,8 @@ so to get it you should type a couple more commands:
 
 Version history
 ---------------
+
+- *2013.11.08*, **[v0.6.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.6.0.zip)**
 - *2013.10.17*, **[v0.5.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.5.0.zip)**
 - *2013.09.27*, **[v0.4.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.4.0.zip)**
 - *2013.08.01*, **[v0.3.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.3.0.zip)**
@@ -337,7 +357,7 @@ Version history
 - *2012.07.19*, **[v0.1.3](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.3.zip)**
 - *2012.07.14*, **[v0.1.2](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.2.zip)**
 - *2012.07.11*, **[v0.1.1](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.1.zip)**
-- *2012.00.00*, **[v0.1.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.0.zip)**
+- *2012.07.09*, **[v0.1.0](//github.com/coderaiser/cloudcmd-archive/raw/master/cloudcmd-v0.1.0.zip)**
 
 License
 ---------------
@@ -345,5 +365,8 @@ MIT [license](LICENSE "license").
 
 Special Thanks
 ---------------
-- [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon").
-- [Elec-ua](https://github.com/elec-ua) for [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations.
+
+- [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon");
+- [Elec-ua](https://github.com/elec-ua)
+    - [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations;
+    - config [template](html/config.html) and [style](css/config.css);
