@@ -71,7 +71,7 @@ Hot keys
 - **F7**                - new dir
 - **F8, Delete**        - remove current file
 - **F9**                - menu
-- **10**                - config
+- **F10**               - config
 - **Ctrl + r**          - reload dir content
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
