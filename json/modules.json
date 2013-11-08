@@ -3,6 +3,7 @@
     "menu",
     "view",
     "help",
+    "config",
     "console", {
         "name": "storage",
         "data": [{

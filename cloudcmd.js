@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
     
     var DIR         = __dirname     + '/',
@@ -49,18 +49,6 @@
             lData       = pData.data,
             lAdditional = pData.additional;
         
-        /*
-         * если выбрана опция минимизировать скрипты
-         * меняем в index.html обычные css на
-         * минифицированый
-         */
-        if (Minify.allowed) {
-            lPath   = '/' + Util.removeStr(Minify.MinFolder, DIR);
-            lReplace = '<link rel=stylesheet href="/css/reset.css">';
-            lData   = Util.removeStr(lData, lReplace)
-                    .replace('/css/style.css', lPath + 'all.min.css');
-        }
-        
         if (!Config.appcache)
             lData = Util.removeStr(lData, [
                 /* min */
@@ -86,7 +74,7 @@
     /**
      * init and process of appcache if it allowed in config
      */
-    function appCacheProcessing(){
+    function appCacheProcessing() {
         var lFONT_REMOTE    = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
             lFONT_LOCAL     = './font/DroidSansMono.woff',
             lJQUERY_REMOTE  = '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
@@ -96,54 +84,19 @@
             lFiles[0][lFONT_REMOTE]     = lFONT_LOCAL;
             lFiles[1][lJQUERY_REMOTE]   = lJQUERY_LOCAL;
         
-        if (Config.minify)
-            lFiles.push('node_modules/minify/min/all.min.css');
-        
         AppCache.addFiles(lFiles);
         AppCache.createManifest();
-    }
-    
-    /**
-     * Функция минимизирует css/js/html
-     * если установлены параметры минимизации
-     */
-    function minimize(pAllowed){
-        var lOptimizeParams = [],
-            lStyles         = [{}, {}],
-            lStyleCSS       = DIR + 'css/style.css',
-            lResetCSS       = DIR + 'css/reset.css',
-            
-            lCSSOptions     = {
-                img     : true,
-                merge   : true
-            };
-            
-        if (pAllowed) {
-            lOptimizeParams.push(LIBDIR + 'client.js');
-            lOptimizeParams.push(INDEX);
-            
-            lStyles[0][lStyleCSS]   = lCSSOptions;
-            lStyles[1][lResetCSS]   = lCSSOptions;
-            
-            lOptimizeParams.push(lStyles[0]);
-            lOptimizeParams.push(lStyles[1]);
-        }
-        
-        if (lOptimizeParams.length)
-            Minify.optimize(lOptimizeParams, {
-                force: true
-            });
     }
     
     /**
      * rest interface
      * @pParams pConnectionData {request, responce}
      */
-    function rest(pConnectionData){
+    function rest(pConnectionData) {
         return Util.exec(main.rest, pConnectionData);
     }
     
-    function init(){
+    function init() {
         var lServerDir,  lArg, lParams, lFiles;
         
         if (update)
@@ -161,94 +114,72 @@
             process.chdir(lServerDir);
         }
         
-        Util.log('server dir:  ' + lServerDir);
-        Util.log('reading configuration file config.json...');
+        Util.log('server dir: ' + lServerDir);
         
-        if (Config) {
-            Util.log('config.json readed');
-            
-            /* if command line parameter testing resolved 
-             * setting config to testing, so server
-             * not created, just init and
-             * all logs writed to screen */
-            lArg = process.argv;
-            lArg = lArg[lArg.length - 1];
-            
-            if ( lArg === 'test' ||  lArg === 'test\r') {
-                Util.log(process.argv);
-                Config.server  = false;
-            }
-            
-            if (Config.logs) {
-                Util.log('log param setted up in config.json\n' +
-                    'from now all logs will be writed to log.txt');
-                writeLogsToFile();
-            }
-            
-            if (Config.server)
-                Util.tryCatchLog(function(){
-                    fs.watch(CONFIG_PATH, function(){
-                        /* every catch up - calling twice */
-                        setTimeout(function() {
-                            readConfig();
-                        }, 1000);
-                    });
-                });
-            
-            lParams = {
-                appcache    : appCacheProcessing,
-                minimize    : minimize,
-                rest        : rest,
-                route       : route
-            },
-            
-            lFiles = [FILE_TMPL, PATH_TMPL];
-            
-            if (Config.ssl)
-                lFiles.push(CA, KEY, CERT);
-            
-            main.readFiles(lFiles, function(pErrors, pFiles){
-                if (pErrors)
-                    Util.log(pErrors);
-                else {
-                    FileTemplate        = pFiles[FILE_TMPL].toString();
-                    PathTemplate    = pFiles[PATH_TMPL].toString();
-                    
-                    if (Config.ssl)
-                        lParams.ssl = {
-                            ca      : pFiles[CA],
-                            key     : pFiles[KEY],
-                            cert    : pFiles[CERT]
-                        };
-                    
-                    server.start(lParams);
-                }
-            });
+        /* if command line parameter testing resolved 
+         * setting config to testing, so server
+         * not created, just init and
+         * all logs writed to screen */
+        lArg = process.argv;
+        lArg = lArg[lArg.length - 1];
+        
+        if ( lArg === 'test' ||  lArg === 'test\r') {
+            Util.log(process.argv);
+            Config.server  = false;
         }
-        else
-            Util.log('read error: config.json');
+        
+        if (Config.logs) {
+            Util.log('log param setted up in config.json\n' +
+                'from now all logs will be writed to log.txt');
+            writeLogsToFile();
+        }
+        
+        lParams = {
+            appcache    : appCacheProcessing,
+            rest        : rest,
+            route       : route
+        },
+        
+        lFiles = [FILE_TMPL, PATH_TMPL];
+        
+        if (Config.ssl)
+            lFiles.push(CA, KEY, CERT);
+        
+        main.readFiles(lFiles, function(pErrors, pFiles) {
+            if (pErrors)
+                Util.log(pErrors);
+            else {
+                FileTemplate        = pFiles[FILE_TMPL].toString();
+                PathTemplate    = pFiles[PATH_TMPL].toString();
+                
+                if (Config.ssl)
+                    lParams.ssl = {
+                        ca      : pFiles[CA],
+                        key     : pFiles[KEY],
+                        cert    : pFiles[CERT]
+                    };
+                
+                server.start(lParams);
+            }
+        });
     }
     
-    function readConfig(pCallBack){
-        fs.readFile(CONFIG_PATH, function(pError, pData){
-            if (!pError){
-                Util.log('config: readed');
+    function readConfig(pCallBack) {
+        fs.readFile(CONFIG_PATH, function(pError, pData) {
+            var msg, status, str, readed;
+            
+            if (pError) 
+                status = 'error';
+            else {
+                status = 'ok';
+                str    = pData.toString(),
+                readed = Util.parseJSON(str);
                 
-                var lStr            = pData.toString(),
-                    lReadedConf     = Util.parseJSON(lStr);
-                
-                if (!Config.minify)
-                    main.config = Config = lReadedConf;
-                
-                Util.tryCatchLog(function(){
-                    Config.minify   = lReadedConf.minify;
-                    Config.cache    = lReadedConf.cache;
-                    
-                    Minify.setAllowed(Config.minify);
-                });
+                main.config = Config = readed;
             }
-            else
-                Util.log(pError);
+                
+            msg = CloudFunc.formatMsg('read', 'config', status);
+            Util.log(msg);
             
             Util.exec(pCallBack);
         });
@@ -257,13 +188,13 @@
     /**
      * routing of server queries
      */
-    function route(pParams){
+    function route(pParams) {
         var lRet = main.checkParams(pParams);
         
-        if (lRet){
+        if (lRet) {
             var p = pParams;
             
-            if ( Util.strCmp(p.name, ['/auth', '/auth/github']) ){
+            if ( Util.strCmp(p.name, ['/auth', '/auth/github']) ) {
                 Util.log('* Routing' +
                     '-> ' + p.name);
                 
@@ -280,14 +211,14 @@
         return lRet;
     }
     
-    function sendCommanderContent(pParams){
+    function sendCommanderContent(pParams) {
         var p, lRet = main.checkParams(pParams);
         
-        if (lRet){
+        if (lRet) {
             p       = pParams;
             p.name  = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
             
-            fs.stat(p.name, function(pError, pStat){
+            fs.stat(p.name, function(pError, pStat) {
                 if (!pError)
                     if ( pStat.isDirectory() )
                         processCommanderContent(pParams);
@@ -301,22 +232,22 @@
         return lRet;
     }
     
-    function processCommanderContent(pParams){
+    function processCommanderContent(pParams) {
         var lRet = main.checkParams(pParams);
         
-        if (lRet){
+        if (lRet) {
             var p = pParams;
-            main.commander.getDirContent(p.name, function(pError, pJSON){
-                if (!pError){
+            main.commander.getDirContent(p.name, function(pError, pJSON) {
+                if (!pError) {
                     var lQuery = main.getQuery(p.request);
-                    if ( Util.isContainStr(lQuery, 'json') ){
+                    if ( Util.isContainStr(lQuery, 'json') ) {
                         p.data  = Util.stringifyJSON(pJSON);
                         p.name +='.json';
-                        main.sendResponse(p);
+                        main.sendResponse(p, null, true);
                     }
                     else{ /* get back html*/
                         p.name   = Minify.allowed ? Minify.getName(INDEX) : INDEX;
-                        fs.readFile(p.name, function(pError, pData){
+                        fs.readFile(p.name, function(pError, pData) {
                             if (!pError) {
                                 var lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
@@ -325,7 +256,7 @@
                                 main.sendResponse(p, indexProcessing({
                                     additional  : lList,
                                     data        : pData.toString(),
-                                }));
+                                }), true);
                             }
                             else
                                 main.sendError(pParams, pError);
