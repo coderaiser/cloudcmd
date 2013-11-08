@@ -16,7 +16,7 @@ feature:
 - (config) add online
 
 upadate:
-- minify: v0.2.1 -> v0.2.2* 
+- minify: v0.2.1 -> v0.2.2- 
 
 fix:
 - (util) retExec: if param was - use it
@@ -145,288 +145,288 @@ inside:
 
 2013.08.01, v0.3.0
 
-* Changed jquery cdn to one with https suport jquery.com -> google cdn.
+- Changed jquery cdn to one with https suport jquery.com -> google cdn.
 
-* Added Access-Control-Allow-Origin header.
+- Added Access-Control-Allow-Origin header.
 
-* Added functions in DOM module: createEvent
+- Added functions in DOM module: createEvent
 (createKeyEvent, createClickEvent, createDblClickEvent),
 dispatch
 (dispatchKeyEvent, dispatchClickEvent, dispatchDblClickEvent)
 
-* Changed object name CloudCommander -> CloudCmd
+- Changed object name CloudCommander -> CloudCmd
 
-* Moved loading functions to Loader object in DOM module.
+- Moved loading functions to Loader object in DOM module.
 
-* Added addtables script'
+- Added addtables script'
 
-* Fixed typo in README.
+- Fixed typo in README.
 
-* Fixed same background declartion a couple times.
+- Fixed same background declartion a couple times.
 
-* Changed the way of work with listeners (DOM.addListener to DOM.Events.add).
+- Changed the way of work with listeners (DOM.addListener to DOM.Events.add).
 
-* Added ability to add a couple events in Events.add.
+- Added ability to add a couple events in Events.add.
 
-* Moved jqeuryLoader and socketLoader to CMD object in DOM.
+- Moved jqeuryLoader and socketLoader to CMD object in DOM.
 
-* Fixed bug with deletting in menu js.
+- Fixed bug with deletting in menu js.
 
-* Removed function _editFileName from client.js.
+- Removed function _editFileName from client.js.
 
-* Removed linuxWatch function from main.js.
+- Removed linuxWatch function from main.js.
 
-* Added tryCatch to fs.watch in cloudcmd.js.
+- Added tryCatch to fs.watch in cloudcmd.js.
 
-* Set F3 to veiw.
+- Set F3 to veiw.
 
-* Renamed KeyBinding -> Key.
+- Renamed KeyBinding -> Key.
 
-* Renamed: set -> setBinded, unSet -> unsetBinded, get -> isBinded.
+- Renamed: set -> setBinded, unSet -> unsetBinded, get -> isBinded.
 
-* Functions maked private: ajaxload, changeLinks, createFileTable,
+- Functions maked private: ajaxload, changeLinks, createFileTable,
 getJSONfromFileTable.
 
-* Moved CloudCmd.KEY object data to prototype of CloudCmd.Key.
+- Moved CloudCmd.KEY object data to prototype of CloudCmd.Key.
 
-* Simpified plugins id's.
+- Simpified plugins id's.
 
-* Rewrited _codemirror and view modules with prototypes.
+- Rewrited _codemirror and view modules with prototypes.
 
-* Added hide method to view module.
+- Added hide method to view module.
 
-* Updated socket.io to v0.9.16.
+- Updated socket.io to v0.9.16.
 
-* Removed init property from view and edit.
+- Removed init property from view and edit.
 
-* FilePicker gets key from modules.json.
+- FilePicker gets key from modules.json.
 
-* Added ability to put callback to view.
+- Added ability to put callback to view.
 
-* Added help module.
+- Added help module.
 
-* Added ability to show help on F1.
+- Added ability to show help on F1.
 
-* Added ability to set attributes in Loader.anyload.
+- Added ability to set attributes in Loader.anyload.
 
-* Fixed upload function of filepicker.
+- Fixed upload function of filepicker.
 
-* fix(DOM) this promptNewFile -> Cmd.promptNewFile
+- fix(DOM) this promptNewFile -> Cmd.promptNewFile
 
-* feature(console) add jq-console
+- feature(console) add jq-console
 
-* fix(style) .name{width}: 37% -> 35%
+- fix(style) .name{width}: 37% -> 35%
 
-* feature(view) show(pData) -> show(pData, pCallBack)
+- feature(view) show(pData) -> show(pData, pCallBack)
 
-* doc(license) add
+- doc(license) add
 
-* doc(contribute) add commit message conventions
+- doc(contribute) add commit message conventions
 
-* fix(socket) log level: debug -> info
+- fix(socket) log level: debug -> info
 
-* feature(console) jquery-terminal -> jq-console
+- feature(console) jquery-terminal -> jq-console
 
-* fix(help) remove pre
+- fix(help) remove pre
 
-* feature(socket) add disconect
+- feature(socket) add disconect
 
-* feature(socket) add minification and gzip
+- feature(socket) add minification and gzip
 
-* feature(socket) if id in use - reconnect
+- feature(socket) if id in use - reconnect
 
-* chore(console) remove jquery-terminal
+- chore(console) remove jquery-terminal
 
-* feature(favicon) add
+- feature(favicon) add
 
-* fix(style) .mode width: 25% -> 23%
+- fix(style) .mode width: 25% -> 23%
 
-* feature(edit) codemirror -> ace
+- feature(edit) codemirror -> ace
 
-* feature(edit) add diff
+- feature(edit) add diff
 
-* chore(dom) jquery: v2.0.0 -> v2.0.3
+- chore(dom) jquery: v2.0.0 -> v2.0.3
 
-* feature(util) call log with any count of params
+- feature(util) call log with any count of params
 
-* feature(util) add logArray
+- feature(util) add logArray
 
-* feature(socket) add chdir on cd
+- feature(socket) add chdir on cd
 
-* feature(dom) add events.add array
+- feature(dom) add events.add array
 
-* feauture(client) add unload event
+- feauture(client) add unload event
 
-* feature(update) exec -> exec(cwd)
+- feature(update) exec -> exec(cwd)
 
-* feature(cloudcmd) add bin
+- feature(cloudcmd) add bin
 
-* feature(rest) add put patch
+- feature(rest) add put patch
 
-* feature(edit) save file only if it was changed
+- feature(edit) save file only if it was changed
 
-* fix(dom) rm array param from jsload
+- fix(dom) rm array param from jsload
 
-* feature(main) add to exports checkCallBackParams
+- feature(main) add to exports checkCallBackParams
 
-* feature(win) diskpart -> wmic
+- feature(win) diskpart -> wmic
 
-* fix(diff) rm, work bad with win line ending
+- fix(diff) rm, work bad with win line ending
 
-* fix(dom) this -> Cmd
+- fix(dom) this -> Cmd
 
-* fix(css) .cmd-button: "outline:0"
+- fix(css) .cmd-button: "outline:0"
 
-* feature(index) add "~ - console" button
+- feature(index) add "~ - console" button
 
-* chore(css) .cmd-button {width: 10% -> 8%}
+- chore(css) .cmd-button {width: 10% -> 8%}
 
-* feature(index) add "f9 - menu" button
+- feature(index) add "f9 - menu" button
 
-* feature(Events) dispatch: event -> event || eventName
+- feature(Events) dispatch: event -> event || eventName
 
-* feature(css) add media-query for .cmd-button
+- feature(css) add media-query for .cmd-button
 
-* fix(view) open on f3 cmd button click
+- fix(view) open on f3 cmd button click
 
-* fix(rest) save and create new file
+- fix(rest) save and create new file
 
-* chore(minify) v0.2.0 -> v0.2.1
+- chore(minify) v0.2.0 -> v0.2.1
 
 
 2013.04.22, v0.2.0
 
-* Added alerting about errors.
+- Added alerting about errors.
 
-* Removed Listeners array for DOM.
+- Removed Listeners array for DOM.
 
-* Added ability create folders.
+- Added ability create folders.
 
-* Added filepicker.
+- Added filepicker.
 
-* Added ability to load files to cloud 
+- Added ability to load files to cloud 
 and get them out to file system.
 
-* Added SSL suport.
+- Added SSL suport.
 
-* jquery updated to v1.9.1.
+- jquery updated to v1.9.1.
 
-* Fixed bug with multiple click events on f3 and f4 buttons.
+- Fixed bug with multiple click events on f3 and f4 buttons.
 
-* Added ability to move files.
+- Added ability to move files.
 
-* Added ability to degradate to http from https.
+- Added ability to degradate to http from https.
 
-* Fixed bug of multiple call of sockets.
+- Fixed bug of multiple call of sockets.
 
-* If create directory command executed - loading spinner
+- If create directory command executed - loading spinner
 would be on top.
 
-* Refactored getShortSize.
+- Refactored getShortSize.
 
-* Added update of size on file changing in editor.
+- Added update of size on file changing in editor.
 
-* Removed cache control of fs resour.
+- Removed cache control of fs resour.
 
-* Added ability to copy files.
+- Added ability to copy files.
 
-* Fixed bug with saving json to localStorage, it's always
+- Fixed bug with saving json to localStorage, it's always
 writed root directory.
 
-* Moved out set current file from cloudfunc to client.js.
+- Moved out set current file from cloudfunc to client.js.
 
-* Changed the way file table building. From now templating used.
+- Changed the way file table building. From now templating used.
 
-* Changed sync reading of certs to async.
+- Changed sync reading of certs to async.
 
-* Updated dropbox to v0.9.2 and moved to packege.json
+- Updated dropbox to v0.9.2 and moved to packege.json
 from storage folder.
 
-* Updated socket.io to v0.9.14.
+- Updated socket.io to v0.9.14.
 
-* Fixed Util.time and Util.timeEnd
+- Fixed Util.time and Util.timeEnd
 
-* Added ability to select files with Insert key.
+- Added ability to select files with Insert key.
 
-* Added ability to delete selected files from DOM.
+- Added ability to delete selected files from DOM.
 
-* Added ability to recursivly get current folder size.
+- Added ability to recursivly get current folder size.
 
-* Added ability to get directory size, when space button
+- Added ability to get directory size, when space button
 is pressed and current file is directory.
 
-* Added ability to select all files on Ctrl + A
+- Added ability to select all files on Ctrl + A
 
-* Fixed the href generation of renamed file.
+- Fixed the href generation of renamed file.
 
-* Renamed promptNewFolder -> promptNewDir'.
+- Renamed promptNewFolder -> promptNewDir'.
 
-* Added function getSelectedNames.
+- Added function getSelectedNames.
 
-* Added ability to delete file when f8 key pressed.
+- Added ability to delete file when f8 key pressed.
 
-* Fixed bug with selectecting root directory with space.
+- Fixed bug with selectecting root directory with space.
 
-* Fixed bug with processing selected root directory.
+- Fixed bug with processing selected root directory.
 
-* Added ability to delete files.
+- Added ability to delete files.
 
-* Removed modules cache.js.
+- Removed modules cache.js.
 
-* Fixed bug with writing new file.
+- Fixed bug with writing new file.
 
-* Updated jquery to v2.0.0.
+- Updated jquery to v2.0.0.
 
-* Improved CloudFunc module.
+- Improved CloudFunc module.
 
-* Fixed selection style in opera.
+- Fixed selection style in opera.
 
-* Fixed header of api fs GET.
+- Fixed header of api fs GET.
 
-* Fixed bug with sending response on
+- Fixed bug with sending response on
 query other then json on /fs url.
 
-* Fixed bug with getting back to
+- Fixed bug with getting back to
 directory where file was removed.
 
 
 2013.03.01, v0.1.9
 
-* Changed the way of getting github application id
+- Changed the way of getting github application id
 (now it's just from config, rest api removed).
 
-* Added ability to upload files to GDrive.
+- Added ability to upload files to GDrive.
 
-* Added functions DOM.getCurrentFileContent(pCallBack [, pCurrentFile])
+- Added functions DOM.getCurrentFileContent(pCallBack [, pCurrentFile])
 and Util.setTimeout(pFunction [, pCallBack, pTime])
 
-* Added functions in win.js for parsing diskpart output.
+- Added functions in win.js for parsing diskpart output.
 
-* Added function getCurrentDir to DOM module.
+- Added function getCurrentDir to DOM module.
 
-* Fixed bug with terminal load.
+- Fixed bug with terminal load.
 
-* From now api url on client readed from config.json.
+- From now api url on client readed from config.json.
 
-* If choosen upload to -> Gist, and file in json have
+- If choosen upload to -> Gist, and file in json have
 not '.json' extension, it's added to the and of filename.
 
-* Fixed bug in not fully functional browsers,
+- Fixed bug in not fully functional browsers,
 jquery loaded after ie.js, should be before.
 
-* Fixed bug with closing terminal and opening viewer:
+- Fixed bug with closing terminal and opening viewer:
 inside event function varible called event do not exist
 (everithing ok on webkit).
 
-* Added ability to upload files to dropbox.
+- Added ability to upload files to dropbox.
 
-* Added ability to authorize on github thru new window,
+- Added ability to authorize on github thru new window,
 changed redirecting url to /auth and added rout function
 to cloudcmd.js
 
-* DropBox, GDrive and GitHub modules now look the same.
+- DropBox, GDrive and GitHub modules now look the same.
 
-* Fixed bug with pressing Esc when menu showed.
+- Fixed bug with pressing Esc when menu showed.
 We could not to now, when key was pressed becaouse of
 stopPropogation function in jquery.contextMenu module.
 Commented stopPropogration.
@@ -439,577 +439,577 @@ keyStop: function(e, opt) {
     //e.stopPropagation();
 }
 ```
-* Updated socket.io to v0.9.13.
+- Updated socket.io to v0.9.13.
 
-* Updated jquery-terminal to v0.4.22.
+- Updated jquery-terminal to v0.4.22.
 
-* Refactore viewer module.
+- Refactore viewer module.
 
-* Removed loading spinner by commenting jquery.fancybox.css block
+- Removed loading spinner by commenting jquery.fancybox.css block
 #fancybox-loading div {
     width: 44px;
     height: 44px;
 	background: url('fancybox_loading.gif') center center no-repeat;
 }
 
-* Updated CodeMirror to v2.37.01.
+- Updated CodeMirror to v2.37.01.
 
-* Updated jquery to v.1.8.3.
+- Updated jquery to v.1.8.3.
 
-* Improved optimizing size of menu.js from 2539 to 2444.
+- Improved optimizing size of menu.js from 2539 to 2444.
 
-* Fixed bug with height of terminal.
+- Fixed bug with height of terminal.
 
-* Added ability to read gdrive key from config.
+- Added ability to read gdrive key from config.
 
-* Fixed bug with setting curent cursor when
+- Fixed bug with setting curent cursor when
 clicked on menu item.
 
-* Updated dropbox library to v.0.8.1.
+- Updated dropbox library to v.0.8.1.
 
-* Added ability to authorize on dropbox thru popup.
+- Added ability to authorize on dropbox thru popup.
 
-* Added ability to authorize in vk.com.
+- Added ability to authorize in vk.com.
 
-* Added vk to menu.
+- Added vk to menu.
 
-* Updated funcyBox to v2.1.4.
+- Updated funcyBox to v2.1.4.
 
-* Updated jquery to v1.9.0.
+- Updated jquery to v1.9.0.
 
-* Improved modules.json format and parsing.
+- Improved modules.json format and parsing.
 
-* Added ability to read storage modules information from menu module.
+- Added ability to read storage modules information from menu module.
 
-* Added easy template renderrer system Util.render.
+- Added easy template renderrer system Util.render.
 
-* Added functions DOM.parseJSON and DOM.stringifyJSON
+- Added functions DOM.parseJSON and DOM.stringifyJSON
 
-* Improved modules.json.
+- Improved modules.json.
 
-* Added migrate plugin for jquery.
+- Added migrate plugin for jquery.
 
-* Removed getting data from Minify cache.
+- Removed getting data from Minify cache.
 
-* Moved jsons to json folder.
+- Moved jsons to json folder.
 
-* Fixed bug with working links in path panel and
+- Fixed bug with working links in path panel and
 with clicks on files.
 
-* Changed icons font from octicons to foundicons
+- Changed icons font from octicons to foundicons
 
-* Changed icons font from foundicons to fonteollo
+- Changed icons font from foundicons to fonteollo
 
-* Removed Octicons font.
+- Removed Octicons font.
 
-* Removed allowed from cache property in config.
+- Removed allowed from cache property in config.
 
-* Added ability to hide "Upload To" menu item if
+- Added ability to hide "Upload To" menu item if
 no storage modules setted up in modules.json.
 
-* From now any file minifying only if last modified
+- From now any file minifying only if last modified
 time was changed.
 
-* Removed ability to cache files in memory.
+- Removed ability to cache files in memory.
 
-* Moved extensions from main.js to json/ext.json.
+- Moved extensions from main.js to json/ext.json.
 
-* Commander functions moved out to commander.js from server.js
+- Commander functions moved out to commander.js from server.js
 
-* Fixed bug with old browsers support.
+- Fixed bug with old browsers support.
 
-* Fixed bug with scrolling in opera and firefox.
+- Fixed bug with scrolling in opera and firefox.
 
-* Fixed bug with (fake) deleting file.
+- Fixed bug with (fake) deleting file.
 
-* Added ability show context menu on right click
+- Added ability show context menu on right click
 while menu is showing now.
 
-* Added ability to remove /fs/no-js when go up to root
+- Added ability to remove /fs/no-js when go up to root
 directory.
 
-* Removed reflows maded by js.
+- Removed reflows maded by js.
 
-* Fixed bug with setting current file
+- Fixed bug with setting current file
 after refresh and refreshing dir content.
 
-* Removed part of url thet says that js is disabled, from
+- Removed part of url thet says that js is disabled, from
 now json data of file structure would be getted from 
 click event with ?json flag. "no-js" part of url
 would not be supported anymore.
 
-* Added ability to add ?json flag only if we work with dir.
+- Added ability to add ?json flag only if we work with dir.
 
-* Added ability not to change url if we have no rights
+- Added ability not to change url if we have no rights
 for reading.
 
-* Fixed bug with pressing enter on file.
+- Fixed bug with pressing enter on file.
 
-* Updated jquery jQuery-contextMenu to v1.6.5.
+- Updated jquery jQuery-contextMenu to v1.6.5.
 
-* Fixed bug with getting showed menu in firefox.
+- Fixed bug with getting showed menu in firefox.
 
-* Added temporary redirection for old no-js urls.
+- Added temporary redirection for old no-js urls.
 
-* Changed the way clickProcessing of menu works,
+- Changed the way clickProcessing of menu works,
 for now it's much simplier.
 
-* Fixed dblclick selection in firefox.
+- Fixed dblclick selection in firefox.
 
-* Fixed the first show of menu in firefox.
+- Fixed the first show of menu in firefox.
 
-* Added ability to change configs without restart
+- Added ability to change configs without restart
 (works for js minification only).
 
-* Added ability to disable browser cache from config.json.
+- Added ability to disable browser cache from config.json.
 
-* Totaly refactored and leave in commander.js just
+- Totaly refactored and leave in commander.js just
 generation of json of directory listing.
 
-* Added ability to upload files.
+- Added ability to upload files.
 
-* Added ability save files on Ctrl+S in CodeMirror.
+- Added ability save files on Ctrl+S in CodeMirror.
 
-* Added ability to delete files.
+- Added ability to delete files.
 
-* Added rename menu item.
+- Added rename menu item.
 
-* Added to html templating.
+- Added to html templating.
 
-* Added ability to rename files.
+- Added ability to rename files.
 
-* Added RESTful object to DOM for easy work with
+- Added RESTful object to DOM for easy work with
 CloudCmd REST API.
 
-* Added help screen (on F1 after viewer loads).
+- Added help screen (on F1 after viewer loads).
 
 
 2012.12.12, v0.1.8
 
-* Added ability to shutdown Cloud Commander
+- Added ability to shutdown Cloud Commander
 thru terminal command: "cloudcmd exit"
 
-* Fixed bug with showing terminal and viewer
+- Fixed bug with showing terminal and viewer
 at the same time.
 
-* Fixed bug with appcache config. Windows reads
+- Fixed bug with appcache config. Windows reads
 file not just like Linux.
 
-* Added ability to update thru git.
+- Added ability to update thru git.
 
-* Added ability to change charset on terminal only if
+- Added ability to change charset on terminal only if
 it's build in command on win32.
 
-* Fixed bug with testing mode. If was same arguments,
+- Fixed bug with testing mode. If was same arguments,
 Cloud Commander works in testing mode and server do not
 started.
 
-* Added more demo mirrors to readme (appfog, cloudfoundry).
+- Added more demo mirrors to readme (appfog, cloudfoundry).
 
-* Removed resize event from jquery-terminal.
+- Removed resize event from jquery-terminal.
 
-* Fixed bug with error code of program execution in terminal.
+- Fixed bug with error code of program execution in terminal.
 
-* Fixed bug with menu itmes edit and view.
+- Fixed bug with menu itmes edit and view.
 
-* Added function jsLoadOnLoad, thet loads js files
+- Added function jsLoadOnLoad, thet loads js files
 one-by-one, and then calls callback if needed.
 
-* Added function anyloadOnLoad thet loads any files or
+- Added function anyloadOnLoad thet loads any files or
 elements one-by-one.
 
-* Added function loadModule thet make it easier to connect
+- Added function loadModule thet make it easier to connect
 new module.
 
-* Fixed bug with context menu hiding (on Esc).
+- Fixed bug with context menu hiding (on Esc).
 Keys was unbinded.
 
-* Added ability to disable web sockets.
+- Added ability to disable web sockets.
 
-* Moved cloudRequire to srvfunc.js file.
+- Moved cloudRequire to srvfunc.js file.
 
-* Fixed bug with directory pathes detection
+- Fixed bug with directory pathes detection
 (used document.location.href, now using 
 document.location.origin)
 
-* Fixed bug with keybinding in FireFox
+- Fixed bug with keybinding in FireFox
 (removed KeyBinding call on window load).
 
-* Fixed bug with getting current url in Firefox.
+- Fixed bug with getting current url in Firefox.
 
-* Util cleaned up (addClass and removeClass
+- Util cleaned up (addClass and removeClass
 moved to ie.js).
 
-* Index processing function moved out from
+- Index processing function moved out from
 server.js to cloudcmd.js.
 
-* Added ability of authorithation in GitHub.
+- Added ability of authorithation in GitHub.
 
-* Rewrited sizing of names if they are to 
+- Rewrited sizing of names if they are to 
 long thru css, from JavaScript.
 
-* Fixed bug with application cahe forming on windows
+- Fixed bug with application cahe forming on windows
 and linux.
 
-* Removed unneeded windows check.
+- Removed unneeded windows check.
 
-* Fixed bug with downloading directory
+- Fixed bug with downloading directory
 listing in json from menu.
 
-* Changed default port to 80.
+- Changed default port to 80.
 
-* Util object moved from client.js to modules
+- Util object moved from client.js to modules
 dom.js and util.js.
 
-* Fixed bug with navigation thru path panel.
+- Fixed bug with navigation thru path panel.
 
-* Added functions DOM.addKeyListener and Util.loadOnLoad
+- Added functions DOM.addKeyListener and Util.loadOnLoad
 
-* Added buttons panel.
+- Added buttons panel.
 
-* Fixed bug with config file, when no need to minification.
+- Fixed bug with config file, when no need to minification.
 
-* Added ability to hide keys panel thru config option.
+- Added ability to hide keys panel thru config option.
 
-* CodeMirror upgraded to version 2.35.0.
+- CodeMirror upgraded to version 2.35.0.
 
-* Fixed bug with keys panel and fm bottom margin,
+- Fixed bug with keys panel and fm bottom margin,
 when CodeMirror is open on the right panel.
 
-* Fixed bug with positioning of CodeMirror on the 
+- Fixed bug with positioning of CodeMirror on the 
 right panel.
 
-* Function generateHeaders moved to main module.
+- Function generateHeaders moved to main module.
 
-* Setted up auth on GitHub thru rest.
+- Setted up auth on GitHub thru rest.
 
-* Fixed bug with context menu. Now it disabled 
+- Fixed bug with context menu. Now it disabled 
 before load menu module to.
 
-* Throw out jquery from github module, moved Cache
+- Throw out jquery from github module, moved Cache
 object from client to DOM module, 
 refactored Cache object and added polyfill.
 
-* Added ability to connect github development id,
+- Added ability to connect github development id,
 to Cloud Commander instance working in any host,
 for this all the needed to be done is:
 set enveronment varibles "oauth_client_id" and 
 "oauth_client_secret" values from github profile.
 
-* Changed funcyBox version to 2.1.3.
+- Changed funcyBox version to 2.1.3.
 
-* Improved reading file with streams.
+- Improved reading file with streams.
 
-* Improved download speed of js and css files by
+- Improved download speed of js and css files by
 adding DOM.anyLoadInParallel function that is
 loading files in parallel and then execute
 callback function.
 
-* Added ability to load a couple scripts after one main,
+- Added ability to load a couple scripts after one main,
 in any position in anyLoadOnLoad function.
 
-* Added chainable to Cache object in DOM.
+- Added chainable to Cache object in DOM.
 
-* Changed default ip to null so IP would be geted from
+- Changed default ip to null so IP would be geted from
 config.json only if it setted up.
 
-* Fixed bug with starting node from other then projects dir.
+- Fixed bug with starting node from other then projects dir.
 
-* Fixed bug with slashes on win32.
+- Fixed bug with slashes on win32.
 
-* Fixed bug with editor close, when started from menu.
+- Fixed bug with editor close, when started from menu.
 
-* Added url change on folder changing.
+- Added url change on folder changing.
 
-* Fixed bug with traveling in directories with
+- Fixed bug with traveling in directories with
 Javascript dissabled.
 
-* client.js and server.js moved to lib directory.
+- client.js and server.js moved to lib directory.
 
-* Improved work with browsers history api.
+- Improved work with browsers history api.
 
-* Fixed bug with setting path of index.html.
+- Fixed bug with setting path of index.html.
 
-* Added dropbox module.
+- Added dropbox module.
 
-* Renamed config options ouath_client_id and
+- Renamed config options ouath_client_id and
 oauth_client_secre to github_id and github_secret.
 Added dropbox_id option.
 
-* Fixed bug in github show function.
+- Fixed bug in github show function.
 
-* Added ability to call dropbox chooser on <ctr> + <d>.
+- Added ability to call dropbox chooser on <ctr> + <d>.
 
-* Added ability to read dropbox key from config.
+- Added ability to read dropbox key from config.
 
-* Fixed bug with menu load, when dir other then root.
+- Fixed bug with menu load, when dir other then root.
 
-* Added confirmation before (not real) deleting file.
+- Added confirmation before (not real) deleting file.
 
-* Added ability to upload file to gists on github thru menu.
+- Added ability to upload file to gists on github thru menu.
 
-* Added getCurrentPath function to Util module.
+- Added getCurrentPath function to Util module.
 
-* GitHub and DropBox secret's moved out from
+- GitHub and DropBox secret's moved out from
 config.json to env.
 
-* Fixed bug with auth in github.
+- Fixed bug with auth in github.
 
-* Fixed bug with opening empty files in CodeMiror.
+- Fixed bug with opening empty files in CodeMiror.
 Editor window could not be cloused.
 
-* Added windows support on terminal command: "cloudcmd exit".
+- Added windows support on terminal command: "cloudcmd exit".
 
-* Fixed IP on windows.
+- Fixed IP on windows.
 
-* Added ability to delete files (not for real for now)
+- Added ability to delete files (not for real for now)
 thru keys panel (F8).
 
-* Changed "Upload" menu item to "Upload to".
+- Changed "Upload" menu item to "Upload to".
 
-* Fixed bug with minified styles.
+- Fixed bug with minified styles.
 
-* If git not installed do not show error.
+- If git not installed do not show error.
 Just propose install git and clone from github repo.
 
-* Fixed bug with client.js minifying.
+- Fixed bug with client.js minifying.
 
-* Fixed bug with appcache.
+- Fixed bug with appcache.
 
 
 2012.10.01, v0.1.7
 
-* Changed name of menu files, fixed npm and jitsu
+- Changed name of menu files, fixed npm and jitsu
 problem with menu showing.
 
-* Fixed bug with empty directorys. If directory
+- Fixed bug with empty directorys. If directory
 was empty, we could not go in.
 
-* Removed packed versions of files, uglifing
+- Removed packed versions of files, uglifing
 would be doing on-a-fly
 
-* Added ability to use ajax without jquery.
+- Added ability to use ajax without jquery.
 
-* From now jquery not necessary for Cloud Commander
+- From now jquery not necessary for Cloud Commander
 work, (so start load get faster), but it could be
 loaded any time by any extension.
 
-* Fixed bug with getByClass IE version.
+- Fixed bug with getByClass IE version.
 
-* Fixed bug with keyboard not responding when go deeper
+- Fixed bug with keyboard not responding when go deeper
 in file tree thru mouse double click.
 
-* Removed property keyBinded. From not it's private
+- Removed property keyBinded. From not it's private
 member of KeyBinding class.
 
-* Fixed scrolling bug on non-webkit based browsers.
+- Fixed scrolling bug on non-webkit based browsers.
 Function scrollIntoViewIfNeeded was polyfilled.
 
-* Added classic borders to panels.
+- Added classic borders to panels.
 
-* Added ability to download files thru drag'n'drop.
+- Added ability to download files thru drag'n'drop.
 
-* Fixed bug with setting current file when mouse down.
+- Fixed bug with setting current file when mouse down.
 
-* Improved borders over CodeMirror and panels thru css.
+- Improved borders over CodeMirror and panels thru css.
 
-* Added ability to watch is file changed wile server is
+- Added ability to watch is file changed wile server is
 running
 
-* Moved calling api scrollIntoViewIfNeeded to setCurrentFile.
+- Moved calling api scrollIntoViewIfNeeded to setCurrentFile.
 
-* Added module is-file-changed.
+- Added module is-file-changed.
 
-* Added suport of AppCache. So CloudCommander can work totaly
+- Added suport of AppCache. So CloudCommander can work totaly
 in offline mode (if connection suddenly lost, all visited
 directories would be cached).
 
-* fixed bug with keyboard not responding when click on file.
+- fixed bug with keyboard not responding when click on file.
 
-* Server.js separated to two files: cloudcmd.js and server.js.
+- Server.js separated to two files: cloudcmd.js and server.js.
 Start file is - cloudcmd.js
 
-* Refactored and fixed old bugs in function generateHeaders (server.js).
+- Refactored and fixed old bugs in function generateHeaders (server.js).
 
-* Added ability to remove files (on the surface, not for real).
+- Added ability to remove files (on the surface, not for real).
 
-* From now right panel would be always shown no matter js enabled or
+- From now right panel would be always shown no matter js enabled or
 disabled in browsers.
 
-* Added plagin terminal ( ` button under TAB).
+- Added plagin terminal ( ` button under TAB).
 
-* Added ability to execute commands on server thru terminal.
+- Added ability to execute commands on server thru terminal.
 
-* Added appcache paramter to config.json
+- Added appcache paramter to config.json
 
-* Added ability convert charset from win to unicode on win32.
+- Added ability convert charset from win to unicode on win32.
 
-* Added ability to freeze terminal screen on connection lost
+- Added ability to freeze terminal screen on connection lost
 
-* Added serialisation to socket connection.
+- Added serialisation to socket connection.
 
-* Added ability to work with terminal to any number of clients
+- Added ability to work with terminal to any number of clients
 
-* Fixed bug with jquery load in viewer. Jquery could be loaded to late.
+- Fixed bug with jquery load in viewer. Jquery could be loaded to late.
 
-* Changed version of FuncyBox to 2.1.0.
+- Changed version of FuncyBox to 2.1.0.
 
-* Added Ace editor.
+- Added Ace editor.
 
-* Little bit changed styles. Fixed margins in responsive view.
+- Little bit changed styles. Fixed margins in responsive view.
 
-* Fixed bug with minifying, if file do not minimized so allowed set to none.
+- Fixed bug with minifying, if file do not minimized so allowed set to none.
 
-* Added fix of 866 charset.
+- Added fix of 866 charset.
 
 
 2012.08.24, v0.1.6
  
-* From now jsload, cssload and anyload suport arrays.
+- From now jsload, cssload and anyload suport arrays.
 
-* Added ability to move scrollbar, when Home and
+- Added ability to move scrollbar, when Home and
 End buttons pressed.
 
-* Added ability to move with Page Up and Page Down
+- Added ability to move with Page Up and Page Down
 buttons.
 
-* Added moving scrolling by cursor ability.
+- Added moving scrolling by cursor ability.
 
-* Fixed bug with go to parent directory: from now,
+- Fixed bug with go to parent directory: from now,
 if parent directory not in view area, page will
 scroll to needed place.
 
-* Fixed bug with tab key pressed.
+- Fixed bug with tab key pressed.
 
-* Fixed bug: files now clickable to.
+- Fixed bug: files now clickable to.
 
-* Fixed bug with double click on files.
+- Fixed bug with double click on files.
 
-* Fixed bug with double click on images.
+- Fixed bug with double click on images.
 
-* Fixed bug with Array.isArray and getElementsByClassName in IE.
+- Fixed bug with Array.isArray and getElementsByClassName in IE.
 
-* Fixed bug with document.head in IE.
+- Fixed bug with document.head in IE.
 
-* JQuery 1.7.2 changed to 1.8.0
+- JQuery 1.7.2 changed to 1.8.0
 
-* Added support of mibile browsers and touch events.
+- Added support of mibile browsers and touch events.
 
-* Fixed bug with ignoring all browser defined keys.
+- Fixed bug with ignoring all browser defined keys.
 
-* Moved unSetCurrentfile to setCurrent file.
+- Moved unSetCurrentfile to setCurrent file.
 All the time one of files must be current, so wen we setting up some file
 current, file that was previously current must be unset automatically.
 
-* Added context menu on shift + F10.
+- Added context menu on shift + F10.
 
-* A little bit beautified css.
+- A little bit beautified css.
 
-* Added function getRefreshButton.
+- Added function getRefreshButton.
 
-* Fixed bug with refreshing directory, from now current file would not be seeted up to first, after refresh.
+- Fixed bug with refreshing directory, from now current file would not be seeted up to first, after refresh.
 
-* Added ability to view any file.
+- Added ability to view any file.
 
-* Moved error message a little bit lower.
+- Moved error message a little bit lower.
 
-* Added ability to download files.
+- Added ability to download files.
 
 
 2012.08.06, v0.1.5
 
-* Added tab support.
+- Added tab support.
 
-* Fixed bug with Path links.
+- Fixed bug with Path links.
 
-* From now CodeMirror js files loads, when f4 key pressed.
+- From now CodeMirror js files loads, when f4 key pressed.
 
-* Fixed bug with showing CodeMirror after first show.
+- Fixed bug with showing CodeMirror after first show.
 
-* Added ability to read files in CodeMirror.
+- Added ability to read files in CodeMirror.
 
-* Added ability rename files.
+- Added ability rename files.
 
-* Fixed bug with CodeMirror vertical scroll bar.
+- Fixed bug with CodeMirror vertical scroll bar.
 
-* Added loading image when file going to be edited.
+- Added loading image when file going to be edited.
 
-* All sync functions changed to async equivalents.
+- All sync functions changed to async equivalents.
 
-* On f4 key pressed when current-file is folder
+- On f4 key pressed when current-file is folder
 CodeMirror opens json data of folder.
 
-* Fixed bug with response when we have no rihgts
+- Fixed bug with response when we have no rihgts
 read dir server sends 404 response for now,
 not 200 ok.
 
-* Fixed bug with forming error of loading dir.
+- Fixed bug with forming error of loading dir.
 Was : "not found".
 Now : "Error: EACCES, readdir '/root'"
 
-* Fixed bug with showing loading spinner, when f4 key
+- Fixed bug with showing loading spinner, when f4 key
 pressed couple times and CodeMirror not loaded fully.
 
-* Setted readOnly mode, when directory opened in CodeMirror.
+- Setted readOnly mode, when directory opened in CodeMirror.
 
-* Added api for getting curent file, getting active
+- Added api for getting curent file, getting active
 and passive panels and show/hide any of panels.
 
 
 2012.07.27, v0.1.4
 
-* Added local version of Droids font for offline mode
+- Added local version of Droids font for offline mode
 
-* Fixed bug with positioning of cursor when came back 
+- Fixed bug with positioning of cursor when came back 
 from folder whith long name.
 
-* Fixed bug with setting up current file, if a couple of
+- Fixed bug with setting up current file, if a couple of
 files was with the same name on 16-chars, after going
 up on folders, current file would be last.
 
-* Fixed bug with links and titles with spaces in Path of
+- Fixed bug with links and titles with spaces in Path of
 current directory.
 
-* Added ability to send 404 response if file not found.
+- Added ability to send 404 response if file not found.
 
-* Fixed bug which occurs when error reading directory happens.
+- Fixed bug which occurs when error reading directory happens.
 
-* Fixed bug: ErrorImage.title writes always for now, no matter
+- Fixed bug: ErrorImage.title writes always for now, no matter
 why error occurred.
 
-* Seted up default cursor on file attributes.
+- Seted up default cursor on file attributes.
 
-* _currentToParent refactored, no more cicles again. Changed
+- _currentToParent refactored, no more cicles again. Changed
 the way of searching of current root directory, now it shoud
 be more faster, DOM, short, simple and logical.
 
-* Added ability to view images on F3 key pressed.
+- Added ability to view images on F3 key pressed.
 
-* Added ability to work view images offline.
+- Added ability to work view images offline.
 
-* Added async flag to anyload function.
+- Added async flag to anyload function.
 
-* Added ability remove not loaded scripts from DOM.
+- Added ability remove not loaded scripts from DOM.
 
 
 2012.07.19, v0.1.3
 
-* Fixed bug with nodester (jitsu env.HOME make him go done).
+- Fixed bug with nodester (jitsu env.HOME make him go done).
 
-* Fixed bug: gzip do not working out, becouse accessible flag settet
+- Fixed bug: gzip do not working out, becouse accessible flag settet
 up to _controller object.
 
-* To every panel added scroll bars which is hiding if do not needed.
+- To every panel added scroll bars which is hiding if do not needed.
 
-* Fixed bug with setting up flag in config.json: do not minimize js.
+- Fixed bug with setting up flag in config.json: do not minimize js.
 
-* Fixed bugs many bugs in _anyload function (client.js).
+- Fixed bugs many bugs in _anyload function (client.js).
 
-* Added function cssLoad to client.js
+- Added function cssLoad to client.js
 
-* Added Client Side CodeMirror library with name Cloud Editor.
+- Added Client Side CodeMirror library with name Cloud Editor.
 
-* Fixed bug with building file table from json data, when we go around
+- Fixed bug with building file table from json data, when we go around
 and come back to root dir.
 If name of a file or directory is more then 16 charactes it shows 
 like 'VERY-LONG-NAME..', so becaouse of on first came we load page
@@ -1018,41 +1018,41 @@ server. So if file to long we should take it's name from title
 parameter of <a> tag, it's wasn't, so folder navigation not every
 time was possible.
 
-* Fixed bug with undefined size on root directory of Cloud Commander.
+- Fixed bug with undefined size on root directory of Cloud Commander.
 Now Cloud Commander writes size 0, if can't get size, and besides will
 setted b char: "0b".
 
-* Added supporting of Russian language in directory names.
+- Added supporting of Russian language in directory names.
 
 
 2012.07.14, v0.1.2
 
-* Added suport of jitsu.
+- Added suport of jitsu.
 
-* Added module objects.js, Minify and Cache objects moved there.
+- Added module objects.js, Minify and Cache objects moved there.
 
-* Module Minify moved to node_modules dir
+- Module Minify moved to node_modules dir
 
-* Changed the minimize function calls accroding to Minify 0.1.2 changes.
+- Changed the minimize function calls accroding to Minify 0.1.2 changes.
 
 
 2012.07.11, v0.1.1
 
-* Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
+- Added onerror parametr to anyload in Clinet Side, so now we can process situation when 
 js-script(or something other) has not loaded.
 
-* Added jquery file, so from now Cloud Commander can totaly work offline.
+- Added jquery file, so from now Cloud Commander can totaly work offline.
 
-* Added css-lint to travis ci.
+- Added css-lint to travis ci.
 
-* Fixed bug in object Minify, doit function, more processing function did not
+- Fixed bug in object Minify, doit function, more processing function did not
 return final_code so changes was not saving, and clien side loaded keyBinding.js
 and cloudfunc.js full sized versions.
 
-* Changed the way Minify post-processing js-files so, from now in Minify object
+- Changed the way Minify post-processing js-files so, from now in Minify object
 post-processing functions passed like this {'client.js': function(){}}
 
-* Added ability to read file data from Minify Cache, without writing to disk
+- Added ability to read file data from Minify Cache, without writing to disk
 
-* Changed the passing MoreProcessing agrument to jsScripts function Minify module, 
+- Changed the passing MoreProcessing agrument to jsScripts function Minify module, 
 no it passes with a file name, and js file name writing only once.
