@@ -109,6 +109,15 @@ Console
 - **~**                 - open
 - **Esc**               - close
 
+Config
+---------------
+[Demo](http://io.cloudcmd.io#/config "Config")
+![Console](/img/screenshot/config.png "Config")
+
+###Hot keys
+- **F10**               - open
+- **Esc**               - close
+
 Menu
 ---------------
 [Demo](http://io.cloudcmd.io#/menu "Menu")
