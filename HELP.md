@@ -29,6 +29,7 @@ Cloud Commander v0.6.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 
 Benefits
 ---------------
+
 - Open Source.
 - Has 2 classic ortodox panels.
 - Works on Windows, Linux and Mac OS.
@@ -123,6 +124,7 @@ Menu
 [Demo](http://io.cloudcmd.io#/menu "Menu")
 ![Menu](/img/screen/menu.png "Menu")
 Right mouse click button shows context menu with items:
+
 - View
 - Edit
 - Rename
