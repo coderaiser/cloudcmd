@@ -18,7 +18,7 @@
     "subdomain": "cloudcmd",
     "dependencies": {
         "dropbox": "0.10.2",
-        "minify": "0.2.2",
+        "minify": "0.2.3",
         "socket.io": "0.9.16",
         "express": "3.4.x"
     },
