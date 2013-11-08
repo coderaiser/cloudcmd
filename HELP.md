@@ -91,7 +91,7 @@ Hot keys
 Edit
 ---------------
 [Demo](http://io.cloudcmd.io/fs/etc#/edit/passwd "Edit")
-![Edit](/img/screenshot/edit.png "Edit")
+![Edit](/img/screen/edit.png "Edit")
 
 ###Hot keys
 - **F4**                - open
@@ -103,7 +103,7 @@ For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wik
 Console
 ---------------
 [Demo](http://io.cloudcmd.io#/console "Console")
-![Console](/img/screenshot/console.png "Console")
+![Console](/img/screen/console.png "Console")
 
 ###Hot keys
 - **~**                 - open
@@ -112,7 +112,7 @@ Console
 Config
 ---------------
 [Demo](http://io.cloudcmd.io#/config "Config")
-![Console](/img/screenshot/config.png "Config")
+![Console](/img/screen/config.png "Config")
 
 ###Hot keys
 - **F10**               - open
@@ -121,7 +121,7 @@ Config
 Menu
 ---------------
 [Demo](http://io.cloudcmd.io#/menu "Menu")
-![Menu](/img/screenshot/menu.png "Menu")
+![Menu](/img/screen/menu.png "Menu")
 Right mouse click button shows context menu with items:
 - View
 - Edit
