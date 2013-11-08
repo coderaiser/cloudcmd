@@ -1,3 +1,87 @@
+2013.11.08, v0.6.0
+
+update:
+- minify v0.2.3
+- dropbox: 0.10.1 -> 0.10.2
+- express: 3.4.2 -> 3.4.x
+
+fix:
+- (rest) config: sendError -> main.sendError
+- (socket) if " " at begin execption occurs
+- (socket) error: undefined
+- (rest) crash on /api/v1
+- (main) sendFile callback: add error condition
+- (main) if file not exist - send error; sendFile: add stat, add setHeader
+- (main) header was sended twice
+
+feature:
+- (ind) f10: rm hidden
+- (style) .cmd-button width: 8% -> 9%
+- (dom) rest: add {top: true}
+- (minify) rm setAllowed
+- (config) add saving of config
+- (reset) rm font-size, line-height
+- (cloudcmd) rm config watch
+- (config) port, ssl port: add title
+- (config) rm api_url, server, ip, rest from gui
+- (config) add autosize
+- (config) rm border
+- (minify) rm force flag
+- (cloudocmd) rm minimize
+- (cloudcmd) rm all.min.css
+- (rest) add config
+- (config) add change
+- (config) add template-updating
+- (config) rm checked
+- (util) copyObj: rm copy
+- (config) add
+- (socket) JSON.stringify -> Util.stringifyJSON
+- (socket) exec symbols: add "*"
+- (socket) add "#"
+- (socket) connect: add reconnect limit: 5 seconds
+- (socket) reconnect_failed: mv from options to events
+- (rest) rm proxy
+- (rest) rm " "
+- (rest) rm log lSize
+- (socket) getExec: add lError condition
+- (util) add addNewLine
+- (socket) getSpawn: rm log
+- (express) add
+- (socket) lExecSymbols: add "&"
+- (socket) getSpawn error: add retFalse
+- (socket) add spawn
+- (console) add Buffer
+- (socket) listen: add stringifyJSON
+- (socket) connected -> connected\n
+- (console) rm addNewLine
+- (rest) rm log error (would log later anyway)
+- (server) add express logger (if exist)
+- (server) add express
+- (main) mrequire: error -> no
+- (socket) connect: rm reconnect, reconnect delay
+- (edit) showMessage: ".msg" -> "#view .msg"
+- (edit) show: rm className
+- (asyncCall) add any count of params
+- (client) getSystemFile: rm !pGlobal
+- (dom) Dialog: add confirm
+- (dom) add Dialog
+- (help) show: add cssSet, list-style-type
+- (server) controller log: rm ":"
+- (main) mrequire: add formatMsg
+- (util) checkObj: add trace
+- (cloudcmd) retExec -> retFunc
+- (help) add margin: 25px
+- (dom) addOneTime -> addOnce
+- (server) change socket msg
+- (cloudfunc) formatMsg: add empty name condition
+- (socket) rm flashsocket
+- (main) readFiles: add formatMsg
+- (server) add query
+- (cloudcmd) sendResponse: p -> p, null, true
+- (cloudcmd) change logs: rm pathname, request, name; add method, data
+- (util) log: add if lArg[0]
+
+
 2013.10.17, v0.5.0
 
 feature:
