@@ -139,18 +139,6 @@ Right mouse click button shows context menu with items:
 - **F9**                - open
 - **Esc**               - close
 
-Menu
----------------
-Right mouse click button shows context menu with items:
-
-- View
-- Edit
-- Rename
-- Delete
-- Upload to (Dropbox, Github, GDrive)
-- Download
-- New (File, Dir, from cloud)
-
 Configuration
 ---------------
 All main configuration could be done via [config.json](json/config.json "Config").
