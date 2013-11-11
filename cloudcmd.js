@@ -202,7 +202,7 @@
                 lRet            = main.sendFile( pParams );
             }
             else if ( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') )
-                lRet = sendCommanderContent( pParams );
+                lRet = sendContent( pParams );
             
             else
                 lRet = false;
@@ -211,7 +211,7 @@
         return lRet;
     }
     
-    function sendCommanderContent(pParams) {
+    function sendContent(pParams) {
         var p, lRet = main.checkParams(pParams);
         
         if (lRet) {
