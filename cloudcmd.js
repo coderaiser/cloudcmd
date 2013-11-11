@@ -238,7 +238,9 @@
         if (lRet) {
             var p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON) {
-                if (!pError) {
+                if (pError) 
+                    main.sendError(pParams, pError);
+                else {
                     var lQuery = main.getQuery(p.request);
                     if ( Util.isContainStr(lQuery, 'json') ) {
                         p.data  = Util.stringifyJSON(pJSON);
@@ -248,7 +250,9 @@
                     else{ /* get back html*/
                         p.name   = Minify.allowed ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData) {
-                            if (!pError) {
+                            if (pError)
+                                main.sendError(pParams, pError);
+                            else {
                                 var lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
                                     lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
                                               '<ul id=right class=panel>' + lPanel + '</ul>';
@@ -258,13 +262,9 @@
                                     data        : pData.toString(),
                                 }), true);
                             }
-                            else
-                                main.sendError(pParams, pError);
                         });
                     }
                 }
-                else
-                    main.sendError(pParams, pError);
             });
         }
     }
