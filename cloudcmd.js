@@ -49,7 +49,7 @@
             lData       = pData.data,
             lAdditional = pData.additional;
         
-        if (!Config.appcache)
+        if (!Config.appCache)
             lData = Util.removeStr(lData, [
                 /* min */
                 ' manifest=/cloudcmd.appcache',

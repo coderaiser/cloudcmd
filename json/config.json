@@ -1,6 +1,6 @@
 {
     "apiURL": "/api/v1",
-    "appcache": false,
+    "appСache": false,
     "analytics": true,
     "localStorage": true,
     "minify": true,
