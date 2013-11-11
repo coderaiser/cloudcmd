@@ -221,7 +221,7 @@
             fs.stat(p.name, function(pError, pStat) {
                 if (!pError)
                     if ( pStat.isDirectory() )
-                        processCommanderContent(pParams);
+                        processContent(pParams);
                     else
                         main.sendFile( pParams );
                 else
@@ -232,7 +232,7 @@
         return lRet;
     }
     
-    function processCommanderContent(pParams) {
+    function processContent(pParams) {
         var p,
             lRet = main.checkParams(pParams);
         
