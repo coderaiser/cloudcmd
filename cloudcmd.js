@@ -149,7 +149,7 @@
             if (pErrors)
                 Util.log(pErrors);
             else {
-                FileTemplate        = pFiles[FILE_TMPL].toString();
+                FileTemplate    = pFiles[FILE_TMPL].toString();
                 PathTemplate    = pFiles[PATH_TMPL].toString();
                 
                 if (Config.ssl)
