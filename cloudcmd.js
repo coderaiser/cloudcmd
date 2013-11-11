@@ -239,7 +239,9 @@
         if (lRet) {
             p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON) {
-                var lQuery, isJSON;
+                var lQuery, isJSON,
+                    config  = main.config,
+                    minify  = config.minify;
                 
                 if (pError) 
                     main.sendError(pParams, pError);
@@ -253,7 +255,7 @@
                         main.sendResponse(p, null, true);
                     }
                     else{ /* get back html*/
-                        p.name   = Minify.allowed ? Minify.getName(INDEX) : INDEX;
+                        p.name   = minify ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData) {
                             var lPanel, lList;
                             
