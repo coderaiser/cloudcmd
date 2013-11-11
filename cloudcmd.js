@@ -233,16 +233,21 @@
     }
     
     function processCommanderContent(pParams) {
-        var lRet = main.checkParams(pParams);
+        var p,
+            lRet = main.checkParams(pParams);
         
         if (lRet) {
-            var p = pParams;
+            p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON) {
+                var lQuery, isJSON;
+                
                 if (pError) 
                     main.sendError(pParams, pError);
                 else {
-                    var lQuery = main.getQuery(p.request);
-                    if ( Util.isContainStr(lQuery, 'json') ) {
+                    lQuery      = main.getQuery(p.request);
+                    isJSON      = Util.isContainStr(lQuery, 'json');
+                    
+                    if (isJSON) {
                         p.data  = Util.stringifyJSON(pJSON);
                         p.name +='.json';
                         main.sendResponse(p, null, true);
@@ -250,12 +255,14 @@
                     else{ /* get back html*/
                         p.name   = Minify.allowed ? Minify.getName(INDEX) : INDEX;
                         fs.readFile(p.name, function(pError, pData) {
+                            var lPanel, lList;
+                            
                             if (pError)
                                 main.sendError(pParams, pError);
                             else {
-                                var lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
-                                    lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
-                                              '<ul id=right class=panel>' + lPanel + '</ul>';
+                                lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
+                                lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
+                                          '<ul id=right class=panel>' + lPanel + '</ul>';
                                 
                                 main.sendResponse(p, indexProcessing({
                                     additional  : lList,
