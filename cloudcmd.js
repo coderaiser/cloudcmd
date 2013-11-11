@@ -58,8 +58,8 @@
             ]);
         
         if (!Config.show_keys_panel) {
-            lKeysPanel  = '<div id=keyspanel';
-            lData       = lData.replace(lKeysPanel, lKeysPanel +' class=hidden');
+            lKeysPanel  = '<div class="keyspanel';
+            lData       = lData.replace(lKeysPanel + '"', lKeysPanel +' hidden"');
         }
         
         lData = Util.render(lData, {
