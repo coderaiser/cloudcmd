@@ -32,7 +32,7 @@ body {
 }
 
 .fm, #left>li, #right>li, .path, .fm-header,
-.mini-icon, .name, .size, .owner, .mode, #keyspanel, .cmd-button {
+.mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
     -webkit-user-select : none;
     -moz-user-select    : none;
     -ms-user-select     : none;
@@ -200,7 +200,7 @@ body {
     border-color: rgba(254, 159, 224, .40);
 }
 
-#keyspanel {
+.keyspanel {
   text-align: center;
 }
 
