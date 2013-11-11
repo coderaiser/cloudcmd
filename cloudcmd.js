@@ -29,10 +29,10 @@
         CERT        = DIR + 'ssl/ssl.crt',
         
         FILE_TMPL   = HTMLDIR + 'file.html',
-        
         PATH_TMPL   = HTMLDIR + 'path.html',
+        INDEX_TMPL  = HTMLDIR + 'index.html',
         
-        FileTemplate, PathTemplate,
+        FileTemplate, PathTemplate, IndexTemplate,
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
@@ -140,7 +140,7 @@
             route       : route
         },
         
-        lFiles = [FILE_TMPL, PATH_TMPL];
+        lFiles = [FILE_TMPL, PATH_TMPL, INDEX_TMPL];
         
         if (Config.ssl)
             lFiles.push(CA, KEY, CERT);
@@ -151,6 +151,7 @@
             else {
                 FileTemplate    = pFiles[FILE_TMPL].toString();
                 PathTemplate    = pFiles[PATH_TMPL].toString();
+                IndexTemplate   = pFiles[INDEX_TMPL].toString();
                 
                 if (Config.ssl)
                     lParams.ssl = {
@@ -239,7 +240,7 @@
         if (lRet) {
             p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON) {
-                var lQuery, isJSON,
+                var lQuery, isJSON, lPanel, lList,
                     config  = main.config,
                     minify  = config.minify;
                 
@@ -254,24 +255,16 @@
                         p.name +='.json';
                         main.sendResponse(p, null, true);
                     }
-                    else{ /* get back html*/
-                        p.name   = minify ? Minify.getName(INDEX) : INDEX;
-                        fs.readFile(p.name, function(pError, pData) {
-                            var lPanel, lList;
-                            
-                            if (pError)
-                                main.sendError(pParams, pError);
-                            else {
-                                lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
-                                lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
-                                          '<ul id=right class=panel>' + lPanel + '</ul>';
-                                
-                                main.sendResponse(p, indexProcessing({
-                                    additional  : lList,
-                                    data        : pData.toString(),
-                                }), true);
-                            }
-                        });
+                    else {
+                        p.name  = INDEX,
+                        lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
+                        lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
+                                  '<ul id=right class=panel>' + lPanel + '</ul>';
+                        
+                        main.sendResponse(p, indexProcessing({
+                            additional  : lList,
+                            data        : IndexTemplate,
+                        }), true);
                     }
                 }
             });
