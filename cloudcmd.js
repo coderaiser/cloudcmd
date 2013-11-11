@@ -57,7 +57,7 @@
                 ' manifest="/cloudcmd.appcache"'
             ]);
         
-        if (!Config.show_keys_panel) {
+        if (!Config.showKeysPanel) {
             lKeysPanel  = '<div class="keyspanel';
             lData       = lData.replace(lKeysPanel + '"', lKeysPanel +' hidden"');
         }

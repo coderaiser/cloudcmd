@@ -153,7 +153,7 @@ All main configuration could be done via [config.json](json/config.json "Config"
     "online"            : true,     /* load js files from cdn or local path     */
     "cache"             : true,     /* add cache-control                        */
     "logs"              : false,    /* logs or console ouput                    */
-    "show_keys_panel"   : true,     /* show classic panel with buttons of keys  */
+    "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
     "server"            : true,     /* server mode or testing mode              */
     "socket"            : true      /* enable web sockets                       */
     "port"              : 8000,     /* http port or null(default)               */
