@@ -146,7 +146,7 @@ All main configuration could be done via [config.json](json/config.json "Config"
 ```js
 {
     "api_url"           :"/api/v1",
-    "appcache"          : false,    /* cache files for offline use              */
+    "appCache"          : false,    /* cache files for offline use              */
     "analytics"         : true,     /* google analytics suport                  */
     "localStorage"      : true,     /* cache directory data                     */
     "minify"            : true      /* minification of js,css,html and img      */
