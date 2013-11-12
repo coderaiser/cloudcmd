@@ -2,6 +2,7 @@
     "apiURL": "/api/v1",
     "appСache": false,
     "analytics": true,
+    "diff": false,
     "localStorage": true,
     "minify": true,
     "online": true,
