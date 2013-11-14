@@ -3,6 +3,7 @@
     "appСache": false,
     "analytics": true,
     "diff": false,
+    "notifications": false,
     "localStorage": true,
     "minify": true,
     "online": true,
