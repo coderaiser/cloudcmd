@@ -149,6 +149,7 @@ All main configuration could be done via [config.json](json/config.json "Config"
     "appCache"          : false,    /* cache files for offline use              */
     "analytics"         : true,     /* google analytics suport                  */
     "diff"              : false,    /* when save - send patch, not whole file   */
+    "notifications"     : false,    /* show notifications when tab is not active*/
     "localStorage"      : true,     /* cache directory data                     */
     "minify"            : true      /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
