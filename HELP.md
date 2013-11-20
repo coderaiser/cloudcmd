@@ -97,6 +97,8 @@ Edit
 ###Hot keys
 - **F4**                - open
 - **Ctrl + s**          - save
+- **Ctrl + f**          - find
+- **Ctrl + f + f**      - replace
 - **Ctrl + g**          - go to line
 - **Esc**               - close
 
