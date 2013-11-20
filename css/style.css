@@ -115,12 +115,12 @@ body {
     transition: ease 0.1s;
 }
 
-.clear-cache {
+.clear-storage {
     margin-right: 6px;
     margin-left: 7px;
     background:url(/img/console_clear.png)  -4px -4px no-repeat;
 }
-.clear-cache:active {
+.clear-storage:active {
     top:5px;
 }
 
