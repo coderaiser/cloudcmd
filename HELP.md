@@ -97,6 +97,7 @@ Edit
 ###Hot keys
 - **F4**                - open
 - **Ctrl + s**          - save
+- **Ctrl + g**          - go to line
 - **Esc**               - close
 
 For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").
