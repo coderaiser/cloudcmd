@@ -234,6 +234,34 @@ server {
 }
 ```
 
+If you want add **ssl**, add 3 lines to server block:
+
+```sh
+server {
+    listen 443;
+    client_max_body_size 100m;
+    ssl                  on;
+    ssl_certificate      /home/coderaiser/cloudcmd/ssl/ssl.crt;
+    ssl_certificate_key  /home/coderaiser/cloudcmd/ssl/ssl.key;
+    server_name io.cloudcmd.io;
+    access_log /var/log/nginx/io.cloudcmd.io.access.log;
+    location / {
+        proxy_pass    http://127.0.0.1:8000/;
+    }
+}
+```
+
+If you need redirection from **http** to **https**, it's simple:
+
+```sh
+server {
+    listen 80;
+    server_name admin.cloudcmd.io;
+    rewrite ^ https://io.cloudcmd.io$request_uri? permanent; #301 redirect
+    access_log /var/log/nginx/io.cloudcmd.io.access.log;
+}
+```
+
 ```sh
 # create symlink of this file
 ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
