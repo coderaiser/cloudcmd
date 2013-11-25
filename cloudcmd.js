@@ -12,6 +12,7 @@
         
         path        = main.path,
         fs          = main.fs,
+        files       = main.files,
         CloudFunc   = main.cloudfunc,
         AppCache    = main.appcache,
         Util        = main.util,
@@ -144,7 +145,7 @@
         if (Config.ssl)
             lFiles.push(KEY, CERT);
         
-        main.readFiles(lFiles, function(pErrors, pFiles) {
+        files.read(lFiles, function(pErrors, pFiles) {
             if (pErrors)
                 Util.log(pErrors);
             else {
