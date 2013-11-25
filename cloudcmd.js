@@ -24,7 +24,6 @@
         INDEX       = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
         
-        CA          = DIR + 'ssl/sub.class1.server.ca.pem',
         KEY         = DIR + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
@@ -143,7 +142,7 @@
         lFiles = [FILE_TMPL, PATH_TMPL, INDEX_TMPL];
         
         if (Config.ssl)
-            lFiles.push(CA, KEY, CERT);
+            lFiles.push(KEY, CERT);
         
         main.readFiles(lFiles, function(pErrors, pFiles) {
             if (pErrors)
@@ -155,7 +154,6 @@
                 
                 if (Config.ssl)
                     lParams.ssl = {
-                        ca      : pFiles[CA],
                         key     : pFiles[KEY],
                         cert    : pFiles[CERT]
                     };
