@@ -234,7 +234,7 @@ server {
 }
 ```
 
-If you want add **ssl**, add 3 lines to server block:
+If you want add **ssl**, add a couple lines to server block:
 
 ```sh
 server {
