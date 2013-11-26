@@ -10,8 +10,7 @@
         <link href=/img/favicon/favicon.png rel=icon type=image/png />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href="/css/reset.css">
-        <link rel=stylesheet href="/css/style.css">
+        <link rel=stylesheet href=/combine/css/reset.css:css/style.css>
     </head>
     <body>
     
@@ -29,8 +28,6 @@
         <button id=f10 class=cmd-button>F10 - config</button>
         <button id=~ class=cmd-button>~ - console</button>
     </div>
-    <script src=/lib/util.js></script>
-    <script src=/lib/client/dom.js></script>
-    <script src=/lib/client.js></script>
+    <script src=/combine/lib/client.js:lib/client/dom.js:lib/util.js></script>
     </body>
 </html>
