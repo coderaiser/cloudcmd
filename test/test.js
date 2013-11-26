@@ -3,11 +3,12 @@
     
     var DIR                 = process.cwd() + '/',
         main                = require(DIR + 'lib/server/main'),
-
+        
         Util                = main.util,
         
         CloudFunc           = main.cloudfunc,
         HTMLDIR             = main.HTMLDIR,
+        files               = main.files,
         
         TEMPLATEPATH        = HTMLDIR + 'file.html',
         PATHTEMPLATE_PATH   = HTMLDIR + 'path.html',
@@ -52,9 +53,9 @@
                 '<span class=owner>owner</span>'                                +
                 '<span class=mode>mode</span>'                                  +
             '</li>';
-   
     
-    main.readFiles(Files, function(pErrors, pFiles){
+    
+    files.readFiles(Files, function(pErrors, pFiles){
         if(pErrors)
             Util.log(pErrors);
         else{
