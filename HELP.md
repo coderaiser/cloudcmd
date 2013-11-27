@@ -60,6 +60,18 @@ or install in npm:
     cloudcmd
 ```
 
+Additional modules
+---------------
+**Cloud Commander's Server Side** not using additional modules for main functionality.
+But for console and minification and optimization tricks optional can be
+assingned (and installed) modules: [Minify] (https://github.com/coderaiser/minify "Minify")
+and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
+
+Install addtitional modules (type in **Cloud Commander** directory):
+
+    npm i
+
+
 Hot keys
 ---------------
 
@@ -314,17 +326,6 @@ and then, if there is new version
 
     npm r cloudcmd
     npm i cloudcmd
-
-Additional modules
----------------
-**Cloud Commander's Server Side** not using additional modules for main functionality.
-But for minification and optimization tricks optional can be
-assingned (and installed) modules: [Minify] (https://github.com/coderaiser/minify "Minify")
-and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
-
-Install addtitional modules (type in **Cloud Commander** directory):
-
-    npm i
 
 Extensions
 ---------------
