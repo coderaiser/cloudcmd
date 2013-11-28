@@ -28,6 +28,50 @@
         <button id=f10 class=cmd-button>F10 - config</button>
         <button id=~ class=cmd-button>~ - console</button>
     </div>
-    <script async src=/combine/lib/client.js:lib/client/dom.js:lib/util.js></script>
+    <script>
+        (function() {
+            'use strict';
+            
+            var script,
+                files   = [
+                    'lib/client/listeners.js',
+                    'lib/client.js',
+                    'lib/client/dom.js',
+                    'lib/cloudfunc.js',
+                    'lib/util.js'
+                ],
+                url             = getCombineURL(files);
+            
+            window.addEventListener('load', createScript);
+            
+            function createScript() {
+                script          = document.createElement('script');
+                script.src      = url;
+                script.async    = true;
+                script.addEventListener('load', scriptLoad);
+                document.body.appendChild(script);
+                window.removeEventListener('load', createScript);
+            }
+            
+            function getCombineURL(files) {
+                var i,
+                    url     = '/combine/',
+                    n       = files.length;
+                
+                for (i = 0; i < n-1; i++) {
+                    url += files[i] + ':';
+                }
+                
+                url += files[i];
+                
+                return url;
+            }
+            
+            function scriptLoad() {
+                CloudCmd.init();
+                script.removeEventListener('load', scriptLoad);
+            }
+        })();
+    </script>
     </body>
 </html>
