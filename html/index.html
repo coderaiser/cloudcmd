@@ -32,7 +32,7 @@
         (function() {
             'use strict';
             
-            var script,
+            var script, Height,
                 files   = [
                     'lib/client/listeners.js',
                     'lib/client.js',
@@ -43,6 +43,7 @@
                 url             = getCombineURL(files);
             
             window.addEventListener('load', createScript);
+            setPanelHeight();
             
             function createScript() {
                 script          = document.createElement('script');
@@ -69,8 +70,32 @@
             
             function scriptLoad() {
                 CloudCmd.init();
+                CloudCmd.HEIGHT = Height;
                 script.removeEventListener('load', scriptLoad);
             }
+            
+            function setPanelHeight() {
+                var style;
+                /* устанавливаем размер высоты таблицы файлов
+                 * исходя из размеров разрешения экрана
+                 *
+                 * формируем и округляем высоту экрана
+                 * при разрешениии 1024x1280:
+                 * 658 -> 700
+                 */
+                
+                Height = window.screen.height;
+                Height -= (Height / 3).toFixed();
+                Height = (Height / 100).toFixed() * 100;
+                
+                style           = document.createElement('style');
+                style.innerText = '.panel {'    +
+                                    'height:'   + Height +'px;'  +
+                                '}';
+                
+                document.head.appendChild(style);
+            }
+            
         })();
     </script>
     </body>
