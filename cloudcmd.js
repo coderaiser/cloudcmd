@@ -144,12 +144,12 @@
         if (Config.ssl)
             lFiles.push(KEY, CERT);
         
-        files.read(lFiles, function(pErrors, pFiles) {
+        files.read(lFiles, 'utf-8', function(pErrors, pFiles) {
             if (pErrors)
                 Util.log(pErrors);
             else {
-                FileTemplate    = pFiles[FILE_TMPL].toString();
-                PathTemplate    = pFiles[PATH_TMPL].toString();
+                FileTemplate    = pFiles[FILE_TMPL];
+                PathTemplate    = pFiles[PATH_TMPL];
                 
                 if (Config.ssl)
                     lParams.ssl = {
