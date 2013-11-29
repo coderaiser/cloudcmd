@@ -56,15 +56,10 @@
             }
             
             function getCombineURL(files) {
-                var i,
-                    url     = '/combine/',
-                    n       = files.length;
+                var regExp  = new RegExp(',', 'g'),
+                    url     = '/combine/' + files;
                 
-                for (i = 0; i < n-1; i++) {
-                    url += files[i] + ':';
-                }
-                
-                url += files[i];
+                url = url.replace(regExp, ':');
                 
                 return url;
             }
