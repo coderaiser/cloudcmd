@@ -22,7 +22,7 @@
         Minify      = main.minify,
         Config      = main.config,
         
-        INDEX       = HTMLDIR + 'index.html',
+        INDEX_PATH  = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
         
         KEY         = DIR + 'ssl/ssl.key',
@@ -30,9 +30,8 @@
         
         FILE_TMPL   = HTMLDIR + 'file.html',
         PATH_TMPL   = HTMLDIR + 'path.html',
-        INDEX_TMPL  = HTMLDIR + 'index.html',
         
-        FileTemplate, PathTemplate, IndexTemplate,
+        FileTemplate, PathTemplate,
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
@@ -140,7 +139,7 @@
             route       : route
         },
         
-        lFiles = [FILE_TMPL, PATH_TMPL, INDEX_TMPL];
+        lFiles = [FILE_TMPL, PATH_TMPL];
         
         if (Config.ssl)
             lFiles.push(KEY, CERT);
@@ -151,7 +150,6 @@
             else {
                 FileTemplate    = pFiles[FILE_TMPL].toString();
                 PathTemplate    = pFiles[PATH_TMPL].toString();
-                IndexTemplate   = pFiles[INDEX_TMPL].toString();
                 
                 if (Config.ssl)
                     lParams.ssl = {
@@ -253,18 +251,22 @@
                         p.data  = Util.stringifyJSON(pJSON);
                         p.name +='.json';
                         main.sendResponse(p, null, true);
-                    }
-                    else {
-                        p.name  = INDEX,
-                        lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
-                        lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
-                                  '<ul id=right class=panel>' + lPanel + '</ul>';
-                        
-                        main.sendResponse(p, indexProcessing({
-                            additional  : lList,
-                            data        : IndexTemplate,
-                        }), true);
-                    }
+                    } else 
+                        fs.readFile(INDEX_PATH, 'utf8', function(error, template) {
+                            if (error)
+                                main.sendError(p, error);
+                            else {
+                                p.name  = INDEX_PATH,
+                                lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
+                                lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
+                                          '<ul id=right class=panel>' + lPanel + '</ul>';
+                                
+                                main.sendResponse(p, indexProcessing({
+                                    additional  : lList,
+                                    data        : template,
+                                }), true);
+                            }
+                        });
                 }
             });
         }
