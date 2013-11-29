@@ -55,7 +55,7 @@
             '</li>';
     
     
-    files.readFiles(Files, function(pErrors, pFiles){
+    files.read(Files, function(pErrors, pFiles){
         if(pErrors)
             Util.log(pErrors);
         else{
