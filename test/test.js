@@ -55,15 +55,15 @@
             '</li>';
     
     
-    files.read(Files, function(pErrors, pFiles){
+    files.read(Files, 'utf-8', function(pErrors, pFiles){
         if(pErrors)
             Util.log(pErrors);
         else{
             console.time('CloudFunc.buildFromJSON');
             
-            var lTemplate       = pFiles[TEMPLATEPATH].toString(),
-                lPathTemplate   = pFiles[PATHTEMPLATE_PATH].toString(),
-                lExpect         = pFiles[EXPECT_PATH].toString(),
+            var lTemplate       = pFiles[TEMPLATEPATH],
+                lPathTemplate   = pFiles[PATHTEMPLATE_PATH],
+                lExpect         = pFiles[EXPECT_PATH],
                 
                 lResult         = CloudFunc.buildFromJSON(lJSON, lTemplate, lPathTemplate);
                 
