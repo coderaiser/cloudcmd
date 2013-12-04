@@ -30,8 +30,9 @@
         
         FILE_TMPL   = HTMLDIR + 'file.html',
         PATH_TMPL   = HTMLDIR + 'path.html',
+        LINK_TMPL   = HTMLDIR + 'path.html',
         
-        FileTemplate, PathTemplate,
+        FileTemplate, PathTemplate, LinkTemplate,
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
@@ -139,7 +140,7 @@
             route       : route
         },
         
-        lFiles = [FILE_TMPL, PATH_TMPL];
+        lFiles = [FILE_TMPL, PATH_TMPL, LINK_TMPL];
         
         if (Config.ssl)
             lFiles.push(KEY, CERT);
@@ -150,6 +151,7 @@
             else {
                 FileTemplate    = pFiles[FILE_TMPL];
                 PathTemplate    = pFiles[PATH_TMPL];
+                LinkTemplate    = pFiles[LINK_TMPL];
                 
                 if (Config.ssl)
                     lParams.ssl = {
@@ -257,7 +259,7 @@
                                 main.sendError(p, error);
                             else {
                                 p.name  = INDEX_PATH,
-                                lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate),
+                                lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
                                 lList   = '<ul id=left class=panel>'  + lPanel + '</ul>' +
                                           '<ul id=right class=panel>' + lPanel + '</ul>';
                                 
