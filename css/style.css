@@ -94,7 +94,9 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     background-color: white;
-    border: 1.5px solid rgba(49,123,249,.40);
+    border: 1.5px solid;
+    border-color: rgb(49,123,249);
+    border-color: rgba(49,123,249,.40);
     outline: 0;
     transition: ease 0.1s;
 }
@@ -176,10 +178,13 @@ body {
     padding: 20px;
     margin: 0;
     overflow-y: auto;
-    border: 1.5px solid rgba(49, 123, 249, .40);
+    border: 1.5px solid;
+    border-color: rgb(49, 123, 249);
+    border-color: rgba(49, 123, 249, .40);
 }
 
 .selected-panel {
+    border-color: rgb(254, 159, 224);
     border-color: rgba(254, 159, 224, .40);
 }
 
