@@ -30,7 +30,7 @@
         
         FILE_TMPL   = HTMLDIR + 'file.html',
         PATH_TMPL   = HTMLDIR + 'path.html',
-        LINK_TMPL   = HTMLDIR + 'path.html',
+        LINK_TMPL   = HTMLDIR + 'link.html',
         
         FileTemplate, PathTemplate, LinkTemplate,
         
