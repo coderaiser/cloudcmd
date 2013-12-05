@@ -239,9 +239,7 @@
         if (lRet) {
             p = pParams;
             main.commander.getDirContent(p.name, function(pError, pJSON) {
-                var lQuery, isJSON, lPanel, lList,
-                    config  = main.config,
-                    minify  = config.minify;
+                var lQuery, isJSON;
                 
                 if (pError) 
                     main.sendError(pParams, pError);
@@ -249,29 +247,50 @@
                     lQuery      = main.getQuery(p.request);
                     isJSON      = Util.isContainStr(lQuery, 'json');
                     
-                    if (isJSON) {
+                    if (!isJSON) 
+                        readIndex(pJSON, pParams);
+                    else {
                         p.data  = Util.stringifyJSON(pJSON);
                         p.name +='.json';
                         main.sendResponse(p, null, true);
-                    } else 
-                        fs.readFile(INDEX_PATH, 'utf8', function(error, template) {
-                            if (error)
-                                main.sendError(p, error);
-                            else {
-                                p.name  = INDEX_PATH,
-                                lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
-                                lList   = '<div id=left class=panel>'  + lPanel + '</div>' +
-                                          '<div id=right class=panel>' + lPanel + '</div>';
-                                
-                                main.sendResponse(p, indexProcessing({
-                                    additional  : lList,
-                                    data        : template,
-                                }), true);
-                            }
-                        });
+                    }
+                        
                 }
             });
         }
+    }
+    
+    function readIndex(pJSON, params) {
+        var p = params;
+        
+        Util.ifExec(!minify, function(params) {
+            var name = params && params.name;
+            
+            fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
+                var lPanel, lList,
+                    config  = main.config,
+                    minify  = config.minify;
+                
+                if (error)
+                    main.sendError(p, error);
+                else {
+                    p.name  = INDEX_PATH,
+                    lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
+                    lList   = '<div id=left class=panel>'  + lPanel + '</div>' +
+                              '<div id=right class=panel>' + lPanel + '</div>';
+                    
+                    main.sendResponse(p, indexProcessing({
+                        additional  : lList,
+                        data        : template,
+                    }), true);
+                }
+            });
+        },  function(callback) {
+                Minify.optimize(INDEX_PATH, {
+                    callback    : callback,
+                    returnName  : true
+                });
+        });
     }
     
     
