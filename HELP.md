@@ -395,3 +395,4 @@ Special Thanks
     - [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations;
     - config template and style;
     - change order of directories and files;
+    - add ability do not hide path and header when files are scrolling;
