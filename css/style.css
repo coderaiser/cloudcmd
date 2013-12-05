@@ -2,14 +2,6 @@
 @import url(//fonts.googleapis.com/css?family=Droid+Sans+Mono);
 */
 
-/* символьный шрифт от гитхаба*/
-@font-face {
-  font-family: "GeneralFoundicons";
-  src: url('/font/general_foundicons.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* http://fontello.com/ */
 @font-face {
   font-family: 'Fontello';
