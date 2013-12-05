@@ -97,7 +97,6 @@ body {
     border: 1.5px solid;
     border-color: rgb(49,123,249);
     border-color: rgba(49,123,249,.40);
-    outline: 0;
     transition: ease 0.1s;
 }
 
