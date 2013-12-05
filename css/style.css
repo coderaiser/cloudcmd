@@ -137,15 +137,12 @@ body {
    */
 }
 
-/* freeupex */
 .directory {
-    /*list-style-image*/
     background-image:url('/img/dir.png');
     background-position: 0 0;
     background-repeat: no-repeat;  
 }
 .text-file {
-    /*list-style-image*/
     background-image:url('/img/txt.png');
     background-position: 0 0;
     background-repeat: no-repeat;  
