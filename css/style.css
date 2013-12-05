@@ -126,6 +126,10 @@ body {
 .mini-icon {
     position: relative;
     top: 2px;
+    /* отступ перед картинкой 
+     * для нормального отображения
+     * рамки
+     */
     left: -5px;
     float: left;
     width: 16px;
@@ -133,10 +137,6 @@ body {
     margin-left: 6px;
     background-position: 0 0;
     background-repeat: no-repeat;  
-  /* отступ перед картинкой 
-   * для нормального отображения
-   * рамки
-   */
 }
 
 .directory {
