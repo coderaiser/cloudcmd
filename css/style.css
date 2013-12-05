@@ -176,7 +176,6 @@ body {
     width: 46%;
     padding: 20px;
     margin: 0;
-    overflow-y: auto;
     border: 1.5px solid;
     border-color: rgb(49, 123, 249);
     border-color: rgba(49, 123, 249, .40);
@@ -210,7 +209,10 @@ body {
   width: 23%;
 }
 
-.panel, li {
+.files {
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
     list-style-type: none;
     cursor: default;
 }
