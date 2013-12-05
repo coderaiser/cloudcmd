@@ -131,6 +131,8 @@ body {
     width: 16px;
     height: 16px;
     margin-left: 6px;
+    background-position: 0 0;
+    background-repeat: no-repeat;  
   /* отступ перед картинкой 
    * для нормального отображения
    * рамки
@@ -139,13 +141,9 @@ body {
 
 .directory {
     background-image:url('/img/dir.png');
-    background-position: 0 0;
-    background-repeat: no-repeat;  
 }
 .text-file {
     background-image:url('/img/txt.png');
-    background-position: 0 0;
-    background-repeat: no-repeat;  
 }
 .fm {
     height: 90%;
