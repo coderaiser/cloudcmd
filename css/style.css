@@ -136,14 +136,7 @@ body {
    * рамки
    */
 }
-/* уменьшаем отступ 
- * между между иконкой и
- * именем файла во время
- * установления курсора
- */
-.current-file > .mini-icon {
-     left: -6px;
-}
+
 /* freeupex */
 .directory {
     /*list-style-image*/
