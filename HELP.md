@@ -391,7 +391,7 @@ Special Thanks
 ---------------
 
 - [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon");
-- [TarZak](https://github.com/jobtarzak)
+- [TarZak](https://github.com/tarzak)
     - [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations;
     - config template and style;
     - change order of directories and files;
