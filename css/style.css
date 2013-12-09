@@ -2,19 +2,14 @@
 @import url(//fonts.googleapis.com/css?family=Droid+Sans+Mono);
 */
 
-/* символьный шрифт от гитхаба*/
-@font-face {
-  font-family: "GeneralFoundicons";
-  src: url('/font/general_foundicons.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* http://fontello.com/ */
 @font-face {
   font-family: 'Fontello';
   src: url("/font/fontello.eot");
-  src: url("/font/fontello.eot?#iefix") format('embedded-opentype'), url("/font/fontello.woff") format('woff'), url("/font/fontello.ttf") format('truetype'), url("/font/fontello.svg#cloudcmd") format('svg');
+  src: url("/font/fontello.eot?#iefix") format('embedded-opentype'),
+       url("/font/fontello.woff") format('woff'),
+       url("/font/fontello.ttf") format('truetype'),
+       url("/font/fontello.svg#cloudcmd") format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -31,8 +26,8 @@ body {
     background-color:white;
 }
 
-#fm, #left>li, #right>li, .path, .fm-header,
-.mini-icon, .name, .size, .owner, .mode, #keyspanel, .cmd-button {
+.fm, #left>li, #right>li, .path, .fm-header,
+.mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
     -webkit-user-select : none;
     -moz-user-select    : none;
     -ms-user-select     : none;
@@ -99,8 +94,9 @@ body {
     text-overflow: ellipsis;
     white-space: nowrap;
     background-color: white;
-    border: 1.5px solid rgba(49,123,249,.40);
-    outline: 0;
+    border: 1.5px solid;
+    border-color: rgb(49,123,249);
+    border-color: rgba(49,123,249,.40);
     transition: ease 0.1s;
 }
 
@@ -115,12 +111,12 @@ body {
     transition: ease 0.1s;
 }
 
-.clear-cache {
+.clear-storage {
     margin-right: 6px;
     margin-left: 7px;
     background:url(/img/console_clear.png)  -4px -4px no-repeat;
 }
-.clear-cache:active {
+.clear-storage:active {
     top:5px;
 }
 
@@ -131,38 +127,26 @@ body {
 .mini-icon {
     position: relative;
     top: 2px;
+    /* отступ перед картинкой 
+     * для нормального отображения
+     * рамки
+     */
     left: -5px;
     float: left;
     width: 16px;
     height: 16px;
     margin-left: 6px;
-  /* отступ перед картинкой 
-   * для нормального отображения
-   * рамки
-   */
-}
-/* уменьшаем отступ 
- * между между иконкой и
- * именем файла во время
- * установления курсора
- */
-.current-file > .mini-icon {
-     left: -6px;
-}
-/* freeupex */
-.directory {
-    /*list-style-image*/
-    background-image:url('/img/dir.png');
     background-position: 0 0;
     background-repeat: no-repeat;  
+}
+
+.directory {
+    background-image:url('/img/dir.png');
 }
 .text-file {
-    /*list-style-image*/
     background-image:url('/img/txt.png');
-    background-position: 0 0;
-    background-repeat: no-repeat;  
 }
-#fm{
+.fm {
     height: 90%;
     margin: 26px 26px 0 26px;
 }
@@ -192,15 +176,17 @@ body {
     width: 46%;
     padding: 20px;
     margin: 0;
-    overflow-y: auto;
-    border: 1.5px solid rgba(49, 123, 249, .40);
+    border: 1.5px solid;
+    border-color: rgb(49, 123, 249);
+    border-color: rgba(49, 123, 249, .40);
 }
 
 .selected-panel {
+    border-color: rgb(254, 159, 224);
     border-color: rgba(254, 159, 224, .40);
 }
 
-#keyspanel {
+.keyspanel {
   text-align: center;
 }
 
@@ -223,7 +209,10 @@ body {
   width: 23%;
 }
 
-.panel, li {
+.files {
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
     list-style-type: none;
     cursor: default;
 }

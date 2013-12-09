@@ -10,13 +10,12 @@
         <link href=/img/favicon/favicon.png rel=icon type=image/png />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href="/css/reset.css">
-        <link rel=stylesheet href="/css/style.css">
+        <link rel=stylesheet href=/combine/css/reset.css:css/style.css>
     </head>
     <body>
     
-    <div id=fm class=no-js>{{ fm }}</div>
-    <div id=keyspanel>
+    <div class=fm>{{ fm }}</div>
+    <div class="keyspanel">
         <button id=f1 class=cmd-button>F1 - help</button>
         <button id=f2 class=cmd-button>F2 - rename</button>
         <button id=f3 class=cmd-button>F3 - view</button>
@@ -29,8 +28,70 @@
         <button id=f10 class=cmd-button>F10 - config</button>
         <button id=~ class=cmd-button>~ - console</button>
     </div>
-    <script src=/lib/util.js></script>
-    <script src=/lib/client/dom.js></script>
-    <script src=/lib/client.js></script>
+    <script>
+        (function() {
+            'use strict';
+            
+            var script, Height,
+                files   = [
+                    'lib/client/key.js',
+                    'lib/client/listeners.js',
+                    'lib/client.js',
+                    'lib/client/dom.js',
+                    'lib/cloudfunc.js',
+                    'lib/util.js'
+                ],
+                url             = getCombineURL(files);
+            
+            window.addEventListener('load', createScript);
+            setPanelHeight();
+            
+            function createScript() {
+                script          = document.createElement('script');
+                script.src      = url;
+                script.async    = true;
+                script.addEventListener('load', scriptLoad);
+                document.body.appendChild(script);
+                window.removeEventListener('load', createScript);
+            }
+            
+            function getCombineURL(files) {
+                var regExp  = new RegExp(',', 'g'),
+                    url     = '/combine/' + files;
+                
+                url = url.replace(regExp, ':');
+                
+                return url;
+            }
+            
+            function scriptLoad() {
+                CloudCmd.init();
+                script.removeEventListener('load', scriptLoad);
+            }
+            
+            function setPanelHeight() {
+                var style;
+                /* устанавливаем размер высоты таблицы файлов
+                 * исходя из размеров разрешения экрана
+                 *
+                 * формируем и округляем высоту экрана
+                 * при разрешениии 1024x1280:
+                 * 658 -> 700
+                 */
+                
+                Height = window.screen.height;
+                Height -= (Height / 3).toFixed();
+                Height = (Height / 100).toFixed() * 100;
+                
+                style           = document.createElement('style');
+                style.innerText = '.files {'    +
+                                    'height:'   + Height +'px;'  +
+                                '}';
+                
+                document.head.appendChild(style);
+            }
+            
+        })();
+    </script>
     </body>
 </html>
