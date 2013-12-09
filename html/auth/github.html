@@ -8,9 +8,9 @@
             
             var lOpener = window.opener;
             if(lOpener){
-                var cloudcmd = lOpener.CloudCommander;
+                var CloudCmd = lOpener.CloudCmd;
                 
-                cloudcmd.getModules(function(pModules){
+                CloudCmd.getModules(function(pModules){
                     var Util        = lOpener.Util,
                         lStorage    = Util.findObjByNameInArr(pModules, 'storage'),
                         lGitHub     = Util.findObjByNameInArr(lStorage, 'GitHub'),

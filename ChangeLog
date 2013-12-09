@@ -1,3 +1,177 @@
+2013.12.09, v0.7.0
+
+fix:
+- (dropbox) path -> json.path
+- (dropbox) Drivers -> Dropbox.AuthDriver
+- (key) setCurrentByLetter i: 2 -> 0
+- (key) panel -> files
+- (client) rm last slash before first save to storage
+- (cloudcmd) path -> link
+- (file) rm new line at end
+- (dom) getCurrentData: add isCurrentIsDir
+- (dom) storage set: rm data condition
+- (edit) do not save hash when file update
+- (commander) fillJSON: files -> json.files
+- (client) getJSONfromFileTable: json
+- (edit) add data check condition
+- (edit) set patch only if hashes same
+- (edit) onSave -> getSave
+- (dom) getDataFromStorage: never return hash
+- (dom) checkStorageHash: always equal result, never store data
+- (files) add isFunction condition
+- (commander) fillJSON: add push
+- (key) add !alt, !ctrl condition to setCurrentByLetter
+- (server) combine: write error to pipe if headers sent
+- (main) set Header only if it was not sent
+- (Edit) change patch condition
+- (Edit) length of patch condition
+- (minify) ret -> callback
+- (util) lExtLenght -> lExtLength
+- (server) add gzip
+- (util) lExtLenght -> lExtLength
+- (edit) value size < then patch size -> save value
+- (client) format -> formatMsg
+- (server) redirect port
+- (server) add redirection port
+- (github) CloudCommander -> CloudCmd
+- (edit) saveDataToCache -> saveDataToStorage
+- (edit) set Value befor onSave
+- (dom) getCurrentData
+- (config) change config before setConfig
+- (rest) pErr -> pError
+- (socket) onCD: rm "."
+- (rest) heckSendError -> checkSendError
+- (socket) exit on cloudcmd command
+- (edit) diff
+- (diff) applyPatch: results -> results[0]
+- (cloudcmd)  mv index data to var
+
+feature:
+- (commander) mode: str -> number
+- (cloudfunc) buildFromJSON mode:  -> getSymbolicPermissions(".")
+- (dropbox) readDir json: add mode
+- (dropbox) readDir: add path condition
+- (dropbox) add delete, cp, mv
+- (dropbox) add save
+- (dropbox) add read
+- (dropbox) add getToken, mkDir, writeFile, readFile, readDir
+- (key) add moving by first letter
+- (cloudcmd) add readIndex; when minify - index to
+- (config) add -moz and -o
+- (config) list: add list-style-type
+- (cloudcmd) do not hide path and header when files are scrolling
+- (style) .cmd-button: rm outline
+- (style) rm .current-file > .mini-icon
+- (style) rm GeneralFoundicons
+- (link) add
+- (html) rm link to cloudfunc
+- (file) add className
+- (ssl) add signed ssl
+- (commander) change json structure: [path, files] -> {path: "", files: []}
+- (server) fillJSON path: rm size
+- (edit) add get data from storage before diff
+- (files) add options
+- (commander) fillJSON: add changeOrder
+- (commander) add changeOrder
+- (util) copyObj: add ability take one param
+- (config) add min, max port
+- (cloudcmd) add read index on every request
+- (edit) if storage disabled - hash not getted
+- (client) rm HEIGHT
+- (index) add key
+- (client) mv cloudfunc, listeners to index
+- (key) add setCurrentByLetter
+- (edit) rm setOptions
+- (edit) modelist: add yml
+- (edit) add modelist
+- (edit) add json mode for dir
+- (edit) update ace
+- (edit) add mode
+- (edit) add workers
+- (edit) add snippets
+- (cloudfunc) add getCombineURL, getCombineArray, isCombineURL
+- (edit) diff: anyLoadInParallel -> combineURL
+- (server) add checkExtension
+- (console) add combineURL
+- (edit) anyLoadOnLoad -> combineURL && jsload
+- (dom) add combineLoad
+- (index) add async
+- (index) combine
+- (server) combine: add mainSetHeader
+- (main) exports: add mainSetHeader
+- (files) files, dir, writeStream, callback -> params
+- (server) add minify
+- (server) combine: add minify
+- (pipe) add notEnd
+- (main) sendFile: rm stat
+- (server) add combine
+- (files) readPipe: add dir
+- (pipe) pipe -> on("data")
+- (files) add readPipe
+- (main) mv readFiles -> files.read
+- (cloudcmd) rm CA
+- (ssl) rm ssl.rastakoding.rv.ua cert
+- (dropbox) v0.9.2 -> v0.10.2
+- (dropbox) encodedKey -> key
+- (dom) add loadCurrentTime
+- (edit) rm client sha
+- (dom) add checkStorageHash
+- (dom) getCurrentData: if data from storage do not save it
+- (edit) add go to line
+- (edit) add autocompletion
+- (client) add getType
+- (client) add getExt
+- (dom) rm getTime
+- (config) css line-height: 1.428571429 -> 1.5
+- (config) port, sslPort: add focus:invalid:focus
+- (config) port, sslPort input: add type=number
+- (dom) getDataFromStorage: add isDir condition
+- (dom) Cache -> Storage
+- (time) add
+- (dom) getDataFromCache: add !hash
+- (dom) saveDataToCache: add Cache.get
+- (edit) add saveDataToCache
+- (edit) RESTful.save -> saveCurrentData
+- (dom) saveDataInCache -> saveDataToCache
+- (dom) add saveCurrentData
+- (dom) add getDataFromCache, saveDataInCache
+- (dom) add loadCurrentHash
+- (hash) add handling old node versions
+- (hash) rm Writable.call
+- (rest) add ?hash
+- (edit) if on server would be error with diff, try to save without diff
+- (dom) add Dialog
+- (socket) HOME -> DIR
+- (util) rmNewLine: add "\r"
+- (socket) HOMEPATH -> SYSTEMDRIVE
+- (socket) add Win32 condition
+- (socket) add pwd, homepath
+- (socket) any client could work with own dir
+- (util) isContainStrAtBegin: pStr2 could be array
+- (util) add rmNewLine
+- (socket) add HOME
+- (dom) Notify send: add getConfig
+- (dom) Notify click: add focus
+- (dom) add notify-icon
+- (config) add Notifications
+- (socket) jsonSend: rm console.log
+- (socket) onCloudCmd: add process.exit
+- (socket) add jsonSend
+- (socket) add chat
+- (rest) GET: rm kill, zip; PUT: rm cmd
+- (rest) add checkSendError
+- (client) add setConfig
+- (config) add diff
+- (diff) add
+- (reset) sendMsg: add status
+- (config)  appcache -> appCache
+- (config) api_url -> apiURL
+- (config) appcache -> appCache
+- (config) api_url -> apiURL
+- (config) show_keys_panel -> showKeysPanel
+- (index) rm no-js
+
+
 2013.11.08, v0.6.0
 
 update:
