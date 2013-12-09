@@ -10,7 +10,7 @@
         <link href=/img/favicon/favicon.png rel=icon type=image/png />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href=/combine/css/reset.css:css/style.css>
+        <link rel=stylesheet href=/join/css/reset.css:css/style.css>
     </head>
     <body>
     
@@ -41,7 +41,7 @@
                     'lib/cloudfunc.js',
                     'lib/util.js'
                 ],
-                url             = getCombineURL(files);
+                url             = getJoinURL(files);
             
             window.addEventListener('load', createScript);
             setPanelHeight();
@@ -55,9 +55,9 @@
                 window.removeEventListener('load', createScript);
             }
             
-            function getCombineURL(files) {
+            function getJoinURL(files) {
                 var regExp  = new RegExp(',', 'g'),
-                    url     = '/combine/' + files;
+                    url     = '/join/' + files;
                 
                 url = url.replace(regExp, ':');
                 
