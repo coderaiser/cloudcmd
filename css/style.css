@@ -111,6 +111,10 @@ body {
     transition: ease 0.1s;
 }
 
+.cmd-button:focus {
+    outline: 0;
+}
+
 .clear-storage {
     margin-right: 6px;
     margin-left: 7px;
