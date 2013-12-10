@@ -4,6 +4,7 @@
     "view",
     "help",
     "config",
+    "contact",
     "console", {
         "name": "storage",
         "data": [{
