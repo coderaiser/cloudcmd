@@ -49,15 +49,15 @@ All you need is
 and unpack or just clone repository from github:
 
 ```
-    git clone git://github.com/coderaiser/cloudcmd.git
-    cd cloudcmd
-    node cloudcmd
+git clone git://github.com/coderaiser/cloudcmd.git
+cd cloudcmd
+node cloudcmd
 ```
 or install in npm:
 
 ```
-    npm i cloudcmd -g
-    cloudcmd
+npm i cloudcmd -g
+cloudcmd
 ```
 
 Additional modules
