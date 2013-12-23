@@ -101,7 +101,7 @@ body {
 }
 
 .cmd-button:hover {
-    border: 1.5px solid rgb(0,0,0);
+    border: 1.5px solid;
     transition: ease 0.5s;
 }
 
