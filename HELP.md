@@ -333,14 +333,18 @@ For extend main functionality Cloud Commander use next modules:
 - [github]                  [githubURL]
 - [dropbox-js]              [dropbox-jsURL]
 - [jquery]                  [jqueryURL]
+- [socket.io]               [socketIOURL]
+- [http-auth]               [httpAuthURL]
 
-[AceURL]:                   //ace.ajax.org/ "Ace"
+[AceURL]:                   http://ace.ajax.org/ "Ace"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
 [jQuery-contextMenuURL]:    //github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
 [jq-consoleURL]:            //github.com/replit/jq-console "jq-console"
 [githubURL]:                //github.com/michael/github "github"
 [dropbox-jsURL]:            //github.com/dropbox/dropbox-js "dropbox-js"
 [jqueryURL]:                //jquery.com
+[socketIOURL]:              http://socket.io
+[httpAuthURL]:              //github.com/gevorg/http-auth
 
 Contributing
 ---------------
