@@ -33,7 +33,7 @@
         (function() {
             'use strict';
             
-            var script, Height,
+            var script,
                 files   = [
                     'lib/client/key.js',
                     'lib/client/listeners.js',
@@ -45,7 +45,7 @@
                 url             = getJoinURL(files);
             
             window.addEventListener('load', createScript);
-            setPanelHeight();
+            setHeight();
             
             function createScript() {
                 script          = document.createElement('script');
@@ -70,23 +70,18 @@
                 script.removeEventListener('load', scriptLoad);
             }
             
-            function setPanelHeight() {
-                var style;
+            function setHeight() {
+                var style, height;
                 /* устанавливаем размер высоты таблицы файлов
                  * исходя из размеров разрешения экрана
-                 *
-                 * формируем и округляем высоту экрана
-                 * при разрешениии 1024x1280:
-                 * 658 -> 700
                  */
                 
-                Height = window.screen.height;
-                Height -= (Height / 3).toFixed();
-                Height = (Height / 100).toFixed() * 100;
+                height = screen.height;
+                height -= (height / 2.5);
                 
                 style           = document.createElement('style');
                 style.innerText = '.files {'    +
-                                    'height:'   + Height +'px;'  +
+                                    'height:'   + height +'px;'  +
                                 '}';
                 
                 document.head.appendChild(style);
