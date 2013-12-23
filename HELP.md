@@ -160,9 +160,9 @@ All main configuration could be done via [config.json](json/config.json "Config"
 
 ```js
 {
-    "auth"              : false,    /* enable http authorization                */
-    "username"          : "root",   /* username for authorization               */
-    "password"          : "toor",   /* password hash in sha-1 for authorization */
+    "auth"              : false,    /* enable http authentication               */
+    "username"          : "root",   /* username for authentication              */
+    "password"          : "toor",   /* password hash in sha-1 for authentication*/
     "apiURL"            :"/api/v1",
     "appCache"          : false,    /* cache files for offline use              */
     "analytics"         : true,     /* google analytics suport                  */
