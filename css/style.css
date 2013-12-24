@@ -105,6 +105,26 @@ body {
     transition: ease 0.1s;
 }
 
+.help-button:before {
+    font-family: 'Fontello';
+    content: '\e803  ';
+}
+
+.view-button:before {
+    font-family: 'Fontello';
+    content: '\e80a  ';
+}
+
+.edit-button:before {
+    font-family: 'Fontello';
+    content: '\e806  ';
+}
+
+.contact-button:before {
+    font-family: 'Fontello';
+    content: '\e809  ';
+}
+
 .config-button:before {
     font-family: 'Fontello';
     content: '\e804  ';
@@ -113,6 +133,21 @@ body {
 .directory-button:before {
     font-family: 'Fontello';
     content: '\e802  ';
+}
+
+.delete-button:before {
+    font-family: 'Fontello';
+    content: '\e802  ';
+}
+
+.menu-button:before {
+    font-family: 'Fontello';
+    content: '\e805  ';
+}
+
+.console-button:before {
+    font-family: 'Fontello';
+    content: '\e807  ';
 }
 
 .cmd-button:hover {
