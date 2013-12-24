@@ -99,9 +99,21 @@
       "src": "fontawesome"
     },
     {
+      "uid": "c8585e1e5b0467f28b70bce765d5840c",
+      "css": "docs",
+      "code": 59403,
+      "src": "fontawesome"
+    },
+    {
       "uid": "559647a6f430b3aeadbecd67194451dd",
       "css": "menu",
       "code": 59397,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "6020aff067fc3c119cdd75daa5249220",
+      "css": "exchange",
+      "code": 59404,
       "src": "fontawesome"
     },
     {
@@ -121,6 +133,12 @@
       "css": "folder",
       "code": 59394,
       "src": "entypo"
+    },
+    {
+      "uid": "67f793f91864e379458a92ccc61d9ccf",
+      "css": "sort-alphabet",
+      "code": 59405,
+      "src": "typicons"
     },
     {
       "uid": "7336247ba3db350dec8d6c0a47cef966",
