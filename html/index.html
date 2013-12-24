@@ -30,7 +30,7 @@
         <button id=contact class=cmd-button>contact</button>
     </div>
     <script>
-        (function() {
+        !(function() {
             'use strict';
             
             var script,
@@ -45,7 +45,6 @@
                 url             = getJoinURL(files);
             
             window.addEventListener('load', createScript);
-            setHeight();
             
             function createScript() {
                 script          = document.createElement('script');
@@ -69,24 +68,6 @@
                 CloudCmd.init();
                 script.removeEventListener('load', scriptLoad);
             }
-            
-            function setHeight() {
-                var style, height;
-                /* устанавливаем размер высоты таблицы файлов
-                 * исходя из размеров разрешения экрана
-                 */
-                
-                height = screen.height;
-                height -= (height / 2.5);
-                
-                style           = document.createElement('style');
-                style.innerText = '.files {'    +
-                                    'height:'   + height +'px;'  +
-                                '}';
-                
-                document.head.appendChild(style);
-            }
-            
         })();
     </script>
     </body>

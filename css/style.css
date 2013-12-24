@@ -21,9 +21,14 @@
   src: local('Droid Sans Mono'), local('DroidSansMono'), url('//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
 }
 
+html {
+    height: 100%;
+}
+
 body {
     font:16px "Droid Sans Mono";
     background-color:white;
+    height: 95%;
 }
 
 .fm, #left>li, #right>li, .path, .fm-header,
@@ -183,6 +188,7 @@ body {
     border: 1.5px solid;
     border-color: rgb(49, 123, 249);
     border-color: rgba(49, 123, 249, .40);
+    height: 90%;
 }
 
 .selected-panel {
@@ -192,6 +198,7 @@ body {
 
 .keyspanel {
   text-align: center;
+  height: 10%;
 }
 
 .name {
@@ -219,6 +226,7 @@ body {
     margin: 0;
     list-style-type: none;
     cursor: default;
+    height: 95%;
 }
 
 a {
