@@ -110,6 +110,11 @@ body {
     content: '\e804  ';
 }
 
+.directory-button:before {
+    font-family: 'Fontello';
+    content: '\e802  ';
+}
+
 .cmd-button:hover {
     border: 1.5px solid;
     transition: ease 0.5s;
