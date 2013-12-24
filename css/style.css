@@ -71,7 +71,7 @@ body {
     font-size   : 14px;
     color       : rgb(222, 41, 41);
     cursor      : default;
-    content     : '\2757';
+    content     : '\e800';
 }
 
 .loading {
@@ -103,6 +103,11 @@ body {
     border-color: rgb(49,123,249);
     border-color: rgba(49,123,249,.40);
     transition: ease 0.1s;
+}
+
+.config-button:before {
+    font-family: 'Fontello';
+    content: '\e804  ';
 }
 
 .cmd-button:hover {
@@ -274,12 +279,12 @@ a:hover, a:active {
         top: 10px
     }
     .directory::before {
-        content: '\1f4c1';
+        content: '\e802';
     }
      .text-file::before {
         color: rgb(26, 224, 124);
         color: rgba(26, 224, 124, 0.56);
-        content: '\1f4c4';
+        content: '\e801';
     }
     .text-file {
         background-image:none;
