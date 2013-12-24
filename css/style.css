@@ -110,6 +110,11 @@ body {
     content: '\e803  ';
 }
 
+.rename-button:before {
+    font-family: 'Fontello';
+    content: '\e80d  ';
+}
+
 .view-button:before {
     font-family: 'Fontello';
     content: '\e80a  ';
@@ -118,6 +123,16 @@ body {
 .edit-button:before {
     font-family: 'Fontello';
     content: '\e806  ';
+}
+
+.copy-button:before {
+    font-family: 'Fontello';
+    content: '\e80b  ';
+}
+
+.move-button:before {
+    font-family: 'Fontello';
+    content: '\e80c  ';
 }
 
 .contact-button:before {
