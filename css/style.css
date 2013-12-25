@@ -105,62 +105,62 @@ body {
     transition: ease 0.1s;
 }
 
-.help-button:before {
+.icon-help:before {
     font-family: 'Fontello';
     content: '\e801  ';
 }
 
-.rename-button:before {
+.icon-rename:before {
     font-family: 'Fontello';
     content: '\e802  ';
 }
 
-.view-button:before {
+.icon-view:before {
     font-family: 'Fontello';
     content: '\e803  ';
 }
 
-.edit-button:before {
+.icon-edit:before {
     font-family: 'Fontello';
     content: '\e804  ';
 }
 
-.copy-button:before {
+.icon-copy:before {
     font-family: 'Fontello';
     content: '\e805  ';
 }
 
-.move-button:before {
+.icon-move:before {
     font-family: 'Fontello';
     content: '\e806  ';
 }
 
-.directory-button:before {
+.icon-directory:before {
     font-family: 'Fontello';
     content: '\e807  ';
 }
 
-.delete-button:before {
+.icon-delete:before {
     font-family: 'Fontello';
     content: '\e808  ';
 }
 
-.menu-button:before {
+.icon-menu:before {
     font-family: 'Fontello';
     content: '\e809  ';
 }
 
-.config-button:before {
+.icon-config:before {
     font-family: 'Fontello';
     content: '\e80a  ';
 }
 
-.console-button:before {
+.icon-console:before {
     font-family: 'Fontello';
     content: '\e80b  ';
 }
 
-.contact-button:before {
+.icon-contact:before {
     font-family: 'Fontello';
     content: '\e80c  ';
 }
