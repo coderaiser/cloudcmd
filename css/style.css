@@ -107,47 +107,37 @@ body {
 
 .help-button:before {
     font-family: 'Fontello';
-    content: '\e803  ';
+    content: '\e801  ';
 }
 
 .rename-button:before {
     font-family: 'Fontello';
-    content: '\e80d  ';
+    content: '\e802  ';
 }
 
 .view-button:before {
     font-family: 'Fontello';
-    content: '\e80a  ';
+    content: '\e803  ';
 }
 
 .edit-button:before {
     font-family: 'Fontello';
-    content: '\e806  ';
+    content: '\e804  ';
 }
 
 .copy-button:before {
     font-family: 'Fontello';
-    content: '\e80b  ';
+    content: '\e805  ';
 }
 
 .move-button:before {
     font-family: 'Fontello';
-    content: '\e80c  ';
-}
-
-.contact-button:before {
-    font-family: 'Fontello';
-    content: '\e809  ';
-}
-
-.config-button:before {
-    font-family: 'Fontello';
-    content: '\e804  ';
+    content: '\e806  ';
 }
 
 .directory-button:before {
     font-family: 'Fontello';
-    content: '\e802  ';
+    content: '\e807  ';
 }
 
 .delete-button:before {
@@ -157,12 +147,22 @@ body {
 
 .menu-button:before {
     font-family: 'Fontello';
-    content: '\e805  ';
+    content: '\e809  ';
+}
+
+.config-button:before {
+    font-family: 'Fontello';
+    content: '\e80a  ';
 }
 
 .console-button:before {
     font-family: 'Fontello';
-    content: '\e807  ';
+    content: '\e80b  ';
+}
+
+.contact-button:before {
+    font-family: 'Fontello';
+    content: '\e80c  ';
 }
 
 .cmd-button:hover {
@@ -333,12 +333,12 @@ a:hover, a:active {
         top: 10px
     }
     .directory::before {
-        content: '\e802';
+        content: '\e807';
     }
      .text-file::before {
         color: rgb(26, 224, 124);
         color: rgba(26, 224, 124, 0.56);
-        content: '\e801';
+        content: '\e80d';
     }
     .text-file {
         background-image:none;
