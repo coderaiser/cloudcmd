@@ -1,64 +1,64 @@
 .icon-help:before {
-    font-family: 'Fontello';
-    content: '\e801  ';
+    font-family : 'Fontello';
+    content     : '\e801  ';
 }
 
 .icon-rename:before {
-    font-family: 'Fontello';
-    content: '\e802  ';
+    font-family : 'Fontello';
+    content     : '\e802  ';
 }
 
 .icon-view:before {
-    font-family: 'Fontello';
-    content: '\e803  ';
+    font-family : 'Fontello';
+    content     : '\e803  ';
 }
 
 .icon-edit:before {
-    font-family: 'Fontello';
-    content: '\e804  ';
+    font-family : 'Fontello';
+    content     : '\e804  ';
 }
 
 .icon-copy:before {
-    font-family: 'Fontello';
-    content: '\e805  ';
+    font-family : 'Fontello';
+    content     : '\e805  ';
 }
 
 .icon-move:before {
-    font-family: 'Fontello';
-    content: '\e806  ';
+    font-family : 'Fontello';
+    content     : '\e806  ';
 }
 
 .icon-directory:before {
-    font-family: 'Fontello';
-    content: '\e807  ';
+    font-family : 'Fontello';
+    content     : '\e807  ';
 }
 
 .icon-delete:before {
-    font-family: 'Fontello';
-    content: '\e808  ';
+    font-family : 'Fontello';
+    content     : '\e808  ';
 }
 
 .icon-menu:before {
-    font-family: 'Fontello';
-    content: '\e809  ';
+    font-family : 'Fontello';
+    content     : '\e809  ';
 }
 
 .icon-config:before {
-    font-family: 'Fontello';
-    content: '\e80a  ';
+    font-family : 'Fontello';
+    content     : '\e80a  ';
 }
 
 .icon-console:before {
-    font-family: 'Fontello';
-    content: '\e80b  ';
+    font-family : 'Fontello';
+    content     : '\e80b  ';
 }
 
 .icon-contact:before {
-    font-family: 'Fontello';
-    content: '\e80c  ';
+    font-family : 'Fontello';
+    content     : '\e80c  ';
 }
 
 .icon-file::before {
-    font-family: 'Fontello';
-    content: '\e80d  ';
+    font-family : 'Fontello';
+    content     : '\e80d  ';
 }
