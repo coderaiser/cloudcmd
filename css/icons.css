@@ -62,3 +62,33 @@
     font-family : 'Fontello';
     content     : '\e80d  ';
 }
+
+.icon-upload-to::before {
+    font-family : 'Fontello';
+    content     : '\e80e  ';
+}
+
+.icon-from-cloud::before {
+    font-family : 'Fontello';
+    content     : '\e80f  ';
+}
+
+.icon-download::before {
+    font-family : 'Fontello';
+    content     : '\e810  ';
+}
+
+.icon-new::before {
+    font-family : 'Fontello';
+    content     : '\e811  ';
+}
+
+.icon-unselect-all::before {
+    font-family : 'Fontello';
+    content     : '\e812  ';
+}
+
+.icon-zip-file::before {
+    font-family : 'Fontello';
+    content     : '\e813  ';
+}
