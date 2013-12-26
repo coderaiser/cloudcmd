@@ -47,8 +47,6 @@ body {
     display     : inline-block;
     width       : 15px;
     height      : 15px;
-    color       : #46A4C3;/*#55BF3F; green*/
-    text-shadow :black 0 2px 1px;
 }
 
 .path-icon:hover {
