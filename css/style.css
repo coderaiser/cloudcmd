@@ -93,7 +93,7 @@ body {
     width: 5%;
     margin: 20px 2px 0 2px;
     overflow: hidden;
-    color: rgb(49,123,249);
+    color: #222;
     text-overflow: ellipsis;
     white-space: nowrap;
     background-color: white;
