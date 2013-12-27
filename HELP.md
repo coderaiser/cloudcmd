@@ -100,6 +100,7 @@ Hot keys
 - **Insert**            - select current file
 - **Shift + F10**       - context menu
 - **~**                 - console
+- **Ctrl + Click**      - open file on new tab
 
 Edit
 ---------------
