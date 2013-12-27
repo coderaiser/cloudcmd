@@ -260,16 +260,25 @@ a:hover, a:active {
     
     /* меняем иконки на шрифтовые*/
     .mini-icon {
-        color: rgb(246, 224, 124);
-        color: rgba(246, 224, 124, 0.56);
-        font: 60px 'Fontello';
-        width: 40%;
-        height: 0;
-        margin-left: 0;
-        float: right;
-        position: relative;
-        top: 10px
+        color           : rgb(246, 224, 124);
+        color           : rgba(246, 224, 124, 0.56);
+        font            : 16px 'Fontello';
+        width           : 6%;
+        margin-left     : 10px;
+        float           : left;
+        background-image: none;
     }
+    
+    .size, .owner, .mode {
+        display: none;
+    }
+    
+    .name {
+        float: none;
+        width: 100%;
+        font-size: 18px;
+    }
+    
     .directory::before {
         content: '\e807';
     }
@@ -287,43 +296,7 @@ a:hover, a:active {
         display:none;
     }
     
-    .mode,.size,.owner {
-        /* располагаем элементы 
-         * один под другим
-         */
-        display: table;
-        float: none;
-        width: 0;
-        
-        text-align: left;
-    }
     /* выводим заголовки рядом с полями */
-    .name::before {
-        content: 'name:';
-        font-weight: bold;
-        font-size: 13px;
-    }
-    .mode::before {
-        content: 'mode:';
-        font-weight: bold;
-        font-size: 13px;
-    }
-    .size::before {
-        content: 'size:';
-        font-weight: bold;
-        font-size: 13px;
-    }
-    .owner::before {
-        content: 'owner:';
-        font-weight: bold;
-        font-size: 13px;
-    }
-    
-    .name {
-        float: none;
-        width:100%;
-        font-size: 18px;
-    }
     
     .cmd-button {
         width: 20%;
