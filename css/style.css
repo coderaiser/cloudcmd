@@ -40,6 +40,12 @@ body {
     user-select         : none;
 }
 
+.path {
+    overflow            : hidden;
+    white-space         : nowrap;
+    text-overflow       : ellipsis;
+}
+
 .path-icon {
     position    : relative;
     top         : 3px;
