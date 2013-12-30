@@ -1,4 +1,4 @@
-Cloud Commander v0.7.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] ![Trending][TrendingIMG]
+Cloud Commander v0.7.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
 ###[Main][MainURL] [Blog][BlogURL] Live(![IO][IO_LIVE_IMG] [IO][IOURL], ![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL] ![RunKite][RunKite_LIVE_IMG] [RunKite][RunKiteURL])
 [NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
@@ -6,7 +6,6 @@ Cloud Commander v0.7.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [FlattrIMGURL]:             http://api.flattr.com/button/flattr-badge-large.png
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars
-[TrendingIMG]:             https://d2weczhvl823v0.cloudfront.net/coderaiser/cloudcmd/trend.png
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
