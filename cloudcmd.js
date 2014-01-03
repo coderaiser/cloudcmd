@@ -263,7 +263,7 @@
     function readIndex(pJSON, params) {
         var p = params;
         
-        Util.ifExec(!minify, function(params) {
+        Util.ifExec(!Minify, function(params) {
             var name = params && params.name;
             
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
