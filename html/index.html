@@ -34,13 +34,15 @@
             'use strict';
             
             var script,
+                lib     = 'lib/',
+                client  = lib + 'client/',
                 files   = [
-                    'lib/client/key.js',
-                    'lib/client/listeners.js',
-                    'lib/client.js',
-                    'lib/client/dom.js',
-                    'lib/cloudfunc.js',
-                    'lib/util.js'
+                    client  + 'key.js',
+                    client  + 'listeners.js',
+                    lib     + 'client.js',
+                    client  + 'dom.js',
+                    lib     + 'cloudfunc.js',
+                    lib     + 'util.js'
                 ],
                 url             = getJoinURL(files);
             
