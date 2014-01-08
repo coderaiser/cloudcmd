@@ -21,7 +21,7 @@
         "minify": "0.2.4",
         "socket.io": "0.9.16",
         "express": "3.4.x",
-        "http-auth": "2.0.9"
+        "http-auth": "2.1.x"
     },
     "license": "MIT",
     "engines": {
