@@ -2,13 +2,13 @@
     white-space: normal;
 }
 
-.list li{
+.list li {
+    list-style-type: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
-    list-style-type: none;
 }
 
 .config .form-control{
