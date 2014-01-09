@@ -11,37 +11,38 @@
         files               = main.files,
         
         TEMPLATEPATH        = HTMLDIR + 'file.html',
+        LINK_TEMPLATE_PATH  = HTMLDIR + 'link.html',
         PATHTEMPLATE_PATH   = HTMLDIR + 'path.html',
         EXPECT_PATH         = DIR + 'test/expect.html',
         
-        Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, EXPECT_PATH],
+        Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH],
         
-        lJSON = [{
-            "path": "/etc/X11/",
-            "size": "dir"
-        }, {
-            "name": "applnk",
-            "size": "dir",
-            "uid": 0,
-            "mode": "40755"
-        },{
-            "name": "prefdm",
-            "size": 1328,
-            "uid": 0,
-            "mode": "100755"
-        }],
+        lJSON = {
+            path  : "/etc/X11/", 
+            files : [{
+                name: "applnk",
+                size: "dir",
+                uid : 0,
+                mode: "40755"
+            }, {
+                name: "prefdm",
+                size: 1328,
+                uid : 0,
+                mode: "100755"
+            }]
+        },
         
         
         Expect =
-            '<li class=path>'                                                   +
+            '<div class=path title="/etc/X11/">'                                +
                 '<span class="path-icon clear-cache" '                          +
                     'id=clear-cache title="clear cache (Ctrl+D)">'              +
                 '</span>'                                                       +
                 '<span class="path-icon refresh-icon" title="refresh (Ctrl+R)">'+
                     '<a href="/fs/etc/X11"></a></span>'                         +
-                '<span>'                                                        +
-                    '<a class=links href="/fs" title="/">/</a>'                 +
-                    '<a class=links href="/fs/etc" title="/etc">'               +
+                '<span class=links>'                                            +
+                    '<a href="/fs" title="/">/</a>'                             +
+                    '<a href="/fs/etc" title="/etc">'                           +
                         'etc'                                                   +
                     '</a>/X11/'                                                 +
                 '</span>'                                                       +
@@ -61,23 +62,25 @@
         else{
             console.time('CloudFunc.buildFromJSON');
             
-            var lTemplate       = pFiles[TEMPLATEPATH],
+            var i, n,
+                lTemplate       = pFiles[TEMPLATEPATH],
                 lPathTemplate   = pFiles[PATHTEMPLATE_PATH],
+                lLinkTemplate   = pFiles[LINK_TEMPLATE_PATH],
                 lExpect         = pFiles[EXPECT_PATH],
                 
-                lResult         = CloudFunc.buildFromJSON(lJSON, lTemplate, lPathTemplate);
+                lResult         = CloudFunc.buildFromJSON(lJSON, lTemplate, lPathTemplate, lLinkTemplate);
                 
                 Expect          += lExpect;
                 
-                for(var i = 0, n = Expect.length; i < n; i++)
-                    if(lResult[i] !== Expect[i]){
+                for (i = 0, n = Expect.length; i < n; i++)
+                    if (lResult[i] !== Expect[i]){
                         console.log('Error in char number: ' + i    + '\n' +
                                     'Expect: ' + Expect.substr(i)  + '\n' +
                                     'Result: ' + lResult.substr(i) );
                         break;
                     }
                 
-                    if(i===n)
+                    if (i === n)
                         console.log('CloudFunc.buildFromJSON: OK');    
             
             console.timeEnd('CloudFunc.buildFromJSON');
