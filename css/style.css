@@ -26,9 +26,9 @@ html {
 }
 
 body {
+    height: 95%;
     font:16px "Droid Sans Mono";
     background-color:white;
-    height: 95%;
 }
 
 .fm, #left>li, #right>li, .path, .fm-header,
@@ -42,8 +42,8 @@ body {
 
 .path {
     overflow            : hidden;
-    white-space         : nowrap;
     text-overflow       : ellipsis;
+    white-space         : nowrap;
 }
 
 .path-icon {
@@ -187,12 +187,12 @@ body {
 }
 .panel {
     width: 46%;
+    height: 90%;
     padding: 20px;
     margin: 0;
     border: 1.5px solid;
     border-color: rgb(49, 123, 249);
     border-color: rgba(49, 123, 249, .40);
-    height: 90%;
 }
 
 .selected-panel {
@@ -224,12 +224,12 @@ body {
 }
 
 .files {
-    overflow-y: auto;
+    height: 95%;
     padding: 0;
     margin: 0;
+    overflow-y: auto;
     list-style-type: none;
     cursor: default;
-    height: 95%;
 }
 
 a {
