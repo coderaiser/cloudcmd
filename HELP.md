@@ -85,6 +85,9 @@ Hot keys
 - **F8, Delete**        - remove current file
 - **F9**                - menu
 - **F10**               - config
+- **(*)**               - select/unselect all
+- **(+)**               - expand selection
+- **(-)**               - shrink selection
 - **Ctrl + r**          - reload dir content
 - **Ctrl + d**          - clear local cache (wich contains dir contents)
 - **Alt  + q**          - disable key bindings
