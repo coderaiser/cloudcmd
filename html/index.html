@@ -10,7 +10,7 @@
         <link href=/img/favicon/favicon.png rel=icon type=image/png />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href=/join/css/reset.css:css/icons.css:css/style.css>
+        <link rel=stylesheet href=/join/css/reset.css:css/style.css:css/icons.css>
     </head>
     <body>
     
@@ -37,14 +37,14 @@
                 lib     = 'lib/',
                 client  = lib + 'client/',
                 files   = [
-                    client  + 'key.js',
-                    client  + 'listeners.js',
-                    lib     + 'client.js',
-                    client  + 'notify.js',
-                    client  + 'loader.js',
-                    client  + 'dom.js',
+                    lib     + 'util.js',
                     lib     + 'cloudfunc.js',
-                    lib     + 'util.js'
+                    client  + 'dom.js',
+                    client  + 'loader.js',
+                    client  + 'notify.js',
+                    lib     + 'client.js',
+                    client  + 'listeners.js',
+                    client  + 'key.js'
                 ],
                 url             = getJoinURL(files);
             
