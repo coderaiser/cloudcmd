@@ -67,7 +67,7 @@ But for console and minification and optimization tricks optional can be
 assingned (and installed) modules: [Minify] (https://github.com/coderaiser/minify "Minify")
 and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
 
-Install addtitional modules (type in **Cloud Commander** directory):
+Install additional modules (type in **Cloud Commander** directory):
 
     npm i
 
