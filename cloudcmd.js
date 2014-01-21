@@ -276,8 +276,8 @@
                 else {
                     p.name  = INDEX_PATH,
                     lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
-                    lList   = '<div id="js-left" class="panel left">'  + lPanel + '</div>' +
-                              '<div id="js-right" class="panel right">' + lPanel + '</div>';
+                    lList   = '<div id="js-left" class="panel panel-left">'  + lPanel + '</div>' +
+                              '<div id="js-right" class="panel panel-right">' + lPanel + '</div>';
                     
                     main.sendResponse(p, indexProcessing({
                         additional  : lList,

@@ -31,7 +31,7 @@ body {
     background-color:white;
 }
 
-.fm, .left>li, .right>li, .path, .fm-header,
+.fm, .panel-left>li, .panel-right>li, .path, .fm-header,
 .mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
     -webkit-user-select : none;
     -moz-user-select    : none;
@@ -167,7 +167,7 @@ body {
     font-weight: bold;
 }
 
-.left {
+.panel-left {
     float:left;
 }
 
@@ -180,7 +180,7 @@ body {
     color: rgb(254,159,224);
 }
 
-.right {
+.panel-right {
     float:right;
 }
 .panel {
@@ -323,7 +323,7 @@ a:hover, a:active {
         width:94%;
     }
     /* если правая панель не помещаеться - прячем её */
-    .right, .cmd-button#f5, .cmd-button#f6 {
+    .panel-right, .cmd-button#f5, .cmd-button#f6 {
         display: none;
     }
 }
