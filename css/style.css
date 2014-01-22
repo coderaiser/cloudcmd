@@ -31,16 +31,13 @@ body {
     background-color:white;
 }
 
-.fm, .panel-left>li, .panel-right>li, .path, .fm-header,
+.fm, .panel-left>li, .panel-right>li, .fm-header,
 .mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
     -webkit-user-select : none;
     -moz-user-select    : none;
     -ms-user-select     : none;
     -o-user-select      : none;
     user-select         : none;
-}
-
-.path {
 }
 
 .path-icon {
