@@ -215,6 +215,8 @@ body {
     width:16%;
     margin-right: 27px;
     text-align: right;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .owner {                            
