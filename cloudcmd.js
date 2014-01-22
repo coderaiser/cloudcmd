@@ -270,8 +270,8 @@
                 var lPanel, lList,
                     config  = main.config,
                     minify  = config.minify,
-                    LEFT    = CloudFunc.LEFT_PANEL,
-                    RIGHT   = CloudFunc.RIGHT_PANEL;
+                    LEFT    = CloudFunc.PANEL_LEFT,
+                    RIGHT   = CloudFunc.PANEL_RIGHT;
                 
                 if (error)
                     main.sendError(p, error);
