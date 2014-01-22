@@ -216,6 +216,20 @@ body {
     margin-right: 27px;
     text-align: right;
 }
+
+.owner {                            
+    display         : inline-block;
+    width           : 14%;
+    text-overflow   : ellipsis;
+    overflow        : hidden;
+    /* when inline-block
+     * vertical align should be
+     * set top to prevent additional
+     * spaces behind lines
+     */
+    vertical-align  : top;
+}
+
 .mode {
   float: right;
   width: 23%;
