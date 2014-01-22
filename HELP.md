@@ -94,6 +94,7 @@ Hot keys
 - **Alt  + s**          - get all key bindings back
 - **Ctrl + a**          - select all files in a panel
 - **up, down, enter**   - filesystem navigation
+- **Ctrl + \**          - go to the root directory
 - **Tab**               - move via panels
 - **Page Up**           - up on one page
 - **Page Down**         - down on one page
