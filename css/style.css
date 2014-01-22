@@ -219,7 +219,7 @@ body {
     overflow: hidden;
 }
 
-.owner {                            
+.owner {
     display         : inline-block;
     width           : 14%;
     text-overflow   : ellipsis;
