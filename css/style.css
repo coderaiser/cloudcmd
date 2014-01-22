@@ -41,9 +41,6 @@ body {
 }
 
 .path {
-    overflow            : hidden;
-    text-overflow       : ellipsis;
-    white-space         : nowrap;
 }
 
 .path-icon {
@@ -98,10 +95,7 @@ body {
 .cmd-button {
     width: 5%;
     margin: 20px 2px 0 2px;
-    overflow: hidden;
     color: #222;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     background-color: white;
     border: 1.5px solid;
     border-color: rgb(49,123,249);
@@ -205,9 +199,6 @@ body {
 .name {
     float: left;
     width: 35%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
 .size {
@@ -215,17 +206,11 @@ body {
     width:16%;
     margin-right: 27px;
     text-align: right;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space : nowrap;
 }
 
 .owner {
     display         : inline-block;
     width           : 14%;
-    text-overflow   : ellipsis;
-    overflow        : hidden;
-    white-space     : nowrap;
     /* when inline-block
      * vertical align should be
      * set top to prevent additional
@@ -237,6 +222,12 @@ body {
 .mode {
   float: right;
   width: 23%;
+}
+
+.reduce-text {
+    white-space     : nowrap;
+    overflow        : hidden;
+    text-overflow   : ellipsis;
 }
 
 .files {
