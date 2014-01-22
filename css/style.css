@@ -217,6 +217,7 @@ body {
     text-align: right;
     text-overflow: ellipsis;
     overflow: hidden;
+    white-space : nowrap;
 }
 
 .owner {
@@ -224,6 +225,7 @@ body {
     width           : 14%;
     text-overflow   : ellipsis;
     overflow        : hidden;
+    white-space     : nowrap;
     /* when inline-block
      * vertical align should be
      * set top to prevent additional
