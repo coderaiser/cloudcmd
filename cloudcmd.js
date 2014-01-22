@@ -269,15 +269,17 @@
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
                 var lPanel, lList,
                     config  = main.config,
-                    minify  = config.minify;
+                    minify  = config.minify,
+                    LEFT    = CloudFunc.LEFT_PANEL,
+                    RIGHT   = CloudFunc.RIGHT_PANEL;
                 
                 if (error)
                     main.sendError(p, error);
                 else {
                     p.name  = INDEX_PATH,
                     lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
-                    lList   = '<div id="js-left" class="panel panel-left">'  + lPanel + '</div>' +
-                              '<div id="js-right" class="panel panel-right">' + lPanel + '</div>';
+                    lList   = '<div id="' + LEFT    + '" class="panel panel-left">'  + lPanel + '</div>' +
+                              '<div id="' + RIGHT   + '" class="panel panel-right">' + lPanel + '</div>';
                     
                     main.sendResponse(p, indexProcessing({
                         additional  : lList,
