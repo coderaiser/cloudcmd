@@ -29,10 +29,11 @@
         CERT        = DIR + 'ssl/ssl.crt',
         
         FILE_TMPL   = HTMLDIR + 'file.html',
+        PANEL_TMPL  = HTMLDIR + 'panel.html',
         PATH_TMPL   = HTMLDIR + 'path.html',
         LINK_TMPL   = HTMLDIR + 'link.html',
         
-        FileTemplate, PathTemplate, LinkTemplate,
+        FileTemplate, PanelTemplate, PathTemplate, LinkTemplate,
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
@@ -46,8 +47,11 @@
      */
     function indexProcessing(pData) {
         var lPath, lReplace, lKeysPanel,
-            lData       = pData.data,
-            lAdditional = pData.additional;
+            left, right,
+            LEFT    = CloudFunc.PANEL_LEFT,
+            RIGHT   = CloudFunc.PANEL_RIGHT,
+            lData   = pData.data,
+            panel   = pData.panel;
         
         if (!Config.appCache)
             lData = Util.removeStr(lData, [
@@ -62,9 +66,21 @@
             lData       = lData.replace(lKeysPanel + '"', lKeysPanel +' hidden"');
         }
         
+        left    = Util.render(PanelTemplate, {
+            id      : LEFT,
+            side    : 'left',
+            content : panel
+        });
+        
+        right    = Util.render(PanelTemplate, {
+            id      : RIGHT,
+            side    : 'right',
+            content : panel
+        });
+        
         lData = Util.render(lData, {
             title   : CloudFunc.getTitle(),
-            fm      : lAdditional
+            fm      : left + right
         });
         
         return lData;
@@ -140,7 +156,7 @@
             route       : route
         },
         
-        lFiles = [FILE_TMPL, PATH_TMPL, LINK_TMPL];
+        lFiles = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, LINK_TMPL];
         
         if (Config.ssl)
             lFiles.push(KEY, CERT);
@@ -150,6 +166,7 @@
                 Util.log(pErrors);
             else {
                 FileTemplate    = pFiles[FILE_TMPL];
+                PanelTemplate   = pFiles[PANEL_TMPL];
                 PathTemplate    = pFiles[PATH_TMPL];
                 LinkTemplate    = pFiles[LINK_TMPL];
                 
@@ -267,23 +284,19 @@
             var name = params && params.name;
             
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
-                var lPanel, lList,
+                var panel,
                     config  = main.config,
-                    minify  = config.minify,
-                    LEFT    = CloudFunc.PANEL_LEFT,
-                    RIGHT   = CloudFunc.PANEL_RIGHT;
+                    minify  = config.minify;
                 
                 if (error)
                     main.sendError(p, error);
                 else {
                     p.name  = INDEX_PATH,
-                    lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
-                    lList   = '<div id="' + LEFT    + '" class="panel panel-left">'  + lPanel + '</div>' +
-                              '<div id="' + RIGHT   + '" class="panel panel-right">' + lPanel + '</div>';
+                    panel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
                     
                     main.sendResponse(p, indexProcessing({
-                        additional  : lList,
-                        data        : template,
+                        panel   : panel,
+                        data    : template,
                     }), true);
                 }
             });
