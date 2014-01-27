@@ -5,6 +5,7 @@
     "help",
     "config",
     "contact",
+    "socket",
     "console", {
         "name": "storage",
         "data": [{
