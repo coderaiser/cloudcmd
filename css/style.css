@@ -202,6 +202,10 @@ body {
     width: 35%;
 }
 
+.name a:hover {
+    cursor: default;
+}
+
 .size {
     float:left;
     width:16%;
@@ -245,7 +249,7 @@ a {
 }
 a:hover, a:active {
     color : #06e;
-    cursor: pointer;
+    text-decoration:none;
 }
 
 /* Если размер окна очень маленький

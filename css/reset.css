@@ -29,12 +29,6 @@ body {
    Links
    ========================================================================== */
 
-a{
-    color: #00e;
-    text-decoration:none;
-}
-a:visited { color: #551a8b; }
-a:hover { color: #06e; }
 a:focus { outline: thin dotted; }
 
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
