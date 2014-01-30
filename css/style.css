@@ -31,6 +31,10 @@ body {
     background-color:white;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .fm, .panel-left>li, .panel-right>li, .fm-header,
 .mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
     -webkit-user-select : none;
