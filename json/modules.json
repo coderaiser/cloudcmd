@@ -6,6 +6,7 @@
     "config",
     "contact",
     "socket",
+    "terminal",
     "console", {
         "name": "storage",
         "data": [{
