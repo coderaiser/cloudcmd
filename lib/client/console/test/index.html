@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mocha</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="vendor/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="vendor/mocha.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../lib/jqconsole.js"></script>
+    <script src="vendor/assert.js"></script>
+    <script src="vendor/coffeescript.js"></script>
+
+    <script>
+    var tests = [ 'setup.coffee'
+                , 'ansi-test.coffee'
+                , 'jqconsole-test.coffee'
+                , 'prompt-test.coffee'
+                , 'shortcuts-test.coffee'
+                , 'history-test.coffee'
+                ]
+    tests.forEach(function (test) {
+      CoffeeScript.load(test, start)
+    })
+    function start () {
+      if (start.called == null) start.called = 0;
+      if (++start.called == tests.length) {
+        mocha.run();
+      }
+    }
+    </script>
+  </body>
+</html>

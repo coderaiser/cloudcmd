@@ -66,3 +66,11 @@ info.
 
 2013.1.26 Version 2.7.7
 * Support for middle click paste on linux. #47.
+
+2013.8.5 Version 2.7.8
+* Fix issue #51.
+
+2014.2.3 Version 2.8.0
+* Remove browser sniffing. Fix #37 #42 #53
+* Update android support. Fix #41
+* Add wrapper div for padding/styling of console. Fix #40
