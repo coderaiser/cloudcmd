@@ -35,12 +35,20 @@ body {
     visibility: hidden;
 }
 
-.fm-header, .mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
+.fm, .keyspanel {
     -webkit-user-select : none;
     -moz-user-select    : none;
     -ms-user-select     : none;
     -o-user-select      : none;
     user-select         : none;
+}
+
+.links {
+    -webkit-user-select : initial;
+    -moz-user-select    : initial;
+    -ms-user-select     : initial;
+    -o-user-select      : initial;
+    user-select         : text;
 }
 
 .path-icon {
