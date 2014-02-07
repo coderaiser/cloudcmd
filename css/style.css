@@ -35,8 +35,7 @@ body {
     visibility: hidden;
 }
 
-.fm, .panel-left>li, .panel-right>li, .fm-header,
-.mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
+.fm-header, .mini-icon, .name, .size, .owner, .mode, .keyspanel, .cmd-button {
     -webkit-user-select : none;
     -moz-user-select    : none;
     -ms-user-select     : none;
