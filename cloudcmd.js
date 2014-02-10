@@ -235,14 +235,14 @@
             p       = pParams;
             p.name  = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
             
-            fs.stat(p.name, function(pError, pStat) {
-                if (!pError)
-                    if ( pStat.isDirectory() )
+            fs.stat(p.name, function(error, stat) {
+                if (error)
+                    main.sendError(pParams, error);
+                else
+                    if (stat.isDirectory())
                         processContent(pParams);
                     else
-                        main.sendFile( pParams );
-                else
-                    main.sendError(pParams, pError);
+                        main.sendFile(pParams);
            });
         }
         
