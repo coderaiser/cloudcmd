@@ -249,32 +249,29 @@
         return lRet;
     }
     
-    function processContent(pParams) {
-        var p,
-            lRet = main.checkParams(pParams);
+    function processContent(params) {
+        var p       = params,
+            ret     = main.checkParams(params);
         
-        if (lRet) {
-            p = pParams;
-            main.commander.getDirContent(p.name, function(pError, pJSON) {
-                var lQuery, isJSON;
+        if (ret)
+            main.commander.getDirContent(p.name, function(error, json) {
+                var query, isJSON;
                 
-                if (pError) 
-                    main.sendError(pParams, pError);
+                if (error) 
+                    main.sendError(pParams, error);
                 else {
-                    lQuery      = main.getQuery(p.request);
-                    isJSON      = Util.isContainStr(lQuery, 'json');
+                    query       = main.getQuery(p.request);
+                    isJSON      = Util.isContainStr(query, 'json');
                     
                     if (!isJSON) 
-                        readIndex(pJSON, pParams);
+                        readIndex(json, params);
                     else {
-                        p.data  = Util.stringifyJSON(pJSON);
+                        p.data  = Util.stringifyJSON(json);
                         p.name +='.json';
-                        main.sendResponse(p, null, true);
+                        main.sendResponse(params, null, true);
                     }
-                        
                 }
             });
-        }
     }
     
     function readIndex(pJSON, params) {
