@@ -45,16 +45,15 @@
     /**
      * additional processing of index file
      */
-    function indexProcessing(pData) {
-        var lPath, lReplace, lKeysPanel,
-            left, right,
+    function indexProcessing(options) {
+        var keysPanel, left, right,
             LEFT    = CloudFunc.PANEL_LEFT,
             RIGHT   = CloudFunc.PANEL_RIGHT,
-            lData   = pData.data,
-            panel   = pData.panel;
+            data    = options.data,
+            panel   = options.panel;
         
         if (!Config.appCache)
-            lData = Util.removeStr(lData, [
+            data = Util.removeStr(data, [
                 /* min */
                 ' manifest=/cloudcmd.appcache',
                 /* normal */
@@ -63,7 +62,7 @@
         
         if (!Config.showKeysPanel) {
             lKeysPanel  = '<div class="keyspanel';
-            lData       = lData.replace(lKeysPanel + '"', lKeysPanel +' hidden"');
+            data        = data.replace(keysPanel + '"', keysPanel +' hidden"');
         }
         
         left    = Util.render(PanelTemplate, {
@@ -78,12 +77,12 @@
             content : panel
         });
         
-        lData = Util.render(lData, {
+        data = Util.render(data, {
             title   : CloudFunc.getTitle(),
             fm      : left + right
         });
         
-        return lData;
+        return data;
         
     }
     
