@@ -181,16 +181,15 @@
         });
     }
     
-    function readConfig(pCallBack) {
-        fs.readFile(CONFIG_PATH, function(pError, pData) {
-            var msg, status, str, readed;
+    function readConfig(callback) {
+        fs.readFile(CONFIG_PATH, 'utf8', function(error, data) {
+            var msg, status, readed;
             
-            if (pError) 
+            if (error) 
                 status = 'error';
             else {
                 status = 'ok';
-                str    = pData.toString(),
-                readed = Util.parseJSON(str);
+                readed = Util.parseJSON(data);
                 
                 main.config = Config = readed;
             }
@@ -198,7 +197,7 @@
             msg = CloudFunc.formatMsg('read', 'config', status);
             Util.log(msg);
             
-            Util.exec(pCallBack);
+            Util.exec(callback);
         });
     }
     
