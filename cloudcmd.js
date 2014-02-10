@@ -104,13 +104,6 @@
         AppCache.createManifest();
     }
     
-    /**
-     * rest interface
-     * @pParams pConnectionData {request, responce}
-     */
-    function rest(pConnectionData) {
-        return Util.exec(main.rest, pConnectionData);
-    }
     
     function init() {
         var lServerDir,  lArg, lParams, lFiles;
@@ -152,7 +145,7 @@
         
         lParams = {
             appcache    : appCacheProcessing,
-            rest        : rest,
+            rest        : main.rest,
             route       : route
         },
         
