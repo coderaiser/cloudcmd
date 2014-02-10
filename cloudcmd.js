@@ -197,27 +197,34 @@
     /**
      * routing of server queries
      */
-    function route(pParams) {
-        var lRet = main.checkParams(pParams);
+    function route(request, response, callback) {
+        var ret, name, params, isAuth, isFS;
         
-        if (lRet) {
-            var p = pParams;
+        if (request && response) {
+            name    = main.getPathName(request);
+            isAuth  = Util.strCmp(name, ['/auth', '/auth/github']);
+            isFS    = Util.strCmp(name, '/') || Util.isContainStrAtBegin(name, FS);
             
-            if ( Util.strCmp(p.name, ['/auth', '/auth/github']) ) {
-                Util.log('* Routing' +
-                    '-> ' + p.name);
+            params  = {
+                request     : request,
+                response    : response,
+                name        : name
+            };
+            
+            if (isAuth) {
+                Util.log('* Routing' + '-> ' + name);
                 
-                pParams.name    = main.HTMLDIR + p.name + '.html';
-                lRet            = main.sendFile( pParams );
+                params.name = main.HTMLDIR + name + '.html';
+                main.sendFile(params);
+            } else if (isFS)
+                sendContent(params);
+            else {
+                ret = false;
+                Util.exec(callback);
             }
-            else if ( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') )
-                lRet = sendContent( pParams );
-            
-            else
-                lRet = false;
         }
         
-        return lRet;
+        return ret;
     }
     
     function sendContent(pParams) {
