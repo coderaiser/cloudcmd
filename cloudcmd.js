@@ -201,6 +201,7 @@
         var ret, name, params, isAuth, isFS;
         
         if (request && response) {
+            ret     = true;
             name    = main.getPathName(request);
             isAuth  = Util.strCmp(name, ['/auth', '/auth/github']);
             isFS    = Util.strCmp(name, '/') || Util.isContainStrAtBegin(name, FS);
