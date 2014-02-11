@@ -257,7 +257,7 @@
                 var query, isJSON;
                 
                 if (error) 
-                    main.sendError(pParams, error);
+                    main.sendError(params, error);
                 else {
                     query       = main.getQuery(p.request);
                     isJSON      = Util.isContainStr(query, 'json');
