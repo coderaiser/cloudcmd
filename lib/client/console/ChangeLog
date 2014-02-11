@@ -74,3 +74,11 @@ info.
 * Remove browser sniffing. Fix #37 #42 #53
 * Update android support. Fix #41
 * Add wrapper div for padding/styling of console. Fix #40
+
+2014.2.8 Version 2.9.0
+* Fixed `GetColumn` method to return the column number up until the cursor.
+* `Dump`: Add header contents in console dump and remove extra spaces.
+
+2014.2.8 Version 2.10.0
+* Add `Clear` method to clear the console
+

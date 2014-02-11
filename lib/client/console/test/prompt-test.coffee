@@ -390,5 +390,11 @@ describe 'Prompt Interaction', ->
       type('foo')
       keyDown 13
 
-
-
+  describe '#Input', ->
+    it 'should enable history', (done) ->
+      jqconsole.Prompt true, done.bind(null, null)
+      jqconsole.Input (text) ->
+        assert.equal text, 'foo'
+        setTimeout (-> keyDown(13)), 0
+      type 'foo'
+      keyDown 13
