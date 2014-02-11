@@ -22,7 +22,7 @@
         "socket.io": "0.9.16",
         "express": "3.4.x",
         "http-auth": "2.1.x",
-        "rimraf": "2.2.x"
+        "fs-extra": "0.8.x"
     },
     "license": "MIT",
     "engines": {
