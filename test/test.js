@@ -34,9 +34,9 @@
         
         
         Expect =
-            '<div class=path title="/etc/X11/">'                                +
-                '<span class="path-icon clear-cache" '                          +
-                    'id=clear-cache title="clear cache (Ctrl+D)">'              +
+            '<div id="js-path class="reduce-text" title="/etc/X11/">'           +
+                '<span class="path-icon clear-storage" '                        +
+                    'title="clear storage (Ctrl+D)">'                           +
                 '</span>'                                                       +
                 '<span class="path-icon refresh-icon" title="refresh (Ctrl+R)">'+
                     '<a href="/fs/etc/X11"></a></span>'                         +
@@ -49,10 +49,10 @@
             '</li>'                                                             +
             '<li class=fm-header>'                                              +
                 '<span class=mini-icon></span>'                                 +
-                '<span class=name>name</span>'                                  +
-                '<span class=size>size</span>'                                  +
-                '<span class=owner>owner</span>'                                +
-                '<span class=mode>mode</span>'                                  +
+                '<span class=name>"name reduce-text"</span>'                    +
+                '<span class=size>"size reduce-text"</span>'                    +
+                '<span class=owner>"owner reduce-text"</span>'                  +
+                '<span class=mode>"mode reduce-text"</span>'                    +
             '</li>';
     
     
