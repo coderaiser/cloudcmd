@@ -17,7 +17,7 @@
         
         Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH],
         
-        JSON_Files = {
+        JSON_FILES          = {
             path  : "/etc/X11/", 
             files : [{
                 name: "applnk",
