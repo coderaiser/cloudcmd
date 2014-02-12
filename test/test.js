@@ -46,15 +46,7 @@
                         'etc'                                                   +
                     '</a>/X11/'                                                 +
                 '</span>'                                                       +
-            '</div>'                                                            +
-            '<div class="fm-header">'                                           +
-                '<span class=mini-icon></span>'                                 +
-                '<span class=name>"name reduce-text"</span>'                    +
-                '<span class=size>"size reduce-text"</span>'                    +
-                '<span class=owner>"owner reduce-text"</span>'                  +
-                '<span class=mode>"mode reduce-text"</span>'                    +
             '</div>';
-    
     
     files.read(Files, 'utf-8', function(errors, files) {
         var i, n, template, pathTemplate, linkTemplate, expect, result;
