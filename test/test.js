@@ -17,7 +17,7 @@
         
         Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH],
         
-        lJSON = {
+        JSON_Files = {
             path  : "/etc/X11/", 
             files : [{
                 name: "applnk",
@@ -56,34 +56,36 @@
             '</li>';
     
     
-    files.read(Files, 'utf-8', function(pErrors, pFiles){
-        if(pErrors)
-            Util.log(pErrors);
-        else{
-            console.time('CloudFunc.buildFromJSON');
+    files.read(Files, 'utf-8', function(errors, files) {
+        var i, n, template, pathTemplate, linkTemplate, expect, result;
+        
+        if (errors)
+            Util.log(errors);
+        else {
+            Util.time('CloudFunc.buildFromJSON');
             
-            var i, n,
-                lTemplate       = pFiles[TEMPLATEPATH],
-                lPathTemplate   = pFiles[PATHTEMPLATE_PATH],
-                lLinkTemplate   = pFiles[LINK_TEMPLATE_PATH],
-                lExpect         = pFiles[EXPECT_PATH],
-                
-                lResult         = CloudFunc.buildFromJSON(lJSON, lTemplate, lPathTemplate, lLinkTemplate);
-                
-                Expect          += lExpect;
-                
-                for (i = 0, n = Expect.length; i < n; i++)
-                    if (lResult[i] !== Expect[i]){
-                        console.log('Error in char number: ' + i    + '\n' +
-                                    'Expect: ' + Expect.substr(i)  + '\n' +
-                                    'Result: ' + lResult.substr(i) );
-                        break;
-                    }
-                
-                    if (i === n)
-                        console.log('CloudFunc.buildFromJSON: OK');    
+            template        = files[TEMPLATEPATH];
+            pathTemplate    = files[PATHTEMPLATE_PATH];
+            linkTemplate    = files[LINK_TEMPLATE_PATH];
+            expect          = files[EXPECT_PATH];
             
-            console.timeEnd('CloudFunc.buildFromJSON');
+            result          = CloudFunc.buildFromJSON(JSON_FILES, template, pathTemplate, linkTemplate);
+            
+            Expect          += expect;
+            
+            n = Expect.length;
+            for (i = 0; i < n; i++)
+                if (result[i] !== Expect[i]){
+                    Util.log('Error in char number: ' + i    + '\n' +
+                                'Expect: ' + Expect.substr(i)  + '\n' +
+                                'Result: ' + result.substr(i) );
+                    break;
+                }
+                
+                if (i === n)
+                    console.log('CloudFunc.buildFromJSON: OK');   
+            
+            Util.timeEnd('CloudFunc.buildFromJSON');
         }
     });
 
