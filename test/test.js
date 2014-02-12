@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
     
     var DIR                 = process.cwd() + '/',
@@ -75,7 +75,7 @@
             
             n = Expect.length;
             for (i = 0; i < n; i++)
-                if (result[i] !== Expect[i]){
+                if (result[i] !== Expect[i]) {
                     Util.log('Error in char number: ' + i    + '\n' +
                                 'Expect: ' + Expect.substr(i)  + '\n' +
                                 'Result: ' + result.substr(i) );
