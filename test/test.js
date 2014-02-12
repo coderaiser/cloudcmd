@@ -47,7 +47,7 @@
                     '</a>/X11/'                                                 +
                 '</span>'                                                       +
             '</div>'                                                            +
-            '<div draggable class=fm-header>'                                   +
+            '<div class=fm-header>'                                             +
                 '<span class=mini-icon></span>'                                 +
                 '<span class=name>"name reduce-text"</span>'                    +
                 '<span class=size>"size reduce-text"</span>'                    +
