@@ -15,10 +15,11 @@ queueing.
 The plugin has been tested on the following browsers:  
   
 * IE 9+
-* Chrome 10+
-* Firefox 4+
-* Opera 11+
-* iOS 4+
+* Chrome
+* Firefox
+* Opera
+* iOS Safari and Chrome
+* Android Chrome
   
   
 ##Getting Started  
@@ -134,8 +135,7 @@ Takes two arguments:
 Sets the number of spaces inserted when indenting and removed when unindenting.  
 Takes one argument:  
   
-  * __int__ *width*: The code of the key pressing which (when Ctrl is held) will  
-    trigger this shortcut.  
+  * __int__ *width*: The number of spaces in each indentation level.  
 
 
   Example:  
@@ -469,6 +469,9 @@ Resets the character matching configuration.
 Resets the shortcut configuration.
 
 
+###jqconsole.Clear
+Clears the console's content excluding the current prompt
+
 ##Default Key Config  
   
 The console responds to the followind keys and key combinations by default:  
@@ -720,4 +723,8 @@ further customization.
 ##Contributors  
   
 [Max Shawabkeh](http://max99x.com/)    
-[Amjad Masad](http://twitter.com/amjad_masad)  
+[Amjad Masad](http://twitter.com/amasad)  
+
+## License
+
+[MIT](http://opensource.org/licenses/MIT)

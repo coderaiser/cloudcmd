@@ -48,21 +48,21 @@ DEFAULT_PROMPT_CONINUE_LABEL = '... '
 # The default number of spaces inserted when indenting.
 DEFAULT_INDENT_WIDTH = 2
 
-CLASS_ANSI = "#{CLASS_PREFIX}ansi-" 
+CLASS_ANSI = "#{CLASS_PREFIX}ansi-"
 ESCAPE_CHAR = '\x1B'
 ESCAPE_SYNTAX = /\[(\d*)(?:;(\d*))*m/
 
 class Ansi
   COLORS: ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
-  
+
   constructor: ->
     @klasses = [];
-  
+
   _append: (klass) =>
     klass = "#{CLASS_ANSI}#{klass}"
     if @klasses.indexOf(klass) is -1
       @klasses.push klass
-  
+
   _remove: (klasses...) =>
     for klass in klasses
       if klass in ['fonts', 'color', 'background-color']
@@ -70,15 +70,15 @@ class Ansi
       else
         klass = "#{CLASS_ANSI}#{klass}"
         @klasses = (cls for cls in @klasses when cls isnt klass)
-  
+
   _color: (i) => @COLORS[i]
-  
+
   _style: (code) =>
     code = 0 if code == ''
     code = parseInt code
-    
+
     return if isNaN code
-    
+
     switch code
       when 0  then @klasses = []
       when 1  then @_append 'bold'
@@ -113,27 +113,27 @@ class Ansi
       when 53 then @_append 'overline'
       when 54 then @_remove 'framed'
       when 55 then @_remove 'overline'
-  
+
   getClasses: => @klasses.join ' '
-  
+
   _openSpan: (text) => "<span class=\"#{@getClasses()}\">#{text}"
   _closeSpan: (text) => "#{text}</span>"
-  
+
   stylize: (text) =>
     text = @_openSpan text
-    
+
     i = 0
     while (i = text.indexOf(ESCAPE_CHAR ,i)) and i isnt -1
       if d = text[i...].match ESCAPE_SYNTAX
         @_style code for code in d[1...]
         text = @_closeSpan(text[0...i]) + @_openSpan text[i + 1 + d[0].length...]
       else i++
-    
-    return @_closeSpan text 
-        
+
+    return @_closeSpan text
+
 # Helper functions
 spanHtml = (klass, content) -> "<span class=\"#{klass}\">#{content or ''}</span>"
-  
+
 class JQConsole
   # Creates a console.
   #   @arg container: The DOM element into which the console is inserted.
@@ -143,21 +143,21 @@ class JQConsole
   #     Defaults to DEFAULT_PROMPT_LABEL.
   #   @arg prompt_continue: The label to show before continuation lines of the
   #     command prompt. Optional. Defaults to DEFAULT_PROMPT_CONINUE_LABEL.
-  constructor: (@container, header, prompt_label, prompt_continue_label) ->
+  constructor: (outer_container, header, prompt_label, prompt_continue_label) ->
     # Mobile devices supported sniff.
     @isMobile = !!navigator.userAgent.match /iPhone|iPad|iPod|Android/i
     @isIos = !!navigator.userAgent.match /iPhone|iPad|iPod/i
     @isAndroid = !!navigator.userAgent.match /Android/i
-    
+
     @$window = $(window)
-    
+
     # The header written when the console is reset.
     @header = header or ''
 
     # The prompt label used by Prompt().
     @prompt_label_main = if typeof prompt_label == 'string'
-      prompt_label 
-    else 
+      prompt_label
+    else
       DEFAULT_PROMPT_LABEL
     @prompt_label_continue = (prompt_continue_label or
                               DEFAULT_PROMPT_CONINUE_LABEL)
@@ -193,60 +193,76 @@ class JQConsole
 
     # A table of custom shortcuts, mapping character codes to callbacks.
     @shortcuts = {}
-    
+
+    @$container = $('<div/>').appendTo outer_container
+    @$container.css
+      'top': 0
+      'left': 0
+      'right': 0
+      'bottom': 0
+      'position': 'absolute'
+      'overflow': 'auto'
+
     # The main console area. Everything else happens inside this.
-    @$console = $('<pre class="jqconsole"/>').appendTo @container
-    @$console.css 
-      position: 'absolute'
-      top: 0
-      bottom: 0
-      right: 0
-      left: 0
-      margin: 0
-      overflow: 'auto'
+    @$console = $('<pre class="jqconsole"/>').appendTo @$container
+    @$console.css
+      'margin': 0
+      'position': 'relative'
+      'min-height': '100%'
+      'box-sizing': 'border-box'
+      '-moz-box-sizing': 'border-box'
+      '-webkit-box-sizing': 'border-box'
 
     # Whether the console currently has focus.
     @$console_focused = true
-    
+
     # On screen somehow invisible textbox for input.
     # Copied from codemirror2, this works for both mobile and desktop browsers.
-    @$input_container = $(EMPTY_DIV).appendTo @container
+    @$input_container = $(EMPTY_DIV).appendTo @$container
     @$input_container.css
-      position: 'relative'
+      position: 'absolute'
       width: 1
       height: 0
       overflow: 'hidden'
-    @$input_source = $('<textarea/>')
-    @$input_source.attr('wrap', 'off').css
+
+    # On android autocapitlize works for input.
+    @$input_source = if @isAndroid then $('<input/>') else $('<textarea/>')
+    @$input_source.attr
+      wrap: 'off'
+      autocapitalize: 'off'
+      autocorrect: 'off'
+      spellcheck: 'false'
+      autocomplete: 'off'
+    @$input_source.css
       position: 'absolute'
       width: 2
     @$input_source.appendTo @$input_container
-    
+
     @$composition = $(EMPTY_DIV)
     @$composition.addClass "#{CLASS_PREFIX}composition"
     @$composition.css
       display: 'inline'
       position: 'relative'
-      
+
     # Hash containing all matching settings
-    # openings/closings[char] = matching_config 
+    # openings/closings[char] = matching_config
     # where char is the opening/closing character.
     # clss is an array of classes for fast unhighlighting
     # for matching_config see Match method
-    @matchings = 
+    @matchings =
       openings: {}
       closings: {}
       clss: []
-    
+
     @ansi = new Ansi()
-    
+
     # Prepare console for interaction.
     @_InitPrompt()
     @_SetupEvents()
     @Write @header, CLASS_HEADER
-    
+
     # Save this instance to be accessed if lost.
-    $(@container).data 'jqconsole', this
+    $(outer_container).data 'jqconsole', this
 
   #### Reset methods
 
@@ -260,7 +276,7 @@ class JQConsole
 
   # Resets the matching configuration.
   ResetMatchings: ->
-    @matchings = 
+    @matchings =
       openings: {}
       closings: {}
       clss: []
@@ -279,23 +295,23 @@ class JQConsole
     @$input_container.detach()
     @$console.html ''
     @$prompt.appendTo @$console
-    @$input_container.appendTo @container
+    @$input_container.appendTo @$container
     @Write @header, CLASS_HEADER
     return undefined
-  
+
   #### History Methods
-  
+
   # Get the current history
   GetHistory: ->
   	@history
-  
+
   # Set the history
   SetHistory: (history) ->
   	@history = history.slice()
   	@history_index = @history.length
-    
+
   ###------------------------ Shortcut Methods -----------------------------###
-  
+
   # Checks the type/value of key codes passed in for registering/unregistering
   #   shortcuts and handles accordingly.
   _CheckKeyCode: (key_code) ->
@@ -306,16 +322,16 @@ class JQConsole
 
     if not (0 < key_code < 256) or isNaN key_code
       throw new Error 'Key code must be a number between 0 and 256 exclusive.'
-    
+
     return key_code
-  
+
   # A helper function responsible for calling the register/unregister callback
   #   twice passing in both the upper and lower case letters.
   _LetterCaseHelper: (key_code, callback)->
     callback key_code
     if 65 <= key_code <= 90 then callback key_code + 32
     if 97 <= key_code <= 122 then callback key_code - 32
-    
+
   # Registers a Ctrl+Key shortcut.
   #   @arg key_code: The code of the key pressing which (when Ctrl is held) will
   #     trigger this shortcut. If a string is provided, the character code of
@@ -330,10 +346,10 @@ class JQConsole
     addShortcut = (key) =>
       if key not of @shortcuts then @shortcuts[key] = []
       @shortcuts[key].push callback
-    
+
     @_LetterCaseHelper key_code, addShortcut
     return undefined
-  
+
   # Removes a Ctrl+Key shortcut from shortcut registry.
   #   @arg key_code: The code of the key pressing which (when Ctrl is held) will
   #     trigger this shortcut. If a string is provided, the character code of
@@ -343,24 +359,26 @@ class JQConsole
   #     would be removed.
   UnRegisterShortcut: (key_code, handler) ->
     key_code = @_CheckKeyCode key_code
-    
+
     removeShortcut = (key)=>
       if key of @shortcuts
         if handler
           @shortcuts[key].splice @shortcuts[key].indexOf(handler), 1
         else
           delete @shortcuts[key]
-    
+
     @_LetterCaseHelper key_code, removeShortcut
     return undefined
-  
+
   ###---------------------- END Shortcut Methods ---------------------------###
-  
+
   # Returns the 0-based number of the column on which the cursor currently is.
   GetColumn: ->
+    @$prompt_right.detach()
     @$prompt_cursor.text ''
     lines = @$console.text().split NEWLINE
     @$prompt_cursor.html '&nbsp;'
+    @$prompt_cursor.after @$prompt_right
     return lines[lines.length - 1].length
 
   # Returns the 0-based number of the line on which the cursor currently is.
@@ -415,7 +433,7 @@ class JQConsole
     @_AppendPromptText text
     @_ScrollToEnd()
     return undefined
-  
+
   # Replaces the main prompt label.
   #   @arg main_label: The new main label for the next prompt.
   #   @arg continue_label: The new continuation label for the next prompt. Optional.
@@ -431,12 +449,12 @@ class JQConsole
   Write: (text, cls, escape=true) ->
     if escape
       text = @ansi.stylize $(EMPTY_SPAN).text(text).html()
-      
+
     span = $(EMPTY_SPAN).html text
     if cls? then span.addClass cls
     @Append span
-    
-  # Adds a dom node, where any text would have been inserted 
+
+  # Adds a dom node, where any text would have been inserted
   #   @arg node: The node to insert.
   Append: (node) ->
   	$node = $(node).insertBefore @$prompt
@@ -444,7 +462,7 @@ class JQConsole
   	# Force reclaculation of the cursor's position.
   	@$prompt_cursor.detach().insertAfter @$prompt_left
   	return $node
-  
+
   # Starts an input operation. If another input or prompt operation is currently
   # underway, the new input operation is enqueued and will be called when the
   # current operation and all previously enqueued operations finish.
@@ -536,26 +554,29 @@ class JQConsole
   #   @arg open: the openning character
   #   @arg close: the closing character
   #   @arg cls: the html class to add to the matched characters
-  RegisterMatching: (open, close, cls) ->  
-      match_config = 
+  RegisterMatching: (open, close, cls) ->
+      match_config =
         opening_char: open
         closing_char: close
         cls: cls
-        
+
       @matchings.clss.push(cls)
       @matchings.openings[open] = match_config
       @matchings.closings[close] = match_config
-  
+
   # Unregisters a character matching. cls is optional.
   UnRegisterMatching: (open, close) ->
     cls = @matchings.openings[open].cls
     delete @matchings.openings[open]
     delete @matchings.closings[close]
     @matchings.clss.splice @matchings.clss.indexOf(cls), 1
-  
+
   # Dumps the content of the console before the current prompt.
   Dump: ->
-    $elems = @$console.find(".#{CLASS_HEADER}").nextUntil(".#{CLASS_PROMPT}")
+    $elems = @$console
+      .find(".#{CLASS_HEADER}")
+      .nextUntil(".#{CLASS_PROMPT}")
+      .addBack()
 
     return (
       for elem in $elems
@@ -563,7 +584,7 @@ class JQConsole
           $(elem).text().replace /^\s+/, '>>> '
         else
           $(elem).text()
-    ).join ' '
+    ).join ''
 
   # Gets the current prompt state.
   GetState: ->
@@ -573,12 +594,12 @@ class JQConsole
       'output'
     else
       'prompt'
-  
+
   # Disables focus and input on the console.
   Disable: ->
     @$input_source.attr 'disabled', on
     @$input_source.blur();
-    
+
   # Enables focus and input on the console.
   Enable: ->
     @$input_source.attr 'disabled', off
@@ -598,6 +619,17 @@ class JQConsole
   MoveToEnd: (all_lines) ->
     @_MoveTo all_lines, false
     return undefined
+
+  # Clear the console keeping only the prompt.
+  Clear: ->
+    @$console
+      .find(".#{CLASS_HEADER}")
+      .nextUntil(".#{CLASS_PROMPT}")
+      .addBack()
+      .text ''
+    # Bug in Chrome were the cursor's position is not recalculated
+    @$prompt_cursor.detach()
+    @$prompt_after.before @$prompt_cursor
 
   ###------------------------ Private Methods -------------------------------###
 
@@ -660,7 +692,7 @@ class JQConsole
 
   # Binds all the required input and focus events.
   _SetupEvents: ->
-    
+
     # Click to focus.
     if @isMobile
       @$console.click (e) =>
@@ -672,14 +704,14 @@ class JQConsole
         # paste on linux desktop.
         if e.which == 2
           @Focus()
-        else 
+        else
           fn = =>
             if not window.getSelection().toString()
               e.preventDefault()
               @Focus()
           # Force selection update.
           setTimeout fn, 0
-        
+
     # Mark the console with a style when it loses focus.
     @$input_source.focus =>
       @_ScrollToEnd()
@@ -691,17 +723,16 @@ class JQConsole
       hideTextInput = =>
         if @isIos and @$console_focused then @$input_source.hide()
       setTimeout hideTextInput, 500
-      
+
     @$input_source.blur =>
       @$console_focused = false
       if @isIos then @$input_source.show()
       addClass = =>
         if not @$console_focused then @$console.addClass CLASS_BLURRED
       setTimeout addClass, 100
-    
+
     # Intercept pasting.
-    paste_event = if $.browser.opera then 'input' else 'paste'
-    @$input_source.bind paste_event, =>
+    @$input_source.bind 'paste', =>
       handlePaste = =>
         # Opera fires input on composition end.
         return if @in_composition
@@ -715,24 +746,25 @@ class JQConsole
     @$input_source.keypress @_HandleChar
     @$input_source.keydown @_HandleKey
     @$input_source.keydown @_CheckComposition
-    
+
     # Firefox don't fire any key event for composition characters, so we listen
     # for the unstandard composition-events.
-    if $.browser.mozilla?
-      @$input_source.bind 'compositionstart', @_StartComposition
-      @$input_source.bind 'compositionend', @_EndCommposition
+    @$input_source.bind 'compositionstart', @_StartComposition
+    @$input_source.bind 'compositionend', (e) =>
+      # Wait for the input element to update so we don't rely on buggy e.data
+      setTimeout((=> @_EndComposition(e)), 0)
+
+    # Android has an out of screen text input for autocorrect and autocomplete
+    # and since it doesn't allow disabling we use composition events and more
+    # hacks to get input to work.
+    if @isAndroid
+      # Text is handled via composition events but for things like spaces
+      # we need to emulate a composition start.
+      @$input_source.bind 'input', @_StartComposition
+      @$input_source.bind 'input', @_UpdateComposition
+    else
       @$input_source.bind 'text', @_UpdateComposition
-    
-    # There is no way to detect compositionstart in opera so we poll for it.
-    if $.browser.opera?
-      cb = =>
-        return if @in_composition
-        # if there was characters that actually escaped to the input source
-        # then its most probably a multibyte char.
-        if @$input_source.val().length
-          @_StartComposition()
-      setInterval cb, 200
-  
+
   # Handles a character key press.
   #   @arg event: The jQuery keyboard Event object to handle.
   _HandleChar: (event) =>
@@ -741,26 +773,17 @@ class JQConsole
     # Allow alt key to pass through for unicode & multibyte characters.
     if @state == STATE_OUTPUT or event.metaKey or event.ctrlKey
       return true
-    
+
     # IE & Chrome capture non-control characters and Enter.
     # Mozilla and Opera capture everything.
 
     # This is the most reliable cross-browser; charCode/keyCode break on Opera.
     char_code = event.which
 
-    # Skip Enter on IE and Chrome and Tab & backspace on Opera. 
+    # Skip Enter on IE and Chrome and Tab & backspace on Opera.
     # These are handled in _HandleKey().
     if char_code in [8, 9, 13] then return false
-    
-    # Pass control characters which are captured on Mozilla/Safari.
-    if $.browser.mozilla
-       if event.keyCode or event.altKey
-         return true
-    # Pass control characters which are captured on Opera.
-    if $.browser.opera
-       if event.altKey
-         return true
-    
+
     @$prompt_left.text @$prompt_left.text() + String.fromCharCode char_code
     @_ScrollToEnd()
     return false
@@ -770,12 +793,12 @@ class JQConsole
   _HandleKey: (event) =>
     # We let the browser take over during output mode.
     if @state == STATE_OUTPUT then return true
-    
+
     key = event.keyCode or event.which
-    
+
     # Check for char matching next time the callstack unwinds.
     setTimeout $.proxy(@_CheckMatchings, this), 0
-    
+
     # Don't care about alt-modifier.
     if event.altKey
       return true
@@ -789,8 +812,8 @@ class JQConsole
         when KEY_TAB then @_Unindent()
         when KEY_UP then  @_MoveUp()
         when KEY_DOWN then @_MoveDown()
-        when KEY_PAGE_UP then @_ScrollUp()
-        when KEY_PAGE_DOWN then @_ScrollDown()
+        when KEY_PAGE_UP then @_ScrollPage 'up'
+        when KEY_PAGE_DOWN then @_ScrollPage 'down'
         # Allow other Shift shortcuts to pass through to the browser.
         else return true
       return false
@@ -807,8 +830,8 @@ class JQConsole
         when KEY_DOWN then @_HistoryNext()
         when KEY_HOME then @MoveToStart false
         when KEY_END then @MoveToEnd false
-        when KEY_PAGE_UP then @_ScrollUp()
-        when KEY_PAGE_DOWN then @_ScrollDown()
+        when KEY_PAGE_UP then @_ScrollPage 'up'
+        when KEY_PAGE_DOWN then @_ScrollPage 'down'
         # Let any other key continue its way to keypress.
         else return true
       return false
@@ -839,6 +862,7 @@ class JQConsole
   # Handles the user pressing the Enter key.
   #   @arg shift: Whether the shift key is held.
   _HandleEnter: (shift) ->
+    @_EndComposition()
     if shift
       @_InsertNewLine true
     else
@@ -863,7 +887,7 @@ class JQConsole
           @input_callback = null
           if callback then callback text
           @_CheckInputQueue()
-      
+
       if @multiline_callback
         if @async_multiline
           @multiline_callback text, continuation
@@ -871,8 +895,8 @@ class JQConsole
           continuation @multiline_callback text
       else
         continuation false
-          
-  
+
+
   # Returns the appropriate variables for usage in methods that depends on the
   #   direction of the interaction with the console.
   _GetDirectionals: (back) ->
@@ -882,11 +906,11 @@ class JQConsole
     $prompt_rel_opposite = if back then @$prompt_after else @$prompt_before
     MoveToLimit = if back
       $.proxy @MoveToStart, @
-    else 
+    else
       $.proxy @MoveToEnd, @
     MoveDirection = if back
-      $.proxy @_MoveLeft, @ 
-    else 
+      $.proxy @_MoveLeft, @
+    else
       $.proxy @_MoveRight, @
     which_end = if back then 'last' else 'first'
     where_append = if back then 'prependTo' else 'appendTo'
@@ -900,7 +924,7 @@ class JQConsole
       which_end
       where_append
     }
-    
+
   # Moves the cursor vertically in the current prompt,
   #   in the same column. (Used by _MoveUp, _MoveDown)
   _VerticalMove: (up) ->
@@ -911,7 +935,7 @@ class JQConsole
       MoveToLimit
       MoveDirection
     } = @_GetDirectionals(up)
-            
+
     if $prompt_relative.is EMPTY_SELECTOR then return
     pos = @$prompt_left.text().length
     MoveToLimit()
@@ -919,8 +943,8 @@ class JQConsole
     text = $prompt_which.text()
     $prompt_opposite.text if up then text[pos..] else text[...pos]
     $prompt_which.text if up then text[...pos] else text[pos..]
-    
-    
+
+
   # Moves the cursor to the line above the current one, in the same column.
   _MoveUp: ->
     @_VerticalMove true
@@ -928,7 +952,7 @@ class JQConsole
   # Moves the cursor to the line below the current one, in the same column.
   _MoveDown: ->
     @_VerticalMove()
-  
+
   # Moves the cursor horizontally in the current prompt.
   #   Used by _MoveLeft, _MoveRight
   _HorizontalMove: (whole_word, back) ->
@@ -941,7 +965,7 @@ class JQConsole
       where_append
     } = @_GetDirectionals(back)
     regexp = if back then /\w*\W*$/ else /^\w*\W*/
-    
+
     text = $prompt_which.text()
     if text
       if whole_word
@@ -960,12 +984,12 @@ class JQConsole
       $which_line = $(EMPTY_SPAN)[where_append] $prompt_rel_opposite
       $which_line.append $(EMPTY_SPAN).text @$prompt_label.text()
       $which_line.append $(EMPTY_SPAN).text $prompt_opposite.text()
-      
+
       $opposite_line = $prompt_relative.children()[which_end]().detach()
       @$prompt_label.text $opposite_line.children().first().text()
       $prompt_which.text $opposite_line.children().last().text()
       $prompt_opposite.text ''
-      
+
   # Moves the cursor to the left.
   #   @arg whole_word: Whether to move by a whole word rather than a character.
   _MoveLeft: (whole_word) ->
@@ -975,7 +999,7 @@ class JQConsole
   #   @arg whole_word: Whether to move by a whole word rather than a character.
   _MoveRight: (whole_word) ->
     @_HorizontalMove whole_word
-  
+
   # Moves the cursor either to the start or end of the current prompt line(s).
   _MoveTo: (all_lines, back) ->
     {
@@ -985,7 +1009,7 @@ class JQConsole
       MoveToLimit
       MoveDirection
     } = @_GetDirectionals(back)
-    
+
     if all_lines
       # Warning! FF 3.6 hangs on is(EMPTY_SELECTOR)
       until $prompt_relative.is(EMPTY_SELECTOR) and $prompt_which.text() == ''
@@ -1069,57 +1093,58 @@ class JQConsole
       @_InsertNewLine()
       @$prompt_left.text line
 
-  # Scrolls the console area up one page (with animation).
-  _ScrollUp: ->
-    target = @$console[0].scrollTop - @$console.height()
-    @$console.stop().animate {scrollTop: target}, 'fast'
-
-  # Scrolls the console area down one page (with animation).
-  _ScrollDown: ->
-    target = @$console[0].scrollTop + @$console.height()
-    @$console.stop().animate {scrollTop: target}, 'fast'
+  # Scrolls the console area down/up one page (with animation).
+  _ScrollPage: (dir) ->
+    target = @$container[0].scrollTop
+    if dir == 'up'
+      target -= @$container.height()
+    else
+      target += @$container.height()
+    @$container.stop().animate {scrollTop: target}, 'fast'
 
   # Scrolls the console area to its bottom;
   # Scrolls the window to the cursor vertical position.
   # Called with every input/output to the console.
   _ScrollToEnd: ->
     # Scroll console to the bottom.
-    @$console.scrollTop @$console[0].scrollHeight
-    
-    # The cursor's top position is effected by the scroll-top of the console 
-    # so we need to this asynchronously to give the browser a chance to 
+    @$container.scrollTop @$container[0].scrollHeight
+
+    # Move the input element to the cursor position.
+    pos = @$prompt_cursor.position()
+    @$input_container.css
+      left: pos.left
+      top: pos.top
+
+    # Give time for mobile browsers to zoom in on textarea
+    setTimeout @ScrollWindowToPrompt.bind(@), 50
+
+  ScrollWindowToPrompt: ->
+    # The cursor's top position is effected by the scroll-top of the console
+    # so we need to this asynchronously to give the browser a chance to
     # reflow and recaluclate the cursor's possition.
-    cont = =>
-      line_height = @$prompt_cursor.height()
-      screen_top = @$window.scrollTop()
-      screen_left = @$window.scrollLeft()
-      doc_height = document.documentElement.clientHeight
-      pos = @$prompt_cursor.offset()
-      rel_pos = @$prompt_cursor.position()
-      
-      # Move the input element to the cursor position.
-      @$input_container.css
-        left: rel_pos.left 
-        top: rel_pos.top 
-  
-      optimal_pos = pos.top - (2 * line_height)
-      # Follow the cursor vertically on mobile and desktop.
-      if @isMobile and orientation?
-        # Since the keyboard takes up most of the screen, we don't care about how
-        # far the the cursor position from the screen top is. We just follow it.
-        if screen_top < pos.top or screen_top > pos.top
-          @$window.scrollTop optimal_pos
-      else
-        if screen_top + doc_height < pos.top
-          # Scroll just to a place where the cursor is in the view port.
-          @$window.scrollTop pos.top - doc_height + line_height
-        else if screen_top > optimal_pos
-          # If the window is scrolled beyond the cursor, scroll to the cursor's
-          # position and give two line to the top.
-          @$window.scrollTop pos.top
-    
-    setTimeout cont, 0
-      
+    line_height = @$prompt_cursor.height()
+    screen_top = @$window.scrollTop()
+    screen_left = @$window.scrollLeft()
+    doc_height = document.documentElement.clientHeight
+    pos = @$prompt_cursor.offset()
+
+    optimal_pos = pos.top - (2 * line_height)
+
+    # Follow the cursor vertically on mobile and desktop.
+    if @isMobile and orientation?
+      # Since the keyboard takes up most of the screen, we don't care about how
+      # far the the cursor position from the screen top is. We just follow it.
+      if screen_top < pos.top or screen_top > pos.top
+        @$window.scrollTop optimal_pos
+    else
+      if screen_top + doc_height < pos.top
+        # Scroll just to a place where the cursor is in the view port.
+        @$window.scrollTop pos.top - doc_height + line_height
+      else if screen_top > optimal_pos
+        # If the window is scrolled beyond the cursor, scroll to the cursor's
+        # position and give two line to the top.
+        @$window.scrollTop pos.top
+
   # Selects the prompt label appropriate to the current mode.
   #   @arg continuation: If true, returns the continuation prompt rather than
   #     the main one.
@@ -1128,14 +1153,7 @@ class JQConsole
       return if continuation then (' \n' + @prompt_label_continue) else @prompt_label_main
     else
       return if continuation then '\n ' else ' '
-  
-  # Cross-browser outerHTML
-  _outerHTML: ($elem) ->
-    if document.body.outerHTML 
-      return $elem.get(0).outerHTML
-    else
-      return $(EMPTY_DIV).append($elem.eq(0).clone()).html()
-    
+
   # Wraps a single character in an element with a <span> having a class
   #   @arg $elem: The JqDom element in question
   #   @arg index: the index of the character to be wrapped
@@ -1146,7 +1164,7 @@ class JQConsole
            spanHtml(cls, text[index])+
            text[index + 1...]
     $elem.html html
-  
+
   # Walks a string of characters incrementing current_count each time a char is found
   # and decrementing each time an opposing char is found.
   #   @arg text: the text in question
@@ -1170,11 +1188,11 @@ class JQConsole
         current_count++
       else if ch is opposing_char
         current_count--
-      if current_count is 0 
+      if current_count is 0
         return {index: index, current_count: current_count}
 
     return {index: -1, current_count: current_count}
-  
+
   _ProcessMatch: (config, back, before_char) =>
       [char, opposing_char] = if back
         [
@@ -1187,7 +1205,7 @@ class JQConsole
           config['closing_char']
         ]
       {$prompt_which, $prompt_relative} = @_GetDirectionals(back)
-      
+
       current_count = 1
       found = false
       # check current line first
@@ -1210,40 +1228,40 @@ class JQConsole
           text = $elem.html()
           {index, current_count} = @_WalkCharacters text, char, opposing_char, current_count, back
           if index > -1
-            # When checking for matchings ona different line going forward we must decrement 
+            # When checking for matchings ona different line going forward we must decrement
             # the index since the current char is not included
             if !back then index--
             @_Wrap $elem, index, config.cls
             found = true
             return false
-            
+
       return found
-  
+
   # Unrwaps all prevoisly matched characters.
   # Checks if the cursor's current character is one to be matched, then walks
   # the following/preceeding characters to look for the opposing character that
-  # would satisfy the match. If found both characters would be wrapped with a 
+  # would satisfy the match. If found both characters would be wrapped with a
   # span and applied the html class that was found in the match_config.
   _CheckMatchings: (before_char) ->
     current_char = if before_char then @$prompt_left.text()[@$prompt_left.text().length - 1...] else @$prompt_right.text()[0]
     # on every move unwrap all matched elements
     # TODO(amasad): cache previous matched elements since this must be costly
     $('.' + cls, @$console).contents().unwrap() for cls in @matchings.clss
-                
+
     if config = @matchings.closings[current_char]
       found = @_ProcessMatch config, true, before_char
     else if config = @matchings.openings[current_char]
       found = @_ProcessMatch config, false, before_char
     else if not before_char
       @_CheckMatchings true
-      
+
     if before_char
       @_Wrap @$prompt_left, @$prompt_left.html().length - 1, config.cls if found
     else
     # Wrap current element when a matching was found
       @_Wrap @$prompt_right, 0, config.cls if found
-    
-  
+
+
   # Sets the prompt to the previous history item.
   _HistoryPrevious: ->
     if not @history_active then return
@@ -1261,48 +1279,48 @@ class JQConsole
       @SetPromptText @history_new
     else
       @SetPromptText @history[++@history_index]
-  
+
   # Check if this could be the start of a composition or an update to it.
   _CheckComposition: (e) =>
     key = e.keyCode or e.which
-    if $.browser.opera? and @in_composition
-      @_UpdateComposition()
     if key == 229
       if @in_composition then @_UpdateComposition() else @_StartComposition()
-  
+
   # Starts a multibyte character composition.
   _StartComposition: =>
-    @$input_source.bind E_KEYPRESS, @_EndComposition
+    return if @in_composition
     @in_composition = true
     @_ShowComposition()
     setTimeout @_UpdateComposition, 0
-  
+
   # Ends a multibyte character composition.
   _EndComposition: =>
-    @$input_source.unbind E_KEYPRESS, @_EndComposition 
-    @in_composition = false
+    return if not @in_composition
     @_HideComposition()
+    @$prompt_left.text @$prompt_left.text() + @$composition.text()
+    @$composition.text ''
     @$input_source.val ''
-  
+    @in_composition = false
+
   # Updates a multibyte character composition.
   _UpdateComposition: (e) =>
     cb =  =>
       return if not @in_composition
       @$composition.text @$input_source.val()
     setTimeout cb, 0
-  
+
   # Shows a multibyte character composition.
   _ShowComposition: =>
     @$composition.css 'height', @$prompt_cursor.height()
     @$composition.empty()
     @$composition.appendTo @$prompt_left
-  
+
   # Hides a multibyte character composition.
   _HideComposition: =>
     # We just detach the element because by now the text value of this element
     # is already extracted and has been put on the left of the prompt.
     @$composition.detach()
-  
+
 $.fn.jqconsole = (header, prompt_main, prompt_continue) ->
   new JQConsole this, header, prompt_main, prompt_continue
 

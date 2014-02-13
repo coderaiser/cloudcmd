@@ -4,6 +4,9 @@
     "view",
     "help",
     "config",
+    "contact",
+    "socket",
+    "terminal",
     "console", {
         "name": "storage",
         "data": [{

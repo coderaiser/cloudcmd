@@ -3,18 +3,19 @@
     <head></head>
     <body>
         <script>
-        (function(){
+        (function() {
             "use strict";
             
-            var lOpener = window.opener;
-            if(lOpener){
-                var CloudCmd = lOpener.CloudCmd;
+            var opener = window.opener;
+            
+            if (opener) {
+                var CloudCmd = opener.CloudCmd;
                 
-                CloudCmd.getModules(function(pModules){
-                    var Util        = lOpener.Util,
-                        lStorage    = Util.findObjByNameInArr(pModules, 'storage'),
-                        lGitHub     = Util.findObjByNameInArr(lStorage, 'GitHub'),
-                        GitHub_ID   = lGitHub && lGitHub.key;
+                CloudCmd.getModules(function(pModules) {
+                    var Util        = opener.Util,
+                        Storage     = Util.findObjByNameInArr(pModules, 'storage'),
+                        GitHub      = Util.findObjByNameInArr(Storage, 'GitHub'),
+                        GitHub_ID   = GitHub && GitHub.key;
                     
                     window.location = 
                         'https://github.com/login/oauth/authorize?client_id=' + 

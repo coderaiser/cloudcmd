@@ -10,41 +10,45 @@
         <link href=/img/favicon/favicon.png rel=icon type=image/png />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href=/combine/css/reset.css:css/style.css>
+        <link rel=stylesheet href=/join/css/reset.css:css/style.css:css/icons.css>
     </head>
     <body>
     
     <div class=fm>{{ fm }}</div>
     <div class="keyspanel">
-        <button id=f1 class=cmd-button>F1 - help</button>
-        <button id=f2 class=cmd-button>F2 - rename</button>
-        <button id=f3 class=cmd-button>F3 - view</button>
-        <button id=f4 class=cmd-button>F4 - edit</button>
-        <button id=f5 class=cmd-button>F5 - copy</button>
-        <button id=f6 class=cmd-button>F6 - move</button>
-        <button id=f7 class=cmd-button>F7 - make dir</button>
-        <button id=f8 class=cmd-button>F8 - delete</button>
-        <button id=f9 class=cmd-button>F9 - menu</button>
-        <button id=f10 class=cmd-button>F10 - config</button>
-        <button id=~ class=cmd-button>~ - console</button>
+        <button id=f1      class="cmd-button reduce-text icon-help" title="help">F1</button>
+        <button id=f2      class="cmd-button reduce-text icon-rename" title="rename">F2</button>
+        <button id=f3      class="cmd-button reduce-text icon-view" title="view">F3</button>
+        <button id=f4      class="cmd-button reduce-text icon-edit " title="edit">F4</button>
+        <button id=f5      class="cmd-button reduce-text icon-copy" title="copy">F5</button>
+        <button id=f6      class="cmd-button reduce-text icon-move" title="move">F6</button>
+        <button id=f7      class="cmd-button reduce-text icon-directory" title="make directory">F7</button>
+        <button id=f8      class="cmd-button reduce-text icon-delete" title="delete">F8</button>
+        <button id=f9      class="cmd-button reduce-text icon-menu" title="menu">F9</button>
+        <button id=f10     class="cmd-button reduce-text icon-config" title="config">F10</button>
+        <button id=~       class="cmd-button reduce-text icon-console" title="console">~</button>
+        <button id=contact class="cmd-button reduce-text icon-contact" title="contact"></button>
     </div>
     <script>
-        (function() {
+        !(function() {
             'use strict';
             
-            var script, Height,
+            var script,
+                lib     = 'lib/',
+                client  = lib + 'client/',
                 files   = [
-                    'lib/client/key.js',
-                    'lib/client/listeners.js',
-                    'lib/client.js',
-                    'lib/client/dom.js',
-                    'lib/cloudfunc.js',
-                    'lib/util.js'
+                    lib     + 'util.js',
+                    lib     + 'cloudfunc.js',
+                    client  + 'dom.js',
+                    client  + 'loader.js',
+                    client  + 'notify.js',
+                    lib     + 'client.js',
+                    client  + 'listeners.js',
+                    client  + 'key.js'
                 ],
-                url             = getCombineURL(files);
+                url             = getJoinURL(files);
             
             window.addEventListener('load', createScript);
-            setPanelHeight();
             
             function createScript() {
                 script          = document.createElement('script');
@@ -55,9 +59,9 @@
                 window.removeEventListener('load', createScript);
             }
             
-            function getCombineURL(files) {
+            function getJoinURL(files) {
                 var regExp  = new RegExp(',', 'g'),
-                    url     = '/combine/' + files;
+                    url     = '/join/' + files;
                 
                 url = url.replace(regExp, ':');
                 
@@ -68,29 +72,6 @@
                 CloudCmd.init();
                 script.removeEventListener('load', scriptLoad);
             }
-            
-            function setPanelHeight() {
-                var style;
-                /* устанавливаем размер высоты таблицы файлов
-                 * исходя из размеров разрешения экрана
-                 *
-                 * формируем и округляем высоту экрана
-                 * при разрешениии 1024x1280:
-                 * 658 -> 700
-                 */
-                
-                Height = window.screen.height;
-                Height -= (Height / 3).toFixed();
-                Height = (Height / 100).toFixed() * 100;
-                
-                style           = document.createElement('style');
-                style.innerText = '.files {'    +
-                                    'height:'   + Height +'px;'  +
-                                '}';
-                
-                document.head.appendChild(style);
-            }
-            
         })();
     </script>
     </body>

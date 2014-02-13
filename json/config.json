@@ -1,4 +1,7 @@
 {
+    "auth": false,
+    "username": "root",
+    "password": "435b41068e8665513a20070c033b08b9c66e4332",
     "apiURL": "/api/v1",
     "appСache": false,
     "analytics": true,

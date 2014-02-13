@@ -1,4 +1,3 @@
-
 .jqconsole-ansi-bold {
   /* font-weight: bold; */
 }
@@ -121,10 +120,10 @@
   color: red;
 }
 .jqconsole-ansi-color-green {
-  color: #65b04b;
+  color: green;
 }
 .jqconsole-ansi-color-yellow {
-  color: #fed563;
+  color: yellow;
 }
 .jqconsole-ansi-color-blue {
   color: rgb(49,123,249);
@@ -146,10 +145,10 @@
   background-color: red;
 }
 .jqconsole-ansi-background-color-green {
-  background-color: #65b04b;
+  background-color: green;
 }
 .jqconsole-ansi-background-color-yellow {
-  background-color: #fed563;
+  background-color: yellow;
 }
 .jqconsole-ansi-background-color-blue {
   background-color: blue;

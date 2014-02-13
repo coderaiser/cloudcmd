@@ -9,7 +9,7 @@ task 'watch', 'Build and watch the CoffeeScript source files', ->
 
 task 'build', 'Build minified file with uglify', ->
   console.log 'building...'
-  exec 'uglifyjs -o jqconsole.min.js lib/jqconsole.js', (err, res)->
+  exec 'uglifyjs -m -o jqconsole.min.js lib/jqconsole.js', (err, res)->
     if err
       console.error 'failed with', err
     else
