@@ -1,3 +1,9 @@
+2013.02.13, v0.8.1
+
+fix:
+- (commander) changeUIDToName: doesn't work on win
+
+
 2013.02.13, v0.8.0
 
 fix:
