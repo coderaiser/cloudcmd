@@ -352,6 +352,7 @@ For extend main functionality Cloud Commander use next modules:
 - [jquery]                  [jqueryURL]
 - [socket.io]               [socketIOURL]
 - [http-auth]               [httpAuthURL]
+- [fs-extra]                [fs-extraURL]
 
 [AceURL]:                   http://ace.ajax.org/ "Ace"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
@@ -362,6 +363,7 @@ For extend main functionality Cloud Commander use next modules:
 [jqueryURL]:                //jquery.com
 [socketIOURL]:              http://socket.io
 [httpAuthURL]:              //github.com/gevorg/http-auth
+[fs-extraURL]:              //github.com/jprichardson/node-fs-extra "fs-extra"
 
 Contributing
 ---------------
