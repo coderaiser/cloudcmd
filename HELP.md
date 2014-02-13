@@ -335,10 +335,9 @@ and then, if there is new version
     npm r cloudcmd
     npm i cloudcmd
 
-Extensions
+Additional modules list
 ---------------
-**Cloud Commander** desinged to easily porting extensions.
-For extend main functionality Cloud Commander use next modules:
+To extend capabilities of file manager next modules used:
 
 - [Ace]                     [AceURL]
 - [FancyBox]                [FancyBoxURL]
