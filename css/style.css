@@ -94,7 +94,7 @@ body {
 }
 
 .refresh-icon {
-    background:url(/img/panel_refresh.png) no-repeat;
+    background:url(/img/refresh.png) no-repeat;
 }
 
 .refresh-icon:active {
@@ -130,7 +130,7 @@ body {
 .clear-storage {
     margin-right: 6px;
     margin-left: 7px;
-    background:url(/img/console_clear.png)  -4px -4px no-repeat;
+    background:url(/img/clear.png)  -4px -4px no-repeat;
 }
 .clear-storage:active {
     top:5px;
