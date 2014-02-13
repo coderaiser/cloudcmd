@@ -49,26 +49,23 @@ and unpack or just clone repository from github:
 ```
 git clone git://github.com/coderaiser/cloudcmd.git
 cd cloudcmd
+npm install
 node cloudcmd
 ```
 or install in npm:
 
 ```
-npm i cloudcmd -g
+npm install cloudcmd -g
 cloudcmd
 ```
 
 Additional modules
 ---------------
-**Cloud Commander's Server Side** not using additional modules for main functionality.
-But for console and minification and optimization tricks optional can be
-assingned (and installed) modules: [Minify] (https://github.com/coderaiser/minify "Minify")
-and [socket.io] (https://github.com/LearnBoost/socket.io "Socket.IO").
+**Cloud Commander** could work without any modules installed.
+But for console, minification, file system operations etc, recommended
+install additional modules with next commnad (type in **Cloud Commander**'s directory):
 
-Install additional modules (type in **Cloud Commander** directory):
-
-    npm i
-
+    npm install
 
 Hot keys
 ---------------
