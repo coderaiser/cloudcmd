@@ -1,0 +1,41 @@
+{
+  "name": "jq-console",
+  "version": "2.10.0",
+  "description": "Feature complete web terminal",
+  "main": "jqconsole.min.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/replit/jq-console.git"
+  },
+  "keywords": [
+    "jq-consoel",
+    "console",
+    "terminal"
+  ],
+  "author": "amasad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/replit/jq-console/issues"
+  },
+  "devDependencies": {
+    "karma-coffee-preprocessor": "~0.1.2",
+    "mocha": "~1.17.1",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-jasmine": "~0.1.5",
+    "requirejs": "~2.1.10",
+    "karma-requirejs": "~0.2.1",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "karma": "~0.10.9",
+    "karma-mocha": "~0.1.1",
+    "karma-coverage": "~0.1.5"
+  }
+}

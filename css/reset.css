@@ -29,44 +29,7 @@ body {
    Links
    ========================================================================== */
 
-a{
-    color: #00e;
-    text-decoration:none;
-}
-a:visited { color: #551a8b; }
-a:hover { color: #06e; }
 a:focus { outline: thin dotted; }
 
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
 a:hover, a:active { outline: 0; }
-
-/*
- * 1. Display hand cursor for clickable form elements
- * 2. Allow styling of clickable form elements in iOS
- * 3. Correct inner spacing displayed oddly in IE7 (doesn't effect IE6)
- */
-
-/* ==== non-semantic helper classes ========================================
-   Please define your styles before this section.
-   ========================================================================== */
-
-/* Hide from both screenreaders and browsers: h5bp.com/u */
-.hidden { display: none !important; visibility: hidden; }
-
-/* preformatted text */
-.pre {white-space:pre}
-
-/* ==== print styles =======================================================
-   Print styles.
-   Inlined to avoid required HTTP connection: h5bp.com/r
-   ========================================================================== */
-
-@media print {
-  * { background: transparent !important;
-      color: black !important; box-shadow:none !important; text-shadow: none !important;
-      filter:none !important; -ms-filter: none !important; } /* Black prints faster: h5bp.com/s */
-  a, a:visited { text-decoration: underline; }
-  a[href]:after { content: " (" attr(href) ")"; } 
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
-  @page { margin: 0.5cm; }
-}

@@ -6,9 +6,11 @@
             (function(){
                 'use strict';
                 
-                if(window.opener){
-                    var lGitHub = window.opener.CloudCommander.GitHub;
-                    lGitHub.autorize(lGitHub.callback, window.location.search);
+                var opener = window.opener;
+                
+                if (opener){
+                    var GitHub = opener.CloudCmd.GitHub;
+                    GitHub.autorize(GitHub.callback, window.location.search);
                     window.close();
                 }
             })();

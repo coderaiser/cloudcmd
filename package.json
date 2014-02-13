@@ -1,6 +1,6 @@
 {
     "name": "cloudcmd",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
     "description": "Cloud Commander - file manager with console and editor",
     "homepage": "http://cloudcmd.io",
@@ -18,9 +18,11 @@
     "subdomain": "cloudcmd",
     "dependencies": {
         "dropbox": "0.10.2",
-        "minify": "0.2.3",
+        "minify": "0.2.5",
         "socket.io": "0.9.16",
-        "express": "3.4.x"
+        "express": "3.4.x",
+        "http-auth": "2.1.x",
+        "fs-extra": "0.8.x"
     },
     "license": "MIT",
     "engines": {

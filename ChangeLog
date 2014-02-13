@@ -1,3 +1,194 @@
+2013.02.13, v0.8.0
+
+fix:
+- (test) template
+- (cloudfunc) "draggable" -> "draggable "
+- (cloudfunc) buildFromJSON: lHeader -> header
+- (test) add ""
+- (test) add draggable
+- (test) li -> div
+- (files) p.error -> error
+- (test) add "
+- (path) rm " "
+- (test) JSON_Files -> JSON_FILES
+- (polyfill) args not defined
+- (server) lHost -> host
+- (test) change template
+- (util) retExec: add unshift
+- (rest) onPut: lFiles.password -> lFiles && lFiles.password
+- (console) access to socket before it loads
+- (cloudcmd) pParams -> params
+- (util) Util.exec -> Util.retExec.apply
+- (main) getQuery
+- (css) error position: add left
+- (listeners) changeLinks: pPanelID -> panelId
+- (menu) if menu could not load keys do not working
+- (terminal) resizing
+- (terminal) CHANNEL_RESIZE -> CHANNEL_TERMINAL_RESIZE
+- (terminal) new line
+- (terminal) maxSize
+- (terminal) when back to term, first simbol wasn't wrote
+- (rest) onFS: Util.log -> Util.log.bind(Util)
+- (terminal) onConnection bind: add context
+- (terminal) add rmKeys
+- (polyfill) bind
+- (console) chat do not broadcast
+- (dom) getNotCurrentDirPath: add this
+- (console) io - > exec
+- (users) File -> FILE
+- (config) init: change order
+- (filepicker) change to proto
+- (menu) set key bind when close
+- (github) api_url -> apiURL
+- (loader) anyLoadOnLoad: lParam -> param, callback -> func
+- (console) connNum -> conNum
+- (console) onMessageFunc -> Clients
+- (socket) ret -> io
+- (socket) change onDisconect
+- (socket) lRet -> ret
+- (socket) add removeListeners
+- (cloudfunc) RIGH_TPANE -> RIGHT_PANEL
+- (menu) if ESC current file is one mouse pointer on it
+- (dom) scrollIntoViewIfNeeded: add false
+- (dom) getPanel isLeft check: class -> id
+- (view) ',' -> ';'
+- (client) getJSONfromFileTable: owner -> uid
+- (client) getJSONfromFileTable: i: 2 -> 0
+- (client) baseInit: add 'js-'
+- (client) createFileTable: found -> !found
+- (view) add margin only when view text documents
+- (dom) selectByPattern: show message if not esc
+- (dom) selectByPattern: "." -> "\."
+- (dom) selectByPattern: DOM.alert -> Dialog.alert
+- chore(cloudcmd) fix lint warnings
+- (socket) prevent memory leak
+- (socket) getSpawn: add tryCachLog
+- (edit) add emmet
+- (cloudcmd) minify -> Minify
+- (loader) add Images
+- (client) baseInit: mv setCurrentFile to top
+- (dom) add max length for storage file
+- (express) if username or password is change, auth do not work
+- (listeners) changeLinks: get back current
+- (dom) getById: rm pElement
+- (dom) udpateCurrentInfo: files -> files.children
+- (css) .keyspanel: rm height
+- (css) .delete-button: change icon
+- (key) insert
+- (dom) first 2 files not select
+- (dom) CurrentInfo: prev, next not updates
+- (config) if view is load config do not show
+- (key) ";" -> ","
+- (config) init
+- (dom) getCurrentData: this -> Cmd
+- (edit) DOM.getData -> Info.getData
+- (dom) getFiles: add panel
+- (client) baseInit pCallBack: mv to end
+
+feature:
+- (util) spead improvement; exec: rm condition
+- (cloudfunc) buildFromJSON: rm draggable from header
+- (package) update minify to v0.2.5
+- (util) rm setTimeout
+- (util) rm setValue
+- (util) rm call
+- (main) rm gzipData
+- (rest) create recursive dir
+- (console) update to v2.10.0
+- (rest) add recursiv copy dir (rimraf -> fs-extra)
+- (main) add getPathName
+- (express) add join as express middleware
+- (dom) Images: improved access speed
+- (util) copyObj: from, to -> to, from
+- (listeners) onConextMenu: rm showLoad
+- (style) user-select : rm path
+- (rest) add ability to remove directory with files
+- (util) rm bind
+- (terminal) add info if pty not installed
+- (console) (dis)connected: add "console"
+- (terminal) add connect/disconnect events
+- (terminal) add Size
+- (terminal) dir : home -> DIR
+- (terminal) add update
+- (terminal) add cursor style
+- (main) mrequire: tryCatchLog - > tryCatch
+- (main) mrequire: tryCatch -> tryCatchLog
+- (terminal) add
+- (view) rm afterShow, mv css to style
+- (util) rm retFunc
+- (console) update to v2.8.0
+- (console) rm unused vars
+- (commander) rm file.sort: no use
+- (css) add media print
+- (style) .files: rm cursor
+- (util) add slice
+- (util) loadOnLoad: rm data
+- (key) <shift> + <f7> - add new file
+- (loader) pop -> shift
+- (util) loadOnLoad: rm data
+- (util) loadOnLoad: pop -> shift - change params order
+- (socket) getSpawn: add error sending
+- (socket) addListener: first parameter could be object
+- (console) addEvenets: add connect, disconect
+- (panel) add
+- (cloudfunc) rm Path
+- (key) add Ctrl + \ -> go to root
+- (key) go to parent dir on backspace
+- (style) add .reduce-text
+- (style) prevent text from wrapping in .size and .owner
+- (style) if size to long it reduce
+- (style) if owner name to long - it's reduce
+- (users) add
+- (key) add help call on "?"
+- (commander) uid -> owner
+- (dom) scrollIntViewIfNeeded: add second param
+- (dom) CurrentInfo: add filesPassive
+- (dom) getByClass -> getByClassAll
+- (util) rm bind
+- (files) readPipe: pop -> shift
+- (dom) add getCurrentOwner
+- (style) rm #path
+- (view) add margin
+- (dom) add extended selection (*, +, -)
+- (package) http-auth: 2.1.x
+- (package) minify: v0.2.4
+- (edit) add autocomletion
+- (edit) emmet: add css suport
+- (edit) add emmet
+- (notify) add
+- (loader) add
+- (path) add title with full path
+- (css) style: new line when path to long
+- (listeners) open file on new tab on <ctrl> + click
+- (style) max-width 600px: hide .size, .owner, .mode
+- (style) .cmd-button color : rgb(49,123,249) -> #222
+- (listeners) initKeysPanel: rm i === 12
+- (menu) From Filepicker -> From Cloud
+- (css) icons: add menu icons
+- (menu) getItem: add icon processing
+- (css) mv icons to icons.css
+- (css) add .icon-file
+- (menu) add icons
+- (util) add getStrSmallfirst
+- (menu) getConfig: rm callback
+- (css) .cmd-button width: 9% -> 5%
+- (html) buttons: mv name to title
+- (css) keyspanel: add rename, copy and move icons
+- (css) keyspanel: add icons for: help, view, edit, delete, menu, console and contact
+- (style) cmd-button: add directory icon
+- (font) add config icon
+- (css) style height: .fm 85%, .keyspanel 15%
+- (css) .cmd-button hover: rm border color
+- (config) auth: false
+- (cloudcmd) add http authorization
+- (listeners) ListenersProto: add Info
+- (dom) add CurrentInfo
+- (key) rm lCurrent
+- (config) add Loading
+- (style) .cmd-button focus: add outline
+- (contact) add
+- (cloudfunc) getJoinURL: rm first "/"
+
 2013.12.09, v0.7.0
 
 fix:

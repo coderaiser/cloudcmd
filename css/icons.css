@@ -1,0 +1,94 @@
+.icon-help:before {
+    font-family : 'Fontello';
+    content     : '\e801  ';
+}
+
+.icon-rename:before {
+    font-family : 'Fontello';
+    content     : '\e802  ';
+}
+
+.icon-view:before {
+    font-family : 'Fontello';
+    content     : '\e803  ';
+}
+
+.icon-edit:before {
+    font-family : 'Fontello';
+    content     : '\e804  ';
+}
+
+.icon-copy:before {
+    font-family : 'Fontello';
+    content     : '\e805  ';
+}
+
+.icon-move:before {
+    font-family : 'Fontello';
+    content     : '\e806  ';
+}
+
+.icon-directory:before {
+    font-family : 'Fontello';
+    content     : '\e807  ';
+}
+
+.icon-delete:before {
+    font-family : 'Fontello';
+    content     : '\e808  ';
+}
+
+.icon-menu:before {
+    font-family : 'Fontello';
+    content     : '\e809  ';
+}
+
+.icon-config:before {
+    font-family : 'Fontello';
+    content     : '\e80a  ';
+}
+
+.icon-console:before {
+    font-family : 'Fontello';
+    content     : '\e80b  ';
+}
+
+.icon-contact:before {
+    font-family : 'Fontello';
+    content     : '\e80c  ';
+}
+
+.icon-file::before {
+    font-family : 'Fontello';
+    content     : '\e80d  ';
+}
+
+.icon-upload-to::before {
+    font-family : 'Fontello';
+    content     : '\e80e  ';
+}
+
+.icon-from-cloud::before {
+    font-family : 'Fontello';
+    content     : '\e80f  ';
+}
+
+.icon-download::before {
+    font-family : 'Fontello';
+    content     : '\e810  ';
+}
+
+.icon-new::before {
+    font-family : 'Fontello';
+    content     : '\e811  ';
+}
+
+.icon-unselect-all::before {
+    font-family : 'Fontello';
+    content     : '\e812  ';
+}
+
+.icon-zip-file::before {
+    font-family : 'Fontello';
+    content     : '\e813  ';
+}

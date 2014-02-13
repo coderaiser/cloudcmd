@@ -29,10 +29,11 @@
         CERT        = DIR + 'ssl/ssl.crt',
         
         FILE_TMPL   = HTMLDIR + 'file.html',
+        PANEL_TMPL  = HTMLDIR + 'panel.html',
         PATH_TMPL   = HTMLDIR + 'path.html',
         LINK_TMPL   = HTMLDIR + 'link.html',
         
-        FileTemplate, PathTemplate, LinkTemplate,
+        FileTemplate, PanelTemplate, PathTemplate, LinkTemplate,
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
@@ -44,13 +45,15 @@
     /**
      * additional processing of index file
      */
-    function indexProcessing(pData) {
-        var lPath, lReplace, lKeysPanel,
-            lData       = pData.data,
-            lAdditional = pData.additional;
+    function indexProcessing(options) {
+        var keysPanel, left, right,
+            LEFT    = CloudFunc.PANEL_LEFT,
+            RIGHT   = CloudFunc.PANEL_RIGHT,
+            data    = options.data,
+            panel   = options.panel;
         
         if (!Config.appCache)
-            lData = Util.removeStr(lData, [
+            data = Util.removeStr(data, [
                 /* min */
                 ' manifest=/cloudcmd.appcache',
                 /* normal */
@@ -59,15 +62,27 @@
         
         if (!Config.showKeysPanel) {
             lKeysPanel  = '<div class="keyspanel';
-            lData       = lData.replace(lKeysPanel + '"', lKeysPanel +' hidden"');
+            data        = data.replace(keysPanel + '"', keysPanel +' hidden"');
         }
         
-        lData = Util.render(lData, {
-            title   : CloudFunc.getTitle(),
-            fm      : lAdditional
+        left    = Util.render(PanelTemplate, {
+            id      : LEFT,
+            side    : 'left',
+            content : panel
         });
         
-        return lData;
+        right    = Util.render(PanelTemplate, {
+            id      : RIGHT,
+            side    : 'right',
+            content : panel
+        });
+        
+        data = Util.render(data, {
+            title   : CloudFunc.getTitle(),
+            fm      : left + right
+        });
+        
+        return data;
         
     }
     
@@ -88,13 +103,6 @@
         AppCache.createManifest();
     }
     
-    /**
-     * rest interface
-     * @pParams pConnectionData {request, responce}
-     */
-    function rest(pConnectionData) {
-        return Util.exec(main.rest, pConnectionData);
-    }
     
     function init() {
         var lServerDir,  lArg, lParams, lFiles;
@@ -136,11 +144,11 @@
         
         lParams = {
             appcache    : appCacheProcessing,
-            rest        : rest,
+            rest        : main.rest,
             route       : route
         },
         
-        lFiles = [FILE_TMPL, PATH_TMPL, LINK_TMPL];
+        lFiles = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, LINK_TMPL];
         
         if (Config.ssl)
             lFiles.push(KEY, CERT);
@@ -150,6 +158,7 @@
                 Util.log(pErrors);
             else {
                 FileTemplate    = pFiles[FILE_TMPL];
+                PanelTemplate   = pFiles[PANEL_TMPL];
                 PathTemplate    = pFiles[PATH_TMPL];
                 LinkTemplate    = pFiles[LINK_TMPL];
                 
@@ -164,16 +173,15 @@
         });
     }
     
-    function readConfig(pCallBack) {
-        fs.readFile(CONFIG_PATH, function(pError, pData) {
-            var msg, status, str, readed;
+    function readConfig(callback) {
+        fs.readFile(CONFIG_PATH, 'utf8', function(error, data) {
+            var msg, status, readed;
             
-            if (pError) 
+            if (error) 
                 status = 'error';
             else {
                 status = 'ok';
-                str    = pData.toString(),
-                readed = Util.parseJSON(str);
+                readed = Util.parseJSON(data);
                 
                 main.config = Config = readed;
             }
@@ -181,34 +189,42 @@
             msg = CloudFunc.formatMsg('read', 'config', status);
             Util.log(msg);
             
-            Util.exec(pCallBack);
+            Util.exec(callback);
         });
     }
     
     /**
      * routing of server queries
      */
-    function route(pParams) {
-        var lRet = main.checkParams(pParams);
+    function route(request, response, callback) {
+        var ret, name, params, isAuth, isFS;
         
-        if (lRet) {
-            var p = pParams;
+        if (request && response) {
+            ret     = true;
+            name    = main.getPathName(request);
+            isAuth  = Util.strCmp(name, ['/auth', '/auth/github']);
+            isFS    = Util.strCmp(name, '/') || Util.isContainStrAtBegin(name, FS);
             
-            if ( Util.strCmp(p.name, ['/auth', '/auth/github']) ) {
-                Util.log('* Routing' +
-                    '-> ' + p.name);
+            params  = {
+                request     : request,
+                response    : response,
+                name        : name
+            };
+            
+            if (isAuth) {
+                Util.log('* Routing' + '-> ' + name);
                 
-                pParams.name    = main.HTMLDIR + p.name + '.html';
-                lRet            = main.sendFile( pParams );
+                params.name = main.HTMLDIR + name + '.html';
+                main.sendFile(params);
+            } else if (isFS)
+                sendContent(params);
+            else {
+                ret = false;
+                Util.exec(callback);
             }
-            else if ( Util.isContainStrAtBegin(p.name, FS) || Util.strCmp( p.name, '/') )
-                lRet = sendContent( pParams );
-            
-            else
-                lRet = false;
         }
         
-        return lRet;
+        return ret;
     }
     
     function sendContent(pParams) {
@@ -218,56 +234,53 @@
             p       = pParams;
             p.name  = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
             
-            fs.stat(p.name, function(pError, pStat) {
-                if (!pError)
-                    if ( pStat.isDirectory() )
+            fs.stat(p.name, function(error, stat) {
+                if (error)
+                    main.sendError(pParams, error);
+                else
+                    if (stat.isDirectory())
                         processContent(pParams);
                     else
-                        main.sendFile( pParams );
-                else
-                    main.sendError(pParams, pError);
+                        main.sendFile(pParams);
            });
         }
         
         return lRet;
     }
     
-    function processContent(pParams) {
-        var p,
-            lRet = main.checkParams(pParams);
+    function processContent(params) {
+        var p       = params,
+            ret     = main.checkParams(params);
         
-        if (lRet) {
-            p = pParams;
-            main.commander.getDirContent(p.name, function(pError, pJSON) {
-                var lQuery, isJSON;
+        if (ret)
+            main.commander.getDirContent(p.name, function(error, json) {
+                var query, isJSON;
                 
-                if (pError) 
-                    main.sendError(pParams, pError);
+                if (error) 
+                    main.sendError(params, error);
                 else {
-                    lQuery      = main.getQuery(p.request);
-                    isJSON      = Util.isContainStr(lQuery, 'json');
+                    query       = main.getQuery(p.request);
+                    isJSON      = Util.isContainStr(query, 'json');
                     
                     if (!isJSON) 
-                        readIndex(pJSON, pParams);
+                        readIndex(json, params);
                     else {
-                        p.data  = Util.stringifyJSON(pJSON);
+                        p.data  = Util.stringifyJSON(json);
                         p.name +='.json';
-                        main.sendResponse(p, null, true);
+                        main.sendResponse(params, null, true);
                     }
-                        
                 }
             });
-        }
     }
     
     function readIndex(pJSON, params) {
         var p = params;
         
-        Util.ifExec(!minify, function(params) {
+        Util.ifExec(!Minify, function(params) {
             var name = params && params.name;
             
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
-                var lPanel, lList,
+                var panel,
                     config  = main.config,
                     minify  = config.minify;
                 
@@ -275,13 +288,11 @@
                     main.sendError(p, error);
                 else {
                     p.name  = INDEX_PATH,
-                    lPanel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
-                    lList   = '<div id=left class=panel>'  + lPanel + '</div>' +
-                              '<div id=right class=panel>' + lPanel + '</div>';
+                    panel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
                     
                     main.sendResponse(p, indexProcessing({
-                        additional  : lList,
-                        data        : template,
+                        panel   : panel,
+                        data    : template,
                     }), true);
                 }
             });
