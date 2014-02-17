@@ -37,35 +37,13 @@ Benefits
 
 Install
 ---------------
+
+The installation of file manager is very simple.
+
+- install [node.js](http://nodejs.org/ "node.js") if you still have not.
+- install ```cloudcmd``` via npm with one simple command.
+
 [![NPM_INFO][NPM_INFO_IMG]][NPMURL]
-
-Installing **Cloud Commander** is very simple.
-All you need is 
-
-- install [node.js](http://nodejs.org/ "node.js")
-- [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
-and unpack or just clone repository from github:
-
-```
-git clone git://github.com/coderaiser/cloudcmd.git
-cd cloudcmd
-npm install
-node cloudcmd
-```
-or install in npm:
-
-```
-npm install cloudcmd -g
-cloudcmd
-```
-
-Additional modules
----------------
-**Cloud Commander** could work without any modules installed.
-But for console, minification, file system operations etc, recommended
-install additional modules with next commnad (type in **Cloud Commander**'s directory):
-
-    npm install
 
 Hot keys
 ---------------
