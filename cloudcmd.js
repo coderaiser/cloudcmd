@@ -227,7 +227,7 @@
     }
     
     function sendContent(pParams) {
-        var p, lRet = main.checkParams(pParams);
+        var p, query, lRet = main.checkParams(pParams);
         
         if (lRet) {
             p       = pParams;
@@ -237,46 +237,42 @@
                 if (error)
                     main.sendError(pParams, error);
                 else
-                    if (stat.isDirectory())
-                        processContent(pParams);
-                    else
+                    if (!stat.isDirectory())
                         main.sendFile(pParams);
+                    else {
+                        query   = main.getQuery(p.request),
+                        
+                        processContent(p.name, query, function(name, error, data) {
+                            if (error) 
+                                main.sendError(params, error);
+                            else {
+                                p.name = name;
+                                main.sendResponse(p, data, true);
+                            }
+                        });
+                    }
            });
         }
         
         return lRet;
     }
     
-    function processContent(params) {
-        var p       = params,
-            ret     = main.checkParams(params);
-        
-        if (ret)
-            main.commander.getDirContent(p.name, function(error, json) {
-                var query, isJSON;
+    function processContent(name, query, callback) {
+        main.commander.getDirContent(name, function(error, json) {
+            var data, name,
+                isJSON  = Util.isContainStr(query, 'json');
                 
-                if (error) 
-                    main.sendError(params, error);
+                if (!isJSON && !error) 
+                    readIndex(json, Util.retExec(callback, INDEX_PATH));
                 else {
-                    query       = main.getQuery(p.request);
-                    isJSON      = Util.isContainStr(query, 'json');
-                    
-                    if (!isJSON) 
-                        readIndex(json, function(error, data) {
-                            p.name  = INDEX_PATH;
-                            
-                            if (error)
-                                main.sendError(p, error);
-                            else
-                                main.sendResponse(p, data, true);
-                        });
-                    else {
-                        p.data  = Util.stringifyJSON(json);
-                        p.name +='.json';
-                        main.sendResponse(params, null, true);
+                    if (!error) {
+                        data  = Util.stringifyJSON(json);
+                        name +='.json';
                     }
+                    
+                    Util.exec(callback, name, error, data);
                 }
-            });
+        });
     }
     
     function readIndex(json, callback) {
