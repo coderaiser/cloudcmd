@@ -262,7 +262,14 @@
                     isJSON      = Util.isContainStr(query, 'json');
                     
                     if (!isJSON) 
-                        readIndex(json, params);
+                        readIndex(json, function(error, data) {
+                            p.name  = INDEX_PATH;
+                            
+                            if (error)
+                                main.sendError(p, error);
+                            else
+                                main.sendResponse(p, data, true);
+                        });
                     else {
                         p.data  = Util.stringifyJSON(json);
                         p.name +='.json';
@@ -272,28 +279,24 @@
             });
     }
     
-    function readIndex(pJSON, params) {
-        var p = params;
-        
+    function readIndex(json, callback) {
         Util.ifExec(!Minify, function(params) {
             var name = params && params.name;
             
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
-                var panel,
+                var panel, data,
                     config  = main.config,
                     minify  = config.minify;
                 
-                if (error)
-                    main.sendError(p, error);
-                else {
-                    p.name  = INDEX_PATH,
-                    panel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
-                    
-                    main.sendResponse(p, indexProcessing({
+                if (!error) {
+                    panel   = CloudFunc.buildFromJSON(json, FileTemplate, PathTemplate, LinkTemplate),
+                    data    = indexProcessing({
                         panel   : panel,
                         data    : template,
-                    }), true);
+                    });
                 }
+                
+                Util.exec(callback, error, data);
             });
         },  function(callback) {
                 Minify.optimize(INDEX_PATH, {
