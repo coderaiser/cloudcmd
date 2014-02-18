@@ -196,7 +196,7 @@
      * routing of server queries
      */
     function route(request, response, callback) {
-        var ret, name, params, isAuth, isFS;
+        var ret, name, params, isAuth, isFS, query;
         
         if (request && response) {
             ret     = true;
@@ -215,9 +215,19 @@
                 
                 params.name = main.HTMLDIR + name + '.html';
                 main.sendFile(params);
-            } else if (isFS)
-                sendContent(params);
-            else {
+            } else if (isFS) {
+                query   = main.getQuery(params.request),
+                sendContent(name, query, function(error, data, name, isFile) {
+                    if (error)
+                        main.sendError(pParams, error);
+                    else if (isFile)
+                        main.sendFile(pParams);
+                    else {
+                        params.name = name;
+                        main.sendResponse(params, data, true);
+                    }
+                });
+            } else {
                 ret = false;
                 Util.exec(callback);
             }
@@ -226,35 +236,24 @@
         return ret;
     }
     
-    function sendContent(pParams) {
-        var p, query, lRet = main.checkParams(pParams);
+    function sendContent(name, query, callback) {
+        name  = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
         
-        if (lRet) {
-            p       = pParams;
-            p.name  = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
-            
-            fs.stat(p.name, function(error, stat) {
-                if (error)
-                    main.sendError(pParams, error);
-                else
-                    if (!stat.isDirectory())
-                        main.sendFile(pParams);
-                    else {
-                        query   = main.getQuery(p.request),
-                        
-                        processContent(p.name, query, function(name, error, data) {
-                            if (error) 
-                                main.sendError(params, error);
-                            else {
-                                p.name = name;
-                                main.sendResponse(p, data, true);
-                            }
-                        });
-                    }
-           });
-        }
-        
-        return lRet;
+        fs.stat(name, function(error, stat) {
+            if (error)
+                Util.exec(callback, error);
+            else
+                if (!stat.isDirectory())
+                    Util.exec(callback, null, null, true);
+                else {
+                    processContent(name, query, function(name, error, data) {
+                        if (error) 
+                            Util.exec(callback, error);
+                        else
+                            Util.exec(callback, null, data, name);
+                    });
+                }
+       });
     }
     
     function processContent(name, query, callback) {
