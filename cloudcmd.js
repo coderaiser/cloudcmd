@@ -176,20 +176,19 @@
     
     function readConfig(callback) {
         fs.readFile(CONFIG_PATH, 'utf8', function(error, data) {
-            var msg, status, readed;
+            var status, json, msg;
             
             if (error) 
-                status = 'error';
+                status      = 'error';
             else {
-                status = 'ok';
-                readed = Util.parseJSON(data);
-                
-                main.config = Config = readed;
+                status      = 'ok';
+                json        = Util.parseJSON(data);
+                main.config = Config = json;
             }
-                
-            msg = CloudFunc.formatMsg('read', 'config', status);
-            Util.log(msg);
             
+            msg             = CloudFunc.formatMsg('read', 'config', status);
+            
+            Util.log(msg);
             Util.exec(callback);
         });
     }
