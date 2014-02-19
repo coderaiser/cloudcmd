@@ -264,6 +264,13 @@ a:hover, a:active {
  * друг-под-другом
 */
 /* responsive design */
+
+@media only screen and (max-height: 800px) {
+.fm {
+        height: 75%;
+    }
+}
+    
 @media only screen and (max-width: 600px) {
     /* текущий файл под курсором */
     .current-file {
@@ -311,7 +318,7 @@ a:hover, a:active {
     .text-file {
         background-image:none;
     }
-        
+    
     /* убираем заголовок*/
     .fm-header {
         display:none;
