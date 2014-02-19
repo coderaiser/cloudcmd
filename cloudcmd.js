@@ -104,7 +104,8 @@
     
     
     function init() {
-        var lServerDir,  lArg, lParams, lFiles;
+        var serverDir, params, filesList, isContain, argvFirst,
+            argv = process.argv;
         
         if (update)
             update.get();
@@ -114,60 +115,61 @@
          * (usually /) to it.
          * argv[1] - is always script name
          */
-        lServerDir = path.dirname(process.argv[1]) + '/';
+        serverDir = path.dirname(argv[1]) + '/';
         
-        if (DIR !== lServerDir) {
+        if (DIR !== serverDir) {
             Util.log('current dir: ' + DIR);
-            process.chdir(lServerDir);
+            process.chdir(serverDir);
         }
         
-        Util.log('server dir: ' + lServerDir);
+        Util.log('server dir: ' + serverDir);
         
         /* if command line parameter testing resolved 
          * setting config to testing, so server
          * not created, just init and
          * all logs writed to screen */
-        lArg = process.argv;
-        lArg = lArg[lArg.length - 1];
+        argvFirst    = argv[argv.length - 1];
+        isContain   = Util.isContainStr(argvFirst, 'test');
         
-        if ( lArg === 'test' ||  lArg === 'test\r') {
-            Util.log(process.argv);
+        if (isContain) {
+            Util.log(argv);
             Config.server  = false;
         }
         
         if (Config.logs) {
             Util.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
+            
             writeLogsToFile();
         }
         
-        lParams = {
+        params = {
             appcache    : appCacheProcessing,
             rest        : main.rest,
             route       : route
-        },
+        };
         
-        lFiles = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, LINK_TMPL];
+        filesList = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, LINK_TMPL];
         
         if (Config.ssl)
-            lFiles.push(KEY, CERT);
+            filesList.push(KEY, CERT);
         
-        files.read(lFiles, 'utf-8', function(pErrors, pFiles) {
-            if (pErrors)
-                Util.log(pErrors);
+        files.read(filesList, 'utf-8', function(errors, files) {
+            if (errors)
+                Util.log(errors);
             else {
-                FileTemplate    = pFiles[FILE_TMPL];
-                PanelTemplate   = pFiles[PANEL_TMPL];
-                PathTemplate    = pFiles[PATH_TMPL];
-                LinkTemplate    = pFiles[LINK_TMPL];
+                FileTemplate    = files[FILE_TMPL];
+                PanelTemplate   = files[PANEL_TMPL];
+                PathTemplate    = files[PATH_TMPL];
+                LinkTemplate    = files[LINK_TMPL];
                 
                 if (Config.ssl)
-                    lParams.ssl = {
-                        key     : pFiles[KEY],
-                        cert    : pFiles[CERT]
+                    params.ssl = {
+                        key     : files[KEY],
+                        cert    : files[CERT]
                     };
                 
-                server.start(lParams);
+                server.start(params);
             }
         });
     }
