@@ -217,12 +217,13 @@
                 main.sendFile(params);
             } else if (isFS) {
                 query   = main.getQuery(params.request),
-                sendContent(name, query, function(error, data, name, isFile) {
+                sendContent(name, query, function(name, error, data, isFile) {
                     if (error)
-                        main.sendError(pParams, error);
-                    else if (isFile)
-                        main.sendFile(pParams);
-                    else {
+                        main.sendError(params, error);
+                    else if (isFile) {
+                        params.name = name;
+                        main.sendFile(params);
+                    } else {
                         params.name = name;
                         main.sendResponse(params, data, true);
                     }
@@ -240,18 +241,15 @@
         name  = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
         
         fs.stat(name, function(error, stat) {
+            var func = Util.retExec(callback, name);
+            
             if (error)
-                Util.exec(callback, error);
+                func(error);
             else
                 if (!stat.isDirectory())
-                    Util.exec(callback, null, null, true);
+                    func(error, null, true);
                 else {
-                    processContent(name, query, function(name, error, data) {
-                        if (error) 
-                            Util.exec(callback, error);
-                        else
-                            Util.exec(callback, null, data, name);
-                    });
+                    processContent(name, query, callback);
                 }
        });
     }
