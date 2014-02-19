@@ -279,10 +279,6 @@ a:hover, a:active {
         color:white;
     }
     
-    .fm-header {
-        display:none;
-    }
-    
     /* меняем иконки на шрифтовые*/
     .mini-icon {
         color           : rgb(246, 224, 124);
@@ -317,7 +313,7 @@ a:hover, a:active {
     }
         
     /* убираем заголовок*/
-    .fm_header {
+    .fm-header {
         display:none;
     }
     
