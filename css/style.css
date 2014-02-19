@@ -272,10 +272,10 @@ a:hover, a:active {
         color:white;
     }
     /* делаем иконки под курсом белыми*/
-    .current-file > .mini-icon{
+    .current-file a {
         color:white;
     }
-    .current-file > .text-file::before {
+    .current-file .text-file::before {
         color:white;
     }
     
