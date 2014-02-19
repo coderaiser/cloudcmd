@@ -25,7 +25,7 @@
         INDEX_PATH  = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
         
-        KEY         = DIR + 'ssl/ssl.key',
+        KEY         = DIR   + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
         FILE_TMPL   = HTMLDIR + 'file.html',
@@ -89,16 +89,16 @@
      * init and process of appcache if it allowed in config
      */
     function appCacheProcessing() {
-        var lFONT_REMOTE    = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
-            lFONT_LOCAL     = './font/DroidSansMono.woff',
-            lJQUERY_REMOTE  = '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
-            lJQUERY_LOCAL   = './lib/client/jquery.js',
-            lFiles          = [{}, {}];
+        var FONT_REMOTE         = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
+            FONT_LOCAL          = './font/DroidSansMono.woff',
+            JQUERY_REMOTE       = '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
+            JQUERY_LOCAL        = './lib/client/jquery.js',
+            files               = [{}, {}];
             
-            lFiles[0][lFONT_REMOTE]     = lFONT_LOCAL;
-            lFiles[1][lJQUERY_REMOTE]   = lJQUERY_LOCAL;
+        files[0][FONT_REMOTE]   = FONT_LOCAL;
+        files[1][JQUERY_REMOTE] = JQUERY_LOCAL;
         
-        AppCache.addFiles(lFiles);
+        AppCache.addFiles(files);
         AppCache.createManifest();
     }
     
