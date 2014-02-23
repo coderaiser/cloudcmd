@@ -103,6 +103,7 @@ body {
 
 .cmd-button {
     width: 5%;
+    height: 30px;
     margin: 20px 2px 0 2px;
     color: #222;
     background-color: white;
