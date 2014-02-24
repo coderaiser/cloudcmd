@@ -246,7 +246,7 @@ body {
 }
 
 .files {
-    height: 85%;
+    height: 95%;
     padding: 0;
     margin: 0;
     overflow-y: auto;
@@ -268,9 +268,14 @@ a:hover, a:active {
 /* responsive design */
 
 @media only screen and (max-height: 800px) {
-.fm {
+    .fm {
         height: 75%;
     }
+    
+    .files {
+        height: 85%;
+    }
+
 }
     
 @media only screen and (max-width: 600px) {
