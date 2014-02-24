@@ -27,6 +27,7 @@ html {
 
 body {
     height: 95%;
+    width: 100%;
     font:16px "Droid Sans Mono";
     background-color:white;
 }
@@ -165,7 +166,8 @@ body {
 }
 .fm {
     height: 85%;
-    margin: 26px 26px 0 26px;
+    width: 97%;
+    margin: 26px auto 0 auto;
 }
 .fm-header {
     font-weight: bold;
@@ -189,9 +191,8 @@ body {
 }
 .panel {
     width: 46%;
-    height: 90%;
-    padding: 20px;
-    margin: 0;
+    height: 97%;
+    padding: 1%;
     border: 1.5px solid;
     border-color: rgb(49, 123, 249);
     border-color: rgba(49, 123, 249, .40);
@@ -345,7 +346,7 @@ a:hover, a:active {
 
 @media only screen and (max-width: 1155px) {
     .panel {
-        width:94%;
+        width:97%;
     }
     /* если правая панель не помещаеться - прячем её */
     .panel-right, .cmd-button#f5, .cmd-button#f6 {
