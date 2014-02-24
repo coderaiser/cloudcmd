@@ -28,10 +28,11 @@
         KEY         = DIR   + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
-        FILE_TMPL   = HTMLDIR + 'file.html',
-        PANEL_TMPL  = HTMLDIR + 'panel.html',
-        PATH_TMPL   = HTMLDIR + 'path.html',
-        LINK_TMPL   = HTMLDIR + 'link.html',
+        HTML_FS_DIR = HTMLDIR       + 'fs/',
+        FILE_TMPL   = HTML_FS_DIR   + 'file.html',
+        PANEL_TMPL  = HTML_FS_DIR   + 'panel.html',
+        PATH_TMPL   = HTML_FS_DIR   + 'path.html',
+        LINK_TMPL   = HTML_FS_DIR   + 'link.html',
         
         FileTemplate, PanelTemplate, PathTemplate, LinkTemplate,
         
