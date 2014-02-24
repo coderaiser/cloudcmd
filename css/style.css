@@ -279,6 +279,9 @@ a:hover, a:active {
 }
     
 @media only screen and (max-width: 600px) {
+    .panel {
+        font-size: 26px;
+    }
     /* текущий файл под курсором */
     .current-file {
         background-color: rgb(49, 123, 249);
@@ -308,7 +311,6 @@ a:hover, a:active {
     .name {
         float: none;
         width: 90%;
-        font-size: 18px;
         display: inline-block;
     }
     
