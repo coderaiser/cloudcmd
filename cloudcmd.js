@@ -22,13 +22,13 @@
         Minify      = main.minify,
         Config      = main.config,
         
-        INDEX_PATH  = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
         
         KEY         = DIR   + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
         HTML_FS_DIR = HTMLDIR       + 'fs/',
+        INDEX_PATH  = HTML_FS_DIR   + 'index.html',
         FILE_TMPL   = HTML_FS_DIR   + 'file.html',
         PANEL_TMPL  = HTML_FS_DIR   + 'panel.html',
         PATH_TMPL   = HTML_FS_DIR   + 'path.html',
