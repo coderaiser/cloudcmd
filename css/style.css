@@ -86,12 +86,13 @@ body {
 }
 
 .loading {
-    position    : relative;
-    top         : 1px;
-    display     : inline-block;
-    width       : 15px;
-    height      : 14.8px;
-    background  : url(/img/spinner.gif);
+    position        : relative;
+    top             : 1px;
+    display         : inline-block;
+    width           : 16px;
+    height          : 16px;
+    background      : url(/img/spinner.gif);
+    vertical-align  : top;
 }
 
 .refresh-icon {
