@@ -87,7 +87,7 @@ body {
 
 .loading {
     position        : relative;
-    top             : 1px;
+    top             : 2px;
     display         : inline-block;
     width           : 16px;
     height          : 16px;
