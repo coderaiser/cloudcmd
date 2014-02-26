@@ -2,7 +2,7 @@ Cloud Commander v0.8.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 ===============
 ###[Main][MainURL] [Blog][BlogURL] Live(![IO][IO_LIVE_IMG] [IO][IOURL], ![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg
-[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd/dev.svg
+[BuildStatusIMGURL]:        http://img.shields.io/travis/coderaiser/cloudcmd/dev.svg
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [FlattrIMGURL]:             https://img.shields.io/badge/flattr-donate-317BF9.svg
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg
