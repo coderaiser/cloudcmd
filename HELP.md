@@ -6,7 +6,7 @@ Cloud Commander v0.8.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
 [FlattrIMGURL]:             https://img.shields.io/badge/flattr-donate-317BF9.svg
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg
-[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
+[NPM_INFO_IMG]:             http://nodei.co/npm/cloudcmd.png
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
