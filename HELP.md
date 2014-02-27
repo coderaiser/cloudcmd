@@ -28,7 +28,7 @@ Cloud Commander v0.8.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 Benefits
 ---------------
 
-- Open Source.
+- Open Source (**MIT License**).
 - Has 2 classic ortodox panels.
 - Works on Windows, Linux and Mac OS.
 - Could be used local or remotly.
@@ -378,10 +378,6 @@ Version history
 - *2012.07.14*, **[v0.1.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.2.zip)**
 - *2012.07.11*, **[v0.1.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.1.zip)**
 - *2012.07.09*, **[v0.1.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.0.zip)**
-
-License
----------------
-MIT [license](LICENSE "license").
 
 Special Thanks
 ---------------
