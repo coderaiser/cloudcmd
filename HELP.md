@@ -21,7 +21,9 @@ Cloud Commander v0.8.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/host/cloudcmd.jit.su/fs?json "JitSu"
 [HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/fs?json "Heroku"
 
-**Cloud Commander** - cloud file manager with console and editor.
+**Cloud Commander** - cloud file manager with console and editor. Will help you: **create**, **edit**, **move** and **delete files** and **folders** in your favorite browser from any computer. File manager has two parts: 
+- **client** (with nice and simple interface)
+- **server** (based on Node.js).
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
@@ -34,6 +36,7 @@ Benefits
 - Could be used local or remotly.
 - Has nice console and editor.
 - Wrote on JavaScript/Node.js.
+- Works in browser.
 
 Install
 ---------------
