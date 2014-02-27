@@ -75,7 +75,8 @@ Hot keys
 - **Home**              - to begin of list
 - **End**               - to end of list
 - **Shift + Delete**    - remove without prompt
-- **Insert**            - select current file
+- **Space**             - select current file (and show size of directory)
+- **Insert**            - select current file (and move to next)
 - **Shift + F10**       - context menu
 - **~**                 - console
 - **Ctrl + Click**      - open file on new tab
