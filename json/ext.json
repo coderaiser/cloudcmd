@@ -56,7 +56,7 @@
     ".hh": "text/x-c",
     ".htm": "text/html",
     ".html": "text/html",
-    ".ico": "image/vnd.microsoft.icon",
+    ".ico": "image/x-icon",
     ".ics": "text/calendar",
     ".ifb": "text/calendar",
     ".iso": "application/octet-stream",
