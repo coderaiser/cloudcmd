@@ -68,8 +68,8 @@ Hot keys
 | `*`               | select/unselect all
 | `+`               | expand selection
 | `-`               | shrink selection
-| `Ctrl + r`        | reload dir content
-| `Ctrl + d`        | clear local cache (wich contains dir contents)
+| `Ctrl + r`        | refresh dir content
+| `Ctrl + d`        | clear local storage
 | `Alt  + q`        | disable key bindings
 | `Alt  + s`        | get all key bindings back
 | `Ctrl + a`        | select all files in a panel
