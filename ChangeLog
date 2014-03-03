@@ -1,3 +1,64 @@
+2014.03.03, v0.8.2
+
+fix:
+- (style) .loading: spinner size
+- (server) createRedirect: add sslPort
+- (server) http -> procol
+- (server) start: http -> HTTP
+- (dom) promptDeleteSelected: pCurrentFile -> current
+- (rest) onDelete: func(null, body) -> func
+- (rest) onStat: add var
+- (cloudcmd) change index path
+- (server) start: url -> URL
+- (server) start: SSLPort -> sslPort
+- (server) start: Port -> port
+- (dom) getCurrentDirPath: "," -> ";"
+- (dom) renameCurrent: rm dir listing from Storage
+- (client) loadDir: do not change dir after fail load
+- (cloudcmd) route: add name
+- (style) .files height: 95% -> 85%
+- (dom) setCurrent: set id of li to
+- (client) ajaxLoad: do not save path to history if content not load
+- (path) #js-path -> .js-path: 2 pathes on a page
+
+feature:
+- (package) rm pty.js
+- (view) rm spinner from doBefore, add to view
+- (package) add pty.js
+- (package) minify: v0.2.5 -> 0.2.6
+- (client) initModules doBefore: add filepicker
+- (menu) DOM.Images -> Images, "From Cloud" -> "From FilePicker"
+- (index) change favicon
+- (favicon) add
+- (ext) .ico: vnd.microsoft.icon -> x-icon
+- (index) hide .path-icon when no js
+- (style) .loading top: 1px -> 2px
+- (storage) get: ret -> this
+- (favicon) optimize img
+- (cloudcmd) optimize image
+- (deleteSelected) rm param notSet
+- (fs) add fs folder
+- (style) height < 800px: .fm height: 74%
+- (style) set bigger font for width < 600px
+- (style)if height < 800px: .fm height 85%
+- (css) html: change height
+- (style) show only part of name is to long
+- (index) add style for no js: hide keys, show one panel
+- (style) .cmd-button: height: 30px
+- (polyfill) rm localStorage
+- (refactor) .js-left -> [data=js-left]
+- (rest) add onFSPut
+- (style) change .fm height to 75% on small screen heights
+- (style) change name color on small screens
+- (style) rm duplicate .fm-header
+- (edit) add save on F2
+- (storage) change to async
+- (storage) add
+- (dom) add storage
+- (listeners) change touchend
+- (key) setCurrentByLatter: add numbers
+
+
 2014.02.13, v0.8.1
 
 fix:
