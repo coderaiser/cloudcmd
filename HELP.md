@@ -52,38 +52,40 @@ The installation of file manager is very simple.
 Hot keys
 ---------------
 
-- **F1**                - help
-- **F2**                - rename current file
-- **F3**                - view
-- **F4**                - edit
-- **F5**                - copy
-- **F6**                - rename/move
-- **F7**                - new dir
-- **F7** + **shift**    - new file
-- **F8, Delete**        - remove current file
-- **F9**                - menu
-- **F10**               - config
-- **(*)**               - select/unselect all
-- **(+)**               - expand selection
-- **(-)**               - shrink selection
-- **Ctrl + r**          - reload dir content
-- **Ctrl + d**          - clear local cache (wich contains dir contents)
-- **Alt  + q**          - disable key bindings
-- **Alt  + s**          - get all key bindings back
-- **Ctrl + a**          - select all files in a panel
-- **up, down, enter**   - filesystem navigation
-- **Ctrl + \**          - go to the root directory
-- **Tab**               - move via panels
-- **Page Up**           - up on one page
-- **Page Down**         - down on one page
-- **Home**              - to begin of list
-- **End**               - to end of list
-- **Shift + Delete**    - remove without prompt
-- **Space**             - select current file (and show size of directory)
-- **Insert**            - select current file (and move to next)
-- **Shift + F10**       - context menu
-- **~**                 - console
-- **Ctrl + Click**      - open file on new tab
+|Key                |Operation
+|:------------------|:--------------------------------------------
+| `F1`              | help
+| `F2`              | rename current file
+| `F3`              | view
+| `F4`              | edit
+| `F5`              | copy
+| `F6`              | rename/move
+| `F7`              | new dir
+| `F7` + `shift`    | new file
+| `F8, Delete`      | remove current file
+| `F9`              | menu
+| `F10`             | config
+| `*`               | select/unselect all
+| `+`               | expand selection
+| `-`               | shrink selection
+| `Ctrl + r`        | reload dir content
+| `Ctrl + d`        | clear local cache (wich contains dir contents)
+| `Alt  + q`        | disable key bindings
+| `Alt  + s`        | get all key bindings back
+| `Ctrl + a`        | select all files in a panel
+| `up, down, enter` | filesystem navigation
+| `Ctrl + \`        | go to the root directory
+| `Tab`             | move via panels
+| `Page Up`         | up on one page
+| `Page Down`       | down on one page
+| `Home`            | to begin of list
+| `End`             | to end of list
+| `Shift + Delete`  | remove without prompt
+| `Space`           | select current file (and show size of directory)
+| `Insert`          | select current file (and move to next)
+| `Shift + F10`     | context menu
+| `~`               | console
+| `Ctrl + Click`    | open file on new tab
 
 Edit
 ---------------
