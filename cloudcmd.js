@@ -22,16 +22,17 @@
         Minify      = main.minify,
         Config      = main.config,
         
-        INDEX_PATH  = HTMLDIR + 'index.html',
         CONFIG_PATH = JSONDIR + 'config.json',
         
-        KEY         = DIR + 'ssl/ssl.key',
+        KEY         = DIR   + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
-        FILE_TMPL   = HTMLDIR + 'file.html',
-        PANEL_TMPL  = HTMLDIR + 'panel.html',
-        PATH_TMPL   = HTMLDIR + 'path.html',
-        LINK_TMPL   = HTMLDIR + 'link.html',
+        HTML_FS_DIR = HTMLDIR       + 'fs/',
+        INDEX_PATH  = HTML_FS_DIR   + 'index.html',
+        FILE_TMPL   = HTML_FS_DIR   + 'file.html',
+        PANEL_TMPL  = HTML_FS_DIR   + 'panel.html',
+        PATH_TMPL   = HTML_FS_DIR   + 'path.html',
+        LINK_TMPL   = HTML_FS_DIR   + 'link.html',
         
         FileTemplate, PanelTemplate, PathTemplate, LinkTemplate,
         
@@ -83,29 +84,29 @@
         });
         
         return data;
-        
     }
     
     /**
      * init and process of appcache if it allowed in config
      */
     function appCacheProcessing() {
-        var lFONT_REMOTE    = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
-            lFONT_LOCAL     = './font/DroidSansMono.woff',
-            lJQUERY_REMOTE  = '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
-            lJQUERY_LOCAL   = './lib/client/jquery.js',
-            lFiles          = [{}, {}];
+        var FONT_REMOTE         = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
+            FONT_LOCAL          = './font/DroidSansMono.woff',
+            JQUERY_REMOTE       = '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
+            JQUERY_LOCAL        = './lib/client/jquery.js',
+            files               = [{}, {}];
             
-            lFiles[0][lFONT_REMOTE]     = lFONT_LOCAL;
-            lFiles[1][lJQUERY_REMOTE]   = lJQUERY_LOCAL;
+        files[0][FONT_REMOTE]   = FONT_LOCAL;
+        files[1][JQUERY_REMOTE] = JQUERY_LOCAL;
         
-        AppCache.addFiles(lFiles);
+        AppCache.addFiles(files);
         AppCache.createManifest();
     }
     
     
     function init() {
-        var lServerDir,  lArg, lParams, lFiles;
+        var serverDir, params, filesList, isContain, argvFirst,
+            argv = process.argv;
         
         if (update)
             update.get();
@@ -115,80 +116,80 @@
          * (usually /) to it.
          * argv[1] - is always script name
          */
-        lServerDir = path.dirname(process.argv[1]) + '/';
+        serverDir = path.dirname(argv[1]) + '/';
         
-        if (DIR !== lServerDir) {
+        if (DIR !== serverDir) {
             Util.log('current dir: ' + DIR);
-            process.chdir(lServerDir);
+            process.chdir(serverDir);
         }
         
-        Util.log('server dir: ' + lServerDir);
+        Util.log('server dir: ' + serverDir);
         
         /* if command line parameter testing resolved 
          * setting config to testing, so server
          * not created, just init and
          * all logs writed to screen */
-        lArg = process.argv;
-        lArg = lArg[lArg.length - 1];
+        argvFirst    = argv[argv.length - 1];
+        isContain   = Util.isContainStr(argvFirst, 'test');
         
-        if ( lArg === 'test' ||  lArg === 'test\r') {
-            Util.log(process.argv);
+        if (isContain) {
+            Util.log(argv);
             Config.server  = false;
         }
         
         if (Config.logs) {
             Util.log('log param setted up in config.json\n' +
                 'from now all logs will be writed to log.txt');
+            
             writeLogsToFile();
         }
         
-        lParams = {
+        params = {
             appcache    : appCacheProcessing,
             rest        : main.rest,
             route       : route
-        },
+        };
         
-        lFiles = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, LINK_TMPL];
+        filesList = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, LINK_TMPL];
         
         if (Config.ssl)
-            lFiles.push(KEY, CERT);
+            filesList.push(KEY, CERT);
         
-        files.read(lFiles, 'utf-8', function(pErrors, pFiles) {
-            if (pErrors)
-                Util.log(pErrors);
+        files.read(filesList, 'utf-8', function(errors, files) {
+            if (errors)
+                Util.log(errors);
             else {
-                FileTemplate    = pFiles[FILE_TMPL];
-                PanelTemplate   = pFiles[PANEL_TMPL];
-                PathTemplate    = pFiles[PATH_TMPL];
-                LinkTemplate    = pFiles[LINK_TMPL];
+                FileTemplate    = files[FILE_TMPL];
+                PanelTemplate   = files[PANEL_TMPL];
+                PathTemplate    = files[PATH_TMPL];
+                LinkTemplate    = files[LINK_TMPL];
                 
                 if (Config.ssl)
-                    lParams.ssl = {
-                        key     : pFiles[KEY],
-                        cert    : pFiles[CERT]
+                    params.ssl = {
+                        key     : files[KEY],
+                        cert    : files[CERT]
                     };
                 
-                server.start(lParams);
+                server.start(params);
             }
         });
     }
     
     function readConfig(callback) {
         fs.readFile(CONFIG_PATH, 'utf8', function(error, data) {
-            var msg, status, readed;
+            var status, json, msg;
             
             if (error) 
-                status = 'error';
+                status      = 'error';
             else {
-                status = 'ok';
-                readed = Util.parseJSON(data);
-                
-                main.config = Config = readed;
+                status      = 'ok';
+                json        = Util.parseJSON(data);
+                main.config = Config = json;
             }
-                
-            msg = CloudFunc.formatMsg('read', 'config', status);
-            Util.log(msg);
             
+            msg             = CloudFunc.formatMsg('read', 'config', status);
+            
+            Util.log(msg);
             Util.exec(callback);
         });
     }
@@ -197,7 +198,7 @@
      * routing of server queries
      */
     function route(request, response, callback) {
-        var ret, name, params, isAuth, isFS;
+        var ret, name, params, isAuth, isFS, query;
         
         if (request && response) {
             ret     = true;
@@ -216,9 +217,20 @@
                 
                 params.name = main.HTMLDIR + name + '.html';
                 main.sendFile(params);
-            } else if (isFS)
-                sendContent(params);
-            else {
+            } else if (isFS) {
+                query   = main.getQuery(params.request),
+                sendContent(name, query, function(name, error, data, isFile) {
+                    if (error)
+                        main.sendError(params, error);
+                    else if (isFile) {
+                        params.name = name;
+                        main.sendFile(params);
+                    } else {
+                        params.name = name;
+                        main.sendResponse(params, data, true);
+                    }
+                });
+            } else {
                 ret = false;
                 Util.exec(callback);
             }
@@ -227,74 +239,59 @@
         return ret;
     }
     
-    function sendContent(pParams) {
-        var p, lRet = main.checkParams(pParams);
+    function sendContent(name, query, callback) {
+        name  = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
         
-        if (lRet) {
-            p       = pParams;
-            p.name  = Util.removeStrOneTime(p.name, CloudFunc.FS) || main.SLASH;
+        fs.stat(name, function(error, stat) {
+            var func = Util.retExec(callback, name);
             
-            fs.stat(p.name, function(error, stat) {
-                if (error)
-                    main.sendError(pParams, error);
-                else
-                    if (stat.isDirectory())
-                        processContent(pParams);
-                    else
-                        main.sendFile(pParams);
-           });
-        }
-        
-        return lRet;
-    }
-    
-    function processContent(params) {
-        var p       = params,
-            ret     = main.checkParams(params);
-        
-        if (ret)
-            main.commander.getDirContent(p.name, function(error, json) {
-                var query, isJSON;
-                
-                if (error) 
-                    main.sendError(params, error);
+            if (error)
+                func(error);
+            else
+                if (!stat.isDirectory())
+                    func(error, null, true);
                 else {
-                    query       = main.getQuery(p.request);
-                    isJSON      = Util.isContainStr(query, 'json');
-                    
-                    if (!isJSON) 
-                        readIndex(json, params);
-                    else {
-                        p.data  = Util.stringifyJSON(json);
-                        p.name +='.json';
-                        main.sendResponse(params, null, true);
-                    }
+                    processContent(name, query, callback);
                 }
-            });
+       });
     }
     
-    function readIndex(pJSON, params) {
-        var p = params;
-        
+    function processContent(name, query, callback) {
+        main.commander.getDirContent(name, function(error, json) {
+            var data, name,
+                isJSON  = Util.isContainStr(query, 'json');
+                
+                if (!isJSON && !error) 
+                    readIndex(json, Util.retExec(callback, INDEX_PATH));
+                else {
+                    if (!error) {
+                        data  = Util.stringifyJSON(json);
+                        name +='.json';
+                    }
+                    
+                    Util.exec(callback, name, error, data);
+                }
+        });
+    }
+    
+    function readIndex(json, callback) {
         Util.ifExec(!Minify, function(params) {
             var name = params && params.name;
             
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
-                var panel,
+                var panel, data,
                     config  = main.config,
                     minify  = config.minify;
                 
-                if (error)
-                    main.sendError(p, error);
-                else {
-                    p.name  = INDEX_PATH,
-                    panel  = CloudFunc.buildFromJSON(pJSON, FileTemplate, PathTemplate, LinkTemplate),
-                    
-                    main.sendResponse(p, indexProcessing({
+                if (!error) {
+                    panel   = CloudFunc.buildFromJSON(json, FileTemplate, PathTemplate, LinkTemplate),
+                    data    = indexProcessing({
                         panel   : panel,
                         data    : template,
-                    }), true);
+                    });
                 }
+                
+                Util.exec(callback, error, data);
             });
         },  function(callback) {
                 Minify.optimize(INDEX_PATH, {

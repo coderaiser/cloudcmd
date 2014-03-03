@@ -22,11 +22,12 @@
 }
 
 html {
-    height: 100%;
+    height: 94%;
 }
 
 body {
     height: 95%;
+    width: 100%;
     font:16px "Droid Sans Mono";
     background-color:white;
 }
@@ -85,12 +86,13 @@ body {
 }
 
 .loading {
-    position    : relative;
-    top         : 1px;
-    display     : inline-block;
-    width       : 15px;
-    height      : 14.8px;
-    background  : url(/img/spinner.gif);
+    position        : relative;
+    top             : 2px;
+    display         : inline-block;
+    width           : 16px;
+    height          : 16px;
+    background      : url(/img/spinner.gif);
+    vertical-align  : top;
 }
 
 .refresh-icon {
@@ -103,6 +105,7 @@ body {
 
 .cmd-button {
     width: 5%;
+    height: 30px;
     margin: 20px 2px 0 2px;
     color: #222;
     background-color: white;
@@ -164,7 +167,8 @@ body {
 }
 .fm {
     height: 85%;
-    margin: 26px 26px 0 26px;
+    width: 97%;
+    margin: 26px auto 0 auto;
 }
 .fm-header {
     font-weight: bold;
@@ -188,9 +192,8 @@ body {
 }
 .panel {
     width: 46%;
-    height: 90%;
-    padding: 20px;
-    margin: 0;
+    height: 97%;
+    padding: 1%;
     border: 1.5px solid;
     border-color: rgb(49, 123, 249);
     border-color: rgba(49, 123, 249, .40);
@@ -264,7 +267,22 @@ a:hover, a:active {
  * друг-под-другом
 */
 /* responsive design */
+
+@media only screen and (max-height: 800px) {
+    .fm {
+        height: 74%;
+    }
+    
+    .files {
+        height: 85%;
+    }
+
+}
+    
 @media only screen and (max-width: 600px) {
+    .panel {
+        font-size: 26px;
+    }
     /* текущий файл под курсором */
     .current-file {
         background-color: rgb(49, 123, 249);
@@ -272,15 +290,11 @@ a:hover, a:active {
         color:white;
     }
     /* делаем иконки под курсом белыми*/
-    .current-file > .mini-icon{
+    .current-file a {
         color:white;
     }
-    .current-file > .text-file::before {
+    .current-file .text-file::before {
         color:white;
-    }
-    
-    .fm-header {
-        display:none;
     }
     
     /* меняем иконки на шрифтовые*/
@@ -288,9 +302,6 @@ a:hover, a:active {
         color           : rgb(246, 224, 124);
         color           : rgba(246, 224, 124, 0.56);
         font            : 16px 'Fontello';
-        width           : 6%;
-        margin-left     : 10px;
-        float           : left;
         background-image: none;
     }
     
@@ -300,8 +311,8 @@ a:hover, a:active {
     
     .name {
         float: none;
-        width: 100%;
-        font-size: 18px;
+        width: 90%;
+        display: inline-block;
     }
     
     .directory::before {
@@ -315,9 +326,9 @@ a:hover, a:active {
     .text-file {
         background-image:none;
     }
-        
+    
     /* убираем заголовок*/
-    .fm_header {
+    .fm-header {
         display:none;
     }
     
@@ -341,7 +352,7 @@ a:hover, a:active {
 
 @media only screen and (max-width: 1155px) {
     .panel {
-        width:94%;
+        width:97%;
     }
     /* если правая панель не помещаеться - прячем её */
     .panel-right, .cmd-button#f5, .cmd-button#f6 {

@@ -1,15 +1,17 @@
-Cloud Commander v0.8.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+Cloud Commander v0.8.2 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![License][LicenseIMGURL]][LicenseURL] [![Flattr][FlattrIMGURL]][FlattrURL]
 ===============
 ###[Main][MainURL] [Blog][BlogURL] Live(![IO][IO_LIVE_IMG] [IO][IOURL], ![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
-[NPMIMGURL]:                https://badge.fury.io/js/cloudcmd.png
-[BuildStatusIMGURL]:        https://secure.travis-ci.org/coderaiser/cloudcmd.png?branch=master
+[NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg
+[BuildStatusIMGURL]:        https://api.travis-ci.org/coderaiser/cloudcmd.png?branch=dev
 [DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
-[FlattrIMGURL]:             https://api.flattr.com/button/flattr-badge-large.png
-[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
+[FlattrIMGURL]:             https://img.shields.io/badge/flattr-donate-317BF9.svg
+[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg
+[NPM_INFO_IMG]:             http://nodei.co/npm/cloudcmd.png
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
-[BuildStatusURL]:           http://travis-ci.org/coderaiser/cloudcmd  "Build Status"
+[BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
 [FlattrURL]:                https://flattr.com/submit/auto?user_id=coderaiser&url=github.com/coderaiser/cloudcmd&title=cloudcmd&language=&tags=github&category=software "flattr"
+[LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [IOURL]:                    http://io.cloudcmd.io "IO"
@@ -19,53 +21,32 @@ Cloud Commander v0.8.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status]
 [JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/host/cloudcmd.jit.su/fs?json "JitSu"
 [HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/fs?json "Heroku"
 
-**Cloud Commander** - cloud file manager with console and editor.
+**Cloud Commander** - cloud file manager with console and editor. Will help you: **create**, **edit**, **move** and **delete files** and **folders** in your favorite browser from any computer. File manager has two parts: 
+- **client** (with nice and simple interface)
+- **server** (based on Node.js).
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
-
-[![Flattr][FlattrIMGURL]][FlattrURL]
 
 Benefits
 ---------------
 
-- Open Source.
+- Open Source (**MIT License**).
 - Has 2 classic ortodox panels.
 - Works on Windows, Linux and Mac OS.
 - Could be used local or remotly.
 - Has nice console and editor.
 - Wrote on JavaScript/Node.js.
+- Works in browser.
 
 Install
 ---------------
-[![NPM_INFO][NPM_INFO_IMG]][NPMURL]
 
-Installing **Cloud Commander** is very simple.
-All you need is 
+The installation of file manager is very simple.
 
-- install [node.js](http://nodejs.org/ "node.js")
-- [download](https://github.com/coderaiser/cloudcmd/archive/master.zip)
-and unpack or just clone repository from github:
+- install [node.js](http://nodejs.org/ "node.js") if you still have not.
+- install ```cloudcmd``` via ```npm``` with one simple command.
 
-```
-git clone git://github.com/coderaiser/cloudcmd.git
-cd cloudcmd
-npm install
-node cloudcmd
-```
-or install in npm:
-
-```
-npm install cloudcmd -g
-cloudcmd
-```
-
-Additional modules
----------------
-**Cloud Commander** could work without any modules installed.
-But for console, minification, file system operations etc, recommended
-install additional modules with next commnad (type in **Cloud Commander**'s directory):
-
-    npm install
+![NPM_INFO][NPM_INFO_IMG]
 
 Hot keys
 ---------------
@@ -77,7 +58,7 @@ Hot keys
 - **F5**                - copy
 - **F6**                - rename/move
 - **F7**                - new dir
-- **F7** + **shift**    = new file
+- **F7** + **shift**    - new file
 - **F8, Delete**        - remove current file
 - **F9**                - menu
 - **F10**               - config
@@ -97,7 +78,8 @@ Hot keys
 - **Home**              - to begin of list
 - **End**               - to end of list
 - **Shift + Delete**    - remove without prompt
-- **Insert**            - select current file
+- **Space**             - select current file (and show size of directory)
+- **Insert**            - select current file (and move to next)
 - **Shift + F10**       - context menu
 - **~**                 - console
 - **Ctrl + Click**      - open file on new tab
@@ -340,6 +322,7 @@ Additional modules list
 To extend capabilities of file manager next modules used:
 
 - [Ace]                     [AceURL]
+- [Minify]                  [MinifyURL]
 - [FancyBox]                [FancyBoxURL]
 - [jQuery-contextMenu]      [jQuery-contextMenuURL]
 - [jq-console]              [jq-consoleURL]
@@ -351,6 +334,7 @@ To extend capabilities of file manager next modules used:
 - [fs-extra]                [fs-extraURL]
 
 [AceURL]:                   http://ace.ajax.org/ "Ace"
+[MinifyURL]:                http://coderaiser.github.io/minify "Minify"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
 [jQuery-contextMenuURL]:    //github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
 [jq-consoleURL]:            //github.com/replit/jq-console "jq-console"
@@ -379,6 +363,7 @@ so to get it you should type a couple more commands:
 
 Version history
 ---------------
+- *2014.03.03*, **[v0.8.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.8.2.zip)**
 - *2014.02.13*, **[v0.8.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.8.1.zip)**
 - *2014.02.13*, **[v0.8.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.8.0.zip)**
 - *2013.12.09*, **[v0.7.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.7.0.zip)**
@@ -397,10 +382,6 @@ Version history
 - *2012.07.14*, **[v0.1.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.2.zip)**
 - *2012.07.11*, **[v0.1.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.1.zip)**
 - *2012.07.09*, **[v0.1.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.0.zip)**
-
-License
----------------
-MIT [license](LICENSE "license").
 
 Special Thanks
 ---------------
