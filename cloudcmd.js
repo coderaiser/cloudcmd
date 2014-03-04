@@ -239,15 +239,14 @@
         name  = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
         
         fs.stat(name, function(error, stat) {
-            var func = Util.retExec(callback, name);
+            var isFile,
+                isDir   = stat && stat.isDirectory(),
+                func    = Util.retExec(callback, name);
             
-            if (error)
-                func(error);
+            if (!error && isDir)
+                processContent(name, query, callback);
             else
-                if (!stat.isDirectory())
-                    func(null, null, true);
-                else
-                    processContent(name, query, callback);
+                func(error, null, !isDir);
        });
     }
     
