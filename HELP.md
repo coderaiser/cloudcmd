@@ -73,7 +73,7 @@ Hot keys
 | `Alt  + q`        | disable key bindings
 | `Alt  + s`        | get all key bindings back
 | `Ctrl + a`        | select all files in a panel
-| `up, down, enter` | filesystem navigation
+| `Up, Down, Enter` | filesystem navigation
 | `Ctrl + \`        | go to the root directory
 | `Tab`             | move via panels
 | `Page Up`         | up on one page
