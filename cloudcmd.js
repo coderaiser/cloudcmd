@@ -219,7 +219,7 @@
                 main.sendFile(params);
             } else if (isFS) {
                 query   = main.getQuery(params.request),
-                sendContent(name, query, function(name, error, data, isFile) {
+                getContent(name, query, function(name, error, data, isFile) {
                     if (error)
                         main.sendError(params, error);
                     else if (isFile) {
@@ -239,7 +239,7 @@
         return ret;
     }
     
-    function sendContent(name, query, callback) {
+    function getContent(name, query, callback) {
         name  = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
         
         fs.stat(name, function(error, stat) {
