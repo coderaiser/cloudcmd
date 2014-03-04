@@ -198,10 +198,9 @@
      * routing of server queries
      */
     function route(request, response, callback) {
-        var ret, name, params, isAuth, isFS, query;
+        var name, params, isAuth, isFS, query;
         
         if (request && response) {
-            ret     = true;
             name    = main.getPathName(request);
             isAuth  = Util.strCmp(name, ['/auth', '/auth/github']);
             isFS    = Util.strCmp(name, '/') || Util.isContainStrAtBegin(name, FS);
@@ -212,7 +211,9 @@
                 name        : name
             };
             
-            if (isAuth) {
+            if (!isAuth && !isFS)
+                Util.exec(callback);
+            else if (isAuth) {
                 Util.log('* Routing' + '-> ' + name);
                 
                 params.name = main.HTMLDIR + name + '.html';
@@ -230,13 +231,8 @@
                         main.sendResponse(params, data, true);
                     }
                 });
-            } else {
-                ret = false;
-                Util.exec(callback);
             }
         }
-        
-        return ret;
     }
     
     function getContent(name, query, callback) {
@@ -249,10 +245,9 @@
                 func(error);
             else
                 if (!stat.isDirectory())
-                    func(error, null, true);
-                else {
+                    func(null, null, true);
+                else
                     processContent(name, query, callback);
-                }
        });
     }
     
