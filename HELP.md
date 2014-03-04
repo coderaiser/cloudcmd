@@ -132,9 +132,9 @@ Right mouse click button shows context menu with items:
 - Delete
 - Zip file
 - (Un)Select All
-- Upload to (Dropbox, Github, GDrive)
+- Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
-- New (File, Dir, from cloud)
+- New (File, Dir, from FilePicker)
 
 ###Hot keys
 - **F9**                - open
