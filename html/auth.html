@@ -6,10 +6,11 @@
             (function(){
                 'use strict';
                 
-                var opener = window.opener;
+                var GitHub,
+                    opener = window.opener;
                 
-                if (opener){
-                    var GitHub = opener.CloudCmd.GitHub;
+                if (opener) {
+                    GitHub = opener.CloudCmd.GitHub;
                     GitHub.autorize(GitHub.callback, window.location.search);
                     window.close();
                 }
