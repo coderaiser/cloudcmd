@@ -251,12 +251,12 @@
     
     function getContent(name, callback) {
         fs.stat(name, function(error, stat) {
-            var isFile,
-                isDir   = stat && stat.isDirectory(),
-                func    = Util.retExec(callback);
+            var getDirContent   = main.commander.getDirContent,
+                isDir           = stat && stat.isDirectory(),
+                func            = Util.retExec(callback);
             
             if (!error && isDir)
-                main.commander.getDirContent(name, callback);
+                getDirContent(name, callback);
             else
                 func(error, null, !isDir);
        });
