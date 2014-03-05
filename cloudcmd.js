@@ -224,6 +224,7 @@
                 
                 getContent(name, function(error, data, isFile) {
                     var json,
+                        NOT_LOG = true,
                         query   = main.getQuery(request),
                         isJSON  = Util.isContainStr(query, 'json');
                     
@@ -235,7 +236,7 @@
                     } else if (isJSON) {
                         p.name +='.json';
                         json    = Util.stringifyJSON(data);
-                        main.sendResponse(p, json, true);
+                        main.sendResponse(p, json, NOT_LOG);
                     } else
                         readIndex(data, function(error, data) {
                             p.name = INDEX_PATH;
@@ -243,7 +244,7 @@
                             if (error)
                                 main.sendError(error);
                             else
-                                main.sendResponse(p, data, true); 
+                                main.sendResponse(p, data, NOT_LOG);
                         });
                 });
             }
