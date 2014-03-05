@@ -17,6 +17,7 @@
         AppCache    = main.appcache,
         Util        = main.util,
         update      = main.update,
+        dir         = main.dir,
         
         server      = main.librequire('server'),
         Minify      = main.minify,
@@ -250,9 +251,8 @@
     }
     
     function getContent(name, callback) {
-        fs.stat(name, function(error, stat) {
+        dir.isDir(name, function(error, isDir) {
             var getDirContent   = main.commander.getDirContent,
-                isDir           = stat && stat.isDirectory(),
                 func            = Util.retExec(callback);
             
             if (!error && isDir)
