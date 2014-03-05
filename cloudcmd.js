@@ -198,14 +198,14 @@
      * routing of server queries
      */
     function route(request, response, callback) {
-        var name, params, isAuth, isFS, query;
+        var name, p, isAuth, isFS, query;
         
         if (request && response) {
             name    = main.getPathName(request);
             isAuth  = Util.strCmp(name, ['/auth', '/auth/github']);
             isFS    = Util.strCmp(name, '/') || Util.isContainStrAtBegin(name, FS);
             
-            params  = {
+            p       = {
                 request     : request,
                 response    : response,
                 name        : name
@@ -216,56 +216,50 @@
             else if (isAuth) {
                 Util.log('* Routing' + '-> ' + name);
                 
-                params.name = main.HTMLDIR + name + '.html';
-                main.sendFile(params);
+                p.name = main.HTMLDIR + name + '.html';
+                main.sendFile(p);
             } else if (isFS) {
-                query   = main.getQuery(params.request),
-                getContent(name, query, function(name, error, data, isFile) {
+                name    = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
+                
+                getContent(name, function(error, data, isFile) {
+                    var json,
+                        query   = main.getQuery(request),
+                        isJSON  = Util.isContainStr(query, 'json');
+                    
                     if (error)
-                        main.sendError(params, error);
+                        main.sendError(p, error);
                     else if (isFile) {
-                        params.name = name;
-                        main.sendFile(params);
-                    } else {
-                        params.name = name;
-                        main.sendResponse(params, data, true);
-                    }
+                        p.name = name;
+                        main.sendFile(p);
+                    } else if (isJSON) {
+                        p.name +='.json';
+                        json    = Util.stringifyJSON(data);
+                        main.sendResponse(p, json, true);
+                    } else
+                        readIndex(data, function(error, data) {
+                            p.name = INDEX_PATH;
+                            
+                            if (error)
+                                main.sendError(error);
+                            else
+                                main.sendResponse(p, data, true); 
+                        });
                 });
             }
         }
     }
     
-    function getContent(name, query, callback) {
-        name  = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
-        
+    function getContent(name, callback) {
         fs.stat(name, function(error, stat) {
             var isFile,
                 isDir   = stat && stat.isDirectory(),
-                func    = Util.retExec(callback, name);
+                func    = Util.retExec(callback);
             
             if (!error && isDir)
-                processContent(name, query, callback);
+                main.commander.getDirContent(name, callback);
             else
                 func(error, null, !isDir);
        });
-    }
-    
-    function processContent(name, query, callback) {
-        main.commander.getDirContent(name, function(error, json) {
-            var data, name,
-                isJSON  = Util.isContainStr(query, 'json');
-                
-                if (!isJSON && !error) 
-                    readIndex(json, Util.retExec(callback, INDEX_PATH));
-                else {
-                    if (!error) {
-                        data  = Util.stringifyJSON(json);
-                        name +='.json';
-                    }
-                    
-                    Util.exec(callback, name, error, data);
-                }
-        });
     }
     
     function readIndex(json, callback) {
