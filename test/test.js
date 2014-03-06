@@ -10,10 +10,11 @@
         HTMLDIR             = main.HTMLDIR,
         files               = main.files,
         
-        TEMPLATEPATH        = HTMLDIR + 'file.html',
-        LINK_TEMPLATE_PATH  = HTMLDIR + 'link.html',
-        PATHTEMPLATE_PATH   = HTMLDIR + 'path.html',
-        EXPECT_PATH         = DIR + 'test/expect.html',
+        FS_DIR              = HTMLDIR   + 'fs/',
+        TEMPLATEPATH        = FS_DIR    + 'file.html',
+        LINK_TEMPLATE_PATH  = FS_DIR    + 'link.html',
+        PATHTEMPLATE_PATH   = FS_DIR    + 'path.html',
+        EXPECT_PATH         = DIR       + 'test/expect.html',
         
         Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH],
         
