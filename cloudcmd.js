@@ -180,7 +180,7 @@
                     return path.basename(name);
                 });
                 
-                msg             = CloudFunc.formatMsg('read', namesStr, status);
+                msg             = CloudFunc.formatMsg('read', names, status);
                 Util.log(msg);
                 
                 server.start(params);
