@@ -157,9 +157,15 @@
             filesList.push(KEY, CERT);
         
         files.read(filesList, 'utf-8', function(errors, files) {
-            if (errors)
+            var status, name, msg,
+                namesStr        = '';
+            
+            if (errors) {
+                status          = 'error';
                 Util.log(errors);
-            else {
+            } else {
+                status          = 'ok';
+                
                 FileTemplate    = files[FILE_TMPL];
                 PanelTemplate   = files[PANEL_TMPL];
                 PathTemplate    = files[PATH_TMPL];
@@ -170,6 +176,13 @@
                         key     : files[KEY],
                         cert    : files[CERT]
                     };
+                
+                namesStr     = filesList.map(function(name) {
+                    return path.basename(name);
+                });
+                
+                msg     = CloudFunc.formatMsg('read', namesStr, status);
+                Util.log(msg);
                 
                 server.start(params);
             }
