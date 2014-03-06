@@ -157,8 +157,7 @@
             filesList.push(KEY, CERT);
         
         files.read(filesList, 'utf-8', function(errors, files) {
-            var status, name, msg,
-                namesStr        = '';
+            var status, name, msg, names;
             
             if (errors) {
                 status          = 'error';
@@ -172,16 +171,16 @@
                 LinkTemplate    = files[LINK_TMPL];
                 
                 if (Config.ssl)
-                    params.ssl = {
+                    params.ssl  = {
                         key     : files[KEY],
                         cert    : files[CERT]
                     };
                 
-                namesStr     = filesList.map(function(name) {
+                names           = filesList.map(function(name) {
                     return path.basename(name);
                 });
                 
-                msg     = CloudFunc.formatMsg('read', namesStr, status);
+                msg             = CloudFunc.formatMsg('read', namesStr, status);
                 Util.log(msg);
                 
                 server.start(params);
