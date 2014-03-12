@@ -45,14 +45,14 @@ Hot keys
 |Key                |Operation
 |:------------------|:--------------------------------------------
 | `F1`              | help
-| `F2`              | rename current file
+| `F2`              | rename
 | `F3`              | view
 | `F4`              | edit
 | `F5`              | copy
 | `F6`              | rename/move
 | `F7`              | new dir
 | `Shift + F7`      | new file
-| `F8, Delete`      | remove current file
+| `F8, Delete`      | remove
 | `F9`              | menu
 | `F10`             | config
 | `*`               | select/unselect all
