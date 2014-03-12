@@ -22,7 +22,9 @@
 }
 
 html {
-    height: 94%;
+    height           : 94%;
+    /* fix overflow change of fancybox */
+    overflow         : hidden;
 }
 
 body {
