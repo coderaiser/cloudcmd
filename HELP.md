@@ -183,24 +183,24 @@ There is a couple easy and fast ways. One of them is port forwarding.
 Just run [shell/addtables.sh](shell/addtables.sh) for default options.
 
 ```sh
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules after
+# iptables -t nat -L # look rules before
+# iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+# iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+# iptables -t nat -L # look rules after
 ```
 
 You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
-
-    target     prot opt source               destination
-    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
-    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
-
+```
+target     prot opt source               destination
+REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
+REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
+```
 If you would want to get things back just clear rules ( **1** and **2** it's rule numbers,
 in your list they could differ).
 
 ```sh
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 2
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
+# iptables -t nat -D PREROUTING 2
+# iptables -t nat -D PREROUTING 1
 ```
 
 ###nginx
