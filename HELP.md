@@ -7,9 +7,9 @@ Cloud Commander v0.8.2
 [IOURL]:                    http://io.cloudcmd.io "IO"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
-[IO_LIVE_IMG]:              http://status-ok.cloudcmd.io/host/io.cloudcmd.io/fs?json "IO"
-[JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/host/cloudcmd.jit.su/fs?json "JitSu"
-[HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/fs?json "Heroku"
+[IO_LIVE_IMG]:              https://status-ok.cloudcmd.io/host/io.cloudcmd.io/fs?json "IO"
+[JitSu_LIVE_IMG]:           https://status-ok.cloudcmd.io/host/cloudcmd.jit.su/fs?json "JitSu"
+[HEROKU_LIVE_IMG]:          https://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/fs?json "Heroku"
 
 **Cloud Commander** - cloud file manager with console and editor. Will help you: **create**, **edit**, **move** and **delete files** and **folders** in your favorite browser from any computer. File manager has two parts: 
 
