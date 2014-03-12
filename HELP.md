@@ -58,7 +58,7 @@ Hot keys
 | `*`               | select/unselect all
 | `+`               | expand selection
 | `-`               | shrink selection
-| `Ctrl + r`        | refresh dir content
+| `Ctrl + r`        | refresh
 | `Ctrl + d`        | clear local storage
 | `Alt  + q`        | disable key bindings
 | `Alt  + s`        | get all key bindings back
