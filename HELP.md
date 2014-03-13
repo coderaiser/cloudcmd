@@ -53,6 +53,7 @@ Hot keys
 | `F7`              | new dir
 | `Shift + F7`      | new file
 | `F8, Delete`      | remove
+| `Shift + Delete`  | remove without prompt
 | `F9`              | menu
 | `F10`             | config
 | `*`               | select/unselect all
@@ -70,7 +71,6 @@ Hot keys
 | `Page Down`       | down on one page
 | `Home`            | to begin of list
 | `End`             | to end of list
-| `Shift + Delete`  | remove without prompt
 | `Space`           | select current file (and get size of directory)
 | `Insert`          | select current file (and move to next)
 | `Shift + F10`     | context menu
