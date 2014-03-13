@@ -1,14 +1,4 @@
-#console {
-    height: 400px;
-    width: 750px;
-    position:relative;
-    background-color: black;
-    border: 2px solid #CCC;
-    margin: 0 auto;
-    margin-top: 50px;
-}
-
-.error-msg{
+.error-msg {
     color: crimson;
 }
 
