@@ -11,10 +11,7 @@ Cloud Commander v0.8.2
 [JitSu_LIVE_IMG]:           https://status-ok.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
 [HEROKU_LIVE_IMG]:          https://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
-**Cloud Commander** - cloud file manager with console and editor. Will help you: **create**, **edit**, **move** and **delete files** and **folders** in your favorite browser from any computer. File manager has two parts: 
-
-- **client** (with nice and simple interface)
-- **server** (based on Node.js).
+**Cloud Commander** web based orthodox file manager with console and editor. Will help you manage the server and work with files, folders and programs in browser from any computer, mobile or tablet device.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
@@ -22,12 +19,15 @@ Benefits
 ---------------
 
 - Open Source (**MIT License**).
-- Has 2 classic ortodox panels.
-- Works on Windows, Linux and Mac OS.
+- Has 2 classic panels.
+- Optional **authorization**.
+- Clien works in web browser.
+- Server works on **Windows, Linux and Mac OS**.
 - Could be used local or remotly.
-- Has nice console and editor.
-- Written in JavaScript/Node.js.
-- Works in browser.
+- Adapting to screen size.
+- **Editor** with suport of **syntax highlighting** for over 110 languages.
+- **Console** with suport of default OS command line.
+- Written in **JavaScript/Node.js**.
 
 Install
 ---------------
@@ -38,6 +38,21 @@ The installation of file manager is very simple.
 - install ```cloudcmd``` via ```npm``` with one simple command.
 
 ![NPM_INFO][NPM_INFO_IMG]
+
+Start
+---------------
+To start **Cloud Commander** only one command needed:
+    
+    node cloudcmd
+or if you install with `-g` flag just type:
+
+    cloudcmd
+
+After that Cloud Commander reads port information from config file [config.json](json/config.json#L17 "Config") and start server
+on this port ( **8000** by default ), if none of port variables ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
+Then type in browser
+
+    http://127.0.0.1:8000
 
 Hot keys
 ---------------
@@ -278,22 +293,6 @@ do something like this:
     
     nohup node cloudcmd
 
-Start
----------------
-To start **Cloud Commander** only one command needed:
-    
-    node cloudcmd
-or on win platform just
-
-    cloudcmd
-After that Cloud Commander reads port information from config file [config.json](json/config.json#L17 "Config") and start server
-on this port ( **8000** by default ), if none of port variables ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
-Then type in browser
-
-    http://127.0.0.1:8000
-or
-
-    http://localhost:8000
 Update
 ---------------
 **Cloud Commander** is very often updates.
