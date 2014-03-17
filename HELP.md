@@ -57,40 +57,40 @@ Then type in browser
 Hot keys
 ---------------
 
-|Key                |Operation
-|:------------------|:--------------------------------------------
-| `F1`              | help
-| `F2`              | rename
-| `F3`              | view
-| `F4`              | edit
-| `F5`              | copy
-| `F6`              | rename/move
-| `F7`              | new dir
-| `Shift + F7`      | new file
-| `F8, Delete`      | remove
-| `Shift + Delete`  | remove without prompt
-| `F9`              | menu
-| `F10`             | config
-| `*`               | select/unselect all
-| `+`               | expand selection
-| `-`               | shrink selection
-| `Ctrl + r`        | refresh
-| `Ctrl + d`        | clear local storage
-| `Alt  + q`        | disable key bindings
-| `Alt  + s`        | get all key bindings back
-| `Ctrl + a`        | select all files in a panel
-| `Up, Down, Enter` | filesystem navigation
-| `Ctrl + \`        | go to the root directory
-| `Tab`             | move via panels
-| `Page Up`         | up on one page
-| `Page Down`       | down on one page
-| `Home`            | to begin of list
-| `End`             | to end of list
-| `Space`           | select current file (and get size of directory)
-| `Insert`          | select current file (and move to next)
-| `Shift + F10`     | context menu
-| `~`               | console
-| `Ctrl + Click`    | open file on new tab
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `F1`                  | help
+| `F2`                  | rename
+| `F3`                  | view
+| `F4`                  | edit
+| `F5`                  | copy
+| `F6`                  | rename/move
+| `F7`                  | new dir
+| `Shift + F7`          | new file
+| `F8`, `Delete`        | remove
+| `Shift + Delete`      | remove without prompt
+| `F9`                  | menu
+| `F10`                 | config
+| `*`                   | select/unselect all
+| `+`                   | expand selection
+| `-`                   | shrink selection
+| `Ctrl + r`            | refresh
+| `Ctrl + d`            | clear local storage
+| `Alt  + q`            | disable key bindings
+| `Alt  + s`            | get all key bindings back
+| `Ctrl + a`            | select all files in a panel
+| `Up`, `Down`, `Enter` | filesystem navigation
+| `Ctrl + \`            | go to the root directory
+| `Tab`                 | move via panels
+| `Page Up`             | up on one page
+| `Page Down`           | down on one page
+| `Home`                | to begin of list
+| `End`                 | to end of list
+| `Space`               | select current file (and get size of directory)
+| `Insert`              | select current file (and move to next)
+| `Shift + F10`         | context menu
+| `~`                   | console
+| `Ctrl + Click`        | open file on new tab
 
 Edit
 ---------------
