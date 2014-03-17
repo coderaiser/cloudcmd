@@ -15,10 +15,16 @@
 }
 
 @font-face {
-  font-family: 'Droid Sans Mono';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Droid Sans Mono'), local('DroidSansMono'), url('//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
+    font-family   : 'Droid Sans Mono'; 
+    src           : url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot);
+    src           : local('Droid Sans Mono'),
+                    local('DroidSansMono'),
+                    url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot?#iefix) format('embedded-opentype'),
+                    url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot) format('embedded-opentype'),
+                    url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff) format('woff'),
+                    local('Consolas');
+    font-style    : normal;
+    font-weight   : 400;
 }
 
 html {
@@ -31,7 +37,7 @@ body {
     width               : 100%;
     height              : 95%;
     font-size           : 16px;
-    font-family         : "Droid Sans Mono", "Ubuntu Monospace", "Consolas", monospace;
+    font-family         : "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
     background-color    : white;
 }
 
