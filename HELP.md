@@ -21,7 +21,7 @@ Benefits
 - Open Source (**MIT License**).
 - Has 2 classic panels.
 - Optional **authorization**.
-- Clien works in web browser.
+- Client works in web browser.
 - Server works on **Windows, Linux and Mac OS**.
 - Could be used local or remotly.
 - Adapting to screen size.
