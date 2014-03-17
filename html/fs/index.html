@@ -51,18 +51,32 @@
                     lib     + 'client.js',
                     client  + 'listeners.js',
                     client  + 'key.js'
-                ],
-                url             = getJoinURL(files);
+                ];
             
-            window.addEventListener('load', createScript);
+            window.addEventListener('load', load);
             
-            function createScript() {
+            function load() {
+                var urlFiles     = getJoinURL(files);
+                
+                createScript(urlFiles, function() {
+                    CloudCmd.init();
+                });
+                
+                window.removeEventListener('load', load);
+            }
+            
+            function createScript(url, callback) {
                 script          = document.createElement('script');
                 script.src      = url;
                 script.async    = true;
-                script.addEventListener('load', scriptLoad);
+                
+                if (callback)
+                    script.addEventListener('load', function(event) {
+                        callback(event);
+                        script.removeEventListener('load', callback);
+                    });
+                
                 document.body.appendChild(script);
-                window.removeEventListener('load', createScript);
             }
             
             function getJoinURL(files) {
@@ -72,11 +86,6 @@
                 url = url.replace(regExp, ':');
                 
                 return url;
-            }
-            
-            function scriptLoad() {
-                CloudCmd.init();
-                script.removeEventListener('load', scriptLoad);
             }
         })();
     </script>
