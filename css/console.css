@@ -34,8 +34,8 @@
     color: #4a473a
 }
 .jqconsole-old-prompt {
-    color: #b7b4a8;
-    font-weight: normal;
+    font-weight : normal;
+    color       : #b7b4a8;
 }
 
 .brace {
