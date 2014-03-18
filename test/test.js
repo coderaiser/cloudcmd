@@ -35,12 +35,12 @@
         
         
         Expect =
-            '<div data-name="js-path" class="reduce-text" title="/etc/X11/">'          +
+            '<div data-name="js-path" class="reduce-text" title="/etc/X11/">'   +
                 '<span class="path-icon clear-storage" '                        +
                     'title="clear storage (Ctrl+D)">'                           +
                 '</span>'                                                       +
                 '<a data-name="js-refresh" href="/fs/etc/X11" '                 +
-                'class="path-icon refresh-icon" title="refresh (Ctrl+R)">'      +
+                'class="path-icon refresh-icon" title="refresh (Ctrl+R)"></a>'  +
                 '<span class=links>'                                            +
                     '<a href="/fs" title="/">/</a>'                             +
                     '<a href="/fs/etc" title="/etc">'                           +
