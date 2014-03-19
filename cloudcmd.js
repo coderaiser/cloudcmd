@@ -17,6 +17,7 @@
         AppCache    = main.appcache,
         Util        = main.util,
         update      = main.update,
+        dir         = main.dir,
         
         server      = main.librequire('server'),
         Minify      = main.minify,
@@ -156,19 +157,31 @@
             filesList.push(KEY, CERT);
         
         files.read(filesList, 'utf-8', function(errors, files) {
-            if (errors)
+            var status, name, msg, names;
+            
+            if (errors) {
+                status          = 'error';
                 Util.log(errors);
-            else {
+            } else {
+                status          = 'ok';
+                
                 FileTemplate    = files[FILE_TMPL];
                 PanelTemplate   = files[PANEL_TMPL];
                 PathTemplate    = files[PATH_TMPL];
                 LinkTemplate    = files[LINK_TMPL];
                 
                 if (Config.ssl)
-                    params.ssl = {
+                    params.ssl  = {
                         key     : files[KEY],
                         cert    : files[CERT]
                     };
+                
+                names           = filesList.map(function(name) {
+                    return path.basename(name);
+                });
+                
+                msg             = CloudFunc.formatMsg('read', names, status);
+                Util.log(msg);
                 
                 server.start(params);
             }
@@ -198,80 +211,68 @@
      * routing of server queries
      */
     function route(request, response, callback) {
-        var ret, name, params, isAuth, isFS, query;
+        var name, p, isAuth, isFS, query;
         
         if (request && response) {
-            ret     = true;
             name    = main.getPathName(request);
             isAuth  = Util.strCmp(name, ['/auth', '/auth/github']);
             isFS    = Util.strCmp(name, '/') || Util.isContainStrAtBegin(name, FS);
             
-            params  = {
+            p       = {
                 request     : request,
                 response    : response,
                 name        : name
             };
             
-            if (isAuth) {
+            if (!isAuth && !isFS)
+                Util.exec(callback);
+            else if (isAuth) {
                 Util.log('* Routing' + '-> ' + name);
                 
-                params.name = main.HTMLDIR + name + '.html';
-                main.sendFile(params);
+                p.name = main.HTMLDIR + name + '.html';
+                main.sendFile(p);
             } else if (isFS) {
-                query   = main.getQuery(params.request),
-                sendContent(name, query, function(name, error, data, isFile) {
+                name    = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
+                
+                getContent(name, function(error, data, isFile) {
+                    var json,
+                        NOT_LOG = true,
+                        query   = main.getQuery(request),
+                        isJSON  = Util.isContainStr(query, 'json');
+                    
                     if (error)
-                        main.sendError(params, error);
+                        main.sendError(p, error);
                     else if (isFile) {
-                        params.name = name;
-                        main.sendFile(params);
-                    } else {
-                        params.name = name;
-                        main.sendResponse(params, data, true);
-                    }
+                        p.name = name;
+                        main.sendFile(p);
+                    } else if (isJSON) {
+                        p.name +='.json';
+                        json    = Util.stringifyJSON(data);
+                        main.sendResponse(p, json, NOT_LOG);
+                    } else
+                        readIndex(data, function(error, data) {
+                            p.name = INDEX_PATH;
+                            
+                            if (error)
+                                main.sendError(error);
+                            else
+                                main.sendResponse(p, data, NOT_LOG);
+                        });
                 });
-            } else {
-                ret = false;
-                Util.exec(callback);
             }
         }
-        
-        return ret;
     }
     
-    function sendContent(name, query, callback) {
-        name  = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
-        
-        fs.stat(name, function(error, stat) {
-            var func = Util.retExec(callback, name);
+    function getContent(name, callback) {
+        dir.isDir(name, function(error, isDir) {
+            var getDirContent   = main.commander.getDirContent,
+                func            = Util.retExec(callback);
             
-            if (error)
-                func(error);
+            if (!error && isDir)
+                getDirContent(name, callback);
             else
-                if (!stat.isDirectory())
-                    func(error, null, true);
-                else {
-                    processContent(name, query, callback);
-                }
+                func(error, null, !isDir);
        });
-    }
-    
-    function processContent(name, query, callback) {
-        main.commander.getDirContent(name, function(error, json) {
-            var data, name,
-                isJSON  = Util.isContainStr(query, 'json');
-                
-                if (!isJSON && !error) 
-                    readIndex(json, Util.retExec(callback, INDEX_PATH));
-                else {
-                    if (!error) {
-                        data  = Util.stringifyJSON(json);
-                        name +='.json';
-                    }
-                    
-                    Util.exec(callback, name, error, data);
-                }
-        });
     }
     
     function readIndex(json, callback) {

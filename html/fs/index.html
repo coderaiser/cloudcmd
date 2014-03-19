@@ -4,40 +4,14 @@
         <meta charset="utf-8">
         <meta name="robots" content="noindex,nofollow">
         <!-- mobile first design -->
-        <meta content="width=device-width,initial-scale=1" name="viewport" />
-        <!-- chrome frame -->
-        <meta http-equiv="X-UA-Compatible" content=" chrome=1" />
+        <meta content="width=device-width,initial-scale=1" name="viewport">
         <link rel="icon" href="/favicon.ico" />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href=/join/css/reset.css:css/style.css:css/icons.css>
+        <link rel=stylesheet href=/join/css/reset.css:css/style.css:css/icons.css:css/help.css>
         
         <noscript>
-            <style>
-                .path-icon, .keyspanel {
-                    display: none;
-                }
-                
-                .links {
-                    margin-left: 16px;
-                }
-                
-                .fm {
-                    height: 100%;
-                }
-                
-                .panel-right {
-                    display: none;
-                }
-                
-                .panel-left {
-                    width: 97%;
-                }
-                
-                .name a:hover {
-                    cursor: pointer;
-                }
-            </style>
+            <link rel=stylesheet href="/css/nojs.css">
         </noscript>
     </head>
     <body>
@@ -68,24 +42,39 @@
                     lib     + 'util.js',
                     lib     + 'cloudfunc.js',
                     client  + 'dom.js',
+                    client  + 'rest.js',
                     client  + 'loader.js',
                     client  + 'notify.js',
                     client  + 'storage.js',
                     lib     + 'client.js',
                     client  + 'listeners.js',
                     client  + 'key.js'
-                ],
-                url             = getJoinURL(files);
+                ];
             
-            window.addEventListener('load', createScript);
+            window.addEventListener('load', load);
             
-            function createScript() {
+            function load() {
+                var urlFiles     = getJoinURL(files);
+                
+                createScript(urlFiles, function() {
+                    CloudCmd.init();
+                });
+                
+                window.removeEventListener('load', load);
+            }
+            
+            function createScript(url, callback) {
                 script          = document.createElement('script');
                 script.src      = url;
                 script.async    = true;
-                script.addEventListener('load', scriptLoad);
+                
+                if (callback)
+                    script.addEventListener('load', function(event) {
+                        callback(event);
+                        script.removeEventListener('load', callback);
+                    });
+                
                 document.body.appendChild(script);
-                window.removeEventListener('load', createScript);
             }
             
             function getJoinURL(files) {
@@ -95,11 +84,6 @@
                 url = url.replace(regExp, ':');
                 
                 return url;
-            }
-            
-            function scriptLoad() {
-                CloudCmd.init();
-                script.removeEventListener('load', scriptLoad);
             }
         })();
     </script>

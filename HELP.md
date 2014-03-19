@@ -1,18 +1,15 @@
-Cloud Commander v0.8.2
+Cloud Commander v0.8.3
 ===============
-###[Main][MainURL] [Blog][BlogURL] Live(![IO][IO_LIVE_IMG] [IO][IOURL], ![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [IOURL]:                    http://io.cloudcmd.io "IO"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
-[IO_LIVE_IMG]:              http://status-ok.cloudcmd.io/host/io.cloudcmd.io/fs?json "IO"
-[JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/host/cloudcmd.jit.su/fs?json "JitSu"
-[HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/fs?json "Heroku"
+[IO_LIVE_IMG]:              https://status-ok.cloudcmd.io/host/io.cloudcmd.io/img/txt.png "IO"
+[JitSu_LIVE_IMG]:           https://status-ok.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
+[HEROKU_LIVE_IMG]:          https://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
-**Cloud Commander** - cloud file manager with console and editor. Will help you: **create**, **edit**, **move** and **delete files** and **folders** in your favorite browser from any computer. File manager has two parts: 
-- **client** (with nice and simple interface)
-- **server** (based on Node.js).
+**Cloud Commander** web based orthodox file manager with console and editor. Will help you manage the server and work with files, folders and programs in browser from any computer, mobile or tablet device.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
@@ -20,12 +17,15 @@ Benefits
 ---------------
 
 - Open Source (**MIT License**).
-- Has 2 classic ortodox panels.
-- Works on Windows, Linux and Mac OS.
+- Has 2 classic panels.
+- Optional **authorization**.
+- Client works in web browser.
+- Server works on **Windows, Linux and Mac OS**.
 - Could be used local or remotly.
-- Has nice console and editor.
-- Wrote on JavaScript/Node.js.
-- Works in browser.
+- Adapting to screen size.
+- **Editor** with suport of **syntax highlighting** for over 110 languages.
+- **Console** with suport of default OS command line.
+- Written in **JavaScript/Node.js**.
 
 Install
 ---------------
@@ -37,41 +37,58 @@ The installation of file manager is very simple.
 
 ![NPM_INFO][NPM_INFO_IMG]
 
+Start
+---------------
+To start **Cloud Commander** only one command needed:
+    
+    node cloudcmd
+or if you install with `-g` flag just type:
+
+    cloudcmd
+
+After that Cloud Commander reads port information from config file [config.json](json/config.json#L17 "Config") and start server
+on this port ( **8000** by default ), if none of port variables ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
+Then type in browser
+
+    http://127.0.0.1:8000
+
 Hot keys
 ---------------
 
-- **F1**                - help
-- **F2**                - rename current file
-- **F3**                - view
-- **F4**                - edit
-- **F5**                - copy
-- **F6**                - rename/move
-- **F7**                - new dir
-- **F7** + **shift**    - new file
-- **F8, Delete**        - remove current file
-- **F9**                - menu
-- **F10**               - config
-- **(*)**               - select/unselect all
-- **(+)**               - expand selection
-- **(-)**               - shrink selection
-- **Ctrl + r**          - reload dir content
-- **Ctrl + d**          - clear local cache (wich contains dir contents)
-- **Alt  + q**          - disable key bindings
-- **Alt  + s**          - get all key bindings back
-- **Ctrl + a**          - select all files in a panel
-- **up, down, enter**   - filesystem navigation
-- **Ctrl + \**          - go to the root directory
-- **Tab**               - move via panels
-- **Page Up**           - up on one page
-- **Page Down**         - down on one page
-- **Home**              - to begin of list
-- **End**               - to end of list
-- **Shift + Delete**    - remove without prompt
-- **Space**             - select current file (and show size of directory)
-- **Insert**            - select current file (and move to next)
-- **Shift + F10**       - context menu
-- **~**                 - console
-- **Ctrl + Click**      - open file on new tab
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `F1`                  | help
+| `F2`                  | rename
+| `F3`                  | view
+| `F4`                  | edit
+| `F5`                  | copy
+| `F6`                  | rename/move
+| `F7`                  | new dir
+| `Shift + F7`          | new file
+| `F8`, `Delete`        | remove
+| `Shift + Delete`      | remove without prompt
+| `F9`                  | menu
+| `F10`                 | config
+| `*`                   | select/unselect all
+| `+`                   | expand selection
+| `-`                   | shrink selection
+| `Ctrl + r`            | refresh
+| `Ctrl + d`            | clear local storage
+| `Alt  + q`            | disable key bindings
+| `Alt  + s`            | get all key bindings back
+| `Ctrl + a`            | select all files in a panel
+| `Up`, `Down`, `Enter` | filesystem navigation
+| `Ctrl + \`            | go to the root directory
+| `Tab`                 | move via panels
+| `Page Up`             | up on one page
+| `Page Down`           | down on one page
+| `Home`                | to begin of list
+| `End`                 | to end of list
+| `Space`               | select current file (and get size of directory)
+| `Insert`              | select current file (and move to next)
+| `Shift + F10`         | context menu
+| `~`                   | console
+| `Ctrl + Click`        | open file on new tab
 
 Edit
 ---------------
@@ -118,9 +135,9 @@ Right mouse click button shows context menu with items:
 - Delete
 - Zip file
 - (Un)Select All
-- Upload to (Dropbox, Github, GDrive)
+- Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
-- New (File, Dir, from cloud)
+- New (File, Dir, from FilePicker)
 
 ###Hot keys
 - **F9**                - open
@@ -179,24 +196,24 @@ There is a couple easy and fast ways. One of them is port forwarding.
 Just run [shell/addtables.sh](shell/addtables.sh) for default options.
 
 ```sh
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules before
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -L # look rules after
+# iptables -t nat -L # look rules before
+# iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+# iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+# iptables -t nat -L # look rules after
 ```
 
 You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
-
-    target     prot opt source               destination
-    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
-    REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
-
+```
+target     prot opt source               destination
+REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
+REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
+```
 If you would want to get things back just clear rules ( **1** and **2** it's rule numbers,
 in your list they could differ).
 
 ```sh
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 2
-@:/tmp/cloudcmd (dev) $ sudo iptables -t nat -D PREROUTING 1
+# iptables -t nat -D PREROUTING 2
+# iptables -t nat -D PREROUTING 1
 ```
 
 ###nginx
@@ -274,22 +291,6 @@ do something like this:
     
     nohup node cloudcmd
 
-Start
----------------
-To start **Cloud Commander** only one command needed:
-    
-    node cloudcmd
-or on win platform just
-
-    cloudcmd
-After that Cloud Commander reads port information from config file [config.json](json/config.json#L17 "Config") and start server
-on this port ( **8000** by default ), if none of port variables ( *cloud9*, *cloudfoundry* and *nodester* ) isn't exist.
-Then type in browser
-
-    http://127.0.0.1:8000
-or
-
-    http://localhost:8000
 Update
 ---------------
 **Cloud Commander** is very often updates.
@@ -352,6 +353,7 @@ so to get it you should type a couple more commands:
 
 Version history
 ---------------
+- *2014.03.19*, **[v0.8.3](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.8.3.zip)**
 - *2014.03.03*, **[v0.8.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.8.2.zip)**
 - *2014.02.13*, **[v0.8.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.8.1.zip)**
 - *2014.02.13*, **[v0.8.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.8.0.zip)**

@@ -1,0 +1,51 @@
+.error-msg {
+    color: crimson;
+}
+
+.log-msg{
+    color: #444;
+}
+
+.error-msg, .log-msg{
+    display                 : block;
+    padding                 : 10px;
+    margin                  : 10px;
+    font                    : 16px "Droid Sans Mono";
+    background              : beige;
+    -webkit-border-radius   : 5px;
+    -moz-border-radius      : 5px;
+    border-radius           : 5px;
+}
+
+.jqconsole {
+    padding         : 10px;
+    padding-bottom  : 10px;
+    background      : #fffdf9;
+}
+
+.jqconsole-cursor {
+    background-color: #999;
+}
+.jqconsole-blurred .jqconsole-cursor {
+    background-color: #666;
+}
+.jqconsole-prompt {
+    color: #4a473a
+}
+.jqconsole-old-prompt {
+    font-weight : normal;
+    color       : #b7b4a8;
+}
+
+.brace {
+    color: #00FFFF;
+}
+.paran {
+    color: #FF00FF;
+}
+.bracket {
+    color: #FFFF00;
+}
+.jqconsole-composition {
+    background-color: red;
+}
