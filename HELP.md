@@ -1,5 +1,6 @@
 Cloud Commander v0.8.3
 ===============
+[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars "npm install cloudcmd"
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [IOURL]:                    http://io.cloudcmd.io "IO"
