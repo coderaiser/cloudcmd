@@ -22,7 +22,7 @@ Benefits
 - Has 2 classic panels.
 - Optional **authorization**.
 - Client works in web browser.
-- Server works on **Windows, Linux and Mac OS**.
+- Server works on **Windows**, **Linux** and **Mac OS**.
 - Could be used local or remotly.
 - Adapting to screen size.
 - **Editor** with suport of **syntax highlighting** for over 110 languages.
