@@ -1,3 +1,79 @@
+2014.03.19, v0.8.3
+
+fix:
+- (test) draggable
+- (test) draggable -> draggable="true
+- (test) add /a
+- (test) span>a -> a
+- (test) data -> data-name
+- (join) response -> res
+- (dom) loadCurrentTime: lCurrent -> current
+- (put) patchFiles: write(name, error) -> onWrite(error)
+- (util) execOnMatch: isMatch -> match
+- (worker-html) addAttributesToElement: attributes could be undefined
+- (cloudfunc) "taget" -> "target "
+- (index) meta: "/>" -> ">"
+- (css) fancybox: stop page jumping on modal window close
+- (ischanged) on asyncCall Times do not changed
+- (server) beforeJoin: exec -> retExec
+- (join) readPipe: add path
+- (join) readPipe: response -> res
+- (server) beforeJoin: funcs -> func = []
+- (rest) onDelete: if Files is empty names = p.name
+- (style) fancybox html: overflow hidden
+- (dom) renameCurrent: add updateCurrentInfo
+- (files) readPipe: add dir
+- (delete) add dir
+- (test) add FS_DIR
+- (cloudcmd) init: nameStr -> names
+- (github) rm code
+
+feature:
+- (cloudfunc) draggable -> draggable="true"
+- (font) droid mono: add eot
+- (index) rm chrome frame
+- (console) rm background-color
+- (rest) add CloudFunc
+- (pipe) getBody: add error handling
+- (pipe) getBody: add error handling
+- (edit) onSave: add setCurrentSize
+- (style) Droid Sans Mono: speed up when minimize
+- (font) Droid Sans: add eot
+- (css) Droid Sans Mono: add more formats
+- (style) add fallback fonts
+- (package) description: web based orthodox
+- (util) add execOnMatch
+- (files) rm dir
+- (nojs) add
+- (join) mv from server
+- (console) jqconsole -> console
+- (dom) add sendDelete
+- (rest) delete: data is optional param
+- (rest) write -> save
+- (rest) add markdown get
+- (markdown) add
+- (rest) mv rest from dom
+- (fancybox) add ico
+- (put) patch: change message
+- (cloudfunc) add MAX_FILE_SIZE
+- (put) pathch: add size check
+- (ace) 1.1.3
+- (markdown) add
+- (dom) rest: add markdown
+- (help) mv css to file
+- (rest) add markdown
+- (edit) set emmet only for html, not for css
+- (util) rm convertArrToObj
+- (pipe) add getBody
+- (put) add getBody
+- (cloudcmd, rest) add NOT_LOG
+- (dir) add isDir
+- (view) style: add overflow-y hidden
+- (panel) div -> section
+- (util) ownRender: clean all params after render
+- (file) add attribute, tag
+
+
 2014.03.03, v0.8.2
 
 fix:
