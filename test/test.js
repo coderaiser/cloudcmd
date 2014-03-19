@@ -10,10 +10,11 @@
         HTMLDIR             = main.HTMLDIR,
         files               = main.files,
         
-        TEMPLATEPATH        = HTMLDIR + 'file.html',
-        LINK_TEMPLATE_PATH  = HTMLDIR + 'link.html',
-        PATHTEMPLATE_PATH   = HTMLDIR + 'path.html',
-        EXPECT_PATH         = DIR + 'test/expect.html',
+        FS_DIR              = HTMLDIR   + 'fs/',
+        TEMPLATEPATH        = FS_DIR    + 'file.html',
+        LINK_TEMPLATE_PATH  = FS_DIR    + 'link.html',
+        PATHTEMPLATE_PATH   = FS_DIR    + 'path.html',
+        EXPECT_PATH         = DIR       + 'test/expect.html',
         
         Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH],
         
@@ -34,12 +35,12 @@
         
         
         Expect =
-            '<div data="js-path" class="reduce-text" title="/etc/X11/">'          +
+            '<div data-name="js-path" class="reduce-text" title="/etc/X11/">'   +
                 '<span class="path-icon clear-storage" '                        +
                     'title="clear storage (Ctrl+D)">'                           +
                 '</span>'                                                       +
-                '<span class="path-icon refresh-icon" title="refresh (Ctrl+R)">'+
-                    '<a href="/fs/etc/X11"></a></span>'                         +
+                '<a data-name="js-refresh" href="/fs/etc/X11" '                 +
+                'class="path-icon refresh-icon" title="refresh (Ctrl+R)"></a>'  +
                 '<span class=links>'                                            +
                     '<a href="/fs" title="/">/</a>'                             +
                     '<a href="/fs/etc" title="/etc">'                           +

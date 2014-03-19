@@ -15,21 +15,32 @@
 }
 
 @font-face {
-  font-family: 'Droid Sans Mono';
-  font-style: normal;
-  font-weight: normal;
-  src: local('Droid Sans Mono'), local('DroidSansMono'), url('//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff') format('woff');
+    font-family     : 'Droid Sans Mono'; 
+    src             : url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot);
+    src             : local('Droid Sans Mono'),
+                        local('DroidSansMono'),
+                        url(/font/DroidSansMono.eot) format('embedded-opentype'),
+                        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot?#iefix) format('embedded-opentype'),
+                        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot) format('embedded-opentype'),
+                        url(/font/DroidSansMono.woff) format('woff'),
+                        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff) format('woff'),
+                        local('Consolas');
+    font-style      : normal;
+    font-weight     : 400;
 }
 
 html {
-    height: 94%;
+    height           : 94%;
 }
 
 body {
-    height: 95%;
-    width: 100%;
-    font:16px "Droid Sans Mono";
-    background-color:white;
+    width               : 100%;
+    height              : 95%;
+    /* fix overflow change of fancybox */
+    overflow            : hidden;
+    font-family         : "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
+    font-size           : 16px;
+    background-color    : white;
 }
 
 .hidden {
@@ -91,8 +102,8 @@ body {
     display         : inline-block;
     width           : 16px;
     height          : 16px;
-    background      : url(/img/spinner.gif);
     vertical-align  : top;
+    background      : url(/img/spinner.gif);
 }
 
 .refresh-icon {
@@ -166,8 +177,8 @@ body {
     background-image:url('/img/txt.png');
 }
 .fm {
+    width : 97%;
     height: 85%;
-    width: 97%;
     margin: 26px auto 0 auto;
 }
 .fm-header {
