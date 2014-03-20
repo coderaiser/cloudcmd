@@ -147,7 +147,7 @@ Right mouse click button shows context menu with items:
 
 Configuration
 ---------------
-All main configuration could be done via [config.json](json/config.json "Config").
+All main configuration could be done via `json/config.json`.
 
 ```js
 {
@@ -378,10 +378,9 @@ Version history
 
 Special Thanks
 ---------------
-
 - [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon");
 - [TarZak](https://github.com/tarzak)
-    - [ru](http://ru.cloudcmd.io "Cloud Commander in Russian") and [ua](http://ua.cloudcmd.io "Cloud Commander in Ukrainian") translations;
+    - Russian and Ukrainian translations;
     - config template and style;
     - change order of directories and files;
     - add ability do not hide path and header when files are scrolling;
