@@ -205,7 +205,8 @@ iptables -t nat -L # look rules after
 ```
 
 You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
-```
+
+```sh
 target     prot opt source               destination
 REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
 REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
