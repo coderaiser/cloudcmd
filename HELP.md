@@ -198,10 +198,10 @@ There is a couple easy and fast ways. One of them is port forwarding.
 Just run [shell/addtables.sh](shell/addtables.sh) for default options.
 
 ```sh
-# iptables -t nat -L # look rules before
-# iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
-# iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
-# iptables -t nat -L # look rules after
+iptables -t nat -L # look rules before
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8000
+iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
+iptables -t nat -L # look rules after
 ```
 
 You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
@@ -214,8 +214,8 @@ If you would want to get things back just clear rules ( **1** and **2** it's rul
 in your list they could differ).
 
 ```sh
-# iptables -t nat -D PREROUTING 2
-# iptables -t nat -D PREROUTING 1
+iptables -t nat -D PREROUTING 2
+iptables -t nat -D PREROUTING 1
 ```
 
 ###nginx
