@@ -379,7 +379,7 @@ Version history
 
 Special Thanks
 ---------------
-- [Polietilena](http://polietilena.github.io/ "Polietilena") for [logo](img/logo/cloudcmd.png "logo") and [favicon](img/favicon/favicon.png "favicon");
+- [Polietilena](http://polietilena.github.io/ "Polietilena") for **logo** and **favicon**.
 - [TarZak](https://github.com/tarzak)
     - Russian and Ukrainian translations;
     - config template and style;
