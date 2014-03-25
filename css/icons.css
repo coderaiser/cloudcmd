@@ -92,3 +92,8 @@
     font-family : 'Fontello';
     content     : '\e813  ';
 }
+
+.icon-unzip-file::before {
+    font-family : 'Fontello';
+    content     : '\e814  ';
+}
