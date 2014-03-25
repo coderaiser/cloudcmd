@@ -6,6 +6,7 @@
     "appСache": false,
     "analytics": true,
     "diff": false,
+    "zip" : false,
     "notifications": false,
     "localStorage": true,
     "minify": true,
