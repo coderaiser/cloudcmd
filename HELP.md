@@ -23,7 +23,7 @@ Benefits
 - Optional **authorization**.
 - Client works in web browser.
 - Server works on **Windows**, **Linux** and **Mac OS**.
-- Could be used local or remotly.
+- Could be used local or remotely.
 - Adapting to screen size.
 - **Editor** with support of **syntax highlighting** for over 110 languages.
 - **Console** with support of default OS command line.
