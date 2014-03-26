@@ -25,8 +25,8 @@ Benefits
 - Server works on **Windows**, **Linux** and **Mac OS**.
 - Could be used local or remotly.
 - Adapting to screen size.
-- **Editor** with suport of **syntax highlighting** for over 110 languages.
-- **Console** with suport of default OS command line.
+- **Editor** with support of **syntax highlighting** for over 110 languages.
+- **Console** with support of default OS command line.
 - Written in **JavaScript/Node.js**.
 
 Install
@@ -165,7 +165,7 @@ All main configuration could be done via `json/config.json`.
     "password"          : "toor",   /* password hash in sha-1 for authentication*/
     "apiURL"            :"/api/v1",
     "appCache"          : false,    /* cache files for offline use              */
-    "analytics"         : true,     /* google analytics suport                  */
+    "analytics"         : true,     /* google analytics support                  */
     "diff"              : false,    /* when save - send patch, not whole file   */
     "zip"               : false,    /* zip text before send / unzip before save */
     "notifications"     : false,    /* show notifications when tab is not active*/
@@ -268,7 +268,7 @@ server {
 }
 ```
 
-For websocket suport (nginx >= v1.3.13) modify server block:
+For websocket support (nginx >= v1.3.13) modify server block:
 
 ```sh
     location / {
