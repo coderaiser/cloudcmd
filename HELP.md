@@ -98,12 +98,14 @@ Edit
 ![Edit](/img/screen/edit.png "Edit")
 
 ###Hot keys
-- **F4**                - open
-- **Ctrl + s**          - save
-- **Ctrl + f**          - find
-- **Ctrl + f + f**      - replace
-- **Ctrl + g**          - go to line
-- **Esc**               - close
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+|`F4`                   | open
+| `Ctrl + s`            | save
+| `Ctrl + f`            | find
+| `Ctrl + f + f`        | replace
+| `Ctrl + g`            | go to line
+| `Esc`                 | close
 
 For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").
 
@@ -113,8 +115,10 @@ Console
 ![Console](/img/screen/console.png "Console")
 
 ###Hot keys
-- **~**                 - open
-- **Esc**               - close
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `~`                   | open
+| `Esc`                 | close
 
 Config
 ---------------
@@ -122,8 +126,10 @@ Config
 ![Console](/img/screen/config.png "Config")
 
 ###Hot keys
-- **F10**               - open
-- **Esc**               - close
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `F10`                 | open
+| `Esc`                 | close
 
 Menu
 ---------------
@@ -143,8 +149,10 @@ Right mouse click button shows context menu with items:
 - New (File, Dir, from FilePicker)
 
 ###Hot keys
-- **F9**                - open
-- **Esc**               - close
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `F9`                  | open
+| `Esc`                 | close
 
 Configuration
 ---------------
