@@ -12,7 +12,7 @@
         "cloudcmd": "./bin/cloudcmd"
     },
     "scripts": {
-        "test": "sh ./test/test.sh",
+        "test": "gulp default",
         "start": "cloudcmd.js"
     },
     "subdomain": "cloudcmd",
@@ -24,6 +24,11 @@
         "http-auth": "2.1.x",
         "fs-extra": "0.8.x",
         "marked": "~0.3.2"
+    },
+    "devDependencies": {
+        "gulp": "3.6.x",
+        "gulp-jshint": "1.5.x",
+        "gulp-recess": "0.3.x"
     },
     "license": "MIT",
     "engines": {
