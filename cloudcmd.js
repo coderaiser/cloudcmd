@@ -63,7 +63,7 @@
             ]);
         
         if (!Config.showKeysPanel) {
-            lKeysPanel  = '<div class="keyspanel';
+            keysPanel  = '<div class="keyspanel';
             data        = data.replace(keysPanel + '"', keysPanel +' hidden"');
         }
         
