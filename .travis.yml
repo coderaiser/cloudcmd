@@ -1,7 +1,5 @@
 language: node_js
 node_js:
-    - 0.6
-    - 0.8
     - 0.10
     - 0.11
 
@@ -10,8 +8,7 @@ matrix:
     - node_js: '0.11'
 
 before_install:
-  - npm install npm-compat -g
-  - npm install -g gulp@`npm-compat gulp`
+  - npm install gulp -g
 
 script:
   - gulp default
