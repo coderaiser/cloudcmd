@@ -10,7 +10,8 @@ matrix:
     - node_js: '0.11'
 
 before_install:
-  - npm install -g gulp
+  - npm install npm-compat -g
+  - npm install -g gulp@`npm-compat gulp`
 
 script:
   - gulp default
