@@ -4,6 +4,8 @@
     var gulp        = require('gulp'),
         jshint      = require('gulp-jshint'),
         recess      = require('gulp-recess'),
+        concat      = require('gulp-concat'),
+        stylestats  = require('gulp-stylestats'),
         test        = require('./test/test.js'),
         
         LIB         = './lib/',
@@ -24,9 +26,11 @@
     });
     
    
-    gulp.task('recess', function () {
+    gulp.task('css', function () {
         gulp.src('css/*.css')
             .pipe(recess())
+            .pipe(concat('all.css'))
+            .pipe(stylestats())
             .on('error', onError);
     });
     
@@ -34,7 +38,7 @@
        test.check();
     });
     
-    gulp.task('default', ['jshint', 'recess', 'test']);
+    gulp.task('default', ['jshint', 'css', 'test']);
     
     function onError(params) {
         console.log(params.message);
