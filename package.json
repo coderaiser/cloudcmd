@@ -28,7 +28,9 @@
     "devDependencies": {
         "gulp": "3.6.x",
         "gulp-jshint": "1.5.x",
-        "gulp-recess": "0.3.x"
+        "gulp-recess": "0.3.x",
+        "gulp-stylestats":"0.2.x",
+        "gulp-concat": "2.2.x"
     },
     "license": "MIT",
     "engines": {
