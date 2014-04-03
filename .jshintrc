@@ -1,4 +1,5 @@
 {
+    "unused"  : true,
     "bitwise" : true,
     "browser" : true,
     "devel" : true,
