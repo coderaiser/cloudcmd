@@ -4,9 +4,6 @@
     var DIR         = __dirname     + '/',
         main        = require(DIR   + 'lib/server/main'),
         
-        LIBDIR      = main.LIBDIR,
-        SRVDIR      = main.SRVDIR,
-        CLIENTDIR   = LIBDIR + 'client',
         HTMLDIR     = main.HTMLDIR,
         JSONDIR     = main.JSONDIR,
         
