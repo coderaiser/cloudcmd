@@ -154,7 +154,7 @@
             filesList.push(KEY, CERT);
         
         files.read(filesList, 'utf-8', function(errors, files) {
-            var status, name, msg, names;
+            var status, msg, names;
             
             if (errors) {
                 status          = 'error';
@@ -208,7 +208,7 @@
      * routing of server queries
      */
     function route(request, response, callback) {
-        var name, p, isAuth, isFS, query;
+        var name, p, isAuth, isFS;
         
         if (request && response) {
             name    = main.getPathName(request);
@@ -277,9 +277,7 @@
             var name = params && params.name;
             
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
-                var panel, data,
-                    config  = main.config,
-                    minify  = config.minify;
+                var panel, data;
                 
                 if (!error) {
                     panel   = CloudFunc.buildFromJSON(json, FileTemplate, PathTemplate, LinkTemplate),
