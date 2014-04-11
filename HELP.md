@@ -334,7 +334,8 @@ To extend capabilities of file manager next modules used:
 - [jquery]                  [jqueryURL]
 - [socket.io]               [socketIOURL]
 - [http-auth]               [httpAuthURL]
-- [fs-extra]                [fs-extraURL]
+- [rimraf]                  [rimrafURL]
+- [mkdirp]                  [mkdirpURL]
 
 [AceURL]:                   http://ace.ajax.org/ "Ace"
 [MinifyURL]:                http://coderaiser.github.io/minify "Minify"
@@ -346,7 +347,8 @@ To extend capabilities of file manager next modules used:
 [jqueryURL]:                //jquery.com
 [socketIOURL]:              http://socket.io
 [httpAuthURL]:              //github.com/gevorg/http-auth
-[fs-extraURL]:              //github.com/jprichardson/node-fs-extra "fs-extra"
+[rimrafURL]:                //github.com/isaacs/rimraf "rimraf"
+[mkdirpURL]:                //github.com/substack/node-mkdirp
 
 Contributing
 ---------------
