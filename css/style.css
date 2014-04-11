@@ -98,11 +98,10 @@ body {
 
 .loading {
     position        : relative;
-    top             : 2px;
     display         : inline-block;
     width           : 16px;
     height          : 16px;
-    vertical-align  : top;
+    vertical-align  : middle;
 }
 
 .loading-svg {
