@@ -106,8 +106,8 @@ body {
 
 .loading::after {
     position    : relative;
-    left        : 16px;
     bottom      : 3px;
+    left        : 16px;
     font-size   : 10px;
     color       : rgb(49,123,249);
     content     : attr(data-progress);
