@@ -97,6 +97,12 @@ Edit
 [Demo](http://io.cloudcmd.io/fs/etc#/edit/passwd "Edit")
 ![Edit](/img/screen/edit.png "Edit")
 
+### Features
+- Syntax highlighting based on extension of file for over 110 languages.
+- Build in `emmet` (for html files)
+- Drag n drop (drag file from desktop to editor).
+- Build in `jshint` (with options in `.jshintrc` file)
+
 ###Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
