@@ -41,7 +41,7 @@
                 '</span>'                                                       +
                 '<a data-name="js-refresh" href="/fs/etc/X11" '                 +
                 'class="path-icon refresh-icon" title="refresh (Ctrl+R)"></a>'  +
-                '<span class=links>'                                            +
+                '<span data-name="js-links" class=links>'                       +
                     '<a href="/fs" title="/">/</a>'                             +
                     '<a href="/fs/etc" title="/etc">'                           +
                         'etc'                                                   +
