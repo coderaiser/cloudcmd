@@ -87,9 +87,6 @@ body {
 }
 
 .error::before {
-    position    : relative;
-    right       : 15px;
-    bottom      : 1px;
     font-family : 'Fontello';
     font-size   : 14px;
     color       : rgb(222, 41, 41);
