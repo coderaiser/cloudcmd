@@ -1,7 +1,7 @@
 {
   "name"            : "pako",
   "description"     : "zlib port to javascript - fast, modularized, with browser support",
-  "version"         : "0.1.1",
+  "version"         : "0.2.0",
   "keywords"        : [ "zlib", "deflate", "inflate", "gzip" ],
   "homepage"        : "https://github.com/nodeca/pako",
 
@@ -27,9 +27,9 @@
                         "lodash":    "2.4.1",
                         "async":     "0.2.10",
 
-                        "grunt": "~0.4.0",
+                        "grunt": "~0.4.4",
                         "grunt-cli": "~0.1.13",
-                        "grunt-saucelabs": "~5.0.1",
+                        "grunt-saucelabs": "~5.1.1",
                         "grunt-contrib-connect": "~0.7.1"
                       }
 }

@@ -1,7 +1,7 @@
 {
   "name": "pako",
   "main": "dist/pako.js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "homepage": "https://github.com/nodeca/pako",
   "authors": [
     "Andrei Tuputcyn <Andrew.Tupitsin@gmail.com>",
@@ -26,14 +26,14 @@
     "benchmark",
     "coverage"
   ],
-  "_release": "0.1.1",
+  "_release": "0.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.1",
-    "commit": "160301218a747105cd5803ab76812b6074dd4399"
+    "tag": "0.2.0",
+    "commit": "e93c614f7ab3db2f9d39be66fa54e4b2c6fc08e0"
   },
   "_source": "git://github.com/nodeca/pako.git",
-  "_target": "~0.1.1",
+  "_target": "~0.2.0",
   "_originalSource": "pako",
   "_direct": true
 }
