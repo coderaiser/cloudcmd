@@ -7,42 +7,54 @@ __Why pako is cool:__
 
 - Almost as fast in modern JS engines as C implementation (see benchmarks).
 - Works in browsers, you can browserify any separate component.
-- Both Sync & streamable (for big blobs) interfaces.
-- It's fresh - ports the latest zlib version (now 1.2.8), results are binary equal.
+- Chunking support for big blobs.
+- Results are binary equal to well known [zlib](http://www.zlib.net/) (now v1.2.8 ported).
 
 This project was done to understand how fast JS can be and is it necessary to
 develop native C modules for CPU-intensive tasks. Enjoy the result!
+
+
+__Famous projects, using pako:__
+
+- [browserify](http://browserify.org/) (via [browserify-zlib](https://github.com/devongovett/browserify-zlib))
+- [JSZip](http://stuk.github.io/jszip/)
+- [mincer](https://github.com/nodeca/mincer)
+
 
 __Benchmarks:__
 
 ```
 node v0.10.26, 1mb sample:
 
-   deflate-dankogai x 4.74 ops/sec ±0.68% (15 runs sampled)
-   deflate-gildas x 4.61 ops/sec ±1.73% (15 runs sampled)
-   deflate-imaya x 3.10 ops/sec ±3.73% (11 runs sampled)
- ! deflate-pako x 7.11 ops/sec ±0.26% (21 runs sampled)
-   deflate-pako-untyped x 4.34 ops/sec ±1.35% (14 runs sampled)
-   deflate-zlib x 14.34 ops/sec ±2.90% (68 runs sampled)
-   inflate-dankogai x 31.29 ops/sec ±0.72% (56 runs sampled)
-   inflate-imaya x 30.49 ops/sec ±0.84% (53 runs sampled)
- ! inflate-pako x 70.00 ops/sec ±1.60% (71 runs sampled)
-   inflate-pako-untyped x 17.67 ops/sec ±1.27% (33 runs sampled)
-   inflate-zlib x 70.82 ops/sec ±1.69% (81 runs sampled)
+   deflate-dankogai x 4.73 ops/sec ±0.82% (15 runs sampled)
+   deflate-gildas x 4.58 ops/sec ±2.33% (15 runs sampled)
+   deflate-imaya x 3.22 ops/sec ±3.95% (12 runs sampled)
+ ! deflate-pako x 6.99 ops/sec ±0.51% (21 runs sampled)
+   deflate-pako-string x 5.89 ops/sec ±0.77% (18 runs sampled)
+   deflate-pako-untyped x 4.39 ops/sec ±1.58% (14 runs sampled)
+ * deflate-zlib x 14.71 ops/sec ±4.23% (59 runs sampled)
+   inflate-dankogai x 32.16 ops/sec ±0.13% (56 runs sampled)
+   inflate-imaya x 30.35 ops/sec ±0.92% (53 runs sampled)
+ ! inflate-pako x 69.89 ops/sec ±1.46% (71 runs sampled)
+   inflate-pako-string x 19.22 ops/sec ±1.86% (49 runs sampled)
+   inflate-pako-untyped x 17.19 ops/sec ±0.85% (32 runs sampled)
+ * inflate-zlib x 70.03 ops/sec ±1.64% (81 runs sampled)
 
-node v0.11.11, 1mb sample:
+node v0.11.12, 1mb sample:
 
-   deflate-dankogai x 5.61 ops/sec ±0.30% (17 runs sampled)
-   deflate-gildas x 4.97 ops/sec ±5.68% (16 runs sampled)
-   deflate-imaya x 3.53 ops/sec ±4.19% (12 runs sampled)
- ! deflate-pako x 11.52 ops/sec ±0.23% (32 runs sampled)
-   deflate-pako-untyped x 5.12 ops/sec ±1.44% (17 runs sampled)
-   deflate-zlib x 14.33 ops/sec ±3.34% (63 runs sampled)
-   inflate-dankogai x 42.96 ops/sec ±0.19% (57 runs sampled)
-   inflate-imaya x 85.05 ops/sec ±1.07% (71 runs sampled)
- ! inflate-pako x 97.58 ops/sec ±0.69% (80 runs sampled)
-   inflate-pako-untyped x 18.06 ops/sec ±0.65% (56 runs sampled)
-   inflate-zlib x 60.60 ops/sec ±2.04% (67 runs sampled)
+   deflate-dankogai x 5.60 ops/sec ±0.49% (17 runs sampled)
+   deflate-gildas x 5.06 ops/sec ±6.00% (16 runs sampled)
+   deflate-imaya x 3.52 ops/sec ±3.71% (13 runs sampled)
+ ! deflate-pako x 11.52 ops/sec ±0.22% (32 runs sampled)
+   deflate-pako-string x 9.53 ops/sec ±1.12% (27 runs sampled)
+   deflate-pako-untyped x 5.44 ops/sec ±0.72% (17 runs sampled)
+ * deflate-zlib x 14.05 ops/sec ±3.34% (63 runs sampled)
+   inflate-dankogai x 42.19 ops/sec ±0.09% (56 runs sampled)
+   inflate-imaya x 79.68 ops/sec ±1.07% (68 runs sampled)
+ ! inflate-pako x 97.52 ops/sec ±0.83% (80 runs sampled)
+   inflate-pako-string x 45.19 ops/sec ±1.69% (57 runs sampled)
+   inflate-pako-untyped x 24.35 ops/sec ±2.59% (40 runs sampled)
+ * inflate-zlib x 60.32 ops/sec ±1.36% (69 runs sampled)
 ```
 
 zlib's test is partialy afferted by marshling (that make sense for inflate only).
@@ -107,17 +119,35 @@ var output = inflator.result;
 
 ```
 
+Sometime you can wish to work with strings. For example, to send
+big objects as json to server. Pako detects input data type. You can
+force output to be string with option `{ to: 'string' }`.
+
+```javascript
+var pako = require('pako');
+
+var test = { my: 'super', puper: [456, 567], awesome: 'pako' };
+
+var binaryString = pako.deflate(JSON.stringify(test), { to: 'string' });
+
+//
+// Here you can do base64 encode, make xhr requests and so on.
+//
+
+var restored = JSON.parse(pako.inflate(binaryString, { to: 'string' }));
+```
+
 
 Notes
 -----
 
 Pako does not contain some specific zlib functions:
 
-- __deflate__ - writing custom gzip headers and methods `deflateSetDictionary`,
-  `deflateParams`, `deflateSetHeader`, `deflateBound`, `deflatePending`.
-- __inflate__ - getting custom gzip headers and methods `inflateGetDictionary`,
-  `inflateGetHeader`, `inflateSetDictionary`, `inflateSync`, `inflateSyncPoint`,
-  `inflateCopy`, `inflateUndermine`, `inflateMark`.
+- __deflate__ -  methods `deflateCopy`, `deflateBound`, `deflateParams`,
+  `deflatePending`, `deflatePrime`, `deflateSetDictionary`, `deflateTune`.
+- __inflate__ - `inflateGetDictionary`, `inflateCopy`, `inflateMark`,
+  `inflatePrime`, `inflateSetDictionary`, `inflateSync`, `inflateSyncPoint`,
+  `inflateUndermine`.
 
 
 Authors
