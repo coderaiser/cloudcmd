@@ -9,11 +9,13 @@
         test        = require('./test/test.js'),
         
         LIB         = './lib/',
-        LIB_CLIENT  =  LIB + 'client/',
+        LIB_CLIENT  = LIB + 'client/',
+        LIB_SERVER  = LIB + 'server/',
         Src         = [
             './*.js',
-            LIB + '*/*.js',
+            LIB + '*.js',
             LIB_CLIENT + 'storage/*.js',
+            LIB_SERVER + '/*.js',
             '!' + LIB + 'diff/diff-match-patch.js',
             '!' + LIB_CLIENT + 'jquery.js'
         ];
