@@ -13,5 +13,6 @@
     "strict" : true,
     "undef" : true,
     "evil"  : true,
-    "expr" : true
+    "expr" : true,
+    "quotmark": "single"
 }
