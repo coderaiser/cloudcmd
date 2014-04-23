@@ -244,6 +244,7 @@
                         main.sendFile(p);
                     } else if (isJSON) {
                         p.name +='.json';
+                        p.query = query;
                         json    = Util.stringifyJSON(data);
                         main.sendResponse(p, json, NOT_LOG);
                     } else
