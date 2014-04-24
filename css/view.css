@@ -1,0 +1,26 @@
+.view {
+    font-size: 16px;
+    white-space :pre;
+    outline: 0;     
+} 
+.view::selection {  
+    background: #b3d4fc;
+    text-shadow: none;
+} 
+#fancybox-loading div {
+    background: none;
+    width: 0;
+    height: 0;
+} 
+.view-overlay { 
+    background: rgb(255, 255, 255); 
+    background: rgba(255, 255, 255, 0.1);
+    display: block;
+} 
+.fancybox-wrap {
+    /* 
+     * when search element with
+     * document.elementFromPoint
+     */
+    z-index: 1
+}
