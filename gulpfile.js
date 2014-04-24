@@ -15,7 +15,7 @@
             './*.js',
             LIB + '*.js',
             LIB_CLIENT + 'storage/*.js',
-            LIB_SERVER + '/*.js',
+            LIB_SERVER + '/**/*.js',
             '!' + LIB + 'diff/diff-match-patch.js',
             '!' + LIB_CLIENT + 'jquery.js'
         ];
