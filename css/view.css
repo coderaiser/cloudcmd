@@ -22,3 +22,7 @@
      */
     z-index: 1
 }
+
+.media, video {
+    width: 100%;
+}
