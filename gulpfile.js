@@ -13,6 +13,7 @@
         LIB_SERVER  = LIB + 'server/',
         Src         = [
             './*.js',
+            'test/*.js',
             LIB + '*.js',
             LIB_CLIENT + 'storage/*.js',
             LIB_SERVER + '/**/*.js',
