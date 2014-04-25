@@ -19,17 +19,17 @@
         Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH],
         
         JSON_FILES          = {
-            path  : "/etc/X11/", 
+            path  : '/etc/X11/', 
             files : [{
-                name: "applnk",
-                size: "dir",
+                name: 'applnk',
+                size: 'dir',
                 uid : 0,
-                mode: "40755"
+                mode: '40755'
             }, {
-                name: "prefdm",
+                name: 'prefdm',
                 size: 1328,
                 uid : 0,
-                mode: "100755"
+                mode: '100755'
             }]
         },
         
