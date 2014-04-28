@@ -7,6 +7,10 @@
         concat      = require('gulp-concat'),
         stylestats  = require('gulp-stylestats'),
         test        = require('./test/test.js'),
+        Util        = require('./lib/util'),
+        fs          = require('fs'),
+        exec        = require('child_process').exec,
+        Info        = require('./package'),
         
         LIB         = './lib/',
         LIB_CLIENT  = LIB + 'client/',
@@ -39,6 +43,35 @@
     
     gulp.task('test', function() {
        test.check();
+    });
+    
+    gulp.task('changelog', function() {
+        var version = 'v' + Info.version,
+            name    = 'ChangeLog';
+        
+        Util.asyncCall([
+            Util.bind(exec, 'shell/log.sh ' + version),
+            Util.bind(fs.readFile, name),
+            ], function(execParams, readParams) {
+                var ERROR       = 0,
+                    DATA        = 1,
+                    STD_ERR     = 2,
+                    error       = execParams[ERROR] || execParams[STD_ERR] || readParams[ERROR],
+                    execData    = execParams[DATA],
+                    fileData    = readParams[DATA],
+                    date        = Util.getShortDate(),
+                    head        = date + ', ' + version + '?\n\n',
+                    data        = head + execData + fileData;
+                
+                if (error)
+                    console.log(error);
+                else
+                    fs.writeFile(name, data, function(error) {
+                        var msg = 'changelog: done';
+                        
+                        console.log(error || msg);
+                    });
+            });
     });
     
     gulp.task('default', ['jshint', 'css', 'test']);
