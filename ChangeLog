@@ -1,3 +1,138 @@
+2014.04.28, v0.8.4
+
+fix:
+- (view) hide fancybox spinner
+- (get) hash -> hex
+- (main) sendResponse: query always undefined
+- (menu) downloadFromMenu: spinner do not hide
+- (dom) Images {set,clear}Progress: get image not show
+- (edit) setUseOfWorker: regExp
+- (client) callBack -> callback
+- chore(edit)  quotes
+- (view) onOverLayClick: add hide
+- (view) overlay -> helpers.overlay
+- (minify) add fs.exists to minified file before send
+- (view) close when click on content in overlay
+- (key) switchKey: empty current
+- (delete) deleteFiles: remove when access denied
+- (edit) rm Key
+- (rest) rmDir -> rmdir
+- (dom) getSelectedNames: if current is ".." not select it
+- (dom) getSelectedFiles: get from active panel
+- (edit) set first undo
+- (style) error::before: position
+- (menu) MenuProto: add start position
+- (key) space twice on selected file do not update size
+- chore(key)  comment
+- (key) BACKevent -> BACKSPACE
+- (view) onOverLayClick on every close
+- (test) ul: add data-name
+- (rest) fse -> copy
+- (main) sendRespons: if not gzip send nothing
+- (view) onAfterShow: only when click on overlay
+- (view) show if music: add afterShow, beforeClose
+- (view) beforeClose -> onClick
+- (main) generate headers: last-modified
+- (menu) clickProcessing: root -> layer
+- (put) add msg, baseName
+- (client) loadModule: path change to wrong after fail loading
+- (menu) clickProcessing: keys do not work after close
+- (menu) clickProcessing: layer -> root
+- (view) set current, only if height view is big enough
+- (fancybox) twice loading of images
+- (view) image was loaded twice
+- (console) getSpawn: add "\n"
+- (console) getSpawn: mv send up
+- (cloudcmd) lKeysPanel -> kesyPanel
+- (files) add callback
+- (key) files not always have parentElement
+- (key) tab after mv
+- (dom) setCurrentFile: add CENTER
+- (dom) isSVG ie10: toString.call(svgNode) -> svgNode.toString()
+- (edit) if patch not str => patch = false
+- (listeners) onTouchEnd -> onTouch
+- (key) tab
+- (util) change the way of detection node.js
+- docs(help) server:  markup
+
+feature:
+- (view) audio -> media
+- (gulp) add test
+- (package) minify v0.4.0
+- (rest) get: add config
+- (package) mkdirp v0.4.0
+- (view) join css only if minify is on
+- (view) use own overlay
+- (gulp) add server subdirs
+- (commander) readDir: stat -> lstat
+- (package) minify v0.3.3
+- (minify) v0.3.2
+- (package) minify v0.3.1
+- (edit) add setUserOfWorker
+- (package) minify v0.3.0
+- (gulp) add server dir
+- (server) minify: params -> error, params
+- (editorconfig) add
+- (jshint) add quotmark: single
+- (zip) pako v0.2.0
+- (path) clear-storage: add data-name
+- (path) links: add data-name
+- (index) keyspanel: add id
+- (listeners) change panel to clicked panel
+- (storage) rm dir -> rm subdirs of dir from storage
+- (rest) copyFiles: add rename
+- (dom) moveCurrent -> moveFiles
+- (rest) cp, mv: add top imgPosition
+- (rest) cp: add ability to copy couple files
+- (key) f3: add parse markdown on shift
+- docs(help) edit: add s
+- (edit) add ability to drop file content
+- (listeners) load files directly to server, without reading them
+- (dom) images: add load progress
+- (util) add convertName
+- (view) add pause/start of music on SPACE pressed
+- (package) express v4.0.0
+- (rest) rm: fs-extra; add: rimraf, mkdirp
+- (jquery) update to v2.1.0
+- (main) add range support
+- (time) add options
+- (ncp) add ncp
+- (cloudfunc) buildFromJSON ul.files:add data-name
+- (edit) add suport of .jshintrc
+- (jshint) add unused
+- (view) add set current file afterClose
+- (view) add preload:0
+- (view) rm image template
+- (client) add getTemplate
+- (view) add audio
+- (travis) add cloudcmd start
+- (gulp) add stylestats
+- (travis) rm node: v0.6.0, v0.8.0
+- (travis) check compat version of gulp before install
+- (test) add gulp
+- (package) express: v3.5
+- (zip) add unescape pollyfill
+- (client) loadDir, ajaxLoad, createFileTable: add panel param
+- (dom) deleteCurrent: return currentNew
+- (client) currentToParent: rm scrollIntoViewIfNeeded
+- (dom) isSVG: detect svg -> detect smil svg
+- (img) spinner: add svg
+- (config) fillTemplate: rm hideLoad
+- (config) fillTemplate: hideLoad -> onShow
+- (config) fillTemplate: li -> input, add focus
+- (config) change: save number, if type number
+- (config) add zip
+- (config) add zip
+- (edit) add unzip
+- (put) add unzip
+- (rest) add unzip
+- (listeners) add (un)setOnPanel
+- (dom) events: add rmClick
+- (listeners) changeLinks: set events to one main files element
+- (listeners) changeLinks touch: if file current -> change dir
+- (link) draggable: true -> "true"
+
+
 2014.03.19, v0.8.3
 
 fix:
