@@ -173,8 +173,8 @@ All main configuration could be done via `json/config.json`.
     "apiURL"            :"/api/v1",
     "appCache"          : false,    /* cache files for offline use              */
     "analytics"         : true,     /* google analytics support                  */
-    "diff"              : false,    /* when save - send patch, not whole file   */
-    "zip"               : false,    /* zip text before send / unzip before save */
+    "diff"              : true,     /* when save - send patch, not whole file   */
+    "zip"               : true,     /* zip text before send / unzip before save */
     "notifications"     : false,    /* show notifications when tab is not active*/
     "localStorage"      : true,     /* cache directory data                     */
     "minify"            : true      /* minification of js,css,html and img      */
