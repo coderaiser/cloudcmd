@@ -332,6 +332,7 @@ Additional modules list
 To extend capabilities of file manager next modules used:
 
 - [Ace]                     [AceURL]
+- [Diff-Match-Patch]        [Diff-Match-PatchURL]
 - [Minify]                  [MinifyURL]
 - [FancyBox]                [FancyBoxURL]
 - [jQuery-contextMenu]      [jQuery-contextMenuURL]
@@ -345,6 +346,7 @@ To extend capabilities of file manager next modules used:
 - [mkdirp]                  [mkdirpURL]
 
 [AceURL]:                   http://ace.ajax.org/ "Ace"
+[Diff-Match-PatchURL]:      https://code.google.com/p/google-diff-match-patch/ "Diff-Match-Patch"
 [MinifyURL]:                http://coderaiser.github.io/minify "Minify"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
 [jQuery-contextMenuURL]:    //github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
