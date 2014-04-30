@@ -313,7 +313,7 @@ do something like this:
 
 Update
 ---------------
-**Cloud Commander** is very often updates.
+**Cloud Commander** is very often updated.
 Update is doing automagically but it could be done also manualy
 by typing a few commands in cloudcmd directory:
 
