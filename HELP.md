@@ -170,7 +170,7 @@ All main configuration could be done via `json/config.json`.
     "auth"              : false,    /* enable http authentication               */
     "username"          : "root",   /* username for authentication              */
     "password"          : "toor",   /* password hash in sha-1 for authentication*/
-    "apiURL"            :"/api/v1",
+    "apiURL"            : "/api/v1",
     "appCache"          : false,    /* cache files for offline use              */
     "analytics"         : true,     /* google analytics support                  */
     "diff"              : true,     /* when save - send patch, not whole file   */
