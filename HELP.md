@@ -361,19 +361,12 @@ To extend capabilities of file manager next modules used:
 
 Contributing
 ---------------
-If you would like to contribute - send pull request to dev branch.
+If you would like to contribute - read [guide](https://github.com/coderaiser/cloudcmd/blob/master/CONTRIBUTING.md) and send pull requests to dev branch.
 Getting dev version of **Cloud Commander**:
 
     git clone git://github.com/coderaiser/cloudcmd.git
     cd cloudcmd && git checkout dev
 
-It is possible that dev version of Cloud Commander will needed dev version of Minify,
-so to get it you should type a couple more commands:
-
-    cd node_modules
-    rm -rf minify
-    git clone git://github.com/coderaiser/minify
-    git checkout dev
 
 Version history
 ---------------
