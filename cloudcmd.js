@@ -52,7 +52,7 @@
             panel   = options.panel;
         
         if (!Config.appCache)
-            data = Util.removeStr(data, [
+            data = Util.rmStr(data, [
                 /* min */
                 ' manifest=/cloudcmd.appcache',
                 /* normal */
@@ -229,7 +229,7 @@
                 p.name = main.HTMLDIR + name + '.html';
                 main.sendFile(p);
             } else if (isFS) {
-                name    = Util.removeStrOneTime(name, CloudFunc.FS) || main.SLASH;
+                name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
                 
                 getContent(name, function(error, data, isFile) {
                     var json,
