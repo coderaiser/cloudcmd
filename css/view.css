@@ -7,7 +7,7 @@
 .view::selection {
     text-shadow: none;
     background: #b3d4fc;
-} 
+}
 
 .view-overlay {
     display     : block;
