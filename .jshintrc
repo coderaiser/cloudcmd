@@ -5,7 +5,7 @@
     "devel" : true,
     "eqeqeq" : true,
     "jquery" : false,
-    "newcap" : true,
+    "newcap" : false,
     "noarg" : true,
     "node" : true,
     "noempty" : true,
