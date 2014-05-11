@@ -1,5 +1,6 @@
 {
     "options": {
+        "theme": "ace/theme/tomorrow_night_blue",
         "enableBasicAutocompletion": true,
         "enableSnippets": false,
         "showPrintMargin": false,
