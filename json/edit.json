@@ -1,0 +1,13 @@
+{
+    "options": {
+        "enableBasicAutocompletion": true,
+        "enableSnippets": false,
+        "showPrintMargin": false,
+        "showInvisibles": true,
+        "useSoftTabs": true
+    },
+    
+    "extensions": {
+        "emmet": false
+    }
+}
