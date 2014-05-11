@@ -4,7 +4,8 @@
         "enableSnippets": false,
         "showPrintMargin": false,
         "showInvisibles": true,
-        "useSoftTabs": true
+        "useSoftTabs": true,
+        "tabSize": 4
     },
     
     "extensions": {
