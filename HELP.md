@@ -111,7 +111,7 @@ Edit
 |`F4`                   | open
 | `Ctrl + s`            | save
 | `Ctrl + f`            | find
-| `Ctrl + f + f`        | replace
+| `Ctrl + h`            | replace
 | `Ctrl + g`            | go to line
 | `Esc`                 | close
 
