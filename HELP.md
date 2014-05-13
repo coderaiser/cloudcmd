@@ -89,7 +89,7 @@ Hot keys
 | `End`                 | to end of list
 | `Space`               | select current file (and get size of directory)
 | `Insert`              | select current file (and move to next)
-| `Shift + F10`         | context menu
+| `F9`                  | context menu
 | `~`                   | console
 | `Ctrl + Click`        | open file on new tab
 
@@ -335,7 +335,6 @@ To extend capabilities of file manager next modules used:
 - [Diff-Match-Patch]        [Diff-Match-PatchURL]
 - [Minify]                  [MinifyURL]
 - [FancyBox]                [FancyBoxURL]
-- [jQuery-contextMenu]      [jQuery-contextMenuURL]
 - [jq-console]              [jq-consoleURL]
 - [github]                  [githubURL]
 - [dropbox-js]              [dropbox-jsURL]
@@ -349,7 +348,6 @@ To extend capabilities of file manager next modules used:
 [Diff-Match-PatchURL]:      https://code.google.com/p/google-diff-match-patch/ "Diff-Match-Patch"
 [MinifyURL]:                http://coderaiser.github.io/minify "Minify"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
-[jQuery-contextMenuURL]:    //github.com/medialize/jQuery-contextMenu "jQuery-contextMenu"
 [jq-consoleURL]:            //github.com/replit/jq-console "jq-console"
 [githubURL]:                //github.com/michael/github "github"
 [dropbox-jsURL]:            //github.com/dropbox/dropbox-js "dropbox-js"
