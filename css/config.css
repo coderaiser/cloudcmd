@@ -60,10 +60,9 @@
 
 .config .list {
     margin      : 5%;
-    text-align  : left;
 }
 
-.config .border{
+.config {
     width   : 300px;
     margin  : 10% auto;
 }
