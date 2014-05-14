@@ -93,6 +93,22 @@ Hot keys
 | `~`                   | console
 | `Ctrl + Click`        | open file on new tab
 
+View
+---------------
+![View](/img/screen/view.png "View")
+
+### Features
+- View images.
+- View text files.
+- Playing audio.
+- Playing video.
+
+###Hot keys
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `F3`                  | open
+| `Esc`                 | close
+
 Edit
 ---------------
 [Demo](http://io.cloudcmd.io/fs/etc#/edit/passwd "Edit")
