@@ -37,7 +37,7 @@
 .menu-item {
     position: relative;
     padding: 3px 20px;
-    white-space: nowrap;
+    white-space: pre;
 }
 
 .menu-item:hover {
