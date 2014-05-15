@@ -24,29 +24,47 @@ Tired to use js based libraries which use jquery and `.hover` classes insteed of
 Create `html` page with `js` and `css` connected.
 
 ```html
-<link rel="stylesheet" href="http://coderaiser.github.io/menu/menu.min.css">
-<script src="http://coderaiser.github.io/menu/menu.min.js"></script>
+<link rel="stylesheet" href="http://coderaiser.github.io/menu-io/menu.min.css">
+<script src="http://coderaiser.github.io/menu-io/menu.min.js"></script>
 ```
 
 Add little JavaScript:
+
 ```js
-var menu        = Menu({
+var menu        = MenuIO({
     'item name': function onItemNameClick() {
     }
 }
+```
+You could use element and (or) options parameters if you need to.
+
+```js
+var element     = document.body,
+    
+    options     = {
+        icon        : true, /* add class icon-item-name */
+        beforeClose : alert,
+        beforeShow  : alert,
+        beforeClick : alert,
+        name        : 'name of menu' /* if you want use a couple menu on one element */
+    },
+    
+    menu        = Menu(element, options, {
+        'item name': function onItemNameClick() {
+    });
 ```
 
 Look for `examples` directory or copy example from bottom:
 
 ```html
-<link rel="stylesheet" href="http://coderaiser.github.io/menu/menu.min.css">
-<script src="http://coderaiser.github.io/menu/menu.min.js"></script>
+<link rel="stylesheet" href="http://coderaiser.github.io/menu-io/menu.min.css">
+<script src="http://coderaiser.github.io/menu-io/menu-io.min.js"></script>
 <script>
     window.addEventListener('load', function onLoad() {
         'use strict';
         
         window.removeEventListener('load', onLoad);
-        var menu        = Menu({
+        var menu        = MenuIO({
             help: function() {
                 alert('*help');
             },
