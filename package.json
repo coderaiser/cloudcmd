@@ -19,7 +19,7 @@
     "dependencies": {
         "dropbox": "0.10.2",
         "minify": "~0.6.x",
-        "socket.io": "0.9.16",
+        "socket.io": "~1.0.0",
         "express": "~4.1.1",
         "morgan": "~1.0.0",
         "http-auth": "2.1.x",
