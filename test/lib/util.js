@@ -100,6 +100,18 @@
             
         });
         
+        describe('render', function() {
+            it('should render template with object of params', function() {
+                var WORD        = 'hello world',
+                    word        = Util.render('hello {{ name }}', {
+                        name: 'world'
+                    });
+                
+                WORD.should.equal(word);
+            });
+            
+        });
+        
     });
     
 })();
