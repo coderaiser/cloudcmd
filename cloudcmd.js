@@ -274,7 +274,7 @@
     }
     
     function readIndex(json, callback) {
-        var isMinify = Minify && Config.minify
+        var isMinify = Minify && Config.minify;
         
         Util.ifExec(!isMinify, function(error, params) {
             var name = params && params.name;
