@@ -1,42 +1,42 @@
 {
-    "name": "cloudcmd",
-    "version": "0.8.4",
-    "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
-    "description": "Cloud Commander web based orthodox file manager with console and editor",
-    "homepage": "http://cloudcmd.io",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/coderaiser/cloudcmd.git"
-    },
-    "bin": {
-        "cloudcmd": "./bin/cloudcmd"
-    },
-    "scripts": {
-        "test": "gulp default",
-        "start": "cloudcmd.js"
-    },
-    "subdomain": "cloudcmd",
-    "dependencies": {
-        "dropbox": "0.10.2",
-        "minify": "~0.6.x",
-        "socket.io": "~1.0.0",
-        "express": "~4.2.x",
-        "morgan": "~1.0.0",
-        "http-auth": "2.1.x",
-        "rimraf": "~2.2.6",
-        "mkdirp": "~0.5.0",
-        "marked": "~0.3.2"
-    },
-    "devDependencies": {
-        "gulp": "3.6.x",
-        "gulp-jshint": "1.6.x",
-        "gulp-recess": "0.3.x",
-        "gulp-stylestats":"0.2.x",
-        "gulp-concat": "2.2.x"
-    },
-    "license": "MIT",
-    "engines": {
-        "node": ">=0.4.x"
-    },
-    "main": "cloudcmd.js"
+  "name": "cloudcmd",
+  "version": "0.8.4",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "Cloud Commander web based orthodox file manager with console and editor",
+  "homepage": "http://cloudcmd.io",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/cloudcmd.git"
+  },
+  "bin": {
+    "cloudcmd": "./bin/cloudcmd"
+  },
+  "scripts": {
+    "test": "gulp default",
+    "start": "cloudcmd.js"
+  },
+  "subdomain": "cloudcmd",
+  "dependencies": {
+    "dropbox": "0.10.2",
+    "express": "~4.2.x",
+    "http-auth": "2.1.x",
+    "marked": "~0.3.2",
+    "minify": "~0.6.x",
+    "mkdirp": "~0.5.0",
+    "morgan": "~1.0.0",
+    "rimraf": "~2.2.6",
+    "socket.io": "~1.0.0"
+  },
+  "devDependencies": {
+    "gulp": "3.6.x",
+    "gulp-jshint": "1.6.x",
+    "gulp-recess": "0.3.x",
+    "gulp-stylestats": "0.2.x",
+    "gulp-concat": "2.2.x"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.4.x"
+  },
+  "main": "cloudcmd.js"
 }
