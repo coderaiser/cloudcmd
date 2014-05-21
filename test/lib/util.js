@@ -59,6 +59,26 @@
                  same.should.be.false;
             });
         });
+        
+        describe('exec', function() {
+            it('should execute function with parameters', function() {
+                var WORD    = 'hello',
+                    func    = function(word) {
+                        return word;
+                    },
+                    word  = Util.exec(func, WORD);
+                
+                 WORD.should.equal(word);
+            });
+            
+            it('should not execute function, if type of first argument not function', function() {
+                var WORD    = 'hello',
+                    word  = Util.exec(WORD);
+                
+                 (word === undefined).should.be.true;
+            });
+        });
+        
     });
     
 })();
