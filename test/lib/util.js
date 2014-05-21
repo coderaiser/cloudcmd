@@ -79,6 +79,27 @@
             });
         });
         
+        describe('asyncCall', function() {
+            it('should execute a couple functions async and return results in callback', function() {
+                var WORD    = 'hello world',
+                    funcSlow    = function(callback) {
+                        setTimeout(function() {
+                            Util.exec(callback, 'hello');
+                        }, 10);
+                    },
+                    funcFast    = function(callback) {
+                        setTimeout(function() {
+                            Util.exec(callback, 'world');
+                        }, 1);
+                    };
+                    
+                    Util.asyncCall([funcSlow, funcFast], function(hello, world) {
+                        WORD.should.equal(hello + ' ' + world);
+                    });
+            });
+            
+        });
+        
     });
     
 })();
