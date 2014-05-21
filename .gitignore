@@ -1,20 +1,2 @@
-#files, the will be ignored by git
-
-#file with changes
 json/changes.json
-
-#c9 files
-.c9revisions
-*tmp
-
-#node modules folder
 node_modules
-
-#temporary files folder
-tmp
-
-#log file
-log.txt
-
-#cloudfoundry file
-manifest.yml
