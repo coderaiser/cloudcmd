@@ -7,8 +7,8 @@
         concat      = require('gulp-concat'),
         stylestats  = require('gulp-stylestats'),
         mocha       = require('gulp-mocha'),
-
-        test        = require('./test/test.js'),
+        
+        cloudfunc   = require('./test/lib/cloudfunc.js'),
         Util        = require('./lib/util'),
         fs          = require('fs'),
         exec        = require('child_process').exec,
@@ -45,7 +45,7 @@
     });
     
     gulp.task('test', function() {
-       test.check();
+       cloudfunc.check();
        
        gulp.src('test/lib/util.js')
            .pipe(mocha({reporter: 'progress'}))
