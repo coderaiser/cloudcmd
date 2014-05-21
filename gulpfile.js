@@ -6,6 +6,8 @@
         recess      = require('gulp-recess'),
         concat      = require('gulp-concat'),
         stylestats  = require('gulp-stylestats'),
+        mocha       = require('gulp-mocha'),
+
         test        = require('./test/test.js'),
         Util        = require('./lib/util'),
         fs          = require('fs'),
@@ -44,6 +46,10 @@
     
     gulp.task('test', function() {
        test.check();
+       
+       gulp.src('test/lib/util.js')
+           .pipe(mocha({reporter: 'progress'}))
+           .on('error', onError);
     });
     
     gulp.task('changelog', function() {
