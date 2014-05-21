@@ -1,6 +1,6 @@
 {
     "unused"  : true,
-    "bitwise" : true,
+    "bitwise" : false,
     "browser" : true,
     "devel" : true,
     "eqeqeq" : true,
