@@ -33,7 +33,6 @@
     "gulp-jshint": "1.6.x",
     "gulp-mocha": "^0.4.1",
     "gulp-recess": "0.3.x",
-    "gulp-stylestats": "0.2.x",
     "should": "^3.3.1"
   },
   "license": "MIT",

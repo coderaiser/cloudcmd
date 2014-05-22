@@ -5,7 +5,6 @@
         jshint      = require('gulp-jshint'),
         recess      = require('gulp-recess'),
         concat      = require('gulp-concat'),
-        stylestats  = require('gulp-stylestats'),
         mocha       = require('gulp-mocha'),
         
         cloudfunc   = require('./test/lib/cloudfunc.js'),
@@ -40,7 +39,6 @@
         gulp.src('css/*.css')
             .pipe(recess())
             .pipe(concat('all.css'))
-            .pipe(stylestats())
             .on('error', onError);
     });
     
