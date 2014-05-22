@@ -138,6 +138,26 @@
             
         });
         
+          describe('forEach', function() {
+            it('should call arrays forEach on any type', function() {
+                var str     = '',
+                    obj     = {
+                        0: 'a', 
+                        1: 'b',
+                        2: 'c',
+                        length: 3
+                    };
+                    
+                Util.forEach(obj, function(item) {
+                    str += item;
+                });
+                
+                str.should.be.equal('abc');
+                
+            });
+            
+        });
+        
     });
     
 })();
