@@ -112,6 +112,32 @@
             
         });
         
+        describe('slice', function() {
+            it('should return copy of given array', function() {
+                var arr1    = [1, 2, 3],
+                    length  = arr1.length,
+                    arr2    = Util.slice(arr1);
+                    
+                arr2.should.be.instanceof(Array)
+                    .and.have.lengthOf(length);
+            });
+            
+            it('should return empty array on given undefined', function() {
+                var arr     = Util.slice(),
+                    LENGTH  = 0;
+                    
+                arr.should.be.instanceof(Array)
+                    .and.have.lengthOf(LENGTH);
+            });
+            
+            it('should return sliced array', function() {
+                var arr     = Util.slice([1,2,3], 1);
+                    
+                arr.should.eql([2, 3]);
+            });
+            
+        });
+        
     });
     
 })();
