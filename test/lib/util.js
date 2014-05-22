@@ -138,7 +138,7 @@
             
         });
         
-          describe('forEach', function() {
+        describe('forEach', function() {
             it('should call arrays forEach on any type', function() {
                 var str     = '',
                     obj     = {
@@ -153,7 +153,6 @@
                 });
                 
                 str.should.be.equal('abc');
-                
             });
             
         });
