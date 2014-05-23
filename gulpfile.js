@@ -46,7 +46,7 @@
        cloudfunc.check();
        
        gulp.src('test/lib/util.js')
-           .pipe(mocha({reporter: 'progress'}))
+           .pipe(mocha({reporter: 'min'}))
            .on('error', onError);
     });
     
@@ -54,7 +54,7 @@
         var version = 'v' + Info.version,
             name    = 'ChangeLog';
         
-        Util.asyncCall([
+        Util.execParallel([
             Util.bind(exec, 'shell/log.sh ' + version),
             Util.bind(fs.readFile, name),
             ], function(execParams, readParams) {
