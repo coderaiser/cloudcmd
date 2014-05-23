@@ -276,7 +276,7 @@
     function readIndex(json, callback) {
         var isMinify = Minify && Config.minify;
         
-        Util.ifExec(!isMinify, function(error, params) {
+        Util.exec.if(!isMinify, function(error, params) {
             var name = params && params.name;
             
             fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
