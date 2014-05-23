@@ -264,7 +264,7 @@
     function getContent(name, callback) {
         dir.isDir(name, function(error, isDir) {
             var getDirContent   = main.commander.getDirContent,
-                func            = Util.retExec(callback);
+                func            = Util.exec.ret(callback);
             
             if (!error && isDir)
                 getDirContent(name, callback);
