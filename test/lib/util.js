@@ -79,6 +79,22 @@
             });
         });
         
+        describe('exec.ret', function() {
+            it('should return function that try to call callback', function() {
+                var STR     = 'hello world',
+                    func1   = function() {
+                        var args = Util.slice(arguments);
+                        
+                        return args.join(' ');
+                    },
+                    func2   = Util.exec.ret(func1, 'hello'),
+                    str     = func2('world');
+                
+                str.should.be.equal(STR);
+            });
+            
+        });
+        
         describe('exec.parallel', function() {
             it('should execute a couple functions async and return results in callback', function() {
                 var WORD    = 'hello world',
