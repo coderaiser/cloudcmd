@@ -79,7 +79,7 @@
             });
         });
         
-        describe('asyncCall', function() {
+        describe('exec.parallel', function() {
             it('should execute a couple functions async and return results in callback', function() {
                 var WORD    = 'hello world',
                     funcSlow    = function(callback) {
@@ -93,7 +93,7 @@
                         }, 1);
                     };
                     
-                    Util.asyncCall([funcSlow, funcFast], function(hello, world) {
+                    Util.exec.parallel([funcSlow, funcFast], function(hello, world) {
                         WORD.should.equal(hello + ' ' + world);
                     });
             });
