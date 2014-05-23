@@ -55,8 +55,8 @@
             name    = 'ChangeLog';
         
         Util.execParallel([
-            Util.bind(exec, 'shell/log.sh ' + version),
-            Util.bind(fs.readFile, name),
+            Util.exec.with(exec, 'shell/log.sh ' + version),
+            Util.exec.with(fs.readFile, name),
             ], function(execParams, readParams) {
                 var ERROR       = 0,
                     DATA        = 1,
