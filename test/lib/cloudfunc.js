@@ -32,7 +32,6 @@
             }]
         },
         
-        
         Expect =
             '<div data-name="js-path" class="reduce-text" title="/etc/X11/">'   +
                 '<span data-name="js-clear-storage" class="path-icon clear-storage" '                        +
@@ -48,10 +47,9 @@
                 '</span>'                                                       +
             '</div>';
     
-    
     exports.check = function() {
         files.read(Files, 'utf-8', function(errors, files) {
-            var i, n, template, pathTemplate, linkTemplate, expect, result;
+            var isNotOk, i, template, pathTemplate, linkTemplate, expect, result;
             
             if (errors)
                 Util.log(errors);
@@ -63,23 +61,36 @@
                 linkTemplate    = files[LINK_TEMPLATE_PATH];
                 expect          = files[EXPECT_PATH];
                 
-                result          = CloudFunc.buildFromJSON(JSON_FILES, template, pathTemplate, linkTemplate);
+                result          = CloudFunc.buildFromJSON({
+                    data: JSON_FILES,
+                    template: {
+                        file: template,
+                        path: pathTemplate,
+                        link: linkTemplate
+                    }
+                });
                 
                 Expect          += expect;
                 
-                n = Expect.length;
-                for (i = 0; i < n; i++)
-                    if (result[i] !== Expect[i]) {
-                        Util.log('Error in char number: ' + i    + '\n' +
-                                    'Expect: ' + Expect.substr(i)  + '\n' +
-                                    'Result: ' + result.substr(i) );
-                        break;
-                    }
+                isNotOk = Util.slice(Expect).some(function(item, number) {
+                    var ret = result[number] !== item;
                     
-                    if (i === n)
-                        console.log('CloudFunc.buildFromJSON: OK');   
+                    if (ret)
+                        i = number;
+                    
+                    return ret;
+                });
                 
                 Util.timeEnd('CloudFunc.buildFromJSON');
+                
+                if (isNotOk) {
+                    console.log('Error in char number: ' + i    + '\n' +
+                                'Expect: ' + Expect.substr(i)  + '\n' +
+                                'Result: ' + result.substr(i) );
+                    
+                    throw('buildFromJSON: Not OK');
+                
+                }
             }
         });
     };
