@@ -275,7 +275,15 @@
                 var panel, data;
                 
                 if (!error) {
-                    panel   = CloudFunc.buildFromJSON(json, FileTemplate, PathTemplate, LinkTemplate),
+                    panel   = CloudFunc.buildFromJSON({
+                        data: json,
+                        template: {
+                            file: FileTemplate,
+                            path: PathTemplate,
+                            link: LinkTemplate
+                        }
+                    }),
+                    
                     data    = indexProcessing({
                         panel   : panel,
                         data    : template,
