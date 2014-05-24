@@ -232,23 +232,15 @@
                 name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
                 
                 getContent(name, function(error, data, isFile) {
-                    var json,
-                        NOT_LOG = true,
-                        query   = main.getQuery(request),
-                        isJSON  = Util.isContainStr(query, 'json');
-                    
                     if (error)
                         main.sendError(p, error);
                     else if (isFile) {
                         p.name = name;
                         main.sendFile(p);
-                    } else if (isJSON) {
-                        p.name +='.json';
-                        p.query = query;
-                        json    = Util.stringifyJSON(data);
-                        main.sendResponse(p, json, NOT_LOG);
                     } else
                         readIndex(data, function(error, data) {
+                            var NOT_LOG = true;
+                            
                             p.name = INDEX_PATH;
                             
                             if (error)
