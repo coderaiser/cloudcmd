@@ -25,15 +25,19 @@
         KEY         = DIR   + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
-        HTML_FS_DIR     = HTMLDIR       + 'fs/',
-        INDEX_PATH      = HTML_FS_DIR   + 'index.html',
-        FILE_TMPL       = HTML_FS_DIR   + 'file.html',
-        PANEL_TMPL      = HTML_FS_DIR   + 'panel.html',
-        PATH_TMPL       = HTML_FS_DIR   + 'path.html',
-        PATH_LINK_TMPL  = HTML_FS_DIR   + 'path-link.html',
-        LINK_TMPL       = HTML_FS_DIR   + 'link.html',
+        HTML_FS_DIR = HTMLDIR       + 'fs/',
         
-        FileTemplate, PanelTemplate, PathTemplate, LinkTemplate, PathLinkTemplate,
+        PATH_INDEX  =HTML_FS_DIR   + 'index.html',
+        
+        TMPL_PATH   = {
+            File        : HTML_FS_DIR   + 'file.html',
+            Panel       : HTML_FS_DIR   + 'panel.html',
+            Path        : HTML_FS_DIR   + 'path.html',
+            PathLink    : HTML_FS_DIR   + 'path-link.html',
+            Link        : HTML_FS_DIR   + 'link.html',
+        },
+        
+        Template    = {},
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
@@ -65,13 +69,13 @@
             data        = data.replace(keysPanel + '"', keysPanel +' hidden"');
         }
         
-        left    = Util.render(PanelTemplate, {
-            id      : LEFT,
+        left    = Util.render(Template.Panel, {
+            id      : HTML_FS_DIR   + LEFT,
             side    : 'left',
             content : panel
         });
         
-        right    = Util.render(PanelTemplate, {
+        right    = Util.render(Template.Panel, {
             id      : RIGHT,
             side    : 'right',
             content : panel
@@ -104,7 +108,7 @@
     
     
     function init() {
-        var serverDir, params, filesList, isContain, argvFirst,
+        var serverDir, params, filesList, isContain, argvFirst, keys,
             argv = process.argv;
         
         if (update)
@@ -143,13 +147,17 @@
             writeLogsToFile();
         }
         
-        params = {
+        params      = {
             appcache    : appCacheProcessing,
             rest        : main.rest,
             route       : route
         };
         
-        filesList = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, PATH_LINK_TMPL, LINK_TMPL];
+        keys        = Object.keys(TMPL_PATH);
+        
+        filesList   = keys.map(function(name) {
+            return TMPL_PATH[name];
+        });
         
         if (Config.ssl)
             filesList.push(KEY, CERT);
@@ -162,12 +170,7 @@
                 Util.log(errors);
             } else {
                 status          = 'ok';
-                
-                FileTemplate        = files[FILE_TMPL];
-                PanelTemplate       = files[PANEL_TMPL];
-                PathTemplate        = files[PATH_TMPL];
-                PathLinkTemplate    = files[PATH_LINK_TMPL];
-                LinkTemplate        = files[LINK_TMPL];
+                Template        = files;
                 
                 if (Config.ssl)
                     params.ssl  = {
@@ -243,7 +246,7 @@
                         readIndex(data, function(error, data) {
                             var NOT_LOG = true;
                             
-                            p.name = INDEX_PATH;
+                            p.name = PATH_INDEX;
                             
                             if (error)
                                 main.sendError(error);
@@ -273,18 +276,13 @@
         Util.exec.if(!isMinify, function(error, params) {
             var name = params && params.name;
             
-            fs.readFile(name || INDEX_PATH, 'utf8', function(error, template) {
+            fs.readFile(name || PATH_INDEX, 'utf8', function(error, template) {
                 var panel, data;
                 
                 if (!error) {
                     panel   = CloudFunc.buildFromJSON({
-                        data: json,
-                        template: {
-                            file        : FileTemplate,
-                            path        : PathTemplate,
-                            pathLink    : PathLinkTemplate,
-                            link        : LinkTemplate
-                        }
+                        data        : json,
+                        template    : Template
                     }),
                     
                     data    = indexProcessing({
@@ -296,7 +294,7 @@
                 Util.exec(callback, error, data);
             });
         },  function(callback) {
-                Minify.optimize(INDEX_PATH, {
+                Minify.optimize(PATH_INDEX, {
                     callback    : callback,
                     returnName  : true
                 });
