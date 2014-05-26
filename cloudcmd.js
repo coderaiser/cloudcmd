@@ -25,14 +25,15 @@
         KEY         = DIR   + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
-        HTML_FS_DIR = HTMLDIR       + 'fs/',
-        INDEX_PATH  = HTML_FS_DIR   + 'index.html',
-        FILE_TMPL   = HTML_FS_DIR   + 'file.html',
-        PANEL_TMPL  = HTML_FS_DIR   + 'panel.html',
-        PATH_TMPL   = HTML_FS_DIR   + 'path.html',
-        LINK_TMPL   = HTML_FS_DIR   + 'link.html',
+        HTML_FS_DIR     = HTMLDIR       + 'fs/',
+        INDEX_PATH      = HTML_FS_DIR   + 'index.html',
+        FILE_TMPL       = HTML_FS_DIR   + 'file.html',
+        PANEL_TMPL      = HTML_FS_DIR   + 'panel.html',
+        PATH_TMPL       = HTML_FS_DIR   + 'path.html',
+        PATH_LINK_TMPL  = HTML_FS_DIR   + 'path-link.html',
+        LINK_TMPL       = HTML_FS_DIR   + 'link.html',
         
-        FileTemplate, PanelTemplate, PathTemplate, LinkTemplate,
+        FileTemplate, PanelTemplate, PathTemplate, LinkTemplate, PathLinkTemplate,
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
@@ -162,10 +163,11 @@
             } else {
                 status          = 'ok';
                 
-                FileTemplate    = files[FILE_TMPL];
-                PanelTemplate   = files[PANEL_TMPL];
-                PathTemplate    = files[PATH_TMPL];
-                LinkTemplate    = files[LINK_TMPL];
+                FileTemplate        = files[FILE_TMPL];
+                PanelTemplate       = files[PANEL_TMPL];
+                PathTemplate        = files[PATH_TMPL];
+                PathLinkTemplate    = files[PATH_LINK_TMPL];
+                LinkTemplate        = files[LINK_TMPL];
                 
                 if (Config.ssl)
                     params.ssl  = {
@@ -278,9 +280,10 @@
                     panel   = CloudFunc.buildFromJSON({
                         data: json,
                         template: {
-                            file: FileTemplate,
-                            path: PathTemplate,
-                            link: LinkTemplate
+                            file        : FileTemplate,
+                            path        : PathTemplate,
+                            pathLinks   : PathLinkTemplate,
+                            link        : LinkTemplate
                         }
                     }),
                     
