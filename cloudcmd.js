@@ -149,7 +149,7 @@
             route       : route
         };
         
-        filesList = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, LINK_TMPL];
+        filesList = [FILE_TMPL, PANEL_TMPL, PATH_TMPL, PATH_LINK_TMPL, LINK_TMPL];
         
         if (Config.ssl)
             filesList.push(KEY, CERT);
@@ -282,7 +282,7 @@
                         template: {
                             file        : FileTemplate,
                             path        : PathTemplate,
-                            pathLinks   : PathLinkTemplate,
+                            pathLink    : PathLinkTemplate,
                             link        : LinkTemplate
                         }
                     }),
