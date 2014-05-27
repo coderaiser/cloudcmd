@@ -22,27 +22,27 @@
         
         CONFIG_PATH = JSONDIR + 'config.json',
         
-        KEY         = DIR   + 'ssl/ssl.key',
+        KEY         = DIR + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
         HTML_FS_DIR = HTMLDIR       + 'fs/',
         
-        PATH_INDEX  =HTML_FS_DIR   + 'index.html',
+        PATH_INDEX  = HTML_FS_DIR   + 'index.html',
         
-        TMPL_PATH   = {
-            file        : HTML_FS_DIR   + 'file.html',
-            panel       : HTML_FS_DIR   + 'panel.html',
-            path        : HTML_FS_DIR   + 'path.html',
-            pathLink    : HTML_FS_DIR   + 'path-link.html',
-            link        : HTML_FS_DIR   + 'link.html',
-        },
+        TMPL_PATH   = [
+            'file',
+            'panel',
+            'path',
+            'pathLink',
+            'link',
+        ],
         
         Template    = {},
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
         DIR         = main.DIR;
-    
+        
     readConfig(init);
     
     
@@ -145,9 +145,8 @@
     function readFiles(params, callback) {
         var filesList, paths   = {};
         
-        filesList   = Object.keys(TMPL_PATH)
-            .map(function(name) {
-                var path = TMPL_PATH[name];
+        filesList   = TMPL_PATH.map(function(name) {
+                var path = HTML_FS_DIR + name + '.html';
                 
                 paths[path] = name;
                 
@@ -178,7 +177,9 @@
                         cert    : files[CERT]
                     };
                 
-                names           = filesList.map(path.basename);
+                names           = TMPL_PATH.map(function(item) {
+                    return item + '.html';
+                });
                 
                 msg = CloudFunc.formatMsg('read', names, status);
                 Util.log(msg);
