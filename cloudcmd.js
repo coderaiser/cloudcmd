@@ -108,8 +108,7 @@
     
     
     function init() {
-        var serverDir, params, filesList, isContain, argvFirst, keys,
-            paths   = {},
+        var serverDir, params, isContain, argvFirst,
             argv    = process.argv;
         
         if (update)
@@ -154,15 +153,22 @@
             route       : route
         };
         
-        keys        = Object.keys(TMPL_PATH);
-        
-        filesList   = keys.map(function(name) {
-            var path = TMPL_PATH[name];
-            
-            paths[path] = name;
-            
-            return path;
+        readFiles(params, function(params) {
+            server.start(params);
         });
+    }
+    
+    function readFiles(params, callback) {
+        var filesList, paths   = {};
+        
+        filesList   = Object.keys(TMPL_PATH)
+            .map(function(name) {
+                var path = TMPL_PATH[name];
+                
+                paths[path] = name;
+                
+                return path;
+            });
         
         if (Config.ssl)
             filesList.push(KEY, CERT);
@@ -192,11 +198,11 @@
                     return path.basename(name);
                 });
                 
-                server.start(params);
+                msg = CloudFunc.formatMsg('read', names, status);
+                Util.log(msg);
             }
             
-            msg = CloudFunc.formatMsg('read', names, status);
-            Util.log(msg);
+            callback(params);
         });
     }
     
