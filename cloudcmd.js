@@ -45,7 +45,6 @@
         
     readConfig(init);
     
-    
     /**
      * additional processing of index file
      */
