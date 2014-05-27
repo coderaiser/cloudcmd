@@ -30,11 +30,11 @@
         PATH_INDEX  =HTML_FS_DIR   + 'index.html',
         
         TMPL_PATH   = {
-            File        : HTML_FS_DIR   + 'file.html',
-            Panel       : HTML_FS_DIR   + 'panel.html',
-            Path        : HTML_FS_DIR   + 'path.html',
-            PathLink    : HTML_FS_DIR   + 'path-link.html',
-            Link        : HTML_FS_DIR   + 'link.html',
+            file        : HTML_FS_DIR   + 'file.html',
+            panel       : HTML_FS_DIR   + 'panel.html',
+            path        : HTML_FS_DIR   + 'path.html',
+            pathLink    : HTML_FS_DIR   + 'path-link.html',
+            link        : HTML_FS_DIR   + 'link.html',
         },
         
         Template    = {},
@@ -69,13 +69,13 @@
             data        = data.replace(keysPanel + '"', keysPanel +' hidden"');
         }
         
-        left    = Util.render(Template.Panel, {
-            id      : HTML_FS_DIR   + LEFT,
+        left    = Util.render(Template.panel, {
+            id      : LEFT,
             side    : 'left',
             content : panel
         });
         
-        right    = Util.render(Template.Panel, {
+        right    = Util.render(Template.panel, {
             id      : RIGHT,
             side    : 'right',
             content : panel
@@ -109,7 +109,8 @@
     
     function init() {
         var serverDir, params, filesList, isContain, argvFirst, keys,
-            argv = process.argv;
+            paths   = {},
+            argv    = process.argv;
         
         if (update)
             update.get();
@@ -156,13 +157,17 @@
         keys        = Object.keys(TMPL_PATH);
         
         filesList   = keys.map(function(name) {
-            return TMPL_PATH[name];
+            var path = TMPL_PATH[name];
+            
+            paths[path] = name;
+            
+            return path;
         });
         
         if (Config.ssl)
             filesList.push(KEY, CERT);
         
-        files.read(filesList, 'utf-8', function(errors, files) {
+        files.read(filesList, 'utf8', function(errors, files) {
             var status, msg, names;
             
             if (errors) {
@@ -170,7 +175,12 @@
                 Util.log(errors);
             } else {
                 status          = 'ok';
-                Template        = files;
+                
+                Object.keys(files).forEach(function(path) {
+                    var name = paths[path];
+                    
+                    Template[name] = files[path];
+                });
                 
                 if (Config.ssl)
                     params.ssl  = {
