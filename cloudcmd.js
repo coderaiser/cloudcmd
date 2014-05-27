@@ -194,9 +194,7 @@
                         cert    : files[CERT]
                     };
                 
-                names           = filesList.map(function(name) {
-                    return path.basename(name);
-                });
+                names           = filesList.map(path.basename);
                 
                 msg = CloudFunc.formatMsg('read', names, status);
                 Util.log(msg);
