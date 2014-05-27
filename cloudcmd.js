@@ -108,35 +108,19 @@
     
     
     function init() {
-        var serverDir, params, isContain, argvFirst,
-            argv    = process.argv;
+        var params,
+            argv        = process.argv,
+            length      = argv.length - 1,
+            argvFirst   = argv[length],
+            isTest      = Util.isContainStr(argvFirst, 'test');
         
         if (update)
             update.get();
         
-        /* Determining server.js directory
-         * and chang current process directory
-         * (usually /) to it.
-         * argv[1] - is always script name
-         */
-        serverDir = path.dirname(argv[1]) + '/';
+        Util.log('server dir: ' + DIR);
         
-        if (DIR !== serverDir) {
-            Util.log('current dir: ' + DIR);
-            process.chdir(serverDir);
-        }
-        
-        Util.log('server dir: ' + serverDir);
-        
-        /* if command line parameter testing resolved 
-         * setting config to testing, so server
-         * not created, just init and
-         * all logs writed to screen */
-        argvFirst    = argv[argv.length - 1];
-        isContain   = Util.isContainStr(argvFirst, 'test');
-        
-        if (isContain) {
-            Util.log(argv);
+        if (isTest) {
+            Util.log('argv: ', argv);
             Config.server  = false;
         }
         
