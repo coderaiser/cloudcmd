@@ -13,7 +13,7 @@
         TEMPLATEPATH        = FS_DIR    + 'file.html',
         LINK_TEMPLATE_PATH  = FS_DIR    + 'link.html',
         PATHTEMPLATE_PATH   = FS_DIR    + 'path.html',
-        PATH_LINK           = FS_DIR    + 'path-link.html',
+        PATH_LINK           = FS_DIR    + 'pathLink.html',
         EXPECT_PATH         = DIR       + 'test/lib/cloudfunc.html',
         
         Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH, PATH_LINK],
