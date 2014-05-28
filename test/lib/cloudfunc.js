@@ -52,9 +52,9 @@
         files.read(Files, 'utf-8', function(errors, files) {
             var isNotOk, i, template, pathTemplate, pathLink, linkTemplate, expect, result;
             
-            if (errors)
-                Util.log(errors);
-            else {
+            if (errors) {
+                throw(console.log(errors));
+            } else {
                 Util.time('CloudFunc.buildFromJSON');
                 
                 template        = files[TEMPLATEPATH];
