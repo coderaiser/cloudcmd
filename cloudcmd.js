@@ -7,7 +7,6 @@
         HTMLDIR     = main.HTMLDIR,
         JSONDIR     = main.JSONDIR,
         
-        path        = main.path,
         fs          = main.fs,
         files       = main.files,
         CloudFunc   = main.cloudfunc,
