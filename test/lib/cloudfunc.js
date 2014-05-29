@@ -10,13 +10,14 @@
         files               = require(LIBDIR + 'server/files'),
         
         FS_DIR              = HTMLDIR   + 'fs/',
-        TEMPLATEPATH        = FS_DIR    + 'file.html',
-        LINK_TEMPLATE_PATH  = FS_DIR    + 'link.html',
-        PATHTEMPLATE_PATH   = FS_DIR    + 'path.html',
-        PATH_LINK           = FS_DIR    + 'pathLink.html',
         EXPECT_PATH         = DIR       + 'test/lib/cloudfunc.html',
         
-        Files               = [TEMPLATEPATH, PATHTEMPLATE_PATH, LINK_TEMPLATE_PATH, EXPECT_PATH, PATH_LINK],
+        TMPL_PATH   = [
+            'file',
+            'path',
+            'pathLink',
+            'link',
+        ],
         
         JSON_FILES          = {
             path  : '/etc/X11/', 
@@ -49,28 +50,39 @@
             '</div>';
     
     exports.check = function() {
-        files.read(Files, 'utf-8', function(errors, files) {
-            var isNotOk, i, template, pathTemplate, pathLink, linkTemplate, expect, result;
+        var paths       = {},
+            
+            filesList   = TMPL_PATH.map(function(name) {
+                var path = FS_DIR + name + '.html';
+                
+                paths[path] = name;
+                
+                return path;
+            })
+            .concat(EXPECT_PATH);
+        
+        files.read(filesList, 'utf-8', function(errors, files) {
+            var isNotOk, expect, result,
+                i           = 0,
+                template    = {};
             
             if (errors) {
                 throw(console.log(errors));
             } else {
                 Util.time('CloudFunc.buildFromJSON');
                 
-                template        = files[TEMPLATEPATH];
-                pathTemplate    = files[PATHTEMPLATE_PATH];
-                pathLink        = files[PATH_LINK],
-                linkTemplate    = files[LINK_TEMPLATE_PATH];
+                Object.keys(files).forEach(function(path) {
+                    var name = paths[path];
+                    
+                    if (path !== EXPECT_PATH)
+                        template[name] = files[path];
+                });
+                
                 expect          = files[EXPECT_PATH];
                 
                 result          = CloudFunc.buildFromJSON({
-                    data: JSON_FILES,
-                    template: {
-                        file        : template,
-                        path        : pathTemplate,
-                        pathLink    : pathLink,
-                        link        : linkTemplate
-                    }
+                    data    : JSON_FILES,
+                    template: template
                 });
                 
                 Expect          += expect;
