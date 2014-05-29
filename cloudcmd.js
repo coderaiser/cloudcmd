@@ -144,12 +144,12 @@
         var filesList, paths   = {};
         
         filesList   = TMPL_PATH.map(function(name) {
-                var path = HTML_FS_DIR + name + '.html';
-                
-                paths[path] = name;
-                
-                return path;
-            });
+            var path = HTML_FS_DIR + name + '.html';
+            
+            paths[path] = name;
+            
+            return path;
+        });
         
         if (Config.ssl)
             filesList.push(KEY, CERT);
