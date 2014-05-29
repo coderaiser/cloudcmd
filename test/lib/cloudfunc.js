@@ -61,7 +61,7 @@
             })
             .concat(EXPECT_PATH);
         
-        files.read(filesList, 'utf-8', function(errors, files) {
+        files.read(filesList, 'utf8', function(errors, files) {
             var isNotOk, expect, result,
                 i           = 0,
                 template    = {};
