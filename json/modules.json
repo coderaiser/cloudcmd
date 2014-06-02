@@ -9,6 +9,19 @@
     "socket",
     "terminal",
     "console", [{
+        "name": "remote",
+        "data": [ {
+            "name": "jquery",
+            "version": "2.1.1",
+            "local": "/lib/client/jquery.js",
+            "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
+        }, {
+            "name": "socket",
+            "version": "1.0.0",
+            "local": "/socket.io/socket.io.js",
+            "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
+        }]
+        }, {
         "name": "storage",
         "data": [{
                 "name": "DropBox",
