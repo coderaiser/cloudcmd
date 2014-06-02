@@ -8,7 +8,7 @@
     "contact",
     "socket",
     "terminal",
-    "console", {
+    "console", [{
         "name": "storage",
         "data": [{
                 "name": "DropBox",
@@ -48,5 +48,5 @@
                 }
             }
         ]
-    }
+    }]
 ]
