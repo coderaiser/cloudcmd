@@ -100,16 +100,16 @@
                 var WORD    = 'hello world',
                     funcSlow    = function(callback) {
                         setTimeout(function() {
-                            Util.exec(callback, 'hello');
+                            callback(null, 'hello');
                         }, 10);
                     },
                     funcFast    = function(callback) {
                         setTimeout(function() {
-                            Util.exec(callback, 'world');
+                            callback(null, 'world');
                         }, 1);
                     };
                     
-                    Util.exec.parallel([funcSlow, funcFast], function(hello, world) {
+                    Util.exec.parallel([funcSlow, funcFast], function(error, hello, world) {
                         WORD.should.equal(hello + ' ' + world);
                     });
             });
