@@ -20,6 +20,17 @@
             "version": "1.0.3",
             "local": "/socket.io/socket.io.js",
             "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
+        }, {
+            "name": "fancybox",
+            "version": "2.1.5",
+            "local": [
+                "/lib/client/view/fancyBox/source/jquery.fancybox.css",
+                "/lib/client/view/fancyBox/source/jquery.fancybox.js"
+            ],
+            "remote": [
+                "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/jquery.fancybox.min.css",
+                "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/jquery.fancybox.min.js"
+            ]
         }]
     }, {
         "name": "storage",
