@@ -11,9 +11,9 @@
             if (opener) {
                 var CloudCmd = opener.CloudCmd;
                 
-                CloudCmd.getModules(function(pModules) {
+                CloudCmd.getModules(function(error, modules) {
                     var Util        = opener.Util,
-                        Storage     = Util.findObjByNameInArr(pModules, 'storage'),
+                        Storage     = Util.findObjByNameInArr(modules, 'storage'),
                         GitHub      = Util.findObjByNameInArr(Storage, 'GitHub'),
                         GitHub_ID   = GitHub && GitHub.key;
                     
