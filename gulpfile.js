@@ -52,19 +52,18 @@
         var version = 'v' + Info.version,
             name    = 'ChangeLog';
         
-        Util.execParallel([
+        Util.exec.parallel([
             Util.exec.with(exec, 'shell/log.sh ' + version),
-            Util.exec.with(fs.readFile, name),
-            ], function(execParams, readParams) {
-                var ERROR       = 0,
-                    DATA        = 1,
-                    STD_ERR     = 2,
-                    error       = execParams[ERROR] || execParams[STD_ERR] || readParams[ERROR],
+            Util.exec.with(fs.readFile, name, 'utf8'),
+            ], function(error, execParams, fileData) {
+                var DATA        = 0,
+                    STD_ERR     = 1,
                     execData    = execParams[DATA],
-                    fileData    = readParams[DATA],
                     date        = Util.getShortDate(),
                     head        = date + ', ' + version + '?\n\n',
                     data        = head + execData + fileData;
+                
+                error   = error || execParams[STD_ERR];
                 
                 if (error)
                     console.log(error);
