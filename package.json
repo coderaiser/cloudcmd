@@ -28,11 +28,11 @@
     "socket.io": "~1.0.0"
   },
   "devDependencies": {
-    "gulp": "3.6.x",
+    "gulp": "~3.7.x",
     "gulp-jshint": "1.6.x",
     "gulp-mocha": "^0.4.1",
     "gulp-recess": "0.3.x",
-    "should": "^3.3.1"
+    "should": "~4.0.x"
   },
   "license": "MIT",
   "engines": {
