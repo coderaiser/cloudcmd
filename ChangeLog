@@ -1,3 +1,212 @@
+2014.06.10, v0.9.0
+
+fix:
+- (main) generateHeaders: if no cache: max-age - 0
+- (edit) diff: add error check
+- (win) getVolumes: rm chcp
+- (gulp) changelog: execParallel -> exec.parallel
+- (events) remove: type, listener, element -> type, element, listener
+- (menu) download: folders in json
+- (notify) send addClick: focus, notify -> notify, focus
+- (edit) showMessage: add font-size
+- (load) load: func.onload -> func && func.onload
+- (key) preventDefault: DOM -> Events
+- (listeners) changePanel: DOM.getPanel -> Info.panel
+- (key) preventDefault: DOM -> Events
+- (term) stopPropogation, cancelBubble
+- (terminal) init: cssSet -> load.style, jqueryLoad -> loadJquery
+- (listeners) onDrop toggle: add drop
+- (edit) onDrop: files -> Util.slice(files)
+- (put) onPut: add options
+- (pipe) on: memory lick
+- (pipe) on: length -> indexOf
+- (dom) setCurrentName: id -> data-name
+- (view) show: add fs
+- (pipe) create: EventEmitter memory leak
+- (dropbox) load
+- (menu) uploadTo: name
+- (menu) DOM.getIdBySrc -> DOM.load.getIdBySrc
+- (cloudcmd) DOM.jsload -> DOM.load.js
+- (client) load.jquery -> loadJquery
+- (config) show: rm cssLoad
+- (util) slice: array, count -> arra, begin, end
+- (dom) getElement: attr -> attribute
+- (rest) DIR
+- (users) require: time -> ./time
+- (cloudcmd) init: read templates
+- (cloudcmd) init: add path-link
+- (cloudfunc) add " "
+- (client) createFileTable: rm unSetOnPanel
+- (rest) onFSGet: if !isStr stringifyJSON
+- (dom) getCurrentData RESTful.read: rm "?json"
+- (menu) hide on Esc
+- (dom) execParallel -> Util.exec.parallel
+- (listeners) setOnPanel: add preventDefault
+- (util) slice: always return array
+- (rest) read: add dataType
+- (view) getType: add return
+- (view) show switch: path -> type
+- (view) show: mv default to bottom of switch
+- (view) isVideo: isMatch always undefined
+- (cloudcmd) readIndex: add isMinify
+- (menu) add Images
+- (edit) if menu not loaded -> not close
+- (minify) callback: params -> error, params
+- (edit) close menu before close
+- (menu) beforeShow: name -> params.name
+- (view) isAudio, isVideo regExp
+- (util) replaceStr: escape before create
+- (util) replaceStr: isStr -> isString
+- (util) checkExtension: isObject -> isArray
+- (cloudcmd) readIndex: params -> error, params
+- (util) strCmp: indexOf && length
+- (util) rmStr: str.replace -> Util.replace
+- (util) isObject: array was object
+- (dom) setCurrentName: getCurrentDirName -> getCurrentDirPath
+- (dom) setCurrentName: link.href
+- (dom) change url when current dir changed
+- (console) log: type -> typeParam
+- (gulp) jshint: add lib/client
+- (listeners) if click on path of passive panel change content on active panel
+
+feature:
+- (package) should v4.0, gulp v3.7
+- (listeners) onContextMenu: add MenuIO check
+- (dom) loadMenu: add error
+- (load) funcError: rm event
+- (main) terminal: add win32 check
+- (view) {before,after}{show, close} exec: parallel -> series
+- (gulp) rm gulp-concat
+- (modules) cdnjs -> jsdelivr
+- (package) express v4.4
+- (key) switchKey: rm SLASH
+- (modules) ace: add date
+- (modules) add ace
+- (edit) ace v1.1.3
+- (storage) callback(ret) -> callback(error, ret)
+- (storage) get: callback(data) -> callback(error, data)
+- (modules) socket.io v1.0.4
+- (util) callback(arg1...) -> callback(error, arg1...)
+- (modules) add fancybox
+- (terminal) add hide
+- (term) v0.0.4
+- (events) preventDefault: DOM -> Events
+- (console) handler: rm Images: showLoad, hide
+- (modules) socket.io v1.0.3
+- (modules) add jquery, socket
+- (util) findObjByNameInArr: find array in array first
+- (load) rm jquery
+- (socket) init: add config check online
+- (dom) showError: isQuiet
+- (socket) add cdn
+- (pipe) create: params -> read, write, options, callback
+- (minify) rm MinFolder
+- (github) uploadFiles: change messge
+- (events) add
+- (dom) Events: type, element, listener
+- (dom) Events: addLoad
+- (load) loader -> load
+- (loader) anyLoadOnLoad -> loadSeries
+- (view) anyLoadOnLoad -> loadParallel
+- (loader) anyload: not_append -> notAppend
+- (loader) asyncLoad -> loadParallel
+- (console) onConnection: rm "\n"
+- (package) express v4.3
+- (package) morgan v1.1
+- (html) path-link -> pathLink
+- (util) add checkArgs
+- (html) add path-link
+- (cloudfunc) getPathElement -> getPathLinks
+- (listeners) add onPathElementClick
+- (cloudfunc) buildFromJSON: add data-name
+- (listeners) rm changeLinks
+- (cloudfunc) buildFromJSON: change params
+- (cloudcmd) rm ?json
+- (listeners) rm unSetOnPanel
+- (util) bind -> exec.with
+- (util) tryCatch{Log} -> exec.try{Log}
+- (util) rm tryCatch{Debug, Call}
+- (polyfill) add isArray
+- (util) loadOnLoad -> exec.series
+- (util) retExec -> exec.ret
+- (util) ifExec -> exec.if
+- (util) execIfExist -> exec.ifExist
+- (util) asyncCall -> exec.parallel
+- (loader) anyLoadInParallel -> asyncLoad
+- (loader) anyLoadInParallel: simplified
+- (client) createFileTable: make private
+- (dom) setCurrentFile: add options
+- (gulp) rm stylestats
+- (util) add forEach
+- (listeners) add changePanel
+- (client) loadModule: params could not be string
+- (util) slice: add test
+- (util) render: add test
+- (util) asyncCall: add test
+- (cloudfunc) add tests
+- (util) rm execOnMatch
+- (gulp) add test subfolders
+- (util) exec: add test
+- (util) add tests
+- (util) getExtension -> getExt
+- (util) checkExt: add test
+- (test) add util
+- (rest) read: add optional dataType
+- (jshint) bitwise: false
+- (package) express v4.2
+- (socket) v1.0.0
+- (console) make private log, error
+- (view) add getType
+- (package) gulp-jshint v1.6
+- (package) minify v0.6.0
+- (edit) load menu on first request
+- (menu) v0.6.3
+- (edit) menu: add "Delete"
+- (edit) menu: add "Select All"
+- (edit) menu: add close
+- (edit) add "Go To Line"
+- (menu) v0.6.2
+- (menu) v0.6.1
+- (edit) add menu
+- (menu) v0.6.0
+- (listeners) onContextMenu: show menu if not on file
+- (menu) add second menu, when click not on file
+- (menu) v0.5.0
+- (rest) read: log if query
+- docs(help) View: add s, hot keys
+- (util) checkExtension -> checkExt
+- (cloudfunc) removeListener: add return this
+- (dom) rm getCurrentFileContent
+- (config) .config .list : rm text-align; rm .border
+- (config) rm border
+- (menu) change menu module
+- (view) show: data, callback, newConfig -> data, options
+- (edit) add confirm, if file changed and not saved, before close
+- (config) mv apiURL to CloudFunc
+- (config) mv apiURL to CloudFunc
+- (rest) config: add read
+- (util) add back isArrayBuffer
+- (util) rm isArrayBuffer
+- (util) rm for, fori
+- (util) rm forIn
+- (edit) mv theme to json
+- (edit) add tabSize
+- (edit) mv options to file
+- (jshint) do not capitalize names of constructor functions
+- (util) add getType
+- (style) .mini-icon: rm background{position, repeat}
+- (client) loadDir: rm event
+- (client) loadDir: change params
+- (package) express v4.1.1
+- (package) mkdirp v0.5.0
+- (jquery) v2.1.1
+- (jquery) v2.1.1
+- (package) minify v0.5.1
+- (commander) getDirPath -> addSlashToEnd
+- (util) rm paralelExec
+- (server) rm WIN32 check for ip set
+
+
 2014.04.28, v0.8.4
 
 fix:
