@@ -28,7 +28,7 @@
     "socket.io": "~1.0.0"
   },
   "devDependencies": {
-    "gulp": "~3.7.x",
+    "gulp": "~3.8.x",
     "gulp-jshint": "1.6.x",
     "gulp-mocha": "^0.4.1",
     "gulp-recess": "0.3.x",
