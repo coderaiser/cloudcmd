@@ -13,13 +13,12 @@ Commit
 Format of the commit message: **type(scope) subject**
 
 **Type**:
-- feature
-- fix (bug fix)
-- docs (documentation)
-- style (formatting, missing semi colons, …)
-- refactor
-- test (when adding missing tests)
-- chore (maintain)
+- feature(scope) subject
+- fix(scope) subject
+- docs(scope) subject
+- refactor(scope) subject
+- test(scope) subject
+- chore(scope) subject
 
 **Scope**:
 Scope could be anything specifying place of the commit change.
