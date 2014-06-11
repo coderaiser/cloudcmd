@@ -1,3 +1,17 @@
+2014.06.11, v0.9.1
+
+fix:
+- (edit) showMessage: mv style to load
+- (edit) showMessage: empty message
+- (view) beforeClose: callback then hide
+
+feature:
+- (edit) showMessage: rm font-size
+- (package) gulp v3.8
+- (package) dropbox: v0.10.3
+- (img) menu update
+
+
 2014.06.10, v0.9.0
 
 fix:

@@ -1,4 +1,4 @@
-Cloud Commander v0.9.0 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![License][LicenseIMGURL]][LicenseURL]
+Cloud Commander v0.9.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![License][LicenseIMGURL]][LicenseURL]
 ===============
 ###[Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg
