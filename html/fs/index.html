@@ -37,20 +37,22 @@
             
             var script,
                 lib     = 'lib/',
-                client  = lib + 'client/',
+                client  = 'client/',
                 files   = [
-                    lib     + 'util.js',
-                    lib     + 'cloudfunc.js',
-                    client  + 'dom.js',
-                    client  + 'events.js',
-                    client  + 'rest.js',
-                    client  + 'load.js',
-                    client  + 'notify.js',
-                    client  + 'storage.js',
-                    lib     + 'client.js',
-                    client  + 'listeners.js',
-                    client  + 'key.js'
-                ];
+                    'util',
+                    'cloudfunc',
+                    client  + 'dom',
+                    client  + 'events',
+                    client  + 'rest',
+                    client  + 'load',
+                    client  + 'notify',
+                    client  + 'storage',
+                    'client',
+                    client  + 'listeners',
+                    client  + 'key'
+                ].map(function(name) {
+                   return lib + name + '.js';
+                });
             
             window.addEventListener('load', load);
             
