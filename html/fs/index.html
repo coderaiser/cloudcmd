@@ -35,29 +35,28 @@
         !(function() {
             'use strict';
             
-            var script,
-                lib     = 'lib/',
-                client  = 'client/',
-                files   = [
-                    'util',
-                    'cloudfunc',
-                    client  + 'dom',
-                    client  + 'events',
-                    client  + 'rest',
-                    client  + 'load',
-                    client  + 'notify',
-                    client  + 'storage',
-                    'client',
-                    client  + 'listeners',
-                    client  + 'key'
-                ].map(function(name) {
-                   return lib + name + '.js';
-                });
-            
             window.addEventListener('load', load);
             
             function load() {
-                var urlFiles     = getJoinURL(files);
+                var lib     = 'lib/',
+                    client  = 'client/',
+                    files   = [
+                        'util',
+                        'cloudfunc',
+                        client  + 'dom',
+                        client  + 'events',
+                        client  + 'rest',
+                        client  + 'load',
+                        client  + 'notify',
+                        client  + 'storage',
+                        'client',
+                        client  + 'listeners',
+                        client  + 'key'
+                    ].map(function(name) {
+                       return lib + name + '.js';
+                    }),
+                    
+                    urlFiles     = getJoinURL(files);
                 
                 createScript(urlFiles, function() {
                     CloudCmd.init();
@@ -67,7 +66,8 @@
             }
             
             function createScript(url, callback) {
-                script          = document.createElement('script');
+                var script      = document.createElement('script');
+                
                 script.src      = url;
                 script.async    = true;
                 
