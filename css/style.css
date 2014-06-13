@@ -84,6 +84,7 @@ body {
 
 .icon {
     margin-left : 0.5%;
+    cursor: default;
 }
 
 .error::before {
