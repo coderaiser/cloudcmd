@@ -1,10 +1,10 @@
-Cloud Commander v0.9.1 [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![License][LicenseIMGURL]][LicenseURL]
+Cloud Commander v0.9.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 ===============
 ###[Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
-[NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg
-[BuildStatusIMGURL]:        https://api.travis-ci.org/coderaiser/cloudcmd.png?branch=dev
-[DependencyStatusIMGURL]:   https://gemnasium.com/coderaiser/cloudcmd.png
-[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg
+[NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
+[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd/dev.svg?style=flat
+[DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/coderaiser/cloudcmd.svg?style=flat
+[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
