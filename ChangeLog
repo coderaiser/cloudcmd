@@ -1,3 +1,16 @@
+2014.06.16, v0.9.2
+
+fix:
+- (menu) show: add Images.hide
+- (listeners) onContextMenu: if menu showed in editor first - it would not be shown on a file
+- (load) ajax xhr.send: p.data -> data
+- (style) .icon: set default mouse cursor in firefox
+
+feature:
+- (load) ajax: stringify if data is object
+- (console) dir: cloudcmd dir -> process curren dir
+
+
 2014.06.11, v0.9.1
 
 fix:
