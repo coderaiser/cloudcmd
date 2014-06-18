@@ -2,7 +2,10 @@
     'use strict';
     
     var DIR         = __dirname     + '/',
-        main        = require(DIR   + 'lib/server/main'),
+        DIR_SERVER  = DIR + 'lib/server/',
+        
+        main        = require(DIR_SERVER + 'main'),
+        flop        = require(DIR_SERVER + 'flop'),
         
         HTMLDIR     = main.HTMLDIR,
         JSONDIR     = main.JSONDIR,
@@ -13,7 +16,6 @@
         AppCache    = main.appcache,
         Util        = main.util,
         update      = main.update,
-        dir         = main.dir,
         
         server      = main.librequire('server'),
         Minify      = main.minify,
@@ -233,7 +235,7 @@
             } else if (isFS) {
                 name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
                 
-                getContent(name, function(error, data, isFile) {
+                flop.read(name, function(error, data, isFile) {
                     if (error)
                         main.sendError(p, error);
                     else if (isFile) {
@@ -253,18 +255,6 @@
                 });
             }
         }
-    }
-    
-    function getContent(name, callback) {
-        dir.isDir(name, function(error, isDir) {
-            var getDirContent   = main.commander.getDirContent,
-                func            = Util.exec.ret(callback);
-            
-            if (!error && isDir)
-                getDirContent(name, callback);
-            else
-                func(error, null, !isDir);
-       });
     }
     
     function readIndex(json, callback) {
