@@ -235,12 +235,14 @@
             } else if (isFS) {
                 name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
                 
-                flop.read(name, function(error, data, isFile) {
-                    if (error)
-                        main.sendError(p, error);
-                    else if (isFile) {
+                flop.read(name, function(error, data) {
+                    var isFile = error.code === 'ENOTDIR';
+                    
+                    if (isFile) {
                         p.name = name;
                         main.sendFile(p);
+                    } else if (error) {
+                        main.sendError(p, error);
                     } else
                         readIndex(data, function(error, data) {
                             var NOT_LOG = true;
