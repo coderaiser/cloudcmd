@@ -61,13 +61,13 @@
             })
             .concat(EXPECT_PATH);
         
-        files.read(filesList, 'utf8', function(errors, files) {
+        files.read(filesList, 'utf8', function(error, files) {
             var isNotOk, expect, result,
                 i           = 0,
                 template    = {};
             
-            if (errors) {
-                throw(console.log(errors));
+            if (error) {
+                throw(new Error(error));
             } else {
                 Util.time('CloudFunc.buildFromJSON');
                 
