@@ -28,7 +28,7 @@
                 mode: '40755'
             }, {
                 name: 'prefdm',
-                size: 1328,
+                size: '1.30kb',
                 uid : 0,
                 mode: '100755'
             }]
