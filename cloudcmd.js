@@ -156,12 +156,11 @@
         if (Config.ssl)
             filesList.push(KEY, CERT);
         
-        files.read(filesList, 'utf8', function(errors, files) {
+        files.read(filesList, 'utf8', function(error, files) {
             var status, msg, names;
             
-            if (errors) {
-                status          = 'error';
-                Util.log(errors);
+            if (error) {
+                Util.log(error);
             } else {
                 status          = 'ok';
                 
