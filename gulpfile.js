@@ -23,6 +23,7 @@
             LIB_CLIENT + 'storage/*.js',
             LIB_SERVER + '/**/*.js',
             '!' + LIB + 'diff/diff-match-patch.js',
+            '!' + LIB + 'promise.js',
             '!' + LIB_CLIENT + 'jquery.js'
         ];
     
