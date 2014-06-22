@@ -5,7 +5,8 @@
         DIR_SERVER  = DIR + 'lib/server/',
         
         main        = require(DIR_SERVER + 'main'),
-        flop        = require(DIR_SERVER + 'flop'),
+        format      = require(DIR_SERVER + 'format'),
+        mellow      = require(DIR_SERVER + 'mellow'),
         
         HTMLDIR     = main.HTMLDIR,
         JSONDIR     = main.JSONDIR,
@@ -18,6 +19,7 @@
         update      = main.update,
         
         server      = main.librequire('server'),
+        
         Minify      = main.minify,
         Config      = main.config,
         
@@ -211,7 +213,7 @@
      * routing of server queries
      */
     function route(request, response, callback) {
-        var name, p, isAuth, isFS;
+        var name, p, isAuth, isFS, path;
         
         if (request && response) {
             name    = main.getPathName(request);
@@ -233,11 +235,15 @@
                 main.sendFile(p);
             } else if (isFS) {
                 name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
+                path    = mellow.convertPath(name);
                 
-                flop.read(name, function(error, data) {
+                mellow.read(path, function(error, data) {
+                    if (data)
+                        data.path = format.addSlashToEnd(name);
+                    
                     if (error)
                         if (error.code === 'ENOTDIR') {
-                            p.name = name;
+                            p.name = path;
                             main.sendFile(p);
                         } else {
                             main.sendError(p, error);
