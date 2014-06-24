@@ -97,3 +97,13 @@
     font-family : 'Fontello';
     content     : '\e814  ';
 }
+
+.icon-clear::before {
+    font-family : 'Fontello';
+    content     : '\e815  ';
+}
+
+.icon-refresh::before {
+    font-family : 'Fontello';
+    content     : '\e816  ';
+}
