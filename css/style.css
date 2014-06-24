@@ -73,8 +73,8 @@ body {
 }
 
 .path-icon {
+    position: relative;
     color: #222;
-    position    : relative;
 }
 
 .path-icon:active {
