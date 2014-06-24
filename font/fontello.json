@@ -187,6 +187,18 @@
             "css": "resize-full",
             "code": 59412,
             "src": "fontawesome"
+        },
+         {
+          "uid": "ebc57fa8400e4ede049ac5dc665210e1",
+          "css": "eraser",
+          "code": 59413,
+          "src": "fontawesome"
+        },
+        {
+          "uid": "3bd18d47a12b8709e9f4fe9ead4f7518",
+          "css": "arrows-ccw",
+          "code": 59414,
+          "src": "entypo"
         }
     ]
 }

@@ -63,28 +63,27 @@ body {
     user-select         : text;
 }
 
-.path-icon {
-    position    : relative;
-    top         : 3px;
-    left        : -4px;
-    display     : inline-block;
-    width       : 15px;
-    height      : 15px;
-}
-
-.path-icon:hover {
-  cursor:pointer;
-}
-
-.path-icon:active {
-    position: relative;
-    top: 4px;
-    text-shadow:black 0 0 1px;
-}
-
 .icon {
     margin-left : 0.5%;
     cursor: default;
+}
+
+.icon:hover {
+    cursor: default;
+}
+
+.path-icon {
+    color: #222;
+    position    : relative;
+}
+
+.path-icon:active {
+    top: 1px;
+}
+
+.path-icon:hover {
+    color : #06e;
+    cursor: pointer;
 }
 
 .error::before {
@@ -120,14 +119,6 @@ body {
     background      : url(/img/spinner.gif);
 }
 
-.refresh-icon {
-    background:url(/img/refresh.png) no-repeat;
-}
-
-.refresh-icon:active {
-    background-position: 0 -15px;
-}
-
 .cmd-button {
     width: 5%;
     height: 30px;
@@ -153,15 +144,6 @@ body {
 
 .cmd-button:focus {
     outline: 0;
-}
-
-.clear-storage {
-    margin-right: 6px;
-    margin-left: 7px;
-    background:url(/img/clear.png)  -4px -4px no-repeat;
-}
-.clear-storage:active {
-    top:5px;
 }
 
 .links a {
