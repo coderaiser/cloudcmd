@@ -8,6 +8,14 @@
     "type": "git",
     "url": "git://github.com/coderaiser/cloudcmd.git"
   },
+  "keywords": [
+    "file manager",
+    "orthodox",
+    "file",
+    "folder",
+    "console",
+    "editor"
+  ],
   "bin": {
     "cloudcmd": "./bin/cloudcmd"
   },
