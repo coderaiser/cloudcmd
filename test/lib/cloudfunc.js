@@ -25,12 +25,12 @@
                 name: 'applnk',
                 size: 'dir',
                 uid : 0,
-                mode: '40755'
+                mode: 'rwx r-x r-x'
             }, {
                 name: 'prefdm',
                 size: '1.30kb',
                 uid : 0,
-                mode: '100755'
+                mode: 'rwx r-x r-x'
             }]
         },
         
