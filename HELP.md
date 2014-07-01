@@ -138,6 +138,7 @@ Console
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `~`                   | open
+| `Ctrl` + `P`          | paste path of current directory
 | `Esc`                 | close
 
 Config
