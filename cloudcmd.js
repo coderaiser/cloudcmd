@@ -23,6 +23,8 @@
         Minify      = main.minify,
         Config      = main.config,
         
+        win         = require(DIR_SERVER + 'win'),
+        
         CONFIG_PATH = JSONDIR + 'config.json',
         
         KEY         = DIR + 'ssl/ssl.key',
@@ -47,6 +49,7 @@
         DIR         = main.DIR;
         
     readConfig(init);
+    win.prepareCodePage();
     
     /**
      * additional processing of index file
