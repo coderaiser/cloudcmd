@@ -154,6 +154,7 @@ Console
 |:----------------------|:--------------------------------------------
 | `~`                   | open
 | `Ctrl` + `P`          | paste path of current directory
+| `Ctrl` + `Z`          | cancel current prompt
 | `Esc`                 | close
 
 Config
