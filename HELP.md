@@ -52,6 +52,21 @@ To start work type in address bar of your browser:
 
     http://127.0.0.1:8000
 
+Update
+---------------
+**Cloud Commander** is very often updated.
+
+Update is doing automagically but it could be done also manualy.
+If you cloned repository you could get last changes with:
+
+    git pull
+
+If you installed Cloud Commander with `npm` just re-install it:
+
+    npm i cloudcmd -g
+
+After that clear cache of your browser, restart application and reload page.
+
 Hot keys
 ---------------
 
@@ -321,22 +336,6 @@ To run Cloud Commander as daemon in linux you could set **log** to true in confi
 do something like this:
     
     nohup node cloudcmd
-
-Update
----------------
-**Cloud Commander** is very often updated.
-Update is doing automagically but it could be done also manualy
-by typing a few commands in cloudcmd directory:
-
-    git pull
-or check new version on npm
-
-    npm info cloudcmd
-
-and then, if there is new version
-
-    npm r cloudcmd
-    npm i cloudcmd
 
 Additional modules list
 ---------------
