@@ -37,6 +37,10 @@
     color       : #b7b4a8;
 }
 
+.jqconsole-prompt, .jqconsole-old-prompt {
+    margin: 10px;
+}
+
 .brace {
     color: #00FFFF;
 }
