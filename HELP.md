@@ -75,7 +75,7 @@ Hot keys
 | `F1`                  | help
 | `F2`                  | rename
 | `F3`                  | view
-| `Shift` + `F3`        | view as `markdown`
+| `Shift + F3`          | view as `markdown`
 | `F4`                  | edit
 | `F5`                  | copy
 | `F6`                  | rename/move
