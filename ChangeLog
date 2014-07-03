@@ -1,3 +1,109 @@
+2014.07.3, v1.0.0
+
+fix:
+- (console) handler: add new prompt on empty command
+- (console) Ctrl + Z: abort -> setPromptText
+- (dom) processFiles: send request if canceled
+- (console) ctrl + z: abort
+- (console) setSpawn: always send result
+- (console) emit message on cd
+- (listeners) history
+- (server) respond: change funcs before call
+- (client) refresh: add "/"
+- (client) refresh: rm FS
+- (client) ajaxLoad: mv rmStr FS to js-path-link
+- (client) refresh: add nohistory
+- (cloudcmd) add ability work with % path
+- (files) getModules: add FILES_HTML_ROOT to regExp
+- (size) onReaddir: add dir
+- (size) rm isFile
+- (flop) copy: conditions
+- (view) getMediaElement: CloudCmd.getTemplate -> DOM.Files.get
+- (mellow) add last slash only on win
+- (win) getVolumes: add stdin.end
+- (mellow) convertPath: add slash to end
+- (flop) copy: add directory check
+- (put) rm dublicate mellow
+- (rest) onFSGet: sendFile
+- (mellow) getRoot size: 0 -> dir
+- (win) getVolumes callback: error || volumes -> error, volumes
+- (mellow) convertPath: add join
+- (markdown) server -> lib/server/
+- (put) unzip only if query
+- (flop) read: time raw
+- (join) require: main, util
+- (dir) getSize: if error - return error in callback
+- (get) rm CloudFunc.getShortSize
+- (put) flop.read: size -> size raw
+- (put) path -> name
+- (cloudcmd) route: ENOTDIR
+- (files) set: regExp.match -> name.match
+- (config) set: CloudCmd -> DOM.Files
+- (files) multiple loading of config.json
+- (events) (add|remove)EventListener: window -> element
+- (config) CloudCmd.getTemplate -> DOM.Files.get
+- (load) ajax: if data is array - nothing working out
+- (view) onOverLayClick: add event
+- (key) switch key F7: add preventDefault
+- (util) checkExt: add case-insensitive check
+- (view) overlay: show config only ones when click on button
+
+feature:
+- (rest) getWin32RootMsg: add error
+- (rest) add getWin32RootMsg
+- (rest) onPUT: add WIN32_ROOT_MSG
+- (rest) add isRootWin32 check on: copy, move
+- (console) prompt: add " "
+- (console) prompt: add margin 10px
+- (format) mv to lib
+- (console) abort prompt on disconnect
+- (console) paste path of current directory on Ctrl + P
+- (console) change console output on windows
+- (console) prompt: add current directory
+- (util) mv addListener, removeListener from cloudfunc
+- (package) add keywords
+- (format) mv permissions
+- (size) callback once if error
+- Merge pull request #18 from tarzak/patch-1
+- (update) add git check
+- (rest) add ability to work with #-names
+- (path) change refresh, clear icons
+- (win) getVolumes: add checkArgs
+- (size) add options
+- (main) rm getVolumes
+- (mellow) getRoot: set default mode
+- (ncp) add stopedOnError
+- (flop) copy: add ncp check
+- (flop) copy, move: add ncp options
+- (rest) onPUT: add mellow.convertPath
+- (modules) socket.io v1.0.6
+- (mellow) windows: add volumes
+- (win) add convertPath
+- (time) add raw option
+- (size) dir -> size
+- (flop) delete, move: add checkArgs
+- (gulp) add promise to ignore list
+- (flop) read: add size raw
+- (format) mv getShortSize to format
+- (pack) add: gzip, gunzip
+- (flop) create: only dir
+- (flop) mv, cp -> move, copy
+- (flop) mv hash to get
+- (flop) read: rm isFile
+- (commander) readdir: error.toString -> error
+- (flop) read: rm isDir
+- (flop) write: add Buffer
+- (flop) add write
+- (main) rm users
+- (dom) sendDelete: rm ?dir
+- (flop) add mv, delete
+- (flop) add
+- (promise) add
+- (modules) simplify format
+- (files) add showError
+- (files) add
+
+
 2014.06.16, v0.9.2
 
 fix:
