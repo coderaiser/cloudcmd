@@ -367,29 +367,29 @@ a:hover, a:active {
 
 @media print {
     .panel {
-      width: 94%;
-      margin: 0;
-      padding: 0;
-      border: none;
+        width: 94%;
+        margin: 0;
+        padding: 0;
+        border: none;
     }
     
     .keyspanel, .panel-right {
-      display: none;
+        display: none;
     }
     
     .files {
-      overflow-y: visible;
+        overflow-y: visible;
     }
     
     .current-file {
-      box-shadow: none;
+        box-shadow: none;
     }
     
     .path-icon {
-      display: none;
+        display: none;
     }
     
     .mini-icon {
-      display: none;
+        display: none;
     }
 }
