@@ -1,4 +1,4 @@
-Brunch
+Branch
 ---------------
 If you would like to contribute - send pull request to dev branch.
 Getting dev version of **Cloud Commander**:
