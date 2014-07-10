@@ -48,8 +48,10 @@
         /* reinit main dir os if we on Win32 should be backslashes */
         DIR         = main.DIR;
         
-    readConfig(init);
-    win.prepareCodePage();
+    exports.start = function() {
+        readConfig(init);
+        win.prepareCodePage();
+    };
     
     /**
      * additional processing of index file

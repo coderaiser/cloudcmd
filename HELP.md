@@ -33,16 +33,26 @@ Install
 The installation of file manager is very simple.
 
 - install [node.js](http://nodejs.org/ "node.js") if you still have not.
-- install ```cloudcmd``` via ```npm``` with one simple command.
+- install ```cloudcmd``` via ```npm``` with:
+
+
+    npm install cloudcmd    #local install
+
+or
+
+    npm install cloudcmd -g #global install
+
 
 ![NPM_INFO][NPM_INFO_IMG]
 
 Start
 ---------------
-To start **Cloud Commander** only one command needed:
-    
-    node cloudcmd
-or if you install with `-g` flag just type:
+To start **Cloud Commander** change directory to `node_modules/cloudcmd` and
+run command:
+
+    node bin/cloudcmd
+
+or if you install with `-g` flag just type in any directory:
 
     cloudcmd
 

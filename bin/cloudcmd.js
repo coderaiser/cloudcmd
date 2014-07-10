@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-/* cloudcmd binary
- * usage: node cloudcmd
- */
 (function(){
     'use strict';
     
-    require('../cloudcmd');
+    var CloudCmd = require('../cloudcmd');
+    
+    CloudCmd.start();
     
 })();
 
