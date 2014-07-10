@@ -42,13 +42,17 @@
             'link',
         ],
         
+        IsTest,
+        
         Template    = {},
         
         FS          = CloudFunc.FS;
         /* reinit main dir os if we on Win32 should be backslashes */
         DIR         = main.DIR;
         
-    exports.start = function() {
+    exports.start = function(params) {
+        IsTest = params.isTest;
+        
         readConfig(init);
         win.prepareCodePage();
     };
@@ -115,21 +119,15 @@
     
     
     function init() {
-        var params,
-            argv        = process.argv,
-            length      = argv.length - 1,
-            argvFirst   = argv[length],
-            isTest      = Util.isContainStr(argvFirst, 'test');
+        var params;
         
         if (update)
             update.get();
         
         Util.log('server dir: ' + DIR);
         
-        if (isTest) {
-            Util.log('argv: ', argv);
+        if (IsTest)
             Config.server  = false;
-        }
         
         if (Config.logs) {
             Util.log('log param setted up in config.json\n' +
