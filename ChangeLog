@@ -1,3 +1,35 @@
+2014.07.10, v1.1.0
+
+fix:
+- (listeners) onTouch: add path
+- (console) getOnMessage: if isSymbol do not cd
+- (console) onCD callback
+- (console) getOnMessage onCD: if error do not change path
+- (client) loadModule: corrupted CloudCmd[name] on error
+- (dom) getCurrentPath fs: rmStr -> rmStrOnce
+- (commander) getAllStats: do not get response when folder is empty
+- (dom) getCurrentPath: wrong path when width changed panels: two  -> one
+- (mellow) convertPath: add last slash to files
+- (dom) loadCurrentSize: show load
+- (rest) unzip: if !to
+- (rest) zip file if !to
+
+feature:
+- (console) add clear with Ctrl + l
+- (console) add ability to use CD on windows
+- (console) change volume in windows
+- (package) express v4.5
+- (commander) getDirContent: add checkType
+- (util) checkArgs: return this
+- (util) add checkType
+- (util) exec.parallel: add ability to take and return object
+- (commander) add parseStats
+- (win) restore codepage before quit
+- (gitignore) add npm-debug.log
+- (img) update
+- (img) update t v1.0.0
+
+
 2014.07.3, v1.0.0
 
 fix:
