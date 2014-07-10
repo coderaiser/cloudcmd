@@ -56,7 +56,7 @@ Update
 ---------------
 **Cloud Commander** is very often updated.
 
-Update is doing automagically but it could be done also manualy.
+Update is doing automatically but it could be done also manualy.
 If you cloned repository you could get last changes with:
 
     git pull
