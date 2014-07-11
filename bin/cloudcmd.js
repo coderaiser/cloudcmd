@@ -9,12 +9,15 @@
         argv        = process.argv,
         length      = argv.length - 1,
         argvLast    = argv[length],
-        regExp      = new RegExp('^test'),
-        isTest      = argvLast.match(regExp);
+        isTest;
     
-    if (isTest) {
+    switch (argvLast) {
+    case 'test':
         Util.log('Cloud Commander testing mode');
         Util.log('argv: ', argv);
+        
+        isTest = true;
+        break;
     }
     
     CloudCmd.start({
@@ -22,4 +25,3 @@
     });
     
 })();
-
