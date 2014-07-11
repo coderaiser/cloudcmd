@@ -13,7 +13,7 @@
     
     switch (argvLast) {
     default:
-        start({});
+        start();
         break;
     
     case '--test':
@@ -21,7 +21,7 @@
         Util.log('argv: ', argv);
         
         start({
-            isTest: true
+            test: true
         });
         break;
     

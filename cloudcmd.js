@@ -42,8 +42,6 @@
             'link',
         ],
         
-        IsTest,
-        
         Template    = {},
         
         FS          = CloudFunc.FS;
@@ -51,9 +49,10 @@
         DIR         = main.DIR;
         
     exports.start = function(params) {
-        IsTest = params.isTest;
+        readConfig(function() {
+            init(params);
+        });
         
-        readConfig(init);
         win.prepareCodePage();
     };
     
@@ -118,15 +117,15 @@
     }
     
     
-    function init() {
-        var params;
+    function init(params) {
+        var paramsStart;
+        
+        Util.log('server dir: ' + DIR);
         
         if (update)
             update.get();
         
-        Util.log('server dir: ' + DIR);
-        
-        if (IsTest)
+        if (params && params.test)
             Config.server  = false;
         
         if (Config.logs) {
@@ -136,13 +135,13 @@
             writeLogsToFile();
         }
         
-        params      = {
+        paramsStart = {
             appcache    : appCacheProcessing,
             rest        : main.rest,
             route       : route
         };
         
-        readFiles(params, function(params) {
+        readFiles(paramsStart, function(params) {
             server.start(params);
         });
     }
@@ -194,6 +193,8 @@
     }
     
     function readConfig(callback) {
+        Util.checkArgs(arguments, ['callback']);
+        
         fs.readFile(CONFIG_PATH, 'utf8', function(error, data) {
             var status, json, msg;
             
@@ -208,7 +209,7 @@
             msg             = CloudFunc.formatMsg('read', 'config', status);
             
             Util.log(msg);
-            Util.exec(callback);
+            callback();
         });
     }
     
