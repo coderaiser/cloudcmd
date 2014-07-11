@@ -12,7 +12,7 @@
         isTest;
     
     switch (argvLast) {
-    case 'test':
+    case '--test':
         Util.log('Cloud Commander testing mode');
         Util.log('argv: ', argv);
         

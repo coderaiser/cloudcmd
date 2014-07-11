@@ -12,7 +12,7 @@ before_install:
 
 script:
   - gulp default
-  - node bin/cloudcmd test
+  - node bin/cloudcmd --test
 
 notifications:
     #webhooks:
