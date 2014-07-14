@@ -26,7 +26,7 @@
   "subdomain": "cloudcmd",
   "dependencies": {
     "dropbox": "0.10.x",
-    "express": "4.5.x",
+    "express": "~4.6.1",
     "http-auth": "2.1.x",
     "marked": "~0.3.2",
     "minify": "~0.6.x",
