@@ -147,7 +147,7 @@ body {
 }
 
 .links a {
-    color:red;
+    color: red;
 }
 
 .mini-icon {
@@ -292,14 +292,14 @@ a:hover, a:active {
     .current-file {
         background-color: rgb(49, 123, 249);
         background-color: rgba(49, 123, 249, .40);
-        color:white;
+        color: white;
     }
     /* делаем иконки под курсом белыми*/
     .current-file a {
-        color:white;
+        color: white;
     }
     .current-file .text-file::before {
-        color:white;
+        color: white;
     }
     
     /* меняем иконки на шрифтовые*/
