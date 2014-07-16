@@ -241,9 +241,9 @@
                 name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
                 path    = mellow.convertPath(name);
                 
-                mellow.read(path, function(error, data) {
-                    if (data)
-                        data.path = format.addSlashToEnd(name);
+                mellow.read(path, function(error, dir) {
+                    if (dir)
+                        dir.path = format.addSlashToEnd(name);
                     
                     if (error)
                         if (error.code === 'ENOTDIR') {
@@ -253,7 +253,7 @@
                             main.sendError(p, error);
                         }
                     else
-                        readIndex(data, function(error, data) {
+                        buildIndex(dir, function(error, data) {
                             var NOT_LOG = true;
                             
                             p.name = PATH_INDEX;
@@ -268,7 +268,7 @@
         }
     }
     
-    function readIndex(json, callback) {
+    function buildIndex(json, callback) {
         var isMinify = Minify && Config.minify;
         
         Util.exec.if(!isMinify, function(error, params) {
