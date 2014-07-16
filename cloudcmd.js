@@ -9,7 +9,6 @@
         mellow      = require(DIR_SERVER + 'mellow'),
         
         HTMLDIR     = main.HTMLDIR,
-        JSONDIR     = main.JSONDIR,
         
         fs          = main.fs,
         files       = main.files,
@@ -24,8 +23,6 @@
         Config      = main.config,
         
         win         = require(DIR_SERVER + 'win'),
-        
-        CONFIG_PATH = JSONDIR + 'config.json',
         
         KEY         = DIR + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
@@ -48,10 +45,8 @@
         /* reinit main dir os if we on Win32 should be backslashes */
         DIR         = main.DIR;
         
-    exports.start = function(params) {
-        readConfig(function() {
-            init(params);
-        });
+    exports.start = function(config) {
+        init(config);
         
         win.prepareCodePage();
     };
@@ -117,7 +112,7 @@
     }
     
     
-    function init(params) {
+    function init(config) {
         var paramsStart;
         
         Util.log('server dir: ' + DIR);
@@ -125,8 +120,12 @@
         if (update)
             update.get();
         
-        if (params && params.test)
-            Config.server  = false;
+        if (config) {
+            main.config = Config = config;
+            
+            if (config.test)
+                Config.server  = false;
+        }
         
         if (Config.logs) {
             Util.log('log param setted up in config.json\n' +
@@ -189,27 +188,6 @@
             }
             
             callback(params);
-        });
-    }
-    
-    function readConfig(callback) {
-        Util.checkArgs(arguments, ['callback']);
-        
-        fs.readFile(CONFIG_PATH, 'utf8', function(error, data) {
-            var status, json, msg;
-            
-            if (error) 
-                status      = 'error';
-            else {
-                status      = 'ok';
-                json        = Util.parseJSON(data);
-                main.config = Config = json;
-            }
-            
-            msg             = CloudFunc.formatMsg('read', 'config', status);
-            
-            Util.log(msg);
-            callback();
         });
     }
     

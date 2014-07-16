@@ -5,8 +5,13 @@
     
     var Info        = require('../package'),
         
+        fs          = require('fs'),
+        
         DIR         = '../lib/',
+        
         Util        = require(DIR + 'util'),
+        CloudFunc   = require(DIR + 'cloudfunc'),
+        
         argv        = process.argv,
         length      = argv.length - 1,
         argvLast    = argv[length];
@@ -41,7 +46,36 @@
     function start(params) {
         var cloudcmd    = require('../cloudcmd');
         
-        cloudcmd.start(params);
+        readConfig(function(config) {
+            if (params && params.test)
+                config.test = params.test;
+            
+            cloudcmd.start(config);
+        });
+    }
+    
+    function readConfig(callback) {
+        var path = __dirname + '/../json/config.json';
+        
+        Util.checkArgs(arguments, ['callback']);
+        
+        fs.readFile(path, 'utf8', function(error, data) {
+            var status, config, msg;
+            
+            if (error) {
+                status  = 'error';
+                Util.log(error.code);
+            } else {
+                status  = 'ok';
+                config  = Util.parseJSON(data);
+            }
+            
+            msg         = CloudFunc.formatMsg('read', 'config', status);
+            
+            Util.log(msg);
+            
+            callback(config);
+        });
     }
     
 })();
