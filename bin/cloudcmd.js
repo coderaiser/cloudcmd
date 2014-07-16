@@ -7,10 +7,11 @@
         
         fs          = require('fs'),
         
-        DIR         = '../lib/',
+        DIR         = __dirname + '/../',
+        DIR_LIB     = DIR + 'lib/',
         
-        Util        = require(DIR + 'util'),
-        CloudFunc   = require(DIR + 'cloudfunc'),
+        Util        = require(DIR_LIB + 'util'),
+        CloudFunc   = require(DIR_LIB + 'cloudfunc'),
         
         argv        = process.argv,
         length      = argv.length - 1,
@@ -55,7 +56,7 @@
     }
     
     function readConfig(callback) {
-        var path = __dirname + '/../json/config.json';
+        var path = DIR + 'json/config.json';
         
         Util.checkArgs(arguments, ['callback']);
         
