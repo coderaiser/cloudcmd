@@ -47,9 +47,11 @@
     function start(params) {
         var cloudcmd    = require('../cloudcmd');
         
-        readConfig(function(config) {
+        readConfig(function(msg, config) {
             if (params && params.test)
                 config.test = params.test;
+            
+            Util.log(msg);
             
             cloudcmd.start(config);
         });
@@ -72,9 +74,7 @@
             
             msg         = CloudFunc.formatMsg('read', 'config', status);
             
-            Util.log(msg);
-            
-            callback(config);
+            callback(msg, config);
         });
     }
     
