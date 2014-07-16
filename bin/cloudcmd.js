@@ -65,7 +65,6 @@
             
             if (error) {
                 status  = 'error';
-                Util.log(error.code);
             } else {
                 status  = 'ok';
                 config  = Util.parseJSON(data);
