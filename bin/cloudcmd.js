@@ -47,35 +47,7 @@
     function start(params) {
         var cloudcmd    = require('../cloudcmd');
         
-        readConfig(function(msg, config) {
-            if (params && params.test)
-                config.test = params.test;
-            
-            Util.log(msg);
-            
-            cloudcmd.start(config);
-        });
-    }
-    
-    function readConfig(callback) {
-        var path = DIR + 'json/config.json';
-        
-        Util.checkArgs(arguments, ['callback']);
-        
-        fs.readFile(path, 'utf8', function(error, data) {
-            var status, config, msg;
-            
-            if (error) {
-                status  = 'error';
-            } else {
-                status  = 'ok';
-                config  = Util.parseJSON(data);
-            }
-            
-            msg         = CloudFunc.formatMsg('read', 'config', status);
-            
-            callback(msg, config);
-        });
+        cloudcmd.start(params);
     }
     
 })();

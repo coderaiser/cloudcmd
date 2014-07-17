@@ -45,8 +45,26 @@
         /* reinit main dir os if we on Win32 should be backslashes */
         DIR         = main.DIR;
         
-    exports.start = function(config) {
-        init(config);
+    exports.start = function(params) {
+        readConfig(function(msg, config) {
+            var keys;
+            
+            Util.log(msg);
+            
+            if (!config)
+                config = {};
+            
+            if (params) {
+                keys = Object.keys(params);
+                
+                keys.forEach(function(item) {
+                    config[item] = params[item];
+                });
+            }
+            
+            init(config);
+            
+        });
         
         win.prepareCodePage();
     };
@@ -277,6 +295,26 @@
         });
     }
     
+    function readConfig(callback) {
+        var path = DIR + 'json/config.json';
+        
+        Util.checkArgs(arguments, ['callback']);
+        
+        fs.readFile(path, 'utf8', function(error, data) {
+            var status, config, msg;
+            
+            if (error) {
+                status  = 'error';
+            } else {
+                status  = 'ok';
+                config  = Util.parseJSON(data);
+            }
+            
+            msg         = CloudFunc.formatMsg('read', 'config', status);
+            
+            callback(msg, config);
+        });
+    }
     
     /* function sets stdout to file log.txt */
     function writeLogsToFile() {
