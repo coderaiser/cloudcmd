@@ -50,8 +50,21 @@
     });
     
     gulp.task('changelog', function() {
-        var version = 'v' + Info.version,
-            name    = 'ChangeLog';
+        var version     = 'v' + Info.version,
+            name        = 'ChangeLog',
+            argv        = process.argv,
+            length      = argv.length - 1,
+            versionNew  = process.argv[length],
+            regExp      = new RegExp('^--'),
+            isMatch     = versionNew.match(regExp);
+            
+        if (!isMatch)
+            versionNew  = version + '?';
+        else
+            versionNew  = versionNew
+                .split('')
+                .slice(2)
+                .join('');
         
         Util.exec.parallel([
             Util.exec.with(exec, 'shell/log.sh ' + version),
@@ -61,7 +74,7 @@
                     STD_ERR     = 1,
                     execData    = execParams[DATA],
                     date        = Util.getShortDate(),
-                    head        = date + ', ' + version + '?\n\n',
+                    head        = date + ', ' + versionNew + '\n\n',
                     data        = head + execData + fileData;
                 
                 error   = error || execParams[STD_ERR];
