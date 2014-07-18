@@ -18,6 +18,5 @@
     "port": 8000,
     "sslPort": 4430,
     "ip": null,
-    "ssl": false,
-    "rest": true
+    "ssl": false
 }

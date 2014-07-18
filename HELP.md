@@ -212,18 +212,17 @@ All main configuration could be done via `json/config.json`.
     "zip"               : true,     /* zip text before send / unzip before save */
     "notifications"     : false,    /* show notifications when tab is not active*/
     "localStorage"      : true,     /* cache directory data                     */
-    "minify"            : true      /* minification of js,css,html and img      */
+    "minify"            : true,     /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
     "cache"             : true,     /* add cache-control                        */
     "logs"              : false,    /* logs or console ouput                    */
     "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
     "server"            : true,     /* server mode or testing mode              */
-    "socket"            : true      /* enable web sockets                       */
+    "socket"            : true,     /* enable web sockets                       */
     "port"              : 8000,     /* http port                                */
     "sslPort"           : 443,      /* https port                               */
     "ip"                : null,     /* ip or null(default)                      */
     "ssl"               : false     /* should use https?                        */
-    "rest"              : true      /* enable rest interface                    */
 }
 ```
 
