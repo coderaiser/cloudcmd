@@ -10,13 +10,22 @@
         
         Util        = require(DIR_LIB + 'util'),
         
+        config      = {},
+        
         argv        = process.argv,
-        length      = argv.length - 1,
-        argvLast    = argv[length];
+        argvLast    = argv.slice().pop();
     
     switch (argvLast) {
     default:
-        start();
+        if (isPort(argv)) {
+            if (argvLast - 0 > 0)
+                config.port = argvLast;
+            else
+                console.log('Error: port should be a number.');
+        }
+        
+        start(config);
+        
         break;
     
     case '--test':
@@ -45,6 +54,18 @@
         var cloudcmd    = require('../cloudcmd');
         
         cloudcmd.start(params);
+    }
+    
+    function isPort(argv) {
+        var length  = argv.length,
+            str     = argv
+                .slice(length - 2, length - 1)
+                .pop(),
+            
+            PORT    = ['-p', '--port'],
+            is      = Util.strCmp(str, PORT);
+        
+        return is;
     }
     
 })();
