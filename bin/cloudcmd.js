@@ -5,13 +5,10 @@
     
     var Info        = require('../package'),
         
-        fs          = require('fs'),
-        
         DIR         = __dirname + '/../',
         DIR_LIB     = DIR + 'lib/',
         
         Util        = require(DIR_LIB + 'util'),
-        CloudFunc   = require(DIR_LIB + 'cloudfunc'),
         
         argv        = process.argv,
         length      = argv.length - 1,
