@@ -127,7 +127,7 @@
     });
     
     gulp.task('default', ['jshint', 'css', 'test']);
-    gulp.task('release', ['changelog', 'package', 'docs']);
+    gulp.task('release', ['changelog', 'docs', 'package']);
     
     function onError(params) {
         console.log(params.message);
