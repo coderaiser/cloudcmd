@@ -105,17 +105,25 @@
     });
     
     gulp.task('docs', function() {
-        var version     = Info.version,
+        var history     = 'Version history\n---------------\n',
+            link        = '//github.com/cloudcmd/archive/raw/master/cloudcmd',
+            template    = '- *{{ date }}*, '    +
+                          '**[v{{ version }}]'   +
+                          '(' + link + '-v{{ version }}.zip)**\n',
+            version     = Info.version,
             versionNew  = getNewVersion(),
-            msg         = 'ERROR: version is missing. gulp readme --v<version>';
+            msg         = 'ERROR: version is missing. gulp docs --v<version>';
         
         if (!versionNew) {
             console.log(msg);
         } else {
             replaceVersion('README.md', version, versionNew);
             replaceVersion('HELP.md', version, versionNew);
+            replaceVersion('HELP.md', history, history + Util.render(template, {
+                date    : Util.getShortDate,
+                version : versionNew
+            }));
         }
-           
     });
     
     gulp.task('default', ['jshint', 'css', 'test']);
