@@ -118,11 +118,14 @@
             console.log(msg);
         } else {
             replaceVersion('README.md', version, versionNew);
-            replaceVersion('HELP.md', version, versionNew);
-            replaceVersion('HELP.md', history, history + Util.render(template, {
-                date    : Util.getShortDate,
-                version : versionNew
-            }));
+            replaceVersion('HELP.md', version, versionNew, function() {
+                var historyNew = history + Util.render(template, {
+                    date    : Util.getShortDate,
+                    version : versionNew
+                });
+                
+                replaceVersion('HELP.md', history, historyNew);
+            });
         }
     });
     
@@ -147,7 +150,7 @@
         return versionNew;
     }
     
-    function replaceVersion(name, version, versionNew) {
+    function replaceVersion(name, version, versionNew, callback) {
          fs.readFile(name, 'utf8', function(error, data) {
                 if (error) {
                     console.log(error);
@@ -158,6 +161,7 @@
                         var msg = 'done: ' + name;
                         
                         console.log(error || msg);
+                        Util.exec(callback);
                     });
                 }
             });
