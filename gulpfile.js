@@ -105,6 +105,7 @@
     });
     
     gulp.task('default', ['jshint', 'css', 'test']);
+    gulp.task('release', ['changelog', 'package']);
     
     function onError(params) {
         console.log(params.message);
