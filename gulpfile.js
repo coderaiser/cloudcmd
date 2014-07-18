@@ -104,8 +104,22 @@
         }
     });
     
+    gulp.task('docs', function() {
+        var version     = Info.version,
+            versionNew  = getNewVersion(),
+            msg         = 'ERROR: version is missing. gulp readme --v<version>';
+        
+        if (!versionNew) {
+            console.log(msg);
+        } else {
+            replaceVersion('README.md', version, versionNew);
+            replaceVersion('HELP.md', version, versionNew);
+        }
+           
+    });
+    
     gulp.task('default', ['jshint', 'css', 'test']);
-    gulp.task('release', ['changelog', 'package']);
+    gulp.task('release', ['changelog', 'package', 'docs']);
     
     function onError(params) {
         console.log(params.message);
@@ -123,6 +137,22 @@
             versionNew  = last.substr(3);
         
         return versionNew;
+    }
+    
+    function replaceVersion(name, version, versionNew) {
+         fs.readFile(name, 'utf8', function(error, data) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    data = data.replace(version, versionNew);
+                    
+                    fs.writeFile(name, data, function(error) {
+                        var msg = 'done: ' + name;
+                        
+                        console.log(error || msg);
+                    });
+                }
+            });
     }
     
 })();
