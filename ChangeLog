@@ -1,3 +1,35 @@
+2014.07.18, v1.1.1
+
+fix:
+- (gulp) replaceVersion: add callback
+- (minify) optimize isExist: fs.exists -> fs.lstat
+- (load) load funcError: could be no callback
+- (client) disable localStorage
+- (console) onMessage: change directory to "some-name*"
+- (minify) optimize isExist: error always null
+- (console) check prompt before create
+- (console) setSpawn sendError: send full error
+- (console) addListeners disconnect: check prompt state before abort
+
+feature:
+- (gulp) readme -> docs
+- (gulp) add docs
+- (gulp) add release
+- (gulp) add package
+- (gulp) changelog: add version
+- (config) add onDiffChange
+- (config) unset diff on localStorage disabling
+- (cloudcmd) start: add ability to override default config
+- (package) express v4.6.1
+- (package) gulp-mocha v0.5.0
+- (package) gulp-jshint v1.7.1
+- (cloudcmd) add -v, --version
+- (cloudcmd) test -> --test
+- (cloudcmd) add exports.start
+- (bin) cloudcmd -> cloudcmd.js
+- (edit) ace v1.1.5
+
+
 2014.07.10, v1.1.0
 
 fix:
