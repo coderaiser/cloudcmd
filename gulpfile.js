@@ -52,19 +52,12 @@
     gulp.task('changelog', function() {
         var version     = 'v' + Info.version,
             name        = 'ChangeLog',
-            argv        = process.argv,
-            length      = argv.length - 1,
-            versionNew  = process.argv[length],
-            regExp      = new RegExp('^--'),
-            isMatch     = versionNew.match(regExp);
-            
-        if (!isMatch)
-            versionNew  = version + '?';
+            versionNew  = getNewVersion();
+        
+        if (versionNew)
+            versionNew = 'v' + versionNew;
         else
-            versionNew  = versionNew
-                .split('')
-                .slice(2)
-                .join('');
+            versionNew  = version + '?';
         
         Util.exec.parallel([
             Util.exec.with(exec, 'shell/log.sh ' + version),
@@ -90,10 +83,45 @@
             });
     });
     
+    gulp.task('package', function() {
+        var data,
+            msg         = 'ERROR: version is missing. gulp package --v<version>',
+            version     = Info.version,
+            versionNew  = getNewVersion();
+        
+        if (!versionNew) {
+            console.log(msg);
+        } else {
+            Info.version    = versionNew;
+            data            = JSON.stringify(Info, 0, 2) + '\n';
+            Info.version    = version;
+            
+            fs.writeFile('package.json', data, function(error) {
+                var msg = 'package: done';
+                
+                console.log(error || msg);
+            });
+        }
+    });
+    
     gulp.task('default', ['jshint', 'css', 'test']);
     
     function onError(params) {
         console.log(params.message);
+    }
+    
+    function getNewVersion() {
+        var versionNew,
+            argv        = process.argv,
+            length      = argv.length - 1,
+            last        = process.argv[length],
+            regExp      = new RegExp('^--'),
+            isMatch     = last.match(regExp);
+            
+        if (isMatch)
+            versionNew  = last.substr(3);
+        
+        return versionNew;
     }
     
 })();
