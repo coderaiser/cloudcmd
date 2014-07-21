@@ -289,9 +289,8 @@
             });
         },  function(callback) {
                 Minify.optimize(PATH_INDEX, {
-                    callback    : callback,
                     returnName  : true
-                });
+                }, callback);
         });
     }
     
