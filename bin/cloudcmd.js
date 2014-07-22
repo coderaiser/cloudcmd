@@ -13,16 +13,20 @@
         config      = {},
         
         argv        = process.argv,
+        argvLength  = argv.length,
         argvLast    = argv.slice().pop();
     
     switch (argvLast) {
     default:
-        if (isPort(argv)) {
-            if (argvLast - 0 > 0)
-                config.port = argvLast;
-            else
-                console.log('Error: port should be a number.');
-        }
+        if (argvLength > 2)
+            if (isPort(argv)) {
+                if (argvLast - 0 > 0)
+                    config.port = argvLast;
+                else
+                    console.log('Error: port should be a number.');
+            }
+        else
+            help();
         
         start(config);
         
@@ -43,6 +47,14 @@
     
     case '--version':
         version();
+        break;
+    
+    case '-h':
+        help();
+        break;
+    
+    case '--help':
+        help();
         break;
     }
     
@@ -66,6 +78,26 @@
             is      = Util.strCmp(str, PORT);
         
         return is;
+    }
+    
+    function help() {
+        var bin         = require('../json/bin'),
+            usage       = 'Usage: cloudcmd [OPTION]...',
+            description = Info.description + '.',
+            
+            site        = Util.render('General help using Cloud Commander: <{{ url }}>', {
+                url: Info.homepage
+            });
+        
+        console.log(usage);
+        console.log(description + '\n');
+        
+        Object.keys(bin).forEach(function(name) {
+            var line = '  ' + name + ' ' + bin[name];
+            console.log(line);
+        });
+        
+        console.log('\n' + site);
     }
     
 })();
