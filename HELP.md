@@ -53,9 +53,18 @@ or if you install with `-g` flag just type in any directory:
 
     cloudcmd
 
-Cloud Commander reads port information from config file `json/config.json` and start server
-on default port (`8000`), if none of port variables (`cloud9`, `cloudfoundry` and `nodester`) isn't exist.
-To start work type in address bar of your browser:
+Cloud Commander supports command line parameters:
+
+|Parameter              |Operation
+|:----------------------|:--------------------------------------------
+| `-h, --help`          | display help and exit
+| `-v, --version`       | output version information and exit
+| `-p, --port`          | set port number and start
+
+If no parameters given Cloud Commander reads information from `json/config.json` and use
+default port (`8000`), if none of port variables (`cloud9`, `cloudfoundry` and `nodester`) exist.
+
+To begin use, type in address bar of your browser:
 
     http://127.0.0.1:8000
 
