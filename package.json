@@ -27,6 +27,7 @@
   "dependencies": {
     "dropbox": "0.10.x",
     "express": "~4.6.1",
+    "glob": "~4.0.5",
     "http-auth": "2.1.x",
     "marked": "~0.3.2",
     "minify": "~0.7.x",
