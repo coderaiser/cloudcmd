@@ -38,6 +38,7 @@
     gulp.task('css', function () {
         gulp.src('css/*.css')
             .pipe(recess())
+            .pipe(recess.reporter())
             .on('error', onError);
     });
     

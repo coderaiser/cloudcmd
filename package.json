@@ -40,7 +40,7 @@
     "gulp": "~3.8.x",
     "gulp-jshint": "~1.8.4",
     "gulp-mocha": "~0.5.0",
-    "gulp-recess": "0.3.x",
+    "gulp-recess": "~1.0.0",
     "should": "~4.0.x"
   },
   "license": "MIT",
