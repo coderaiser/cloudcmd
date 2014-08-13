@@ -7,6 +7,7 @@
         main        = require(DIR_SERVER + 'main'),
         format      = require(DIR_SERVER + 'format'),
         mellow      = require(DIR_SERVER + 'mellow'),
+        ponse       = require(DIR_SERVER + 'ponse'),
         
         HTMLDIR     = main.HTMLDIR,
         
@@ -216,7 +217,7 @@
         var name, p, isAuth, isFS, path;
         
         if (request && response) {
-            name    = main.getPathName(request);
+            name    = ponse.getPathName(request);
             isAuth  = Util.strCmp(name, ['/auth', '/auth/github']);
             isFS    = Util.strCmp(name, '/') || Util.isContainStrAtBegin(name, FS);
             
@@ -232,7 +233,7 @@
                 Util.log('* Routing' + '-> ' + name);
                 
                 p.name = main.HTMLDIR + name + '.html';
-                main.sendFile(p);
+                ponse.sendFile(p);
             } else if (isFS) {
                 name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
                 path    = mellow.convertPath(name);
@@ -244,9 +245,9 @@
                     if (error)
                         if (error.code === 'ENOTDIR') {
                             p.name = path;
-                            main.sendFile(p);
+                            ponse.sendFile(p);
                         } else {
-                            main.sendError(error, p);
+                            ponse.sendError(error, p);
                         }
                     else
                         buildIndex(dir, function(error, data) {
@@ -255,9 +256,9 @@
                             p.name = PATH_INDEX;
                             
                             if (error)
-                                main.sendError(error, p);
+                                ponse.sendError(error, p);
                             else
-                                main.sendResponse(data, p, NOT_LOG);
+                                ponse.send(data, p, NOT_LOG);
                         });
                 });
             }
