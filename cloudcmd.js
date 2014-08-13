@@ -257,7 +257,7 @@
                             if (error)
                                 main.sendError(error, p);
                             else
-                                main.sendResponse(p, data, NOT_LOG);
+                                main.sendResponse(data, p, NOT_LOG);
                         });
                 });
             }
