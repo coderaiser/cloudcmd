@@ -246,7 +246,7 @@
                             p.name = path;
                             main.sendFile(p);
                         } else {
-                            main.sendError(p, error);
+                            main.sendError(error, p);
                         }
                     else
                         buildIndex(dir, function(error, data) {
@@ -255,7 +255,7 @@
                             p.name = PATH_INDEX;
                             
                             if (error)
-                                main.sendError(error);
+                                main.sendError(error, p);
                             else
                                 main.sendResponse(p, data, NOT_LOG);
                         });
