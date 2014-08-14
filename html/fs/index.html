@@ -8,7 +8,7 @@
         <link rel="icon" href="/favicon.ico" />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href=/join/css/reset.css:css/style.css:css/icons.css:css/help.css>
+        <link rel=stylesheet href=/join:css/reset.css:css/style.css:css/icons.css:css/help.css>
         
         <noscript>
             <link rel=stylesheet href="/css/nojs.css">
@@ -84,11 +84,9 @@
                 document.body.appendChild(script);
             }
             
-            function getJoinURL(files) {
-                var regExp  = new RegExp(',', 'g'),
-                    url     = '/join/' + files;
-                
-                url = url.replace(regExp, ':');
+            function getJoinURL(names) {
+                var prefix  = '/join:',
+                    url     = prefix + names.join(':');
                 
                 return url;
             }
