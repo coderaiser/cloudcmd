@@ -56,6 +56,10 @@
     case '--help':
         help();
         break;
+    
+    case '--repl':
+        repl();
+        break;
     }
     
     function version() {
@@ -98,6 +102,12 @@
         });
         
         console.log('\n' + site);
+    }
+    
+    function repl() {
+        console.log('REPL mode enabled (telnet localhost 1337)');
+        require(DIR_LIB + '/server/repl');
+        start();
     }
     
 })();
