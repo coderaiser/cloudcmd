@@ -271,9 +271,7 @@
     function buildIndex(json, callback) {
         var isMinify = Minify && Config.minify;
         
-        Util.exec.if(!isMinify, function(error, params) {
-            var name = params && params.name;
-            
+        Util.exec.if(!isMinify, function(error, name) {
             fs.readFile(name || PATH_INDEX, 'utf8', function(error, template) {
                 var panel, data;
                 
