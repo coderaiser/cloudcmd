@@ -1,29 +1,32 @@
 (function() {
     'use strict';
     
-    var DIR         = __dirname     + '/',
-        DIR_SERVER  = DIR + 'lib/server/',
+    var DIR         = __dirname + '/',
+        DIR_LIB     = DIR       + 'lib/',
+        DIR_SERVER  = DIR       + 'lib/server/',
         
+        fs          = require('fs'),
+        
+        win         = require(DIR_SERVER + 'win'),
         main        = require(DIR_SERVER + 'main'),
         format      = require(DIR_SERVER + 'format'),
         mellow      = require(DIR_SERVER + 'mellow'),
         ponse       = require(DIR_SERVER + 'ponse'),
+        files       = require(DIR_SERVER + 'files'),
+        AppCache    = require(DIR_SERVER + 'appcache'),
+        update      = require(DIR_SERVER + 'update'),
+        
+        Minify      = require(DIR_SERVER + 'minify'),
         
         HTMLDIR     = main.HTMLDIR,
         
-        fs          = main.fs,
-        files       = main.files,
-        CloudFunc   = main.cloudfunc,
-        AppCache    = main.appcache,
-        Util        = main.util,
-        update      = main.update,
         
-        server      = main.librequire('server'),
         
-        Minify      = main.minify,
+        Util        = require(DIR_LIB + 'util'),
+        CloudFunc   = require(DIR_LIB + 'cloudfunc'),
+        server      = require(DIR_LIB + 'server'),
+        
         Config      = main.config,
-        
-        win         = require(DIR_SERVER + 'win'),
         
         KEY         = DIR + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
