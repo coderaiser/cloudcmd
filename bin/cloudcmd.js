@@ -9,27 +9,28 @@
         DIR_LIB     = DIR + 'lib/',
         
         Util        = require(DIR_LIB + 'util'),
-        
-        config      = {},
-        
+        port,
         argv        = process.argv,
         argvLength  = argv.length,
         argvLast    = argv.slice().pop();
     
     switch (argvLast) {
     default:
-        if (argvLength > 2)
-            if (isPort(argv)) {
-                if (argvLast - 0 > 0)
-                    config.port = argvLast;
+        port = argvLast - 0;
+        
+        if (argvLength === 2)
+            start();
+        else 
+            if (!isPort(argv))
+                help();
+            else
+                if (isNaN(port))
+                    throw('Error: port should be a number.');
                 else
-                    console.log('Error: port should be a number.');
-            }
-        else
-            help();
-        
-        start(config);
-        
+                    start({
+                        port: port
+                    });
+            
         break;
     
     case '--test':
@@ -66,10 +67,10 @@
         console.log('v' + Info.version);
     }
     
-    function start(params) {
-        var cloudcmd    = require('../cloudcmd');
+    function start(config) {
+        var cloudcmd    = require('..');
         
-        cloudcmd.start(params);
+        cloudcmd.start(config);
     }
     
     function isPort(argv) {
