@@ -2,8 +2,10 @@
     'use strict';
     
     var DIR         = __dirname + '/',
+        DIR_HTML    = DIR       + 'html/',
         DIR_LIB     = DIR       + 'lib/',
         DIR_SERVER  = DIR       + 'lib/server/',
+        DIR_FS      = DIR_HTML  + 'fs/',
         
         fs          = require('fs'),
         
@@ -15,12 +17,7 @@
         files       = require(DIR_SERVER + 'files'),
         AppCache    = require(DIR_SERVER + 'appcache'),
         update      = require(DIR_SERVER + 'update'),
-        
         Minify      = require(DIR_SERVER + 'minify'),
-        
-        HTMLDIR     = main.HTMLDIR,
-        
-        
         
         Util        = require(DIR_LIB + 'util'),
         CloudFunc   = require(DIR_LIB + 'cloudfunc'),
@@ -31,9 +28,7 @@
         KEY         = DIR + 'ssl/ssl.key',
         CERT        = DIR + 'ssl/ssl.crt',
         
-        HTML_FS_DIR = HTMLDIR       + 'fs/',
-        
-        PATH_INDEX  = HTML_FS_DIR   + 'index.html',
+        PATH_INDEX  = DIR_FS   + 'index.html',
         
         TMPL_PATH   = [
             'file',
@@ -171,7 +166,7 @@
         var filesList, paths   = {};
         
         filesList   = TMPL_PATH.map(function(name) {
-            var path = HTML_FS_DIR + name + '.html';
+            var path = DIR_FS + name + '.html';
             
             paths[path] = name;
             
@@ -235,7 +230,7 @@
             else if (isAuth) {
                 Util.log('* Routing' + '-> ' + name);
                 
-                p.name = main.HTMLDIR + name + '.html';
+                p.name = DIR_HTML + name + '.html';
                 ponse.sendFile(p);
             } else if (isFS) {
                 name    = Util.rmStrOnce(name, CloudFunc.FS) || main.SLASH;
