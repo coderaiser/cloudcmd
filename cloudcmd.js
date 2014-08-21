@@ -17,7 +17,7 @@
         files       = require(DIR_SERVER + 'files'),
         AppCache    = require(DIR_SERVER + 'appcache'),
         update      = require(DIR_SERVER + 'update'),
-        Minify      = require(DIR_SERVER + 'minify'),
+        minify      = require(DIR_SERVER + 'minify'),
         
         Util        = require(DIR_LIB + 'util'),
         CloudFunc   = require(DIR_LIB + 'cloudfunc'),
@@ -264,7 +264,7 @@
     }
     
     function buildIndex(json, callback) {
-        var isMinify = Minify && Config.minify;
+        var isMinify = Config.minify;
         
         Util.exec.if(!isMinify, function(error, name) {
             fs.readFile(name || PATH_INDEX, 'utf8', function(error, template) {
@@ -285,7 +285,8 @@
                 Util.exec(callback, error, data);
             });
         },  function(callback) {
-                Minify.optimize(PATH_INDEX, {
+                minify(PATH_INDEX, {
+                    log         : true,
                     returnName  : true
                 }, callback);
         });
