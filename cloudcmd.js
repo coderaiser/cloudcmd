@@ -41,8 +41,6 @@
         Template    = {},
         
         FS          = CloudFunc.FS;
-        /* reinit main dir os if we on Win32 should be backslashes */
-        DIR         = main.DIR;
         
     exports.start = function(params) {
         readConfig(function(msg, config) {
