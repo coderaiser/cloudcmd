@@ -126,7 +126,6 @@
         AppCache.createManifest();
     }
     
-    
     function init(config) {
         var paramsStart;
         
