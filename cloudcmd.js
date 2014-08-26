@@ -15,7 +15,6 @@
         mellow      = require(DIR_SERVER + 'mellow'),
         ponse       = require(DIR_SERVER + 'ponse'),
         files       = require(DIR_SERVER + 'files'),
-        AppCache    = require(DIR_SERVER + 'appcache'),
         update      = require(DIR_SERVER + 'update'),
         minify      = require(DIR_SERVER + 'minify'),
         
@@ -76,14 +75,6 @@
             data    = options.data,
             panel   = options.panel;
         
-        if (!Config.appCache)
-            data = Util.rmStr(data, [
-                /* min */
-                ' manifest=/cloudcmd.appcache',
-                /* normal */
-                ' manifest="/cloudcmd.appcache"'
-            ]);
-        
         if (!Config.showKeysPanel) {
             keysPanel  = '<div class="keyspanel';
             data        = data.replace(keysPanel + '"', keysPanel +' hidden"');
@@ -109,23 +100,6 @@
         return data;
     }
     
-    /**
-     * init and process of appcache if it allowed in config
-     */
-    function appCacheProcessing() {
-        var FONT_REMOTE         = '//themes.googleusercontent.com/static/fonts/droidsansmono/v4/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff',
-            FONT_LOCAL          = './font/DroidSansMono.woff',
-            JQUERY_REMOTE       = '//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js',
-            JQUERY_LOCAL        = './lib/client/jquery.js',
-            files               = [{}, {}];
-            
-        files[0][FONT_REMOTE]   = FONT_LOCAL;
-        files[1][JQUERY_REMOTE] = JQUERY_LOCAL;
-        
-        AppCache.addFiles(files);
-        AppCache.createManifest();
-    }
-    
     function init(config) {
         var paramsStart;
         
@@ -149,7 +123,6 @@
         }
         
         paramsStart = {
-            appcache    : appCacheProcessing,
             rest        : main.rest,
             route       : route
         };
