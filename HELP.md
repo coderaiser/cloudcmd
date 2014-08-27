@@ -111,8 +111,8 @@ Hot keys
 | `*`                   | select/unselect all
 | `+`                   | expand selection
 | `-`                   | shrink selection
-| `Ctrl + с`            | copy to buffer
 | `Ctrl + x`            | cut to buffer
+| `Ctrl + с`            | copy to buffer
 | `Ctrl + v`            | paste from buffer
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
@@ -202,16 +202,16 @@ Right mouse click button shows context menu with items:
 - View
 - Edit
 - Rename
-- Copy
-- Cut
-- Paste
 - Delete
 - Zip file
 - Unzip file
-- (Un)Select All
 - Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
 - New (File, Dir, from FilePicker)
+- Cut
+- Copy
+- Paste
+- (Un)Select All
 
 ###Hot keys
 |Key                    |Operation
