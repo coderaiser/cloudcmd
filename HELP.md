@@ -62,11 +62,17 @@ Cloud Commander supports command line parameters:
 | `-p, --port`          | set port number and start
 
 If no parameters given Cloud Commander reads information from `json/config.json` and use
-default port (`8000`), if none of port variables (`cloud9`, `cloudfoundry` and `nodester`) exist.
+port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
 
 To begin use, type in address bar of your browser:
 
-    http://127.0.0.1:8000
+    http://localhost:<port>
+
+
+With default settings it would be:
+    
+    http://localhost:8000
+
 
 Update
 ---------------
