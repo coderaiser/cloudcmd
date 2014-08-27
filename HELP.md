@@ -202,6 +202,9 @@ Right mouse click button shows context menu with items:
 - View
 - Edit
 - Rename
+- Copy
+- Move
+- Paste
 - Delete
 - Zip file
 - Unzip file
