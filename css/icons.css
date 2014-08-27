@@ -107,3 +107,13 @@
     font-family : 'Fontello';
     content     : '\e816  ';
 }
+
+.icon-cut::before {
+    font-family : 'Fontello';
+    content     : '\e817  ';
+}
+
+.icon-paste::before {
+    font-family : 'Fontello';
+    content     : '\e818  ';
+}
