@@ -203,7 +203,7 @@ Right mouse click button shows context menu with items:
 - Edit
 - Rename
 - Copy
-- Move
+- Cut
 - Paste
 - Delete
 - Zip file
