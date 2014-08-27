@@ -111,6 +111,9 @@ Hot keys
 | `*`                   | select/unselect all
 | `+`                   | expand selection
 | `-`                   | shrink selection
+| `Ctrl + с`            | copy to buffer
+| `Ctrl + x`            | cut to buffer
+| `Ctrl + v`            | paste from buffer
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Alt  + q`            | disable key bindings
