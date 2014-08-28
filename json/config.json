@@ -7,6 +7,7 @@
     "zip" : true,
     "notifications": false,
     "localStorage": true,
+    "buffer": true,
     "minify": true,
     "online": true,
     "cache": true,

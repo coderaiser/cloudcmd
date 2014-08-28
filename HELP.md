@@ -234,6 +234,7 @@ All main configuration could be done via `json/config.json`.
     "zip"               : true,     /* zip text before send / unzip before save */
     "notifications"     : false,    /* show notifications when tab is not active*/
     "localStorage"      : true,     /* cache directory data                     */
+    "buffer"            : true,     /* buffer for copying files                 */
     "minify"            : true,     /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
     "cache"             : true,     /* add cache-control                        */
