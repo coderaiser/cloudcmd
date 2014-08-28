@@ -114,6 +114,7 @@ Hot keys
 | `Ctrl + x`            | cut to buffer
 | `Ctrl + с`            | copy to buffer
 | `Ctrl + v`            | paste from buffer
+| `Ctrl + z`            | clear buffer
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Alt  + q`            | disable key bindings
