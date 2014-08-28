@@ -235,6 +235,7 @@ All main configuration could be done via `json/config.json`.
     "notifications"     : false,    /* show notifications when tab is not active*/
     "localStorage"      : true,     /* cache directory data                     */
     "buffer"            : true,     /* buffer for copying files                 */
+    "dirStorage"        : true,     /* store directory listing to localStorage  */
     "minify"            : true,     /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
     "cache"             : true,     /* add cache-control                        */
