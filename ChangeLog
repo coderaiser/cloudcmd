@@ -1,3 +1,151 @@
+2014.08.29, v1.2.0
+
+fix:
+- (dom) processFiles: remove from storage path with slash
+- (dom) processFiles: remove storage only if move
+- (spawnify) setSpawn: addNewLine
+- (dom) panel refresh when buffer used
+- (util) checkArgs: add length check first
+- (markdown) add DIR_ROOT
+- (dom) selectByPattern: last selected file
+- (markdown) rm main
+- (pipe) getBody: call callback twice - error, close
+- (cloudcmd) show help and start
+- (util) exec.parallel double callback
+- (ischanged) add "/" on win
+- (files) add regExp separator
+- (join) regexp: ":" -> "(:|/)"
+- (ischanged) util-io -> util
+- (ischanged) make dir first and then do things
+- (ischanged) path: relative -> absolute
+- (commander) if could not parse /etc/passwd - leave uid
+- (ponse) generateHeaders: ext -> extionsion
+- (client) refresh: init panel
+- (join) ^/join -> ^/join/
+- (files) read: two arguments is a must
+- (ischanged) first argument in callback: error
+- (console) add processing of ";"
+- (console) cd to full path
+- (console) cd to ~ and do something else
+- (console) cd: if error in one of shell commands change directory
+- (console) change dir if current dir removed
+- (console) onCD: add addNewLine
+
+feature:
+- (config) add dirStorage
+- (buffer) if buffer disabled, and copy, cut, paste, clear shows alert
+- (config) add buffer
+- (buffer) paste: "No files selected" -> "Buffer is empty!"
+- (dom) copy, move files: add spinner
+- (buffer) add cut and clear
+- (menu) Cut and Copy only when right click on a file
+- (menu) change menu order
+- (icons) add cut, paste
+- (buffer) move -> cut
+- (menu) add Copy, Move, Paste
+- (buffer) add
+- (key) add copy, cut to buffer; paste from buffer
+- (dom) processFile: rm from storage only if operation is move
+- (spawnfiy) setSpawn: rm addNewLine
+- (spawnify) callback: json -> error, json
+- (server) rm nodester
+- (put) add checkArgs
+- (main) rm diff
+- (main) rm rest
+- (cloudcmd) rm appCache
+- (rest) for-in -> forEach
+- (rest) JSONDIR -> DIR_JSON
+- (fstream) rm main
+- (console) module.exports: rm ret
+- (spawnify) exec, cd -> spawnify, rm onCloudCmd
+- (terminal) exports.init -> module.exports
+- (console) exports.init -> module.exports
+- (console) regExp: match -> test
+- (spawnify) add checkArgs
+- (spawnify) add
+- (pawn) error, stderr, stdout -> error, stdout, stderr
+- (pawn) add
+- (rest) regExp: match -> test
+- (join) regExp: match -> test
+- (console) regExp: match -> test
+- (files) regExp: match -> test
+- (edit) regExp: match -> test
+- (util) checkExt: match -> test
+- (console) add checkArgs
+- (console) Util.exec -> callback
+- (util) rm checkObj, checkObjTrue
+- (ponse) getQuery, checkParams: rm checkObjTrue
+- (ponse) redirect: params -> url, response
+- (rest) isContainStr -> regExp
+- (server) add controller.midle to express app
+- (main) rm CloudFunc
+- (main) rm Util
+- (express) rm main
+- (express) add static
+- (package) minify v1.0.0
+- (package) minify v0.9.0
+- (main) rm crypto, zlib, url
+- (main) rm http, https, querystring
+- (main) rm WIN32
+- (main) rm fs
+- (nicki) users -> nicki
+- (ncp) add from npm v0.6.0
+- (main) rm pipe
+- (console) spawn processes on win
+- (readify) commander.getDirContent -> readify
+- (commander) sort files on win
+- (gulp) mv to files
+- (log) if no s or not fixes do not add to changelog
+- (gulp) if no s or not fixes do not add to changelog
+- (ischanged) add normilize of path
+- (minify) rm isChanged, isExist
+- (minify) update Minify to v0.8.0
+- (package) minify v0.8.0
+- (main) rm crypto
+- (ischanged) try use mkdirp
+- (ischanged) change dir to tmp
+- (ischanged) rm log
+- (ischanged) rm main
+- (ischanged) rm Util.log
+- (users) time -> ischanged
+- (timem) time -> timem
+- (main) rm ischanged
+- (ischanged) ischanged.isFileChanged -> ischanged
+- (join) isJoinFile
+- (join) /join/ -> /join:
+- (join) add
+- (join) mv from cloudfunc
+- (rest) rm checkParams
+- (repl) add
+- (ponse) mv req, res functions to ponse
+- (main) rm checkCallBackParams
+- (main) sendResponse: params, data, notLog -> data, params, notLog
+- (main) gzip only when need
+- (main) sendError: params, error -> error, params
+- (join)  before, req, res, next -> before
+- (cloudfunc) rm isJoinURL
+- (files) readPipe: change arguments order
+- (package) gulp-recess v1.0.0
+- (package) gulp-jshint v1.8.4
+- (load) getIdBySrc: "_" -> "-"
+- (package) express v4.8.2
+- (console) add optional glob for wildcard parsing
+- (console) change directory to ~ + wildcard
+- (console) find path when wildcard present
+- (util) add getRegExp [from wild card]
+- (console) change directory and do something after ";, &&, ||"
+- (console) cd to couple-words-names directories
+- (console) change directory && do something
+- (main) rm console
+- (main) rm express
+- (socket) connect: rm host
+- (package) morgan v1.2
+- (cloudcmd) add -h, --help
+- (package) minify v0.7.0
+- (config) rm rest
+- (cloudcmd) add -p, --port
+
+
 2014.07.18, v1.1.1
 
 fix:
