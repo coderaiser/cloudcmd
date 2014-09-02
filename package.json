@@ -17,7 +17,7 @@
     "editor"
   ],
   "bin": {
-    "cloudcmd": "./bin/cloudcmd.js"
+    "cloudcmd": "bin/cloudcmd.js"
   },
   "scripts": {
     "test": "gulp default",
@@ -27,7 +27,6 @@
   "dependencies": {
     "dropbox": "0.10.x",
     "express": "~4.8.2",
-    "glob": "~4.0.5",
     "http-auth": "2.1.x",
     "marked": "~0.3.2",
     "minify": "~1.0.0",
@@ -35,7 +34,8 @@
     "morgan": "~1.2.x",
     "ncp": "~0.6.0",
     "rimraf": "~2.2.6",
-    "socket.io": "~1.0.0"
+    "socket.io": "~1.0.0",
+    "console-io": "~1.6.5"
   },
   "devDependencies": {
     "gulp": "~3.8.x",
@@ -45,8 +45,5 @@
     "should": "~4.0.x"
   },
   "license": "MIT",
-  "engines": {
-    "node": ">=0.4.x"
-  },
   "main": "cloudcmd.js"
 }
