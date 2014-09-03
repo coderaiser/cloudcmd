@@ -44,6 +44,9 @@
     "gulp-recess": "~1.0.0",
     "should": "~4.0.x"
   },
+  "engines": {
+    "node": ">=0.6.x"
+  },
   "license": "MIT",
   "main": "cloudcmd.js"
 }
