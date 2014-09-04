@@ -11,7 +11,6 @@
         
         win         = require(DIR_SERVER + 'win'),
         main        = require(DIR_SERVER + 'main'),
-        format      = require(DIR_SERVER + 'format'),
         mellow      = require(DIR_SERVER + 'mellow'),
         ponse       = require(DIR_SERVER + 'ponse'),
         files       = require(DIR_SERVER + 'files'),
@@ -22,6 +21,7 @@
         Util        = require(DIR_LIB + 'util'),
         CloudFunc   = require(DIR_LIB + 'cloudfunc'),
         server      = require(DIR_LIB + 'server'),
+        format      = require(DIR_LIB + 'format'),
         
         Config      = main.config,
         
