@@ -271,19 +271,15 @@ a:hover, a:active {
     text-decoration:none;
 }
 
-/* Если размер окна очень маленький
- * располагаем имя и атрибуты файла
- * друг-под-другом
-*/
-/* responsive design */
-
-@media only screen and (max-height: 800px) {
+@media only screen and (max-height: 800px), (max-height: 640px) and (max-width: 360px) {
     .fm {
-        height: 74%;
+        height: 80%;
     }
-    
-    .files {
-        height: 85%;
+}
+
+@media only screen and (max-height: 533px) {
+    .fm {
+        height: 70%;
     }
 
 }
@@ -300,10 +296,6 @@ a:hover, a:active {
 }
 
 @media only screen and (max-width: 600px) {
-    .fm {
-        height: 85%;
-    }
-    
     .panel {
         font-size: 26px;
     }
