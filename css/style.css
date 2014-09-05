@@ -298,7 +298,7 @@ a:hover, a:active {
     }
 
 }
-    
+
 @media only screen and (max-width: 600px) {
     .fm {
         height: 85%;
@@ -328,6 +328,7 @@ a:hover, a:active {
         color           : rgba(246, 224, 124, 0.56);
         font            : 16px 'Fontello';
         background-image: none;
+        padding         : 1%;
     }
     
     .size, .owner, .mode {
