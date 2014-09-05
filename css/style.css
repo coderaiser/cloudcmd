@@ -287,6 +287,17 @@ a:hover, a:active {
     }
 
 }
+
+@media only screen and (max-height: 400px) {
+    .fm {
+        height: 65%;
+    }
+    
+    .files {
+        height: 85%;
+    }
+
+}
     
 @media only screen and (max-width: 600px) {
     .panel {
