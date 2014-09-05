@@ -275,6 +275,10 @@ a:hover, a:active {
     .fm {
         height: 80%;
     }
+    
+    .files {
+        height: 90%;
+    }
 }
 
 @media only screen and (max-height: 533px) {
