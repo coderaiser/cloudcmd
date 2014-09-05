@@ -172,7 +172,7 @@ body {
 }
 .fm {
     width : 97%;
-    height: 85%;
+    height: 90%;
     margin: 26px auto 0 auto;
 }
 .fm-header {
@@ -300,9 +300,14 @@ a:hover, a:active {
 }
     
 @media only screen and (max-width: 600px) {
+    .fm {
+        height: 85%;
+    }
+    
     .panel {
         font-size: 26px;
     }
+    
     /* текущий файл под курсором */
     .current-file {
         background-color: rgb(49, 123, 249);
