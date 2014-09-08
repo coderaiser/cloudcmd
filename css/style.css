@@ -38,9 +38,12 @@ body {
     height              : 95%;
     /* fix overflow change of fancybox */
     overflow            : hidden;
-    font-family         : "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
-    font-size           : 16px;
     background-color    : white;
+}
+
+body, pre, code {
+    font-family     : "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
+    font-size       : 16px;
 }
 
 .hidden {
