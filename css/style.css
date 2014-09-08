@@ -273,7 +273,7 @@ a:hover, a:active {
 
 @media only screen and (max-height: 800px), (max-height: 640px) and (max-width: 360px) {
     .fm {
-        height: 80%;
+        height: 75%;
     }
     
     .files {
