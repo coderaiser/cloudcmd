@@ -281,22 +281,14 @@ a:hover, a:active {
     }
 }
 
-@media only screen and (max-height: 533px) {
+@media only screen and (max-height: 360px) and (max-width: 640px) {
     .fm {
-        height: 70%;
-    }
-
-}
-
-@media only screen and (max-height: 400px) {
-    .fm {
-        height: 65%;
+        height: 55%;
     }
     
     .files {
-        height: 85%;
+        height: 60%;
     }
-
 }
 
 @media only screen and (max-width: 600px) {
