@@ -25,9 +25,6 @@
         
         Config      = main.config,
         
-        KEY         = DIR + 'ssl/ssl.key',
-        CERT        = DIR + 'ssl/ssl.crt',
-        
         PATH_INDEX  = DIR_FS   + 'index.html',
         
         TMPL_PATH   = [
@@ -144,9 +141,6 @@
             return path;
         });
         
-        if (Config.ssl)
-            filesList.push(KEY, CERT);
-        
         files.read(filesList, 'utf8', function(error, files) {
             var status, msg, names;
             
@@ -160,12 +154,6 @@
                     
                     Template[name] = files[path];
                 });
-                
-                if (Config.ssl)
-                    params.ssl  = {
-                        key     : files[KEY],
-                        cert    : files[CERT]
-                    };
                 
                 names           = TMPL_PATH.map(function(item) {
                     return item + '.html';

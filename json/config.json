@@ -17,7 +17,5 @@
     "server": true,
     "socket": true,
     "port": 8000,
-    "sslPort": 4430,
-    "ip": null,
-    "ssl": false
+    "ip": null
 }

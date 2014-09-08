@@ -244,9 +244,7 @@ All main configuration could be done via `json/config.json`.
     "server"            : true,     /* server mode or testing mode              */
     "socket"            : true,     /* enable web sockets                       */
     "port"              : 8000,     /* http port                                */
-    "sslPort"           : 443,      /* https port                               */
     "ip"                : null,     /* ip or null(default)                      */
-    "ssl"               : false     /* should use https?                        */
 }
 ```
 
