@@ -181,6 +181,7 @@
             p       = {
                 request     : request,
                 response    : response,
+                gzip        : true,
                 name        : name
             };
             
