@@ -204,8 +204,8 @@ Right mouse click button shows context menu with items:
 - Edit
 - Rename
 - Delete
-- Zip file
-- Unzip file
+- Pack
+- Unpack
 - Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
 - New (File, Dir, from FilePicker)
