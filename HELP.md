@@ -118,7 +118,7 @@ Hot keys
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Alt  + q`            | disable key bindings
-| `Alt  + s`            | get all key bindings back
+| `Alt  + s`            | enable key bindings
 | `Ctrl + a`            | select all files in a panel
 | `Up`, `Down`, `Enter` | filesystem navigation
 | `Ctrl + \`            | go to the root directory
