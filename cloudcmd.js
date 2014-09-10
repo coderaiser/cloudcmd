@@ -205,7 +205,6 @@
                             p.name = path;
                             p.gzip = false;
                             ponse.sendFile(p);
-                            console.log('>>>', path)
                         } else {
                             ponse.sendError(error, p);
                         }
