@@ -201,13 +201,18 @@
                         dir.path = format.addSlashToEnd(name);
                     
                     if (error)
-                        if (error.code === 'ENOTDIR') {
-                            p.name = path;
-                            p.gzip = false;
-                            ponse.sendFile(p);
-                        } else {
+                        if (error.code !== 'ENOTDIR')
                             ponse.sendError(error, p);
-                        }
+                        else
+                            fs.realpath(path, function(error, pathReal) {
+                                if (!error)
+                                    p.name = pathReal;
+                                else
+                                    p.name = path;
+                                
+                                p.gzip = false;
+                                ponse.sendFile(p);
+                            });
                     else
                         buildIndex(dir, function(error, data) {
                             var NOT_LOG = true;
