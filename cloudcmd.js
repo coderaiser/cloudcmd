@@ -17,6 +17,7 @@
         update      = require(DIR_SERVER + 'update'),
         minify      = require(DIR_SERVER + 'minify'),
         rest        = require(DIR_SERVER + 'rest'),
+        tryRequire  = require(DIR_SERVER + 'tryRequire'),
         
         Util        = require(DIR_LIB + 'util'),
         CloudFunc   = require(DIR_LIB + 'cloudfunc'),
@@ -40,10 +41,11 @@
         FS          = CloudFunc.FS;
         
     exports.start = function(params) {
-        readConfig(function(msg, config) {
+        readConfig(function(error, config) {
             var keys;
             
-            Util.log(msg);
+            if (error)
+                Util.log(error.message);
             
             if (!config)
                 config = {};
@@ -57,7 +59,6 @@
             }
             
             init(config);
-            
         });
         
         win.prepareCodePage();
@@ -259,24 +260,16 @@
     }
     
     function readConfig(callback) {
-        var path = DIR + 'json/config.json';
+        var error,
+            configPath  = DIR + 'json/config.json',
+            config      = tryRequire(configPath, function(err) {
+                if (err)
+                    error = err;
+            });
         
         Util.checkArgs(arguments, ['callback']);
         
-        fs.readFile(path, 'utf8', function(error, data) {
-            var status, config, msg;
-            
-            if (error) {
-                status  = 'error';
-            } else {
-                status  = 'ok';
-                config  = Util.parseJSON(data);
-            }
-            
-            msg         = CloudFunc.formatMsg('read', 'config', status);
-            
-            callback(msg, config);
-        });
+        callback(error, config);
     }
     
     /* function sets stdout to file log.txt */
