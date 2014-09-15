@@ -24,7 +24,7 @@
             "version": "1.1.5",
             "date": "09.07.2014",
             "local": "/lib/client/edit/ace.js",
-            "remote": "//cdn.jsdelivr.net/ace/{{ version }}/noconflict/ace.js"
+            "remote": "//cdn.jsdelivr.net/ace/{{ version }}/min/ace.js"
         }, {
             "name": "fancybox",
             "version": "2.1.5",
