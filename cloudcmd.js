@@ -61,7 +61,7 @@
             writeLogsToFile();
         }
         
-        server.start();
+        server();
     }
     
     function readConfig(callback) {
