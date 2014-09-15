@@ -17,7 +17,7 @@
         
         Config      = main.config;
         
-    exports.start = function(params) {
+    module.exports = function(params) {
         readConfig(function(error, config) {
             var keys;
             

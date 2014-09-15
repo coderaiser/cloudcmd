@@ -70,7 +70,7 @@
     function start(config) {
         var cloudcmd    = require('..');
         
-        cloudcmd.start(config);
+        cloudcmd(config);
     }
     
     function isPort(argv) {
