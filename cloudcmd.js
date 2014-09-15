@@ -16,7 +16,6 @@
         files       = require(DIR_SERVER + 'files'),
         update      = require(DIR_SERVER + 'update'),
         minify      = require(DIR_SERVER + 'minify'),
-        rest        = require(DIR_SERVER + 'rest'),
         tryRequire  = require(DIR_SERVER + 'tryRequire'),
         
         Util        = require(DIR_LIB + 'util'),
@@ -122,7 +121,6 @@
         }
         
         paramsStart = {
-            rest        : rest,
             route       : route
         };
         
