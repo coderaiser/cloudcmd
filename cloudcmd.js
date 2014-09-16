@@ -28,9 +28,6 @@
         if (update)
             update.get();
         
-        if (config('test'))
-            config(server, false);
-        
         server();
     };
 })();

@@ -38,7 +38,7 @@
         Util.log('argv: ', argv);
         
         start({
-            test: true
+            server: false
         });
         break;
     
