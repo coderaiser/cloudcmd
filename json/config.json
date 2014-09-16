@@ -12,7 +12,6 @@
     "minify": true,
     "online": true,
     "cache": true,
-    "logs": false,
     "showKeysPanel": true,
     "server": true,
     "socket": true,

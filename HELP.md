@@ -239,7 +239,6 @@ All main configuration could be done via `json/config.json`.
     "minify"            : true,     /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
     "cache"             : true,     /* add cache-control                        */
-    "logs"              : false,    /* logs or console ouput                    */
     "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
     "server"            : true,     /* server mode or testing mode              */
     "socket"            : true,     /* enable web sockets                       */
