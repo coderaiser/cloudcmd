@@ -23,6 +23,6 @@
     z-index: 1
 }
 
-.media, video {
+.media, audio, video {
     width: 100%;
 }
