@@ -5,10 +5,8 @@
         DIR_LIB     = DIR       + 'lib/',
         DIR_SERVER  = DIR       + 'lib/server/',
         
-        server      = require(DIR_LIB + 'server'),
-        
-        update      = require(DIR_SERVER + 'update'),
-        config      = require(DIR_SERVER + 'config');
+        server      = require(DIR_LIB       + 'server'),
+        config      = require(DIR_SERVER    + 'config');
         
         
     module.exports = function(params) {
@@ -21,9 +19,6 @@
                 config(name, params[name]);
             });
         }
-        
-        if (update)
-            update.get();
         
         server();
     };
