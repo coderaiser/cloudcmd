@@ -1,3 +1,97 @@
+2014.09.18, v1.3.0
+
+fix:
+- (edit) define -> ace.define
+- (listeners) onDblClick: add rm last slash
+- (client) goToParentDir: rm FS
+- (menu) download: toggle selection of file only if file was selected
+- (key) TRA: add condition
+- (cloudcmd) add gzip to index
+- (server) spdy: return
+- (server) spdy: createServer
+- (ponse) redirect: setHeader -> fillHeader
+- (style) @media height: 640px .fm height: 75%
+- (listeners) Console.show -> Konsole.show
+- (package) scripts start: cloudcmd.js -> bin/cloudcmd.js
+- (socket) require: socket.io, Util -> Util, socket.io
+
+feature:
+- (dom) add pack, unpack -> twopack
+- (client) refresh: add callback
+- (server) "Server runngin" -> "url"
+- (view) add audio width: 100%
+- (ponse) add static
+- (update) rm
+- (cloudcmd) rm win.prepareCodePage
+- (modules) ace v1.1.6
+- (cloudcmd) test: true -> server: false
+- (config) rm logs
+- (main) rm
+- (config) add
+- (server) exports.start -> module.exports
+- (cloudcmd) exports.start -> module.exports
+- (markdown) exports.operate -> module.exports
+- (route) readFiles on every route
+- (route) readFiles: rm callback
+- (route) add
+- (cloudcmd) mv rest to server
+- (modules) ace: noconflict -> min
+- (edit) ace v1.1.6
+- (package) gulp-mocha v1.1.0
+- (socket) rm
+- (terminal) add room /terminal
+- (server) socket -> io
+- (socket) rm
+- (socket) if connected dispatch connect listeners
+- (load) add "-join" if ":" in name
+- (edit) load: load.js([url]) -> load.js(url)
+- (readify) lstat -> stat
+- (cloudcmd) fs: add realpath
+- (ponse) generateHeaders: add Content-Length
+- (ponse) sendFile: if !isGzip add length
+- (pack) add str check
+- (server) webconsole: add isOnline
+- (package) console-io v1.7.0
+- (readify) sort: always, not only on win
+- (package) gulp-mocha v1.0.0
+- (package) express v4.9.0
+- (ssl) rm
+- (shell) rm unused
+- (key) change logs
+- (dom) add getActiveFiles
+- (menu) Zip -> Pack
+- (rest) put response: no gzip, content, content-type: plain text
+- (rest) delete add: gzip: false, name .txt
+- (cloudcmd) when send file from fs: gzip false
+- (pack) add ability pack and unpack folders
+- (client) createFileTable: add error check
+- (tryRequire) add
+- (main) rm DIR, require, etc
+- (update) rm main
+- (server) rm spdy
+- (server) add spdy support
+- (style) body, pre, code: set font
+- (cloudcmd) drop ssl suport
+- (style) @media 360px x 640px .fm, .files
+- (package) morgan v1.3.0
+- (menu) download: selected and current files
+- (style) @media .files: height 90%
+- (style) .fm @media: height
+- (style) .minif-icon @media max-width 600px: padding 1%
+- (style) .fm: height
+- (style) add @media max-height: 400px
+- (package) socket.io v1.1.0
+- (package) rm heroku Procfile
+- (format) rm duplicate
+- (format) permissions if: perms -> perms !== undefined
+- (package) add engine
+- (console) consle -> console-io from npm
+- (console) rm unbind
+- (console) add socket, change socket api: callback last
+- (socket) main -> tryRequire
+- (console) add onMsg
+
+
 2014.08.29, v1.2.0
 
 fix:
