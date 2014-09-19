@@ -14,7 +14,6 @@
     "cache": true,
     "showKeysPanel": true,
     "server": true,
-    "socket": true,
     "port": 8000,
     "ip": null
 }

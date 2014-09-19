@@ -241,7 +241,6 @@ All main configuration could be done via `json/config.json`.
     "cache"             : true,     /* add cache-control                        */
     "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
     "server"            : true,     /* server mode or testing mode              */
-    "socket"            : true,     /* enable web sockets                       */
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
 }
