@@ -50,5 +50,5 @@
     "node": ">=0.6.x"
   },
   "license": "MIT",
-  "main": "cloudcmd.js"
+  "main": "lib/cloudcmd.js"
 }
