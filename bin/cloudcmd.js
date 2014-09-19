@@ -19,7 +19,7 @@
         port = argvLast - 0;
         
         if (argvLength === 2)
-            start();
+            start(true);
         else 
             if (!isPort(argv))
                 help();
@@ -27,7 +27,7 @@
                 if (isNaN(port))
                     throw('Error: port should be a number.');
                 else
-                    start({
+                    start(true, {
                         port: port
                     });
             
@@ -37,9 +37,7 @@
         Util.log('Cloud Commander testing mode');
         Util.log('argv: ', argv);
         
-        start({
-            server: false
-        });
+        start();
         break;
     
     case '-v':
@@ -67,10 +65,14 @@
         console.log('v' + Info.version);
     }
     
-    function start(config) {
-        var cloudcmd    = require('..');
+    function start(isServer, config) {
+        var SERVER      = '../lib/server',
+            CLOUDCMD    = '..';
         
-        cloudcmd(config);
+        if (isServer)
+            require(SERVER)(config);
+        else
+            require(CLOUDCMD)(config);
     }
     
     function isPort(argv) {
@@ -108,7 +110,7 @@
     function repl() {
         console.log('REPL mode enabled (telnet localhost 1337)');
         require(DIR_LIB + '/server/repl');
-        start();
+        start(true);
     }
     
 })();
