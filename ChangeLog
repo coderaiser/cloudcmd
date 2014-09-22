@@ -1,3 +1,30 @@
+2014.09.22, v1.3.1
+
+fix:
+- (route) showKeysPanel
+- (cloudcmd) add auth data
+- (cloudcmd) minify: DIR -> DIR_ROOT
+- (express) if !config condition
+- (server) config
+
+feature:
+- (tryRequire) name, callback -> name, options
+- (package) morgan: mv to devDependencies
+- (travis) rm webhooks
+- (package) console-io v1.8.0
+- (auth) add config
+- (edit) edit.json: add prefix
+- (index) add prefix
+- (cloudcmd) add prefix to all urls
+- (cloudcmd) index.html -> lib/client/cloudcmd.js
+- (auth) express -> auth
+- (github) auth -> github
+- (config) rm socket
+- (cloudcmd) add middleware
+- (cloudcmd) cloudcmd -> lib/cloudcmd
+- (dom) add window
+
+
 2014.09.18, v1.3.0
 
 fix:
