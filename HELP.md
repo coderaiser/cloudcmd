@@ -76,14 +76,6 @@ With default settings it would be:
 
 Update
 ---------------
-**Cloud Commander** is very often updated.
-
-Update is doing automagically but it could be done also manualy.
-If you cloned repository you could get last changes with:
-
-    git pull
-    npm i
-    
 If you installed Cloud Commander with `npm` just re-install it:
 
     npm i cloudcmd -g
