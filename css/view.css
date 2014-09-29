@@ -23,6 +23,10 @@
     z-index: 1
 }
 
-.media, audio, video {
+.media, video {
     width: 100%;
+}
+
+audio {
+    margin-top: 10px;
 }
