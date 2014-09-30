@@ -117,3 +117,8 @@
     font-family : 'Fontello';
     content     : '\e818  ';
 }
+
+.icon-upload::before {
+    font-family : 'Fontello';
+    content     : '\e819  ';
+}

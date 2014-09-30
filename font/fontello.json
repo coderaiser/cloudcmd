@@ -199,6 +199,24 @@
           "css": "arrows-ccw",
           "code": 59414,
           "src": "entypo"
+        },
+        {
+          "uid": "8772331a9fec983cdb5d72902a6f9e0e",
+          "css": "scissors",
+          "code": 59415,
+          "src": "fontawesome"
+        },
+        {
+          "uid": "b429436ec5a518c78479d44ef18dbd60",
+          "css": "paste",
+          "code": 59416,
+          "src": "fontawesome"
+        },
+        {
+          "uid": "eeec3208c90b7b48e804919d0d2d4a41",
+          "css": "upload",
+          "code": 59417,
+          "src": "fontawesome"
         }
     ]
 }
