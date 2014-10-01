@@ -198,6 +198,7 @@ Right mouse click button shows context menu with items:
 - Delete
 - Pack
 - Unpack
+- Upload
 - Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
 - New (File, Dir, from FilePicker)
