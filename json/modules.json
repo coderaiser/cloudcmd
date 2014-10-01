@@ -37,6 +37,17 @@
                 "//cdn.jsdelivr.net/fancybox/{{ version }}/jquery.fancybox.min.js",
                 "//cdn.jsdelivr.net/fancybox/{{ version }}/jquery.fancybox.min.css"
             ]
+        }, {
+            "name": "menu",
+            "version": "0.6.5",
+            "local": [
+                "/lib/client/menu/menu-io.css",
+                "/lib/client/menu/menu-io.js"
+            ],
+            "remote": [
+                "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.js",
+                "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.css"
+            ]
         }]
     }, {
         "name": "storage",
