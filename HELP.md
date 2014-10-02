@@ -366,7 +366,7 @@ To extend capabilities of file manager next modules used:
 - [Diff-Match-Patch]        [Diff-Match-PatchURL]
 - [Minify]                  [MinifyURL]
 - [FancyBox]                [FancyBoxURL]
-- [jq-console]              [jq-consoleURL]
+- [console-io]              [console-ioURL]
 - [github]                  [githubURL]
 - [dropbox-js]              [dropbox-jsURL]
 - [jquery]                  [jqueryURL]
@@ -379,7 +379,7 @@ To extend capabilities of file manager next modules used:
 [Diff-Match-PatchURL]:      https://code.google.com/p/google-diff-match-patch/ "Diff-Match-Patch"
 [MinifyURL]:                http://coderaiser.github.io/minify "Minify"
 [FancyBoxURL]:              //github.com/fancyapps/fancyBox "FancyBox"
-[jq-consoleURL]:            //github.com/replit/jq-console "jq-console"
+[console-ioURL]:            //github.com/cloudcmd/console "console-io"
 [githubURL]:                //github.com/michael/github "github"
 [dropbox-jsURL]:            //github.com/dropbox/dropbox-js "dropbox-js"
 [jqueryURL]:                //jquery.com
