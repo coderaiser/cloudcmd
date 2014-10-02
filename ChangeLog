@@ -1,3 +1,34 @@
+2014.10.2, v1.3.2
+
+fix:
+- (buffer) copy, or cut, after cut, do not prevent previous cutting
+- (dom) uploadFiles: checkArgs
+- (edit) twice load edit.json
+- (config) css: add pre
+- (view) css: add pre
+- (edit) jshintrc pre
+- (client) goToParentDir: when parent is root
+
+feature:
+- (config) .config: add padding 0, width: 300 -> 250
+- (konsole) ^P: rm last slash from path
+- (upload) js-upload -> upload-css
+- (dom) uploadFiles: add
+- (modules) add menu cdn
+- (menu) new: "From FilePicker" -> "From Cloud"
+- (icons) add upload icon
+- (upload) add
+- (view) audio: rm width - bad for chrome, add margin-top - good for firefox
+- (util) Util.is* -> Util.type.*
+- (menu) v0.6.4
+- (util) parseJSON -> json.parse, stringifyJSON -> json.stringify
+- (edit) ace v1.1.7
+- (urls) change url: "/" -> "../"
+- (css) add urls
+- (terminal) location.origin -> CloudCmd.HOST
+- (util) rm retParam, removeListener, addListener
+
+
 2014.09.22, v1.3.1
 
 fix:
