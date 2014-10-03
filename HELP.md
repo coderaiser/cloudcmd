@@ -177,6 +177,8 @@ Console
 | `Ctrl + l`            | clear
 | `Esc`                 | close
 
+For more details see [Jq-console keyboard shortcuts](https://github.com/replit/jq-console#default-key-config).
+
 Config
 ---------------
 ![Console](/img/screen/config.png "Config")
