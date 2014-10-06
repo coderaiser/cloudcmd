@@ -11,7 +11,8 @@
     user-select: none;
 }
 
-.config .form-control{
+.config .form-control {
+    width: 200px;
     padding: 0 12px;
     font-size: 16px;
     line-height: 1.5;
