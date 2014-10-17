@@ -181,13 +181,38 @@ For more details see [Jq-console keyboard shortcuts](https://github.com/replit/j
 
 Config
 ---------------
-![Console](/img/screen/config.png "Config")
+![Config](/img/screen/config.png "Config")
 
 ###Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F10`                 | open
 | `Esc`                 | close
+
+When you change one of options file `~/.cloudcmd.json` would be saved.
+It could be edited manually with any text editor.
+Here is description of options:
+
+```js
+{
+    "auth"              : false,    /* enable http authentication               */
+    "username"          : "root",   /* username for authentication              */
+    "password"          : "toor",   /* password hash in sha-1 for authentication*/
+    "analytics"         : true,     /* google analytics support                 */
+    "diff"              : true,     /* when save - send patch, not whole file   */
+    "zip"               : true,     /* zip text before send / unzip before save */
+    "notifications"     : false,    /* show notifications when tab is not active*/
+    "localStorage"      : true,     /* cache directory data                     */
+    "buffer"            : true,     /* buffer for copying files                 */
+    "dirStorage"        : true,     /* store directory listing to localStorage  */
+    "minify"            : true,     /* minification of js,css,html and img      */
+    "online"            : true,     /* load js files from cdn or local path     */
+    "cache"             : true,     /* add cache-control                        */
+    "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
+    "server"            : true,     /* server mode or testing mode              */
+    "port"              : 8000,     /* http port                                */
+    "ip"                : null,     /* ip or null(default)                      */
+}
 
 Menu
 ---------------
@@ -214,45 +239,6 @@ Right mouse click button shows context menu with items:
 |:----------------------|:--------------------------------------------
 | `F9`                  | open
 | `Esc`                 | close
-
-Configuration
----------------
-All main configuration could be done via `json/config.json`.
-
-```js
-{
-    "auth"              : false,    /* enable http authentication               */
-    "username"          : "root",   /* username for authentication              */
-    "password"          : "toor",   /* password hash in sha-1 for authentication*/
-    "analytics"         : true,     /* google analytics support                 */
-    "diff"              : true,     /* when save - send patch, not whole file   */
-    "zip"               : true,     /* zip text before send / unzip before save */
-    "notifications"     : false,    /* show notifications when tab is not active*/
-    "localStorage"      : true,     /* cache directory data                     */
-    "buffer"            : true,     /* buffer for copying files                 */
-    "dirStorage"        : true,     /* store directory listing to localStorage  */
-    "minify"            : true,     /* minification of js,css,html and img      */
-    "online"            : true,     /* load js files from cdn or local path     */
-    "cache"             : true,     /* add cache-control                        */
-    "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
-    "server"            : true,     /* server mode or testing mode              */
-    "port"              : 8000,     /* http port                                */
-    "ip"                : null,     /* ip or null(default)                      */
-}
-```
-
-If you had changed **config** and want to keep updating via git,
-you should execute next command in root directory of **Cloud Commander**:
-
-```
-git update-index --assume-unchanged json/config.json
-```
-
-To get back to tracking:
-
-```
-git update-index --no-assume-unchanged json/config.json
-```
 
 Server
 ---------------
