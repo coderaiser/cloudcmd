@@ -36,22 +36,17 @@ The installation of file manager is very simple.
 - install ```cloudcmd``` via ```npm``` with:
 
 ```sh
-npm install cloudcmd    #local install or
-npm install cloudcmd -g #global install
+npm i cloudcmd -g
 ```
 
 ![NPM_INFO][NPM_INFO_IMG]
 
 Start
 ---------------
-To start **Cloud Commander** change directory to `node_modules/cloudcmd` and
-run command:
-
-    node bin/cloudcmd
-
-or if you install with `-g` flag just type in any directory:
-
+For starting just type in console:
+```sh
     cloudcmd
+```
 
 Cloud Commander supports command line parameters:
 
@@ -65,22 +60,25 @@ If no parameters given Cloud Commander reads information from `~/.cloudcmd.json`
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
 
 To begin use, type in address bar of your browser:
-
+```
     http://localhost:<port>
-
+```
 
 With default settings it would be:
-    
+```
     http://localhost:8000
-
+```
 
 Update
 ---------------
-If you installed Cloud Commander with `npm` just re-install it:
+If you installed Cloud Commander with `npm`, stop application and
+re-install it:
 
+```sh
     npm i cloudcmd -g
+```
 
-After that clear cache of your browser, restart application and reload page.
+After that start it again, clear cache of your browser and reload page.
 
 Hot keys
 ---------------
