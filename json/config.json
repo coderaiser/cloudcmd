@@ -13,7 +13,6 @@
     "online": true,
     "cache": true,
     "showKeysPanel": true,
-    "server": true,
     "port": 8000,
     "ip": null
 }

@@ -209,7 +209,6 @@ Here is description of options:
     "online"            : true,     /* load js files from cdn or local path     */
     "cache"             : true,     /* add cache-control                        */
     "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
-    "server"            : true,     /* server mode or testing mode              */
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
 }
