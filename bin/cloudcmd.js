@@ -25,7 +25,7 @@
                 help();
             else
                 if (isNaN(port))
-                    throw('Error: port should be a number.');
+                    console.error('Error: port should be a number.');
                 else
                     start(true, {
                         port: port
