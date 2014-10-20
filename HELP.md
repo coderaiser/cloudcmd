@@ -61,7 +61,7 @@ Cloud Commander supports command line parameters:
 | `-v, --version`       | output version information and exit
 | `-p, --port`          | set port number and start
 
-If no parameters given Cloud Commander reads information from `json/config.json` and use
+If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
 
 To begin use, type in address bar of your browser:
