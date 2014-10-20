@@ -78,7 +78,7 @@ re-install it:
     npm i cloudcmd -g
 ```
 
-After that start it again, clear cache of your browser and reload page.
+Then start it again, clear cache of your browser and reload page.
 
 Hot keys
 ---------------
