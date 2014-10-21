@@ -45,7 +45,7 @@ Start
 ---------------
 For starting just type in console:
 ```sh
-    cloudcmd
+cloudcmd
 ```
 
 Cloud Commander supports command line parameters:
@@ -61,12 +61,12 @@ port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't
 
 To begin use, type in address bar of your browser:
 ```
-    http://localhost:<port>
+http://localhost:<port>
 ```
 
 With default settings it would be:
 ```
-    http://localhost:8000
+http://localhost:8000
 ```
 
 Update
@@ -75,7 +75,7 @@ If you installed Cloud Commander with `npm`, stop application and
 re-install it:
 
 ```sh
-    npm i cloudcmd -g
+npm i cloudcmd -g
 ```
 
 Then start it again, clear cache of your browser and reload page.
