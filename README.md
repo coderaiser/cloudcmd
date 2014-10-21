@@ -14,8 +14,8 @@ Cloud Commander v1.3.2 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
-[JitSu_LIVE_IMG]:           http://status-ok.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
-[HEROKU_LIVE_IMG]:          http://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
+[JitSu_LIVE_IMG]:           http://status-io.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
+[HEROKU_LIVE_IMG]:          http://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
 **Cloud Commander** orthodox web file manager with console and editor.
 

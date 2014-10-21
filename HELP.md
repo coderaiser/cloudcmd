@@ -6,8 +6,8 @@ Cloud Commander v1.3.2
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
-[JitSu_LIVE_IMG]:           https://status-ok.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
-[HEROKU_LIVE_IMG]:          https://status-ok.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
+[JitSu_LIVE_IMG]:           https://status-io.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
+[HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
 **Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, folders and programs in browser from any computer, mobile or tablet device.
 
