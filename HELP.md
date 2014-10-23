@@ -156,6 +156,7 @@ Edit
 | `Ctrl + f`            | find
 | `Ctrl + h`            | replace
 | `Ctrl + g`            | go to line
+| `Ctrl + b`            | beautify js, css or html
 | `Esc`                 | close
 
 For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").
