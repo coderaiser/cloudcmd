@@ -27,7 +27,7 @@
   "dependencies": {
     "console-io": "~1.8.0",
     "dropbox": "0.10.x",
-    "express": "~4.9.0",
+    "express": "~4.10.0",
     "fstream": "~1.0.2",
     "http-auth": "2.1.x",
     "js-beautify": "~1.5.4",
