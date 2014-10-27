@@ -143,10 +143,10 @@ Edit
 
 ### Features
 - Syntax highlighting based on extension of file for over 110 languages.
-- Build in `emmet` (for html files)
+- Built-in `emmet` (for html files)
 - Drag n drop (drag file from desktop to editor).
-- Build in `jshint` (with options in `.jshintrc` file)
-- Build in `beautifier` (with options in `json/beautify.json`, could be overriden in `~/.beautify.json`)
+- Built-in `jshint` (with options in `.jshintrc` file)
+- Built-in `beautifier` (with options in `json/beautify.json`, could be overriden in `~/.beautify.json`)
 - Configurable options (could be edited in `json/edit.json`)
 
 ###Hot keys
