@@ -1,3 +1,72 @@
+2014.10.28, v1.4.0
+
+fix:
+- (route) /fs -> ^/fs
+- (mellow) c: -> c:\
+- (server) when no express, middleware no respond but init on every request
+- (rest) read regExp: .? -> \?
+- (key) switchKey: command -> ctrlMeta
+- (edit) setModeForPath: setJsHint after mode was set
+- (cloudcmd) url: /cloudcmd -> /
+- (dom) changePanel: after copy/move on tab, panel changed to ".."
+- (dom) set current file after copy/move
+- (key) firefox: keyIdentifier -> key
+
+feature:
+- (util) rm isContainStrAtBegin
+- (cloudfunc) rm rmFirstSlash
+- (sha) add
+- (package) express v4.10
+- (analygics) ga -> analytics
+- (rest) fs: add PATCH
+- (config) http method: put -> patch
+- (beautify) "Supported file types" -> "File type not supported"
+- (edit) add minify
+- (beautify) add config, that could be read from ~/.beautify.json
+- (beautify) error message
+- (edit) beautify: add clearSelection, moveCursor to begin
+- (beautify) add
+- (edit) add beautify
+- (key) do not set current ".." when dot pressed
+- (key) setCurrentByLetter: add "_"
+- (key) rm disable/enable key bindings keys
+- (key) rm chaining
+- (key) add chaining
+- (config) rm server
+- (cloudcmd) start: isServer, config -> start: config
+- (cloudcmd) isNaN(port): throw -> console.error
+- (server) if !ip in config, log localhost
+- (package) morgan v1.4.0
+- (terminal) pty: rm log
+- (nicki) add from npm
+- (tryRequire) options: add callback
+- (menu) rm keys, becouse of firefox strange behavior
+- (menu) show hot keys in menu
+- (menu) v0.7.0
+- (config) mv serve from rest
+- (dom) getCurrentFileByName -> getCurrentByName
+- (package) ncp v1.0.0
+- (config) default path: ~/.cloudcmd.json
+- (key) ctrl || meta -> ctrlMeta
+- (key) selectByLetter: add "."
+- (key) setCurrentByLetter: add not English chars
+- (key) add Insert for Mac
+- (key) add suport of mac Command key
+- (patch) add
+- (edit) beforeClose: if -> ifExist
+- (util) ifExist: args -> [args]
+- (dom) uploadFiles: set current uploaded file
+- (client) createFileTable: add getCurrentFileByName
+- (config) disable username and password if auth unchecked
+- (config) .config .form-control: rm background-color
+- (config) .config .form-control: add width 200px
+- (client) refresh: current, panel[, callbac]k -> panel[, callback]
+- (rest) write: url, data, callback / url, callback
+- (dom) promptNew: set current new file/folder
+- (edit) add setValue, setMode, setModeForPath
+- (edit) show: rm value
+
+
 2014.10.2, v1.3.2
 
 fix:
