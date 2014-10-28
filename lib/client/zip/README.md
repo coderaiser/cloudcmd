@@ -1,7 +1,8 @@
 pako - zlib port to javascript, very fast!
 ==========================================
 
-[![Build Status](https://travis-ci.org/nodeca/pako.png?branch=master)](https://travis-ci.org/nodeca/pako)
+[![Build Status](https://travis-ci.org/nodeca/pako.svg?branch=master)](https://travis-ci.org/nodeca/pako)
+[![NPM version](https://img.shields.io/npm/v/pako.svg)](https://www.npmjs.org/package/pako)
 
 __Why pako is cool:__
 
@@ -19,7 +20,11 @@ __Famous projects, using pako:__
 - [browserify](http://browserify.org/) (via [browserify-zlib](https://github.com/devongovett/browserify-zlib))
 - [JSZip](http://stuk.github.io/jszip/)
 - [mincer](https://github.com/nodeca/mincer)
+- [JS-Git](https://github.com/creationix/js-git) and
+  [Tedit](https://chrome.google.com/webstore/detail/tedit-development-environ/ooekdijbnbbjdfjocaiflnjgoohnblgf)
+  by [@creatronix](https://github.com/creationix)
 
+ 
 
 __Benchmarks:__
 
