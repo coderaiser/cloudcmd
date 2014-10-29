@@ -32,48 +32,58 @@
         else
             versionNew  = version + '?';
         
-        Util.exec.parallel([
-            Util.exec.with(fs.readFile, name, 'utf8'),
-            Util.exec.with(exec, gitFix),
-            Util.exec.with(exec, gitFeature),
-            ], function(error, fileData, fixData, featureData) {
-                var DATA        = 0,
-                    STD_ERR     = 1,
-                    fix         = fixData[DATA],
-                    feature     = featureData[DATA],
-                    date        = Util.getShortDate(),
-                    head        = date + ', ' + versionNew + '\n\n',
-                    data        = '';
-                
-                if (fix || feature) {
-                    data        = head;
+        fs.readFile(name, 'utf8', function(error, fileData) {
+            if (error) {
+                if (error.code === 'ENOENT')
+                    console.log('ChangeLog read error. Would be created.');
+            }
+            
+            Util.exec.parallel([
+                Util.exec.with(exec, gitFix),
+                Util.exec.with(exec, gitFeature),
+                ], function(error, fixData, featureData) {
+                    var fix, feature,
+                        DATA        = 0,
+                        STD_ERR     = 1,
+                        date        = Util.getShortDate(),
+                        head        = date + ', ' + versionNew + '\n\n',
+                        data        = '';
                     
-                    if (fix) {
-                        data    += 'fix:'       + '\n';
-                        data    += fix          + '\n\n';
+                    if (!error) {
+                        fix         = fixData[DATA];
+                        feature     = featureData[DATA];
                     }
                     
-                    if (feature) {
-                        data    += 'feature:'   + '\n';
-                        data    += feature      + '\n\n';
-                    }
-                    
-                    data        += '\n';
-                    data        += fileData;
-                }
-                
-                error   = error || fixData[STD_ERR] || featureData[STD_ERR];
-                
-                if (error)
-                    console.log(error);
-                else if (!data)
-                    console.log('No new feature and fix commits from v', version);
-                else
-                    fs.writeFile(name, data, function(error) {
-                        var msg = 'changelog: done';
+                    if (fix || feature) {
+                        data        = head;
                         
-                        console.log(error || msg);
-                    });
-            });
+                        if (fix) {
+                            data    += 'fix:'       + '\n';
+                            data    += fix          + '\n';
+                        }
+                        
+                        if (feature) {
+                            data    += 'feature:'   + '\n';
+                            data    += feature      + '\n';
+                        }
+                        
+                        if (fileData)
+                            data        += '\n\n' + fileData;
+                    }
+                    
+                    error   = error || fixData[STD_ERR] || featureData[STD_ERR];
+                    
+                    if (error)
+                        console.error(error);
+                    else if (!data)
+                        console.log('No new feature and fix commits from v', version);
+                    else
+                        fs.writeFile(name, data, function(error) {
+                            var msg = 'changelog: done';
+                            
+                            console.log(error || msg);
+                        });
+                });
+        });
     };
 })();
