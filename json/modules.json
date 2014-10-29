@@ -17,7 +17,7 @@
             "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
         }, {
             "name": "socket",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "local": "/socket.io/socket.io.js",
             "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
         }, {

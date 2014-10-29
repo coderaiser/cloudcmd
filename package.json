@@ -37,7 +37,7 @@
     "ncp": "~1.0.0",
     "nicki": "~1.1.2",
     "rimraf": "~2.2.6",
-    "socket.io": "~1.1.0",
+    "socket.io": "~1.2.0",
     "tar": "~1.0.1"
   },
   "devDependencies": {
