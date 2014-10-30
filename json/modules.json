@@ -39,7 +39,7 @@
             ]
         }, {
             "name": "menu",
-            "version": "0.6.5",
+            "version": "0.7.3",
             "local": [
                 "/lib/client/menu/menu-io.css",
                 "/lib/client/menu/menu-io.js"

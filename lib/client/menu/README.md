@@ -16,7 +16,7 @@ Tired to use js based libraries which use jquery and `.hover` classes insteed of
 
 - `1.6kb` min & gzip for js.
 - `1kb` min & gzip  for css.
-- no dependencies (just part of [util.io](http://coderaiser.github.io/util.io)).
+- no dependencies (just part of [util-io](http://coderaiser.github.io/util-io)).
 - easy to use.
 - easy to extend.
 
@@ -49,7 +49,7 @@ var element     = document.body,
         name        : 'name of menu' /* if you want use a couple menu on one element */
     },
     
-    menu        = Menu(element, options, {
+    menu        = MenuIO(element, options, {
         'item name': function onItemNameClick() {
     });
 ```
@@ -85,3 +85,6 @@ Look for `examples` directory or copy example from bottom:
     });
 </script>
 ```
+
+#License
+MIT
