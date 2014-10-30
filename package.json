@@ -41,12 +41,13 @@
     "tar": "~1.0.1"
   },
   "devDependencies": {
+    "changelog-io": "~1.2.1",
     "gulp": "~3.8.x",
     "gulp-jshint": "~1.8.4",
     "gulp-mocha": "~1.1.0",
     "gulp-recess": "~1.0.0",
-    "should": "~4.0.x",
-    "morgan": "~1.4.0"
+    "morgan": "~1.4.0",
+    "should": "~4.0.x"
   },
   "engines": {
     "node": ">=0.6.x"
