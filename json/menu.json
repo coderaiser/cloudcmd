@@ -1,9 +1,0 @@
-{
-    "View"          : "F3",
-    "Edit"          : "F4",
-    "Rename"        : "F2",
-    "Delete"        : "F8",
-    "Cut"           : "Ctrl+X",
-    "Copy"          : "Ctrl+C",
-    "Paste"         : "Ctrl+V"
-}
