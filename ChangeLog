@@ -1,3 +1,54 @@
+2014.11.05, v1.4.1
+
+fix:
+- (auth) show deprecated when password wrong
+- (files) if module not received always show error
+- (config) passwd -> password
+- (packer) pack: add error handler
+- (mellow) always add slash to end
+- (dom) when create archive do not set current on it: .gz -> .zip
+- (client) ajaxLoad: when refresh callback not called
+- (dom) renameCurrent: if name ".." show dialog -> alert
+- (client) ajaxLoad: set same current file after refresh
+- (client) createFileTable: when name of subdir same as parrentdir it is became current after changing directory
+
+feature:
+- (util) getShortDate: if day <= 9 add 0
+- (gulp) package add from npm
+- (menu) v0.7.4
+- (font) add woff2
+- (auth) add warning about changing password
+- (menu) rm json
+- (config) rm analytics
+- (util) init Util only if it is not present in global scrope
+- (auth) password: sha1 -> sha512WithRSAEncryption
+- (package) nicki v1.2.0
+- (util) checkArgs -> check
+- (util) checkArgs speed up: rm while
+- (pipe) options: notEnd -> end
+- (util) checkArgs speed up: for -> while
+- (files) add pipeFiles from pipe
+- (pipe) add all
+- (pipe) create: init isFsWrite on start
+- (rest) zip, unzip -> pack, unpack
+- (pipe) rm Util.exec
+- (pipe) pipe.create -> pipe
+- (fstream) rm
+- (gulp) changelog: add from npm
+- (menu) v0.7.3
+- (util) rm convertName
+- (gulp) changelog: changelog should be created if absent
+- (package) console-io v1.9.0
+- (package) socket.io v1.2.0
+- (cloudfunc) rm: addNewLine, rmNewLine
+- (util) mv getStrBigFirst to CloudFunc
+- (util) rm retFalse
+- (util) rm tryLog, logError
+- (util) rm logArray
+- (zip) pako v0.2.5
+- (util) rm isContainStr
+
+
 2014.10.28, v1.4.0
 
 fix:
