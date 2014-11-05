@@ -47,7 +47,8 @@
     "gulp-mocha": "~1.1.0",
     "gulp-recess": "~1.0.0",
     "morgan": "~1.4.0",
-    "should": "~4.0.x"
+    "should": "~4.0.x",
+    "version-io": "~1.0.3"
   },
   "engines": {
     "node": ">=0.6.x"

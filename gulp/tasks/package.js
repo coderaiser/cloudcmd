@@ -1,29 +1,20 @@
 (function() {
     'use strict';
     
-    var DIR         = '../../',
-        fs          = require('fs'),
-        
-        cl          = require('../cl'),
-        Info        = require(DIR + 'package');
+    var version     = require('version-io'),
+        cl          = require('../cl');
         
     module.exports = function() {
-        var data,
-            version     = Info.version,
-            versionNew  = cl.getVersion();
+        var versionNew  = cl.getVersion();
         
-        if (!versionNew) {
+        if (!versionNew)
             cl.showVersionError();
-        } else {
-            Info.version    = versionNew;
-            data            = JSON.stringify(Info, 0, 2) + '\n';
-            Info.version    = version;
-            
-            fs.writeFile('package.json', data, function(error) {
-                var msg = 'package: done';
-                
-                console.log(error || msg);
+        else
+            version(versionNew, function(error) {
+                if (error)
+                    console.error(error.message);
+                else
+                    console.log('package: done');
             });
-        }
     };
 })();
