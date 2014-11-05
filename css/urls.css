@@ -7,6 +7,7 @@
   font-family: 'Fontello';
   src: url("../font/fontello.eot");
   src: url("../font/fontello.eot?#iefix") format('embedded-opentype'),
+       url("../font/fontello.woff2") format('woff2'),
        url("../font/fontello.woff") format('woff'),
        url("../font/fontello.ttf") format('truetype'),
        url("../font/fontello.svg#cloudcmd") format('svg');
@@ -22,6 +23,7 @@
                         url(../font/DroidSansMono.eot) format('embedded-opentype'),
                         url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot?#iefix) format('embedded-opentype'),
                         url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot) format('embedded-opentype'),
+                        url(../font/DroidSansMono.woff2) format('woff2'),
                         url(../font/DroidSansMono.woff) format('woff'),
                         url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff) format('woff'),
                         local('Consolas');
