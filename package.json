@@ -25,7 +25,7 @@
   },
   "subdomain": "cloudcmd",
   "dependencies": {
-    "console-io": "~1.9.0",
+    "console-io": "~1.10.0",
     "dropbox": "0.10.x",
     "express": "~4.10.0",
     "fstream": "~1.0.2",
