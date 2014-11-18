@@ -1,25 +1,15 @@
 (function() {
     'use strict';
     
-    var DIR         = '../../',
-        changelog   = require('changelog-io'),
-        cl          = require('../cl'),
-        Info        = require(DIR + 'package');
+    var changelog   = require('changelog-io'),
+        cl          = require('../cl');
     
-    module.exports = function() {
-        var version     = 'v' + Info.version,
-            versionNew  = cl.getVersion();
-        
-        if (versionNew)
-            versionNew  = 'v' + versionNew;
-        else
-            versionNew  = version + '?';
-        
-        changelog(versionNew, function(error, msg) {
+    module.exports = function(callback) {
+        cl(function(error, versionNew) {
             if (error)
-                console.error(error.message);
+                callback(error);
             else
-                console.log(msg);
+                changelog(versionNew, callback);
         });
     };
 })();

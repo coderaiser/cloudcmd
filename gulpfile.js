@@ -25,7 +25,16 @@
         ];
     
     ['changelog', 'docs', 'package'].forEach(function(name) {
-        gulp.task(name, require('./gulp/tasks/' + name));
+        gulp.task(name, function() {
+            var task = require('./gulp/tasks/' + name);
+            
+            task(function(error, msg) {
+                if (error)
+                    console.error(error.message);
+                else
+                    console.log(msg);
+            });
+        }.bind(null, name));
     });
     
     gulp.task('jshint', function() {
