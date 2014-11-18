@@ -45,6 +45,7 @@
     "gulp-jshint": "~1.8.4",
     "gulp-mocha": "~1.1.0",
     "gulp-recess": "~1.0.0",
+    "minor": "~1.2.2",
     "morgan": "~1.5.0",
     "should": "~4.2.1",
     "version-io": "~1.0.3"
