@@ -3,7 +3,8 @@
     
     var DIR     = '../',
         minor   = require('minor'),
-        Info    = require(DIR + 'package');
+        Info    = require(DIR + 'package'),
+        Version;
     
     exports.getVersion          = function() {
         var versionNew,
@@ -12,17 +13,17 @@
             last        = process.argv[length],
             regExp      = /^--(major|minor|patch)?/,
             match       = last.match(regExp);
-            
-        if (regExp.test(last)) {
+        
+        if (!Version && regExp.test(last)) {
             if (match[1])
                 versionNew  = minor(match[1], Info.version);
             else
                 versionNew  = last.substr(3);
             
-            console.log(versionNew);
+            Version = versionNew;
         }
         
-        return versionNew;
+        return Version;
     };
     
     exports.showVersionError    = function() {
