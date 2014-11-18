@@ -20,3 +20,17 @@ Cloud Commander v1.4.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 **Cloud Commander** orthodox web file manager with console and editor.
 
 ![Cloud Commander](http://cloudcmd.io/img/logo/cloudcmd.png "Cloud Commander")
+
+## Install
+
+```
+npm i cloudcmd -g
+```
+
+## How to use?
+
+Open url `http://localhost:8000` in browser.
+
+## License
+
+MIT
