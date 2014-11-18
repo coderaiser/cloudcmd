@@ -5,6 +5,7 @@
         fs          = require('fs'),
         
         cl          = require('../cl'),
+        place       = require('place'),
         Util        = require(DIR + 'lib/util'),
         Info        = require(DIR + 'package');
         
@@ -34,16 +35,13 @@
     };
     
     function replaceVersion(name, version, versionNew, callback) {
-        fs.readFile(name, 'utf8', function(error, data) {
-            if (error)
-                callback(error);
-            else
-                fs.writeFile(
-                    name,
-                    data.replace(version, versionNew),
-                    function(error) {
-                        callback(error, 'done: ' + name);
-                    });
+        place(name, version, versionNew, function(error) {
+            var msg;
+            
+            if (!error)
+                msg = 'done: ' + name;
+            
+            callback(error, msg);
         });
     }
 })();
