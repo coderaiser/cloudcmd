@@ -2,7 +2,6 @@
     'use strict';
     
     var DIR         = '../../',
-        fs          = require('fs'),
         
         cl          = require('../cl'),
         place       = require('place'),
