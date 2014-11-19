@@ -1,3 +1,43 @@
+2014.11.19, v1.5.0
+
+fix:
+- (util) check: add check
+- (ncp) call cb only if no case is suitable
+
+feature:
+- (gulp) add place from npm
+- (cl) cl.getVersion -> cl
+- (cl) save Version after first call
+- (gulp) release: add --major, --minor, --patch
+- (put) rm deprecated patch
+- (auth) rm deprecated oldSha
+- (util) exec.if: rm condition
+- (package) minify v1.3.0
+- (package) minify v1.2.0
+- (shell) rm log.sh
+- (util) check: add indexOf undefined
+- (package) console-io v1.10.0
+- (package) minify v1.1.0
+- (dom) loadRemote options: add name
+- (shell) rm install-dev
+- (edit) patch: add socket sync
+- (edit) keep cursor on same position after remote patch
+- (edit) patch: add socket
+- (edit) ace: add elixir, elm
+- (edit) ace v1.1.8
+- (package) add local ncp
+- (package) should v4.2.1
+- (package) morgan v1.5.0
+- (edit) add socket
+- (edit) save -> Edit.save
+- (ponse) send: rm unused isGzip
+- (config) add sockets
+- (dom) loadRemote: add options
+- (load) rm xhr.responseText overwriting
+- (config) set value after receive response about saving
+- (files) set: callback -> Util.exec
+
+
 2014.11.05, v1.4.1
 
 fix:
