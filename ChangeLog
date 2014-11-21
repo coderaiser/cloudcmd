@@ -1,3 +1,17 @@
+2014.11.21, v1.5.1
+
+fix:
+- (pipe) if error when write to file -> exeption
+- (storage) if to much data -> exeption
+- (edit) could not save when diff disabled in options
+- (edit) wrong file name on win
+
+feature:
+- (edit) when error: emmit error.message
+- (edit) socket err: log -> alert
+- (ischanged) rm
+
+
 2014.11.19, v1.5.0
 
 fix:
