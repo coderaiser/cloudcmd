@@ -7,7 +7,7 @@
         
         Util                = require(LIBDIR + 'util'),
         CloudFunc           = require(LIBDIR + 'cloudfunc'),
-        files               = require(LIBDIR + 'server/files'),
+        files               = require('files-io'),
         
         FS_DIR              = HTMLDIR   + 'fs/',
         EXPECT_PATH         = DIR       + 'test/lib/cloudfunc.html',
