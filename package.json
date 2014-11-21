@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "changelog-io": "~1.2.1",
-    "gulp": "~3.8.x",
+    "gulp": "~3.8.0",
     "gulp-jshint": "~1.8.4",
     "gulp-mocha": "~1.1.0",
     "gulp-recess": "~1.0.0",
