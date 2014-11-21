@@ -56,7 +56,7 @@
     "version-io": "~1.0.3"
   },
   "engines": {
-    "node": ">=0.6.x"
+    "node": ">=0.6"
   },
   "license": "MIT",
   "main": "lib/cloudcmd.js"
