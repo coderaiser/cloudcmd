@@ -85,15 +85,14 @@
     
     function help() {
         var bin         = require('../json/bin'),
-            usage       = 'Usage: cloudcmd [OPTION]...',
-            description = Info.description + '.',
+            usage       = 'Usage: cloudcmd [options]',
             
             site        = Util.render('General help using Cloud Commander: <{{ url }}>', {
                 url: Info.homepage
             });
         
         console.log(usage);
-        console.log(description + '\n');
+        console.log('Options:');
         
         Object.keys(bin).forEach(function(name) {
             var line = '  ' + name + ' ' + bin[name];
