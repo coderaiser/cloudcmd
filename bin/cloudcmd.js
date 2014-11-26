@@ -9,56 +9,46 @@
         DIR_LIB     = DIR + 'lib/',
         
         Util        = require(DIR_LIB + 'util'),
-        port,
-        argv        = process.argv,
-        argvLength  = argv.length,
-        argvLast    = argv.slice().pop();
-    
-    switch (argvLast) {
-    default:
-        port = argvLast - 0;
         
-        if (argvLength === 2)
-            start();
-        else 
-            if (!isPort(argv))
-                help();
-            else
-                if (isNaN(port))
-                    console.error('Error: port should be a number.');
-                else
-                    start({
-                        port: port
-                    });
-            
-        break;
+        argv        = process.argv,
+        args        = require('minimist')(argv.slice(2), {
+            string: 'port',
+            boolean: ['test', 'repl'],
+            alias: { 
+                v: 'version',
+                h: 'help',
+                p: 'port' }
+        });
     
-    case '--test':
+    if (args.version) {
+        version();
+    } else if (args.help) {
+        help();
+    } else if (args.test) {
+        test();
+    } else if (!args.repl && !args.port) {
+        start();
+    } else {
+        if (args.repl)
+            repl();
+        
+        if (!args.port)
+            start();
+        else
+            if (isNaN(args.port))
+                console.error('Error: port should be a number!');
+            else
+                start({
+                    port: args.port
+                });
+            
+    }
+    
+    function test() {
         Util.log('Cloud Commander testing mode');
         Util.log('argv: ', argv);
         
         require('..');
-        break;
-    
-    case '-v':
-        version();
-        break;
-    
-    case '--version':
-        version();
-        break;
-    
-    case '-h':
-        help();
-        break;
-    
-    case '--help':
-        help();
-        break;
-    
-    case '--repl':
-        repl();
-        break;
     }
     
     function version() {
@@ -69,18 +59,6 @@
         var SERVER      = '../lib/server';
         
         require(SERVER)(config);
-    }
-    
-    function isPort(argv) {
-        var length  = argv.length,
-            str     = argv
-                .slice(length - 2, length - 1)
-                .pop(),
-            
-            PORT    = ['-p', '--port'],
-            is      = Util.strCmp(str, PORT);
-        
-        return is;
     }
     
     function help() {
@@ -105,7 +83,6 @@
     function repl() {
         console.log('REPL mode enabled (telnet localhost 1337)');
         require(DIR_LIB + '/server/repl');
-        start();
     }
     
 })();
