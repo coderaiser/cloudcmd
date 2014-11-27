@@ -25,7 +25,7 @@
   },
   "subdomain": "cloudcmd",
   "dependencies": {
-    "check": "~1.0.0",
+    "checkup": "~1.0.2",
     "console-io": "~1.10.0",
     "dropbox": "~0.10.0",
     "execon": "~1.0.1",
