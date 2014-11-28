@@ -10,6 +10,8 @@
         
         Util        = require(DIR_LIB + 'util'),
         
+        HOME_PAGE   = 'General help using Cloud Commander: <{{ url }}>',
+        
         argv        = process.argv,
         args        = require('minimist')(argv.slice(2), {
             string: 'port',
@@ -65,7 +67,7 @@
         var bin         = require('../json/bin'),
             usage       = 'Usage: cloudcmd [options]',
             
-            site        = Util.render('General help using Cloud Commander: <{{ url }}>', {
+            site        = Util.render(HOME_PAGE, {
                 url: Info.homepage
             });
         
