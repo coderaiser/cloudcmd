@@ -32,7 +32,7 @@
     "files-io": "~1.2.0",
     "flop": "~1.0.25",
     "fstream": "~1.0.2",
-    "http-auth": "~2.1.0",
+    "http-auth": "~2.2.3",
     "join-io": "~1.2.0",
     "js-beautify": "~1.5.4",
     "marked": "~0.3.2",
