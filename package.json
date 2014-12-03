@@ -37,7 +37,7 @@
     "js-beautify": "~1.5.4",
     "marked": "~0.3.2",
     "mellow": "~0.9.7",
-    "minify": "~1.3.0",
+    "minify": "~1.4.0",
     "minimist": "~1.1.0",
     "mollify": "~1.0.0",
     "pipe-io": "~1.1.1",
