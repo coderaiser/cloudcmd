@@ -3,12 +3,13 @@
     <head></head>
     <body>
         <script>
-            (function(){
+            (function() {
                 'use strict';
                 
-                window.addEventListener('message', function(event) {
-                    event.source.postMessage(window.location.search, event.origin);
-                });
+                window.opener
+                    .CloudCmd
+                    .GitHub
+                    .authorize(window.location.search);
             })();
         
         </script>
