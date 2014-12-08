@@ -29,6 +29,7 @@
     "console-io": "~1.11.0",
     "execon": "~1.0.1",
     "express": "~4.10.0",
+    "faust": "~1.0.0",
     "files-io": "~1.2.0",
     "flop": "~1.0.25",
     "http-auth": "~2.2.3",
