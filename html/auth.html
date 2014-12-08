@@ -6,14 +6,9 @@
             (function(){
                 'use strict';
                 
-                var GitHub,
-                    opener = window.opener;
-                
-                if (opener) {
-                    GitHub = opener.CloudCmd.GitHub;
-                    GitHub.autorize(GitHub.callback, window.location.search);
-                    window.close();
-                }
+                window.addEventListener('message', function(event) {
+                    event.source.postMessage(window.location.search, event.origin);
+                });
             })();
         
         </script>
