@@ -1,3 +1,76 @@
+2014.12.09, v2.0.0
+
+fix:
+- (github) athorize
+- (cloudfunc) rmLastSlash: remove even when str consist of one slash
+- (config) do not crypt password when save with sockets
+- (put) check -> checkup
+- (edit) err: error -> error.message
+- (config) onLocalStorageChange map: el, number -> getById id, el
+- (config) socket emit: error -> err
+- (edit) wrong file name on win
+- (cloudcmd) join: add dir
+- (edit) could not save when diff disabled in options
+- (tryRequire) tryCatch: return error
+- (storage) if to much data -> exeption
+
+feature:
+- (cloudcmd) speed up: RegExp.test -> indexOf
+- (hash) hash -> ashify
+- (edit) rm tryRequire
+- (route) rm tryRequire
+- (package) rm js-beautify
+- (fs) fs -> restafary
+- (rest) ponse: rm notLog
+- (rest) rm tryRequire
+- (github) github -> faust
+- (packer) packer -> jag
+- (github) rm tryRequire
+- (ssl) change mode
+- (config) rm tryRequire
+- (packer) rm tryRequire
+- (package) join-io v1.3
+- (package) console-io v1.11
+- (package) minify v1.4.0
+- (package) add mollify
+- (dom) Images load: top true -> "top"
+- (dom) images show.load: top true -> "top"
+- (dom) showLoad, showError -> show.load, show.error
+- (config) add traverse
+- (package) http-auth v2.2.3
+- (package) gulp-recess v1.1.1
+- (package) should v4.3.0
+- (package) gulp-mocha v2.0.0
+- (package) gulp-jshint v1.9.0
+- (package) rm dropbox
+- (put) Util -> exec, check
+- (put) rm file
+- (cloudcmd) bin: add minimist
+- (cloudcmd) bin: rm description
+- (package) tryRequire -> require
+- (tryRequire) rm module.parent.filename
+- (cloudcmd) rm tryRequire
+- (config) err: Error -> str
+- (config) log -> alert
+- (beautify) / -> path.sep
+- (package) rm nicki
+- (modules) socket.io v1.2.1
+- (files) add from npm
+- (ponse) add from npm
+- (tryRequire) add module name
+- (pipe) add pipe-io from npm
+- (package) rm mkdirp
+- (package) rm rimraf
+- (join) add from npm
+- (flop) add from npm
+- (edit) socket err: log -> alert
+- (ischanged) rm
+- (mellow) add from npm
+- (tryRequire) options: add exit
+- (time) time.get -> time
+- (size) size.get -> size
+
+
 2014.11.21, v1.5.1
 
 fix:
