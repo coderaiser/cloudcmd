@@ -32,18 +32,18 @@
         <button id=~       class="cmd-button reduce-text icon-console"   title="console"         >~</button>
         <button id=contact class="cmd-button reduce-text icon-contact"   title="contact"         ></button>
     </div>
+    <script src="/cloudcmd/cloudcmd.js"></script>
     <script>
         !(function() {
             'use strict';
             
-            window.addEventListener('load', load);
+            window.addEventListener('DOMContentLoaded', load);
             
             function load() {
-                window.removeEventListener('load', load);
+                window.removeEventListener('DOMContentLoaded', load);
                 CloudCmd();
             }
         })();
     </script>
-    <script src="/cloudcmd/cloudcmd.js"></script>
     </body>
 </html>
