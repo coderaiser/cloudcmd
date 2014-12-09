@@ -25,6 +25,7 @@
   },
   "subdomain": "cloudcmd",
   "dependencies": {
+    "ashify": "~1.0.0",
     "checkup": "~1.0.2",
     "console-io": "~1.11.0",
     "execon": "~1.0.1",
