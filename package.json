@@ -55,7 +55,7 @@
     "minor": "~1.2.2",
     "morgan": "~1.5.0",
     "place": "~1.0.0",
-    "should": "~4.3.0",
+    "should": "~4.4.1",
     "version-io": "~1.0.3"
   },
   "engines": {
