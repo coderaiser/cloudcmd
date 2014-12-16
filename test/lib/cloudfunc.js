@@ -87,7 +87,7 @@
                 
                 Expect          += expect;
                 
-                isNotOk = Util.slice(Expect).some(function(item, number) {
+                isNotOk = Expect.split('').some(function(item, number) {
                     var ret = result[number] !== item;
                     
                     if (ret)
