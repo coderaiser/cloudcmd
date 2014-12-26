@@ -15,7 +15,9 @@
             };
             
             e(error) || changelog(versionNew, function(error, data) {
-                e(error) || prepend('ChangeLog', data, callback);
+                e(error) || prepend('ChangeLog', data, function() {
+                    e(error) || callback(null, 'changelog: done');
+                });
             });
         });
     };
