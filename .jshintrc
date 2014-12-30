@@ -14,5 +14,6 @@
     "undef" : true,
     "evil"  : true,
     "expr" : true,
-    "quotmark": "single"
+    "quotmark": "single",
+    "validthis":true
 }
