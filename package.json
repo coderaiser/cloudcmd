@@ -44,7 +44,8 @@
     "pipe-io": "~1.1.1",
     "ponse": "~1.3.0",
     "restafary": "~1.0.0",
-    "socket.io": "~1.2.0"
+    "socket.io": "~1.2.0",
+    "tryrequire": "~1.1.5"
   },
   "devDependencies": {
     "changelog-io": "~1.3.4",
