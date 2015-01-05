@@ -1,3 +1,9 @@
-json/changes.json
 node_modules
 npm-debug.log
+
+modules/jquery/src
+modules/fancybox/demo
+modules/ace-builds/demo
+modules/ace-builds/src
+modules/ace-builds/src-min
+modules/ace-builds/src-min-noconflict
