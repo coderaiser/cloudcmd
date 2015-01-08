@@ -5,6 +5,7 @@
         
         cl          = require('../cl'),
         place       = require('place'),
+        rendy       = require('rendy'),
         Util        = require(DIR + 'lib/util'),
         Info        = require(DIR + 'package');
         
@@ -22,7 +23,7 @@
             } else {
                 replaceVersion('README.md', version, versionNew, callback);
                 replaceVersion('HELP.md', version, versionNew, function() {
-                    var historyNew = history + Util.render(template, {
+                    var historyNew = history + rendy(template, {
                         date    : Util.getShortDate,
                         version : versionNew
                     });

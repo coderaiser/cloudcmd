@@ -8,7 +8,7 @@
         DIR         = __dirname + '/../',
         DIR_LIB     = DIR + 'lib/',
         
-        Util        = require(DIR_LIB + 'util'),
+        rendy       = require('rendy'),
         
         HOME_PAGE   = 'General help using Cloud Commander: <{{ url }}>',
         
@@ -47,8 +47,8 @@
     }
     
     function test() {
-        Util.log('Cloud Commander testing mode');
-        Util.log('argv: ', argv);
+        console.log('Cloud Commander testing mode');
+        console.log('argv: ', argv);
         
         require('..');
     }
@@ -67,7 +67,7 @@
         var bin         = require('../json/bin'),
             usage       = 'Usage: cloudcmd [options]',
             
-            site        = Util.render(HOME_PAGE, {
+            site        = rendy(HOME_PAGE, {
                 url: Info.homepage
             });
         
