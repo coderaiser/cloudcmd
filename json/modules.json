@@ -27,6 +27,11 @@
             "local": "/modules/ace-builds/src-noconflict/ace.js",
             "remote": "//cdn.jsdelivr.net/ace/{{ version }}/noconflict/ace.js"
         }, {
+            "name": "pako",
+            "version": "1.2.1",
+            "local": "/modules/pako/dist/pako.min.js",
+            "remote": "//cdn.jsdelivr.net/pako/0.2.5/pako.min.js"
+        },{
             "name": "fancybox",
             "version": "2.1.5",
             "local": [
