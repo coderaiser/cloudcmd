@@ -43,6 +43,7 @@
     "minify": "~1.4.0",
     "minimist": "~1.1.0",
     "mollify": "~1.0.0",
+    "patchfile": "~1.0.0",
     "pipe-io": "~1.1.1",
     "ponse": "~1.3.0",
     "rendy": "~1.0.2",
