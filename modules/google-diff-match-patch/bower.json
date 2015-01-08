@@ -1,0 +1,26 @@
+{
+  "name": "google-diff-match-patch",
+  "version": "0.1.0",
+  "homepage": "https://github.com/friedolinfoerder/google-diff-match-patch",
+  "authors": [
+    "Friedolin Förder"
+  ],
+  "description": "A bower wrapper for the google-diff-match-patch Javascript library",
+  "main": "diff_match_patch.js",
+  "keywords": [
+    "google",
+    "diff",
+    "match",
+    "patch",
+    "text",
+    "content"
+  ],
+  "license": "Apache License V2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

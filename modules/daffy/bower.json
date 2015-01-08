@@ -1,0 +1,26 @@
+{
+  "name": "daffy",
+  "homepage": "https://github.com/coderaiser/daffy",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "create and apply patch",
+  "main": "lib/daffy.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "diff",
+    "patch"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "modules"
+  ],
+  "dependencies": {
+    "google-diff-match-patch": "~0.1.0"
+  }
+}

@@ -1,7 +1,12 @@
-!(function (obj) {
+!(function (global) {
     'use strict';
     
-    obj.DiffProto = function(DiffMatchPatch) {
+    if (typeof module !== 'undefined' && module.exports)
+        module.exports = new DiffProto(require('diff-match-patch'));
+    else
+        global.daffy = new DiffProto(global.diff_match_patch);
+    
+    function DiffProto(DiffMatchPatch) {
         var dmp = new DiffMatchPatch();
         
         this.createPatch    = function(oldText, newText) {
@@ -19,5 +24,5 @@
             
             return newText;
         };
-    };
+    }
 })(this);

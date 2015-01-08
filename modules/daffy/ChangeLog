@@ -1,0 +1,17 @@
+2015.01.08, v1.0.3
+
+fix:
+- (daffy) diff_match_patch
+
+
+2015.01.08, v1.0.2
+
+fix:
+- (daffy) add "!"
+
+
+2015.01.08, v1.0.1
+
+feature:
+- (bower) rm private
+
