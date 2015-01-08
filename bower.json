@@ -26,6 +26,7 @@
     "menu": "~0.7.5",
     "pako": "~0.2.5",
     "google-diff-match-patch": "~0.1.0",
-    "daffy": "~1.0.1"
+    "daffy": "~1.0.1",
+    "jsSHA": "~1.5.0"
   }
 }

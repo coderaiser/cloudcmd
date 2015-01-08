@@ -1,6 +1,6 @@
 {
-  "name": "jssha",
-  "version": "2.0.0",
+  "name": "jsSHA",
+  "version": "1.5.0",
   "description": "jsSHA is a JavaScript implementation of the entire family of SHA hashes as defined in FIPS 180-2 (SHA-1, SHA-224, SHA-256, SHA-384, and SHA-512) as well as HMAC",
   "main": "src/sha.js",
   "repository": {
@@ -23,17 +23,23 @@
     "hash"
   ],
   "license": "BSD",
-  "author": "Brian Turek <brian.turek@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/Caligatio/jsSHA/issues"
+  "authors": [
+    "Brian Turek <brian.turek@gmail.com>"
+  ],
+  "homepage": "http://caligatio.github.com/jsSHA/",
+  "ignore": [
+    "build",
+    "test",
+    "src/sha_dev.js"
+  ],
+  "_release": "1.5.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.5.0",
+    "commit": "c65d3e2d3e548c38774b81b463117c114238399e"
   },
-  "engines": {
-    "node": "*"
-  },
-  "homepage": "https://github.com/Caligatio/jsSHA",
-  "dependencies": {},
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  "_source": "git://github.com/Caligatio/jsSHA.git",
+  "_target": "~1.5.0",
+  "_originalSource": "jsSHA",
+  "_direct": true
 }
