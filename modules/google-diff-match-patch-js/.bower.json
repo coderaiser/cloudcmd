@@ -1,0 +1,24 @@
+{
+  "name": "google-diff-match-patch-js",
+  "version": "1.0.0",
+  "main": [
+    "diff_match_patch.js",
+    "diff_match_patch_uncompressed.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "homepage": "https://github.com/tanaka-de-silva/google-diff-match-patch-js",
+  "_release": "1.0.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0",
+    "commit": "7843d8804fc2553ddd9d2131b9fa68708ac69580"
+  },
+  "_source": "git://github.com/tanaka-de-silva/google-diff-match-patch-js.git",
+  "_target": "~1.0.0",
+  "_originalSource": "google-diff-match-patch-js",
+  "_direct": true
+}
