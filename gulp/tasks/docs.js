@@ -6,7 +6,7 @@
         cl          = require('../cl'),
         place       = require('place'),
         rendy       = require('rendy'),
-        Util        = require(DIR + 'lib/util'),
+        shortdate   = require('shortdate'),
         Info        = require(DIR + 'package');
         
     module.exports = function(callback) {
@@ -24,7 +24,7 @@
                 replaceVersion('README.md', version, versionNew, callback);
                 replaceVersion('HELP.md', version, versionNew, function() {
                     var historyNew = history + rendy(template, {
-                        date    : Util.getShortDate,
+                        date    : shortdate(),
                         version : versionNew
                     });
                     
