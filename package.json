@@ -17,7 +17,8 @@
     "editor"
   ],
   "bin": {
-    "cloudcmd": "bin/cloudcmd.js"
+    "cloudcmd": "bin/cloudcmd.js",
+    "iocmd": "bin/iocmd.js"
   },
   "scripts": {
     "test": "gulp default",
