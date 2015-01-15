@@ -1,0 +1,5 @@
+2015.01.13, v1.1.2
+
+feature:
+- (load) json: rm data
+
