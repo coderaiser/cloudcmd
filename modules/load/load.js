@@ -118,14 +118,14 @@
         
         load.parallel = function(urls, callback) {
             var i       = urls.length,
+                done,
                 func    = function(error) {
                     --i;
                     
-                    if (error)
-                        i = 0;
-                    
-                    if (!i)
+                    if (!i && !done || error) {
+                        done = true;
                         callback(error);
+                    }
                 };
                 
             urls.forEach(function(url) {
