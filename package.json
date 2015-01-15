@@ -29,7 +29,7 @@
     "ashify": "~1.0.0",
     "checkup": "~1.0.2",
     "console-io": "~1.11.0",
-    "execon": "~1.0.1",
+    "execon": "~1.1.0",
     "express": "~4.10.0",
     "faust": "~1.0.0",
     "files-io": "~1.2.0",
