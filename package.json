@@ -61,7 +61,7 @@
     "place": "~1.0.0",
     "prepend": "~1.0.2",
     "shortdate": "~1.0.1",
-    "should": "~4.4.1",
+    "should": "~4.6.0",
     "version-io": "~1.0.3"
   },
   "engines": {
