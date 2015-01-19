@@ -47,7 +47,7 @@
     "ponse": "~1.3.0",
     "rendy": "~1.0.2",
     "restafary": "~1.1.0",
-    "socket.io": "~1.2.0",
+    "socket.io": "~1.3.2",
     "tryrequire": "~1.1.5"
   },
   "devDependencies": {
