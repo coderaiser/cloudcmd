@@ -175,11 +175,9 @@ Console
 |:----------------------|:--------------------------------------------
 | `~`                   | open
 | `Ctrl + p`            | paste path of current directory
-| `Ctrl + z`            | cancel current prompt
-| `Ctrl + l`            | clear
 | `Esc`                 | close
 
-For more details see [Jq-console keyboard shortcuts](https://github.com/replit/jq-console#default-key-config).
+For more details see [console keyboard shortcuts](https://github.com/cloudcmd/console#hot-keys).
 
 Config
 ---------------
