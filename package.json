@@ -28,7 +28,7 @@
   "dependencies": {
     "ashify": "~1.0.0",
     "checkup": "~1.0.2",
-    "console-io": "~2.0.0",
+    "console-io": "~2.1.0",
     "execon": "~1.1.0",
     "express": "~4.11.0",
     "faust": "~1.0.0",
