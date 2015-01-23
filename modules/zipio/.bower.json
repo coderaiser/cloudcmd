@@ -1,0 +1,35 @@
+{
+  "name": "zipio",
+  "homepage": "https://github.com/coderaiser/zipio",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "zip data",
+  "main": "lib/zipio.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "zip"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "modules"
+  ],
+  "dependencies": {
+    "pako": "~0.2.5"
+  },
+  "version": "1.0.1",
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.1",
+    "commit": "605053168a5e774e0f771f2bbea30fa6ef9f23df"
+  },
+  "_source": "git://github.com/coderaiser/zipio.git",
+  "_target": "~1.0.0",
+  "_originalSource": "zipio"
+}
