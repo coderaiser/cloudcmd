@@ -21,17 +21,6 @@
             "local": "/socket.io/socket.io.js",
             "remote": "//cdn.socket.io/socket.io-{{ version }}.js"
         }, {
-            "name": "ace",
-            "version": "1.1.8",
-            "date": "08.11.14",
-            "local": "/modules/ace-builds/src-noconflict/ace.js",
-            "remote": "//cdn.jsdelivr.net/ace/{{ version }}/noconflict/ace.js"
-        }, {
-            "name": "pako",
-            "version": "0.2.5",
-            "local": "/modules/pako/dist/pako.min.js",
-            "remote": "//cdn.jsdelivr.net/pako/{{ version }}/pako.min.js"
-        },{
             "name": "fancybox",
             "version": "2.1.5",
             "local": [
