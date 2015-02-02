@@ -144,18 +144,10 @@ Edit
 ---------------
 ![Edit](/img/screen/edit.png "Edit")
 
-### Features
-- Syntax highlighting based on extension of file for over 110 languages.
-- Built-in `emmet` (for html files)
-- Drag n drop (drag file from desktop to editor).
-- Built-in `jshint` (with options in `.jshintrc` file)
-- Built-in `beautifier` (with options in `json/beautify.json`, could be overriden in `~/.beautify.json`)
-- Configurable options (could be edited in `json/edit.json`)
-
 ###Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
-|`F4`                   | open
+| `F4`                  | open
 | `Esc`                 | close
 
 For more details see [edward hot keys](https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys").
