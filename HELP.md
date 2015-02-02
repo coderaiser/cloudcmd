@@ -156,15 +156,9 @@ Edit
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 |`F4`                   | open
-| `Ctrl + s`            | save
-| `Ctrl + f`            | find
-| `Ctrl + h`            | replace
-| `Ctrl + g`            | go to line
-| `Ctrl + b`            | beautify js, css or html
-| `Ctrl + m`            | minify js, css or html
 | `Esc`                 | close
 
-For more details see [Ace keyboard shortcuts](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts "Ace keyboard shortcuts").
+For more details see [edward hot keys](https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys").
 
 Console
 ---------------
@@ -177,7 +171,7 @@ Console
 | `Ctrl + p`            | paste path of current directory
 | `Esc`                 | close
 
-For more details see [console keyboard shortcuts](https://github.com/cloudcmd/console#hot-keys).
+For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys).
 
 Config
 ---------------
