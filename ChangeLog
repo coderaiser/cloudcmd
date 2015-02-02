@@ -1,3 +1,115 @@
+2015.02.02, v2.1.0
+
+fix:
+- (listeners) dragndrop: upload files from downloads bar
+- (poyfill) removeListener -> Events.remove
+- (modules) pako version: 1.2.1 -> 0.2.5
+- (edward) Options -> Config
+- (dom) getNotCurrentDirPath: getPanel -> getPanel({active:false})
+- (dom) getCurrentName: title || textContent -> innerHTML, decodeEntities
+- (cloudfunc) encodeEntities: add "<", ">"
+- (cloudfunc) encode space before render: " " -> "&nbsp;"
+- (load) add arraybuffer check
+- (events) addOnce: do not remove listener when to arguments
+- (util) render: do not remove empty blocks "{{", "}}"
+- (util) indexOf -> ~indexOf
+
+feature:
+- docs(help) edit: rm s
+- (edit) setMsgChanged: add " "
+- (package) edward v1.1.0
+- (emmet) rm
+- (package) mellow v1.0.0
+- (pako) rm
+- (util) type: regexp speed up
+- (edward) v1.0.0
+- (edward) rm
+- (package) edward v0.6.0
+- (cloudcmd) edward: size, socket -> socket, {size}
+- (package) edward v0.5.0
+- (iocmd) +x
+- (package) edit -> edward
+- (darwin) DOM.getDataFromStorage -> story
+- (events) rm preventDefault
+- (util) rendy: improve speed
+- (util) render: speed up in 10 times
+- (edward) isChanged: rm confirm, save
+- (edward) add on
+- (zip) zip -> zipio
+- (bower) rm google-diff-match-patch
+- (edit) rm showMessage
+- (edit) rm setValueFirst, goToLine
+- (edward) rm CloudFunc
+- (edward) add save, patch from edit
+- (package) socket.io v1.3.2
+- (package) console-io v2.0.0
+- (package) should v4.6
+- (package) express v4.11
+- (package) execon v1.1.0
+- (bower) load v1.1.3
+- (load) add
+- (edward) add jshint, emmet from edit
+- (iocmd) add
+- (package) bin: add iocmd
+- (edward) mv sha from edit
+- (edit) RESTful -> restafary
+- (package) restafary v1.1.0
+- (style) body - rm overflow: hidden
+- (edward) rm hideMenu
+- (edit) mv menu back from edward
+- (edward) add hideMenu
+- (edward) add setMenu
+- (edward) add onDrop
+- (edward) setUseOfWorker
+- (edward) ed -> edward
+- (edit) rm Ace, Session
+- (edward) DOM.load -> documentFragment
+- (edward) add showMessage
+- (edward) add .edward-msg
+- (edward) add
+- (edward) add
+- (util) rm replaceStr
+- (util) rm rmStr
+- (util) rm getDate, getShortDate
+- (util) rm log
+- (client) rm Util.log
+- (server) rm util
+- (package) rm daffy, diff-match-patch
+- (patch) add from npm
+- (patch) util -> checkup, execon
+- (bower) add jsSHA from bower
+- (package) add daffy from npm
+- (patch) rm tryRequire
+- (util) rm strCmp
+- (route) Util.strCmp -> RegExp.test
+- (cloudcmd) Util.render -> rendy
+- (package) add diff-match-patch from npm
+- (polyfill) rm DOM.cssSet
+- (edit) Info.path -> FileName
+- (edit) Util.log -> console.error
+- (jquery) rm duplicate
+- (modules) add pako
+- (modules) menu v0.7.5
+- (bower) add modules
+- (tryrequire) add from npm
+- (link) add title
+- (jshint) add validthis
+- (cloudfunc) entities: add ampersand
+- (cloudfunc) add decodeEntities
+- (modules) jquery v2.1.3
+- (changelog) add "changelog: done"
+- (changelog) add prepend
+- (package) changelog-io v1.3.4
+- (util) type: add null, mv back object
+- (util) rm rmStrOnce
+- (util) rm slice
+- (events) Util.slice -> [].slice, Util.check -> check, Util.type -> type
+- (util) rm forEach
+- (package) should v4.4.1
+- (util) rm ownRender
+- (index) speed up event: load -> DOMContentLoaded
+
+
 2014.12.09, v2.0.0
 
 fix:
