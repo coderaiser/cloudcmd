@@ -163,7 +163,7 @@ Console
 | `Ctrl + p`            | paste path of current directory
 | `Esc`                 | close
 
-For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys).
+For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
 
 Config
 ---------------
