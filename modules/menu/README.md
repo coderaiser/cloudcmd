@@ -20,6 +20,12 @@ Tired to use js based libraries which use jquery and `.hover` classes insteed of
 - easy to use.
 - easy to extend.
 
+# Install
+With help of [bower](http://bower.io "Bower").
+```
+bower install menu
+```
+
 #How use?
 Create `html` page with `js` and `css` connected.
 

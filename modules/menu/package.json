@@ -1,7 +1,7 @@
 {
   "name": "menu",
   "private": true,
-  "version": "0.7.5",
+  "version": "0.7.6",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Simple css-based multillevel context menu",
   "homepage": "http://coderaiser.github.io/menu",

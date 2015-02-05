@@ -372,13 +372,13 @@ var MenuIO;
             .keys(data)
             .forEach(function(param) {
                 str     = data[param];
-                expr    = '{{\\s*' + param + '\\s*}}';
+                expr    = '{{\\s' + param + '\\s}}';
                 regExp  = RegExp(expr, 'g');
                 result  = result.replace(regExp, str);
             });
         
         if (~result.indexOf('{{'))
-            result = result.replace(/{{\s*.*\s*}}/, '');
+            result = result.replace(/{{\s.*\s}}/, '');
         
         return result;
     }

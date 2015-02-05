@@ -1,6 +1,6 @@
 {
   "name": "menu",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "homepage": "https://github.com/coderaiser/menu-io",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -16,6 +16,7 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "gulpfile.js",
     "node_modules"
   ]
 }
