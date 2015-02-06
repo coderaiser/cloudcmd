@@ -1,6 +1,6 @@
 {
   "name": "menu",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "homepage": "https://github.com/coderaiser/menu-io",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -8,7 +8,8 @@
   "description": "Simple css-based multillevel context menu",
   "main": "menu-io.min.js",
   "moduleType": [
-    "globals"
+    "globals",
+    "node"
   ],
   "keywords": [
     "menu"
