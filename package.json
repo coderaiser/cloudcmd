@@ -28,6 +28,7 @@
   "dependencies": {
     "ashify": "~1.0.0",
     "console-io": "~2.1.0",
+    "copymitter": "~1.4.1",
     "edward": "~1.1.0",
     "execon": "~1.1.0",
     "express": "~4.11.0",
