@@ -16,10 +16,11 @@
         args        = require('minimist')(argv.slice(2), {
             string: 'port',
             boolean: ['test', 'repl'],
-            alias: { 
+            alias: {
                 v: 'version',
                 h: 'help',
-                p: 'port' }
+                p: 'port'
+            }
         });
     
     if (args.version) {
