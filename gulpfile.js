@@ -5,6 +5,7 @@
         jshint      = require('gulp-jshint'),
         recess      = require('gulp-recess'),
         mocha       = require('gulp-mocha'),
+        jscs        = require('gulp-jscs'),
         
         cloudfunc   = require('./test/lib/cloudfunc.js'),
         
@@ -44,7 +45,11 @@
             .on('error', onError);
     });
     
-   
+    gulp.task('jscs', function () {
+        return gulp.src(Src)
+            .pipe(jscs());
+    });
+    
     gulp.task('css', function () {
         gulp.src('css/*.css')
             .pipe(recess())
@@ -60,7 +65,7 @@
            .on('error', onError);
     });
     
-    gulp.task('default', ['jshint', 'css', 'test']);
+    gulp.task('default', ['jshint', 'jscs', 'css', 'test']);
     gulp.task('release', ['changelog', 'docs', 'package']);
     
     function onError(params) {
