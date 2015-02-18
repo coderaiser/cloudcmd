@@ -8,6 +8,7 @@
         Util                = require(LIBDIR + 'util'),
         CloudFunc           = require(LIBDIR + 'cloudfunc'),
         files               = require('files-io'),
+        rendy               = require('rendy'),
         
         FS_DIR              = HTMLDIR   + 'fs/',
         EXPECT_PATH         = DIR       + 'test/lib/cloudfunc.html',
@@ -99,9 +100,15 @@
                 Util.timeEnd('CloudFunc.buildFromJSON');
                 
                 if (isNotOk) {
-                    console.log('Error in char number: ' + i    + '\n' +
-                                'Expect: ' + Expect.substr(i)  + '\n' +
-                                'Result: ' + result.substr(i) );
+                    console.log(rendy([
+                        'Error in char number: {{ number }}',
+                        'Expect: {{ expect }}',
+                        'Result: {{ result }}'
+                    ].join('\n'), {
+                      number: i,
+                      expect: Expect.substr(i),
+                      result: result.substr(i)
+                    }));
                     
                     throw('buildFromJSON: Not OK');
                 }
