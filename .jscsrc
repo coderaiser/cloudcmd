@@ -1,0 +1,7 @@
+{
+	"preset": "crockford",
+	"requireSpaceAfterKeywords": null,
+	"disallowTrailingWhitespace": "ignoreEmptyLines",
+	"validateIndentation": null,
+	"requireCurlyBraces": null
+}
