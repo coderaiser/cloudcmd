@@ -1,12 +1,10 @@
-(function(scope) {
+(function(global) {
     'use strict';
-    
-    var Scope = scope.window ? window : global;
     
     if (typeof module === 'object' && module.exports)
         module.exports  = new FormatProto();
     else
-        Scope.Format    = new FormatProto();
+        global.Format   = new FormatProto();
         
     function FormatProto() {
         this.addSlashToEnd  = function(path) {
@@ -38,18 +36,18 @@
             
             if (isNumber) {
                 if      (size < l1KB)   size = size + 'b';
-                else if (size < l1MB)   size = (size/l1KB).toFixed(2) + 'kb';
-                else if (size < l1GB)   size = (size/l1MB).toFixed(2) + 'mb';
-                else if (size < l1TB)   size = (size/l1GB).toFixed(2) + 'gb';
-                else if (size < l1PB)   size = (size/l1TB).toFixed(2) + 'tb';
-                else                    size = (size/l1PB).toFixed(2) + 'pb';
+                else if (size < l1MB)   size = (size / l1KB).toFixed(2) + 'kb';
+                else if (size < l1GB)   size = (size / l1MB).toFixed(2) + 'mb';
+                else if (size < l1TB)   size = (size / l1GB).toFixed(2) + 'gb';
+                else if (size < l1PB)   size = (size / l1TB).toFixed(2) + 'tb';
+                else                    size = (size / l1PB).toFixed(2) + 'pb';
             }
             
             return size;
         };
-    
+        
         /**
-         * Функция переводит права из цыфрового вида в символьный 
+         * Функция переводит права из цыфрового вида в символьный
          * @param perms - строка с правами доступа
          * к файлу в 8-миричной системе
          */
@@ -78,16 +76,16 @@
                     
                     switch (type - 0) {
                         case 1: /* обычный файл */
-                            type='-';
+                            type = '-';
                             break;
                         case 2: /* байт-ориентированное (символьное) устройство*/
-                            type='c';
+                            type = 'c';
                             break;
                         case 4: /* каталог */
-                            type='d';
+                            type = 'd';
                             break;
                         default:
-                            type='-';
+                            type = '-';
                     }
                     
                     /* оставляем последние 3 символа*/
@@ -99,12 +97,12 @@
                     /* Рекомендации гугла советуют вместо string[3]
                      * использовать string.charAt(3)
                      */
-                    /*    
+                    /*
                         http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml?showone=Standards_features#Standards_features
                         
                         Always preferred over non-standards featuresFor
-                        maximum portability and compatibility, always 
-                        prefer standards features over non-standards 
+                        maximum portability and compatibility, always
+                        prefer standards features over non-standards
                         features (e.g., string.charAt(3) over string[3]
                         and element access with DOM functions instead
                         of using an application-specific shorthand).
@@ -124,9 +122,9 @@
                                  (group[1] - 0 > 0 ? 'w' : '-')     +
                                  (group[2] - 0 > 0 ? 'x' : '-')     +
                                  ' '                                +
-                                 (all[0]- 0    > 0 ? 'r' : '-')     +
-                                 (all[1]- 0    > 0 ? 'w' : '-')     +
-                                 (all[2]- 0    > 0 ? 'x' : '-');
+                                 (all[0] - 0    > 0 ? 'r' : '-')     +
+                                 (all[1] - 0    > 0 ? 'w' : '-')     +
+                                 (all[2] - 0    > 0 ? 'x' : '-');
                 }
                 
                 return permissions;
