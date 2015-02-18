@@ -1,8 +1,9 @@
 {
-	"preset": "crockford",
-	"requireSpaceAfterKeywords": null,
-	"disallowTrailingWhitespace": "ignoreEmptyLines",
-	"disallowTrailingComma": null,
+    "preset": "crockford",
+    "requireSpaceAfterKeywords": null,
+    "requireCapitalizedConstructors": null,
+    "disallowTrailingWhitespace": "ignoreEmptyLines",
+    "disallowTrailingComma": null,
     "validateIndentation": null,
-	"requireCurlyBraces": null
+    "requireCurlyBraces": null
 }
