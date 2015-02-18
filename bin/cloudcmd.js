@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-(function(){
+(function() {
     'use strict';
     
     var Info        = require('../package'),
