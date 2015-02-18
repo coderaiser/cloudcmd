@@ -2,6 +2,7 @@
 	"preset": "crockford",
 	"requireSpaceAfterKeywords": null,
 	"disallowTrailingWhitespace": "ignoreEmptyLines",
-	"validateIndentation": null,
+	"disallowTrailingComma": null,
+    "validateIndentation": null,
 	"requireCurlyBraces": null
 }
