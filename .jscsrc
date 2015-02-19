@@ -5,5 +5,10 @@
     "disallowTrailingWhitespace": "ignoreEmptyLines",
     "disallowTrailingComma": null,
     "validateIndentation": null,
-    "requireCurlyBraces": null
+    "requireCurlyBraces": null,
+    "excludeFiles": [
+        "node_modules/**",
+        "modules/**",
+        "bower_components/**"
+    ]
 }
