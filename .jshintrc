@@ -15,5 +15,6 @@
     "evil"  : true,
     "expr" : true,
     "quotmark": "single",
-    "validthis":true
+    "validthis":true,
+    "indent" : 4
 }
