@@ -32,7 +32,7 @@
             ]
         }, {
             "name": "menu",
-            "version": "0.7.5",
+            "version": "0.7.8",
             "local": [
                 "/modules/menu/menu-io.css",
                 "/modules/menu/menu-io.js"
