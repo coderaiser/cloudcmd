@@ -23,6 +23,10 @@
     z-index: 1
 }
 
+.fancybox-overlay {
+    z-index: 0;
+}
+
 .media, video {
     width: 100%;
 }
