@@ -12,6 +12,7 @@
     "online": true,
     "cache": true,
     "showKeysPanel": true,
+    "editor": "dword",
     "port": 8000,
     "ip": null
 }
