@@ -1,6 +1,6 @@
 Cloud Commander v2.1.0
 ===============
-###[Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
@@ -134,7 +134,7 @@ View
 - Playing audio.
 - Playing video.
 
-###Hot keys
+### Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F3`                  | open
@@ -144,7 +144,7 @@ Edit
 ---------------
 ![Edit](/img/screen/edit.png "Edit")
 
-###Hot keys
+### Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F4`                  | open
@@ -156,7 +156,7 @@ Console
 ---------------
 ![Console](/img/screen/console.png "Console")
 
-###Hot keys
+### Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `~`                   | open
@@ -169,7 +169,7 @@ Config
 ---------------
 ![Config](/img/screen/config.png "Config")
 
-###Hot keys
+### Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F10`                 | open
@@ -219,7 +219,7 @@ Right mouse click button shows context menu with items:
 - Paste
 - (Un)Select All
 
-###Hot keys
+### Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F9`                  | open
@@ -231,7 +231,7 @@ Standard practices say no non-root process gets to talk to
 the Internet on a port less than 1024. Anyway I suggest you
 to start Cloud Commander as non-root. How it could be solved?
 There is a couple easy and fast ways. One of them is port forwarding.
-###Iptables
+### Iptables
 Just run `shell/addtables.sh` for default options.
 
 ```sh
@@ -256,7 +256,7 @@ iptables -t nat -D PREROUTING 2
 iptables -t nat -D PREROUTING 1
 ```
 
-###nginx
+### nginx
 Get [nginx](http://nginx.org/ "nginx"). On linux it could be done this way:
 
 ```sh
