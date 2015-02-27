@@ -1,13 +1,13 @@
----                                                                                                                                                                                  
-applications:                                                                                                                                                                        
-  .:                                                                                                                                                                                 
-    name: cloudcmd                                                                                                                                                                   
-    framework:                                                                                                                                                                       
-      name: node                                                                                                                                                                     
-      info:                                                                                                                                                                          
-        mem: 512M                                                                                                                                                                    
-        description: Node.js Application                                                                                                                                             
-        exec:                                                                                                                                                                        
-    url: ${name}.${target-base}                                                                                                                                                      
-    mem: 128M                                                                                                                                                                        
-    instances: 2       
+---
+applications:
+  .:
+    name: cloudcmd
+    framework:
+      name: node
+      info:
+        mem: 512M
+        description: Node.js Application
+        exec:
+    url: ${name}.${target-base}
+    mem: 128M
+    instances: 2
