@@ -9,7 +9,7 @@ matrix:
     - node_js: 'iojs'
 
 before_install:
-  - npm install gulp -g
+  - npm install gulp bower -g
 
 script:
   - gulp default
