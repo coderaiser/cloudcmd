@@ -112,7 +112,7 @@ Hot keys
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Ctrl + a`            | select all files in a panel
-| `Up`, `Down`, `Enter` | filesystem navigation
+| `Up`, `Down`, `Enter` | file system navigation
 | `Ctrl + \`            | go to the root directory
 | `Tab`                 | move via panels
 | `Page Up`             | up on one page
