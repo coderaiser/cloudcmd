@@ -2,6 +2,7 @@
     "auth": false,
     "username": "root",
     "password": "2b64f2e3f9fee1942af9ff60d40aa5a719db33b8ba8dd4864bb4f11e25ca2bee00907de32a59429602336cac832c8f2eeff5177cc14c864dd116c8bf6ca5d9a9",
+    "editor": "edward",
     "diff": true,
     "zip" : true,
     "notifications": false,
@@ -12,7 +13,6 @@
     "online": true,
     "cache": true,
     "showKeysPanel": true,
-    "editor": "dword",
     "port": 8000,
     "ip": null
 }
