@@ -151,7 +151,7 @@ Edit
 | `F4`                  | open
 | `Esc`                 | close
 
-For more details see [edward hot keys](https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys").
+For more details see [Edward hot keys](https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys").
 
 Console
 ---------------
