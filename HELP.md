@@ -96,7 +96,7 @@ Hot keys
 | `F4`                  | edit
 | `F5`                  | copy
 | `F6`                  | rename/move
-| `F7`                  | new dir
+| `F7`                  | new directory
 | `Shift + F7`          | new file
 | `F8`, `Delete`        | remove
 | `Shift + Delete`      | remove without prompt
@@ -214,7 +214,7 @@ Right mouse click button shows context menu with items:
 - Upload
 - Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
-- New (File, Dir, from FilePicker)
+- New (File, Directory, from FilePicker)
 - Cut
 - Copy
 - Paste
