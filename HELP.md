@@ -279,7 +279,7 @@ server {
 }
 ```
 
-If you want add **ssl**, add a couple lines to server block:
+If you want add **SSL**, add a couple lines to server block:
 
 ```sh
 server {
