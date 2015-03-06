@@ -258,7 +258,7 @@ iptables -t nat -D PREROUTING 1
 ```
 
 ### nginx
-Get [nginx](http://nginx.org/ "nginx"). On linux it could be done this way:
+Get [nginx](http://nginx.org/ "nginx"). On Linux it could be done this way:
 
 ```sh
 sudo apt-get install nginx #for ubuntu and debian
