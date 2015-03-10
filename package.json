@@ -22,7 +22,8 @@
   },
   "scripts": {
     "test": "gulp default",
-    "start": "node bin/cloudcmd.js"
+    "start": "node bin/cloudcmd.js",
+    "gulp": "gulp"
   },
   "subdomain": "cloudcmd",
   "dependencies": {

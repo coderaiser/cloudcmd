@@ -9,11 +9,11 @@ matrix:
     - node_js: 'iojs'
 
 before_install:
-  - npm install gulp bower -g
+  - npm install bower -g
 
 script:
-  - gulp default
-  - node bin/cloudcmd --test
+  - npm run gulp
+  - node start -- --test
 
 notifications:
     email:
