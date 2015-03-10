@@ -13,7 +13,7 @@ before_install:
 
 script:
   - npm run gulp
-  - node start -- --test
+  - npm start -- --test
 
 notifications:
     email:
