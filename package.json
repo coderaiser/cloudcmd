@@ -23,7 +23,8 @@
   "scripts": {
     "test": "gulp default",
     "start": "node bin/cloudcmd.js",
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "yaspeller": "yaspeller ."
   },
   "subdomain": "cloudcmd",
   "dependencies": {
@@ -69,7 +70,8 @@
     "prepend": "~1.0.2",
     "shortdate": "~1.0.1",
     "should": "~5.0.0",
-    "version-io": "~1.0.3"
+    "version-io": "~1.0.3",
+    "yaspeller": "~1.0.2"
   },
   "engines": {
     "node": ">=0.6"

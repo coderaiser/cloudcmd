@@ -1,0 +1,44 @@
+{
+    "ignoreDigits": true,
+    "excludeFiles": [
+        ".git",
+        "modules",
+        "lib",
+        "node_modules"
+    ],
+    "fileExtensions": [
+        ".md"
+    ],
+    "dictionary":[
+        "Dev",
+        "Dropbox",
+        "FilePicker",
+        "GDrive",
+        "Github",
+        "Heroku",
+        "Iptables",
+        "JitSu",
+        "Polietilena",
+        "TarZak",
+        "WebSocket",
+        "cd",
+        "cloudcmd",
+        "coderaiser",
+        "com",
+        "dev",
+        "favicon",
+        "github",
+        "io",
+        "js",
+        "mouseup",
+        "nginx",
+        "or io",
+        "refactor",
+        "sslPort",
+        "unselect",
+        "util",
+        "v0",
+        "v1",
+        "v2"
+    ]
+}
