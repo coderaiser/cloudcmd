@@ -297,7 +297,7 @@ server {
 }
 ```
 
-For websocket support (nginx >= v1.3.13) modify server block:
+For WebSocket support (nginx >= v1.3.13) modify server block:
 
 ```sh
     location / {
