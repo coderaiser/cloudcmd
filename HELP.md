@@ -64,12 +64,6 @@ port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't
 To begin use, type in address bar of your browser:
 
 ```
-http://localhost:<port>
-```
-
-With default settings it would be:
-
-```
 http://localhost:8000
 ```
 
