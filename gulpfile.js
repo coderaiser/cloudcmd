@@ -7,6 +7,8 @@
         mocha       = require('gulp-mocha'),
         jscs        = require('gulp-jscs'),
         
+        docs        = require('./gulp/docs'),
+        
         cloudfunc   = require('./test/lib/cloudfunc.js'),
         
         LIB         = 'lib/',
@@ -25,24 +27,17 @@
             '!' + LIB_CLIENT + 'jquery.js'
         ];
     
-    ['changelog', 'docs', 'package'].forEach(function(name) {
-        gulp.task(name, function() {
-            var task = require('./gulp/tasks/' + name);
-            
-            task(function(error, msg) {
-                if (error)
-                    console.error(error.message);
-                else
-                    console.log(msg);
-            });
-        }.bind(null, name));
+    gulp.task('release', function() {
+        docs(function(e, msg) {
+            error(e) || console.log(msg);
+        });
     });
     
     gulp.task('jshint', function() {
         gulp.src(Src)
             .pipe(jshint())
             .pipe(jshint.reporter())
-            .on('error', onError);
+            .on('error', error);
     });
     
     gulp.task('jscs', function () {
@@ -54,7 +49,7 @@
         gulp.src('css/*.css')
             .pipe(recess())
             .pipe(recess.reporter())
-            .on('error', onError);
+            .on('error', error);
     });
     
     gulp.task('test', function() {
@@ -62,14 +57,14 @@
        
        gulp.src('test/lib/util.js')
            .pipe(mocha({reporter: 'min'}))
-           .on('error', onError);
+           .on('error', error);
     });
     
     gulp.task('default', ['jshint', 'jscs', 'css', 'test']);
-    gulp.task('release', ['changelog', 'docs', 'package']);
     
-    function onError(params) {
-        console.log(params.message);
+    function error(e) {
+        e && console.error(e.message);
+        return e;
     }
     
 })();
