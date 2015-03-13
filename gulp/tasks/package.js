@@ -12,6 +12,13 @@
                 else
                     callback(null, 'package: done');
             });
+            
+            version(versionNew, {name: 'bower'}, function(error) {
+                if (error)
+                    callback(error);
+                else
+                    callback(null, 'bower: done');
+            });
         });
     };
 })();
