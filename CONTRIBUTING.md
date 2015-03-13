@@ -1,13 +1,3 @@
-Branch
----------------
-If you would like to contribute - send pull request to dev branch.
-Getting dev version of **Cloud Commander**:
-
-    git clone git://github.com/coderaiser/cloudcmd.git
-    cd cloudcmd && git checkout dev
-
-or by [link](https://github.com/coderaiser/cloudcmd/tree/dev "Dev version").
-
 Commit
 ---------------
 Format of the commit message: **type(scope) subject**
