@@ -1,3 +1,71 @@
+2015.03.13, v2.2.0
+
+fix:
+- (dom) renameCurrent: when there is file with same name - two same names is shown on a panel
+- (travis) script: node -> npm
+- (key) open konsole on mac with cyrillic
+- (key) all keys are dots
+- (key) listener: dot on win
+- (edit) show: name -> Info.name
+- (edit) show: set mode before data set
+- (view) .fancybox-overlay: set z-index: 0
+- (edit) Edit.goToLine -> edward.goToLine
+- (dom) processFiles: change panel in wrong way
+- (util) getRegExp
+- (cloudcmd) twopack: add ".." check
+- (util) some: add return
+
+feature:
+- (yaspeller) add
+- (travis) rm 0.10
+- (package) scripts: add gulp
+- (package) Util.json -> jonny
+- (package) Util.check -> checkup
+- (route) add execon
+- (rest) add try-catch
+- (key) setCurrentByLatter: add "-, +, ="
+- (config) add editor
+- (travis) before_install: add bower
+- (package) dword v1.3.2
+- (edit) go to line: Ctrl+G -> Ctrl+L
+- (package) dword v1.2.0
+- (package) edward v1.4.0
+- (cloudcmd) create: rm predefined key commands
+- (package) marked -> markdown-it
+- (dword) add
+- (package) edward v1.3.0
+- (package) console-io v2.2
+- (package) express v4.12
+- (bower) menu v0.7.8
+- (package) edward v1.2.0
+- (jshintrc) rm indent, not supported anymore by jshint
+- (jshintrc) add indent: 4
+- (jscsrc) add excludeFiles
+- (gulp) add jscs
+- (package) add format-io v0.9.6
+- (bower) add format-io
+- (modules) add promise-polyfill
+- (jscsrc) requireCapitalizedConstructors
+- (terminal) rm
+- (jscsrc) add disallowTrailingComma
+- (jscsrc) add
+- (rest) copy: add progress
+- (util) findObjByNameInArr: add arguments check
+- (package) rm charm
+- (rest) copy: add progress
+- (package) should v5.0.0
+- (package) copymitter v1.5.0
+- (cloudcmd) get back droid sans mono v5: beter better cyrillic support
+- (client) refresh: add noCurrent
+- (rest) flop.cp -> copymitter
+- (travis) add 0.12, iojs
+- (package) socket.io v1.3.3
+- (bower) menu v0.7.7
+- (bower) menu v0.7.6
+- (font) Droid Sans Mono v7
+- (package) rm checkup
+
+
 2015.02.02, v2.1.0
 
 fix:
