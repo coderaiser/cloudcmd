@@ -25,7 +25,7 @@
     "start": "node bin/cloudcmd.js",
     "gulp": "gulp",
     "yaspeller": "yaspeller .",
-    "publish-io": "gulp release"
+    "wisdom": "gulp release"
   },
   "subdomain": "cloudcmd",
   "dependencies": {
