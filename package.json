@@ -72,7 +72,7 @@
     "yaspeller": "~1.0.2"
   },
   "engines": {
-    "node": ">=0.6"
+    "node": ">=0.10"
   },
   "license": "MIT",
   "main": "lib/cloudcmd.js"
