@@ -24,7 +24,8 @@
     "test": "gulp default",
     "start": "node bin/cloudcmd.js",
     "gulp": "gulp",
-    "yaspeller": "yaspeller ."
+    "yaspeller": "yaspeller .",
+    "publish-io": "gulp release"
   },
   "subdomain": "cloudcmd",
   "dependencies": {
@@ -67,7 +68,7 @@
     "morgan": "~1.5.0",
     "place": "~1.0.0",
     "shortdate": "~1.0.1",
-    "should": "~5.0.0",
+    "should": "~5.2.0",
     "yaspeller": "~1.0.2"
   },
   "engines": {
