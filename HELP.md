@@ -9,6 +9,10 @@ Cloud Commander v2.2.0
 [JitSu_LIVE_IMG]:           https://status-io.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
 [HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
+[DWORD]:                    https://github.com/coderaiser/dword "Editor based on CodeMirror"
+[EDWARD]:                   https://github.com/cloudcmd/edward "Editor based on Ace"
+[EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
+
 **Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, folders and programs in browser from any computer, mobile or tablet device.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
@@ -23,7 +27,7 @@ Benefits
 - Server works on **Windows**, **Linux** and **Mac OS**.
 - Could be used local or remotely.
 - Adapting to screen size.
-- **Editor** with support of **syntax highlighting** for over 110 languages.
+- **2 built-in editors** with support of **syntax highlighting**: [Dword][DWORD] and [Edward][EDWARD].
 - **Console** with support of default OS command line.
 - Written in **JavaScript/Node.js**.
 
@@ -145,7 +149,7 @@ Edit
 | `F4`                  | open
 | `Esc`                 | close
 
-For more details see [Edward hot keys](https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys").
+For more details see [Edward hot keys][EDWARD_KEYS].
 
 Console
 ---------------
