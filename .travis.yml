@@ -13,7 +13,7 @@ before_install:
 script:
   - npm run gulp
   - npm run yaspeller
-  - npm start -- --test
+  - npm test
 
 notifications:
     email:
