@@ -1,4 +1,4 @@
-Cloud Commander v2.2.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
+Cloud Commander v2.2.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status]VeyorStatusIMGURL]][VeyorStatusURL]
 ===============
 ###[Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
@@ -16,6 +16,9 @@ Cloud Commander v2.2.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 [JitSu_LIVE_IMG]:           http://status-io.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
 [HEROKU_LIVE_IMG]:          http://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
+
+[VeyorStatusIMGURL]:        https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true
+[VeyorStatusURL]:           https://ci.appveyor.com/project/coderaiser/cloudcmd "Build Status"
 
 **Cloud Commander** orthodox web file manager with console and editor.
 
