@@ -1,4 +1,4 @@
-Cloud Commander v2.2.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status][VeyorStatusIMGURL]][VeyorStatusURL]
+Cloud Commander v2.2.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status][VeyorStatusIMGURL]][VeyorStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL]
 ===============
 ###[Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
@@ -19,6 +19,10 @@ Cloud Commander v2.2.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 
 [VeyorStatusIMGURL]:        https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true
 [VeyorStatusURL]:           https://ci.appveyor.com/project/coderaiser/cloudcmd "Build Status"
+
+[ShippableIMGURL]:          https://api.shippable.com/projects/550adb2e5ab6cc1352a50b28/badge?branchName=master
+[ShippableURL]:             https://app.shippable.com/projects/550adb2e5ab6cc1352a50b28/builds/latest "Shippable Build"
+
 
 **Cloud Commander** orthodox web file manager with console and editor.
 
