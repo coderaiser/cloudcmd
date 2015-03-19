@@ -1,3 +1,35 @@
+2015.03.19, v2.2.1
+
+fix:
+- (contact) hide: infinite loop
+- (buffer) cut: when cut root directory, it became transparent
+- (dom) processFiles: when names.length !== 1 name is undefined
+- (gulp) add docs
+- (util) render: clean up regexp: lazy -> greedy
+
+feature:
+- (npmignore) add
+- (appveyor) appveyor.yml -> .appveyor.yml
+- (appveyor) add
+- (travis) rm gulp
+- (travis) npm start -> npm test
+- (place) v1.1.2
+- (modules) socket.io v1.3.5
+- (package) markdown-it v4.0.1
+- (yaspeller) dictionary: Dword
+- (package) rm ashify
+- (package) rm patchfile
+- (package) engines: 0.6 -> 0.10
+- (package) publish-io -> wisdom
+- (package) scripts: add publish-io
+- (gulp) rm changelog, package
+- (config) add editor
+- (config) rm span
+- (config) username, password: add title
+- (gulp) add bower support
+- (modules) rm
+
+
 2015.03.13, v2.2.0
 
 fix:
