@@ -4,7 +4,12 @@
     <li><input type="password" class="form-control" placeholder="password" id="password" value="{{ password }}" title="Password"></input></li>
     <li><input type="checkbox" id="diff" {{ diff }} ></input> <label for="diff">Diff</label></li>
     <li><input type="checkbox" id="zip" {{ zip }} ></input> <label for="zip">Zip</label></li>
-    <li><select class="form-control" id="editor" title="Editor"><option {{ edward-selected }}>edward</option><option {{ dword-selected }}>dword</option></select></li>
+    <li>
+        <select class="form-control full-width" id="editor" title="Editor">
+            <option {{ edward-selected }}>edward</option>
+            <option {{ dword-selected }}>dword</option>
+        </select>
+    </li>
     <li><input type="checkbox" id="notifications" {{ notifications }} ></input> <label for="notifications">Notifications</label></li>
     <li><input type="checkbox" id="localStorage" {{ localStorage }} ></input> <label for="localStorage">Local Storage</label></li>
     <li><input type="checkbox" id="buffer" {{ buffer }} ></input> <label for="buffer">Buffer</label></li>
