@@ -26,40 +26,6 @@
             });
         });
         
-        describe('checkExt', function() {
-            it('should return true when extension is same', function() {
-                var EXT     = 'png',
-                    name    = 'picture.png',
-                    same    = Util.checkExt(name, EXT);
-                
-                 same.should.be.true;
-            });
-            
-            it('should return false when extension is not same', function() {
-                var EXT     = 'jpg',
-                    name    = 'picture.png',
-                    same    = Util.checkExt(name, EXT);
-                
-                 same.should.be.false;
-            });
-            
-            it('should return true when one item of extensions array is same', function() {
-                var EXT     = ['jpg', 'png'],
-                    name    = 'picture.png',
-                    same    = Util.checkExt(name, EXT);
-                
-                 same.should.be.true;
-            });
-            
-            it('should return false when no one item of extensions array is same', function() {
-                var EXT     = ['jpg', 'gif'],
-                    name    = 'picture.png',
-                    same    = Util.checkExt(name, EXT);
-                
-                 same.should.be.false;
-            });
-        });
-        
         describe('exec', function() {
             it('should execute function with parameters', function() {
                 var WORD    = 'hello',
