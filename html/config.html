@@ -1,22 +1,90 @@
 <ul class="list" >
-    <li><input type="checkbox" id="auth" {{ auth }} ></input> <label for="auth">Auth</label></li>
-    <li><input type="text" class="form-control" placeholder="username" id="username" value="{{ username }}" title="Username"></input></li>
-    <li><input type="password" class="form-control" placeholder="password" id="password" value="{{ password }}" title="Password"></input></li>
-    <li><input type="checkbox" id="diff" {{ diff }} ></input> <label for="diff">Diff</label></li>
-    <li><input type="checkbox" id="zip" {{ zip }} ></input> <label for="zip">Zip</label></li>
+    <li>
+        <input id="auth" type="checkbox" {{ auth }} >
+        <label for="auth">Auth</label>
+    </li>
+    <li>
+        <input
+            id="username"
+            type="text"
+            class="form-control"
+            placeholder="username"
+            value="{{ username }}"
+            title="Username">
+    </li>
+    <li>
+        <input
+            id="password"
+            type="password"
+            class="form-control"
+            placeholder="password"
+            value="{{ password }}"
+            title="Password">
+    </li>
+    <li>
+        <input
+            id="diff"
+            type="checkbox"
+            {{ diff }}>
+        <label for="diff">Diff</label>
+    </li>
+    <li>
+        <input
+            id="zip" 
+            type="checkbox"
+            {{ zip }}>
+        <label for="zip">Zip</label>
+    </li>
     <li>
         <select class="form-control full-width" id="editor" title="Editor">
             <option {{ edward-selected }}>edward</option>
             <option {{ dword-selected }}>dword</option>
         </select>
     </li>
-    <li><input type="checkbox" id="notifications" {{ notifications }} ></input> <label for="notifications">Notifications</label></li>
-    <li><input type="checkbox" id="localStorage" {{ localStorage }} ></input> <label for="localStorage">Local Storage</label></li>
-    <li><input type="checkbox" id="buffer" {{ buffer }} ></input> <label for="buffer">Buffer</label></li>
-    <li><input type="checkbox" id="dirStorage" {{ dirStorage }} ></input> <label for="dirStorage">Directory Storage</label></li>
-    <li><input type="checkbox" id="minify" {{ minify }} ></input> <label for="minify">Minify</label></li>
-    <li><input type="checkbox" id="online" {{ online }} ></input> <label for="online">Online</label></li>
-    <li><input type="checkbox" id="cache" {{ cache }} ></input> <label for="cache">Cache</label></li>
-    <li><input type="checkbox" id="showKeysPanel" {{ showKeysPanel }}></input> <label for="showKeysPanel">Show keys panel</label></li>
-    <li><input type="number" min="0" max="65535" class="form-control" placeholder="Port" id="port" value="{{ port }}" title="Port"></input></li>
-</div>
+    <li>
+        <input
+            id="notifications"
+            type="checkbox"
+            {{ notifications }}>
+        <label for="notifications">Notifications</label>
+    </li>
+    <li>
+        <input
+            id="localStorage"
+            type="checkbox"
+            {{ localStorage }}>
+        <label for="localStorage">Local Storage</label>
+    </li>
+    <li>
+        <input id="buffer" type="checkbox" {{ buffer }} >
+        <label for="buffer">Buffer</label></li>
+    <li>
+        <input id="dirStorage" type="checkbox" {{ dirStorage }} >
+        <label for="dirStorage">Directory Storage</label></li>
+    <li>
+        <input id="minify" type="checkbox" {{ minify }}>
+        <label for="minify">Minify</label></li>
+    <li>
+        <input id="online" type="checkbox" {{ online }}>
+        <label for="online">Online</label>
+    </li>
+    <li>
+        <input id="cache" type="checkbox" {{ cache }} >
+        <label for="cache">Cache</label>
+    </li>
+    <li>
+        <input id="showKeysPanel" type="checkbox" {{ showKeysPanel }}>
+        <label for="showKeysPanel">Show keys panel</label>
+    </li>
+    <li>
+        <input 
+            id="port"
+            min="0"
+            max="65535"
+            title="Port"
+            type="number"
+            value="{{ port }}"
+            placeholder="Port"
+            class="form-control">
+    </li>
+</ul>
