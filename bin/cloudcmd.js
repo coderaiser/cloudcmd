@@ -3,23 +3,29 @@
 (function() {
     'use strict';
     
-    var Info        = require('../package'),
+    var config,
+        Info        = require('../package'),
         
         DIR         = __dirname + '/../',
         DIR_LIB     = DIR + 'lib/',
+        DIR_SERVER  = DIR_LIB + 'server/',
         
         rendy       = require('rendy'),
+        createPass  = require(DIR_SERVER + 'password'),
         
         HOME_PAGE   = 'General help using Cloud Commander: <{{ url }}>',
         
         argv        = process.argv,
         args        = require('minimist')(argv.slice(2), {
-            string: 'port',
-            boolean: ['test', 'repl'],
+            string: ['port', 'password', 'username'],
+            boolean: ['test', 'repl', 'save'],
             alias: {
                 v: 'version',
                 h: 'help',
-                p: 'port'
+                p: 'port',
+                u: 'username',
+                ps: 'password',
+                s: 'save'
             }
         });
     
@@ -29,22 +35,20 @@
         help();
     } else if (args.test) {
         test();
-    } else if (!args.repl && !args.port) {
-        start();
     } else {
         if (args.repl)
             repl();
         
-        if (!args.port)
-            start();
+        config  = require(DIR_SERVER + 'config');
+        
+        password(args.password);
+        username(args.username);
+        port(args.port);
+        
+        if (args.save)
+            config.save(start);
         else
-            if (isNaN(args.port))
-                console.error('Error: port should be a number!');
-            else
-                start({
-                    port: args.port
-                });
-            
+            start();
     }
     
     function test() {
@@ -62,6 +66,31 @@
         var SERVER      = '../lib/server';
         
         require(SERVER)(config);
+    }
+    
+    function password(pass) {
+        var algo, hash;
+        
+        if (pass) {
+            algo    = config('algo');
+            hash    = createPass(algo, pass);
+            
+            config('password', hash);
+        }
+    }
+    
+    function username(name) {
+        if (name)
+            config('username', name);
+    }
+    
+    function port(number) {
+        if (port) {
+            if (!isNaN(number))
+                config('port', number);
+            else
+                console.error('port: ignored, should be a number');
+        }
     }
     
     function help() {
