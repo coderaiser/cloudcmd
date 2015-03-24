@@ -17,7 +17,7 @@
         
         argv        = process.argv,
         args        = require('minimist')(argv.slice(2), {
-            string: ['port', 'password', 'username'],
+            string: ['port', 'password', 'username', 'auth', 'no-auth'],
             boolean: ['test', 'repl', 'save'],
             alias: {
                 v: 'version',
@@ -25,7 +25,9 @@
                 p: 'port',
                 u: 'username',
                 ps: 'password',
-                s: 'save'
+                s: 'save',
+                a: 'auth',
+                na: 'no-auth',
             }
         });
     
@@ -44,6 +46,11 @@
         password(args.password);
         username(args.username);
         port(args.port);
+        
+        if (args.auth)
+            config('auth', true);
+        else if (args['no-auth'])
+            config('auth', false);
         
         if (args.save)
             config.save(start);
