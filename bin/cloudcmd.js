@@ -85,7 +85,7 @@
     }
     
     function port(number) {
-        if (port) {
+        if (number) {
             if (!isNaN(number))
                 config('port', number);
             else
