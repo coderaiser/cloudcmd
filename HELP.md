@@ -61,6 +61,8 @@ Cloud Commander supports command line parameters:
 | `-h, --help`          | display help and exit
 | `-v, --version`       | output version information and exit
 | `-s, --save`          | save options
+| `-on, --online`       | load scripts from remote servers
+| `-off, --offline`     | load scripts from local server
 | `-a, --auth`          | enable authorization
 | `-na, --no-auth`      | disable authorization
 | `-p, --port`          | set port number

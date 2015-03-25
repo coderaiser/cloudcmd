@@ -17,12 +17,22 @@
         
         argv        = process.argv,
         args        = require('minimist')(argv.slice(2), {
-            string: ['port', 'password', 'username', 'auth', 'no-auth'],
+            string: [
+                'port',
+                'password',
+                'username',
+                'auth',
+                'no-auth',
+                'online',
+                'offline'
+            ],
             boolean: ['test', 'repl', 'save'],
             alias: {
                 v: 'version',
                 h: 'help',
                 p: 'port',
+                on: 'online',
+                off: 'offline',
                 u: 'username',
                 ps: 'password',
                 s: 'save',
