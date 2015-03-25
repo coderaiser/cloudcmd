@@ -21,12 +21,15 @@
                 'port',
                 'password',
                 'username',
+                'online',
+                'offline',
+            ],
+            boolean: [
+                'no-server',
                 'auth',
                 'no-auth',
-                'online',
-                'offline'
-            ],
-            boolean: ['test', 'repl', 'save'],
+                'repl',
+                'save'],
             alias: {
                 v: 'version',
                 h: 'help',
@@ -38,6 +41,7 @@
                 s: 'save',
                 a: 'auth',
                 na: 'no-auth',
+                ns: 'no-server'
             }
         });
     
@@ -45,8 +49,6 @@
         version();
     } else if (args.help) {
         help();
-    } else if (args.test) {
-        test();
     } else {
         if (args.repl)
             repl();
@@ -62,17 +64,15 @@
         else if (args['no-auth'])
             config('auth', false);
         
+        if (args.online)
+            config('online', true);
+        else if (args.offline)
+            config('offline', false);
+        
         if (args.save)
             config.save(start);
         else
             start();
-    }
-    
-    function test() {
-        console.log('Cloud Commander testing mode');
-        console.log('argv: ', argv);
-        
-        require('..');
     }
     
     function version() {
@@ -82,7 +82,8 @@
     function start(config) {
         var SERVER      = '../lib/server';
         
-        require(SERVER)(config);
+        if (!args['no-server'])
+            require(SERVER)(config);
     }
     
     function password(pass) {

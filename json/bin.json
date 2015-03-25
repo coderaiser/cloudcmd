@@ -8,5 +8,6 @@
     "-na, --no-auth "   : "disable authorization",
     "-p, --port     "   : "set port number",
     "-u, --username "   : "set username",
-    "-ps, --password"   : "set password"
+    "-ps, --password"   : "set password",
+    "-ns, --no-server"  : "do not start server"
 }
