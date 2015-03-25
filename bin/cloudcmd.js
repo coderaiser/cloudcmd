@@ -5,6 +5,7 @@
     
     var config,
         Info        = require('../package'),
+        Config      = require('../json/config.json'),
         
         DIR         = __dirname + '/../',
         DIR_LIB     = DIR + 'lib/',
@@ -26,22 +27,23 @@
             ],
             boolean: [
                 'auth',
-                'noauth',
-                'noserver',
+                'server',
                 'repl',
                 'save'],
+            default: {
+                'auth'  : Config.auth,
+                'online': Config.online,
+                'server': true
+            },
             alias: {
                 v: 'version',
                 h: 'help',
                 p: 'port',
                 on: 'online',
-                off: 'offline',
                 u: 'username',
                 ps: 'password',
                 s: 'save',
-                a: 'auth',
-                na: 'noauth',
-                ns: 'noserver'
+                a: 'auth'
             }
         });
     
@@ -59,15 +61,8 @@
         username(args.username);
         port(args.port);
         
-        if (args.auth)
-            config('auth', true);
-        else if (args['no-auth'])
-            config('auth', false);
-        
-        if (args.online)
-            config('online', true);
-        else if (args.offline)
-            config('offline', false);
+        config('auth', args.auth);
+        config('online', args.online);
         
         if (args.save)
             config.save(start);
@@ -82,7 +77,7 @@
     function start(config) {
         var SERVER      = '../lib/server';
         
-        if (!args.noserver)
+        if (args.server)
             require(SERVER)(config);
     }
     
