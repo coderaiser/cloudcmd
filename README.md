@@ -22,6 +22,9 @@ Cloud Commander v2.2.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd/dev.svg?style=flat
 
+[PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
+[PackageQualityIMGURL]:     http://packagequality.com/badge/cloudcmd.png
+
 **Cloud Commander** orthodox web file manager with console and editor.
 
 ![Cloud Commander](http://cloudcmd.io/img/logo/cloudcmd.png "Cloud Commander")
@@ -39,3 +42,5 @@ Open url `http://localhost:8000` in browser.
 ## License
 
 MIT
+
+[![Package quality][PackageQualityIMGURL]][PackageQualityURL]
