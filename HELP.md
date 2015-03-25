@@ -64,11 +64,11 @@ Cloud Commander supports command line parameters:
 | `-on, --online`       | load scripts from remote servers
 | `-off, --offline`     | load scripts from local server
 | `-a, --auth`          | enable authorization
-| `-na, --no-auth`      | disable authorization
+| `-na, --noauth`       | disable authorization
 | `-p, --port`          | set port number
 | `-u, --username`      | set username
 | `-ps, --password`     | set password
-| `-ns, --no-server`    | do not start server
+| `-ns, --noserver`     | do not start server
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.

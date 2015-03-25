@@ -25,9 +25,9 @@
                 'offline',
             ],
             boolean: [
-                'no-server',
                 'auth',
-                'no-auth',
+                'noauth',
+                'noserver',
                 'repl',
                 'save'],
             alias: {
@@ -40,8 +40,8 @@
                 ps: 'password',
                 s: 'save',
                 a: 'auth',
-                na: 'no-auth',
-                ns: 'no-server'
+                na: 'noauth',
+                ns: 'noserver'
             }
         });
     
@@ -82,7 +82,7 @@
     function start(config) {
         var SERVER      = '../lib/server';
         
-        if (!args['no-server'])
+        if (!args.noserver)
             require(SERVER)(config);
     }
     
