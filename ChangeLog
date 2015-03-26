@@ -1,3 +1,29 @@
+2015.03.26, v2.3.0
+
+fix:
+- (listeners) pop: event.state could be null
+- (cloudcmd) port: port -> number
+
+feature:
+- (docs) zip -> tar.gz
+- (bin) add --no-online, --no-auth, --no-server
+- (bin) add --noserver
+- (bin) add --no-server
+- (bin) add --online, --offline
+- (bin) add --auth, --no-auth
+- (bin) add --username, --password, --save
+- (config) save stringify: add 4
+- (config) add algo
+- (package) copymitter v1.6.0
+- (appveyor) io.js: 1.0 -> 1
+- (route) rm checkup
+- (util) rm getTime
+- (util) rm checkExt
+- (util) applyConstructor: util -> client
+- (config) add .full-width
+- (json) rm ext, edit
+
+
 2015.03.19, v2.2.1
 
 fix:
