@@ -14,7 +14,7 @@
             link        = '//github.com/cloudcmd/archive/raw/master/cloudcmd',
             template    = '- *{{ date }}*, '    +
                           '**[v{{ version }}]'   +
-                          '(' + link + '-v{{ version }}.zip)**\n',
+                          '(' + link + '-v{{ version }}.tar.gz)**\n',
             version     = Info.version;
         
         cl(function(error, versionNew) {
