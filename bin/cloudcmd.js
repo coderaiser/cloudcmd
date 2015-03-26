@@ -3,14 +3,13 @@
 (function() {
     'use strict';
     
-    var config,
-        Info        = require('../package'),
-        Config      = require('../json/config.json'),
-        
+    var Info        = require('../package'),
+         
         DIR         = __dirname + '/../',
         DIR_LIB     = DIR + 'lib/',
         DIR_SERVER  = DIR_LIB + 'server/',
         
+        config      = require(DIR_SERVER + 'config'),
         rendy       = require('rendy'),
         createPass  = require(DIR_SERVER + 'password'),
         
@@ -31,8 +30,8 @@
                 'repl',
                 'save'],
             default: {
-                'auth'  : Config.auth,
-                'online': Config.online,
+                'auth'  : config('auth'),
+                'online': config('online'),
                 'server': true
             },
             alias: {
@@ -54,8 +53,6 @@
     } else {
         if (args.repl)
             repl();
-        
-        config  = require(DIR_SERVER + 'config');
         
         password(args.password);
         username(args.username);
