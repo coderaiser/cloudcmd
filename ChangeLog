@@ -1,3 +1,9 @@
+2015.03.26, v2.3.1
+
+fix:
+- (cloudcmd) auth always false
+
+
 2015.03.26, v2.3.0
 
 fix:
