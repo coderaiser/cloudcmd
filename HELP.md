@@ -37,7 +37,6 @@ Install
 The installation of file manager is very simple.
 
 - install [node.js](http://nodejs.org/ "node.js") or [io.js](https://iojs.org/ "io.js") if you still have not.
-- install [bower](http://bower.io "Bower") and [git](http://git-scm.com "Git") ([How to install Git on Windows](https://github.com/bower/bower#windows-users "How to install Git on Windows"))
 - install ```cloudcmd``` via ```npm``` with:
 
 ```sh

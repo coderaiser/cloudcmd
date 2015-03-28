@@ -1,0 +1,36 @@
+{
+  "name": "format-io",
+  "version": "0.9.6",
+  "homepage": "https://github.com/coderaiser/format-io",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "Format size, permissions, etc",
+  "main": "lib/format.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "format",
+    "size",
+    "permissions"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.9.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.9.6",
+    "commit": "3381e500de22cc60a25a4049589c377198f8cc57"
+  },
+  "_source": "git://github.com/coderaiser/format-io.git",
+  "_target": "~0.9.6",
+  "_originalSource": "format-io"
+}
