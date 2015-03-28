@@ -1,3 +1,9 @@
+2015.03.28, v2.4.1
+
+feature:
+- (client) rm throw when no callback
+
+
 2015.03.28, v2.4.0
 
 fix:
