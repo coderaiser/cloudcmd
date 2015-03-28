@@ -31,16 +31,16 @@
                 'save'],
             default: {
                 'auth'  : config('auth'),
+                'port'  : config('port'),
                 'online': config('online'),
                 'server': true
             },
             alias: {
                 v: 'version',
                 h: 'help',
-                p: 'port',
+                p: 'password',
                 on: 'online',
                 u: 'username',
-                ps: 'password',
                 s: 'save',
                 a: 'auth'
             }
@@ -94,13 +94,13 @@
             config('username', name);
     }
     
-    function port(number) {
-        if (number) {
-            if (!isNaN(number))
-                config('port', number);
-            else
-                console.error('port: ignored, should be a number');
-        }
+    function port(arg) {
+        var number = parseInt(arg, 10);
+        
+        if (!isNaN(number))
+            config('port', number);
+        else
+            console.error('port: ignored, should be a number');
     }
     
     function help() {

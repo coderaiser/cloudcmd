@@ -63,10 +63,10 @@ Cloud Commander supports command line parameters:
 | `-s, --save`          | save options
 | `-o, --online`        | load scripts from remote servers
 | `-a, --auth`          | enable authorization
-| `-p, --port`          | set port number
 | `-u, --username`      | set username
-| `-ps, --password`     | set password
-| `--no-auth`            | disable authorization
+| `-p, --password`      | set password
+| `--port`              | set port number
+| `--no-auth`           | disable authorization
 | `--no-server`         | do not start server
 | `--no-online`         | load scripts from remote servers
 
