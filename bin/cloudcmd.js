@@ -30,10 +30,11 @@
                 'repl',
                 'save'],
             default: {
-                'auth'  : config('auth'),
-                'port'  : config('port'),
-                'online': config('online'),
-                'server': true
+                server      : true,
+                auth        : config('auth'),
+                port        : config('port'),
+                online      : config('online'),
+                username    : config('username'),
             },
             alias: {
                 v: 'version',
@@ -54,12 +55,12 @@
         if (args.repl)
             repl();
         
-        password(args.password);
-        username(args.username);
         port(args.port);
+        password(args.password);
         
         config('auth', args.auth);
         config('online', args.online);
+        config('username', args.username);
         
         if (args.save)
             config.save(start);
@@ -87,11 +88,6 @@
             
             config('password', hash);
         }
-    }
-    
-    function username(name) {
-        if (name)
-            config('username', name);
     }
     
     function port(arg) {
