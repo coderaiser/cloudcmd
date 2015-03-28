@@ -73,7 +73,7 @@
     }
     
     function start(config) {
-        var SERVER      = '../lib/server';
+        var SERVER = '../lib/server';
         
         if (args.server)
             require(SERVER)(config);
