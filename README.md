@@ -1,4 +1,4 @@
-Cloud Commander v2.4.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status][VeyorStatusIMGURL]][VeyorStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL]
+Cloud Commander v2.4.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status][VeyorStatusIMGURL]][VeyorStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL]
 ===============
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 
@@ -22,6 +22,9 @@ Cloud Commander v2.4.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 
 [PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
 [PackageQualityIMGURL]:     http://packagequality.com/badge/cloudcmd.png
+
+[CircleCiURL]: https://circleci.com/gh/coderaiser/cloudcmd
+[CircleCiIMGURL]: https://circleci.com/gh/coderaiser/cloudcmd.svg?style=shield
 
 **Cloud Commander** orthodox web file manager with console and editor.
 
