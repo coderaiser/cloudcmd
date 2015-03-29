@@ -35,6 +35,13 @@ Cloud Commander v2.4.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 ```
 npm i cloudcmd -g
 ```
+Start
+---------------
+For starting just type in console:
+
+```sh
+cloudcmd
+```
 
 ## How to use?
 
