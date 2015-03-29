@@ -9,5 +9,5 @@
     "--port         "   : "set port number",
     "--no-auth "        : "disable authorization",
     "--no-server"       : "do not start server",
-    "--no-online"       : "do not load scripts from local server"
+    "--no-online"       : "load scripts from local server"
 }
