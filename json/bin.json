@@ -7,7 +7,7 @@
     "-u, --username "   : "set username",
     "-p, --password "   : "set password",
     "--port         "   : "set port number",
-    "--no-auth "        : "disable authorization",
-    "--no-server"       : "do not start server",
-    "--no-online"       : "load scripts from local server"
+    "--no-auth      "   : "disable authorization",
+    "--no-server    "   : "do not start server",
+    "--no-online    "   : "load scripts from local server"
 }
