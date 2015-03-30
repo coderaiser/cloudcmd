@@ -41,7 +41,7 @@
                 v: 'version',
                 h: 'help',
                 p: 'password',
-                on: 'online',
+                o: 'online',
                 u: 'username',
                 s: 'save',
                 a: 'auth'
