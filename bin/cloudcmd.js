@@ -28,7 +28,8 @@
                 'auth',
                 'server',
                 'repl',
-                'save'],
+                'save'
+            ],
             default: {
                 server      : true,
                 auth        : config('auth'),
