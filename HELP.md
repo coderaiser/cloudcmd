@@ -59,7 +59,7 @@ Cloud Commander supports command line parameters:
 |:----------------------|:--------------------------------------------
 | `-h, --help`          | display help and exit
 | `-v, --version`       | output version information and exit
-| `-s, --save`          | save options
+| `-s, --save`          | save configuration
 | `-o, --online`        | load scripts from remote servers
 | `-a, --auth`          | enable authorization
 | `-u, --username`      | set username
