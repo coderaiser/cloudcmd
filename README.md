@@ -24,7 +24,7 @@ Cloud Commander v2.4.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [PackageQualityIMGURL]:     http://packagequality.com/badge/cloudcmd.png
 
 [CircleCiURL]: https://circleci.com/gh/coderaiser/cloudcmd
-[CircleCiIMGURL]: https://circleci.com/gh/coderaiser/cloudcmd.svg?style=shield
+[CircleCiIMGURL]: https://circleci.com/gh/coderaiser/cloudcmd.svg
 
 **Cloud Commander** orthodox web file manager with console and editor.
 
