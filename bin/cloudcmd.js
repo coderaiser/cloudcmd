@@ -10,10 +10,7 @@
         DIR_SERVER  = DIR_LIB + 'server/',
         
         config      = require(DIR_SERVER + 'config'),
-        rendy       = require('rendy'),
         createPass  = require(DIR_SERVER + 'password'),
-        
-        HOME_PAGE   = 'General help using Cloud Commander: <{{ url }}>',
         
         argv        = process.argv,
         args        = require('minimist')(argv.slice(2), {
@@ -127,20 +124,16 @@
     function help() {
         var bin         = require('../json/bin'),
             usage       = 'Usage: cloudcmd [options]',
-            
-            site        = rendy(HOME_PAGE, {
-                url: Info.homepage
-            });
+            url         = Info.homepage;
         
         console.log(usage);
         console.log('Options:');
         
         Object.keys(bin).forEach(function(name) {
-            var line = '  ' + name + ' ' + bin[name];
-            console.log(line);
+            console.log('  %s %s', name, bin[name]);
         });
         
-        console.log('\n' + site);
+        console.log('\nGeneral help using Cloud Commander: <%s>', url);
     }
     
     function repl() {
