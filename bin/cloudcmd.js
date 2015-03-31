@@ -23,6 +23,7 @@
                 'username',
                 'online',
                 'offline',
+                'config'
             ],
             boolean: [
                 'auth',
@@ -44,7 +45,8 @@
                 o: 'online',
                 u: 'username',
                 s: 'save',
-                a: 'auth'
+                a: 'auth',
+                c: 'config'
             }
         });
     
@@ -62,6 +64,8 @@
         config('auth', args.auth);
         config('online', args.online);
         config('username', args.username);
+        
+        readConfig(args.config);
         
         if (args.save)
             config.save(start);
@@ -97,7 +101,27 @@
         if (!isNaN(number))
             config('port', number);
         else
-            console.error('port: ignored, should be a number');
+            exit('port should be a number');
+    }
+    
+    function readConfig(name) {
+        var fs, data, error, tryCatch;
+        
+        if (name) {
+            fs          = require('fs');
+            tryCatch    = require('try-catch');
+            error       = tryCatch(function() {
+                var json    = fs.readFileSync(name);
+                data        = JSON.parse(json);
+            });
+            
+            if (error)
+                exit(error.message);
+            else
+                Object.keys(data).forEach(function(item) {
+                    config(item, data[item]);
+                });
+        }
     }
     
     function help() {
@@ -122,6 +146,11 @@
     function repl() {
         console.log('REPL mode enabled (telnet localhost 1337)');
         require(DIR_LIB + '/server/repl');
+    }
+    
+    function exit(message) {
+        console.error(message);
+        process.exit(1);
     }
     
 })();
