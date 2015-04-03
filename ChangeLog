@@ -1,3 +1,18 @@
+2015.04.03, v2.4.2
+
+fix:
+- (bin) add " "
+- (cloudcmd) online: on -> o
+- (bin) --no-online: do not load -> load
+- (bin) --no-online: load -> do not load
+
+feature:
+- (cloudcmd) rendy -> %s
+- (bin) output -> display
+- (bin) options -> configuration
+- (cloudcmd) add -c, --config
+
+
 2015.03.28, v2.4.1
 
 feature:
