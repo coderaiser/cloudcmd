@@ -1,4 +1,5 @@
-Cloud Commander v2.4.2 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status][VeyorStatusIMGURL]][VeyorStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL]
+Cloud Commander v2.4.2 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status][VeyorStatusIMGURL]][VeyorStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
+
 ===============
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 
@@ -21,7 +22,7 @@ Cloud Commander v2.4.2 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd/dev.svg?style=flat
 
 [PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
-[PackageQualityIMGURL]:     http://packagequality.com/badge/cloudcmd.png
+[PackageQualityIMGURL]:     http://packagequality.com/shield/cloudcmd.svg
 
 [CircleCiURL]: https://circleci.com/gh/coderaiser/cloudcmd
 [CircleCiIMGURL]: https://circleci.com/gh/coderaiser/cloudcmd.svg
@@ -51,4 +52,3 @@ Open url `http://localhost:8000` in browser.
 
 MIT
 
-[![Package quality][PackageQualityIMGURL]][PackageQualityURL]
