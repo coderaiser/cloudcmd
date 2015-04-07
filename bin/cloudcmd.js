@@ -20,7 +20,8 @@
                 'username',
                 'online',
                 'offline',
-                'config'
+                'config',
+                'root'
             ],
             boolean: [
                 'auth',
@@ -61,6 +62,7 @@
         config('auth', args.auth);
         config('online', args.online);
         config('username', args.username);
+        config('root', args.root);
         
         readConfig(args.config);
         
