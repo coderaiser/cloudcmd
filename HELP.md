@@ -65,7 +65,7 @@ Cloud Commander supports command line parameters:
 | `-u, --username`      | set username
 | `-p, --password`      | set password
 | `-c, --config`        | configuration file path
-| `--root`              | set root folder
+| `--root`              | set root directory
 | `--port`              | set port number
 | `--no-auth`           | disable authorization
 | `--no-server`         | do not start server
