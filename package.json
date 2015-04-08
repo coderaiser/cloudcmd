@@ -28,6 +28,9 @@
     "wisdom": "gulp release",
     "bower": "bower"
   },
+  "directories": {
+    "man": "man"
+  },
   "subdomain": "cloudcmd",
   "dependencies": {
     "checkup": "~1.0.3",
