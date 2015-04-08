@@ -62,7 +62,7 @@
         config('auth', args.auth);
         config('online', args.online);
         config('username', args.username);
-        config('root', args.root);
+        root(args.root)
         
         readConfig(args.config);
         
@@ -136,6 +136,13 @@
         });
         
         console.log('\nGeneral help using Cloud Commander: <%s>', url);
+    }
+    
+    function root(dir) {
+        if (dir) {
+            config('root', dir);
+            console.log('root:', dir);
+        }
     }
     
     function repl() {
