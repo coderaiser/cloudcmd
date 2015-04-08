@@ -139,10 +139,17 @@
     }
     
     function root(dir) {
-        if (dir) {
+        var current;
+        
+        if (!dir) {
+            current = config('root');
+        } else {
+            current = dir;
             config('root', dir);
-            console.log('root:', dir);
         }
+        
+        if (current && current !== '/')
+            console.log('root:', dir);
     }
     
     function repl() {
