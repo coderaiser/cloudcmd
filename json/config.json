@@ -15,5 +15,6 @@
     "cache": true,
     "showKeysPanel": true,
     "port": 8000,
-    "ip": null
+    "ip": null,
+    "root": "/"
 }
