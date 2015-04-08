@@ -64,7 +64,7 @@
   "devDependencies": {
     "bower": "~1.4.1",
     "gulp": "~3.8.0",
-    "gulp-jscs": "~1.4.0",
+    "gulp-jscs": "~1.5.0",
     "gulp-jshint": "~1.10.0",
     "gulp-mocha": "~2.0.0",
     "gulp-recess": "~1.1.1",
