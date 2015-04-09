@@ -1,3 +1,32 @@
+2015.04.09, v2.5.0
+
+fix:
+- (root) pathToWin only when root dir
+- (readme) use mini-badge for package-quality instead of large badge
+
+feature:
+- (package) gulp-jscs v1.5.0
+- (man) add
+- (cloudcmd) root: show root, when not "/"
+- (config) add root
+- (cloudcmd) show root directory when used flag --root
+- (root) rm path
+- (client) createFileTable: history -> options (history, noCurrent)
+- (cloudcmd) add command line parameter --root
+- (cloudcmd) dword, edward: add root
+- (root) add condition dir and root
+- (package) mellow v1.3.0
+- (config) tryrequire -> try-catch
+- (package) mellow v1.1.0
+- (package) restafary v1.2.0
+- (cloudcmd) add --root
+- (config) tryrequire -> try-catch
+- (server) rm socket condition
+- (package) gulp-jshint v1.10
+- (package) markdown-it v4.1.0
+- (package) bower v1.4.1
+
+
 2015.04.03, v2.4.2
 
 fix:
