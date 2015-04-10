@@ -13,7 +13,7 @@ Cloud Commander v2.5.0
 [EDWARD]:                   https://github.com/cloudcmd/edward "Editor based on Ace"
 [EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
 
-**Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, folders and programs in browser from any computer, mobile or tablet.
+**Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
