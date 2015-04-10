@@ -13,6 +13,7 @@
         createPass  = require(DIR_SERVER + 'password'),
         
         argv        = process.argv,
+        
         args        = require('minimist')(argv.slice(2), {
             string: [
                 'port',
@@ -45,6 +46,9 @@
                 s: 'save',
                 a: 'auth',
                 c: 'config'
+            },
+            unknown: function(cmd) {
+                exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
             }
         });
     
@@ -62,7 +66,7 @@
         config('auth', args.auth);
         config('online', args.online);
         config('username', args.username);
-        root(args.root)
+        root(args.root);
         
         readConfig(args.config);
         
@@ -157,8 +161,8 @@
         require(DIR_LIB + '/server/repl');
     }
     
-    function exit(message) {
-        console.error(message);
+    function exit() {
+        console.error.apply(console, arguments);
         process.exit(1);
     }
     
