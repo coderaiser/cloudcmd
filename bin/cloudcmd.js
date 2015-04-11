@@ -9,6 +9,7 @@
         DIR_LIB     = DIR + 'lib/',
         DIR_SERVER  = DIR_LIB + 'server/',
         
+        exit        = require(DIR_SERVER + 'exit'),
         config      = require(DIR_SERVER + 'config'),
         createPass  = require(DIR_SERVER + 'password'),
         
@@ -165,11 +166,6 @@
     function repl() {
         console.log('REPL mode enabled (telnet localhost 1337)');
         require(DIR_LIB + '/server/repl');
-    }
-    
-    function exit() {
-        console.error.apply(console, arguments);
-        process.exit(1);
     }
     
 })();
