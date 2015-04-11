@@ -143,17 +143,23 @@
     }
     
     function root(dir) {
-        var current;
+        var current,
+            fs  = require('fs');
         
         if (!dir) {
-            current = config('root');
+            current = config('root') || '/';
         } else {
             current = dir;
             config('root', dir);
         }
         
-        if (current && current !== '/')
-            console.log('root:', dir);
+        fs.stat(current, function(error) {
+            if (error)
+                exit('cloudcmd --root: %s', error.message);
+            else if (current !== '/')
+                console.log('root:', dir);
+        });
+        
     }
     
     function repl() {
