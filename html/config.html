@@ -7,7 +7,7 @@
     </li>
     <li>
         <input
-            id="username"
+            data-name="js-username"
             type="text"
             class="form-control"
             placeholder="username"
@@ -16,7 +16,7 @@
     </li>
     <li>
         <input
-            id="password"
+            data-name="js-password"
             type="password"
             class="form-control"
             placeholder="password"
@@ -26,7 +26,7 @@
     <li>
         <label>
             <input
-                id="diff"
+                data-name="js-diff"
                 type="checkbox"
                 {{ diff }}>
             Diff
@@ -35,14 +35,14 @@
     <li>
         <label>
             <input
-                id="zip" 
+                data-name="js-zip"
                 type="checkbox"
                 {{ zip }}>
             Zip
          </label>
     </li>
     <li>
-        <select class="form-control full-width" id="editor" title="Editor">
+        <select data-name="js-editor" class="form-control full-width" title="Editor">
             <option {{ edward-selected }}>edward</option>
             <option {{ dword-selected }}>dword</option>
         </select>
@@ -50,7 +50,7 @@
     <li>
         <label>
             <input
-                id="notifications"
+                data-name="js-notifications"
                 type="checkbox"
                 {{ notifications }}>
             Notifications
@@ -59,7 +59,7 @@
     <li>
         <label>
             <input
-                id="localStorage"
+                data-name="js-localStorage"
                 type="checkbox"
                 {{ localStorage }}>
             Local Storage
@@ -68,44 +68,43 @@
     <li>
         
         <label>
-            <input id="buffer" type="checkbox" {{ buffer }}>
-            
+            <input data-name="js-buffer" type="checkbox" {{ buffer }}>
             Buffer
         </label>
     </li>
     <li>
         <label>
-            <input id="dirStorage" type="checkbox" {{ dirStorage }} >
+            <input data-name="js-dirStorage" type="checkbox" {{ dirStorage }} >
             Directory Storage
         </label>
     </li>
     <li>
         <label>
-            <input id="minify" type="checkbox" {{ minify }}>
+            <input data-name="js-minify" type="checkbox" {{ minify }}>
             Minify
         </label>
     </li>
     <li>
         <label>
-            <input id="online" type="checkbox" {{ online }}>
+            <input data-name="js-online" type="checkbox" {{ online }}>
             Online
         </label>
     </li>
     <li>
         <label>
-            <input id="cache" type="checkbox" {{ cache }} >
+            <input data-name="js-cache" type="checkbox" {{ cache }} >
             Cache
         </label>
     </li>
     <li>
         <label>
-            <input id="showKeysPanel" type="checkbox" {{ showKeysPanel }}>
+            <input data-name="js-showKeysPanel" type="checkbox" {{ showKeysPanel }}>
             Show keys panel
         </label>
     </li>
     <li>
         <input 
-            id="port"
+            data-name="js-port"
             min="0"
             max="65535"
             title="Port"
