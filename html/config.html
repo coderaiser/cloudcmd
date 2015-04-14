@@ -1,7 +1,9 @@
 <ul class="list" >
     <li>
-        <input id="auth" type="checkbox" {{ auth }} >
-        <label for="auth">Auth</label>
+        <label>
+            <input id="auth" type="checkbox" {{ auth }} >
+            Auth
+        </label>
     </li>
     <li>
         <input
@@ -22,18 +24,22 @@
             title="Password">
     </li>
     <li>
-        <input
-            id="diff"
-            type="checkbox"
-            {{ diff }}>
-        <label for="diff">Diff</label>
+        <label>
+            <input
+                id="diff"
+                type="checkbox"
+                {{ diff }}>
+            Diff
+        </label>
     </li>
     <li>
-        <input
-            id="zip" 
-            type="checkbox"
-            {{ zip }}>
-        <label for="zip">Zip</label>
+        <label>
+            <input
+                id="zip" 
+                type="checkbox"
+                {{ zip }}>
+            Zip
+         </label>
     </li>
     <li>
         <select class="form-control full-width" id="editor" title="Editor">
@@ -42,39 +48,60 @@
         </select>
     </li>
     <li>
-        <input
-            id="notifications"
-            type="checkbox"
-            {{ notifications }}>
-        <label for="notifications">Notifications</label>
+        <label>
+            <input
+                id="notifications"
+                type="checkbox"
+                {{ notifications }}>
+            Notifications
+        </label>
     </li>
     <li>
-        <input
-            id="localStorage"
-            type="checkbox"
-            {{ localStorage }}>
-        <label for="localStorage">Local Storage</label>
+        <label>
+            <input
+                id="localStorage"
+                type="checkbox"
+                {{ localStorage }}>
+            Local Storage
+        </label>
     </li>
     <li>
-        <input id="buffer" type="checkbox" {{ buffer }} >
-        <label for="buffer">Buffer</label></li>
-    <li>
-        <input id="dirStorage" type="checkbox" {{ dirStorage }} >
-        <label for="dirStorage">Directory Storage</label></li>
-    <li>
-        <input id="minify" type="checkbox" {{ minify }}>
-        <label for="minify">Minify</label></li>
-    <li>
-        <input id="online" type="checkbox" {{ online }}>
-        <label for="online">Online</label>
+        
+        <label>
+            <input id="buffer" type="checkbox" {{ buffer }}>
+            
+            Buffer
+        </label>
     </li>
     <li>
-        <input id="cache" type="checkbox" {{ cache }} >
-        <label for="cache">Cache</label>
+        <label>
+            <input id="dirStorage" type="checkbox" {{ dirStorage }} >
+            Directory Storage
+        </label>
     </li>
     <li>
-        <input id="showKeysPanel" type="checkbox" {{ showKeysPanel }}>
-        <label for="showKeysPanel">Show keys panel</label>
+        <label>
+            <input id="minify" type="checkbox" {{ minify }}>
+            Minify
+        </label>
+    </li>
+    <li>
+        <label>
+            <input id="online" type="checkbox" {{ online }}>
+            Online
+        </label>
+    </li>
+    <li>
+        <label>
+            <input id="cache" type="checkbox" {{ cache }} >
+            Cache
+        </label>
+    </li>
+    <li>
+        <label>
+            <input id="showKeysPanel" type="checkbox" {{ showKeysPanel }}>
+            Show keys panel
+        </label>
     </li>
     <li>
         <input 
