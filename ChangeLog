@@ -1,3 +1,20 @@
+2015.04.14, v2.5.1
+
+fix:
+- (view) images with upper case extension are not recognized as images
+- (contact) window could not be closed
+- (view) audio, video has no focus, when open by mouse
+
+feature:
+- (config) id -> data-name
+- (view) isAudio: add m4a
+- (view) rm FocusWas
+- (exit) add
+- (server) add error listener
+- (cloudcmd) root: add directory check
+- (cloudcmd) args: add check of unknown options
+
+
 2015.04.09, v2.5.0
 
 fix:
