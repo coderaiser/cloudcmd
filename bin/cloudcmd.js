@@ -20,16 +20,15 @@
                 'port',
                 'password',
                 'username',
-                'online',
-                'offline',
                 'config',
                 'root'
             ],
             boolean: [
                 'auth',
-                'server',
                 'repl',
-                'save'
+                'save',
+                'server',
+                'online'
             ],
             default: {
                 server      : true,
