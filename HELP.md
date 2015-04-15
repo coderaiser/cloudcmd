@@ -70,6 +70,8 @@ Cloud Commander supports command line parameters:
 | `--no-auth`           | disable authorization
 | `--no-server`         | do not start server
 | `--no-online`         | load scripts from local server
+| `--minify`            | enable minification
+| `--no-minify`         | disable minification
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.

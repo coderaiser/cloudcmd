@@ -28,12 +28,14 @@
                 'repl',
                 'save',
                 'server',
-                'online'
+                'online',
+                'minify'
             ],
             default: {
                 server      : true,
                 auth        : config('auth'),
                 port        : config('port'),
+                minify      : config('minify'),
                 online      : config('online'),
                 username    : config('username'),
             },
@@ -65,6 +67,7 @@
         
         config('auth', args.auth);
         config('online', args.online);
+        config('minify', args.minify);
         config('username', args.username);
         root(args.root);
         
