@@ -110,7 +110,7 @@
         if (!isNaN(number))
             config('port', number);
         else
-            exit('port should be a number');
+            exit('cloudcmd --port: should be a number');
     }
     
     function readConfig(name) {
