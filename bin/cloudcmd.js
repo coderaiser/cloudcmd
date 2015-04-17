@@ -21,6 +21,7 @@
                 'password',
                 'username',
                 'config',
+                'editor',
                 'root'
             ],
             boolean: [
@@ -37,6 +38,7 @@
                 port        : config('port'),
                 minify      : config('minify'),
                 online      : config('online'),
+                editor      : config('editor'),
                 username    : config('username'),
             },
             alias: {
@@ -70,6 +72,7 @@
         config('minify', args.minify);
         config('username', args.username);
         root(args.root);
+        editor(args.editor);
         
         readConfig(args.config);
         
@@ -163,6 +166,13 @@
                 console.log('root:', dir);
         });
         
+    }
+    
+    function editor(name) {
+        var reg = /^(dword|edward)$/;
+        
+        if (!reg.test(name))
+            exit('cloudcmd --editor: could be "dword" or "edward" only');
     }
     
     function repl() {
