@@ -1,3 +1,21 @@
+2015.04.17, v2.6.0
+
+fix:
+- (bin) online: string -> boolean
+- (files) config read only once and do not sync with server even when server reloads
+
+feature:
+- (yaspeller) dictionary: add dword, edward
+- (cloudcmd) "port should be a number" -> "cloudcmd --port: should be a number"
+- (cloudcmd) add editor
+- (dword) v1.5.0
+- (package) edward v1.6.0
+- (edit) rm clearSelection
+- (yaspeller) dictionary: add minification
+- (cloudcmd) add --minify, --no-minify
+- (config) add sync via sockets
+
+
 2015.04.14, v2.5.1
 
 fix:
