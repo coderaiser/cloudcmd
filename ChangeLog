@@ -1,3 +1,21 @@
+2015.04.24, v2.7.0
+
+fix:
+- (rest) auth: array, name -> name, array
+- (auth) lib/promise.js -> modules/promise-polyfill/Promise.js
+
+feature:
+- (binom) Util.findObjByNameInArr -> binom
+- (binom) add
+- (panel) id -> data-name
+- (cloudfunc) rm LEFT, RIGHT
+- (dom) processFiles: add ask before overwriting
+- (client) rm MousePosition
+- (travis) rm before_install
+- (package) should v6.0.1
+- (package) yaspeller v2.0.1
+
+
 2015.04.17, v2.6.0
 
 fix:
