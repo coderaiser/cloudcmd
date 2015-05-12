@@ -122,6 +122,7 @@ Hot keys
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Ctrl + a`            | select all files in a panel
+| `Ctrl + u`            | swap panels
 | `Up`, `Down`, `Enter` | file system navigation
 | `Alt + Left/Right`    | show content of directory under cursor in target panel
 | `Ctrl + \`            | go to the root directory
