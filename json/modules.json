@@ -11,7 +11,7 @@
         "name": "remote",
         "data": [{
             "name": "jquery",
-            "version": "2.1.3",
+            "version": "2.1.4",
             "local": "/modules/jquery/dist/jquery.js",
             "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
         }, {
