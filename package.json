@@ -35,7 +35,7 @@
   "dependencies": {
     "checkup": "~1.0.3",
     "console-io": "~2.2.0",
-    "copymitter": "~1.6.0",
+    "copymitter": "~1.7.0",
     "dword": "~1.5.0",
     "edward": "~1.6.0",
     "execon": "~1.1.0",
