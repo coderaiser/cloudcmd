@@ -40,6 +40,7 @@
                 online      : config('online'),
                 editor      : config('editor'),
                 username    : config('username'),
+                root        : config('root') || '/'
             },
             alias: {
                 v: 'version',
@@ -149,23 +150,19 @@
     }
     
     function root(dir) {
-        var current,
+        var fs;
+        
+        config('root', dir);
+        
+        if (dir !== '/') {
             fs  = require('fs');
-        
-        if (!dir) {
-            current = config('root') || '/';
-        } else {
-            current = dir;
-            config('root', dir);
+            fs.stat(dir, function(error) {
+                if (error)
+                    exit('cloudcmd --root: %s', error.message);
+                else
+                    console.log('root:', dir);
+            });
         }
-        
-        fs.stat(current, function(error) {
-            if (error)
-                exit('cloudcmd --root: %s', error.message);
-            else if (current !== '/')
-                console.log('root:', dir);
-        });
-        
     }
     
     function editor(name) {
