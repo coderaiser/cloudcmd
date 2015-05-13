@@ -33,6 +33,12 @@ body, pre, code {
     user-select         : text;
 }
 
+.panel, .cmd-button {
+    border: 1.5px solid;
+    border-color: rgb(49,123,249);
+    border-color: rgba(49,123,249, 0.4);
+}
+
 .icon {
     margin-left : 0.5%;
     cursor: default;
@@ -87,9 +93,6 @@ body, pre, code {
     margin: 20px 2px 0 2px;
     color: #222;
     background-color: white;
-    border: 1.5px solid;
-    border-color: rgb(49,123,249);
-    border-color: rgba(49,123,249,.40);
     transition: ease 0.1s;
 }
 
@@ -159,9 +162,6 @@ body, pre, code {
     width: 46%;
     height: 97%;
     padding: 1%;
-    border: 1.5px solid;
-    border-color: rgb(49, 123, 249);
-    border-color: rgba(49, 123, 249, .40);
 }
 
 .selected-panel {
