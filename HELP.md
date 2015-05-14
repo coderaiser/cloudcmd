@@ -125,6 +125,7 @@ Hot keys
 | `Ctrl + u`            | swap panels
 | `Up`, `Down`, `Enter` | file system navigation
 | `Alt + Left/Right`    | show content of directory under cursor in target panel
+| `Alt + g`             | go to directory
 | `Ctrl + \`            | go to the root directory
 | `Tab`                 | move via panels
 | `Page Up`             | up on one page
