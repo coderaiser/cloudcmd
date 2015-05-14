@@ -38,7 +38,7 @@
                 port        : config('port'),
                 minify      : config('minify'),
                 online      : config('online'),
-                editor      : config('editor'),
+                editor      : config('editor') || 'edward',
                 username    : config('username'),
                 root        : config('root') || '/'
             },
