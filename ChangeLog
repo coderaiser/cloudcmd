@@ -1,3 +1,28 @@
+2015.05.14, v2.8.0
+
+fix:
+- (dom) processFiles refresh: add callback
+- (cloudcmd) show "root: undefined", when argument "--root" is absent
+- (edit) setValueFirst before edward loaded
+- (dom) getCurrentSize: <dirundefined
+
+feature:
+- (dom) add goToDirectory
+- (package) copymitter v1.8.0
+- (package) copymitter v1.7.0
+- (modules) jquery v2.1.4
+- (style) border: .panel and .cmd-button -> .panel, .cmd-button
+- (dom) add swapPanels
+- (dom) duplicatePanel: show content of directory under cursor in target panel
+- (dom) changePanel: element -> name
+- (client) loadDir: image position on top, when no history
+- (package) yaspeller v2.2.0
+- (listeners) rm appStorage
+- (package) gulp-jscs v1.6.0
+- (package) yaspeller v2.1.0
+- (index) make directory -> new directory
+
+
 2015.04.24, v2.7.1
 
 feature:
