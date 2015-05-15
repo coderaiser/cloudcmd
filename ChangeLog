@@ -1,3 +1,15 @@
+2015.05.15, v2.9.0
+
+fix:
+- (key) ctrl + u: open view-source of a browser
+- (cloudcmd) could not start because undefined is not supported editor
+
+feature:
+- (package) restafary v1.3.0
+- (cloudcmd) root could be changed without restarting
+- (config) add root
+
+
 2015.05.14, v2.8.0
 
 fix:
