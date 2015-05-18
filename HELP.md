@@ -242,6 +242,13 @@ Right mouse click button shows context menu with items:
 | `F9`                  | open
 | `Esc`                 | close
 
+One panel mode
+---------------
+Cloud Commander could work in one panel mode when screen size can not accommodate second panel.
+It could happen when mobile device, tablet or small window size used to work with file manager.
+
+![One panel mode](/img/screen/one-panel-mode.png "One panel mode")
+
 Server
 ---------------
 Standard practices say no non-root process gets to talk to
