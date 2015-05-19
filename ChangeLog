@@ -1,3 +1,12 @@
+2015.05.19, v2.9.1
+
+fix:
+- (config) id="auth" -> data-name="js-auth"
+
+feature:
+- (img) add one-panel-mode
+
+
 2015.05.15, v2.9.0
 
 fix:
