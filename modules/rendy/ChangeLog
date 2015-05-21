@@ -1,0 +1,59 @@
+2015.05.21, v1.1.0
+
+feature:
+- (rendy) 5 times spead up
+- (package) should v6.0.1
+- (travis) add iojs, rm global gulp
+- (package) scripts: test
+- (test) greedy
+- (package) should v5.2
+- (package) scripts: gulp
+
+
+2015.03.13, v1.0.6
+
+fix:
+- (rendy) clean up regexp: lazy -> greedy
+
+
+2015.03.13, v1.0.5
+
+feature:
+- (rendy) put vars in forEach
+- (package) should v5.0.0
+- (bower) add
+
+
+2015.01.26, v1.0.4
+
+feature:
+- (rendy) improve speed
+
+
+2015.01.26, v1.0.3
+
+feature:
+- (rendy) speed up in 10 times: rm greedy quantifier
+- (package) should v4.6
+- (package) should v4.4.1
+
+
+2014.12.12, v1.0.2
+
+fix:
+- (util) render: do not remove empty blocks "{{", "}}"
+- (rendy) indexOf -> ~indexOf
+
+feature:
+- (package) v1.0.1
+- (rendy) add expr
+
+
+2014.12.12, v1.0.1
+
+fix:
+- (rendy) indexOf -> ~indexOf
+
+feature:
+- (rendy) add expr
+

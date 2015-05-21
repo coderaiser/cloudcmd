@@ -1,0 +1,25 @@
+{
+  "name": "rendy",
+  "version": "1.1.0",
+  "homepage": "https://github.com/coderaiser/rendy",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "simple template engine",
+  "main": "lib/rendy.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "template",
+    "engine",
+    "rendy"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "test"
+  ]
+}

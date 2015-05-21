@@ -1,0 +1,28 @@
+{
+  "name": "rendy",
+  "version": "1.1.0",
+  "description": "simplest template engine",
+  "main": "lib/rendy.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/rendy.git"
+  },
+  "keywords": [
+    "template",
+    "engine"
+  ],
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderaiser/rendy/issues"
+  },
+  "homepage": "https://github.com/coderaiser/rendy",
+  "devDependencies": {
+    "gulp": "~3.8.10",
+    "gulp-mocha": "~2.0.0",
+    "should": "~6.0.1"
+  }
+}

@@ -25,6 +25,7 @@
     "jquery": "~2.1.4",
     "menu": "~0.7.8",
     "promise-polyfill": "~2.0.0",
-    "format-io": "~0.9.6"
+    "format-io": "~0.9.6",
+    "rendy": "~1.1.0"
   }
 }
