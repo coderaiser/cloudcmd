@@ -1,3 +1,17 @@
+2015.05.22, v2.9.3
+
+fix:
+- (config) save: json -> jonny
+- (menu) show menu on path
+- (listeners) initKeysPanel: fn not a function
+- (dom) getCurrentByPosition: current not LI
+
+feature:
+- (file) add data-name
+- (listeners) rm onContextMenu
+- (style) body: overflow hidden
+
+
 2015.05.22, v2.9.2
 
 fix:
