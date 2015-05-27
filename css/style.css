@@ -81,7 +81,7 @@ body, pre, code {
 
 .loading::after {
     position    : relative;
-    bottom      : 3px;
+    bottom      : 5px;
     left        : 16px;
     font-size   : 10px;
     color       : rgb(49,123,249);
