@@ -16,5 +16,6 @@
     "showKeysPanel": true,
     "port": 8000,
     "ip": null,
-    "root": "/"
+    "root": "/",
+    "progressOfCopying": false
 }

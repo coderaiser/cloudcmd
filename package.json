@@ -58,6 +58,7 @@
     "rendy": "~1.1.0",
     "restafary": "~1.3.0",
     "socket.io": "~1.3.5",
+    "spero": "~1.0.0",
     "try-catch": "~1.0.0",
     "tryrequire": "~1.1.5"
   },
