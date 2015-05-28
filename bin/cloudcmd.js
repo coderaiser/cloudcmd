@@ -30,7 +30,8 @@
                 'save',
                 'server',
                 'online',
-                'minify'
+                'minify',
+                'progress-of-copying'
             ],
             default: {
                 server      : true,
@@ -40,7 +41,9 @@
                 online      : config('online'),
                 editor      : config('editor') || 'edward',
                 username    : config('username'),
-                root        : config('root') || '/'
+                root        : config('root') || '/',
+                
+                'progress-of-copying': config('progressOfCopying')
             },
             alias: {
                 v: 'version',
@@ -72,6 +75,7 @@
         config('online', args.online);
         config('minify', args.minify);
         config('username', args.username);
+        config('progressOfCopying', args['progress-of-copying']);
         root(args.root);
         editor(args.editor);
         
