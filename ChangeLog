@@ -1,3 +1,24 @@
+2015.05.28, v3.0.0
+
+fix:
+- (show) position -> pos
+- (menu) did not show when button pressed
+- (edit) setMenu: try to show before MenuIO loaded
+- (konsole) error when multiple key "~" down
+
+feature:
+- (img) config: progress of copying
+- (cloudcmd) add progress-of-copying
+- (cloudcmd) add progress of copying
+- (dom) processMessage -> message
+- (style) loading::after bottom: 3px -> 5px
+- (listeners) rm online
+- (dom) CurrentInfo: add isOnePanel
+- (konsole) rm DOM.loadJquery
+- (package) gulp-jshint v1.11.0
+- (package) gulp-mocha v2.1.0
+
+
 2015.05.22, v2.9.3
 
 fix:
