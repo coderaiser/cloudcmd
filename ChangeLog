@@ -1,3 +1,15 @@
+2015.05.29, v3.0.1
+
+fix:
+- (markdown) root -> DIR + root
+- (markdown) set root when reletive path
+- (rest) isRootWin32: no root directory check
+- (markdown) root
+
+feature:
+- (bin) --progress-of-copying, --no-progress-of-copying
+
+
 2015.05.28, v3.0.0
 
 fix:
