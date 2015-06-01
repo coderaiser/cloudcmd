@@ -74,7 +74,7 @@
     "place": "~1.1.2",
     "shortdate": "~1.0.1",
     "should": "~6.0.1",
-    "yaspeller": "~2.2.0"
+    "yaspeller": "~2.4.0"
   },
   "engines": {
     "node": ">=0.10"
