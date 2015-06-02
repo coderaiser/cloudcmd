@@ -1,3 +1,19 @@
+2015.06.02, v3.0.3
+
+fix:
+- (cloudcmd) load listener do not removed after load
+- (dom) loadRemote: window[o.name] -> o.name && window[o.name]
+- (listeners) contextMenu: event is undefined
+- (operation) load image do not hide when operation done loading
+
+feature:
+- (style) .fm: cursor default for ff
+- (style) current file: loocks similar on chrome and ff
+- (dom) resize: set current file on left panel, when right panel is active on resizing, and size is to small for two panels
+- (dom) sendDelete: add Images.show
+- (package) yaspeller v2.4.0
+
+
 2015.05.31, v3.0.2
 
 fix:
