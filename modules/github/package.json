@@ -1,0 +1,59 @@
+{
+  "name": "github-api",
+  "version": "0.10.6",
+  "description": "A higher-level wrapper around the Github API.",
+  "main": "github.js",
+  "dependencies": {
+    "atob": "^1.1.2",
+    "btoa": "^1.1.2",
+    "underscore": "~1.6.0",
+    "xmlhttprequest": "~1.6.0"
+  },
+  "devDependencies": {
+    "argg": "0.0.1",
+    "istanbul": "^0.3.13",
+    "jshint": "^2.5.8",
+    "plato": "^1.4.0",
+    "tape": "^3.0.3",
+    "testling": "^1.7.1"
+  },
+  "scripts": {
+    "test": "node node_modules/argg test/*.js && node node_modules/jshint/bin/jshint github.js test/*.js",
+    "jshint": "node node_modules/jshint/bin/jshint github.js test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/michael/github.git"
+  },
+  "keywords": [
+    "github",
+    "api"
+  ],
+  "contributors": [
+    "Sergey Klimov <sergey.v.klimov@gmail.com> (http://darvin.github.com/)",
+    "Michael Aufreiter (http://substance.io)",
+    "Ændrew Rininsland <aendrew.rininsland@thetimes.co.uk> (http://www.aendrew.com)"
+  ],
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "aa8aa3c8cd5ce5240373d4fd1d06a7ab4af41a36",
+  "bugs": {
+    "url": "https://github.com/michael/github/issues"
+  },
+  "browser": {
+    "xmlhttprequest": false
+  },
+  "testling": {
+    "files": "test/test.*.js",
+    "browsers": [
+      "iexplore/9.0..latest",
+      "chrome/18.0..latest",
+      "firefox/15.0..latest",
+      "opera/11.0..latest",
+      "safari/5.0.5..latest",
+      "iphone/6.0..latest",
+      "ipad/6.0..latest",
+      "android-browser/4.2..latest"
+    ]
+  }
+}
