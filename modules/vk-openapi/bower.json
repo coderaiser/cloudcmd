@@ -1,0 +1,13 @@
+{
+  "name": "vk-openapi",
+  "version": "0.0.1",
+  "main": "openapi/vk-openapi.js",
+  "keywords": [
+    "vk",
+    "openapi",
+    "javascript"
+  ],
+  "dependencies": {
+    "vk-openapi": "https://github.com/colmer/vk_openapi"
+  }
+}

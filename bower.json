@@ -27,6 +27,7 @@
     "promise-polyfill": "~2.0.0",
     "format-io": "~0.9.6",
     "rendy": "~1.1.0",
-    "github": "~0.10.6"
+    "github": "~0.10.6",
+    "vk-openapi": "~0.0.1"
   }
 }
