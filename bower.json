@@ -28,6 +28,7 @@
     "format-io": "~0.9.6",
     "rendy": "~1.1.0",
     "github": "~0.10.6",
-    "vk-openapi": "~0.0.1"
+    "vk-openapi": "~0.0.1",
+    "html5-polyfills": "*"
   }
 }

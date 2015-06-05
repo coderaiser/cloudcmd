@@ -1,0 +1,16 @@
+{
+  "name": "polyfills",
+  "scripts": [
+    "classList.js",
+    "dataset.js",
+    "device-motion-polyfill.js",
+    "EventSource.js",
+    "index.js",
+    "input-target.js",
+    "offline-events.js",
+    "range.js",
+    "sessionStorage.js",
+    "Storage.js"
+  ],
+  "main": "index.js"
+}

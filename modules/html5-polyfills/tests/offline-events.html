@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Online and offline event tests</title>
+<style>
+  * { font-family: sans-serif; }
+  body { width: 600px; margin: 40px auto; }
+  #status { padding: 10px; text-align: center; }
+  #status.online { background: #0c0; }
+  #status.offline { background: #c00; }
+</style>
+</head>
+<body>
+  <p><strong>Directions:</strong> disconnect the internet connection from your machine and watch the status switch from online to offline (and back again if you want to see the online event fire).</p>
+  <p>Note that this polyfill <em>phones home</em> so it will also fire the offline event if the server this script is hosted on, goes down (feature or bug? who knows!).</p>
+  <p class="online" id="status">ONLINE</p>
+<script src="../offline-events.js"></script>
+<script>
+(function () {
+  var status = document.getElementById('status');
+  status.className = navigator.onLine ? 'online' : 'offline';
+  window.addEventListener('online', function () {
+    status.className = 'online';
+    status.innerHTML = 'ONLINE';
+  }, false);
+
+  window.addEventListener('offline', function () {
+    status.className = 'offline';
+    status.innerHTML = 'OFFLINE';
+  }, false);
+})();
+</script>
+</body>
+</html>
+

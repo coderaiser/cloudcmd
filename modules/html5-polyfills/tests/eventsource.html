@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8 />
+<title>event source test</title>
+</head>
+<body>
+<script src="../EventSource.js"></script>
+<script>
+var es = new EventSource('/sse/');
+es.onmessage = function (event) {
+  console.log('msg: ' + event.data);
+};
+
+es.onopen = function () {
+  console.log('connected');
+}
+
+console.log(es);
+</script>
+</body>
+</html>

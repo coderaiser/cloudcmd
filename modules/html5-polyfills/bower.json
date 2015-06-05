@@ -1,0 +1,22 @@
+{
+    "name": "html5-polyfills",
+    "description": "Collection of polyfills by Remy Sharp",
+    "homepage": "https://github.com/remy/polyfills",
+    "keywords": [
+        "polyfill",
+        "client",
+        "browser"
+    ],
+    "author": {
+        "name": "Remy Sharp",
+        "email": "remy@leftlogic.com"
+    },
+    "version": "0.0.20130621",
+    "readme": "This is my own collection of code snippets that support different native features of browsers using JavaScript (and if required, Flash in some cases).",
+    "readmeFilename": "README.md",
+    "_id": "html5-polyfills@0.0.20130621",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/remy/polyfills.git"
+    }
+}
