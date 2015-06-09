@@ -355,7 +355,7 @@ ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
 
 Version history
 ---------------
-- *2015.06.09*, **[v3.1.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v3.2.0.tar.gz)**
+- *2015.06.09*, **[v3.1.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v3.1.0.tar.gz)**
 - *2015.06.04*, **[v3.0.4](//github.com/cloudcmd/archive/raw/master/cloudcmd-v3.0.4.tar.gz)**
 - *2015.06.02*, **[v3.0.3](//github.com/cloudcmd/archive/raw/master/cloudcmd-v3.0.3.tar.gz)**
 - *2015.05.31*, **[v3.0.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v3.0.2.tar.gz)**
