@@ -1,3 +1,25 @@
+2015.06.09, v3.1.0
+
+fix:
+- (util) check: isEmpty
+
+feature:
+- (package) checkup v1.3.0
+- (cloudcmd) speedup: execon.series -> express
+- (package) checkup v1.1.0
+- (package) add checkup back
+- (package) v1.1.0
+- (package) rm checkup
+- (package) gulp v3.9.0
+- (listeners) DOM.toggleClass -> classList.toggleClass
+- (bower) add domtokenlist-shim
+- (util) exec.with: callback.bind -> bind.apply
+- (util) exec.with: arguments[0] -> slice.call(arguments)
+- (dom) rm addClass, removeClass
+- (dom) loading, error: DOM.add/removeClass -> classList.add/remove
+- (dom) Images.show.error: jqXHR -> text
+
+
 2015.06.04, v3.0.4
 
 feature:
