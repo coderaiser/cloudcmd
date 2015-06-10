@@ -1,3 +1,9 @@
+2015.06.10, v3.1.2
+
+fix:
+- (dom) operation: copy/move buttons do not work
+
+
 2015.06.09, v3.1.1
 
 fix:
