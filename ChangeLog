@@ -1,3 +1,11 @@
+2015.06.11, v3.1.3
+
+feature:
+- (tmpl) mv index, auth to html
+- (package) ponse v1.4.0
+- (html) html -> tmpl: 2 x times speed up
+
+
 2015.06.10, v3.1.2
 
 fix:
