@@ -3,14 +3,14 @@
     
     var DIR                 = __dirname + '/../../',
         LIBDIR              = DIR + 'lib/',
-        HTMLDIR             = DIR + 'html/',
+        TMPLDIR             = DIR + 'tmpl/',
         
         Util                = require(LIBDIR + 'util'),
         CloudFunc           = require(LIBDIR + 'cloudfunc'),
         files               = require('files-io'),
         rendy               = require('rendy'),
         
-        FS_DIR              = HTMLDIR   + 'fs/',
+        FS_DIR              = TMPLDIR   + 'fs/',
         EXPECT_PATH         = DIR       + 'test/lib/cloudfunc.html',
         
         TMPL_PATH   = [
@@ -54,7 +54,7 @@
         var paths       = {},
             
             filesList   = TMPL_PATH.map(function(name) {
-                var path = FS_DIR + name + '.html';
+                var path = FS_DIR + name + '.hbs';
                 
                 paths[path] = name;
                 
