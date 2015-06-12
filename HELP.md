@@ -238,6 +238,7 @@ Right mouse click button shows context menu with items:
 - Copy
 - Paste
 - (Un)Select All
+- Log Out (available when the `authorization` is enabled)
 
 ### Hot keys
 |Key                    |Operation

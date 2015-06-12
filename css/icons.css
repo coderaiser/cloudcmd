@@ -122,3 +122,8 @@
     font-family : 'Fontello';
     content     : '\e819  ';
 }
+
+.icon-log-out::before {
+    font-family : 'Fontello';
+    content     : '\e81a  ';
+}

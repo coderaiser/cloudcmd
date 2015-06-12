@@ -217,6 +217,12 @@
           "css": "upload",
           "code": 59417,
           "src": "fontawesome"
+        },
+        {
+          "uid": "2d76f2c8d13be40694ecadfea7fb83c3",
+          "css": "logout",
+          "code": 59418,
+          "src": "entypo"
         }
     ]
 }
