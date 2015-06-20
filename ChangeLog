@@ -1,3 +1,23 @@
+2015.06.20, v3.3.0
+
+fix:
+- (auth) always show auth dialog
+
+feature:
+- (cloudcmd) add checkUpdate
+- (bin) add " "
+- (konsole) rm CloudFunc
+- (markdown) rm util
+- (config) mapCondition -> filter
+- (edit) fontSize: style -> setOption
+- (package) dword v1.6.0
+- (input) add
+- (config) add mapCondition
+- (auth) add ability to enable/disable without restart
+- (config) add os.homedir
+- (package) morgan v1.6.0
+
+
 2015.06.12, v3.2.0
 
 feature:
