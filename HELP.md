@@ -91,7 +91,7 @@ If you installed Cloud Commander with `npm`, stop application and
 re-install it:
 
 ```sh
-npm i cloudcmd -g
+npm update cloudcmd -g
 ```
 
 Then start it again, clear cache of your browser and reload page.
