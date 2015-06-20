@@ -4,7 +4,6 @@
     'use strict';
     
     var Info        = require('../package'),
-         
         DIR         = __dirname + '/../',
         DIR_LIB     = DIR + 'lib/',
         DIR_SERVER  = DIR_LIB + 'server/',
@@ -67,6 +66,8 @@
     } else {
         if (args.repl)
             repl();
+        
+        checkUpdate();
         
         port(args.port);
         password(args.password);
@@ -179,6 +180,29 @@
     function repl() {
         console.log('REPL mode enabled (telnet localhost 1337)');
         require(DIR_LIB + '/server/repl');
+    }
+    
+    function checkUpdate() {
+        var load    = require('package-json'),
+            chalk   = require('chalk'),
+            rendy   = require('rendy');
+        
+        load.field('cloudcmd', 'version', function(error, version) {
+            var latest, current,
+                is = version !== Info.version;
+            
+            if (!error && is) {
+                latest  = rendy('update available: {{ latest }}', {
+                    latest: chalk.green.bold('v' + version),
+                });
+                
+                current = chalk.dim(rendy('(current: v{{ current }})', {
+                     current: Info.version
+                }));
+                
+                console.log('%s %s', latest, current);
+            }
+        });
     }
     
 })();
