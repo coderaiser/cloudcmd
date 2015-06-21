@@ -8,11 +8,11 @@
         <link rel="icon" href="/favicon.ico" />
         <title>{{ title }}</title>
         
-        <link rel=stylesheet href=/cloudcmd/css/urls.css>
-        <link rel=stylesheet href=/cloudcmd/join:css/reset.css:css/style.css:css/icons.css:css/help.css>
+        <link rel=stylesheet href="{{ prefix }}/css/urls.css">
+        <link rel=stylesheet href="{{ prefix }}/join:css/reset.css:css/style.css:css/icons.css:css/help.css">
         
         <noscript>
-            <link rel=stylesheet href="/cloudcmd/css/nojs.css">
+            <link rel=stylesheet href="{{ prefix }}/css/nojs.css">
         </noscript>
     </head>
     <body>
@@ -31,7 +31,7 @@
             <button id=~       class="cmd-button reduce-text icon-console"   title="console"         >~</button>
             <button id=contact class="cmd-button reduce-text icon-contact"   title="contact"         ></button>
         </div>
-        <script src="/cloudcmd/cloudcmd.js"></script>
+        <script src="{{ prefix }}/cloudcmd.js"></script>
         <script>
             !(function() {
                 'use strict';
@@ -40,7 +40,7 @@
                 
                 function load() {
                     window.removeEventListener('DOMContentLoaded', load);
-                    CloudCmd();
+                    CloudCmd('{{ prefix }}');
                 }
             })();
         </script>
