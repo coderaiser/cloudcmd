@@ -10,7 +10,7 @@
     "localStorage": true,
     "buffer": true,
     "dirStorage": false,
-    "minify": true,
+    "minify": false,
     "online": true,
     "cache": true,
     "showKeysPanel": true,

@@ -208,7 +208,7 @@ Here is description of options:
     "localStorage"      : true,     /* local storage                            */
     "buffer"            : true,     /* buffer for copying files                 */
     "dirStorage"        : true,     /* store directory listing to localStorage  */
-    "minify"            : true,     /* minification of js,css,html and img      */
+    "minify"            : false,    /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
     "cache"             : true,     /* add cache-control                        */
     "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
