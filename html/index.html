@@ -33,16 +33,7 @@
         </div>
         <script src="{{ prefix }}/cloudcmd.js"></script>
         <script>
-            !(function() {
-                'use strict';
-                
-                window.addEventListener('DOMContentLoaded', load);
-                
-                function load() {
-                    window.removeEventListener('DOMContentLoaded', load);
-                    CloudCmd('{{ prefix }}');
-                }
-            })();
+            CloudCmd('{{ prefix }}');
         </script>
     </body>
 </html>
