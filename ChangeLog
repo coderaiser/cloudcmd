@@ -4,7 +4,7 @@ fix:
 - (modules) domkentlist: cloudcmd -> client
 - (cloudcmd) password: double crypt
 - (cloudcmd) add password
-- feature(cloudcmd) add pre support
+- feature(cloudcmd) add prefix support
 
 feature:
 - (package) should v7.0.1
