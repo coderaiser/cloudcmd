@@ -253,6 +253,35 @@ It could happen when mobile device, tablet or small window size used to work wit
 
 ![One panel mode](/img/screen/one-panel-mode.png "One panel mode")
 
+Using as Middleware
+---------------
+
+Cloud Commander could be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
+
+```js
+var http        = require('http'),
+    cloudcmd    = require('cloudcmd'),
+    express     = require('express'),
+    io          = require('socket.io'),
+    app         = express(),
+    
+    PORT        = 31337,
+    
+    server,
+    socket;
+    
+server = http.createServer(app);
+socket = io.listen(server);
+
+app.use(cloudcmd({
+    prefix: '/prefix',  /* base URL (optional)                                      */
+    socket: socket,     /* used by Config, Edit (optional) and Console (required)   */
+    config: {}          /* config data (optional)                                   */
+}));
+
+server.listen(PORT);
+```
+
 Server
 ---------------
 Standard practices say no non-root process gets to talk to
