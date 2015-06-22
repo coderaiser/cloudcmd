@@ -11,6 +11,7 @@
         exit        = require(DIR_SERVER + 'exit'),
         config      = require(DIR_SERVER + 'config'),
         
+        options,
         argv        = process.argv,
         
         args        = require('minimist')(argv.slice(2), {
@@ -39,7 +40,6 @@
                 online      : config('online'),
                 editor      : config('editor') || 'edward',
                 username    : config('username'),
-                password    : config('password'),
                 root        : config('root') || '/',
                 
                 'progress-of-copying': config('progressOfCopying')
@@ -79,14 +79,18 @@
         
         readConfig(args.config);
         
+        options = {
+            root: args.root,
+            editor: args.editor
+        };
+        
+        if (args.password)
+            options.password = args.password;
+        
         if (args.save)
             config.save(start);
         else
-            start({
-                root: args.root,
-                editor: args.editor,
-                password: args.password,
-            });
+            start(options);
     }
     
     function version() {
