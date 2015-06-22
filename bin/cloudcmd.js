@@ -39,6 +39,7 @@
                 online      : config('online'),
                 editor      : config('editor') || 'edward',
                 username    : config('username'),
+                password    : config('password'),
                 root        : config('root') || '/',
                 
                 'progress-of-copying': config('progressOfCopying')
