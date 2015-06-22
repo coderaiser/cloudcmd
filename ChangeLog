@@ -1,3 +1,20 @@
+2015.06.22, v3.4.0
+
+fix:
+- (modules) domkentlist: cloudcmd -> client
+- (cloudcmd) password: double crypt
+- (cloudcmd) add password
+- feature(cloudcmd) add pre support
+
+feature:
+- (package) should v7.0.1
+- (validate) add
+- (index) rm DOMContentLoaded
+- (cloudcmd) add prefix support
+- (config) minify: true -> false
+- (package) express v4.13.0
+
+
 2015.06.20, v3.3.0
 
 fix:
