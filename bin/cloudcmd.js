@@ -10,7 +10,6 @@
         
         exit        = require(DIR_SERVER + 'exit'),
         config      = require(DIR_SERVER + 'config'),
-        createPass  = require(DIR_SERVER + 'password'),
         
         argv        = process.argv,
         
@@ -70,22 +69,23 @@
         checkUpdate();
         
         port(args.port);
-        password(args.password);
         
         config('auth', args.auth);
         config('online', args.online);
         config('minify', args.minify);
         config('username', args.username);
         config('progressOfCopying', args['progress-of-copying']);
-        root(args.root);
-        editor(args.editor);
         
         readConfig(args.config);
         
         if (args.save)
             config.save(start);
         else
-            start();
+            start({
+                root: args.root,
+                editor: args.editor,
+                password: args.password,
+            });
     }
     
     function version() {
@@ -97,17 +97,6 @@
         
         if (args.server)
             require(SERVER)(config);
-    }
-    
-    function password(pass) {
-        var algo, hash;
-        
-        if (pass) {
-            algo    = config('algo');
-            hash    = createPass(algo, pass);
-            
-            config('password', hash);
-        }
     }
     
     function port(arg) {
@@ -152,29 +141,6 @@
         });
         
         console.log('\nGeneral help using Cloud Commander: <%s>', url);
-    }
-    
-    function root(dir) {
-        var fs;
-        
-        config('root', dir);
-        
-        if (dir !== '/') {
-            fs  = require('fs');
-            fs.stat(dir, function(error) {
-                if (error)
-                    exit('cloudcmd --root: %s', error.message);
-                else
-                    console.log('root:', dir);
-            });
-        }
-    }
-    
-    function editor(name) {
-        var reg = /^(dword|edward)$/;
-        
-        if (!reg.test(name))
-            exit('cloudcmd --editor: could be "dword" or "edward" only');
     }
     
     function repl() {
