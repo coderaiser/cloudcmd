@@ -75,7 +75,7 @@
     "morgan": "~1.6.0",
     "place": "~1.1.2",
     "shortdate": "~1.0.1",
-    "should": "~6.0.1",
+    "should": "^7.0.1",
     "yaspeller": "~2.4.0"
   },
   "engines": {
