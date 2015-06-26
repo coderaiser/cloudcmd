@@ -17,5 +17,5 @@
     "port": 8000,
     "ip": null,
     "root": "/",
-    "progressOfCopying": false
+    "progress": false
 }

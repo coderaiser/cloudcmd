@@ -15,6 +15,6 @@
     "--no-online                ": "load scripts from local server",
     "--minify                   ": "enable minification",
     "--no-minify                ": "disable minification",
-    "--progress-of-copying      ": "show progress of copying",
-    "--no-progress-of-copying   ": "not show progress of copying"
+    "--progress                 ": "show progress of file operations",
+    "--no-progress              ": "not show progress of file operations"
 }

@@ -55,26 +55,26 @@ cloudcmd
 
 Cloud Commander supports command line parameters:
 
-|Parameter              |Operation
-|:--------------------------|:--------------------------------------------
-| `-h, --help`              | display help and exit
-| `-v, --version`           | display version and exit
-| `-s, --save`              | save configuration
-| `-o, --online`            | load scripts from remote servers
-| `-a, --auth`              | enable authorization
-| `-u, --username`          | set username
-| `-p, --password`          | set password
-| `-c, --config`            | configuration file path
-| `--editor`                | set editor: "dword" or "edward"
-| `--root`                  | set root directory
-| `--port`                  | set port number
-| `--no-auth`               | disable authorization
-| `--no-server`             | do not start server
-| `--no-online`             | load scripts from local server
-| `--minify`                | enable minification
-| `--no-minify`             | disable minification
-| `--progress-of-copying`   | show progress of copying
-| `--no-progress-of-copying`| do not show progress of copying
+|Parameter                      |Operation
+|:------------------------------|:------------------------------
+| `-h, --help`                  | display help and exit
+| `-v, --version`               | display version and exit
+| `-s, --save`                  | save configuration
+| `-o, --online`                | load scripts from remote servers
+| `-a, --auth`                  | enable authorization
+| `-u, --username`              | set username
+| `-p, --password`              | set password
+| `-c, --config`                | configuration file path
+| `--editor`                    | set editor: "dword" or "edward"
+| `--root`                      | set root directory
+| `--port`                      | set port number
+| `--no-auth`                   | disable authorization
+| `--no-server`                 | do not start server
+| `--no-online`                 | load scripts from local server
+| `--minify`                    | enable minification
+| `--no-minify`                 | disable minification
+| `--progress`                  | show progress of file operations
+| `--no-progress`               | do not show progress of file operations
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -215,7 +215,7 @@ Here is description of options:
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
     "root"              : "/"       /* root directory                           */
-    "progressOfCopying" : false     /* show progress of copying                 */
+    "progress"          : false     /* show progress of file operations         */
 }
 ```
 
