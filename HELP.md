@@ -265,7 +265,7 @@ var http        = require('http'),
     io          = require('socket.io'),
     app         = express(),
     
-    PORT        = 31337,
+    PORT        = 1337,
     
     server,
     socket;
@@ -274,7 +274,7 @@ server = http.createServer(app);
 socket = io.listen(server);
 
 app.use(cloudcmd({
-    prefix: '/prefix',  /* base URL or function which returns base URL (optional)   */
+    prefix: '/cloudcmd',/* base URL or function which returns base URL (optional)   */
     socket: socket,     /* used by Config, Edit (optional) and Console (required)   */
     config: {}          /* config data (optional)                                   */
 }));
