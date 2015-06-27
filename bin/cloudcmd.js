@@ -30,7 +30,8 @@
                 'server',
                 'online',
                 'minify',
-                'progress'
+                'progress',
+                'progress-of-copying'
             ],
             default: {
                 server      : true,
@@ -41,7 +42,7 @@
                 editor      : config('editor') || 'edward',
                 username    : config('username'),
                 root        : config('root') || '/',
-                progress    : config('progress')
+                progress    : config('progress') || config('progressOfCopying'),
             },
             alias: {
                 v: 'version',
@@ -74,7 +75,9 @@
         config('online', args.online);
         config('minify', args.minify);
         config('username', args.username);
-        config('progressOfCopying', args['progress-of-copying']);
+        config('progress', args.progress);
+        
+        deprecate('progress-of-copying', 'progress');
         
         readConfig(args.config);
         
@@ -90,6 +93,15 @@
             config.save(start);
         else
             start(options);
+    }
+    
+    function deprecate(was, became) {
+        var value = args[was];
+        
+        if (value) {
+            console.log('cloudcmd --' + was + ': deprecated, use --' + became);
+            config(became, value);
+        }
     }
     
     function version() {
