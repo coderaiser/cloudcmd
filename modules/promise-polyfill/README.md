@@ -13,6 +13,9 @@ For API information about Promises, please check out this article [HTML5Rocks ar
 
 It is extremely lightweight. ***< 1kb Gzipped***
 
+## Browser Support
+IE8+, Chrome, Firefox, IOS 4+, Safari 5+, Opera
+
 ## Downloads
 
 - [Promise](https://raw.github.com/taylorhakes/promise-polyfill/master/Promise.js)
@@ -22,6 +25,10 @@ It is extremely lightweight. ***< 1kb Gzipped***
 ```
 npm install promise-polyfill
 ```
+### Bower
+```
+bower install promise-polyfill
+```
 
 ## Simple use
 ```
@@ -30,8 +37,7 @@ var prom = new Promise(function(resolve, reject) {
 
   if (/* everything turned out fine */) {
     resolve("Stuff worked!");
-  }
-  else {
+  }  else {
     reject(new Error("It broke"));
   }
 });
@@ -44,6 +50,8 @@ prom.then(function() {
 ## Performance
 By default promise-polyfill uses `setImmediate`, but falls back to `setTimeout` for executing asynchronously. If a browser does not support `setImmediate`, you may see performance issues.
 Use a `setImmediate` polyfill to fix this issue. [setAsap](https://github.com/taylorhakes/setAsap) or [setImmediate](https://github.com/YuzuJS/setImmediate) work well.
+
+If you polyfill `window.setImmediate` or use `Promise._setImmediateFn(immedateFn)` it will be used instead of `window.setTimeout`
 
 ## Testing
 ```

@@ -1,14 +1,8 @@
-(function() {
-    var root;
-
-	if (typeof window === 'object' && window) {
-		root = window;
-	} else {
-		root = global;
-	}
+(function(root) {
 
 	// Use polyfill for setImmediate for performance gains
-	var asap = Promise.immediateFn || root.setImmediate || function(fn) { setTimeout(fn, 1); };
+	var asap = (typeof setImmediate === 'function' && setImmediate) ||
+		function(fn) { setTimeout(fn, 1); };
 
 	// Polyfill for Function.prototype.bind
 	function bind(fn, thisArg) {
@@ -178,9 +172,19 @@
 		});
 	};
 
+	/**
+	 * Set the immediate function to execute callbacks
+	 * @param fn {function} Function to execute
+	 * @private
+	 */
+	Promise._setImmediateFn = function _setImmediateFn(fn) {
+		asap = fn;
+	};
+
 	if (typeof module !== 'undefined' && module.exports) {
 		module.exports = Promise;
 	} else if (!root.Promise) {
 		root.Promise = Promise;
 	}
-})();
+
+})(this);
