@@ -1,3 +1,23 @@
+2015.06.27, v3.5.0
+
+fix:
+- docs(help) pre -> cloudcmd, 31337 -> 1337
+- (cloudcmd) getPre: undefined
+- feature(cloudcmd) pre could be function
+- docs(changelog) pre -> pre
+
+feature:
+- (cloudcmd) --progressOfCopying deprecated
+- (cloudcmd) progress-of-copying -> progress
+- (package) mellow v2.0.0
+- (flop) v1.3.0
+- (cloudcmd) show progress of files removing
+- (package) flop v1.2.0
+- (cloudcmd) prefix could be function
+- (config) tryrequire -> readjson
+- (config) socket -> middle
+
+
 2015.06.22, v3.4.0
 
 fix:
