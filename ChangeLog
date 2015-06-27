@@ -10,9 +10,8 @@ feature:
 - (cloudcmd) --progressOfCopying deprecated
 - (cloudcmd) progress-of-copying -> progress
 - (package) mellow v2.0.0
-- (flop) v1.3.0
+- (package) flop v1.3.0
 - (cloudcmd) show progress of files removing
-- (package) flop v1.2.0
 - (cloudcmd) prefix could be function
 - (config) tryrequire -> readjson
 - (config) socket -> middle
