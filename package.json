@@ -9,24 +9,24 @@
     "url": "git://github.com/coderaiser/cloudcmd.git"
   },
   "keywords": [
-    "file manager",
-    "orthodox",
-    "file",
-    "folder",
     "console",
-    "editor"
+    "editor",
+    "file",
+    "file manager",
+    "folder",
+    "orthodox"
   ],
   "bin": {
     "cloudcmd": "bin/cloudcmd.js",
     "iocmd": "bin/iocmd.js"
   },
   "scripts": {
-    "test": "gulp default",
-    "start": "node bin/cloudcmd.js",
+    "bower": "bower",
     "gulp": "gulp",
-    "yaspeller": "yaspeller .",
+    "start": "node bin/cloudcmd.js",
+    "test": "gulp default",
     "wisdom": "gulp release",
-    "bower": "bower"
+    "yaspeller": "yaspeller ."
   },
   "directories": {
     "man": "man"
@@ -78,7 +78,7 @@
     "place": "~1.1.2",
     "shortdate": "~1.0.1",
     "should": "^7.0.1",
-    "yaspeller": "~2.4.0"
+    "yaspeller": "~2.5.0"
   },
   "engines": {
     "node": ">=0.10"
