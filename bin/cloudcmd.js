@@ -89,10 +89,12 @@
         if (args.password)
             options.password = args.password;
         
-        if (args.save)
-            config.save(start);
-        else
+        if (!args.save)
             start(options);
+        else
+            config.save(function() {
+                start(options);
+            });
     }
     
     function deprecate(was, became) {
