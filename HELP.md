@@ -230,13 +230,13 @@ Right mouse click button shows context menu with items:
 - Delete
 - Pack
 - Unpack
-- Upload
 - Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
-- New (File, Directory, from FilePicker)
 - Cut
 - Copy
 - Paste
+- New (File, Directory, from FilePicker)
+- Upload
 - (Un)Select All
 - Log Out (available when the `authorization` is enabled)
 
