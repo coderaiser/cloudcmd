@@ -1,3 +1,20 @@
+2015.07.01, v3.6.0
+
+fix:
+- (client) when none files in the root, menu doesn't work
+- (cloudcmd) refresh: panel that would be refreshed depends on current file location
+- (dom) getPanel: when no currentFile panel is undefined
+- (cloudcmd) ignore commandl line options when --save flag set
+
+feature:
+- (config) onKey: onChange on Enter
+- (files) add getTimeoutOnce
+- (menu) show upload in two kinds of menu
+- (package) yaspeller v2.5.0
+- (package) markdown-it v4.3.0
+- (bower) promise-poyfill v2.1.0
+
+
 2015.06.27, v3.5.0
 
 fix:
