@@ -93,7 +93,7 @@
     content     : '\e813  ';
 }
 
-.icon-unpack::before {
+.icon-extract::before {
     font-family : 'Fontello';
     content     : '\e814  ';
 }

@@ -229,7 +229,7 @@ Right mouse click button shows context menu with items:
 - Rename
 - Delete
 - Pack
-- Unpack
+- Extract
 - Upload to (Dropbox, Github, GDrive, FilePicker)
 - Download
 - Cut
