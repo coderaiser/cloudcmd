@@ -4,7 +4,7 @@ fix:
 - (operation) loading image
 
 feature:
-- (cloudcmd) pack -> extract
+- (cloudcmd) unpack -> extract
 - (cloudcmd) jag -> jaguar: add ability to pack couple files in one directory
 - (dom) Images: add chaining
 
