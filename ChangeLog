@@ -1,3 +1,9 @@
+2015.07.04, v3.7.2
+
+fix:
+- (files) getConfig: remove Promise before resolve
+
+
 2015.07.04, v3.7.1
 
 feature:
