@@ -54,6 +54,7 @@
     "minify": "~1.4.0",
     "minimist": "~1.1.0",
     "mollify": "~1.0.0",
+    "os-homedir": "~1.0.0",
     "package-json": "~1.2.0",
     "pipe-io": "~1.1.1",
     "ponse": "~1.4.0",
