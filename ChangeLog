@@ -1,3 +1,10 @@
+2015.07.04, v3.7.1
+
+feature:
+- (config) homedir -> os-homedir
+- (package) chalk v1.1.0
+
+
 2015.07.03, v3.7.0
 
 fix:
