@@ -1,3 +1,15 @@
+2015.07.06, v3.8.0
+
+fix:
+- (buffer) rmCutClass: forEach -> slice, forEach
+
+feature:
+- (view) add ability to view next/previous image
+- (rest) streamPack: add one-click folder download
+- (cloudcmd) disallow to view and edit ".." directory
+- (rest) rm console.log
+
+
 2015.07.04, v3.7.2
 
 fix:
