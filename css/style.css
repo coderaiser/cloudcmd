@@ -221,6 +221,10 @@ body, pre, code {
     list-style-type: none;
 }
 
+.files li {
+    overflow: hidden;
+}
+
 a {
   text-decoration:none;
 }
