@@ -1,3 +1,20 @@
+2015.07.09, v3.8.1
+
+fix:
+- (dom) unpack -> extract
+- (dom) twopack: lengh -> length
+- (menu) delete: Operation.show -> CloudCmd.Operation.show
+- (rest) streamPack: root
+- (files) getConfig promise: add reject
+- (style) file names that conatains Chinese characters breaks the line
+
+feature:
+- (server) add port number check
+- (rest) callback called on success only -> callback called always
+- (listeners) onDragStart: add ability to download directories via drag n drop
+- (package) jaguar v1.1.0
+
+
 2015.07.06, v3.8.0
 
 fix:
