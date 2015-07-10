@@ -17,8 +17,7 @@
     "orthodox"
   ],
   "bin": {
-    "cloudcmd": "bin/cloudcmd.js",
-    "iocmd": "bin/iocmd.js"
+    "cloudcmd": "bin/cloudcmd.js"
   },
   "scripts": {
     "bower": "bower",
