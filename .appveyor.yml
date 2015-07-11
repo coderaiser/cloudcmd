@@ -3,7 +3,7 @@ environment:
   # node.js
   - nodejs_version: "0.12"
   # io.js
-  - nodejs_version: "1"
+  - nodejs_version: "2"
 
 install:
   - ps: Install-Product node $env:nodejs_version
