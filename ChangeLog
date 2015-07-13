@@ -1,3 +1,23 @@
+2015.07.13, v4.0.0
+
+fix:
+- (listeners) initKeysPanel: name missing
+
+feature:
+- (config) progress: true
+- (package) dword v1.9.0
+- (package) edward v1.9.0
+- (config) show error.message when file exist, but could not be read from home
+- (operation) speed up loading: set delete, copy, pack operations load in order
+- (package) dword v1.8.0
+- (package) edward v1.8.0
+- (package) ishtar v1.1.5
+- (package) remedy v1.1.3
+- (package) spero v1.1.4
+- (iocmd) rm
+- (cloudcmd) add progress of pack/extract operations
+
+
 2015.07.09, v3.8.1
 
 fix:
