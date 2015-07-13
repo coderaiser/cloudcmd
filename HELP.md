@@ -215,7 +215,7 @@ Here is description of options:
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
     "root"              : "/"       /* root directory                           */
-    "progress"          : false     /* show progress of file operations         */
+    "progress"          : true      /* show progress of file operations         */
 }
 ```
 
