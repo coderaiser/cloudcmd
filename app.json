@@ -1,0 +1,14 @@
+{
+  "name": "cloudcmd",
+  "description": "Cloud Commander orthodox web file manager with console and editor",
+  "repository": "https://github.com/coderaiser/cloudcmd",
+  "logo": "http://cloudcmd.io/img/logo/cloudcmd.png",
+  "keywords": [
+    "console",
+    "editor",
+    "file",
+    "file manager",
+    "folder",
+    "orthodox"
+  ]
+}

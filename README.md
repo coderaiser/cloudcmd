@@ -23,8 +23,11 @@ Cloud Commander v4.0.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
 [PackageQualityIMGURL]:     http://packagequality.com/shield/cloudcmd.svg
 
-[CircleCiURL]: https://circleci.com/gh/coderaiser/cloudcmd
-[CircleCiIMGURL]: https://circleci.com/gh/coderaiser/cloudcmd.svg
+[CircleCiURL]:              https://circleci.com/gh/coderaiser/cloudcmd
+[CircleCiIMGURL]:           https://circleci.com/gh/coderaiser/cloudcmd.svg
+
+[DeployURL]:                https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy"
+[DeployIMG]:                https://www.herokucdn.com/deploy/button.png
 
 **Cloud Commander** orthodox web file manager with console and editor.
 
@@ -46,6 +49,8 @@ cloudcmd
 ## How to use?
 
 Open url `http://localhost:8000` in browser.
+
+[![Deploy][DeployIMG]][DeployURL]
 
 ## License
 
