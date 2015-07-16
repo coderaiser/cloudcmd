@@ -1,0 +1,27 @@
+{
+  "name": "findit",
+  "private": true,
+  "version": "1.1.2",
+  "description": "Walk a directory tree in DOM File System",
+  "main": "lib/findit.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/domfs-findit.git"
+  },
+  "keywords": [
+    "findit",
+    "DOM",
+    "File System"
+  ],
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderaiser/domfs-findit/issues"
+  },
+  "homepage": "https://github.com/coderaiser/domfs-findit"
+}

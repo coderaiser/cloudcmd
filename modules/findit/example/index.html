@@ -1,0 +1,39 @@
+<body>
+<script src="../modules/emitify/lib/emitify.js"></script>
+<script src="../lib/findit.js"></script>
+<script>
+(function() {
+    'use strict';
+    
+    var node = window;
+    
+    node.addEventListener('drop', function (e) {
+        var entry,
+            finder,
+            item = e.dataTransfer.items[0];
+        
+        e.preventDefault();
+        
+        entry = item.webkitGetAsEntry();
+        
+        finder = findit(entry);
+        
+        finder.on('file', function(file, entry) {
+            console.log('file: ', file, entry);
+        });
+        
+        finder.on('directory', function(file, entry) {
+            console.log('directory: ', file, entry);
+        })
+        
+        finder.on('end', function() {
+            console.log('done');
+        })
+    });
+        
+    node.addEventListener('dragover', function (e) {
+        e.preventDefault();
+    });
+})();
+</script>
+</body>

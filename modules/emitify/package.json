@@ -1,0 +1,23 @@
+{
+  "name": "emitify",
+  "version": "1.2.0",
+  "description": "dead simple event emitter",
+  "main": "lib/emitify.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/emitify.git"
+  },
+  "keywords": [
+    "event",
+    "emitter"
+  ],
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderaiser/emitify/issues"
+  },
+  "homepage": "https://github.com/coderaiser/emitify"
+}

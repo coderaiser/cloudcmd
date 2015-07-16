@@ -1,0 +1,39 @@
+2015.07.16, v1.1.2
+
+fix:
+- (findit) find -> self._find
+
+
+2015.07.15, v1.1.1
+
+fix:
+- (dindit) enry -> entry
+
+feature:
+- (package) main: domfs-findit -> findit
+
+
+2015.07.14, v1.1.0
+
+fix:
+- (findit) dirs, first could be overwriting
+
+
+2015.07.14, v1.0.3
+
+fix:
+- (findit) no end when entry file
+
+
+2015.07.14, v1.0.2
+
+fix:
+- (findit) dirs could be more then 0
+
+
+2015.07.13, v1.0.1
+
+fix:
+- (findit) return
+- (example) add ()
+

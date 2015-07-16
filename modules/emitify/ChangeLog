@@ -1,0 +1,47 @@
+2015.06.16, v1.2.0
+
+feature:
+- (emitify) add instanceof check
+
+
+2015.02.24, v1.1.2
+
+fix:
+- (emitify) once: do not remove callback after emit
+
+
+2015.02.11, v1.1.1
+
+fix:
+- (emitify) emit throw: data -> args[0]
+
+feature:
+- (package) v1.1.0
+
+
+2015.02.11, v1.1.0
+
+feature:
+- (emitify) emit: add ability to use more then two arguments
+
+
+2015.02.10, v1.0.3
+
+fix:
+- (emitify) "event should be function"
+
+
+2015.02.10, v1.0.2
+
+feature:
+- (emitify) add arguments check
+
+
+2015.02.10, v1.0.1
+
+fix:
+- (emitify) off: index do not changed
+
+feature:
+- (bower) add
+

@@ -1,0 +1,38 @@
+{
+  "name": "philip",
+  "version": "1.1.1",
+  "homepage": "https://github.com/coderaiser/domfs-philip",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "Walk a directory tree in DOM File System",
+  "main": "lib/philip.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "DOM",
+    "File System"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "modules"
+  ],
+  "dependencies": {
+    "emitify": "~1.2.0",
+    "findit": "~1.1.0"
+  },
+  "_release": "1.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.1",
+    "commit": "8d6fdd3fe7dece2c0760a6beada90ff4e4ff4064"
+  },
+  "_source": "git://github.com/coderaiser/domfs-philip.git",
+  "_target": "~1.1.1",
+  "_originalSource": "philip",
+  "_direct": true
+}
