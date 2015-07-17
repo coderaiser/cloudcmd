@@ -34,6 +34,7 @@
         this._n             = 0;
         this._processingFn  = processingFn;
         this._pause         = false;
+        this._prev          = 0;
         
         this._find(array, function(files, dirs) {
             self._files = files;
@@ -102,7 +103,10 @@
     Philip.prototype._progress  = function() {
         var value = Math.round(this._i * 100 / this._n);
         
-        this.emit('progress', value);
+        if (value !== this._prev) {
+            this._prev = value;
+            this.emit('progress', value);
+        }
     };
     
     Philip.prototype._getFiles = function(files, obj, callback) {
