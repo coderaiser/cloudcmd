@@ -1,6 +1,6 @@
 {
   "name": "philip",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "homepage": "https://github.com/coderaiser/domfs-philip",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -23,16 +23,17 @@
   ],
   "dependencies": {
     "emitify": "~1.2.0",
-    "findit": "~1.1.0"
+    "findit": "~1.1.0",
+    "execon": "~1.2.2"
   },
-  "_release": "1.1.2",
+  "_release": "1.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "v1.1.2",
-    "commit": "9784fc8c0b935b596d6135743334fa5f86d787e7"
+    "tag": "v1.2.0",
+    "commit": "f23a266be8221788974a851c6eed96060dc61f2f"
   },
   "_source": "git://github.com/coderaiser/domfs-philip.git",
-  "_target": "~1.1.2",
+  "_target": "~1.2.0",
   "_originalSource": "philip",
   "_direct": true
 }

@@ -1,7 +1,7 @@
 {
   "name": "philip",
   "private": true,
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Process files and directories in DOM File System",
   "main": "lib/philip.js",
   "dependencies": {},

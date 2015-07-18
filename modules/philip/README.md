@@ -10,7 +10,7 @@ bower i philip --save
 
 ## How to use?
 
-Add `philip.js` [findit](https://github.com/coderaiser/domfs-findit "Find It") and [emitify](https://github.com/coderaiser/emitify "Emitify").
+Add `philip.js` [findit](https://github.com/coderaiser/domfs-findit "Find It"), [execon](https://github.com/coderaiser/execon "Patterns of function calls")(or [async](https://github.com/caolan/async "Async utilities for node and the browser" with `window.exec = window.async`) and [emitify](https://github.com/coderaiser/emitify "Emitify").
 
 Or any other node-compitable [EventEmitter](https://iojs.org/api/events.html "Events") (set `window.Emitify = your_emitter` before using `findit`).
 

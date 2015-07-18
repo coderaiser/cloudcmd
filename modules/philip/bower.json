@@ -1,6 +1,6 @@
 {
   "name": "philip",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "homepage": "https://github.com/coderaiser/domfs-philip",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -23,6 +23,7 @@
   ],
   "dependencies": {
     "emitify": "~1.2.0",
-    "findit": "~1.1.0"
+    "findit": "~1.1.0",
+    "execon": "~1.2.2"
   }
 }

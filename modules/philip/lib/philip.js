@@ -1,5 +1,6 @@
 /* global Emitify */
 /* global findit */
+/* global exec */
 
 (function(global) {
     'use strict';
@@ -132,10 +133,11 @@
     };
     
     Philip.prototype._find = function(entries, fn) {
-        [].forEach.call(entries, function(entry) {
-            var files       = [],
-                dirs        = [],
-                finder      = findit(entry);
+        var files   = [],
+            dirs    = [];
+        
+        exec.each(entries, function(entry) {
+            var finder  = findit(entry);
             
             finder.on('directory', function(name) {
                 dirs.push(name);
@@ -148,6 +150,8 @@
             finder.on('end', function() {
                 fn(files, dirs);
             });
+        }, function() {
+            fn(files, dirs);
         });
     };
 })(this);

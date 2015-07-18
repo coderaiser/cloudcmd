@@ -1,0 +1,25 @@
+{
+  "name": "execon",
+  "homepage": "https://github.com/coderaiser/execon",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "Patterns of function calls",
+  "main": "lib/exec.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "exec"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "version": "1.2.2"
+}
