@@ -26,7 +26,8 @@
     "test": "gulp default",
     "wisdom": "gulp release",
     "yaspeller": "yaspeller .",
-    "nupdate": "nupdate"
+    "nupdate": "nupdate",
+    "bupdate": "bupdate"
   },
   "directories": {
     "man": "man"
@@ -70,6 +71,7 @@
   },
   "devDependencies": {
     "bower": "~1.4.1",
+    "bupdate": "~1.0.2",
     "gulp": "^3.9.0",
     "gulp-jscs": "~1.6.0",
     "gulp-jshint": "^1.11.0",
