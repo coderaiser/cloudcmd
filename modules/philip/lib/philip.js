@@ -136,7 +136,7 @@
         var files   = [],
             dirs    = [];
         
-        exec.each(entries, function(entry) {
+        exec.each(entries, function(entry, callback) {
             var finder  = findit(entry);
             
             finder.on('directory', function(name) {
@@ -148,7 +148,7 @@
             });
             
             finder.on('end', function() {
-                fn(files, dirs);
+                callback();
             });
         }, function() {
             fn(files, dirs);

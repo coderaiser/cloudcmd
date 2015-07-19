@@ -1,3 +1,9 @@
+2015.07.19, v1.2.1
+
+fix:
+- (philip) _getFiles: to fast callback call
+
+
 2015.07.18, v1.2.0
 
 fix:
