@@ -50,11 +50,24 @@
     }
     
     Philip.prototype._process    = function() {
-        var el,
+        var args,
+            argsLength  = this._processingFn.length,
+            el,
             data,
-            self    = this,
-            name    = self._dirs.shift(),
-            type    = 'directory';
+            self        = this,
+            name        = self._dirs.shift(),
+            type        = 'directory',
+            fn          = function(error) {
+                ++self._i;
+                
+                if (error) {
+                    self.emit('error', error);
+                    self.pause();
+                }
+                
+                self._process();
+                self._progress();
+            };
         
         if (!name) {
             type    = 'file';
@@ -69,17 +82,19 @@
         if (!name) {
             self.emit('end');
         } else if (!this._pause) {
-            self._processingFn(type, name, data, function(error) {
-                ++self._i;
-                
-                if (error) {
-                    self.emit('error', error);
-                    self.pause();
-                }
-                
-                self._process();
-                self._progress();
-            });
+            switch(argsLength) {
+            default:
+                args = [type, name, data];
+                break;
+            
+            case 6:
+                args = [type, name, data, this._i, this._n];
+                break;
+            }
+            
+            args.push(fn);
+            
+            self._processingFn.apply(null, args);
         }
     };
     

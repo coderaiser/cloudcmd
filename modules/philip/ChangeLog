@@ -1,3 +1,9 @@
+2015.07.20, v1.3.0
+
+feature:
+- (philip) add optional parameters to processingFn: i, n
+
+
 2015.07.19, v1.2.1
 
 fix:

@@ -36,7 +36,7 @@ Or any other node-compitable [EventEmitter](https://iojs.org/api/events.html "Ev
         
         entry   = item.webkitGetAsEntry();
         
-        upload = philip(entry, function(type, name, data, callback) {
+        upload = philip(entry, function(type, name, data/*, i, n,*/, callback) {
             var error = null;
             
             switch(type) {
