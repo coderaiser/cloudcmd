@@ -40,7 +40,7 @@
                 '<span data-name="js-clear-storage" class="path-icon icon-clear" '  +
                     'title="clear storage (Ctrl+D)">'                               +
                 '</span>'                                                           +
-                '<a data-name="js-refresh" href="/fs/etc/X11" '                     +
+                '<a data-name="js-refresh" href="/fs/etc/X11/" '                    +
                 'class="path-icon icon-refresh" title="refresh (Ctrl+R)"></a>'      +
                 '<span data-name="js-links" class=links>'                           +
                     '<a data-name="js-path-link" href="/fs/" title="/">/</a>'       +
