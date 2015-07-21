@@ -1,3 +1,35 @@
+2015.07.21, v4.1.0
+
+fix:
+- (listeners) dragndrop: toggle -> select/unselect
+- (view) series
+- (edit) show error message twice
+- (client) destroy file view even if we can not read directory
+
+feature:
+- (bower) execon v1.2.5
+- (bower) emitify v1.2.0
+- (dom) uploadFiles progress: every file -> all files
+- (util) exec: each, eachSeries
+- (package) ishtar v1.2.0
+- (package) remedy v1.2.0
+- (package) spero v1.2.0
+- (directory) improve the accuracy of upload progress
+- (bower) philip v1.3.0
+- (package) socket.io v1.3.6
+- (bower) philip v1.2.1
+- (package) add bupdate
+- (package) markdown-it v4.4.0
+- (package) add nupdate
+- (bower) philip v1.2.0
+- (bower) philip v1.1.2
+- (directory) add ability to upload directories via drag n drop in Chrome
+- (dom) uploadFiles: files -> dir, files
+- (operation) speed up
+- (css) get list of files from css.json
+- (query) add
+
+
 2015.07.13, v4.0.0
 
 fix:
