@@ -21,12 +21,12 @@
     "test",
     "tests"
   ],
-  "version": "1.2.2",
-  "_release": "1.2.2",
+  "version": "1.2.5",
+  "_release": "1.2.5",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.2",
-    "commit": "07ebb474438800f66b4b2c5b7abca58a9aa57bf7"
+    "tag": "v1.2.5",
+    "commit": "ea4e9ed95a445e84298ed670be59e42ce6fbe678"
   },
   "_source": "git://github.com/coderaiser/execon.git",
   "_target": "~1.2.2",

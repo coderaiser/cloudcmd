@@ -1,3 +1,21 @@
+2015.07.21, v1.2.5
+
+fix:
+- (exec) eachSeries
+
+
+2015.07.21, v1.2.4
+
+fix:
+- (exec) each, eachSeries
+
+
+2015.07.21, v1.2.3
+
+fix:
+- (exec) each, eachSeries: call callback when !listeners.length
+
+
 2015.06.05, v1.2.2
 
 feature:

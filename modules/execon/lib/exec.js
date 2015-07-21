@@ -191,15 +191,24 @@
                 return iterator.bind(null, item);
             });
             
-            exec.parallel(listeners, callback);
+            if (!listeners.length)
+                callback();
+            else
+                exec.parallel(listeners, callback);
         };
-        
+            
         exec.eachSeries         = function(array, iterator, callback) {
             var listeners = array.map(function(item) {
                 return iterator.bind(null, item);
             });
             
-            exec.series(listeners, callback);
+            if (typeof callback !== 'function')
+                throw Error('callback should be function');
+            
+            if (!listeners.length)
+                callback();
+            else
+                exec.series(listeners, callback);
         };
         
        /**
