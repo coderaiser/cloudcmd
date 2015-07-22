@@ -48,6 +48,12 @@
     }
 }
 
+@media only screen and (max-height: 850px) {
+    .files {
+        height: 90%;
+    }
+}
+
 @media only screen and (max-height: 700px) and (min-width: 600px) {
     .fm {
         height: 85%;
