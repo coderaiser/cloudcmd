@@ -23,7 +23,6 @@
   "dependencies": {
     "fancybox": "~2.1.5",
     "jquery": "~2.1.4",
-    "menu": "~0.7.8",
     "format-io": "~0.9.6",
     "rendy": "~1.1.0",
     "github": "~0.10.6",
@@ -31,6 +30,7 @@
     "domtokenlist-shim": "~1.1.0",
     "promise-polyfill": "~2.1.0",
     "emitify": "~1.2.0",
-    "philip": "~1.3.0"
+    "philip": "~1.3.0",
+    "menu": "~0.7.9"
   }
 }

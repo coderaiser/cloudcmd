@@ -364,22 +364,43 @@ var MenuIO;
         return ret;
     }
     
+    /*
+     * rendy v1.1.0
+     * https://github.com/coderaiser/rendy
+     */
+    
+    /**
+     * render template with data
+     *
+     * @param templ
+     * @param data
+     */
     function rendy(templ, data) {
-        var str, regExp, expr,
-            result  = templ;
+        var result  = templ;
+        
+        check(templ, data);
         
         Object
             .keys(data)
             .forEach(function(param) {
-                str     = data[param];
-                expr    = '{{\\s' + param + '\\s}}';
-                regExp  = RegExp(expr, 'g');
-                result  = result.replace(regExp, str);
+                var name    = '{{ ' + param + ' }}',
+                    str     = data[param];
+                
+                while(~result.indexOf(name))
+                    result = result.replace(name, str);
             });
         
         if (~result.indexOf('{{'))
-            result = result.replace(/{{\s.*\s}}/, '');
+            result = result.replace(/{{.*?}}/g, '');
         
         return result;
+    }
+    
+    function check(templ, data) {
+        if (typeof templ !== 'string')
+            throw(Error('template should be string!'));
+        
+        if (typeof data !== 'object')
+            throw(Error('data should be object!'));
     }
 })(window);
