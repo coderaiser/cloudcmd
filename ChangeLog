@@ -1,3 +1,22 @@
+2015.07.23, v4.1.1
+
+fix:
+- (buffer) try copy and cut ".."
+- (key) loadDir: add "/"
+- (dom) uploadFiles: progress
+- (upload) uploadFiles
+- (listeners) onDblClick: add "/"
+- (listeners) onDblClick: add "/"
+
+feature:
+- (bower) menu-io v0.7.9
+- (query) .files height: 90% when window height less then 850px
+- (menu) show alert when try to cut/copy ".."
+- (menu) download: show alert, when ".."
+- (dom) getCurrentData: show alert when ".."
+- (cloudfunc) rm rmLastSlash
+
+
 2015.07.21, v4.1.0
 
 fix:
