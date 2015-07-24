@@ -1,4 +1,4 @@
-Cloud Commander v4.1.2
+Cloud Commander v4.2.0
 ===============
 ### [Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
@@ -385,6 +385,7 @@ ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
 
 Version history
 ---------------
+- *2015.07.24*, **[v4.2.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v4.2.0.tar.gz)**
 - *2015.07.23*, **[v4.1.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v4.1.2.tar.gz)**
 - *2015.07.23*, **[v4.1.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v4.1.1.tar.gz)**
 - *2015.07.21*, **[v4.1.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v4.1.0.tar.gz)**
