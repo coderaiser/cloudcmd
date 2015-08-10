@@ -21,7 +21,8 @@
                 'username',
                 'config',
                 'editor',
-                'root'
+                'root',
+                'prefix'
             ],
             boolean: [
                 'auth',
@@ -42,6 +43,7 @@
                 editor      : config('editor') || 'edward',
                 username    : config('username'),
                 root        : config('root') || '/',
+                prefix      : config('prefix') || '',
                 progress    : config('progress') || config('progressOfCopying'),
             },
             alias: {
@@ -83,7 +85,8 @@
         
         options = {
             root: args.root,
-            editor: args.editor
+            editor: args.editor,
+            prefix: args.prefix
         };
         
         if (args.password)

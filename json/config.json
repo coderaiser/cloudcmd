@@ -17,5 +17,6 @@
     "port": 8000,
     "ip": null,
     "root": "/",
+    "prefix": "",
     "progress": true
 }

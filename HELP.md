@@ -67,6 +67,7 @@ Cloud Commander supports command line parameters:
 | `-c, --config`                | configuration file path
 | `--editor`                    | set editor: "dword" or "edward"
 | `--root`                      | set root directory
+| `--prefix`                    | set url prefix
 | `--port`                      | set port number
 | `--no-auth`                   | disable authorization
 | `--no-server`                 | do not start server
@@ -215,6 +216,7 @@ Here is description of options:
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
     "root"              : "/"       /* root directory                           */
+    "prefix"            : "",       /* url prefix                               */
     "progress"          : true      /* show progress of file operations         */
 }
 ```
