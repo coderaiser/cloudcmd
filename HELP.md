@@ -276,9 +276,10 @@ server = http.createServer(app);
 socket = io.listen(server);
 
 app.use(cloudcmd({
-    prefix: '/cloudcmd',/* base URL or function which returns base URL (optional)   */
     socket: socket,     /* used by Config, Edit (optional) and Console (required)   */
-    config: {}          /* config data (optional)                                   */
+    config: {           /* config data (optional)                                   */
+        prefix: '/cloudcmd', /* base URL or function which returns base URL (optional)   */
+    }
 }));
 
 server.listen(PORT);
