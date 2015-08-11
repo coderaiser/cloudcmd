@@ -215,7 +215,7 @@ Here is description of options:
     "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
-    "root"              : "/"       /* root directory                           */
+    "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
     "progress"          : true      /* show progress of file operations         */
 }
