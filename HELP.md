@@ -69,12 +69,12 @@ Cloud Commander supports command line parameters:
 | `--root`                      | set root directory
 | `--prefix`                    | set url prefix
 | `--port`                      | set port number
-| `--no-auth`                   | disable authorization
-| `--no-server`                 | do not start server
-| `--no-online`                 | load scripts from local server
 | `--minify`                    | enable minification
-| `--no-minify`                 | disable minification
 | `--progress`                  | show progress of file operations
+| `--no-server`                 | do not start server
+| `--no-auth`                   | disable authorization
+| `--no-online`                 | load scripts from local server
+| `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
