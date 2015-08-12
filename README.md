@@ -1,4 +1,4 @@
-Cloud Commander v4.3.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Veyor Status][VeyorStatusIMGURL]][VeyorStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
+Cloud Commander v4.3.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
 ===============
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 
@@ -9,8 +9,6 @@ Cloud Commander v4.3.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
-[VeyorStatusURL]:           https://ci.appveyor.com/project/coderaiser/cloudcmd "Build Status"
-[VeyorStatusIMGURL]:        https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true
 [ShippableURL]:             https://app.shippable.com/projects/550adb2e5ab6cc1352a50b28/builds/latest "Shippable Build"
 [ShippableIMGURL]:          https://api.shippable.com/projects/550adb2e5ab6cc1352a50b28/badge?branchName=master
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
