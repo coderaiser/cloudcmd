@@ -58,7 +58,7 @@
     "mollify": "~1.0.0",
     "os-homedir": "~1.0.0",
     "package-json": "~1.2.0",
-    "pipe-io": "~1.1.1",
+    "pipe-io": "~1.2.0",
     "ponse": "~1.4.0",
     "readjson": "~1.1.0",
     "remedy": "~1.2.0",
