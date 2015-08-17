@@ -174,20 +174,27 @@
             chalk   = require('chalk'),
             rendy   = require('rendy');
         
-        load.field('cloudcmd', 'version', function(error, version) {
-            var latest, current,
-                is = version !== Info.version;
+        load(Info.name, 'latest', function(error, data) {
+            var is,
+                version,
+                latest,
+                current;
             
-            if (!error && is) {
-                latest  = rendy('update available: {{ latest }}', {
-                    latest: chalk.green.bold('v' + version),
-                });
+            if (!error) {
+                version = data.version;
+                is      = version !== Info.version;
                 
-                current = chalk.dim(rendy('(current: v{{ current }})', {
-                     current: Info.version
-                }));
-                
-                console.log('%s %s', latest, current);
+                if (is) {
+                    latest  = rendy('update available: {{ latest }}', {
+                        latest: chalk.green.bold('v' + version),
+                    });
+                    
+                    current = chalk.dim(rendy('(current: v{{ current }})', {
+                         current: Info.version
+                    }));
+                    
+                    console.log('%s %s', latest, current);
+                }
             }
         });
     }
