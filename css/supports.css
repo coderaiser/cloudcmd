@@ -1,0 +1,9 @@
+@supports (overflow: overlay) {
+    .files {
+        overflow-y: overlay;
+    }
+    
+    .fm-header {
+        overflow-y: hidden;
+    }
+}
