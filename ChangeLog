@@ -1,3 +1,11 @@
+2015.08.19, v4.3.4
+
+feature:
+- feature(json) add supports
+- feature(supports) add
+- feature(style) .current-file: improve feel in firefox
+
+
 2015.08.17, v4.3.3
 
 fix:
