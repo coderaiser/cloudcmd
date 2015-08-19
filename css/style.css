@@ -145,8 +145,7 @@ body, pre, code {
 }
 
 .current-file {
-    box-shadow: 0 0 0 1px rgba(49, 123, 249, 0.4) inset;
-    transition: ease 0.05s;
+    box-shadow: 0 0 0 0.8px rgba(49, 123, 249, 0.4) inset;
 }
 
 .cut-file {
