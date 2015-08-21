@@ -1,3 +1,9 @@
+2015.08.21, v4.3.5
+
+fix:
+- fix(dom) getCurrentData: when could not get hash call callback with error
+
+
 2015.08.19, v4.3.4
 
 feature:
