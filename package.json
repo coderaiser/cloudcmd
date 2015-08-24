@@ -54,7 +54,7 @@
     "markdown-it": "~4.4.0",
     "mellow": "~2.0.0",
     "minify": "~1.4.0",
-    "minimist": "~1.1.0",
+    "minimist": "~1.2.0",
     "mollify": "~1.0.0",
     "os-homedir": "~1.0.0",
     "package-json": "~1.2.0",
