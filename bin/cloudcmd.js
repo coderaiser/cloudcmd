@@ -78,6 +78,7 @@
         config('minify', args.minify);
         config('username', args.username);
         config('progress', args.progress);
+        config('prefix', args.prefix);
         
         deprecate('progress-of-copying', 'progress');
         
