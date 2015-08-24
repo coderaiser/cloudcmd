@@ -70,7 +70,7 @@
     "tryrequire": "~1.1.5"
   },
   "devDependencies": {
-    "bower": "~1.4.1",
+    "bower": "^1.5.1",
     "bupdate": "~1.0.2",
     "gulp": "^3.9.0",
     "gulp-jscs": "^1.6.0",
