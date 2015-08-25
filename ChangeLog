@@ -1,20 +1,19 @@
 2015.08.25, v4.4.0
 
 fix:
-- fix(cloudcmd) prefix -> getPrefix(prefix)
-- fix(cloudcmd) listen: webconsole
-- feature(cloudcmd) improve prefix support
-- fix(cloudcmd) prefix
-- fix(cloudcmd) do not save prefix with flag --save
-- fix(cloudcmd) value -> typeof value
+- (cloudcmd) prefix -> getPrefix(prefix)
+- (cloudcmd) listen: webconsole
+- (cloudcmd) prefix
+- (cloudcmd) do not save prefix with flag --save
+- (cloudcmd) value -> typeof value
 
 feature:
-- feature(cloudcmd) improve prefix support
-- feature(package) edward v2.0.0
-- feature(package) dword v2.0.0
-- feature(package) restafary v1.5.0
-- feature(package) bower v1.5.1
-- feature(package) minimist v1.2.0
+- (cloudcmd) improve prefix support
+- (package) edward v2.0.0
+- (package) dword v2.0.0
+- (package) restafary v1.5.0
+- (package) bower v1.5.1
+- (package) minimist v1.2.0
 
 
 2015.08.21, v4.3.5
