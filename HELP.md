@@ -232,13 +232,14 @@ Right mouse click button shows context menu with items:
 - Delete
 - Pack
 - Extract
-- Upload to (Dropbox, Github, GDrive, FilePicker)
+- Upload To Cloud
 - Download
 - Cut
 - Copy
 - Paste
-- New (File, Directory, from FilePicker)
+- New (File, Directory)
 - Upload
+- Upload From Cloud
 - (Un)Select All
 - Log Out (available when the `authorization` is enabled)
 
