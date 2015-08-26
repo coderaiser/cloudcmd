@@ -63,12 +63,12 @@
     content     : '\e80d  ';
 }
 
-.icon-upload-to::before {
+.icon-upload-to-cloud::before {
     font-family : 'Fontello';
     content     : '\e80e  ';
 }
 
-.icon-from-cloud::before {
+.icon-upload-from-cloud::before {
     font-family : 'Fontello';
     content     : '\e80f  ';
 }
