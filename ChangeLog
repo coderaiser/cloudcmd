@@ -1,3 +1,18 @@
+2015.08.26, v4.5.0
+
+fix:
+- (upload) show: scrollbar
+- (github) script src
+- docs(changelog) () -> (), feature() -> ()
+
+feature:
+- (menu) new - uploadFromCloud -> uploadFromCloud
+- (client) execFromModule: exec(fn) -> fn.apply
+- (menu) rework of upload to/from cloud
+- (menu) getUploadTo: remove not working items
+- docs(changelog) fix() -> (), () -> ()
+
+
 2015.08.25, v4.4.0
 
 fix:
