@@ -8,7 +8,8 @@
     "contact",
     "upload",
     "operation",
-    "konsole", [{
+    "konsole", 
+    "cloud", [{
         "name": "remote",
         "data": [{
             "name": "jquery",
