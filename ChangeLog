@@ -1,3 +1,10 @@
+2015.08.28, v4.5.1
+
+feature:
+- (cloud) _filepicker -> cloud
+- (storage) rm vk, skydrive, github, dropbox
+
+
 2015.08.26, v4.5.0
 
 fix:
