@@ -1,3 +1,10 @@
+2015.09.03, v4.5.2
+
+fix:
+- (style) .current-file box-shadow: 0.8 -> 1.5
+- (cloudcmd) config save
+
+
 2015.08.28, v4.5.1
 
 feature:
