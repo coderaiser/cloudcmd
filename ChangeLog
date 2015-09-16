@@ -1,3 +1,12 @@
+2015.09.16, v4.5.3
+
+feature:
+- (package) gulp-jscs v2.0.0
+- (travis) node_js: add 4
+- (index) New directory -> New Directory
+- Merge pull request #50 from tarzak/patch-3
+
+
 2015.09.03, v4.5.2
 
 fix:
