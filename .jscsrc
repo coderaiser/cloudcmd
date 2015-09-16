@@ -1,11 +1,14 @@
 {
     "preset": "crockford",
-    "requireSpaceAfterKeywords": null,
-    "requireCapitalizedConstructors": null,
+    "requireSpaceAfterKeywords": false,
+    "requireCapitalizedConstructors": false,
     "disallowTrailingWhitespace": "ignoreEmptyLines",
-    "disallowTrailingComma": null,
-    "validateIndentation": null,
-    "requireCurlyBraces": null,
+    "disallowTrailingComma": false,
+    "validateIndentation": false,
+    "requireCurlyBraces": false,
+    "requireSpacesInAnonymousFunctionExpression": {
+        "beforeOpeningCurlyBrace": true
+    },
     "excludeFiles": [
         "node_modules/**",
         "modules/**",
