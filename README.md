@@ -16,7 +16,7 @@ Cloud Commander v4.5.3 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
 [DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/coderaiser/cloudcmd.svg?style=flat
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
-[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd/dev.svg?style=flat
+[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat
 
 [PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
 [PackageQualityIMGURL]:     http://packagequality.com/shield/cloudcmd.svg
