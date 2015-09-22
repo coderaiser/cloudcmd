@@ -1,3 +1,16 @@
+2015.09.22, v4.5.4
+
+fix:
+- (operation) deleteShift -> deleteSilent
+
+feature:
+- (package) socket.io v1.3.7
+- (package) edward v2.2.0
+- (package) dword v2.2.1
+- (package) dword v2.1.0
+- (package) edward v2.1.0
+
+
 2015.09.16, v4.5.3
 
 feature:
