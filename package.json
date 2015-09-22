@@ -42,6 +42,7 @@
     "edward": "~2.2.0",
     "execon": "~1.2.0",
     "express": "~4.13.0",
+    "express-domain-middleware": "^0.1.0",
     "faust": "~1.0.0",
     "files-io": "~1.2.0",
     "flop": "~1.3.0",
