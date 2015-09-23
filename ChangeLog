@@ -1,3 +1,11 @@
+2015.09.23, v4.5.5
+
+fix:
+- (config) alert -> Dialog.alert
+- (directory) alert -> Dialog.alert
+- (operation) setListeners: show alert on last file when error
+
+
 2015.09.22, v4.5.4
 
 fix:
