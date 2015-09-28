@@ -1,3 +1,14 @@
+2015.09.28, v4.6.0
+
+feature:
+- (cloudcmd) add --html-dialogs
+- (package) edward v2.3.0
+- (package) dword v2.3.0
+- (package) bupdate v1.0.4
+- (package) bower v1.5.3
+- (package) gulp-jscs v3.0.0
+
+
 2015.09.27, v4.5.7
 
 fix:
