@@ -1,0 +1,47 @@
+{
+  "name": "smalltalk",
+  "version": "1.5.0",
+  "description": "Promise-based Alert, Confirm and Prompt replacement",
+  "homepage": "http://github.com/coderaiser/smalltalk",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/smalltalk.git"
+  },
+  "main": "dist/smalltalk.min.js",
+  "scripts": {
+    "watch": "watch 'npm run 6to5' dist",
+    "6to5": "babel -d lib src",
+    "build-css": "minify css/smalltalk.css > dist/smalltalk.min.css",
+    "build-js": "npm run 6to5 && minify lib/smalltalk.js > dist/smalltalk.min.js",
+    "build-js-native": "minify lib/smalltalk.native.js > dist/smalltalk.native.min.js",
+    "build-poly": "cat node_modules/promise-polyfill/Promise.min.js dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
+    "build-poly-native": "cat node_modules/promise-polyfill/Promise.min.js dist/smalltalk.native.min.js > dist/smalltalk.native.poly.min.js",
+    "build-js-full": "npm run build-js && npm run build-poly",
+    "build-native-full": "npm run build-js-native && npm run build-js-native",
+    "build": "npm run build-css && npm run build-js-full && npm run build-native-full",
+    "bower": "bower",
+    "babel": "babel",
+    "minify": "minify",
+    "wisdom": "npm run build",
+    "test": "jshint src && jscs --esnext src"
+  },
+  "keywords": [
+    "modal",
+    "alert",
+    "confirm",
+    "prompt"
+  ],
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderaiser/smalltalk/issues"
+  },
+  "devDependencies": {
+    "babel": "~5.8.23",
+    "jscs": "~2.1.1",
+    "jshint": "~2.8.0",
+    "minify": "~1.4.20",
+    "promise-polyfill": "^2.1.0",
+    "watch": "~0.16.0"
+  }
+}

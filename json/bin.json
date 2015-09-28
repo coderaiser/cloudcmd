@@ -13,9 +13,11 @@
     "--port                     ": "set port number",
     "--minify                   ": "enable minification",
     "--progress                 ": "show progress of file operations",
+    "--html-dialogs             ": "use html dialogs",
     "--no-server                ": "do not start server",
     "--no-auth                  ": "disable authorization",
     "--no-online                ": "load scripts from local server",
     "--no-minify                ": "disable minification",
-    "--no-progress              ": "do not show progress of file operations"
+    "--no-progress              ": "do not show progress of file operations",
+    "--no-html-dialogs          ": "do not use html dialogs"
 }

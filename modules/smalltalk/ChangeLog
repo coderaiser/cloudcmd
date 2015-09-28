@@ -1,0 +1,67 @@
+2015.09.28, v1.5.0
+
+feature:
+- (smalltalk) add native
+
+
+2015.09.26, v1.4.1
+
+feature:
+- (bower) rm promise-polyfill
+
+
+2015.09.26, v1.4.0
+
+feature:
+- (smalltalk) Cancel, OK -> OK, Cancel
+
+
+2015.09.26, v1.3.4
+
+fix:
+- (smalltalk) keyDown enter: prevent pass next
+
+feature:
+- (package) add jscs
+- (package) add jshint support
+
+
+2015.09.24, v1.3.3
+
+feature:
+- (smalltalk) header: add font-weight
+
+
+2015.09.24, v1.3.2
+
+feature:
+- (smalltalk) h1 -> header
+- (smalltalk) .content-area: add max-width
+
+
+2015.09.23, v1.3.1
+
+fix:
+- (smalltalk) changeButtonFocus: left, right, up, down do not work with confirm
+
+
+2015.09.23, v1.3.0
+
+feature:
+- (smalltalk) add handling of keys: left, right, up, down
+
+
+2015.09.23, v1.2.0
+
+feature:
+- (smalltalk) keyDown: add stopPropogation
+- (smalltalk) .smalltalk: rm background-color
+
+
+2015.09.22, v1.1.0
+
+feature:
+- (package) scripts build: add build-poly
+- (smalltalk) add options {cancel}
+- (screen) add
+

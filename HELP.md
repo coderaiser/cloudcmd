@@ -71,11 +71,13 @@ Cloud Commander supports command line parameters:
 | `--port`                      | set port number
 | `--minify`                    | enable minification
 | `--progress`                  | show progress of file operations
+| `--html-dialogs`              | show html dialogs
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
 | `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
+| `--no-html-dialogs`           | do not use html dialogs
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -218,6 +220,7 @@ Here is description of options:
     "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
     "progress"          : true      /* show progress of file operations         */
+    "htmlDialogs"       : false     /* show html dialogs                        */
 }
 ```
 

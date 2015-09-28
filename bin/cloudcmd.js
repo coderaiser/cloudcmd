@@ -32,7 +32,8 @@
                 'online',
                 'minify',
                 'progress',
-                'progress-of-copying'
+                'progress-of-copying',
+                'html-dialogs'
             ],
             default: {
                 server      : true,
@@ -45,6 +46,8 @@
                 root        : config('root') || '/',
                 prefix      : config('prefix') || '',
                 progress    : config('progress') || config('progressOfCopying'),
+                
+                'html-dialogs' : config('htmlDialogs')
             },
             alias: {
                 v: 'version',
@@ -80,6 +83,7 @@
         config('progress', args.progress);
         config('prefix', args.prefix);
         config('root', args.root);
+        config('htmlDialogs', args['html-dialogs']);
         
         deprecate('progress-of-copying', 'progress');
         
