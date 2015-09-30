@@ -21,7 +21,7 @@
         };
         
         this.prompt         = (title, message, value, options) => {
-            let o       = options, 
+            let o       = options,
                 promise = new Promise(function(resolve, reject) {
                     let noCancel = o && !o.cancel,
                         result  = prompt(message, value);

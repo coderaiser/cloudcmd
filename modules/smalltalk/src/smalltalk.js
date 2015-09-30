@@ -173,7 +173,7 @@
                 isButton    = /ok|cancel/.test(activeName),
                 count       = names.length - 1;
             
-            if (count && isButton) {
+            if (activeName !== 'input' && count && isButton) {
                 if (activeName === 'cancel')
                     name = 'ok';
                 else

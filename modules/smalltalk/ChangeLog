@@ -1,3 +1,9 @@
+2015.09.30, v1.5.2
+
+fix:
+- (smalltalk) changeButtons: when input active
+
+
 2015.09.29, v1.5.1
 
 feature:
