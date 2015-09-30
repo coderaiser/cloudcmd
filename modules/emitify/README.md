@@ -1,4 +1,4 @@
-# Emitify
+# Emitify [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
 
 Dead simple event emitter.
 
@@ -51,8 +51,6 @@ var Emitify = require('emitify'),
 emitter.on('data', log);
 
 emitter.emit('data', 'hello');
-// result
-'hello'
 
 emitter.off('data', log);
 
@@ -61,3 +59,13 @@ emitter.off('data', log);
 ## License
 
 MIT
+
+[NPMIMGURL]:                https://img.shields.io/npm/v/emitify.svg?style=flat
+[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/emitify/master.svg?style=flat
+[DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/coderaiser/emitify.svg?style=flat
+[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
+[NPMURL]:                   https://npmjs.org/package/emitify "npm"
+[BuildStatusURL]:           https://travis-ci.org/coderaiser/emitify  "Build Status"
+[DependencyStatusURL]:      https://gemnasium.com/coderaiser/emitify "Dependency Status"
+[LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+

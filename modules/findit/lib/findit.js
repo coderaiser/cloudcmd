@@ -46,7 +46,7 @@
             
             entry.createReader()
                 .readEntries(function(entries) {
-                    [].filter.call(entries, function(entry) {
+                    [].forEach.call(entries, function(entry) {
                         self._find(emitter, entry);
                     });
                     

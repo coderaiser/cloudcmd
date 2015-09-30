@@ -17,10 +17,10 @@
         var isTwo = arguments.length === 2;
         
         if (typeof event !== 'string')
-            throw(Error('event should be string!'));
+            throw Error('event should be string!');
         
         if (isTwo && typeof callback !== 'function')
-            throw(Error('callback should be function!'));
+            throw Error('callback should be function!');
     };
     
     Emitify.prototype.on   = function(event, callback) {
@@ -48,6 +48,8 @@
             callback();
             self.off(event, fn);
         });
+        
+        return this;
     };
     
     Emitify.prototype.off   = function(event, callback) {
@@ -60,6 +62,8 @@
             events.splice(index, 1);
             index = events.indexOf(callback);
         }
+        
+        return this;
     };
     
     Emitify.prototype.removeListener    =
@@ -77,6 +81,8 @@
             });
         else if (event === 'error')
             throw args[0];
+        
+        return this;
     };
     
 })(this);

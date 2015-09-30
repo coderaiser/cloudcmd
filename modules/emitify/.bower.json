@@ -1,6 +1,6 @@
 {
   "name": "emitify",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "homepage": "https://github.com/coderaiser/emitify",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -23,13 +23,14 @@
     "test",
     "tests"
   ],
-  "_release": "1.2.0",
+  "_release": "1.3.0",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.0",
-    "commit": "5dd1685840ba4905c7fcbd7b00202bed4baeb1ad"
+    "tag": "v1.3.0",
+    "commit": "828df111561259b17cb3ec65aff7ab2228682b5b"
   },
   "_source": "git://github.com/coderaiser/emitify.git",
-  "_target": "~1.2.0",
-  "_originalSource": "emitify"
+  "_target": "~1.3.0",
+  "_originalSource": "emitify",
+  "_direct": true
 }
