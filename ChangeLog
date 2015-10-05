@@ -1,3 +1,21 @@
+2015.10.05, v4.7.0
+
+fix:
+- (edit) isChanged: call fn only when ok pressed
+- (edit) isChanged: confirm -> Dialog.confirm
+
+feature:
+- (package) dword v2.4.0
+- (package) edward v2.4.0
+- (config) add authCheck
+- (bower) emitify v1.3.0
+- (bower) smalltalk v1.5.2
+- (cloudcmd) console: add authCheck
+- (package) console-io v2.3.0
+- (markdown) lib/server/rest -> lib/server
+- (bower) smalltalk v1.5.1
+
+
 2015.09.28, v4.6.0
 
 feature:
