@@ -1,3 +1,9 @@
+2015.10.14, v1.5.3
+
+fix:
+- (smalltalk) prompt: focus on ok -> focus on input
+
+
 2015.09.30, v1.5.2
 
 fix:
