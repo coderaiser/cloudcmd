@@ -1,3 +1,14 @@
+2015.10.14, v4.7.1
+
+fix:
+- (rest) onGET: json.parse
+
+feature:
+- (bower) smalltalk v1.5.3
+- (package) package-json v2.0.0
+- (package) markdown-it v5.0.0
+
+
 2015.10.05, v4.7.0
 
 fix:
