@@ -1,5 +1,6 @@
 {
   "name": "execon",
+  "version": "1.2.8",
   "homepage": "https://github.com/coderaiser/execon",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -20,6 +21,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "version": "1.2.5"
+  ]
 }

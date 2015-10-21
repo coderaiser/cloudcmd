@@ -1,9 +1,12 @@
 {
   "name": "execon",
-  "version": "1.2.5",
+  "version": "1.2.8",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Patterns of function calls",
   "homepage": "http://github.com/coderaiser/execon",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/coderaiser/execon.git"
@@ -13,5 +16,8 @@
   "engines": {
     "node": ">=0.8"
   },
-  "main": "lib/exec.js"
+  "main": "lib/exec.js",
+  "devDependencies": {
+    "tape": "~4.2.1"
+  }
 }

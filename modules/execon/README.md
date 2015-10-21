@@ -1,4 +1,5 @@
-# Execon [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL]
+# Execon [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![BuildStatusIMGURL]][BuildStatusURL]
+
 Patterns of function calls.
 
 ## Install
@@ -149,4 +150,5 @@ MIT
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/execon  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/execon "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
-
+[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/execon/master.svg?style=flat
+[BuildStatusURL]:           https://travis-ci.org/coderaiser/execon  "Build Status"

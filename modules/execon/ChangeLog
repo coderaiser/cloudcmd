@@ -1,3 +1,25 @@
+2015.10.21, v1.2.8
+
+fix:
+- (exec) with do not return value
+
+feature:
+- (travis) add
+- (gitignore) add
+
+
+2015.10.01, v1.2.7
+
+fix:
+- (exec) with: concat arguments
+
+
+2015.10.01, v1.2.6
+
+feature:
+- (exec) with: bind.apply -> function apply
+
+
 2015.07.21, v1.2.5
 
 fix:
