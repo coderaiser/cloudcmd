@@ -1,3 +1,14 @@
+2015.10.24, v4.7.3
+
+fix:
+- (buffer) Dialog.alert -> showMessage
+- (edit) isChanged: create -> beforeClose
+
+feature:
+- (cloudcmd) add execon from bower
+- (package) package-json v2.1.0
+
+
 2015.10.14, v4.7.2
 
 fix:
