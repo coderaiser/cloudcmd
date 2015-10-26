@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "1.5.3",
+  "version": "1.5.5",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -17,7 +17,7 @@
     "build-poly": "cat node_modules/promise-polyfill/Promise.min.js dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
     "build-poly-native": "cat node_modules/promise-polyfill/Promise.min.js dist/smalltalk.native.min.js > dist/smalltalk.native.poly.min.js",
     "build-js-full": "npm run build-js && npm run build-poly",
-    "build-native-full": "npm run build-js-native && npm run build-js-native",
+    "build-native-full": "npm run build-js-native && npm run build-poly-native",
     "build": "npm run build-css && npm run build-js-full && npm run build-native-full",
     "bower": "bower",
     "babel": "babel",

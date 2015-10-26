@@ -1,3 +1,18 @@
+2015.10.26, v1.5.5
+
+fix:
+- (package) build-native-full
+
+feature:
+- (gitignore) npm-debug.log -> npm-debug.log*
+
+
+2015.10.26, v1.5.4
+
+feature:
+- (smalltalk) addListenerAll: fn(event) -> fn
+
+
 2015.10.14, v1.5.3
 
 fix:

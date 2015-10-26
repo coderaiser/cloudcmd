@@ -235,9 +235,7 @@
         
         function addListeterAll(event, parent, elements, fn) {
             find(parent, elements).forEach(el =>
-                el.addEventListener(event, event =>
-                    fn(event)
-                )
+                el.addEventListener(event, fn)
             );
         }
         

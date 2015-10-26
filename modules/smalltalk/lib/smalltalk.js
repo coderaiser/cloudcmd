@@ -198,9 +198,7 @@
 
         function addListeterAll(event, parent, elements, fn) {
             find(parent, elements).forEach(function (el) {
-                return el.addEventListener(event, function (event) {
-                    return fn(event);
-                });
+                return el.addEventListener(event, fn);
             });
         }
 
