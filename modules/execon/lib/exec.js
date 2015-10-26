@@ -100,10 +100,10 @@
                 type        = getType(funcs);
             
             if (!funcs)
-                throw Error('funcs' + ERROR);
+                throw Error('funcs ' + ERROR);
             
             if (!callback)
-                throw Error('callback' + ERROR);
+                throw Error('callback ' + ERROR);
             
             switch(type) {
             case 'array':
