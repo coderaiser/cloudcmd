@@ -1,4 +1,4 @@
-Cloud Commander v4.7.3 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
+Cloud Commander v4.7.4 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
 ===============
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 

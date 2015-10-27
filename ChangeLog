@@ -1,3 +1,12 @@
+2015.10.27, v4.7.4
+
+feature:
+- (bower) execon v1.2.9
+- (bower) smalltalk v1.5.5
+- (package) minify v2.0.0
+- (package) package-json v2.2.0
+
+
 2015.10.24, v4.7.3
 
 fix:
