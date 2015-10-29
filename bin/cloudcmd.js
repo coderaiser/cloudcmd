@@ -65,131 +65,131 @@
         }
     });
 
-if (args.version) {
-    version();
-} else if (args.help) {
-    help();
-} else {
-    if (args.repl)
-        repl();
-    
-    checkUpdate();
-    
-    port(args.port);
-    
-    config('auth', args.auth);
-    config('online', args.online);
-    config('minify', args.minify);
-    config('username', args.username);
-    config('progress', args.progress);
-    config('prefix', args.prefix);
-    config('root', args.root);
-    config('htmlDialogs', args['html-dialogs']);
-    
-    deprecate('progress-of-copying', 'progress');
-    
-    readConfig(args.config);
-    
-    options = {
-        root: args.root,
-        editor: args.editor,
-        prefix: args.prefix
-    };
-    
-    if (args.password)
-        config('password', getPassword(args.password));
-    
-    if (!args.save)
-        start(options);
-    else
-        config.save(function() {
-            start(options);
-        });
-}
-
-function getPassword(password) {
-    return createPass(config('algo'), password);
-}
-
-function deprecate(was, became) {
-    var value = args[was];
-    
-    if (value) {
-        console.log('cloudcmd --' + was + ': deprecated, use --' + became);
-        config(became, value);
-    }
-}
-
-function version() {
-    console.log('v' + Info.version);
-}
-
-function start(config) {
-    var SERVER = '../lib/server';
-    
-    if (args.server)
-        require(SERVER)(config);
-}
-
-function port(arg) {
-    var number = parseInt(arg, 10);
-    
-    if (!isNaN(number))
-        config('port', number);
-    else
-        exit('cloudcmd --port: should be a number');
-}
-
-function readConfig(name) {
-    var fs, data, error, tryCatch;
-    
-    if (name) {
-        fs          = require('fs');
-        tryCatch    = require('try-catch');
-        error       = tryCatch(function() {
-            var json    = fs.readFileSync(name);
-            data        = JSON.parse(json);
-        });
+    if (args.version) {
+        version();
+    } else if (args.help) {
+        help();
+    } else {
+        if (args.repl)
+            repl();
         
-        if (error)
-            exit(error.message);
+        checkUpdate();
+        
+        port(args.port);
+        
+        config('auth', args.auth);
+        config('online', args.online);
+        config('minify', args.minify);
+        config('username', args.username);
+        config('progress', args.progress);
+        config('prefix', args.prefix);
+        config('root', args.root);
+        config('htmlDialogs', args['html-dialogs']);
+        
+        deprecate('progress-of-copying', 'progress');
+        
+        readConfig(args.config);
+        
+        options = {
+            root: args.root,
+            editor: args.editor,
+            prefix: args.prefix
+        };
+        
+        if (args.password)
+            config('password', getPassword(args.password));
+        
+        if (!args.save)
+            start(options);
         else
-            Object.keys(data).forEach(function(item) {
-                config(item, data[item]);
+            config.save(function() {
+                start(options);
             });
     }
-}
-
-function help() {
-    var bin         = require('../json/bin'),
-        usage       = 'Usage: cloudcmd [options]',
-        url         = Info.homepage;
     
-    console.log(usage);
-    console.log('Options:');
+    function getPassword(password) {
+        return createPass(config('algo'), password);
+    }
     
-    Object.keys(bin).forEach(function(name) {
-        console.log('  %s %s', name, bin[name]);
-    });
+    function deprecate(was, became) {
+        var value = args[was];
+        
+        if (value) {
+            console.log('cloudcmd --' + was + ': deprecated, use --' + became);
+            config(became, value);
+        }
+    }
     
-    console.log('\nGeneral help using Cloud Commander: <%s>', url);
-}
-
-function repl() {
-    console.log('REPL mode enabled (telnet localhost 1337)');
-    require(DIR_LIB + '/server/repl');
-}
-
-function checkUpdate() {
-    var load    = require('package-json'),
-        chalk   = require('chalk'),
-        rendy   = require('rendy');
+    function version() {
+        console.log('v' + Info.version);
+    }
     
-    load(Info.name, 'latest').then(function(data) {
-        var latest,
-            current,
-            version = data.version;
+    function start(config) {
+        var SERVER = '../lib/server';
+        
+        if (args.server)
+            require(SERVER)(config);
+    }
+    
+    function port(arg) {
+        var number = parseInt(arg, 10);
+        
+        if (!isNaN(number))
+            config('port', number);
+        else
+            exit('cloudcmd --port: should be a number');
+    }
+    
+    function readConfig(name) {
+        var fs, data, error, tryCatch;
+        
+        if (name) {
+            fs          = require('fs');
+            tryCatch    = require('try-catch');
+            error       = tryCatch(function() {
+                var json    = fs.readFileSync(name);
+                data        = JSON.parse(json);
+            });
             
+            if (error)
+                exit(error.message);
+            else
+                Object.keys(data).forEach(function(item) {
+                    config(item, data[item]);
+                });
+        }
+    }
+    
+    function help() {
+        var bin         = require('../json/bin'),
+            usage       = 'Usage: cloudcmd [options]',
+            url         = Info.homepage;
+        
+        console.log(usage);
+        console.log('Options:');
+        
+        Object.keys(bin).forEach(function(name) {
+            console.log('  %s %s', name, bin[name]);
+        });
+        
+        console.log('\nGeneral help using Cloud Commander: <%s>', url);
+    }
+    
+    function repl() {
+        console.log('REPL mode enabled (telnet localhost 1337)');
+        require(DIR_LIB + '/server/repl');
+    }
+    
+    function checkUpdate() {
+        var load    = require('package-json'),
+            chalk   = require('chalk'),
+            rendy   = require('rendy');
+        
+        load(Info.name, 'latest').then(function(data) {
+            var latest,
+                current,
+                version = data.version;
+                
             if (version !== Info.version) {
                 latest  = rendy('update available: {{ latest }}', {
                     latest: chalk.green.bold('v' + version),
