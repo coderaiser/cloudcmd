@@ -7,9 +7,10 @@
         DIR         = __dirname + '/../',
         DIR_LIB     = DIR + 'lib/',
         DIR_SERVER  = DIR_LIB + 'server/',
-
+    
     exit        = require(DIR_SERVER + 'exit'),
     config      = require(DIR_SERVER + 'config'),
+    createPass  = require(DIR_SERVER + 'password'),
     
     options,
     argv        = process.argv,
@@ -96,7 +97,7 @@ if (args.version) {
     };
     
     if (args.password)
-        options.password = args.password;
+        config('password', getPassword(args.password));
     
     if (!args.save)
         start(options);
@@ -104,6 +105,10 @@ if (args.version) {
         config.save(function() {
             start(options);
         });
+}
+
+function getPassword(password) {
+    return createPass(config('algo'), password);
 }
 
 function deprecate(was, became) {
