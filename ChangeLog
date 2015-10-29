@@ -1,3 +1,10 @@
+2015.10.29, v4.7.5
+
+feature:
+- (cloudcmd) add getPassword
+- (bower) smalltalk v1.5.6
+
+
 2015.10.27, v4.7.4
 
 feature:
