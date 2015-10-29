@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -10,7 +10,7 @@
   "main": "dist/smalltalk.min.js",
   "scripts": {
     "watch": "watch 'npm run 6to5' dist",
-    "6to5": "babel -d lib src",
+    "6to5": "babel -d lib -b strict src",
     "build-css": "minify css/smalltalk.css > dist/smalltalk.min.css",
     "build-js": "npm run 6to5 && minify lib/smalltalk.js > dist/smalltalk.min.js",
     "build-js-native": "minify lib/smalltalk.native.js > dist/smalltalk.native.min.js",
@@ -37,11 +37,11 @@
     "url": "https://github.com/coderaiser/smalltalk/issues"
   },
   "devDependencies": {
-    "babel": "~5.8.23",
-    "jscs": "~2.1.1",
-    "jshint": "~2.8.0",
-    "minify": "~1.4.20",
+    "babel": "^5.8.23",
+    "jscs": "^2.1.1",
+    "jshint": "^2.8.0",
+    "minify": "^2.0.0",
     "promise-polyfill": "^2.1.0",
-    "watch": "~0.16.0"
+    "watch": "^0.16.0"
   }
 }
