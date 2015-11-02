@@ -57,6 +57,11 @@
 }
 
 .smalltalk .page header {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 500px;
+    
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -70,12 +75,15 @@
 }
 
 .smalltalk .page .content-area {
-    overflow: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
     padding: 6px 17px 6px;
     position: relative;
     max-width: 500px;
-}    
-    
+}
+
 .smalltalk .page .action-area {
     padding: 14px 17px;
 }
