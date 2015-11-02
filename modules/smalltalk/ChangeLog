@@ -1,3 +1,9 @@
+2015.11.02, v1.6.1
+
+fix:
+- (smalltalk) .content-area: rm nowrap
+
+
 2015.11.02, v1.6.0
 
 feature:

@@ -77,7 +77,6 @@
 .smalltalk .page .content-area {
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     
     padding: 6px 17px 6px;
     position: relative;

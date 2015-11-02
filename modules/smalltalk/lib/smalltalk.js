@@ -17,7 +17,7 @@
 
         this.prompt = function (title, msg, value, options) {
             var val = value || '';
-            var valueStr = '<br><input type="text" value="' + val + '" data-name="js-input">';
+            var valueStr = '<input type="text" value="' + val + '" data-name="js-input">';
 
             return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
         };

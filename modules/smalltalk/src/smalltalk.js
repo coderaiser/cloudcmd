@@ -21,7 +21,7 @@
         
         this.prompt = (title, msg, value, options) => {
             let val         = value || '';
-            let valueStr    = `<br><input type="text" value="${ val }" data-name="js-input">`;
+            let valueStr    = `<input type="text" value="${ val }" data-name="js-input">`;
             
             return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
         };
