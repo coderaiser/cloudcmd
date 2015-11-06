@@ -45,6 +45,12 @@ npm i cloudcmd -g
 
 ![NPM_INFO][NPM_INFO_IMG]
 
+When in trouble use:
+
+```sh
+npm i cloudcmd -g --force
+```
+
 Start
 ---------------
 For starting just type in console:
