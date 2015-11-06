@@ -1,3 +1,15 @@
+2015.11.06, v4.7.6
+
+feature:
+- (package) dword v2.5.0
+- (package) edward v2.5.0
+- (package) console-io v2.4.0
+- (bower) smalltalk v1.6.1
+- (bower) smalltalk v1.6.0
+- (travis) rm iojs
+- (travis) node_js: 5
+
+
 2015.10.29, v4.7.5
 
 feature:
