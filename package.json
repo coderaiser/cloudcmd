@@ -39,7 +39,7 @@
     "console-io": "~2.4.0",
     "copymitter": "~1.8.0",
     "dword": "~2.4.0",
-    "edward": "~2.4.0",
+    "edward": "~2.5.0",
     "execon": "~1.2.0",
     "express": "~4.13.0",
     "faust": "~1.0.0",
