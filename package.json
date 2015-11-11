@@ -36,7 +36,7 @@
   "dependencies": {
     "chalk": "~1.1.0",
     "checkup": "~1.3.0",
-    "console-io": "~2.4.0",
+    "console-io": "~2.5.0",
     "copymitter": "~1.8.0",
     "dword": "~2.5.0",
     "edward": "~2.5.0",
