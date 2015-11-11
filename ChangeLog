@@ -1,3 +1,10 @@
+2015.11.11, v4.7.7
+
+fix:
+- (dom) deleteCurrent: this -> DOM
+- (operation) deleteSilent: work with outdated dom elements
+
+
 2015.11.06, v4.7.6
 
 feature:
