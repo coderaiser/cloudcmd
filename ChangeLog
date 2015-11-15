@@ -1,3 +1,9 @@
+2015.11.15, v5.0.1
+
+fix:
+- (dom) deleteSelected: this -> DOM
+
+
 2015.11.15, v5.0.0
 
 fix:
