@@ -1,3 +1,18 @@
+2015.11.15, v5.0.0
+
+fix:
+- feature(cloudcmd) rm deprecated features: --progress-of-copying, prefix -> config.prefix
+
+feature:
+- (gitignore) npm-debug.log -> npm-debug.log*
+- (package) gulp-mocha v2.2.0
+- (package) gulp-recess v1.2.0
+- (config) set htmlDialogs true by default
+- (cloudcmd) rm deprecated features: --progress-of-copying, prefix -> config.prefix
+- (package) nupdate v2.0.0
+- (package) console-io v2.5.0
+
+
 2015.11.11, v4.7.7
 
 fix:
