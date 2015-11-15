@@ -86,8 +86,6 @@
         config('root', args.root);
         config('htmlDialogs', args['html-dialogs']);
         
-        deprecate('progress-of-copying', 'progress');
-        
         readConfig(args.config);
         
         options = {
@@ -109,15 +107,6 @@
     
     function getPassword(password) {
         return createPass(config('algo'), password);
-    }
-    
-    function deprecate(was, became) {
-        var value = args[was];
-        
-        if (value) {
-            console.log('cloudcmd --' + was + ': deprecated, use --' + became);
-            config(became, value);
-        }
     }
     
     function version() {
