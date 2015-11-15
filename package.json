@@ -76,7 +76,7 @@
     "gulp-jscs": "^3.0.0",
     "gulp-jshint": "^1.11.0",
     "gulp-mocha": "~2.1.0",
-    "gulp-recess": "~1.1.1",
+    "gulp-recess": "^1.2.0",
     "minor": "~1.2.2",
     "morgan": "~1.6.0",
     "nupdate": "~2.0.0",
