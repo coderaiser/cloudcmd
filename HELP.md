@@ -226,7 +226,7 @@ Here is description of options:
     "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
     "progress"          : true      /* show progress of file operations         */
-    "htmlDialogs"       : false     /* show html dialogs                        */
+    "htmlDialogs"       : true      /* show html dialogs                        */
 }
 ```
 
