@@ -1,3 +1,12 @@
+2015.12.01, v5.0.2
+
+feature:
+- (package) edward v2.6.0
+- (package) dword v2.6.0
+- (package) gulp-jshint v2.0.0
+- (package) nupdate v2.1.0
+
+
 2015.11.15, v5.0.1
 
 fix:
