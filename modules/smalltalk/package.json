@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -8,17 +8,26 @@
     "url": "git://github.com/coderaiser/smalltalk.git"
   },
   "main": "dist/smalltalk.min.js",
+  "config": {
+    "poly": "node_modules/promise-polyfill/Promise.min.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "scripts": {
     "watch": "watch 'npm run 6to5' dist",
-    "6to5": "babel -d lib -b strict src",
-    "build-css": "minify css/smalltalk.css > dist/smalltalk.min.css",
-    "build-js": "npm run 6to5 && minify lib/smalltalk.js > dist/smalltalk.min.js",
-    "build-js-native": "minify lib/smalltalk.native.js > dist/smalltalk.native.min.js",
-    "build-poly": "cat node_modules/promise-polyfill/Promise.min.js dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
-    "build-poly-native": "cat node_modules/promise-polyfill/Promise.min.js dist/smalltalk.native.min.js > dist/smalltalk.native.poly.min.js",
-    "build-js-full": "npm run build-js && npm run build-poly",
-    "build-native-full": "npm run build-js-native && npm run build-poly-native",
-    "build": "npm run build-css && npm run build-js-full && npm run build-native-full",
+    "6to5": "babel -d lib src",
+    "minify:css": "minify css/smalltalk.css > dist/smalltalk.min.css",
+    "minify:js": "minify lib/smalltalk.js > dist/smalltalk.min.js",
+    "minify:js-native": "minify lib/smalltalk.native.js > dist/smalltalk.native.min.js",
+    "build:js": "npm-run-all 6to5 minify:js",
+    "build:js-poly": "cat $npm_package_config_poly dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
+    "build:js-poly-native": "cat $npm_package_config_poly dist/smalltalk.native.min.js > dist/smalltalk.native.poly.min.js",
+    "build:js-full": "npm-run-all build:js build:js-poly",
+    "build:js-native-full": "npm-run-all minify:js-native build:js-poly-native",
+    "build": "npm-run-all -p minify-css build:js-full build:js-native-full",
     "bower": "bower",
     "babel": "babel",
     "minify": "minify",
@@ -37,10 +46,12 @@
     "url": "https://github.com/coderaiser/smalltalk/issues"
   },
   "devDependencies": {
-    "babel": "^5.8.23",
+    "babel-cli": "^6.1.1",
+    "babel-preset-es2015": "^6.0.15",
     "jscs": "^2.1.1",
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
+    "npm-run-all": "^1.2.12",
     "promise-polyfill": "^2.1.0",
     "watch": "^0.16.0"
   }
