@@ -1,3 +1,9 @@
+2015.12.05, v1.6.3
+
+fix:
+- (package) minify-css -> minify:css
+
+
 2015.12.05, v1.6.2
 
 feature:
