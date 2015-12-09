@@ -83,7 +83,7 @@
     "nupdate": "^2.1.0",
     "place": "~1.1.2",
     "shortdate": "~1.0.1",
-    "should": "^7.0.1",
+    "should": "^8.0.0",
     "yaspeller": "~2.5.0"
   },
   "engines": {
