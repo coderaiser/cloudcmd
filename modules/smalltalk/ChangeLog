@@ -1,3 +1,9 @@
+2015.12.09, v1.6.4
+
+feature:
+- (smalltalk) bind: slice -> rest
+
+
 2015.12.05, v1.6.3
 
 fix:

@@ -245,10 +245,8 @@
             el.parentElement.removeChild(el);
         }
         
-        function bind(fn) {
-            var args = [].slice.call(arguments, 1);
-            
-            return fn.bind(null, args);
+        function bind(fn, ...args) {
+            return () => fn(...args);
         }
     }
     
