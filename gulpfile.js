@@ -20,7 +20,6 @@
             'gulp/**/*.js',
             LIB + '*.js',
             LIB_CLIENT + '/*.js',
-            LIB_CLIENT + 'storage/*.js',
             LIB_SERVER + '/**/*.js'
         ];
     
