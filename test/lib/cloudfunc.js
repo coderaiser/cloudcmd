@@ -1,6 +1,8 @@
 (function() {
     'use strict';
     
+    /* global describe, it */
+    
     var DIR                 = __dirname + '/../../',
         LIBDIR              = DIR + 'lib/',
         TMPLDIR             = DIR + 'tmpl/',
@@ -49,8 +51,14 @@
                     '</a>/X11/'                                                     +
                 '</span>'                                                           +
             '</div>';
+   
+   describe('cloudfunc', function() {
+       it('should check', function() {
+           check();
+       });
+   });
     
-    exports.check = function() {
+    function check() {
         var paths       = {},
             
             filesList   = TMPL_PATH.map(function(name) {
@@ -114,5 +122,5 @@
                 }
             }
         });
-    };
+    }
 })();

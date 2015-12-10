@@ -1,15 +1,24 @@
+#!/usr/bin/env node
+
 (function() {
     'use strict';
     
     var DIR         = '../',
+        Info        = require(DIR + 'package'),
         
-        cl          = require('./cl'),
+        minor       = require('minor'),
         place       = require('place'),
         rendy       = require('rendy'),
         shortdate   = require('shortdate'),
-        Info        = require(DIR + 'package');
         
-    module.exports = function(callback) {
+        ERROR   = Error('ERROR: version is missing. release --patch|--minor|--major');
+    
+    main(function(error) {
+        if (error)
+            console.error(error.message);
+    });
+    
+    function main(callback) {
         var history     = 'Version history\n---------------\n',
             link        = '//github.com/cloudcmd/archive/raw/master/cloudcmd',
             template    = '- *{{ date }}*, '    +
@@ -32,7 +41,7 @@
                 });
             }
         });
-    };
+    }
     
     function replaceVersion(name, version, versionNew, callback) {
         place(name, version, versionNew, function(error) {
@@ -44,4 +53,23 @@
             callback(error, msg);
         });
     }
+    
+    function cl(callback) {
+        var versionNew, error,
+            argv        = process.argv,
+            length      = argv.length - 1,
+            last        = process.argv[length],
+            regExp      = /^--(major|minor|patch)$/,
+            match       = last.match(regExp);
+        
+        if (!regExp.test(last))
+            error = ERROR;
+        else if (match[1])
+            versionNew  = minor(match[1], Info.version);
+        else
+            versionNew  = last.substr(3);
+        
+        callback(error, versionNew);
+    }
 })();
+

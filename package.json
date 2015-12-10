@@ -14,20 +14,32 @@
     "file",
     "file manager",
     "folder",
-    "orthodox"
+    "orthodox",
+    "view",
+    "copy",
+    "rename",
+    "move",
+    "delete",
+    "file operation"
   ],
   "bin": {
     "cloudcmd": "bin/cloudcmd.js"
   },
+  "config": {
+    "dirs": "bin lib test"
+  },
   "scripts": {
     "bower": "bower",
     "bupdate": "bupdate",
-    "gulp": "gulp",
     "nupdate": "nupdate",
     "start": "node bin/cloudcmd.js",
-    "test": "gulp default",
-    "wisdom": "gulp release",
-    "yaspeller": "yaspeller ."
+    "test": "npm-run-all --parallel lint:* codestyle spell mocha",
+    "lint:css": "recess css/*.css",
+    "lint:js": "jshint $npm_package_config_dirs",
+    "codestyle": "jscs --esnext $npm_package_config_dirs",
+    "mocha": "mocha test/lib",
+    "spell": "yaspeller .",
+    "wisdom": "bin/release.js"
   },
   "directories": {
     "man": "man"
@@ -72,17 +84,16 @@
   "devDependencies": {
     "bower": "^1.5.3",
     "bupdate": "^1.0.4",
-    "gulp": "^3.9.0",
-    "gulp-jscs": "^3.0.0",
-    "gulp-jshint": "^2.0.0",
-    "gulp-mocha": "^2.2.0",
-    "gulp-recess": "^1.2.0",
+    "jscs": "^2.7.0",
     "jshint": "^2.8.0",
-    "minor": "~1.2.2",
+    "minor": "^1.2.2",
+    "mocha": "^2.3.4",
     "morgan": "~1.6.0",
+    "npm-run-all": "^1.4.0",
     "nupdate": "^2.1.0",
     "place": "~1.1.2",
-    "shortdate": "~1.0.1",
+    "recess": "^1.1.9",
+    "shortdate": "^1.0.1",
     "should": "^8.0.0",
     "yaspeller": "^2.6.0"
   },

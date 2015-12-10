@@ -8,12 +8,20 @@
   "description": "orthodox web file manager with console and editor",
   "main": "bin/cloudcmd.js",
   "keywords": [
+    "console",
+    "editor",
     "file",
+    "file manager",
+    "folder",
     "orthodox",
-    "file",
-    "manager"
+    "view",
+    "copy",
+    "rename",
+    "move",
+    "delete",
+    "file operation"
   ],
-  "license": "MIT",
+ "license": "MIT",
   "private": true,
   "ignore": [
     "node_modules",
