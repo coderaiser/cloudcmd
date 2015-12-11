@@ -91,7 +91,7 @@
     "morgan": "^1.6.1",
     "npm-run-all": "^1.4.0",
     "nupdate": "^2.1.0",
-    "place": "~1.1.2",
+    "place": "^1.1.4",
     "recess": "^1.1.9",
     "shortdate": "^1.0.1",
     "should": "^8.0.0",
