@@ -29,7 +29,6 @@
     "dirs": "bin lib test"
   },
   "scripts": {
-    "bower": "bower",
     "bupdate": "bupdate",
     "nupdate": "nupdate",
     "start": "node bin/cloudcmd.js",
@@ -82,7 +81,6 @@
     "tryrequire": "~1.1.5"
   },
   "devDependencies": {
-    "bower": "^1.5.3",
     "bupdate": "^1.0.4",
     "jscs": "^2.7.0",
     "jshint": "^2.8.0",
