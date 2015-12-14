@@ -1,5 +1,5 @@
-Cloud Commander v5.0.3 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
-===============
+# Cloud Commander v5.0.3 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
+
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
@@ -36,8 +36,8 @@ Cloud Commander v5.0.3 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][N
 ```
 npm i cloudcmd -g
 ```
-Start
----------------
+## Start
+
 For starting just type in console:
 
 ```sh
