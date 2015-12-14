@@ -29,7 +29,6 @@
     "dirs": "bin lib test"
   },
   "scripts": {
-    "nupdate": "nupdate",
     "start": "node bin/cloudcmd.js",
     "test": "npm-run-all --parallel lint:* codestyle spell mocha",
     "lint:css": "recess css/*.css",
@@ -86,7 +85,6 @@
     "mocha": "^2.3.4",
     "morgan": "^1.6.1",
     "npm-run-all": "^1.4.0",
-    "nupdate": "^3.0.0",
     "place": "^1.1.4",
     "recess": "^1.1.9",
     "shortdate": "^1.0.1",
