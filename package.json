@@ -29,7 +29,6 @@
     "dirs": "bin lib test"
   },
   "scripts": {
-    "bupdate": "bupdate",
     "nupdate": "nupdate",
     "start": "node bin/cloudcmd.js",
     "test": "npm-run-all --parallel lint:* codestyle spell mocha",
@@ -81,7 +80,6 @@
     "tryrequire": "~1.1.5"
   },
   "devDependencies": {
-    "bupdate": "^1.0.4",
     "jscs": "^2.7.0",
     "jshint": "^2.8.0",
     "minor": "^1.2.2",
