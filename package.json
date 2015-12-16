@@ -76,7 +76,8 @@
     "socket.io": "~1.3.7",
     "spero": "~1.2.0",
     "try-catch": "~1.0.0",
-    "tryrequire": "~1.1.5"
+    "tryrequire": "~1.1.5",
+    "writejson": "~1.1.0"
   },
   "devDependencies": {
     "jscs": "^2.7.0",
