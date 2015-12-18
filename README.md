@@ -1,4 +1,4 @@
-# Cloud Commander v5.0.3 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Shippable Status][ShippableIMGURL]][ShippableURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
+# Cloud Commander v5.0.3 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
 
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 
@@ -9,8 +9,6 @@
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
-[ShippableURL]:             https://app.shippable.com/projects/550adb2e5ab6cc1352a50b28/builds/latest "Shippable Build"
-[ShippableIMGURL]:          https://api.shippable.com/projects/550adb2e5ab6cc1352a50b28/badge?branchName=master
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
