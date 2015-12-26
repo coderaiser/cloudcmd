@@ -1,3 +1,25 @@
+2015.12.26, v5.0.4
+
+fix:
+- (client) LIBDIR, LIBDIRCLIENT: rm PREFIX
+
+feature:
+- (config) fs.writeFile -> writejson
+- (package) rm nupdate
+- (package) rm bupdate
+- (package) rm bower
+- (package) nupdate v3.0.0
+- (package) place v1.1.4
+- (package) morgan v1.6.1
+- (package) gulp -> npm scripts
+- (gulpfile) rm storage
+- (package) yaspeller v2.6.0
+- (package) should v8.0.0
+- (package) package-json v2.3.0
+- (bower) smalltalk v1.6.4
+- (docker) add
+
+
 2015.12.08, v5.0.3
 
 feature:

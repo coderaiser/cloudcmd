@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "homepage": "https://github.com/coderaiser/cloudcmd",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -21,7 +21,7 @@
     "delete",
     "file operation"
   ],
- "license": "MIT",
+  "license": "MIT",
   "private": true,
   "ignore": [
     "node_modules",
