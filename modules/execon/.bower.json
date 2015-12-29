@@ -29,6 +29,6 @@
     "commit": "b71d2c60651f957486301e10462aab80a0f62ee1"
   },
   "_source": "git://github.com/coderaiser/execon.git",
-  "_target": "~1.2.2",
+  "_target": "~1.2.8",
   "_originalSource": "execon"
 }

@@ -1,10 +1,20 @@
 {
   "name": "emitify",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "dead simple event emitter",
   "main": "lib/emitify.js",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tape test/*.js",
+    "jscs": "jscs --esnext lib test",
+    "jshint": "jshint lib test",
+    "codestyle": "npm-run-all jshint jscs",
+    "coverage": "nyc npm test",
+    "report": "nyc report --reporter=text-lcov | coveralls",
+    "bundle:base": "browserify -s Emitify --dg false",
+    "bundle": "npm run bundle:base -- -r ./lib/emitify.js:emitify ./lib/emitify.js -o dist/emitify.js",
+    "minify": "minify dist/emitify.js > dist/emitify.min.js",
+    "build": "npm-run-all bundle minify",
+    "wisdom": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -21,6 +31,13 @@
   },
   "homepage": "https://github.com/coderaiser/emitify",
   "devDependencies": {
-    "tape": "~4.2.0"
+    "browserify": "~12.0.1",
+    "coveralls": "^2.11.6",
+    "jscs": "^2.7.0",
+    "jshint": "^2.8.0",
+    "minify": "~2.0.2",
+    "npm-run-all": "^1.4.0",
+    "nyc": "^5.0.1",
+    "tape": "^4.4.0"
   }
 }

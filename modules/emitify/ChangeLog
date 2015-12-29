@@ -1,3 +1,17 @@
+2015.12.29, v2.0.0
+
+feature:
+- (emitify) global: lib/emitify -> dist/emitify
+- (jscsrc) add
+- (jshintrc) add
+- (package) jscs v2.7.0
+- (package) jshint v2.8.0
+- (travis) node.js v5
+- (package) npm-run-all v1.4.0
+- (package) scripts: add coverage, report
+- (package) tape v4.4.0
+
+
 2015.09.30, v1.3.0
 
 feature:
