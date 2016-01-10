@@ -1,3 +1,11 @@
+2016.01.10, v1.6.5
+
+feature:
+- (package) promise-polyfill v3.0.0
+- (travis) node v5
+- (package) watch v0.17.1
+
+
 2015.12.09, v1.6.4
 
 feature:
