@@ -2,10 +2,14 @@
     <img src="http://promises-aplus.github.com/promises-spec/assets/logo-small.png"
          align="right" alt="Promises/A+ logo" />
 </a>
-Promise [![Build Status](https://travis-ci.org/taylorhakes/promise-polyfill.png?branch=master)](https://travis-ci.org/taylorhakes/promise-polyfill)
-=============
+# Promise 
+[![travis][travis-image]][travis-url]
 
-Lightweight promise polyfill for the browser and node. A+ Compliant. It is a perfect polyfill IE, Firefox or any other browser that does not support native promises.
+[travis-image]: https://img.shields.io/travis/taylorhakes/promise-polyfill.svg?style=flat
+[travis-url]: https://travis-ci.org/taylorhakes/promise-polyfill
+
+
+Lightweight ES6 Promise polyfill for the browser and node. Adheres closely to the spec. It is a perfect polyfill IE, Firefox or any other browser that does not support native promises.
 
 This implementation is based on [then/promise](https://github.com/then/promise). It has been changed to use the prototype for performance and memory reasons.
 
