@@ -1,3 +1,17 @@
+2016.01.11, v5.0.5
+
+fix:
+- (server) logger
+
+feature:
+- (bower) promise-polyfill v3.0.0
+- (bower) smalltalk v1.6.5
+- (package) markdown-it v5.1.0
+- (package) socket.io v1.4.3
+- (bower) emitify v2.0.0
+- (gulpfile) rm
+
+
 2015.12.26, v5.0.4
 
 fix:
