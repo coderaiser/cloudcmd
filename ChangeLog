@@ -1,3 +1,15 @@
+2016.01.15, v5.0.6
+
+fix:
+- (client) goToParentDir: set current dir
+- (dom) getParentDirPath: str -> regexp
+
+feature:
+- (edit) menu: add Cut, Copy and Paste
+- (package) dword v2.8.0
+- (package) edward v2.8.0
+
+
 2016.01.11, v5.0.5
 
 fix:
