@@ -1,3 +1,13 @@
+2016.01.20, v5.0.7
+
+fix:
+- (pathLink) prefix when js disabled
+- (password) default algo: set password
+
+feature:
+- (bower) promise-polyfill v3.1.0
+
+
 2016.01.15, v5.0.6
 
 fix:
