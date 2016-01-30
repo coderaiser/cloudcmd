@@ -64,7 +64,7 @@
             exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
         }
     });
-
+    
     if (args.version) {
         version();
     } else if (args.help) {
