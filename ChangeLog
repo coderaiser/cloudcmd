@@ -1,3 +1,21 @@
+2016.02.01, v5.0.8
+
+fix:
+- feature(cloudcmd) prefix: remedy, spero, ishtar
+- (config) /config -> prefix + /config
+- (cloudcmd) loadSocket, loadJquery: prefix
+
+feature:
+- (cloudcmd) prefix: remedy, spero, ishtar
+- (package) spero v1.3.0
+- (package) remedy v1.3.0
+- (package) ishtar v1.3.0
+- (package) dword v2.9.0
+- (package) edward v2.9.0
+- (package) console-io v2.6.0
+- (modules) socket.io v1.4.5
+
+
 2016.01.20, v5.0.7
 
 fix:
