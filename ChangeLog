@@ -1,7 +1,6 @@
 2016.02.01, v5.0.8
 
 fix:
-- feature(cloudcmd) prefix: remedy, spero, ishtar
 - (config) /config -> prefix + /config
 - (cloudcmd) loadSocket, loadJquery: prefix
 
