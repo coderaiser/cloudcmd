@@ -1,3 +1,14 @@
+2016.02.02, v5.0.9
+
+fix:
+- (cloudcmd) logout -> prefix + /logout
+- (server) prefix + /socket -> path.join(prefix, /socket)
+- docs(changelog) rm : feature
+
+feature:
+- docs(changelog) rm fix: 
+
+
 2016.02.01, v5.0.8
 
 fix:
