@@ -90,6 +90,7 @@
                 expect          = files[EXPECT_PATH];
                 
                 result          = CloudFunc.buildFromJSON({
+                    prefix  : '',
                     data    : JSON_FILES,
                     template: template
                 });
