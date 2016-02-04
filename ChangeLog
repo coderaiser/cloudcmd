@@ -1,7 +1,6 @@
 2016.02.04, v5.0.10
 
 fix:
-- chore(prefixer) add ";"
 - (server) socket path
 
 
