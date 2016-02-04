@@ -1,3 +1,11 @@
+2016.02.04, v5.0.10
+
+fix:
+- chore(prefixer) add ";"
+- (server) socket path
+- test(cloudfunc) buildFromJSON: add prefix
+
+
 2016.02.02, v5.0.9
 
 fix:
