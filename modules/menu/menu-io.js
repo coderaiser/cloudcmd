@@ -211,8 +211,12 @@ var MenuIO;
                 heightInner = window.innerHeight,
                 widthInner  = window.innerWidth;
             
-            if (widthInner < widthMenu + x)
+            if (widthInner < widthMenu + x) {
                 x -= widthMenu;
+                
+                if (x < 0)
+                    x = 0;
+            }
             
             if (heightInner < heightMenu + y) {
                 y -= heightMenu;

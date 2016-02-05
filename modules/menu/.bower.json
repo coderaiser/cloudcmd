@@ -1,6 +1,6 @@
 {
   "name": "menu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/coderaiser/menu-io",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -20,14 +20,14 @@
     "gulpfile.js",
     "node_modules"
   ],
-  "_release": "1.0.0",
+  "_release": "1.0.1",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.0",
-    "commit": "044d5045e6849290d2a1a8c8d041a88d887bd0c2"
+    "tag": "v1.0.1",
+    "commit": "c2aa4fda3cdcfb499e7edb9d0ce6a679b38e4c81"
   },
   "_source": "git://github.com/coderaiser/menu-io.git",
-  "_target": "~1.0.0",
+  "_target": "~1.0.1",
   "_originalSource": "menu",
   "_direct": true
 }
