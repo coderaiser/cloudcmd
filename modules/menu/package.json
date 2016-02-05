@@ -1,7 +1,8 @@
 {
   "name": "menu",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.7.9",
+  "branch": "gh-pages",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Simple css-based multillevel context menu",
   "homepage": "http://coderaiser.github.io/menu",
@@ -10,7 +11,8 @@
     "url": "git://github.com/coderaiser/menu-io.git"
   },
   "scripts": {
-    "test": "gulp default"
+    "test": "gulp default",
+    "wisdom": "npm test"
   },
   "devDependencies": {
     "gulp": "~3.8.8",
@@ -23,6 +25,6 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">=0.4.x"
+    "node": ">=0.12"
   }
 }

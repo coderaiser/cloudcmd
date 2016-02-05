@@ -1,3 +1,13 @@
+2016.02.05, v1.0.0
+
+fix:
+- (menu) menu cut on small screen
+
+feature:
+- (package) add wisdom
+- (package) add branch
+
+
 2015.07.22, v0.7.9
 
 feature:

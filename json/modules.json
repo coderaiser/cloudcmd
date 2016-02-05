@@ -34,10 +34,10 @@
             ]
         }, {
             "name": "menu",
-            "version": "0.7.9",
+            "version": "1.0.0",
             "local": [
-                "/modules/menu/menu-io.css",
-                "/modules/menu/menu-io.js"
+                "/modules/menu/menu-io.min.css",
+                "/modules/menu/menu-io.min.js"
             ],
             "remote": [
                 "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.js",

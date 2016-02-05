@@ -33,13 +33,13 @@
     "fancybox": "~2.1.5",
     "format-io": "~0.9.6",
     "jquery": "~2.1.4",
-    "menu": "~0.7.9",
     "rendy": "~1.1.0",
     "execon": "~1.2.8",
     "emitify": "~2.0.0",
     "findit": "~1.1.4",
     "philip": "~1.3.2",
     "smalltalk": "~1.6.5",
-    "promise-polyfill": "~3.1.0"
+    "promise-polyfill": "~3.1.0",
+    "menu": "~1.0.0"
   }
 }

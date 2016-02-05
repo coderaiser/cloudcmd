@@ -16,7 +16,7 @@ Tired to use js based libraries which use jquery and `.hover` classes insteed of
 
 - `1.6kb` min & gzip for js.
 - `1kb` min & gzip  for css.
-- no dependencies (just part of [util-io](http://coderaiser.github.io/util-io)).
+- no dependencies.
 - easy to use.
 - easy to extend.
 
