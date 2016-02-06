@@ -36,7 +36,11 @@
     "codestyle": "jscs --esnext $npm_package_config_dirs",
     "mocha": "mocha test/lib",
     "spell": "yaspeller .",
-    "wisdom": "bin/release.js"
+    "wisdom": "bin/release.js",
+    "docker:pull": "docker pull coderaiser/cloudcmd:latest",
+    "docker:tag": "docker tag coderaiser/cloudcmd:latest coderaiser/cloudcmd:`version`",
+    "docker:push": "docket push coderaiser/cloudcmd:`version`",
+    "publish": "npm-run-all docker:pull docker:tag docker:push"
   },
   "directories": {
     "man": "man"
@@ -90,6 +94,7 @@
     "recess": "^1.1.9",
     "shortdate": "^1.0.1",
     "should": "^8.0.0",
+    "version-io": "^1.2.5",
     "yaspeller": "^2.6.0"
   },
   "engines": {
