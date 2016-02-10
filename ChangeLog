@@ -1,3 +1,13 @@
+2016.02.10, v5.0.12
+
+fix:
+- (password) createHash: algo could be undefined
+
+feature:
+- (config) rm Util
+- (package) publish: docker pull, tag, push
+
+
 2016.02.06, v5.0.11
 
 feature:
