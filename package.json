@@ -37,10 +37,10 @@
     "mocha": "mocha test/lib",
     "spell": "yaspeller .",
     "wisdom": "bin/release.js",
-    "docker:pull": "docker pull coderaiser/cloudcmd:latest",
+    "docker:pull": "docker pull coderaiser/cloudcmd:v`version`",
     "docker:tag": "docker tag coderaiser/cloudcmd:latest coderaiser/cloudcmd:`version`",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
-    "publish": "npm-run-all docker:pull docker:tag docker:push"
+    "docker": "npm-run-all docker:pull docker:tag docker:push"
   },
   "directories": {
     "man": "man"
