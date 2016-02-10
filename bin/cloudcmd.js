@@ -106,7 +106,7 @@
     }
     
     function getPassword(password) {
-        return createPass(config('algo'), password);
+        return createPass(password, config('algo'));
     }
     
     function version() {
