@@ -1,3 +1,9 @@
+2016.02.10, v5.0.14
+
+fix:
+- (cloudcmd) createPass: algo, pass -> pass, algo
+
+
 2016.02.10, v5.0.13
 
 fix:
