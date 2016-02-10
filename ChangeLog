@@ -1,3 +1,13 @@
+2016.02.10, v5.0.13
+
+fix:
+- (cloudcmd) algo, value -> value, algo
+- (package) scripts: docket -> docker
+
+feature:
+- (package) scripts: publish -> docker
+
+
 2016.02.10, v5.0.12
 
 fix:
