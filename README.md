@@ -1,4 +1,4 @@
-# Cloud Commander v5.0.14 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL]
+# Cloud Commander v5.0.14 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Gitter][GitterIMGURL]][GitterURL]
 
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 
@@ -18,6 +18,9 @@
 
 [PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
 [PackageQualityIMGURL]:     http://packagequality.com/shield/cloudcmd.svg
+
+[GitterURL]:                https://gitter.im/cloudcmd
+[GitterIMGURL]:             https://img.shields.io/gitter/room/coderaiser/cloudcmd.js.svg
 
 [CircleCiURL]:              https://circleci.com/gh/coderaiser/cloudcmd
 [CircleCiIMGURL]:           https://circleci.com/gh/coderaiser/cloudcmd.svg
