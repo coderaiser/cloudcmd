@@ -176,7 +176,7 @@ body, pre, code {
 
 .name {
     float: left;
-    width: 35%;
+    width: 27%;
 }
 
 .name a:hover {
@@ -185,14 +185,19 @@ body, pre, code {
 
 .size {
     float:left;
-    width:16%;
+    width:12%;
     margin-right: 27px;
     text-align: right;
 }
 
+.date {
+    float: left;
+    width: 20%;
+}
+
 .owner {
     display         : inline-block;
-    width           : 14%;
+    width           : 13%;
     /* when inline-block
      * vertical align should be
      * set top to prevent additional
@@ -203,7 +208,7 @@ body, pre, code {
 
 .mode {
   float: right;
-  width: 23%;
+  width: 16%;
 }
 
 .reduce-text {

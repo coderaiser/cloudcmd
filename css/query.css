@@ -118,7 +118,7 @@
         padding         : 1%;
     }
     
-    .size, .owner, .mode {
+    .size, .date, .owner, .mode {
         display: none;
     }
     
