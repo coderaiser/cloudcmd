@@ -280,17 +280,19 @@ var http        = require('http'),
     app         = express(),
     
     PORT        = 1337,
-    
+    PREFIX      = '/cloudcmd',
     server,
     socket;
     
 server = http.createServer(app);
-socket = io.listen(server);
+socket = io.listen(server, {
+    path: PREFIX + '/socket.io'
+});
 
 app.use(cloudcmd({
     socket: socket,     /* used by Config, Edit (optional) and Console (required)   */
     config: {           /* config data (optional)                                   */
-        prefix: '/cloudcmd', /* base URL or function which returns base URL (optional)   */
+        prefix: PREFIX, /* base URL or function which returns base URL (optional)   */
     }
 }));
 
