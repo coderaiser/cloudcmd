@@ -1,3 +1,13 @@
+2016.02.20, v5.1.0
+
+fix:
+- refactor(load) put: prefix
+
+feature:
+- (cloudcmd) add date column
+- (editorconfig) exclude hbs from insert_final_newline
+
+
 2016.02.13, v5.0.15
 
 fix:
