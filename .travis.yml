@@ -5,7 +5,8 @@ node_js:
     - 0.12
 
 script:
-  - npm test
+  - npm codestyle
+  - npm run coverage && npm run report
 
 notifications:
     email:

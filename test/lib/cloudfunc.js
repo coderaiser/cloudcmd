@@ -1,8 +1,6 @@
 (function() {
     'use strict';
     
-    /* global describe, it */
-    
     var DIR                 = __dirname + '/../../',
         LIBDIR              = DIR + 'lib/',
         TMPLDIR             = DIR + 'tmpl/',
@@ -11,6 +9,8 @@
         CloudFunc           = require(LIBDIR + 'cloudfunc'),
         files               = require('files-io'),
         rendy               = require('rendy'),
+        
+        test                = require('tape'),
         
         FS_DIR              = TMPLDIR   + 'fs/',
         EXPECT_PATH         = DIR       + 'test/lib/cloudfunc.html',
@@ -27,11 +27,13 @@
             files : [{
                 name: 'applnk',
                 size: 'dir',
+                date: '21.02.2016',
                 uid : 0,
                 mode: 'rwx r-x r-x'
             }, {
                 name: 'prefdm',
                 size: '1.30kb',
+                date: '21.02.2016',
                 uid : 0,
                 mode: 'rwx r-x r-x'
             }]
@@ -51,15 +53,9 @@
                     '</a>/X11/'                                                     +
                 '</span>'                                                           +
             '</div>';
-   
-   describe('cloudfunc', function() {
-       it('should check', function() {
-           check();
-       });
-   });
     
-    function check() {
-        var paths       = {},
+    test(function(t) {
+            var paths       = {},
             
             filesList   = TMPL_PATH.map(function(name) {
                 var path = FS_DIR + name + '.hbs';
@@ -119,9 +115,14 @@
                       result: result.substr(i)
                     }));
                     
-                    throw('buildFromJSON: Not OK');
+                    console.log('buildFromJSON: Not OK');
                 }
+                
+                t.equal(Expect, result, 'should be equal rendered json data');
+                
+                t.end();
             }
         });
-    }
+    });
+    
 })();

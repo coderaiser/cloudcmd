@@ -1,30 +1,27 @@
 (function() {
     'use strict';
     
-    /*global describe, it */
-    
-    var should  = require('should'),
+    var test    = require('tape'),
         DIR     = '../../',
         Util    = require(DIR + 'lib/util');
     
-    describe('Util', function() {
-        describe('getExt', function() {
-            it('should return "" when extension is none', function() {
-                var EXT     = '',
-                    name    = 'file-withot-extension',
-                    ext     = Util.getExt(name);
-                
-                 should(ext).eql(EXT);
-            });
-            
-            it('should return ".png" in files "picture.png"', function() {
-                var EXT     = '.png',
-                    name    = 'picture.png',
-                    ext     = Util.getExt(name);
-                
-                 should(ext).eql(EXT);
-            });
-        });
+    
+    test('getExt: no extension', function(t) {
+        var EXT     = '',
+            name    = 'file-withot-extension',
+            ext     = Util.getExt(name);
+        
+        t.equal(ext, EXT, 'should return "" when extension is none');
+        t.end();
+    });
+    
+    test('getExt: return extension', function(t) {
+        var EXT     = '.png',
+            name    = 'picture.png',
+            ext     = Util.getExt(name);
+        
+        t.equal(ext, EXT, 'should return ".png" in files "picture.png"');
+        t.end();
     });
     
 })();

@@ -30,17 +30,19 @@
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
-    "test": "npm-run-all --parallel lint:* codestyle spell mocha",
+    "codestyle": "npm-run-all --parallel lint:* jscs spell",
     "lint:css": "recess css/*.css",
     "lint:js": "jshint $npm_package_config_dirs",
-    "codestyle": "jscs --esnext $npm_package_config_dirs",
-    "mocha": "mocha test/lib",
+    "jscs": "jscs --esnext $npm_package_config_dirs",
+    "test": "tape test/**/*.js",
     "spell": "yaspeller .",
     "wisdom": "bin/release.js",
     "docker:pull": "docker pull coderaiser/cloudcmd:v`version`",
     "docker:tag": "docker tag coderaiser/cloudcmd:latest coderaiser/cloudcmd:`version`",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
-    "docker": "npm-run-all docker:pull docker:tag docker:push"
+    "docker": "npm-run-all docker:pull docker:tag docker:push",
+    "coverage": "nyc npm test",
+    "report": "nyc report --reporter=text-lcov | coveralls"
   },
   "directories": {
     "man": "man"
@@ -84,16 +86,17 @@
     "writejson": "~1.1.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.6",
     "jscs": "^2.7.0",
     "jshint": "^2.8.0",
     "minor": "^1.2.2",
-    "mocha": "^2.3.4",
     "morgan": "^1.6.1",
     "npm-run-all": "^1.4.0",
+    "nyc": "^5.6.0",
     "place": "^1.1.4",
     "recess": "^1.1.9",
     "shortdate": "^1.0.1",
-    "should": "^8.0.0",
+    "tape": "^4.4.0",
     "version-io": "^1.2.5",
     "yaspeller": "^2.6.0"
   },
