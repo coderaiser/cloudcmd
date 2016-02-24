@@ -162,6 +162,7 @@ View
 - Playing video.
 
 ### Hot keys
+
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F3`                  | open
@@ -172,6 +173,7 @@ Edit
 ![Edit](/img/screen/edit.png "Edit")
 
 ### Hot keys
+
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F4`                  | open
@@ -184,6 +186,7 @@ Console
 ![Console](/img/screen/console.png "Console")
 
 ### Hot keys
+
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `~`                   | open
@@ -255,6 +258,7 @@ Right mouse click button shows context menu with items:
 - Log Out (available when the `authorization` is enabled)
 
 ### Hot keys
+
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F9`                  | open
