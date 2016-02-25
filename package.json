@@ -40,7 +40,8 @@
     "docker:pull": "docker pull coderaiser/cloudcmd:v`version`",
     "docker:tag": "docker tag coderaiser/cloudcmd:v`version` coderaiser/cloudcmd:`version`",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
-    "docker": "npm-run-all docker:pull docker:tag docker:push",
+    "docker:rm": "docker rmi coderaiser/cloudcmd:v`version`",
+    "docker": "npm-run-all docker:pull docker:tag docker:push docker:rm",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls"
   },
