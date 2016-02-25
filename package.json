@@ -38,7 +38,7 @@
     "spell": "yaspeller .",
     "wisdom": "bin/release.js",
     "docker:pull": "docker pull coderaiser/cloudcmd:v`version`",
-    "docker:tag": "docker tag coderaiser/cloudcmd:latest coderaiser/cloudcmd:`version`",
+    "docker:tag": "docker tag coderaiser/cloudcmd:v`version` coderaiser/cloudcmd:`version`",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
     "docker": "npm-run-all docker:pull docker:tag docker:push",
     "coverage": "nyc npm test",
