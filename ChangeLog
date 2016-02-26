@@ -1,3 +1,13 @@
+2016.02.26, v5.1.5
+
+fix:
+- (view) showImage: prefix
+- (package) docker tag: latest -> v`version`
+
+feature:
+- (package) add docker:rm
+
+
 2016.02.25, v5.1.4
 
 fix:
