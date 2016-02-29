@@ -30,7 +30,7 @@ Benefits
 - Could be used local or remotely.
 - Adapting to screen size.
 - **2 built-in editors** with support of **syntax highlighting**: [Dword][DWORD] and [Edward][EDWARD].
-- **Console** with support of default OS command line.
+- [Console](https://github.com/cloudcmd/console "Console") with support of default OS command line.
 - Written in **JavaScript/Node.js**.
 
 Install
