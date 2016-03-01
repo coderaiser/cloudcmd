@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "1.6.5",
+  "version": "1.6.6",
   "homepage": "https://github.com/coderaiser/smalltalk",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -28,14 +28,14 @@
     "screen"
   ],
   "dependencies": {},
-  "_release": "1.6.5",
+  "_release": "1.6.6",
   "_resolution": {
     "type": "version",
-    "tag": "v1.6.5",
-    "commit": "b372f0ff4b8315f65130d63284015c32f2f00b12"
+    "tag": "v1.6.6",
+    "commit": "2f16905160fe1dae5c326b673f09029113ca13cb"
   },
   "_source": "git://github.com/coderaiser/smalltalk.git",
-  "_target": "~1.6.5",
+  "_target": "~1.6.6",
   "_originalSource": "smalltalk",
   "_direct": true
 }
