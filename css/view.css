@@ -1,6 +1,9 @@
 .view {
     font-size: 16px;
     white-space: pre;
+}
+
+.view:focus {
     outline: 0;
 }
 
