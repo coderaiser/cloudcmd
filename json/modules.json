@@ -34,7 +34,7 @@
             ]
         }, {
             "name": "menu",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "local": [
                 "/modules/menu/menu-io.min.css",
                 "/modules/menu/menu-io.min.js"

@@ -1,5 +1,5 @@
 .menu-hidden {
-    display:none;
+    display: none;
 }
 
 .menu {
@@ -13,11 +13,11 @@
     
     color               : #222;
     
-    background          : rgb(255,255,255);
-    background          : rgba(255,255,255, 0.9);
+    background          : rgb(255, 255, 255);
+    background          : rgba(255, 255, 255, 0.9);
     
-    border-color        : rgb(49,123,249);
-    border-color        : rgba(49,123,249,.40);
+    border-color        : rgb(49, 123, 249);
+    border-color        : rgba(49, 123, 249, .40);
     border-style        : solid;
     border-width        : 1px;
     border-radius       : 5px;
@@ -59,7 +59,7 @@
     display: block;
 }
 
-.menu-submenu > label:after {
+.menu-submenu > label::after {
     display: block;
     float: right;
     width: 0;
@@ -67,7 +67,7 @@
     margin-top: 3px;
     margin-right: -10px;
     border-color: transparent;
-    border-left-color: rgb(49,123,249);
+    border-left-color: rgb(49, 123, 249);
     border-style: solid;
     border-width: 5px 0 5px 5px;
     content: " ";

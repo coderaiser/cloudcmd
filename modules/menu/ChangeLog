@@ -1,3 +1,14 @@
+2016.03.01, v1.0.2
+
+fix:
+- (package) test: lint:css -> npm run lint:css
+
+feature:
+- (stylelint) .stylelintrc -> .stylelintrc.yml
+- (package) ~ -> ^
+- (package) add stylelint
+
+
 2016.02.05, v1.0.1
 
 fix:
