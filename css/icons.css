@@ -1,59 +1,59 @@
-.icon-help:before {
+.icon-help::before {
     font-family : 'Fontello';
     content     : '\e801  ';
 }
 
-.icon-rename:before {
+.icon-rename::before {
     font-family : 'Fontello';
     content     : '\e802  ';
 }
 
-.icon-view:before {
+.icon-view::before {
     font-family : 'Fontello';
     content     : '\e803  ';
 }
 
-.icon-edit:before {
+.icon-edit::before {
     font-family : 'Fontello';
     content     : '\e804  ';
 }
 
-.icon-copy:before {
+.icon-copy::before {
     font-family : 'Fontello';
     content     : '\e805  ';
 }
 
-.icon-move:before {
+.icon-move::before {
     font-family : 'Fontello';
     content     : '\e806  ';
 }
 
-.icon-directory:before {
+.icon-directory::before {
     font-family : 'Fontello';
     content     : '\e807  ';
 }
 
-.icon-delete:before {
+.icon-delete::before {
     font-family : 'Fontello';
     content     : '\e808  ';
 }
 
-.icon-menu:before {
+.icon-menu::before {
     font-family : 'Fontello';
     content     : '\e809  ';
 }
 
-.icon-config:before {
+.icon-config::before {
     font-family : 'Fontello';
     content     : '\e80a  ';
 }
 
-.icon-console:before {
+.icon-console::before {
     font-family : 'Fontello';
     content     : '\e80b  ';
 }
 
-.icon-contact:before {
+.icon-contact::before {
     font-family : 'Fontello';
     content     : '\e80c  ';
 }

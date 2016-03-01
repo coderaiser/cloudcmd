@@ -32,6 +32,7 @@
     "start": "node bin/cloudcmd.js",
     "codestyle": "npm-run-all --parallel lint:* jscs spell",
     "lint:css": "recess css/*.css",
+    "lint:style": "stylelint css/*.css",
     "lint:js": "jshint $npm_package_config_dirs",
     "jscs": "jscs --esnext $npm_package_config_dirs",
     "test": "tape test/**/*.js",
@@ -97,6 +98,8 @@
     "place": "^1.1.4",
     "recess": "^1.1.9",
     "shortdate": "^1.0.1",
+    "stylelint": "^4.4.0",
+    "stylelint-config-standard": "^3.0.0",
     "tape": "^4.4.0",
     "version-io": "^1.2.5",
     "yaspeller": "^2.6.0"

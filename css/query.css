@@ -101,7 +101,7 @@
         background-color: rgba(49, 123, 249, .40);
         color: white;
     }
-    /* делаем иконки под курсом белыми*/
+    /* делаем иконки под курсом белыми */
     .current-file a {
         color: white;
     }
@@ -109,7 +109,7 @@
         color: white;
     }
     
-    /* меняем иконки на шрифтовые*/
+    /* меняем иконки на шрифтовые */
     .mini-icon {
         color           : rgb(246, 224, 124);
         color           : rgba(246, 224, 124, 0.56);
@@ -131,33 +131,35 @@
     .directory::before {
         content: '\e807';
     }
-     .text-file::before {
+    
+    .text-file::before {
         color: rgb(26, 224, 124);
         color: rgba(26, 224, 124, 0.56);
         content: '\e80d';
     }
+    
     .text-file {
-        background-image:none;
+        background-image: none;
     }
     
-    /* убираем заголовок*/
+    /* убираем заголовок */
     .fm-header {
-        display:none;
+        display: none;
     }
     
     /* выводим заголовки рядом с полями */
-    
     .cmd-button {
         width: 20%;
     }
 }
+
 @media only screen and (min-width: 601px) and (max-width: 785px) {
     .cmd-button {
         width: 13%;
     }
 }
 
-@media only screen and (min-width:786px) and (max-width: 1155px) {
+@media only screen and (min-width: 786px) and (max-width: 1155px) {
     .cmd-button {
         width: 10%;
     }
@@ -165,7 +167,7 @@
 
 @media only screen and (max-width: 1155px) {
     .panel {
-        width:97%;
+        width: 97%;
     }
     /* если правая панель не помещаеться - прячем её */
     .panel-right, .cmd-button#f5, .cmd-button#f6 {

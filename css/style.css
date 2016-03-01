@@ -10,7 +10,7 @@ body {
 }
 
 body, pre, code {
-    font-family     : "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;
+    font-family     : 'Droid Sans Mono', 'Ubuntu Mono', 'Consolas', monospace;
     font-size       : 16px;
 }
 
@@ -19,7 +19,7 @@ body, pre, code {
 }
 
 .fm, .keyspanel {
-     cursor              : default;
+    cursor              : default;
     -webkit-user-select : none;
     -moz-user-select    : none;
     -ms-user-select     : none;
@@ -37,8 +37,8 @@ body, pre, code {
 
 .panel, .cmd-button {
     border: 1.5px solid;
-    border-color: rgb(49,123,249);
-    border-color: rgba(49,123,249, 0.4);
+    border-color: rgb(49, 123, 249);
+    border-color: rgba(49, 123, 249, 0.4);
 }
 
 .icon {
@@ -85,7 +85,7 @@ body, pre, code {
     bottom      : 5px;
     left        : 16px;
     font-size   : 10px;
-    color       : rgb(49,123,249);
+    color       : rgb(49, 123, 249);
     content     : attr(data-progress);
 }
 
@@ -105,7 +105,7 @@ body, pre, code {
 
 .cmd-button:active {
     color: white;
-    background-color: rgb(49,123,249);
+    background-color: rgb(49, 123, 249);
     transition: ease 0.1s;
 }
 
@@ -120,7 +120,7 @@ body, pre, code {
 .mini-icon {
     position: relative;
     top: 2px;
-    /* отступ перед картинкой 
+    /* отступ перед картинкой
      * для нормального отображения
      * рамки
      */
@@ -136,12 +136,13 @@ body, pre, code {
     height: 90%;
     margin: 26px auto 0 auto;
 }
+
 .fm-header {
     font-weight: bold;
 }
 
 .panel-left {
-    float:left;
+    float: left;
 }
 
 .current-file {
@@ -153,12 +154,13 @@ body, pre, code {
 }
 
 .selected-file, .selected-file .name > a {
-    color: rgb(254,159,224);
+    color: rgb(254, 159, 224);
 }
 
 .panel-right {
-    float:right;
+    float: right;
 }
+
 .panel {
     width: 46%;
     height: 97%;
@@ -171,7 +173,7 @@ body, pre, code {
 }
 
 .keyspanel {
-  text-align: center;
+    text-align: center;
 }
 
 .name {
@@ -184,8 +186,8 @@ body, pre, code {
 }
 
 .size {
-    float:left;
-    width:12%;
+    float: left;
+    width: 12%;
     margin-right: 27px;
     text-align: right;
 }
@@ -207,8 +209,8 @@ body, pre, code {
 }
 
 .mode {
-  float: right;
-  width: 18%;
+    float: right;
+    width: 18%;
 }
 
 .reduce-text {
@@ -230,9 +232,10 @@ body, pre, code {
 }
 
 a {
-  text-decoration:none;
+    text-decoration: none;
 }
+
 a:hover, a:active {
-    color : #06e;
-    text-decoration:none;
+    color: #06e;
+    text-decoration: none;
 }

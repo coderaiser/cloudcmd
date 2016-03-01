@@ -7,11 +7,11 @@
  * 2. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
  */
 
-html{
+html {
     color: #222;
 }
 
-body { 
+body {
     margin: 0;
 }
 
@@ -20,16 +20,17 @@ body {
  * These selection declarations have to be separate
  * Also: hot pink! (or customize the background color to match your design)
  */
-/*
-    ::selection { background: #fe57a1; color: #fff; text-shadow: none; }
-*/
-
 
 /* =============================================================================
    Links
    ========================================================================== */
 
-a:focus { outline: thin dotted; }
+a:focus {
+    outline: thin dotted;
+}
 
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
-a:hover, a:active { outline: 0; }
+a:hover,
+a:active {
+    outline: 0;
+}
