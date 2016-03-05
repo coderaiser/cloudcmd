@@ -414,7 +414,7 @@ docker run -v ~:/root -v /:/mnt/fs -it -p 8000:8000 coderaiser/cloudcmd
 ```
 
 Config would be read from home directory, hosts root file system would be mount to `/mnt/fs`,
-`8000` port would be exposed to hosts port. 
+`8000` port would be exposed to hosts port.
 
 Version history
 ---------------
