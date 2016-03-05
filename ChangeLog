@@ -1,3 +1,24 @@
+2016.03.05, v5.2.0
+
+fix:
+- (directory) percent: when percent should not change it became bigger by 100
+- feature(load) put: rm prefix, apiURL
+- (key) switch key: add preventDefault on F8
+
+feature:
+- (package) add postpublish
+- (package) add docker:build
+- (directory) uploadFile, uploadDir: rm callback
+- (load) put: rm prefix, apiURL
+- (client) add PREFIX_URL
+- (operation) TITLE: Operation -> CloudCmd.TITLE
+- (stylint) .stylelintrc -> .stylintrc.yml
+- (bower) menu v1.0.2
+- (bower) smalltalk v1.6.6
+- (reset) rm a:hover, a:active: outline
+- (package) add stylelint
+
+
 2016.02.26, v5.1.5
 
 fix:
