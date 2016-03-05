@@ -13,8 +13,6 @@ Cloud Commander v5.1.5
 [EDWARD]:                   https://github.com/cloudcmd/edward "Editor based on Ace"
 [EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
 
-[Docker_URL]:                https://docker.io "Docker"
-
 **Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
@@ -409,7 +407,7 @@ ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
 
 Docker
 ---------------
-`Cloud Commander` could be used as [docker][DOCKER_URL] container this way:
+`Cloud Commander` could be used as [docker container](https://hub.docker.com/r/coderaiser/cloudcmd/ "Docker container") this way:
 
 ```sh
 docker run -v ~:/root -v /:/mnt/fs -it -p 8000:8000 coderaiser/cloudcmd
