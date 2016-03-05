@@ -49,6 +49,9 @@ cloudcmd
 
 Open url `http://localhost:8000` in browser.
 
+## Deploy
+`Cloud Commander` could be easily deployed to [Heroku][DeployURL].
+
 [![Deploy][DeployIMG]][DeployURL]
 
 ## Using as Middleware
