@@ -36,7 +36,7 @@ Install
 
 The installation of file manager is very simple.
 
-- install [node.js](http://nodejs.org/ "node.js") or [io.js](https://iojs.org/ "io.js") if you still did not.
+- install last version of [node.js](https://nodejs.org/ "node.js").
 - install ```cloudcmd``` via ```npm``` with:
 
 ```sh
