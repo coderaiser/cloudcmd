@@ -40,11 +40,12 @@
     "wisdom": "bin/release.js",
     "postpublish": "npm run docker",
     "docker:pull": "docker pull coderaiser/cloudcmd:v`version`",
+    "docker:pull:node": "docker pull node",
     "docker:tag": "docker tag coderaiser/cloudcmd:v`version` coderaiser/cloudcmd:`version`",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
     "docker:rm": "docker rmi coderaiser/cloudcmd:v`version`",
     "docker:build": "docker build -t coderaiser/cloudcmd:`version` .",
-    "docker": "npm-run-all docker:build docker:push",
+    "docker": "npm-run-all docker:pull:node docker:build docker:push",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls"
   },
