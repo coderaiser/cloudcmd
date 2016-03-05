@@ -2,7 +2,6 @@
 
 fix:
 - (directory) percent: when percent should not change it became bigger by 100
-- feature(load) put: rm prefix, apiURL
 - (key) switch key: add preventDefault on F8
 
 feature:
