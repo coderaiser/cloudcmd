@@ -1,3 +1,15 @@
+2016.03.07, v5.2.1
+
+fix:
+- (edit) setMenu: set focus on editor insted of prompt when "Go To Line" activated
+- (edit) Go To Line: Ctrl+L -> Ctrl+G
+
+feature:
+- (package) dword v3.0.3
+- (package) edward v3.0.0
+- (package) add docker:pull:node
+
+
 2016.03.05, v5.2.0
 
 fix:

@@ -1,4 +1,4 @@
-Cloud Commander v5.2.0
+Cloud Commander v5.2.1
 ===============
 ### [Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
@@ -424,6 +424,7 @@ Config would be read from home directory, hosts root file system would be mount 
 
 Version history
 ---------------
+- *2016.03.07*, **[v5.2.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.2.1.tar.gz)**
 - *2016.03.05*, **[v5.2.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.2.0.tar.gz)**
 - *2016.02.26*, **[v5.1.5](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.1.5.tar.gz)**
 - *2016.02.25*, **[v5.1.4](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.1.4.tar.gz)**
