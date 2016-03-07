@@ -23,7 +23,7 @@
      * when search element with
      * document.elementFromPoint
      */
-    z-index: 1
+    z-index: 1;
 }
 
 .fancybox-overlay {

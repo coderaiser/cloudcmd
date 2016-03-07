@@ -10,3 +10,5 @@ rules:
     string-quotes: single
     function-url-quotes: none
     no-eol-whitespace: null
+    font-family-name-quotes: single-unless-keyword
+
