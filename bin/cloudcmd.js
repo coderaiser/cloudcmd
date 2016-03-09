@@ -10,7 +10,6 @@
     
     exit        = require(DIR_SERVER + 'exit'),
     config      = require(DIR_SERVER + 'config'),
-    createPass  = require(DIR_SERVER + 'password'),
     
     options,
     argv        = process.argv,
@@ -106,7 +105,9 @@
     }
     
     function getPassword(password) {
-        return createPass(password, config('algo'));
+        var criton = require('criton');
+        
+        return criton(password, config('algo'));
     }
     
     function version() {
