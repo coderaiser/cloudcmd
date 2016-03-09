@@ -1,0 +1,10 @@
+version: '2'
+services:
+  web:
+    ports:
+      - 8000:8000
+    volumes:
+      - ~:/root
+      - /:/mnt/fs
+    image: coderaiser/cloudcmd
+

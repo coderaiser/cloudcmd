@@ -3,4 +3,4 @@
 manifest.yml
 Dockerfile
 .dockerignore
-
+docker-compose.yml
