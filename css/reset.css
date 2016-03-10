@@ -14,17 +14,3 @@ html {
 body {
     margin: 0;
 }
-
-/*
- * Remove text-shadow in selection highlight: h5bp.com/i
- * These selection declarations have to be separate
- * Also: hot pink! (or customize the background color to match your design)
- */
-
-/* =============================================================================
-   Links
-   ========================================================================== */
-
-a:focus {
-    outline: thin dotted;
-}
