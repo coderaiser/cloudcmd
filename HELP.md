@@ -439,7 +439,7 @@ services:
 When you create this file run:
 
 ```sh
-    docker-compose up
+docker-compose up
 ```
 
 Version history
