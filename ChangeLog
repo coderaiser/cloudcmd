@@ -1,3 +1,17 @@
+2016.03.10, v5.2.2
+
+fix:
+- (view) showImage: href
+
+feature:
+- (css) rm a:focus
+- (password) password -> criton
+- (yaspeller) add yml
+- (docker-compose) add
+- (package) stylelint-config-standard v4.0.0
+- (package) nyc v6.0.0
+
+
 2016.03.07, v5.2.1
 
 fix:
