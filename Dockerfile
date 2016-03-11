@@ -1,4 +1,5 @@
 FROM node
+MAINTAINER Coderaiser
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
