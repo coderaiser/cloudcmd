@@ -1,7 +1,7 @@
 extends: stylelint-config-standard
 rules:
     indentation: 4
-    rule-trailing-semicolon: null
+    declaration-block-trailing-semicolon: always
     declaration-colon-space-before: null
     selector-list-comma-newline-after: null
     comment-empty-line-before: null
