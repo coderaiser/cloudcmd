@@ -1,3 +1,14 @@
+2016.03.18, v5.2.3
+
+feature:
+- (style) .current-file box-shadow: 1.5px -> 1px
+- (package) console-io v2.7.1
+- (package) add nodemon
+- (shell) rm secret
+- (package) stylelint v5.0.1
+- (dockefile) add maintainer
+
+
 2016.03.10, v5.2.2
 
 fix:
