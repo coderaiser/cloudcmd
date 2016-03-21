@@ -1,3 +1,10 @@
+2016.03.21, v1.6.7
+
+feature:
+- (package) promise-poyfill v4.0.1
+- (travis) notifications: default
+
+
 2016.03.01, v1.6.6
 
 feature:

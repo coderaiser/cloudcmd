@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -9,7 +9,7 @@
   },
   "main": "dist/smalltalk.min.js",
   "config": {
-    "poly": "node_modules/promise-polyfill/Promise.min.js"
+    "poly": "node_modules/promise-polyfill/promise.min.js"
   },
   "babel": {
     "presets": [
@@ -54,7 +54,7 @@
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
     "npm-run-all": "^1.2.12",
-    "promise-polyfill": "^3.0.0",
+    "promise-polyfill": "~4.0.1",
     "stylelint": "^4.4.0",
     "stylelint-config-standard": "^3.0.0",
     "watch": "^0.17.1"
