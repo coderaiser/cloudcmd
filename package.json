@@ -49,10 +49,10 @@
     "docker:build:alpine": "docker build -f Dockerfile.alpine -t coderaiser/cloudcmd:`version`-alpine .",
     "docker": "npm-run-all docker:pull:node docker:build docker:push",
     "docker:alpine": "npm-run-all docker:pull:alpine docker:build:alpine docker:tag:alpine docker:push:alpine docker:push:alpine:latest",
-    "docker:tag:alpine": "docker tag coderaiser/cloudcmd:v`version`-alpine coderaiser/cloudcmd:latest-alpine",
+    "docker:tag:alpine": "docker tag coderaiser/cloudcmd:`version`-alpine coderaiser/cloudcmd:latest-alpine",
     "docker:pull:alpine": "docker pull mhart/alpine-node",
-    "docker:rm": "docker rmi coderaiser/cloudcmd:v`version` || true",
-    "docker:rm:alpine": "docker rmi coderaiser/cloudcmd:v`version`-alpine || true",
+    "docker:rm": "docker rmi coderaiser/cloudcmd:`version` || true",
+    "docker:rm:alpine": "docker rmi coderaiser/cloudcmd:`version`-alpine || true",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls"
   },
