@@ -10,5 +10,5 @@ COPY . /usr/src/app
 
 EXPOSE 8000
 
-ENTRYPOINT: ["bin/cloudcmd.js"]
+ENTRYPOINT ["bin/cloudcmd.js"]
 
