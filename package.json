@@ -31,6 +31,7 @@
   "scripts": {
     "start": "node bin/cloudcmd.js",
     "start:dev": "nodemon bin/cloudcmd.js",
+    "security": "nsp check",
     "codestyle": "npm-run-all --parallel lint:* jscs spell",
     "lint:css": "recess css/*.css",
     "lint:style": "stylelint css/*.css",
@@ -106,6 +107,7 @@
     "morgan": "^1.6.1",
     "nodemon": "^1.9.1",
     "npm-run-all": "^1.4.0",
+    "nsp": "^2.2.1",
     "nyc": "^6.0.0",
     "place": "^1.1.4",
     "recess": "^1.1.9",
