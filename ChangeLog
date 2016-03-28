@@ -1,3 +1,9 @@
+2016.03.28, v5.3.1
+
+feature:
+- (markdown) throw() -> throw
+
+
 2016.03.28, v5.3.0
 
 feature:
