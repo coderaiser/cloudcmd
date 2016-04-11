@@ -52,8 +52,10 @@
     "docker:alpine": "npm-run-all docker:pull:alpine docker:build:alpine docker:tag:alpine docker:push:alpine docker:push:alpine:latest",
     "docker:tag:alpine": "docker tag coderaiser/cloudcmd:`version`-alpine coderaiser/cloudcmd:latest-alpine",
     "docker:rm": "docker rmi coderaiser/cloudcmd:`version`",
+    "docker:rm:latest": "docker rmi coderaiser/cloudcmd:latest",
     "docker:rm:alpine": "docker rmi coderaiser/cloudcmd:`version`-alpine",
-    "docker:rm-old": "npm-run-all --parallel --continue-on-error docker:rm*",
+    "docker:rm:latest-alpine": "docker rmi coderaiser/cloudcmd:latest-alpine",
+    "docker:rm-old": "npm-run-all --parallel --continue-on-error docker:rm:*",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls"
   },
