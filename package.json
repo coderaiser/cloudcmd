@@ -104,7 +104,7 @@
   },
   "devDependencies": {
     "coveralls": "^2.11.6",
-    "jscs": "^2.7.0",
+    "jscs": "^3.0.1",
     "jshint": "^2.8.0",
     "minor": "^1.2.2",
     "morgan": "^1.6.1",
