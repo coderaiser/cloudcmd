@@ -4,7 +4,6 @@
     "requireCapitalizedConstructors": false,
     "disallowTrailingWhitespace": "ignoreEmptyLines",
     "disallowTrailingComma": false,
-    "disallowUnusedVariables": true,
     "validateIndentation": false,
     "requireCurlyBraces": false,
     "requireSpacesInAnonymousFunctionExpression": {
