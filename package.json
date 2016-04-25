@@ -115,7 +115,7 @@
     "place": "^1.1.4",
     "recess": "^1.1.9",
     "shortdate": "^1.0.1",
-    "stylelint": "^5.4.0",
+    "stylelint": "^6.1.1",
     "stylelint-config-standard": "^5.0.0",
     "tape": "^4.4.0",
     "version-io": "^1.2.5",
