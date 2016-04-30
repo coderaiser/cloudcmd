@@ -5,7 +5,7 @@ Cloud Commander v5.3.1
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
-[HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
+[HerokuURL]:                http://mycloudcmd.herokuapp.com/ "Heroku"
 [JitSu_LIVE_IMG]:           https://status-io.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
 [HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
