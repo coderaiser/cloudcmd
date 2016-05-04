@@ -22,8 +22,8 @@ IE8+, Chrome, Firefox, IOS 4+, Safari 5+, Opera
 
 ## Downloads
 
-- [Promise](https://raw.github.com/taylorhakes/promise-polyfill/master/Promise.js)
-- [Promise-min](https://raw.github.com/taylorhakes/promise-polyfill/master/Promise.min.js)
+- [Promise](https://raw.github.com/taylorhakes/promise-polyfill/master/promise.js)
+- [Promise-min](https://raw.github.com/taylorhakes/promise-polyfill/master/promise.min.js)
 
 ### Node
 ```
@@ -35,7 +35,7 @@ bower install promise-polyfill
 ```
 
 ## Simple use
-```
+```js
 var prom = new Promise(function(resolve, reject) {
   // do a thing, possibly async, then…
 
@@ -63,7 +63,7 @@ npm install setasap --save
 ```js
 var Promise = require('promise-polyfill');
 var setAsap = require('setasap');
-Promise._setImmedateFn(setAsap);
+Promise._setImmediateFn(setAsap);
 ```
 
 ## Unhandled Rejections

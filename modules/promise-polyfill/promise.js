@@ -14,7 +14,9 @@
     };
 
   var onUnhandledRejection = function onUnhandledRejection(err) {
-    console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
+    if (typeof console !== 'undefined' && console) {
+      console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
+    }
   };
 
   // Polyfill for Function.prototype.bind
@@ -23,10 +25,6 @@
       fn.apply(thisArg, arguments);
     };
   }
-
-  var isArray = Array.isArray || function (value) {
-    return Object.prototype.toString.call(value) === '[object Array]';
-  };
 
   function Promise(fn) {
     if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
@@ -151,8 +149,8 @@
     return prom;
   };
 
-  Promise.all = function () {
-    var args = Array.prototype.slice.call(arguments.length === 1 && isArray(arguments[0]) ? arguments[0] : arguments);
+  Promise.all = function (arr) {
+    var args = Array.prototype.slice.call(arr);
 
     return new Promise(function (resolve, reject) {
       if (args.length === 0) return resolve([]);
