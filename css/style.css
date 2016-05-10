@@ -92,7 +92,7 @@ body, pre, code {
 .cmd-button {
     width: 5%;
     height: 30px;
-    margin: 20px 2px 0 2px;
+    margin: 20px 2px 0;
     color: #222;
     background-color: white;
     transition: ease 0.1s;
@@ -134,7 +134,7 @@ body, pre, code {
 .fm {
     width : 97%;
     height: 90%;
-    margin: 26px auto 0 auto;
+    margin: 26px auto 0;
 }
 
 .fm-header {
