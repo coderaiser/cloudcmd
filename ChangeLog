@@ -1,3 +1,31 @@
+2016.05.11, v5.3.2
+
+fix:
+- (route) prefix without "/" at beginning in rendered view
+- (key) Alt + G: replace path with "©"
+
+feature:
+- (bower) smalltalk v1.6.8
+- (bower) promise-polyfill v5.1.0
+- (package) stylelint-config-standard v7.0.0
+- (package) redrun v3.0.0
+- (bower) promise-polyfill v5.0.0
+- (travis) add node v6
+- (travis) rm 0.12
+- (package) npm-run-all -> redrun
+- (package) stylelint-config-standard  v6.0.0
+- (package) stylelint v6.1.1
+- (jscsrc) rm disallowUnusedVariables
+- (package) jscs v3.0.1
+- (package) http-auth v2.3.1
+- (package) stylelint-config-standard v5.0.0
+- (query) .name: rm ignored float
+- (package) docker:rm:latest-alpine
+- (package) scripts docker: rm:old -> rm-old
+- (package) add docker:rm:old
+- (package) wisdom: npm-run-all --continue-on-error
+
+
 2016.03.28, v5.3.1
 
 feature:
