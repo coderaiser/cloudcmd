@@ -72,7 +72,7 @@
     font-size: 120%;
     font-weight: bold;
     margin: 0;
-    padding: 14px 17px 14px;
+    padding: 14px 17px;
     text-shadow: white 0 1px 2px;
 }
 
@@ -80,7 +80,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     
-    padding: 6px 17px 6px;
+    padding: 6px 17px;
     position: relative;
     max-width: 500px;
 }

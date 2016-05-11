@@ -1,3 +1,16 @@
+2016.05.10, v1.6.8
+
+feature:
+- (package) v0.18.0
+- (package) stylelint-config-standard v7.0.0
+- (package) promise-polyfill v5.1.0
+- (package) redrun v3.0.0
+- (package) stylelint v6.2.2
+- (package) jscs v3.0.3
+- (package) stylelint-config-standard v5.0.0
+- (package) stylelint v5.1.0, stylelint-config-standard v4.0.1
+
+
 2016.03.21, v1.6.7
 
 feature:
