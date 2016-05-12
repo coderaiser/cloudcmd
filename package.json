@@ -44,7 +44,7 @@
     "start": "node bin/cloudcmd.js",
     "start:dev": "nodemon bin/cloudcmd.js",
     "security": "nsp check",
-    "codestyle": "redrun --parallel lint:* jscs spell",
+    "codestyle": "redrun lint:* jscs spell",
     "lint:css": "recess css/*.css",
     "lint:style": "stylelint css/*.css",
     "lint:js": "jshint $npm_package_config_dirs",
