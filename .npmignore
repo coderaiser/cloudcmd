@@ -1,6 +1,8 @@
-.travis.yml
-.appveyor.yml
+.*
 manifest.yml
-Dockerfile
-.dockerignore
+cercle.yml
+Dockerfile*
 docker-compose.yml
+shell
+test
+
