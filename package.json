@@ -10,17 +10,29 @@
   },
   "keywords": [
     "console",
+    "edit",
     "editor",
     "file",
     "file manager",
     "folder",
     "orthodox",
     "view",
+    "viewer",
     "copy",
     "rename",
     "move",
+    "rm",
+    "mv",
+    "cp",
     "delete",
-    "file operation"
+    "delete file",
+    "delete directory",
+    "remove",
+    "remove file",
+    "remove directory",
+    "file operation",
+    "pack",
+    "server"
   ],
   "bin": {
     "cloudcmd": "bin/cloudcmd.js"
