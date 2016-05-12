@@ -2,6 +2,7 @@
     "preset": "crockford",
     "requireSpaceAfterKeywords": false,
     "requireCapitalizedConstructors": false,
+    "requireMultipleVarDecl": false,
     "disallowTrailingWhitespace": "ignoreEmptyLines",
     "disallowTrailingComma": false,
     "validateIndentation": false,
