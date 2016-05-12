@@ -30,6 +30,7 @@
             'save',
             'server',
             'online',
+            'open',
             'minify',
             'progress',
             'progress-of-copying',
@@ -41,6 +42,7 @@
             port        : config('port'),
             minify      : config('minify'),
             online      : config('online'),
+            open        : config('open'),
             editor      : config('editor') || 'edward',
             username    : config('username'),
             root        : config('root') || '/',
@@ -78,6 +80,7 @@
         
         config('auth', args.auth);
         config('online', args.online);
+        config('open', args.open);
         config('minify', args.minify);
         config('username', args.username);
         config('progress', args.progress);

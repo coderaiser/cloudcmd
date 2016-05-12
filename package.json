@@ -89,6 +89,7 @@
     "minify": "~2.0.0",
     "minimist": "~1.2.0",
     "mollify": "~1.0.0",
+    "opn": "~4.0.1",
     "os-homedir": "~1.0.0",
     "package-json": "~2.3.0",
     "pipe-io": "~1.2.0",

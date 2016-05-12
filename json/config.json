@@ -12,6 +12,7 @@
     "dirStorage": false,
     "minify": false,
     "online": true,
+    "open": false,
     "cache": true,
     "showKeysPanel": true,
     "port": 8000,
