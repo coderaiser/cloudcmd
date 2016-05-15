@@ -1,4 +1,4 @@
-Cloud Commander v5.3.2
+Cloud Commander v5.4.0
 ===============
 ### [Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
@@ -447,6 +447,7 @@ docker-compose up
 
 Version history
 ---------------
+- *2016.05.15*, **[v5.4.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.4.0.tar.gz)**
 - *2016.05.11*, **[v5.3.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.3.2.tar.gz)**
 - *2016.03.28*, **[v5.3.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.3.1.tar.gz)**
 - *2016.03.28*, **[v5.3.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.3.0.tar.gz)**

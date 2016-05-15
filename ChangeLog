@@ -1,3 +1,19 @@
+2016.05.15, v5.4.0
+
+fix:
+- feature(server) add prefix to url
+
+feature:
+- (package) codestyle: redrun --parallel -> redrun
+- (jscs) requireMultipleVarDecl: false
+- (package) add keywords
+- (package) ~ -> ^
+- (cloudcmd) add --open: open browser when server started
+- (npmignore) add .*
+- (server) add prefix to url
+- (circle) add
+
+
 2016.05.11, v5.3.2
 
 fix:
