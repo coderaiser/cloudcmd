@@ -6,3 +6,6 @@ docker-compose.yml
 shell
 test
 
+app.json
+circle.yml
+
