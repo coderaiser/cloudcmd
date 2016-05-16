@@ -2,7 +2,7 @@
     <img src="http://promises-aplus.github.com/promises-spec/assets/logo-small.png"
          align="right" alt="Promises/A+ logo" />
 </a>
-# Promise
+# Promise Polyfill
 [![travis][travis-image]][travis-url]
 
 [travis-image]: https://img.shields.io/travis/taylorhakes/promise-polyfill.svg?style=flat
@@ -18,19 +18,19 @@ It is extremely lightweight. ***< 1kb Gzipped***
 ## Browser Support
 IE8+, Chrome, Firefox, IOS 4+, Safari 5+, Opera
 
+### NPM Use
+```
+npm install promise-polyfill --save-exact
+```
+### Bower Use
+```
+bower install promise-polyfill
+```
+
 ## Downloads
 
 - [Promise](https://raw.github.com/taylorhakes/promise-polyfill/master/promise.js)
 - [Promise-min](https://raw.github.com/taylorhakes/promise-polyfill/master/promise.min.js)
-
-### Node
-```
-npm install promise-polyfill
-```
-### Bower
-```
-bower install promise-polyfill
-```
 
 ## Simple use
 ```js
