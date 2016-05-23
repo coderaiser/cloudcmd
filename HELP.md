@@ -1,9 +1,8 @@
-Cloud Commander v5.4.0
-===============
-### [Main][MainURL] [Blog][BlogURL] Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
+# Cloud Commander v5.4.0
+
+### [Main](http://cloudcmd.io "Main") [Blog](http://blog.cloudcmd.io "Blog") Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
+Live(![JitSu][JitSu_LIVE_IMG] [JitSu][JitSuURL], ![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
-[MainURL]:                  http://cloudcmd.io "Main"
-[BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 [JitSu_LIVE_IMG]:           https://status-io.cloudcmd.io/host/cloudcmd.jit.su/img/txt.png "JitSu"
