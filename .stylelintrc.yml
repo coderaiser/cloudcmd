@@ -8,7 +8,7 @@ rules:
     number-leading-zero: null
     number-no-trailing-zeros: null
     string-quotes: single
-    function-url-quotes: none
+    function-url-quotes: never
     no-eol-whitespace: null
-    font-family-name-quotes: single-unless-keyword
+    font-family-name-quotes: always-unless-keyword
 
