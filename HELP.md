@@ -583,7 +583,7 @@ Version history
 Special Thanks
 ---------------
 - [Polietilena](http://polietilena.github.io/ "Polietilena") for **logo** and **favicon**.
-- [TarZak](https://github.com/tarzak)
+- [TarZak](https://github.com/tarzak "TarZak")
     - Russian and Ukrainian translations;
     - config template and style;
     - change order of directories and files;
