@@ -1,4 +1,4 @@
-# Cloud Commander v5.4.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Gitter][GitterIMGURL]][GitterURL]
+# Cloud Commander v5.4.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
 ### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
 
@@ -18,6 +18,9 @@
 
 [PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
 [PackageQualityIMGURL]:     http://packagequality.com/shield/cloudcmd.svg
+
+[CodacyURL]:                https://www.codacy.com/app/coderaiser/cloudcmd
+[CodacyIMG]:                https://api.codacy.com/project/badge/Grade/ddda78be780549ce8754f8d47a8c0e36
 
 [GitterURL]:                https://gitter.im/cloudcmd
 [GitterIMGURL]:             https://img.shields.io/gitter/room/coderaiser/cloudcmd.js.svg
