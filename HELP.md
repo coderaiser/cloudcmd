@@ -239,6 +239,7 @@ Here is description of options:
 Menu
 ---------------
 ![Menu](/img/screen/menu.png "Menu")
+
 Right mouse click button shows context menu with items:
 
 - View
