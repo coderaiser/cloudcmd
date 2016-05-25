@@ -1,11 +1,10 @@
 # Cloud Commander v5.4.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
-### [Main][MainURL] [Blog][BlogURL] Live([JitSu][JitSuURL], [Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
 
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[JitSuURL]:                 http://cloudcmd.jit.su "JitSu"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
