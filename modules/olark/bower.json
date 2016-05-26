@@ -1,0 +1,19 @@
+{
+  "name": "olark",
+  "homepage": "https://github.com/cloudcmd/olark",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "olark extension for chat",
+  "main": "olark.min.js",
+  "keywords": [
+    "olark",
+    "chat"
+  ],
+  "license": "MIT",
+  "ignore": [
+  ],
+  "dependencies": {
+  }
+}
+
