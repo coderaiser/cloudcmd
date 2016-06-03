@@ -82,5 +82,13 @@ Emitify.prototype.emit = function(event) {
     return this;
 };
 
+Emitify.prototype.removeAllListeners = function(event) {
+    this._check(event);
+    this._all[event] = [];
+    
+    return this;
+}
+
+
 },{}]},{},["emitify"])("emitify")
 });

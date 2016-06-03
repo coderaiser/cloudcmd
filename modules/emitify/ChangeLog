@@ -1,3 +1,14 @@
+2016.06.02, v2.1.0
+
+feature:
+- (emitify) add removeAllListeners
+- (travis) add node v6
+- (package) npm-run-all -> redrun
+- (package) jscs v3.0.3
+- (package) browserify v13.0.0
+- (package) nyc v6.1.1
+
+
 2015.12.29, v2.0.0
 
 feature:

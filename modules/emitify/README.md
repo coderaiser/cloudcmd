@@ -39,6 +39,10 @@ Alias to `emitter.on`.
 
 Alias to `emitter.off`.
 
+### emitter.removeAllListeners(event)
+
+Removes all listeners related to `event`.
+
 ## How to use?
 
 ```js
