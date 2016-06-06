@@ -36,7 +36,7 @@
     "rendy": "~1.1.0",
     "execon": "~1.2.8",
     "emitify": "~2.1.0",
-    "findit": "~1.1.4",
+    "findit": "^1.1.5",
     "menu": "~1.0.2",
     "smalltalk": "^1.6.8",
     "promise-polyfill": "^5.2.0",

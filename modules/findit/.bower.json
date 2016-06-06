@@ -22,17 +22,17 @@
     "modules"
   ],
   "dependencies": {
-    "emitify": "~2.0.0"
+    "emitify": "^2.1.0"
   },
-  "version": "1.1.4",
-  "_release": "1.1.4",
+  "version": "1.1.5",
+  "_release": "1.1.5",
   "_resolution": {
     "type": "version",
-    "tag": "v1.1.4",
-    "commit": "f581f83f9a06d89f8578a38774a2d32dbeb73698"
+    "tag": "v1.1.5",
+    "commit": "1b8b27135ee977360427ea56ee105bb6c280ab76"
   },
-  "_source": "git://github.com/coderaiser/domfs-findit.git",
-  "_target": "~1.1.4",
+  "_source": "https://github.com/coderaiser/domfs-findit.git",
+  "_target": "^1.1.5",
   "_originalSource": "findit",
   "_direct": true
 }
