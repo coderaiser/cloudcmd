@@ -1,3 +1,15 @@
+2016.06.09, v5.4.2
+
+fix:
+- (edit) Paste: Ctrl+X -> Ctrl+V
+
+feature:
+- (bower) findit v1.1.5
+- (bower) philip v1.3.3
+- (bower) emitify v2.1.0
+- (olark) contact -> bower
+
+
 2016.05.25, v5.4.1
 
 fix:
