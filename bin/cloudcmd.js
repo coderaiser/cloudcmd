@@ -154,7 +154,7 @@
     }
     
     function help() {
-        var bin         = require('../json/bin'),
+        var bin         = require('../json/help'),
             usage       = 'Usage: cloudcmd [options]',
             url         = Info.homepage;
         
