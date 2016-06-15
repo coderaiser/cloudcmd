@@ -1,4 +1,4 @@
-# Cloud Commander v5.4.3
+# Cloud Commander v5.5.0
 
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
@@ -450,6 +450,7 @@ docker-compose up
 
 Version history
 ---------------
+- *2016.06.15*, **[v5.5.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.5.0.tar.gz)**
 - *2016.06.10*, **[v5.4.3](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.4.3.tar.gz)**
 - *2016.06.09*, **[v5.4.2](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.4.2.tar.gz)**
 - *2016.05.25*, **[v5.4.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v5.4.1.tar.gz)**

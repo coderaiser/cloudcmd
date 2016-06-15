@@ -1,3 +1,13 @@
+2016.06.15, v5.5.0
+
+feature:
+- (cloudcmd) add one-panel-mode
+- (json) bin -> help
+- (style) panel width: 97% -> 98%
+- (modules) jquery v3.0.0
+- (package) stylelint-config-standard v9.0.0
+
+
 2016.06.10, v5.4.3
 
 fix:
