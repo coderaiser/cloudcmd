@@ -78,6 +78,7 @@ Cloud Commander supports command line parameters:
 | `--progress`                  | show progress of file operations
 | `--html-dialogs`              | show html dialogs
 | `--open`                      | open web browser when server started
+| `--one-panel-mode`            | set one panel mode
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
@@ -85,6 +86,7 @@ Cloud Commander supports command line parameters:
 | `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
 | `--no-html-dialogs`           | do not use html dialogs
+| `--no-one-panel-mode`         | unset one panel mode
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -233,6 +235,7 @@ Here is description of options:
     "prefix"            : "",       /* url prefix                               */
     "progress"          : true      /* show progress of file operations         */
     "htmlDialogs"       : true      /* show html dialogs                        */
+    "onePanelMode"      : false     /* set one panel mode                       */
 }
 ```
 
@@ -268,7 +271,7 @@ Right mouse click button shows context menu with items:
 
 One panel mode
 ---------------
-Cloud Commander could work in one panel mode when screen size can not accommodate second panel.
+Cloud Commander could work in one panel mode when screen size can not accommodate second panel or via `--one-panel-mode` options flag.
 It could happen when mobile device, tablet or small window size used to work with file manager.
 
 ![One panel mode](/img/screen/one-panel-mode.png "One panel mode")

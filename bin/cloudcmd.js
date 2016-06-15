@@ -34,7 +34,8 @@
             'minify',
             'progress',
             'progress-of-copying',
-            'html-dialogs'
+            'html-dialogs',
+            'one-panel-mode'
         ],
         default: {
             server      : true,
@@ -49,7 +50,8 @@
             prefix      : config('prefix') || '',
             progress    : config('progress') || config('progressOfCopying'),
             
-            'html-dialogs' : config('htmlDialogs')
+            'html-dialogs'  : config('htmlDialogs'),
+            'one-panel-mode': config('onePanelMode'),
         },
         alias: {
             v: 'version',
@@ -87,6 +89,7 @@
         config('prefix', args.prefix);
         config('root', args.root);
         config('htmlDialogs', args['html-dialogs']);
+        config('onePanelMode', args['one-panel-mode']);
         
         readConfig(args.config);
         

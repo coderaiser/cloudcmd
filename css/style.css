@@ -18,6 +18,10 @@ body, pre, code {
     visibility: hidden;
 }
 
+.none {
+    display: none;
+}
+
 .fm, .keyspanel {
     cursor              : default;
     -webkit-user-select : none;
@@ -165,6 +169,10 @@ body, pre, code {
     width: 46%;
     height: 98%;
     padding: 1%;
+}
+
+.panel-single {
+    width: 98%;
 }
 
 .selected-panel {
