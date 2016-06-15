@@ -166,7 +166,7 @@
 
 @media only screen and (max-width: 1155px) {
     .panel {
-        width: 97%;
+        width: 98%;
     }
     /* если правая панель не помещаеться - прячем её */
     .panel-right, .cmd-button#f5, .cmd-button#f6 {
