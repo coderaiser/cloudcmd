@@ -20,10 +20,10 @@
     
     function main(callback) {
         var history     = 'Version history\n---------------\n',
-            link        = '//github.com/cloudcmd/archive/raw/master/cloudcmd',
+            link        = '//github.com/coderaiser/cloudcmd/releases/tag/',
             template    = '- *{{ date }}*, '    +
                           '**[v{{ version }}]'   +
-                          '(' + link + '-v{{ version }}.tar.gz)**\n',
+                          '(' + link + 'v{{ version }})**\n',
             version     = Info.version;
         
         cl(function(error, versionNew) {
