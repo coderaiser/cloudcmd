@@ -6,7 +6,6 @@ node_js:
 
 script:
   - npm run codestyle
-  - npm run security
   - npm run coverage && npm run report
 
 notifications:
