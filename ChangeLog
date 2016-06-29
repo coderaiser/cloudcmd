@@ -1,3 +1,12 @@
+2016.06.29, v5.5.1
+
+feature:
+- (travis) rm security
+- (package) redrun v4.0.0
+- (package) markdown-it v7.0.0
+- (img) add v5.5.0
+
+
 2016.06.15, v5.5.0
 
 feature:
