@@ -348,7 +348,7 @@ Get [nginx](http://nginx.org/ "nginx"). On Linux it could be done this way:
 sudo apt-get install nginx #for ubuntu and debian
 ```
 
-Than make host file **/etc/nginx/sites-enabled/io.cloudcmd.io**
+Then make host file **/etc/nginx/sites-available/io.cloudcmd.io**
 ( *io.cloudcmd.io* is your domain name) with content:
 
 ```sh
@@ -406,7 +406,7 @@ server {
 
 ```sh
 # create symlink of this file
-ln -s ./sites-enabled/io.cloudcmd.io ./sites-available
+ln -s ./sites-available/io.cloudcmd.io ./sites-enabled
 # restart nginx
 /etc/init.d/nginx restart
 ```
