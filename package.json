@@ -127,7 +127,7 @@
     "nyc": "^6.0.0",
     "place": "^1.1.4",
     "recess": "^1.1.9",
-    "redrun": "^4.0.0",
+    "redrun": "^5.0.0",
     "shortdate": "^1.0.1",
     "stylelint": "^6.1.1",
     "stylelint-config-standard": "^10.0.0",
