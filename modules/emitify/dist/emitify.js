@@ -42,7 +42,7 @@ Emitify.prototype.once  = function(event, callback) {
     self._check(event, callback);
     
     self.on(event, function fn() {
-        callback();
+        callback.apply(null, arguments);
         self.off(event, fn);
     });
     
@@ -87,7 +87,7 @@ Emitify.prototype.removeAllListeners = function(event) {
     this._all[event] = [];
     
     return this;
-}
+};
 
 
 },{}]},{},["emitify"])("emitify")

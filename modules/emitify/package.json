@@ -1,6 +1,6 @@
 {
   "name": "emitify",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "dead simple event emitter",
   "main": "lib/emitify.js",
   "scripts": {
@@ -36,8 +36,9 @@
     "jscs": "^3.0.3",
     "jshint": "^2.8.0",
     "minify": "^2.0.2",
-    "nyc": "^6.1.1",
-    "redrun": "^3.0.0",
+    "nyc": "^7.0.0",
+    "redrun": "^5.0.1",
     "tape": "^4.4.0"
-  }
+  },
+  "dependencies": {}
 }

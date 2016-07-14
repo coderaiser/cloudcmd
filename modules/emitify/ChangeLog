@@ -1,3 +1,14 @@
+2016.07.14, v2.1.1
+
+fix:
+- (emitify) once: arguments
+
+feature:
+- (package) redrun v5.0.0
+- (package) nyc v7.0.0
+- (package) redrun v4.0.0
+
+
 2016.06.02, v2.1.0
 
 feature:
