@@ -24,6 +24,10 @@
     
     z-index: 100;
 }
+.smalltalk + .smalltalk {
+    transition: ease 1s;
+    display: none;
+}
 
 .smalltalk .page {
     border-radius: 3px;

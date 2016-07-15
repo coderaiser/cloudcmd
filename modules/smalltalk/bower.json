@@ -1,6 +1,5 @@
 {
   "name": "smalltalk",
-  "version": "1.6.8",
   "homepage": "https://github.com/coderaiser/smalltalk",
   "authors": [
     "coderaiser <mnemonic.enemy@gmail.com>"
@@ -20,12 +19,8 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
-    "bower_components",
-    "modules",
-    "test",
-    "tests",
-    "screen"
+    "screen",
+    "example"
   ],
   "dependencies": {}
 }

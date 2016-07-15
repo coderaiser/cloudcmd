@@ -27,15 +27,13 @@ for preventing of handling cancel event.
 }
 ```
 
-## smalltalk.alert(title, message [, options])
+## smalltalk.alert(title, message)
 
 ![Alert](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/alert.png "Alert")
 
 ```js
 smalltalk.alert('Error', 'There was an error!').then(function() {
     console.log('ok');
-}, function() {
-    console.log('cancel');
 });
 ```
 
@@ -74,3 +72,4 @@ MIT
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/smalltalk  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/smalltalk "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+

@@ -1,3 +1,28 @@
+2016.07.15, v2.0.0
+
+feature:
+- (npmignore) add
+- (package) add legacy:index
+- (smalltalk) hide all bu first
+- (bower) ignore: clean
+- (smalltalk) alert: rm options
+- (package) lint: add eslint
+- (smalltalk) src -> lib
+- (gitignore) legacy
+- (package) add bundle
+- (example) add legacy
+- (smalltalk) IIFE -> commonjs
+- (jshint) esversion: 6
+- (package) redrun v5.0.0
+- (package) add lint
+- (package) redrun v5.0.0
+- (package) stylelint-config-standard v10.0.0
+- (package) redrun v4.0.0
+- (package) watch v0.19.1
+- (package) stylelint-config-standard v9.0.0
+- (package) stylelint-config-standard v8.0.0
+
+
 2016.05.10, v1.6.8
 
 feature:
