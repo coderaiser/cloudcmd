@@ -129,7 +129,7 @@
     "recess": "^1.1.9",
     "redrun": "^5.0.0",
     "shortdate": "^1.0.1",
-    "stylelint": "^6.1.1",
+    "stylelint": "^7.0.2",
     "stylelint-config-standard": "^10.0.0",
     "tape": "^4.4.0",
     "version-io": "^1.2.5",
