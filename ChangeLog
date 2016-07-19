@@ -1,3 +1,31 @@
+2016.07.19, v5.6.0
+
+feature:
+- (package) remedy v1.5.0
+- (package) ishtar v1.5.0
+- (package) spero v1.5.0
+- (package) edward v3.2.0
+- (package) dword v3.2.0
+- (cloudcmd) authCheck: add accept, reject
+- (package) stylelint-config-standard v11.0.0
+- (package) stylelint v7.0.2
+- (bower) smalltalk v2.0.0
+- (edit) add authCheck
+- (bower) emitify v2.1.1
+- (modules) philip v1.3.4
+- (modules) findit v1.1.6
+- (operation) add authCheck
+- (package) dword v3.1.0: add authCheck
+- (package) edward v3.1.0: add authCheck
+- (package) remedy v1.4.0: add authCheck
+- (package) ishtar v1.4.0: add authCheck
+- (package) spero v1.4.0: add authCheck
+- (bower) jquery v3.1.0
+- (package) nyc v7.0.0
+- (package) redrun v5.0.0
+- (package) stylelint-config-standard v10.0.0
+
+
 2016.06.29, v5.5.1
 
 feature:
