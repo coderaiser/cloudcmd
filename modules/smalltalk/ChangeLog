@@ -1,3 +1,16 @@
+2016.07.20, v2.1.0
+
+fix:
+- feature(package) add postcss, autoprefixer
+
+feature:
+- (smalltalk) hide all windows but first, no matter where they located in DOM
+- (travis) node v6
+- (package) add postcss, autoprefixer
+- (package) stylelint-config-standard v11.0.0
+- (package) stylelint v7.0.2
+
+
 2016.07.15, v2.0.0
 
 feature:

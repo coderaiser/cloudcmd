@@ -1,17 +1,10 @@
 .smalltalk {
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     
     align-items: center;
     flex-direction: column;
     justify-content: center;
     
-    -webkit-transition: 200ms opacity;
-    -moz-transition: 200ms opacity;
-    -ms-transition: 200ms opacity;
-    -o-transition: 200ms opacity;
     transition: 200ms opacity;
     
     bottom: 0;
@@ -24,7 +17,8 @@
     
     z-index: 100;
 }
-.smalltalk + .smalltalk {
+
+.smalltalk:not(:first-of-type) {
     transition: ease 1s;
     display: none;
 }
@@ -68,9 +62,6 @@
     white-space: nowrap;
     max-width: 500px;
     
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
     color: #333;
     font-size: 120%;
@@ -94,9 +85,6 @@
 }
 
 .smalltalk .page .button-strip {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
     display: flex;
     
     flex-direction: row;
@@ -104,27 +92,17 @@
 }
 
 .smalltalk .page .button-strip > button {
-    -webkit-margin-start: 10px;
-    -moz-margin-start: 10px;
-    -ms-margin-start: 10px;
+    margin-left: 10px;
 }
 
 .smalltalk button:enabled:focus, .smalltalk input:enabled:focus {
-    -webkit-transition: border-color 200ms;
-    -moz-transition: border-color 200ms;
-    -ms-transition: border-color 200ms;
-    -o-transition: border-color 200ms;
     transition: border-color 200ms;
     border-color: rgb(77, 144, 254);
     outline: none;
 }
 
 .smalltalk button:enabled:active {
-    background-image: -webkit-linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
-    background-image: -moz-linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
-    background-image: -ms-linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
     background-image: linear-gradient(#e7e7e7, #e7e7e7 38%, #d7d7d7);
-    
     box-shadow: none;
     text-shadow: none;
 }
@@ -139,19 +117,8 @@
 }
 
 .smalltalk button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
     appearance: none;
-    
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
-    
-    background-image: -webkit-linear-gradient(#ededed, #ededed 38%, #dedede);
-    background-image: -moz-linear-gradient(#ededed, #ededed 38%, #dedede);
-    background-image: -ms-linear-gradient(#ededed, #ededed 38%, #dedede);
     background-image: linear-gradient(#ededed, #ededed 38%, #dedede);
     
     border: 1px solid rgb(0, 0, 0);
@@ -165,10 +132,6 @@
 }
 
 .smalltalk button:enabled:focus, .smalltalk input:enabled:focus {
-    -webkit-transition: border-color 200ms;
-    -moz-transition: border-color 200ms;
-    -ms-transition: border-color 200ms;
-    -o-transition: border-color 200ms;
     transition: border-color 200ms;
     border-color: rgb(77, 144, 254);
     outline: none;
