@@ -78,7 +78,7 @@ function showDialog(title, msg, value, buttons, options) {
         el.setSelectionRange(0, value.length);
     });
     
-    addListeterAll('click', dialog, closeButtons, event =>
+    addListenerAll('click', dialog, closeButtons, event =>
         closeDialog(event.target, dialog, ok, cancel)
     );
     
@@ -224,7 +224,7 @@ function find(element, names) {
     return elements;
 }
 
-function addListeterAll(event, parent, elements, fn) {
+function addListenerAll(event, parent, elements, fn) {
     find(parent, elements).forEach(el =>
         el.addEventListener(event, fn)
     );

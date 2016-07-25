@@ -32,7 +32,6 @@
     "commit": "33dbcad07b762540f0f743f917be9bc829108bae"
   },
   "_source": "https://github.com/taylorhakes/promise-polyfill.git",
-  "_target": "^6.0.0",
-  "_originalSource": "promise-polyfill",
-  "_direct": true
+  "_target": "6.0.0",
+  "_originalSource": "promise-polyfill"
 }

@@ -20,17 +20,19 @@
   "ignore": [
     "**/.*",
     "screen",
-    "example"
+    "example",
+    "test"
   ],
   "dependencies": {},
-  "version": "2.1.0",
-  "_release": "2.1.0",
+  "version": "2.1.1",
+  "_release": "2.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.0",
-    "commit": "c94a49648f0ffff6f24e5770581b0528cc130664"
+    "tag": "v2.1.1",
+    "commit": "d5fbf701270e46919e63d287be0834c6b718ae51"
   },
   "_source": "https://github.com/coderaiser/smalltalk.git",
-  "_target": "2.1.0",
-  "_originalSource": "smalltalk"
+  "_target": "^2.1.1",
+  "_originalSource": "smalltalk",
+  "_direct": true
 }

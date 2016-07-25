@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -17,7 +17,11 @@
     ]
   },
   "scripts": {
-    "watch": "watch 'npm run 6to5' dist",
+    "watch": "nodemon --watch lib --watch test --exec",
+    "watch:test": "npm run watch -- npm test",
+    "watch:coverage": "redrun watch -- redrun coverage",
+    "coverage": "nyc npm test",
+    "report": "nyc report --reporter=text-lcov | coveralls",
     "compile:js": "babel -d legacy lib",
     "compile:css": "postcss --use autoprefixer css/*.css -d dist",
     "minify:css": "minify dist/smalltalk.css > dist/smalltalk.min.css",
@@ -41,9 +45,9 @@
     "minify": "minify",
     "wisdom": "npm run build",
     "lint:css": "stylelint css/*.css",
-    "lint:js": "jshint lib && jscs lib && eslint lib",
+    "lint:js": "jshint lib test && jscs lib test && eslint lib test",
     "lint": "redrun lint:*",
-    "test": "redrun lint:*"
+    "test": "tape 'test/**/*.js'"
   },
   "keywords": [
     "modal",
@@ -61,17 +65,21 @@
     "babel-cli": "^6.1.1",
     "babel-preset-es2015": "^6.0.15",
     "browserify": "^13.0.1",
+    "coveralls": "^2.11.11",
     "eslint": "^3.0.1",
     "jscs": "^3.0.3",
     "jshint": "^2.8.0",
     "minify": "^2.0.0",
+    "nodemon": "^1.9.2",
+    "nyc": "^7.0.0",
     "postcss-cli": "^2.5.2",
-    "promise-polyfill": "^5.1.0",
+    "promise-polyfill": "^6.0.0",
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
+    "sinon": "^1.17.4",
     "stylelint": "^7.0.2",
     "stylelint-config-standard": "^11.0.0",
     "systemjs": "^0.19.31",
-    "watch": "^0.19.1"
+    "tape": "^4.6.0"
   }
 }

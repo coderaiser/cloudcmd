@@ -26,13 +26,13 @@ exports.prompt         = (title, message, value, options) => {
 
 exports.confirm         = (title, message, options) => {
     const o         = options,
-        noCancel    = o && !o.noCancel,
+        noCancel    = o && !o.cancel,
         promise     = new Promise(function(resolve, reject) {
             const is = confirm(message);
             
-            if (is)
+            if (is || noCancel)
                 resolve();
-            else if (!noCancel)
+            else
                 reject();
         });
     
