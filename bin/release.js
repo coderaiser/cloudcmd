@@ -12,7 +12,7 @@ const   shortdate   = require('shortdate');
 
 const   ERROR   = Error('ERROR: version is missing. release --patch|--minor|--major');
 
-main(function(error) {
+main((error) => {
     if (error)
         console.error(error.message);
 });
@@ -26,7 +26,7 @@ function main(callback) {
     
     const version     = Info.version;
     
-    cl(function(error, versionNew) {
+    cl((error, versionNew) => {
         if (error) {
             callback(error);
         } else {
@@ -44,7 +44,7 @@ function main(callback) {
 }
 
 function replaceVersion(name, version, versionNew, callback) {
-    place(name, version, versionNew, function(error) {
+    place(name, version, versionNew, (error) => {
         let msg;
         
         if (!error)
