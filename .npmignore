@@ -9,3 +9,6 @@ test
 app.json
 circle.yml
 
+bin/release.js
+legacy
+
