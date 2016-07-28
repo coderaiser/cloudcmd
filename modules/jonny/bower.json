@@ -1,0 +1,26 @@
+{
+  "name": "jonny",
+  "version": "1.0.0",
+  "homepage": "https://github.com/coderaiser/jonny",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com>"
+  ],
+  "description": "work with json without exaptions",
+  "main": "lib/jonny.js",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "json",
+    "try"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "modules"
+  ],
+  "dependencies": {
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "jonny",
+  "version": "1.0.0",
+  "description": "work with json without exaptions",
+  "main": "lib/jonny.js",
+  "dependencies": {
+    "diff-match-patch": "~1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/jonny.git"
+  },
+  "keywords": [
+    "json",
+    "try"
+  ],
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderaiser/jonny/issues"
+  },
+  "homepage": "https://github.com/coderaiser/jonny"
+}
