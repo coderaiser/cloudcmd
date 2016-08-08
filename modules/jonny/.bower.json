@@ -29,7 +29,6 @@
     "commit": "b8909d33db868af9797c95881891c5d432209f1a"
   },
   "_source": "https://github.com/coderaiser/jonny.git",
-  "_target": "^1.0.1",
-  "_originalSource": "jonny",
-  "_direct": true
+  "_target": "1.0.1",
+  "_originalSource": "jonny"
 }

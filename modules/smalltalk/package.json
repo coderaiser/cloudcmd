@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -78,7 +78,7 @@
     "rimraf": "^2.5.3",
     "sinon": "^1.17.4",
     "stylelint": "^7.0.2",
-    "stylelint-config-standard": "^11.0.0",
+    "stylelint-config-standard": "^12.0.0",
     "systemjs": "^0.19.31",
     "tape": "^4.6.0"
   }
