@@ -97,7 +97,6 @@
     
     /* текущий файл под курсором */
     .current-file {
-        background-color: rgb(49, 123, 249);
         background-color: rgba(49, 123, 249, .40);
         color: white;
     }
@@ -111,7 +110,6 @@
     
     /* меняем иконки на шрифтовые */
     .mini-icon {
-        color           : rgb(246, 224, 124);
         color           : rgba(246, 224, 124, 0.56);
         font            : 16px 'Fontello';
         background-image: none;
@@ -132,7 +130,6 @@
     }
     
     .text-file::before {
-        color: rgb(26, 224, 124);
         color: rgba(26, 224, 124, 0.56);
         content: '\e80d';
     }

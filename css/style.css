@@ -41,7 +41,6 @@ body, pre, code {
 
 .panel, .cmd-button {
     border: 1.5px solid;
-    border-color: rgb(49, 123, 249);
     border-color: rgba(49, 123, 249, 0.4);
 }
 
@@ -176,7 +175,6 @@ body, pre, code {
 }
 
 .selected-panel {
-    border-color: rgb(254, 159, 224);
     border-color: rgba(254, 159, 224, .40);
 }
 
