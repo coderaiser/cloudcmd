@@ -11,7 +11,7 @@
 [DWORD]:                    https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]:                   https://github.com/cloudcmd/edward "Editor based on Ace"
 [EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
-
+[TERMUX]:                   https://termux.com "Termux"
 **Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
@@ -23,7 +23,7 @@ Benefits
 - Has 2 classic panels.
 - Optional **authorization**.
 - Client works in web browser.
-- Server works on **Windows**, **Linux** and **Mac OS**.
+- Server works on **Windows**, **Linux**, **Mac OS** and **Android** (with help of [Termux][TERMUX]).
 - Could be used local or remotely.
 - Adapting to screen size.
 - **2 built-in editors** with support of **syntax highlighting**: [Dword][DWORD] and [Edward][EDWARD].
