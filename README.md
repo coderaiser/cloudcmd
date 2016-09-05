@@ -1,4 +1,4 @@
-# Cloud Commander v5.6.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Circle Ci][CircleCiIMGURL]][CircleCiURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
+# Cloud Commander v5.6.0 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
 
@@ -23,9 +23,6 @@
 
 [GitterURL]:                https://gitter.im/cloudcmd
 [GitterIMGURL]:             https://img.shields.io/gitter/room/coderaiser/cloudcmd.js.svg
-
-[CircleCiURL]:              https://circleci.com/gh/coderaiser/cloudcmd
-[CircleCiIMGURL]:           https://circleci.com/gh/coderaiser/cloudcmd.svg
 
 [DeployURL]:                https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy"
 [DeployIMG]:                https://www.herokucdn.com/deploy/button.png
