@@ -1,3 +1,22 @@
+2016.09.06, v5.6.1
+
+fix:
+- (auth) blank password results in inability to authenticate
+- (events) dispatch: event -> customEvent
+
+feature:
+- (package) stylelint-config-standard v13.0.0
+- (package) nyc v8.1.0
+- (bower) smalltalk v2.1.2
+- (package) stylelint-config-standard v12.0.0
+- (package) add eslint
+- (jshintrc) add legacy
+- (util) json -> jonny
+- (bower) smalltalk v2.1.1
+- (bower) promise-polyfil v6.0.0
+- (bower) smalltalk v2.1.0
+
+
 2016.07.19, v5.6.0
 
 feature:
