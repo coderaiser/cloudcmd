@@ -1,3 +1,12 @@
+2016.09.22, v5.6.2
+
+fix:
+- (operation) English spelling: directoris -> directories (#76)
+
+feature:
+- (package) markdown-it v8.0.0
+
+
 2016.09.06, v5.6.1
 
 fix:
