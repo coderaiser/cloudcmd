@@ -1,11 +1,11 @@
 {
   "name": "promise-polyfill",
-  "version": "6.0.0",
+  "version": "6.0.2",
   "description": "Lightweight promise polyfill. A+ compliant",
   "main": "promise.js",
   "scripts": {
     "test": "eslint promise.js && mocha && karma start --single-run",
-    "build": "uglifyjs --compress --mangle -o promise.min.js -- promise.js "
+    "build": "uglifyjs --compress --support-ie8 --mangle -o promise.min.js -- promise.js "
   },
   "repository": {
     "type": "git",
