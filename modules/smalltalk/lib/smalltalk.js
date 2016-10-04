@@ -44,27 +44,24 @@ function getTemplate(title, msg, value, buttons) {
 
 function showDialog(title, msg, value, buttons, options) {
     let ok, cancel;
-    const dialog  = document.createElement('div'),
+    
+    const dialog  = document.createElement('div');
+    const closeButtons    = [
+        'cancel',
+        'close',
+        'ok'
+    ];
+    
+    const promise = new Promise((resolve, reject) => {
+        const noCancel    = options && !options.cancel;
+        const empty       = () => {};
         
-        closeButtons    = [
-            'cancel',
-            'close',
-            'ok'
-        ],
-        
-        promise = new Promise((resolve, reject) => {
-            const noCancel    = options && !options.cancel;
-            const empty       = () => {};
-            
-            ok      = resolve;
-            cancel  = reject;
-            
-            if (noCancel)
-                cancel = empty;
-        }),
-        
-        tmpl    = getTemplate(title, msg, value, buttons);
-        
+        ok      = resolve;
+        cancel  = noCancel ? empty : reject;
+    });
+    
+    const tmpl    = getTemplate(title, msg, value, buttons);
+    
     dialog.innerHTML = tmpl;
     dialog.className = 'smalltalk';
     
