@@ -140,7 +140,7 @@
     "stylelint-config-standard": "^13.0.0",
     "tape": "^4.4.0",
     "version-io": "^1.2.5",
-    "yaspeller": "^2.6.0"
+    "yaspeller": "^3.0.0"
   },
   "engines": {
     "node": ">=0.10"
