@@ -1,3 +1,13 @@
+2016.10.18, v5.7.0
+
+feature:
+- (cloudcmd) add deepword
+- (package) yaspeller v3.0.0
+- (bower) smalltalk v2.1.3
+- (bower) promise-polyfill v6.0.2
+- (modules) socket.io v1.4.8
+
+
 2016.09.22, v5.6.2
 
 fix:
