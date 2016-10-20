@@ -26,7 +26,7 @@
             "version": "2.1.5",
             "local": [
                 "/modules/fancybox/source/jquery.fancybox.css",
-                "/modules/fancybox/source/jquery.fancybox.js"
+                "/modules/fancybox/source/jquery.fancybox.pack.js"
             ],
             "remote": [
                 "//cdn.jsdelivr.net/fancybox/{{ version }}/jquery.fancybox.min.js",
