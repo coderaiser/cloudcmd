@@ -13,8 +13,8 @@
         "name": "remote",
         "data": [{
             "name": "jquery",
-            "version": "3.1.0",
-            "local": "/modules/jquery/dist/jquery.js",
+            "version": "3.1.1",
+            "local": "/modules/jquery/dist/jquery.min.js",
             "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
         }, {
             "name": "socket",

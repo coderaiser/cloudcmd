@@ -2,7 +2,8 @@ node_modules
 npm-debug.log*
 
 modules/fancybox/lib/
-modules/jquery/src
+modules/jquery/
+!modules/jquery/dist/jquery.min.js
 modules/fancybox/demo
 
 .nyc_output
