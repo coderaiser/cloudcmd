@@ -1,10 +1,15 @@
 node_modules
 npm-debug.log*
 
-modules/fancybox/lib/
-modules/jquery/
+modules/jquery/dist
+modules/jquery/external
+modules/jquery/src
+
 !modules/jquery/dist/jquery.min.js
+
+modules/fancybox/lib/
 modules/fancybox/demo
+modules/fancybox/sprite.psd
 
 .nyc_output
 
