@@ -1,3 +1,16 @@
+2016.10.24, v5.7.1
+
+fix:
+- (yaspeller) Deepword: quotes
+
+feature:
+- (package) dword v4.0.0
+- (gitignore) rm unused
+- (modules) jquery.fancybox.js -> jquery.fancybox.pack.js
+- (bower) jquery v3.1.1
+- (yaspeller) add Deepword
+
+
 2016.10.18, v5.7.0
 
 feature:
