@@ -1,3 +1,10 @@
+2016.10.24, v5.7.2
+
+fix:
+- (menu) download: file name containes "#" (#80)
+- (rest) download directory: overwriting response data (#78)
+
+
 2016.10.24, v5.7.1
 
 fix:
