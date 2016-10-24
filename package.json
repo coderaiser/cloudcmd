@@ -138,7 +138,7 @@
     "redrun": "^5.0.0",
     "shortdate": "^1.0.1",
     "stylelint": "^7.0.2",
-    "stylelint-config-standard": "^13.0.0",
+    "stylelint-config-standard": "^14.0.0",
     "tape": "^4.4.0",
     "version-io": "^1.2.5",
     "yaspeller": "^3.0.0"
