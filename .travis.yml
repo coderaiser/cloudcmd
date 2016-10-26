@@ -1,7 +1,7 @@
 language: node_js
 node_js:
+    - 7
     - 6
-    - 5
     - 4
 
 script:
@@ -14,3 +14,4 @@ notifications:
         on_failure: change
 
 sudo: false
+
