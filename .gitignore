@@ -13,3 +13,5 @@ modules/fancybox/sprite.psd
 
 .nyc_output
 
+*.swp
+
