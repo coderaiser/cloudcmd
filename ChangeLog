@@ -1,3 +1,9 @@
+2016.10.27, v5.7.4
+
+fix:
+- (operation) put back setListeners
+
+
 2016.10.27, v5.7.3
 
 fix:
