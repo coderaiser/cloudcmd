@@ -1,3 +1,21 @@
+2016.10.27, v5.7.3
+
+fix:
+- (operation) setListeners: leak on copy, pack, delete
+- (rest) pack, extract: put
+- chore(prefixer) rm iife
+- (menu) download: download files and folders with "%" in name
+
+feature:
+- (cloudcmd) pipe-io -> pullout
+- (validate) mv console.log out
+- (gitignore) add swp
+- (package) scripts: watch:test
+- (travis) node_js: add 7
+- (package) stylelint-config-standard v14.0.0
+- (package) edward v4.0.0
+
+
 2016.10.24, v5.7.2
 
 fix:
