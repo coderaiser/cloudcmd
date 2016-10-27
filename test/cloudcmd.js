@@ -1,4 +1,6 @@
+const assert = require('assert');
 const http = require('http');
+const fs = require('fs');
 
 const test = require('tape');
 const express = require('express');
@@ -10,6 +12,8 @@ const success = (fn) => (...args) => fn(null, ...args);
 
 const freeport = promisify(require('freeport'));
 const getBody = promisify(pipe.getBody);
+const getBuffer = promisify(_getBuffer);
+
 const get = promisify((url, fn) => {
     http.get(url, success(fn));
 });
@@ -56,4 +60,51 @@ test('cloudcmd: rest: fs: path', (t) => {
             });
     });
 });
+
+test('cloudcmd: rest: pack', (t) => {
+    before((port, after) => {
+        console.log(port);
+        get(`http://${host}:${port}/api/v1/pack/fixture/pack`)
+            .then(wrap(getBuffer))
+            .then((pack) => {
+                const fixture = fs.readFileSync(__dirname + '/fixture/pack.tar.gz');
+                t.ok(fixture.compare(pack), 'should pack data');
+                t.end();
+                after();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
+});
+
+/**
+ * get body of readStream
+ *
+ * @param readStream
+ * @param callback
+ */
+function _getBuffer(readStream, callback) {
+    var error,
+        body = [];
+    
+    assert(readStream, 'could not be empty!');
+    assert(callback, 'could not be empty!');
+     
+    readStream.on('data', onData);
+    readStream.on('error', onEnd);
+    readStream.on('end', onEnd);
+    
+    function onData(chunk) {
+        body.push(chunk);
+    }
+    
+    function onEnd(error) {
+        readStream.removeListener('data', onData);
+        readStream.removeListener('error', onEnd);
+        readStream.removeListener('end', onEnd);
+        
+        callback(error, Buffer.from(body));
+    }
+}
 
