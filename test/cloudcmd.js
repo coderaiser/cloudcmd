@@ -5,14 +5,14 @@ const fs = require('fs');
 const test = require('tape');
 const express = require('express');
 const promisify = require('es6-promisify');
-const pipe = require('pipe-io');
+const pullout = require('pullout');
 
 const wrap = (fn, ...a) => (...b) => fn(...a, ...b);
+const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 const success = (fn) => (...args) => fn(null, ...args);
 
 const freeport = promisify(require('freeport'));
-const getBody = promisify(pipe.getBody);
-const getBuffer = promisify(_getBuffer);
+const _pullout = promisify(pullout);
 
 const get = promisify((url, fn) => {
     http.get(url, success(fn));
@@ -48,7 +48,7 @@ test('cloudcmd: rest: fs: path', (t) => {
     before((port, after) => {
         console.log(port);
         get(`http://${host}:${port}/api/v1/fs`)
-            .then(wrap(getBody))
+            .then(warp(_pullout, 'string'))
             .then(JSON.parse)
             .then((dir) => {
                 t.equal('/', dir.path, 'should dir path be "/"');
@@ -65,7 +65,7 @@ test('cloudcmd: rest: pack', (t) => {
     before((port, after) => {
         console.log(port);
         get(`http://${host}:${port}/api/v1/pack/fixture/pack`)
-            .then(wrap(getBuffer))
+            .then(warp(_pullout, 'buffer'))
             .then((pack) => {
                 const fixture = fs.readFileSync(__dirname + '/fixture/pack.tar.gz');
                 t.ok(fixture.compare(pack), 'should pack data');
@@ -77,34 +77,4 @@ test('cloudcmd: rest: pack', (t) => {
             });
     });
 });
-
-/**
- * get body of readStream
- *
- * @param readStream
- * @param callback
- */
-function _getBuffer(readStream, callback) {
-    var error,
-        body = [];
-    
-    assert(readStream, 'could not be empty!');
-    assert(callback, 'could not be empty!');
-     
-    readStream.on('data', onData);
-    readStream.on('error', onEnd);
-    readStream.on('end', onEnd);
-    
-    function onData(chunk) {
-        body.push(chunk);
-    }
-    
-    function onEnd(error) {
-        readStream.removeListener('data', onData);
-        readStream.removeListener('error', onEnd);
-        readStream.removeListener('end', onEnd);
-        
-        callback(error, Buffer.from(body));
-    }
-}
 
