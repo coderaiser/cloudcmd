@@ -1,6 +1,5 @@
 const http = require('http');
 const fs = require('fs');
-const path = require('path');
 
 const test = require('tape');
 const express = require('express');
@@ -10,7 +9,6 @@ const request = require('request');
 
 const wrap = (fn, ...a) => (...b) => fn(...a, ...b);
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
-const success = (fn) => (...args) => fn(null, ...args);
 
 const freeport = promisify(require('freeport'));
 const _pullout = promisify(pullout);
@@ -88,7 +86,7 @@ test('cloudcmd: rest: pack: put: file', (t) => {
         
         put(options)
             .then(warp(_pullout, 'string'))
-            .then((pack) => {
+            .then(() => {
                 const file = fs.readFileSync(__dirname + '/' + name);
                 const fixture = fs.readFileSync(__dirname + '/fixture/pack.tar.gz');
                 
@@ -127,7 +125,6 @@ test('cloudcmd: rest: pack: put: response', (t) => {
 
 test('cloudcmd: rest: pack: put: error', (t) => {
     before((port, after) => {
-        const name = String(Math.random()) + '.tar.gz';
         const options = getPackOptions(host, port, 'name', [
             'not found'
         ]);
