@@ -101,12 +101,19 @@ if (args.version) {
     if (args.password)
         config('password', getPassword(args.password));
     
+    validateRoot(options.root);
+    
     if (!args.save)
         start(options);
     else
         config.save(function() {
             start(options);
         });
+}
+
+function validateRoot(root) {
+    var validate = require('../lib/server/validate');
+    validate.root(root, console.log);
 }
 
 function getPassword(password) {
