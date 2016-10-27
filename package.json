@@ -38,6 +38,7 @@
     "cloudcmd": "bin/cloudcmd.js"
   },
   "config": {
+    "dirs_legacy": "bin lib",
     "dirs": "bin lib test"
   },
   "scripts": {
@@ -50,11 +51,11 @@
     "lint:style": "stylelint css/*.css",
     "lint:js": "redrun jshint jscs eslint",
     "lint:js:legacy": "redrun legacy:*",
-    "eslint": "eslint --rule 'no-console:0' bin/release.js",
+    "eslint": "eslint --rule 'no-console:0' test bin/release.js",
     "jshint": "jshint bin/release.js",
     "jscs": "jscs --esnext $npm_package_config_dirs",
-    "legacy:jshint": "jshint --config legacy/.jshintrc $npm_package_config_dirs --exclude bin/release.js",
-    "legacy:eslint": "eslint -c legacy/.eslintrc --rule 'no-console:0' $npm_package_config_dirs --ignore-path bin/release.js",
+    "legacy:jshint": "jshint --config legacy/.jshintrc $npm_package_config_dirs_dirs_legacy --exclude bin/release.js",
+    "legacy:eslint": "eslint -c legacy/.eslintrc --rule 'no-console:0' $npm_package_config_dirs_legacy --ignore-path bin/release.js",
     "test": "tape 'test/**/*.js'",
     "watch:test": "nodemon -w lib -w test -x \"npm run test\"",
     "spell": "yaspeller .",
