@@ -282,32 +282,47 @@ Using as Middleware
 
 Cloud Commander could be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
 
+Init `package.json`:
+
+```
+npm init -y
+```
+
+Install dependencies:
+
+```
+npm i cloudcmd express socket.io -S
+```
+
+And create `index.js`:
+
 ```js
-var http        = require('http'),
-    cloudcmd    = require('cloudcmd'),
-    express     = require('express'),
-    io          = require('socket.io'),
-    app         = express(),
-    
-    PORT        = 1337,
-    PREFIX      = '/cloudcmd',
-    server,
-    socket;
-    
-server = http.createServer(app);
-socket = io.listen(server, {
-    path: PREFIX + '/socket.io'
+const http = require('http');
+const cloudcmd = require('cloudcmd');
+const io = require('socket.io');
+const app = require('express')();
+
+const port = 1337;
+const prefix = '/cloudcmd';
+
+const server = http.createServer(app);
+const socket = io.listen(server, {
+    path: `${prefix}/socket.io`
 });
 
+const config = {
+    prefix /* base URL or function which returns base URL (optional)   */
+};
+
 app.use(cloudcmd({
-    socket: socket,     /* used by Config, Edit (optional) and Console (required)   */
-    config: {           /* config data (optional)                                   */
-        prefix: PREFIX, /* base URL or function which returns base URL (optional)   */
-    }
+    socket, /* used by Config, Edit (optional) and Console (required)   */
+    config, /* config data (optional)                                   */
 }));
 
-server.listen(PORT);
+server.listen(port);
 ```
+
+And you are ready to go.
 
 Server
 ---------------
