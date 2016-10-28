@@ -27,7 +27,7 @@
 [DeployURL]:                https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy"
 [DeployIMG]:                https://www.herokucdn.com/deploy/button.png
 
-**Cloud Commander** orthodox web file manager with console and editor.
+**Cloud Commander** is an orthodox web file manager with console and editor.
 
 ![Cloud Commander](http://cloudcmd.io/img/logo/cloudcmd.png "Cloud Commander")
 
