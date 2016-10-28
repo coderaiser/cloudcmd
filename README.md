@@ -82,12 +82,12 @@ const prefix = '/cloudcmd';
 
 const server = http.createServer(app);
 const socket = io.listen(server, {
-    path: `${prefix}/socket.io'
+    path: `${prefix}/socket.io`
 });
 
 const config = {
     prefix /* base URL or function which returns base URL (optional)   */
-}
+};
 
 app.use(cloudcmd({
     socket, /* used by Config, Edit (optional) and Console (required)   */
