@@ -7,10 +7,8 @@ const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 
-const wrap = (fn, ...a) => (...b) => fn(...a, ...b);
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 
-const freeport = promisify(require('freeport'));
 const _pullout = promisify(pullout);
 
 const get = promisify((url, fn) => {
@@ -23,17 +21,11 @@ const put = promisify((options, fn) => {
 
 const cloudcmd = require('..');
 
-const host = '127.0.0.1';
-
 const before = (fn) => {
     const app = express();
     const server = http.createServer(app);
     const after = () => {
         server.close();
-    };
-    
-    const listen = (port) => {
-       server.listen(port, host, wrap(fn, port, after));
     };
     
     app.use(cloudcmd({
@@ -43,13 +35,14 @@ const before = (fn) => {
         }
     }));
     
-    freeport()
-        .then(listen)
+    server.listen(() => {
+        fn(server.address().port, after);
+    });
 };
 
 test('cloudcmd: rest: fs: path', (t) => {
     before((port, after) => {
-        get(`http://${host}:${port}/api/v1/fs`)
+        get(`http://localhost:${port}/api/v1/fs`)
             .then(warp(_pullout, 'string'))
             .then(JSON.parse)
             .then((dir) => {
@@ -65,7 +58,7 @@ test('cloudcmd: rest: fs: path', (t) => {
 
 test('cloudcmd: rest: pack: get', (t) => {
     before((port, after) => {
-        get(`http://${host}:${port}/api/v1/pack/fixture/pack`)
+        get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
             .then(_pullout)
             .then((pack) => {
                 const fixture = fs.readFileSync(__dirname + '/fixture/pack.tar.gz');
@@ -82,7 +75,7 @@ test('cloudcmd: rest: pack: get', (t) => {
 test('cloudcmd: rest: pack: put: file', (t) => {
     before((port, after) => {
         const name = String(Math.random()) + '.tar.gz';
-        const options = getPackOptions(host, port, name);
+        const options = getPackOptions(port, name);
         
         put(options)
             .then(warp(_pullout, 'string'))
@@ -105,7 +98,7 @@ test('cloudcmd: rest: pack: put: file', (t) => {
 test('cloudcmd: rest: pack: put: response', (t) => {
     before((port, after) => {
         const name = String(Math.random()) + '.tar.gz';
-        const options = getPackOptions(host, port, name);
+        const options = getPackOptions(port, name);
         
         put(options)
             .then(warp(_pullout, 'string'))
@@ -125,7 +118,7 @@ test('cloudcmd: rest: pack: put: response', (t) => {
 
 test('cloudcmd: rest: pack: put: error', (t) => {
     before((port, after) => {
-        const options = getPackOptions(host, port, 'name', [
+        const options = getPackOptions(port, 'name', [
             'not found'
         ]);
         
@@ -143,9 +136,9 @@ test('cloudcmd: rest: pack: put: error', (t) => {
     });
 });
 
-function getPackOptions(host, port, to, names = ['pack']) {
+function getPackOptions(port, to, names = ['pack']) {
     return {
-            url: `http://${host}:${port}/api/v1/pack`,
+            url: `http://localhost:${port}/api/v1/pack`,
             json: {
                 to,
                 names,
