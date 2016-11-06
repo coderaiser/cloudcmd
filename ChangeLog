@@ -1,3 +1,10 @@
+2016.11.06, v5.7.6
+
+fix:
+- (key) ALT + LEFT/RIGHT: one panel mode
+- (key) listener: handle of Numpad keys
+
+
 2016.11.06, v5.7.5
 
 fix:
