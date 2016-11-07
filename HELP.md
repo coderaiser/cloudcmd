@@ -4,7 +4,6 @@
 
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 [HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
@@ -42,8 +41,6 @@ The installation of file manager is very simple.
 ```sh
 npm i cloudcmd -g
 ```
-
-![NPM_INFO][NPM_INFO_IMG]
 
 When in trouble use:
 
