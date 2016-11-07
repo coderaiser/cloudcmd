@@ -7,65 +7,65 @@ var Info        = require('../package'),
     DIR_LIB     = DIR + 'lib/',
     DIR_SERVER  = DIR_LIB + 'server/',
 
-exit        = require(DIR_SERVER + 'exit'),
-config      = require(DIR_SERVER + 'config'),
-
-options,
-argv        = process.argv,
-
-args        = require('minimist')(argv.slice(2), {
-    string: [
-        'port',
-        'password',
-        'username',
-        'config',
-        'editor',
-        'root',
-        'prefix'
-    ],
-    boolean: [
-        'auth',
-        'repl',
-        'save',
-        'server',
-        'online',
-        'open',
-        'minify',
-        'progress',
-        'progress-of-copying',
-        'html-dialogs',
-        'one-panel-mode'
-    ],
-    default: {
-        server      : true,
-        auth        : config('auth'),
-        port        : config('port'),
-        minify      : config('minify'),
-        online      : config('online'),
-        open        : config('open'),
-        editor      : config('editor') || 'edward',
-        username    : config('username'),
-        root        : config('root') || '/',
-        prefix      : config('prefix') || '',
-        progress    : config('progress') || config('progressOfCopying'),
-        
-        'html-dialogs'  : config('htmlDialogs'),
-        'one-panel-mode': config('onePanelMode'),
-    },
-    alias: {
-        v: 'version',
-        h: 'help',
-        p: 'password',
-        o: 'online',
-        u: 'username',
-        s: 'save',
-        a: 'auth',
-        c: 'config'
-    },
-    unknown: function(cmd) {
-        exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
-    }
-});
+    exit        = require(DIR_SERVER + 'exit'),
+    config      = require(DIR_SERVER + 'config'),
+    
+    options,
+    argv        = process.argv,
+    
+    args        = require('minimist')(argv.slice(2), {
+        string: [
+            'port',
+            'password',
+            'username',
+            'config',
+            'editor',
+            'root',
+            'prefix'
+        ],
+        boolean: [
+            'auth',
+            'repl',
+            'save',
+            'server',
+            'online',
+            'open',
+            'minify',
+            'progress',
+            'progress-of-copying',
+            'html-dialogs',
+            'one-panel-mode'
+        ],
+        default: {
+            server      : true,
+            auth        : config('auth'),
+            port        : config('port'),
+            minify      : config('minify'),
+            online      : config('online'),
+            open        : config('open'),
+            editor      : config('editor') || 'edward',
+            username    : config('username'),
+            root        : config('root') || '/',
+            prefix      : config('prefix') || '',
+            progress    : config('progress') || config('progressOfCopying'),
+            
+            'html-dialogs'  : config('htmlDialogs'),
+            'one-panel-mode': config('onePanelMode'),
+        },
+        alias: {
+            v: 'version',
+            h: 'help',
+            p: 'password',
+            o: 'online',
+            u: 'username',
+            s: 'save',
+            a: 'auth',
+            c: 'config'
+        },
+        unknown: function(cmd) {
+            exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
+        }
+    });
 
 if (args.version) {
     version();
