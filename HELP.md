@@ -76,6 +76,7 @@ Cloud Commander supports command line parameters:
 | `--progress`                  | show progress of file operations
 | `--open`                      | open web browser when server started
 | `--one-panel-mode`            | set one panel mode
+  `--config-dialog`             | enable config dialog
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
@@ -83,6 +84,7 @@ Cloud Commander supports command line parameters:
 | `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
 | `--no-one-panel-mode`         | unset one panel mode
+| `--no-config-dialog`          | disable config dialog
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.

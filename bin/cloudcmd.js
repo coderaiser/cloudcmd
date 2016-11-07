@@ -32,6 +32,7 @@ var Info        = require('../package'),
             'open',
             'minify',
             'progress',
+            'config-dialog',
             'one-panel-mode'
         ],
         default: {
@@ -47,6 +48,7 @@ var Info        = require('../package'),
             prefix      : config('prefix') || '',
             progress    : config('progress'),
             
+            'config-dialog': defaultTrue(config('configDialog')),
             'one-panel-mode': config('onePanelMode'),
         },
         alias: {
@@ -85,6 +87,7 @@ if (args.version) {
     config('prefix', args.prefix);
     config('root', args.root);
     config('onePanelMode', args['one-panel-mode']);
+    config('configDialog', args['config-dialog']);
     
     readConfig(args.config);
     
@@ -105,6 +108,13 @@ if (args.version) {
         config.save(function() {
             start(options);
         });
+}
+
+function defaultTrue(value) {
+    if (typeof value === 'undefined')
+        return true;
+    
+    return value;
 }
 
 function validateRoot(root) {

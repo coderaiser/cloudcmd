@@ -20,5 +20,6 @@
     "root": "/",
     "prefix": "",
     "progress": true,
-    "onePanelMode": false
+    "onePanelMode": false,
+    "configDialog": true
 }

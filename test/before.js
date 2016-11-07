@@ -8,6 +8,7 @@ const writejson = require('writejson');
 const readjson = require('readjson');
 
 const cloudcmd = require('..');
+const {assign} = Object;
 
 const pathConfig = os.homedir() + '/.cloudcmd.json';
 const currentConfig = readjson.sync.try(pathConfig);
@@ -23,14 +24,18 @@ module.exports = (config, fn = config) => {
     };
     
     app.use(cloudcmd({
-        config: {
-            auth: false,
-            root: __dirname
-        }
+        config: assign(defaultConfig(), config)
     }));
     
     server.listen(() => {
         fn(server.address().port, after);
     });
 };
+
+function defaultConfig() {
+    return {
+        auth: false,
+        root: __dirname
+    };
+}
 

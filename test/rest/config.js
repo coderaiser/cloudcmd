@@ -35,18 +35,63 @@ test('cloudcmd: rest: config: get', (t) => {
     });
 });
 
-test('cloudcmd: rest: config: put', (t) => {
-    before((port, after) => {
-        patch(`http://localhost:${port}/api/v1/config`, {
-            json: {
-                auth: false
-            }
-        })
+test('cloudcmd: rest: config: patch', (t) => {
+    const configDialog = true;
+    
+    before({configDialog}, (port, after) => {
+        const json = {
+            auth: false,
+        };
+        
+        patch(`http://localhost:${port}/api/v1/config`, json)
             .then(warp(_pullout, 'string'))
             .then((result) => {
-                t.equal(result, 'config: ok("json")', 'should patch config');
+                t.equal(result, 'config: ok("auth")', 'should patch config');
                 t.end();
                 after();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
+});
+
+test('cloudcmd: rest: config: patch: no configDialog', (t) => {
+    const configDialog = false;
+    
+    before({configDialog}, (port, after) => {
+        const json = {
+            ip: null
+        };
+        
+        patch(`http://localhost:${port}/api/v1/config`, json)
+            .then(warp(_pullout, 'string'))
+            .then((result) => {
+                t.equal(result, 'Config is disabled', 'should return error');
+                t.end();
+                after();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
+});
+
+test('cloudcmd: rest: config: patch: no configDialog: statusCode', (t) => {
+    const configDialog = false;
+    
+    before({configDialog}, (port, after) => {
+        const json = {
+            ip: null
+        };
+        
+        patch(`http://localhost:${port}/api/v1/config`, json)
+            .then((result) => {
+                result.on('response', (response) => {
+                    t.equal(response.statusCode, 404);
+                    t.end();
+                    after();
+                });
             })
             .catch((error) => {
                 console.log(error);
