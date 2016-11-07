@@ -20,6 +20,5 @@
     "root": "/",
     "prefix": "",
     "progress": true,
-    "htmlDialogs": true,
     "onePanelMode": false
 }

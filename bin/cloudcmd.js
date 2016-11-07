@@ -32,7 +32,6 @@ var Info        = require('../package'),
             'open',
             'minify',
             'progress',
-            'html-dialogs',
             'one-panel-mode'
         ],
         default: {
@@ -48,7 +47,6 @@ var Info        = require('../package'),
             prefix      : config('prefix') || '',
             progress    : config('progress'),
             
-            'html-dialogs'  : config('htmlDialogs'),
             'one-panel-mode': config('onePanelMode'),
         },
         alias: {
@@ -86,7 +84,6 @@ if (args.version) {
     config('progress', args.progress);
     config('prefix', args.prefix);
     config('root', args.root);
-    config('htmlDialogs', args['html-dialogs']);
     config('onePanelMode', args['one-panel-mode']);
     
     readConfig(args.config);

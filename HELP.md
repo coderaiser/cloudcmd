@@ -74,7 +74,6 @@ Cloud Commander supports command line parameters:
 | `--port`                      | set port number
 | `--minify`                    | enable minification
 | `--progress`                  | show progress of file operations
-| `--html-dialogs`              | show html dialogs
 | `--open`                      | open web browser when server started
 | `--one-panel-mode`            | set one panel mode
 | `--no-server`                 | do not start server
@@ -83,7 +82,6 @@ Cloud Commander supports command line parameters:
 | `--no-open`                   | do not open web browser when server started
 | `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
-| `--no-html-dialogs`           | do not use html dialogs
 | `--no-one-panel-mode`         | unset one panel mode
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
