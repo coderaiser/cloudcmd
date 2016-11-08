@@ -1,15 +1,21 @@
+'use strict';
+
 const fs = require('fs');
+const path = require('path');
 
 const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 
-const before = require('./before');
+const before = require('../before');
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 
 const _pullout = promisify(pullout);
+
+const pathFixture = path.join(__dirname, '..', 'fixture/pack.tar.gz');
+const fixture = fs.readFileSync(pathFixture);
 
 const get = promisify((url, fn) => {
     fn(null, request(url));
@@ -40,7 +46,6 @@ test('cloudcmd: rest: pack: get', (t) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
             .then(_pullout)
             .then((pack) => {
-                const fixture = fs.readFileSync(__dirname + '/fixture/pack.tar.gz');
                 t.ok(fixture.compare(pack), 'should pack data');
                 t.end();
                 after();
@@ -59,10 +64,9 @@ test('cloudcmd: rest: pack: put: file', (t) => {
         put(options)
             .then(warp(_pullout, 'string'))
             .then(() => {
-                const file = fs.readFileSync(__dirname + '/' + name);
-                const fixture = fs.readFileSync(__dirname + '/fixture/pack.tar.gz');
+                const file = fs.readFileSync(__dirname + '/../' + name);
                 
-                fs.unlinkSync(`${__dirname}/${name}`);
+                fs.unlinkSync(`${__dirname}/../${name}`);
                 t.ok(fixture.compare(file), 'should create archive');
                 
                 t.end();
@@ -84,7 +88,7 @@ test('cloudcmd: rest: pack: put: response', (t) => {
             .then((msg) => {
                 t.equal(msg, 'pack: ok("fixture")', 'should return result message');
                 
-                fs.unlinkSync(`${__dirname}/${name}`);
+                fs.unlinkSync(`${__dirname}/../${name}`);
                 
                 t.end();
                 after();
