@@ -1,11 +1,11 @@
-const http = require('http');
 const fs = require('fs');
 
 const test = require('tape');
-const express = require('express');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
+
+const before = require('./before');
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 
@@ -18,27 +18,6 @@ const get = promisify((url, fn) => {
 const put = promisify((options, fn) => {
     fn(null, request.put(options));
 });
-
-const cloudcmd = require('..');
-
-const before = (fn) => {
-    const app = express();
-    const server = http.createServer(app);
-    const after = () => {
-        server.close();
-    };
-    
-    app.use(cloudcmd({
-        config: {
-            auth: false,
-            root: __dirname
-        }
-    }));
-    
-    server.listen(() => {
-        fn(server.address().port, after);
-    });
-};
 
 test('cloudcmd: rest: fs: path', (t) => {
     before((port, after) => {
