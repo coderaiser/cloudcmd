@@ -1,3 +1,13 @@
+2016.11.09, v5.8.0
+
+feature:
+- (cloudcmd) add --no-config-dialog: add ability to hide config dialog (#65)
+- (jscs) requireVarDeclFirst: false
+- (package) jaguar v3.0.0
+- (cloudcmd) rm --html-dialogs: do nothing
+- (cloudcmd) rm deprecated long time ago --progress-of-copying
+
+
 2016.11.06, v5.7.6
 
 fix:
