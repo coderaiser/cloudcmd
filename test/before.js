@@ -1,7 +1,6 @@
 'use strict';
 
 const http = require('http');
-const fs = require('fs');
 const os = require('os');
 
 const express = require('express');
