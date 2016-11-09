@@ -231,9 +231,9 @@ Here is description of options:
     "ip"                : null,     /* ip or null(default)                      */
     "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
-    "progress"          : true      /* show progress of file operations         */
-    "htmlDialogs"       : true      /* show html dialogs                        */
-    "onePanelMode"      : false     /* set one panel mode                       */
+    "progress"          : true,     /* show progress of file operations         */
+    "onePanelMode"      : false,    /* set one panel mode                       */
+    "configDialog"      : true      /* enable config dialog                     */
 }
 ```
 
