@@ -8,6 +8,7 @@
     "disallowDanglingUnderscores": false,
     "validateIndentation": false,
     "requireCurlyBraces": false,
+    "requireVarDeclFirst": false,
     "requireSpacesInAnonymousFunctionExpression": {
         "beforeOpeningCurlyBrace": true
     },
