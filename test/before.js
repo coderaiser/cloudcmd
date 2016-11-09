@@ -4,6 +4,7 @@ const http = require('http');
 const os = require('os');
 
 const express = require('express');
+const io = require('socket.io');
 const writejson = require('writejson');
 const readjson = require('readjson');
 
@@ -23,7 +24,10 @@ module.exports = (config, fn = config) => {
         server.close();
     };
     
+    const socket = io.listen(server);
+    
     app.use(cloudcmd({
+        socket,
         config: assign(defaultConfig(), config)
     }));
     

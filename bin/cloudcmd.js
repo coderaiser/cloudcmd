@@ -32,6 +32,7 @@ var Info        = require('../package'),
             'open',
             'minify',
             'progress',
+            'console',
             'config-dialog',
             'one-panel-mode'
         ],
@@ -47,6 +48,7 @@ var Info        = require('../package'),
             root        : config('root') || '/',
             prefix      : config('prefix') || '',
             progress    : config('progress'),
+            console     : defaultTrue(config('console')),
             
             'config-dialog': defaultTrue(config('configDialog')),
             'one-panel-mode': config('onePanelMode'),
@@ -84,6 +86,7 @@ if (args.version) {
     config('minify', args.minify);
     config('username', args.username);
     config('progress', args.progress);
+    config('console', args.console);
     config('prefix', args.prefix);
     config('root', args.root);
     config('onePanelMode', args['one-panel-mode']);

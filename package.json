@@ -140,6 +140,7 @@
     "redrun": "^5.0.0",
     "request": "^2.76.0",
     "shortdate": "^1.0.1",
+    "socket.io-client": "^1.5.1",
     "stylelint": "^7.0.2",
     "stylelint-config-standard": "^14.0.0",
     "tape": "^4.4.0",
