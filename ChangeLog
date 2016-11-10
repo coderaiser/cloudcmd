@@ -1,3 +1,9 @@
+2016.11.10, v5.9.0
+
+feature:
+- (cloudcmd) add ability to disable console with "--no-console" (#65)
+
+
 2016.11.09, v5.8.0
 
 feature:
