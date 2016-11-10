@@ -1,3 +1,9 @@
+2016.11.10, v5.9.1
+
+fix:
+- (cloudcmd) bring back working --html-dialogs
+
+
 2016.11.10, v5.9.0
 
 feature:
