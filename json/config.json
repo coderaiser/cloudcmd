@@ -20,6 +20,8 @@
     "root": "/",
     "prefix": "",
     "progress": true,
+    "htmlDialogs": true,
+    "configDialog": true,
     "onePanelMode": false,
     "configDialog": true,
     "console": true

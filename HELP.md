@@ -74,6 +74,7 @@ Cloud Commander supports command line parameters:
 | `--port`                      | set port number
 | `--minify`                    | enable minification
 | `--progress`                  | show progress of file operations
+| `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
 | `--one-panel-mode`            | set one panel mode
   `--config-dialog`             | enable config dialog
@@ -84,6 +85,7 @@ Cloud Commander supports command line parameters:
 | `--no-open`                   | do not open web browser when server started
 | `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
+| `--no-html-dialogs`           | do not use html dialogs
 | `--no-one-panel-mode`         | unset one panel mode
 | `--no-config-dialog`          | disable config dialog
 | `--no-console`                | disable console
@@ -234,6 +236,7 @@ Here is description of options:
     "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
     "progress"          : true,     /* show progress of file operations         */
+    "htmlDialogs"       : true,     /* use html dialogs                         */
     "onePanelMode"      : false,    /* set one panel mode                       */
     "configDialog"      : true,     /* enable config dialog                     */
     "console"           : true      /* enable console                           */
