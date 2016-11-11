@@ -1,3 +1,67 @@
+2016.11.10, v5.9.1
+
+fix:
+- (cloudcmd) bring back working --html-dialogs
+
+
+2016.11.10, v5.9.0
+
+feature:
+- (cloudcmd) add ability to disable console with "--no-console" (#65)
+
+
+2016.11.09, v5.8.0
+
+feature:
+- (cloudcmd) add --no-config-dialog: add ability to hide config dialog (#65)
+- (jscs) requireVarDeclFirst: false
+- (package) jaguar v3.0.0
+- (cloudcmd) rm --html-dialogs: do nothing
+- (cloudcmd) rm deprecated long time ago --progress-of-copying
+
+
+2016.11.06, v5.7.6
+
+fix:
+- (key) ALT + LEFT/RIGHT: one panel mode
+- (key) listener: handle of Numpad keys
+
+
+2016.11.06, v5.7.5
+
+fix:
+- (client) baseInit: do not set history when hash preset
+- (client) route: open file with module by hash: string.join -> string
+
+feature:
+- (package) jaguar v2.1.0
+- (package) rm freeport
+
+
+2016.10.27, v5.7.4
+
+fix:
+- (operation) put back setListeners
+
+
+2016.10.27, v5.7.3
+
+fix:
+- (operation) setListeners: leak on copy, pack, delete
+- (rest) pack, extract: put
+- chore(prefixer) rm iife
+- (menu) download: download files and folders with "%" in name
+
+feature:
+- (cloudcmd) pipe-io -> pullout
+- (validate) mv console.log out
+- (gitignore) add swp
+- (package) scripts: watch:test
+- (travis) node_js: add 7
+- (package) stylelint-config-standard v14.0.0
+- (package) edward v4.0.0
+
+
 2016.10.24, v5.7.2
 
 fix:

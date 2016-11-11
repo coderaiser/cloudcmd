@@ -21,5 +21,9 @@
     "prefix": "",
     "progress": true,
     "htmlDialogs": true,
-    "onePanelMode": false
+    "configDialog": true,
+    "onePanelMode": false,
+    "configDialog": true,
+    "console": true
 }
+

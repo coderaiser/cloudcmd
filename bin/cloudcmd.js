@@ -7,65 +7,68 @@ var Info        = require('../package'),
     DIR_LIB     = DIR + 'lib/',
     DIR_SERVER  = DIR_LIB + 'server/',
 
-exit        = require(DIR_SERVER + 'exit'),
-config      = require(DIR_SERVER + 'config'),
-
-options,
-argv        = process.argv,
-
-args        = require('minimist')(argv.slice(2), {
-    string: [
-        'port',
-        'password',
-        'username',
-        'config',
-        'editor',
-        'root',
-        'prefix'
-    ],
-    boolean: [
-        'auth',
-        'repl',
-        'save',
-        'server',
-        'online',
-        'open',
-        'minify',
-        'progress',
-        'progress-of-copying',
-        'html-dialogs',
-        'one-panel-mode'
-    ],
-    default: {
-        server      : true,
-        auth        : config('auth'),
-        port        : config('port'),
-        minify      : config('minify'),
-        online      : config('online'),
-        open        : config('open'),
-        editor      : config('editor') || 'edward',
-        username    : config('username'),
-        root        : config('root') || '/',
-        prefix      : config('prefix') || '',
-        progress    : config('progress') || config('progressOfCopying'),
-        
-        'html-dialogs'  : config('htmlDialogs'),
-        'one-panel-mode': config('onePanelMode'),
-    },
-    alias: {
-        v: 'version',
-        h: 'help',
-        p: 'password',
-        o: 'online',
-        u: 'username',
-        s: 'save',
-        a: 'auth',
-        c: 'config'
-    },
-    unknown: function(cmd) {
-        exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
-    }
-});
+    exit        = require(DIR_SERVER + 'exit'),
+    config      = require(DIR_SERVER + 'config'),
+    
+    options,
+    argv        = process.argv,
+    
+    args        = require('minimist')(argv.slice(2), {
+        string: [
+            'port',
+            'password',
+            'username',
+            'config',
+            'editor',
+            'root',
+            'prefix'
+        ],
+        boolean: [
+            'auth',
+            'repl',
+            'save',
+            'server',
+            'online',
+            'open',
+            'minify',
+            'progress',
+            'html-dialogs',
+            'console',
+            'config-dialog',
+            'one-panel-mode'
+        ],
+        default: {
+            server      : true,
+            auth        : config('auth'),
+            port        : config('port'),
+            minify      : config('minify'),
+            online      : config('online'),
+            open        : config('open'),
+            editor      : config('editor') || 'edward',
+            username    : config('username'),
+            root        : config('root') || '/',
+            prefix      : config('prefix') || '',
+            progress    : config('progress'),
+            console     : defaultTrue(config('console')),
+            
+            'html-dialogs': config('htmlDialogs'),
+            'config-dialog': defaultTrue(config('configDialog')),
+            'one-panel-mode': config('onePanelMode'),
+        },
+        alias: {
+            v: 'version',
+            h: 'help',
+            p: 'password',
+            o: 'online',
+            u: 'username',
+            s: 'save',
+            a: 'auth',
+            c: 'config'
+        },
+        unknown: function(cmd) {
+            exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
+        }
+    });
 
 if (args.version) {
     version();
@@ -85,10 +88,12 @@ if (args.version) {
     config('minify', args.minify);
     config('username', args.username);
     config('progress', args.progress);
+    config('console', args.console);
     config('prefix', args.prefix);
     config('root', args.root);
     config('htmlDialogs', args['html-dialogs']);
     config('onePanelMode', args['one-panel-mode']);
+    config('configDialog', args['config-dialog']);
     
     readConfig(args.config);
     
@@ -101,12 +106,26 @@ if (args.version) {
     if (args.password)
         config('password', getPassword(args.password));
     
+    validateRoot(options.root);
+    
     if (!args.save)
         start(options);
     else
         config.save(function() {
             start(options);
         });
+}
+
+function defaultTrue(value) {
+    if (typeof value === 'undefined')
+        return true;
+    
+    return value;
+}
+
+function validateRoot(root) {
+    var validate = require('../lib/server/validate');
+    validate.root(root, console.log);
 }
 
 function getPassword(password) {

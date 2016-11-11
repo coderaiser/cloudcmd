@@ -1,10 +1,9 @@
-# Cloud Commander v5.7.2
+# Cloud Commander v5.9.1
 
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
 [HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 
@@ -13,7 +12,7 @@
 [DEEPWORD]:                 https://github.com/cloudcmd/deepword "Editor based on Monaco"
 [EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
 [TERMUX]:                   https://termux.com "Termux"
-**Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
+**Cloud Commander** is an orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
@@ -42,8 +41,6 @@ The installation of file manager is very simple.
 ```sh
 npm i cloudcmd -g
 ```
-
-![NPM_INFO][NPM_INFO_IMG]
 
 When in trouble use:
 
@@ -77,9 +74,11 @@ Cloud Commander supports command line parameters:
 | `--port`                      | set port number
 | `--minify`                    | enable minification
 | `--progress`                  | show progress of file operations
-| `--html-dialogs`              | show html dialogs
+| `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
 | `--one-panel-mode`            | set one panel mode
+  `--config-dialog`             | enable config dialog
+  `--console`                   | enable console
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
@@ -88,6 +87,8 @@ Cloud Commander supports command line parameters:
 | `--no-progress`               | do not show progress of file operations
 | `--no-html-dialogs`           | do not use html dialogs
 | `--no-one-panel-mode`         | unset one panel mode
+| `--no-config-dialog`          | disable config dialog
+| `--no-console`                | disable console
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -234,9 +235,11 @@ Here is description of options:
     "ip"                : null,     /* ip or null(default)                      */
     "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
-    "progress"          : true      /* show progress of file operations         */
-    "htmlDialogs"       : true      /* show html dialogs                        */
-    "onePanelMode"      : false     /* set one panel mode                       */
+    "progress"          : true,     /* show progress of file operations         */
+    "htmlDialogs"       : true,     /* use html dialogs                         */
+    "onePanelMode"      : false,    /* set one panel mode                       */
+    "configDialog"      : true,     /* enable config dialog                     */
+    "console"           : true      /* enable console                           */
 }
 ```
 
@@ -282,32 +285,47 @@ Using as Middleware
 
 Cloud Commander could be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
 
+Init `package.json`:
+
+```
+npm init -y
+```
+
+Install dependencies:
+
+```
+npm i cloudcmd express socket.io -S
+```
+
+And create `index.js`:
+
 ```js
-var http        = require('http'),
-    cloudcmd    = require('cloudcmd'),
-    express     = require('express'),
-    io          = require('socket.io'),
-    app         = express(),
-    
-    PORT        = 1337,
-    PREFIX      = '/cloudcmd',
-    server,
-    socket;
-    
-server = http.createServer(app);
-socket = io.listen(server, {
-    path: PREFIX + '/socket.io'
+const http = require('http');
+const cloudcmd = require('cloudcmd');
+const io = require('socket.io');
+const app = require('express')();
+
+const port = 1337;
+const prefix = '/cloudcmd';
+
+const server = http.createServer(app);
+const socket = io.listen(server, {
+    path: `${prefix}/socket.io`
 });
 
+const config = {
+    prefix /* base URL or function which returns base URL (optional)   */
+};
+
 app.use(cloudcmd({
-    socket: socket,     /* used by Config, Edit (optional) and Console (required)   */
-    config: {           /* config data (optional)                                   */
-        prefix: PREFIX, /* base URL or function which returns base URL (optional)   */
-    }
+    socket, /* used by Config, Edit (optional) and Console (required)   */
+    config, /* config data (optional)                                   */
 }));
 
-server.listen(PORT);
+server.listen(port);
 ```
+
+And you are ready to go.
 
 Server
 ---------------
@@ -449,8 +467,24 @@ When you create this file run:
 docker-compose up
 ```
 
+Get involved
+---------------
+
+There is a lot ways to be involved in `Cloud Commander` development:
+
+- if you find a bug or got idea to share [create issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
+- if you fixed a bug, typo or implemented new feature [create pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
+- if you know languages you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
+
 Version history
 ---------------
+- *2016.11.10*, **[v5.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.9.1)**
+- *2016.11.10*, **[v5.9.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.9.0)**
+- *2016.11.09*, **[v5.8.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.8.0)**
+- *2016.11.06*, **[v5.7.6](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.6)**
+- *2016.11.06*, **[v5.7.5](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.5)**
+- *2016.10.27*, **[v5.7.4](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.4)**
+- *2016.10.27*, **[v5.7.3](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.3)**
 - *2016.10.24*, **[v5.7.2](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.2)**
 - *2016.10.24*, **[v5.7.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.1)**
 - *2016.10.18*, **[v5.7.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.0)**

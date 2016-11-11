@@ -5,8 +5,10 @@
     "requireMultipleVarDecl": false,
     "disallowTrailingWhitespace": "ignoreEmptyLines",
     "disallowTrailingComma": false,
+    "disallowDanglingUnderscores": false,
     "validateIndentation": false,
     "requireCurlyBraces": false,
+    "requireVarDeclFirst": false,
     "requireSpacesInAnonymousFunctionExpression": {
         "beforeOpeningCurlyBrace": true
     },

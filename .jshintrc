@@ -1,5 +1,5 @@
 {
-    "esnext": true,
+    "esversion": 6,
     "unused"  : true,
     "bitwise" : false,
     "browser" : true,
