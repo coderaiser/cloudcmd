@@ -198,6 +198,20 @@ Console
 
 For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
 
+Every program executed in `console` has these `environment` variables:
+
+- `ACTIVE_DIR` - directory that contains cursor
+- `PASSIVE_DIR` - directory with no cursor
+- `CURRENT_NAME` - name of a file under cursor
+- `CURRENT_PATH` - path to file under cursor
+
+On Unix you can use it this way:
+
+```sh
+~> echo $CURRENT_PATH
+/home/coderaiser/cloudcmd/bin/cloudcmd.js
+```
+
 Config
 ---------------
 ![Config](/img/screen/config.png "Config")
