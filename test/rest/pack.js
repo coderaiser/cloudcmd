@@ -25,22 +25,6 @@ const put = promisify((options, fn) => {
     fn(null, request.put(options));
 });
 
-test('cloudcmd: rest: fs: path', (t) => {
-    before((port, after) => {
-        get(`http://localhost:${port}/api/v1/fs`)
-            .then(warp(_pullout, 'string'))
-            .then(JSON.parse)
-            .then((dir) => {
-                t.equal('/', dir.path, 'should dir path be "/"');
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
-});
-
 test('cloudcmd: rest: pack: get', (t) => {
     before((port, after) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
