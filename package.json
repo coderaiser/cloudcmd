@@ -35,7 +35,7 @@
     "server"
   ],
   "bin": {
-    "cloudcmd": "bin-legacy/cloudcmd.js",
+    "cloudcmd": "bin_/cloudcmd.js",
     "cloudcmd+": "bin/cloudcmd.js"
   },
   "config": {
@@ -79,7 +79,7 @@
     "docker:rm-old": "redrun --parallel docker:rm:*",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
-    "6to5:bin": "babel bin -d bin-legacy",
+    "6to5:bin": "babel bin -d bin_",
     "build": "redrun 6to5:*"
   },
   "directories": {
