@@ -69,6 +69,7 @@ Cloud Commander supports command line parameters:
 | `-p, --password`              | set password
 | `-c, --config`                | configuration file path
 | `--editor`                    | set editor: "dword", "edward" or "deepword"
+| `--packer`                    | set packer: "tar" or "zip"
 | `--root`                      | set root directory
 | `--prefix`                    | set url prefix
 | `--port`                      | set port number
@@ -236,6 +237,7 @@ Here is description of options:
     "password"          : "toor",   /* password hash in sha-1 for authentication*/
     "algo"              : "sha512WithRSAEncryption", /* cryptographic algorithm */
     "editor"            : "edward", /* default, could be "dword" or "edward"    */
+    "packer"            : "tar",    /* default, could be "tar" or "zip"         */
     "diff"              : true,     /* when save - send patch, not whole file   */
     "zip"               : true,     /* zip text before send / unzip before save */
     "notifications"     : false,    /* show notifications when tab is not active*/

@@ -18,6 +18,7 @@ const args = require('minimist')(argv.slice(2), {
         'username',
         'config',
         'editor',
+        'packer',
         'root',
         'prefix'
     ],
@@ -42,6 +43,8 @@ const args = require('minimist')(argv.slice(2), {
         online      : config('online'),
         open        : config('open'),
         editor      : config('editor') || 'edward',
+        packer      : config('packer') || 'tar',
+        zip         : config('zip'),
         username    : config('username'),
         root        : config('root') || '/',
         prefix      : config('prefix') || '',
@@ -96,6 +99,7 @@ if (args.version) {
     const options = {
         root: args.root,
         editor: args.editor,
+        packer: args.packer,
         prefix: args.prefix
     };
     

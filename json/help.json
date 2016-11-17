@@ -8,6 +8,7 @@
     "-p, --password             ": "set password",
     "-c, --config               ": "configuration file path",
     "--editor                   ": "set editor: \"dword\" or \"edward\"",
+    "--packer                   ": "set packer: \"tar\" or \"zip\"",
     "--root                     ": "set root directory",
     "--prefix                   ": "set url prefix",
     "--port                     ": "set port number",

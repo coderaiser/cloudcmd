@@ -92,6 +92,12 @@
         </label>
     </li>
     <li>
+        <select data-name="js-packer" class="form-control full-width" title="Packer">
+            <option {{ tar-selected }}>tar</option>
+            <option {{ zip-selected }}>zip</option>
+        </select>
+    </li>
+    <li>
         <label>
             <input data-name="js-cache" type="checkbox" {{ cache }} >
             Cache
@@ -104,7 +110,7 @@
         </label>
     </li>
      <li>
-        <input 
+        <input
             data-name="js-root"
             title="Root"
             value="{{ root }}"
