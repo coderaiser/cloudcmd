@@ -198,6 +198,8 @@ Console
 
 For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
 
+### Environment variables
+
 Every program executed in `console` has these `environment` variables:
 
 - `ACTIVE_DIR` - directory that contains cursor
@@ -205,7 +207,7 @@ Every program executed in `console` has these `environment` variables:
 - `CURRENT_NAME` - name of a file under cursor
 - `CURRENT_PATH` - path to file under cursor
 
-On Unix you can use it this way:
+On `Unix` you can use it this way:
 
 ```sh
 ~> echo $CURRENT_PATH
