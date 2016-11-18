@@ -199,7 +199,7 @@ Console
 
 For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
 
-### Environment variables
+### Environment Variables
 
 Every program executed in `console` has these `environment` variables:
 
