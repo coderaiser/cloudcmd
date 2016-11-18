@@ -1,3 +1,19 @@
+2016.11.18, v5.10.0
+
+fix:
+- (menu) download: no files selected: title is undefined
+- (man) add deepword
+
+feature:
+- (cloudcmd) add ability to set packer with: --packer: "tar" or "zip"
+- (package) nyc v9.0.1
+- (package) console-io v3.0.0
+- (dom) add setCurrentByName
+- (cloudcmd) add libDist: .js -> .min.js
+- (modules) add currify
+- (cloudcmd) es2015-ify
+
+
 2016.11.10, v5.9.1
 
 fix:
