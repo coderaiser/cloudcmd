@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "5.9.1",
+  "version": "5.10.0",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Orthodox web file manager with console and editor",
   "homepage": "http://cloudcmd.io",
@@ -35,7 +35,8 @@
     "server"
   ],
   "bin": {
-    "cloudcmd": "bin/cloudcmd.js"
+    "cloudcmd": "bin_/cloudcmd.js",
+    "cloudcmd+": "bin/cloudcmd.js"
   },
   "config": {
     "dirs_legacy": "bin lib",
@@ -59,7 +60,7 @@
     "test": "tape 'test/**/*.js'",
     "watch:test": "nodemon -w lib -w test -x \"npm run test\"",
     "spell": "yaspeller .",
-    "wisdom": "npm run docker:rm-old; bin/release.js",
+    "wisdom": "npm run build; npm run docker:rm-old; bin/release.js",
     "postpublish": "redrun --parallel docker docker:alpine",
     "docker:pull:node": "docker pull node",
     "docker:pull:alpine": "docker pull mhart/alpine-node",
@@ -77,7 +78,9 @@
     "docker:rm:latest-alpine": "docker rmi coderaiser/cloudcmd:latest-alpine",
     "docker:rm-old": "redrun --parallel docker:rm:*",
     "coverage": "nyc npm test",
-    "report": "nyc report --reporter=text-lcov | coveralls"
+    "report": "nyc report --reporter=text-lcov | coveralls",
+    "6to5:bin": "babel bin -d bin_",
+    "build": "redrun 6to5:*"
   },
   "directories": {
     "man": "man"
@@ -87,7 +90,7 @@
     "apart": "^1.0.1",
     "chalk": "^1.1.0",
     "checkup": "^1.3.0",
-    "console-io": "^2.7.1",
+    "console-io": "^3.0.0",
     "copymitter": "^1.8.0",
     "criton": "^1.0.0",
     "deepword": "^1.1.2",
@@ -108,6 +111,7 @@
     "minify": "^2.0.0",
     "minimist": "^1.2.0",
     "mollify": "^1.0.0",
+    "onezip": "^1.0.5",
     "opn": "^4.0.1",
     "os-homedir": "^1.0.0",
     "package-json": "^2.3.0",
@@ -117,6 +121,7 @@
     "remedy": "^1.5.0",
     "rendy": "^1.1.0",
     "restafary": "^1.6.0",
+    "salam": "^1.0.0",
     "socket.io": "^1.4.3",
     "spero": "^1.5.0",
     "squad": "^1.1.3",
@@ -125,6 +130,8 @@
     "writejson": "^1.1.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
     "coveralls": "^2.11.6",
     "es6-promisify": "^5.0.0",
     "eslint": "^3.1.1",
@@ -134,7 +141,7 @@
     "morgan": "^1.6.1",
     "nodemon": "^1.9.1",
     "nsp": "^2.2.1",
-    "nyc": "^8.1.0",
+    "nyc": "^9.0.1",
     "place": "^1.1.4",
     "recess": "^1.1.9",
     "redrun": "^5.0.0",

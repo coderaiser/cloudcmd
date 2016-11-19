@@ -2,73 +2,72 @@
 
 'use strict';
 
-var Info        = require('../package'),
-    DIR         = __dirname + '/../',
-    DIR_LIB     = DIR + 'lib/',
-    DIR_SERVER  = DIR_LIB + 'server/',
+const Info = require('../package');
+const DIR = __dirname + '/../';
+const DIR_LIB = DIR + 'lib/';
+const DIR_SERVER = DIR_LIB + 'server/';
 
-    exit        = require(DIR_SERVER + 'exit'),
-    config      = require(DIR_SERVER + 'config'),
-    
-    options,
-    argv        = process.argv,
-    
-    args        = require('minimist')(argv.slice(2), {
-        string: [
-            'port',
-            'password',
-            'username',
-            'config',
-            'editor',
-            'root',
-            'prefix'
-        ],
-        boolean: [
-            'auth',
-            'repl',
-            'save',
-            'server',
-            'online',
-            'open',
-            'minify',
-            'progress',
-            'html-dialogs',
-            'console',
-            'config-dialog',
-            'one-panel-mode'
-        ],
-        default: {
-            server      : true,
-            auth        : config('auth'),
-            port        : config('port'),
-            minify      : config('minify'),
-            online      : config('online'),
-            open        : config('open'),
-            editor      : config('editor') || 'edward',
-            username    : config('username'),
-            root        : config('root') || '/',
-            prefix      : config('prefix') || '',
-            progress    : config('progress'),
-            console     : defaultTrue(config('console')),
-            
-            'html-dialogs': config('htmlDialogs'),
-            'config-dialog': defaultTrue(config('configDialog')),
-            'one-panel-mode': config('onePanelMode'),
-        },
-        alias: {
-            v: 'version',
-            h: 'help',
-            p: 'password',
-            o: 'online',
-            u: 'username',
-            s: 'save',
-            a: 'auth',
-            c: 'config'
-        },
-        unknown: function(cmd) {
-            exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
-        }
-    });
+const exit = require(DIR_SERVER + 'exit');
+const config = require(DIR_SERVER + 'config');
+
+const argv = process.argv;
+const args = require('minimist')(argv.slice(2), {
+    string: [
+        'port',
+        'password',
+        'username',
+        'config',
+        'editor',
+        'packer',
+        'root',
+        'prefix'
+    ],
+    boolean: [
+        'auth',
+        'repl',
+        'save',
+        'server',
+        'online',
+        'open',
+        'minify',
+        'progress',
+        'config-dialog',
+        'console',
+        'one-panel-mode'
+    ],
+    default: {
+        server      : true,
+        auth        : config('auth'),
+        port        : config('port'),
+        minify      : config('minify'),
+        online      : config('online'),
+        open        : config('open'),
+        editor      : config('editor') || 'edward',
+        packer      : config('packer') || 'tar',
+        zip         : config('zip'),
+        username    : config('username'),
+        root        : config('root') || '/',
+        prefix      : config('prefix') || '',
+        progress    : config('progress'),
+        console     : defaultTrue(config('console')),
+        
+        'config-dialog': defaultTrue(config('configDialog')),
+        'one-panel-mode': config('onePanelMode'),
+    },
+    alias: {
+        v: 'version',
+        h: 'help',
+        p: 'password',
+        o: 'online',
+        u: 'username',
+        s: 'save',
+        a: 'auth',
+        c: 'config'
+    },
+    unknown: (cmd) => {
+        exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
+    }
+});
 
 if (args.version) {
     version();
@@ -97,9 +96,10 @@ if (args.version) {
     
     readConfig(args.config);
     
-    options = {
+    const options = {
         root: args.root,
         editor: args.editor,
+        packer: args.packer,
         prefix: args.prefix
     };
     
@@ -111,7 +111,7 @@ if (args.version) {
     if (!args.save)
         start(options);
     else
-        config.save(function() {
+        config.save(() => {
             start(options);
         });
 }
@@ -124,12 +124,12 @@ function defaultTrue(value) {
 }
 
 function validateRoot(root) {
-    var validate = require('../lib/server/validate');
+    const validate = require('../lib/server/validate');
     validate.root(root, console.log);
 }
 
 function getPassword(password) {
-    var criton = require('criton');
+    const criton = require('criton');
     
     return criton(password, config('algo'));
 }
@@ -139,14 +139,14 @@ function version() {
 }
 
 function start(config) {
-    var SERVER = '../lib/server';
+    const SERVER = '../lib/server';
     
     if (args.server)
         require(SERVER)(config);
 }
 
 function port(arg) {
-    var number = parseInt(arg, 10);
+    const number = parseInt(arg, 10);
     
     if (!isNaN(number))
         config('port', number);
@@ -155,34 +155,35 @@ function port(arg) {
 }
 
 function readConfig(name) {
-    var fs, data, error, tryCatch;
+    if (!name)
+        return;
     
-    if (name) {
-        fs          = require('fs');
-        tryCatch    = require('try-catch');
-        error       = tryCatch(function() {
-            var json    = fs.readFileSync(name);
-            data        = JSON.parse(json);
+    const tryCatch = require('try-catch');
+    const readjson = require('readjson');
+    
+    let data;
+    
+    const error = tryCatch(() => {
+        data = readjson.sync(name);
+    });
+    
+    if (error)
+        exit(error.message);
+    else
+        Object.keys(data).forEach((item) => {
+            config(item, data[item]);
         });
-        
-        if (error)
-            exit(error.message);
-        else
-            Object.keys(data).forEach(function(item) {
-                config(item, data[item]);
-            });
-    }
 }
 
 function help() {
-    var bin         = require('../json/help'),
-        usage       = 'Usage: cloudcmd [options]',
-        url         = Info.homepage;
+    const bin = require('../json/help');
+    const usage = 'Usage: cloudcmd [options]';
+    const url = Info.homepage;
     
     console.log(usage);
     console.log('Options:');
     
-    Object.keys(bin).forEach(function(name) {
+    Object.keys(bin).forEach((name) => {
         console.log('  %s %s', name, bin[name]);
     });
     
@@ -195,21 +196,19 @@ function repl() {
 }
 
 function checkUpdate() {
-    var load    = require('package-json'),
-        chalk   = require('chalk'),
-        rendy   = require('rendy');
+    const load = require('package-json');
+    const chalk = require('chalk');
+    const rendy = require('rendy');
     
-    load(Info.name, 'latest').then(function(data) {
-        var latest,
-            current,
-            version = data.version;
+    load(Info.name, 'latest').then((data) => {
+        const version = data.version;
             
         if (version !== Info.version) {
-            latest  = rendy('update available: {{ latest }}', {
+            const latest = rendy('update available: {{ latest }}', {
                 latest: chalk.green.bold('v' + version),
             });
            
-            current = chalk.dim(rendy('(current: v{{ current }})', {
+            const current = chalk.dim(rendy('(current: v{{ current }})', {
                 current: Info.version
             }));
             

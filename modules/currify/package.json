@@ -1,0 +1,43 @@
+{
+  "name": "currify",
+  "version": "1.0.0",
+  "description": "translate the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single or more arguments",
+  "main": "lib/currify.js",
+  "scripts": {
+    "test": "tape test/*.js",
+    "build": "npm-run-all clean 6to5 bundle bundle:es6 minify",
+    "minify": "minify dist/currify.js > dist/currify.min.js",
+    "6to5": "babel -d lib src",
+    "wisdom": "npm run build",
+    "jscs-fix": "jscs --esnext test src --fix",
+    "clean": "rimraf lib/* dist/*",
+    "bundle:base": "browserify -s currify --ng false",
+    "bundle": "npm run bundle:base -- -r ./lib/currify.js:currify ./lib/currify.js -o dist/currify.js",
+    "bundle:es6:base": "npm run bundle:base -- -r ./src/currify.js:currify ./src/currify.js",
+    "bundle:es6": "npm run bundle:es6:base -- -o dist/currify.es6.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/currify.git"
+  },
+  "keywords": [
+    "currify",
+    "partial",
+    "functional"
+  ],
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (http://coderaiser.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coderaiser/currify/issues"
+  },
+  "homepage": "https://github.com/coderaiser/currify",
+  "devDependencies": {
+    "babel-cli": "^6.1.1",
+    "babel-preset-es2015": "^6.0.15",
+    "browserify": "^12.0.1",
+    "jscs": "^2.4.0",
+    "npm-run-all": "^1.2.12",
+    "rimraf": "^2.4.3",
+    "tape": "^4.2.0"
+  }
+}

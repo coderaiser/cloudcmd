@@ -1,4 +1,4 @@
-# Cloud Commander v5.9.1
+# Cloud Commander v5.10.0
 
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
@@ -68,7 +68,8 @@ Cloud Commander supports command line parameters:
 | `-u, --username`              | set username
 | `-p, --password`              | set password
 | `-c, --config`                | configuration file path
-| `--editor`                    | set editor: "dword" or "edward"
+| `--editor`                    | set editor: "dword", "edward" or "deepword"
+| `--packer`                    | set packer: "tar" or "zip"
 | `--root`                      | set root directory
 | `--prefix`                    | set url prefix
 | `--port`                      | set port number
@@ -198,6 +199,22 @@ Console
 
 For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
 
+### Environment Variables
+
+Every program executed in `console` has these `environment` variables:
+
+- `ACTIVE_DIR` - directory that contains cursor
+- `PASSIVE_DIR` - directory with no cursor
+- `CURRENT_NAME` - name of a file under cursor
+- `CURRENT_PATH` - path to file under cursor
+
+On `Unix` you can use it this way:
+
+```sh
+~> echo $CURRENT_PATH
+/home/coderaiser/cloudcmd/bin/cloudcmd.js
+```
+
 Config
 ---------------
 ![Config](/img/screen/config.png "Config")
@@ -220,6 +237,7 @@ Here is description of options:
     "password"          : "toor",   /* password hash in sha-1 for authentication*/
     "algo"              : "sha512WithRSAEncryption", /* cryptographic algorithm */
     "editor"            : "edward", /* default, could be "dword" or "edward"    */
+    "packer"            : "tar",    /* default, could be "tar" or "zip"         */
     "diff"              : true,     /* when save - send patch, not whole file   */
     "zip"               : true,     /* zip text before send / unzip before save */
     "notifications"     : false,    /* show notifications when tab is not active*/
@@ -478,6 +496,7 @@ There is a lot ways to be involved in `Cloud Commander` development:
 
 Version history
 ---------------
+- *2016.11.18*, **[v5.10.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.10.0)**
 - *2016.11.10*, **[v5.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.9.1)**
 - *2016.11.10*, **[v5.9.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.9.0)**
 - *2016.11.09*, **[v5.8.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.8.0)**
