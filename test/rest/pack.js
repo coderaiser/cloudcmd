@@ -36,7 +36,7 @@ test('cloudcmd: rest: pack: tar: get', (t) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
             .then(_pullout)
             .then((pack) => {
-                t.ok(fixture.tar.compare(pack), 'should pack data');
+                t.equal(fixture.tar.length, pack.length, 'should pack data');
                 t.end();
                 after();
             })
@@ -58,7 +58,7 @@ test('cloudcmd: rest: pack: tar: put: file', (t) => {
                 const file = fs.readFileSync(__dirname + '/../' + name);
                 
                 fs.unlinkSync(`${__dirname}/../${name}`);
-                t.ok(fixture.tar.compare(file), 'should create archive');
+                t.ok(fixture.tar.equals(file), 'should create archive');
                 
                 t.end();
                 after();
@@ -118,7 +118,7 @@ test('cloudcmd: rest: pack: zip: get', (t) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
             .then(_pullout)
             .then((pack) => {
-                t.ok(fixture.zip.compare(pack), 'should pack data');
+                t.equal(pack.length, fixture.zip.length, 'should pack data');
                 t.end();
                 after();
             })
@@ -140,7 +140,7 @@ test('cloudcmd: rest: pack: zip: put: file', (t) => {
                 const file = fs.readFileSync(__dirname + '/../' + name);
                 
                 fs.unlinkSync(`${__dirname}/../${name}`);
-                t.ok(fixture.zip.compare(file), 'should create archive');
+                t.equal(fixture.zip.length, file.length, 'should create archive');
                 
                 t.end();
                 after();
