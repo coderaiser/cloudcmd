@@ -1,3 +1,13 @@
+2016.11.22, v5.10.1
+
+fix:
+- (rest) getPackReg: config zip -> config packer
+- (operation) _initPacker: proceed when error
+
+feature:
+- (package) stylelint-config-standard v15.0.0
+
+
 2016.11.18, v5.10.0
 
 fix:
