@@ -1,6 +1,5 @@
 {
   "name": "currify",
-  "version": "1.0.0",
   "description": "translate the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single or more arguments",
   "homepage": "https://github.com/coderaiser/currify",
   "authors": [
@@ -18,9 +17,6 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "test"
   ]
 }

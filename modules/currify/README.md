@@ -11,16 +11,28 @@ npm i currify --save
 ## How to use?
 
 ```js
-let currify = require('currify');
+const currify = require('currify');
 
-let mean    = (a, b, c) => (a + b) / c;
-let mean1   = currify(mean, 1);
-let mean2   = mean1(2);
-let result  = mean2(2);
+const mean = (a, b, c) => (a + b) / c;
+const mean1 = currify(mean, 1);
+const mean2 = mean1(2);
 
+mean2(2);
 // returns
 1.5
 ```
+
+## Environments
+
+In old `node.js` environments that not fully supports `es2015`, `currify` could be used with:
+
+```js
+var currify = require('currify/legacy');
+```
+
+## Related
+
+- [zames](https://github.com/coderaiser/zames "zames") - converts callback-based functions to Promises and apply currying to arguments
 
 ## License
 

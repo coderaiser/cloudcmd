@@ -1,20 +1,27 @@
 {
   "name": "currify",
-  "version": "1.0.0",
+  "version": "2.0.2",
   "description": "translate the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single or more arguments",
   "main": "lib/currify.js",
   "scripts": {
     "test": "tape test/*.js",
-    "build": "npm-run-all clean 6to5 bundle bundle:es6 minify",
+    "coverage": "nyc npm test",
+    "lint": "eslint lib test",
+    "build": "redrun clean 6to5 legacy:* bundle bundle minify",
     "minify": "minify dist/currify.js > dist/currify.min.js",
-    "6to5": "babel -d lib src",
+    "6to5": "babel -d legacy/lib lib",
     "wisdom": "npm run build",
-    "jscs-fix": "jscs --esnext test src --fix",
-    "clean": "rimraf lib/* dist/*",
+    "clean": "rimraf dist/* legacy/*",
     "bundle:base": "browserify -s currify --ng false",
     "bundle": "npm run bundle:base -- -r ./lib/currify.js:currify ./lib/currify.js -o dist/currify.js",
-    "bundle:es6:base": "npm run bundle:base -- -r ./src/currify.js:currify ./src/currify.js",
-    "bundle:es6": "npm run bundle:es6:base -- -o dist/currify.es6.js"
+    "watcher": "nodemon -w test -w lib --exec",
+    "watch:test": "npm run watcher -- npm test",
+    "watch:lint": "npm run watcher -- 'npm run lint'",
+    "watch:tape": "nodemon -w test -w lib --exec tape",
+    "watch:coverage:base": "npm run watcher -- nyc npm test",
+    "watch:coverage:tape": "npm run watcher -- nyc tape",
+    "watch:coverage": "bin/redrun.js watch:coverage:base",
+    "legacy:index": "echo \"module.exports = require('./lib/currify');\" > legacy/index.js"
   },
   "repository": {
     "type": "git",
@@ -35,8 +42,11 @@
     "babel-cli": "^6.1.1",
     "babel-preset-es2015": "^6.0.15",
     "browserify": "^13.0.0",
-    "jscs": "^3.0.7",
-    "npm-run-all": "^3.1.1",
+    "eslint": "^3.10.2",
+    "minify": "^2.0.13",
+    "nodemon": "^1.11.0",
+    "nyc": "^10.0.0",
+    "redrun": "^5.0.1",
     "rimraf": "^2.4.3",
     "tape": "^4.2.0"
   }
