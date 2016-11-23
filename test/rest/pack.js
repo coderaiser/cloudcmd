@@ -53,7 +53,7 @@ test('cloudcmd: rest: pack: tar: put: file', (t) => {
         const options = getPackOptions(port, name);
         
         put(options)
-            .then(warp(_pullout, 'string'))
+            .then(_pullout)
             .then(() => {
                 const file = fs.readFileSync(__dirname + '/../' + name);
                 
