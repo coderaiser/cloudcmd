@@ -58,7 +58,7 @@ test('cloudcmd: rest: pack: tar: put: file', (t) => {
                 const file = fs.readFileSync(__dirname + '/../' + name);
                 
                 fs.unlinkSync(`${__dirname}/../${name}`);
-                t.ok(fixture.tar.equals(file), 'should create archive');
+                t.equal(Buffer.byteLength(file), Buffer.byteLength(fixture.tar), 'should create archive');
                 
                 t.end();
                 after();
