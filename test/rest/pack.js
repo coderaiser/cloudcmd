@@ -36,7 +36,7 @@ test('cloudcmd: rest: pack: tar: get', (t) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
             .then(_pullout)
             .then((pack) => {
-                t.equal(fixture.tar.length, pack.length, 'should pack data');
+                t.equal(Buffer.byteLength(fixture.tar), Buffer.byteLength(pack), 'should pack data');
                 t.end();
                 after();
             })
