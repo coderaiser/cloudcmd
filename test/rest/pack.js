@@ -7,6 +7,8 @@ const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
+const tar = require('tar-stream');
+const gunzip = require('gunzip-maybe');
 
 const before = require('../before');
 
@@ -34,11 +36,19 @@ test('cloudcmd: rest: pack: tar: get', (t) => {
     const options = {packer: 'tar'};
     before(options, (port, after) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
-            .then(_pullout)
             .then((pack) => {
-                t.equal(Buffer.byteLength(fixture.tar), Buffer.byteLength(pack), 'should pack data');
-                t.end();
-                after();
+                const extract = tar.extract();
+                
+                pack.pipe(gunzip()).pipe(extract);
+                
+                extract.on('entry', (header, stream) => {
+                    pullout(stream, 'string', (e, data) => {
+                        const file = fs.readFileSync(__dirname + '/../fixture/pack', 'utf8');
+                        t.equal(file, data, 'should pack data');
+                        t.end();
+                        after();
+                    });
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -53,15 +63,23 @@ test('cloudcmd: rest: pack: tar: put: file', (t) => {
         const options = getPackOptions(port, name);
         
         put(options)
-            .then(warp(_pullout, 'string'))
+            .then(_pullout)
             .then(() => {
-                const file = fs.readFileSync(__dirname + '/../' + name, 'utf8');
+                const file = fs.createReadStream(__dirname + '/../' + name);
+                const extract = tar.extract();
                 
-                fs.unlinkSync(`${__dirname}/../${name}`);
-                t.equal(Buffer.byteLength(file), Buffer.byteLength(fixture.tar), 'should create archive');
+                file.pipe(gunzip()).pipe(extract);
                 
-                t.end();
-                after();
+                extract.on('entry', (header, stream) => {
+                    pullout(stream, 'string', (e, data) => {
+                        const file = fs.readFileSync(__dirname + '/../fixture/pack', 'utf8');
+                        fs.unlinkSync(`${__dirname}/../${name}`);
+                         
+                        t.equal(file, data, 'should create archive');
+                        t.end();
+                        after();
+                    });
+                });
             })
             .catch((error) => {
                 console.log(error);
