@@ -14,7 +14,9 @@ const {assign} = Object;
 const pathConfig = os.homedir() + '/.cloudcmd.json';
 const currentConfig = readjson.sync.try(pathConfig);
 
-module.exports = (config, fn = config) => {
+module.exports = (_config, _plugins, _fn) => {
+    const {config, plugins, fn} = parse(_config, _plugins, _fn);
+    
     const app = express();
     const server = http.createServer(app);
     const after = () => {
@@ -28,6 +30,7 @@ module.exports = (config, fn = config) => {
     
     app.use(cloudcmd({
         socket,
+        plugins,
         config: assign(defaultConfig(), config)
     }));
     
@@ -40,6 +43,28 @@ function defaultConfig() {
     return {
         auth: false,
         root: __dirname
+    };
+}
+
+function parse(config, plugins, fn) {
+    if (typeof plugins === 'undefined')
+        return {
+            fn: config,
+            config: undefined,
+            plugins: undefined
+        }
+    
+    if (typeof fn === 'undefined')
+        return {
+            config,
+            fn: plugins,
+            plugins: undefined
+        }
+    
+    return {
+        config,
+        plugins,
+        fn
     };
 }
 

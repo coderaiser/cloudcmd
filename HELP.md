@@ -335,9 +335,14 @@ const config = {
     prefix /* base URL or function which returns base URL (optional)   */
 };
 
+const plugins = [
+    __dirname + '/plugin.js'
+];
+
 app.use(cloudcmd({
-    socket, /* used by Config, Edit (optional) and Console (required)   */
-    config, /* config data (optional)                                   */
+    socket,  /* used by Config, Edit (optional) and Console (required)   */
+    config,  /* config data (optional)                                   */
+    plugins, /* optional */
 }));
 
 server.listen(port);
