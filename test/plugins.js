@@ -17,10 +17,9 @@ const get = promisify((url, fn) => {
 });
 
 test('cloudcmd: plugins', (t) => {
-    const config = {};
     const plugins = [];
     
-    before(config, plugins, (port, after) => {
+    before({plugins}, (port, after) => {
         get(`http://localhost:${port}/plugins.js`)
             .then(warp(_pullout, 'string'))
             .then((content) => {
@@ -35,12 +34,11 @@ test('cloudcmd: plugins', (t) => {
 });
 
 test('cloudcmd: plugins', (t) => {
-    const config = {};
     const plugins = [
         __filename
     ];
     
-    before(config, plugins, (port, after) => {
+    before({plugins}, (port, after) => {
         get(`http://localhost:${port}/plugins.js`)
             .then(warp(_pullout, 'string'))
             .then((content) => {
@@ -56,7 +54,6 @@ test('cloudcmd: plugins', (t) => {
 });
 
 test('cloudcmd: plugins: load error', (t) => {
-    const config = {};
     const noEntry = __filename + Math.random();
     const plugins = [
         __filename,
@@ -65,7 +62,7 @@ test('cloudcmd: plugins: load error', (t) => {
     
     const msg = `ENOENT: no such file or directory, open '${noEntry}'`;
     
-    before(config, plugins, (port, after) => {
+    before({plugins}, (port, after) => {
         get(`http://localhost:${port}/plugins.js`)
             .then(warp(_pullout, 'string'))
             .then((content) => {

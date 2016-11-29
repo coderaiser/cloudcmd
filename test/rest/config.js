@@ -57,9 +57,11 @@ test('cloudcmd: rest: config: patch', (t) => {
 });
 
 test('cloudcmd: rest: config: patch: no configDialog', (t) => {
-    const configDialog = false;
+    const config = {
+        configDialog: false
+    };
     
-    before({configDialog}, (port, after) => {
+    before({config}, (port, after) => {
         const json = {
             ip: null
         };
@@ -78,9 +80,11 @@ test('cloudcmd: rest: config: patch: no configDialog', (t) => {
 });
 
 test('cloudcmd: rest: config: patch: no configDialog: statusCode', (t) => {
-    const configDialog = false;
+    const config = {
+        configDialog: false
+    };
     
-    before({configDialog}, (port, after) => {
+    before({config}, (port, after) => {
         const json = {
             ip: null
         };

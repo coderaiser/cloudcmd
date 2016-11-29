@@ -21,7 +21,7 @@ test('cloudcmd: console: enabled by default', (t) => {
 test('cloudcmd: console: enabled', (t) => {
     const config = {console: true};
     
-    before(config, (port, after) => {
+    before({config}, (port, after) => {
         const socket = io(`http://localhost:${port}/console`)
         
         socket.once('data', (data) => {
@@ -36,7 +36,7 @@ test('cloudcmd: console: enabled', (t) => {
 test('cloudcmd: console: disabled', (t) => {
     const config = {console: false};
     
-    before(config, (port, after) => {
+    before({config}, (port, after) => {
         const socket = io(`http://localhost:${port}/console`);
         
         socket.on('error', (error) => {

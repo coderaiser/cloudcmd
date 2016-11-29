@@ -14,8 +14,12 @@ const {assign} = Object;
 const pathConfig = os.homedir() + '/.cloudcmd.json';
 const currentConfig = readjson.sync.try(pathConfig);
 
-module.exports = (_config, _plugins, _fn) => {
-    const {config, plugins, fn} = parse(_config, _plugins, _fn);
+module.exports = (options, fn = options) => {
+    if (fn === options) {
+        options = {};
+    }
+    
+    const {config, plugins} = options;
     
     const app = express();
     const server = http.createServer(app);
@@ -43,28 +47,6 @@ function defaultConfig() {
     return {
         auth: false,
         root: __dirname
-    };
-}
-
-function parse(config, plugins, fn) {
-    if (typeof plugins === 'undefined')
-        return {
-            fn: config,
-            config: undefined,
-            plugins: undefined
-        }
-    
-    if (typeof fn === 'undefined')
-        return {
-            config,
-            fn: plugins,
-            plugins: undefined
-        }
-    
-    return {
-        config,
-        plugins,
-        fn
     };
 }
 

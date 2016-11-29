@@ -33,8 +33,9 @@ const put = promisify((options, fn) => {
 });
 
 test('cloudcmd: rest: pack: tar: get', (t) => {
-    const options = {packer: 'tar'};
-    before(options, (port, after) => {
+    const config = {packer: 'tar'};
+    
+    before({config}, (port, after) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
             .then((pack) => {
                 const extract = tar.extract();
@@ -57,8 +58,9 @@ test('cloudcmd: rest: pack: tar: get', (t) => {
 });
 
 test('cloudcmd: rest: pack: tar: put: file', (t) => {
-    const options = {packer: 'tar'};
-    before(options, (port, after) => {
+    const config = {packer: 'tar'};
+    
+    before({config}, (port, after) => {
         const name = String(Math.random()) + '.tar.gz';
         const options = getPackOptions(port, name);
         
@@ -110,8 +112,9 @@ test('cloudcmd: rest: pack: tar: put: response', (t) => {
 });
 
 test('cloudcmd: rest: pack: tar: put: error', (t) => {
-    const options = {packer: 'tar'};
-    before(options, (port, after) => {
+    const config = {packer: 'tar'};
+    
+    before({config}, (port, after) => {
         const options = getPackOptions(port, 'name', [
             'not found'
         ]);
@@ -131,8 +134,8 @@ test('cloudcmd: rest: pack: tar: put: error', (t) => {
 });
 
 test('cloudcmd: rest: pack: zip: get', (t) => {
-    const options = {packer: 'zip'};
-    before(options, (port, after) => {
+    const config = {packer: 'zip'};
+    before({config}, (port, after) => {
         get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
             .then(_pullout)
             .then((pack) => {
@@ -147,8 +150,9 @@ test('cloudcmd: rest: pack: zip: get', (t) => {
 });
 
 test('cloudcmd: rest: pack: zip: put: file', (t) => {
-    const options = {packer: 'zip'};
-    before(options, (port, after) => {
+    const config = {packer: 'zip'};
+    
+    before({config}, (port, after) => {
         const name = String(Math.random()) + '.zip';
         const options = getPackOptions(port, name);
         
@@ -170,8 +174,9 @@ test('cloudcmd: rest: pack: zip: put: file', (t) => {
 });
 
 test('cloudcmd: rest: pack: zip: put: response', (t) => {
-    const options = {packer: 'zip'};
-    before(options, (port, after) => {
+    const config = {packer: 'zip'};
+    
+    before({config}, (port, after) => {
         const name = String(Math.random()) + '.zip';
         const options = getPackOptions(port, name);
         
@@ -192,8 +197,8 @@ test('cloudcmd: rest: pack: zip: put: response', (t) => {
 });
 
 test('cloudcmd: rest: pack: zip: put: error', (t) => {
-    const options = {packer: 'zip'};
-    before(options, (port, after) => {
+    const config = {packer: 'zip'};
+    before({config}, (port, after) => {
         const options = getPackOptions(port, 'name', [
             'not found'
         ]);
