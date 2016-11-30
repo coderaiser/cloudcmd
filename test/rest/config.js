@@ -99,3 +99,22 @@ test('cloudcmd: rest: config: patch: no configDialog: statusCode', (t) => {
     });
 });
 
+test('cloudcmd: rest: config: enabled by default', (t) => {
+    before({}, (port, after) => {
+        const json = {
+            auth: false,
+        };
+        
+        patch(`http://localhost:${port}/api/v1/config`, json)
+            .then(warp(_pullout, 'string'))
+            .then((result) => {
+                t.equal(result, 'config: ok("auth")', 'should patch config');
+                t.end();
+                after();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
+});
+

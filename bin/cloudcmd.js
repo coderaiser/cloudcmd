@@ -49,9 +49,9 @@ const args = require('minimist')(argv.slice(2), {
         root        : config('root') || '/',
         prefix      : config('prefix') || '',
         progress    : config('progress'),
-        console     : defaultTrue(config('console')),
+        console     : config('console'),
         
-        'config-dialog': defaultTrue(config('configDialog')),
+        'config-dialog': config('configDialog'),
         'one-panel-mode': config('onePanelMode'),
     },
     alias: {
@@ -114,13 +114,6 @@ if (args.version) {
         config.save(() => {
             start(options);
         });
-}
-
-function defaultTrue(value) {
-    if (typeof value === 'undefined')
-        return true;
-    
-    return value;
 }
 
 function validateRoot(root) {
