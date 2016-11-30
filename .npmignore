@@ -5,6 +5,7 @@ Dockerfile*
 docker-compose.yml
 shell
 test
+coverage
 
 app.json
 circle.yml
