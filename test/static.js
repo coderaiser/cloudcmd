@@ -1,7 +1,5 @@
 'use strict';
 
-const path = require('path');
-const fs = require('fs');
 const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
@@ -36,8 +34,6 @@ test('cloudcmd: staatic', (t) => {
 });
 
 test('cloudcmd: staatic: not found', (t) => {
-    const name = 'package.json';
-    
     before({}, (port, after) => {
         const name = Math.random();
         get(`http://localhost:${port}/${name}`)
