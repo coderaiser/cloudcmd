@@ -1,11 +1,15 @@
+2016.12.01, v5.11.0
+
+feature:
+- (cloudcmd) add plugins
+
+
 2016.12.01, v5.10.2
 
 fix:
 - (cloudcmd) --console, --config-dialog: defaults
-- refactor(cloudcmd) getPrefix: rm result
 
 feature:
-- (cloudcmd) add plugins
 - (bower) currify v2.0.2
 
 
