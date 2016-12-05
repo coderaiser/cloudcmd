@@ -42,9 +42,10 @@
 }
 
 .loading-svg {
-    background      : url(../img/spinner.svg);
+    background: url(../img/spinner.svg);
 }
 
 .loading-gif {
-    background      : url(../img/spinner.gif);
+    background: url(../img/spinner.gif);
 }
+
