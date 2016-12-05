@@ -1,3 +1,9 @@
+2016.12.05, v2.0.3
+
+fix:
+- (currify) bundle: empty currify in dist
+
+
 2016.11.23, v2.0.2
 
 fix:

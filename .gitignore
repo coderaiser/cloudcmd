@@ -12,6 +12,8 @@ modules/fancybox/lib/
 modules/fancybox/demo
 modules/fancybox/sprite.psd
 
+modules/currify/dist/currify.js
+
 .nyc_output
 
 *.swp

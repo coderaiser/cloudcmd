@@ -1,6 +1,6 @@
 {
   "name": "currify",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "translate the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single or more arguments",
   "main": "lib/currify.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "wisdom": "npm run build",
     "clean": "rimraf dist/* legacy/*",
     "bundle:base": "browserify -s currify --ng false",
-    "bundle": "npm run bundle:base -- -r ./lib/currify.js:currify ./lib/currify.js -o dist/currify.js",
+    "bundle": "npm run bundle:base -- -r ./legacy/lib/currify.js:currify ./legacy/lib/currify.js -o dist/currify.js",
     "watcher": "nodemon -w test -w lib --exec",
     "watch:test": "npm run watcher -- npm test",
     "watch:lint": "npm run watcher -- 'npm run lint'",

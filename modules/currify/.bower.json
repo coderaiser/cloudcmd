@@ -19,15 +19,15 @@
     "**/.*",
     "test"
   ],
-  "version": "2.0.2",
-  "_release": "2.0.2",
+  "version": "2.0.3",
+  "_release": "2.0.3",
   "_resolution": {
     "type": "version",
-    "tag": "v2.0.2",
-    "commit": "c12ef5cc8caacd81d9a3aebd5b3fb3ba18a53878"
+    "tag": "v2.0.3",
+    "commit": "be9ab0b0f7b8e685da89321df384ac902fa3c587"
   },
   "_source": "https://github.com/coderaiser/currify.git",
-  "_target": "^2.0.2",
+  "_target": "^2.0.3",
   "_originalSource": "currify",
   "_direct": true
 }
