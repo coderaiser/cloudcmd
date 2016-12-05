@@ -4,10 +4,6 @@ const test = require('tape');
 const root = '../../';
 const config = require(root + 'lib/server/config');
 
-const promisify = require('es6-promisify');
-const pullout = require('pullout');
-const request = require('request');
-
 const before = require('../before');
 
 test('config: manage', (t) => {
