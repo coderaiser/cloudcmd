@@ -15,7 +15,7 @@ const get = promisify((url, fn) => {
     fn(null, request(url));
 });
 
-test('cloudcmd: staatic', (t) => {
+test('cloudcmd: static', (t) => {
     before({}, (port, after) => {
         const name = 'package.json';
         
@@ -33,7 +33,7 @@ test('cloudcmd: staatic', (t) => {
     });
 });
 
-test('cloudcmd: staatic: not found', (t) => {
+test('cloudcmd: static: not found', (t) => {
     before({}, (port, after) => {
         const name = Math.random();
         get(`http://localhost:${port}/${name}`)
