@@ -161,11 +161,11 @@ function readConfig(name) {
     });
     
     if (error)
-        exit(error.message);
-    else
-        Object.keys(data).forEach((item) => {
-            config(item, data[item]);
-        });
+        return exit(error.message);
+    
+    Object.keys(data).forEach((item) => {
+        config(item, data[item]);
+    });
 }
 
 function help() {
