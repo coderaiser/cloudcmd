@@ -97,7 +97,7 @@ if (args.version) {
     readConfig(args.config);
     
     const options = {
-        root: args.root,
+        root: args.root || '/', /* --no-root */
         editor: args.editor,
         packer: args.packer,
         prefix: args.prefix
