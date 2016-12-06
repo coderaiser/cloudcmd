@@ -89,7 +89,7 @@ const config = {
     prefix /* base URL or function which returns base URL (optional)   */
 };
 
-const plugins= [
+const plugins = [
     __dirname + '/plugin.js'
 ];
 
