@@ -1,9 +1,6 @@
 'use strict';
 
 const test = require('tape');
-const root = '../../';
-const validate = require(root + 'lib/server/validate');
-
 const before = require('../before');
 
 test('validate: root: bad', (t) => {
