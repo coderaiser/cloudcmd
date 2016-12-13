@@ -14,9 +14,10 @@ modules/fancybox/sprite.psd
 
 modules/currify/dist/currify.js
 
+legacy
+lib_
+
 .nyc_output
 
 *.swp
-
-bin_
 

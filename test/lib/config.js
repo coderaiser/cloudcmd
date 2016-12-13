@@ -13,12 +13,9 @@ test('config: manage', (t) => {
 
 test('config: manage: get', (t) => {
     const editor = 'deepword';
-    const conf = {
-        editor
-    };
     
-    before({config: conf}, (port, after) => {
-        t.equal(editor, config('editor'), 'should get config');
+    before({config: {editor}}, (port, after) => {
+        t.equal(config('editor'), editor, 'should get config');
         t.end();
         after();
     });

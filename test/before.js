@@ -8,7 +8,7 @@ const io = require('socket.io');
 const writejson = require('writejson');
 const readjson = require('readjson');
 
-const cloudcmd = require('..');
+const cloudcmd = require('../lib/cloudcmd');
 const {assign} = Object;
 
 const pathConfig = os.homedir() + '/.cloudcmd.json';

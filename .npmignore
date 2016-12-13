@@ -11,8 +11,10 @@ app.json
 circle.yml
 
 bin/release.js
+bin/legacy.js
 
-legacy
+.es5
 
-bin-legacy/release.js
+legacy/bin/release.js
+legacy/bin/legacy.js
 

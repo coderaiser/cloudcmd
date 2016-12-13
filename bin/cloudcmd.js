@@ -3,9 +3,7 @@
 'use strict';
 
 const Info = require('../package');
-const DIR = __dirname + '/../';
-const DIR_LIB = DIR + 'lib/';
-const DIR_SERVER = DIR_LIB + 'server/';
+const DIR_SERVER = '../lib/server/';
 
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
@@ -119,7 +117,7 @@ if (args.version) {
 }
 
 function validateRoot(root) {
-    const validate = require('../lib/server/validate');
+    const validate = require(DIR_SERVER + 'validate');
     validate.root(root, console.log);
 }
 
@@ -187,7 +185,7 @@ function help() {
 
 function repl() {
     console.log('REPL mode enabled (telnet localhost 1337)');
-    require(DIR_LIB + '/server/repl');
+    require(DIR_SERVER + 'repl');
 }
 
 function checkUpdate() {

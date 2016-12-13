@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const cloudcmd = require('../..');
+const cloudcmd = require('../../lib/cloudcmd');
 
 test('cloudcmd: args: no', (t) => {
     const fn = () => cloudcmd();

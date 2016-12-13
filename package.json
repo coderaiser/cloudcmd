@@ -35,11 +35,11 @@
     "server"
   ],
   "bin": {
-    "cloudcmd": "bin_/cloudcmd.js",
+    "cloudcmd": "legacy/bin/cloudcmd.js",
     "cloudcmd+": "bin/cloudcmd.js"
   },
   "config": {
-    "dirs_legacy": "bin lib",
+    "dirs_legacy": "client",
     "dirs": "bin lib test"
   },
   "scripts": {
@@ -50,13 +50,13 @@
     "lint": "redrun lint:*",
     "lint:css": "recess css/*.css",
     "lint:style": "stylelint css/*.css",
-    "lint:js": "redrun jshint jscs eslint",
-    "lint:js:legacy": "redrun legacy:*",
-    "eslint": "eslint --rule 'no-console:0' test bin/release.js",
+    "lint:js": "redrun jshint jscs eslint:*",
+    "lint:js:es5": "redrun es5:*",
+    "eslint:bin": "eslint --rule 'no-console:0' bin test lib",
     "jshint": "jshint bin/release.js",
     "jscs": "jscs --esnext $npm_package_config_dirs",
-    "legacy:jshint": "jshint --config legacy/.jshintrc $npm_package_config_dirs_dirs_legacy --exclude bin/release.js",
-    "legacy:eslint": "eslint -c legacy/.eslintrc --rule 'no-console:0' $npm_package_config_dirs_legacy --ignore-path bin/release.js",
+    "es5:jshint": "jshint --config .es5/.jshintrc $npm_package_config_dirs_dirs_legacy --exclude bin/release.js",
+    "es5:eslint": "eslint -c .es5/.eslintrc --rule 'no-console:0' $npm_package_config_dirs_legacy --ignore-path bin/release.js",
     "test": "tape 'test/**/*.js'",
     "watch:test": "nodemon -w lib -w test -x \"npm run test\"",
     "spell": "yaspeller .",
@@ -79,8 +79,15 @@
     "docker:rm-old": "redrun --parallel docker:rm:*",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
-    "6to5:bin": "babel bin -d bin_",
-    "build": "redrun 6to5:*"
+    "6to5:bin": "babel bin -d legacy/bin",
+    "6to5:lib": "babel lib -d lib_",
+    "build": "redrun rm:* 6to5:* mkdir:* legacy:*",
+    "legacy:package": "echo \"module.exports = require('../package');\" > legacy/package.js",
+    "legacy:lib:cloudcmd": "echo \"module.exports = require('../../lib_/cloudcmd');\" > legacy/lib/cloudcmd.js",
+    "legacy:lib:server": "echo \"module.exports = require('../../lib_/server');\" > legacy/lib/server.js",
+    "mkdir:server": "mkdirp legacy/lib/server",
+    "legacy:server": "bin/legacy.js",
+    "rm:legacy": "rimraf legacy"
   },
   "directories": {
     "man": "man"
@@ -139,6 +146,7 @@
     "jscs": "^3.0.1",
     "jshint": "^2.8.0",
     "minor": "^1.2.2",
+    "mkdirp": "^0.5.1",
     "morgan": "^1.6.1",
     "nodemon": "^1.9.1",
     "nsp": "^2.2.1",
@@ -147,6 +155,7 @@
     "recess": "^1.1.9",
     "redrun": "^5.0.0",
     "request": "^2.76.0",
+    "rimraf": "^2.5.4",
     "shortdate": "^1.0.1",
     "socket.io-client": "^1.5.1",
     "stylelint": "^7.0.2",
@@ -160,5 +169,5 @@
     "node": ">=0.10"
   },
   "license": "MIT",
-  "main": "lib/cloudcmd.js"
+  "main": "legacy/lib/cloudcmd.js"
 }

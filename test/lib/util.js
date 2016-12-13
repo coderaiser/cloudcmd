@@ -3,7 +3,7 @@
     
     var test    = require('tape'),
         DIR     = '../../',
-        Util    = require(DIR + 'lib/util');
+        Util    = require(DIR + 'common/util');
     
     
     test('getExt: no extension', function(t) {
