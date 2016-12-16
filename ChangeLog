@@ -1,3 +1,14 @@
+2016.12.16, v5.12.0
+
+fix:
+- (cloudcmd) --html-dialogs: is not cloudcmd option (#97)
+- (plugins) arrow -> function
+- (validate) root: crash when --no-root used
+
+feature:
+- (cloudcmd) lib/client -> client
+
+
 2016.12.05, v5.11.1
 
 fix:
