@@ -33,7 +33,8 @@ const args = require('minimist')(argv.slice(2), {
         'progress',
         'config-dialog',
         'console',
-        'one-panel-mode'
+        'one-panel-mode',
+        'html-dialogs'
     ],
     default: {
         server      : true,
@@ -53,6 +54,7 @@ const args = require('minimist')(argv.slice(2), {
         
         'config-dialog': config('configDialog'),
         'one-panel-mode': config('onePanelMode'),
+        'html-dialogs': config('htmlDialogs')
     },
     alias: {
         v: 'version',
