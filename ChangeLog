@@ -1,3 +1,9 @@
+2016.12.19, v5.12.2
+
+fix:
+- (package) scripts: legacy:json:  --help
+
+
 2016.12.19, v5.12.1
 
 fix:
