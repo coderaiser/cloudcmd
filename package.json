@@ -86,8 +86,9 @@
     "legacy:lib:cloudcmd": "echo \"module.exports = require('../../lib_/cloudcmd');\" > legacy/lib/cloudcmd.js",
     "legacy:lib:server": "echo \"module.exports = require('../../lib_/server');\" > legacy/lib/server.js",
     "mkdir:server": "mkdirp legacy/lib/server",
+    "mkdir:json": "mkdirp legacy/json",
     "legacy:server": "bin/legacy.js",
-    "legacy:json": "cp -r json legacy/",
+    "legacy:help": "cp json/help.json legacy/json/",
     "rm:legacy": "rimraf legacy"
   },
   "directories": {
