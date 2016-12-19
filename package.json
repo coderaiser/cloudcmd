@@ -87,6 +87,7 @@
     "legacy:lib:server": "echo \"module.exports = require('../../lib_/server');\" > legacy/lib/server.js",
     "mkdir:server": "mkdirp legacy/lib/server",
     "legacy:server": "bin/legacy.js",
+    "legacy:json": "cp -r json legacy/",
     "rm:legacy": "rimraf legacy"
   },
   "directories": {
