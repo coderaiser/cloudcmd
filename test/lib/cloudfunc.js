@@ -54,7 +54,7 @@ var DIR                 = __dirname + '/../../',
         '</div>';
 
 test(function(t) {
-        var paths       = {},
+    var paths       = {},
         
         filesList   = TMPL_PATH.map(function(name) {
             var path = FS_DIR + name + '.hbs';
@@ -109,9 +109,9 @@ test(function(t) {
                     'Expect: {{ expect }}',
                     'Result: {{ result }}'
                 ].join('\n'), {
-                  number: i,
-                  expect: Expect.substr(i),
-                  result: result.substr(i)
+                    number: i,
+                    expect: Expect.substr(i),
+                    result: result.substr(i)
                 }));
                 
                 console.log('buildFromJSON: Not OK');

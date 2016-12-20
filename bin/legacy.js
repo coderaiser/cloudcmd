@@ -9,7 +9,7 @@ const dir = path.join(__dirname, '../lib/server');
 const _dir = path.join(__dirname, '../legacy/lib/server');
 
 const setDir = (name) => {
-  return path.join(_dir, name);
+    return path.join(_dir, name);
 };
 
 
@@ -18,13 +18,13 @@ fs.readdirSync(dir)
   .map(writeFile);
 
 function fillFile(name) {
-  return {
-    name: setDir(name),
-    data: `module.exports = require(\'../../../lib_/server/${name}\');`
-  }
+    return {
+        name: setDir(name),
+        data: `module.exports = require(\'../../../lib_/server/${name}\');`
+    }
 }
 
 function writeFile({name, data}) {
-  return fs.writeFileSync(name, data);
+    return fs.writeFileSync(name, data);
 }
 

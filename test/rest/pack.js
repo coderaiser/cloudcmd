@@ -219,12 +219,12 @@ test('cloudcmd: rest: pack: zip: put: error', (t) => {
 
 function getPackOptions(port, to, names = ['pack']) {
     return {
-            url: `http://localhost:${port}/api/v1/pack`,
-            json: {
-                to,
-                names,
-                from: '/fixture',
-            }
+        url: `http://localhost:${port}/api/v1/pack`,
+        json: {
+            to,
+            names,
+            from: '/fixture',
+        }
     };
 }
 
