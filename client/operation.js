@@ -347,7 +347,7 @@
             n           = names.length;
             
             if (!n)
-                names   = [Info.name];
+                names = [Info.name];
             
             deleteFn(path + query, names, function(error) {
                 var Storage     = DOM.Storage,
