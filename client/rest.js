@@ -14,11 +14,11 @@ var Util, DOM, CloudFunc, CloudCmd;
         var Images = DOM.Images;
         
         this.delete = function(url, data, callback) {
-            var isFunc      = Util.type.function(data);
+            var isFunc = Util.type.function(data);
             
             if (!callback && isFunc) {
-                callback    = data;
-                data        = null;
+                callback = data;
+                data = null;
             }
             
             sendRequest({
@@ -31,11 +31,11 @@ var Util, DOM, CloudFunc, CloudCmd;
         };
         
         this.patch  = function(url, data, callback) {
-            var isFunc      = Util.type.function(data);
+            var isFunc = Util.type.function(data);
             
             if (!callback && isFunc) {
-                callback    = data;
-                data        = null;
+                callback = data;
+                data = null;
             }
             
             sendRequest({
