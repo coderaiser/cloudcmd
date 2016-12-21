@@ -1346,13 +1346,13 @@ var CloudCmd, Util, DOM, CloudFunc;
              *
              */
             this.deleteCurrent           = function(current) {
-                var name, next, prev, parent, currentNew;
+                var next, prev, currentNew;
                 
                 if (!current)
                     Cmd.getCurrentFile();
                 
-                parent      = current && current.parentElement;
-                name        = Cmd.getCurrentName(current);
+                var parent = current && current.parentElement;
+                var name = Cmd.getCurrentName(current);
                 
                 if (current && name !== '..') {
                     next    = current.nextSibling,
