@@ -113,7 +113,7 @@ var Util, DOM, CloudFunc, CloudCmd;
             });
         };
         
-        this.mv     = function(data, callback) {
+        this.mv = function(data, callback) {
             sendRequest({
                 method      : 'PUT',
                 url         : '/mv',
@@ -123,7 +123,7 @@ var Util, DOM, CloudFunc, CloudCmd;
             });
         };
         
-        this.Config    = {
+        this.Config = {
             read:   function(callback) {
                 sendRequest({
                     method      : 'GET',
