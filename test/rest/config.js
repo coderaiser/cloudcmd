@@ -4,6 +4,7 @@ const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
+const manageConfig = require('../../lib/server/config');
 
 const before = require('../before');
 
@@ -93,6 +94,7 @@ test('cloudcmd: rest: config: patch: no configDialog: statusCode', (t) => {
             .then((result) => {
                 result.on('response', (response) => {
                     t.equal(response.statusCode, 404);
+                    manageConfig('configDialog', true);
                     t.end();
                     after();
                 });
