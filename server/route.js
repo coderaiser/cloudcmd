@@ -1,6 +1,6 @@
 'use strict';
 
-const DIR = __dirname + '/../../';
+const DIR = __dirname + '/../';
 const DIR_TMPL = DIR + 'tmpl/';
 const DIR_HTML = DIR + 'html/';
 const DIR_COMMON = DIR + 'common/';

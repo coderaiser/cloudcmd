@@ -2,18 +2,17 @@
 
 const DIR = __dirname + '/';
 const DIR_ROOT = DIR + '../';
-const DIR_SERVER = DIR + 'server/';
 const DIR_COMMON = DIR + '../common/';
 
 const cloudfunc = require(DIR_COMMON + 'cloudfunc');
 
-const auth = require(DIR_SERVER + 'auth');
-const config = require(DIR_SERVER + 'config');
-const rest = require(DIR_SERVER + 'rest');
-const route = require(DIR_SERVER + 'route');
-const validate = require(DIR_SERVER + 'validate');
-const prefixer = require(DIR_SERVER + 'prefixer');
-const pluginer = require(DIR_SERVER + 'plugins');
+const auth = require(DIR + 'auth');
+const config = require(DIR + 'config');
+const rest = require(DIR + 'rest');
+const route = require(DIR + 'route');
+const validate = require(DIR + 'validate');
+const prefixer = require(DIR + 'prefixer');
+const pluginer = require(DIR + 'plugins');
 
 const apart = require('apart');
 const join = require('join-io');

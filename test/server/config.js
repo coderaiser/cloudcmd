@@ -2,7 +2,7 @@
 
 const test = require('tape');
 const root = '../../';
-const config = require(root + 'lib/server/config');
+const config = require(root + 'server/config');
 
 const before = require('../before');
 

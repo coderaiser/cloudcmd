@@ -1,7 +1,7 @@
 'use strict';
 
 const DIR = './';
-const DIR_COMMON = DIR + '../../common/';
+const DIR_COMMON = DIR + '../common/';
 const path = require('path');
 
 const root = require(DIR + 'root');

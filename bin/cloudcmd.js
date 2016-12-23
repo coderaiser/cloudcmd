@@ -3,7 +3,7 @@
 'use strict';
 
 const Info = require('../package');
-const DIR_SERVER = '../lib/server/';
+const DIR_SERVER = '../server/';
 
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
@@ -132,7 +132,7 @@ function version() {
 }
 
 function start(config) {
-    const SERVER = '../lib/server';
+    const SERVER = DIR_SERVER + 'server';
     
     if (args.server)
         require(SERVER)(config);

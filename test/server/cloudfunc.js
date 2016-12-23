@@ -12,7 +12,7 @@ var DIR                 = __dirname + '/../../',
     test                = require('tape'),
     
     FS_DIR              = TMPLDIR   + 'fs/',
-    EXPECT_PATH         = DIR       + 'test/lib/cloudfunc.html',
+    EXPECT_PATH         = DIR       + 'test/server/cloudfunc.html',
     
     TMPL_PATH   = [
         'file',

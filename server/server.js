@@ -1,9 +1,7 @@
 'use strict';
 
-const DIR_LIB = './';
-const DIR_SERVER = DIR_LIB + 'server/';
-
-const cloudcmd = require(DIR_LIB + 'cloudcmd');
+const DIR_SERVER = './';
+const cloudcmd = require(DIR_SERVER + 'cloudcmd');
 
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');

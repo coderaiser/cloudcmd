@@ -4,7 +4,7 @@ const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
-const manageConfig = require('../../lib/server/config');
+const manageConfig = require('../../server/config');
 
 const before = require('../before');
 

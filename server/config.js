@@ -1,8 +1,8 @@
 'use strict';
 
 const DIR_SERVER = __dirname + '/';
-const DIR_COMMON = DIR_SERVER + '../../common/';
-const DIR = DIR_SERVER + '../../';
+const DIR_COMMON = DIR_SERVER + '../common/';
+const DIR = DIR_SERVER + '../';
 
 const path = require('path');
 
