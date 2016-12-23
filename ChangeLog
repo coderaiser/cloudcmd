@@ -1,3 +1,9 @@
+2016.12.23, v5.12.4
+
+fix:
+- (package) main: legacy/lib -> legacy/server
+
+
 2016.12.23, v5.12.3
 
 fix:
