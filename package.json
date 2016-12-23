@@ -170,5 +170,5 @@
     "node": ">=0.10"
   },
   "license": "MIT",
-  "main": "legacy/lib/cloudcmd.js"
+  "main": "legacy/server/cloudcmd.js"
 }
