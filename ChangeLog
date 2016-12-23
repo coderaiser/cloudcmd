@@ -1,3 +1,14 @@
+2016.12.23, v5.12.3
+
+fix:
+- (cloudcmd) --no-console: console is always enabled (#99)
+- chore(prefixer) es-2015-ify
+
+feature:
+- (cloudcmd) lib/server -> server
+- (package) legacy:json -> legacy:help: optimize size of published package
+
+
 2016.12.19, v5.12.2
 
 fix:
