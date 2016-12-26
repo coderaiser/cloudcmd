@@ -131,13 +131,13 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                 if (error)
                     return Dialog.alert(TITLE, error);
                 
-                if (config.auth) {
-                    spawn.emit('auth', config.username, config.password);
-                    
-                    spawn.on('reject', function() {
-                        Dialog.alert(TITLE, 'Wrong credentials!');
-                    });
-                }
+                if (!config.auth)
+                    return;
+                
+                spawn.emit('auth', config.username, config.password);
+                spawn.on('reject', function() {
+                    Dialog.alert(TITLE, 'Wrong credentials!');
+                });
             });
         }
         
