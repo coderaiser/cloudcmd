@@ -152,9 +152,14 @@ function streamPack(cmd, response) {
     operation('pack', dir, response, names, noop);
 }
 
-function onPUT(name, body, callback) {
-    let cmd;
+function getCMD(cmd) {
+    if (cmd[0] === '/')
+        return cmd.slice(1);
     
+    return cmd;
+}
+
+function onPUT(name, body, callback) {
     check
         .type('callback', callback, 'function')
         .check({
@@ -162,9 +167,7 @@ function onPUT(name, body, callback) {
             body,
         });
     
-    if (name[0] === '/')
-        cmd = name.replace('/', '');
-    
+    const cmd = getCMD(name);
     const files = json.parse(body);
     
     switch(cmd) {
