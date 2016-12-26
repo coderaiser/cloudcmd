@@ -150,19 +150,19 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         }
         
         function loadFiles(element, callback) {
-            var prefix      = CloudCmd.PREFIX,
-                prefixName  = prefix + '/' + EditorName,
-                url         = prefixName + '/' + EditorName + '.js';
+            var prefix = CloudCmd.PREFIX;
+            var prefixName = prefix + '/' + EditorName;
+            var url = prefixName + '/' + EditorName + '.js';
             
             Util.time(Name + ' load');
             
             DOM.load.js(url, function() {
-                var word    = window[EditorName],
-                    options = {
-                        maxSize     : CloudFunc.MAX_FILE_SIZE,
-                        prefix      : prefixName,
-                        socketPath  : prefix
-                    };
+                var word = window[EditorName];
+                var options = {
+                    maxSize     : CloudFunc.MAX_FILE_SIZE,
+                    prefix      : prefixName,
+                    socketPath  : prefix
+                };
                 
                 word(element, options, function(ed) {
                     Util.timeEnd(Name + ' load');
