@@ -94,16 +94,25 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                 if (error)
                     return Images.hide();
                 
-                editor.setValueFirst(path, data);
-                
-                setMsgChanged(name);
-                
-                editor
-                    .setModeForPath(name)
-                    .setOption('fontSize', 16);
+                Edit.setValue(data, {
+                    name: name,
+                    path: path
+                });
                 
                 CloudCmd.View.show(Element, ConfigView);
             });
+        };
+        
+        this.setValue = function(value, info) {
+            var path = info.path;
+            var name = info.name;
+            
+            editor
+                .setValueFirst(path, value)
+                .setModeForPath(name)
+                .setOption('fontSize', 16);
+            
+            setMsgChanged(name);
         };
         
         this.hide = function() {
