@@ -75,36 +75,36 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
             return element;
         }
         
-        this.show                       = function(callback) {
-            if (!Loading) {
-                Images.show.load();
+        this.show = function(callback) {
+            if (Loading)
+                return this;
+            
+            Images.show.load();
+            
+            if (callback)
+                ConfigView.beforeShow = callback;
+            
+            Info.getData(function(error, data) {
+                var path = Info.path;
+                var isDir = Info.isDir;
+                var name = Info.name;
                 
-                if (callback)
-                    ConfigView.beforeShow = callback;
+                if (isDir)
+                    name += '.json';
                 
-                Info.getData(function(error, data) {
-                    var path    = Info.path,
-                        isDir   = Info.isDir,
-                        name    = Info.name;
-                    
-                    if (isDir)
-                        name += '.json';
-                    
-                    if (error) {
-                        Images.hide();
-                    } else {
-                        editor.setValueFirst(path, data);
-                        
-                        setMsgChanged(name);
-                        
-                        editor
-                            .setModeForPath(name)
-                            .setOption('fontSize', 16);
-                        
-                        CloudCmd.View.show(Element, ConfigView);
-                    }
-                });
-            }
+                if (error)
+                    return Images.hide();
+                
+                editor.setValueFirst(path, data);
+                
+                setMsgChanged(name);
+                
+                editor
+                    .setModeForPath(name)
+                    .setOption('fontSize', 16);
+                
+                CloudCmd.View.show(Element, ConfigView);
+            });
             
             return this;
         };
