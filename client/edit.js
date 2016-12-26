@@ -76,7 +76,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         
         this.show = function(callback) {
             if (Loading)
-                return this;
+                return;
             
             Images.show.load();
             
@@ -104,8 +104,6 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                 
                 CloudCmd.View.show(Element, ConfigView);
             });
-            
-            return this;
         };
         
         this.hide = function() {
