@@ -5,7 +5,7 @@ const DIR_TMPL = DIR + 'tmpl/';
 const DIR_HTML = DIR + 'html/';
 const DIR_COMMON = DIR + 'common/';
 const DIR_JSON = DIR + 'json/';
-const DIR_SERVER = __dirname + '/';
+const DIR_SERVER = './';
 const DIR_FS = DIR_TMPL + 'fs/';
 
 const fs = require('fs');
