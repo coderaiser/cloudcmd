@@ -55,11 +55,11 @@ var CloudCmd, Util, DOM, CloudFunc, $;
                 }
             };
         
-        View.show   = show;
-        View.hide   = hide;
+        View.show = show;
+        View.hide = hide;
         
         function init() {
-            var func        = CallBack || Util.exec.with(show, null);
+            var func = CallBack || Util.exec.with(show, null);
             
             Loading = true;
             
@@ -99,7 +99,7 @@ var CloudCmd, Util, DOM, CloudFunc, $;
             Element = $('<div class="view" tabindex=0>');
             
             if (data) {
-                element    = $(Element).append(data);
+                element = $(Element).append(data);
                 
                 Util.copyObj(config, Config);
                 
