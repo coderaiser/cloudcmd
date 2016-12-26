@@ -1,9 +1,10 @@
 var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
+
 (function(CloudCmd, Util, DOM) {
     'use strict';
     
     CloudCmd.Edit = EditProto;
-        
+    
     function EditProto(callback) {
         var Name        = 'Edit',
             Loading     = true,
@@ -241,13 +242,12 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         
         function setMsgChanged(name) {
             var msg = 'Do you want to save changes to ' + name + '?';
-            
             MSG_CHANGED = msg;
         }
         
         function isChanged() {
-            var is  = editor.isChanged();
-                
+            var is = editor.isChanged();
+            
             is && Dialog.confirm(TITLE, MSG_CHANGED, {cancel: false})
                 .then(function() {
                     editor.save();
