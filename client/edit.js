@@ -241,8 +241,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         }
         
         function setMsgChanged(name) {
-            var msg = 'Do you want to save changes to ' + name + '?';
-            MSG_CHANGED = msg;
+            MSG_CHANGED = 'Do you want to save changes to ' + name + '?';
         }
         
         function isChanged() {
