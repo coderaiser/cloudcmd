@@ -55,7 +55,6 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                 function(callback) {
                     Edit.create(element)
                         .show(callback);
-                    
                 },
                 callback
             ]);
@@ -109,7 +108,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
             return this;
         };
         
-        this.hide                       = function() {
+        this.hide = function() {
             CloudCmd.View.hide();
         };
         
@@ -185,7 +184,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
             
             !Menu && DOM.loadRemote('menu', function(error) {
                 var noFocus,
-                    options     = {
+                    options = {
                         beforeShow: function(params) {
                             params.x -= 18;
                             params.y -= 27;
@@ -195,7 +194,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                             !noFocus && editor.focus();
                         }
                 },
-                menuData    = {
+                menuData = {
                     'Save           Ctrl+S' : function() {
                         editor.save();
                     },
@@ -255,3 +254,4 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
     }
     
 })(CloudCmd, Util, DOM, CloudFunc);
+
