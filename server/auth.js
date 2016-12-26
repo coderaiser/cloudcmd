@@ -19,7 +19,7 @@ function middle(authentication) {
         
         if (!is)
             return next();
-            
+        
         const success = () => next(/* success */);
         authentication.check(req, res, success);
     };
