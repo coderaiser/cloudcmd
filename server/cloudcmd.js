@@ -119,53 +119,53 @@ function listen(prefix, socket) {
     config.listen(socket, authCheck);
     
     edward.listen(socket, {
-        size: size,
-        root: root,
+        size,
+        root,
+        authCheck,
         prefix: prefix + '/edward',
-        authCheck: authCheck
     });
     
     dword.listen(socket, {
-        size: size,
-        root: root,
+        size,
+        root,
+        authCheck,
         prefix: prefix + '/dword',
-        authCheck: authCheck
     });
     
     deepword.listen(socket, {
-        size: size,
-        root: root,
+        size,
+        root,
+        authCheck,
         prefix: prefix + '/deepword',
-        authCheck: authCheck
     });
     
     spero.listen(socket, {
-        root: root,
+        root,
+        authCheck,
         prefix: prefix + '/spero',
-        authCheck: authCheck
     });
     
     remedy.listen(socket, {
-        root: root,
+        root,
+        authCheck,
         prefix: prefix + '/remedy',
-        authCheck: authCheck
     });
     
     ishtar.listen(socket, {
-        root: root,
+        root,
+        authCheck,
         prefix: prefix + '/ishtar',
-        authCheck: authCheck
     });
     
     salam.listen(socket, {
-        root: root,
+        root,
+        authCheck,
         prefix: prefix + '/salam',
-        authCheck: authCheck
     });
     
     config('console') && konsole.listen(socket, {
+        authCheck,
         prefix: prefix + '/console',
-        authCheck: authCheck
     });
 }
 
