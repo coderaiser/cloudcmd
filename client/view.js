@@ -90,90 +90,88 @@ var CloudCmd, Util, DOM, CloudFunc, $;
          */
         function show(data, options) {
             var path, element, type,
-                prefixUrl   = CloudCmd.PREFIX_URL + CloudFunc.FS,
-                config      = {};
+                prefixUrl = CloudCmd.PREFIX_URL + CloudFunc.FS,
+                config = {};
             
-            if (!Loading) {
-                Element         = $('<div class="view" tabindex=0>');
+            if (Loading)
+                return;
+            
+            Element = $('<div class="view" tabindex=0>');
+            
+            if (data) {
+                element    = $(Element).append(data);
                 
-                if (data) {
-                    element    = $(Element).append(data);
-                    
-                    Util.copyObj(config, Config);
-                    
-                    if (options)
-                        Object.keys(options).forEach(function(name) {
-                            var func,
-                                isConfig        = !!config[name],
-                                series          = Util.exec.series,
-                                item            = options[name],
-                                isFunc          = Util.type.function(item);
+                Util.copyObj(config, Config);
+                
+                if (options)
+                    Object.keys(options).forEach(function(name) {
+                        var func,
+                            isConfig        = !!config[name],
+                            series          = Util.exec.series,
+                            item            = options[name],
+                            isFunc          = Util.type.function(item);
+                        
+                        if (isFunc && isConfig) {
+                            func            = config[name];
+                            config[name]    = function() {
+                                series([func, item]);
+                            };
+                        } else {
+                            config[name]    = options[name];
+                        }
+                    });
+                
+                $.fancybox(element, config);
+            } else {
+                Images.show.load();
+                path = prefixUrl + Info.path;
+                type = getType(path);
+                
+                switch(type) {
+                default:
+                    Info.getData(function(error, data) {
+                        if (error)
+                            return Images.hide();
+                        
+                        var element = document.createTextNode(data);
+                        /* add margin only for view text documents */
+                        Element.css('margin', '2%');
+                        
+                        $.fancybox(Element.append(element), Config);
+                    });
+                    break;
+                
+                case 'image':
+                    showImage(path, prefixUrl);
+                    break;
+                
+                case 'media':
+                     getMediaElement(path, function(element) {
+                        var media = DOM.getByDataName('js-media', element);
+                        var onKey = Util.exec.with(onMediaKey, media);
                             
-                            if (isFunc && isConfig) {
-                                func            = config[name];
-                                config[name]    = function() {
-                                    series([func, item]);
-                                };
-                            } else {
-                                config[name]    = options[name];
+                        $.fancybox.open(element, {
+                            parent      : Overlay,
+                            beforeShow  : function() {
+                                Config.beforeShow();
+                                Events.addKey(onKey);
+                            },
+                            beforeClose : function() {
+                                Config.beforeClose();
+                                Events.rmKey(onKey);
+                            },
+                            afterShow: function() {
+                                element
+                                    .querySelector('audio, video')
+                                    .focus();
+                            },
+                            helpers: {
+                                overlay : null,
+                                title   : null
                             }
                         });
-                    
-                    $.fancybox(element, config);
-                    
-                } else {
-                    Images.show.load();
-                    path    = prefixUrl + Info.path;
-                    type    = getType(path);
-                    
-                    switch(type) {
-                    default:
-                        Info.getData(function(error, data) {
-                            var element;
-                            if (error) {
-                                Images.hide();
-                            } else {
-                                element = document.createTextNode(data);
-                                /* add margin only for view text documents */
-                                Element.css('margin', '2%');
-                                
-                                $.fancybox(Element.append(element), Config);
-                            }
-                        });
-                        break;
-                    
-                    case 'image':
-                        showImage(path, prefixUrl);
-                        break;
-                    
-                    case 'media':
-                         getMediaElement(path, function(element) {
-                            var media       = DOM.getByDataName('js-media', element),
-                                onKey       = Util.exec.with(onMediaKey, media);
-                                
-                            $.fancybox.open(element, {
-                                parent      : Overlay,
-                                beforeShow  : function() {
-                                    Config.beforeShow();
-                                    Events.addKey(onKey);
-                                },
-                                beforeClose : function() {
-                                    Config.beforeClose();
-                                    Events.rmKey(onKey);
-                                },
-                                afterShow: function() {
-                                    element
-                                        .querySelector('audio, video')
-                                        .focus();
-                                },
-                                helpers: {
-                                    overlay : null,
-                                    title   : null
-                                }
-                            });
-                        });
-                        break;
-                    }
+                    });
+                    break;
                 }
             }
         }
