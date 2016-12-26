@@ -228,12 +228,14 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                     }
                 };
                 
-                if (error) {
-                    Dialog.alert(TITLE, error);
-                } else if (!Menu && MenuIO) {
-                    Menu = new MenuIO(Element, options, menuData);
-                    Menu.show(position.x, position.y);
-                }
+                if (error)
+                    return Dialog.alert(TITLE, error);
+                
+                if (Menu || !MenuIO)
+                    return;
+                    
+                Menu = new MenuIO(Element, options, menuData);
+                Menu.show(position.x, position.y);
             });
         }
         
