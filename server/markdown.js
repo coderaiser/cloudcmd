@@ -22,12 +22,12 @@ module.exports  = (name, request, callback) => {
         if (query === 'relative')
             name = DIR_ROOT + name;
         else
-                name = root(name);
-            
+            name = root(name);
+        
         fs.readFile(name, 'utf8', (error, data) => {
             if (error)
                 return callback(error);
-                
+            
             parse(data, callback);
         });
         break;
@@ -36,7 +36,7 @@ module.exports  = (name, request, callback) => {
         pullout(request, 'string', (error, data) => {
             if (error)
                 return callback(error);
-               
+            
             parse(data, callback);
         });
         break;
@@ -61,5 +61,4 @@ function check(name, request, callback) {
     if (typeof callback !== 'function')
         throw Error('callback should be function!');
 }
-
 
