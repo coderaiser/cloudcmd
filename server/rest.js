@@ -158,8 +158,8 @@ function onPUT(name, body, callback) {
     check
         .type('callback', callback, 'function')
         .check({
-            name: name,
-            body: body
+            name,
+            body,
         });
     
     if (name[0] === '/')
