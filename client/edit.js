@@ -62,13 +62,13 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         
         function createElement() {
             var element = DOM.load({
-                name        : 'div',
-                style   :
-                    'width      : 100%;'    +
-                    'height     : 100%;'    +
-                    'font-family: "Droid Sans Mono";' +
+                name: 'div',
+                style:
+                    'width      : 100%;'                +
+                    'height     : 100%;'                +
+                    'font-family: "Droid Sans Mono";'   +
                     'position   : absolute;',
-                notAppend : true
+                notAppend: true
             });
             
             return element;
