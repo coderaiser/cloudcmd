@@ -181,18 +181,18 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
             event.preventDefault();
             
             !Menu && DOM.loadRemote('menu', function(error) {
-                var noFocus,
-                    options = {
-                        beforeShow: function(params) {
-                            params.x -= 18;
-                            params.y -= 27;
-                        },
-                        
-                        afterClick: function() {
-                            !noFocus && editor.focus();
-                        }
-                },
-                menuData = {
+                var noFocus;
+                var options = {
+                    beforeShow: function(params) {
+                        params.x -= 18;
+                        params.y -= 27;
+                    },
+                    
+                    afterClick: function() {
+                        !noFocus && editor.focus();
+                    }
+                };
+                var menuData = {
                     'Save           Ctrl+S' : function() {
                         editor.save();
                     },
