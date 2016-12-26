@@ -29,16 +29,11 @@ const isWin32 = process.platform === 'win32';
  * @param callback
  */
 module.exports = (request, response, next) => {
-    const params  = {
-        request     : request,
-        response    : response
-    };
-    
     check
         .type('next', next, 'function')
         .check({
-            request: request,
-            response: response
+            request,
+            response,
         });
     
     const apiURL = CloudFunc.apiURL;
@@ -49,13 +44,17 @@ module.exports = (request, response, next) => {
     if (!is)
         return next();
     
-    params.name = name.replace(apiURL, '') || '/';
+    const params  = {
+        request,
+        response,
+        name: name.replace(apiURL, '') || '/',
+    };
     
     sendData(params, (error, options, data) => {
         params.gzip = !error;
         
         if (!data) {
-            data    = options;
+            data = options;
             options = {};
         }
         
