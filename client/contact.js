@@ -13,23 +13,24 @@ var CloudCmd, Util, DOM, olark;
             Inited  = false;
         
         function init(callback) {
-            if (!Inited) {
-                Contact.show = show;
-                Contact.hide = hide;
+            if (Inited)
+                return;
+            
+            Contact.show = show;
+            Contact.hide = hide;
+            
+            load(function() {
+                Inited = true;
                 
-                load(function() {
-                    Inited = true;
-                    
-                    olark.identify('6216-545-10-4223');
-                    olark('api.box.onExpand',   Contact.show);
-                    olark('api.box.onShow',     Contact.show);
-                    olark('api.box.onShrink',   Contact.hide);
-                    
-                    Util.exec(callback);
-                });
+                olark.identify('6216-545-10-4223');
+                olark('api.box.onExpand',   Contact.show);
+                olark('api.box.onShow',     Contact.show);
+                olark('api.box.onShrink',   Contact.hide);
                 
-                Events.addKey(onKey);
-            }
+                Util.exec(callback);
+            });
+            
+            Events.addKey(onKey);
         }
         
         function load(callback) {
