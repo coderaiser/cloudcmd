@@ -111,7 +111,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         };
         
         this.create = function(element) {
-            Element     = element;
+            Element = element;
             
             editor.on('save', function(value) {
                 var size = Format.size(value);
