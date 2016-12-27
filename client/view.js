@@ -100,26 +100,8 @@ var CloudCmd, Util, DOM, CloudFunc, $;
             if (data) {
                 element = $(Element).append(data);
                 
-                var config = {};
-                Util.copyObj(config, Config);
+                var config = initConfig(Config, options);
                 
-                if (options)
-                    Object.keys(options).forEach(function(name) {
-                        var isConfig = !!config[name];
-                        var series = Util.exec.series;
-                        var item = options[name];
-                        var isFunc = Util.type.function(item);
-                        
-                        if (!isFunc || !isConfig) {
-                            config[name] = options[name];
-                        } else {
-                            var func = config[name];
-                            config[name] = function() {
-                                series([func, item]);
-                            };
-                        }
-                    });
-                    
                 $.fancybox(element, config);
             } else {
                 Images.show.load();
@@ -173,6 +155,32 @@ var CloudCmd, Util, DOM, CloudFunc, $;
                     break;
                 }
             }
+        }
+        
+        function initConfig(Config, options) {
+            var config = {};
+            
+            Util.copyObj(config, Config);
+            
+            if (!options)
+                return config;
+            
+            Object.keys(options).forEach(function(name) {
+                var isConfig = !!config[name];
+                var item = options[name];
+                var isFunc = Util.type.function(item);
+                
+                if (!isFunc || !isConfig) {
+                    config[name] = options[name];
+                } else {
+                    var func = config[name];
+                    config[name] = function() {
+                        exec.series([func, item]);
+                    };
+                }
+            });
+            
+            return config;
         }
         
         function hide() {
