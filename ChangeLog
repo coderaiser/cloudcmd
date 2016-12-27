@@ -1,3 +1,11 @@
+2016.12.27, v5.13.0
+
+feature:
+- (cloudcmd) show line number when config is not valid json (closes #98)
+- (edit) add setValue
+- (edit) show: rm this
+
+
 2016.12.23, v5.12.4
 
 fix:
