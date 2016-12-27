@@ -122,6 +122,7 @@
     "minify": "^2.0.0",
     "minimist": "^1.2.0",
     "mollify": "^1.0.0",
+    "nomine": "^1.0.1",
     "onezip": "^1.0.5",
     "opn": "^4.0.1",
     "os-homedir": "^1.0.0",

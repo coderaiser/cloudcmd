@@ -1,5 +1,6 @@
 [
     "edit",
+    "edit-file",
     "menu",
     "view",
     "help",
@@ -8,7 +9,7 @@
     "contact",
     "upload",
     "operation",
-    "konsole", 
+    "konsole",
     "cloud", [{
         "name": "remote",
         "data": [{

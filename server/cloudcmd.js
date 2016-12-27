@@ -23,6 +23,7 @@ const konsole = require('console-io/legacy');
 const edward = require('edward/legacy');
 const dword = require('dword/legacy');
 const deepword = require('deepword/legacy');
+const nomine = require('nomine/legacy');
 const spero = require('spero');
 const remedy = require('remedy');
 const ishtar = require('ishtar');
@@ -235,6 +236,10 @@ function cloudcmd(prefix, plugins) {
         
         salam({
             prefix: prefix + '/salam',
+        }),
+        
+        nomine({
+            prefix: prefix + '/rename',
         }),
         
         setUrl(prefix),

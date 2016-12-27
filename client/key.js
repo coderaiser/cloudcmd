@@ -294,7 +294,7 @@ var CloudCmd, Util, DOM;
                 break;
             
             case Key.F4:
-                CloudCmd.Edit.show();
+                CloudCmd.EditFile.show();
                 event.preventDefault();
                 break;
             

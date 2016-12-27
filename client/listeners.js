@@ -53,7 +53,7 @@ var Util, DOM, CloudFunc, CloudCmd;
                         'f1'        : CloudCmd.Help.show,
                         'f2'        : DOM.renameCurrent,
                         'f3'        : CloudCmd.View.show,
-                        'f4'        : CloudCmd.Edit.show,
+                        'f4'        : CloudCmd.EditFile.show,
                         'f5'        : operation('copy'),
                         'f6'        : operation('move'),
                         'f7'        : DOM.promptNewDir,
