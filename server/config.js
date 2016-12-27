@@ -5,6 +5,7 @@ const DIR_COMMON = DIR_SERVER + '../common/';
 const DIR = DIR_SERVER + '../';
 
 const path = require('path');
+const fs = require('fs');
 
 const exit = require(DIR_SERVER + 'exit');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
@@ -12,7 +13,7 @@ const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const pullout = require('pullout/legacy');
 const ponse = require('ponse');
 const jonny = require('jonny');
-const readjson = require('readjson');
+const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');
 const exec = require('execon');
@@ -24,9 +25,13 @@ const apiURL = CloudFunc.apiURL;
 const ConfigPath = path.join(DIR, 'json/config.json');
 const ConfigHome = path.join(HOME, '.cloudcmd.json');
 
+const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
+    mode: 'json'
+});
+
 let config;
 let error = tryCatch(() => {
-    config = readjson.sync(ConfigHome);
+    config = readjsonSync(ConfigHome);
 });
 
 if (error) {
@@ -34,7 +39,7 @@ if (error) {
         console.error('cloudcmd --config ~/.cloudcmd.json:', error.message);
     
     error = tryCatch(() => {
-        config = readjson.sync(ConfigPath);
+        config = readjsonSync(ConfigPath);
     });
     
     if (error)

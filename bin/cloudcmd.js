@@ -151,13 +151,18 @@ function readConfig(name) {
     if (!name)
         return;
     
+    const fs = require('fs');
     const tryCatch = require('try-catch');
-    const readjson = require('readjson');
+    const jju = require('jju');
+    
+    const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
+        mode: 'json'
+    });
     
     let data;
     
     const error = tryCatch(() => {
-        data = readjson.sync(name);
+        data = readjsonSync(name);
     });
     
     if (error)
