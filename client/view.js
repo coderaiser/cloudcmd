@@ -89,9 +89,8 @@ var CloudCmd, Util, DOM, CloudFunc, $;
          * function shows FancyBox
          */
         function show(data, options) {
-            var path, element, type,
-                prefixUrl = CloudCmd.PREFIX_URL + CloudFunc.FS,
-                config = {};
+            var path, element, type;
+            var prefixUrl = CloudCmd.PREFIX_URL + CloudFunc.FS;
             
             if (Loading)
                 return;
@@ -101,26 +100,26 @@ var CloudCmd, Util, DOM, CloudFunc, $;
             if (data) {
                 element = $(Element).append(data);
                 
+                var config = {};
                 Util.copyObj(config, Config);
                 
                 if (options)
                     Object.keys(options).forEach(function(name) {
-                        var func,
-                            isConfig        = !!config[name],
-                            series          = Util.exec.series,
-                            item            = options[name],
-                            isFunc          = Util.type.function(item);
+                        var isConfig = !!config[name];
+                        var series = Util.exec.series;
+                        var item = options[name];
+                        var isFunc = Util.type.function(item);
                         
-                        if (isFunc && isConfig) {
-                            func            = config[name];
-                            config[name]    = function() {
+                        if (!isFunc || !isConfig) {
+                            config[name] = options[name];
+                        } else {
+                            var func = config[name];
+                            config[name] = function() {
                                 series([func, item]);
                             };
-                        } else {
-                            config[name]    = options[name];
                         }
                     });
-                
+                    
                 $.fancybox(element, config);
             } else {
                 Images.show.load();
