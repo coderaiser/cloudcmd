@@ -1,9 +1,11 @@
+/* global itype */
+
 var Util, DOM, jQuery;
 
 (function(window, document, Util, DOM, $) {
     'use strict';
     
-    var type = Util.type;
+    var type = itype;
     
     if (!window.XMLHttpRequest || !document.head)
         DOM.load.ajax = $.ajax;
@@ -34,13 +36,6 @@ var Util, DOM, jQuery;
         Array.isArray = function(arr) {
             return type(arr) === 'array';
         };
-    
-    /*
-     * typeof callback === "function" should not be used,
-     * as older browsers may report objects to be a function,
-     * which they are not
-     */
-    Util.type.function = $.isFunction;
     
     if (!document.addEventListener)
         /**

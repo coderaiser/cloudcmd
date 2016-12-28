@@ -1,3 +1,5 @@
+/* global itype */
+
 var CloudCmd, Util, DOM, CloudFunc, $, exec;
 
 (function(CloudCmd, Util, DOM, CloudFunc) {
@@ -168,7 +170,7 @@ var CloudCmd, Util, DOM, CloudFunc, $, exec;
             Object.keys(options).forEach(function(name) {
                 var isConfig = !!config[name];
                 var item = options[name];
-                var isFunc = Util.type.function(item);
+                var isFunc = itype.function(item);
                 
                 if (!isFunc || !isConfig) {
                     config[name] = options[name];

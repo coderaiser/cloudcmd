@@ -1,7 +1,8 @@
 /* global Util */
 /* global DOM */
+/* global itype */
 
-(function(Util, DOM, localStorage, exec, json, type) {
+(function(Util, DOM, localStorage, exec, json, itype) {
     'use strict';
     
     var Storage     = Util.extendProto(StorageProto),
@@ -62,7 +63,7 @@
         this.set         = function(name, data, callback) {
             var str, error;
             
-            if (type.object(data))
+            if (itype.object(data))
                 str = json.stringify(data);
             
             if (Allowed && name)
@@ -99,4 +100,4 @@
             return this;
         };
     }
-})(Util, DOM, localStorage, Util.exec, Util.json, Util.type);
+})(Util, DOM, localStorage, Util.exec, Util.json, itype);

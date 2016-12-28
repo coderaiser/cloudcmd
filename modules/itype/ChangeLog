@@ -1,0 +1,35 @@
+2016.12.28, v2.0.3
+
+fix:
+- (bower) main
+
+
+2016.12.28, v2.0.2
+
+feature:
+- (bower) ignore: add ".*"
+
+
+2016.12.28, v2.0.1
+
+feature:
+- (bower) add
+
+
+2016.12.28, v2.0.0
+
+feature:
+- (itype) add browser support
+
+
+2015.01.30, v1.0.2
+
+feature:
+- (type) change format of regexp
+
+
+2014.12.22, v1.0.1
+
+feature:
+- (itype) add null
+

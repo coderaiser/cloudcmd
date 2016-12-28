@@ -1,0 +1,53 @@
+{
+  "name": "itype",
+  "version": "2.0.3",
+  "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
+  "description": "Improved type check",
+  "main": "lib/itype.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/itype.git"
+  },
+  "keywords": [
+    "type",
+    "string",
+    "array",
+    "object",
+    "boolean",
+    "null",
+    "undefined",
+    "check"
+  ],
+  "scripts": {
+    "test": "tape test/*.js",
+    "watcher": "nodemon -w test -w lib --exec",
+    "watch:test": "npm run watcher -- npm test",
+    "watch:coverage": "npm run watcher -- npm run coverage",
+    "lint": "eslint lib test",
+    "build": "redrun clean init 6to5 legacy:* bundle minify",
+    "init": "mkdirp dist legacy",
+    "minify": "minify dist/itype.js > dist/itype.min.js",
+    "wisdom": "npm run build",
+    "clean": "rimraf legacy dist",
+    "bundle:base": "browserify -s itype --ng false",
+    "bundle": "npm run bundle:base -- -r ./legacy/lib/itype.js:itype ./legacy/lib/itype.js -o dist/itype.js",
+    "coverage": "nyc npm test",
+    "report": "nyc report --reporter=text-lcov | coveralls",
+    "6to5": "buble lib -o legacy/lib",
+    "legacy:index": "echo \"module.exports = require('./lib/itype');\" > legacy/index.js"
+  },
+  "dependencies": {},
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "buble": "^0.15.1",
+    "coveralls": "^2.11.9",
+    "eslint": "^3.10.2",
+    "minify": "^2.0.5",
+    "mkdirp": "^0.5.1",
+    "nodemon": "^1.11.0",
+    "nyc": "^10.0.0",
+    "redrun": "^5.0.1",
+    "tape": "^4.5.1"
+  }
+}

@@ -1,6 +1,7 @@
 /* global Util */
 /* global DOM */
 /* global Emitify */
+/* global itype */
 
 (function (Util, DOM) {
     'use strict';
@@ -101,7 +102,7 @@
                 }
                 
                 if (p.attribute) {
-                    type = Util.type(p.attribute);
+                    type = itype(p.attribute);
                     
                     switch(type) {
                     case 'string':
@@ -140,7 +141,7 @@
          */
         load.getIdBySrc             = function(src) {
             var num, sub, id,
-                isStr       = Util.type.string(src);
+                isStr       = itype.string(src);
             
             if (isStr) {
                 if (~src.indexOf(':'))
@@ -165,9 +166,9 @@
         load.ajax                    = function(params) {
             var data,
                 p           = params,
-                isObject    = Util.type.object(p.data),
-                isArray     = Util.type.array(p.data),
-                isArrayBuf  = Util.type(p.data) === 'arraybuffer',
+                isObject    = itype.object(p.data),
+                isArray     = itype.array(p.data),
+                isArrayBuf  = itype(p.data) === 'arraybuffer',
                 type        = p.type || p.method || 'GET',
                 headers     = p.headers || {},
                 xhr         = new XMLHttpRequest();

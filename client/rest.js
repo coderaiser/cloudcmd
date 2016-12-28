@@ -1,3 +1,5 @@
+/* global itype */
+
 var Util, DOM, CloudFunc, CloudCmd;
 
 (function(Util, DOM, CloudFunc) {
@@ -14,7 +16,7 @@ var Util, DOM, CloudFunc, CloudCmd;
         var Images = DOM.Images;
         
         this.delete = function(url, data, callback) {
-            var isFunc = Util.type.function(data);
+            var isFunc = itype.function(data);
             
             if (!callback && isFunc) {
                 callback = data;
@@ -31,7 +33,7 @@ var Util, DOM, CloudFunc, CloudCmd;
         };
         
         this.patch  = function(url, data, callback) {
-            var isFunc = Util.type.function(data);
+            var isFunc = itype.function(data);
             
             if (!callback && isFunc) {
                 callback = data;
@@ -48,7 +50,7 @@ var Util, DOM, CloudFunc, CloudCmd;
         };
         
         this.write   = function(url, data, callback) {
-            var isFunc      = Util.type.function(data);
+            var isFunc      = itype.function(data);
             
             if (!callback && isFunc) {
                 callback    = data;
@@ -69,7 +71,7 @@ var Util, DOM, CloudFunc, CloudCmd;
                 isBeautify  = /\?beautify$/.test(url),
                 isMinify    = /\?minify$/.test(url),
                 notLog      = !isQuery || isBeautify || isMinify,
-                isFunc      = Util.type.function(dataType);
+                isFunc      = itype.function(dataType);
             
             if (!callback && isFunc) {
                 callback    = dataType;

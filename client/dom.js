@@ -4,6 +4,7 @@ var CloudCmd, Util, DOM, CloudFunc;
     'use strict';
     
     /* global rendy */
+    /* global itype */
     
     var DOMFunc                     = function() {},
         DOMProto,
@@ -301,7 +302,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                             remoteObj   = Util.findObjByNameInArr(modules, 'remote'),
                             module      = Util.findObjByNameInArr(remoteObj, name),
                             
-                            isArray     = Util.type.array(module.local),
+                            isArray     = itype.array(module.local),
                             version     = module.version,
                             
                             funcON      = function() {
@@ -724,7 +725,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                             ONE_MEGABYTE    = 1024 * 1024 * 1024;
                         
                         if (!error) {
-                            if (Util.type.object(data))
+                            if (itype.object(data))
                                 data = Util.json.stringify(data);
                             
                             length  = data.length;

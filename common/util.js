@@ -1,10 +1,10 @@
 (function(scope) {
     'use strict';
     
-    var exec,
-        rendy,
-        jonny,
-        Scope = scope.window ? window : global;
+    var exec;
+    var rendy;
+    var jonny;
+    var Scope = scope.window ? window : global;
     
     if (typeof module === 'object' && module.exports) {
         exec = require('execon');
@@ -50,20 +50,19 @@
          * @target
          * @objFrom
          */
-        this.extend                 = function(target, objFrom) {
-            var obj,
-                keys,
-                proto,
-                isFunc  = Util.type.function(objFrom),
-                isArray = Util.type.array(objFrom),
-                isObj   = Util.type.object(target),
-                ret     = isObj ? target : {};
+        this.extend = function(target, objFrom) {
+            var obj;
+            var keys;
+            var proto;
+            var isFunc  = typeof objFrom === 'function';
+            var isArray = Array.isArray(objFrom);
+            var isObj = typeof target === 'object';
+            var ret = isObj ? target : {};
             
             if (isArray)
                 objFrom.forEach(function(item) {
                    ret = Util.extend(target, item);
                 });
-                   
             
             else if (objFrom) {
                 obj     = isFunc ? new objFrom() : objFrom;
@@ -98,7 +97,7 @@
         this.json               = jonny;
         
         this.escapeRegExp = function(str) {
-            var isStr   = Util.type.string(str);
+            var isStr = typeof str === 'string';
             
             if (isStr)
                 str = str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
@@ -127,50 +126,7 @@
             return regExp;
         };
         
-        this.type                   = new TypeProto();
-        
-        function TypeProto() {
-            /**
-             * get type of variable
-             *
-             * @param variable
-             */
-            function type(variable) {
-                var regExp      = /\s([a-zA-Z]+)/,
-                    str         = {}.toString.call(variable),
-                    typeBig     = str.match(regExp)[1],
-                    result      = typeBig.toLowerCase();
-                
-                return result;
-            }
-            
-            /**
-             * functions check is variable is type of name
-             *
-             * @param variable
-             */
-            function typeOf(name, variable) {
-                return type(variable) === name;
-            }
-            
-            function typeOfSimple(name, variable) {
-                return typeof variable === name;
-            }
-            
-            ['null', 'arrayBuffer', 'file', 'array', 'object']
-                .forEach(function(name) {
-                    type[name] = typeOf.bind(null, name);
-                });
-            
-            ['string', 'undefined', 'boolean', 'number', 'function']
-                .forEach(function(name) {
-                    type[name] = typeOfSimple.bind(null, name);
-                });
-            
-            return type;
-        }
-        
-        this.exec                       = exec;
+        this.exec = exec;
         
         /**
          * function gets file extension
@@ -178,10 +134,10 @@
          * @param pFileName
          * @return Ext
          */
-        this.getExt                     = function(name) {
-            var ret     = '',
-                dot,
-                isStr   = Util.type.string(name);
+        this.getExt = function(name) {
+            var ret = '';
+            var dot;
+            var isStr = typeof name === 'string'
             
             if (isStr) {
                 dot = name.lastIndexOf('.');

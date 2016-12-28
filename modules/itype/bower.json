@@ -1,0 +1,25 @@
+{
+  "name": "itype",
+  "description": "Improved type check",
+  "main": "dist/itype.js",
+  "authors": [
+    "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "type",
+    "string",
+    "array",
+    "object",
+    "boolean",
+    "null",
+    "undefined",
+    "check"
+  ],
+  "homepage": "https://github.com/coderaiser/itype",
+  "ignore": [
+    ".*",
+    "test",
+    "lib"
+  ]
+}

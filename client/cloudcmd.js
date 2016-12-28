@@ -36,6 +36,7 @@ var CloudCmd;
             libDir('jonny'),
             libDist('emitify'),
             libDist('currify'),
+            libDist('itype'),
         ].filter(function(name) {
             return name;
         }).map(function(name) {

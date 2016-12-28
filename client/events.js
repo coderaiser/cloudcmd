@@ -1,5 +1,7 @@
 var Util, DOM;
 
+/* global itype */
+
 (function(Util, DOM) {
     'use strict';
     
@@ -9,7 +11,7 @@ var Util, DOM;
     
     function EventsProto() {
         var Events = this;
-        var Type = Util.type;
+        var Type = itype;
             
         function parseArgs(eventName, element, listener, callback) {
             var isFunc, isElement, error,

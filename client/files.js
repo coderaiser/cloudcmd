@@ -1,7 +1,6 @@
-/* load and store templates data */
-
-/*global Promise */
-/*global Util, DOM, CloudCmd */
+/* global Promise */
+/* global itype */
+/* global Util, DOM, CloudCmd */
 
 (function(Util, DOM) {
     'use strict';
@@ -24,7 +23,7 @@
             timeout         = getTimeoutOnce(2000);
         
         this.get = function(name, callback) {
-            var type = Util.type(name);
+            var type = itype(name);
             
             check(name, callback);
             

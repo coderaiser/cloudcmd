@@ -1,3 +1,5 @@
+/* global itype */
+
 var Util, DOM, CloudFunc, join;
 
 (function(scope, Util, DOM, CloudFunc) {
@@ -19,8 +21,7 @@ var Util, DOM, CloudFunc, join;
             Images                  = DOM.Images,
             Info                    = DOM.CurrentInfo,
             CloudCmd                = this,
-            Storage                 = DOM.Storage,
-            type                    = Util.type;
+            Storage                 = DOM.Storage;
         
         this.log                    = log;
         this.PREFIX                 = '';
@@ -124,7 +125,7 @@ var Util, DOM, CloudFunc, join;
                             function(error) {
                                 var Proto = CloudCmd[name];
                                 
-                                if (!error && type.function(Proto))
+                                if (!error && itype.function(Proto))
                                     CloudCmd[name] = applyConstructor(Proto, args);
                             });
                     };
@@ -286,7 +287,7 @@ var Util, DOM, CloudFunc, join;
                     modules = [];
                 
                 modules.forEach(function(module) {
-                    var isStr = type.string(module);
+                    var isStr = itype.string(module);
                     
                     if (isStr)
                         load(null, module, doBefore[module]);
@@ -340,7 +341,7 @@ var Util, DOM, CloudFunc, join;
         this.execFromModule         = function(moduleName, funcName) {
             var args    = [].slice.call(arguments, 2),
                 obj     = CloudCmd[moduleName],
-                isObj   = Util.type.object(obj);
+                isObj   = itype.object(obj);
             
             Util.exec.if(isObj,
                 function() {
