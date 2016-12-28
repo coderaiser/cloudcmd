@@ -60,7 +60,7 @@
     "es5:eslint": "eslint -c .es5/.eslintrc --rule 'no-console:0' $npm_package_config_dirs_legacy --ignore-path bin/release.js",
     "fix:es5:eslint": "redrun es5:eslint -- --fix",
     "test": "tape 'test/**/*.js'",
-    "watch:test": "nodemon -w server -w test -x \"npm run test\"",
+    "watch:test": "nodemon -w server -w test -w common -x \"npm run test\"",
     "spell": "yaspeller .",
     "wisdom": "npm run build; npm run docker:rm-old; bin/release.js",
     "postpublish": "redrun --parallel docker docker:alpine",

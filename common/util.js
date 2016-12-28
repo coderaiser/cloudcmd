@@ -23,13 +23,8 @@
         
         this.check = new checkProto();
         
-        this.getStrBigFirst = function getStrBigFirst(str) {
-            if (!str)
-                throw Error('str could not be empty!');
-            
-            var first = str[0].toUpperCase();
-            return first + str.slice(1);
-        }
+        this.getStrBigFirst = getStrBigFirst;
+        this.kebabToCamelCase = kebabToCamelCase;
         
         function checkProto() {
             /**
@@ -335,6 +330,26 @@
             
             return this;
         };
+        
+        function getStrBigFirst(str) {
+            if (!str)
+                throw Error('str could not be empty!');
+            
+            var first = str[0].toUpperCase();
+            return first + str.slice(1);
+        }
+        
+        function kebabToCamelCase(str) {
+            if (!str)
+                throw Error('str could not be empty!');
+            
+            return str
+                .split('-')
+                .map(getStrBigFirst)
+                .join('')
+                .replace(/.js$/, '');
+        }
+        
     }
     
 })(this);

@@ -44,6 +44,7 @@ var Util, DOM, CloudFunc, join;
         };
         
         var getStrBigFirst = Util.getStrBigFirst;
+        var kebabToCamelCase = Util.kebabToCamelCase;
         
         /**
          * Функция привязываеться ко всем ссылкам и
@@ -103,10 +104,8 @@ var Util, DOM, CloudFunc, join;
                 funcName    = params.funcName,
                 doBefore    = params.dobefore;
                 
-                if (path && !name) {
-                    name = getStrBigFirst(path);
-                    name = name.replace(/.js$/, '');
-                }
+                if (path && !name)
+                    name = kebabToCamelCase(path);
                 
                 isContain   = /\.js/.test(path);
                 
