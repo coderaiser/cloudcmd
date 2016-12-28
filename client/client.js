@@ -43,6 +43,8 @@ var Util, DOM, CloudFunc, join;
             Debug = false;
         };
         
+        var getStrBigFirst = Util.getStrBigFirst;
+        
         /**
          * Функция привязываеться ко всем ссылкам и
          *  загружает содержимое каталогов
@@ -552,18 +554,5 @@ var Util, DOM, CloudFunc, join;
                 });
             }
         };
-        
-        function getStrBigFirst(str) {
-            var first;
-            
-            if (!str)
-                throw Error('str could not be empty!');
-            
-            first   = str[0].toUpperCase();
-            str     = first + str.slice(1);
-            
-            return str;
-        }
-        
     }
 })(this, Util, DOM, CloudFunc);

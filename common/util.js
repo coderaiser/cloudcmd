@@ -21,7 +21,15 @@
     function UtilProto(exec) {
         var Util = this;
         
-        this.check              = new checkProto();
+        this.check = new checkProto();
+        
+        this.getStrBigFirst = function getStrBigFirst(str) {
+            if (!str)
+                throw Error('str could not be empty!');
+            
+            var first = str[0].toUpperCase();
+            return first + str.slice(1);
+        }
         
         function checkProto() {
             /**
