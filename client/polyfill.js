@@ -28,7 +28,7 @@ var Util, DOM, jQuery;
             fBound.prototype = new NOP();
             
             return fBound;
-          };
+        };
     
     if (!Array.isArray)
         Array.isArray = function(arr) {

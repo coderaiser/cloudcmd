@@ -17,13 +17,13 @@
             var log = CloudCmd.log;
             
             filepicker.store(data, {
-                    mimetype: '',
-                    filename: name
-                },
+                mimetype: '',
+                filename: name
+            },
                 function(fpFile) {
                     log(fpFile);
                     filepicker.exportFile(fpFile, log, log);
-            });
+                });
         };
         
         this.saveFile   = function(callback) {
@@ -49,13 +49,13 @@
                         picker  = Util.findObjByNameInArr(storage, 'FilePicker'),
                         key     = picker && picker.key;
                         
-                        filepicker.setKey(key);
+                    filepicker.setKey(key);
                         
-                        DOM.Images.hide();
-                        Util.timeEnd('filepicker loaded');
-                        Util.exec(callback);
-                    });
+                    DOM.Images.hide();
+                    Util.timeEnd('filepicker loaded');
+                    Util.exec(callback);
                 });
+            });
         }
         
         init(callback);

@@ -141,8 +141,8 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
             var menu = {
                 'Paste'         : Buffer.paste,
                 'New'           : {
-                     'File'             : DOM.promptNewFile,
-                     'Directory'        : DOM.promptNewDir
+                    'File'             : DOM.promptNewFile,
+                    'Directory'        : DOM.promptNewDir
                 },
                 'Upload'        : function() {
                     CloudCmd.Upload.show();
@@ -199,7 +199,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
                                 Dialog.alert.noFiles(TITLE);
                             });
                         },
-                };
+                    };
                 
                 Util.copyObj(menu, menuData);
                 
@@ -340,10 +340,10 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
         function getCurrentPosition() {
             var current     = Info.element,
                 rect        = current.getBoundingClientRect();
-                position    = {
-                    x: rect.left + rect.width / 3,
-                    y: rect.top
-                };
+            position    = {
+                x: rect.left + rect.width / 3,
+                y: rect.top
+            };
             
             return position;
         }
@@ -361,7 +361,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
                 
                 event.preventDefault();
             }  else if (key === ESC) {
-                    Menu.hide();
+                Menu.hide();
             }
         }
         

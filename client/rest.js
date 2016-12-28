@@ -85,7 +85,7 @@ var Util, DOM, CloudFunc, CloudCmd;
             });
         };
         
-         this.cp     = function(data, callback) {
+        this.cp     = function(data, callback) {
             sendRequest({
                 method      : 'PUT',
                 url         : '/cp',
@@ -168,7 +168,7 @@ var Util, DOM, CloudFunc, CloudCmd;
             }
         };
         
-       function sendRequest(params) {
+        function sendRequest(params) {
             var p           = params,
                 prefixUrl   = CloudCmd.PREFIX_URL;
             

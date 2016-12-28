@@ -68,7 +68,7 @@
         }
         
         function callIfEnabled(callback) {
-             isEnabled(function(is) {
+            isEnabled(function(is) {
                 if (is)
                     callback();
                 else
@@ -110,7 +110,7 @@
         }
         
         function clear() {
-             Storage.remove(COPY)
+            Storage.remove(COPY)
                     .remove(CUT);
             
             rmCutClass();

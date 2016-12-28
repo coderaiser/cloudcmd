@@ -34,10 +34,10 @@ var CloudCmd, Util, DOM;
             
             Markdown.read(name, function(error, result) {
                 var div = DOM.load({
-                        name        : 'div',
-                        className   : 'help',
-                        inner       : result
-                    });
+                    name        : 'div',
+                    className   : 'help',
+                    inner       : result
+                });
                 
                 Images.hide();
                 

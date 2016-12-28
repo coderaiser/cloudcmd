@@ -33,11 +33,11 @@ var Util, DOM;
                     granted         = Notify.check();
                 
                 if (notifications && granted && Show) {
-                     notify = new Notification(msg, {
-                         icon: '/img/favicon/favicon-notify.png'
-                     });
+                    notify = new Notification(msg, {
+                        icon: '/img/favicon/favicon-notify.png'
+                    });
                      
-                     Events.addClick(notify, focus);
+                    Events.addClick(notify, focus);
                 }
             });
         };

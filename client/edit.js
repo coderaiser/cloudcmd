@@ -37,7 +37,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                 }
             };
         
-       function init(callback) {
+        function init(callback) {
             var element = createElement();
             
             DOM.Events.addOnce('contextmenu', element, setMenu);

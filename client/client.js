@@ -166,9 +166,9 @@ var Util, DOM, CloudFunc, join;
                 
                 funcBefore  = function(callback) {
                     var src = prefix + '/join:' + [
-                            CloudCmd.LIBDIRCLIENT + 'polyfill.js',
-                            '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
-                        ].join(':');
+                        CloudCmd.LIBDIRCLIENT + 'polyfill.js',
+                        '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
+                    ].join(':');
                     
                     DOM.loadJquery(function() {
                         DOM.load.js(src, callback);

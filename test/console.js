@@ -7,7 +7,7 @@ const before = require('./before');
 
 test('cloudcmd: console: enabled by default', (t) => {
     before({}, (port, after) => {
-        const socket = io(`http://localhost:${port}/console`)
+        const socket = io(`http://localhost:${port}/console`);
         
         socket.once('data', (data) => {
             socket.close();
@@ -22,7 +22,7 @@ test('cloudcmd: console: enabled', (t) => {
     const config = {console: true};
     
     before({config}, (port, after) => {
-        const socket = io(`http://localhost:${port}/console`)
+        const socket = io(`http://localhost:${port}/console`);
         
         socket.once('data', (data) => {
             socket.close();

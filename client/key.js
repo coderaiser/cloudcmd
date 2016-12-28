@@ -520,7 +520,7 @@ var CloudCmd, Util, DOM;
                 
             case Key.V:
                 if (ctrlMeta)
-                   Buffer.paste();
+                    Buffer.paste();
                 break;
             
             case Key.Z:

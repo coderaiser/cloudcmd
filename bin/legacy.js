@@ -21,7 +21,7 @@ function fillFile(name) {
     return {
         name: setDir(name),
         data: `module.exports = require(\'../../server_/${name}\');`
-    }
+    };
 }
 
 function writeFile({name, data}) {

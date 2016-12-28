@@ -11,7 +11,7 @@
         Storage: Storage
     });
    
-   function StorageProto() {
+    function StorageProto() {
         /* приватный переключатель возможности работы с кэшем */
         var Allowed;
         

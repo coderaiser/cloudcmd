@@ -1,4 +1,4 @@
-var CloudCmd, Util, DOM, CloudFunc, $;
+var CloudCmd, Util, DOM, CloudFunc, $, exec;
 
 (function(CloudCmd, Util, DOM, CloudFunc) {
     'use strict';
@@ -14,26 +14,26 @@ var CloudCmd, Util, DOM, CloudFunc, $;
             Info        = DOM.CurrentInfo,
             Key         = CloudCmd.Key,
             Images      = DOM.Images,
-            View        = Util.exec.bind(Util),
+            View        = exec.bind(Util),
             Element, TemplateAudio, Overlay,
             Config      = {
                 beforeShow      : function(callback) {
                     Images.hide();
                     Key.unsetBind();
                     showOverlay();
-                    Util.exec(callback);
+                    exec(callback);
                 },
                 beforeClose     : function(callback) {
                     Key.setBind();
-                    Util.exec(callback);
+                    exec(callback);
                     hideOverlay();
                 },
                 afterShow       : function(callback) {
                     Element.focus();
-                    Util.exec(callback);
+                    exec(callback);
                 },
                 afterClose      : function(callback) {
-                    Util.exec(callback);
+                    exec(callback);
                 },
                 fitToView       : true,
                 loop            : false,
@@ -59,16 +59,16 @@ var CloudCmd, Util, DOM, CloudFunc, $;
         View.hide = hide;
         
         function init() {
-            var func = CallBack || Util.exec.with(show, null);
+            var func = CallBack || exec.with(show, null);
             
             Loading = true;
             
-            Util.exec.series([
+            exec.series([
                 DOM.loadJquery,
                 load,
                 function(callback) {
                     Loading = false;
-                    Util.exec(callback);
+                    exec(callback);
                 }
             ], func);
             
@@ -127,9 +127,9 @@ var CloudCmd, Util, DOM, CloudFunc, $;
                     break;
                 
                 case 'media':
-                     getMediaElement(path, function(element) {
+                    getMediaElement(path, function(element) {
                         var media = DOM.getByDataName('js-media', element);
-                        var onKey = Util.exec.with(onMediaKey, media);
+                        var onKey = exec.with(onMediaKey, media);
                             
                         $.fancybox.open(element, {
                             parent      : Overlay,
@@ -334,9 +334,9 @@ var CloudCmd, Util, DOM, CloudFunc, $;
                     id      : 'view-inlince-css',
                     inner   : [
                         '.fancybox-title-float-wrap .child {',
-                            '-webkit-border-radius: 0;',
-                            '-moz-border-radius: 0;',
-                            'border-radius: 0;',
+                        '-webkit-border-radius: 0;',
+                        '-moz-border-radius: 0;',
+                        'border-radius: 0;',
                         '}'
                     ].join('')
                 });

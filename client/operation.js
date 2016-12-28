@@ -195,7 +195,7 @@
                 error: function(error) {
                     if (options.noContinue) {
                         listeners.end(error);
-                        Dialog.alert(TITLE, error)
+                        Dialog.alert(TITLE, error);
                     } else {
                         Dialog.confirm(TITLE, error + '\n Continue?')
                             .then(function() {
@@ -309,7 +309,7 @@
                 else
                     type    = 'file';
                  
-                 type += ' ';
+                type += ' ';
                 
                 name   = DOM.getCurrentName(current);
                 msg    = msgAsk + msgSel + type + name + '?';
@@ -373,7 +373,7 @@
          * @param operation
          */
         function processFiles(data, operation, message) {
-             var name, selFiles, files,
+            var name, selFiles, files,
                 Info        = DOM.CurrentInfo,
                 panel,
                 shouldAsk,
@@ -466,7 +466,7 @@
             if (type === 'zip')
                 return /\.zip$/;
             
-            return /\.tar\.gz$/
+            return /\.tar\.gz$/;
         }
         
         function twopack(operation, type) {
@@ -552,9 +552,9 @@
                     '/remedy/remedy.js',
                     '/ishtar/ishtar.js',
                     '/salam/salam.js'
-            ].map(function(name) {
-                return prefix + name;
-            });
+                ].map(function(name) {
+                    return prefix + name;
+                });
             
             DOM.load.parallel(files, function(error) {
                 if (error) {

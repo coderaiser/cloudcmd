@@ -30,7 +30,7 @@ var Util, DOM;
                         eventName   = arguments[ELEMENT];
                         element     = arguments[EVENT_NAME];
                         
-                       parseArgs(
+                        parseArgs(
                             eventName,
                             element,
                             listener,
@@ -110,9 +110,9 @@ var Util, DOM;
          */
         this.addOnce                    = function(type, element, listener) {
             var once    = function (event) {
-                    Events.remove(type, element, once);
-                    listener(event);
-                };
+                Events.remove(type, element, once);
+                listener(event);
+            };
             
             if (!listener) {
                 listener    = element;

@@ -3,9 +3,9 @@ var Util, DOM, CloudFunc, CloudCmd;
 (function (Util, DOM, CloudFunc, CloudCmd) {
     'use strict';
     
-     CloudCmd.Listeners = new ListenersProto(Util, DOM, CloudFunc, CloudCmd);
+    CloudCmd.Listeners = new ListenersProto(Util, DOM, CloudFunc, CloudCmd);
      
-     function ListenersProto(Util, DOM, CloudFunc, CloudCmd) {
+    function ListenersProto(Util, DOM, CloudFunc, CloudCmd) {
         var Info                = DOM.CurrentInfo,
             Storage             = DOM.Storage,
             Events              = DOM.Events,
@@ -286,7 +286,7 @@ var Util, DOM, CloudFunc, CloudCmd;
             DOM.setCurrentFile(element);
             toName  = Info.name;
             
-         if (key.shift)
+            if (key.shift)
                 files = getFilesRange(fromName, toName);
             else
                 files.push(Info.element);
@@ -443,6 +443,6 @@ var Util, DOM, CloudFunc, CloudCmd;
             });
         }
         
-     }
+    }
     
 })(Util, DOM, CloudFunc, CloudCmd);

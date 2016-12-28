@@ -39,7 +39,7 @@ var CloudCmd;
         ].filter(function(name) {
             return name;
         }).map(function(name) {
-             return modules + name;
+            return modules + name;
         });
         
         var allFiles = moduleFiles

@@ -56,7 +56,7 @@
                 CURRENT_PATH: function() {
                     return DOM.CurrentInfo.path;
                 }
-            }
+            };
         }
         
         function create(callback) {

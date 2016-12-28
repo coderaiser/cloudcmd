@@ -41,7 +41,7 @@ const FS = CloudFunc.FS;
 
 const CSS_URL = require(DIR_JSON + 'css.json')
     .map((name) => {
-        return 'css/' + name + '.css'
+        return 'css/' + name + '.css';
     }).join(':');
 
 module.exports = (req, res, next) => {

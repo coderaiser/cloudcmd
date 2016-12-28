@@ -62,7 +62,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                         
                         return element;
                     };
-            };
+                };
             
             Images          = new ImageElementProto();
             
@@ -138,7 +138,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                 var DATA    = 'data-progress',
                     element = Images.get();
                     
-                 if (element) {
+                if (element) {
                     element.setAttribute(DATA, '');
                     element.title = '';
                 }
@@ -321,8 +321,8 @@ var CloudCmd, Util, DOM, CloudFunc;
                             remoteTmpls = module.remote;
                             local       = module.local;
                         } else {
-                           remoteTmpls  = [module.remote];
-                           local        = [module.local];
+                            remoteTmpls  = [module.remote];
+                            local        = [module.local];
                         }
                         
                         local   = local.map(function(url) {
@@ -405,18 +405,18 @@ var CloudCmd, Util, DOM, CloudFunc;
                             FS          = CloudFunc.FS,
                             api         = prefixURL + FS;
                             
-                            ++i;
+                        ++i;
                             
-                            uploader = DOM.load.put(api + path, file);
-                            uploader.on('progress', function(count) {
-                                var max     = step(n),
-                                    value   = (i - 1) * max + percent(count, 100, max);
+                        uploader = DOM.load.put(api + path, file);
+                        uploader.on('progress', function(count) {
+                            var max     = step(n),
+                                value   = (i - 1) * max + percent(count, 100, max);
                                 
-                                Images.show.load('top');
-                                Images.setProgress(Math.round(value));
-                            });
+                            Images.show.load('top');
+                            Images.setProgress(Math.round(value));
+                        });
                             
-                            uploader.on('end', callback);
+                        uploader.on('end', callback);
                     };
                 
                 if (!files) {
@@ -447,7 +447,7 @@ var CloudCmd, Util, DOM, CloudFunc;
              * @type
              */
             this.promptNewFile       = function() {
-                 promptNew('file');
+                promptNew('file');
             };
             
             function promptNew(typeName, type) {
@@ -686,7 +686,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                 var ret,
                     current    = currentFile || this.getCurrentFile(),
                     lMode       = this.getByDataName('js-mode', current);
-                    ret        = lMode.textContent;
+                ret        = lMode.textContent;
                 
                 return ret;
             };
@@ -710,7 +710,7 @@ var CloudCmd, Util, DOM, CloudFunc;
              * @param callback
              * @param currentFile
              */
-             this.getCurrentData             = function(callback, currentFile) {
+            this.getCurrentData             = function(callback, currentFile) {
                 var hash,
                     RESTful         = DOM.RESTful,
                     Dialog          = DOM.Dialog,
@@ -721,7 +721,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                     
                     func            = function(error, data) {
                         var length,
-                           ONE_MEGABYTE    = 1024 * 1024 * 1024;
+                            ONE_MEGABYTE    = 1024 * 1024 * 1024;
                         
                         if (!error) {
                             if (Util.type.object(data))
@@ -782,9 +782,9 @@ var CloudCmd, Util, DOM, CloudFunc;
             };
             
             this.setCurrentByName = function(name) {
-                var current = this.getCurrentByName(name)
+                var current = this.getCurrentByName(name);
                 return this.setCurrentFile(current);
-            }
+            };
             
             /**
              * unified way to set current file
@@ -958,7 +958,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                 var msg     = 'shrink',
                     files   = DOM.getSelectedFiles();
                
-               selectByPattern(msg, files);
+                selectByPattern(msg, files);
             };
             
             /**
@@ -1460,7 +1460,7 @@ var CloudCmd, Util, DOM, CloudFunc;
             
             /* scroll on one page*/
             this.scrollByPages           = function(element, pPages) {
-               var ret = element && element.scrollByPages && pPages;
+                var ret = element && element.scrollByPages && pPages;
                 
                 if (ret)
                     element.scrollByPages(pPages);
@@ -1514,7 +1514,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                     return '.zip';
                 
                 return '.tar.gz';
-            }
+            };
             
             this.goToDirectory          = function() {
                 var msg     = 'Go to directory:',
@@ -1554,7 +1554,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                     dirPath         = DOM.getCurrentDirPath(),
                     dirPathPassive  = DOM.getNotCurrentDirPath();
                 
-                 CloudCmd.loadDir({
+                CloudCmd.loadDir({
                     path: dirPath,
                     panel: panelPassive,
                     noCurrent: true
