@@ -469,6 +469,11 @@
             return /\.tar\.gz$/;
         }
         
+        function checkEmpty(name, operation) {
+            if (!operation)
+                throw Error(name + ' could not be empty!');
+        }
+        
         function twopack(operation, type) {
             var op,
                 fileFrom,
@@ -480,7 +485,7 @@
                 activeFiles = DOM.getActiveFiles(),
                 names       = DOM.getFilenames(activeFiles);
             
-            Util.check(arguments, ['operation']);
+            checkEmpty('operation', operation);
             
             if (!names.length) {
                 Dialog.alert.noFiles(TITLE);

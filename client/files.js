@@ -23,10 +23,10 @@
             DIR_JSON        = '/json/',
             timeout         = getTimeoutOnce(2000);
         
-        this.get            = function(name, callback) {
-            var type    = Util.type(name);
+        this.get = function(name, callback) {
+            var type = Util.type(name);
             
-            Util.check(arguments, ['name', 'callback']);
+            check(name, callback);
             
             switch(type) {
             case 'string':
@@ -46,6 +46,14 @@
             
             return Files;
         };
+        
+        function check(name, callback) {
+            if (!name)
+                throw Error('name could not be empty!');
+            
+            if (typeof callback !== 'function')
+                throw Error('callback should be a function');
+        }
         
         function getModule(name, callback) {
             var path,

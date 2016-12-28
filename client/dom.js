@@ -1139,18 +1139,22 @@ var CloudCmd, Util, DOM, CloudFunc;
             /**
              * check storage hash
              */
-            this.checkStorageHash       = function(name, callback) {
-                var Storage         = DOM.Storage,
-                    parallel        = Util.exec.parallel,
-                    loadHash        = DOM.loadCurrentHash,
-                    nameHash        = name + '-hash',
-                    getStoreHash    = Util.exec.with(Storage.get, nameHash);
+            this.checkStorageHash = function(name, callback) {
+                var Storage = DOM.Storage;
+                var parallel = Util.exec.parallel;
+                var loadHash = DOM.loadCurrentHash;
+                var nameHash = name + '-hash';
+                var getStoreHash = Util.exec.with(Storage.get, nameHash);
                 
-                Util.check(arguments, ['name', 'callback']);
+                if (typeof name !== 'string')
+                    throw Error('name should be a string!');
+                
+                if (typeof callback !== 'function')
+                    throw Error('callback should be a function!');
                 
                 parallel([loadHash, getStoreHash], function(error, loadHash, storeHash) {
-                    var equal,
-                        isContain   = /error/.test(loadHash);
+                    var equal;
+                    var isContain = /error/.test(loadHash);
                     
                     if (isContain)
                         error = loadHash;

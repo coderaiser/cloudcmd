@@ -8,81 +8,79 @@ var Util, DOM;
     DOMProto.Events = new EventsProto();
     
     function EventsProto() {
-        var Events      = this,
+        var Events = this;
+        var Type = Util.type;
             
-            Type        = Util.type,
-            check       = Util.check,
+        function parseArgs(eventName, element, listener, callback) {
+            var isFunc, isElement, error,
+                EVENT_NAME  = 0,
+                ELEMENT     = 1,
+                type        = Type(eventName);
             
-            parseArgs   = function(eventName, element, listener, callback) {
-                var isFunc, isElement, error,
-                    EVENT_NAME  = 0,
-                    ELEMENT     = 1,
-                    type        = Type(eventName);
+            switch(type) {
+            default:
+                isElement   = type.match('element');
                 
-                switch(type) {
-                default:
-                    isElement   = type.match('element');
+                if (!isElement) {
+                    error   = new Error('unknown eventName: ' + type);
+                    throw(error);
+                } else {
+                    eventName   = arguments[ELEMENT];
+                    element     = arguments[EVENT_NAME];
                     
-                    if (!isElement) {
-                        error   = new Error('unknown eventName: ' + type);
-                        throw(error);
-                    } else {
-                        eventName   = arguments[ELEMENT];
-                        element     = arguments[EVENT_NAME];
-                        
-                        parseArgs(
-                            eventName,
-                            element,
-                            listener,
-                            callback
-                        );
-                    }
-                    break;
-                
-                case 'string':
-                    isFunc = Type.function(element);
-                    
-                    if (isFunc) {
-                        listener   = element;
-                        element    = null;
-                    }
-                    
-                    if (!element)
-                        element = window;
-                    
-                    callback(element, [
+                    parseArgs(
                         eventName,
+                        element,
                         listener,
-                        false
-                    ]);
-                    break;
-                
-                case 'array':
-                    eventName.forEach(function(eventName) {
-                        parseArgs(
-                            eventName,
-                            element,
-                            listener,
-                            callback
-                        );
-                    });
-                    break;
-                
-                case 'object':
-                    Object.keys(eventName).forEach(function(name) {
-                        var eventListener = eventName[name];
-                        
-                        parseArgs(
-                            name,
-                            element,
-                            eventListener,
-                            callback
-                        );
-                    });
-                        
-                    break;
+                        callback
+                    );
                 }
-            };
+                break;
+            
+            case 'string':
+                isFunc = Type.function(element);
+                
+                if (isFunc) {
+                    listener   = element;
+                    element    = null;
+                }
+                
+                if (!element)
+                    element = window;
+                
+                callback(element, [
+                    eventName,
+                    listener,
+                    false
+                ]);
+                break;
+            
+            case 'array':
+                eventName.forEach(function(eventName) {
+                    parseArgs(
+                        eventName,
+                        element,
+                        listener,
+                        callback
+                    );
+                });
+                break;
+            
+            case 'object':
+                Object.keys(eventName).forEach(function(name) {
+                    var eventListener = eventName[name];
+                    
+                    parseArgs(
+                        name,
+                        element,
+                        eventListener,
+                        callback
+                    );
+                });
+               
+                break;
+            }
+        }
         
         /**
          * safe add event listener
@@ -91,8 +89,8 @@ var Util, DOM;
          * @param element {document by default}
          * @param listener
          */
-        this.add                        = function(type, element, listener) {
-            check(arguments, ['type']);
+        this.add = function(type, element, listener) {
+            checkType(type);
             
             parseArgs(type, element, listener, function(element, args) {
                 element.addEventListener.apply(element, args);
@@ -132,7 +130,7 @@ var Util, DOM;
          * @param element {document by default}
          */
         this.remove                     = function(type, element, listener) {
-            check(arguments, ['type']);
+            checkType(type);
             
             parseArgs(type, element, listener, function(element, args) {
                 element.removeEventListener.apply(element, args);
@@ -328,5 +326,10 @@ var Util, DOM;
             
             return ret;
         };
+        
+        function checkType(type) {
+            if (!type)
+                throw Error('type could not be empty!');
+        }
     }
 })(Util, DOM);

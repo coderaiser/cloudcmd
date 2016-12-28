@@ -21,67 +21,8 @@
     function UtilProto(exec) {
         var Util = this;
         
-        this.check = new checkProto();
-        
         this.getStrBigFirst = getStrBigFirst;
         this.kebabToCamelCase = kebabToCamelCase;
-        
-        function checkProto() {
-            /**
-             * Check is all arguments with names present
-             *
-             * @param name
-             * @param arg
-             */
-            function check(args, names) {
-                var msg         = '',
-                    name        = '',
-                    template    = '{{ name }} coud not be empty!',
-                    
-                    indexOf     = Array.prototype.indexOf,
-                    
-                    lenNames    = names.length,
-                    lenArgs     = args.length,
-                    lessArgs    = lenArgs < lenNames,
-                    emptyIndex  = indexOf.call(args),
-                    isEmpty     = ~emptyIndex && emptyIndex <= lenNames - 1;
-                
-                if (lessArgs || isEmpty) {
-                    if (lessArgs)
-                        name        = names[lenNames - 1];
-                    else
-                        name        = names[emptyIndex];
-                    
-                    msg         = rendy(template, {
-                        name: name
-                    });
-                    
-                    throw Error(msg);
-                }
-                
-                return check;
-            }
-            
-            check.check = check;
-            
-            /**
-             * Check is type of arg with name is equal to type
-             *
-             * @param name
-             * @param arg
-             * @param type
-             */
-            check.type  = function(name, arg, type) {
-                var is = Util.type(arg) === type;
-                
-                if (!is)
-                    throw Error(name + ' should be ' + type);
-                
-                return check;
-            };
-            
-            return check;
-        }
         
         /**
          * Copy properties from from to to

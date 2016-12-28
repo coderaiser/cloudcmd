@@ -280,7 +280,7 @@ var CloudCmd, Util, DOM, CloudFunc, $, exec;
         }
         
         function getMediaElement(src, callback) {
-            Util.check(arguments, ['src', 'callback']);
+            check(src, callback);
             
             DOM.Files.get('view/media-tmpl', function(error, template) {
                 var rendered, element, type, is,
@@ -305,6 +305,14 @@ var CloudCmd, Util, DOM, CloudFunc, $, exec;
                     callback(element);
                 }
             });
+        }
+        
+        function check(src, callback) {
+            if (typeof src !== 'string')
+                throw Error('src should be a string!');
+            
+            if (typeof callback !== 'function')
+                throw Error('callback should be a function');
         }
         
         function onMediaKey(media, event) {
