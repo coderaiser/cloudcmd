@@ -1,3 +1,17 @@
+2016.12.29, v6.0.0
+
+fix:
+- (cloudcmd) --editor: do not change editor
+
+feature:
+- (edit-names) add ability to edit file names in editor
+- (edit-file) add
+- (util) Util.type -> itype
+- (util) rm checkType
+- (util) add kebabToCamelCase
+- (util) getStrBigFirst: client -> util
+
+
 2016.12.27, v5.13.0
 
 feature:
