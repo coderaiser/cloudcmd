@@ -1,6 +1,7 @@
 [
     "edit",
     "edit-file",
+    "edit-names",
     "menu",
     "view",
     "help",

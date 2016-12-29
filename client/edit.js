@@ -1,3 +1,5 @@
+/* global itype */
+
 var CloudCmd, Util, DOM, CloudFunc;
 
 (function(CloudCmd, Util, DOM) {
@@ -25,6 +27,13 @@ var CloudCmd, Util, DOM, CloudFunc;
                         .focus();
                 }
             };
+        
+        var Edit = function(fn) {
+            if (!itype.function(fn))
+                return;
+            
+            fn();
+        };
         
         function init(callback) {
             var element = createElement();
@@ -79,22 +88,22 @@ var CloudCmd, Util, DOM, CloudFunc;
             return config;
         }
         
-        this.show = function(options) {
+        Edit.show = function(options) {
             if (Loading)
                 return;
              
             CloudCmd.View.show(Element, initConfig(options));
         };
         
-        this.getEditor = function() {
+        Edit.getEditor = function() {
             return editor;
         };
         
-        this.getElement = function() {
+        Edit.getElement = function() {
             return Element;
         };
         
-        this.hide = function() {
+        Edit.hide = function() {
             CloudCmd.View.hide();
         };
         
@@ -135,6 +144,8 @@ var CloudCmd, Util, DOM, CloudFunc;
         }
         
         init(callback);
+        
+        return Edit;
     }
     
 })(CloudCmd, Util, DOM, CloudFunc);

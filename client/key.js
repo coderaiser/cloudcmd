@@ -37,6 +37,8 @@ var CloudCmd, Util, DOM;
             
             G           : 71,
             
+            M           : 77,
+            
             O           : 79,
             Q           : 81,
             R           : 82,
@@ -488,6 +490,14 @@ var CloudCmd, Util, DOM;
             case Key.G:
                 if (alt) {
                     DOM.goToDirectory();
+                    event.preventDefault();
+                }
+                
+                break;
+            
+            case Key.M:
+                if (ctrlMeta) {
+                    CloudCmd.EditNames.show();
                     event.preventDefault();
                 }
                 

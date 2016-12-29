@@ -18,7 +18,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
             ConfigView  = {
                 beforeClose: function() {
                     exec.ifExist(Menu, 'hide');
-                    isChanged(EditFile.hide);
+                    isChanged();
                 }
             };
         
@@ -66,7 +66,8 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
                     .getEditor()
                     .setValueFirst(path, data)
                     .setModeForPath(name)
-                    .setOption('fontSize', 16);
+                    .setOption('fontSize', 16)
+                    .enableKey();
                 
                 CloudCmd.Edit.show(ConfigView);
             });
