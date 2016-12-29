@@ -88,6 +88,7 @@ if (args.version) {
     config('username', args.username);
     config('progress', args.progress);
     config('console', args.console);
+    config('editor', args.editor);
     config('prefix', args.prefix);
     config('root', args.root);
     config('htmlDialogs', args['html-dialogs']);
