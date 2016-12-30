@@ -46,10 +46,10 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
         }
         
         this.show = function() {
-            if (Info.name === '..')
-                return Dialog.alert.noFiles(TITLE);
-            
             var names = getActiveNames().join('\n');
+            
+            if (Info.name === '..' && names.length === 1)
+                return Dialog.alert.noFiles(TITLE);
             
             CloudCmd.Edit
                 .getEditor()
