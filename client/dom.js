@@ -1617,8 +1617,8 @@ var CloudCmd, Util, DOM, CloudFunc;
                 info.parentDirPath  = Cmd.getParentDirPath();
                 info.element        = current;
                 info.ext            = Util.getExt(name);
-                info.files          = files.children,
-                info.filesPassive   = filesPassive,
+                info.files          = [].slice.call(files.children),
+                info.filesPassive   = [].slice.call(filesPassive),
                 info.first          = files.firstChild;
                 info.getData        = Cmd.getCurrentData;
                 info.last           = files.lastChild;

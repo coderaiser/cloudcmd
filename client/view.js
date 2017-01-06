@@ -369,8 +369,8 @@ var CloudCmd, Util, DOM, CloudFunc, $, exec;
                 element     = DOM.getCurrentByPosition(position);
                 
                 if (element) {
-                    isFiles         = ~[].indexOf.call(files, element);
-                    isFilesPassive  = ~[].indexOf.call(filesPassive, element);
+                    isFiles         = ~files.indexOf(element);
+                    isFilesPassive  = ~filesPassive.indexOf(element);
                     
                     if (isFiles || isFilesPassive) {
                         isCurrent = DOM.isCurrentFile(element);
