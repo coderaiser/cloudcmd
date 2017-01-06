@@ -585,18 +585,17 @@ var CloudCmd, Util, DOM, CloudFunc;
             };
             
             /**
-             * get all selected files with current included
+             * get all selected files or current when none selected
              *
              * @currentFile
              */
             this.getActiveFiles         = function() {
-                var current     = DOM.getCurrentFile(),
-                    files       = DOM.getSelectedFiles(),
-                    selected    = ~files.indexOf(current),
-                    name        = DOM.getCurrentName(current);
+                var current = DOM.getCurrentFile();
+                var files = DOM.getSelectedFiles();
+                var name = DOM.getCurrentName(current);
                 
-                if (!selected && name !== '..')
-                    files.push(current);
+                if (!files.length && name !== '..')
+                    return [current];
                 
                 return files;
             };
