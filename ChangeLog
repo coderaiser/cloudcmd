@@ -1,3 +1,14 @@
+2017.01.06, v6.0.1
+
+fix:
+- (key) Ctrl + A: toggleSelected -> selectAllFiles
+- (dom) getAcitveFiles: include current -> return current when none selected
+- (edit-names) rename files when current file is ".."
+
+feature:
+- (dom) Info.files, Info.filesPasive: array
+
+
 2016.12.29, v6.0.0
 
 fix:
