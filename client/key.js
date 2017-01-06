@@ -481,7 +481,7 @@ var CloudCmd, Util, DOM;
             
             case Key.A:
                 if (ctrlMeta) {
-                    DOM.toggleAllSelectedFiles();
+                    DOM.selectAllFiles();
                     event.preventDefault();
                 }
                 

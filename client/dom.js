@@ -871,6 +871,14 @@ var CloudCmd, Util, DOM, CloudFunc;
              * select current file
              * @param currentFile
              */
+            this.selectFile = function(currentFile) {
+                var current = currentFile || DOM.getCurrentFile();
+                
+                current.classList.add(SELECTED_FILE);
+                
+                return Cmd;
+            };
+            
             this.toggleSelectedFile = function(currentFile) {
                 var current = currentFile || this.getCurrentFile();
                 
@@ -879,8 +887,20 @@ var CloudCmd, Util, DOM, CloudFunc;
                 return Cmd;
             };
             
-            this.toggleAllSelectedFiles         = function() {
-                var i, n,
+            this.toggleAllSelectedFiles = function() {
+                DOM.getAllFiles().map(DOM.toggleSelectedFile);
+                
+                return Cmd;
+            };
+            
+            this.selectAllFiles = function() {
+                DOM.getAllFiles().map(DOM.selectFile);
+                
+                return Cmd;
+            };
+            
+            this.getAllFiles = function() {
+                var i,
                     panel       = DOM.getPanel(),
                     files       = DOM.getFiles(panel),
                     name        = DOM.getCurrentName(files[0]);
@@ -890,12 +910,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                 else
                     i = 0;
                 
-                n = files.length;
-                
-                for (; i < n; i++)
-                    DOM.toggleSelectedFile(files[i]);
-                
-                return Cmd;
+                return [].slice.call(files, i);
             };
             
             function selectByPattern(msg, files) {
