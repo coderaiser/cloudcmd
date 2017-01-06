@@ -173,11 +173,10 @@ var CloudCmd, Util, DOM;
         }
         
         function setCurrentByChar(char) {
-            var name, isMatch, byName, firstByName,
+            var firstByName,
                 skipCount   = 0,
                 skipN       = 0,
                 setted      = false,
-                current     = Info.element,
                 files       = Info.files,
                 escapeChar  = Util.escapeRegExp(char),
                 regExp      = new RegExp('^' + escapeChar + '.*$', 'i'),
@@ -191,30 +190,30 @@ var CloudCmd, Util, DOM;
             if (!i)
                 Chars = [];
             
-            skipN           = skipCount = i;
+            skipN = skipCount = i;
             Chars.push(char);
             
-            n               = files.length;
-            for (i = 0; i < n; i++) {
-                current     = files[i];
-                name        = DOM.getCurrentName(current);
-                isMatch     = name.match(regExp);
+            var names = DOM.getFilenames(files);
+            
+            names.filter(function(name) {
+                var isMatch = name.match(regExp);
                 
-                if (isMatch && name !== '..') {
-                    byName = DOM.getCurrentByName(name);
+                if (isMatch && name !== '..')
+                    return true;
+            }).some(function(name) {
+                var byName = DOM.getCurrentByName(name);
+                
+                if (!skipCount) {
+                    setted = true;
+                    DOM.setCurrentFile(byName);
+                    return true;
+                } else {
+                    if (skipN === skipCount)
+                        firstByName = byName;
                     
-                    if (!skipCount) {
-                        setted = true;
-                        DOM.setCurrentFile(byName);
-                        break;
-                    } else {
-                        if (skipN === skipCount)
-                            firstByName = byName;
-                        
-                        --skipCount;
-                    }
+                    --skipCount;
                 }
-            }
+            });
             
             if (!setted) {
                 DOM.setCurrentFile(firstByName);
