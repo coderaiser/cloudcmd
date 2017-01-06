@@ -20,8 +20,6 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
             }
         };
         
-        var getName = DOM.getCurrentName.bind(DOM);
-        
         function init(callback) {
             var editor;
             
@@ -74,9 +72,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
         }
         
         function getActiveNames() {
-            return DOM
-                .getActiveFiles()
-                .map(getName);
+            return DOM.getFilenames(DOM.getActiveFiles());
         }
         
         this.hide = function() {
