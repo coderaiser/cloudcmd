@@ -871,9 +871,9 @@ var CloudCmd, Util, DOM, CloudFunc;
              * select current file
              * @param currentFile
              */
-            this.toggleSelectedFile              = function(currentFile) {
-                var current     = currentFile || this.getCurrentFile();
-                    
+            this.toggleSelectedFile = function(currentFile) {
+                var current = currentFile || this.getCurrentFile();
+                
                 current.classList.toggle(SELECTED_FILE);
                 
                 return Cmd;
