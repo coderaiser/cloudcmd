@@ -1,6 +1,6 @@
 'use strict';
 
-const DIR_ROOT = __dirname + '/../../';
+const DIR_ROOT = __dirname + '/../';
 const fs = require('fs');
 
 const pullout = require('pullout/legacy');
