@@ -190,13 +190,13 @@ function route(request, response, callback) {
                 
                 if (error)
                     return ponse.sendError(error, p);
-                    
+                
                 ponse.send(data, p);
             });
         
         if (error.code !== 'ENOTDIR')
             return ponse.sendError(error, p);
-            
+        
         fs.realpath(fullPath, (error, pathReal) => {
             if (!error)
                 p.name = pathReal;
