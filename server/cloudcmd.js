@@ -248,8 +248,8 @@ function cloudcmd(prefix, plugins) {
         config.middle,
         
         restafary({
-            prefix  : cloudfunc.apiURL + '/fs',
-            root    : root
+            prefix: cloudfunc.apiURL + '/fs',
+            root
         }),
         
         rest,
