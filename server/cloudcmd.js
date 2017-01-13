@@ -175,63 +175,61 @@ function cloudcmd(prefix, plugins) {
         return config(name);
     };
     
-    const isMinify = apart(isOption, 'minify');
-    const isOnline = apart(isOption, 'online');
-    const isCache = apart(isOption, 'cache');
-    const isDiff = apart(isOption, 'diff');
-    const isZip = apart(isOption, 'zip');
+    const minify = apart(isOption, 'minify');
+    const online = apart(isOption, 'online');
+    const cache = apart(isOption, 'cache');
+    const diff = apart(isOption, 'diff');
+    const zip = apart(isOption, 'zip');
     
-    const ponseStatic = ponse.static(DIR_ROOT, {
-        cache: isCache
-    });
+    const ponseStatic = ponse.static(DIR_ROOT, {cache});
    
     const funcs = [
         konsole({
             prefix: prefix + '/console',
-            minify: isMinify,
-            online: isOnline
+            minify,
+            online,
         }),
         
         edward({
             prefix  : prefix + '/edward',
-            minify  : isMinify,
-            online  : isOnline,
-            diff    : isDiff,
-            zip     : isZip
+            minify,
+            online,
+            diff,
+            zip,
         }),
        
         dword({
             prefix  : prefix + '/dword',
-            minify  : isMinify,
-            online  : isOnline,
-            diff    : isDiff,
-            zip     : isZip
+            minify,
+            online,
+            diff,
+            zip,
         }),
         
         deepword({
             prefix  : prefix + '/deepword',
-            minify  : isMinify,
-            online  : isOnline,
-            diff    : isDiff,
-            zip     : isZip
+            minify,
+            online,
+            diff,
+            zip,
         }),
         
         spero({
             prefix  : prefix + '/spero',
-            minify  : isMinify,
-            online  : isOnline
+            minify,
+            online,
         }),
         
         remedy({
             prefix  : prefix + '/remedy',
-            minify  : isMinify,
-            online  : isOnline
+            minify,
+            online,
         }),
         
         ishtar({
             prefix  : prefix + '/ishtar',
-            minify  : isMinify,
-            online  : isOnline
+            minify,
+            online,
         }),
         
         salam({
@@ -257,12 +255,12 @@ function cloudcmd(prefix, plugins) {
         
         join({
             dir     : DIR_ROOT,
-            minify  : isMinify
+            minify,
         }),
         
         mollify({
             dir : DIR_ROOT,
-            is  : isMinify
+            is  : minify,
         }),
         
         pluginer(plugins),
