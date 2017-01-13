@@ -103,12 +103,11 @@ function authCheck(socket, success) {
         const isName = name === config('username');
         const isPass = pass === config('password');
         
-        if (isName && isPass) {
-            success();
-            socket.emit('accept');
-        } else {
-            socket.emit('reject');
-        }
+        if (!isName || !isPass)
+            return socket.emit('reject');
+        
+        success();
+        socket.emit('accept');
     });
 }
 
