@@ -284,7 +284,7 @@ function setUrl(pref) {
         
         if (!is)
             return next();
-            
+        
         req.url = req.url.replace(prefix, '') || '/';
         
         if (req.url === '/cloudcmd.js')
