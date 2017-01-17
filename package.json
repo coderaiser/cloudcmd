@@ -63,7 +63,7 @@
     "watch:test": "nodemon -w server -w test -w common -x \"npm run test\"",
     "spell": "yaspeller .",
     "wisdom": "npm run build; npm run docker:rm-old; bin/release.js",
-    "postpublish": "redrun --parallel docker docker:alpine",
+    "postpublish": "redrun docker",
     "docker:pull:node": "docker pull node",
     "docker:pull:alpine": "docker pull mhart/alpine-node",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
