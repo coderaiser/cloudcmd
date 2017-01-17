@@ -66,35 +66,35 @@ var CloudCmd, Util, DOM, io;
                     path: prefix + '/socket.io'
                 });
                 
-                auth(socket, function() {
-                    socket.on('connect', function() {
-                        Config.save = save;
-                    });
-                    
-                    socket.on('config', function(config) {
-                        DOM.Storage.setAllowed(config.localStorage);
-                    });
-                    
-                    socket.on('message', function(data) {
-                        onSave(data);
-                    });
-                    
-                    socket.on('log', function(msg) {
-                        CloudCmd.log(msg);
-                    });
-                    
-                    socket.on('disconnect', function() {
-                        Config.save = saveHttp;
-                    });
-                    
-                    socket.on('err', function(error) {
-                        Dialog.alert(TITLE, error);
-                    });
+                authCheck(socket);
+                
+                socket.on('connect', function() {
+                    Config.save = save;
+                });
+                
+                socket.on('config', function(config) {
+                    DOM.Storage.setAllowed(config.localStorage);
+                });
+                
+                socket.on('message', function(data) {
+                    onSave(data);
+                });
+                
+                socket.on('log', function(msg) {
+                    CloudCmd.log(msg);
+                });
+                
+                socket.on('disconnect', function() {
+                    Config.save = saveHttp;
+                });
+                
+                socket.on('err', function(error) {
+                    Dialog.alert(TITLE, error);
                 });
             }
         }
         
-        function auth(socket) {
+        function authCheck(socket) {
             Files.get('config', function(error, config) {
                 if (error)
                     return Dialog.alert(TITLE, error);
