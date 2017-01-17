@@ -1,16 +1,23 @@
 'use strict';
 
+const path = require('path');
+const os = require('os');
+
 const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
-const manageConfig = require('../../server/config');
+const readjson = require('readjson');
+const writejson = require('writejson');
 
+const manageConfig = require('../../server/config');
 const before = require('../before');
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 
 const _pullout = promisify(pullout);
+
+const pathConfig = path.join(os.homedir(), '.cloudcmd.json');
 
 const get = promisify((url, fn) => {
     fn(null, request(url));
@@ -114,8 +121,34 @@ test('cloudcmd: rest: config: enabled by default', (t) => {
         patch(`http://localhost:${port}/api/v1/config`, json)
             .then(warp(_pullout, 'string'))
             .then((result) => {
-                t.equal(result, 'config: ok("auth")', 'should patch config');
+                t.equal(result, 'config: ok("auth")', 'should send message');
                 t.end();
+                after();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
+});
+
+test('cloudcmd: rest: config: patch: save config', (t) => {
+    before({}, (port, after) => {
+        const json = {
+            editor: 'dword',
+        };
+        
+        let originalConfig = readjson.sync.try(pathConfig);
+        
+        patch(`http://localhost:${port}/api/v1/config`, json)
+            .then(warp(_pullout, 'string'))
+            .then(() => {
+                const config = readjson.sync(pathConfig);
+                t.equal(config.editor, 'dword', 'should change config file on patch');
+                t.end();
+                
+                if (originalConfig)
+                    writejson.sync(pathConfig, originalConfig);
+                
                 after();
             })
             .catch((error) => {

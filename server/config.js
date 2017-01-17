@@ -29,6 +29,8 @@ const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
     mode: 'json'
 });
 
+const key = (a) => Object.keys(a).pop();
+
 let config;
 let error = tryCatch(() => {
     config = readjsonSync(ConfigHome);
@@ -95,12 +97,13 @@ function connection(socket) {
             return socket.emit('err', 'Error: Wrong data type!');
             
         cryptoPass(json);
+        traverse(json);
         
         save((error)  => {
             if (error)
                 return socket.emit('err', error.message);
             
-            const data = traverse(json);
+            const data = CloudFunc.formatMsg('config', key(json));
             
             socket.broadcast.send(json);
             socket.send(json);
@@ -158,14 +161,15 @@ function patch(req, res, callback) {
         
         if (error)
             return callback(error);
-             
+        
         cryptoPass(json);
+        traverse(json);
         
         save((error) => {
             if (error)
                 return ponse.sendError(error, options);
             
-            const data = traverse(json);
+            const data = CloudFunc.formatMsg('config', key(json));
             
             ponse.send(data, options);
         });
@@ -173,14 +177,9 @@ function patch(req, res, callback) {
 }
 
 function traverse(json) {
-    let data;
-    
     Object.keys(json).forEach((name) => {
-        data = CloudFunc.formatMsg('config', name);
         manage(name, json[name]);
     });
-    
-    return data;
 }
 
 function cryptoPass(json) {
