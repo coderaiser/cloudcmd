@@ -74,7 +74,7 @@
     "docker": "redrun docker:pull* docker:build* docker:tag* docker:push*",
     "docker:alpine": "redrun docker:pull:alpine docker:build:alpine docker:tag:alpine docker:push:alpine docker:push:alpine:latest",
     "docker:tag:alpine": "docker tag coderaiser/cloudcmd:`version`-alpine coderaiser/cloudcmd:latest-alpine",
-    "docker:rm": "docker rmi coderaiser/cloudcmd:`version`",
+    "docker:rm:version": "docker rmi coderaiser/cloudcmd:`version`",
     "docker:rm:latest": "docker rmi coderaiser/cloudcmd:latest",
     "docker:rm:alpine": "docker rmi coderaiser/cloudcmd:`version`-alpine",
     "docker:rm:latest-alpine": "docker rmi coderaiser/cloudcmd:latest-alpine",
