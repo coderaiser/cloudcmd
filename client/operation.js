@@ -104,7 +104,7 @@
                 remover.on('connect', function() {
                     authCheck(remover, function() {
                         deleteFn = function(from, files, callback) {
-                            setListeners(remover, callback);
+                            setListeners(remover, {noContinue: true}, callback);
                             from = from.replace(/\?.*/, '');
                             remover.remove(from, files);
                         };
