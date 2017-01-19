@@ -58,11 +58,14 @@ var Util, DOM, CloudFunc, join;
          *      }
          * @param callback
          */
-        this.loadDir                = function(params, callback) {
-            var imgPosition, panelChanged,
-                noCurrent,
-                isRefresh, panel, history,
-                p               = params;
+        this.loadDir = function(params, callback) {
+            var imgPosition;
+            var panelChanged;
+            var noCurrent;
+            var isRefresh;
+            var panel;
+            var history;
+            var p = params;
             
             if (params) {
                 isRefresh       = p.isRefresh;
