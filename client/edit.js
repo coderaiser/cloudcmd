@@ -10,15 +10,11 @@ var CloudCmd, Util, DOM, CloudFunc;
     function EditProto(callback) {
         var Name = 'Edit';
         var Loading = true;
+        var EditorName = CloudCmd.config('editor');
         
-        var Dialog      = DOM.Dialog,
-            exec        = Util.exec,
-            Element,
-            
-            EditorName = 'edward',
+        var exec = Util.exec;
+        var Element,
             editor,
-            
-            TITLE = 'Edit',
             
             ConfigView  = {
                 afterShow: function() {
@@ -40,7 +36,6 @@ var CloudCmd, Util, DOM, CloudFunc;
             
             exec.series([
                 CloudCmd.View,
-                getConfig,
                 function(callback) {
                     loadFiles(element, callback);
                 },
@@ -106,17 +101,6 @@ var CloudCmd, Util, DOM, CloudFunc;
         Edit.hide = function() {
             CloudCmd.View.hide();
         };
-        
-        function getConfig(callback) {
-            DOM.Files.get('config', function(error, config) {
-                if (error)
-                    Dialog.alert(TITLE, error);
-                else if (config.editor)
-                    EditorName = config.editor;
-                
-                callback();
-            });
-        }
         
         function loadFiles(element, callback) {
             var prefix = CloudCmd.PREFIX;

@@ -96,8 +96,9 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
                 .split('\n');
             
             var reject = Promise.reject.bind(Promise);
+            var root = CloudCmd.config('root');
             
-            getRoot()
+            Promise.resolve(root)
                 .then(rename(dir, from, to))
                 .then(function(res) {
                     if (res.status === 404)
@@ -195,17 +196,6 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
                 
                 Menu = new MenuIO(element, options, menuData);
                 Menu.show(position.x, position.y);
-            });
-        }
-        
-        function getRoot() {
-            return new Promise(function(resolve, reject) {
-                DOM.Files.get('config', function(error, config) {
-                    if (error)
-                        return reject(error);
-                    
-                    resolve(config.root);
-                });
             });
         }
         

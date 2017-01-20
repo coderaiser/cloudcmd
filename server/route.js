@@ -56,10 +56,6 @@ module.exports = (req, res, next) => {
  * additional processing of index file
  */
 function indexProcessing(options) {
-    let from;
-    let to;
-    let left = '';
-    let right = '';
     const keysPanel = '<div id="js-keyspanel" class="{{ className }}';
     const isOnePanel = config('onePanelMode');
     const noConfig = !config('configDialog');
@@ -68,6 +64,8 @@ function indexProcessing(options) {
     
     let data = options.data;
     
+    let from;
+    let to;
     if (!config('showKeysPanel')) {
         from = rendy(keysPanel, {
             className: 'keyspanel'
@@ -93,12 +91,13 @@ function indexProcessing(options) {
         data = data
              .replace('icon-console', 'icon-console none');
     
-    left = rendy(Template.panel, {
+    let left = rendy(Template.panel, {
         side        : 'left',
         content     : panel,
         className   : !isOnePanel ? '' : 'panel-single'
     });
     
+    let right = '';
     if (!isOnePanel)
         right = rendy(Template.panel, {
             side        : 'right',
@@ -110,6 +109,7 @@ function indexProcessing(options) {
         title: CloudFunc.getTitle(),
         fm: left + right,
         prefix: prefix(),
+        config: JSON.stringify(config('*')),
         css: CSS_URL
     });
     

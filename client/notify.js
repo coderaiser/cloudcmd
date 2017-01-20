@@ -1,10 +1,12 @@
+/* global CloudCmd */
 var Util, DOM;
 
 (function(Util, DOM) {
     'use strict';
     
-    var Notify      = Util.extendProto(NotifyProto),
-        DOMProto    = Object.getPrototypeOf(DOM);
+    var config = CloudCmd.config;
+    var Notify = Util.extendProto(NotifyProto);
+    var DOMProto = Object.getPrototypeOf(DOM);
     
     Util.extend(DOMProto, {
         Notify: Notify
@@ -26,20 +28,18 @@ var Util, DOM;
         });
         
         this.send       = function(msg) {
-            DOM.Files.get('config', function(error, config) {
-                var notify,
-                    notifications   = config.notifications,
-                    focus           = window.focus.bind(window),
-                    granted         = Notify.check();
-                
-                if (notifications && granted && Show) {
-                    notify = new Notification(msg, {
-                        icon: '/img/favicon/favicon-notify.png'
-                    });
-                     
-                    Events.addClick(notify, focus);
-                }
-            });
+            var notify,
+                notifications   = config('notifications'),
+                focus           = window.focus.bind(window),
+                granted         = Notify.check();
+            
+            if (notifications && granted && Show) {
+                notify = new Notification(msg, {
+                    icon: '/img/favicon/favicon-notify.png'
+                });
+                 
+                Events.addClick(notify, focus);
+            }
         };
         
         this.check = function () {

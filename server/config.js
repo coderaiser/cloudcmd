@@ -65,7 +65,10 @@ module.exports.listen   = (socket, authCheck) => {
 function manage(key, value) {
     if (!key)
         return;
-        
+    
+    if (key === '*')
+        return config;
+    
     if (value === undefined)
         return config[key];
     

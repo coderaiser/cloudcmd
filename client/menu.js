@@ -6,6 +6,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
     CloudCmd.Menu = MenuProto;
         
     function MenuProto(position) {
+        var config = CloudCmd.config;
         var Buffer              = DOM.Buffer,
             Info                = DOM.CurrentInfo,
             Loading             = true,
@@ -105,17 +106,6 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
             }
         }
         
-        function isAuth(callback) {
-            DOM.Files.get('config', function(error, config) {
-                var is = config.auth;
-                
-                if (error)
-                    DOM.alert(TITLE, error);
-                
-                callback(is);
-            });
-        }
-        
         function getOptions(notFile) {
             var name, func, options;
             
@@ -166,45 +156,44 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
         }
         
         function loadFileMenuData(callback) {
-            isAuth(function(is) {
-                var show        = function(name) {
-                        CloudCmd[name].show();
+            var is = CloudCmd.config('auth');
+            var show        = function(name) {
+                    CloudCmd[name].show();
+                },
+                Dialog      = DOM.Dialog,
+                menuData    = getMenuData(is),
+                menu        = {
+                    'View'          : curry(show, 'View'),
+                    'Edit'          : curry(show, 'Edit'),
+                    'Rename'        : function() {
+                        setTimeout(DOM.renameCurrent, 100);
                     },
-                    Dialog      = DOM.Dialog,
-                    menuData    = getMenuData(is),
-                    menu        = {
-                        'View'          : curry(show, 'View'),
-                        'Edit'          : curry(show, 'Edit'),
-                        'Rename'        : function() {
-                            setTimeout(DOM.renameCurrent, 100);
-                        },
-                        'Delete'        : function() {
-                            CloudCmd.Operation.show('delete');
-                        },
-                        'Pack'          : function() {
-                            CloudCmd.Operation.show('pack');
-                        },
-                        'Extract'       : function() {
-                            CloudCmd.Operation.show('extract');
-                        },
-                        'Download'      : preDownload,
-                        'Upload To Cloud': curry(uploadTo, 'Cloud'),
-                        'Cut'           : function() {
-                            isCurrent(Buffer.cut, function() {
-                                Dialog.alert.noFiles(TITLE);
-                            });
-                        },
-                        'Copy'          : function() {
-                            isCurrent(Buffer.copy, function() {
-                                Dialog.alert.noFiles(TITLE);
-                            });
-                        },
-                    };
-                
-                Util.copyObj(menu, menuData);
-                
-                callback(is, menu);
-            });
+                    'Delete'        : function() {
+                        CloudCmd.Operation.show('delete');
+                    },
+                    'Pack'          : function() {
+                        CloudCmd.Operation.show('pack');
+                    },
+                    'Extract'       : function() {
+                        CloudCmd.Operation.show('extract');
+                    },
+                    'Download'      : preDownload,
+                    'Upload To Cloud': curry(uploadTo, 'Cloud'),
+                    'Cut'           : function() {
+                        isCurrent(Buffer.cut, function() {
+                            Dialog.alert.noFiles(TITLE);
+                        });
+                    },
+                    'Copy'          : function() {
+                        isCurrent(Buffer.copy, function() {
+                            Dialog.alert.noFiles(TITLE);
+                        });
+                    },
+                };
+            
+            Util.copyObj(menu, menuData);
+            
+            callback(is, menu);
         }
         
         function isCurrent(yesFn, noFn) {
@@ -282,9 +271,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO;
         }
         
         function preDownload() {
-            DOM.Files.get('config', function(e, config) {
-                download(config && config.packer);
-            });
+            download(config('packer'));
         }
         
         function download(type) {

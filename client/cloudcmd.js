@@ -5,8 +5,8 @@ var CloudCmd;
     
     CloudCmd = load;
     
-    function load(prefix) {
-        prefix = prefix || '';
+    function load(config) {
+        var prefix = config.prefix || '';
         
         var modules = '/modules/';
         var client  = 'client/';
@@ -53,7 +53,7 @@ var CloudCmd;
         var urlFiles = getJoinURL(allFiles);
         
         createScript(prefix + urlFiles, function() {
-            CloudCmd.init(prefix);
+            CloudCmd.init(config);
         });
     }
     

@@ -16,6 +16,7 @@
     function OperationProto(operation, data) {
         var Name        = 'Operation',
             TITLE       = CloudCmd.TITLE,
+            config      = CloudCmd.config,
             Loaded,
             RESTful     = DOM.RESTful,
             
@@ -40,18 +41,12 @@
             Util.exec.series([
                 DOM.loadSocket,
                 function(callback) {
-                    var Files = DOM.Files;
+                    if (config('progress'))
+                        load(function(callback) {
+                            create(CloudCmd.PREFIX, callback);
+                        });
                     
-                    Files.get('config', function(error, config) {
-                        if (error)
-                            Dialog.alert('Config', error);
-                        else if (config.progress)
-                            load(function(callback) {
-                                create(CloudCmd.PREFIX, callback);
-                            });
-                        
-                        callback();
-                    });
+                    callback();
                 },
                 function() {
                     Loaded = true;
@@ -62,21 +57,15 @@
         }
         
         function authCheck(spawn, ok) {
-            DOM.Files.get('config', function(error, config) {
-                if (error)
-                    return Dialog.alert(TITLE, error);
+            if (!config('auth'))
+                return ok();
                 
-                if (!config.auth) {
-                    ok();
-                } else {
-                    spawn.on('accept', ok);
-                    spawn.on('reject', function() {
-                        Dialog.alert(TITLE, 'Wrong credentials!');
-                    });
-                    
-                    spawn.emit('auth', config.username, config.password);
-                }
+            spawn.on('accept', ok);
+            spawn.on('reject', function() {
+                Dialog.alert(TITLE, 'Wrong credentials!');
             });
+            
+            spawn.emit('auth', config('username'), config('password'));
         }
         
         function _initSpero(prefix, fn) {
@@ -142,15 +131,10 @@
         }
         
         function _initPacker(prefix, fn) {
-            DOM.Files.get('config', function(e, config) {
-                if (e)
-                    return CloudCmd.log(e);
+            if (config('packer') === 'zip')
+                return _setPacker(prefix, 'salam', salam, fn);
                 
-                if (config.packer === 'zip')
-                    return _setPacker(prefix, 'salam', salam, fn);
-                
-                _setPacker(prefix, 'ishtar', ishtar, fn);
-            });
+            _setPacker(prefix, 'ishtar', ishtar, fn);
         }
         
         function create(prefix) {
@@ -264,17 +248,13 @@
         };
         
         this.pack           = function() {
-            DOM.Files.get('config', function(e, config) {
-                var zip = config && config.packer === 'zip';
-                twopack('pack', zip ? 'zip' : 'tar');
-            });
+            var isZip = config('packer') === 'zip';
+            twopack('pack', isZip ? 'zip' : 'tar');
         };
         
         this.extract        = function() {
-            DOM.Files.get('config', function(e, config) {
-                var zip = config && config.packer === 'zip';
-                twopack('extract', zip ? 'zip' : 'tar');
-            });
+            var isZip = config('packer') === 'zip';
+            twopack('extract', isZip ? 'zip' : 'tar');
         };
         
          /**

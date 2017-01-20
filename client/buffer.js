@@ -11,7 +11,6 @@
     
     function BufferProto(Util, DOM, CloudCmd) {
         var Storage = DOM.Storage,
-            Files   = DOM.Files,
             Info    = DOM.CurrentInfo,
             json    = Util.json,
             
@@ -58,22 +57,13 @@
                 });
         }
         
-        function isEnabled(callback) {
-            Files.get('config', function(error, config) {
-                if (error)
-                    showMessage(error);
-                else
-                    callback(config.buffer);
-            });
-        }
-        
         function callIfEnabled(callback) {
-            isEnabled(function(is) {
-                if (is)
-                    callback();
-                else
-                    showMessage('Buffer disabled in config!');
-            });
+            var is = CloudCmd.config('buffer');
+            
+            if (is)
+                return callback();
+            
+            showMessage('Buffer disabled in config!');
         }
         
         function copy() {

@@ -157,44 +157,51 @@ var Util, DOM, CloudFunc, join;
          * выполняет весь функционал по
          * инициализации
          */
-        this.init                    = function(prefix) {
-            var func        = function() {
-                    Util.exec.series([
-                        initModules,
-                        baseInit,
-                        loadPlugins,
-                        function() {
-                            CloudCmd.route(location.hash);
-                        }
-                    ]);
-                },
-                
-                funcBefore  = function(callback) {
-                    var src = prefix + '/join:' + [
-                        CloudCmd.LIBDIRCLIENT + 'polyfill.js',
-                        '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
-                    ].join(':');
-                    
-                    DOM.loadJquery(function() {
-                        DOM.load.js(src, callback);
-                    });
-                };
+        this.init = function(config) {
+            var func = function() {
+                Util.exec.series([
+                    initModules,
+                    baseInit,
+                    loadPlugins,
+                    function() {
+                        CloudCmd.route(location.hash);
+                    }
+                ]);
+            };
             
-            CloudCmd.PREFIX     = prefix;
+            var funcBefore  = function(callback) {
+                var src = prefix + '/join:' + [
+                    CloudCmd.LIBDIRCLIENT + 'polyfill.js',
+                    '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
+                ].join(':');
+                
+                DOM.loadJquery(function() {
+                    DOM.load.js(src, callback);
+                });
+            };
+            
+            var prefix = config.prefix;
+            
+            CloudCmd.PREFIX = prefix;
             CloudCmd.PREFIX_URL = prefix + CloudFunc.apiURL;
             
-            DOM.Files.get('config', function(error, config) {
-                var options = {
-                    htmlDialogs: !error && config.htmlDialogs
-                };
-                
-                if (config.onePanelMode)
-                    CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
-                
-                if (error)
-                    CloudCmd.log(error);
-                
-                DOM.Dialog = new DOM.Dialog(prefix, options);
+            CloudCmd.config = function(key) {
+                return config[key];
+            };
+            
+            CloudCmd._config = function(key, value) {
+                /*
+                 * should be called from config.js only
+                 * after successful update on server
+                 */
+                config[key] = value;
+            };
+            
+            if (config.onePanelMode)
+                CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
+            
+            DOM.Dialog = new DOM.Dialog(prefix, {
+                htmlDialogs: config.htmlDialogs
             });
             
             Util.exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
@@ -213,11 +220,11 @@ var Util, DOM, CloudFunc, join;
             if (!Array.isArray(urls))
                 throw Error('urls should be array!');
             
-            urls = urls.map(function(url) {
+            var noPrefixUrls = urls.map(function(url) {
                 return url.replace(prefix, '');
             });
             
-            return prefix + join(urls);
+            return prefix + join(noPrefixUrls);
         };
         
         this.route                   = function(path) {
@@ -419,20 +426,12 @@ var Util, DOM, CloudFunc, join;
             
             CloudCmd.log('reading dir: "' + path + '";');
             
-            Files.get('config', function(error, config) {
-                var dirStorage,
-                    Dialog = DOM.Dialog;
-                
-                if (error)
-                    Dialog.alert(TITLE, error);
-                else
-                    dirStorage = config.dirStorage;
-                
-                if (dirStorage)
-                    Storage.get(path, create);
-                else
-                    create();
-            });
+            var dirStorage = CloudCmd.config(dirStorage);
+            
+            if (!dirStorage)
+                return create();
+            
+            Storage.get(path, create);
         }
         
         /**

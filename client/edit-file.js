@@ -8,6 +8,7 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         var Dialog = DOM.Dialog;
         var exec = Util.exec;
         var EditFile = this;
+        var config = CloudCmd.config;
         
         var Menu,
             
@@ -88,17 +89,12 @@ var CloudCmd, Util, DOM, CloudFunc, MenuIO, Format;
         }
         
         function authCheck(spawn) {
-            DOM.Files.get('config', function(error, config) {
-                if (error)
-                    return Dialog.alert(TITLE, error);
-                
-                if (!config.auth)
-                    return;
-                
-                spawn.emit('auth', config.username, config.password);
-                spawn.on('reject', function() {
-                    Dialog.alert(TITLE, 'Wrong credentials!');
-                });
+            if (!config('auth'))
+                return;
+            
+            spawn.emit('auth', config('username'), config('password'));
+            spawn.on('reject', function() {
+                Dialog.alert(TITLE, 'Wrong credentials!');
             });
         }
         

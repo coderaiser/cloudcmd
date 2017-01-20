@@ -9,6 +9,7 @@ var CloudCmd, Util, DOM, io;
     CloudCmd.Config = ConfigProto;
         
     function ConfigProto() {
+        var config = CloudCmd.config;
         var Loading     = true,
             Key         = CloudCmd.Key,
             Dialog      = DOM.Dialog,
@@ -51,61 +52,58 @@ var CloudCmd, Util, DOM, io;
         }
         
         function initSocket(error) {
-            var socket,
-                href            = getHost(),
-                prefix          = CloudCmd.PREFIX,
+            var href = getHost();
+            var prefix = CloudCmd.PREFIX,
                 FIVE_SECONDS    = 5000,
-                save    = function(data) {
+                save = function(data) {
+                    onSave(data);
                     socket.send(data);
                 };
                 
-            if (!error) {
-                socket  = io.connect(href + prefix + '/config', {
-                    'max reconnection attempts' : Math.pow(2, 32),
-                    'reconnection limit'        : FIVE_SECONDS,
-                    path: prefix + '/socket.io'
-                });
-                
-                authCheck(socket);
-                
-                socket.on('connect', function() {
-                    Config.save = save;
-                });
-                
-                socket.on('config', function(config) {
-                    DOM.Storage.setAllowed(config.localStorage);
-                });
-                
-                socket.on('message', function(data) {
-                    onSave(data);
-                });
-                
-                socket.on('log', function(msg) {
-                    CloudCmd.log(msg);
-                });
-                
-                socket.on('disconnect', function() {
-                    Config.save = saveHttp;
-                });
-                
-                socket.on('err', function(error) {
-                    Dialog.alert(TITLE, error);
-                });
-            }
+            if (error)
+                return;
+            
+            var socket  = io.connect(href + prefix + '/config', {
+                'max reconnection attempts' : Math.pow(2, 32),
+                'reconnection limit'        : FIVE_SECONDS,
+                path: prefix + '/socket.io'
+            });
+            
+            authCheck(socket);
+            
+            socket.on('connect', function() {
+                Config.save = save;
+            });
+            
+            socket.on('config', function(config) {
+                DOM.Storage.setAllowed(config.localStorage);
+            });
+            
+            socket.on('message', function(data) {
+                onSave(data);
+            });
+            
+            socket.on('log', function(msg) {
+                CloudCmd.log(msg);
+            });
+            
+            socket.on('disconnect', function() {
+                Config.save = saveHttp;
+            });
+            
+            socket.on('err', function(error) {
+                Dialog.alert(TITLE, error);
+            });
         }
         
         function authCheck(socket) {
-            Files.get('config', function(error, config) {
-                if (error)
-                    return Dialog.alert(TITLE, error);
-                
-                if (config.auth) {
-                    socket.emit('auth', config.username, config.password);
-                    
-                    socket.on('reject', function() {
-                        Dialog.alert(TITLE, 'Wrong credentials!');
-                    });
-                }
+            if (!config('auth'))
+                return;
+            
+            socket.emit('auth', config('username'), config('password'));
+            
+            socket.on('reject', function() {
+                Dialog.alert(TITLE, 'Wrong credentials!');
             });
         }
         
@@ -214,6 +212,7 @@ var CloudCmd, Util, DOM, io;
             Object.keys(obj).forEach(function(name) {
                 var data = obj[name];
                 
+                CloudCmd._config(name, data);
                 input.setValue(name, data, Element);
             });
             
@@ -296,15 +295,10 @@ var CloudCmd, Util, DOM, io;
             }
         }
         
-        DOM.Files.get('config', function(error, config) {
-            if (error)
-                return Dialog.alert(TITLE, error);
-            
-            if (!config.configDialog)
-                return;
-            
-            init();
-        });
+        if (!CloudCmd.config('configDialog'))
+            return;
+       
+        init();
     }
     
 })(CloudCmd, Util, DOM);

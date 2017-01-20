@@ -2,6 +2,7 @@
 /* global Util */
 /* global DOM */
 /* global Console */
+/* global exec */
 
 (function(CloudCmd, Util, DOM) {
     'use strict';
@@ -9,21 +10,21 @@
     CloudCmd.Konsole = ConsoleProto;
         
     function ConsoleProto() {
-        var Name    = 'Konsole',
+        var config = CloudCmd.config;
+        var Name = 'Konsole',
             TITLE   = 'Console',
             
             Element,
             Loaded,
             Images  = DOM.Images,
             Dialog  = DOM.Dialog,
-            exec    = Util.exec,
             
             Konsole = this;
             
         function init() {
             Images.show.load('top');
             
-            Util.exec.series([
+            exec.series([
                 CloudCmd.View,
                 load,
                 create,
@@ -68,7 +69,7 @@
             
             Console(Element, options, function(spawn) {
                 spawn.on('connect', exec.with(authCheck, spawn));
-                Util.exec(callback);
+                exec(callback);
             });
             
             Console.addShortCuts({
@@ -83,17 +84,13 @@
         }
         
         function authCheck(spawn) {
-            DOM.Files.get('config', function(error, config) {
-                if (error)
-                    return Dialog.alert(TITLE, error);
-                
-                if (config.auth) {
-                    spawn.emit('auth', config.username, config.password);
-                    
-                    spawn.on('reject', function() {
-                        Dialog.alert(TITLE, 'Wrong credentials!');
-                    });
-                }
+            if (!config('auth'))
+                return;
+            
+            spawn.emit('auth', config('username'), config('password'));
+            
+            spawn.on('reject', function() {
+                Dialog.alert(TITLE, 'Wrong credentials!');
             });
         }
         
@@ -102,7 +99,7 @@
                 CloudCmd.View.show(Element, {
                     afterShow: function() {
                         Console.focus();
-                        Util.exec(callback);
+                        exec(callback);
                     }
                 });
         };
@@ -117,22 +114,17 @@
                 } else {
                     Loaded = true;
                     Util.timeEnd(Name + ' load');
-                    Util.exec(callback);
+                    exec(callback);
                 }
             });
             
             Util.time(Name + ' load');
         }
         
-        DOM.Files.get('config', function(error, config) {
-            if (error)
-                return Dialog.alert(TITLE, error);
-            
-            if (!config.console)
-                return;
-            
-            init();
-        });
+        if (!CloudCmd.config('console'))
+            return;
+        
+        init();
     }
     
 })(CloudCmd, Util, DOM);

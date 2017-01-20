@@ -5,6 +5,7 @@ var CloudCmd, Util, DOM, CloudFunc;
     
     /* global rendy */
     /* global itype */
+    /* global exec */
     
     var DOMFunc                     = function() {},
         DOMProto,
@@ -293,11 +294,11 @@ var CloudCmd, Util, DOM, CloudFunc;
                 if (o.name && window[o.name])
                     callback();
                 else
-                    Files.get(['config', 'modules'], function(error, config, modules) {
+                    Files.get('modules', function(error, modules) {
                         var remoteTmpls, local, remote,
                             load        = DOM.load,
                             prefix      = CloudCmd.PREFIX,
-                            online      = config.online && navigator.onLine,
+                            online      = CloudCmd.config('online') && navigator.onLine,
                             
                             remoteObj   = Util.findObjByNameInArr(modules, 'remote'),
                             module      = Util.findObjByNameInArr(remoteObj, name),
@@ -1185,31 +1186,30 @@ var CloudCmd, Util, DOM, CloudFunc;
              *
              * @param name
              * @param data
+             * @param hash
              * @param callback
              */
             this.saveDataToStorage = function(name, data, hash, callback) {
-                DOM.Files.get('config', function(error, config) {
-                    var allowed     = config.localStorage,
-                        isDir       = DOM.isCurrentIsDir(),
-                        nameHash    = name + '-hash',
-                        nameData    = name + '-data';
+                var allowed     = CloudCmd.config('localStorage');
+                var isDir       = DOM.isCurrentIsDir();
+                var nameHash    = name + '-hash';
+                var nameData    = name + '-data';
+                
+                if (!allowed || isDir)
+                    return Util.exec(callback);
+                
+                Util.exec.if(hash, function() {
+                    var Storage = DOM.Storage;
                     
-                    if (!allowed || isDir)
-                        Util.exec(callback);
-                    else
-                        Util.exec.if(hash, function() {
-                            var Storage = DOM.Storage;
-                            
-                            Storage.set(nameHash, hash);
-                            Storage.set(nameData, data);
-                            
-                            Util.exec(callback, hash);
-                        }, function(callback) {
-                            DOM.loadCurrentHash(function(error, loadHash) {
-                                hash = loadHash;
-                                callback();
-                            });
-                        });
+                    Storage.set(nameHash, hash);
+                    Storage.set(nameData, data);
+                    
+                    Util.exec(callback, hash);
+                }, function(callback) {
+                    DOM.loadCurrentHash(function(error, loadHash) {
+                        hash = loadHash;
+                        callback();
+                    });
                 });
             };
             
@@ -1221,32 +1221,22 @@ var CloudCmd, Util, DOM, CloudFunc;
              * @param callback
              */
             this.getDataFromStorage = function(name, callback) {
-                DOM.Files.get('config', function(error, config) {
-                    var Storage     = DOM.Storage,
-                        nameHash    = name + '-hash',
-                        nameData    = name + '-data',
-                        allowed     = config.localStorage,
-                        isDir       = DOM.isCurrentIsDir();
-                    
-                    if (!allowed || isDir)
-                        Util.exec(callback);
-                    else {
-                        Util.exec.parallel([
-                            function(callback) {
-                                Storage.get(nameData, callback);
-                            },
-                            function(callback) {
-                                Storage.get(nameHash, callback);
-                            }
-                        ], callback);
-                    }
-                });
+                var Storage     = DOM.Storage;
+                var nameHash    = name + '-hash';
+                var nameData    = name + '-data';
+                var allowed     = CloudCmd.config('localStorage');
+                var isDir       = DOM.isCurrentIsDir();
+                
+                if (!allowed || isDir)
+                    return Util.exec(callback);
+                
+                Util.exec.parallel([
+                    exec.with(Storage.get, nameData, callback),
+                    exec.with(Storage.get, nameHash, callback),
+                ], callback);
             };
             
-            /** function getting FM
-             * @param pPanel_o = {active: true}
-             */
-            this.getFM                   = function() {
+            this.getFM = function() {
                 return this.getPanel().parentElement;
             };
             
