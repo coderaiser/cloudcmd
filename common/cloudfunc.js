@@ -12,21 +12,21 @@
     }
     
     function CloudFuncProto() {
-        var CloudFunc               = this,
-            Entity                  = new entityProto(),
-            FS;
+        var CloudFunc = this;
+        var Entity = new entityProto();
+        var FS;
         
         /* КОНСТАНТЫ (общие для клиента и сервера)*/
         
         /* название программы */
-        this.NAME                   = 'Cloud Commander';
+        this.NAME = 'Cloud Commander';
         
         /* если в ссылке будет эта строка - в браузере js отключен */
-        this.FS    =   FS           = '/fs';
+        this.FS = FS = '/fs';
         
-        this.apiURL                 = '/api/v1';
-        this.MAX_FILE_SIZE          = 500 * 1024;
-        this.Entity                 = Entity;
+        this.apiURL = '/api/v1';
+        this.MAX_FILE_SIZE = 500 * 1024;
+        this.Entity = Entity;
         
         function entityProto() {
             var Entities = {
@@ -35,10 +35,12 @@
                 '&gt;'   : '>'
             };
             
+            var keys = Object.keys(Entities);
+            
             this.encode = function(str) {
-                Object.keys(Entities).forEach(function(code) {
-                    var char    = Entities[code],
-                        reg     = RegExp(char, 'g');
+                keys.forEach(function(code) {
+                    var char = Entities[code];
+                    var reg = RegExp(char, 'g');
                     
                     str = str.replace(reg, code);
                 });
@@ -47,9 +49,9 @@
             };
             
             this.decode = function(str) {
-                Object.keys(Entities).forEach(function(code) {
-                    var char    = Entities[code],
-                        reg     = RegExp(code, 'g');
+                keys.forEach(function(code) {
+                    var char = Entities[code];
+                    var reg = RegExp(code, 'g');
                     
                     str = str.replace(reg, char);
                 });
@@ -58,7 +60,7 @@
             };
         }
         
-        this.formatMsg              = function(msg, name, status) {
+        this.formatMsg = function(msg, name, status) {
             if (!status)
                 status = 'ok';
             
@@ -75,12 +77,11 @@
         /** Функция возвращает заголовок веб страницы
          * @pPath
          */
-        this.getTitle               = function(pPath) {
+        this.getTitle = function(path) {
             if (!CloudFunc.Path)
                 CloudFunc.Path = '/';
-                
-            return  CloudFunc.NAME + ' - ' + (pPath || CloudFunc.Path);
-                
+            
+            return  CloudFunc.NAME + ' - ' + (path || CloudFunc.Path);
         };
         
         /** Функция получает адреса каждого каталога в пути
@@ -135,7 +136,7 @@
          * @param params - информация о файлах
          *
          */
-        this.buildFromJSON          = function(params) {
+        this.buildFromJSON = function(params) {
             var file, i, n, type, attribute, size, date, owner, mode,
                 dotDot, link, dataName,
                 linkResult,
