@@ -137,7 +137,7 @@
          *
          */
         this.buildFromJSON = function(params) {
-            var file, i, n, type, attribute, size, date, owner, mode,
+            var attribute, size, date, owner, mode,
                 dotDot, link, dataName,
                 linkResult,
                 prefix          = params.prefix,
@@ -152,51 +152,50 @@
                  * Строим путь каталога в котором мы находимся
                  * со всеми подкаталогами
                  */
-                htmlPath        = getPathLink(path, prefix, template.pathLink),
-                
-                fileTable       = rendy(template.path, {
-                    link        : prefix + FS + path,
-                    fullPath    : path,
-                    path        : htmlPath
-                }),
-                
-                header         = rendy(templateFile, {
-                    tag         : 'div',
-                    attribute   : '',
-                    className   : 'fm-header',
-                    type        : '',
-                    name        : 'name',
-                    size        : 'size',
-                    date        : 'date',
-                    owner       : 'owner',
-                    mode        : 'mode'
-                });
+                htmlPath        = getPathLink(path, prefix, template.pathLink);
             
-            fileTable          += header;
+            var fileTable       = rendy(template.path, {
+                link        : prefix + FS + path,
+                fullPath    : path,
+                path        : htmlPath
+            });
+            
+            var header = rendy(templateFile, {
+                tag         : 'div',
+                attribute   : '',
+                className   : 'fm-header',
+                type        : '',
+                name        : 'name',
+                size        : 'size',
+                date        : 'date',
+                owner       : 'owner',
+                mode        : 'mode'
+            });
             
             /* сохраняем путь */
             CloudFunc.Path      = path;
             
-            fileTable           += '<ul data-name="js-files" class="files">';
+            fileTable += header + '<ul data-name="js-files" class="files">';
             /* Если мы не в корне */
             if (path !== '/') {
                 /* убираем последний слеш и каталог в котором мы сейчас находимся*/
-                dotDot          = path.substr(path, path.lastIndexOf('/'));
-                dotDot          = dotDot.substr(dotDot, dotDot.lastIndexOf('/'));
+                dotDot = path.substr(path, path.lastIndexOf('/'));
+                dotDot = dotDot.substr(dotDot, dotDot.lastIndexOf('/'));
                 /* Если предыдущий каталог корневой */
                 if (dotDot === '')
                     dotDot = '/';
                 
-                link            = prefix + FS + dotDot;
+                link = prefix + FS + dotDot;
                 
-                linkResult      = rendy(template.link, {
+                linkResult = rendy(template.link, {
                     link        : link,
                     title       : '..',
                     name        : '..'
                 });
                 
-                dataName        = 'data-name="js-file-.." ',
-                attribute       = 'draggable="true" ' + dataName,
+                dataName = 'data-name="js-file-.." ';
+                attribute = 'draggable="true" ' + dataName;
+                
                 /* Сохраняем путь к каталогу верхнего уровня*/
                 fileTable += rendy(template.file, {
                     tag         : 'li',
@@ -211,41 +210,31 @@
                 });
             }
             
-            n = files.length;
-            for (i = 0; i < n; i++) {
-                file            = files[i];
-                link            = prefix + FS + path + file.name;
+            fileTable += files.map(function(file) {
+                var link = prefix + FS + path + file.name;
                 
-                if (file.size === 'dir') {
-                    type        = 'directory';
-                    attribute   = '';
-                    size        = '&lt;dir&gt;';
-                } else {
-                    type        = 'text-file';
-                    attribute   = 'target="_blank" ';
-                    size        = file.size;
-                }
+                var type = getType(file.size);
+                var attribute = getAttribute(file.size);
+                var size = getSize(file.size);
                 
-                date    = file.date || '--.--.----';
-                owner   = file.owner || 'root';
-                mode    = file.mode;
+                var date = file.date || '--.--.----';
+                var owner = file.owner || 'root';
+                var mode = file.mode;
                 
-                linkResult  = rendy(templateLink, {
+                var linkResult = rendy(templateLink, {
                     link        : link,
                     title       : file.name,
                     name        : Entity.encode(file.name),
                     attribute   : attribute
                 });
                 
-                dataName        = 'data-name="js-file-' + file.name + '" ';
-                attribute       = 'draggable="true" ' + dataName;
+                var dataName = 'data-name="js-file-' + file.name + '" ';
+                var attribute = 'draggable="true" ' + dataName;
                 
-                fileTable += rendy(templateFile, {
+                return rendy(templateFile, {
                     tag         : 'li',
                     attribute   : attribute,
                     className   : '',
-                    /* Если папка - выводим пиктограмму папки   *
-                     * В противоположном случае - файла         */
                     type        : type,
                     name        : linkResult,
                     size        : size,
@@ -253,11 +242,33 @@
                     owner       : owner,
                     mode        : mode
                 });
-            }
+            }).join('');
             
-            fileTable          += '</ul>';
+            fileTable += '</ul>';
             
             return fileTable;
         };
+        
+        function getType(size) {
+            if (size === 'dir')
+                return 'directory';
+            
+            return 'text-file'
+        };
+        
+        function getAttribute(size) {
+            if (size === 'dir')
+                return '';
+            
+            return 'target="_blank" ';
+        }
+        
+        function getSize(size) {
+            if (size === 'dir')
+                return '&lt;dir&gt;';
+            
+            return size;
+        }
      }
 })(this);
+
