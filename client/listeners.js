@@ -38,37 +38,39 @@ var Util, DOM, CloudFunc, CloudCmd;
         this.initKeysPanel = function() {
             var keysElement = DOM.getById('js-keyspanel');
             
-            if (keysElement)
-                Events.addClick(keysElement, function(event) {
-                    var element = event.target;
-                    var id = element.id;
-                    var operation = function(name) {
-                        var Operation = CloudCmd.Operation;
-                        var fn = Operation.show.bind(null, name);
-                        
-                        return fn;
-                    };
+            if (!keysElement)
+                return;
+            
+            Events.addClick(keysElement, function(event) {
+                var element = event.target;
+                var id = element.id;
+                var operation = function(name) {
+                    var Operation = CloudCmd.Operation;
+                    var fn = Operation.show.bind(null, name);
                     
-                    var clickFuncs = {
-                        'f1'        : CloudCmd.Help.show,
-                        'f2'        : DOM.renameCurrent,
-                        'f3'        : CloudCmd.View.show,
-                        'f4'        : CloudCmd.EditFile.show,
-                        'f5'        : operation('copy'),
-                        'f6'        : operation('move'),
-                        'f7'        : DOM.promptNewDir,
-                        'f8'        : operation('delete'),
-                        'f9'        : CloudCmd.Menu.show,
-                        'f10'       : CloudCmd.Config.show,
-                        '~'         : CloudCmd.Konsole.show,
-                        'contact'   : CloudCmd.Contact.show,
-                    };
-                   
-                    var func = clickFuncs[id];
-                    
-                    if (func)
-                        func();
-                });
+                    return fn;
+                };
+                
+                var clickFuncs = {
+                    'f1'        : CloudCmd.Help.show,
+                    'f2'        : DOM.renameCurrent,
+                    'f3'        : CloudCmd.View.show,
+                    'f4'        : CloudCmd.EditFile.show,
+                    'f5'        : operation('copy'),
+                    'f6'        : operation('move'),
+                    'f7'        : DOM.promptNewDir,
+                    'f8'        : operation('delete'),
+                    'f9'        : CloudCmd.Menu.show,
+                    'f10'       : CloudCmd.Config.show,
+                    '~'         : CloudCmd.Konsole.show,
+                    'contact'   : CloudCmd.Contact.show,
+                };
+               
+                var func = clickFuncs[id];
+                
+                if (func)
+                    func();
+            });
         };
         
         this.setOnPanel = function(side) {
