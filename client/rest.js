@@ -66,28 +66,28 @@ var Util, DOM, CloudFunc, CloudCmd;
             });
         };
         
-        this.read   = function(url, dataType, callback) {
-            var isQuery     = /\?/.test(url),
-                isBeautify  = /\?beautify$/.test(url),
-                isMinify    = /\?minify$/.test(url),
-                notLog      = !isQuery || isBeautify || isMinify,
-                isFunc      = itype.function(dataType);
+        this.read = function(url, dataType, callback) {
+            var isQuery = /\?/.test(url);
+            var isBeautify = /\?beautify$/.test(url);
+            var isMinify = /\?minify$/.test(url);
+            var notLog = !isQuery || isBeautify || isMinify;
+            var isFunc = itype.function(dataType);
             
             if (!callback && isFunc) {
-                callback    = dataType;
-                dataType    = 'text';
+                callback = dataType;
+                dataType = 'text';
             }
             
             sendRequest({
-                method      : 'GET',
-                url         : CloudFunc.FS + url,
-                callback    : callback,
-                notLog      : notLog,
-                dataType    : dataType
+                method: 'GET',
+                url: CloudFunc.FS + url,
+                callback: callback,
+                notLog: notLog,
+                dataType: dataType
             });
         };
         
-        this.cp     = function(data, callback) {
+        this.cp = function(data, callback) {
             sendRequest({
                 method      : 'PUT',
                 url         : '/cp',
