@@ -404,21 +404,22 @@ var Util, DOM, CloudFunc, join;
                     noCurrent   = options.noCurrent;
                 
                 if (!isRefresh && json)
-                    createFileTable(obj, panel, options, callback);
-                else
-                    RESTful.read(path, 'json', function(error, obj) {
-                        if (!error) {
-                            Storage.set(path, obj);
-                            
-                            createFileTable(obj, panel, options, function() {
-                                if (isRefresh && !noCurrent) {
-                                    DOM.setCurrentByName(name);
-                                }
-                                
-                                Util.exec(callback);
-                            });
+                    return createFileTable(obj, panel, options, callback);
+                
+                RESTful.read(path, 'json', function(error, obj) {
+                    if (error)
+                        return;
+                    
+                    Storage.set(path, obj);
+                    
+                    createFileTable(obj, panel, options, function() {
+                        if (isRefresh && !noCurrent) {
+                            DOM.setCurrentByName(name);
                         }
+                        
+                        Util.exec(callback);
                     });
+                });
             };
             
             if (!options)
