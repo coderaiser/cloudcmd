@@ -1,3 +1,9 @@
+2017.01.24, v6.2.1
+
+fix:
+- (cloucmd) sort: handle click on header of passive panel
+
+
 2017.01.24, v6.2.0
 
 fix:
