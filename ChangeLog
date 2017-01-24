@@ -1,3 +1,12 @@
+2017.01.24, v6.2.0
+
+fix:
+- (dom) getDataFromStorage: callback called twice
+
+feature:
+- (cloudcmd) add ability to sort by name, size and date (#101)
+
+
 2017.01.20, v6.1.0
 
 fix:
