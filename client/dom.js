@@ -739,23 +739,23 @@ var CloudCmd, Util, DOM, CloudFunc;
                 
                 if (Info.name === '..') {
                     Dialog.alert.noFiles(TITLE);
-                    callback(Error('No files selected!'));
-                } else if (isDir) {
-                    RESTful.read(path, func);
-                } else {
-                    DOM.checkStorageHash(path, function(error, equal, hashNew) {
-                        if (error) {
-                            callback(error);
-                        } else if (equal) {
-                            DOM.getDataFromStorage(path, callback);
-                        } else {
-                            hash = hashNew;
-                            RESTful.read(path, func);
-                        }
-                    });
+                    return callback(Error('No files selected!'));
                 }
+                
+                if (isDir)
+                    return RESTful.read(path, func);
+                
+                DOM.checkStorageHash(path, function(error, equal, hashNew) {
+                    if (error) {
+                        callback(error);
+                    } else if (equal) {
+                        DOM.getDataFromStorage(path, callback);
+                    } else {
+                        hash = hashNew;
+                        RESTful.read(path, func);
+                    }
+                });
             };
-            
             
             /**
              * unified way to save current file content
