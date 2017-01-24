@@ -35,8 +35,15 @@ var Util, DOM, CloudFunc, join;
         
         this.TITLE                  = 'Cloud Commander';
         
-        this.sort = 'name';
-        this.order = 'asc';
+        this.sort = {
+            left: 'name',
+            right: 'name',
+        };
+        
+        this.order = {
+            left: 'asc',
+            right: 'asc',
+        };
         
         TITLE                       = this.TITLE;
         
@@ -65,18 +72,12 @@ var Util, DOM, CloudFunc, join;
         this.loadDir = function(params, callback) {
             var imgPosition;
             var panelChanged;
-            var noCurrent;
-            var isRefresh;
-            var panel;
-            var history;
             var p = params;
             
-            if (params) {
-                isRefresh       = p.isRefresh;
-                panel           = p.panel;
-                history         = p.history;
-                noCurrent       = p.noCurrent;
-            }
+            var isRefresh       = p.isRefresh;
+            var panel           = p.panel;
+            var history         = p.history;
+            var noCurrent       = p.noCurrent;
             
             if (!noCurrent)
                 if (panel && panel !== Info.panel) {
@@ -91,9 +92,9 @@ var Util, DOM, CloudFunc, join;
             
             /* загружаем содержимое каталога */
             ajaxLoad(p.path, {
-                refresh     : isRefresh,
-                history     : history,
-                noCurrent   : noCurrent
+                refresh: isRefresh,
+                history: history,
+                noCurrent: noCurrent
             }, panel, callback);
         };
         
@@ -366,11 +367,11 @@ var Util, DOM, CloudFunc, join;
                 }, obj);
         };
         
-        this.refresh                =  function(panelParam, options, callback) {
-            var panel           = panelParam || Info.panel,
-                noCurrent,
-                NEEDREFRESH     = true,
-                path            = DOM.getCurrentDirPath(panel);
+        this.refresh =  function(panelParam, options, callback) {
+            var panel = panelParam || Info.panel;
+            var NEEDREFRESH = true;
+            var path = DOM.getCurrentDirPath(panel);
+            var noCurrent;
             
             if (options)
                 noCurrent       = options.noCurrent;
@@ -410,9 +411,13 @@ var Util, DOM, CloudFunc, join;
                 if (!isRefresh && json)
                     return createFileTable(obj, panel, options, callback);
                 
+                var position = DOM.getPanelPosition(panel);
+                var sort = CloudCmd.sort[position];
+                var order = CloudCmd.order[position];
+                
                 var query = rendy('?sort={{ sort }}&order={{ order }}', {
-                    sort: CloudCmd.sort,
-                    order: CloudCmd.order
+                    sort: sort,
+                    order: order,
                 });
                 
                 RESTful.read(path + query, 'json', function(error, obj) {
@@ -421,8 +426,8 @@ var Util, DOM, CloudFunc, join;
                     
                     Storage.set(path, obj);
                     
-                    options.sort = CloudCmd.sort;
-                    options.order = CloudCmd.order;
+                    options.sort = sort;
+                    options.order = order;
                     
                     createFileTable(obj, panel, options, function() {
                         if (isRefresh && !noCurrent) {

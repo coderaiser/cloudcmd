@@ -32,6 +32,20 @@ var Util, DOM, CloudFunc, CloudCmd;
         function header() {
             var fm = DOM.getFM();
             
+            var position = Info.panelPosition;
+            var sortPrevious = CloudCmd.sort[position];
+            
+            var sort = CloudCmd.sort;
+            var order = CloudCmd.order;
+            
+            var isDataset = function(el) {
+                return el.dataset;
+            };
+            
+            var isPanel = function(el) {
+                return /^js-(left|right)$/.test(el.dataset.name);
+            };
+            
             Events.addClick(fm, function(event) {
                 var el = event.target;
                 var parent = el.parentElement;
@@ -45,15 +59,31 @@ var Util, DOM, CloudFunc, CloudCmd;
                 if (!/^(name|size|date)$/.test(name))
                     return;
                 
-                if (name === CloudCmd.sort) {
-                    if (CloudCmd.order === 'asc')
-                        CloudCmd.order = 'desc';
+                var panel = event.path
+                    .filter(isDataset)
+                    .filter(isPanel)
+                    .pop();
+                
+                var position = panel
+                    .dataset
+                    .name
+                    .replace('js-', '');
+                
+                if (name !== sortPrevious) {
+                    order[position] = 'asc';
+                } else {
+                    if (order[position] === 'asc')
+                        order[position] = 'desc';
                     else
-                        CloudCmd.order = 'asc';
+                        order[position] = 'asc';
                 }
                 
-                CloudCmd.sort = name;
-                CloudCmd.refresh();
+                sortPrevious =
+                sort[position] = name;
+                
+                CloudCmd.refresh(panel, {
+                    noCurrent: position !== Info.panelPosition
+                });
             });
         }
         

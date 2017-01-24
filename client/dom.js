@@ -1240,10 +1240,16 @@ var CloudCmd, Util, DOM, CloudFunc;
                 return this.getPanel().parentElement;
             };
             
+            this.getPanelPosition = function(panel) {
+                panel = panel || DOM.getPanel();
+                
+                return panel.dataset.name.replace('js-', '');
+            };
+            
             /** function getting panel active, or passive
              * @param options = {active: true}
              */
-            this.getPanel                = function(options) {
+            this.getPanel = function(options) {
                 var files, panel, isLeft,
                     dataName    = 'js-',
                     current     = this.getCurrentFile();
@@ -1621,6 +1627,7 @@ var CloudCmd, Util, DOM, CloudFunc;
                 info.size           = Cmd.getCurrentSize(current);
                 info.isDir          = Cmd.isCurrentIsDir();
                 info.isSelected     = Cmd.isSelected(current);
+                info.panelPosition  = Cmd.getPanel().dataset.name.replace('js-', '');
                 info.isOnePanel     =
                     info.panel.getAttribute('data-name') ===
                     info.panelPassive.getAttribute('data-name');
