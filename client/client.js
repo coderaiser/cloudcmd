@@ -1,4 +1,5 @@
 /* global itype */
+/* global rendy */
 
 var Util, DOM, CloudFunc, join;
 
@@ -33,6 +34,9 @@ var Util, DOM, CloudFunc, join;
                                       location.protocol + '//' + location.host;
         
         this.TITLE                  = 'Cloud Commander';
+        
+        this.sort = 'name';
+        this.order = 'asc';
         
         TITLE                       = this.TITLE;
         
@@ -100,7 +104,7 @@ var Util, DOM, CloudFunc, join;
         function loadModule(params) {
             var name, path, func, doBefore,
                 funcName, isContain;
-                    
+            
             if (params) {
                 name        = params.name,
                 path        = params.path,
@@ -406,11 +410,19 @@ var Util, DOM, CloudFunc, join;
                 if (!isRefresh && json)
                     return createFileTable(obj, panel, options, callback);
                 
-                RESTful.read(path, 'json', function(error, obj) {
+                var query = rendy('?sort={{ sort }}&order={{ order }}', {
+                    sort: CloudCmd.sort,
+                    order: CloudCmd.order
+                });
+                
+                RESTful.read(path + query, 'json', function(error, obj) {
                     if (error)
                         return;
                     
                     Storage.set(path, obj);
+                    
+                    options.sort = CloudCmd.sort;
+                    options.order = CloudCmd.order;
                     
                     createFileTable(obj, panel, options, function() {
                         if (isRefresh && !noCurrent) {
@@ -456,43 +468,44 @@ var Util, DOM, CloudFunc, join;
                     dir         = Info.dir,
                     name        = Info.name;
                 
-                if (error) {
-                    Dialog.alert(TITLE, error.responseText);
-                } else {
-                    childNodes  = panel.childNodes;
-                    i           = childNodes.length;
+                if (error)
+                    return Dialog.alert(TITLE, error.responseText);
                     
-                    while (i--)
-                        panel.removeChild(panel.lastChild);
-                    
-                    panel.innerHTML = CloudFunc.buildFromJSON({
-                        data        : json,
-                        id          : panel.id,
-                        prefix      : CloudCmd.PREFIX,
-                        template    : {
-                            file        : templFile,
-                            path        : templPath,
-                            pathLink    : templPathLink,
-                            link        : templLink
-                        }
-                    });
-                    
-                    Listeners.setOnPanel(panel);
-                    
-                    if (!noCurrent) {
-                        if (name === '..' && dir !== '/')
-                            current = DOM.getCurrentByName(dir);
-                        
-                        if (!current)
-                            current = DOM.getFiles(panel)[0];
-                            
-                        DOM.setCurrentFile(current, {
-                            history: history
-                        });
+                childNodes  = panel.childNodes;
+                i           = childNodes.length;
+                
+                while (i--)
+                    panel.removeChild(panel.lastChild);
+                
+                panel.innerHTML = CloudFunc.buildFromJSON({
+                    sort        : options.sort,
+                    order       : options.order,
+                    data        : json,
+                    id          : panel.id,
+                    prefix      : CloudCmd.PREFIX,
+                    template    : {
+                        file        : templFile,
+                        path        : templPath,
+                        pathLink    : templPathLink,
+                        link        : templLink
                     }
+                });
+                
+                Listeners.setOnPanel(panel);
+                
+                if (!noCurrent) {
+                    if (name === '..' && dir !== '/')
+                        current = DOM.getCurrentByName(dir);
                     
-                    Util.exec(callback);
+                    if (!current)
+                        current = DOM.getFiles(panel)[0];
+                        
+                    DOM.setCurrentFile(current, {
+                        history: history
+                    });
                 }
+                
+                Util.exec(callback);
             });
         }
         

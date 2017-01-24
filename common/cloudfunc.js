@@ -137,7 +137,7 @@
          *
          */
         this.buildFromJSON = function(params) {
-            var attribute, size, date, owner, mode,
+            var attribute,
                 dotDot, link, dataName,
                 linkResult,
                 prefix          = params.prefix,
@@ -147,6 +147,9 @@
                 json            = params.data,
                 files           = json.files,
                 path            = json.path,
+                
+                sort            = params.sort || 'name',
+                order           = params.order || 'asc',
                 
                 /*
                  * Строим путь каталога в котором мы находимся
@@ -160,14 +163,26 @@
                 path        : htmlPath
             });
             
+            var name = 'name';
+            var size = 'size';
+            var date = 'date';
+            var arrow = order === 'asc' ?  '↑' : '↓';
+            
+            if (sort === 'name' && order !== 'asc')
+                name += arrow;
+            else if (sort === 'size')
+                size += arrow;
+            else if (sort === 'date')
+                date += arrow;
+            
             var header = rendy(templateFile, {
                 tag         : 'div',
-                attribute   : '',
+                attribute   : 'data-name="js-fm-header" ',
                 className   : 'fm-header',
                 type        : '',
-                name        : 'name',
-                size        : 'size',
-                date        : 'date',
+                name        : name,
+                size        : size,
+                date        : date,
                 owner       : 'owner',
                 mode        : 'mode'
             });
@@ -214,7 +229,6 @@
                 var link = prefix + FS + path + file.name;
                 
                 var type = getType(file.size);
-                var attribute = getAttribute(file.size);
                 var size = getSize(file.size);
                 
                 var date = file.date || '--.--.----';
@@ -225,7 +239,7 @@
                     link        : link,
                     title       : file.name,
                     name        : Entity.encode(file.name),
-                    attribute   : attribute
+                    attribute   : getAttribute(file.size)
                 });
                 
                 var dataName = 'data-name="js-file-' + file.name + '" ';
@@ -253,8 +267,8 @@
             if (size === 'dir')
                 return 'directory';
             
-            return 'text-file'
-        };
+            return 'text-file';
+        }
         
         function getAttribute(size) {
             if (size === 'dir')

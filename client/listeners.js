@@ -26,7 +26,36 @@ var Util, DOM, CloudFunc, CloudCmd;
             pop();
             resize();
             config();
+            header();
         };
+        
+        function header() {
+            var fm = DOM.getFM();
+            
+            Events.addClick(fm, function(event) {
+                var el = event.target;
+                var parent = el.parentElement;
+                
+                if (parent.dataset.name !== 'js-fm-header')
+                    return;
+                
+                var name = (el.dataset.name || '')
+                    .replace('js-', '');
+                
+                if (!/^(name|size|date)$/.test(name))
+                    return;
+                
+                if (name === CloudCmd.sort) {
+                    if (CloudCmd.order === 'asc')
+                        CloudCmd.order = 'desc';
+                    else
+                        CloudCmd.order = 'asc';
+                }
+                
+                CloudCmd.sort = name;
+                CloudCmd.refresh();
+            });
+        }
         
         function config() {
             DOM.Files.get('config', function(e, config) {
