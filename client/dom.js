@@ -1231,8 +1231,8 @@ var CloudCmd, Util, DOM, CloudFunc;
                     return Util.exec(callback);
                 
                 Util.exec.parallel([
-                    exec.with(Storage.get, nameData, callback),
-                    exec.with(Storage.get, nameHash, callback),
+                    exec.with(Storage.get, nameData),
+                    exec.with(Storage.get, nameHash),
                 ], callback);
             };
             
