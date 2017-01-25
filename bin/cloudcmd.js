@@ -196,23 +196,29 @@ function repl() {
 
 function checkUpdate() {
     const load = require('package-json');
-    const chalk = require('chalk');
-    const rendy = require('rendy');
+    const noop = () => {};
     
-    load(Info.name, 'latest').then((data) => {
-        const version = data.version;
-            
-        if (version !== Info.version) {
-            const latest = rendy('update available: {{ latest }}', {
-                latest: chalk.green.bold('v' + version),
-            });
-           
-            const current = chalk.dim(rendy('(current: v{{ current }})', {
-                current: Info.version
-            }));
-            
-            console.log('%s %s', latest, current);
-        }
-    });
+    load(Info.name, 'latest')
+        .then(showUpdateInfo)
+        .catch(noop);
+}
+
+function showUpdateInfo(data) {
+    const version = data.version;
+    
+    if (version !== Info.version) {
+        const chalk = require('chalk');
+        const rendy = require('rendy');
+        
+        const latest = rendy('update available: {{ latest }}', {
+            latest: chalk.green.bold('v' + version),
+        });
+        
+        const current = chalk.dim(rendy('(current: v{{ current }})', {
+            current: Info.version
+        }));
+        
+        console.log('%s %s', latest, current);
+    }
 }
 
