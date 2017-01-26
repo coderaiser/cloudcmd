@@ -158,11 +158,12 @@ var Util, DOM, CloudFunc, join;
             return new F();
         }
         
-        /** Конструктор CloudClient, который
+        /**
+         * Конструктор CloudClient, который
          * выполняет весь функционал по
          * инициализации
          */
-        this.init = function(config) {
+        this.init = function(prefix, config) {
             var func = function() {
                 Util.exec.series([
                     initModules,
@@ -184,8 +185,6 @@ var Util, DOM, CloudFunc, join;
                     DOM.load.js(src, callback);
                 });
             };
-            
-            var prefix = config.prefix;
             
             CloudCmd.PREFIX = prefix;
             CloudCmd.PREFIX_URL = prefix + CloudFunc.apiURL;

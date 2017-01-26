@@ -6,8 +6,7 @@ var CloudCmd;
     CloudCmd = load;
     
     function load(config) {
-        var prefix = config.prefix || '';
-        
+        var prefix = getPrefix(config.prefix);
         var modules = '/modules/';
         var client  = 'client/';
         var files   = [
@@ -53,7 +52,7 @@ var CloudCmd;
         var urlFiles = getJoinURL(allFiles);
         
         createScript(prefix + urlFiles, function() {
-            CloudCmd.init(config);
+            CloudCmd.init(prefix, config);
         });
     }
     
@@ -68,6 +67,16 @@ var CloudCmd;
     
     function libDist(name) {
         return name + '/dist/' + name + '.min';
+    }
+    
+    function getPrefix(prefix) {
+        if (!prefix)
+            return '';
+       
+        if (!prefix.indexOf('/'))
+            return prefix;
+        
+        return '/' + prefix;
     }
     
     function createScript(url, callback) {
