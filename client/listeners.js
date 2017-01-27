@@ -59,7 +59,7 @@ var Util, DOM, CloudFunc, CloudCmd;
                 if (!/^(name|size|date)$/.test(name))
                     return;
                 
-                var panel = event.path
+                var panel = getPath(el)
                     .filter(isDataset)
                     .filter(isPanel)
                     .pop();
@@ -85,6 +85,17 @@ var Util, DOM, CloudFunc, CloudCmd;
                     noCurrent: position !== Info.panelPosition
                 });
             });
+        }
+        
+        function getPath(el, path) {
+            path = path || [];
+            
+            if (!el)
+                return path;
+            
+            var parent = el.parentElement;
+            
+            return getPath(parent, path.concat(el));
         }
         
         function config() {
