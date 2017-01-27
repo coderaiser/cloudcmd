@@ -316,16 +316,18 @@ var Util, DOM, CloudFunc, CloudCmd;
         }
         
         function getLIElement(element) {
-            if (element)
-                while (element.tagName !== 'LI')
-                    element = element.parentElement;
+            if (!element)
+                return element;
+            
+            while (element.tagName !== 'LI')
+                element = element.parentElement;
             
             return element;
         }
         
         function getULElement(element) {
             while (element.tagName !== 'UL')
-                element     = element.parentElement;
+                element = element.parentElement;
             
             return element;
         }
