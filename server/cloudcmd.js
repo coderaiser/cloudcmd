@@ -28,6 +28,7 @@ const spero = require('spero');
 const remedy = require('remedy');
 const ishtar = require('ishtar');
 const salam = require('salam/legacy');
+const omnes = require('omnes/legacy');
 const criton = require('criton');
 
 const root = () => config('root');
@@ -163,6 +164,12 @@ function listen(prefix, socket) {
         prefix: prefix + '/salam',
     });
     
+    omnes.listen(socket, {
+        root,
+        authCheck,
+        prefix: prefix + '/omnes',
+    });
+    
     config('console') && konsole.listen(socket, {
         authCheck,
         prefix: prefix + '/console',
@@ -233,6 +240,10 @@ function cloudcmd(prefix, plugins) {
         
         salam({
             prefix: prefix + '/salam',
+        }),
+        
+        omnes({
+            prefix: prefix + '/omnes',
         }),
         
         nomine({

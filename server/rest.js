@@ -11,6 +11,7 @@ const markdown = require(DIR + 'markdown');
 
 const jaguar = require('jaguar/legacy');
 const onezip = require('onezip/legacy');
+const inly = require('inly/legacy');
 const flop = require('flop');
 const pullout = require('pullout/legacy');
 const ponse = require('ponse');
@@ -253,11 +254,14 @@ function extract(from, to, fn) {
     operation('extract', from, to, fn);
 }
 
-function getPacker() {
-    if (config('packer') === 'zip')
-        return onezip;
+function getPacker(operation) {
+    if (operation === 'extract')
+        return inly;
     
-    return jaguar;
+    if (config('packer') === 'zip')
+        return onezip.pack;
+    
+    return jaguar.pack;
 }
 
 function operation(op, from, to, names, fn) {
@@ -268,13 +272,14 @@ function operation(op, from, to, names, fn) {
         ];
     }
     
-    const packer = getPacker()[op](from, to, names);
+    const packer = getPacker(op);
+    const pack = packer(from, to, names);
     
-    packer.on('error', error => {
+    pack.on('error', error => {
         fn(error);
     });
     
-    packer.on('progress', (count) => {
+    pack.on('progress', (count) => {
         process.stdout.write(rendy('\r{{ operation }} "{{ name }}": {{ count }}%', {
             operation   : op,
             name        : names[0],
@@ -282,7 +287,7 @@ function operation(op, from, to, names, fn) {
         }));
     });
     
-    packer.on('end', () => {
+    pack.on('end', () => {
         process.stdout.write('\n');
         
         const name = path.basename(from);

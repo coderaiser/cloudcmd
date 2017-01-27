@@ -7,6 +7,7 @@
 /* global remedy */
 /* global ishtar */
 /* global salam */
+/* global omnes */
 
 (function(CloudCmd, Util, DOM, rendy) {
     'use strict';
@@ -115,17 +116,11 @@
                             setListeners(packer, {noContinue: true}, callback);
                             packer.pack(data.from, data.to, data.names);
                         };
-                        
-                        extractFn = function(data, callback) {
-                            setListeners(packer, {noContinue: true}, callback);
-                            packer.extract(data.from, data.to);
-                        };
                     });
                 });
                 
                 packer.on('disconnect', function() {
                     packFn      = RESTful.pack;
-                    extractFn   = RESTful.extract;
                 });
             });
         }
@@ -137,15 +132,35 @@
             _setPacker(prefix, 'ishtar', ishtar, fn);
         }
         
+        function _initExtractor(prefix, fn) {
+            omnes(prefix + '/omnes', prefix, function(packer) {
+                fn();
+                packer.on('connect', function() {
+                    authCheck(packer, function() {
+                        extractFn = function(data, callback) {
+                            setListeners(packer, {noContinue: true}, callback);
+                            packer.extract(data.from, data.to);
+                        };
+                    });
+                });
+                
+                packer.on('disconnect', function() {
+                    extractFn = RESTful.extract;
+                });
+            });
+        }
+        
         function create(prefix) {
             var initSpero = currify(_initSpero);
             var initRemedy = currify(_initRemedy);
             var initPacker = currify(_initPacker);
+            var initExtractor = currify(_initExtractor);
             
             exec.parallel([
                 initSpero(prefix),
                 initRemedy(prefix),
-                initPacker(prefix)
+                initPacker(prefix),
+                initExtractor(prefix)
             ], exec.ret);
         }
         
@@ -536,7 +551,8 @@
                     '/spero/spero.js',
                     '/remedy/remedy.js',
                     '/ishtar/ishtar.js',
-                    '/salam/salam.js'
+                    '/salam/salam.js',
+                    '/omnes/omnes.js'
                 ].map(function(name) {
                     return prefix + name;
                 });
