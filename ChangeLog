@@ -1,3 +1,12 @@
+2017.01.27, v6.3.0
+
+fix:
+- (listeners) header: event.path -> getPath (#101)
+
+feature:
+- (cloudcmd) simplify archive extraction for: zip, tar, gz, tar.gz, tgz
+
+
 2017.01.26, v6.2.2
 
 fix:
