@@ -10,7 +10,7 @@ const DIR_FS = DIR_TMPL + 'fs/';
 
 const fs = require('fs');
 
-const flop = require('flop');
+const flop = require('flop/legacy');
 const ponse = require('ponse');
 const files = require('files-io');
 const rendy = require('rendy');
