@@ -16,7 +16,7 @@ const flop = require('flop/legacy');
 const pullout = require('pullout/legacy');
 const ponse = require('ponse');
 const rendy = require('rendy');
-const copymitter = require('copymitter');
+const copymitter = require('copymitter/legacy');
 const json = require('jonny');
 const check = require('checkup');
 

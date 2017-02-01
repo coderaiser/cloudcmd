@@ -100,7 +100,7 @@
     "chalk": "^1.1.0",
     "checkup": "^1.3.0",
     "console-io": "^3.0.0",
-    "copymitter": "^1.8.0",
+    "copymitter": "^2.0.0",
     "criton": "^1.0.0",
     "currify": "^2.0.3",
     "deepword": "^1.3.0",
