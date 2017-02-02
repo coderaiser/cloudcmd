@@ -11,5 +11,5 @@ rules:
     function-url-quotes: never
     no-eol-whitespace: null
     font-family-name-quotes: always-unless-keyword
-    rule-nested-empty-line-before: never-multi-line
+    rule-empty-line-before: null
 
