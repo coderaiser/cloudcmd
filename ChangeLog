@@ -1,3 +1,13 @@
+2017.02.02, v6.3.1
+
+fix:
+- (operation) remove: when can not remove show error -> when can not remove suggest to continue
+
+feature:
+- (package) copymitter v2.0.0
+- (package) flop v2.0.0
+
+
 2017.01.27, v6.3.0
 
 fix:
