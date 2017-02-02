@@ -94,7 +94,7 @@
                 remover.on('connect', function() {
                     authCheck(remover, function() {
                         deleteFn = function(from, files, callback) {
-                            setListeners(remover, {noContinue: true}, callback);
+                            setListeners(remover, callback);
                             from = from.replace(/\?.*/, '');
                             remover.remove(from, files);
                         };
@@ -171,6 +171,7 @@
             }
             
             var done;
+            var lastError;
             
             var listeners = {
                 progress: function(value) {
@@ -178,7 +179,7 @@
                     Images.setProgress(value);
                 },
                 
-                end: function(error) {
+                end: function() {
                     Images
                         .hide()
                         .clearProgress();
@@ -187,11 +188,13 @@
                         emitter.removeListener(name, listeners[name]);
                     });
                     
-                    if (error || done)
-                        callback(error);
+                    if (lastError || done)
+                        callback(lastError);
                 },
                 
                 error: function(error) {
+                    lastError = error;
+                    
                     if (options.noContinue) {
                         listeners.end(error);
                         Dialog.alert(TITLE, error);
