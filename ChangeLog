@@ -1,3 +1,10 @@
+2017.02.06, v6.4.0
+
+feature:
+- (sort) add hot keys
+- (package) stylelint-config-standard v16.0.0
+
+
 2017.02.02, v6.3.1
 
 fix:
