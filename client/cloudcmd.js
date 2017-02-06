@@ -24,7 +24,8 @@ var CloudCmd;
             client  + 'buffer',
             client  + 'listeners',
             client  + 'key',
-            client  + 'directory'
+            client  + 'directory',
+            client  + 'sort'
         ];
         
         var moduleFiles = [

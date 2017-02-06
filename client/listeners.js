@@ -32,12 +32,6 @@ var Util, DOM, CloudFunc, CloudCmd;
         function header() {
             var fm = DOM.getFM();
             
-            var position = Info.panelPosition;
-            var sortPrevious = CloudCmd.sort[position];
-            
-            var sort = CloudCmd.sort;
-            var order = CloudCmd.order;
-            
             var isDataset = function(el) {
                 return el.dataset;
             };
@@ -64,26 +58,7 @@ var Util, DOM, CloudFunc, CloudCmd;
                     .filter(isPanel)
                     .pop();
                 
-                var position = panel
-                    .dataset
-                    .name
-                    .replace('js-', '');
-                
-                if (name !== sortPrevious) {
-                    order[position] = 'asc';
-                } else {
-                    if (order[position] === 'asc')
-                        order[position] = 'desc';
-                    else
-                        order[position] = 'asc';
-                }
-                
-                sortPrevious =
-                sort[position] = name;
-                
-                CloudCmd.refresh(panel, {
-                    noCurrent: position !== Info.panelPosition
-                });
+                CloudCmd.sortPanel(name, panel);
             });
         }
         
