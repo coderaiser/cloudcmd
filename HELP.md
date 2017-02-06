@@ -141,6 +141,9 @@ Hot keys
 | `Ctrl + a`            | select all files in a panel
 | `Ctrl + m`            | rename selected files
 | `Ctrl + u`            | swap panels
+| `Ctrl + F3`           | sort by name
+| `Ctrl + F5`           | sort by date
+| `Ctrl + F6`           | sort by size
 | `Up`, `Down`, `Enter` | file system navigation
 | `Alt + Left/Right`    | show content of directory under cursor in target panel
 | `Alt + g`             | go to directory

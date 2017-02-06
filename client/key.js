@@ -288,6 +288,8 @@ var CloudCmd, Util, DOM;
             case Key.F3:
                 if (shift)
                     CloudCmd.Markdown.show(path);
+                else if (ctrlMeta)
+                    CloudCmd.sortPanel('name');
                 else
                     CloudCmd.View.show();
                 
@@ -300,12 +302,20 @@ var CloudCmd, Util, DOM;
                 break;
             
             case Key.F5:
-                Operation.show('copy');
+                if (ctrlMeta)
+                    CloudCmd.sortPanel('date');
+                else
+                    Operation.show('copy');
+                
                 event.preventDefault();
                 break;
             
             case Key.F6:
-                Operation.show('move');
+                if (ctrlMeta)
+                    CloudCmd.sortPanel('size');
+                else
+                    Operation.show('move');
+                
                 event.preventDefault();
                 break;
             
