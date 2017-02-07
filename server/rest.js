@@ -292,22 +292,15 @@ function operation(op, from, to, names, fn) {
 }
 
 function copy(from, to, names, fn) {
-    let error;
-    const cp = copymitter(from, to, names);
-     
-    cp.on('error', e => {
-        error = e;
-        cp.abort();
-    });
-    
-    cp.on('progress', (count) => {
-        process.stdout.write(`\r copy ${from} ${to} ${count}%`);
-    });
-    
-    cp.on('end', () => {
-        process.stdout.write('\n');
-        fn(error);
-    });
+    copymitter(from, to, names)
+        .on('error', fn)
+        .on('progress', (count) => {
+            process.stdout.write(`\r copy ${from} ${to} ${count}%`);
+        })
+        .on('end', () => {
+            process.stdout.write('\n');
+            fn();
+        });
 }
 
 function copyFiles(files, processFunc, callback) {
