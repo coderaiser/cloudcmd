@@ -15,7 +15,6 @@ const inly = require('inly/legacy');
 const flop = require('flop/legacy');
 const pullout = require('pullout/legacy');
 const ponse = require('ponse');
-const rendy = require('rendy');
 const copymitter = require('copymitter/legacy');
 const json = require('jonny');
 const check = require('checkup');
@@ -275,16 +274,11 @@ function operation(op, from, to, names, fn) {
     const packer = getPacker(op);
     const pack = packer(from, to, names);
     
-    pack.on('error', error => {
-        fn(error);
-    });
+    pack.on('error', fn);
     
+    const name = names[0];
     pack.on('progress', (count) => {
-        process.stdout.write(rendy('\r{{ operation }} "{{ name }}": {{ count }}%', {
-            operation   : op,
-            name        : names[0],
-            count       : count
-        }));
+        process.stdout.write(`\r${ op } "${ name }": ${ count }%`);
     });
     
     pack.on('end', () => {
