@@ -6,12 +6,11 @@ const fs = require('fs');
 const path = require('path');
 
 const dir = path.join(__dirname, '../server');
-const _dir = path.join(__dirname, '../legacy/server');
+const dir_ = path.join(__dirname, '../legacy/server');
 
 const setDir = (name) => {
-    return path.join(_dir, name);
+    return path.join(dir_, name);
 };
-
 
 fs.readdirSync(dir)
   .map(fillFile)
