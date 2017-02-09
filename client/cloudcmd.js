@@ -1,104 +1,80 @@
-var CloudCmd;
+'use strict';
 
-(function() {
-    'use strict';
+window.CloudCmd = (config) => {
+    window.Util = require('../common/util');
+    window.CloudFunc = require('../common/cloudfunc');
+    window.DOM = require('./dom');
     
-    CloudCmd = load;
+    require('./events');
+    require('./storage');
+    require('./files');
+    require('./rest');
+    require('./load');
+    require('./notify');
+    require('./dialog');
     
-    function load(config) {
-        var prefix = getPrefix(config.prefix);
-        var modules = '/modules/';
-        var client  = 'client/';
-        var files   = [
-            'common/util',
-            'common/cloudfunc',
-            client  + 'dom',
-            client  + 'events',
-            client  + 'rest',
-            client  + 'load',
-            client  + 'notify',
-            client  + 'storage',
-            client  + 'files',
-            client  + 'dialog',
-            'client/client',
-            client  + 'buffer',
-            client  + 'listeners',
-            client  + 'key',
-            client  + 'directory',
-            client  + 'sort'
-        ];
-        
-        var moduleFiles = [
-            window.Promise ? '' : 'promise-polyfill/promise.min',
-            libDir('format', 'format-io'),
-            libDir('rendy'),
-            libDir('exec', 'execon'),
-            libDir('jonny'),
-            libDist('emitify'),
-            libDist('currify'),
-            libDist('itype'),
-        ].filter(function(name) {
-            return name;
-        }).map(function(name) {
-            return modules + name;
-        });
-        
-        var allFiles = moduleFiles
-            .concat(files)
-            .concat('/join/join')
-            .map(function(name) {
-                return name + '.js';
-            });
-        
-        var urlFiles = getJoinURL(allFiles);
-        
-        createScript(prefix + urlFiles, function() {
-            CloudCmd.init(prefix, config);
-        });
-    }
+    window.CloudCmd = require('./client');
     
-    function libDir(name, dir) {
-        var lib = '/lib/';
-        
-        if (!dir)
-            dir = name;
-        
-        return dir + lib + name;
-    }
+    require('./buffer');
+    require('./listeners');
+    require('./key');
+    require('./directory');
+    require('./sort');
     
-    function libDist(name) {
-        return name + '/dist/' + name + '.min';
-    }
+    window.exec = require('execon');
+    window.rendy = require('rendy');
     
-    function getPrefix(prefix) {
-        if (!prefix)
-            return '';
-       
-        if (!prefix.indexOf('/'))
-            return prefix;
-        
-        return '/' + prefix;
-    }
+    const modules = '/modules/';
     
-    function createScript(url, callback) {
-        var script = document.createElement('script');
-        
-        script.src = url;
-        script.async = true;
-        
-        script.addEventListener('load', function load(event) {
-            callback(event);
-            script.removeEventListener('load', load);
-        });
-        
-        document.body.appendChild(script);
-    }
-        
-    function getJoinURL(names) {
-        var prefix = '/join:';
-        var url = prefix + names.join(':');
-        
-        return url;
-    }
-})();
+    var moduleFiles = [
+        window.Promise ? '' : 'promise-polyfill/promise.min',
+    ].filter((name) => {
+        return name;
+    }).map((name) => {
+        return modules + name;
+    });
+    
+    const allFiles = moduleFiles
+        .concat('/join/join')
+        .map((name) => `${name}.js`);
+    
+    const urlFiles = getJoinURL(allFiles);
+    
+    const prefix = getPrefix(config.prefix);
+    
+    createScript(prefix + urlFiles, () => {
+        window.CloudCmd.init(prefix, config);
+    });
+};
+
+function getPrefix(prefix) {
+    if (!prefix)
+        return '';
+   
+    if (!prefix.indexOf('/'))
+        return prefix;
+    
+    return '/' + prefix;
+}
+
+function createScript(url, callback) {
+    var script = document.createElement('script');
+    
+    script.src = url;
+    script.async = true;
+    
+    script.addEventListener('load', function load(event) {
+        callback(event);
+        script.removeEventListener('load', load);
+    });
+    
+    document.body.appendChild(script);
+}
+
+function getJoinURL(names) {
+    const prefix = '/join:';
+    const url = prefix + names.join(':');
+    
+    return url;
+}
 

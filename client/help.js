@@ -1,33 +1,31 @@
-var CloudCmd, Util, DOM;
+'use strict';
 
-(function(CloudCmd, Util, DOM) {
-    'use strict';
+/* global DOM, CloudCmd */
+
+window.CloudCmd.Help = HelpProto;
+
+function HelpProto() {
+    const Images = DOM.Images;
+    const Help = this;
     
-    CloudCmd.Help = HelpProto;
-        
-    function HelpProto() {
-        var Images      = DOM.Images,
-            Help        = this;
-            
-        function init() {
-            Images.show.load('top');
-            Help.show();
-        }
-        
-        this.show                       = function() {
-            CloudCmd
-                .Markdown
-                .show('/HELP.md', {
-                    positionLoad    : 'top',
-                    relative        : true
-                });
-        };
-        
-        this.hide                       = function() {
-            CloudCmd.View.hide();
-        };
-        
-        init();
+    function init() {
+        Images.show.load('top');
+        Help.show();
     }
     
-})(CloudCmd, Util, DOM);
+    this.show = () => {
+        CloudCmd
+            .Markdown
+            .show('/HELP.md', {
+                positionLoad    : 'top',
+                relative        : true
+            });
+    };
+    
+    this.hide = () => {
+        CloudCmd.View.hide();
+    };
+    
+    init();
+}
+

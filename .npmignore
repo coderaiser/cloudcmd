@@ -13,8 +13,10 @@ circle.yml
 bin/release.js
 bin/legacy.js
 
-.es5
+client
 
 legacy/bin/release.js
 legacy/bin/legacy.js
+
+webpack.config.js
 

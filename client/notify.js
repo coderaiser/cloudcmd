@@ -1,63 +1,56 @@
+/* global Util */
+/* global DOM */
 /* global CloudCmd */
-var Util, DOM;
 
-(function(Util, DOM) {
-    'use strict';
+'use strict';
+
+const Notify = Util.extendProto(NotifyProto);
+const DOMProto = Object.getPrototypeOf(DOM);
+
+Util.extend(DOMProto, {
+    Notify
+});
+
+function NotifyProto() {
+    var Events          = DOM.Events,
+        Show,
+        Notify          = this,
+        Notification    = window.Notification;
     
-    var config = CloudCmd.config;
-    var Notify = Util.extendProto(NotifyProto);
-    var DOMProto = Object.getPrototypeOf(DOM);
-    
-    Util.extend(DOMProto, {
-        Notify: Notify
+    Events.add({
+        'blur': () => {
+            Show = true;
+        },
+        'focus': () => {
+            Show = false;
+        }
     });
     
-    function NotifyProto() {
-        var Events          = DOM.Events,
-            Show,
-            Notify          = this,
-            Notification    = window.Notification;
+    this.send = (msg) => {
+        const notifications = CloudCmd.config('notifications');
+        const focus = window.focus.bind(window);
+        const granted = Notify.check();
         
-        Events.add({
-            'blur': function() {
-                Show = true;
-            },
-            'focus': function() {
-                Show = false;
-            }
-        });
+        if (notifications && granted && Show) {
+            const notify = new Notification(msg, {
+                icon: '/img/favicon/favicon-notify.png'
+            });
+             
+            Events.addClick(notify, focus);
+        }
+    };
+    
+    this.check = () => {
+        const Not = Notification;
+        const perm = Not && Not.permission;
         
-        this.send       = function(msg) {
-            var notify,
-                notifications   = config('notifications'),
-                focus           = window.focus.bind(window),
-                granted         = Notify.check();
-            
-            if (notifications && granted && Show) {
-                notify = new Notification(msg, {
-                    icon: '/img/favicon/favicon-notify.png'
-                });
-                 
-                Events.addClick(notify, focus);
-            }
-        };
-        
-        this.check = function () {
-            var ret,
-                Not     = Notification,
-                perm    = Not && Not.permission;
-            
-            if (perm === 'granted')
-                ret = true;
-            
-            return ret;
-        };
-        
-        this.request = function () {
-            var Not = Notification;
-            
-            if (Not)
-                Not.requestPermission();
-        };
-    }
-})(Util, DOM);
+        if (perm === 'granted')
+            return true;
+    };
+    
+    this.request = () => {
+        if (Notification)
+            Notification.requestPermission();
+    };
+}
+

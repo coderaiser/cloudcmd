@@ -1,103 +1,103 @@
-/* global Util */
-/* global DOM */
-/* global itype */
+'use strict';
 
-(function(Util, DOM, localStorage, exec, json, itype) {
-    'use strict';
+const itype = require('itype/legacy');
+const Util = require('../common/util');
+const DOM = require('./dom');
+const jonny = require('jonny');
+const exec = require('execon');
+
+const Storage = Util.extendProto(StorageProto);
+const DOMProto = Object.getPrototypeOf(DOM);
+
+Util.extend(DOMProto, {
+    Storage
+});
+
+function StorageProto() {
+    /* приватный переключатель возможности работы с кэшем */
+    var Allowed;
     
-    var Storage     = Util.extendProto(StorageProto),
-        DOMProto    = Object.getPrototypeOf(DOM);
+    /* функция проверяет возможно ли работать с кэшем каким-либо образом */
+    this.isAllowed = () => {
+        return Allowed && !!localStorage;
+    };
     
-    Util.extend(DOMProto, {
-        Storage: Storage
-    });
-   
-    function StorageProto() {
-        /* приватный переключатель возможности работы с кэшем */
-        var Allowed;
+    /**
+     * allow Storage usage
+     */
+    this.setAllowed = (isAllowed) => {
+        Allowed = isAllowed;
+    };
+    
+    /** remove element */
+    this.remove = (item, callback) => {
+        var ret = Allowed;
         
-        /* функция проверяет возможно ли работать с кэшем каким-либо образом */
-        this.isAllowed   = function() {
-            var ret = Allowed && !!localStorage;
-            return ret;
-        };
+        if (ret)
+            localStorage.removeItem(item);
         
-        /**
-         * allow Storage usage
-         */
-        this.setAllowed = function(isAllowed) {
-            Allowed = isAllowed;
-        };
+        exec(callback, null, ret);
         
-        /** remove element */
-        this.remove      = function(item, callback) {
-            var ret = Allowed;
+        return this;
+    };
+    
+    this.removeMatch = (string, callback) => {
+        var reg = RegExp('^' + string + '.*$');
+        
+        Object.keys(localStorage).forEach(function(name) {
+            var is = reg.test(name);
             
-            if (ret)
-                localStorage.removeItem(item);
-            
-            exec(callback, null, ret);
-                
-            return this;
-        };
+            if (is)
+                localStorage.removeItem(name);
+        });
         
-        this.removeMatch = function(string, callback) {
-            var reg = RegExp('^' + string + '.*$');
-            
-            Object.keys(localStorage).forEach(function(name) {
-                var is = reg.test(name);
-                
-                if (is)
-                    localStorage.removeItem(name);
+        exec(callback);
+        
+        return this;
+    };
+    
+    /** если доступен localStorage и
+     * в нём есть нужная нам директория -
+     * записываем данные в него
+     */
+    this.set = (name, data, callback) => {
+        var str, error;
+        
+        if (itype.object(data))
+            str = jonny.stringify(data);
+        
+        if (Allowed && name)
+            error = exec.try(() => {
+                localStorage.setItem(name, str || data);
             });
-            
-            exec(callback);
-            
-            return this;
-        };
         
-        /** если доступен localStorage и
-         * в нём есть нужная нам директория -
-         * записываем данные в него
-         */
-        this.set         = function(name, data, callback) {
-            var str, error;
-            
-            if (itype.object(data))
-                str = json.stringify(data);
-            
-            if (Allowed && name)
-                error = exec.try(function() {
-                    localStorage.setItem(name, str || data);
-                });
-            
-            exec(callback, error);
-            
-            return this;
-        },
+        exec(callback, error);
         
-        /** Если доступен Storage принимаем из него данные*/
-        this.get        = function(name, callback) {
-            var ret;
-            
-            if (Allowed)
-                ret = localStorage.getItem(name);
-            
-            exec(callback, null, ret);
-                
-            return this;
-        },
+        return this;
+    },
+    
+    /** Если доступен Storage принимаем из него данные*/
+    this.get        = function(name, callback) {
+        var ret;
         
-        /** функция чистит весь кэш для всех каталогов*/
-        this.clear       = function(callback) {
-            var ret = Allowed;
+        if (Allowed)
+            ret = localStorage.getItem(name);
+        
+        exec(callback, null, ret);
             
-            if (ret)
-                localStorage.clear();
-            
-            exec(callback, null, ret);
-            
-            return this;
-        };
-    }
-})(Util, DOM, localStorage, Util.exec, Util.json, itype);
+        return this;
+    },
+    
+    /** функция чистит весь кэш для всех каталогов*/
+    this.clear       = function(callback) {
+        var ret = Allowed;
+        
+        if (ret)
+            localStorage.clear();
+        
+        exec(callback, null, ret);
+        
+        return this;
+    };
+}
+

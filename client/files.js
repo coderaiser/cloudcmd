@@ -1,171 +1,171 @@
 /* global Promise */
-/* global itype */
-/* global Util, DOM, CloudCmd */
+/* global Util, CloudCmd */
 
-(function(Util, DOM) {
-    'use strict';
+'use strict';
+
+const DOM = require('./dom');
+
+var DOMProto = Object.getPrototypeOf(DOM);
+DOMProto.Files = new FilesProto(Util, DOM);
+
+const itype = require('itype/legacy');
+
+function FilesProto(Util, DOM) {
+    var Promises        = {},
+        Storage         = DOM.Storage,
+        Files           = this,
+        FILES_JSON      = 'config|modules',
+        FILES_HTML      = 'file|path|link|pathLink|media',
+        FILES_HTML_ROOT = 'view/media-tmpl|config-tmpl|upload',
+        funcs           = [],
+        DIR_HTML        = '/tmpl/',
+        DIR_HTML_FS     = DIR_HTML + 'fs/',
+        DIR_JSON        = '/json/',
+        timeout         = getTimeoutOnce(2000);
     
-    var DOMProto    = Object.getPrototypeOf(DOM);
-    
-    DOMProto.Files = new FilesProto(Util, DOM);
-    
-    function FilesProto(Util, DOM) {
-        var Promises        = {},
-            Storage         = DOM.Storage,
-            Files           = this,
-            FILES_JSON      = 'config|modules',
-            FILES_HTML      = 'file|path|link|pathLink|media',
-            FILES_HTML_ROOT = 'view/media-tmpl|config-tmpl|upload',
-            funcs           = [],
-            DIR_HTML        = '/tmpl/',
-            DIR_HTML_FS     = DIR_HTML + 'fs/',
-            DIR_JSON        = '/json/',
-            timeout         = getTimeoutOnce(2000);
+    this.get = function(name, callback) {
+        var type = itype(name);
         
-        this.get = function(name, callback) {
-            var type = itype(name);
-            
-            check(name, callback);
-            
-            switch(type) {
-            case 'string':
-                getModule(name, callback);
-                break;
-            
-            case 'array':
-                funcs = name.map(function(name) {
-                    return function(callback) {
-                        Files.get(name, callback);
-                    };
-                });
-                
-                Util.exec.parallel(funcs, callback);
-                break;
-            }
-            
-            return Files;
-        };
+        check(name, callback);
         
-        function check(name, callback) {
-            if (!name)
-                throw Error('name could not be empty!');
-            
-            if (typeof callback !== 'function')
-                throw Error('callback should be a function');
-        }
+        switch(type) {
+        case 'string':
+            getModule(name, callback);
+            break;
         
-        function getModule(name, callback) {
-            var path,
-                
-                regExpHTML  = new RegExp(FILES_HTML + '|' + FILES_HTML_ROOT),
-                regExpJSON  = new RegExp(FILES_JSON),
-                
-                isHTML      = regExpHTML.test(name),
-                isJSON      = regExpJSON.test(name);
-            
-            if (!isHTML && !isJSON) {
-                showError(name);
-            } else if (name === 'config') {
-                getConfig(callback);
-            } else {
-                path = getPath(name, isHTML, isJSON);
-                
-                getSystemFile(path, callback);
-            }
-            
-        }
-        
-        function getPath(name, isHTML, isJSON) {
-            var path,
-                regExp  = new RegExp(FILES_HTML_ROOT),
-                isRoot  = regExp.test(name);
-            
-            if (isHTML) {
-                if (isRoot)
-                    path = DIR_HTML + name.replace('-tmpl', '');
-                else
-                    path = DIR_HTML_FS  + name;
-                
-                path += '.hbs';
-            } else if (isJSON) {
-                path = DIR_JSON  + name + '.json';
-            }
-            
-            return path;
-        }
-        
-        function showError(name) {
-            var str     = 'Wrong file name: ' + name,
-                error   = new Error(str);
-            
-            throw(error);
-        }
-        
-        function getSystemFile(url, callback) {
-            var prefix = CloudCmd.PREFIX;
-            
-            if (!Promises[url])
-                Promises[url] = new Promise(function(resolve, reject) {
-                    DOM.load.ajax({
-                        url     : prefix + url,
-                        success : resolve,
-                        error   : reject
-                    });
-                });
-            
-            Promises[url].then(function(data) {
-                callback(null, data);
-            }, function(error) {
-                Promises[url] = null;
-                callback(error);
+        case 'array':
+            funcs = name.map(function(name) {
+                return function(callback) {
+                    Files.get(name, callback);
+                };
             });
+            
+            Util.exec.parallel(funcs, callback);
+            break;
         }
         
-        function getConfig(callback) {
-            var is,
-                RESTful = DOM.RESTful;
+        return Files;
+    };
+    
+    function check(name, callback) {
+        if (!name)
+            throw Error('name could not be empty!');
+        
+        if (typeof callback !== 'function')
+            throw Error('callback should be a function');
+    }
+    
+    function getModule(name, callback) {
+        var path,
             
-            if (!Promises.config)
-                Promises.config = new Promise(function(resolve, reject) {
-                    is = true;
-                    RESTful.Config.read(function(error, data) {
-                        if (error)
-                            reject(error);
-                        else
-                            resolve(data);
-                    });
-                });
+            regExpHTML  = new RegExp(FILES_HTML + '|' + FILES_HTML_ROOT),
+            regExpJSON  = new RegExp(FILES_JSON),
             
-            Promises.config.then(function(data) {
-                is = false;
-                Storage.setAllowed(data.localStorage);
-                
-                callback(null, data);
-                
-                timeout(function() {
-                    if (!is)
-                        Promises.config = null;
+            isHTML      = regExpHTML.test(name),
+            isJSON      = regExpJSON.test(name);
+        
+        if (!isHTML && !isJSON) {
+            showError(name);
+        } else if (name === 'config') {
+            getConfig(callback);
+        } else {
+            path = getPath(name, isHTML, isJSON);
+            
+            getSystemFile(path, callback);
+        }
+        
+    }
+    
+    function getPath(name, isHTML, isJSON) {
+        var path,
+            regExp  = new RegExp(FILES_HTML_ROOT),
+            isRoot  = regExp.test(name);
+        
+        if (isHTML) {
+            if (isRoot)
+                path = DIR_HTML + name.replace('-tmpl', '');
+            else
+                path = DIR_HTML_FS  + name;
+            
+            path += '.hbs';
+        } else if (isJSON) {
+            path = DIR_JSON  + name + '.json';
+        }
+        
+        return path;
+    }
+    
+    function showError(name) {
+        var str     = 'Wrong file name: ' + name,
+            error   = new Error(str);
+        
+        throw(error);
+    }
+    
+    function getSystemFile(url, callback) {
+        var prefix = CloudCmd.PREFIX;
+        
+        if (!Promises[url])
+            Promises[url] = new Promise(function(resolve, reject) {
+                DOM.load.ajax({
+                    url     : prefix + url,
+                    success : resolve,
+                    error   : reject
                 });
-            }, function() {
+            });
+        
+        Promises[url].then(function(data) {
+            callback(null, data);
+        }, function(error) {
+            Promises[url] = null;
+            callback(error);
+        });
+    }
+    
+    function getConfig(callback) {
+        var is,
+            RESTful = DOM.RESTful;
+        
+        if (!Promises.config)
+            Promises.config = new Promise(function(resolve, reject) {
+                is = true;
+                RESTful.Config.read(function(error, data) {
+                    if (error)
+                        reject(error);
+                    else
+                        resolve(data);
+                });
+            });
+        
+        Promises.config.then(function(data) {
+            is = false;
+            Storage.setAllowed(data.localStorage);
+            
+            callback(null, data);
+            
+            timeout(function() {
                 if (!is)
                     Promises.config = null;
             });
-        }
-        
-        function getTimeoutOnce(time) {
-            var is,
-                fn = function(callback) {
-                    if (!is) {
-                        is = true;
-                        
-                        setTimeout(function() {
-                            is = false;
-                            callback();
-                        }, time);
-                    }
-                };
-            
-            return fn;
-        }
+        }, function() {
+            if (!is)
+                Promises.config = null;
+        });
     }
-})(Util, DOM);
+    
+    function getTimeoutOnce(time) {
+        var is,
+            fn = function(callback) {
+                if (!is) {
+                    is = true;
+                    
+                    setTimeout(function() {
+                        is = false;
+                        callback();
+                    }, time);
+                }
+            };
+        
+        return fn;
+    }
+}

@@ -2,124 +2,109 @@
 /* global CloudFunc */
 /* global DOM */
 
-(function() {
-    'use strict';
+'use strict';
+
+module.exports = uploadDirectory;
+
+function uploadDirectory(items) {
+    const Images = DOM.Images;
+    const Info = DOM.CurrentInfo;
+    const load = DOM.load;
+    const Dialog = DOM.Dialog;
     
-    if (typeof module !== 'undefined' && module.exports)
-        module.exports      = uploadDirectory;
-    else
-        DOM.uploadDirectory = uploadDirectory;
+    let array   = [
+        'findit',
+        'philip'
+    ];
     
-    function uploadDirectory(items) {
-        var entries,
-            Images  = DOM.Images,
-            Info    = DOM.CurrentInfo,
-            load    = DOM.load,
-            Dialog  = DOM.Dialog,
-            url     = '',
-            array   = [
-                'findit',
-                'philip'
-            ];
-        
-        if (items.length)
-            Images.show('top');
-        
-        entries     = [].map.call(items, function(item) {
-            return item.webkitGetAsEntry();
-        });
-        
-        array = array.map(function(name) {
-            var result = [
-                '/modules/' + name,
-                '/lib/' + name,
-                '.js'
-            ].join('');
-            
-            return result;
-        });
-        
-        if (!window.Emitify)
-            array.unshift('/modules/emitify/dist/emitify.js');
-        
-        if (!window.exec)
-            array.unshift('/modules/execon/lib/exec.js');
-        
-        url = CloudCmd.join(array);
-        
-        load.js(url, function() {
-            var path        = Info.dirPath
-                .replace(/\/$/, ''),
-                
-                uploader;
-            
-            uploader = window.philip(entries, function(type, name, data, i, n, callback) {
-                var upload,
-                    prefixURL   = CloudCmd.PREFIX_URL,
-                    FS          = CloudFunc.FS,
-                    full        = prefixURL + FS + path + name;
-                
-                switch(type) {
-                case 'file':
-                    upload = uploadFile(full, data);
-                    break;
-                
-                case 'directory':
-                    upload = uploadDir(full);
-                    break;
-                }
-                
-                upload.on('end', callback);
-                
-                upload.on('progress', function(count) {
-                    var current = percent(i, n),
-                        next    = percent(i + 1, n),
-                        max     = next - current,
-                        value   = current + percent(count, 100, max);
-                    
-                    setProgress(value);
-                });
-            });
-            
-            uploader.on('error', function(error) {
-                Dialog.alert(error);
-                uploader.abort();
-            });
-            
-            uploader.on('progress', function(count) {
-                setProgress(count);
-            });
-            
-            uploader.on('end', function() {
-                CloudCmd.refresh();
-            });
-        });
-    }
-    
-    function percent(i, n, per) {
-        var value;
-        
-        if (typeof per === 'undefined')
-            per = 100;
-        
-        value = Math.round(i * per / n);
-        
-        return value;
-    }
-    
-    function setProgress(count) {
-        var Images  = DOM.Images;
-        
-        Images.setProgress(count);
+    if (items.length)
         Images.show('top');
-    }
     
-    function uploadFile(url, data) {
-        return DOM.load.put(url, data);
-    }
+    const entries = [].map.call(items, (item) => {
+        return item.webkitGetAsEntry();
+    });
     
-    function uploadDir(url) {
-        return DOM.load.put(url + '?dir');
-    }
+    array = array.map(function(name) {
+        const result = [
+            '/modules/' + name,
+            '/lib/' + name,
+            '.js'
+        ].join('');
+        
+        return result;
+    });
     
-})();
+    if (!window.Emitify)
+        window.Emitify = require('emitify');
+    
+    if (!window.exec)
+        window.exec = require('execon');
+    
+    const url = CloudCmd.join(array);
+    
+    load.js(url, () => {
+        const path = Info.dirPath
+            .replace(/\/$/, '');
+        
+        const uploader = window.philip(entries, (type, name, data, i, n, callback) => {
+            const prefixURL = CloudCmd.PREFIX_URL;
+            const FS = CloudFunc.FS;
+            const full = prefixURL + FS + path + name;
+            
+            let upload;
+            switch(type) {
+            case 'file':
+                upload = uploadFile(full, data);
+                break;
+            
+            case 'directory':
+                upload = uploadDir(full);
+                break;
+            }
+            
+            upload.on('end', callback);
+            
+            upload.on('progress', (count) => {
+                const current = percent(i, n);
+                const next = percent(i + 1, n);
+                const max = next - current;
+                const value = current + percent(count, 100, max);
+                
+                setProgress(value);
+            });
+        });
+        
+        uploader.on('error', (error) => {
+            Dialog.alert(error);
+            uploader.abort();
+        });
+        
+        uploader.on('progress', setProgress);
+        
+        uploader.on('end', () => {
+            CloudCmd.refresh();
+        });
+    });
+}
+
+function percent(i, n, per) {
+    if (typeof per === 'undefined')
+        per = 100;
+    
+    return Math.round(i * per / n);
+}
+
+function setProgress(count) {
+    DOM.Images
+        .setProgress(count)
+        .show('top');
+}
+
+function uploadFile(url, data) {
+    return DOM.load.put(url, data);
+}
+
+function uploadDir(url) {
+    return DOM.load.put(url + '?dir');
+}
+

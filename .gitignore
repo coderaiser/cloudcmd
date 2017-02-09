@@ -12,12 +12,13 @@ modules/fancybox/lib/
 modules/fancybox/demo
 modules/fancybox/sprite.psd
 
-modules/currify/dist/currify.js
-
 legacy
 server_
 
 .nyc_output
 
 *.swp
+
+dist
+dist-debug
 
