@@ -27,7 +27,6 @@ var Util, DOM, CloudFunc, join;
         this.log                    = log;
         this.PREFIX                 = '';
         this.PREFIX_URL             = '';
-        this.LIBDIR                 = '/lib/';
         this.LIBDIRCLIENT           = '/client/';
         this.MIN_ONE_PANEL_WIDTH    = 1155;
         this.HOST                   = location.origin ||
