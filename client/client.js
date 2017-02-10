@@ -27,7 +27,7 @@ var Util, DOM, CloudFunc, join;
         this.log                    = log;
         this.PREFIX                 = '';
         this.PREFIX_URL             = '';
-        this.LIBDIRCLIENT           = '/client/';
+        this.DIRCLIENT = '/client/';
         this.MIN_ONE_PANEL_WIDTH    = 1155;
         this.HOST                   = location.origin ||
                                       location.protocol + '//' + location.host;
@@ -123,7 +123,7 @@ var Util, DOM, CloudFunc, join;
                 if (!CloudCmd[name]) {
                     CloudCmd[name] = function() {
                         var prefix      = CloudCmd.PREFIX,
-                            pathFull    = prefix + CloudCmd.LIBDIRCLIENT + path,
+                            pathFull    = prefix + CloudCmd.DIRCLIENT + path,
                             args        = arguments;
                         
                         Util.exec(doBefore);
@@ -176,7 +176,7 @@ var Util, DOM, CloudFunc, join;
             
             var funcBefore  = function(callback) {
                 var src = prefix + '/join:' + [
-                    CloudCmd.LIBDIRCLIENT + 'polyfill.js',
+                    CloudCmd.DIRCLIENT + 'polyfill.js',
                     '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
                 ].join(':');
                 

@@ -116,7 +116,7 @@ var CloudCmd, Util, DOM, io;
                     exec.with(Files.get, 'config-tmpl'),
                     exec.with(DOM.load.parallel, [
                         prefix + '/css/config.css',
-                        prefix + CloudCmd.LIBDIRCLIENT + 'input.js'
+                        prefix + CloudCmd.DIRCLIENT + 'input.js'
                     ])
                 ];
             
