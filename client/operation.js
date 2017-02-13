@@ -13,7 +13,6 @@ CloudCmd.Operation = OperationProto;
 
 const currify = require('currify/legacy');
 const exec = require('execon');
-const emitify = require('emitify');
 
 const RESTful = require('./rest');
 
