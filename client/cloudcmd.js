@@ -25,7 +25,6 @@ window.CloudCmd = (config) => {
         .map((name) => `${name}.js`);
     
     const urlFiles = getJoinURL(allFiles);
-    
     const prefix = getPrefix(config.prefix);
     
     createScript(prefix + urlFiles, () => {
@@ -44,13 +43,13 @@ function getPrefix(prefix) {
 }
 
 function createScript(url, callback) {
-    var script = document.createElement('script');
+    const script = document.createElement('script');
     
     script.src = url;
     script.async = true;
     
-    script.addEventListener('load', function load(event) {
-        callback(event);
+    script.addEventListener('load', function load() {
+        callback();
         script.removeEventListener('load', load);
     });
     
