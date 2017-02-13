@@ -39,6 +39,10 @@ module.exports = {
         new UglifyJsPlugin({
             sourceMap: true
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'cloudcmd',
+            filename: 'cloudcmd.js',
+        }),
     ],
     module: {
         loaders: [{
