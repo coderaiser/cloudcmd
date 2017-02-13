@@ -10,5 +10,12 @@
     "file manager",
     "folder",
     "orthodox"
-  ]
+  ],
+  "env": {
+      "NPM_CONFIG_PRODUCTION": {
+          "description": "Keep false to install devDependencies and build frontend",
+          "value": "false",
+          "required": false
+      }
+  }
 }
