@@ -1,6 +1,5 @@
 .*
 manifest.yml
-cercle.yml
 Dockerfile*
 docker-compose.yml
 shell
