@@ -106,17 +106,16 @@ function ConsoleProto() {
     };
     
     function load(callback) {
-        var prefix  = getPrefix(),
-            url     = prefix + '/console.js';
+        const prefix = getPrefix();
+        const url = prefix + '/console.js';
         
-        DOM.load.js(url, function(error) {
-            if (error) {
-                Dialog.alert(TITLE, error.message);
-            } else {
-                Loaded = true;
-                Util.timeEnd(Name + ' load');
-                exec(callback);
-            }
+        DOM.load.js(url, (error) => {
+            if (error)
+                return Dialog.alert(TITLE, error.message);
+            
+            Loaded = true;
+            Util.timeEnd(Name + ' load');
+            exec(callback);
         });
         
         Util.time(Name + ' load');
