@@ -1,52 +1,50 @@
 /* global DOM */
 /* global smalltalk */
 
-(function(DOM) {
-    'use strict';
+'use strict';
+
+module.exports = Dialog;
+
+function Dialog(prefix, config) {
+    const self = this;
     
-    DOM.Dialog = Dialog;
+    if (!(this instanceof Dialog))
+        return new Dialog(prefix, config);
     
-    function Dialog(prefix, config) {
-        var self            = this;
+    load(config.htmlDialogs);
+    
+    function load(htmlDialogs) {
+        var names,
+            name        = 'smalltalk',
+            is          = window.Promise,
+            js          = '.min.js',
+            jsName      = is ? js : '.poly' + js,
+            dir         = '/modules/' + name + '/dist/';
         
-        if (!(this instanceof Dialog))
-            return new Dialog(config);
+        if (!htmlDialogs)
+            jsName = '.native' + jsName;
         
-        load(config.htmlDialogs);
+        names = [jsName, '.min.css'].map(function(ext) {
+            return prefix + dir + name + ext;
+        });
         
-        function load(htmlDialogs) {
-            var names,
-                name        = 'smalltalk',
-                is          = window.Promise,
-                js          = '.min.js',
-                jsName      = is ? js : '.poly' + js,
-                dir         = '/modules/' + name + '/dist/';
-            
-            if (!htmlDialogs)
-                jsName = '.native' + jsName;
-            
-            names = [jsName, '.min.css'].map(function(ext) {
-                return prefix + dir + name + ext;
-            });
-            
-            DOM.load.parallel(names, function() {});
-        }
-        
-        this.alert          = function(title, message) {
-            return smalltalk.alert(title, message);
-        };
-        
-        this.prompt         = function(title, message, value, options) {
-            return smalltalk.prompt(title, message, value, options);
-        };
-        
-        this.confirm         = function(title, message, options) {
-            return smalltalk.confirm(title, message, options);
-        };
-        
-        this.alert.noFiles  = function(title) {
-            return self.alert(title, 'No files selected!');
-        };
+        DOM.load.parallel(names, function() {});
     }
     
-})(DOM);
+    this.alert          = function(title, message) {
+        return smalltalk.alert(title, message);
+    };
+    
+    this.prompt         = function(title, message, value, options) {
+        return smalltalk.prompt(title, message, value, options);
+    };
+    
+    this.confirm         = function(title, message, options) {
+        return smalltalk.confirm(title, message, options);
+    };
+    
+    this.alert.noFiles  = function(title) {
+        return self.alert(title, 'No files selected!');
+    };
+}
+

@@ -7,32 +7,39 @@
 const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
+const jonny = require('jonny');
 
 const DOMFunc = function() {};
-const DOMTree = Util.extendProto(DOMTreeProto);
-const Images = Util.extendProto(ImagesProto);
 
+const DOMTree = Util.extendProto(DOMTreeProto);
 const DOMProto = DOMFunc.prototype = new CmdProto();
 
-Util.extend(DOMProto, [
-    DOMTree, {
-        Images  : Images
-    }
-]);
+Util.extend(DOMProto, DOMTree);
 
 const DOM = new DOMFunc();
+
+DOM.Images = new ImagesProto();
+
 module.exports = DOM;
 
 DOM.uploadDirectory = require('./directory');
+DOM.Buffer = require('./buffer');
+DOM.Dialog = require('./dialog');
+DOM.Events = require('./events');
+DOM.Storage = require('./storage');
+DOM.Files = require('./files');
+DOM.RESTful = require('./rest');
+DOM.load = require('./load');
+DOM.Notify = require('./notify');
 
 function ImagesProto() {
-    var Images = new ImageElementProto();
+    const Images = new ImageElementProto();
     
     function ImageElementProto () {
-        var LOADING = 'loading';
-        var LoadingImage;
-        var HIDDEN = 'hidden';
-        var ERROR = 'error';
+        let LoadingImage;
+        const LOADING = 'loading';
+        const HIDDEN = 'hidden';
+        const ERROR = 'error';
         
         function getLoadingType() {
             return DOM.isSVG() ? '-svg' : '-gif';
@@ -162,7 +169,7 @@ function ImagesProto() {
         return this;
     };
 }
-    
+
 function DOMTreeProto() {
     var DOM = this;
     
@@ -351,7 +358,7 @@ function CmdProto() {
                     });
                 });
                 
-                Util.exec.if(online, funcON, funcOFF);
+                exec.if(online, funcON, funcOFF);
             });
         
         return DOM;
@@ -444,7 +451,7 @@ function CmdProto() {
         array   = slice.call(files);
         
         if (n) {
-            Util.exec.eachSeries(array, load, func(files[0].name));
+            exec.eachSeries(array, load, func(files[0].name));
         }
     };
     
@@ -551,10 +558,8 @@ function CmdProto() {
      *
      * @currentFile
      */
-    this.getCurrentFile             = function() {
-        var ret = this.getByClass(CURRENT_FILE);
-        
-        return ret;
+    this.getCurrentFile = () => {
+        return DOM.getByClass(CURRENT_FILE);
     };
     
     /**
@@ -648,7 +653,7 @@ function CmdProto() {
             RESTful.read(link + query, function(error, size) {
                 if (!error) {
                     DOM.setCurrentSize(size, current);
-                    Util.exec(callback, current);
+                    exec(callback, current);
                     Images.hide();
                 }
             });
@@ -740,7 +745,7 @@ function CmdProto() {
                 
                 if (!error) {
                     if (itype.object(data))
-                        data = Util.json.stringify(data);
+                        data = jonny.stringify(data);
                     
                     length  = data.length;
                     
@@ -1171,10 +1176,10 @@ function CmdProto() {
      */
     this.checkStorageHash = function(name, callback) {
         var Storage = DOM.Storage;
-        var parallel = Util.exec.parallel;
+        var parallel = exec.parallel;
         var loadHash = DOM.loadCurrentHash;
         var nameHash = name + '-hash';
-        var getStoreHash = Util.exec.with(Storage.get, nameHash);
+        var getStoreHash = exec.with(Storage.get, nameHash);
         
         if (typeof name !== 'string')
             throw Error('name should be a string!');
@@ -1210,15 +1215,15 @@ function CmdProto() {
         var nameData    = name + '-data';
         
         if (!allowed || isDir)
-            return Util.exec(callback);
+            return exec(callback);
         
-        Util.exec.if(hash, function() {
+        exec.if(hash, function() {
             var Storage = DOM.Storage;
             
             Storage.set(nameHash, hash);
             Storage.set(nameData, data);
             
-            Util.exec(callback, hash);
+            exec(callback, hash);
         }, function(callback) {
             DOM.loadCurrentHash(function(error, loadHash) {
                 hash = loadHash;
@@ -1242,9 +1247,9 @@ function CmdProto() {
         var isDir       = DOM.isCurrentIsDir();
         
         if (!allowed || isDir)
-            return Util.exec(callback);
+            return exec(callback);
         
-        Util.exec.parallel([
+        exec.parallel([
             exec.with(Storage.get, nameData),
             exec.with(Storage.get, nameHash),
         ], callback);

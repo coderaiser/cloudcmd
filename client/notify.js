@@ -1,21 +1,16 @@
-/* global Util */
-/* global DOM */
 /* global CloudCmd */
 
 'use strict';
 
-const Notify = Util.extendProto(NotifyProto);
-const DOMProto = Object.getPrototypeOf(DOM);
+const Events = require('./events');
 
-Util.extend(DOMProto, {
-    Notify
-});
+module.exports = new Notify();
 
-function NotifyProto() {
-    var Events          = DOM.Events,
-        Show,
-        Notify          = this,
-        Notification    = window.Notification;
+function Notify() {
+    let Show;
+    
+    const Notify = this;
+    const Notification = window.Notification;
     
     Events.add({
         'blur': () => {

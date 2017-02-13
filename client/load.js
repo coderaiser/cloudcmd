@@ -1,14 +1,14 @@
 'use strict';
 
 /* global Util */
-/* global DOM */
 
-const DOMProto = Object.getPrototypeOf(DOM);
 const rendy = require('rendy');
 const itype = require('itype/legacy');
 const Emitify = require('emitify');
+const {Images} = require('./dom');
+const Events = require('./events');
 
-DOMProto.load = new LoaderProto(Util, DOM.Images, DOM.Events);
+module.exports = new LoaderProto(Util, Images, Events);
 
 function LoaderProto(Util, Images, Events) {
     /**
@@ -269,8 +269,8 @@ function LoaderProto(Util, Images, Events) {
         
         default:
             element = load({
-                src     : src,
-                func    : func
+                src,
+                func,
             });
         }
         

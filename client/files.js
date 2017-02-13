@@ -1,18 +1,19 @@
 /* global Promise */
-/* global Util, CloudCmd */
+/* global CloudCmd */
 
 'use strict';
 
-const DOM = require('./dom');
-
-var DOMProto = Object.getPrototypeOf(DOM);
-DOMProto.Files = new FilesProto(Util, DOM);
+module.exports = new FilesProto();
 
 const itype = require('itype/legacy');
+const exec = require('execon');
 
-function FilesProto(Util, DOM) {
+const Storage = require('./storage');
+const load = require('./load');
+const RESTful = require('./rest');
+
+function FilesProto() {
     var Promises        = {},
-        Storage         = DOM.Storage,
         Files           = this,
         FILES_JSON      = 'config|modules',
         FILES_HTML      = 'file|path|link|pathLink|media',
@@ -40,7 +41,7 @@ function FilesProto(Util, DOM) {
                 };
             });
             
-            Util.exec.parallel(funcs, callback);
+            exec.parallel(funcs, callback);
             break;
         }
         
@@ -107,7 +108,7 @@ function FilesProto(Util, DOM) {
         
         if (!Promises[url])
             Promises[url] = new Promise(function(resolve, reject) {
-                DOM.load.ajax({
+                load.ajax({
                     url     : prefix + url,
                     success : resolve,
                     error   : reject
@@ -123,8 +124,7 @@ function FilesProto(Util, DOM) {
     }
     
     function getConfig(callback) {
-        var is,
-            RESTful = DOM.RESTful;
+        let is;
         
         if (!Promises.config)
             Promises.config = new Promise(function(resolve, reject) {
@@ -169,3 +169,4 @@ function FilesProto(Util, DOM) {
         return fn;
     }
 }
+

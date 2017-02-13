@@ -4,6 +4,7 @@ const {optimize} = webpack
 const {UglifyJsPlugin} = optimize;
 
 const dir = './client';
+const dirExternal = './node_modules';
 
 const {env} = process;
 const isDebug = env.NODE_ENV === 'debug';
@@ -28,7 +29,9 @@ module.exports = {
         upload: `${dir}/upload.js`,
         operation: `${dir}/operation.js`,
         konsole: `${dir}/konsole.js`,
-        cloud: `${dir}/cloud.js`
+        cloud: `${dir}/cloud.js`,
+        
+        promise: `${dirExternal}/promise-polyfill/promise.js`,
     },
     output: {
         filename: '[name].js',

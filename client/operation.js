@@ -12,24 +12,32 @@
 CloudCmd.Operation = OperationProto;
 
 const currify = require('currify/legacy');
+const exec = require('execon');
+const emitify = require('emitify');
+
+// prevent loading of exec by spero, remedy, ishtar, salam, omnes
+window.exec = exec;
+// prevent loading of emitify
+window.Emitify = emitify;
+
+const RESTful = require('./rest');
 
 function OperationProto(operation, data) {
-    let Name        = 'Operation',
-        TITLE       = CloudCmd.TITLE,
-        config      = CloudCmd.config,
-        Loaded,
-        RESTful     = DOM.RESTful,
-        
-        exec        = Util.exec,
-        
-        copyFn      = RESTful.cp,
-        moveFn      = RESTful.mv,
-        deleteFn    = RESTful.delete,
-        packFn      = RESTful.pack,
-        extractFn   = RESTful.extract,
-        
-        Images      = DOM.Images,
-        Dialog      = DOM.Dialog;
+    const Name = 'Operation';
+    const TITLE = CloudCmd.TITLE;
+    const config = CloudCmd.config;
+    const {Dialog, Images} = DOM;
+    
+    let Loaded;
+    
+    let {
+        cp: copyFn,
+        mv: moveFn,
+        pack: packFn,
+        extract: extractFn,
+    } = RESTful;
+    
+    let deleteFn = RESTful.delete;
     
     const Info = DOM.CurrentInfo;
     const showLoad = Images.show.load.bind(null, 'top');
@@ -38,11 +46,11 @@ function OperationProto(operation, data) {
     function init() {
         showLoad();
         
-        Util.exec.series([
+        exec.series([
             DOM.loadSocket,
-            function(callback) {
+            (callback) => {
                 if (config('progress'))
-                    load(function(callback) {
+                    load((callback) => {
                         create(CloudCmd.PREFIX, callback);
                     });
                 
@@ -82,7 +90,7 @@ function OperationProto(operation, data) {
             });
             
             copier.on('disconnect', function() {
-                copyFn = DOM.RESTful.cp;
+                copyFn = RESTful.cp;
             });
         });
     }
@@ -101,7 +109,7 @@ function OperationProto(operation, data) {
             });
             
             remover.on('disconnect', function() {
-                deleteFn = DOM.RESTful.remove;
+                deleteFn = RESTful.remove;
             });
         });
     }
@@ -119,7 +127,7 @@ function OperationProto(operation, data) {
             });
             
             packer.on('disconnect', function() {
-                packFn      = RESTful.pack;
+                packFn = RESTful.pack;
             });
         });
     }
@@ -416,11 +424,11 @@ function OperationProto(operation, data) {
             if (ok)
                 if (!shouldAsk || !sameName)
                     return go;
-                   
-                const str = `"${ name }" already exist. Overwrite?`;
-                const cancel = false;
-                
-                Dialog.confirm(TITLE, str, {cancel}).then(go);
+            
+            const str = `"${ name }" already exist. Overwrite?`;
+            const cancel = false;
+            
+            Dialog.confirm(TITLE, str, {cancel}).then(go);
             
             function go() {
                 showLoad();
@@ -542,25 +550,24 @@ function OperationProto(operation, data) {
     }
     
     function load(callback) {
-        var prefix  = CloudCmd.PREFIX,
-            files   = [
-                '/spero/spero.js',
-                '/remedy/remedy.js',
-                '/ishtar/ishtar.js',
-                '/salam/salam.js',
-                '/omnes/omnes.js'
-            ].map(function(name) {
-                return prefix + name;
-            });
+        const prefix = CloudCmd.PREFIX;
+        const files = [
+            '/spero/spero.js',
+            '/remedy/remedy.js',
+            '/ishtar/ishtar.js',
+            '/salam/salam.js',
+            '/omnes/omnes.js'
+        ].map((name) => {
+            return prefix + name;
+        });
         
-        DOM.load.parallel(files, function(error) {
-            if (error) {
-                Dialog.alert(TITLE, error.message);
-            } else {
-                Loaded = true;
-                Util.timeEnd(Name + ' load');
-                Util.exec(callback);
-            }
+        DOM.load.parallel(files, (error) => {
+            if (error)
+                return Dialog.alert(TITLE, error.message);
+            
+            Loaded = true;
+            Util.timeEnd(Name + ' load');
+            exec(callback);
         });
         
         Util.time(Name + ' load');

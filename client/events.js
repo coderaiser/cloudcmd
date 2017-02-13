@@ -1,11 +1,8 @@
 'use strict';
 
-const DOM = require('./dom');
 const itype = require('itype/legacy');
 
-var DOMProto = Object.getPrototypeOf(DOM);
-
-DOMProto.Events = new EventsProto();
+module.exports = new EventsProto();
 
 function EventsProto() {
     const Events = this;

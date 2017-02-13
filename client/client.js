@@ -201,7 +201,7 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
         
         const {htmlDialogs} = config;
         
-        DOM.Dialog = new DOM.Dialog(prefix, {
+        DOM.Dialog = DOM.Dialog(prefix, {
             htmlDialogs
         });
         

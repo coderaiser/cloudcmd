@@ -2,20 +2,17 @@
 
 const itype = require('itype/legacy');
 
-/* global Util, DOM, CloudFunc, CloudCmd */
+/* global CloudFunc, CloudCmd */
 
-const RESTful= Util.extendProto(RESTfulProto);
-const DOMProto = Object.getPrototypeOf(DOM);
+module.exports = new RESTful();
 
-Util.extend(DOMProto, {
-    RESTful
-});
+const {Images} = require('./dom');
+const load = require('./load');
+const Dialog = require('./dialog');
 
-function RESTfulProto() {
-    const Images = DOM.Images;
-    
+function RESTful() {
     this.delete = (url, data, callback) => {
-        var isFunc = itype.function(data);
+        const isFunc = itype.function(data);
         
         if (!callback && isFunc) {
             callback = data;
@@ -182,7 +179,7 @@ function RESTfulProto() {
          */
         p.url   = p.url.replace('#', '%23');
         
-        DOM.load.ajax({
+        load.ajax({
             method      : p.method,
             url         : p.url,
             data        : p.data,
@@ -195,7 +192,7 @@ function RESTfulProto() {
                 
                 Images.show.error(text);
                 setTimeout(function() {
-                    DOM.Dialog.alert(CloudCmd.TITLE, text);
+                    Dialog.alert(CloudCmd.TITLE, text);
                 }, 100);
                 
                 p.callback(Error(text));
