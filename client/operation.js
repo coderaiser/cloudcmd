@@ -15,11 +15,6 @@ const currify = require('currify/legacy');
 const exec = require('execon');
 const emitify = require('emitify');
 
-// prevent loading of exec by spero, remedy, ishtar, salam, omnes
-window.exec = exec;
-// prevent loading of emitify
-window.Emitify = emitify;
-
 const RESTful = require('./rest');
 
 function OperationProto(operation, data) {

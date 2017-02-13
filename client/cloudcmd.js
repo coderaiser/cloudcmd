@@ -1,5 +1,11 @@
 'use strict';
 
+// prevent additional loading of exec by spero, remedy, ishtar, salam, omnes
+window.exec = require('execon');
+
+// prevent additional loading of emitify
+window.Emitify = require('emitify');
+
 window.CloudCmd = (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');

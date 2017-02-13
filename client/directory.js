@@ -24,7 +24,7 @@ function uploadDirectory(items) {
         return item.webkitGetAsEntry();
     });
     
-    array = array.map(function(name) {
+    array = array.map((name) => {
         const result = [
             '/modules/' + name,
             '/lib/' + name,
@@ -33,12 +33,6 @@ function uploadDirectory(items) {
         
         return result;
     });
-    
-    if (!window.Emitify)
-        window.Emitify = require('emitify');
-    
-    if (!window.exec)
-        window.exec = require('execon');
     
     const url = CloudCmd.join(array);
     
