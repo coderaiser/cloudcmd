@@ -12,6 +12,18 @@ const isDebug = env.NODE_ENV === 'debug';
 const dist = path.resolve(__dirname, 'dist');
 const distDebug = path.resolve(__dirname, 'dist-debug');
 const devtool = isDebug ? 'eval' : 'source-map';
+const notEmpty = (a) => a;
+const clean = (array) => array.filter(notEmpty);
+
+const plugins = clean([
+    !isDebug && new UglifyJsPlugin({
+        sourceMap: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+        name: 'cloudcmd',
+        filename: 'cloudcmd.js',
+    }),
+]);
 
 module.exports = {
     devtool,
@@ -38,15 +50,7 @@ module.exports = {
         path: isDebug ? distDebug : dist,
         libraryTarget: 'umd'
     },
-    plugins: [
-        new UglifyJsPlugin({
-            sourceMap: true
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'cloudcmd',
-            filename: 'cloudcmd.js',
-        }),
-    ],
+    plugins,
     module: {
         loaders: [{
           test: /\.js$/,
