@@ -1,3 +1,10 @@
+2017.02.14, v6.5.1
+
+fix:
+- (buffer) dialog
+- (dom) Dialog
+
+
 2017.02.14, v6.5.0
 
 feature:
