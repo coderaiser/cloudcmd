@@ -24,7 +24,6 @@ module.exports = DOM;
 
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
-DOM.Dialog = require('./dialog');
 DOM.Events = require('./events');
 DOM.Storage = require('./storage');
 DOM.Files = require('./files');

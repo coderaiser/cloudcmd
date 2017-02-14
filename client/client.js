@@ -199,12 +199,6 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
         if (config.onePanelMode)
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
         
-        const {htmlDialogs} = config;
-        
-        DOM.Dialog = DOM.Dialog(prefix, {
-            htmlDialogs
-        });
-        
         Util.exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
     };
     

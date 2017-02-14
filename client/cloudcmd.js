@@ -10,6 +10,16 @@ window.CloudCmd = (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     window.DOM = require('./dom');
+    
+    const Dialog = require('./dialog');
+    
+    const prefix = getPrefix(config.prefix);
+    const {htmlDialogs} = config;
+    
+    DOM.Dialog = Dialog(prefix, {
+        htmlDialogs
+    });
+    
     window.CloudCmd = require('./client');
     
     require('./listeners');
@@ -31,7 +41,6 @@ window.CloudCmd = (config) => {
         .map((name) => `${name}.js`);
     
     const urlFiles = getJoinURL(allFiles);
-    const prefix = getPrefix(config.prefix);
     
     createScript(prefix + urlFiles, () => {
         window.CloudCmd.init(prefix, config);

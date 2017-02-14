@@ -6,8 +6,8 @@ const jonny = require('jonny');
 const exec = require('execon');
 
 const Storage = require('./storage');
-const Dialog = require('./dialog');
 const DOM = require('./dom');
+const {Dialog} = DOM;
 
 module.exports = new BufferProto(DOM, CloudCmd);
 

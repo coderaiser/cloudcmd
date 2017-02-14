@@ -2,13 +2,12 @@
 
 const itype = require('itype/legacy');
 
-/* global CloudFunc, CloudCmd */
+/* global CloudFunc, CloudCmd, DOM */
 
 module.exports = new RESTful();
 
 const {Images} = require('./dom');
 const load = require('./load');
-const Dialog = require('./dialog');
 
 function RESTful() {
     this.delete = (url, data, callback) => {
@@ -184,20 +183,20 @@ function RESTful() {
             url         : p.url,
             data        : p.data,
             dataType    : p.dataType,
-            error       : function(jqXHR) {
-                var response       = jqXHR.responseText,
-                    statusText     = jqXHR.statusText,
-                    status         = jqXHR.status,
-                    text           = status === 404 ? response : statusText;
+            error       : (jqXHR) => {
+                const response = jqXHR.responseText;
+                const statusText = jqXHR.statusText;
+                const status = jqXHR.status;
+                const text = status === 404 ? response : statusText;
                 
                 Images.show.error(text);
-                setTimeout(function() {
-                    Dialog.alert(CloudCmd.TITLE, text);
+                setTimeout(() => {
+                    DOM.Dialog.alert(CloudCmd.TITLE, text);
                 }, 100);
                 
                 p.callback(Error(text));
             },
-            success     : function(data) {
+            success: (data) => {
                 Images.hide();
                 
                 if (!p.notLog)
