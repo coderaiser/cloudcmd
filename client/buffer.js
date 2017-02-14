@@ -42,17 +42,16 @@ function BufferProto() {
     }
     
     function rmCutClass() {
-        var files   = DOM.getByClassAll(CLASS);
+        const files = DOM.getByClassAll(CLASS);
         
-        []
-            .slice.call(files)
+        [].slice.call(files)
             .forEach(function(element) {
                 element.classList.remove(CLASS);
             });
     }
     
     function callIfEnabled(callback) {
-        var is = CloudCmd.config('buffer');
+        const is = CloudCmd.config('buffer');
         
         if (is)
             return callback();
@@ -106,28 +105,26 @@ function BufferProto() {
         const cut = Storage.get.bind(Storage, CUT);
         
         exec.parallel([copy, cut], function(error, cp, ct) {
-            var opStr       = cp ? 'copy' : 'move',
-                opData      = cp || ct,
-                data        = {},
-                Operation   = CloudCmd.Operation,
-                msg         = 'Path is same!',
-                path        = Info.dirPath;
+            const opStr = cp ? 'copy' : 'move';
+            const opData = cp || ct;
+            const Operation = CloudCmd.Operation;
+            const msg = 'Path is same!';
+            const path = Info.dirPath;
             
             if (!error && !cp && !ct)
-                error   = 'Buffer is empty!';
-                
+                error = 'Buffer is empty!';
+           
             if (error)
                 return showMessage(error);
                 
-            data        = jonny.parse(opData);
-            data.to     = path;
+            const data = jonny.parse(opData);
+            data.to = path;
             
-            if (data.from === path) {
-                showMessage(msg);
-            } else {
-                Operation.show(opStr, data);
-                clear();
-            }
+            if (data.from === path)
+                return showMessage(msg);
+            
+            Operation.show(opStr, data);
+            clear();
         });
     }
     
