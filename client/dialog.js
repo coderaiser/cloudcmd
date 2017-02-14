@@ -6,45 +6,51 @@
 module.exports = Dialog;
 
 function Dialog(prefix, config) {
-    const self = this;
-    
     if (!(this instanceof Dialog))
         return new Dialog(prefix, config);
     
     load(config.htmlDialogs);
     
-    function load(htmlDialogs) {
-        var names,
-            name        = 'smalltalk',
-            is          = window.Promise,
-            js          = '.min.js',
-            jsName      = is ? js : '.poly' + js,
-            dir         = '/modules/' + name + '/dist/';
+    function getJsName(htmlDialogs) {
+        const is = window.Promise;
+        const js = '.min.js';
+        const jsName = is ? js : '.poly' + js;
         
         if (!htmlDialogs)
-            jsName = '.native' + jsName;
+            return '.native' + jsName;
         
-        names = [jsName, '.min.css'].map(function(ext) {
+        return jsName;
+    }
+    
+    function load(htmlDialogs) {
+        const noop = () => {};
+        const name = 'smalltalk';
+        const dir = '/modules/' + name + '/dist/';
+        const jsName = getJsName(htmlDialogs);
+        
+        const names = [jsName, '.min.css'].map((ext) => {
             return prefix + dir + name + ext;
         });
         
-        DOM.load.parallel(names, function() {});
+        DOM.load.parallel(names, noop);
     }
     
-    this.alert          = function(title, message) {
+    const alert = (title, message) => {
         return smalltalk.alert(title, message);
     };
     
-    this.prompt         = function(title, message, value, options) {
+    this.alert = alert;
+    
+    this.prompt = (title, message, value, options) => {
         return smalltalk.prompt(title, message, value, options);
     };
     
-    this.confirm         = function(title, message, options) {
+    this.confirm = (title, message, options) => {
         return smalltalk.confirm(title, message, options);
     };
     
-    this.alert.noFiles  = function(title) {
-        return self.alert(title, 'No files selected!');
+    this.alert.noFiles = (title) => {
+        return alert(title, 'No files selected!');
     };
 }
 
