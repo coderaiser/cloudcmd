@@ -44,7 +44,7 @@
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
-    "start:dev": "NODE_ENV=debug node bin/cloudcmd.js",
+    "start:dev": "NODE_ENV=development node bin/cloudcmd.js",
     "security": "nsp check",
     "codestyle": "redrun lint spell",
     "lint": "redrun lint:*",

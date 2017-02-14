@@ -43,7 +43,7 @@ function OperationProto(operation, data) {
         exec.series([
             DOM.loadSocket,
             (callback) => {
-                if (config('progress'))
+                if (CloudCmd.config('progress'))
                     load((callback) => {
                         create(CloudCmd.PREFIX, callback);
                     });
@@ -59,7 +59,7 @@ function OperationProto(operation, data) {
     }
     
     function authCheck(spawn, ok) {
-        if (!config('auth'))
+        if (!CloudCmd.config('auth'))
             return ok();
             
         spawn.on('accept', ok);
@@ -415,9 +415,8 @@ function OperationProto(operation, data) {
         function ask(to) {
             ok = from !== to && to;
             
-            if (ok)
-                if (!shouldAsk || !sameName)
-                    return go;
+            if (ok && !shouldAsk || !sameName)
+                return go();
             
             const str = `"${ name }" already exist. Overwrite?`;
             const cancel = false;

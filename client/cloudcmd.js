@@ -10,6 +10,7 @@ window.CloudCmd = (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     window.DOM = require('./dom');
+    window.CloudCmd = require('./client');
     
     const Dialog = require('./dialog');
     
@@ -19,8 +20,6 @@ window.CloudCmd = (config) => {
     DOM.Dialog = Dialog(prefix, {
         htmlDialogs
     });
-    
-    window.CloudCmd = require('./client');
     
     require('./listeners');
     require('./key');

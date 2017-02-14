@@ -1,5 +1,3 @@
-/* global CloudCmd */
-
 'use strict';
 
 const jonny = require('jonny');
@@ -7,39 +5,38 @@ const exec = require('execon');
 
 const Storage = require('./storage');
 const DOM = require('./dom');
-const {Dialog} = DOM;
 
-module.exports = new BufferProto(DOM, CloudCmd);
+module.exports = new BufferProto();
 
-function BufferProto(DOM, CloudCmd) {
-    const Info = DOM.CurrentInfo,
-        CLASS   = 'cut-file',
-        COPY    = 'copy',
-        CUT     = 'cut',
-        TITLE   = 'Buffer',
-        
-        Buffer  = {
-            cut     : callIfEnabled.bind(null, cut),
-            copy    : callIfEnabled.bind(null, copy),
-            clear   : callIfEnabled.bind(null, clear),
-            paste   : callIfEnabled.bind(null, paste)
-        };
+function BufferProto() {
+    const Info = DOM.CurrentInfo;
+    const CLASS = 'cut-file';
+    const COPY = 'copy';
+    const CUT = 'cut';
+    const TITLE = 'Buffer';
+    
+    const Buffer  = {
+        cut     : callIfEnabled.bind(null, cut),
+        copy    : callIfEnabled.bind(null, copy),
+        clear   : callIfEnabled.bind(null, clear),
+        paste   : callIfEnabled.bind(null, paste)
+    };
     
     function showMessage(msg) {
-        Dialog.alert(TITLE, msg);
+        DOM.Dialog.alert(TITLE, msg);
     }
     
     function getNames() {
-        var files   = DOM.getActiveFiles(),
-            names   = DOM.getFilenames(files);
+        const files = DOM.getActiveFiles();
+        const names = DOM.getFilenames(files);
         
         return names;
     }
     
     function addCutClass() {
-        var files   = DOM.getActiveFiles();
+        const files = DOM.getActiveFiles();
         
-        files.forEach(function(element) {
+        files.forEach((element) => {
             element.classList.add(CLASS);
         });
     }

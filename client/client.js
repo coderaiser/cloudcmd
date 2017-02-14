@@ -570,3 +570,4 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
         }
     };
 }
+
