@@ -95,7 +95,8 @@
     "mkdir:json": "mkdirp legacy/json",
     "legacy:server": "bin/legacy.js",
     "legacy:help": "cp json/help.json legacy/json/",
-    "rm:legacy": "rimraf legacy server_",
+    "rm:server": "rimraf server_",
+    "rm:client": "rimraf dist dist-dev",
     "heroku-postbuild": "redrun 6to5:client -- --progress"
   },
   "directories": {
