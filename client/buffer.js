@@ -44,10 +44,9 @@ function BufferProto() {
     function rmCutClass() {
         const files = DOM.getByClassAll(CLASS);
         
-        [].slice.call(files)
-            .forEach(function(element) {
-                element.classList.remove(CLASS);
-            });
+        [...files].forEach((element) => {
+            element.classList.remove(CLASS);
+        });
     }
     
     function callIfEnabled(callback) {
