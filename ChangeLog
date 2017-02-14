@@ -1,3 +1,18 @@
+2017.02.14, v6.5.0
+
+feature:
+- (package) scripts: rm:legacy -> rm:client, rm:server
+- (cloudcmd) NODE_ENV: debug -> development
+- (webpack) turn of uglify when NODE_ENV=debug
+- (package) nyc v10.1.2
+- (package) scripts: 6to5:client: add --progress
+- (package) scripts: add heroku-postbuild
+- (package) watch:client:debug
+- (webpack) put commons to cloudcmd.js
+- (client) es2015-ify
+- (rest) rm rendy
+
+
 2017.02.06, v6.4.0
 
 feature:
