@@ -7,16 +7,16 @@ const dir = './client';
 const dirExternal = './node_modules';
 
 const {env} = process;
-const isDebug = env.NODE_ENV === 'debug';
+const isDev = env.NODE_ENV === 'development';
 
 const dist = path.resolve(__dirname, 'dist');
-const distDebug = path.resolve(__dirname, 'dist-debug');
-const devtool = isDebug ? 'eval' : 'source-map';
+const distDev = path.resolve(__dirname, 'dist-dev');
+const devtool = isDev ? 'eval' : 'source-map';
 const notEmpty = (a) => a;
 const clean = (array) => array.filter(notEmpty);
 
 const plugins = clean([
-    !isDebug && new UglifyJsPlugin({
+    !isDev && new UglifyJsPlugin({
         sourceMap: true
     }),
     new webpack.optimize.CommonsChunkPlugin({
@@ -47,7 +47,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: isDebug ? distDebug : dist,
+        path: isDev ? distDev : dist,
         libraryTarget: 'umd'
     },
     plugins,

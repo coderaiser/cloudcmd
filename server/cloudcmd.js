@@ -35,7 +35,7 @@ const root = () => config('root');
 const emptyFunc = (req, res, next) => next();
 emptyFunc.middle = () => emptyFunc;
 
-const isDebug = process.env.NODE_ENV === 'debug';
+const isDev = process.env.NODE_ENV === 'development';
 
 function getPrefix(prefix) {
     if (typeof prefix === 'function')
@@ -302,8 +302,8 @@ function setUrl(pref) {
         if (/^\/cloudcmd\.js(\.map)?$/.test(req.url))
             req.url = `/dist${req.url}`;
         
-        if (isDebug)
-            req.url = req.url.replace(/^\/dist\//, '/dist-debug/');
+        if (isDev)
+            req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
         
         next();
     };

@@ -20,5 +20,5 @@ server_
 *.swp
 
 dist
-dist-debug
+dist-dev
 
