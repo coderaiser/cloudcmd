@@ -9,7 +9,10 @@ window.Emitify = require('emitify');
 window.CloudCmd = (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
-    window.DOM = require('./dom');
+    
+    const DOM = require('./dom');
+    
+    window.DOM = DOM;
     window.CloudCmd = require('./client');
     
     const Dialog = require('./dialog');

@@ -1,5 +1,7 @@
 'use strict';
 
+/* global CloudCmd */
+
 const jonny = require('jonny');
 const exec = require('execon');
 
