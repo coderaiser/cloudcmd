@@ -54,6 +54,7 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
         CloudCmd.Edit
             .getEditor()
             .setValueFirst('edit-names', names)
+            .setMode('text')
             .setOption('fontSize', 16)
             .disableKey();
         
