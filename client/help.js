@@ -1,31 +1,34 @@
 'use strict';
 
-/* global DOM, CloudCmd */
+/* global CloudCmd */
 
-window.CloudCmd.Help = HelpProto;
+CloudCmd.Help = HelpProto;
 
 function HelpProto() {
-    const Images = DOM.Images;
-    const Help = this;
+    Images.show.load('top');
+    show();
     
-    function init() {
-        Images.show.load('top');
-        Help.show();
-    }
+    return exports;
+}
+
+const {Images} = require('./dom');
+
+module.exports.show = show;
+module.exports.hide = hide;
+
+function show() {
+    const positionLoad = 'top';
+    const relative = true;
     
-    this.show = () => {
-        CloudCmd
-            .Markdown
-            .show('/HELP.md', {
-                positionLoad    : 'top',
-                relative        : true
-            });
-    };
-    
-    this.hide = () => {
-        CloudCmd.View.hide();
-    };
-    
-    init();
+    CloudCmd
+        .Markdown
+        .show('/HELP.md', {
+            positionLoad,
+            relative,
+        });
+}
+
+function hide() {
+    CloudCmd.View.hide();
 }
 
