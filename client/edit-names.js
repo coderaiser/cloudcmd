@@ -1,16 +1,20 @@
 'use strict';
 
-/* global Promise */
-/* global CloudCmd, Util, DOM, MenuIO */
+/* global CloudCmd, DOM, MenuIO */
+
+const currify = require('currify/legacy');
+const exec = require('execon');
 
 CloudCmd.EditNames = function EditNamesProto(callback) {
-    var Info = DOM.CurrentInfo;
-    var Dialog = DOM.Dialog;
-    var exec = Util.exec;
-    var EditNames = this;
-    var Menu;
-    var TITLE = 'Edit Names';
-    var ConfigView  = {
+    const Info = DOM.CurrentInfo;
+    const Dialog = DOM.Dialog;
+    
+    const TITLE = 'Edit Names';
+    const alert = currify(Dialog.alert, TITLE);
+    
+    const EditNames = this;
+    let Menu;
+    const ConfigView  = {
         beforeClose: () => {
             exec.ifExist(Menu, 'hide');
             isChanged();
@@ -19,30 +23,30 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     };
     
     function init(callback) {
-        var editor;
+        let editor;
         
         exec.series([
             CloudCmd.Edit,
             
-            function(callback) {
+            (callback) => {
                 editor = CloudCmd.Edit.getEditor();
                 callback();
             },
             
-            function(callback) {
+            (callback) => {
                 setListeners(editor);
                 callback();
             },
             
-            function(callback) {
+            (callback) => {
                 EditNames.show();
                 callback();
             },
         ], callback);
     }
     
-    this.show = function() {
-        var names = getActiveNames().join('\n');
+    this.show = () => {
+        const names = getActiveNames().join('\n');
         
         if (Info.name === '..' && names.length === 1)
             return Dialog.alert.noFiles(TITLE);
@@ -58,10 +62,10 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     };
     
     function keyListener(event) {
-        var ctrl = event.ctrlKey;
-        var meta = event.metaKey;
-        var ctrlMeta = ctrl || meta;
-        var Key = CloudCmd.Key;
+        const ctrl = event.ctrlKey;
+        const meta = event.metaKey;
+        const ctrlMeta = ctrl || meta;
+        const Key = CloudCmd.Key;
         
         if (!ctrlMeta || event.keyCode !== Key.S)
             return;
@@ -73,42 +77,40 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
         return DOM.getFilenames(DOM.getActiveFiles());
     }
     
-    this.hide = function() {
+    this.hide = () => {
         CloudCmd.Edit.hide();
     };
     
     function setListeners() {
-        var element = CloudCmd.Edit.getElement();
+        const element = CloudCmd.Edit.getElement();
         
         DOM.Events.addOnce('contextmenu', element, setMenu);
     }
     
     function applyNames() {
-        var dir = Info.dirPath;
-        var from = getActiveNames();
-        var nameIndex = from.indexOf(Info.name);
+        const dir = Info.dirPath;
+        const from = getActiveNames();
+        const nameIndex = from.indexOf(Info.name);
         
-        var editor = CloudCmd.Edit.getEditor();
-        var to = editor
+        const editor = CloudCmd.Edit.getEditor();
+        const to = editor
             .getValue()
             .split('\n');
         
-        var reject = Promise.reject.bind(Promise);
-        var root = CloudCmd.config('root');
+        const reject = Promise.reject.bind(Promise);
+        const root = CloudCmd.config('root');
         
         Promise.resolve(root)
             .then(rename(dir, from, to))
-            .then(function(res) {
+            .then((res) => {
                 if (res.status === 404)
                     return res.text().then(reject);
                 
-                CloudCmd.refresh(null, function() {
-                    var name = to[nameIndex];
+                CloudCmd.refresh(null, () => {
+                    const name = to[nameIndex];
                     DOM.setCurrentByName(name);
                 });
-            }).catch(function(message) {
-                Dialog.alert(TITLE, message);
-            });
+            }).catch(alert);
     }
     
     function getDir(root, dir) {
@@ -119,7 +121,7 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     }
     
     function rename(dir, from, to) {
-        return function(root) {
+        return (root) => {
             return fetch(CloudCmd.PREFIX + '/rename', {
                 method: 'put',
                 credentials: 'include',
@@ -133,64 +135,64 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     }
     
     function setMenu(event) {
-        var position = {
+        const position = {
             x: event.clientX,
             y: event.clientY
         };
         
         event.preventDefault();
         
-        !Menu && DOM.loadRemote('menu', function(error) {
-            var noFocus;
-            var options = {
-                beforeShow: function(params) {
+        !Menu && DOM.loadRemote('menu', (error) => {
+            let noFocus;
+            const options = {
+                beforeShow: (params) => {
                     params.x -= 18;
                     params.y -= 27;
                 },
                 
-                afterClick: function() {
+                afterClick: () => {
                     !noFocus && editor.focus();
                 }
             };
             
-            var editor = CloudCmd.Edit.getEditor();
+            const editor = CloudCmd.Edit.getEditor();
             
-            var menuData = {
-                'Save           Ctrl+S' : function() {
+            const menuData = {
+                'Save           Ctrl+S' : () => {
                     editor.save();
                     EditNames.hide();
                 },
-                'Go To Line     Ctrl+G' : function() {
+                'Go To Line     Ctrl+G' : () => {
                     noFocus = true;
                     editor.goToLine();
                 },
-                'Cut            Ctrl+X' : function() {
+                'Cut            Ctrl+X' : () => {
                     editor.cutToClipboard();
                 },
-                'Copy           Ctrl+C' : function() {
+                'Copy           Ctrl+C' : () => {
                     editor.copyToClipboard();
                 },
-                'Paste          Ctrl+V' : function() {
+                'Paste          Ctrl+V' : () => {
                     editor.pasteFromClipboard();
                 },
-                'Delete         Del'    : function() {
+                'Delete         Del'    : () => {
                     editor.remove('right');
                 },
-                'Select All     Ctrl+A' : function() {
+                'Select All     Ctrl+A' : () => {
                     editor.selectAll();
                 },
-                'Close          Esc'    : function() {
+                'Close          Esc'    : () => {
                     EditNames.hide();
                 }
             };
             
             if (error)
-                return Dialog.alert(TITLE, error);
+                return alert(error);
             
             if (Menu || !MenuIO)
                 return;
                 
-            var element = CloudCmd.Edit.getElement();
+            const element = CloudCmd.Edit.getElement();
             
             Menu = new MenuIO(element, options, menuData);
             Menu.show(position.x, position.y);
@@ -198,8 +200,8 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     }
     
     function isChanged() {
-        var editor = CloudCmd.Edit.getEditor();
-        var msg = 'Apply new names?';
+        const editor = CloudCmd.Edit.getEditor();
+        const msg = 'Apply new names?';
         
         if (!editor.isChanged())
             return;
@@ -212,5 +214,4 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     
     init(callback);
 };
-
 
