@@ -1,172 +1,168 @@
-/* global Promise */
 /* global CloudCmd */
 
 'use strict';
 
-module.exports = new FilesProto();
-
 const itype = require('itype/legacy');
+const currify = require('currify/legacy');
 const exec = require('execon');
 
 const Storage = require('./storage');
 const load = require('./load');
 const RESTful = require('./rest');
 
-function FilesProto() {
-    var Promises        = {},
-        Files           = this,
-        FILES_JSON      = 'config|modules',
-        FILES_HTML      = 'file|path|link|pathLink|media',
-        FILES_HTML_ROOT = 'view/media-tmpl|config-tmpl|upload',
-        funcs           = [],
-        DIR_HTML        = '/tmpl/',
-        DIR_HTML_FS     = DIR_HTML + 'fs/',
-        DIR_JSON        = '/json/',
-        timeout         = getTimeoutOnce(2000);
+const Promises = {};
+const FILES_JSON = 'config|modules';
+const FILES_HTML = 'file|path|link|pathLink|media';
+const FILES_HTML_ROOT = 'view/media-tmpl|config-tmpl|upload';
+const DIR_HTML = '/tmpl/';
+const DIR_HTML_FS = DIR_HTML + 'fs/';
+const DIR_JSON = '/json/';
+const timeout = getTimeoutOnce(2000);
+
+const get = currify(getFile);
+const unaryMap = (array, fn) => array.map((a) => fn(a));
+
+module.exports.get = get;
+
+function getFile(name, callback) {
+    const type = itype(name);
+    let array;
     
-    this.get = function(name, callback) {
-        var type = itype(name);
+    check(name, callback);
+    
+    switch(type) {
+    case 'string':
+        getModule(name, callback);
+        break;
+    
+    case 'array':
+        array = unaryMap(name, get);
         
-        check(name, callback);
+        exec.parallel(array, callback);
+        break;
+    }
+}
+
+function check(name, callback) {
+    if (!name)
+        throw Error('name could not be empty!');
+    
+    if (typeof callback !== 'function')
+        throw Error('callback should be a function');
+}
+
+function getModule(name, callback) {
+    let path;
+    
+    const regExpHTML = new RegExp(FILES_HTML + '|' + FILES_HTML_ROOT);
+    const regExpJSON = new RegExp(FILES_JSON);
+    
+    const isHTML = regExpHTML.test(name);
+    const isJSON = regExpJSON.test(name);
+    
+    if (!isHTML && !isJSON) {
+        showError(name);
+    } else if (name === 'config') {
+        getConfig(callback);
+    } else {
+        path = getPath(name, isHTML, isJSON);
         
-        switch(type) {
-        case 'string':
-            getModule(name, callback);
-            break;
+        getSystemFile(path, callback);
+    }
+    
+}
+
+function getPath(name, isHTML, isJSON) {
+    let path;
+    const regExp = new RegExp(FILES_HTML_ROOT);
+    const isRoot = regExp.test(name);
+    
+    if (isHTML) {
+        if (isRoot)
+            path = DIR_HTML + name.replace('-tmpl', '');
+        else
+            path = DIR_HTML_FS  + name;
         
-        case 'array':
-            funcs = name.map(function(name) {
-                return function(callback) {
-                    Files.get(name, callback);
-                };
+        path += '.hbs';
+    } else if (isJSON) {
+        path = DIR_JSON  + name + '.json';
+    }
+    
+    return path;
+}
+
+function showError(name) {
+    const str = 'Wrong file name: ' + name;
+    const error = new Error(str);
+    
+    throw(error);
+}
+
+function getSystemFile(url, callback) {
+    const prefix = CloudCmd.PREFIX;
+    
+    if (!Promises[url])
+        Promises[url] = new Promise((success, error) => {
+            url = prefix + url;
+            
+            load.ajax({
+                url,
+                success,
+                error
             });
-            
-            exec.parallel(funcs, callback);
-            break;
-        }
-        
-        return Files;
-    };
-    
-    function check(name, callback) {
-        if (!name)
-            throw Error('name could not be empty!');
-        
-        if (typeof callback !== 'function')
-            throw Error('callback should be a function');
-    }
-    
-    function getModule(name, callback) {
-        var path,
-            
-            regExpHTML  = new RegExp(FILES_HTML + '|' + FILES_HTML_ROOT),
-            regExpJSON  = new RegExp(FILES_JSON),
-            
-            isHTML      = regExpHTML.test(name),
-            isJSON      = regExpJSON.test(name);
-        
-        if (!isHTML && !isJSON) {
-            showError(name);
-        } else if (name === 'config') {
-            getConfig(callback);
-        } else {
-            path = getPath(name, isHTML, isJSON);
-            
-            getSystemFile(path, callback);
-        }
-        
-    }
-    
-    function getPath(name, isHTML, isJSON) {
-        var path,
-            regExp  = new RegExp(FILES_HTML_ROOT),
-            isRoot  = regExp.test(name);
-        
-        if (isHTML) {
-            if (isRoot)
-                path = DIR_HTML + name.replace('-tmpl', '');
-            else
-                path = DIR_HTML_FS  + name;
-            
-            path += '.hbs';
-        } else if (isJSON) {
-            path = DIR_JSON  + name + '.json';
-        }
-        
-        return path;
-    }
-    
-    function showError(name) {
-        var str     = 'Wrong file name: ' + name,
-            error   = new Error(str);
-        
-        throw(error);
-    }
-    
-    function getSystemFile(url, callback) {
-        var prefix = CloudCmd.PREFIX;
-        
-        if (!Promises[url])
-            Promises[url] = new Promise(function(resolve, reject) {
-                load.ajax({
-                    url     : prefix + url,
-                    success : resolve,
-                    error   : reject
-                });
-            });
-        
-        Promises[url].then(function(data) {
-            callback(null, data);
-        }, function(error) {
-            Promises[url] = null;
-            callback(error);
         });
-    }
     
-    function getConfig(callback) {
-        let is;
-        
-        if (!Promises.config)
-            Promises.config = new Promise(function(resolve, reject) {
-                is = true;
-                RESTful.Config.read(function(error, data) {
-                    if (error)
-                        reject(error);
-                    else
-                        resolve(data);
-                });
+    Promises[url].then((data) => {
+        callback(null, data);
+    }, (error) => {
+        Promises[url] = null;
+        callback(error);
+    });
+}
+
+function getConfig(callback) {
+    let is;
+    
+    if (!Promises.config)
+        Promises.config = new Promise((resolve, reject) => {
+            is = true;
+            RESTful.Config.read((error, data) => {
+                if (error)
+                    return reject(error);
+                
+                resolve(data);
             });
+        });
+    
+    Promises.config.then(function(data) {
+        is = false;
+        Storage.setAllowed(data.localStorage);
         
-        Promises.config.then(function(data) {
-            is = false;
-            Storage.setAllowed(data.localStorage);
-            
-            callback(null, data);
-            
-            timeout(function() {
-                if (!is)
-                    Promises.config = null;
-            });
-        }, function() {
+        callback(null, data);
+        
+        timeout(() => {
             if (!is)
                 Promises.config = null;
         });
-    }
+    }, function() {
+        if (!is)
+            Promises.config = null;
+    });
+}
+
+function getTimeoutOnce(time) {
+    let is;
     
-    function getTimeoutOnce(time) {
-        var is,
-            fn = function(callback) {
-                if (!is) {
-                    is = true;
-                    
-                    setTimeout(function() {
-                        is = false;
-                        callback();
-                    }, time);
-                }
-            };
+    return (callback) => {
+        if (is)
+            return;
         
-        return fn;
-    }
+        is = true;
+        
+        setTimeout(() => {
+            is = false;
+            callback();
+        }, time);
+    };
 }
 
