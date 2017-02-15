@@ -4,6 +4,7 @@
 
 const rendy = require('rendy');
 const exec = require('execon');
+const currify = require('currify/legacy');
 const input = require('./input');
 
 CloudCmd.Config = ConfigProto;
@@ -12,6 +13,10 @@ function ConfigProto() {
     const config = CloudCmd.config;
     const Key = CloudCmd.Key;
     const Dialog = DOM.Dialog;
+    
+    const TITLE = 'Config';
+    const alert = currify(Dialog.alert, TITLE);
+    
     const Images = DOM.Images;
     const Events = DOM.Events;
     const Files = DOM.Files;
@@ -20,7 +25,6 @@ function ConfigProto() {
         Images.show.load('top');
     };
     
-    const TITLE = 'Config';
     const Notify = DOM.Notify;
     const Config = this;
     
@@ -34,7 +38,7 @@ function ConfigProto() {
         showLoad();
         exec.series([
             CloudCmd.View,
-            function(callback) {
+            (callback) => {
                 Loading = false;
                 exec(callback);
                 DOM.loadSocket(initSocket);
@@ -44,25 +48,25 @@ function ConfigProto() {
     }
     
     function getHost() {
-        var l       = location,
-            href    = l.origin || l.protocol + '//' + l.host;
+        const {host, origin, protocol} = location;
+        const href = origin || `${protocol}//${host}`;
         
         return href;
     }
     
     function initSocket(error) {
-        var href = getHost();
-        var prefix = CloudCmd.PREFIX,
-            FIVE_SECONDS    = 5000,
-            save = function(data) {
-                onSave(data);
-                socket.send(data);
-            };
+        const href = getHost();
+        const prefix = CloudCmd.PREFIX;
+        const FIVE_SECONDS = 5000;
+        const save = (data) => {
+            onSave(data);
+            socket.send(data);
+        };
             
         if (error)
             return;
         
-        var socket  = io.connect(href + prefix + '/config', {
+        const socket  = io.connect(href + prefix + '/config', {
             'max reconnection attempts' : Math.pow(2, 32),
             'reconnection limit'        : FIVE_SECONDS,
             path: prefix + '/socket.io'
@@ -70,29 +74,22 @@ function ConfigProto() {
         
         authCheck(socket);
         
-        socket.on('connect', function() {
+        socket.on('connect', () => {
             Config.save = save;
         });
         
-        socket.on('config', function(config) {
+        socket.on('config', (config) => {
             DOM.Storage.setAllowed(config.localStorage);
         });
         
-        socket.on('message', function(data) {
-            onSave(data);
-        });
+        socket.on('message', onSave);
+        socket.on('log', CloudCmd.log);
         
-        socket.on('log', function(msg) {
-            CloudCmd.log(msg);
-        });
-        
-        socket.on('disconnect', function() {
+        socket.on('disconnect', () => {
             Config.save = saveHttp;
         });
         
-        socket.on('err', function(error) {
-            Dialog.alert(TITLE, error);
-        });
+        socket.on('err', alert);
     }
     
     function authCheck(socket) {
@@ -101,26 +98,27 @@ function ConfigProto() {
         
         socket.emit('auth', config('username'), config('password'));
         
-        socket.on('reject', function() {
-            Dialog.alert(TITLE, 'Wrong credentials!');
+        socket.on('reject', () => {
+            alert('Wrong credentials!');
         });
     }
     
-    Config.save             = saveHttp;
+    Config.save = saveHttp;
     
-    this.show               = function() {
-        var prefix  = CloudCmd.PREFIX,
-            funcs   = [
-                exec.with(Files.get, 'config-tmpl'),
-                exec.with(DOM.load.parallel, [
-                    prefix + '/css/config.css'
-                ])
-            ];
+    this.show = () => {
+        const prefix = CloudCmd.PREFIX;
+        const funcs = [
+            exec.with(Files.get, 'config-tmpl'),
+            exec.with(DOM.load.parallel, [
+                prefix + '/css/config.css'
+            ])
+        ];
         
-        if (!Loading) {
-            showLoad();
-            exec.parallel(funcs, fillTemplate);
-        }
+        if (Loading)
+            return;
+        
+        showLoad();
+        exec.parallel(funcs, fillTemplate);
     };
     
     function fillTemplate(error, template) {
@@ -129,7 +127,7 @@ function ConfigProto() {
         
         Files.get('config', (error, config) => {
             if (error)
-                return Dialog.alert(TITLE, 'Could not load config!');
+                return alert('Could not load config!');
             
             const obj = input.convert(config);
             
@@ -153,25 +151,26 @@ function ConfigProto() {
             const inputs = document.querySelectorAll('input, select', Element);
             const inputFirst = inputs[0];
             
-            let focus;
+            let afterShow;
             if (inputFirst) {
                 onAuthChange(inputFirst.checked);
                 
-                focus = () => {
+                afterShow = () => {
                     inputFirst.focus();
                 };
             }
             
-            [].forEach.call(inputs, (input) => {
+            [...inputs].forEach((input) => {
                 Events.addKey(input, onKey)
                     .add('change', input, ({target}) => {
                         onChange(target);
                     });
             });
             
+            const autoSize = true;
             CloudCmd.View.show(Element, {
-                autoSize: true,
-                afterShow: focus
+                autoSize,
+                afterShow,
             });
         });
     }
@@ -228,7 +227,7 @@ function ConfigProto() {
     
     function onLocalStorageChange() {
         var names           = ['diff', 'buffer', 'dirStorage', 'localStorage'],
-            elements        = names.map(function(name) {
+            elements        = names.map((name) => {
                 return input.getElementByName(name, Element);
             }),
             
@@ -247,23 +246,21 @@ function ConfigProto() {
         
         if (!isChecked || el.localStorage.checked)
             return;
-            
-        Dialog.alert(TITLE, msg);
+        
+        alert(msg);
         
         elements.forEach((element) => {
-            if (element.checked) {
-                element.checked = false;
+            if (!element.checked)
+                return;
                 
-                onChange(element);
-            }
-            
-            return element;
+            element.checked = false;
+            onChange(element);
         });
     }
     
     function onLSChange(name, data) {
         const elLocalStorage = input.getElementByName('localStorage', Element);
-        const msg = name + ' depends on localStorage';
+        const msg = `${name} depends on localStorage`;
         
         if (!data || elLocalStorage.checked)
             return;
