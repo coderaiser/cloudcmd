@@ -84,6 +84,7 @@
     "6to5:client:dev": "NODE_ENV=development redrun 6to5:client",
     "watch:client": "redrun 6to5:client -- --watch",
     "watch:server": "nodemon bin/cloudcmd.js",
+    "watch:lint:client": "nodemon -w client -x 'redrun lint:js:eslint:client'",
     "watch:test": "nodemon -w server -w test -w common -x \"npm run test\"",
     "w:c": "redrun watch:client",
     "watch:client:dev": "redrun 6to5:client:dev -- --watch",
