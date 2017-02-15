@@ -1,7 +1,9 @@
 'use strict';
 
-/* global CloudCmd, DOM, MenuIO, Format */
-    
+/* global CloudCmd, DOM, MenuIO */
+
+const Format = require('format-io');
+
 CloudCmd.EditFile = function EditFileProto(callback) {
     var Info = DOM.CurrentInfo;
     var Dialog = DOM.Dialog;
