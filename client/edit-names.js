@@ -1,6 +1,6 @@
 'use strict';
 
-/* global CloudCmd, DOM, MenuIO */
+/* global CloudCmd, DOM */
 
 const currify = require('currify/legacy');
 const exec = require('execon');
@@ -13,7 +13,7 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     const alert = currify(Dialog.alert, TITLE);
     
     const EditNames = this;
-    let Menu;
+    let Menu, MenuIO;
     const ConfigView  = {
         beforeClose: () => {
             exec.ifExist(Menu, 'hide');
@@ -144,6 +144,7 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
         event.preventDefault();
         
         !Menu && DOM.loadRemote('menu', (error) => {
+            MenuIO = window.MenuIO;
             let noFocus;
             const options = {
                 beforeShow: (params) => {
