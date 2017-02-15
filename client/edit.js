@@ -2,47 +2,41 @@
 
 'use strict';
 
-const itype = require('itype/legacy');
+const exec = require('execon');
 
 CloudCmd.Edit = EditProto;
 
 function EditProto(callback) {
-    var Name = 'Edit';
-    var Loading = true;
-    var EditorName = CloudCmd.config('editor');
+    const Name = 'Edit';
+    const EditorName = CloudCmd.config('editor');
     
-    var exec = Util.exec;
-    var Element,
-        editor,
-        
-        ConfigView  = {
-            afterShow: function() {
-                editor
-                    .moveCursorTo(0, 0)
-                    .focus();
-            }
-        };
+    let Loading = true;
+    let Element;
+    let editor;
     
-    var Edit = function(fn) {
-        if (!itype.function(fn))
-            return;
-        
-        fn();
+    const ConfigView = {
+        afterShow: () => {
+            editor
+                .moveCursorTo(0, 0)
+                .focus();
+        }
     };
     
+    const Edit = exec;
+    
     function init(callback) {
-        var element = createElement();
+        const element = createElement();
         
         exec.series([
             CloudCmd.View,
-            function(callback) {
+            (callback) => {
                 loadFiles(element, callback);
             },
         ], callback);
     }
     
     function createElement() {
-        var element = DOM.load({
+        const element = DOM.load({
             name: 'div',
             style:
                 'width      : 100%;'                +
@@ -71,9 +65,9 @@ function EditProto(callback) {
         if (options.afterShow) {
             checkFn('options.afterShow', options.afterShow);
             
-            var afterShow = config.afterShow;
+            const afterShow = config.afterShow;
             
-            config.afterShow = function() {
+            config.afterShow = () => {
                 afterShow();
                 options.afterShow();
             };
@@ -82,41 +76,43 @@ function EditProto(callback) {
         return config;
     }
     
-    Edit.show = function(options) {
+    Edit.show = (options) => {
         if (Loading)
             return;
          
         CloudCmd.View.show(Element, initConfig(options));
     };
     
-    Edit.getEditor = function() {
+    Edit.getEditor = () => {
         return editor;
     };
     
-    Edit.getElement = function() {
+    Edit.getElement = () => {
         return Element;
     };
     
-    Edit.hide = function() {
+    Edit.hide = () => {
         CloudCmd.View.hide();
     };
     
     function loadFiles(element, callback) {
-        var prefix = CloudCmd.PREFIX;
-        var prefixName = prefix + '/' + EditorName;
-        var url = prefixName + '/' + EditorName + '.js';
+        const socketPath = CloudCmd.PREFIX;
+        const maxSize = CloudFunc.MAX_FILE_SIZE;
+        
+        const prefix = socketPath + '/' + EditorName;
+        const url = prefix + '/' + EditorName + '.js';
         
         Util.time(Name + ' load');
         
-        DOM.load.js(url, function() {
-            var word = window[EditorName];
-            var options = {
-                maxSize     : CloudFunc.MAX_FILE_SIZE,
-                prefix      : prefixName,
-                socketPath  : prefix
+        DOM.load.js(url, () => {
+            const word = window[EditorName];
+            const options = {
+                maxSize,
+                prefix,
+                socketPath,
             };
             
-            word(element, options, function(ed) {
+            word(element, options, (ed) => {
                 Util.timeEnd(Name + ' load');
                 editor  = ed;
                 Loading = false;
