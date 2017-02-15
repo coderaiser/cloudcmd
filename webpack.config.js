@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const {optimize} = webpack
+const {optimize} = webpack;
 const {UglifyJsPlugin} = optimize;
 
 const dir = './client';
@@ -53,14 +53,14 @@ module.exports = {
     plugins,
     module: {
         loaders: [{
-          test: /\.js$/,
-          exclude: /(node_)?modules/,
-          loader: 'babel-loader',
-          query: {
-            presets: ['es2015']
-          }
+            test: /\.js$/,
+            exclude: /(node_)?modules/,
+            loader: 'babel-loader',
+            query: {
+                presets: ['es2015']
+            }
         }
-      ]
+        ]
     }
 };
 

@@ -56,7 +56,7 @@
     "jshint": "jshint bin client server",
     "jscs": "jscs --esnext $npm_package_config_dirs",
     "jshint:client": "jshint --config .es5/.jshintrc $npm_package_config_dirs_dirs_legacy --exclude bin/release.js",
-    "eslint:client": "eslint --rule 'no-console:0' --env browser client",
+    "eslint:client": "eslint --rule 'no-console:0' --env browser client webpack.config.js",
     "fix:eslint": "redrun eslint:client -- --fix",
     "test": "tape 'test/**/*.js'",
     "spell": "yaspeller .",
