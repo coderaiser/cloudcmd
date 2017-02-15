@@ -3,16 +3,17 @@
 /* global CloudCmd */
 const DOM = require('./dom');
 
-var Info = DOM.CurrentInfo;
-var sort = CloudCmd.sort;
-var order = CloudCmd.order;
-var position = DOM.getPanelPosition();
-var sortPrevious = sort[position];
+const Info = DOM.CurrentInfo;
+const sort = CloudCmd.sort;
+const order = CloudCmd.order;
+const position = DOM.getPanelPosition();
 
-CloudCmd.sortPanel = function(name, panel) {
-    panel = panel || DOM.getPanel();
-    
-    var position = panel
+let sortPrevious = sort[position];
+
+const {getPanel} = DOM;
+
+CloudCmd.sortPanel = (name, panel = getPanel()) => {
+    const position = panel
         .dataset
         .name
         .replace('js-', '');
@@ -33,3 +34,4 @@ CloudCmd.sortPanel = function(name, panel) {
         noCurrent: position !== Info.panelPosition
     });
 };
+
