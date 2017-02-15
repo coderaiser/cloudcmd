@@ -5,10 +5,10 @@
 const Format = require('format-io');
 
 CloudCmd.EditFile = function EditFileProto(callback) {
-    var Info = DOM.CurrentInfo;
-    var Dialog = DOM.Dialog;
-    var EditFile = this;
-    var config = CloudCmd.config;
+    const Info = DOM.CurrentInfo;
+    const Dialog = DOM.Dialog;
+    const EditFile = this;
+    const config = CloudCmd.config;
     
     let Menu;
     
@@ -25,39 +25,44 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     };
     
     function init(callback) {
-        var editor;
+        let editor;
         
         exec.series([
             CloudCmd.Edit,
-            function(callback) {
+            (callback) => {
                 editor = CloudCmd.Edit.getEditor();
                 callback();
             },
-            function(callback) {
+            (callback) => {
                 authCheck(editor);
                 callback();
             },
             
-            function(callback) {
+            (callback) => {
                 setListeners(editor);
                 callback();
             },
-            function(callback) {
+            (callback) => {
                 EditFile.show(callback);
             },
         ], callback);
     }
     
-    this.show = function() {
+    function getName() {
+        const {name, isDir} = Info;
+        
+        if (isDir)
+            return `${name}.json`;
+            
+        return name;
+    }
+    
+    this.show = () => {
         Images.show.load();
         
-        Info.getData(function(error, data) {
-            var path = Info.path;
-            var isDir = Info.isDir;
-            var name = Info.name;
-            
-            if (isDir)
-                name += '.json';
+        Info.getData((error, data) => {
+            const path = Info.path;
+            const name = getName();
             
             if (error)
                 return Images.hide();
@@ -75,16 +80,16 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         });
     };
     
-    this.hide = function() {
+    this.hide = () => {
         CloudCmd.Edit.hide();
     };
     
     function setListeners(editor) {
-        var element = CloudCmd.Edit.getElement();
+        const element = CloudCmd.Edit.getElement();
         
         DOM.Events.addOnce('contextmenu', element, setMenu);
         
-        editor.on('save', function(value) {
+        editor.on('save', (value) => {
             DOM.setCurrentSize(Format.size(value));
         });
     }
@@ -94,64 +99,64 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             return;
         
         spawn.emit('auth', config('username'), config('password'));
-        spawn.on('reject', function() {
+        spawn.on('reject', () => {
             Dialog.alert(TITLE, 'Wrong credentials!');
         });
     }
     
     function setMenu(event) {
-        var position = {
+        const position = {
             x: event.clientX,
             y: event.clientY
         };
         
         event.preventDefault();
         
-        !Menu && DOM.loadRemote('menu', function(error) {
-            var noFocus;
-            var options = {
-                beforeShow: function(params) {
+        !Menu && DOM.loadRemote('menu', (error) => {
+            let noFocus;
+            const options = {
+                beforeShow: (params) => {
                     params.x -= 18;
                     params.y -= 27;
                 },
                 
-                afterClick: function() {
+                afterClick: () => {
                     !noFocus && editor.focus();
                 }
             };
             
-            var editor = CloudCmd.Edit.getEditor();
+            const editor = CloudCmd.Edit.getEditor();
             
-            var menuData = {
-                'Save           Ctrl+S' : function() {
+            const menuData = {
+                'Save           Ctrl+S' : () => {
                     editor.save();
                 },
-                'Go To Line     Ctrl+G' : function() {
+                'Go To Line     Ctrl+G' : () => {
                     noFocus = true;
                     editor.goToLine();
                 },
-                'Cut            Ctrl+X' : function() {
+                'Cut            Ctrl+X' : () => {
                     editor.cutToClipboard();
                 },
-                'Copy           Ctrl+C' : function() {
+                'Copy           Ctrl+C' : () => {
                     editor.copyToClipboard();
                 },
-                'Paste          Ctrl+V' : function() {
+                'Paste          Ctrl+V' : () => {
                     editor.pasteFromClipboard();
                 },
-                'Delete         Del'    : function() {
+                'Delete         Del'    : () => {
                     editor.remove('right');
                 },
-                'Select All     Ctrl+A' : function() {
+                'Select All     Ctrl+A' : () => {
                     editor.selectAll();
                 },
-                'Beautify       Ctrl+B' : function() {
+                'Beautify       Ctrl+B' : () => {
                     editor.beautify();
                 },
-                'Minify         Ctrl+M' : function() {
+                'Minify         Ctrl+M' : () => {
                     editor.minify();
                 },
-                'Close          Esc'    : function() {
+                'Close          Esc'    : () => {
                     EditFile.hide();
                 }
             };
@@ -162,7 +167,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             if (Menu || !MenuIO)
                 return;
                 
-            var element = CloudCmd.Edit.getElement();
+            const element = CloudCmd.Edit.getElement();
             
             Menu = new MenuIO(element, options, menuData);
             Menu.show(position.x, position.y);
