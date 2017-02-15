@@ -19,7 +19,7 @@ const RESTful = require('./rest');
 function OperationProto(operation, data) {
     const Name = 'Operation';
     const TITLE = CloudCmd.TITLE;
-    const config = CloudCmd.config;
+    const {config} = CloudCmd;
     const {Dialog, Images} = DOM;
     
     let Loaded;
@@ -43,7 +43,7 @@ function OperationProto(operation, data) {
         exec.series([
             DOM.loadSocket,
             (callback) => {
-                if (CloudCmd.config('progress'))
+                if (config('progress'))
                     load((callback) => {
                         create(CloudCmd.PREFIX, callback);
                     });
@@ -59,7 +59,7 @@ function OperationProto(operation, data) {
     }
     
     function authCheck(spawn, ok) {
-        if (!CloudCmd.config('auth'))
+        if (!config('auth'))
             return ok();
             
         spawn.on('accept', ok);
