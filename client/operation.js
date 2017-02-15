@@ -7,6 +7,9 @@
 /* global salam */
 /* global omnes */
 
+// ignore reserved words
+// jshint -W024
+
 'use strict';
 
 CloudCmd.Operation = OperationProto;
@@ -28,10 +31,9 @@ function OperationProto(operation, data) {
         cp: copyFn,
         mv: moveFn,
         pack: packFn,
+        delete: deleteFn,
         extract: extractFn,
     } = RESTful;
-    
-    let deleteFn = RESTful.delete;
     
     const Info = DOM.CurrentInfo;
     const showLoad = Images.show.load.bind(null, 'top');
