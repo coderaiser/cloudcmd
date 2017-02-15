@@ -1,120 +1,88 @@
 'use strict';
 
-module.exports = InputProto();
+const currify = require('currify/legacy');
 
-function InputProto() {
-    if (!(this instanceof InputProto))
-        return new InputProto();
+const isType = currify((type, object, name) => {
+    return typeof object[name] === type;
+});
+
+const isBool = isType('boolean');
+
+module.exports.getElementByName = getElementByName;
+
+function getElementByName (selector, element) {
+    const str = `[data-name="js-${selector}"]`;
     
-    this.setValue           = setValue;
-    this.getValue           = getValue;
-    this.convert            = convert;
-    this.getName            = getName;
-    this.getElementByName   = getElementByName;
-    
-    function getElementByName(selector, element) {
-        var el = element.querySelector('[data-name="js-' + selector + '"]');
-        
-        return el;
-    }
-        
-    function getName(element) {
-        var name = element
-            .getAttribute('data-name')
-            .replace(/^js-/, '');
-        
-        return name;
-    }
-    
-    function convert(config) {
-        var result  = clone(config),
-            array   = Object.keys(result),
-            isBool  = partial(isType, result, 'boolean');
-        
-        array
-            .filter(isBool)
-            .forEach(function(name) {
-                var item = result[name];
-                
-                result[name] = setState(item);
-            });
-        
-        return result;
-    }
-    
-    function clone(object) {
-        var result = {};
-        
-        Object.keys(object).forEach(function(name) {
-            result[name] = object[name];
-        });
-        
-        return result;
-    }
-    
-    function partial(fn) {
-        var i,
-            bind    = Function.prototype.bind,
-            n       = arguments.length,
-            args    = Array(n - 1);
-        
-        args[0] = null;
-        
-        for (i = 1; i < n; i++)
-            args[i] = arguments[i];
-        
-        return bind.apply(fn, args);
-    }
-    
-    function isType(object, type, name) {
-        var current = typeof object[name],
-            is      = current === type;
-        
-        return is;
-    }
-    
-    function setState(state) {
-        var ret = '';
-        
-        if (state)
-            ret = ' checked';
-        
-        return ret;
-    }
-    
-    function getValue(name, element) {
-        var data,
-            el      = getElementByName(name, element),
-            type    = el.type;
-        
-        switch(type) {
-        case 'checkbox':
-            data = el.checked;
-            break;
-        case 'number':
-            data = Number(el.value);
-            break;
-        default:
-            data = el.value;
-            break;
-        }
-        
-        return data;
-    }
-    
-    function setValue(name, value, element) {
-        var el      = getElementByName(name, element),
-            type    = el.type;
-        
-        switch(type) {
-        case 'checkbox':
-            el.checked = value;
-            break;
-        
-        default:
-            el.value    = value;
-            break;
-        }
-    }
+    return element
+        .querySelector(str);
 }
+
+module.exports.getName = (element) => {
+    const name = element
+        .getAttribute('data-name')
+        .replace(/^js-/, '');
+    
+    return name;
+};
+
+module.exports.convert = (config) => {
+    const result = clone(config);
+    const array = Object.keys(result);
+    
+    array
+        .filter(isBool(result))
+        .forEach((name) => {
+            const item = result[name];
+            
+            result[name] = setState(item);
+        });
+    
+    return result;
+};
+
+function clone(object) {
+    const result = {};
+    
+    Object.keys(object).forEach((name) => {
+        result[name] = object[name];
+    });
+    
+    return result;
+}
+
+function setState(state) {
+    if (state)
+        return ' checked';
+    
+    return '';
+}
+
+module.exports.getValue = (name, element) => {
+    const el = getElementByName(name, element);
+    const type = el.type;
+    
+    switch(type) {
+    case 'checkbox':
+        return el.checked;
+    case 'number':
+        return Number(el.value);
+    default:
+        return el.value;
+    }
+};
+
+module.exports.setValue = (name, value, element) => {
+    const el = getElementByName(name, element);
+    const type = el.type;
+    
+    switch(type) {
+    case 'checkbox':
+        el.checked = value;
+        break;
+    
+    default:
+        el.value    = value;
+        break;
+    }
+};
 
