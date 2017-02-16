@@ -2,7 +2,7 @@
 
 /* global Util, DOM, $ */
 
-const type = require('itype/legacy');
+const itype = require('itype/legacy');
 
 if (!window.XMLHttpRequest || !document.head)
     DOM.load.ajax = $.ajax;
@@ -30,9 +30,7 @@ if (!Function.bind)
     };
 
 if (!Array.isArray)
-    Array.isArray = function(arr) {
-        return type(arr) === 'array';
-    };
+    Array.isArray = itype.array.bind();
 
 if (!document.addEventListener)
     /**
@@ -40,19 +38,12 @@ if (!document.addEventListener)
      * @param pType
      * @param pListener
      */
-    DOM.Events.add = function(pType, pElement, pListener) {
-        var lRet;
-        
-        if (!pElement)
-            pElement = window;
-        
-        lRet = $(pElement).bind(pType, null, pListener);
-        
-        return lRet;
+    DOM.Events.add = (pType, element, listener) => {
+        return $(element || window).bind(itype, null, listener);
     };
 
 if (!document.removeEventListener) {
-    DOM.Events.remove = function(pType, pElement, pListener) {
+    DOM.Events.remove = (pType, pElement, pListener) => {
         if (!pElement)
             pElement = window;
         
@@ -61,16 +52,14 @@ if (!document.removeEventListener) {
 }
 
 if (!document.getElementsByClassName) {
-    DOM.getByClassAll = function(pClass, pElement) {
-        var lClass = '.' + pClass,
-            lResult;
+    DOM.getByClassAll = (className, el) => {
+        const selector = '.' + className;
         
-        if (pElement)
-            lResult = $(pElement).find(lClass);
-        else
-            lResult = $.find(lClass);
+        if (el)
+            return $(el).find(selector);
         
-        return lResult;
+        return $.find(selector);
+        
     };
 }
 
@@ -145,17 +134,19 @@ DOM.scrollIntoViewIfNeeded = function(element, centerIfNeeded) {
 };
 
 if (!window.JSON) {
-    Util.json.parse       = $.parseJSON;
+    window.JSON = {};
+    
+    window.JSON.parse = $.parseJSON;
     
     /* https://gist.github.com/754454 */
-    Util.json.stringify   = function(obj) {
+    window.JSON.stringify   = function(obj) {
         var n, v, has,
             ret     = '',
             value   = '',
             json    = [],
-            isStr   = type.string(obj),
-            isObj   = type.object(obj),
-            isArray = type.array(obj);
+            isStr   = itype.string(obj),
+            isObj   = itype.object(obj),
+            isArray = itype.array(obj);
         
         if (!isObj || obj === null) {
             // simple data type
@@ -170,8 +161,8 @@ if (!window.JSON) {
                 has = obj.hasOwnProperty(n);
                 
                 if (has) {
-                    isStr   = type.string(v);
-                    isObj   = type.object(v);
+                    isStr   = itype.string(v);
+                    isObj   = itype.object(v);
                     
                     if (isStr)
                         v   = '"' + v + '"';
