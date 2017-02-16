@@ -51,6 +51,9 @@ module.exports = {
         libraryTarget: 'umd'
     },
     plugins,
+    externals: [
+        externals
+    ],
     module: {
         loaders: [{
             test: /\.js$/,
@@ -64,3 +67,17 @@ module.exports = {
     }
 };
 
+function externals(context, request, fn) {
+    if (!isDev)
+        return fn();
+    
+    const list = [
+        'es6-promise',
+        'object.assign',
+    ];
+    
+    if (list.includes(request))
+        return fn(null, request);
+    
+    fn();
+}
