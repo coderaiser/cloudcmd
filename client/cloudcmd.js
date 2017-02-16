@@ -7,6 +7,9 @@ window.exec = require('execon');
 window.Emitify = require('emitify');
 
 window.CloudCmd = (config) => {
+    window.Promise = window.Promise || require('promise-polyfill');
+    Object.assign = Object.assign || require('object.assign');
+
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     
@@ -29,23 +32,7 @@ window.CloudCmd = (config) => {
     require('./directory');
     require('./sort');
     
-    const dir = '/dist';
-    
-    const notEmpty = (a) => a;
-    // does not work in development mode
-    const moduleFiles = [
-        window.Promise ? '' : `${dir}/promise`,
-        Object.assign ? '' : `${dir}/object.assign`,
-    ].filter(notEmpty);
-    
-    const allFiles = moduleFiles
-        .map((name) => `${name}.js`);
-    
-    const urlFiles = getJoinURL(allFiles);
-    
-    createScript(prefix + urlFiles, () => {
-        window.CloudCmd.init(prefix, config);
-    });
+    window.CloudCmd.init(prefix, config);
 };
 
 function getPrefix(prefix) {
@@ -56,26 +43,5 @@ function getPrefix(prefix) {
         return prefix;
     
     return '/' + prefix;
-}
-
-function createScript(url, callback) {
-    const script = document.createElement('script');
-    
-    script.src = url;
-    script.async = true;
-    
-    script.addEventListener('load', function load() {
-        callback();
-        script.removeEventListener('load', load);
-    });
-    
-    document.body.appendChild(script);
-}
-
-function getJoinURL(names) {
-    const prefix = '/join:';
-    const url = prefix + names.join(':');
-    
-    return url;
 }
 
