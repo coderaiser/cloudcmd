@@ -44,6 +44,7 @@ module.exports = {
         cloud: `${dir}/cloud.js`,
         
         promise: `${dirExternal}/promise-polyfill/promise.js`,
+        'object.assign': `${dirExternal}/object.assign/dist/browser.js`,
     },
     output: {
         filename: '[name].js',

@@ -167,6 +167,7 @@
     "nodemon": "^1.9.1",
     "nsp": "^2.2.1",
     "nyc": "^10.1.2",
+    "object.assign": "^4.0.4",
     "place": "^1.1.4",
     "promise-polyfill": "^6.0.2",
     "readjson": "^1.1.3",

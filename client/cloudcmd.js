@@ -31,15 +31,14 @@ window.CloudCmd = (config) => {
     
     const dir = '/dist';
     
+    const notEmpty = (a) => a;
+    // does not work in development mode
     const moduleFiles = [
         window.Promise ? '' : `${dir}/promise`,
         Object.assign ? '' : `${dir}/object.assign`,
-    ].filter((name) => {
-        return name;
-    });
+    ].filter(notEmpty);
     
     const allFiles = moduleFiles
-        .concat('/join/join')
         .map((name) => `${name}.js`);
     
     const urlFiles = getJoinURL(allFiles);
