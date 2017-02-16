@@ -57,7 +57,7 @@ function EditProto(callback) {
     }
     
     function initConfig(config, options) {
-        Util.copyObj(config, ConfigView);
+        Object.assign(config, ConfigView);
         
         if (!options)
             return config;

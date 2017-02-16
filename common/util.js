@@ -3,6 +3,7 @@
 const exec = require('execon');
 const rendy = require('rendy');
 const jonny = require('jonny');
+const itype = require('itype/legacy');
 
 module.exports = new UtilProto(exec);
 
@@ -14,42 +15,23 @@ function UtilProto(exec) {
     this.kebabToCamelCase = kebabToCamelCase;
     
     /**
-     * Copy properties from from to to
-     *
-     * @param from
-     * @param to
-     */
-    this.copyObj                = function(to, from) {
-        if (!from) {
-            from    = to;
-            to      = {};
-        }
-        
-        if (to)
-            Object.keys(from).forEach(function(name) {
-                to[name]    = from[name];
-            });
-        
-        return to;
-    };
-    
-    /**
      * copy objFrom properties to target
      *
      * @target
      * @objFrom
      */
-    this.extend = function(target, objFrom) {
-        var obj;
-        var keys;
-        var proto;
-        var isFunc  = typeof objFrom === 'function';
-        var isArray = Array.isArray(objFrom);
-        var isObj = typeof target === 'object';
-        var ret = isObj ? target : {};
+    this.extend = (target, objFrom) => {
+        let obj;
+        let keys;
+        let proto;
+        
+        const isFunc  = itype.function(objFrom);
+        const isArray = Array.isArray(objFrom);
+        const isObj = itype.object(target);
+        let ret = isObj ? target : {};
         
         if (isArray)
-            objFrom.forEach(function(item) {
+            objFrom.forEach((item) => {
                ret = Util.extend(target, item);
             });
         

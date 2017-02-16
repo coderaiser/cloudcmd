@@ -123,13 +123,13 @@ function MenuProto(position) {
     }
     
     function getMenuData(isAuth) {
-        var menu = {
-            'Paste'         : Buffer.paste,
-            'New'           : {
-                'File'             : DOM.promptNewFile,
-                'Directory'        : DOM.promptNewDir
+        const menu = {
+            'Paste': Buffer.paste,
+            'New': {
+                'File': DOM.promptNewFile,
+                'Directory': DOM.promptNewDir
             },
-            'Upload'        : function() {
+            'Upload': () => {
                 CloudCmd.Upload.show();
             },
             'Upload From Cloud': uploadFromCloud,
@@ -151,42 +151,42 @@ function MenuProto(position) {
     }
     
     function loadFileMenuData(callback) {
-        var is = CloudCmd.config('auth');
-        var show        = function(name) {
-                CloudCmd[name].show();
-            },
-            Dialog      = DOM.Dialog,
-            menuData    = getMenuData(is),
-            menu        = {
-                'View'          : curry(show, 'View'),
-                'Edit'          : curry(show, 'Edit'),
-                'Rename'        : function() {
-                    setTimeout(DOM.renameCurrent, 100);
-                },
-                'Delete'        : function() {
-                    CloudCmd.Operation.show('delete');
-                },
-                'Pack'          : function() {
-                    CloudCmd.Operation.show('pack');
-                },
-                'Extract'       : function() {
-                    CloudCmd.Operation.show('extract');
-                },
-                'Download'      : preDownload,
-                'Upload To Cloud': curry(uploadTo, 'Cloud'),
-                'Cut'           : function() {
-                    isCurrent(Buffer.cut, function() {
-                        Dialog.alert.noFiles(TITLE);
-                    });
-                },
-                'Copy'          : function() {
-                    isCurrent(Buffer.copy, function() {
-                        Dialog.alert.noFiles(TITLE);
-                    });
-                },
-            };
+        const is = CloudCmd.config('auth');
+        const show = (name) => {
+            CloudCmd[name].show();
+        };
         
-        Util.copyObj(menu, menuData);
+        const Dialog = DOM.Dialog;
+        const menuData = getMenuData(is);
+        
+        const menu = Object.assign({}, menuData, {
+            'View'          : curry(show, 'View'),
+            'Edit'          : curry(show, 'Edit'),
+            'Rename'        : () => {
+                setTimeout(DOM.renameCurrent, 100);
+            },
+            'Delete'        : () => {
+                CloudCmd.Operation.show('delete');
+            },
+            'Pack'          : () => {
+                CloudCmd.Operation.show('pack');
+            },
+            'Extract'       : () => {
+                CloudCmd.Operation.show('extract');
+            },
+            'Download'      : preDownload,
+            'Upload To Cloud': curry(uploadTo, 'Cloud'),
+            'Cut'           : () => {
+                isCurrent(Buffer.cut, () => {
+                    Dialog.alert.noFiles(TITLE);
+                });
+            },
+            'Copy'          : () => {
+                isCurrent(Buffer.copy, () => {
+                    Dialog.alert.noFiles(TITLE);
+                });
+            },
+        });
         
         callback(is, menu);
     }
