@@ -1,71 +1,72 @@
-var CloudCmd, Util, DOM, olark;
+/* global CloudCmd */
+/* global DOM */
+/* global olark */
 
-(function(CloudCmd, Util, DOM) {
-    'use strict';
+'use strict';
+
+CloudCmd.Contact = ContactProto;
+
+const exec = require('execon');
+
+function ContactProto(callback) {
+    init(callback);
     
-    CloudCmd.Contact = ContactProto;
+    return exports;
+}
+
+const Events = DOM.Events;
+const Images = DOM.Images;
+const Key = CloudCmd.Key;
+
+module.exports.show = show;
+module.exports.hide = hide;
+
+let Inited = false;
+
+function init(callback) {
+    if (Inited)
+        return;
     
-    function ContactProto(callback) {
-        var Contact = this,
-            Events  = DOM.Events,
-            Images  = DOM.Images,
-            Key     = CloudCmd.Key,
-            Inited  = false;
+    load(() => {
+        Inited = true;
         
-        function init(callback) {
-            if (Inited)
-                return;
-            
-            Contact.show = show;
-            Contact.hide = hide;
-            
-            load(function() {
-                Inited = true;
-                
-                olark.identify('6216-545-10-4223');
-                olark('api.box.onExpand',   Contact.show);
-                olark('api.box.onShow',     Contact.show);
-                olark('api.box.onShrink',   Contact.hide);
-                
-                Util.exec(callback);
-            });
-            
-            Events.addKey(onKey);
-        }
+        olark.identify('6216-545-10-4223');
+        olark('api.box.onExpand', show);
+        olark('api.box.onShow', show);
+        olark('api.box.onShrink', hide);
         
-        function load(callback) {
-            var prefix  = CloudCmd.PREFIX,
-                path    = prefix + '/modules/olark/olark.min.js';
-            
-            Images.show.load('top');
-            
-            DOM.load.js(path, callback);
-        }
-        
-        function show() {
-            Key.unsetBind();
-            Images.hide();
-            
-            if (Inited)
-                olark('api.box.expand');
-            else
-                init(Contact.show);
-        }
-        
-        function hide() {
-            Key.setBind();
-            olark('api.box.hide');
-        }
-        
-        function onKey(event) {
-            var keyCode = event.keyCode,
-                ESC     = Key.ESC;
-            
-            if (keyCode === ESC)
-                hide();
-        }
-        
-        init(callback);
-    }
+        exec(callback);
+    });
     
-})(CloudCmd, Util, DOM);
+    Events.addKey(onKey);
+}
+
+function load(callback) {
+    const {PREFIX} = CloudCmd;
+    const path = `${PREFIX}/modules/olark/olark.min.js`;
+    
+    Images.show.load('top');
+    
+    DOM.load.js(path, callback);
+}
+
+function show() {
+    Key.unsetBind();
+    Images.hide();
+    
+    if (Inited)
+        return olark('api.box.expand');
+    
+    init(show);
+}
+
+function hide() {
+    Key.setBind();
+    olark('api.box.hide');
+}
+
+function onKey({keyCode}) {
+    if (keyCode === Key.ESC)
+        hide();
+}
+
