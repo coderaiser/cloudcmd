@@ -4,37 +4,29 @@
 
 'use strict';
 
-module.exports = uploadDirectory;
-
-function uploadDirectory(items) {
+module.exports = (items) => {
     const Images = DOM.Images;
     const Info = DOM.CurrentInfo;
     const load = DOM.load;
     const Dialog = DOM.Dialog;
     
-    let array   = [
+    if (items.length)
+        Images.show('top');
+    
+    const entries = [...items].map((item) => {
+        return item.webkitGetAsEntry();
+    });
+    
+    const addDir = (name) => {
+        return `/modules/${name}/lib/${name}.js`;
+    };
+    
+    const array   = [
         'findit',
         'philip'
     ];
     
-    if (items.length)
-        Images.show('top');
-    
-    const entries = [].map.call(items, (item) => {
-        return item.webkitGetAsEntry();
-    });
-    
-    array = array.map((name) => {
-        const result = [
-            '/modules/' + name,
-            '/lib/' + name,
-            '.js'
-        ].join('');
-        
-        return result;
-    });
-    
-    const url = CloudCmd.join(array);
+    const url = CloudCmd.join(array.map(addDir));
     
     load.js(url, () => {
         const path = Info.dirPath
@@ -74,17 +66,11 @@ function uploadDirectory(items) {
         });
         
         uploader.on('progress', setProgress);
-        
-        uploader.on('end', () => {
-            CloudCmd.refresh();
-        });
+        uploader.on('end', CloudCmd.refresh);
     });
-}
+};
 
-function percent(i, n, per) {
-    if (typeof per === 'undefined')
-        per = 100;
-    
+function percent(i, n, per = 100) {
     return Math.round(i * per / n);
 }
 
