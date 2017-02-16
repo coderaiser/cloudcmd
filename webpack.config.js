@@ -42,9 +42,7 @@ module.exports = {
         operation: `${dir}/operation.js`,
         konsole: `${dir}/konsole.js`,
         cloud: `${dir}/cloud.js`,
-        
-        promise: `${dirExternal}/promise-polyfill/promise.js`,
-        'object.assign': `${dirExternal}/object.assign/dist/browser.js`,
+        polyfill: `${dir}/polyfill.js`,
     },
     output: {
         filename: '[name].js',
