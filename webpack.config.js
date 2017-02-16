@@ -17,7 +17,8 @@ const clean = (array) => array.filter(notEmpty);
 
 const plugins = clean([
     !isDev && new UglifyJsPlugin({
-        sourceMap: true
+        sourceMap: true,
+        comments: false,
     }),
     new webpack.optimize.CommonsChunkPlugin({
         name: 'cloudcmd',
