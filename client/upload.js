@@ -1,63 +1,74 @@
-/* global CloudCmd, Util, DOM */
+/* global CloudCmd, DOM */
 
 'use strict';
+
+const exec = require('execon');
+
+const load = require('./load');
+const Files = require('./files');
 
 CloudCmd.Upload = UploadProto;
 
 function UploadProto() {
-    var Images      = DOM.Images,
-        Files       = DOM.Files,
-        
-        Upload      = this;
+    Images.show.load('top');
     
-    function init() {
-        Images.show.load('top');
-        
-        Util.exec.series([
-            CloudCmd.View,
-            Upload.show
-        ]);
-    }
+    exec.series([
+        CloudCmd.View,
+        show
+    ]);
     
-    this.show                       = function() {
-        Images.show.load('top');
+    return exports;
+}
+
+const {Images} = DOM;
+
+module.exports.show = show;
+module.exports.hide = hide;
+
+function show() {
+    Images.show.load('top');
+    
+    Files.get('upload', (error, data) => {
+        const autoSize = true;
         
-        Files.get('upload', function(error, data) {
-            CloudCmd.View.show(data, {
-                autoSize    : true,
-                afterShow   : afterShow
-            });
+        CloudCmd.View.show(data, {
+            autoSize,
+            afterShow,
         });
-        
-        DOM.load.style({
-            id      : 'upload-css',
-            inner   : '[data-name=js-upload-file-button] {'                                         +
-                          'font-family: "Droid Sans Mono", "Ubuntu Mono", "Consolas", monospace;'   +
-                          'font-size: 20px;'                                                        +
-                          'width: 97%'                                                              +
-                    '}'
-        });
-        
-    };
+    });
     
-    this.hide                       = function() {
-        CloudCmd.View.hide();
-    };
+    const fontFamily = [
+        '"Droid Sans Mono"',
+        '"Ubuntu Mono"',
+        '"Consolas"',
+        'monospace'
+    ].join(', ');
     
-    function afterShow() {
-        var button = DOM.getByDataName('js-upload-file-button');
-        
-        Images.hide();
-        
-        DOM.Events.add('change', button, (event) => {
-            const files = event.target.files;
-            
-            Upload.hide();
-            
-            DOM.uploadFiles(files);
-        });
-    }
+    load.style({
+        id      : 'upload-css',
+        inner   : '[data-name=js-upload-file-button] {' +
+                      `font-family: ${fontFamily};`     +
+                      'font-size: 20px;'                +
+                      'width: 97%'                      +
+                '}'
+    });
+}
+
+function hide() {
+    CloudCmd.View.hide();
+}
+
+function afterShow() {
+    const button = DOM.getByDataName('js-upload-file-button');
     
-    init();
+    Images.hide();
+    
+    DOM.Events.add('change', button, ({target}) => {
+        const {files} = target;
+        
+        hide();
+        
+        DOM.uploadFiles(files);
+    });
 }
 
