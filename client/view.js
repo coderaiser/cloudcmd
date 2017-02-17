@@ -9,6 +9,7 @@ const exec = require('execon');
 const {time} = require('../common/util');
 const Files = require('./files');
 const Events = require('./events');
+const load = require('./load');
 
 CloudCmd.View = ViewProto;
 
@@ -24,7 +25,7 @@ const Info = DOM.CurrentInfo;
 const Images = DOM.Images;
 const Key = CloudCmd.Key;
 
-let Element, TemplateAudio, Overlay;
+let El, TemplateAudio, Overlay;
 
 const Config = {
     beforeShow: (callback) => {
@@ -39,7 +40,7 @@ const Config = {
         hideOverlay();
     },
     afterShow: (callback) => {
-        Element.focus();
+        El.focus();
         exec(callback);
     },
     afterClose      : exec,
@@ -70,14 +71,14 @@ function ViewProto(callback) {
     
     exec.series([
         DOM.loadJquery,
-        load,
+        loadAll,
         (callback) => {
             Loading = false;
             exec(callback);
         }
     ], func);
     
-    Config.parent = Overlay = DOM.load({
+    Config.parent = Overlay = load({
         id          : 'js-view',
         name        : 'div',
         className   : 'fancybox-overlay fancybox-overlay-fixed'
@@ -98,12 +99,10 @@ function show(data, options) {
     if (Loading)
         return;
     
-    Element = $('<div class="view" tabindex=0>');
-    
-    let element;
+    El = $('<div class="view" tabindex=0>');
     
     if (data) {
-        element = $(Element).append(data);
+        const element = $(El).append(data);
         $.fancybox(element, initConfig(Config, options));
         return;
     }
@@ -121,9 +120,9 @@ function show(data, options) {
             
             const element = document.createTextNode(data);
             /* add margin only for view text documents */
-            Element.css('margin', '2%');
+            El.css('margin', '2%');
             
-            $.fancybox(Element.append(element), Config);
+            $.fancybox(El.append(element), Config);
         });
     
     case 'image':
@@ -266,27 +265,25 @@ function getMediaElement(src, callback) {
     check(src, callback);
     
     Files.get('view/media-tmpl', (error, template) => {
-        var rendered, element, type, is,
-            name = Info.name;
+        const {name} = Info;
         
-        if (error) {
-            alert(error);
-        } else {
-            if (!TemplateAudio)
-                TemplateAudio   = template;
-            
-            is      = isAudio(name);
-            type    =  is ? 'audio' : 'video';
-            
-            rendered    = rendy(TemplateAudio, {
-                src : src,
-                type: type,
-                name: Info.name
-            });
-            
-            element     = $(rendered)[0];
-            callback(element);
-        }
+        if (error)
+            return alert(error);
+        
+        if (!TemplateAudio)
+            TemplateAudio   = template;
+        
+        const is = isAudio(name);
+        const type =  is ? 'audio' : 'video';
+        
+        const rendered = rendy(TemplateAudio, {
+            src,
+            type,
+            name,
+        });
+        
+        const [element] = $(rendered);
+        callback(element);
     });
 }
 
@@ -299,9 +296,9 @@ function check(src, callback) {
 }
 
 function onMediaKey(media, event) {
-    var key = event.keyCode;
+    const {keyCode} = event;
     
-    if (key === Key.SPACE) {
+    if (keyCode === Key.SPACE) {
         if (media.paused)
             media.play();
         else
@@ -313,15 +310,15 @@ function onMediaKey(media, event) {
  * function loads css and js of FancyBox
  * @callback   -  executes, when everything loaded
  */
-function load(callback) {
+function loadAll(callback) {
     time(Name + ' load');
     
-    DOM.loadRemote('fancybox', function() {
-        var prefix = CloudCmd.PREFIX;
+    DOM.loadRemote('fancybox', () => {
+        const {PREFIX} = CloudCmd;
         
-        DOM.load.css(prefix + '/css/view.css', callback);
+        load.css(PREFIX + '/css/view.css', callback);
         
-        DOM.load.style({
+        load.style({
             id      : 'view-inlince-css',
             inner   : [
                 '.fancybox-title-float-wrap .child {',
