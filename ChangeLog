@@ -1,3 +1,18 @@
+2017.02.17, v6.5.3
+
+fix:
+- (contact) do not open
+- chore(package) scripts: add prefix lint:js to js linters
+
+feature:
+- (webpack) exclude object.assign, promise polyfill from dev build
+- (package) promise-polyfill -> es6-promise
+- (util) rm copyObj
+- (webpack) promise -> polyfill
+- (cloudcmd) add Promise, Object.assign polyfill
+- (package) scripts: watch:lint:client
+
+
 2017.02.15, v6.5.2
 
 fix:
