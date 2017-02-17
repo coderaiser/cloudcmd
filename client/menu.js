@@ -267,11 +267,7 @@ function MenuProto(position) {
             
         files.forEach((file) => {
             const selected = DOM.isSelected(file);
-            const id = load.getIdBySrc(path);
             const isDir = DOM.isCurrentIsDir(file);
-            
-            CloudCmd.log('downloading file ' + path + '...');
-            
              /*
               * if we send ajax request -
               * no need in hash so we escape #
@@ -280,7 +276,9 @@ function MenuProto(position) {
             const path = DOM.getCurrentPath(file)
                 .replace(/#/g, '%23');
             
+            CloudCmd.log('downloading file ' + path + '...');
             const encodedPath = encodeURI(path);
+            const id = load.getIdBySrc(path);
             
             let src;
             

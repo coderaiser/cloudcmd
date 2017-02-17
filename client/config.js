@@ -58,19 +58,20 @@ function ConfigProto() {
         const href = getHost();
         const prefix = CloudCmd.PREFIX;
         const FIVE_SECONDS = 5000;
-        const save = (data) => {
-            onSave(data);
-            socket.send(data);
-        };
-            
-        if (error)
-            return;
         
         const socket  = io.connect(href + prefix + '/config', {
             'max reconnection attempts' : Math.pow(2, 32),
             'reconnection limit'        : FIVE_SECONDS,
             path: prefix + '/socket.io'
         });
+        
+        const save = (data) => {
+            onSave(data);
+            socket.send(data);
+        };
+        
+        if (error)
+            return;
         
         authCheck(socket);
         

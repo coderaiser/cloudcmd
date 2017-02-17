@@ -6,6 +6,7 @@ const exec = require('execon');
 
 const load = require('./load');
 const Files = require('./files');
+const {Images} = DOM;
 
 CloudCmd.Upload = UploadProto;
 
@@ -19,8 +20,6 @@ function UploadProto() {
     
     return exports;
 }
-
-const {Images} = DOM;
 
 module.exports.show = show;
 module.exports.hide = hide;

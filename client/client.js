@@ -438,9 +438,7 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
         
         CloudCmd.log('reading dir: "' + path + '";');
         
-        var dirStorage = CloudCmd.config(dirStorage);
-        
-        if (!dirStorage)
+        if (!CloudCmd.config('dirStorage'))
             return create();
         
         Storage.get(path, create);

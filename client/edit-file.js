@@ -114,6 +114,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         
         !Menu && DOM.loadRemote('menu', (error) => {
             let noFocus;
+            const editor = CloudCmd.Edit.getEditor();
             const options = {
                 beforeShow: (params) => {
                     params.x -= 18;
@@ -124,8 +125,6 @@ CloudCmd.EditFile = function EditFileProto(callback) {
                     !noFocus && editor.focus();
                 }
             };
-            
-            const editor = CloudCmd.Edit.getEditor();
             
             const menuData = {
                 'Save           Ctrl+S' : () => {

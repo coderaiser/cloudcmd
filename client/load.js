@@ -46,19 +46,14 @@ function load(params) {
         notAppend,
     } = params;
     
-    /*
-     * if passed arguments function
-     * then it's onload by default
-     *
-     * if object - then onload and onerror
-     */
-    const funcLoad = () => {
-        const callback = func && func.onload || func;
-        
-        Events.remove('error', element, funcError);
-        
-        exec(callback);
-    };
+    let element = document.getElementById(id);
+    
+    if (element) {
+        exec(func);
+        return element;
+    }
+    
+    element = document.createElement(name);
     
     const funcError = () => {
         const msg = `file ${src} could not be loaded`;
@@ -73,14 +68,13 @@ function load(params) {
         exec(callback, error);
     };
     
-    let element = document.getElementById(id);
-    
-    if (element) {
-        exec(func);
-        return element;
-    }
-    
-    element = document.createElement(name);
+    const funcLoad = () => {
+        const callback = func && func.onload || func;
+        
+        Events.remove('error', element, funcError);
+        
+        exec(callback);
+    };
     
     if (/^(script|link)$/.test(name))
         Events.addOnce('load', element, funcLoad)

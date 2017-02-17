@@ -4,14 +4,14 @@
 
 CloudCmd.Help = HelpProto;
 
+const {Images} = require('./dom');
+
 function HelpProto() {
     Images.show.load('top');
     show();
     
     return exports;
 }
-
-const {Images} = require('./dom');
 
 module.exports.show = show;
 module.exports.hide = hide;

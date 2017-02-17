@@ -10,7 +10,8 @@
     },
     "rules": {
         "indent": ["error", 4],
-        "semi": "error"
+        "semi": "error",
+        "no-use-before-define": ["error", "nofunc"]
     },
   "extends": ["eslint:recommended"]
 }

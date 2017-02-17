@@ -326,19 +326,19 @@ function CmdProto() {
                     isArray     = itype.array(module.local),
                     version     = module.version,
                     
-                    funcON      = function() {
-                        load.parallel(remote, function(error) {
-                            if (error)
-                                funcOFF();
-                            else
-                                callback();
-                        });
+                    funcOFF = () => {
+                        load.parallel(local, callback);
                     },
                     
-                    funcOFF     = function() {
-                        load.parallel(local, callback);
+                    funcON = () => {
+                        load.parallel(remote, (error) => {
+                            if (error)
+                                return funcOFF();
+                            
+                            callback();
+                        });
                     };
-                    
+                
                 if (isArray) {
                     remoteTmpls = module.remote;
                     local       = module.local;

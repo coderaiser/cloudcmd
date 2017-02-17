@@ -173,21 +173,21 @@ function OperationProto(operation, data) {
             options = {};
         }
         
-        var done;
-        var lastError;
+        let done;
+        let lastError;
         
-        var listeners = {
-            progress: function(value) {
+        const listeners = {
+            progress: (value) => {
                 done = value === 100;
                 Images.setProgress(value);
             },
             
-            end: function() {
+            end: () => {
                 Images
                     .hide()
                     .clearProgress();
                 
-                events.forEach(function(name) {
+                Object.keys(listeners).forEach((name) => {
                     emitter.removeListener(name, listeners[name]);
                 });
                 
@@ -195,7 +195,7 @@ function OperationProto(operation, data) {
                     callback(lastError);
             },
             
-            error: function(error) {
+            error: (error) => {
                 lastError = error;
                 
                 if (options.noContinue) {
@@ -203,18 +203,18 @@ function OperationProto(operation, data) {
                     Dialog.alert(TITLE, error);
                 } else {
                     Dialog.confirm(TITLE, error + '\n Continue?')
-                        .then(function() {
+                        .then(() => {
                             emitter.continue();
-                        }, function() {
+                        }, () => {
                             emitter.abort();
                         });
                 }
             }
         };
         
-        var events = Object.keys(listeners);
+        const events = Object.keys(listeners);
         
-        events.forEach(function(name) {
+        events.forEach((name) => {
             emitter.on(name, listeners[name]);
         });
     }
