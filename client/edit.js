@@ -1,14 +1,19 @@
-/* global CloudCmd, Util, DOM, CloudFunc */
+/* global CloudCmd, CloudFunc */
 
 'use strict';
 
 const exec = require('execon');
+const currify = require('currify/legacy');
+
+const load = require('./load');
+const {time, timeEnd} = require('../common/util');
 
 CloudCmd.Edit = EditProto;
 
 function EditProto(callback) {
     const Name = 'Edit';
     const EditorName = CloudCmd.config('editor');
+    const loadFiles = currify(_loadFiles);
     
     let Loading = true;
     let Element;
@@ -22,21 +27,19 @@ function EditProto(callback) {
         }
     };
     
-    const Edit = exec;
+    const Edit = exec.bind();
     
     function init(callback) {
         const element = createElement();
         
         exec.series([
             CloudCmd.View,
-            (callback) => {
-                loadFiles(element, callback);
-            },
+            loadFiles(element)
         ], callback);
     }
     
     function createElement() {
-        const element = DOM.load({
+        const element = load({
             name: 'div',
             style:
                 'width      : 100%;'                +
@@ -56,7 +59,7 @@ function EditProto(callback) {
             throw Error(name + ' should be a function!');
     }
     
-    function initConfig(config, options) {
+    function initConfig(config = {}, options) {
         Object.assign(config, ConfigView);
         
         if (!options)
@@ -95,16 +98,16 @@ function EditProto(callback) {
         CloudCmd.View.hide();
     };
     
-    function loadFiles(element, callback) {
+    function _loadFiles(element, callback) {
         const socketPath = CloudCmd.PREFIX;
         const maxSize = CloudFunc.MAX_FILE_SIZE;
         
         const prefix = socketPath + '/' + EditorName;
         const url = prefix + '/' + EditorName + '.js';
         
-        Util.time(Name + ' load');
+        time(Name + ' load');
         
-        DOM.load.js(url, () => {
+        load.js(url, () => {
             const word = window[EditorName];
             const options = {
                 maxSize,
@@ -113,7 +116,7 @@ function EditProto(callback) {
             };
             
             word(element, options, (ed) => {
-                Util.timeEnd(Name + ' load');
+                timeEnd(Name + ' load');
                 editor  = ed;
                 Loading = false;
                 
