@@ -39,8 +39,7 @@
     "cloudcmd+": "bin/cloudcmd.js"
   },
   "config": {
-    "dirs_legacy": "client",
-    "dirs": "bin server test"
+    "dirs": "bin server test webpack.config.js"
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
@@ -51,7 +50,7 @@
     "lint:css": "recess css/*.css",
     "lint:style": "stylelint css/*.css",
     "lint:js": "redrun lint:js:*",
-    "lint:js:eslint:server": "eslint --rule 'no-console:0' bin test server webpack.config.js",
+    "lint:js:eslint:server": "eslint --rule 'no-console:0' $npm_package_config_dirs",
     "lint:js:jshint": "jshint bin client server",
     "lint:js:jscs": "jscs --esnext $npm_package_config_dirs",
     "lint:js:eslint:client": "eslint --rule 'no-console:0' --env browser client",
@@ -84,7 +83,7 @@
     "6to5:client:dev": "NODE_ENV=development redrun 6to5:client",
     "watch:client": "redrun 6to5:client -- --watch",
     "watch:server": "nodemon bin/cloudcmd.js",
-    "watch:lint:client": "nodemon -w client -x 'redrun lint:js:eslint:client'",
+    "watch:lint": "nodemon -w client -w server -w webpack.config.js -x 'redrun lint:js'",
     "watch:test": "nodemon -w server -w test -w common -x \"npm run test\"",
     "w:c": "redrun watch:client",
     "watch:client:dev": "redrun 6to5:client:dev -- --watch",
