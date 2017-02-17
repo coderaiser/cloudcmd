@@ -169,8 +169,10 @@ function initConfig(Config, options) {
         const item = options[name];
         const isFunc = itype.function(item);
         
-        if (!isFunc || !isConfig)
-            return config[name] = options[name];
+        if (!isFunc || !isConfig) {
+            config[name] = options[name];
+            return;
+        }
         
         const func = config[name];
         config[name] = () => {
