@@ -16,5 +16,6 @@
     "evil"  : true,
     "expr" : true,
     "quotmark": "single",
-    "validthis": true
+    "validthis": true,
+    "-W024": true
 }

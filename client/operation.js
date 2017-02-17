@@ -7,9 +7,6 @@
 /* global salam */
 /* global omnes */
 
-// ignore reserved words
-// jshint -W024
-
 'use strict';
 
 CloudCmd.Operation = OperationProto;
