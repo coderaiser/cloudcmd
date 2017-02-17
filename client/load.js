@@ -34,7 +34,7 @@ module.exports.ext = ext;
 function load(params) {
     const {
         src,
-        id = getIdBySrc(src),
+        id = getIdBySrc(params.src),
         func,
         name,
         async,
