@@ -1,27 +1,36 @@
-/* global CloudCmd, Util, DOM, CloudFunc */
+/* global CloudCmd, DOM, CloudFunc */
 
 'use strict';
 
 CloudCmd.Menu = MenuProto;
+
+const exec = require('execon');
+const currify = require('currify/legacy');
+
+const load = require('./load');
+const RESTful = require('./rest');
+const bind = (f, ...a) => (...b) => f(...a, ...b);
 
 function MenuProto(position) {
     const config = CloudCmd.config;
     const Buffer = DOM.Buffer;
     const Info = DOM.CurrentInfo;
     
-    let Loading             = true,
-        Key                 = CloudCmd.Key,
-        Events              = DOM.Events,
-        Dialog              = DOM.Dialog,
-        Images              = DOM.Images,
-        Menu                = this,
-        TITLE               = 'Menu',
-        
-        MenuShowedName,
-        MenuContext,
-        MenuContextFile;
+    let Loading = true;
+    const Key = CloudCmd.Key;
+    const Events = DOM.Events;
+    const Dialog = DOM.Dialog;
+    const Images = DOM.Images;
+    const Menu = this;
+    const TITLE = 'Menu';
+    const alert = currify(Dialog.alert, TITLE);
+    const alertNoFiles = () => Dialog.alert.noFiles(TITLE);
     
-    this.ENABLED                    = false;
+    let MenuShowedName;
+    let MenuContext;
+    let MenuContextFile;
+    
+    this.ENABLED = false;
     
     function init() {
         Loading  = true;
@@ -30,29 +39,26 @@ function MenuProto(position) {
         Events.addKey(listener);
     }
     
-    this.hide   = function() {
+    this.hide = () => {
         MenuContext.hide();
         MenuContextFile.hide();
     };
     
-    this.show   = function(position) {
-        var x, y,
-            showFunc;
-            
-        if (position) {
-            x   = position.x;
-            y   = position.y;
-        }
+    this.show = (position = {}) => {
+        const {
+            x = 0,
+            y = 0,
+        } = position;
         
-        showFunc    = function() {
+        const showFunc = () => {
             show(x, y);
             Images.hide();
         };
         
-        Util.exec.if(window.MenuIO, showFunc, () => {
+        exec.if(window.MenuIO, showFunc, () => {
             DOM.loadMenu((error) => {
                 if (error)
-                    return Dialog.alert(TITLE, error);
+                    return alert(error);
                 
                 showFunc();
             });
@@ -60,14 +66,12 @@ function MenuProto(position) {
     };
     
     function show(x, y) {
-        var pos;
-        
         if (!x || !y) {
             if (position) {
                 x = position.x;
                 y = position.y;
             } else {
-                pos = getCurrentPosition();
+                const pos = getCurrentPosition();
                 
                 x = pos.x;
                 y = pos.y;
@@ -102,7 +106,7 @@ function MenuProto(position) {
     }
     
     function getOptions(notFile) {
-        var name, func, options;
+        let name, func;
         
         if (notFile) {
             name    = 'context';
@@ -111,12 +115,12 @@ function MenuProto(position) {
             name    = 'contextFile';
         }
         
-        options     = {
+        const options = {
             icon        : true,
             beforeClose : Key.setBind,
-            beforeShow  : Util.exec.with(beforeShow, func),
-            beforeClick : beforeClick,
-            name        : name,
+            beforeShow  : exec.with(beforeShow, func),
+            beforeClick,
+            name,
         };
         
         return options;
@@ -142,90 +146,76 @@ function MenuProto(position) {
         return menu;
     }
     
-    function curry(fn) {
-        var args = [].slice.call(arguments, 1);
-        
-        return function() {
-            fn.apply(null, args.concat(arguments));
-        };
-    }
-    
     function loadFileMenuData(callback) {
         const is = CloudCmd.config('auth');
         const show = (name) => {
             CloudCmd[name].show();
         };
         
-        const Dialog = DOM.Dialog;
-        const menuData = getMenuData(is);
+        const menuBottom = getMenuData(is);
         
-        const menu = Object.assign({}, menuData, {
-            'View'          : curry(show, 'View'),
-            'Edit'          : curry(show, 'Edit'),
-            'Rename'        : () => {
+        const menuTop = {
+            'View': bind(show, 'View'),
+            'Edit': bind(show, 'EditFile'),
+            'Rename': () => {
                 setTimeout(DOM.renameCurrent, 100);
             },
-            'Delete'        : () => {
+            'Delete': () => {
                 CloudCmd.Operation.show('delete');
             },
-            'Pack'          : () => {
+            'Pack': () => {
                 CloudCmd.Operation.show('pack');
             },
-            'Extract'       : () => {
+            'Extract': () => {
                 CloudCmd.Operation.show('extract');
             },
-            'Download'      : preDownload,
-            'Upload To Cloud': curry(uploadTo, 'Cloud'),
-            'Cut'           : () => {
-                isCurrent(Buffer.cut, () => {
-                    Dialog.alert.noFiles(TITLE);
-                });
+            'Download': preDownload,
+            'Upload To Cloud': bind(uploadTo, 'Cloud'),
+            'Cut': () => {
+                isCurrent(Buffer.cut, alertNoFiles);
             },
-            'Copy'          : () => {
-                isCurrent(Buffer.copy, () => {
-                    Dialog.alert.noFiles(TITLE);
-                });
+            'Copy': () => {
+                isCurrent(Buffer.copy, alertNoFiles);
             },
-        });
+        };
+        
+        const menu = Object.assign({}, menuTop, menuBottom);
         
         callback(is, menu);
     }
     
     function isCurrent(yesFn, noFn) {
         if (Info.name !== '..')
-            yesFn();
-        else
-            noFn();
+            return yesFn();
+        
+        noFn();
     }
     
     function isPath(x, y) {
-        var el, elements, is,
-            panel       = Info.panel;
+        const panel = Info.panel;
         
-        if (panel) {
-            el          = document.elementFromPoint(x, y),
-            elements    = panel.querySelectorAll('[data-name="js-path"] *'),
-            is          = ~[].indexOf.call(elements, el);
-        }
+        const el = document.elementFromPoint(x, y);
+        const elements = panel.querySelectorAll('[data-name="js-path"] *');
+        const is = ~[].indexOf.call(elements, el);
         
         return is;
     }
     
     function beforeShow(callback, params) {
-        var name    = params.name,
-            notShow = DOM.getCurrentByPosition({
-                x: params.x,
-                y: params.y
-            });
+        const name = params.name;
+        let notShow = DOM.getCurrentByPosition({
+            x: params.x,
+            y: params.y
+        });
         
         if (params.name === 'contextFile') {
-            notShow   = !notShow;
+            notShow = !notShow;
         }
         
         if (!notShow)
             MenuShowedName = name;
         
-        Util.exec(callback);
+        exec(callback);
         
         if (!notShow)
             notShow = isPath(params.x, params.y);
@@ -234,18 +224,13 @@ function MenuProto(position) {
     }
     
     function beforeClick(name) {
-        var notCall;
-        
-        if (MenuShowedName !== name)
-            notCall = true;
-        
-        return notCall;
+        return MenuShowedName !== name;
     }
     
     function uploadTo(nameModule) {
-        Info.getData(function(error, data) {
-            var name        = Info.name,
-                execFrom    = CloudCmd.execFromModule;
+        Info.getData((error, data) => {
+            const name = Info.name;
+            const execFrom = CloudCmd.execFromModule;
              
             execFrom(nameModule, 'uploadFile', name, data);
         });
@@ -256,10 +241,10 @@ function MenuProto(position) {
     function uploadFromCloud() {
         Images.show.load('top');
         
-        CloudCmd.execFromModule('Cloud', 'saveFile', function(name, data) {
-            var path = DOM.getCurrentDirPath() + name;
+        CloudCmd.execFromModule('Cloud', 'saveFile', (name, data) => {
+            const path = DOM.getCurrentDirPath() + name;
             
-            DOM.RESTful.write(path,  data, function(error) {
+            RESTful.write(path,  data, (error) => {
                 !error && CloudCmd.refresh();
             });
         });
@@ -270,59 +255,62 @@ function MenuProto(position) {
     }
     
     function download(type) {
-        var TIME        = 30 * 1000,
-            prefixUr    = CloudCmd.PREFIX_URL,
-            FS          = CloudFunc.FS,
-            PACK        = '/pack',
-            date        = Date.now(),
-            files       = DOM.getActiveFiles();
+        const TIME = 30 * 1000;
+        const prefixUr = CloudCmd.PREFIX_URL;
+        const FS = CloudFunc.FS;
+        const PACK = '/pack';
+        const date = Date.now();
+        const files = DOM.getActiveFiles();
         
         if (!files.length)
-            DOM.Dialog.alert.noFiles(TITLE);
-        else
-            files.forEach(function(file) {
-                var element,
-                    selected    = DOM.isSelected(file),
-                    path        = DOM.getCurrentPath(file),
-                    id          = DOM.load.getIdBySrc(path),
-                    isDir       = DOM.isCurrentIsDir(file);
-                
-                CloudCmd.log('downloading file ' + path + '...');
-                
-                 /*
-                  * if we send ajax request -
-                  * no need in hash so we escape #
-                  * and all other characters, like "%"
-                  */
-                path = path.replace(/#/g, '%23');
-                path = encodeURI(path);
-                
-                if (isDir)
-                    path        = prefixUr + PACK + path + DOM.getPackerExt(type);
-                else
-                    path        = prefixUr + FS + path + '?download';
-                
-                element     = DOM.load({
-                    id          : id + '-' + date,
-                    name        : 'iframe',
-                    async       : false,
-                    className   : 'hidden',
-                    src         : path
-                });
-                
-                setTimeout(function() {
-                    document.body.removeChild(element);
-                }, TIME);
-                
-                if (selected)
-                    DOM.toggleSelectedFile(file);
+            return alertNoFiles();
+            
+        files.forEach((file) => {
+            const selected = DOM.isSelected(file);
+            const id = load.getIdBySrc(path);
+            const isDir = DOM.isCurrentIsDir(file);
+            
+            CloudCmd.log('downloading file ' + path + '...');
+            
+             /*
+              * if we send ajax request -
+              * no need in hash so we escape #
+              * and all other characters, like "%"
+              */
+            const path = DOM.getCurrentPath(file)
+                .replace(/#/g, '%23');
+            
+            const encodedPath = encodeURI(path);
+            
+            let src;
+            
+            if (isDir)
+                src = prefixUr + PACK + encodedPath + DOM.getPackerExt(type);
+            else
+                src = prefixUr + FS + encodedPath + '?download';
+            
+            const element = load({
+                id          : id + '-' + date,
+                name        : 'iframe',
+                async       : false,
+                className   : 'hidden',
+                src,
             });
+            
+            setTimeout(() => {
+                document.body.removeChild(element);
+            }, TIME);
+            
+            if (selected)
+                DOM.toggleSelectedFile(file);
+        });
     }
     
     function getCurrentPosition() {
-        var current     = Info.element,
-            rect        = current.getBoundingClientRect();
-        position    = {
+        const current = Info.element;
+        const rect = current.getBoundingClientRect();
+        
+        const position    = {
             x: rect.left + rect.width / 3,
             y: rect.top
         };
@@ -331,19 +319,22 @@ function MenuProto(position) {
     }
     
     function listener(event) {
-        var position,
-            F9          = Key.F9,
-            ESC         = Key.ESC,
-            key         = event.keyCode,
-            isBind      = Key.isBind();
+        const F9 = Key.F9;
+        const ESC = Key.ESC;
+        const key = event.keyCode;
+        const isBind = Key.isBind();
         
-        if (isBind && key === F9) {
-            position = getCurrentPosition();
+        if (!isBind)
+            return;
+        
+        if (key === ESC)
+            return Menu.hide();
+        
+        if (key === F9) {
+            const position = getCurrentPosition();
             MenuContext.show(position.x, position.y);
             
             event.preventDefault();
-        }  else if (key === ESC) {
-            Menu.hide();
         }
     }
     
