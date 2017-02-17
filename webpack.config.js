@@ -4,7 +4,6 @@ const {optimize} = webpack;
 const {UglifyJsPlugin} = optimize;
 
 const dir = './client';
-const dirExternal = './node_modules';
 
 const {env} = process;
 const isDev = env.NODE_ENV === 'development';
