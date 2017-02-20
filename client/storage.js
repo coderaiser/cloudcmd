@@ -5,7 +5,7 @@ const jonny = require('jonny');
 const exec = require('execon');
 
 /* приватный переключатель возможности работы с кэшем */
-var Allowed;
+let Allowed;
 
 /* функция проверяет возможно ли работать с кэшем каким-либо образом */
 module.exports.isAllowed = () => {
@@ -30,14 +30,13 @@ module.exports.remove = (item, callback) => {
 };
 
 module.exports.removeMatch = (string, callback) => {
-    var reg = RegExp('^' + string + '.*$');
+    const reg = RegExp('^' + string + '.*$');
+    const test = (a) => reg.test(a);
+    const remove = (a) => localStorage.removeItem(a);
     
-    Object.keys(localStorage).forEach((name) => {
-        const is = reg.test(name);
-        
-        if (is)
-            localStorage.removeItem(name);
-    });
+    Object.keys(localStorage)
+        .filter(test)
+        .forEach(remove);
     
     exec(callback);
     
@@ -49,7 +48,7 @@ module.exports.removeMatch = (string, callback) => {
  * записываем данные в него
  */
 module.exports.set = (name, data, callback) => {
-    var str, error;
+    let str, error;
     
     if (itype.object(data))
         str = jonny.stringify(data);
@@ -66,19 +65,19 @@ module.exports.set = (name, data, callback) => {
 
 /** Если доступен Storage принимаем из него данные*/
 module.exports.get = (name, callback) => {
-    var ret;
+    let ret;
     
     if (Allowed)
         ret = localStorage.getItem(name);
     
     exec(callback, null, ret);
-        
+    
     return module.exports;
 },
 
 /** функция чистит весь кэш для всех каталогов*/
 module.exports.clear = (callback) => {
-    var ret = Allowed;
+    const ret = Allowed;
     
     if (ret)
         localStorage.clear();
