@@ -72,7 +72,6 @@ function externals(context, request, fn) {
     
     const list = [
         'es6-promise',
-        'object.assign',
     ];
     
     if (list.includes(request))

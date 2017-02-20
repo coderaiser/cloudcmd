@@ -8,8 +8,6 @@ window.Emitify = require('emitify');
 
 window.CloudCmd = (config) => {
     window.Promise = window.Promise || require('es6-promise');
-    Object.assign = Object.assign || require('object.assign');
-
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     
