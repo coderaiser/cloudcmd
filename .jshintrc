@@ -17,5 +17,6 @@
     "expr" : true,
     "quotmark": "single",
     "validthis": true,
-    "-W024": true
+    "-W024": true,
+    "-W120": true
 }
