@@ -1,130 +1,135 @@
-/* global CloudCmd, Util, DOM */
+/* global CloudCmd, DOM */
 
 'use strict';
 
-var Info    = DOM.CurrentInfo,
-    Events  = DOM.Events,
-    Buffer  = DOM.Buffer,
+const Info = DOM.CurrentInfo;
+
+const exec = require('execon');
+
+const Events = require('./events');
+const Buffer = require('./buffer');
+const {escapeRegExp} = require('../common/util');
+
+let Chars = [];
+const KEY = {
+    BACKSPACE   : 8,
+    TAB         : 9,
+    ENTER       : 13,
+    ESC         : 27,
     
-    Chars   = [],
-    KEY     = {
-        BACKSPACE   : 8,
-        TAB         : 9,
-        ENTER       : 13,
-        ESC         : 27,
-        
-        SPACE       : 32,
-        PAGE_UP     : 33,
-        PAGE_DOWN   : 34,
-        END         : 35,
-        HOME        : 36,
-        
-        LEFT        : 37,
-        UP          : 38,
-        RIGHT       : 39,
-        DOWN        : 40,
-        
-        INSERT      : 45,
-        DELETE      : 46,
-        
-        ZERO        : 48,
-        
-        A           : 65,
-        
-        C           : 67,
-        D           : 68,
-        
-        G           : 71,
-        
-        M           : 77,
-        
-        O           : 79,
-        Q           : 81,
-        R           : 82,
-        S           : 83,
-        T           : 84,
-        U           : 85,
-        
-        V           : 86,
-        
-        X           : 88,
-        
-        Z           : 90,
-        
-        INSERT_MAC  : 96,
-        
-        ASTERISK    : 106,
-        PLUS        : 107,
-        MINUS       : 109,
-        
-        F1          : 112,
-        F2          : 113,
-        F3          : 114,
-        F4          : 115,
-        F5          : 116,
-        F6          : 117,
-        F7          : 118,
-        F8          : 119,
-        F9          : 120,
-        F10         : 121,
-        
-        EQUAL       : 187,
-        HYPHEN      : 189,
-        DOT         : 190,
-        SLASH       : 191,
-        TRA         : 192, /* Typewritten Reverse Apostrophe (`) */
-        BACKSLASH   : 220,
-        
-        BRACKET_CLOSE: 221
-    };
+    SPACE       : 32,
+    PAGE_UP     : 33,
+    PAGE_DOWN   : 34,
+    END         : 35,
+    HOME        : 36,
+    
+    LEFT        : 37,
+    UP          : 38,
+    RIGHT       : 39,
+    DOWN        : 40,
+    
+    INSERT      : 45,
+    DELETE      : 46,
+    
+    ZERO        : 48,
+    
+    A           : 65,
+    
+    C           : 67,
+    D           : 68,
+    
+    G           : 71,
+    
+    M           : 77,
+    
+    O           : 79,
+    Q           : 81,
+    R           : 82,
+    S           : 83,
+    T           : 84,
+    U           : 85,
+    
+    V           : 86,
+    
+    X           : 88,
+    
+    Z           : 90,
+    
+    INSERT_MAC  : 96,
+    
+    ASTERISK    : 106,
+    PLUS        : 107,
+    MINUS       : 109,
+    
+    F1          : 112,
+    F2          : 113,
+    F3          : 114,
+    F4          : 115,
+    F5          : 116,
+    F6          : 117,
+    F7          : 118,
+    F8          : 119,
+    F9          : 120,
+    F10         : 121,
+    
+    EQUAL       : 187,
+    HYPHEN      : 189,
+    DOT         : 190,
+    SLASH       : 191,
+    TRA         : 192, /* Typewritten Reverse Apostrophe (`) */
+    BACKSLASH   : 220,
+    
+    BRACKET_CLOSE: 221
+};
 
 KeyProto.prototype = KEY;
 CloudCmd.Key = KeyProto;
 
 function KeyProto() {
-    var Key = this,
-        Binded;
+    const Key = this;
     
-    this.isBind     = function() {
+    let Binded;
+    
+    this.isBind     = () => {
         return Binded;
     };
     
-    this.setBind    = function() {
+    this.setBind    = () => {
         Binded = true;
     };
     
-    this.unsetBind  = function() {
+    this.unsetBind  = () => {
         Binded = false;
     };
     
-    this.bind   = function() {
+    this.bind   = () => {
         Events.addKey(listener);
         Binded = true;
     };
     
-    function listener(event) {
-        /* get selected file */
-        var keyCode         = event.keyCode,
-            alt             = event.altKey,
-            ctrl            = event.ctrlKey,
-            shift           = event.shiftKey,
-            meta            = event.metaKey,
-            isBetween       = keyCode >= KEY.ZERO && keyCode <= KEY.Z,
-            isNumpad        = /Numpad/.test(event.code),
-            isSymbol,
-            char            = '';
-        
+    function getChar(event) {
          /*
           * event.keyIdentifier deprecated in chrome v51
           * but event.key is absent in chrome <= v51
           */
         
         if (event.key)
-            char = event.key;
-        else
-            char = fromCharCode(event.keyIdentifier);
+            return event.key;
         
-        isSymbol = ~['.', '_', '-', '+', '='].indexOf(char);
+        return fromCharCode(event.keyIdentifier);
+    }
+    
+    function listener(event) {
+        const keyCode = event.keyCode;
+        const alt = event.altKey;
+        const ctrl = event.ctrlKey;
+        const shift = event.shiftKey;
+        const meta = event.metaKey;
+        const isBetween = keyCode >= KEY.ZERO && keyCode <= KEY.Z;
+        const isNumpad = /Numpad/.test(event.code);
+        
+        let char = getChar(event);
+        let isSymbol = ~['.', '_', '-', '+', '='].indexOf(char);
         
         if (!isSymbol) {
             isSymbol = getSymbol(shift, keyCode);
@@ -144,43 +149,36 @@ function KeyProto() {
     }
     
     function getSymbol(shift, keyCode) {
-        var char;
-        
         switch (keyCode) {
         case KEY.DOT:
-            char = '.';
-            break;
+            return '.';
         
         case KEY.HYPHEN:
-            char = shift ? '_' : '-';
-            break;
+            return shift ? '_' : '-';
         
         case KEY.EQUAL:
-            char = shift ? '+' : '=';
-            break;
+            return shift ? '+' : '=';
         }
-        
-        return char;
     }
     
     function fromCharCode(keyIdentifier) {
-        var code    = keyIdentifier.substring(2),
-            hex     = parseInt(code, 16),
-            char    = String.fromCharCode(hex);
-            
+        const code = keyIdentifier.substring(2);
+        const hex = parseInt(code, 16);
+        const char = String.fromCharCode(hex);
+        
         return char;
     }
     
     function setCurrentByChar(char) {
-        var firstByName,
-            skipCount   = 0,
-            skipN       = 0,
-            setted      = false,
-            files       = Info.files,
-            escapeChar  = Util.escapeRegExp(char),
-            regExp      = new RegExp('^' + escapeChar + '.*$', 'i'),
-            i           = 0,
-            n           = Chars.length;
+        let firstByName;
+        let skipCount = 0;
+        let setted = false;
+        let i = 0;
+        
+        const escapeChar = escapeRegExp(char);
+        const regExp = new RegExp('^' + escapeChar + '.*$', 'i');
+        const {files} = Info;
+        const n = Chars.length;
         
         while(i < n && char === Chars[i]) {
             i++;
@@ -189,18 +187,15 @@ function KeyProto() {
         if (!i)
             Chars = [];
         
-        skipN = skipCount = i;
+        const skipN = skipCount = i;
         Chars.push(char);
         
-        var names = DOM.getFilenames(files);
-        
-        names.filter(function(name) {
-            var isMatch = name.match(regExp);
-            
-            if (isMatch && name !== '..')
-                return true;
-        }).some(function(name) {
-            var byName = DOM.getCurrentByName(name);
+        const names = DOM.getFilenames(files);
+        const isTest = (a) => regExp.test(a);
+        const isRoot = (a) => a === '..';
+        const not = (f) => (a) => !f(a);
+        const setCurrent = (name) => {
+            const byName = DOM.getCurrentByName(name);
             
             if (!skipCount) {
                 setted = true;
@@ -212,7 +207,12 @@ function KeyProto() {
                 
                 --skipCount;
             }
-        });
+        };
+        
+        names
+            .filter(isTest)
+            .filter(not(isRoot))
+            .some(setCurrent);
         
         if (!setted) {
             DOM.setCurrentFile(firstByName);
@@ -221,21 +221,25 @@ function KeyProto() {
     }
     
     function switchKey(event) {
-        var i, name, isSelected, isDir, prev, next,
-            Operation       = CloudCmd.Operation,
-            current         = Info.element,
-            panel           = Info.panel,
-            path            = Info.path,
-            keyCode         = event.keyCode,
-            alt             = event.altKey,
-            shift           = event.shiftKey,
-            ctrl            = event.ctrlKey,
-            meta            = event.metaKey,
-            ctrlMeta        = ctrl || meta;
+        let i, isSelected, prev, next;
+        let current = Info.element;
+        let name = Info.name;
+        
+        const {Operation} = CloudCmd;
+        const panel = Info.panel;
+        const path = Info.path;
+        const isDir = Info.isDir;
+        
+        const keyCode = event.keyCode;
+        const alt = event.altKey;
+        const shift = event.shiftKey;
+        const ctrl = event.ctrlKey;
+        const meta = event.metaKey;
+        const ctrlMeta = ctrl || meta;
         
         if (current) {
-            prev            = current.previousSibling;
-            next            = current.nextSibling;
+            prev = current.previousSibling;
+            next = current.nextSibling;
         }
         
         switch (keyCode) {
@@ -353,17 +357,14 @@ function KeyProto() {
             break;
             
         case Key.SPACE:
-            isDir   = Info.isDir,
-            name    = Info.name;
-            
             if (!isDir || name === '..')
-                isSelected    = true;
+                isSelected = true;
             else
-                isSelected    = DOM.isSelected(current);
+                isSelected = DOM.isSelected(current);
                 
-            Util.exec.if(isSelected, function() {
+            exec.if(isSelected, () => {
                 DOM.toggleSelectedFile(current);
-            }, function(callback) {
+            }, (callback) => {
                 DOM.loadCurrentSize(callback, current);
             });
             
@@ -551,7 +552,7 @@ function KeyProto() {
             if (ctrlMeta) {
                 CloudCmd.log('clearing storage...');
                 
-                DOM.Storage.clear(function() {
+                DOM.Storage.clear(() => {
                     CloudCmd.log('storage cleared');
                 });
                 
