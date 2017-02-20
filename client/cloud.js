@@ -36,7 +36,7 @@ module.exports.uploadFile = (filename, data) => {
 
 module.exports.saveFile = (callback) => {
     filepicker.pick((fpFile) => {
-        console.log(fpFile);
+        CloudCmd.log(fpFile);
         const {url} = fpFile;
         const responseType = 'arraybuffer';
         const success = exec.with(callback, fpFile.filename);
