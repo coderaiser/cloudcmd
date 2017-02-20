@@ -18,10 +18,9 @@ Util.extend(DOMProto, DOMTree);
 
 const DOM = new DOMFunc();
 
-DOM.Images = new ImagesProto();
-
 module.exports = DOM;
 
+DOM.Images = require('./images');
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
 DOM.Events = require('./events');
@@ -31,146 +30,8 @@ DOM.RESTful = require('./rest');
 DOM.load = require('./load');
 DOM.Notify = require('./notify');
 
-function ImagesProto() {
-    const Images = new ImageElementProto();
-    
-    function ImageElementProto () {
-        let LoadingImage;
-        const LOADING = 'loading';
-        const HIDDEN = 'hidden';
-        const ERROR = 'error';
-        
-        function getLoadingType() {
-            return DOM.isSVG() ? '-svg' : '-gif';
-        }
-        
-        function init() {
-            if (LoadingImage)
-                return;
-            
-            LoadingImage = LOADING + getLoadingType();
-        }
-        
-        function getElement() {
-            init();
-            
-            return DOM.load({
-                name        : 'span',
-                id          : 'js-status-image',
-                className   : 'icon',
-                attribute   : 'data-progress',
-                notAppend   : true
-            });
-        }
-        
-        this.get        = getElement;
-        
-        /* Функция создаёт картинку загрузки */
-        this.loading = function() {
-            var element = getElement();
-            var classList = element.classList;
-            
-            classList.add(LOADING, LoadingImage);
-            classList.remove(ERROR, HIDDEN);
-            
-            return element;
-        };
-        
-        /* Функция создаёт картинку ошибки загрузки */
-        this.error = function() {
-            var element = getElement();
-            var classList = element.classList;
-            
-            classList.add(ERROR);
-            classList.remove(HIDDEN, LOADING, LoadingImage);
-            
-            return element;
-        };
-    }
-    
-    this.show       = load;
-    this.show.load  = load;
-    this.show.error = error;
-    
-    /**
-     * Function shows loading spinner
-     * position = {top: true};
-     */
-    function load(position, panel) {
-        var current,
-            image           = Images.loading(),
-            parent          = image.parentElement,
-            refreshButton   = DOM.getRefreshButton(panel);
-        
-        if (position === 'top') {
-            current         = refreshButton.parentElement;
-        } else {
-            current         = DOM.getCurrentFile();
-            
-            if (current)
-                current     = DOM.getByDataName('js-name', current);
-            else
-                current     = refreshButton.parentElement;
-        }
-        
-        if (!parent || (parent && parent !== current))
-            current.appendChild(image);
-        
-        DOM.show(image);
-        
-        return image;
-    }
-        
-    function error(text) {
-        var image = Images.error();
-        
-        DOM.show(image);
-        image.title = text;
-        
-        CloudCmd.log(text);
-        
-        return image;
-    }
-    
-    /**
-     * hide load image
-     */
-    this.hide       = function() {
-        var element = Images.get();
-        DOM.hide(element);
-        
-        return this;
-    };
-    
-    this.setProgress    = function(value, title) {
-        var DATA    = 'data-progress',
-            element = Images.get();
-            
-        if (element) {
-            element.setAttribute(DATA, value + '%');
-            
-            if (title)
-                element.title = title;
-        }
-        
-        return this;
-    };
-        
-    this.clearProgress  = function() {
-        var DATA    = 'data-progress',
-            element = Images.get();
-            
-        if (element) {
-            element.setAttribute(DATA, '');
-            element.title = '';
-        }
-        
-        return this;
-    };
-}
-
 function DOMTreeProto() {
-    var DOM = this;
+    const DOM = this;
     
     /**
      * check class of element
