@@ -1,61 +1,69 @@
-/* global CloudCmd, Util, DOM, filepicker */
+/* global CloudCmd, filepicker */
 
 'use strict';
 
 CloudCmd.Cloud = CloudProto;
 
+const exec = require('execon');
+
+const load = require('./load');
+const Files = require('./files');
+const {Images} = require('./dom');
+
+const Util = require('../common/util');
+
 function CloudProto(callback) {
-    function init(callback) {
-        Util.exec.series([
-            load,
-            callback,
-        ]);
-    }
+    exec.series([
+        loadFiles,
+        callback,
+    ]);
     
-    this.uploadFile = function(name, data) {
-        var log = CloudCmd.log;
-        
-        filepicker.store(data, {
-            mimetype: '',
-            filename: name
-        },
-            function(fpFile) {
-                log(fpFile);
-                filepicker.exportFile(fpFile, log, log);
-            });
-    };
-    
-    this.saveFile   = function(callback) {
-        filepicker.pick(function(fpFile) {
-            console.log(fpFile);
-            
-            DOM.load.ajax({
-                url             : fpFile.url,
-                responseType    : 'arraybuffer',
-                success         : function(data) {
-                    Util.exec(callback, fpFile.filename, data);
-                }
-            });
-        });
-    };
-    
-    function load(callback) {
-        Util.time('filepicker load');
-        
-        DOM.load.js('//api.filepicker.io/v1/filepicker.js', function() {
-            DOM.Files.get('modules', function(error, modules) {
-                var storage = Util.findObjByNameInArr(modules, 'storage'),
-                    picker  = Util.findObjByNameInArr(storage, 'FilePicker'),
-                    key     = picker && picker.key;
-                    
-                filepicker.setKey(key);
-                    
-                DOM.Images.hide();
-                Util.timeEnd('filepicker loaded');
-                Util.exec(callback);
-            });
-        });
-    }
-    
-    init(callback);
+    return module.exports;
 }
+
+module.exports.uploadFile = (filename, data) => {
+    const {log} = CloudCmd;
+    const mimetype = '';
+    
+    filepicker.store(data, {
+        mimetype,
+        filename,
+    }, (fpFile) => {
+        log(fpFile);
+        filepicker.exportFile(fpFile, log, log);
+    });
+};
+
+module.exports.saveFile = (callback) => {
+    filepicker.pick((fpFile) => {
+        console.log(fpFile);
+        const {url} = fpFile;
+        const responseType = 'arraybuffer';
+        const success = exec.with(callback, fpFile.filename);
+        
+        load.ajax({
+            url,
+            responseType,
+            success,
+        });
+    });
+};
+
+function loadFiles(callback) {
+    Util.time('filepicker load');
+    
+    load.js('//api.filepicker.io/v1/filepicker.js', () => {
+        Files.get('modules', (error, modules) => {
+            const storage = Util.findObjByNameInArr(modules, 'storage');
+            const picker = Util.findObjByNameInArr(storage, 'FilePicker');
+            const key = picker && picker.key;
+            
+            filepicker.setKey(key);
+            
+            Images.hide();
+            Util.timeEnd('filepicker loaded');
+            exec(callback);
+        });
+    });
+}
+
