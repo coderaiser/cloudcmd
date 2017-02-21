@@ -10,7 +10,7 @@ const isBool = isType('boolean');
 
 module.exports.getElementByName = getElementByName;
 
-function getElementByName (selector, element) {
+function getElementByName(selector, element) {
     const str = `[data-name="js-${selector}"]`;
     
     return element
