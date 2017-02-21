@@ -1,56 +1,58 @@
 'use strict';
 
-/*global CloudCmd, Util, DOM */
+/*global CloudCmd */
 
-window.CloudCmd.Markdown = MarkdownProto;
+CloudCmd.Markdown = MarkdownProto;
 
-function MarkdownProto(nameParam, optionsParam) {
-    var Images      = DOM.Images,
-        RESTful     = DOM.RESTful,
-        Markdown    = RESTful.Markdown,
-        MD          = this;
-        
-    function init() {
-        Images.show.load('top');
-        
-        Util.exec.series([
-            CloudCmd.View,
-            Util.exec.with(MD.show, null, null),
-        ]);
-    }
+const exec = require('execon');
+
+const Images = require('./images');
+const load = require('./load');
+const {Markdown} = require('./rest');
+
+function MarkdownProto(name, options) {
+    Images.show.load('top');
     
-    this.show                       = function(name, options) {
-        var o               = options || optionsParam || {},
-            relativeQuery   = '?relative';
+    exec.series([
+        CloudCmd.View,
+        exec.with(show, name, options),
+    ]);
+    
+    return module.exports;
+}
+
+module.exports.show = show;
+
+module.exports.hide = () => {
+    CloudCmd.View.hide();
+};
+
+
+function show(name, options = {}) {
+    const relativeQuery = '?relative';
+    const {
+        positionLoad,
+        relative,
+    } = options;
+    
+    Images.show.load(positionLoad);
+    
+    if (relative)
+        name += relativeQuery;
+    
+    Markdown.read(name, (error, inner) => {
+        const name = 'div';
+        const className = 'help';
         
-        if (!name)
-            name            = nameParam;
-        
-        Images.show.load(o.positionLoad);
-        
-        if (o.relative)
-            name += relativeQuery;
-        
-        Markdown.read(name, function(error, result) {
-            var div = DOM.load({
-                name        : 'div',
-                className   : 'help',
-                inner       : result
-            });
-            
-            Images.hide();
-            
-            CloudCmd.View.show(div);
-            
-            nameParam       =
-            optionsParam    = null;
+        const div = load({
+            name,
+            className,
+            inner,
         });
-    };
-    
-    this.hide                       = function() {
-        CloudCmd.View.hide();
-    };
-    
-    init();
+        
+        Images.hide();
+        
+        CloudCmd.View.show(div);
+    });
 }
 
