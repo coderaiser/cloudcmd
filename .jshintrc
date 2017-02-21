@@ -18,5 +18,6 @@
     "quotmark": "single",
     "validthis": true,
     "-W024": true,
-    "-W120": true
+    "-W120": true,
+    "-W079": true
 }
