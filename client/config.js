@@ -15,8 +15,6 @@ const {Dialog} = DOM;
 const TITLE = 'Config';
 const alert = currify(Dialog.alert, TITLE);
 
-const Notify = DOM.Notify;
-
 const Config = module.exports;
 
 const showLoad = () => {
@@ -202,11 +200,6 @@ function onChange(el) {
             onLocalStorageChange();
         else if (name === 'auth')
             onAuthChange(data);
-    
-    if (name === 'notifications') {
-        if (data && !Notify.check())
-            Notify.request();
-    }
     
     obj[name] = data;
     

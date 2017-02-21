@@ -7,7 +7,6 @@
     "packer": "tar",
     "diff": true,
     "zip" : true,
-    "notifications": false,
     "localStorage": true,
     "buffer": true,
     "dirStorage": false,

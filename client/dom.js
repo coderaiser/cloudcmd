@@ -28,7 +28,6 @@ DOM.Storage = require('./storage');
 DOM.Files = require('./files');
 DOM.RESTful = require('./rest');
 DOM.load = require('./load');
-DOM.Notify = require('./notify');
 
 function DOMTreeProto() {
     const DOM = this;
