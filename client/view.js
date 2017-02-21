@@ -24,6 +24,7 @@ const Name = 'View';
 const Info = DOM.CurrentInfo;
 const Images = DOM.Images;
 const Key = CloudCmd.Key;
+const basename = (a) => a.split('/').pop();
 
 let El, TemplateAudio, Overlay;
 
@@ -188,28 +189,27 @@ function hide() {
 
 function showImage(href, prefixUrl) {
     const title = Info.name;
-    const names = Info.files
-        .filter((file) => {
-            const name = DOM.getCurrentName(file);
-            return isImage(name);
-        })
-        .filter((file) => {
-            const name = DOM.getCurrentName(file);
-            return name !== title;
-        }).map((file) => {
-            const href = prefixUrl + DOM.getCurrentPath(file);
-            const title = DOM.getCurrentName(file);
-            
-            return {
-                href,
-                title,
-            };
-        });
-        
-    names.unshift({
+    const excludeCurrent = (path) => {
+        return path !== Info.path;
+    };
+    
+    const makeTitle = (path) => {
+        return {
+            href: prefixUrl + path,
+            title: basename(path),
+        };
+    };
+    
+    const first = {
         href,
         title,
-    });
+    };
+    
+    const names = Info.files
+        .map(DOM.getCurrentPath)
+        .filter(isImage)
+        .filter(excludeCurrent)
+        .map(makeTitle);
     
     const config = Object.assign({}, Config, {
         autoSize    : true,
@@ -224,7 +224,9 @@ function showImage(href, prefixUrl) {
         }
     });
     
-    $.fancybox.open(names, config);
+    const allNames = [first].concat(names);
+    
+    $.fancybox.open(allNames, config);
 }
 
 function isImage(name) {
