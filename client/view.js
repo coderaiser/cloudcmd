@@ -188,7 +188,7 @@ function hide() {
 
 function showImage(href, prefixUrl) {
     const title = Info.name;
-    const names = Info.file
+    const names = Info.files
         .filter((file) => {
             const name = DOM.getCurrentName(file);
             return isImage(name);
@@ -204,10 +204,12 @@ function showImage(href, prefixUrl) {
                 href,
                 title,
             };
-        }).unshift({
-            href,
-            title,
         });
+        
+    names.unshift({
+        href,
+        title,
+    });
     
     const config = Object.assign({}, Config, {
         autoSize    : true,
