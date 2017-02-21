@@ -8,8 +8,7 @@ const exec = require('execon');
 
 const load = require('./load');
 const Files = require('./files');
-const {Images} = require('./dom');
-
+const Images = require('./images');
 const Util = require('../common/util');
 
 function CloudProto(callback) {
