@@ -1,3 +1,15 @@
+2017.02.21, v6.5.5
+
+fix:
+- (docker) ignore: remove client files (#107)
+
+feature:
+- (client) object.assign -> babel-plugin-object-assign: decrease client size by 2kb
+- (images) move out from dom
+- (jshint) ignore reserved words
+- (eslintrc) add no-use-before-define
+
+
 2017.02.17, v6.5.4
 
 fix:
