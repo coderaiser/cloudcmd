@@ -61,6 +61,14 @@ smalltalk.prompt('Question', 'How old are you?', '10').then(function(value) {
 });
 ```
 
+## Bundlers
+
+When `webpack` `rollup` or `browserify` used, you can import `es5` version with:
+
+```js
+import smalltalk from 'smalltalk/legacy';
+```
+
 #License
 MIT
 

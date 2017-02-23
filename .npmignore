@@ -6,6 +6,18 @@ shell
 test
 coverage
 
+modules/jquery/dist
+modules/jquery/external
+modules/jquery/src
+
+!modules/jquery/dist/jquery.min.js
+
+modules/fancybox/lib/
+modules/fancybox/demo
+modules/fancybox/sprite.psd
+
+modules/execon
+
 app.json
 circle.yml
 

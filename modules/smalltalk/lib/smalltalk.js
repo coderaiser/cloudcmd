@@ -9,9 +9,9 @@ exports.alert = (title, msg) => {
     return showDialog(title, msg, '', BUTTON_OK, {cancel: false});
 };
 
-exports.prompt = (title, msg, value, options) => {
-    const val         = value || '';
-    const valueStr    = `<input type="text" value="${ val }" data-name="js-input">`;
+exports.prompt = (title, msg, value = '', options) => {
+    const val = value.replace(/\"/g, '&quot;');
+    const valueStr = `<input type="text" value="${ val }" data-name="js-input">`;
     
     return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
 };
