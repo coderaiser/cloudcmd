@@ -20,6 +20,8 @@ const DOM = new DOMFunc();
 
 module.exports = DOM;
 
+const load = require('./load');
+
 DOM.Images = require('./images');
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
@@ -27,7 +29,8 @@ DOM.Events = require('./events');
 DOM.Storage = require('./storage');
 DOM.Files = require('./files');
 DOM.RESTful = require('./rest');
-DOM.load = require('./load');
+
+DOM.load = load;
 
 function DOMTreeProto() {
     const DOM = this;
@@ -250,67 +253,57 @@ function CmdProto() {
         return DOM.loadRemote('menu', callback);
     };
     
-    this.uploadFiles        = function(dir, files) {
-        var array,
-            slice   = [].slice,
-            i       = 0,
-            n       = 0,
-            func    = function(name) {
-                return function() {
-                    CloudCmd.refresh(null, function() {
-                        DOM.setCurrentByName(name);
-                    });
-                };
-            },
+    this.uploadFiles = (dir, files) => {
+        let i = 0;
+        const slice = [].slice;
+        
+        if (!files) {
+            files = dir;
+            dir = CurrentInfo.dirPath;
+        }
+        
+        const n = files.length;
+        
+        if (!n)
+            return;
+        
+        const array = slice.call(files);
+        
+        exec.eachSeries(array, loadFile, func(files[0].name));
+        
+        function func(name) {
+            return () => {
+                CloudCmd.refresh(null, () => {
+                    DOM.setCurrentByName(name);
+                });
+            };
+        }
+        
+        function loadFile(file, callback) {
+            const Images = DOM.Images;
+            const name = file.name;
+            const path = dir + name;
+            const prefixURL = CloudCmd.PREFIX_URL;
+            const FS = CloudFunc.FS;
+            const api = prefixURL + FS;
             
-            percent = function(i, n, per) {
-                var value;
-                
-                if (!per)
-                    per = 100;
-                
-                value = Math.round(i * per / n);
-                
-                return value;
-            },
+            const percent = (i, n, per = 100) => {
+                return Math.round(i * per / n);
+            };
             
-            step    = function(n) {
-                return 100 / n;
-            },
+            const step = (n) => 100 / n;
             
-            load    = function(file, callback) {
-                var uploader,
-                    Images      = DOM.Images,
-                    name        = file.name,
-                    path        = dir + name,
-                    prefixURL   = CloudCmd.PREFIX_URL,
-                    FS          = CloudFunc.FS,
-                    api         = prefixURL + FS;
+            ++i;
+            
+            load.put(api + path, file)
+                .on('end', callback)
+                .on('progress', (count) => {
+                    const max = step(n);
+                    const value = (i - 1) * max + percent(count, 100, max);
                     
-                ++i;
-                    
-                uploader = DOM.load.put(api + path, file);
-                uploader.on('progress', function(count) {
-                    var max     = step(n),
-                        value   = (i - 1) * max + percent(count, 100, max);
-                        
                     Images.show.load('top');
                     Images.setProgress(Math.round(value));
                 });
-                    
-                uploader.on('end', callback);
-            };
-        
-        if (!files) {
-            files   = dir;
-            dir     = CurrentInfo.dirPath;
-        }
-        
-        n       = files.length;
-        array   = slice.call(files);
-        
-        if (n) {
-            exec.eachSeries(array, load, func(files[0].name));
         }
     };
     
