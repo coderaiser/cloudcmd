@@ -10,6 +10,7 @@ const {time} = require('../common/util');
 const Files = require('./files');
 const Events = require('./events');
 const load = require('./load');
+const Images = require('./images');
 
 CloudCmd.View = ViewProto;
 
@@ -22,7 +23,6 @@ let Loading = false;
 
 const Name = 'View';
 const Info = DOM.CurrentInfo;
-const Images = DOM.Images;
 const Key = CloudCmd.Key;
 const basename = (a) => a.split('/').pop();
 
