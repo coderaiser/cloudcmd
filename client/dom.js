@@ -839,8 +839,8 @@ function CmdProto() {
      * open dialog with expand selection
      */
     this.expandSelection                = function() {
-        var msg     = 'expand',
-            files   = CurrentInfo.files;
+        var msg = 'expand';
+        var files = CurrentInfo.files;
         
         selectByPattern(msg, files);
     };
@@ -849,8 +849,8 @@ function CmdProto() {
      * open dialog with shrink selection
      */
     this.shrinkSelection                = function() {
-        var msg     = 'shrink',
-            files   = DOM.getSelectedFiles();
+        var msg = 'shrink';
+        var files = DOM.getSelectedFiles();
        
         selectByPattern(msg, files);
     };
@@ -923,9 +923,9 @@ function CmdProto() {
      * @param currentFile
      */
     this.isCurrentIsDir            = function(currentFile) {
-        var current    = currentFile || this.getCurrentFile(),
-            fileType   = this.getByDataName('js-type', current),
-            ret        = this.isContainClass(fileType, 'directory');
+        var current = currentFile || this.getCurrentFile();
+        var fileType = this.getByDataName('js-type', current);
+        var ret = this.isContainClass(fileType, 'directory');
         
         return ret;
     };
@@ -936,8 +936,8 @@ function CmdProto() {
      * @param currentFile - current file by default
      */
     this.getCurrentLink          = function(currentFile) {
-        var current = currentFile || this.getCurrentFile(),
-            link    = this.getByTag('a', current);
+        var current = currentFile || this.getCurrentFile();
+        var link = this.getByTag('a', current);
         
         return link[0];
     };
@@ -948,13 +948,13 @@ function CmdProto() {
      * @param currentFile - current file by default
      */
     this.getCurrentPath          = function(currentFile) {
-        var current     = currentFile || DOM.getCurrentFile(),
-            element     = DOM.getByTag('a', current)[0],
-            path        = element.getAttribute('href'),
-            prefix      = CloudCmd.PREFIX,
-            fs          = CloudFunc.FS;
+        var current = currentFile || DOM.getCurrentFile();
+        var element = DOM.getByTag('a', current)[0];
+        var prefix = CloudCmd.PREFIX;
+        var fs = CloudFunc.FS;
         
-        path            = path.replace(RegExp('^' + prefix + fs), '');
+        var path = element.getAttribute('href')
+            .replace(RegExp('^' + prefix + fs), '');
         
         return path;
     };
@@ -965,13 +965,13 @@ function CmdProto() {
      * @param currentFile
      */
     this.getCurrentName          = function(currentFile) {
-        var link,
-            name        = '',
-            current     = currentFile || this.getCurrentFile();
+        var link;
+        var name = '';
+        var current = currentFile || this.getCurrentFile();
         
         if (current)
             link        = this.getCurrentLink(current);
-            
+        
         if (link) {
             name = link.title;
         }
@@ -979,11 +979,11 @@ function CmdProto() {
         return name;
     };
     
-    this.getFilenames           = function(allFiles) {
-        var first, name,
-            files,
-            slice   = Array.prototype.slice,
-            names   = [];
+    this.getFilenames = function(allFiles) {
+        var first, name;
+        var files;
+        var slice = Array.prototype.slice;
+        var names = [];
         
         if (!allFiles)
             throw Error('AllFiles could not be empty');
