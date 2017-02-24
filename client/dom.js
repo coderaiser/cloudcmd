@@ -1,6 +1,5 @@
 /* global CloudCmd */
 /* global CloudFunc */
-/* global Util */
 
 'use strict';
 
@@ -8,6 +7,7 @@ const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
 const jonny = require('jonny');
+const Util = require('../common/util');
 
 const DOMFunc = function() {};
 
@@ -1472,19 +1472,18 @@ function CmdProto() {
     
     this.CurrentInfo            = CurrentInfo,
     
-    this.updateCurrentInfo      = function(currentFile) {
-        var info            = Cmd.CurrentInfo,
-            current         = currentFile || Cmd.getCurrentFile(),
-            files           = current.parentElement,
-            panel           = files.parentElement,
-            
-            panelPassive    = Cmd.getPanel({
-                active: false
-            }),
-            
-            filesPassive    = DOM.getFiles(panelPassive),
-            
-            name            = Cmd.getCurrentName(current);
+    this.updateCurrentInfo = (currentFile) => {
+        const info = Cmd.CurrentInfo;
+        const current = currentFile || Cmd.getCurrentFile();
+        const files = current.parentElement;
+        const panel = files.parentElement;
+        
+        const panelPassive = Cmd.getPanel({
+            active: false
+        });
+        
+        const filesPassive = DOM.getFiles(panelPassive);
+        const name = Cmd.getCurrentName(current);
         
         info.dir            = Cmd.getCurrentDirName();
         info.dirPath        = Cmd.getCurrentDirPath();
