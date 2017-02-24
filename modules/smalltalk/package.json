@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -19,6 +19,8 @@
   "scripts": {
     "watch": "nodemon --watch lib --watch test --exec",
     "watch:test": "npm run watch -- npm test",
+    "watch:lint": "npm run watch -- 'npm run lint'",
+    "watch:lint:js": "npm run watch -- \"run lint:js\"",
     "watch:coverage": "redrun watch -- redrun coverage",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
@@ -81,5 +83,8 @@
     "stylelint-config-standard": "^16.0.0",
     "systemjs": "^0.20.2",
     "tape": "^4.6.0"
+  },
+  "dependencies": {
+    "currify": "^2.0.3"
   }
 }
