@@ -468,6 +468,10 @@ function resize() {
             return;
         
         const {panel} = Info;
+        const isEmptyRoot = !panel;
+        
+        if (isEmptyRoot)
+            return;
         
         const name = panel.getAttribute('data-name');
         const isLeft = name === 'js-left';
