@@ -192,7 +192,11 @@ function MenuProto(position) {
     }
     
     function isPath(x, y) {
-        const panel = Info.panel;
+        const {panel} = Info;
+        const isEmptyRoot = !panel;
+        
+        if (isEmptyRoot)
+            return false;
         
         const el = document.elementFromPoint(x, y);
         const elements = panel.querySelectorAll('[data-name="js-path"] *');
