@@ -20,17 +20,17 @@ const DOM = new DOMFunc();
 
 module.exports = DOM;
 
+const Images = require('./images');
 const load = require('./load');
 
-DOM.Images = require('./images');
+DOM.Images = Images;
+DOM.load = load;
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
 DOM.Events = require('./events');
 DOM.Storage = require('./storage');
 DOM.Files = require('./files');
 DOM.RESTful = require('./rest');
-
-DOM.load = load;
 
 function DOMTreeProto() {
     const DOM = this;
@@ -280,7 +280,6 @@ function CmdProto() {
         }
         
         function loadFile(file, callback) {
-            const Images = DOM.Images;
             const name = file.name;
             const path = dir + name;
             const prefixURL = CloudCmd.PREFIX_URL;
@@ -494,7 +493,6 @@ function CmdProto() {
      */
     this.loadCurrentSize          = function(callback, currentFile) {
         var RESTful     = DOM.RESTful,
-            Images      = DOM.Images,
             current     = currentFile || this.getCurrentFile(),
             query       = '?size',
             link        = this.getCurrentPath(current);
