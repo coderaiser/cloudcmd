@@ -14,14 +14,9 @@ const {
     Entity,
 } = require('../../common/cloudfunc');
 
-const DOMFunc = function() {};
+const DOMTree = require('./dom-tree');
 
-const DOMTree = Util.extendProto(DOMTreeProto);
-const DOMProto = DOMFunc.prototype = new CmdProto();
-
-Util.extend(DOMProto, DOMTree);
-
-const DOM = new DOMFunc();
+const DOM = Object.assign({}, DOMTree, new CmdProto());
 
 module.exports = DOM;
 
@@ -37,110 +32,15 @@ DOM.Storage = require('./storage');
 DOM.Files = require('./files');
 DOM.RESTful = require('./rest');
 
-function DOMTreeProto() {
-    const DOM = this;
-    
-    /**
-     * check class of element
-     *
-     * @param element
-     * @param className
-     */
-    this.isContainClass = (element, className) => {
-        if (!element)
-            throw Error('element could not be empty!');
-        
-        if (!className)
-            throw Error('className could not be empty!');
-        
-        const classList = element.classList;
-        const ret = classList.contains(className);
-        
-        return ret;
-    };
-    
-    /**
-     * Function search element by tag
-     * @param tag - className
-     * @param element - element
-     */
-    this.getByTag = (tag, element = document) => {
-        return element.getElementsByTagName(tag);
-    };
-    
-    /**
-     * Function search element by id
-     * @param Id - id
-     */
-    this.getById = (id, element = document) => {
-        return element.querySelector('#' + id);
-    };
-    
-    /**
-     * Function search first element by class name
-     * @param className - className
-     * @param element - element
-     */
-    this.getByClass = (className, element = document) => {
-        return DOM.getByClassAll(className, element)[0];
-    };
-    
-    this.getByDataName = (attribute, element = document) => {
-        const selector    = '[' + 'data-name="' + attribute + '"]';
-        return element.querySelector(selector);
-    };
-    
-    /**
-     * Function search element by class name
-     * @param pClass - className
-     * @param element - element
-     */
-    this.getByClassAll = (className, element) => {
-        return (element || document).getElementsByClassName(className);
-    };
-    
-    /**
-     * check SVG SMIL animation support
-     */
-    this.isSVG = () => {
-        const createNS = document.createElementNS;
-        const SVG_URL = 'http://www.w3.org/2000/svg';
-        
-        if (!createNS)
-            return false;
-        
-        const create = createNS.bind(document);
-        const svgNode = create(SVG_URL, 'animate');
-        const name = svgNode.toString();
-        
-        return /SVGAnimate/.test(name);
-    };
-    
-    /**
-     * add class=hidden to element
-     *
-     * @param element
-     */
-    this.hide = (element) => {
-        element.classList.add('hidden');
-        return DOM;
-    };
-    
-    this.show = (element) => {
-        element.classList.remove('hidden');
-        return DOM;
-    };
-}
-
 function CmdProto() {
-    var Cmd = this;
-    var CurrentInfo = {};
-    var CURRENT_FILE = 'current-file';
-    var SELECTED_FILE = 'selected-file';
-    var SelectType = '*.*';
-    var TITLE = 'Cloud Commander';
+    const Cmd = this;
+    let CurrentInfo = {};
+    const CURRENT_FILE = 'current-file';
+    const SELECTED_FILE = 'selected-file';
+    let SelectType = '*.*';
+    const TITLE = 'Cloud Commander';
     var Title;
-    var TabPanel = {
+    const TabPanel = {
         'js-left'        : null,
         'js-right'       : null
     };
@@ -292,15 +192,12 @@ function CmdProto() {
     /**
      * get current direcotory name
      */
-    this.getCurrentDirName           = function() {
-        var ret,
-            substr,
-            /* получаем имя каталога в котором находимся */
-            href    = this.getCurrentDirPath();
+    this.getCurrentDirName = () => {
+        const href = DOM.getCurrentDirPath()
+            .replace(/\/$/, '');
         
-        href    = href.replace(/\/$/, '');
-        substr  = href.substr(href, href.lastIndexOf('/'));
-        ret     = href.replace(substr + '/', '') || '/';
+        const substr  = href.substr(href, href.lastIndexOf('/'));
+        const ret     = href.replace(substr + '/', '') || '/';
         
         return ret;
     };
@@ -308,14 +205,9 @@ function CmdProto() {
     /**
      * get current direcotory path
      */
-    this.getCurrentDirPath       = function(panel) {
-        var ret, path;
-        
-        if (!panel)
-            panel   =  this.getPanel();
-        
-        path        =  this.getByDataName('js-path', panel);
-        ret         = path && path.textContent;
+    this.getCurrentDirPath = (panel = DOM.getPanel()) => {
+        const path =  DOM.getByDataName('js-path', panel);
+        const ret = path && path.textContent;
         
         return ret;
     };
@@ -337,8 +229,8 @@ function CmdProto() {
      * get not current direcotory path
      */
     this.getNotCurrentDirPath       = function() {
-        var panel  = this.getPanel({active: false}),
-            path   = this.getCurrentDirPath(panel);
+        var panel  = DOM.getPanel({active: false}),
+            path   = DOM.getCurrentDirPath(panel);
         
         return path;
     };
@@ -372,7 +264,7 @@ function CmdProto() {
      */
     this.getSelectedFiles         = function() {
         var panel       = DOM.getPanel(),
-            selected    = this.getByClassAll(SELECTED_FILE, panel),
+            selected    = DOM.getByClassAll(SELECTED_FILE, panel),
             ret         = [].slice.call(selected);
         
         return ret;
@@ -416,7 +308,7 @@ function CmdProto() {
      */
     this.getCurrentSize          = function(currentFile) {
         var current     = currentFile || Cmd.getCurrentFile(),
-            size        = this.getByDataName('js-size', current);
+            size        = DOM.getByDataName('js-size', current);
         
         /* если это папка - возвращаем слово dir вместо размера*/
         size    = size
@@ -432,9 +324,9 @@ function CmdProto() {
      */
     this.loadCurrentSize          = function(callback, currentFile) {
         var RESTful     = DOM.RESTful,
-            current     = currentFile || this.getCurrentFile(),
+            current     = currentFile || DOM.getCurrentFile(),
             query       = '?size',
-            link        = this.getCurrentPath(current);
+            link        = DOM.getCurrentPath(current);
         
         Images.show.load();
         
@@ -469,9 +361,9 @@ function CmdProto() {
      */
     this.loadCurrentTime          = function(callback, currentFile) {
         var RESTful     = DOM.RESTful,
-            current     = currentFile || this.getCurrentFile(),
+            current     = currentFile || DOM.getCurrentFile(),
             query       = '?time',
-            link        = this.getCurrentPath(current);
+            link        = DOM.getCurrentPath(current);
         
         RESTful.read(link + query, callback);
     };
@@ -481,8 +373,8 @@ function CmdProto() {
      * @currentFile
      */
     this.setCurrentSize          = function(size, currentFile) {
-        var current         = currentFile || this.getCurrentFile(),
-            sizeElement     = this.getByDataName('js-size', current);
+        var current         = currentFile || DOM.getCurrentFile(),
+            sizeElement     = DOM.getByDataName('js-size', current);
         
         sizeElement.textContent = size;
     
@@ -493,8 +385,8 @@ function CmdProto() {
      */
     this.getCurrentMode          = function(currentFile) {
         var ret,
-            current    = currentFile || this.getCurrentFile(),
-            lMode       = this.getByDataName('js-mode', current);
+            current    = currentFile || DOM.getCurrentFile(),
+            lMode       = DOM.getByDataName('js-mode', current);
         ret        = lMode.textContent;
         
         return ret;
@@ -505,8 +397,8 @@ function CmdProto() {
      */
     this.getCurrentOwner         = function(currentFile) {
         var ret,
-            current     = currentFile || this.getCurrentFile(),
-            owner       = this.getByDataName('js-owner', current);
+            current     = currentFile || DOM.getCurrentFile(),
+            owner       = DOM.getByDataName('js-owner', current);
         
         ret             = owner.textContent;
         
@@ -584,15 +476,15 @@ function CmdProto() {
      * unified way to get RefreshButton
      */
     this.getRefreshButton        = function(panel) {
-        var currentPanel    = panel || this.getPanel(),
-            refresh         = this.getByDataName('js-refresh', currentPanel);
+        var currentPanel    = panel || DOM.getPanel(),
+            refresh         = DOM.getByDataName('js-refresh', currentPanel);
         
         return refresh;
     };
     
     this.setCurrentByName = function(name) {
-        var current = this.getCurrentByName(name);
-        return this.setCurrentFile(current);
+        var current = DOM.getCurrentByName(name);
+        return DOM.setCurrentFile(current);
     };
     
     /**
@@ -602,7 +494,7 @@ function CmdProto() {
         var path, pathWas, title,
             o               = options,
             CENTER          = true,
-            currentFileWas  = this.getCurrentFile();
+            currentFileWas  = DOM.getCurrentFile();
         
         if (currentFile) {
             if (currentFileWas) {
@@ -616,7 +508,7 @@ function CmdProto() {
             
             if (path !== pathWas) {
                 title = getTitle(path);
-                this.setTitle(title);
+                DOM.setTitle(title);
                 
                 /* history could be present
                  * but it should be false
@@ -631,12 +523,12 @@ function CmdProto() {
             }
             
             /* scrolling to current file */
-            this.scrollIntoViewIfNeeded(currentFile, CENTER);
+            DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
             
             Cmd.updateCurrentInfo();
         }
         
-        return this;
+        return DOM;
     };
     
      /*
@@ -688,7 +580,7 @@ function CmdProto() {
     };
     
     this.toggleSelectedFile = function(currentFile) {
-        var current = currentFile || this.getCurrentFile();
+        var current = currentFile || DOM.getCurrentFile();
         
         current.classList.toggle(SELECTED_FILE);
         
@@ -815,7 +707,7 @@ function CmdProto() {
         
         Title.textContent = name;
         
-        return this;
+        return DOM;
     };
     
     /**
@@ -827,7 +719,7 @@ function CmdProto() {
         var ret;
         
         if (currentFile)
-            ret = this.isContainClass(currentFile, CURRENT_FILE);
+            ret = DOM.isContainClass(currentFile, CURRENT_FILE);
         
         return ret;
     };
@@ -837,13 +729,11 @@ function CmdProto() {
      *
      * @param currentFile
      */
-    this.isSelected              = function(pSelected) {
-        var ret;
+    this.isSelected = (selected) => {
+        if (!selected)
+            return false;
         
-        if (pSelected)
-            ret = this.isContainClass(pSelected, SELECTED_FILE);
-        
-        return ret;
+        return DOM.isContainClass(selected, SELECTED_FILE);
     };
     
     /**
@@ -853,8 +743,8 @@ function CmdProto() {
      */
     this.isCurrentIsDir            = function(currentFile) {
         var current = currentFile || this.getCurrentFile();
-        var fileType = this.getByDataName('js-type', current);
-        var ret = this.isContainClass(fileType, 'directory');
+        var fileType = DOM.getByDataName('js-type', current);
+        var ret = DOM.isContainClass(fileType, 'directory');
         
         return ret;
     };
@@ -864,9 +754,9 @@ function CmdProto() {
      *
      * @param currentFile - current file by default
      */
-    this.getCurrentLink          = function(currentFile) {
-        var current = currentFile || this.getCurrentFile();
-        var link = this.getByTag('a', current);
+    this.getCurrentLink = (currentFile) => {
+        const current = currentFile || this.getCurrentFile();
+        const link = DOM.getByTag('a', current);
         
         return link[0];
     };
@@ -894,10 +784,10 @@ function CmdProto() {
     this.getCurrentName          = function(currentFile) {
         var link;
         var name = '';
-        var current = currentFile || this.getCurrentFile();
+        var current = currentFile || DOM.getCurrentFile();
         
         if (current)
-            link        = this.getCurrentLink(current);
+            link        = DOM.getCurrentLink(current);
         
         if (link) {
             name = link.title;
@@ -919,10 +809,10 @@ function CmdProto() {
         first           = files[0];
         
         if (first) {
-            name        = this.getCurrentName(first);
+            name        = DOM.getCurrentName(first);
         } else {
-            first       = this.getCurrentFile();
-            name        = this.getCurrentName(first);
+            first       = DOM.getCurrentFile();
+            name        = DOM.getCurrentName(first);
         }
         
         if (name === '..')
@@ -941,11 +831,11 @@ function CmdProto() {
      * @param name
      * @param current
      */
-    this.setCurrentName          = function(name, current) {
-        var Info        = CurrentInfo,
-            link        = Info.link,
-            PREFIX      = CloudCmd.PREFIX,
-            dir         = PREFIX + FS + Info.dirPath;
+    this.setCurrentName = (name, current) => {
+        const Info = CurrentInfo;
+        const link = Info.link;
+        const PREFIX = CloudCmd.PREFIX;
+        const dir = PREFIX + FS + Info.dirPath;
         
         link.title      = name;
         link.innerHTML  = Entity.encode(name);
@@ -1041,7 +931,7 @@ function CmdProto() {
     };
     
     this.getFM = function() {
-        return this.getPanel().parentElement;
+        return DOM.getPanel().parentElement;
     };
     
     this.getPanelPosition = function(panel) {
@@ -1056,10 +946,10 @@ function CmdProto() {
     this.getPanel = function(options) {
         var files, panel, isLeft,
             dataName    = 'js-',
-            current     = this.getCurrentFile();
+            current     = DOM.getCurrentFile();
         
         if (!current) {
-            panel       = this.getByDataName('js-left');
+            panel       = DOM.getByDataName('js-left');
         } else {
             files       = current.parentElement,
             panel       = files.parentElement,
@@ -1069,7 +959,7 @@ function CmdProto() {
         /* if {active : false} getting passive panel */
         if (options && !options.active) {
             dataName    += isLeft ? 'right' : 'left';
-            panel       = this.getByDataName(dataName);
+            panel       = DOM.getByDataName(dataName);
         }
         
         /* if two panels showed
@@ -1077,7 +967,7 @@ function CmdProto() {
          * panel
          */
         if (window.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH)
-            panel = this.getByDataName('js-left');
+            panel = DOM.getByDataName('js-left');
             
         
         if (!panel)
@@ -1098,10 +988,10 @@ function CmdProto() {
      */
     this.showPanel               = function(active) {
         var ret     = true,
-            panel   = this.getPanel({active: active});
-                        
+            panel   = DOM.getPanel({active: active});
+        
         if (panel)
-            this.show(panel);
+            DOM.show(panel);
         else
             ret = false;
         
@@ -1113,10 +1003,10 @@ function CmdProto() {
      */
     this.hidePanel               = function(active) {
         var ret     = false,
-            panel   = this.getPanel({active: active});
+            panel   = DOM.getPanel({active: active});
         
         if (panel)
-            ret = this.hide(panel);
+            ret = DOM.hide(panel);
         
         return ret;
     };
@@ -1198,7 +1088,7 @@ function CmdProto() {
         var i, n, current;
         
         if (!selected)
-            selected = this.getSelectedFiles();
+            selected = DOM.getSelectedFiles();
         
         if (selected) {
             n = selected.length;
@@ -1325,7 +1215,7 @@ function CmdProto() {
             history: true
         });
         
-        return this;
+        return DOM;
     };
     
     this.getPackerExt = function(type) {
@@ -1404,7 +1294,7 @@ function CmdProto() {
         });
     };
     
-    this.CurrentInfo            = CurrentInfo,
+    this.CurrentInfo = CurrentInfo,
     
     this.updateCurrentInfo = (currentFile) => {
         const info = Cmd.CurrentInfo;
