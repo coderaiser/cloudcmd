@@ -1376,15 +1376,18 @@ function CmdProto() {
         });
     };
     
-    this.swapPanels             = function() {
-        var Info            = CurrentInfo,
-            panel           = Info.panel,
-            panelPassive    = Info.panelPassive,
-            
-            currentIndex    = [].indexOf.call(Info.files, Info.element),
-            
-            dirPath         = DOM.getCurrentDirPath(),
-            dirPathPassive  = DOM.getNotCurrentDirPath();
+    this.swapPanels = () => {
+        const Info = CurrentInfo;
+        const {panel} = Info;
+        const {files} = Info;
+        const {element} = Info;
+        
+        const panelPassive = Info.panelPassive;
+        
+        const dirPath = DOM.getCurrentDirPath();
+        const dirPathPassive = DOM.getNotCurrentDirPath();
+        
+        let currentIndex = files.indexOf(element);
         
         CloudCmd.loadDir({
             path: dirPath,
@@ -1395,15 +1398,14 @@ function CmdProto() {
         CloudCmd.loadDir({
             path: dirPathPassive,
             panel: panel
-        }, function() {
-            var el,
-                files   = Info.files,
-                length  = files.length - 1;
+        }, () => {
+            const files = Info.files;
+            const length = files.length - 1;
             
             if (currentIndex > length)
                 currentIndex = length;
             
-            el = files[currentIndex];
+            const el = files[currentIndex];
             
             DOM.setCurrentFile(el);
         });
