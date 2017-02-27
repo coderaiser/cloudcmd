@@ -1,10 +1,10 @@
 /* global CloudCmd */
-/* global CloudFunc */
 /* global DOM */
 
 'use strict';
 
 const Images = require('./images');
+const {FS} = require('../../common/cloudfunc');
 
 module.exports = (items) => {
     const Info = DOM.CurrentInfo;
@@ -35,7 +35,6 @@ module.exports = (items) => {
         
         const uploader = window.philip(entries, (type, name, data, i, n, callback) => {
             const prefixURL = CloudCmd.PREFIX_URL;
-            const FS = CloudFunc.FS;
             const full = prefixURL + FS + path + name;
             
             let upload;

@@ -1,5 +1,4 @@
 /* global CloudCmd */
-/* global CloudFunc */
 
 'use strict';
 
@@ -8,6 +7,12 @@ const rendy = require('rendy');
 const exec = require('execon');
 const jonny = require('jonny');
 const Util = require('../../common/util');
+
+const {
+    getTitle,
+    FS,
+    Entity,
+} = require('../../common/cloudfunc');
 
 const DOMFunc = function() {};
 
@@ -283,7 +288,6 @@ function CmdProto() {
             const name = file.name;
             const path = dir + name;
             const prefixURL = CloudCmd.PREFIX_URL;
-            const FS = CloudFunc.FS;
             const api = prefixURL + FS;
             
             const percent = (i, n, per = 100) => {
@@ -662,7 +666,6 @@ function CmdProto() {
     this.setCurrentFile = function(currentFile, options) {
         var path, pathWas, title,
             o               = options,
-            FS              = CloudFunc.FS,
             CENTER          = true,
             currentFileWas  = this.getCurrentFile();
         
@@ -677,7 +680,7 @@ function CmdProto() {
             path        = DOM.getCurrentDirPath();
             
             if (path !== pathWas) {
-                title   = CloudFunc.getTitle(path);
+                title = getTitle(path);
                 this.setTitle(title);
                 
                 /* history could be present
@@ -938,14 +941,12 @@ function CmdProto() {
      *
      * @param currentFile - current file by default
      */
-    this.getCurrentPath          = function(currentFile) {
-        var current = currentFile || DOM.getCurrentFile();
-        var element = DOM.getByTag('a', current)[0];
-        var prefix = CloudCmd.PREFIX;
-        var fs = CloudFunc.FS;
-        
-        var path = element.getAttribute('href')
-            .replace(RegExp('^' + prefix + fs), '');
+    this.getCurrentPath = (currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
+        const element = DOM.getByTag('a', current)[0];
+        const prefix = CloudCmd.PREFIX;
+        const path = element.getAttribute('href')
+            .replace(RegExp('^' + prefix + FS), '');
         
         return path;
     };
@@ -1008,12 +1009,11 @@ function CmdProto() {
     this.setCurrentName          = function(name, current) {
         var Info        = CurrentInfo,
             link        = Info.link,
-            FS          = CloudFunc.FS,
             PREFIX      = CloudCmd.PREFIX,
             dir         = PREFIX + FS + Info.dirPath;
         
         link.title      = name;
-        link.innerHTML  = CloudFunc.Entity.encode(name);
+        link.innerHTML  = Entity.encode(name);
         link.href       = dir + name;
         
         current.setAttribute('data-name', 'js-file-' + name);

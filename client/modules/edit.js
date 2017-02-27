@@ -1,4 +1,4 @@
-/* global CloudCmd, CloudFunc */
+/* global CloudCmd */
 
 'use strict';
 
@@ -6,6 +6,8 @@ const exec = require('execon');
 const currify = require('currify/legacy');
 
 const load = require('../dom/load');
+
+const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
 const {time, timeEnd} = require('../../common/util');
 
 CloudCmd.Edit = EditProto;
@@ -97,8 +99,6 @@ function EditProto(callback) {
     
     function _loadFiles(element, callback) {
         const socketPath = CloudCmd.PREFIX;
-        const maxSize = CloudFunc.MAX_FILE_SIZE;
-        
         const prefix = socketPath + '/' + EditorName;
         const url = prefix + '/' + EditorName + '.js';
         

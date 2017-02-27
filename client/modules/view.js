@@ -1,12 +1,14 @@
 'use strict';
 
-/* global CloudCmd, DOM, CloudFunc, $ */
+/* global CloudCmd, DOM, $ */
 
 const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
 
 const {time} = require('../../common/util');
+const {FS} = require('../../common/cloudfunc');
+
 const Files = require('../dom/files');
 const Events = require('../dom/events');
 const load = require('../dom/load');
@@ -95,7 +97,7 @@ function ViewProto(callback) {
 }
 
 function show(data, options) {
-    const prefixUrl = CloudCmd.PREFIX_URL + CloudFunc.FS;
+    const prefixUrl = CloudCmd.PREFIX_URL + FS;
     
     if (Loading)
         return;

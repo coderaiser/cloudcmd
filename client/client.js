@@ -4,11 +4,17 @@ const itype = require('itype/legacy');
 const rendy = require('rendy');
 const Images = require('./dom/images');
 
-/* global Util, DOM, CloudFunc, join */
+const {
+    apiURL,
+    formatMsg,
+    buildFromJSON,
+} = require('../common/cloudfunc');
 
-module.exports = new CloudCmdProto(Util, DOM, CloudFunc);
+/* global Util, DOM, join */
 
-function CloudCmdProto(Util, DOM, CloudFunc) {
+module.exports = new CloudCmdProto(Util, DOM);
+
+function CloudCmdProto(Util, DOM) {
     let Key;
     let Debug;
     let Listeners;
@@ -187,7 +193,7 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
         };
         
         CloudCmd.PREFIX = prefix;
-        CloudCmd.PREFIX_URL = prefix + CloudFunc.apiURL;
+        CloudCmd.PREFIX_URL = prefix + apiURL;
         
         CloudCmd.config = (key) => config[key];
         CloudCmd._config = (key, value) => {
@@ -239,7 +245,7 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
         const current = DOM.getCurrentByName(file);
         
         if (file && !current) {
-            const msg = CloudFunc.formatMsg('set current file', file, 'error');
+            const msg = formatMsg('set current file', file, 'error');
             CloudCmd.log(msg);
             return;
         }
@@ -476,7 +482,7 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
             while (i--)
                 panel.removeChild(panel.lastChild);
             
-            panel.innerHTML = CloudFunc.buildFromJSON({
+            panel.innerHTML = buildFromJSON({
                 sort        : options.sort,
                 order       : options.order,
                 data        : json,

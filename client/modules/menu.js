@@ -1,4 +1,4 @@
-/* global CloudCmd, DOM, CloudFunc */
+/* global CloudCmd, DOM */
 
 'use strict';
 
@@ -7,8 +7,11 @@ CloudCmd.Menu = MenuProto;
 const exec = require('execon');
 const currify = require('currify/legacy');
 
+const {FS} = require('../../common/cloudfunc');
+
 const load = require('../dom/load');
 const RESTful = require('../dom/rest');
+
 const bind = (f, ...a) => (...b) => f(...a, ...b);
 
 function MenuProto(position) {
@@ -261,7 +264,6 @@ function MenuProto(position) {
     function download(type) {
         const TIME = 30 * 1000;
         const prefixUr = CloudCmd.PREFIX_URL;
-        const FS = CloudFunc.FS;
         const PACK = '/pack';
         const date = Date.now();
         const files = DOM.getActiveFiles();

@@ -1,8 +1,10 @@
 'use strict';
 
+/* global CloudCmd, DOM */
+
 const itype = require('itype/legacy');
 
-/* global CloudFunc, CloudCmd, DOM */
+const {FS} = require('../../common/cloudfunc');
 
 module.exports = new RESTful();
 
@@ -20,7 +22,7 @@ function RESTful() {
         
         sendRequest({
             method      : 'DELETE',
-            url         : CloudFunc.FS + url,
+            url         : FS + url,
             data,
             callback,
             imgPosition : { top: !!data }
@@ -37,7 +39,7 @@ function RESTful() {
         
         sendRequest({
             method      : 'PATCH',
-            url         : CloudFunc.FS + url,
+            url         : FS + url,
             data        : data,
             callback    : callback,
             imgPosition : { top: true }
@@ -54,7 +56,7 @@ function RESTful() {
         
         sendRequest({
             method      : 'PUT',
-            url         : CloudFunc.FS + url,
+            url         : FS + url,
             data        : data,
             callback    : callback,
             imgPosition : { top: true }
@@ -75,7 +77,7 @@ function RESTful() {
         
         sendRequest({
             method: 'GET',
-            url: CloudFunc.FS + url,
+            url: FS + url,
             callback: callback,
             notLog: notLog,
             dataType: dataType

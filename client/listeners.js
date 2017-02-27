@@ -1,9 +1,14 @@
-/* global DOM, CloudFunc, CloudCmd */
+/* global DOM, CloudCmd */
 
 'use strict';
 
 const exec = require('execon');
 const itype = require('itype/legacy');
+
+const {
+    FS,
+    apiURL
+} = require('../common/cloudfunc');
 
 module.exports.init = () => {
     contextMenu();
@@ -142,7 +147,6 @@ function isNoCurrent(panel) {
 function onPathElementClick(panel, event) {
     let link, href, url, noCurrent;
     
-    const fs = CloudFunc.FS;
     const prefix = CloudCmd.PREFIX;
     const element = event.target;
     const attr = element.getAttribute('data-name');
@@ -172,7 +176,7 @@ function onPathElementClick(panel, event) {
          */
         link        = link.replace('%%', '%25%');
         link        = decodeURI(link);
-        link        = link.replace(RegExp('^' + prefix + fs), '') || '/';
+        link        = link.replace(RegExp('^' + prefix + FS), '') || '/';
         
         noCurrent   = isNoCurrent(panel);
         
@@ -267,7 +271,6 @@ function onTouch(event) {
   * in Chrome (HTML5)
   */
 function onDragStart(event) {
-    const apiURL = CloudFunc.apiURL;
     const element = getLIElement(event.target);
     const isDir = Info.isDir;
     let link = DOM.getCurrentLink(element);
@@ -448,7 +451,7 @@ function unload() {
 function pop() {
     Events.add('popstate', (event) => {
         const path = event.state || ''
-            .replace(CloudFunc.FS, '');
+            .replace(FS, '');
         
         if (!path)
             return CloudCmd.route(location.hash);
