@@ -44,62 +44,50 @@ function DOMTreeProto() {
      * check class of element
      *
      * @param element
-     * @param pClass
+     * @param className
      */
-    this.isContainClass          = function(element, className) {
-        var ret, classList;
-        
+    this.isContainClass = (element, className) => {
         if (!element)
             throw Error('element could not be empty!');
         
         if (!className)
             throw Error('className could not be empty!');
         
-        classList   = element.classList;
-        ret         = classList.contains(className);
-            
+        const classList = element.classList;
+        const ret = classList.contains(className);
+        
         return ret;
     };
     
     /**
      * Function search element by tag
-     * @param pTag - className
+     * @param tag - className
      * @param element - element
      */
-    this.getByTag                = function(pTag, element) {
-        return (element || document).getElementsByTagName(pTag);
+    this.getByTag = (tag, element = document) => {
+        return element.getElementsByTagName(tag);
     };
     
     /**
      * Function search element by id
      * @param Id - id
      */
-    this.getById                = function(id, element) {
-        return (element || document).querySelector('#' + id);
+    this.getById = (id, element = document) => {
+        return element.querySelector('#' + id);
     };
     
     /**
      * Function search first element by class name
-     * @param pClass - className
+     * @param className - className
      * @param element - element
      */
-    this.getByClass             = function(pClass, elementParam) {
-        var element = elementParam || document,
-            ret     = this.getByClassAll(pClass, element)[0];
-        
-        return ret;
+    this.getByClass = (className, element = document) => {
+        return DOM.getByClassAll(className, element)[0];
     };
     
-    this.getByDataName          = function(attribute, element) {
-        var ret,
-            selector    = '[' + 'data-name="' + attribute + '"]';
-        
-        if (!element)
-            element     = document;
-        
-        ret             = element.querySelector(selector);
-        
-        return ret;
+    this.getByDataName = (attribute, element = document) => {
+        const selector    = '[' + 'data-name="' + attribute + '"]';
+        return element.querySelector(selector);
     };
     
     /**
@@ -107,26 +95,25 @@ function DOMTreeProto() {
      * @param pClass - className
      * @param element - element
      */
-    this.getByClassAll          = function(pClass, element) {
-        return (element || document).getElementsByClassName(pClass);
+    this.getByClassAll = (className, element) => {
+        return (element || document).getElementsByClassName(className);
     };
     
     /**
      * check SVG SMIL animation support
      */
-    this.isSVG                  = function() {
-        var ret, svgNode, name,
-            create  = document.createElementNS,
-            SVG_URL = 'http://www.w3.org/2000/svg';
+    this.isSVG = () => {
+        const createNS = document.createElementNS;
+        const SVG_URL = 'http://www.w3.org/2000/svg';
         
-        if (create) {
-            create  = create.bind(document);
-            svgNode = create(SVG_URL, 'animate');
-            name    = svgNode.toString();
-            ret     = /SVGAnimate/.test(name);
-        }
+        if (!createNS)
+            return false;
         
-        return ret;
+        const create = createNS.bind(document);
+        const svgNode = create(SVG_URL, 'animate');
+        const name = svgNode.toString();
+        
+        return /SVGAnimate/.test(name);
     };
     
     /**
@@ -134,12 +121,12 @@ function DOMTreeProto() {
      *
      * @param element
      */
-    this.hide                    = function(element) {
+    this.hide = (element) => {
         element.classList.add('hidden');
         return DOM;
     };
     
-    this.show                    = function(element) {
+    this.show = (element) => {
         element.classList.remove('hidden');
         return DOM;
     };
