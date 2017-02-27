@@ -6,6 +6,8 @@ const {optimize} = webpack;
 const {UglifyJsPlugin} = optimize;
 
 const dir = './client';
+const dirModules = './client/modules';
+const modules = './modules';
 
 const {env} = process;
 const isDev = env.NODE_ENV === 'development';
@@ -31,20 +33,20 @@ module.exports = {
     devtool,
     entry: {
         cloudcmd: `${dir}/cloudcmd.js`,
-        edit: `${dir}/edit.js`,
-        'edit-file': `${dir}/edit-file.js`,
-        'edit-names': `${dir}/edit-names.js`,
-        menu: `${dir}/menu.js`,
-        view: `${dir}/view.js`,
-        help: `${dir}/help.js`,
-        markdown: `${dir}/markdown.js`,
-        config: `${dir}/config.js`,
-        contact: `${dir}/contact.js`,
-        upload: `${dir}/upload.js`,
-        operation: `${dir}/operation.js`,
-        konsole: `${dir}/konsole.js`,
-        cloud: `${dir}/cloud.js`,
-        polyfill: `${dir}/polyfill.js`,
+        [modules + '/edit']: `${dirModules}/edit.js`,
+        [modules + '/edit-file']: `${dirModules}/edit-file.js`,
+        [modules + '/edit-names']: `${dirModules}/edit-names.js`,
+        [modules + '/menu']: `${dirModules}/menu.js`,
+        [modules + '/view']: `${dirModules}/view.js`,
+        [modules + '/help']: `${dirModules}/help.js`,
+        [modules + '/markdown']: `${dirModules}/markdown.js`,
+        [modules + '/config']: `${dirModules}/config.js`,
+        [modules + '/contact']: `${dirModules}/contact.js`,
+        [modules + '/upload']: `${dirModules}/upload.js`,
+        [modules + '/operation']: `${dirModules}/operation.js`,
+        [modules + '/konsole']: `${dirModules}/konsole.js`,
+        [modules + '/cloud']: `${dirModules}/cloud.js`,
+        [modules + '/polyfill']: `${dirModules}/polyfill.js`,
     },
     output: {
         filename: '[name].js',
@@ -58,13 +60,12 @@ module.exports = {
     module: {
         loaders: [{
             test: /\.js$/,
-            exclude: /(node_)?modules/,
+            exclude: /node_modules/,
             loader: 'babel-loader',
             query: {
                 presets: ['es2015']
             }
-        }
-        ]
+        }]
     }
 };
 

@@ -7,7 +7,7 @@
 CloudCmd.Contact = ContactProto;
 
 const exec = require('execon');
-const Images = require('./dom/images');
+const Images = require('../dom/images');
 
 function ContactProto(callback) {
     init(callback);

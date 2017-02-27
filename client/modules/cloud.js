@@ -6,10 +6,10 @@ CloudCmd.Cloud = CloudProto;
 
 const exec = require('execon');
 
-const load = require('./load');
-const Files = require('./files');
-const Images = require('./dom/images');
-const Util = require('../common/util');
+const load = require('../load');
+const Files = require('../files');
+const Images = require('../dom/images');
+const Util = require('../../common/util');
 
 function CloudProto(callback) {
     exec.series([

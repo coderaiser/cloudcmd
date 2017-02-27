@@ -6,11 +6,11 @@ const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
 
-const {time} = require('../common/util');
-const Files = require('./files');
-const Events = require('./events');
-const load = require('./load');
-const Images = require('./dom/images');
+const {time} = require('../../common/util');
+const Files = require('../files');
+const Events = require('../events');
+const load = require('../load');
+const Images = require('../dom/images');
 
 CloudCmd.View = ViewProto;
 

@@ -29,6 +29,8 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
     this.PREFIX = '';
     this.PREFIX_URL = '';
     this.DIRCLIENT = '/dist/';
+    this.DIRCLIENT_MODULES = this.DIRCLIENT + 'modules/';
+    
     this.MIN_ONE_PANEL_WIDTH    = 1155;
     this.HOST                   = location.origin ||
                                   location.protocol + '//' + location.host;
@@ -123,7 +125,7 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
             if (!CloudCmd[name]) {
                 CloudCmd[name] = (...args) => {
                     const prefix = CloudCmd.PREFIX;
-                    const pathFull = prefix + CloudCmd.DIRCLIENT + path;
+                    const pathFull = prefix + CloudCmd.DIRCLIENT_MODULES + path;
                     
                     Util.exec(doBefore);
                     
@@ -175,7 +177,7 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
         
         const funcBefore  = (callback) => {
             const src = prefix + '/join:' + [
-                CloudCmd.DIRCLIENT + 'polyfill.js',
+                CloudCmd.DIRCLIENT_MODULES + 'polyfill.js',
                 '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
             ].join(':');
             
