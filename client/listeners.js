@@ -5,6 +5,8 @@
 const exec = require('execon');
 const itype = require('itype/legacy');
 
+const uploadFiles = require('./dom/upload-files');
+
 const {
     FS,
     apiURL
@@ -398,7 +400,7 @@ function dragndrop() {
         event.preventDefault();
         
         if (!items || !items.length || !items[0].webkitGetAsEntry)
-            return DOM.uploadFiles(files);
+            return uploadFiles(files);
         
         const dirFiles = [...items].filter((item) => {
             return item.kind === 'file';
