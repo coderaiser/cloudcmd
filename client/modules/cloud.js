@@ -6,8 +6,8 @@ CloudCmd.Cloud = CloudProto;
 
 const exec = require('execon');
 
-const load = require('../load');
-const Files = require('../files');
+const load = require('../dom/load');
+const Files = require('../dom/files');
 const Images = require('../dom/images');
 const Util = require('../../common/util');
 

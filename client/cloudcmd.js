@@ -16,7 +16,7 @@ window.CloudCmd = (config) => {
     window.DOM = DOM;
     window.CloudCmd = require('./client');
     
-    const Dialog = require('./dialog');
+    const Dialog = require('./dom/dialog');
     
     const prefix = getPrefix(config.prefix);
     const {htmlDialogs} = config;
@@ -27,7 +27,6 @@ window.CloudCmd = (config) => {
     
     require('./listeners');
     require('./key');
-    require('./directory');
     require('./sort');
     
     window.CloudCmd.init(prefix, config);

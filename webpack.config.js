@@ -66,7 +66,14 @@ module.exports = {
                 presets: ['es2015']
             }
         }]
+    },
+    /*
+    resolve: {
+        alias: {
+            dom: `${dir}/dom`
+        }
     }
+    */
 };
 
 function externals(context, request, fn) {

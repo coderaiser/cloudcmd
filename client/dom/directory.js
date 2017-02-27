@@ -4,7 +4,7 @@
 
 'use strict';
 
-const Images = require('./dom/images');
+const Images = require('./images');
 
 module.exports = (items) => {
     const Info = DOM.CurrentInfo;

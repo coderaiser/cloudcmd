@@ -7,7 +7,7 @@ const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
 const jonny = require('jonny');
-const Util = require('../common/util');
+const Util = require('../../common/util');
 
 const DOMFunc = function() {};
 
@@ -20,7 +20,7 @@ const DOM = new DOMFunc();
 
 module.exports = DOM;
 
-const Images = require('./dom/images');
+const Images = require('./images');
 const load = require('./load');
 
 DOM.Images = Images;

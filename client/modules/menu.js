@@ -7,8 +7,8 @@ CloudCmd.Menu = MenuProto;
 const exec = require('execon');
 const currify = require('currify/legacy');
 
-const load = require('../load');
-const RESTful = require('../rest');
+const load = require('../dom/load');
+const RESTful = require('../dom/rest');
 const bind = (f, ...a) => (...b) => f(...a, ...b);
 
 function MenuProto(position) {

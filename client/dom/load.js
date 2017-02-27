@@ -4,10 +4,10 @@ const itype = require('itype/legacy');
 const jonny = require('jonny');
 const Emitify = require('emitify');
 const exec = require('execon');
-const Images = require('./dom/images');
+const Images = require('./images');
 const Events = require('./events');
 
-const {getExt} = require('../common/util');
+const {getExt} = require('../../common/util');
 
 module.exports = load;
 module.exports.getIdBySrc = getIdBySrc;

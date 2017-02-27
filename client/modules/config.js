@@ -8,8 +8,9 @@ const currify = require('currify/legacy');
 const input = require('../input');
 
 const Images = require('../dom/images');
-const Events = require('../events');
-const Files = require('../files');
+const Events = require('../dom/events');
+const Files = require('../dom/files');
+
 const {Dialog} = DOM;
 
 const TITLE = 'Config';

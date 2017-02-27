@@ -7,9 +7,9 @@ const rendy = require('rendy');
 const exec = require('execon');
 
 const {time} = require('../../common/util');
-const Files = require('../files');
-const Events = require('../events');
-const load = require('../load');
+const Files = require('../dom/files');
+const Events = require('../dom/events');
+const load = require('../dom/load');
 const Images = require('../dom/images');
 
 CloudCmd.View = ViewProto;

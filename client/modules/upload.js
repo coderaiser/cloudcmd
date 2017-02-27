@@ -4,9 +4,9 @@
 
 const exec = require('execon');
 
-const load = require('../load');
-const Files = require('../files');
-const {Images} = DOM;
+const load = require('../dom/load');
+const Files = require('../dom/files');
+const Images = require('../dom/images');
 
 CloudCmd.Upload = UploadProto;
 

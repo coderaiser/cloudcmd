@@ -6,7 +6,7 @@ const itype = require('itype/legacy');
 
 module.exports = new RESTful();
 
-const {Images} = require('./dom');
+const Images = require('./images');
 const load = require('./load');
 
 function RESTful() {

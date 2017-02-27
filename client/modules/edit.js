@@ -5,7 +5,7 @@
 const exec = require('execon');
 const currify = require('currify/legacy');
 
-const load = require('../load');
+const load = require('../dom/load');
 const {time, timeEnd} = require('../../common/util');
 
 CloudCmd.Edit = EditProto;

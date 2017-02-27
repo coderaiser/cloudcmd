@@ -14,7 +14,7 @@ CloudCmd.Operation = OperationProto;
 const currify = require('currify/legacy');
 const exec = require('execon');
 
-const RESTful = require('../rest');
+const RESTful = require('../dom/rest');
 
 function OperationProto(operation, data) {
     const Name = 'Operation';

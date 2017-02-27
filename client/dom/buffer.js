@@ -6,7 +6,7 @@ const jonny = require('jonny');
 const exec = require('execon');
 
 const Storage = require('./storage');
-const DOM = require('./dom');
+const DOM = require('./');
 
 module.exports = new BufferProto();
 

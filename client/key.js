@@ -6,8 +6,8 @@ const Info = DOM.CurrentInfo;
 
 const exec = require('execon');
 
-const Events = require('./events');
-const Buffer = require('./buffer');
+const Events = require('./dom/events');
+const Buffer = require('./dom/buffer');
 const {escapeRegExp} = require('../common/util');
 
 let Chars = [];
