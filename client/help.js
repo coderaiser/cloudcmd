@@ -4,7 +4,7 @@
 
 CloudCmd.Help = HelpProto;
 
-const Images = require('./images');
+const Images = require('./dom/images');
 
 function HelpProto() {
     Images.show.load('top');

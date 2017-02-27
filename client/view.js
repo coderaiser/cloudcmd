@@ -10,7 +10,7 @@ const {time} = require('../common/util');
 const Files = require('./files');
 const Events = require('./events');
 const load = require('./load');
-const Images = require('./images');
+const Images = require('./dom/images');
 
 CloudCmd.View = ViewProto;
 

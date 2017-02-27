@@ -7,6 +7,7 @@
 CloudCmd.Contact = ContactProto;
 
 const exec = require('execon');
+const Images = require('./dom/images');
 
 function ContactProto(callback) {
     init(callback);
@@ -15,7 +16,6 @@ function ContactProto(callback) {
 }
 
 const Events = DOM.Events;
-const Images = DOM.Images;
 const Key = CloudCmd.Key;
 
 module.exports.show = show;

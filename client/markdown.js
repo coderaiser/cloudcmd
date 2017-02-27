@@ -6,7 +6,7 @@ CloudCmd.Markdown = MarkdownProto;
 
 const exec = require('execon');
 
-const Images = require('./images');
+const Images = require('./dom/images');
 const load = require('./load');
 const {Markdown} = require('./rest');
 

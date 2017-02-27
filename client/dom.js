@@ -20,7 +20,7 @@ const DOM = new DOMFunc();
 
 module.exports = DOM;
 
-const Images = require('./images');
+const Images = require('./dom/images');
 const load = require('./load');
 
 DOM.Images = Images;

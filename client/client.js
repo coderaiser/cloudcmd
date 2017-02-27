@@ -2,6 +2,7 @@
 
 const itype = require('itype/legacy');
 const rendy = require('rendy');
+const Images = require('./dom/images');
 
 /* global Util, DOM, CloudFunc, join */
 
@@ -20,7 +21,6 @@ function CloudCmdProto(Util, DOM, CloudFunc) {
     };
     
     const CloudCmd = this;
-    const Images = DOM.Images;
     const Info = DOM.CurrentInfo;
     const Storage = DOM.Storage;
     const Files = DOM.Files;

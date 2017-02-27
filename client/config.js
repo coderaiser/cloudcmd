@@ -7,7 +7,7 @@ const exec = require('execon');
 const currify = require('currify/legacy');
 const input = require('./input');
 
-const Images = require('./images');
+const Images = require('./dom/images');
 const Events = require('./events');
 const Files = require('./files');
 const {Dialog} = DOM;

@@ -2,7 +2,7 @@
 
 'use strict';
 
-const DOM = require('./dom');
+const DOM = require('../dom');
 
 const Images = module.exports;
 

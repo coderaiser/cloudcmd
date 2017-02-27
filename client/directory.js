@@ -4,8 +4,9 @@
 
 'use strict';
 
+const Images = require('./dom/images');
+
 module.exports = (items) => {
-    const Images = DOM.Images;
     const Info = DOM.CurrentInfo;
     const load = DOM.load;
     const Dialog = DOM.Dialog;
