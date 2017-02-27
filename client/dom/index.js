@@ -32,12 +32,13 @@ DOM.Storage = require('./storage');
 DOM.Files = require('./files');
 DOM.RESTful = require('./rest');
 
+const selectByPattern = require('./select-by-pattern');
+
 function CmdProto() {
     const Cmd = this;
     let CurrentInfo = {};
     const CURRENT_FILE = 'current-file';
     const SELECTED_FILE = 'selected-file';
-    let SelectType = '*.*';
     const TITLE = 'Cloud Commander';
     var Title;
     const TabPanel = {
@@ -571,23 +572,23 @@ function CmdProto() {
      * select current file
      * @param currentFile
      */
-    this.selectFile = function(currentFile) {
-        var current = currentFile || DOM.getCurrentFile();
+    this.selectFile = (currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
         
         current.classList.add(SELECTED_FILE);
         
         return Cmd;
     };
     
-    this.toggleSelectedFile = function(currentFile) {
-        var current = currentFile || DOM.getCurrentFile();
+    this.toggleSelectedFile = (currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
         
         current.classList.toggle(SELECTED_FILE);
         
         return Cmd;
     };
     
-    this.toggleAllSelectedFiles = function() {
+    this.toggleAllSelectedFiles = () => {
         DOM.getAllFiles().map(DOM.toggleSelectedFile);
         
         return Cmd;
@@ -605,60 +606,17 @@ function CmdProto() {
         const name = DOM.getCurrentName(files[0]);
         
         const from = (a) => a === '..' ? 1 : 0;
-        const i = from('..');
+        const i = from(name);
         
         return [].slice.call(files, i);
     };
     
-    function selectByPattern(msg, files) {
-        var n, regExp,
-            Dialog      = DOM.Dialog,
-            allMsg      = 'Specify file type for ' + msg + ' selection',
-            i           = 0,
-            matches     = 0,
-            name,
-            shouldSel   = msg === 'expand',
-            isSelected, isMatch,
-            current;
-        
-        Dialog.prompt(TITLE, allMsg, SelectType, {cancel: false}).then(function(type) {
-            SelectType  = type;
-            
-            regExp      = Util.getRegExp(type);
-            
-            n           = files && files.length;
-            for (i = 0; i < n; i++) {
-                current = files[i];
-                name    = DOM.getCurrentName(current);
-                    
-                if (name !== '..') {
-                    isMatch     = regExp.test(name);
-                    
-                    if (isMatch) {
-                        ++matches;
-                        
-                        isSelected  = DOM.isSelected(current);
-                        
-                        if (shouldSel)
-                            isSelected = !isSelected;
-                        
-                        if (isSelected)
-                            DOM.toggleSelectedFile(current);
-                    }
-                }
-            }
-            
-            if (!matches)
-                Dialog.alert('Select Files', 'No matches found!');
-        });
-    }
-    
     /**
      * open dialog with expand selection
      */
-    this.expandSelection                = function() {
-        var msg = 'expand';
-        var files = CurrentInfo.files;
+    this.expandSelection = () => {
+        const msg = 'expand';
+        const files = CurrentInfo.files;
         
         selectByPattern(msg, files);
     };
@@ -666,9 +624,9 @@ function CmdProto() {
     /**
      * open dialog with shrink selection
      */
-    this.shrinkSelection                = function() {
-        var msg = 'shrink';
-        var files = DOM.getSelectedFiles();
+    this.shrinkSelection = () => {
+        const msg = 'shrink';
+        const files = CurrentInfo.files;
        
         selectByPattern(msg, files);
     };
@@ -676,8 +634,8 @@ function CmdProto() {
     /**
      * setting history wrapper
      */
-    this.setHistory              = function(data, title, url) {
-        var ret = window.history;
+    this.setHistory = (data, title, url) => {
+        const ret = window.history;
         
         url = CloudCmd.PREFIX + url;
         
@@ -693,7 +651,7 @@ function CmdProto() {
      * @param name
      */
     
-    this.setTitle                = function(name) {
+    this.setTitle = (name) => {
         if (!Title)
             Title = DOM.getByTag('title')[0] ||
                     DOM.load({
