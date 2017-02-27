@@ -599,16 +599,13 @@ function CmdProto() {
         return Cmd;
     };
     
-    this.getAllFiles = function() {
-        var i,
-            panel       = DOM.getPanel(),
-            files       = DOM.getFiles(panel),
-            name        = DOM.getCurrentName(files[0]);
+    this.getAllFiles = () => {
+        const panel = DOM.getPanel();
+        const files = DOM.getFiles(panel);
+        const name = DOM.getCurrentName(files[0]);
         
-        if (name === '..')
-            i = 1;
-        else
-            i = 0;
+        const from = (a) => a === '..' ? 1 : 0;
+        const i = from('..');
         
         return [].slice.call(files, i);
     };
