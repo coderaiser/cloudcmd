@@ -1360,19 +1360,25 @@ function CmdProto() {
         });
     },
     
-    this.duplicatePanel         = function() {
-        var isDir = CurrentInfo.isDir;
-        var path = CurrentInfo.dirPath;
-        var panel = CurrentInfo.panelPassive;
-        var noCurrent = !CurrentInfo.isOnePanel;
+    this.duplicatePanel = () => {
+        const Info = CurrentInfo;
+        const isDir = Info.isDir;
+        const panel = Info.panelPassive;
+        const noCurrent = !Info.isOnePanel;
         
-        if (isDir)
-            path = CurrentInfo.path;
+        const getPath = (isDir) => {
+            if (isDir)
+                return Info.path;
+            
+            return Info.dirPath;
+        };
+        
+        const path = getPath(isDir);
         
         CloudCmd.loadDir({
-            path: path,
-            panel: panel,
-            noCurrent: noCurrent,
+            path,
+            panel,
+            noCurrent,
         });
     };
     
