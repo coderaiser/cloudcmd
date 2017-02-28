@@ -23,17 +23,17 @@ const Images = require('./images');
 const load = require('./load');
 const Files = require('./files');
 const RESTful = require('./rest');
+const Storage = require('./storage');
 
 DOM.Images = Images;
 DOM.load = load;
 DOM.Files = Files;
 DOM.RESTful = RESTful;
+DOM.Storage = Storage;
 
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
 DOM.Events = require('./events');
-DOM.Storage = require('./storage');
-DOM.RESTful = require('./rest');
 
 const loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');
@@ -605,13 +605,11 @@ function CmdProto() {
      *
      * @param currentFile
      */
-    this.isCurrentFile           = function(currentFile) {
-        var ret;
+    this.isCurrentFile = (currentFile) => {
+        if (!currentFile)
+            return false;
         
-        if (currentFile)
-            ret = DOM.isContainClass(currentFile, CURRENT_FILE);
-        
-        return ret;
+        return DOM.isContainClass(currentFile, CURRENT_FILE);
     };
     
     /**
@@ -631,10 +629,10 @@ function CmdProto() {
      *
      * @param currentFile
      */
-    this.isCurrentIsDir            = function(currentFile) {
-        var current = currentFile || this.getCurrentFile();
-        var fileType = DOM.getByDataName('js-type', current);
-        var ret = DOM.isContainClass(fileType, 'directory');
+    this.isCurrentIsDir = (currentFile) => {
+        const current = currentFile || this.getCurrentFile();
+        const fileType = DOM.getByDataName('js-type', current);
+        const ret = DOM.isContainClass(fileType, 'directory');
         
         return ret;
     };
@@ -671,44 +669,35 @@ function CmdProto() {
      *
      * @param currentFile
      */
-    this.getCurrentName          = function(currentFile) {
-        var link;
-        var name = '';
-        var current = currentFile || DOM.getCurrentFile();
+    this.getCurrentName = (currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
         
-        if (current)
-            link        = DOM.getCurrentLink(current);
+        if (!current)
+            return '';
+           
+        const link = DOM.getCurrentLink(current);
         
-        if (link) {
-            name = link.title;
-        }
+        if (!link)
+            return '';
+            
+        const name = link.title;
         
         return name;
     };
     
-    this.getFilenames = function(allFiles) {
-        var first, name;
-        var files;
-        var slice = Array.prototype.slice;
-        var names = [];
-        
-        if (!allFiles)
+    this.getFilenames = (files) => {
+        if (!files)
             throw Error('AllFiles could not be empty');
         
-        files           = slice.call(allFiles);
-        first           = files[0];
+        const first = files[0] || DOM.getCurrentFile();
+        const name = DOM.getCurrentName(first);
         
-        if (first) {
-            name        = DOM.getCurrentName(first);
-        } else {
-            first       = DOM.getCurrentFile();
-            name        = DOM.getCurrentName(first);
-        }
+        const allFiles = [...files];
         
         if (name === '..')
-            files.shift();
+            allFiles.shift();
         
-        names = files.map(function(current) {
+        const names = allFiles.map((current) => {
             return DOM.getCurrentName(current);
         });
         
@@ -739,12 +728,11 @@ function CmdProto() {
     /**
      * check storage hash
      */
-    this.checkStorageHash = function(name, callback) {
-        var Storage = DOM.Storage;
-        var parallel = exec.parallel;
-        var loadHash = DOM.loadCurrentHash;
-        var nameHash = name + '-hash';
-        var getStoreHash = exec.with(Storage.get, nameHash);
+    this.checkStorageHash = (name, callback) => {
+        const parallel = exec.parallel;
+        const loadHash = DOM.loadCurrentHash;
+        const nameHash = name + '-hash';
+        const getStoreHash = exec.with(Storage.get, nameHash);
         
         if (typeof name !== 'string')
             throw Error('name should be a string!');
@@ -752,9 +740,9 @@ function CmdProto() {
         if (typeof callback !== 'function')
             throw Error('callback should be a function!');
         
-        parallel([loadHash, getStoreHash], function(error, loadHash, storeHash) {
-            var equal;
-            var isContain = /error/.test(loadHash);
+        parallel([loadHash, getStoreHash], (error, loadHash, storeHash) => {
+            let equal;
+            const isContain = /error/.test(loadHash);
             
             if (isContain)
                 error = loadHash;
@@ -774,23 +762,21 @@ function CmdProto() {
      * @param callback
      */
     this.saveDataToStorage = function(name, data, hash, callback) {
-        var allowed     = CloudCmd.config('localStorage');
-        var isDir       = DOM.isCurrentIsDir();
-        var nameHash    = name + '-hash';
-        var nameData    = name + '-data';
+        const allowed = CloudCmd.config('localStorage');
+        const isDir = DOM.isCurrentIsDir();
+        const nameHash = name + '-hash';
+        const nameData = name + '-data';
         
         if (!allowed || isDir)
             return exec(callback);
         
-        exec.if(hash, function() {
-            var Storage = DOM.Storage;
-            
+        exec.if(hash, () => {
             Storage.set(nameHash, hash);
             Storage.set(nameData, data);
             
             exec(callback, hash);
-        }, function(callback) {
-            DOM.loadCurrentHash(function(error, loadHash) {
+        }, (callback) => {
+            DOM.loadCurrentHash((error, loadHash) => {
                 hash = loadHash;
                 callback();
             });
@@ -804,12 +790,11 @@ function CmdProto() {
      * @param data
      * @param callback
      */
-    this.getDataFromStorage = function(name, callback) {
-        var Storage     = DOM.Storage;
-        var nameHash    = name + '-hash';
-        var nameData    = name + '-data';
-        var allowed     = CloudCmd.config('localStorage');
-        var isDir       = DOM.isCurrentIsDir();
+    this.getDataFromStorage = (name, callback) => {
+        const nameHash = name + '-hash';
+        const nameData = name + '-data';
+        const allowed = CloudCmd.config('localStorage');
+        const isDir = DOM.isCurrentIsDir();
         
         if (!allowed || isDir)
             return exec(callback);
@@ -820,11 +805,11 @@ function CmdProto() {
         ], callback);
     };
     
-    this.getFM = function() {
+    this.getFM = () => {
         return DOM.getPanel().parentElement;
     };
     
-    this.getPanelPosition = function(panel) {
+    this.getPanelPosition = (panel) => {
         panel = panel || DOM.getPanel();
         
         return panel.dataset.name.replace('js-', '');
@@ -833,7 +818,7 @@ function CmdProto() {
     /** function getting panel active, or passive
      * @param options = {active: true}
      */
-    this.getPanel = function(options) {
+    this.getPanel = (options) => {
         var files, panel, isLeft,
             dataName    = 'js-',
             current     = DOM.getCurrentFile();
@@ -866,9 +851,9 @@ function CmdProto() {
         return panel;
     };
     
-    this.getFiles               = function(element) {
-        var files   = DOM.getByDataName('js-files', element),
-            ret     = files.children || [];
+    this.getFiles = (element) => {
+        const files = DOM.getByDataName('js-files', element);
+        const ret = files.children || [];
         
         return ret;
     };
@@ -876,22 +861,21 @@ function CmdProto() {
     /**
      * shows panel right or left (or active)
      */
-    this.showPanel               = function(active) {
-        var ret     = true,
-            panel   = DOM.getPanel({active: active});
+    this.showPanel = (active) => {
+        const panel = DOM.getPanel({active: active});
         
-        if (panel)
-            DOM.show(panel);
-        else
-            ret = false;
+        if (!panel)
+            return false;
         
-        return ret;
+        DOM.show(panel);
+        
+        return true;
     };
     
     /**
      * hides panel right or left (or active)
      */
-    this.hidePanel               = function(active) {
+    this.hidePanel               = (active) => {
         var ret     = false,
             panel   = DOM.getPanel({active: active});
         
@@ -905,7 +889,7 @@ function CmdProto() {
      * open window with URL
      * @param url
      */
-    this.openWindow              = function(url) {
+    this.openWindow              = (url) => {
         var left        = 140,
             top         = 187,
             width       = 1000,
@@ -931,11 +915,11 @@ function CmdProto() {
      * @param pChild
      * @param element
      */
-    this.remove                  = function(child, element) {
-        var parent = element || document.body;
+    this.remove = (child, element) => {
+        const parent = element || document.body;
         
         parent.removeChild(child);
-            
+        
         return DOM;
     };
     
@@ -944,7 +928,7 @@ function CmdProto() {
      * @param current
      *
      */
-    this.deleteCurrent           = function(current) {
+    this.deleteCurrent = (current) => {
         var next, prev, currentNew;
         
         if (!current)
@@ -974,7 +958,7 @@ function CmdProto() {
      * remove selected files from file table
      * @Selected
      */
-    this.deleteSelected          = function(selected) {
+    this.deleteSelected = (selected) => {
         var i, n, current;
         
         if (!selected)
@@ -997,7 +981,7 @@ function CmdProto() {
      *
      * @currentFile
      */
-    this.renameCurrent            = function(current) {
+    this.renameCurrent = (current) => {
         var from, dirPath, files, isExist,
             RESTful     = DOM.RESTful,
             Dialog      = DOM.Dialog;
@@ -1020,9 +1004,7 @@ function CmdProto() {
                         to      : dirPath + to
                     };
                     
-                    RESTful.mv(files, function(error) {
-                        var Storage = DOM.Storage;
-                        
+                    RESTful.mv(files, (error) => {
                         if (!error) {
                             DOM.setCurrentName(to, current);
                             Cmd.updateCurrentInfo();
@@ -1058,7 +1040,7 @@ function CmdProto() {
     };
     
     /* scroll on one page*/
-    this.scrollByPages           = function(element, pPages) {
+    this.scrollByPages           = (element, pPages) => {
         var ret = element && element.scrollByPages && pPages;
         
         if (ret)
@@ -1067,7 +1049,7 @@ function CmdProto() {
         return ret;
     };
     
-    this.changePanel            = function() {
+    this.changePanel            = () => {
         var dataName, files, current,
             
             panel           = DOM.getPanel(),
