@@ -105,12 +105,12 @@ function CmdProto() {
         const dir = Cmd.getCurrentDirPath();
         const msg = 'New ' + typeName || 'File';
         const getName = () => {
-            const name = Cmd.getCurrentName()
+            const name = Cmd.getCurrentName();
             
             if (name === '..')
                 return '';
              
-             return name;
+            return name;
         };
         
         const name = getName();
@@ -121,7 +121,7 @@ function CmdProto() {
                 return;
             
             const path = (type) => {
-                const result = dir + name
+                const result = dir + name;
                 
                 if (!type)
                     return result;
@@ -163,12 +163,12 @@ function CmdProto() {
     /**
      * get current direcotory path
      */
-    this.getParentDirPath       = function(panel) {
-        var path    = DOM.getCurrentDirPath(panel),
-            dirName = DOM.getCurrentDirName() + '/';
+    this.getParentDirPath = (panel) => {
+        const path = DOM.getCurrentDirPath(panel);
+        const dirName = DOM.getCurrentDirName() + '/';
         
         if (path !== '/')
-            path = path.replace(RegExp(dirName + '$'), '');
+            return path.replace(RegExp(dirName + '$'), '');
         
         return path;
     };
@@ -176,9 +176,9 @@ function CmdProto() {
     /**
      * get not current direcotory path
      */
-    this.getNotCurrentDirPath       = function() {
-        var panel  = DOM.getPanel({active: false}),
-            path   = DOM.getCurrentDirPath(panel);
+    this.getNotCurrentDirPath = () => {
+        const panel = DOM.getPanel({active: false});
+        const path = DOM.getCurrentDirPath(panel);
         
         return path;
     };
@@ -195,12 +195,9 @@ function CmdProto() {
     /**
      * get current file by name
      */
-    this.getCurrentByName           = function(name, panelParam) {
-        var element,
-            panel   = panelParam || CurrentInfo.panel;
-        
-        name    = 'js-file-' + name;
-        element = DOM.getByDataName(name, panel);
+    this.getCurrentByName = (name, panel = CurrentInfo.panel) => {
+        const dataName = 'js-file-' + name;
+        const element = DOM.getByDataName(dataName, panel);
         
         return element;
     };
@@ -210,28 +207,20 @@ function CmdProto() {
      *
      * @currentFile
      */
-    this.getSelectedFiles         = function() {
-        var panel       = DOM.getPanel(),
-            selected    = DOM.getByClassAll(SELECTED_FILE, panel),
-            ret         = [].slice.call(selected);
+    this.getSelectedFiles = () => {
+        const panel = DOM.getPanel();
+        const selected = DOM.getByClassAll(SELECTED_FILE, panel);
         
-        return ret;
+        return [...selected];
     };
-    
     
     /*
      * unselect all files
      */
-    this.unselectFiles          = function(files) {
-        var array,
-            isArray = Array.isArray(files);
+    this.unselectFiles = (files) => {
+        files = files || DOM.getSelectedFiles();
         
-        if (!files) {
-            array = DOM.getSelectedFiles();
-        } else if (!isArray)
-            array = [].slice.call(files);
-        
-        array.forEach(DOM.toggleSelectedFile);
+        [...files].forEach(DOM.toggleSelectedFile);
     };
     
     /**
@@ -239,10 +228,10 @@ function CmdProto() {
      *
      * @currentFile
      */
-    this.getActiveFiles         = function() {
-        var current = DOM.getCurrentFile();
-        var files = DOM.getSelectedFiles();
-        var name = DOM.getCurrentName(current);
+    this.getActiveFiles = () => {
+        const current = DOM.getCurrentFile();
+        const files = DOM.getSelectedFiles();
+        const name = DOM.getCurrentName(current);
         
         if (!files.length && name !== '..')
             return [current];
@@ -254,12 +243,10 @@ function CmdProto() {
      * get size
      * @currentFile
      */
-    this.getCurrentSize          = function(currentFile) {
-        var current     = currentFile || Cmd.getCurrentFile(),
-            size        = DOM.getByDataName('js-size', current);
-        
+    this.getCurrentSize = (currentFile) => {
+        const current = currentFile || Cmd.getCurrentFile();
         /* если это папка - возвращаем слово dir вместо размера*/
-        size    = size
+        const size = DOM.getByDataName('js-size', current)
             .textContent
             .replace(/^<|>$/g, '');
         
@@ -270,22 +257,24 @@ function CmdProto() {
      * get size
      * @currentFile
      */
-    this.loadCurrentSize          = function(callback, currentFile) {
-        var RESTful     = DOM.RESTful,
-            current     = currentFile || DOM.getCurrentFile(),
-            query       = '?size',
-            link        = DOM.getCurrentPath(current);
+    this.loadCurrentSize = (callback, currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
+        const query = '?size';
+        const link = DOM.getCurrentPath(current);
         
         Images.show.load();
         
-        if (name !== '..')
-            RESTful.read(link + query, function(error, size) {
-                if (!error) {
-                    DOM.setCurrentSize(size, current);
-                    exec(callback, current);
-                    Images.hide();
-                }
-            });
+        if (name === '..')
+            return;
+        
+        RESTful.read(link + query, (error, size) => {
+            if (error)
+                return;
+                
+            DOM.setCurrentSize(size, current);
+            exec(callback, current);
+            Images.hide();
+        });
     };
     
     /**
@@ -293,11 +282,10 @@ function CmdProto() {
      * @callback
      * @currentFile
      */
-    this.loadCurrentHash          = function(callback, currentFile) {
-        var RESTful     = DOM.RESTful,
-            current     = currentFile || DOM.getCurrentFile(),
-            query       = '?hash',
-            link        = DOM.getCurrentPath(current);
+    this.loadCurrentHash = (callback, currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
+        const query = '?hash';
+        const link = DOM.getCurrentPath(current);
         
         RESTful.read(link + query, callback);
     };
@@ -307,11 +295,10 @@ function CmdProto() {
      * @callback
      * @currentFile
      */
-    this.loadCurrentTime          = function(callback, currentFile) {
-        var RESTful     = DOM.RESTful,
-            current     = currentFile || DOM.getCurrentFile(),
-            query       = '?time',
-            link        = DOM.getCurrentPath(current);
+    this.loadCurrentTime = (callback, currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
+        const query = '?time';
+        const link = DOM.getCurrentPath(current);
         
         RESTful.read(link + query, callback);
     };
@@ -341,13 +328,10 @@ function CmdProto() {
      * @currentFile
      */
     this.getCurrentOwner = (currentFile) => {
-        var ret,
-            current     = currentFile || DOM.getCurrentFile(),
-            owner       = DOM.getByDataName('js-owner', current);
+        const current = currentFile || DOM.getCurrentFile();
+        const owner = DOM.getByDataName('js-owner', current);
         
-        ret             = owner.textContent;
-        
-        return ret;
+        return owner.textContent;
     };
     
     /**
@@ -356,31 +340,29 @@ function CmdProto() {
      * @param callback
      * @param currentFile
      */
-    this.getCurrentData             = function(callback, currentFile) {
-        var hash,
-            RESTful         = DOM.RESTful,
-            Dialog          = DOM.Dialog,
-            Info            = DOM.CurrentInfo,
-            current         = currentFile || DOM.getCurrentFile(),
-            path            = DOM.getCurrentPath(current),
-            isDir           = DOM.isCurrentIsDir(current),
+    this.getCurrentData = (callback, currentFile) => {
+        let hash;
+        const Dialog = DOM.Dialog;
+        const Info = DOM.CurrentInfo;
+        const current = currentFile || DOM.getCurrentFile();
+        const path = DOM.getCurrentPath(current);
+        const isDir = DOM.isCurrentIsDir(current);
+        
+        const func = (error, data) => {
+            const ONE_MEGABYTE = 1024 * 1024 * 1024;
             
-            func            = function(error, data) {
-                var length,
-                    ONE_MEGABYTE    = 1024 * 1024 * 1024;
+            if (!error) {
+                if (itype.object(data))
+                    data = jonny.stringify(data);
                 
-                if (!error) {
-                    if (itype.object(data))
-                        data = jonny.stringify(data);
-                    
-                    length  = data.length;
-                    
-                    if (hash && length < ONE_MEGABYTE)
-                        DOM.saveDataToStorage(path, data, hash);
-                }
+                const length  = data.length;
                 
-                callback(error, data);
-            };
+                if (hash && length < ONE_MEGABYTE)
+                    DOM.saveDataToStorage(path, data, hash);
+            }
+            
+            callback(error, data);
+        };
         
         if (Info.name === '..') {
             Dialog.alert.noFiles(TITLE);
@@ -390,15 +372,15 @@ function CmdProto() {
         if (isDir)
             return RESTful.read(path, func);
         
-        DOM.checkStorageHash(path, function(error, equal, hashNew) {
-            if (error) {
-                callback(error);
-            } else if (equal) {
-                DOM.getDataFromStorage(path, callback);
-            } else {
-                hash = hashNew;
-                RESTful.read(path, func);
-            }
+        DOM.checkStorageHash(path, (error, equal, hashNew) => {
+            if (error)
+                return callback(error);
+            
+            if (equal)
+                return DOM.getDataFromStorage(path, callback);
+            
+            hash = hashNew;
+            RESTful.read(path, func);
         });
     };
     
@@ -408,11 +390,8 @@ function CmdProto() {
      * @callback - function({data, name}) {}
      * @currentFile
      */
-    this.saveCurrentData             = function(url, data, callback, query) {
-        if (!query)
-            query = '';
-        
-        DOM.RESTful.write(url + query, data, function(error) {
+    this.saveCurrentData = (url, data, callback, query = '') => {
+        DOM.RESTful.write(url + query, data, (error) => {
             !error && DOM.saveDataToStorage(url, data);
         });
     };
