@@ -46,20 +46,6 @@ function CmdProto() {
         'js-right'       : null
     };
     
-    /**
-     * private function thet unset currentfile
-     *
-     * @currentFile
-     */
-    function unsetCurrentFile(currentFile) {
-        var ret = DOM.isCurrentFile(currentFile);
-        
-        if (ret)
-            currentFile.classList.remove(CURRENT_FILE);
-        
-        return ret;
-    }
-    
     this.loadRemote = function(name, options, callback) {
         var o = options;
         var Files = DOM.Files;
@@ -373,30 +359,27 @@ function CmdProto() {
      * set size
      * @currentFile
      */
-    this.setCurrentSize          = function(size, currentFile) {
-        var current         = currentFile || DOM.getCurrentFile(),
-            sizeElement     = DOM.getByDataName('js-size', current);
+    this.setCurrentSize = (size, currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
+        const sizeElement = DOM.getByDataName('js-size', current);
         
         sizeElement.textContent = size;
-    
     };
     
     /**
      * @currentFile
      */
-    this.getCurrentMode          = function(currentFile) {
-        var ret,
-            current    = currentFile || DOM.getCurrentFile(),
-            lMode       = DOM.getByDataName('js-mode', current);
-        ret        = lMode.textContent;
+    this.getCurrentMode = (currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
+        const mode = DOM.getByDataName('js-mode', current);
         
-        return ret;
+        return mode.textContent;
     };
     
     /**
      * @currentFile
      */
-    this.getCurrentOwner         = function(currentFile) {
+    this.getCurrentOwner = (currentFile) => {
         var ret,
             current     = currentFile || DOM.getCurrentFile(),
             owner       = DOM.getByDataName('js-owner', current);
@@ -476,58 +459,73 @@ function CmdProto() {
     /**
      * unified way to get RefreshButton
      */
-    this.getRefreshButton        = function(panel) {
-        var currentPanel    = panel || DOM.getPanel(),
-            refresh         = DOM.getByDataName('js-refresh', currentPanel);
+    this.getRefreshButton = (panel) => {
+        const currentPanel = panel || DOM.getPanel();
+        const refresh = DOM.getByDataName('js-refresh', currentPanel);
         
         return refresh;
     };
     
-    this.setCurrentByName = function(name) {
-        var current = DOM.getCurrentByName(name);
+    this.setCurrentByName = (name) => {
+        const current = DOM.getCurrentByName(name);
         return DOM.setCurrentFile(current);
     };
     
     /**
+     * private function thet unset currentfile
+     *
+     * @currentFile
+     */
+    function unsetCurrentFile(currentFile) {
+        const is = DOM.isCurrentFile(currentFile);
+        
+        if (!is)
+            return;
+        
+        currentFile.classList.remove(CURRENT_FILE);
+    }
+    
+    /**
      * unified way to set current file
      */
-    this.setCurrentFile = function(currentFile, options) {
-        var path, pathWas, title,
-            o               = options,
-            CENTER          = true,
-            currentFileWas  = DOM.getCurrentFile();
+    this.setCurrentFile = (currentFile, options) => {
+        const o = options;
+        const CENTER = true;
+        const currentFileWas = DOM.getCurrentFile();
         
-        if (currentFile) {
-            if (currentFileWas) {
-                pathWas     = DOM.getCurrentDirPath();
-                unsetCurrentFile(currentFileWas);
-            }
-            
-            currentFile.classList.add(CURRENT_FILE);
-            
-            path        = DOM.getCurrentDirPath();
-            
-            if (path !== pathWas) {
-                title = getTitle(path);
-                DOM.setTitle(title);
-                
-                /* history could be present
-                 * but it should be false
-                 * to prevent default behavior
-                 */
-                if (!o || o.history !== false) {
-                    if (path !== '/')
-                        path    = FS + path;
-                    
-                    DOM.setHistory(path, null, path);
-                }
-            }
-            
-            /* scrolling to current file */
-            DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
-            
-            Cmd.updateCurrentInfo();
+        if (!currentFile)
+            return DOM;
+        
+        let pathWas = '';
+        
+        if (currentFileWas) {
+            pathWas = DOM.getCurrentDirPath();
+            unsetCurrentFile(currentFileWas);
         }
+        
+        currentFile.classList.add(CURRENT_FILE);
+        
+        let path = DOM.getCurrentDirPath();
+        
+        if (path !== pathWas) {
+            DOM.setTitle(getTitle(path));
+            
+            /* history could be present
+             * but it should be false
+             * to prevent default behavior
+             */
+            if (!o || o.history !== false) {
+                if (path !== '/')
+                    path = FS + path;
+                
+                DOM.setHistory(path, null, path);
+            }
+        }
+        
+        /* scrolling to current file */
+        DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
+        
+        Cmd.updateCurrentInfo();
         
         return DOM;
     };
@@ -538,34 +536,31 @@ function CmdProto() {
       * @param layer    - element
       * @param          - position {x, y}
       */
-    this.getCurrentByPosition               = function(position) {
-        var element, tag, isChild,
-            x   = position.x,
-            y   = position.y;
+    this.getCurrentByPosition = ({x, y}) => {
+        const element = document.elementFromPoint(x, y);
         
-        element = document.elementFromPoint(x, y),
-        tag     = element.tagName;
-        
-        isChild = /A|SPAN|LI/.test(tag);
-        
-        if (!isChild) {
-            element = null;
-        } else {
-            switch (tag) {
-            case 'A':
-                element = element.parentElement.parentElement;
-                break;
+        const getEl = (el) => {
+            const {tagName} = el;
+            const isChild = /A|SPAN|LI/.test(tagName);
             
-            case 'SPAN':
-                element = element.parentElement;
-                break;
-            }
+            if (!isChild)
+                return null;
+            
+            if (tagName === 'A')
+                return el.parentElement.parentElement;
+            
+            if (tagName === 'SPAN')
+                return el.parentElement;
+            
+            return el;
         }
         
-        if (element && element.tagName !== 'LI')
-            element = null;
+        const el = getEl(element);
         
-        return element;
+        if (el && el.tagName !== 'LI')
+            return null;
+        
+        return el;
     };
     
     /**
@@ -594,7 +589,7 @@ function CmdProto() {
         return Cmd;
     };
     
-    this.selectAllFiles = function() {
+    this.selectAllFiles = () => {
         DOM.getAllFiles().map(DOM.selectFile);
         
         return Cmd;
