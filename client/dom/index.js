@@ -22,10 +22,12 @@ module.exports = DOM;
 const Images = require('./images');
 const load = require('./load');
 const Files = require('./files');
+const RESTful = require('./rest');
 
 DOM.Images = Images;
 DOM.load = load;
 DOM.Files = Files;
+DOM.RESTful = RESTful;
 
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
@@ -94,33 +96,44 @@ function CmdProto() {
      * @typeName
      * @type
      */
-    this.promptNewFile       = function() {
+    this.promptNewFile = () => {
         promptNew('file');
     };
     
     function promptNew(typeName, type) {
-        var RESTful = DOM.RESTful,
-            Dialog  = DOM.Dialog,
-            path    = '',
-            name    = Cmd.getCurrentName(),
-            dir     = Cmd.getCurrentDirPath(),
-            msg     = 'New ' + typeName || 'File';
-        
-        if (name === '..')
-            name = '';
-        
-        Dialog.prompt(TITLE, msg, name, {cancel: false}).then(function(name) {
-            path        = dir + name;
+        const {Dialog} = DOM;
+        const dir = Cmd.getCurrentDirPath();
+        const msg = 'New ' + typeName || 'File';
+        const getName = () => {
+            const name = Cmd.getCurrentName()
             
-            if (type)
-                path    += type;
+            if (name === '..')
+                return '';
+             
+             return name;
+        };
+        
+        const name = getName();
+        const cancel = false;
+        
+        Dialog.prompt(TITLE, msg, name, {cancel}).then((name) => {
+            if (!name)
+                return;
+            
+            const path = (type) => {
+                const result = dir + name
                 
-            if (name)
-                RESTful.write(path, function(error) {
-                    !error && CloudCmd.refresh(null, function() {
-                        DOM.setCurrentByName(name);
-                    });
+                if (!type)
+                    return result;
+                
+                return result + type;
+            };
+            
+            RESTful.write(path(type), (error) => {
+                !error && CloudCmd.refresh(null, () => {
+                    DOM.setCurrentByName(name);
                 });
+            });
         });
     }
     
