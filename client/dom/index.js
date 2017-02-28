@@ -3,7 +3,6 @@
 'use strict';
 
 const itype = require('itype/legacy');
-const rendy = require('rendy');
 const exec = require('execon');
 const jonny = require('jonny');
 const Util = require('../../common/util');
@@ -22,89 +21,38 @@ module.exports = DOM;
 
 const Images = require('./images');
 const load = require('./load');
+const Files = require('./files');
 
 DOM.Images = Images;
 DOM.load = load;
+DOM.Files = Files;
+
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
 DOM.Events = require('./events');
 DOM.Storage = require('./storage');
-DOM.Files = require('./files');
 DOM.RESTful = require('./rest');
 
+const loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');
 
 function CmdProto() {
-    const Cmd = this;
+    let Title;
     let CurrentInfo = {};
+    
+    const Cmd = this;
     const CURRENT_FILE = 'current-file';
     const SELECTED_FILE = 'selected-file';
     const TITLE = 'Cloud Commander';
-    var Title;
     const TabPanel = {
         'js-left'        : null,
         'js-right'       : null
     };
     
-    this.loadRemote = function(name, options, callback) {
-        var o = options;
-        var Files = DOM.Files;
-        
-        if (!callback)
-            callback = options;
-        
-        if (o.name && window[o.name])
-            callback();
-        else
-            Files.get('modules', function(error, modules) {
-                var remoteTmpls, local, remote,
-                    load        = DOM.load,
-                    prefix      = CloudCmd.PREFIX,
-                    online      = CloudCmd.config('online') && navigator.onLine,
-                    
-                    remoteObj   = Util.findObjByNameInArr(modules, 'remote'),
-                    module      = Util.findObjByNameInArr(remoteObj, name),
-                    
-                    isArray     = itype.array(module.local),
-                    version     = module.version,
-                    
-                    funcOFF = () => {
-                        load.parallel(local, callback);
-                    },
-                    
-                    funcON = () => {
-                        load.parallel(remote, (error) => {
-                            if (error)
-                                return funcOFF();
-                            
-                            callback();
-                        });
-                    };
-                
-                if (isArray) {
-                    remoteTmpls = module.remote;
-                    local       = module.local;
-                } else {
-                    remoteTmpls  = [module.remote];
-                    local        = [module.local];
-                }
-                
-                local   = local.map(function(url) {
-                    return prefix + url;
-                });
-                
-                remote  = remoteTmpls.map(function(tmpl) {
-                    return rendy(tmpl, {
-                        version: version
-                    });
-                });
-                
-                exec.if(online, funcON, funcOFF);
-            });
-        
+    this.loadRemote = (name, options, callback) => {
+        loadRemote(name, options, callback);
         return DOM;
     };
-    
     /**
      * load jquery from google cdn or local copy
      * @param callback
@@ -553,7 +501,7 @@ function CmdProto() {
                 return el.parentElement;
             
             return el;
-        }
+        };
         
         const el = getEl(element);
         

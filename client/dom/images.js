@@ -2,7 +2,7 @@
 
 'use strict';
 
-const DOM = require('../dom');
+const DOM = require('./');
 
 const Images = module.exports;
 
@@ -13,10 +13,28 @@ const ERROR = 'error';
 const LoadingImage = LOADING + getLoadingType();
 
 function getLoadingType() {
-    return DOM.isSVG() ? '-svg' : '-gif';
+    return isSVG() ? '-svg' : '-gif';
 }
 
 module.exports.get = getElement;
+
+/**
+ * check SVG SMIL animation support
+ */
+function isSVG() {
+    const createNS = document.createElementNS;
+    const SVG_URL = 'http://www.w3.org/2000/svg';
+    
+    if (!createNS)
+        return false;
+    
+    const create = createNS.bind(document);
+    const svgNode = create(SVG_URL, 'animate');
+    const name = svgNode.toString();
+    
+    return /SVGAnimate/.test(name);
+}
+
 
 function getElement() {
     return DOM.load({
@@ -50,15 +68,15 @@ module.exports.error = () => {
     return element;
 };
 
-module.exports.show = load;
-module.exports.show.load  = load;
+module.exports.show = show;
+module.exports.show.load  = show;
 module.exports.show.error = error;
 
 /**
 * Function shows loading spinner
 * position = {top: true};
 */
-function load(position, panel) {
+function show(position, panel) {
     const image = Images.loading();
     const parent = image.parentElement;
     const refreshButton = DOM.getRefreshButton(panel);

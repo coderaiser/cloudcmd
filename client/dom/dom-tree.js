@@ -62,23 +62,6 @@ module.exports.getByClassAll = (className, element) => {
 };
 
 /**
- * check SVG SMIL animation support
- */
-module.exports.isSVG = () => {
-    const createNS = document.createElementNS;
-    const SVG_URL = 'http://www.w3.org/2000/svg';
-    
-    if (!createNS)
-        return false;
-    
-    const create = createNS.bind(document);
-    const svgNode = create(SVG_URL, 'animate');
-    const name = svgNode.toString();
-    
-    return /SVGAnimate/.test(name);
-};
-
-/**
  * add class=hidden to element
  *
  * @param element
