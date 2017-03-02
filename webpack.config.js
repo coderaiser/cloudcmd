@@ -67,13 +67,6 @@ module.exports = {
             }
         }]
     },
-    /*
-    resolve: {
-        alias: {
-            dom: `${dir}/dom`
-        }
-    }
-    */
 };
 
 function externals(context, request, fn) {
