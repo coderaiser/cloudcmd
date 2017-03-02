@@ -28,6 +28,16 @@ const plugins = clean([
         filename: 'cloudcmd.js',
     }),
 ]);
+const loaders = clean([
+    !isDev && {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+            presets: ['es2015']
+        }
+    }
+]);
 
 module.exports = {
     devtool,
@@ -58,14 +68,7 @@ module.exports = {
         externals
     ],
     module: {
-        loaders: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-                presets: ['es2015']
-            }
-        }]
+        loaders,
     },
 };
 
