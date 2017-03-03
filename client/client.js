@@ -11,7 +11,7 @@ const {
     buildFromJSON,
 } = require('../common/cloudfunc');
 
-/* global Util, DOM, join */
+/* global Util, DOM */
 
 module.exports = new CloudCmdProto(Util, DOM);
 
