@@ -52,6 +52,7 @@ module.exports = {
         [modules + '/upload']: `${dirModules}/upload.js`,
         [modules + '/operation']: `${dirModules}/operation.js`,
         [modules + '/konsole']: `${dirModules}/konsole.js`,
+        [modules + '/terminal']: `${dirModules}/terminal.js`,
         [modules + '/cloud']: `${dirModules}/cloud.js`,
         [modules + '/polyfill']: `${dirModules}/polyfill.js`,
     },

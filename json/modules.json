@@ -11,6 +11,7 @@
     "upload",
     "operation",
     "konsole",
+    "terminal",
     "cloud", [{
         "name": "remote",
         "data": [{

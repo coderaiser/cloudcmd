@@ -18,7 +18,8 @@ const args = require('minimist')(argv.slice(2), {
         'editor',
         'packer',
         'root',
-        'prefix'
+        'prefix',
+        'terminal-path',
     ],
     boolean: [
         'auth',
@@ -31,6 +32,7 @@ const args = require('minimist')(argv.slice(2), {
         'progress',
         'config-dialog',
         'console',
+        'terminal',
         'one-panel-mode',
         'html-dialogs'
     ],
@@ -49,7 +51,9 @@ const args = require('minimist')(argv.slice(2), {
         prefix      : config('prefix') || '',
         progress    : config('progress'),
         console     : config('console'),
+        terminal    : config('terminal'),
         
+        'terminal-path': config('terminalPath'),
         'config-dialog': config('configDialog'),
         'one-panel-mode': config('onePanelMode'),
         'html-dialogs': config('htmlDialogs')
@@ -88,6 +92,8 @@ if (args.version) {
     config('username', args.username);
     config('progress', args.progress);
     config('console', args.console);
+    config('terminal', args.terminal);
+    config('terminalPath', args.terminalPath);
     config('editor', args.editor);
     config('prefix', args.prefix);
     config('root', args.root);

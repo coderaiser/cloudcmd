@@ -13,6 +13,7 @@ const route = require(DIR + 'route');
 const validate = require(DIR + 'validate');
 const prefixer = require(DIR + 'prefixer');
 const pluginer = require(DIR + 'plugins');
+const terminal = require(DIR + 'terminal');
 
 const apart = require('apart');
 const join = require('join-io');
@@ -32,8 +33,9 @@ const omnes = require('omnes/legacy');
 const criton = require('criton');
 
 const root = () => config('root');
-const emptyFunc = (req, res, next) => next();
-emptyFunc.middle = () => emptyFunc;
+
+const notEmpty = (a) => a;
+const clean = (a) => a.filter(notEmpty);
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -44,7 +46,7 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-module.exports = function(params) {
+module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
     const plugins = p.plugins;
@@ -54,7 +56,7 @@ module.exports = function(params) {
     
     checkPlugins(plugins);
     
-    keys.forEach(function(name) {
+    keys.forEach((name) => {
         let value = options[name];
         
         switch(name) {
@@ -176,6 +178,11 @@ function listen(prefix, socket) {
         authCheck,
         prefix: prefix + '/console',
     });
+    
+    config('terminal') && terminal.listen(socket, {
+        authCheck,
+        prefix: prefix + '/gritty',
+    });
 }
 
 function cloudcmd(prefix, plugins) {
@@ -191,11 +198,15 @@ function cloudcmd(prefix, plugins) {
     
     const ponseStatic = ponse.static(DIR_ROOT, {cache});
    
-    const funcs = [
-        konsole({
+    const funcs = clean([
+        config('console') && konsole({
             prefix: prefix + '/console',
             minify,
             online,
+        }),
+        
+        config('terminal') && terminal({
+            prefix: prefix + '/gritty',
         }),
         
         edward({
@@ -277,7 +288,7 @@ function cloudcmd(prefix, plugins) {
         
         pluginer(plugins),
         ponseStatic
-    ];
+    ]);
     
     return funcs;
 }

@@ -98,12 +98,12 @@ function showError(name) {
     throw(error);
 }
 
-function getSystemFile(url, callback) {
+function getSystemFile(file, callback) {
     const prefix = CloudCmd.PREFIX;
     
-    if (!Promises[url])
-        Promises[url] = new Promise((success, error) => {
-            url = prefix + url;
+    if (!Promises[file])
+        Promises[file] = new Promise((success, error) => {
+            const url = prefix + file;
             
             load.ajax({
                 url,
@@ -112,10 +112,10 @@ function getSystemFile(url, callback) {
             });
         });
     
-    Promises[url].then((data) => {
+    Promises[file].then((data) => {
         callback(null, data);
     }, (error) => {
-        Promises[url] = null;
+        Promises[file] = null;
         callback(error);
     });
 }

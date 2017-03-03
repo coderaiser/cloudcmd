@@ -347,6 +347,9 @@ function KeyProto() {
             break;
         
         case Key.TRA:
+            if (shift)
+                return CloudCmd.Terminal.show();
+            
             CloudCmd.Konsole.show();
             event.preventDefault();
             break;

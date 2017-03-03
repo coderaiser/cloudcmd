@@ -18,6 +18,8 @@
     "--one-panel-mode           ": "set one panel mode",
     "--config-dialog            ": "enable config dialog",
     "--console                  ": "enable console",
+    "--terminal                 ": "enable terminal",
+    "--terminal-path            ": "set terminal path",
     "--open                     ": "open web browser when server started",
     "--no-server                ": "do not start server",
     "--no-auth                  ": "disable authorization",
@@ -28,5 +30,6 @@
     "--no-html-dialogs          ": "do not use html dialogs",
     "--no-one-panel-mode        ": "unset one panel mode",
     "--no-config-dialog         ": "disable config dialog",
-    "--no-console               ": "disable console"
+    "--no-console               ": "disable console",
+    "--no-terminal              ": "disable terminal"
 }

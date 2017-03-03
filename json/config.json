@@ -24,6 +24,8 @@
     "configDialog": true,
     "onePanelMode": false,
     "configDialog": true,
-    "console": true
+    "console": true,
+    "terminal": false,
+    "terminalPath": ""
 }
 
