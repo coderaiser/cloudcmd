@@ -3,6 +3,7 @@
 const itype = require('itype/legacy');
 const rendy = require('rendy');
 const Images = require('./dom/images');
+const join = require('join-io/www/join');
 
 const {
     apiURL,
