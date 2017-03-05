@@ -55,7 +55,7 @@ const args = require('minimist')(argv.slice(2), {
         terminal    : env.bool('terminal') || config('terminal'),
         
         'terminal-path': env('terminal_path') || config('terminalPath'),
-        'config-dialog': config('configDialog'),
+        'config-dialog': env.bool('config_dialog') || config('configDialog'),
         'one-panel-mode': config('onePanelMode'),
         'html-dialogs': config('htmlDialogs')
     },

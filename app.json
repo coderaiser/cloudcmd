@@ -26,6 +26,11 @@
           "description": "set terminal path",
           "value": "gritty",
           "required": false
+      },
+      "CLOUDCMD_CONFIG_DIALOG": {
+          "description": "show config dialog",
+          "value": "false",
+          "required": false
       }
   }
 }
