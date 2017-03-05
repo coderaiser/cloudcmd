@@ -322,6 +322,13 @@ Here is description of options:
 }
 ```
 
+### Environment Variables
+
+Some config options can be overriden with `environment variables` such:
+
+- `CLOUDCMD_TERMINAL` - enable terminal
+- `CLOUDCMD_TERMINAL_PATH` - set terminal path
+
 Menu
 ---------------
 ![Menu](/img/screen/menu.png "Menu")

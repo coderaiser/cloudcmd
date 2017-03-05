@@ -97,7 +97,7 @@
     "legacy:help": "cp json/help.json legacy/json/",
     "rm:server": "rimraf server_ legacy",
     "rm:client": "rimraf dist dist-dev",
-    "heroku-postbuild": "redrun 6to5:client -- --progress"
+    "heroku-postbuild": "redrun 6to5:client -- --progress && npm i gritty"
   },
   "directories": {
     "man": "man"

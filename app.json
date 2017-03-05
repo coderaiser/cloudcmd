@@ -16,6 +16,16 @@
           "description": "Keep false to install devDependencies and build frontend",
           "value": "false",
           "required": false
+      },
+      "CLOUDCMD_TERMINAL": {
+          "description": "enable terminal",
+          "value": "true",
+          "required": false
+      },
+      "CLOUDCMD_TERMINAL_PATH": {
+          "description": "set terminal path",
+          "value": "gritty",
+          "required": false
       }
   }
 }

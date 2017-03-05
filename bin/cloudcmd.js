@@ -7,6 +7,7 @@ const DIR_SERVER = '../server/';
 
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
+const env = require(DIR_SERVER + 'env');
 
 const argv = process.argv;
 const args = require('minimist')(argv.slice(2), {
@@ -51,9 +52,9 @@ const args = require('minimist')(argv.slice(2), {
         prefix      : config('prefix') || '',
         progress    : config('progress'),
         console     : config('console'),
-        terminal    : config('terminal'),
+        terminal    : env.bool('terminal') || config('terminal'),
         
-        'terminal-path': config('terminalPath'),
+        'terminal-path': env('terminal_path') || config('terminalPath'),
         'config-dialog': config('configDialog'),
         'one-panel-mode': config('onePanelMode'),
         'html-dialogs': config('htmlDialogs')
@@ -93,7 +94,7 @@ if (args.version) {
     config('progress', args.progress);
     config('console', args.console);
     config('terminal', args.terminal);
-    config('terminalPath', args.terminalPath);
+    config('terminalPath', args['terminal-path']);
     config('editor', args.editor);
     config('prefix', args.prefix);
     config('root', args.root);

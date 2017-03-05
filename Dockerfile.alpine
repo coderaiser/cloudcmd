@@ -5,8 +5,25 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
-RUN npm install --production
+
+RUN npm install --production && \
+    apk add --no-cache git bash make g++ python && \
+    npm i node-pty@">0.6.2" || \
+        (cd node_modules && \
+        git clone https://github.com/Tyriar/node-pty && \
+        cd node-pty && \
+        npm i && npm run tsc && \
+        npm run install && \
+        rm -rf .git && \
+        cd ../..) && \
+    npm i gritty && \
+    apk del git make g++ python && \
+    rm -rf /usr/include /tmp/* /var/cache/apk/*
+
 COPY . /usr/src/app
+
+ENV cloudcmd_terminal true
+ENV cloudcmd_terminal_path gritty
 
 EXPOSE 8000
 
