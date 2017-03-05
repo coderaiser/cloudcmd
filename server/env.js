@@ -4,7 +4,14 @@ const env = process.env;
 const up = (a) => a.toUpperCase();
 
 module.exports = parse;
-module.exports.bool = (name) => Boolean(parse(name));
+module.exports.bool = (name) => {
+    const value = parse(name);
+    
+    if (value === 'false')
+        return false;
+    
+    return value;
+};
 
 function parse(name) {
     const small = `cloudcmd_${name}`;

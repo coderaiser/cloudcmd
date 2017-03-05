@@ -9,6 +9,13 @@ const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
 const env = require(DIR_SERVER + 'env');
 
+const choose = (a, b) => {
+    if (!a && typeof a !== 'boolean')
+        return b;
+    
+    return a;
+};
+
 const argv = process.argv;
 const args = require('minimist')(argv.slice(2), {
     string: [
@@ -52,10 +59,10 @@ const args = require('minimist')(argv.slice(2), {
         prefix      : config('prefix') || '',
         progress    : config('progress'),
         console     : config('console'),
-        terminal    : env.bool('terminal') || config('terminal'),
+        terminal    : choose(env.bool('terminal'), config('terminal')),
         
         'terminal-path': env('terminal_path') || config('terminalPath'),
-        'config-dialog': env.bool('config_dialog') || config('configDialog'),
+        'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'one-panel-mode': config('onePanelMode'),
         'html-dialogs': config('htmlDialogs')
     },
