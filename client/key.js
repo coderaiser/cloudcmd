@@ -347,11 +347,12 @@ function KeyProto() {
             break;
         
         case Key.TRA:
+            event.preventDefault();
+            
             if (shift)
                 return CloudCmd.Terminal.show();
             
             CloudCmd.Konsole.show();
-            event.preventDefault();
             break;
         
         case KEY.BRACKET_CLOSE:
