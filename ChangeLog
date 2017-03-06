@@ -1,3 +1,13 @@
+2017.03.06, v6.8.0
+
+fix:
+- (key) TRA: prevent Terminal of handling ~ key
+
+feature:
+- (cloudcmd) add env var CLOUDCMD_CONFIG_DIALOG
+- (env) add env vars CLOUDCMD_TERMINAL, CLOUDCMD_TERMINAL_PATH
+
+
 2017.03.04, v6.7.0
 
 fix:
