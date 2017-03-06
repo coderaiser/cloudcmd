@@ -4,6 +4,6 @@
     ],
     "plugins": [
       "transform-object-assign"
-  ]
+    ]
 }
 
