@@ -982,40 +982,42 @@ function CmdProto() {
      * @currentFile
      */
     this.renameCurrent = (current) => {
-        var from, dirPath, files, isExist,
-            RESTful     = DOM.RESTful,
-            Dialog      = DOM.Dialog;
+        const Dialog = DOM.Dialog;
         
         if (!Cmd.isCurrentFile(current))
             current = Cmd.getCurrentFile();
         
-        from        = Cmd.getCurrentName(current);
+        const from = Cmd.getCurrentName(current);
         
         if (from === '..')
-            Dialog.alert.noFiles(TITLE);
-        else
-            Dialog.prompt(TITLE, 'Rename', from, {cancel: false}).then(function(to) {
-                isExist     = !!DOM.getCurrentByName(to);
-                dirPath     = Cmd.getCurrentDirPath();
+            return Dialog.alert.noFiles(TITLE);
+        
+        const cancel = false;
+        
+        Dialog.prompt(TITLE, 'Rename', from, {cancel}).then((to) => {
+            const isExist = !!DOM.getCurrentByName(to);
+            const dirPath = Cmd.getCurrentDirPath();
+            
+            if (from === to)
+                return;
+            
+            const files = {
+                from : dirPath + from,
+                to : dirPath + to
+            };
+            
+            RESTful.mv(files, (error) => {
+                if (error)
+                    return;
                 
-                if (from !== to) {
-                    files      = {
-                        from    : dirPath + from,
-                        to      : dirPath + to
-                    };
-                    
-                    RESTful.mv(files, (error) => {
-                        if (!error) {
-                            DOM.setCurrentName(to, current);
-                            Cmd.updateCurrentInfo();
-                            Storage.remove(dirPath);
-                            
-                            if (isExist)
-                                CloudCmd.refresh();
-                        }
-                    });
-                }
+                DOM.setCurrentName(to, current);
+                Cmd.updateCurrentInfo();
+                Storage.remove(dirPath);
+                
+                if (isExist)
+                    CloudCmd.refresh();
             });
+        });
     };
     
     /**
@@ -1097,12 +1099,13 @@ function CmdProto() {
         return '.tar.gz';
     };
     
-    this.goToDirectory          = function() {
-        var msg     = 'Go to directory:',
-            path    = CurrentInfo.dirPath,
-            Dialog  = DOM.Dialog;
+    this.goToDirectory = () => {
+        const msg = 'Go to directory:';
+        const path = CurrentInfo.dirPath;
+        const Dialog = DOM.Dialog;
+        const cancel = false;
         
-        Dialog.prompt(TITLE, msg, path, {cancel: false}).then(function(path) {
+        Dialog.prompt(TITLE, msg, path, {cancel}).then((path) => {
             CloudCmd.loadDir({
                 path: path
             });
@@ -1186,8 +1189,8 @@ function CmdProto() {
         info.parentDirPath  = Cmd.getParentDirPath();
         info.element        = current;
         info.ext            = Util.getExt(name);
-        info.files          = [].slice.call(files.children),
-        info.filesPassive   = [].slice.call(filesPassive),
+        info.files          = [...files.children];
+        info.filesPassive   = [...filesPassive];
         info.first          = files.firstChild;
         info.getData        = Cmd.getCurrentData;
         info.last           = files.lastChild;
