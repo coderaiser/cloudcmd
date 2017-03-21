@@ -6,22 +6,22 @@
 /* global Console */
 
 const exec = require('execon');
+const Images = require('../dom/images');
+const {Dialog} = require('../dom');
 
 CloudCmd.Konsole = ConsoleProto;
 
 function ConsoleProto() {
     const config = CloudCmd.config;
     
-    var Name = 'Konsole',
-        TITLE   = 'Console',
-        
-        Element,
-        Loaded,
-        Images  = DOM.Images,
-        Dialog  = DOM.Dialog,
-        
-        Konsole = this;
-        
+    const Name = 'Konsole';
+    const TITLE = 'Console';
+    
+    let Element;
+    let Loaded;
+    
+    const Konsole = this;
+    
     function init() {
         Images.show.load('top');
         
@@ -38,11 +38,11 @@ function ConsoleProto() {
         });
     }
     
-    this.hide   = function() {
+    this.hide = () => {
         CloudCmd.View.hide();
     };
     
-    this.clear  = function() {
+    this.clear = () => {
         Console.clear();
     };
     
@@ -55,31 +55,30 @@ function ConsoleProto() {
             ACTIVE_DIR: DOM.getCurrentDirPath.bind(DOM),
             PASSIVE_DIR: DOM.getNotCurrentDirPath.bind(DOM),
             CURRENT_NAME: DOM.getCurrentName.bind(DOM),
-            CURRENT_PATH: function() {
+            CURRENT_PATH: () => {
                 return DOM.CurrentInfo.path;
             }
         };
     }
     
     function create(callback) {
-        var options = {
+        const options = {
             env: getEnv(),
             prefix: getPrefix(),
             socketPath: CloudCmd.PREFIX,
         };
         
-        Console(Element, options, function(spawn) {
+        Console(Element, options, (spawn) => {
             spawn.on('connect', exec.with(authCheck, spawn));
             exec(callback);
         });
         
         Console.addShortCuts({
-            'P': function() {
-                var command = Console.getPromptText(),
-                    path    = DOM.getCurrentDirPath();
+            'P': () => {
+                const command = Console.getPromptText();
+                const path = DOM.getCurrentDirPath();
                 
-                command += path;
-                Console.setPromptText(command);
+                Console.setPromptText(command + path);
             }
         });
     }
@@ -90,19 +89,21 @@ function ConsoleProto() {
         
         spawn.emit('auth', config('username'), config('password'));
         
-        spawn.on('reject', function() {
+        spawn.on('reject', () => {
             Dialog.alert(TITLE, 'Wrong credentials!');
         });
     }
     
-    this.show = function(callback) {
-        if (Loaded)
-            CloudCmd.View.show(Element, {
-                afterShow: function() {
-                    Console.focus();
-                    exec(callback);
-                }
-            });
+    this.show = (callback) => {
+        if (!Loaded)
+            return;
+        
+        CloudCmd.View.show(Element, {
+            afterShow: () => {
+                Console.focus();
+                exec(callback);
+            }
+        });
     };
     
     function load(callback) {
