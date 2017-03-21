@@ -40,7 +40,7 @@ body, pre, code {
 }
 
 .panel, .cmd-button {
-    border: 1.5px solid;
+    border: 1px solid;
     border-color: rgba(49, 123, 249, 0.4);
 }
 
@@ -102,7 +102,7 @@ body, pre, code {
 }
 
 .cmd-button:hover {
-    border: 1.5px solid;
+    border: 1px solid;
     transition: ease 0.5s;
 }
 
