@@ -55,22 +55,22 @@ function replaceVersion(name, version, versionNew, callback) {
 }
 
 function cl(callback) {
-    const argv        = process.argv;
-    const length      = argv.length - 1;
-    const last        = process.argv[length];
-    const regExp      = /^--(major|minor|patch)$/;
-    const [, match]   = last.match(regExp) || [];
-    
-    let error;
-    let versionNew;
+    const argv = process.argv;
+    const length = argv.length - 1;
+    const last = process.argv[length];
+    const regExp = /^--(major|minor|patch)$/;
+    const [, match] = last.match(regExp) || [];
     
     if (!regExp.test(last))
-        error = ERROR;
-    else if (match)
-        versionNew  = minor(match, Info.version);
-    else
-        versionNew  = last.substr(3);
+        return callback(ERROR);
     
-    callback(error, versionNew);
+    callback(null, getVersionNew(last, match));
+}
+
+function getVersionNew(last, match) {
+    if (match)
+        return minor(match, Info.version);
+    
+    return last.substr(3);
 }
 
