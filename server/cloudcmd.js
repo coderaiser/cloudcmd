@@ -2,10 +2,8 @@
 
 const DIR = __dirname + '/';
 const DIR_ROOT = DIR + '../';
-const DIR_COMMON = DIR + '../common/';
 
-const cloudfunc = require(DIR_COMMON + 'cloudfunc');
-
+const cloudfunc = require(DIR + 'cloudfunc');
 const auth = require(DIR + 'auth');
 const config = require(DIR + 'config');
 const rest = require(DIR + 'rest');

@@ -3,7 +3,6 @@
 const DIR = __dirname + '/../';
 const DIR_TMPL = DIR + 'tmpl/';
 const DIR_HTML = DIR + 'html/';
-const DIR_COMMON = DIR + 'common/';
 const DIR_JSON = DIR + 'json/';
 const DIR_SERVER = './';
 const DIR_FS = DIR_TMPL + 'fs/';
@@ -23,8 +22,8 @@ const apart = require('apart');
 const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
+const CloudFunc = require(DIR_SERVER + 'cloudfunc');
 const prefix = squad(prefixer, apart(config, 'prefix'));
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
 const PATH_INDEX = DIR_HTML + 'index.html';
 

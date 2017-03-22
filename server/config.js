@@ -1,14 +1,13 @@
 'use strict';
 
 const DIR_SERVER = __dirname + '/';
-const DIR_COMMON = DIR_SERVER + '../common/';
 const DIR = DIR_SERVER + '../';
 
 const path = require('path');
 const fs = require('fs');
 
 const exit = require(DIR_SERVER + 'exit');
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
+const CloudFunc = require(DIR_SERVER + 'cloudfunc');
 
 const pullout = require('pullout/legacy');
 const ponse = require('ponse');
