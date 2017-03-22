@@ -1,279 +1,240 @@
 'use strict';
 
 const rendy = require('rendy');
+const Entity = require('./entity');
 
-module.exports = new CloudFuncProto();
+/* КОНСТАНТЫ (общие для клиента и сервера)*/
 
-function CloudFuncProto() {
-    const CloudFunc = this;
-    const Entity = new entityProto();
-    var FS;
+/* название программы */
+const NAME = 'Cloud Commander';
+const FS = '/fs';
+
+let Path;
+
+module.exports.FS = FS;
+module.exports.apiURL = '/api/v1';
+module.exports.MAX_FILE_SIZE = 500 * 1024;
+module.exports.Entity = Entity;
+
+module.exports.formatMsg = (msg, name, status = 'ok') => {
+    if (name)
+        name = '("' + name + '")';
+    else
+        name = '';
     
-    /* КОНСТАНТЫ (общие для клиента и сервера)*/
+    return msg + ': ' + status + name;
+};
+
+/**
+ * Функция возвращает заголовок веб страницы
+ * @path
+ */
+module.exports.getTitle = (path) => {
+    if (!Path)
+        Path = '/';
     
-    /* название программы */
-    this.NAME = 'Cloud Commander';
+    return  NAME + ' - ' + (path || Path);
+};
+
+/** Функция получает адреса каждого каталога в пути
+ * возвращаеться массив каталогов
+ * @param url -  адрес каталога
+ */
+function getPathLink(url, prefix, template) {
+    var namesRaw, names, length,
+        pathHTML    = '',
+        path        = '/';
     
-    /* если в ссылке будет эта строка - в браузере js отключен */
-    this.FS = FS = '/fs';
+    if (!url)
+        throw Error('url could not be empty!');
     
-    this.apiURL = '/api/v1';
-    this.MAX_FILE_SIZE = 500 * 1024;
-    this.Entity = Entity;
+    if (!template)
+        throw Error('template could not be empty!');
     
-    function entityProto() {
-        var Entities = {
-            '&nbsp;': ' ',
-            '&lt;'  : '<',
-            '&gt;'   : '>'
-        };
-        
-        var keys = Object.keys(Entities);
-        
-        this.encode = function(str) {
-            keys.forEach(function(code) {
-                var char = Entities[code];
-                var reg = RegExp(char, 'g');
-                
-                str = str.replace(reg, code);
-            });
-            
-            return str;
-        };
-        
-        this.decode = function(str) {
-            keys.forEach(function(code) {
-                var char = Entities[code];
-                var reg = RegExp(code, 'g');
-                
-                str = str.replace(reg, char);
-            });
-            
-            return str;
-        };
-    }
+    namesRaw    = url.split('/')
+                     .slice(1, -1),
     
-    this.formatMsg = function(msg, name, status) {
-        if (!status)
-            status = 'ok';
-        
-        if (name)
-            name = '("' + name + '")';
-        else
-            name = '';
-        
-        msg = msg + ': ' + status + name;
-        
-        return msg;
-    };
+    names       = [].concat('/', namesRaw),
     
-    /** Функция возвращает заголовок веб страницы
-     * @pPath
-     */
-    this.getTitle = function(path) {
-        if (!CloudFunc.Path)
-            CloudFunc.Path = '/';
-        
-        return  CloudFunc.NAME + ' - ' + (path || CloudFunc.Path);
-    };
+    length      = names.length - 1;
     
-    /** Функция получает адреса каждого каталога в пути
-     * возвращаеться массив каталогов
-     * @param url -  адрес каталога
-     */
-    function getPathLink(url, prefix, template) {
-        var namesRaw, names, length,
-            pathHTML    = '',
-            path        = '/';
+    names.forEach((name, index) => {
+        var slash       = '',
+            isLast      = index === length;
         
-        if (!url)
-            throw Error('url could not be empty!');
+        if (index)
+            path        += name + '/';
         
-        if (!template)
-            throw Error('template could not be empty!');
-        
-        namesRaw    = url.split('/')
-                         .slice(1, -1),
-        
-        names       = [].concat('/', namesRaw),
-        
-        length      = names.length - 1;
-        
-        names.forEach(function(name, index) {
-            var slash       = '',
-                isLast      = index === length;
-            
+        if (index && isLast) {
+            pathHTML    += name + '/';
+        } else {
             if (index)
-                path        += name + '/';
+                slash = '/';
             
-            if (index && isLast) {
-                pathHTML    += name + '/';
-            } else {
-                if (index)
-                    slash = '/';
-                
-                pathHTML    += rendy(template, {
-                    path: path,
-                    name: name,
-                    slash: slash,
-                    prefix: prefix
-                });
-            }
-        });
-        
-        return pathHTML;
-    }
-    
-    /**
-     * Функция строит таблицу файлв из JSON-информации о файлах
-     * @param params - информация о файлах
-     *
-     */
-    this.buildFromJSON = function(params) {
-        var attribute,
-            dotDot, link, dataName,
-            linkResult,
-            prefix          = params.prefix,
-            template        = params.template,
-            templateFile    = template.file,
-            templateLink    = template.link,
-            json            = params.data,
-            files           = json.files,
-            path            = json.path,
-            
-            sort            = params.sort || 'name',
-            order           = params.order || 'asc',
-            
-            /*
-             * Строим путь каталога в котором мы находимся
-             * со всеми подкаталогами
-             */
-            htmlPath        = getPathLink(path, prefix, template.pathLink);
-        
-        var fileTable       = rendy(template.path, {
-            link        : prefix + FS + path,
-            fullPath    : path,
-            path        : htmlPath
-        });
-        
-        var name = 'name';
-        var size = 'size';
-        var date = 'date';
-        var arrow = order === 'asc' ?  '↑' : '↓';
-        
-        if (sort === 'name' && order !== 'asc')
-            name += arrow;
-        else if (sort === 'size')
-            size += arrow;
-        else if (sort === 'date')
-            date += arrow;
-        
-        var header = rendy(templateFile, {
-            tag         : 'div',
-            attribute   : 'data-name="js-fm-header" ',
-            className   : 'fm-header',
-            type        : '',
-            name        : name,
-            size        : size,
-            date        : date,
-            owner       : 'owner',
-            mode        : 'mode'
-        });
-        
-        /* сохраняем путь */
-        CloudFunc.Path      = path;
-        
-        fileTable += header + '<ul data-name="js-files" class="files">';
-        /* Если мы не в корне */
-        if (path !== '/') {
-            /* убираем последний слеш и каталог в котором мы сейчас находимся*/
-            dotDot = path.substr(path, path.lastIndexOf('/'));
-            dotDot = dotDot.substr(dotDot, dotDot.lastIndexOf('/'));
-            /* Если предыдущий каталог корневой */
-            if (dotDot === '')
-                dotDot = '/';
-            
-            link = prefix + FS + dotDot;
-            
-            linkResult = rendy(template.link, {
-                link        : link,
-                title       : '..',
-                name        : '..'
-            });
-            
-            dataName = 'data-name="js-file-.." ';
-            attribute = 'draggable="true" ' + dataName;
-            
-            /* Сохраняем путь к каталогу верхнего уровня*/
-            fileTable += rendy(template.file, {
-                tag         : 'li',
-                attribute   : attribute,
-                className   : '',
-                type        : 'directory',
-                name        : linkResult,
-                size        : '&lt;dir&gt;',
-                date        : '--.--.----',
-                owner       : '.',
-                mode        : '--- --- ---'
+            pathHTML    += rendy(template, {
+                path: path,
+                name: name,
+                slash: slash,
+                prefix: prefix
             });
         }
-        
-        fileTable += files.map((file) => {
-            const link = prefix + FS + path + file.name;
-            
-            const type = getType(file.size);
-            const  size = getSize(file.size);
-            
-            const  date = file.date || '--.--.----';
-            const  owner = file.owner || 'root';
-            const  mode = file.mode;
-            
-            const linkResult = rendy(templateLink, {
-                link,
-                title       : file.name,
-                name        : Entity.encode(file.name),
-                attribute   : getAttribute(file.size)
-            });
-            
-            const dataName = 'data-name="js-file-' + file.name + '" ';
-            const attribute = 'draggable="true" ' + dataName;
-            
-            return rendy(templateFile, {
-                tag: 'li',
-                attribute,
-                className: '',
-                type,
-                name: linkResult,
-                size,
-                date,
-                owner,
-                mode,
-            });
-        }).join('');
-        
-        fileTable += '</ul>';
-        
-        return fileTable;
-    };
+    });
     
-    function getType(size) {
-        if (size === 'dir')
-            return 'directory';
+    return pathHTML;
+}
+
+/**
+ * Функция строит таблицу файлв из JSON-информации о файлах
+ * @param params - информация о файлах
+ *
+ */
+module.exports.buildFromJSON = (params) => {
+    var attribute,
+        dotDot, link, dataName,
+        linkResult,
+        prefix          = params.prefix,
+        template        = params.template,
+        templateFile    = template.file,
+        templateLink    = template.link,
+        json            = params.data,
+        files           = json.files,
+        path            = json.path,
         
-        return 'text-file';
+        sort            = params.sort || 'name',
+        order           = params.order || 'asc',
+        
+        /*
+         * Строим путь каталога в котором мы находимся
+         * со всеми подкаталогами
+         */
+        htmlPath        = getPathLink(path, prefix, template.pathLink);
+    
+    let fileTable = rendy(template.path, {
+        link        : prefix + FS + path,
+        fullPath    : path,
+        path        : htmlPath
+    });
+    
+    let name = 'name';
+    let size = 'size';
+    let date = 'date';
+    const owner = 'owner';
+    const mode = 'mode';
+    const arrow = order === 'asc' ?  '↑' : '↓';
+    
+    if (sort === 'name' && order !== 'asc')
+        name += arrow;
+    else if (sort === 'size')
+        size += arrow;
+    else if (sort === 'date')
+        date += arrow;
+    
+    const header = rendy(templateFile, {
+        tag         : 'div',
+        attribute   : 'data-name="js-fm-header" ',
+        className   : 'fm-header',
+        type        : '',
+        name,
+        size,
+        date,
+        owner,
+        mode,
+    });
+    
+    /* сохраняем путь */
+    Path = path;
+    
+    fileTable += header + '<ul data-name="js-files" class="files">';
+    /* Если мы не в корне */
+    if (path !== '/') {
+        /* убираем последний слеш и каталог в котором мы сейчас находимся*/
+        dotDot = path.substr(path, path.lastIndexOf('/'));
+        dotDot = dotDot.substr(dotDot, dotDot.lastIndexOf('/'));
+        /* Если предыдущий каталог корневой */
+        if (dotDot === '')
+            dotDot = '/';
+        
+        link = prefix + FS + dotDot;
+        
+        linkResult = rendy(template.link, {
+            link        : link,
+            title       : '..',
+            name        : '..'
+        });
+        
+        dataName = 'data-name="js-file-.." ';
+        attribute = 'draggable="true" ' + dataName;
+        
+        /* Сохраняем путь к каталогу верхнего уровня*/
+        fileTable += rendy(template.file, {
+            tag         : 'li',
+            attribute   : attribute,
+            className   : '',
+            type        : 'directory',
+            name        : linkResult,
+            size        : '&lt;dir&gt;',
+            date        : '--.--.----',
+            owner       : '.',
+            mode        : '--- --- ---'
+        });
     }
     
-    function getAttribute(size) {
-        if (size === 'dir')
-            return '';
+    fileTable += files.map((file) => {
+        const link = prefix + FS + path + file.name;
         
-        return 'target="_blank" ';
-    }
+        const type = getType(file.size);
+        const  size = getSize(file.size);
+        
+        const  date = file.date || '--.--.----';
+        const  owner = file.owner || 'root';
+        const  mode = file.mode;
+        
+        const linkResult = rendy(templateLink, {
+            link,
+            title: file.name,
+            name: Entity.encode(file.name),
+            attribute: getAttribute(file.size)
+        });
+        
+        const dataName = 'data-name="js-file-' + file.name + '" ';
+        const attribute = 'draggable="true" ' + dataName;
+        
+        return rendy(templateFile, {
+            tag: 'li',
+            attribute,
+            className: '',
+            type,
+            name: linkResult,
+            size,
+            date,
+            owner,
+            mode,
+        });
+    }).join('');
     
-    function getSize(size) {
-        if (size === 'dir')
-            return '&lt;dir&gt;';
-        
-        return size;
-    }
- }
+    fileTable += '</ul>';
+    
+    return fileTable;
+};
+
+function getType(size) {
+    if (size === 'dir')
+        return 'directory';
+    
+    return 'text-file';
+}
+
+function getAttribute(size) {
+    if (size === 'dir')
+        return '';
+    
+    return 'target="_blank" ';
+}
+
+function getSize(size) {
+    if (size === 'dir')
+        return '&lt;dir&gt;';
+    
+    return size;
+}
+
