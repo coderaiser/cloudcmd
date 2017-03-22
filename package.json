@@ -176,6 +176,7 @@
     "request": "^2.76.0",
     "rimraf": "^2.5.4",
     "shortdate": "^1.0.1",
+    "sinon": "^2.1.0",
     "socket.io-client": "^1.5.1",
     "stylelint": "^7.0.2",
     "stylelint-config-standard": "^16.0.0",
