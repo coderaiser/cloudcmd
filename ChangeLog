@@ -1,3 +1,11 @@
+2017.03.23, v6.9.0
+
+feature:
+- (cloudcmd) add ability to override modules (#109)
+- (server) cloudfunc: common -> server
+- (entity) add from cloudfunc
+
+
 2017.03.21, v6.8.1
 
 fix:
