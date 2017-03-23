@@ -120,24 +120,6 @@ function UtilProto(exec) {
         return ret;
     };
     
-   /**
-     * get values from Object Array name properties
-     * or
-     * @pObj
-     */
-    this.getNamesFromObjArray       = function(arr) {
-        var ret     = [];
-        
-        if (!Array.isArray(arr))
-            throw Error('arr should be array!');
-        
-        ret = arr.map(function(item) {
-            return item.name;
-        });
-        
-        return ret;
-    };
-    
     /**
      * find object by name in arrray
      *

@@ -2,6 +2,7 @@
 
 const itype = require('itype/legacy');
 const rendy = require('rendy');
+const exec = require('execon');
 const Images = require('./dom/images');
 const join = require('join-io/www/join');
 
@@ -134,7 +135,7 @@ function CloudCmdProto(Util, DOM) {
                     const prefix = CloudCmd.PREFIX;
                     const pathFull = prefix + CloudCmd.DIRCLIENT_MODULES + path;
                     
-                    Util.exec(doBefore);
+                    exec(doBefore);
                     
                     return DOM.load.js(pathFull, func ||
                         function(error) {
@@ -172,7 +173,7 @@ function CloudCmdProto(Util, DOM) {
      */
     this.init = (prefix, config) => {
         const func = () => {
-            Util.exec.series([
+            exec.series([
                 initModules,
                 baseInit,
                 loadPlugins,
@@ -208,7 +209,7 @@ function CloudCmdProto(Util, DOM) {
         if (config.onePanelMode)
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
         
-        Util.exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
+        exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
     };
     
     function loadPlugins(callback) {
@@ -263,7 +264,7 @@ function CloudCmdProto(Util, DOM) {
     };
     
     function initModules(callback) {
-        Util.exec.if(CloudCmd.Key, () => {
+        exec.if(CloudCmd.Key, () => {
             Key = new CloudCmd.Key();
             CloudCmd.Key = Key;
             Key.bind();
@@ -278,13 +279,11 @@ function CloudCmdProto(Util, DOM) {
         });
         
         Files.get('modules', (error, modules) => {
-            const STORAGE = 'storage';
             const showLoad = Images.show.load;
             
             const doBefore = {
-                'edit'                  : showLoad,
-                'menu'                  : showLoad,
-                'storage/_filepicker'   : showLoad
+                'edit': showLoad,
+                'menu': showLoad,
             };
             
             const load = (name, path, dobefore) => {
@@ -302,22 +301,8 @@ function CloudCmdProto(Util, DOM) {
             if (!modules)
                 modules = [];
             
-            modules.forEach((module) => {
-                const isStr = itype.string(module);
-                
-                if (!isStr)
-                    return;
-                
+            modules.local.forEach((module) => {
                 load(null, module, doBefore[module]);
-            });
-            
-            const storageObj = Util.findObjByNameInArr(modules, STORAGE);
-            const mod = Util.getNamesFromObjArray(storageObj);
-            
-            mod.forEach((name) => {
-                const path = STORAGE + '/_' + name.toLowerCase();
-                
-                load(name, path, doBefore[path]);
             });
             
             callback();
@@ -325,9 +310,8 @@ function CloudCmdProto(Util, DOM) {
     }
     
     function baseInit(callback) {
-        var dirPath = '',
-            files   = DOM.getFiles();
-                
+        const files = DOM.getFiles();
+        
         /* выделяем строку с первым файлом */
         if (files)
             DOM.setCurrentFile(files[0], {
@@ -337,8 +321,8 @@ function CloudCmdProto(Util, DOM) {
                 history: !location.hash
             });
         
-        dirPath     = DOM.getCurrentDirPath(),
-        Listeners   = CloudCmd.Listeners;
+        const dirPath = DOM.getCurrentDirPath();
+        Listeners = CloudCmd.Listeners;
         Listeners.init();
         
         Listeners.setOnPanel('left');
@@ -346,9 +330,9 @@ function CloudCmdProto(Util, DOM) {
         
         Listeners.initKeysPanel();
         
-        Storage.get(dirPath, function(error, data) {
+        Storage.get(dirPath, (error, data) => {
             if (!data) {
-                data    = getJSONfromFileTable();
+                data = getJSONfromFileTable();
                 Storage.set(dirPath, data);
             }
         });
@@ -356,18 +340,16 @@ function CloudCmdProto(Util, DOM) {
         callback();
     }
     
-    this.execFromModule         = function(moduleName, funcName) {
-        var args    = [].slice.call(arguments, 2),
-            obj     = CloudCmd[moduleName],
-            isObj   = itype.object(obj);
+    this.execFromModule = (moduleName, funcName, ...args) => {
+        const obj = CloudCmd[moduleName];
+        const isObj = itype.object(obj);
         
-        Util.exec.if(isObj,
-            function() {
-                var obj     = CloudCmd[moduleName],
-                    func    = obj[funcName];
-                
-                func.apply(null, args);
-            }, obj);
+        exec.if(isObj, () => {
+            const obj = CloudCmd[moduleName];
+            const func = obj[funcName];
+            
+            func(...args);
+        }, obj);
     };
     
     this.refresh =  function(panelParam, options, callback) {
@@ -437,7 +419,7 @@ function CloudCmdProto(Util, DOM) {
                         DOM.setCurrentByName(name);
                     }
                     
-                    Util.exec(callback);
+                    exec(callback);
                 });
             });
         };
@@ -511,7 +493,7 @@ function CloudCmdProto(Util, DOM) {
                 });
             }
             
-            Util.exec(callback);
+            exec(callback);
         });
     }
     

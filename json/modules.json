@@ -1,57 +1,56 @@
-[
-    "edit",
-    "edit-file",
-    "edit-names",
-    "menu",
-    "view",
-    "help",
-    "markdown",
-    "config",
-    "contact",
-    "upload",
-    "operation",
-    "konsole",
-    "terminal",
-    "cloud", [{
-        "name": "remote",
-        "data": [{
-            "name": "jquery",
-            "version": "3.1.1",
-            "local": "/modules/jquery/dist/jquery.min.js",
-            "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
-        }, {
-            "name": "socket",
-            "version": "1.7.3",
-            "local": "/socket.io/socket.io.js",
-            "remote": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
-        }, {
-            "name": "fancybox",
-            "version": "2.1.6",
-            "local": [
-                "/modules/fancybox/source/jquery.fancybox.css",
-                "/modules/fancybox/source/jquery.fancybox.pack.js"
-            ],
-            "remote": [
-                "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/css/jquery.fancybox.min.css",
-                "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/js/jquery.fancybox.min.js"
-            ]
-        }, {
-            "name": "menu",
-            "version": "1.0.2",
-            "local": [
-                "/modules/menu/menu-io.min.css",
-                "/modules/menu/menu-io.min.js"
-            ],
-            "remote": [
-                "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.js",
-                "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.css"
-            ]
-        }]
+{
+    "local": [
+        "edit",
+        "edit-file",
+        "edit-names",
+        "menu",
+        "view",
+        "help",
+        "markdown",
+        "config",
+        "contact",
+        "upload",
+        "operation",
+        "konsole",
+        "terminal",
+        "cloud"
+    ],
+    "remote": [{
+        "name": "jquery",
+        "version": "3.1.1",
+        "local": "/modules/jquery/dist/jquery.min.js",
+        "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
     }, {
-        "name": "storage",
-        "data": [{
-            "name"  : "FilePicker",
-            "key"   : "AACq5fTfzRY2E_Rw_4kyaz"
-        }]
-    }]
-]
+        "name": "socket",
+        "version": "1.7.3",
+        "local": "/socket.io/socket.io.js",
+        "remote": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
+    }, {
+        "name": "fancybox",
+        "version": "2.1.6",
+        "local": [
+            "/modules/fancybox/source/jquery.fancybox.css",
+            "/modules/fancybox/source/jquery.fancybox.pack.js"
+        ],
+        "remote": [
+            "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/css/jquery.fancybox.min.css",
+            "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/js/jquery.fancybox.min.js"
+        ]
+    }, {
+        "name": "menu",
+        "version": "1.0.2",
+        "local": [
+            "/modules/menu/menu-io.min.css",
+            "/modules/menu/menu-io.min.js"
+        ],
+        "remote": [
+            "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.js",
+            "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.css"
+        ]
+    }],
+    "data": {
+        "FilePicker": {
+            "key": "AACq5fTfzRY2E_Rw_4kyaz"
+        }
+    }
+}

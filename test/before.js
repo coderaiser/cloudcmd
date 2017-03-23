@@ -19,7 +19,7 @@ module.exports = (options, fn = options) => {
         options = {};
     }
     
-    const {config, plugins} = options;
+    const {config, plugins, modules} = options;
     
     const app = express();
     const server = http.createServer(app);
@@ -35,7 +35,8 @@ module.exports = (options, fn = options) => {
     app.use(cloudcmd({
         socket,
         plugins,
-        config: assign(defaultConfig(), config)
+        config: assign(defaultConfig(), config),
+        modules,
     }));
     
     server.listen(() => {

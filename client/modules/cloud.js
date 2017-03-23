@@ -53,9 +53,7 @@ function loadFiles(callback) {
     
     load.js('//api.filepicker.io/v1/filepicker.js', () => {
         Files.get('modules', (error, modules) => {
-            const storage = Util.findObjByNameInArr(modules, 'storage');
-            const picker = Util.findObjByNameInArr(storage, 'FilePicker');
-            const key = picker && picker.key;
+            const {key} = modules.data.FilePicker;
             
             filepicker.setKey(key);
             

@@ -93,10 +93,22 @@ const plugins = [
     __dirname + '/plugin.js'
 ];
 
+const filePicker = {
+    data: {
+        FilePicker: {
+            key: 'key',
+        }
+    }
+};
+
+// override option from json/modules.json
+const modules = {filePicker};
+
 app.use(cloudcmd({
     socket,  /* used by Config, Edit (optional) and Console (required)   */
     config,  /* config data (optional)                                   */
     plugins, /* optional */
+    modules, /* optional */
 }));
 
 server.listen(port);

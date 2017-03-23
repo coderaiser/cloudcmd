@@ -38,7 +38,7 @@ module.exports = (options) => {
         config: options,
         socket: io(server, {
             path: prefix() + '/socket.io'
-        })
+        }),
     }));
     
     if (port < 0 || port > 65535)

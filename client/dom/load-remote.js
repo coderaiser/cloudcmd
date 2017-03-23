@@ -19,9 +19,7 @@ module.exports = (name, options, callback = options) => {
     
     Files.get('modules', (error, modules) => {
         const online = config('online') && navigator.onLine;
-        
-        const remoteObj = findObjByNameInArr(modules, 'remote');
-        const module = findObjByNameInArr(remoteObj, name);
+        const module = findObjByNameInArr(modules.remote, name);
         
         const isArray = itype.array(module.local);
         const version = module.version;

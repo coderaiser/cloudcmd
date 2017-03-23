@@ -6,6 +6,7 @@ const DIR_ROOT = DIR + '../';
 const cloudfunc = require(DIR + 'cloudfunc');
 const auth = require(DIR + 'auth');
 const config = require(DIR + 'config');
+const modulas = require(DIR + 'modulas');
 const rest = require(DIR + 'rest');
 const route = require(DIR + 'route');
 const validate = require(DIR + 'validate');
@@ -48,6 +49,8 @@ module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
     const plugins = p.plugins;
+    const modules = p.modules;
+    
     const keys = Object.keys(options);
     
     let prefix;
@@ -88,7 +91,7 @@ module.exports = (params) => {
     if (p.socket)
         listen(prefix, p.socket);
     
-    return cloudcmd(prefix, plugins);
+    return cloudcmd(prefix, plugins, modules);
 };
 
 function defaultValue(value, previous) {
@@ -183,7 +186,7 @@ function listen(prefix, socket) {
     });
 }
 
-function cloudcmd(prefix, plugins) {
+function cloudcmd(prefix, plugins, modules) {
     const isOption = (name) => {
         return config(name);
     };
@@ -265,6 +268,8 @@ function cloudcmd(prefix, plugins) {
         logout,
         auth(),
         config.middle,
+        
+        modules && modulas(modules),
         
         restafary({
             prefix: cloudfunc.apiURL + '/fs',
