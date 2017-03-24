@@ -12,7 +12,7 @@ function root(dir, fn) {
     
     if (dir === '/')
         return;
-        
+    
     const fs = require('fs');
     
     fs.stat(dir, (error) => {
