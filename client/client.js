@@ -56,16 +56,15 @@ function CloudCmdProto(Util, DOM) {
         right: 'asc',
     };
     
-    log.enable     = function() {
+    log.enable = () => {
         Debug = true;
     };
     
-    log.disable    = function() {
+    log.disable = () => {
         Debug = false;
     };
     
-    var getStrBigFirst = Util.getStrBigFirst;
-    var kebabToCamelCase = Util.kebabToCamelCase;
+    const kebabToCamelCase = Util.kebabToCamelCase;
     
     /**
      * Функция привязываеться ко всем ссылкам и
@@ -238,10 +237,8 @@ function CloudCmdProto(Util, DOM) {
         if (!path)
             return;
         
-        let [module] = query;
-        
-        module = module.slice(1);
-        module = getStrBigFirst(module);
+        const [kebabModule] = query;
+        const module = kebabToCamelCase(kebabModule.slice(1));
         
         const file = query[1];
         const current = DOM.getCurrentByName(file);

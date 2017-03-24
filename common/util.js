@@ -185,7 +185,7 @@ function UtilProto(exec) {
         if (!str)
             throw Error('str could not be empty!');
         
-        var first = str[0].toUpperCase();
+        const first = str[0].toUpperCase();
         return first + str.slice(1);
     }
     
