@@ -1,7 +1,10 @@
 'use strict';
 
+const fs = require('fs');
+
 const test = require('tape');
-const sinon = require('sinon');
+const withDiff = require('../sinon-called-with-diff');
+const sinon = withDiff(require('sinon'));
 
 const before = require('../before');
 const dir = '../..';
@@ -32,6 +35,56 @@ test('validate: root: /', (t) => {
     validate.root('/', fn);
     
     t.notOk(fn.called, 'should not call fn');
+    t.end();
+});
+
+test('validate: root: /home', (t) => {
+    const fn = sinon.stub();
+    
+    validate.root('/home', (...args) => {
+        fn(...args);
+        
+        t.ok(fn.calledWith('root:', '/home'), 'should not call fn');
+        t.end();
+    });
+});
+
+test('validate: root: stat', (t) => {
+    const fn = sinon.stub();
+    const {stat} = fs;
+    
+    const error = 'ENOENT';
+    fs.stat = (dir, fn) => fn(Error(error));
+    
+    clean();
+    require(exitPath);
+    stub(exitPath, fn);
+    
+    const {root} = require(validatePath);
+    
+    root('hello', fn);
+    
+    const msg = 'cloudcmd --root: %s';
+    t.ok(fn.calledWith(msg, error), 'should call fn');
+    
+    fs.stat = stat;
+    t.end();
+});
+
+test('validate: packer: not valid', (t) => {
+    const fn = sinon.stub();
+    
+    clean();
+    require(exitPath);
+    stub(exitPath, fn);
+    
+    const {packer} = require(validatePath);
+    const msg = 'cloudcmd --packer: could be "tar" or "zip" only';
+    
+    packer('hello');
+    
+    t.ok(fn.calledWith(msg), 'should call fn');
+    
     t.end();
 });
 
