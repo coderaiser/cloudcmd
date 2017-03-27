@@ -1,0 +1,21 @@
+'use strict';
+
+const test = require('tape');
+const entity = require('../../server/entity');
+
+test('cloudcmd: entity: encode', (t) => {
+    const result = entity.encode('<hello> ');
+    const expected = '&lt;hello&gt;&nbsp;';
+    
+    t.equal(result, expected, 'should encode entity');
+    t.end();
+});
+
+test('cloudcmd: entity: decode', (t) => {
+    const result = entity.decode('&lt;hello&gt;');
+    const expected = '<hello>';
+    
+    t.equal(result, expected, 'should decode entity');
+    t.end();
+});
+
