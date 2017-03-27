@@ -12,8 +12,8 @@ test('cloudcmd: entity: encode', (t) => {
 });
 
 test('cloudcmd: entity: decode', (t) => {
-    const result = entity.decode('&lt;hello&gt;');
-    const expected = '<hello>';
+    const result = entity.decode('&lt;hello&gt;&nbsp;');
+    const expected = '<hello> ';
     
     t.equal(result, expected, 'should decode entity');
     t.end();
