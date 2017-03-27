@@ -3,8 +3,7 @@
 const fs = require('fs');
 
 const test = require('tape');
-const withDiff = require('../sinon-called-with-diff');
-const sinon = withDiff(require('sinon'));
+const sinon = require('../sinon');
 
 const before = require('../before');
 const dir = '../..';
