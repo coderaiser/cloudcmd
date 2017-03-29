@@ -105,7 +105,7 @@ function authCheck(socket, success) {
     if (!config('auth'))
         return success();
     
-    socket.on('auth', function(name, pass) {
+    socket.on('auth', (name, pass) => {
         const isName = name === config('username');
         const isPass = pass === config('password');
         
