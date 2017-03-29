@@ -52,3 +52,60 @@ test('cloudcmd: static: not found', (t) => {
     });
 });
 
+test('cloudcmd: prefix: wrong', (t) => {
+    const prefix = '/hello';
+    const config = {prefix};
+    
+    before({config}, (port, after) => {
+        const name = Math.random();
+        
+        get(`http://localhost:${port}/${name}`)
+            .then((res) => {
+                res.on('response', ({statusCode}) => {
+                    t.equal(statusCode, 404, 'should return 404');
+                });
+                res.on('end', () => {
+                    t.end();
+                    after();
+                });
+            })
+            .catch(console.error);
+    });
+});
+
+test('cloudcmd: /cloudcmd.js', (t) => {
+    before({}, (port, after) => {
+        const name = 'cloudcmd.js';
+        
+        get(`http://localhost:${port}/${name}`)
+            .then((res) => {
+                res.on('response', ({statusCode}) => {
+                    t.equal(statusCode, 200, 'should return OK');
+                });
+                res.on('end', () => {
+                    t.end();
+                    after();
+                });
+            })
+            .catch(console.error);
+    });
+});
+
+test('cloudcmd: /logout', (t) => {
+    before({}, (port, after) => {
+        const name = 'logout';
+        
+        get(`http://localhost:${port}/${name}`)
+            .then((res) => {
+                res.on('response', ({statusCode}) => {
+                    t.equal(statusCode, 401, 'should return 401');
+                });
+                res.on('end', () => {
+                    t.end();
+                    after();
+                });
+            })
+            .catch(console.error);
+    });
+});
+

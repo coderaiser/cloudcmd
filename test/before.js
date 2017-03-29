@@ -8,6 +8,8 @@ const io = require('socket.io');
 const writejson = require('writejson');
 const readjson = require('readjson');
 
+process.env.NODE_ENV = 'development';
+
 const cloudcmd = require('../server/cloudcmd');
 const {assign} = Object;
 
