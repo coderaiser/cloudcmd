@@ -41,44 +41,39 @@ module.exports.getTitle = (path) => {
  * @param url -  адрес каталога
  */
 function getPathLink(url, prefix, template) {
-    var namesRaw, names, length,
-        pathHTML    = '',
-        path        = '/';
-    
     if (!url)
         throw Error('url could not be empty!');
     
     if (!template)
         throw Error('template could not be empty!');
     
-    namesRaw    = url.split('/')
-                     .slice(1, -1),
+    const names = url
+        .split('/')
+        .slice(1, -1);
     
-    names       = [].concat('/', namesRaw),
+    const allNames = ['/', ...names];
+    const length = allNames.length - 1;
     
-    length      = names.length - 1;
+    let path = '/';
     
-    names.forEach((name, index) => {
-        var slash       = '',
-            isLast      = index === length;
+    const pathHTML = allNames.map((name, index) => {
+        const isLast = index === length;
         
         if (index)
-            path        += name + '/';
+            path += name + '/';
         
-        if (index && isLast) {
-            pathHTML    += name + '/';
-        } else {
-            if (index)
-                slash = '/';
-            
-            pathHTML    += rendy(template, {
-                path: path,
-                name: name,
-                slash: slash,
-                prefix: prefix
-            });
-        }
-    });
+        if (index && isLast)
+            return name + '/';
+        
+        const slash = index ? '/' : '';
+        
+        return rendy(template, {
+            path,
+            name,
+            slash,
+            prefix,
+        });
+    }).join('');
     
     return pathHTML;
 }
