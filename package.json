@@ -86,6 +86,7 @@
     "watch:lint": "nodemon -w client -w server -w webpack.config.js -x 'redrun lint:js'",
     "watch:lint:client": "nodemon -w client -w webpack.config.js -x 'redrun lint:js:eslint:client'",
     "watch:test": "nodemon -w server -w test -w common -x \"npm run test\"",
+    "watch:coverage": "nodemon -w server -w test -w common -x \"npm run coverage\"",
     "w:c": "redrun watch:client",
     "watch:client:dev": "redrun 6to5:client:dev -- --watch",
     "w:c:d": "redrun watch:client:dev",
