@@ -5,6 +5,7 @@ node_js:
 
 script:
   - npm run codestyle
+  - npm run 6to5:client:dev
   - npm run coverage && npm run report
 
 notifications:
