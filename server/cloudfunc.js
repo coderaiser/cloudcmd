@@ -9,7 +9,9 @@ const Entity = require('./entity');
 const NAME = 'Cloud Commander';
 const FS = '/fs';
 
-let Path;
+const Path = store();
+
+Path('/');
 
 module.exports.FS = FS;
 module.exports.apiURL = '/api/v1';
@@ -30,10 +32,7 @@ module.exports.formatMsg = (msg, name, status = 'ok') => {
  * @path
  */
 module.exports.getTitle = (path) => {
-    if (!Path)
-        Path = '/';
-    
-    return  NAME + ' - ' + (path || Path);
+    return  NAME + ' - ' + (path || Path());
 };
 
 /** Функция получает адреса каждого каталога в пути
@@ -84,25 +83,22 @@ function getPathLink(url, prefix, template) {
  *
  */
 module.exports.buildFromJSON = (params) => {
-    var attribute,
-        dotDot, link, dataName,
-        linkResult,
-        prefix          = params.prefix,
-        template        = params.template,
-        templateFile    = template.file,
-        templateLink    = template.link,
-        json            = params.data,
-        files           = json.files,
-        path            = json.path,
-        
-        sort            = params.sort || 'name',
-        order           = params.order || 'asc',
-        
-        /*
-         * Строим путь каталога в котором мы находимся
-         * со всеми подкаталогами
-         */
-        htmlPath        = getPathLink(path, prefix, template.pathLink);
+    const prefix = params.prefix;
+    const template = params.template;
+    const templateFile = template.file;
+    const templateLink = template.link;
+    const json = params.data;
+    
+    const {path, files} = json;
+    
+    const sort = params.sort || 'name';
+    const order = params.order || 'asc';
+    
+    /*
+     * Строим путь каталога в котором мы находимся
+     * со всеми подкаталогами
+     */
+    const htmlPath = getPathLink(path, prefix, template.pathLink);
     
     let fileTable = rendy(template.path, {
         link        : prefix + FS + path,
@@ -137,33 +133,30 @@ module.exports.buildFromJSON = (params) => {
     });
     
     /* сохраняем путь */
-    Path = path;
+    Path(path);
     
     fileTable += header + '<ul data-name="js-files" class="files">';
     /* Если мы не в корне */
     if (path !== '/') {
         /* убираем последний слеш и каталог в котором мы сейчас находимся*/
-        dotDot = path.substr(path, path.lastIndexOf('/'));
-        dotDot = dotDot.substr(dotDot, dotDot.lastIndexOf('/'));
-        /* Если предыдущий каталог корневой */
-        if (dotDot === '')
-            dotDot = '/';
+        const lastSlash  = path.substr(path, path.lastIndexOf('/'))
+        const dotDot = lastSlash.substr(lastSlash, lastSlash.lastIndexOf('/'));
         
-        link = prefix + FS + dotDot;
+        const link = prefix + FS + (dotDot || '/');
         
-        linkResult = rendy(template.link, {
-            link        : link,
+        const linkResult = rendy(template.link, {
+            link,
             title       : '..',
             name        : '..'
         });
         
-        dataName = 'data-name="js-file-.." ';
-        attribute = 'draggable="true" ' + dataName;
+        const dataName = 'data-name="js-file-.." ';
+        const attribute = 'draggable="true" ' + dataName;
         
         /* Сохраняем путь к каталогу верхнего уровня*/
         fileTable += rendy(template.file, {
             tag         : 'li',
-            attribute   : attribute,
+            attribute,
             className   : '',
             type        : 'directory',
             name        : linkResult,
@@ -178,11 +171,11 @@ module.exports.buildFromJSON = (params) => {
         const link = prefix + FS + path + file.name;
         
         const type = getType(file.size);
-        const  size = getSize(file.size);
+        const size = getSize(file.size);
         
-        const  date = file.date || '--.--.----';
-        const  owner = file.owner || 'root';
-        const  mode = file.mode;
+        const date = file.date || '--.--.----';
+        const owner = file.owner || 'root';
+        const mode = file.mode;
         
         const linkResult = rendy(templateLink, {
             link,
@@ -232,4 +225,14 @@ function getSize(size) {
     
     return size;
 }
+
+function store() {
+    const data = {};
+    return (value) => {
+        if (typeof value !== 'undefined')
+            data.value = value;
+        
+        return data.value;
+    };
+};
 
