@@ -7,17 +7,10 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 
 RUN npm install --production && \
-    apk add --no-cache git bash make g++ python && \
-    npm i node-pty@">0.6.2" || \
-        (cd node_modules && \
-        git clone https://github.com/Tyriar/node-pty && \
-        cd node-pty && \
-        npm i && npm run tsc && \
-        npm run install && \
-        rm -rf .git && \
-        cd ../..) && \
+    apk update && \
+    apk add --no-cache bash make g++ python && \
     npm i gritty && \
-    apk del git make g++ python && \
+    apk del make g++ python && \
     rm -rf /usr/include /tmp/* /var/cache/apk/*
 
 COPY . /usr/src/app
