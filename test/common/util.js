@@ -42,7 +42,7 @@ test('kebabToCamelCase: args', (t) => {
 });
 
 test('kebabToCamelCase', (t) => {
-    t.equal(kebabToCamelCase('hello-world'), 'HelloWorld', 'should convert kebab to camel caes');
+    t.equal(kebabToCamelCase('hello-world'), 'HelloWorld', 'should convert kebab to camel case');
     t.end();
 });
 
