@@ -91,6 +91,8 @@
     "watch:client:dev": "redrun 6to5:client:dev -- --watch",
     "w:c:d": "redrun watch:client:dev",
     "build": "redrun rm:* 6to5:* mkdir:* legacy:*",
+    "build:client": "redrun 6to5:client",
+    "build:client:dev": "redrun 6to5:client:dev",
     "legacy:package": "echo \"module.exports = require('../package');\" > legacy/package.js",
     "mkdir:server": "mkdirp legacy/server",
     "mkdir:json": "mkdirp legacy/json",
