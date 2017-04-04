@@ -60,7 +60,8 @@ module.exports = {
         filename: '[name].js',
         path: isDev ? distDev : dist,
         pathinfo: isDev,
-        libraryTarget: 'umd'
+        libraryTarget: 'umd',
+        devtoolModuleFilenameTemplate,
     },
     plugins,
     externals: [
@@ -83,5 +84,10 @@ function externals(context, request, fn) {
         return fn(null, request);
     
     fn();
+}
+
+function devtoolModuleFilenameTemplate(info) {
+    const resource = info.absoluteResourcePath.replace(__dirname + path.sep, '');
+    return `file://cloudcmd/${resource}`;
 }
 
