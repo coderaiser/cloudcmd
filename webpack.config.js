@@ -59,6 +59,7 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: isDev ? distDev : dist,
+        pathinfo: isDev,
         libraryTarget: 'umd'
     },
     plugins,
