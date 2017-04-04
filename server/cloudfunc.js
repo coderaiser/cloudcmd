@@ -139,7 +139,7 @@ module.exports.buildFromJSON = (params) => {
     /* Если мы не в корне */
     if (path !== '/') {
         /* убираем последний слеш и каталог в котором мы сейчас находимся*/
-        const lastSlash  = path.substr(path, path.lastIndexOf('/'))
+        const lastSlash  = path.substr(path, path.lastIndexOf('/'));
         const dotDot = lastSlash.substr(lastSlash, lastSlash.lastIndexOf('/'));
         
         const link = prefix + FS + (dotDot || '/');
@@ -234,5 +234,5 @@ function store() {
         
         return data.value;
     };
-};
+}
 
