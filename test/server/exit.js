@@ -2,7 +2,8 @@
 
 const test = require('tape');
 const exit = require('../../server/exit');
-const sinon = require('sinon');
+const diff = require('sinon-called-with-diff');
+const sinon = diff(require('sinon'));
 
 test('cloudcmd: exit: process.exit', (t) => {
     const {exit:exitOriginal} = process;
