@@ -1,5 +1,7 @@
 'use strict';
 
+/* global CloudCmd */
+
 const exec = require('execon');
 
 const DOM = require('.');
@@ -9,15 +11,8 @@ const Images = require('./images');
 const {FS} = require('../../common/cloudfunc');
 const {CurrentInfo} = DOM;
 
-const CloudCmd = require('../client');
-
-const {
-    PREFIX_URL,
-} = CloudCmd;
-
 module.exports = (dir, files) => {
     let i = 0;
-    const slice = [].slice;
     
     if (!files) {
         files = dir;
@@ -29,9 +24,10 @@ module.exports = (dir, files) => {
     if (!n)
         return;
     
-    const array = slice.call(files);
+    const array = [...files];
+    const {name} = files[0];
     
-    exec.eachSeries(array, loadFile, func(files[0].name));
+    exec.eachSeries(array, loadFile, func(name));
     
     function func(name) {
         return () => {
@@ -44,6 +40,7 @@ module.exports = (dir, files) => {
     function loadFile(file, callback) {
         const name = file.name;
         const path = dir + name;
+        const {PREFIX_URL} = CloudCmd;
         const api = PREFIX_URL + FS;
         
         const percent = (i, n, per = 100) => {
