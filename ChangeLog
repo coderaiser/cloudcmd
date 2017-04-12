@@ -1,3 +1,20 @@
+2017.04.12, v6.9.1
+
+fix:
+- (upload-file) PREFIX_URL (#113)
+- (client) route: strBigFirst -> kebabToCamelCase
+
+feature:
+- (upload-file) add wraptile
+- (package) add sinon-called-with-diff
+- (webpack) devtoolModuleFilenameTemplate: webpack:// -> cloudcmd
+- (webpack) output: pathInfo
+- (package) scripts: build:client:dev
+- (Dockerfile) alpine: rm node-pty < 0.6.3 fallback
+- (travis) build client before test
+- (package) scripts: watch:coverage
+
+
 2017.03.23, v6.9.0
 
 feature:
