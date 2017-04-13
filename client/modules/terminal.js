@@ -35,7 +35,6 @@ function TerminalProto() {
     
     Element = load({
         name: 'div',
-        style: 'height: 99%',
         className : 'terminal',
     });
     
