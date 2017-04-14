@@ -7,11 +7,6 @@ const exec = require('execon');
 /* приватный переключатель возможности работы с кэшем */
 let Allowed;
 
-/* функция проверяет возможно ли работать с кэшем каким-либо образом */
-module.exports.isAllowed = () => {
-    return Allowed && !!localStorage;
-};
-
 /**
  * allow Storage usage
  */
