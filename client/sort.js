@@ -30,8 +30,11 @@ CloudCmd.sortPanel = (name, panel = getPanel()) => {
     sortPrevious =
     sort[position] = name;
     
-    CloudCmd.refresh(panel, {
-        noCurrent: position !== Info.panelPosition
+    const noCurrent = position !== Info.panelPosition;
+    
+    CloudCmd.refresh({
+        panel,
+        noCurrent,
     });
 };
 

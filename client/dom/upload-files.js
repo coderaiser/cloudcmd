@@ -35,9 +35,9 @@ module.exports = (dir, files) => {
     eachSeries(array, loadFile(dir, n), onEnd(name));
 };
 
-function _onEnd(name) {
-    CloudCmd.refresh(null, () => {
-        DOM.setCurrentByName(name);
+function _onEnd(currentName) {
+    CloudCmd.refresh({
+        currentName
     });
 }
 

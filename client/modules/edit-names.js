@@ -107,9 +107,10 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
                 if (res.status === 404)
                     return res.text().then(reject);
                 
-                CloudCmd.refresh(null, () => {
-                    const name = to[nameIndex];
-                    DOM.setCurrentByName(name);
+                const currentName = to[nameIndex];
+                
+                CloudCmd.refresh({
+                    currentName
                 });
             }).catch(alert);
     }

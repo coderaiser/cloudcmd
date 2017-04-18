@@ -130,8 +130,13 @@ function CmdProto() {
             };
             
             RESTful.write(path(type), (error) => {
-                !error && CloudCmd.refresh(null, () => {
-                    DOM.setCurrentByName(name);
+                if (error)
+                    return;
+                
+                const currentName = name;
+                
+                CloudCmd.refresh({
+                    currentName
                 });
             });
         });

@@ -248,15 +248,14 @@ function MenuProto(position) {
     function uploadFromCloud() {
         Images.show.load('top');
         
-        CloudCmd.execFromModule('Cloud', 'saveFile', (name, data) => {
-            const path = DOM.getCurrentDirPath() + name;
-            const setCurrent = () => DOM.setCurrentByName(name);
+        CloudCmd.execFromModule('Cloud', 'saveFile', (currentName, data) => {
+            const path = DOM.getCurrentDirPath() + currentName;
             
             RESTful.write(path,  data, (error) => {
                 if (error)
                     return;
                  
-                CloudCmd.refresh(null, setCurrent);
+                CloudCmd.refresh({currentName});
             });
         });
     }

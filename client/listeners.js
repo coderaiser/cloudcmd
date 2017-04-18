@@ -161,7 +161,8 @@ function onPathElementClick(panel, event) {
     case 'js-refresh':
         noCurrent = isNoCurrent(panel);
         
-        CloudCmd.refresh(panel, {
+        CloudCmd.refresh({
+            panel,
             noCurrent
         });
         

@@ -443,11 +443,12 @@ function OperationProto(operation, data) {
                             };
                         
                         if (!Info.isOnePanel)
-                            CloudCmd.refresh(panelPassive, {
-                                noCurrent: true
+                            CloudCmd.refresh({
+                                panel: panelPassive,
+                                noCurrent: true,
                             });
                         
-                        CloudCmd.refresh(panel, setCurrent);
+                        CloudCmd.refresh({panel}, setCurrent);
                     });
                 });
             }
@@ -467,57 +468,57 @@ function OperationProto(operation, data) {
     }
     
     function twopack(operation, type) {
-        var op,
-            fileFrom,
-            Images      = DOM.Images,
-            name        = Info.name,
-            path        = Info.path,
-            dirPath     = Info.dirPath,
-            activeFiles = DOM.getActiveFiles(),
-            names       = DOM.getFilenames(activeFiles);
+        let op;
+        let fileFrom;
+        let currentName = Info.name;
+        
+        const Images = DOM.Images;
+        const path = Info.path;
+        const dirPath = Info.dirPath;
+        const activeFiles = DOM.getActiveFiles();
+        const names = DOM.getFilenames(activeFiles);
         
         checkEmpty('operation', operation);
         
-        if (!names.length) {
-            Dialog.alert.noFiles(TITLE);
-        } else {
-            switch(operation) {
-            case 'extract':
-                op = extractFn;
-                
-                fileFrom   = {
-                    from    : path,
-                    to      : dirPath
-                };
-                
-                name = name.replace(getTypeReg(type), '');
-                
-                break;
+        if (!names.length)
+            return Dialog.alert.noFiles(TITLE);
             
-            case 'pack':
-                op = packFn;
-                
-                if (names.length > 1)
-                    name = Info.dir;
-                
-                name += DOM.getPackerExt(type);
-                
-                fileFrom = {
-                    from    : dirPath,
-                    to      : dirPath + name,
-                    names   : names
-                };
-                break;
-            }
+        switch(operation) {
+        case 'extract':
+            op = extractFn;
             
-            Images.show.load('top');
+            fileFrom   = {
+                from    : path,
+                to      : dirPath
+            };
             
-            op(fileFrom, function(error) {
-                !error && CloudCmd.refresh(null, function() {
-                    DOM.setCurrentByName(name);
-                });
-            });
+            currentName = currentName.replace(getTypeReg(type), '');
+            
+            break;
+        
+        case 'pack':
+            op = packFn;
+            
+            if (names.length > 1)
+                currentName  = Info.dir;
+            
+            currentName += DOM.getPackerExt(type);
+            
+            fileFrom = {
+                from: dirPath,
+                to: dirPath + currentName,
+                names,
+            };
+            break;
         }
+        
+        Images.show.load('top');
+        
+        op(fileFrom, (error) => {
+            !error && CloudCmd.refresh({
+                currentName
+            });
+        });
     }
     
     function message(msg) {

@@ -77,15 +77,16 @@ function CloudCmdProto(Util, DOM) {
      *      }
      * @param callback
      */
-    this.loadDir = function(params, callback) {
+    this.loadDir = (params, callback) => {
         var imgPosition;
         var panelChanged;
         var p = params;
         
-        var isRefresh       = p.isRefresh;
-        var panel           = p.panel;
-        var history         = p.history;
-        var noCurrent       = p.noCurrent;
+        const refresh = p.isRefresh;
+        const panel = p.panel;
+        const history = p.history;
+        const noCurrent = p.noCurrent;
+        const currentName = p.currentName;
         
         if (!noCurrent)
             if (panel && panel !== Info.panel) {
@@ -93,16 +94,17 @@ function CloudCmdProto(Util, DOM) {
                 panelChanged = true;
             }
         
-        if (panelChanged || isRefresh || !history)
+        if (panelChanged || refresh || !history)
             imgPosition = 'top';
         
         Images.show.load(imgPosition, panel);
         
         /* загружаем содержимое каталога */
         ajaxLoad(p.path, {
-            refresh: isRefresh,
-            history: history,
-            noCurrent: noCurrent
+            refresh,
+            history,
+            noCurrent,
+            currentName,
         }, panel, callback);
     };
     
@@ -349,26 +351,27 @@ function CloudCmdProto(Util, DOM) {
         }, obj);
     };
     
-    this.refresh =  function(panelParam, options, callback) {
-        var panel = panelParam || Info.panel;
-        var NEEDREFRESH = true;
-        var path = DOM.getCurrentDirPath(panel);
-        var noCurrent;
-        
-        if (options)
-            noCurrent       = options.noCurrent;
-        
+    this.refresh = (options = {}, callback) => {
         if (!callback && typeof options === 'function') {
-            callback    = options;
-            options     = {};
+            callback = options;
+            options = {};
         }
+       
+        const panel = options.panel || Info.panel;
+        const path = DOM.getCurrentDirPath(panel);
+        
+        const isRefresh = true;
+        const history = false;
+        const noCurrent = options ? options.noCurrent : false;
+        const currentName = options.currentName;
         
         CloudCmd.loadDir({
-            path        : path,
-            isRefresh   : NEEDREFRESH,
-            history     : false,
-            panel       : panel,
-            noCurrent   : noCurrent
+            path,
+            isRefresh,
+            history,
+            panel,
+            noCurrent,
+            currentName,
         }, callback);
     };
     
@@ -383,26 +386,26 @@ function CloudCmdProto(Util, DOM) {
      *
      */
     function ajaxLoad(path, options, panel, callback) {
-        var create = function(error, json) {
-            var RESTful     = DOM.RESTful,
-                name        = Info.name,
-                obj         = Util.json.parse(json),
-                isRefresh   = options.refresh,
-                noCurrent   = options.noCurrent;
+        const create = (error, json) => {
+            const RESTful = DOM.RESTful;
+            const name = options.currentName || Info.name;
+            const obj = Util.json.parse(json);
+            const isRefresh = options.refresh;
+            const noCurrent = options.noCurrent;
             
             if (!isRefresh && json)
                 return createFileTable(obj, panel, options, callback);
             
-            var position = DOM.getPanelPosition(panel);
-            var sort = CloudCmd.sort[position];
-            var order = CloudCmd.order[position];
+            const position = DOM.getPanelPosition(panel);
+            const sort = CloudCmd.sort[position];
+            const order = CloudCmd.order[position];
             
-            var query = rendy('?sort={{ sort }}&order={{ order }}', {
-                sort: sort,
-                order: order,
+            const query = rendy('?sort={{ sort }}&order={{ order }}', {
+                sort,
+                order,
             });
             
-            RESTful.read(path + query, 'json', function(error, obj) {
+            RESTful.read(path + query, 'json', (error, obj) => {
                 if (error)
                     return;
                 
@@ -411,10 +414,9 @@ function CloudCmdProto(Util, DOM) {
                 options.sort = sort;
                 options.order = order;
                 
-                createFileTable(obj, panel, options, function() {
-                    if (isRefresh && !noCurrent) {
+                createFileTable(obj, panel, options, () => {
+                    if (isRefresh && !noCurrent)
                         DOM.setCurrentByName(name);
-                    }
                     
                     exec(callback);
                 });
@@ -530,30 +532,27 @@ function CloudCmdProto(Util, DOM) {
         return ret;
     }
     
-    this.goToParentDir          = function() {
-        var path        = Info.dirPath,
-            dir         = Info.dir,
-            parentPath  = Info.parentDirPath;
+    this.goToParentDir = () => {
+        let path = Info.dirPath;
+        const dir = Info.dir;
+        const parentPath = Info.parentDirPath;
         
-        if (path !== parentPath) {
-            path    = parentPath;
+        if (path === Info.parentDirPath)
+            return;
+        
+        path = parentPath;
+        
+        CloudCmd.loadDir({path}, () => {
+            const panel = Info.panel;
+            let current = DOM.getCurrentByName(dir);
             
-            CloudCmd.loadDir({
-                path: path,
-            }, function() {
-                var current,
-                    panel   = Info.panel;
-                
-                current = DOM.getCurrentByName(dir);
-                
-                if (!current)
-                    current = DOM.getFiles(panel)[0];
-                    
-                DOM.setCurrentFile(current, {
-                    history: history
-                });
+            if (!current)
+                current = DOM.getFiles(panel)[0];
+            
+            DOM.setCurrentFile(current, {
+                history
             });
-        }
+        });
     };
 }
 
