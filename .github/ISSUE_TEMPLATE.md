@@ -7,4 +7,6 @@ about something, just do as best as you're able.
 * **Node Version** `node -v`: 
 * **OS** (`uname -a` on Linux): 
 * **Browser name/version**: 
+* **Used Command Line Parameters**: 
+* **Changed Config**: 
 
