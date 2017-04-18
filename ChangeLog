@@ -1,3 +1,13 @@
+2017.04.18, v6.9.3
+
+fix:
+- (menu) set current file after upload from cloud
+- (upload-files) upload a file to an empty root directory (#113)
+
+feature:
+- (client) refresh: panel, options, callback -> options, callback: add currentName
+
+
 2017.04.13, v6.9.2
 
 fix:
