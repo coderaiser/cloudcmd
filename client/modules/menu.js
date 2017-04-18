@@ -250,9 +250,13 @@ function MenuProto(position) {
         
         CloudCmd.execFromModule('Cloud', 'saveFile', (name, data) => {
             const path = DOM.getCurrentDirPath() + name;
+            const setCurrent = () => DOM.setCurrentByName(name);
             
             RESTful.write(path,  data, (error) => {
-                !error && CloudCmd.refresh();
+                if (error)
+                    return;
+                 
+                CloudCmd.refresh(null, setCurrent);
             });
         });
     }
