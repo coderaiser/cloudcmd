@@ -10,15 +10,18 @@ const load = require('./load');
 const Images = require('./images');
 
 const {FS} = require('../../common/cloudfunc');
-const {CurrentInfo} = DOM;
 
 const onEnd = wraptile(_onEnd);
 const loadFile = wraptile(_loadFile);
 
+const {
+    getCurrentDirPath: getPathWhenRootEmpty
+} = DOM;
+
 module.exports = (dir, files) => {
     if (!files) {
         files = dir;
-        dir = CurrentInfo.dirPath;
+        dir = getPathWhenRootEmpty();
     }
     
     const n = files.length;
