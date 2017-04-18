@@ -1,41 +1,42 @@
 'use strict';
 
-const DIR                 = __dirname + '/../../',
-    COMMONDIR           = DIR + 'common/',
-    TMPLDIR             = DIR + 'tmpl/',
-    
-    Util                = require(COMMONDIR + 'util'),
-    CloudFunc           = require(COMMONDIR + 'cloudfunc'),
-    files               = require('files-io'),
-    
-    test                = require('tape'),
-    
-    FS_DIR              = TMPLDIR   + 'fs/',
-    EXPECT_PATH         = __dirname + '/cloudfunc.html',
-    
-    TMPL_PATH   = [
-        'file',
-        'path',
-        'pathLink',
-        'link',
-    ],
-    
-    JSON_FILES          = {
-        path  : '/etc/X11/',
-        files : [{
-            name: 'applnk',
-            size: 'dir',
-            date: '21.02.2016',
-            uid : 0,
-            mode: 'rwx r-x r-x'
-        }, {
-            name: 'prefdm',
-            size: '1.30kb',
-            date: '21.02.2016',
-            uid : 0,
-            mode: 'rwx r-x r-x'
-        }]
-    };
+const DIR = __dirname + '/../../';
+const COMMONDIR = DIR + 'common/';
+const TMPLDIR = DIR + 'tmpl/';
+
+const Util = require(COMMONDIR + 'util');
+const CloudFunc = require(COMMONDIR + 'cloudfunc');
+const files = require('files-io');
+
+const test = require('tape');
+const htmlLooksLike = require('html-looks-like');
+
+const FS_DIR = TMPLDIR   + 'fs/';
+const EXPECT_PATH = __dirname + '/cloudfunc.html';
+
+const TMPL_PATH = [
+    'file',
+    'path',
+    'pathLink',
+    'link',
+];
+
+const JSON_FILES = {
+    path  : '/etc/X11/',
+    files : [{
+        name: 'applnk',
+        size: 'dir',
+        date: '21.02.2016',
+        uid : 0,
+        mode: 'rwx r-x r-x'
+    }, {
+        name: 'prefdm',
+        size: '1.30kb',
+        date: '21.02.2016',
+        uid : 0,
+        mode: 'rwx r-x r-x'
+    }]
+};
 
 let Expect =
     '<div data-name="js-path" class="reduce-text" title="/etc/X11/">'       +
@@ -114,6 +115,9 @@ test('render', (t) => {
         }
         
         t.equal(Expect, result, 'should be equal rendered json data');
+        
+        htmlLooksLike(Expect, result);
+        
         t.end();
     });
 });
