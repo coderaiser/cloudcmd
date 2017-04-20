@@ -19,5 +19,6 @@
     "validthis": true,
     "-W024": true,
     "-W120": true,
-    "-W079": true
+    "-W079": true,
+    "-W138": true
 }
