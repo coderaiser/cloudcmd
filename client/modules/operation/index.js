@@ -61,7 +61,7 @@ function OperationProto(operation, data) {
     function authCheck(spawn, ok) {
         if (!config('auth'))
             return ok();
-            
+        
         spawn.on('accept', ok);
         spawn.on('reject', () => {
             Dialog.alert(TITLE, 'Wrong credentials!');
