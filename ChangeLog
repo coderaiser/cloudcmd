@@ -1,3 +1,10 @@
+2017.04.24, v6.10.0
+
+feature:
+- (operation) add support of unpacking bzip2 archives: .bz2, .tar.bz2, .tbz2
+- (package) babel-loader v7.0.0
+
+
 2017.04.18, v6.9.3
 
 fix:
