@@ -49,7 +49,7 @@ function OperationProto(operation, data) {
                 
                 callback();
             },
-            function() {
+            () => {
                 Loaded = true;
                 Images.hide();
                 Operation.show(operation, data);
@@ -62,7 +62,7 @@ function OperationProto(operation, data) {
             return ok();
             
         spawn.on('accept', ok);
-        spawn.on('reject', function() {
+        spawn.on('reject', () => {
             Dialog.alert(TITLE, 'Wrong credentials!');
         });
         
@@ -70,30 +70,30 @@ function OperationProto(operation, data) {
     }
     
     function _initSpero(prefix, fn) {
-        spero(prefix + '/spero', prefix, function(copier) {
+        spero(prefix + '/spero', prefix, (copier) => {
             fn();
             
-            copier.on('connect', function() {
-                authCheck(copier, function() {
-                    copyFn = function(data, callback) {
+            copier.on('connect', () => {
+                authCheck(copier, () => {
+                    copyFn = (data, callback) => {
                         setListeners(copier, callback);
                         copier.copy(data.from, data.to, data.names);
                     };
                 });
             });
             
-            copier.on('disconnect', function() {
+            copier.on('disconnect', () => {
                 copyFn = RESTful.cp;
             });
         });
     }
     
     function _initRemedy(prefix, fn) {
-        remedy(prefix + '/remedy', prefix, function(remover) {
+        remedy(prefix + '/remedy', prefix, (remover) => {
             fn();
-            remover.on('connect', function() {
-                authCheck(remover, function() {
-                    deleteFn = function(from, files, callback) {
+            remover.on('connect', () => {
+                authCheck(remover, () => {
+                    deleteFn = (from, files, callback) => {
                         setListeners(remover, callback);
                         from = from.replace(/\?.*/, '');
                         remover.remove(from, files);
@@ -101,25 +101,25 @@ function OperationProto(operation, data) {
                 });
             });
             
-            remover.on('disconnect', function() {
+            remover.on('disconnect', () => {
                 deleteFn = RESTful.remove;
             });
         });
     }
     
     function _setPacker(prefix, name, pack, fn) {
-        pack(prefix + '/' + name, prefix, function(packer) {
+        pack(prefix + '/' + name, prefix, (packer) => {
             fn();
-            packer.on('connect', function() {
-                authCheck(packer, function() {
-                    packFn = function(data, callback) {
+            packer.on('connect', () => {
+                authCheck(packer, () => {
+                    packFn = (data, callback) => {
                         setListeners(packer, {noContinue: true}, callback);
                         packer.pack(data.from, data.to, data.names);
                     };
                 });
             });
             
-            packer.on('disconnect', function() {
+            packer.on('disconnect', () => {
                 packFn = RESTful.pack;
             });
         });
@@ -133,28 +133,28 @@ function OperationProto(operation, data) {
     }
     
     function _initExtractor(prefix, fn) {
-        omnes(prefix + '/omnes', prefix, function(packer) {
+        omnes(prefix + '/omnes', prefix, (packer) => {
             fn();
-            packer.on('connect', function() {
-                authCheck(packer, function() {
-                    extractFn = function(data, callback) {
+            packer.on('connect', () => {
+                authCheck(packer, () => {
+                    extractFn = (data, callback) => {
                         setListeners(packer, {noContinue: true}, callback);
                         packer.extract(data.from, data.to);
                     };
                 });
             });
             
-            packer.on('disconnect', function() {
+            packer.on('disconnect', () => {
                 extractFn = RESTful.extract;
             });
         });
     }
     
     function create(prefix) {
-        var initSpero = currify(_initSpero);
-        var initRemedy = currify(_initRemedy);
-        var initPacker = currify(_initPacker);
-        var initExtractor = currify(_initExtractor);
+        const initSpero = currify(_initSpero);
+        const initRemedy = currify(_initRemedy);
+        const initPacker = currify(_initPacker);
+        const initExtractor = currify(_initExtractor);
         
         exec.parallel([
             initSpero(prefix),
@@ -198,14 +198,15 @@ function OperationProto(operation, data) {
                 if (options.noContinue) {
                     listeners.end(error);
                     Dialog.alert(TITLE, error);
-                } else {
-                    Dialog.confirm(TITLE, error + '\n Continue?')
-                        .then(() => {
-                            emitter.continue();
-                        }, () => {
-                            emitter.abort();
-                        });
+                    return;
                 }
+                
+                Dialog.confirm(TITLE, error + '\n Continue?')
+                    .then(() => {
+                        emitter.continue();
+                    }, () => {
+                        emitter.abort();
+                    });
             }
         };
         
@@ -216,11 +217,11 @@ function OperationProto(operation, data) {
         });
     }
     
-    this.hide   = function() {
+    this.hide = () => {
         CloudCmd.View.hide();
     };
     
-    this.show = function(operation, data) {
+    this.show = (operation, data) => {
         if (Loaded)
             switch(operation) {
             case 'copy':
@@ -249,29 +250,29 @@ function OperationProto(operation, data) {
             }
     };
     
-    this.copy           = function(data) {
+    this.copy = (data) => {
         processFiles(data, copyFn, message('Copy'));
     };
     
-    this.move           = function(data) {
+    this.move = (data) => {
         processFiles(data, moveFn, message('Rename/Move'));
     };
     
-    this.delete         = function() {
+    this.delete = () => {
         promptDelete();
     };
     
-    this.deleteSilent   = function() {
+    this.deleteSilent = () => {
         deleteSilent();
     };
     
-    this.pack           = function() {
-        var isZip = config('packer') === 'zip';
+    this.pack = () => {
+        const isZip = config('packer') === 'zip';
         twopack('pack', isZip ? 'zip' : 'tar');
     };
     
-    this.extract        = function() {
-        var isZip = config('packer') === 'zip';
+    this.extract = () => {
+        const isZip = config('packer') === 'zip';
         twopack('extract', isZip ? 'zip' : 'tar');
     };
     
@@ -316,7 +317,7 @@ function OperationProto(operation, data) {
         if (name === '..')
             return Dialog.alert.noFiles(TITLE);
         
-        Dialog.confirm(TITLE, msg, {cancel: false}).then(function() {
+        Dialog.confirm(TITLE, msg, {cancel: false}).then(() => {
             deleteSilent(files);
         });
     }
@@ -346,7 +347,7 @@ function OperationProto(operation, data) {
         if (!n)
             names = [Info.name];
         
-        deleteFn(path + query, names, function(error) {
+        deleteFn(path + query, names, (error) => {
             var Storage     = DOM.Storage,
                 dirPath     = Info.dirPath,
                 delCurrent  = DOM.deleteCurrent,
@@ -431,16 +432,16 @@ function OperationProto(operation, data) {
                     names   : names
                 };
                 
-                operation(files, function(error) {
-                    !error && DOM.Storage.remove(from, function() {
-                        var panel           = Info.panel,
-                            panelPassive    = Info.panelPassive,
-                            setCurrent      = function() {
-                                if (!name)
-                                    name = data.names[0];
-                                
-                                DOM.setCurrentByName(name);
-                            };
+                operation(files, (error) => {
+                    !error && DOM.Storage.remove(from, () => {
+                        const panel = Info.panel;
+                        const panelPassive = Info.panelPassive;
+                        const setCurrent = () => {
+                            if (!name)
+                                name = data.names[0];
+                            
+                            DOM.setCurrentByName(name);
+                        };
                         
                         if (!Info.isOnePanel)
                             CloudCmd.refresh({
@@ -482,14 +483,14 @@ function OperationProto(operation, data) {
         
         if (!names.length)
             return Dialog.alert.noFiles(TITLE);
-            
+        
         switch(operation) {
         case 'extract':
             op = extractFn;
             
             fileFrom   = {
-                from    : path,
-                to      : dirPath
+                from: path,
+                to: dirPath
             };
             
             currentName = currentName.replace(getTypeReg(type), '');
@@ -522,10 +523,9 @@ function OperationProto(operation, data) {
     }
     
     function message(msg) {
-        return function(to, names) {
-            var promise,
-                n       = names.length,
-                name    = names[0];
+        return (to, names) => {
+            const n = names.length;
+            const name = names[0];
             
             msg += ' ';
             
@@ -534,11 +534,11 @@ function OperationProto(operation, data) {
             else
                 msg     += '"' + name + '"';
             
-            msg         += ' to';
+            msg += ' to';
             
-            promise = Dialog.prompt(TITLE, msg, to, {cancel: false});
+            const cancel = false;
             
-            return promise;
+            return Dialog.prompt(TITLE, msg, to, {cancel});
         };
     }
     
