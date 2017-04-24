@@ -50,7 +50,7 @@ module.exports = {
         [modules + '/config']: `${dirModules}/config.js`,
         [modules + '/contact']: `${dirModules}/contact.js`,
         [modules + '/upload']: `${dirModules}/upload.js`,
-        [modules + '/operation']: `${dirModules}/operation.js`,
+        [modules + '/operation']: `${dirModules}/operation/index.js`,
         [modules + '/konsole']: `${dirModules}/konsole.js`,
         [modules + '/terminal']: `${dirModules}/terminal.js`,
         [modules + '/cloud']: `${dirModules}/cloud.js`,

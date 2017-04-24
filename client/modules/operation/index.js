@@ -14,7 +14,8 @@ CloudCmd.Operation = OperationProto;
 const currify = require('currify/legacy');
 const exec = require('execon');
 
-const RESTful = require('../dom/rest');
+const RESTful = require('../../dom/rest');
+const removeExtension = require('./remove-extension');
 
 function OperationProto(operation, data) {
     const Name = 'Operation';
@@ -272,8 +273,7 @@ function OperationProto(operation, data) {
     };
     
     this.extract = () => {
-        const isZip = config('packer') === 'zip';
-        twopack('extract', isZip ? 'zip' : 'tar');
+        twopack('extract');
     };
     
      /**
@@ -456,13 +456,6 @@ function OperationProto(operation, data) {
         }
     }
     
-    function getTypeReg(type) {
-        if (type === 'zip')
-            return /\.zip$/;
-        
-        return /\.tar\.gz$/;
-    }
-    
     function checkEmpty(name, operation) {
         if (!operation)
             throw Error(name + ' could not be empty!');
@@ -493,7 +486,7 @@ function OperationProto(operation, data) {
                 to: dirPath
             };
             
-            currentName = currentName.replace(getTypeReg(type), '');
+            currentName = removeExtension(currentName);
             
             break;
         

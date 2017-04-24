@@ -12,6 +12,7 @@
 [DEEPWORD]:                 https://github.com/cloudcmd/deepword "Editor based on Monaco"
 [EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
 [TERMUX]:                   https://termux.com "Termux"
+[INLY]:                     https://github.com/coderaiser/node-inly "Extract archive"
 **Cloud Commander** is an orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
@@ -29,6 +30,8 @@ Benefits
 - **3 built-in editors** with support of **syntax highlighting**: [Dword][DWORD], [Edward][EDWARD] and [Deepword][DEEPWORD].
 - [Console](https://github.com/cloudcmd/console "Console") with support of default OS command line.
 - Written in **JavaScript/Node.js**.
+- Built-in archives pack: **zip** and **tar.gz**.
+- Built-in archives extract: **zip**, **tar**, **gz**, **bz2**, **.tar.gz** and **.tar.bz2** (with help of [inly][INLY]).
 
 Install
 ---------------
