@@ -5,12 +5,15 @@
 const currify = require('currify/legacy');
 const exec = require('execon');
 
+const reject = Promise.reject.bind(Promise);
+
 CloudCmd.EditNames = function EditNamesProto(callback) {
     const Info = DOM.CurrentInfo;
     const Dialog = DOM.Dialog;
     
     const TITLE = 'Edit Names';
     const alert = currify(Dialog.alert, TITLE);
+    const refresh = currify(_refresh);
     
     const EditNames = this;
     let Menu, MenuIO;
@@ -98,21 +101,23 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
             .getValue()
             .split('\n');
         
-        const reject = Promise.reject.bind(Promise);
         const root = CloudCmd.config('root');
         
         Promise.resolve(root)
             .then(rename(dir, from, to))
-            .then((res) => {
-                if (res.status === 404)
-                    return res.text().then(reject);
-                
-                const currentName = to[nameIndex];
-                
-                CloudCmd.refresh({
-                    currentName
-                });
-            }).catch(alert);
+            .then(refresh(to, nameIndex))
+            .catch(alert);
+    }
+    
+    function _refresh(to, nameIndex, res) {
+        if (res.status === 404)
+            return res.text().then(reject);
+        
+        const currentName = to[nameIndex];
+        
+        CloudCmd.refresh({
+            currentName
+        });
     }
     
     function getDir(root, dir) {
