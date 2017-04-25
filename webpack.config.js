@@ -28,6 +28,7 @@ const plugins = clean([
         filename: 'cloudcmd.js',
     }),
 ]);
+
 const loaders = clean([
     !isDev && {
         test: /\.js$/,
@@ -60,7 +61,7 @@ module.exports = {
         filename: '[name].js',
         path: isDev ? distDev : dist,
         pathinfo: isDev,
-        libraryTarget: 'umd',
+        libraryTarget: 'var',
         devtoolModuleFilenameTemplate,
     },
     plugins,
