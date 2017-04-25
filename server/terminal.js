@@ -6,9 +6,11 @@ const config = require('./config');
 const noop = () => {};
 noop.listen = noop;
 
-module.exports = getTerminal(config('terminal'));
+module.exports = (arg) => {
+    return getTerminal(config('terminal'), arg);
+};
 
-function getTerminal(term) {
+function getTerminal(term, arg) {
     if (!term)
         return noop;
     
@@ -18,8 +20,11 @@ function getTerminal(term) {
         result = require(config('terminalPath'));
     });
     
-    if (!e)
+    if (!e && !arg)
         return result;
+    
+    if (!e)
+        return result(arg);
     
     config('terminal', false);
     console.log(`cloudcmd --terminal: ${e.message}`);

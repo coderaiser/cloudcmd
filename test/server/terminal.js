@@ -7,16 +7,19 @@ const sinon = diff(require('sinon'));
 const configPath = '../../server/config';
 const terminalPath = '../../server/terminal';
 
+
 test('cloudcmd: terminal: disabled', (t) => {
     clean(terminalPath);
     stub(configPath, () => {
         return false;
     });
     
-    const terminal = require(terminalPath);
-    const fn = terminal();
+    const terminal = require('../../server/terminal');
     
-    t.notOk(fn, 'should return noop');
+    const fn = terminal();
+    const noop = () => {};
+    
+    t.equal(String(fn), String(noop), 'should return noop');
     
     clean(configPath);
     require(configPath);
@@ -28,8 +31,9 @@ test('cloudcmd: terminal: disabled: listen', (t) => {
     clean(terminalPath);
     stub(configPath, () => false);
     
-    const terminal = require('../../server/terminal');
-    const fn = terminal.listen();
+    const terminal = require(terminalPath);
+    
+    const fn = terminal().listen();
     
     t.notOk(fn, 'should return noop');
     
@@ -45,7 +49,9 @@ test('cloudcmd: terminal: enabled', (t) => {
     
     clean(terminalPath);
     stub(configPath, () => true);
-    require(terminalPath);
+    
+    const terminal = require(terminalPath);
+    terminal();
     
     const msg = 'cloudcmd --terminal: path must be a string';
     

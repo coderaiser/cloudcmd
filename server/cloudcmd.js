@@ -180,7 +180,7 @@ function listen(prefix, socket) {
         prefix: prefix + '/console',
     });
     
-    config('terminal') && terminal.listen(socket, {
+    config('terminal') && terminal().listen(socket, {
         authCheck,
         prefix: prefix + '/gritty',
     });
