@@ -8,29 +8,23 @@ function EventsProto() {
     const Events = this;
     
     function parseArgs(eventName, element, listener, callback) {
-        var isFunc, isElement, error,
-            EVENT_NAME  = 0,
-            ELEMENT     = 1,
-            type        = itype(eventName);
+        let isFunc;
+        
+        const EVENT_NAME = 1;
+        const ELEMENT = 0;
+        const type = itype(eventName);
         
         switch(type) {
         default:
-            isElement   = type.match('element');
+            if (!/element$/.test(type))
+                throw Error('unknown eventName: ' + type);
             
-            if (!isElement) {
-                error   = new Error('unknown eventName: ' + type);
-                throw(error);
-            } else {
-                eventName   = arguments[ELEMENT];
-                element     = arguments[EVENT_NAME];
-                
-                parseArgs(
-                    eventName,
-                    element,
-                    listener,
-                    callback
-                );
-            }
+            parseArgs(
+                arguments[EVENT_NAME],
+                arguments[ELEMENT],
+                listener,
+                callback
+            );
             break;
         
         case 'string':
@@ -52,7 +46,7 @@ function EventsProto() {
             break;
         
         case 'array':
-            eventName.forEach(function(eventName) {
+            eventName.forEach((eventName) => {
                 parseArgs(
                     eventName,
                     element,
@@ -63,8 +57,8 @@ function EventsProto() {
             break;
         
         case 'object':
-            Object.keys(eventName).forEach(function(name) {
-                var eventListener = eventName[name];
+            Object.keys(eventName).forEach((name) => {
+                const eventListener = eventName[name];
                 
                 parseArgs(
                     name,
@@ -85,7 +79,7 @@ function EventsProto() {
      * @param element {document by default}
      * @param listener
      */
-    this.add = function(type, element, listener) {
+    this.add = (type, element, listener) => {
         checkType(type);
         
         parseArgs(type, element, listener, function(element, args) {
@@ -102,8 +96,8 @@ function EventsProto() {
      * @param listener
      * @param element {document by default}
      */
-    this.addOnce                    = function(type, element, listener) {
-        var once    = function (event) {
+    this.addOnce = (type, element, listener) => {
+        var once = (event) => {
             Events.remove(type, element, once);
             listener(event);
         };
@@ -125,10 +119,10 @@ function EventsProto() {
      * @param listener
      * @param element {document by default}
      */
-    this.remove                     = function(type, element, listener) {
+    this.remove = (type, element, listener) => {
         checkType(type);
         
-        parseArgs(type, element, listener, function(element, args) {
+        parseArgs(type, element, listener, (element, args) => {
             element.removeEventListener.apply(element, args);
         });
         
@@ -221,7 +215,7 @@ function EventsProto() {
      * @param keyCode - not necessarily
      */
     this.create = function(eventName, keyCode) {
-        var event = document.createEvent('Event');
+        const event = document.createEvent('Event');
         
         event.initEvent(eventName, true, true);
         
@@ -263,9 +257,9 @@ function EventsProto() {
      *
      * @param event
      */
-    this.dispatch = function(event, element) {
-        var customEvent;
-        var isStr = itype.string(event);
+    this.dispatch = (event, element) => {
+        let customEvent;
+        const isStr = itype.string(event);
         
         if (isStr)
             customEvent = Events.create(event);
