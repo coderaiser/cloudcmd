@@ -17,9 +17,8 @@ test('cloudcmd: terminal: disabled', (t) => {
     const terminal = require('../../server/terminal');
     
     const fn = terminal();
-    const noop = () => {};
     
-    t.equal(String(fn), String(noop), 'should return noop');
+    t.notOk(fn(), 'should return noop');
     
     clean(configPath);
     require(configPath);
