@@ -1,3 +1,11 @@
+2017.04.25, v6.10.1
+
+fix:
+- (webpack) umd -> var: load editor before console
+- (edit-names) deepword: setMode
+- (terminal) config: terminal and terminalPath checked before set
+
+
 2017.04.24, v6.10.0
 
 feature:
