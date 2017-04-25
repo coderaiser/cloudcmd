@@ -26,7 +26,7 @@ module.exports.getName = (element) => {
 };
 
 module.exports.convert = (config) => {
-    const result = clone(config);
+    const result = Object.assign({}, config);
     const array = Object.keys(result);
     
     array
@@ -39,16 +39,6 @@ module.exports.convert = (config) => {
     
     return result;
 };
-
-function clone(object) {
-    const result = {};
-    
-    Object.keys(object).forEach((name) => {
-        result[name] = object[name];
-    });
-    
-    return result;
-}
 
 function setState(state) {
     if (state)
