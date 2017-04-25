@@ -7,7 +7,7 @@
 
 const exec = require('execon');
 const Images = require('../dom/images');
-const {Dialog} = require('../dom');
+const {Dialog} = DOM;
 
 CloudCmd.Konsole = ConsoleProto;
 
