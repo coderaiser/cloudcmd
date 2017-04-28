@@ -29,7 +29,6 @@
   ],
   "dependencies": {
     "domtokenlist-shim": "~1.1.0",
-    "emitify": "~2.1.1",
     "findit": "^1.1.5",
     "menu": "~1.0.2",
     "olark": "^1.0.0",

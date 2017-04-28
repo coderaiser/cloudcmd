@@ -16,6 +16,7 @@ modules/fancybox/gulpfile.js
 modules/jquery-mousewheel
 
 modules/execon
+modules/emitify
 
 legacy
 server_

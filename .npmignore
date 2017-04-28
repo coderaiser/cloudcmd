@@ -17,6 +17,7 @@ modules/fancybox/demo
 modules/fancybox/sprite.psd
 
 modules/execon
+modules/emitify
 
 app.json
 circle.yml
