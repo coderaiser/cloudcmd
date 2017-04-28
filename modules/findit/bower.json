@@ -22,6 +22,6 @@
     "modules"
   ],
   "dependencies": {
-    "emitify": "^2.1.1"
+    "emitify": "^3.0.1"
   }
 }

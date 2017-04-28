@@ -30,6 +30,5 @@
   },
   "_source": "https://github.com/fancyapps/fancyBox.git",
   "_target": "^2.1.6",
-  "_originalSource": "fancybox",
-  "_direct": true
+  "_originalSource": "fancybox"
 }

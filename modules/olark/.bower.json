@@ -22,6 +22,5 @@
   },
   "_source": "https://github.com/cloudcmd/olark.git",
   "_target": "^1.0.0",
-  "_originalSource": "olark",
-  "_direct": true
+  "_originalSource": "olark"
 }

@@ -26,15 +26,14 @@
     "Bogdan Chadkin <trysound@yandex.ru>"
   ],
   "homepage": "https://github.com/jwilsson/domtokenlist",
-  "version": "1.1.0",
-  "_release": "1.1.0",
+  "version": "1.1.1",
+  "_release": "1.1.1",
   "_resolution": {
     "type": "version",
-    "tag": "1.1.0",
-    "commit": "61eb3d90801480205a2b994ff535e60f14c65ce6"
+    "tag": "v1.1.1",
+    "commit": "83b9acb080e47a5dcdaa75f2351a0602ab8351b5"
   },
-  "_source": "git://github.com/jwilsson/domtokenlist.git",
+  "_source": "https://github.com/jwilsson/domtokenlist.git",
   "_target": "~1.1.0",
-  "_originalSource": "domtokenlist-shim",
-  "_direct": true
+  "_originalSource": "domtokenlist-shim"
 }

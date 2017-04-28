@@ -26,8 +26,7 @@
     "tag": "v1.0.2",
     "commit": "f258a85ac333460ef2affc8b8a901be7ce93be2c"
   },
-  "_source": "git://github.com/coderaiser/menu-io.git",
+  "_source": "https://github.com/coderaiser/menu-io.git",
   "_target": "~1.0.2",
-  "_originalSource": "menu",
-  "_direct": true
+  "_originalSource": "menu"
 }
