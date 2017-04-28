@@ -4,7 +4,7 @@
 window.exec = require('execon');
 
 // prevent additional loading of emitify
-window.Emitify = require('emitify');
+window.Emitify = require('emitify/legacy');
 
 window.CloudCmd = (config) => {
     window.Promise = window.Promise || require('es6-promise');

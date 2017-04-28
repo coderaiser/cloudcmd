@@ -2,7 +2,7 @@
 
 const itype = require('itype/legacy');
 const jonny = require('jonny');
-const Emitify = require('emitify');
+const Emitify = require('emitify/legacy');
 const exec = require('execon');
 const Images = require('./images');
 const Events = require('./events');
