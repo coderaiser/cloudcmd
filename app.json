@@ -17,6 +17,11 @@
           "value": "false",
           "required": false
       },
+      "CLOUDCMD_EDITOR": {
+          "description": "set editor",
+          "value": "edward",
+          "required": false
+      },
       "CLOUDCMD_TERMINAL": {
           "description": "enable terminal",
           "value": "true",

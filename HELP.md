@@ -329,6 +329,7 @@ Here is description of options:
 
 Some config options can be overridden with `environment variables` such:
 
+- `CLOUDCMD_EDITOR` - set editor
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog

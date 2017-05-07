@@ -51,7 +51,7 @@ const args = require('minimist')(argv.slice(2), {
         minify      : config('minify'),
         online      : config('online'),
         open        : config('open'),
-        editor      : config('editor') || 'edward',
+        editor      : choose(env('editor'), config('editor')) || 'edward',
         packer      : config('packer') || 'tar',
         zip         : config('zip'),
         username    : config('username'),
