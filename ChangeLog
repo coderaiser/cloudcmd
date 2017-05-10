@@ -1,3 +1,20 @@
+2017.05.10, v6.11.0
+
+fix:
+- (style) focus on click in IOS Safari
+
+feature:
+- (bower) smalltalk v2.2.1
+- (package) socket.io-client v2.0.1
+- (bower) jquery v3.2.1
+- (package) socket.io v2.0.1
+- (cloudcmd) add ability to override editor with CLOUDCMD_EDITOR environment variable
+- (modules) socket.io v1.7.4
+- (bower) philip v1.3.6
+- (package) emitify v3.0.2
+- (bower) rm emitify
+
+
 2017.04.25, v6.10.1
 
 fix:
