@@ -33,8 +33,8 @@
     "menu": "~1.0.2",
     "olark": "^1.0.0",
     "jquery": "3.2.1",
-    "smalltalk": "2.2.0",
     "fancybox": "^2.1.6",
-    "philip": "1.3.6"
+    "philip": "1.3.6",
+    "smalltalk": "2.2.1"
   }
 }

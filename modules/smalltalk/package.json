@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -63,7 +63,7 @@
     "url": "https://github.com/coderaiser/smalltalk/issues"
   },
   "devDependencies": {
-    "autoprefixer": "^6.3.7",
+    "autoprefixer": "^7.0.1",
     "babel-cli": "^6.1.1",
     "babel-preset-es2015": "^6.0.15",
     "browserify": "^14.0.0",
@@ -74,11 +74,11 @@
     "minify": "^2.0.0",
     "nodemon": "^1.9.2",
     "nyc": "^10.0.0",
-    "postcss-cli": "^2.5.2",
+    "postcss-cli": "^4.0.0",
     "promise-polyfill": "^6.0.0",
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
-    "sinon": "^1.17.4",
+    "sinon": "^2.0.0",
     "stylelint": "^7.0.2",
     "stylelint-config-standard": "^16.0.0",
     "systemjs": "^0.20.2",

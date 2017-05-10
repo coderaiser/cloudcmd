@@ -1,3 +1,15 @@
+2017.05.10, v2.2.1
+
+fix:
+- feature(package) autoprefixer v7.0.1
+
+feature:
+- (package) postcss-cli v4.0.0
+- (package) autoprefixer v7.0.1
+- (package) postcss-cli v3.0.0
+- (package) sinon v2.0.0
+
+
 2017.02.24, v2.2.0
 
 fix:
