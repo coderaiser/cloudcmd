@@ -3,12 +3,18 @@
 const path = require('path');
 const test = require('tape');
 
+const diff = require('sinon-called-with-diff');
+const sinon = diff(require('sinon'));
+
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 
-const modulesPath = path.join(__dirname, '..', '..', 'json', 'modules.json');
+const dir = path.join(__dirname, '..', '..');
+const modulesPath = path.join(dir, 'json', 'modules.json');
+
 const localModules  = require(modulesPath);
+const modulas = require(`${dir}/server/modulas`);
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 const _pullout = promisify(pullout);
@@ -63,5 +69,18 @@ test('cloudcmd: modules: wrong route', (t) => {
             })
             .catch(console.error);
     });
+});
+
+test('cloudcmd: modules: no', (t) => { 
+    const fn = modulas();
+    const url = '/json/modules.json';
+    const send = sinon.stub();
+    
+    fn({url}, {
+        send
+    });
+    
+    t.ok(send.calledWith(localModules), 'should have been called with modules');
+    t.end();
 });
 

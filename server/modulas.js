@@ -3,8 +3,8 @@
 const deepmerge = require('deepmerge');
 const originalModules = require('../json/modules');
 
-module.exports = (modules = {}) => {
-    const result = deepmerge(originalModules, modules);
+module.exports = (modules) => {
+    const result = deepmerge(originalModules, modules || {});
     
     return (req, res, next) => {
         if (req.url !== '/json/modules.json')
