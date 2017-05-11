@@ -81,11 +81,14 @@ const args = require('minimist')(argv.slice(2), {
     }
 });
 
-if (args.version) {
+if (args.version)
     version();
-} else if (args.help) {
+else if (args.help)
     help();
-} else {
+else
+    main();
+
+function main() {
     if (args.repl)
         repl();
     

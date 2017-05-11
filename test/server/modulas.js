@@ -71,7 +71,7 @@ test('cloudcmd: modules: wrong route', (t) => {
     });
 });
 
-test('cloudcmd: modules: no', (t) => { 
+test('cloudcmd: modules: no', (t) => {
     const fn = modulas();
     const url = '/json/modules.json';
     const send = sinon.stub();

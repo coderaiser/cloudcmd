@@ -1,10 +1,8 @@
 'use strict';
 
-const os = require('os');
 const path = require('path');
 
 const test = require('tape');
-const readjson = require('readjson');
 
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
@@ -12,8 +10,6 @@ const sinon = diff(require('sinon'));
 const dir = path.join(__dirname, '..', '..', 'server');
 const pathConfig = path.join(dir, 'config');
 const pathRoot = `${dir}/root`;
-
-const root = require(pathRoot);
 
 const clean = (name) => {
     delete require.cache[require.resolve(name)];
