@@ -313,46 +313,44 @@ function getULElement(element) {
 function setCurrentFileByEvent(event) {
     const BUTTON_LEFT = 0;
     
-    let fromName;
-    let toName;
-    let files = [];
-    let key = {
+    const key = {
         ctrl: event.ctrlKey,
         meta: event.metaKey,
         shift: event.shiftKey
     };
     
-    let element     = getLIElement(event.target);
+    const element = getLIElement(event.target);
     
-    fromName = Info.name;
+    const fromName = Info.name;
     DOM.setCurrentFile(element);
-    toName = Info.name;
+    const toName = Info.name;
+    
+    let files = [];
     
     if (key.shift)
         files = getFilesRange(fromName, toName);
     else
         files.push(Info.element);
-        
+    
     if (event.button === BUTTON_LEFT)
         toggleSelect(key, files);
 }
 
 function getFilesRange(from, to) {
-    let i           = 0,
-        delta       = 0,
-        result      = [],
-        files       = DOM.getFiles(),
-        names       = DOM.getFilenames(files),
-        indexFrom,
-        indexTo;
+    let i = 0;
+    let delta = 0;
+    
+    const result = [];
+    const files = DOM.getFiles();
+    const names = DOM.getFilenames(files);
     
     if (names[0] === '..') {
         names.shift();
         delta = 1;
     }
     
-    indexFrom   = names.indexOf(from);
-    indexTo     = names.indexOf(to);
+    const indexFrom = names.indexOf(from);
+    const indexTo = names.indexOf(to);
     
     if (indexFrom < indexTo)
         for (i = indexFrom; i <= indexTo; i++)
@@ -394,6 +392,7 @@ function dragndrop() {
             panel.classList.remove('selected-panel');
         });
     };
+    
     const onDrop = (event) => {
         const files = event.dataTransfer.files;
         const items = event.dataTransfer.items;
@@ -403,11 +402,11 @@ function dragndrop() {
         if (!items || !items.length || !items[0].webkitGetAsEntry)
             return uploadFiles(files);
         
-        const dirFiles = [...items].filter((item) => {
-            return item.kind === 'file';
-        });
+        const isFile = (item) => item.kind === 'file';
+        const dirFiles = [...items].filter(isFile);
         
-        DOM.uploadDirectory(dirFiles);
+        if (dirFiles.length)
+            return DOM.uploadDirectory(dirFiles);
     };
     
     /**
@@ -437,31 +436,29 @@ function dragndrop() {
 }
 
 function unload() {
-    DOM.Events.add(['unload', 'beforeunload'], function (event) {
-        var ret,
-            Key     = CloudCmd.Key,
-            isBind  = Key && Key.isBind();
+    DOM.Events.add(['unload', 'beforeunload'], (event) => {
+        const Key = CloudCmd.Key;
+        const isBind = Key && Key.isBind();
         
-        if (!isBind) {
-            event.preventDefault();
-            ret = 'Please make sure that you saved all work.';
-        }
+        if (isBind)
+            return;
         
-        return ret;
+        event.preventDefault();
+        return 'Please make sure that you saved all work.';
     });
 }
 
 function pop() {
     Events.add('popstate', (event) => {
-        const path = event.state || ''
-            .replace(FS, '');
+        const path = event.state.replace(FS, '');
         
         if (!path)
             return CloudCmd.route(location.hash);
         
+        const history = false;
         CloudCmd.loadDir({
-            path        : path,
-            history     : false
+            path,
+            history,
         });
     });
 }
