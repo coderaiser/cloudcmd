@@ -10,15 +10,15 @@ const root = '../../';
 const dir = root + 'server/';
 const config = require(dir + 'config');
 
-const pathConfig = path.join(os.homedir(), '.cloudcmd.json');
-const localConfig = path.join(__dirname, '..', '..', 'json', 'config.json');
+const pathHomeConfig = path.join(os.homedir(), '.cloudcmd.json');
+const pathConfig = path.join(__dirname, '..', '..', 'json', 'config.json');
 
 const clean = (name) => {
     delete require.cache[require.resolve(name)];
 };
 
 function readConfig() {
-    return readjson.sync.try(pathConfig) || require(localConfig);
+    return readjson.sync.try(pathHomeConfig) || require(pathConfig);
 }
 
 const before = require('../before');
@@ -57,8 +57,9 @@ test('config: manage: get: *', (t) => {
     
     const config = require(dir + 'config');
     const data = config('*');
+    const expected = Object.assign({}, require(pathConfig), readConfig());
     
-    t.deepEqual(data, readConfig(), 'should return config data');
+    t.deepEqual(data, expected, 'should return config data');
     t.end();
 });
 

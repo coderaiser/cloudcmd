@@ -24,28 +24,25 @@ const apiURL = CloudFunc.apiURL;
 const ConfigPath = path.join(DIR, 'json/config.json');
 const ConfigHome = path.join(HOME, '.cloudcmd.json');
 
-const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
-    mode: 'json'
-});
+const readjsonSync = (name) => {
+    return jju.parse(fs.readFileSync(name, 'utf8'), {
+        mode: 'json'
+    });
+};
+
+const rootConfig = readjsonSync(ConfigPath);
 
 const key = (a) => Object.keys(a).pop();
 
-let config;
+let configHome;
 let error = tryCatch(() => {
-    config = readjsonSync(ConfigHome);
+    configHome = readjsonSync(ConfigHome);
 });
 
-if (error) {
-    if (error.code !== 'ENOENT')
-        console.error('cloudcmd --config ~/.cloudcmd.json:', error.message);
-    
-    error = tryCatch(() => {
-        config = readjsonSync(ConfigPath);
-    });
-    
-    if (error)
-        exit('cloudcmd --config', ConfigPath + ':', error.message);
-}
+if (error && error.code !== 'ENOENT')
+    exit(`cloudcmd --config ${ConfigHome}: ${error.message}`);
+
+const config = Object.assign({}, rootConfig, configHome);
 
 module.exports          = manage;
 module.exports.save     = save;
