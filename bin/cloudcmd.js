@@ -51,12 +51,12 @@ const args = require('minimist')(argv.slice(2), {
         minify      : config('minify'),
         online      : config('online'),
         open        : config('open'),
-        editor      : choose(env('editor'), config('editor')) || 'edward',
+        editor      : choose(env('editor'), config('editor')),
         packer      : config('packer') || 'tar',
         zip         : config('zip'),
         username    : config('username'),
-        root        : config('root') || '/',
-        prefix      : config('prefix') || '',
+        root        : config('root'),
+        prefix      : config('prefix'),
         progress    : config('progress'),
         console     : config('console'),
         terminal    : choose(env.bool('terminal'), config('terminal')),
@@ -124,11 +124,11 @@ if (args.version) {
     validateRoot(options.root);
     
     if (!args.save)
+        return start(options);
+    
+    config.save(() => {
         start(options);
-    else
-        config.save(() => {
-            start(options);
-        });
+    });
 }
 
 function validateRoot(root) {
