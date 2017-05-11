@@ -82,11 +82,8 @@ module.exports = (params) => {
         config(name, value);
     });
     
-    const console = config('console');
-    const configDialog = config('configDialog');
-    
-    config('console', defaultValue(options.console, console));
-    config('configDialog', defaultValue(options.configDialog, configDialog));
+    config('console', defaultValue('console', options));
+    config('configDialog', defaultValue('configDialog', options));
     
     if (p.socket)
         listen(prefix, p.socket);
@@ -94,7 +91,10 @@ module.exports = (params) => {
     return cloudcmd(prefix, plugins, modules);
 };
 
-function defaultValue(value, previous) {
+function defaultValue(name, options) {
+    const value = options[name];
+    const previous = config(name);
+    
     if (typeof value === 'undefined')
         return previous;
     
