@@ -217,14 +217,12 @@ function toggleSelect(key, files) {
         throw Error('key should not be undefined!');
     
     if (isMac && key.meta || key.ctrl)
-        DOM.toggleSelectedFile(files[0]);
-    else if (key.shift)
-        files.forEach((current) => {
-            if (!DOM.isSelected(current))
-                DOM.toggleSelectedFile(current);
-        });
-    else
-        DOM.unselectFiles();
+        return DOM.toggleSelectedFile(files[0]);
+    
+    if (key.shift)
+        return files.forEach(DOM.selectFile);
+    
+    DOM.unselectFiles();
 }
 
 function changePanel(element) {
