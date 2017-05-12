@@ -116,12 +116,15 @@ module.exports.initKeysPanel = () => {
     });
 };
 
+const getPanel = (side) => {
+    if (!itype.string(side))
+        return side;
+    
+    return DOM.getByDataName('js-' + side);
+};
+
 module.exports.setOnPanel = (side) => {
-    let panel;
-    if (itype.string(side))
-        panel = DOM.getByDataName('js-' + side);
-    else
-        panel = side;
+    const panel = getPanel(side);
     
     const filesElement = DOM.getByDataName('js-files', panel);
     const pathElement = DOM.getByDataName('js-path', panel);
@@ -132,7 +135,7 @@ module.exports.setOnPanel = (side) => {
 };
 
 function getPathListener(panel) {
-    return  onPathElementClick.bind(null, panel);
+    return onPathElementClick.bind(null, panel);
 }
 
 function isNoCurrent(panel) {
@@ -425,7 +428,7 @@ function dragndrop() {
         
         event.preventDefault();
     };
-        
+    
     Events.add('dragenter', select);
     Events.add(['dragleave', 'drop'], unselect);
     
