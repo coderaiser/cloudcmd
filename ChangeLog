@@ -1,3 +1,13 @@
+2017.05.12, v6.12.0
+
+fix:
+- (listeners) getFileRange: select with shift + click
+
+feature:
+- (listeners) add ability to copy files with help of drag n drop (#114)
+- (config) add ability to override absent values in config
+
+
 2017.05.10, v6.11.0
 
 fix:
