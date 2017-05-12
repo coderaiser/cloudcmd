@@ -216,8 +216,10 @@ function toggleSelect(key, files) {
     if (!key)
         throw Error('key should not be undefined!');
     
+    const [file] = files;
+    
     if (isMac && key.meta || key.ctrl)
-        return DOM.toggleSelectedFile(files[0]);
+        return DOM.toggleSelectedFile(file);
     
     if (key.shift)
         return files.forEach(DOM.selectFile);
