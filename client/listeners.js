@@ -340,31 +340,20 @@ function setCurrentFileByEvent(event) {
 }
 
 function getFilesRange(from, to) {
-    let i = 0;
-    let delta = 0;
-    
-    const result = [];
-    const files = DOM.getFiles();
+    const files = [...DOM.getFiles()];
     const names = DOM.getFilenames(files);
     
-    if (names[0] === '..') {
-        names.shift();
-        delta = 1;
-    }
-    
-    const indexFrom = names.indexOf(from);
-    const indexTo = names.indexOf(to);
+    const indexFrom = names.indexOf(from) + 1;
+    const indexTo = names.indexOf(to) + 1;
     
     if (indexFrom < indexTo)
-        for (i = indexFrom; i <= indexTo; i++)
-            result.push(files[i + delta]);
-    else if (indexFrom > indexTo)
-        for (i = indexFrom; i >= indexTo; i--)
-            result.push(files[i + delta]);
-    else
-        result.push(to);
+        return files.slice(indexFrom, indexTo + 1);
     
-    return result;
+    if (indexFrom > indexTo)
+        return files.slice(indexTo, indexFrom + 1);
+    
+    const file = DOM.getCurrentByName(to);
+    return [file];
 }
 
 function contextMenu() {
