@@ -4,6 +4,7 @@
 
 const exec = require('execon');
 const itype = require('itype/legacy');
+const currify = require('currify/legacy');
 
 const uploadFiles = require('./dom/upload-files');
 
@@ -24,12 +25,33 @@ module.exports.init = () => {
 
 CloudCmd.Listeners = module.exports;
 
+const unselect = (event) => {
+    const isMac = /Mac/.test(window.navigator.platform);
+    const {
+        shiftKey,
+        metaKey,
+        ctrlKey,
+    } = event;
+    
+    if (shiftKey || isMac && metaKey || ctrlKey)
+        return;
+    
+    DOM.unselectFiles();
+};
+
+const execAll = currify((funcs, event) => {
+    funcs.forEach((fn) => {
+        fn(event);
+    });
+});
+
+
 const Info = DOM.CurrentInfo;
 const Storage = DOM.Storage;
 const Events = DOM.Events;
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
-    click: onClick,
+    click: execAll([onClick, unselect]),
     dragstart: exec.with(execIfNotUL, onDragStart),
     dblclick: exec.with(execIfNotUL, onDblClick),
     touchstart: exec.with(execIfNotUL, onTouch)
@@ -226,8 +248,6 @@ function toggleSelect(key, files) {
     
     if (key.shift)
         return files.forEach(DOM.selectFile);
-    
-    DOM.unselectFiles();
 }
 
 function changePanel(element) {
@@ -317,6 +337,7 @@ function setCurrentFileByEvent(event) {
     const BUTTON_LEFT = 0;
     
     const key = {
+        alt: event.altKey,
         ctrl: event.ctrlKey,
         meta: event.metaKey,
         shift: event.shiftKey
@@ -388,10 +409,11 @@ function dragndrop() {
     const onDrop = (event) => {
         const files = event.dataTransfer.files;
         const items = event.dataTransfer.items;
+        const {length: filesCount} = files;
         
         event.preventDefault();
         
-        if (!items || !items.length || !items[0].webkitGetAsEntry)
+        if (filesCount && (!items || !items.length || !items[0].webkitGetAsEntry))
             return uploadFiles(files);
         
         const isFile = (item) => item.kind === 'file';
@@ -399,6 +421,8 @@ function dragndrop() {
         
         if (dirFiles.length)
             return DOM.uploadDirectory(dirFiles);
+        
+        return CloudCmd.Operation.show('copy');
     };
     
     /**
