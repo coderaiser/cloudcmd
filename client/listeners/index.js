@@ -5,13 +5,16 @@
 const exec = require('execon');
 const itype = require('itype/legacy');
 const currify = require('currify/legacy');
+const getRange = require('./get-range');
 
-const uploadFiles = require('./dom/upload-files');
+const getIndex = currify(require('./get-index'));
+
+const uploadFiles = require('../dom/upload-files');
 
 const {
     FS,
     apiURL
-} = require('../common/cloudfunc');
+} = require('../../common/cloudfunc');
 
 module.exports.init = () => {
     contextMenu();
@@ -24,15 +27,6 @@ module.exports.init = () => {
 };
 
 CloudCmd.Listeners = module.exports;
-
-const getIndex = currify((array, item) =>{
-    const index = array.indexOf(item);
-    
-    if (!~index)
-        return 0;
-    
-    return index;
-});
 
 const unselect = (event) => {
     const isMac = /Mac/.test(window.navigator.platform);
@@ -378,16 +372,6 @@ function getFilesRange(from, to) {
     const indexTo = getNameIndex(to);
     
     return getRange(indexFrom, indexTo, files);
-}
-
-function getRange(indexFrom, indexTo, files) {
-    if (indexFrom < indexTo)
-        return files.slice(indexFrom, indexTo + 1);
-    
-    if (indexFrom > indexTo)
-        return files.slice(indexTo, indexFrom + 1);
-    
-    return files[indexFrom];
 }
 
 function contextMenu() {
