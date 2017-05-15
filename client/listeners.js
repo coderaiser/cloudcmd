@@ -25,6 +25,15 @@ module.exports.init = () => {
 
 CloudCmd.Listeners = module.exports;
 
+const getIndex = currify((array, item) =>{
+    const index = array.indexOf(item);
+    
+    if (!~index)
+        return 0;
+    
+    return index;
+});
+
 const unselect = (event) => {
     const isMac = /Mac/.test(window.navigator.platform);
     const {
@@ -361,20 +370,24 @@ function setCurrentFileByEvent(event) {
 }
 
 function getFilesRange(from, to) {
-    const files = [...DOM.getFiles()];
+    const files = [...DOM.getFiles()].slice(1);
     const names = DOM.getFilenames(files);
+    const getNameIndex = getIndex(names);
     
-    const indexFrom = names.indexOf(from) + 1;
-    const indexTo = names.indexOf(to) + 1;
+    const indexFrom = getNameIndex(from);
+    const indexTo = getNameIndex(to);
     
+    return getRange(indexFrom, indexTo, files);
+}
+
+function getRange(indexFrom, indexTo, files) {
     if (indexFrom < indexTo)
         return files.slice(indexFrom, indexTo + 1);
     
     if (indexFrom > indexTo)
         return files.slice(indexTo, indexFrom + 1);
     
-    const file = DOM.getCurrentByName(to);
-    return [file];
+    return files[indexFrom];
 }
 
 function contextMenu() {
