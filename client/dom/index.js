@@ -522,6 +522,10 @@ function CmdProto() {
     
     this.toggleSelectedFile = (currentFile) => {
         const current = currentFile || DOM.getCurrentFile();
+        const name = DOM.getCurrentName(current);
+        
+        if (name === '..')
+            return Cmd;
         
         current.classList.toggle(SELECTED_FILE);
         
