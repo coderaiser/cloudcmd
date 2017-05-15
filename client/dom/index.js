@@ -862,9 +862,7 @@ function CmdProto() {
     
     this.getFiles = (element) => {
         const files = DOM.getByDataName('js-files', element);
-        const ret = files.children || [];
-        
-        return ret;
+        return files.children || [];
     };
     
     /**
@@ -1060,35 +1058,36 @@ function CmdProto() {
         return ret;
     };
     
-    this.changePanel            = () => {
-        var dataName, files, current,
-            
-            panel           = DOM.getPanel(),
-            panelPassive    = DOM.getPanel({
-                active: false
-            }),
-            
-            name            = DOM.getCurrentName(),
-            
-            filesPassive    = DOM.getFiles(panelPassive);
+    this.changePanel = () => {
+        let panel = DOM.getPanel();
+        const panelPassive = DOM.getPanel({
+            active: false
+        });
         
-        dataName            = panel.getAttribute('data-name');
-        TabPanel[dataName]  = name;
+        let name = DOM.getCurrentName();
+        const filesPassive = DOM.getFiles(panelPassive);
         
-        panel           = panelPassive;
-        dataName        = panel.getAttribute('data-name');
+        let dataName = panel.getAttribute('data-name');
         
-        name            = TabPanel[dataName];
+        TabPanel[dataName] = name;
+         
+        panel = panelPassive;
+        dataName = panel.getAttribute('data-name');
+        
+        name = TabPanel[dataName];
+        
+        let files;
+        let current;
         
         if (name) {
-            current     = DOM.getCurrentByName(name, panel);
+            current = DOM.getCurrentByName(name, panel);
             
             if (current)
-                files       = current.parentElement;
+                files = current.parentElement;
         }
         
         if (!files || !files.parentElement) {
-            current     = DOM.getCurrentByName(name, panel);
+            current = DOM.getCurrentByName(name, panel);
             
             if (!current)
                 current = filesPassive[0];
@@ -1101,7 +1100,7 @@ function CmdProto() {
         return DOM;
     };
     
-    this.getPackerExt = function(type) {
+    this.getPackerExt = (type) => {
         if (type === 'zip')
             return '.zip';
         
