@@ -552,7 +552,7 @@ function CmdProto() {
         const from = (a) => a === '..' ? 1 : 0;
         const i = from(name);
         
-        return [].slice.call(files, i);
+        return [...files].slice(i);
     };
     
     /**

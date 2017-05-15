@@ -370,7 +370,7 @@ function setCurrentFileByEvent(event) {
 }
 
 function getFilesRange(from, to) {
-    const files = [...DOM.getFiles()].slice(1);
+    const files = DOM.getAllFiles();
     const names = DOM.getFilenames(files);
     const getNameIndex = getIndex(names);
     
