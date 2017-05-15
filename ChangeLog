@@ -1,3 +1,14 @@
+2017.05.15, v6.13.0
+
+fix:
+- (getFilesRange) avoid selecting of ".."
+
+feature:
+- (cloudcmd) add terminal button (#115)
+- (listeners) add get-index, get-range
+- (dom) toggleSelect only when not ".."
+
+
 2017.05.12, v6.12.0
 
 fix:
