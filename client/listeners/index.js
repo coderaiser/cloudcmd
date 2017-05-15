@@ -134,6 +134,7 @@ module.exports.initKeysPanel = () => {
             'f9'        : CloudCmd.Menu.show,
             'f10'       : CloudCmd.Config.show,
             '~'         : CloudCmd.Konsole.show,
+            'shift~'    : CloudCmd.Terminal.show,
             'contact'   : CloudCmd.Contact.show,
         };
        

@@ -127,3 +127,8 @@
     font-family : 'Fontello';
     content     : '\e81a  ';
 }
+
+.icon-terminal::before {
+    font-family : 'Fontello';
+    content     : '\e81b  ';
+}

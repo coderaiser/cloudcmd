@@ -59,6 +59,7 @@ function indexProcessing(options) {
     const isOnePanel = config('onePanelMode');
     const noConfig = !config('configDialog');
     const noConsole = !config('console');
+    const noTerminal = !config('terminal');
     const panel = options.panel;
     
     let data = options.data;
@@ -89,6 +90,10 @@ function indexProcessing(options) {
     if (noConsole)
         data = data
              .replace('icon-console', 'icon-console none');
+    
+    if (noTerminal)
+        data = data
+             .replace('icon-terminal', 'icon-termianl none');
     
     let left = rendy(Template.panel, {
         side        : 'left',
