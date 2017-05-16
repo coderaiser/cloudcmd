@@ -54,7 +54,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         
         if (isDir)
             return `${name}.json`;
-            
+        
         return name;
     }
     
