@@ -1,8 +1,8 @@
 'use strict';
 
 const rendy = require('rendy');
-const Entity = require('./entity');
-const store = require('../common/store');
+const Entity = require('./common/entity');
+const store = require('./common/store');
 
 /* КОНСТАНТЫ (общие для клиента и сервера)*/
 
