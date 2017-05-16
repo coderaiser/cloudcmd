@@ -93,7 +93,7 @@ function indexProcessing(options) {
     
     if (noTerminal)
         data = data
-             .replace('icon-terminal', 'icon-termianl none');
+             .replace('icon-terminal', 'icon-terminal none');
     
     let left = rendy(Template.panel, {
         side        : 'left',
