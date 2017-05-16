@@ -2,6 +2,7 @@
 
 const rendy = require('rendy');
 const Entity = require('./entity');
+const store = require('../common/store');
 
 /* КОНСТАНТЫ (общие для клиента и сервера)*/
 
@@ -224,15 +225,5 @@ function getSize(size) {
         return '&lt;dir&gt;';
     
     return size;
-}
-
-function store() {
-    const data = {};
-    return (value) => {
-        if (typeof value !== 'undefined')
-            data.value = value;
-        
-        return data.value;
-    };
 }
 

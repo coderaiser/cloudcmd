@@ -64,16 +64,17 @@ function EditProto(callback) {
     function initConfig(options = {}) {
         const config = Object.assign({}, options, ConfigView);
         
-        if (options.afterShow) {
-            checkFn('options.afterShow', options.afterShow);
-            
-            const afterShow = {config};
-            
-            config.afterShow = () => {
-                afterShow();
-                options.afterShow();
-            };
-        }
+        if (!options.afterShow)
+            return config;
+        
+        checkFn('options.afterShow', options.afterShow);
+        
+        const afterShow = {config};
+        
+        config.afterShow = () => {
+            afterShow();
+            options.afterShow();
+        };
         
         return config;
     }

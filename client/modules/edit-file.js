@@ -3,6 +3,14 @@
 /* global CloudCmd, DOM, MenuIO */
 
 const Format = require('format-io');
+const currify = require('currify/legacy');
+const squad = require('squad');
+const store = require('../../common/store');
+
+const call = currify((fn, callback) => {
+    fn();
+    callback();
+});
 
 CloudCmd.EditFile = function EditFileProto(callback) {
     const Info = DOM.CurrentInfo;
@@ -25,26 +33,19 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     };
     
     function init(callback) {
-        let editor;
+        const editor = store();
+        
+        const getMainEditor = () => CloudCmd.Edit.getEditor();
+        const getEditor = squad(editor, getMainEditor);
+        const auth = squad(authCheck, editor);
+        const listeners = squad(setListeners, editor);
         
         exec.series([
             CloudCmd.Edit,
-            (callback) => {
-                editor = CloudCmd.Edit.getEditor();
-                callback();
-            },
-            (callback) => {
-                authCheck(editor);
-                callback();
-            },
-            
-            (callback) => {
-                setListeners(editor);
-                callback();
-            },
-            (callback) => {
-                EditFile.show(callback);
-            },
+            call(getEditor),
+            call(auth),
+            call(listeners),
+            EditFile.show,
         ], callback);
     }
     
