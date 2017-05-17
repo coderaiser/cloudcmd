@@ -1,3 +1,15 @@
+2017.05.17, v6.14.0
+
+fix:
+- (route) termianl -> terminal
+
+feature:
+- (edit-file-vim) editor: add vim mode on shift + f4
+- (bower) smalltalk v2.3.1
+- (package) rm recess
+- (store) add
+
+
 2017.05.15, v6.13.0
 
 fix:
