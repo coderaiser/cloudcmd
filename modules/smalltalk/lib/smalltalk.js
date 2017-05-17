@@ -1,5 +1,7 @@
 'use strict';
 
+window.Promise = window.Promise || require('es6-promise');
+
 const currify = require('currify/legacy');
 const keyDown = currify(keyDown_);
 
@@ -13,7 +15,7 @@ exports.alert = (title, msg) => {
 };
 
 exports.prompt = (title, msg, value = '', options) => {
-    const val = value.replace(/\"/g, '&quot;');
+    const val = String(value).replace(/\"/g, '&quot;');
     const valueStr = `<input type="text" value="${ val }" data-name="js-input">`;
     
     return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);

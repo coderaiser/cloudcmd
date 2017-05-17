@@ -21,7 +21,8 @@
     "**/.*",
     "screen",
     "example",
-    "test"
+    "test",
+    "webpack.config.js"
   ],
   "dependencies": {}
 }

@@ -1,3 +1,21 @@
+2017.05.17, v2.3.1
+
+feature:
+- (bower) ignore: add webpack.config.js
+
+
+2017.05.17, v2.3.0
+
+feature:
+- (package) browserify -> webpack: add sourcemaps
+
+
+2017.05.16, v2.2.2
+
+fix:
+- (smalltalk) prompt value is a number
+
+
 2017.05.10, v2.2.1
 
 fix:

@@ -1,6 +1,6 @@
 {
   "name": "smalltalk",
-  "version": "2.2.1",
+  "version": "2.3.1",
   "description": "Promise-based Alert, Confirm and Prompt replacement",
   "homepage": "http://github.com/coderaiser/smalltalk",
   "repository": {
@@ -8,9 +8,6 @@
     "url": "git://github.com/coderaiser/smalltalk.git"
   },
   "main": "lib/smalltalk.js",
-  "config": {
-    "poly": "node_modules/promise-polyfill/promise.min.js"
-  },
   "babel": {
     "presets": [
       "es2015"
@@ -18,33 +15,21 @@
   },
   "scripts": {
     "watch": "nodemon --watch lib --watch test --exec",
+    "watch:client": "redrun compile:client -- --watch",
     "watch:test": "npm run watch -- npm test",
     "watch:lint": "npm run watch -- 'npm run lint'",
     "watch:lint:js": "npm run watch -- \"run lint:js\"",
     "watch:coverage": "redrun watch -- redrun coverage",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
-    "compile:js": "babel -d legacy lib",
-    "compile:css": "postcss css/*.css -d dist --use autoprefixer",
-    "minify:css": "minify dist/smalltalk.css > dist/smalltalk.min.css",
-    "minify:js": "minify dist/smalltalk.js > dist/smalltalk.min.js",
-    "minify:js-native": "minify dist/smalltalk.native.js > dist/smalltalk.native.min.js",
-    "build:js-poly": "cat $npm_package_config_poly dist/smalltalk.min.js > dist/smalltalk.poly.min.js",
-    "build:js-poly-native": "cat $npm_package_config_poly dist/smalltalk.native.min.js > dist/smalltalk.native.poly.min.js",
-    "build:js-full": "redrun bundle:js minify:js build:js-poly",
-    "build:js-native-full": "redrun bundle:js:native minify:js-native build:js-poly-native",
-    "build": "redrun build:js build:css",
-    "build:js": "redrun compile:js build:js-full build:js-native-full legacy:index clean:js",
-    "build:css": "redrun compile:css minify:css clean:css",
-    "bundle:base": "browserify -s smalltalk --ng false",
-    "bundle:js": "redrun bundle:base -- -r ./legacy/smalltalk.js:smalltalk ./legacy/smalltalk.js -o dist/smalltalk.js",
-    "bundle:js:native": "redrun bundle:base -- -r ./legacy/smalltalk.native.js:smalltalk ./legacy/smalltalk.native.js -o dist/smalltalk.native.js",
+    "compile:server": "babel -d legacy lib",
+    "compile:client": "webpack --progress",
+    "compile:client:poly": "BUILD_TYPE=poly webpack --progress",
+    "build": "redrun clean build:js build:css",
+    "build:js": "redrun compile:* legacy:index",
+    "build:css": "postcss css/*.css -o dist/smalltalk.min.css -m --use autoprefixer postcss-clean",
     "legacy:index": "echo \"module.exports = require('./smalltalk');\" > legacy/index.js",
-    "clean:js": "rimraf dist/smalltalk.js dist/smalltalk.native.js",
-    "clean:css": "rimraf dist/smalltalk.css",
-    "bower": "bower",
-    "babel": "babel",
-    "minify": "minify",
+    "clean": "rimraf dist",
     "wisdom": "npm run build",
     "lint:css": "stylelint css/*.css",
     "lint:js": "jshint lib test && jscs lib test && eslint lib test",
@@ -65,26 +50,28 @@
   "devDependencies": {
     "autoprefixer": "^7.0.1",
     "babel-cli": "^6.1.1",
+    "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.0.15",
-    "browserify": "^14.0.0",
     "coveralls": "^2.11.11",
     "eslint": "^3.0.1",
+    "glob": "^7.1.1",
     "jscs": "^3.0.3",
     "jshint": "^2.8.0",
-    "minify": "^2.0.0",
     "nodemon": "^1.9.2",
     "nyc": "^10.0.0",
+    "postcss-clean": "^1.0.2",
     "postcss-cli": "^4.0.0",
-    "promise-polyfill": "^6.0.0",
     "redrun": "^5.0.1",
     "rimraf": "^2.5.3",
     "sinon": "^2.0.0",
     "stylelint": "^7.0.2",
     "stylelint-config-standard": "^16.0.0",
     "systemjs": "^0.20.2",
-    "tape": "^4.6.0"
+    "tape": "^4.6.0",
+    "webpack": "^2.5.1"
   },
   "dependencies": {
-    "currify": "^2.0.3"
+    "currify": "^2.0.3",
+    "es6-promise": "^4.1.0"
   }
 }

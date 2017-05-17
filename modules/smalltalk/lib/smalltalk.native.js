@@ -1,7 +1,9 @@
 'use strict';
 
-exports.alert          = (title, message) => {
-    const promise = new Promise(function(resolve) {
+window.Promise = window.Promise || require('es6-promise');
+
+exports.alert = (title, message) => {
+    const promise = new Promise((resolve) => {
         alert(message);
         resolve();
     });
@@ -9,32 +11,33 @@ exports.alert          = (title, message) => {
     return promise;
 };
 
-exports.prompt         = (title, message, value, options) => {
-    const o     = options,
-        promise = new Promise(function(resolve, reject) {
-            const noCancel = o && !o.cancel,
-                result  = prompt(message, value);
-            
-            if (result !== null)
-                resolve(result);
-            else if (!noCancel)
-                reject();
-        });
+exports.prompt = (title, message, value, options) => {
+    const o = options;
+    const promise = new Promise((resolve, reject) => {
+        const noCancel = o && !o.cancel;
+        const result = prompt(message, value);
+        
+        if (result !== null)
+            return resolve(result);
+        
+        if (!noCancel)
+            reject();
+    });
     
     return promise;
 };
 
-exports.confirm         = (title, message, options) => {
-    const o         = options,
-        noCancel    = o && !o.cancel,
-        promise     = new Promise(function(resolve, reject) {
-            const is = confirm(message);
-            
-            if (is || noCancel)
-                resolve();
-            else
-                reject();
-        });
+exports.confirm = (title, message, options) => {
+    const o = options;
+    const noCancel = o && !o.cancel;
+    const promise = new Promise((resolve, reject) => {
+        const is = confirm(message);
+        
+        if (is || noCancel)
+            return resolve();
+        
+        reject();
+    });
     
     return promise;
 };

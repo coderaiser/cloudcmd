@@ -1,6 +1,5 @@
 # Smalltalk [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage][CoverageIMGURL]][CoverageURL]
 
-
 Simple [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based replacement of native Alert, Confirm and Prompt.
 
 # Install
@@ -69,7 +68,7 @@ When `webpack` `rollup` or `browserify` used, you can import `es5` version with:
 import smalltalk from 'smalltalk/legacy';
 ```
 
-#License
+# License
 MIT
 
 [NPMIMGURL]:                https://img.shields.io/npm/v/smalltalk.svg?style=flat
