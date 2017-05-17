@@ -38,6 +38,7 @@ const Config = {
         exec(callback);
     },
     beforeClose: (callback) => {
+        Events.rmKey(listener);
         Key.setBind();
         exec(callback);
         hideOverlay();
@@ -91,8 +92,6 @@ function ViewProto(callback) {
         Events.add(name, Overlay, onOverLayClick);
     });
     
-    Events.addKey(listener);
-    
     return module.exports;
 }
 
@@ -101,6 +100,9 @@ function show(data, options) {
     
     if (Loading)
         return;
+    
+    if (options && options.bindKeys !== false)
+        Events.addKey(listener);
     
     El = $('<div class="view" tabindex=0>');
     

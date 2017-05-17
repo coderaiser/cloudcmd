@@ -127,6 +127,7 @@ Hot keys
 | `F3`                  | view
 | `Shift + F3`          | view as `markdown`
 | `F4`                  | edit
+| `Shift + F4`          | edit in `vim` mode
 | `F5`                  | copy
 | `F6`                  | rename/move
 | `F7`                  | new directory
@@ -191,6 +192,7 @@ Edit
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F4`                  | open
+| `Shift + F4`          | open in `vim` mode
 | `Esc`                 | close
 
 For more details see [Edward hot keys][EDWARD_KEYS].

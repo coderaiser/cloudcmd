@@ -58,7 +58,6 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
             .getEditor()
             .setValueFirst('edit-names', names)
             .setMode()
-            .setOption('fontSize', 16)
             .disableKey();
         
         DOM.Events.addKey(keyListener);

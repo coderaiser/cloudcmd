@@ -2,6 +2,7 @@
     "local": [
         "edit",
         "edit-file",
+        "edit-file-vim",
         "edit-names",
         "menu",
         "view",

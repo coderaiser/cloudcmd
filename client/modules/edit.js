@@ -84,6 +84,14 @@ function EditProto(callback) {
             return;
          
         CloudCmd.View.show(Element, initConfig(options));
+        
+        Edit.getEditor()
+            .setOptions({
+                keyMap: 'default',
+                fontSize: 16,
+            });
+        
+        return Edit;
     };
     
     Edit.getEditor = () => {
@@ -96,6 +104,7 @@ function EditProto(callback) {
     
     Edit.hide = () => {
         CloudCmd.View.hide();
+        return Edit;
     };
     
     function _loadFiles(element, callback) {

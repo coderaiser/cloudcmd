@@ -300,7 +300,11 @@ function KeyProto() {
             break;
         
         case Key.F4:
-            CloudCmd.EditFile.show();
+            if (shift)
+                CloudCmd.EditFileVim.show();
+            else
+                CloudCmd.EditFile.show();
+            
             event.preventDefault();
             break;
         

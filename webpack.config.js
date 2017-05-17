@@ -43,6 +43,7 @@ module.exports = {
         cloudcmd: `${dir}/cloudcmd.js`,
         [modules + '/edit']: `${dirModules}/edit.js`,
         [modules + '/edit-file']: `${dirModules}/edit-file.js`,
+        [modules + '/edit-file-vim']: `${dirModules}/edit-file-vim.js`,
         [modules + '/edit-names']: `${dirModules}/edit-names.js`,
         [modules + '/menu']: `${dirModules}/menu.js`,
         [modules + '/view']: `${dirModules}/view.js`,

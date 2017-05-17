@@ -6,16 +6,19 @@ const Format = require('format-io');
 const currify = require('currify/legacy');
 const squad = require('squad');
 const store = require('../../common/store');
+const Key = CloudCmd.Key;
+
+const Events = require('../dom/events');
 
 const call = currify((fn, callback) => {
     fn();
     callback();
 });
 
-CloudCmd.EditFile = function EditFileProto(callback) {
+CloudCmd.EditFileVim = function EditFileVimProto(callback) {
     const Info = DOM.CurrentInfo;
     const Dialog = DOM.Dialog;
-    const EditFile = this;
+    const EditFileVim = this;
     const config = CloudCmd.config;
     
     let Menu;
@@ -26,7 +29,9 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     
     let MSG_CHANGED;
     const ConfigView  = {
+        bindKeys: false,
         beforeClose: () => {
+            Events.rmKey(listener);
             exec.ifExist(Menu, 'hide');
             isChanged();
         }
@@ -45,7 +50,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             call(getEditor),
             call(auth),
             call(listeners),
-            EditFile.show,
+            EditFileVim.show,
         ], callback);
     }
     
@@ -70,12 +75,17 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             
             setMsgChanged(name);
             
+            Events.addKey(listener);
+            
             CloudCmd.Edit
                 .show(ConfigView)
                 .getEditor()
                 .setValueFirst(path, data)
                 .setModeForPath(name)
-                .enableKey();
+                .enableKey()
+                .setOptions({
+                    keyMap: 'vim'
+                });
         });
     };
     
@@ -86,7 +96,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     function setListeners(editor) {
         const element = CloudCmd.Edit.getElement();
         
-        DOM.Events.addOnce('contextmenu', element, setMenu);
+        Events.addOnce('contextmenu', element, setMenu);
         
         editor.on('save', (value) => {
             DOM.setCurrentSize(Format.size(value));
@@ -155,7 +165,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
                     editor.minify();
                 },
                 'Close          Esc'    : () => {
-                    EditFile.hide();
+                    EditFileVim.hide();
                 }
             };
             
@@ -188,6 +198,11 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             .then(() => {
                 editor.save();
             });
+    }
+    
+    function listener({keyCode, shiftKey}) {
+        if (shiftKey && keyCode === Key.ESC)
+            EditFileVim.hide();
     }
     
     init(callback);
