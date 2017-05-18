@@ -5,6 +5,7 @@
 const Format = require('format-io');
 const currify = require('currify/legacy');
 const squad = require('squad');
+const exec = require('execon');
 const store = require('../../common/store');
 
 const call = currify((fn, callback) => {
@@ -15,12 +16,11 @@ const call = currify((fn, callback) => {
 CloudCmd.EditFile = function EditFileProto(callback) {
     const Info = DOM.CurrentInfo;
     const Dialog = DOM.Dialog;
-    const EditFile = this;
+    const EditFile = exec.bind();
     const config = CloudCmd.config;
     
     let Menu;
     
-    const exec = require('execon');
     const TITLE = 'Edit';
     const Images = DOM.Images;
     
@@ -40,12 +40,14 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         const auth = squad(authCheck, editor);
         const listeners = squad(setListeners, editor);
         
+        const show = callback ? exec : EditFile.show;
+        
         exec.series([
             CloudCmd.Edit,
             call(getEditor),
             call(auth),
             call(listeners),
-            EditFile.show,
+            show,
         ], callback);
     }
     
@@ -58,8 +60,12 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         return name;
     }
     
-    this.show = () => {
+    EditFile.show = (options) => {
+        const config = Object.assign({}, ConfigView, options);
+        
         Images.show.load();
+        
+        CloudCmd.Edit.show(config);
         
         Info.getData((error, data) => {
             const path = Info.path;
@@ -71,15 +77,16 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             setMsgChanged(name);
             
             CloudCmd.Edit
-                .show(ConfigView)
                 .getEditor()
                 .setValueFirst(path, data)
                 .setModeForPath(name)
                 .enableKey();
         });
+        
+        return CloudCmd.Edit;
     };
     
-    this.hide = () => {
+    EditFile.hide = () => {
         CloudCmd.Edit.hide();
     };
     
@@ -191,5 +198,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     }
     
     init(callback);
+    
+    return EditFile;
 };
 
