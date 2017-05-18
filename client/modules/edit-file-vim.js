@@ -1,5 +1,7 @@
 'use strict';
 
+/* global CloudCmd */
+
 const exec = require('execon');
 const Key = CloudCmd.Key;
 

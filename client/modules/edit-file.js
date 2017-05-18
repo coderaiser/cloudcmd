@@ -65,7 +65,9 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         
         Images.show.load();
         
-        CloudCmd.Edit.show(config);
+        CloudCmd.Edit
+            .getEditor()
+            .setOption('keyMap', 'default');
         
         Info.getData((error, data) => {
             const path = Info.path;
@@ -81,6 +83,8 @@ CloudCmd.EditFile = function EditFileProto(callback) {
                 .setValueFirst(path, data)
                 .setModeForPath(name)
                 .enableKey();
+            
+            CloudCmd.Edit.show(config);
         });
         
         return CloudCmd.Edit;

@@ -58,9 +58,11 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
             .getEditor()
             .setValueFirst('edit-names', names)
             .setMode()
+            .setOption('keyMap', 'default')
             .disableKey();
         
         DOM.Events.addKey(keyListener);
+        
         CloudCmd.Edit.show(ConfigView);
     };
     

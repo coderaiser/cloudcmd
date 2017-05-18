@@ -87,7 +87,6 @@ function EditProto(callback) {
         
         Edit.getEditor()
             .setOptions({
-                keyMap: 'default',
                 fontSize: 16,
             });
         
