@@ -78,9 +78,7 @@ function CloudCmdProto(Util, DOM) {
      * @param callback
      */
     this.loadDir = (params, callback) => {
-        var imgPosition;
-        var panelChanged;
-        var p = params;
+        const p = params;
         
         const refresh = p.isRefresh;
         const panel = p.panel;
@@ -88,12 +86,14 @@ function CloudCmdProto(Util, DOM) {
         const noCurrent = p.noCurrent;
         const currentName = p.currentName;
         
+        let panelChanged;
         if (!noCurrent)
             if (panel && panel !== Info.panel) {
                 DOM.changePanel();
                 panelChanged = true;
             }
         
+        let imgPosition;
         if (panelChanged || refresh || !history)
             imgPosition = 'top';
         
@@ -113,43 +113,39 @@ function CloudCmdProto(Util, DOM) {
      * @params = {name, path, func, dobefore, arg}
      */
     function loadModule(params) {
-        var name, path, func, doBefore,
-            funcName, isContain;
+        if (!params)
+            return;
         
-        if (params) {
-            name        = params.name,
-            path        = params.path,
-            func        = params.func,
-            funcName    = params.funcName,
-            doBefore    = params.dobefore;
+        let path = params.path;
+        const name = params.name || path && kebabToCamelCase(path);
+        const func = params.func;
+        const funcName = params.funcName;
+        const doBefore = params.dobefore;
+        
+        const isContain = /\.js/.test(path);
+        
+        if (!isContain)
+            path += '.js';
+        
+        if (CloudCmd[name])
+            return;
+        
+        CloudCmd[name] = (...args) => {
+            const prefix = CloudCmd.PREFIX;
+            const pathFull = prefix + CloudCmd.DIRCLIENT_MODULES + path;
             
-            if (path && !name)
-                name = kebabToCamelCase(path);
+            exec(doBefore);
             
-            isContain   = /\.js/.test(path);
-            
-            if (!isContain)
-                path += '.js';
-            
-            if (!CloudCmd[name]) {
-                CloudCmd[name] = (...args) => {
-                    const prefix = CloudCmd.PREFIX;
-                    const pathFull = prefix + CloudCmd.DIRCLIENT_MODULES + path;
+            return DOM.load.js(pathFull, func ||
+                function(error) {
+                    var Proto = CloudCmd[name];
                     
-                    exec(doBefore);
-                    
-                    return DOM.load.js(pathFull, func ||
-                        function(error) {
-                            var Proto = CloudCmd[name];
-                            
-                            if (!error && itype.function(Proto))
-                                CloudCmd[name] = applyConstructor(Proto, args);
-                        });
-                };
-                
-                CloudCmd[name][funcName] = CloudCmd[name];
-            }
-        }
+                    if (!error && itype.function(Proto))
+                        CloudCmd[name] = applyConstructor(Proto, args);
+                });
+        };
+        
+        CloudCmd[name][funcName] = CloudCmd[name];
     }
     
     /*
