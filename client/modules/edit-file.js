@@ -4,9 +4,9 @@
 
 const Format = require('format-io');
 const currify = require('currify/legacy');
+const store = require('fullstore/legacy');
 const squad = require('squad');
 const exec = require('execon');
-const store = require('../../common/store');
 
 const call = currify((fn, callback) => {
     fn();
