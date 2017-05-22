@@ -1,3 +1,13 @@
+2017.05.22, v6.14.3
+
+fix:
+- (client) dirStorage: save date
+
+feature:
+- (bower) philip v1.3.7
+- (cloudcmd) store -> fullstore
+
+
 2017.05.18, v6.14.2
 
 fix:
