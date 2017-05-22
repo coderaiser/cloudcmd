@@ -22,17 +22,18 @@
   ],
   "dependencies": {
     "execon": "~1.2.2",
-    "emitify": "3.0.2",
+    "emitify": "^3.1.0",
     "findit": "1.1.7"
   },
-  "version": "1.3.6",
-  "_release": "1.3.6",
+  "version": "1.3.7",
+  "_release": "1.3.7",
   "_resolution": {
     "type": "version",
-    "tag": "v1.3.6",
-    "commit": "7475a4547d8a8abe3f615ac983a41ef26d14509b"
+    "tag": "v1.3.7",
+    "commit": "5179476e600b28575eb2c8a549990e1f039f2dbf"
   },
   "_source": "https://github.com/coderaiser/domfs-philip.git",
-  "_target": "1.3.6",
-  "_originalSource": "philip"
+  "_target": "^1.3.7",
+  "_originalSource": "philip",
+  "_direct": true
 }
