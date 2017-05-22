@@ -5,6 +5,7 @@ const rendy = require('rendy');
 const exec = require('execon');
 const Images = require('./dom/images');
 const join = require('join-io/www/join');
+const jonny = require('jonny');
 
 const {
     apiURL,
@@ -203,6 +204,8 @@ function CloudCmdProto(Util, DOM) {
             config[key] = value;
         };
         
+        DOM.Storage.setAllowed(CloudCmd.config('localStorage'));
+        
         if (config.onePanelMode)
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
         
@@ -385,7 +388,7 @@ function CloudCmdProto(Util, DOM) {
         const create = (error, json) => {
             const RESTful = DOM.RESTful;
             const name = options.currentName || Info.name;
-            const obj = Util.json.parse(json);
+            const obj = jonny.parse(json);
             const isRefresh = options.refresh;
             const noCurrent = options.noCurrent;
             
@@ -497,35 +500,40 @@ function CloudCmdProto(Util, DOM) {
      * используеться при первом заходе в корень
      */
     function getJSONfromFileTable() {
-        var name, size, owner, mode, ret,
-            path        = DOM.getCurrentDirPath(),
-            infoFiles   = Info.files || [],
-            
-            fileTable   = {
-                path    : path,
-                files   : []
-            },
-            
-            files       = fileTable.files;
+        const path = DOM.getCurrentDirPath();
+        const infoFiles = Info.files || [];
         
-        [].forEach.call(infoFiles, function(current) {
-            name        = DOM.getCurrentName(current);
-            size        = DOM.getCurrentSize(current);
-            owner       = DOM.getCurrentOwner(current);
-            mode        = DOM.getCurrentMode(current);
+        const notParent = (current) => {
+            const name = DOM.getCurrentName(current);
+            return name !== '..';
+        };
+        
+        const parse = (current) => {
+            const name = DOM.getCurrentName(current);
+            const size = DOM.getCurrentSize(current);
+            const owner = DOM.getCurrentOwner(current);
+            const mode = DOM.getCurrentMode(current);
+            const date = DOM.getCurrentDate(current);
             
-            if (name !== '..')
-                files.push({
-                    name    : name,
-                    size    : size,
-                    mode    : mode,
-                    owner   : owner
-                });
-        });
+            return {
+                name,
+                size,
+                mode,
+                owner,
+                date,
+            }
+        };
         
-        ret = Util.json.stringify(fileTable);
+        const files = infoFiles
+            .filter(notParent)
+            .map(parse);
         
-        return ret;
+        const fileTable = {
+            path,
+            files,
+        };
+        
+        return fileTable;
     }
     
     this.goToParentDir = () => {

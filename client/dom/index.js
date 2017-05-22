@@ -244,6 +244,14 @@ function CmdProto() {
         return files;
     };
     
+    this.getCurrentDate = (currentFile) => {
+        const current = currentFile || Cmd.getCurrentFile();
+        const date = DOM.getByDataName('js-date', current)
+            .textContent
+        
+        return date;
+    };
+    
     /**
      * get size
      * @currentFile
