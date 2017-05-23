@@ -27,30 +27,27 @@ function main(callback) {
     const version     = Info.version;
     
     cl((error, versionNew) => {
-        if (error) {
-            callback(error);
-        } else {
-            replaceVersion('README.md', version, versionNew, callback);
-            replaceVersion('HELP.md', version, versionNew, function() {
-                const historyNew = history + rendy(template, {
-                    date    : shortdate(),
-                    version : versionNew
-                });
-                
-                replaceVersion('HELP.md', history, historyNew, callback);
+        if (error)
+            return callback(error);
+        
+        replaceVersion('README.md', version, versionNew, callback);
+        replaceVersion('HELP.md', version, versionNew, function() {
+            const historyNew = history + rendy(template, {
+                date    : shortdate(),
+                version : versionNew
             });
-        }
+            
+            replaceVersion('HELP.md', history, historyNew, callback);
+        });
     });
 }
 
 function replaceVersion(name, version, versionNew, callback) {
     place(name, version, versionNew, (error) => {
-        let msg;
+        if (error)
+            return callback(error);
         
-        if (!error)
-            msg = 'done: ' + name;
-        
-        callback(error, msg);
+        callback(null,  'done: ' + name);
     });
 }
 
