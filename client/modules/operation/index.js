@@ -282,42 +282,43 @@ function OperationProto(operation, data) {
      * @currentFile
      */
     function promptDelete() {
-        var type, isDir, msg,
-            name        = '',
-            msgAsk      = 'Do you really want to delete the ',
-            msgSel      = 'selected ',
-            files       = DOM.getSelectedFiles(),
-            names       = DOM.getFilenames(files),
-            i,
-            n           = names.length,
-            current     = DOM.getCurrentFile();
+        const msgAsk = 'Do you really want to delete the ';
+        const msgSel = 'selected ';
         
+        const files = DOM.getSelectedFiles();
+        const names = DOM.getFilenames(files);
+        const n = names.length;
+        
+        let msg;
         if (n) {
-            for (i = 0; i < 5 && i < n; i++)
+            let name = '';
+            
+            for (let i = 0; i < 5 && i < n; i++)
                 name += '\n' + names[i];
             
             if (n >= 5)
-                name   += '\n...';
+                name += '\n...';
             
-            msg    = msgAsk + msgSel + n + ' files/directories?\n' + name ;
+            msg = msgAsk + msgSel + n + ' files/directories?\n' + name ;
         } else {
-            isDir       = DOM.isCurrentIsDir(current);
+            const current = DOM.getCurrentFile();
+            const isDir = DOM.isCurrentIsDir(current);
+            const getType = (isDir) => {
+                return isDir ? 'directory' : 'file';
+            };
             
-            if (isDir)
-                type    = 'directory';
-            else
-                type    = 'file';
-             
-            type += ' ';
+            const type = getType(isDir) + ' ';
             
-            name   = DOM.getCurrentName(current);
-            msg    = msgAsk + msgSel + type + name + '?';
+            const name = DOM.getCurrentName(current);
+            msg = msgAsk + msgSel + type + name + '?';
         }
         
         if (name === '..')
             return Dialog.alert.noFiles(TITLE);
         
-        Dialog.confirm(TITLE, msg, {cancel: false}).then(() => {
+        const cancel = false;
+        
+        Dialog.confirm(TITLE, msg, {cancel}).then(() => {
             deleteSilent(files);
         });
     }

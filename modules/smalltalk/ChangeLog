@@ -1,3 +1,12 @@
+2017.05.23, v2.4.0
+
+feature:
+- (smalltalk) add ability to encode new lines in message
+- (smalltalk) .content-area: rm max-width: forced new lines
+- (smalltalk) store -> fullstore
+- (package) rm unused glob
+
+
 2017.05.17, v2.3.1
 
 feature:

@@ -3,6 +3,7 @@
 window.Promise = window.Promise || require('es6-promise');
 
 const currify = require('currify/legacy');
+const store = require('fullstore/legacy');
 const keyDown = currify(keyDown_);
 
 const remove = bind(removeEl, '.smalltalk');
@@ -26,11 +27,13 @@ exports.confirm = (title, msg, options) => {
 };
 
 function getTemplate(title, msg, value, buttons) {
+    const encodedMsg = msg.replace(/\n/g, '<br>');
+    
     return `<div class="page">
         <div data-name="js-close" class="close-button"></div>
         <header>${ title }</header>
         <div class="content-area">
-            ${ msg }
+            ${ encodedMsg }
             ${ value }
         </div>
         <div class="action-area">
@@ -43,16 +46,6 @@ function getTemplate(title, msg, value, buttons) {
         </div>
     </div>`;
 }
-
-const store = () => {
-    let a;
-    return (...b) => {
-        if (b.length)
-            a = b.pop();
-        
-        return a;
-    };
-};
 
 function showDialog(title, msg, value, buttons, options) {
     const ok = store();
