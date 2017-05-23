@@ -189,7 +189,6 @@
     "stylelint-config-standard": "^16.0.0",
     "tape": "^4.4.0",
     "tar-stream": "^1.5.2",
-    "version-io": "^1.2.5",
     "webpack": "^2.2.1",
     "wraptile": "^1.0.0",
     "yaspeller": "^3.0.0"
