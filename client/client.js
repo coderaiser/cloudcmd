@@ -521,7 +521,7 @@ function CloudCmdProto(Util, DOM) {
                 mode,
                 owner,
                 date,
-            }
+            };
         };
         
         const files = infoFiles
