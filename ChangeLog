@@ -1,3 +1,13 @@
+2017.05.25, v6.14.4
+
+fix:
+- (package) put fullstore in dependencies
+
+feature:
+- (bower) smalltalk v2.4.0
+- (package) rm unused version-io
+
+
 2017.05.22, v6.14.3
 
 fix:
