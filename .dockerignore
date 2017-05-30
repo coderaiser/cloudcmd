@@ -1,6 +1,20 @@
+.*
 node_modules
 npm-debug.log*
 coverage
+test
+shell
+manifest.yml
+app.json
+bower.json
+
+Dockerfile
+Dockerfile.alpine
+
+webpack.config.js
+
+bin/legacy.js
+bin/release.js
 
 modules/jquery/dist
 modules/jquery/external
@@ -13,12 +27,11 @@ modules/fancybox/demo
 modules/fancybox/sprite.psd
 
 modules/execon
+modules/emitify
 
 client
 legacy
 server_
 
 .nyc_output
-
-*.swp
 
