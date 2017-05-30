@@ -20,7 +20,8 @@ modules/execon
 modules/emitify
 
 app.json
-circle.yml
+bower.json
+manifest.yml
 
 bin/release.js
 bin/legacy.js
