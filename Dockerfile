@@ -11,10 +11,12 @@ RUN npm install --production && \
 
 COPY . /usr/src/app
 
+WORKDIR /root
+
 ENV cloudcmd_terminal true
 ENV cloudcmd_terminal_path gritty
 
 EXPOSE 8000
 
-ENTRYPOINT ["bin/cloudcmd.js"]
+ENTRYPOINT /usr/src/app/bin/cloudcmd.js
 
