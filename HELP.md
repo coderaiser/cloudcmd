@@ -299,7 +299,7 @@ Here is description of options:
 {
     "auth"              : false,    /* enable http authentication               */
     "username"          : "root",   /* username for authentication              */
-    "password"          : "toor",   /* password hash in sha-1 for authentication*/
+    "password"          : "toor",   /* password hash for authentication*/
     "algo"              : "sha512WithRSAEncryption", /* cryptographic algorithm */
     "editor"            : "edward", /* default, could be "dword" or "edward"    */
     "packer"            : "tar",    /* default, could be "tar" or "zip"         */
