@@ -336,6 +336,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_AUTH` - enable authentication
+- `CLOUDCMD_USERNAME` - set username
 - `CLOUDCMD_PASSWORD` - set password
 
 Menu
