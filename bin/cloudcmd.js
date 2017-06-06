@@ -46,7 +46,7 @@ const args = require('minimist')(argv.slice(2), {
     ],
     default: {
         server      : true,
-        auth        : config('auth'),
+        auth        : choose(env('auth'), config('auth')),
         port        : config('port'),
         minify      : config('minify'),
         online      : config('online'),
