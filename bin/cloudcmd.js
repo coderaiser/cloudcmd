@@ -166,9 +166,9 @@ function port(arg) {
     const number = parseInt(arg, 10);
     
     if (!isNaN(number))
-        config('port', number);
-    else
-        exit('cloudcmd --port: should be a number');
+        return config('port', number);
+    
+    exit('cloudcmd --port: should be a number');
 }
 
 function showConfig() {
