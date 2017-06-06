@@ -36,6 +36,21 @@
           "description": "show config dialog",
           "value": "false",
           "required": false
+      },
+      "CLOUDCMD_AUTH": {
+          "description": "enable authorization",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_USERNAME": {
+          "description": "set username",
+          "value": "root",
+          "required": false
+      },
+      "CLOUDCMD_PASSWORD": {
+          "description": "set password",
+          "value": "toor",
+          "required": false
       }
   }
 }
