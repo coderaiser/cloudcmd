@@ -23,7 +23,7 @@
         "remote": "//ajax.googleapis.com/ajax/libs/jquery/{{ version }}/jquery.min.js"
     }, {
         "name": "socket",
-        "version": "2.0.1",
+        "version": "2.0.2",
         "local": "/socket.io/socket.io.js",
         "remote": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
     }, {
