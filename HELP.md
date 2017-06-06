@@ -71,6 +71,7 @@ Cloud Commander supports command line parameters:
 | `-u, --username`              | set username
 | `-p, --password`              | set password
 | `-c, --config`                | configuration file path
+| `--show-config`               | show config values
 | `--editor`                    | set editor: "dword", "edward" or "deepword"
 | `--packer`                    | set packer: "tar" or "zip"
 | `--root`                      | set root directory

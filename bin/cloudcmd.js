@@ -42,7 +42,8 @@ const args = require('minimist')(argv.slice(2), {
         'console',
         'terminal',
         'one-panel-mode',
-        'html-dialogs'
+        'html-dialogs',
+        'show-config',
     ],
     default: {
         server      : true,
@@ -128,6 +129,9 @@ function main() {
     
     validateRoot(options.root);
     
+    if (args['show-config'])
+        showConfig();
+    
     if (!args.save)
         return start(options);
     
@@ -165,6 +169,13 @@ function port(arg) {
         config('port', number);
     else
         exit('cloudcmd --port: should be a number');
+}
+
+function showConfig() {
+    const show = require('../server/show-config');
+    const data = show(config('*'));
+    
+    console.log(data);
 }
 
 function readConfig(name) {
