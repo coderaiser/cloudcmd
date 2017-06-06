@@ -121,8 +121,10 @@ function main() {
         prefix: args.prefix
     };
     
-    if (args.password)
-        config('password', getPassword(args.password));
+    const password = env('password') || args.password;
+    
+    if (password)
+        config('password', getPassword(password));
     
     validateRoot(options.root);
     
