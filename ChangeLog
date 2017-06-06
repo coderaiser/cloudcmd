@@ -1,3 +1,24 @@
+2017.06.06, v6.15.0
+
+fix:
+- (cloudcmd) editor: choose -> env
+
+feature:
+- (show-config) add ability to show config values with --show-config
+- (cloudcmd) add CLOUDCMD_USERNAME
+- (cloudcmd) add CLOUDCMD_PASSWORD
+- (help) add CLOUDCMD_AUTH
+- (modules) socket.io v2.0.2
+- (package) nyc v11.0.2
+- (gitignore) add package-lock.json
+- (package) docker:rm: add -f: force
+- (travis) node_js: 7 -> 8
+- (dockerignore) reduce size of image
+- (package) scripts: docker:tag
+- (npmignore) add bower.json, manifest.yml
+- (Dockerfile) Entrypoint: set absolute: add ability to override WorkDir
+
+
 2017.05.25, v6.14.4
 
 fix:
