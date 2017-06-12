@@ -484,7 +484,7 @@ function CmdProto() {
         return DOM;
     };
     
-     /*
+    /*
       * set current file by position
       *
       * @param layer    - element
@@ -655,7 +655,7 @@ function CmdProto() {
         return ret;
     };
     
-   /**
+    /**
      * get link from current (or param) file
      *
      * @param currentFile - current file by default
@@ -970,7 +970,7 @@ function CmdProto() {
         return currentNew;
     };
     
-     /**
+    /**
      * remove selected files from file table
      * @Selected
      */

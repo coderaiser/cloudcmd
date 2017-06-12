@@ -78,7 +78,7 @@ function load(params) {
     
     if (/^(script|link)$/.test(name))
         Events.addOnce('load', element, funcLoad)
-              .addError(element, funcError);
+            .addError(element, funcError);
     
     if (id)
         element.id = id;

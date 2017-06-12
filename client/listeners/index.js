@@ -296,7 +296,7 @@ function onTouch(event) {
     event.preventDefault();
 }
 
- /*
+/*
   * download file from browser to desktop
   * in Chrome (HTML5)
   */
@@ -445,7 +445,7 @@ function dragndrop() {
     
     [...panels].forEach((panel) => {
         Events.add('dragover', panel, onDragOver)
-              .add('drop', panel, onDrop);
+            .add('drop', panel, onDrop);
     });
 }
 

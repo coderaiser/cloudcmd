@@ -85,15 +85,15 @@ function indexProcessing(options) {
     
     if (noConfig)
         data = data
-             .replace('icon-config', 'icon-config none');
+            .replace('icon-config', 'icon-config none');
     
     if (noConsole)
         data = data
-             .replace('icon-console', 'icon-console none');
+            .replace('icon-console', 'icon-console none');
     
     if (noTerminal)
         data = data
-             .replace('icon-terminal', 'icon-terminal none');
+            .replace('icon-terminal', 'icon-terminal none');
     
     let left = rendy(Template.panel, {
         side        : 'left',

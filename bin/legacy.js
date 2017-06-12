@@ -13,13 +13,13 @@ const setDir = (name) => {
 };
 
 fs.readdirSync(dir)
-  .map(fillFile)
-  .map(writeFile);
+    .map(fillFile)
+    .map(writeFile);
 
 function fillFile(name) {
     return {
         name: setDir(name),
-        data: `module.exports = require(\'../../server_/${name}\');`
+        data: `module.exports = require('../../server_/${name}');`
     };
 }
 

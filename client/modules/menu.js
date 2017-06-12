@@ -277,7 +277,7 @@ function MenuProto(position) {
         files.forEach((file) => {
             const selected = DOM.isSelected(file);
             const isDir = DOM.isCurrentIsDir(file);
-             /*
+            /*
               * if we send ajax request -
               * no need in hash so we escape #
               * and all other characters, like "%"

@@ -276,7 +276,7 @@ function OperationProto(operation, data) {
         twopack('extract');
     };
     
-     /**
+    /**
      * prompt and delete current file or selected files
      *
      * @currentFile

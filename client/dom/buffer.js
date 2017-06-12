@@ -96,7 +96,7 @@ function BufferProto() {
     
     function clear() {
         Storage.remove(COPY)
-                .remove(CUT);
+            .remove(CUT);
         
         rmCutClass();
     }

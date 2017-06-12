@@ -29,25 +29,29 @@ function RESTful() {
         });
     };
     
-    this.patch  = function(url, data, callback) {
-        var isFunc = itype.function(data);
+    this.patch = (url, data, callback) => {
+        const isFunc = itype.function(data);
         
         if (!callback && isFunc) {
             callback = data;
             data = null;
         }
         
+        const imgPosition = {
+            top: true
+        };
+        
         sendRequest({
-            method      : 'PATCH',
-            url         : FS + url,
-            data        : data,
-            callback    : callback,
-            imgPosition : { top: true }
+            method: 'PATCH',
+            url: FS + url,
+            data,
+            callback,
+            imgPosition,
         });
     };
     
-    this.write   = function(url, data, callback) {
-        var isFunc      = itype.function(data);
+    this.write = (url, data, callback) => {
+        const isFunc = itype.function(data);
         
         if (!callback && isFunc) {
             callback    = data;
@@ -55,20 +59,20 @@ function RESTful() {
         }
         
         sendRequest({
-            method      : 'PUT',
-            url         : FS + url,
-            data        : data,
-            callback    : callback,
+            method: 'PUT',
+            url: FS + url,
+            data,
+            callback,
             imgPosition : { top: true }
         });
     };
     
-    this.read = function(url, dataType, callback) {
-        var isQuery = /\?/.test(url);
-        var isBeautify = /\?beautify$/.test(url);
-        var isMinify = /\?minify$/.test(url);
-        var notLog = !isQuery || isBeautify || isMinify;
-        var isFunc = itype.function(dataType);
+    this.read = (url, dataType, callback) => {
+        const isQuery = /\?/.test(url);
+        const isBeautify = /\?beautify$/.test(url);
+        const isMinify = /\?minify$/.test(url);
+        const notLog = !isQuery || isBeautify || isMinify;
+        const isFunc = itype.function(dataType);
         
         if (!callback && isFunc) {
             callback = dataType;
@@ -78,28 +82,28 @@ function RESTful() {
         sendRequest({
             method: 'GET',
             url: FS + url,
-            callback: callback,
-            notLog: notLog,
-            dataType: dataType
+            callback,
+            notLog,
+            dataType,
         });
     };
     
-    this.cp = function(data, callback) {
+    this.cp = (data, callback) => {
         sendRequest({
-            method      : 'PUT',
-            url         : '/cp',
-            data        : data,
-            callback    : callback,
+            method: 'PUT',
+            url: '/cp',
+            data,
+            callback,
             imgPosition : { top: true }
         });
     };
     
-    this.pack   = function(data, callback) {
+    this.pack = (data, callback) => {
         sendRequest({
             method      : 'PUT',
             url         : '/pack',
-            data        : data,
-            callback    : callback
+            data,
+            callback,
         });
     };
     
