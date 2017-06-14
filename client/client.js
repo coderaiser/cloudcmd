@@ -323,8 +323,8 @@ function CloudCmdProto(Util, DOM) {
         Listeners = CloudCmd.Listeners;
         Listeners.init();
         
-        Listeners.setOnPanel('left');
-        Listeners.setOnPanel('right');
+        const panels = getPanels();
+        panels.forEach(Listeners.setOnPanel);
         
         Listeners.initKeysPanel();
         
@@ -336,6 +336,18 @@ function CloudCmdProto(Util, DOM) {
         });
         
         callback();
+    }
+    
+    function getPanels() {
+        const panels = ['left'];
+        
+        if (CloudCmd.config('onePanelMode'))
+            return panels;
+        
+        return [
+            ...panels,
+            'rigth',
+        ];
     }
     
     this.execFromModule = (moduleName, funcName, ...args) => {
