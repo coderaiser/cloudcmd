@@ -1,3 +1,16 @@
+2017.06.14, v6.15.1
+
+fix:
+- (client) rigth -> right
+- (client) baseInit: init both panels in OnePanelMode (#116)
+- (Dockerfile) ENTRYPOINT: command -> executable
+
+feature:
+- (modules) socket.io v2.0.3
+- (package) eslint v4.0.0
+- (app) add auth env variables
+
+
 2017.06.06, v6.15.0
 
 fix:
