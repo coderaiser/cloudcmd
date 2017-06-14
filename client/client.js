@@ -346,7 +346,7 @@ function CloudCmdProto(Util, DOM) {
         
         return [
             ...panels,
-            'rigth',
+            'right',
         ];
     }
     
