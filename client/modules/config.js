@@ -27,8 +27,12 @@ CloudCmd.Config = ConfigProto;
 let Loading = true;
 
 function ConfigProto() {
+    const noop = () => {};
+    
     if (!CloudCmd.config('configDialog'))
-        return;
+        return {
+            show: noop
+        };
     
     Loading = true;
     
