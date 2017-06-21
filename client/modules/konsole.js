@@ -12,6 +12,13 @@ const {Dialog} = DOM;
 CloudCmd.Konsole = ConsoleProto;
 
 function ConsoleProto() {
+    const noop = () => {};
+    
+    if (!CloudCmd.config('console'))
+        return {
+            show: noop
+        };
+    
     const config = CloudCmd.config;
     
     const Name = 'Konsole';
@@ -121,9 +128,6 @@ function ConsoleProto() {
         
         Util.time(Name + ' load');
     }
-    
-    if (!CloudCmd.config('console'))
-        return;
     
     init();
 }
