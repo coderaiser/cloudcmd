@@ -21,8 +21,12 @@ let Terminal;
 const {config} = CloudCmd;
 
 function TerminalProto() {
+    const noop = () => {};
+    
     if (!config('terminal'))
-        return;
+        return {
+            show: noop
+        };
     
     Images.show.load('top');
     
