@@ -1,3 +1,15 @@
+2017.06.22, v6.15.2
+
+fix:
+- (konsole) when disabled error occures on second call
+- (config) when disabled error occures on second call
+- (terminal) when disabled, error occures on second call
+
+feature:
+- (package) heroku-postbuild -> heroku-postbuild, postheroku-postbuild
+- (package) webpack v3.0.0
+
+
 2017.06.14, v6.15.1
 
 fix:
