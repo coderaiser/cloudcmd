@@ -101,7 +101,7 @@ function show(data, options) {
     if (Loading)
         return;
     
-    if (options && options.bindKeys !== false)
+    if (!options || options.bindKeys !== false)
         Events.addKey(listener);
     
     El = $('<div class="view" tabindex=0>');
