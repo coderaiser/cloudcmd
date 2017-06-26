@@ -137,13 +137,16 @@ function CloudCmdProto(Util, DOM) {
             
             exec(doBefore);
             
-            return DOM.load.js(pathFull, func ||
-                function(error) {
-                    var Proto = CloudCmd[name];
-                    
-                    if (!error && itype.function(Proto))
-                        CloudCmd[name] = applyConstructor(Proto, args);
-                });
+            const done = (error) => {
+                const Proto = CloudCmd[name];
+                
+                if (error || !itype.function(Proto))
+                    return;
+                
+                CloudCmd[name] = applyConstructor(Proto, args);
+            };
+            
+            return DOM.load.js(pathFull, func || done);
         };
         
         CloudCmd[name][funcName] = CloudCmd[name];
@@ -156,7 +159,7 @@ function CloudCmdProto(Util, DOM) {
      * @param args
      */
     function applyConstructor(constructor, args) {
-        var F = function () {
+        const F = function () {
             return constructor.apply(this, args);
         };
         
@@ -453,24 +456,27 @@ function CloudCmdProto(Util, DOM) {
      * @param callback
      */
     function createFileTable(json, panelParam, options, callback) {
-        var history     = options.history,
-            noCurrent   = options.noCurrent,
-            names       = ['file', 'path', 'link', 'pathLink'];
+        const {
+            history,
+            noCurrent,
+        } = options;
         
-        Files.get(names, function(error, templFile, templPath, templLink, templPathLink) {
-            var childNodes, i,
-                Dialog      = DOM.Dialog,
-                current,
-                panel       = panelParam || DOM.getPanel(),
-                
-                dir         = Info.dir,
-                name        = Info.name;
+        const names = ['file', 'path', 'link', 'pathLink'];
+        
+        Files.get(names, (error, templFile, templPath, templLink, templPathLink) => {
+            const Dialog = DOM.Dialog;
+            const panel = panelParam || DOM.getPanel();
+            
+            const {
+                dir,
+                name,
+            } = Info;
             
             if (error)
                 return Dialog.alert(TITLE, error.responseText);
-                
-            childNodes  = panel.childNodes;
-            i           = childNodes.length;
+            
+            const childNodes = panel.childNodes;
+            let i = childNodes.length;
             
             while (i--)
                 panel.removeChild(panel.lastChild);
@@ -492,6 +498,8 @@ function CloudCmdProto(Util, DOM) {
             Listeners.setOnPanel(panel);
             
             if (!noCurrent) {
+                let current;
+                
                 if (name === '..' && dir !== '/')
                     current = DOM.getCurrentByName(dir);
                 
@@ -549,23 +557,23 @@ function CloudCmdProto(Util, DOM) {
     }
     
     this.goToParentDir = () => {
-        let path = Info.dirPath;
         const dir = Info.dir;
-        const parentPath = Info.parentDirPath;
+        const {
+            dirPath,
+            parentDirPath,
+        } = Info;
         
-        if (path === Info.parentDirPath)
+        if (dirPath === parentDirPath)
             return;
         
-        path = parentPath;
+        const path = Info.dirPath || parentDirPath;
         
         CloudCmd.loadDir({path}, () => {
             const panel = Info.panel;
-            let current = DOM.getCurrentByName(dir);
+            const current = DOM.getCurrentByName(dir);
+            const first = DOM.getFiles(panel)[0];
             
-            if (!current)
-                current = DOM.getFiles(panel)[0];
-            
-            DOM.setCurrentFile(current, {
+            DOM.setCurrentFile(current || first, {
                 history
             });
         });
