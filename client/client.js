@@ -331,14 +331,16 @@ function CloudCmdProto(Util, DOM) {
         
         Listeners.initKeysPanel();
         
+        if (!CloudCmd.config('dirStorage'))
+            return callback();
+        
         Storage.get(dirPath, (error, data) => {
             if (!data) {
                 data = getJSONfromFileTable();
                 Storage.set(dirPath, data);
             }
+            callback();
         });
-        
-        callback();
     }
     
     function getPanels() {
@@ -423,8 +425,6 @@ function CloudCmdProto(Util, DOM) {
                 if (error)
                     return;
                 
-                Storage.set(path, obj);
-                
                 options.sort = sort;
                 options.order = order;
                 
@@ -434,6 +434,11 @@ function CloudCmdProto(Util, DOM) {
                     
                     exec(callback);
                 });
+                
+                if (!CloudCmd.config('dirStorage'))
+                    return;
+                
+                Storage.set(path, obj);
             });
         };
         
