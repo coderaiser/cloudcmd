@@ -1,3 +1,10 @@
+2017.06.26, v6.15.3
+
+fix:
+- (client) save directory path and file list to storage when dirStorage disabled
+- (view) show: close view on ESC
+
+
 2017.06.22, v6.15.2
 
 fix:
