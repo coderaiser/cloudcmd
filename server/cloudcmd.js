@@ -211,7 +211,6 @@ function cloudcmd(prefix, plugins, modules) {
         
         edward({
             prefix  : prefix + '/edward',
-            minify,
             online,
             diff,
             zip,
