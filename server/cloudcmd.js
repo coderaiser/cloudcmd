@@ -202,7 +202,6 @@ function cloudcmd(prefix, plugins, modules) {
     const funcs = clean([
         config('console') && konsole({
             prefix: prefix + '/console',
-            minify,
             online,
         }),
         
