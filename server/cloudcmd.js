@@ -225,7 +225,6 @@ function cloudcmd(prefix, plugins, modules) {
         
         deepword({
             prefix  : prefix + '/deepword',
-            minify,
             online,
             diff,
             zip,
