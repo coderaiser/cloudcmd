@@ -218,7 +218,6 @@ function cloudcmd(prefix, plugins, modules) {
        
         dword({
             prefix  : prefix + '/dword',
-            minify,
             online,
             diff,
             zip,
