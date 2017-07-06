@@ -14,6 +14,7 @@ const prefixer = require(DIR + 'prefixer');
 const pluginer = require(DIR + 'plugins');
 const terminal = require(DIR + 'terminal');
 
+const currify = require('currify');
 const apart = require('apart');
 const join = require('join-io');
 const ponse = require('ponse');
@@ -30,6 +31,8 @@ const ishtar = require('ishtar');
 const salam = require('salam/legacy');
 const omnes = require('omnes/legacy');
 const criton = require('criton');
+
+const setUrl = currify(_setUrl);
 
 const root = () => config('root');
 
@@ -299,24 +302,22 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
-function setUrl(pref) {
-    return (req, res, next) => {
-        const prefix = getPrefix(pref);
-        const is = !req.url.indexOf(prefix);
-        
-        if (!is)
-            return next();
-        
-        req.url = req.url.replace(prefix, '') || '/';
-        
-        if (/^\/cloudcmd\.js(\.map)?$/.test(req.url))
-            req.url = `/dist${req.url}`;
-        
-        if (isDev)
-            req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
-        
-        next();
-    };
+function _setUrl(pref, req, res, next) {
+    const prefix = getPrefix(pref);
+    const is = !req.url.indexOf(prefix);
+    
+    if (!is)
+        return next();
+    
+    req.url = req.url.replace(prefix, '') || '/';
+    
+    if (/^\/cloudcmd\.js(\.map)?$/.test(req.url))
+        req.url = `/dist${req.url}`;
+    
+    if (isDev)
+        req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
+    
+    next();
 }
 
 function checkPlugins(plugins) {

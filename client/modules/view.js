@@ -2,6 +2,8 @@
 
 /* global CloudCmd, DOM, $ */
 
+require('../../css/view.css');
+
 const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
@@ -324,7 +326,7 @@ function loadAll(callback) {
     DOM.loadRemote('fancybox', () => {
         const {PREFIX} = CloudCmd;
         
-        load.css(PREFIX + '/css/view.css', callback);
+        load.css(PREFIX + '/dist/view.css', callback);
         
         load.style({
             id      : 'view-inlince-css',

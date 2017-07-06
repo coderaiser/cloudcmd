@@ -17,6 +17,13 @@ const distDev = path.resolve(__dirname, 'dist-dev');
 const devtool = isDev ? 'eval' : 'source-map';
 const notEmpty = (a) => a;
 const clean = (array) => array.filter(notEmpty);
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractMain = new ExtractTextPlugin('[name].css');
+const extractNojs = new ExtractTextPlugin('nojs.css');
+
+const extractView = new ExtractTextPlugin('view.css');
+const extractConfig = new ExtractTextPlugin('config.css');
 
 const plugins = clean([
     !isDev && new UglifyJsPlugin({
@@ -27,6 +34,10 @@ const plugins = clean([
         name: 'cloudcmd',
         filename: 'cloudcmd.js',
     }),
+    extractMain,
+    extractNojs,
+    extractView,
+    extractConfig,
 ]);
 
 const rules = clean([
@@ -34,7 +45,20 @@ const rules = clean([
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-    }
+    }, {
+        test: /\.css$/,
+        exclude: /css\/(nojs|view|config)\.css/,
+        use: extractMain.extract([
+            'css-loader?minimize',
+        ]),
+    },
+    extract('nojs', extractNojs),
+    extract('view', extractView),
+    extract('config', extractConfig),
+    {
+        test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
+        loader: 'url-loader?limit=50000',
+    },
 ]);
 
 module.exports = {
@@ -91,5 +115,17 @@ function externals(context, request, fn) {
 function devtoolModuleFilenameTemplate(info) {
     const resource = info.absoluteResourcePath.replace(__dirname + path.sep, '');
     return `file://cloudcmd/${resource}`;
+}
+
+function extract(name, extractCss) {
+    return {
+        test: RegExp(`css\/${name}\.css`),
+        use: extractCss.extract([
+            isDev ?
+                'css-loader'
+                :
+                'css-loader?minimize'
+        ])
+    };
 }
 

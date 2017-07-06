@@ -1,5 +1,8 @@
 'use strict';
 
+require('../css/main.css');
+require('../css/nojs.css');
+
 // prevent additional loading of exec by spero, remedy, ishtar, salam, omnes
 window.exec = require('execon');
 

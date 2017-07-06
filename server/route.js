@@ -38,11 +38,6 @@ const TMPL_PATH   = [
 const Template = {};
 const FS = CloudFunc.FS;
 
-const CSS_URL = require(DIR_JSON + 'css.json')
-    .map((name) => {
-        return 'css/' + name + '.css';
-    }).join(':');
-
 module.exports = (req, res, next) => {
     check(req, res, next);
     
@@ -114,7 +109,6 @@ function indexProcessing(options) {
         fm: left + right,
         prefix: prefix(),
         config: JSON.stringify(config('*')),
-        css: CSS_URL
     });
     
     return data;
@@ -220,7 +214,7 @@ function buildIndex(json, callback) {
         fs.readFile(name || PATH_INDEX, 'utf8', (error, template) => {
             if (error)
                 return;
-                
+            
             const panel = CloudFunc.buildFromJSON({
                 data        : json,
                 prefix      : prefix(),

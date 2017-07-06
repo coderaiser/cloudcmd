@@ -2,6 +2,8 @@
 
 /* global CloudCmd, DOM, io */
 
+require('../../css/config.css');
+
 const rendy = require('rendy');
 const exec = require('execon');
 const currify = require('currify/legacy');
@@ -123,7 +125,7 @@ function show() {
     const funcs = [
         exec.with(Files.get, 'config-tmpl'),
         exec.with(DOM.load.parallel, [
-            prefix + '/css/config.css'
+            prefix + '/dist/config.css'
         ])
     ];
     
