@@ -29,7 +29,7 @@ const plugins = clean([
     }),
 ]);
 
-const loaders = clean([
+const rules = clean([
     !isDev && {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -70,7 +70,7 @@ module.exports = {
         externals
     ],
     module: {
-        loaders,
+        rules,
     },
 };
 
