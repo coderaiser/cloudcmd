@@ -26,7 +26,7 @@ const deepword = require('deepword/legacy');
 const nomine = require('nomine/legacy');
 const spero = require('spero/legacy');
 const remedy = require('remedy/legacy');
-const ishtar = require('ishtar');
+const ishtar = require('ishtar/legacy');
 const salam = require('salam/legacy');
 const omnes = require('omnes/legacy');
 const criton = require('criton');
@@ -244,7 +244,6 @@ function cloudcmd(prefix, plugins, modules) {
         
         ishtar({
             prefix  : prefix + '/ishtar',
-            minify,
             online,
         }),
         
