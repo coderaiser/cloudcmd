@@ -24,7 +24,7 @@ const edward = require('edward/legacy');
 const dword = require('dword/legacy');
 const deepword = require('deepword/legacy');
 const nomine = require('nomine/legacy');
-const spero = require('spero');
+const spero = require('spero/legacy');
 const remedy = require('remedy');
 const ishtar = require('ishtar');
 const salam = require('salam/legacy');
@@ -234,7 +234,6 @@ function cloudcmd(prefix, plugins, modules) {
         
         spero({
             prefix  : prefix + '/spero',
-            minify,
             online,
         }),
         
