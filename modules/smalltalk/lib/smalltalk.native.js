@@ -17,11 +17,13 @@ exports.prompt = (title, message, value, options) => {
         const noCancel = o && !o.cancel;
         const result = prompt(message, value);
         
+        if (noCancel)
+            return;
+        
         if (result !== null)
             return resolve(result);
         
-        if (!noCancel)
-            reject();
+        reject();
     });
     
     return promise;
@@ -33,7 +35,10 @@ exports.confirm = (title, message, options) => {
     const promise = new Promise((resolve, reject) => {
         const is = confirm(message);
         
-        if (is || noCancel)
+        if (noCancel)
+            return;
+        
+        if (is)
             return resolve();
         
         reject();

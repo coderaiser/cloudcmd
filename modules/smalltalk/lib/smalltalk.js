@@ -16,7 +16,7 @@ exports.alert = (title, msg) => {
 };
 
 exports.prompt = (title, msg, value = '', options) => {
-    const val = String(value).replace(/\"/g, '&quot;');
+    const val = String(value).replace(/"/g, '&quot;');
     const valueStr = `<input type="text" value="${ val }" data-name="js-input">`;
     
     return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
@@ -180,8 +180,7 @@ const getIndex = (count, index) => {
     if (index === count)
         return 0;
     
-    if (index < count)
-        return index + 1;
+    return index + 1;
 };
 
 function tab(dialog, names) {
