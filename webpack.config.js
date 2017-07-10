@@ -119,7 +119,7 @@ function devtoolModuleFilenameTemplate(info) {
 
 function extract(name, extractCss) {
     return {
-        test: RegExp(`css\/${name}\.css`),
+        test: RegExp(`css/${name}.css`),
         use: extractCss.extract([
             isDev ?
                 'css-loader'
