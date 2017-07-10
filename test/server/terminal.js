@@ -7,7 +7,6 @@ const sinon = diff(require('sinon'));
 const configPath = '../../server/config';
 const terminalPath = '../../server/terminal';
 
-
 test('cloudcmd: terminal: disabled', (t) => {
     clean(terminalPath);
     stub(configPath, () => {
