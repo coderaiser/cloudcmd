@@ -1,3 +1,18 @@
+2017.07.10, v6.15.4
+
+feature:
+- (bower) smalltalk v2.4.1 (#117)
+- (package) ishtar v2.0.0
+- (package) remedy v2.0.0
+- (package) spero v2.0.0
+- (package) rm mollify
+- (css) add minification build step
+- (webpack) loaders -> rules
+- (package) dword v5.0.0
+- (package) edward v5.0.0
+- (package) console-io v4.0.0
+
+
 2017.06.26, v6.15.3
 
 fix:
