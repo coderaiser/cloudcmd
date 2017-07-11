@@ -28,8 +28,5 @@ bin/legacy.js
 
 client
 
-legacy/bin/release.js
-legacy/bin/legacy.js
-
 webpack.config.js
 

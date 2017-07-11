@@ -36,8 +36,7 @@
     "server"
   ],
   "bin": {
-    "cloudcmd": "legacy/bin/cloudcmd.js",
-    "cloudcmd+": "bin/cloudcmd.js"
+    "cloudcmd": "bin/cloudcmd.js"
   },
   "config": {
     "dirs": "bin server test webpack.config.js"
@@ -80,8 +79,6 @@
     "docker:rm-old": "redrun --parallel docker:rm:*",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
-    "6to5:bin": "babel bin -d legacy/bin",
-    "6to5:server": "babel server -d server_",
     "6to5:client": "webpack --progress",
     "6to5:client:dev": "NODE_ENV=development redrun 6to5:client",
     "watch:client": "redrun 6to5:client -- --watch",
@@ -93,16 +90,9 @@
     "watch:coverage": "nodemon -w server -w test -w common -x \"npm run coverage\"",
     "w:c": "redrun watch:client",
     "w:c:d": "redrun watch:client:dev",
-    "build": "redrun rm:* 6to5:* mkdir:* legacy:*",
+    "build": "redrun 6to5:*",
     "build:client": "redrun 6to5:client",
     "build:client:dev": "redrun 6to5:client:dev",
-    "legacy:package": "echo \"module.exports = require('../package');\" > legacy/package.js",
-    "mkdir:server": "mkdirp legacy/server",
-    "mkdir:json": "mkdirp legacy/json",
-    "legacy:server": "bin/legacy.js",
-    "legacy:help": "cp json/help.json legacy/json/",
-    "rm:server": "rimraf server_ legacy",
-    "rm:client": "rimraf dist dist-dev",
     "heroku-postbuild": "redrun 6to5:client",
     "postheroku-postbuild": "npm i gritty"
   },
@@ -205,8 +195,8 @@
     "yaspeller": "^3.0.0"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">=4.0.0"
   },
   "license": "MIT",
-  "main": "legacy/server/cloudcmd.js"
+  "main": "server/cloudcmd.js"
 }
