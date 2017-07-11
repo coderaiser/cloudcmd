@@ -9,13 +9,13 @@ const config = require(DIR + 'config');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const markdown = require(DIR + 'markdown');
 
-const jaguar = require('jaguar/legacy');
-const onezip = require('onezip/legacy');
-const inly = require('inly/legacy');
-const flop = require('flop/legacy');
-const pullout = require('pullout/legacy');
+const jaguar = require('jaguar');
+const onezip = require('onezip');
+const inly = require('inly');
+const flop = require('flop');
+const pullout = require('pullout');
 const ponse = require('ponse');
-const copymitter = require('copymitter/legacy');
+const copymitter = require('copymitter');
 const json = require('jonny');
 const check = require('checkup');
 
