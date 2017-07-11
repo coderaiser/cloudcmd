@@ -13,7 +13,6 @@ const ponse = require('ponse');
 const files = require('files-io');
 const rendy = require('rendy');
 const exec = require('execon');
-const minify = require('minify');
 const format = require('format-io');
 const squad = require('squad');
 const apart = require('apart');
@@ -24,7 +23,13 @@ const prefixer = require(DIR_SERVER + 'prefixer');
 const CloudFunc = require(DIR_SERVER + 'cloudfunc');
 const prefix = squad(prefixer, apart(config, 'prefix'));
 
-const PATH_INDEX = DIR_HTML + 'index.html';
+const isDev = process.env.NODE_ENV === 'development';
+
+const getIndexPath = () => {
+    const dist = isDev ? 'dist-dev' : 'dist';
+    
+    return DIR + `${dist}/index.html`;
+}
 
 const TMPL_PATH   = [
     'file',
@@ -153,26 +158,16 @@ function readFiles(callback) {
 function route(request, response, callback) {
     let name = ponse.getPathName(request);
     
-    const isAuth = RegExp('^(/auth|/auth/github)$').test(name);
     const isFS = RegExp('^/$|^' + FS).test(name);
     const p = {
-        request     : request,
-        response    : response,
+        request,
+        response,
         gzip        : true,
-        name        : name
+        name,
     };
     
-    if (!isAuth && !isFS)
-        return callback();
-    
-    if (isAuth) {
-        p.name = DIR_HTML + name + '.html';
-        ponse.sendFile(p);
-        return;
-    }
-    
     if (!isFS)
-        return;
+        return callback();
     
     name = name.replace(CloudFunc.FS, '') || '/';
     const fullPath = root(name);
@@ -183,7 +178,7 @@ function route(request, response, callback) {
         
         if (!error)
             return buildIndex(dir, (error, data) => {
-                p.name = PATH_INDEX;
+                p.name = getIndexPath();
                 
                 if (error)
                     return ponse.sendError(error, p);
@@ -207,28 +202,22 @@ function route(request, response, callback) {
 }
 
 function buildIndex(json, callback) {
-    const isMinify = config('minify');
-    
-    exec.if(!isMinify, (error, name) => {
-        fs.readFile(name || PATH_INDEX, 'utf8', (error, template) => {
-            if (error)
-                return;
-            
-            const panel = CloudFunc.buildFromJSON({
-                data        : json,
-                prefix      : prefix(),
-                template    : Template
-            });
-            
-            const data = indexProcessing({
-                panel   : panel,
-                data    : template
-            });
-            
-            callback(error, data);
+    fs.readFile(getIndexPath(), 'utf8', (error, template) => {
+        if (error)
+            return;
+        
+        const panel = CloudFunc.buildFromJSON({
+            data        : json,
+            prefix      : prefix(),
+            template    : Template
         });
-    },  (callback) => {
-        minify(PATH_INDEX, 'name', callback);
+        
+        const data = indexProcessing({
+            panel   : panel,
+            data    : template
+        });
+        
+        callback(error, data);
     });
 }
 
