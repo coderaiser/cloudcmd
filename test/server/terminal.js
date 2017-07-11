@@ -1,6 +1,7 @@
 'use strict';
 
 const test = require('tape');
+const mock = require('mock-require');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
@@ -58,6 +59,31 @@ test('cloudcmd: terminal: enabled', (t) => {
     console.log = log;
     
     clean(configPath);
+    require(configPath);
+    
+    t.end();
+});
+
+test('cloudcmd: terminal: no arg', (t) => {
+    const gritty = {};
+    
+    mock('gritty', gritty);
+    
+    clean(terminalPath);
+    stub(configPath, (a) => {
+        if (a === 'terminal')
+            return true;
+        
+        return 'gritty';
+    });
+    
+    const terminal = require(terminalPath);
+    const result = terminal();
+    
+    t.equal(result, gritty, 'should equal');
+    
+    clean(configPath);
+    require(configPath);
     
     t.end();
 });
