@@ -77,7 +77,6 @@ Cloud Commander supports command line parameters:
 | `--root`                      | set root directory
 | `--prefix`                    | set url prefix
 | `--port`                      | set port number
-| `--minify`                    | enable minification
 | `--progress`                  | show progress of file operations
 | `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
@@ -90,7 +89,6 @@ Cloud Commander supports command line parameters:
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
 | `--no-open`                   | do not open web browser when server started
-| `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
 | `--no-html-dialogs`           | do not use html dialogs
 | `--no-one-panel-mode`         | unset one panel mode
@@ -309,7 +307,6 @@ Here is description of options:
     "localStorage"      : true,     /* local storage                            */
     "buffer"            : true,     /* buffer for copying files                 */
     "dirStorage"        : true,     /* store directory listing to localStorage  */
-    "minify"            : false,    /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
     "open"              : false     /* open web browser when server started     */
     "cache"             : true,     /* add cache-control                        */

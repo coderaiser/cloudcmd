@@ -36,7 +36,6 @@ const args = require('minimist')(argv.slice(2), {
         'server',
         'online',
         'open',
-        'minify',
         'progress',
         'config-dialog',
         'console',
@@ -49,7 +48,6 @@ const args = require('minimist')(argv.slice(2), {
         server      : true,
         auth        : choose(env('auth'), config('auth')),
         port        : config('port'),
-        minify      : config('minify'),
         online      : config('online'),
         open        : config('open'),
         editor      : env('editor') || config('editor'),
@@ -100,7 +98,6 @@ function main() {
     config('auth', args.auth);
     config('online', args.online);
     config('open', args.open);
-    config('minify', args.minify);
     config('username', args.username);
     config('progress', args.progress);
     config('console', args.console);

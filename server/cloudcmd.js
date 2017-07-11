@@ -193,7 +193,6 @@ function cloudcmd(prefix, plugins, modules) {
         return config(name);
     };
     
-    const minify = apart(isOption, 'minify');
     const online = apart(isOption, 'online');
     const cache = apart(isOption, 'cache');
     const diff = apart(isOption, 'diff');
@@ -275,8 +274,8 @@ function cloudcmd(prefix, plugins, modules) {
         route,
         
         join({
-            dir     : DIR_ROOT,
-            minify,
+            dir: DIR_ROOT,
+            minify: false,
         }),
         
         pluginer(plugins),
