@@ -1,11 +1,12 @@
 'use strict';
 
 const DIR = './';
+const DIR_COMMON = '../common/';
 const path = require('path');
 
 const root = require(DIR + 'root');
 const config = require(DIR + 'config');
-const CloudFunc = require(DIR + 'cloudfunc');
+const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const markdown = require(DIR + 'markdown');
 
 const jaguar = require('jaguar/legacy');

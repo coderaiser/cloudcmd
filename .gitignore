@@ -19,9 +19,6 @@ modules/jquery-mousewheel
 modules/execon
 modules/emitify
 
-legacy
-server_
-
 .nyc_output
 
 *.swp

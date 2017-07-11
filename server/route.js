@@ -4,6 +4,7 @@ const DIR = __dirname + '/../';
 const DIR_TMPL = DIR + 'tmpl/';
 const DIR_HTML = DIR + 'html/';
 const DIR_SERVER = './';
+const DIR_COMMON = '../common/';
 const DIR_FS = DIR_TMPL + 'fs/';
 
 const fs = require('fs');
@@ -20,7 +21,7 @@ const apart = require('apart');
 const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
-const CloudFunc = require(DIR_SERVER + 'cloudfunc');
+const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const prefix = squad(prefixer, apart(config, 'prefix'));
 
 const isDev = process.env.NODE_ENV === 'development';
