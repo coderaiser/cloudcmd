@@ -10,7 +10,6 @@
     "localStorage": true,
     "buffer": true,
     "dirStorage": false,
-    "minify": false,
     "online": true,
     "open": false,
     "cache": true,
