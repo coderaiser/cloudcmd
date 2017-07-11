@@ -17,7 +17,10 @@ const distDev = path.resolve(__dirname, 'dist-dev');
 const devtool = isDev ? 'eval' : 'source-map';
 const notEmpty = (a) => a;
 const clean = (array) => array.filter(notEmpty);
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin')
 
 const extractMain = new ExtractTextPlugin('[name].css');
 const extractNojs = new ExtractTextPlugin('nojs.css');
@@ -34,6 +37,12 @@ const plugins = clean([
         name: 'cloudcmd',
         filename: 'cloudcmd.js',
     }),
+    new HtmlWebpackPlugin({
+        template: 'html/index.html',
+        minify: !isDev && getMinifyHtmlOptions(),
+        excludeAssets: [/\\*/],
+    }),
+    new HtmlWebpackExcludeAssetsPlugin(),
     extractMain,
     extractNojs,
     extractView,
@@ -127,5 +136,30 @@ function extract(name, extractCss) {
                 'css-loader?minimize'
         ])
     };
+}
+
+function getMinifyHtmlOptions() {
+    return {
+        removeComments:                 true,
+        removeCommentsFromCDATA:        true,
+        removeCDATASectionsFromCDATA:   true,
+        collapseWhitespace:             true,
+        collapseBooleanAttributes:      true,
+        removeAttributeQuotes:          true,
+        removeRedundantAttributes:      true,
+        useShortDoctype:                true,
+        removeEmptyAttributes:          true,
+        /* оставляем, поскольку у нас
+         * в элемент fm генерируеться
+         * таблица файлов
+         */
+        removeEmptyElements:            false,
+        removeOptionalTags:             true,
+        removeScriptTypeAttributes:     true,
+        removeStyleLinkTypeAttributes:  true,
+        
+        minifyJS:                       true,
+        minifyCSS:                      true
+    }
 }
 
