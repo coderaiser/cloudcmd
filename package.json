@@ -118,7 +118,7 @@
     "flop": "^2.0.0",
     "format-io": "^0.9.6",
     "fullstore": "^1.0.0",
-    "http-auth": "^2.3.1",
+    "http-auth": "^3.2.3",
     "inly": "^1.0.2",
     "ishtar": "^2.0.0",
     "jaguar": "^3.0.0",
