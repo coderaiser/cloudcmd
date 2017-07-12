@@ -2,7 +2,6 @@
 
 const DIR = __dirname + '/../';
 const DIR_TMPL = DIR + 'tmpl/';
-const DIR_HTML = DIR + 'html/';
 const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
 const DIR_FS = DIR_TMPL + 'fs/';
@@ -13,7 +12,6 @@ const flop = require('flop');
 const ponse = require('ponse');
 const files = require('files-io');
 const rendy = require('rendy');
-const exec = require('execon');
 const format = require('format-io');
 const squad = require('squad');
 const apart = require('apart');
@@ -30,7 +28,7 @@ const getIndexPath = () => {
     const dist = isDev ? 'dist-dev' : 'dist';
     
     return DIR + `${dist}/index.html`;
-}
+};
 
 const TMPL_PATH   = [
     'file',
