@@ -20,7 +20,7 @@ const clean = (array) => array.filter(notEmpty);
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin')
+const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 
 const extractMain = new ExtractTextPlugin('[name].css');
 const extractNojs = new ExtractTextPlugin('nojs.css');
@@ -160,6 +160,6 @@ function getMinifyHtmlOptions() {
         
         minifyJS:                       true,
         minifyCSS:                      true
-    }
+    };
 }
 
