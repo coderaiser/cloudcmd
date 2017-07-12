@@ -1,3 +1,18 @@
+2017.07.12, v7.0.0
+
+feature:
+- (auth) add currify
+- (cloudcmd) require es2015 versions of packages
+- (package) opn v5.1.0
+- (package) http-auth v3.2.3
+- (package) package-json v4.0.1
+- (package) chalk v2.0.1
+- (cloudcmd) rm support of node.js < 4.0.0
+- (cloudcmd) rm config option: minify
+- (route) rm minify
+- (package) extract-text-webpack-plugin v3.0.0
+
+
 2017.07.10, v6.15.4
 
 feature:
