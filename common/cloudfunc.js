@@ -53,7 +53,8 @@ function getPathLink(url, prefix, template) {
         .split('/')
         .slice(1, -1);
     
-    const allNames = ['/', ...names];
+    const allNames = ['/'].concat(names);
+    
     const length = allNames.length - 1;
     
     let path = '/';
@@ -92,7 +93,8 @@ module.exports.buildFromJSON = (params) => {
     const templateLink = template.link;
     const json = params.data;
     
-    const {path, files} = json;
+    const path = json.path;
+    const files = json.files;
     
     const sort = params.sort || 'name';
     const order = params.order || 'asc';

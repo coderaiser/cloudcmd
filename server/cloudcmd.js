@@ -15,7 +15,7 @@ const prefixer = require(DIR + 'prefixer');
 const pluginer = require(DIR + 'plugins');
 const terminal = require(DIR + 'terminal');
 
-const currify = require('currify');
+const currify = require('currify/legacy');
 const apart = require('apart');
 const join = require('join-io');
 const ponse = require('ponse');
