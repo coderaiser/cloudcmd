@@ -5,6 +5,8 @@ docker-compose.yml
 shell
 test
 coverage
+css
+html
 
 modules/jquery/dist
 modules/jquery/external
