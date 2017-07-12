@@ -2,6 +2,8 @@
 
 const httpAuth = require('http-auth');
 const criton = require('criton');
+const currify = require('currify');
+const middle = currify(_middle);
 
 const config = require('./config');
 
@@ -13,16 +15,14 @@ module.exports = () => {
     return middle(auth);
 };
 
-function middle(authentication) {
-    return (req, res, next) => {
-        const is = config('auth');
-        
-        if (!is)
-            return next();
-        
-        const success = () => next(/* success */);
-        authentication.check(req, res, success);
-    };
+function _middle(authentication, req, res, next) {
+    const is = config('auth');
+    
+    if (!is)
+        return next();
+    
+    const success = () => next(/* success */);
+    authentication.check(req, res, success);
 }
 
 function check(username, password, callback) {
