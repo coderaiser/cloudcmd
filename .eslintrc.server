@@ -1,8 +1,7 @@
 {
     "env": {
         "es6": true,
-        "node": true,
-        "browser": true
+        "node": true
     },
     "parserOptions": {
         "ecmaVersion": 6,
@@ -11,9 +10,14 @@
     "rules": {
         "indent": ["error", 4],
         "semi": "error",
-        "no-use-before-define": ["error", "nofunc"]
+        "no-use-before-define": ["error", "nofunc"],
+        'no-process-exit': 0
     },
     "extends": [
-        "eslint:recommended"
+        "eslint:recommended",
+        "plugin:node/recommended"
+    ],
+    "plugins": [
+        "node"
     ]
 }

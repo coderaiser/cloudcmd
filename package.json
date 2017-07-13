@@ -39,7 +39,8 @@
     "cloudcmd": "bin/cloudcmd.js"
   },
   "config": {
-    "dirs": "bin server test webpack.config.js"
+    "dirs": "bin/cloudcmd.js server",
+    "dirs_dev": "test bin/release.js webpack.config.js"
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
@@ -51,7 +52,8 @@
     "lint": "redrun lint:*",
     "lint:css": "stylelint css/*.css",
     "lint:js": "redrun lint:js:*",
-    "lint:js:eslint:server": "eslint --rule 'no-console:0' $npm_package_config_dirs",
+    "lint:js:eslint:server": "eslint --rule 'no-console:0' -c .eslintrc.server $npm_package_config_dirs",
+    "lint:js:eslint:dev": "eslint --rule 'no-console:0' $npm_package_config_dirs_dev",
     "lint:js:jshint": "jshint bin client server",
     "lint:js:jscs": "jscs --esnext $npm_package_config_dirs",
     "lint:js:eslint:client": "eslint --rule 'no-console:0' --env browser client",
@@ -160,6 +162,7 @@
     "es6-promise": "^4.0.5",
     "es6-promisify": "^5.0.0",
     "eslint": "^4.0.0",
+    "eslint-plugin-node": "^5.1.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "gunzip-maybe": "^1.3.1",
