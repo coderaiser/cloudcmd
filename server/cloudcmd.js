@@ -198,8 +198,9 @@ function cloudcmd(prefix, plugins, modules) {
     const cache = apart(isOption, 'cache');
     const diff = apart(isOption, 'diff');
     const zip = apart(isOption, 'zip');
+    const dir = DIR_ROOT;
     
-    const ponseStatic = ponse.static(DIR_ROOT, {cache});
+    const ponseStatic = ponse.static(dir, {cache});
    
     const funcs = clean([
         config('console') && konsole({
@@ -275,8 +276,7 @@ function cloudcmd(prefix, plugins, modules) {
         route,
         
         join({
-            dir: DIR_ROOT,
-            minify: false,
+            dir,
         }),
         
         pluginer(plugins),
