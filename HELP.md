@@ -1,4 +1,4 @@
-# Cloud Commander v7.0.1
+# Cloud Commander v7.0.2
 
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
@@ -589,6 +589,7 @@ There is a lot ways to be involved in `Cloud Commander` development:
 
 Version history
 ---------------
+- *2017.07.14*, **[v7.0.2](//github.com/coderaiser/cloudcmd/releases/tag/v7.0.2)**
 - *2017.07.12*, **[v7.0.1](//github.com/coderaiser/cloudcmd/releases/tag/v7.0.1)**
 - *2017.07.12*, **[v7.0.0](//github.com/coderaiser/cloudcmd/releases/tag/v7.0.0)**
 - *2017.07.14*, **[v6.15.5](//github.com/coderaiser/cloudcmd/releases/tag/v6.15.5)**
