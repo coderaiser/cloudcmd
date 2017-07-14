@@ -117,7 +117,7 @@
     "execon": "^1.2.0",
     "express": "^4.13.0",
     "files-io": "^1.2.0",
-    "flop": "^2.0.0",
+    "flop": "^3.0.0",
     "format-io": "^0.9.6",
     "fullstore": "^1.0.0",
     "http-auth": "^3.2.3",
