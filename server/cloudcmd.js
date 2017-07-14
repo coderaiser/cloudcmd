@@ -240,7 +240,6 @@ function cloudcmd(prefix, plugins, modules) {
         
         remedy({
             prefix  : prefix + '/remedy',
-            online,
         }),
         
         ishtar({
