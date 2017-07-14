@@ -230,7 +230,7 @@ cloudcmd --terminal --terminal-path `gritty --path` --save
 
 ### Windows
 
-On Windows you need to install `windows-build-tools` before:
+On Windows you need to install `windows-build-tools` first:
 
 ```sh
 npm install --global windows-build-tools
