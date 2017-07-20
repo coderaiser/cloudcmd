@@ -10,6 +10,7 @@ RUN npm install --production && \
     apk update && \
     apk add --no-cache bash make g++ python && \
     npm i gritty && \
+    npm cache clean --force && \
     apk del make g++ python && \
     rm -rf /usr/include /tmp/* /var/cache/apk/*
 
