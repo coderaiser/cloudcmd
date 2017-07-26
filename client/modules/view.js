@@ -355,6 +355,7 @@ function onOverLayClick(event) {
         return;
     
     hideOverlay();
+    hide();
     
     const element = DOM.getCurrentByPosition(position);
     
@@ -373,8 +374,6 @@ function onOverLayClick(event) {
         return;
     
     DOM.setCurrentFile(element);
-    
-    hide();
 }
 
 function hideOverlay() {
