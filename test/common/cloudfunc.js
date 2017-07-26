@@ -53,7 +53,7 @@ let Expect =
         '</span>'                                                           +
     '</div>';
 
-test('render', (t) => {
+test('cloudfunc: render', (t) => {
     const paths = {};
     const filesList = TMPL_PATH
         .map((name) => {
@@ -141,6 +141,20 @@ test('cloudfunc: formatMsg', (t) => {
     const result = CloudFunc.formatMsg(msg, name, status);
     
     t.equal(result, 'hello: ok');
+    t.end();
+});
+
+test('cloudfunc: getTitle', (t) => {
+    const result = CloudFunc.getTitle();
+    
+    t.equal(result, 'Cloud Commander - /');
+    t.end();
+});
+
+test('cloudfunc: getTitle', (t) => {
+    const result = CloudFunc.getTitle('/hello/world');
+    
+    t.equal(result, 'Cloud Commander - /hello/world');
     t.end();
 });
 

@@ -34,7 +34,7 @@ module.exports.formatMsg = (msg, name, status) => {
  * @path
  */
 module.exports.getTitle = (path) => {
-    return  NAME + ' - ' + (path || Path());
+    return NAME + ' - ' + (path || Path());
 };
 
 /** Функция получает адреса каждого каталога в пути
