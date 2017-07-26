@@ -93,6 +93,7 @@ Cloud Commander supports command line parameters:
 | `--terminal`                  | enable terminal
 | `--terminal-path`             | set terminal path
 | `--vim`                       | enable vim hot keys
+| `--keys-panel`                | show keys panel
 | `--columns`                   | set visible columns
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
@@ -110,6 +111,7 @@ Cloud Commander supports command line parameters:
 | `--no-sync-console-path`      | do not sync console path
 | `--no-terminal`               | disable terminal
 | `--no-vim`                    | disable vim hot keys
+| `--no-keys-panel`             | hide keys panel
 | `--no-columns`                | set visible default columns
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
@@ -364,7 +366,7 @@ Here is description of options:
     "online"            : true,     /* load js files from cdn or local path     */
     "open"              : false     /* open web browser when server started     */
     "cache"             : true,     /* add cache-control                        */
-    "showKeysPanel"     : true,     /* show classic panel with buttons of keys  */
+    "keysPanel"         : true,     /* show classic panel with buttons of keys  */
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
     "root"              : "/",      /* root directory                           */
@@ -399,6 +401,8 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_SYNC_CONSOLE_PATH` - sync console path
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
+- `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
+- `CLOUDCMD_KEYS_PANEL` - show keys panel
 - `CLOUDCMD_AUTH` - enable authentication
 - `CLOUDCMD_USERNAME` - set username
 - `CLOUDCMD_PASSWORD` - set password

@@ -14,7 +14,7 @@
     "online": true,
     "open": false,
     "cache": true,
-    "showKeysPanel": true,
+    "keysPanel": true,
     "port": 8000,
     "ip": null,
     "root": "/",

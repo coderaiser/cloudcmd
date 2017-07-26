@@ -28,6 +28,7 @@
     "--terminal-path            ": "set terminal path",
     "--vim                      ": "enable vim hot keys",
     "--columns                  ": "set visible columns",
+    "--keys-panel               ": "show keys panel",
     "--no-server                ": "do not start server",
     "--no-auth                  ": "disable authorization",
     "--no-online                ": "load scripts from local server",
@@ -44,5 +45,6 @@
     "--no-contact               ": "disable contact",
     "--no-terminal              ": "disable terminal",
     "--no-vim                   ": "disable vim hot keys",
+    "--no-keys-panel            ": "hide keys panel",
     "--no-columns               ": "set default visible columns"
 }

@@ -49,7 +49,7 @@ function indexProcessing(options) {
     
     let data = options.data;
     
-    if (!config('showKeysPanel'))
+    if (!config('keysPanel'))
         data = hideKeysPanel(data);
     
     if (isOnePanel)

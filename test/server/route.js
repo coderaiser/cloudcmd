@@ -157,7 +157,7 @@ test('cloudcmd: route: buttons: one panel mode: move', (t) => {
 
 test('cloudcmd: route: keys panel: hide', (t) => {
     const config = {
-        showKeysPanel: false
+        keysPanel: false
     };
     
     before({config}, (port, after) => {
@@ -172,7 +172,7 @@ test('cloudcmd: route: keys panel: hide', (t) => {
 
 test('cloudcmd: route: keys panel', (t) => {
     const config = {
-        showKeysPanel: true
+        keysPanel: true
     };
     
     before({config}, (port, after) => {

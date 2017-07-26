@@ -50,6 +50,7 @@ const args = require('minimist')(argv.slice(2), {
         'html-dialogs',
         'show-config',
         'vim',
+        'keys-panel',
     ],
     default: {
         server      : true,
@@ -78,6 +79,7 @@ const args = require('minimist')(argv.slice(2), {
         'html-dialogs': config('htmlDialogs'),
         'vim': choose(env.bool('vim'), config('vim')),
         'columns': env('columns') || config('columns') || '',
+        'keys-panel': env.bool('keys_panel') || config('keysPanel'),
     },
     alias: {
         v: 'version',
@@ -130,6 +132,7 @@ function main() {
     config('confirmMove', args['confirm-move']);
     config('onePanelMode', args['one-panel-mode']);
     config('configDialog', args['config-dialog']);
+    config('keysPanel', args['keys-panel']);
     
     readConfig(args.config);
     

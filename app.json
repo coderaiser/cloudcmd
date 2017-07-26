@@ -52,6 +52,16 @@
           "value": "gritty",
           "required": false
       },
+      "CLOUDCMD_CONFIG_DIALOG": {
+          "description": "show config dialog",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_KEYS_PANEL": {
+          "description": "show keys panel",
+          "value": "true",
+          "required": false
+      },
       "CLOUDCMD_NAME": {
           "description": "set tab name in web browser",
           "value": "",
