@@ -37,6 +37,11 @@
           "value": "false",
           "required": false
       },
+      "CLOUDCMD_NAME": {
+          "description": "set tab name in web browser",
+          "value": "",
+          "required": false
+      },
       "CLOUDCMD_AUTH": {
           "description": "enable authorization",
           "value": "false",

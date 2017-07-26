@@ -33,8 +33,20 @@ module.exports.formatMsg = (msg, name, status) => {
  * Функция возвращает заголовок веб страницы
  * @path
  */
-module.exports.getTitle = (path) => {
-    return NAME + ' - ' + (path || Path());
+module.exports.getTitle = (options) => {
+    options = options || {};
+    
+    const path = options.path || Path();
+    const name = options.name;
+    
+    const array = [
+        name || NAME,
+        path,
+    ];
+    
+    return array
+        .filter(Boolean)
+        .join(' - ');
 };
 
 /** Функция получает адреса каждого каталога в пути

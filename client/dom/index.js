@@ -461,8 +461,12 @@ function CmdProto() {
         
         let path = DOM.getCurrentDirPath();
         
+        const name = CloudCmd.config('name');
         if (path !== pathWas) {
-            DOM.setTitle(getTitle(path));
+            DOM.setTitle(getTitle({
+                name,
+                path,
+            }));
             
             /* history could be present
              * but it should be false

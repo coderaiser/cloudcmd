@@ -80,11 +80,12 @@ Cloud Commander supports command line parameters:
 | `--progress`                  | show progress of file operations
 | `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
+| `--name`                      | set tab name in web browser
 | `--one-panel-mode`            | set one panel mode
-  `--config-dialog`             | enable config dialog
-  `--console`                   | enable console
-  `--terminal`                  | enable terminal
-  `--terminal-path`             | set terminal path
+| `--config-dialog`             | enable config dialog
+| `--console`                   | enable console
+| `--terminal`                  | enable terminal
+| `--terminal-path`             | set terminal path
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
@@ -95,6 +96,8 @@ Cloud Commander supports command line parameters:
 | `--no-config-dialog`          | disable config dialog
 | `--no-console`                | disable console
 | `--no-terminal`               | disable terminal
+| `--no-name`                   | set empty tab name in web browser
+
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -296,9 +299,10 @@ Here is description of options:
 
 ```js
 {
+    "name"              : "",       /* set tab name in web browser              */
     "auth"              : false,    /* enable http authentication               */
     "username"          : "root",   /* username for authentication              */
-    "password"          : "toor",   /* password hash for authentication*/
+    "password"          : "toor",   /* password hash for authentication         */
     "algo"              : "sha512WithRSAEncryption", /* cryptographic algorithm */
     "editor"            : "edward", /* default, could be "dword" or "edward"    */
     "packer"            : "tar",    /* default, could be "tar" or "zip"         */
@@ -329,6 +333,7 @@ Here is description of options:
 
 Some config options can be overridden with `environment variables` such:
 
+- `CLOUDCMD_NAME` - set tab name in web browser
 - `CLOUDCMD_EDITOR` - set editor
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path

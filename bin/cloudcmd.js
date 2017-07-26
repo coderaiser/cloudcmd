@@ -19,6 +19,7 @@ const choose = (a, b) => {
 const argv = process.argv;
 const args = require('minimist')(argv.slice(2), {
     string: [
+        'name',
         'port',
         'password',
         'username',
@@ -46,6 +47,7 @@ const args = require('minimist')(argv.slice(2), {
     ],
     default: {
         server      : true,
+        name        : env('name') || config('name'),
         auth        : choose(env('auth'), config('auth')),
         port        : config('port'),
         online      : config('online'),
@@ -95,6 +97,7 @@ function main() {
     
     port(args.port);
     
+    config('name', args.name);
     config('auth', args.auth);
     config('online', args.online);
     config('open', args.open);

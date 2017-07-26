@@ -13,7 +13,9 @@ const Images = require('../dom/images');
 const Events = require('../dom/events');
 const Files = require('../dom/files');
 
-const {Dialog} = DOM;
+const {getTitle} = require('../../common/cloudfunc');
+
+const {Dialog, setTitle} = DOM;
 
 const TITLE = 'Config';
 const alert = currify(Dialog.alert, TITLE);
@@ -200,7 +202,9 @@ function onChange(el) {
     const data = input.getValue(name, Element);
     const type = el.type;
     
-    if (type === 'checkbox')
+    if (name === 'name')
+        onNameChange(data);
+    else if (type === 'checkbox')
         if (/^(diff|buffer|dirStorage)$/.test(name))
             onLSChange(name, data);
         else if (name === 'localStorage')
@@ -285,6 +289,12 @@ function onAuthChange(checked) {
     
     elUsername.disabled =
     elPassword.disabled = !checked;
+}
+
+function onNameChange(name) {
+    setTitle(getTitle({
+        name
+    }));
 }
 
 function onKey({keyCode, target}) {

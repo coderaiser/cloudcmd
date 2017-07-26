@@ -5,7 +5,9 @@ const COMMONDIR = DIR + 'common/';
 const TMPLDIR = DIR + 'tmpl/';
 
 const Util = require(COMMONDIR + 'util');
-const CloudFunc = require(COMMONDIR + 'cloudfunc');
+const CloudFuncPath = COMMONDIR + 'cloudfunc';
+    
+const CloudFunc = require(CloudFuncPath);
 
 const files = require('files-io');
 const currify = require('currify');
@@ -151,22 +153,37 @@ test('cloudfunc: formatMsg', (t) => {
 });
 
 test('cloudfunc: getTitle', (t) => {
-    const name = COMMONDIR + 'cloudfunc';
+    const CloudFunc = fresh(CloudFuncPath);
     
-    const CloudFunc = fresh(name);
     const result = CloudFunc.getTitle();
     
     t.equal(result, 'Cloud Commander - /');
     t.end();
 });
 
-test('cloudfunc: getTitle', (t) => {
-    const name = COMMONDIR + 'cloudfunc';
+test('cloudfunc: getTitle: no name', (t) => {
+    const CloudFunc = fresh(CloudFuncPath);
+    const path = '/hello/world';
     
-    const CloudFunc = fresh(name);
-    const result = CloudFunc.getTitle('/hello/world');
+    const result = CloudFunc.getTitle({
+        path
+    });
     
     t.equal(result, 'Cloud Commander - /hello/world');
+    t.end();
+});
+
+test('cloudfunc: getTitle: name, path', (t) => {
+    const CloudFunc = fresh(CloudFuncPath);
+    const name = 'hello';
+    const path = '/hello/world';
+    
+    const result = CloudFunc.getTitle({
+        name,
+        path,
+    });
+    
+    t.equal(result, 'hello - /hello/world');
     t.end();
 });
 

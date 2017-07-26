@@ -107,8 +107,12 @@ function indexProcessing(options) {
             className   : ''
         });
     
+    const name = config('name');
+    
     data = rendy(data, {
-        title: CloudFunc.getTitle(),
+        title: CloudFunc.getTitle({
+            name,
+        }),
         fm: left + right,
         prefix: prefix(),
         config: JSON.stringify(config('*')),
