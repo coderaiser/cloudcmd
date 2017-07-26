@@ -6,9 +6,15 @@ const TMPLDIR = DIR + 'tmpl/';
 
 const Util = require(COMMONDIR + 'util');
 const CloudFunc = require(COMMONDIR + 'cloudfunc');
+
 const files = require('files-io');
+const currify = require('currify');
+
+const swap = currify((fn, a, b) => fn(b, a));
 
 const test = require('tape');
+const fresh = swap(require('fresh-require'), require);
+
 const htmlLooksLike = require('html-looks-like');
 
 const FS_DIR = TMPLDIR   + 'fs/';
@@ -145,6 +151,9 @@ test('cloudfunc: formatMsg', (t) => {
 });
 
 test('cloudfunc: getTitle', (t) => {
+    const name = COMMONDIR + 'cloudfunc';
+    
+    const CloudFunc = fresh(name);
     const result = CloudFunc.getTitle();
     
     t.equal(result, 'Cloud Commander - /');
@@ -152,6 +161,9 @@ test('cloudfunc: getTitle', (t) => {
 });
 
 test('cloudfunc: getTitle', (t) => {
+    const name = COMMONDIR + 'cloudfunc';
+    
+    const CloudFunc = fresh(name);
     const result = CloudFunc.getTitle('/hello/world');
     
     t.equal(result, 'Cloud Commander - /hello/world');
