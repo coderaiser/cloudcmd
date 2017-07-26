@@ -122,3 +122,25 @@ test('render', (t) => {
     });
 });
 
+test('cloudfunc: formatMsg', (t) => {
+    const msg = 'hello';
+    const name = 'name';
+    const status = 'ok';
+    
+    const result = CloudFunc.formatMsg(msg, name, status);
+    
+    t.equal(result, 'hello: ok("name")');
+    t.end();
+});
+
+test('cloudfunc: formatMsg', (t) => {
+    const msg = 'hello';
+    const name = null;
+    const status = 'ok';
+    
+    const result = CloudFunc.formatMsg(msg, name, status);
+    
+    t.equal(result, 'hello: ok');
+    t.end();
+});
+

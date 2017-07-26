@@ -21,11 +21,10 @@ module.exports.Entity = Entity;
 
 module.exports.formatMsg = (msg, name, status) => {
     status = status || 'ok';
+    name = name || '';
     
     if (name)
         name = '("' + name + '")';
-    else
-        name = '';
     
     return msg + ': ' + status + name;
 };
