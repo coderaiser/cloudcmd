@@ -1,3 +1,10 @@
+2017.07.27, v7.1.1
+
+fix:
+- (view) config: additional panel at the bottom
+- (view) terminal: set .view height
+
+
 2017.07.27, v7.1.0
 
 fix:
