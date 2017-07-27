@@ -53,7 +53,8 @@ module.exports = (req, res, next) => {
  * additional processing of index file
  */
 function indexProcessing(options) {
-    const keysPanel = '<div id="js-keyspanel" class="{{ className }}';
+    const keysPanel = '<div id="js-keyspanel" class="{{ className }}"';
+    const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';
     const isOnePanel = config('onePanelMode');
     const noConfig = !config('configDialog');
     const noConsole = !config('console');
@@ -64,8 +65,9 @@ function indexProcessing(options) {
     
     let from;
     let to;
+    
     if (!config('showKeysPanel')) {
-        from = rendy(keysPanel, {
+        from = rendy(keysPanelRegExp, {
             className: 'keyspanel'
         });
         
@@ -73,7 +75,7 @@ function indexProcessing(options) {
             className: 'keyspanel hidden'
         });
         
-        data = data.replace(from, to);
+        data = data.replace(RegExp(from), to);
     }
     
     if (isOnePanel)
