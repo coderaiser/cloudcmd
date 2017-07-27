@@ -1,6 +1,7 @@
 .view {
     font-size: 16px;
     white-space: pre;
+    height: 100%;
 }
 
 .view:focus {
