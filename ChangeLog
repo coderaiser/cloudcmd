@@ -1,3 +1,18 @@
+2017.07.27, v7.1.0
+
+fix:
+- (route) showKeysPanel
+- (config) additional bar: .view: rm height: 100%
+- (view) key binding after click outside the modal window
+
+feature:
+- (cloudcmd) --name: add ability to set tab name in web browser
+- (Dockerfile) decrease image size: clean npm cache after install
+- (gitignore) add yarn-error.log
+- (package) stylelint-config-standard v17.0.0
+- (package) stylelint v8.0.0
+
+
 2017.07.14, v7.0.2
 
 fix:
