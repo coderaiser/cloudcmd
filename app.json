@@ -27,6 +27,16 @@
           "value": "true",
           "required": false
       },
+      "CLOUDCMD_CONFIG_DIALOG": {
+          "description": "show config dialog",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_CONSOLE": {
+          "description": "enable console",
+          "value": "true",
+          "required": false
+      },
       "CLOUDCMD_TERMINAL": {
           "description": "enable terminal",
           "value": "true",
@@ -35,11 +45,6 @@
       "CLOUDCMD_TERMINAL_PATH": {
           "description": "set terminal path",
           "value": "gritty",
-          "required": false
-      },
-      "CLOUDCMD_CONFIG_DIALOG": {
-          "description": "show config dialog",
-          "value": "false",
           "required": false
       },
       "CLOUDCMD_NAME": {

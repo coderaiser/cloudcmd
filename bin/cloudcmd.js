@@ -60,7 +60,7 @@ const args = require('minimist')(argv.slice(2), {
         root        : config('root'),
         prefix      : config('prefix'),
         progress    : config('progress'),
-        console     : config('console'),
+        console     : choose(env.bool('console'), config('console')),
         contact     : choose(env.bool('contact'), config('contact')),
         terminal    : choose(env.bool('terminal'), config('terminal')),
         
