@@ -62,7 +62,7 @@ function getEnv() {
         ACTIVE_DIR: DOM.getCurrentDirPath,
         PASSIVE_DIR: DOM.getNotCurrentDirPath,
         CURRENT_NAME: DOM.getCurrentName,
-        CURRENT_PATH: DOM.getCurrentPath
+        CURRENT_PATH: DOM.getCurrentPath,
     };
 }
 
