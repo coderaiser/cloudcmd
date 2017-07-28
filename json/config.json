@@ -23,7 +23,7 @@
     "htmlDialogs": true,
     "configDialog": true,
     "onePanelMode": false,
-    "configDialog": true,
+    "contact": true,
     "console": true,
     "terminal": false,
     "terminalPath": "",

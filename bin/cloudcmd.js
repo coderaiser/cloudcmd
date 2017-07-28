@@ -12,7 +12,7 @@ const env = require(DIR_SERVER + 'env');
 const choose = (a, b) => {
     if (!a && typeof a !== 'boolean')
         return b;
-    
+
     return a;
 };
 
@@ -41,6 +41,7 @@ const args = require('minimist')(argv.slice(2), {
         'config-dialog',
         'console',
         'terminal',
+        'contact',
         'one-panel-mode',
         'html-dialogs',
         'show-config',
@@ -61,7 +62,8 @@ const args = require('minimist')(argv.slice(2), {
         progress    : config('progress'),
         console     : config('console'),
         terminal    : choose(env.bool('terminal'), config('terminal')),
-        
+        contact     : config('contact'),
+
         'terminal-path': env('terminal_path') || config('terminalPath'),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'one-panel-mode': config('onePanelMode'),
@@ -92,11 +94,11 @@ else
 function main() {
     if (args.repl)
         repl();
-    
+
     checkUpdate();
-    
+
     port(args.port);
-    
+
     config('name', args.name);
     config('auth', args.auth);
     config('online', args.online);
@@ -104,6 +106,7 @@ function main() {
     config('username', args.username);
     config('progress', args.progress);
     config('console', args.console);
+    config('contact', args.contact);
     config('terminal', args.terminal);
     config('terminalPath', args['terminal-path']);
     config('editor', args.editor);
@@ -112,29 +115,29 @@ function main() {
     config('htmlDialogs', args['html-dialogs']);
     config('onePanelMode', args['one-panel-mode']);
     config('configDialog', args['config-dialog']);
-    
+
     readConfig(args.config);
-    
+
     const options = {
         root: args.root || '/', /* --no-root */
         editor: args.editor,
         packer: args.packer,
         prefix: args.prefix
     };
-    
+
     const password = env('password') || args.password;
-    
+
     if (password)
         config('password', getPassword(password));
-    
+
     validateRoot(options.root);
-    
+
     if (args['show-config'])
         showConfig();
-    
+
     if (!args.save)
         return start(options);
-    
+
     config.save(() => {
         start(options);
     });
@@ -147,7 +150,7 @@ function validateRoot(root) {
 
 function getPassword(password) {
     const criton = require('criton');
-    
+
     return criton(password, config('algo'));
 }
 
@@ -157,48 +160,48 @@ function version() {
 
 function start(config) {
     const SERVER = DIR_SERVER + 'server';
-    
+
     if (args.server)
         require(SERVER)(config);
 }
 
 function port(arg) {
     const number = parseInt(arg, 10);
-    
+
     if (!isNaN(number))
         return config('port', number);
-    
+
     exit('cloudcmd --port: should be a number');
 }
 
 function showConfig() {
     const show = require('../server/show-config');
     const data = show(config('*'));
-    
+
     console.log(data);
 }
 
 function readConfig(name) {
     if (!name)
         return;
-    
+
     const fs = require('fs');
     const tryCatch = require('try-catch');
     const jju = require('jju');
-    
+
     const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
         mode: 'json'
     });
-    
+
     let data;
-    
+
     const error = tryCatch(() => {
         data = readjsonSync(name);
     });
-    
+
     if (error)
         return exit(error.message);
-    
+
     Object.keys(data).forEach((item) => {
         config(item, data[item]);
     });
@@ -208,14 +211,14 @@ function help() {
     const bin = require('../json/help');
     const usage = 'Usage: cloudcmd [options]';
     const url = Info.homepage;
-    
+
     console.log(usage);
     console.log('Options:');
-    
+
     Object.keys(bin).forEach((name) => {
         console.log('  %s %s', name, bin[name]);
     });
-    
+
     console.log('\nGeneral help using Cloud Commander: <%s>', url);
 }
 
@@ -227,7 +230,7 @@ function repl() {
 function checkUpdate() {
     const load = require('package-json');
     const noop = () => {};
-    
+
     load(Info.name, 'latest')
         .then(showUpdateInfo)
         .catch(noop);
@@ -235,19 +238,19 @@ function checkUpdate() {
 
 function showUpdateInfo(data) {
     const version = data.version;
-    
+
     if (version !== Info.version) {
         const chalk = require('chalk');
         const rendy = require('rendy');
-        
+
         const latest = rendy('update available: {{ latest }}', {
             latest: chalk.green.bold('v' + version),
         });
-        
+
         const current = chalk.dim(rendy('(current: v{{ current }})', {
             current: Info.version
         }));
-        
+
         console.log('%s %s', latest, current);
     }
 }
