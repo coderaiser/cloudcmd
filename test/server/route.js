@@ -29,14 +29,14 @@ test('cloudcmd: route: no args', (t) => {
 
 test('cloudcmd: route: no res', (t) => {
     const fn = () => route({});
-    
+
     t.throws(fn, /res could not be empty!/, 'should throw when no res');
     t.end();
 });
 
 test('cloudcmd: route: no next', (t) => {
     const fn = () => route({}, {});
-    
+
     t.throws(fn, /next should be function!/, 'should throw when no next');
     t.end();
 });
@@ -45,7 +45,7 @@ test('cloudcmd: route: buttons: no console', (t) => {
     const config = {
         console: false
     };
-    
+
     before({config}, (port, after) => {
         getStr(`http://localhost:${port}/`)
             .then((result) => {
@@ -60,7 +60,7 @@ test('cloudcmd: route: buttons: no terminal', (t) => {
     const config = {
         terminal: false
     };
-    
+
     before({config}, (port, after) => {
         getStr(`http://localhost:${port}/`)
             .then((result) => {
@@ -71,11 +71,26 @@ test('cloudcmd: route: buttons: no terminal', (t) => {
     });
 });
 
+test('cloudcmd: route: buttons: no contact', (t) => {
+    const config = {
+        contact: false
+    };
+
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                t.ok(/icon-contact none/.test(result), 'should hide contact');
+                t.end();
+                after();
+            });
+    });
+});
+
 test('cloudcmd: route: buttons: no config', (t) => {
     const config = {
         configDialog: false
     };
-    
+
     before({config}, (port, after) => {
         getStr(`http://localhost:${port}/`)
             .then((result) => {

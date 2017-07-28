@@ -86,6 +86,7 @@ Cloud Commander supports command line parameters:
 | `--console`                   | enable console
 | `--terminal`                  | enable terminal
 | `--terminal-path`             | set terminal path
+| `--contact`                   | enable contact
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
@@ -96,6 +97,7 @@ Cloud Commander supports command line parameters:
 | `--no-config-dialog`          | disable config dialog
 | `--no-console`                | disable console
 | `--no-terminal`               | disable terminal
+| `--no-contact`                | disable contact
 | `--no-name`                   | set empty tab name in web browser
 
 
