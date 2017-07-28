@@ -85,3 +85,19 @@ test('cloudcmd: route: buttons: no config', (t) => {
             });
     });
 });
+
+test('cloudcmd: route: buttons: no contact', (t) => {
+    const config = {
+        contact: false
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                t.ok(/icon-contact none/.test(result), 'should hide contact');
+                t.end();
+                after();
+            });
+    });
+});
+

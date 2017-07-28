@@ -82,6 +82,7 @@ Cloud Commander supports command line parameters:
 | `--open`                      | open web browser when server started
 | `--name`                      | set tab name in web browser
 | `--one-panel-mode`            | set one panel mode
+| `--contact`                   | enable contact
 | `--config-dialog`             | enable config dialog
 | `--console`                   | enable console
 | `--terminal`                  | enable terminal
@@ -93,6 +94,7 @@ Cloud Commander supports command line parameters:
 | `--no-progress`               | do not show progress of file operations
 | `--no-html-dialogs`           | do not use html dialogs
 | `--no-one-panel-mode`         | unset one panel mode
+| `--no-contact`                | disable contact
 | `--no-config-dialog`          | disable config dialog
 | `--no-console`                | disable console
 | `--no-terminal`               | disable terminal
@@ -322,6 +324,7 @@ Here is description of options:
     "progress"          : true,     /* show progress of file operations         */
     "htmlDialogs"       : true,     /* use html dialogs                         */
     "onePanelMode"      : false,    /* set one panel mode                       */
+    "contact"           : true,     /* enable contact                           */
     "configDialog"      : true,     /* enable config dialog                     */
     "console"           : true,     /* enable console                           */
     "terminal"          : false,    /* disable terminal                         */
@@ -335,9 +338,10 @@ Some config options can be overridden with `environment variables` such:
 
 - `CLOUDCMD_NAME` - set tab name in web browser
 - `CLOUDCMD_EDITOR` - set editor
+- `CLOUDCMD_CONTACT` - enable contact
+- `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
-- `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_AUTH` - enable authentication
 - `CLOUDCMD_USERNAME` - set username
 - `CLOUDCMD_PASSWORD` - set password

@@ -22,6 +22,11 @@
           "value": "edward",
           "required": false
       },
+      "CLOUDCMD_CONTACT": {
+          "description": "enable contact",
+          "value": "true",
+          "required": false
+      },
       "CLOUDCMD_TERMINAL": {
           "description": "enable terminal",
           "value": "true",

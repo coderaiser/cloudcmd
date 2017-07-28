@@ -56,6 +56,7 @@ function indexProcessing(options) {
     const keysPanel = '<div id="js-keyspanel" class="{{ className }}"';
     const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';
     const isOnePanel = config('onePanelMode');
+    const noContact = !config('contact');
     const noConfig = !config('configDialog');
     const noConsole = !config('console');
     const noTerminal = !config('terminal');
@@ -82,6 +83,10 @@ function indexProcessing(options) {
         data = data
             .replace('icon-move', 'icon-move none')
             .replace('icon-copy', 'icon-copy none');
+    
+    if (noContact)
+        data = data
+            .replace('icon-contact', 'icon-contact none');
     
     if (noConfig)
         data = data

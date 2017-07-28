@@ -18,6 +18,7 @@
     "--one-panel-mode           ": "set one panel mode",
     "--config-dialog            ": "enable config dialog",
     "--console                  ": "enable console",
+    "--contact                  ": "enable contact",
     "--terminal                 ": "enable terminal",
     "--terminal-path            ": "set terminal path",
     "--open                     ": "open web browser when server started",
@@ -31,6 +32,7 @@
     "--no-one-panel-mode        ": "unset one panel mode",
     "--no-config-dialog         ": "disable config dialog",
     "--no-console               ": "disable console",
+    "--no-contact               ": "disable contact",
     "--no-terminal              ": "disable terminal",
     "--no-name                  ": "set default tab name in web browser"
 }
