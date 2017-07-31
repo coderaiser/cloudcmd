@@ -66,6 +66,7 @@
     "docker:pull:node": "docker pull node",
     "docker:pull:alpine": "docker pull mhart/alpine-node",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
+    "docker:push:latest": "docker push coderaiser/cloudcmd:latest",
     "docker:push:alpine": "docker push coderaiser/cloudcmd:`version`-alpine",
     "docker:push:alpine:latest": "docker push coderaiser/cloudcmd:latest-alpine",
     "docker:build": "docker build -t coderaiser/cloudcmd:`version` .",
