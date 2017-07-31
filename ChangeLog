@@ -1,3 +1,11 @@
+2017.07.31, v7.2.1
+
+fix:
+- (config) aditional panel
+- (view) no scrallbar on help
+- (package) docker:push:latest: add (#127)
+
+
 2017.07.28, v7.2.0
 
 feature:
