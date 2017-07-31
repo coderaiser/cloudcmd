@@ -30,10 +30,6 @@
     z-index: 0;
 }
 
-.fancybox-inner {
-    overflow: hidden !important;
-}
-
 .media, video {
     width: 100%;
 }
