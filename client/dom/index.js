@@ -483,7 +483,7 @@ function CmdProto() {
         /* scrolling to current file */
         DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
         
-        Cmd.updateCurrentInfo();
+        Cmd.updateCurrentInfo(currentFile);
         
         return DOM;
     };
@@ -1031,7 +1031,7 @@ function CmdProto() {
                     return;
                 
                 DOM.setCurrentName(to, current);
-                Cmd.updateCurrentInfo();
+                Cmd.updateCurrentInfo(current);
                 Storage.remove(dirPath);
                 
                 if (isExist)
