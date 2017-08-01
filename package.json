@@ -39,7 +39,7 @@
     "cloudcmd": "bin/cloudcmd.js"
   },
   "config": {
-    "dirs": "bin/cloudcmd.js server",
+    "dirs": "bin/cloudcmd.js common server",
     "dirs_dev": "test bin/release.js webpack.config.js"
   },
   "scripts": {
@@ -52,8 +52,8 @@
     "lint": "redrun lint:*",
     "lint:css": "stylelint css/*.css",
     "lint:js": "redrun lint:js:*",
-    "lint:js:eslint:server": "eslint --rule 'no-console:0' -c .eslintrc.server $npm_package_config_dirs",
-    "lint:js:eslint:dev": "eslint --rule 'no-console:0' $npm_package_config_dirs_dev",
+    "lint:js:server": "eslint --rule 'no-console:0' -c .eslintrc.server $npm_package_config_dirs",
+    "lint:js:dev": "eslint --rule 'no-console:0' $npm_package_config_dirs_dev",
     "lint:js:jshint": "jshint bin client server",
     "lint:js:jscs": "jscs --esnext $npm_package_config_dirs",
     "lint:js:eslint:client": "eslint --rule 'no-console:0' --env browser client",

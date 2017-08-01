@@ -1,50 +1,11 @@
 'use strict';
 
 const exec = require('execon');
-const rendy = require('rendy');
 const jonny = require('jonny');
-const itype = require('itype/legacy');
-
 const Scope = global || window;
 
 module.exports.getStrBigFirst = getStrBigFirst;
 module.exports.kebabToCamelCase = kebabToCamelCase;
-
-/**
- * copy objFrom properties to target
- *
- * @target
- * @objFrom
- */
-const extend = (target, objFrom) => {
-    const isFunc  = itype.function(objFrom);
-    const isArray = Array.isArray(objFrom);
-    const isObj = itype.object(target);
-    let ret = isObj ? target : {};
-    
-    if (isArray)
-        objFrom.forEach((item) => {
-           ret = Util.extend(target, item);
-        });
-    
-    else if (objFrom) {
-        const obj = isFunc ? new objFrom() : objFrom;
-        let keys = Object.keys(obj);
-        
-        if (!keys.length) {
-            const proto = Object.getPrototypeOf(objFrom);
-            keys = Object.keys(proto);
-        }
-        
-        keys.forEach((name) => {
-            ret[name] = obj[name];
-        });
-    }
-    
-    return ret;
-};
-
-module.exports.extend = extend;
 
 /**
  * extend proto
@@ -53,7 +14,7 @@ module.exports.extend = extend;
  */
 module.exports.extendProto = (obj) => {
     const F = () => {};
-    F.prototype = extend({}, obj);
+    F.prototype = Object.assign({}, obj);
     return new F();
 };
 
@@ -71,7 +32,9 @@ module.exports.escapeRegExp = (str) => {
 /**
  * get regexp from wild card
  */
-module.exports.getRegExp = (wildcard = '*') => {
+module.exports.getRegExp = (wildcard) => {
+    wildcard = wildcard || '*';
+    
     const escaped = '^' + wildcard // search from start of line
         .replace('.', '\\.')
         .replace('*', '.*')
@@ -91,7 +54,7 @@ module.exports.exec = exec;
  * @return ext
  */
 module.exports.getExt = (name) => {
-    const isStr = typeof name === 'string'
+    const isStr = typeof name === 'string';
     
     if (!isStr)
         return '';
@@ -113,7 +76,7 @@ module.exports.getExt = (name) => {
 module.exports.findObjByNameInArr = (array, name) => {
     let ret;
     
-     if (!Array.isArray(array))
+    if (!Array.isArray(array))
         throw Error('array should be array!');
         
     if (typeof name !== 'string')
