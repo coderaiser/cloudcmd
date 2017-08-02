@@ -199,3 +199,17 @@ test('cloudfunc: getHeaderField', (t) => {
     t.end();
 });
 
+test('cloudfunc: getPathLink: no url', (t) => {
+    t.throws(CloudFunc.getPathLink, 'should throw when no url');
+    t.end();
+});
+
+test('cloudfunc: getPathLink: no template', (t) => {
+    const url = 'http://abc.com';
+    const prefix = '';
+    const fn = () => CloudFunc.getPathLink(url, prefix);
+    
+    t.throws(fn, 'should throw when no template');
+    t.end();
+});
+

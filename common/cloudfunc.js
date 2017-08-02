@@ -22,6 +22,7 @@ module.exports.apiURL = '/api/v1';
 module.exports.MAX_FILE_SIZE = 500 * 1024;
 module.exports.Entity = Entity;
 module.exports.getHeaderField = getHeaderField;
+module.exports.getPathLink = getPathLink;
 
 module.exports.formatMsg = (msg, name, status) => {
     status = status || 'ok';
