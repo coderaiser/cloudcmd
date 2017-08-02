@@ -213,3 +213,18 @@ test('cloudfunc: getPathLink: no template', (t) => {
     t.end();
 });
 
+test('cloudfunc: getDotDot', (t) => {
+    const dotDot = CloudFunc.getDotDot('/home');
+    
+    t.equal(dotDot, '/', 'should return root');
+    t.end();
+});
+
+test('cloudfunc: getDotDot: two levels deep', (t) => {
+    const dotDot = CloudFunc.getDotDot('/home/coderaiser/');
+    console.log(dotDot);
+    
+    t.equal(dotDot, '/home', 'should return up level');
+    t.end();
+});
+

@@ -23,6 +23,7 @@ module.exports.MAX_FILE_SIZE = 500 * 1024;
 module.exports.Entity = Entity;
 module.exports.getHeaderField = getHeaderField;
 module.exports.getPathLink = getPathLink;
+module.exports.getDotDot = getDotDot;
 
 module.exports.formatMsg = (msg, name, status) => {
     status = status || 'ok';
@@ -152,12 +153,9 @@ module.exports.buildFromJSON = (params) => {
     
     fileTable += header + '<ul data-name="js-files" class="files">';
     /* Если мы не в корне */
-    if (path !== '/') {
-        /* убираем последний слеш и каталог в котором мы сейчас находимся*/
-        const lastSlash  = path.substr(path, path.lastIndexOf('/'));
-        const dotDot = lastSlash.substr(lastSlash, lastSlash.lastIndexOf('/'));
-        
-        const link = prefix + FS + (dotDot || '/');
+    if (path !== '/') { 
+        const dotDot = getDotDot(path);
+        const link = prefix + FS + dotDot;
         
         const linkResult = rendy(template.link, {
             link,
@@ -251,5 +249,16 @@ function _getHeaderField(sort, order, name) {
         return name;
     
     return `${name}${arrow}`;
+}
+
+function getDotDot(path) {
+    // убираем последний слеш и каталог в котором мы сейчас находимся
+    const lastSlash = path.substr(path, path.lastIndexOf('/'));
+    const dotDot = lastSlash.substr(lastSlash, lastSlash.lastIndexOf('/'));
+    
+    if (!dotDot)
+        return '/';
+    
+    return dotDot;
 }
 
