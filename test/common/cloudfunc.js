@@ -6,7 +6,7 @@ const TMPLDIR = DIR + 'tmpl/';
 
 const Util = require(COMMONDIR + 'util');
 const CloudFuncPath = COMMONDIR + 'cloudfunc';
-    
+
 const CloudFunc = require(CloudFuncPath);
 
 const files = require('files-io');
@@ -40,7 +40,7 @@ const JSON_FILES = {
     }, {
         name: 'prefdm',
         size: '1.30kb',
-        date: '21.02.2016',
+        date: 0,
         uid : 0,
         mode: 'rwx r-x r-x'
     }]
