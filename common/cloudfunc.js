@@ -1,8 +1,11 @@
 'use strict';
 
 const rendy = require('rendy');
+const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
 const Entity = require('./entity');
+
+const getHeaderField = currify(_getHeaderField);
 
 /* КОНСТАНТЫ (общие для клиента и сервера)*/
 
@@ -18,6 +21,7 @@ module.exports.FS = FS;
 module.exports.apiURL = '/api/v1';
 module.exports.MAX_FILE_SIZE = 500 * 1024;
 module.exports.Entity = Entity;
+module.exports.getHeaderField = getHeaderField;
 
 module.exports.formatMsg = (msg, name, status) => {
     status = status || 'ok';
@@ -121,19 +125,14 @@ module.exports.buildFromJSON = (params) => {
         path        : htmlPath
     });
     
-    let name = 'name';
-    let size = 'size';
-    let date = 'date';
     const owner = 'owner';
     const mode = 'mode';
-    const arrow = order === 'asc' ?  '↑' : '↓';
     
-    if (sort === 'name' && order !== 'asc')
-        name += arrow;
-    else if (sort === 'size')
-        size += arrow;
-    else if (sort === 'date')
-        date += arrow;
+    const getFieldName = getHeaderField(sort, order);
+    
+    const name = getFieldName('name');
+    const size = getFieldName('size');
+    const date = getFieldName('date');
     
     const header = rendy(templateFile, {
         tag         : 'div',
@@ -239,5 +238,17 @@ function getSize(size) {
         return '&lt;dir&gt;';
     
     return size;
+}
+
+function _getHeaderField(sort, order, name) {
+    const arrow = order === 'asc' ?  '↑' : '↓';
+    
+    if (sort !== name)
+        return name;
+    
+    if (sort === 'name' && order === 'asc')
+        return name;
+    
+    return `${name}${arrow}`;
 }
 

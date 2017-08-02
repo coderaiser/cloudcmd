@@ -187,3 +187,15 @@ test('cloudfunc: getTitle: name, path', (t) => {
     t.end();
 });
 
+test('cloudfunc: getHeaderField', (t) => {
+    const sort = 'name';
+    const order = 'desc';
+    const name = 'name';
+    
+    const result = CloudFunc.getHeaderField(sort, order, name);
+    const expected = 'name↓';
+    
+    t.equal(result, expected, 'should set desc arrow');
+    t.end();
+});
+
