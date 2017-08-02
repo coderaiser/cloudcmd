@@ -40,9 +40,7 @@ module.exports.getRegExp = (wildcard) => {
         .replace('*', '.*')
         .replace('?', '.?') + '$'; // search to end of line
     
-    const regExp = new RegExp(escaped);
-    
-    return regExp;
+    return RegExp(escaped);
 };
 
 module.exports.exec = exec;
