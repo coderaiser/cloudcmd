@@ -107,9 +107,7 @@ module.exports.findObjByNameInArr = (array, name) => {
  * @param name
  */
 module.exports.time = (name) => {
-    const console = Scope.console;
-    
-    exec.ifExist(console, 'time', [name]);
+    exec.ifExist(Scope.console, 'time', [name]);
 };
 
 /**
@@ -117,9 +115,7 @@ module.exports.time = (name) => {
  * @param name
  */
 module.exports.timeEnd = (name) => {
-    const console = Scope.console;
-    
-    exec.ifExist(console, 'timeEnd', [name]);
+    exec.ifExist(Scope.console, 'timeEnd', [name]);
 };
 
 function getStrBigFirst(str) {
@@ -127,6 +123,7 @@ function getStrBigFirst(str) {
         throw Error('str could not be empty!');
     
     const first = str[0].toUpperCase();
+    
     return first + str.slice(1);
 }
 
