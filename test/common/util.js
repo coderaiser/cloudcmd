@@ -8,6 +8,7 @@ const {
     kebabToCamelCase,
     findObjByNameInArr,
     getRegExp,
+    escapeRegExp,
 } = Util;
 
 test('getExt: no extension', (t) => {
@@ -99,6 +100,16 @@ test('util: getRegExp', (t) => {
     const reg = getRegExp('hel?o.*');
     
     t.deepEqual(reg, RegExp('^hel.?\\..*$'), 'should return regexp');
+    t.end();
+});
+
+test('util: escapeRegExp: no str', (t) => {
+    t.equal(escapeRegExp(1), 1, 'should equal');
+    t.end();
+});
+
+test('util: escapeRegExp', (t) => {
+    t.equal(escapeRegExp('#hello'), '\\#hello', 'should equal');
     t.end();
 });
 
