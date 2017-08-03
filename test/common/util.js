@@ -7,6 +7,7 @@ const {
     getStrBigFirst,
     kebabToCamelCase,
     findObjByNameInArr,
+    getRegExp,
 } = Util;
 
 test('getExt: no extension', (t) => {
@@ -91,6 +92,13 @@ test('util: findObjByNameInArr: array', (t) => {
     const result = findObjByNameInArr(array, name);
     
     t.equal(result, data, 'should return data');
+    t.end();
+});
+
+test('util: getRegExp', (t) => {
+    const reg = getRegExp('hel?o.*');
+    
+    t.deepEqual(reg, RegExp('^hel.?\\..*$'), 'should return regexp');
     t.end();
 });
 
