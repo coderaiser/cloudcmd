@@ -5,7 +5,8 @@ const DIR = '../../';
 const Util = require(DIR + 'common/util');
 const {
     getStrBigFirst,
-    kebabToCamelCase
+    kebabToCamelCase,
+    findObjByNameInArr,
 } = Util;
 
 test('getExt: no extension', (t) => {
@@ -43,6 +44,53 @@ test('kebabToCamelCase: args', (t) => {
 
 test('kebabToCamelCase', (t) => {
     t.equal(kebabToCamelCase('hello-world'), 'HelloWorld', 'should convert kebab to camel case');
+    t.end();
+});
+
+test('util: findObjByNameInArr: no array', (t) => {
+    t.throws(findObjByNameInArr, /array should be array!/, 'should throw when no array');
+    t.end();
+});
+
+test('util: findObjByNameInArr: no name', (t) => {
+    const fn = () => findObjByNameInArr([]);
+    t.throws(fn, /name should be string!/, 'should throw when no name');
+    t.end();
+});
+
+test('util: findObjByNameInArr: object', (t) => {
+    const name = 'hello';
+    const obj = {
+        name,
+    };
+    
+    const array = [
+        obj,
+    ];
+    
+    const result = findObjByNameInArr(array, name);
+    
+    t.equal(result, obj, 'should return obj');
+    t.end();
+});
+
+test('util: findObjByNameInArr: array', (t) => {
+    const name = 'hello';
+    const data = 'abc';
+    const item = {
+        name,
+        data,
+    };
+    
+    const array = [
+        [
+            item,
+        ]
+    ];
+    
+    const result = findObjByNameInArr(array, name);
+    
+    t.equal(result, data, 'should return data');
     t.end();
 });
 
