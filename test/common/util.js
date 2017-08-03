@@ -29,6 +29,13 @@ test('getExt: return extension', (t) => {
     t.end();
 });
 
+test('util: getExt: no name', (t) => {
+    const ext = Util.getExt();
+    
+    t.equal(ext, '', 'should return empty string');
+    t.end();
+});
+
 test('getStrBigFirst: args', (t) => {
     t.throws(getStrBigFirst, /str could not be empty!/, 'should throw when no str');
     t.end();
