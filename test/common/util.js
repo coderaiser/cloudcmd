@@ -110,6 +110,13 @@ test('util: getRegExp', (t) => {
     t.end();
 });
 
+test('util: getRegExp: no', (t) => {
+    const reg = getRegExp('');
+    
+    t.deepEqual(reg, RegExp('^.*$'), 'should return regexp');
+    t.end();
+});
+
 test('util: escapeRegExp: no str', (t) => {
     t.equal(escapeRegExp(1), 1, 'should equal');
     t.end();
