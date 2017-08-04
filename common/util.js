@@ -72,19 +72,22 @@ module.exports.findObjByNameInArr = (array, name) => {
         let is = item.name === name;
         const isArray = Array.isArray(item);
         
-        if (is)
+        if (is) {
             ret = item;
-        else if (isArray)
-            item.some((item) => {
-                is = item.name === name;
-                
-                if (is)
-                    ret = item.data;
-                
-                return is;
-            });
+            return is;
+        }
         
-        return is;
+        if (!isArray)
+            return is;
+        
+        return item.some((item) => {
+            const is = item.name === name;
+            
+            if (is)
+                ret = item.data;
+            
+            return is;
+        });
     });
     
     return ret;

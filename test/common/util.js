@@ -91,8 +91,13 @@ test('util: findObjByNameInArr: array', (t) => {
         data,
     };
     
+    const obj = {
+        name: 'world',
+    }
+    
     const array = [
-        [
+        name, [
+            obj,
             item,
         ]
     ];
