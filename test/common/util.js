@@ -2,7 +2,8 @@
 
 const test = require('tape');
 const DIR = '../../';
-const Util = require(DIR + 'common/util');
+const UtilPath = DIR + 'common/util';
+const Util = require(UtilPath);
 const {
     getStrBigFirst,
     kebabToCamelCase,
@@ -131,4 +132,21 @@ test('util: escapeRegExp', (t) => {
     t.equal(escapeRegExp('#hello'), '\\#hello', 'should equal');
     t.end();
 });
+
+test('util: scope', (t) => {
+    global.window = {};
+    clean(UtilPath);
+    
+    require(UtilPath);
+    
+    t.pass('should set window in scope');
+    
+    delete global.window;
+    
+    t.end();
+});
+
+function clean(path) {
+    delete require.cache[require.resolve(path)];
+}
 

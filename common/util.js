@@ -2,7 +2,8 @@
 
 const exec = require('execon');
 const jonny = require('jonny');
-const Scope = global || window;
+
+const Scope = typeof window !== 'undefined' ? window : global;
 
 module.exports.getStrBigFirst = getStrBigFirst;
 module.exports.kebabToCamelCase = kebabToCamelCase;
