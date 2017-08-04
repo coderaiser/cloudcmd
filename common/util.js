@@ -6,18 +6,6 @@ const Scope = global || window;
 
 module.exports.getStrBigFirst = getStrBigFirst;
 module.exports.kebabToCamelCase = kebabToCamelCase;
-
-/**
- * extend proto
- *
- * @obj
- */
-module.exports.extendProto = (obj) => {
-    const F = () => {};
-    F.prototype = Object.assign({}, obj);
-    return new F();
-};
-
 module.exports.json = jonny;
 
 module.exports.escapeRegExp = (str) => {
