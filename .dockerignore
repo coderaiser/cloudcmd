@@ -14,7 +14,6 @@ Dockerfile.alpine
 
 webpack.config.js
 
-bin/legacy.js
 bin/release.js
 
 modules/jquery/dist
@@ -33,6 +32,4 @@ modules/emitify
 client
 legacy
 server_
-
-.nyc_output
 
