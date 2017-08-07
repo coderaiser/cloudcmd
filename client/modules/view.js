@@ -110,7 +110,7 @@ function show(data, options) {
     
     if (data) {
         const element = $(El).append(data);
-        $.fancybox(element, initConfig(Config, options));
+        $.fancybox.open(element, initConfig(Config, options));
         return;
     }
     
@@ -129,7 +129,7 @@ function show(data, options) {
             /* add margin only for view text documents */
             El.css('margin', '2%');
             
-            $.fancybox(El.append(element), Config);
+            $.fancybox.open(El.append(element), Config);
         });
     
     case 'image':
