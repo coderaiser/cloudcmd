@@ -27,7 +27,6 @@ bower.json
 manifest.yml
 
 bin/release.js
-bin/legacy.js
 
 client
 
