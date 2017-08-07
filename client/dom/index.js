@@ -59,7 +59,7 @@ function CmdProto() {
      * load jquery from google cdn or local copy
      * @param callback
      */
-    this.loadJquery         = function(callback) {
+    this.loadJquery = function(callback) {
         DOM.loadRemote('jquery', {
             name    : '$'
         }, callback);
@@ -67,7 +67,7 @@ function CmdProto() {
         return DOM;
     };
     
-    this.loadSocket         = function(callback) {
+    this.loadSocket = function(callback) {
         DOM.loadRemote('socket', {
             name    : 'io'
         }, callback);
@@ -78,7 +78,7 @@ function CmdProto() {
     /** function loads css and js of Menu
      * @param callback
      */
-    this.loadMenu           = function(callback) {
+    this.loadMenu = function(callback) {
         return DOM.loadRemote('menu', callback);
     };
     
