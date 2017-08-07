@@ -94,7 +94,7 @@ test('util: findObjByNameInArr: array', (t) => {
     
     const obj = {
         name: 'world',
-    }
+    };
     
     const array = [
         name, [
