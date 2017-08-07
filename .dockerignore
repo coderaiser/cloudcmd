@@ -7,6 +7,7 @@ shell
 manifest.yml
 app.json
 bower.json
+yarn-error.log
 
 Dockerfile
 Dockerfile.alpine
