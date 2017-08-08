@@ -6,8 +6,12 @@
 /* global Console */
 
 const exec = require('execon');
+const currify = require('currify/legacy');
 const Images = require('../dom/images');
-const {Dialog} = DOM;
+const {
+    Dialog,
+    CurrentInfo:Info,
+} = DOM;
 
 CloudCmd.Konsole = ConsoleProto;
 
@@ -63,7 +67,7 @@ function ConsoleProto() {
             PASSIVE_DIR: DOM.getNotCurrentDirPath.bind(DOM),
             CURRENT_NAME: DOM.getCurrentName.bind(DOM),
             CURRENT_PATH: () => {
-                return DOM.CurrentInfo.path;
+                return Info.path;
             }
         };
     }
@@ -77,6 +81,7 @@ function ConsoleProto() {
         
         Console(Element, options, (spawn) => {
             spawn.on('connect', exec.with(authCheck, spawn));
+            
             exec(callback);
         });
         

@@ -159,7 +159,7 @@ function CmdProto() {
      * get current direcotory path
      */
     this.getCurrentDirPath = (panel = DOM.getPanel()) => {
-        const path =  DOM.getByDataName('js-path', panel);
+        const path = DOM.getByDataName('js-path', panel);
         const ret = path && path.textContent;
         
         return ret;
@@ -473,17 +473,17 @@ function CmdProto() {
              * to prevent default behavior
              */
             if (!o || o.history !== false) {
-                if (path !== '/')
-                    path = FS + path;
-                
-                DOM.setHistory(path, null, path);
+                const historyPath = path === '/' ? path : FS + path;
+                DOM.setHistory(historyPath, null, historyPath);
             }
         }
         
         /* scrolling to current file */
         DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
         
-        Cmd.updateCurrentInfo(currentFile);
+        CloudCmd.emit('current-file', currentFile);
+        CloudCmd.emit('current-path', path);
+        CloudCmd.emit('current-name', DOM.getCurrentName(currentFile));
         
         return DOM;
     };
@@ -996,7 +996,6 @@ function CmdProto() {
                     return;
                 
                 DOM.setCurrentName(to, current);
-                Cmd.updateCurrentInfo(current);
                 Storage.remove(dirPath);
                 
                 if (isExist)
@@ -1029,7 +1028,11 @@ function CmdProto() {
     };
     
     this.changePanel = () => {
+        const Info = CurrentInfo;
         let panel = DOM.getPanel();
+        
+        CloudCmd.emit('passive-dir', Info.dirPath);
+        
         const panelPassive = DOM.getPanel({
             active: false
         });
@@ -1066,6 +1069,8 @@ function CmdProto() {
         DOM.setCurrentFile(current, {
             history: true
         });
+        
+        CloudCmd.emit('active-dir', Info.dirPath);
         
         return DOM;
     };

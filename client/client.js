@@ -3,6 +3,8 @@
 /* global Util, DOM */
 
 const itype = require('itype/legacy');
+const emitify = require('emitify/legacy');
+const inherits = require('inherits');
 const rendy = require('rendy');
 const exec = require('execon');
 const Images = require('./dom/images');
@@ -16,6 +18,10 @@ const {
     buildFromJSON,
 } = require('../common/cloudfunc');
 
+/* global Util, DOM */
+
+inherits(CloudCmdProto, Emitify);
+
 module.exports = new CloudCmdProto(Util, DOM);
 
 function CloudCmdProto(Util, DOM) {
@@ -24,11 +30,13 @@ function CloudCmdProto(Util, DOM) {
     let Listeners;
     
     const log = (str) => {
-        if (Debug)
-            console.log(str);
+        if (!Debug)
+            return;
         
-        return str;
+        console.log(str);
     };
+    
+    Emitify.call(this);
     
     const CloudCmd = this;
     const Info = DOM.CurrentInfo;
@@ -251,6 +259,7 @@ function CloudCmdProto(Util, DOM) {
         }
         
         DOM.setCurrentFile(current);
+        
         CloudCmd.execFromModule(module, 'show');
     };
     
@@ -309,6 +318,8 @@ function CloudCmdProto(Util, DOM) {
     
     function baseInit(callback) {
         const files = DOM.getFiles();
+        
+        CloudCmd.on('current-file', DOM.updateCurrentInfo);
         
         /* выделяем строку с первым файлом */
         if (files)
@@ -507,10 +518,12 @@ function CloudCmdProto(Util, DOM) {
                 
                 if (!current)
                     current = DOM.getFiles(panel)[0];
-                    
+                
                 DOM.setCurrentFile(current, {
                     history: history
                 });
+                
+                CloudCmd.emit('active-dir', Info.dirPath);
             }
             
             exec(callback);
