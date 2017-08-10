@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
@@ -95,6 +96,27 @@ test('cloudcmd: route: buttons: no contact', (t) => {
         getStr(`http://localhost:${port}/`)
             .then((result) => {
                 t.ok(/icon-contact none/.test(result), 'should hide contact');
+                t.end();
+                after();
+            });
+    });
+});
+
+test('cloudcmd: route: no index', (t) => {
+    const name = path.join(__dirname, '../../dist-dev/index.html');
+    const nameAfter = path.join(__dirname, '../../dist-dev/index1.html');
+    
+    const fs = require('fs');
+    
+    fs.renameSync(name, nameAfter);
+    
+    const before = require('../before');
+    
+    before({}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                fs.renameSync(nameAfter, name);
+                t.equal(result.indexOf('ENOENT'), 0, 'should not found index.html');
                 t.end();
                 after();
             });

@@ -26,7 +26,6 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const getIndexPath = () => {
     const dist = isDev ? 'dist-dev' : 'dist';
-    
     return DIR + `${dist}/index.html`;
 };
 
@@ -214,17 +213,17 @@ function route(request, response, callback) {
 function buildIndex(json, callback) {
     fs.readFile(getIndexPath(), 'utf8', (error, template) => {
         if (error)
-            return;
+            return callback(error);
         
         const panel = CloudFunc.buildFromJSON({
-            data: json,,
+            data: json,
             prefix: prefix(),
-            template: Template
+            template: Template,
         });
         
         const data = indexProcessing({
             panel,
-            data: template
+            data: template,
         });
         
         callback(error, data);
