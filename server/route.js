@@ -217,14 +217,14 @@ function buildIndex(json, callback) {
             return;
         
         const panel = CloudFunc.buildFromJSON({
-            data        : json,
-            prefix      : prefix(),
-            template    : Template
+            data: json,,
+            prefix: prefix(),
+            template: Template
         });
         
         const data = indexProcessing({
-            panel   : panel,
-            data    : template
+            panel,
+            data: template
         });
         
         callback(error, data);
