@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "7.2.1",
+  "version": "7.2.2",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "Orthodox web file manager with console and editor",
   "homepage": "http://cloudcmd.io",
@@ -187,7 +187,7 @@
     "rimraf": "^2.5.4",
     "shortdate": "^1.0.1",
     "sinon": "^3.0.0",
-    "sinon-called-with-diff": "^1.0.0",
+    "sinon-called-with-diff": "^1.0.1",
     "socket.io-client": "^2.0.1",
     "style-loader": "^0.18.2",
     "stylelint": "^8.0.0",

@@ -1,3 +1,14 @@
+2017.08.11, v7.2.2
+
+fix:
+- (route) buildIndex: no index.html
+
+feature:
+- (Dockerfile) set package-lock false
+- (dockerignore) yarn-error
+- (package) sinon v3.0.0
+
+
 2017.07.31, v7.2.1
 
 fix:
