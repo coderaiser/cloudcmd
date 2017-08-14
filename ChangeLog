@@ -1,3 +1,9 @@
+2017.08.14, v7.3.1
+
+fix:
+- (cloudcmd) empty string in CLOUDCMD_NAME and CLOUDCMD_ROOT
+
+
 2017.08.14, v7.3.0
 
 feature:
