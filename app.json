@@ -71,6 +71,11 @@
           "description": "set root dir",
           "value": "",
           "required": false
+      },
+      "CLOUDCMD_ONE_PANEL_MODE": {
+          "description": "set one panel mode",
+          "value": "false",
+          "required": false
       }
   }
 }

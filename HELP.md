@@ -347,6 +347,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_USERNAME` - set username
 - `CLOUDCMD_PASSWORD` - set password
 - `CLOUDCMD_ROOT` - set root directory
+- `CLOUDCMD_ONE_PANEL_MODE` - set one panel mode
 
 Menu
 ---------------
