@@ -196,6 +196,7 @@
     "tape": "^4.4.0",
     "tar-stream": "^1.5.2",
     "url-loader": "^0.5.9",
+    "version-io": "^2.0.1",
     "webpack": "^3.0.0",
     "wraptile": "^1.0.0",
     "yaspeller": "^3.0.0"
