@@ -102,7 +102,9 @@ const filePicker = {
 };
 
 // override option from json/modules.json
-const modules = {filePicker};
+const modules = {
+    filePicker,
+};
 
 app.use(cloudcmd({
     socket,  /* used by Config, Edit (optional) and Console (required)   */
