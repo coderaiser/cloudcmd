@@ -11,6 +11,7 @@ yarn-error.log
 
 Dockerfile
 Dockerfile.alpine
+docker.sh
 
 webpack.config.js
 

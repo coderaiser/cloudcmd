@@ -14,5 +14,16 @@ notifications:
         on_success: never
         on_failure: change
 
-sudo: false
+sudo: required
+
+services:
+  - docker
+
+deploy:
+    provider: script
+    script: docker.sh
+    skip_cleanup: true
+    on:
+        tags: true
+        all_branches: false
 

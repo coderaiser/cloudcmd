@@ -62,7 +62,6 @@
     "test": "tape 'test/**/*.js'",
     "spell": "yaspeller .",
     "wisdom": "redrun build docker:rm-old; bin/release.js",
-    "postpublish": "redrun docker",
     "docker:pull:node": "docker pull node",
     "docker:pull:alpine": "docker pull mhart/alpine-node",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
