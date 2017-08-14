@@ -2,7 +2,6 @@
 manifest.yml
 Dockerfile*
 docker-compose.yml
-docker.sh
 shell
 test
 coverage
