@@ -24,7 +24,7 @@ deploy:
     script: docker.sh
     skip_cleanup: true
     on:
-        node: '8',
+        node: '8'
         tags: true
         all_branches: false
 
