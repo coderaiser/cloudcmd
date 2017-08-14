@@ -66,6 +66,11 @@
           "description": "set password",
           "value": "toor",
           "required": false
+      },
+      "CLOUDCMD_ROOT": {
+          "description": "set root dir",
+          "value": "",
+          "required": false
       }
   }
 }

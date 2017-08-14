@@ -57,7 +57,7 @@ const args = require('minimist')(argv.slice(2), {
         packer      : config('packer') || 'tar',
         zip         : config('zip'),
         username    : env('username') || config('username'),
-        root        : config('root'),
+        root        : env('root') || config('root'),
         prefix      : config('prefix'),
         progress    : config('progress'),
         console     : choose(env.bool('console'), config('console')),
