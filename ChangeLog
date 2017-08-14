@@ -1,3 +1,12 @@
+2017.08.14, v7.3.0
+
+feature:
+- (cloudcmd) add support of CLOUDCMD_ONE_PANEL_MODE (#64)
+- (cloudcmd) add support of CLOUDCMD_ROOT (#64)
+- (travis) add node v8 condition
+- (cloudcmd) add ability to build docker images with help of travis
+
+
 2017.08.11, v7.2.2
 
 fix:
