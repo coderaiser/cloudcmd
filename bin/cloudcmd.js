@@ -10,7 +10,7 @@ const config = require(DIR_SERVER + 'config');
 const env = require(DIR_SERVER + 'env');
 
 const choose = (a, b) => {
-    if (!a && typeof a !== 'boolean')
+    if (!a && typeof a === 'undefined')
         return b;
     
     return a;
@@ -48,7 +48,7 @@ const args = require('minimist')(argv.slice(2), {
     ],
     default: {
         server      : true,
-        name        : env('name') || config('name'),
+        name        : choose(env('name'), config('name')),
         auth        : choose(env('auth'), config('auth')),
         port        : config('port'),
         online      : config('online'),
@@ -57,7 +57,7 @@ const args = require('minimist')(argv.slice(2), {
         packer      : config('packer') || 'tar',
         zip         : config('zip'),
         username    : env('username') || config('username'),
-        root        : env('root') || config('root'),
+        root        : choose(env('root'), config('root')),
         prefix      : config('prefix'),
         progress    : config('progress'),
         console     : choose(env.bool('console'), config('console')),
