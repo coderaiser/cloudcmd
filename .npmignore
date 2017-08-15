@@ -8,6 +8,7 @@ coverage
 css
 html
 yarn-error.log
+now.json
 
 modules/jquery/dist
 modules/jquery/external

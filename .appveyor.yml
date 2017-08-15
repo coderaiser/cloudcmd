@@ -1,0 +1,17 @@
+platform: x64
+
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+
+build: off
+
+build_script:
+    # Output useful info for debugging.
+    - node --version
+    - npm --version
+    
+    - npm i now -g
+    - now rm cloudcmd -y -t %NOW_TOKEN%
+    - now --public -t %NOW_TOKEN%
+    - now alias -t %NOW_TOKEN%
+

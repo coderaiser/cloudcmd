@@ -1,11 +1,12 @@
 # Cloud Commander v7.3.1 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![OpenCollective](https://opencollective.com/cloudcmd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/cloudcmd/sponsors/badge.svg)](#sponsors)
 
-### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL], [Now][NowURL])
 
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
+[NowURL]:                   https://cloudcmd.now.sh/ "Now"
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"

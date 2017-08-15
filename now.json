@@ -1,0 +1,21 @@
+{
+    "type": "npm",
+    "alias": "cloudcmd",
+    "files": [
+        "bin",
+        "server",
+        ".babelrc",
+        "css",
+        "font",
+        "favicon.ico",
+        "client",
+        "common",
+        "html",
+        "tmpl",
+        "img",
+        "modules",
+        "webpack.config.js",
+        "json",
+        "HELP.md"
+    ]
+}

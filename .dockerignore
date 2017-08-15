@@ -8,6 +8,7 @@ manifest.yml
 app.json
 bower.json
 yarn-error.log
+now.json
 
 Dockerfile
 Dockerfile.alpine
