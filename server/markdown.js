@@ -10,10 +10,10 @@ const markdown = require('markdown-it')();
 const root = require('./root');
 
 module.exports = (name, request, callback) => {
+    check(name, request, callback);
+    
     const method = request.method;
     const query = ponse.getQuery(request);
-    
-    check(name, request, callback);
     
     switch(method) {
     case 'GET':
