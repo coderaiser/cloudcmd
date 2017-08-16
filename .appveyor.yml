@@ -6,11 +6,11 @@ install:
 build: off
 
 build_script:
-    # Output useful info for debugging.
     - node --version
     - npm --version
     
-    - npm i now -g
+    - npm i now nupdate -g
+    - nupdate -a gritty
     - now rm cloudcmd -y -t %NOW_TOKEN%
     - now --public -t %NOW_TOKEN%
     - now alias -t %NOW_TOKEN%
