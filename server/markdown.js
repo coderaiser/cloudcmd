@@ -9,7 +9,7 @@ const markdown = require('markdown-it')();
 
 const root = require('./root');
 
-module.exports  = (name, request, callback) => {
+module.exports = (name, request, callback) => {
     const method = request.method;
     const query = ponse.getQuery(request);
     
