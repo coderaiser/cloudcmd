@@ -18,7 +18,7 @@ module.exports = (name, request, callback) => {
     switch(method) {
     case 'GET':
         name = name.replace('/markdown', '');
-            
+        
         if (query === 'relative')
             name = DIR_ROOT + name;
         else
