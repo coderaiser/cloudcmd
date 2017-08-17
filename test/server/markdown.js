@@ -13,6 +13,7 @@ const before = require('../before');
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 const _pullout = promisify(pullout);
+const _markdown = promisify(markdown);
 
 const get = promisify((url, fn) => {
     fn(null, request(url));
@@ -73,6 +74,27 @@ test('cloudcmd: markdown: put', (t) => {
                 t.end();
             });
     });
+});
+
+test('cloudcmd: markdown: put: error', (t) => {
+    const dir = path.join(__dirname, 'fixture');
+    const md = path.join(dir, 'markdown-not-exist.md');
+    
+    const name = 'hello';
+    const mdStream = fs.createReadStream(md);
+    
+    mdStream.url = 'http://hello.world';
+    mdStream.method = 'PUT';
+    
+    _markdown(name, mdStream)
+        .then((result) => {
+            t.fail(`should fail but: ${result}`);
+            t.end();
+        })
+        .catch((error) => {
+            t.ok(error.message.includes('ENOENT: no such file or directory'), 'should emit error');
+            t.end();
+        });
 });
 
 test('cloudcmd: markdown: no name', (t) => {
