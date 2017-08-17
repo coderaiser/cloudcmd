@@ -1,5 +1,7 @@
 'use strict';
 
+const fs = require('fs');
+const path = require('path');
 const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
@@ -42,6 +44,33 @@ test('cloudcmd: markdown: relative', (t) => {
             })
             .catch((error) => {
                 console.log(error);
+            });
+    });
+});
+
+test('cloudcmd: markdown: put', (t) => {
+    const dir = path.join(__dirname, 'fixture');
+    const md = path.join(dir, 'markdown.md');
+    const html = path.join(dir, 'markdown.html');
+    
+    const mdStream = fs.createReadStream(md);
+    const htmlFile = fs.readFileSync(html, 'utf8');
+    
+    before((port, after) => {
+        const url = `http://localhost:${port}/api/v1/markdown`;
+        
+        const putStream = mdStream
+            .pipe(request.put(url));
+        
+        _pullout(putStream, 'string')
+            .then((result) => {
+                t.equal(result, htmlFile, 'should render markdown input to html');
+                t.end();
+                after();
+            })
+            .catch((error) => {
+                t.fail(error.message);
+                t.end();
             });
     });
 });
