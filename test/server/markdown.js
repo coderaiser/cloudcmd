@@ -19,6 +19,21 @@ const get = promisify((url, fn) => {
     fn(null, request(url));
 });
 
+test('cloudcmd: markdown: error', (t) => {
+    before((port, after) => {
+        get(`http://localhost:${port}/api/v1/markdown/not-found`)
+            .then(warp(_pullout, 'string'))
+            .then((result) => {
+                t.ok(/ENOENT/.test(result), 'should not found');
+                t.end();
+                after();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    });
+});
+
 test('cloudcmd: markdown: relative: error', (t) => {
     before((port, after) => {
         get(`http://localhost:${port}/api/v1/markdown/not-found?relative`)
