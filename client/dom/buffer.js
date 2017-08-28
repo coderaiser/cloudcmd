@@ -71,8 +71,8 @@ function BufferProto() {
         
         Storage.remove(CUT)
             .set(COPY, {
-                from : from,
-                names: names
+                from,
+                names,
             });
     }
     
@@ -89,8 +89,8 @@ function BufferProto() {
         
         Storage
             .set(CUT, {
-                from : from,
-                names: names
+                from,
+                names,
             });
     }
     
