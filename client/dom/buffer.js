@@ -68,7 +68,7 @@ function BufferProto() {
         
         if (!names.length)
             return;
-            
+        
         Storage.remove(CUT)
             .set(COPY, {
                 from : from,
