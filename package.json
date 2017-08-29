@@ -61,7 +61,7 @@
     "fix:js:eslint:server": "redrun eslint:server -- --fix",
     "test": "tape 'test/**/*.js'",
     "spell": "yaspeller .",
-    "wisdom": "redrun build docker:rm-old; bin/release.js",
+    "wisdom": "redrun build; bin/release.js",
     "docker:pull:node": "docker pull node",
     "docker:pull:alpine": "docker pull mhart/alpine-node",
     "docker:push": "docker push coderaiser/cloudcmd:`version`",
