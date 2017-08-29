@@ -28,10 +28,12 @@ function OperationProto(operation, data) {
     let {
         cp: copyFn,
         mv: moveFn,
-        pack: packFn,
         delete: deleteFn,
         extract: extractFn,
     } = RESTful;
+    
+    let packZipFn = RESTful.pack;
+    let packTarFn = RESTful.pack;
     
     const Info = DOM.CurrentInfo;
     const showLoad = Images.show.load.bind(null, 'top');
@@ -108,12 +110,12 @@ function OperationProto(operation, data) {
         });
     }
     
-    function _setPacker(prefix, name, pack, fn) {
+    function _setTarPacker(prefix, name, pack, fn) {
         pack(prefix + '/' + name, prefix, (packer) => {
             fn();
             packer.on('connect', () => {
                 authCheck(packer, () => {
-                    packFn = (data, callback) => {
+                    packTarFn = (data, callback) => {
                         setListeners(packer, {noContinue: true}, callback);
                         packer.pack(data.from, data.to, data.names);
                     };
@@ -121,16 +123,39 @@ function OperationProto(operation, data) {
             });
             
             packer.on('disconnect', () => {
-                packFn = RESTful.pack;
+                packTarFn = RESTful.pack;
+            });
+        });
+    }
+    
+    function _setZipPacker(prefix, name, pack, fn) {
+        pack(prefix + '/' + name, prefix, (packer) => {
+            fn();
+            packer.on('connect', () => {
+                authCheck(packer, () => {
+                    packZipFn = (data, callback) => {
+                        setListeners(packer, {noContinue: true}, callback);
+                        packer.pack(data.from, data.to, data.names);
+                    };
+                });
+            });
+            
+            packer.on('disconnect', () => {
+                packZipFn = RESTful.pack;
             });
         });
     }
     
     function _initPacker(prefix, fn) {
-        if (config('packer') === 'zip')
-            return _setPacker(prefix, 'salam', salam, fn);
-            
-        _setPacker(prefix, 'ishtar', ishtar, fn);
+        _setZipPacker(prefix, 'salam', salam, fn);
+        _setTarPacker(prefix, 'ishtar', ishtar, fn);
+    }
+    
+    function getPacker(type) {
+        if (type === 'zip')
+            return packZipFn;
+        
+        return packTarFn;
     }
     
     function _initExtractor(prefix, fn) {
@@ -492,7 +517,7 @@ function OperationProto(operation, data) {
             break;
         
         case 'pack':
-            op = packFn;
+            op = getPacker(type);
             
             if (names.length > 1)
                 currentName  = Info.dir;
