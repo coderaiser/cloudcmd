@@ -1,3 +1,13 @@
+2017.08.29, v7.3.2
+
+fix:
+- (operation) pack in old packer type after changin packer without reload
+
+feature:
+- (appveyor) add terminal
+- (cloudcmd) add now demo
+
+
 2017.08.14, v7.3.1
 
 fix:
