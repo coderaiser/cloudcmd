@@ -80,7 +80,7 @@
     "docker:rm:latest": "docker rmi -f coderaiser/cloudcmd:latest",
     "docker:rm:alpine": "docker rmi -f coderaiser/cloudcmd:`version`-alpine",
     "docker:rm:latest-alpine": "docker rmi -f coderaiser/cloudcmd:latest-alpine",
-    "docker:rm-old": "redrun --parallel docker:rm:*",
+    "docker:rm-old": "redrun --calm docker:rm:*",
     "coverage": "nyc npm test",
     "report": "nyc report --reporter=text-lcov | coveralls",
     "6to5:client": "webpack --progress",
