@@ -248,32 +248,34 @@ function OperationProto(operation, data) {
     };
     
     this.show = (operation, data) => {
-        if (Loaded)
-            switch(operation) {
-            case 'copy':
-                Operation.copy(data);
-                break;
-            
-            case 'move':
-                Operation.move(data);
-                break;
-            
-            case 'delete':
-                Operation.delete();
-                break;
-            
-            case 'delete:silent':
-                Operation.deleteSilent();
-                break;
-            
-            case 'pack':
-                Operation.pack();
-                break;
-            
-            case 'extract':
-                Operation.extract();
-                break;
-            }
+        if (!Loaded)
+            return;
+        
+        switch(operation) {
+        case 'copy':
+            Operation.copy(data);
+            break;
+        
+        case 'move':
+            Operation.move(data);
+            break;
+        
+        case 'delete':
+            Operation.delete();
+            break;
+        
+        case 'delete:silent':
+            Operation.deleteSilent();
+            break;
+        
+        case 'pack':
+            Operation.pack();
+            break;
+        
+        case 'extract':
+            Operation.extract();
+            break;
+        }
     };
     
     this.copy = (data) => {
