@@ -368,13 +368,13 @@ function KeyProto() {
             CloudCmd.Konsole.show();
             event.preventDefault();
             break;
-            
+        
         case Key.SPACE:
             if (!isDir || name === '..')
                 isSelected = true;
             else
                 isSelected = DOM.isSelected(current);
-                
+            
             exec.if(isSelected, () => {
                 DOM.toggleSelectedFile(current);
             }, (callback) => {
