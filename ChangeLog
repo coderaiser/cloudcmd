@@ -1,3 +1,14 @@
+2017.09.04, v7.4.0
+
+feature:
+- (key) add ability to extract archives with Alt + F9
+- (key) add ability to pack files with Alt + F5
+- (package) docker:rm-old: --cam -> -P
+- (package) scripts: wisdom:type: add support of wisdom 6
+- (package) docker:rm-old: --parallel -> --calm
+- (package) wisdom: rm docker:rm-old
+
+
 2017.08.29, v7.3.2
 
 fix:
