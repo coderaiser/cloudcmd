@@ -150,7 +150,7 @@ function readFiles(callback) {
     files.read(filesList, 'utf8', (error, files) => {
         if (error)
             throw error;
-            
+        
         Object.keys(files).forEach((path) => {
             const name = paths[path];
             
@@ -168,10 +168,11 @@ function route(request, response, callback) {
     let name = ponse.getPathName(request);
     
     const isFS = RegExp('^/$|^' + FS).test(name);
+    const gzip = true;
     const p = {
         request,
         response,
-        gzip        : true,
+        gzip,
         name,
     };
     
