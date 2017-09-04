@@ -135,6 +135,7 @@ Hot keys
 | `F4`                  | edit
 | `Shift + F4`          | edit in `vim` mode
 | `F5`                  | copy
+| `Alt` + `F5`          | pack
 | `F6`                  | rename/move
 | `F7`                  | new directory
 | `Shift + F7`          | new file
