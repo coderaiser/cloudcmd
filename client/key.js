@@ -311,6 +311,8 @@ function KeyProto() {
         case Key.F5:
             if (ctrlMeta)
                 CloudCmd.sortPanel('date');
+            else if (alt)
+                Operation.show('pack');
             else
                 Operation.show('copy');
             
