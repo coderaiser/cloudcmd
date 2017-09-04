@@ -1,12 +1,14 @@
 'use strict';
 
 const path = require('path');
+const fs = require('fs');
 const test = require('tape');
 const promisify = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 
-const route = require('../../server/route');
+const routePath = '../../server/route';
+const route = require(routePath);
 const before = require('../before');
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
@@ -21,7 +23,6 @@ const getStr = (url) => {
         .then(warp(_pullout, 'string'))
         .catch(console.log);
 };
-
 
 test('cloudcmd: route: no args', (t) => {
     t.throws(route, /req could not be empty!/, 'should throw when no args');
@@ -106,11 +107,7 @@ test('cloudcmd: route: no index', (t) => {
     const name = path.join(__dirname, '../../dist-dev/index.html');
     const nameAfter = path.join(__dirname, '../../dist-dev/index1.html');
     
-    const fs = require('fs');
-    
     fs.renameSync(name, nameAfter);
-    
-    const before = require('../before');
     
     before({}, (port, after) => {
         getStr(`http://localhost:${port}/`)
@@ -122,4 +119,84 @@ test('cloudcmd: route: no index', (t) => {
             });
     });
 });
+
+test('cloudcmd: route: file', (t) => {
+    const root = path.join(__dirname, '..', 'fixture', 'empty-file');
+    const config = {
+        root,
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/fs/`)
+            .then((empty) => {
+                t.equal(empty, '', 'should equal');
+                t.end();
+                after();
+            });
+    });
+});
+
+test('cloudcmd: route: symlink', (t) => {
+    const root = path.join(__dirname, '..', 'fixture', 'symlink-dir');
+    const config = {
+        root,
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/fs/`)
+            .then((empty) => {
+                t.ok(empty.length, 'should return html document');
+                t.end();
+                after();
+            });
+    });
+});
+
+test('cloudcmd: route: not found', (t) => {
+    const root = path.join(__dirname, '..', 'fixture');
+    const config = {
+        root,
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/fs/file-not-found`)
+            .then((data) => {
+                t.ok(~data.indexOf('ENOENT: no such file or directory'), 'should return error');
+                t.end();
+                after();
+            });
+    });
+});
+
+test('cloudcmd: route: realpath: error', (t) => {
+    const error = 'realpath error';
+    const {realpath} = fs;
+    
+    fs.realpath = (name, fn) => {
+        fn(error);
+        fs.realpath = realpath;
+    };
+    
+    clean('../before');
+    clean(routePath);
+    
+    const before = require('../before');
+    const root = path.join(__dirname, '..', 'fixture');
+    const config = {
+        root,
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/fs/empty-file`)
+            .then((data) => {
+                t.ok(/^ENOENT/.test(data), 'should return error');
+                t.end();
+                after();
+            });
+    });
+});
+
+function clean(path) {
+    delete require.cache[require.resolve(path)];
+}
 
