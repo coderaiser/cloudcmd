@@ -137,15 +137,21 @@ test('cloudcmd: route: file', (t) => {
 });
 
 test('cloudcmd: route: symlink', (t) => {
-    const root = path.join(__dirname, '..', 'fixture', 'symlink-dir');
+    const emptyDir = path.join(__dirname, '..', 'fixture', 'empty-dir');
+    const root = path.join(__dirname, '..', 'fixture');
+    const symlink = path.join(root, 'symlink-dir');
+    
     const config = {
         root,
     };
     
+    fs.symlinkSync(emptyDir, symlink);
+    
     before({config}, (port, after) => {
-        getStr(`http://localhost:${port}/fs/`)
+        getStr(`http://localhost:${port}/fs/symlink-dir`)
             .then((empty) => {
                 t.ok(empty.length, 'should return html document');
+                fs.unlinkSync(symlink);
                 t.end();
                 after();
             });
