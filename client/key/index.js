@@ -6,103 +6,36 @@ const Info = DOM.CurrentInfo;
 
 const exec = require('execon');
 
-const Events = require('./dom/events');
-const Buffer = require('./dom/buffer');
-const {escapeRegExp} = require('../common/util');
+const Events = require('../dom/events');
+const Buffer = require('../dom/buffer');
+const KEY = require('./key');
+const setCurrentByChar = require('./set-current-by-char');
+const fullstore = require('fullstore/legacy');
+const Chars = fullstore();
 
-let Chars = [];
-const KEY = {
-    BACKSPACE   : 8,
-    TAB         : 9,
-    ENTER       : 13,
-    ESC         : 27,
-    
-    SPACE       : 32,
-    PAGE_UP     : 33,
-    PAGE_DOWN   : 34,
-    END         : 35,
-    HOME        : 36,
-    
-    LEFT        : 37,
-    UP          : 38,
-    RIGHT       : 39,
-    DOWN        : 40,
-    
-    INSERT      : 45,
-    DELETE      : 46,
-    
-    ZERO        : 48,
-    
-    A           : 65,
-    
-    C           : 67,
-    D           : 68,
-    
-    G           : 71,
-    
-    M           : 77,
-    
-    O           : 79,
-    Q           : 81,
-    R           : 82,
-    S           : 83,
-    T           : 84,
-    U           : 85,
-    
-    V           : 86,
-    
-    X           : 88,
-    
-    Z           : 90,
-    
-    INSERT_MAC  : 96,
-    
-    ASTERISK    : 106,
-    PLUS        : 107,
-    MINUS       : 109,
-    
-    F1          : 112,
-    F2          : 113,
-    F3          : 114,
-    F4          : 115,
-    F5          : 116,
-    F6          : 117,
-    F7          : 118,
-    F8          : 119,
-    F9          : 120,
-    F10         : 121,
-    
-    EQUAL       : 187,
-    HYPHEN      : 189,
-    DOT         : 190,
-    SLASH       : 191,
-    TRA         : 192, /* Typewritten Reverse Apostrophe (`) */
-    BACKSLASH   : 220,
-    
-    BRACKET_CLOSE: 221
-};
+Chars([]);
 
 KeyProto.prototype = KEY;
 CloudCmd.Key = KeyProto;
 
 function KeyProto() {
-    const Key = this;
-    
     let Binded;
     
-    this.isBind     = () => {
+    const Key = this;
+    
+    this.isBind = () => {
         return Binded;
     };
     
-    this.setBind    = () => {
+    this.setBind = () => {
         Binded = true;
     };
     
-    this.unsetBind  = () => {
+    this.unsetBind = () => {
         Binded = false;
     };
     
-    this.bind   = () => {
+    this.bind = () => {
         Events.addKey(listener);
         Binded = true;
     };
@@ -139,13 +72,14 @@ function KeyProto() {
         }
         
         /* in case buttons can be processed */
-        if (Key.isBind())
-            if (!isNumpad && !alt && !ctrl && !meta && (isBetween || isSymbol))
-                setCurrentByChar(char);
-            else {
-                Chars       = [];
-                switchKey(event);
-            }
+        if (!Key.isBind())
+            return;
+        
+        if (!isNumpad && !alt && !ctrl && !meta && (isBetween || isSymbol))
+            return setCurrentByChar(char, Chars);
+        
+        Chars([]);
+        switchKey(event);
     }
     
     function getSymbol(shift, keyCode) {
@@ -169,61 +103,10 @@ function KeyProto() {
         return char;
     }
     
-    function setCurrentByChar(char) {
-        let firstByName;
-        let skipCount = 0;
-        let setted = false;
-        let i = 0;
-        
-        const escapeChar = escapeRegExp(char);
-        const regExp = new RegExp('^' + escapeChar + '.*$', 'i');
-        const {files} = Info;
-        const n = Chars.length;
-        
-        while(i < n && char === Chars[i]) {
-            i++;
-        }
-        
-        if (!i)
-            Chars = [];
-        
-        const skipN = skipCount = i;
-        Chars.push(char);
-        
-        const names = DOM.getFilenames(files);
-        const isTest = (a) => regExp.test(a);
-        const isRoot = (a) => a === '..';
-        const not = (f) => (a) => !f(a);
-        const setCurrent = (name) => {
-            const byName = DOM.getCurrentByName(name);
-            
-            if (!skipCount) {
-                setted = true;
-                DOM.setCurrentFile(byName);
-                return true;
-            } else {
-                if (skipN === skipCount)
-                    firstByName = byName;
-                
-                --skipCount;
-            }
-        };
-        
-        names
-            .filter(isTest)
-            .filter(not(isRoot))
-            .some(setCurrent);
-        
-        if (!setted) {
-            DOM.setCurrentFile(firstByName);
-            Chars = [char];
-        }
-    }
-    
     function switchKey(event) {
         let i, isSelected, prev, next;
         let current = Info.element;
-        let name = Info.name;
+        const name = Info.name;
         
         const {Operation} = CloudCmd;
         const panel = Info.panel;
@@ -418,9 +301,9 @@ function KeyProto() {
             
             event.preventDefault();
             
-            name = Info.panel.getAttribute('data-name');
+            const attr = Info.panel.getAttribute('data-name');
             
-            if (name === 'js-right')
+            if (attr === 'js-right')
                 DOM.duplicatePanel();
             
             break;
