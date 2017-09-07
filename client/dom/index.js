@@ -533,6 +533,14 @@ function CmdProto() {
         return Cmd;
     };
     
+    this.unselectFile = (currentFile) => {
+        const current = currentFile || DOM.getCurrentFile();
+        
+        current.classList.remove(SELECTED_FILE);
+        
+        return Cmd;
+    };
+    
     this.toggleSelectedFile = (currentFile) => {
         const current = currentFile || DOM.getCurrentFile();
         const name = DOM.getCurrentName(current);

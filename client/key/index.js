@@ -9,6 +9,7 @@ const exec = require('execon');
 const Events = require('../dom/events');
 const Buffer = require('../dom/buffer');
 const KEY = require('./key');
+const vim = require('./vim');
 const setCurrentByChar = require('./set-current-by-char');
 const fullstore = require('fullstore/legacy');
 const Chars = fullstore();
@@ -71,15 +72,19 @@ function KeyProto() {
                 char = isSymbol;
         }
         
-        /* in case buttons can be processed */
         if (!Key.isBind())
             return;
         
-        if (!isNumpad && !alt && !ctrl && !meta && (isBetween || isSymbol))
+        const isVim = CloudCmd.config('vim');
+        
+        if (!isVim && !isNumpad && !alt && !ctrl && !meta && (isBetween || isSymbol))
             return setCurrentByChar(char, Chars);
         
         Chars([]);
         switchKey(event);
+        
+        if (isVim)
+            vim(char, event);
     }
     
     function getSymbol(shift, keyCode) {
@@ -106,6 +111,8 @@ function KeyProto() {
     function switchKey(event) {
         let i, isSelected, prev, next;
         let current = Info.element;
+        let dataName;
+        
         const name = Info.name;
         
         const {Operation} = CloudCmd;
@@ -301,9 +308,9 @@ function KeyProto() {
             
             event.preventDefault();
             
-            const attr = Info.panel.getAttribute('data-name');
+            dataName = Info.panel.getAttribute('data-name');
             
-            if (attr === 'js-right')
+            if (dataName === 'js-right')
                 DOM.duplicatePanel();
             
             break;
@@ -314,9 +321,9 @@ function KeyProto() {
            
             event.preventDefault();
             
-            name = Info.panel.getAttribute('data-name');
+            dataName = Info.panel.getAttribute('data-name');
             
-            if (name === 'js-left')
+            if (dataName === 'js-left')
                 DOM.duplicatePanel();
             
             break;

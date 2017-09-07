@@ -89,18 +89,20 @@ Cloud Commander supports command line parameters:
 | `--console`                   | enable console
 | `--terminal`                  | enable terminal
 | `--terminal-path`             | set terminal path
+| `--vim`                       | enable vim hot keys
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
 | `--no-open`                   | do not open web browser when server started
+| `--no-name`                   | set empty tab name in web browser
+| `--no-one-panel-mode`         | unset one panel mode
 | `--no-progress`               | do not show progress of file operations
 | `--no-html-dialogs`           | do not use html dialogs
-| `--no-one-panel-mode`         | unset one panel mode
 | `--no-contact`                | disable contact
 | `--no-config-dialog`          | disable config dialog
 | `--no-console`                | disable console
 | `--no-terminal`               | disable terminal
-| `--no-name`                   | set empty tab name in web browser
+| `--no-vim`                    | disable vim hot keys
 
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
@@ -173,6 +175,27 @@ Hot keys
 | `F9`                  | context menu
 | `~`                   | console
 | `Ctrl + Click`        | open file on new tab
+
+### Vim
+
+When `--vim` option provided, or configuration parameter `vim` set, next hot keys become available:
+
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `j`                   | navigate to next file
+| `k`                   | navigate to previous file
+| `dd`                  | remove current file
+| `G`                   | navigate to bottom file
+| `gg`                  | navigate to top file
+| `v`                   | visual mode
+| `y`                   | copy (selected in visual mode files)
+| `p`                   | paste files
+| `Esc`                 | unselect all
+
+Commands can be joined, for example:
+- `5j` will navigate `5` files below current;
+- `d5j` will remove next `5` files;
+- `dG` will remove all files from current to bottom;
 
 View
 ---------------
@@ -333,6 +356,7 @@ Here is description of options:
     "console"           : true,     /* enable console                           */
     "terminal"          : false,    /* disable terminal                         */
     "terminalPath"      : '',       /* path of a terminal                       */
+    "vim"               : false,    /* disable vim hot keys                     */
 }
 ```
 

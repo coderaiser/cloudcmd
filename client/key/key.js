@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
     BACKSPACE   : 8,
     TAB         : 9,
@@ -20,12 +22,19 @@ module.exports = {
     
     ZERO        : 48,
     
+    SEMICOLON   : 52,
+    
+    COLON       : 54,
+    
     A           : 65,
     
     C           : 67,
     D           : 68,
     
     G           : 71,
+    
+    J           : 74,
+    K           : 75,
     
     M           : 77,
     

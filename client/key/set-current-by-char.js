@@ -3,7 +3,6 @@
 'use strict';
 
 const Info = DOM.CurrentInfo;
-
 const {escapeRegExp} = require('../../common/util');
 
 module.exports = function setCurrentByChar(char, charStore) {
@@ -56,5 +55,5 @@ module.exports = function setCurrentByChar(char, charStore) {
         DOM.setCurrentFile(firstByName);
         charStore([char]);
     }
-}
+};
 
