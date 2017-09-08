@@ -28,6 +28,6 @@
     "terminal": false,
     "terminalPath": "",
     "showConfig": "false",
-    "vim": "true"
+    "vim": "false"
 }
 
