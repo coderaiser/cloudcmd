@@ -45,6 +45,7 @@ const args = require('minimist')(argv.slice(2), {
         'one-panel-mode',
         'html-dialogs',
         'show-config',
+        'vim',
     ],
     default: {
         server      : true,
@@ -67,7 +68,8 @@ const args = require('minimist')(argv.slice(2), {
         'terminal-path': env('terminal_path') || config('terminalPath'),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'one-panel-mode': choose(env.bool('one_panel_mode'), config('onePanelMode')),
-        'html-dialogs': config('htmlDialogs')
+        'html-dialogs': config('htmlDialogs'),
+        'vim': config('vim'),
     },
     alias: {
         v: 'version',
@@ -112,6 +114,7 @@ function main() {
     config('editor', args.editor);
     config('prefix', args.prefix);
     config('root', args.root);
+    config('vim', args.vim);
     config('htmlDialogs', args['html-dialogs']);
     config('onePanelMode', args['one-panel-mode']);
     config('configDialog', args['config-dialog']);
