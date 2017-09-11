@@ -1,12 +1,20 @@
 'use strict';
 /* global CloudCmd, DOM */
 
+const KEY = require('../key');
 const Info = DOM.CurrentInfo;
-const KEY = require('./key');
+const Dialog = DOM.Dialog;
 
 const fullstore = require('fullstore/legacy');
 const store = fullstore('');
 const visual = fullstore(false);
+const {
+    find,
+    findNext,
+    findPrevious,
+} = require('./find');
+
+const TITLE = 'Cloud Commander';
 
 const stopVisual = () => {
     visual(false);
@@ -102,6 +110,25 @@ module.exports = (key, event) => {
         DOM.toggleSelectedFile(current);
         visual(!visual());
         
+        return end();
+    }
+    
+    if (key === '/') {
+        event.preventDefault();
+        
+        Dialog.prompt(TITLE, 'Find', '', {cancel: false})
+            .then(find);
+       
+        return end();
+    }
+    
+    if (key === 'n') {
+        findNext();
+        return end();
+    }
+    
+    if (key === 'N') {
+        findPrevious();
         return end();
     }
 };

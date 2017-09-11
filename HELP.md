@@ -191,6 +191,9 @@ When `--vim` option provided, or configuration parameter `vim` set, next hot key
 | `y`                   | copy (selected in visual mode files)
 | `p`                   | paste files
 | `Esc`                 | unselect all
+| `/`                   | find file in current directory
+| `n`                   | navigate to next found file
+| `N`                   | navigate to previous found file
 
 Commands can be joined, for example:
 - `5j` will navigate `5` files below current;

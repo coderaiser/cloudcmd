@@ -3,10 +3,16 @@
 const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
-const dir = '../../../client/key/';
+const dir = '../../../../client/key/';
 const KEY = require(dir + 'key');
 
-initGlobals();
+const {
+    getDOM,
+    getCloudCmd,
+} = require('./globals');
+
+global.DOM = global.DOM || getDOM();
+global.CloudCmd = global.CloudCmd || getCloudCmd();
 
 const DOM = global.DOM;
 const Buffer = DOM.Buffer;
@@ -349,8 +355,8 @@ test('cloudcmd: client: key: Enter', (t) => {
     
     const setCurrentFile = sinon.stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    DOM.CurrentInfo.element = element;
+    DOM.setCurrentFile = setCurrentFile;
     
     vim('', {
         keyCode: KEY.ENTER
@@ -363,32 +369,60 @@ test('cloudcmd: client: key: Enter', (t) => {
     t.end();
 });
 
-function initGlobals() {
-    const CurrentInfo = {
-        element: {},
-    };
+test('cloudcmd: client: key: /', (t) => {
+    const preventDefault = sinon.stub();
+    const element = {};
     
-    const noop = () => {};
-    const Buffer = {
-        copy: noop,
-    };
+    DOM.CurrentInfo.element = element;
+    DOM.getCurrentName = () => '';
     
-    global.DOM = {
-        Buffer,
-        CurrentInfo,
-        selectFile: noop,
-        unselectFile: noop,
-        unselectFiles: noop,
-        setCurrentFile: noop,
-        toggleSelectedFile: noop,
-    };
+    vim('/', {
+        preventDefault
+    });
     
-    const show = () => {};
+    t.ok(preventDefault.calledWith(), 'should call preventDefault');
+    t.end();
+});
+
+test('cloudcmd: client: key: n', (t) => {
+    const findNext = sinon.stub();
     
-    global.CloudCmd = {
-        Operation:  {
-            show
-        }
-    };
+    clean(dir + 'vim');
+    stub(dir + 'vim/find', {
+        findNext
+    });
+    
+    const vim = require(dir + 'vim');
+    const event = {};
+    
+    vim('n', event);
+    
+    t.ok(findNext.calledWith(), 'should call findNext');
+    t.end();
+});
+
+test('cloudcmd: client: key: N', (t) => {
+    const findPrevious = sinon.stub();
+    
+    clean(dir + 'vim');
+    stub(dir + 'vim/find', {
+        findPrevious,
+    });
+    
+    const vim = require(dir + 'vim');
+    const event = {};
+    
+    vim('N', event);
+    
+    t.ok(findPrevious.calledWith(), 'should call findPrevious');
+    t.end();
+});
+
+function clean(path) {
+    delete require.cache[require.resolve(path)];
+}
+
+function stub(name, fn) {
+    require.cache[require.resolve(name)].exports = fn;
 }
 

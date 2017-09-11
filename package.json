@@ -202,7 +202,8 @@
     "version-io": "^2.0.1",
     "webpack": "^3.0.0",
     "wraptile": "^1.0.0",
-    "yaspeller": "^4.0.0"
+    "yaspeller": "^4.0.0",
+    "limier": "^1.0.1"
   },
   "engines": {
     "node": ">=4.0.0"
