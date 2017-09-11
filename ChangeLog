@@ -1,3 +1,10 @@
+2017.09.11, v7.6.0
+
+feature:
+- (vim) add find support with: "/", "n" and "N"
+- (package) yaspeller v4.0.0
+
+
 2017.09.08, v7.5.2
 
 fix:

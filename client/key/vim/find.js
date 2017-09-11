@@ -1,7 +1,7 @@
 'use strict';
 /* global DOM */
 
-const fullstore = require('fullstore');
+const fullstore = require('fullstore/legacy');
 const limier = require('limier');
 const Info = DOM.CurrentInfo;
 
