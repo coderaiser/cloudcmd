@@ -76,6 +76,11 @@
           "description": "set one panel mode",
           "value": "false",
           "required": false
+      },
+      "CLOUDCMD_VIM": {
+          "description": "enable vim hot keys",
+          "value": "false",
+          "required": false
       }
   }
 }

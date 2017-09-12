@@ -69,7 +69,7 @@ const args = require('minimist')(argv.slice(2), {
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'one-panel-mode': choose(env.bool('one_panel_mode'), config('onePanelMode')),
         'html-dialogs': config('htmlDialogs'),
-        'vim': config('vim'),
+        'vim': choose(env.bool('vim'), config('vim')),
     },
     alias: {
         v: 'version',

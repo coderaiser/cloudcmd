@@ -379,6 +379,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_PASSWORD` - set password
 - `CLOUDCMD_ROOT` - set root directory
 - `CLOUDCMD_ONE_PANEL_MODE` - set one panel mode
+- `CLOUDCMD_VIM` - enable vim hot keys
 
 Menu
 ---------------
