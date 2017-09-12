@@ -1,3 +1,9 @@
+2017.09.12, v7.7.0
+
+feature:
+- (cloudcmd) add support of CLOUDCMD_VIM env variable
+
+
 2017.09.11, v7.6.0
 
 feature:
