@@ -105,7 +105,7 @@ function OperationProto(operation, data) {
             });
             
             remover.on('disconnect', () => {
-                deleteFn = RESTful.remove;
+                deleteFn = RESTful.delete;
             });
         });
     }
