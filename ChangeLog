@@ -1,3 +1,12 @@
+2017.09.18, v7.7.1
+
+fix:
+- (operation) RESTful.remove -> RESTful.delete (#132)
+
+feature:
+- (package) babel-preset-2015 -> babel-preset-env
+
+
 2017.09.12, v7.7.0
 
 feature:
