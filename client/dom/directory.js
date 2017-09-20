@@ -3,12 +3,13 @@
 
 'use strict';
 
+const philip = require('philip');
+
 const Images = require('./images');
 const {FS} = require('../../common/cloudfunc');
 
 module.exports = (items) => {
     const Info = DOM.CurrentInfo;
-    const load = DOM.load;
     const Dialog = DOM.Dialog;
     
     if (items.length)
@@ -18,56 +19,43 @@ module.exports = (items) => {
         return item.webkitGetAsEntry();
     });
     
-    const addDir = (name) => {
-        return `/modules/${name}/lib/${name}.js`;
-    };
+    const path = Info.dirPath
+        .replace(/\/$/, '');
     
-    const array   = [
-        'findit',
-        'philip'
-    ];
-    
-    const url = CloudCmd.join(array.map(addDir));
-    
-    load.js(url, () => {
-        const path = Info.dirPath
-            .replace(/\/$/, '');
+    const uploader = philip(entries, (type, name, data, i, n, callback) => {
+        const prefixURL = CloudCmd.PREFIX_URL;
+        const full = prefixURL + FS + path + name;
         
-        const uploader = window.philip(entries, (type, name, data, i, n, callback) => {
-            const prefixURL = CloudCmd.PREFIX_URL;
-            const full = prefixURL + FS + path + name;
+        let upload;
+        switch(type) {
+        case 'file':
+            upload = uploadFile(full, data);
+            break;
+        
+        case 'directory':
+            upload = uploadDir(full);
+            break;
+        }
+        
+        upload.on('end', callback);
+        
+        upload.on('progress', (count) => {
+            const current = percent(i, n);
+            const next = percent(i + 1, n);
+            const max = next - current;
+            const value = current + percent(count, 100, max);
             
-            let upload;
-            switch(type) {
-            case 'file':
-                upload = uploadFile(full, data);
-                break;
-            
-            case 'directory':
-                upload = uploadDir(full);
-                break;
-            }
-            
-            upload.on('end', callback);
-            
-            upload.on('progress', (count) => {
-                const current = percent(i, n);
-                const next = percent(i + 1, n);
-                const max = next - current;
-                const value = current + percent(count, 100, max);
-                
-                setProgress(value);
-            });
+            setProgress(value);
         });
-        
-        uploader.on('error', (error) => {
-            Dialog.alert(error);
-            uploader.abort();
-        });
-        
-        uploader.on('progress', setProgress);
-        uploader.on('end', CloudCmd.refresh);
     });
+    
+    uploader.on('error', (error) => {
+        Dialog.alert(error);
+        uploader.abort();
+    });
+    
+    uploader.on('progress', setProgress);
+    uploader.on('end', CloudCmd.refresh);
 };
 
 function percent(i, n, per = 100) {
