@@ -1,3 +1,16 @@
+2017.09.22, v2.4.2
+
+fix:
+- (smalltalk) confirm: no cancel
+- (smalltalk) native: prompt: cancel
+
+feature:
+- (package) babel-preset-env v1.6.0
+- (package) sinon v3.0.0
+- (package) stylelint-config-standard v17.0.0
+- (package) stylelint v8.0.0
+
+
 2017.07.10, v2.4.1
 
 fix:

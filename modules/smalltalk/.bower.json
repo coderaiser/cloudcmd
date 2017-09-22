@@ -25,15 +25,15 @@
     "webpack.config.js"
   ],
   "dependencies": {},
-  "version": "2.4.1",
-  "_release": "2.4.1",
+  "version": "2.4.2",
+  "_release": "2.4.2",
   "_resolution": {
     "type": "version",
-    "tag": "v2.4.1",
-    "commit": "1c993e63d5228568515378487ef44069cce55911"
+    "tag": "v2.4.2",
+    "commit": "1d02d9673ddb41e2e31f1ade83aef48e3e5c905c"
   },
   "_source": "https://github.com/coderaiser/smalltalk.git",
-  "_target": "^2.4.1",
+  "_target": "^2.4.2",
   "_originalSource": "smalltalk",
   "_direct": true
 }
