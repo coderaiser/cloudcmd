@@ -1,3 +1,9 @@
+2017.09.22, v7.7.2
+
+feature:
+- (package) spead up directory upload: philip: bower -> npm
+
+
 2017.09.18, v7.7.1
 
 fix:
