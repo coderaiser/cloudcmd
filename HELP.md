@@ -200,6 +200,17 @@ Commands can be joined, for example:
 - `d5j` will remove next `5` files;
 - `dG` will remove all files from current to bottom;
 
+Drag and Drop
+---------------
+Next file operations are accessible through `Drag and Drop`.
+
+| Drag Mouse Button | Key       | Origin    | Destination   |Operation
+|:------------------|:----------|:----------|:--------------|:------------------
+| `Left`            |           | `Panel`   | `Panel`       | copy files
+| `Left`            | `Shift`   | `Panel`   | `Panel`       | rename/move files
+| `Left`            |           | `Panel`   | `Desktop`     | download files
+| `Left`            |           | `Desktop` | `Panel`       | upload files
+
 View
 ---------------
 ![View](/img/screen/view.png "View")
