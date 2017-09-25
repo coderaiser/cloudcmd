@@ -420,7 +420,10 @@ function dragndrop() {
         if (dirFiles.length)
             return DOM.uploadDirectory(dirFiles);
         
-        return CloudCmd.Operation.show('copy');
+        const {Operation} = CloudCmd;
+        const operation = event.shiftKey ? 'move' : 'copy';
+        
+        return Operation.show(operation);
     };
     
     /**
