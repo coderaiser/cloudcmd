@@ -103,6 +103,36 @@ test('cloudcmd: route: buttons: no contact', (t) => {
     });
 });
 
+test('cloudcmd: route: buttons: one panel mode: move', (t) => {
+    const config = {
+        onePanelMode: true
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                t.ok(/icon-move none/.test(result), 'should hide move button');
+                t.end();
+                after();
+            });
+    });
+});
+
+test('cloudcmd: route: buttons: one panel mode: move', (t) => {
+    const config = {
+        onePanelMode: true
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                t.ok(/icon-copy none/.test(result), 'should hide copy button');
+                t.end();
+                after();
+            });
+    });
+});
+
 test('cloudcmd: route: no index', (t) => {
     const name = path.join(__dirname, '../../dist-dev/index.html');
     const nameAfter = path.join(__dirname, '../../dist-dev/index1.html');
