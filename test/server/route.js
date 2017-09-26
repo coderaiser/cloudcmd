@@ -133,6 +133,21 @@ test('cloudcmd: route: buttons: one panel mode: move', (t) => {
     });
 });
 
+test('cloudcmd: route: keys panel', (t) => {
+    const config = {
+        showKeysPanel: false
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                t.ok(/keyspanel hidden/.test(result), 'should hide keyspanel');
+                t.end();
+                after();
+            });
+    });
+});
+
 test('cloudcmd: route: no index', (t) => {
     const name = path.join(__dirname, '../../dist-dev/index.html');
     const nameAfter = path.join(__dirname, '../../dist-dev/index1.html');
