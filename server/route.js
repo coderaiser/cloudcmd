@@ -5,6 +5,7 @@ const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
 
 const fs = require('fs');
+const path = require('path');
 
 const flop = require('flop');
 const ponse = require('ponse');
@@ -23,9 +24,9 @@ const Template = require(DIR_SERVER + 'template')();
 const prefix = squad(prefixer, apart(config, 'prefix'));
 const isDev = process.env.NODE_ENV === 'development';
 
-const getIndexPath = () => {
+const getIndexPath = (isDev) => {
     const dist = isDev ? 'dist-dev' : 'dist';
-    return DIR + `${dist}/index.html`;
+    return path.join(DIR, `${dist}/index.html`);
 };
 
 const FS = CloudFunc.FS;
@@ -35,6 +36,8 @@ module.exports = (req, res, next) => {
     
     route(req, res, next);
 };
+
+module.exports._getIndexPath = getIndexPath;
 
 /**
  * additional processing of index file
@@ -142,7 +145,7 @@ function route(request, response, callback) {
         
         if (!error)
             return buildIndex(dir, (error, data) => {
-                p.name = getIndexPath();
+                p.name = getIndexPath(isDev);
                 
                 if (error)
                     return ponse.sendError(error, p);

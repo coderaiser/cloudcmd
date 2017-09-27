@@ -164,20 +164,37 @@ test('cloudcmd: route: keys panel', (t) => {
 });
 
 test('cloudcmd: route: no index', (t) => {
-    const name = path.join(__dirname, '../../dist-dev/index.html');
-    const nameAfter = path.join(__dirname, '../../dist-dev/index1.html');
+    const name = path.join(__dirname, '../../dist/index.html');
+    const nameAfter = path.join(__dirname, '../../dist/index1.html');
     
     fs.renameSync(name, nameAfter);
     
     before({}, (port, after) => {
         getStr(`http://localhost:${port}/`)
             .then((result) => {
+                console.log(result);
                 fs.renameSync(nameAfter, name);
                 t.equal(result.indexOf('ENOENT'), 0, 'should not found index.html');
                 t.end();
                 after();
             });
     });
+});
+
+test('cloudcmd: route: getIndexPath: production', (t) => {
+    const isDev = false;
+    const name = path.join(__dirname, '..', '..', 'dist', 'index.html');
+    
+    t.equal(route._getIndexPath(isDev), name);
+    t.end();
+});
+
+test('cloudcmd: route: getIndexPath: development', (t) => {
+    const isDev = true;
+    const name = path.join(__dirname, '..', '..', 'dist-dev', 'index.html');
+    
+    t.equal(route._getIndexPath(isDev), name);
+    t.end();
 });
 
 test('cloudcmd: route: file', (t) => {
