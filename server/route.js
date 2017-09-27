@@ -1,16 +1,13 @@
 'use strict';
 
 const DIR = __dirname + '/../';
-const DIR_TMPL = DIR + 'tmpl/';
 const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
-const DIR_FS = DIR_TMPL + 'fs/';
 
 const fs = require('fs');
 
 const flop = require('flop');
 const ponse = require('ponse');
-const files = require('files-io');
 const rendy = require('rendy');
 const format = require('format-io');
 const squad = require('squad');
@@ -20,8 +17,10 @@ const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
-const prefix = squad(prefixer, apart(config, 'prefix'));
 
+const Template = require(DIR_SERVER + 'template')();
+
+const prefix = squad(prefixer, apart(config, 'prefix'));
 const isDev = process.env.NODE_ENV === 'development';
 
 const getIndexPath = () => {
@@ -29,23 +28,12 @@ const getIndexPath = () => {
     return DIR + `${dist}/index.html`;
 };
 
-const TMPL_PATH   = [
-    'file',
-    'panel',
-    'path',
-    'pathLink',
-    'link'
-];
-
-const Template = {};
 const FS = CloudFunc.FS;
 
 module.exports = (req, res, next) => {
     check(req, res, next);
     
-    readFiles(() => {
-        route(req, res, next);
-    });
+    route(req, res, next);
 };
 
 /**
@@ -125,40 +113,6 @@ function indexProcessing(options) {
     });
     
     return data;
-}
-
-function readFiles(callback) {
-    const paths = {};
-    const lengthTmpl = Object.keys(Template).length;
-    const lenthPath = TMPL_PATH.length;
-    const isRead = lengthTmpl === lenthPath;
-    
-    if (typeof callback !== 'function')
-        throw Error('callback should be a function!');
-    
-    if (isRead)
-        return callback();
-        
-    const filesList = TMPL_PATH.map((name) => {
-        const path = DIR_FS + name + '.hbs';
-        
-        paths[path] = name;
-        
-        return path;
-    });
-    
-    files.read(filesList, 'utf8', (error, files) => {
-        if (error)
-            throw error;
-        
-        Object.keys(files).forEach((path) => {
-            const name = paths[path];
-            
-            Template[name] = files[path];
-        });
-        
-        callback();
-    });
 }
 
 /**
