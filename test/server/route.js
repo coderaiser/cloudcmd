@@ -58,6 +58,21 @@ test('cloudcmd: route: buttons: no console', (t) => {
     });
 });
 
+test('cloudcmd: route: buttons: console', (t) => {
+    const config = {
+        console: true,
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                t.notOk(/icon-console none/.test(result), 'should not hide console');
+                t.end();
+                after();
+            });
+    });
+});
+
 test('cloudcmd: route: buttons: no terminal', (t) => {
     const config = {
         terminal: false
