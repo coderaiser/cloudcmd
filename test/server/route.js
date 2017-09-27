@@ -196,6 +196,22 @@ test('cloudcmd: route: file', (t) => {
     });
 });
 
+test('cloudcmd: route: file: fs', (t) => {
+    const root = path.join(__dirname, '..', 'fixture', 'empty-file');
+    const config = {
+        root,
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/fs`)
+            .then((empty) => {
+                t.equal(empty, '', 'should equal');
+                t.end();
+                after();
+            });
+    });
+});
+
 test('cloudcmd: route: symlink', (t) => {
     const emptyDir = path.join(__dirname, '..', 'fixture', 'empty-dir');
     const root = path.join(__dirname, '..', 'fixture');
