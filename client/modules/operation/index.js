@@ -438,12 +438,13 @@ function OperationProto(operation, data) {
         
         const {type} = options;
         
-        if (shouldAsk && config(type)) {
-            const isCopy = type === 'copy';
-            const title = isCopy ? 'Copy' : 'Rename/Move';
-            
-            return message(title, to, names).then(ask);
-        }
+        const isCopy = type === 'copy';
+        const option = isCopy ? 'confirmCopy' : 'confirmMove';
+        const title = isCopy ? 'Copy' : 'Rename/Move';
+        
+        if (shouldAsk && config(option))
+            return message(title, to, names)
+                .then(ask);
         
         ask(to);
         

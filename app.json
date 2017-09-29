@@ -86,6 +86,11 @@
           "description": "confirm copy",
           "value": "true",
           "required": false
+      },
+      "CLOUDCMD_CONFIRM_MOVE": {
+          "description": "confirm move",
+          "value": "true",
+          "required": false
       }
   }
 }

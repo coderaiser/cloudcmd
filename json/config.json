@@ -23,6 +23,7 @@
     "htmlDialogs": true,
     "contact": true,
     "confirmCopy": true,
+    "confirmMove": true,
     "configDialog": true,
     "onePanelMode": false,
     "console": true,

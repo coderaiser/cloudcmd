@@ -81,6 +81,7 @@ Cloud Commander supports command line parameters:
 | `--port`                      | set port number
 | `--progress`                  | show progress of file operations
 | `--confirm-copy`              | confirm copy
+| `--confirm-move`              | confirm move
 | `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
 | `--name`                      | set tab name in web browser
@@ -99,6 +100,7 @@ Cloud Commander supports command line parameters:
 | `--no-one-panel-mode`         | unset one panel mode
 | `--no-progress`               | do not show progress of file operations
 | `--no-confirm-copy`           | do not confirm copy
+| `--no-confirm-move`           | do not confirm move
 | `--no-html-dialogs`           | do not use html dialogs
 | `--no-contact`                | disable contact
 | `--no-config-dialog`          | disable config dialog
@@ -366,6 +368,7 @@ Here is description of options:
     "prefix"            : "",       /* url prefix                               */
     "progress"          : true,     /* show progress of file operations         */
     "confirmCopy"       : true,     /* confirm copy                             */
+    "confirmMove"       : true,     /* confirm move                             */
     "htmlDialogs"       : true,     /* use html dialogs                         */
     "onePanelMode"      : false,    /* set one panel mode                       */
     "contact"           : true,     /* enable contact                           */
@@ -395,6 +398,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_ONE_PANEL_MODE` - set one panel mode
 - `CLOUDCMD_VIM` - enable vim hot keys
 - `CLOUDCMD_CONFIRM_COPY` - confirm copy
+- `CLOUDCMD_CONFIRM_MOVE` - confirm move
 
 Menu
 ---------------
