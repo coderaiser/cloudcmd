@@ -80,6 +80,7 @@ Cloud Commander supports command line parameters:
 | `--prefix`                    | set url prefix
 | `--port`                      | set port number
 | `--progress`                  | show progress of file operations
+| `--confirm-copy`              | confirm copy
 | `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
 | `--name`                      | set tab name in web browser
@@ -97,6 +98,7 @@ Cloud Commander supports command line parameters:
 | `--no-name`                   | set empty tab name in web browser
 | `--no-one-panel-mode`         | unset one panel mode
 | `--no-progress`               | do not show progress of file operations
+| `--no-confirm-copy`           | do not confirm copy
 | `--no-html-dialogs`           | do not use html dialogs
 | `--no-contact`                | disable contact
 | `--no-config-dialog`          | disable config dialog
@@ -363,6 +365,7 @@ Here is description of options:
     "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
     "progress"          : true,     /* show progress of file operations         */
+    "confirmCopy"       : true,     /* confirm copy                             */
     "htmlDialogs"       : true,     /* use html dialogs                         */
     "onePanelMode"      : false,    /* set one panel mode                       */
     "contact"           : true,     /* enable contact                           */
@@ -391,6 +394,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_ROOT` - set root directory
 - `CLOUDCMD_ONE_PANEL_MODE` - set one panel mode
 - `CLOUDCMD_VIM` - enable vim hot keys
+- `CLOUDCMD_CONFIRM_COPY` - confirm copy
 
 Menu
 ---------------

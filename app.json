@@ -81,6 +81,11 @@
           "description": "enable vim hot keys",
           "value": "false",
           "required": false
+      },
+      "CLOUDCMD_CONFIRM_COPY": {
+          "description": "confirm copy",
+          "value": "true",
+          "required": false
       }
   }
 }

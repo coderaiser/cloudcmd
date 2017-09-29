@@ -38,6 +38,7 @@ function OperationProto(operation, data) {
     const Info = DOM.CurrentInfo;
     const showLoad = Images.show.load.bind(null, 'top');
     const Operation = this;
+    const processFiles = currify(_processFiles);
     
     function init() {
         showLoad();
@@ -278,13 +279,13 @@ function OperationProto(operation, data) {
         }
     };
     
-    this.copy = (data) => {
-        processFiles(data, copyFn, message('Copy'));
-    };
+    this.copy = processFiles(copyFn, {
+        type: 'copy',
+    });
     
-    this.move = (data) => {
-        processFiles(data, moveFn, message('Rename/Move'));
-    };
+    this.move = processFiles(moveFn, {
+        type: 'move'
+    });
     
     this.delete = () => {
         promptDelete();
@@ -398,17 +399,17 @@ function OperationProto(operation, data) {
      * @param data
      * @param operation
      */
-    function processFiles(data, operation, message) {
-        var name, selFiles, files,
-            panel,
-            shouldAsk,
-            sameName,
-            ok,
-            
-            from        = '',
-            to          = '',
-            
-            names       = [];
+    function _processFiles(operation, options, data) {
+        let name, selFiles, files;
+        let panel;
+        let shouldAsk;
+        let sameName;
+        let ok;
+        
+        let from = '';
+        let to = '';
+        
+        let names = [];
         
         if (data) {
             from        = data.from;
@@ -435,8 +436,14 @@ function OperationProto(operation, data) {
         if (name === '..')
             return Dialog.alert.noFiles(TITLE);
         
-        if (shouldAsk)
-            return message(to, names).then(ask);
+        const {type} = options;
+        
+        if (shouldAsk && config(type)) {
+            const isCopy = type === 'copy';
+            const title = isCopy ? 'Copy' : 'Rename/Move';
+            
+            return message(title, to, names).then(ask);
+        }
         
         ask(to);
         
@@ -543,24 +550,22 @@ function OperationProto(operation, data) {
         });
     }
     
-    function message(msg) {
-        return (to, names) => {
-            const n = names.length;
-            const name = names[0];
-            
-            msg += ' ';
-            
-            if (names.length > 1)
-                msg     += n + ' file(s)';
-            else
-                msg     += '"' + name + '"';
-            
-            msg += ' to';
-            
-            const cancel = false;
-            
-            return Dialog.prompt(TITLE, msg, to, {cancel});
-        };
+    function message(msg, to, names) {
+        const n = names.length;
+        const name = names[0];
+        
+        msg += ' ';
+        
+        if (names.length > 1)
+            msg     += n + ' file(s)';
+        else
+            msg     += '"' + name + '"';
+        
+        msg += ' to';
+        
+        const cancel = false;
+        
+        return Dialog.prompt(TITLE, msg, to, {cancel});
     }
     
     function load(callback) {

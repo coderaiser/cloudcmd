@@ -43,6 +43,7 @@ const args = require('minimist')(argv.slice(2), {
         'contact',
         'terminal',
         'one-panel-mode',
+        'confirm-copy',
         'html-dialogs',
         'show-config',
         'vim',
@@ -65,9 +66,10 @@ const args = require('minimist')(argv.slice(2), {
         contact     : choose(env.bool('contact'), config('contact')),
         terminal    : choose(env.bool('terminal'), config('terminal')),
         
-        'terminal-path': env('terminal_path') || config('terminalPath'),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
+        'terminal-path': env('terminal_path') || config('terminalPath'),
         'one-panel-mode': choose(env.bool('one_panel_mode'), config('onePanelMode')),
+        'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'html-dialogs': config('htmlDialogs'),
         'vim': choose(env.bool('vim'), config('vim')),
     },
@@ -116,6 +118,7 @@ function main() {
     config('root', args.root);
     config('vim', args.vim);
     config('htmlDialogs', args['html-dialogs']);
+    config('confirmCopy', args['confirm-copy']);
     config('onePanelMode', args['one-panel-mode']);
     config('configDialog', args['config-dialog']);
     
