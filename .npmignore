@@ -20,9 +20,6 @@ modules/fancybox/lib/
 modules/fancybox/demo
 modules/fancybox/sprite.psd
 
-modules/execon
-modules/emitify
-
 app.json
 bower.json
 manifest.yml
