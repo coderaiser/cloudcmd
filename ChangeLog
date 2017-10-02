@@ -1,3 +1,9 @@
+2017.10.02, v8.0.1
+
+fix:
+- (package) get back file-loader
+
+
 2017.10.02, v8.0.0
 
 feature:
