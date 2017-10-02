@@ -1,3 +1,10 @@
+2017.10.02, v8.0.0
+
+feature:
+- (cloudcmd) middleware: password: plain -> encrypted (#136)
+- (package) coveralls v3.0.0
+
+
 2017.09.29, v7.9.0
 
 feature:
