@@ -503,6 +503,33 @@ server.listen(port);
 
 And you are ready to go.
 
+### Authorization
+
+If you want to enable `authorization` you can pass credentials in a `config`.
+To generate password you can install `criton` with `npm i criton --save` and use it
+or any other way to generate a `hash` of a `password`.
+
+```js
+const criton = require('criton');
+const algo = 'sha512WithRSAEncryption'; // default
+
+// you can generate hash dynamically
+const password = criton('root', algo);
+
+// or use pregenerated hash as well
+'2b64f2e..ca5d9a9';
+
+const auth = true;
+const username = 'root';
+
+const config = {
+    algo, // optional
+    auth,
+    username,
+    pasword,
+}
+```
+
 Server
 ---------------
 Standard practices say no non-root process gets to talk to

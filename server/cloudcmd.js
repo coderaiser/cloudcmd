@@ -30,7 +30,6 @@ const remedy = require('remedy');
 const ishtar = require('ishtar');
 const salam = require('salam');
 const omnes = require('omnes');
-const criton = require('criton');
 
 const setUrl = currify(_setUrl);
 
@@ -56,29 +55,22 @@ module.exports = (params) => {
     
     const keys = Object.keys(options);
     
-    let prefix;
-    
     checkPlugins(plugins);
     
     keys.forEach((name) => {
-        let value = options[name];
+        const value = options[name];
         
         switch(name) {
         case 'root':
             validate.root(value);
             break;
+        
         case 'editor':
             validate.editor(value);
             break;
+        
         case 'packer':
             validate.packer(value);
-            break;
-        case 'password':
-            /* could be useful when used as middleware */
-            value = criton(value, config('algo'));
-            break;
-        case 'prefix':
-            prefix = prefixer(value);
             break;
         }
         
@@ -87,6 +79,8 @@ module.exports = (params) => {
     
     config('console', defaultValue('console', options));
     config('configDialog', defaultValue('configDialog', options));
+    
+    const prefix = prefixer(options.prefix);
     
     if (p.socket)
         listen(prefix, p.socket);

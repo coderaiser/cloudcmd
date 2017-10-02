@@ -1,6 +1,7 @@
 'use strict';
 
 const test = require('tape');
+
 const DIR = '../../server/';
 const cloudcmd = require(DIR + 'cloudcmd');
 const config = require(DIR + 'config');
@@ -34,8 +35,7 @@ test('cloudcmd: defaults: config', (t) => {
 });
 
 test('cloudcmd: defaults: console', (t) => {
-    const console  = config('console');
-    
+    const console = config('console');
     config('console', false);
     cloudcmd();
     t.notOk(config('console'), 'should not override config with defaults');
