@@ -195,7 +195,7 @@
     "sinon": "^4.0.0",
     "sinon-called-with-diff": "^1.0.1",
     "socket.io-client": "^2.0.1",
-    "style-loader": "^0.18.2",
+    "style-loader": "^0.19.0",
     "stylelint": "^8.0.0",
     "stylelint-config-standard": "^17.0.0",
     "tape": "^4.4.0",
