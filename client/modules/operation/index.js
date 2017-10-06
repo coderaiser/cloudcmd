@@ -310,6 +310,11 @@ function OperationProto(operation, data) {
      * @currentFile
      */
     function promptDelete() {
+        let name = Info.name;
+        
+        if (name === '..')
+            return Dialog.alert.noFiles(TITLE);
+        
         const msgAsk = 'Do you really want to delete the ';
         const msgSel = 'selected ';
         
@@ -340,9 +345,6 @@ function OperationProto(operation, data) {
             const name = DOM.getCurrentName(current);
             msg = msgAsk + msgSel + type + name + '?';
         }
-        
-        if (name === '..')
-            return Dialog.alert.noFiles(TITLE);
         
         const cancel = false;
         
