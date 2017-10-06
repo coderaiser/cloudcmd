@@ -40,6 +40,16 @@ function OperationProto(operation, data) {
     const Operation = this;
     const processFiles = currify(_processFiles);
     
+    const noFilesCheck = () => {
+        const name = Info.name;
+        const is = name === '..';
+        
+        if (is)
+            return Dialog.alert.noFiles(TITLE);
+        
+        return is;
+    };
+    
     function init() {
         showLoad();
         
@@ -310,10 +320,8 @@ function OperationProto(operation, data) {
      * @currentFile
      */
     function promptDelete() {
-        let name = Info.name;
-        
-        if (name === '..')
-            return Dialog.alert.noFiles(TITLE);
+        if (noFilesCheck())
+            return;
         
         const msgAsk = 'Do you really want to delete the ';
         const msgSel = 'selected ';
@@ -358,32 +366,27 @@ function OperationProto(operation, data) {
      *
      * @files
      */
-    function deleteSilent(files) {
-        var n, names,
-            query       = '?files',
-            path        = Info.dirPath,
-            name        = Info.name;
+    function deleteSilent(files = DOM.getSelectedFiles()) {
+        const query = '?files';
+        const path = Info.dirPath;
         
-        if (name === '..')
-            return Dialog.alert.noFiles(TITLE);
+        if (noFilesCheck())
+            return;
         
         showLoad();
         
-        if (!files)
-            files       = DOM.getSelectedFiles();
-        
-        names       = DOM.getFilenames(files),
-        n           = names.length;
+        let names = DOM.getFilenames(files);
+        const n = names.length;
         
         if (!n)
             names = [Info.name];
         
         deleteFn(path + query, names, (error) => {
-            var Storage     = DOM.Storage,
-                dirPath     = Info.dirPath,
-                delCurrent  = DOM.deleteCurrent,
-                delSelected = DOM.deleteSelected,
-                getByName   = DOM.getCurrentByName;
+            const Storage = DOM.Storage;
+            const dirPath = Info.dirPath;
+            const delCurrent = DOM.deleteCurrent;
+            const delSelected = DOM.deleteSelected;
+            const getByName = DOM.getCurrentByName;
             
             if (!error) {
                 if (n > 1)
@@ -402,7 +405,7 @@ function OperationProto(operation, data) {
      * @param operation
      */
     function _processFiles(operation, options, data) {
-        let name, selFiles, files;
+        let selFiles, files;
         let panel;
         let shouldAsk;
         let sameName;
@@ -431,12 +434,12 @@ function OperationProto(operation, data) {
         if (!names.length)
             names.push(DOM.getCurrentName());
         
-        name = names[0];
+        const name = names[0];
         
-        sameName = !!DOM.getCurrentByName(name, panel);
+        sameName = DOM.getCurrentByName(name, panel);
         
-        if (name === '..')
-            return Dialog.alert.noFiles(TITLE);
+        if (noFilesCheck())
+            return;
         
         const {type} = options;
         
@@ -475,10 +478,8 @@ function OperationProto(operation, data) {
                         const panel = Info.panel;
                         const panelPassive = Info.panelPassive;
                         const setCurrent = () => {
-                            if (!name)
-                                name = data.names[0];
-                            
-                            DOM.setCurrentByName(name);
+                            const currentName = name || data.names[0];
+                            DOM.setCurrentByName(currentName);
                         };
                         
                         if (!Info.isOnePanel)
