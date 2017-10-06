@@ -1,3 +1,13 @@
+2017.10.06, v8.0.2
+
+fix:
+- (operation) delete: check no files after ask
+
+feature:
+- (package) url-loader v0.6.1
+- (package) style-loader v0.19.0
+
+
 2017.10.02, v8.0.1
 
 fix:
