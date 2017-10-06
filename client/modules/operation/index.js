@@ -326,7 +326,7 @@ function OperationProto(operation, data) {
         const msgAsk = 'Do you really want to delete the ';
         const msgSel = 'selected ';
         
-        const files = DOM.getSelectedFiles();
+        const files = DOM.getActiveFiles();
         const names = DOM.getFilenames(files);
         const n = names.length;
         
@@ -366,7 +366,7 @@ function OperationProto(operation, data) {
      *
      * @files
      */
-    function deleteSilent(files = DOM.getSelectedFiles()) {
+    function deleteSilent(files = DOM.getActiveFiles()) {
         const query = '?files';
         const path = Info.dirPath;
         
@@ -375,27 +375,18 @@ function OperationProto(operation, data) {
         
         showLoad();
         
-        let names = DOM.getFilenames(files);
-        const n = names.length;
-        
-        if (!n)
-            names = [Info.name];
+        const names = DOM.getFilenames(files);
         
         deleteFn(path + query, names, (error) => {
             const Storage = DOM.Storage;
             const dirPath = Info.dirPath;
-            const delCurrent = DOM.deleteCurrent;
             const delSelected = DOM.deleteSelected;
-            const getByName = DOM.getCurrentByName;
             
-            if (!error) {
-                if (n > 1)
-                    delSelected(files);
-                else
-                    delCurrent(getByName(name));
-                
-                Storage.removeMatch(dirPath);
-            }
+            if (error)
+                return;
+             
+            delSelected(files);
+            Storage.removeMatch(dirPath);
         });
     }
     
