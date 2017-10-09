@@ -1,3 +1,11 @@
+2017.10.09, v2.5.0
+
+feature:
+- (smalltalk) prompt: password (#8)
+- (package) sinon v4.0.0
+- (package) coveralls v3.0.0
+
+
 2017.09.22, v2.4.2
 
 fix:

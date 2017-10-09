@@ -31,9 +31,11 @@ for preventing of handling cancel event.
 ![Alert](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/alert.png "Alert")
 
 ```js
-smalltalk.alert('Error', 'There was an error!').then(function() {
-    console.log('ok');
-});
+smalltalk
+    .alert('Error', 'There was an error!')
+    .then(() => {
+        console.log('ok');
+    });
 ```
 
 ## smalltalk.confirm(title, message [, options])
@@ -41,11 +43,13 @@ smalltalk.alert('Error', 'There was an error!').then(function() {
 ![Confirm](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/confirm.png "Confirm")
 
 ```js
-smalltalk.confirm('Question', 'Are you sure?').then(function() {
-    console.log('yes');
-}, function() {
-    console.log('no');
-});
+smalltalk
+    .confirm('Question', 'Are you sure?')
+    .then(() => {
+        console.log('yes');
+    .catch(() => {
+        console.log('no');
+    });
 ```
 
 ## smalltalk.prompt(title, message, value [, options])
@@ -53,11 +57,27 @@ smalltalk.confirm('Question', 'Are you sure?').then(function() {
 ![Prompt](https://raw.githubusercontent.com/coderaiser/smalltalk/master/screen/prompt.png "Prompt")
 
 ```js
-smalltalk.prompt('Question', 'How old are you?', '10').then(function(value) {
-    console.log(value);
-}, function() {
-    console.log('cancel');
-});
+smalltalk
+    .prompt('Question', 'How old are you?', '10')
+    .then((value) => {
+        console.log(value);
+    .catch(() => {
+        console.log('cancel');
+    });
+```
+
+Use `type='password'` for `password` fields:
+
+```js
+smalltalk
+    .prompt('Question', 'How old are you?', '10', {
+        type: 'password',
+    })
+    .then((value) => {
+        console.log(value);
+    .catch(() => {
+        console.log('cancel');
+    });
 ```
 
 ## Bundlers

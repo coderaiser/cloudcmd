@@ -16,8 +16,12 @@ exports.alert = (title, msg) => {
 };
 
 exports.prompt = (title, msg, value = '', options) => {
-    const val = String(value).replace(/"/g, '&quot;');
-    const valueStr = `<input type="text" value="${ val }" data-name="js-input">`;
+    const type = getType(options);
+    
+    const val = String(value)
+        .replace(/"/g, '&quot;');
+    
+    const valueStr = `<input type="${ type }" value="${ val }" data-name="js-input">`;
     
     return showDialog(title, msg, valueStr, BUTTON_OK_CANCEL, options);
 };
@@ -25,6 +29,15 @@ exports.prompt = (title, msg, value = '', options) => {
 exports.confirm = (title, msg, options) => {
     return showDialog(title, msg, '', BUTTON_OK_CANCEL, options);
 };
+
+function getType(options = {}) {
+    const {type} = options;
+    
+    if (type === 'password')
+        return 'password';
+    
+    return 'text';
+}
 
 function getTemplate(title, msg, value, buttons) {
     const encodedMsg = msg.replace(/\n/g, '<br>');
