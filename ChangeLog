@@ -1,3 +1,10 @@
+2017.10.13, v8.0.5
+
+feature:
+- (polyfill) clean up old polyfills
+- (events) rm unused dispatch
+
+
 2017.10.10, v8.0.4
 
 feature:
