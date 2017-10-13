@@ -9,6 +9,12 @@ function EventsProto() {
     
     function parseArgs(eventName, element, listener, callback) {
         let isFunc;
+        const args = [
+            eventName,
+            element,
+            listener,
+            callback,
+        ];
         
         const EVENT_NAME = 1;
         const ELEMENT = 0;
@@ -20,8 +26,8 @@ function EventsProto() {
                 throw Error('unknown eventName: ' + type);
             
             parseArgs(
-                arguments[EVENT_NAME],
-                arguments[ELEMENT],
+                args[EVENT_NAME],
+                args[ELEMENT],
                 listener,
                 callback
             );
@@ -82,7 +88,7 @@ function EventsProto() {
     this.add = (type, element, listener) => {
         checkType(type);
         
-        parseArgs(type, element, listener, function(element, args) {
+        parseArgs(type, element, listener, (element, args) => {
             element.addEventListener.apply(element, args);
         });
         
@@ -97,7 +103,7 @@ function EventsProto() {
      * @param element {document by default}
      */
     this.addOnce = (type, element, listener) => {
-        var once = (event) => {
+        const once = (event) => {
             Events.remove(type, element, once);
             listener(event);
         };
@@ -138,7 +144,7 @@ function EventsProto() {
         const name = 'keydown';
         const args = [name].concat(argsArr);
         
-        return this.add(...args);
+        return Events.add(...args);
     };
     
     /**
@@ -150,7 +156,7 @@ function EventsProto() {
         const name = 'keydown';
         const args = [name].concat(argsArr);
         
-        return this.remove(...args);
+        return Events.remove(...args);
     };
     
     /**
@@ -162,7 +168,7 @@ function EventsProto() {
         const name = 'click';
         const args = [name].concat(argsArr);
         
-        return this.add(...args);
+        return Events.add(...args);
     };
     
     /**
@@ -174,14 +180,14 @@ function EventsProto() {
         const name = 'click';
         const args = [name].concat(argsArr);
         
-        return this.remove(...args);
+        return Events.remove(...args);
     };
     
     this.addContextMenu = function(...argsArr) {
         const name = 'contextmenu';
         const args = [name].concat(argsArr);
         
-        return this.add(...args);
+        return Events.add(...args);
     };
     
     /**
@@ -193,7 +199,7 @@ function EventsProto() {
         const name = 'error';
         const args = [name].concat(argsArr);
         
-        return this.add(...args);
+        return Events.add(...args);
     };
     
     /**
@@ -205,100 +211,7 @@ function EventsProto() {
         const name = 'load';
         const args = [name].concat(argsArr);
         
-        return this.add(...args);
-    };
-    
-    /**
-     * crossbrowser create event
-     *
-     * @param eventName
-     * @param keyCode - not necessarily
-     */
-    this.create = function(eventName, keyCode) {
-        const event = document.createEvent('Event');
-        
-        event.initEvent(eventName, true, true);
-        
-        if (keyCode)
-            event.keyCode = keyCode;
-        
-        event.isDefaultPrevented = function() {
-            return this.defaultPrevented;
-        };
-        
-        return event;
-    };
-    
-    /**
-     * create keydown event
-     *
-     * @param keyCode
-     */
-    this.createKey = function(keyCode) {
-        return this.create('keydown', keyCode);
-    };
-    
-    /**
-     * create click event
-     */
-    this.createClick = function() {
-        return this.create('click');
-    };
-    
-    /**
-     * create click event
-     */
-    this.createDblClick = function() {
-        return this.create('dblclick');
-    };
-    
-    /**
-     * dispatch event
-     *
-     * @param event
-     */
-    this.dispatch = (event, element) => {
-        let customEvent;
-        const isStr = itype.string(event);
-        
-        if (isStr)
-            customEvent = Events.create(event);
-        else
-            customEvent = event;
-        
-        return (element || window).dispatchEvent(customEvent);
-    };
-    
-    /**
-     * dispatch keydown event
-     *
-     * @param keyCode
-     * @param element
-     */
-    this.dispatchKey = function(keyCode, element) {
-        const event = this.createKey(keyCode);
-        return this.dispatch(event, element);
-    };
-    
-    /**
-     * dispatch click event
-     *
-     * @param element
-     */
-    this.dispatchClick = function(element) {
-        const event = this.createClick();
-        return this.dispatch(event, element);
-    };
-    
-    /**
-     * dispatch dblclick event
-     *
-     * @param element
-     */
-    this.dispatchDblClick = function(element) {
-        const event = this.createDblClick();
-        
-        return this.dispatch(event, element);
+        return Events.add(...args);
     };
     
     function checkType(type) {
