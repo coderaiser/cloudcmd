@@ -54,8 +54,10 @@ module.exports.getValue = (name, element) => {
     switch(type) {
     case 'checkbox':
         return el.checked;
+    
     case 'number':
         return Number(el.value);
+    
     default:
         return el.value;
     }
@@ -71,7 +73,7 @@ module.exports.setValue = (name, value, element) => {
         break;
     
     default:
-        el.value    = value;
+        el.value = value;
         break;
     }
 };
