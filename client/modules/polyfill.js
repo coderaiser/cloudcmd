@@ -7,61 +7,8 @@ const itype = require('itype/legacy');
 if (!window.XMLHttpRequest || !document.head)
     DOM.load.ajax = $.ajax;
 
-/* setting head ie6 - ie8 */
-if (!document.head)
-    document.head = $('head')[0];
-
-if (!Function.bind)
-    Function.prototype.bind = function (context) {
-        var aArgs   = [].slice.call(arguments, 1),
-            fToBind = this,
-            NOP     = function () {},
-            fBound  = function () {
-                var arr     = [].slice.call(arguments),
-                    args    = aArgs.concat(arr);
-                
-                return fToBind.apply(context, args);
-            };
-        
-        NOP.prototype = this.prototype;
-        fBound.prototype = new NOP();
-        
-        return fBound;
-    };
-
 if (!Array.isArray)
     Array.isArray = itype.array.bind();
-
-if (!document.addEventListener)
-    /**
-     * safe add event listener on ie
-     * @param pType
-     * @param pListener
-     */
-    DOM.Events.add = (pType, element, listener) => {
-        return $(element || window).bind(itype, null, listener);
-    };
-
-if (!document.removeEventListener) {
-    DOM.Events.remove = (pType, pElement, pListener) => {
-        if (!pElement)
-            pElement = window;
-        
-        $(pElement).unbind(pType, pListener);
-    };
-}
-
-if (!document.getElementsByClassName) {
-    DOM.getByClassAll = (className, el) => {
-        const selector = '.' + className;
-        
-        if (el)
-            return $(el).find(selector);
-        
-        return $.find(selector);
-        
-    };
-}
 
 /* function polyfill webkit standart function
  *    https://gist.github.com/2581101
