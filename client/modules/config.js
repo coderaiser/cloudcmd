@@ -7,6 +7,7 @@ require('../../css/config.css');
 const rendy = require('rendy');
 const exec = require('execon');
 const currify = require('currify/legacy');
+const squad = require('squad');
 const input = require('../input');
 
 const Images = require('../dom/images');
@@ -25,6 +26,16 @@ const Config = module.exports;
 const showLoad = () => {
     Images.show.load('top');
 };
+
+const addKey = currify((fn, input) => {
+    Events.addKey(input, fn);
+    return input;
+});
+
+const addChange = currify((fn, input) => {
+    Events.add('change', input, fn);
+    return input;
+});
 
 CloudCmd.Config = ConfigProto;
 
@@ -166,23 +177,20 @@ function fillTemplate(error, template) {
         });
         
         const inputs = document.querySelectorAll('input, select', Element);
-        const inputFirst = inputs[0];
+        const [inputFirst] = inputs;
         
         let afterShow;
         if (inputFirst) {
             onAuthChange(inputFirst.checked);
-            
-            afterShow = () => {
-                inputFirst.focus();
-            };
+            afterShow = inputFirst.focus.bind(inputFirst);
         }
         
-        [...inputs].forEach((input) => {
-            Events.addKey(input, onKey)
-                .add('change', input, ({target}) => {
-                    onChange(target);
-                });
-        });
+        const getTarget = ({target}) => target;
+        const handleChange = squad(onChange, getTarget);
+        
+        [...inputs]
+            .map(addKey(onKey))
+            .map(addChange(handleChange));
         
         const autoSize = true;
         CloudCmd.View.show(Element, {
