@@ -5,23 +5,23 @@
 CloudCmd.Cloud = CloudProto;
 
 const exec = require('execon');
+const {log} = CloudCmd;
 
 const load = require('../dom/load');
 const Files = require('../dom/files');
 const Images = require('../dom/images');
-const Util = require('../../common/util');
+const {
+    time,
+    timeEnd,
+} = require('../../common/util');
 
 function CloudProto(callback) {
-    exec.series([
-        loadFiles,
-        callback,
-    ]);
+    loadFiles(callback);
     
     return module.exports;
 }
 
 module.exports.uploadFile = (filename, data) => {
-    const {log} = CloudCmd;
     const mimetype = '';
     
     filepicker.store(data, {
@@ -35,7 +35,8 @@ module.exports.uploadFile = (filename, data) => {
 
 module.exports.saveFile = (callback) => {
     filepicker.pick((fpFile) => {
-        CloudCmd.log(fpFile);
+        log(fpFile);
+        
         const {url} = fpFile;
         const responseType = 'arraybuffer';
         const success = exec.with(callback, fpFile.filename);
@@ -49,7 +50,7 @@ module.exports.saveFile = (callback) => {
 };
 
 function loadFiles(callback) {
-    Util.time('filepicker load');
+    time('filepicker load');
     
     load.js('//api.filepicker.io/v1/filepicker.js', () => {
         Files.get('modules', (error, modules) => {
@@ -58,7 +59,7 @@ function loadFiles(callback) {
             filepicker.setKey(key);
             
             Images.hide();
-            Util.timeEnd('filepicker loaded');
+            timeEnd('filepicker loaded');
             exec(callback);
         });
     });
