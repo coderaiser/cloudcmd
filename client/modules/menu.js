@@ -103,25 +103,6 @@ function MenuProto(Position) {
         return MenuContextFile;
     }
     
-    function getMenuNameByEl(el) {
-        if (!el)
-            return 'context';
-        
-        const name = DOM.getCurrentName(el);
-        
-        if (name === '..')
-            return 'context'
-        
-        return 'contextFile'
-    };
-    
-    function getMenuByName(name) {
-        if (name === 'context')
-            return MenuContext;
-        
-        return MenuContextFile;
-    }
-    
     function show(position) {
         const {x, y} = getPosition(position);
         
