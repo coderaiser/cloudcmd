@@ -68,21 +68,40 @@ function MenuProto(Position) {
             return {
                 x: position.x,
                 y: position.y,
-            }
+            };
         
         if (Position)
             return {
                 x: Position.x,
                 y: Position.y,
-            }
+            };
         if (position)
             return {
                 x: position.x,
                 y: position.y,
-            }
+            };
        
         return getCurrentPosition();
-    };
+    }
+    
+    function getMenuNameByEl(el) {
+        if (!el)
+            return 'context';
+        
+        const name = DOM.getCurrentName(el);
+        
+        if (name === '..')
+            return 'context';
+        
+        return 'contextFile';
+    }
+    
+    function getMenuByName(name) {
+        if (name === 'context')
+            return MenuContext;
+        
+        return MenuContextFile;
+    }
     
     function getMenuNameByEl(el) {
         if (!el)
