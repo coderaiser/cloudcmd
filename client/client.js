@@ -23,10 +23,10 @@ function CloudCmdProto(Util, DOM) {
     let Listeners;
     
     const log = (str) => {
-        if (!Debug)
-            return;
+        if (Debug)
+            console.log(str);
         
-        console.log(str);
+        return str;
     };
     
     const CloudCmd = this;
