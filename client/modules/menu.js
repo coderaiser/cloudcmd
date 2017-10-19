@@ -84,6 +84,25 @@ function MenuProto(Position) {
         return getCurrentPosition();
     };
     
+    function getMenuNameByEl(el) {
+        if (!el)
+            return 'context';
+        
+        const name = DOM.getCurrentName(el);
+        
+        if (name === '..')
+            return 'context'
+        
+        return 'contextFile'
+    };
+    
+    function getMenuByName(name) {
+        if (name === 'context')
+            return MenuContext;
+        
+        return MenuContextFile;
+    }
+    
     function show(position) {
         const {x, y} = getPosition(position);
         
@@ -104,8 +123,9 @@ function MenuProto(Position) {
             MenuContext = new MenuIO(fm, options, menuData);
             MenuContextFile = new MenuIO(fm, optionsFile, menuDataFile);
             
-            const is = DOM.getCurrentByPosition({x, y});
-            const menu = is ? MenuContextFile : MenuContext;
+            const el = DOM.getCurrentByPosition({x, y});
+            const menuName = getMenuNameByEl(el);
+            const menu = getMenuByName(menuName);
             
             menu.show(x, y);
             
@@ -216,10 +236,13 @@ function MenuProto(Position) {
     
     function beforeShow(callback, params) {
         const name = params.name;
-        let notShow = DOM.getCurrentByPosition({
+        let el = DOM.getCurrentByPosition({
             x: params.x,
             y: params.y
         });
+        
+        const menuName = getMenuNameByEl(el);
+        let notShow = menuName === 'contextFile';
         
         if (params.name === 'contextFile') {
             notShow = !notShow;
