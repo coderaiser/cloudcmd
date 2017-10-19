@@ -6,6 +6,7 @@ CloudCmd.Menu = MenuProto;
 
 const exec = require('execon');
 const currify = require('currify/legacy');
+const wrap = require('wraptile/legacy');
 
 const {FS} = require('../../common/cloudfunc');
 
@@ -25,9 +26,9 @@ function MenuProto(position) {
     const Dialog = DOM.Dialog;
     const Images = DOM.Images;
     const Menu = this;
-    const TITLE = 'Menu';
+    const TITLE = 'Cloud Commander';
     const alert = currify(Dialog.alert, TITLE);
-    const alertNoFiles = () => Dialog.alert.noFiles(TITLE);
+    const alertNoFiles = wrap(Dialog.alert.noFiles)(TITLE);
     
     let MenuShowedName;
     let MenuContext;
