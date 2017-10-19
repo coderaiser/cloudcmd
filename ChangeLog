@@ -1,3 +1,13 @@
+2017.10.19, v8.1.1
+
+fix:
+- (menu) when click on ".." show full menu
+
+feature:
+- (bower) smalltalk v2.5.1
+- (package) lint:js:eslint:client -> lint:client
+
+
 2017.10.19, v8.1.0
 
 fix:
