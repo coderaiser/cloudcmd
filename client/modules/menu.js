@@ -236,6 +236,9 @@ function MenuProto(position) {
     
     function uploadTo(nameModule) {
         Info.getData((error, data) => {
+            if (error)
+                return;
+            
             const name = Info.name;
             const execFrom = CloudCmd.execFromModule;
              
