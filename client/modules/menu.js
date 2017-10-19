@@ -13,7 +13,7 @@ const {FS} = require('../../common/cloudfunc');
 const load = require('../dom/load');
 const RESTful = require('../dom/rest');
 
-function MenuProto(position) {
+function MenuProto(Position) {
     const config = CloudCmd.config;
     const Buffer = DOM.Buffer;
     const Info = DOM.CurrentInfo;
@@ -47,14 +47,9 @@ function MenuProto(position) {
         MenuContextFile.hide();
     };
     
-    this.show = (position = {}) => {
-        const {
-            x = 0,
-            y = 0,
-        } = position;
-        
+    this.show = (position) => {
         const showFunc = () => {
-            show(x, y);
+            show(position);
             Images.hide();
         };
         
@@ -68,18 +63,29 @@ function MenuProto(position) {
         });
     };
     
-    function show(x, y) {
-        if (!x || !y) {
-            if (position) {
-                x = position.x;
-                y = position.y;
-            } else {
-                const pos = getCurrentPosition();
-                
-                x = pos.x;
-                y = pos.y;
+    function getPosition(position) {
+        if (position)
+            return {
+                x: position.x,
+                y: position.y,
             }
-        }
+        
+        if (Position)
+            return {
+                x: Position.x,
+                y: Position.y,
+            }
+        if (position)
+            return {
+                x: position.x,
+                y: position.y,
+            }
+       
+        return getCurrentPosition();
+    };
+    
+    function show(position) {
+        const {x, y} = getPosition(position);
         
         if (!Loading) {
             MenuContext.show(x, y);
@@ -104,7 +110,7 @@ function MenuProto(position) {
             menu.show(x, y);
             
             Loading = false;
-            position = null;
+            Position = null;
         });
     }
     
@@ -322,8 +328,8 @@ function MenuProto(position) {
         const rect = current.getBoundingClientRect();
         
         const position = {
-            x: rect.left + rect.width / 3,
-            y: rect.top
+            x: Math.round(rect.left + rect.width / 3),
+            y: Math.round(rect.top)
         };
         
         return position;
