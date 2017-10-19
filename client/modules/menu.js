@@ -13,8 +13,6 @@ const {FS} = require('../../common/cloudfunc');
 const load = require('../dom/load');
 const RESTful = require('../dom/rest');
 
-const bind = (f, ...a) => (...b) => f(...a, ...b);
-
 function MenuProto(position) {
     const config = CloudCmd.config;
     const Buffer = DOM.Buffer;
@@ -29,6 +27,7 @@ function MenuProto(position) {
     const TITLE = 'Cloud Commander';
     const alert = currify(Dialog.alert, TITLE);
     const alertNoFiles = wrap(Dialog.alert.noFiles)(TITLE);
+    const uploadTo = wrap(_uploadTo);
     
     let MenuShowedName;
     let MenuContext;
@@ -152,15 +151,15 @@ function MenuProto(position) {
     
     function loadFileMenuData(callback) {
         const is = CloudCmd.config('auth');
-        const show = (name) => {
+        const show = wrap((name) => {
             CloudCmd[name].show();
-        };
+        });
         
         const menuBottom = getMenuData(is);
         
         const menuTop = {
-            'View': bind(show, 'View'),
-            'Edit': bind(show, 'EditFile'),
+            'View': show('View'),
+            'Edit': show('EditFile'),
             'Rename': () => {
                 setTimeout(DOM.renameCurrent, 100);
             },
@@ -174,7 +173,7 @@ function MenuProto(position) {
                 CloudCmd.Operation.show('extract');
             },
             'Download': preDownload,
-            'Upload To Cloud': bind(uploadTo, 'Cloud'),
+            'Upload To Cloud': uploadTo('Cloud'),
             'Cut': () => {
                 isCurrent(Buffer.cut, alertNoFiles);
             },
@@ -235,7 +234,7 @@ function MenuProto(position) {
         return MenuShowedName !== name;
     }
     
-    function uploadTo(nameModule) {
+    function _uploadTo(nameModule) {
         Info.getData((error, data) => {
             if (error)
                 return;
@@ -308,9 +307,10 @@ function MenuProto(position) {
                 src,
             });
             
-            setTimeout(() => {
-                document.body.removeChild(element);
-            }, TIME);
+            const {body} = document;
+            const removeChild = body.removeChild.bind(body, element);
+            
+            setTimeout(removeChild, TIME);
             
             if (selected)
                 DOM.toggleSelectedFile(file);
