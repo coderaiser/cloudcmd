@@ -45,10 +45,7 @@ function getTemplate(title, msg, value, buttons) {
     return `<div class="page">
         <div data-name="js-close" class="close-button"></div>
         <header>${ title }</header>
-        <div class="content-area">
-            ${ encodedMsg }
-            ${ value }
-        </div>
+        <div class="content-area">${ encodedMsg }${ value }</div>
         <div class="action-area">
             <div class="button-strip"> ${
                 buttons.map((name, i) =>

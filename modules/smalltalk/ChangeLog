@@ -1,3 +1,9 @@
+2017.10.19, v2.5.1
+
+fix:
+- (smalltalk) new line at the end of a message
+
+
 2017.10.09, v2.5.0
 
 feature:
