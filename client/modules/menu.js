@@ -321,7 +321,7 @@ function MenuProto(position) {
         const current = Info.element;
         const rect = current.getBoundingClientRect();
         
-        const position    = {
+        const position = {
             x: rect.left + rect.width / 3,
             y: rect.top
         };
