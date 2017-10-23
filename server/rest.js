@@ -346,7 +346,7 @@ function copyFiles(files, processFunc, callback) {
 function isRootWin32(path) {
     const isRoot = path === '/';
     const isConfig = config('root') === '/';
-
+    
     return isWin32 && isRoot && isConfig;
 }
 
