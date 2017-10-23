@@ -363,15 +363,20 @@ function getWin32RootMsg() {
     return error;
 }
 
-function formatMsg(msgParam, dataParam, status) {
-    let data;
-    const isObj = typeof dataParam === 'object';
+function parseData(data) {
+    const isObj = typeof data === 'object';
     
-    if (isObj)
-        data = json.stringify(dataParam);
-    else
-        data = dataParam;
+    if (!isObj)
+        return data;
     
-    return CloudFunc.formatMsg(msgParam, data, status);
+    return json.stringify(data);
+}
+
+module.exports._formatMsg = formatMsg;
+
+function formatMsg(msg, data, status) {
+    const value = parseData(data);
+    
+    return CloudFunc.formatMsg(msg, value, status);
 }
 
