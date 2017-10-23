@@ -383,7 +383,7 @@ function OperationProto(operation, data) {
             const delSelected = DOM.deleteSelected;
             
             if (error)
-                return;
+                return CloudCmd.refresh();
              
             delSelected(files);
             Storage.removeMatch(dirPath);
