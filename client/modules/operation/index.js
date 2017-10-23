@@ -41,8 +41,8 @@ function OperationProto(operation, data) {
     const processFiles = currify(_processFiles);
     
     const noFilesCheck = () => {
-        const name = Info.name;
-        const is = name === '..';
+        const {length} = DOM.getActiveFiles();
+        const is = Boolean(!length);
         
         if (is)
             return Dialog.alert.noFiles(TITLE);
