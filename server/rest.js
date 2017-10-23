@@ -356,6 +356,8 @@ function isRootAll(names) {
     });
 }
 
+module.exports._getWin32RootMsg = getWin32RootMsg;
+
 function getWin32RootMsg() {
     const message = 'Could not copy from/to root on windows!';
     const error = Error(message);
