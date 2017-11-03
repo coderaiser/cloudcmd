@@ -179,14 +179,10 @@ function listen(prefix, socket) {
 }
 
 function cloudcmd(prefix, plugins, modules) {
-    const isOption = (name) => {
-        return config(name);
-    };
-    
-    const online = apart(isOption, 'online');
-    const cache = apart(isOption, 'cache');
-    const diff = apart(isOption, 'diff');
-    const zip = apart(isOption, 'zip');
+    const online = apart(config, 'online');
+    const cache = apart(config, 'cache');
+    const diff = apart(config, 'diff');
+    const zip = apart(config, 'zip');
     const dir = DIR_ROOT;
     
     const ponseStatic = ponse.static(dir, {cache});
