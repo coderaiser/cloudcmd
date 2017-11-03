@@ -115,28 +115,23 @@ function authCheck(socket, success) {
 }
 
 function listen(prefix, socket) {
-    const size = cloudfunc.MAX_SIZE;
-    
     prefix = getPrefix(prefix);
     
     config.listen(socket, authCheck);
     
     edward.listen(socket, {
-        size,
         root,
         authCheck,
         prefix: prefix + '/edward',
     });
     
     dword.listen(socket, {
-        size,
         root,
         authCheck,
         prefix: prefix + '/dword',
     });
     
     deepword.listen(socket, {
-        size,
         root,
         authCheck,
         prefix: prefix + '/deepword',
