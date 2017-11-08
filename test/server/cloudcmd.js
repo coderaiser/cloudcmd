@@ -8,7 +8,10 @@ const currify = require('currify');
 const DIR = '../../server/';
 const cloudcmd = require(DIR + 'cloudcmd');
 const config = require(DIR + 'config');
-const {_authenticate} = cloudcmd;
+const {
+    _authenticate,
+    _getPrefix,
+} = cloudcmd;
 
 test('cloudcmd: args: no', (t) => {
     const fn = () => cloudcmd();
@@ -46,6 +49,15 @@ test('cloudcmd: defaults: console', (t) => {
     
     config('console', console);
     
+    t.end();
+});
+
+test('cloudcmd: getPrefix', (t) => {
+    const value = 'hello';
+    const fn = () => value;
+    const result = _getPrefix(fn);
+    
+    t.equal(result, value, 'should equal')
     t.end();
 });
 

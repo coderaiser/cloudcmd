@@ -41,13 +41,6 @@ const clean = (a) => a.filter(notEmpty);
 
 const isDev = process.env.NODE_ENV === 'development';
 
-function getPrefix(prefix) {
-    if (typeof prefix === 'function')
-        return prefix() || '';
-    
-    return prefix || '';
-}
-
 module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
@@ -98,6 +91,15 @@ function defaultValue(name, options) {
     
     return value;
 }
+
+module.exports._getPrefix = getPrefix;
+function getPrefix(prefix) {
+    if (typeof prefix === 'function')
+        return prefix() || '';
+    
+    return prefix || '';
+}
+
 
 function authCheck(socket, success) {
     if (!config('auth'))
