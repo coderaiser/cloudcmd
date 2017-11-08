@@ -57,7 +57,7 @@ test('cloudcmd: getPrefix', (t) => {
     const fn = () => value;
     const result = _getPrefix(fn);
     
-    t.equal(result, value, 'should equal')
+    t.equal(result, value, 'should equal');
     t.end();
 });
 
@@ -109,7 +109,7 @@ function credentials() {
     const reset = () => {
         config('username', username);
         config('password', password);
-    }
+    };
     
     const set = currify((fn, a, b) => {
         config('username', a);
