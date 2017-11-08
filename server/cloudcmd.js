@@ -31,6 +31,7 @@ const ishtar = require('ishtar');
 const salam = require('salam');
 const omnes = require('omnes');
 
+const authenticate = currify(_authenticate);
 const setUrl = currify(_setUrl);
 
 const root = () => config('root');
@@ -102,16 +103,19 @@ function authCheck(socket, success) {
     if (!config('auth'))
         return success();
     
-    socket.on('auth', (name, pass) => {
-        const isName = name === config('username');
-        const isPass = pass === config('password');
-        
-        if (!isName || !isPass)
-            return socket.emit('reject');
-        
-        success();
-        socket.emit('accept');
-    });
+    socket.on('auth', authenticate(socket, success));
+}
+
+module.exports._authenticate = _authenticate;
+function _authenticate(socket, success, name, pass) {
+    const isName = name === config('username');
+    const isPass = pass === config('password');
+    
+    if (!isName || !isPass)
+        return socket.emit('reject');
+    
+    success();
+    socket.emit('accept');
 }
 
 function listen(prefix, socket) {
