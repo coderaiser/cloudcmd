@@ -11,6 +11,7 @@ const config = require(DIR + 'config');
 const {
     _authenticate,
     _getPrefix,
+    _authCheck,
 } = cloudcmd;
 
 test('cloudcmd: args: no', (t) => {
@@ -58,6 +59,54 @@ test('cloudcmd: getPrefix', (t) => {
     const result = _getPrefix(fn);
     
     t.equal(result, value, 'should equal');
+    t.end();
+});
+
+test('cloudcmd: authCheck: success', (t) => {
+    const auth = config('auth');
+    const success = sinon.stub();
+    const on = sinon.stub;
+    const socket = {
+        on,
+    };
+    
+    config('auth', true);
+    _authCheck(socket, success);
+    config('auth', auth);
+    
+    t.notOk(success.called, 'should not call success');
+    t.end();
+});
+
+test('cloudcmd: authCheck: socket', (t) => {
+    const auth = config('auth');
+    const success = sinon.stub();
+    const on = sinon.stub();
+    const socket = {
+        on,
+    };
+    
+    config('auth', true);
+    _authCheck(socket, success);
+    config('auth', auth);
+    
+    t.ok(on.calledWith('auth'), 'should call socket.on');
+    t.end();
+});
+
+test('cloudcmd: authCheck: success', (t) => {
+    const success = sinon.stub();
+    const auth = config('auth');
+    const on = sinon.stub();
+    const socket = {
+        on,
+    };
+    
+    config('auth', true);
+    _authCheck(socket, success);
+    config('auth', auth);
+    
+    t.notOk(success.called, 'should not call success');
     t.end();
 });
 

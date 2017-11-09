@@ -100,7 +100,7 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-
+module.exports._authCheck = authCheck;
 function authCheck(socket, success) {
     if (!config('auth'))
         return success();
