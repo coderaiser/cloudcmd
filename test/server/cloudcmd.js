@@ -12,6 +12,7 @@ const {
     _authenticate,
     _getPrefix,
     _authCheck,
+    _replacePrefix,
 } = cloudcmd;
 
 test('cloudcmd: args: no', (t) => {
@@ -67,6 +68,15 @@ test('cloudcmd: getPrefix: function', (t) => {
     const result = _getPrefix(fn);
     
     t.equal(result, value, 'should equal');
+    t.end();
+});
+
+test('cloudcmd: replacePrefix', (t) => {
+    const url = '/hello';
+    const prefix = url;
+    const result = _replacePrefix(url, prefix);
+    
+    t.equal(result, '/', 'should equal');
     t.end();
 });
 

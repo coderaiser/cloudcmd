@@ -283,6 +283,11 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
+module.exports._replacePrefix = replacePrefix;
+function replacePrefix(url, prefix) {
+    return url.replace(prefix, '') || '/';
+}
+
 function _setUrl(pref, req, res, next) {
     const prefix = getPrefix(pref);
     const is = !req.url.indexOf(prefix);
@@ -290,7 +295,7 @@ function _setUrl(pref, req, res, next) {
     if (!is)
         return next();
     
-    req.url = req.url.replace(prefix, '') || '/';
+    req.url = replacePrefix(req.url, prefix);
     
     if (/^\/cloudcmd\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
