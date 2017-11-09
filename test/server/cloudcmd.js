@@ -71,6 +71,15 @@ test('cloudcmd: getPrefix: function', (t) => {
     t.end();
 });
 
+test('cloudcmd: getPrefix: function: empty', (t) => {
+    const value = null;
+    const fn = () => value;
+    const result = _getPrefix(fn);
+    
+    t.equal(result, '', 'should equal');
+    t.end();
+});
+
 test('cloudcmd: replacePrefix', (t) => {
     const url = '/hello';
     const prefix = url;
