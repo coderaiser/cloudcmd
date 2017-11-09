@@ -288,6 +288,14 @@ function replacePrefix(url, prefix) {
     return url.replace(prefix, '') || '/';
 }
 
+module.exports._replaceDist = replaceDist;
+function replaceDist(url) {
+    if (!isDev)
+        return url;
+    
+    return url.replace(/^\/dist\//, '/dist-dev/');
+}
+
 function _setUrl(pref, req, res, next) {
     const prefix = getPrefix(pref);
     const is = !req.url.indexOf(prefix);
@@ -300,8 +308,7 @@ function _setUrl(pref, req, res, next) {
     if (/^\/cloudcmd\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
     
-    if (isDev)
-        req.url = req.url.replace(/^\/dist\//, '/dist-dev/');
+    req.url = replaceDist(req.url);
     
     next();
 }

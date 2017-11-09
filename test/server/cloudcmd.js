@@ -13,6 +13,7 @@ const {
     _getPrefix,
     _authCheck,
     _replacePrefix,
+    _replaceDist,
 } = cloudcmd;
 
 test('cloudcmd: args: no', (t) => {
@@ -86,6 +87,33 @@ test('cloudcmd: replacePrefix', (t) => {
     const result = _replacePrefix(url, prefix);
     
     t.equal(result, '/', 'should equal');
+    t.end();
+});
+
+test('cloudcmd: replaceDist', (t) => {
+    const url = '/dist/hello';
+    const result = _replaceDist(url);
+    const expected = '/dist-dev/hello';
+    
+    t.equal(result, expected, 'should equal');
+    t.end();
+});
+
+test('cloudcmd: replaceDist: !isDev', (t) => {
+    const url = '/dist/hello';
+    const cloudcmdPath = DIR + 'cloudcmd';
+    
+    const reset = cleanNodeEnv();
+    
+    clean(cloudcmdPath);
+    const {_replaceDist} = require(cloudcmdPath);
+    
+    const result = _replaceDist(url);
+    const expected = '/dist-dev/hello';
+    
+    reset();
+    
+    t.equal(result, expected, 'should equal');
     t.end();
 });
 
@@ -195,5 +223,20 @@ function credentials() {
     });
     
     return set(reset);
+}
+
+function clean(path) {
+    delete require.cache[require.resolve(path)];
+}
+
+function cleanNodeEnv() {
+    const {NODE_ENV} = process.env;
+    process.env.NODE_ENV = '';
+    
+    const reset = () => {
+        process.env.NODE_ENV = NODE_ENV;
+    };
+    
+    return reset;
 }
 
