@@ -55,6 +55,14 @@ test('cloudcmd: defaults: console', (t) => {
 
 test('cloudcmd: getPrefix', (t) => {
     const value = 'hello';
+    const result = _getPrefix(value);
+    
+    t.equal(result, value, 'should equal');
+    t.end();
+});
+
+test('cloudcmd: getPrefix: function', (t) => {
+    const value = 'hello';
     const fn = () => value;
     const result = _getPrefix(fn);
     
