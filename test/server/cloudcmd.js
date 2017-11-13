@@ -109,7 +109,7 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
     const {_replaceDist} = require(cloudcmdPath);
     
     const result = _replaceDist(url);
-    const expected = '/dist-dev/hello';
+    const expected = url;
     
     reset();
     
