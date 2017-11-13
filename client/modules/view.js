@@ -7,6 +7,7 @@ require('../../css/view.css');
 const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
+const currify = require('currify/legacy');
 
 const {time} = require('../../common/util');
 const {FS} = require('../../common/cloudfunc');
@@ -15,6 +16,9 @@ const Files = require('../dom/files');
 const Events = require('../dom/events');
 const load = require('../dom/load');
 const Images = require('../dom/images');
+
+const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
+const testRegExp = currify((name, reg) => reg.test(name));
 
 CloudCmd.View = ViewProto;
 
@@ -247,8 +251,8 @@ function isImage(name) {
     ];
     
     return images
-        .map((ext) => RegExp(`\\.${ext}$`, 'i'))
-        .some((reg) => reg.test(name));
+        .map(getRegExp)
+        .some(testRegExp(name));
 }
 
 function isMedia(name) {
