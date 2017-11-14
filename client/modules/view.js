@@ -17,8 +17,11 @@ const Events = require('../dom/events');
 const load = require('../dom/load');
 const Images = require('../dom/images');
 
-const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 const testRegExp = currify((name, reg) => reg.test(name));
+const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
+
+const addEvent = lifo(Events.add);
+const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
 CloudCmd.View = ViewProto;
 
@@ -94,9 +97,12 @@ function ViewProto(callback) {
         className   : 'fancybox-overlay fancybox-overlay-fixed'
     });
     
-    ['click', 'contextmenu'].forEach((name) => {
-        Events.add(name, Overlay, onOverLayClick);
-    });
+    const events = [
+        'click',
+        'contextmenu',
+    ];
+    
+    events.forEach(addEvent(Overlay, onOverLayClick));
     
     return module.exports;
 }
