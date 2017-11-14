@@ -346,8 +346,6 @@ function loadAll(callback) {
 }
 
 function onOverLayClick(event) {
-    const files = Info.files;
-    const filesPassive = Info.filesPassive;
     const {target} = event;
     const isOverlay = target === Overlay;
     const position = {
@@ -361,10 +359,19 @@ function onOverLayClick(event) {
     hideOverlay();
     hide();
     
+    setCurrentByPosition(position);
+}
+
+function setCurrentByPosition(position) {
     const element = DOM.getCurrentByPosition(position);
     
     if (!element)
         return;
+    
+    const {
+        files,
+        filesPassive,
+    } = Info.files;
     
     const isFiles = ~files.indexOf(element);
     const isFilesPassive = ~filesPassive.indexOf(element);
