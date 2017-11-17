@@ -337,7 +337,7 @@ function copyFiles(files, processFunc, callback) {
         .type('callback', callback, 'function')
         .type('processFunc', processFunc, 'function')
         .check({
-            files: files
+            files,
         });
     
     copy();
