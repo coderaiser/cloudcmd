@@ -63,3 +63,16 @@ test('config: manage: get: *', (t) => {
     t.end();
 });
 
+test('config: listen: no socket', (t) => {
+    t.throws(config.listen, 'should throw when no socket');
+    t.end();
+});
+
+test('config: listen: authCheck: not function', (t) => {
+    const socket = {};
+    const fn = () => config.listen(socket, 'hello');
+    
+    t.throws(fn, 'should throw when authCheck not function');
+    t.end();
+});
+
