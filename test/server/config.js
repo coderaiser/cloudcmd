@@ -9,9 +9,11 @@ const readjson = require('readjson');
 const root = '../../';
 const dir = root + 'server/';
 const config = require(dir + 'config');
+const {_cryptoPass} = config;
 
 const pathHomeConfig = path.join(os.homedir(), '.cloudcmd.json');
 const pathConfig = path.join(__dirname, '..', '..', 'json', 'config.json');
+const fixture = require('./config.fixture');
 
 const clean = (name) => {
     delete require.cache[require.resolve(name)];
@@ -73,6 +75,34 @@ test('config: listen: authCheck: not function', (t) => {
     const fn = () => config.listen(socket, 'hello');
     
     t.throws(fn, 'should throw when authCheck not function');
+    t.end();
+});
+
+test('config: cryptoPass: no password', (t) => {
+    const json = {
+        hello: 'world',
+    };
+    
+    const result = _cryptoPass(json);
+    
+    t.equal(result, json, 'should not change json');
+    t.end();
+});
+
+test('config: cryptoPass', (t) => {
+    const json = {
+        password: 'hello',
+    };
+    
+    const {password} = fixture;
+    
+    const expected = {
+        password,
+    };
+    
+    const result = _cryptoPass(json);
+    
+    t.deepEqual(result, expected, 'should crypt password');
     t.end();
 });
 

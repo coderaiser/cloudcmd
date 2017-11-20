@@ -10,6 +10,7 @@ const fs = require('fs');
 const exit = require(DIR_SERVER + 'exit');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
+const squad = require('squad');
 const pullout = require('pullout/legacy');
 const ponse = require('ponse');
 const jonny = require('jonny');
@@ -19,6 +20,8 @@ const tryCatch = require('try-catch');
 const exec = require('execon');
 const criton = require('criton');
 const HOME = require('os-homedir')();
+
+const manageConfig = squad(traverse, cryptoPass);
 
 const apiURL = CloudFunc.apiURL;
 
@@ -32,11 +35,10 @@ const readjsonSync = (name) => {
 };
 
 const rootConfig = readjsonSync(ConfigPath);
-
 const key = (a) => Object.keys(a).pop();
 
 let configHome;
-let error = tryCatch(() => {
+const error = tryCatch(() => {
     configHome = readjsonSync(ConfigHome);
 });
 
@@ -95,9 +97,8 @@ function connection(socket) {
     socket.on('message', (json) => {
         if (typeof json !== 'object')
             return socket.emit('err', 'Error: Wrong data type!');
-            
-        cryptoPass(json);
-        traverse(json);
+        
+        manageConfig(json);
         
         save((error)  => {
             if (error)
@@ -117,7 +118,7 @@ function middle(req, res, next) {
     
     if (req.url !== apiURL + '/config')
         return next();
-        
+    
     switch(req.method) {
     case 'GET':
         get(req, res, next);
@@ -162,8 +163,7 @@ function patch(req, res, callback) {
         if (error)
             return callback(error);
         
-        cryptoPass(json);
-        traverse(json);
+        manageConfig(json);
         
         save((error) => {
             if (error)
@@ -182,11 +182,18 @@ function traverse(json) {
     });
 }
 
+module.exports._cryptoPass = cryptoPass;
 function cryptoPass(json) {
     const algo = manage('algo');
     
-    if (json && json.password)
-        json.password = criton(json.password, algo);
+    if (!json.password)
+        return json;
+    
+    const password = criton(json.password, algo);
+    
+    return Object.assign({}, json, {
+        password,
+    });
 }
 
 function check(socket, authCheck) {
