@@ -1,6 +1,7 @@
 .config {
     white-space: normal;
     overflow: hidden;
+    width   : 250px;
 }
 
 .list li {
@@ -28,11 +29,16 @@
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-.config .form-control:focus:invalid:focus {
-    border-color: #e9322d;
-    -webkit-box-shadow: 0 0 6px #f8b9b7;
-    -moz-box-shadow: 0 0 6px #f8b9b7;
-    box-shadow: 0 0 6px #f8b9b7;
+.config .form-control::-moz-placeholder {
+    color: #999;
+}
+
+.config .form-control::-ms-input-placeholder {
+    color: #999;
+}
+
+.config .form-control::-webkit-input-placeholder {
+    color: #999;
 }
 
 .config .form-control:focus {
@@ -43,29 +49,16 @@
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 1px rgba(102, 175, 233, 0.6);
 }
 
-.config .form-control:-moz-placeholder {
-    color: #999;
-}
-
-.config .form-control::-moz-placeholder {
-    color: #999;
-}
-
-.config .form-control:-ms-input-placeholder {
-    color: #999;
-}
-
-.config .form-control::-webkit-input-placeholder {
-    color: #999;
+.config .form-control:focus:invalid:focus {
+    border-color: #e9322d;
+    -webkit-box-shadow: 0 0 6px #f8b9b7;
+    -moz-box-shadow: 0 0 6px #f8b9b7;
+    box-shadow: 0 0 6px #f8b9b7;
 }
 
 .config .list {
     padding     : 0;
     margin      : 5%;
-}
-
-.config {
-    width   : 250px;
 }
 
 .config .full-width {

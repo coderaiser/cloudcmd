@@ -104,6 +104,12 @@
     .current-file a {
         color: white;
     }
+    
+    .text-file::before {
+        color: rgba(26, 224, 124, 0.56);
+        content: '\e80d';
+    }
+    
     .current-file .text-file::before {
         color: white;
     }
@@ -127,11 +133,6 @@
     
     .directory::before {
         content: '\e807';
-    }
-    
-    .text-file::before {
-        color: rgba(26, 224, 124, 0.56);
-        content: '\e80d';
     }
     
     .text-file {
