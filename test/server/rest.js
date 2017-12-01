@@ -5,6 +5,7 @@ const rest = require('../../server/rest');
 const {
     _formatMsg,
     _getWin32RootMsg,
+    _isRootWin32,
 } = rest;
 
 test('rest: formatMsg', (t) => {
@@ -27,6 +28,14 @@ test('rest: getWin32RootMsg', (t) => {
     const {message}= _getWin32RootMsg();
     
     t.equal(message,'Could not copy from/to root on windows!', 'should return error');
+    t.end();
+});
+
+test('rest: isRootWin32', (t) => {
+    const path = '/';
+    const result = _isRootWin32('/');
+    
+    t.notOk(result, 'should equal');
     t.end();
 });
 
