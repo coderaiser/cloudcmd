@@ -10,8 +10,12 @@ const fs = require('fs');
 const exit = require(DIR_SERVER + 'exit');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
+const fullstore = require('fullstore/legacy');
+const currify = require('currify/legacy');
+const wraptile = require('wraptile/legacy');
 const squad = require('squad');
-const pullout = require('pullout/legacy');
+const promisify = require('es6-promisify');
+const pullout = promisify(require('pullout/legacy'));
 const ponse = require('ponse');
 const jonny = require('jonny');
 const jju = require('jju');
@@ -22,6 +26,12 @@ const criton = require('criton');
 const HOME = require('os-homedir')();
 
 const manageConfig = squad(traverse, cryptoPass);
+const save = promisify(_save);
+const swap = currify((f, a, b) => f(b, a));
+
+const sendError = swap(ponse.sendError);
+const send = swap(ponse.send);
+const formatMsg = currify(CloudFunc.formatMsg);
 
 const apiURL = CloudFunc.apiURL;
 
@@ -48,7 +58,7 @@ if (error && error.code !== 'ENOENT')
 const config = Object.assign({}, rootConfig, configHome);
 
 module.exports          = manage;
-module.exports.save     = save;
+module.exports.save     = _save;
 module.exports.middle   = middle;
 module.exports.listen   = (socket, authCheck) => {
     check(socket, authCheck);
@@ -74,7 +84,7 @@ function manage(key, value) {
     config[key] = value;
 }
 
-function save(callback) {
+function _save(callback) {
     writejson(ConfigHome, config, callback);
 }
 
@@ -100,15 +110,13 @@ function connection(socket) {
         
         manageConfig(json);
         
-        save((error)  => {
-            if (error)
-                return socket.emit('err', error.message);
-            
+        save().then(() => {
             const data = CloudFunc.formatMsg('config', key(json));
-            
             socket.broadcast.send(json);
             socket.send(json);
             socket.emit('log', data);
+        }).catch((e) => {
+            socket.emit('err', e.message);
         });
     });
 }
@@ -130,7 +138,7 @@ function middle(req, res, next) {
                 .status(404)
                 .send('Config is disabled');
          
-        patch(req, res, next);
+        patch(req, res);
         break;
     
     default:
@@ -149,7 +157,8 @@ function get(req, res) {
     });
 }
 
-function patch(req, res, callback) {
+function patch(req, res) {
+    const jsonStore = fullstore();
     const options = {
         name    : 'config.json',
         request : req,
@@ -157,23 +166,18 @@ function patch(req, res, callback) {
         cache   : false
     };
     
-    pullout(req, 'string', (error, body) => {
-        const json = jonny.parse(body) || {};
-        
-        if (error)
-            return callback(error);
-        
-        manageConfig(json);
-        
-        save((error) => {
-            if (error)
-                return ponse.sendError(error, options);
-            
-            const data = CloudFunc.formatMsg('config', key(json));
-            
-            ponse.send(data, options);
-        });
-    });
+    const saveData = wraptile(save);
+    
+    pullout(req, 'string')
+        .then(jonny.parse)
+        .then(jsonStore)
+        .then(manageConfig)
+        .then(saveData)
+        .then(jsonStore)
+        .then(key)
+        .then(formatMsg('config'))
+        .then(send(options))
+        .catch(sendError(options));
 }
 
 function traverse(json) {

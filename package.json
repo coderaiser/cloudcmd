@@ -120,6 +120,7 @@
     "deepword": "^2.0.0",
     "dword": "^6.0.0",
     "edward": "^6.0.0",
+    "es6-promisify": "^5.0.0",
     "execon": "^1.2.0",
     "express": "^4.13.0",
     "files-io": "^1.2.0",
@@ -154,6 +155,7 @@
     "table": "^4.0.1",
     "try-catch": "^1.0.0",
     "tryrequire": "^1.1.5",
+    "wraptile": "^1.0.0",
     "writejson": "^1.1.0"
   },
   "devDependencies": {
@@ -166,7 +168,6 @@
     "css-loader": "^0.28.4",
     "emitify": "^3.0.2",
     "es6-promise": "^4.0.5",
-    "es6-promisify": "^5.0.0",
     "eslint": "^4.0.0",
     "eslint-plugin-node": "^5.1.0",
     "extract-text-webpack-plugin": "^3.0.0",
@@ -204,7 +205,6 @@
     "url-loader": "^0.6.1",
     "version-io": "^2.0.1",
     "webpack": "^3.0.0",
-    "wraptile": "^1.0.0",
     "yaspeller": "^4.0.0"
   },
   "engines": {

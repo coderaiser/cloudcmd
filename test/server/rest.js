@@ -32,7 +32,6 @@ test('rest: getWin32RootMsg', (t) => {
 });
 
 test('rest: isRootWin32', (t) => {
-    const path = '/';
     const result = _isRootWin32('/');
     
     t.notOk(result, 'should equal');
