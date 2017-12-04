@@ -137,12 +137,13 @@ test('cloudcmd: rest: config: patch: save config', (t) => {
             editor: 'dword',
         };
         
-        let originalConfig = readjson.sync.try(pathConfig);
+        const originalConfig = readjson.sync.try(pathConfig);
         
         patch(`http://localhost:${port}/api/v1/config`, json)
             .then(warp(_pullout, 'string'))
             .then(() => {
                 const config = readjson.sync(pathConfig);
+                
                 t.equal(config.editor, 'dword', 'should change config file on patch');
                 t.end();
                 

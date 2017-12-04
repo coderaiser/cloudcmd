@@ -28,10 +28,12 @@ const HOME = require('os-homedir')();
 const manageConfig = squad(traverse, cryptoPass);
 const save = promisify(_save);
 const swap = currify((f, a, b) => f(b, a));
+const noArgs = (fn) => () => fn();
+const saveData = noArgs(save);
 
 const sendError = swap(ponse.sendError);
 const send = swap(ponse.send);
-const formatMsg = currify(CloudFunc.formatMsg);
+const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
 const apiURL = CloudFunc.apiURL;
 
@@ -166,14 +168,12 @@ function patch(req, res) {
         cache   : false
     };
     
-    const saveData = wraptile(save);
-    
     pullout(req, 'string')
         .then(jonny.parse)
         .then(jsonStore)
         .then(manageConfig)
         .then(saveData)
-        .then(jsonStore)
+        .then(noArgs(jsonStore))
         .then(key)
         .then(formatMsg('config'))
         .then(send(options))
