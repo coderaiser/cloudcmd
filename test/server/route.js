@@ -148,7 +148,7 @@ test('cloudcmd: route: buttons: one panel mode: move', (t) => {
     });
 });
 
-test('cloudcmd: route: keys panel', (t) => {
+test('cloudcmd: route: keys panel: hide', (t) => {
     const config = {
         showKeysPanel: false
     };
@@ -157,6 +157,21 @@ test('cloudcmd: route: keys panel', (t) => {
         getStr(`http://localhost:${port}/`)
             .then((result) => {
                 t.ok(/keyspanel hidden/.test(result), 'should hide keyspanel');
+                t.end();
+                after();
+            });
+    });
+});
+
+test('cloudcmd: route: keys panel', (t) => {
+    const config = {
+        showKeysPanel: true
+    };
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}/`)
+            .then((result) => {
+                t.notOk(/keyspanel hidden/.test(result), 'should show keyspanel');
                 t.end();
                 after();
             });

@@ -43,8 +43,6 @@ module.exports._getIndexPath = getIndexPath;
  * additional processing of index file
  */
 function indexProcessing(options) {
-    const keysPanel = '<div id="js-keyspanel" class="{{ className }}"';
-    const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';
     const isOnePanel = config('onePanelMode');
     const noContact = !config('contact');
     const noConfig = !config('configDialog');
@@ -54,20 +52,8 @@ function indexProcessing(options) {
     
     let data = options.data;
     
-    let from;
-    let to;
-    
-    if (!config('showKeysPanel')) {
-        from = rendy(keysPanelRegExp, {
-            className: 'keyspanel'
-        });
-        
-        to = rendy(keysPanel, {
-            className: 'keyspanel hidden'
-        });
-        
-        data = data.replace(RegExp(from), to);
-    }
+    if (!config('showKeysPanel'))
+        data = hideKeysPanel(data);
     
     if (isOnePanel)
         data = data
@@ -90,7 +76,7 @@ function indexProcessing(options) {
         data = data
             .replace('icon-terminal', 'icon-terminal none');
     
-    let left = rendy(Template.panel, {
+    const left = rendy(Template.panel, {
         side        : 'left',
         content     : panel,
         className   : !isOnePanel ? '' : 'panel-single'
@@ -186,6 +172,22 @@ function buildIndex(json, callback) {
         
         callback(error, data);
     });
+}
+
+module.exports._hideKeysPanel = hideKeysPanel;
+function hideKeysPanel(html) {
+    const keysPanel = '<div id="js-keyspanel" class="{{ className }}"';
+    const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';
+    
+    const from = rendy(keysPanelRegExp, {
+        className: 'keyspanel'
+    });
+    
+    const to = rendy(keysPanel, {
+        className: 'keyspanel hidden'
+    });
+    
+    return html.replace(RegExp(from), to);
 }
 
 function check(req, res, next) {
