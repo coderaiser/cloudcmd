@@ -12,7 +12,6 @@ const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
 const fullstore = require('fullstore/legacy');
 const currify = require('currify/legacy');
-const wraptile = require('wraptile/legacy');
 const squad = require('squad');
 const promisify = require('es6-promisify');
 const pullout = promisify(require('pullout/legacy'));
@@ -126,9 +125,9 @@ function connection(socket) {
 function middle(req, res, next) {
     const noConfigDialog = !manage('configDialog');
     
-    if (req.url !== apiURL + '/config')
+    if (req.url !== `${apiURL}/config`)
         return next();
-    
+   
     switch(req.method) {
     case 'GET':
         get(req, res, next);

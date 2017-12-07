@@ -5,11 +5,14 @@ const path = require('path');
 
 const test = require('tape');
 const readjson = require('readjson');
+const diff = require('sinon-called-with-diff');
+const sinon = diff(require('sinon'));
 
 const root = '../../';
 const dir = root + 'server/';
 const config = require(dir + 'config');
 const {_cryptoPass} = config;
+const {apiURL} = require(root + 'common/cloudfunc');
 
 const pathHomeConfig = path.join(os.homedir(), '.cloudcmd.json');
 const pathConfig = path.join(__dirname, '..', '..', 'json', 'config.json');
@@ -103,6 +106,22 @@ test('config: cryptoPass', (t) => {
     const result = _cryptoPass(json);
     
     t.deepEqual(result, expected, 'should crypt password');
+    t.end();
+});
+
+test('config: middle: no', (t) => {
+    const {middle} = config;
+    const next = sinon.stub();
+    const res = null;
+    const url = `${apiURL}/config`;
+    const method = 'POST';
+    const req = {
+        url,
+        method
+    };
+    
+    middle(req, res, next);
+    t.ok(next.calledWith(), 'should call next');
     t.end();
 });
 
