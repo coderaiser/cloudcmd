@@ -105,20 +105,26 @@ function listen(sock, authCheck) {
 function connection(socket) {
     socket.emit('config', config);
     
+    const emit = currify((socket, name, e) => {
+        return socket.emit(name, e.message);
+    });
+    
     socket.on('message', (json) => {
         if (typeof json !== 'object')
             return socket.emit('err', 'Error: Wrong data type!');
         
         manageConfig(json);
         
-        save().then(() => {
+        const send = () => {
             const data = CloudFunc.formatMsg('config', key(json));
             socket.broadcast.send(json);
             socket.send(json);
             socket.emit('log', data);
-        }).catch((e) => {
-            socket.emit('err', e.message);
-        });
+        };
+        
+        save()
+            .then(send)
+            .catch(emit(socket, 'err'));
     });
 }
 
