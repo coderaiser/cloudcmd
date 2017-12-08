@@ -1,3 +1,22 @@
+2017.12.08, v8.1.3
+
+fix:
+- (view) Info.files -> Info
+- (config) patch
+- (fancybox) _afterZoomIn: hide
+- test(cloudcmd) getPrefix: coverage
+- test(cloudcmd) replacePrefix
+- test(cloudcmd) getPrefix: coverage
+- chore(package) :lint:dev
+- chore(package) :lint:server: eslint -> lint
+- test(cloudcmd) getPrefix
+
+feature:
+- (edit-file-vim) setOption -> setKeyMap
+- (package) stylelint-config-standard v18.0.0
+- (package) nsp v3.1.0
+
+
 2017.10.23, v8.1.2
 
 fix:
