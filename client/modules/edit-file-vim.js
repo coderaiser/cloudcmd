@@ -30,7 +30,7 @@ CloudCmd.EditFileVim = function EditFileVimProto(callback) {
         CloudCmd.EditFile
             .show(ConfigView)
             .getEditor()
-            .setOption('keyMap', 'vim');
+            .setKeyMap('vim');
     };
     
     this.hide = () => {
