@@ -4,12 +4,6 @@ fix:
 - (view) Info.files -> Info
 - (config) patch
 - (fancybox) _afterZoomIn: hide
-- test(cloudcmd) getPrefix: coverage
-- test(cloudcmd) replacePrefix
-- test(cloudcmd) getPrefix: coverage
-- chore(package) :lint:dev
-- chore(package) :lint:server: eslint -> lint
-- test(cloudcmd) getPrefix
 
 feature:
 - (edit-file-vim) setOption -> setKeyMap
