@@ -3,9 +3,9 @@
 /* global CloudCmd */
 
 const exec = require('execon');
-const Key = CloudCmd.Key;
-
 const Events = require('../dom/events');
+
+const {Key} = CloudCmd;
 
 CloudCmd.EditFileVim = function EditFileVimProto(callback) {
     const EditFileVim = this;
