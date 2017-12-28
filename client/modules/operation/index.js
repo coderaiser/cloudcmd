@@ -12,6 +12,7 @@
 CloudCmd.Operation = OperationProto;
 
 const currify = require('currify/legacy');
+const wraptile = require('wraptile/legacy');
 const exec = require('execon');
 
 const RESTful = require('../../dom/rest');
@@ -22,6 +23,7 @@ function OperationProto(operation, data) {
     const TITLE = CloudCmd.TITLE;
     const {config} = CloudCmd;
     const {Dialog, Images} = DOM;
+    const create = wraptile(_create);
     
     let Loaded;
     
@@ -56,12 +58,10 @@ function OperationProto(operation, data) {
         exec.series([
             DOM.loadSocket,
             (callback) => {
-                if (config('progress'))
-                    load((callback) => {
-                        create(CloudCmd.PREFIX, callback);
-                    });
+                if (!config('progress'))
+                    return callback();
                 
-                callback();
+                load(create(CloudCmd.PREFIX, callback));
             },
             () => {
                 Loaded = true;
@@ -187,7 +187,7 @@ function OperationProto(operation, data) {
         });
     }
     
-    function create(prefix) {
+    function _create(prefix, callback) {
         const initSpero = currify(_initSpero);
         const initRemedy = currify(_initRemedy);
         const initPacker = currify(_initPacker);
@@ -198,7 +198,7 @@ function OperationProto(operation, data) {
             initRemedy(prefix),
             initPacker(prefix),
             initExtractor(prefix)
-        ], exec.ret);
+        ], callback);
     }
     
     function setListeners(emitter, options, callback) {
@@ -576,8 +576,10 @@ function OperationProto(operation, data) {
         });
         
         DOM.load.parallel(files, (error) => {
-            if (error)
-                return Dialog.alert(TITLE, error.message);
+            if (error) {
+                Dialog.alert(TITLE, error.message);
+                return exec(callback);
+            }
             
             Loaded = true;
             Util.timeEnd(Name + ' load');
