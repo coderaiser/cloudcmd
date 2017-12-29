@@ -29,7 +29,7 @@
     "console": true,
     "terminal": false,
     "terminalPath": "",
-    "showConfig": "false",
+    "showConfig": false,
     "vim": false
 }
 
