@@ -370,6 +370,7 @@ Here is description of options:
     "confirmCopy"       : true,     /* confirm copy                             */
     "confirmMove"       : true,     /* confirm move                             */
     "htmlDialogs"       : true,     /* use html dialogs                         */
+    "showConfig"        : false,    /* show config at startap                   */
     "onePanelMode"      : false,    /* set one panel mode                       */
     "contact"           : true,     /* enable contact                           */
     "configDialog"      : true,     /* enable config dialog                     */
