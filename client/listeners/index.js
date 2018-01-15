@@ -64,10 +64,8 @@ let EXT;
 
 function header() {
     const fm = DOM.getFM();
-    
     const isDataset = (el) => el.dataset;
-    
-    var isPanel = (el) => {
+    const isPanel = (el) => {
         return /^js-(left|right)$/.test(el.dataset.name);
     };
     
