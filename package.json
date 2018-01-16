@@ -48,7 +48,7 @@
     "build:start": "redrun build:client start",
     "build:start:dev": "redrun build:client:dev start:dev",
     "security": "nsp check",
-    "codestyle": "redrun lint -c spell",
+    "codestyle": "redrun lint spell",
     "lint": "redrun lint:*",
     "lint:css": "stylelint css/*.css",
     "lint:js": "redrun lint:js:*",
