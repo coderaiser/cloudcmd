@@ -1,3 +1,15 @@
+2018.01.16, v8.2.0
+
+fix:
+- (config) showConfig
+- (now) add quotes
+
+feature:
+- (config) username, password: add autocomplete
+- (config) div -> form
+- (package) mock-require v3.0.1
+
+
 2017.12.08, v8.1.3
 
 fix:
