@@ -168,7 +168,7 @@ function fillTemplate(error, template) {
         const inner = rendy(Template, obj);
         
         Element = DOM.load({
-            name        : 'div',
+            name        : 'form',
             className   : 'config',
             inner,
             attribute   : {
