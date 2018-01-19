@@ -1082,12 +1082,13 @@ function CmdProto() {
         const path = CurrentInfo.dirPath;
         const Dialog = DOM.Dialog;
         const cancel = false;
-        
-        Dialog.prompt(TITLE, msg, path, {cancel}).then((path) => {
-            CloudCmd.loadDir({
-                path: path
-            });
+        const setPath = (path) => ({
+            path
         });
+        
+        Dialog.prompt(TITLE, msg, path, {cancel})
+            .then(setPath)
+            .then(CloudCmd.loadDir);
     },
     
     this.duplicatePanel = () => {
