@@ -903,41 +903,17 @@ function CmdProto() {
     /**
      * hides panel right or left (or active)
      */
-    this.hidePanel               = (active) => {
-        var ret     = false,
-            panel   = DOM.getPanel({active: active});
+    this.hidePanel = (active) => {
+        const panel = DOM.getPanel({
+            active
+        });
         
-        if (panel)
-            ret = DOM.hide(panel);
+        if (!panel)
+            return false;
         
-        return ret;
+        return DOM.hide(panel);
     };
-        
-    /**
-     * open window with URL
-     * @param url
-     */
-    this.openWindow              = (url) => {
-        var left        = 140,
-            top         = 187,
-            width       = 1000,
-            height      = 650,
-            
-            options     = 'left='   + left          +
-                ',top='             + top           +
-                ',width='           + width         +
-                ',height='          + height        +
-                ',personalbar=0,toolbar=0'          +
-                ',scrollbars=1,resizable=1',
-            
-            wnd         = window.open(url, 'Cloud Commander Auth', options);
-        
-        if (!wnd)
-            DOM.Dialog.alert(TITLE, 'Please disable your popup blocker and try again.');
-        
-        return wnd;
-    };
-    
+     
     /**
      * remove child of element
      * @param pChild
