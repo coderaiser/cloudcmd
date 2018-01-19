@@ -48,7 +48,6 @@ const execAll = currify((funcs, event) => {
     });
 });
 
-
 const Info = DOM.CurrentInfo;
 const Storage = DOM.Storage;
 const Events = DOM.Events;
