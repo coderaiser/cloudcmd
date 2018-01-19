@@ -933,29 +933,19 @@ function CmdProto() {
      *
      */
     this.deleteCurrent = (current) => {
-        var next, prev, currentNew;
-        
         if (!current)
             Cmd.getCurrentFile();
         
-        var parent = current && current.parentElement;
-        var name = Cmd.getCurrentName(current);
+        const parent = current && current.parentElement;
+        const name = Cmd.getCurrentName(current);
         
         if (current && name !== '..') {
-            next    = current.nextSibling,
-            prev    = current.previousSibling;
-                
-            if (next)
-                currentNew = next;
-            else if (prev)
-                currentNew = prev;
+            const next = current.nextSibling;
+            const prev = current.previousSibling;
             
-            DOM.setCurrentFile(currentNew);
-            
+            DOM.setCurrentFile(next || prev);
             parent.removeChild(current);
         }
-        
-        return currentNew;
     };
     
     /**
