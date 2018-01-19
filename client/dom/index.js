@@ -1009,26 +1009,18 @@ function CmdProto() {
      * unified way to scrollIntoViewIfNeeded
      * (native suporte by webkit only)
      * @param element
-     * @param pCenter
+     * @param center - to scroll as small as possible param should be false
      */
-    this.scrollIntoViewIfNeeded  = function(element, center) {
-        var ret = element && element.scrollIntoViewIfNeeded;
+    this.scrollIntoViewIfNeeded = function(element, center = false) {
+        if (!element || !element.scrollIntoViewIfNeeded)
+            return;
         
-        /* for scroll as small as possible
-         * param should be false
-         */
-        if (arguments.length === 1)
-            center = false;
-        
-        if (ret)
-            element.scrollIntoViewIfNeeded(center);
-        
-        return ret;
+        element.scrollIntoViewIfNeeded(center);
     };
     
-    /* scroll on one page*/
-    this.scrollByPages           = (element, pPages) => {
-        var ret = element && element.scrollByPages && pPages;
+    /* scroll on one page */
+    this.scrollByPages = (element, pPages) => {
+        const ret = element && element.scrollByPages && pPages;
         
         if (ret)
             element.scrollByPages(pPages);
