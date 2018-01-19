@@ -849,22 +849,23 @@ function CmdProto() {
      * @param options = {active: true}
      */
     this.getPanel = (options) => {
-        var files, panel, isLeft,
-            dataName    = 'js-',
-            current     = DOM.getCurrentFile();
+        let files, panel, isLeft;
+        let dataName = 'js-';
+        
+        const current = DOM.getCurrentFile();
         
         if (!current) {
-            panel       = DOM.getByDataName('js-left');
+            panel = DOM.getByDataName('js-left');
         } else {
-            files       = current.parentElement,
-            panel       = files.parentElement,
-            isLeft      = panel.getAttribute('data-name') === 'js-left';
+            files = current.parentElement,
+            panel = files.parentElement,
+            isLeft = panel.getAttribute('data-name') === 'js-left';
         }
-            
+        
         /* if {active : false} getting passive panel */
         if (options && !options.active) {
-            dataName    += isLeft ? 'right' : 'left';
-            panel       = DOM.getByDataName(dataName);
+            dataName += isLeft ? 'right' : 'left';
+            panel = DOM.getByDataName(dataName);
         }
         
         /* if two panels showed
@@ -873,11 +874,10 @@ function CmdProto() {
          */
         if (window.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH)
             panel = DOM.getByDataName('js-left');
-            
         
         if (!panel)
             throw Error('can not find Active Panel!');
-            
+       
         return panel;
     };
     
