@@ -218,15 +218,13 @@ module.exports.put = (url, body) => {
     xhr.open('put', url, true);
     
     xhr.upload.onprogress = (event) => {
-        var percent, count;
+        if (!event.lengthComputable)
+            return;
         
-        if (event.lengthComputable) {
-            percent = (event.loaded / event.total) * 100;
-            count   = Math.round(percent);
-            
-            emitter.emit('progress', count);
-        }
-    
+        const percent = (event.loaded / event.total) * 100;
+        const count   = Math.round(percent);
+        
+        emitter.emit('progress', count);
     };
     
     xhr.onreadystatechange = () => {
