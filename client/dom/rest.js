@@ -172,17 +172,17 @@ function RESTful() {
     };
     
     function sendRequest(params) {
-        var p           = params,
-            prefixUrl   = CloudCmd.PREFIX_URL;
+        const p = params;
+        const prefixUrl = CloudCmd.PREFIX_URL;
         
-        p.url   = prefixUrl + p.url;
-        p.url   = encodeURI(p.url);
+        p.url = prefixUrl + p.url;
+        p.url = encodeURI(p.url);
         
         /*
          * if we send ajax request -
          * no need in hash so we escape #
          */
-        p.url   = p.url.replace('#', '%23');
+        p.url = p.url.replace('#', '%23');
         
         load.ajax({
             method      : p.method,
