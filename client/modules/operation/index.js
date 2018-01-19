@@ -380,12 +380,11 @@ function OperationProto(operation, data) {
         deleteFn(path + query, names, (error) => {
             const Storage = DOM.Storage;
             const dirPath = Info.dirPath;
-            const delSelected = DOM.deleteSelected;
             
             if (error)
                 return CloudCmd.refresh();
              
-            delSelected(files);
+            DOM.deleteSelected(files);
             Storage.removeMatch(dirPath);
         });
     }
