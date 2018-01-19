@@ -953,21 +953,12 @@ function CmdProto() {
      * @Selected
      */
     this.deleteSelected = (selected) => {
-        var i, n, current;
+        selected = selected || DOM.getSelectedFiles();
         
         if (!selected)
-            selected = DOM.getSelectedFiles();
+            return;
         
-        if (selected) {
-            n = selected.length;
-            
-            for (i = 0; i < n; i++) {
-                current = selected[i];
-                DOM.deleteCurrent(current);
-            }
-        }
-        
-        return selected;
+        selected.map(DOM.deleteCurrent);
     };
     
     /**
