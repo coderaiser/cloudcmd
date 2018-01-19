@@ -14,7 +14,7 @@ if (!Array.isArray)
  *    https://gist.github.com/2581101
  */
 DOM.scrollIntoViewIfNeeded = function(element, centerIfNeeded) {
-    var parent,
+    let parent,
         topWidth,
         leftWidth,
         parentComputedStyle,
@@ -87,13 +87,14 @@ if (!window.JSON) {
     
     /* https://gist.github.com/754454 */
     window.JSON.stringify   = function(obj) {
-        var n, v, has,
+        let n, v, has,
             ret     = '',
             value   = '',
-            json    = [],
-            isStr   = itype.string(obj),
-            isObj   = itype.object(obj),
-            isArray = itype.array(obj);
+            json    = [];
+        
+        let isStr = itype.string(obj);
+        let isObj = itype.object(obj);
+        let isArray = itype.array(obj);
         
         if (!isObj || obj === null) {
             // simple data type
