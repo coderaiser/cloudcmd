@@ -53,7 +53,10 @@ const Storage = DOM.Storage;
 const Events = DOM.Events;
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
-    click: execAll([onClick, unselect]),
+    click: execAll([
+        onClick,
+        unselect,
+    ]),
     dragstart: exec.with(execIfNotUL, onDragStart),
     dblclick: exec.with(execIfNotUL, onDblClick),
     touchstart: exec.with(execIfNotUL, onTouch)
