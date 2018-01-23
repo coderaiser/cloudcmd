@@ -280,10 +280,10 @@ cloudcmd --terminal --terminal-path `gritty --path` --save
 
 ### Windows
 
-On Windows you need to install `windows-build-tools` first:
+If you can't install `gritty` on Windows try to install `windows-build-tools` first:
 
 ```sh
-npm install --global windows-build-tools
+npm install windows-build-tools -g
 ```
 
 Then get path of a `gritty` with:
