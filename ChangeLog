@@ -1,3 +1,12 @@
+2018.01.23, v8.2.1
+
+fix:
+- (operation) paste files when current file is ".." (#142)
+
+feature:
+- (bower) jquery v3.3.1
+
+
 2018.01.16, v8.2.0
 
 fix:
