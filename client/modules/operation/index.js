@@ -428,7 +428,7 @@ function OperationProto(operation, data) {
         
         sameName = DOM.getCurrentByName(name, panel);
         
-        if (noFilesCheck())
+        if (!data && noFilesCheck())
             return;
         
         const {type} = options;
