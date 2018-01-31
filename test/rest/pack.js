@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const test = require('tape');
-const promisify = require('es6-promisify');
+const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 const tar = require('tar-stream');

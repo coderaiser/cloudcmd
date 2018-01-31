@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const promisify = require('es6-promisify');
+const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 

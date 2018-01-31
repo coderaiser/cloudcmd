@@ -6,7 +6,7 @@ const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
-const promisify = require('es6-promisify');
+const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 
