@@ -169,7 +169,7 @@
     "emitify": "^3.0.2",
     "es6-promise": "^4.0.5",
     "eslint": "^4.0.0",
-    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-node": "^6.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "fresh-require": "^1.0.3",
