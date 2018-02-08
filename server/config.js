@@ -48,10 +48,9 @@ const readjsonSync = (name) => {
 const rootConfig = readjsonSync(ConfigPath);
 const key = (a) => Object.keys(a).pop();
 
-let configHome;
-const error = tryCatch(() => {
-    configHome = readjsonSync(ConfigHome);
-});
+const result = tryCatch(readjsonSync, ConfigHome);
+const error = result[0];
+const configHome = result[1];
 
 if (error && error.code !== 'ENOENT')
     exit(`cloudcmd --config ${ConfigHome}: ${error.message}`);

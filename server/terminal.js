@@ -14,17 +14,15 @@ function getTerminal(term, arg) {
     if (!term)
         return noop;
     
-    let result;
-    
-    const e = tryCatch(() => {
-        result = require(config('terminalPath'));
-    });
+    const result = tryCatch(require, config('terminalPath'));
+    const e = result[0];
+    const terminalModule = result[1];
     
     if (!e && !arg)
-        return result;
+        return terminalModule;
     
     if (!e)
-        return result(arg);
+        return terminalModule(arg);
     
     config('terminal', false);
     console.log(`cloudcmd --terminal: ${e.message}`);

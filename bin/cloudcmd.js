@@ -202,11 +202,9 @@ function readConfig(name) {
         mode: 'json'
     });
     
-    let data;
-    
-    const error = tryCatch(() => {
-        data = readjsonSync(name);
-    });
+    const result = tryCatch(readjsonSync, name);
+    const error = result[0];
+    const data = result[1];
     
     if (error)
         return exit(error.message);

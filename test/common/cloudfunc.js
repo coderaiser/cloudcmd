@@ -222,7 +222,6 @@ test('cloudfunc: getDotDot', (t) => {
 
 test('cloudfunc: getDotDot: two levels deep', (t) => {
     const dotDot = CloudFunc.getDotDot('/home/coderaiser/');
-    console.log(dotDot);
     
     t.equal(dotDot, '/home', 'should return up level');
     t.end();
