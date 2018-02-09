@@ -154,7 +154,7 @@
     "squad": "^1.1.3",
     "table": "^4.0.1",
     "try-catch": "^2.0.0",
-    "tryrequire": "^1.1.5",
+    "tryrequire": "^2.0.1",
     "wraptile": "^1.0.0",
     "writejson": "^1.1.0"
   },
