@@ -11,7 +11,7 @@ const http = require('http');
 const opn = require('opn');
 const express = require('express');
 const io = require('socket.io');
-const squad = require('squad');
+const squad = require('squad/legacy');
 const apart = require('apart');
 
 const tryRequire = require('tryrequire');

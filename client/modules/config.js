@@ -7,7 +7,7 @@ require('../../css/config.css');
 const rendy = require('rendy');
 const exec = require('execon');
 const currify = require('currify/legacy');
-const squad = require('squad');
+const squad = require('squad/legacy');
 const input = require('../input');
 
 const Images = require('../dom/images');

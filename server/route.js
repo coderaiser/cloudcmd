@@ -11,7 +11,7 @@ const flop = require('flop');
 const ponse = require('ponse');
 const rendy = require('rendy');
 const format = require('format-io');
-const squad = require('squad');
+const squad = require('squad/legacy');
 const apart = require('apart');
 
 const config = require(DIR_SERVER + 'config');
