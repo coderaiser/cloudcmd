@@ -13,6 +13,8 @@ const validatePath = `${dir}/server/validate`;
 const exitPath = `${dir}/server/exit`;
 
 const validate = require(validatePath);
+const stub = require('mock-require');
+const clear = require('clear-module');
 
 test('validate: root: bad', (t) => {
     const config = {
@@ -106,11 +108,7 @@ test('validate: editor: not valid', (t) => {
 });
 
 function clean() {
-    delete require.cache[require.resolve(validatePath)];
-    delete require.cache[require.resolve(exitPath)];
-}
-
-function stub(name, fn) {
-    require.cache[require.resolve(name)].exports = fn;
+    clear(validatePath);
+    clear(exitPath);
 }
 
