@@ -1,3 +1,19 @@
+2018.02.19, v8.2.2
+
+fix:
+- (directory) upload files with help of dragndrop when root directory is empty (#145)
+
+feature:
+- (package) stylelint v9.0.0
+- (package) squad v2.0.0
+- (package) sinon-called-with-diff v2.0.0
+- (package) tryrequire v2.0.1
+- (package) try-catch v2.0.0
+- (package) eslint-plugin-node v6.0.0
+- (package) es6-promisify v6.0.0
+- (package) style-loader v0.20.1
+
+
 2018.01.23, v8.2.1
 
 fix:
