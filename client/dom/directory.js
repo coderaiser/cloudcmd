@@ -1,5 +1,4 @@
 /* global CloudCmd */
-/* global DOM */
 
 'use strict';
 
@@ -7,9 +6,13 @@ const philip = require('philip');
 
 const Images = require('./images');
 const {FS} = require('../../common/cloudfunc');
+const DOM = require('.');
+
+const {
+    getCurrentDirPath: getPathWhenRootEmpty,
+} = DOM;
 
 module.exports = (items) => {
-    const Info = DOM.CurrentInfo;
     const Dialog = DOM.Dialog;
     
     if (items.length)
@@ -19,7 +22,8 @@ module.exports = (items) => {
         return item.webkitGetAsEntry();
     });
     
-    const path = Info.dirPath
+    const dirPath = getPathWhenRootEmpty();
+    const path = dirPath
         .replace(/\/$/, '');
     
     const uploader = philip(entries, (type, name, data, i, n, callback) => {
