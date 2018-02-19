@@ -465,8 +465,11 @@ function OperationProto(operation, data) {
                 
                 operation(files, (error) => {
                     !error && DOM.Storage.remove(from, () => {
-                        const panel = Info.panel;
-                        const panelPassive = Info.panelPassive;
+                        const {
+                            panel,
+                            panelPassive,
+                        } = Info;
+                        
                         const setCurrent = () => {
                             const currentName = name || data.names[0];
                             DOM.setCurrentByName(currentName);
