@@ -4,6 +4,7 @@ const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 const currify = require('currify');
+const clean = require('clear-module');
 
 const DIR = '../../server/';
 const cloudcmd = require(DIR + 'cloudcmd');
@@ -223,10 +224,6 @@ function credentials() {
     });
     
     return set(reset);
-}
-
-function clean(path) {
-    delete require.cache[require.resolve(path)];
 }
 
 function cleanNodeEnv() {

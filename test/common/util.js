@@ -1,6 +1,7 @@
 'use strict';
 
 const test = require('tape');
+const clean = require('clear-module');
 const DIR = '../../';
 const UtilPath = DIR + 'common/util';
 const Util = require(UtilPath);
@@ -145,8 +146,4 @@ test('util: scope', (t) => {
     
     t.end();
 });
-
-function clean(path) {
-    delete require.cache[require.resolve(path)];
-}
 

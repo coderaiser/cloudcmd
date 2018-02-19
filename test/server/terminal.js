@@ -5,6 +5,9 @@ const mock = require('mock-require');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
+const stub = require('mock-require');
+const clean = require('clear-module');
+
 const configPath = '../../server/config';
 const terminalPath = '../../server/terminal';
 
@@ -87,12 +90,4 @@ test('cloudcmd: terminal: no arg', (t) => {
     
     t.end();
 });
-
-function clean(path) {
-    delete require.cache[require.resolve(path)];
-}
-
-function stub(name, fn) {
-    require.cache[require.resolve(name)].exports = fn;
-}
 

@@ -1,25 +1,27 @@
 'use strict';
 
 const path = require('path');
-
 const test = require('tape');
 
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
-const dir = path.join(__dirname, '..', '..', 'server');
+const dir = path.join('..', '..', 'server');
+
 const pathConfig = path.join(dir, 'config');
 const pathRoot = `${dir}/root`;
 
-const clean = (name) => {
-    delete require.cache[require.resolve(name)];
-};
+const stub = require('mock-require');
+const clean = require('clear-module');
 
 test('cloudcmd: root: config', (t) => {
     clean(pathRoot);
     
+    const originalConfig = require(pathConfig);
     const config = sinon.stub().returns(false);
-    const originalConfig = stub(pathConfig, config);
+    
+    stub(pathConfig, config);
+    
     const root = require(pathRoot);
     
     root('hello');
@@ -56,13 +58,4 @@ test('cloudcmd: root: mellow', (t) => {
     
     t.end();
 });
-
-function stub(name, data) {
-    const resolved = require.resolve(name);
-    const {exports} = require.cache[resolved];
-    
-    require.cache[resolved].exports = data;
-    
-    return exports;
-}
 

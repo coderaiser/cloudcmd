@@ -11,6 +11,8 @@ const routePath = '../../server/route';
 const route = require(routePath);
 const before = require('../before');
 
+const clean = require('clear-module');
+
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 const _pullout = promisify(pullout);
 
@@ -309,8 +311,4 @@ test('cloudcmd: route: realpath: error', (t) => {
             });
     });
 });
-
-function clean(path) {
-    delete require.cache[require.resolve(path)];
-}
 
