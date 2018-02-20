@@ -1,8 +1,10 @@
 'use strict';
 
 const itype = require('itype/legacy');
-const jonny = require('jonny');
+const jonny = require('jonny/legacy');
 const exec = require('execon');
+const tryCatch = require('try-catch');
+const setItem = localStorage.setItem.bind(localStorage);
 
 /* приватный переключатель возможности работы с кэшем */
 let Allowed;
@@ -49,9 +51,7 @@ module.exports.set = (name, data, callback) => {
         str = jonny.stringify(data);
     
     if (Allowed && name)
-        error = exec.try(() => {
-            localStorage.setItem(name, str || data);
-        });
+        [error] = tryCatch(setItem, name, str || data);
     
     exec(callback, error);
     

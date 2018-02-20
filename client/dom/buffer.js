@@ -2,7 +2,7 @@
 
 /* global CloudCmd */
 
-const jonny = require('jonny');
+const jonny = require('jonny/legacy');
 const exec = require('execon');
 
 const Storage = require('./storage');
@@ -105,7 +105,7 @@ function BufferProto() {
         const copy = Storage.get.bind(Storage, COPY);
         const cut = Storage.get.bind(Storage, CUT);
         
-        exec.parallel([copy, cut], function(error, cp, ct) {
+        exec.parallel([copy, cut], (error, cp, ct) => {
             const opStr = cp ? 'copy' : 'move';
             const opData = cp || ct;
             const Operation = CloudCmd.Operation;

@@ -4,7 +4,7 @@
 
 const itype = require('itype/legacy');
 const exec = require('execon');
-const jonny = require('jonny');
+const jonny = require('jonny/legacy');
 const Util = require('../../common/util');
 
 const {

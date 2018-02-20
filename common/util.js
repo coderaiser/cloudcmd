@@ -1,13 +1,11 @@
 'use strict';
 
 const exec = require('execon');
-const jonny = require('jonny');
 
 const Scope = typeof window !== 'undefined' ? window : global;
 
 module.exports.getStrBigFirst = getStrBigFirst;
 module.exports.kebabToCamelCase = kebabToCamelCase;
-module.exports.json = jonny;
 
 module.exports.escapeRegExp = (str) => {
     const isStr = typeof str === 'string';

@@ -5,7 +5,7 @@ const rendy = require('rendy');
 const exec = require('execon');
 const Images = require('./dom/images');
 const join = require('join-io/www/join');
-const jonny = require('jonny');
+const jonny = require('jonny/legacy');
 
 const {
     apiURL,

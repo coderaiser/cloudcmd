@@ -1,7 +1,7 @@
 'use strict';
 
 const itype = require('itype/legacy');
-const jonny = require('jonny');
+const jonny = require('jonny/legacy');
 const Emitify = require('emitify/legacy');
 const exec = require('execon');
 const Images = require('./images');
