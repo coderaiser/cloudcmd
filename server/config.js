@@ -152,27 +152,29 @@ function middle(req, res, next) {
     }
 }
 
-function get(req, res) {
+function get(request, response) {
     const data = jonny.stringify(config);
     
     ponse.send(data, {
         name    : 'config.json',
-        request : req,
-        response: res,
+        request,
+        response,
         cache   : false
     });
 }
 
-function patch(req, res) {
+function patch(request, response) {
     const jsonStore = fullstore();
+    const name = 'config.json';
+    const cache = false;
     const options = {
-        name    : 'config.json',
-        request : req,
-        response: res,
-        cache   : false
+        name,
+        request,
+        response,
+        cache,
     };
     
-    pullout(req, 'string')
+    pullout(request, 'string')
         .then(jonny.parse)
         .then(jsonStore)
         .then(manageConfig)
