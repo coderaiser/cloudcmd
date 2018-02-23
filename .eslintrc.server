@@ -1,20 +1,12 @@
 {
     "env": {
-        "es6": true,
         "node": true
     },
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module"
-    },
     "rules": {
-        "indent": ["error", 4],
-        "semi": "error",
-        "no-use-before-define": ["error", "nofunc"],
         'no-process-exit': 0
     },
     "extends": [
-        "eslint:recommended",
+        ".eslintrc",
         "plugin:node/recommended"
     ],
     "plugins": [

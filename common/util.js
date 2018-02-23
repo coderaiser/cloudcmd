@@ -2,8 +2,6 @@
 
 const exec = require('execon');
 
-const Scope = typeof window !== 'undefined' ? window : global;
-
 module.exports.getStrBigFirst = getStrBigFirst;
 module.exports.kebabToCamelCase = kebabToCamelCase;
 
@@ -97,7 +95,7 @@ module.exports.findObjByNameInArr = (array, name) => {
  * @param name
  */
 module.exports.time = (name) => {
-    exec.ifExist(Scope.console, 'time', [name]);
+    exec.ifExist(console, 'time', [name]);
 };
 
 /**
@@ -105,7 +103,7 @@ module.exports.time = (name) => {
  * @param name
  */
 module.exports.timeEnd = (name) => {
-    exec.ifExist(Scope.console, 'timeEnd', [name]);
+    exec.ifExist(console, 'timeEnd', [name]);
 };
 
 function getStrBigFirst(str) {

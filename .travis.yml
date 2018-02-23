@@ -5,9 +5,10 @@ node_js:
     - 6
 
 script:
-  - npm run codestyle
+  - npm run lint
   - npm run build
-  - npm run coverage && npm run report
+  - npm run coverage
+  - npm run report
 
 notifications:
     email:

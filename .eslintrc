@@ -2,7 +2,6 @@
     "env": {
         "es6": true,
         "node": true,
-        "browser": true
     },
     "parserOptions": {
         "ecmaVersion": 6,
@@ -11,6 +10,7 @@
     "rules": {
         "indent": ["error", 4],
         "semi": "error",
+        "no-console": 0,
         "no-use-before-define": ["error", "nofunc"]
     },
     "extends": [
