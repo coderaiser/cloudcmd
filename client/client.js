@@ -1,19 +1,20 @@
 'use strict';
 
+/* global Util, DOM */
+
 const itype = require('itype/legacy');
 const rendy = require('rendy');
 const exec = require('execon');
 const Images = require('./dom/images');
 const join = require('join-io/www/join');
 const jonny = require('jonny/legacy');
+const bind = (f, ...a) => () => f(...a);
 
 const {
     apiURL,
     formatMsg,
     buildFromJSON,
 } = require('../common/cloudfunc');
-
-/* global Util, DOM */
 
 module.exports = new CloudCmdProto(Util, DOM);
 
@@ -173,16 +174,12 @@ function CloudCmdProto(Util, DOM) {
      * инициализации
      */
     this.init = (prefix, config) => {
-        const func = () => {
-            exec.series([
-                initModules,
-                baseInit,
-                loadPlugins,
-                () => {
-                    CloudCmd.route(location.hash);
-                }
-            ]);
-        };
+        const func = bind(exec.series, [
+            initModules,
+            baseInit,
+            loadPlugins,
+            exec.with(CloudCmd.route, location.hash),
+        ]);
         
         const funcBefore  = (callback) => {
             const src = prefix + '/join:' + [
