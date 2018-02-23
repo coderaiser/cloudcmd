@@ -246,7 +246,7 @@ function extract(from, to, fn) {
     from = root(from);
     
     if (to)
-        to  = root(to);
+        to = root(to);
     else
         to = from.replace(/\.tar\.gz$/, '');
     
@@ -351,10 +351,9 @@ function isRootWin32(path) {
     return isWin32 && isRoot && isConfig;
 }
 
+module.exports._isRootAll = isRootAll;
 function isRootAll(names) {
-    return names.some((name) => {
-        return isRootWin32(name);
-    });
+    return names.some(isRootWin32);
 }
 
 module.exports._getWin32RootMsg = getWin32RootMsg;

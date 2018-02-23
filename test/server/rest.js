@@ -6,6 +6,7 @@ const {
     _formatMsg,
     _getWin32RootMsg,
     _isRootWin32,
+    _isRootAll,
 } = rest;
 
 test('rest: formatMsg', (t) => {
@@ -25,7 +26,7 @@ test('rest: formatMsg: json', (t) => {
 });
 
 test('rest: getWin32RootMsg', (t) => {
-    const {message}= _getWin32RootMsg();
+    const {message} = _getWin32RootMsg();
     
     t.equal(message,'Could not copy from/to root on windows!', 'should return error');
     t.end();
@@ -33,6 +34,13 @@ test('rest: getWin32RootMsg', (t) => {
 
 test('rest: isRootWin32', (t) => {
     const result = _isRootWin32('/');
+    
+    t.notOk(result, 'should equal');
+    t.end();
+});
+
+test('rest: isRootAll', (t) => {
+    const result = _isRootAll(['/', '/h']);
     
     t.notOk(result, 'should equal');
     t.end();
