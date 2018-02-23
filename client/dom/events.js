@@ -142,7 +142,7 @@ function EventsProto() {
      */
     this.addKey = function(...argsArr) {
         const name = 'keydown';
-        const args = [name].concat(argsArr);
+        const args = [name, ...argsArr];
         
         return Events.add(...args);
     };
@@ -154,7 +154,7 @@ function EventsProto() {
      */
     this.rmKey = function(...argsArr) {
         const name = 'keydown';
-        const args = [name].concat(argsArr);
+        const args = [name, ...argsArr];
         
         return Events.remove(...args);
     };
@@ -166,7 +166,7 @@ function EventsProto() {
      */
     this.addClick = function(...argsArr) {
         const name = 'click';
-        const args = [name].concat(argsArr);
+        const args = [name, ...argsArr];
         
         return Events.add(...args);
     };
@@ -178,14 +178,14 @@ function EventsProto() {
      */
     this.rmClick = function(...argsArr) {
         const name = 'click';
-        const args = [name].concat(argsArr);
+        const args = [name, ...argsArr];
         
         return Events.remove(...args);
     };
     
     this.addContextMenu = function(...argsArr) {
         const name = 'contextmenu';
-        const args = [name].concat(argsArr);
+        const args = [name, ...argsArr];
         
         return Events.add(...args);
     };
@@ -197,7 +197,7 @@ function EventsProto() {
      */
     this.addError = function(...argsArr) {
         const name = 'error';
-        const args = [name].concat(argsArr);
+        const args = [name, ...argsArr];
         
         return Events.add(...args);
     };
@@ -209,7 +209,7 @@ function EventsProto() {
      */
     this.addLoad = function(...argsArr) {
         const name = 'load';
-        const args = [name].concat(argsArr);
+        const args = [name, ...argsArr];
         
         return Events.add(...args);
     };
