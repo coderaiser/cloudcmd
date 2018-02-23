@@ -466,8 +466,8 @@ function unload() {
 }
 
 function pop() {
-    Events.add('popstate', (event) => {
-        const path = event.state.replace(FS, '');
+    Events.add('popstate', ({state}) => {
+        const path = (state || '').replace(FS, '');
         
         if (!path)
             return CloudCmd.route(location.hash);
