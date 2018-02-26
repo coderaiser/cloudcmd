@@ -1,10 +1,6 @@
 'use strict';
 
 const path = require('path');
-const webpack = require('webpack');
-const {optimize} = webpack;
-const {UglifyJsPlugin} = optimize;
-
 const dir = './client';
 const dirModules = './client/modules';
 const modules = './modules';
@@ -21,7 +17,6 @@ const clean = (array) => array.filter(notEmpty);
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackExcludeAssetsPlugin = require('html-webpack-exclude-assets-plugin');
 
 const extractMain = new ExtractTextPlugin('[name].css');
 const extractNojs = new ExtractTextPlugin('nojs.css');
@@ -29,26 +24,17 @@ const extractNojs = new ExtractTextPlugin('nojs.css');
 const extractView = new ExtractTextPlugin('view.css');
 const extractConfig = new ExtractTextPlugin('config.css');
 
-const plugins = clean([
-    !isDev && new UglifyJsPlugin({
-        sourceMap: true,
-        comments: false,
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-        name: 'cloudcmd',
-        filename: 'cloudcmd.js',
-    }),
+const plugins = [
     new HtmlWebpackPlugin({
+        inject: false,
         template: 'html/index.html',
         minify: !isDev && getMinifyHtmlOptions(),
-        excludeAssets: [/\\*/],
     }),
-    new HtmlWebpackExcludeAssetsPlugin(),
     extractMain,
     extractNojs,
     extractView,
     extractConfig,
-]);
+];
 
 const rules = clean([
     !isDev && {
@@ -71,8 +57,16 @@ const rules = clean([
     },
 ]);
 
+const splitChunks = {
+    chunks: 'all',
+    name: 'cloudcmd.common',
+};
+
 module.exports = {
     devtool,
+    optimization: {
+        splitChunks,
+    },
     entry: {
         cloudcmd: `${dir}/cloudcmd.js`,
         [modules + '/edit']: `${dirModules}/edit.js`,

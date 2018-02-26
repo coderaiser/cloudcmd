@@ -9,7 +9,7 @@ window.exec = require('execon');
 // prevent additional loading of emitify
 window.Emitify = require('emitify/legacy');
 
-window.CloudCmd = (config) => {
+module.exports = window.CloudCmd = (config) => {
     window.Promise = window.Promise || require('es6-promise');
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');

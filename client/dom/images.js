@@ -1,8 +1,7 @@
 /* global CloudCmd */
+/* global DOM */
 
 'use strict';
-
-const DOM = require('./');
 
 const Images = module.exports;
 
