@@ -86,6 +86,8 @@
     "6to5": "webpack --progress",
     "6to5:client": "npm run 6to5 -- --mode production",
     "6to5:client:dev": "NODE_ENV=development npm run 6to5 -- --progress --mode development",
+    "pre6to5:client": "rimraf dist",
+    "pre6to5:client:dev": "rimraf dist-dev",
     "watch:client": "redrun 6to5:client -- --watch",
     "watch:client:dev": "redrun 6to5:client:dev -- --watch",
     "watch:server": "nodemon bin/cloudcmd.js",
