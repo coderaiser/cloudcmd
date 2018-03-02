@@ -177,7 +177,7 @@
     "gunzip-maybe": "^1.3.1",
     "html-looks-like": "^1.0.2",
     "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
-    "limier": "^1.0.1",
+    "limier": "^2.0.0",
     "minor": "^1.2.2",
     "mock-require": "^3.0.1",
     "morgan": "^1.6.1",
