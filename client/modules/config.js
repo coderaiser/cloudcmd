@@ -165,6 +165,9 @@ function fillTemplate(error, template) {
         obj[obj.packer + '-selected'] = 'selected';
         delete obj.packer;
         
+        obj[obj.columns + '-selected'] = 'selected';
+        delete obj.columns;
+        
         const inner = rendy(Template, obj);
         
         Element = DOM.load({

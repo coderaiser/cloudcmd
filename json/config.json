@@ -30,6 +30,7 @@
     "terminal": false,
     "terminalPath": "",
     "showConfig": false,
-    "vim": false
+    "vim": false,
+    "columns": "name-size-date-owner-mode"
 }
 

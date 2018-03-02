@@ -107,6 +107,37 @@ test('validate: editor: not valid', (t) => {
     t.end();
 });
 
+test('validate: columns', (t) => {
+    const fn = sinon.stub();
+    
+    clean();
+    require(exitPath);
+    stub(exitPath, fn);
+    
+    const {columns} = require(validatePath);
+    
+    columns('name-size-date');
+    
+    t.notOk(fn.called, 'should not call exit');
+    t.end();
+});
+
+test('validate: columns: wrong', (t) => {
+    const fn = sinon.stub();
+    
+    clean();
+    require(exitPath);
+    stub(exitPath, fn);
+    
+    const {columns} = require(validatePath);
+    const msg = 'cloudcmd --columns: could be "name-size-date" or "name-size-date-owner-mode"';
+    
+    columns('hello');
+    
+    t.ok(fn.calledWith(msg), 'should call exit');
+    t.end();
+});
+
 function clean() {
     clear(validatePath);
     clear(exitPath);

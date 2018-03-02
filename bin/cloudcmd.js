@@ -29,6 +29,7 @@ const args = require('minimist')(argv.slice(2), {
         'root',
         'prefix',
         'terminal-path',
+        'columns',
     ],
     boolean: [
         'auth',
@@ -74,6 +75,7 @@ const args = require('minimist')(argv.slice(2), {
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
         'html-dialogs': config('htmlDialogs'),
         'vim': choose(env.bool('vim'), config('vim')),
+        'columns': env('columns') || config('columns') || '',
     },
     alias: {
         v: 'version',
@@ -119,6 +121,7 @@ function main() {
     config('prefix', args.prefix);
     config('root', args.root);
     config('vim', args.vim);
+    config('columns', args.columns);
     config('htmlDialogs', args['html-dialogs']);
     config('confirmCopy', args['confirm-copy']);
     config('confirmMove', args['confirm-move']);
@@ -131,7 +134,8 @@ function main() {
         root: args.root || '/', /* --no-root */
         editor: args.editor,
         packer: args.packer,
-        prefix: args.prefix
+        prefix: args.prefix,
+        columns: args.columns,
     };
     
     const password = env('password') || args.password;

@@ -23,6 +23,7 @@ const extractNojs = new ExtractTextPlugin('nojs.css');
 
 const extractView = new ExtractTextPlugin('view.css');
 const extractConfig = new ExtractTextPlugin('config.css');
+const extractNameSizeDate = new ExtractTextPlugin('columns/name-size-date.css');
 
 const plugins = [
     new HtmlWebpackPlugin({
@@ -34,6 +35,7 @@ const plugins = [
     extractNojs,
     extractView,
     extractConfig,
+    extractNameSizeDate,
 ];
 
 const rules = clean([
@@ -43,7 +45,7 @@ const rules = clean([
         loader: 'babel-loader',
     }, {
         test: /\.css$/,
-        exclude: /css\/(nojs|view|config)\.css/,
+        exclude: /css\/(nojs|view|config|columns.*)\.css/,
         use: extractMain.extract([
             'css-loader?minimize',
         ]),
@@ -51,6 +53,7 @@ const rules = clean([
     extract('nojs', extractNojs),
     extract('view', extractView),
     extract('config', extractConfig),
+    extract('columns/name-size-date', extractNameSizeDate),
     {
         test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
         loader: 'url-loader?limit=50000',
@@ -154,7 +157,7 @@ function getMinifyHtmlOptions() {
         removeStyleLinkTypeAttributes:  true,
         
         minifyJS:                       true,
-        minifyCSS:                      true
+        minifyCSS:                     false, 
     };
 }
 

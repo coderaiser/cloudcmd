@@ -1,12 +1,9 @@
 'use strict';
 
 const exit = require('./exit');
+const columns = require('./columns');
 
-module.exports.root = root;
-module.exports.editor = editor;
-module.exports.packer = packer;
-
-function root(dir, fn) {
+module.exports.root = (dir, fn) => {
     if (typeof dir !== 'string')
         throw Error('dir should be a string');
     
@@ -22,19 +19,28 @@ function root(dir, fn) {
         if (typeof fn === 'function')
             fn('root:', dir);
     });
-}
+};
 
-function editor(name) {
+module.exports.editor = (name) => {
     const reg = /^(dword|edward|deepword)$/;
     
     if (!reg.test(name))
         exit('cloudcmd --editor: could be "dword", "edward" or "deepword" only');
-}
+};
 
-function packer(name) {
+module.exports.packer = (name) => {
     const reg = /^(tar|zip)$/;
     
     if (!reg.test(name))
         exit('cloudcmd --packer: could be "tar" or "zip" only');
-}
+};
+
+module.exports.columns = (type) => {
+    const all = Object
+        .keys(columns)
+        .concat('');
+    
+    if (!~all.indexOf(type))
+        exit('cloudcmd --columns: could be "name-size-date" or "name-size-date-owner-mode"');
+};
 

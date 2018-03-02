@@ -14,6 +14,7 @@ const format = require('format-io');
 const squad = require('squad/legacy');
 const apart = require('apart');
 
+const columns = require(DIR_SERVER + 'columns');
 const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
@@ -99,6 +100,7 @@ function indexProcessing(options) {
         fm: left + right,
         prefix: prefix(),
         config: JSON.stringify(config('*')),
+        columns: columns[config('columns')],
     });
     
     return data;

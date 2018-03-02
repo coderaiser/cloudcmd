@@ -54,19 +54,8 @@ module.exports = (params) => {
     keys.forEach((name) => {
         const value = options[name];
         
-        switch(name) {
-        case 'root':
-            validate.root(value);
-            break;
-        
-        case 'editor':
-            validate.editor(value);
-            break;
-        
-        case 'packer':
-            validate.packer(value);
-            break;
-        }
+        if (/root|editor|packer|columns/.test(name))
+            validate[name](value);
         
         config(name, value);
     });
