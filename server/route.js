@@ -157,7 +157,7 @@ function route(request, response, callback) {
 }
 
 function buildIndex(json, callback) {
-    fs.readFile(getIndexPath(), 'utf8', (error, template) => {
+    fs.readFile(getIndexPath(isDev), 'utf8', (error, template) => {
         if (error)
             return callback(error);
         
