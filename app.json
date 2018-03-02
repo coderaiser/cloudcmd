@@ -82,6 +82,11 @@
           "value": "false",
           "required": false
       },
+      "CLOUDCMD_COLUMNS": {
+          "description": "set visible columns",
+          "value": "name-size-date-owner-mode",
+          "required": false
+      },
       "CLOUDCMD_CONFIRM_COPY": {
           "description": "confirm copy",
           "value": "true",
