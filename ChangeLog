@@ -1,3 +1,20 @@
+2018.03.02, v8.3.0
+
+fix:
+- (route) buildIndex: getIndexPath
+- (listeners) pop: change #hash
+
+feature:
+- (cloudcmd) --columns: add ability to set visible columns (#146)
+- (package) html-webpack-plugin v3.0.4
+- (package) limier v2.0.0
+- (package) webpack v4.0.0
+- (package) rm jscs, jshint
+- (package) jonny v2.0.3
+- (package) flop v4.0.0
+- (package) add mock-require, clear-module
+
+
 2018.02.19, v8.2.2
 
 fix:
