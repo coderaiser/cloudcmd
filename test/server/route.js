@@ -181,15 +181,14 @@ test('cloudcmd: route: keys panel', (t) => {
 });
 
 test('cloudcmd: route: no index', (t) => {
-    const name = path.join(__dirname, '../../dist/index.html');
-    const nameAfter = path.join(__dirname, '../../dist/index1.html');
+    const name = path.join(__dirname, '../../dist-dev/index.html');
+    const nameAfter = path.join(__dirname, '../../dist-dev/index1.html');
     
     fs.renameSync(name, nameAfter);
     
     before({}, (port, after) => {
         getStr(`http://localhost:${port}/`)
             .then((result) => {
-                console.log(result);
                 fs.renameSync(nameAfter, name);
                 t.equal(result.indexOf('ENOENT'), 0, 'should not found index.html');
                 t.end();
