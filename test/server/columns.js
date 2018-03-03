@@ -2,8 +2,8 @@
 
 const test = require('tape');
 const fs = require('fs');
-const columnsPath = '../../server/columns';
 const clean = require('clear-module');
+const columnsPath = '../../server/columns';
 
 test('columns', (t) => {
     const columns = require(columnsPath);

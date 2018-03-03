@@ -14,30 +14,26 @@ const format = require('format-io');
 const squad = require('squad/legacy');
 const apart = require('apart');
 
-const columns = require(DIR_SERVER + 'columns');
 const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
-const Template = require(DIR_SERVER + 'template')();
-
 const prefix = squad(prefixer, apart(config, 'prefix'));
 const isDev = process.env.NODE_ENV === 'development';
+const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
 const getIndexPath = (isDev) => {
-    const dist = isDev ? 'dist-dev' : 'dist';
+    const dist = getDist(isDev);
     return path.join(DIR, `${dist}/index.html`);
 };
 
 const FS = CloudFunc.FS;
 
-module.exports = (req, res, next) => {
-    check(req, res, next);
-    
-    route(req, res, next);
-};
+const Columns = require('./columns');
+const Template = require('./template');
 
+module.exports = route;
 module.exports._getIndexPath = getIndexPath;
 
 /**
@@ -100,7 +96,7 @@ function indexProcessing(options) {
         fm: left + right,
         prefix: prefix(),
         config: JSON.stringify(config('*')),
-        columns: columns[config('columns')],
+        columns: Columns[config('columns')],
     });
     
     return data;
@@ -110,6 +106,8 @@ function indexProcessing(options) {
  * routing of server queries
  */
 function route(request, response, callback) {
+    check(request, response, callback);
+    
     let name = ponse.getPathName(request);
     
     const isFS = RegExp('^/$|^' + FS).test(name);

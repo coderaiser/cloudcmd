@@ -1,17 +1,22 @@
 'use strict';
 
-const fs = require('fs');
-const isDev = process.NODE_ENV === 'development';
-const dir = getDirPath(isDev);
+const path = require('path');
+const readFilesSync = require('@cloudcmd/read-files-sync');
 
-module.exports = {
+const defaultColumns = {
     '': '',
-    'name-size-date': fs.readFileSync(`${dir}/name-size-date.css`, 'utf8'),
     'name-size-date-owner-mode': '',
 };
 
-function getDirPath (isDev) {
-    const dist = isDev ? 'dist-dev' : 'dist';
-    return `${__dirname}/../${dist}/columns`;
-}
+const isDev = process.NODE_ENV === 'development';
+const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
+
+const dist = getDist(isDev);
+const columnsDir = path.join(__dirname, '..', dist, 'columns');
+const columns = readFilesSync(columnsDir, 'utf8');
+
+module.exports = Object.assign(
+    columns,
+    defaultColumns
+);
 
