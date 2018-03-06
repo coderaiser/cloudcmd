@@ -1,6 +1,13 @@
 'use strict';
 
-const path = require('path');
+const fs = require('fs');
+const {
+    resolve,
+    basename,
+    extname,
+    sep,
+} = require('path');
+
 const dir = './client';
 const dirModules = './client/modules';
 const modules = './modules';
@@ -8,8 +15,8 @@ const modules = './modules';
 const {env} = process;
 const isDev = env.NODE_ENV === 'development';
 
-const dist = path.resolve(__dirname, 'dist');
-const distDev = path.resolve(__dirname, 'dist-dev');
+const dist = resolve(__dirname, 'dist');
+const distDev = resolve(__dirname, 'dist-dev');
 const devtool = isDev ? 'eval' : 'source-map';
 
 const notEmpty = (a) => a;
@@ -18,12 +25,17 @@ const clean = (array) => array.filter(notEmpty);
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const extractMain = new ExtractTextPlugin('[name].css');
-const extractNojs = new ExtractTextPlugin('nojs.css');
+const extractCSS = (a) => new ExtractTextPlugin(`${a}.css`);
+const extractMain = extractCSS('[name]');
 
-const extractView = new ExtractTextPlugin('view.css');
-const extractConfig = new ExtractTextPlugin('config.css');
-const extractNameSizeDate = new ExtractTextPlugin('columns/name-size-date.css');
+const cssNames = [
+    'nojs',
+    'view',
+    'config',
+    ...getCSSList('columns'),
+];
+
+const cssPlugins = cssNames.map(extractCSS);
 
 const plugins = [
     new HtmlWebpackPlugin({
@@ -31,11 +43,8 @@ const plugins = [
         template: 'html/index.html',
         minify: !isDev && getMinifyHtmlOptions(),
     }),
+    ...cssPlugins,
     extractMain,
-    extractNojs,
-    extractView,
-    extractConfig,
-    extractNameSizeDate,
 ];
 
 const rules = clean([
@@ -50,10 +59,7 @@ const rules = clean([
             'css-loader?minimize',
         ]),
     },
-    extract('nojs', extractNojs),
-    extract('view', extractView),
-    extract('config', extractConfig),
-    extract('columns/name-size-date', extractNameSizeDate),
+    ...cssPlugins.map(extract),
     {
         test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
         loader: 'url-loader?limit=50000',
@@ -104,6 +110,15 @@ module.exports = {
     },
 };
 
+function getCSSList(dir) {
+    const base = (a) => basename(a, extname(a))
+    const addDir = (name) => `${dir}/${name}`;
+    
+    return fs.readdirSync(`./css/${dir}`)
+      .map(base)
+      .map(addDir);
+}
+
 function externals(context, request, fn) {
     if (!isDev)
         return fn();
@@ -119,18 +134,18 @@ function externals(context, request, fn) {
 }
 
 function devtoolModuleFilenameTemplate(info) {
-    const resource = info.absoluteResourcePath.replace(__dirname + path.sep, '');
+    const resource = info.absoluteResourcePath.replace(__dirname + sep, '');
     return `file://cloudcmd/${resource}`;
 }
 
-function extract(name, extractCss) {
+function extract(extractPlugin) {
+    const {filename} = extractPlugin;
+    const loader = isDev ? 'css-loader' : 'css-loader?minimize';
+    
     return {
-        test: RegExp(`css/${name}.css`),
-        use: extractCss.extract([
-            isDev ?
-                'css-loader'
-                :
-                'css-loader?minimize'
+        test: RegExp(`css/${filename}`),
+        use: extractPlugin.extract([
+            loader
         ])
     };
 }
