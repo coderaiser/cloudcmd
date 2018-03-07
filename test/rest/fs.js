@@ -4,11 +4,9 @@ const test = require('tape');
 const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
-
 const before = require('../before');
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
-
 const _pullout = promisify(pullout);
 
 const get = promisify((url, fn) => {
@@ -25,9 +23,7 @@ test('cloudcmd: rest: fs: path', (t) => {
                 t.end();
                 after();
             })
-            .catch((error) => {
-                console.log(error);
-            });
+            .catch(console.error);
     });
 });
 
