@@ -111,12 +111,12 @@ module.exports = {
 };
 
 function getCSSList(dir) {
-    const base = (a) => basename(a, extname(a))
+    const base = (a) => basename(a, extname(a));
     const addDir = (name) => `${dir}/${name}`;
     
     return fs.readdirSync(`./css/${dir}`)
-      .map(base)
-      .map(addDir);
+        .map(base)
+        .map(addDir);
 }
 
 function externals(context, request, fn) {
