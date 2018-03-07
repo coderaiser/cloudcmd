@@ -12,8 +12,9 @@ const markdown = require(DIR + 'markdown');
 const jaguar = require('jaguar');
 const onezip = require('onezip');
 const inly = require('inly');
-const flop = require('flop');
 const pullout = require('pullout/legacy');
+const promisify = require('es6-promisify').promisify;
+const move = promisify(require('flop').move);
 const ponse = require('ponse');
 const copymitter = require('copymitter');
 const json = require('jonny');
@@ -181,7 +182,7 @@ function onPUT(name, body, callback) {
         files.from = root(files.from);
         files.to = root(files.to);
         
-        copyFiles(files, flop.move, (error) => {
+        moveFiles(files, (error) => {
             const data = !files.names ? files : files.names.slice();
             const msg = formatMsg('move', data);
             
@@ -303,8 +304,8 @@ function copy(from, to, names, fn) {
         });
 }
 
-function copyFiles(files, processFunc, callback) {
-    let names = files.names;
+function moveFiles(files, callback) {
+    let names = files.names.slice();
     
     const copy = () => {
         let isLast;
@@ -325,17 +326,13 @@ function copyFiles(files, processFunc, callback) {
         if (isLast)
             return callback();
         
-        processFunc(from, to, error => {
-            if (error)
-                return callback(error);
-            
-            copy();
-        });
+        move(from, to)
+            .then(copy)
+            .catch(callback);
     };
     
     check
         .type('callback', callback, 'function')
-        .type('processFunc', processFunc, 'function')
         .check({
             files,
         });
