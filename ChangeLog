@@ -1,3 +1,13 @@
+2018.03.14, v8.4.0
+
+feature:
+- (name-size-date) improve view
+- (columns) add name-size (#139)
+- (package) redrun v6.0.0
+- (package) url-loader v1.0.1
+- (app) add CLOUDCMD_COLUMNS
+
+
 2018.03.02, v8.3.0
 
 fix:
