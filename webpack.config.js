@@ -171,7 +171,6 @@ function getMinifyHtmlOptions() {
         removeStyleLinkTypeAttributes:  true,
         
         minifyJS:                       true,
-        minifyCSS:                     false, 
     };
 }
 

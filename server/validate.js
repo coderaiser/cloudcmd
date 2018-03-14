@@ -36,11 +36,17 @@ module.exports.packer = (name) => {
 };
 
 module.exports.columns = (type) => {
+    const addQuotes = (a) => `"${a}"`;
     const all = Object
         .keys(columns)
         .concat('');
     
+    const names = all
+        .filter(Boolean)
+        .map(addQuotes)
+        .join(', ');
+    
     if (!~all.indexOf(type))
-        exit('cloudcmd --columns: could be "name-size-date" or "name-size-date-owner-mode"');
+        exit(`cloudcmd --columns: can be only one of: ${names}`);
 };
 

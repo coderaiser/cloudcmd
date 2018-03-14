@@ -11,6 +11,7 @@ const dir = '../..';
 
 const validatePath = `${dir}/server/validate`;
 const exitPath = `${dir}/server/exit`;
+const columnsPath = `${dir}/server/columns`;
 
 const validate = require(validatePath);
 const stub = require('mock-require');
@@ -126,11 +127,16 @@ test('validate: columns: wrong', (t) => {
     const fn = sinon.stub();
     
     clean();
+    clear(columnsPath);
     require(exitPath);
     stub(exitPath, fn);
+    stub(columnsPath, {
+        'name-size-date': '',
+        'name-size': '',
+    });
     
     const {columns} = require(validatePath);
-    const msg = 'cloudcmd --columns: could be "name-size-date" or "name-size-date-owner-mode"';
+    const msg = 'cloudcmd --columns: can be only one of: "name-size-date", "name-size"';
     
     columns('hello');
     
