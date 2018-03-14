@@ -10,3 +10,8 @@
     display: none;
 }
 
+.date {
+    float: right;
+    width: 19%;
+}
+
