@@ -3,7 +3,6 @@
 const {
     join,
 } = require('path');
-const fs = require('fs');
 const test = require('tape');
 const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
@@ -36,17 +35,18 @@ test('cloudcmd: rest: cp', (t) => {
         
         mkdirp.sync(tmp);
         
+        const rmTmp = () => rimraf.sync(tmp);
+        
         put(`http://localhost:${port}/api/v1/cp`, files)
             .then(warp(_pullout, 'string'))
             .then((body) => {
                 t.equal(body, 'copy: ok("["cp.txt"]")', 'should return result');
                 t.end();
                 
-                rimraf.sync(tmp);
-                
                 after();
             })
-            .catch(console.error);
+            .catch(console.error)
+            .then(rmTmp);
     });
 });
 
