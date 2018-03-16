@@ -87,23 +87,21 @@ function sendData(params, callback) {
     const isMD = RegExp('^/markdown').test(p.name);
     
     if (isMD)
-        return markdown(p.name, p.request, (error, data) => {
-            callback(error, data);
-        });
+        return markdown(p.name, p.request, callback);
     
-    switch(p.request.method) {
+    const method = p.request.method;
+    
+    switch(method) {
     case 'GET':
-        onGET(params, callback);
-        break;
+        return onGET(params, callback);
     
     case 'PUT':
-        pullout(p.request, 'string', (error, body) => {
+        return pullout(p.request, 'string', (error, body) => {
             if (error)
                 return callback(error);
             
             onPUT(p.name, body, callback);
         });
-        break;
     }
 }
 
