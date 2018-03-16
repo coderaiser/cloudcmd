@@ -10,6 +10,7 @@ const pullout = require('pullout');
 const request = require('request');
 const before = require('../before');
 const rimraf = require('rimraf');
+const mkdirp = require('mkdirp');
 
 const fixtureDir = join(__dirname, '..', 'fixture') + '/';
 
@@ -33,7 +34,7 @@ test('cloudcmd: rest: cp', (t) => {
             ]
         };
         
-        fs.mkdirSync(tmp);
+        mkdirp.sync(tmp);
         
         put(`http://localhost:${port}/api/v1/cp`, files)
             .then(warp(_pullout, 'string'))

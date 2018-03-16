@@ -10,6 +10,7 @@ const pullout = require('pullout');
 const request = require('request');
 const before = require('../before');
 const rimraf = require('rimraf');
+const mkdirp = require('mkdirp');
 
 const fixtureDir = join(__dirname, '..', 'fixture') + '/';
 
@@ -33,7 +34,7 @@ test('cloudcmd: rest: mv', (t) => {
             ]
         };
         
-        fs.mkdirSync(tmp);
+        mkdirp.sync(tmp);
         
         const rmTmp = () => rimraf.sync(tmp);
         
