@@ -35,6 +35,8 @@ test('cloudcmd: rest: mv', (t) => {
         
         fs.mkdirSync(tmp);
         
+        const rmTmp = () => rimraf.sync(tmp);
+        
         put(`http://localhost:${port}/api/v1/mv`, files)
             .then(warp(_pullout, 'string'))
             .then((body) => {
@@ -44,11 +46,10 @@ test('cloudcmd: rest: mv', (t) => {
                 const file = fs.readFileSync(`${tmp}/mv.txt`);
                 fs.writeFileSync(`${fixtureDir}/mv.txt`, file);
                 
-                rimraf.sync(tmp);
-                
                 after();
             })
-            .catch(console.error);
+            .catch(console.error)
+            .then(rmTmp);
     });
 });
 

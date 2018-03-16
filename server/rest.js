@@ -13,13 +13,16 @@ const jaguar = require('jaguar');
 const onezip = require('onezip');
 const inly = require('inly');
 const pullout = require('pullout/legacy');
+const currify = require('currify/legacy');
 const promisify = require('es6-promisify').promisify;
-const move = promisify(require('flop').move);
+const flop = require('flop');
+const move = promisify(flop.move);
 const ponse = require('ponse');
 const copymitter = require('copymitter');
 const json = require('jonny');
 const check = require('checkup');
 
+const swap = currify((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
 
 /**
@@ -160,6 +163,13 @@ function getCMD(cmd) {
     return cmd;
 }
 
+const getMoveMsg = (files) => {
+    const data = !files.names ? files : files.names.slice();
+    const msg = formatMsg('move', data);
+    
+    return msg;
+};
+
 function onPUT(name, body, callback) {
     check
         .type('callback', callback, 'function')
@@ -172,26 +182,23 @@ function onPUT(name, body, callback) {
     const files = json.parse(body);
     
     switch(cmd) {
-    case 'mv':
+    case 'mv': {
         if (!files.from || !files.to)
             return callback(body);
         
         if (isRootAll([files.to, files.from]))
             return callback(getWin32RootMsg());
-            
-        files.from = root(files.from);
-        files.to = root(files.to);
         
-        moveFiles(files, (error) => {
-            const data = !files.names ? files : files.names.slice();
-            const msg = formatMsg('move', data);
-            
-            callback(error, msg);
-        });
+        const msg = getMoveMsg(files);
+        const fn = swap(callback, msg);
         
+        const from = root(files.from);
+        const to = root(files.to);
+        const names = files.names;
+        
+        moveFiles({from, to, names}, fn);
         break;
-    
-    case 'cp':
+    } case 'cp':
         if (!files.from || !files.names || !files.to)
             return callback(body);
         
@@ -305,26 +312,21 @@ function copy(from, to, names, fn) {
 }
 
 function moveFiles(files, callback) {
-    let names = files.names.slice();
+    if (!files.names)
+        return move(files.from, files.to)
+            .then(callback)
+            .catch(callback);
     
+    const names = files.names.slice();
     const copy = () => {
-        let isLast;
-        let name;
-        let from = files.from;
-        let to = files.to;
-        
-        if (names) {
-            isLast  = !names.length;
-            name    = names.shift();
-            from    += name;
-            to      += name;
-        } else {
-            isLast  = false;
-            names   = [];
-        }
+        const isLast = !names.length;
         
         if (isLast)
-            return callback();
+            return callback(null);
+        
+        const name = names.shift();
+        const from = path.join(files.from, name);
+        const to = path.join(files.to, name);
         
         move(from, to)
             .then(copy)
