@@ -14,9 +14,9 @@ const onezip = require('onezip');
 const inly = require('inly');
 const currify = require('currify/legacy');
 const pullout = require('pullout/legacy');
+const json = require('jonny/legacy');
 const ponse = require('ponse');
 const copymitter = require('copymitter');
-const json = require('jonny');
 const check = require('checkup');
 
 const moveFiles = require('./move-files');
