@@ -44,8 +44,7 @@ test('cloudcmd: rest: mv', (t) => {
                 t.equal(body, 'move: ok("["mv.txt"]")', 'should move');
                 t.end();
                 
-                const file = fs.readFileSync(`${tmp}/mv.txt`);
-                fs.writeFileSync(`${fixtureDir}/mv.txt`, file);
+                fs.renameSync(`${tmp}/mv.txt`, `${fixtureDir}/mv.txt`);
                 
                 after();
             })
@@ -54,3 +53,31 @@ test('cloudcmd: rest: mv', (t) => {
     });
 });
 
+test('cloudcmd: rest: mv: rename', (t) => {
+    before({}, (port, after) => {
+        const tmp = join(fixtureDir, 'tmp');
+        const files = {
+            from: '/fixture/mv.txt',
+            to: '/fixture/tmp/mv.txt',
+        };
+        
+        mkdirp.sync(tmp);
+        
+        const rmTmp = () => rimraf.sync(tmp);
+        
+        put(`http://localhost:${port}/api/v1/mv`, files)
+            .then(warp(_pullout, 'string'))
+            .then((body) => {
+                const expected = 'move: ok("{"from":"/fixture/mv.txt","to":"/fixture/tmp/mv.txt"}")';
+                
+                t.equal(body, expected, 'should move');
+                t.end();
+                
+                fs.renameSync(`${tmp}/mv.txt`, `${fixtureDir}/mv.txt`);
+                
+                after();
+            })
+            .catch(console.error)
+            .then(rmTmp);
+    });
+});

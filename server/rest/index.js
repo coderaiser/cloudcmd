@@ -1,7 +1,7 @@
 'use strict';
 
-const DIR = './';
-const DIR_COMMON = '../common/';
+const DIR = '../';
+const DIR_COMMON = DIR + '../common/';
 const path = require('path');
 
 const root = require(DIR + 'root');
@@ -12,15 +12,14 @@ const markdown = require(DIR + 'markdown');
 const jaguar = require('jaguar');
 const onezip = require('onezip');
 const inly = require('inly');
-const pullout = require('pullout/legacy');
 const currify = require('currify/legacy');
-const promisify = require('es6-promisify').promisify;
-const flop = require('flop');
-const move = promisify(flop.move);
+const pullout = require('pullout/legacy');
 const ponse = require('ponse');
 const copymitter = require('copymitter');
 const json = require('jonny');
 const check = require('checkup');
+
+const moveFiles = require('./move-files');
 
 const swap = currify((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
@@ -309,37 +308,6 @@ function copy(from, to, names, fn) {
             process.stdout.write('\n');
             fn();
         });
-}
-
-function moveFiles(files, callback) {
-    if (!files.names)
-        return move(files.from, files.to)
-            .then(callback)
-            .catch(callback);
-    
-    const names = files.names.slice();
-    const copy = () => {
-        const isLast = !names.length;
-        
-        if (isLast)
-            return callback(null);
-        
-        const name = names.shift();
-        const from = path.join(files.from, name);
-        const to = path.join(files.to, name);
-        
-        move(from, to)
-            .then(copy)
-            .catch(callback);
-    };
-    
-    check
-        .type('callback', callback, 'function')
-        .check({
-            files,
-        });
-    
-    copy();
 }
 
 module.exports._isRootWin32 = isRootWin32;
