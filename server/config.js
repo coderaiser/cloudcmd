@@ -22,7 +22,7 @@ const writejson = require('writejson');
 const tryCatch = require('try-catch');
 const exec = require('execon');
 const criton = require('criton');
-const HOME = require('os-homedir')();
+const HOME = require('os').homedir();
 
 const manageConfig = squad(traverse, cryptoPass);
 const save = promisify(_save);
