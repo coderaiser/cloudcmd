@@ -13,17 +13,21 @@ const {
     CurrentInfo:Info,
 } = DOM;
 
+const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
+
 CloudCmd.Konsole = ConsoleProto;
 
 function ConsoleProto() {
-    const noop = () => {};
+    let konsole;
+    const {config} = CloudCmd;
     
-    if (!CloudCmd.config('console'))
+    const noop = () => {};
+    const cd = currify((fn, dir) => fn(`cd ${rmLastSlash(dir)}`));
+    
+    if (!config('console'))
         return {
             show: noop
         };
-    
-    const config = CloudCmd.config;
     
     const Name = 'Konsole';
     const TITLE = 'Console';
@@ -54,7 +58,7 @@ function ConsoleProto() {
     };
     
     this.clear = () => {
-        Console.clear();
+        konsole.clear();
     };
     
     function getPrefix() {
@@ -72,20 +76,38 @@ function ConsoleProto() {
         };
     }
     
+    function onPath(path) {
+        if (Info.dirPath === path)
+            return;
+        
+        CloudCmd.loadDir({
+            path,
+        });
+    }
+    
+    const getDirPath = () => {
+        if (config('syncConsolePath'))
+            return Info.dirPath;
+    };
+    
     function create(callback) {
         const options = {
+            cwd: getDirPath(),
             env: getEnv(),
             prefix: getPrefix(),
             socketPath: CloudCmd.PREFIX,
         };
         
-        Console(Element, options, (spawn) => {
+        konsole = Console(Element, options, (spawn) => {
             spawn.on('connect', exec.with(authCheck, spawn));
+            spawn.on('path', config.if('syncConsolePath', onPath));
+            
+            CloudCmd.on('active-dir', config.if('syncConsolePath', cd(spawn.handler)));
             
             exec(callback);
         });
         
-        Console.addShortCuts({
+        konsole.addShortCuts({
             'P': () => {
                 const command = Console.getPromptText();
                 const path = DOM.getCurrentDirPath();
@@ -112,7 +134,7 @@ function ConsoleProto() {
         
         CloudCmd.View.show(Element, {
             afterShow: () => {
-                Console.focus();
+                konsole.focus();
                 exec(callback);
             }
         });

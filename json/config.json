@@ -27,6 +27,7 @@
     "configDialog": true,
     "onePanelMode": false,
     "console": true,
+    "syncConsolePath": false,
     "terminal": false,
     "terminalPath": "",
     "showConfig": false,

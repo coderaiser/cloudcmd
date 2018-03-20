@@ -3,13 +3,15 @@
 /* global Util, DOM */
 
 const itype = require('itype/legacy');
-const emitify = require('emitify/legacy');
+const Emitify = require('emitify/legacy');
 const inherits = require('inherits');
 const rendy = require('rendy');
 const exec = require('execon');
 const Images = require('./dom/images');
 const join = require('join-io/www/join');
 const jonny = require('jonny/legacy');
+const currify = require('currify/legacy');
+
 const bind = (f, ...a) => () => f(...a);
 
 const {
@@ -204,6 +206,7 @@ function CloudCmdProto(Util, DOM) {
         CloudCmd.PREFIX_URL = prefix + apiURL;
         
         CloudCmd.config = (key) => config[key];
+        CloudCmd.config.if = currify((key, fn, a) => config[key] && fn(a));
         CloudCmd._config = (key, value) => {
             /*
              * should be called from config.js only
@@ -584,7 +587,7 @@ function CloudCmdProto(Util, DOM) {
         const path = Info.dirPath || parentDirPath;
         
         CloudCmd.loadDir({path}, () => {
-            const panel = Info.panel;
+            const {panel} = Info;
             const current = DOM.getCurrentByName(dir);
             const first = DOM.getFiles(panel)[0];
             

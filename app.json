@@ -37,6 +37,11 @@
           "value": "true",
           "required": false
       },
+      "CLOUDCMD_SYNC_CONSOLE_PATH": {
+          "description": "sync console path",
+          "value": "false",
+          "required": false
+      },
       "CLOUDCMD_TERMINAL": {
           "description": "enable terminal",
           "value": "true",

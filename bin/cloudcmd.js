@@ -41,6 +41,7 @@ const args = require('minimist')(argv.slice(2), {
         'progress',
         'config-dialog',
         'console',
+        'sync-console-path',
         'contact',
         'terminal',
         'one-panel-mode',
@@ -68,6 +69,7 @@ const args = require('minimist')(argv.slice(2), {
         contact     : choose(env.bool('contact'), config('contact')),
         terminal    : choose(env.bool('terminal'), config('terminal')),
         
+        'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'terminal-path': env('terminal_path') || config('terminalPath'),
         'one-panel-mode': choose(env.bool('one_panel_mode'), config('onePanelMode')),
@@ -114,6 +116,7 @@ function main() {
     config('username', args.username);
     config('progress', args.progress);
     config('console', args.console);
+    config('syncConsolePath', args['sync-console-path']);
     config('contact', args.contact);
     config('terminal', args.terminal);
     config('terminalPath', args['terminal-path']);

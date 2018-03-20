@@ -89,6 +89,7 @@ Cloud Commander supports command line parameters:
 | `--contact`                   | enable contact
 | `--config-dialog`             | enable config dialog
 | `--console`                   | enable console
+| `--sync-console-path`         | sync console path
 | `--terminal`                  | enable terminal
 | `--terminal-path`             | set terminal path
 | `--vim`                       | enable vim hot keys
@@ -106,6 +107,7 @@ Cloud Commander supports command line parameters:
 | `--no-contact`                | disable contact
 | `--no-config-dialog`          | disable config dialog
 | `--no-console`                | disable console
+| `--no-sync-console-path`      | do not sync console path
 | `--no-terminal`               | disable terminal
 | `--no-vim`                    | disable vim hot keys
 | `--no-columns`                | set visible default columns
@@ -376,6 +378,7 @@ Here is description of options:
     "contact"           : true,     /* enable contact                           */
     "configDialog"      : true,     /* enable config dialog                     */
     "console"           : true,     /* enable console                           */
+    "syncConsolePath"   : false     /* do not sync console path                 */
     "terminal"          : false,    /* disable terminal                         */
     "terminalPath"      : '',       /* path of a terminal                       */
     "vim"               : false,    /* disable vim hot keys                     */
@@ -393,6 +396,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_CONTACT` - enable contact
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_CONSOLE` - enable console
+- `CLOUDCMD_SYNC_CONSOLE_PATH` - sync console path
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
 - `CLOUDCMD_AUTH` - enable authentication
