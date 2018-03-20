@@ -1,3 +1,17 @@
+2018.03.20, v8.5.0
+
+fix:
+- (rest) jonny: node v4 support
+
+feature:
+- (cloudcmd) add --sync-console-path
+- (package) console-io v6.0.1
+- (package) html-webpack-exclude-assets-plugin v0.0.6
+- (package) html-webpack-plugin v3.0.7
+- (cloudcmd) add emitter
+- (package) os-homedir -> os.homedir
+
+
 2018.03.16, v8.4.1
 
 fix:
