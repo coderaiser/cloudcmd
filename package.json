@@ -113,7 +113,7 @@
     "apart": "^1.0.1",
     "chalk": "^2.0.1",
     "checkup": "^1.3.0",
-    "console-io": "^5.0.0",
+    "console-io": "^6.0.1",
     "copymitter": "^2.0.0",
     "criton": "^1.0.0",
     "currify": "^2.0.3",
