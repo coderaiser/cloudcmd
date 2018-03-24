@@ -1,3 +1,9 @@
+2018.03.24, v8.5.1
+
+fix:
+- (operation) progress of copy/move (#155)
+
+
 2018.03.20, v8.5.0
 
 fix:
