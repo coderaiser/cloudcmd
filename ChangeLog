@@ -1,3 +1,9 @@
+2018.03.24, v8.5.2
+
+fix:
+- (cloudcmd) rm redundant dir 1
+
+
 2018.03.24, v8.5.1
 
 fix:
