@@ -289,11 +289,11 @@ function OperationProto(operation, data) {
         }
     };
     
-    this.copy = processFiles(copyFn, {
+    this.copy = processFiles({
         type: 'copy',
     });
     
-    this.move = processFiles(moveFn, {
+    this.move = processFiles({
         type: 'move'
     });
     
@@ -394,7 +394,7 @@ function OperationProto(operation, data) {
      * @param data
      * @param operation
      */
-    function _processFiles(operation, options, data) {
+    function _processFiles(options, data) {
         let selFiles, files;
         let panel;
         let shouldAsk;
@@ -436,6 +436,7 @@ function OperationProto(operation, data) {
         const isCopy = type === 'copy';
         const option = isCopy ? 'confirmCopy' : 'confirmMove';
         const title = isCopy ? 'Copy' : 'Rename/Move';
+        const operation = isCopy ? copyFn : moveFn;
         
         if (shouldAsk && config(option))
             return message(title, to, names)
