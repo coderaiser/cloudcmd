@@ -13,6 +13,7 @@ const {
     _authenticate,
     _getPrefix,
     _authCheck,
+    _authCheckNew,
     _replacePrefix,
     _replaceDist,
 } = cloudcmd;
@@ -118,7 +119,62 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
     t.end();
 });
 
-test('cloudcmd: authCheck: success', (t) => {
+test('cloudcmd: authCheckNew: reject', (t) => {
+    const auth = config('auth');
+    const accept = sinon.stub();
+    const reject = sinon.stub();
+    const username = 'root';
+    const password = 'toor';
+    
+    const set = credentials();
+    const reset = set('hello', 'world');
+    config('auth', true);
+    
+    _authCheckNew(accept, reject, username, password);
+    
+    config('auth', auth);
+    reset();
+    
+    t.ok(reject.called, 'should accept');
+    t.end();
+});
+
+test('cloudcmd: authCheckNew: accept', (t) => {
+    const auth = config('auth');
+    const accept = sinon.stub();
+    const reject = sinon.stub();
+    const username = 'root';
+    const password = 'toor';
+    
+    const set = credentials();
+    const reset = set(username, password);
+    config('auth', true);
+    
+    _authCheckNew(accept, reject, username, password);
+    
+    config('auth', auth);
+    reset();
+    
+    t.ok(accept.called, 'should accept');
+    t.end();
+});
+
+test('cloudcmd: authCheckNew: accept: no auth', (t) => {
+    const auth = config('auth');
+    const accept = sinon.stub();
+    const reject = sinon.stub();
+    const username = 'root';
+    const password = 'toor';
+    
+    config('auth', false);
+    _authCheckNew(accept, reject, username, password);
+    config('auth', auth);
+    
+    t.ok(accept.called, 'should accept');
+    t.end();
+});
+
+test('cloudcmd: authCheckNew: reject', (t) => {
     const auth = config('auth');
     const success = sinon.stub();
     const on = sinon.stub;

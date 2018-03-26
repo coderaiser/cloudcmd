@@ -1,11 +1,7 @@
 /* global CloudCmd */
 /* global Util */
 /* global DOM */
-/* global spero */
-/* global remedy */
-/* global ishtar */
-/* global salam */
-/* global omnes */
+/* global fileop */
 
 'use strict';
 
@@ -14,17 +10,22 @@ CloudCmd.Operation = OperationProto;
 const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const exec = require('execon');
-const forEachKey = require('../../../common/for-each-key');
 
 const RESTful = require('../../dom/rest');
 const removeExtension = require('./remove-extension');
+const setListeners = require('./set-listeners');
+
+const removeQuery = (a) => a.replace(/\?.*/, '');
 
 function OperationProto(operation, data) {
     const Name = 'Operation';
-    const TITLE = CloudCmd.TITLE;
-    const {config} = CloudCmd;
+    const {
+        TITLE,
+        config,
+    } = CloudCmd;
     const {Dialog, Images} = DOM;
-    const create = wraptile(_create);
+    const initOperations = wraptile(_initOperations);
+    const authCheck = wraptile(_authCheck);
     
     let Loaded;
     
@@ -62,7 +63,7 @@ function OperationProto(operation, data) {
                 if (!config('progress'))
                     return callback();
                 
-                load(create(CloudCmd.PREFIX, callback));
+                load(initOperations(CloudCmd.PREFIX, callback));
             },
             () => {
                 Loaded = true;
@@ -72,95 +73,62 @@ function OperationProto(operation, data) {
         ]);
     }
     
-    function authCheck(spawn, ok) {
+    function _authCheck(spawn, ok) {
+        const accept = wraptile(ok);
+        const alertDialog = wraptile(Dialog.alert);
+        
         if (!config('auth'))
-            return ok();
+            return ok(spawn);
         
-        spawn.on('accept', ok);
-        spawn.on('reject', () => {
-            Dialog.alert(TITLE, 'Wrong credentials!');
-        });
-        
+        spawn.on('accept', accept(spawn));
+        spawn.on('reject', alertDialog (TITLE, 'Wrong credentials!'));
         spawn.emit('auth', config('username'), config('password'));
     }
     
-    function _initSpero(prefix, fn) {
-        spero(prefix + '/spero', prefix, (copier) => {
+    function _initOperations(socketPrefix, fn) {
+        const prefix = `${socketPrefix}/fileop`;
+        fileop({prefix, socketPrefix}, (e, operator) => {
             fn();
             
-            copier.on('connect', () => {
-                authCheck(copier, () => {
-                    copyFn = (data, callback) => {
-                        setListeners(copier, callback);
-                        copier.copy(data.from, data.to, data.names);
-                    };
-                });
-            });
-            
-            copier.on('disconnect', () => {
-                copyFn = RESTful.cp;
-            });
+            operator.on('connect', authCheck(operator, onConnect));
+            operator.on('disconnect', onDisconnect);
         });
     }
     
-    function _initRemedy(prefix, fn) {
-        remedy(prefix + '/remedy', prefix, (remover) => {
-            fn();
-            remover.on('connect', () => {
-                authCheck(remover, () => {
-                    deleteFn = (from, files, callback) => {
-                        setListeners(remover, callback);
-                        from = from.replace(/\?.*/, '');
-                        remover.remove(from, files);
-                    };
-                });
-            });
-            
-            remover.on('disconnect', () => {
-                deleteFn = RESTful.delete;
-            });
-        });
+    function onConnect(operator) {
+        packTarFn = (data, callback) => {
+            operator.tar(data.from, data.to, data.names)
+                .then(setListeners({noContinue: true}, callback));
+        };
+        
+        packZipFn = (data, callback) => {
+            operator.zip(data.from, data.to, data.names)
+                .then(setListeners({noContinue: true}, callback));
+        };
+        
+        deleteFn = (from, files, callback) => {
+            from = removeQuery(from);
+            operator.remove(from, files)
+                .then(setListeners(callback));
+        };
+        
+        copyFn = (data, callback) => {
+            operator.copy(data.from, data.to, data.names)
+                .then(setListeners(callback));
+        };
+        
+        extractFn = (data, callback) => {
+            operator.extract(data.from, data.to)
+                .then(setListeners({noContinue: true}, callback));
+        };
     }
     
-    function _setTarPacker(prefix, name, pack, fn) {
-        pack(prefix + '/' + name, prefix, (packer) => {
-            fn();
-            packer.on('connect', () => {
-                authCheck(packer, () => {
-                    packTarFn = (data, callback) => {
-                        setListeners(packer, {noContinue: true}, callback);
-                        packer.pack(data.from, data.to, data.names);
-                    };
-                });
-            });
-            
-            packer.on('disconnect', () => {
-                packTarFn = RESTful.pack;
-            });
-        });
-    }
-    
-    function _setZipPacker(prefix, name, pack, fn) {
-        pack(prefix + '/' + name, prefix, (packer) => {
-            fn();
-            packer.on('connect', () => {
-                authCheck(packer, () => {
-                    packZipFn = (data, callback) => {
-                        setListeners(packer, {noContinue: true}, callback);
-                        packer.pack(data.from, data.to, data.names);
-                    };
-                });
-            });
-            
-            packer.on('disconnect', () => {
-                packZipFn = RESTful.pack;
-            });
-        });
-    }
-    
-    function _initPacker(prefix, fn) {
-        _setZipPacker(prefix, 'salam', salam, fn);
-        _setTarPacker(prefix, 'ishtar', ishtar, fn);
+    function onDisconnect() {
+        packZipFn = RESTful.pack;
+        packTarFn = RESTful.pack;
+        deleteFn = RESTful.delete;
+        copyFn = RESTful.cp;
+        extractFn = RESTful.extract;
     }
     
     function getPacker(type) {
@@ -168,88 +136,6 @@ function OperationProto(operation, data) {
             return packZipFn;
         
         return packTarFn;
-    }
-    
-    function _initExtractor(prefix, fn) {
-        omnes(prefix + '/omnes', prefix, (packer) => {
-            fn();
-            packer.on('connect', () => {
-                authCheck(packer, () => {
-                    extractFn = (data, callback) => {
-                        setListeners(packer, {noContinue: true}, callback);
-                        packer.extract(data.from, data.to);
-                    };
-                });
-            });
-            
-            packer.on('disconnect', () => {
-                extractFn = RESTful.extract;
-            });
-        });
-    }
-    
-    function _create(prefix, callback) {
-        const initSpero = currify(_initSpero);
-        const initRemedy = currify(_initRemedy);
-        const initPacker = currify(_initPacker);
-        const initExtractor = currify(_initExtractor);
-        
-        exec.parallel([
-            initSpero(prefix),
-            initRemedy(prefix),
-            initPacker(prefix),
-            initExtractor(prefix)
-        ], callback);
-    }
-    
-    function setListeners(emitter, options, callback) {
-        if (!callback) {
-            callback = options;
-            options = {};
-        }
-        
-        let done;
-        let lastError;
-        
-        const removeListener = emitter.removeListener.bind(emitter);
-        const on = emitter.on.bind(emitter);
-        
-        const listeners = {
-            progress: (value) => {
-                done = value === 100;
-                Images.setProgress(value);
-            },
-            
-            end: () => {
-                Images
-                    .hide()
-                    .clearProgress();
-                
-                forEachKey(removeListener, listeners);
-                
-                if (lastError || done)
-                    callback(lastError);
-            },
-            
-            error: (error) => {
-                lastError = error;
-                
-                if (options.noContinue) {
-                    listeners.end(error);
-                    Dialog.alert(TITLE, error);
-                    return;
-                }
-                
-                Dialog.confirm(TITLE, error + '\n Continue?')
-                    .then(() => {
-                        emitter.continue();
-                    }, () => {
-                        emitter.abort();
-                    });
-            }
-        };
-        
-        forEachKey(on, listeners);
     }
     
     this.hide = () => {
@@ -260,31 +146,23 @@ function OperationProto(operation, data) {
         if (!Loaded)
             return;
         
-        switch(operation) {
-        case 'copy':
-            Operation.copy(data);
-            break;
+        if (operation === 'copy')
+            return Operation.copy(data);
         
-        case 'move':
-            Operation.move(data);
-            break;
+        if (operation === 'move')
+            return Operation.move(data);
         
-        case 'delete':
-            Operation.delete();
-            break;
+        if (operation === 'delete')
+            return Operation.delete();
         
-        case 'delete:silent':
-            Operation.deleteSilent();
-            break;
+        if (operation === 'delete:silent')
+            return Operation.deleteSilent();
         
-        case 'pack':
-            Operation.pack();
-            break;
+        if (operation === 'pack')
+            return Operation.pack();
         
-        case 'extract':
-            Operation.extract();
-            break;
-        }
+        if (operation === 'extract')
+            return Operation.extract();
     };
     
     this.copy = processFiles({
@@ -566,17 +444,9 @@ function OperationProto(operation, data) {
     
     function load(callback) {
         const prefix = CloudCmd.PREFIX;
-        const files = [
-            '/spero/spero.js',
-            '/remedy/remedy.js',
-            '/ishtar/ishtar.js',
-            '/salam/salam.js',
-            '/omnes/omnes.js'
-        ].map((name) => {
-            return prefix + name;
-        });
+        const file = `${prefix}/fileop/fileop.js`;
         
-        DOM.load.parallel(files, (error) => {
+        DOM.load.js(file, (error) => {
             if (error) {
                 Dialog.alert(TITLE, error.message);
                 return exec(callback);
