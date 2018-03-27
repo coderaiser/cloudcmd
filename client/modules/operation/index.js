@@ -14,6 +14,7 @@ CloudCmd.Operation = OperationProto;
 const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const exec = require('execon');
+const forEachKey = require('../../../common/for-each-key');
 
 const RESTful = require('../../dom/rest');
 const removeExtension = require('./remove-extension');
@@ -210,6 +211,9 @@ function OperationProto(operation, data) {
         let done;
         let lastError;
         
+        const removeListener = emitter.removeListener.bind(emitter);
+        const on = emitter.on.bind(emitter);
+        
         const listeners = {
             progress: (value) => {
                 done = value === 100;
@@ -221,9 +225,7 @@ function OperationProto(operation, data) {
                     .hide()
                     .clearProgress();
                 
-                Object.keys(listeners).forEach((name) => {
-                    emitter.removeListener(name, listeners[name]);
-                });
+                forEachKey(removeListener, listeners);
                 
                 if (lastError || done)
                     callback(lastError);
@@ -247,11 +249,7 @@ function OperationProto(operation, data) {
             }
         };
         
-        const events = Object.keys(listeners);
-        
-        events.forEach((name) => {
-            emitter.on(name, listeners[name]);
-        });
+        forEachKey(on, listeners);
     }
     
     this.hide = () => {

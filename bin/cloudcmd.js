@@ -204,6 +204,7 @@ function readConfig(name) {
     const fs = require('fs');
     const tryCatch = require('try-catch');
     const jju = require('jju');
+    const forEachKey = require('../common/for-each-key');
     
     const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
         mode: 'json'
@@ -216,23 +217,21 @@ function readConfig(name) {
     if (error)
         return exit(error.message);
     
-    Object.keys(data).forEach((item) => {
-        config(item, data[item]);
-    });
+    forEachKey(config, data);
 }
 
 function help() {
     const bin = require('../json/help');
+    const forEachKey = require('../common/for-each-key');
+    const currify = require('currify/legacy');
     const usage = 'Usage: cloudcmd [options]';
     const url = Info.homepage;
+    const log = currify((a, b, c) => console.log(a, b, c));
     
     console.log(usage);
     console.log('Options:');
     
-    Object.keys(bin).forEach((name) => {
-        console.log('  %s %s', name, bin[name]);
-    });
-    
+    forEachKey(log('  %s %s'), bin);
     console.log('\nGeneral help using Cloud Commander: <%s>', url);
 }
 
