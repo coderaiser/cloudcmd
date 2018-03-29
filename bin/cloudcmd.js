@@ -137,7 +137,7 @@ function main() {
         root: args.root || '/', /* --no-root */
         editor: args.editor,
         packer: args.packer,
-        prefix: args.prefix,
+        prefix: args.prefix || '', /* --no-prefix */
         columns: args.columns,
     };
     
