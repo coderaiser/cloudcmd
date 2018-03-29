@@ -584,7 +584,7 @@ function CloudCmdProto(Util, DOM) {
         if (dirPath === parentDirPath)
             return;
         
-        const path = Info.dirPath || parentDirPath;
+        const path = parentDirPath;
         
         CloudCmd.loadDir({path}, () => {
             const {panel} = Info;
