@@ -79,7 +79,7 @@ function getHost() {
     return href;
 }
 
-function initSocket(error) {
+function initSocket() {
     const href = getHost();
     const prefix = CloudCmd.PREFIX;
     const FIVE_SECONDS = 5000;
@@ -94,9 +94,6 @@ function initSocket(error) {
         onSave(data);
         socket.send(data);
     };
-    
-    if (error)
-        return;
     
     authCheck(socket);
     

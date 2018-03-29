@@ -13,7 +13,7 @@ const {
     _authenticate,
     _getPrefix,
     _authCheck,
-    _authCheckNew,
+    _auth,
     _replacePrefix,
     _replaceDist,
 } = cloudcmd;
@@ -119,7 +119,7 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
     t.end();
 });
 
-test('cloudcmd: authCheckNew: reject', (t) => {
+test('cloudcmd: auth: reject', (t) => {
     const auth = config('auth');
     const accept = sinon.stub();
     const reject = sinon.stub();
@@ -130,7 +130,7 @@ test('cloudcmd: authCheckNew: reject', (t) => {
     const reset = set('hello', 'world');
     config('auth', true);
     
-    _authCheckNew(accept, reject, username, password);
+    _auth(accept, reject, username, password);
     
     config('auth', auth);
     reset();
@@ -139,7 +139,7 @@ test('cloudcmd: authCheckNew: reject', (t) => {
     t.end();
 });
 
-test('cloudcmd: authCheckNew: accept', (t) => {
+test('cloudcmd: auth: accept', (t) => {
     const auth = config('auth');
     const accept = sinon.stub();
     const reject = sinon.stub();
@@ -150,7 +150,7 @@ test('cloudcmd: authCheckNew: accept', (t) => {
     const reset = set(username, password);
     config('auth', true);
     
-    _authCheckNew(accept, reject, username, password);
+    _auth(accept, reject, username, password);
     
     config('auth', auth);
     reset();
@@ -159,7 +159,7 @@ test('cloudcmd: authCheckNew: accept', (t) => {
     t.end();
 });
 
-test('cloudcmd: authCheckNew: accept: no auth', (t) => {
+test('cloudcmd: auth: accept: no auth', (t) => {
     const auth = config('auth');
     const accept = sinon.stub();
     const reject = sinon.stub();
@@ -167,14 +167,14 @@ test('cloudcmd: authCheckNew: accept: no auth', (t) => {
     const password = 'toor';
     
     config('auth', false);
-    _authCheckNew(accept, reject, username, password);
+    _auth(accept, reject, username, password);
     config('auth', auth);
     
     t.ok(accept.called, 'should accept');
     t.end();
 });
 
-test('cloudcmd: authCheckNew: reject', (t) => {
+test('cloudcmd: auth: reject', (t) => {
     const auth = config('auth');
     const success = sinon.stub();
     const on = sinon.stub;

@@ -12,6 +12,7 @@ const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
 const fullstore = require('fullstore/legacy');
 const currify = require('currify/legacy');
+const wraptile = require('wraptile/legacy');
 const squad = require('squad/legacy');
 const promisify = require('es6-promisify').promisify;
 const pullout = promisify(require('pullout/legacy'));
@@ -20,7 +21,6 @@ const jonny = require('jonny/legacy');
 const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');
-const exec = require('execon');
 const criton = require('criton');
 const HOME = require('os').homedir();
 
@@ -56,17 +56,18 @@ if (error && error.code !== 'ENOENT')
     exit(`cloudcmd --config ${ConfigHome}: ${error.message}`);
 
 const config = Object.assign({}, rootConfig, configHome);
+const connectionWraped = wraptile(connection);
 
 module.exports          = manage;
 module.exports.save     = _save;
 module.exports.middle   = middle;
-module.exports.listen   = (socket, authCheck) => {
-    check(socket, authCheck);
+module.exports.listen   = (socket, auth) => {
+    check(socket, auth);
     
     if (!manage('configDialog'))
         return middle;
     
-    listen(socket, authCheck);
+    listen(socket, auth);
     
     return middle;
 };
@@ -88,16 +89,16 @@ function _save(callback) {
     writejson(ConfigHome, config, callback);
 }
 
-function listen(sock, authCheck) {
+function listen(sock, auth) {
     const prefix = manage('prefix');
     
     sock.of(prefix + '/config')
         .on('connection', (socket) => {
-            const connect = exec.with(connection, socket);
-            
-            exec.if(!manage('auth'), connect, (fn) => {
-                authCheck(socket, fn);
-            });
+            if (!manage('auth'))
+                return connection(socket);
+             
+            const reject = () => socket.emit('reject');
+            socket.on('auth', auth(connectionWraped(socket), reject));
         });
 }
 
@@ -206,11 +207,11 @@ function cryptoPass(json) {
     });
 }
 
-function check(socket, authCheck) {
+function check(socket, auth) {
     if (!socket)
         throw Error('socket could not be empty!');
     
-    if (authCheck && typeof authCheck !== 'function')
-        throw Error('authCheck should be function!');
+    if (auth && typeof auth !== 'function')
+        throw Error('auth should be function!');
 }
 

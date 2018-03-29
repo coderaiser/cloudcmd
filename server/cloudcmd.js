@@ -5,7 +5,7 @@ const DIR_ROOT = DIR + '../';
 const DIR_COMMON = DIR + '../common/';
 
 const cloudfunc = require(DIR_COMMON + 'cloudfunc');
-const auth = require(DIR + 'auth');
+const authentication = require(DIR + 'auth');
 const config = require(DIR + 'config');
 const modulas = require(DIR + 'modulas');
 const rest = require(DIR + 'rest');
@@ -27,7 +27,7 @@ const deepword = require('deepword');
 const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
 
-const authCheckNew = currify(_authCheckNew);
+const auth = currify(_auth);
 const authenticate = currify(_authenticate);
 const setUrl = currify(_setUrl);
 
@@ -94,8 +94,8 @@ function authCheck(socket, success) {
     socket.on('auth', authenticate(socket, success));
 }
 
-module.exports._authCheckNew = _authCheckNew;
-function _authCheckNew(accept, reject, username, password) {
+module.exports._auth = _auth;
+function _auth(accept, reject, username, password) {
     if (!config('auth'))
         return accept();
     
@@ -123,7 +123,7 @@ function _authenticate(socket, success, name, pass) {
 function listen(prefix, socket) {
     prefix = getPrefix(prefix);
     
-    config.listen(socket, authCheck);
+    config.listen(socket, auth);
     
     edward.listen(socket, {
         root,
@@ -145,7 +145,7 @@ function listen(prefix, socket) {
     
     fileop.listen(socket, {
         root,
-        authCheck: authCheckNew,
+        auth,
         prefix: prefix + '/fileop',
     });
     
@@ -210,7 +210,7 @@ function cloudcmd(prefix, plugins, modules) {
         
         setUrl(prefix),
         logout,
-        auth(),
+        authentication(),
         config.middle,
         
         modules && modulas(modules),
