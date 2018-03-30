@@ -127,7 +127,7 @@ function listen(prefix, socket) {
     
     edward.listen(socket, {
         root,
-        authCheck,
+        auth,
         prefix: prefix + '/edward',
     });
     
