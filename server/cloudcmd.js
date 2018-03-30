@@ -28,7 +28,6 @@ const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
 
 const auth = currify(_auth);
-const authenticate = currify(_authenticate);
 const setUrl = currify(_setUrl);
 
 const root = () => config('root');
@@ -86,14 +85,6 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-module.exports._authCheck = authCheck;
-function authCheck(socket, success) {
-    if (!config('auth'))
-        return success();
-    
-    socket.on('auth', authenticate(socket, success));
-}
-
 module.exports._auth = _auth;
 function _auth(accept, reject, username, password) {
     if (!config('auth'))
@@ -106,18 +97,6 @@ function _auth(accept, reject, username, password) {
         return accept();
     
     reject();
-}
-
-module.exports._authenticate = _authenticate;
-function _authenticate(socket, success, name, pass) {
-    const isName = name === config('username');
-    const isPass = pass === config('password');
-    
-    if (!isName || !isPass)
-        return socket.emit('reject');
-    
-    success();
-    socket.emit('accept');
 }
 
 function listen(prefix, socket) {

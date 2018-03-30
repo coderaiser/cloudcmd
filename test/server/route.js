@@ -7,9 +7,14 @@ const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
 
-const routePath = '../../server/route';
+const rootDir = '../..';
+
+const routePath = `${rootDir}/server/route`;
+const beforePath = '../before';
+const configPath = `${rootDir}/server/config`;
+
 const route = require(routePath);
-const before = require('../before');
+const before = require(beforePath);
 
 const clean = require('clear-module');
 
@@ -180,23 +185,6 @@ test('cloudcmd: route: keys panel', (t) => {
     });
 });
 
-test('cloudcmd: route: no index', (t) => {
-    const name = path.join(__dirname, '../../dist-dev/index.html');
-    const nameAfter = path.join(__dirname, '../../dist-dev/index1.html');
-    
-    fs.renameSync(name, nameAfter);
-    
-    before({}, (port, after) => {
-        getStr(`http://localhost:${port}/`)
-            .then((result) => {
-                fs.renameSync(nameAfter, name);
-                t.equal(result.indexOf('ENOENT'), 0, 'should not found index.html');
-                t.end();
-                after();
-            });
-    });
-});
-
 test('cloudcmd: route: getIndexPath: production', (t) => {
     const isDev = false;
     const name = path.join(__dirname, '..', '..', 'dist', 'index.html');
@@ -294,6 +282,7 @@ test('cloudcmd: route: realpath: error', (t) => {
     
     clean('../before');
     clean(routePath);
+    clean(configPath);
     
     const before = require('../before');
     const root = path.join(__dirname, '..', 'fixture');

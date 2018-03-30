@@ -1,13 +1,22 @@
 'use strict';
 
+const path = require('path');
+
 const test = require('tape');
 const io = require('socket.io-client');
 
-const before = require('./before');
+const configPath = path.join(__dirname, '../..', 'server', 'config');
+const before = require('../before');
+const configFn = require(configPath);
 
 test('cloudcmd: console: enabled by default', (t) => {
-    before({}, (port, after) => {
+    const config = {
+        auth: false
+    };
+    
+    before({config}, (port, after) => {
         const socket = io(`http://localhost:${port}/console`);
+        socket.emit('auth', configFn('username'), configFn('password'));
         
         socket.once('data', (data) => {
             socket.close();
@@ -23,6 +32,7 @@ test('cloudcmd: console: enabled', (t) => {
     
     before({config}, (port, after) => {
         const socket = io(`http://localhost:${port}/console`);
+        socket.emit('auth', configFn('username'), configFn('password'));
         
         socket.once('data', (data) => {
             socket.close();

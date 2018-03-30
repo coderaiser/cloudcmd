@@ -14,8 +14,16 @@ const exitPath = `${dir}/server/exit`;
 const columnsPath = `${dir}/server/columns`;
 
 const validate = require(validatePath);
-const stub = require('mock-require');
+//const stub = require('mock-require');
 const clear = require('clear-module');
+
+const {cache, resolve} = require;
+const stub = (name, exports) => {
+    require(name);
+    
+    const resolved = resolve(name);
+    cache[resolved].exports = exports;
+};
 
 test('validate: root: bad', (t) => {
     const config = {

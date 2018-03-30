@@ -10,17 +10,16 @@ const sinon = diff(require('sinon'));
 
 const root = '../../';
 const dir = root + 'server/';
-const config = require(dir + 'config');
+const configPath = dir + 'config';
+
+const config = require(configPath);
 const {_cryptoPass} = config;
 const {apiURL} = require(root + 'common/cloudfunc');
+const clean = require('clear-module');
 
 const pathHomeConfig = path.join(os.homedir(), '.cloudcmd.json');
 const pathConfig = path.join(__dirname, '..', '..', 'json', 'config.json');
 const fixture = require('./config.fixture');
-
-const clean = (name) => {
-    delete require.cache[require.resolve(name)];
-};
 
 function readConfig() {
     return readjson.sync.try(pathHomeConfig) || require(pathConfig);
@@ -58,11 +57,11 @@ test('config: manage: get', (t) => {
 });
 
 test('config: manage: get: *', (t) => {
-    clean(dir + 'config');
+    clean(configPath);
     
-    const config = require(dir + 'config');
+    const config = require(configPath);
     const data = config('*');
-    const expected = Object.assign({}, require(pathConfig), readConfig());
+    const expected = readConfig();
     
     t.deepEqual(data, expected, 'should return config data');
     t.end();

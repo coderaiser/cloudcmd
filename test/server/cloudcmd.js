@@ -7,15 +7,14 @@ const currify = require('currify');
 const clean = require('clear-module');
 
 const DIR = '../../server/';
-const cloudcmd = require(DIR + 'cloudcmd');
+const cloudcmdPath = DIR + 'cloudcmd';
+
+const cloudcmd = require(cloudcmdPath);
 const config = require(DIR + 'config');
 const {
-    _authenticate,
     _getPrefix,
-    _authCheck,
     _auth,
     _replacePrefix,
-    _replaceDist,
 } = cloudcmd;
 
 test('cloudcmd: args: no', (t) => {
@@ -93,9 +92,18 @@ test('cloudcmd: replacePrefix', (t) => {
 });
 
 test('cloudcmd: replaceDist', (t) => {
+    const {NODE_ENV} = process.env;
+    process.env.NODE_ENV = 'development';
+    
+    clean(cloudcmdPath);
+    
+    const {_replaceDist} = require(cloudcmdPath);
+    
     const url = '/dist/hello';
     const result = _replaceDist(url);
     const expected = '/dist-dev/hello';
+    
+    process.env.NODE_ENV = NODE_ENV;
     
     t.equal(result, expected, 'should equal');
     t.end();
@@ -171,95 +179,6 @@ test('cloudcmd: auth: accept: no auth', (t) => {
     config('auth', auth);
     
     t.ok(accept.called, 'should accept');
-    t.end();
-});
-
-test('cloudcmd: auth: reject', (t) => {
-    const auth = config('auth');
-    const success = sinon.stub();
-    const on = sinon.stub;
-    const socket = {
-        on,
-    };
-    
-    config('auth', true);
-    _authCheck(socket, success);
-    config('auth', auth);
-    
-    t.notOk(success.called, 'should not call success');
-    t.end();
-});
-
-test('cloudcmd: authCheck: socket', (t) => {
-    const auth = config('auth');
-    const success = sinon.stub();
-    const on = sinon.stub();
-    const socket = {
-        on,
-    };
-    
-    config('auth', true);
-    _authCheck(socket, success);
-    config('auth', auth);
-    
-    t.ok(on.calledWith('auth'), 'should call socket.on');
-    t.end();
-});
-
-test('cloudcmd: authCheck: success', (t) => {
-    const success = sinon.stub();
-    const auth = config('auth');
-    const on = sinon.stub();
-    const socket = {
-        on,
-    };
-    
-    config('auth', true);
-    _authCheck(socket, success);
-    config('auth', auth);
-    
-    t.notOk(success.called, 'should not call success');
-    t.end();
-});
-
-test('cloudcmd: authenticate: reject', (t) => {
-    const success = sinon.stub();
-    const emit = sinon.stub();
-    const socket = {
-        emit,
-    };
-    
-    _authenticate(socket, success, 'hello', 'world');
-    t.ok(emit.calledWith('reject'), 'should reject');
-    t.end();
-});
-
-test('cloudcmd: authenticate: reject: success', (t) => {
-    const success = sinon.stub();
-    const emit = sinon.stub();
-    const socket = {
-        emit,
-    };
-    
-    _authenticate(socket, success, 'hello', 'world');
-    t.notOk(success.called, 'should not call success');
-    t.end();
-});
-
-test('cloudcmd: authenticate: accept: success', (t) => {
-    const success = sinon.stub();
-    const emit = sinon.stub();
-    const socket = {
-        emit,
-    };
-    
-    const set = credentials();
-    const reset = set('hello', 'world');
-    
-    _authenticate(socket, success, 'hello', 'world');
-    reset();
-    
-    t.ok(success.called, 'should call success');
     t.end();
 });
 
