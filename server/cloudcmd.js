@@ -150,7 +150,7 @@ function listen(prefix, socket) {
     });
     
     config('console') && konsole.listen(socket, {
-        authCheck,
+        auth,
         prefix: prefix + '/console',
     });
     
