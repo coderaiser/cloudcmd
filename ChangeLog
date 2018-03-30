@@ -1,3 +1,24 @@
+2018.03.30, v9.0.0
+
+fix:
+- (cloudcmd) --no-prefix
+- (client) goToParentDir
+- (query) portrait on iphone 6 firefox
+
+feature:
+- (cloudcmd) showKeysPanel -> keysPanel
+- (package) dword v7.0.0
+- (package) deepword v3.0.0
+- (package) edward v7.0.0
+- (package) console-io v7.0.0
+- (cloudcmd) drop support of gritty < v2
+- (config) auth
+- (cloudcmd) spero, ishtar, salam, remedy, omnes -> fileop
+- (for-each-key) add
+- (package) html-webpack-exclude-assets-plugin v0.0.7
+- (query) add support if iphone 6 landscape
+
+
 2018.03.24, v8.5.2
 
 fix:
