@@ -155,7 +155,7 @@ function listen(prefix, socket) {
     });
     
     config('terminal') && terminal().listen(socket, {
-        authCheck,
+        auth,
         prefix: prefix + '/gritty',
     });
 }
