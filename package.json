@@ -119,7 +119,7 @@
     "criton": "^1.0.0",
     "currify": "^2.0.3",
     "deepmerge": "^2.0.0",
-    "deepword": "^2.0.0",
+    "deepword": "^3.0.0",
     "dword": "^6.0.0",
     "edward": "^7.0.0",
     "es6-promisify": "^6.0.0",

@@ -139,7 +139,7 @@ function listen(prefix, socket) {
     
     deepword.listen(socket, {
         root,
-        authCheck,
+        auth,
         prefix: prefix + '/deepword',
     });
     
