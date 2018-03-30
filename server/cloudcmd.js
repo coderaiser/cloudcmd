@@ -133,7 +133,7 @@ function listen(prefix, socket) {
     
     dword.listen(socket, {
         root,
-        authCheck,
+        auth,
         prefix: prefix + '/dword',
     });
     
