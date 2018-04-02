@@ -33,6 +33,7 @@ const args = require('minimist')(argv.slice(2), {
     ],
     boolean: [
         'auth',
+        'cache',
         'repl',
         'save',
         'server',
@@ -56,6 +57,7 @@ const args = require('minimist')(argv.slice(2), {
         server      : true,
         name        : choose(env('name'), config('name')),
         auth        : choose(env('auth'), config('auth')),
+        cache       : choose(env.bool('cache'), config('cache')),
         port        : config('port'),
         online      : config('online'),
         open        : config('open'),
@@ -113,6 +115,7 @@ function main() {
     
     config('name', args.name);
     config('auth', args.auth);
+    config('cache', args.cache);
     config('online', args.online);
     config('open', args.open);
     config('username', args.username);

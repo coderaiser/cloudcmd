@@ -29,6 +29,7 @@
     "--vim                      ": "enable vim hot keys",
     "--columns                  ": "set visible columns",
     "--keys-panel               ": "show keys panel",
+    "--cache                    ": "enable cache",
     "--no-server                ": "do not start server",
     "--no-auth                  ": "disable authorization",
     "--no-online                ": "load scripts from local server",
@@ -46,5 +47,6 @@
     "--no-terminal              ": "disable terminal",
     "--no-vim                   ": "disable vim hot keys",
     "--no-keys-panel            ": "hide keys panel",
-    "--no-columns               ": "set default visible columns"
+    "--no-columns               ": "set default visible columns",
+    "--no-cache                 ": "disable cache"
 }
