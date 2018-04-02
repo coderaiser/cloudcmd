@@ -413,6 +413,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_VIM` - enable vim hot keys
 - `CLOUDCMD_CONFIRM_COPY` - confirm copy
 - `CLOUDCMD_CONFIRM_MOVE` - confirm move
+- `CLOUDCMD_CACHE` - enable cache
 
 Menu
 ---------------
