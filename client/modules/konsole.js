@@ -118,9 +118,6 @@ function ConsoleProto() {
     }
     
     function authCheck(spawn) {
-        if (!config('auth'))
-            return;
-        
         spawn.emit('auth', config('username'), config('password'));
         
         spawn.on('reject', () => {

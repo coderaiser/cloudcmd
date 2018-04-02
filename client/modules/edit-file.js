@@ -105,9 +105,6 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     }
     
     function authCheck(spawn) {
-        if (!config('auth'))
-            return;
-        
         spawn.emit('auth', config('username'), config('password'));
         spawn.on('reject', () => {
             Dialog.alert(TITLE, 'Wrong credentials!');

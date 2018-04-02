@@ -77,9 +77,6 @@ function OperationProto(operation, data) {
         const accept = wraptile(ok);
         const alertDialog = wraptile(Dialog.alert);
         
-        if (!config('auth'))
-            return ok(spawn);
-        
         spawn.on('accept', accept(spawn));
         spawn.on('reject', alertDialog (TITLE, 'Wrong credentials!'));
         spawn.emit('auth', config('username'), config('password'));

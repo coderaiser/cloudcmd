@@ -116,9 +116,6 @@ function initSocket() {
 }
 
 function authCheck(socket) {
-    if (!config('auth'))
-        return;
-    
     socket.emit('auth', config('username'), config('password'));
     
     socket.on('reject', () => {
