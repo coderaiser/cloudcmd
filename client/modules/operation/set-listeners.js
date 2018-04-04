@@ -8,7 +8,7 @@ const {
     Dialog,
 } = DOM;
 
-const forEachKey = require('../../../common/for-each-key');
+const forEachKey = require('for-each-key/legacy');
 const {
     TITLE,
 } = CloudCmd;
