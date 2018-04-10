@@ -41,7 +41,7 @@ module.exports._getIndexPath = getIndexPath;
  * additional processing of index file
  */
 function indexProcessing(options) {
-    const isOnePanel = config('onePanelMode');
+    const oneFilePanel = config('onePanelMode');
     const noContact = !config('contact');
     const noConfig = !config('configDialog');
     const noConsole = !config('console');
@@ -53,7 +53,7 @@ function indexProcessing(options) {
     if (!config('keysPanel'))
         data = hideKeysPanel(data);
     
-    if (isOnePanel)
+    if (oneFilePanel)
         data = data
             .replace('icon-move', 'icon-move none')
             .replace('icon-copy', 'icon-copy none');
@@ -77,11 +77,11 @@ function indexProcessing(options) {
     const left = rendy(Template.panel, {
         side        : 'left',
         content     : panel,
-        className   : !isOnePanel ? '' : 'panel-single'
+        className   : !oneFilePanel ? '' : 'panel-single'
     });
     
     let right = '';
-    if (!isOnePanel)
+    if (!oneFilePanel)
         right = rendy(Template.panel, {
             side        : 'right',
             content     : panel,

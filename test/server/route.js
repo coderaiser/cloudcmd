@@ -113,7 +113,7 @@ test('cloudcmd: route: buttons: no contact', async (t) => {
 
 test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
     const config = {
-        onePanelMode: true
+        oneFilePanel: true
     };
     
     const {port, done} = await connect({config});
@@ -127,7 +127,7 @@ test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
 
 test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
     const config = {
-        onePanelMode: true
+        oneFilePanel: true
     };
     
     const {port, done} = await connect({config});

@@ -2,6 +2,9 @@
 
 'use strict';
 
+const util = require('util');
+const noop = () => {};
+
 const Info = require('../package');
 const DIR_SERVER = '../server/';
 
@@ -45,6 +48,7 @@ const args = require('minimist')(argv.slice(2), {
         'sync-console-path',
         'contact',
         'terminal',
+        'one-file-panel',
         'one-panel-mode',
         'confirm-copy',
         'confirm-move',
@@ -75,7 +79,8 @@ const args = require('minimist')(argv.slice(2), {
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'terminal-path': env('terminal_path') || config('terminalPath'),
-        'one-panel-mode': choose(env.bool('one_panel_mode'), config('onePanelMode')),
+        'one-file-panel': choose(env.bool('one_file_panel'), config('onePanelMode')),
+        'one-panel-mode': '',
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
         'html-dialogs': config('htmlDialogs'),
@@ -133,9 +138,26 @@ function main() {
     config('htmlDialogs', args['html-dialogs']);
     config('confirmCopy', args['confirm-copy']);
     config('confirmMove', args['confirm-move']);
-    config('onePanelMode', args['one-panel-mode']);
+    config('onePanelMode', args['one-file-panel']);
+    config('oneFilePanel', args['one-file-panel']);
     config('configDialog', args['config-dialog']);
     config('keysPanel', args['keys-panel']);
+    
+    if (args['one-panel-mode']) {
+        util.deprecate(noop, `cloudcmd --one-panel-mode: deprecated, use --one-file-panel instead`, 'DP0001')();
+        config('oneFilePanel', true);
+        config('onePanelMode', true);
+    } else if (typeof args['one-panel-mode'] === 'boolean') {
+        util.deprecate(noop, `cloudcmd --no-one-panel-mode: deprecated, use --no-one-file-panel instead`, 'DP0001')();
+        config('oneFilePanel', false);
+        config('onePanelMode', false);
+    }
+    
+    if (typeof env.bool('one_panel_mode') === 'boolean') {
+        util.deprecate(noop, `CLOUDCMD_ONE_PANEL_MODE deprecated, use CLOUDCMD_ONE_FILE_PANEL instead`, 'DP0001')();
+        config('oneFilePanel', env.bool('one_panel_mode'));
+        config('onePanelMode', env.bool('one_panel_mode'));
+    }
     
     readConfig(args.config);
     

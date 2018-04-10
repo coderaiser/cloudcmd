@@ -85,7 +85,9 @@ Cloud Commander supports command line parameters:
 | `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
 | `--name`                      | set tab name in web browser
-| `--one-panel-mode`            | set one panel mode
+| `--one-panel-mode`            | show one file panel (**deprecated**: use `--one-file-panel` instead)
+| `--one-file-panel`            | show one file panel
+| `--keys-panel`                | show keys panel
 | `--contact`                   | enable contact
 | `--config-dialog`             | enable config dialog
 | `--console`                   | enable console
@@ -93,7 +95,6 @@ Cloud Commander supports command line parameters:
 | `--terminal`                  | enable terminal
 | `--terminal-path`             | set terminal path
 | `--vim`                       | enable vim hot keys
-| `--keys-panel`                | show keys panel
 | `--columns`                   | set visible columns
 | `--cache`                     | enable cache
 | `--no-server`                 | do not start server
@@ -101,7 +102,9 @@ Cloud Commander supports command line parameters:
 | `--no-online`                 | load scripts from local server
 | `--no-open`                   | do not open web browser when server started
 | `--no-name`                   | set empty tab name in web browser
-| `--no-one-panel-mode`         | unset one panel mode
+| `--no-one-file-panel`         | show two file panels
+| `--no-one-panel-mode`          | show two file panels (**deprecated**: use `--no-one-file-panel` instead)
+| `--no-keys-panel`             | hide keys panel
 | `--no-progress`               | do not show progress of file operations
 | `--no-confirm-copy`           | do not confirm copy
 | `--no-confirm-move`           | do not confirm move
@@ -112,7 +115,6 @@ Cloud Commander supports command line parameters:
 | `--no-sync-console-path`      | do not sync console path
 | `--no-terminal`               | disable terminal
 | `--no-vim`                    | disable vim hot keys
-| `--no-keys-panel`             | hide keys panel
 | `--no-columns`                | set visible default columns
 | `--no-cache`                  | disable cache
 
@@ -368,6 +370,8 @@ Here is description of options:
     "online"            : true,     /* load js files from cdn or local path     */
     "open"              : false     /* open web browser when server started     */
     "cache"             : true,     /* enable cache                             */
+    "onePanelMode"      : false,    /* show one file panel (deprecated)         */
+    "oneFilePanel"      : false,    /* show one file panel                      */
     "keysPanel"         : true,     /* show classic panel with buttons of keys  */
     "port"              : 8000,     /* http port                                */
     "ip"                : null,     /* ip or null(default)                      */
@@ -378,7 +382,6 @@ Here is description of options:
     "confirmMove"       : true,     /* confirm move                             */
     "htmlDialogs"       : true,     /* use html dialogs                         */
     "showConfig"        : false,    /* show config at startap                   */
-    "onePanelMode"      : false,    /* set one panel mode                       */
     "contact"           : true,     /* enable contact                           */
     "configDialog"      : true,     /* enable config dialog                     */
     "console"           : true,     /* enable console                           */
@@ -405,11 +408,12 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_KEYS_PANEL` - show keys panel
+- `CLOUDCMD_ONE_PANEL_MODE` - show one file panel (**deprecated**: use `CLOUDCMD_ONE_FILE_PANEL` instead)
+- `CLOUDCMD_ONE_FILE_PANEL` - show one file panel
 - `CLOUDCMD_AUTH` - enable authentication
 - `CLOUDCMD_USERNAME` - set username
 - `CLOUDCMD_PASSWORD` - set password
 - `CLOUDCMD_ROOT` - set root directory
-- `CLOUDCMD_ONE_PANEL_MODE` - set one panel mode
 - `CLOUDCMD_VIM` - enable vim hot keys
 - `CLOUDCMD_CONFIRM_COPY` - confirm copy
 - `CLOUDCMD_CONFIRM_MOVE` - confirm move
@@ -445,12 +449,12 @@ Right mouse click button shows context menu with items:
 | `F9`                  | open
 | `Esc`                 | close
 
-One panel mode
+One file panel
 ---------------
-Cloud Commander could work in one panel mode when screen size can not accommodate second panel or via `--one-panel-mode` options flag.
+Cloud Commander can work in one panel mode when screen size can not accommodate second panel or via `--one-file-panel` options flag.
 It could happen when mobile device, tablet or small window size used to work with file manager.
 
-![One panel mode](/img/screen/one-panel-mode.png "One panel mode")
+![One file panel](/img/screen/one-file-panel.png "One file panel")
 
 Using as Middleware
 ---------------
