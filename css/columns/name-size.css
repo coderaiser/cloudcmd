@@ -1,5 +1,9 @@
 .name {
-    width: 78%;
+    width: 77%;
+}
+
+.size {
+    float: none;
 }
 
 .owner {
