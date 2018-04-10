@@ -222,31 +222,6 @@ test('cloudcmd: getIndexPath: development', (t) => {
     t.end();
 });
 
-test('cloudcmd: deprecated: one panel mode', (t) => {
-    const config = {
-        onePanelMode: true
-    };
-    
-    const {
-        deprecate: originalDeprecate
-    } = util;
-    
-    const deprecate = sinon
-        .stub()
-        .returns(noop);
-    
-    util.deprecate = deprecate;
-    
-    cloudcmd({
-        config
-    });
-    
-    util.deprecate = originalDeprecate;
-    
-    t.ok(deprecate.called, 'should call deprecate');
-    t.end();
-});
-
 function cleanNodeEnv() {
     const {NODE_ENV} = process.env;
     process.env.NODE_ENV = '';

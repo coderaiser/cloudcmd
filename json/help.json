@@ -19,7 +19,6 @@
     "--html-dialogs             ": "use html dialogs",
     "--open                     ": "open web browser when server started",
     "--name                     ": "set tab name in web browser",
-    "--one-panel-mode           ": "show one file panel (deprecated use --one-file-panel instead)",
     "--one-file-panel           ": "show one file panel",
     "--keys-panel               ": "show keys panel",
     "--config-dialog            ": "enable config dialog",

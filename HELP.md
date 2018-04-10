@@ -84,7 +84,6 @@ Cloud Commander supports command line parameters:
 | `--confirm-move`              | confirm move
 | `--open`                      | open web browser when server started
 | `--name`                      | set tab name in web browser
-| `--one-panel-mode`            | show one file panel (**deprecated**: use `--one-file-panel` instead)
 | `--one-file-panel`            | show one file panel
 | `--keys-panel`                | show keys panel
 | `--contact`                   | enable contact
@@ -101,7 +100,6 @@ Cloud Commander supports command line parameters:
 | `--no-open`                   | do not open web browser when server started
 | `--no-name`                   | set empty tab name in web browser
 | `--no-one-file-panel`         | show two file panels
-| `--no-one-panel-mode`          | show two file panels (**deprecated**: use `--no-one-file-panel` instead)
 | `--no-keys-panel`             | hide keys panel
 | `--no-progress`               | do not show progress of file operations
 | `--no-confirm-copy`           | do not confirm copy
@@ -365,7 +363,6 @@ Here is description of options:
     "dirStorage"        : true,     /* store directory listing                  */
     "online"            : true,     /* load js files from cdn or local path     */
     "open"              : false     /* open web browser when server started     */
-    "onePanelMode"      : false,    /* show one file panel (deprecated)         */
     "oneFilePanel"      : false,    /* show one file panel                      */
     "keysPanel"         : true,     /* show classic panel with buttons of keys  */
     "port"              : 8000,     /* http port                                */
@@ -401,7 +398,6 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
 - `CLOUDCMD_KEYS_PANEL` - show keys panel
-- `CLOUDCMD_ONE_PANEL_MODE` - show one file panel (**deprecated**: use `CLOUDCMD_ONE_FILE_PANEL` instead)
 - `CLOUDCMD_ONE_FILE_PANEL` - show one file panel
 - `CLOUDCMD_AUTH` - enable authentication
 - `CLOUDCMD_USERNAME` - set username

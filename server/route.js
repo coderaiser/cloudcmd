@@ -82,7 +82,7 @@ module.exports = currify((options, request, response, callback) => {
  * additional processing of index file
  */
 function indexProcessing(options) {
-    const oneFilePanel = config('onePanelMode');
+    const oneFilePanel = config('oneFilePanel');
     const noContact = !config('contact');
     const noConfig = !config('configDialog');
     const noConsole = !config('console');

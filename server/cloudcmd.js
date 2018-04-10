@@ -47,10 +47,6 @@ const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
 
 const noop = () => {};
-const deprecateOnePanelMode = (value) => {
-    util.deprecate(noop, 'onePanelMode is deprecated, use oneFilePanel instead', 'DP0001')();
-    config('oneFilePanel', value);
-};
 
 module.exports = (params) => {
     const p = params || {};
@@ -65,11 +61,7 @@ module.exports = (params) => {
     keys.forEach((name) => {
         const value = options[name];
         
-        if (name === 'onePanelMode')
-            deprecateOnePanelMode();
-        else if (name === 'oneFilePanel')
-            config('onePanelMode', value);
-        else if (/root|editor|packer|columns/.test(name))
+        if (/root|editor|packer|columns/.test(name))
             validate[name](value);
         
         config(name, value);

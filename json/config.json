@@ -22,7 +22,6 @@
     "confirmCopy": true,
     "confirmMove": true,
     "configDialog": true,
-    "onePanelMode": false,
     "oneFilePanel": false,
     "console": true,
     "syncConsolePath": false,

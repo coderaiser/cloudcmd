@@ -225,7 +225,7 @@ function CloudCmdProto(Util, DOM) {
             config[key] = value;
         };
         
-        if (config.onePanelMode)
+        if (config.oneFilePanel)
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
         
         exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
@@ -372,7 +372,7 @@ function CloudCmdProto(Util, DOM) {
     function getPanels() {
         const panels = ['left'];
         
-        if (CloudCmd.config('onePanelMode'))
+        if (CloudCmd.config('oneFilePanel'))
             return panels;
         
         return [
