@@ -40,7 +40,7 @@
   },
   "config": {
     "dirs": "bin/cloudcmd.js common server",
-    "dirs_test": "test bin/release.js webpack.config.js"
+    "dirs_test": "test bin/release.js webpack.config.js .webpack"
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
