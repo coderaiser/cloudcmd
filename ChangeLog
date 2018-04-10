@@ -1,3 +1,13 @@
+2018.04.10, v9.1.1
+
+fix:
+- (columns) name-size in firefox (#162)
+
+feature:
+- (package) add for-each-key from npm
+- (modules) socket.io v2.1.0
+
+
 2018.04.02, v9.1.0
 
 fix:
