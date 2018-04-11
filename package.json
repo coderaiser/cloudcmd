@@ -203,6 +203,7 @@
     "version-io": "^2.0.1",
     "webpack": "^4.0.0",
     "webpack-cli": "^2.0.9",
+    "webpack-merge": "^4.1.2",
     "yaspeller": "^4.0.0"
   },
   "engines": {
