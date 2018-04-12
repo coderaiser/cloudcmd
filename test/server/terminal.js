@@ -5,19 +5,11 @@ const mock = require('mock-require');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
-//const stub = require('mock-require');
+const stub = require('mock-require');
 const clean = require('clear-module');
 
 const configPath = '../../server/config';
 const terminalPath = '../../server/terminal';
-
-const {cache, resolve} = require;
-const stub = (name, exports) => {
-    require(name);
-    
-    const resolved = resolve(name);
-    cache[resolved].exports = exports;
-};
 
 test('cloudcmd: terminal: disabled', (t) => {
     clean(terminalPath);
@@ -54,6 +46,24 @@ test('cloudcmd: terminal: disabled: listen', (t) => {
 });
 
 test('cloudcmd: terminal: enabled', (t) => {
+    const term = sinon.stub();
+    const arg = 'hello';
+    
+    clean(terminalPath);
+    stub(configPath, () => '/terminal');
+    stub('/terminal', term);
+    
+    const terminal = require(terminalPath);
+    terminal(arg);
+    
+    clean(configPath);
+    require(configPath);
+    
+    t.ok(term.calledWith(arg), 'should call terminal');
+    t.end();
+});
+
+test('cloudcmd: terminal: enabled: no string', (t) => {
     const {log} = console;
     console.log = sinon.stub();
     
