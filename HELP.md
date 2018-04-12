@@ -96,7 +96,6 @@ Cloud Commander supports command line parameters:
 | `--terminal-path`             | set terminal path
 | `--vim`                       | enable vim hot keys
 | `--columns`                   | set visible columns
-| `--cache`                     | enable cache
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
@@ -116,7 +115,6 @@ Cloud Commander supports command line parameters:
 | `--no-terminal`               | disable terminal
 | `--no-vim`                    | disable vim hot keys
 | `--no-columns`                | set visible default columns
-| `--no-cache`                  | disable cache
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -136,7 +134,7 @@ re-install it:
 npm install cloudcmd -g
 ```
 
-Then start it again, clear cache of your browser and reload page.
+Then start it again and reload the page.
 
 Hot keys
 ---------------
@@ -369,7 +367,6 @@ Here is description of options:
     "dirStorage"        : true,     /* store directory listing                  */
     "online"            : true,     /* load js files from cdn or local path     */
     "open"              : false     /* open web browser when server started     */
-    "cache"             : true,     /* enable cache                             */
     "onePanelMode"      : false,    /* show one file panel (deprecated)         */
     "oneFilePanel"      : false,    /* show one file panel                      */
     "keysPanel"         : true,     /* show classic panel with buttons of keys  */
@@ -416,7 +413,6 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_VIM` - enable vim hot keys
 - `CLOUDCMD_CONFIRM_COPY` - confirm copy
 - `CLOUDCMD_CONFIRM_MOVE` - confirm move
-- `CLOUDCMD_CACHE` - enable cache
 
 Menu
 ---------------

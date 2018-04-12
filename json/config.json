@@ -12,7 +12,6 @@
     "dirStorage": false,
     "online": true,
     "open": false,
-    "cache": true,
     "keysPanel": true,
     "port": 8000,
     "ip": null,

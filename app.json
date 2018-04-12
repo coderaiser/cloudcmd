@@ -121,11 +121,6 @@
           "description": "confirm move",
           "value": "true",
           "required": false
-      },
-      "CLOUDCMD_CACHE": {
-          "description": "enable cache",
-          "value": "true",
-          "required": false
       }
   }
 }

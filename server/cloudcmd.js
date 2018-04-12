@@ -161,7 +161,7 @@ function listen(prefix, socket) {
 
 function cloudcmd(prefix, plugins, modules) {
     const online = apart(config, 'online');
-    const cache = apart(config, 'cache');
+    const cache = false;
     const diff = apart(config, 'diff');
     const zip = apart(config, 'zip');
     const dir = DIR_ROOT;
