@@ -1,3 +1,13 @@
+2018.04.12, v9.1.2
+
+fix:
+- (operations) for-each-key v1.0.1: update file list after removing file
+
+feature:
+- (webpack) deepmerge -> webpack-merge
+- (webpack) split config to: js, html and css
+
+
 2018.04.10, v9.1.1
 
 fix:
