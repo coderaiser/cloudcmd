@@ -204,11 +204,6 @@ function hide() {
 }
 
 function showImage(href, prefixUrl) {
-    const title = Info.name;
-    const excludeCurrent = (path) => {
-        return path !== Info.path;
-    };
-    
     const makeTitle = (path) => {
         return {
             href: prefixUrl + path,
@@ -216,18 +211,16 @@ function showImage(href, prefixUrl) {
         };
     };
     
-    const first = {
-        href,
-        title,
-    };
-    
     const names = Info.files
         .map(DOM.getCurrentPath)
-        .filter(isImage)
-        .filter(excludeCurrent)
+        .filter(isImage);
+    
+    const titles = names
         .map(makeTitle);
     
+    const index = names.indexOf(Info.path);
     const config = Object.assign({}, Config, {
+        index,
         autoSize    : true,
         type        : 'image',
         prevEffect  : 'none',
@@ -240,9 +233,7 @@ function showImage(href, prefixUrl) {
         }
     });
     
-    const allNames = [first].concat(names);
-    
-    $.fancybox.open(allNames, config);
+    $.fancybox.open(titles, config);
 }
 
 function isImage(name) {
