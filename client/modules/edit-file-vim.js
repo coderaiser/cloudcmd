@@ -37,9 +37,16 @@ CloudCmd.EditFileVim = function EditFileVimProto(callback) {
         CloudCmd.Edit.hide();
     };
     
-    function listener({keyCode, shiftKey}) {
-        if (shiftKey && keyCode === Key.ESC)
+    function listener(event) {
+        const {
+            keyCode,
+            shiftKey,
+        } = event;
+        
+        if (shiftKey && keyCode === Key.ESC) {
+            event.preventDefault();
             EditFileVim.hide();
+        }
     }
     
     init(callback);
