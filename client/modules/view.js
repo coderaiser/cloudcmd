@@ -219,7 +219,7 @@ function showImage(href, prefixUrl) {
         .map(makeTitle);
     
     const index = names.indexOf(Info.path);
-    const config = Object.assign({}, Config, {
+    const imageConfig = {
         index,
         autoSize    : true,
         type        : 'image',
@@ -231,7 +231,12 @@ function showImage(href, prefixUrl) {
             overlay : null,
             title   : {}
         }
-    });
+    };
+    
+    const config = {
+        ...Config,
+        ...imageConfig,
+    };
     
     $.fancybox.open(titles, config);
 }
