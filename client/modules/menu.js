@@ -309,16 +309,15 @@ function MenuProto(Position) {
         files.forEach((file) => {
             const selected = DOM.isSelected(file);
             const isDir = DOM.isCurrentIsDir(file);
+            const path = DOM.getCurrentPath(file);
+            
+            CloudCmd.log('downloading file ' + path + '...');
             /*
               * if we send ajax request -
               * no need in hash so we escape #
               * and all other characters, like "%"
               */
-            const path = DOM.getCurrentPath(file)
-                .replace(/#/g, '%23');
-            
-            CloudCmd.log('downloading file ' + path + '...');
-            const encodedPath = encodeURI(path);
+            const encodedPath = encodeURI(path).replace(/#/g, '%23');
             const id = load.getIdBySrc(path);
             
             let src;
