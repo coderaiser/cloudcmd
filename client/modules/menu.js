@@ -314,11 +314,10 @@ function MenuProto(Position) {
               * no need in hash so we escape #
               * and all other characters, like "%"
               */
-            const path = DOM.getCurrentPath(file)
-                .replace(/#/g, '%23');
+            const path = DOM.getCurrentPath(file);
             
             CloudCmd.log('downloading file ' + path + '...');
-            const encodedPath = encodeURI(path);
+            const encodedPath = encodeURI(path).replace(/#/g, '%23');
             const id = load.getIdBySrc(path);
             
             let src;
