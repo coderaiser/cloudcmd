@@ -23,10 +23,11 @@ const prefix = squad(prefixer, apart(config, 'prefix'));
 const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
-const getIndexPath = (isDev) => {
+module.exports._getIndexPath = getIndexPath;
+function getIndexPath(isDev) {
     const dist = getDist(isDev);
     return path.join(DIR, `${dist}/index.html`);
-};
+}
 
 const FS = CloudFunc.FS;
 
@@ -102,6 +103,17 @@ function indexProcessing(options) {
     return data;
 }
 
+const sendIndex = (params) => (error, data) => {
+    const ponseParams = Object.assign({}, params, {
+        name: getIndexPath(isDev)
+    });
+    
+    if (error)
+        return ponse.sendError(error, ponseParams);
+    
+    ponse.send(data, ponseParams);
+};
+
 /**
  * routing of server queries
  */
@@ -130,14 +142,7 @@ function route(request, response, callback) {
             dir.path = format.addSlashToEnd(name);
         
         if (!error)
-            return buildIndex(dir, (error, data) => {
-                p.name = getIndexPath(isDev);
-                
-                if (error)
-                    return ponse.sendError(error, p);
-                
-                ponse.send(data, p);
-            });
+            return buildIndex(dir, sendIndex(p));
         
         if (error.code !== 'ENOTDIR')
             return ponse.sendError(error, p);
@@ -170,7 +175,7 @@ function buildIndex(json, callback) {
             data: template,
         });
         
-        callback(error, data);
+        callback(null, data);
     });
 }
 

@@ -12,6 +12,11 @@ const rootDir = '../..';
 const routePath = `${rootDir}/server/route`;
 const beforePath = '../before';
 const configPath = `${rootDir}/server/config`;
+const cloudcmdPath = `${rootDir}/server/cloudcmd`;
+
+const {
+    _getIndexPath,
+} = require(routePath);
 
 const route = require(routePath);
 const before = require(beforePath);
@@ -297,6 +302,34 @@ test('cloudcmd: route: realpath: error', (t) => {
                 t.end();
                 after();
             });
+    });
+});
+
+test('cloudcmd: route: sendIndex: error', (t) => {
+    const error = Error('index path error');
+    const {readFile} = fs;
+    const isDev = true;
+    const indexPath = _getIndexPath(isDev);
+    
+    fs.readFile = (name, options, fn = options) => {
+        if (name === indexPath) {
+            fn(error);
+            fs.readFile = readFile;;
+            return;
+        };
+        
+        return readFile(name, options, fn);
+    };
+    
+    const config = {};
+    
+    before({config}, (port, after) => {
+        getStr(`http://localhost:${port}`)
+            .then((data) => {
+                t.equal(data, error.message, 'should return error');
+                t.end();
+                after();
+            })
     });
 });
 
