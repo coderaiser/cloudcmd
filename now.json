@@ -6,6 +6,9 @@
         "cloudcmd_terminal": "true",
         "cloudcmd_terminal_path": "gritty"
     },
+    "engines": {
+        "node": "8"
+    },
     "files": [
         "bin",
         "server",
@@ -19,6 +22,7 @@
         "tmpl",
         "img",
         "modules",
+        ".webpack",
         "webpack.config.js",
         "json",
         "HELP.md"
