@@ -7,6 +7,7 @@ const express = require('express');
 const io = require('socket.io');
 const writejson = require('writejson');
 const readjson = require('readjson');
+const {promisify} = require('es6-promisify');
 
 process.env.NODE_ENV = 'development';
 
@@ -16,7 +17,9 @@ const {assign} = Object;
 const pathConfig = os.homedir() + '/.cloudcmd.json';
 const currentConfig = readjson.sync.try(pathConfig);
 
-module.exports = (options, fn = options) => {
+module.exports = before;
+
+function before(options, fn = options) {
     if (fn === options) {
         options = {};
     }
@@ -44,7 +47,13 @@ module.exports = (options, fn = options) => {
     server.listen(() => {
         fn(server.address().port, after);
     });
-};
+}
+
+module.exports.connect = promisify((options, fn = options) => {
+    before(options, (port, done) => {
+        fn(null, {port, done});
+    });
+});
 
 function defaultConfig() {
     return {

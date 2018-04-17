@@ -12,7 +12,6 @@ const rootDir = '../..';
 const routePath = `${rootDir}/server/route`;
 const beforePath = '../before';
 const configPath = `${rootDir}/server/config`;
-const cloudcmdPath = `${rootDir}/server/cloudcmd`;
 
 const {
     _getIndexPath,
@@ -20,6 +19,7 @@ const {
 
 const route = require(routePath);
 const before = require(beforePath);
+const {connect} = before;
 
 const clean = require('clear-module');
 
@@ -305,7 +305,7 @@ test('cloudcmd: route: realpath: error', (t) => {
     });
 });
 
-test('cloudcmd: route: sendIndex: error', (t) => {
+test('cloudcmd: route: sendIndex: error', async (t) => {
     const error = Error('index path error');
     const {readFile} = fs;
     const isDev = true;
@@ -314,22 +314,19 @@ test('cloudcmd: route: sendIndex: error', (t) => {
     fs.readFile = (name, options, fn = options) => {
         if (name === indexPath) {
             fn(error);
-            fs.readFile = readFile;;
+            fs.readFile = readFile;
             return;
-        };
+        }
         
         return readFile(name, options, fn);
     };
     
-    const config = {};
+    const {port, done} = await connect();
+    const data = await getStr(`http://localhost:${port}`);
     
-    before({config}, (port, after) => {
-        getStr(`http://localhost:${port}`)
-            .then((data) => {
-                t.equal(data, error.message, 'should return error');
-                t.end();
-                after();
-            })
-    });
+    t.equal(data, error.message, 'should return error');
+    t.end();
+    
+    done();
 });
 
