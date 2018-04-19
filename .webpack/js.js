@@ -86,7 +86,7 @@ function externals(context, request, fn) {
 }
 
 function devtoolModuleFilenameTemplate(info) {
-    const resource = info.absoluteResourcePath.replace(__dirname + sep, '');
+    const resource = info.absoluteResourcePath.replace(rootDir + sep, '');
     return `file://cloudcmd/${resource}`;
 }
 
