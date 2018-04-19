@@ -7,6 +7,7 @@ const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
 const before = require('../before');
+const {connect} = before;
 const dir = '../..';
 
 const validatePath = `${dir}/server/validate`;
@@ -14,7 +15,6 @@ const exitPath = `${dir}/server/exit`;
 const columnsPath = `${dir}/server/columns`;
 
 const validate = require(validatePath);
-//const stub = require('mock-require');
 const clear = require('clear-module');
 
 const {cache, resolve} = require;
@@ -29,16 +29,21 @@ test('validate: root: bad', (t) => {
     const config = {
         root: Math.random()
     };
-    const fn = () => {
-        before({config}, (port, after) => {
-            t.fail('should not create server');
-            after();
-            t.end();
-        });
+    
+    const success = ({done}) => {
+        t.fail('should not create server');
+        t.end();
+        done();
     };
     
-    t.throws(fn, /dir should be a string/, 'should throw');
-    t.end();
+    const error = (e) => {
+        t.equal(e.message, 'dir should be a string', 'should throw');
+        t.end();
+    };
+    
+    connect({config})
+        .then(success)
+        .catch(error);
 });
 
 test('validate: root: /', (t) => {
