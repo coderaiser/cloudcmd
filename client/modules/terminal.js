@@ -2,6 +2,8 @@
 
 /* global CloudCmd, gritty */
 
+require('../../css/terminal.css');
+
 const exec = require('execon');
 const load = require('../dom/load');
 const DOM = require('../dom');
@@ -46,7 +48,6 @@ function TerminalProto() {
 }
 
 module.exports.show = show;
-
 module.exports.hide = hide;
 
 function hide () {
@@ -75,8 +76,6 @@ function create(callback) {
     
     const {socket, terminal} = gritty(Element, options);
     
-    terminal.focus();
-    
     Terminal = terminal;
     
     terminal.on('key', (char, {keyCode, shiftKey}) => {
@@ -86,7 +85,6 @@ function create(callback) {
     });
     
     socket.on('connect', exec.with(authCheck, socket));
-    
     exec(callback);
 }
 
@@ -104,10 +102,8 @@ function show(callback) {
     
     CloudCmd.View.show(Element, {
         afterShow: () => {
-            if (Terminal) {
-                Terminal.fit(); // lines corrupt without
+            if (Terminal)
                 Terminal.focus();
-            }
             
             exec(callback);
         }
