@@ -1,3 +1,15 @@
+2018.04.19, v9.1.5
+
+fix:
+- (terminal) rows and cols
+- (wepback) js: devtoolModuleFilenameTemplate
+- (now) files: add .webpack
+
+feature:
+- (package) style-loader v0.21.0
+- (travis) node_js: rm 6
+
+
 2018.04.17, v9.1.4
 
 fix:
