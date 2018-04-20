@@ -61,6 +61,7 @@
     "test": "tape 'test/**/*.js'",
     "test:client": "tape 'test/client/**/*.js'",
     "wisdom": "redrun build",
+    "prewisdom": "redrun lint test",
     "wisdom:type": "bin/release.js",
     "docker:pull:node": "docker pull node",
     "docker:pull:alpine": "docker pull mhart/alpine-node",
