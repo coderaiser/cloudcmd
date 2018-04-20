@@ -6,55 +6,60 @@ const test = require('tape');
 const io = require('socket.io-client');
 
 const configPath = path.join(__dirname, '../..', 'server', 'config');
-const before = require('../before');
+const {connect} = require('../before');
 const configFn = require(configPath);
 
-test('cloudcmd: console: enabled by default', (t) => {
+test('cloudcmd: console: enabled by default',async (t) => {
     const config = {
         auth: false
     };
     
-    before({config}, (port, after) => {
-        const socket = io(`http://localhost:${port}/console`);
-        socket.emit('auth', configFn('username'), configFn('password'));
+    const {port, done} = await connect({config});
+    
+    const socket = io(`http://localhost:${port}/console`);
+    socket.emit('auth', configFn('username'), configFn('password'));
+    
+    socket.once('data', (data) => {
+        socket.close();
+        done();
         
-        socket.once('data', (data) => {
-            socket.close();
-            t.equal(data, 'client #1 console connected\n', 'should emit data event');
-            after();
-            t.end();
-        });
+        t.equal(data, 'client #1 console connected\n', 'should emit data event');
+        t.end();
     });
 });
 
-test('cloudcmd: console: enabled', (t) => {
-    const config = {console: true};
+test('cloudcmd: console: enabled', async (t) => {
+    const config = {
+        console: true,
+    };
     
-    before({config}, (port, after) => {
-        const socket = io(`http://localhost:${port}/console`);
-        socket.emit('auth', configFn('username'), configFn('password'));
+    const {port, done} = await connect({config});
+    const socket = io(`http://localhost:${port}/console`);
+    
+    socket.emit('auth', configFn('username'), configFn('password'));
+    socket.once('data', (data) => {
+        done();
+        socket.close();
         
-        socket.once('data', (data) => {
-            socket.close();
-            t.equal(data, 'client #1 console connected\n', 'should emit data event');
-            after();
-            t.end();
-        });
+        t.equal(data, 'client #1 console connected\n', 'should emit data event');
+        t.end();
     });
 });
 
-test('cloudcmd: console: disabled', (t) => {
-    const config = {console: false};
+test('cloudcmd: console: disabled', async (t) => {
+    const config = {
+        console: false,
+    };
     
-    before({config}, (port, after) => {
-        const socket = io(`http://localhost:${port}/console`);
+    const {port, done} = await connect({config});
+    const socket = io(`http://localhost:${port}/console`);
+    
+    socket.on('error', (error) => {
+        socket.close();
+        done();
         
-        socket.on('error', (error) => {
-            t.equal(error, 'Invalid namespace', 'should emit error');
-            socket.close();
-            after();
-            t.end();
-        });
+        t.equal(error, 'Invalid namespace', 'should emit error');
+        t.end();
     });
 });
 
