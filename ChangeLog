@@ -1,3 +1,13 @@
+2018.04.23, v9.1.6
+
+fix:
+- (cloudfunc) XSS vulnerability: html in file name: allows executing malicious javascript code in the user's browser
+
+feature:
+- (entity) add &quot;
+- (package) add prewisdom
+
+
 2018.04.19, v9.1.5
 
 fix:
