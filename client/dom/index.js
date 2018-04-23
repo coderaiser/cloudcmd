@@ -10,8 +10,9 @@ const Util = require('../../common/util');
 const {
     getTitle,
     FS,
-    Entity,
 } = require('../../common/cloudfunc');
+
+const {encode} = require('../../common/entity');
 
 const DOMTree = require('./dom-tree');
 
@@ -747,7 +748,7 @@ function CmdProto() {
         const dir = PREFIX + FS + Info.dirPath;
         
         link.title      = name;
-        link.innerHTML  = Entity.encode(name);
+        link.innerHTML  = encode(name);
         link.href       = dir + name;
         
         current.setAttribute('data-name', 'js-file-' + name);

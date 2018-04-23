@@ -6,17 +6,20 @@ const test = require('tape');
 const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
 const request = require('request');
+const mockRequire = require('mock-require');
+const clear = require('clear-module');
 
 const rootDir = '../..';
 
 const routePath = `${rootDir}/server/route`;
+const beforePath = '../before';
 
 const {
     _getIndexPath,
 } = require(routePath);
 
 const route = require(routePath);
-const {connect}= require('../before');
+const {connect} = require(beforePath);
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 const _pullout = promisify(pullout);
@@ -73,20 +76,6 @@ test('cloudcmd: route: buttons: console', async (t) => {
     const result = await getStr(`http://localhost:${port}`);
     
     t.notOk(/icon-console none/.test(result), 'should not hide console');
-    t.end();
-    
-    done();
-});
-
-test('cloudcmd: route: buttons: no terminal', async (t) => {
-    const config = {
-        terminal: false
-    };
-    
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
-    
-    t.ok(/icon-terminal none/.test(result), 'should hide terminal');
     t.end();
     
     done();
@@ -286,8 +275,91 @@ test('cloudcmd: route: sendIndex: error', async (t) => {
     const data = await getStr(`http://localhost:${port}`);
     
     t.equal(data, error.message, 'should return error');
-    t.end();
     
     done();
+    t.end();
+});
+
+test('cloudcmd: route: sendIndex: encode', async (t) => {
+    const name = '"><svg onload=alert(3);>';
+    const nameEncoded = '&quot;&gt;&lt;svg&nbsp;onload=alert(3);&gt;';
+    const files = [{
+        name,
+    }];
+    
+    const read = (path, fn) => fn(null, {
+        path,
+        files,
+    });
+    
+    mockRequire('flop', {
+        read
+    });
+    
+    clear(routePath);
+    clear('../../server/cloudcmd');
+    clear(beforePath);
+    
+    const {connect} = require(beforePath);
+    const {port, done} = await connect();
+    const data = await getStr(`http://localhost:${port}`);
+    
+    t.ok(data.includes(nameEncoded), 'should encode name');
+    
+    clear('flop');
+    clear(routePath);
+    clear('../../server/cloudcmd');
+    clear(beforePath);
+    
+    done();
+    t.end();
+});
+
+test('cloudcmd: route: sendIndex: encode', async (t) => {
+    const name = '"><svg onload=alert(3);>';
+    const files = [{
+        name,
+    }];
+    
+    const read = (path, fn) => fn(null, {
+        path,
+        files,
+    });
+    
+    mockRequire('flop', {
+        read
+    });
+    
+    clear(routePath);
+    clear('../../server/cloudcmd');
+    clear(beforePath);
+    
+    const {connect} = require(beforePath);
+    const {port, done} = await connect();
+    const data = await getStr(`http://localhost:${port}`);
+    
+    t.notOk(data.includes(name), 'should put not encoded name');
+    
+    clear('flop');
+    clear(routePath);
+    clear('../../server/cloudcmd');
+    clear(beforePath);
+    
+    done();
+    t.end();
+});
+
+test('cloudcmd: route: buttons: no terminal', async (t) => {
+    const config = {
+        terminal: false
+    };
+    
+    const {port, done} = await connect({config});
+    const result = await getStr(`http://localhost:${port}`);
+    
+    t.ok(/icon-terminal none/.test(result), 'should hide terminal');
+    
+    done();
+    t.end();
 });
 

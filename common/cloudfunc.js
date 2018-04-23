@@ -3,7 +3,7 @@
 const rendy = require('rendy');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
-const Entity = require('./entity');
+const encode = require('./entity').encode;
 
 const getHeaderField = currify(_getHeaderField);
 
@@ -20,7 +20,6 @@ Path('/');
 module.exports.FS = FS;
 module.exports.apiURL = '/api/v1';
 module.exports.MAX_FILE_SIZE = 500 * 1024;
-module.exports.Entity = Entity;
 module.exports.getHeaderField = getHeaderField;
 module.exports.getPathLink = getPathLink;
 module.exports.getDotDot = getDotDot;
@@ -181,7 +180,8 @@ module.exports.buildFromJSON = (params) => {
     }
     
     fileTable += files.map((file) => {
-        const link = prefix + FS + path + file.name;
+        const name = encode(file.name);
+        const link = prefix + FS + path + name;
         
         const type = getType(file.size);
         const size = getSize(file.size);
@@ -192,13 +192,13 @@ module.exports.buildFromJSON = (params) => {
         
         const linkResult = rendy(templateLink, {
             link,
-            title: file.name,
-            name: Entity.encode(file.name),
+            title: name,
+            name,
             attribute: getAttribute(file.size)
         });
         
-        const dataName = 'data-name="js-file-' + file.name + '" ';
-        const attribute = 'draggable="true" ' + dataName;
+        const dataName = `data-name="js-file-${name}" `;
+        const attribute = `draggable="true" ${dataName}`;
         
         return rendy(templateFile, {
             tag: 'li',
