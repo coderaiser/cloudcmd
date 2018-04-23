@@ -315,7 +315,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: sendIndex: encode', async (t) => {
+test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     const name = '"><svg onload=alert(3);>';
     const files = [{
         name,
@@ -338,7 +338,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     const {port, done} = await connect();
     const data = await getStr(`http://localhost:${port}`);
     
-    t.notOk(data.includes(name), 'should put not encoded name');
+    t.notOk(data.includes(name), 'should not put not encoded name');
     
     clear('flop');
     clear(routePath);
