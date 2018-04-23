@@ -4,6 +4,7 @@ const Entities = {
     '&nbsp;': ' ',
     '&lt;': '<',
     '&gt;': '>',
+    '&quot;': '"',
 };
 
 const keys = Object.keys(Entities);
