@@ -212,6 +212,10 @@ function CloudCmdProto(Util, DOM) {
              * should be called from config.js only
              * after successful update on server
              */
+             
+            if (key === 'password')
+                return;
+            
             config[key] = value;
         };
         
