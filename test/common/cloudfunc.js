@@ -1,16 +1,22 @@
 'use strict';
 
+const fs = require('fs');
+
 const DIR = __dirname + '/../../';
 const COMMONDIR = DIR + 'common/';
 const TMPLDIR = DIR + 'tmpl/';
 
-const Util = require(COMMONDIR + 'util');
+const {
+    time,
+    timeEnd,
+} = require(COMMONDIR + 'util');
+
 const CloudFuncPath = COMMONDIR + 'cloudfunc';
 
 const CloudFunc = require(CloudFuncPath);
 
-const files = require('files-io');
 const currify = require('currify');
+const readFilesSync = require('@cloudcmd/read-files-sync');
 
 const swap = currify((fn, a, b) => fn(b, a));
 
@@ -22,12 +28,13 @@ const htmlLooksLike = require('html-looks-like');
 const FS_DIR = TMPLDIR   + 'fs/';
 const EXPECT_PATH = __dirname + '/cloudfunc.html';
 
-const TMPL_PATH = [
+const addHBS = (a) => `${a}.hbs`;
+const TMPL = [
     'file',
     'path',
     'pathLink',
     'link',
-];
+].map(addHBS);
 
 const JSON_FILES = {
     path  : '/etc/X11/',
@@ -62,72 +69,48 @@ let Expect =
     '</div>';
 
 test('cloudfunc: render', (t) => {
-    const paths = {};
-    const filesList = TMPL_PATH
-        .map((name) => {
-            const path = FS_DIR + name + '.hbs';
-            
-            paths[path] = name;
-            
-            return path;
-        })
-        .concat(EXPECT_PATH);
+    const template = readFilesSync(FS_DIR, TMPL, 'utf8');
+    const expect = fs.readFileSync(EXPECT_PATH, 'utf8');
     
-    files.read(filesList, 'utf8', (error, files) => {
-        const template = {};
-        
-        if (error)
-            throw(Error(error));
-            
-        Util.time('CloudFunc.buildFromJSON');
-        
-        Object.keys(files).forEach((path) => {
-            const name = paths[path];
-            
-            if (path !== EXPECT_PATH)
-                template[name] = files[path];
-        });
-        
-        const expect = files[EXPECT_PATH];
-        const result = CloudFunc.buildFromJSON({
-            prefix  : '',
-            data    : JSON_FILES,
-            template: template
-        });
-        
-        Expect += expect;
-        
-        let i;
-        const isNotOk = Expect
-            .split('')
-            .some((item, number) => {
-                const ret = result[number] !== item;
-                
-                if (ret) {
-                    i = number;
-                }
-                
-                return ret;
-            });
-        
-        Util.timeEnd('CloudFunc.buildFromJSON');
-        
-        if (isNotOk) {
-            console.log(
-                `Error in char number: ${i}\n`,
-                `Expect: ${Expect.substr(i)}\n`,
-                `Result: ${result.substr(i)}`
-            );
-            
-            console.log('buildFromJSON: Not OK');
-        }
-        
-        t.equal(Expect, result, 'should be equal rendered json data');
-        
-        htmlLooksLike(Expect, result);
-        
-        t.end();
+    time('CloudFunc.buildFromJSON');
+    const result = CloudFunc.buildFromJSON({
+        prefix  : '',
+        data    : JSON_FILES,
+        template: template
     });
+    
+    Expect += expect;
+    
+    let i;
+    const isNotOk = Expect
+        .split('')
+        .some((item, number) => {
+            const ret = result[number] !== item;
+            
+            if (ret) {
+                i = number;
+            }
+            
+            return ret;
+        });
+    
+    timeEnd('CloudFunc.buildFromJSON');
+    
+    if (isNotOk) {
+        console.log(
+            `Error in char number: ${i}\n`,
+            `Expect: ${Expect.substr(i)}\n`,
+            `Result: ${result.substr(i)}`
+        );
+        
+        console.log('buildFromJSON: Not OK');
+    }
+    
+    t.equal(Expect, result, 'should be equal rendered json data');
+    
+    htmlLooksLike(Expect, result);
+    
+    t.end();
 });
 
 test('cloudfunc: formatMsg', (t) => {
