@@ -4,6 +4,7 @@ const rendy = require('rendy');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
 const encode = require('./entity').encode;
+const btoa = require('./btoa');
 
 const getHeaderField = currify(_getHeaderField);
 
@@ -12,7 +13,6 @@ const getHeaderField = currify(_getHeaderField);
 /* название программы */
 const NAME = 'Cloud Commander';
 const FS = '/fs';
-
 const Path = store();
 
 Path('/');
@@ -96,6 +96,11 @@ function getPathLink(url, prefix, template) {
     return pathHTML;
 }
 
+const getDataName = (name) => {
+    const encoded = btoa(name);
+    return `data-name="js-file-${encoded}" `;
+};
+
 /**
  * Функция строит таблицу файлв из JSON-информации о файлах
  * @param params - информация о файлах
@@ -108,7 +113,7 @@ module.exports.buildFromJSON = (params) => {
     const templateLink = template.link;
     const json = params.data;
     
-    const path = json.path;
+    const path = encode(json.path);
     const files = json.files;
     
     const sort = params.sort || 'name';
@@ -123,7 +128,7 @@ module.exports.buildFromJSON = (params) => {
     let fileTable = rendy(template.path, {
         link        : prefix + FS + path,
         fullPath    : path,
-        path        : htmlPath
+        path        : htmlPath,
     });
     
     const owner = 'owner';
@@ -197,7 +202,7 @@ module.exports.buildFromJSON = (params) => {
             attribute: getAttribute(file.size)
         });
         
-        const dataName = `data-name="js-file-${name}" `;
+        const dataName = getDataName(file.name);
         const attribute = `draggable="true" ${dataName}`;
         
         return rendy(templateFile, {

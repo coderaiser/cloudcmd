@@ -12,25 +12,28 @@ const {
     FS,
 } = require('../../common/cloudfunc');
 
-const {encode} = require('../../common/entity');
-
-const DOMTree = require('./dom-tree');
-
-const DOM = Object.assign({}, DOMTree, new CmdProto());
-
-module.exports = DOM;
-
 const Images = require('./images');
 const load = require('./load');
 const Files = require('./files');
 const RESTful = require('./rest');
 const Storage = require('./storage');
 
+const currentFile = require('./current-file');
+const DOMTree = require('./dom-tree');
+
+const DOM = {
+    ...DOMTree,
+    ...currentFile,
+    ...new CmdProto(),
+};
+
 DOM.Images = Images;
 DOM.load = load;
 DOM.Files = Files;
 DOM.RESTful = RESTful;
 DOM.Storage = Storage;
+
+module.exports = DOM;
 
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
@@ -103,10 +106,10 @@ function CmdProto() {
     
     function promptNew(typeName, type) {
         const {Dialog} = DOM;
-        const dir = Cmd.getCurrentDirPath();
+        const dir = DOM.getCurrentDirPath();
         const msg = 'New ' + typeName || 'File';
         const getName = () => {
-            const name = Cmd.getCurrentName();
+            const name = DOM.getCurrentName();
             
             if (name === '..')
                 return '';
@@ -159,16 +162,6 @@ function CmdProto() {
     /**
      * get current direcotory path
      */
-    this.getCurrentDirPath = (panel = DOM.getPanel()) => {
-        const path = DOM.getByDataName('js-path', panel);
-        const ret = path && path.textContent;
-        
-        return ret;
-    };
-    
-    /**
-     * get current direcotory path
-     */
     this.getParentDirPath = (panel) => {
         const path = DOM.getCurrentDirPath(panel);
         const dirName = DOM.getCurrentDirName() + '/';
@@ -202,7 +195,7 @@ function CmdProto() {
      * get current file by name
      */
     this.getCurrentByName = (name, panel = CurrentInfo.panel) => {
-        const dataName = 'js-file-' + name;
+        const dataName = 'js-file-' + btoa(name);
         const element = DOM.getByDataName(dataName, panel);
         
         return element;
@@ -246,7 +239,7 @@ function CmdProto() {
     };
     
     this.getCurrentDate = (currentFile) => {
-        const current = currentFile || Cmd.getCurrentFile();
+        const current = currentFile || DOM.getCurrentFile();
         const date = DOM
             .getByDataName('js-date', current)
             .textContent;
@@ -259,7 +252,7 @@ function CmdProto() {
      * @currentFile
      */
     this.getCurrentSize = (currentFile) => {
-        const current = currentFile || Cmd.getCurrentFile();
+        const current = currentFile || DOM.getCurrentFile();
         /* если это папка - возвращаем слово dir вместо размера*/
         const size = DOM.getByDataName('js-size', current)
             .textContent
@@ -460,9 +453,9 @@ function CmdProto() {
         
         currentFile.classList.add(CURRENT_FILE);
         
-        let path = DOM.getCurrentDirPath();
-        
+        const path = DOM.getCurrentDirPath();
         const name = CloudCmd.config('name');
+        
         if (path !== pathWas) {
             DOM.setTitle(getTitle({
                 name,
@@ -680,42 +673,6 @@ function CmdProto() {
         return link[0];
     };
     
-    /**
-     * get link from current (or param) file
-     *
-     * @param currentFile - current file by default
-     */
-    this.getCurrentPath = (currentFile) => {
-        const current = currentFile || DOM.getCurrentFile();
-        const element = DOM.getByTag('a', current)[0];
-        const prefix = CloudCmd.PREFIX;
-        const path = element.getAttribute('href')
-            .replace(RegExp('^' + prefix + FS), '');
-        
-        return path;
-    };
-    
-    /**
-     * get name from current (or param) file
-     *
-     * @param currentFile
-     */
-    this.getCurrentName = (currentFile) => {
-        const current = currentFile || DOM.getCurrentFile();
-        
-        if (!current)
-            return '';
-           
-        const link = DOM.getCurrentLink(current);
-        
-        if (!link)
-            return '';
-            
-        const name = link.title;
-        
-        return name;
-    };
-    
     this.getFilenames = (files) => {
         if (!files)
             throw Error('AllFiles could not be empty');
@@ -733,27 +690,6 @@ function CmdProto() {
         });
         
         return names;
-    };
-    
-    /**
-     * set name from current (or param) file
-     *
-     * @param name
-     * @param current
-     */
-    this.setCurrentName = (name, current) => {
-        const Info = CurrentInfo;
-        const link = Info.link;
-        const PREFIX = CloudCmd.PREFIX;
-        const dir = PREFIX + FS + Info.dirPath;
-        
-        link.title      = name;
-        link.innerHTML  = encode(name);
-        link.href       = dir + name;
-        
-        current.setAttribute('data-name', 'js-file-' + name);
-        
-        return link;
     };
     
     /**
@@ -935,10 +871,10 @@ function CmdProto() {
      */
     this.deleteCurrent = (current) => {
         if (!current)
-            Cmd.getCurrentFile();
+            DOM.getCurrentFile();
         
         const parent = current && current.parentElement;
-        const name = Cmd.getCurrentName(current);
+        const name = DOM.getCurrentName(current);
         
         if (current && name !== '..') {
             const next = current.nextSibling;
@@ -970,10 +906,10 @@ function CmdProto() {
     this.renameCurrent = (current) => {
         const Dialog = DOM.Dialog;
         
-        if (!Cmd.isCurrentFile(current))
-            current = Cmd.getCurrentFile();
+        if (!DOM.isCurrentFile(current))
+            current = DOM.getCurrentFile();
         
-        const from = Cmd.getCurrentName(current);
+        const from = DOM.getCurrentName(current);
         
         if (from === '..')
             return Dialog.alert.noFiles(TITLE);
@@ -982,7 +918,7 @@ function CmdProto() {
         
         Dialog.prompt(TITLE, 'Rename', from, {cancel}).then((to) => {
             const isExist = !!DOM.getCurrentByName(to);
-            const dirPath = Cmd.getCurrentDirPath();
+            const dirPath = DOM.getCurrentDirPath();
             
             if (from === to)
                 return;
@@ -1157,38 +1093,38 @@ function CmdProto() {
     this.CurrentInfo = CurrentInfo,
     
     this.updateCurrentInfo = (currentFile) => {
-        const info = Cmd.CurrentInfo;
-        const current = currentFile || Cmd.getCurrentFile();
+        const info = DOM.CurrentInfo;
+        const current = currentFile || DOM.getCurrentFile();
         const files = current.parentElement;
         const panel = files.parentElement;
         
-        const panelPassive = Cmd.getPanel({
+        const panelPassive = DOM.getPanel({
             active: false
         });
         
         const filesPassive = DOM.getFiles(panelPassive);
-        const name = Cmd.getCurrentName(current);
+        const name = DOM.getCurrentName(current);
         
-        info.dir            = Cmd.getCurrentDirName();
-        info.dirPath        = Cmd.getCurrentDirPath();
-        info.parentDirPath  = Cmd.getParentDirPath();
+        info.dir            = DOM.getCurrentDirName();
+        info.dirPath        = DOM.getCurrentDirPath();
+        info.parentDirPath  = DOM.getParentDirPath();
         info.element        = current;
         info.ext            = Util.getExt(name);
         info.files          = [...files.children];
         info.filesPassive   = [...filesPassive];
         info.first          = files.firstChild;
-        info.getData        = Cmd.getCurrentData;
+        info.getData        = DOM.getCurrentData;
         info.last           = files.lastChild;
-        info.link           = Cmd.getCurrentLink(current);
-        info.mode           = Cmd.getCurrentMode(current);
+        info.link           = DOM.getCurrentLink(current);
+        info.mode           = DOM.getCurrentMode(current);
         info.name           = name;
-        info.path           = Cmd.getCurrentPath(current);
+        info.path           = DOM.getCurrentPath(current);
         info.panel          = panel;
         info.panelPassive   = panelPassive;
-        info.size           = Cmd.getCurrentSize(current);
-        info.isDir          = Cmd.isCurrentIsDir();
-        info.isSelected     = Cmd.isSelected(current);
-        info.panelPosition  = Cmd.getPanel().dataset.name.replace('js-', '');
+        info.size           = DOM.getCurrentSize(current);
+        info.isDir          = DOM.isCurrentIsDir();
+        info.isSelected     = DOM.isSelected(current);
+        info.panelPosition  = DOM.getPanel().dataset.name.replace('js-', '');
         info.isOnePanel     =
             info.panel.getAttribute('data-name') ===
             info.panelPassive.getAttribute('data-name');

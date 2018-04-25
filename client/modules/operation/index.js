@@ -11,6 +11,10 @@ const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const exec = require('execon');
 
+const {
+    encode,
+} = require('../../../common/entity');
+
 const RESTful = require('../../dom/rest');
 const removeExtension = require('./remove-extension');
 const setListeners = require('./set-listeners');
@@ -213,7 +217,7 @@ function OperationProto(operation, data) {
             if (n >= 5)
                 name += '\n...';
             
-            msg = msgAsk + msgSel + n + ' files/directories?\n' + name ;
+            msg = msgAsk + msgSel + n + ' files/directories?\n' + encode(name);
         } else {
             const current = DOM.getCurrentFile();
             const isDir = DOM.isCurrentIsDir(current);
@@ -312,7 +316,7 @@ function OperationProto(operation, data) {
         const operation = isCopy ? copyFn : moveFn;
         
         if (shouldAsk && config(option))
-            return message(title, to, names)
+            return message(title, to, names.map(encode))
                 .then(ask);
         
         ask(to);
@@ -331,10 +335,10 @@ function OperationProto(operation, data) {
             function go() {
                 showLoad();
                  
-                files   = {
-                    from    : from,
-                    to      : to,
-                    names   : names
+                files = {
+                    from,
+                    to,
+                    names,
                 };
                 
                 operation(files, (error) => {

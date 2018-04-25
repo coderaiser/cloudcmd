@@ -5,6 +5,9 @@
 const itype = require('itype/legacy');
 
 const {FS} = require('../../common/cloudfunc');
+const {
+    encode,
+} = require('../../common/entity');
 
 module.exports = new RESTful();
 
@@ -194,10 +197,12 @@ function RESTful() {
                 const statusText = jqXHR.statusText;
                 const status = jqXHR.status;
                 const text = status === 404 ? response : statusText;
+                const encoded = encode(text);
                 
-                Images.show.error(text);
+                Images.show.error(encoded);
+                
                 setTimeout(() => {
-                    DOM.Dialog.alert(CloudCmd.TITLE, text);
+                    DOM.Dialog.alert(CloudCmd.TITLE, encoded);
                 }, 100);
                 
                 p.callback(Error(text));
