@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+
 const test = require('tape');
 const {promisify} = require('es6-promisify');
 const pullout = require('pullout');
@@ -9,10 +10,11 @@ const request = require('request');
 const mockRequire = require('mock-require');
 const clear = require('clear-module');
 
-const rootDir = '../..';
+const rootDir = path.join(__dirname, '../..');
 
 const routePath = `${rootDir}/server/route`;
-const beforePath = '../before';
+const cloudcmdPath = `${rootDir}/server/cloudcmd`;
+const beforePath = path.join(__dirname, '../before');
 
 const {
     _getIndexPath,
@@ -343,6 +345,41 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     clear('flop');
     clear(routePath);
     clear('../../server/cloudcmd');
+    clear(beforePath);
+    
+    done();
+    t.end();
+});
+
+test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
+    const name = '$$$\'&quot;';
+    const files = [{
+        name,
+    }];
+    
+    const read = (path, fn) => fn(null, {
+        path,
+        files,
+    });
+    
+    mockRequire('flop', {
+        read
+    });
+    
+    clear(routePath);
+    clear(cloudcmdPath);
+    clear(beforePath);
+    
+    const {connect} = require(beforePath);
+    const {port, done} = await connect();
+    
+    await getStr(`http://localhost:${port}`);
+    
+    t.pass('should not hang up');
+    
+    clear('flop');
+    clear(routePath);
+    clear(cloudcmdPath);
     clear(beforePath);
     
     done();
