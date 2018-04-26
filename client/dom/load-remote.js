@@ -3,7 +3,7 @@
 /* global CloudCmd */
 
 const exec = require('execon');
-const rendy = require('rendy');
+const rendy = require('rendy/legacy');
 const itype = require('itype/legacy');
 const {findObjByNameInArr} = require('../../common/util');
 

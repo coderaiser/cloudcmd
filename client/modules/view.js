@@ -5,7 +5,7 @@
 require('../../css/view.css');
 
 const itype = require('itype/legacy');
-const rendy = require('rendy');
+const rendy = require('rendy/legacy');
 const exec = require('execon');
 const currify = require('currify/legacy');
 

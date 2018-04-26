@@ -1,6 +1,6 @@
 'use strict';
 
-const rendy = require('rendy');
+const rendy = require('rendy/legacy');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
 const encode = require('./entity').encode;

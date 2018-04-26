@@ -4,7 +4,7 @@
 
 require('../../css/config.css');
 
-const rendy = require('rendy');
+const rendy = require('rendy/legacy');
 const exec = require('execon');
 const currify = require('currify/legacy');
 const squad = require('squad/legacy');
