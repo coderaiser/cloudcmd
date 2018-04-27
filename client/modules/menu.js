@@ -8,6 +8,8 @@ const exec = require('execon');
 const currify = require('currify/legacy');
 const wrap = require('wraptile/legacy');
 
+const supermenu = require('supermenu');
+
 const {FS} = require('../../common/cloudfunc');
 
 const load = require('../dom/load');
@@ -48,19 +50,8 @@ function MenuProto(Position) {
     };
     
     this.show = (position) => {
-        const showFunc = () => {
-            show(position);
-            Images.hide();
-        };
-        
-        exec.if(window.MenuIO, showFunc, () => {
-            DOM.loadMenu((error) => {
-                if (error)
-                    return alert(error);
-                
-                showFunc();
-            });
-        });
+        show(position);
+        Images.hide();
     };
     
     function getPosition(position) {
@@ -118,10 +109,9 @@ function MenuProto(Position) {
             const menuData = getMenuData(isAuth);
             const options = getOptions(NOT_FILE);
             const optionsFile = getOptions();
-            const MenuIO = window.MenuIO;
             
-            MenuContext = new MenuIO(fm, options, menuData);
-            MenuContextFile = new MenuIO(fm, optionsFile, menuDataFile);
+            MenuContext = supermenu(fm, options, menuData);
+            MenuContextFile = supermenu(fm, optionsFile, menuDataFile);
             
             const el = DOM.getCurrentByPosition({x, y});
             const menuName = getMenuNameByEl(el);

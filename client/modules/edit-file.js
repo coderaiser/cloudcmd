@@ -1,12 +1,14 @@
 'use strict';
 
-/* global CloudCmd, DOM, MenuIO */
+/* global CloudCmd, DOM*/
 
 const Format = require('format-io');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
 const squad = require('squad/legacy');
+const fullstore = require('fullstore/legacy');
 const exec = require('execon');
+const supermenu = require('supermenu');
 
 const call = currify((fn, callback) => {
     fn();
@@ -18,6 +20,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     const Dialog = DOM.Dialog;
     const EditFile = exec.bind();
     const config = CloudCmd.config;
+    const isFocuse = fullstore();
     
     let Menu;
     
@@ -119,66 +122,61 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         
         event.preventDefault();
         
-        !Menu && DOM.loadRemote('menu', (error) => {
-            let noFocus;
-            const editor = CloudCmd.Edit.getEditor();
-            const options = {
-                beforeShow: (params) => {
-                    params.x -= 18;
-                    params.y -= 27;
-                },
-                
-                afterClick: () => {
-                    !noFocus && editor.focus();
-                }
-            };
+        if (Menu)
+            return;
+        
+        const editor = CloudCmd.Edit.getEditor();
+        const options = {
+            beforeShow: (params) => {
+                params.x -= 18;
+                params.y -= 27;
+            },
             
-            const menuData = {
-                'Save           Ctrl+S' : () => {
-                    editor.save();
-                },
-                'Go To Line     Ctrl+G' : () => {
-                    noFocus = true;
-                    editor.goToLine();
-                },
-                'Cut            Ctrl+X' : () => {
-                    editor.cutToClipboard();
-                },
-                'Copy           Ctrl+C' : () => {
-                    editor.copyToClipboard();
-                },
-                'Paste          Ctrl+V' : () => {
-                    editor.pasteFromClipboard();
-                },
-                'Delete         Del'    : () => {
-                    editor.remove('right');
-                },
-                'Select All     Ctrl+A' : () => {
-                    editor.selectAll();
-                },
-                'Beautify       Ctrl+B' : () => {
-                    editor.beautify();
-                },
-                'Minify         Ctrl+M' : () => {
-                    editor.minify();
-                },
-                'Close          Esc'    : () => {
-                    EditFile.hide();
-                }
-            };
-            
-            if (error)
-                return Dialog.alert(TITLE, error);
-            
-            if (Menu || !MenuIO)
-                return;
-                
-            const element = CloudCmd.Edit.getElement();
-            
-            Menu = new MenuIO(element, options, menuData);
-            Menu.show(position.x, position.y);
-        });
+            afterClick: () => {
+                editor.focus();
+            }
+        };
+        
+        const element = CloudCmd.Edit.getElement();
+        
+        Menu = supermenu(element, options, getMenuData());
+        Menu.show(position.x, position.y);
     }
+    
+    function getMenuData() {
+        return {
+            'Save           Ctrl+S' : () => {
+                editor.save();
+            },
+            'Go To Line     Ctrl+G' : () => {
+                editor.goToLine();
+            },
+            'Cut            Ctrl+X' : () => {
+                editor.cutToClipboard();
+            },
+            'Copy           Ctrl+C' : () => {
+                editor.copyToClipboard();
+            },
+            'Paste          Ctrl+V' : () => {
+                editor.pasteFromClipboard();
+            },
+            'Delete         Del'    : () => {
+                editor.remove('right');
+            },
+            'Select All     Ctrl+A' : () => {
+                editor.selectAll();
+            },
+            'Beautify       Ctrl+B' : () => {
+                editor.beautify();
+            },
+            'Minify         Ctrl+M' : () => {
+                editor.minify();
+            },
+            'Close          Esc'    : () => {
+                EditFile.hide();
+            }
+        };
+    };
     
     function setMsgChanged(name) {
         MSG_CHANGED = 'Do you want to save changes to ' + name + '?';

@@ -79,13 +79,6 @@ function CmdProto() {
         return DOM;
     };
     
-    /** function loads css and js of Menu
-     * @param callback
-     */
-    this.loadMenu = function(callback) {
-        return DOM.loadRemote('menu', callback);
-    };
-    
     /**
      * create new folder
      *

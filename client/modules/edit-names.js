@@ -4,6 +4,7 @@
 
 const currify = require('currify/legacy');
 const exec = require('execon');
+const supermenu = require('supermenu');
 
 const reject = Promise.reject.bind(Promise);
 
@@ -15,8 +16,9 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     const alert = currify(Dialog.alert, TITLE);
     const refresh = currify(_refresh);
     
+    let Menu;
+    
     const EditNames = this;
-    let Menu, MenuIO;
     const ConfigView  = {
         beforeClose: () => {
             exec.ifExist(Menu, 'hide');
@@ -149,62 +151,54 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
         };
         
         event.preventDefault();
+            
+        if (Menu)
+            return;
         
-        !Menu && DOM.loadRemote('menu', (error) => {
-            MenuIO = window.MenuIO;
-            let noFocus;
-            const editor = CloudCmd.Edit.getEditor();
-            const options = {
-                beforeShow: (params) => {
-                    params.x -= 18;
-                    params.y -= 27;
-                },
-                
-                afterClick: () => {
-                    !noFocus && editor.focus();
-                }
-            };
+        const editor = CloudCmd.Edit.getEditor();
+        const options = {
+            beforeShow: (params) => {
+                params.x -= 18;
+                params.y -= 27;
+            },
             
-            const menuData = {
-                'Save           Ctrl+S' : () => {
-                    editor.save();
-                    EditNames.hide();
-                },
-                'Go To Line     Ctrl+G' : () => {
-                    noFocus = true;
-                    editor.goToLine();
-                },
-                'Cut            Ctrl+X' : () => {
-                    editor.cutToClipboard();
-                },
-                'Copy           Ctrl+C' : () => {
-                    editor.copyToClipboard();
-                },
-                'Paste          Ctrl+V' : () => {
-                    editor.pasteFromClipboard();
-                },
-                'Delete         Del'    : () => {
-                    editor.remove('right');
-                },
-                'Select All     Ctrl+A' : () => {
-                    editor.selectAll();
-                },
-                'Close          Esc'    : () => {
-                    EditNames.hide();
-                }
-            };
-            
-            if (error)
-                return alert(error);
-            
-            if (Menu || !MenuIO)
-                return;
-                
-            const element = CloudCmd.Edit.getElement();
-            
-            Menu = new MenuIO(element, options, menuData);
-            Menu.show(position.x, position.y);
-        });
+            afterClick: () => {
+                editor.focus();
+            }
+        };
+        
+        const menuData = {
+            'Save           Ctrl+S' : () => {
+                editor.save();
+                EditNames.hide();
+            },
+            'Go To Line     Ctrl+G' : () => {
+                editor.goToLine();
+            },
+            'Cut            Ctrl+X' : () => {
+                editor.cutToClipboard();
+            },
+            'Copy           Ctrl+C' : () => {
+                editor.copyToClipboard();
+            },
+            'Paste          Ctrl+V' : () => {
+                editor.pasteFromClipboard();
+            },
+            'Delete         Del'    : () => {
+                editor.remove('right');
+            },
+            'Select All     Ctrl+A' : () => {
+                editor.selectAll();
+            },
+            'Close          Esc'    : () => {
+                EditNames.hide();
+            }
+        };
+        
+        const element = CloudCmd.Edit.getElement();
+        
+        Menu = supermenu(element, options, menuData);
+        Menu.show(position.x, position.y);
     }
     
     function isChanged() {

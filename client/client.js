@@ -13,6 +13,7 @@ const jonny = require('jonny/legacy');
 const currify = require('currify/legacy');
 
 const bind = (f, ...a) => () => f(...a);
+const noop = () => {};
 
 const {
     apiURL,
@@ -184,12 +185,13 @@ function CloudCmdProto(Util, DOM) {
      * инициализации
      */
     this.init = (prefix, config) => {
-        const func = bind(exec.series, [
+        const func = bind(exec.parallel, [
             initModules,
             baseInit,
             loadPlugins,
+            loadStyle,
             exec.with(CloudCmd.route, location.hash),
-        ]);
+        ], noop);
         
         const funcBefore  = (callback) => {
             const src = prefix + '/join:' + [
@@ -226,6 +228,13 @@ function CloudCmdProto(Util, DOM) {
         
         exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
     };
+    
+    function loadStyle(callback) {
+        const prefix = CloudCmd.PREFIX;
+        const plugins = prefix + '/dist/cloudcmd.common.css';
+        
+        DOM.load.css(plugins, callback);
+    }
     
     function loadPlugins(callback) {
         const prefix = CloudCmd.PREFIX;

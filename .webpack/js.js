@@ -62,6 +62,7 @@ module.exports = {
         path: isDev ? distDev : dist,
         pathinfo: isDev,
         devtoolModuleFilenameTemplate,
+        publicPath: '/dist/',
     },
     externals: [
         externals

@@ -37,17 +37,6 @@
             "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/css/jquery.fancybox.min.css",
             "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/js/jquery.fancybox.min.js"
         ]
-    }, {
-        "name": "menu",
-        "version": "1.0.2",
-        "local": [
-            "/modules/menu/menu-io.min.css",
-            "/modules/menu/menu-io.min.js"
-        ],
-        "remote": [
-            "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.js",
-            "//cdn.jsdelivr.net/menu-io/{{ version }}/menu-io.min.css"
-        ]
     }],
     "data": {
         "FilePicker": {
