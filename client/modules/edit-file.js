@@ -6,7 +6,6 @@ const Format = require('format-io');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
 const squad = require('squad/legacy');
-const fullstore = require('fullstore/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');
 
@@ -20,7 +19,6 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     const Dialog = DOM.Dialog;
     const EditFile = exec.bind();
     const config = CloudCmd.config;
-    const isFocuse = fullstore();
     
     let Menu;
     
@@ -125,7 +123,6 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         if (Menu)
             return;
         
-        const editor = CloudCmd.Edit.getEditor();
         const options = {
             beforeShow: (params) => {
                 params.x -= 18;
@@ -133,6 +130,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             },
             
             afterClick: () => {
+                const editor = CloudCmd.Edit.getEditor();
                 editor.focus();
             }
         };
@@ -144,6 +142,8 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     }
     
     function getMenuData() {
+        const editor = CloudCmd.Edit.getEditor();
+        
         return {
             'Save           Ctrl+S' : () => {
                 editor.save();
@@ -176,7 +176,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
                 EditFile.hide();
             }
         };
-    };
+    }
     
     function setMsgChanged(name) {
         MSG_CHANGED = 'Do you want to save changes to ' + name + '?';

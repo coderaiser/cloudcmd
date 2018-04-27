@@ -5,7 +5,6 @@
 CloudCmd.Menu = MenuProto;
 
 const exec = require('execon');
-const currify = require('currify/legacy');
 const wrap = require('wraptile/legacy');
 
 const supermenu = require('supermenu');
@@ -27,7 +26,6 @@ function MenuProto(Position) {
     const Images = DOM.Images;
     const Menu = this;
     const TITLE = 'Cloud Commander';
-    const alert = currify(Dialog.alert, TITLE);
     const alertNoFiles = wrap(Dialog.alert.noFiles)(TITLE);
     const uploadTo = wrap(_uploadTo);
     
