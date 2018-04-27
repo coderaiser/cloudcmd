@@ -1,3 +1,11 @@
+2018.04.27, v9.3.0
+
+feature:
+- (package) smalltalk: bower -> npm
+- (modules) menu-io -> supermenu
+- (package) rendy v2.0.0
+
+
 2018.04.25, v9.2.0
 
 fix:
