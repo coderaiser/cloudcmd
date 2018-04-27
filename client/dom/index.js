@@ -12,6 +12,7 @@ const load = require('./load');
 const Files = require('./files');
 const RESTful = require('./rest');
 const Storage = require('./storage');
+const Dialog = require('./dialog');
 
 const currentFile = require('./current-file');
 const DOMTree = require('./dom-tree');
@@ -27,6 +28,7 @@ DOM.load = load;
 DOM.Files = Files;
 DOM.RESTful = RESTful;
 DOM.Storage = Storage;
+DOM.Dialog = Dialog;
 
 module.exports = DOM;
 

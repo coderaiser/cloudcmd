@@ -18,14 +18,7 @@ module.exports = window.CloudCmd = (config) => {
     window.DOM = DOM;
     window.CloudCmd = require('./client');
     
-    const Dialog = require('./dom/dialog');
-    
     const prefix = getPrefix(config.prefix);
-    const {htmlDialogs} = config;
-    
-    DOM.Dialog = Dialog(prefix, {
-        htmlDialogs
-    });
     
     require('./listeners');
     require('./key');
