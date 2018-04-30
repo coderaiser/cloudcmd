@@ -1,3 +1,14 @@
+2018.04.30, v9.3.1
+
+fix:
+- (listeners) onPathElementClick: empty space (#171)
+
+feature:
+- (package) sinon v5.0.1
+- (travis) node_js: add 10
+- (docker) node v10
+
+
 2018.04.27, v9.3.0
 
 feature:
