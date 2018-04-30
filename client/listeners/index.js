@@ -16,6 +16,9 @@ const {
     apiURL
 } = require('../../common/cloudfunc');
 
+const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
+const SPACE = ' ';
+
 module.exports.init = () => {
     contextMenu();
     dragndrop();
@@ -208,7 +211,9 @@ function onPathElementClick(panel, event) {
          */
         link        = link.replace('%%', '%25%');
         link        = decodeURI(link);
+        
         link        = link.replace(RegExp('^' + prefix + FS), '') || '/';
+        link        = link.replace(NBSP_REG, SPACE);
         
         noCurrent   = isNoCurrent(panel);
         
