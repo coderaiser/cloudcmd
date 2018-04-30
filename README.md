@@ -90,7 +90,7 @@ const socket = io.listen(server, {
 });
 
 const config = {
-    prefix /* base URL or function which returns base URL (optional)   */
+    prefix // base URL or function which returns base URL (optional)
 };
 
 const plugins = [
@@ -111,10 +111,10 @@ const modules = {
 };
 
 app.use(cloudcmd({
-    socket,  /* used by Config, Edit (optional) and Console (required)   */
-    config,  /* config data (optional)                                   */
-    plugins, /* optional */
-    modules, /* optional */
+    socket,  // used by Config, Edit (optional) and Console (required)
+    config,  // config data (optional)
+    plugins, // optional
+    modules, // optional
 }));
 
 server.listen(port);
