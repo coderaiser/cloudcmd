@@ -3,6 +3,8 @@
 /* global DOM */
 /* global CloudCmd */
 
+const btoa = require('../../common/btoa');
+
 const {
     encode,
     decode,

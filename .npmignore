@@ -1,4 +1,5 @@
 .*
+*.spec.js
 manifest.yml
 Dockerfile*
 docker-compose.yml
