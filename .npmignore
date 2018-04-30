@@ -2,7 +2,6 @@
 manifest.yml
 Dockerfile*
 docker-compose.yml
-shell
 test
 coverage
 css

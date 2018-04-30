@@ -3,7 +3,6 @@ node_modules
 npm-debug.log*
 coverage
 test
-shell
 manifest.yml
 app.json
 bower.json
