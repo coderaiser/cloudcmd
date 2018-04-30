@@ -178,53 +178,47 @@ function isNoCurrent(panel) {
     return false;
 }
 
-function onPathElementClick(panel, event) {
-    let link, href, url, noCurrent;
-    
+function decodePath(path){
+    const url = CloudCmd.HOST;
     const prefix = CloudCmd.PREFIX;
+    const prefixReg = RegExp('^' + prefix + FS);
+    
+    return decodeURI(path)
+        .replace(url, '')
+        .replace(prefixReg, '')
+    // browser doesn't replace % -> %25% do it for him
+        .replace('%%', '%25%')
+        .replace(NBSP_REG, SPACE) || '/';
+}
+    
+
+function onPathElementClick(panel, event) {
+    event.preventDefault();
+    
     const element = event.target;
     const attr = element.getAttribute('data-name');
+    const noCurrent = isNoCurrent(panel);
     
-    switch (attr) {
-    case 'js-clear-storage':
-        Storage.clear();
-        break;
+    if (attr === 'js-clear-storage')
+        return Storage.clear();
     
-    case 'js-refresh':
-        noCurrent = isNoCurrent(panel);
-        
-        CloudCmd.refresh({
+    if (attr === 'js-refresh')
+        return CloudCmd.refresh({
             panel,
             noCurrent
         });
-        
-        event.preventDefault();
-        break;
     
-    case 'js-path-link':
-        url         = CloudCmd.HOST;
-        href        = element.href;
-        link        = href.replace(url, '');
-        /**
-         * browser doesn't replace % -> %25%
-         * do it for him
-         */
-        link        = link.replace('%%', '%25%');
-        link        = decodeURI(link);
-        
-        link        = link.replace(RegExp('^' + prefix + FS), '') || '/';
-        link        = link.replace(NBSP_REG, SPACE);
-        
-        noCurrent   = isNoCurrent(panel);
-        
-        CloudCmd.loadDir({
-            path        : link,
-            isRefresh   : false,
-            panel       : noCurrent ? panel : Info.panel
-        });
-        
-        event.preventDefault();
-    }
+    if (attr !== 'js-path-link')
+        return;
+    
+    const {href} = element;
+    const path = decodePath(href);
+    
+    CloudCmd.loadDir({
+        path,
+        isRefresh: false,
+        panel: noCurrent ? panel : Info.panel
+    });
 }
 
 function execIfNotUL(callback, event) {
