@@ -1,3 +1,14 @@
+2018.05.01, v9.3.2
+
+fix:
+- (cloudcmd) cyrillic symbols in names
+- (operation) update file list after error on copy
+
+feature:
+- (package) clean-css-loader v1.0.1
+- (package) copymitter v3.0.0: improved copy accuracy (#157)
+
+
 2018.04.30, v9.3.1
 
 fix:
