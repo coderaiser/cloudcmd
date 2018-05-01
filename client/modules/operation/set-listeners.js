@@ -39,7 +39,7 @@ module.exports = (options, callback) => (emitter) => {
             forEachKey(removeListener, listeners);
             
             if (lastError || done)
-                callback(lastError);
+                callback();
         },
         
         error: (error) => {

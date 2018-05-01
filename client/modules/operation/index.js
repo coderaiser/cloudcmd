@@ -341,8 +341,8 @@ function OperationProto(operation, data) {
                     names,
                 };
                 
-                operation(files, (error) => {
-                    !error && DOM.Storage.remove(from, () => {
+                operation(files, () => {
+                    DOM.Storage.remove(from, () => {
                         const {
                             panel,
                             panelPassive,
