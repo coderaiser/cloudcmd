@@ -56,9 +56,6 @@ test('cloudcmd: terminal: enabled', (t) => {
     const terminal = require(terminalPath);
     terminal(arg);
     
-    clean(configPath);
-    require(configPath);
-    
     t.ok(term.calledWith(arg), 'should call terminal');
     t.end();
 });
@@ -78,9 +75,6 @@ test('cloudcmd: terminal: enabled: no string', (t) => {
     t.ok(console.log.calledWith(msg), 'should call exit');
     
     console.log = log;
-    
-    clean(configPath);
-    require(configPath);
     
     t.end();
 });
