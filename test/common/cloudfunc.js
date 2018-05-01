@@ -45,7 +45,7 @@ const JSON_FILES = {
         uid : 0,
         mode: 'rwx r-x r-x'
     }, {
-        name: 'prefdm',
+        name: 'ай',
         size: '1.30kb',
         date: 0,
         uid : 0,

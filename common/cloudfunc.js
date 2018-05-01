@@ -97,7 +97,7 @@ function getPathLink(url, prefix, template) {
 }
 
 const getDataName = (name) => {
-    const encoded = btoa(name);
+    const encoded = btoa(encodeURI(name));
     return `data-name="js-file-${encoded}" `;
 };
 

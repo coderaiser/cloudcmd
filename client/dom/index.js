@@ -188,7 +188,7 @@ function CmdProto() {
      * get current file by name
      */
     this.getCurrentByName = (name, panel = CurrentInfo.panel) => {
-        const dataName = 'js-file-' + btoa(name);
+        const dataName = 'js-file-' + btoa(encodeURI(name));
         const element = DOM.getByDataName(dataName, panel);
         
         return element;

@@ -34,7 +34,7 @@ module.exports.setCurrentName = (name, current) => {
     link.href = dir + encoded;
     link.innerHTML = encoded;
     
-    current.setAttribute('data-name', 'js-file-' + btoa(name));
+    current.setAttribute('data-name', 'js-file-' + btoa(encodeURI(name)));
     CloudCmd.emit('current-file', current);
     
     return link;

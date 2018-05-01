@@ -30,6 +30,30 @@ test('current-file: setCurrentName: setAttribute', (t) => {
     t.end();
 });
 
+test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM();
+    global.CloudCmd = getCloudCmd();
+    
+    const setAttribute = sinon.stub();
+    const current = {
+        setAttribute
+    };
+    
+    currentFile.setCurrentName('ай', current);
+    
+    t.ok(setAttribute.calledWith('data-name', 'js-file-JUQwJUIwJUQwJUI5'), 'should call setAttribute');
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.end();
+});
+
 test('current-file: emit', (t) => {
     const {
         DOM,
