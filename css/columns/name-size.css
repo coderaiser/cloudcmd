@@ -4,6 +4,7 @@
 
 .size {
     float: none;
+    margin-right: 0;
 }
 
 .owner {
