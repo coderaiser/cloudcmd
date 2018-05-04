@@ -12,7 +12,7 @@ const markdown = require(DIR + 'markdown');
 const jaguar = require('jaguar');
 const onezip = require('onezip');
 const inly = require('inly');
-const currify = require('currify/legacy');
+const wraptile = require('wraptile/legacy');
 const pullout = require('pullout/legacy');
 const json = require('jonny/legacy');
 const ponse = require('ponse');
@@ -21,7 +21,7 @@ const check = require('checkup');
 
 const moveFiles = require('./move-files');
 
-const swap = currify((fn, a, b) => fn(b, a));
+const swap = wraptile((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
 
 /**
