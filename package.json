@@ -114,7 +114,6 @@
     "@cloudcmd/read-files-sync": "^1.0.0",
     "apart": "^1.0.1",
     "chalk": "^2.0.1",
-    "checkup": "^1.3.0",
     "console-io": "^7.0.0",
     "copymitter": "^3.0.0",
     "criton": "^1.0.0",

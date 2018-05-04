@@ -16,9 +16,8 @@ const wraptile = require('wraptile/legacy');
 const pullout = require('pullout/legacy');
 const json = require('jonny/legacy');
 const ponse = require('ponse');
-const copymitter = require('copymitter');
-const check = require('checkup');
 
+const copymitter = require('copymitter');
 const moveFiles = require('./move-files');
 
 const swap = wraptile((fn, a, b) => fn(b, a));
@@ -32,12 +31,7 @@ const isWin32 = process.platform === 'win32';
  * @param callback
  */
 module.exports = (request, response, next) => {
-    check
-        .type('next', next, 'function')
-        .check({
-            request,
-            response,
-        });
+    check(request, response, next);
     
     const apiURL = CloudFunc.apiURL;
     const name = ponse.getPathName(request);
@@ -168,12 +162,7 @@ const getMoveMsg = (files) => {
 };
 
 function onPUT(name, body, callback) {
-    check
-        .type('callback', callback, 'function')
-        .check({
-            name,
-            body,
-        });
+    checkPut(name, body, callback);
     
     const cmd = getCMD(name);
     const files = json.parse(body);
@@ -345,5 +334,27 @@ function formatMsg(msg, data, status) {
     const value = parseData(data);
     
     return CloudFunc.formatMsg(msg, value, status);
+}
+
+function check(request, response, next) {
+    if (typeof request !== 'object')
+        throw Error('request should be an object');
+    
+    if (typeof response !== 'object')
+        throw Error('response should be an object');
+    
+    if (typeof next !== 'function')
+        throw Error('next should be a function');
+}
+
+function checkPut(name, body, callback) {
+    if (typeof name !== 'string')
+        throw Error('name should be a string!');
+    
+    if (typeof body !== 'string')
+        throw Error('body should be a string!');
+    
+    if (typeof callback !== 'function')
+        throw Error('callback should be a function');
 }
 
