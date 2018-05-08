@@ -191,8 +191,8 @@ function onPUT(name, body, callback) {
         const basename = path.basename;
         
         moveFiles(dirname(from), dirname(to), [basename(to)])
-                .on('error', fn)
-                .on('end', fn);
+            .on('error', fn)
+            .on('end', fn);
         
         break;
     } case 'cp':
