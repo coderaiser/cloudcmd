@@ -61,20 +61,20 @@ test('cloudcmd: terminal: enabled', (t) => {
 });
 
 test('cloudcmd: terminal: enabled: no string', (t) => {
-    const {log} = console;
-    console.log = sinon.stub();
+    const {log:originalLog} = console;
+    const log = sinon.stub();
     
     clean(terminalPath);
-    stub(configPath, () => true);
-    
-    const terminal = require(terminalPath);
-    terminal();
-    
-    const msg = 'cloudcmd --terminal: path must be a string';
-    
-    t.ok(console.log.calledWith(msg), 'should call exit');
+    stub(configPath, () => 'hello');
     
     console.log = log;
+    const terminal = require(terminalPath);
+    terminal();
+    console.log = originalLog;
+    
+    const msg = 'cloudcmd --terminal: Cannot find module \'hello\'';
+    
+    t.ok(log.calledWith(msg), 'should call exit');
     
     t.end();
 });
