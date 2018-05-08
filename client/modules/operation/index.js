@@ -118,6 +118,11 @@ function OperationProto(operation, data) {
                 .then(setListeners(callback));
         };
         
+        moveFn = (data, callback) => {
+            operator.move(data.from, data.to, data.names)
+                .then(setListeners(callback));
+        };
+        
         extractFn = (data, callback) => {
             operator.extract(data.from, data.to)
                 .then(setListeners({noContinue: true}, callback));

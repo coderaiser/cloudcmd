@@ -110,7 +110,8 @@
   },
   "subdomain": "cloudcmd",
   "dependencies": {
-    "@cloudcmd/fileop": "^1.0.1",
+    "@cloudcmd/fileop": "^1.1.0",
+    "@cloudcmd/move-files": "^1.0.0",
     "@cloudcmd/read-files-sync": "^1.0.0",
     "apart": "^1.0.1",
     "chalk": "^2.0.1",

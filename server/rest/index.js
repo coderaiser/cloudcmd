@@ -18,7 +18,7 @@ const json = require('jonny/legacy');
 const ponse = require('ponse');
 
 const copymitter = require('copymitter');
-const moveFiles = require('./move-files');
+const moveFiles = require('@cloudcmd/move-files');
 
 const swap = wraptile((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
@@ -182,7 +182,18 @@ function onPUT(name, body, callback) {
         const to = root(files.to);
         const names = files.names;
         
-        moveFiles({from, to, names}, fn);
+        if (names)
+            return moveFiles(from, to, names)
+                .on('error', fn)
+                .on('end', fn);
+        
+        const dirname = path.dirname;
+        const basename = path.basename;
+        
+        moveFiles(dirname(from), dirname(to), [basename(to)])
+                .on('error', fn)
+                .on('end', fn);
+        
         break;
     } case 'cp':
         if (!files.from || !files.names || !files.to)
