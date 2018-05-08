@@ -1,3 +1,20 @@
+2018.05.08, v9.4.0
+
+fix:
+- (name-size) margin-right: 0
+
+feature:
+- (cloudcmd) deprecate --one-panel-mode in favour --one-file-panel
+- (cloudcmd) add ability to show progress on move (#157)
+- (package) rm checkup
+- (package) wraptile v2.0.0
+- (package) ponse v2.0.0
+- (package) onezip v2.0.0
+- (package) jaguar v4.0.0
+- (package) files-io v2.0.0
+- (package) inly v2.0.0
+
+
 2018.05.01, v9.3.2
 
 fix:
