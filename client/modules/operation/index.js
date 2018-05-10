@@ -134,6 +134,7 @@ function OperationProto(operation, data) {
         packTarFn = RESTful.pack;
         deleteFn = RESTful.delete;
         copyFn = RESTful.cp;
+        moveFn = RESTful.mv;
         extractFn = RESTful.extract;
     }
     
