@@ -11,8 +11,8 @@
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
 [LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
-[DependencyStatusURL]:      https://gemnasium.com/coderaiser/cloudcmd "Dependency Status"
-[DependencyStatusIMGURL]:   https://img.shields.io/gemnasium/coderaiser/cloudcmd.svg?style=flat
+[DependencyStatusURL]:      https://david-dm.org/coderaiser/cloudcmd
+[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/cloudcmd.svg?style=flat
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat
 
