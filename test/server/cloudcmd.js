@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const util = require('util');
 
 const test = require('tape');
 const diff = require('sinon-called-with-diff');
@@ -10,6 +11,8 @@ const clean = require('clear-module');
 
 const DIR = '../../server/';
 const cloudcmdPath = DIR + 'cloudcmd';
+
+const noop = () => {};
 
 const cloudcmd = require(cloudcmdPath);
 const config = require(DIR + 'config');
@@ -219,6 +222,30 @@ test('cloudcmd: getIndexPath: development', (t) => {
     t.end();
 });
 
+test('cloudcmd: deprecated: one panel mode', (t) => {
+    const config = {
+        onePanelMode: true
+    };
+    
+    const {
+        deprecate: originalDeprecate
+    } = util;
+    
+    const deprecate = sinon
+        .stub()
+        .returns(noop);
+    
+    util.deprecate = deprecate;
+    
+    cloudcmd({
+        config
+    });
+    
+    util.deprecate = originalDeprecate;
+    
+    t.ok(deprecate.called, 'should call deprecate');
+    t.end();
+});
 
 function cleanNodeEnv() {
     const {NODE_ENV} = process.env;
