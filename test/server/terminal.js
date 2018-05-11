@@ -97,6 +97,8 @@ test('cloudcmd: terminal: no arg', (t) => {
     
     t.equal(result, gritty, 'should equal');
     
+    mock.stop('gritty');
+    
     clean(configPath);
     require(configPath);
     

@@ -243,7 +243,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     
     t.ok(data.includes(nameEncoded), 'should encode name');
     
-    clear('flop');
+    mockRequire.stop('flop');
     clear(routePath);
     clear('../../server/cloudcmd');
     clear(beforePath);
@@ -277,7 +277,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     
     t.notOk(data.includes(name), 'should not put not encoded name');
     
-    clear('flop');
+    mockRequire.stop('flop');
     clear(routePath);
     clear('../../server/cloudcmd');
     clear(beforePath);
@@ -312,7 +312,7 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     
     t.pass('should not hang up');
     
-    clear('flop');
+    mockRequire.stop('flo');
     clear(routePath);
     clear(cloudcmdPath);
     clear(beforePath);
@@ -330,6 +330,21 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
     const result = await getStr(`http://localhost:${port}`);
     
     t.ok(/icon-terminal none/.test(result), 'should hide terminal');
+    
+    done();
+    t.end();
+});
+
+test('cloudcmd: route: buttons: terminal', async (t) => {
+    const config = {
+        terminal: true,
+        terminalPath: 'gritty',
+    };
+    
+    const {port, done} = await connect({config});
+    const result = await getStr(`http://localhost:${port}`);
+    
+    t.notOk(/icon-terminal none/.test(result), 'should enable terminal');
     
     done();
     t.end();

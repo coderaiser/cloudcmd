@@ -6,9 +6,7 @@ const config = require('./config');
 const noop = () => {};
 noop.listen = noop;
 
-module.exports = (arg) => {
-    return getTerminal(config('terminal'), arg);
-};
+module.exports = (arg) => getTerminal(config('terminal'), arg);
 
 function getTerminal(term, arg) {
     if (!term)
