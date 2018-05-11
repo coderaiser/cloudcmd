@@ -13,7 +13,7 @@ const config = require(DIR_SERVER + 'config');
 const env = require(DIR_SERVER + 'env');
 
 const choose = (a, b) => {
-    if (!a && typeof a === 'undefined')
+    if (!a)
         return b;
     
     return a;
