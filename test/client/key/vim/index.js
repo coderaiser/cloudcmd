@@ -212,7 +212,6 @@ test('cloudcmd: client: key: copy', (t) => {
     vim('y', {});
     
     t.ok(copy.calledWith(), 'should copy files');
-    
     t.end();
 });
 
@@ -225,7 +224,6 @@ test('cloudcmd: client: key: copy: unselectFiles', (t) => {
     vim('y', {});
     
     t.ok(unselectFiles.calledWith(), 'should unselect files');
-    
     t.end();
 });
 
