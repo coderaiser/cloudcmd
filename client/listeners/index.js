@@ -172,7 +172,7 @@ function isNoCurrent(panel) {
     const namePanel = panel.getAttribute('data-name');
     const nameInfoPanel = infoPanel.getAttribute('data-name');
     
-    return namePanel !== nameInfoPanel
+    return namePanel !== nameInfoPanel;
 }
 
 function decodePath(path){

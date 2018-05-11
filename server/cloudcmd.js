@@ -5,6 +5,8 @@ const DIR_ROOT = DIR + '../';
 const DIR_COMMON = DIR + '../common/';
 
 const util = require('util');
+const path = require('path');
+const fs = require('fs');
 
 const cloudfunc = require(DIR_COMMON + 'cloudfunc');
 const authentication = require(DIR + 'auth');
@@ -29,6 +31,12 @@ const deepword = require('deepword');
 const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
 
+const isDev = process.env.NODE_ENV === 'development';
+const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
+
+const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.html`);
+const defaultHtml = fs.readFileSync(getIndexPath(isDev), 'utf8');
+
 const auth = currify(_auth);
 const setUrl = currify(_setUrl);
 
@@ -36,8 +44,6 @@ const root = () => config('root');
 
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
-
-const isDev = process.env.NODE_ENV === 'development';
 
 const deprecateOnePanelMode = (value) => {
     const noop = () => {};
@@ -80,6 +86,8 @@ module.exports = (params) => {
     
     return cloudcmd(prefix, plugins, modules);
 };
+
+module.exports._getIndexPath = getIndexPath;
 
 function defaultValue(name, options) {
     const value = options[name];
@@ -214,7 +222,9 @@ function cloudcmd(prefix, plugins, modules) {
         }),
         
         rest,
-        route,
+        route({
+            html: defaultHtml
+        }),
         
         join({
             dir,

@@ -16,11 +16,6 @@ const routePath = `${rootDir}/server/route`;
 const cloudcmdPath = `${rootDir}/server/cloudcmd`;
 const beforePath = path.join(__dirname, '../before');
 
-const {
-    _getIndexPath,
-} = require(routePath);
-
-const route = require(routePath);
 const {connect} = require(beforePath);
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
@@ -35,25 +30,6 @@ const getStr = (url) => {
         .then(warp(_pullout, 'string'))
         .catch(console.log);
 };
-
-test('cloudcmd: route: no args', (t) => {
-    t.throws(route, /req could not be empty!/, 'should throw when no args');
-    t.end();
-});
-
-test('cloudcmd: route: no res', (t) => {
-    const fn = () => route({});
-    
-    t.throws(fn, /res could not be empty!/, 'should throw when no res');
-    t.end();
-});
-
-test('cloudcmd: route: no next', (t) => {
-    const fn = () => route({}, {});
-    
-    t.throws(fn, /next should be function!/, 'should throw when no next');
-    t.end();
-});
 
 test('cloudcmd: route: buttons: no console', async (t) => {
     const config = {
@@ -167,22 +143,6 @@ test('cloudcmd: route: keys panel', async (t) => {
     done();
 });
 
-test('cloudcmd: route: getIndexPath: production', (t) => {
-    const isDev = false;
-    const name = path.join(__dirname, '..', '..', 'dist', 'index.html');
-    
-    t.equal(route._getIndexPath(isDev), name);
-    t.end();
-});
-
-test('cloudcmd: route: getIndexPath: development', (t) => {
-    const isDev = true;
-    const name = path.join(__dirname, '..', '..', 'dist-dev', 'index.html');
-    
-    t.equal(route._getIndexPath(isDev), name);
-    t.end();
-});
-
 test('cloudcmd: route: file: fs', async (t) => {
     const root = path.join(__dirname, '..', 'fixture', 'empty-file');
     const config = {
@@ -255,31 +215,6 @@ test('cloudcmd: route: realpath: error', async (t) => {
     t.end();
     
     done();
-});
-
-test('cloudcmd: route: sendIndex: error', async (t) => {
-    const error = Error('index path error');
-    const {readFile} = fs;
-    const isDev = true;
-    const indexPath = _getIndexPath(isDev);
-    
-    fs.readFile = (name, options, fn = options) => {
-        if (name === indexPath) {
-            fn(error);
-            fs.readFile = readFile;
-            return;
-        }
-        
-        return readFile(name, options, fn);
-    };
-    
-    const {port, done} = await connect();
-    const data = await getStr(`http://localhost:${port}`);
-    
-    t.equal(data, error.message, 'should return error');
-    
-    done();
-    t.end();
 });
 
 test('cloudcmd: route: sendIndex: encode', async (t) => {

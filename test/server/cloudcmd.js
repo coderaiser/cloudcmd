@@ -1,5 +1,7 @@
 'use strict';
 
+const path = require('path');
+
 const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
@@ -200,6 +202,23 @@ function credentials() {
     
     return set(reset);
 }
+
+test('cloudcmd: getIndexPath: production', (t) => {
+    const isDev = false;
+    const name = path.join(__dirname, '..', '..', 'dist', 'index.html');
+    
+    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.end();
+});
+
+test('cloudcmd: getIndexPath: development', (t) => {
+    const isDev = true;
+    const name = path.join(__dirname, '..', '..', 'dist-dev', 'index.html');
+    
+    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.end();
+});
+
 
 function cleanNodeEnv() {
     const {NODE_ENV} = process.env;
