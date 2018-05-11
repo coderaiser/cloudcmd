@@ -153,7 +153,7 @@ function main() {
         config('onePanelMode', false);
     }
     
-    if (typeof env.bool('one_panel_mode') === 'boolean') {
+    if (env('one_panel_mode')) {
         util.deprecate(noop, `CLOUDCMD_ONE_PANEL_MODE deprecated, use CLOUDCMD_ONE_FILE_PANEL instead`, 'DP0001')();
         config('oneFilePanel', env.bool('one_panel_mode'));
         config('onePanelMode', env.bool('one_panel_mode'));
