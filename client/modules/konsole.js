@@ -109,10 +109,10 @@ function ConsoleProto() {
         
         konsole.addShortCuts({
             'P': () => {
-                const command = Console.getPromptText();
+                const command = konsole.getPromptText();
                 const path = DOM.getCurrentDirPath();
                 
-                Console.setPromptText(command + path);
+                konsole.setPromptText(command + path);
             }
         });
     }
