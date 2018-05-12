@@ -406,7 +406,6 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_SYNC_CONSOLE_PATH` - sync console path
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
-- `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_KEYS_PANEL` - show keys panel
 - `CLOUDCMD_ONE_PANEL_MODE` - show one file panel (**deprecated**: use `CLOUDCMD_ONE_FILE_PANEL` instead)
 - `CLOUDCMD_ONE_FILE_PANEL` - show one file panel
