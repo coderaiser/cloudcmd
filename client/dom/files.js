@@ -134,7 +134,7 @@ function getConfig(callback) {
             });
         });
     
-    Promises.config.then(function(data) {
+    Promises.config.then((data) => {
         is = false;
         Storage.setAllowed(data.localStorage);
         
@@ -144,7 +144,7 @@ function getConfig(callback) {
             if (!is)
                 Promises.config = null;
         });
-    }, function() {
+    }, () => {
         if (!is)
             Promises.config = null;
     });
