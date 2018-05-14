@@ -56,8 +56,8 @@ const JSON_FILES = {
 
 let Expect =
     '<div data-name="js-path" class="reduce-text" title="/etc/X11/">'       +
-        '<span data-name="js-clear-storage" class="path-icon icon-clear" '  +
-            'title="clear storage (Ctrl+D)">'                               +
+        '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"'  +
+        ' title="copy path (Ctrl+P)">'                                      +
         '</span>'                                                           +
         '<a data-name="js-refresh" href="/fs/etc/X11/" '                    +
         'class="path-icon icon-refresh" title="refresh (Ctrl+R)"></a>'      +

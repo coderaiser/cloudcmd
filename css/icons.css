@@ -98,7 +98,7 @@
     content     : '\e814  ';
 }
 
-.icon-clear::before {
+.icon-copy-to-clipboard::before {
     font-family : 'Fontello';
     content     : '\e815  ';
 }

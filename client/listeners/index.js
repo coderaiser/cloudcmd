@@ -9,6 +9,8 @@ const getRange = require('./get-range');
 
 const getIndex = currify(require('./get-index'));
 
+const {writeText} = require('@cloudcmd/clipboard');
+
 const uploadFiles = require('../dom/upload-files');
 
 const {
@@ -52,7 +54,6 @@ const execAll = currify((funcs, event) => {
 });
 
 const Info = DOM.CurrentInfo;
-const Storage = DOM.Storage;
 const Events = DOM.Events;
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
@@ -187,7 +188,6 @@ function decodePath(path){
         .replace('%%', '%25%')
         .replace(NBSP_REG, SPACE) || '/';
 }
-    
 
 function onPathElementClick(panel, event) {
     event.preventDefault();
@@ -196,8 +196,8 @@ function onPathElementClick(panel, event) {
     const attr = element.getAttribute('data-name');
     const noCurrent = isNoCurrent(panel);
     
-    if (attr === 'js-clear-storage')
-        return Storage.clear();
+    if (attr === 'js-copy-path')
+        return copyPath(element);
     
     if (attr === 'js-refresh')
         return CloudCmd.refresh({
@@ -216,6 +216,12 @@ function onPathElementClick(panel, event) {
         isRefresh: false,
         panel: noCurrent ? panel : Info.panel
     });
+}
+
+function copyPath(el) {
+    writeText(el.parentElement.title)
+        .then(CloudCmd.log)
+        .catch(CloudCmd.log);
 }
 
 function execIfNotUL(callback, event) {
