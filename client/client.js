@@ -221,8 +221,6 @@ function CloudCmdProto(Util, DOM) {
             config[key] = value;
         };
         
-        DOM.Storage.setAllowed(CloudCmd.config('localStorage'));
-        
         if (config.onePanelMode)
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
         

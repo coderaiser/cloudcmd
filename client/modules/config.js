@@ -101,10 +101,6 @@ function initSocket() {
         Config.save = save;
     });
     
-    socket.on('config', (config) => {
-        DOM.Storage.setAllowed(config.localStorage);
-    });
-    
     socket.on('message', onSave);
     socket.on('log', CloudCmd.log);
     
@@ -205,17 +201,11 @@ function onChange(el) {
     const obj = {};
     const name = input.getName(el);
     const data = input.getValue(name, Element);
-    const type = el.type;
     
     if (name === 'name')
         onNameChange(data);
-    else if (type === 'checkbox')
-        if (/^(diff|buffer|dirStorage)$/.test(name))
-            onLSChange(name, data);
-        else if (name === 'localStorage')
-            onLocalStorageChange();
-        else if (name === 'auth')
-            onAuthChange(data);
+    else if (name === 'auth')
+        onAuthChange(data);
     
     obj[name] = data;
     
@@ -229,8 +219,6 @@ function onSave(obj) {
         CloudCmd._config(name, data);
         input.setValue(name, data, Element);
     });
-    
-    DOM.Storage.setAllowed(obj.localStorage);
 }
 
 function saveHttp(obj) {
@@ -242,50 +230,6 @@ function saveHttp(obj) {
         
         onSave(obj);
     });
-}
-
-function onLocalStorageChange() {
-    const names = ['diff', 'buffer', 'dirStorage', 'localStorage'];
-    const elements = names.map((name) => {
-        return input.getElementByName(name, Element);
-    });
-    const el = {};
-    const msg = 'Diff, Buffer and Directory Storage do not work without localStorage';
-    
-    let isChecked;
-    
-    elements.forEach((element) => {
-        const name = input.getName(element);
-        
-        el[name] = element;
-        
-        if (element.checked)
-            isChecked = true;
-    });
-    
-    if (!isChecked || el.localStorage.checked)
-        return;
-    
-    alert(msg);
-    
-    elements.forEach((element) => {
-        if (!element.checked)
-            return;
-        
-        element.checked = false;
-        onChange(element);
-    });
-}
-
-function onLSChange(name, data) {
-    const elLocalStorage = input.getElementByName('localStorage', Element);
-    const msg = `${name} depends on localStorage`;
-    
-    if (!data || elLocalStorage.checked)
-        return;
-    
-    Dialog.alert(TITLE, msg);
-    elLocalStorage.checked = true;
 }
 
 function onAuthChange(checked) {

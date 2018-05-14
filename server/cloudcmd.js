@@ -51,11 +51,6 @@ const deprecateOnePanelMode = (value) => {
     config('oneFilePanel', value);
 };
 
-const deprecateLocalStorage = (value) => {
-    util.deprecate(noop, 'localStorage is deprecated', 'DP0002')();
-    config('localStorage', value);
-};
-
 module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
@@ -69,9 +64,7 @@ module.exports = (params) => {
     keys.forEach((name) => {
         const value = options[name];
         
-        if (name === 'localStorage')
-            deprecateLocalStorage(value);
-        else if (name === 'onePanelMode')
+        if (name === 'onePanelMode')
             deprecateOnePanelMode();
         else if (name === 'oneFilePanel')
             config('onePanelMode', value);

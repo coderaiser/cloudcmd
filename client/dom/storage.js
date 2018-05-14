@@ -6,22 +6,10 @@ const exec = require('execon');
 const tryCatch = require('try-catch');
 const setItem = localStorage.setItem.bind(localStorage);
 
-/* приватный переключатель возможности работы с кэшем */
-let Allowed;
-
-/**
- * allow Storage usage
- */
-module.exports.setAllowed = (isAllowed) => {
-    Allowed = isAllowed;
-};
-
 /** remove element */
 module.exports.remove = (item, callback) => {
-    if (Allowed)
-        localStorage.removeItem(item);
-    
-    exec(callback, null, Allowed);
+    localStorage.removeItem(item);
+    exec(callback, null);
     
     return module.exports;
 };
@@ -50,7 +38,7 @@ module.exports.set = (name, data, callback) => {
     if (itype.object(data))
         str = jonny.stringify(data);
     
-    if (Allowed && name)
+    if (name)
         [error] = tryCatch(setItem, name, str || data);
     
     exec(callback, error);
@@ -60,10 +48,7 @@ module.exports.set = (name, data, callback) => {
 
 /** Если доступен Storage принимаем из него данные*/
 module.exports.get = (name, callback) => {
-    let ret;
-    
-    if (Allowed)
-        ret = localStorage.getItem(name);
+    const ret = localStorage.getItem(name);
     
     exec(callback, null, ret);
     
@@ -72,12 +57,9 @@ module.exports.get = (name, callback) => {
 
 /** функция чистит весь кэш для всех каталогов*/
 module.exports.clear = (callback) => {
-    const ret = Allowed;
+    localStorage.clear();
     
-    if (ret)
-        localStorage.clear();
-    
-    exec(callback, null, ret);
+    exec(callback);
     
     return module.exports;
 };

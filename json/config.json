@@ -8,7 +8,6 @@
     "packer": "tar",
     "diff": true,
     "zip" : true,
-    "localStorage": true,
     "buffer": true,
     "dirStorage": false,
     "online": true,

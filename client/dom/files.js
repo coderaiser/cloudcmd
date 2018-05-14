@@ -6,7 +6,6 @@ const itype = require('itype/legacy');
 const currify = require('currify/legacy');
 const exec = require('execon');
 
-const Storage = require('./storage');
 const load = require('./load');
 const RESTful = require('./rest');
 
@@ -136,7 +135,6 @@ function getConfig(callback) {
     
     Promises.config.then((data) => {
         is = false;
-        Storage.setAllowed(data.localStorage);
         
         callback(null, data);
         

@@ -6,6 +6,7 @@ const Info = DOM.CurrentInfo;
 
 const exec = require('execon');
 const clipboard = require('@cloudcmd/clipboard');
+const wraptile = require('wraptile/legacy');
 
 const Events = require('../dom/events');
 const Buffer = require('../dom/buffer');
@@ -465,11 +466,7 @@ function KeyProto() {
         case Key.D:
             if (ctrlMeta) {
                 CloudCmd.log('clearing storage...');
-                
-                DOM.Storage.clear(() => {
-                    CloudCmd.log('storage cleared');
-                });
-                
+                DOM.Storage.clear(wraptile(CloudCmd.log, 'storage cleared'));
                 event.preventDefault();
             }
             break;
