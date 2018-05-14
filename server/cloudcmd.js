@@ -45,12 +45,15 @@ const root = () => config('root');
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
 
+const noop = () => {};
 const deprecateOnePanelMode = (value) => {
-    const noop = () => {};
-    
     util.deprecate(noop, 'onePanelMode is deprecated, use oneFilePanel instead', 'DP0001')();
-    
     config('oneFilePanel', value);
+};
+
+const deprecateLocalStorage = (value) => {
+    util.deprecate(noop, 'localStorage is deprecated', 'DP0002')();
+    config('localStorage', value);
 };
 
 module.exports = (params) => {
@@ -66,7 +69,9 @@ module.exports = (params) => {
     keys.forEach((name) => {
         const value = options[name];
         
-        if (name === 'onePanelMode')
+        if (name === 'localStorage')
+            deprecateLocalStorage(value);
+        else if (name === 'onePanelMode')
             deprecateOnePanelMode();
         else if (name === 'oneFilePanel')
             config('onePanelMode', value);
