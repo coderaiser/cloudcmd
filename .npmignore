@@ -8,6 +8,7 @@ coverage
 css
 html
 yarn-error.log
+yarn.lock
 now.json
 
 modules/jquery/dist

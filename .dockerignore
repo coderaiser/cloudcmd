@@ -8,6 +8,7 @@ manifest.yml
 app.json
 bower.json
 yarn-error.log
+yarn.lock
 now.json
 
 Dockerfile
