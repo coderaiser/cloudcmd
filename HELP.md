@@ -365,7 +365,7 @@ Here is description of options:
     "packer"            : "tar",    /* default, could be "tar" or "zip"         */
     "diff"              : true,     /* when save - send patch, not whole file   */
     "zip"               : true,     /* zip text before send / unzip before save */
-    "localStorage"      : true,     /* local storage                            */
+    "localStorage"      : true,     /* local storage (deprecated)               */
     "buffer"            : true,     /* buffer for copying files                 */
     "dirStorage"        : true,     /* store directory listing to localStorage  */
     "online"            : true,     /* load js files from cdn or local path     */
