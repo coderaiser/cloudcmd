@@ -39,6 +39,7 @@ module.exports = {
     M           : 77,
     
     O           : 79,
+    P           : 80,
     Q           : 81,
     R           : 82,
     S           : 83,

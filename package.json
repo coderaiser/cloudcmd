@@ -157,6 +157,7 @@
     "writejson": "^1.1.0"
   },
   "devDependencies": {
+    "@cloudcmd/clipboard": "^1.0.0",
     "babel-cli": "^6.18.0",
     "babel-loader": "^7.0.0",
     "babel-plugin-transform-object-assign": "^6.22.0",

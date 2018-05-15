@@ -166,6 +166,7 @@ Hot keys
 | `Ctrl + с`            | copy to buffer
 | `Ctrl + v`            | paste from buffer
 | `Ctrl + z`            | clear buffer
+| `Ctrl + p`            | copy path
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Ctrl + a`            | select all files in a panel

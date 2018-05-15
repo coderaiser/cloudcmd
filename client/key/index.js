@@ -5,6 +5,7 @@
 const Info = DOM.CurrentInfo;
 
 const exec = require('execon');
+const clipboard = require('@cloudcmd/clipboard');
 
 const Events = require('../dom/events');
 const Buffer = require('../dom/buffer');
@@ -415,6 +416,16 @@ function KeyProto() {
             
             break;
         
+        case Key.P:
+            if (!ctrlMeta)
+                return;
+            
+            event.preventDefault();
+            clipboard
+                .writeText(Info.dirPath)
+                .catch(CloudCmd.log);
+            
+            break;
         /**
          * обновляем страницу,
          * загружаем содержимое каталога
