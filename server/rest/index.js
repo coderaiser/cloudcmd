@@ -2,7 +2,9 @@
 
 const DIR = '../';
 const DIR_COMMON = DIR + '../common/';
+
 const path = require('path');
+const fs = require('fs');
 
 const root = require(DIR + 'root');
 const config = require(DIR + 'config');
@@ -182,19 +184,12 @@ function onPUT(name, body, callback) {
         const to = root(files.to);
         const names = files.names;
         
-        if (names)
-            return moveFiles(from, to, names)
-                .on('error', fn)
-                .on('end', fn);
+        if (!names)
+            return fs.rename(from, to, fn);
         
-        const dirname = path.dirname;
-        const basename = path.basename;
-        
-        moveFiles(dirname(from), dirname(to), [basename(to)])
+        return moveFiles(from, to, names)
             .on('error', fn)
             .on('end', fn);
-        
-        break;
     } case 'cp':
         if (!files.from || !files.names || !files.to)
             return callback(body);
