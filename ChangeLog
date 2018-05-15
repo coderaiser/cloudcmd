@@ -1,3 +1,18 @@
+2018.05.15, v9.5.0
+
+fix:
+- (server) mv: rename file
+- (cloudcmd) choose
+- (konsole) Ctrl + P: paste current directory path
+- (operation) set moveFn to RESTful.mv on disconnect
+
+feature:
+- (cloudcmd) deprecate localStorage
+- (key) add ability to copy path with help of Ctrl + p
+- (env) return boolean only
+- (cloudcmd) move out dist from route
+
+
 2018.05.08, v9.4.0
 
 fix:
