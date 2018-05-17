@@ -12,6 +12,8 @@ const join = require('join-io/www/join');
 const jonny = require('jonny/legacy');
 const currify = require('currify/legacy');
 
+const runtime = require('serviceworker-webpack-plugin/lib/runtime');
+
 const bind = (f, ...a) => () => f(...a);
 const noop = () => {};
 
@@ -38,6 +40,8 @@ function CloudCmdProto(Util, DOM) {
         
         console.log(str);
     };
+    
+    serviceWorker();
     
     Emitify.call(this);
     
@@ -607,5 +611,18 @@ function CloudCmdProto(Util, DOM) {
             });
         });
     };
+    
+    function serviceWorker() {
+        if (!navigator.serviceWorker)
+            return;
+        
+        const isHTTPS = location.protocol === 'https:';
+        const isLocalhost = location.hostname === 'localhost';
+        
+        if (!isHTTPS && !isLocalhost)
+            return;
+        
+        runtime.register();
+    }
 }
 

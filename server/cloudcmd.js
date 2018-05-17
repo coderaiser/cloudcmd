@@ -39,6 +39,7 @@ const defaultHtml = fs.readFileSync(getIndexPath(isDev), 'utf8');
 
 const auth = currify(_auth);
 const setUrl = currify(_setUrl);
+const setSW = currify(_setSW);
 
 const root = () => config('root');
 
@@ -208,6 +209,7 @@ function cloudcmd(prefix, plugins, modules) {
         }),
         
         setUrl(prefix),
+        setSW(prefix),
         logout,
         authentication(),
         config.middle,
@@ -268,6 +270,22 @@ function _setUrl(pref, req, res, next) {
         req.url = `/dist${req.url}`;
     
     req.url = replaceDist(req.url);
+    
+    next();
+}
+
+function _setSW(pref, req, res, next) {
+    const prefix = getPrefix(pref);
+    const is = !req.url.indexOf(prefix);
+    
+    if (!is)
+        return next();
+    
+    const url = replacePrefix(req.url, prefix);
+    const isSW = /^\/sw\.js(\.map)?$/.test(url);
+    
+    if (isSW)
+        req.url = replaceDist(`/dist${url}`);
     
     next();
 }

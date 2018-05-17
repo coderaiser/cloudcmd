@@ -1,10 +1,16 @@
 {
     "presets": [
-      "env"
+      ["env", {
+        "exclude": [
+          "transform-regenerator"
+        ]
+      }]
     ],
     "plugins": [
       "transform-object-assign",
-      "transform-object-rest-spread"
+      "transform-object-rest-spread",
+      "fast-async",
+      "babel-plugin-macros",
     ]
 }
 

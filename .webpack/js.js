@@ -6,6 +6,12 @@ const {
     join,
 } = require('path');
 
+const {
+    EnvironmentPlugin,
+} = require('webpack');
+
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+
 const dir = './client';
 const dirModules = './client/modules';
 const modules = './modules';
@@ -21,12 +27,32 @@ const devtool = isDev ? 'eval' : 'source-map';
 const notEmpty = (a) => a;
 const clean = (array) => array.filter(notEmpty);
 
+const babelDev = {
+    babelrc: false,
+    plugins: [
+        'babel-plugin-macros',
+    ]
+};
+
 const rules = clean([
     !isDev && {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+    },
+    isDev && {
+        test: /sw.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: babelDev
     }]);
+
+const plugins = [
+    new EnvironmentPlugin(['NODE_ENV']),
+    new ServiceWorkerWebpackPlugin({
+        entry: join(__dirname, '../client', 'sw.js'),
+    }),
+];
 
 const splitChunks = {
     chunks: 'all',
@@ -40,6 +66,7 @@ module.exports = {
     },
     entry: {
         cloudcmd: `${dir}/cloudcmd.js`,
+        //[sw]: `${dir}/sw.js`,
         [modules + '/edit']: `${dirModules}/edit.js`,
         [modules + '/edit-file']: `${dirModules}/edit-file.js`,
         [modules + '/edit-file-vim']: `${dirModules}/edit-file-vim.js`,
@@ -70,6 +97,7 @@ module.exports = {
     module: {
         rules,
     },
+    plugins,
 };
 
 function externals(context, request, fn) {
