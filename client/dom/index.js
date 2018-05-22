@@ -7,11 +7,6 @@ const exec = require('execon');
 const jonny = require('jonny/legacy');
 const Util = require('../../common/util');
 
-const {
-    getTitle,
-    FS,
-} = require('../../common/cloudfunc');
-
 const Images = require('./images');
 const load = require('./load');
 const Files = require('./files');
@@ -43,11 +38,9 @@ const loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');
 
 function CmdProto() {
-    let Title;
     let CurrentInfo = {};
     
     const Cmd = this;
-    const CURRENT_FILE = 'current-file';
     const SELECTED_FILE = 'selected-file';
     const TITLE = 'Cloud Commander';
     const TabPanel = {
@@ -140,6 +133,7 @@ function CmdProto() {
     }
     
     /**
+<<<<<<< HEAD
      * get current direcotory name
      */
     this.getCurrentDirName = () => {
@@ -176,15 +170,6 @@ function CmdProto() {
     };
     
     /**
-     * unified way to get current file
-     *
-     * @currentFile
-     */
-    this.getCurrentFile = () => {
-        return DOM.getByClass(CURRENT_FILE);
-    };
-    
-    /**
      * get current file by name
      */
     this.getCurrentByName = (name, panel = CurrentInfo.panel) => {
@@ -195,7 +180,7 @@ function CmdProto() {
     };
     
     /**
-     * unified way to get current file
+     * unified way to get selected files
      *
      * @currentFile
      */
@@ -413,102 +398,6 @@ function CmdProto() {
     };
     
     /**
-     * private function thet unset currentfile
-     *
-     * @currentFile
-     */
-    function unsetCurrentFile(currentFile) {
-        const is = DOM.isCurrentFile(currentFile);
-        
-        if (!is)
-            return;
-        
-        currentFile.classList.remove(CURRENT_FILE);
-    }
-    
-    /**
-     * unified way to set current file
-     */
-    this.setCurrentFile = (currentFile, options) => {
-        const o = options;
-        const CENTER = true;
-        const currentFileWas = DOM.getCurrentFile();
-        
-        if (!currentFile)
-            return DOM;
-        
-        let pathWas = '';
-        
-        if (currentFileWas) {
-            pathWas = DOM.getCurrentDirPath();
-            unsetCurrentFile(currentFileWas);
-        }
-        
-        currentFile.classList.add(CURRENT_FILE);
-        
-        const path = DOM.getCurrentDirPath();
-        const name = CloudCmd.config('name');
-        
-        if (path !== pathWas) {
-            DOM.setTitle(getTitle({
-                name,
-                path,
-            }));
-            
-            /* history could be present
-             * but it should be false
-             * to prevent default behavior
-             */
-            if (!o || o.history !== false) {
-                const historyPath = path === '/' ? path : FS + path;
-                DOM.setHistory(historyPath, null, historyPath);
-            }
-        }
-        
-        /* scrolling to current file */
-        DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
-        
-        CloudCmd.emit('current-file', currentFile);
-        CloudCmd.emit('current-path', path);
-        CloudCmd.emit('current-name', DOM.getCurrentName(currentFile));
-        
-        return DOM;
-    };
-    
-    /*
-      * set current file by position
-      *
-      * @param layer    - element
-      * @param          - position {x, y}
-      */
-    this.getCurrentByPosition = ({x, y}) => {
-        const element = document.elementFromPoint(x, y);
-        
-        const getEl = (el) => {
-            const {tagName} = el;
-            const isChild = /A|SPAN|LI/.test(tagName);
-            
-            if (!isChild)
-                return null;
-            
-            if (tagName === 'A')
-                return el.parentElement.parentElement;
-            
-            if (tagName === 'SPAN')
-                return el.parentElement;
-            
-            return el;
-        };
-        
-        const el = getEl(element);
-        
-        if (el && el.tagName !== 'LI')
-            return null;
-        
-        return el;
-    };
-    
-    /**
      * select current file
      * @param currentFile
      */
@@ -598,38 +487,6 @@ function CmdProto() {
     };
     
     /**
-     * set title or create title element
-     *
-     * @param name
-     */
-    
-    this.setTitle = (name) => {
-        if (!Title)
-            Title = DOM.getByTag('title')[0] ||
-                    DOM.load({
-                        name            : 'title',
-                        innerHTML       : name,
-                        parentElement   : document.head
-                    });
-        
-        Title.textContent = name;
-        
-        return DOM;
-    };
-    
-    /**
-     * current file check
-     *
-     * @param currentFile
-     */
-    this.isCurrentFile = (currentFile) => {
-        if (!currentFile)
-            return false;
-        
-        return DOM.isContainClass(currentFile, CURRENT_FILE);
-    };
-    
-    /**
      * selected file check
      *
      * @param currentFile
@@ -647,7 +504,7 @@ function CmdProto() {
      * @param currentFile
      */
     this.isCurrentIsDir = (currentFile) => {
-        const current = currentFile || this.getCurrentFile();
+        const current = currentFile || DOM.getCurrentFile();
         const fileType = DOM.getByDataName('js-type', current);
         const ret = DOM.isContainClass(fileType, 'directory');
         
@@ -660,7 +517,7 @@ function CmdProto() {
      * @param currentFile - current file by default
      */
     this.getCurrentLink = (currentFile) => {
-        const current = currentFile || this.getCurrentFile();
+        const current = currentFile || DOM.getCurrentFile();
         const link = DOM.getByTag('a', current);
         
         return link[0];
