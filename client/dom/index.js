@@ -152,9 +152,10 @@ function CmdProto() {
     this.getParentDirPath = (panel) => {
         const path = DOM.getCurrentDirPath(panel);
         const dirName = DOM.getCurrentDirName() + '/';
+        const index = path.lastIndexOf(dirName);
         
         if (path !== '/')
-            return path.replace(RegExp(dirName + '$'), '');
+            return path.slice(0, index);
         
         return path;
     };

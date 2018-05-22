@@ -112,10 +112,10 @@ module.exports.getParentDirPath = (panel) => {
     const dirName = DOM.getCurrentDirName() + '/';
     const index = path.lastIndexOf(dirName);
     
-    if (path !== '/')
-        return path.slice(0, index);
+    if (path === '/')
+        return path;
     
-    return path;
+    return path.slice(0, index);
 };
 
 /**

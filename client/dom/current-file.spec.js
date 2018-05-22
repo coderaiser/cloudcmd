@@ -3,6 +3,9 @@
 const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
+const id = (a) => a;
+const wraptile = require('wraptile');
+const returns = wraptile(id);
 
 const currentFile = require('./current-file');
 
@@ -82,7 +85,7 @@ test('current-file: emit', (t) => {
     t.end();
 });
 
-test('current-file: return', (t) => {
+test('current-file: setCurrentName: return', (t) => {
     const {
         DOM,
         CloudCmd,
@@ -111,6 +114,28 @@ test('current-file: return', (t) => {
     t.end();
 });
 
+test('current-file: getParentDirPath: result', (t) => {
+    const {
+        DOM,
+    } = global;
+    
+    const getCurrentDirPath = returns('/D/Films/+++favorite films/');
+    const getCurrentDirName = returns('+++favorite films');
+    
+    global.DOM = getDOM({
+        getCurrentDirPath,
+        getCurrentDirName,
+    });
+    
+    const result = currentFile.getParentDirPath();
+    const expected = '/D/Films/';
+    
+    global.DOM = DOM;
+    
+    t.equal(result, expected, 'should return parent dir path');
+    t.end();
+});
+
 function getCloudCmd({emit} = {}) {
     return {
         PREFIX: '',
@@ -118,14 +143,20 @@ function getCloudCmd({emit} = {}) {
     };
 }
 
-
-function getDOM({link} = {}) {
-    link = link || {};
-    
+function getDOM({
+    link = {},
+    getCurrentDirPath = sinon.stub(),
+    getCurrentDirName = sinon.stub(),
+    getByDataName = sinon.stub(),
+} = {}) {
     return {
+        getCurrentDirPath,
+        getCurrentDirName,
+        getByDataName,
         CurrentInfo: {
             link,
             dirPath: '/',
         }
     };
 }
+
