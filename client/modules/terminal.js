@@ -72,6 +72,7 @@ function create(callback) {
         env: getEnv(),
         prefix: getPrefix(),
         socketPath: CloudCmd.PREFIX,
+        fontFamily: 'Droid Sans Mono',
     };
     
     const {socket, terminal} = gritty(Element, options);
