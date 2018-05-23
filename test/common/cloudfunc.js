@@ -15,13 +15,14 @@ const CloudFuncPath = COMMONDIR + 'cloudfunc';
 
 const CloudFunc = require(CloudFuncPath);
 
-const currify = require('currify');
 const readFilesSync = require('@cloudcmd/read-files-sync');
 
-const swap = currify((fn, a, b) => fn(b, a));
-
 const test = require('tape');
-const fresh = swap(require('fresh-require'), require);
+const clean = require('clear-module');
+const fresh = (name) => {
+    clean(name);
+    return require(name);
+};
 
 const htmlLooksLike = require('html-looks-like');
 

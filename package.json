@@ -172,7 +172,6 @@
     "eslint-plugin-node": "^6.0.0",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "file-loader": "^1.1.4",
-    "fresh-require": "^1.0.3",
     "gritty": "^2.2.0",
     "gunzip-maybe": "^1.3.1",
     "html-looks-like": "^1.0.2",
