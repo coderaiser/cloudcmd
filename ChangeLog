@@ -1,3 +1,17 @@
+2018.05.24, v9.6.0
+
+fix:
+- (docker) node v10.1
+- (current-file) getParrentDirPath: path contains "+++"
+
+feature:
+- (cloudcmd) rm global window.exec
+- (package) rm vulnerable fresh-require
+- (package) rm vulnerable nsp
+- (terminal) set fontFamily
+- (modules) socket.io v2.1.1
+
+
 2018.05.15, v9.5.0
 
 fix:
