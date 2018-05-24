@@ -5,9 +5,6 @@ require('../css/nojs.css');
 require('../css/columns/name-size-date.css');
 require('../css/columns/name-size.css');
 
-// prevent additional loading of exec by spero, remedy, ishtar, salam, omnes
-window.exec = require('execon');
-
 // prevent additional loading of emitify
 window.Emitify = require('emitify/legacy');
 
