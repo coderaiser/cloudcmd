@@ -1,4 +1,4 @@
-FROM node:10
+FROM node:10.1
 MAINTAINER Coderaiser
 
 RUN mkdir -p /usr/src/app
