@@ -4,7 +4,6 @@ const DIR = __dirname + '/';
 const DIR_ROOT = DIR + '../';
 const DIR_COMMON = DIR + '../common/';
 
-const util = require('util');
 const path = require('path');
 const fs = require('fs');
 
@@ -45,8 +44,6 @@ const root = () => config('root');
 
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
-
-const noop = () => {};
 
 module.exports = (params) => {
     const p = params || {};

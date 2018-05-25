@@ -1,7 +1,6 @@
 'use strict';
 
 const path = require('path');
-const util = require('util');
 
 const test = require('tape');
 const diff = require('sinon-called-with-diff');
@@ -11,8 +10,6 @@ const clean = require('clear-module');
 
 const DIR = '../../server/';
 const cloudcmdPath = DIR + 'cloudcmd';
-
-const noop = () => {};
 
 const cloudcmd = require(cloudcmdPath);
 const config = require(DIR + 'config');
