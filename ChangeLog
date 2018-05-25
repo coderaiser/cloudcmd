@@ -1,3 +1,14 @@
+2018.05.25, v10.0.0
+
+feature:
+- (cloudcmd) --one-panel-mode -> --one-file-panel
+- (cloudcmd) clear storage -> copy path (#173)
+- (config) rm option: htmlDialogs
+- (cloudcmd) add service worker
+- (config) rm option: cache
+- (cloudcmd) rm option: localStorage
+
+
 2018.05.24, v9.6.0
 
 fix:
