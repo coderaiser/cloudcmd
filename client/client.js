@@ -612,7 +612,7 @@ function CloudCmdProto(Util, DOM) {
         });
     };
     
-    function serviceWorker() {
+    async function serviceWorker() {
         if (!navigator.serviceWorker)
             return;
         
@@ -622,7 +622,20 @@ function CloudCmdProto(Util, DOM) {
         if (!isHTTPS && !isLocalhost)
             return;
         
-        runtime.register();
+        const req = await runtime.register();
+        
+        req.onupdatefound = () => {
+            const installingWorker = req.installing;
+            installingWorker.onstatechange = () => {
+                if (installingWorker.state !== 'installed' || !navigator.serviceWorker.controller)
+                    return;
+                
+                const reload = location.reload.bind(location);
+                DOM.Dialog.confirm(TITLE, 'Update available. Do you want to realod page?', {
+                    cancel: true
+                }).then(reload);
+            };
+        };
     }
 }
 
