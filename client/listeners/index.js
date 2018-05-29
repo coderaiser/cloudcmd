@@ -5,12 +5,10 @@
 const exec = require('execon');
 const itype = require('itype/legacy');
 const currify = require('currify/legacy');
+const clipboard = require('@cloudcmd/clipboard');
+
 const getRange = require('./get-range');
-
 const getIndex = currify(require('./get-index'));
-
-const {writeText} = require('@cloudcmd/clipboard');
-
 const uploadFiles = require('../dom/upload-files');
 
 const {
@@ -219,7 +217,7 @@ function onPathElementClick(panel, event) {
 }
 
 function copyPath(el) {
-    writeText(el.parentElement.title)
+    clipboard.writeText(el.parentElement.title)
         .then(CloudCmd.log)
         .catch(CloudCmd.log);
 }
