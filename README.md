@@ -5,7 +5,7 @@
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
+[HerokuURL]:                https://cloudcmd.herokuapp.com/ "Heroku"
 [NowURL]:                   https://cloudcmd.now.sh/ "Now"
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
 [NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
