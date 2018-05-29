@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:10.1
+FROM mhart/alpine-node:10
 MAINTAINER Coderaiser
 
 RUN mkdir -p /usr/src/app
