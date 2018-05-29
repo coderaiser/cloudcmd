@@ -4,7 +4,7 @@
 
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
+[HerokuURL]:                https://cloudcmd.herokuapp.com/ "Heroku"
 [NowURL]:                   https://cloudcmd.now.sh/ "Now"
 [HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
 [NOW_LIVE_IMG]:             https://status-io.cloudcmd.io/host/cloudcmd.now.sh/img/txt.png "Now"
