@@ -232,9 +232,9 @@ function CloudCmdProto(Util, DOM) {
     
     function loadStyle(callback) {
         const prefix = CloudCmd.PREFIX;
-        const plugins = prefix + '/dist/cloudcmd.common.css';
+        const name = prefix + '/dist/cloudcmd.common.css';
         
-        DOM.load.css(plugins, callback);
+        DOM.load.css(name, callback);
     }
     
     function loadPlugins(callback) {
