@@ -136,8 +136,8 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
                 method: 'put',
                 credentials: 'include',
                 body: JSON.stringify({
-                    from: from,
-                    to: to,
+                    from,
+                    to,
                     dir: getDir(root, dir)
                 })
             });
