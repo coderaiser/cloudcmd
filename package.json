@@ -139,7 +139,7 @@
     "markdown-it": "^8.0.0",
     "mellow": "^2.0.0",
     "minimist": "^1.2.0",
-    "nomine": "^1.0.1",
+    "nomine": "^2.0.0",
     "onezip": "^2.0.0",
     "opn": "^5.1.0",
     "package-json": "^4.0.1",
