@@ -3,7 +3,7 @@
 const DIR_ROOT = __dirname + '/../';
 const fs = require('fs');
 
-const pullout = require('pullout/legacy');
+const pullout = require('pullout');
 const ponse = require('ponse');
 const markdown = require('markdown-it')();
 

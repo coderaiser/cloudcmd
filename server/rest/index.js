@@ -15,7 +15,7 @@ const jaguar = require('jaguar');
 const onezip = require('onezip');
 const inly = require('inly');
 const wraptile = require('wraptile/legacy');
-const pullout = require('pullout/legacy');
+const pullout = require('pullout');
 const json = require('jonny/legacy');
 const ponse = require('ponse');
 
