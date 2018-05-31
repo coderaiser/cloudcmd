@@ -7,17 +7,23 @@ const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 const currify = require('currify');
 const clean = require('clear-module');
+const request = require('request');
+const {promisify} = require('es6-promisify');
 
 const DIR = '../../server/';
 const cloudcmdPath = DIR + 'cloudcmd';
+const beforePath = '../before';
 
-const cloudcmd = require(cloudcmdPath);
 const config = require(DIR + 'config');
+const cloudcmd = require(cloudcmdPath);
+const {connect} = require(beforePath);
 const {
     _getPrefix,
     _auth,
     _replacePrefix,
 } = cloudcmd;
+
+const get = promisify(request);
 
 test('cloudcmd: args: no', (t) => {
     const fn = () => cloudcmd();
@@ -216,6 +222,16 @@ test('cloudcmd: getIndexPath: development', (t) => {
     const name = path.join(__dirname, '..', '..', 'dist-dev', 'index.html');
     
     t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.end();
+});
+
+test('cloudcmd: sw', async (t) => {
+    const {port, done} = await connect();
+    const {statusCode}= await get(`http://localhost:${port}/sw.js`);
+    done();
+    
+    t.equal(statusCode, 200, 'should return sw');
+    
     t.end();
 });
 
