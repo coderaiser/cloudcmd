@@ -30,7 +30,7 @@ const clean = (array) => array.filter(notEmpty);
 const babelDev = {
     babelrc: false,
     plugins: [
-        'babel-plugin-macros',
+        'module:babel-plugin-macros',
     ]
 };
 

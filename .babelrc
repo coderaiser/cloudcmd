@@ -1,16 +1,15 @@
 {
-    "presets": [
-      ["env", {
-        "exclude": [
-          "transform-regenerator"
-        ]
-      }]
-    ],
-    "plugins": [
-      "transform-object-assign",
-      "transform-object-rest-spread",
-      "fast-async",
-      "babel-plugin-macros",
-    ]
+  "presets": [
+    ["@babel/preset-env", {
+      "exclude": [
+        "transform-regenerator"
+      ]
+    }],
+  ],
+  "plugins": [
+    "@babel/plugin-transform-object-assign",
+    "@babel/plugin-proposal-object-rest-spread",
+    "module:fast-async",
+    "module:babel-plugin-macros",
+  ]
 }
-

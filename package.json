@@ -156,13 +156,13 @@
     "writejson": "^1.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
+    "@babel/plugin-transform-object-assign": "^7.0.0-beta.49",
+    "@babel/preset-env": "^7.0.0-beta.49",
     "@cloudcmd/clipboard": "^1.0.0",
-    "babel-cli": "^6.18.0",
-    "babel-loader": "^7.0.0",
+    "babel-loader": "^8.0.0-beta",
     "babel-plugin-macros": "^2.2.1",
-    "babel-plugin-transform-object-assign": "^6.22.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
     "clean-css-loader": "^1.0.1",
     "clear-module": "^2.1.0",
     "coveralls": "^3.0.0",
