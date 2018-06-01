@@ -10,6 +10,7 @@ const root = require(DIR + 'root');
 const config = require(DIR + 'config');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const markdown = require(DIR + 'markdown');
+const info = require('./info');
 
 const jaguar = require('jaguar');
 const onezip = require('onezip');
@@ -116,9 +117,7 @@ function onGET(params, callback) {
     
     switch(cmd) {
     case '':
-        p.data = json.stringify({
-            info: 'Cloud Commander API v1'
-        });
+        p.data = json.stringify(info());
         
         callback(null, {name: 'api.json'}, p.data);
         break;
