@@ -187,7 +187,7 @@
     "mock-require": "^3.0.1",
     "morgan": "^1.6.1",
     "nodemon": "^1.9.1",
-    "nyc": "^11.0.2",
+    "nyc": "^12.0.1",
     "philip": "^2.0.0",
     "place": "^1.1.4",
     "preval.macro": "^1.0.2",
