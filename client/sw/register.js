@@ -2,7 +2,10 @@
 
 const runtime = require('serviceworker-webpack-plugin/lib/runtime');
 
-module.exports = () => {
+module.exports.registerSW = registerSW;
+module.exports.unregisterSW = unregisterSW;
+
+async function registerSW() {
     if (!navigator.serviceWorker)
         return;
     
@@ -12,6 +15,11 @@ module.exports = () => {
     if (!isHTTPS && !isLocalhost)
         return;
     
-    runtime.register();
-};
+    return runtime.register();
+}
+
+async function unregisterSW() {
+    const reg = await registerSW();
+    return reg.unregister();
+}
 

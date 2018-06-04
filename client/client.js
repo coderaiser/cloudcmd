@@ -8,7 +8,11 @@ const inherits = require('inherits');
 const rendy = require('rendy/legacy');
 const exec = require('execon');
 const Images = require('./dom/images');
-const registerSW = require('./sw/register');
+const {
+    registerSW,
+    unregisterSW,
+} = require('./sw/register');
+
 const join = require('join-io/www/join');
 const jonny = require('jonny/legacy');
 const currify = require('currify/legacy');
@@ -284,7 +288,11 @@ function CloudCmdProto(Util, DOM) {
         const url = CloudCmd.PREFIX + '/logout';
         const error = () => document.location.reload();
         
-        DOM.load.ajax({url, error});
+        unregisterSW();
+        DOM.load.ajax({
+            url,
+            error,
+        });
     };
     
     function initModules(callback) {

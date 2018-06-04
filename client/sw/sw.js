@@ -67,7 +67,7 @@ async function onFetch(event) {
     if (!isGet(request) || !resp.ok || !isBasic(resp))
         return resp;
     
-    if (/^\/$/.test(pathname))
+    if (/\/$/.test(pathname))
         return resp;
     
     if (/^\/api/.test(pathname))
@@ -83,7 +83,6 @@ async function onFetch(event) {
 
 async function addToCache(request, response) {
     const cache = await caches.open(NAME);
-    
-    cache.put(request, response);
+    return cache.put(request, response);
 }
 
