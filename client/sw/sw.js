@@ -62,7 +62,7 @@ async function onFetch(event) {
     const [e, resp] = await tryToCatch(fetch, request.clone());
     
     if (e)
-        return console.error(e);
+        return console.error(e, pathname);
     
     if (!isGet(request) || !resp.ok || !isBasic(resp))
         return resp;
