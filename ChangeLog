@@ -1,3 +1,18 @@
+2018.06.04, v10.0.3
+
+fix:
+- (index) zoom on tap
+- (client) logout: servicer worker: unregister
+
+feature:
+- (package) webpack-cli v3.0.1
+- (rest) add memory info
+- (package) babel v7
+- (package) nyc v12.0.1
+- (cloudcmd) pullout/legacy -> pullout
+- (package) nomine v2.0.0
+
+
 2018.05.29, v10.0.2
 
 fix:
