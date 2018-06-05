@@ -18,6 +18,13 @@ const createRequest = (a) => new Request(a, {
     credentials: 'same-origin'
 });
 
+const getRequest = (a, request) => {
+    if (a !== '/')
+        return request;
+    
+    return createRequest('/');
+};
+
 self.addEventListener('install', wait(onInstall));
 self.addEventListener('fetch', respondWith(onFetch));
 self.addEventListener('activate', wait(onActivate));
@@ -44,14 +51,13 @@ async function onInstall() {
     ];
     
     const requests = urls.map(createRequest);
-    
     return cache.addAll(requests);
 }
 
 async function onFetch(event) {
-    const {request} = event;
-    const url = request.url;
+    const url = event.request.url;
     const pathname = getPathName(url);
+    const request = getRequest(pathname, event.request);
     
     const cache = await caches.open(NAME);
     const response = await cache.match(request);
@@ -62,7 +68,7 @@ async function onFetch(event) {
     const [e, resp] = await tryToCatch(fetch, request.clone());
     
     if (e)
-        return console.error(e, pathname);
+        return console.error(e, response, pathname);
     
     if (!isGet(request) || !resp.ok || !isBasic(resp))
         return resp;
