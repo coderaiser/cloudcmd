@@ -545,7 +545,7 @@ function CloudCmdProto(Util, DOM) {
                     current = DOM.getFiles(panel)[0];
                 
                 DOM.setCurrentFile(current, {
-                    history: history
+                    history,
                 });
                 
                 CloudCmd.emit('active-dir', Info.dirPath);
