@@ -29,7 +29,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     const ConfigView  = {
         beforeClose: () => {
             exec.ifExist(Menu, 'hide');
-            isChanged();
+            EditFile.isChanged();
         }
     };
     
@@ -182,7 +182,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
         MSG_CHANGED = 'Do you want to save changes to ' + name + '?';
     }
     
-    function isChanged() {
+    EditFile.isChanged = () => {
         const editor = CloudCmd.Edit.getEditor();
         const is = editor.isChanged();
         
@@ -194,7 +194,7 @@ CloudCmd.EditFile = function EditFileProto(callback) {
             .then(() => {
                 editor.save();
             });
-    }
+    };
     
     init(callback);
     

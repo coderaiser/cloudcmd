@@ -14,6 +14,7 @@ CloudCmd.EditFileVim = function EditFileVimProto(callback) {
         bindKeys: false,
         beforeClose: () => {
             Events.rmKey(listener);
+            CloudCmd.EditFile.isChanged();
         }
     };
     
