@@ -145,7 +145,7 @@
     "opn": "^5.1.0",
     "package-json": "^4.0.1",
     "ponse": "^2.0.0",
-    "pullout": "^1.0.1",
+    "pullout": "^2.0.0",
     "rendy": "^2.0.0",
     "restafary": "^3.0.0",
     "socket.io": "^2.0.3",
