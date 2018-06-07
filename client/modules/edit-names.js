@@ -209,7 +209,6 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
             return;
         
         Dialog.confirm(TITLE, msg)
-            .then(EditNames.hide)
             .then(applyNames)
             .catch(EditNames.hide);
     }
