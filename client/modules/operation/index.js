@@ -260,14 +260,11 @@ function OperationProto(operation, data) {
         
         const names = DOM.getFilenames(files);
         
-        deleteFn(path + query, names, (error) => {
+        deleteFn(path + query, names, () => {
             const Storage = DOM.Storage;
             const dirPath = Info.dirPath;
             
-            if (error)
-                return CloudCmd.refresh();
-             
-            DOM.deleteSelected(files);
+            CloudCmd.refresh();
             Storage.removeMatch(dirPath);
         });
     }
