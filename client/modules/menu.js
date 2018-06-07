@@ -6,11 +6,9 @@ CloudCmd.Menu = MenuProto;
 
 const exec = require('execon');
 const wrap = require('wraptile/legacy');
-
 const supermenu = require('supermenu');
 
 const {FS} = require('../../common/cloudfunc');
-
 const load = require('../dom/load');
 const RESTful = require('../dom/rest');
 
@@ -18,8 +16,6 @@ function MenuProto(Position) {
     const config = CloudCmd.config;
     const Buffer = DOM.Buffer;
     const Info = DOM.CurrentInfo;
-    
-    let Loading = true;
     const Key = CloudCmd.Key;
     const Events = DOM.Events;
     const Dialog = DOM.Dialog;
@@ -36,10 +32,21 @@ function MenuProto(Position) {
     this.ENABLED = false;
     
     function init() {
-        Loading  = true;
-        Menu.show();
+        const {isAuth, menuDataFile} = getFileMenuData();
         
+        const NOT_FILE = true;
+        const fm = DOM.getFM();
+        const menuData = getMenuData(isAuth);
+        const options = getOptions(NOT_FILE);
+        const optionsFile = getOptions();
+        
+        MenuContext = supermenu(fm, options, menuData);
+        MenuContextFile = supermenu(fm, optionsFile, menuDataFile);
+        Position = null;
+        
+        Menu.show();
         Events.addKey(listener);
+        
     }
     
     this.hide = () => {
@@ -85,41 +92,11 @@ function MenuProto(Position) {
         return 'contextFile';
     }
     
-    function getMenuByName(name) {
-        if (name === 'context')
-            return MenuContext;
-        
-        return MenuContextFile;
-    }
-    
     function show(position) {
         const {x, y} = getPosition(position);
         
-        if (!Loading) {
-            MenuContext.show(x, y);
-            MenuContextFile.show(x, y);
-            return;
-        }
-        
-        loadFileMenuData((isAuth, menuDataFile) => {
-            const NOT_FILE = true;
-            const fm = DOM.getFM();
-            const menuData = getMenuData(isAuth);
-            const options = getOptions(NOT_FILE);
-            const optionsFile = getOptions();
-            
-            MenuContext = supermenu(fm, options, menuData);
-            MenuContextFile = supermenu(fm, optionsFile, menuDataFile);
-            
-            const el = DOM.getCurrentByPosition({x, y});
-            const menuName = getMenuNameByEl(el);
-            const menu = getMenuByName(menuName);
-            
-            menu.show(x, y);
-            
-            Loading = false;
-            Position = null;
-        });
+        MenuContext.show(x, y);
+        MenuContextFile.show(x, y);
     }
     
     function getOptions(notFile) {
@@ -163,14 +140,13 @@ function MenuProto(Position) {
         return menu;
     }
     
-    function loadFileMenuData(callback) {
-        const is = CloudCmd.config('auth');
+    function getFileMenuData() {
+        const isAuth = CloudCmd.config('auth');
         const show = wrap((name) => {
             CloudCmd[name].show();
         });
         
-        const menuBottom = getMenuData(is);
-        
+        const menuBottom = getMenuData(isAuth);
         const menuTop = {
             'View': show('View'),
             'Edit': show('EditFile'),
@@ -196,9 +172,15 @@ function MenuProto(Position) {
             },
         };
         
-        const menu = Object.assign({}, menuTop, menuBottom);
+        const menuDataFile = {
+            ...menuTop,
+            ...menuBottom,
+        };
         
-        callback(is, menu);
+        return {
+            isAuth,
+            menuDataFile,
+        };
     }
     
     function isCurrent(yesFn, noFn) {
