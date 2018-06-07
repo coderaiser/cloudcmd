@@ -71,6 +71,7 @@ module.exports = {
         [modules + '/edit-file']: `${dirModules}/edit-file.js`,
         [modules + '/edit-file-vim']: `${dirModules}/edit-file-vim.js`,
         [modules + '/edit-names']: `${dirModules}/edit-names.js`,
+        [modules + '/edit-names-vim']: `${dirModules}/edit-names-vim.js`,
         [modules + '/menu']: `${dirModules}/menu.js`,
         [modules + '/view']: `${dirModules}/view.js`,
         [modules + '/help']: `${dirModules}/help.js`,

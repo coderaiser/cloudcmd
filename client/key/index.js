@@ -411,7 +411,11 @@ function KeyProto() {
         
         case Key.M:
             if (ctrlMeta) {
-                CloudCmd.EditNames.show();
+                if (shift)
+                    CloudCmd.EditNamesVim.show();
+                else
+                    CloudCmd.EditNames.show();
+                
                 event.preventDefault();
             }
             

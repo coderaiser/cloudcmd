@@ -164,7 +164,8 @@ Hot keys
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Ctrl + a`            | select all files in a panel
-| `Ctrl + m`            | rename selected files
+| `Ctrl + m`            | rename selected files in editor
+| `Shift + Ctrl + m`    | rename selected files in vim mode of editor
 | `Ctrl + u`            | swap panels
 | `Ctrl + F3`           | sort by name
 | `Ctrl + F5`           | sort by date

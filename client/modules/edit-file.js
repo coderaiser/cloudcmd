@@ -62,7 +62,10 @@ CloudCmd.EditFile = function EditFileProto(callback) {
     }
     
     EditFile.show = (options) => {
-        const config = Object.assign({}, ConfigView, options);
+        const config = {
+            ...ConfigView,
+            ...options,
+        };
         
         Images.show.load();
         

@@ -4,6 +4,7 @@
         "edit-file",
         "edit-file-vim",
         "edit-names",
+        "edit-names-vim",
         "menu",
         "view",
         "help",

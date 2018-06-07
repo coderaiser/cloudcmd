@@ -3,10 +3,18 @@
 /* global CloudCmd, DOM */
 
 const currify = require('currify/legacy');
+const store = require('fullstore/legacy');
+const squad = require('squad/legacy');
+const wraptile = require('wraptile/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');
 
 const reject = Promise.reject.bind(Promise);
+
+const call = currify((fn, callback) => {
+    fn();
+    callback();
+});
 
 CloudCmd.EditNames = function EditNamesProto(callback) {
     const Info = DOM.CurrentInfo;
@@ -15,46 +23,47 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
     const TITLE = 'Edit Names';
     const alert = currify(Dialog.alert, TITLE);
     const refresh = currify(_refresh);
+    const rename = currify(_rename);
     
     let Menu;
     
-    const EditNames = this;
+    const EditNames = exec.bind();
     const ConfigView  = {
         beforeClose: () => {
             exec.ifExist(Menu, 'hide');
-            isChanged();
             DOM.Events.remove('keydown', keyListener);
+            EditNames.isChanged();
         }
     };
     
     function init(callback) {
-        let editor;
+        const editor = store();
+        
+        const getMainEditor = () => CloudCmd.Edit.getEditor();
+        const getEditor = squad(editor, getMainEditor);
+        const listeners = squad(setListeners, editor);
+        
+        const show = callback ? exec : EditNames.show;
         
         exec.series([
             CloudCmd.Edit,
-            
-            (callback) => {
-                editor = CloudCmd.Edit.getEditor();
-                callback();
-            },
-            
-            (callback) => {
-                setListeners(editor);
-                callback();
-            },
-            
-            (callback) => {
-                EditNames.show();
-                callback();
-            },
+            call(getEditor),
+            call(listeners),
+            show,
         ], callback);
     }
     
-    this.show = () => {
+    EditNames.show = (options) => {
         const names = getActiveNames().join('\n');
+        const config = {
+            ...ConfigView, 
+            ...options,
+        };
         
         if (Info.name === '..' && names.length === 1)
             return Dialog.alert.noFiles(TITLE);
+        
+        DOM.Events.addKey(keyListener);
         
         CloudCmd.Edit
             .getEditor()
@@ -63,9 +72,9 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
             .setOption('keyMap', 'default')
             .disableKey();
         
-        DOM.Events.addKey(keyListener);
-        
-        CloudCmd.Edit.show(ConfigView);
+        CloudCmd.Edit.show(config);
+         
+        return CloudCmd.Edit;
     };
     
     function keyListener(event) {
@@ -84,7 +93,7 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
         return DOM.getFilenames(DOM.getActiveFiles());
     }
     
-    this.hide = () => {
+    EditNames.hide = () => {
         CloudCmd.Edit.hide();
     };
     
@@ -130,18 +139,18 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
         return root + dir;
     }
     
-    function rename(dir, from, to) {
-        return (root) => {
-            return fetch(CloudCmd.PREFIX + '/rename', {
-                method: 'put',
-                credentials: 'include',
-                body: JSON.stringify({
-                    from,
-                    to,
-                    dir: getDir(root, dir)
-                })
-            });
-        };
+    function _rename(path, from, to, root) {
+        const dir = getDir(root, path);
+        
+        return fetch(CloudCmd.PREFIX + '/rename', {
+            method: 'put',
+            credentials: 'include',
+            body: JSON.stringify({
+                from,
+                to,
+                dir,
+            })
+        });
     }
     
     function setMenu(event) {
@@ -201,18 +210,19 @@ CloudCmd.EditNames = function EditNamesProto(callback) {
         Menu.show(position.x, position.y);
     }
     
-    function isChanged() {
+    EditNames.isChanged = () => {
         const editor = CloudCmd.Edit.getEditor();
         const msg = 'Apply new names?';
         
         if (!editor.isChanged())
             return;
         
-        Dialog.confirm(TITLE, msg)
-            .then(applyNames)
-            .catch(EditNames.hide);
-    }
+        Dialog.confirm(TITLE, msg, {cancel: false})
+            .then(applyNames);
+    };
     
-    init(callback);
+    setTimeout(wraptile(init, callback));
+    
+    return EditNames;
 };
 
