@@ -162,28 +162,13 @@ function CloudCmdProto(Util, DOM) {
                 if (error || !itype.function(Proto))
                     return;
                 
-                CloudCmd[name] = applyConstructor(Proto, args);
+                CloudCmd[name] = new Proto(...args);
             };
             
             return DOM.load.js(pathFull, func || done);
         };
         
         CloudCmd[name][funcName] = CloudCmd[name];
-    }
-    
-    /*
-     * apply arguemnts to constructor
-     *
-     * @param constructor
-     * @param args
-     */
-    function applyConstructor(constructor, args) {
-        const F = function () {
-            return constructor.apply(this, args);
-        };
-        
-        F.prototype = constructor.prototype;
-        return new F();
     }
     
     /**
