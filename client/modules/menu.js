@@ -12,7 +12,7 @@ const {FS} = require('../../common/cloudfunc');
 const load = require('../dom/load');
 const RESTful = require('../dom/rest');
 
-function MenuProto(Position) {
+function MenuProto(position) {
     const config = CloudCmd.config;
     const Buffer = DOM.Buffer;
     const Info = DOM.CurrentInfo;
@@ -31,7 +31,7 @@ function MenuProto(Position) {
     
     this.ENABLED = false;
     
-    function init() {
+    function init(position) {
         const {isAuth, menuDataFile} = getFileMenuData();
         
         const NOT_FILE = true;
@@ -42,11 +42,9 @@ function MenuProto(Position) {
         
         MenuContext = supermenu(fm, options, menuData);
         MenuContextFile = supermenu(fm, optionsFile, menuDataFile);
-        Position = null;
         
-        Menu.show();
+        Menu.show(position);
         Events.addKey(listener);
-        
     }
     
     this.hide = () => {
@@ -55,7 +53,11 @@ function MenuProto(Position) {
     };
     
     this.show = (position) => {
-        show(position);
+        const {x, y} = getPosition(position);
+        
+        MenuContext.show(x, y);
+        MenuContextFile.show(x, y);
+        
         Images.hide();
     };
     
@@ -66,17 +68,6 @@ function MenuProto(Position) {
                 y: position.y,
             };
         
-        if (Position)
-            return {
-                x: Position.x,
-                y: Position.y,
-            };
-        if (position)
-            return {
-                x: position.x,
-                y: position.y,
-            };
-       
         return getCurrentPosition();
     }
     
@@ -90,13 +81,6 @@ function MenuProto(Position) {
             return 'context';
         
         return 'contextFile';
-    }
-    
-    function show(position) {
-        const {x, y} = getPosition(position);
-        
-        MenuContext.show(x, y);
-        MenuContextFile.show(x, y);
     }
     
     function getOptions(notFile) {
@@ -347,5 +331,5 @@ function MenuProto(Position) {
         }
     }
     
-    init();
+    init(position);
 }
