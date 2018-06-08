@@ -66,7 +66,6 @@ module.exports = {
     },
     entry: {
         cloudcmd: `${dir}/cloudcmd.js`,
-        //[sw]: `${dir}/sw.js`,
         [modules + '/edit']: `${dirModules}/edit.js`,
         [modules + '/edit-file']: `${dirModules}/edit-file.js`,
         [modules + '/edit-file-vim']: `${dirModules}/edit-file-vim.js`,
