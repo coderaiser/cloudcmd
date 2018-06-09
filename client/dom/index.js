@@ -582,12 +582,11 @@ function CmdProto() {
      * @param callback
      */
     this.saveDataToStorage = function(name, data, hash, callback) {
-        const allowed = CloudCmd.config('localStorage');
         const isDir = DOM.isCurrentIsDir();
         const nameHash = name + '-hash';
         const nameData = name + '-data';
         
-        if (!allowed || isDir)
+        if (isDir)
             return exec(callback);
         
         exec.if(hash, () => {
@@ -613,10 +612,9 @@ function CmdProto() {
     this.getDataFromStorage = (name, callback) => {
         const nameHash = name + '-hash';
         const nameData = name + '-data';
-        const allowed = CloudCmd.config('localStorage');
         const isDir = DOM.isCurrentIsDir();
         
-        if (!allowed || isDir)
+        if (isDir)
             return exec(callback);
         
         exec.parallel([
