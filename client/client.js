@@ -185,14 +185,15 @@ function CloudCmdProto(Util, DOM) {
             exec.with(CloudCmd.route, location.hash),
         ], noop);
         
+        const addPrefix = (a) => `${prefix}${a}`;
         const funcBefore  = (callback) => {
-            const src = prefix + '/join:' + [
+            const srcs = [
                 CloudCmd.DIRCLIENT_MODULES + 'polyfill.js',
                 '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
-            ].join(':');
+            ].map(addPrefix);
             
             DOM.loadJquery(() => {
-                DOM.load.js(src, callback);
+                DOM.load.parallel(srcs, callback);
             });
         };
         

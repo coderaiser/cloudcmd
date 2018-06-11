@@ -195,6 +195,7 @@
     "redrun": "^6.0.0",
     "request": "^2.76.0",
     "rimraf": "^2.5.4",
+    "scroll-into-view-if-needed": "^2.2.5",
     "serviceworker-webpack-plugin": "1.0.0-alpha02",
     "shortdate": "^1.0.1",
     "sinon": "^6.0.0",
