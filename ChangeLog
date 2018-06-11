@@ -1,3 +1,11 @@
+2018.06.11, v10.2.0
+
+feature:
+- (cloudcmd) add ability to set current file closer to removed files
+- (client) add ability to clear localStorage on logOut
+- (package) sinon v6.0.0
+
+
 2018.06.09, v10.1.2
 
 fix:
