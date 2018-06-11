@@ -198,7 +198,7 @@
     "rimraf": "^2.5.4",
     "serviceworker-webpack-plugin": "1.0.0-alpha02",
     "shortdate": "^1.0.1",
-    "sinon": "^5.0.1",
+    "sinon": "^6.0.0",
     "sinon-called-with-diff": "^2.0.0",
     "smalltalk": "^3.0.0",
     "socket.io-client": "^2.0.1",
