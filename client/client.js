@@ -6,7 +6,9 @@ const itype = require('itype/legacy');
 const Emitify = require('emitify/legacy');
 const inherits = require('inherits');
 const rendy = require('rendy/legacy');
+const wraptile = require('wraptile/legacy');
 const exec = require('execon');
+
 const Images = require('./dom/images');
 const {
     registerSW,
@@ -185,16 +187,14 @@ function CloudCmdProto(Util, DOM) {
             exec.with(CloudCmd.route, location.hash),
         ], noop);
         
-        const addPrefix = (a) => `${prefix}${a}`;
+        const {
+            load,
+            loadJquery,
+        } = DOM;
+        
         const funcBefore  = (callback) => {
-            const srcs = [
-                CloudCmd.DIRCLIENT_MODULES + 'polyfill.js',
-                '/modules/domtokenlist-shim/dist/domtokenlist.min.js',
-            ].map(addPrefix);
-            
-            DOM.loadJquery(() => {
-                DOM.load.parallel(srcs, callback);
-            });
+            const src = prefix + CloudCmd.DIRCLIENT_MODULES + 'polyfill.js';
+            loadJquery(wraptile(load.js, src, callback));
         };
         
         CloudCmd.PREFIX = prefix;

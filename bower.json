@@ -28,7 +28,6 @@
     "test"
   ],
   "dependencies": {
-    "domtokenlist-shim": "~1.1.0",
     "olark": "^1.0.0",
     "jquery": "3.3.1",
     "fancybox": "^2.1.6"
