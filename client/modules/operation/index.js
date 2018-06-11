@@ -18,6 +18,7 @@ const {
 const RESTful = require('../../dom/rest');
 const removeExtension = require('./remove-extension');
 const setListeners = require('./set-listeners');
+const getNextCurrentName = require('./get-next-current-name');
 
 const removeQuery = (a) => a.replace(/\?.*/, '');
 
@@ -258,13 +259,19 @@ function OperationProto(operation, data) {
         
         showLoad();
         
-        const names = DOM.getFilenames(files);
+        const removedNames = DOM.getFilenames(files);
+        const names = DOM.CurrentInfo.files.map(DOM.getCurrentName);
+        const prevCurrent = DOM.getCurrentName();
+        const currentName = getNextCurrentName(prevCurrent, names, removedNames);
         
-        deleteFn(path + query, names, () => {
+        deleteFn(path + query, removedNames, (e) => {
             const Storage = DOM.Storage;
             const dirPath = Info.dirPath;
             
-            CloudCmd.refresh();
+            !e && CloudCmd.refresh({
+                currentName
+            });
+            
             Storage.removeMatch(dirPath);
         });
     }
