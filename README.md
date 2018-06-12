@@ -33,7 +33,7 @@
 
 **Cloud Commander** is an orthodox web file manager with console and editor.
 
-![Cloud Commander](http://cloudcmd.io/img/logo/cloudcmd.png "Cloud Commander")
+![Cloud Commander](https://cloudcmd.io/img/logo/cloudcmd.png "Cloud Commander")
 
 ## Install
 
@@ -51,6 +51,12 @@ cloudcmd
 ## How to use?
 
 Open url `http://localhost:8000` in browser.
+
+### View
+
+You will see something similar to this.
+![View](https://cloudcmd.io/img/screen/view.png "View")
+
 
 ## Deploy
 `Cloud Commander` could be easily deployed to [Heroku][DeployURL].
