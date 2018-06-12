@@ -128,7 +128,7 @@
     "files-io": "^2.0.0",
     "flop": "^4.0.0",
     "for-each-key": "^1.0.1",
-    "format-io": "^0.9.6",
+    "format-io": "^1.0.0",
     "fullstore": "^1.0.0",
     "http-auth": "^3.2.3",
     "inly": "^2.0.0",

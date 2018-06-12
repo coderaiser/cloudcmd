@@ -2,7 +2,7 @@
 
 /* global CloudCmd, DOM*/
 
-const Format = require('format-io');
+const Format = require('format-io/legacy');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
 const squad = require('squad/legacy');
