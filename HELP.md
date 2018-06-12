@@ -129,7 +129,7 @@ Cloud Commander supports command line parameters:
 | `--no-show-file-name`         | do not show file name in view and edit
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
-port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
+port from it (`8000` default). if port variables `PORT` isn't exist.
 
 To begin use, type in address bar of your browser:
 

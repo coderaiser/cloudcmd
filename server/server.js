@@ -21,7 +21,6 @@ const prefix = squad(prefixer, apart(config, 'prefix'));
 
 module.exports = (options) => {
     const port = process.env.PORT            ||  /* c9           */
-                 process.env.VCAP_APP_PORT   ||  /* cloudfoundry */
                  config('port');
     
     const ip =  process.env.IP               ||  /* c9           */
