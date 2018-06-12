@@ -7,6 +7,15 @@ module.exports = new EventsProto();
 function EventsProto() {
     const Events = this;
     
+    const getEventOptions = (eventName) => {
+        if (eventName !== 'touchstart')
+            return false;
+        
+        return {
+            passive: true
+        };
+    };
+    
     function parseArgs(eventName, element, listener, callback) {
         let isFunc;
         const args = [
@@ -47,7 +56,7 @@ function EventsProto() {
             callback(element, [
                 eventName,
                 listener,
-                false
+                getEventOptions(eventName),
             ]);
             break;
         

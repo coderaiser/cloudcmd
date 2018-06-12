@@ -61,7 +61,7 @@ const EventsFiles = {
     ]),
     dragstart: exec.with(execIfNotUL, onDragStart),
     dblclick: exec.with(execIfNotUL, onDblClick),
-    touchstart: exec.with(execIfNotUL, onTouch)
+    touchstart: exec.with(execIfNotUL, onTouch),
 };
 
 let EXT;
@@ -292,8 +292,6 @@ function onTouch(event) {
     CloudCmd.loadDir({
         path: DOM.getCurrentPath(current)
     });
-    
-    event.preventDefault();
 }
 
 /*
