@@ -378,7 +378,7 @@ Here is description of options:
     "zip"               : true,     /* zip text before send / unzip before save */
     "buffer"            : true,     /* buffer for copying files                 */
     "dirStorage"        : true,     /* store directory listing                  */
-    "online"            : true,     /* load js files from cdn or local path     */
+    "online"            : false,    /* do not load js files from cdn            */
     "open"              : true,     /* open web browser when server started     */
     "oneFilePanel"      : false,    /* show one file panel                      */
     "keysPanel"         : true,     /* show classic panel with buttons of keys  */
