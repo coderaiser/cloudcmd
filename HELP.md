@@ -379,7 +379,7 @@ Here is description of options:
     "buffer"            : true,     /* buffer for copying files                 */
     "dirStorage"        : true,     /* store directory listing                  */
     "online"            : true,     /* load js files from cdn or local path     */
-    "open"              : false     /* open web browser when server started     */
+    "open"              : true,     /* open web browser when server started     */
     "oneFilePanel"      : false,    /* show one file panel                      */
     "keysPanel"         : true,     /* show classic panel with buttons of keys  */
     "port"              : 8000,     /* http port                                */

@@ -11,7 +11,7 @@
     "buffer": true,
     "dirStorage": false,
     "online": true,
-    "open": false,
+    "open": true,
     "keysPanel": true,
     "port": 8000,
     "ip": null,
