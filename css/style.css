@@ -241,6 +241,7 @@ a:hover, a:active {
     margin: 0;
     overflow-y: auto;
     list-style-type: none;
+    -webkit-overflow-scrolling: touch;
 }
 
 .files li {
