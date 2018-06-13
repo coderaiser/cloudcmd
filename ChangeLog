@@ -1,3 +1,15 @@
+2018.06.13, v10.2.1
+
+fix:
+- (style) .fm: scrolling on ios
+
+feature:
+- (dom) touchstart: set passive listener
+- (package) format-io v1.0.0
+- (package) add domtokenlist-shim from npm
+- (polyfill) add scroll-into-view-if-needed polyfill from npm
+
+
 2018.06.11, v10.2.0
 
 feature:
