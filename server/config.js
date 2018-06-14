@@ -86,7 +86,7 @@ function manage(key, value) {
 }
 
 function _save(callback) {
-    writejson(ConfigHome, config, callback);
+    writejson(ConfigHome, config, {mode: 0o600}, callback);
 }
 
 function listen(sock, auth) {
