@@ -5,6 +5,8 @@ node_modules
 npm-debug.log*
 coverage
 
+modules/jquery-mouse-wheel
+
 modules/jquery/dist
 modules/jquery/external
 modules/jquery/src
