@@ -2,25 +2,15 @@
 
 'use strict';
 
-const exec = require('execon');
-
 const load = require('../dom/load');
 const Files = require('../dom/files');
 const Images = require('../dom/images');
 const uploadFiles = require('../dom/upload-files');
 
-CloudCmd.Upload = UploadProto;
-
-function UploadProto() {
+module.exports.init = async () => {
     Images.show.load('top');
-    
-    exec.series([
-        CloudCmd.View,
-        show
-    ]);
-    
-    return exports;
-}
+    await CloudCmd.View();
+};
 
 module.exports.show = show;
 module.exports.hide = hide;

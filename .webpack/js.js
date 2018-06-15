@@ -27,6 +27,8 @@ const devtool = isDev ? 'eval' : 'source-map';
 const notEmpty = (a) => a;
 const clean = (array) => array.filter(notEmpty);
 
+const noParse = (a) => /\.spec\.js$/.test(a);
+
 const babelDev = {
     babelrc: false,
     plugins: [
@@ -55,8 +57,8 @@ const plugins = [
 ];
 
 const splitChunks = {
-    chunks: 'all',
     name: 'cloudcmd.common',
+    chunks: 'async',
 };
 
 module.exports = {
@@ -96,6 +98,7 @@ module.exports = {
     ],
     module: {
         rules,
+        noParse,
     },
     plugins,
 };

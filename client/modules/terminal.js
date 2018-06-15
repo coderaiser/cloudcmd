@@ -2,18 +2,18 @@
 
 /* global CloudCmd, gritty */
 
+const {promisify} = require('es6-promisify');
+
 require('../../css/terminal.css');
 
 const exec = require('execon');
 const load = require('../dom/load');
 const DOM = require('../dom');
 const Images = require('../dom/images');
-const {Dialog} = DOM;
 
 const TITLE = 'Terminal';
 
-CloudCmd.Terminal = TerminalProto;
-
+const {Dialog} = DOM;
 const {Key} = CloudCmd;
 
 let Element;
@@ -22,30 +22,26 @@ let Terminal;
 
 const {config} = CloudCmd;
 
-function TerminalProto() {
-    const noop = () => {};
+const loadAll = promisify((callback) => {
+    const prefix = getPrefix();
+    const url = prefix + '/gritty.js';
     
-    if (!config('terminal'))
-        return {
-            show: noop
-        };
-    
+    DOM.load.js(url, (error) => {
+        if (error)
+            return Dialog.alert(TITLE, error.message);
+        
+        Loaded = true;
+        exec(callback);
+    });
+});
+
+module.exports.init = async () => {
     Images.show.load('top');
     
-    exec.series([
-        CloudCmd.View,
-        loadAll,
-        create,
-        show,
-    ]);
-    
-    Element = load({
-        name: 'div',
-        className : 'terminal',
-    });
-    
-    return module.exports;
-}
+    await CloudCmd.View();
+    await loadAll();
+    await create();
+};
 
 module.exports.show = show;
 module.exports.hide = hide;
@@ -67,7 +63,12 @@ function getEnv() {
     };
 }
 
-function create(callback) {
+function create() {
+    Element = load({
+        name: 'div',
+        className : 'terminal',
+    });
+    
     const options = {
         env: getEnv(),
         prefix: getPrefix(),
@@ -86,12 +87,11 @@ function create(callback) {
     });
     
     socket.on('connect', exec.with(authCheck, socket));
-    exec(callback);
 }
 
 function authCheck(spawn) {
     spawn.emit('auth', config('username'), config('password'));
-    
+
     spawn.on('reject', () => {
         Dialog.alert(TITLE, 'Wrong credentials!');
     });
@@ -101,6 +101,9 @@ function show(callback) {
     if (!Loaded)
         return;
     
+    if (!config('terminal'))
+        return;
+    
     CloudCmd.View.show(Element, {
         afterShow: () => {
             if (Terminal)
@@ -108,19 +111,6 @@ function show(callback) {
             
             exec(callback);
         }
-    });
-}
-
-function loadAll(callback) {
-    const prefix = getPrefix();
-    const url = prefix + '/gritty.js';
-    
-    DOM.load.js(url, (error) => {
-        if (error)
-            return Dialog.alert(TITLE, error.message);
-        
-        Loaded = true;
-        exec(callback);
     });
 }
 

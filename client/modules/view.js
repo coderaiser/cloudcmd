@@ -8,6 +8,7 @@ const itype = require('itype/legacy');
 const rendy = require('rendy/legacy');
 const exec = require('execon');
 const currify = require('currify/legacy');
+const {promisify} = require('es6-promisify');
 
 const {time} = require('../../common/util');
 const {FS} = require('../../common/cloudfunc');
@@ -23,10 +24,7 @@ const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 const addEvent = lifo(Events.add);
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
-CloudCmd.View = ViewProto;
-
-module.exports = exec.bind();
-
+//module.exports = exec.bind();
 module.exports.show = show;
 module.exports.hide = hide;
 
@@ -77,9 +75,7 @@ const Config = {
     }
 };
 
-function ViewProto(callback) {
-    const func = callback || exec.with(show, null);
-    
+module.exports.init = promisify((fn) => {
     Loading = true;
     
     exec.series([
@@ -87,9 +83,9 @@ function ViewProto(callback) {
         loadAll,
         (callback) => {
             Loading = false;
-            exec(callback);
+            callback();
         }
-    ], func);
+    ], fn);
     
     Config.parent = Overlay = load({
         id          : 'js-view',
@@ -103,9 +99,7 @@ function ViewProto(callback) {
     ];
     
     events.forEach(addEvent(Overlay, onOverLayClick));
-    
-    return module.exports;
-}
+});
 
 function show(data, options) {
     const prefixUrl = CloudCmd.PREFIX_URL + FS;

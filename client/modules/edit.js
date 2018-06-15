@@ -2,137 +2,122 @@
 
 'use strict';
 
-const exec = require('execon');
-const currify = require('currify/legacy');
+const {promisify} = require('es6-promisify');
 
 const load = require('../dom/load');
 
 const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
 const {time, timeEnd} = require('../../common/util');
 
-CloudCmd.Edit = EditProto;
+const Name = 'Edit';
+const EditorName = CloudCmd.config('editor');
 
-function EditProto(callback) {
-    const Name = 'Edit';
-    const EditorName = CloudCmd.config('editor');
-    const loadFiles = currify(_loadFiles);
+let Loading = true;
+let Element;
+let editor;
+
+const ConfigView = {
+    afterShow: () => {
+        editor
+            .moveCursorTo(0, 0)
+            .focus();
+    }
+};
+
+module.exports.init = async () => {
+    const element = createElement();
     
-    let Loading = true;
-    let Element;
-    let editor;
+    await CloudCmd.View();
+    await loadFiles(element);
+};
+
+function createElement() {
+    const element = load({
+        name: 'div',
+        style:
+            'width      : 100%;'                +
+            'height     : 100%;'                +
+            'font-family: "Droid Sans Mono";'   +
+            'position   : absolute;',
+        notAppend: true
+    });
     
-    const ConfigView = {
-        afterShow: () => {
-            editor
-                .moveCursorTo(0, 0)
-                .focus();
-        }
+    Element = element;
+    
+    return element;
+}
+
+function checkFn(name, fn) {
+    if (typeof fn !== 'function')
+        throw Error(name + ' should be a function!');
+}
+
+function initConfig(options = {}) {
+    const config = Object.assign({}, options, ConfigView);
+    
+    if (!options.afterShow)
+        return config;
+    
+    checkFn('options.afterShow', options.afterShow);
+    
+    const afterShow = {config};
+    
+    config.afterShow = () => {
+        afterShow();
+        options.afterShow();
     };
     
-    const Edit = exec.bind();
+    return config;
+}
+
+module.exports.show = (options) => {
+    if (Loading)
+        return;
+     
+    CloudCmd.View.show(Element, initConfig(options));
     
-    function init(callback) {
-        const element = createElement();
-        
-        exec.series([
-            CloudCmd.View,
-            loadFiles(element)
-        ], callback);
-    }
-    
-    function createElement() {
-        const element = load({
-            name: 'div',
-            style:
-                'width      : 100%;'                +
-                'height     : 100%;'                +
-                'font-family: "Droid Sans Mono";'   +
-                'position   : absolute;',
-            notAppend: true
+    getEditor()
+        .setOptions({
+            fontSize: 16,
         });
-        
-        Element = element;
-        
-        return element;
-    }
+};
+
+module.exports.getEditor = getEditor;
+
+function getEditor() {
+    return editor;
+}
+
+module.exports.getElement = () => {
+    return Element;
+};
+
+module.exports.hide = () => {
+    CloudCmd.View.hide();
+};
+
+const loadFiles = promisify((element, callback) => {
+    const socketPath = CloudCmd.PREFIX;
+    const prefix = socketPath + '/' + EditorName;
+    const url = prefix + '/' + EditorName + '.js';
     
-    function checkFn(name, fn) {
-        if (typeof fn !== 'function')
-            throw Error(name + ' should be a function!');
-    }
+    time(Name + ' load');
     
-    function initConfig(options = {}) {
-        const config = Object.assign({}, options, ConfigView);
-        
-        if (!options.afterShow)
-            return config;
-        
-        checkFn('options.afterShow', options.afterShow);
-        
-        const afterShow = {config};
-        
-        config.afterShow = () => {
-            afterShow();
-            options.afterShow();
+    load.js(url, () => {
+        const word = window[EditorName];
+        const options = {
+            maxSize,
+            prefix,
+            socketPath,
         };
         
-        return config;
-    }
-    
-    Edit.show = (options) => {
-        if (Loading)
-            return;
-         
-        CloudCmd.View.show(Element, initConfig(options));
-        
-        Edit.getEditor()
-            .setOptions({
-                fontSize: 16,
-            });
-        
-        return Edit;
-    };
-    
-    Edit.getEditor = () => {
-        return editor;
-    };
-    
-    Edit.getElement = () => {
-        return Element;
-    };
-    
-    Edit.hide = () => {
-        CloudCmd.View.hide();
-        return Edit;
-    };
-    
-    function _loadFiles(element, callback) {
-        const socketPath = CloudCmd.PREFIX;
-        const prefix = socketPath + '/' + EditorName;
-        const url = prefix + '/' + EditorName + '.js';
-        
-        time(Name + ' load');
-        
-        load.js(url, () => {
-            const word = window[EditorName];
-            const options = {
-                maxSize,
-                prefix,
-                socketPath,
-            };
+        word(element, options, (ed) => {
+            timeEnd(Name + ' load');
+            editor  = ed;
+            Loading = false;
             
-            word(element, options, (ed) => {
-                timeEnd(Name + ' load');
-                editor  = ed;
-                Loading = false;
-                
-                exec(callback);
-            });
+            callback();
         });
-    }
-    
-    init(callback);
-    
-    return Edit;
-}
+    });
+});
 

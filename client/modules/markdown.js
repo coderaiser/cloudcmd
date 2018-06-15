@@ -2,24 +2,14 @@
 
 /*global CloudCmd */
 
-CloudCmd.Markdown = MarkdownProto;
-
-const exec = require('execon');
-
 const Images = require('../dom/images');
 const load = require('../dom/load');
 const {Markdown} = require('../dom/rest');
 
-function MarkdownProto(name, options) {
+module.exports.init = async () => {
     Images.show.load('top');
-    
-    exec.series([
-        CloudCmd.View,
-        exec.with(show, name, options),
-    ]);
-    
-    return module.exports;
-}
+    await CloudCmd.View();
+};
 
 module.exports.show = show;
 

@@ -2,10 +2,9 @@
 
 'use strict';
 
-CloudCmd.Cloud = CloudProto;
-
 const exec = require('execon');
 const currify = require('currify/legacy');
+const {promisify} = require('es6-promisify');
 
 const {log} = CloudCmd;
 
@@ -15,11 +14,9 @@ const Images = require('../dom/images');
 
 const upload = currify(_upload);
 
-function CloudProto(callback) {
-    loadFiles(callback);
-    
-    return module.exports;
-}
+module.exports.init = async () => {
+    await loadFiles();
+};
 
 module.exports.uploadFile = (filename, data) => {
     const mimetype = '';
@@ -52,7 +49,7 @@ function _upload(callback, file) {
     });
 }
 
-function loadFiles(callback) {
+const loadFiles = promisify((callback) => {
     const js = '//api.filepicker.io/v2/filepicker.js';
     
     load.js(js, () => {
@@ -65,5 +62,5 @@ function loadFiles(callback) {
             exec(callback);
         });
     });
-}
+});
 

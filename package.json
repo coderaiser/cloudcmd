@@ -158,9 +158,11 @@
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.49",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.51",
     "@babel/plugin-transform-object-assign": "^7.0.0-beta.49",
     "@babel/preset-env": "^7.0.0-beta.49",
     "@cloudcmd/clipboard": "^1.0.0",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^8.0.0-beta",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",

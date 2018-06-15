@@ -5,6 +5,7 @@ module.exports.unregisterSW = unregisterSW;
 
 async function registerSW(prefix) {
     prefix = prefix ? `/${prefix}/` : `/`;
+    
     if (!navigator.serviceWorker)
         return;
     

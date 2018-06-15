@@ -2,16 +2,11 @@
 
 /* global CloudCmd */
 
-CloudCmd.Help = HelpProto;
-
 const Images = require('../dom/images');
 
-function HelpProto() {
+module.exports.init = () => {
     Images.show.load('top');
-    show();
-    
-    return exports;
-}
+};
 
 module.exports.show = show;
 module.exports.hide = hide;

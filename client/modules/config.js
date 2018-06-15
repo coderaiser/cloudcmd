@@ -7,21 +7,22 @@ require('../../css/config.css');
 const rendy = require('rendy/legacy');
 const exec = require('execon');
 const currify = require('currify/legacy');
+const wraptile = require('wraptile/legacy');
 const squad = require('squad/legacy');
-const input = require('../input');
+const {promisify} = require('es6-promisify');
 
+const input = require('../input');
 const Images = require('../dom/images');
 const Events = require('../dom/events');
 const Files = require('../dom/files');
 
 const {getTitle} = require('../../common/cloudfunc');
-
 const {Dialog, setTitle} = DOM;
 
 const TITLE = 'Config';
 const alert = currify(Dialog.alert, TITLE);
 
-const Config = module.exports;
+const loadSocket = promisify(DOM.loadSocket);
 
 const showLoad = () => {
     Images.show.load('top');
@@ -37,33 +38,18 @@ const addChange = currify((fn, input) => {
     return input;
 });
 
-CloudCmd.Config = ConfigProto;
+const Config = {};
 
 let Loading = true;
 
-function ConfigProto() {
-    const noop = () => {};
-    
-    if (!CloudCmd.config('configDialog'))
-        return {
-            show: noop
-        };
-    
-    Loading = true;
-    
+module.exports.init = async () => {
     showLoad();
-    exec.series([
-        CloudCmd.View,
-        (callback) => {
-            Loading = false;
-            exec(callback);
-            DOM.loadSocket(initSocket);
-        },
-        show
-    ]);
     
-    return module.exports;
-}
+    await CloudCmd.View();
+    await loadSocket();
+    initSocket();
+    Loading = false;
+};
 
 const config = CloudCmd.config;
 
@@ -113,10 +99,7 @@ function initSocket() {
 
 function authCheck(socket) {
     socket.emit('auth', config('username'), config('password'));
-    
-    socket.on('reject', () => {
-        alert('Wrong credentials!');
-    });
+    socket.on('reject', wraptile(alert, 'Wrong credentials!'));
 }
 
 Config.save = saveHttp;
@@ -124,6 +107,9 @@ Config.save = saveHttp;
 module.exports.show = show;
 
 function show() {
+    if (!CloudCmd.config('configDialog'))
+        return;
+    
     const prefix = CloudCmd.PREFIX;
     const funcs = [
         exec.with(Files.get, 'config-tmpl'),
@@ -193,9 +179,11 @@ function fillTemplate(error, template) {
     });
 }
 
-module.exports.hide = () => {
+module.exports.hide = hide;
+
+function hide() {
     CloudCmd.View.hide();
-};
+}
 
 function onChange(el) {
     const obj = {};
@@ -249,7 +237,7 @@ function onNameChange(name) {
 function onKey({keyCode, target}) {
     switch (keyCode) {
     case Key.ESC:
-        Config.hide();
+        hide();
         break;
     
     case Key.ENTER:

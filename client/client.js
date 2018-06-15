@@ -1,13 +1,15 @@
 'use strict';
 
-/* global Util, DOM */
+/* global DOM */
 
-const itype = require('itype/legacy');
 const Emitify = require('emitify/legacy');
 const inherits = require('inherits');
 const rendy = require('rendy/legacy');
 const wraptile = require('wraptile/legacy');
 const exec = require('execon');
+
+const {kebabToCamelCase} = require('../common/util');
+const isDev = process.env.NODE_ENV === 'development';
 
 const Images = require('./dom/images');
 const {
@@ -27,22 +29,21 @@ const {
     buildFromJSON,
 } = require('../common/cloudfunc');
 
-/* global Util, DOM */
+const loadModule = require('./load-module');
 
 inherits(CloudCmdProto, Emitify);
 
-module.exports = new CloudCmdProto(Util, DOM);
+module.exports = new CloudCmdProto(DOM);
 
-function CloudCmdProto(Util, DOM) {
+function CloudCmdProto(DOM) {
     let Key;
-    let Debug;
     let Listeners;
     
-    const log = (str) => {
-        if (!Debug)
+    const log = (...a) => {
+        if (!isDev )
             return;
         
-        console.log(str);
+        console.log(...a);
     };
     
     Emitify.call(this);
@@ -74,16 +75,6 @@ function CloudCmdProto(Util, DOM) {
         left: 'asc',
         right: 'asc',
     };
-    
-    log.enable = () => {
-        Debug = true;
-    };
-    
-    log.disable = () => {
-        Debug = false;
-    };
-    
-    const kebabToCamelCase = Util.kebabToCamelCase;
     
     /**
      * Функция привязываеться ко всем ссылкам и
@@ -128,49 +119,6 @@ function CloudCmdProto(Util, DOM) {
     };
     
     /**
-     * function load modules
-     * @params = {name, path, func, dobefore, arg}
-     */
-    function loadModule(params) {
-        if (!params)
-            return;
-        
-        let path = params.path;
-        const name = params.name || path && kebabToCamelCase(path);
-        const func = params.func;
-        const funcName = params.funcName;
-        const doBefore = params.dobefore;
-        
-        const isContain = /\.js/.test(path);
-        
-        if (!isContain)
-            path += '.js';
-        
-        if (CloudCmd[name])
-            return;
-        
-        CloudCmd[name] = (...args) => {
-            const prefix = CloudCmd.PREFIX;
-            const pathFull = prefix + CloudCmd.DIRCLIENT_MODULES + path;
-            
-            exec(doBefore);
-            
-            const done = (error) => {
-                const Proto = CloudCmd[name];
-                
-                if (error || !itype.function(Proto))
-                    return;
-                
-                CloudCmd[name] = new Proto(...args);
-            };
-            
-            return DOM.load.js(pathFull, func || done);
-        };
-        
-        CloudCmd[name][funcName] = CloudCmd[name];
-    }
-    
-    /**
      * Конструктор CloudClient, который
      * выполняет весь функционал по
      * инициализации
@@ -180,7 +128,6 @@ function CloudCmdProto(Util, DOM) {
             initModules,
             baseInit,
             loadPlugins,
-            loadStyle,
             exec.with(CloudCmd.route, location.hash),
         ], noop);
         
@@ -216,13 +163,6 @@ function CloudCmdProto(Util, DOM) {
         
         exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
     };
-    
-    function loadStyle(callback) {
-        const prefix = CloudCmd.PREFIX;
-        const name = prefix + '/dist/cloudcmd.common.css';
-        
-        DOM.load.css(name, callback);
-    }
     
     function loadPlugins(callback) {
         const prefix = CloudCmd.PREFIX;
@@ -263,7 +203,6 @@ function CloudCmdProto(Util, DOM) {
         }
         
         DOM.setCurrentFile(current);
-        
         CloudCmd.execFromModule(module, 'show');
     };
     
@@ -303,14 +242,10 @@ function CloudCmdProto(Util, DOM) {
             };
             
             const load = (name, path, dobefore) => {
-                const isTmpl = path === 'template';
-                const funcName = isTmpl ? 'get' : 'show';
-                
                 loadModule({
                     name,
                     path,
                     dobefore,
-                    funcName,
                 });
             };
             
@@ -372,16 +307,11 @@ function CloudCmdProto(Util, DOM) {
         ];
     }
     
-    this.execFromModule = (moduleName, funcName, ...args) => {
-        const obj = CloudCmd[moduleName];
-        const isObj = itype.object(obj);
+    this.execFromModule = async (moduleName, funcName, ...args) => {
+        await CloudCmd[moduleName]();
         
-        exec.if(isObj, () => {
-            const obj = CloudCmd[moduleName];
-            const func = obj[funcName];
-            
-            func(...args);
-        }, obj);
+        const func = CloudCmd[moduleName][funcName];
+        func(...args);
     };
     
     this.refresh = (options = {}, callback) => {
