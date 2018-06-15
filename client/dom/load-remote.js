@@ -5,10 +5,14 @@
 const exec = require('execon');
 const rendy = require('rendy/legacy');
 const itype = require('itype/legacy');
+const wraptile = require('wraptile/legacy');
+
 const {findObjByNameInArr} = require('../../common/util');
 
 const load = require('./load');
 const Files = require('./files');
+
+const parallel = wraptile(load.parallel);
 
 module.exports = (name, options, callback = options) => {
     const {PREFIX, config} = CloudCmd;
@@ -51,19 +55,15 @@ module.exports = (name, options, callback = options) => {
 };
 
 function funcOFF(local, callback) {
-    return () => {
-        load.parallel(local, callback);
-    };
+    return parallel(local, callback);
 }
 
 function funcON (local, remote,callback) {
-    return () => {
-        load.parallel(remote, (error) => {
-            if (error)
-                return funcOFF();
-            
-            callback();
-        });
-    };
+    return parallel(remote, (error) => {
+        if (error)
+            return funcOFF();
+        
+        callback();
+    });
 }
 
