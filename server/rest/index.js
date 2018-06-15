@@ -162,6 +162,7 @@ const getMoveMsg = (files) => {
     return msg;
 };
 
+module.exports._onPUT = onPUT;
 function onPUT(name, body, callback) {
     checkPut(name, body, callback);
     
@@ -343,13 +344,13 @@ function formatMsg(msg, data, status) {
 
 function check(request, response, next) {
     if (typeof request !== 'object')
-        throw Error('request should be an object');
+        throw Error('request should be an object!');
     
     if (typeof response !== 'object')
-        throw Error('response should be an object');
+        throw Error('response should be an object!');
     
     if (typeof next !== 'function')
-        throw Error('next should be a function');
+        throw Error('next should be a function!');
 }
 
 function checkPut(name, body, callback) {
@@ -360,6 +361,6 @@ function checkPut(name, body, callback) {
         throw Error('body should be a string!');
     
     if (typeof callback !== 'function')
-        throw Error('callback should be a function');
+        throw Error('callback should be a function!');
 }
 
