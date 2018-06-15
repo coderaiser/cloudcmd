@@ -1,3 +1,9 @@
+2018.06.15, v10.2.2
+
+fix:
+- (config) set file mode permissions to readable only by current user (#61)
+
+
 2018.06.13, v10.2.1
 
 fix:
