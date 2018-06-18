@@ -11,7 +11,6 @@ const exec = require('execon');
 
 const Images = require('./dom/images');
 const {
-    registerSW,
     unregisterSW,
 } = require('./sw/register');
 
@@ -45,8 +44,6 @@ function CloudCmdProto(Util, DOM) {
         
         console.log(str);
     };
-    
-    registerSW();
     
     Emitify.call(this);
     

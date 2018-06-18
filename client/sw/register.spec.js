@@ -4,27 +4,19 @@ const test = require('tape');
 const sinon = require('sinon');
 const mock = require('mock-require');
 
-const SERVICE_WORKER = 'serviceworker-webpack-plugin/lib/runtime';
-
 test('sw: register: registerSW: no serviceWorker', async (t) => {
     const {navigator} = global;
     global.navigator = {};
-    
-    const register = sinon.stub();
-    
-    mock(SERVICE_WORKER, {
-        register
-    });
     
     const {
         registerSW,
     } = mock.reRequire('./register');
     
     await registerSW();
-    mock.stop(SERVICE_WORKER);
+    
     global.navigator = navigator;
     
-    t.notOk(register.called, 'should not call register');
+    t.pass('should not call register');
     t.end();
 });
 
@@ -34,27 +26,21 @@ test('sw: register: registerSW: no https', async (t) => {
         location,
     } = global;
     
-    global.navigator = {
-        serviceWorker: true
-    };
+    const register = sinon.stub();
+    
+    global.navigator = getNavigator({
+        register,
+    });
     
     global.location = {
         protocol: 'http:'
     };
-    
-    const register = sinon.stub();
-    
-    mock(SERVICE_WORKER, {
-        register
-    });
     
     const {
         registerSW,
     } = mock.reRequire('./register');
     
     await registerSW();
-    
-    mock.stop(SERVICE_WORKER);
     
     global.location = location;
     global.navigator = navigator;
@@ -69,10 +55,6 @@ test('sw: register: registerSW: no localhost', async (t) => {
         location,
     } = global;
     
-    global.navigator = {
-        serviceWorker: true
-    };
-    
     global.location = {
         protocol: 'http:',
         hostname: 'cloudcmd.io',
@@ -80,8 +62,8 @@ test('sw: register: registerSW: no localhost', async (t) => {
     
     const register = sinon.stub();
     
-    mock(SERVICE_WORKER, {
-        register
+    global.navigator = getNavigator({
+        register,
     });
     
     const {
@@ -89,8 +71,6 @@ test('sw: register: registerSW: no localhost', async (t) => {
     } = mock.reRequire('./register');
     
     await registerSW();
-    
-    mock.stop(SERVICE_WORKER);
     
     global.location = location;
     global.navigator = navigator;
@@ -105,18 +85,14 @@ test('sw: register: registerSW', async (t) => {
         location,
     } = global;
     
-    global.navigator = {
-        serviceWorker: true
-    };
-    
     global.location = {
         hostname: 'localhost',
     };
     
     const register = sinon.stub();
     
-    mock(SERVICE_WORKER, {
-        register
+    global.navigator = getNavigator({
+        register,
     });
     
     const {
@@ -124,8 +100,6 @@ test('sw: register: registerSW', async (t) => {
     } = mock.reRequire('./register');
     
     await registerSW();
-    
-    mock.stop(SERVICE_WORKER);
     
     global.location = location;
     global.navigator = navigator;
@@ -140,10 +114,6 @@ test('sw: register: unregisterSW', async (t) => {
         location,
     } = global;
     
-    global.navigator = {
-        serviceWorker: true
-    };
-    
     global.location = {
         hostname: 'localhost',
     };
@@ -155,8 +125,8 @@ test('sw: register: unregisterSW', async (t) => {
     const register = sinon.stub()
         .returns(Promise.resolve(reg));
     
-    mock(SERVICE_WORKER, {
-        register
+    global.navigator = getNavigator({
+        register,
     });
     
     const {
@@ -165,8 +135,6 @@ test('sw: register: unregisterSW', async (t) => {
     
     await unregisterSW();
     
-    mock.stop(SERVICE_WORKER);
-    
     global.location = location;
     global.navigator = navigator;
     
@@ -174,3 +142,14 @@ test('sw: register: unregisterSW', async (t) => {
     t.end();
 });
 
+
+function getNavigator({register, unregister}) {
+    unregister = unregister || sinon.stub();
+    
+    return {
+        serviceWorker: {
+            register,
+            unregister,
+        }
+    };
+}

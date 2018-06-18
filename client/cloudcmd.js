@@ -5,6 +5,10 @@ require('../css/nojs.css');
 require('../css/columns/name-size-date.css');
 require('../css/columns/name-size.css');
 
+const {
+    registerSW,
+} = require('./sw/register');
+
 // prevent additional loading of emitify
 window.Emitify = require('emitify/legacy');
 
@@ -17,6 +21,8 @@ module.exports = window.CloudCmd = (config) => {
     
     window.DOM = DOM;
     window.CloudCmd = require('./client');
+
+    registerSW(config.prefix);
     
     const prefix = getPrefix(config.prefix);
     

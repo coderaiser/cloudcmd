@@ -1,11 +1,10 @@
 'use strict';
 
-const runtime = require('serviceworker-webpack-plugin/lib/runtime');
-
 module.exports.registerSW = registerSW;
 module.exports.unregisterSW = unregisterSW;
 
-async function registerSW() {
+async function registerSW(prefix) {
+    prefix = prefix ? `/${prefix}/` : `/`;
     if (!navigator.serviceWorker)
         return;
     
@@ -15,7 +14,7 @@ async function registerSW() {
     if (!isHTTPS && !isLocalhost)
         return;
     
-    return runtime.register();
+    return navigator.serviceWorker.register(`${prefix}sw.js`);
 }
 
 async function unregisterSW() {

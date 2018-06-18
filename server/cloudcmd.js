@@ -265,10 +265,6 @@ function _setUrl(pref, req, res, next) {
 
 function _setSW(pref, req, res, next) {
     const prefix = getPrefix(pref);
-    const is = !req.url.indexOf(prefix);
-    
-    if (!is)
-        return next();
     
     const url = replacePrefix(req.url, prefix);
     const isSW = /^\/sw\.js(\.map)?$/.test(url);
