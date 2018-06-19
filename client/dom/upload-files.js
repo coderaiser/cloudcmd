@@ -8,8 +8,11 @@ const wraptile = require('wraptile/legacy');
 const DOM = require('.');
 const load = require('./load');
 const Images = require('./images');
+const {alert} = require('./dialog');
 
 const {FS} = require('../../common/cloudfunc');
+
+const {TITLE} = CloudCmd;
 
 const onEnd = wraptile(_onEnd);
 const loadFile = wraptile(_loadFile);
@@ -58,6 +61,7 @@ function _loadFile(dir, n, file, callback) {
     ++i;
     
     load.put(api + path, file)
+        .on('error', showError)
         .on('end', callback)
         .on('progress', (count) => {
             const max = step(n);
@@ -66,5 +70,9 @@ function _loadFile(dir, n, file, callback) {
             Images.show.load('top');
             Images.setProgress(Math.round(value));
         });
+}
+
+function showError({message}) {
+    alert(TITLE, message);
 }
 
