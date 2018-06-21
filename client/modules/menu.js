@@ -27,6 +27,8 @@ let MenuContextFile;
 
 module.exports.ENABLED = false;
 
+CloudCmd.Menu = exports;
+
 module.exports.init = () => {
     const {isAuth, menuDataFile} = getFileMenuData();
     

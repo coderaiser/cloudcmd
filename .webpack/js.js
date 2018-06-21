@@ -43,7 +43,7 @@ const rules = clean([
         loader: 'babel-loader',
     },
     isDev && {
-        test: /sw.js$/,
+        test: /sw\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: babelDev
@@ -58,7 +58,7 @@ const plugins = [
 
 const splitChunks = {
     name: 'cloudcmd.common',
-    chunks: 'async',
+    chunks: 'all',
 };
 
 module.exports = {

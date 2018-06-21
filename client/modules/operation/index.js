@@ -5,7 +5,6 @@
 
 'use strict';
 
-
 const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const {promisify} = require('es6-promisify');
@@ -23,6 +22,8 @@ const getNextCurrentName = require('./get-next-current-name');
 const removeQuery = (a) => a.replace(/\?.*/, '');
 
 const Name = 'Operation';
+CloudCmd[Name] = exports;
+
 const {
     TITLE,
     config,

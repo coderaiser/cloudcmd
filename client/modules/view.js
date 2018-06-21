@@ -24,13 +24,14 @@ const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 const addEvent = lifo(Events.add);
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
-//module.exports = exec.bind();
 module.exports.show = show;
 module.exports.hide = hide;
 
 let Loading = false;
 
 const Name = 'View';
+CloudCmd[Name] = module.exports;
+
 const Info = DOM.CurrentInfo;
 const Key = CloudCmd.Key;
 const basename = (a) => a.split('/').pop();

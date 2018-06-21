@@ -99,12 +99,12 @@ test('sw: register: registerSW', async (t) => {
         registerSW,
     } = mock.reRequire('./register');
     
-    await registerSW();
+    await registerSW('hello');
     
     global.location = location;
     global.navigator = navigator;
     
-    t.ok(register.calledWith(), 'should call register');
+    t.ok(register.calledWith('/hello/sw.js'), 'should call register');
     t.end();
 });
 

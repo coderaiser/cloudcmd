@@ -14,6 +14,9 @@ const Images = require('../dom/images');
 
 const upload = currify(_upload);
 
+const Name = 'Cloud';
+CloudCmd[Name] = module.exports;
+
 module.exports.init = async () => {
     await loadFiles();
 };

@@ -1,18 +1,16 @@
 'use strict';
 
-const preval = require('preval.macro');
+const codegen = require('codegen.macro');
 const tryToCatch = require('try-to-catch/legacy');
 const currify = require('currify/legacy');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const tryWrap = (a) => (...b) => tryToCatch(a, ...b);
-
 const wait = currify((f, e) => e.waitUntil(f()));
 const respondWith = currify((f, e) => e.respondWith(f(e)));
 const getPathName = (url) => new URL(url).pathname;
 
-const date = preval`module.exports = Date()`;
+const date = codegen`module.exports = '"' + Date() + '"'`;
 const NAME = `cloudcmd: ${date}`;
 
 const isGet = (a) => a.method === 'GET';
@@ -69,7 +67,7 @@ async function onFetch(event) {
     if (!isDev && response)
         return response;
      
-    const [e, resp] = await tryToRequest(request);
+    const [e, resp] = await tryToCatch(fetch, request.clone());
     
     if (e)
         return console.error(e, response, pathname);
@@ -94,30 +92,5 @@ async function onFetch(event) {
 async function addToCache(request, response) {
     const cache = await caches.open(NAME);
     return cache.put(request, response);
-}
-
-async function tryToRequest(req) {
-    const {url} = req;
-    const path = url.replace(`${location.origin}/`, '');
-    const get = tryWrap(fetch);
-    const prefix = getPrefix();
-    
-    if (prefix && /^dist/.test(path))
-        return await get(createRequest(`${prefix}${path}`));
-    
-    return await get(req.clone());
-}
-
-function getPrefix() {
-    const {
-        href,
-        origin,
-    } = location;
-    
-    const prefix = href
-        .replace(origin, '')
-        .replace('sw.js', '');
-    
-    return prefix;
 }
 

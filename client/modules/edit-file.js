@@ -2,6 +2,8 @@
 
 /* global CloudCmd, DOM*/
 
+CloudCmd.EditFile = exports;
+
 const Format = require('format-io/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');

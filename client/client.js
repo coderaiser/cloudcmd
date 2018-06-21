@@ -128,6 +128,7 @@ function CloudCmdProto(DOM) {
             initModules,
             baseInit,
             loadPlugins,
+            loadStyle,
             exec.with(CloudCmd.route, location.hash),
         ], noop);
         
@@ -163,6 +164,13 @@ function CloudCmdProto(DOM) {
         
         exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
     };
+    
+    function loadStyle(callback) {
+        const prefix = CloudCmd.PREFIX;
+        const name = prefix + '/dist/cloudcmd.common.css';
+        
+        DOM.load.css(name, callback);
+    }
     
     function loadPlugins(callback) {
         const prefix = CloudCmd.PREFIX;

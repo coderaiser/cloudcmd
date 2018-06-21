@@ -29,11 +29,13 @@ const plugins = [
     extractMain,
 ];
 
+const cssLoader = isDev ? 'css-loader' : 'css-loader?minimize';
+
 const rules = [{
     test: /\.css$/,
     exclude: /css\/(nojs|view|config|columns.*)\.css/,
     use: extractMain.extract([
-        'css-loader?minimize',
+        cssLoader,
     ]),
 },
 ...cssPlugins.map(extract), {
@@ -60,12 +62,11 @@ function getCSSList(dir) {
 
 function extract(extractPlugin) {
     const {filename} = extractPlugin;
-    const loader = isDev ? 'css-loader' : 'css-loader?minimize';
     
     return {
         test: RegExp(`css/${filename}`),
         use: extractPlugin.extract([
-            loader
+            cssLoader
         ])
     };
 }

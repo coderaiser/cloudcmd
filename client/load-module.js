@@ -3,10 +3,13 @@
 /* global CloudCmd */
 
 const exec = require('execon');
+const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch/legacy');
 const {
     kebabToCamelCase,
 } = require('../common/util');
+
+const loadJS = promisify(require('./dom/load').js);
 
 /**
  * function load modules
@@ -16,7 +19,7 @@ module.exports = function loadModule(params) {
     if (!params)
         return;
     
-    let path = params.path;
+    const {path} = params;
     const name = params.name || path && kebabToCamelCase(path);
     const doBefore = params.dobefore;
     
@@ -25,10 +28,15 @@ module.exports = function loadModule(params) {
     
     CloudCmd[name] = () => {
         exec(doBefore);
-        return import(`./modules/${path}` /* webpackChunkName: "cloudcmd-" */).then(async (module) => {
+        const prefix = CloudCmd.PREFIX;
+        const pathFull = prefix + CloudCmd.DIRCLIENT_MODULES + path + '.js';
+        
+        return loadJS(pathFull).then(async () => {
             const newModule = async (f) => f && f();
+            const module = CloudCmd[name];
             
             Object.assign(newModule, module);
+            
             CloudCmd[name] = newModule;
             
             CloudCmd.log('init', name);

@@ -10,6 +10,9 @@ const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
 const {time, timeEnd} = require('../../common/util');
 
 const Name = 'Edit';
+
+CloudCmd[Name] = exports;
+
 const EditorName = CloudCmd.config('editor');
 
 let Loading = true;

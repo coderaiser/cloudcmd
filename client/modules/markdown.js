@@ -1,6 +1,8 @@
 'use strict';
 
-/*global CloudCmd */
+/* global CloudCmd */
+
+CloudCmd.Markdown = exports;
 
 const Images = require('../dom/images');
 const load = require('../dom/load');

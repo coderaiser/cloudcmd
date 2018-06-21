@@ -4,16 +4,12 @@
 
 'use strict';
 
-CloudCmd.Contact = ContactProto;
+CloudCmd.Contact = exports;
 
-const exec = require('execon');
+const {promisify} = require('es6-promisify');
+
 const Images = require('../dom/images');
-
-function ContactProto(callback) {
-    init(callback);
-    
-    return exports;
-}
+const loadJS = require('../dom/load').js;
 
 const Events = DOM.Events;
 const Key = CloudCmd.Key;
@@ -23,41 +19,38 @@ module.exports.hide = hide;
 
 let Inited = false;
 
-function init(callback) {
+module.exports.init = async () => {
     if (Inited)
         return;
     
-    load(() => {
-        Inited = true;
-        
-        olark.identify('6216-545-10-4223');
-        olark('api.box.onExpand', show);
-        olark('api.box.onShow', show);
-        olark('api.box.onShrink', hide);
-        
-        exec(callback);
-    });
-    
     Events.addKey(onKey);
-}
+    await load();
+    
+    Inited = true;
+    
+    olark.identify('6216-545-10-4223');
+    olark('api.box.onExpand', show);
+    olark('api.box.onShow', show);
+    olark('api.box.onShrink', hide);
+};
 
-function load(callback) {
+const load = promisify((callback) => {
     const {PREFIX} = CloudCmd;
     const path = `${PREFIX}/modules/olark/olark.min.js`;
     
     Images.show.load('top');
     
-    DOM.load.js(path, callback);
-}
+    return loadJS(path, callback);
+});
 
 function show() {
     Key.unsetBind();
     Images.hide();
     
-    if (Inited)
-        return olark('api.box.expand');
+    if (!Inited)
+        return;
     
-    init(show);
+    olark('api.box.expand');
 }
 
 function hide() {

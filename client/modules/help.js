@@ -2,6 +2,8 @@
 
 /* global CloudCmd */
 
+CloudCmd.Help = exports;
+
 const Images = require('../dom/images');
 
 module.exports.init = () => {

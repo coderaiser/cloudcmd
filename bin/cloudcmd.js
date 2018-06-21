@@ -54,7 +54,7 @@ const args = require('minimist')(argv.slice(2), {
     default: {
         server      : true,
         name        : choose(env('name'), config('name')),
-        auth        : choose(env('auth'), config('auth')),
+        auth        : choose(env.bool('auth'), config('auth')),
         port        : config('port'),
         online      : config('online'),
         open        : config('open'),

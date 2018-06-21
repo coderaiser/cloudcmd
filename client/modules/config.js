@@ -19,8 +19,9 @@ const Files = require('../dom/files');
 const {getTitle} = require('../../common/cloudfunc');
 const {Dialog, setTitle} = DOM;
 
-const TITLE = 'Config';
-const alert = currify(Dialog.alert, TITLE);
+const Name = 'Config';
+CloudCmd[Name] = module.exports;
+const alert = currify(Dialog.alert, Name);
 
 const loadSocket = promisify(DOM.loadSocket);
 

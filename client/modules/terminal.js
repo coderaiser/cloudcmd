@@ -16,6 +16,8 @@ const TITLE = 'Terminal';
 const {Dialog} = DOM;
 const {Key} = CloudCmd;
 
+CloudCmd.Terminal = exports;
+
 let Element;
 let Loaded;
 let Terminal;

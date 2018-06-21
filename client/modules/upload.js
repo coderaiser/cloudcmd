@@ -2,6 +2,8 @@
 
 'use strict';
 
+CloudCmd.Upload = exports;
+
 const load = require('../dom/load');
 const Files = require('../dom/files');
 const Images = require('../dom/images');

@@ -2,6 +2,8 @@
 
 /* global CloudCmd */
 
+CloudCmd.EditFileVim = exports;
+
 const Events = require('../dom/events');
 
 const {Key} = CloudCmd;

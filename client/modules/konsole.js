@@ -5,6 +5,8 @@
 /* global DOM */
 /* global Console */
 
+CloudCmd.Konsole = exports;
+
 const exec = require('execon');
 const {promisify} = require('es6-promisify');
 const currify = require('currify/legacy');
