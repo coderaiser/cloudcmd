@@ -1,3 +1,14 @@
+2018.06.21, v10.2.3
+
+fix:
+- (cloudcmd) env variables override (#179)
+- (sw) register when prefix changed
+
+feature:
+- (upload-files) add ability to show error message
+- (gitignore) add jquery-mouse-wheel
+
+
 2018.06.15, v10.2.2
 
 fix:
