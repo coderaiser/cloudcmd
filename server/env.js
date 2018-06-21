@@ -10,7 +10,8 @@ module.exports.bool = (name) => {
     if (value === 'true')
         return true;
     
-    return false;
+    if (value === 'false')
+        return false;
 };
 
 function parse(name) {
