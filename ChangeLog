@@ -1,3 +1,16 @@
+2018.06.22, v10.3.0
+
+fix:
+- (operation) set next file current when can not delete
+
+feature:
+- (webpack) minimize service worker size
+- (terminal) move out terminal.css from view.css
+- (package) fast-async v7.0.6
+- (cloudcmd) import -> load.js
+- (load-module) add
+
+
 2018.06.21, v10.2.3
 
 fix:
