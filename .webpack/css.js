@@ -19,6 +19,7 @@ const cssNames = [
     'nojs',
     'view',
     'config',
+    'terminal',
     ...getCSSList('columns'),
 ];
 
@@ -33,7 +34,7 @@ const cssLoader = isDev ? 'css-loader' : 'css-loader?minimize';
 
 const rules = [{
     test: /\.css$/,
-    exclude: /css\/(nojs|view|config|columns.*)\.css/,
+    exclude: /css\/(nojs|view|config|terminal|columns.*)\.css/,
     use: extractMain.extract([
         cssLoader,
     ]),

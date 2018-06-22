@@ -3,6 +3,7 @@
 /* global CloudCmd, gritty */
 
 const {promisify} = require('es6-promisify');
+const tryToCatch = require('try-to-catch');
 
 require('../../css/terminal.css');
 
@@ -10,6 +11,8 @@ const exec = require('execon');
 const load = require('../dom/load');
 const DOM = require('../dom');
 const Images = require('../dom/images');
+
+const loadParallel = promisify(load.parallel);
 
 const TITLE = 'Terminal';
 
@@ -24,18 +27,22 @@ let Terminal;
 
 const {config} = CloudCmd;
 
-const loadAll = promisify((callback) => {
-    const prefix = getPrefix();
-    const url = prefix + '/gritty.js';
+const loadAll = async () => {
+    const {
+        PREFIX,
+    } = CloudCmd;
     
-    DOM.load.js(url, (error) => {
-        if (error)
-            return Dialog.alert(TITLE, error.message);
-        
-        Loaded = true;
-        exec(callback);
-    });
-});
+    const prefix = getPrefix();
+    const js = `${prefix}/gritty.js`;
+    const css = `${PREFIX}/dist/terminal.css`;
+    
+    const [e] = await tryToCatch(loadParallel, [js, css]);
+    
+    if (e)
+        return Dialog.alert(TITLE, e.message);
+    
+    Loaded = true;
+};
 
 module.exports.init = async () => {
     Images.show.load('top');
