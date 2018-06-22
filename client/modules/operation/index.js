@@ -270,6 +270,8 @@ function deleteSilent(files = DOM.getActiveFiles()) {
         const Storage = DOM.Storage;
         const dirPath = Info.dirPath;
         
+        DOM.setCurrentByName(prevCurrent);
+        
         !e && CloudCmd.refresh({
             currentName
         });
