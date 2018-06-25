@@ -11,8 +11,6 @@ yarn-error.log
 yarn.lock
 now.json
 
-dist*/modules
-
 modules/jquery-mouse-wheel
 
 modules/jquery/dist
