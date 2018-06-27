@@ -3,11 +3,11 @@
 const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
-const dir = '../../../../client/key/vim/';
+const dir = './';
 
 const {
     getDOM,
-} = require('./globals');
+} = require('./globals.fixture');
 
 global.DOM = global.DOM || getDOM();
 
@@ -28,7 +28,7 @@ test('cloudcmd: client: vim: find', (t) => {
     
     find('');
     
-    t.ok(setCurrentByName.calledWith(), 'should call setCurrentByName');
+    t.ok(setCurrentByName.calledWith(null), 'should call setCurrentByName');
     t.end();
 });
 
@@ -38,7 +38,7 @@ test('cloudcmd: client: vim: findNext', (t) => {
     
     findNext();
     
-    t.ok(setCurrentByName.calledWith(), 'should call setCurrentByName');
+    t.ok(setCurrentByName.calledWith(null), 'should call setCurrentByName');
     t.end();
 });
 
@@ -48,7 +48,7 @@ test('cloudcmd: client: vim: findPrevious', (t) => {
     
     findPrevious();
     
-    t.ok(setCurrentByName.calledWith(), 'should call setCurrentByName');
+    t.ok(setCurrentByName.calledWith(null), 'should call setCurrentByName');
     t.end();
 });
 

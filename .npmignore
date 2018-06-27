@@ -1,5 +1,6 @@
 .*
 *.spec.js
+*.fixture.js
 manifest.yml
 Dockerfile*
 docker-compose.yml

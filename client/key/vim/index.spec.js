@@ -3,13 +3,13 @@
 const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
-const dir = '../../../../client/key/';
+const dir = '../';
 const KEY = require(dir + 'key');
 
 const {
     getDOM,
     getCloudCmd,
-} = require('./globals');
+} = require('./globals.fixture');
 
 global.DOM = global.DOM || getDOM();
 global.CloudCmd = global.CloudCmd || getCloudCmd();
