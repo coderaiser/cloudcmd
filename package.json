@@ -167,7 +167,7 @@
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",
     "clear-module": "^2.1.0",
-    "codegen.macro": "^2.0.0",
+    "codegen.macro": "^3.0.0",
     "coveralls": "^3.0.0",
     "css-loader": "^0.28.4",
     "domtokenlist-shim": "^1.2.0",
