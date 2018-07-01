@@ -263,20 +263,18 @@ function deleteSilent(files = DOM.getActiveFiles()) {
     
     const removedNames = DOM.getFilenames(files);
     const names = DOM.CurrentInfo.files.map(DOM.getCurrentName);
-    const prevCurrent = DOM.getCurrentName();
-    const currentName = getNextCurrentName(prevCurrent, names, removedNames);
+    const currentName = DOM.getCurrentName();
+    const nextCurrentName = getNextCurrentName(currentName, names, removedNames);
     
-    deleteFn(path + query, removedNames, (e) => {
-        const Storage = DOM.Storage;
-        const dirPath = Info.dirPath;
-        
-        DOM.setCurrentByName(prevCurrent);
-        
-        !e && CloudCmd.refresh({
-            currentName
+    deleteFn(path + query, removedNames, () => {
+        CloudCmd.refresh(() => {
+            const names = Info.files.map(DOM.getCurrentName);
+            const isCurrent = names.includes(currentName);
+            
+            let name = isCurrent ? currentName : nextCurrentName;
+           
+            DOM.setCurrentByName(name);
         });
-        
-        Storage.removeMatch(dirPath);
     });
 }
 
