@@ -85,6 +85,9 @@ function KeyProto() {
         Chars([]);
         switchKey(event);
         
+        if (keyCode >= KEY.F1 && keyCode <= KEY.F10)
+            return;
+        
         if (isVim)
             vim(char, event);
     }
