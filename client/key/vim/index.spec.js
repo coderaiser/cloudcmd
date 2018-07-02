@@ -11,8 +11,8 @@ const {
     getCloudCmd,
 } = require('./globals.fixture');
 
-global.DOM = global.DOM || getDOM();
-global.CloudCmd = global.CloudCmd || getCloudCmd();
+global.DOM = getDOM();
+global.CloudCmd = getCloudCmd();
 
 const DOM = global.DOM;
 const Buffer = DOM.Buffer;

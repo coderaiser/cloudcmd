@@ -9,9 +9,7 @@ const {
     getDOM,
 } = require('./globals.fixture');
 
-global.DOM = global.DOM || getDOM();
-
-const DOM = global.DOM;
+global.DOM = getDOM();
 
 const {
     find,
@@ -22,7 +20,9 @@ const {
 } = require(dir + 'find');
 
 test('cloudcmd: client: vim: find', (t) => {
+    const {DOM} = global;
     const setCurrentByName = sinon.stub();
+    
     DOM.setCurrentByName = setCurrentByName;
     DOM.Dialog.prompt = Promise.resolve.bind(Promise);
     
@@ -33,6 +33,7 @@ test('cloudcmd: client: vim: find', (t) => {
 });
 
 test('cloudcmd: client: vim: findNext', (t) => {
+    const {DOM} = global;
     const setCurrentByName = sinon.stub();
     DOM.setCurrentByName = setCurrentByName;
     
@@ -43,9 +44,10 @@ test('cloudcmd: client: vim: findNext', (t) => {
 });
 
 test('cloudcmd: client: vim: findPrevious', (t) => {
+    const {DOM} = global;
     const setCurrentByName = sinon.stub();
-    DOM.setCurrentByName = setCurrentByName;
     
+    DOM.setCurrentByName = setCurrentByName;
     findPrevious();
     
     t.ok(setCurrentByName.calledWith(null), 'should call setCurrentByName');
