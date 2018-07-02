@@ -45,6 +45,9 @@ const loadAll = async () => {
 };
 
 module.exports.init = async () => {
+    if (!config('terminal'))
+        return;
+    
     Images.show.load('top');
     
     await CloudCmd.View();
