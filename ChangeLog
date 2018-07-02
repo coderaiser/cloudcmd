@@ -1,3 +1,14 @@
+2018.07.02, v10.3.2
+
+fix:
+- (terminal) prevent init when config disabled
+- (operation) next current file after delete
+- (key) vim: do not react on navigation after view hide
+
+feature:
+- (package) codegen.macro v3.0.0
+
+
 2018.06.25, v10.3.1
 
 fix:
