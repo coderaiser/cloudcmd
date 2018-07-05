@@ -1,4 +1,4 @@
-# Cloud Commander v10.3.2 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Package Quality][PackageQualityIMGURL]][PackageQualityURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![OpenCollective](https://opencollective.com/cloudcmd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/cloudcmd/sponsors/badge.svg)](#sponsors)
+# Cloud Commander v10.3.2 [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![OpenCollective](https://opencollective.com/cloudcmd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/cloudcmd/sponsors/badge.svg)](#sponsors)
 
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL], [Now][NowURL])
 
@@ -8,19 +8,16 @@
 [HerokuURL]:                https://cloudcmd.herokuapp.com/ "Heroku"
 [NowURL]:                   https://cloudcmd.now.sh/ "Now"
 [NPMURL]:                   https://npmjs.org/package/cloudcmd "npm"
-[NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat
+[NPMIMGURL]:                https://img.shields.io/npm/v/cloudcmd.svg?style=flat-squere&longCache=true
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
-[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat
+[LicenseIMGURL]:            https://img.shields.io/badge/license-MIT-317BF9.svg?style=flat-squere&longCache=true
 [DependencyStatusURL]:      https://david-dm.org/coderaiser/cloudcmd
-[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/cloudcmd.svg?style=flat
+[DependencyStatusIMGURL]:   https://img.shields.io/david/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
-[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat
+[BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
 
 [BuildAppveyorURL]:         https://ci.appveyor.com/project/coderaiser/cloudcmd
 [BuildAppveyorIMGURL]:      https://ci.appveyor.com/api/projects/status/tse6sc8dxrqxqehi?svg=true
-
-[PackageQualityURL]:        http://packagequality.com/#?package=cloudcmd "Package Quality"
-[PackageQualityIMGURL]:     http://packagequality.com/shield/cloudcmd.svg
 
 [CodacyURL]:                https://www.codacy.com/app/coderaiser/cloudcmd
 [CodacyIMG]:                https://api.codacy.com/project/badge/Grade/ddda78be780549ce8754f8d47a8c0e36
