@@ -11,6 +11,7 @@ const {env} = process;
 const isDev = env.NODE_ENV === 'development';
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const extractCSS = (a) => new ExtractTextPlugin(`${a}.css`);
 const extractMain = extractCSS('[name]');
@@ -24,19 +25,19 @@ const cssNames = [
 ];
 
 const cssPlugins = cssNames.map(extractCSS);
+const clean = (a) => a.filter(Boolean);
 
-const plugins = [
+const plugins = clean([
     ...cssPlugins,
     extractMain,
-];
-
-const cssLoader = isDev ? 'css-loader' : 'css-loader?minimize';
+    !isDev && new OptimizeCssAssetsPlugin({}),
+]);
 
 const rules = [{
     test: /\.css$/,
     exclude: /css\/(nojs|view|config|terminal|columns.*)\.css/,
     use: extractMain.extract([
-        cssLoader,
+        'css-loader',
     ]),
 },
 ...cssPlugins.map(extract), {
@@ -67,7 +68,7 @@ function extract(extractPlugin) {
     return {
         test: RegExp(`css/${filename}`),
         use: extractPlugin.extract([
-            cssLoader
+            'css-loader',
         ])
     };
 }
