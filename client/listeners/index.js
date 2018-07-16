@@ -13,7 +13,7 @@ const uploadFiles = require('../dom/upload-files');
 
 const {
     FS,
-    apiURL
+    apiURL,
 } = require('../../common/cloudfunc');
 
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
