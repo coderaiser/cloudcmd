@@ -5,5 +5,7 @@
 require('domtokenlist-shim');
 
 const scrollIntoViewIfNeeded = require('scroll-into-view-if-needed').default;
-DOM.scrollIntoViewIfNeeded = scrollIntoViewIfNeeded;
+DOM.scrollIntoViewIfNeeded = (el) => scrollIntoViewIfNeeded(el, {
+    block: 'nearest'
+});
 
