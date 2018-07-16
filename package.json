@@ -178,7 +178,7 @@
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "fast-async": "^7.0.6",
     "file-loader": "^1.1.4",
-    "gritty": "^2.2.0",
+    "gritty": "^3.0.0",
     "gunzip-maybe": "^1.3.1",
     "html-looks-like": "^1.0.2",
     "html-webpack-exclude-assets-plugin": "^0.0.7",
