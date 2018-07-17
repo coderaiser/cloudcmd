@@ -67,7 +67,9 @@ async function onFetch(event) {
     if (!isDev && response)
         return response;
      
-    const [e, resp] = await tryToCatch(fetch, request.clone());
+    const [e, resp] = await tryToCatch(fetch, request.clone(), {
+        credentials: 'same-origin'
+    });
     
     if (e)
         return console.error(e, response, pathname);
