@@ -1,3 +1,23 @@
+2018.07.17, v10.4.0
+
+fix:
+- (sw) cache of 401
+- (polyfill) scrollIntoViewIfNeeded in firefox
+
+feature:
+- (package) engines: node v4.5.0
+- (package) eslint-plugin-node v7.0.0
+- (package) @cloudcmd/clipboard v1.0.2
+- (package) rm unused html-webpack-exclude-assets-plugin
+- (package) gritty v3.0.0
+- (package) optimize-css-assets-webpack-plugin v5.0.0
+- (package) @cloudcmd/clipboard v1.0.1
+- (package) clear-module v3.0.0
+- (package) smalltalk v3.1.0
+- (package) css-loader v1.0.0
+- (Dockerfile) mhart/alpine-node -> node:alpine
+
+
 2018.07.02, v10.3.2
 
 fix:
