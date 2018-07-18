@@ -15,6 +15,7 @@ Dockerfile
 Dockerfile.alpine
 
 webpack.config.js
+cssnano.config.js
 
 bin/release.js
 

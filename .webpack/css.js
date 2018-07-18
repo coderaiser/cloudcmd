@@ -30,7 +30,7 @@ const clean = (a) => a.filter(Boolean);
 const plugins = clean([
     ...cssPlugins,
     extractMain,
-    !isDev && new OptimizeCssAssetsPlugin({}),
+    !isDev && new OptimizeCssAssetsPlugin(),
 ]);
 
 const rules = [{
