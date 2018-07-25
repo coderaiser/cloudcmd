@@ -8,6 +8,7 @@ const wraptile = require('wraptile');
 const returns = wraptile(id);
 
 const currentFile = require('./current-file');
+const {_CURRENT_FILE} = currentFile;
 
 test('current-file: setCurrentName: setAttribute', (t) => {
     const {
@@ -136,6 +137,49 @@ test('current-file: getParentDirPath: result', (t) => {
     t.end();
 });
 
+test('current-file: isCurrentFile: no', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM();
+    global.CloudCmd = getCloudCmd();
+    
+    const result = currentFile.isCurrentFile();
+    const expect = false;
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.equal(result, expect, 'should equal');
+    t.end();
+});
+
+test('current-file: isCurrentFile', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    const isContainClass = sinon.stub();
+    
+    global.DOM = getDOM({
+        isContainClass
+    });
+    
+    global.CloudCmd = getCloudCmd();
+    
+    const current = {};
+    currentFile.isCurrentFile(current);
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.ok(isContainClass.calledWith(current, _CURRENT_FILE), 'should call isContainClass');
+    t.end();
+});
+
 function getCloudCmd({emit} = {}) {
     return {
         PREFIX: '',
@@ -148,11 +192,13 @@ function getDOM({
     getCurrentDirPath = sinon.stub(),
     getCurrentDirName = sinon.stub(),
     getByDataName = sinon.stub(),
+    isContainClass = sinon.stub(),
 } = {}) {
     return {
         getCurrentDirPath,
         getCurrentDirName,
         getByDataName,
+        isContainClass,
         CurrentInfo: {
             link,
             dirPath: '/',

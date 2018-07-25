@@ -21,6 +21,8 @@ const CURRENT_FILE = 'current-file';
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
 const SPACE = ' ';
 
+module.exports._CURRENT_FILE = CURRENT_FILE;
+
 /**
  * set name from current (or param) file
  *
