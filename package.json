@@ -205,7 +205,7 @@
     "sinon-called-with-diff": "^2.0.0",
     "smalltalk": "^3.1.0",
     "socket.io-client": "^2.0.1",
-    "style-loader": "^0.21.0",
+    "style-loader": "^0.22.0",
     "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.0.0",
     "supermenu": "^2.0.0",
