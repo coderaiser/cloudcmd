@@ -107,8 +107,6 @@ function error(text) {
     DOM.show(image);
     image.title = text;
     
-    CloudCmd.log(text);
-    
     return image;
 }
 
