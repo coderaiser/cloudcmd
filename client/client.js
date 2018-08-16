@@ -124,7 +124,7 @@ function CloudCmdProto(DOM) {
      * инициализации
      */
     this.init = (prefix, config) => {
-        const func = bind(exec.parallel, [
+        const func = bind(exec.series, [
             initModules,
             baseInit,
             loadPlugins,
