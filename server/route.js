@@ -83,6 +83,7 @@ module.exports = currify((options, request, response, callback) => {
  */
 function indexProcessing(options) {
     const oneFilePanel = config('oneFilePanel');
+    const noKeysPanel = !config('keysPanel');
     const noContact = !config('contact');
     const noConfig = !config('configDialog');
     const noConsole = !config('console');
@@ -91,7 +92,7 @@ function indexProcessing(options) {
     
     let data = options.data;
     
-    if (!config('keysPanel'))
+    if (noKeysPanel)
         data = hideKeysPanel(data);
     
     if (oneFilePanel)
