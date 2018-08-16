@@ -69,11 +69,11 @@ function getHost() {
 function initSocket() {
     const href = getHost();
     const prefix = CloudCmd.PREFIX;
-    const FIVE_SECONDS = 5000;
+    const ONE_MINUTE = 60 * 1000;
     
     const socket  = io.connect(href + prefix + '/config', {
-        'max reconnection attempts' : Math.pow(2, 32),
-        'reconnection limit'        : FIVE_SECONDS,
+        reconnectionAttempts: Infinity,
+        reconnectionDelay: ONE_MINUTE,
         path: prefix + '/socket.io'
     });
     
