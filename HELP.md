@@ -94,23 +94,34 @@ Cloud Commander supports command line parameters:
 | `--terminal-path`             | set terminal path
 | `--vim`                       | enable vim hot keys
 | `--columns`                   | set visible columns
+| `--export`                    | enable export of config through a server
+| `--export-token`              | authorization token used by export server
+| `--import`                    | enable import of config
+| `--import-token`              | authorization  token used to connect to export server
+| `--import-url`                | url of an import server
+| `--import-listen`             | enable listen on config updates from import server
+| `--log`                       | enable logging
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
 | `--no-open`                   | do not open web browser when server started
-| `--no-name`                   | set empty tab name in web browser
-| `--no-one-file-panel`         | show two file panels
+| `--no-name`                   | set default tab name in web browser
 | `--no-keys-panel`             | hide keys panel
+| `--no-one-file-panel`         | show two file panels
 | `--no-progress`               | do not show progress of file operations
 | `--no-confirm-copy`           | do not confirm copy
 | `--no-confirm-move`           | do not confirm move
-| `--no-contact`                | disable contact
 | `--no-config-dialog`          | disable config dialog
 | `--no-console`                | disable console
 | `--no-sync-console-path`      | do not sync console path
+| `--no-contact`                | disable contact
 | `--no-terminal`               | disable terminal
 | `--no-vim`                    | disable vim hot keys
-| `--no-columns`                | set visible default columns
+| `--no-columns`                | set default visible columns
+| `--no-export`                 | disable export config through a server
+| `--no-import`                 | disable import of config
+| `--no-import-listen`          | disable listen on config updates from import server
+| `--no-log`                    | disable logging
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -382,6 +393,13 @@ Here is description of options:
     "terminalPath"      : '',       /* path of a terminal                       */
     "vim"               : false,    /* disable vim hot keys                     */
     "columns"           : "name-size-date-owner-mode", /* set visible columns   */
+    "export"            : false,    /* enable export of config through a server */
+    "exportToken"       : "root",   /* token used by export server              */
+    "import"            : false,    /* enable import of config                  */
+    "import-url"        : "http://localhost:8000",   /* url of an export server */
+    "importToken"       : "root", /* token used to connect to export server     */
+    "importListen"      : false, /* listen on config updates from import server */
+    "log"               : true /* logging */
 }
 ```
 
@@ -407,6 +425,54 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_VIM` - enable vim hot keys
 - `CLOUDCMD_CONFIRM_COPY` - confirm copy
 - `CLOUDCMD_CONFIRM_MOVE` - confirm move
+- `CLOUDCMD_EXPORT` - enable export of config through a server
+- `CLOUDCMD_EXPORT_TOKEN` - authorization token used by export server
+- `CLOUDCMD_IMPORT` - enable import of config
+- `CLOUDCMD_IMPORT_TOKEN` - authorization  token used to connect to export server
+- `CLOUDCMD_IMPORT_URL` - url of an import server
+- `CLOUDCMD_IMPORT_LISTEN`- enable listen on config updates from import server
+
+### Distribute
+
+Being able to configure `Cloud Commander` remotely opens the doors to using it as microservice and that's what distribute options set out to do.
+There is `an export server` and `import client` and they enabled with `--export` and `--import` accordingly. There is a `token` it should be the same
+in `--import-token` and `export-token`. To use report you should provide `--import-url` to `import client` so it could connect to an `export server`.
+There is 2 ways imports client can receive config from an export server:
+
+- full config at startup (default)
+- get every updated option (with help of `--import-listen` flag)
+
+There is an example of using distribute options in `Cloud Commander` to get config from remote instance.
+Here is an `export server`:
+
+```
+coderaiser@cloudcmd:~$ cloudcmd --port 1234 --export --export-token=cloudcmd
+```
+
+And `import client`:
+```
+coderaiser@cloudcmd:~$ cloudcmd --name importer --port 4321 --import-url http://127.0.0.1:1234 --import-token=cloudcmd --no-server --save
+```
+
+Here is the log of `export server`:
+
+```
+url: http://localhost:1233/
+2018.08.23 13:41:45 -> export: try to auth from importer [127.0.0.1:4444]
+2018.08.23 13:41:45 -> export: connected to importer [127.0.0.1:4444]
+2018.08.23 13:41:45 -> export: disconnected importer [127.0.0.1:4444]
+```
+
+And log of `import client`:
+
+```
+2018.08.23 13:47:36 -> import: try to auth to http://127.0.0.1:1234
+2018.08.23 13:47:36 -> import: connected to http://127.0.0.1:1234
+2018.08.23 13:47:36 -> import: config received from http://localhost:1234
+2018.08.23 13:47:36 -> import: disconnected from http://127.0.0.1:1234
+```
+
+When `import client` uses `--import-listen` persistent connection used and client receives live updates from the `import server`.
 
 Menu
 ---------------

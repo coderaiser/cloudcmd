@@ -111,6 +111,35 @@
           "description": "confirm move",
           "value": "true",
           "required": false
+      },
+      "CLOUDCMD_EXPORT": {
+          "description": "enable export of config through a server",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_EXPORT_TOKEN": {
+          "description": "authorization token used by export server",
+          "value": "root",
+          "required": false
+      },
+      "CLOUDCMD_IMPORT": {
+          "description": "enable import of config",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_IMPORT_TOKEN": {
+          "description": "authorization  token used to connect to export server",
+          "value": "root",
+          "required": false
+      },
+      "CLOUDCMD_IMPORT_URL": {
+          "description": "url of an import server",
+          "value": "http://localhost:8000",
+          "required": false
+      },
+      "CLOUDCMD_IMPORT_LISTEN": {
+          "description": "enable listen on config updates from import server",
+          "value": "false",
+          "required": false
       }
   }
-}

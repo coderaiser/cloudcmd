@@ -17,6 +17,7 @@ const validate = require(DIR + 'validate');
 const prefixer = require(DIR + 'prefixer');
 const pluginer = require(DIR + 'plugins');
 const terminal = require(DIR + 'terminal');
+const distribute = require(DIR + 'distribute');
 
 const currify = require('currify/legacy');
 const apart = require('apart');
@@ -147,6 +148,8 @@ function listen(prefix, socket) {
         auth,
         prefix: prefix + '/gritty',
     });
+    
+    distribute.export(socket);
 }
 
 function cloudcmd(prefix, plugins, modules) {

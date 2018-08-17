@@ -6,6 +6,7 @@ const DIR = DIR_SERVER + '../';
 
 const path = require('path');
 const fs = require('fs');
+const Emitter = require('events');
 
 const exit = require(DIR_SERVER + 'exit');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
@@ -35,6 +36,7 @@ const send = swap(ponse.send);
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
 const apiURL = CloudFunc.apiURL;
+const changeEmitter = new Emitter();
 
 const ConfigPath = path.join(DIR, 'json/config.json');
 const ConfigHome = path.join(HOME, '.cloudcmd.json');
@@ -59,8 +61,16 @@ const config = Object.assign({}, rootConfig, configHome);
 const connectionWraped = wraptile(connection);
 
 module.exports          = manage;
-module.exports.save     = _save;
+module.exports.save     = save;
 module.exports.middle   = middle;
+module.exports.subscribe = (fn) => {
+    changeEmitter.on('change', fn);
+};
+
+module.exports.unsubscribe = (fn) => {
+    changeEmitter.removeListener('change', fn);
+};
+
 module.exports.listen   = (socket, auth) => {
     check(socket, auth);
     
@@ -83,6 +93,10 @@ function manage(key, value) {
         return config[key];
     
     config[key] = value;
+    
+    changeEmitter.emit('change', key, value);
+    
+    return `${key} = ${value}`;
 }
 
 function _save(callback) {
