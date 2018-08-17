@@ -29,6 +29,13 @@
     "terminalPath": "",
     "showConfig": false,
     "vim": false,
-    "columns": "name-size-date-owner-mode"
+    "columns": "name-size-date-owner-mode",
+    "export": false,
+    "exportToken": "root",
+    "import": false,
+    "importToken": "root",
+    "importUrl": "http://localhost:8000",
+    "importListen": false,
+    "log": true 
 }
 

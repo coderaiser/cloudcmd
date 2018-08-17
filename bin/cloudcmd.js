@@ -5,9 +5,14 @@
 const Info = require('../package');
 const DIR_SERVER = '../server/';
 
+const promisify = require('es6-promisify').promisify;
+const wraptile = require('wraptile/legacy');
+
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
 const env = require(DIR_SERVER + 'env');
+
+const noop = () => {};
 
 const choose = (a, b) => {
     if (a === undefined)
@@ -30,6 +35,9 @@ const args = require('minimist')(argv.slice(2), {
         'prefix',
         'terminal-path',
         'columns',
+        'import-url',
+        'import-token',
+        'export-token',
     ],
     boolean: [
         'auth',
@@ -50,6 +58,11 @@ const args = require('minimist')(argv.slice(2), {
         'show-config',
         'vim',
         'keys-panel',
+        'color',
+        'export',
+        'import',
+        'import-listen',
+        'log',
     ],
     default: {
         server      : true,
@@ -68,6 +81,14 @@ const args = require('minimist')(argv.slice(2), {
         console     : choose(env.bool('console'), config('console')),
         contact     : choose(env.bool('contact'), config('contact')),
         terminal    : choose(env.bool('terminal'), config('terminal')),
+        columns     : env('columns') || config('columns') || '',
+        vim         : choose(env.bool('vim'), config('vim')),
+        log         : config('log'),
+        
+        'import-url': env('import_url') || config('importUrl'),
+        'import-listen': choose(env.bool('import_listen'), config('importListen')),
+        import      : choose(env.bool('import'), config('import')),
+        export      : choose(env.bool('export'), config('export')),
         
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
@@ -75,9 +96,9 @@ const args = require('minimist')(argv.slice(2), {
         'one-file-panel': choose(env.bool('one_file_panel'), config('oneFilePanel')),
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
-        'vim': choose(env.bool('vim'), config('vim')),
-        'columns': env('columns') || config('columns') || '',
         'keys-panel': env.bool('keys_panel') || config('keysPanel'),
+        'import-token': env('import_token') || config('importToken'),
+        'export-token': env('export_token') || config('exportToken'),
     },
     alias: {
         v: 'version',
@@ -106,7 +127,6 @@ function main() {
         repl();
     
     checkUpdate();
-    
     port(args.port);
     
     config('name', args.name);
@@ -125,11 +145,18 @@ function main() {
     config('root', args.root);
     config('vim', args.vim);
     config('columns', args.columns);
+    config('log', args.log);
     config('confirmCopy', args['confirm-copy']);
     config('confirmMove', args['confirm-move']);
     config('oneFilePanel', args['one-file-panel']);
     config('configDialog', args['config-dialog']);
     config('keysPanel', args['keys-panel']);
+    config('export', args.export);
+    config('exportToken', args['export-token']);
+    config('import', args.import);
+    config('importToken', args['import-token']);
+    config('importListen', args['import-listen']);
+    config('importUrl', args['import-url']);
     
     readConfig(args.config);
     
@@ -151,12 +178,14 @@ function main() {
     if (args['show-config'])
         showConfig();
     
-    if (!args.save)
-        return start(options);
+    const startWraped = wraptile(start, options);
+    const distribute = require('../server/distribute');
+    const importConfig = promisify(distribute.import);
+    const caller = (fn) => fn();
     
-    config.save(() => {
-        start(options);
-    });
+    importConfig()
+        .then(args.save ? caller(config.save) : noop)
+        .then(startWraped(options));
 }
 
 function validateRoot(root) {
@@ -166,7 +195,6 @@ function validateRoot(root) {
 
 function getPassword(password) {
     const criton = require('criton');
-    
     return criton(password, config('algo'));
 }
 
@@ -241,7 +269,6 @@ function repl() {
 
 function checkUpdate() {
     const load = require('package-json');
-    const noop = () => {};
     
     load(Info.name, 'latest')
         .then(showUpdateInfo)
