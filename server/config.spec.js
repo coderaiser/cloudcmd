@@ -8,62 +8,58 @@ const readjson = require('readjson');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
-const root = '../../';
-const dir = root + 'server/';
-const configPath = dir + 'config';
+const root = '../';
+const dir = './';
+const configPath = './config';
 
 const config = require(configPath);
 const {_cryptoPass} = config;
 const {apiURL} = require(root + 'common/cloudfunc');
-const clean = require('clear-module');
 
 const pathHomeConfig = path.join(os.homedir(), '.cloudcmd.json');
-const pathConfig = path.join(__dirname, '..', '..', 'json', 'config.json');
+const pathConfig = path.join(__dirname, '..', 'json', 'config.json');
+
 const fixture = require('./config.fixture');
-
-function readConfig() {
-    return readjson.sync.try(pathHomeConfig) || require(pathConfig);
-}
-
-const before = require('../before');
+const {connect} = require('../test/before');
 
 test('config: manage', (t) => {
     t.equal(undefined, config(), 'should return "undefined"');
     t.end();
 });
 
-test('config: manage: get', (t) => {
+test('config: manage: get', async (t) => {
     const editor = 'deepword';
     
-    before({config: {editor}}, (port, after) => {
-        t.equal(config('editor'), editor, 'should get config');
-        t.end();
-        after();
+    const {done} = await connect({
+        config: {editor}
     });
+    
+    done();
+    
+    t.equal(config('editor'), editor, 'should get config');
+    t.end();
 });
 
-test('config: manage: get', (t) => {
+test('config: manage: get', async (t) => {
     const editor = 'deepword';
     const conf = {
         editor
     };
     
-    before({config: conf}, (port, after) => {
-        config('editor', 'dword');
-        t.equal('dword', config('editor'), 'should set config');
-        t.end();
-        after();
-    });
+    const {done} = await connect({config: conf});
+    
+    config('editor', 'dword');
+    done();
+    
+    t.equal('dword', config('editor'), 'should set config');
+    t.end();
 });
 
 test('config: manage: get: *', (t) => {
-    clean(configPath);
-    
-    const config = require(configPath);
     const data = config('*');
-    const expected = readConfig();
+    const keys = Object.keys(data);
     
-    t.deepEqual(data, expected, 'should return config data');
+    t.ok(keys.length > 1, 'should return config data');
     t.end();
 });
 
