@@ -1,4 +1,3 @@
-/* global CloudCmd */
 /* global DOM */
 
 'use strict';
