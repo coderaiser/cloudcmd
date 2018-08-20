@@ -7,7 +7,7 @@ const express = require('express');
 const io = require('socket.io');
 const writejson = require('writejson');
 const readjson = require('readjson');
-const {promisify} = require('es6-promisify');
+const {promisify} = require('util');
 
 process.env.NODE_ENV = 'development';
 
@@ -28,11 +28,11 @@ function before(options, fn = options) {
     
     const app = express();
     const server = http.createServer(app);
-    const after = () => {
+    const after = (cb) => {
         if (currentConfig)
             writejson.sync(pathConfig, currentConfig);
         
-        server.close();
+        server.close(cb);
     };
     
     const socket = io.listen(server);
@@ -45,7 +45,7 @@ function before(options, fn = options) {
     }));
     
     server.listen(() => {
-        fn(server.address().port, after);
+        fn(server.address().port, promisify(after));
     });
 }
 

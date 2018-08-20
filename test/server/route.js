@@ -42,7 +42,7 @@ test('cloudcmd: route: buttons: no console', async (t) => {
     t.ok(/icon-console none/.test(result), 'should hide console');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: buttons: console', async (t) => {
@@ -56,7 +56,7 @@ test('cloudcmd: route: buttons: console', async (t) => {
     t.notOk(/icon-console none/.test(result), 'should not hide console');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: buttons: no config', async (t) => {
@@ -70,7 +70,7 @@ test('cloudcmd: route: buttons: no config', async (t) => {
     t.ok(/icon-config none/.test(result), 'should hide config');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: buttons: no contact', async (t) => {
@@ -84,7 +84,7 @@ test('cloudcmd: route: buttons: no contact', async (t) => {
     t.ok(/icon-contact none/.test(result), 'should hide contact');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
@@ -98,7 +98,7 @@ test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
     t.ok(/icon-move none/.test(result), 'should hide move button');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
@@ -112,7 +112,7 @@ test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
     t.ok(/icon-copy none/.test(result), 'should hide copy button');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: keys panel: hide', async (t) => {
@@ -126,7 +126,7 @@ test('cloudcmd: route: keys panel: hide', async (t) => {
     t.ok(/keyspanel hidden/.test(result), 'should hide keyspanel');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: keys panel', async (t) => {
@@ -140,7 +140,7 @@ test('cloudcmd: route: keys panel', async (t) => {
     t.notOk(/keyspanel hidden/.test(result), 'should show keyspanel');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: file: fs', async (t) => {
@@ -155,7 +155,7 @@ test('cloudcmd: route: file: fs', async (t) => {
     t.equal(empty, '', 'should equal');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: symlink', async (t) => {
@@ -176,7 +176,7 @@ test('cloudcmd: route: symlink', async (t) => {
     fs.unlinkSync(symlink);
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: not found', async (t) => {
@@ -191,7 +191,7 @@ test('cloudcmd: route: not found', async (t) => {
     t.ok(~data.indexOf('ENOENT: no such file or directory'), 'should return error');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: realpath: error', async (t) => {
@@ -214,7 +214,7 @@ test('cloudcmd: route: realpath: error', async (t) => {
     t.ok(/^ENOENT/.test(data), 'should return error');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: route: sendIndex: encode', async (t) => {
@@ -248,7 +248,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     clear('../../server/cloudcmd');
     clear(beforePath);
     
-    done();
+    await done();
     t.end();
 });
 
@@ -282,7 +282,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     clear('../../server/cloudcmd');
     clear(beforePath);
     
-    done();
+    await done();
     t.end();
 });
 
@@ -317,7 +317,7 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     clear(cloudcmdPath);
     clear(beforePath);
     
-    done();
+    await done();
     t.end();
 });
 
@@ -331,7 +331,7 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
     
     t.ok(/icon-terminal none/.test(result), 'should hide terminal');
     
-    done();
+    await done();
     t.end();
 });
 
@@ -346,7 +346,7 @@ test('cloudcmd: route: buttons: terminal', async (t) => {
     
     t.notOk(/icon-terminal none/.test(result), 'should enable terminal');
     
-    done();
+    await done();
     t.end();
 });
 

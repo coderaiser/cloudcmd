@@ -228,10 +228,10 @@ test('cloudcmd: getIndexPath: development', (t) => {
 test('cloudcmd: sw', async (t) => {
     const {port, done} = await connect();
     const {statusCode}= await get(`http://localhost:${port}/sw.js`);
-    done();
+    
+    await done();
     
     t.equal(statusCode, 200, 'should return sw');
-    
     t.end();
 });
 

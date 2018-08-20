@@ -50,7 +50,7 @@ test('cloudcmd: modules', async (t) => {
     t.deepEqual(result, expected, 'should equal');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: modules: wrong route', async (t) => {
@@ -69,7 +69,7 @@ test('cloudcmd: modules: wrong route', async (t) => {
     t.notDeepEqual(result, expected, 'should not be equal');
     t.end();
     
-    done();
+    await done();
 });
 
 test('cloudcmd: modules: no', (t) => {
