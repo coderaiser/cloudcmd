@@ -44,6 +44,9 @@ const Config = {};
 let Loading = true;
 
 module.exports.init = async () => {
+    if (!CloudCmd.config('configDialog'))
+        return;
+    
     showLoad();
     
     await CloudCmd.View();
