@@ -468,7 +468,7 @@ And log of `import client`:
 ```
 2018.08.23 13:47:36 -> import: try to auth to http://127.0.0.1:1234
 2018.08.23 13:47:36 -> import: connected to http://127.0.0.1:1234
-2018.08.23 13:47:36 -> import: config received from http://localhost:1234
+2018.08.23 13:47:36 -> import: config received from http://127.0.0.1:1234
 2018.08.23 13:47:36 -> import: disconnected from http://127.0.0.1:1234
 ```
 
