@@ -5,6 +5,7 @@
 CloudCmd.EditFile = exports;
 
 const Format = require('format-io/legacy');
+const fullstore = require('fullstore/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');
 
@@ -18,6 +19,8 @@ const TITLE = 'Edit';
 const Images = DOM.Images;
 
 let MSG_CHANGED;
+const isLoading = fullstore();
+
 const ConfigView  = {
     beforeClose: () => {
         exec.ifExist(Menu, 'hide');
@@ -26,11 +29,15 @@ const ConfigView  = {
 };
 
 module.exports.init = async () => {
+    isLoading(true);
+    
     await CloudCmd.Edit();
     
     const editor = CloudCmd.Edit.getEditor();
     authCheck(editor);
     setListeners(editor);
+    
+    isLoading(false);
 };
 
 function getName() {
@@ -43,6 +50,9 @@ function getName() {
 }
 
 module.exports.show = (options) => {
+    if (isLoading())
+        return;
+    
     const config = {
         ...ConfigView,
         ...options,
