@@ -135,7 +135,6 @@ function CmdProto() {
     }
     
     /**
-<<<<<<< HEAD
      * get current direcotory name
      */
     this.getCurrentDirName = () => {
