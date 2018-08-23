@@ -1,3 +1,22 @@
+2018.08.23, v10.5.0
+
+fix:
+- (edit-file) multiple f4
+- (config) init: load when configDialog disabled
+- (name-size-date) .name width
+- (listeners) isNoCurrent: can not go to root when root is empty
+- (client) parallel -> series: route
+
+feature:
+- (distribute) add ability to import config from remote export server
+- (package) file-loader v2.0.0
+- (package) watch:lint:server
+- (package) add watch:test:server
+- (package) yaspeller v5.0.0
+- (package) style-loader v0.22.0
+- (package) serviceworker-webpack-plugin v1.0.1
+
+
 2018.07.18, v10.4.1
 
 fix:
