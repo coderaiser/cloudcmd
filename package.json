@@ -103,8 +103,7 @@
     "build": "redrun 6to5:*",
     "build:client": "redrun 6to5:client",
     "build:client:dev": "redrun 6to5:client:dev",
-    "heroku-postbuild": "redrun 6to5:client",
-    "postheroku-postbuild": "npm i gritty"
+    "heroku-postbuild": "redrun 6to5:client"
   },
   "directories": {
     "man": "man"
