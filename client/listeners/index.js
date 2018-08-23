@@ -168,6 +168,10 @@ function getPathListener(panel) {
 
 function isNoCurrent(panel) {
     const infoPanel = Info.panel;
+    
+    if (!infoPanel)
+        return true;
+    
     const namePanel = panel.getAttribute('data-name');
     const nameInfoPanel = infoPanel.getAttribute('data-name');
     
