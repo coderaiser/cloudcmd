@@ -23,7 +23,12 @@ const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');
 const criton = require('criton');
-const HOME = require('os').homedir();
+
+const homeDir = require('os').homedir();
+const configPath = config('configPath')
+    .replace(/^~/, homeDir);
+
+const HOME = configPath || homeDir;
 
 const manageConfig = squad(traverse, cryptoPass);
 const save = promisify(_save);

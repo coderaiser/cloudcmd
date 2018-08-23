@@ -38,6 +38,7 @@ const args = require('minimist')(argv.slice(2), {
         'import-url',
         'import-token',
         'export-token',
+        'config-path',
     ],
     boolean: [
         'auth',
@@ -92,6 +93,7 @@ const args = require('minimist')(argv.slice(2), {
         
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
+        'config-path': env('config_path') || config('configPath'),
         'terminal-path': env('terminal_path') || config('terminalPath'),
         'one-file-panel': choose(env.bool('one_file_panel'), config('oneFilePanel')),
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
@@ -150,6 +152,7 @@ function main() {
     config('confirmMove', args['confirm-move']);
     config('oneFilePanel', args['one-file-panel']);
     config('configDialog', args['config-dialog']);
+    config('configPath', args['config-path']);
     config('keysPanel', args['keys-panel']);
     config('export', args.export);
     config('exportToken', args['export-token']);
