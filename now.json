@@ -7,7 +7,7 @@
         "cloudcmd_terminal_path": "gritty",
         "cloudcmd_import": true,
         "cloudcmd_import_listen": true,
-        "cloudcmd_import_token": "hello-world",
+        "cloudcmd_import_token": "hello",
         "cloudcmd_import_url": "http://config.cloudcmd.io"
     },
     "engines": {
