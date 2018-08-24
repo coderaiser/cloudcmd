@@ -9,25 +9,6 @@ const configPath = path.join(__dirname, '../..', 'server', 'config');
 const {connect} = require('../before');
 const configFn = require(configPath);
 
-test('cloudcmd: console: enabled by default',async (t) => {
-    const config = {
-        auth: false
-    };
-    
-    const {port, done} = await connect({config});
-    
-    const socket = io(`http://localhost:${port}/console`);
-    socket.emit('auth', configFn('username'), configFn('password'));
-    
-    socket.once('data', (data) => {
-        socket.close();
-        done();
-        
-        t.equal(data, 'client #1 console connected\n', 'should emit data event');
-        t.end();
-    });
-});
-
 test('cloudcmd: console: enabled', async (t) => {
     const config = {
         console: true,
