@@ -85,6 +85,7 @@ const connectPush = wraptile((push, socket) => {
     
     log(exportStr, `${connectedStr} to ${host}`);
     socket.emit('config', omitConfig(config('*')));
+    log(exportStr, `config send to ${host}`);
     
     config.subscribe(subscription);
 });

@@ -460,6 +460,7 @@ Here is the log of `export server`:
 url: http://localhost:1234/
 2018.08.23 13:41:45 -> export: try to auth from importer [127.0.0.1:4321]
 2018.08.23 13:41:45 -> export: connected to importer [127.0.0.1:4321]
+2018.08.23 13:41:45 -> export: config send to importer[127.0.0.1:4321]
 2018.08.23 13:41:45 -> export: disconnected importer [127.0.0.1:4321]
 ```
 
