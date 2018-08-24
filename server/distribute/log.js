@@ -7,7 +7,7 @@ const config = require('../config');
 const datetime = require('../../common/datetime');
 
 const log = (name, msg) => config('log') && console.log(`${datetime()} -> ${name}: ${msg}`);
-const makeColor = (a, color) => chalk.rgb(color || stringToRGB(a))(a);
+const makeColor = (a, color) => chalk.rgb.apply(chalk, color || stringToRGB(a))(a);
 const getMessage = (e) => e.message || e;
 const getDescription = (e) => `${e.type}: ${e.description}`;
 
