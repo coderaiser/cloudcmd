@@ -61,6 +61,8 @@ const emitAuth = wraptile((importUrl, socket) => {
     socket.emit('auth', config('importToken'));
 });
 
+const apply = (fn, args) => fn.apply(null, args);
+
 module.exports = (options, fn) => {
     fn = fn || options;
     
@@ -89,16 +91,38 @@ module.exports = (options, fn) => {
     const statusStore = fullstore();
     const statusStoreWraped = wraptile(statusStore);
     
-    const onConfig = squad(close, logWraped(importStr, `config received from ${colorUrl}`), statusStoreWraped('received'), forEachKey(config));
-    const onError = squad(superFn('error'), logWraped(importStr), addUrl(colorUrl), getMessage);
-    const onConnectError = squad(superFn('connect_error'), logWraped(importStr), addUrl(colorUrl), getDescription);
+    const onConfig = apply(squad, [
+        close,
+        logWraped(importStr, `config received from ${colorUrl}`),
+        statusStoreWraped('received'),
+        forEachKey(config),
+    ]);
+    
+    const onError = apply(squad, [
+        superFn('error'),
+        logWraped(importStr),
+        addUrl(colorUrl),
+        getMessage,
+    ]);
+    
+    const onConnectError = apply(squad, [
+        superFn('connect_error'),
+        logWraped(importStr),
+        addUrl(colorUrl),
+        getDescription,
+    ]);
+    
     const onConnect = emitAuth(importUrl, socket);
     const onAccept = logWraped(importStr,`${connectedStr} to ${colorUrl}`);
-    const onDisconnect = squad(done(fn, statusStore), logWraped(importStr, `${disconnectedStr} from ${colorUrl}`), rmListeners(socket, {
-        onError,
-        onConnect,
-        onConfig,
-    }));
+    const onDisconnect = apply(squad, [
+        done(fn, statusStore),
+        logWraped(importStr, `${disconnectedStr} from ${colorUrl}`),
+        rmListeners(socket, {
+            onError,
+            onConnect,
+            onConfig,
+        }),
+    ]);
     
     const onChange = squad(logWraped(importStr), config);
     const onReject = squad(superFn('reject'), logWraped(importStr, tokenRejectedStr));
