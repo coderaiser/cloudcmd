@@ -30,6 +30,9 @@ let Element;
 let Loaded;
 
 module.exports.init = async () => {
+    if (!config('console'))
+        return;
+    
     Images.show.load('top');
     
     await CloudCmd.View();
