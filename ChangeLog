@@ -1,3 +1,9 @@
+2018.08.25, v10.5.2
+
+fix:
+- (konsole) try to load console.js when console is disabled
+
+
 2018.08.25, v10.5.1
 
 fix:
