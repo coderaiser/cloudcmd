@@ -89,6 +89,7 @@ module.exports = (options, fn) => {
     const close = closeIfNot(socket, importListen);
     
     const statusStore = fullstore();
+    const nameStore = fullstore();
     const statusStoreWraped = wraptile(statusStore);
     
     const onConfig = apply(squad, [
@@ -113,7 +114,10 @@ module.exports = (options, fn) => {
     ]);
     
     const onConnect = emitAuth(importUrl, socket);
-    const onAccept = logWraped(importStr,`${connectedStr} to ${colorUrl}`);
+    const onAccept = apply(squad, [
+        logWraped(importStr,`${connectedStr} to ${colorUrl}`),
+        nameStore,
+    ]);
     const onDisconnect = apply(squad, [
         done(fn, statusStore),
         logWraped(importStr, `${disconnectedStr} from ${colorUrl}`),
