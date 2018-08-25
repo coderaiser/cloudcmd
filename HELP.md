@@ -397,9 +397,9 @@ Here is description of options:
     "exportToken"       : "root",   /* token used by export server              */
     "import"            : false,    /* enable import of config                  */
     "import-url"        : "http://localhost:8000",   /* url of an export server */
-    "importToken"       : "root", /* token used to connect to export server     */
-    "importListen"      : false, /* listen on config updates from import server */
-    "log"               : true  /* logging                                      */
+    "importToken"       : "root",   /* token used to connect to export server   */
+    "importListen"      : false,    /* listen on config updates                 */
+    "log"               : true      /* logging                                  */
 }
 ```
 
