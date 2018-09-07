@@ -7,7 +7,14 @@ const currify = require('currify/legacy');
 const isDev = process.env.NODE_ENV === 'development';
 
 const wait = currify((f, e) => e.waitUntil(f()));
-const respondWith = currify((f, e) => e.respondWith(f(e)));
+const respondWith = currify((f, e) => {
+    const {url} = e.requestl;
+    
+    if (/\/$/.test(url) || /\^\/fs/.test(url))
+        return;
+    
+    e.respondWith(f(e));
+});
 const getPathName = (url) => new URL(url).pathname;
 
 const date = codegen`module.exports = '"' + Date() + '"'`;
@@ -73,7 +80,7 @@ async function onFetch(event) {
     });
     
     if (e)
-        return console.error(e, response, pathname);
+        return new Response(e.message);
     
     if (!isGet(request) || !resp.ok || !isBasic(resp))
         return resp;
