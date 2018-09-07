@@ -167,7 +167,7 @@
     "@babel/preset-env": "^7.0.0",
     "@cloudcmd/clipboard": "^1.0.2",
     "babel-eslint": "^9.0.0",
-    "babel-loader": "^8.0.0-beta",
+    "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",
     "clear-module": "^3.0.0",
