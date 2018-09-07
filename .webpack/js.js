@@ -33,6 +33,7 @@ const babelDev = {
     babelrc: false,
     plugins: [
         'module:babel-plugin-macros',
+        '@babel/plugin-proposal-object-rest-spread',
     ]
 };
 
