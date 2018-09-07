@@ -57,9 +57,10 @@ async function onInstall() {
 }
 
 async function onFetch(event) {
-    const url = event.request.url;
+    const {request} = event;
+    const {url} = request;
     const pathname = getPathName(url);
-    const request = getRequest(pathname, event.request);
+    const newRequest = getRequest(pathname, event.request);
     
     const cache = await caches.open(NAME);
     const response = await cache.match(request);
@@ -67,7 +68,7 @@ async function onFetch(event) {
     if (!isDev && response)
         return response;
      
-    const [e, resp] = await tryToCatch(fetch, request.clone(), {
+    const [e, resp] = await tryToCatch(fetch, newRequest, {
         credentials: 'same-origin'
     });
     
