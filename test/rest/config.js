@@ -11,7 +11,7 @@ const readjson = require('readjson');
 const writejson = require('writejson');
 
 const manageConfig = require('../../server/config');
-const before = require('../before');
+const {connect} = require('../before');
 
 const warp = (fn, ...a) => (...b) => fn(...b, ...a);
 
@@ -27,134 +27,105 @@ const patch = promisify((url, json, fn) => {
     fn(null, request.patch({url, json}));
 });
 
-test('cloudcmd: rest: config: get', (t) => {
-    before((port, after) => {
-        get(`http://localhost:${port}/api/v1/config`)
-            .then(warp(_pullout, 'string'))
-            .then(JSON.parse)
-            .then((config) => {
-                t.notOk(config.auth, 'should config.auth to be false');
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
+test('cloudcmd: rest: config: get', async (t) => {
+    const {port, done} = await connect();
+    
+    const config = await get(`http://localhost:${port}/api/v1/config`)
+        .then(warp(_pullout, 'string'))
+        .then(JSON.parse)
+        .catch(console.error);
+    
+    await done();
+    
+    t.notOk(config.auth, 'should config.auth to be false');
+    t.end();
 });
 
-test('cloudcmd: rest: config: patch', (t) => {
+test('cloudcmd: rest: config: patch', async (t) => {
     const configDialog = true;
+    const config = {
+        configDialog,
+    };
     
-    before({configDialog}, (port, after) => {
-        const json = {
-            auth: false,
-        };
-        
-        patch(`http://localhost:${port}/api/v1/config`, json)
-            .then(warp(_pullout, 'string'))
-            .then((result) => {
-                t.equal(result, 'config: ok("auth")', 'should patch config');
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
+    const {port, done} = await connect({config});
+    const json = {
+        auth: false,
+    };
+    
+    const result = await patch(`http://localhost:${port}/api/v1/config`, json)
+        .then(warp(_pullout, 'string'))
+        .catch(console.error);
+    
+    await done();
+    
+    t.equal(result, 'config: ok("auth")', 'should patch config');
+    t.end();
 });
 
-test('cloudcmd: rest: config: patch: no configDialog', (t) => {
+test('cloudcmd: rest: config: patch: no configDialog', async (t) => {
     const config = {
         configDialog: false
     };
     
-    before({config}, (port, after) => {
-        const json = {
-            ip: null
-        };
-        
-        patch(`http://localhost:${port}/api/v1/config`, json)
-            .then(warp(_pullout, 'string'))
-            .then((result) => {
-                t.equal(result, 'Config is disabled', 'should return error');
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
+    const {port, done} = await connect({config});
+    const json = {
+        ip: null
+    };
+     
+    const result = await patch(`http://localhost:${port}/api/v1/config`, json)
+        .then(warp(_pullout, 'string'))
+        .catch(console.error);
+    
+    await done();
+    
+    t.equal(result, 'Config is disabled', 'should return error');
+    t.end();
 });
 
-test('cloudcmd: rest: config: patch: no configDialog: statusCode', (t) => {
+test('cloudcmd: rest: config: patch: no configDialog: statusCode', async (t) => {
     const config = {
         configDialog: false
     };
     
-    before({config}, (port, after) => {
-        const json = {
-            ip: null
-        };
+    const {port, done} = await connect({config});
+    const json = {
+        ip: null,
+    };
+    
+    const result = await patch(`http://localhost:${port}/api/v1/config`, json)
+        .catch((error) => {
+            console.log(error);
+        });
+     
+    result.on('response', async (response) => {
+        manageConfig('configDialog', true);
         
-        patch(`http://localhost:${port}/api/v1/config`, json)
-            .then((result) => {
-                result.on('response', (response) => {
-                    t.equal(response.statusCode, 404);
-                    manageConfig('configDialog', true);
-                    t.end();
-                    after();
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        await done();
+        t.equal(response.statusCode, 404);
+        t.end();
     });
 });
 
-test('cloudcmd: rest: config: enabled by default', (t) => {
-    before({}, (port, after) => {
-        const json = {
-            auth: false,
-        };
-        
-        patch(`http://localhost:${port}/api/v1/config`, json)
-            .then(warp(_pullout, 'string'))
-            .then((result) => {
-                t.equal(result, 'config: ok("auth")', 'should send message');
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
-});
-
-test('cloudcmd: rest: config: patch: save config', (t) => {
-    before({}, (port, after) => {
-        const json = {
-            editor: 'dword',
-        };
-        
-        const originalConfig = readjson.sync.try(pathConfig);
-        
-        patch(`http://localhost:${port}/api/v1/config`, json)
-            .then(warp(_pullout, 'string'))
-            .then(() => {
-                const config = readjson.sync(pathConfig);
-                
-                t.equal(config.editor, 'dword', 'should change config file on patch');
-                t.end();
-                
-                if (originalConfig)
-                    writejson.sync(pathConfig, originalConfig);
-                
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
+test('cloudcmd: rest: config: patch: save config', async (t) => {
+    const {port, done} = await connect();
+    const json = {
+        editor: 'dword',
+    };
+    
+    const originalConfig = readjson.sync.try(pathConfig);
+    
+    await patch(`http://localhost:${port}/api/v1/config`, json)
+        .then(warp(_pullout, 'string'))
+        .catch(console.error);
+         
+    const config = readjson.sync(pathConfig);
+   
+    await done();
+    
+    t.equal(config.editor, 'dword', 'should change config file on patch');
+    t.end();
+    
+    if (originalConfig)
+        writejson.sync(pathConfig, originalConfig);
 });
 
