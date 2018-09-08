@@ -1,3 +1,19 @@
+2018.09.08, v10.5.3
+
+fix:
+- (webpack) css: font resource ignores prefix setting (#185)
+- (sw) no auth dialog when serve by service worker
+- (sw) http auth
+
+feature:
+- (package) babel-loader v8.0.0
+- (package) babel v7.0.0
+- (package) table v5.0.2
+- (package) style-loader v0.23.0
+- (package) nyc v13.0.1
+- (package) babel-eslint v9.0.0
+
+
 2018.08.25, v10.5.2
 
 fix:
