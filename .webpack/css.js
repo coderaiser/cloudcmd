@@ -42,7 +42,7 @@ const rules = [{
 },
 ...cssPlugins.map(extract), {
     test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
-    loader: 'url-loader?limit=50000',
+    loader: 'url-loader?limit=100000',
 }];
 
 module.exports = {
