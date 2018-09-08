@@ -33,7 +33,6 @@ const date = codegen`module.exports = '"' + Date() + '"'`;
 const NAME = `cloudcmd: ${date}`;
 
 const isGet = (a) => a.method === 'GET';
-const isBasic = (a) => a.type === 'basic';
 
 const createRequest = (a) => new Request(a, {
     credentials: 'same-origin'
