@@ -19,8 +19,15 @@ let Loading = true;
 let Element;
 let editor;
 
+let InfoElement;
+
 const ConfigView = {
+    beforeClose: () => {
+        document.body.removeChild(InfoElement);
+    },
     afterShow: () => {
+        document.body.appendChild(InfoElement);
+        
         editor
             .moveCursorTo(0, 0)
             .focus();
@@ -28,6 +35,7 @@ const ConfigView = {
 };
 
 module.exports.init = async () => {
+    createInfoElement();
     const element = createElement();
     
     await CloudCmd.View();
@@ -98,6 +106,22 @@ module.exports.getElement = () => {
 module.exports.hide = () => {
     CloudCmd.View.hide();
 };
+
+module.exports.setInfo = (info) => {
+    InfoElement.textContent = info;
+    return this;
+};
+
+function createInfoElement() {
+    InfoElement = load({
+        name: 'div',
+        style:
+            'top: 0;' +
+            'left: 20px;' +
+            'position: fixed;',
+        inner: '',
+    });
+}
 
 const loadFiles = promisify((element, callback) => {
     const socketPath = CloudCmd.PREFIX;

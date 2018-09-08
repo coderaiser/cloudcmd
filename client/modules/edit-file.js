@@ -74,6 +74,7 @@ module.exports.show = (options) => {
         setMsgChanged(name);
         
         CloudCmd.Edit
+            .setInfo(name)
             .getEditor()
             .setValueFirst(path, data)
             .setModeForPath(name)
