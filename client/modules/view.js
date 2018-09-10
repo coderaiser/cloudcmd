@@ -39,7 +39,7 @@ const basename = (a) => a.split('/').pop();
 let El, TemplateAudio, Overlay;
 
 const Config = {
-    beforeShow: (callback) => {
+    beforeShow: function(callback) {
         Images.hide();
         Key.unsetBind();
         showOverlay();
@@ -72,7 +72,7 @@ const Config = {
     arrows          : false,
     helpers         : {
         overlay : null,
-        title   : null
+        title   : {},
     }
 };
 
@@ -126,16 +126,7 @@ function show(data, options) {
     
     switch(type) {
     default:
-        return Info.getData((error, data) => {
-            if (error)
-                return Images.hide();
-            
-            const element = document.createTextNode(data);
-            /* add margin only for view text documents */
-            El.css('margin', '2%');
-            
-            $.fancybox.open(El.append(element), Config);
-        });
+        return showFile();
     
     case 'image':
         return showImage(path, prefixUrl);
@@ -167,6 +158,26 @@ function show(data, options) {
             });
         });
     }
+}
+
+function showFile() {
+    Info.getData((error, data) => {
+        if (error)
+            return Images.hide();
+        
+        const element = document.createTextNode(data);
+        /* add margin only for view text documents */
+        El.css('margin', '2%');
+        
+        const options = {
+            ...Config,
+        };
+        
+        if (CloudCmd.config('showFileName'))
+            options.title = Info.name;
+        
+        $.fancybox.open(El.append(element), options);
+    });
 }
 
 function initConfig(Config, options) {

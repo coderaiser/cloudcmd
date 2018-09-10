@@ -8,6 +8,7 @@
     "-p, --password             ": "set password",
     "-c, --config               ": "configuration file path",
     "--show-config              ": "show config values",
+    "--show-file-name           ": "show file name in view and edit",
     "--editor                   ": "set editor: \"dword\", \"edward\" or \"deepword\"",
     "--packer                   ": "set packer: \"tar\" or \"zip\"",
     "--root                     ": "set root directory",
@@ -57,5 +58,6 @@
     "--no-export                ": "disable export config through a server",
     "--no-import                ": "disable import of config",
     "--no-import-listen         ": "disable listen on config updates from import server",
-    "--no-log                   ": "disable logging"
+    "--no-log                   ": "disable logging",
+    "--no-show-file-name        ": "do not show file name in view and edit"
 }

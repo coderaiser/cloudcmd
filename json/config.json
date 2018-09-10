@@ -28,6 +28,7 @@
     "terminal": false,
     "terminalPath": "",
     "showConfig": false,
+    "showFileName": false,
     "vim": false,
     "columns": "name-size-date-owner-mode",
     "export": false,

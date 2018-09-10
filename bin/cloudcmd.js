@@ -56,6 +56,7 @@ const args = require('minimist')(argv.slice(2), {
         'confirm-copy',
         'confirm-move',
         'show-config',
+        'show-file-name',
         'vim',
         'keys-panel',
         'color',
@@ -90,6 +91,7 @@ const args = require('minimist')(argv.slice(2), {
         import      : choose(env.bool('import'), config('import')),
         export      : choose(env.bool('export'), config('export')),
         
+        'show-file-name': choose(env.bool('show_file_name'), config('showFileName')),
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'terminal-path': env('terminal_path') || config('terminalPath'),
@@ -137,6 +139,7 @@ function main() {
     config('progress', args.progress);
     config('console', args.console);
     config('syncConsolePath', args['sync-console-path']);
+    config('showFileName', args['show-file-name']);
     config('contact', args.contact);
     config('terminal', args.terminal);
     config('terminalPath', args['terminal-path']);

@@ -112,6 +112,11 @@
           "value": "true",
           "required": false
       },
+      "CLOUDCMD_SHOW_FILE_NAME": {
+          "description": "show file name in view and edit",
+          "value": "false",
+          "required": false
+      },
       "CLOUDCMD_EXPORT": {
           "description": "enable export of config through a server",
           "value": "false",

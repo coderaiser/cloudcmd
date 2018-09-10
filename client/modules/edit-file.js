@@ -53,10 +53,13 @@ module.exports.show = (options) => {
     if (isLoading())
         return;
     
-    const config = {
+    const optionsEdit = {
         ...ConfigView,
         ...options,
     };
+    
+    if (CloudCmd.config('showFileName'))
+        optionsEdit.title = Info.name;
     
     Images.show.load();
     
@@ -79,7 +82,7 @@ module.exports.show = (options) => {
             .setModeForPath(name)
             .enableKey();
         
-        CloudCmd.Edit.show(config);
+        CloudCmd.Edit.show(optionsEdit);
     });
     
     return CloudCmd.Edit;
