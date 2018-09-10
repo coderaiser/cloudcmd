@@ -21,7 +21,7 @@ module.exports = window.CloudCmd = (config) => {
     
     window.DOM = DOM;
     window.CloudCmd = require('./client');
-
+    
     registerSW(config.prefix);
     
     const prefix = getPrefix(config.prefix);
