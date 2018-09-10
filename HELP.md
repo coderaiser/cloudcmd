@@ -101,6 +101,7 @@ Cloud Commander supports command line parameters:
 | `--import-url`                | url of an import server
 | `--import-listen`             | enable listen on config updates from import server
 | `--log`                       | enable logging
+| `--no-show-config`            | do not show config values
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
