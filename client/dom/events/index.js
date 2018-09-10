@@ -1,6 +1,7 @@
 'use strict';
 
 const itype = require('itype/legacy');
+const EventStore = require('./event-store');
 
 module.exports = new EventsProto();
 
@@ -98,7 +99,10 @@ function EventsProto() {
         checkType(type);
         
         parseArgs(type, element, listener, (element, args) => {
-            element.addEventListener.apply(element, args);
+            const [name, fn, options] = args;
+            
+            element.addEventListener(name, fn, options);
+            EventStore.add(element, name, fn);
         });
         
         return Events;
@@ -142,6 +146,20 @@ function EventsProto() {
         });
         
         return Events;
+    };
+    
+    /**
+     * remove all added event listeners
+     *
+     * @param listener
+     */
+    this.removeAll = () => {
+        const events = EventStore.get();
+        
+        for (const [el, name, fn] of events)
+            el.removeEventListener(name, fn);
+        
+        EventStore.clear();
     };
     
     /**
