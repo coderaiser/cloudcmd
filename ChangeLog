@@ -1,3 +1,15 @@
+2018.09.10, v10.6.0
+
+fix:
+- (view) title: xss
+- (sw) navigation error
+
+feature:
+- (events) add ability to remove all added listeners
+- (cloudcmd) add ability update cloudcmd without page reload
+- (cloudcmd) add --show-file-name to add file name title in view and edit (#183)
+
+
 2018.09.08, v10.5.3
 
 fix:
