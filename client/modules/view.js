@@ -18,6 +18,8 @@ const Events = require('../dom/events');
 const load = require('../dom/load');
 const Images = require('../dom/images');
 
+const {encode} = require('../../common/entity');
+
 const testRegExp = currify((name, reg) => reg.test(name));
 const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 
@@ -40,6 +42,7 @@ let El, TemplateAudio, Overlay;
 
 const Config = {
     beforeShow: function(callback) {
+        this.title = encode(this.title);
         Images.hide();
         Key.unsetBind();
         showOverlay();
