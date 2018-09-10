@@ -6,6 +6,9 @@ const currify = require('currify/legacy');
 
 const isDev = process.env.NODE_ENV === 'development';
 
+const isGet = (a) => a.method === 'GET';
+const isBasic = (a) => a.type === 'basic';
+
 const wait = currify((f, e) => e.waitUntil(f()));
 const respondWith = currify((f, e) => {
     const {request} = e;
@@ -16,6 +19,9 @@ const respondWith = currify((f, e) => {
         return;
     
     if (!isGet(request))
+        return;
+    
+    if (!isBasic(request))
         return;
     
     if (/^\/api/.test(pathname))
@@ -31,8 +37,6 @@ const getPathName = (url) => new URL(url).pathname;
 
 const date = codegen`module.exports = '"' + Date() + '"'`;
 const NAME = `cloudcmd: ${date}`;
-
-const isGet = (a) => a.method === 'GET';
 
 const createRequest = (a) => new Request(a, {
     credentials: 'same-origin'
