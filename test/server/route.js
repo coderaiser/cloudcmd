@@ -87,7 +87,7 @@ test('cloudcmd: route: buttons: no contact', async (t) => {
     await done();
 });
 
-test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
+test('cloudcmd: route: buttons: one file panel: move', async (t) => {
     const config = {
         oneFilePanel: true
     };
@@ -101,7 +101,7 @@ test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
     await done();
 });
 
-test('cloudcmd: route: buttons: one panel mode: move', async (t) => {
+test('cloudcmd: route: buttons: one file panel: move', async (t) => {
     const config = {
         oneFilePanel: true
     };
