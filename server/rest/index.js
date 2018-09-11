@@ -15,9 +15,9 @@ const info = require('./info');
 const jaguar = require('jaguar');
 const onezip = require('onezip');
 const inly = require('inly');
-const wraptile = require('wraptile/legacy');
+const wraptile = require('wraptile');
 const pullout = require('pullout');
-const json = require('jonny/legacy');
+const json = require('jonny');
 const ponse = require('ponse');
 
 const copymitter = require('copymitter');

@@ -1,12 +1,12 @@
 'use strict';
 
-const currify = require('currify/legacy');
-const wraptile = require('wraptile/legacy');
-const squad = require('squad/legacy');
-const fullstore = require('fullstore/legacy');
+const currify = require('currify');
+const wraptile = require('wraptile');
+const squad = require('squad');
+const fullstore = require('fullstore');
 
 const io = require('socket.io-client');
-const forEachKey = currify(require('for-each-key/legacy'));
+const forEachKey = currify(require('for-each-key'));
 
 const config = require('../config');
 const log = require('./log');

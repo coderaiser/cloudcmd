@@ -12,13 +12,13 @@ const exit = require(DIR_SERVER + 'exit');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
 const fullstore = require('fullstore');
-const currify = require('currify/legacy');
-const wraptile = require('wraptile/legacy');
-const squad = require('squad/legacy');
+const currify = require('currify');
+const wraptile = require('wraptile');
+const squad = require('squad');
 const promisify = require('es6-promisify').promisify;
 const pullout = promisify(require('pullout'));
 const ponse = require('ponse');
-const jonny = require('jonny/legacy');
+const jonny = require('jonny');
 const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');

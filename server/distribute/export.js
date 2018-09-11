@@ -1,8 +1,8 @@
 'use strict';
 
-const currify = require('currify/legacy');
-const wraptile = require('wraptile/legacy');
-const squad = require('squad/legacy');
+const currify = require('currify');
+const wraptile = require('wraptile');
+const squad = require('squad');
 const omit = require('object.omit');
 
 const config = require('../config');

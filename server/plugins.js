@@ -1,6 +1,6 @@
 'use strict';
 
-const currify = require('currify/legacy');
+const currify = require('currify');
 const files = require('files-io');
 
 module.exports = currify((plugins, req, res, next) => {

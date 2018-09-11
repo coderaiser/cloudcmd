@@ -1,6 +1,6 @@
 'use strict';
 
-const wraptile = require('wraptile/legacy');
+const wraptile = require('wraptile');
 const chalk = require('chalk');
 
 const config = require('../config');

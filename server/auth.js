@@ -2,7 +2,7 @@
 
 const httpAuth = require('http-auth');
 const criton = require('criton');
-const currify = require('currify/legacy');
+const currify = require('currify');
 const middle = currify(_middle);
 
 const config = require('./config');

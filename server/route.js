@@ -9,9 +9,9 @@ const flop = require('flop');
 const ponse = require('ponse');
 const rendy = require('rendy');
 const format = require('format-io');
-const squad = require('squad/legacy');
+const squad = require('squad');
 const apart = require('apart');
-const currify = require('currify/legacy');
+const currify = require('currify');
 
 const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');

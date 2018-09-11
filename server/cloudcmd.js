@@ -19,7 +19,7 @@ const pluginer = require(DIR + 'plugins');
 const terminal = require(DIR + 'terminal');
 const distribute = require(DIR + 'distribute');
 
-const currify = require('currify/legacy');
+const currify = require('currify');
 const apart = require('apart');
 const join = require('join-io');
 const ponse = require('ponse');

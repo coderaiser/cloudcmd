@@ -6,7 +6,7 @@ const Info = require('../package');
 const DIR_SERVER = '../server/';
 
 const promisify = require('es6-promisify').promisify;
-const wraptile = require('wraptile/legacy');
+const wraptile = require('wraptile');
 
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
@@ -254,7 +254,7 @@ function readConfig(name) {
 function help() {
     const bin = require('../json/help');
     const forEachKey = require('for-each-key');
-    const currify = require('currify/legacy');
+    const currify = require('currify');
     const usage = 'Usage: cloudcmd [options]';
     const url = Info.homepage;
     const log = currify((a, b, c) => console.log(a, b, c));
