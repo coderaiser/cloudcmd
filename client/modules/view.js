@@ -10,6 +10,8 @@ const exec = require('execon');
 const currify = require('currify/legacy');
 const {promisify} = require('es6-promisify');
 
+const modal = require('@cloudcmd/modal');
+
 const {time} = require('../../common/util');
 const {FS} = require('../../common/cloudfunc');
 
@@ -42,41 +44,26 @@ let El, TemplateAudio, Overlay;
 
 const Config = {
     beforeShow: function(callback) {
-        this.title = encode(this.title);
+        //this.title = encode(this.title);
         Images.hide();
         Key.unsetBind();
-        showOverlay();
         exec(callback);
     },
     beforeClose: (callback) => {
         Events.rmKey(listener);
         Key.setBind();
         exec(callback);
-        hideOverlay();
     },
     afterShow: (callback) => {
         El.focus();
         exec(callback);
     },
+    onOverlayClick,
     afterClose      : exec,
-    fitToView       : true,
-    loop            : false,
-    openEffect      : 'none',
-    closeEffect     : 'none',
     autoSize        : false,
-    height          : '100%',
-    width           : '100%',
-    minWidth        : 0,
-    minHeight       : 0,
-    padding         : 0,
-    preload         : 0,
-    keys            : null,
-    mouseWheel      : false,
-    arrows          : false,
-    helpers         : {
-        overlay : null,
-        title   : {},
-    }
+    helpers: {
+        title: {},
+    },
 };
 
 module.exports.init = promisify((fn) => {
@@ -91,18 +78,12 @@ module.exports.init = promisify((fn) => {
         }
     ], fn);
     
-    Config.parent = Overlay = load({
-        id          : 'js-view',
-        name        : 'div',
-        className   : 'fancybox-overlay fancybox-overlay-fixed'
-    });
-    
     const events = [
         'click',
         'contextmenu',
     ];
     
-    events.forEach(addEvent(Overlay, onOverLayClick));
+    events.forEach(addEvent(Overlay, onOverlayClick));
 });
 
 function show(data, options) {
@@ -118,7 +99,7 @@ function show(data, options) {
     
     if (data) {
         const element = $(El).append(data);
-        $.fancybox.open(element, initConfig(Config, options));
+        modal.open(element[0], initConfig(Config, options));
         return;
     }
     
@@ -129,49 +110,40 @@ function show(data, options) {
     
     switch(type) {
     default:
-        return showFile();
+        return viewFile();
     
     case 'image':
-        return showImage(path, prefixUrl);
+        return viewImage(path, prefixUrl);
     
     case 'media':
-        return getMediaElement(path, (element) => {
-            const media = DOM.getByDataName('js-media', element);
-            const onKey = exec.with(onMediaKey, media);
-            
-            $.fancybox.open(element, {
-                parent      : Overlay,
-                beforeShow  : () => {
-                    Config.beforeShow();
-                    Events.addKey(onKey);
-                },
-                beforeClose : () => {
-                    Config.beforeClose();
-                    Events.rmKey(onKey);
-                },
+        return viewMedia(path);
+    }
+}
+
+function viewMedia(path) {
+    getMediaElement(path, (element) => {
+        const allConfig = {
+            ...Config,
+            ...{
+                autoSize: true,
                 afterShow: () => {
                     element
                         .querySelector('audio, video')
                         .focus();
-                },
-                helpers: {
-                    overlay : null,
-                    title   : null
                 }
-            });
-        });
-    }
+            }
+        };
+        
+        modal.open(element, allConfig);
+    });
 }
 
-function showFile() {
+function viewFile() {
     Info.getData((error, data) => {
         if (error)
             return Images.hide();
         
         const element = document.createTextNode(data);
-        /* add margin only for view text documents */
-        El.css('margin', '2%');
-        
         const options = {
             ...Config,
         };
@@ -179,7 +151,7 @@ function showFile() {
         if (CloudCmd.config('showFileName'))
             options.title = Info.name;
         
-        $.fancybox.open(El.append(element), options);
+        modal.open(El.append(element)[0], options);
     });
 }
 
@@ -209,14 +181,14 @@ function initConfig(Config, options) {
 }
 
 function hide() {
-    $.fancybox.close();
+    modal.close();
 }
 
-function showImage(href, prefixUrl) {
+function viewImage(href, prefixUrl) {
     const makeTitle = (path) => {
         return {
             href: prefixUrl + path,
-            title: basename(path),
+            title: encode(basename(path)),
         };
     };
     
@@ -231,13 +203,9 @@ function showImage(href, prefixUrl) {
     const imageConfig = {
         index,
         autoSize    : true,
-        type        : 'image',
-        prevEffect  : 'none',
-        nextEffect  : 'none',
         arrows      : true,
         keys        : true,
         helpers     : {
-            overlay : null,
             title   : {}
         }
     };
@@ -247,7 +215,7 @@ function showImage(href, prefixUrl) {
         ...imageConfig,
     };
     
-    $.fancybox.open(titles, config);
+    modal.open(titles, config);
 }
 
 function isImage(name) {
@@ -320,17 +288,6 @@ function check(src, callback) {
         throw Error('callback should be a function');
 }
 
-function onMediaKey(media, event) {
-    const {keyCode} = event;
-    
-    if (keyCode === Key.SPACE) {
-        if (media.paused)
-            media.play();
-        else
-            media.pause();
-    }
-}
-
 /**
  * function loads css and js of FancyBox
  * @callback   -  executes, when everything loaded
@@ -338,38 +295,18 @@ function onMediaKey(media, event) {
 function loadAll(callback) {
     time(Name + ' load');
     
-    DOM.loadRemote('fancybox', () => {
-        const {PREFIX} = CloudCmd;
-        
-        load.css(PREFIX + '/dist/view.css', callback);
-        
-        load.style({
-            id      : 'view-inlince-css',
-            inner   : [
-                '.fancybox-title-float-wrap .child {',
-                '-webkit-border-radius: 0;',
-                '-moz-border-radius: 0;',
-                'border-radius: 0;',
-                '}'
-            ].join('')
-        });
-    });
+    const {PREFIX} = CloudCmd;
+    load.css(PREFIX + '/dist/view.css', callback);
+    
+    callback();
 }
 
-function onOverLayClick(event) {
-    const {target} = event;
-    const isOverlay = target === Overlay;
+function onOverlayClick(event) {
     const position = {
         x: event.clientX,
         y: event.clientY
     };
       
-    if (!isOverlay)
-        return;
-    
-    hideOverlay();
-    hide();
-    
     setCurrentByPosition(position);
 }
 
@@ -396,14 +333,6 @@ function setCurrentByPosition(position) {
         return;
     
     DOM.setCurrentFile(element);
-}
-
-function hideOverlay() {
-    Overlay.classList.remove('view-overlay');
-}
-
-function showOverlay() {
-    Overlay.classList.add('view-overlay');
 }
 
 function listener({keyCode}) {

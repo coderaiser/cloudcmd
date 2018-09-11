@@ -25,10 +25,6 @@ modules/jquery/src
 
 !modules/jquery/dist/jquery.min.js
 
-modules/fancybox/lib/
-modules/fancybox/demo
-modules/fancybox/sprite.psd
-
 modules/execon
 modules/emitify
 

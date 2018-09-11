@@ -27,17 +27,6 @@
         "version": "2.1.1",
         "local": "/socket.io/socket.io.js",
         "remote": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
-    }, {
-        "name": "fancybox",
-        "version": "2.1.6",
-        "local": [
-            "/modules/fancybox/source/jquery.fancybox.css",
-            "/modules/fancybox/source/jquery.fancybox.pack.js"
-        ],
-        "remote": [
-            "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/css/jquery.fancybox.min.css",
-            "//cdnjs.cloudflare.com/ajax/libs/fancybox/{{ version }}/js/jquery.fancybox.min.js"
-        ]
     }],
     "data": {
         "FilePicker": {

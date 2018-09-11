@@ -40,8 +40,7 @@ function createElement() {
         style:
             'width      : 100%;'                +
             'height     : 100%;'                +
-            'font-family: "Droid Sans Mono";'   +
-            'position   : absolute;',
+            'font-family: "Droid Sans Mono";',
         notAppend: true
     });
     
