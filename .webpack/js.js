@@ -64,6 +64,9 @@ const splitChunks = {
 };
 
 module.exports = {
+    resolve: {
+        symlinks: false
+    },
     devtool,
     optimization: {
         splitChunks,
