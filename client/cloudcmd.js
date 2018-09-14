@@ -47,12 +47,12 @@ function getPrefix(prefix) {
 }
 
 const onUpdateFound = wraptile(async (config) => {
-    const {prefix} = config;
     const {DOM} = window;
+    const prefix = getPrefix(config.prefix);
     const js = promisify(DOM.load.js);
     
-    await js(`${prefix}dist/cloudcmd.common.js`);
-    await js(`${prefix}dist/cloudcmd.js`);
+    await js(`${prefix}/dist/cloudcmd.common.js`);
+    await js(`${prefix}/dist/cloudcmd.js`);
     
     DOM.Events.removeAll();
     window.CloudCmd(config);
