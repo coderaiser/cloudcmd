@@ -5,8 +5,8 @@
 const Emitify = require('emitify/legacy');
 const inherits = require('inherits');
 const rendy = require('rendy/legacy');
-const wraptile = require('wraptile/legacy');
 const exec = require('execon');
+const load = require('load.js');
 
 const {kebabToCamelCase} = require('../common/util');
 const isDev = process.env.NODE_ENV === 'development';
@@ -34,6 +34,11 @@ const loadModule = require('./load-module');
 inherits(CloudCmdProto, Emitify);
 
 module.exports = new CloudCmdProto(DOM);
+
+load.addErrorListener((e, src) => {
+    const msg = `file ${src} could not be loaded`;
+    Images.show.error(msg);
+});
 
 function CloudCmdProto(DOM) {
     let Key;
@@ -132,13 +137,9 @@ function CloudCmdProto(DOM) {
             exec.with(CloudCmd.route, location.hash),
         ], noop);
         
-        const {
-            load,
-        } = DOM;
-        
         const funcBefore = (callback) => {
             const src = prefix + CloudCmd.DIRCLIENT_MODULES + 'polyfill.js';
-            load.js(src, callback));
+            load.js(src, callback);
         };
         
         CloudCmd.PREFIX = prefix;
@@ -168,14 +169,14 @@ function CloudCmdProto(DOM) {
         const prefix = CloudCmd.PREFIX;
         const name = prefix + '/dist/cloudcmd.common.css';
         
-        DOM.load.css(name, callback);
+        load.css(name, callback);
     }
     
     function loadPlugins(callback) {
         const prefix = CloudCmd.PREFIX;
         const plugins = prefix + '/plugins.js';
         
-        DOM.load.js(plugins, callback);
+        load.js(plugins, callback);
     }
     
     this.join = (urls) => {

@@ -3,13 +3,13 @@
 /* global CloudCmd */
 
 const exec = require('execon');
-const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch/legacy');
+const {promisify} = require('es6-promisify');
+const loadJS = promisify(require('load.js').js);
+
 const {
     kebabToCamelCase,
 } = require('../common/util');
-
-const loadJS = promisify(require('./dom/load').js);
 
 /**
  * function load modules

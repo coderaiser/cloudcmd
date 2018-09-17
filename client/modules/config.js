@@ -10,6 +10,8 @@ const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const squad = require('squad/legacy');
 const {promisify} = require('es6-promisify');
+const load = require('load.js');
+const createElement = require('@cloudcmd/create-element');
 
 const input = require('../input');
 const Images = require('../dom/images');
@@ -117,9 +119,7 @@ function show() {
     const prefix = CloudCmd.PREFIX;
     const funcs = [
         exec.with(Files.get, 'config-tmpl'),
-        exec.with(DOM.load.parallel, [
-            prefix + '/dist/config.css'
-        ])
+        exec.with(load.css, prefix + '/dist/config.css'),
     ];
     
     if (Loading)
@@ -148,15 +148,11 @@ function fillTemplate(error, template) {
         obj[obj.columns + '-selected'] = 'selected';
         delete obj.columns;
         
-        const inner = rendy(Template, obj);
+        const innerHTML = rendy(Template, obj);
         
-        Element = DOM.load({
-            name        : 'form',
+        Element = createElement('form', {
             className   : 'config',
-            inner,
-            attribute   : {
-                'data-name': 'js-config'
-            }
+            innerHTML,
         });
         
         const inputs = document.querySelectorAll('input, select', Element);
@@ -241,12 +237,10 @@ function onNameChange(name) {
 function onKey({keyCode, target}) {
     switch (keyCode) {
     case Key.ESC:
-        hide();
-        break;
+        return hide();
     
     case Key.ENTER:
-        onChange(target);
-        break;
+        return onChange(target);
     }
 }
 

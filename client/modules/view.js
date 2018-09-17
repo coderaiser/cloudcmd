@@ -11,14 +11,14 @@ const currify = require('currify/legacy');
 const {promisify} = require('es6-promisify');
 
 const modal = require('@cloudcmd/modal');
-const createElement = require('./create-element')
+const createElement = require('@cloudcmd/create-element');
 
 const {time} = require('../../common/util');
 const {FS} = require('../../common/cloudfunc');
 
 const Files = require('../dom/files');
 const Events = require('../dom/events');
-const load = require('../dom/load');
+const load = require('load.js');
 const Images = require('../dom/images');
 
 const {encode} = require('../../common/entity');
@@ -99,7 +99,7 @@ function show(data, options) {
         className: 'view',
     });
     
-    El.tabindex = 0;
+    El.tabIndex = 0;
     
     if (data) {
         El.append(data);
@@ -276,13 +276,16 @@ function getMediaElement(src, callback) {
         const is = isAudio(name);
         const type =  is ? 'audio' : 'video';
         
-        const rendered = rendy(TemplateAudio, {
+        const innerHTML = rendy(TemplateAudio, {
             src,
             type,
             name,
         });
         
-        const [element] = $(rendered);
+        const element = createElement('div', {
+            innerHTML,
+        });
+        
         callback(element);
     });
 }

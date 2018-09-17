@@ -4,8 +4,9 @@
 
 CloudCmd.Markdown = exports;
 
+const createElement = require('@cloudcmd/create-element');
+
 const Images = require('../dom/images');
-const load = require('../dom/load');
 const {Markdown} = require('../dom/rest');
 
 module.exports.init = async () => {
@@ -32,18 +33,15 @@ function show(name, options = {}) {
     if (relative)
         name += relativeQuery;
     
-    Markdown.read(name, (error, inner) => {
-        const name = 'div';
+    Markdown.read(name, (error, innerHTML) => {
         const className = 'help';
         
-        const div = load({
-            name,
+        const div = createElement('div', {
             className,
-            inner,
+            innerHTML,
         });
         
         Images.hide();
-        
         CloudCmd.View.show(div);
     });
 }

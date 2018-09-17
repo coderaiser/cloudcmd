@@ -5,10 +5,11 @@
 const exec = require('execon');
 const currify = require('currify/legacy');
 const {promisify} = require('es6-promisify');
+const loadJS = require('load.js').js;
 
 const {log} = CloudCmd;
 
-const load = require('../dom/load');
+const {ajax} = require('../dom/load');
 const Files = require('../dom/files');
 const Images = require('../dom/images');
 
@@ -45,7 +46,7 @@ function _upload(callback, file) {
     const responseType = 'arraybuffer';
     const success = exec.with(callback, filename);
     
-    load.ajax({
+    ajax({
         url,
         responseType,
         success,
@@ -55,7 +56,7 @@ function _upload(callback, file) {
 const loadFiles = promisify((callback) => {
     const js = '//api.filepicker.io/v2/filepicker.js';
     
-    load.js(js, () => {
+    loadJS(js, () => {
         Files.get('modules', (error, modules) => {
             const {key} = modules.data.FilePicker;
             

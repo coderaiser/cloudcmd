@@ -2,6 +2,8 @@
 
 'use strict';
 
+const createElement = require('@cloudcmd/create-element');
+
 const Images = module.exports;
 
 const LOADING = 'loading';
@@ -33,14 +35,12 @@ function isSVG() {
     return /SVGAnimate/.test(name);
 }
 
-
 function getElement() {
-    return DOM.load({
-        name        : 'span',
-        id          : 'js-status-image',
-        className   : 'icon',
-        attribute   : 'data-progress',
-        notAppend   : true
+    return createElement('span', {
+        id: 'js-status-image',
+        className: 'icon',
+        dataName: 'progress',
+        notAppend: true
     });
 }
 

@@ -7,6 +7,7 @@ require('../css/columns/name-size.css');
 
 const {promisify} = require('es6-promisify');
 const wraptile = require('wraptile/legacy');
+const load = require('load.js');
 
 const {
     registerSW,
@@ -49,7 +50,7 @@ function getPrefix(prefix) {
 const onUpdateFound = wraptile(async (config) => {
     const {DOM} = window;
     const prefix = getPrefix(config.prefix);
-    const js = promisify(DOM.load.js);
+    const js = promisify(load.js);
     
     await js(`${prefix}/dist/cloudcmd.common.js`);
     await js(`${prefix}/dist/cloudcmd.js`);

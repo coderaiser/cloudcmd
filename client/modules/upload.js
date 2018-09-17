@@ -4,10 +4,10 @@
 
 CloudCmd.Upload = exports;
 
-const load = require('../dom/load');
 const Files = require('../dom/files');
 const Images = require('../dom/images');
 const uploadFiles = require('../dom/upload-files');
+const createElement = require('@cloudcmd/create-element');
 
 module.exports.init = async () => {
     Images.show.load('top');
@@ -20,10 +20,14 @@ module.exports.hide = hide;
 function show() {
     Images.show.load('top');
     
-    Files.get('upload', (error, data) => {
+    Files.get('upload', (error, innerHTML) => {
         const autoSize = true;
         
-        CloudCmd.View.show(data, {
+        const el = createElement('div', {
+            innerHTML,
+        });
+        
+        CloudCmd.View.show(el, {
             autoSize,
             afterShow,
         });
@@ -36,9 +40,9 @@ function show() {
         'monospace'
     ].join(', ');
     
-    load.style({
-        id      : 'upload-css',
-        inner   : '[data-name=js-upload-file-button] {' +
+    createElement('style', {
+        dataName: 'upload-css',
+        innerText: '[data-name=js-upload-file-button] {' +
                       `font-family: ${fontFamily};`     +
                       'font-size: 20px;'                +
                       'width: 97%'                      +

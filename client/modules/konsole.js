@@ -10,6 +10,9 @@ CloudCmd.Konsole = exports;
 const exec = require('execon');
 const {promisify} = require('es6-promisify');
 const currify = require('currify/legacy');
+const loadJS = require('load.js').js;
+const createElement = require('@cloudcmd/create-element');
+
 const Images = require('../dom/images');
 const {
     Dialog,
@@ -85,9 +88,8 @@ const create = promisify((callback) => {
         socketPath: CloudCmd.PREFIX,
     };
     
-    Element = DOM.load({
-        name        : 'div',
-        className   : 'console'
+    Element = createElement('div', {
+        className: 'console',
     });
     
     konsole = Console(Element, options, (spawn) => {
@@ -136,7 +138,7 @@ const load = promisify((callback) => {
     const prefix = getPrefix();
     const url = prefix + '/console.js';
     
-    DOM.load.js(url, (error) => {
+    loadJS(url, (error) => {
         if (error)
             return Dialog.alert(TITLE, error.message);
         

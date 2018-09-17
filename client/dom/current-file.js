@@ -4,6 +4,7 @@
 /* global CloudCmd */
 
 const btoa = require('../../common/btoa');
+const createElement = require('@cloudcmd/create-element');
 
 const {
     encode,
@@ -264,12 +265,10 @@ module.exports.isCurrentFile = (currentFile) => {
 
 module.exports.setTitle = (name) => {
     if (!Title)
-        Title = DOM.getByTag('title')[0] ||
-                DOM.load({
-                    name            : 'title',
-                    innerHTML       : name,
-                    parentElement   : document.head
-                });
+        Title = DOM.getByTag('title')[0] || createElement('title', {
+            innerHTML: name,
+            parent: document.head
+        });
     
     Title.textContent = name;
     

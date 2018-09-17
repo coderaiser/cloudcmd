@@ -3,8 +3,8 @@
 'use strict';
 
 const {promisify} = require('es6-promisify');
-
-const load = require('../dom/load');
+const createElement = require('@cloudcmd/create-element');
+const load = require('load.js');
 
 const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
 const {time, timeEnd} = require('../../common/util');
@@ -28,15 +28,14 @@ const ConfigView = {
 };
 
 module.exports.init = async () => {
-    const element = createElement();
+    const element = create();
     
     await CloudCmd.View();
     await loadFiles(element);
 };
 
-function createElement() {
-    const element = load({
-        name: 'div',
+function create() {
+    const element = createElement('div', {
         style:
             'width      : 100%;'                +
             'height     : 100%;'                +

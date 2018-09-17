@@ -9,6 +9,7 @@ const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const {promisify} = require('es6-promisify');
 const exec = require('execon');
+const loadJS = require('load.js').js;
 
 const {
     encode,
@@ -459,7 +460,7 @@ function load(callback) {
     const prefix = CloudCmd.PREFIX;
     const file = `${prefix}/fileop/fileop.js`;
     
-    DOM.load.js(file, (error) => {
+    loadJS(file, (error) => {
         if (error) {
             Dialog.alert(TITLE, error.message);
             return exec(callback);

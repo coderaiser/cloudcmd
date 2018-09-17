@@ -5,9 +5,10 @@
 const exec = require('execon');
 const wrap = require('wraptile/legacy');
 const supermenu = require('supermenu');
+const createElement = require('@cloudcmd/create-element');
 
 const {FS} = require('../../common/cloudfunc');
-const load = require('../dom/load');
+const {getIdBySrc} = require('../dom/load');
 const RESTful = require('../dom/rest');
 
 const config = CloudCmd.config;
@@ -271,7 +272,7 @@ function download(type) {
           * and all other characters, like "%"
           */
         const encodedPath = encodeURI(path).replace(/#/g, '%23');
-        const id = load.getIdBySrc(path);
+        const id = getIdBySrc(path);
         
         let src;
         
@@ -280,11 +281,10 @@ function download(type) {
         else
             src = prefixUr + FS + encodedPath + '?download';
         
-        const element = load({
-            id          : id + '-' + date,
-            name        : 'iframe',
-            async       : false,
-            className   : 'hidden',
+        const element = createElement('iframe', {
+            id : id + '-' + date,
+            async: false,
+            className: 'hidden',
             src,
         });
         

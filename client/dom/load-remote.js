@@ -6,12 +6,11 @@ const exec = require('execon');
 const rendy = require('rendy/legacy');
 const itype = require('itype/legacy');
 const wraptile = require('wraptile/legacy');
+const load = require('load.js');
 
 const {findObjByNameInArr} = require('../../common/util');
 
-const load = require('./load');
 const Files = require('./files');
-
 const parallel = wraptile(load.parallel);
 
 module.exports = (name, options, callback = options) => {

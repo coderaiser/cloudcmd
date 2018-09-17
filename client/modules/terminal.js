@@ -8,7 +8,7 @@ const tryToCatch = require('try-to-catch');
 require('../../css/terminal.css');
 
 const exec = require('execon');
-const load = require('../dom/load');
+const load = require('load.js');
 const DOM = require('../dom');
 const Images = require('../dom/images');
 
@@ -37,8 +37,10 @@ const loadAll = async () => {
     
     const [e] = await tryToCatch(loadParallel, [js, css]);
     
-    if (e)
-        return Dialog.alert(TITLE, e.message);
+    if (e) {
+        const src = e.target.src.replace(window.location.href, '');
+        return Dialog.alert(TITLE, `file ${src} could not be loaded`);
+    }
     
     Loaded = true;
 };
