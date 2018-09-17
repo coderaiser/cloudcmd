@@ -18,11 +18,6 @@
         "cloud"
     ],
     "remote": [{
-        "name": "jquery",
-        "version": "3.3.1",
-        "local": "/modules/jquery/dist/jquery.min.js",
-        "remote": "https://code.jquery.com/jquery-{{ version }}.min.js"
-    }, {
         "name": "socket",
         "version": "2.1.1",
         "local": "/socket.io/socket.io.js",

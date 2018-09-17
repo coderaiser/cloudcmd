@@ -19,15 +19,6 @@ cssnano.config.js
 
 bin/release.js
 
-modules/jquery/dist
-modules/jquery/external
-modules/jquery/src
-
-!modules/jquery/dist/jquery.min.js
-
-modules/execon
-modules/emitify
-
 client
 legacy
 server_

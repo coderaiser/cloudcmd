@@ -54,17 +54,6 @@ function CmdProto() {
         loadRemote(name, options, callback);
         return DOM;
     };
-    /**
-     * load jquery from google cdn or local copy
-     * @param callback
-     */
-    this.loadJquery = function(callback) {
-        DOM.loadRemote('jquery', {
-            name    : '$'
-        }, callback);
-        
-        return DOM;
-    };
     
     this.loadSocket = function(callback) {
         DOM.loadRemote('socket', {

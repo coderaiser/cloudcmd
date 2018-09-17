@@ -1,6 +1,6 @@
 'use strict';
 
-/* global CloudCmd, DOM, $ */
+/* global CloudCmd, DOM */
 
 require('../../css/view.css');
 
@@ -11,6 +11,7 @@ const currify = require('currify/legacy');
 const {promisify} = require('es6-promisify');
 
 const modal = require('@cloudcmd/modal');
+const createElement = require('./create-element')
 
 const {time} = require('../../common/util');
 const {FS} = require('../../common/cloudfunc');
@@ -70,7 +71,6 @@ module.exports.init = promisify((fn) => {
     Loading = true;
     
     exec.series([
-        DOM.loadJquery,
         loadAll,
         (callback) => {
             Loading = false;
@@ -95,11 +95,15 @@ function show(data, options) {
     if (!options || options.bindKeys !== false)
         Events.addKey(listener);
     
-    El = $('<div class="view" tabindex=0>');
+    El = createElement('div', {
+        className: 'view',
+    });
+    
+    El.tabindex = 0;
     
     if (data) {
-        const element = $(El).append(data);
-        modal.open(element[0], initConfig(Config, options));
+        El.append(data);
+        modal.open(El, initConfig(Config, options));
         return;
     }
     
@@ -151,12 +155,15 @@ function viewFile() {
         if (CloudCmd.config('showFileName'))
             options.title = Info.name;
         
-        modal.open(El.append(element)[0], options);
+        El.append(element);
+        modal.open(El, options);
     });
 }
 
 function initConfig(Config, options) {
-    const config = Object.assign({}, Config);
+    const config = {
+        ...Config
+    };
     
     if (!options)
         return config;

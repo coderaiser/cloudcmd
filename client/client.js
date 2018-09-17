@@ -134,12 +134,11 @@ function CloudCmdProto(DOM) {
         
         const {
             load,
-            loadJquery,
         } = DOM;
         
-        const funcBefore  = (callback) => {
+        const funcBefore = (callback) => {
             const src = prefix + CloudCmd.DIRCLIENT_MODULES + 'polyfill.js';
-            loadJquery(wraptile(load.js, src, callback));
+            load.js(src, callback));
         };
         
         CloudCmd.PREFIX = prefix;

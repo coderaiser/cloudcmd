@@ -13,14 +13,6 @@ yarn.lock
 now.json
 cssnano.config.js
 
-modules/jquery-mouse-wheel
-
-modules/jquery/dist
-modules/jquery/external
-modules/jquery/src
-
-!modules/jquery/dist/jquery.min.js
-
 app.json
 bower.json
 manifest.yml
