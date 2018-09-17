@@ -21,7 +21,6 @@ const {Key} = CloudCmd;
 
 CloudCmd.Terminal = exports;
 
-let Element;
 let Loaded;
 let Terminal;
 
@@ -76,11 +75,6 @@ function getEnv() {
 }
 
 function create() {
-    Element = load({
-        name: 'div',
-        className : 'terminal',
-    });
-    
     const options = {
         env: getEnv(),
         prefix: getPrefix(),
@@ -88,7 +82,7 @@ function create() {
         fontFamily: 'Droid Sans Mono',
     };
     
-    const {socket, terminal} = gritty(Element, options);
+    const {socket, terminal} = gritty(document.body, options);
     
     Terminal = terminal;
     
@@ -103,7 +97,7 @@ function create() {
 
 function authCheck(spawn) {
     spawn.emit('auth', config('username'), config('password'));
-
+    
     spawn.on('reject', () => {
         Dialog.alert(TITLE, 'Wrong credentials!');
     });
@@ -116,7 +110,7 @@ function show(callback) {
     if (!config('terminal'))
         return;
     
-    CloudCmd.View.show(Element, {
+    CloudCmd.View.show(Terminal.element, {
         afterShow: () => {
             if (Terminal)
                 Terminal.focus();
