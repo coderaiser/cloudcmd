@@ -15,7 +15,9 @@
 [EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
 [TERMUX]:                   https://termux.com "Termux"
 [INLY]:                     https://github.com/coderaiser/node-inly "Extract archive"
-**Cloud Commander** is an orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
+
+**Cloud Commander** a file manager for the web with console and editor.
+ Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
