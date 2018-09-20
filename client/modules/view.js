@@ -97,6 +97,7 @@ function show(data, options) {
     
     El = createElement('div', {
         className: 'view',
+        notAppend: true,
     });
     
     El.tabIndex = 0;
