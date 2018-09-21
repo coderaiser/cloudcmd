@@ -28,6 +28,7 @@
         "html",
         "tmpl",
         "img",
+        "man",
         "modules",
         ".webpack",
         "webpack.config.js",
