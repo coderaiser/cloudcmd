@@ -3,6 +3,8 @@
 module.exports.registerSW = registerSW;
 module.exports.unregisterSW = unregisterSW;
 
+const noop = () => {};
+
 async function registerSW(prefix) {
     prefix = prefix ? `/${prefix}/` : `/`;
     
@@ -13,7 +15,9 @@ async function registerSW(prefix) {
     const isLocalhost = location.hostname === 'localhost';
     
     if (!isHTTPS && !isLocalhost)
-        return;
+        return {
+            addEventListener: noop,
+        };
     
     return navigator.serviceWorker.register(`${prefix}sw.js`);
 }
