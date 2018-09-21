@@ -43,3 +43,33 @@ test('distribute: export', async (t) => {
     });
 });
 
+test('distribute: export: config', async (t) => {
+    const defaultConfig = {
+        export: true,
+        exportToken: 'a',
+        vim: true,
+        log: false,
+    };
+    
+    const {port, done} = await connect({
+        config: defaultConfig
+    });
+    
+    const url = `http://localhost:${port}/distribute?port=${1111}`;
+    const socket = io.connect(url);
+    
+    const name = config('name');
+    
+    socket.on('connect', () => {
+        socket.emit('auth', 'a');
+    });
+    
+    socket.on('config', async (data) => {
+        socket.close();
+        await done();
+        
+        t.equal(typeof data, 'object', 'should emit object');
+        t.end();
+    });
+});
+

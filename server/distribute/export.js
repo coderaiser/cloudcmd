@@ -36,7 +36,7 @@ const omitList = [
     'configDialog',
 ];
 
-const omitConfig = wraptile((config) => omit(config, omitList));
+const omitConfig = (config) => omit(config, omitList);
 
 module.exports = (socket) => {
     if (!config('export'))
