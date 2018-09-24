@@ -152,7 +152,7 @@
     "shortdate": "^1.2.0",
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.1.1",
-    "squad": "^2.0.0",
+    "squad": "^3.0.0",
     "table": "^5.0.2",
     "try-catch": "^2.0.0",
     "tryrequire": "^2.0.1",
