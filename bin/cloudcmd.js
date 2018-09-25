@@ -285,15 +285,10 @@ function showUpdateInfo(data) {
         return;
     
     const chalk = require('chalk');
-    const rendy = require('rendy');
     
-    const latest = rendy('update available: {{ latest }}', {
-        latest: chalk.green.bold('v' + version),
-    });
-    
-    const current = chalk.dim(rendy('(current: v{{ current }})', {
-        current: Info.version
-    }));
+    const latestVersion = chalk.green.bold('v' + version);
+    const latest = `update available: ${latestVersion}`;
+    const current = chalk.dim(`(current: v${Info.version})`);
     
     console.log('%s %s', latest, current);
 }
