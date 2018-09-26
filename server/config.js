@@ -11,11 +11,11 @@ const Emitter = require('events');
 const exit = require(DIR_SERVER + 'exit');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
-const fullstore = require('fullstore');
 const currify = require('currify');
 const wraptile = require('wraptile');
 const squad = require('squad');
 const promisify = require('es6-promisify').promisify;
+const tryToCatch = require('try-to-catch');
 const pullout = promisify(require('pullout'));
 const ponse = require('ponse');
 const jonny = require('jonny');
@@ -27,12 +27,9 @@ const HOME = require('os').homedir();
 
 const manageConfig = squad(traverse, cryptoPass);
 const save = promisify(_save);
-const swap = currify((f, a, b) => f(b, a));
 const noArgs = (fn) => () => fn();
 const saveData = noArgs(save);
 
-const sendError = swap(ponse.sendError);
-const send = swap(ponse.send);
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
 const apiURL = CloudFunc.apiURL;
@@ -178,8 +175,7 @@ function get(request, response) {
     });
 }
 
-function patch(request, response) {
-    const jsonStore = fullstore();
+async function patch(request, response) {
     const name = 'config.json';
     const cache = false;
     const options = {
@@ -189,16 +185,26 @@ function patch(request, response) {
         cache,
     };
     
-    pullout(request, 'string')
-        .then(jonny.parse)
-        .then(jsonStore)
-        .then(manageConfig)
-        .then(saveData)
-        .then(noArgs(jsonStore))
-        .then(key)
-        .then(formatMsg('config'))
-        .then(send(options))
-        .catch(sendError(options));
+    const [e] = await tryToCatch(patchConfig, options);
+    
+    if (e)
+        ponse.sendError(e, options);
+}
+
+async function patchConfig({name, request, response, cache}) {
+    const str = await pullout(request, 'string');
+    const json = jonny.parse(str);
+    
+    manageConfig(json);
+    saveData();
+    
+    const msg = formatMsg('config', key(json));
+    ponse.send(msg, {
+        name,
+        request,
+        response,
+        cache,
+    });
 }
 
 function traverse(json) {

@@ -155,6 +155,7 @@
     "squad": "^3.0.0",
     "table": "^5.0.2",
     "try-catch": "^2.0.0",
+    "try-to-catch": "^1.0.2",
     "tryrequire": "^2.0.1",
     "wraptile": "^2.0.0",
     "writejson": "^2.0.0"
@@ -216,7 +217,6 @@
     "supermenu": "^2.0.0",
     "tape": "^4.4.0",
     "tar-stream": "^1.5.2",
-    "try-to-catch": "^1.0.2",
     "unionfs": "^3.0.2",
     "url-loader": "^1.0.1",
     "version-io": "^2.0.1",
