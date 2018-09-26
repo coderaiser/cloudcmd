@@ -168,7 +168,7 @@
     "@cloudcmd/clipboard": "^1.0.2",
     "@cloudcmd/create-element": "^1.0.0",
     "@cloudcmd/modal": "^1.0.0",
-    "babel-eslint": "^9.0.0",
+    "babel-eslint": "^10.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",
