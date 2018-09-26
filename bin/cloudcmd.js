@@ -5,7 +5,7 @@
 const Info = require('../package');
 const DIR_SERVER = '../server/';
 
-const promisify = require('es6-promisify').promisify;
+const {promisify} = require('util');
 const wraptile = require('wraptile');
 
 const exit = require(DIR_SERVER + 'exit');
@@ -241,9 +241,7 @@ function readConfig(name) {
         mode: 'json'
     });
     
-    const result = tryCatch(readjsonSync, name);
-    const error = result[0];
-    const data = result[1];
+    const [error, data] = tryCatch(readjsonSync, name);
     
     if (error)
         return exit(error.message);

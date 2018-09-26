@@ -21,9 +21,10 @@ const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const prefix = squad(prefixer, apart(config, 'prefix'));
 
 const sendIndex = (params, data) => {
-    const ponseParams = Object.assign({}, params, {
+    const ponseParams = {
+        ...params,
         name: 'index.html'
-    });
+    };
     
     ponse.send(data, ponseParams);
 };

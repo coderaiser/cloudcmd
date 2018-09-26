@@ -12,9 +12,7 @@ function getTerminal(term, arg) {
     if (!term)
         return noop;
     
-    const result = tryCatch(require, config('terminalPath'));
-    const e = result[0];
-    const terminalModule = result[1];
+    const [e, terminalModule] = tryCatch(require, config('terminalPath'));
     
     if (!e && !arg)
         return terminalModule;

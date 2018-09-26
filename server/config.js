@@ -7,6 +7,8 @@ const DIR = DIR_SERVER + '../';
 const path = require('path');
 const fs = require('fs');
 const Emitter = require('events');
+const {promisify} = require('util');
+const {homedir} = require('os');
 
 const exit = require(DIR_SERVER + 'exit');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
@@ -14,7 +16,6 @@ const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const currify = require('currify');
 const wraptile = require('wraptile');
 const squad = require('squad');
-const promisify = require('es6-promisify').promisify;
 const tryToCatch = require('try-to-catch');
 const pullout = promisify(require('pullout'));
 const ponse = require('ponse');
@@ -23,7 +24,7 @@ const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');
 const criton = require('criton');
-const HOME = require('os').homedir();
+const HOME = homedir();
 
 const manageConfig = squad(traverse, cryptoPass);
 const save = promisify(_save);
@@ -47,14 +48,16 @@ const readjsonSync = (name) => {
 const rootConfig = readjsonSync(ConfigPath);
 const key = (a) => Object.keys(a).pop();
 
-const result = tryCatch(readjsonSync, ConfigHome);
-const error = result[0];
-const configHome = result[1];
+const [error, configHome] = tryCatch(readjsonSync, ConfigHome);
 
 if (error && error.code !== 'ENOENT')
     exit(`cloudcmd --config ${ConfigHome}: ${error.message}`);
 
-const config = Object.assign({}, rootConfig, configHome);
+const config = {
+    ...rootConfig,
+    ...configHome,
+};
+
 const connectionWraped = wraptile(connection);
 
 module.exports          = manage;
@@ -222,9 +225,10 @@ function cryptoPass(json) {
     
     const password = criton(json.password, algo);
     
-    return Object.assign({}, json, {
+    return {
+        ...json,
         password,
-    });
+    };
 }
 
 function check(socket, auth) {

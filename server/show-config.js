@@ -1,7 +1,7 @@
 'use strict';
 
 const t = require('table');
-const table = t.table;
+const {table} = t;
 const getBorderCharacters = t.getBorderCharacters;
 
 module.exports = (config) => {

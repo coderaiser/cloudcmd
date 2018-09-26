@@ -80,9 +80,10 @@ module.exports = (options, fn) => {
     });
     
     const url = `${importUrl}/distribute?${query}`;
-    const socket = io.connect(url, Object.assign({}, {
+    const socket = io.connect(url, {
+        ...options,
         rejectUnauthorized: false,
-    }, options));
+    });
     
     const superFn = wrapApply(fn, socket.close.bind(socket));
     const colorUrl = getColorUrl(importUrl, name);

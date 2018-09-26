@@ -49,8 +49,10 @@ const clean = (a) => a.filter(notEmpty);
 module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
-    const plugins = p.plugins;
-    const modules = p.modules;
+    const {
+        modules,
+        plugins,
+    } = p;
     
     const keys = Object.keys(options);
     

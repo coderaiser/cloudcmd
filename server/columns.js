@@ -22,8 +22,8 @@ const names = fs.readdirSync(columnsDir)
 
 const columns = readFilesSync(columnsDir, names, 'utf8');
 
-module.exports = Object.assign(
-    columns,
-    defaultColumns
-);
+module.exports = {
+    ...columns,
+    ...defaultColumns,
+};
 
