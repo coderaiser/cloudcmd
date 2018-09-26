@@ -44,8 +44,7 @@ const basename = (a) => a.split('/').pop();
 let El, TemplateAudio, Overlay;
 
 const Config = {
-    beforeShow: function(callback) {
-        //this.title = encode(this.title);
+    beforeShow: (callback) => {
         Images.hide();
         Key.unsetBind();
         exec(callback);
