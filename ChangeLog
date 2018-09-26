@@ -1,3 +1,24 @@
+2018.09.26, v11.0.0
+
+feature:
+- (package) babel-eslint v10.0.0
+- (package) deepword v4.0.0
+- (package) edward v8.0.0
+- (package) dword v8.0.0
+- (package) restafary v4.0.0
+- (package) flop v5.0.0
+- (package) @cloudcmd/fileop v2.0.0
+- (package) @cloudcmd/move-files v2.0.1
+- (package) copymitter v4.0.2: add ability to copy symlinks (#191)
+- (config) disable online by default
+- (config) enable open by default
+- (package) set engine to node v8.0.0 LTS
+- (package) package-json v5.0.0
+- (server) drop support of VCAP_APP_PORT
+- (cloudcmd) showUpdateInfo: rm rendy
+- (package) squad v3.0.0
+
+
 2018.09.21, v10.8.2
 
 fix:
