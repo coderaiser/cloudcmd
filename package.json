@@ -126,7 +126,7 @@
     "execon": "^1.2.0",
     "express": "^4.13.0",
     "files-io": "^2.0.0",
-    "flop": "^4.0.0",
+    "flop": "^5.0.0",
     "for-each-key": "^1.0.1",
     "format-io": "^1.0.0",
     "fullstore": "^1.0.0",
