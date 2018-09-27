@@ -13,4 +13,5 @@ rules:
     font-family-name-quotes: always-unless-keyword
     font-family-no-missing-generic-family-keyword: null
     rule-empty-line-before: null
+    max-empty-lines: 2
 
