@@ -1,3 +1,13 @@
+2018.09.27, v11.1.0
+
+feature:
+- (package) redrun v7.0.0
+- (package) @cloudcmd/read-files-sync v2.0.0
+- (cloudcmd) --terminal-command: command to run in terminal (shell by default)
+- (package) gritty v4.0.0
+- (package) console-io v8.0.0
+
+
 2018.09.26, v11.0.0
 
 feature:
