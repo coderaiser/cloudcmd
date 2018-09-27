@@ -28,8 +28,6 @@ const HOME = homedir();
 
 const manageConfig = squad(traverse, cryptoPass);
 const save = promisify(_save);
-const noArgs = (fn) => () => fn();
-const saveData = noArgs(save);
 
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
@@ -199,7 +197,7 @@ async function patchConfig({name, request, response, cache}) {
     const json = jonny.parse(str);
     
     manageConfig(json);
-    saveData();
+    await save();
     
     const msg = formatMsg('config', key(json));
     ponse.send(msg, {
