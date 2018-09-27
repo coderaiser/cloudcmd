@@ -95,6 +95,7 @@ Cloud Commander supports command line parameters:
 | `--sync-console-path`         | sync console path
 | `--terminal`                  | enable terminal
 | `--terminal-path`             | set terminal path
+| `--terminal-command`          | set command to run in terminal (shell by default)
 | `--vim`                       | enable vim hot keys
 | `--columns`                   | set visible columns
 | `--export`                    | enable export of config through a server
@@ -120,6 +121,7 @@ Cloud Commander supports command line parameters:
 | `--no-sync-console-path`      | do not sync console path
 | `--no-contact`                | disable contact
 | `--no-terminal`               | disable terminal
+| `--no-terminal-command`       | set default shell to run in terminal
 | `--no-vim`                    | disable vim hot keys
 | `--no-columns`                | set default visible columns
 | `--no-export`                 | disable export config through a server
@@ -397,6 +399,7 @@ Here is description of options:
     "syncConsolePath"   : false     /* do not sync console path                 */
     "terminal"          : false,    /* disable terminal                         */
     "terminalPath"      : '',       /* path of a terminal                       */
+    "terminalCommand"   : '',       /* set command to run in terminal           */
     "vim"               : false,    /* disable vim hot keys                     */
     "columns"           : "name-size-date-owner-mode", /* set visible columns   */
     "export"            : false,    /* enable export of config through a server */

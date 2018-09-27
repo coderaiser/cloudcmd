@@ -34,6 +34,7 @@ const args = require('minimist')(argv.slice(2), {
         'root',
         'prefix',
         'terminal-path',
+        'terminal-command',
         'columns',
         'import-url',
         'import-token',
@@ -95,6 +96,7 @@ const args = require('minimist')(argv.slice(2), {
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'terminal-path': env('terminal_path') || config('terminalPath'),
+        'terminal-command': env('terminal_command') || config('terminalCommand'),
         'one-file-panel': choose(env.bool('one_file_panel'), config('oneFilePanel')),
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
@@ -143,6 +145,7 @@ function main() {
     config('contact', args.contact);
     config('terminal', args.terminal);
     config('terminalPath', args['terminal-path']);
+    config('terminalCommand', args['terminal-command']);
     config('editor', args.editor);
     config('prefix', args.prefix);
     config('root', args.root);

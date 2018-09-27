@@ -149,6 +149,7 @@ function listen(prefix, socket) {
     config('terminal') && terminal().listen(socket, {
         auth,
         prefix: prefix + '/gritty',
+        command: config('terminalCommand'),
     });
     
     distribute.export(socket);

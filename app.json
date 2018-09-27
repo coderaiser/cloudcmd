@@ -52,6 +52,11 @@
           "value": "gritty",
           "required": false
       },
+      "CLOUDCMD_TERMINAL_COMMAND": {
+          "description": "set command to run in terminal (shell by default)",
+          "value": "",
+          "required": false
+      },
       "CLOUDCMD_CONFIG_DIALOG": {
           "description": "show config dialog",
           "value": "false",

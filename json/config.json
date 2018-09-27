@@ -27,6 +27,7 @@
     "syncConsolePath": false,
     "terminal": false,
     "terminalPath": "",
+    "terminalCommand": "",
     "showConfig": false,
     "showFileName": false,
     "vim": false,
