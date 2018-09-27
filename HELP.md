@@ -425,6 +425,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_SYNC_CONSOLE_PATH` - sync console path
 - `CLOUDCMD_TERMINAL` - enable terminal
 - `CLOUDCMD_TERMINAL_PATH` - set terminal path
+- `CLOUDCMD_TERMINAL_COMMAND` - set command to run in terminal (shell by default)
 - `CLOUDCMD_KEYS_PANEL` - show keys panel
 - `CLOUDCMD_ONE_FILE_PANEL` - show one file panel
 - `CLOUDCMD_AUTH` - enable authentication
