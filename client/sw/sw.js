@@ -67,15 +67,6 @@ async function onInstall() {
     console.info(`cloudcmd: sw: install: ${NAME}`);
     
     await self.skipWaiting();
-    
-    const cache = await caches.open(NAME);
-    
-    const urls = [
-        '/favicon.ico',
-    ];
-    
-    const requests = urls.map(createRequest);
-    return cache.addAll(requests);
 }
 
 async function onFetch(event) {
