@@ -1,3 +1,11 @@
+2018.09.28, v11.2.0
+
+feature:
+- (package) inly v3.0.0
+- (package) jaguar v5.0.0
+- (cloudcmd) add --terminal-auto-restart
+
+
 2018.09.27, v11.1.0
 
 feature:
