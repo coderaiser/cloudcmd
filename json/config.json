@@ -28,6 +28,7 @@
     "terminal": false,
     "terminalPath": "",
     "terminalCommand": "",
+    "terminalAutoRestart": true,
     "showConfig": false,
     "showFileName": false,
     "vim": false,

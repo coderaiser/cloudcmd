@@ -150,6 +150,7 @@ function listen(prefix, socket) {
         auth,
         prefix: prefix + '/gritty',
         command: config('terminalCommand'),
+        autoRestart: config('terminalAutoRestart'),
     });
     
     distribute.export(socket);

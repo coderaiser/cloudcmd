@@ -53,6 +53,7 @@ const args = require('minimist')(argv.slice(2), {
         'sync-console-path',
         'contact',
         'terminal',
+        'terminal-auto-restart',
         'one-file-panel',
         'confirm-copy',
         'confirm-move',
@@ -97,6 +98,7 @@ const args = require('minimist')(argv.slice(2), {
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'terminal-path': env('terminal_path') || config('terminalPath'),
         'terminal-command': env('terminal_command') || config('terminalCommand'),
+        'terminal-auto-restart': choose(env.bool('terminal_auto_restart'), config('terminalAutoRestart')),
         'one-file-panel': choose(env.bool('one_file_panel'), config('oneFilePanel')),
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
@@ -146,6 +148,7 @@ function main() {
     config('terminal', args.terminal);
     config('terminalPath', args['terminal-path']);
     config('terminalCommand', args['terminal-command']);
+    config('terminalAutoRestart', args['terminal-auto-restart']);
     config('editor', args.editor);
     config('prefix', args.prefix);
     config('root', args.root);
