@@ -6,7 +6,7 @@ module.exports.unregisterSW = unregisterSW;
 const noop = () => {};
 
 async function registerSW(prefix) {
-    prefix = prefix ? `/${prefix}/` : `/`;
+    prefix = prefix ? `${prefix}/` : `/`;
     
     if (!navigator.serviceWorker)
         return;

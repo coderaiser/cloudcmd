@@ -104,7 +104,7 @@ test('sw: register: registerSW', async (t) => {
     global.location = location;
     global.navigator = navigator;
     
-    t.ok(register.calledWith('/hello/sw.js'), 'should call register');
+    t.ok(register.calledWith('hello/sw.js'), 'should call register');
     t.end();
 });
 

@@ -11,6 +11,7 @@ const wraptile = require('wraptile');
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
 const env = require(DIR_SERVER + 'env');
+const prefixer = require(DIR_SERVER + '/prefixer');
 
 const noop = () => {};
 
@@ -150,7 +151,7 @@ function main() {
     config('terminalCommand', args['terminal-command']);
     config('terminalAutoRestart', args['terminal-auto-restart']);
     config('editor', args.editor);
-    config('prefix', args.prefix);
+    config('prefix', prefixer(args.prefix));
     config('root', args.root);
     config('vim', args.vim);
     config('columns', args.columns);

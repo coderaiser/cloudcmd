@@ -5,21 +5,17 @@ const cloudcmd = require(DIR_SERVER + 'cloudcmd');
 
 const exit = require(DIR_SERVER + 'exit');
 const config = require(DIR_SERVER + 'config');
-const prefixer = require(DIR_SERVER + 'prefixer');
 
 const http = require('http');
 const opn = require('opn');
 const express = require('express');
 const io = require('socket.io');
-const squad = require('squad');
-const apart = require('apart');
 
 const tryRequire = require('tryrequire');
 const logger = tryRequire('morgan');
 
-const prefix = squad(prefixer, apart(config, 'prefix'));
-
 module.exports = (options) => {
+    const prefix = config('prefix');
     const port = process.env.PORT            ||  /* c9           */
                  config('port');
     
@@ -36,7 +32,7 @@ module.exports = (options) => {
     app.use(cloudcmd({
         config: options,
         socket: io(server, {
-            path: prefix() + '/socket.io'
+            path: `${prefix}/socket.io`,
         }),
     }));
     
@@ -46,7 +42,7 @@ module.exports = (options) => {
     server.listen(port, ip, () => {
         const host = config('ip') || 'localhost';
         const port0 = port || server.address().port;
-        const url = `http://${host}:${port0}${prefix()}/`;
+        const url = `http://${host}:${port0}${prefix}/`;
         
         console.log('url:', url);
         
