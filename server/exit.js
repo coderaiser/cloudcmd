@@ -1,7 +1,7 @@
 'use strict';
 
-module.exports = function() {
-    console.error.apply(console, arguments);
+module.exports = (...args) => {
+    console.error(...args);
     process.exit(1);
 };
 
