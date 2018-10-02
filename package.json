@@ -113,7 +113,7 @@
     "@cloudcmd/fileop": "^2.0.0",
     "@cloudcmd/move-files": "^2.0.1",
     "@cloudcmd/read-files-sync": "^2.0.0",
-    "apart": "^1.0.1",
+    "apart": "^2.0.0",
     "chalk": "^2.0.1",
     "console-io": "^8.0.0",
     "copymitter": "^4.0.2",
