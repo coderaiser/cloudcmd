@@ -21,7 +21,6 @@ const distribute = require(DIR + 'distribute');
 
 const currify = require('currify');
 const apart = require('apart');
-const join = require('join-io');
 const ponse = require('ponse');
 const restafary = require('restafary');
 const konsole = require('console-io');
@@ -220,10 +219,6 @@ function cloudcmd(prefix, plugins, modules) {
         rest,
         route({
             html: defaultHtml
-        }),
-        
-        join({
-            dir,
         }),
         
         pluginer(plugins),

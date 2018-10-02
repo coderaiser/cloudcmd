@@ -16,7 +16,6 @@ const {
     unregisterSW,
 } = require('./sw/register');
 
-const join = require('join-io/www/join');
 const jonny = require('jonny/legacy');
 const currify = require('currify/legacy');
 
@@ -178,19 +177,6 @@ function CloudCmdProto(DOM) {
         
         load.js(plugins, callback);
     }
-    
-    this.join = (urls) => {
-        const prefix  = CloudCmd.PREFIX;
-        
-        if (!Array.isArray(urls))
-            throw Error('urls should be array!');
-        
-        const noPrefixUrls = urls.map((url) => {
-            return url.replace(prefix, '');
-        });
-        
-        return prefix + join(noPrefixUrls);
-    };
     
     this.route = (path) => {
         const query = path.split('/');
