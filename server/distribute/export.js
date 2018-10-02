@@ -45,7 +45,11 @@ module.exports = (socket) => {
     const prefix = config('prefix');
     const distributePrefix = `${prefix}/distribute`;
     
-    const onError = squad(logWraped(exportStr), getMessage);
+    const onError = squad(
+        logWraped(exportStr),
+        getMessage,
+    );
+    
     const onConnectError = squad(logWraped(exportStr), getDescription);
     
     socket.of(distributePrefix)
