@@ -3,10 +3,23 @@
 const DIR_SERVER = './';
 const cloudcmd = require(DIR_SERVER + 'cloudcmd');
 
-const exit = require(DIR_SERVER + 'exit');
+const http = require('http');
+const {promisify} = require('util');
+const currify = require('currify');
+const squad = require('squad');
+
 const config = require(DIR_SERVER + 'config');
 
-const http = require('http');
+const two = currify((f, a, b) => f(a, b));
+const exit = require(DIR_SERVER + 'exit');
+
+const exitPort = two(exit, 'cloudcmd --port: %s');
+const bind = (f, self) => f.bind(self);
+const promisifySelf = squad(promisify, bind);
+
+const getError = (e) => e.message;
+const superExit = squad(exitPort, getError);
+
 const opn = require('opn');
 const express = require('express');
 const io = require('socket.io');
@@ -14,7 +27,7 @@ const io = require('socket.io');
 const tryRequire = require('tryrequire');
 const logger = tryRequire('morgan');
 
-module.exports = (options) => {
+module.exports = async (options) => {
     const prefix = config('prefix');
     const port = process.env.PORT            ||  /* c9           */
                  config('port');
@@ -37,23 +50,21 @@ module.exports = (options) => {
     }));
     
     if (port < 0 || port > 65535)
-        exit('cloudcmd --port: %s', 'port number could be 1..65535, 0 means any available port');
+        return exitPort('port number could be 1..65535, 0 means any available port');
     
-    server.listen(port, ip, () => {
-        const host = config('ip') || 'localhost';
-        const port0 = port || server.address().port;
-        const url = `http://${host}:${port0}${prefix}/`;
-        
-        console.log('url:', url);
-        
-        if (!config('open'))
-            return;
-        
-        opn(url);
-    });
+    const listen = promisifySelf(server.listen, server);
     
-    server.on('error', error => {
-        exit('cloudcmd --port: %s', error.message);
-    });
+    server.on('error', superExit);
+    await listen(port, ip);
+    
+    const host = config('ip') || 'localhost';
+    const port0 = port || server.address().port;
+    const url = `http://${host}:${port0}${prefix}/`;
+    console.log('url:', url);
+    
+    if (!config('open'))
+        return;
+    
+    opn(url);
 };
 
