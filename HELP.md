@@ -451,7 +451,7 @@ Some config options can be overridden with `environment variables` such:
 
 Being able to configure `Cloud Commander` remotely opens the doors to using it as microservice and that's what distribute options set out to do.
 There is an `export server` and `import client` and they enabled with `--export` and `--import` accordingly. There is a `token` it should be the same
-in `--import-token` and `--export-token`. To use report you should provide `--import-url` to `import client` so it can connect to an `export server`.
+in `--import-token` and `--export-token`. To use `import` you should provide `--import-url` to `import client` so it can connect to an `export server`.
 There is 2 ways `import client` can receive config from an `export server`:
 
 - full config at startup (default)
