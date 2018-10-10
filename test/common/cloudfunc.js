@@ -15,16 +15,11 @@ const CloudFuncPath = COMMONDIR + 'cloudfunc';
 
 const CloudFunc = require(CloudFuncPath);
 
-const readFilesSync = require('@cloudcmd/read-files-sync');
-
 const test = require('tape');
-const clean = require('clear-module');
-const fresh = (name) => {
-    clean(name);
-    return require(name);
-};
+const {reRequire} = require('mock-require');
 
 const htmlLooksLike = require('html-looks-like');
+const readFilesSync = require('@cloudcmd/read-files-sync');
 
 const FS_DIR = TMPLDIR   + 'fs/';
 const EXPECT_PATH = __dirname + '/cloudfunc.html';
@@ -139,7 +134,7 @@ test('cloudfunc: formatMsg', (t) => {
 });
 
 test('cloudfunc: getTitle', (t) => {
-    const CloudFunc = fresh(CloudFuncPath);
+    const CloudFunc = reRequire(CloudFuncPath);
     
     const result = CloudFunc.getTitle();
     
@@ -148,7 +143,7 @@ test('cloudfunc: getTitle', (t) => {
 });
 
 test('cloudfunc: getTitle: no name', (t) => {
-    const CloudFunc = fresh(CloudFuncPath);
+    const CloudFunc = reRequire(CloudFuncPath);
     const path = '/hello/world';
     
     const result = CloudFunc.getTitle({
@@ -160,7 +155,7 @@ test('cloudfunc: getTitle: no name', (t) => {
 });
 
 test('cloudfunc: getTitle: name, path', (t) => {
-    const CloudFunc = fresh(CloudFuncPath);
+    const CloudFunc = reRequire(CloudFuncPath);
     const name = 'hello';
     const path = '/hello/world';
     
