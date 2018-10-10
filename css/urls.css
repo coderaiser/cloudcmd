@@ -37,7 +37,15 @@
     background-image: url(../img/dir.png);
 }
 
-.text-file {
+.directory-link {
+    background-image: url(../img/dir.png);
+}
+
+.file {
+    background-image: url(../img/txt.png);
+}
+
+.file-link {
     background-image: url(../img/txt.png);
 }
 

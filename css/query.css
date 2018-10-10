@@ -107,12 +107,12 @@
         color: white;
     }
     
-    .text-file::before {
+    .file::before, .file-link::before {
         color: rgba(26, 224, 124, 0.56);
         content: '\e80d';
     }
     
-    .current-file .text-file::before {
+    .current-file .file::before, .file-link::before {
         color: white;
     }
     
@@ -133,11 +133,11 @@
         display: inline-block;
     }
     
-    .directory::before {
+    .directory::before, .directory-link::before {
         content: '\e807';
     }
     
-    .text-file {
+    .file, .file-link {
         background-image: none;
     }
     

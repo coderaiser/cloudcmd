@@ -41,16 +41,18 @@ const JSON_FILES = {
     path  : '/etc/X11/',
     files : [{
         name: 'applnk',
-        size: 'dir',
+        size: '4.0.0kb',
         date: '21.02.2016',
         uid : 0,
-        mode: 'rwx r-x r-x'
+        mode: 'rwx r-x r-x',
+        type: 'directory',
     }, {
         name: 'ай',
         size: '1.30kb',
         date: 0,
         uid : 0,
-        mode: 'rwx r-x r-x'
+        mode: 'rwx r-x r-x',
+        type: 'file',
     }]
 };
 

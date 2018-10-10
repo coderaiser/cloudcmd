@@ -188,8 +188,8 @@ module.exports.buildFromJSON = (params) => {
         const name = encode(file.name);
         const link = prefix + FS + path + name;
         
-        const type = getType(file.size);
-        const size = getSize(file.size);
+        const {type} = file;
+        const size = getSize(file);
         
         const date = file.date || '--.--.----';
         const owner = file.owner || 'root';
@@ -199,7 +199,7 @@ module.exports.buildFromJSON = (params) => {
             link,
             title: name,
             name,
-            attribute: getAttribute(file.size)
+            attribute: getAttribute(file.type)
         });
         
         const dataName = getDataName(file.name);
@@ -223,22 +223,20 @@ module.exports.buildFromJSON = (params) => {
     return fileTable;
 };
 
-function getType(size) {
-    if (size === 'dir')
-        return 'directory';
-    
-    return 'text-file';
-}
-
-function getAttribute(size) {
-    if (size === 'dir')
+function getAttribute(type) {
+    if (type === 'directory')
         return '';
     
     return 'target="_blank" ';
 }
 
-function getSize(size) {
-    if (size === 'dir')
+function getSize(file) {
+    const {
+        size,
+        type,
+    } = file;
+    
+    if (type === 'directory')
         return '&lt;dir&gt;';
     
     return size;
