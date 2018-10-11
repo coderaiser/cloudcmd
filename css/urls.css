@@ -34,19 +34,19 @@
 }
 
 .directory {
-    background-image: url(../img/dir.png);
+    background-image: url(../img/directory.svg);
 }
 
 .directory-link {
-    background-image: url(../img/dir.png);
+    background-image: url(../img/directory-link.svg);
 }
 
 .file {
-    background-image: url(../img/txt.png);
+    background-image: url(../img/file.svg);
 }
 
 .file-link {
-    background-image: url(../img/txt.png);
+    background-image: url(../img/file-link.svg);
 }
 
 .loading-svg {

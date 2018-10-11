@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="13px" viewBox="0 0 16 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>folder icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#E3C463" offset="0%"></stop>
+            <stop stop-color="#F4D757" offset="57.1244673%"></stop>
+            <stop stop-color="#D98B33" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="folder-icon" fill-rule="nonzero">
+            <path d="M8,0 L8,1.18181818 L16,1.18181818 L16,13 L0,13 L0,0 L8,0 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <path d="M13.7142857,7.09090909 L13.7142857,5.90909091 L8,5.90909091 L8,7.09090909 L2.28571429,7.09090909 L2.28571429,11.8181818 L1.14285714,11.8181818 L1.14285714,1.18181818 L8,1.18181818 L8,2.36363636 L14.8571429,2.36363636 L14.8571429,11.8181818 L13.7142857,11.8181818 L13.7142857,7.09090909 Z M6.85714286,3.54545455 L6.85714286,2.36363636 L2.28571429,2.36363636 L2.28571429,5.90909091 L6.85714286,5.90909091 L6.85714286,4.72727273 L13.7142857,4.72727273 L13.7142857,3.54545455 L6.85714286,3.54545455 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

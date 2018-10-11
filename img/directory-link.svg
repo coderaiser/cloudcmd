@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="14px" viewBox="0 0 16 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>folder alias icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#E3C463" offset="0%"></stop>
+            <stop stop-color="#F4D757" offset="57.1244673%"></stop>
+            <stop stop-color="#D98B33" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="folder-alias-icon" fill-rule="nonzero">
+            <g id="Group-2">
+                <g transform="translate(0.941176, 0.000000)">
+                    <path d="M7.52941176,0 L7.52941176,1.10795455 L15.0588235,1.10795455 L15.0588235,12.1875 L0,12.1875 L0,0 L7.52941176,0 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+                    <path d="M12.907563,6.64772727 L12.907563,5.53977273 L7.52941176,5.53977273 L7.52941176,6.64772727 L2.1512605,6.64772727 L2.1512605,11.0795455 L1.07563025,11.0795455 L1.07563025,1.10795455 L7.52941176,1.10795455 L7.52941176,2.21590909 L13.9831933,2.21590909 L13.9831933,11.0795455 L12.907563,11.0795455 L12.907563,6.64772727 Z M6.45378151,3.32386364 L6.45378151,2.21590909 L2.1512605,2.21590909 L2.1512605,5.53977273 L6.45378151,5.53977273 L6.45378151,4.43181818 L12.907563,4.43181818 L12.907563,3.32386364 L6.45378151,3.32386364 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                </g>
+            </g>
+            <g id="Group-3-Copy" transform="translate(0.000000, 6.000000)">
+                <path d="M0.470113118,0.253252262 L4.51392619,0.253252262 L4.51392619,4.76486496 L3.07104492,3.18776513 C1.84451633,3.79088306 1.04951173,5.37217195 0.686031131,7.93163179 C0.686031131,7.93163179 -0.491119385,4.46548006 1.8417867,1.79376414 C1.8417867,1.79376414 1.38456217,1.28026018 0.470113118,0.253252262 Z" id="Path-Copy" fill="#FFFFFF"></path>
+                <path d="M1.24939177,0.65158371 L4.1592047,0.65158371 L4.1592047,3.9090648 L3.11026213,2.73846905 C1.72032087,3.51886622 0.907989562,4.99914716 0.673268218,7.1793119 C0.673268218,7.1793119 0.00487293883,3.9154478 2.31239786,1.82174199" id="Path" fill="#444444"></path>
+            </g>
+        </g>
+    </g>
+</svg>

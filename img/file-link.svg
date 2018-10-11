@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>file alias icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="78.8846593%" y1="17.2462158%" x2="31.1078338%" y2="58.005127%" id="linearGradient-1">
+            <stop stop-color="#EAEAEA" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="file-alias-icon" fill-rule="nonzero">
+            <g>
+                <g id="Group" transform="translate(0.933333, 0.000000)">
+                    <path d="M9.55614486,0 L13.0666667,3.70719205 L13.0666667,15.0588235 L0,15.0588235 L0,0 L9.55614486,0 Z" id="Combined-Shape" fill="#D8D8D8"></path>
+                    <path d="M9.08444444,0.941176471 L12.1333333,4.23529412 L12.1333333,14.1176471 L0.933333333,14.1176471 L0.933333333,0.941176471 L9.08444444,0.941176471 Z" id="Combined-Shape-Copy" fill="#FFFFFF"></path>
+                    <path d="M11.4333333,4.47058824 L11.4333333,13.4117647 L1.63333333,13.4117647 L1.63333333,1.64705882 L8.84871795,1.64705882 L8.86666667,1.66666667 L8.86666667,4.47058824 L11.4333333,4.47058824 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+                </g>
+                <g id="Group-3" transform="translate(0.000000, 8.000000)">
+                    <path d="M0.470113118,0.253252262 L4.51392619,0.253252262 L4.51392619,4.76486496 L3.07104492,3.18776513 C1.84451633,3.79088306 1.04951173,5.37217195 0.686031131,7.93163179 C0.686031131,7.93163179 -0.491119385,4.46548006 1.8417867,1.79376414 C1.8417867,1.79376414 1.38456217,1.28026018 0.470113118,0.253252262 Z" id="Path-Copy" fill="#FFFFFF"></path>
+                    <path d="M1.24939177,0.65158371 L4.1592047,0.65158371 L4.1592047,3.9090648 L3.11026213,2.73846905 C1.72032087,3.51886622 0.907989562,4.99914716 0.673268218,7.1793119 C0.673268218,7.1793119 0.00487293883,3.9154478 2.31239786,1.82174199" id="Path" fill="#444444"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

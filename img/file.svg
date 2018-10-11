@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>file icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="82.2219122%" y1="16.4414062%" x2="35.8189174%" y2="72.1035156%" id="linearGradient-1">
+            <stop stop-color="#EAEAEA" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="file-icon" fill-rule="nonzero">
+            <path d="M10.2387266,4.4408921e-16 L14,3.93889155 L14,16 L0,16 L0,0 L10.2387266,0 Z" id="Combined-Shape" fill="#D8D8D8"></path>
+            <path d="M9.73333333,1 L13,4.5 L13,15 L1,15 L1,1 L9.73333333,1 Z" id="Combined-Shape-Copy" fill="#FFFFFF"></path>
+            <path d="M12.25,4.75 L12.25,14.25 L1.75,14.25 L1.75,1.75 L9.48076923,1.75 L9.5,1.77083333 L9.5,4.75 L12.25,4.75 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+        </g>
+    </g>
+</svg>
