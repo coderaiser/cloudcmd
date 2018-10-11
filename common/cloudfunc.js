@@ -230,6 +230,7 @@ function getAttribute(type) {
     return 'target="_blank" ';
 }
 
+module.exports._getSize = getSize;
 function getSize(file) {
     const {
         size,
@@ -238,6 +239,9 @@ function getSize(file) {
     
     if (type === 'directory')
         return '&lt;dir&gt;';
+    
+    if (/link/.test(type))
+        return '&lt;link&gt;';
     
     return size;
 }

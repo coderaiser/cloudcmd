@@ -1,5 +1,7 @@
 'use strict';
 
+const currify = require('currify/legacy');
+
 const DOM = module.exports;
 
 /**
@@ -8,18 +10,22 @@ const DOM = module.exports;
  * @param element
  * @param className
  */
-module.exports.isContainClass = (element, className) => {
+const isContainClass = (element, className) => {
     if (!element)
         throw Error('element could not be empty!');
     
     if (!className)
         throw Error('className could not be empty!');
     
-    const classList = element.classList;
-    const ret = classList.contains(className);
+    if (Array.isArray(className))
+        return className.some(currify(isContainClass, element));
     
-    return ret;
+    const classList = element.classList;
+    
+    return classList.contains(className);
 };
+
+module.exports.isContainClass = isContainClass;
 
 /**
  * Function search element by tag

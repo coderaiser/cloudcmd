@@ -497,9 +497,11 @@ function CmdProto() {
     this.isCurrentIsDir = (currentFile) => {
         const current = currentFile || DOM.getCurrentFile();
         const fileType = DOM.getByDataName('js-type', current);
-        const ret = DOM.isContainClass(fileType, 'directory');
         
-        return ret;
+        return DOM.isContainClass(fileType, [
+            'directory',
+            'directory-link',
+        ]);
     };
     
     /**
