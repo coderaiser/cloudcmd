@@ -1,3 +1,15 @@
+2018.10.11, v11.3.0
+
+feature:
+- (img) add file-link, directory-link
+- (cloudcmd) show size as <link> for links
+- (cloudcmd) readify: add support of links
+- (package) nomine v3.0.0
+- (package) restafary v5.0.0
+- (package) flop v6.0.0
+- (package) currify v3.0.0
+
+
 2018.10.04, v11.2.3
 
 feature:
