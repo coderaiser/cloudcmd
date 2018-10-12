@@ -7,6 +7,7 @@ const http = require('http');
 const {promisify} = require('util');
 const currify = require('currify');
 const squad = require('squad');
+const tryToCatch = require('try-to-catch');
 
 const config = require(DIR_SERVER + 'config');
 
@@ -62,6 +63,9 @@ module.exports = async (options) => {
     if (!config('open'))
         return;
     
-    opn(url);
+    const [openError] = await tryToCatch(opn, url);
+    
+    if (openError)
+        exit('cloudcmd --open:', openError);
 };
 

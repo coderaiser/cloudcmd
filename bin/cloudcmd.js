@@ -217,8 +217,11 @@ function version() {
 function start(config) {
     const SERVER = DIR_SERVER + 'server';
     
-    if (args.server)
-        require(SERVER)(config);
+    if (!args.server)
+        return;
+    
+    const server = require(SERVER);
+    server(config);
 }
 
 function port(arg) {
