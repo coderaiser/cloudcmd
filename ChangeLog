@@ -1,3 +1,13 @@
+2018.10.12, v11.3.1
+
+fix:
+- (server) crash on open error (#196)
+
+feature:
+- (cloudcmd) add unhandledRejection listener
+- (exit) add ability to receive error as argument
+
+
 2018.10.11, v11.3.0
 
 feature:
