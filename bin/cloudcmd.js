@@ -76,7 +76,7 @@ const args = require('minimist')(argv.slice(2), {
         auth        : choose(env.bool('auth'), config('auth')),
         port        : config('port'),
         online      : config('online'),
-        open        : config('open'),
+        open        : choose(env.bool('open'), config('open')),
         editor      : env('editor') || config('editor'),
         packer      : config('packer') || 'tar',
         zip         : config('zip'),

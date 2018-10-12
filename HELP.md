@@ -420,6 +420,7 @@ Here is description of options:
 Some config options can be overridden with `environment variables` such:
 
 - `CLOUDCMD_NAME` - set tab name in web browser
+- `CLOUDCMD_OPEN` - open web browser when server started
 - `CLOUDCMD_EDITOR` - set editor
 - `CLOUDCMD_COLUMNS` - set visible columns 
 - `CLOUDCMD_CONTACT` - enable contact

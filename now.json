@@ -11,7 +11,8 @@
         "cloudcmd_import_url": "https://cloudcmd.herokuapp.com",
         "cloudcmd_export": "true",
         "cloudcmd_export_token": "hello",
-        "cloudcmd_name": "Cloud Commander - Now"
+        "cloudcmd_name": "Cloud Commander - Now",
+        "cloudcmd_open": "false"
     },
     "engines": {
         "node": "8"

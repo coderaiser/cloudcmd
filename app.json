@@ -107,6 +107,11 @@
           "value": "name-size-date-owner-mode",
           "required": false
       },
+      "CLOUDCMD_OPEN": {
+          "description": "open web browser when server started",
+          "value": "false",
+          "required": false
+      },
       "CLOUDCMD_CONFIRM_COPY": {
           "description": "confirm copy",
           "value": "true",
