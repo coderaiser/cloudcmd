@@ -1,3 +1,9 @@
+2018.10.12, v11.4.0
+
+feature:
+- (cloudcmd) add env variable CLOUDCMD_OPEN
+
+
 2018.10.12, v11.3.1
 
 fix:
