@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const exit = require('../../server/exit');
+const exit = require('./exit');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
@@ -19,7 +19,7 @@ test('cloudcmd: exit: process.exit', (t) => {
 test('cloudcmd: exit: console.error', (t) => {
     const {exit:exitOriginal} = process;
     const {error} = console;
-
+    
     console.error = sinon.stub();
     process.exit = sinon.stub();
     
@@ -31,3 +31,4 @@ test('cloudcmd: exit: console.error', (t) => {
     
     t.end();
 });
+
