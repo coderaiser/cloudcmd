@@ -22,6 +22,8 @@ const choose = (a, b) => {
     return a;
 };
 
+process.on('unhandledRejection', exit);
+
 const argv = process.argv;
 const args = require('minimist')(argv.slice(2), {
     string: [
