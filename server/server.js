@@ -17,9 +17,6 @@ const exitPort = two(exit, 'cloudcmd --port: %s');
 const bind = (f, self) => f.bind(self);
 const promisifySelf = squad(promisify, bind);
 
-const getError = (e) => e.message;
-const superExit = squad(exitPort, getError);
-
 const opn = require('opn');
 const express = require('express');
 const io = require('socket.io');
@@ -54,7 +51,7 @@ module.exports = async (options) => {
     
     const listen = promisifySelf(server.listen, server);
     
-    server.on('error', superExit);
+    server.on('error', exitPort);
     await listen(port, ip);
     
     const host = config('ip') || 'localhost';

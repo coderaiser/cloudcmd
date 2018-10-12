@@ -32,3 +32,19 @@ test('cloudcmd: exit: console.error', (t) => {
     t.end();
 });
 
+test('cloudcmd: exit.error: console.error: error', (t) => {
+    const {exit:exitOriginal} = process;
+    const {error} = console;
+    
+    console.error = sinon.stub();
+    process.exit = sinon.stub();
+    
+    exit(Error('hello world'));
+    t.ok(console.error.calledWith('hello world'), 'should call console.error');
+    
+    process.exit = exitOriginal;
+    console.error = error;
+    
+    t.end();
+});
+
