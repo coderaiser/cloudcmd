@@ -1,3 +1,12 @@
+2018.10.16, v11.4.1
+
+fix:
+- (Docker) cloudcmd_open false (#197)
+
+feature:
+- (package) sinon v7.0.0
+
+
 2018.10.12, v11.4.0
 
 feature:
