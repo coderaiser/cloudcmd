@@ -17,6 +17,7 @@ WORKDIR /root
 
 ENV cloudcmd_terminal true
 ENV cloudcmd_terminal_path gritty
+ENV cloudcmd_open false
 
 EXPOSE 8000
 
