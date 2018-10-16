@@ -1,3 +1,9 @@
+2018.10.16, v11.5.0
+
+feature:
+- (config) add ability to remove auth change from config with help of --config-auth flag
+
+
 2018.10.16, v11.4.1
 
 fix:
