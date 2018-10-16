@@ -26,7 +26,10 @@ module.exports.getName = (element) => {
 };
 
 module.exports.convert = (config) => {
-    const result = Object.assign({}, config);
+    const result = {
+        ...config
+    };
+    
     const array = Object.keys(result);
     
     array
