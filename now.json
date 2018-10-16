@@ -2,7 +2,8 @@
     "type": "npm",
     "alias": "cloudcmd",
     "env": {
-        "cloudcmd_config_dialog": "false",
+        "cloudcmd_config_dialog": "true",
+        "cloudcmd_config_auth": "false",
         "cloudcmd_terminal": "true",
         "cloudcmd_terminal_path": "gritty",
         "cloudcmd_import": "true",

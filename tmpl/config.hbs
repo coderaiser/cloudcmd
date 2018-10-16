@@ -1,11 +1,11 @@
 <ul class="list">
-    <li>
+    <li {{ configAuth }}>
         <label>
             <input data-name="js-auth" type="checkbox" {{ auth }} >
             Auth
         </label>
     </li>
-    <li>
+    <li {{ configAuth }}>
         <input
             data-name="js-username"
             type="text"
@@ -15,7 +15,7 @@
             title="Username"
             autocomplete="username">
     </li>
-    <li>
+    <li {{ configAuth }}>
         <input
             data-name="js-password"
             type="password"

@@ -91,6 +91,7 @@ Cloud Commander supports command line parameters:
 | `--keys-panel`                | show keys panel
 | `--contact`                   | enable contact
 | `--config-dialog`             | enable config dialog
+| `--config-auth`               | enable auth change in config dialog
 | `--console`                   | enable console
 | `--sync-console-path`         | sync console path
 | `--terminal`                  | enable terminal
@@ -118,6 +119,7 @@ Cloud Commander supports command line parameters:
 | `--no-confirm-copy`           | do not confirm copy
 | `--no-confirm-move`           | do not confirm move
 | `--no-config-dialog`          | disable config dialog
+| `--no-config-auth`            | disable auth change in config dialog
 | `--no-console`                | disable console
 | `--no-sync-console-path`      | do not sync console path
 | `--no-contact`                | disable contact
@@ -397,6 +399,7 @@ Here is description of options:
     "showFileName"          : false     /* do not show file name in view and edit   */
     "contact"               : true,     /* enable contact                           */
     "configDialog"          : true,     /* enable config dialog                     */
+    "configAuth"            : true,     /* enable auth change in config dialog      */
     "console"               : true,     /* enable console                           */
     "syncConsolePath"       : false     /* do not sync console path                 */
     "terminal"              : false,    /* disable terminal                         */
@@ -425,6 +428,7 @@ Some config options can be overridden with `environment variables` such:
 - `CLOUDCMD_COLUMNS` - set visible columns 
 - `CLOUDCMD_CONTACT` - enable contact
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
+- `CLOUDCMD_CONFIG_AUTH` - enable auth change in config dialog
 - `CLOUDCMD_CONSOLE` - enable console
 - `CLOUDCMD_SYNC_CONSOLE_PATH` - sync console path
 - `CLOUDCMD_TERMINAL` - enable terminal

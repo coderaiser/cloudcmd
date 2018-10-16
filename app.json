@@ -32,6 +32,11 @@
           "value": "false",
           "required": false
       },
+      "CLOUDCMD_CONFIG_AUTH": {
+          "description": "disable auth change in config dialog",
+          "value": "false",
+          "required": false
+      },
       "CLOUDCMD_CONSOLE": {
           "description": "enable console",
           "value": "true",

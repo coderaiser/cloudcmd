@@ -137,16 +137,18 @@ function fillTemplate(error, template) {
         if (error)
             return alert('Could not load config!');
         
-        const obj = input.convert(config);
+        const {
+            editor,
+            packer,
+            columns,
+            configAuth,
+            ...obj
+        } = input.convert(config);
         
-        obj[obj.editor + '-selected'] = 'selected';
-        delete obj.editor;
-        
-        obj[obj.packer + '-selected'] = 'selected';
-        delete obj.packer;
-        
-        obj[obj.columns + '-selected'] = 'selected';
-        delete obj.columns;
+        obj[editor + '-selected'] = 'selected';
+        obj[packer + '-selected'] = 'selected';
+        obj[columns + '-selected'] = 'selected';
+        obj.configAuth = configAuth ? '' : 'hidden';
         
         const innerHTML = rendy(Template, obj);
         

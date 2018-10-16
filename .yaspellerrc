@@ -26,6 +26,7 @@
         "Termux",
         "Zalitok",
         "WebSocket",
+        "auth",
         "cd",
         "cloudcmd",
         "coderaiser",

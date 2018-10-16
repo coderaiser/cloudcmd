@@ -52,6 +52,7 @@ const args = require('minimist')(argv.slice(2), {
         'open',
         'progress',
         'config-dialog',
+        'config-auth',
         'console',
         'sync-console-path',
         'contact',
@@ -99,6 +100,7 @@ const args = require('minimist')(argv.slice(2), {
         'show-file-name': choose(env.bool('show_file_name'), config('showFileName')),
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
+        'config-auth': choose(env.bool('config_auth'), config('configAuth')),
         'terminal-path': env('terminal_path') || config('terminalPath'),
         'terminal-command': env('terminal_command') || config('terminalCommand'),
         'terminal-auto-restart': choose(env.bool('terminal_auto_restart'), config('terminalAutoRestart')),
@@ -162,6 +164,7 @@ function main() {
     config('confirmMove', args['confirm-move']);
     config('oneFilePanel', args['one-file-panel']);
     config('configDialog', args['config-dialog']);
+    config('configAuth', args['config-auth']);
     config('keysPanel', args['keys-panel']);
     config('export', args.export);
     config('exportToken', args['export-token']);
