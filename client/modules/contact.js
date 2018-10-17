@@ -9,7 +9,7 @@ CloudCmd.Contact = exports;
 const {promisify} = require('es6-promisify');
 
 const Images = require('../dom/images');
-const loadJS = require('../dom/load').js;
+const loadJS = promisify(require('load.js/legacy').js);
 
 const Events = DOM.Events;
 const Key = CloudCmd.Key;
@@ -34,14 +34,14 @@ module.exports.init = async () => {
     olark('api.box.onShrink', hide);
 };
 
-const load = promisify((callback) => {
+const load = async () => {
     const {PREFIX} = CloudCmd;
     const path = `${PREFIX}/modules/olark/olark.min.js`;
     
     Images.show.load('top');
     
-    return loadJS(path, callback);
-});
+    await loadJS(path);
+};
 
 function show() {
     Key.unsetBind();
