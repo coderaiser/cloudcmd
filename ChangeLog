@@ -1,3 +1,12 @@
+2018.10.17, v11.5.1
+
+fix:
+- (contact) load
+
+feature:
+- (olark) bower -> npm
+
+
 2018.10.16, v11.5.0
 
 feature:
