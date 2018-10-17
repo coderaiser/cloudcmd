@@ -167,6 +167,7 @@
     "@cloudcmd/clipboard": "^1.0.2",
     "@cloudcmd/create-element": "^1.0.0",
     "@cloudcmd/modal": "^1.0.0",
+    "@cloudcmd/olark": "^2.0.1",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",
