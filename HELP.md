@@ -6,8 +6,8 @@
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [HerokuURL]:                https://cloudcmd.herokuapp.com/ "Heroku"
 [NowURL]:                   https://cloudcmd.now.sh/ "Now"
-[HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
-[NOW_LIVE_IMG]:             https://status-io.cloudcmd.io/host/cloudcmd.now.sh/img/txt.png "Now"
+[HEROKU_LIVE_IMG]:          https://status.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
+[NOW_LIVE_IMG]:             https://status.cloudcmd.io/host/cloudcmd.now.sh/img/txt.png "Now"
 
 [DWORD]:                    https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]:                   https://github.com/cloudcmd/edward "Editor based on Ace"
