@@ -4,6 +4,9 @@ const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
 
 const fs = require('fs');
+const {
+    promisify,
+} = require('util');
 
 const flop = require('flop');
 const ponse = require('ponse');
@@ -12,6 +15,7 @@ const format = require('format-io');
 const squad = require('squad');
 const apart = require('apart');
 const currify = require('currify');
+const tryToCatch = require('try-to-catch');
 
 const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
@@ -29,20 +33,30 @@ const sendIndex = (params, data) => {
     ponse.send(data, ponseParams);
 };
 
-const FS = CloudFunc.FS;
+const {FS} = CloudFunc;
 
 const Columns = require('./columns');
 const Template = require('./template');
 
+const read = promisify(flop.read);
+const realpath = promisify(fs.realpath);
+
 /**
  * routing of server queries
  */
-module.exports = currify((options, request, response, callback) => {
-    const html = options.html;
-    
-    let name = ponse.getPathName(request);
-    
+module.exports = currify((options, request, response, next) => {
+    const name = ponse.getPathName(request);
     const isFS = RegExp('^/$|^' + FS).test(name);
+    
+    if (!isFS)
+        return next();
+    
+    route(options, request, response)
+        .catch(next);
+});
+
+async function route(options, request, response) {
+    const name = ponse.getPathName(request);
     const gzip = true;
     const p = {
         request,
@@ -51,33 +65,29 @@ module.exports = currify((options, request, response, callback) => {
         name,
     };
     
-    if (!isFS)
-        return callback();
+    const rootName = name.replace(CloudFunc.FS, '') || '/';
+    const fullPath = root(rootName);
     
-    name = name.replace(CloudFunc.FS, '') || '/';
-    const fullPath = root(name);
+    const [error, dir] = await tryToCatch(read, fullPath);
+    const {html} = options;
     
-    flop.read(fullPath, (error, dir) => {
-        if (dir)
-            dir.path = format.addSlashToEnd(name);
-        
-        if (!error)
-            return sendIndex(p, buildIndex(html, dir));
-        
-        if (error.code !== 'ENOTDIR')
-            return ponse.sendError(error, p);
-        
-        fs.realpath(fullPath, (error, pathReal) => {
-            if (!error)
-                p.name = pathReal;
-            else
-                p.name = name;
-            
-            p.gzip = false;
-            ponse.sendFile(p);
-        });
+    if (!error)
+        return sendIndex(p, buildIndex(html, {
+            ...dir,
+            path: format.addSlashToEnd(rootName),
+        }));
+    
+    if (error.code !== 'ENOTDIR')
+        return ponse.sendError(error, p);
+    
+    const [realPathError, pathReal] = await tryToCatch(realpath, fullPath);
+    
+    ponse.sendFile({
+        ...p,
+        name: realPathError ? name : pathReal,
+        gzip: false
     });
-});
+}
 
 /**
  * additional processing of index file

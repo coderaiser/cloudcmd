@@ -4,17 +4,19 @@ const path = require('path');
 const fs = require('fs');
 
 const test = require('tape');
-const {promisify} = require('es6-promisify');
+const {promisify} = require('util');
 const pullout = require('pullout');
 const request = require('request');
 const mockRequire = require('mock-require');
+const {reRequire} = mockRequire;
 const clear = require('clear-module');
 
 const rootDir = path.join(__dirname, '../..');
+const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 
-const routePath = `${rootDir}/server/route`;
-const cloudcmdPath = `${rootDir}/server/cloudcmd`;
-const beforePath = path.join(__dirname, '../before');
+const routePath = './route';
+const cloudcmdPath = './cloudcmd';
+const beforePath = path.join(__dirname, '../test/before');
 
 const {connect} = require(beforePath);
 
@@ -28,7 +30,7 @@ const get = promisify((url, fn) => {
 const getStr = (url) => {
     return get(url)
         .then(warp(_pullout, 'string'))
-        .catch(console.log);
+        .catch(console.error);
 };
 
 test('cloudcmd: route: buttons: no console', async (t) => {
@@ -158,7 +160,7 @@ test('cloudcmd: route: keys panel', async (t) => {
 });
 
 test('cloudcmd: route: file: fs', async (t) => {
-    const root = path.join(__dirname, '..', 'fixture', 'empty-file');
+    const root = path.join(fixtureDir, 'empty-file');
     const config = {
         root,
     };
@@ -173,8 +175,8 @@ test('cloudcmd: route: file: fs', async (t) => {
 });
 
 test('cloudcmd: route: symlink', async (t) => {
-    const emptyDir = path.join(__dirname, '..', 'fixture', 'empty-dir');
-    const root = path.join(__dirname, '..', 'fixture');
+    const emptyDir = path.join(fixtureDir, 'empty-dir');
+    const root = fixtureDir
     const symlink = path.join(root, 'symlink-dir');
     
     const config = {
@@ -194,7 +196,7 @@ test('cloudcmd: route: symlink', async (t) => {
 });
 
 test('cloudcmd: route: not found', async (t) => {
-    const root = path.join(__dirname, '..', 'fixture');
+    const root = fixtureDir;
     const config = {
         root,
     };
@@ -217,13 +219,18 @@ test('cloudcmd: route: realpath: error', async (t) => {
         fs.realpath = realpath;
     };
     
-    const root = path.join(__dirname, '..', 'fixture');
     const config = {
-        root,
+        root: fixtureDir,
     };
     
+    reRequire('./route');
+    reRequire('./cloudcmd');
+    
+    const {connect} = reRequire(beforePath);
     const {port, done} = await connect({config});
     const data = await getStr(`http://localhost:${port}/fs/empty-file`);
+    
+    fs.realpath = realpath;
     
     t.ok(/^ENOENT/.test(data), 'should return error');
     t.end();
@@ -247,20 +254,16 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
         read
     });
     
-    clear(routePath);
-    clear('../../server/cloudcmd');
-    clear(beforePath);
+    reRequire(routePath);
+    reRequire(cloudcmdPath);
     
-    const {connect} = require(beforePath);
+    const {connect} = reRequire(beforePath);
     const {port, done} = await connect();
     const data = await getStr(`http://localhost:${port}`);
     
     t.ok(data.includes(nameEncoded), 'should encode name');
     
     mockRequire.stop('flop');
-    clear(routePath);
-    clear('../../server/cloudcmd');
-    clear(beforePath);
     
     await done();
     t.end();
@@ -282,7 +285,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     });
     
     clear(routePath);
-    clear('../../server/cloudcmd');
+    clear(cloudcmdPath);
     clear(beforePath);
     
     const {connect} = require(beforePath);
@@ -293,7 +296,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     
     mockRequire.stop('flop');
     clear(routePath);
-    clear('../../server/cloudcmd');
+    clear(cloudcmdPath);
     clear(beforePath);
     
     await done();
