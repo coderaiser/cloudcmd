@@ -3,6 +3,15 @@ node_js:
     - 10
     - 8
 
+matrix:
+    allow_failures:
+        - os: windows
+
+os:
+    - linux
+    - osx
+    - windows
+
 script:
   - npm run lint && npm run build && npm run coverage && npm run report
 
@@ -22,6 +31,7 @@ deploy:
     skip_cleanup: true
     on:
         node: '8'
+        condition: $TRAVIS_OS_NAME = linux
         tags: true
         all_branches: false
 
