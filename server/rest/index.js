@@ -25,18 +25,11 @@ const moveFiles = require('@cloudcmd/move-files');
 
 const swap = wraptile((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
+const {apiURL} = CloudFunc;
 
-/**
- * rest interface
- *
- * @param request
- * @param response
- * @param callback
- */
 module.exports = (request, response, next) => {
     check(request, response, next);
     
-    const apiURL = CloudFunc.apiURL;
     const name = ponse.getPathName(request);
     const regExp = RegExp('^' + apiURL);
     const is = regExp.test(name);
@@ -44,6 +37,11 @@ module.exports = (request, response, next) => {
     if (!is)
         return next();
     
+    rest(request,response);
+};
+
+function rest(request, response) {
+    const name = ponse.getPathName(request);
     const params  = {
         request,
         response,
@@ -72,7 +70,7 @@ module.exports = (request, response, next) => {
         
         ponse.send(data, params);
     });
-};
+}
 
 /**
  * getting data on method and command
@@ -276,7 +274,7 @@ function operation(op, from, to, names, fn) {
     
     pack.on('error', fn);
     
-    const name = names[0];
+    const [name] = names;
     pack.on('progress', (count) => {
         process.stdout.write(`\r${ op } "${ name }": ${ count }%`);
     });
