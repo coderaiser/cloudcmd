@@ -1,8 +1,9 @@
 'use strict';
 
-const t = require('table');
-const {table} = t;
-const getBorderCharacters = t.getBorderCharacters;
+const {
+    table,
+    getBorderCharacters,
+} = require('table');
 
 module.exports = (config) => {
     check(config);
