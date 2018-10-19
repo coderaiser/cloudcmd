@@ -2,63 +2,69 @@
 
 const DIR_ROOT = __dirname + '/../';
 const fs = require('fs');
+const {
+    callbackify,
+    promisify,
+} = require('util');
 
-const pullout = require('pullout');
+const pullout = promisify(require('pullout'));
 const ponse = require('ponse');
 const markdown = require('markdown-it')();
 
+const readFile = promisify(fs.readFile);
+
 const root = require('./root');
 
-module.exports = (name, request, callback) => {
-    check(name, request, callback);
+module.exports = callbackify(async (name, request) => {
+    check(name, request);
     
-    const method = request.method;
-    const query = ponse.getQuery(request);
+    const {method} = request;
     
     switch(method) {
     case 'GET':
-        name = name.replace('/markdown', '');
-        
-        if (query === 'relative')
-            name = DIR_ROOT + name;
-        else
-            name = root(name);
-        
-        fs.readFile(name, 'utf8', (error, data) => {
-            if (error)
-                return callback(error);
-            
-            parse(data, callback);
-        });
-        break;
-        
+        return onGET(request, name);
+    
     case 'PUT':
-        pullout(request, 'string', (error, data) => {
-            if (error)
-                return callback(error);
-            
-            parse(data, callback);
-        });
-        break;
+        return onPUT(request);
     }
-};
+});
 
-function parse(data, callback) {
+function parseName(query, name) {
+    const shortName = name.replace('/markdown', '');
+    
+    if (query === 'relative')
+        return DIR_ROOT + shortName;
+    
+    return root(shortName);
+}
+
+async function onGET(request, name) {
+    const query = ponse.getQuery(request);
+    const fileName = parseName(query, name);
+    const data = await readFile(fileName, 'utf8');
+    
+    return parse(data);
+}
+
+async function onPUT(request) {
+    const data = await pullout(request, 'string');
+    
+    return parse(data);
+}
+
+const parse = promisify((data, callback) => {
     process.nextTick(() => {
         const md = markdown.render(data);
         
         callback(null, md);
     });
-}
+});
 
-function check(name, request, callback) {
+function check(name, request) {
     if (typeof name !== 'string')
         throw Error('name should be string!');
     
     if (!request)
         throw Error('request could not be empty!');
-    
-    if (typeof callback !== 'function')
-        throw Error('callback should be function!');
 }
 
