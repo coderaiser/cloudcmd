@@ -81,7 +81,7 @@ const getDirPath = () => {
         return Info.dirPath;
 };
 
-const create = promisify((callback) => {
+const create = async () => {
     const options = {
         cwd: getDirPath(),
         env: getEnv(),
@@ -93,14 +93,12 @@ const create = promisify((callback) => {
         className: 'console',
     });
     
-    konsole = Console(Element, options, (spawn) => {
-        spawn.on('connect', exec.with(authCheck, spawn));
-        spawn.on('path', config.if('syncConsolePath', onPath));
-        
-        CloudCmd.on('active-dir', config.if('syncConsolePath', cd(spawn.handler)));
-        
-        exec(callback);
-    });
+    konsole = await Console(Element, options);
+    
+    konsole.on('connect', exec.with(authCheck, konsole));
+    konsole.on('path', config.if('syncConsolePath', onPath));
+    
+    CloudCmd.on('active-dir', config.if('syncConsolePath', cd(konsole.handler)));
     
     konsole.addShortCuts({
         'P': () => {
@@ -110,12 +108,12 @@ const create = promisify((callback) => {
             konsole.setPromptText(command + path);
         }
     });
-});
+};
 
-function authCheck(spawn) {
-    spawn.emit('auth', config('username'), config('password'));
+function authCheck(konsole) {
+    konsole.emit('auth', config('username'), config('password'));
     
-    spawn.on('reject', () => {
+    konsole.on('reject', () => {
         Dialog.alert(TITLE, 'Wrong credentials!');
     });
 }
