@@ -1,8 +1,5 @@
 2018.10.19, v11.5.3
 
-fix:
-- feature(npmignore) add fixture
-
 feature:
 - (package) console-io v9.0.0
 - (npmignore) add fixture
