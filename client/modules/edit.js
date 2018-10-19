@@ -3,8 +3,10 @@
 'use strict';
 
 const {promisify} = require('es6-promisify');
+const tryToCatch = require('try-to-catch/legacy');
 const createElement = require('@cloudcmd/create-element');
 const load = require('load.js');
+const loadJS = promisify(load.js);
 
 const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
 const {time, timeEnd} = require('../../common/util');
@@ -54,7 +56,10 @@ function checkFn(name, fn) {
 }
 
 function initConfig(options = {}) {
-    const config = Object.assign({}, options, ConfigView);
+    const config = {
+        ...options,
+        ...ConfigView,
+    };
     
     if (!options.afterShow)
         return config;
@@ -97,28 +102,26 @@ module.exports.hide = () => {
     CloudCmd.View.hide();
 };
 
-const loadFiles = promisify((element, callback) => {
+const loadFiles = async (element) => {
     const socketPath = CloudCmd.PREFIX;
     const prefix = socketPath + '/' + EditorName;
     const url = prefix + '/' + EditorName + '.js';
     
     time(Name + ' load');
     
-    load.js(url, () => {
-        const word = window[EditorName];
-        const options = {
-            maxSize,
-            prefix,
-            socketPath,
-        };
-        
-        word(element, options, (ed) => {
-            timeEnd(Name + ' load');
-            editor  = ed;
-            Loading = false;
-            
-            callback();
-        });
-    });
-});
+    await loadJS(url);
+    
+    const word = promisify(window[EditorName]);
+    const options = {
+        maxSize,
+        prefix,
+        socketPath,
+    };
+    
+    const [ed] = await tryToCatch(word, element, options);
+    
+    timeEnd(Name + ' load');
+    editor = ed;
+    Loading = false;
+};
 
