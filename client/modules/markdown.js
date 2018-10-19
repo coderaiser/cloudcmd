@@ -2,12 +2,20 @@
 
 /* global CloudCmd */
 
+const {promisify} = require('es6-promisify');
+const tryToCatch = require('try-to-catch/legacy');
+
 CloudCmd.Markdown = exports;
+
+const TITLE = 'Cloud Commander';
 
 const createElement = require('@cloudcmd/create-element');
 
 const Images = require('../dom/images');
 const {Markdown} = require('../dom/rest');
+const {alert} = require('../dom/dialog');
+
+const read = promisify(Markdown.read);
 
 module.exports.init = async () => {
     Images.show.load('top');
@@ -20,8 +28,7 @@ module.exports.hide = () => {
     CloudCmd.View.hide();
 };
 
-
-function show(name, options = {}) {
+async function show(name, options = {}) {
     const relativeQuery = '?relative';
     const {
         positionLoad,
@@ -33,16 +40,21 @@ function show(name, options = {}) {
     if (relative)
         name += relativeQuery;
     
-    Markdown.read(name, (error, innerHTML) => {
-        const className = 'help';
-        
-        const div = createElement('div', {
-            className,
-            innerHTML,
+    const [error, innerHTML] = await tryToCatch(read, name);
+    Images.hide();
+    
+    if (error)
+        return alert(TITLE, error.message, {
+            cancel: false,
         });
-        
-        Images.hide();
-        CloudCmd.View.show(div);
+    
+    const className = 'help';
+    
+    const div = createElement('div', {
+        className,
+        innerHTML,
     });
+    
+    CloudCmd.View.show(div);
 }
 
