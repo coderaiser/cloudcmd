@@ -29,6 +29,8 @@ const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 const addEvent = lifo(Events.add);
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
+const loadCSS = promisify(load.css);
+
 module.exports.show = show;
 module.exports.hide = hide;
 
@@ -66,16 +68,8 @@ const Config = {
     },
 };
 
-module.exports.init = promisify((fn) => {
-    Loading = true;
-    
-    exec.series([
-        loadAll,
-        (callback) => {
-            Loading = false;
-            callback();
-        }
-    ], fn);
+module.exports.init = async () => {
+    await loadAll();
     
     const events = [
         'click',
@@ -83,7 +77,7 @@ module.exports.init = promisify((fn) => {
     ];
     
     events.forEach(addEvent(Overlay, onOverlayClick));
-});
+};
 
 function show(data, options) {
     const prefixUrl = CloudCmd.PREFIX_URL + FS;
@@ -302,13 +296,14 @@ function check(src, callback) {
  * function loads css and js of FancyBox
  * @callback   -  executes, when everything loaded
  */
-function loadAll(callback) {
+async function loadAll() {
+    const {PREFIX} = CloudCmd;
+    
     time(Name + ' load');
     
-    const {PREFIX} = CloudCmd;
-    load.css(PREFIX + '/dist/view.css', callback);
-    
-    callback();
+    Loading = true;
+    await loadCSS(PREFIX + '/dist/view.css');
+    Loading = false;
 }
 
 function onOverlayClick(event) {
