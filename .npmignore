@@ -24,3 +24,7 @@ client
 
 webpack.config.js
 
+*.ai
+*.cdr
+*.eps
+
