@@ -5,6 +5,7 @@ manifest.yml
 Dockerfile*
 docker-compose.yml
 test
+fixture
 coverage
 css
 html
