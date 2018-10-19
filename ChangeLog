@@ -1,3 +1,9 @@
+2018.10.19, v11.5.2
+
+fix:
+- (server) open error: exit -> warning (#196, #197, #198)
+
+
 2018.10.17, v11.5.1
 
 fix:
