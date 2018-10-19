@@ -10,7 +10,8 @@ CloudCmd.Konsole = exports;
 const exec = require('execon');
 const {promisify} = require('es6-promisify');
 const currify = require('currify/legacy');
-const loadJS = require('load.js').js;
+const tryToCatch = require('try-to-catch/legacy');
+const loadJS = promisify(require('load.js').js);
 const createElement = require('@cloudcmd/create-element');
 
 const Images = require('../dom/images');
@@ -134,19 +135,19 @@ module.exports.show = (callback) => {
     });
 };
 
-const load = promisify((callback) => {
+const load = async () => {
+    Util.time(Name + ' load');
+    
     const prefix = getPrefix();
     const url = prefix + '/console.js';
+    const [error] = await tryToCatch(loadJS, url);
     
-    loadJS(url, (error) => {
-        if (error)
-            return Dialog.alert(TITLE, error.message);
-        
-        Loaded = true;
-        Util.timeEnd(Name + ' load');
-        exec(callback);
-    });
+    Loaded = true;
+    Util.timeEnd(Name + ' load');
     
-    Util.time(Name + ' load');
-});
+    if (error)
+        return Dialog.alert(TITLE, error.message, {
+            cancel: false
+        });
+};
 
