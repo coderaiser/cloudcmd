@@ -65,6 +65,8 @@ async function route(options, request, response) {
         name,
     };
     
+    config('prefix', prefixer(request.baseUrl));
+    
     const rootName = name.replace(CloudFunc.FS, '') || '/';
     const fullPath = root(rootName);
     

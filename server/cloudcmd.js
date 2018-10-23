@@ -37,9 +37,6 @@ const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.ht
 const defaultHtml = fs.readFileSync(getIndexPath(isDev), 'utf8');
 
 const auth = currify(_auth);
-const setUrl = currify(_setUrl);
-const setSW = currify(_setSW);
-
 const root = () => config('root');
 
 const notEmpty = (a) => a;
@@ -166,45 +163,38 @@ function cloudcmd(prefix, plugins, modules) {
    
     const funcs = clean([
         config('console') && konsole({
-            prefix: prefix + '/console',
             online,
         }),
         
         config('terminal') && terminal({
-            prefix: prefix + '/gritty',
         }),
         
         edward({
-            prefix: prefix + '/edward',
             online,
             diff,
             zip,
         }),
        
         dword({
-            prefix: prefix + '/dword',
             online,
             diff,
             zip,
         }),
         
         deepword({
-            prefix: prefix + '/deepword',
             online,
             diff,
             zip,
         }),
         
         fileop({
-            prefix: prefix + '/fileop',
         }),
         
         nomine({
-            prefix: prefix + '/rename',
         }),
         
-        setUrl(prefix),
-        setSW(prefix),
+        setUrl,
+        setSW,
         logout,
         authentication(),
         config.middle,
@@ -235,11 +225,6 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
-module.exports._replacePrefix = replacePrefix;
-function replacePrefix(url, prefix) {
-    return url.replace(prefix, '') || '/';
-}
-
 module.exports._replaceDist = replaceDist;
 function replaceDist(url) {
     if (!isDev)
@@ -248,15 +233,7 @@ function replaceDist(url) {
     return url.replace(/^\/dist\//, '/dist-dev/');
 }
 
-function _setUrl(pref, req, res, next) {
-    const prefix = getPrefix(pref);
-    const is = !req.url.indexOf(prefix);
-    
-    if (!is)
-        return next();
-    
-    req.url = replacePrefix(req.url, prefix);
-    
+function setUrl(req, res, next) {
     if (/^\/cloudcmd\.js(\.map)?$/.test(req.url))
         req.url = `/dist${req.url}`;
     
@@ -265,10 +242,8 @@ function _setUrl(pref, req, res, next) {
     next();
 }
 
-function _setSW(pref, req, res, next) {
-    const prefix = getPrefix(pref);
-    
-    const url = replacePrefix(req.url, prefix);
+function setSW(req, res, next) {
+    const {url} = req;
     const isSW = /^\/sw\.js(\.map)?$/.test(url);
     
     if (isSW)

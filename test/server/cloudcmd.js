@@ -20,7 +20,6 @@ const {connect} = require(beforePath);
 const {
     _getPrefix,
     _auth,
-    _replacePrefix,
 } = cloudcmd;
 
 const get = promisify(request);
@@ -87,15 +86,6 @@ test('cloudcmd: getPrefix: function: empty', (t) => {
     const result = _getPrefix(fn);
     
     t.equal(result, '', 'should equal');
-    t.end();
-});
-
-test('cloudcmd: replacePrefix', (t) => {
-    const url = '/hello';
-    const prefix = url;
-    const result = _replacePrefix(url, prefix);
-    
-    t.equal(result, '/', 'should equal');
     t.end();
 });
 

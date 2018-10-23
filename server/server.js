@@ -40,7 +40,10 @@ module.exports = async (options) => {
     if (logger)
         app.use(logger('dev'));
     
-    app.use(cloudcmd({
+    if (prefix)
+        app.get('/', (req, res) => res.redirect(prefix + '/'));
+    
+    app.use(prefix, cloudcmd({
         config: options,
         socket: io(server, {
             path: `${prefix}/socket.io`,

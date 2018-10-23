@@ -6,8 +6,6 @@ module.exports.unregisterSW = unregisterSW;
 const noop = () => {};
 
 async function registerSW(prefix) {
-    prefix = prefix ? `${prefix}/` : `/`;
-    
     if (!navigator.serviceWorker)
         return;
     
@@ -19,7 +17,7 @@ async function registerSW(prefix) {
             addEventListener: noop,
         };
     
-    return navigator.serviceWorker.register(`${prefix}sw.js`);
+    return navigator.serviceWorker.register(`${prefix}/sw.js`);
 }
 
 async function unregisterSW() {
