@@ -175,28 +175,28 @@ function cloudcmd(prefix, plugins, modules) {
         }),
         
         edward({
-            prefix  : prefix + '/edward',
+            prefix: prefix + '/edward',
             online,
             diff,
             zip,
         }),
        
         dword({
-            prefix  : prefix + '/dword',
+            prefix: prefix + '/dword',
             online,
             diff,
             zip,
         }),
         
         deepword({
-            prefix  : prefix + '/deepword',
+            prefix: prefix + '/deepword',
             online,
             diff,
             zip,
         }),
         
         fileop({
-            prefix  : prefix + '/fileop',
+            prefix: prefix + '/fileop',
         }),
         
         nomine({
