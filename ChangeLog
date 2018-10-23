@@ -1,3 +1,13 @@
+2018.10.23, v11.5.4
+
+fix:
+- docs(changelog) rm 
+
+feature:
+- (package) supermenu v2.1.2
+- (npmignore) add ai, cdr, eps
+
+
 2018.10.19, v11.5.3
 
 feature:
