@@ -10,10 +10,7 @@ module.exports = currify((plugins, req, res, next) => {
     if (!plugins || !plugins.length)
         return res.send('');
     
-    files.readPipe(plugins, res, (e) => {
-        if (!e)
-            return;
-        
+    files.readPipe(plugins, res).catch((e) => {
         res.end(e.message);
     });
 });

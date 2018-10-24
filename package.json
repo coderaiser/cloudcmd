@@ -125,7 +125,7 @@
     "edward": "^8.0.0",
     "execon": "^1.2.0",
     "express": "^4.13.0",
-    "files-io": "^2.0.0",
+    "files-io": "^3.0.0",
     "flop": "^6.0.0",
     "for-each-key": "^1.0.1",
     "format-io": "^1.0.0",
