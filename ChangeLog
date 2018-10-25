@@ -1,3 +1,18 @@
+2018.10.25, v11.7.0
+
+fix:
+- feature(cloudcmd) add ability to set prefix for web sockets connections with --prefix-socket (#200)
+
+feature:
+- (cloudcmd) add ability to set prefix for web sockets connections with --prefix-socket (#200)
+- (package) deepword v5.0.0
+- (package) dword v9.0.0
+- (package) edward v9.0.0
+- (package) console-io v10.0.0
+- (package) ponse v3.0.0
+- (package) files-io v3.0.0
+
+
 2018.10.23, v11.6.0
 
 feature:
