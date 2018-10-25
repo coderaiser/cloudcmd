@@ -55,10 +55,13 @@ module.exports = (params) => {
     checkPlugins(plugins);
     
     keys.forEach((name) => {
-        const value = options[name];
+        let value = options[name];
         
         if (/root|editor|packer|columns/.test(name))
             validate[name](value);
+         
+        if (/prefix/.test(name))
+            value = prefixer(value);
         
         config(name, value);
     });
@@ -66,10 +69,11 @@ module.exports = (params) => {
     config('console', defaultValue('console', options));
     config('configDialog', defaultValue('configDialog', options));
     
-    const prefix = prefixer(options.prefix);
+    const {prefix} = prefixer(options.prefix);
+    const prefixSocket = prefixer(options.prefixSocket) || prefix; // MAJOR: remove condition on v12
     
     if (p.socket)
-        listen(prefix, p.socket);
+        listen(prefixSocket, p.socket);
     
     return cloudcmd(prefix, plugins, modules);
 };
@@ -108,43 +112,43 @@ function _auth(accept, reject, username, password) {
     reject();
 }
 
-function listen(prefix, socket) {
-    prefix = getPrefix(prefix);
+function listen(prefixSocket, socket) {
+    prefixSocket = getPrefix(prefixSocket);
     
     config.listen(socket, auth);
     
     edward.listen(socket, {
         root,
         auth,
-        prefix: prefix + '/edward',
+        prefixSocket: prefixSocket + '/edward',
     });
     
     dword.listen(socket, {
         root,
         auth,
-        prefix: prefix + '/dword',
+        prefixSocket: prefixSocket + '/dword',
     });
     
     deepword.listen(socket, {
         root,
         auth,
-        prefix: prefix + '/deepword',
+        prefixSocket: prefixSocket + '/deepword',
+    });
+    
+    config('console') && konsole.listen(socket, {
+        auth,
+        prefixSocket: prefixSocket + '/console',
     });
     
     fileop.listen(socket, {
         root,
         auth,
-        prefix: prefix + '/fileop',
-    });
-    
-    config('console') && konsole.listen(socket, {
-        auth,
-        prefix: prefix + '/console',
+        prefix: prefixSocket + '/fileop',
     });
     
     config('terminal') && terminal().listen(socket, {
         auth,
-        prefix: prefix + '/gritty',
+        prefix: prefixSocket + '/gritty',
         command: config('terminalCommand'),
         autoRestart: config('terminalAutoRestart'),
     });

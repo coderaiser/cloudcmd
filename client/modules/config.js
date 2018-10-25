@@ -73,13 +73,17 @@ function getHost() {
 
 function initSocket() {
     const href = getHost();
-    const prefix = CloudCmd.PREFIX;
+    const {
+        prefixSocket,
+        PREFIX,
+    } = CloudCmd;
+    
     const ONE_MINUTE = 60 * 1000;
     
-    const socket  = io.connect(href + prefix + '/config', {
+    const socket = io.connect(href + prefixSocket + '/config', {
         reconnectionAttempts: Infinity,
         reconnectionDelay: ONE_MINUTE,
-        path: prefix + '/socket.io'
+        path: PREFIX + '/socket.io'
     });
     
     const save = (data) => {

@@ -104,6 +104,7 @@ module.exports.hide = () => {
 
 const loadFiles = async (element) => {
     const socketPath = CloudCmd.PREFIX;
+    const {prefixSocket} = CloudCmd;
     const prefix = socketPath + '/' + EditorName;
     const url = prefix + '/' + EditorName + '.js';
     
@@ -112,13 +113,12 @@ const loadFiles = async (element) => {
     await loadJS(url);
     
     const word = promisify(window[EditorName]);
-    const options = {
+    const [ed] = await tryToCatch(word, element, {
         maxSize,
         prefix,
+        prefixSocket,
         socketPath,
-    };
-    
-    const [ed] = await tryToCatch(word, element, options);
+    });
     
     timeEnd(Name + ' load');
     editor = ed;

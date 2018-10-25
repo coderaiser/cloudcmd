@@ -36,6 +36,7 @@ const args = require('minimist')(argv.slice(2), {
         'packer',
         'root',
         'prefix',
+        'prefix-socket',
         'terminal-path',
         'terminal-command',
         'columns',
@@ -97,6 +98,7 @@ const args = require('minimist')(argv.slice(2), {
         import      : choose(env.bool('import'), config('import')),
         export      : choose(env.bool('export'), config('export')),
         
+        'prefix-socket': config('prefixSocket'),
         'show-file-name': choose(env.bool('show_file_name'), config('showFileName')),
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
@@ -156,6 +158,8 @@ function main() {
     config('terminalAutoRestart', args['terminal-auto-restart']);
     config('editor', args.editor);
     config('prefix', prefixer(args.prefix));
+    // MAJOR: remove condition on v12
+    config('prefixSocket', prefixer(args['prefix-socket']) || config('prefix'));
     config('root', args.root);
     config('vim', args.vim);
     config('columns', args.columns);
@@ -176,10 +180,11 @@ function main() {
     readConfig(args.config);
     
     const options = {
-        root: args.root || '/', /* --no-root */
+        root: args.root || '/', // --no-root
         editor: args.editor,
         packer: args.packer,
-        prefix: args.prefix || '', /* --no-prefix */
+        prefix: args.prefix,
+        prefixSocket: args['prefix-socket'] || args.prefix, // MAJOR: remove condition on v12
         columns: args.columns,
     };
     

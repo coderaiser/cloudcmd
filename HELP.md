@@ -81,6 +81,7 @@ Cloud Commander supports command line parameters:
 | `--packer`                    | set packer: "tar" or "zip"
 | `--root`                      | set root directory
 | `--prefix`                    | set url prefix
+| `--prefix-socket`             | set prefix for url connection
 | `--port`                      | set port number
 | `--progress`                  | show progress of file operations
 | `--confirm-copy`              | confirm copy
@@ -392,6 +393,7 @@ Here is description of options:
     "ip"                    : null,     /* ip or null(default)                      */
     "root"                  : "/",      /* root directory                           */
     "prefix"                : "",       /* url prefix                               */
+    "prefixSocket"          : "",       /* prefix for socket connection             */
     "progress"              : true,     /* show progress of file operations         */
     "confirmCopy"           : true,     /* confirm copy                             */
     "confirmMove"           : true,     /* confirm move                             */
@@ -577,6 +579,7 @@ const app = require('express')();
 
 const port = 1337;
 const prefix = '/cloudcmd';
+const socketPrefix = '/cloudcmd-sockets';
 
 const server = http.createServer(app);
 const socket = io.listen(server, {
@@ -584,7 +587,8 @@ const socket = io.listen(server, {
 });
 
 const config = {
-    prefix // base URL or function which returns base URL (optional)
+    prefix, // base URL or function which returns base URL (optional)
+    socketPrefix, // prefix for socket connection
 };
 
 const plugins = [

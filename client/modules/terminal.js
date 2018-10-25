@@ -67,6 +67,10 @@ function getPrefix() {
     return CloudCmd.PREFIX + '/gritty';
 }
 
+function getPrefixSocket() {
+    return CloudCmd.prefixSocket + '/gritty';
+}
+
 function getEnv() {
     return {
         ACTIVE_DIR: DOM.getCurrentDirPath,
@@ -79,7 +83,7 @@ function getEnv() {
 function create() {
     const options = {
         env: getEnv(),
-        prefix: getPrefix(),
+        prefix: getPrefixSocket(),
         socketPath: CloudCmd.PREFIX,
         fontFamily: 'Droid Sans Mono',
     };

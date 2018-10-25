@@ -102,7 +102,7 @@ function _save(callback) {
 }
 
 function listen(sock, auth) {
-    const prefix = manage('prefix');
+    const prefix = manage('prefixSocket');
     
     sock.of(prefix + '/config')
         .on('connection', (socket) => {

@@ -56,6 +56,10 @@ function getPrefix() {
     return CloudCmd.PREFIX + '/console';
 }
 
+function getPrefixSocket() {
+    return CloudCmd.prefixSocket + '/console';
+}
+
 function getEnv() {
     return {
         ACTIVE_DIR: DOM.getCurrentDirPath.bind(DOM),
@@ -86,6 +90,7 @@ const create = async () => {
         cwd: getDirPath(),
         env: getEnv(),
         prefix: getPrefix(),
+        prefixSocket: getPrefixSocket(),
         socketPath: CloudCmd.PREFIX,
     };
     

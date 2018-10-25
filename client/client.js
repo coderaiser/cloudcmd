@@ -59,6 +59,7 @@ function CloudCmdProto(DOM) {
     
     this.log = log;
     this.PREFIX = '';
+    this.prefixSocket = '';
     this.PREFIX_URL = '';
     this.DIRCLIENT = '/dist/';
     this.DIRCLIENT_MODULES = this.DIRCLIENT + 'modules/';
@@ -143,6 +144,7 @@ function CloudCmdProto(DOM) {
         
         CloudCmd.PREFIX = prefix;
         CloudCmd.PREFIX_URL = prefix + apiURL;
+        CloudCmd.prefixSocket = config.prefixSocket;
         
         CloudCmd.config = (key) => config[key];
         CloudCmd.config.if = currify((key, fn, a) => config[key] && fn(a));
