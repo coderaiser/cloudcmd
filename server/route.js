@@ -35,10 +35,20 @@ const sendIndex = (params, data) => {
 
 const {FS} = CloudFunc;
 
-const Columns = require('./columns');
-const Template = require('./template');
+const Columns = require(`${DIR_SERVER}/columns`);
+const Template = require(`${DIR_SERVER}/template`);
 
-const read = promisify(flop.read);
+const getReadDir = () => {
+    if (!config('dropbox'))
+        return promisify(flop.read);
+    
+    const tokenize = (fn, a) => (b) => fn(a, b);
+    const {readDir} = require('@cloudcmd/dropbox');
+    
+    return tokenize(readDir, config('dropboxToken'));
+};
+
+const read = getReadDir();
 const realpath = promisify(fs.realpath);
 
 /**
@@ -54,6 +64,8 @@ module.exports = currify((options, request, response, next) => {
     route(options, request, response)
         .catch(next);
 });
+
+module.exports._getReadDir = getReadDir;
 
 async function route(options, request, response) {
     const name = ponse.getPathName(request);

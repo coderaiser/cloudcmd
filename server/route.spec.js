@@ -3,48 +3,37 @@
 const path = require('path');
 const fs = require('fs');
 
-const test = require('tape');
-const {promisify} = require('util');
-const pullout = require('pullout');
-const request = require('request');
+const tryToCatch = require('try-to-catch');
+const tryToTape = require('try-to-tape');
+const test = tryToTape(require('tape'));
 const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
-const clear = require('clear-module');
 
 const rootDir = path.join(__dirname, '../..');
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 
 const routePath = './route';
 const cloudcmdPath = './cloudcmd';
-const beforePath = path.join(__dirname, '../test/before');
 
-const {connect} = require(beforePath);
-
-const warp = (fn, ...a) => (...b) => fn(...b, ...a);
-const _pullout = promisify(pullout);
-
-const get = promisify((url, fn) => {
-    fn(null, request(url));
-});
-
-const getStr = (url) => {
-    return get(url)
-        .then(warp(_pullout, 'string'))
-        .catch(console.error);
-};
+const cloudcmd = require(cloudcmdPath);
+const serveOnce = require('serve-once');
+const {request} = serveOnce(cloudcmd);
 
 test('cloudcmd: route: buttons: no console', async (t) => {
     const config = {
-        console: false
+        console: false,
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.ok(/icon-console none/.test(result), 'should hide console');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.ok(/icon-console none/.test(body), 'should hide console');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: buttons: console', async (t) => {
@@ -52,13 +41,16 @@ test('cloudcmd: route: buttons: console', async (t) => {
         console: true,
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.notOk(/icon-console none/.test(result), 'should not hide console');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.notOk(/icon-console none/.test(body), 'should not hide console');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: buttons: no config', async (t) => {
@@ -66,13 +58,16 @@ test('cloudcmd: route: buttons: no config', async (t) => {
         configDialog: false
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.ok(/icon-config none/.test(result), 'should hide config');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.ok(/icon-config none/.test(body), 'should hide config');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: buttons: no contact', async (t) => {
@@ -80,13 +75,16 @@ test('cloudcmd: route: buttons: no contact', async (t) => {
         contact: false
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.ok(/icon-contact none/.test(result), 'should hide contact');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.ok(/icon-contact none/.test(body), 'should hide contact');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: buttons: one file panel: move', async (t) => {
@@ -94,13 +92,16 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
         oneFilePanel: true
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.ok(/icon-move none/.test(result), 'should hide move button');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.ok(/icon-move none/.test(body), 'should hide move button');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: buttons: no one file panel: move', async (t) => {
@@ -108,13 +109,16 @@ test('cloudcmd: route: buttons: no one file panel: move', async (t) => {
         oneFilePanel: false
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.notOk(/icon-move none/.test(result), 'should not hide move button');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.notOk(/icon-move none/.test(body), 'should not hide move button');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: buttons: one file panel: move', async (t) => {
@@ -122,13 +126,16 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
         oneFilePanel: true
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.ok(/icon-copy none/.test(result), 'should hide copy button');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.ok(/icon-copy none/.test(body), 'should hide copy button');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: keys panel: hide', async (t) => {
@@ -136,13 +143,16 @@ test('cloudcmd: route: keys panel: hide', async (t) => {
         keysPanel: false
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.ok(/keyspanel hidden/.test(result), 'should hide keyspanel');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.ok(/keyspanel hidden/.test(body), 'should hide keyspanel');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: keys panel', async (t) => {
@@ -150,13 +160,16 @@ test('cloudcmd: route: keys panel', async (t) => {
         keysPanel: true
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    };
     
-    t.notOk(/keyspanel hidden/.test(result), 'should show keyspanel');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.notOk(/keyspanel hidden/.test(body), 'should show keyspanel');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: file: fs', async (t) => {
@@ -165,13 +178,16 @@ test('cloudcmd: route: file: fs', async (t) => {
         root,
     };
     
-    const {port, done} = await connect({config});
-    const empty = await getStr(`http://localhost:${port}/fs`);
+    const options = {
+        config,
+    };
     
-    t.equal(empty, '', 'should equal');
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.equal(body, '', 'should equal');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: symlink', async (t) => {
@@ -183,16 +199,22 @@ test('cloudcmd: route: symlink', async (t) => {
         root,
     };
     
+    const options = {
+        config,
+    };
+    
     fs.symlinkSync(emptyDir, symlink);
     
-    const {port, done} = await connect({config});
-    const data = await getStr(`http://localhost:${port}/fs/symlink-dir`);
+    const {body} = await request.get('/fs/symlink-dir', {
+        options,
+    });
     
-    t.ok(data.length, 'should return html document');
     fs.unlinkSync(symlink);
-    t.end();
     
-    await done();
+    console.log(body);
+    
+    t.ok(body.length, 'should return html document');
+    t.end();
 });
 
 test('cloudcmd: route: not found', async (t) => {
@@ -201,13 +223,16 @@ test('cloudcmd: route: not found', async (t) => {
         root,
     };
     
-    const {port, done} = await connect({config});
-    const data = await getStr(`http://localhost:${port}/fs/file-not-found`);
+    const options = {
+        config,
+    };
     
-    t.ok(~data.indexOf('ENOENT: no such file or directory'), 'should return error');
+    const {body} = await request.get('/fs/file-not-found', {
+        options,
+    });
+    
+    t.ok(~body.indexOf('ENOENT: no such file or directory'), 'should return error');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: realpath: error', async (t) => {
@@ -223,19 +248,22 @@ test('cloudcmd: route: realpath: error', async (t) => {
         root: fixtureDir,
     };
     
-    reRequire('./route');
-    reRequire('./cloudcmd');
+    const options = {
+        config,
+    };
     
-    const {connect} = reRequire(beforePath);
-    const {port, done} = await connect({config});
-    const data = await getStr(`http://localhost:${port}/fs/empty-file`);
+    reRequire(routePath);
+    const cloudcmd = reRequire(cloudcmdPath);
+    
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/fs/empty-file', {
+        options,
+    });
     
     fs.realpath = realpath;
     
-    t.ok(/^ENOENT/.test(data), 'should return error');
+    t.ok(/^ENOENT/.test(body), 'should return error');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: route: sendIndex: encode', async (t) => {
@@ -255,17 +283,14 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     });
     
     reRequire(routePath);
-    reRequire(cloudcmdPath);
+    const cloudcmd = reRequire(cloudcmdPath);
     
-    const {connect} = reRequire(beforePath);
-    const {port, done} = await connect();
-    const data = await getStr(`http://localhost:${port}`);
-    
-    t.ok(data.includes(nameEncoded), 'should encode name');
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/');
     
     mockRequire.stop('flop');
     
-    await done();
+    t.ok(body.includes(nameEncoded), 'should encode name');
     t.end();
 });
 
@@ -284,22 +309,15 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
         read
     });
     
-    clear(routePath);
-    clear(cloudcmdPath);
-    clear(beforePath);
+    reRequire(routePath);
+    const cloudcmd = reRequire(cloudcmdPath);
     
-    const {connect} = require(beforePath);
-    const {port, done} = await connect();
-    const data = await getStr(`http://localhost:${port}`);
-    
-    t.notOk(data.includes(name), 'should not put not encoded name');
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/');
     
     mockRequire.stop('flop');
-    clear(routePath);
-    clear(cloudcmdPath);
-    clear(beforePath);
     
-    await done();
+    t.notOk(body.includes(name), 'should not put not encoded name');
     t.end();
 });
 
@@ -318,23 +336,15 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
         read
     });
     
-    clear(routePath);
-    clear(cloudcmdPath);
-    clear(beforePath);
+    reRequire(routePath);
+    const cloudcmd = reRequire(cloudcmdPath);
     
-    const {connect} = require(beforePath);
-    const {port, done} = await connect();
-    
-    await getStr(`http://localhost:${port}`);
-    
-    t.pass('should not hang up');
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/');
     
     mockRequire.stop('flo');
-    clear(routePath);
-    clear(cloudcmdPath);
-    clear(beforePath);
     
-    await done();
+    t.pass('should not hang up');
     t.end();
 });
 
@@ -343,12 +353,34 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
         terminal: false
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    }
     
-    t.ok(/icon-terminal none/.test(result), 'should hide terminal');
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/', {
+        options
+    });
     
-    await done();
+    t.ok(/icon-terminal none/.test(body), 'should hide terminal');
+    t.end();
+});
+
+test('cloudcmd: route: no termianl: /fs', async (t) => {
+    const config = {
+        terminal: false
+    };
+    
+    const options = {
+        config,
+    }
+    
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/fs', {
+        options,
+    });
+    
+    t.ok(/icon-terminal none/.test(body), 'should hide terminal');
     t.end();
 });
 
@@ -358,12 +390,54 @@ test('cloudcmd: route: buttons: terminal', async (t) => {
         terminalPath: 'gritty',
     };
     
-    const {port, done} = await connect({config});
-    const result = await getStr(`http://localhost:${port}`);
+    const options = {
+        config,
+    }
     
-    t.notOk(/icon-terminal none/.test(result), 'should enable terminal');
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/', {
+        options
+    });
     
-    await done();
+    t.notOk(/icon-terminal none/.test(body), 'should enable terminal');
+    t.end();
+});
+
+test('cloudcmd: route: buttons: contact', async (t) => {
+    const config = {
+        contact: true,
+    };
+    
+    const options = {
+        config,
+    }
+    
+    const {request} = serveOnce(cloudcmd);
+    const {body} = await request.get('/', {
+        options
+    });
+    
+    t.notOk(/icon-contact none/.test(body), 'should enable terminal');
+    t.end();
+});
+
+test('cloudcmd: route: dropbox', async (t) => {
+    const config = require('./config');
+    const dropbox = config('dropbox');
+    const dropboxToken = config('dropboxToken');
+    
+    config('dropbox', true);
+    config('dropboxToken', '');
+    
+    const {_getReadDir} = reRequire(routePath);
+    
+    const readdir = _getReadDir();
+    const [e] = await tryToCatch(readdir, '/root');
+    
+    config('dropbox', dropbox);
+    config('dropboxToken', dropboxToken);
+    
+    t.ok(/token/.test(e.message), 'should contain word token in message');
     t.end();
 });
 

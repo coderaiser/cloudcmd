@@ -13,7 +13,6 @@ const uploadFiles = require('../dom/upload-files');
 
 const {
     FS,
-    apiURL,
 } = require('../../common/cloudfunc');
 
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
@@ -303,6 +302,7 @@ function onTouch(event) {
   * in Chrome (HTML5)
   */
 function onDragStart(event) {
+    const {prefixURL} = CloudCmd;
     const element = getLIElement(event.target);
     const isDir = Info.isDir;
     let link = DOM.getCurrentLink(element);
@@ -313,7 +313,7 @@ function onDragStart(event) {
         name += EXT;
         link = document.createElement('a');
         link.textContent = name;
-        link.href = apiURL + '/pack' + Info.path + EXT;
+        link.href = prefixURL + '/pack' + Info.path + EXT;
     }
     
     event.dataTransfer.setData('DownloadURL',

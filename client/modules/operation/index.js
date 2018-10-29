@@ -61,14 +61,14 @@ const noFilesCheck = () => {
     
     return is;
 };
-    
+
 module.exports.init = promisify((callback) => {
     showLoad();
     
     exec.series([
         DOM.loadSocket,
         (callback) => {
-            if (!config('progress'))
+            if (!config('progress') || config('dropbox'))
                 return callback();
             
             load(initOperations(CloudCmd.prefix, callback));

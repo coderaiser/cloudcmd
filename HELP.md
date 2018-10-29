@@ -107,6 +107,8 @@ Cloud Commander supports command line parameters:
 | `--import-token`              | authorization  token used to connect to export server
 | `--import-url`                | url of an import server
 | `--import-listen`             | enable listen on config updates from import server
+| `--dropbox`                   | enable dropbox integration
+| `--dropbox-token`             | set dropbox token
 | `--log`                       | enable logging
 | `--no-show-config`            | do not show config values
 | `--no-server`                 | do not start server
@@ -132,8 +134,10 @@ Cloud Commander supports command line parameters:
 | `--no-export`                 | disable export config through a server
 | `--no-import`                 | disable import of config
 | `--no-import-listen`          | disable listen on config updates from import server
-| `--no-log`                    | disable logging
 | `--no-show-file-name`         | do not show file name in view and edit
+| `--no-dropbox`                | disable dropbox integration
+| `--no-dropbox-token`          | unset dropbox token
+| `--no-log`                    | disable logging
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` isn't exist.
@@ -374,49 +378,51 @@ Here is description of options:
 
 ```js
 {
-    "name"                  : "",       /* set tab name in web browser              */
-    "auth"                  : false,    /* enable http authentication               */
-    "username"              : "root",   /* username for authentication              */
-    "password"              : "toor",   /* password hash for authentication         */
-    "algo"                  : "sha512WithRSAEncryption", /* cryptographic algorithm */
-    "editor"                : "edward", /* default, could be "dword" or "edward"    */
-    "packer"                : "tar",    /* default, could be "tar" or "zip"         */
-    "diff"                  : true,     /* when save - send patch, not whole file   */
-    "zip"                   : true,     /* zip text before send / unzip before save */
-    "buffer"                : true,     /* buffer for copying files                 */
-    "dirStorage"            : true,     /* store directory listing                  */
-    "online"                : false,    /* do not load js files from cdn            */
-    "open"                  : true,     /* open web browser when server started     */
-    "oneFilePanel"          : false,    /* show one file panel                      */
-    "keysPanel"             : true,     /* show classic panel with buttons of keys  */
-    "port"                  : 8000,     /* http port                                */
-    "ip"                    : null,     /* ip or null(default)                      */
-    "root"                  : "/",      /* root directory                           */
-    "prefix"                : "",       /* url prefix                               */
-    "prefixSocket"          : "",       /* prefix for socket connection             */
-    "progress"              : true,     /* show progress of file operations         */
-    "confirmCopy"           : true,     /* confirm copy                             */
-    "confirmMove"           : true,     /* confirm move                             */
-    "showConfig"            : false,    /* show config at startap                   */
-    "showFileName"          : false     /* do not show file name in view and edit   */
-    "contact"               : true,     /* enable contact                           */
-    "configDialog"          : true,     /* enable config dialog                     */
-    "configAuth"            : true,     /* enable auth change in config dialog      */
-    "console"               : true,     /* enable console                           */
-    "syncConsolePath"       : false     /* do not sync console path                 */
-    "terminal"              : false,    /* disable terminal                         */
-    "terminalPath"          : '',       /* path of a terminal                       */
-    "terminalCommand"       : '',       /* set command to run in terminal           */
-    "terminalAutoRestart"   : true,     /* restart command on exit                  */
-    "vim"                   : false,    /* disable vim hot keys                     */
-    "columns"               : "name-size-date-owner-mode", /* set visible columns   */
-    "export"                : false,    /* enable export of config through a server */
-    "exportToken"           : "root",   /* token used by export server              */
-    "import"                : false,    /* enable import of config                  */
-    "import-url"            : "http://localhost:8000",   /* url of an export server */
-    "importToken"           : "root",   /* token used to connect to export server   */
-    "importListen"          : false,    /* listen on config updates                 */
-    "log"                   : true      /* logging                                  */
+    "name"                  : "",       // set tab name in web browser
+    "auth"                  : false,    // enable http authentication
+    "username"              : "root",   // username for authentication
+    "password"              : "toor",   // password hash for authentication
+    "algo"                  : "sha512WithRSAEncryption", // cryptographic algorithm
+    "editor"                : "edward", // default, could be "dword" or "edward"
+    "packer"                : "tar",    // default, could be "tar" or "zip"
+    "diff"                  : true,     // when save - send patch, not whole file
+    "zip"                   : true,     // zip text before send / unzip before save
+    "buffer"                : true,     // buffer for copying files
+    "dirStorage"            : true,     // store directory listing
+    "online"                : false,    // do not load js files from cdn
+    "open"                  : true,     // open web browser when server started
+    "oneFilePanel"          : false,    // show one file panel
+    "keysPanel"             : true,     // show classic panel with buttons of keys
+    "port"                  : 8000,     // http port
+    "ip"                    : null,     // ip or null(default)
+    "root"                  : "/",      // root directory
+    "prefix"                : "",       // url prefix
+    "prefixSocket"          : "",       // prefix for socket connection
+    "progress"              : true,     // show progress of file operations
+    "confirmCopy"           : true,     // confirm copy
+    "confirmMove"           : true,     // confirm move
+    "showConfig"            : false,    // show config at startup
+    "showFileName"          : false     // do not show file name in view and edit
+    "contact"               : true,     // enable contact
+    "configDialog"          : true,     // enable config dialog
+    "configAuth"            : true,     // enable auth change in config dialog
+    "console"               : true,     // enable console
+    "syncConsolePath"       : false     // do not sync console path
+    "terminal"              : false,    // disable terminal
+    "terminalPath"          : '',       // path of a terminal
+    "terminalCommand"       : '',       // set command to run in terminal
+    "terminalAutoRestart"   : true,     // restart command on exit
+    "vim"                   : false,    // disable vim hot keys
+    "columns"               : "name-size-date-owner-mode", // set visible columns
+    "export"                : false,    // enable export of config through a server
+    "exportToken"           : "root",   // token used by export server
+    "import"                : false,    // enable import of config 
+    "import-url"            : "http://localhost:8000",   // url of an export server
+    "importToken"           : "root",   // token used to connect to export server
+    "importListen"          : false,    // listen on config updates
+    "dropbox"               : false,    // disable dropbox integration
+    "dropboxToken"          : "",       // unset dropbox token
+    "log"                   : true      // logging
 }
 ```
 
@@ -784,6 +790,25 @@ When you create this file run:
 ```sh
 docker-compose up
 ```
+
+# Dropbox
+
+Dropbox support integrated into Cloud Commander and you can switch from local file system to a dropbox account.
+All you need to do is set `--dropbox` option and [generate dropbox token](https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/) for you account.
+
+This can look like this:
+
+```sh
+cloudcmd --dropbox --dropbox-token your-dropbox-token
+```
+
+Using `dropbox` remember that there is no remote support of a `console` and `terminal. Progress of file operation also not supported. There is only basic support, but you can do next things with `files` and `directories`:
+
+- create
+- remove
+- rename/move
+- view
+- edit
 
 Get involved
 ---------------

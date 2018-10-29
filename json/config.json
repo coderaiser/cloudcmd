@@ -41,6 +41,8 @@
     "importToken": "root",
     "importUrl": "http://localhost:8000",
     "importListen": false,
-    "log": true 
+    "log": true,
+    "dropbox": false,
+    "dropboxToken": ""
 }
 

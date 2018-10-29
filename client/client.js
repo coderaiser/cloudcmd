@@ -143,7 +143,7 @@ function CloudCmdProto(DOM) {
         };
         
         CloudCmd.prefix = prefix;
-        CloudCmd.prefixURL = prefix + apiURL;
+        CloudCmd.prefixURL = `${prefix}${apiURL}`;
         CloudCmd.prefixSocket = config.prefixSocket;
         
         CloudCmd.config = (key) => config[key];

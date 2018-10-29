@@ -43,6 +43,7 @@ const args = require('minimist')(argv.slice(2), {
         'import-url',
         'import-token',
         'export-token',
+        'dropbox-token',
     ],
     boolean: [
         'auth',
@@ -71,6 +72,7 @@ const args = require('minimist')(argv.slice(2), {
         'import',
         'import-listen',
         'log',
+        'dropbox',
     ],
     default: {
         server      : true,
@@ -112,6 +114,9 @@ const args = require('minimist')(argv.slice(2), {
         'keys-panel': env.bool('keys_panel') || config('keysPanel'),
         'import-token': env('import_token') || config('importToken'),
         'export-token': env('export_token') || config('exportToken'),
+        
+        'dropbox': config('dropbox'),
+        'dropbox-token': config('dropboxToken'),
     },
     alias: {
         v: 'version',
@@ -176,6 +181,9 @@ function main() {
     config('importToken', args['import-token']);
     config('importListen', args['import-listen']);
     config('importUrl', args['import-url']);
+    
+    config('dropbox', args['dropbox']);
+    config('dropboxToken', args['dropbox-token'] || '');
     
     readConfig(args.config);
     
