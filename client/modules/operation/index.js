@@ -71,7 +71,7 @@ module.exports.init = promisify((callback) => {
             if (!config('progress'))
                 return callback();
             
-            load(initOperations(CloudCmd.PREFIX, callback));
+            load(initOperations(CloudCmd.prefix, callback));
         },
         (callback) => {
             Loaded = true;
@@ -457,7 +457,7 @@ function message(msg, to, names) {
 }
 
 function load(callback) {
-    const prefix = CloudCmd.PREFIX;
+    const {prefix} = CloudCmd;
     const file = `${prefix}/fileop/fileop.js`;
     
     loadJS(file, (error) => {

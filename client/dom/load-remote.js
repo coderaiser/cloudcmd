@@ -14,7 +14,7 @@ const Files = require('./files');
 const parallel = wraptile(load.parallel);
 
 module.exports = (name, options, callback = options) => {
-    const {PREFIX, config} = CloudCmd;
+    const {prefix, config} = CloudCmd;
     const o = options;
     
     if (o.name && window[o.name])
@@ -37,7 +37,7 @@ module.exports = (name, options, callback = options) => {
         }
         
         const localURL = local.map((url) => {
-            return PREFIX + url;
+            return prefix + url;
         });
         
         const remoteURL = remoteTmpls.map((tmpl) => {

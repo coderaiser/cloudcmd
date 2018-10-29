@@ -27,7 +27,7 @@ module.exports = (items) => {
         .replace(/\/$/, '');
     
     const uploader = philip(entries, (type, name, data, i, n, callback) => {
-        const prefixURL = CloudCmd.PREFIX_URL;
+        const {prefixURL} = CloudCmd;
         const full = prefixURL + FS + path + name;
         
         let upload;

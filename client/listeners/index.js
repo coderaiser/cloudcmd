@@ -180,7 +180,7 @@ function isNoCurrent(panel) {
 
 function decodePath(path){
     const url = CloudCmd.HOST;
-    const prefix = CloudCmd.PREFIX;
+    const {prefix} = CloudCmd;
     const prefixReg = RegExp('^' + prefix + FS);
     
     return decodeURI(path)

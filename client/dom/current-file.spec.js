@@ -182,7 +182,7 @@ test('current-file: isCurrentFile', (t) => {
 
 function getCloudCmd({emit} = {}) {
     return {
-        PREFIX: '',
+        prefix: '',
         emit: emit || sinon.stub(),
     };
 }

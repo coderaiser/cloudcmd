@@ -468,8 +468,9 @@ function CmdProto() {
      */
     this.setHistory = (data, title, url) => {
         const ret = window.history;
+        const {prefix} = CloudCmd;
         
-        url = CloudCmd.PREFIX + url;
+        url = prefix + url;
         
         if (ret)
             history.pushState(data, title, url);

@@ -124,8 +124,9 @@ function getDir(root, dir) {
 
 function _rename(path, from, to, root) {
     const dir = getDir(root, path);
+    const {prefix} = CloudCmd;
     
-    return fetch(CloudCmd.PREFIX + '/rename', {
+    return fetch(`${prefix}/rename`, {
         method: 'put',
         credentials: 'include',
         body: JSON.stringify({

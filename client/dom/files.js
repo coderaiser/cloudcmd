@@ -98,7 +98,7 @@ function showError(name) {
 }
 
 function getSystemFile(file, callback) {
-    const prefix = CloudCmd.PREFIX;
+    const {prefix} = CloudCmd;
     
     if (!Promises[file])
         Promises[file] = new Promise((success, error) => {

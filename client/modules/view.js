@@ -80,7 +80,7 @@ module.exports.init = async () => {
 };
 
 function show(data, options) {
-    const prefixUrl = CloudCmd.PREFIX_URL + FS;
+    const prefixURL = CloudCmd.prefixURL + FS;
     
     if (Loading)
         return;
@@ -103,7 +103,7 @@ function show(data, options) {
     
     Images.show.load();
     
-    const path = prefixUrl + Info.path;
+    const path = prefixURL + Info.path;
     const type = getType(path);
     
     switch(type) {
@@ -111,7 +111,7 @@ function show(data, options) {
         return viewFile();
     
     case 'image':
-        return viewImage(path, prefixUrl);
+        return viewImage(path, prefixURL);
     
     case 'media':
         return viewMedia(path);
@@ -185,10 +185,10 @@ function hide() {
     modal.close();
 }
 
-function viewImage(href, prefixUrl) {
+function viewImage(href, prefixURL) {
     const makeTitle = (path) => {
         return {
-            href: prefixUrl + path,
+            href: prefixURL + path,
             title: encode(basename(path)),
         };
     };
@@ -297,12 +297,12 @@ function check(src, callback) {
  * @callback   -  executes, when everything loaded
  */
 async function loadAll() {
-    const {PREFIX} = CloudCmd;
+    const {prefix} = CloudCmd;
     
     time(Name + ' load');
     
     Loading = true;
-    await loadCSS(PREFIX + '/dist/view.css');
+    await loadCSS(`${prefix}/dist/view.css`);
     Loading = false;
 }
 

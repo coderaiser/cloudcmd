@@ -176,9 +176,9 @@ function RESTful() {
     
     function sendRequest(params) {
         const p = params;
-        const prefixUrl = CloudCmd.PREFIX_URL;
+        const {prefixURL} = CloudCmd;
         
-        p.url = prefixUrl + p.url;
+        p.url = prefixURL + p.url;
         p.url = encodeURI(p.url);
         
         /*

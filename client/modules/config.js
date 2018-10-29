@@ -75,7 +75,7 @@ function initSocket() {
     const href = getHost();
     const {
         prefixSocket,
-        PREFIX,
+        prefix,
     } = CloudCmd;
     
     const ONE_MINUTE = 60 * 1000;
@@ -83,7 +83,7 @@ function initSocket() {
     const socket = io.connect(href + prefixSocket + '/config', {
         reconnectionAttempts: Infinity,
         reconnectionDelay: ONE_MINUTE,
-        path: PREFIX + '/socket.io'
+        path: prefix + '/socket.io'
     });
     
     const save = (data) => {
@@ -120,7 +120,7 @@ function show() {
     if (!CloudCmd.config('configDialog'))
         return;
     
-    const prefix = CloudCmd.PREFIX;
+    const {prefix} = CloudCmd;
     const funcs = [
         exec.with(Files.get, 'config-tmpl'),
         exec.with(load.css, prefix + '/dist/config.css'),

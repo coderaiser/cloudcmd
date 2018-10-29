@@ -33,8 +33,8 @@ module.exports._CURRENT_FILE = CURRENT_FILE;
 module.exports.setCurrentName = (name, current) => {
     const Info = DOM.CurrentInfo;
     const {link} = Info;
-    const {PREFIX} = CloudCmd;
-    const dir = PREFIX + FS + Info.dirPath;
+    const {prefix} = CloudCmd;
+    const dir = prefix + FS + Info.dirPath;
     const encoded = encode(name);
     
     link.title = encoded;
@@ -84,7 +84,7 @@ module.exports.getCurrentDirPath = (panel = DOM.getPanel()) => {
 module.exports.getCurrentPath = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
     const element = DOM.getByTag('a', current)[0];
-    const prefix = CloudCmd.PREFIX;
+    const {prefix} = CloudCmd;
     
     const path = element
         .getAttribute('href')

@@ -53,7 +53,7 @@ module.exports.clear = () => {
 };
 
 function getPrefix() {
-    return CloudCmd.PREFIX + '/console';
+    return CloudCmd.prefix + '/console';
 }
 
 function getPrefixSocket() {
@@ -91,7 +91,7 @@ const create = async () => {
         env: getEnv(),
         prefix: getPrefix(),
         prefixSocket: getPrefixSocket(),
-        socketPath: CloudCmd.PREFIX,
+        socketPath: CloudCmd.prefix,
     };
     
     Element = createElement('div', {

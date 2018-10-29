@@ -49,8 +49,8 @@ function _loadFile(dir, n, file, callback) {
     
     const name = file.name;
     const path = dir + name;
-    const {PREFIX_URL} = CloudCmd;
-    const api = PREFIX_URL + FS;
+    const {prefixURL} = CloudCmd;
+    const api = prefixURL + FS;
     
     const percent = (i, n, per = 100) => {
         return Math.round(i * per / n);

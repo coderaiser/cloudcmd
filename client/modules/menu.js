@@ -252,7 +252,7 @@ function preDownload() {
 
 function download(type) {
     const TIME = 30 * 1000;
-    const prefixUr = CloudCmd.PREFIX_URL;
+    const {prefixURL} = CloudCmd;
     const PACK = '/pack';
     const date = Date.now();
     const files = DOM.getActiveFiles();
@@ -277,9 +277,9 @@ function download(type) {
         let src;
         
         if (isDir)
-            src = prefixUr + PACK + encodedPath + DOM.getPackerExt(type);
+            src = prefixURL + PACK + encodedPath + DOM.getPackerExt(type);
         else
-            src = prefixUr + FS + encodedPath + '?download';
+            src = prefixURL + FS + encodedPath + '?download';
         
         const element = createElement('iframe', {
             id : id + '-' + date,

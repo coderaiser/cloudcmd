@@ -28,7 +28,7 @@ module.exports = function loadModule(params) {
     
     CloudCmd[name] = () => {
         exec(doBefore);
-        const prefix = CloudCmd.PREFIX;
+        const {prefix} = CloudCmd;
         const pathFull = prefix + CloudCmd.DIRCLIENT_MODULES + path + '.js';
         
         return loadJS(pathFull).then(async () => {

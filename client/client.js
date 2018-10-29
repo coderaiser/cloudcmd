@@ -58,9 +58,9 @@ function CloudCmdProto(DOM) {
     const Files = DOM.Files;
     
     this.log = log;
-    this.PREFIX = '';
+    this.prefix = '';
     this.prefixSocket = '';
-    this.PREFIX_URL = '';
+    this.prefixURL = '';
     this.DIRCLIENT = '/dist/';
     this.DIRCLIENT_MODULES = this.DIRCLIENT + 'modules/';
     
@@ -142,8 +142,8 @@ function CloudCmdProto(DOM) {
             load.js(src, callback);
         };
         
-        CloudCmd.PREFIX = prefix;
-        CloudCmd.PREFIX_URL = prefix + apiURL;
+        CloudCmd.prefix = prefix;
+        CloudCmd.prefixURL = prefix + apiURL;
         CloudCmd.prefixSocket = config.prefixSocket;
         
         CloudCmd.config = (key) => config[key];
@@ -167,14 +167,14 @@ function CloudCmdProto(DOM) {
     };
     
     function loadStyle(callback) {
-        const prefix = CloudCmd.PREFIX;
+        const {prefix} = CloudCmd;
         const name = prefix + '/dist/cloudcmd.common.css';
         
         load.css(name, callback);
     }
     
     function loadPlugins(callback) {
-        const prefix = CloudCmd.PREFIX;
+        const {prefix} = CloudCmd;
         const plugins = prefix + '/plugins.js';
         
         load.js(plugins, callback);
@@ -203,7 +203,7 @@ function CloudCmdProto(DOM) {
     };
     
     this.logOut = () => {
-        const url = CloudCmd.PREFIX + '/logout';
+        const url = CloudCmd.prefix + '/logout';
         const error = () => document.location.reload();
         
         DOM.Storage.clear();
@@ -414,6 +414,7 @@ function CloudCmdProto(DOM) {
         Files.get(names, (error, templFile, templPath, templLink, templPathLink) => {
             const Dialog = DOM.Dialog;
             const panel = panelParam || DOM.getPanel();
+            const {prefix} = CloudCmd;
             
             const {
                 dir,
@@ -434,7 +435,7 @@ function CloudCmdProto(DOM) {
                 order       : options.order,
                 data        : json,
                 id          : panel.id,
-                prefix      : CloudCmd.PREFIX,
+                prefix,
                 template    : {
                     file        : templFile,
                     path        : templPath,

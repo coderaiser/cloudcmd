@@ -28,12 +28,12 @@ const {config} = CloudCmd;
 
 const loadAll = async () => {
     const {
-        PREFIX,
+        prefix,
     } = CloudCmd;
     
-    const prefix = getPrefix();
-    const js = `${prefix}/gritty.js`;
-    const css = `${PREFIX}/dist/terminal.css`;
+    const prefixGritty = getPrefix();
+    const js = `${prefixGritty}/gritty.js`;
+    const css = `${prefix}/dist/terminal.css`;
     
     const [e] = await tryToCatch(loadParallel, [js, css]);
     
@@ -64,7 +64,7 @@ function hide () {
 }
 
 function getPrefix() {
-    return CloudCmd.PREFIX + '/gritty';
+    return CloudCmd.prefix + '/gritty';
 }
 
 function getPrefixSocket() {
@@ -84,7 +84,7 @@ function create() {
     const options = {
         env: getEnv(),
         prefix: getPrefixSocket(),
-        socketPath: CloudCmd.PREFIX,
+        socketPath: CloudCmd.prefix,
         fontFamily: 'Droid Sans Mono',
     };
     
