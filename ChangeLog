@@ -1,3 +1,15 @@
+2018.11.01, v11.7.1
+
+fix:
+- (cloudcmd) register service worker on http connection (#203)
+- refactor(cloudcmd) PREFIX -> prefix
+- docs(help) example: prefix -> express mount point
+
+feature:
+- (package) criton v2.0.0
+- (package) eslint-plugin-node v8.0.0
+
+
 2018.10.25, v11.7.0
 
 fix:
