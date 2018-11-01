@@ -117,7 +117,7 @@
     "chalk": "^2.0.1",
     "console-io": "^10.0.0",
     "copymitter": "^4.0.2",
-    "criton": "^1.0.0",
+    "criton": "^2.0.0",
     "currify": "^3.0.0",
     "deepmerge": "^2.0.0",
     "deepword": "^5.0.0",
