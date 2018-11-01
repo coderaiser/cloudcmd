@@ -3,6 +3,28 @@
 const test = require('tape');
 const sinon = require('sinon');
 const mock = require('mock-require');
+const tryCatch = require('try-catch');
+
+test('sw: listen', (t) => {
+    const {listenSW} = mock.reRequire('./register');
+    const addEventListener = sinon.stub();
+    const sw = {
+        addEventListener,
+    };
+    
+    listenSW(sw, 'hello', 'world');
+    
+    t.ok(addEventListener.calledWith('hello', 'world'), 'should call addEventListener');
+    t.end();
+});
+
+test('sw: lesten: no sw', (t) => {
+    const {listenSW} = mock.reRequire('./register');
+    const [e] = tryCatch(listenSW, null, 'hello', 'world');
+    
+    t.notOk(e, 'should not throw');
+    t.end();
+});
 
 test('sw: register: registerSW: no serviceWorker', async (t) => {
     const {navigator} = global;

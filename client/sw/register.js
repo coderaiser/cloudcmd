@@ -3,7 +3,9 @@
 module.exports.registerSW = registerSW;
 module.exports.unregisterSW = unregisterSW;
 
-const noop = () => {};
+module.exports.listenSW = (sw, ...args) => {
+    sw && sw.addEventListener(...args);
+};
 
 async function registerSW(prefix) {
     if (!navigator.serviceWorker)
@@ -13,15 +15,12 @@ async function registerSW(prefix) {
     const isLocalhost = location.hostname === 'localhost';
     
     if (!isHTTPS && !isLocalhost)
-        return {
-            addEventListener: noop,
-        };
+        return;
     
     return navigator.serviceWorker.register(`${prefix}/sw.js`);
 }
-
 async function unregisterSW() {
     const reg = await registerSW();
-    return reg.unregister();
+    reg && reg.unregister();
 }
 

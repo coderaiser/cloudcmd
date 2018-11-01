@@ -11,6 +11,7 @@ const load = require('load.js');
 
 const {
     registerSW,
+    listenSW,
 } = require('./sw/register');
 
 // prevent additional loading of emitify
@@ -65,5 +66,6 @@ async function register(config) {
     const {prefix} = config;
     const sw = await registerSW(prefix);
     
-    sw.addEventListener('updatefound', onUpdateFound(config));
+    listenSW(sw, 'updatefound', onUpdateFound(config));
 }
+
