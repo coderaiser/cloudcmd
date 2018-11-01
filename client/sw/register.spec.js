@@ -2,11 +2,11 @@
 
 const test = require('tape');
 const sinon = require('sinon');
-const mock = require('mock-require');
 const tryCatch = require('try-catch');
+const {reRequire} = require('mock-require');
 
 test('sw: listen', (t) => {
-    const {listenSW} = mock.reRequire('./register');
+    const {listenSW} = reRequire('./register');
     const addEventListener = sinon.stub();
     const sw = {
         addEventListener,
@@ -19,7 +19,7 @@ test('sw: listen', (t) => {
 });
 
 test('sw: lesten: no sw', (t) => {
-    const {listenSW} = mock.reRequire('./register');
+    const {listenSW} = reRequire('./register');
     const [e] = tryCatch(listenSW, null, 'hello', 'world');
     
     t.notOk(e, 'should not throw');
@@ -32,7 +32,7 @@ test('sw: register: registerSW: no serviceWorker', async (t) => {
     
     const {
         registerSW,
-    } = mock.reRequire('./register');
+    } = reRequire('./register');
     
     await registerSW();
     
@@ -58,9 +58,7 @@ test('sw: register: registerSW: no https', async (t) => {
         protocol: 'http:'
     };
     
-    const {
-        registerSW,
-    } = mock.reRequire('./register');
+    const {registerSW} = reRequire('./register');
     
     await registerSW();
     
@@ -88,9 +86,7 @@ test('sw: register: registerSW: no localhost', async (t) => {
         register,
     });
     
-    const {
-        registerSW,
-    } = mock.reRequire('./register');
+    const {registerSW} = reRequire('./register');
     
     await registerSW();
     
@@ -117,9 +113,7 @@ test('sw: register: registerSW', async (t) => {
         register,
     });
     
-    const {
-        registerSW,
-    } = mock.reRequire('./register');
+    const {registerSW} = reRequire('./register');
     
     await registerSW('/hello');
     
@@ -151,9 +145,7 @@ test('sw: register: unregisterSW', async (t) => {
         register,
     });
     
-    const {
-        unregisterSW,
-    } = mock.reRequire('./register');
+    const {unregisterSW} = reRequire('./register');
     
     await unregisterSW();
     
