@@ -14,6 +14,8 @@ module.exports = {
 };
 
 module.exports.alert.noFiles = (title) => {
-    return alert(title, 'No files selected!');
+    return alert(title, 'No files selected!', {
+        cancel: false,
+    });
 };
 
