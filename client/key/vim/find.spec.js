@@ -28,7 +28,7 @@ test('cloudcmd: client: vim: find', (t) => {
     
     find('');
     
-    t.ok(setCurrentByName.calledWith(null), 'should call setCurrentByName');
+    t.ok(setCurrentByName.calledWith(undefined), 'should call setCurrentByName');
     t.end();
 });
 
@@ -39,7 +39,7 @@ test('cloudcmd: client: vim: findNext', (t) => {
     
     findNext();
     
-    t.ok(setCurrentByName.calledWith(null), 'should call setCurrentByName');
+    t.ok(setCurrentByName.calledWith(undefined), 'should call setCurrentByName');
     t.end();
 });
 
@@ -50,7 +50,7 @@ test('cloudcmd: client: vim: findPrevious', (t) => {
     DOM.setCurrentByName = setCurrentByName;
     findPrevious();
     
-    t.ok(setCurrentByName.calledWith(null), 'should call setCurrentByName');
+    t.ok(setCurrentByName.calledWith(undefined), 'should call setCurrentByName');
     t.end();
 });
 
