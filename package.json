@@ -206,6 +206,7 @@
     "request": "^2.76.0",
     "rimraf": "^2.5.4",
     "scroll-into-view-if-needed": "^2.2.5",
+    "serve-once": "^1.2.1",
     "serviceworker-webpack-plugin": "^1.0.1",
     "sinon": "^7.0.0",
     "sinon-called-with-diff": "^3.0.0",
