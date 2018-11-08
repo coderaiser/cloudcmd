@@ -19,10 +19,11 @@ const manageConfig = require('../../server/config');
 const pathConfig = path.join(os.homedir(), '.cloudcmd.json');
 
 test('cloudcmd: rest: config: get', async (t) => {
-    const {body} = await request.get('/api/v1/config');
-    const config = JSON.parse(body);
+    const {body} = await request.get('/api/v1/config', {
+        type: 'json'
+    });
     
-    t.notOk(config.auth, 'should config.auth to be false');
+    t.notOk(body.auth, 'should config.auth to be false');
     t.end();
 });
 
