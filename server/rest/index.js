@@ -37,7 +37,7 @@ module.exports = (request, response, next) => {
     if (!is)
         return next();
     
-    rest(request,response);
+    rest(request, response);
 };
 
 function rest(request, response) {
