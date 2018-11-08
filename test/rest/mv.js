@@ -2,29 +2,19 @@
 
 const fs = require('fs');
 
-const test = require('tape');
-const {promisify} = require('es6-promisify');
-const pullout = require('pullout');
-const request = require('request');
+const tryToTape = require('try-to-tape');
+const test = tryToTape(require('tape'));
 const {Volume} = require('memfs');
 const {ufs} = require('unionfs');
-const tryToCatch = require('try-to-catch');
+
 const mockRequire = require('mock-require');
-const clean = require('clear-module');
+const {reRequire} = mockRequire;
+const serveOnce = require('serve-once');
 
 const root = '../../';
 const dir = root + 'server/';
-const cloudcmdPath = dir + 'cloudcmd';
+const cloudcmdPath = root;
 const restPath = dir + 'rest';
-const beforePath = '../before';
-
-const _pullout = promisify(pullout);
-
-const put = promisify((url, json, fn) => {
-    fn(null, request.put(url, {
-        json,
-    }));
-});
 
 test('cloudcmd: rest: mv', async (t) => {
     const volume = {
@@ -38,16 +28,15 @@ test('cloudcmd: rest: mv', async (t) => {
         .use(vol)
         .use(fs);
     
-    clean(beforePath);
-    clean(cloudcmdPath);
-    clean(restPath);
-    clean('@cloudcmd/move-files');
-    clean('@cloudcmd/rename-files');
-    
     mockRequire('fs', unionFS);
     
-    const {connect} = require(beforePath);
-    const {port, done} = await connect({
+    reRequire('@cloudcmd/rename-files');
+    reRequire('@cloudcmd/move-files');
+    reRequire(restPath);
+    
+    const cloudcmd = reRequire(cloudcmdPath);
+    
+    const {request} = serveOnce(cloudcmd, {
         config: {
             root: '/'
         }
@@ -61,11 +50,10 @@ test('cloudcmd: rest: mv', async (t) => {
         ]
     };
     
+    const {body} = await request.put(`/api/v1/mv`, {
+        body: files
+    });
     
-    const [, result] = await tryToCatch(put, `http://localhost:${port}/api/v1/mv`, files);
-    const body = await _pullout(result, 'string');
-    
-    done();
     mockRequire.stop('fs');
     
     t.equal(body, 'move: ok("["mv.txt"]")', 'should move');
@@ -84,14 +72,15 @@ test('cloudcmd: rest: mv: rename', async (t) => {
         .use(vol)
         .use(fs);
     
-    clean(beforePath);
-    clean(cloudcmdPath);
-    clean(restPath);
-    
     mockRequire('fs', unionFS);
     
-    const {connect} = require(beforePath);
-    const {port, done} = await connect({
+    reRequire('@cloudcmd/rename-files');
+    reRequire('@cloudcmd/move-files');
+    reRequire(restPath);
+    
+    const cloudcmd = reRequire(cloudcmdPath);
+    
+    const {request} = serveOnce(cloudcmd, {
         config: {
             root: '/'
         }
@@ -102,10 +91,10 @@ test('cloudcmd: rest: mv: rename', async (t) => {
         to: '/fixture/tmp/mv.txt',
     };
     
-    const [, result] = await tryToCatch(put, `http://localhost:${port}/api/v1/mv`, files);
-    const body = await _pullout(result, 'string');
+    const {body} = await request.put(`/api/v1/mv`, {
+        body: files
+    });
     
-    done();
     mockRequire.stop('fs');
     
     const expected = 'move: ok("{"from":"/fixture/mv.txt","to":"/fixture/tmp/mv.txt"}")';
