@@ -8,6 +8,7 @@ const {promisify} = require('util');
 const currify = require('currify');
 const squad = require('squad');
 const tryToCatch = require('try-to-catch');
+const wraptile = require('wraptile');
 
 const config = require(DIR_SERVER + 'config');
 
@@ -17,6 +18,12 @@ const exit = require(DIR_SERVER + 'exit');
 const exitPort = two(exit, 'cloudcmd --port: %s');
 const bind = (f, self) => f.bind(self);
 const promisifySelf = squad(promisify, bind);
+
+const shutdown = wraptile(async (promises) => {
+    console.log('closing cloudcmd...');
+    await Promise.all(promises);
+    process.exit(0);
+});
 
 const opn = require('opn');
 const express = require('express');
@@ -43,20 +50,27 @@ module.exports = async (options) => {
     if (prefix)
         app.get('/', (req, res) => res.redirect(prefix + '/'));
     
+    const socketServer = io(server, {
+        path: `${prefix}/socket.io`,
+    });
+    
     app.use(prefix, cloudcmd({
         config: options,
-        socket: io(server, {
-            path: `${prefix}/socket.io`,
-        }),
+        socket: socketServer,
     }));
     
     if (port < 0 || port > 65535)
         return exitPort('port number could be 1..65535, 0 means any available port');
     
     const listen = promisifySelf(server.listen, server);
+    const closeServer = promisifySelf(server.close, server);
+    const closeSocket = promisifySelf(socketServer.close, socketServer);
     
     server.on('error', exitPort);
     await listen(port, ip);
+    
+    const close = shutdown([closeServer, closeSocket]);
+    process.on('SIGINT', close);
     
     const host = config('ip') || 'localhost';
     const port0 = port || server.address().port;
