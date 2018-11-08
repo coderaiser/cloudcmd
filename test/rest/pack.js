@@ -1,230 +1,230 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
+const {join} = require('path');
+const {promisify} = require('util');
 
-const test = require('tape');
-const {promisify} = require('es6-promisify');
-const pullout = require('pullout');
-const request = require('request');
+const {reRequire} = require('mock-require');
+const tryToTape = require('try-to-tape');
+const test = tryToTape(require('tape'));
 const tar = require('tar-stream');
 const gunzip = require('gunzip-maybe');
+const pullout = promisify(require('pullout'));
 
-const before = require('../before');
-
-const warp = (fn, ...a) => (...b) => fn(...b, ...a);
-
-const _pullout = promisify(pullout);
-
-const pathTarFixture = path.join(__dirname, '..', 'fixture/pack.tar.gz');
-const pathZipFixture = path.join(__dirname, '..', 'fixture/pack.zip');
+const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
+const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
+const cloudcmdPath = '../..';
 
 const fixture = {
     tar: fs.readFileSync(pathTarFixture),
     zip: fs.readFileSync(pathZipFixture),
 };
 
-const get = promisify((url, fn) => {
-    fn(null, request(url));
-});
+const defaultOptions = {
+    config: {
+        root: join(__dirname, '..'),
+    }
+};
+const cloudcmd = require(cloudcmdPath);
+const serveOnce = require('serve-once');
+const {request} = serveOnce(cloudcmd);
 
-const put = promisify((options, fn) => {
-    fn(null, request.put(options));
-});
-
-test('cloudcmd: rest: pack: tar: get', (t) => {
-    const config = {packer: 'tar'};
-    
-    before({config}, (port, after) => {
-        get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
-            .then((pack) => {
-                const extract = tar.extract();
-                
-                pack.pipe(gunzip()).pipe(extract);
-                
-                extract.on('entry', (header, stream) => {
-                    pullout(stream, 'string', (e, data) => {
-                        const file = fs.readFileSync(__dirname + '/../fixture/pack', 'utf8');
-                        t.equal(file, data, 'should pack data');
-                        t.end();
-                        after();
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+const once = promisify((name, extract, fn) => {
+    extract.once(name, (header, stream) => {
+        fn(null, [header, stream]);
     });
 });
 
-test('cloudcmd: rest: pack: tar: put: file', (t) => {
-    const config = {packer: 'tar'};
+test('cloudcmd: rest: pack: tar: get', async (t) => {
+    const config = {
+        packer: 'tar',
+    };
     
-    before({config}, (port, after) => {
-        const name = String(Math.random()) + '.tar.gz';
-        const options = getPackOptions(port, name);
-        
-        put(options)
-            .then(_pullout)
-            .then(() => {
-                const file = fs.createReadStream(__dirname + '/../' + name);
-                const extract = tar.extract();
-                
-                file.pipe(gunzip()).pipe(extract);
-                
-                extract.on('entry', (header, stream) => {
-                    pullout(stream, 'string', (e, data) => {
-                        const file = fs.readFileSync(__dirname + '/../fixture/pack', 'utf8');
-                        fs.unlinkSync(`${__dirname}/../${name}`);
-                         
-                        t.equal(file, data, 'should create archive');
-                        t.end();
-                        after();
-                    });
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    const options = {
+        config,
+    };
+    
+    const cloudcmd = reRequire(cloudcmdPath);
+    const {request} = serveOnce(cloudcmd, defaultOptions);
+    
+    const {body} = await request.get(`/api/v1/pack/fixture/pack`, {
+        options,
+        type: 'stream',
     });
+    
+    const extract = tar.extract();
+    
+    body.pipe(gunzip()).pipe(extract);
+   
+    const [, stream] = await once('entry', extract);
+    const data = await pullout(stream, 'string');
+    const file = fs.readFileSync(__dirname + '/../fixture/pack', 'utf8');
+    
+    t.equal(file, data, 'should pack data');
+    t.end();
 });
 
-test('cloudcmd: rest: pack: tar: put: response', (t) => {
-    const options = {packer: 'tar'};
-    before(options, (port, after) => {
-        const name = String(Math.random()) + '.tar.gz';
-        const options = getPackOptions(port, name);
-        
-        put(options)
-            .then(warp(_pullout, 'string'))
-            .then((msg) => {
-                t.equal(msg, 'pack: ok("fixture")', 'should return result message');
-                
-                fs.unlinkSync(`${__dirname}/../${name}`);
-                
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+test('cloudcmd: rest: pack: tar: put: file', async (t) => {
+    const config = {
+        packer: 'tar'
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const name = String(Math.random()) + '.tar.gz';
+    
+    const cloudcmd = reRequire(cloudcmdPath);
+    const {request} = serveOnce(cloudcmd, defaultOptions);
+    
+    await request.put(`/api/v1/pack`, {
+        options,
+        body: getPackOptions(name),
     });
+    
+    const file = fs.createReadStream(join(__dirname,'..', name));
+    const extract = tar.extract();
+    
+    file.pipe(gunzip()).pipe(extract);
+    
+    const [, stream] = await once('entry', extract);
+    const data = await pullout(stream);
+    const result = fs.readFileSync(__dirname + '/../fixture/pack');
+    
+    fs.unlinkSync(`${__dirname}/../${name}`);
+     
+    t.deepEqual(result, data, 'should create archive');
+    t.end();
 });
 
-test('cloudcmd: rest: pack: tar: put: error', (t) => {
-    const config = {packer: 'tar'};
+test('cloudcmd: rest: pack: tar: put: response', async (t) => {
+    const config = {
+        packer: 'tar',
+    };
     
-    before({config}, (port, after) => {
-        const options = getPackOptions(port, 'name', [
+    const options = {
+        config,
+    };
+    
+    const name = String(Math.random()) + '.tar.gz';
+    const {body} = await request.put(`/api/v1/pack`, {
+        options,
+        body: getPackOptions(name),
+    });
+    
+    fs.unlinkSync(`${__dirname}/../${name}`);
+    
+    t.equal(body, 'pack: ok("fixture")', 'should return result message');
+    t.end();
+});
+
+test('cloudcmd: rest: pack: tar: put: error', async (t) => {
+    const config = {
+        packer: 'tar',
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const {body} = await request.put(`/api/v1/pack`, {
+        options,
+        body: getPackOptions('name', [
+            'not found',
+        ]),
+    });
+    
+    t.ok(/^ENOENT: no such file or directory/.test(body), 'should return error');
+    t.end();
+});
+
+test('cloudcmd: rest: pack: zip: get', async (t) => {
+    const config = {
+        packer: 'zip',
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const {body} = await request.get(`/api/v1/pack/fixture/pack`, {
+        options,
+        type: 'buffer',
+    });
+    
+    t.equal(body.length, fixture.zip.length, 'should pack data');
+    t.end();
+});
+
+test('cloudcmd: rest: pack: zip: put: file', async (t) => {
+    const config = {
+        packer: 'zip',
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const name = String(Math.random()) + '.zip';
+    await request.put(`/api/v1/pack`, {
+        options,
+        body: getPackOptions(name),
+    });
+    
+    const file = fs.readFileSync(__dirname + '/../' + name);
+    fs.unlinkSync(`${__dirname}/../${name}`);
+    
+    t.equal(fixture.zip.length, file.length, 'should create archive');
+    t.end();
+});
+
+test('cloudcmd: rest: pack: zip: put: response', async (t) => {
+    const config = {
+        packer: 'zip',
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const name = String(Math.random()) + '.zip';
+    const {body} = await request.put(`/api/v1/pack`, {
+        options,
+        body: getPackOptions(name),
+    });
+    
+    fs.unlinkSync(`${__dirname}/../${name}`);
+    
+    t.equal(body, 'pack: ok("fixture")', 'should return result message');
+    t.end();
+});
+
+test('cloudcmd: rest: pack: zip: put: error', async (t) => {
+    const config = {
+        packer: 'zip',
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const {body} = await request.put(`/api/v1/pack`, {
+        options,
+        body: getPackOptions('name', [
             'not found'
-        ]);
-        
-        put(options)
-            .then(warp(_pullout, 'string'))
-            .then((msg) => {
-                t.ok(/^ENOENT: no such file or directory/.test(msg), 'should return error');
-                
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        ]),
     });
-});
-
-test('cloudcmd: rest: pack: zip: get', (t) => {
-    const config = {packer: 'zip'};
-    before({config}, (port, after) => {
-        get(`http://localhost:${port}/api/v1/pack/fixture/pack`)
-            .then(_pullout)
-            .then((pack) => {
-                t.equal(pack.length, fixture.zip.length, 'should pack data');
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
-});
-
-test('cloudcmd: rest: pack: zip: put: file', (t) => {
-    const config = {packer: 'zip'};
     
-    before({config}, (port, after) => {
-        const name = String(Math.random()) + '.zip';
-        const options = getPackOptions(port, name);
-        
-        put(options)
-            .then(warp(_pullout, 'string'))
-            .then(() => {
-                const file = fs.readFileSync(__dirname + '/../' + name);
-                
-                fs.unlinkSync(`${__dirname}/../${name}`);
-                t.equal(fixture.zip.length, file.length, 'should create archive');
-                
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
+    t.ok(/^ENOENT: no such file or directory/.test(body), 'should return error');
+    t.end();
 });
 
-test('cloudcmd: rest: pack: zip: put: response', (t) => {
-    const config = {packer: 'zip'};
-    
-    before({config}, (port, after) => {
-        const name = String(Math.random()) + '.zip';
-        const options = getPackOptions(port, name);
-        
-        put(options)
-            .then(warp(_pullout, 'string'))
-            .then((msg) => {
-                t.equal(msg, 'pack: ok("fixture")', 'should return result message');
-                
-                fs.unlinkSync(`${__dirname}/../${name}`);
-                
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
-});
-
-test('cloudcmd: rest: pack: zip: put: error', (t) => {
-    const config = {packer: 'zip'};
-    before({config}, (port, after) => {
-        const options = getPackOptions(port, 'name', [
-            'not found'
-        ]);
-        
-        put(options)
-            .then(warp(_pullout, 'string'))
-            .then((msg) => {
-                t.ok(/^ENOENT: no such file or directory/.test(msg), 'should return error');
-                
-                t.end();
-                after();
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    });
-});
-
-function getPackOptions(port, to, names = ['pack']) {
+function getPackOptions(to, names = ['pack']) {
     return {
-        url: `http://localhost:${port}/api/v1/pack`,
-        json: {
-            to,
-            names,
-            from: '/fixture',
-        }
+        to,
+        names,
+        from: '/fixture',
     };
 }
 
