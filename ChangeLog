@@ -1,3 +1,14 @@
+2018.11.09, v11.8.0
+
+fix:
+- (dialog) noFiles: reject on close
+
+feature:
+- (package) add dropbox support
+- (server) add graceful shutdown
+- (package) sinon-called-with-diff v3.0.0
+
+
 2018.11.01, v11.7.1
 
 fix:
