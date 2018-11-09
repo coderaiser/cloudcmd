@@ -802,7 +802,7 @@ This can look like this:
 cloudcmd --dropbox --dropbox-token your-dropbox-token
 ```
 
-Using `dropbox` remember that there is no remote support of a `console` and `terminal. Progress of file operation also not supported. There is only basic support, but you can do next things with `files` and `directories`:
+Using `dropbox` remember that there is no remote support of a `console` and `terminal`. Progress of file operation also not supported. There is only basic support, but you can do next things with `files` and `directories`:
 
 - create
 - remove
