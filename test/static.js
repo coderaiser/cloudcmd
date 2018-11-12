@@ -1,95 +1,64 @@
 'use strict';
 
-const test = require('tape');
-const {promisify} = require('es6-promisify');
-const pullout = require('pullout');
-const request = require('request');
+const tryTo = require('try-to-tape');
+const test = tryTo(require('tape'));
+const criton = require('criton');
 
+const cloudcmd = require('..');
 const configFn = require('../server/config');
-const {connect} = require('./before');
 
-const warp = (fn, ...a) => (...b) => fn(...b, ...a);
-
-const _pullout = promisify(pullout);
-
-const get = promisify((url, options, fn) => {
-    if (!fn) {
-        fn = options;
-        options = {};
-    }
-    
-    fn(null, request(url, options));
+const config = {
+    auth: false,
+};
+const {request} = require('serve-once')(cloudcmd, {
+    config,
 });
 
 test('cloudcmd: static', async (t) => {
-    const {port, done} = await connect();
     const name = 'package.json';
+    const {body} = await request.get(`/${name}`, {
+        type: 'json',
+    });
     
-    get(`http://localhost:${port}/${name}`)
-        .then(warp(_pullout, 'string'))
-        .then(JSON.parse)
-        .then((json) => {
-            t.equal(json.name, 'cloudcmd', 'should download file');
-            t.end();
-        })
-        .catch(console.error)
-        .then(done);
+    t.equal(body.name, 'cloudcmd', 'should download file');
+    t.end();
 });
 
 test('cloudcmd: static: not found', async (t) => {
     const name = Math.random();
+    const {status} = await request.get(`/${name}`);
     
-    const {port, done} = await connect({});
-    const res = await get(`http://localhost:${port}/${name}`);
-    
-    res.on('response', (res) => {
-        t.equal(res.statusCode, 404, 'should return 404');
-    });
-    
-    res.on('error', console.error);
-    res.on('end', async () => {
-        await done();
-        t.end();
-    });
+    t.equal(status, 404, 'should return 404');
+    t.end();
 });
 
 test('cloudcmd: prefix: wrong', async (t) => {
     const originalPrefix = configFn('prefix');
+    const config = {
+        prefix: '/hello'
+    };
     
-    const {port, done} = await connect({
-        config: {
-            prefix: '/hello'
-        }
-    });
+    const options = {
+        config,
+    };
     
     const name = Math.random();
-    const res = await get(`http://localhost:${port}/${name}`);
-    
-    res.on('response', async ({statusCode}) => {
-        await done();
-        configFn('prefix', originalPrefix);
-        
-        console.log(require('../server/config')('prefix'));
-        
-        t.equal(statusCode, 404, 'should return 404');
-        t.end();
+    const {status} = await request.get(`/${name}`, {
+        options,
     });
+    
+    configFn('prefix', originalPrefix);
+    
+    t.equal(status, 404, 'should return 404');
+    t.end();
 });
 
 test('cloudcmd: /cloudcmd.js', async (t) => {
     const name = 'cloudcmd.js';
+    const {status} = await request.get(`/${name}`);
     
-    const {port, done} = await connect();
-    const res = await get(`http://localhost:${port}/${name}`);
-    
-    res.on('response', ({statusCode}) => {
-        t.equal(statusCode, 200, 'should return OK');
-    });
-    
-    res.on('end', async () => {
-        await done();
-        t.end();
-    });
+    t.equal(status, 200, 'should return OK');
+    t.end();
 });
 
 test('cloudcmd: /cloudcmd.js: auth: access denied', async (t) => {
@@ -97,77 +66,79 @@ test('cloudcmd: /cloudcmd.js: auth: access denied', async (t) => {
     const config = {
         auth: true
     };
+    const options = {
+        config,
+    };
     
-    const {port, done} = await connect({config});
-    const res = await get(`http://localhost:${port}/${name}`);
-    
-    res.on('response', ({statusCode}) => {
-        t.equal(statusCode, 401, 'should return auth');
+    const {status} = await request.get(`/${name}`, {
+        options,
     });
     
-    res.on('end', async () => {
-        await done();
-        t.end();
-    });
+    t.equal(status, 401, 'should return auth');
+    t.end();
 });
 
 test('cloudcmd: /cloudcmd.js: auth: no password', async (t) => {
     const name = 'cloudcmd.js';
-    
+    const username = 'hello';
     const config = {
-        auth: true
+        auth: true,
+        username,
+    };
+    const options = {
+        config,
     };
     
-    const auth = {
-        username: configFn('username'),
-    };
+    const encoded = Buffer.from(`${username}:`).toString('base64');
+    const authorization = `Basic ${encoded}`;
     
-    const {port, done} = await connect({config});
-    const res = await get(`http://localhost:${port}/${name}`, {auth});
+    const {status} = await request.get(`/${name}`, {
+        headers: {
+            authorization,
+        },
+        options,
+    });
     
-    res.on('response', ({statusCode}) => {
-        t.equal(statusCode, 401, 'should return auth');
-    });
-    res.on('end', async () => {
-        await done();
-        t.end();
-    });
+    t.equal(status, 401, 'should return auth');
+    t.end();
 });
 
 test('cloudcmd: /cloudcmd.js: auth: access granted', async (t) => {
     const name = 'cloudcmd.js';
+    const username = 'hello';
+    const password = 'world';
+    const algo = configFn('algo');
     const config = {
-        auth: true
+        auth: true,
+        username,
+        password: criton(password, algo),
     };
-    const auth = {
-        username: configFn('username'),
-        password: configFn('password'),
+    const options = {
+        config,
     };
     
-    const {port, done} = await connect({config});
-    const res = await get(`http://localhost:${port}/${name}`, {auth});
+    const encoded = Buffer
+        .from(`${username}:${password}`)
+        .toString('base64');
     
-    res.on('response', ({statusCode}) => {
-        t.equal(statusCode, 401, 'should return auth');
+    const authorization = `Basic ${encoded}`;
+    
+    const {status} = await request.get(`/${name}`, {
+        headers: {
+            authorization,
+        },
+        options,
     });
     
-    res.on('end', async () => {
-        await done();
-        t.end();
-    });
+    t.equal(status, 200, 'should return auth');
+    t.end();
 });
 
 test('cloudcmd: /logout', async (t) => {
     const name = 'logout';
-    const {port, done} = await connect();
-    const res = await get(`http://localhost:${port}/${name}`);
+    const {status} = await request.get(`/${name}`);
     
-    res.on('response', ({statusCode}) => {
-        t.equal(statusCode, 401, 'should return 401');
-    });
-    res.on('end', async () => {
-        await done();
-        t.end();
-    });
+    t.equal(status, 401, 'should return 401');
+    t.end();
 });
 

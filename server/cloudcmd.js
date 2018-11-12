@@ -174,8 +174,7 @@ function cloudcmd(prefix, plugins, modules) {
             online,
         }),
         
-        config('terminal') && terminal({
-        }),
+        config('terminal') && terminal({}),
         
         edward({
             online,
