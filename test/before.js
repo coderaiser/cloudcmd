@@ -20,10 +20,6 @@ const currentConfig = readjson.sync.try(pathConfig);
 module.exports = before;
 
 function before(options, fn = options) {
-    if (fn === options) {
-        options = {};
-    }
-    
     const {config, plugins, modules} = options;
     
     const app = express();
