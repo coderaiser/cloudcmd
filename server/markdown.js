@@ -7,7 +7,7 @@ const {
     promisify,
 } = require('util');
 
-const pullout = promisify(require('pullout'));
+const pullout = require('pullout');
 const ponse = require('ponse');
 const markdown = require('markdown-it')();
 
@@ -47,7 +47,7 @@ async function onGET(request, name) {
 }
 
 async function onPUT(request) {
-    const data = await pullout(request, 'string');
+    const data = await pullout(request);
     
     return parse(data);
 }

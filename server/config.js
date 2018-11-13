@@ -17,7 +17,7 @@ const currify = require('currify');
 const wraptile = require('wraptile');
 const squad = require('squad');
 const tryToCatch = require('try-to-catch');
-const pullout = promisify(require('pullout'));
+const pullout = require('pullout');
 const ponse = require('ponse');
 const jonny = require('jonny');
 const jju = require('jju');
@@ -193,7 +193,7 @@ async function patch(request, response) {
 }
 
 async function patchConfig({name, request, response, cache}) {
-    const str = await pullout(request, 'string');
+    const str = await pullout(request);
     const json = jonny.parse(str);
     
     manageConfig(json);

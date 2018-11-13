@@ -91,12 +91,11 @@ function sendData(params, callback) {
         return onGET(params, callback);
     
     case 'PUT':
-        return pullout(p.request, 'string', (error, body) => {
-            if (error)
-                return callback(error);
-            
-            onPUT(p.name, body, callback);
-        });
+        return pullout(p.request)
+            .then((body) => {
+                onPUT(p.name, body, callback);
+            })
+            .catch(callback);
     }
 }
 

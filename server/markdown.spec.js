@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const test = require('tape');
-const {promisify} = require('es6-promisify');
+const {promisify} = require('util');
 const pullout = require('pullout');
 const request = require('request');
 const tryToCatch = require('try-to-catch');
@@ -12,7 +12,6 @@ const markdown = require('./markdown');
 const before = require('../test/before');
 const {connect} = before;
 
-const _pullout = promisify(pullout);
 const _markdown = promisify(markdown);
 
 const fixtureDir = path.join(__dirname, 'fixture', 'markdown');
@@ -25,7 +24,7 @@ test('cloudcmd: markdown: error', async (t) => {
     const {port, done} = await connect();
     
     const [error, data] = await tryToCatch(get, `http://localhost:${port}/api/v1/markdown/not-found`)
-    const result = await _pullout(data, 'string');
+    const result = await pullout(data);
     
     await done();
     
@@ -37,7 +36,7 @@ test('cloudcmd: markdown: error', async (t) => {
 test('cloudcmd: markdown: relative: error', async (t) => {
     const {port, done} = await connect();
     const [e, data] = await tryToCatch(get, `http://localhost:${port}/api/v1/markdown/not-found?relative`)
-    const result = await _pullout(data, 'string');
+    const result = await pullout(data);
     
     await done();
     t.ok(/ENOENT/.test(result), 'should not found');
@@ -47,7 +46,7 @@ test('cloudcmd: markdown: relative: error', async (t) => {
 test('cloudcmd: markdown: relative', async (t) => {
     const {port, done} = await connect();
     const data = await get(`http://localhost:${port}/api/v1/markdown/HELP.md?relative`)
-    const result = await _pullout(data, 'string');
+    const result = await pullout(data);
     
     await done();
     
@@ -68,7 +67,7 @@ test('cloudcmd: markdown: put', async (t) => {
     const putStream = mdStream
         .pipe(request.put(url));
     
-    const [error, result] = await tryToCatch(_pullout, putStream, 'string');
+    const [error, result] = await tryToCatch(pullout, putStream);
     
     await done();
     

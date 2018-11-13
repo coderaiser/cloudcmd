@@ -9,7 +9,7 @@ const tryToTape = require('try-to-tape');
 const test = tryToTape(require('tape'));
 const tar = require('tar-stream');
 const gunzip = require('gunzip-maybe');
-const pullout = promisify(require('pullout'));
+const pullout = require('pullout');
 
 const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
 const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
@@ -57,7 +57,7 @@ test('cloudcmd: rest: pack: tar: get', async (t) => {
     body.pipe(gunzip()).pipe(extract);
    
     const [, stream] = await once('entry', extract);
-    const data = await pullout(stream, 'string');
+    const data = await pullout(stream);
     const file = fs.readFileSync(__dirname + '/../fixture/pack', 'utf8');
     
     t.equal(file, data, 'should pack data');
@@ -89,7 +89,7 @@ test('cloudcmd: rest: pack: tar: put: file', async (t) => {
     file.pipe(gunzip()).pipe(extract);
     
     const [, stream] = await once('entry', extract);
-    const data = await pullout(stream);
+    const data = await pullout(stream, 'buffer');
     const result = fs.readFileSync(__dirname + '/../fixture/pack');
     
     fs.unlinkSync(`${__dirname}/../${name}`);
