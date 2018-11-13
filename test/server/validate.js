@@ -50,10 +50,12 @@ test('validate: root: /home', (t) => {
 
 test('validate: root: stat', (t) => {
     const fn = sinon.stub();
-    const {stat} = fs;
+    const {statSync} = fs;
     
     const error = 'ENOENT';
-    fs.stat = (dir, fn) => fn(Error(error));
+    fs.statSync = () => {
+        throw Error(error);
+    };
     
     mockRequire(exitPath, fn);
     
@@ -62,7 +64,7 @@ test('validate: root: stat', (t) => {
     root('hello', fn);
     
     const msg = 'cloudcmd --root: %s';
-    fs.stat = stat;
+    fs.statSync = statSync;
     
     mockRequire.stop(exitPath);
     t.ok(fn.calledWith(msg, error), 'should call fn');
