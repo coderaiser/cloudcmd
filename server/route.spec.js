@@ -17,15 +17,20 @@ const cloudcmdPath = './cloudcmd';
 
 const cloudcmd = require(cloudcmdPath);
 const serveOnce = require('serve-once');
-const {request} = serveOnce(cloudcmd);
+const config = {
+    auth: false,
+    dropbox: false,
+};
+
+const {request} = serveOnce(cloudcmd, {
+    config,
+});
 
 test('cloudcmd: route: buttons: no console', async (t) => {
-    const config = {
-        console: false,
-    };
-    
     const options = {
-        config,
+        config: {
+            console: false
+        },
     };
     
     const {body} = await request.get('/', {

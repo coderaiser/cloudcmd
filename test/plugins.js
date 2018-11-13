@@ -8,12 +8,8 @@ const config = {
     auth: false,
 };
 
-const options = {
-    config
-};
-
 const {request} = require('serve-once')(cloudcmd, {
-    options,
+    config,
 });
 
 test('cloudcmd: plugins', async (t) => {
