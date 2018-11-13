@@ -76,7 +76,7 @@ test('cloudcmd: markdown: put', async (t) => {
     t.end();
 });
 
-test('cloudcmd: markdown: put: error', (t) => {
+test('cloudcmd: markdown: put: error', async (t) => {
     const md = path.join(fixtureDir, 'markdown-not-exist.md');
     
     const name = 'hello';
@@ -85,15 +85,10 @@ test('cloudcmd: markdown: put: error', (t) => {
     mdStream.url = 'http://hello.world';
     mdStream.method = 'PUT';
     
-    _markdown(name, mdStream)
-        .then((result) => {
-            t.fail(`should fail but: ${result}`);
-            t.end();
-        })
-        .catch((error) => {
-            t.ok(error.message.includes('ENOENT: no such file or directory'), 'should emit error');
-            t.end();
-        });
+    const [e] = await tryToCatch(_markdown, name, mdStream);
+    
+    t.ok(e.message.includes('ENOENT: no such file or directory'), 'should emit error');
+    t.end();
 });
 
 test('cloudcmd: markdown: no name', async (t) => {
