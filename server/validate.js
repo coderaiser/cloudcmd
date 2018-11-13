@@ -1,5 +1,6 @@
 'use strict';
 
+const config = require('./config');
 const exit = require('./exit');
 const columns = require('./columns');
 
@@ -8,6 +9,9 @@ module.exports.root = (dir, fn) => {
         throw Error('dir should be a string');
     
     if (dir === '/')
+        return;
+    
+    if (config('dropbox'))
         return;
     
     const fs = require('fs');
