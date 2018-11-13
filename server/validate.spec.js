@@ -9,12 +9,13 @@ const tryCatch = require('try-catch');
 const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
 
-const dir = '../..';
+const dir = '..';
 
 const validatePath = `${dir}/server/validate`;
 const exitPath = `${dir}/server/exit`;
 const columnsPath = `${dir}/server/columns`;
 const cloudcmdPath = `${dir}/server/cloudcmd`;
+const configPath = `${dir}/server/config`;
 
 const validate = require(validatePath);
 const cloudcmd = require(cloudcmdPath);
@@ -26,6 +27,26 @@ test('validate: root: bad', (t) => {
     
     const [e] = tryCatch(cloudcmd, {config});
     t.equal(e.message, 'dir should be a string', 'should throw');
+    t.end();
+});
+
+test('validate: root: config', (t) => {
+    const config = {
+        root: Math.random()
+    };
+    
+    const configFn = sinon
+        .stub()
+        .returns(true);
+    
+    mockRequire(configPath, configFn);
+    
+    const validate = reRequire(validatePath);
+    validate.root('/hello');
+    
+    mockRequire.stop(configPath);
+    
+    t.ok(configFn.calledWith('dropbox'), 'should call config');
     t.end();
 });
 
