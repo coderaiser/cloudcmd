@@ -1,35 +1,20 @@
 'use strict';
 
-const path = require('path');
+const {join} = require('path');
 const test = require('tape');
 
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 
-const {promisify} = require('es6-promisify');
-const pullout = require('pullout');
-const request = require('request');
-
-const dir = path.join(__dirname, '..', '..');
-const modulesPath = path.join(dir, 'json', 'modules.json');
+const dir = join(__dirname, '..', '..');
+const modulesPath = join(dir, 'json', 'modules.json');
+const cloudcmdPath = dir;
 
 const localModules  = require(modulesPath);
 const modulas = require(`${dir}/server/modulas`);
 
-const warp = (fn, ...a) => (...b) => fn(...b, ...a);
-const _pullout = promisify(pullout);
-
-const get = promisify((url, fn) => {
-    fn(null, request(url));
-});
-
-const getJSON = (url) => {
-    return get(url)
-        .then(warp(_pullout, 'string'))
-        .then(JSON.parse);
-};
-
-const {connect} = require('../before');
+const cloudcmd = require(cloudcmdPath);
+const {request} = require('serve-once')(cloudcmd);
 
 test('cloudcmd: modules', async (t) => {
     const modules = {
@@ -39,18 +24,22 @@ test('cloudcmd: modules', async (t) => {
             }
         }
     };
+    const options = {
+        modules,
+    };
     
     const expected = {
         ...localModules,
         ...modules,
     };
-    const {port, done} = await connect({modules});
-    const result = await getJSON(`http://localhost:${port}/json/modules.json`);
     
-    t.deepEqual(result, expected, 'should equal');
+    const {body} = await request.get(`/json/modules.json`, {
+        type: 'json',
+        options,
+    });
+    
+    t.deepEqual(body, expected, 'should equal');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: modules: wrong route', async (t) => {
@@ -58,18 +47,22 @@ test('cloudcmd: modules: wrong route', async (t) => {
         hello: 'world'
     };
     
+    const options = {
+        modules,
+    };
+    
     const expected = {
         ...localModules,
         ...modules,
     };
     
-    const {port, done} = await connect({modules});
-    const result = await getJSON(`http://localhost:${port}/package.json`);
+    const {body} = await request.get(`/package.json`, {
+        type: 'json',
+        options,
+    });
     
-    t.notDeepEqual(result, expected, 'should not be equal');
+    t.notDeepEqual(body, expected, 'should not be equal');
     t.end();
-    
-    await done();
 });
 
 test('cloudcmd: modules: no', (t) => {
