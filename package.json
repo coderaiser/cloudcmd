@@ -38,6 +38,11 @@
   "bin": {
     "cloudcmd": "bin/cloudcmd.js"
   },
+  "nyc": {
+    "exclude": [
+      "**.*.spec.js"
+    ]
+  },
   "config": {
     "dirs": "bin/cloudcmd.js common server",
     "dirs_test": "test bin/release.js webpack.config.js cssnano.config.js .webpack"
