@@ -6,23 +6,24 @@ const test = require('tape');
 const diff = require('sinon-called-with-diff');
 const sinon = diff(require('sinon'));
 const currify = require('currify');
-const clean = require('clear-module');
-const request = require('request');
-const {promisify} = require('es6-promisify');
+const {reRequire} = require('mock-require');
 
-const DIR = '../../server/';
+const DIR = './';
 const cloudcmdPath = DIR + 'cloudcmd';
-const beforePath = '../before';
 
 const config = require(DIR + 'config');
 const cloudcmd = require(cloudcmdPath);
-const {connect} = require(beforePath);
 const {
     _getPrefix,
     _auth,
 } = cloudcmd;
 
-const get = promisify(request);
+const {request} = require('serve-once')(cloudcmd, {
+    config: {
+        auth: false,
+        dropbox: false,
+    }
+});
 
 test('cloudcmd: args: no', (t) => {
     const fn = () => cloudcmd();
@@ -93,9 +94,7 @@ test('cloudcmd: replaceDist', (t) => {
     const {NODE_ENV} = process.env;
     process.env.NODE_ENV = 'development';
     
-    clean(cloudcmdPath);
-    
-    const {_replaceDist} = require(cloudcmdPath);
+    const {_replaceDist} = reRequire(cloudcmdPath);
     
     const url = '/dist/hello';
     const result = _replaceDist(url);
@@ -113,8 +112,7 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
     
     const reset = cleanNodeEnv();
     
-    clean(cloudcmdPath);
-    const {_replaceDist} = require(cloudcmdPath);
+    const {_replaceDist} = reRequire(cloudcmdPath);
     
     const result = _replaceDist(url);
     const expected = url;
@@ -201,7 +199,7 @@ function credentials() {
 
 test('cloudcmd: getIndexPath: production', (t) => {
     const isDev = false;
-    const name = path.join(__dirname, '..', '..', 'dist', 'index.html');
+    const name = path.join(__dirname, '..', 'dist', 'index.html');
     
     t.equal(cloudcmd._getIndexPath(isDev), name);
     t.end();
@@ -209,19 +207,16 @@ test('cloudcmd: getIndexPath: production', (t) => {
 
 test('cloudcmd: getIndexPath: development', (t) => {
     const isDev = true;
-    const name = path.join(__dirname, '..', '..', 'dist-dev', 'index.html');
+    const name = path.join(__dirname, '..', 'dist-dev', 'index.html');
     
     t.equal(cloudcmd._getIndexPath(isDev), name);
     t.end();
 });
 
 test('cloudcmd: sw', async (t) => {
-    const {port, done} = await connect();
-    const {statusCode}= await get(`http://localhost:${port}/sw.js`);
+    const {status}= await request.get('/sw.js');
     
-    await done();
-    
-    t.equal(statusCode, 200, 'should return sw');
+    t.equal(status, 200, 'should return sw');
     t.end();
 });
 

@@ -101,7 +101,7 @@
     "watch:lint:server": "nodemon -w server -w common -x 'redrun lint:server'",
     "watch:test": "nodemon -w client -w server -w test -w common -x \"npm test\"",
     "watch:test:client": "nodemon -w client -w test/client -x \"npm run test:client\"",
-    "watch:test:server": "nodemon -w client -w test/client -x \"npm run test:server\"",
+    "watch:test:server": "nodemon -w server -w test -x \"npm run test:server\"",
     "watch:coverage": "nodemon -w server -w test -w common -x \"npm run coverage\"",
     "w:c": "redrun watch:client",
     "w:c:d": "redrun watch:client:dev",
