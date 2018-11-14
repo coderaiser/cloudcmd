@@ -4,53 +4,40 @@ const fs = require('fs');
 const path = require('path');
 const test = require('tape');
 const {promisify} = require('util');
+
 const pullout = require('pullout');
-const request = require('request');
 const tryToCatch = require('try-to-catch');
 
 const markdown = require('./markdown');
-const before = require('../test/before');
-const {connect} = before;
 
 const _markdown = promisify(markdown);
-
 const fixtureDir = path.join(__dirname, 'fixture', 'markdown');
-
-const get = promisify((url, fn) => {
-    fn(null, request(url));
+const cloudcmd = require('..');
+const config = {
+    auth: false,
+};
+const {request} = require('serve-once')(cloudcmd, {
+    config,
 });
 
 test('cloudcmd: markdown: error', async (t) => {
-    const {port, done} = await connect();
+    const {body} = await request.get('/api/v1/markdown/not-found');
     
-    const [error, data] = await tryToCatch(get, `http://localhost:${port}/api/v1/markdown/not-found`)
-    const result = await pullout(data);
-    
-    await done();
-    
-    t.notOk(error, 'should not be error');
-    t.ok(/ENOENT/.test(result), 'should not found');
+    t.ok(/ENOENT/.test(body), 'should not found');
     t.end();
 });
 
 test('cloudcmd: markdown: relative: error', async (t) => {
-    const {port, done} = await connect();
-    const [e, data] = await tryToCatch(get, `http://localhost:${port}/api/v1/markdown/not-found?relative`)
-    const result = await pullout(data);
+    const {body} = await request.get('/api/v1/markdown/not-found?relative');
     
-    await done();
-    t.ok(/ENOENT/.test(result), 'should not found');
+    t.ok(/ENOENT/.test(body), 'should not found');
     t.end();
 });
 
 test('cloudcmd: markdown: relative', async (t) => {
-    const {port, done} = await connect();
-    const data = await get(`http://localhost:${port}/api/v1/markdown/HELP.md?relative`)
-    const result = await pullout(data);
+    const {body} = await request.get('/api/v1/markdown/HELP.md?relative');
     
-    await done();
-    
-    t.notOk(/ENOENT/.test(result), 'should not return error');
+    t.notOk(/ENOENT/.test(body), 'should not return error');
     t.end();
 });
 
@@ -61,18 +48,11 @@ test('cloudcmd: markdown: put', async (t) => {
     const mdStream = fs.createReadStream(md);
     const htmlFile = fs.readFileSync(html, 'utf8');
     
-    const {port, done} = await connect();
-    const url = `http://localhost:${port}/api/v1/markdown`;
+    const {body} = await request.put('/api/v1/markdown', {
+        body: mdStream,
+    })
     
-    const putStream = mdStream
-        .pipe(request.put(url));
-    
-    const [error, result] = await tryToCatch(pullout, putStream);
-    
-    await done();
-    
-    t.notOk(error, 'shoud not be error');
-    t.equal(result, htmlFile, 'should render markdown input to html');
+    t.equal(body, htmlFile, 'should render markdown input to html');
     t.end();
 });
 
