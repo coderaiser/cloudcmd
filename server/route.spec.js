@@ -14,6 +14,7 @@ const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 
 const routePath = './route';
 const cloudcmdPath = './cloudcmd';
+const terminalPath = './terminal';
 
 const cloudcmd = require(cloudcmdPath);
 const serveOnce = require('serve-once');
@@ -362,7 +363,6 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
         config,
     }
     
-    const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/', {
         options
     });
@@ -389,22 +389,39 @@ test('cloudcmd: route: no termianl: /fs', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: buttons: terminal', async (t) => {
+test('cloudcmd: route: buttons: terminal: can not load', async (t) => {
     const config = {
         terminal: true,
-        terminalPath: 'gritty',
+        terminalPath: 'xxxxxxxxxxxx',
     };
     
     const options = {
         config,
-    }
+    };
     
-    const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/', {
         options
     });
     
-    t.notOk(/icon-terminal none/.test(body), 'should enable terminal');
+    t.ok(/icon-terminal none/.test(body), 'should not enable terminal');
+    t.end();
+});
+
+test('cloudcmd: route: buttons: terminal', async (t) => {
+    const config = {
+        terminal: true,
+        terminalPath: 'console-io',
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const {body} = await request.get('/', {
+        options
+    });
+    
+    t.notOk(/icon-terminal none/.test(body), 'should not enable terminal');
     t.end();
 });
 

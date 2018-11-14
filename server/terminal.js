@@ -3,7 +3,9 @@
 const tryCatch = require('try-catch');
 const config = require('./config');
 
-const noop = () => {};
+const noop = (req, res, next) => {
+    next && next();
+};
 noop.listen = noop;
 
 module.exports = (arg) => getTerminal(config('terminal'), arg);
