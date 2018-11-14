@@ -12,7 +12,7 @@ const {request} = require('serve-once')(cloudcmd, {
     config,
 });
 
-test('cloudcmd: plugins', async (t) => {
+test('cloudcmd: plugins: empty', async (t) => {
     const plugins = [];
     const options = {
         plugins,
@@ -26,7 +26,7 @@ test('cloudcmd: plugins', async (t) => {
     t.end();
 });
 
-test('cloudcmd: plugins', async (t) => {
+test('cloudcmd: plugins: one', async (t) => {
     const plugins = [
         __filename
     ];
