@@ -1,3 +1,13 @@
+2018.11.14, v11.8.1
+
+fix:
+- (validate) corruption of config when root not found
+
+feature:
+- (package) pullout v3.0.0
+- (validate) root: do not validate dropbox root
+
+
 2018.11.09, v11.8.0
 
 fix:
