@@ -18,13 +18,13 @@ const terminalPath = './terminal';
 
 const cloudcmd = require(cloudcmdPath);
 const serveOnce = require('serve-once');
-const config = {
+const defaultConfig = {
     auth: false,
     dropbox: false,
 };
 
 const {request} = serveOnce(cloudcmd, {
-    config,
+    config: defaultConfig,
 });
 
 test('cloudcmd: route: buttons: no console', async (t) => {
@@ -217,8 +217,6 @@ test('cloudcmd: route: symlink', async (t) => {
     
     fs.unlinkSync(symlink);
     
-    console.log(body);
-    
     t.ok(body.length, 'should return html document');
     t.end();
 });
@@ -261,12 +259,15 @@ test('cloudcmd: route: realpath: error', async (t) => {
     reRequire(routePath);
     const cloudcmd = reRequire(cloudcmdPath);
     
-    const {request} = serveOnce(cloudcmd);
+    const {request} = serveOnce(cloudcmd, {
+        config: defaultConfig
+    });
     const {body} = await request.get('/fs/empty-file', {
         options,
     });
     
     fs.realpath = realpath;
+    console.log(body);
     
     t.ok(/^ENOENT/.test(body), 'should return error');
     t.end();
