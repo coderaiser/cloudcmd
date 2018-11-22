@@ -13,7 +13,7 @@ RUN npm config set package-lock false && \
 
 COPY . /usr/src/app
 
-WORKDIR /root
+WORKDIR /
 
 ENV cloudcmd_terminal true
 ENV cloudcmd_terminal_path gritty
