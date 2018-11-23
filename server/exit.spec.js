@@ -2,12 +2,11 @@
 
 const test = require('tape');
 const exit = require('./exit');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 
 test('cloudcmd: exit: process.exit', (t) => {
     const {exit:exitOriginal} = process;
-    process.exit = sinon.stub();
+    process.exit = stub();
     
     exit();
     t.ok(process.exit.calledWith(1), 'should call process.exit');
@@ -20,8 +19,8 @@ test('cloudcmd: exit: console.error', (t) => {
     const {exit:exitOriginal} = process;
     const {error} = console;
     
-    console.error = sinon.stub();
-    process.exit = sinon.stub();
+    console.error = stub();
+    process.exit = stub();
     
     exit('hello world');
     t.ok(console.error.calledWith('hello world'), 'should call console.error');
@@ -36,8 +35,8 @@ test('cloudcmd: exit.error: console.error: error', (t) => {
     const {exit:exitOriginal} = process;
     const {error} = console;
     
-    console.error = sinon.stub();
-    process.exit = sinon.stub();
+    console.error = stub();
+    process.exit = stub();
     
     exit(Error('hello world'));
     t.ok(console.error.calledWith('hello world'), 'should call console.error');

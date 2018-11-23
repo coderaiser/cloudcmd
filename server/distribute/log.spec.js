@@ -6,7 +6,7 @@ const config = require('../config');
 
 test('distribute: log: getMessage', (t) => {
     const e = 'hello';
-    const result = log.getMessage(e)
+    const result = log.getMessage(e);
     
     t.equal(e, result, 'should equal');
     t.end();
@@ -16,7 +16,7 @@ test('distribute: log: getMessage: message', (t) => {
     const message = 'hello';
     const result = log.getMessage({
         message
-    })
+    });
     
     t.equal(result, message, 'should equal');
     t.end();

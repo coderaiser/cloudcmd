@@ -1,8 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 const dir = './';
 
 const {
@@ -21,7 +20,7 @@ const {
 
 test('cloudcmd: client: vim: find', (t) => {
     const {DOM} = global;
-    const setCurrentByName = sinon.stub();
+    const setCurrentByName = stub();
     
     DOM.setCurrentByName = setCurrentByName;
     DOM.Dialog.prompt = Promise.resolve.bind(Promise);
@@ -34,7 +33,7 @@ test('cloudcmd: client: vim: find', (t) => {
 
 test('cloudcmd: client: vim: findNext', (t) => {
     const {DOM} = global;
-    const setCurrentByName = sinon.stub();
+    const setCurrentByName = stub();
     DOM.setCurrentByName = setCurrentByName;
     
     findNext();
@@ -45,7 +44,7 @@ test('cloudcmd: client: vim: findNext', (t) => {
 
 test('cloudcmd: client: vim: findPrevious', (t) => {
     const {DOM} = global;
-    const setCurrentByName = sinon.stub();
+    const setCurrentByName = stub();
     
     DOM.setCurrentByName = setCurrentByName;
     findPrevious();

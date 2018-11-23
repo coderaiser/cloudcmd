@@ -1,8 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 
 const btoa = require('../../common/btoa');
 
@@ -10,7 +9,7 @@ test('btoa: browser', (t) => {
     const btoaOriginal = global.btoa;
     const str = 'hello';
     
-    global.btoa = sinon.stub();
+    global.btoa = stub();
     
     btoa(str);
     

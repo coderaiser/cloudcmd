@@ -1,8 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 const tryCatch = require('try-catch');
 
 const {
@@ -22,7 +21,7 @@ test('dom: isContainClass: no className', (t) => {
 });
 
 test('dom: isContainClass: contains', (t) => {
-    const contains = sinon.stub();
+    const contains = stub();
     const el = {
         classList: {
             contains,
@@ -37,7 +36,7 @@ test('dom: isContainClass: contains', (t) => {
 });
 
 test('dom: isContainClass: contains: array', (t) => {
-    const contains = sinon.stub();
+    const contains = stub();
     const el = {
         classList: {
             contains,

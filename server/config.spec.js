@@ -5,8 +5,7 @@ const path = require('path');
 
 const test = require('tape');
 const readjson = require('readjson');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 
 const root = '../';
 const dir = './';
@@ -106,7 +105,7 @@ test('config: cryptoPass', (t) => {
 
 test('config: middle: no', (t) => {
     const {middle} = config;
-    const next = sinon.stub();
+    const next = stub();
     const res = null;
     const url = `${apiURL}/config`;
     const method = 'POST';

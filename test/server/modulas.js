@@ -1,10 +1,9 @@
 'use strict';
 
 const {join} = require('path');
-const test = require('tape');
-
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const tryTo = require('try-to-tape');
+const test = tryTo(require('tape'));
+const stub = require('@cloudcmd/stub');
 
 const dir = join(__dirname, '..', '..');
 const modulesPath = join(dir, 'json', 'modules.json');
@@ -14,7 +13,12 @@ const localModules  = require(modulesPath);
 const modulas = require(`${dir}/server/modulas`);
 
 const cloudcmd = require(cloudcmdPath);
-const {request} = require('serve-once')(cloudcmd);
+const {request} = require('serve-once')(cloudcmd, {
+    config: {
+        auth: false,
+        dropbox: false,
+    }
+});
 
 test('cloudcmd: modules', async (t) => {
     const modules = {
@@ -68,7 +72,7 @@ test('cloudcmd: modules: wrong route', async (t) => {
 test('cloudcmd: modules: no', (t) => {
     const fn = modulas();
     const url = '/json/modules.json';
-    const send = sinon.stub();
+    const send = stub();
     
     fn({url}, {send});
     

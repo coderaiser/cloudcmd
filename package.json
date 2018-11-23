@@ -45,7 +45,7 @@
   },
   "config": {
     "dirs": "bin/cloudcmd.js common server",
-    "dirs_test": "test bin/release.js webpack.config.js cssnano.config.js .webpack"
+    "dirs_test": "test bin/release.js webpack.config.js cssnano.config.js .webpack client/**/*.spec.js server/**/*.spec.js common/**/*.spec.js"
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
@@ -175,6 +175,7 @@
     "@cloudcmd/create-element": "^1.0.0",
     "@cloudcmd/modal": "^1.0.0",
     "@cloudcmd/olark": "^2.0.1",
+    "@cloudcmd/stub": "^2.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",
@@ -215,8 +216,6 @@
     "scroll-into-view-if-needed": "^2.2.5",
     "serve-once": "^1.5.0",
     "serviceworker-webpack-plugin": "^1.0.1",
-    "sinon": "^7.0.0",
-    "sinon-called-with-diff": "^3.0.0",
     "smalltalk": "^3.1.0",
     "style-loader": "^0.23.0",
     "stylelint": "^9.0.0",

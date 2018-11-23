@@ -19,8 +19,8 @@ async function registerSW(prefix) {
     
     return navigator.serviceWorker.register(`${prefix}/sw.js`);
 }
-async function unregisterSW() {
-    const reg = await registerSW();
-    reg && reg.unregister();
+async function unregisterSW(prefix) {
+    const reg = await registerSW(prefix);
+    reg && reg.unregister(prefix);
 }
 

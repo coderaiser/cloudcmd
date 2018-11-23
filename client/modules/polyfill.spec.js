@@ -2,12 +2,11 @@
 
 const test = require('tape');
 const mockRequire = require('mock-require');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 
 test('cloudcmd: client: polyfill: scrollIntoViewIfNeaded', (t) => {
     const {DOM} = global;
-    const scroll = sinon.stub();
+    const scroll = stub();
     const el = {};
     
     global.DOM = {};

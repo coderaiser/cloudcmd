@@ -1,8 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 const id = (a) => a;
 const wraptile = require('wraptile');
 const returns = wraptile(id);
@@ -19,7 +18,7 @@ test('current-file: setCurrentName: setAttribute', (t) => {
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
     
-    const setAttribute = sinon.stub();
+    const setAttribute = stub();
     const current = {
         setAttribute
     };
@@ -43,7 +42,7 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
     
-    const setAttribute = sinon.stub();
+    const setAttribute = stub();
     const current = {
         setAttribute
     };
@@ -64,8 +63,8 @@ test('current-file: emit', (t) => {
         CloudCmd,
     } = global;
     
-    const emit = sinon.stub();
-    const setAttribute = sinon.stub();
+    const emit = stub();
+    const setAttribute = stub();
     
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd({
@@ -92,7 +91,7 @@ test('current-file: setCurrentName: return', (t) => {
         CloudCmd,
     } = global;
     
-    const setAttribute = sinon.stub();
+    const setAttribute = stub();
     const link = {};
     
     global.DOM = getDOM({
@@ -162,7 +161,7 @@ test('current-file: isCurrentFile', (t) => {
         CloudCmd,
     } = global;
     
-    const isContainClass = sinon.stub();
+    const isContainClass = stub();
     
     global.DOM = getDOM({
         isContainClass
@@ -183,16 +182,16 @@ test('current-file: isCurrentFile', (t) => {
 function getCloudCmd({emit} = {}) {
     return {
         prefix: '',
-        emit: emit || sinon.stub(),
+        emit: emit || stub(),
     };
 }
 
 function getDOM({
     link = {},
-    getCurrentDirPath = sinon.stub(),
-    getCurrentDirName = sinon.stub(),
-    getByDataName = sinon.stub(),
-    isContainClass = sinon.stub(),
+    getCurrentDirPath = stub(),
+    getCurrentDirName = stub(),
+    getByDataName = stub(),
+    isContainClass = stub(),
 } = {}) {
     return {
         getCurrentDirPath,

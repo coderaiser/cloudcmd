@@ -1,8 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 
 const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
@@ -38,7 +37,7 @@ test('cloudcmd: terminal: disabled: listen', (t) => {
 });
 
 test('cloudcmd: terminal: enabled', (t) => {
-    const term = sinon.stub();
+    const term = stub();
     const arg = 'hello';
     
     mockRequire(configPath, () => '/terminal');
@@ -56,7 +55,7 @@ test('cloudcmd: terminal: enabled', (t) => {
 
 test('cloudcmd: terminal: enabled: no string', (t) => {
     const {log:originalLog} = console;
-    const log = sinon.stub();
+    const log = stub();
     
     mockRequire(configPath, () => 'hello');
     

@@ -3,8 +3,7 @@
 const fs = require('fs');
 
 const test = require('tape');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 const tryCatch = require('try-catch');
 const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
@@ -35,8 +34,7 @@ test('validate: root: config', (t) => {
         root: Math.random()
     };
     
-    const configFn = sinon
-        .stub()
+    const configFn = stub()
         .returns(true);
     
     mockRequire(configPath, configFn);
@@ -51,7 +49,7 @@ test('validate: root: config', (t) => {
 });
 
 test('validate: root: /', (t) => {
-    const fn = sinon.stub();
+    const fn = stub();
     validate.root('/', fn);
     
     t.notOk(fn.called, 'should not call fn');
@@ -59,7 +57,7 @@ test('validate: root: /', (t) => {
 });
 
 test('validate: root: /home', (t) => {
-    const fn = sinon.stub();
+    const fn = stub();
     
     validate.root('/home', (...args) => {
         fn(...args);
@@ -70,7 +68,7 @@ test('validate: root: /home', (t) => {
 });
 
 test('validate: root: stat', (t) => {
-    const fn = sinon.stub();
+    const fn = stub();
     const {statSync} = fs;
     
     const error = 'ENOENT';
@@ -93,7 +91,7 @@ test('validate: root: stat', (t) => {
 });
 
 test('validate: packer: not valid', (t) => {
-    const fn = sinon.stub();
+    const fn = stub();
     
     mockRequire(exitPath, fn);
     
@@ -109,7 +107,7 @@ test('validate: packer: not valid', (t) => {
 });
 
 test('validate: editor: not valid', (t) => {
-    const fn = sinon.stub();
+    const fn = stub();
     
     mockRequire(exitPath, fn);
     
@@ -125,7 +123,7 @@ test('validate: editor: not valid', (t) => {
 });
 
 test('validate: columns', (t) => {
-    const fn = sinon.stub();
+    const fn = stub();
     mockRequire(exitPath, fn);
     
     const {columns} = require(validatePath);
@@ -139,7 +137,7 @@ test('validate: columns', (t) => {
 });
 
 test('validate: columns: wrong', (t) => {
-    const fn = sinon.stub();
+    const fn = stub();
     
     mockRequire(exitPath, fn);
     mockRequire(columnsPath, {

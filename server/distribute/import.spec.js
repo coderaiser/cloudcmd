@@ -3,18 +3,14 @@
 const test = require('tape');
 const {promisify} = require('util');
 const tryToCatch = require('try-to-catch');
-const io = require('socket.io-client');
-const mockRequire = require('mock-require');
-
 const {connect} = require('../../test/before');
-
 const config = require('../config');
 const distribute = {
     import: promisify(require('./import')),
 };
 
 test('distribute: import: canceled', async (t) => {
-    const {done, port} = await connect({
+    const {done} = await connect({
         config: {
             export: false,
             import: false,
@@ -138,7 +134,7 @@ test('distribute: import: received: no name', async (t) => {
 });
 
 test('distribute: import: error', async (t) => {
-    const {done, port} = await connect({
+    const {done} = await connect({
         config: {
             import: true,
             export: false,
@@ -160,7 +156,7 @@ test('distribute: import: error', async (t) => {
 });
 
 test('distribute: import: config:change: no export', async (t) => {
-    const {done, port} = await connect({
+    const {done} = await connect({
         config: {
             import: true,
             export: false,

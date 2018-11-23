@@ -205,9 +205,10 @@ function CloudCmdProto(DOM) {
     this.logOut = () => {
         const url = CloudCmd.prefix + '/logout';
         const error = () => document.location.reload();
+        const {prefix} = CloudCmd;
         
         DOM.Storage.clear();
-        unregisterSW();
+        unregisterSW(prefix);
         DOM.load.ajax({
             url,
             error,

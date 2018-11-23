@@ -2,13 +2,12 @@
 
 const test = require('tape');
 const info = require('./info');
-const sinon = require('sinon');
+const stub = require('@cloudcmd/stub');
 
 test('cloudcmd: rest: info', (t) => {
     const {memoryUsage} = process;
     
-    const _memoryUsage = sinon
-        .stub()
+    const _memoryUsage = stub()
         .returns({});
     
     process.memoryUsage = _memoryUsage;

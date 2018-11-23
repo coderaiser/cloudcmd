@@ -1,7 +1,5 @@
 'use strict';
 
-const {promisify} = require('util');
-
 const test = require('tape');
 const io = require('socket.io-client');
 
@@ -22,8 +20,6 @@ test('distribute: export', async (t) => {
     
     const url = `http://localhost:${port}/distribute?port=${1111}`;
     const socket = io.connect(url);
-    
-    const name = config('name');
     
     socket.on('connect', () => {
         socket.emit('auth', 'a');
@@ -57,8 +53,6 @@ test('distribute: export: config', async (t) => {
     
     const url = `http://localhost:${port}/distribute?port=${1111}`;
     const socket = io.connect(url);
-    
-    const name = config('name');
     
     socket.on('connect', () => {
         socket.emit('auth', 'a');

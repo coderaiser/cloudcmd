@@ -3,8 +3,7 @@
 const path = require('path');
 
 const test = require('tape');
-const diff = require('sinon-called-with-diff');
-const sinon = diff(require('sinon'));
+const stub = require('@cloudcmd/stub');
 const currify = require('currify');
 const {reRequire} = require('mock-require');
 
@@ -125,8 +124,8 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
 
 test('cloudcmd: auth: reject', (t) => {
     const auth = config('auth');
-    const accept = sinon.stub();
-    const reject = sinon.stub();
+    const accept = stub();
+    const reject = stub();
     const username = 'root';
     const password = 'toor';
     
@@ -145,8 +144,8 @@ test('cloudcmd: auth: reject', (t) => {
 
 test('cloudcmd: auth: accept', (t) => {
     const auth = config('auth');
-    const accept = sinon.stub();
-    const reject = sinon.stub();
+    const accept = stub();
+    const reject = stub();
     const username = 'root';
     const password = 'toor';
     
@@ -165,8 +164,8 @@ test('cloudcmd: auth: accept', (t) => {
 
 test('cloudcmd: auth: accept: no auth', (t) => {
     const auth = config('auth');
-    const accept = sinon.stub();
-    const reject = sinon.stub();
+    const accept = stub();
+    const reject = stub();
     const username = 'root';
     const password = 'toor';
     

@@ -262,12 +262,12 @@ test('cloudcmd: route: realpath: error', async (t) => {
     const {request} = serveOnce(cloudcmd, {
         config: defaultConfig
     });
+    
     const {body} = await request.get('/fs/empty-file', {
         options,
     });
     
     fs.realpath = realpath;
-    console.log(body);
     
     t.ok(/^ENOENT/.test(body), 'should return error');
     t.end();

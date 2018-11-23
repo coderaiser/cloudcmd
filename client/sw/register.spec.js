@@ -1,13 +1,13 @@
 'use strict';
 
 const test = require('tape');
-const sinon = require('sinon');
+const stub = require('@cloudcmd/stub');
 const tryCatch = require('try-catch');
 const {reRequire} = require('mock-require');
 
 test('sw: listen', (t) => {
     const {listenSW} = reRequire('./register');
-    const addEventListener = sinon.stub();
+    const addEventListener = stub();
     const sw = {
         addEventListener,
     };
@@ -48,7 +48,7 @@ test('sw: register: registerSW: no https', async (t) => {
         location,
     } = global;
     
-    const register = sinon.stub();
+    const register = stub();
     
     global.navigator = getNavigator({
         register,
@@ -80,7 +80,7 @@ test('sw: register: registerSW: no localhost', async (t) => {
         hostname: 'cloudcmd.io',
     };
     
-    const register = sinon.stub();
+    const register = stub();
     
     global.navigator = getNavigator({
         register,
@@ -107,7 +107,7 @@ test('sw: register: registerSW', async (t) => {
         hostname: 'localhost',
     };
     
-    const register = sinon.stub();
+    const register = stub();
     
     global.navigator = getNavigator({
         register,
@@ -135,10 +135,10 @@ test('sw: register: unregisterSW', async (t) => {
     };
     
     const reg = {
-        unregister: sinon.stub()
+        unregister: stub()
     };
     
-    const register = sinon.stub()
+    const register = stub()
         .returns(Promise.resolve(reg));
     
     global.navigator = getNavigator({
@@ -147,18 +147,18 @@ test('sw: register: unregisterSW', async (t) => {
     
     const {unregisterSW} = reRequire('./register');
     
-    await unregisterSW();
+    await unregisterSW('/hello');
     
     global.location = location;
     global.navigator = navigator;
     
-    t.ok(register.calledWith(), 'should call register');
+    t.ok(register.calledWith('/hello/sw.js'), 'should call register');
     t.end();
 });
 
 
 function getNavigator({register, unregister}) {
-    unregister = unregister || sinon.stub();
+    unregister = unregister || stub();
     
     return {
         serviceWorker: {
