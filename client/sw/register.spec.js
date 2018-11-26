@@ -156,7 +156,6 @@ test('sw: register: unregisterSW', async (t) => {
     t.end();
 });
 
-
 function getNavigator({register, unregister}) {
     unregister = unregister || stub();
     
