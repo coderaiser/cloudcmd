@@ -237,5 +237,8 @@
     "node": ">=8.3.0"
   },
   "license": "MIT",
-  "main": "server/cloudcmd.js"
+  "main": "server/cloudcmd.js",
+  "publishConfig": {
+    "access": "public"
+  }
 }
