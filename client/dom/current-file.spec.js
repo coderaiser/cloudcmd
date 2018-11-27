@@ -1,6 +1,7 @@
 'use strict';
 
 const test = require('tape');
+const {create} = require('auto-globals');
 const stub = require('@cloudcmd/stub');
 const id = (a) => a;
 const wraptile = require('wraptile');
@@ -18,10 +19,8 @@ test('current-file: setCurrentName: setAttribute', (t) => {
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
     
-    const setAttribute = stub();
-    const current = {
-        setAttribute
-    };
+    const current = create();
+    const {setAttribute} = current;
     
     currentFile.setCurrentName('hello', current);
     
@@ -42,10 +41,8 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
     
-    const setAttribute = stub();
-    const current = {
-        setAttribute
-    };
+    const current = create();
+    const {setAttribute} = current;
     
     currentFile.setCurrentName('ай', current);
     
@@ -64,16 +61,13 @@ test('current-file: emit', (t) => {
     } = global;
     
     const emit = stub();
-    const setAttribute = stub();
     
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd({
         emit,
     });
     
-    const current = {
-        setAttribute,
-    };
+    const current = create();
     
     currentFile.setCurrentName('hello', current);
     
@@ -91,7 +85,6 @@ test('current-file: setCurrentName: return', (t) => {
         CloudCmd,
     } = global;
     
-    const setAttribute = stub();
     const link = {};
     
     global.DOM = getDOM({
@@ -100,9 +93,7 @@ test('current-file: setCurrentName: return', (t) => {
     
     global.CloudCmd = getCloudCmd();
     
-    const current = {
-        setAttribute,
-    };
+    const current = create();
     
     const result = currentFile.setCurrentName('hello', current);
     

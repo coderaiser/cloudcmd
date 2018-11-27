@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const stub = require('@cloudcmd/stub');
+const {create} = require('auto-globals');
 const tryCatch = require('try-catch');
 
 const {
@@ -21,12 +21,8 @@ test('dom: isContainClass: no className', (t) => {
 });
 
 test('dom: isContainClass: contains', (t) => {
-    const contains = stub();
-    const el = {
-        classList: {
-            contains,
-        }
-    };
+    const el = create();
+    const {contains} = el.classList;
     
     const className = 'hello';
     isContainClass(el, className);
@@ -36,12 +32,8 @@ test('dom: isContainClass: contains', (t) => {
 });
 
 test('dom: isContainClass: contains: array', (t) => {
-    const contains = stub();
-    const el = {
-        classList: {
-            contains,
-        }
-    };
+    const el = create();
+    const {contains} = el.classList;
     
     const className = 'hello';
     isContainClass(el, [
