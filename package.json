@@ -176,6 +176,7 @@
     "@cloudcmd/modal": "^1.0.0",
     "@cloudcmd/olark": "^2.0.1",
     "@cloudcmd/stub": "^2.0.0",
+    "auto-globals": "^1.7.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",
