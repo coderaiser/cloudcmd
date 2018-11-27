@@ -1,6 +1,11 @@
 'use strict';
 
-const test = require('tape');
+const tryTo = require('try-to-tape');
+const autoGlobals = require('auto-globals');
+const tape = require('tape');
+
+const test = autoGlobals(tryTo(tape));
+
 const stub = require('@cloudcmd/stub');
 const tryCatch = require('try-catch');
 const {reRequire} = require('mock-require');
@@ -27,142 +32,70 @@ test('sw: lesten: no sw', (t) => {
 });
 
 test('sw: register: registerSW: no serviceWorker', async (t) => {
-    const {navigator} = global;
-    global.navigator = {};
-    
     const {
         registerSW,
     } = reRequire('./register');
     
     await registerSW();
     
-    global.navigator = navigator;
-    
     t.pass('should not call register');
     t.end();
 });
 
-test('sw: register: registerSW: no https', async (t) => {
-    const {
-        navigator,
-        location,
-    } = global;
+test('sw: register: registerSW: no https', async (t, {location, navigator}) => {
+    const {register} = navigator.serviceWorker;
     
-    const register = stub();
-    
-    global.navigator = getNavigator({
-        register,
-    });
-    
-    global.location = {
-        protocol: 'http:'
-    };
+    location.protocol = 'http:';
     
     const {registerSW} = reRequire('./register');
     
     await registerSW();
     
-    global.location = location;
-    global.navigator = navigator;
-    
     t.notOk(register.called, 'should not call register');
     t.end();
 });
 
-test('sw: register: registerSW: no localhost', async (t) => {
-    const {
-        navigator,
-        location,
-    } = global;
-    
-    global.location = {
+test('sw: register: registerSW: http', async (t, {location, navigator}) => {
+    Object.assign(location, {
         protocol: 'http:',
         hostname: 'cloudcmd.io',
-    };
-    
-    const register = stub();
-    
-    global.navigator = getNavigator({
-        register,
     });
+    
+    const {register} = navigator.serviceWorker;
     
     const {registerSW} = reRequire('./register');
     
     await registerSW();
     
-    global.location = location;
-    global.navigator = navigator;
-    
     t.notOk(register.called, 'should not call register');
     t.end();
 });
 
-test('sw: register: registerSW', async (t) => {
-    const {
-        navigator,
-        location,
-    } = global;
+test('sw: register: registerSW', async (t, {location, navigator}) => {
+    location.hostname = 'localhost';
     
-    global.location = {
-        hostname: 'localhost',
-    };
-    
-    const register = stub();
-    
-    global.navigator = getNavigator({
-        register,
-    });
-    
+    const {register} = navigator.serviceWorker;
     const {registerSW} = reRequire('./register');
     
     await registerSW('/hello');
-    
-    global.location = location;
-    global.navigator = navigator;
     
     t.ok(register.calledWith('/hello/sw.js'), 'should call register');
     t.end();
 });
 
-test('sw: register: unregisterSW', async (t) => {
-    const {
-        navigator,
-        location,
-    } = global;
+test('sw: register: unregisterSW', async (t, {location, navigator}) => {
+    location.hostname = 'localhost';
     
-    global.location = {
-        hostname: 'localhost',
-    };
+    const {serviceWorker} = navigator;
+    const {register} = serviceWorker;
     
-    const reg = {
-        unregister: stub()
-    };
-    
-    const register = stub()
-        .returns(Promise.resolve(reg));
-    
-    global.navigator = getNavigator({
-        register,
-    });
+    register.returns(serviceWorker);
     
     const {unregisterSW} = reRequire('./register');
     
     await unregisterSW('/hello');
     
-    global.location = location;
-    global.navigator = navigator;
-    
     t.ok(register.calledWith('/hello/sw.js'), 'should call register');
     t.end();
 });
 
-function getNavigator({register, unregister}) {
-    unregister = unregister || stub();
-    
-    return {
-        serviceWorker: {
-            register,
-            unregister,
-        }
-    };
-}
