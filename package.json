@@ -49,6 +49,7 @@
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
+    "start:pnp": "node -r ./.pnp bin/cloudcmd.js",
     "start:dev": "NODE_ENV=development node bin/cloudcmd.js",
     "build:start": "redrun build:client start",
     "build:start:dev": "redrun build:client:dev start:dev",
@@ -241,5 +242,8 @@
   "main": "server/cloudcmd.js",
   "publishConfig": {
     "access": "public"
+  },
+  "installConfig": {
+    "pnp": true
   }
 }

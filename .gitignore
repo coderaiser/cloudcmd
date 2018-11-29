@@ -15,3 +15,4 @@ modules/emitify
 dist
 dist-dev
 
+.pnp*
