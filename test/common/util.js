@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('tape');
-const clean = require('clear-module');
+const {reRequire} = require('mock-require');
 const DIR = '../../';
 const UtilPath = DIR + 'common/util';
 const Util = require(UtilPath);
@@ -136,9 +136,8 @@ test('util: escapeRegExp', (t) => {
 
 test('util: scope', (t) => {
     global.window = {};
-    clean(UtilPath);
     
-    require(UtilPath);
+    reRequire(UtilPath);
     
     t.pass('should set window in scope');
     

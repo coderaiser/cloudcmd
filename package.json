@@ -180,7 +180,6 @@
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^1.0.1",
-    "clear-module": "^3.0.0",
     "codegen.macro": "^3.0.0",
     "coveralls": "^3.0.0",
     "css-loader": "^1.0.0",

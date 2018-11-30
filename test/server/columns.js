@@ -2,33 +2,30 @@
 
 const test = require('tape');
 const fs = require('fs');
-const clean = require('clear-module');
+const {reRequire} = require('mock-require');
 const columnsPath = '../../server/columns';
 
 test('columns', (t) => {
-    clean(columnsPath);
-    
     const {NODE_ENV} = process.env;
     process.env.NODE_ENV = '';
-    const columns = require(columnsPath);
+    const columns = reRequire(columnsPath);
     
-    t.equal(columns[''], '', 'should equal');
     process.env.NODE_ENV = NODE_ENV;
     
+    t.equal(columns[''], '', 'should equal');
     t.end();
 });
 
 test('columns: dev', (t) => {
-    clean(columnsPath);
     const {NODE_ENV} = process.env;
     process.env.NODE_ENV = 'development';
     
-    const columns = require(columnsPath);
+    const columns = reRequire(columnsPath);
     const css = fs.readFileSync(`${__dirname}/../../css/columns/name-size-date.css`, 'utf8');
     
-    t.equal(columns['name-size-date'], css, 'should equal');
     process.env.NODE_ENV = NODE_ENV;
     
+    t.equal(columns['name-size-date'], css, 'should equal');
     t.end();
 });
 
