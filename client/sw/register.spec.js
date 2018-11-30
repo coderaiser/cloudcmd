@@ -31,10 +31,12 @@ test('sw: lesten: no sw', (t) => {
     t.end();
 });
 
-test('sw: register: registerSW: no serviceWorker', async (t) => {
+test('sw: register: registerSW: no serviceWorker', async (t, {navigator}) => {
     const {
         registerSW,
     } = reRequire('./register');
+    
+    delete navigator.serviceWorker;
     
     await registerSW();
     
