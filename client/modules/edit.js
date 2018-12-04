@@ -103,10 +103,10 @@ module.exports.hide = () => {
 };
 
 const loadFiles = async (element) => {
-    const {prefix} = CloudCmd;
-    const socketPath = prefix;
-    const {prefixSocket} = CloudCmd;
-    const url = `${prefix}/${EditorName}/${EditorName}.js`;
+    const prefix = `${CloudCmd.prefix}/${EditorName}`;
+    const socketPath = CloudCmd.prefix;
+    const prefixSocket = `${CloudCmd.prefixSocket}/${EditorName}`;
+    const url = `${prefix}/${EditorName}.js`;
     
     time(Name + ' load');
     
