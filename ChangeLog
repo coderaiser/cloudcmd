@@ -1,3 +1,18 @@
+2018.12.04, v11.8.3
+
+fix:
+- test(export) defaultConfig: prefix
+- (edit) prefix (#207)
+- feature(package) :lint: add eslint-remove-line
+
+feature:
+- (modules) socket.io v2.2.0
+- (package) clear-module -> mock-require
+- (package) auto-globals v1.7.0
+- (package) fix:lint: add eslint-remove-line
+- (cloudcmd) sinon, sinon-called-with-diff -> @cloudcmd/stub
+
+
 2018.11.22, v11.8.2
 
 fix:
