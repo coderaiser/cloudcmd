@@ -19,7 +19,7 @@
     ],
     "remote": [{
         "name": "socket",
-        "version": "2.1.1",
+        "version": "2.2.0",
         "local": "/socket.io/socket.io.js",
         "remote": "https://cdnjs.cloudflare.com/ajax/libs/socket.io/{{ version }}/socket.io.js"
     }],
