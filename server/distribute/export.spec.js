@@ -12,6 +12,7 @@ test('distribute: export', async (t) => {
         exportToken: 'a',
         vim: true,
         log: false,
+        prefix: '',
     };
     
     const {port, done} = await connect({
