@@ -75,7 +75,7 @@ module.exports = async (options) => {
     const host = config('ip') || 'localhost';
     const port0 = port || server.address().port;
     const url = `http://${host}:${port0}${prefix}/`;
-    console.log('url:', url);
+    console.log(`url: ${url}`);
     
     if (!config('open'))
         return;
