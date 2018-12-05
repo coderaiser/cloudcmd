@@ -6,8 +6,6 @@ const DIR = '../../';
 const UtilPath = DIR + 'common/util';
 const Util = require(UtilPath);
 const {
-    getStrBigFirst,
-    kebabToCamelCase,
     findObjByNameInArr,
     getRegExp,
     escapeRegExp,
@@ -35,26 +33,6 @@ test('util: getExt: no name', (t) => {
     const ext = Util.getExt();
     
     t.equal(ext, '', 'should return empty string');
-    t.end();
-});
-
-test('getStrBigFirst: args', (t) => {
-    t.throws(getStrBigFirst, /str could not be empty!/, 'should throw when no str');
-    t.end();
-});
-
-test('getStrBigFirst', (t) => {
-    t.equal(getStrBigFirst('hello'), 'Hello', 'should return str');
-    t.end();
-});
-
-test('kebabToCamelCase: args', (t) => {
-    t.throws(kebabToCamelCase, /str could not be empty!/, 'should throw when no str');
-    t.end();
-});
-
-test('kebabToCamelCase', (t) => {
-    t.equal(kebabToCamelCase('hello-world'), 'HelloWorld', 'should convert kebab to camel case');
     t.end();
 });
 

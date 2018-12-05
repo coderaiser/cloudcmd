@@ -7,9 +7,8 @@ const tryToCatch = require('try-to-catch/legacy');
 const {promisify} = require('es6-promisify');
 const loadJS = promisify(require('load.js').js);
 
-const {
-    kebabToCamelCase,
-} = require('../common/util');
+const pascalCase = require('just-pascal-case');
+const noJS = (a) => a.replace(/.js$/, '');
 
 /**
  * function load modules
@@ -20,7 +19,7 @@ module.exports = function loadModule(params) {
         return;
     
     const {path} = params;
-    const name = params.name || path && kebabToCamelCase(path);
+    const name = params.name || path && noJS(pascalCase(path));
     const doBefore = params.dobefore;
     
     if (CloudCmd[name])

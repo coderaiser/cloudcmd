@@ -8,7 +8,7 @@ const rendy = require('rendy/legacy');
 const exec = require('execon');
 const load = require('load.js');
 
-const {kebabToCamelCase} = require('../common/util');
+const pascalCase = require('just-pascal-case');
 const isDev = process.env.NODE_ENV === 'development';
 
 const Images = require('./dom/images');
@@ -21,6 +21,7 @@ const currify = require('currify/legacy');
 
 const bind = (f, ...a) => () => f(...a);
 const noop = () => {};
+const noJS = (a) => a.replace(/.js$/, '');
 
 const {
     apiURL,
@@ -187,7 +188,7 @@ function CloudCmdProto(DOM) {
             return;
         
         const [kebabModule] = query;
-        const module = kebabToCamelCase(kebabModule.slice(1));
+        const module = noJS(pascalCase(kebabModule.slice(1)));
         
         const file = query[1];
         const current = DOM.getCurrentByName(file);
