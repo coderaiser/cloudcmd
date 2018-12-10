@@ -10,7 +10,7 @@
         "tape/max-asserts": ["error", 1],
     },
     "extends": [
-        ".eslintrc",
+        ".eslintrc.json",
         "plugin:node/recommended",
         "plugin:tape/recommended",
     ],
