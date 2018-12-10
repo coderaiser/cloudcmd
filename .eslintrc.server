@@ -6,7 +6,7 @@
         "no-process-exit": 0
     },
     "extends": [
-        ".eslintrc",
+        ".eslintrc.json",
         "plugin:node/recommended"
     ],
     "plugins": [
