@@ -182,7 +182,7 @@
     "clean-css-loader": "^1.0.1",
     "codegen.macro": "^3.0.0",
     "coveralls": "^3.0.0",
-    "css-loader": "^1.0.0",
+    "css-loader": "^2.0.1",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^3.0.2",
     "es6-promise": "^4.0.5",
