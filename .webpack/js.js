@@ -106,6 +106,10 @@ module.exports = {
         noParse,
     },
     plugins,
+    performance: {
+        maxEntrypointSize: 500000,
+        maxAssetSize: 500000,
+    },
 };
 
 function externals(context, request, fn) {
