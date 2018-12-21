@@ -56,7 +56,7 @@ npm i cloudcmd -g --force
 
 Usage
 ---------------
-To start the server, just run the global NPM binary from your terminal:
+To start the server, just run the global *npm* binary from your terminal:
 
 ```sh
 cloudcmd
@@ -164,7 +164,7 @@ Hot keys
 | `F1`                  | help
 | `F2`                  | rename
 | `F3`                  | view
-| `Shift + F3`          | view as Markdown
+| `Shift + F3`          | view as markdown
 | `F4`                  | edit
 | `Shift + F4`          | edit in "vim" mode
 | `F5`                  | copy
