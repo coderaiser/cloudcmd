@@ -16,14 +16,14 @@
 [TERMUX]:                   https://termux.com "Termux"
 [INLY]:                     https://github.com/coderaiser/node-inly "Extract archive"
 
-**Cloud Commander** is a file manager for the web. It includes a command-line console and a text editor. Cloud Commander will help you manage your server and work with files, directories and programs in a web browser from any computer, mobile or tablet.
+**Cloud Commander** is a file manager for the web. It includes a command-line console and a text editor. Cloud Commander helps you manage your server and work with files, directories and programs in a web browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
 Benefits
 ---------------
 
-- Open Source (**MIT License**).
+- Open source (**MIT License**).
 - Has 2 classic panels.
 - Optional **authorization**.
 - Client works in a web browser.
