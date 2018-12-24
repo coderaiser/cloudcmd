@@ -1,15 +1,21 @@
 {
     "env": {
-        "node": true
+        "node": true,
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
     },
     "rules": {
-        "no-process-exit": 0
+        "no-process-exit": 0,
+        "tape/max-asserts": ["error", 1],
     },
     "extends": [
         ".eslintrc",
-        "plugin:node/recommended"
+        "plugin:node/recommended",
+        "plugin:tape/recommended",
     ],
     "plugins": [
-        "node"
+        "node",
+        "tape",
     ]
 }
