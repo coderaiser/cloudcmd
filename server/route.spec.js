@@ -198,7 +198,7 @@ test('cloudcmd: route: file: fs', async (t) => {
 
 test('cloudcmd: route: symlink', async (t) => {
     const emptyDir = path.join(fixtureDir, 'empty-dir');
-    const root = fixtureDir
+    const root = fixtureDir;
     const symlink = path.join(root, 'symlink-dir');
     
     const config = {
@@ -362,7 +362,7 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
     
     const options = {
         config,
-    }
+    };
     
     const {body} = await request.get('/', {
         options
@@ -379,7 +379,7 @@ test('cloudcmd: route: no termianl: /fs', async (t) => {
     
     const options = {
         config,
-    }
+    };
     
     const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/fs', {
@@ -433,7 +433,7 @@ test('cloudcmd: route: buttons: contact', async (t) => {
     
     const options = {
         config,
-    }
+    };
     
     const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/', {

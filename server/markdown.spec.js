@@ -50,7 +50,7 @@ test('cloudcmd: markdown: put', async (t) => {
     
     const {body} = await request.put('/api/v1/markdown', {
         body: mdStream,
-    })
+    });
     
     t.equal(body, htmlFile, 'should render markdown input to html');
     t.end();

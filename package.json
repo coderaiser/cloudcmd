@@ -45,7 +45,7 @@
   },
   "config": {
     "dirs": "bin/cloudcmd.js common server",
-    "dirs_test": "test bin/release.js webpack.config.js cssnano.config.js .webpack client/**/*.spec.js server/**/*.spec.js common/**/*.spec.js"
+    "dirs_test": "test bin/release.js webpack.config.js cssnano.config.js .webpack {client,server,common}/**/*.spec.js"
   },
   "scripts": {
     "start": "node bin/cloudcmd.js",
