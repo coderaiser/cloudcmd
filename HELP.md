@@ -16,54 +16,53 @@
 [TERMUX]:                   https://termux.com "Termux"
 [INLY]:                     https://github.com/coderaiser/node-inly "Extract archive"
 
-**Cloud Commander** a file manager for the web with console and editor.
- Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
+**Cloud Commander** is a file manager for the web. It includes a command-line console and a text editor. Cloud Commander helps you manage your server and work with files, directories and programs in a web browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
 Benefits
 ---------------
 
-- Open Source (**MIT License**).
+- Open source (**MIT License**).
 - Has 2 classic panels.
 - Optional **authorization**.
-- Client works in web browser.
+- Client works in a web browser.
 - Server works on **Windows**, **Linux**, **Mac OS** and **Android** (with help of [Termux][TERMUX]).
-- Could be used local or remotely.
-- Adapting to screen size.
+- Can be used local or remotely.
+- Adapts to screen size.
 - **3 built-in editors** with support of **syntax highlighting**: [Dword][DWORD], [Edward][EDWARD] and [Deepword][DEEPWORD].
-- [Console](https://github.com/cloudcmd/console "Console") with support of default OS command line.
+- [Console](https://github.com/cloudcmd/console "Console") with support of the default OS command line.
 - Written in **JavaScript/Node.js**.
 - Built-in archives pack: **zip** and **tar.gz**.
 - Built-in archives extract: **zip**, **tar**, **gz**, **bz2**, **.tar.gz** and **.tar.bz2** (with help of [inly][INLY]).
 
-Install
+Installation
 ---------------
 
-The installation of file manager is very simple.
+Installation is very simple:
 
-- install latest version of [node.js](https://nodejs.org/ "node.js").
-- install `cloudcmd` via `npm` with:
+- Install the latest version of [node.js](https://nodejs.org/ "node.js").
+- Install `cloudcmd` via `npm` with:
 
 ```sh
 npm i cloudcmd -g
 ```
 
-When in trouble use:
+When in trouble, use:
 
 ```sh
 npm i cloudcmd -g --force
 ```
 
-Start
+Usage
 ---------------
-For starting just type in console:
+To start the server, just run the global *npm* binary from your terminal:
 
 ```sh
 cloudcmd
 ```
 
-Cloud Commander supports command line parameters:
+Cloud Commander supports the following command-line parameters:
 
 |Parameter                      |Operation
 |:------------------------------|:------------------------------
@@ -86,7 +85,7 @@ Cloud Commander supports command line parameters:
 | `--progress`                  | show progress of file operations
 | `--confirm-copy`              | confirm copy
 | `--confirm-move`              | confirm move
-| `--open`                      | open web browser when server started
+| `--open`                      | open web browser when server starts
 | `--name`                      | set tab name in web browser
 | `--one-file-panel`            | show one file panel
 | `--keys-panel`                | show keys panel
@@ -139,25 +138,23 @@ Cloud Commander supports command line parameters:
 | `--no-dropbox-token`          | unset dropbox token
 | `--no-log`                    | disable logging
 
-If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
-port from it (`8000` default). if port variables `PORT` isn't exist.
+For options not specified by command-line parameters, Cloud Commander then reads configuration data from `~/.cloudcmd.json`. It uses port `8000` by default.
 
-To begin use, type in address bar of your browser:
+To begin using the web client, go to this URL in your browser:
 
 ```
 http://localhost:8000
 ```
 
-Update
+Updating the app
 ---------------
-If you installed Cloud Commander with `npm`, stop application and
-re-install it:
+If you installed Cloud Commander with `npm`, stop the server. Then, reinstall it with:
 
 ```sh
 npm install cloudcmd -g
 ```
 
-Then start it again and reload the page.
+Then, start the server again with `cloudcmd` and reload the page.
 
 Hot keys
 ---------------
@@ -167,9 +164,9 @@ Hot keys
 | `F1`                  | help
 | `F2`                  | rename
 | `F3`                  | view
-| `Shift + F3`          | view as `markdown`
+| `Shift + F3`          | view as markdown
 | `F4`                  | edit
-| `Shift + F4`          | edit in `vim` mode
+| `Shift + F4`          | edit in "vim" mode
 | `F5`                  | copy
 | `Alt` + `F5`          | pack
 | `F6`                  | rename/move
@@ -183,23 +180,23 @@ Hot keys
 | `*`                   | select/unselect all
 | `+`                   | expand selection
 | `-`                   | shrink selection
-| `Ctrl + x`            | cut to buffer
-| `Ctrl + с`            | copy to buffer
-| `Ctrl + v`            | paste from buffer
-| `Ctrl + z`            | clear buffer
-| `Ctrl + p`            | copy path
-| `Ctrl + r`            | refresh
-| `Ctrl + d`            | clear local storage
-| `Ctrl + a`            | select all files in a panel
-| `Ctrl + m`            | rename selected files in editor
-| `Shift + Ctrl + m`    | rename selected files in vim mode of editor
-| `Ctrl + u`            | swap panels
+| `Ctrl + X`            | cut to buffer
+| `Ctrl + C`            | copy to buffer
+| `Ctrl + V`            | paste from buffer
+| `Ctrl + Z`            | clear buffer
+| `Ctrl + P`            | copy path
+| `Ctrl + R`            | refresh
+| `Ctrl + D`            | clear local storage
+| `Ctrl + A`            | select all files in a panel
+| `Ctrl + M`            | rename selected files in editor
+| `Shift + Ctrl + M`    | rename selected files in vim mode of editor
+| `Ctrl + U`            | swap panels
 | `Ctrl + F3`           | sort by name
 | `Ctrl + F5`           | sort by date
 | `Ctrl + F6`           | sort by size
 | `Up`, `Down`, `Enter` | file system navigation
 | `Alt + Left/Right`    | show content of directory under cursor in target panel
-| `Alt + g`             | go to directory
+| `Alt + G`             | go to directory
 | `Ctrl + \`            | go to the root directory
 | `Tab`                 | move via panels
 | `Page Up`             | up on one page
@@ -214,7 +211,7 @@ Hot keys
 
 ### Vim
 
-When `--vim` option provided, or configuration parameter `vim` set, next hot keys become available:
+When the `--vim` option is provided, or the configuration parameter `vim` is set, the following hotkeys become available:
 
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
@@ -232,20 +229,20 @@ When `--vim` option provided, or configuration parameter `vim` set, next hot key
 | `N`                   | navigate to previous found file
 
 Commands can be joined, for example:
-- `5j` will navigate `5` files below current;
-- `d5j` will remove next `5` files;
+- `5j` will navigate **5** files below current;
+- `d5j` will remove next **5** files;
 - `dG` will remove all files from current to bottom;
 
-Drag and Drop
+Drag and drop
 ---------------
-Next file operations are accessible through `Drag and Drop`.
+These file operations are accessible with "drag and drop".
 
 | Drag Mouse Button | Key       | Origin    | Destination   |Operation
 |:------------------|:----------|:----------|:--------------|:------------------
-| `Left`            |           | `Panel`   | `Panel`       | copy files
-| `Left`            | `Shift`   | `Panel`   | `Panel`       | rename/move files
-| `Left`            |           | `Panel`   | `Desktop`     | download files
-| `Left`            |           | `Desktop` | `Panel`       | upload files
+| Left              |           | Panel     | Panel         | copy files
+| Left              | `Shift`   | Panel     | Panel         | rename/move files
+| Left              |           | Panel     | Desktop       | download files
+| Left              |           | Desktop   | Panel         | upload files
 
 View
 ---------------
@@ -254,10 +251,10 @@ View
 ### Features
 - View images.
 - View text files.
-- Playing audio.
-- Playing video.
+- Play audio.
+- Play video.
 
-### Hot keys
+### Hotkeys
 
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
@@ -273,10 +270,10 @@ Edit
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F4`                  | open
-| `Shift + F4`          | open in `vim` mode
+| `Shift + F4`          | open in "vim" mode
 | `Esc`                 | close
 
-For more details see [Edward hot keys][EDWARD_KEYS].
+For more details see [Edward hotkeys][EDWARD_KEYS].
 
 Console
 ---------------
@@ -287,7 +284,7 @@ Console
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `~`                   | open
-| `Ctrl + p`            | paste path of current directory
+| `Ctrl + P`            | paste path of current directory
 | `Esc`                 | close
 
 For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
@@ -298,13 +295,13 @@ Terminal
 
 ### Install
 
-`Terminal` disabled and not installed by default. To use it you should install [gritty](https://github.com/cloudcmd/gritty "Gritty") with:
+The terminal is disabled and not installed by default. To use it, you should install [gritty](https://github.com/cloudcmd/gritty "Gritty") with:
 
 ```sh
 npm i gritty -g
 ```
 
-And then set the path of a terminal with:
+and then set the path for the terminal with:
 
 ```sh
 cloudcmd --terminal --terminal-path `gritty --path` --save
@@ -312,17 +309,18 @@ cloudcmd --terminal --terminal-path `gritty --path` --save
 
 ### Windows
 
-If you can't install `gritty` on Windows try to install `windows-build-tools` first:
+If you can't install `gritty` on Windows, try to install `windows-build-tools` first:
 
 ```sh
 npm install windows-build-tools -g
 ```
 
-Then get path of a `gritty` with:
+Then get the path of `gritty` with:
 
 ```sh
 gritty --path
 ```
+
 It will returns something like:
 
 ```sh
@@ -335,9 +333,9 @@ Set this path as `--terminal-path` with:
 cloudcmd --save --terminal --terminal-path "C:\Users\coderaiser\AppData\Roaming\npm\node_modules\gritty"
 ```
 
-After that you can use `terminal` in the same way as a `console`.
+After that, you can use Cloud Commander's terminal in the same way as a normal shell console.
 
-### Hot keys
+### Hotkeys
 
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
@@ -347,21 +345,21 @@ After that you can use `terminal` in the same way as a `console`.
 Environment Variables
 ---------------
 
-Every program executed in `console` or `terminal` has these `environment` variables:
+Every program executed in Cloud Commander's terminal has these environment variables:
 
 - `ACTIVE_DIR` - directory that contains cursor
 - `PASSIVE_DIR` - directory with no cursor
 - `CURRENT_NAME` - name of a file under cursor
 - `CURRENT_PATH` - path to file under cursor
 
-On `Unix` you can use it this way:
+On Unix, you can use it this way:
 
 ```sh
 ~> echo $CURRENT_PATH
 /home/coderaiser/cloudcmd/bin/cloudcmd.js
 ```
 
-Config
+Configuration
 ---------------
 ![Config](/img/screen/config.png "Config")
 
@@ -372,9 +370,9 @@ Config
 | `F10`                 | open
 | `Esc`                 | close
 
-When you change one of options file `~/.cloudcmd.json` would be saved.
-It could be edited manually with any text editor.
-Here is description of options:
+When you change any options, the `~/.cloudcmd.json` file is automatically updated.
+It can also be edited manually with any text editor.
+Here's a description of all options:
 
 ```js
 {
@@ -428,7 +426,7 @@ Here is description of options:
 
 ### Environment Variables
 
-Some config options can be overridden with `environment variables` such:
+Some config options can be overridden with environment variables, such as:
 
 - `CLOUDCMD_NAME` - set tab name in web browser
 - `CLOUDCMD_OPEN` - open web browser when server started
@@ -462,27 +460,30 @@ Some config options can be overridden with `environment variables` such:
 
 ### Distribute
 
-Being able to configure `Cloud Commander` remotely opens the doors to using it as microservice and that's what distribute options set out to do.
-There is an `export server` and `import client` and they enabled with `--export` and `--import` accordingly. There is a `token` it should be the same
-in `--import-token` and `--export-token`. To use `import` you should provide `--import-url` to `import client` so it can connect to an `export server`.
-There is 2 ways `import client` can receive config from an `export server`:
+Being able to configure Cloud Commander remotely opens the doors to using it as microservice, and that's what the "distribute" options set out to do.
+
+There is an **export server** and an **import client**, which are enabled with `--export` and `--import` respectively. There is a "token", which should be the same in `--import-token` and `--export-token`. To use the *import client*, you should provide `--import-url` to the client so it can connect to an *export server*.
+
+There are two ways that the *import client* can receive configuration from an *export server*:
 
 - full config at startup (default)
-- get every updated option (with help of `--import-listen` flag)
+- get every updated option (with help of the `--import-listen` flag)
 
-There is an example of using distribute options in `Cloud Commander` to get config from remote instance.
-Here is an `export server`:
+#### An example - using the "distribute" options to get configuration from a remote instance:
+
+Here's an *export server*:
 
 ```
 coderaiser@cloudcmd:~$ cloudcmd --port 1234 --export --export-token=cloudcmd
 ```
 
-And `import client`:
+...and an *import client*:
+
 ```
 coderaiser@cloudcmd:~$ cloudcmd --name importer --port 4321 --import-url http://127.0.0.1:1234 --import-token=cloudcmd --no-server --save
 ```
 
-Here is the log of `export server`:
+Here's the log output from the *export server*:
 
 ```
 url: http://localhost:1234/
@@ -492,7 +493,7 @@ url: http://localhost:1234/
 2018.08.23 13:41:45 -> export: disconnected importer [127.0.0.1:4321]
 ```
 
-And log of `import client`:
+...and the log output from the *import client*:
 
 ```
 2018.08.23 13:47:36 -> import: try to auth to http://127.0.0.1:1234
@@ -501,9 +502,9 @@ And log of `import client`:
 2018.08.23 13:47:36 -> import: disconnected from http://127.0.0.1:1234
 ```
 
-When `import client` uses `--import-listen` persistent connection used and client receives live updates from the `import server`.
+When the *import client* uses `--import-listen`, a persistent connection is used, and the *client* receives live updates from the *import server*.
 
-`Export server` omit next configuration fields:
+The *export server* omits the following configuration fields:
 
 - `auth`
 - `username`
@@ -525,7 +526,7 @@ Menu
 ---------------
 ![Menu](/img/screen/menu.png "Menu")
 
-Right mouse click button shows context menu with items:
+Right-mouse click to show a context menu with these items:
 
 - View
 - Edit
@@ -553,15 +554,14 @@ Right mouse click button shows context menu with items:
 
 One file panel
 ---------------
-Cloud Commander can work in one panel mode when screen size can not accommodate second panel or via `--one-file-panel` options flag.
-It could happen when mobile device, tablet or small window size used to work with file manager.
+Cloud Commander can work in one panel mode when your screen size can't accommodate a second panel (such as on mobile or tablet), or via the `--one-file-panel` options flag.
 
 ![One file panel](/img/screen/one-file-panel.png "One file panel")
 
-Using as Middleware
+Using as middleware
 ---------------
 
-Cloud Commander could be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
+Cloud Commander can be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
 
 Init `package.json`:
 
@@ -622,22 +622,20 @@ app.use(prefix, cloudcmd({
 server.listen(port);
 ```
 
-And you are ready to go.
+Now you're ready to go!
 
 ### Authorization
 
-If you want to enable `authorization` you can pass credentials in a `config`.
-To generate password you can install `criton` with `npm i criton --save` and use it
-or any other way to generate a `hash` of a `password`.
+If you want to enable authorization, you can pass credentials to Cloud Commander with a config. To generate a password, you can install `criton` with `npm i criton --save`, and use it (or any other way) to generate a hash of a password.
 
 ```js
 const criton = require('criton');
 const algo = 'sha512WithRSAEncryption'; // default
 
-// you can generate hash dynamically
+// you can generate a hash dynamically
 const password = criton('root', algo);
 
-// or use pregenerated hash as well
+// or use a pregenerated hash as well
 '2b64f2e..ca5d9a9';
 
 const auth = true;
@@ -653,10 +651,7 @@ const config = {
 
 Server
 ---------------
-Standard practices say no non-root process gets to talk to
-the Internet on a port less than 1024. Anyway I suggest you
-to start Cloud Commander as non-root. How it could be solved?
-There is a couple easy and fast ways. One of them is port forwarding.
+Standard practices dictate that no non-root process get to talk to the internet on a port less than 1024. Despite this, **I suggest you start Cloud Commander as a non-root process**. How can we get around this limitation? There's a couple of fast & easy ways. One of them is port forwarding:
 
 ### Iptables
 
@@ -669,15 +664,14 @@ iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 4430
 iptables -t nat -L # look rules after
 ```
 
-You should see something like this ( **8000** and **4430** should be in config as **port** and **sslPort** )
+You should see something like this (**8000** and **4430** should be in config as **port** and **sslPort**)
 
 ```sh
 target     prot opt source               destination
 REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
 REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
 ```
-If you would want to get things back just clear rules ( **1** and **2** it's rule numbers,
-in your list they could differ).
+If you would want to get things back just clear rules (rule numbers **1** and **2**; in your list they could differ).
 
 ```sh
 iptables -t nat -D PREROUTING 2
@@ -685,14 +679,14 @@ iptables -t nat -D PREROUTING 1
 ```
 
 ### nginx
-Get [nginx](http://nginx.org/ "nginx"). On Linux it could be done this way:
+Get [nginx](http://nginx.org/ "nginx"). On Linux, you can run:
 
 ```sh
 sudo apt-get install nginx #for ubuntu and debian
 ```
 
-Then make host file **/etc/nginx/sites-available/io.cloudcmd.io**
-( *io.cloudcmd.io* is your domain name) with content:
+Then, make a host file **/etc/nginx/sites-available/io.cloudcmd.io**
+(where, for example, *io.cloudcmd.io* is your domain name) with these contents:
 
 ```sh
 server {
@@ -706,7 +700,7 @@ server {
 }
 ```
 
-If you want add **SSL**, add a couple lines to server block:
+**If you want add SSL**, add a couple lines to the `server` block:
 
 ```sh
 server {
@@ -723,7 +717,7 @@ server {
 }
 ```
 
-For WebSocket support (nginx >= v1.3.13) modify server block:
+For WebSocket support, (nginx >= v1.3.13) modify the `server` block like so:
 
 ```sh
     location / {
@@ -736,7 +730,7 @@ For WebSocket support (nginx >= v1.3.13) modify server block:
 ```
 
 
-If you need redirection from **http** to **https**, it's simple:
+If you need redirection from **http** to **https**, simply use:
 
 ```sh
 server {
@@ -748,7 +742,7 @@ server {
 ```
 
 ```sh
-# create symlink of this file
+# create a symlink of this file
 ln -s ./sites-available/io.cloudcmd.io ./sites-enabled
 # restart nginx
 /etc/init.d/nginx restart
@@ -756,22 +750,21 @@ ln -s ./sites-available/io.cloudcmd.io ./sites-enabled
 
 Deploy
 ---------------
-`Cloud Commander` could be easily deployed to [Heroku](https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy to Heroku").
+`Cloud Commander` can be easily deployed to [Heroku](https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy to Heroku").
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png "Deploy to Heroku")]( https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd)
 
 Docker
 ---------------
-`Cloud Commander` could be used as [docker container](https://hub.docker.com/r/coderaiser/cloudcmd/ "Docker container") this way:
+`Cloud Commander` can be used as [docker container](https://hub.docker.com/r/coderaiser/cloudcmd/ "Docker container") like so:
 
 ```sh
 docker run -t --rm -v ~:/root -v /:/mnt/fs -w=/root -p 8000:8000 coderaiser/cloudcmd
 ```
 
-Config would be read from home directory, hosts root file system would be mount to `/mnt/fs`,
-`8000` port would be exposed to hosts port.
+Configuration will be read from the home directory, the host's root file system will be mounted to `/mnt/fs`, and port `8000` port will exposed to the host's port.
 
-Also you could use [docker compose](https://docs.docker.com/compose/ "Docker Compose") with `docker-compose.yml`:
+Also, you can use [docker compose](https://docs.docker.com/compose/ "Docker Compose") with `docker-compose.yml`:
 
 ```yml
 version: '2'
@@ -785,7 +778,7 @@ services:
     image: coderaiser/cloudcmd
 ```
 
-When you create this file run:
+When you create this file, run:
 
 ```sh
 docker-compose up
@@ -793,16 +786,16 @@ docker-compose up
 
 # Dropbox
 
-Dropbox support integrated into Cloud Commander and you can switch from local file system to a dropbox account.
-All you need to do is set `--dropbox` option and [generate dropbox token](https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/) for you account.
+Dropbox support is integrated into Cloud Commander, and you can switch from your local file system to a Dropbox account.
+All you need to do is set `--dropbox` option and [generate a dropbox token](https://blogs.dropbox.com/developers/2014/05/generate-an-access-token-for-your-own-account/) for your account.
 
-This can look like this:
+This could look like this:
 
 ```sh
 cloudcmd --dropbox --dropbox-token your-dropbox-token
 ```
 
-Using `dropbox` remember that there is no remote support of a `console` and `terminal`. Progress of file operation also not supported. There is only basic support, but you can do next things with `files` and `directories`:
+While using Dropbox remember that there is no remote support for the console/terminal. Seeing the progress of file operations is also not supported. There's only basic support, but you can do the following things with files and directories:
 
 - create
 - remove
@@ -813,11 +806,11 @@ Using `dropbox` remember that there is no remote support of a `console` and `ter
 Get involved
 ---------------
 
-There is a lot ways to be involved in `Cloud Commander` development:
+There are a lot of ways to be involved in `Cloud Commander` development:
 
-- if you find a bug or got idea to share [create issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
-- if you fixed a bug, typo or implemented new feature [create pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
-- if you know languages you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
+- if you find a bug or have an idea to share, [create an issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
+- if you fixed a bug, typo or implemented a new feature, [create a pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
+- if you know a language not currently translated, or would like to improve an existing translation, you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
 
 Version history
 ---------------
@@ -1139,5 +1132,5 @@ Special Thanks
     - Russian and Ukrainian translations;
     - config template and style;
     - change order of directories and files;
-    - add ability do not hide path and header when files are scrolling;
+    - add ability to not hide path and header when files are scrolling;
 
