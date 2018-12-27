@@ -30,10 +30,6 @@ test('validate: root: bad', (t) => {
 });
 
 test('validate: root: config', (t) => {
-    const config = {
-        root: Math.random()
-    };
-    
     const configFn = stub()
         .returns(true);
     
