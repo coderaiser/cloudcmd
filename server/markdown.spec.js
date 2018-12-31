@@ -5,7 +5,6 @@ const path = require('path');
 const test = require('tape');
 const {promisify} = require('util');
 
-const pullout = require('pullout');
 const tryToCatch = require('try-to-catch');
 
 const markdown = require('./markdown');
