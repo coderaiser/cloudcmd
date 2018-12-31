@@ -1,22 +1,14 @@
 'use strict';
 
-const os = require('os');
-const path = require('path');
-
 const test = require('tape');
-const readjson = require('readjson');
 const stub = require('@cloudcmd/stub');
 
 const root = '../';
-const dir = './';
 const configPath = './config';
 
 const config = require(configPath);
 const {_cryptoPass} = config;
 const {apiURL} = require(root + 'common/cloudfunc');
-
-const pathHomeConfig = path.join(os.homedir(), '.cloudcmd.json');
-const pathConfig = path.join(__dirname, '..', 'json', 'config.json');
 
 const fixture = require('./config.fixture');
 const {connect} = require('../test/before');
