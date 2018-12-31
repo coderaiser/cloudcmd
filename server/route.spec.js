@@ -9,12 +9,10 @@ const test = tryToTape(require('tape'));
 const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
 
-const rootDir = path.join(__dirname, '../..');
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 
 const routePath = './route';
 const cloudcmdPath = './cloudcmd';
-const terminalPath = './terminal';
 
 const cloudcmd = require(cloudcmdPath);
 const serveOnce = require('serve-once');
@@ -346,12 +344,15 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     reRequire(routePath);
     const cloudcmd = reRequire(cloudcmdPath);
     
-    const {request} = serveOnce(cloudcmd);
-    const {body} = await request.get('/');
+    const {request} = serveOnce(cloudcmd, {
+        config: defaultConfig,
+    });
     
-    mockRequire.stop('flo');
+    const {status} = await request.get('/');
     
-    t.pass('should not hang up');
+    mockRequire.stop('flop');
+    
+    t.equal(status, 200, 'should not hang up');
     t.end();
 });
 
