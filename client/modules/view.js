@@ -111,7 +111,7 @@ function show(data, options) {
         return viewFile();
     
     case 'image':
-        return viewImage(path, prefixURL);
+        return viewImage(prefixURL);
     
     case 'media':
         return viewMedia(path);
@@ -185,7 +185,7 @@ function hide() {
     modal.close();
 }
 
-function viewImage(href, prefixURL) {
+function viewImage(prefixURL) {
     const makeTitle = (path) => {
         return {
             href: prefixURL + path,
