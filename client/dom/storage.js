@@ -33,7 +33,8 @@ module.exports.removeMatch = (string, callback) => {
  * записываем данные в него
  */
 module.exports.set = (name, data, callback) => {
-    let str, error;
+    let str;
+    let error;
     
     if (itype.object(data))
         str = jonny.stringify(data);

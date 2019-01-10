@@ -43,7 +43,9 @@ const Info = DOM.CurrentInfo;
 const Key = CloudCmd.Key;
 const basename = (a) => a.split('/').pop();
 
-let El, TemplateAudio, Overlay;
+let El;
+let TemplateAudio;
+let Overlay;
 
 const Config = {
     beforeShow: (callback) => {

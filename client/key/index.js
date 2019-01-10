@@ -114,7 +114,10 @@ function KeyProto() {
     }
     
     function switchKey(event) {
-        let i, isSelected, prev, next;
+        let i;
+        let isSelected;
+        let prev;
+        let next;
         let current = Info.element;
         let dataName;
         

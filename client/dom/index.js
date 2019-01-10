@@ -628,7 +628,9 @@ function CmdProto() {
      * @param options = {active: true}
      */
     this.getPanel = (options) => {
-        let files, panel, isLeft;
+        let files;
+        let panel;
+        let isLeft;
         let dataName = 'js-';
         
         const current = DOM.getCurrentFile();
@@ -656,7 +658,7 @@ function CmdProto() {
         
         if (!panel)
             throw Error('can not find Active Panel!');
-       
+        
         return panel;
     };
     

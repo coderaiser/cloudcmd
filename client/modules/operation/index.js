@@ -285,7 +285,8 @@ function deleteSilent(files = DOM.getActiveFiles()) {
  * @param operation
  */
 function _processFiles(options, data) {
-    let selFiles, files;
+    let selFiles;
+    let files;
     let panel;
     let shouldAsk;
     let sameName;

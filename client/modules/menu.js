@@ -84,7 +84,8 @@ function getMenuNameByEl(el) {
 }
 
 function getOptions(notFile) {
-    let name, func;
+    let name;
+    let func;
     
     if (notFile) {
         name    = 'context';

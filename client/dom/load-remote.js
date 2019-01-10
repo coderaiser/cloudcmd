@@ -27,7 +27,8 @@ module.exports = (name, options, callback = options) => {
         const isArray = itype.array(module.local);
         const version = module.version;
         
-        let remoteTmpls, local;
+        let remoteTmpls;
+        let local;
         if (isArray) {
             remoteTmpls = module.remote;
             local       = module.local;
