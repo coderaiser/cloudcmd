@@ -1,0 +1,10 @@
+{
+    "match": {
+        "server/(server|exit).js": {
+            "remove-process-exit": false
+        },
+        "server": {
+            "remove-process-exit": true
+        }
+    }
+}

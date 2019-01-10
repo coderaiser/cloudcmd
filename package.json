@@ -108,7 +108,8 @@
     "build": "redrun 6to5:*",
     "build:client": "redrun 6to5:client",
     "build:client:dev": "redrun 6to5:client:dev",
-    "heroku-postbuild": "redrun 6to5:client"
+    "heroku-postbuild": "redrun 6to5:client",
+    "putout": "putout bin client server common test"
   },
   "directories": {
     "man": "man"
@@ -211,6 +212,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "philip": "^2.0.0",
     "place": "^1.1.4",
+    "putout": "^3.0.0",
     "readjson": "^1.1.3",
     "redrun": "^7.0.0",
     "request": "^2.76.0",
