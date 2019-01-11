@@ -35,7 +35,7 @@ function check(username, password, callback) {
         return callback(BAD_CREDENTIALS);
     
     const sameName = username === name;
-    const samePass = pass === criton(password, algo);
+    const samePass = criton(pass, algo) === criton(password, algo);
     
     callback(sameName && samePass);
 }
