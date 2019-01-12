@@ -1,7 +1,20 @@
 {
     "match": {
         "server/(server|exit).js": {
-            "remove-process-exit": false
+            "remove-process-exit": false,
+            "remove-console": false
+        },
+        "server/(terminal|distribute/log).js": {
+            "remove-console": false
+        },
+        "client/(client|cloudcmd|load-module).js": {
+            "remove-console": false
+        },
+        "bin": {
+            "remove-console": false
+        },
+        "test/common/cloudfunc.js": {
+            "remove-console": false
         },
         "server": {
             "remove-process-exit": true
