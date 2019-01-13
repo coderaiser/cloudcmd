@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const {create} = require('auto-globals');
 const tryCatch = require('try-catch');
 

@@ -2,7 +2,7 @@
 
 const path = require('path');
 
-const test = require('tape');
+const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 const currify = require('currify');
 const {reRequire} = require('mock-require');

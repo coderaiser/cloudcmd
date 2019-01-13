@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const info = require('./info');
 const stub = require('@cloudcmd/stub');
 

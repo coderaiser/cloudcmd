@@ -1,6 +1,6 @@
 'use stric';
 
-const test = require('tape');
+const test = require('supertape');
 const mockRequire = require('mock-require');
 const stub = require('@cloudcmd/stub');
 

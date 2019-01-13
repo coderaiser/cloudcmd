@@ -1,10 +1,9 @@
 'use strict';
 
-const tryTo = require('try-to-tape');
 const autoGlobals = require('auto-globals');
-const tape = require('tape');
+const tape = require('supertape');
 
-const test = autoGlobals(tryTo(tape));
+const test = autoGlobals(tape);
 
 const stub = require('@cloudcmd/stub');
 const tryCatch = require('try-catch');

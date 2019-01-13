@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const cloudfunc = require('./cloudfunc');
 const {
     _getSize,

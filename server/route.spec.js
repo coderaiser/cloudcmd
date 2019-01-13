@@ -4,8 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 const tryToCatch = require('try-to-catch');
-const tryToTape = require('try-to-tape');
-const test = tryToTape(require('tape'));
+const test = require('supertape');
 const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
 

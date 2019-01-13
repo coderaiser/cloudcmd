@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const fs = require('fs');
 const {reRequire} = require('mock-require');
 const columnsPath = '../../server/columns';

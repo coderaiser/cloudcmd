@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const {promisify} = require('util');
 const tryToCatch = require('try-to-catch');
 const {connect} = require('../../test/before');

@@ -1,7 +1,6 @@
 'use strict';
 
-const tryToTape = require('try-to-tape');
-const test = tryToTape(require('tape'));
+const test = require('supertape');
 
 const cloudcmd = require('../..');
 const {request} = require('serve-once')(cloudcmd);

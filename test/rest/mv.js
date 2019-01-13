@@ -2,8 +2,7 @@
 
 const fs = require('fs');
 
-const tryToTape = require('try-to-tape');
-const test = tryToTape(require('tape'));
+const test = require('supertape');
 const {Volume} = require('memfs');
 const {ufs} = require('unionfs');
 

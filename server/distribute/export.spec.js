@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const io = require('socket.io-client');
 
 const {connect} = require('../../test/before');

@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const test = require('tape');
+const test = require('supertape');
 const {promisify} = require('util');
 
 const tryToCatch = require('try-to-catch');

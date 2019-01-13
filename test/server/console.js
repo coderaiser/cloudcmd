@@ -2,7 +2,7 @@
 
 const path = require('path');
 
-const test = require('tape');
+const test = require('supertape');
 const io = require('socket.io-client');
 
 const configPath = path.join(__dirname, '../..', 'server', 'config');

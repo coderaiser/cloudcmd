@@ -1,8 +1,7 @@
 'use strict';
 
 const {join} = require('path');
-const tryTo = require('try-to-tape');
-const test = tryTo(require('tape'));
+const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 
 const dir = join(__dirname, '..', '..');

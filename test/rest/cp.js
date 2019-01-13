@@ -2,7 +2,7 @@
 
 const {mkdirSync} = require('fs');
 const {join} = require('path');
-const test = require('tape');
+const test = require('supertape');
 const rimraf = require('rimraf');
 
 const fixtureDir = join(__dirname, '..', 'fixture') + '/';

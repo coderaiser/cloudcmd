@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('tape');
+const test = require('supertape');
 const rest = require('.');
 const {
     _formatMsg,

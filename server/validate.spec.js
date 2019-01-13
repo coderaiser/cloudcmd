@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-const test = require('tape');
+const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 const tryCatch = require('try-catch');
 const mockRequire = require('mock-require');

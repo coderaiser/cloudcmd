@@ -15,7 +15,7 @@ const CloudFuncPath = COMMONDIR + 'cloudfunc';
 
 const CloudFunc = require(CloudFuncPath);
 
-const test = require('tape');
+const test = require('supertape');
 const {reRequire} = require('mock-require');
 
 const htmlLooksLike = require('html-looks-like');

@@ -5,8 +5,7 @@ const {join} = require('path');
 const {promisify} = require('util');
 
 const {reRequire} = require('mock-require');
-const tryToTape = require('try-to-tape');
-const test = tryToTape(require('tape'));
+const test = require('supertape');
 const tar = require('tar-stream');
 const gunzip = require('gunzip-maybe');
 const pullout = require('pullout');

@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const test = require('tape');
+const test = require('supertape');
 const cloudcmd = require('..');
 
 const config = {
