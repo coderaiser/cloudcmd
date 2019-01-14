@@ -1,9 +1,7 @@
 'use strict';
 
 const test = require('supertape');
-const dir = '../../../../client/modules/operation';
-
-const removeExtension = require(`${dir}/remove-extension`);
+const removeExtension = require(`./remove-extension`);
 
 test('cloudcmd: client: modules: operation: removeExtension: .tar.gz', (t) => {
     const name = 'hello';
