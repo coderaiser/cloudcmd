@@ -671,7 +671,7 @@ function CmdProto() {
      * shows panel right or left (or active)
      */
     this.showPanel = (active) => {
-        const panel = DOM.getPanel({active: active});
+        const panel = DOM.getPanel({active});
         
         if (!panel)
             return false;
@@ -920,7 +920,7 @@ function CmdProto() {
         
         CloudCmd.loadDir({
             path: dirPathPassive,
-            panel: panel
+            panel
         }, () => {
             const files = Info.files;
             const length = files.length - 1;

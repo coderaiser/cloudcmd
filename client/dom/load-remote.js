@@ -43,7 +43,7 @@ module.exports = (name, options, callback = options) => {
         
         const remoteURL = remoteTmpls.map((tmpl) => {
             return rendy(tmpl, {
-                version: version
+                version
             });
         });
         

@@ -74,7 +74,7 @@ test('cloudfunc: render', (t) => {
     const result = CloudFunc.buildFromJSON({
         prefix  : '',
         data    : JSON_FILES,
-        template: template
+        template
     });
     
     Expect += expect;

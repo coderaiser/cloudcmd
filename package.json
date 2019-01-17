@@ -177,6 +177,7 @@
     "@cloudcmd/modal": "^1.0.0",
     "@cloudcmd/olark": "^2.0.1",
     "@cloudcmd/stub": "^2.0.0",
+    "@putout/eslint-config": "^1.0.1",
     "auto-globals": "^1.7.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",

@@ -114,8 +114,8 @@ function RESTful() {
         sendRequest({
             method      : 'PUT',
             url         : '/extract',
-            data        : data,
-            callback    : callback
+            data,
+            callback
         });
     };
     
@@ -123,51 +123,51 @@ function RESTful() {
         sendRequest({
             method      : 'PUT',
             url         : '/mv',
-            data        : data,
-            callback    : callback,
+            data,
+            callback,
             imgPosition : { top: true }
         });
     };
     
     this.Config = {
-        read:   function(callback) {
+        read(callback) {
             sendRequest({
                 method      : 'GET',
                 url         : '/config',
-                callback    : callback,
+                callback,
                 imgPosition : { top: true },
                 notLog      : true
             });
         },
         
-        write:  function(data, callback) {
+        write(data, callback) {
             sendRequest({
                 method      : 'PATCH',
                 url         : '/config',
-                data        : data,
-                callback    : callback,
+                data,
+                callback,
                 imgPosition : { top: true }
             });
         }
     };
     
     this.Markdown   = {
-        read    : function(url, callback) {
+        read(url, callback) {
             sendRequest({
                 method      : 'GET',
                 url         : '/markdown' + url,
-                callback    : callback,
+                callback,
                 imgPosition : { top: true },
                 notLog      : true
             });
         },
         
-        render  : function(data, callback) {
+        render(data, callback) {
             sendRequest({
                 method      : 'PUT',
                 url         : '/markdown',
-                data        : data,
-                callback    : callback,
+                data,
+                callback,
                 imgPosition : { top: true },
                 notLog      : true
             });

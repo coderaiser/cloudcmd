@@ -1,10 +1,4 @@
 {
-    "env": {
-        "node": true,
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-    },
     "rules": {
         "no-process-exit": 0,
     },
