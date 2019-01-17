@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('supertape');
+const test = require('tape');
 const criton = require('criton');
 
 const cloudcmd = require('..');
@@ -13,7 +13,7 @@ const {request} = require('serve-once')(cloudcmd, {
     config,
 });
 
-test('cloudcmd: static', async (t) => {
+test.only('cloudcmd: static', async (t) => {
     const name = 'package.json';
     const {body} = await request.get(`/${name}`, {
         type: 'json',
