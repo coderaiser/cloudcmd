@@ -52,13 +52,13 @@
     "start:dev": "NODE_ENV=development node bin/cloudcmd.js",
     "build:start": "redrun build:client start",
     "build:start:dev": "redrun build:client:dev start:dev",
-    "lint": "redrun lint:*",
+    "lint": "redrun putout lint:*",
     "lint:server": "eslint -c .eslintrc.server $npm_package_config_dirs --ignore-pattern *.spec.js",
     "lint:test": "eslint $npm_package_config_dirs_test",
     "lint:client": "eslint --env browser client",
     "lint:css": "stylelint css/*.css",
     "lint:md": "yaspeller .",
-    "fix:lint": "redrun fix:lint:*",
+    "fix:lint": "redrun fix:lint:* putout:fix",
     "fix:lint:client": "redrun lint:client -- --fix",
     "fix:lint:test": "redrun lint:test -- --fix",
     "fix:lint:server": "redrun lint:server -- --fix",
@@ -109,7 +109,9 @@
     "build:client": "redrun 6to5:client",
     "build:client:dev": "redrun 6to5:client:dev",
     "heroku-postbuild": "redrun 6to5:client",
-    "putout": "putout bin client server common test"
+    "putout": "putout bin client server common test",
+    "putout:fix": "putout bin client server common test --fix",
+    "fix:putout": "redrun putout:fix"
   },
   "directories": {
     "man": "man"
