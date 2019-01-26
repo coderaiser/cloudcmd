@@ -69,7 +69,7 @@ function getPathLink(url, prefix, template) {
         .split('/')
         .slice(1, -1);
     
-    const allNames = ['/'].concat(names);
+    const allNames = ['/', ...names];
     const length = allNames.length - 1;
     
     let path = '/';
