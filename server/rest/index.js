@@ -84,7 +84,9 @@ function sendData(params, callback) {
     if (isMD)
         return markdown(p.name, p.request, callback);
     
-    const method = p.request.method;
+    const {
+        method
+    } = p.request;
     
     switch(method) {
     case 'GET':
@@ -179,7 +181,9 @@ function onPUT(name, body, callback) {
         
         const from = root(files.from);
         const to = root(files.to);
-        const names = files.names;
+        const {
+            names
+        } = files;
         
         if (!names)
             return fs.rename(from, to, fn);
@@ -193,7 +197,7 @@ function onPUT(name, body, callback) {
         
         if (isRootAll([files.to, files.from]))
             return callback(getWin32RootMsg());
-            
+        
         files.from  = root(files.from);
         files.to    = root(files.to);
         

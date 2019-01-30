@@ -11,13 +11,19 @@ const {FS} = require('../../common/cloudfunc');
 const {getIdBySrc} = require('../dom/load');
 const RESTful = require('../dom/rest');
 
-const config = CloudCmd.config;
-const Buffer = DOM.Buffer;
+const {
+    config,
+    Key
+} = CloudCmd;
+
+const {
+    Buffer,
+    Events,
+    Dialog,
+    Images
+} = DOM;
+
 const Info = DOM.CurrentInfo;
-const Key = CloudCmd.Key;
-const Events = DOM.Events;
-const Dialog = DOM.Dialog;
-const Images = DOM.Images;
 const TITLE = 'Cloud Commander';
 const alertNoFiles = wrap(Dialog.alert.noFiles)(TITLE);
 const uploadTo = wrap(_uploadTo);
@@ -190,7 +196,9 @@ function isPath(x, y) {
 }
 
 function beforeShow(callback, params) {
-    const name = params.name;
+    const {
+        name
+    } = params;
     let el = DOM.getCurrentByPosition({
         x: params.x,
         y: params.y
@@ -223,9 +231,11 @@ function _uploadTo(nameModule) {
         if (error)
             return;
         
-        const name = Info.name;
+        const {
+            name
+        } = Info;
         const execFrom = CloudCmd.execFromModule;
-         
+        
         execFrom(nameModule, 'uploadFile', name, data);
     });
     
@@ -241,7 +251,7 @@ function uploadFromCloud() {
         RESTful.write(path,  data, (error) => {
             if (error)
                 return;
-             
+            
             CloudCmd.refresh({currentName});
         });
     });
@@ -260,7 +270,7 @@ function download(type) {
     
     if (!files.length)
         return alertNoFiles();
-        
+    
     files.forEach((file) => {
         const selected = DOM.isSelected(file);
         const isDir = DOM.isCurrentIsDir(file);
@@ -312,8 +322,11 @@ function getCurrentPosition() {
 }
 
 function listener(event) {
-    const F9 = Key.F9;
-    const ESC = Key.ESC;
+    const {
+        F9,
+        ESC
+    } = Key;
+    
     const key = event.keyCode;
     const isBind = Key.isBind();
     

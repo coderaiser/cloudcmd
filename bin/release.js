@@ -24,7 +24,9 @@ function main(callback) {
                       '**[v{{ version }}]'  +
                       '(' + link + 'v{{ version }})**\n';
     
-    const version     = Info.version;
+    const {
+        version
+    } = Info;
     
     cl((error, versionNew) => {
         if (error)
@@ -52,7 +54,9 @@ function replaceVersion(name, version, versionNew, callback) {
 }
 
 function cl(callback) {
-    const argv = process.argv;
+    const {
+        argv
+    } = process;
     const length = argv.length - 1;
     const last = process.argv[length];
     const regExp = /^--(major|minor|patch)$/;

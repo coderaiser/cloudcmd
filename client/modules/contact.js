@@ -8,8 +8,12 @@ CloudCmd.Contact = exports;
 const olark = require('@cloudcmd/olark');
 const Images = require('../dom/images');
 
-const Events = DOM.Events;
-const Key = CloudCmd.Key;
+const {
+    Events
+} = DOM;
+const {
+    Key
+} = CloudCmd;
 
 module.exports.show = show;
 module.exports.hide = hide;

@@ -8,15 +8,16 @@ const omit = require('object.omit');
 const config = require('../config');
 const log = require('./log');
 
-const exportStr = log.exportStr;
-const connectedStr = log.connectedStr;
-const disconnectedStr = log.disconnectedStr;
-const authTryStr = log.authTryStr;
-
-const makeColor = log.makeColor;
-const getMessage = log.getMessage;
-const getDescription = log.getDescription;
-const logWraped = log.logWraped;
+const {
+    exportStr,
+    connectedStr,
+    disconnectedStr,
+    authTryStr,
+    makeColor,
+    getMessage,
+    getDescription,
+    logWraped
+} = log;
 
 const omitList = [
     'auth',
@@ -66,10 +67,15 @@ const push = currify((socket, key, value) => {
 });
 
 function getHost(socket) {
-    const remoteAddress = socket.request.connection.remoteAddress;
-    const name = socket.handshake.query.name;
-    const port = socket.handshake.query.port;
-    const color = socket.handshake.query.color;
+    const {
+        remoteAddress
+    } = socket.request.connection;
+    
+    const {
+        name,
+        port,
+        color
+    } = socket.handshake.query;
     
     if (!name)
         return `${remoteAddress}:${port}`;

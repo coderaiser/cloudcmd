@@ -4,8 +4,12 @@
 const DOM = require('./dom');
 
 const Info = DOM.CurrentInfo;
-const sort = CloudCmd.sort;
-const order = CloudCmd.order;
+
+const {
+    sort,
+    order
+} = CloudCmd;
+
 const position = DOM.getPanelPosition();
 
 let sortPrevious = sort[position];

@@ -47,7 +47,9 @@ function _onEnd(currentName) {
 function _loadFile(dir, n, file, callback) {
     let i = 0;
     
-    const name = file.name;
+    const {
+        name
+    } = file;
     const path = dir + name;
     const {prefixURL} = CloudCmd;
     const api = prefixURL + FS;

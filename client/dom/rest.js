@@ -194,8 +194,12 @@ function RESTful() {
             dataType    : p.dataType,
             error       : (jqXHR) => {
                 const response = jqXHR.responseText;
-                const statusText = jqXHR.statusText;
-                const status = jqXHR.status;
+                
+                const {
+                    statusText,
+                    status
+                } = jqXHR;
+                
                 const text = status === 404 ? response : statusText;
                 const encoded = encode(text);
                 

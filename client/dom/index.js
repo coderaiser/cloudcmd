@@ -90,7 +90,7 @@ function CmdProto() {
             
             if (name === '..')
                 return '';
-             
+            
             return name;
         };
         
@@ -247,7 +247,7 @@ function CmdProto() {
         RESTful.read(link + query, (error, size) => {
             if (error)
                 return;
-                
+            
             DOM.setCurrentSize(size, current);
             exec(callback, current);
             Images.hide();
@@ -319,7 +319,9 @@ function CmdProto() {
      */
     this.getCurrentData = (callback, currentFile) => {
         let hash;
-        const Dialog = DOM.Dialog;
+        const {
+            Dialog
+        } = DOM;
         const Info = DOM.CurrentInfo;
         const current = currentFile || DOM.getCurrentFile();
         const path = DOM.getCurrentPath(current);
@@ -332,7 +334,9 @@ function CmdProto() {
                 if (itype.object(data))
                     data = jonny.stringify(data);
                 
-                const length  = data.length;
+                const {
+                    length
+                } = data;
                 
                 if (hash && length < ONE_MEGABYTE)
                     DOM.saveDataToStorage(path, data, hash);
@@ -448,7 +452,9 @@ function CmdProto() {
      */
     this.expandSelection = () => {
         const msg = 'expand';
-        const files = CurrentInfo.files;
+        const {
+            files
+        } = CurrentInfo;
         
         selectByPattern(msg, files);
     };
@@ -458,8 +464,10 @@ function CmdProto() {
      */
     this.shrinkSelection = () => {
         const msg = 'shrink';
-        const files = CurrentInfo.files;
-       
+        const {
+            files
+        } = CurrentInfo;
+        
         selectByPattern(msg, files);
     };
     
@@ -540,7 +548,9 @@ function CmdProto() {
      * check storage hash
      */
     this.checkStorageHash = (name, callback) => {
-        const parallel = exec.parallel;
+        const {
+            parallel
+        } = exec;
         const loadHash = DOM.loadCurrentHash;
         const nameHash = name + '-hash';
         const getStoreHash = exec.with(Storage.get, nameHash);
@@ -694,7 +704,7 @@ function CmdProto() {
         
         return DOM.hide(panel);
     };
-     
+    
     /**
      * remove child of element
      * @param pChild
@@ -748,7 +758,9 @@ function CmdProto() {
      * @currentFile
      */
     this.renameCurrent = (current) => {
-        const Dialog = DOM.Dialog;
+        const {
+            Dialog
+        } = DOM;
         
         if (!DOM.isCurrentFile(current))
             current = DOM.getCurrentFile();
@@ -824,7 +836,7 @@ function CmdProto() {
         let dataName = panel.getAttribute('data-name');
         
         TabPanel[dataName] = name;
-         
+        
         panel = panelPassive;
         dataName = panel.getAttribute('data-name');
         
@@ -866,7 +878,9 @@ function CmdProto() {
     this.goToDirectory = () => {
         const msg = 'Go to directory:';
         const path = CurrentInfo.dirPath;
-        const Dialog = DOM.Dialog;
+        const {
+            Dialog
+        } = DOM;
         const cancel = false;
         const setPath = (path) => ({
             path
@@ -879,7 +893,9 @@ function CmdProto() {
     
     this.duplicatePanel = () => {
         const Info = CurrentInfo;
-        const isDir = Info.isDir;
+        const {
+            isDir
+        } = Info;
         const panel = Info.panelPassive;
         const noCurrent = !Info.isOnePanel;
         
@@ -901,11 +917,12 @@ function CmdProto() {
     
     this.swapPanels = () => {
         const Info = CurrentInfo;
-        const {panel} = Info;
-        const {files} = Info;
-        const {element} = Info;
-        
-        const panelPassive = Info.panelPassive;
+        const {
+            panel,
+            files,
+            element,
+            panelPassive
+        } = Info;
         
         const dirPath = DOM.getCurrentDirPath();
         const dirPathPassive = DOM.getNotCurrentDirPath();
@@ -922,7 +939,9 @@ function CmdProto() {
             path: dirPathPassive,
             panel
         }, () => {
-            const files = Info.files;
+            const {
+                files
+            } = Info;
             const length = files.length - 1;
             
             if (currentIndex > length)

@@ -11,17 +11,18 @@ const forEachKey = currify(require('for-each-key'));
 const config = require('../config');
 const log = require('./log');
 
-const importStr = log.importStr;
-const connectedStr = log.connectedStr;
-const disconnectedStr = log.disconnectedStr;
-const tokenRejectedStr = log.tokenRejectedStr;
-const authTryStr = log.authTryStr;
-
-const makeColor = log.makeColor;
-const stringToRGB = log.stringToRGB;
-const getMessage = log.getMessage;
-const getDescription = log.getDescription;
-const logWraped = log.logWraped;
+const {
+    importStr,
+    connectedStr,
+    disconnectedStr,
+    tokenRejectedStr,
+    authTryStr,
+    makeColor,
+    stringToRGB,
+    getMessage,
+    getDescription,
+    logWraped
+} = log;
 
 const equal = (a, b) => `${a}=${b}`;
 const append = currify((obj, a, b) => obj.value += b && equal(a, b) + '&');

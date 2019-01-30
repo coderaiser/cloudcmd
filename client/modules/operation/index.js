@@ -273,7 +273,7 @@ function deleteSilent(files = DOM.getActiveFiles()) {
             const isCurrent = names.includes(currentName);
             
             let name = isCurrent ? currentName : nextCurrentName;
-           
+            
             DOM.setCurrentByName(name);
         });
     });
@@ -348,7 +348,7 @@ function _processFiles(options, data) {
         
         function go() {
             showLoad();
-             
+            
             files = {
                 from,
                 to,
@@ -390,9 +390,15 @@ function twopack(operation, type) {
     let fileFrom;
     let currentName = Info.name;
     
-    const Images = DOM.Images;
-    const path = Info.path;
-    const dirPath = Info.dirPath;
+    const {
+        Images
+    } = DOM;
+    
+    const {
+        path,
+        dirPath
+    } = Info;
+    
     const activeFiles = DOM.getActiveFiles();
     const names = DOM.getFilenames(activeFiles);
     

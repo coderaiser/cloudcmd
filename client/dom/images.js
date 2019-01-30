@@ -47,7 +47,9 @@ function getElement() {
 /* Функция создаёт картинку загрузки */
 module.exports.loading = () => {
     const element = getElement();
-    const classList = element.classList;
+    const {
+        classList
+    } = element;
     
     classList.add(LOADING, LoadingImage);
     classList.remove(ERROR, HIDDEN);
@@ -58,7 +60,9 @@ module.exports.loading = () => {
 /* Функция создаёт картинку ошибки загрузки */
 module.exports.error = () => {
     const element = getElement();
-    const classList = element.classList;
+    const {
+        classList
+    } = element;
     
     classList.add(ERROR);
     classList.remove(HIDDEN, LOADING, LoadingImage);
@@ -80,7 +84,7 @@ function show(position, panel) {
     const refreshButton = DOM.getRefreshButton(panel);
     
     let current;
-
+    
     if (position === 'top') {
         current = refreshButton.parentElement;
     } else {
@@ -123,7 +127,7 @@ module.exports.hide = () => {
 module.exports.setProgress = (value, title) => {
     const DATA = 'data-progress';
     const element = Images.get();
-     
+    
     if (!element)
         return Images;
     

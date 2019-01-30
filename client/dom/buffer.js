@@ -108,16 +108,18 @@ function BufferProto() {
         exec.parallel([copy, cut], (error, cp, ct) => {
             const opStr = cp ? 'copy' : 'move';
             const opData = cp || ct;
-            const Operation = CloudCmd.Operation;
+            const {
+                Operation
+            } = CloudCmd;
             const msg = 'Path is same!';
             const path = Info.dirPath;
             
             if (!error && !cp && !ct)
                 error = 'Buffer is empty!';
-           
+            
             if (error)
                 return showMessage(error);
-                
+            
             const data = jonny.parse(opData);
             data.to = path;
             

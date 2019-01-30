@@ -3,7 +3,9 @@
 const rendy = require('rendy/legacy');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
-const encode = require('./entity').encode;
+const {
+    encode
+} = require('./entity');
 const btoa = require('./btoa');
 
 const getHeaderField = currify(_getHeaderField);
@@ -42,7 +44,9 @@ module.exports.getTitle = (options) => {
     options = options || {};
     
     const path = options.path || Path();
-    const name = options.name;
+    const {
+        name
+    } = options;
     
     const array = [
         name || NAME,
@@ -107,14 +111,20 @@ const getDataName = (name) => {
  *
  */
 module.exports.buildFromJSON = (params) => {
-    const prefix = params.prefix;
-    const template = params.template;
+    const {
+        prefix,
+        template
+    } = params;
+    
     const templateFile = template.file;
     const templateLink = template.link;
     const json = params.data;
     
     const path = encode(json.path);
-    const files = json.files;
+    
+    const {
+        files
+    } = json;
     
     const sort = params.sort || 'name';
     const order = params.order || 'asc';
@@ -188,12 +198,14 @@ module.exports.buildFromJSON = (params) => {
         const name = encode(file.name);
         const link = prefix + FS + path + name;
         
-        const {type} = file;
+        const {
+            type,
+            mode
+        } = file;
         const size = getSize(file);
         
         const date = file.date || '--.--.----';
         const owner = file.owner || 'root';
-        const mode = file.mode;
         
         const linkResult = rendy(templateLink, {
             link,

@@ -3,7 +3,9 @@
 
 const KEY = require('../key');
 const Info = DOM.CurrentInfo;
-const Dialog = DOM.Dialog;
+const {
+    Dialog
+} = DOM;
 
 const fullstore = require('fullstore/legacy');
 const store = fullstore('');
@@ -33,7 +35,9 @@ const rmFirst = (a) => {
 
 module.exports = (key, event) => {
     const current = Info.element;
-    const keyCode = event.keyCode;
+    const {
+        keyCode
+    } = event;
     const prevStore = store();
     
     const value = store(prevStore.concat(key));
@@ -118,7 +122,7 @@ module.exports = (key, event) => {
         
         Dialog.prompt(TITLE, 'Find', '', {cancel: false})
             .then(find);
-       
+        
         return end();
     }
     

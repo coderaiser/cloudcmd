@@ -31,7 +31,9 @@ const save = promisify(_save);
 
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
-const apiURL = CloudFunc.apiURL;
+const {
+    apiURL
+} = CloudFunc;
 const changeEmitter = new Emitter();
 
 const ConfigPath = path.join(DIR, 'json/config.json');
@@ -108,7 +110,7 @@ function listen(sock, auth) {
         .on('connection', (socket) => {
             if (!manage('auth'))
                 return connection(socket);
-             
+            
             const reject = () => socket.emit('reject');
             socket.on('auth', auth(connectionWraped(socket), reject));
         });
@@ -145,7 +147,7 @@ function middle(req, res, next) {
     
     if (req.url !== `${apiURL}/config`)
         return next();
-   
+    
     switch(req.method) {
     case 'GET':
         get(req, res, next);
@@ -156,7 +158,7 @@ function middle(req, res, next) {
             return res
                 .status(404)
                 .send('Config is disabled');
-         
+        
         patch(req, res);
         break;
     

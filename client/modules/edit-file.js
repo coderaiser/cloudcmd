@@ -10,13 +10,19 @@ const exec = require('execon');
 const supermenu = require('supermenu');
 
 const Info = DOM.CurrentInfo;
-const Dialog = DOM.Dialog;
-const config = CloudCmd.config;
+
+const {
+    Dialog,
+    Images
+} = DOM;
+
+const {
+    config
+} = CloudCmd;
 
 let Menu;
 
 const TITLE = 'Edit';
-const Images = DOM.Images;
 
 let MSG_CHANGED;
 const isLoading = fullstore();
@@ -68,7 +74,9 @@ module.exports.show = (options) => {
         .setOption('keyMap', 'default');
     
     Info.getData((error, data) => {
-        const path = Info.path;
+        const {
+            path
+        } = Info;
         const name = getName();
         
         if (error)

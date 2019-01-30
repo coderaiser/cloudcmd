@@ -9,7 +9,9 @@ module.exports = (currentName, names, removedNames) => {
     const i = names.indexOf(currentName);
     
     const nextNames = notOneOf(names, removedNames);
-    const length = nextNames.length;
+    const {
+        length
+    } = nextNames;
     
     if (nextNames[i])
         return nextNames[i];

@@ -13,7 +13,9 @@ const {
 } = DOM;
 
 module.exports = (items) => {
-    const Dialog = DOM.Dialog;
+    const {
+        Dialog
+    } = DOM;
     
     if (items.length)
         Images.show('top');

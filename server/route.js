@@ -113,9 +113,13 @@ function indexProcessing(options) {
     const noConfig = !config('configDialog');
     const noConsole = !config('console');
     const noTerminal = !config('terminal');
-    const panel = options.panel;
+    const {
+        panel
+    } = options;
     
-    let data = options.data;
+    let {
+        data
+    } = options;
     
     if (noKeysPanel)
         data = hideKeysPanel(data);

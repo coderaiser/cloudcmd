@@ -40,7 +40,9 @@ const Name = 'View';
 CloudCmd[Name] = module.exports;
 
 const Info = DOM.CurrentInfo;
-const Key = CloudCmd.Key;
+const {
+    Key
+} = CloudCmd;
 const basename = (a) => a.split('/').pop();
 
 let El;
@@ -313,7 +315,7 @@ function onOverlayClick(event) {
         x: event.clientX,
         y: event.clientY
     };
-      
+    
     setCurrentByPosition(position);
 }
 

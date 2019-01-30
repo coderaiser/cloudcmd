@@ -55,8 +55,11 @@ function CloudCmdProto(DOM) {
     
     const CloudCmd = this;
     const Info = DOM.CurrentInfo;
-    const Storage = DOM.Storage;
-    const Files = DOM.Files;
+    
+    const {
+        Storage,
+        Files
+    } = DOM;
     
     this.log = log;
     this.prefix = '';
@@ -97,10 +100,13 @@ function CloudCmdProto(DOM) {
         const p = params;
         
         const refresh = p.isRefresh;
-        const panel = p.panel;
-        const history = p.history;
-        const noCurrent = p.noCurrent;
-        const currentName = p.currentName;
+        
+        const {
+            panel,
+            history,
+            noCurrent,
+            currentName
+        } = p;
         
         let panelChanged;
         if (!noCurrent)
@@ -154,7 +160,7 @@ function CloudCmdProto(DOM) {
              * should be called from config.js only
              * after successful update on server
              */
-             
+            
             if (key === 'password')
                 return;
             
@@ -317,14 +323,16 @@ function CloudCmdProto(DOM) {
             callback = options;
             options = {};
         }
-       
+        
         const panel = options.panel || Info.panel;
         const path = DOM.getCurrentDirPath(panel);
         
         const isRefresh = true;
         const history = false;
         const noCurrent = options ? options.noCurrent : false;
-        const currentName = options.currentName;
+        const {
+            currentName
+        } = options;
         
         CloudCmd.loadDir({
             path,
@@ -348,11 +356,15 @@ function CloudCmdProto(DOM) {
      */
     function ajaxLoad(path, options, panel, callback) {
         const create = (error, json) => {
-            const RESTful = DOM.RESTful;
+            const {
+                RESTful
+            } = DOM;
             const name = options.currentName || Info.name;
             const obj = jonny.parse(json);
             const isRefresh = options.refresh;
-            const noCurrent = options.noCurrent;
+            const {
+                noCurrent
+            } = options;
             
             if (!isRefresh && json)
                 return createFileTable(obj, panel, options, callback);
@@ -414,7 +426,9 @@ function CloudCmdProto(DOM) {
         const names = ['file', 'path', 'link', 'pathLink'];
         
         Files.get(names, (error, templFile, templPath, templLink, templPathLink) => {
-            const Dialog = DOM.Dialog;
+            const {
+                Dialog
+            } = DOM;
             const panel = panelParam || DOM.getPanel();
             const {prefix} = CloudCmd;
             
@@ -426,7 +440,9 @@ function CloudCmdProto(DOM) {
             if (error)
                 return Dialog.alert(TITLE, error.responseText);
             
-            const childNodes = panel.childNodes;
+            const {
+                childNodes
+            } = panel;
             let i = childNodes.length;
             
             while (i--)
@@ -510,10 +526,10 @@ function CloudCmdProto(DOM) {
     }
     
     this.goToParentDir = () => {
-        const dir = Info.dir;
         const {
+            dir,
             dirPath,
-            parentDirPath,
+            parentDirPath
         } = Info;
         
         if (dirPath === parentDirPath)
