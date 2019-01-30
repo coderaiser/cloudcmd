@@ -229,7 +229,7 @@
     "supermenu": "^2.1.2",
     "supertape": "^1.0.3",
     "tar-stream": "^1.5.2",
-    "unionfs": "^3.0.2",
+    "unionfs": "^4.0.0",
     "url-loader": "^1.0.1",
     "version-io": "^2.0.1",
     "webpack": "^4.0.0",
