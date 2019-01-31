@@ -63,7 +63,7 @@ module.exports.findObjByNameInArr = (array, name) => {
         throw Error('name should be string!');
     
     array.some((item) => {
-        let is = item.name === name;
+        const is = item.name === name;
         const isArray = Array.isArray(item);
         
         if (is) {

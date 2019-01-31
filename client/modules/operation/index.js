@@ -272,7 +272,7 @@ function deleteSilent(files = DOM.getActiveFiles()) {
             const names = Info.files.map(DOM.getCurrentName);
             const isCurrent = names.includes(currentName);
             
-            let name = isCurrent ? currentName : nextCurrentName;
+            const name = isCurrent ? currentName : nextCurrentName;
             
             DOM.setCurrentByName(name);
         });
@@ -289,7 +289,6 @@ function _processFiles(options, data) {
     let files;
     let panel;
     let shouldAsk;
-    let sameName;
     let ok;
     
     let from = '';
@@ -317,7 +316,7 @@ function _processFiles(options, data) {
     
     const name = names[0];
     
-    sameName = DOM.getCurrentByName(name, panel);
+    const sameName = DOM.getCurrentByName(name, panel);
     
     if (!data && noFilesCheck())
         return;

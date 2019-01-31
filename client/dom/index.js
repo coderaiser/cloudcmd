@@ -40,7 +40,7 @@ const loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');
 
 function CmdProto() {
-    let CurrentInfo = {};
+    const CurrentInfo = {};
     
     const Cmd = this;
     const SELECTED_FILE = 'selected-file';

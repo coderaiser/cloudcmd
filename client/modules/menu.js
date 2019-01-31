@@ -199,7 +199,7 @@ function beforeShow(callback, params) {
     const {
         name
     } = params;
-    let el = DOM.getCurrentByPosition({
+    const el = DOM.getCurrentByPosition({
         x: params.x,
         y: params.y
     });
