@@ -165,7 +165,7 @@ function main() {
     config('prefix', prefixer(args.prefix));
     // MAJOR: remove condition on v12
     config('prefixSocket', prefixer(args['prefix-socket']) || config('prefix'));
-    config('root', args.root);
+    config('root', args.root || '/');
     config('vim', args.vim);
     config('columns', args.columns);
     config('log', args.log);
@@ -188,12 +188,12 @@ function main() {
     readConfig(args.config);
     
     const options = {
-        root: args.root || '/', // --no-root
-        editor: args.editor,
-        packer: args.packer,
-        prefix: args.prefix,
-        prefixSocket: args['prefix-socket'] || args.prefix, // MAJOR: remove condition on v12
-        columns: args.columns,
+        root: config('root'),
+        editor: config('editor'),
+        packer: config('packer'),
+        prefix: config('prefix'),
+        prefixSocket: config('prefixSocket') || config('prefix'), // MAJOR: remove condition on v12
+        columns: config('columns'),
     };
     
     const password = env('password') || args.password;
