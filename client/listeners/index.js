@@ -201,7 +201,7 @@ function onPathElementClick(panel, event) {
     if (attr === 'js-refresh')
         return CloudCmd.refresh({
             panel,
-            noCurrent
+            noCurrent,
         });
     
     if (attr !== 'js-path-link')
@@ -213,7 +213,7 @@ function onPathElementClick(panel, event) {
     CloudCmd.loadDir({
         path,
         isRefresh: false,
-        panel: noCurrent ? panel : Info.panel
+        panel: noCurrent ? panel : Info.panel,
     });
 }
 
@@ -271,7 +271,7 @@ function onDblClick(event) {
     
     if (isDir) {
         CloudCmd.loadDir({
-            path: path === '/' ? '/' : path + '/'
+            path: path === '/' ? '/' : path + '/',
         });
         
         event.preventDefault();
@@ -291,7 +291,7 @@ function onTouch(event) {
         return;
     
     CloudCmd.loadDir({
-        path: DOM.getCurrentPath(current)
+        path: DOM.getCurrentPath(current),
     });
 }
 
@@ -344,7 +344,7 @@ function setCurrentFileByEvent(event) {
         alt: event.altKey,
         ctrl: event.ctrlKey,
         meta: event.metaKey,
-        shift: event.shiftKey
+        shift: event.shiftKey,
     };
     
     const element = getLIElement(event.target);
@@ -381,7 +381,7 @@ function contextMenu() {
     Events.addOnce('contextmenu', fm, (event) => {
         CloudCmd.Menu.show({
             x: event.clientX,
-            y: event.clientY
+            y: event.clientY,
         });
     });
     
@@ -407,7 +407,7 @@ function dragndrop() {
     const onDrop = (event) => {
         const {
             files,
-            items
+            items,
         } = event.dataTransfer;
         
         const {length: filesCount} = files;

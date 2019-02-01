@@ -9,7 +9,7 @@ const config = require('./config');
 
 module.exports = () => {
     const auth = httpAuth.basic({
-        realm: 'Cloud Commander'
+        realm: 'Cloud Commander',
     }, check);
     
     return middle(auth);

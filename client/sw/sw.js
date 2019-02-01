@@ -39,7 +39,7 @@ const date = codegen`module.exports = '"' + Date() + '"'`;
 const NAME = `cloudcmd: ${date}`;
 
 const createRequest = (a) => new Request(a, {
-    credentials: 'same-origin'
+    credentials: 'same-origin',
 });
 
 const getRequest = (a, request) => {
@@ -82,7 +82,7 @@ async function onFetch(event) {
         return response;
      
     const [e, resp] = await tryToCatch(fetch, newRequest, {
-        credentials: 'same-origin'
+        credentials: 'same-origin',
     });
     
     if (e)

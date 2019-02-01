@@ -13,7 +13,7 @@ const Info = DOM.CurrentInfo;
 
 const {
     Dialog,
-    Images
+    Images,
 } = DOM;
 
 const {config} = CloudCmd;
@@ -29,7 +29,7 @@ const ConfigView  = {
     beforeClose: () => {
         exec.ifExist(Menu, 'hide');
         isChanged();
-    }
+    },
 };
 
 module.exports.init = async () => {
@@ -118,7 +118,7 @@ function authCheck(spawn) {
 function setMenu(event) {
     const position = {
         x: event.clientX,
-        y: event.clientY
+        y: event.clientY,
     };
     
     event.preventDefault();
@@ -136,7 +136,7 @@ function setMenu(event) {
             CloudCmd.Edit
                 .getEditor()
                 .focus();
-        }
+        },
     };
     
     const element = CloudCmd.Edit.getElement();
@@ -178,7 +178,7 @@ function getMenuData() {
         },
         'Close          Esc'    : () => {
             hide();
-        }
+        },
     };
 }
 

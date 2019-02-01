@@ -12,7 +12,7 @@ test('cloudcmd: client: polyfill: scrollIntoViewIfNeaded', (t) => {
     global.DOM = {};
     
     mockRequire('scroll-into-view-if-needed', {
-        default: scroll
+        default: scroll,
     });
     
     mockRequire.reRequire('./polyfill');

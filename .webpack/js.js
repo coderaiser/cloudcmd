@@ -32,7 +32,7 @@ const babelDev = {
     plugins: [
         'module:babel-plugin-macros',
         '@babel/plugin-proposal-object-rest-spread',
-    ]
+    ],
 };
 
 const rules = clean([
@@ -45,12 +45,12 @@ const rules = clean([
         test: /sw\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: babelDev
+        options: babelDev,
     }]);
 
 const plugins = [
     new EnvironmentPlugin({
-        NODE_ENV: 'production'
+        NODE_ENV: 'production',
     }),
     
     new ServiceWorkerWebpackPlugin({
@@ -66,7 +66,7 @@ const splitChunks = {
 
 module.exports = {
     resolve: {
-        symlinks: false
+        symlinks: false,
     },
     devtool,
     optimization: {
@@ -100,7 +100,7 @@ module.exports = {
         publicPath: '/dist/',
     },
     externals: [
-        externals
+        externals,
     ],
     module: {
         rules,

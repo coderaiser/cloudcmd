@@ -26,7 +26,7 @@ function RESTful() {
             url         : FS + url,
             data,
             callback,
-            imgPosition : { top: !!data }
+            imgPosition : { top: !!data },
         });
     };
     
@@ -39,7 +39,7 @@ function RESTful() {
         }
         
         const imgPosition = {
-            top: true
+            top: true,
         };
         
         sendRequest({
@@ -64,7 +64,7 @@ function RESTful() {
             url: FS + url,
             data,
             callback,
-            imgPosition : { top: true }
+            imgPosition : { top: true },
         });
     };
     
@@ -95,7 +95,7 @@ function RESTful() {
             url: '/cp',
             data,
             callback,
-            imgPosition : { top: true }
+            imgPosition : { top: true },
         });
     };
     
@@ -113,7 +113,7 @@ function RESTful() {
             method      : 'PUT',
             url         : '/extract',
             data,
-            callback
+            callback,
         });
     };
     
@@ -123,7 +123,7 @@ function RESTful() {
             url         : '/mv',
             data,
             callback,
-            imgPosition : { top: true }
+            imgPosition : { top: true },
         });
     };
     
@@ -134,7 +134,7 @@ function RESTful() {
                 url         : '/config',
                 callback,
                 imgPosition : { top: true },
-                notLog      : true
+                notLog      : true,
             });
         },
         
@@ -144,9 +144,9 @@ function RESTful() {
                 url         : '/config',
                 data,
                 callback,
-                imgPosition : { top: true }
+                imgPosition : { top: true },
             });
-        }
+        },
     };
     
     this.Markdown   = {
@@ -156,7 +156,7 @@ function RESTful() {
                 url         : '/markdown' + url,
                 callback,
                 imgPosition : { top: true },
-                notLog      : true
+                notLog      : true,
             });
         },
         
@@ -167,9 +167,9 @@ function RESTful() {
                 data,
                 callback,
                 imgPosition : { top: true },
-                notLog      : true
+                notLog      : true,
             });
-        }
+        },
     };
     
     function sendRequest(params) {
@@ -195,7 +195,7 @@ function RESTful() {
                 
                 const {
                     statusText,
-                    status
+                    status,
                 } = jqXHR;
                 
                 const text = status === 404 ? response : statusText;
@@ -216,7 +216,7 @@ function RESTful() {
                     CloudCmd.log(data);
                 
                 p.callback(null, data);
-            }
+            },
         });
     }
 }

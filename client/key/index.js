@@ -125,7 +125,7 @@ function KeyProto() {
             name,
             panel,
             path,
-            isDir
+            isDir,
         } = Info;
         
         const {Operation} = CloudCmd;
@@ -386,7 +386,7 @@ function KeyProto() {
         case Key.ENTER:
             if (Info.isDir)
                 CloudCmd.loadDir({
-                    path: path === '/' ? '/' : path + '/'
+                    path: path === '/' ? '/' : path + '/',
                 });
             break;
         
@@ -398,7 +398,7 @@ function KeyProto() {
         case Key.BACKSLASH:
             if (ctrlMeta)
                 CloudCmd.loadDir({
-                    path: '/'
+                    path: '/',
                 });
             break;
         

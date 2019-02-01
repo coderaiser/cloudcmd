@@ -22,7 +22,7 @@ const fixture = {
 const defaultOptions = {
     config: {
         root: join(__dirname, '..'),
-    }
+    },
 };
 const cloudcmd = require(cloudcmdPath);
 const serveOnce = require('serve-once');
@@ -65,7 +65,7 @@ test('cloudcmd: rest: pack: tar: get', async (t) => {
 
 test('cloudcmd: rest: pack: tar: put: file', async (t) => {
     const config = {
-        packer: 'tar'
+        packer: 'tar',
     };
     
     const options = {
@@ -211,7 +211,7 @@ test('cloudcmd: rest: pack: zip: put: error', async (t) => {
     const {body} = await request.put(`/api/v1/pack`, {
         options,
         body: getPackOptions('name', [
-            'not found'
+            'not found',
         ]),
     });
     

@@ -88,7 +88,7 @@ test('current-file: setCurrentName: return', (t) => {
     const link = {};
     
     global.DOM = getDOM({
-        link
+        link,
     });
     
     global.CloudCmd = getCloudCmd();
@@ -153,7 +153,7 @@ test('current-file: isCurrentFile', (t) => {
     const isContainClass = stub();
     
     global.DOM = getDOM({
-        isContainClass
+        isContainClass,
     });
     
     global.CloudCmd = getCloudCmd();
@@ -190,7 +190,7 @@ function getDOM({
         CurrentInfo: {
             link,
             dirPath: '/',
-        }
+        },
     };
 }
 

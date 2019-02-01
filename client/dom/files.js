@@ -107,7 +107,7 @@ function getSystemFile(file, callback) {
             load.ajax({
                 url,
                 success,
-                error
+                error,
             });
         });
     

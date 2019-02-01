@@ -21,7 +21,7 @@ test('cloudcmd: show-config: return', (t) => {
 
 test('cloudcmd: show-config: return', (t) => {
     const config = {
-        hello: 'world'
+        hello: 'world',
     };
     
     const result = [

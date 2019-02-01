@@ -16,7 +16,7 @@ const {
     makeColor,
     getMessage,
     getDescription,
-    logWraped
+    logWraped,
 } = log;
 
 const omitList = [
@@ -72,7 +72,7 @@ function getHost(socket) {
     const {
         name,
         port,
-        color
+        color,
     } = socket.handshake.query;
     
     if (!name)

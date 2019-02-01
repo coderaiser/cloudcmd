@@ -7,7 +7,7 @@ const {request} = require('serve-once')(cloudcmd);
 
 test('cloudcmd: rest: fs: path', async (t) => {
     const {body} = await request.get(`/api/v1/fs`, {
-        type: 'json'
+        type: 'json',
     });
     
     const {path} = body;

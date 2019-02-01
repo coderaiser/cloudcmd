@@ -13,7 +13,7 @@ function EventsProto() {
             return false;
         
         return {
-            passive: true
+            passive: true,
         };
     };
     

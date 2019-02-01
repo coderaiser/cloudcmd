@@ -7,7 +7,7 @@ const Info = DOM.CurrentInfo;
 
 const {
     sort,
-    order
+    order,
 } = CloudCmd;
 
 const position = DOM.getPanelPosition();

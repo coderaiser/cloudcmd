@@ -109,7 +109,7 @@ const getDataName = (name) => {
 module.exports.buildFromJSON = (params) => {
     const {
         prefix,
-        template
+        template,
     } = params;
     
     const templateFile = template.file;
@@ -168,7 +168,7 @@ module.exports.buildFromJSON = (params) => {
         const linkResult = rendy(template.link, {
             link,
             title       : '..',
-            name        : '..'
+            name        : '..',
         });
         
         const dataName = 'data-name="js-file-.." ';
@@ -184,7 +184,7 @@ module.exports.buildFromJSON = (params) => {
             size        : '&lt;dir&gt;',
             date        : '--.--.----',
             owner       : '.',
-            mode        : '--- --- ---'
+            mode        : '--- --- ---',
         });
     }
     
@@ -194,7 +194,7 @@ module.exports.buildFromJSON = (params) => {
         
         const {
             type,
-            mode
+            mode,
         } = file;
         const size = getSize(file);
         
@@ -205,7 +205,7 @@ module.exports.buildFromJSON = (params) => {
             link,
             title: name,
             name,
-            attribute: getAttribute(file.type)
+            attribute: getAttribute(file.type),
         });
         
         const dataName = getDataName(file.name);

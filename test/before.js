@@ -54,7 +54,7 @@ module.exports.connect = promisify((options, fn = options) => {
 function defaultConfig() {
     return {
         auth: false,
-        root: __dirname
+        root: __dirname,
     };
 }
 

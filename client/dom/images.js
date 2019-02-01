@@ -40,7 +40,7 @@ function getElement() {
         id: 'js-status-image',
         className: 'icon',
         dataName: 'progress',
-        notAppend: true
+        notAppend: true,
     });
 }
 

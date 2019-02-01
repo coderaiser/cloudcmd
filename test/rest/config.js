@@ -20,7 +20,7 @@ const pathConfig = path.join(os.homedir(), '.cloudcmd.json');
 
 test('cloudcmd: rest: config: get', async (t) => {
     const {body} = await request.get('/api/v1/config', {
-        type: 'json'
+        type: 'json',
     });
     
     t.notOk(body.auth, 'should config.auth to be false');
@@ -34,7 +34,7 @@ test('cloudcmd: rest: config: patch', async (t) => {
     };
     
     const options = {
-        config
+        config,
     };
     
     const json = {
@@ -43,7 +43,7 @@ test('cloudcmd: rest: config: patch', async (t) => {
     
     const res = await request.patch('/api/v1/config', {
         options,
-        body: json
+        body: json,
     });
     
     const result = res.body;
@@ -54,7 +54,7 @@ test('cloudcmd: rest: config: patch', async (t) => {
 
 test('cloudcmd: rest: config: patch: no configDialog', async (t) => {
     const config = {
-        configDialog: false
+        configDialog: false,
     };
     
     const options = {
@@ -62,7 +62,7 @@ test('cloudcmd: rest: config: patch: no configDialog', async (t) => {
     };
     
     const body = {
-        ip: null
+        ip: null,
     };
      
     const result = await request.patch(`/api/v1/config`, {
@@ -76,7 +76,7 @@ test('cloudcmd: rest: config: patch: no configDialog', async (t) => {
 
 test('cloudcmd: rest: config: patch: no configDialog: statusCode', async (t) => {
     const config = {
-        configDialog: false
+        configDialog: false,
     };
     
     const options = {

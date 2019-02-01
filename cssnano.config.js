@@ -9,7 +9,7 @@ module.exports = defaultPreset({
         plugins: [
             {convertPathData: false},
             {convertShapeToPath: false},
-        ]
-    }
+        ],
+    },
 });
 

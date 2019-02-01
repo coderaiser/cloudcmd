@@ -27,7 +27,7 @@ test('cloudcmd: root: mellow', (t) => {
     const pathToWin = stub();
     
     const mellow = {
-        pathToWin
+        pathToWin,
     };
     
     mockRequire('mellow', mellow);

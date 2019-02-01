@@ -67,7 +67,7 @@ function getEnv() {
         CURRENT_NAME: DOM.getCurrentName.bind(DOM),
         CURRENT_PATH: () => {
             return Info.path;
-        }
+        },
     };
 }
 
@@ -111,7 +111,7 @@ const create = async () => {
             const path = DOM.getCurrentDirPath();
             
             konsole.setPromptText(command + path);
-        }
+        },
     });
 };
 
@@ -134,7 +134,7 @@ module.exports.show = (callback) => {
         afterShow: () => {
             konsole.focus();
             exec(callback);
-        }
+        },
     });
 };
 
@@ -150,7 +150,7 @@ const load = async () => {
     
     if (error)
         return Dialog.alert(TITLE, error.message, {
-            cancel: false
+            cancel: false,
         });
 };
 

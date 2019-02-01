@@ -37,7 +37,7 @@ function show() {
         '"Droid Sans Mono"',
         '"Ubuntu Mono"',
         '"Consolas"',
-        'monospace'
+        'monospace',
     ].join(', ');
     
     createElement('style', {
@@ -46,7 +46,7 @@ function show() {
                       `font-family: ${fontFamily};`     +
                       'font-size: 20px;'                +
                       'width: 97%'                      +
-                '}'
+                '}',
     });
 }
 

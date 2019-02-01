@@ -69,7 +69,7 @@ function extract(extractPlugin) {
         test: RegExp(`css/${filename}`),
         use: extractPlugin.extract([
             'css-loader',
-        ])
+        ]),
     };
 }
 

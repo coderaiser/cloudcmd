@@ -13,14 +13,14 @@ const RESTful = require('../dom/rest');
 
 const {
     config,
-    Key
+    Key,
 } = CloudCmd;
 
 const {
     Buffer,
     Events,
     Dialog,
-    Images
+    Images,
 } = DOM;
 
 const Info = DOM.CurrentInfo;
@@ -116,13 +116,13 @@ function getMenuData(isAuth) {
         'Paste': Buffer.paste,
         'New': {
             'File': DOM.promptNewFile,
-            'Directory': DOM.promptNewDir
+            'Directory': DOM.promptNewDir,
         },
         'Upload': () => {
             CloudCmd.Upload.show();
         },
         'Upload From Cloud': uploadFromCloud,
-        '(Un)Select All': DOM.toggleAllSelectedFiles
+        '(Un)Select All': DOM.toggleAllSelectedFiles,
     };
     
     if (isAuth)
@@ -199,7 +199,7 @@ function beforeShow(callback, params) {
     const {name} = params;
     const el = DOM.getCurrentByPosition({
         x: params.x,
-        y: params.y
+        y: params.y,
     });
     
     const menuName = getMenuNameByEl(el);
@@ -311,7 +311,7 @@ function getCurrentPosition() {
     
     const position = {
         x: Math.round(rect.left + rect.width / 3),
-        y: Math.round(rect.top)
+        y: Math.round(rect.top),
     };
     
     return position;
@@ -320,7 +320,7 @@ function getCurrentPosition() {
 function listener(event) {
     const {
         F9,
-        ESC
+        ESC,
     } = Key;
     
     const key = event.keyCode;

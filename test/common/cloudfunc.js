@@ -48,7 +48,7 @@ const JSON_FILES = {
         uid : 0,
         mode: 'rwx r-x r-x',
         type: 'file',
-    }]
+    }],
 };
 
 let Expect =
@@ -74,7 +74,7 @@ test('cloudfunc: render', (t) => {
     const result = CloudFunc.buildFromJSON({
         prefix  : '',
         data    : JSON_FILES,
-        template
+        template,
     });
     
     Expect += expect;
@@ -147,7 +147,7 @@ test('cloudfunc: getTitle: no name', (t) => {
     const path = '/hello/world';
     
     const result = CloudFunc.getTitle({
-        path
+        path,
     });
     
     t.equal(result, 'Cloud Commander - /hello/world');

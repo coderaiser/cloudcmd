@@ -38,7 +38,7 @@ module.exports = (dir, files) => {
 
 function _onEnd(currentName) {
     CloudCmd.refresh({
-        currentName
+        currentName,
     });
 }
 

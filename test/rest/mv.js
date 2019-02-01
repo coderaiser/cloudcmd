@@ -37,20 +37,20 @@ test('cloudcmd: rest: mv', async (t) => {
     
     const {request} = serveOnce(cloudcmd, {
         config: {
-            root: '/'
-        }
+            root: '/',
+        },
     });
     
     const files = {
         from: '/fixture/',
         to: '/fixture/tmp/',
         names: [
-            'mv.txt'
-        ]
+            'mv.txt',
+        ],
     };
     
     const {body} = await request.put(`/api/v1/mv`, {
-        body: files
+        body: files,
     });
     
     mockRequire.stop('fs');
@@ -81,8 +81,8 @@ test('cloudcmd: rest: mv: rename', async (t) => {
     
     const {request} = serveOnce(cloudcmd, {
         config: {
-            root: '/'
-        }
+            root: '/',
+        },
     });
     
     const files = {
@@ -91,7 +91,7 @@ test('cloudcmd: rest: mv: rename', async (t) => {
     };
     
     const {body} = await request.put(`/api/v1/mv`, {
-        body: files
+        body: files,
     });
     
     mockRequire.stop('fs');

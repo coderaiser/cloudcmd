@@ -56,7 +56,7 @@ function CloudCmdProto(DOM) {
     
     const {
         Storage,
-        Files
+        Files,
     } = DOM;
     
     this.log = log;
@@ -103,7 +103,7 @@ function CloudCmdProto(DOM) {
             panel,
             history,
             noCurrent,
-            currentName
+            currentName,
         } = p;
         
         let panelChanged;
@@ -231,7 +231,7 @@ function CloudCmdProto(DOM) {
             
             loadModule({
                 path,
-                func
+                func,
             });
         });
         
@@ -273,7 +273,7 @@ function CloudCmdProto(DOM) {
                 // when hash is present
                 // it should be handled with this.route
                 // overwre otherwise
-                history: !location.hash
+                history: !location.hash,
             });
         
         const dirPath = DOM.getCurrentDirPath();
@@ -446,8 +446,8 @@ function CloudCmdProto(DOM) {
                     file        : templFile,
                     path        : templPath,
                     pathLink    : templPathLink,
-                    link        : templLink
-                }
+                    link        : templLink,
+                },
             });
             
             Listeners.setOnPanel(panel);
@@ -517,7 +517,7 @@ function CloudCmdProto(DOM) {
         const {
             dir,
             dirPath,
-            parentDirPath
+            parentDirPath,
         } = Info;
         
         if (dirPath === parentDirPath)
@@ -531,7 +531,7 @@ function CloudCmdProto(DOM) {
             const first = DOM.getFiles(panel)[0];
             
             DOM.setCurrentFile(current || first, {
-                history
+                history,
             });
         });
     };

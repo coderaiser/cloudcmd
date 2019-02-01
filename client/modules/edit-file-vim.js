@@ -13,7 +13,7 @@ const ConfigView  = {
     beforeClose: () => {
         Events.rmKey(listener);
         CloudCmd.EditFile.isChanged();
-    }
+    },
 };
 
 module.exports.init = async () => {

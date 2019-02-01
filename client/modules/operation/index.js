@@ -75,7 +75,7 @@ module.exports.init = promisify((callback) => {
             Loaded = true;
             Images.hide();
             callback();
-        }
+        },
     ], callback);
 });
 
@@ -179,7 +179,7 @@ Operation.copy = processFiles({
 });
 
 Operation.move = processFiles({
-    type: 'move'
+    type: 'move',
 });
 
 Operation.delete = () => {
@@ -391,7 +391,7 @@ function twopack(operation, type) {
     
     const {
         path,
-        dirPath
+        dirPath,
     } = Info;
     
     const activeFiles = DOM.getActiveFiles();
@@ -408,7 +408,7 @@ function twopack(operation, type) {
         
         fileFrom   = {
             from: path,
-            to: dirPath
+            to: dirPath,
         };
         
         currentName = removeExtension(currentName);
@@ -435,7 +435,7 @@ function twopack(operation, type) {
     
     op(fileFrom, (error) => {
         !error && CloudCmd.refresh({
-            currentName
+            currentName,
         });
     });
 }

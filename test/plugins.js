@@ -28,7 +28,7 @@ test('cloudcmd: plugins: empty', async (t) => {
 
 test('cloudcmd: plugins: one', async (t) => {
     const plugins = [
-        __filename
+        __filename,
     ];
     
     const options = {
@@ -49,7 +49,7 @@ test('cloudcmd: plugins: load error', async (t) => {
     const noEntry = __filename + Math.random();
     const plugins = [
         __filename,
-        noEntry
+        noEntry,
     ];
     
     const msg = `ENOENT: no such file or directory, open '${noEntry}'`;

@@ -126,7 +126,7 @@ module.exports.getParentDirPath = (panel) => {
  */
 module.exports.getNotCurrentDirPath = () => {
     const panel = DOM.getPanel({
-        active: false
+        active: false,
     });
     
     return DOM.getCurrentDirPath(panel);
@@ -267,7 +267,7 @@ module.exports.setTitle = (name) => {
     if (!Title)
         Title = DOM.getByTag('title')[0] || createElement('title', {
             innerHTML: name,
-            parent: document.head
+            parent: document.head,
         });
     
     Title.textContent = name;

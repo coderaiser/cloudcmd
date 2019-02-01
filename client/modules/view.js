@@ -130,8 +130,8 @@ function viewMedia(path) {
                     element
                         .querySelector('audio, video')
                         .focus();
-                }
-            }
+                },
+            },
         };
         
         modal.open(element, allConfig);
@@ -158,7 +158,7 @@ function viewFile() {
 
 function initConfig(Config, options) {
     const config = {
-        ...Config
+        ...Config,
     };
     
     if (!options)
@@ -209,8 +209,8 @@ function viewImage(prefixURL) {
         arrows      : true,
         keys        : true,
         helpers     : {
-            title   : {}
-        }
+            title   : {},
+        },
     };
     
     const config = {
@@ -229,7 +229,7 @@ function isImage(name) {
         'bmp',
         'webp',
         'svg',
-        'ico'
+        'ico',
     ];
     
     return images
@@ -311,7 +311,7 @@ async function loadAll() {
 function onOverlayClick(event) {
     const position = {
         x: event.clientX,
-        y: event.clientY
+        y: event.clientY,
     };
     
     setCurrentByPosition(position);

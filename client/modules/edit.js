@@ -26,7 +26,7 @@ const ConfigView = {
         editor
             .moveCursorTo(0, 0)
             .focus();
-    }
+    },
 };
 
 module.exports.init = async () => {
@@ -42,7 +42,7 @@ function create() {
             'width      : 100%;'                +
             'height     : 100%;'                +
             'font-family: "Droid Sans Mono";',
-        notAppend: true
+        notAppend: true,
     });
     
     Element = element;

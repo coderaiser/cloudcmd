@@ -21,7 +21,7 @@ const {
     stringToRGB,
     getMessage,
     getDescription,
-    logWraped
+    logWraped,
 } = log;
 
 const equal = (a, b) => `${a}=${b}`;
@@ -54,7 +54,7 @@ const canceled = (f) => f(null, {
 });
 
 const done = wraptile((fn, store) => fn(null, {
-    status: store()
+    status: store(),
 }));
 
 const emitAuth = wraptile((importUrl, socket) => {

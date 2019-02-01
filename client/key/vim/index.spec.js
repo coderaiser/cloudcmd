@@ -45,7 +45,7 @@ test('cloudcmd: client: key: set next file: no', (t) => {
 test('cloudcmd: client: key: set next file current', (t) => {
     const nextSibling = 'hello';
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -63,7 +63,7 @@ test('cloudcmd: client: key: set next file current', (t) => {
 test('cloudcmd: client: key: set next file current', (t) => {
     const nextSibling = 'hello';
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -83,7 +83,7 @@ test('cloudcmd: client: key: set next file current', (t) => {
 test('cloudcmd: client: key: set next file current: g', (t) => {
     const nextSibling = 'hello';
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -102,10 +102,10 @@ test('cloudcmd: client: key: set next file current: g', (t) => {
 test('cloudcmd: client: key: set +2 file current', (t) => {
     const last = {};
     const nextSibling = {
-        nextSibling: last
+        nextSibling: last,
     };
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -126,10 +126,10 @@ test('cloudcmd: client: key: set +2 file current', (t) => {
 test('cloudcmd: client: key: select +2 files from current before delete', (t) => {
     const last = {};
     const nextSibling = {
-        nextSibling: last
+        nextSibling: last,
     };
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -154,10 +154,10 @@ test('cloudcmd: client: key: select +2 files from current before delete', (t) =>
 test('cloudcmd: client: key: delete +2 files from current', (t) => {
     const last = {};
     const nextSibling = {
-        nextSibling: last
+        nextSibling: last,
     };
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -183,7 +183,7 @@ test('cloudcmd: client: key: delete +2 files from current', (t) => {
 test('cloudcmd: client: key: set previous file current', (t) => {
     const previousSibling = 'hello';
     const element = {
-        previousSibling
+        previousSibling,
     };
     
     const setCurrentFile = stub();
@@ -277,10 +277,10 @@ test('cloudcmd: client: key: selectFile', (t) => {
 test('cloudcmd: client: key: set last file current', (t) => {
     const last = 'last';
     const nextSibling = {
-        nextSibling: last
+        nextSibling: last,
     };
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -298,11 +298,11 @@ test('cloudcmd: client: key: set last file current', (t) => {
 test('cloudcmd: client: key: set first file current', (t) => {
     const first = 'first';
     const previousSibling= {
-        previousSibling: first
+        previousSibling: first,
     };
     
     const element = {
-        previousSibling
+        previousSibling,
     };
     
     const setCurrentFile = stub();
@@ -344,7 +344,7 @@ test('cloudcmd: client: key: ESC', (t) => {
     global.DOM.unselectFiles = unselectFiles ;
     
     vim('', {
-        keyCode: KEY.ESC
+        keyCode: KEY.ESC,
     });
     
     t.ok(unselectFiles.calledWith(), 'should toggle selection');
@@ -355,7 +355,7 @@ test('cloudcmd: client: key: ESC', (t) => {
 test('cloudcmd: client: key: Enter', (t) => {
     const nextSibling = 'hello';
     const element = {
-        nextSibling
+        nextSibling,
     };
     
     const setCurrentFile = stub();
@@ -364,7 +364,7 @@ test('cloudcmd: client: key: Enter', (t) => {
     DOM.setCurrentFile = setCurrentFile;
     
     vim('', {
-        keyCode: KEY.ENTER
+        keyCode: KEY.ENTER,
     });
     
     vim('j', {});
@@ -382,7 +382,7 @@ test('cloudcmd: client: key: /', (t) => {
     DOM.getCurrentName = () => '';
     
     vim('/', {
-        preventDefault
+        preventDefault,
     });
     
     t.ok(preventDefault.calledWith(), 'should call preventDefault');

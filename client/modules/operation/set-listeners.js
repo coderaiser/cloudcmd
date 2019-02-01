@@ -55,7 +55,7 @@ module.exports = (options, callback) => (emitter) => {
                 }, () => {
                     emitter.abort();
                 });
-        }
+        },
     };
     
     forEachKey(on, listeners);

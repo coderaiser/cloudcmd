@@ -13,7 +13,7 @@ module.exports = net.createServer((socket) => {
         input: socket,
         output: socket,
         terminal: true,
-        useGlobal: false
+        useGlobal: false,
     });
     
     r.on('exit', () => {

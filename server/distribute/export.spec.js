@@ -16,7 +16,7 @@ test('distribute: export', async (t) => {
     };
     
     const {port, done} = await connect({
-        config: defaultConfig
+        config: defaultConfig,
     });
     
     const url = `http://localhost:${port}/distribute?port=${1111}`;
@@ -49,7 +49,7 @@ test('distribute: export: config', async (t) => {
     };
     
     const {port, done} = await connect({
-        config: defaultConfig
+        config: defaultConfig,
     });
     
     const url = `http://localhost:${port}/distribute?port=${1111}`;

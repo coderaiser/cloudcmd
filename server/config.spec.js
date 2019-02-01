@@ -22,7 +22,7 @@ test('config: manage: get', async (t) => {
     const editor = 'deepword';
     
     const {done} = await connect({
-        config: {editor}
+        config: {editor},
     });
     
     done();
@@ -34,7 +34,7 @@ test('config: manage: get', async (t) => {
 test('config: manage: get', async (t) => {
     const editor = 'deepword';
     const conf = {
-        editor
+        editor,
     };
     
     const {done} = await connect({config: conf});
@@ -103,7 +103,7 @@ test('config: middle: no', (t) => {
     const method = 'POST';
     const req = {
         url,
-        method
+        method,
     };
     
     middle(req, res, next);

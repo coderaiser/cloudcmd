@@ -76,6 +76,6 @@ module.exports = {
     TRA         : 192, /* Typewritten Reverse Apostrophe (`) */
     BACKSLASH   : 220,
     
-    BRACKET_CLOSE: 221
+    BRACKET_CLOSE: 221,
 };
 

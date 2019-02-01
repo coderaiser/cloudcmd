@@ -34,7 +34,7 @@ function main(callback) {
         replaceVersion('HELP.md', version, versionNew, () => {
             const historyNew = history + rendy(template, {
                 date    : shortdate(),
-                version : versionNew
+                version : versionNew,
             });
             
             replaceVersion('HELP.md', history, historyNew, callback);

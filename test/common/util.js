@@ -79,7 +79,7 @@ test('util: findObjByNameInArr: array', (t) => {
         name, [
             obj,
             item,
-        ]
+        ],
     ];
     
     const result = findObjByNameInArr(array, name);

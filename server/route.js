@@ -25,7 +25,7 @@ const prefix = squad(prefixer, apart(config, 'prefix'));
 const sendIndex = (params, data) => {
     const ponseParams = {
         ...params,
-        name: 'index.html'
+        name: 'index.html',
     };
     
     ponse.send(data, ponseParams);
@@ -97,7 +97,7 @@ async function route(options, request, response) {
     ponse.sendFile({
         ...p,
         name: realPathError ? name : pathReal,
-        gzip: false
+        gzip: false,
     });
 }
 
@@ -142,7 +142,7 @@ function indexProcessing(options) {
     const left = rendy(Template.panel, {
         side        : 'left',
         content     : panel,
-        className   : !oneFilePanel ? '' : 'panel-single'
+        className   : !oneFilePanel ? '' : 'panel-single',
     });
     
     let right = '';
@@ -150,7 +150,7 @@ function indexProcessing(options) {
         right = rendy(Template.panel, {
             side        : 'right',
             content     : panel,
-            className   : ''
+            className   : '',
         });
     
     const name = config('name');
@@ -187,11 +187,11 @@ function hideKeysPanel(html) {
     const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';
     
     const from = rendy(keysPanelRegExp, {
-        className: 'keyspanel'
+        className: 'keyspanel',
     });
     
     const to = rendy(keysPanel, {
-        className: 'keyspanel hidden'
+        className: 'keyspanel hidden',
     });
     
     return html.replace(RegExp(from), to);

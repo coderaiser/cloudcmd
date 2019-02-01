@@ -16,16 +16,16 @@ const {request} = require('serve-once')(cloudcmd, {
     config: {
         auth: false,
         dropbox: false,
-    }
+    },
 });
 
 test('cloudcmd: modules', async (t) => {
     const modules = {
         data: {
             FilePicker: {
-                key: 'hello'
-            }
-        }
+                key: 'hello',
+            },
+        },
     };
     const options = {
         modules,
@@ -47,7 +47,7 @@ test('cloudcmd: modules', async (t) => {
 
 test('cloudcmd: modules: wrong route', async (t) => {
     const modules = {
-        hello: 'world'
+        hello: 'world',
     };
     
     const options = {

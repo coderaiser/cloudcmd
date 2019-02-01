@@ -15,7 +15,7 @@ test('distribute: log: getMessage', (t) => {
 test('distribute: log: getMessage: message', (t) => {
     const message = 'hello';
     const result = log.getMessage({
-        message
+        message,
     });
     
     t.equal(result, message, 'should equal');

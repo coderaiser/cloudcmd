@@ -34,7 +34,7 @@ test('cloudcmd: static: not found', async (t) => {
 test('cloudcmd: prefix: wrong', async (t) => {
     const originalPrefix = configFn('prefix');
     const config = {
-        prefix: '/hello'
+        prefix: '/hello',
     };
     
     const options = {
@@ -63,7 +63,7 @@ test('cloudcmd: /cloudcmd.js', async (t) => {
 test('cloudcmd: /cloudcmd.js: auth: access denied', async (t) => {
     const name = 'cloudcmd.js';
     const config = {
-        auth: true
+        auth: true,
     };
     const options = {
         config,

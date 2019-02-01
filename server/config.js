@@ -39,7 +39,7 @@ const ConfigHome = path.join(HOME, '.cloudcmd.json');
 
 const readjsonSync = (name) => {
     return jju.parse(fs.readFileSync(name, 'utf8'), {
-        mode: 'json'
+        mode: 'json',
     });
 };
 
@@ -172,7 +172,7 @@ function get(request, response) {
         name    : 'config.json',
         request,
         response,
-        cache   : false
+        cache   : false,
     });
 }
 

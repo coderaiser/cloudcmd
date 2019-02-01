@@ -126,11 +126,11 @@ const args = require('minimist')(argv.slice(2), {
         u: 'username',
         s: 'save',
         a: 'auth',
-        c: 'config'
+        c: 'config',
     },
     unknown: (cmd) => {
         exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
-    }
+    },
 });
 
 if (args.version)
@@ -266,7 +266,7 @@ function readConfig(name) {
     const forEachKey = require('for-each-key');
     
     const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
-        mode: 'json'
+        mode: 'json',
     });
     
     const [error, data] = tryCatch(readjsonSync, name);

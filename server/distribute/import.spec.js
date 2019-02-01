@@ -16,7 +16,7 @@ test('distribute: import: canceled', async (t) => {
             import: false,
             importListen: false,
             log: false,
-        }
+        },
     });
     
     const {status} = await distribute.import();
@@ -34,7 +34,7 @@ test('distribute: import: received: no error', async (t) => {
             importListen: false,
             export: true,
             log: false,
-        }
+        },
     });
     
     config('importUrl', `http://localhost:${port}`);
@@ -57,7 +57,7 @@ test('distribute: import: received', async (t) => {
             export: true,
             importListen: false,
             log: false,
-        }
+        },
     });
     
     config('importUrl', `http://localhost:${port}`);
@@ -79,7 +79,7 @@ test('distribute: import: received: auth: reject', async (t) => {
             export: true,
             importListen: false,
             log: false,
-        }
+        },
     });
     
     config('importUrl', `http://localhost:${port}`);
@@ -101,7 +101,7 @@ test('distribute: import: received: auth: accept', async (t) => {
             export: true,
             importListen: false,
             log: false,
-        }
+        },
     });
     
     config('importUrl', `http://localhost:${port}`);
@@ -121,7 +121,7 @@ test('distribute: import: received: no name', async (t) => {
             export: true,
             importListen: false,
             log: false,
-        }
+        },
     });
     
     config('importUrl', `http://localhost:${port}`);
@@ -140,7 +140,7 @@ test('distribute: import: error', async (t) => {
             export: false,
             importListen: false,
             log: false,
-        }
+        },
     });
     
     config('importUrl', `http://localhost:0`);
@@ -162,7 +162,7 @@ test('distribute: import: config:change: no export', async (t) => {
             export: false,
             importListen: true,
             log: false,
-        }
+        },
     });
     
     const {status} = await distribute.import({

@@ -14,7 +14,7 @@ module.exports.getDOM = () => {
     };
     
     const Dialog = {
-        prompt: resolve
+        prompt: resolve,
     };
     
     return {
@@ -36,8 +36,8 @@ module.exports.getCloudCmd = () => {
     
     return {
         Operation:  {
-            show
-        }
+            show,
+        },
     };
 };
 

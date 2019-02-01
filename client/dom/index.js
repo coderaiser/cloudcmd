@@ -47,7 +47,7 @@ function CmdProto() {
     const TITLE = 'Cloud Commander';
     const TabPanel = {
         'js-left'        : null,
-        'js-right'       : null
+        'js-right'       : null,
     };
     
     this.loadRemote = (name, options, callback) => {
@@ -57,7 +57,7 @@ function CmdProto() {
     
     this.loadSocket = function(callback) {
         DOM.loadRemote('socket', {
-            name    : 'io'
+            name    : 'io',
         }, callback);
         
         return DOM;
@@ -117,7 +117,7 @@ function CmdProto() {
                 const currentName = name;
                 
                 CloudCmd.refresh({
-                    currentName
+                    currentName,
                 });
             });
         });
@@ -686,7 +686,7 @@ function CmdProto() {
      */
     this.hidePanel = (active) => {
         const panel = DOM.getPanel({
-            active
+            active,
         });
         
         if (!panel)
@@ -769,7 +769,7 @@ function CmdProto() {
             
             const files = {
                 from : dirPath + from,
-                to : dirPath + to
+                to : dirPath + to,
             };
             
             RESTful.mv(files, (error) => {
@@ -815,7 +815,7 @@ function CmdProto() {
         CloudCmd.emit('passive-dir', Info.dirPath);
         
         const panelPassive = DOM.getPanel({
-            active: false
+            active: false,
         });
         
         let name = DOM.getCurrentName();
@@ -848,7 +848,7 @@ function CmdProto() {
         }
         
         DOM.setCurrentFile(current, {
-            history: true
+            history: true,
         });
         
         CloudCmd.emit('active-dir', Info.dirPath);
@@ -869,7 +869,7 @@ function CmdProto() {
         const {Dialog} = DOM;
         const cancel = false;
         const setPath = (path) => ({
-            path
+            path,
         });
         
         Dialog.prompt(TITLE, msg, path, {cancel})
@@ -905,7 +905,7 @@ function CmdProto() {
             panel,
             files,
             element,
-            panelPassive
+            panelPassive,
         } = Info;
         
         const dirPath = DOM.getCurrentDirPath();
@@ -916,12 +916,12 @@ function CmdProto() {
         CloudCmd.loadDir({
             path: dirPath,
             panel: panelPassive,
-            noCurrent: true
+            noCurrent: true,
         });
         
         CloudCmd.loadDir({
             path: dirPathPassive,
-            panel
+            panel,
         }, () => {
             const {files} = Info;
             const length = files.length - 1;
@@ -944,7 +944,7 @@ function CmdProto() {
         const panel = files.parentElement;
         
         const panelPassive = DOM.getPanel({
-            active: false
+            active: false,
         });
         
         const filesPassive = DOM.getFiles(panelPassive);

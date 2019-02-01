@@ -12,7 +12,7 @@ const config = {
 
 const cloudcmd = require('../..');
 const {request} = require('serve-once')(cloudcmd, {
-    config
+    config,
 });
 
 test('cloudcmd: rest: cp', async (t) => {
@@ -21,14 +21,14 @@ test('cloudcmd: rest: cp', async (t) => {
         from: '/fixture/',
         to: '/fixture/tmp',
         names: [
-            'cp.txt'
-        ]
+            'cp.txt',
+        ],
     };
     
     mkdirSync(tmp);
     
     const {body} = await request.put(`/api/v1/cp`, {
-        body: files
+        body: files,
     });
     
     rimraf.sync(tmp);

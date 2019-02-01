@@ -121,7 +121,7 @@ function onGET(params, callback) {
     
     default:
         callback({
-            message: 'Not Found'
+            message: 'Not Found',
         });
         break;
     }
@@ -139,7 +139,7 @@ function streamPack(cmd, response) {
     const filename = cmd.replace(getPackReg(), '');
     const dir = path.dirname(filename);
     const names = [
-        path.basename(filename)
+        path.basename(filename),
     ];
     
     operation('pack', dir, response, names, noop);
@@ -230,7 +230,7 @@ function pack(from, to, names, fn) {
     
     if (!names) {
         names = [
-            path.basename(from)
+            path.basename(from),
         ];
         
         from = path.dirname(from);
@@ -264,7 +264,7 @@ function operation(op, from, to, names, fn) {
     if (!fn) {
         fn      = names;
         names   = [
-            path.basename(from)
+            path.basename(from),
         ];
     }
     

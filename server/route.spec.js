@@ -27,7 +27,7 @@ const {request} = serveOnce(cloudcmd, {
 test('cloudcmd: route: buttons: no console', async (t) => {
     const options = {
         config: {
-            console: false
+            console: false,
         },
     };
     
@@ -58,7 +58,7 @@ test('cloudcmd: route: buttons: console', async (t) => {
 
 test('cloudcmd: route: buttons: no config', async (t) => {
     const config = {
-        configDialog: false
+        configDialog: false,
     };
     
     const options = {
@@ -75,7 +75,7 @@ test('cloudcmd: route: buttons: no config', async (t) => {
 
 test('cloudcmd: route: buttons: no contact', async (t) => {
     const config = {
-        contact: false
+        contact: false,
     };
     
     const options = {
@@ -92,7 +92,7 @@ test('cloudcmd: route: buttons: no contact', async (t) => {
 
 test('cloudcmd: route: buttons: one file panel: move', async (t) => {
     const config = {
-        oneFilePanel: true
+        oneFilePanel: true,
     };
     
     const options = {
@@ -109,7 +109,7 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
 
 test('cloudcmd: route: buttons: no one file panel: move', async (t) => {
     const config = {
-        oneFilePanel: false
+        oneFilePanel: false,
     };
     
     const options = {
@@ -126,7 +126,7 @@ test('cloudcmd: route: buttons: no one file panel: move', async (t) => {
 
 test('cloudcmd: route: buttons: one file panel: move', async (t) => {
     const config = {
-        oneFilePanel: true
+        oneFilePanel: true,
     };
     
     const options = {
@@ -143,7 +143,7 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
 
 test('cloudcmd: route: keys panel: hide', async (t) => {
     const config = {
-        keysPanel: false
+        keysPanel: false,
     };
     
     const options = {
@@ -160,7 +160,7 @@ test('cloudcmd: route: keys panel: hide', async (t) => {
 
 test('cloudcmd: route: keys panel', async (t) => {
     const config = {
-        keysPanel: true
+        keysPanel: true,
     };
     
     const options = {
@@ -257,7 +257,7 @@ test('cloudcmd: route: realpath: error', async (t) => {
     const cloudcmd = reRequire(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd, {
-        config: defaultConfig
+        config: defaultConfig,
     });
     
     const {body} = await request.get('/fs/empty-file', {
@@ -283,7 +283,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     });
     
     mockRequire('flop', {
-        read
+        read,
     });
     
     reRequire(routePath);
@@ -310,7 +310,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     });
     
     mockRequire('flop', {
-        read
+        read,
     });
     
     reRequire(routePath);
@@ -337,7 +337,7 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     });
     
     mockRequire('flop', {
-        read
+        read,
     });
     
     reRequire(routePath);
@@ -357,7 +357,7 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
 
 test('cloudcmd: route: buttons: no terminal', async (t) => {
     const config = {
-        terminal: false
+        terminal: false,
     };
     
     const options = {
@@ -365,7 +365,7 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
     };
     
     const {body} = await request.get('/', {
-        options
+        options,
     });
     
     t.ok(/icon-terminal none/.test(body), 'should hide terminal');
@@ -374,7 +374,7 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
 
 test('cloudcmd: route: no termianl: /fs', async (t) => {
     const config = {
-        terminal: false
+        terminal: false,
     };
     
     const options = {
@@ -401,7 +401,7 @@ test('cloudcmd: route: buttons: terminal: can not load', async (t) => {
     };
     
     const {body} = await request.get('/', {
-        options
+        options,
     });
     
     t.ok(/icon-terminal none/.test(body), 'should not enable terminal');
@@ -419,7 +419,7 @@ test('cloudcmd: route: buttons: terminal', async (t) => {
     };
     
     const {body} = await request.get('/', {
-        options
+        options,
     });
     
     t.notOk(/icon-terminal none/.test(body), 'should not enable terminal');
@@ -437,7 +437,7 @@ test('cloudcmd: route: buttons: contact', async (t) => {
     
     const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/', {
-        options
+        options,
     });
     
     t.notOk(/icon-contact none/.test(body), 'should enable terminal');

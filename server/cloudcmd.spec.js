@@ -21,7 +21,7 @@ const {request} = require('serve-once')(cloudcmd, {
     config: {
         auth: false,
         dropbox: false,
-    }
+    },
 });
 
 test('cloudcmd: args: no', (t) => {
@@ -33,7 +33,7 @@ test('cloudcmd: args: no', (t) => {
 
 test('cloudcmd: args: plugins: error', (t) => {
     const fn = () => cloudcmd({
-        plugins: ''
+        plugins: '',
     });
     
     t.throws(fn, /plugins should be an array!/, 'should throw when plugins not an array');

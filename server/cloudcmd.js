@@ -220,16 +220,16 @@ function cloudcmd(prefix, plugins, modules) {
         
         restafary({
             prefix: cloudfunc.apiURL + '/fs',
-            root
+            root,
         }),
         
         rest,
         route({
-            html: defaultHtml
+            html: defaultHtml,
         }),
         
         pluginer(plugins),
-        ponseStatic
+        ponseStatic,
     ]);
     
     return funcs;

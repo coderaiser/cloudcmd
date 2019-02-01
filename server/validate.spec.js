@@ -21,7 +21,7 @@ const cloudcmd = require(cloudcmdPath);
 
 test('validate: root: bad', (t) => {
     const config = {
-        root: Math.random()
+        root: Math.random(),
     };
     
     const [e] = tryCatch(cloudcmd, {config});

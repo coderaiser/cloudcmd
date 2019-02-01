@@ -20,7 +20,7 @@ module.exports = (config) => {
             1: {
                 width: 30,
                 truncate: 30,
-            }
+            },
         },
         border: getBorderCharacters('ramac'),
     });

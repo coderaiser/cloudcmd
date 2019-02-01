@@ -21,7 +21,7 @@ function BufferProto() {
         cut     : callIfEnabled.bind(null, cut),
         copy    : callIfEnabled.bind(null, copy),
         clear   : callIfEnabled.bind(null, clear),
-        paste   : callIfEnabled.bind(null, paste)
+        paste   : callIfEnabled.bind(null, paste),
     };
     
     function showMessage(msg) {
