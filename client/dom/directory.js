@@ -8,14 +8,10 @@ const Images = require('./images');
 const {FS} = require('../../common/cloudfunc');
 const DOM = require('.');
 
-const {
-    getCurrentDirPath: getPathWhenRootEmpty,
-} = DOM;
+const {getCurrentDirPath: getPathWhenRootEmpty} = DOM;
 
 module.exports = (items) => {
-    const {
-        Dialog
-    } = DOM;
+    const {Dialog} = DOM;
     
     if (items.length)
         Images.show('top');

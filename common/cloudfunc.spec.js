@@ -2,9 +2,7 @@
 
 const test = require('supertape');
 const cloudfunc = require('./cloudfunc');
-const {
-    _getSize,
-} = cloudfunc;
+const {_getSize} = cloudfunc;
 
 test('cloudfunc: getSize: dir', (t) => {
     const type = 'directory';

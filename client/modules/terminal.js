@@ -28,9 +28,7 @@ let Loaded;
 let Terminal;
 
 const loadAll = async () => {
-    const {
-        prefix,
-    } = CloudCmd;
+    const {prefix} = CloudCmd;
     
     const prefixGritty = getPrefix();
     const js = `${prefixGritty}/gritty.js`;

@@ -108,9 +108,7 @@ function BufferProto() {
         exec.parallel([copy, cut], (error, cp, ct) => {
             const opStr = cp ? 'copy' : 'move';
             const opData = cp || ct;
-            const {
-                Operation
-            } = CloudCmd;
+            const {Operation} = CloudCmd;
             const msg = 'Path is same!';
             const path = Info.dirPath;
             

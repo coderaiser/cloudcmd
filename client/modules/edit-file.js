@@ -16,9 +16,7 @@ const {
     Images
 } = DOM;
 
-const {
-    config
-} = CloudCmd;
+const {config} = CloudCmd;
 
 let Menu;
 
@@ -74,9 +72,7 @@ module.exports.show = (options) => {
         .setOption('keyMap', 'default');
     
     Info.getData((error, data) => {
-        const {
-            path
-        } = Info;
+        const {path} = Info;
         const name = getName();
         
         if (error)

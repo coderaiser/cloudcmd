@@ -3,9 +3,7 @@
 
 const KEY = require('../key');
 const Info = DOM.CurrentInfo;
-const {
-    Dialog
-} = DOM;
+const {Dialog} = DOM;
 
 const fullstore = require('fullstore/legacy');
 const store = fullstore('');
@@ -35,9 +33,7 @@ const rmFirst = (a) => {
 
 module.exports = (key, event) => {
     const current = Info.element;
-    const {
-        keyCode
-    } = event;
+    const {keyCode} = event;
     const prevStore = store();
     
     const value = store(prevStore.concat(key));

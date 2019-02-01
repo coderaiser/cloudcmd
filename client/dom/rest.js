@@ -5,9 +5,7 @@
 const itype = require('itype/legacy');
 
 const {FS} = require('../../common/cloudfunc');
-const {
-    encode,
-} = require('../../common/entity');
+const {encode} = require('../../common/entity');
 
 module.exports = new RESTful();
 

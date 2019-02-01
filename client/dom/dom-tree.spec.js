@@ -4,9 +4,7 @@ const test = require('supertape');
 const {create} = require('auto-globals');
 const tryCatch = require('try-catch');
 
-const {
-    isContainClass,
-} = require('./dom-tree');
+const {isContainClass} = require('./dom-tree');
 
 test('dom: isContainClass: no element', (t) => {
     const [e] = tryCatch(isContainClass);

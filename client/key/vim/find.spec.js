@@ -4,9 +4,7 @@ const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 const dir = './';
 
-const {
-    getDOM,
-} = require('./globals.fixture');
+const {getDOM} = require('./globals.fixture');
 
 global.DOM = getDOM();
 

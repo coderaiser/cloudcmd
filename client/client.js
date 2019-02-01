@@ -12,9 +12,7 @@ const pascalCase = require('just-pascal-case');
 const isDev = process.env.NODE_ENV === 'development';
 
 const Images = require('./dom/images');
-const {
-    unregisterSW,
-} = require('./sw/register');
+const {unregisterSW} = require('./sw/register');
 
 const jonny = require('jonny/legacy');
 const currify = require('currify/legacy');
@@ -330,9 +328,7 @@ function CloudCmdProto(DOM) {
         const isRefresh = true;
         const history = false;
         const noCurrent = options ? options.noCurrent : false;
-        const {
-            currentName
-        } = options;
+        const {currentName} = options;
         
         CloudCmd.loadDir({
             path,
@@ -356,15 +352,11 @@ function CloudCmdProto(DOM) {
      */
     function ajaxLoad(path, options, panel, callback) {
         const create = (error, json) => {
-            const {
-                RESTful
-            } = DOM;
+            const {RESTful} = DOM;
             const name = options.currentName || Info.name;
             const obj = jonny.parse(json);
             const isRefresh = options.refresh;
-            const {
-                noCurrent
-            } = options;
+            const {noCurrent} = options;
             
             if (!isRefresh && json)
                 return createFileTable(obj, panel, options, callback);
@@ -426,9 +418,7 @@ function CloudCmdProto(DOM) {
         const names = ['file', 'path', 'link', 'pathLink'];
         
         Files.get(names, (error, templFile, templPath, templLink, templPathLink) => {
-            const {
-                Dialog
-            } = DOM;
+            const {Dialog} = DOM;
             const panel = panelParam || DOM.getPanel();
             const {prefix} = CloudCmd;
             
@@ -440,9 +430,7 @@ function CloudCmdProto(DOM) {
             if (error)
                 return Dialog.alert(TITLE, error.responseText);
             
-            const {
-                childNodes
-            } = panel;
+            const {childNodes} = panel;
             let i = childNodes.length;
             
             while (i--)

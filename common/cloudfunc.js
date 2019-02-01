@@ -3,9 +3,7 @@
 const rendy = require('rendy/legacy');
 const currify = require('currify/legacy');
 const store = require('fullstore/legacy');
-const {
-    encode
-} = require('./entity');
+const {encode} = require('./entity');
 const btoa = require('./btoa');
 
 const getHeaderField = currify(_getHeaderField);
@@ -44,9 +42,7 @@ module.exports.getTitle = (options) => {
     options = options || {};
     
     const path = options.path || Path();
-    const {
-        name
-    } = options;
+    const {name} = options;
     
     const array = [
         name || NAME,
@@ -122,9 +118,7 @@ module.exports.buildFromJSON = (params) => {
     
     const path = encode(json.path);
     
-    const {
-        files
-    } = json;
+    const {files} = json;
     
     const sort = params.sort || 'name';
     const order = params.order || 'asc';

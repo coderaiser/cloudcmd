@@ -3,6 +3,9 @@
         "no-console": 0
     },
     "extends": [
-        "@putout"
+        "plugin:putout/recommended"
+    ],
+    "plugins": [
+        "putout"
     ]
 }

@@ -31,9 +31,7 @@ const save = promisify(_save);
 
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
-const {
-    apiURL
-} = CloudFunc;
+const {apiURL} = CloudFunc;
 const changeEmitter = new Emitter();
 
 const ConfigPath = path.join(DIR, 'json/config.json');

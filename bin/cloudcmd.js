@@ -305,9 +305,7 @@ function checkUpdate() {
 }
 
 function showUpdateInfo(data) {
-    const {
-        version
-    } = data;
+    const {version} = data;
     
     if (version === Info.version)
         return;

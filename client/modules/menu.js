@@ -196,9 +196,7 @@ function isPath(x, y) {
 }
 
 function beforeShow(callback, params) {
-    const {
-        name
-    } = params;
+    const {name} = params;
     const el = DOM.getCurrentByPosition({
         x: params.x,
         y: params.y
@@ -231,9 +229,7 @@ function _uploadTo(nameModule) {
         if (error)
             return;
         
-        const {
-            name
-        } = Info;
+        const {name} = Info;
         const execFrom = CloudCmd.execFromModule;
         
         execFrom(nameModule, 'uploadFile', name, data);

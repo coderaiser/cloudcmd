@@ -11,9 +11,7 @@ const supermenu = require('supermenu');
 const reject = Promise.reject.bind(Promise);
 
 const Info = DOM.CurrentInfo;
-const {
-    Dialog
-} = DOM;
+const {Dialog} = DOM;
 
 const TITLE = 'Edit Names';
 const alert = currify(Dialog.alert, TITLE);
@@ -66,9 +64,7 @@ function keyListener(event) {
     const ctrl = event.ctrlKey;
     const meta = event.metaKey;
     const ctrlMeta = ctrl || meta;
-    const {
-        Key
-    } = CloudCmd;
+    const {Key} = CloudCmd;
     
     if (!ctrlMeta || event.keyCode !== Key.S)
         return;

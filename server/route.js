@@ -4,9 +4,7 @@ const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
 
 const fs = require('fs');
-const {
-    promisify,
-} = require('util');
+const {promisify} = require('util');
 
 const flop = require('flop');
 const ponse = require('ponse');
@@ -113,13 +111,9 @@ function indexProcessing(options) {
     const noConfig = !config('configDialog');
     const noConsole = !config('console');
     const noTerminal = !config('terminal');
-    const {
-        panel
-    } = options;
+    const {panel} = options;
     
-    let {
-        data
-    } = options;
+    let {data} = options;
     
     if (noKeysPanel)
         data = hideKeysPanel(data);

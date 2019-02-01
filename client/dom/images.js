@@ -47,9 +47,7 @@ function getElement() {
 /* Функция создаёт картинку загрузки */
 module.exports.loading = () => {
     const element = getElement();
-    const {
-        classList
-    } = element;
+    const {classList} = element;
     
     classList.add(LOADING, LoadingImage);
     classList.remove(ERROR, HIDDEN);
@@ -60,9 +58,7 @@ module.exports.loading = () => {
 /* Функция создаёт картинку ошибки загрузки */
 module.exports.error = () => {
     const element = getElement();
-    const {
-        classList
-    } = element;
+    const {classList} = element;
     
     classList.add(ERROR);
     classList.remove(HIDDEN, LOADING, LoadingImage);

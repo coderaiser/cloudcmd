@@ -20,9 +20,7 @@ const isContainClass = (element, className) => {
     if (Array.isArray(className))
         return className.some(currify(isContainClass, element));
     
-    const {
-        classList
-    } = element;
+    const {classList} = element;
     
     return classList.contains(className);
 };

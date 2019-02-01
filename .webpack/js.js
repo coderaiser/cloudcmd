@@ -6,9 +6,7 @@ const {
     join,
 } = require('path');
 
-const {
-    EnvironmentPlugin,
-} = require('webpack');
+const {EnvironmentPlugin} = require('webpack');
 
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 

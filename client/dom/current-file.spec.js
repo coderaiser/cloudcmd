@@ -106,9 +106,7 @@ test('current-file: setCurrentName: return', (t) => {
 });
 
 test('current-file: getParentDirPath: result', (t) => {
-    const {
-        DOM,
-    } = global;
+    const {DOM} = global;
     
     const getCurrentDirPath = returns('/D/Films/+++favorite films/');
     const getCurrentDirName = returns('+++favorite films');

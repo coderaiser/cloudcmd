@@ -319,9 +319,7 @@ function CmdProto() {
      */
     this.getCurrentData = (callback, currentFile) => {
         let hash;
-        const {
-            Dialog
-        } = DOM;
+        const {Dialog} = DOM;
         const Info = DOM.CurrentInfo;
         const current = currentFile || DOM.getCurrentFile();
         const path = DOM.getCurrentPath(current);
@@ -334,9 +332,7 @@ function CmdProto() {
                 if (itype.object(data))
                     data = jonny.stringify(data);
                 
-                const {
-                    length
-                } = data;
+                const {length} = data;
                 
                 if (hash && length < ONE_MEGABYTE)
                     DOM.saveDataToStorage(path, data, hash);
@@ -452,9 +448,7 @@ function CmdProto() {
      */
     this.expandSelection = () => {
         const msg = 'expand';
-        const {
-            files
-        } = CurrentInfo;
+        const {files} = CurrentInfo;
         
         selectByPattern(msg, files);
     };
@@ -464,9 +458,7 @@ function CmdProto() {
      */
     this.shrinkSelection = () => {
         const msg = 'shrink';
-        const {
-            files
-        } = CurrentInfo;
+        const {files} = CurrentInfo;
         
         selectByPattern(msg, files);
     };
@@ -548,9 +540,7 @@ function CmdProto() {
      * check storage hash
      */
     this.checkStorageHash = (name, callback) => {
-        const {
-            parallel
-        } = exec;
+        const {parallel} = exec;
         const loadHash = DOM.loadCurrentHash;
         const nameHash = name + '-hash';
         const getStoreHash = exec.with(Storage.get, nameHash);
@@ -758,9 +748,7 @@ function CmdProto() {
      * @currentFile
      */
     this.renameCurrent = (current) => {
-        const {
-            Dialog
-        } = DOM;
+        const {Dialog} = DOM;
         
         if (!DOM.isCurrentFile(current))
             current = DOM.getCurrentFile();
@@ -878,9 +866,7 @@ function CmdProto() {
     this.goToDirectory = () => {
         const msg = 'Go to directory:';
         const path = CurrentInfo.dirPath;
-        const {
-            Dialog
-        } = DOM;
+        const {Dialog} = DOM;
         const cancel = false;
         const setPath = (path) => ({
             path
@@ -893,9 +879,7 @@ function CmdProto() {
     
     this.duplicatePanel = () => {
         const Info = CurrentInfo;
-        const {
-            isDir
-        } = Info;
+        const {isDir} = Info;
         const panel = Info.panelPassive;
         const noCurrent = !Info.isOnePanel;
         
@@ -939,9 +923,7 @@ function CmdProto() {
             path: dirPathPassive,
             panel
         }, () => {
-            const {
-                files
-            } = Info;
+            const {files} = Info;
             const length = files.length - 1;
             
             if (currentIndex > length)

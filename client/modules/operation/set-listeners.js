@@ -9,9 +9,7 @@ const {
 } = DOM;
 
 const forEachKey = require('for-each-key/legacy');
-const {
-    TITLE,
-} = CloudCmd;
+const {TITLE} = CloudCmd;
 
 module.exports = (options, callback) => (emitter) => {
     if (!callback) {

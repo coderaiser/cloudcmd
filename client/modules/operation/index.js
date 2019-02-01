@@ -11,9 +11,7 @@ const {promisify} = require('es6-promisify');
 const exec = require('execon');
 const loadJS = require('load.js').js;
 
-const {
-    encode,
-} = require('../../../common/entity');
+const {encode} = require('../../../common/entity');
 
 const RESTful = require('../../dom/rest');
 const removeExtension = require('./remove-extension');
@@ -389,9 +387,7 @@ function twopack(operation, type) {
     let fileFrom;
     let currentName = Info.name;
     
-    const {
-        Images
-    } = DOM;
+    const {Images} = DOM;
     
     const {
         path,

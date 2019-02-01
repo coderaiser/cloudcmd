@@ -25,9 +25,7 @@ module.exports = (name, options, callback = options) => {
         const module = findObjByNameInArr(modules.remote, name);
         
         const isArray = itype.array(module.local);
-        const {
-            version
-        } = module;
+        const {version} = module;
         
         let remoteTmpls;
         let local;

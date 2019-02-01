@@ -11,9 +11,7 @@ const getRange = require('./get-range');
 const getIndex = currify(require('./get-index'));
 const uploadFiles = require('../dom/upload-files');
 
-const {
-    FS,
-} = require('../../common/cloudfunc');
+const {FS} = require('../../common/cloudfunc');
 
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
 const SPACE = ' ';
@@ -51,9 +49,7 @@ const execAll = currify((funcs, event) => {
 });
 
 const Info = DOM.CurrentInfo;
-const {
-    Events
-} = DOM;
+const {Events} = DOM;
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
     click: execAll([
@@ -117,13 +113,9 @@ module.exports.initKeysPanel = () => {
         return;
     
     Events.addClick(keysElement, ({target}) => {
-        const {
-            id
-        } = target;
+        const {id} = target;
         const operation = (name) => {
-            const {
-                Operation
-            } = CloudCmd;
+            const {Operation} = CloudCmd;
             const fn = Operation.show.bind(null, name);
             
             return fn;
@@ -310,9 +302,7 @@ function onTouch(event) {
 function onDragStart(event) {
     const {prefixURL} = CloudCmd;
     const element = getLIElement(event.target);
-    const {
-        isDir
-    } = Info;
+    const {isDir} = Info;
     let link = DOM.getCurrentLink(element);
     let name = DOM.getCurrentName(element);
     
@@ -445,12 +435,8 @@ function dragndrop() {
      * to upload file from download bar
      */
     const onDragOver = (event) => {
-        const {
-            dataTransfer
-        } = event;
-        const {
-            effectAllowed
-        } = dataTransfer;
+        const {dataTransfer} = event;
+        const {effectAllowed} = dataTransfer;
         
         if (/move|linkMove/.test(effectAllowed))
             dataTransfer.dropEffect = 'move';
@@ -471,9 +457,7 @@ function dragndrop() {
 
 function unload() {
     DOM.Events.add(['unload', 'beforeunload'], (event) => {
-        const {
-            Key
-        } = CloudCmd;
+        const {Key} = CloudCmd;
         const isBind = Key && Key.isBind();
         
         if (isBind)

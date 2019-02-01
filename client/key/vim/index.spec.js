@@ -21,12 +21,8 @@ const {
 global.DOM = getDOM();
 global.CloudCmd = getCloudCmd();
 
-const {
-    DOM
-} = global;
-const {
-    Buffer
-} = DOM;
+const {DOM} = global;
+const {Buffer} = DOM;
 
 const KEY = require(pathKey);
 const vim = require(pathVim);

@@ -67,9 +67,7 @@ const push = currify((socket, key, value) => {
 });
 
 function getHost(socket) {
-    const {
-        remoteAddress
-    } = socket.request.connection;
+    const {remoteAddress} = socket.request.connection;
     
     const {
         name,

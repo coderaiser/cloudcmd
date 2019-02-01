@@ -84,9 +84,7 @@ function sendData(params, callback) {
     if (isMD)
         return markdown(p.name, p.request, callback);
     
-    const {
-        method
-    } = p.request;
+    const {method} = p.request;
     
     switch(method) {
     case 'GET':
@@ -181,9 +179,7 @@ function onPUT(name, body, callback) {
         
         const from = root(files.from);
         const to = root(files.to);
-        const {
-            names
-        } = files;
+        const {names} = files;
         
         if (!names)
             return fs.rename(from, to, fn);

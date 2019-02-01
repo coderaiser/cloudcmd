@@ -31,9 +31,7 @@ test('sw: lesten: no sw', (t) => {
 });
 
 test('sw: register: registerSW: no serviceWorker', async (t, {navigator}) => {
-    const {
-        registerSW,
-    } = reRequire('./register');
+    const {registerSW} = reRequire('./register');
     
     delete navigator.serviceWorker;
     

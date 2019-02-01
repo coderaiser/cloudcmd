@@ -52,9 +52,7 @@ function setState(state) {
 
 module.exports.getValue = (name, element) => {
     const el = getElementByName(name, element);
-    const {
-        type
-    } = el;
+    const {type} = el;
     
     switch(type) {
     case 'checkbox':
@@ -70,9 +68,7 @@ module.exports.getValue = (name, element) => {
 
 module.exports.setValue = (name, value, element) => {
     const el = getElementByName(name, element);
-    const {
-        type
-    } = el;
+    const {type} = el;
     
     switch(type) {
     case 'checkbox':

@@ -56,9 +56,7 @@ function KeyProto() {
     }
     
     function listener(event) {
-        const {
-            keyCode
-        } = event;
+        const {keyCode} = event;
         const alt = event.altKey;
         const ctrl = event.ctrlKey;
         const shift = event.shiftKey;
@@ -132,9 +130,7 @@ function KeyProto() {
         
         const {Operation} = CloudCmd;
         
-        const {
-            keyCode
-        } = event;
+        const {keyCode} = event;
         
         const alt = event.altKey;
         const shift = event.shiftKey;

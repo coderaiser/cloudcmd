@@ -40,9 +40,7 @@ const Name = 'View';
 CloudCmd[Name] = module.exports;
 
 const Info = DOM.CurrentInfo;
-const {
-    Key
-} = CloudCmd;
+const {Key} = CloudCmd;
 const basename = (a) => a.split('/').pop();
 
 let El;
