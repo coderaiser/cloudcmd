@@ -43,10 +43,6 @@
       "**.*.spec.js"
     ]
   },
-  "config": {
-    "dirs": "bin/cloudcmd.js common server",
-    "dirs_test": ".madrun.js test bin/release.js webpack.config.js cssnano.config.js .webpack {client,server,common}/**/*.spec.js"
-  },
   "scripts": {
     "start": "madrun start",
     "start:dev": "madrun start:dev",
