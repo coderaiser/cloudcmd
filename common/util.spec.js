@@ -2,9 +2,7 @@
 
 const test = require('supertape');
 const {reRequire} = require('mock-require');
-const DIR = '../../';
-const UtilPath = DIR + 'common/util';
-const Util = require(UtilPath);
+const Util = require('./util');
 const {
     findObjByNameInArr,
     getRegExp,
@@ -91,7 +89,7 @@ test('util: findObjByNameInArr: array', (t) => {
 test('util: getRegExp', (t) => {
     const reg = getRegExp('hel?o.*');
     
-    t.deepEqual(reg, RegExp('^hel.?\\..*$'), 'should return regexp');
+    t.deepEqual(reg, RegExp('^hel.?o\\..*$'), 'should return regexp');
     t.end();
 });
 
@@ -115,7 +113,7 @@ test('util: escapeRegExp', (t) => {
 test('util: scope', (t) => {
     global.window = {};
     
-    reRequire(UtilPath);
+    reRequire('./util');
     
     t.pass('should set window in scope');
     
