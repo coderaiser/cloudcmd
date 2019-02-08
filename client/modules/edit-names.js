@@ -21,7 +21,7 @@ const rename = currify(_rename);
 let Menu;
 
 const EditNames = exec.bind();
-const ConfigView  = {
+const ConfigView = {
     beforeClose: () => {
         exec.ifExist(Menu, 'hide');
         DOM.Events.remove('keydown', keyListener);

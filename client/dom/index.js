@@ -950,6 +950,8 @@ function CmdProto() {
         const filesPassive = DOM.getFiles(panelPassive);
         const name = DOM.getCurrentName(current);
         
+        /* eslint no-multi-spaces:0 */
+        
         info.dir            = DOM.getCurrentDirName();
         info.dirPath        = DOM.getCurrentDirPath();
         info.parentDirPath  = DOM.getParentDirPath();

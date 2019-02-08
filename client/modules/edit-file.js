@@ -25,7 +25,7 @@ const TITLE = 'Edit';
 let MSG_CHANGED;
 const isLoading = fullstore();
 
-const ConfigView  = {
+const ConfigView = {
     beforeClose: () => {
         exec.ifExist(Menu, 'hide');
         isChanged();

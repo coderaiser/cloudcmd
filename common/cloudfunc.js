@@ -253,7 +253,7 @@ function getSize(file) {
 }
 
 function _getHeaderField(sort, order, name) {
-    const arrow = order === 'asc' ?  '↑' : '↓';
+    const arrow = order === 'asc' ? '↑' : '↓';
     
     if (sort !== name)
         return name;

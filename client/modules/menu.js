@@ -94,10 +94,10 @@ function getOptions(notFile) {
     let func;
     
     if (notFile) {
-        name    = 'context';
-        func    = Key.unsetBind;
+        name = 'context';
+        func = Key.unsetBind;
     } else {
-        name    = 'contextFile';
+        name = 'contextFile';
     }
     
     const options = {
@@ -244,7 +244,7 @@ function uploadFromCloud() {
     CloudCmd.execFromModule('Cloud', 'saveFile', (currentName, data) => {
         const path = DOM.getCurrentDirPath() + currentName;
         
-        RESTful.write(path,  data, (error) => {
+        RESTful.write(path, data, (error) => {
             if (error)
                 return;
             

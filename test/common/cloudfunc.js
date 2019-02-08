@@ -21,7 +21,7 @@ const {reRequire} = require('mock-require');
 const htmlLooksLike = require('html-looks-like');
 const readFilesSync = require('@cloudcmd/read-files-sync');
 
-const FS_DIR = TMPLDIR   + 'fs/';
+const FS_DIR = TMPLDIR + 'fs/';
 const EXPECT_PATH = __dirname + '/cloudfunc.html';
 
 const addHBS = (a) => `${a}.hbs`;
@@ -51,19 +51,21 @@ const JSON_FILES = {
     }],
 };
 
+/* eslint no-multi-space: 0 */
+
 let Expect =
-    '<div data-name="js-path" class="reduce-text" title="/etc/X11/">'       +
-        '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"'  +
-        ' title="copy path (Ctrl+P)">'                                      +
-        '</span>'                                                           +
-        '<a data-name="js-refresh" href="/fs/etc/X11/" '                    +
-        'class="path-icon icon-refresh" title="refresh (Ctrl+R)"></a>'      +
-        '<span data-name="js-links" class=links>'                           +
-            '<a data-name="js-path-link" href="/fs/" title="/">/</a>'       +
-            '<a data-name="js-path-link" href="/fs/etc/" title="/etc/">'    +
-                'etc'                                                       +
-            '</a>/X11/'                                                     +
-        '</span>'                                                           +
+    '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
+        '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"' +
+        ' title="copy path (Ctrl+P)">' +
+        '</span>' +
+        '<a data-name="js-refresh" href="/fs/etc/X11/" ' +
+        'class="path-icon icon-refresh" title="refresh (Ctrl+R)"></a>' +
+        '<span data-name="js-links" class=links>' +
+            '<a data-name="js-path-link" href="/fs/" title="/">/</a>' +
+            '<a data-name="js-path-link" href="/fs/etc/" title="/etc/">' +
+                'etc' +
+            '</a>/X11/' +
+        '</span>' +
     '</div>';
 
 test('cloudfunc: render', (t) => {

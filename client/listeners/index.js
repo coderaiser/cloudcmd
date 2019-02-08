@@ -315,8 +315,8 @@ function onDragStart(event) {
     }
     
     event.dataTransfer.setData('DownloadURL',
-        'application/octet-stream'  + ':' +
-        name                        + ':' +
+        'application/octet-stream' + ':' +
+        name + ':' +
         link);
 }
 

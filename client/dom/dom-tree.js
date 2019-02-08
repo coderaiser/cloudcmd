@@ -54,7 +54,7 @@ module.exports.getByClass = (className, element = document) => {
 };
 
 module.exports.getByDataName = (attribute, element = document) => {
-    const selector    = '[' + 'data-name="' + attribute + '"]';
+    const selector = '[' + 'data-name="' + attribute + '"]';
     return element.querySelector(selector);
 };
 

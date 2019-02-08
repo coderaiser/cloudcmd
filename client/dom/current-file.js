@@ -101,7 +101,7 @@ module.exports.getCurrentDirName = () => {
     const href = DOM.getCurrentDirPath()
         .replace(/\/$/, '');
     
-    const substr  = href.substr(href, href.lastIndexOf('/'));
+    const substr = href.substr(href, href.lastIndexOf('/'));
     const ret = href.replace(substr + '/', '') || '/';
     
     return ret;

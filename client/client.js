@@ -66,8 +66,8 @@ function CloudCmdProto(DOM) {
     this.DIRCLIENT = '/dist/';
     this.DIRCLIENT_MODULES = this.DIRCLIENT + 'modules/';
     
-    this.MIN_ONE_PANEL_WIDTH    = 1155;
-    this.HOST                   = location.origin ||
+    this.MIN_ONE_PANEL_WIDTH = 1155;
+    this.HOST = location.origin ||
                                   location.protocol + '//' + location.host;
     
     const TITLE = 'Cloud Commander';
@@ -392,7 +392,7 @@ function CloudCmdProto(DOM) {
         };
         
         if (!options)
-            options    = {};
+            options = {};
         
         CloudCmd.log('reading dir: "' + path + '";');
         

@@ -55,8 +55,8 @@ function RESTful() {
         const isFunc = itype.function(data);
         
         if (!callback && isFunc) {
-            callback    = data;
-            data        = null;
+            callback = data;
+            data = null;
         }
         
         sendRequest({
@@ -149,7 +149,7 @@ function RESTful() {
         },
     };
     
-    this.Markdown   = {
+    this.Markdown = {
         read(url, callback) {
             sendRequest({
                 method      : 'GET',

@@ -47,8 +47,8 @@ function EventsProto() {
             isFunc = itype.function(element);
             
             if (isFunc) {
-                listener   = element;
-                element    = null;
+                listener = element;
+                element = null;
             }
             
             if (!element)
@@ -122,8 +122,8 @@ function EventsProto() {
         };
         
         if (!listener) {
-            listener    = element;
-            element     = null;
+            listener = element;
+            element = null;
         }
         
         this.add(type, element, once);

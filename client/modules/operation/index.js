@@ -294,6 +294,8 @@ function _processFiles(options, data) {
     
     let names = [];
     
+    /* eslint no-multi-spaces: 0 */
+    
     if (data) {
         from        = data.from;
         to          = data.to;

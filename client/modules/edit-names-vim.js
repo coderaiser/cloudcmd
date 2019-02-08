@@ -7,7 +7,7 @@ CloudCmd.EditNamesVim = exports;
 const Events = require('../dom/events');
 const {Key} = CloudCmd;
 
-const ConfigView  = {
+const ConfigView = {
     bindKeys: false,
     beforeClose: () => {
         Events.rmKey(listener);

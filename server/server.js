@@ -34,11 +34,11 @@ const logger = tryRequire('morgan');
 
 module.exports = async (options) => {
     const prefix = config('prefix');
-    const port = process.env.PORT            ||  /* c9           */
+    const port = process.env.PORT || /* c9           */
                  config('port');
     
-    const ip =  process.env.IP               ||  /* c9           */
-                config('ip')                 ||
+    const ip = process.env.IP || /* c9           */
+                config('ip') ||
                 '0.0.0.0';
     
     const app = express();

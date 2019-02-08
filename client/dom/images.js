@@ -67,7 +67,7 @@ module.exports.error = () => {
 };
 
 module.exports.show = show;
-module.exports.show.load  = show;
+module.exports.show.load = show;
 module.exports.show.error = error;
 
 /**
@@ -135,7 +135,7 @@ module.exports.setProgress = (value, title) => {
     return Images;
 };
 
-module.exports.clearProgress  = () => {
+module.exports.clearProgress = () => {
     const DATA = 'data-progress';
     const element = Images.get();
     

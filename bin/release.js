@@ -18,10 +18,10 @@ main((error) => {
 });
 
 function main(callback) {
-    const history     = 'Version history\n---------------\n';
-    const link        = '//github.com/coderaiser/cloudcmd/releases/tag/';
-    const template    = '- *{{ date }}*, '  +
-                      '**[v{{ version }}]'  +
+    const history = 'Version history\n---------------\n';
+    const link = '//github.com/coderaiser/cloudcmd/releases/tag/';
+    const template = '- *{{ date }}*, ' +
+                      '**[v{{ version }}]' +
                       '(' + link + 'v{{ version }})**\n';
     
     const {version} = Info;
@@ -47,7 +47,7 @@ function replaceVersion(name, version, versionNew, callback) {
         if (error)
             return callback(error);
         
-        callback(null,  'done: ' + name);
+        callback(null, 'done: ' + name);
     });
 }
 

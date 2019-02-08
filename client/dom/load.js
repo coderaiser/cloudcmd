@@ -64,7 +64,7 @@ module.exports.ajax = (params) => {
     
     xhr.onreadystatechange = (event) => {
         const xhr = event.target;
-        const OK  = 200;
+        const OK = 200;
         
         if (xhr.readyState !== xhr.DONE)
             return;
@@ -72,7 +72,7 @@ module.exports.ajax = (params) => {
         Images.clearProgress();
         
         const TYPE_JSON = 'application/json';
-        const type        = xhr.getResponseHeader('content-type');
+        const type = xhr.getResponseHeader('content-type');
         
         if (xhr.status !== OK)
             return exec(p.error, xhr);
@@ -104,7 +104,7 @@ module.exports.put = (url, body) => {
             return;
         
         const percent = (event.loaded / event.total) * 100;
-        const count   = Math.round(percent);
+        const count = Math.round(percent);
         
         emitter.emit('progress', count);
     };

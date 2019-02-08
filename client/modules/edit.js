@@ -39,8 +39,8 @@ module.exports.init = async () => {
 function create() {
     const element = createElement('div', {
         style:
-            'width      : 100%;'                +
-            'height     : 100%;'                +
+            'width      : 100%;' +
+            'height     : 100%;' +
             'font-family: "Droid Sans Mono";',
         notAppend: true,
     });

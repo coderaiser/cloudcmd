@@ -8,7 +8,7 @@ const dir = join(__dirname, '..', '..');
 const modulesPath = join(dir, 'json', 'modules.json');
 const cloudcmdPath = dir;
 
-const localModules  = require(modulesPath);
+const localModules = require(modulesPath);
 const modulas = require(`${dir}/server/modulas`);
 
 const cloudcmd = require(cloudcmdPath);

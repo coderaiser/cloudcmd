@@ -17,7 +17,7 @@ function BufferProto() {
     const CUT = 'cut';
     const TITLE = 'Buffer';
     
-    const Buffer  = {
+    const Buffer = {
         cut     : callIfEnabled.bind(null, cut),
         copy    : callIfEnabled.bind(null, copy),
         clear   : callIfEnabled.bind(null, clear),

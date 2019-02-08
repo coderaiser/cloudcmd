@@ -267,10 +267,10 @@ function getMediaElement(src, callback) {
             return alert(error);
         
         if (!TemplateAudio)
-            TemplateAudio   = template;
+            TemplateAudio = template;
         
         const is = isAudio(name);
-        const type =  is ? 'audio' : 'video';
+        const type = is ? 'audio' : 'video';
         
         const innerHTML = rendy(TemplateAudio, {
             src,

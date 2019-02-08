@@ -42,7 +42,7 @@ module.exports = (request, response, next) => {
 
 function rest(request, response) {
     const name = ponse.getPathName(request);
-    const params  = {
+    const params = {
         request,
         response,
         name: name.replace(apiURL, '') || '/',
@@ -194,8 +194,8 @@ function onPUT(name, body, callback) {
         if (isRootAll([files.to, files.from]))
             return callback(getWin32RootMsg());
         
-        files.from  = root(files.from);
-        files.to    = root(files.to);
+        files.from = root(files.from);
+        files.to = root(files.to);
         
         copy(files.from, files.to, files.names, (error) => {
             const msg = formatMsg('copy', files.names);
@@ -262,8 +262,8 @@ function getPacker(operation) {
 
 function operation(op, from, to, names, fn) {
     if (!fn) {
-        fn      = names;
-        names   = [
+        fn = names;
+        names = [
             path.basename(from),
         ];
     }

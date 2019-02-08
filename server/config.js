@@ -58,9 +58,9 @@ const config = {
 
 const connectionWraped = wraptile(connection);
 
-module.exports          = manage;
-module.exports.save     = save;
-module.exports.middle   = middle;
+module.exports = manage;
+module.exports.save = save;
+module.exports.middle = middle;
 module.exports.subscribe = (fn) => {
     changeEmitter.on('change', fn);
 };
@@ -69,7 +69,7 @@ module.exports.unsubscribe = (fn) => {
     changeEmitter.removeListener('change', fn);
 };
 
-module.exports.listen   = (socket, auth) => {
+module.exports.listen = (socket, auth) => {
     check(socket, auth);
     
     if (!manage('configDialog'))
