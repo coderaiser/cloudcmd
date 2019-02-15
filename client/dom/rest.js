@@ -12,6 +12,15 @@ module.exports = new RESTful();
 const Images = require('./images');
 const load = require('./load');
 
+module.exports._replaceHash = replaceHash;
+function replaceHash(url) {
+    /*
+     * if we send ajax request -
+     * no need in hash so we escape #
+     */
+    return url.replace(/#/g, '%23');
+}
+
 function RESTful() {
     this.delete = (url, data, callback) => {
         const isFunc = itype.function(data);
@@ -179,11 +188,7 @@ function RESTful() {
         p.url = prefixURL + p.url;
         p.url = encodeURI(p.url);
         
-        /*
-         * if we send ajax request -
-         * no need in hash so we escape #
-         */
-        p.url = p.url.replace('#', '%23');
+        p.url = replaceHash(p.url);
         
         load.ajax({
             method      : p.method,
