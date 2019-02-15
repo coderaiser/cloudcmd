@@ -10,8 +10,6 @@ const LOADING = 'loading';
 const HIDDEN = 'hidden';
 const ERROR = 'error';
 
-const LoadingImage = LOADING + getLoadingType();
-
 function getLoadingType() {
     return isSVG() ? '-svg' : '-gif';
 }
@@ -48,8 +46,9 @@ function getElement() {
 module.exports.loading = () => {
     const element = getElement();
     const {classList} = element;
+    const loadingImage = LOADING + getLoadingType();
     
-    classList.add(LOADING, LoadingImage);
+    classList.add(LOADING, loadingImage);
     classList.remove(ERROR, HIDDEN);
     
     return element;
@@ -59,9 +58,10 @@ module.exports.loading = () => {
 module.exports.error = () => {
     const element = getElement();
     const {classList} = element;
+    const loadingImage = LOADING + getLoadingType();
     
     classList.add(ERROR);
-    classList.remove(HIDDEN, LOADING, LoadingImage);
+    classList.remove(HIDDEN, LOADING, loadingImage);
     
     return element;
 };
