@@ -194,7 +194,8 @@ Hot keys
 | `Ctrl + F3`           | sort by name
 | `Ctrl + F5`           | sort by date
 | `Ctrl + F6`           | sort by size
-| `Up`, `Down`, `Enter` | file system navigation
+| `Up`, `Down`          | file system navigation
+| `Enter`               | change directory/view file
 | `Alt + Left/Right`    | show content of directory under cursor in target panel
 | `Alt + G`             | go to directory
 | `Ctrl + \`            | go to the root directory

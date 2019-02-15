@@ -275,6 +275,10 @@ function onDblClick(event) {
         });
         
         event.preventDefault();
+    }else{
+        CloudCmd.View.show();
+        
+        event.preventDefault();
     }
 }
 
@@ -282,17 +286,20 @@ function onTouch(event) {
     const current = getLIElement(event.target);
     const isDir = DOM.isCurrentIsDir(current);
     
-    if (!isDir)
-        return;
+    if (!isDir){
+        
+        const isCurrent = DOM.isCurrentFile(current);
+        
+        if (!isCurrent)
+            return;
+        
+        CloudCmd.loadDir({
+            path: DOM.getCurrentPath(current),
+        });
     
-    const isCurrent = DOM.isCurrentFile(current);
-    
-    if (!isCurrent)
-        return;
-    
-    CloudCmd.loadDir({
-        path: DOM.getCurrentPath(current),
-    });
+    }else{
+        CloudCmd.View.show();
+    }
 }
 
 /*

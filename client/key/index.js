@@ -387,6 +387,8 @@ function KeyProto() {
         case Key.ENTER:
             if (Info.isDir)
                 loadDir({path});
+            else
+                CloudCmd.View.show();
             break;
         
         case Key.BACKSPACE:
