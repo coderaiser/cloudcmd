@@ -388,6 +388,8 @@ function KeyProto() {
                 CloudCmd.loadDir({
                     path: path === '/' ? '/' : path + '/',
                 });
+            else
+                CloudCmd.View.show();
             break;
         
         case Key.BACKSPACE:
