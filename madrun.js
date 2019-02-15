@@ -20,7 +20,7 @@ const dirsTest = [
     'webpack.config.js',
     'cssnano.config.js',
     '.webpack',
-    '.madrun.js',
+    'madrun.js',
     '{client,server,common}/**/*.spec.js',
 ].join(' ');
 
