@@ -50,7 +50,7 @@ module.exports = {
     'docker:build': () => `docker build -t coderaiser/cloudcmd:${version} .`,
     'docker:build:alpine': () => `docker build -f Dockerfile.alpine -t coderaiser/cloudcmd:${version}-alpine .`,
     'docker': () => series(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
-    'docker-ci': () => series(['build', 'docker-login docker']),
+    'docker-ci': () => series(['build', 'docker-login', 'docker']),
     'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
     'docker:alpine': () => series([
         'docker:pull:alpine',

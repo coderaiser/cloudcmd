@@ -1,3 +1,28 @@
+2019.02.15, v11.8.4
+
+fix:
+- (terminal) chrome does not display anything on first open (#214)
+- (rest) can not read ###files (#223)
+- (help) add --terminal-auto-restart
+- (cloudcmd) read root from custom config (#224)
+- refactor(view) viewImage: href, prefixURL -> prefixURL
+- docs(help) improve English translation of HELP.md (#211)
+
+feature:
+- (package) tar-stream v2.0.0
+- (package) redrun -> madrun
+- (package) unionfs v4.0.0
+- (package) package-json v6.0.0
+- (package) add @putout/eslint-config
+- (package) tape -> supertape
+- (package) add putout
+- (package) add eslint-plugin-tape
+- (package) file-loader v3.0.1
+- (package) css-loader v2.0.1
+- (package) kebabToCamelCase -> just-pascal-case
+- (package) deepmerge v3.0.0
+
+
 2018.12.04, v11.8.3
 
 fix:
