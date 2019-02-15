@@ -1,9 +1,6 @@
 'use strict';
 
-const autoGlobals = require('auto-globals');
-const tape = autoGlobals(require('supertape'));
-
-const test = autoGlobals(tape);
+const test = require('supertape');
 const rest = require('./rest');
 
 test('cloudcmd: client: rest: replaceHash', (t) => {
@@ -15,3 +12,4 @@ test('cloudcmd: client: rest: replaceHash', (t) => {
     t.equal(result, expected, 'should equal');
     t.end();
 });
+
