@@ -10,9 +10,6 @@
         "client/(client|cloudcmd|load-module).js": {
             "remove-console": false
         },
-        "bin": {
-            "remove-console": false
-        },
         "test/common/cloudfunc.js": {
             "remove-console": false
         },

@@ -314,7 +314,7 @@ function _processFiles(options, data) {
     if (!names.length)
         names.push(DOM.getCurrentName());
     
-    const name = names[0];
+    const [name] = names;
     
     const sameName = DOM.getCurrentByName(name, panel);
     
@@ -444,7 +444,7 @@ function twopack(operation, type) {
 
 function message(msg, to, names) {
     const n = names.length;
-    const name = names[0];
+    const [name] = names;
     
     msg += ' ';
     

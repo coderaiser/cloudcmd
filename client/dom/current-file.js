@@ -57,7 +57,7 @@ module.exports.getCurrentName = (currentFile) => {
     
     if (!current)
         return '';
-       
+    
     const link = DOM.getCurrentLink(current);
     
     if (!link)
@@ -83,7 +83,7 @@ module.exports.getCurrentDirPath = (panel = DOM.getPanel()) => {
  */
 module.exports.getCurrentPath = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
-    const element = DOM.getByTag('a', current)[0];
+    const [element] = DOM.getByTag('a', current);
     const {prefix} = CloudCmd;
     
     const path = element

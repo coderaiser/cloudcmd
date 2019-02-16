@@ -844,7 +844,7 @@ function CmdProto() {
             current = DOM.getCurrentByName(name, panel);
             
             if (!current)
-                current = filesPassive[0];
+                [current] = filesPassive;
         }
         
         DOM.setCurrentFile(current, {

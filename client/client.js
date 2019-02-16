@@ -459,7 +459,7 @@ function CloudCmdProto(DOM) {
                     current = DOM.getCurrentByName(dir);
                 
                 if (!current)
-                    current = DOM.getFiles(panel)[0];
+                    [current] = DOM.getFiles(panel);
                 
                 DOM.setCurrentFile(current, {
                     history,
@@ -528,7 +528,7 @@ function CloudCmdProto(DOM) {
         CloudCmd.loadDir({path}, () => {
             const {panel} = Info;
             const current = DOM.getCurrentByName(dir);
-            const first = DOM.getFiles(panel)[0];
+            const [first] = DOM.getFiles(panel);
             
             DOM.setCurrentFile(current || first, {
                 history,
