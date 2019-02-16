@@ -23,6 +23,7 @@ bin/release.js
 client
 
 webpack.config.js
+madrun.js
 
 *.ai
 *.cdr
