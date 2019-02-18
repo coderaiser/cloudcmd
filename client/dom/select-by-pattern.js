@@ -24,7 +24,7 @@ module.exports = (msg, files) => {
         
         files.forEach((current) => {
             const name = DOM.getCurrentName(current);
-             
+            
             if (name === '..')
                 return;
             
@@ -37,7 +37,7 @@ module.exports = (msg, files) => {
             
             let isSelected = DOM.isSelected(current);
             const shouldSel = msg === 'expand';
-             
+            
             if (shouldSel)
                 isSelected = !isSelected;
             

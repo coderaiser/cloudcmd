@@ -80,7 +80,7 @@ async function onFetch(event) {
     
     if (!isDev && response)
         return response;
-     
+    
     const [e, resp] = await tryToCatch(fetch, newRequest, {
         credentials: 'same-origin',
     });
@@ -89,7 +89,7 @@ async function onFetch(event) {
         return new Response(e.message);
     
     await addToCache(request, resp.clone());
-     
+    
     return resp;
 }
 

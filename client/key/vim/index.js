@@ -1,4 +1,5 @@
 'use strict';
+
 /* global CloudCmd, DOM */
 
 const KEY = require('../key');

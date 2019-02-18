@@ -1,4 +1,4 @@
-'use stric';
+'use strict';
 
 const test = require('supertape');
 const mockRequire = require('mock-require');

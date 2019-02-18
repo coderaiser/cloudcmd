@@ -83,7 +83,7 @@ module.exports.ajax = (params) => {
         let data = xhr.response;
         if (type && isContain && notText)
             data = jonny.parse(xhr.response) || xhr.response;
-            
+        
         exec(p.success, data, xhr.statusText, xhr);
     };
     

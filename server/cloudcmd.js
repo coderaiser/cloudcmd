@@ -60,7 +60,7 @@ module.exports = (params) => {
         
         if (/root|editor|packer|columns/.test(name))
             validate[name](value);
-         
+        
         if (/prefix/.test(name))
             value = prefixer(value);
         
@@ -168,7 +168,7 @@ function cloudcmd(prefix, plugins, modules) {
     
     const dropbox = config('dropbox');
     const dropboxToken = config('dropboxToken');
-   
+    
     const funcs = clean([
         config('console') && konsole({
             online,
@@ -183,7 +183,7 @@ function cloudcmd(prefix, plugins, modules) {
             dropbox,
             dropboxToken,
         }),
-       
+        
         dword({
             online,
             diff,

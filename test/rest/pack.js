@@ -54,7 +54,7 @@ test('cloudcmd: rest: pack: tar: get', async (t) => {
     const extract = tar.extract();
     
     body.pipe(gunzip()).pipe(extract);
-   
+    
     const [, stream] = await once('entry', extract);
     const data = await pullout(stream);
     const file = fs.readFileSync(__dirname + '/../fixture/pack', 'utf8');
@@ -92,7 +92,7 @@ test('cloudcmd: rest: pack: tar: put: file', async (t) => {
     const result = fs.readFileSync(__dirname + '/../fixture/pack');
     
     fs.unlinkSync(`${__dirname}/../${name}`);
-     
+    
     t.deepEqual(result, data, 'should create archive');
     t.end();
 });

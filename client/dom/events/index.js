@@ -83,7 +83,7 @@ function EventsProto() {
                     callback
                 );
             });
-           
+            
             break;
         }
     }

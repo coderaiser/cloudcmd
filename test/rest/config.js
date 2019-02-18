@@ -64,7 +64,7 @@ test('cloudcmd: rest: config: patch: no configDialog', async (t) => {
     const body = {
         ip: null,
     };
-     
+    
     const result = await request.patch(`/api/v1/config`, {
         body,
         options,
@@ -91,7 +91,7 @@ test('cloudcmd: rest: config: patch: no configDialog: statusCode', async (t) => 
         body,
         options,
     });
-     
+    
     manageConfig('configDialog', true);
     
     t.equal(response.status, 404);
@@ -110,7 +110,7 @@ test('cloudcmd: rest: config: patch: save config', async (t) => {
     });
     
     const config = readjson.sync(pathConfig);
-   
+    
     t.equal(config.editor, 'dword', 'should change config file on patch');
     t.end();
     

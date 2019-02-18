@@ -58,7 +58,7 @@ module.exports.findObjByNameInArr = (array, name) => {
     
     if (!Array.isArray(array))
         throw Error('array should be array!');
-        
+    
     if (typeof name !== 'string')
         throw Error('name should be string!');
     

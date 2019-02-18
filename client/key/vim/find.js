@@ -1,4 +1,5 @@
 'use strict';
+
 /* global DOM */
 
 const fullstore = require('fullstore/legacy');

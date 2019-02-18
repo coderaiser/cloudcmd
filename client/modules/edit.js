@@ -79,7 +79,7 @@ function initConfig(options = {}) {
 module.exports.show = (options) => {
     if (Loading)
         return;
-     
+    
     CloudCmd.View.show(Element, initConfig(options));
     
     getEditor()

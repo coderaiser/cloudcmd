@@ -41,7 +41,7 @@ module.exports = window.CloudCmd = (config) => {
 function getPrefix(prefix) {
     if (!prefix)
         return '';
-   
+    
     if (!prefix.indexOf('/'))
         return prefix;
     
