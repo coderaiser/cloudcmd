@@ -1,3 +1,13 @@
+2019.02.20, v11.8.5
+
+fix:
+- (plugins) set content-type (#230)
+
+feature:
+- (package) putout v4.0.0
+- (package) madrun v2.0.0
+
+
 2019.02.15, v11.8.4
 
 fix:
