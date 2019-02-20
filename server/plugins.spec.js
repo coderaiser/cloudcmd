@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const test = require('supertape');
-const cloudcmd = require('..');
+const cloudcmd = require('./cloudcmd');
 
 const config = {
     auth: false,
@@ -26,6 +26,22 @@ test('cloudcmd: plugins: empty', async (t) => {
     t.end();
 });
 
+test('cloudcmd: plugins: empty: header', async (t) => {
+    const plugins = [];
+    const options = {
+        plugins,
+    };
+    
+    const {headers} = await request.get('/plugins.js', {
+        options,
+    });
+    
+    const expected = 'application/javascript; charset=utf-8';
+    
+    t.equal(headers.get('content-type'), expected, 'should content be empty');
+    t.end();
+});
+
 test('cloudcmd: plugins: one', async (t) => {
     const plugins = [
         __filename,
@@ -42,6 +58,25 @@ test('cloudcmd: plugins: one', async (t) => {
     const file = fs.readFileSync(__filename, 'utf8');
     
     t.equal(body, file, 'should return file plugin content');
+    t.end();
+});
+
+test('cloudcmd: plugins: one', async (t) => {
+    const plugins = [
+        __filename,
+    ];
+    
+    const options = {
+        plugins,
+    };
+    
+    const {headers} = await request.get('/plugins.js', {
+        options,
+    });
+    
+    const expected = 'application/javascript; charset=utf-8';
+    
+    t.equal(headers.get('content-type'), expected, 'should content be empty');
     t.end();
 });
 

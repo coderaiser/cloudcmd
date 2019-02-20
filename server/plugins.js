@@ -7,7 +7,7 @@ module.exports = currify((plugins, req, res, next) => {
     if (req.url !== '/plugins.js')
         return next();
     
-    res.setHeader('content-type', 'application/javascript; charset=UTF-8');
+    res.setHeader('content-type', 'application/javascript; charset=utf-8');
     
     if (!plugins || !plugins.length)
         return res.send('');
