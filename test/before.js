@@ -20,7 +20,11 @@ const currentConfig = readjson.sync.try(pathConfig);
 module.exports = before;
 
 function before(options, fn = options) {
-    const {config, plugins, modules} = options;
+    const {
+        config,
+        plugins,
+        modules,
+    } = options;
     
     const app = express();
     const server = http.createServer(app);

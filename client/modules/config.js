@@ -66,7 +66,11 @@ let Element;
 let Template;
 
 function getHost() {
-    const {host, origin, protocol} = location;
+    const {
+        host,
+        origin,
+        protocol,
+    } = location;
     const href = origin || `${protocol}//${host}`;
     
     return href;
