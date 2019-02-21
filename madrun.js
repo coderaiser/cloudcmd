@@ -2,8 +2,7 @@
 
 const {
     run,
-    series,
-    parallel,
+    parallel
 } = require('madrun');
 
 const {version} = require('./package');
@@ -27,19 +26,19 @@ const dirsTest = [
 module.exports = {
     'start': () => 'node bin/cloudcmd.js',
     'start:dev': () => `NODE_ENV=development ${run('start')}`,
-    'build:start': () => series(['build:client', 'start']),
-    'build:start:dev': () => series(['build:client:dev', 'start:dev']),
-    'lint': () => series(['putout', 'lint:*', 'spell']),
+    'build:start': () => run(['build:client', 'start']),
+    'build:start:dev': () => run(['build:client:dev', 'start:dev']),
+    'lint': () => run(['putout', 'lint:*', 'spell']),
     'lint:server': () => `eslint -c .eslintrc.server ${dirs} --ignore-pattern *.spec.js`,
     'lint:test': () => `eslint --ignore-pattern '!.*' ${dirsTest}`,
     'lint:client': () => 'eslint --env browser client',
     'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
-    'fix:lint': () => series(['putout', 'lint:*'], '--fix'),
+    'fix:lint': () => run(['putout', 'lint:*'], '--fix'),
     'test': () => `tape 'test/**/*.js' '{client,common,server}/**/*.spec.js'`,
     'test:client': () => `tape 'test/client/**/*.js`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
-    'wisdom': () => series(['lint', 'build', 'test']),
+    'wisdom': () => run(['lint', 'build', 'test']),
     'wisdom:type': () => 'bin/release.js',
     'docker:pull:node': () => 'docker pull node',
     'docker:pull:alpine': () => 'docker pull mhart/alpine-node',
@@ -49,10 +48,10 @@ module.exports = {
     'docker:push:alpine:latest': () => 'docker push coderaiser/cloudcmd:latest-alpine',
     'docker:build': () => `docker build -t coderaiser/cloudcmd:${version} .`,
     'docker:build:alpine': () => `docker build -f Dockerfile.alpine -t coderaiser/cloudcmd:${version}-alpine .`,
-    'docker': () => series(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
-    'docker-ci': () => series(['build', 'docker-login', 'docker']),
+    'docker': () => run(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
+    'docker-ci': () => run(['build', 'docker-login', 'docker']),
     'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
-    'docker:alpine': () => series([
+    'docker:alpine': () => run([
         'docker:pull:alpine',
         'docker:build:alpine',
         'docker:tag:alpine',
@@ -76,7 +75,7 @@ module.exports = {
     'watch:client': () => run('6to5:client','--watch'),
     'watch:client:dev': () => run('6to5:client:dev', '--watch'),
     'watch:server': () => 'nodemon bin/cloudcmd.js',
-    'watch:lint': () => `nodemon -w client -w server -w webpack.config.js -x ${series(['lint:client', 'lint:server'])}`,
+    'watch:lint': () => `nodemon -w client -w server -w webpack.config.js -x ${run(['lint:client', 'lint:server'])}`,
     'watch:lint:client': () => `nodemon -w client -w webpack.config.js -x ${run('lint:client')}`,
     'watch:lint:server': () => `nodemon -w server -w common -x ${run('lint:server')}`,
     'watch:test': () => `nodemon -w client -w server -w test -w common -x ${run('test')}`,
