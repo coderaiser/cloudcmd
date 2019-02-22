@@ -2,7 +2,7 @@
 
 const {
     run,
-    parallel
+    parallel,
 } = require('madrun');
 
 const {version} = require('./package');
