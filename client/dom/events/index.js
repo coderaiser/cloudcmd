@@ -142,7 +142,7 @@ function EventsProto() {
         checkType(type);
         
         parseArgs(type, element, listener, (element, args) => {
-            element.removeEventListener.apply(element, args);
+            element.removeEventListener(...args);
         });
         
         return Events;
