@@ -10,9 +10,8 @@ const mockRequire = require('mock-require');
 const {reRequire} = mockRequire;
 const serveOnce = require('serve-once');
 
-const root = '../../';
-const dir = root + 'server/';
-const cloudcmdPath = root;
+const cloudcmdPath = '../../';
+const dir = cloudcmdPath + 'server/';
 const restPath = dir + 'rest';
 
 test('cloudcmd: rest: mv', async (t) => {

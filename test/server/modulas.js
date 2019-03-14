@@ -4,12 +4,11 @@ const {join} = require('path');
 const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 
-const dir = join(__dirname, '..', '..');
-const modulesPath = join(dir, 'json', 'modules.json');
-const cloudcmdPath = dir;
+const cloudcmdPath = join(__dirname, '..', '..');
+const modulesPath = join(cloudcmdPath, 'json', 'modules.json');
 
 const localModules = require(modulesPath);
-const modulas = require(`${dir}/server/modulas`);
+const modulas = require(`${cloudcmdPath}/server/modulas`);
 
 const cloudcmd = require(cloudcmdPath);
 const {request} = require('serve-once')(cloudcmd, {

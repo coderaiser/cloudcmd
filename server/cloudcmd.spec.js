@@ -110,15 +110,12 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
     const cloudcmdPath = DIR + 'cloudcmd';
     
     const reset = cleanNodeEnv();
-    
     const {_replaceDist} = reRequire(cloudcmdPath);
-    
     const result = _replaceDist(url);
-    const expected = url;
     
     reset();
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, url, 'should equal');
     t.end();
 });
 
