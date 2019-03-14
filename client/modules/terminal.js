@@ -44,14 +44,11 @@ const loadAll = async () => {
     Loaded = true;
 };
 
-const {IntersectionObserver} = window;
-
 module.exports.init = async () => {
     if (!config('terminal'))
         return;
     
     Images.show.load('top');
-    delete window.IntersectionObserver;
     
     await CloudCmd.View();
     await loadAll();
@@ -90,7 +87,6 @@ function create() {
         fontFamily: 'Droid Sans Mono',
     };
     const {socket, terminal} = gritty(document.body, options);
-    window.IntersectionObserver = IntersectionObserver;
     
     Terminal = terminal;
     
