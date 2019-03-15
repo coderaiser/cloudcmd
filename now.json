@@ -1,6 +1,10 @@
 {
-    "type": "npm",
+    "version": 2,
     "alias": "cloudcmd",
+    "builds": [{
+        "src": "bin/cloudcmd.js",
+        "use": "@now/node-server"
+    }],
     "env": {
         "cloudcmd_config_dialog": "true",
         "cloudcmd_config_auth": "false",
@@ -14,29 +18,5 @@
         "cloudcmd_export_token": "hello",
         "cloudcmd_name": "Cloud Commander - Now",
         "cloudcmd_open": "false"
-    },
-    "engines": {
-        "node": "8"
-    },
-    "files": [
-        "bin",
-        "server",
-        ".babelrc",
-        ".madrun.js",
-        "css",
-        "font",
-        "favicon.ico",
-        "client",
-        "common",
-        "html",
-        "tmpl",
-        "img",
-        "man",
-        "modules",
-        ".webpack",
-        "webpack.config.js",
-        "cssnano.config.js",
-        "json",
-        "HELP.md"
-    ]
+    }
 }
