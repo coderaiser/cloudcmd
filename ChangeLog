@@ -1,3 +1,14 @@
+2019.03.27, v11.8.6
+
+fix:
+- (operation) progress
+- (terminal) rm IntersectionObserver handling (xtermjs/xterm.js#1929)
+
+feature:
+- (package) opn -> open v6.0.0
+- (package) remove @babel/plugin-proposal-object-rest-spread
+
+
 2019.02.20, v11.8.5
 
 fix:
