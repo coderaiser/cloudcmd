@@ -25,7 +25,7 @@ const shutdown = wraptile(async (promises) => {
     process.exit(0);
 });
 
-const opn = require('opn');
+const opn = require('open');
 const express = require('express');
 const io = require('socket.io');
 
