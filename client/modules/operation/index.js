@@ -69,7 +69,11 @@ module.exports.init = promisify((callback) => {
             if (!config('progress') || config('dropbox'))
                 return callback();
             
-            load(initOperations(CloudCmd.prefix, callback));
+            const {
+                prefix,
+                prefixSocket,
+            } = CloudCmd;
+            load(initOperations(prefix, prefixSocket, callback));
         },
         (callback) => {
             Loaded = true;
@@ -88,8 +92,8 @@ function _authCheck(spawn, ok) {
     spawn.emit('auth', config('username'), config('password'));
 }
 
-function _initOperations(socketPrefix, fn) {
-    const prefix = `${socketPrefix}/fileop`;
+function _initOperations(prefix, socketPrefix, fn) {
+    socketPrefix = `${socketPrefix}/fileop`;
     fileop({prefix, socketPrefix}, (e, operator) => {
         fn();
         
