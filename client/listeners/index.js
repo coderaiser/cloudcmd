@@ -275,7 +275,7 @@ function onDblClick(event) {
         });
         
         event.preventDefault();
-    }else{
+    } else {
         CloudCmd.View.show();
         
         event.preventDefault();
@@ -297,7 +297,7 @@ function onTouch(event) {
             path: DOM.getCurrentPath(current),
         });
     
-    }else{
+    } else {
         CloudCmd.View.show();
     }
 }

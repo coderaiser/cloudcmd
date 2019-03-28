@@ -246,7 +246,7 @@ function onNameChange(name) {
 }
 
 function onKey({keyCode, target}) {
-    switch (keyCode) {
+    switch(keyCode) {
     case Key.ESC:
         return hide();
     

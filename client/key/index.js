@@ -94,7 +94,7 @@ function KeyProto() {
     }
     
     function getSymbol(shift, keyCode) {
-        switch (keyCode) {
+        switch(keyCode) {
         case KEY.DOT:
             return '.';
         
@@ -143,7 +143,7 @@ function KeyProto() {
             next = current.nextSibling;
         }
         
-        switch (keyCode) {
+        switch(keyCode) {
         case Key.TAB:
             DOM.changePanel();
             event.preventDefault();

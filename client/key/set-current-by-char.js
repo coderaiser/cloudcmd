@@ -17,7 +17,7 @@ module.exports = function setCurrentByChar(char, charStore) {
     const chars = charStore();
     const n = chars.length;
     
-    while(i < n && char === chars[i])
+    while (i < n && char === chars[i])
         i++;
     
     if (!i)
