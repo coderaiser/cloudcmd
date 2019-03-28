@@ -71,7 +71,7 @@ module.exports = (params) => {
     config('configDialog', defaultValue('configDialog', options));
     
     const {prefix} = prefixer(options.prefix);
-    const prefixSocket = prefixer(options.prefixSocket) || prefix; // MAJOR: remove condition on v12
+    const prefixSocket = prefixer(options.prefixSocket);
     
     if (p.socket)
         listen(prefixSocket, p.socket);

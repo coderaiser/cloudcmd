@@ -163,8 +163,7 @@ function main() {
     config('terminalAutoRestart', args['terminal-auto-restart']);
     config('editor', args.editor);
     config('prefix', prefixer(args.prefix));
-    // MAJOR: remove condition on v12
-    config('prefixSocket', prefixer(args['prefix-socket']) || config('prefix'));
+    config('prefixSocket', prefixer(args['prefix-socket']));
     config('root', args.root || '/');
     config('vim', args.vim);
     config('columns', args.columns);
@@ -192,7 +191,7 @@ function main() {
         editor: config('editor'),
         packer: config('packer'),
         prefix: config('prefix'),
-        prefixSocket: config('prefixSocket') || config('prefix'), // MAJOR: remove condition on v12
+        prefixSocket: config('prefixSocket'),
         columns: config('columns'),
     };
     
