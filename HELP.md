@@ -163,7 +163,7 @@ Hot keys
 |:----------------------|:--------------------------------------------
 | `F1`                  | help
 | `F2`                  | rename
-| `F3`                  | view
+| `F3`                  | view, change directory
 | `Shift + F3`          | view as markdown
 | `F4`                  | edit
 | `Shift + F4`          | edit in "vim" mode

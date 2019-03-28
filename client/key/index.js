@@ -20,6 +20,7 @@ Chars([]);
 
 KeyProto.prototype = KEY;
 CloudCmd.Key = KeyProto;
+const {loadDir} = CloudCmd;
 
 function KeyProto() {
     let Binded;
@@ -129,7 +130,6 @@ function KeyProto() {
         } = Info;
         
         const {Operation} = CloudCmd;
-        
         const {keyCode} = event;
         
         const alt = event.altKey;
@@ -190,7 +190,9 @@ function KeyProto() {
             break;
         
         case Key.F3:
-            if (shift)
+            if (Info.isDir)
+                loadDir({path});
+            else if (shift)
                 CloudCmd.Markdown.show(path);
             else if (ctrlMeta)
                 CloudCmd.sortPanel('name');
@@ -382,12 +384,9 @@ function KeyProto() {
             event.preventDefault();
             break;
         
-        /* open directory */
         case Key.ENTER:
             if (Info.isDir)
-                CloudCmd.loadDir({
-                    path: path === '/' ? '/' : path + '/',
-                });
+                loadDir({path});
             break;
         
         case Key.BACKSPACE:
@@ -397,7 +396,7 @@ function KeyProto() {
         
         case Key.BACKSLASH:
             if (ctrlMeta)
-                CloudCmd.loadDir({
+                loadDir({
                     path: '/',
                 });
             break;
