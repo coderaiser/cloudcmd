@@ -69,7 +69,7 @@ module.exports = {
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     '6to5': () => 'webpack --progress',
     '6to5:client': () => run('6to5', '--mode production'),
-    '6to5:client:dev': () => `NODE_ENV=development ${run('6to5', '--progress --mode development')}`,
+    '6to5:client:dev': () => `NODE_ENV=development ${run('6to5', '--mode development')}`,
     'pre6to5:client': () => 'rimraf dist',
     'pre6to5:client:dev': () => 'rimraf dist-dev',
     'watch:client': () => run('6to5:client','--watch'),
