@@ -170,12 +170,6 @@ function getMenuData() {
         'Select All     Ctrl+A' : () => {
             editor.selectAll();
         },
-        'Beautify       Ctrl+B' : () => {
-            editor.beautify();
-        },
-        'Minify         Ctrl+M' : () => {
-            editor.minify();
-        },
         'Close          Esc'    : () => {
             hide();
         },

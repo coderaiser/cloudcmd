@@ -78,10 +78,7 @@ function RESTful() {
     };
     
     this.read = (url, dataType, callback) => {
-        const isQuery = /\?/.test(url);
-        const isBeautify = /\?beautify$/.test(url);
-        const isMinify = /\?minify$/.test(url);
-        const notLog = !isQuery || isBeautify || isMinify;
+        const notLog = !url.includes('?');
         const isFunc = itype.function(dataType);
         
         if (!callback && isFunc) {
