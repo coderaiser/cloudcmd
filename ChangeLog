@@ -1,3 +1,16 @@
+2019.04.01, v12.0.0
+
+fix:
+- feature(cloudcmd) split prefix and prefixSocket finally
+
+feature:
+- (cloudcmd) drop support of beautify, minify
+- (cloudcmd) improved progress of file operations
+- (cloudcmd) split prefix and prefixSocket finally
+- (cloudcmd) view file on double click or enter
+- (cloudcmd) add ability to change directory using F3
+
+
 2019.03.27, v11.8.6
 
 fix:
