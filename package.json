@@ -188,7 +188,7 @@
     "scroll-into-view-if-needed": "^2.2.5",
     "serve-once": "^1.5.0",
     "serviceworker-webpack-plugin": "^1.0.1",
-    "smalltalk": "^3.1.0",
+    "smalltalk": "^3.3.0",
     "style-loader": "^0.23.0",
     "stylelint": "^9.0.0",
     "stylelint-config-standard": "^18.0.0",

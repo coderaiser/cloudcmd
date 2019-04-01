@@ -103,35 +103,87 @@ function _initOperations(prefix, socketPrefix, fn) {
 }
 
 function onConnect(operator) {
-    packTarFn = (data, callback) => {
-        operator.tar(data.from, data.to, data.names)
-            .then(setListeners({noContinue: true}, callback));
+    packTarFn = ({from, to, names}, callback) => {
+        const operation = 'Tar';
+        const listen = setListeners({
+            operation,
+            callback,
+            noContinue: true,
+            from,
+            to,
+        });
+        
+        operator.tar(from, to, names)
+            .then(listen);
     };
     
-    packZipFn = (data, callback) => {
-        operator.zip(data.from, data.to, data.names)
-            .then(setListeners({noContinue: true}, callback));
+    packZipFn = ({from, to, names}, callback) => {
+        const operation = 'Zip';
+        const listen = setListeners({
+            operation,
+            callback,
+            noContinue: true,
+            from,
+            to,
+        });
+        
+        operator.zip(from, to, names)
+            .then(listen);
     };
     
     deleteFn = (from, files, callback) => {
         from = removeQuery(from);
+        
+        const operation = 'Delete';
+        const listen = setListeners({
+            operation,
+            callback,
+            from,
+        });
+        
         operator.remove(from, files)
-            .then(setListeners(callback));
+            .then(listen);
     };
     
-    copyFn = (data, callback) => {
-        operator.copy(data.from, data.to, data.names)
-            .then(setListeners(callback));
+    copyFn = ({from, to, names}, callback) => {
+        const operation = 'Copy';
+        const listen = setListeners({
+            operation,
+            callback,
+            from,
+            to,
+            names,
+        });
+        
+        operator.copy(from, to, names)
+            .then(listen);
     };
     
-    moveFn = (data, callback) => {
-        operator.move(data.from, data.to, data.names)
-            .then(setListeners(callback));
+    moveFn = ({from, to, names}, callback) => {
+        const operation = 'Move';
+        const listen = setListeners({
+            operation,
+            callback,
+            from,
+            to,
+        });
+        
+        operator.move(from, to, names)
+            .then(listen);
     };
     
-    extractFn = (data, callback) => {
-        operator.extract(data.from, data.to)
-            .then(setListeners({noContinue: true}, callback));
+    extractFn = ({from, to}, callback) => {
+        const operation = 'Extract';
+        const listen = setListeners({
+            operation,
+            callback,
+            noContinue: true,
+            from,
+            to,
+        });
+        
+        operator.extract(from, to)
+            .then(listen);
     };
 }
 
@@ -393,8 +445,6 @@ function twopack(operation, type) {
     let fileFrom;
     let currentName = Info.name;
     
-    const {Images} = DOM;
-    
     const {
         path,
         dirPath,
@@ -437,7 +487,7 @@ function twopack(operation, type) {
         break;
     }
     
-    Images.show.load('top');
+    showLoad();
     
     op(fileFrom, (error) => {
         !error && CloudCmd.refresh({
