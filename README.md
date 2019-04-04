@@ -1,4 +1,4 @@
-# Cloud Commander v12.0.1 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![OpenCollective](https://opencollective.com/cloudcmd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/cloudcmd/sponsors/badge.svg)](#sponsors)
+# Cloud Commander v12.0.2 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![OpenCollective](https://opencollective.com/cloudcmd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/cloudcmd/sponsors/badge.svg)](#sponsors)
 
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL], [Now][NowURL])
 
