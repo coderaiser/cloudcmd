@@ -287,7 +287,7 @@ function onTouch(event) {
     const isDir = DOM.isCurrentIsDir(current);
     
     if (!isDir)
-        return CloudCmd.View.show();
+        return;
     
     const isCurrent = DOM.isCurrentFile(current);
     
