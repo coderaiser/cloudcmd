@@ -170,6 +170,7 @@ function fillTemplate(error, template) {
         const [inputFirst] = inputs;
         
         let afterShow;
+        
         if (inputFirst) {
             onAuthChange(inputFirst.checked);
             afterShow = inputFirst.focus.bind(inputFirst);

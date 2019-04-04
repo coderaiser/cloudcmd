@@ -272,6 +272,7 @@ function promptDelete() {
     const n = names.length;
     
     let msg;
+    
     if (n) {
         let name = '';
         

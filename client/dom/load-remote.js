@@ -29,6 +29,7 @@ module.exports = (name, options, callback = options) => {
         
         let remoteTmpls;
         let local;
+        
         if (isArray) {
             remoteTmpls = module.remote;
             local = module.local;

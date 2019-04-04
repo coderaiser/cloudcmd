@@ -160,6 +160,7 @@ module.exports.buildFromJSON = (params) => {
     Path(path);
     
     fileTable += header + '<ul data-name="js-files" class="files">';
+    
     /* Если мы не в корне */
     if (path !== '/') {
         const dotDot = getDotDot(path);

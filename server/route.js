@@ -146,6 +146,7 @@ function indexProcessing(options) {
     });
     
     let right = '';
+    
     if (!oneFilePanel)
         right = rendy(Template.panel, {
             side        : 'right',

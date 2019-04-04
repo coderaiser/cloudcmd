@@ -107,6 +107,7 @@ function CloudCmdProto(DOM) {
         } = p;
         
         let panelChanged;
+        
         if (!noCurrent)
             if (panel && panel !== Info.panel) {
                 DOM.changePanel();
@@ -114,6 +115,7 @@ function CloudCmdProto(DOM) {
             }
         
         let imgPosition;
+        
         if (panelChanged || refresh || !history)
             imgPosition = 'top';
         

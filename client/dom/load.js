@@ -57,6 +57,7 @@ module.exports.ajax = (params) => {
         xhr.responseType = p.responseType;
     
     let data;
+    
     if (!isArrayBuf && isObject || isArray)
         data = jonny.stringify(p.data);
     else
@@ -81,6 +82,7 @@ module.exports.ajax = (params) => {
         const isContain = ~type.indexOf(TYPE_JSON);
         
         let data = xhr.response;
+        
         if (type && isContain && notText)
             data = jonny.parse(xhr.response) || xhr.response;
         
