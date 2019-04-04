@@ -1,3 +1,9 @@
+2019.04.04, v12.0.1
+
+fix:
+- (listeners) unable to navigate into folders (#235)
+
+
 2019.04.01, v12.0.0
 
 fix:
