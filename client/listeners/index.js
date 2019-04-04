@@ -286,20 +286,17 @@ function onTouch(event) {
     const current = getLIElement(event.target);
     const isDir = DOM.isCurrentIsDir(current);
     
-    if (!isDir){
-        
-        const isCurrent = DOM.isCurrentFile(current);
-        
-        if (!isCurrent)
-            return;
-        
-        CloudCmd.loadDir({
-            path: DOM.getCurrentPath(current),
-        });
+    if (!isDir)
+        return CloudCmd.View.show();
     
-    } else {
-        CloudCmd.View.show();
-    }
+    const isCurrent = DOM.isCurrentFile(current);
+    
+    if (!isCurrent)
+        return;
+    
+    CloudCmd.loadDir({
+        path: DOM.getCurrentPath(current),
+    });
 }
 
 /*
