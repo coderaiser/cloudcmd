@@ -1,3 +1,13 @@
+2019.04.15, v12.1.0
+
+fix:
+- (heroku) app: add "}" (#236)
+
+feature:
+- (edit-names) add bulk rename (#231)
+- (package) stylelint v10.0.0
+
+
 2019.04.04, v12.0.2
 
 fix:
