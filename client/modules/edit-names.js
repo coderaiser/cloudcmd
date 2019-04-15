@@ -7,6 +7,8 @@ CloudCmd.EditNames = exports;
 const currify = require('currify/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');
+const smalltalk = require('smalltalk');
+const multiRename = require('multi-rename');
 
 const reject = Promise.reject.bind(Promise);
 
@@ -66,10 +68,22 @@ function keyListener(event) {
     const ctrlMeta = ctrl || meta;
     const {Key} = CloudCmd;
     
-    if (!ctrlMeta || event.keyCode !== Key.S)
-        return;
+    if (ctrlMeta && event.keyCode === Key.S)
+        EditNames.hide();
     
-    EditNames.hide();
+    else if (ctrlMeta && event.keyCode === Key.P)
+        smalltalk
+            .prompt(TITLE, 'Apply pattern:', '[n][e]', {cancel: false})
+            .then(applyPattern);
+    
+    event.preventDefault();
+}
+
+function applyPattern(pattern) {
+    const newNames = multiRename(pattern, getActiveNames());
+    const editor = CloudCmd.Edit.getEditor();
+    
+    editor.setValue(newNames.join('\n'));
 }
 
 function getActiveNames() {
@@ -162,7 +176,7 @@ function setMenu(event) {
     
     const menuData = {
         'Save           Ctrl+S' : () => {
-            editor.save();
+            applyNames();
             EditNames.hide();
         },
         'Go To Line     Ctrl+G' : () => {
