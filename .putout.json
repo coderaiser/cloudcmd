@@ -1,5 +1,8 @@
 {
     "match": {
+        "server": {
+            "remove-process-exit": true
+        },
         "server/(server|exit).js": {
             "remove-process-exit": false,
             "remove-console": false
@@ -12,9 +15,6 @@
         },
         "test/common/cloudfunc.js": {
             "remove-console": false
-        },
-        "server": {
-            "remove-process-exit": true
         }
     }
 }
