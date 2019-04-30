@@ -9,6 +9,8 @@ const {promisify} = require('es6-promisify');
 const wraptile = require('wraptile/legacy');
 const load = require('load.js');
 
+const isDev = process.env.NODE_ENV === 'development';
+
 const {
     registerSW,
     listenSW,
@@ -49,6 +51,9 @@ function getPrefix(prefix) {
 }
 
 const onUpdateFound = wraptile(async (config) => {
+    if (isDev)
+        return;
+    
     const {DOM} = window;
     const prefix = getPrefix(config.prefix);
     const js = promisify(load.js);

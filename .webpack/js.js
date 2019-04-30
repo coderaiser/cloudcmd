@@ -15,7 +15,8 @@ const dirModules = './client/modules';
 const modules = './modules';
 
 const {env} = process;
-const isDev = env.NODE_ENV === 'development';
+const {NODE_ENV} = env;
+const isDev = NODE_ENV === 'development';
 
 const rootDir = join(__dirname, '..');
 const dist = resolve(rootDir, 'dist');
@@ -50,7 +51,7 @@ const rules = clean([
 
 const plugins = [
     new EnvironmentPlugin({
-        NODE_ENV: 'production',
+        NODE_ENV,
     }),
     
     new ServiceWorkerWebpackPlugin({
