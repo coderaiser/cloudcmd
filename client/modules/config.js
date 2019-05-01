@@ -5,7 +5,6 @@
 require('../../css/config.css');
 
 const rendy = require('rendy/legacy');
-const exec = require('execon');
 const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const squad = require('squad/legacy');
@@ -43,7 +42,10 @@ const addChange = currify((fn, input) => {
 
 const Config = {};
 
-let Loading = true;
+let Template;
+
+const getFile = promisify(Files.get);
+const loadCSS = promisify(load.css);
 
 module.exports.init = async () => {
     if (!CloudCmd.config('configDialog'))
@@ -51,10 +53,16 @@ module.exports.init = async () => {
     
     showLoad();
     
-    await CloudCmd.View();
-    await loadSocket();
+    const {prefix} = CloudCmd;
+    
+    [Template] = await Promise.all([
+        getFile('config-tmpl'),
+        loadSocket(),
+        loadCSS(prefix + '/dist/config.css'),
+        CloudCmd.View(),
+    ]);
+    
     initSocket();
-    Loading = false;
 };
 
 const {
@@ -63,7 +71,6 @@ const {
 } = CloudCmd;
 
 let Element;
-let Template;
 
 function getHost() {
     const {
@@ -125,23 +132,10 @@ function show() {
     if (!CloudCmd.config('configDialog'))
         return;
     
-    const {prefix} = CloudCmd;
-    const funcs = [
-        exec.with(Files.get, 'config-tmpl'),
-        exec.with(load.css, prefix + '/dist/config.css'),
-    ];
-    
-    if (Loading)
-        return;
-    
-    showLoad();
-    exec.parallel(funcs, fillTemplate);
+    fillTemplate();
 }
 
-function fillTemplate(error, template) {
-    if (!Template)
-        Template = template;
-    
+function fillTemplate() {
     Files.get('config', (error, config) => {
         if (error)
             return alert('Could not load config!');
