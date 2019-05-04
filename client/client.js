@@ -430,7 +430,7 @@ function CloudCmdProto(DOM) {
             } = Info;
             
             if (error)
-                return Dialog.alert(TITLE, error.responseText);
+                return Dialog.alert(error.responseText);
             
             const {childNodes} = panel;
             let i = childNodes.length;

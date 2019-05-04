@@ -7,8 +7,6 @@ const tryToCatch = require('try-to-catch/legacy');
 
 CloudCmd.Markdown = exports;
 
-const TITLE = 'Cloud Commander';
-
 const createElement = require('@cloudcmd/create-element');
 
 const Images = require('../dom/images');
@@ -44,12 +42,11 @@ async function show(name, options = {}) {
     Images.hide();
     
     if (error)
-        return alert(TITLE, error.message, {
+        return alert(error.message, {
             cancel: false,
         });
     
     const className = 'help';
-    
     const div = createElement('div', {
         className,
         innerHTML,

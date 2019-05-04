@@ -7,7 +7,6 @@ CloudCmd.EditNames = exports;
 const currify = require('currify/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');
-const smalltalk = require('smalltalk');
 const multiRename = require('multi-rename');
 
 const reject = Promise.reject.bind(Promise);
@@ -15,8 +14,6 @@ const reject = Promise.reject.bind(Promise);
 const Info = DOM.CurrentInfo;
 const {Dialog} = DOM;
 
-const TITLE = 'Edit Names';
-const alert = currify(Dialog.alert, TITLE);
 const refresh = currify(_refresh);
 const rename = currify(_rename);
 
@@ -46,7 +43,7 @@ module.exports.show = (options) => {
     };
     
     if (Info.name === '..' && names.length === 1)
-        return Dialog.alert.noFiles(TITLE);
+        return Dialog.alert.noFiles();
     
     DOM.Events.addKey(keyListener);
     
@@ -72,8 +69,8 @@ function keyListener(event) {
         EditNames.hide();
     
     else if (ctrlMeta && event.keyCode === Key.P)
-        smalltalk
-            .prompt(TITLE, 'Apply pattern:', '[n][e]', {cancel: false})
+        Dialog
+            .prompt('Apply pattern:', '[n][e]', {cancel: false})
             .then(applyPattern);
     
     event.preventDefault();
@@ -217,7 +214,7 @@ function isChanged() {
     if (!editor.isChanged())
         return;
     
-    Dialog.confirm(TITLE, msg, {cancel: false})
+    Dialog.confirm(msg, {cancel: false})
         .then(applyNames);
 }
 

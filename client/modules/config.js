@@ -22,7 +22,6 @@ const {Dialog, setTitle} = DOM;
 
 const Name = 'Config';
 CloudCmd[Name] = module.exports;
-const alert = currify(Dialog.alert, Name);
 
 const loadSocket = promisify(DOM.loadSocket);
 
@@ -116,12 +115,12 @@ function initSocket() {
         Config.save = saveHttp;
     });
     
-    socket.on('err', alert);
+    socket.on('err', Dialog.alert);
 }
 
 function authCheck(socket) {
     socket.emit('auth', config('username'), config('password'));
-    socket.on('reject', wraptile(alert, 'Wrong credentials!'));
+    socket.on('reject', wraptile(Dialog.alert, 'Wrong credentials!'));
 }
 
 Config.save = saveHttp;
@@ -138,7 +137,7 @@ function show() {
 function fillTemplate() {
     Files.get('config', (error, config) => {
         if (error)
-            return alert('Could not load config!');
+            return Dialog.alert('Could not load config!');
         
         const {
             editor,

@@ -3,8 +3,6 @@
 /* global DOM */
 /* global CloudCmd */
 
-const smalltalk = require('smalltalk');
-
 const {
     Dialog,
     Images,
@@ -12,7 +10,6 @@ const {
 
 const forEachKey = require('for-each-key/legacy');
 const wraptile = require('wraptile/legacy');
-const {TITLE} = CloudCmd;
 
 const format = require('./format');
 
@@ -34,7 +31,7 @@ module.exports = (options) => (emitter) => {
         const msg = `${operation} aborted`;
         lastError = true;
         
-        Dialog.alert(TITLE, msg, {
+        Dialog.alert(msg, {
             noCancel: true,
         });
     });
@@ -43,8 +40,7 @@ module.exports = (options) => (emitter) => {
     const on = emitter.on.bind(emitter);
     
     const message = format(operation, from, to);
-    
-    const progress = smalltalk.progress(TITLE, message);
+    const progress = Dialog.progress(message);
     
     progress.catch(onAbort({
         emitter,
@@ -70,11 +66,11 @@ module.exports = (options) => (emitter) => {
             
             if (noContinue) {
                 listeners.end(error);
-                Dialog.alert(TITLE, error);
+                Dialog.alert(error);
                 return;
             }
             
-            Dialog.confirm(TITLE, error + '\n Continue?')
+            Dialog.confirm(error + '\n Continue?')
                 .then(() => {
                     emitter.continue();
                 }, () => {

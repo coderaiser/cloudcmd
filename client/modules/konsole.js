@@ -28,7 +28,6 @@ const {config} = CloudCmd;
 const cd = currify((fn, dir) => fn(`cd ${rmLastSlash(dir)}`));
 
 const Name = 'Konsole';
-const TITLE = 'Console';
 
 let Element;
 let Loaded;
@@ -119,7 +118,7 @@ function authCheck(konsole) {
     konsole.emit('auth', config('username'), config('password'));
     
     konsole.on('reject', () => {
-        Dialog.alert(TITLE, 'Wrong credentials!');
+        Dialog.alert('Wrong credentials!');
     });
 }
 
@@ -149,7 +148,7 @@ const load = async () => {
     Util.timeEnd(Name + ' load');
     
     if (error)
-        return Dialog.alert(TITLE, error.message, {
+        return Dialog.alert(error.message, {
             cancel: false,
         });
 };

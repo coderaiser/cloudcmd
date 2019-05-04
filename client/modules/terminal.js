@@ -14,8 +14,6 @@ const Images = require('../dom/images');
 
 const loadParallel = promisify(load.parallel);
 
-const TITLE = 'Terminal';
-
 const {Dialog} = DOM;
 const {
     Key,
@@ -38,7 +36,7 @@ const loadAll = async () => {
     
     if (e) {
         const src = e.target.src.replace(window.location.href, '');
-        return Dialog.alert(TITLE, `file ${src} could not be loaded`);
+        return Dialog.alert(`file ${src} could not be loaded`);
     }
     
     Loaded = true;
@@ -103,7 +101,7 @@ function authCheck(spawn) {
     spawn.emit('auth', config('username'), config('password'));
     
     spawn.on('reject', () => {
-        Dialog.alert(TITLE, 'Wrong credentials!');
+        Dialog.alert('Wrong credentials!');
     });
 }
 

@@ -44,7 +44,6 @@ function CmdProto() {
     
     const Cmd = this;
     const SELECTED_FILE = 'selected-file';
-    const TITLE = 'Cloud Commander';
     const TabPanel = {
         'js-left'        : null,
         'js-right'       : null,
@@ -97,7 +96,7 @@ function CmdProto() {
         const name = getName();
         const cancel = false;
         
-        Dialog.prompt(TITLE, msg, name, {cancel}).then((name) => {
+        Dialog.prompt(msg, name, {cancel}).then((name) => {
             if (!name)
                 return;
             
@@ -342,7 +341,7 @@ function CmdProto() {
         };
         
         if (Info.name === '..') {
-            Dialog.alert.noFiles(TITLE);
+            Dialog.alert.noFiles();
             return callback(Error('No files selected!'));
         }
         
@@ -756,11 +755,11 @@ function CmdProto() {
         const from = DOM.getCurrentName(current);
         
         if (from === '..')
-            return Dialog.alert.noFiles(TITLE);
+            return Dialog.alert.noFiles();
         
         const cancel = false;
         
-        Dialog.prompt(TITLE, 'Rename', from, {cancel}).then((to) => {
+        Dialog.prompt('Rename', from, {cancel}).then((to) => {
             const isExist = !!DOM.getCurrentByName(to);
             const dirPath = DOM.getCurrentDirPath();
             
@@ -872,7 +871,7 @@ function CmdProto() {
             path,
         });
         
-        Dialog.prompt(TITLE, msg, path, {cancel})
+        Dialog.prompt(msg, path, {cancel})
             .then(setPath)
             .then(CloudCmd.loadDir);
     },

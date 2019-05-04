@@ -15,8 +15,6 @@ function BufferProto() {
     const CLASS = 'cut-file';
     const COPY = 'copy';
     const CUT = 'cut';
-    const TITLE = 'Buffer';
-    
     const Buffer = {
         cut     : callIfEnabled.bind(null, cut),
         copy    : callIfEnabled.bind(null, copy),
@@ -25,7 +23,7 @@ function BufferProto() {
     };
     
     function showMessage(msg) {
-        DOM.Dialog.alert(TITLE, msg);
+        DOM.Dialog.alert(msg);
     }
     
     function getNames() {

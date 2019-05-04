@@ -12,8 +12,6 @@ const {alert} = require('./dialog');
 
 const {FS} = require('../../common/cloudfunc');
 
-const {TITLE} = CloudCmd;
-
 const onEnd = wraptile(_onEnd);
 const loadFile = wraptile(_loadFile);
 
@@ -71,6 +69,6 @@ function _loadFile(dir, n, file, callback) {
 }
 
 function showError({message}) {
-    alert(TITLE, message);
+    alert(message);
 }
 

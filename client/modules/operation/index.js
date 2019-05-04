@@ -23,10 +23,7 @@ const removeQuery = (a) => a.replace(/\?.*/, '');
 const Name = 'Operation';
 CloudCmd[Name] = exports;
 
-const {
-    TITLE,
-    config,
-} = CloudCmd;
+const {config} = CloudCmd;
 const {Dialog, Images} = DOM;
 const initOperations = wraptile(_initOperations);
 const authCheck = wraptile(_authCheck);
@@ -55,7 +52,7 @@ const noFilesCheck = () => {
     const is = Boolean(!length);
     
     if (is)
-        return Dialog.alert.noFiles(TITLE);
+        return Dialog.alert.noFiles();
     
     return is;
 };
@@ -88,7 +85,7 @@ function _authCheck(spawn, ok) {
     const alertDialog = wraptile(Dialog.alert);
     
     spawn.on('accept', accept(spawn));
-    spawn.on('reject', alertDialog (TITLE, 'Wrong credentials!'));
+    spawn.on('reject', alertDialog ('Wrong credentials!'));
     spawn.emit('auth', config('username'), config('password'));
 }
 
@@ -298,7 +295,7 @@ function promptDelete() {
     
     const cancel = false;
     
-    Dialog.confirm(TITLE, msg, {cancel}).then(() => {
+    Dialog.confirm(msg, {cancel}).then(() => {
         deleteSilent(files);
     });
 }
@@ -400,7 +397,7 @@ function _processFiles(options, data) {
         const str = `"${ name }" already exist. Overwrite?`;
         const cancel = false;
         
-        Dialog.confirm(TITLE, str, {cancel}).then(go);
+        Dialog.confirm(str, {cancel}).then(go);
         
         function go() {
             showLoad();
@@ -457,7 +454,7 @@ function twopack(operation, type) {
     checkEmpty('operation', operation);
     
     if (!names.length)
-        return Dialog.alert.noFiles(TITLE);
+        return Dialog.alert.noFiles();
     
     switch(operation) {
     case 'extract':
@@ -512,7 +509,7 @@ function message(msg, to, names) {
     
     const cancel = false;
     
-    return Dialog.prompt(TITLE, msg, to, {cancel});
+    return Dialog.prompt(msg, to, {cancel});
 }
 
 function load(callback) {
@@ -521,7 +518,7 @@ function load(callback) {
     
     loadJS(file, (error) => {
         if (error) {
-            Dialog.alert(TITLE, error.message);
+            Dialog.alert(error.message);
             return exec(callback);
         }
         

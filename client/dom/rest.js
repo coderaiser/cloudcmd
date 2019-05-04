@@ -206,7 +206,7 @@ function RESTful() {
                 Images.show.error(encoded);
                 
                 setTimeout(() => {
-                    DOM.Dialog.alert(CloudCmd.TITLE, encoded);
+                    DOM.Dialog.alert(encoded);
                 }, 100);
                 
                 p.callback(Error(text));

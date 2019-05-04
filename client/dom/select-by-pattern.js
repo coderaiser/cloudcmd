@@ -3,7 +3,6 @@
 /* global DOM */
 
 let SelectType = '*.*';
-const TITLE = 'Cloud Commander';
 
 const {getRegExp} = require('../../common/util');
 
@@ -12,7 +11,7 @@ module.exports = (msg, files) => {
     const cancel = false;
     const {Dialog} = DOM;
     
-    Dialog.prompt(TITLE, allMsg, SelectType, {cancel}).then((type) => {
+    Dialog.prompt(allMsg, SelectType, {cancel}).then((type) => {
         SelectType = type;
         
         const regExp = getRegExp(type);

@@ -24,8 +24,7 @@ const {
 } = DOM;
 
 const Info = DOM.CurrentInfo;
-const TITLE = 'Cloud Commander';
-const alertNoFiles = wrap(Dialog.alert.noFiles)(TITLE);
+const alertNoFiles = Dialog.alert.noFiles;
 const uploadTo = wrap(_uploadTo);
 
 let MenuShowedName;
