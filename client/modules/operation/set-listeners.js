@@ -32,7 +32,7 @@ module.exports = (options) => (emitter) => {
         lastError = true;
         
         Dialog.alert(msg, {
-            noCancel: true,
+            cancel: false,
         });
     });
     
