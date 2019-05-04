@@ -156,7 +156,7 @@
     "emitify": "^3.0.2",
     "es6-promise": "^4.0.5",
     "es6-promisify": "^6.0.0",
-    "eslint": "^5.0.0",
+    "eslint": "^6.0.0-alpha",
     "eslint-plugin-node": "^9.0.1",
     "eslint-plugin-putout": "^1.0.1",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
