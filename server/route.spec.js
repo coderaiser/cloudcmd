@@ -264,6 +264,7 @@ test('cloudcmd: route: realpath: error', async (t) => {
         options,
     });
     
+    /*eslint require-atomic-updates:0*/
     fs.realpath = realpath;
     
     t.ok(/^ENOENT/.test(body), 'should return error');

@@ -21,6 +21,7 @@ const cssNames = [
     'view',
     'config',
     'terminal',
+    'user-menu',
     ...getCSSList('columns'),
 ];
 
@@ -35,7 +36,7 @@ const plugins = clean([
 
 const rules = [{
     test: /\.css$/,
-    exclude: /css\/(nojs|view|config|terminal|columns.*)\.css/,
+    exclude: /css\/(nojs|view|config|terminal|user-menu|columns.*)\.css/,
     use: extractMain.extract([
         'css-loader',
     ]),

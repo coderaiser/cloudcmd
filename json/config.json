@@ -43,6 +43,7 @@
     "importListen": false,
     "log": true,
     "dropbox": false,
-    "dropboxToken": ""
+    "dropboxToken": "",
+    "userMenu": false
 }
 

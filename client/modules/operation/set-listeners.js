@@ -1,7 +1,6 @@
 'use strict';
 
 /* global DOM */
-/* global CloudCmd */
 
 const {
     Dialog,

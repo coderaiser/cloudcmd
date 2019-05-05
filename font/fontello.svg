@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg">
-<metadata>Copyright (C) 2018 by original authors @ fontello.com</metadata>
+<metadata>Copyright (C) 2019 by original authors @ fontello.com</metadata>
 <defs>
 <font id="fontello" horiz-adv-x="1000" >
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
@@ -61,6 +61,8 @@
 <glyph glyph-name="logout" unicode="&#xe81a;" d="M502 0l0 100 98 0 0-100q0-40-29-70t-71-30l-400 0q-40 0-70 30t-30 70l0 700q0 42 30 71t70 29l400 0q42 0 71-29t29-71l0-150-98 0 0 150-402 0 0-700 402 0z m398 326l-198-196 0 120-450 0 0 150 450 0 0 120z" horiz-adv-x="900" />
 
 <glyph glyph-name="terminal-1" unicode="&#xe81b;" d="M1360 849v-1000h-1360v1000h1360z m-838-600h318v77h-318v-77z m-362 77l317 135v96l-317 134v-99l209-84-209-83v-99z" horiz-adv-x="1360" />
+
+<glyph glyph-name="th-list" unicode="&#xe81c;" d="M286 154v-108q0-22-16-37t-38-16h-178q-23 0-38 16t-16 37v108q0 22 16 38t38 15h178q23 0 38-15t16-38z m0 285v-107q0-22-16-38t-38-15h-178q-23 0-38 15t-16 38v107q0 23 16 38t38 16h178q23 0 38-16t16-38z m714-285v-108q0-22-16-37t-38-16h-535q-23 0-38 16t-16 37v108q0 22 16 38t38 15h535q23 0 38-15t16-38z m-714 571v-107q0-22-16-38t-38-16h-178q-23 0-38 16t-16 38v107q0 22 16 38t38 16h178q23 0 38-16t16-38z m714-286v-107q0-22-16-38t-38-15h-535q-23 0-38 15t-16 38v107q0 23 16 38t38 16h535q23 0 38-16t16-38z m0 286v-107q0-22-16-38t-38-16h-535q-23 0-38 16t-16 38v107q0 22 16 38t38 16h535q23 0 38-16t16-38z" horiz-adv-x="1000" />
 </font>
 </defs>
 </svg>

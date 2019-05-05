@@ -20,7 +20,7 @@ const {
     config,
 } = CloudCmd;
 
-CloudCmd.Terminal = exports;
+CloudCmd.TerminalRun = exports;
 
 let Loaded;
 let Terminal;
@@ -51,7 +51,6 @@ module.exports.init = async () => {
     
     await CloudCmd.View();
     await loadAll();
-    await create();
 };
 
 module.exports.show = show;
@@ -78,13 +77,23 @@ function getEnv() {
     };
 }
 
-function create() {
+function create(createOptions) {
+    const {
+        command,
+        autoClose,
+        closeMessage = 'Press any key to close Terminal...',
+    } = createOptions;
+    
     const options = {
         env: getEnv(),
         prefix: getPrefixSocket(),
         socketPath: CloudCmd.prefix,
         fontFamily: 'Droid Sans Mono',
+        command,
+        autoRestart: false,
     };
+    
+    let commandExit = false;
     
     const {socket, terminal} = gritty(document.body, options);
     
@@ -92,9 +101,20 @@ function create() {
     Terminal = terminal;
     
     Terminal.on('key', (char, {keyCode, shiftKey}) => {
+        if (commandExit)
+            hide();
+        
         if (shiftKey && keyCode === Key.ESC) {
             hide();
         }
+    });
+    
+    Socket.on('exit', () => {
+        if (autoClose)
+            return hide();
+        
+        terminal.write(`\n${closeMessage}`);
+        commandExit = true;
     });
     
     Socket.on('connect', exec.with(authCheck, socket));
@@ -108,12 +128,14 @@ function authCheck(spawn) {
     });
 }
 
-function show() {
+async function show(options = {}) {
     if (!Loaded)
         return;
     
     if (!config('terminal'))
         return;
+    
+    await create(options);
     
     CloudCmd.View.show(Terminal.element, {
         afterShow: () => {

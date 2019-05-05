@@ -11,6 +11,7 @@ const cloudfunc = require(DIR_COMMON + 'cloudfunc');
 const authentication = require(DIR + 'auth');
 const config = require(DIR + 'config');
 const modulas = require(DIR + 'modulas');
+const userMenu = require(DIR + 'user-menu');
 const rest = require(DIR + 'rest');
 const route = require(DIR + 'route');
 const validate = require(DIR + 'validate');
@@ -223,6 +224,7 @@ function cloudcmd(prefix, plugins, modules) {
             root,
         }),
         
+        userMenu,
         rest,
         route({
             html: defaultHtml,

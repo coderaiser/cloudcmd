@@ -10,6 +10,7 @@
         ".md"
     ],
     "dictionary":[
+        "CloudCmd",
         "Dev",
         "Dropbox",
         "Deepword",
@@ -27,12 +28,14 @@
         "Zalitok",
         "WebSocket",
         "auth",
+        "binded",
         "cd",
         "cloudcmd",
         "coderaiser",
         "com",
-        "dev",
         "deepword",
+        "dev",
+        "destructuring",
         "dropbox",
         "dword",
         "edward",

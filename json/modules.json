@@ -15,7 +15,9 @@
         "operation",
         "konsole",
         "terminal",
-        "cloud"
+        "terminal-run",
+        "cloud",
+        "user-menu"
     ],
     "remote": [{
         "name": "socket",

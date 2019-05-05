@@ -5,6 +5,8 @@
 const itype = require('itype/legacy');
 const exec = require('execon');
 const jonny = require('jonny/legacy');
+const tryToCatch = require('try-to-catch/legacy');
+
 const Util = require('../../common/util');
 
 const Images = require('./images');
@@ -746,7 +748,7 @@ function CmdProto() {
      *
      * @currentFile
      */
-    this.renameCurrent = (current) => {
+    this.renameCurrent = async (current) => {
         const {Dialog} = DOM;
         
         if (!DOM.isCurrentFile(current))
@@ -757,30 +759,30 @@ function CmdProto() {
         if (from === '..')
             return Dialog.alert.noFiles();
         
-        const cancel = false;
+        const [e, to] = await tryToCatch(Dialog.prompt, 'Rename', from);
         
-        Dialog.prompt('Rename', from, {cancel}).then((to) => {
-            const isExist = !!DOM.getCurrentByName(to);
-            const dirPath = DOM.getCurrentDirPath();
-            
-            if (from === to)
+        if (e)
+            return;
+        const isExist = !!DOM.getCurrentByName(to);
+        const dirPath = DOM.getCurrentDirPath();
+        
+        if (from === to)
+            return;
+        
+        const files = {
+            from : dirPath + from,
+            to : dirPath + to,
+        };
+        
+        RESTful.mv(files, (error) => {
+            if (error)
                 return;
             
-            const files = {
-                from : dirPath + from,
-                to : dirPath + to,
-            };
+            DOM.setCurrentName(to, current);
+            Storage.remove(dirPath);
             
-            RESTful.mv(files, (error) => {
-                if (error)
-                    return;
-                
-                DOM.setCurrentName(to, current);
-                Storage.remove(dirPath);
-                
-                if (isExist)
-                    CloudCmd.refresh();
-            });
+            if (isExist)
+                CloudCmd.refresh();
         });
     };
     
@@ -940,7 +942,7 @@ function CmdProto() {
         const info = DOM.CurrentInfo;
         const current = currentFile || DOM.getCurrentFile();
         const files = current.parentElement;
-        const panel = files.parentElement;
+        const panel = files.parentElement || DOM.getPanel();
         
         const panelPassive = DOM.getPanel({
             active: false,

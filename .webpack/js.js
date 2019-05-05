@@ -32,7 +32,6 @@ const babelDev = {
     babelrc: false,
     plugins: [
         'module:babel-plugin-macros',
-        '@babel/plugin-proposal-object-rest-spread',
     ],
 };
 
@@ -43,7 +42,7 @@ const rules = clean([
         loader: 'babel-loader',
     },
     isDev && {
-        test: /sw\.js$/,
+        test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: babelDev,
@@ -90,7 +89,9 @@ module.exports = {
         [modules + '/operation']: `${dirModules}/operation/index.js`,
         [modules + '/konsole']: `${dirModules}/konsole.js`,
         [modules + '/terminal']: `${dirModules}/terminal.js`,
+        [modules + '/terminal-run']: `${dirModules}/terminal-run.js`,
         [modules + '/cloud']: `${dirModules}/cloud.js`,
+        [modules + '/user-menu']: `${dirModules}/user-menu/index.js`,
         [modules + '/polyfill']: `${dirModules}/polyfill.js`,
     },
     output: {

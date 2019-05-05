@@ -132,3 +132,8 @@
     font-family : 'Fontello';
     content     : '\e81b  ';
 }
+
+.icon-user-menu::before {
+    font-family : 'Fontello';
+    content     : '\e81c  ';
+}
