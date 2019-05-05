@@ -56,6 +56,7 @@ module.exports = (options) => (emitter) => {
         end: () => {
             Images.hide();
             forEachKey(removeListener, listeners);
+            progress.remove();
             
             if (lastError || done)
                 callback();
@@ -67,6 +68,7 @@ module.exports = (options) => (emitter) => {
             if (noContinue) {
                 listeners.end(error);
                 Dialog.alert(error);
+                progress.remove();
                 return;
             }
             
@@ -75,6 +77,7 @@ module.exports = (options) => (emitter) => {
                     emitter.continue();
                 }, () => {
                     emitter.abort();
+                    progress.remove();
                 });
         },
     };
