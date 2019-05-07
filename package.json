@@ -148,7 +148,7 @@
     "auto-globals": "^1.7.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
-    "clean-css-loader": "^1.0.1",
+    "clean-css-loader": "^2.0.0",
     "codegen.macro": "^3.0.0",
     "coveralls": "^3.0.0",
     "css-loader": "^2.0.1",
