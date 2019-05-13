@@ -1,3 +1,26 @@
+2019.05.13, v12.2.0
+
+fix:
+- feature(npmignore) add fixture.json
+- (operation) set-listeners: alert: noCancel -> cancel
+- (cloudcmd) different title
+
+feature:
+- (key) add ability to rename file with Shift + F6
+- (user-menu) add (#221)
+- (package) clean-css-loader v2.0.0
+- (package) edward v11.0.0
+- (npmignore) add fixture.json
+- (package) dword v11.0.0
+- (package) smalltalk v3.4.0
+- (package) eslint v6.0.0-alpha
+- (package) eslint-plugin-node v9.0.1
+- (config) speed up load: series -> parallel
+- (cloudcmd) avoid service worker reoload scripts in dev mode
+- (package) putout v4.23.0
+- (package) nyc v14.0.0
+
+
 2019.04.15, v12.1.0
 
 fix:
