@@ -172,6 +172,7 @@ Hot keys
 | `F5`                  | copy
 | `Alt` + `F5`          | pack
 | `F6`                  | rename/move
+| `Shift` + `F6`        | rename current file
 | `F7`                  | new directory
 | `Shift + F7`          | new file
 | `F8`, `Delete`        | remove

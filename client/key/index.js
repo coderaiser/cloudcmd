@@ -228,6 +228,8 @@ function KeyProto() {
         case Key.F6:
             if (ctrlMeta)
                 CloudCmd.sortPanel('size');
+            else if (shift)
+                DOM.renameCurrent(current);
             else
                 Operation.show('move');
             
