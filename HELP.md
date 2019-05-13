@@ -479,8 +479,8 @@ module.exports = {
     'D - Build Dev': async ({CloudCmd}) => {
         await CloudCmd.TerminalRun.show({
             command: 'npm run build:client:dev',
-            autoClose: false,
-            closeMessage: 'Press any button to close Terminal',
+            autoClose: false, // optional
+            closeMessage: 'Press any button to close Terminal', // optional
         });
         
         CloudCmd.refresh();
@@ -488,7 +488,7 @@ module.exports = {
     'P - Build Prod': async ({CloudCmd}) => {
         await CloudCmd.TerminalRun.show({
             command: 'npm run build:client',
-            autoClose: true,
+            autoClose: true, // optional
         });
         
         CloudCmd.refresh();
