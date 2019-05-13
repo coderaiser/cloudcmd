@@ -500,7 +500,7 @@ You will have ability to run one of this 3 commands with help of double click, e
 
 #### User Menu API
 
-Here you can find `API` that can be used in **User Menu**. **DOM** and **CloudCmd** to main objects you receive in arguments list using destructuring.
+Here you can find `API` that can be used in **User Menu**. **DOM** and **CloudCmd** two main objects you receive in arguments list using destructuring.
 
 **DOM** contains all base functions of `Cloud Commander` (rename, remove, download etc);
 
