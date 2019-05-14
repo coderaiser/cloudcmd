@@ -141,7 +141,6 @@ function CloudCmdProto(DOM) {
         const func = bind(exec.series, [
             initModules,
             baseInit,
-            loadPlugins,
             loadStyle,
             exec.with(CloudCmd.route, location.hash),
         ], noop);
@@ -180,13 +179,6 @@ function CloudCmdProto(DOM) {
         const name = prefix + '/dist/cloudcmd.common.css';
         
         load.css(name, callback);
-    }
-    
-    function loadPlugins(callback) {
-        const {prefix} = CloudCmd;
-        const plugins = prefix + '/plugins.js';
-        
-        load.js(plugins, callback);
     }
     
     this.route = (path) => {

@@ -20,7 +20,6 @@ const rest = require(DIR + 'rest');
 const route = require(DIR + 'route');
 const validate = require(DIR + 'validate');
 const prefixer = require(DIR + 'prefixer');
-const pluginer = require(DIR + 'plugins');
 const terminal = require(DIR + 'terminal');
 const distribute = require(DIR + 'distribute');
 
@@ -53,14 +52,9 @@ module.exports = (params) => {
         configPath,
     });
     
-    const {
-        modules,
-        plugins,
-    } = p;
+    const {modules} = p;
     
     const keys = Object.keys(options);
-    
-    checkPlugins(plugins);
     
     for (const name of keys) {
         let value = options[name];
@@ -90,7 +84,6 @@ module.exports = (params) => {
         });
     
     return cloudcmd({
-        plugins,
         modules,
         config,
     });
@@ -181,7 +174,7 @@ function listen({prefixSocket, socket, config}) {
     distribute.export(config, socket);
 }
 
-function cloudcmd({plugins, modules, config}) {
+function cloudcmd({modules, config}) {
     const online = apart(config, 'online');
     const cache = false;
     const diff = apart(config, 'diff');
@@ -256,7 +249,6 @@ function cloudcmd({plugins, modules, config}) {
             html: defaultHtml,
         }),
         
-        pluginer(plugins),
         ponseStatic,
     ]);
     
@@ -295,13 +287,5 @@ function setSW(req, res, next) {
         req.url = replaceDist(`/dist${url}`);
     
     next();
-}
-
-function checkPlugins(plugins) {
-    if (typeof plugins === 'undefined')
-        return;
-    
-    if (!Array.isArray(plugins))
-        throw Error('plugins should be an array!');
 }
 
