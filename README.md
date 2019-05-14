@@ -110,7 +110,7 @@ const modules = {
 app.use(prefix, cloudcmd({
     socket,  // used by Config, Edit (optional) and Console (required)
     config,  // config data (optional)
-    plugins, // optional
+    plugins, // DEPRECATED, use User Menu instead
     modules, // optional
 }));
 
