@@ -11,6 +11,7 @@ const createElement = require('@cloudcmd/create-element');
 
 const Images = require('../../dom/images');
 const getUserMenu = require('./get-user-menu');
+const navigate = require('./navigate');
 
 const loadCSS = promisify(load.css);
 
@@ -83,20 +84,25 @@ const onDblClick = currify(async (options, userMenu, e) => {
 });
 
 const onKeyDown = currify(async (keys, options, userMenu, e) => {
-    const {keyCode} = e;
+    const {
+        keyCode,
+        target,
+    } = e;
     const key = e.key.toUpperCase();
-    
-    let value;
-    
-    if (keyCode === Key.ENTER)
-        ({value} = e.target);
-    else if (keys.includes(key))
-        value = options.find(beginWith(key));
-    else
-        return;
     
     e.preventDefault();
     e.stopPropagation();
+    
+    let value;
+    
+    if (keyCode === Key.ESC)
+        return hide();
+    else if (keyCode === Key.ENTER)
+        ({value} = target);
+    else if (keys.includes(key))
+        value = options.find(beginWith(key));
+    else
+        return navigate(target, e);
     
     await runUserMenu(value, options, userMenu);
 });
