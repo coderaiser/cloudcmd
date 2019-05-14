@@ -224,7 +224,10 @@ function cloudcmd(prefix, plugins, modules) {
             root,
         }),
         
-        userMenu,
+        userMenu({
+            menuName: '.cloudcmd.menu.js',
+        }),
+        
         rest,
         route({
             html: defaultHtml,
