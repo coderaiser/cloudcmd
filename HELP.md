@@ -164,7 +164,7 @@ Hot keys
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F1`                  | help
-| `F2`                  | rename or show `user menu`
+| `F2`                  | show `user menu`
 | `F3`                  | view, change directory
 | `Shift + F3`          | view as markdown
 | `F4`                  | edit
@@ -466,7 +466,6 @@ Some config options can be overridden with environment variables, such as:
 
 ### User Menu
 
-You can enable `user menu` with help of a flag `--user-menu` (bear in mind that file rename using `F2` will be disabled, but you can use `Shift` + `F6` or `F2` + `F2`).
 When you press `F2` Cloud Commander will read a file `.cloudcmd.menu.js` by walking up parent directories, if can't read it will try to read `~/.cloudcmd.menu.js`.
 
 Let's consider example `user menu` works file:

@@ -142,10 +142,7 @@ module.exports.initKeysPanel = () => {
 };
 
 function initF2() {
-    if (CloudCmd.config('userMenu'))
-        return CloudCmd.UserMenu.show();
-    
-    return DOM.renameCurrent();
+    CloudCmd.UserMenu.show();
 }
 
 const getPanel = (side) => {

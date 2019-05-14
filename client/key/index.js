@@ -195,10 +195,7 @@ function KeyProto() {
             break;
         
         case Key.F2:
-            if (CloudCmd.config('userMenu'))
-                return CloudCmd.UserMenu.show();
-            
-            DOM.renameCurrent(current);
+            CloudCmd.UserMenu.show();
             break;
         
         case Key.F3:
