@@ -8,6 +8,7 @@ const jonny = require('jonny/legacy');
 const tryToCatch = require('try-to-catch/legacy');
 
 const Util = require('../../common/util');
+const tryToPromisify = require('../../common/try-to-promisify');
 
 const Images = require('./images');
 const load = require('./load');
@@ -763,6 +764,7 @@ function CmdProto() {
         
         if (e)
             return;
+        
         const isExist = !!DOM.getCurrentByName(to);
         const dirPath = DOM.getCurrentDirPath();
         
@@ -774,16 +776,16 @@ function CmdProto() {
             to : dirPath + to,
         };
         
-        RESTful.mv(files, (error) => {
-            if (error)
-                return;
-            
-            DOM.setCurrentName(to, current);
-            Storage.remove(dirPath);
-            
-            if (isExist)
-                CloudCmd.refresh();
-        });
+        const [error] = await tryToPromisify(RESTful.mv, files);
+        
+        if (error)
+            return;
+        
+        DOM.setCurrentName(to, current);
+        Storage.remove(dirPath);
+        
+        if (isExist)
+            CloudCmd.refresh();
     };
     
     /**
