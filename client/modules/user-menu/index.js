@@ -8,8 +8,11 @@ const currify = require('currify/legacy');
 const {promisify} = require('es6-promisify');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
+const tryCatch = require('try-catch');
+const tryToCatch = require('try-to-catch/legacy');
 
 const Images = require('../../dom/images');
+const Dialog = require('../../dom/dialog');
 const getUserMenu = require('./get-user-menu');
 const navigate = require('./navigate');
 
@@ -40,7 +43,11 @@ async function show() {
     
     const {dirPath} = CurrentInfo;
     const res = await fetch(`/api/v1/user-menu?dir=${dirPath}`);
-    const userMenu = getUserMenu(await res.text());
+    const [error, userMenu] = tryCatch(getUserMenu, await res.text());
+    
+    if (error)
+        return Dialog.alert(`User menu error: ${error.message}`);
+    
     const options = Object.keys(userMenu);
     
     const el = createElement('select', {
@@ -50,6 +57,7 @@ async function show() {
     });
     
     const keys = options.map(getKey);
+    
     el.addEventListener('keydown', onKeyDown(keys, options, userMenu));
     el.addEventListener('dblclick', onDblClick(options, userMenu));
     
@@ -88,6 +96,7 @@ const onKeyDown = currify(async (keys, options, userMenu, e) => {
         keyCode,
         target,
     } = e;
+    
     const key = e.key.toUpperCase();
     
     e.preventDefault();
@@ -110,9 +119,12 @@ const onKeyDown = currify(async (keys, options, userMenu, e) => {
 const runUserMenu = async (value, options, userMenu) => {
     hide();
     
-    await userMenu[value]({
+    const [e] = await tryToCatch(userMenu[value], {
         DOM,
         CloudCmd,
     });
+    
+    if (e)
+        Dialog.alert(e.stack);
 };
 
