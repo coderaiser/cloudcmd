@@ -12,6 +12,7 @@ const exec = require('execon');
 const loadJS = require('load.js').js;
 
 const {encode} = require('../../../common/entity');
+const callbackify = require('../../../common/callbackify');
 
 const RESTful = require('../../dom/rest');
 const removeExtension = require('./remove-extension');
@@ -32,15 +33,12 @@ const Operation = {};
 
 let Loaded;
 
-let {
-    cp: copyFn,
-    mv: moveFn,
-    delete: deleteFn,
-    extract: extractFn,
-} = RESTful;
-
-let packZipFn = RESTful.pack;
-let packTarFn = RESTful.pack;
+let copyFn = callbackify(RESTful.copy);
+let moveFn = callbackify(RESTful.mv);
+let deleteFn = callbackify(RESTful.delete);
+let extractFn = callbackify(RESTful.extract);
+let packZipFn = callbackify(RESTful.pack);
+let packTarFn = callbackify(RESTful.pack);
 
 const Info = DOM.CurrentInfo;
 const showLoad = Images.show.load.bind(null, 'top');
@@ -185,12 +183,12 @@ function onConnect(operator) {
 }
 
 function onDisconnect() {
-    packZipFn = RESTful.pack;
-    packTarFn = RESTful.pack;
-    deleteFn = RESTful.delete;
-    copyFn = RESTful.cp;
-    moveFn = RESTful.mv;
-    extractFn = RESTful.extract;
+    packZipFn = callbackify(RESTful.pack);
+    packTarFn = callbackify(RESTful.pack);
+    deleteFn = callbackify(RESTful.delete);
+    copyFn = callbackify(RESTful.cp);
+    moveFn = callbackify(RESTful.mv);
+    extractFn = callbackify(RESTful.extract);
 }
 
 function getPacker(type) {

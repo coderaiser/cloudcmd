@@ -286,7 +286,7 @@ function KeyProto() {
             exec.if(isSelected, () => {
                 DOM.toggleSelectedFile(current);
             }, (callback) => {
-                DOM.loadCurrentSize(callback, current);
+                DOM.loadCurrentSize(current, callback);
             });
             
             event.preventDefault();

@@ -217,10 +217,7 @@ function onSave(obj) {
 function saveHttp(obj) {
     const {RESTful} = DOM;
     
-    RESTful.Config.write(obj, (error) => {
-        if (error)
-            return;
-        
+    RESTful.Config.write(obj).then(() => {
         onSave(obj);
     });
 }

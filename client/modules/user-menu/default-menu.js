@@ -14,7 +14,7 @@ module.exports = {
         await DOM.renameCurrent();
     },
     
-    'C - Create User Menu File': async ({DOM, CloudCmd, tryToPromisify}) => {
+    'C - Create User Menu File': async ({DOM, CloudCmd, tryToCatch}) => {
         const {
             Dialog,
             RESTful,
@@ -24,7 +24,7 @@ module.exports = {
         const {dirPath} = CurrentInfo;
         const path = `${dirPath}/.cloudcmd.menu.js`;
         
-        const [e] = await tryToPromisify(RESTful.write, path, data);
+        const [e] = await tryToCatch(RESTful.write, path, data);
         
         if (e)
             return Dialog.alert(e);

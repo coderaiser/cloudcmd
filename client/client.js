@@ -97,7 +97,6 @@ function CloudCmdProto(DOM) {
      */
     this.loadDir = (params, callback) => {
         const p = params;
-        
         const refresh = p.isRefresh;
         
         const {
@@ -354,7 +353,7 @@ function CloudCmdProto(DOM) {
      *
      */
     function ajaxLoad(path, options, panel, callback) {
-        const create = (error, json) => {
+        const create = async (error, json) => {
             const {RESTful} = DOM;
             const name = options.currentName || Info.name;
             const obj = jonny.parse(json);
@@ -373,25 +372,23 @@ function CloudCmdProto(DOM) {
                 order,
             });
             
-            RESTful.read(path + query, 'json', (error, obj) => {
-                if (error)
-                    return;
+            const newObj = await RESTful.read(path + query, 'json');
+            
+            /* eslint require-atomic-updates:0 */
+            options.sort = sort;
+            options.order = order;
+            
+            createFileTable(newObj, panel, options, () => {
+                if (isRefresh && !noCurrent)
+                    DOM.setCurrentByName(name);
                 
-                options.sort = sort;
-                options.order = order;
-                
-                createFileTable(obj, panel, options, () => {
-                    if (isRefresh && !noCurrent)
-                        DOM.setCurrentByName(name);
-                    
-                    exec(callback);
-                });
-                
-                if (!CloudCmd.config('dirStorage'))
-                    return;
-                
-                Storage.set(path, obj);
+                exec(callback);
             });
+            
+            if (!CloudCmd.config('dirStorage'))
+                return;
+            
+            Storage.set(path, newObj);
         };
         
         if (!options)

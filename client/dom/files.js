@@ -123,17 +123,12 @@ function getConfig(callback) {
     let is;
     
     if (!Promises.config)
-        Promises.config = new Promise((resolve, reject) => {
+        Promises.config = () => {
             is = true;
-            RESTful.Config.read((error, data) => {
-                if (error)
-                    return reject(error);
-                
-                resolve(data);
-            });
-        });
+            return RESTful.Config.read();
+        };
     
-    Promises.config.then((data) => {
+    Promises.config().then((data) => {
         is = false;
         
         callback(null, data);
