@@ -11,6 +11,8 @@ const createElement = require('@cloudcmd/create-element');
 const tryCatch = require('try-catch');
 const tryToCatch = require('try-to-catch/legacy');
 
+const tryToPromisify = require('../../../common/try-to-promisify.js');
+
 const Images = require('../../dom/images');
 const Dialog = require('../../dom/dialog');
 const getUserMenu = require('./get-user-menu');
@@ -122,6 +124,7 @@ const runUserMenu = async (value, options, userMenu) => {
     const [e] = await tryToCatch(userMenu[value], {
         DOM,
         CloudCmd,
+        tryToPromisify,
     });
     
     if (e)

@@ -1,10 +1,6 @@
 'use strict';
 
-const defaultUserMenu = {
-    'F2 - Rename file': async ({DOM}) => {
-        DOM.renameCurrent();
-    },
-};
+const defaultUserMenu = require('./default-menu.js');
 
 module.exports = (menuFn) => {
     if (!menuFn)
