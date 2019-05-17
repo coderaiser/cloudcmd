@@ -319,15 +319,15 @@ function deleteSilent(files = DOM.getActiveFiles()) {
     const currentName = DOM.getCurrentName();
     const nextCurrentName = getNextCurrentName(currentName, names, removedNames);
     
-    deleteFn(path + query, removedNames, () => {
-        CloudCmd.refresh(() => {
-            const names = Info.files.map(DOM.getCurrentName);
-            const isCurrent = names.includes(currentName);
-            
-            const name = isCurrent ? currentName : nextCurrentName;
-            
-            DOM.setCurrentByName(name);
-        });
+    deleteFn(path + query, removedNames, async () => {
+        await CloudCmd.refresh();
+        
+        const names = Info.files.map(DOM.getCurrentName);
+        const isCurrent = names.includes(currentName);
+        
+        const name = isCurrent ? currentName : nextCurrentName;
+        
+        DOM.setCurrentByName(name);
     });
 }
 

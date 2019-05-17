@@ -29,7 +29,7 @@ module.exports = {
         if (e)
             return Dialog.alert(e);
         
-        await tryToPromisify(CloudCmd.refresh);
+        await CloudCmd.refresh();
         DOM.setCurrentByName('.cloudcmd.menu.js');
         
         await CloudCmd.EditFile.show();

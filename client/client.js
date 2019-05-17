@@ -7,6 +7,7 @@ const inherits = require('inherits');
 const rendy = require('rendy/legacy');
 const exec = require('execon');
 const load = require('load.js');
+const {promisify} = require('es6-promisify');
 
 const pascalCase = require('just-pascal-case');
 const isDev = process.env.NODE_ENV === 'development';
@@ -318,7 +319,7 @@ function CloudCmdProto(DOM) {
         func(...args);
     };
     
-    this.refresh = (options = {}, callback) => {
+    this.refresh = promisify((options = {}, callback) => {
         if (!callback && typeof options === 'function') {
             callback = options;
             options = {};
@@ -340,7 +341,7 @@ function CloudCmdProto(DOM) {
             noCurrent,
             currentName,
         }, callback);
-    };
+    });
     
     /**
      * Функция загружает json-данные о Файловой Системе
