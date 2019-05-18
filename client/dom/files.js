@@ -31,14 +31,11 @@ function getFile(name, callback) {
     
     switch(type) {
     case 'string':
-        getModule(name, callback);
-        break;
+        return getModule(name, callback);
     
     case 'array':
         array = unaryMap(name, get);
-        
-        exec.parallel(array, callback);
-        break;
+        return exec.parallel(array, callback);
     }
 }
 
@@ -59,15 +56,14 @@ function getModule(name, callback) {
     const isHTML = regExpHTML.test(name);
     const isJSON = regExpJSON.test(name);
     
-    if (!isHTML && !isJSON) {
-        showError(name);
-    } else if (name === 'config') {
-        getConfig(callback);
-    } else {
-        path = getPath(name, isHTML, isJSON);
-        
-        getSystemFile(path, callback);
-    }
+    if (!isHTML && !isJSON)
+        return showError(name);
+    
+    if (name === 'config')
+        return getConfig(callback);
+    
+    path = getPath(name, isHTML, isJSON);
+    getSystemFile(path, callback);
 
 }
 
