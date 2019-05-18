@@ -9,6 +9,7 @@ const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const squad = require('squad/legacy');
 const {promisify} = require('es6-promisify');
+const tryToCatch = require('try-to-catch/legacy');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 
@@ -43,7 +44,6 @@ const Config = {};
 
 let Template;
 
-const getFile = promisify(Files.get);
 const loadCSS = promisify(load.css);
 
 module.exports.init = async () => {
@@ -55,7 +55,7 @@ module.exports.init = async () => {
     const {prefix} = CloudCmd;
     
     [Template] = await Promise.all([
-        getFile('config-tmpl'),
+        Files.get('config-tmpl'),
         loadSocket(),
         loadCSS(prefix + '/dist/config.css'),
         CloudCmd.View(),
@@ -127,60 +127,60 @@ Config.save = saveHttp;
 
 module.exports.show = show;
 
-function show() {
+async function show() {
     if (!CloudCmd.config('configDialog'))
         return;
     
-    fillTemplate();
+    await fillTemplate();
 }
 
-function fillTemplate() {
-    Files.get('config', (error, config) => {
-        if (error)
-            return Dialog.alert('Could not load config!');
-        
-        const {
-            editor,
-            packer,
-            columns,
-            configAuth,
-            ...obj
-        } = input.convert(config);
-        
-        obj[editor + '-selected'] = 'selected';
-        obj[packer + '-selected'] = 'selected';
-        obj[columns + '-selected'] = 'selected';
-        obj.configAuth = configAuth ? '' : 'hidden';
-        
-        const innerHTML = rendy(Template, obj);
-        
-        Element = createElement('form', {
-            className   : 'config',
-            innerHTML,
-        });
-        
-        const inputs = document.querySelectorAll('input, select', Element);
-        const [inputFirst] = inputs;
-        
-        let afterShow;
-        
-        if (inputFirst) {
-            onAuthChange(inputFirst.checked);
-            afterShow = inputFirst.focus.bind(inputFirst);
-        }
-        
-        const getTarget = ({target}) => target;
-        const handleChange = squad(onChange, getTarget);
-        
-        [...inputs]
-            .map(addKey(onKey))
-            .map(addChange(handleChange));
-        
-        const autoSize = true;
-        CloudCmd.View.show(Element, {
-            autoSize,
-            afterShow,
-        });
+async function fillTemplate() {
+    const [error, config] = await tryToCatch(Files.get, 'config');
+    
+    if (error)
+        return Dialog.alert('Could not load config!');
+    
+    const {
+        editor,
+        packer,
+        columns,
+        configAuth,
+        ...obj
+    } = input.convert(config);
+    
+    obj[editor + '-selected'] = 'selected';
+    obj[packer + '-selected'] = 'selected';
+    obj[columns + '-selected'] = 'selected';
+    obj.configAuth = configAuth ? '' : 'hidden';
+    
+    const innerHTML = rendy(Template, obj);
+    
+    Element = createElement('form', {
+        className   : 'config',
+        innerHTML,
+    });
+    
+    const inputs = document.querySelectorAll('input, select', Element);
+    const [inputFirst] = inputs;
+    
+    let afterShow;
+    
+    if (inputFirst) {
+        onAuthChange(inputFirst.checked);
+        afterShow = inputFirst.focus.bind(inputFirst);
+    }
+    
+    const getTarget = ({target}) => target;
+    const handleChange = squad(onChange, getTarget);
+    
+    [...inputs]
+        .map(addKey(onKey))
+        .map(addChange(handleChange));
+    
+    const autoSize = true;
+    CloudCmd.View.show(Element, {
+        autoSize,
+        afterShow,
     });
 }
 

@@ -5,6 +5,7 @@
 const exec = require('execon');
 const itype = require('itype/legacy');
 const currify = require('currify/legacy');
+const tryToCatch = require('try-to-catch/legacy');
 const clipboard = require('@cloudcmd/clipboard');
 
 const getRange = require('./get-range');
@@ -99,11 +100,11 @@ function getPath(el, path = []) {
     return getPath(el.parentElement, path.concat(el));
 }
 
-function config() {
-    DOM.Files.get('config', (e, config) => {
-        const type = config && config.packer;
-        EXT = DOM.getPackerExt(type);
-    });
+async function config() {
+    const [, config] = await tryToCatch(DOM.Files.get, 'config');
+    const type = config && config.packer;
+    
+    EXT = DOM.getPackerExt(type);
 }
 
 module.exports.initKeysPanel = () => {

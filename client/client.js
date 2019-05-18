@@ -8,6 +8,7 @@ const rendy = require('rendy/legacy');
 const exec = require('execon');
 const load = require('load.js');
 const {promisify} = require('es6-promisify');
+const tryToCatch = require('try-to-catch/legacy');
 
 const pascalCase = require('just-pascal-case');
 const isDev = process.env.NODE_ENV === 'development';
@@ -27,6 +28,8 @@ const {
     formatMsg,
     buildFromJSON,
 } = require('../common/cloudfunc');
+
+const callbackify = require('../common/callbackify');
 
 const loadModule = require('./load-module');
 
@@ -222,7 +225,7 @@ function CloudCmdProto(DOM) {
         });
     };
     
-    function initModules(callback) {
+    const initModules = callbackify(async () => {
         exec.if(CloudCmd.Key, () => {
             Key = new CloudCmd.Key();
             CloudCmd.Key = Key;
@@ -237,32 +240,29 @@ function CloudCmdProto(DOM) {
             });
         });
         
-        Files.get('modules', (error, modules) => {
-            const showLoad = Images.show.load;
-            
-            const doBefore = {
-                'edit': showLoad,
-                'menu': showLoad,
-            };
-            
-            const load = (name, path, dobefore) => {
-                loadModule({
-                    name,
-                    path,
-                    dobefore,
-                });
-            };
-            
-            if (!modules)
-                modules = [];
-            
-            modules.local.forEach((module) => {
-                load(null, module, doBefore[module]);
+        const [, modules] = await tryToCatch(Files.get, 'modules');
+        const showLoad = Images.show.load;
+        
+        const doBefore = {
+            'edit': showLoad,
+            'menu': showLoad,
+        };
+        
+        const load = (name, path, dobefore) => {
+            loadModule({
+                name,
+                path,
+                dobefore,
             });
-            
-            callback();
+        };
+        
+        if (!modules)
+            return;
+        
+        modules.local.forEach((module) => {
+            load(null, module, doBefore[module]);
         });
-    }
+    });
     
     function baseInit(callback) {
         const files = DOM.getFiles();
@@ -378,12 +378,12 @@ function CloudCmdProto(DOM) {
             options.sort = sort;
             options.order = order;
             
-            createFileTable(newObj, panel, options, () => {
-                if (isRefresh && !noCurrent)
-                    DOM.setCurrentByName(name);
-                
-                exec(callback);
-            });
+            await createFileTable(newObj, panel, options);
+            
+            if (isRefresh && !noCurrent)
+                DOM.setCurrentByName(name);
+            
+            exec(callback);
             
             if (!CloudCmd.config('dirStorage'))
                 return;
@@ -409,7 +409,7 @@ function CloudCmdProto(DOM) {
      * @param history
      * @param callback
      */
-    function createFileTable(json, panelParam, options, callback) {
+    async function createFileTable(json, panelParam, options) {
         const {
             history,
             noCurrent,
@@ -417,59 +417,59 @@ function CloudCmdProto(DOM) {
         
         const names = ['file', 'path', 'link', 'pathLink'];
         
-        Files.get(names, (error, templFile, templPath, templLink, templPathLink) => {
-            const {Dialog} = DOM;
-            const panel = panelParam || DOM.getPanel();
-            const {prefix} = CloudCmd;
+        const [
+            error,
+            [templFile, templPath, templLink, templPathLink],
+        ] = await tryToCatch(Files.get, names);
+        
+        if (error)
+            return DOM.Dialog.alert(error.responseText);
+        
+        const panel = panelParam || DOM.getPanel();
+        const {prefix} = CloudCmd;
+        
+        const {
+            dir,
+            name,
+        } = Info;
+        
+        const {childNodes} = panel;
+        let i = childNodes.length;
+        
+        while (i--)
+            panel.removeChild(panel.lastChild);
+        
+        panel.innerHTML = buildFromJSON({
+            sort        : options.sort,
+            order       : options.order,
+            data        : json,
+            id          : panel.id,
+            prefix,
+            template    : {
+                file        : templFile,
+                path        : templPath,
+                pathLink    : templPathLink,
+                link        : templLink,
+            },
+        });
+        
+        Listeners.setOnPanel(panel);
+        
+        if (!noCurrent) {
+            let current;
             
-            const {
-                dir,
-                name,
-            } = Info;
+            if (name === '..' && dir !== '/')
+                current = DOM.getCurrentByName(dir);
             
-            if (error)
-                return Dialog.alert(error.responseText);
+            if (!current)
+                [current] = DOM.getFiles(panel);
             
-            const {childNodes} = panel;
-            let i = childNodes.length;
-            
-            while (i--)
-                panel.removeChild(panel.lastChild);
-            
-            panel.innerHTML = buildFromJSON({
-                sort        : options.sort,
-                order       : options.order,
-                data        : json,
-                id          : panel.id,
-                prefix,
-                template    : {
-                    file        : templFile,
-                    path        : templPath,
-                    pathLink    : templPathLink,
-                    link        : templLink,
-                },
+            DOM.setCurrentFile(current, {
+                history,
             });
             
-            Listeners.setOnPanel(panel);
-            
-            if (!noCurrent) {
-                let current;
-                
-                if (name === '..' && dir !== '/')
-                    current = DOM.getCurrentByName(dir);
-                
-                if (!current)
-                    [current] = DOM.getFiles(panel);
-                
-                DOM.setCurrentFile(current, {
-                    history,
-                });
-                
-                CloudCmd.emit('active-dir', Info.dirPath);
-            }
-            
-            exec(callback);
-        });
+            CloudCmd.emit('active-dir', Info.dirPath);
+        }
     }
     
     /**

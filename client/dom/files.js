@@ -4,7 +4,7 @@
 
 const itype = require('itype/legacy');
 const currify = require('currify/legacy');
-const exec = require('execon');
+const {promisify} = require('es6-promisify');
 
 const load = require('./load');
 const RESTful = require('./rest');
@@ -23,33 +23,23 @@ const unaryMap = (array, fn) => array.map((a) => fn(a));
 
 module.exports.get = get;
 
-function getFile(name, callback) {
+async function getFile(name) {
     const type = itype(name);
-    let array;
+    check(name);
     
-    check(name, callback);
+    if (type === 'string')
+        return getModule(name);
     
-    switch(type) {
-    case 'string':
-        return getModule(name, callback);
-    
-    case 'array':
-        array = unaryMap(name, get);
-        return exec.parallel(array, callback);
-    }
+    if (type === 'array')
+        return Promise.all(unaryMap(name, get));
 }
 
-function check(name, callback) {
+function check(name) {
     if (!name)
         throw Error('name could not be empty!');
-    
-    if (typeof callback !== 'function')
-        throw Error('callback should be a function');
 }
 
-function getModule(name, callback) {
-    let path;
-    
+async function getModule(name) {
     const regExpHTML = new RegExp(FILES_HTML + '|' + FILES_HTML_ROOT);
     const regExpJSON = new RegExp(FILES_JSON);
     
@@ -60,11 +50,10 @@ function getModule(name, callback) {
         return showError(name);
     
     if (name === 'config')
-        return getConfig(callback);
+        return getConfig();
     
-    path = getPath(name, isHTML, isJSON);
-    getSystemFile(path, callback);
-
+    const path = getPath(name, isHTML, isJSON);
+    return getSystemFile(path);
 }
 
 function getPath(name, isHTML, isJSON) {
@@ -93,7 +82,7 @@ function showError(name) {
     throw error;
 }
 
-function getSystemFile(file, callback) {
+const getSystemFile = promisify((file, callback) => {
     const {prefix} = CloudCmd;
     
     if (!Promises[file])
@@ -113,9 +102,9 @@ function getSystemFile(file, callback) {
         Promises[file] = null;
         callback(error);
     });
-}
+});
 
-function getConfig(callback) {
+const getConfig = promisify((callback) => {
     let is;
     
     if (!Promises.config)
@@ -137,7 +126,7 @@ function getConfig(callback) {
         if (!is)
             Promises.config = null;
     });
-}
+});
 
 function getTimeoutOnce(time) {
     let is;

@@ -17,20 +17,19 @@ module.exports.init = async () => {
 module.exports.show = show;
 module.exports.hide = hide;
 
-function show() {
+async function show() {
     Images.show.load('top');
     
-    Files.get('upload', (error, innerHTML) => {
-        const autoSize = true;
-        
-        const el = createElement('div', {
-            innerHTML,
-        });
-        
-        CloudCmd.View.show(el, {
-            autoSize,
-            afterShow,
-        });
+    const innerHTML = await Files.get('upload');
+    const autoSize = true;
+    
+    const el = createElement('div', {
+        innerHTML,
+    });
+    
+    CloudCmd.View.show(el, {
+        autoSize,
+        afterShow,
     });
     
     const fontFamily = [

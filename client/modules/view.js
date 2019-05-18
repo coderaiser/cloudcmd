@@ -9,6 +9,7 @@ const rendy = require('rendy/legacy');
 const exec = require('execon');
 const currify = require('currify/legacy');
 const {promisify} = require('es6-promisify');
+const tryToCatch = require('try-to-catch/legacy');
 
 const modal = require('@cloudcmd/modal');
 const createElement = require('@cloudcmd/create-element');
@@ -81,7 +82,7 @@ module.exports.init = async () => {
     events.forEach(addEvent(Overlay, onOverlayClick));
 };
 
-function show(data, options) {
+async function show(data, options) {
     const prefixURL = CloudCmd.prefixURL + FS;
     
     if (Loading)
@@ -120,22 +121,25 @@ function show(data, options) {
     }
 }
 
-function viewMedia(path) {
-    getMediaElement(path, (element) => {
-        const allConfig = {
-            ...Config,
-            ...{
-                autoSize: true,
-                afterShow: () => {
-                    element
-                        .querySelector('audio, video')
-                        .focus();
-                },
+async function viewMedia(path) {
+    const [e, element] = await getMediaElement(path);
+    
+    if (e)
+        return alert(e);
+    
+    const allConfig = {
+        ...Config,
+        ...{
+            autoSize: true,
+            afterShow: () => {
+                element
+                    .querySelector('audio, video')
+                    .focus();
             },
-        };
-        
-        modal.open(element, allConfig);
-    });
+        },
+    };
+    
+    modal.open(element, allConfig);
 }
 
 function viewFile() {
@@ -257,33 +261,33 @@ function getType(name) {
         return 'media';
 }
 
-function getMediaElement(src, callback) {
-    check(src, callback);
+async function getMediaElement(src) {
+    check(src);
     
-    Files.get('view/media-tmpl', (error, template) => {
-        const {name} = Info;
-        
-        if (error)
-            return alert(error);
-        
-        if (!TemplateAudio)
-            TemplateAudio = template;
-        
-        const is = isAudio(name);
-        const type = is ? 'audio' : 'video';
-        
-        const innerHTML = rendy(TemplateAudio, {
-            src,
-            type,
-            name,
-        });
-        
-        const element = createElement('div', {
-            innerHTML,
-        });
-        
-        callback(element);
+    const [error, template] = await tryToCatch(Files.get, 'view/media-tmpl');
+    
+    if (error)
+        return [error];
+    
+    const {name} = Info;
+    
+    if (!TemplateAudio)
+        TemplateAudio = template;
+    
+    const is = isAudio(name);
+    const type = is ? 'audio' : 'video';
+    
+    const innerHTML = rendy(TemplateAudio, {
+        src,
+        type,
+        name,
     });
+    
+    const element = createElement('div', {
+        innerHTML,
+    });
+    
+    return [null, element];
 }
 
 function check(src, callback) {

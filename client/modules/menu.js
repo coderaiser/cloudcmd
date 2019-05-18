@@ -232,9 +232,8 @@ function _uploadTo(nameModule) {
             return;
         
         const {name} = Info;
-        const execFrom = CloudCmd.execFromModule;
         
-        execFrom(nameModule, 'uploadFile', name, data);
+        CloudCmd.execFromModule(nameModule, 'uploadFile', name, data);
     });
     
     CloudCmd.log('Uploading to ' + name + '...');

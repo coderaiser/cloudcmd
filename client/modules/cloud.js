@@ -5,7 +5,7 @@
 const exec = require('execon');
 const currify = require('currify/legacy');
 const {promisify} = require('es6-promisify');
-const loadJS = require('load.js').js;
+const loadJS = promisify(require('load.js').js);
 
 const {log} = CloudCmd;
 
@@ -19,7 +19,11 @@ const Name = 'Cloud';
 CloudCmd[Name] = module.exports;
 
 module.exports.init = async () => {
-    await loadFiles();
+    const [modules] = await loadFiles();
+    const {key} = modules.data.FilePicker;
+    
+    filepicker.setKey(key);
+    Images.hide();
 };
 
 module.exports.uploadFile = (filename, data) => {
@@ -53,18 +57,12 @@ function _upload(callback, file) {
     });
 }
 
-const loadFiles = promisify((callback) => {
+async function loadFiles() {
     const js = '//api.filepicker.io/v2/filepicker.js';
     
-    loadJS(js, () => {
-        Files.get('modules', (error, modules) => {
-            const {key} = modules.data.FilePicker;
-            
-            filepicker.setKey(key);
-            
-            Images.hide();
-            exec(callback);
-        });
-    });
-});
+    return Promise.all([
+        Files.get('modules'),
+        loadJS(js),
+    ]);
+}
 
