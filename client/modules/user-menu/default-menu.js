@@ -27,7 +27,7 @@ module.exports = {
         const [e] = await tryToCatch(RESTful.write, path, data);
         
         if (e)
-            return Dialog.alert(e);
+            return;
         
         await CloudCmd.refresh();
         DOM.setCurrentByName('.cloudcmd.menu.js');
