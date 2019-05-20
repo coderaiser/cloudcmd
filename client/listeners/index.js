@@ -44,9 +44,8 @@ const unselect = (event) => {
 };
 
 const execAll = currify((funcs, event) => {
-    funcs.forEach((fn) => {
+    for (const fn of funcs)
         fn(event);
-    });
 });
 
 const Info = DOM.CurrentInfo;
@@ -260,7 +259,7 @@ function toggleSelect(key, files) {
         return DOM.toggleSelectedFile(file);
     
     if (key.shift)
-        return files.forEach(DOM.selectFile);
+        return files.map(DOM.selectFile);
 }
 
 function changePanel(element) {
@@ -404,16 +403,12 @@ function contextMenu() {
 
 function dragndrop() {
     const panels = DOM.getByClassAll('panel');
-    const select = () => {
-        [...panels].forEach((panel) => {
-            panel.classList.add('selected-panel');
-        });
+    const select = ({target}) => {
+        target.classList.add('selected-panel');
     };
     
-    const unselect = () => {
-        [...panels].forEach((panel) => {
-            panel.classList.remove('selected-panel');
-        });
+    const unselect = ({target}) => {
+        target.classList.remove('selected-panel');
     };
     
     const onDrop = (event) => {
@@ -458,13 +453,12 @@ function dragndrop() {
         event.preventDefault();
     };
     
-    Events.add('dragenter', select);
-    Events.add(['dragleave', 'drop'], unselect);
-    
-    [...panels].forEach((panel) => {
-        Events.add('dragover', panel, onDragOver)
-            .add('drop', panel, onDrop);
-    });
+    for (const panel of panels)
+        Events
+            .add('dragover', panel, onDragOver)
+            .add('drop', panel, onDrop)
+            .add('dragenter', select)
+            .add(['dragleave', 'drop'], unselect);
 }
 
 function unload() {

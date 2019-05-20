@@ -168,21 +168,22 @@ function initConfig(Config, options) {
     if (!options)
         return config;
     
-    Object.keys(options).forEach((name) => {
+    const names = Object.keys(options);
+    for (const name of names) {
         const isConfig = !!config[name];
         const item = options[name];
         const isFunc = itype.function(item);
         
         if (!isFunc || !isConfig) {
             config[name] = options[name];
-            return;
+            continue;
         }
         
         const func = config[name];
         config[name] = () => {
             exec.series([func, item]);
         };
-    });
+    }
     
     return config;
 }

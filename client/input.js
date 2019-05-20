@@ -29,16 +29,14 @@ module.exports.convert = (config) => {
     const result = {
         ...config,
     };
+    const array = Object.keys(config);
     
-    const array = Object.keys(result);
+    const filtered = array.filter(isBool(config));
     
-    array
-        .filter(isBool(result))
-        .forEach((name) => {
-            const item = result[name];
-            
-            result[name] = setState(item);
-        });
+    for (const name of filtered) {
+        const item = config[name];
+        result[name] = setState(item);
+    }
     
     return result;
 };

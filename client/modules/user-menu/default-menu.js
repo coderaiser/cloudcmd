@@ -16,7 +16,6 @@ module.exports = {
     
     'C - Create User Menu File': async ({DOM, CloudCmd, tryToCatch}) => {
         const {
-            Dialog,
             RESTful,
             CurrentInfo,
         } = DOM;
