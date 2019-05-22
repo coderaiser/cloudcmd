@@ -2,7 +2,7 @@
 
 /* global CloudCmd, DOM, io */
 
-require('../../css/config.css');
+require('../../../css/config.css');
 
 const rendy = require('rendy/legacy');
 const currify = require('currify/legacy');
@@ -13,12 +13,12 @@ const tryToCatch = require('try-to-catch/legacy');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 
-const input = require('../input');
-const Images = require('../dom/images');
-const Events = require('../dom/events');
-const Files = require('../dom/files');
+const input = require('./input');
+const Images = require('../../dom/images');
+const Events = require('../../dom/events');
+const Files = require('../../dom/files');
 
-const {getTitle} = require('../../common/cloudfunc');
+const {getTitle} = require('../../../common/cloudfunc');
 const {Dialog, setTitle} = DOM;
 
 const Name = 'Config';

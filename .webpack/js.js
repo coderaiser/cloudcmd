@@ -83,7 +83,7 @@ module.exports = {
         [modules + '/view']: `${dirModules}/view.js`,
         [modules + '/help']: `${dirModules}/help.js`,
         [modules + '/markdown']: `${dirModules}/markdown.js`,
-        [modules + '/config']: `${dirModules}/config.js`,
+        [modules + '/config']: `${dirModules}/config/index.js`,
         [modules + '/contact']: `${dirModules}/contact.js`,
         [modules + '/upload']: `${dirModules}/upload.js`,
         [modules + '/operation']: `${dirModules}/operation/index.js`,
