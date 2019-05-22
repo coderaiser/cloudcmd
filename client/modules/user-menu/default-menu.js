@@ -21,7 +21,7 @@ module.exports = {
         } = DOM;
         
         const {dirPath} = CurrentInfo;
-        const path = `${dirPath}/.cloudcmd.menu.js`;
+        const path = `${dirPath}.cloudcmd.menu.js`;
         
         const [e] = await tryToCatch(RESTful.write, path, data);
         
@@ -30,8 +30,9 @@ module.exports = {
         
         await CloudCmd.refresh();
         DOM.setCurrentByName('.cloudcmd.menu.js');
-        
         await CloudCmd.EditFile.show();
     },
 };
+
+module.exports._data = data;
 
