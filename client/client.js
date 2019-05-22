@@ -372,7 +372,10 @@ function CloudCmdProto(DOM) {
                 order,
             });
             
-            const newObj = await RESTful.read(path + query, 'json');
+            const [, newObj] = await RESTful.read(path + query, 'json');
+            
+            if (!newObj)
+                return;
             
             /* eslint require-atomic-updates:0 */
             options.sort = sort;

@@ -190,7 +190,7 @@ function hide() {
     CloudCmd.View.hide();
 }
 
-function onChange(el) {
+async function onChange(el) {
     const obj = {};
     const name = input.getName(el);
     const data = input.getValue(name, Element);
@@ -202,7 +202,7 @@ function onChange(el) {
     
     obj[name] = data;
     
-    Config.save(obj);
+    await Config.save(obj);
 }
 
 function onSave(obj) {
@@ -214,12 +214,14 @@ function onSave(obj) {
     });
 }
 
-function saveHttp(obj) {
+async function saveHttp(obj) {
     const {RESTful} = DOM;
+    const [e] = await RESTful.Config.write(obj);
     
-    RESTful.Config.write(obj).then(() => {
-        onSave(obj);
-    });
+    if (e)
+        return;
+    
+    onSave(obj);
 }
 
 function onAuthChange(checked) {

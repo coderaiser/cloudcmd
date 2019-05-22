@@ -99,13 +99,13 @@ function CmdProto() {
         
         const name = getName();
         
-        const [cancel, newName] = await Dialog.prompt(msg, name);
+        const [cancel, currentName] = await Dialog.prompt(msg, name);
         
         if (cancel)
             return;
         
         const path = (type) => {
-            const result = dir + newName;
+            const result = dir + currentName;
             
             if (!type)
                 return result;
@@ -115,7 +115,7 @@ function CmdProto() {
         
         await RESTful.write(path(type));
         await CloudCmd.refresh({
-            currentName: newName,
+            currentName,
         });
     }
     
@@ -240,7 +240,7 @@ function CmdProto() {
         if (name === '..')
             return;
         
-        const size = await RESTful.read(link + query);
+        const [, size] = await RESTful.read(link + query);
         
         DOM.setCurrentSize(size, current);
         Images.hide();
@@ -353,19 +353,6 @@ function CmdProto() {
             hash = hashNew;
             read(path, func);
         });
-    };
-    
-    /**
-     * unified way to save current file content
-     *
-     * @callback - function({data, name}) {}
-     * @currentFile
-     */
-    this.saveCurrentData = (url, data, callback, query = '') => {
-        RESTful.write(url + query, data)
-            .then(() => {
-                DOM.saveDataToStorage(url, data);
-            });
     };
     
     /**
@@ -768,7 +755,10 @@ function CmdProto() {
             to : dirPath + to,
         };
         
-        await RESTful.mv(files);
+        const [e] = await RESTful.mv(files);
+        
+        if (e)
+            return;
         
         DOM.setCurrentName(to, current);
         Storage.remove(dirPath);
@@ -869,7 +859,7 @@ function CmdProto() {
             return;
         
         CloudCmd.loadDir({
-            path
+            path,
         });
     },
     

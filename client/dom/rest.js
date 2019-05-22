@@ -3,7 +3,7 @@
 /* global CloudCmd, DOM */
 
 const itype = require('itype/legacy');
-const {promisify} = require('es6-promisify');
+const promisify = require('../../common/try-to-promisify');
 
 const {FS} = require('../../common/cloudfunc');
 const {encode} = require('../../common/entity');

@@ -4,7 +4,6 @@ const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 const wraptile = require('wraptile');
 const defaultMenu = require('./default-menu');
-const tryToCatch = require('try-to-catch');
 const {_data} = defaultMenu;
 const reject = wraptile(async (a) => {
     throw Error(a);
@@ -19,7 +18,6 @@ test('cloudcmd: client: user menu: RESTful.write', async (t) => {
     await defaultMenu[name]({
         DOM,
         CloudCmd,
-        tryToCatch,
     });
     
     const path = '/.cloudcmd.menu.js';
@@ -36,7 +34,6 @@ test('cloudcmd: client: user menu: refresh', async (t) => {
     await defaultMenu[name]({
         DOM,
         CloudCmd,
-        tryToCatch,
     });
     
     t.ok(refresh.calledWith(), 'should call CloudCmd.refresh');
@@ -52,7 +49,6 @@ test('cloudcmd: client: user menu: setCurrentByName', async (t) => {
     await defaultMenu[name]({
         DOM,
         CloudCmd,
-        tryToCatch,
     });
     
     const fileName = '.cloudcmd.menu.js';
@@ -69,7 +65,6 @@ test('cloudcmd: client: user menu: EditFile.show', async (t) => {
     await defaultMenu[name]({
         DOM,
         CloudCmd,
-        tryToCatch,
     });
     
     t.ok(EditFile.show.called, 'should call EditFile.show');
@@ -88,7 +83,6 @@ test('cloudcmd: client: user menu: no EditFile.show', async (t) => {
     await defaultMenu[name]({
         DOM,
         CloudCmd,
-        tryToCatch,
     });
     
     t.notOk(EditFile.show.called, 'should not call EditFile.show');

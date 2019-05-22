@@ -104,7 +104,7 @@ const getSystemFile = promisify((file, callback) => {
     });
 });
 
-const getConfig = promisify((callback) => {
+const getConfig = async () => {
     let is;
     
     if (!Promises.config)
@@ -113,20 +113,18 @@ const getConfig = promisify((callback) => {
             return RESTful.Config.read();
         };
     
-    Promises.config().then((data) => {
+    const [, data] = await Promises.config();
+    
+    if (data)
         is = false;
-        
-        callback(null, data);
-        
-        timeout(() => {
-            if (!is)
-                Promises.config = null;
-        });
-    }, () => {
+    
+    timeout(() => {
         if (!is)
             Promises.config = null;
     });
-});
+    
+    return data;
+};
 
 function getTimeoutOnce(time) {
     let is;

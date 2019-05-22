@@ -244,8 +244,11 @@ function uploadFromCloud() {
     
     CloudCmd.execFromModule('Cloud', 'saveFile', async (currentName, data) => {
         const path = DOM.getCurrentDirPath() + currentName;
+        const [e] = await RESTful.write(path, data);
         
-        await RESTful.write(path, data);
+        if (e)
+            return;
+        
         await CloudCmd.refresh({currentName});
     });
 }

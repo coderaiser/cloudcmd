@@ -14,7 +14,7 @@ module.exports = {
         await DOM.renameCurrent();
     },
     
-    'C - Create User Menu File': async ({DOM, CloudCmd, tryToCatch}) => {
+    'C - Create User Menu File': async ({DOM, CloudCmd}) => {
         const {
             RESTful,
             CurrentInfo,
@@ -23,7 +23,7 @@ module.exports = {
         const {dirPath} = CurrentInfo;
         const path = `${dirPath}.cloudcmd.menu.js`;
         
-        const [e] = await tryToCatch(RESTful.write, path, data);
+        const [e] = await RESTful.write(path, data);
         
         if (e)
             return;

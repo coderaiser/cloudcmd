@@ -122,7 +122,6 @@ const runUserMenu = async (value, options, userMenu) => {
     const [e] = await tryToCatch(userMenu[value], {
         DOM,
         CloudCmd,
-        tryToCatch,
     });
     
     if (e)
