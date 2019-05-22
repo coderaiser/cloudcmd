@@ -255,7 +255,7 @@ Operation.extract = () => {
  *
  * @currentFile
  */
-function promptDelete() {
+async function promptDelete() {
     if (noFilesCheck())
         return;
     
@@ -291,11 +291,12 @@ function promptDelete() {
         msg = msgAsk + msgSel + type + name + '?';
     }
     
-    const cancel = false;
+    const [cancel] = await Dialog.confirm(msg);
     
-    Dialog.confirm(msg, {cancel}).then(() => {
-        deleteSilent(files);
-    });
+    if (cancel)
+        return;
+    
+    deleteSilent(files);
 }
 
 /**
@@ -380,9 +381,12 @@ function _processFiles(options, data) {
     const title = isCopy ? 'Copy' : 'Rename/Move';
     const operation = isCopy ? copyFn : moveFn;
     
-    if (shouldAsk && config(option))
-        return message(title, to, names.map(encode))
-            .then(ask);
+    if (shouldAsk && config(option)) {
+        const [cancel, to] = message(title, to, names.map(encode));
+        
+        if (!cancel)
+            ask(to);
+    }
     
     ask(to);
     
@@ -492,7 +496,7 @@ function twopack(operation, type) {
     });
 }
 
-function message(msg, to, names) {
+async function message(msg, to, names) {
     const n = names.length;
     const [name] = names;
     
@@ -505,9 +509,7 @@ function message(msg, to, names) {
     
     msg += ' to';
     
-    const cancel = false;
-    
-    return Dialog.prompt(msg, to, {cancel});
+    return Dialog.prompt(msg, to);
 }
 
 function load(callback) {

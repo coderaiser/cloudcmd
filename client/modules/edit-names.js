@@ -4,6 +4,7 @@
 
 CloudCmd.EditNames = exports;
 
+const smalltalk = require('smalltalk');
 const currify = require('currify/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');
@@ -69,7 +70,7 @@ function keyListener(event) {
         EditNames.hide();
     
     else if (ctrlMeta && event.keyCode === Key.P)
-        Dialog
+        smalltalk
             .prompt('Apply pattern:', '[n][e]', {cancel: false})
             .then(applyPattern);
     

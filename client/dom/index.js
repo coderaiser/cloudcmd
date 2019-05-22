@@ -5,7 +5,6 @@
 const itype = require('itype/legacy');
 const exec = require('execon');
 const jonny = require('jonny/legacy');
-const tryToCatch = require('try-to-catch/legacy');
 
 const Util = require('../../common/util');
 const callbackify = require('../../common/callbackify');
@@ -100,9 +99,9 @@ function CmdProto() {
         
         const name = getName();
         
-        const [, newName] = await tryToCatch(Dialog.prompt, msg, name);
+        const [cancel, newName] = await Dialog.prompt(msg, name);
         
-        if (!newName)
+        if (cancel)
             return;
         
         const path = (type) => {
@@ -753,9 +752,9 @@ function CmdProto() {
         if (from === '..')
             return Dialog.alert.noFiles();
         
-        const [e, to] = await tryToCatch(Dialog.prompt, 'Rename', from);
+        const [cancel, to] = await Dialog.prompt('Rename', from);
         
-        if (e)
+        if (cancel)
             return;
         
         const isExist = !!DOM.getCurrentByName(to);
@@ -856,18 +855,22 @@ function CmdProto() {
         return '.tar.gz';
     };
     
-    this.goToDirectory = () => {
+    this.goToDirectory = async () => {
         const msg = 'Go to directory:';
-        const path = CurrentInfo.dirPath;
         const {Dialog} = DOM;
-        const cancel = false;
-        const setPath = (path) => ({
-            path,
-        });
+        const {dirPath} = CurrentInfo;
         
-        Dialog.prompt(msg, path, {cancel})
-            .then(setPath)
-            .then(CloudCmd.loadDir);
+        const [
+            cancel,
+            path = dirPath,
+        ] = await Dialog.prompt(msg, path);
+        
+        if (cancel)
+            return;
+        
+        CloudCmd.loadDir({
+            path
+        });
     },
     
     this.duplicatePanel = () => {

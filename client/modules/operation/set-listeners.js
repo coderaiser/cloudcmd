@@ -61,7 +61,7 @@ module.exports = (options) => (emitter) => {
                 callback();
         },
         
-        error: (error) => {
+        error: async (error) => {
             lastError = error;
             
             if (noContinue) {
@@ -71,13 +71,13 @@ module.exports = (options) => (emitter) => {
                 return;
             }
             
-            Dialog.confirm(error + '\n Continue?')
-                .then(() => {
-                    emitter.continue();
-                }, () => {
-                    emitter.abort();
-                    progress.remove();
-                });
+            const [cancel] = await Dialog.confirm(error + '\n Continue?');
+            
+            if (!cancel)
+                emitter.continue();
+            
+            emitter.abort();
+            progress.remove();
         },
     };
     

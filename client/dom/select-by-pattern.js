@@ -16,12 +16,15 @@ module.exports = async (msg, files) => {
     
     const allMsg = `Specify file type for ${msg} selection`;
     
-    const type = await prompt(allMsg, SelectType);
     /* eslint require-atomic-updates: 0 */
+    const [cancel, type] = await prompt(allMsg, SelectType);
+    
+    if (cancel)
+        return;
+    
     SelectType = type;
     
     const regExp = getRegExp(type);
-    
     let matches = 0;
     
     for (const current of files) {

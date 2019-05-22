@@ -180,17 +180,18 @@ function setMsgChanged(name) {
 
 module.exports.isChanged = isChanged;
 
-function isChanged() {
+async function isChanged() {
     const editor = CloudCmd.Edit.getEditor();
     const is = editor.isChanged();
     
     if (!is)
         return;
     
-    const cancel = false;
-    Dialog.confirm(MSG_CHANGED, {cancel})
-        .then(() => {
-            editor.save();
-        });
+    const [cancel] = await Dialog.confirm(MSG_CHANGED);
+    
+    if (cancel)
+        return;
+    
+    editor.save();
 }
 
