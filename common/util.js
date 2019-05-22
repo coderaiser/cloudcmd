@@ -15,8 +15,6 @@ module.exports.escapeRegExp = (str) => {
  * get regexp from wild card
  */
 module.exports.getRegExp = (wildcard) => {
-    wildcard = wildcard || '*';
-    
     const escaped = '^' + wildcard // search from start of line
         .replace('.', '\\.')
         .replace('*', '.*')

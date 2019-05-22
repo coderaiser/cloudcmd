@@ -1,51 +1,48 @@
 'use strict';
 
-/* global DOM */
-
 let SelectType = '*.*';
 
 const {getRegExp} = require('../../common/util');
+const {
+    alert,
+    prompt,
+} = require('./dialog');
 
-module.exports = (msg, files) => {
-    const allMsg = `Specify file type for ${msg} selection`;
-    const cancel = false;
-    const {Dialog} = DOM;
+const {DOM} = require('.');
+
+module.exports = async (msg, files) => {
+    if (!files)
+        return;
     
-    Dialog.prompt(allMsg, SelectType, {cancel}).then((type) => {
-        SelectType = type;
+    const allMsg = `Specify file type for ${msg} selection`;
+    
+    const type = await prompt(allMsg, SelectType);
+    /* eslint require-atomic-updates: 0 */
+    SelectType = type;
+    
+    const regExp = getRegExp(type);
+    
+    let matches = 0;
+    
+    for (const current of files) {
+        const name = DOM.getCurrentName(current);
         
-        const regExp = getRegExp(type);
+        if (name === '..' || !regExp.test(name))
+            continue;
         
-        if (!files)
-            return;
+        ++matches;
         
-        let matches = 0;
+        let isSelected = DOM.isSelected(current);
+        const shouldSel = msg === 'expand';
         
-        files.forEach((current) => {
-            const name = DOM.getCurrentName(current);
-            
-            if (name === '..')
-                return;
-            
-            const isMatch = regExp.test(name);
-            
-            if (!isMatch)
-                return;
-            
-            ++matches;
-            
-            let isSelected = DOM.isSelected(current);
-            const shouldSel = msg === 'expand';
-            
-            if (shouldSel)
-                isSelected = !isSelected;
-            
-            if (isSelected)
-                DOM.toggleSelectedFile(current);
-        });
+        if (shouldSel)
+            isSelected = !isSelected;
         
-        if (!matches)
-            Dialog.alert('Select Files', 'No matches found!');
-    });
+        if (isSelected)
+            DOM.toggleSelectedFile(current);
+    }
+    
+    if (!matches)
+        alert('No matches found!');
 };
 
