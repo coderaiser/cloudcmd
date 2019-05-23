@@ -31,7 +31,7 @@ module.exports = {
     'lint': () => run(['putout', 'lint:*', 'spell']),
     'lint:server': () => `eslint -c .eslintrc.server ${dirs} --ignore-pattern *.spec.js`,
     'lint:test': () => `eslint --ignore-pattern '!.*' ${dirsTest}`,
-    'lint:client': () => 'eslint --env browser client --ignore-pattern .cloudcmd.menu.js',
+    'lint:client': () => 'eslint --env browser client static --ignore-pattern .cloudcmd.menu.js',
     'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
     'fix:lint': () => run(['putout', 'lint:*'], '--fix'),
@@ -86,6 +86,6 @@ module.exports = {
     'build:client': () => run('6to5:client'),
     'build:client:dev': () => run('6to5:client:dev'),
     'heroku-postbuild': () => run('6to5:client'),
-    'putout': () => 'putout bin client server common test .cloudcmd.menu.js',
+    'putout': () => 'putout bin client static server common test .cloudcmd.menu.js',
 };
 

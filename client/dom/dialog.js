@@ -17,7 +17,7 @@ module.exports.alert = (...a) => alert(title, ...a, {
 
 module.exports.prompt = (...a) => tryToCatch(prompt, title, ...a);
 module.exports.confirm = (...a) => tryToCatch(confirm, title, ...a);
-module.exports.progress = (...a) => tryToCatch(progress, title, ...a);
+module.exports.progress = (...a) => progress(title, ...a);
 
 module.exports.alert.noFiles = () => {
     return alert(title, 'No files selected!', {

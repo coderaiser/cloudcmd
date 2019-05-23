@@ -13,10 +13,9 @@ const Images = require('./images');
 const load = require('./load');
 const Files = require('./files');
 const RESTful = require('./rest');
+const IO = require('./io');
 const Storage = require('./storage');
 const Dialog = require('./dialog');
-
-const read = callbackify(RESTful.read);
 
 const currentFile = require('./current-file');
 const DOMTree = require('./dom-tree');
@@ -27,10 +26,20 @@ const DOM = {
     ...new CmdProto(),
 };
 
+const read = callbackify(async (...args) => {
+    const [e, data] = await RESTful.read(...args);
+    
+    if (e)
+        throw e;
+    
+    return data;
+});
+
 DOM.Images = Images;
 DOM.load = load;
 DOM.Files = Files;
 DOM.RESTful = RESTful;
+DOM.IO = IO;
 DOM.Storage = Storage;
 DOM.Dialog = Dialog;
 
