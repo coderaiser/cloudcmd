@@ -1,10 +1,10 @@
 'use strict';
 
 const test = require('supertape');
-const rest = require('./rest');
+const io = require('./io');
 
-test('cloudcmd: client: rest: replaceHash', (t) => {
-    const {_replaceHash} = rest;
+test('cloudcmd: client: io: replaceHash', (t) => {
+    const {_replaceHash} = io;
     const url = '/hello/####world';
     const result = _replaceHash(url);
     const expected = '/hello/%23%23%23%23world';

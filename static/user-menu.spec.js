@@ -9,7 +9,7 @@ const reject = wraptile(async (a) => {
     throw Error(a);
 });
 
-test('cloudcmd: client: user menu: RESTful.write', async (t) => {
+test('cloudcmd: static: user menu: client: RESTful.write', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
@@ -25,7 +25,7 @@ test('cloudcmd: client: user menu: RESTful.write', async (t) => {
     t.end();
 });
 
-test('cloudcmd: client: user menu: refresh', async (t) => {
+test('cloudcmd: static: user menu: refresh', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
@@ -40,7 +40,7 @@ test('cloudcmd: client: user menu: refresh', async (t) => {
     t.end();
 });
 
-test('cloudcmd: client: user menu: setCurrentByName', async (t) => {
+test('cloudcmd: static: user menu: setCurrentByName', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
@@ -56,7 +56,7 @@ test('cloudcmd: client: user menu: setCurrentByName', async (t) => {
     t.end();
 });
 
-test('cloudcmd: client: user menu: EditFile.show', async (t) => {
+test('cloudcmd: static: user menu: EditFile.show', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
@@ -71,7 +71,7 @@ test('cloudcmd: client: user menu: EditFile.show', async (t) => {
     t.end();
 });
 
-test('cloudcmd: client: user menu: no EditFile.show', async (t) => {
+test('cloudcmd: static: user menu: no EditFile.show', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();

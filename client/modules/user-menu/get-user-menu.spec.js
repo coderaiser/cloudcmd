@@ -1,7 +1,6 @@
 'use strict';
 
 const test = require('supertape');
-const stub = require('@cloudcmd/stub');
 const getUserMenu = require('./get-user-menu');
 
 test('user-menu: getUserMenu', (t) => {
@@ -17,23 +16,6 @@ test('user-menu: getUserMenu', (t) => {
     const [key] = Object.keys(result);
     
     t.equal(key, 'F2 - Rename file', 'should equal');
-    t.end();
-});
-
-test('user-menu: getUserMenu: no args', (t) => {
-    const result = getUserMenu();
-    const renameCurrent = stub();
-    const DOM = {
-        renameCurrent,
-    };
-    
-    const name = 'F2 - Rename file';
-    
-    result[name]({
-        DOM,
-    });
-    
-    t.ok(renameCurrent.called, 'should call renameCurrent');
     t.end();
 });
 
