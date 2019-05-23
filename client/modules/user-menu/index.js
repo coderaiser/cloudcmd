@@ -42,7 +42,7 @@ async function show() {
     Images.show.load('top');
     
     const {dirPath} = CurrentInfo;
-    const res = await fetch(`/api/v1/user-menu?dir=${dirPath}`);
+    const res = await fetch(`${CloudCmd.prefix}/api/v1/user-menu?dir=${dirPath}`);
     const [error, userMenu] = tryCatch(getUserMenu, await res.text());
     
     if (error)
