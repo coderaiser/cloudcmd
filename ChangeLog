@@ -1,3 +1,10 @@
+2019.05.24, v12.3.2
+
+fix:
+- (user-menu) F1 and F keys overlapping
+- (select-by-pattern) crash
+
+
 2019.05.24, v12.3.1
 
 fix:
