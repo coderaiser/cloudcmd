@@ -1,19 +1,37 @@
 'use strict';
 
-const test = require('supertape');
+const autoGlobals = require('auto-globals');
+const test = autoGlobals(require('supertape'));
 const stub = require('@cloudcmd/stub');
+const tryToCatch = require('try-to-catch');
 const wraptile = require('wraptile');
-const defaultMenu = require('./default-menu');
+
+const defaultMenu = require('./user-menu');
+
 const {_data} = defaultMenu;
 const reject = wraptile(async (a) => {
     throw Error(a);
 });
 
-test('cloudcmd: static: user menu: client: RESTful.write', async (t) => {
+test('cloudcmd: static: user menu: Rename', async (t) => {
+    const name = 'F2 - Rename file';
+    const DOM = getDOM();
+    
+    const {renameCurrent} = DOM;
+    
+    await defaultMenu[name]({
+        DOM,
+    });
+    
+    t.ok(renameCurrent.called, 'should call renameCurrent');
+    t.end();
+});
+
+test('cloudcmd: static: user menu: IO.write', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
-    const {write} = DOM.RESTful;
+    const {write} = DOM.IO;
     
     await defaultMenu[name]({
         DOM,
@@ -21,7 +39,7 @@ test('cloudcmd: static: user menu: client: RESTful.write', async (t) => {
     });
     
     const path = '/.cloudcmd.menu.js';
-    t.ok(write.calledWith(path, _data), 'should call RESTful.write');
+    t.ok(write.calledWith(path, _data), 'should call IO.write');
     t.end();
 });
 
@@ -75,12 +93,12 @@ test('cloudcmd: static: user menu: no EditFile.show', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
-    const {RESTful} = DOM;
+    const {IO} = DOM;
     const {EditFile} = CloudCmd;
     
-    RESTful.write = stub(reject('Error'));
+    IO.write = stub(reject('Error'));
     
-    await defaultMenu[name]({
+    await tryToCatch(defaultMenu[name], {
         DOM,
         CloudCmd,
     });
@@ -90,7 +108,7 @@ test('cloudcmd: static: user menu: no EditFile.show', async (t) => {
 });
 
 function getDOM() {
-    const RESTful = {
+    const IO = {
         write: stub(),
     };
     
@@ -99,9 +117,10 @@ function getDOM() {
     };
     
     return {
-        RESTful,
+        IO,
         CurrentInfo,
         setCurrentByName: stub(),
+        renameCurrent: stub(),
     };
 }
 
@@ -113,3 +132,4 @@ function getCloudCmd() {
         },
     };
 }
+
