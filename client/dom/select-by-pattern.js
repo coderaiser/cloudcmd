@@ -8,7 +8,7 @@ const {
     prompt,
 } = require('./dialog');
 
-const {DOM} = require('.');
+const DOM = require('.');
 
 module.exports = async (msg, files) => {
     if (!files)
