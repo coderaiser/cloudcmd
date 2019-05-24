@@ -1,3 +1,22 @@
+2019.05.24, v12.3.0
+
+fix:
+- (user-menu) prefix (#244)
+- (dom) renameCurrent: try-to-promise RESTful.mv
+
+feature:
+- (user-menu) hide scroll when small amount of items
+- (user-menu) add ability to run in mobile devices
+- (upload) improve style
+- (user-menu) imrove error output
+- (user-menu) add default user menu
+- (dialog) cancel -> tryToCatch
+- (user-menu) add default option: create user menu
+- (user-menu) add error handling
+- (user-menu) add ability to navigate with j, k
+- (cloudcmd) deprecate plugins
+
+
 2019.05.13, v12.2.0
 
 fix:
