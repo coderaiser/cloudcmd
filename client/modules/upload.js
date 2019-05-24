@@ -41,11 +41,11 @@ async function show() {
     
     createElement('style', {
         dataName: 'upload-css',
-        innerText: '[data-name=js-upload-file-button] {' +
-                      `font-family: ${fontFamily};` +
-                      'font-size: 20px;' +
-                      'width: 97%' +
-                '}',
+        innerText: `[data-name=js-upload-file-button] {
+                      font-family: ${fontFamily};
+                      font-size: 16px;
+                      margin: 10px 0 10px 0;
+                   }`
     });
 }
 
