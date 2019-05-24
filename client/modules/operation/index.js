@@ -335,7 +335,7 @@ function deleteSilent(files = DOM.getActiveFiles()) {
  * @param data
  * @param operation
  */
-function _processFiles(options, data) {
+async function _processFiles(options, data) {
     let selFiles;
     let files;
     let panel;
@@ -382,10 +382,12 @@ function _processFiles(options, data) {
     const operation = isCopy ? copyFn : moveFn;
     
     if (shouldAsk && config(option)) {
-        const [cancel, to] = message(title, to, names.map(encode));
+        const [cancel, newTo] = await prompt(title, to, names.map(encode));
         
         if (!cancel)
-            ask(to);
+            ask(newTo);
+        
+        return;
     }
     
     ask(to);
@@ -496,7 +498,7 @@ function twopack(operation, type) {
     });
 }
 
-async function message(msg, to, names) {
+async function prompt(msg, to, names) {
     const n = names.length;
     const [name] = names;
     
