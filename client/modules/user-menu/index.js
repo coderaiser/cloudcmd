@@ -35,7 +35,7 @@ module.exports.show = show;
 module.exports.hide = hide;
 
 const getKey = (a) => a.split(' - ')[0];
-const beginWith = (a) => (b) => !b.indexOf(a);
+const beginWith = (a) => (b) => a === getKey(b);
 
 const {CurrentInfo} = DOM;
 
