@@ -75,9 +75,8 @@ async function show() {
 function fillTemplate(options) {
     const result = [];
     
-    for (const option of options) {
+    for (const option of options)
         result.push(`<option>${option}</option>`);
-    }
     
     return result.join('');
 }
@@ -125,7 +124,12 @@ const runUserMenu = async (value, options, userMenu) => {
         tryToCatch,
     });
     
-    if (e)
-        Dialog.alert(e.stack);
+    if (!e)
+        return;
+    
+    if (e.name === 'Error')
+        return Dialog.alert(e.message);
+    
+    return Dialog.alert(e.stack);
 };
 
