@@ -5,6 +5,7 @@
 require('../../../css/user-menu.css');
 
 const currify = require('currify/legacy');
+const wraptile = require('wraptile/legacy');
 const {promisify} = require('es6-promisify');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
@@ -50,7 +51,12 @@ async function show() {
     
     const options = Object.keys(userMenu);
     
-    const el = createElement('select', {
+    const button = createElement('button', {
+        className: 'cloudcmd-user-menu-button',
+        innerText: 'User Menu',
+    });
+    
+    const select = createElement('select', {
         className: 'cloudcmd-user-menu',
         innerHTML: fillTemplate(options),
         size: 10,
@@ -58,15 +64,16 @@ async function show() {
     
     const keys = options.map(getKey);
     
-    el.addEventListener('keydown', onKeyDown(keys, options, userMenu));
-    el.addEventListener('dblclick', onDblClick(options, userMenu));
+    button.addEventListener('click', onButtonClick(options, userMenu, select));
+    select.addEventListener('keydown', onKeyDown(keys, options, userMenu));
+    select.addEventListener('dblclick', onDblClick(options, userMenu));
     
-    const afterShow = () => el.focus();
+    const afterShow = () => select.focus();
     const autoSize = true;
     
     Images.hide();
     
-    CloudCmd.View.show(el, {
+    CloudCmd.View.show([button, select], {
         autoSize,
         afterShow,
     });
@@ -87,6 +94,10 @@ function hide() {
 
 const onDblClick = currify(async (options, userMenu, e) => {
     const {value} = e.target;
+    await runUserMenu(value, options, userMenu);
+});
+
+const onButtonClick = wraptile(async (options, userMenu, {value}) => {
     await runUserMenu(value, options, userMenu);
 });
 

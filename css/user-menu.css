@@ -1,7 +1,6 @@
 .cloudcmd-user-menu {
     font-size: 16px;
     font-family: 'Droid Sans Mono', 'Ubuntu Mono', 'Consolas', monospace;
-    width: 400px;
 }
 
 .cloudcmd-user-menu:focus {
@@ -10,5 +9,14 @@
 
 .cloudcmd-user-menu > option:checked {
     box-shadow: 20px -20px 0 2px rgba(49, 123, 249) inset;
+}
+
+.cloudcmd-user-menu-button {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    padding: 2px;
+     -webkit-appearance: none;
+     border: 0;
 }
 

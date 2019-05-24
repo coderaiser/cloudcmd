@@ -24,6 +24,7 @@ const Images = require('../dom/images');
 
 const {encode} = require('../../common/entity');
 
+const {isArray} = Array;
 const testRegExp = currify((name, reg) => reg.test(name));
 const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 
@@ -99,7 +100,11 @@ async function show(data, options) {
     El.tabIndex = 0;
     
     if (data) {
-        El.append(data);
+        if (isArray(data))
+            El.append(...data);
+       else
+            El.append(data);
+       
         modal.open(El, initConfig(Config, options));
         return;
     }
