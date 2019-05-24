@@ -45,7 +45,7 @@ async function show() {
                       font-family: ${fontFamily};
                       font-size: 16px;
                       margin: 10px 0 10px 0;
-                   }`
+                   }`,
     });
 }
 

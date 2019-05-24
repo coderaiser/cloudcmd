@@ -102,9 +102,9 @@ async function show(data, options) {
     if (data) {
         if (isArray(data))
             El.append(...data);
-       else
+        else
             El.append(data);
-       
+        
         modal.open(El, initConfig(Config, options));
         return;
     }
