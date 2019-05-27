@@ -529,7 +529,7 @@ async function readDefaultMenu({prefix}) {
 }
 ```
 
-You will have ability to run one of this 3 commands with help of double click, enter, or binded key (`F2`, `D` or `P` in this example). Also you can run commands in terminal, or execute any built-in function of `Cloud Commander` extended it's interface.
+You will have ability to run one of this 3 commands with help of double click, enter, or binded key (`F2`, `D` or `P` in this example). Also you can run commands in terminal, or execute any built-in function of `Cloud Commander` extended it's interface. You can find more examples in [User Menu Cookbook](https://github.com/coderaiser/cloudcmd/wiki/User-Menu-Cookbook).
 
 #### User Menu API
 
