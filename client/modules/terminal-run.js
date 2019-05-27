@@ -4,6 +4,7 @@
 
 const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch/legacy');
+const fullstore = require('fullstore/legacy');
 
 require('../../css/terminal.css');
 
@@ -25,6 +26,8 @@ CloudCmd.TerminalRun = exports;
 let Loaded;
 let Terminal;
 let Socket;
+
+const exitCodeStore = fullstore();
 
 const loadAll = async () => {
     const {prefix} = CloudCmd;
@@ -67,11 +70,10 @@ module.exports.show = promisify((options = {}, fn) => {
             Terminal.focus();
         },
         afterClose: (/* exec.series args */) => {
-            fn();
+            fn(null, exitCodeStore());
         },
     });
 });
-
 
 module.exports.hide = hide;
 
@@ -128,7 +130,9 @@ function create(createOptions) {
         }
     });
     
-    Socket.on('exit', () => {
+    Socket.on('exit', (code) => {
+        exitCodeStore(code);
+        
         if (autoClose)
             return hide();
         
