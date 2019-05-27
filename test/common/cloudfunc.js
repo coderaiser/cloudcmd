@@ -51,8 +51,6 @@ const JSON_FILES = {
     }],
 };
 
-/* eslint no-multi-space: 0 */
-
 let Expect =
     '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
         '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"' +
