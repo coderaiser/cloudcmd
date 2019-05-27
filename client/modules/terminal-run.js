@@ -53,7 +53,26 @@ module.exports.init = async () => {
     await loadAll();
 };
 
-module.exports.show = show;
+module.exports.show = promisify((options = {}, fn) => {
+    if (!Loaded)
+        return;
+    
+    if (!config('terminal'))
+        return;
+    
+    create(options);
+    
+    CloudCmd.View.show(Terminal.element, {
+        afterShow: () => {
+            Terminal.focus();
+        },
+        afterClose: (/* exec.series args */) => {
+            fn();
+        },
+    });
+});
+
+
 module.exports.hide = hide;
 
 function hide () {
@@ -125,22 +144,6 @@ function authCheck(spawn) {
     
     spawn.on('reject', () => {
         Dialog.alert('Wrong credentials!');
-    });
-}
-
-async function show(options = {}) {
-    if (!Loaded)
-        return;
-    
-    if (!config('terminal'))
-        return;
-    
-    await create(options);
-    
-    CloudCmd.View.show(Terminal.element, {
-        afterShow: () => {
-            Terminal.focus();
-        },
     });
 }
 
