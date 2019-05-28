@@ -36,6 +36,7 @@ module.exports.hide = hide;
 
 const getKey = (a) => a.split(' - ')[0];
 const beginWith = (a) => (b) => a === getKey(b);
+const notPrivate = ([a]) => a !== '_';
 
 const {CurrentInfo} = DOM;
 
@@ -49,7 +50,9 @@ async function show() {
     if (error)
         return Dialog.alert(`User menu error: ${error.message}`);
     
-    const options = Object.keys(userMenu);
+    const options = Object
+        .keys(userMenu)
+        .filter(notPrivate);
     
     const button = createElement('button', {
         className: 'cloudcmd-user-menu-button',

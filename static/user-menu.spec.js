@@ -124,6 +124,56 @@ test('cloudcmd: static: user menu: compare directories', async (t) => {
     t.end();
 });
 
+test('cloudcmd: static: user menu: compare directories: select names', async (t) => {
+    const {_selectNames} = defaultMenu;
+    const selectFile = stub();
+    const file = {};
+    const getCurrentByName = stub().returns(file);
+    
+    const names = ['hi'];
+    const panel = {};
+    
+    _selectNames(names, panel, {
+        selectFile,
+        getCurrentByName,
+    });
+    
+    t.ok(selectFile.calledWith(file), 'should call selectFile');
+    t.end();
+});
+
+test('cloudcmd: static: user menu: compare directories: select names: getCurrentByName', async (t) => {
+    const {_selectNames} = defaultMenu;
+    const selectFile = stub();
+    const getCurrentByName = stub();
+    
+    const name = 'hi';
+    const names = [name];
+    const panel = {};
+    
+    _selectNames(names, panel, {
+        selectFile,
+        getCurrentByName,
+    });
+    
+    t.ok(getCurrentByName.calledWith(name, panel), 'should call selectFile');
+    t.end();
+});
+
+test('cloudcmd: static: user menu: compare directories: select names: compare', async (t) => {
+    const {_compare} = defaultMenu;
+    const a = [1, 2];
+    const b = [1, 3];
+    
+    const result = _compare(a, b);
+    const expected = [
+        2,
+    ];
+    
+    t.deepEqual(result, expected, 'should equal');
+    t.end();
+});
+
 function getDOM() {
     const IO = {
         write: stub(),

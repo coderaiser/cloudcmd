@@ -70,6 +70,7 @@ async function readDefaultMenu({prefix}) {
     return data;
 }
 
+module.exports._selectNames = selectNames;
 function selectNames(names, panel, {selectFile, getCurrentByName}) {
     for (const name of names) {
         const file = getCurrentByName(name, panel);
@@ -77,6 +78,7 @@ function selectNames(names, panel, {selectFile, getCurrentByName}) {
     }
 }
 
+module.exports._compare = compare;
 function compare(a, b) {
     const result = [];
     
