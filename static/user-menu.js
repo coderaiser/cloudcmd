@@ -7,7 +7,6 @@ module.exports = {
     
     'C - Create User Menu File': async ({DOM, CloudCmd}) => {
         const {CurrentInfo} = DOM;
-        
         const {dirPath} = CurrentInfo;
         const path = `${dirPath}.cloudcmd.menu.js`;
         const {prefix} = CloudCmd;
