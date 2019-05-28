@@ -483,7 +483,7 @@ module.exports = {
             closeMessage: 'Press any button to close Terminal', // optional
         });
         
-        CloudCmd.refresh();
+        await CloudCmd.refresh();
     },
     'P - Build Prod': async ({CloudCmd}) => {
         await CloudCmd.TerminalRun.show({
@@ -491,7 +491,7 @@ module.exports = {
             autoClose: true, // optional
         });
         
-        CloudCmd.refresh();
+        await CloudCmd.refresh();
     },
     'C - Create User Menu File': async ({DOM, CloudCmd}) => {
         const {CurrentInfo} = DOM;
