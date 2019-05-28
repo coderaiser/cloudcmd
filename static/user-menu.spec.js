@@ -8,6 +8,8 @@ const wraptile = require('wraptile');
 
 const defaultMenu = require('./user-menu');
 
+const {create} = autoGlobals;
+
 const {_data} = defaultMenu;
 const reject = wraptile(async (a) => {
     throw Error(a);
@@ -107,6 +109,21 @@ test('cloudcmd: static: user menu: no EditFile.show', async (t) => {
     t.end();
 });
 
+test('cloudcmd: static: user menu: compare directories', async (t) => {
+    const name = 'D - Compare directories';
+    const DOM = getDOM();
+    const CloudCmd = getCloudCmd();
+    
+    await defaultMenu[name]({
+        DOM,
+        CloudCmd,
+    });
+    
+    const {files} = DOM.CurrentInfo.files;
+    t.ok(DOM.getFilenames.calledWith(files), 'should call getFilenames');
+    t.end();
+});
+
 function getDOM() {
     const IO = {
         write: stub(),
@@ -114,12 +131,18 @@ function getDOM() {
     
     const CurrentInfo = {
         dirPath: '/',
+        files: [],
+        filesPasive: [],
+        panel: create(),
+        panelPassive: create(),
     };
     
     return {
         IO,
         CurrentInfo,
         setCurrentByName: stub(),
+        getFilenames: stub().returns([]),
+        getCurrentByName: stub(),
         renameCurrent: stub(),
     };
 }

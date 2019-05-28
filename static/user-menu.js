@@ -20,6 +20,37 @@ module.exports = {
             CloudCmd,
         });
     },
+    'D - Compare directories': async ({DOM}) => {
+        const {
+            CurrentInfo,
+            getFilenames,
+            getCurrentByName,
+            selectFile,
+        } = DOM;
+        
+        const {
+            files,
+            filesPassive,
+            panel,
+            panelPassive,
+        } = CurrentInfo;
+        
+        const names = getFilenames(files);
+        const namesPassive = getFilenames(filesPassive);
+        
+        const selectedNames = compare(names, namesPassive);
+        const selectedNamesPassive = compare(namesPassive, names);
+        
+        selectNames(selectedNames, panel, {
+            selectFile,
+            getCurrentByName,
+        });
+        
+        selectNames(selectedNamesPassive, panelPassive, {
+            selectFile,
+            getCurrentByName,
+        });
+    },
 };
 
 async function createDefaultMenu({path, data, DOM, CloudCmd}) {
@@ -38,5 +69,25 @@ async function readDefaultMenu({prefix}) {
     const data = await res.text();
     
     return data;
+}
+
+function selectNames(names, panel, {selectFile, getCurrentByName}) {
+    for (const name of names) {
+        const file = getCurrentByName(name, panel);
+        selectFile(file);
+    }
+}
+
+function compare(a, b) {
+    const result = [];
+    
+    for (const el of a) {
+        if (b.includes(el))
+            continue;
+        
+        result.push(el);
+    }
+    
+    return result;
 }
 
