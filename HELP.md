@@ -707,10 +707,6 @@ app.use(prefix, cloudcmd({
 server.listen(port);
 ```
 
-Now you're ready to go!
-
-### Authorization
-
 If you want to enable authorization, you can pass credentials to Cloud Commander with a config. To generate a password, you can install `criton` with `npm i criton --save`, and use it (or any other way) to generate a hash of a password.
 
 ```js
@@ -733,6 +729,20 @@ const config = {
     pasword,
 }
 ```
+
+Now you're ready to go!
+
+## Authorization
+
+`~/.cloudcmd.json` contains [password hash](https://github.com/coderaiser/cloudcmd/blob/v11.8.3/json/config.json#L5) because of security reason, if someone steal your config, he wouldn't know your password, because hash is [very strong](https://github.com/coderaiser/cloudcmd/blob/v11.8.3/json/config.json#L6) and can be customized.
+
+You should never write your password as plain text to `~/.cloudcmd.json`, you can generate password using `cloudcmd` itself:
+
+```
+cloudcmd --username name --password password --auth --save --no-server
+```
+
+This command will create hash of your password and write it to `~/.cloudcmd.json`.
 
 Server
 ---------------
