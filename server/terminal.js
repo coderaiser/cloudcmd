@@ -1,17 +1,15 @@
 'use strict';
 
 const tryCatch = require('try-catch');
-const config = require('./config');
 
 const noop = (req, res, next) => {
     next && next();
 };
+
 noop.listen = noop;
 
-module.exports = (arg) => getTerminal(config('terminal'), arg);
-
-function getTerminal(term, arg) {
-    if (!term)
+module.exports = (config, arg) => {
+    if (!config('terminal'))
         return noop;
     
     const [e, terminalModule] = tryCatch(require, config('terminalPath'));
@@ -26,5 +24,5 @@ function getTerminal(term, arg) {
     console.log(`cloudcmd --terminal: ${e.message}`);
     
     return noop;
-}
+};
 

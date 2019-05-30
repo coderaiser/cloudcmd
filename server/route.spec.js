@@ -14,6 +14,7 @@ const routePath = './route';
 const cloudcmdPath = './cloudcmd';
 
 const cloudcmd = require(cloudcmdPath);
+const {createConfigManager} = cloudcmd;
 const serveOnce = require('serve-once');
 const defaultConfig = {
     auth: false,
@@ -476,20 +477,14 @@ test('cloudcmd: route: buttons: contact', async (t) => {
 });
 
 test('cloudcmd: route: dropbox', async (t) => {
-    const config = require('./config');
-    const dropbox = config('dropbox');
-    const dropboxToken = config('dropboxToken');
-    
+    const config = createConfigManager();
     config('dropbox', true);
     config('dropboxToken', '');
     
     const {_getReadDir} = reRequire(routePath);
     
-    const readdir = _getReadDir();
+    const readdir = _getReadDir(config);
     const [e] = await tryToCatch(readdir, '/root');
-    
-    config('dropbox', dropbox);
-    config('dropboxToken', dropboxToken);
     
     t.ok(/token/.test(e.message), 'should contain word token in message');
     t.end();

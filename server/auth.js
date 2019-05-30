@@ -4,18 +4,17 @@ const httpAuth = require('http-auth');
 const criton = require('criton');
 const currify = require('currify');
 const middle = currify(_middle);
+const check = currify(_check);
 
-const config = require('./config');
-
-module.exports = () => {
+module.exports = (config) => {
     const auth = httpAuth.basic({
         realm: 'Cloud Commander',
-    }, check);
+    }, check(config));
     
-    return middle(auth);
+    return middle(config, auth);
 };
 
-function _middle(authentication, req, res, next) {
+function _middle(config, authentication, req, res, next) {
     const is = config('auth');
     
     if (!is)
@@ -25,7 +24,7 @@ function _middle(authentication, req, res, next) {
     authentication.check(req, res, success);
 }
 
-function check(username, password, callback) {
+function _check(config, username, password, callback) {
     const BAD_CREDENTIALS = false;
     const name = config('username');
     const pass = config('password');

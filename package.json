@@ -118,6 +118,7 @@
     "minimist": "^1.2.0",
     "nomine": "^3.0.0",
     "object.omit": "^3.0.0",
+    "once": "^1.4.0",
     "onezip": "^3.0.0",
     "open": "^6.0.0",
     "package-json": "^6.0.0",

@@ -3,10 +3,9 @@
 const wraptile = require('wraptile');
 const chalk = require('chalk');
 
-const config = require('../config');
 const datetime = require('../../common/datetime');
 
-const log = (name, msg) => config('log') && console.log(`${datetime()} -> ${name}: ${msg}`);
+const log = (isLog, name, msg) => isLog && console.log(`${datetime()} -> ${name}: ${msg}`);
 const makeColor = (a, color) => chalk.rgb(...(color || stringToRGB(a)))(a);
 const getMessage = (e) => e.message || e;
 const getDescription = (e) => `${e.type}: ${e.description}`;

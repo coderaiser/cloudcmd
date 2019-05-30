@@ -9,7 +9,7 @@ const fs = require('fs');
 
 const cloudfunc = require(DIR_COMMON + 'cloudfunc');
 const authentication = require(DIR + 'auth');
-const config = require(DIR + 'config');
+const defaultConfig = require(DIR + 'config');
 const modulas = require(DIR + 'modulas');
 const userMenu = require(DIR + 'user-menu');
 const rest = require(DIR + 'rest');
@@ -38,15 +38,15 @@ const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.html`);
 const defaultHtml = fs.readFileSync(getIndexPath(isDev), 'utf8');
 
-const auth = currify(_auth);
-const root = () => config('root');
-
+const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
 
 module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
+    const config = p.configManager || defaultConfig;
+    
     const {
         modules,
         plugins,
@@ -59,7 +59,10 @@ module.exports = (params) => {
     keys.forEach((name) => {
         let value = options[name];
         
-        if (/root|editor|packer|columns/.test(name))
+        if (/root/.test(name))
+            validate.root(value, config);
+        
+        if (/editor|packer|columns/.test(name))
             validate[name](value);
         
         if (/prefix/.test(name))
@@ -68,21 +71,31 @@ module.exports = (params) => {
         config(name, value);
     });
     
-    config('console', defaultValue('console', options));
-    config('configDialog', defaultValue('configDialog', options));
+    config('console', defaultValue(config, 'console', options));
+    config('configDialog', defaultValue(config, 'configDialog', options));
     
-    const {prefix} = prefixer(options.prefix);
     const prefixSocket = prefixer(options.prefixSocket);
     
     if (p.socket)
-        listen(prefixSocket, p.socket);
+        listen({
+            prefixSocket,
+            config,
+            socket: p.socket,
+        });
     
-    return cloudcmd(prefix, plugins, modules);
+    return cloudcmd({
+        plugins,
+        modules,
+        config,
+    });
 };
+
+module.exports.createConfigManager = defaultConfig.create;
+module.exports.configPath = defaultConfig.path;
 
 module.exports._getIndexPath = getIndexPath;
 
-function defaultValue(name, options) {
+function defaultValue(config, name, options) {
     const value = options[name];
     const previous = config(name);
     
@@ -100,8 +113,8 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-module.exports._auth = _auth;
-function _auth(accept, reject, username, password) {
+module.exports._initAuth = _initAuth;
+function _initAuth(config, accept, reject, username, password) {
     if (!config('auth'))
         return accept();
     
@@ -114,10 +127,14 @@ function _auth(accept, reject, username, password) {
     reject();
 }
 
-function listen(prefixSocket, socket) {
+function listen({prefixSocket, socket, config}) {
+    const root = () => config('root');
+    const auth = initAuth(config);
+    
     prefixSocket = getPrefix(prefixSocket);
     
-    config.listen(socket, auth);
+    if (config.listen)
+        config.listen(socket, auth);
     
     edward.listen(socket, {
         root,
@@ -148,17 +165,17 @@ function listen(prefixSocket, socket) {
         prefix: prefixSocket + '/fileop',
     });
     
-    config('terminal') && terminal().listen(socket, {
+    config('terminal') && terminal(config).listen(socket, {
         auth,
         prefix: prefixSocket + '/gritty',
         command: config('terminalCommand'),
         autoRestart: config('terminalAutoRestart'),
     });
     
-    distribute.export(socket);
+    distribute.export(config, socket);
 }
 
-function cloudcmd(prefix, plugins, modules) {
+function cloudcmd({plugins, modules, config}) {
     const online = apart(config, 'online');
     const cache = false;
     const diff = apart(config, 'diff');
@@ -169,13 +186,14 @@ function cloudcmd(prefix, plugins, modules) {
     
     const dropbox = config('dropbox');
     const dropboxToken = config('dropboxToken');
+    const root = () => config('root');
     
     const funcs = clean([
         config('console') && konsole({
             online,
         }),
         
-        config('terminal') && terminal({}),
+        config('terminal') && terminal(config, {}),
         
         edward({
             online,
@@ -202,13 +220,12 @@ function cloudcmd(prefix, plugins, modules) {
         }),
         
         fileop(),
-        
         nomine(),
         
         setUrl,
         setSW,
         logout,
-        authentication(),
+        authentication(config),
         config.middle,
         
         modules && modulas(modules),
@@ -228,8 +245,8 @@ function cloudcmd(prefix, plugins, modules) {
             menuName: '.cloudcmd.menu.js',
         }),
         
-        rest,
-        route({
+        rest(config),
+        route(config, {
             html: defaultHtml,
         }),
         

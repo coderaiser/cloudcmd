@@ -5,7 +5,6 @@ const wraptile = require('wraptile');
 const squad = require('squad');
 const omit = require('object.omit');
 
-const config = require('../config');
 const log = require('./log');
 
 const {
@@ -39,22 +38,23 @@ const omitList = [
 
 const omitConfig = (config) => omit(config, omitList);
 
-module.exports = (socket) => {
+module.exports = (config, socket) => {
     if (!config('export'))
         return;
     
     const prefix = config('prefix');
     const distributePrefix = `${prefix}/distribute`;
+    const isLog = config('log');
     
     const onError = squad(
-        logWraped(exportStr),
+        logWraped(isLog, exportStr),
         getMessage,
     );
     
-    const onConnectError = squad(logWraped(exportStr), getDescription);
+    const onConnectError = squad(logWraped(isLog, exportStr), getDescription);
     
     socket.of(distributePrefix)
-        .on('connection', onConnection(push))
+        .on('connection', onConnection(push, config))
         .on('error', onError)
         .on('connect_error', onConnectError);
 };
@@ -83,41 +83,46 @@ function getHost(socket) {
     return `${colorName} [${remoteAddress}:${port}]`;
 }
 
-const connectPush = wraptile((push, socket) => {
+const connectPush = wraptile((push, config, socket) => {
     socket.emit('accept');
     
+    const isLog = config('log');
     const host = getHost(socket);
     const subscription = push(socket);
     
-    socket.on('disconnect', onDisconnect(subscription, host));
+    socket.on('disconnect', onDisconnect(subscription, config, host));
     
-    log(exportStr, `${connectedStr} to ${host}`);
+    log(isLog, exportStr, `${connectedStr} to ${host}`);
     socket.emit('config', omitConfig(config('*')));
-    log(exportStr, `config send to ${host}`);
+    log(isLog, exportStr, `config send to ${host}`);
     
     config.subscribe(subscription);
 });
 
-const onConnection = currify((push, socket) => {
+const onConnection = currify((push, config, socket) => {
     const host = getHost(socket);
     const reject = () => {
         socket.emit('reject');
         socket.disconnect();
     };
     
-    log(exportStr, `${authTryStr} from ${host}`);
-    socket.on('auth', auth(connectPush(push, socket), reject));
+    const isLog = config('log');
+    
+    log(isLog, exportStr, `${authTryStr} from ${host}`);
+    socket.on('auth', auth(config, reject, connectPush(push, config, socket)));
 });
 
-const auth = currify((fn, reject, token) => {
+const auth = currify((config, reject, fn, token) => {
     if (token === config('exportToken'))
         return fn();
     
     reject();
 });
 
-const onDisconnect = wraptile((subscription, host) => {
+const onDisconnect = wraptile((subscription, config, host) => {
+    const isLog = config('log');
+    
     config.unsubscribe(subscription);
-    log(exportStr, `${disconnectedStr} from ${host}`);
+    log(isLog, exportStr, `${disconnectedStr} from ${host}`);
 });
 

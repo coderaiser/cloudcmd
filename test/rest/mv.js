@@ -33,11 +33,14 @@ test('cloudcmd: rest: mv', async (t) => {
     reRequire(restPath);
     
     const cloudcmd = reRequire(cloudcmdPath);
+    const {createConfigManager} = cloudcmd;
+    
+    const configManager = createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/');
     
     const {request} = serveOnce(cloudcmd, {
-        config: {
-            root: '/',
-        },
+        configManager,
     });
     
     const files = {
@@ -77,11 +80,14 @@ test('cloudcmd: rest: mv: rename', async (t) => {
     reRequire(restPath);
     
     const cloudcmd = reRequire(cloudcmdPath);
+    const {createConfigManager} = cloudcmd;
+    const configManager = createConfigManager();
+    
+    configManager('auth', false);
+    configManager('root', '/');
     
     const {request} = serveOnce(cloudcmd, {
-        config: {
-            root: '/',
-        },
+        configManager,
     });
     
     const files = {

@@ -1,6 +1,8 @@
 'use strict';
 
 const test = require('supertape');
+const tryToCatch = require('try-to-catch');
+
 const rest = require('.');
 const {
     _formatMsg,
@@ -34,50 +36,41 @@ test('rest: getWin32RootMsg', (t) => {
 });
 
 test('rest: isRootWin32', (t) => {
-    const result = _isRootWin32('/');
+    const result = _isRootWin32('/', '/');
     
     t.notOk(result, 'should equal');
     t.end();
 });
 
 test('rest: isRootAll', (t) => {
-    const result = _isRootAll(['/', '/h']);
+    const result = _isRootAll('/', ['/', '/h']);
     
     t.notOk(result, 'should equal');
     t.end();
 });
 
-test('rest: onPUT: no args', (t) => {
-    t.throws(_onPUT, /name should be a string!/, 'should throw when no args');
+test('rest: onPUT: no args', async (t) => {
+    const [e] = await tryToCatch(_onPUT, {});
+    t.equal(e.message, 'name should be a string!', 'should throw when no args');
     t.end();
 });
 
-test('rest: onPUT: no body', (t) => {
-    const fn = () => _onPUT('hello');
-    t.throws(fn, /body should be a string!/, 'should throw when no body');
+test('rest: onPUT: no body', async (t) => {
+    const [e] = await tryToCatch(_onPUT, {
+        name: 'hello',
+    });
+    
+    t.equal(e.message, 'body should be a string!', 'should throw when no body');
     t.end();
 });
 
-test('rest: onPUT: no callback', (t) => {
-    const fn = () => _onPUT('hello', 'world');
-    t.throws(fn, /callback should be a function!/, 'should throw when no callback');
-    t.end();
-});
-
-test('rest: no args', (t) => {
-    t.throws(rest, /request should be an object!/, 'should throw when no args');
-    t.end();
-});
-
-test('rest: no response', (t) => {
-    const fn = () => rest({});
-    t.throws(fn, /response should be an object!/, 'should throw when no response');
-    t.end();
-});
-
-test('rest: no next', (t) => {
-    const fn = () => rest({}, {});
-    t.throws(fn, /next should be a function!/, 'should throw when no response');
+test('rest: onPUT: no callback', async (t) => {
+    const [e] = await tryToCatch(_onPUT, {
+        name: 'hello',
+        body: 'world',
+    });
+    
+    t.equal(e.message, 'callback should be a function!', 'should throw when no callback');
     t.end();
 });
 

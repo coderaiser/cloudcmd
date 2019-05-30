@@ -96,7 +96,7 @@ test('util: getRegExp', (t) => {
 test('util: getRegExp: no', (t) => {
     const reg = getRegExp('');
     
-    t.deepEqual(reg, RegExp('^.*$'), 'should return regexp');
+    t.deepEqual(reg, RegExp('^$'), 'should return regexp');
     t.end();
 });
 

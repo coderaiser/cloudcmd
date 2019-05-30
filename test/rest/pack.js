@@ -25,6 +25,7 @@ const defaultOptions = {
     },
 };
 const cloudcmd = require(cloudcmdPath);
+
 const serveOnce = require('serve-once');
 const {request} = serveOnce(cloudcmd);
 
@@ -37,6 +38,7 @@ const once = promisify((name, extract, fn) => {
 test('cloudcmd: rest: pack: tar: get', async (t) => {
     const config = {
         packer: 'tar',
+        auth: false,
     };
     
     const options = {
@@ -202,6 +204,7 @@ test('cloudcmd: rest: pack: zip: put: response', async (t) => {
 test('cloudcmd: rest: pack: zip: put: error', async (t) => {
     const config = {
         packer: 'zip',
+        auth: false,
     };
     
     const options = {

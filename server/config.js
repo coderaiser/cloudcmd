@@ -15,70 +15,73 @@ const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
 const currify = require('currify');
 const wraptile = require('wraptile');
-const squad = require('squad');
 const tryToCatch = require('try-to-catch');
 const pullout = require('pullout');
 const ponse = require('ponse');
 const jonny = require('jonny');
 const jju = require('jju');
-const writejson = require('writejson');
+const writejson = promisify(require('writejson'));
 const tryCatch = require('try-catch');
 const criton = require('criton');
 const HOME = homedir();
 
-const manageConfig = squad(traverse, cryptoPass);
-const save = promisify(_save);
-
+const resolve = Promise.resolve.bind(Promise);
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
 const {apiURL} = CloudFunc;
 const changeEmitter = new Emitter();
 
+const key = (a) => Object.keys(a).pop();
+
 const ConfigPath = path.join(DIR, 'json/config.json');
 const ConfigHome = path.join(HOME, '.cloudcmd.json');
 
-const readjsonSync = (name) => {
-    return jju.parse(fs.readFileSync(name, 'utf8'), {
-        mode: 'json',
-    });
-};
+const config = read();
 
-const rootConfig = readjsonSync(ConfigPath);
-const key = (a) => Object.keys(a).pop();
+const connection = currify(_connection);
+const connectionWraped = wraptile(_connection);
+const middle = currify(_middle);
 
-const [error, configHome] = tryCatch(readjsonSync, ConfigHome);
-
-if (error && error.code !== 'ENOENT')
-    exit(`cloudcmd --config ${ConfigHome}: ${error.message}`);
-
-const config = {
-    ...rootConfig,
-    ...configHome,
-};
-
-const connectionWraped = wraptile(connection);
+function read(filename = ConfigHome) {
+    const readjsonSync = (name) => {
+        return jju.parse(fs.readFileSync(name, 'utf8'), {
+            mode: 'json',
+        });
+    };
+    
+    const rootConfig = readjsonSync(ConfigPath);
+    const [error, configHome] = tryCatch(readjsonSync, ConfigHome);
+    
+    if (error && error.code !== 'ENOENT')
+        exit(`cloudcmd --config ${filename}: ${error.message}`);
+    
+    return {
+        ...rootConfig,
+        ...configHome,
+    };
+}
 
 module.exports = manage;
-module.exports.save = save;
-module.exports.middle = middle;
+module.exports.create = create;
+module.exports.middle = middle(manage);
 module.exports.subscribe = (fn) => {
     changeEmitter.on('change', fn);
 };
+
+module.exports.path = ConfigHome;
 
 module.exports.unsubscribe = (fn) => {
     changeEmitter.removeListener('change', fn);
 };
 
-module.exports.listen = (socket, auth) => {
-    check(socket, auth);
-    
+const manageListen = currify((manage, socket, auth) => {
     if (!manage('configDialog'))
         return middle;
     
-    listen(socket, auth);
+    listen(manage, socket, auth);
     
     return middle;
-};
+});
 
 function manage(key, value) {
     if (!key)
@@ -97,25 +100,59 @@ function manage(key, value) {
     return `${key} = ${value}`;
 }
 
-function _save(callback) {
-    writejson(ConfigHome, config, {mode: 0o600}, callback);
-}
-
-function listen(sock, auth) {
-    const prefix = manage('prefixSocket');
+function initWrite(filename, configManager) {
+    if (filename)
+        return write.bind(null, filename, configManager);
     
-    sock.of(prefix + '/config')
-        .on('connection', (socket) => {
-            if (!manage('auth'))
-                return connection(socket);
-            
-            const reject = () => socket.emit('reject');
-            socket.on('auth', auth(connectionWraped(socket), reject));
-        });
+    return resolve;
 }
 
-function connection(socket) {
-    socket.emit('config', config);
+function readConfig(filename) {
+    if (filename)
+        return read(filename);
+    
+    return config;
+}
+
+function create({filename} = {}) {
+    const config = {};
+    
+    const configManager = (key, value) => {
+        if (key === '*')
+            return {
+                ...config,
+            };
+        
+        if (value === undefined)
+            return config[key];
+        
+        config[key] = value;
+    };
+    
+    spread(configManager);
+    Object.assign(config, readConfig(filename));
+    
+    configManager.middle = middle(configManager);
+    configManager.listen = manageListen(configManager);
+    configManager.write = initWrite(filename, configManager);
+    
+    return configManager;
+}
+
+function spread(store) {
+    const entries = Object.entries(config);
+    
+    for (const [name, value] of entries) {
+        store(name, value);
+    }
+}
+
+const write = async (filename, config) => {
+    return writejson(filename, config('*'), {mode: 0o600});
+};
+
+function _connection(manage, socket) {
+    socket.emit('config', manage('*'));
     
     const emit = currify((socket, name, e) => {
         return socket.emit(name, e.message);
@@ -125,7 +162,7 @@ function connection(socket) {
         if (typeof json !== 'object')
             return socket.emit('err', 'Error: Wrong data type!');
         
-        manageConfig(json);
+        traverse(cryptoPass(manage, json));
         
         const send = () => {
             const data = CloudFunc.formatMsg('config', key(json));
@@ -134,13 +171,26 @@ function connection(socket) {
             socket.emit('log', data);
         };
         
-        save()
+        manage.write()
             .then(send)
             .catch(emit(socket, 'err'));
     });
 }
 
-function middle(req, res, next) {
+function listen(manage, sock, auth) {
+    const prefix = manage('prefixSocket');
+    
+    sock.of(prefix + '/config')
+        .on('connection', (socket) => {
+            if (!manage('auth'))
+                return connection(manage, socket);
+            
+            const reject = () => socket.emit('reject');
+            socket.on('auth', auth(connectionWraped(manage, socket), reject));
+        });
+}
+
+function _middle(manage, req, res, next) {
     const noConfigDialog = !manage('configDialog');
     
     if (req.url !== `${apiURL}/config`)
@@ -148,7 +198,7 @@ function middle(req, res, next) {
     
     switch(req.method) {
     case 'GET':
-        get(req, res, next);
+        get(manage, req, res, next);
         break;
     
     case 'PATCH':
@@ -157,7 +207,7 @@ function middle(req, res, next) {
                 .status(404)
                 .send('Config is disabled');
         
-        patch(req, res);
+        patch(manage, req, res);
         break;
     
     default:
@@ -165,8 +215,8 @@ function middle(req, res, next) {
     }
 }
 
-function get(request, response) {
-    const data = jonny.stringify(config);
+function get(manage, request, response) {
+    const data = jonny.stringify(manage('*'));
     
     ponse.send(data, {
         name    : 'config.json',
@@ -176,7 +226,7 @@ function get(request, response) {
     });
 }
 
-async function patch(request, response) {
+async function patch(manage, request, response) {
     const name = 'config.json';
     const cache = false;
     const options = {
@@ -186,18 +236,18 @@ async function patch(request, response) {
         cache,
     };
     
-    const [e] = await tryToCatch(patchConfig, options);
+    const [e] = await tryToCatch(patchConfig, manage, options);
     
     if (e)
         ponse.sendError(e, options);
 }
 
-async function patchConfig({name, request, response, cache}) {
+async function patchConfig(manage, {name, request, response, cache}) {
     const str = await pullout(request);
     const json = jonny.parse(str);
     
-    manageConfig(json);
-    await save();
+    traverse(cryptoPass(manage, json));
+    await manage.write();
     
     const msg = formatMsg('config', key(json));
     ponse.send(msg, {
@@ -208,32 +258,24 @@ async function patchConfig({name, request, response, cache}) {
     });
 }
 
-function traverse(json) {
+function traverse([manage, json]) {
     Object.keys(json).forEach((name) => {
         manage(name, json[name]);
     });
 }
 
 module.exports._cryptoPass = cryptoPass;
-function cryptoPass(json) {
+function cryptoPass(manage, json) {
     const algo = manage('algo');
     
     if (!json.password)
-        return json;
+        return [manage, json];
     
     const password = criton(json.password, algo);
     
-    return {
+    return [manage, {
         ...json,
         password,
-    };
-}
-
-function check(socket, auth) {
-    if (!socket)
-        throw Error('socket could not be empty!');
-    
-    if (auth && typeof auth !== 'function')
-        throw Error('auth should be function!');
+    }];
 }
 

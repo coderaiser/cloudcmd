@@ -4,10 +4,12 @@ const test = require('supertape');
 const {promisify} = require('util');
 const tryToCatch = require('try-to-catch');
 const {connect} = require('../../test/before');
-const config = require('../config');
+const {createConfigManager} = require('../cloudcmd');
 const distribute = {
     import: promisify(require('./import')),
 };
+
+const config = createConfigManager();
 
 test('distribute: import: canceled', async (t) => {
     const {done} = await connect({
@@ -19,7 +21,7 @@ test('distribute: import: canceled', async (t) => {
         },
     });
     
-    const {status} = await distribute.import();
+    const {status} = await distribute.import(config);
     
     await done();
     
@@ -39,7 +41,7 @@ test('distribute: import: received: no error', async (t) => {
     
     config('importUrl', `http://localhost:${port}`);
     
-    const [e] = await tryToCatch(distribute.import);
+    const [e] = await tryToCatch(distribute.import, config);
     
     await done();
     
@@ -60,9 +62,10 @@ test('distribute: import: received', async (t) => {
         },
     });
     
+    const config = createConfigManager();
     config('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import();
+    const {status} = await distribute.import(config);
     await done();
     
     t.equal(status, 'received','should equal');
@@ -82,12 +85,13 @@ test('distribute: import: received: auth: reject', async (t) => {
         },
     });
     
+    const config = createConfigManager();
     config('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import();
+    const {status} = await distribute.import(config);
     await done();
     
-    t.equal(status, 'reject','should equal');
+    t.equal(status, 'reject', 'should equal');
     t.end();
 });
 
@@ -104,9 +108,10 @@ test('distribute: import: received: auth: accept', async (t) => {
         },
     });
     
+    const config = createConfigManager();
     config('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import();
+    const {status} = await distribute.import(config);
     await done();
     
     t.equal(status, 'received','should equal');
@@ -124,9 +129,10 @@ test('distribute: import: received: no name', async (t) => {
         },
     });
     
+    const config = createConfigManager();
     config('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import();
+    const {status} = await distribute.import(config);
     await done();
     
     t.equal(status, 'received','should equal');
@@ -143,9 +149,10 @@ test('distribute: import: error', async (t) => {
         },
     });
     
+    const config = createConfigManager();
     config('importUrl', `http://localhost:0`);
     
-    const {status} = await distribute.import({
+    const {status} = await distribute.import(config, {
         reconnection: false,
     });
     
@@ -165,7 +172,9 @@ test('distribute: import: config:change: no export', async (t) => {
         },
     });
     
-    const {status} = await distribute.import({
+    const config = createConfigManager();
+    
+    const {status} = await distribute.import(config, {
         reconnection: false,
     });
     

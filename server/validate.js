@@ -2,11 +2,10 @@
 
 const tryCatch = require('try-catch');
 
-const config = require('./config');
 const exit = require('./exit');
 const columns = require('./columns');
 
-module.exports.root = (dir, fn) => {
+module.exports.root = (dir, config) => {
     if (typeof dir !== 'string')
         throw Error('dir should be a string');
     
@@ -21,9 +20,6 @@ module.exports.root = (dir, fn) => {
     
     if (error)
         return exit('cloudcmd --root: %s', error.message);
-    
-    if (typeof fn === 'function')
-        fn('root:', dir);
 };
 
 module.exports.editor = (name) => {

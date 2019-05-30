@@ -14,7 +14,6 @@ const validatePath = `${dir}/server/validate`;
 const exitPath = `${dir}/server/exit`;
 const columnsPath = `${dir}/server/columns`;
 const cloudcmdPath = `${dir}/server/cloudcmd`;
-const configPath = `${dir}/server/config`;
 
 const validate = require(validatePath);
 const cloudcmd = require(cloudcmdPath);
@@ -30,17 +29,11 @@ test('validate: root: bad', (t) => {
 });
 
 test('validate: root: config', (t) => {
-    const configFn = stub()
-        .returns(true);
+    const config = stub().returns(true);
     
-    mockRequire(configPath, configFn);
+    validate.root('/hello', config);
     
-    const validate = reRequire(validatePath);
-    validate.root('/hello');
-    
-    mockRequire.stop(configPath);
-    
-    t.ok(configFn.calledWith('dropbox'), 'should call config');
+    t.ok(config.calledWith('dropbox'), 'should call config');
     t.end();
 });
 
@@ -50,17 +43,6 @@ test('validate: root: /', (t) => {
     
     t.notOk(fn.called, 'should not call fn');
     t.end();
-});
-
-test('validate: root: /home', (t) => {
-    const fn = stub();
-    
-    validate.root('/home', (...args) => {
-        fn(...args);
-        
-        t.ok(fn.calledWith('root:', '/home'), 'should not call fn');
-        t.end();
-    });
 });
 
 test('validate: root: stat', (t) => {

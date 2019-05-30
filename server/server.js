@@ -57,6 +57,9 @@ module.exports = async (options) => {
     app.use(prefix, cloudcmd({
         config: options,
         socket: socketServer,
+        configManager: cloudcmd.createConfigManager({
+            filename: cloudcmd.configPath,
+        }),
     }));
     
     if (port < 0 || port > 65535)

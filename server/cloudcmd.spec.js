@@ -4,17 +4,16 @@ const path = require('path');
 
 const test = require('supertape');
 const stub = require('@cloudcmd/stub');
-const currify = require('currify');
 const {reRequire} = require('mock-require');
 
 const DIR = './';
 const cloudcmdPath = DIR + 'cloudcmd';
 
-const config = require(DIR + 'config');
 const cloudcmd = require(cloudcmdPath);
 const {
+    createConfigManager,
     _getPrefix,
-    _auth,
+    _initAuth,
 } = cloudcmd;
 
 const {request} = require('serve-once')(cloudcmd, {
@@ -41,25 +40,27 @@ test('cloudcmd: args: plugins: error', (t) => {
 });
 
 test('cloudcmd: defaults: config', (t) => {
-    const configDialog = config('configDialog');
+    const configManager = createConfigManager();
     
-    config('configDialog', false);
-    cloudcmd();
-    t.notOk(config('configDialog'), 'should not override config with defaults');
+    configManager('configDialog', false);
     
-    config('configDialog', configDialog);
+    cloudcmd({
+        configManager,
+    });
     
+    t.notOk(configManager('configDialog'), 'should not override config with defaults');
     t.end();
 });
 
 test('cloudcmd: defaults: console', (t) => {
-    const console = config('console');
-    config('console', false);
-    cloudcmd();
-    t.notOk(config('console'), 'should not override config with defaults');
+    const configManager = createConfigManager();
+    configManager('console', false);
     
-    config('console', console);
+    cloudcmd({
+        configManager,
+    });
     
+    t.notOk(configManager('console'), 'should not override config with defaults');
     t.end();
 });
 
@@ -120,78 +121,60 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
 });
 
 test('cloudcmd: auth: reject', (t) => {
-    const auth = config('auth');
     const accept = stub();
     const reject = stub();
+    
+    const config = createConfigManager();
+    
     const username = 'root';
     const password = 'toor';
-    
-    const set = credentials();
-    const reset = set('hello', 'world');
     config('auth', true);
+    config('username', username);
+    config('password', password);
     
-    _auth(accept, reject, username, password);
+    _initAuth(config, accept, reject, username, 'abc');
     
-    config('auth', auth);
-    reset();
-    
-    t.ok(reject.called, 'should accept');
+    t.ok(reject.called, 'should reject');
     t.end();
 });
 
 test('cloudcmd: auth: accept', (t) => {
-    const auth = config('auth');
     const accept = stub();
     const reject = stub();
+    
     const username = 'root';
     const password = 'toor';
+    const auth = true;
     
-    const set = credentials();
-    const reset = set(username, password);
-    config('auth', true);
-    
-    _auth(accept, reject, username, password);
-    
+    const config = createConfigManager();
+    config('username', username);
+    config('password', password);
     config('auth', auth);
-    reset();
+    
+    _initAuth(config, accept, reject, username, password);
     
     t.ok(accept.called, 'should accept');
     t.end();
 });
 
 test('cloudcmd: auth: accept: no auth', (t) => {
-    const auth = config('auth');
     const accept = stub();
     const reject = stub();
+    
+    const auth = false;
     const username = 'root';
     const password = 'toor';
     
-    config('auth', false);
-    _auth(accept, reject, username, password);
+    const config = createConfigManager();
+    config('username', username);
+    config('password', password);
     config('auth', auth);
+    
+    _initAuth(config, accept, reject, username, password);
     
     t.ok(accept.called, 'should accept');
     t.end();
 });
-
-function credentials() {
-    const username = config('username');
-    const password = config('password');
-    
-    const reset = () => {
-        config('username', username);
-        config('password', password);
-    };
-    
-    const set = currify((fn, a, b) => {
-        config('username', a);
-        config('password', b);
-        
-        return fn;
-    });
-    
-    return set(reset);
-}
 
 test('cloudcmd: getIndexPath: production', (t) => {
     const isDev = false;

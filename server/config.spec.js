@@ -7,7 +7,11 @@ const root = '../';
 const configPath = './config';
 
 const config = require(configPath);
-const {_cryptoPass} = config;
+const {
+    _cryptoPass,
+    create,
+} = config;
+
 const {apiURL} = require(root + 'common/cloudfunc');
 
 const fixture = require('./config.fixture');
@@ -54,27 +58,15 @@ test('config: manage: get: *', (t) => {
     t.end();
 });
 
-test('config: listen: no socket', (t) => {
-    t.throws(config.listen, 'should throw when no socket');
-    t.end();
-});
-
-test('config: listen: authCheck: not function', (t) => {
-    const socket = {};
-    const fn = () => config.listen(socket, 'hello');
-    
-    t.throws(fn, 'should throw when authCheck not function');
-    t.end();
-});
-
 test('config: cryptoPass: no password', (t) => {
     const json = {
         hello: 'world',
     };
     
-    const result = _cryptoPass(json);
+    const config = create();
+    const result = _cryptoPass(config, json);
     
-    t.equal(result, json, 'should not change json');
+    t.deepEqual(result, [config, json], 'should not change json');
     t.end();
 });
 
@@ -89,9 +81,10 @@ test('config: cryptoPass', (t) => {
         password,
     };
     
-    const result = _cryptoPass(json);
+    const config = create();
+    const result = _cryptoPass(config, json);
     
-    t.deepEqual(result, expected, 'should crypt password');
+    t.deepEqual(result, [config, expected], 'should crypt password');
     t.end();
 });
 

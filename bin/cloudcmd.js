@@ -203,7 +203,7 @@ function main() {
     if (password)
         config('password', getPassword(password));
     
-    validateRoot(options.root);
+    validateRoot(options.root, config);
     
     if (args['show-config'])
         showConfig();
@@ -213,14 +213,19 @@ function main() {
     const importConfig = promisify(distribute.import);
     const caller = (fn) => fn();
     
-    importConfig()
+    importConfig(config)
         .then(args.save ? caller(config.save) : noop)
         .then(startWraped(options));
 }
 
-function validateRoot(root) {
+function validateRoot(root, config) {
     const validate = require(DIR_SERVER + 'validate');
-    validate.root(root, console.log);
+    validate.root(root, config);
+    
+    if (root === '/')
+        return;
+    
+    console.log(`root: ${root}`);
 }
 
 function getPassword(password) {

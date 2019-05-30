@@ -15,32 +15,32 @@ const readFile = promisify(fs.readFile);
 
 const root = require('./root');
 
-module.exports = callbackify(async (name, request) => {
+module.exports = callbackify(async (name, rootDir, request) => {
     check(name, request);
     
     const {method} = request;
     
     switch(method) {
     case 'GET':
-        return onGET(request, name);
+        return onGET(request, name, rootDir);
     
     case 'PUT':
         return onPUT(request);
     }
 });
 
-function parseName(query, name) {
+function parseName(query, name, rootDir) {
     const shortName = name.replace('/markdown', '');
     
     if (query === 'relative')
         return DIR_ROOT + shortName;
     
-    return root(shortName);
+    return root(shortName, rootDir);
 }
 
-async function onGET(request, name) {
+async function onGET(request, name, root) {
     const query = ponse.getQuery(request);
-    const fileName = parseName(query, name);
+    const fileName = parseName(query, name, root);
     const data = await readFile(fileName, 'utf8');
     
     return parse(data);

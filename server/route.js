@@ -14,6 +14,7 @@ const squad = require('squad');
 const apart = require('apart');
 const currify = require('currify');
 const tryToCatch = require('try-to-catch');
+const once = require('once');
 
 const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
@@ -21,6 +22,8 @@ const prefixer = require(DIR_SERVER + 'prefixer');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
 const prefix = squad(prefixer, apart(config, 'prefix'));
+
+const onceRequire = once(require);
 
 const sendIndex = (params, data) => {
     const ponseParams = {
@@ -36,36 +39,35 @@ const {FS} = CloudFunc;
 const Columns = require(`${DIR_SERVER}/columns`);
 const Template = require(`${DIR_SERVER}/template`);
 
-const getReadDir = () => {
+const tokenize = (fn, a) => (b) => fn(a, b);
+const getReadDir = (config) => {
     if (!config('dropbox'))
         return promisify(flop.read);
     
-    const tokenize = (fn, a) => (b) => fn(a, b);
-    const {readDir} = require('@cloudcmd/dropbox');
+    const {readDir} = onceRequire('@cloudcmd/dropbox');
     
     return tokenize(readDir, config('dropboxToken'));
 };
 
-const read = getReadDir();
 const realpath = promisify(fs.realpath);
 
 /**
  * routing of server queries
  */
-module.exports = currify((options, request, response, next) => {
+module.exports = currify((config, options, request, response, next) => {
     const name = ponse.getPathName(request);
     const isFS = RegExp('^/$|^' + FS).test(name);
     
     if (!isFS)
         return next();
     
-    route(options, request, response)
+    route({config, options, request, response})
         .catch(next);
 });
 
 module.exports._getReadDir = getReadDir;
 
-async function route(options, request, response) {
+async function route({config, options, request, response}) {
     const name = ponse.getPathName(request);
     const gzip = true;
     const p = {
@@ -78,13 +80,14 @@ async function route(options, request, response) {
     config('prefix', prefixer(request.baseUrl));
     
     const rootName = name.replace(CloudFunc.FS, '') || '/';
-    const fullPath = root(rootName);
+    const fullPath = root(rootName, config('root'));
     
+    const read = getReadDir(config);
     const [error, dir] = await tryToCatch(read, fullPath);
     const {html} = options;
     
     if (!error)
-        return sendIndex(p, buildIndex(html, {
+        return sendIndex(p, buildIndex(config, html, {
             ...dir,
             path: format.addSlashToEnd(rootName),
         }));
@@ -104,7 +107,7 @@ async function route(options, request, response) {
 /**
  * additional processing of index file
  */
-function indexProcessing(options) {
+function indexProcessing(config, options) {
     const oneFilePanel = config('oneFilePanel');
     const noKeysPanel = !config('keysPanel');
     const noContact = !config('contact');
@@ -177,14 +180,14 @@ function indexProcessing(options) {
     return data;
 }
 
-function buildIndex(html, json) {
+function buildIndex(config, html, json) {
     const panel = CloudFunc.buildFromJSON({
         data: json,
         prefix: prefix(),
         template: Template,
     });
     
-    return indexProcessing({
+    return indexProcessing(config, {
         panel,
         data: html,
     });

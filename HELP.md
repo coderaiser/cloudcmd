@@ -671,6 +671,8 @@ const app = require('express')();
 const port = 1337;
 const prefix = '/';
 
+const {createConfigManager} = cloudcmd;
+
 const server = http.createServer(app);
 const socket = io.listen(server, {
     path: `{prefix}socket.io`
@@ -702,6 +704,7 @@ app.use(prefix, cloudcmd({
     config,  // config data (optional)
     plugins, // DEPRECATED, use User Menu instead
     modules, // optional
+    configManager: createConfigManager(), //optional
 }));
 
 server.listen(port);

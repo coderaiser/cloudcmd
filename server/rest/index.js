@@ -7,7 +7,6 @@ const path = require('path');
 const fs = require('fs');
 
 const root = require(DIR + 'root');
-const config = require(DIR + 'config');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 const markdown = require(DIR + 'markdown');
 const info = require('./info');
@@ -16,6 +15,7 @@ const jaguar = require('jaguar');
 const onezip = require('onezip');
 const inly = require('inly');
 const wraptile = require('wraptile');
+const currify = require('currify');
 const pullout = require('pullout');
 const json = require('jonny');
 const ponse = require('ponse');
@@ -27,9 +27,7 @@ const swap = wraptile((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
 const {apiURL} = CloudFunc;
 
-module.exports = (request, response, next) => {
-    check(request, response, next);
-    
+module.exports = currify((config, request, response, next) => {
     const name = ponse.getPathName(request);
     const regExp = RegExp('^' + apiURL);
     const is = regExp.test(name);
@@ -37,10 +35,10 @@ module.exports = (request, response, next) => {
     if (!is)
         return next();
     
-    rest(request, response);
-};
+    rest(config, request, response);
+});
 
-function rest(request, response) {
+function rest(config, request, response) {
     const name = ponse.getPathName(request);
     const params = {
         request,
@@ -48,7 +46,7 @@ function rest(request, response) {
         name: name.replace(apiURL, '') || '/',
     };
     
-    sendData(params, (error, options, data) => {
+    sendData(params, config, (error, options, data) => {
         params.gzip = !error;
         
         if (!data) {
@@ -65,8 +63,11 @@ function rest(request, response) {
         if (options.query)
             params.query = options.query;
         
-        if (error)
+        if (error && error.code)
             return ponse.sendError(error, params);
+        
+        if (error)
+            return ponse.sendError(error.stack, params);
         
         ponse.send(data, params);
     });
@@ -77,44 +78,53 @@ function rest(request, response) {
  *
  * @param params {name, method, body, requrest, response}
  */
-function sendData(params, callback) {
+function sendData(params, config, callback) {
     const p = params;
     const isMD = RegExp('^/markdown').test(p.name);
+    const rootDir = config('root');
     
     if (isMD)
-        return markdown(p.name, p.request, callback);
+        return markdown(p.name, rootDir, p.request, callback);
     
     const {method} = p.request;
     
     switch(method) {
     case 'GET':
-        return onGET(params, callback);
+        return onGET(params, config, callback);
     
     case 'PUT':
         return pullout(p.request)
             .then((body) => {
-                onPUT(p.name, body, callback);
+                onPUT({
+                    name: p.name,
+                    config,
+                    body,
+                    callback,
+                });
             })
             .catch(callback);
     }
 }
 
-function onGET(params, callback) {
+function onGET(params, config, callback) {
     let cmd;
     const p = params;
+    const packer = config('packer');
+    const prefix = config('prefix');
+    const rootDir = config('root');
     
     if (p.name[0] === '/')
         cmd = p.name.replace('/', '');
     
     if (/^pack/.test(cmd)) {
         cmd = cmd.replace(/^pack/, '');
-        streamPack(root(cmd), p.response);
+        streamPack(root(cmd, rootDir), p.response, packer);
         return;
     }
     
     switch(cmd) {
     case '':
-        p.data = json.stringify(info());
+        p.data = json.stringify(info(prefix));
         
         callback(null, {name: 'api.json'}, p.data);
         break;
@@ -127,22 +137,22 @@ function onGET(params, callback) {
     }
 }
 
-function getPackReg() {
-    if (config('packer') === 'zip')
+function getPackReg(packer) {
+    if (packer === 'zip')
         return /\.zip$/;
     
     return /\.tar\.gz$/;
 }
 
-function streamPack(cmd, response) {
+function streamPack(cmd, response, packer) {
     const noop = () => {};
-    const filename = cmd.replace(getPackReg(), '');
+    const filename = cmd.replace(getPackReg(packer), '');
     const dir = path.dirname(filename);
     const names = [
         path.basename(filename),
     ];
     
-    operation('pack', dir, response, names, noop);
+    operation('pack', packer, dir, response, names, noop);
 }
 
 function getCMD(cmd) {
@@ -160,25 +170,26 @@ const getMoveMsg = (files) => {
 };
 
 module.exports._onPUT = onPUT;
-function onPUT(name, body, callback) {
+function onPUT({name, config, body, callback}) {
     checkPut(name, body, callback);
     
     const cmd = getCMD(name);
     const files = json.parse(body);
+    const rootDir = config('root');
     
     switch(cmd) {
     case 'mv': {
         if (!files.from || !files.to)
             return callback(body);
         
-        if (isRootAll([files.to, files.from]))
+        if (isRootAll(rootDir, [files.to, files.from]))
             return callback(getWin32RootMsg());
         
         const msg = getMoveMsg(files);
         const fn = swap(callback, msg);
         
-        const from = root(files.from);
-        const to = root(files.to);
+        const from = root(files.from, rootDir);
+        const to = root(files.to, rootDir);
         const {names} = files;
         
         if (!names)
@@ -191,11 +202,11 @@ function onPUT(name, body, callback) {
         if (!files.from || !files.names || !files.to)
             return callback(body);
         
-        if (isRootAll([files.to, files.from]))
+        if (isRootAll(rootDir, [files.to, files.from]))
             return callback(getWin32RootMsg());
         
-        files.from = root(files.from);
-        files.to = root(files.to);
+        files.from = root(files.from, rootDir);
+        files.to = root(files.to, rootDir);
         
         copy(files.from, files.to, files.names, (error) => {
             const msg = formatMsg('copy', files.names);
@@ -207,14 +218,14 @@ function onPUT(name, body, callback) {
         if (!files.from)
             return callback(body);
         
-        pack(files.from, files.to, files.names, callback);
+        pack(files.from, files.to, files.names, config, callback);
         break;
     
     case 'extract':
         if (!files.from)
             return callback(body);
         
-        extract(files.from, files.to, callback);
+        extract(files.from, files.to, config, callback);
         
         break;
     
@@ -224,9 +235,12 @@ function onPUT(name, body, callback) {
     }
 }
 
-function pack(from, to, names, fn) {
-    from = root(from);
-    to = root(to);
+function pack(from, to, names, config, fn) {
+    const rootDir = config('root');
+    const packer = config('packer');
+    
+    from = root(from, rootDir);
+    to = root(to, rootDir);
     
     if (!names) {
         names = [
@@ -236,31 +250,33 @@ function pack(from, to, names, fn) {
         from = path.dirname(from);
     }
     
-    operation('pack', from, to, names, fn);
+    operation('pack', packer, from, to, names, fn);
 }
 
-function extract(from, to, fn) {
-    from = root(from);
+function extract(from, to, config, fn) {
+    const rootDir = config('root');
+    
+    from = root(from, rootDir);
     
     if (to)
-        to = root(to);
+        to = root(to, rootDir);
     else
         to = from.replace(/\.tar\.gz$/, '');
     
-    operation('extract', from, to, fn);
+    operation('extract', config('packer'), from, to, fn);
 }
 
-function getPacker(operation) {
+function getPacker(operation, packer) {
     if (operation === 'extract')
         return inly;
     
-    if (config('packer') === 'zip')
+    if (packer === 'zip')
         return onezip.pack;
     
     return jaguar.pack;
 }
 
-function operation(op, from, to, names, fn) {
+function operation(op, packer, from, to, names, fn) {
     if (!fn) {
         fn = names;
         names = [
@@ -268,8 +284,8 @@ function operation(op, from, to, names, fn) {
         ];
     }
     
-    const packer = getPacker(op);
-    const pack = packer(from, to, names);
+    const packerFn = getPacker(op, packer);
+    const pack = packerFn(from, to, names);
     
     pack.on('error', fn);
     
@@ -300,17 +316,18 @@ function copy(from, to, names, fn) {
         });
 }
 
-module.exports._isRootWin32 = isRootWin32;
-function isRootWin32(path) {
+const isRootWin32 = currify((root, path) => {
     const isRoot = path === '/';
-    const isConfig = config('root') === '/';
+    const isConfig = root === '/';
     
     return isWin32 && isRoot && isConfig;
-}
+});
 
+module.exports._isRootWin32 = isRootWin32;
 module.exports._isRootAll = isRootAll;
-function isRootAll(names) {
-    return names.some(isRootWin32);
+
+function isRootAll(root, names) {
+    return names.some(isRootWin32(root));
 }
 
 module.exports._getWin32RootMsg = getWin32RootMsg;
@@ -337,17 +354,6 @@ function formatMsg(msg, data, status) {
     const value = parseData(data);
     
     return CloudFunc.formatMsg(msg, value, status);
-}
-
-function check(request, response, next) {
-    if (typeof request !== 'object')
-        throw Error('request should be an object!');
-    
-    if (typeof response !== 'object')
-        throw Error('response should be an object!');
-    
-    if (typeof next !== 'function')
-        throw Error('next should be a function!');
 }
 
 function checkPut(name, body, callback) {

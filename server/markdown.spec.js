@@ -15,8 +15,12 @@ const cloudcmd = require('..');
 const config = {
     auth: false,
 };
+
+const configManager = cloudcmd.createConfigManager();
+
 const {request} = require('serve-once')(cloudcmd, {
     config,
+    configManager,
 });
 
 test('cloudcmd: markdown: error', async (t) => {
@@ -64,7 +68,7 @@ test('cloudcmd: markdown: put: error', async (t) => {
     mdStream.url = 'http://hello.world';
     mdStream.method = 'PUT';
     
-    const [e] = await tryToCatch(_markdown, name, mdStream);
+    const [e] = await tryToCatch(_markdown, name, '/', mdStream);
     
     t.ok(e.message.includes('ENOENT: no such file or directory'), 'should emit error');
     t.end();
