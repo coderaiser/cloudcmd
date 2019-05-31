@@ -100,12 +100,14 @@ function getEnv() {
 
 function create(createOptions) {
     const {
+        cwd = DOM.getCurrentDirPath(),
         command,
         autoClose,
         closeMessage = 'Press any key to close Terminal...',
     } = createOptions;
     
     const options = {
+        cwd,
         env: getEnv(),
         prefix: getPrefixSocket(),
         socketPath: CloudCmd.prefix,
