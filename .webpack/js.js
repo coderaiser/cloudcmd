@@ -110,8 +110,8 @@ module.exports = {
     },
     plugins,
     performance: {
-        maxEntrypointSize: 500000,
-        maxAssetSize: 500000,
+        maxEntrypointSize: 600000,
+        maxAssetSize: 600000,
     },
 };
 
