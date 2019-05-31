@@ -1,3 +1,11 @@
+2019.05.31, v12.6.0
+
+feature:
+- (config-manager) add (#208)
+- (package) add support of cwd in TerminalRun with help of gritty v4.7.0
+- (user-menu) add ability to ignore private methods
+
+
 2019.05.28, v12.5.0
 
 feature:
