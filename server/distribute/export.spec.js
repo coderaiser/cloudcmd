@@ -4,7 +4,7 @@ const test = require('supertape');
 const io = require('socket.io-client');
 
 const {connect} = require('../../test/before');
-const config = require('../config');
+const config = require('../config').createConfig();
 
 test('distribute: export', async (t) => {
     const defaultConfig = {
@@ -17,6 +17,7 @@ test('distribute: export', async (t) => {
     
     const {port, done} = await connect({
         config: defaultConfig,
+        configManager: config,
     });
     
     const url = `http://localhost:${port}/distribute?port=${1111}`;

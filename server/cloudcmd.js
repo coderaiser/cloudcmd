@@ -9,7 +9,11 @@ const fs = require('fs');
 
 const cloudfunc = require(DIR_COMMON + 'cloudfunc');
 const authentication = require(DIR + 'auth');
-const defaultConfig = require(DIR + 'config');
+const {
+    createConfig,
+    configPath,
+} = require(DIR + 'config');
+
 const modulas = require(DIR + 'modulas');
 const userMenu = require(DIR + 'user-menu');
 const rest = require(DIR + 'rest');
@@ -45,7 +49,9 @@ const clean = (a) => a.filter(notEmpty);
 module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
-    const config = p.configManager || defaultConfig;
+    const config = p.configManager || createConfig({
+        configPath,
+    });
     
     const {
         modules,
@@ -90,8 +96,8 @@ module.exports = (params) => {
     });
 };
 
-module.exports.createConfigManager = defaultConfig.create;
-module.exports.configPath = defaultConfig.path;
+module.exports.createConfigManager = createConfig;
+module.exports.configPath = configPath;
 
 module.exports._getIndexPath = getIndexPath;
 

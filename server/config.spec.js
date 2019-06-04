@@ -6,11 +6,11 @@ const stub = require('@cloudcmd/stub');
 const root = '../';
 const configPath = './config';
 
-const config = require(configPath);
 const {
+    createConfig,
     _cryptoPass,
-    create,
-} = config;
+} = require(configPath);
+const config = createConfig();
 
 const {apiURL} = require(root + 'common/cloudfunc');
 
@@ -24,14 +24,16 @@ test('config: manage', (t) => {
 
 test('config: manage: get', async (t) => {
     const editor = 'deepword';
+    const configManager = createConfig();
     
     const {done} = await connect({
         config: {editor},
+        configManager,
     });
     
     done();
     
-    t.equal(config('editor'), editor, 'should get config');
+    t.equal(configManager('editor'), editor, 'should get config');
     t.end();
 });
 
@@ -63,7 +65,7 @@ test('config: cryptoPass: no password', (t) => {
         hello: 'world',
     };
     
-    const config = create();
+    const config = createConfig();
     const result = _cryptoPass(config, json);
     
     t.deepEqual(result, [config, json], 'should not change json');
@@ -81,7 +83,7 @@ test('config: cryptoPass', (t) => {
         password,
     };
     
-    const config = create();
+    const config = createConfig();
     const result = _cryptoPass(config, json);
     
     t.deepEqual(result, [config, expected], 'should crypt password');

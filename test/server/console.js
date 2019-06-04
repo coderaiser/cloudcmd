@@ -7,7 +7,7 @@ const io = require('socket.io-client');
 
 const configPath = path.join(__dirname, '../..', 'server', 'config');
 const {connect} = require('../before');
-const configFn = require(configPath);
+const configFn = require(configPath).createConfig();
 
 test('cloudcmd: console: enabled', async (t) => {
     const config = {

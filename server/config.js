@@ -29,28 +29,29 @@ const resolve = Promise.resolve.bind(Promise);
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
 const {apiURL} = CloudFunc;
-const changeEmitter = new Emitter();
 
 const key = (a) => Object.keys(a).pop();
 
 const ConfigPath = path.join(DIR, 'json/config.json');
 const ConfigHome = path.join(HOME, '.cloudcmd.json');
 
-const config = read();
-
 const connection = currify(_connection);
 const connectionWraped = wraptile(_connection);
 const middle = currify(_middle);
 
-function read(filename = ConfigHome) {
-    const readjsonSync = (name) => {
-        return jju.parse(fs.readFileSync(name, 'utf8'), {
-            mode: 'json',
-        });
-    };
+const readjsonSync = (name) => {
+    return jju.parse(fs.readFileSync(name, 'utf8'), {
+        mode: 'json',
+    });
+};
+
+const rootConfig = readjsonSync(ConfigPath);
+
+function read(filename) {
+    if (!filename)
+        return rootConfig;
     
-    const rootConfig = readjsonSync(ConfigPath);
-    const [error, configHome] = tryCatch(readjsonSync, ConfigHome);
+    const [error, configHome] = tryCatch(readjsonSync, filename);
     
     if (error && error.code !== 'ENOENT')
         exit(`cloudcmd --config ${filename}: ${error.message}`);
@@ -61,18 +62,8 @@ function read(filename = ConfigHome) {
     };
 }
 
-module.exports = manage;
-module.exports.create = create;
-module.exports.middle = middle(manage);
-module.exports.subscribe = (fn) => {
-    changeEmitter.on('change', fn);
-};
-
-module.exports.path = ConfigHome;
-
-module.exports.unsubscribe = (fn) => {
-    changeEmitter.removeListener('change', fn);
-};
+module.exports.createConfig = createConfig;
+module.exports.configPath = ConfigHome;
 
 const manageListen = currify((manage, socket, auth) => {
     if (!manage('configDialog'))
@@ -83,23 +74,6 @@ const manageListen = currify((manage, socket, auth) => {
     return middle;
 });
 
-function manage(key, value) {
-    if (!key)
-        return;
-    
-    if (key === '*')
-        return config;
-    
-    if (value === undefined)
-        return config[key];
-    
-    config[key] = value;
-    
-    changeEmitter.emit('change', key, value);
-    
-    return `${key} = ${value}`;
-}
-
 function initWrite(filename, configManager) {
     if (filename)
         return write.bind(null, filename, configManager);
@@ -107,15 +81,9 @@ function initWrite(filename, configManager) {
     return resolve;
 }
 
-function readConfig(filename) {
-    if (filename)
-        return read(filename);
-    
-    return config;
-}
-
-function create({filename} = {}) {
+function createConfig({configPath} = {}) {
     const config = {};
+    const changeEmitter = new Emitter();
     
     const configManager = (key, value) => {
         if (key === '*')
@@ -127,24 +95,26 @@ function create({filename} = {}) {
             return config[key];
         
         config[key] = value;
+        changeEmitter.emit('change', key, value);
+        
+        return `${key} = ${value}`;
     };
     
-    spread(configManager);
-    Object.assign(config, readConfig(filename));
+    Object.assign(config, read(configPath));
     
     configManager.middle = middle(configManager);
     configManager.listen = manageListen(configManager);
-    configManager.write = initWrite(filename, configManager);
+    configManager.write = initWrite(configPath, configManager);
+    configManager.subscribe = (fn) => {
+        changeEmitter.on('change', fn);
+    };
+    
+    configManager.unsubscribe = (fn) => {
+        // replace to off on node v10
+        changeEmitter.removeListener('change', fn);
+    };
     
     return configManager;
-}
-
-function spread(store) {
-    const entries = Object.entries(config);
-    
-    for (const [name, value] of entries) {
-        store(name, value);
-    }
 }
 
 const write = async (filename, config) => {

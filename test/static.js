@@ -4,7 +4,7 @@ const test = require('supertape');
 const criton = require('criton');
 
 const cloudcmd = require('..');
-const configFn = require('../server/config');
+const configFn = cloudcmd.createConfigManager();
 
 const config = {
     auth: false,

@@ -10,8 +10,6 @@ const squad = require('squad');
 const tryToCatch = require('try-to-catch');
 const wraptile = require('wraptile');
 
-const config = require(DIR_SERVER + 'config');
-
 const two = currify((f, a, b) => f(a, b));
 const exit = require(DIR_SERVER + 'exit');
 
@@ -32,7 +30,7 @@ const io = require('socket.io');
 const tryRequire = require('tryrequire');
 const logger = tryRequire('morgan');
 
-module.exports = async (options) => {
+module.exports = async (options, config) => {
     const prefix = config('prefix');
     const port = process.env.PORT || /* c9           */
                  config('port');
@@ -57,9 +55,7 @@ module.exports = async (options) => {
     app.use(prefix, cloudcmd({
         config: options,
         socket: socketServer,
-        configManager: cloudcmd.createConfigManager({
-            filename: cloudcmd.configPath,
-        }),
+        configManager: config,
     }));
     
     if (port < 0 || port > 65535)

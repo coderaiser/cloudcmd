@@ -107,11 +107,21 @@ const modules = {
     filePicker,
 };
 
+const {
+    createConfigManager,
+    configPath,
+} = cloudcmd;
+
+const configManager = createConfigManager({
+    configPath,
+}),
+
 app.use(prefix, cloudcmd({
     socket,  // used by Config, Edit (optional) and Console (required)
     config,  // config data (optional)
     plugins, // DEPRECATED, use User Menu instead
     modules, // optional
+    configManager, // optional
 }));
 
 server.listen(port);

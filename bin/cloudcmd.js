@@ -6,10 +6,19 @@ const Info = require('../package');
 const DIR_SERVER = '../server/';
 
 const {promisify} = require('util');
+
 const wraptile = require('wraptile');
 
 const exit = require(DIR_SERVER + 'exit');
-const config = require(DIR_SERVER + 'config');
+const {
+    createConfig,
+    configPath,
+} = require(DIR_SERVER + 'config');
+
+const config = createConfig({
+    configPath,
+});
+
 const env = require(DIR_SERVER + 'env');
 const prefixer = require(DIR_SERVER + '/prefixer');
 
@@ -208,14 +217,14 @@ function main() {
     if (args['show-config'])
         showConfig();
     
-    const startWraped = wraptile(start, options);
+    const startWraped = wraptile(start, options, config);
     const distribute = require('../server/distribute');
     const importConfig = promisify(distribute.import);
     const caller = (fn) => fn();
     
     importConfig(config)
         .then(args.save ? caller(config.save) : noop)
-        .then(startWraped(options));
+        .then(startWraped);
 }
 
 function validateRoot(root, config) {
@@ -237,14 +246,14 @@ function version() {
     console.log('v' + Info.version);
 }
 
-function start(config) {
+function start(options, config) {
     const SERVER = DIR_SERVER + 'server';
     
     if (!args.server)
         return;
     
     const server = require(SERVER);
-    server(config);
+    server(options, config);
 }
 
 function port(arg) {

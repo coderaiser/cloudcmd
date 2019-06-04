@@ -50,7 +50,9 @@ test('distribute: import: received: no error', async (t) => {
 });
 
 test('distribute: import: received', async (t) => {
+    const configManager = createConfigManager();
     const {done, port} = await connect({
+        configManager,
         config: {
             name: 'bill',
             import: true,
@@ -62,10 +64,9 @@ test('distribute: import: received', async (t) => {
         },
     });
     
-    const config = createConfigManager();
-    config('importUrl', `http://localhost:${port}`);
+    configManager('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import(config);
+    const {status} = await distribute.import(configManager);
     await done();
     
     t.equal(status, 'received','should equal');
@@ -73,7 +74,9 @@ test('distribute: import: received', async (t) => {
 });
 
 test('distribute: import: received: auth: reject', async (t) => {
+    const configManager = createConfigManager();
     const {done, port} = await connect({
+        configManager,
         config: {
             name: 'bill',
             import: true,
@@ -85,10 +88,9 @@ test('distribute: import: received: auth: reject', async (t) => {
         },
     });
     
-    const config = createConfigManager();
-    config('importUrl', `http://localhost:${port}`);
+    configManager('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import(config);
+    const {status} = await distribute.import(configManager);
     await done();
     
     t.equal(status, 'reject', 'should equal');
@@ -96,7 +98,9 @@ test('distribute: import: received: auth: reject', async (t) => {
 });
 
 test('distribute: import: received: auth: accept', async (t) => {
+    const configManager = createConfigManager();
     const {done, port} = await connect({
+        configManager,
         config: {
             name: 'bill',
             import: true,
@@ -108,10 +112,9 @@ test('distribute: import: received: auth: accept', async (t) => {
         },
     });
     
-    const config = createConfigManager();
-    config('importUrl', `http://localhost:${port}`);
+    configManager('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import(config);
+    const {status} = await distribute.import(configManager);
     await done();
     
     t.equal(status, 'received','should equal');
@@ -119,7 +122,9 @@ test('distribute: import: received: auth: accept', async (t) => {
 });
 
 test('distribute: import: received: no name', async (t) => {
+    const configManager = createConfigManager();
     const {done, port} = await connect({
+        configManager,
         config: {
             name: '',
             import: true,
@@ -129,10 +134,9 @@ test('distribute: import: received: no name', async (t) => {
         },
     });
     
-    const config = createConfigManager();
-    config('importUrl', `http://localhost:${port}`);
+    configManager('importUrl', `http://localhost:${port}`);
     
-    const {status} = await distribute.import(config);
+    const {status} = await distribute.import(configManager);
     await done();
     
     t.equal(status, 'received','should equal');
@@ -140,7 +144,9 @@ test('distribute: import: received: no name', async (t) => {
 });
 
 test('distribute: import: error', async (t) => {
+    const configManager = createConfigManager();
     const {done} = await connect({
+        configManager,
         config: {
             import: true,
             export: false,
@@ -149,10 +155,9 @@ test('distribute: import: error', async (t) => {
         },
     });
     
-    const config = createConfigManager();
-    config('importUrl', `http://localhost:0`);
+    configManager('importUrl', `http://localhost:0`);
     
-    const {status} = await distribute.import(config, {
+    const {status} = await distribute.import(configManager, {
         reconnection: false,
     });
     
@@ -163,7 +168,9 @@ test('distribute: import: error', async (t) => {
 });
 
 test('distribute: import: config:change: no export', async (t) => {
+    const configManager = createConfigManager();
     const {done} = await connect({
+        configManager,
         config: {
             import: true,
             export: false,
@@ -172,9 +179,7 @@ test('distribute: import: config:change: no export', async (t) => {
         },
     });
     
-    const config = createConfigManager();
-    
-    const {status} = await distribute.import(config, {
+    const {status} = await distribute.import(configManager, {
         reconnection: false,
     });
     

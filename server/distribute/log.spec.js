@@ -2,7 +2,7 @@
 
 const test = require('supertape');
 const log = require('./log');
-const config = require('../config');
+const {createConfig} = require('../config');
 
 test('distribute: log: getMessage', (t) => {
     const e = 'hello';
@@ -23,7 +23,9 @@ test('distribute: log: getMessage: message', (t) => {
 });
 
 test('distribute: log: config', (t) => {
+    const config = createConfig();
     const logOriginal = config('log');
+    
     config('log', true);
     log('log', 'test message');
     config('log', logOriginal);

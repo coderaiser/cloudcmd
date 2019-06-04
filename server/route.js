@@ -10,18 +10,15 @@ const flop = require('flop');
 const ponse = require('ponse');
 const rendy = require('rendy');
 const format = require('format-io');
-const squad = require('squad');
-const apart = require('apart');
 const currify = require('currify');
 const tryToCatch = require('try-to-catch');
 const once = require('once');
 
-const config = require(DIR_SERVER + 'config');
 const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
-const prefix = squad(prefixer, apart(config, 'prefix'));
+const getPrefix = (config) => prefixer(config('prefix'));
 
 const onceRequire = once(require);
 
@@ -172,7 +169,7 @@ function indexProcessing(config, options) {
             name,
         }),
         fm: left + right,
-        prefix: prefix(),
+        prefix: getPrefix(config),
         config: JSON.stringify(config('*')),
         columns: Columns[config('columns')],
     });
@@ -183,7 +180,7 @@ function indexProcessing(config, options) {
 function buildIndex(config, html, json) {
     const panel = CloudFunc.buildFromJSON({
         data: json,
-        prefix: prefix(),
+        prefix: getPrefix(config),
         template: Template,
     });
     

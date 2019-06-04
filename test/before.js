@@ -24,6 +24,7 @@ function before(options, fn = options) {
         config,
         plugins,
         modules,
+        configManager,
     } = options;
     
     const app = express();
@@ -41,6 +42,7 @@ function before(options, fn = options) {
         socket,
         plugins,
         config: assign(defaultConfig(), config),
+        configManager,
         modules,
     }));
     

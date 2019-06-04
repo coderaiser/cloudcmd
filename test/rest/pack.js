@@ -21,13 +21,15 @@ const fixture = {
 
 const defaultOptions = {
     config: {
+        auth: false,
         root: join(__dirname, '..'),
     },
 };
+
 const cloudcmd = require(cloudcmdPath);
 
 const serveOnce = require('serve-once');
-const {request} = serveOnce(cloudcmd);
+const {request} = serveOnce(cloudcmd, defaultOptions);
 
 const once = promisify((name, extract, fn) => {
     extract.once(name, (header, stream) => {
@@ -76,7 +78,6 @@ test('cloudcmd: rest: pack: tar: put: file', async (t) => {
     
     const name = String(Math.random()) + '.tar.gz';
     
-    const cloudcmd = reRequire(cloudcmdPath);
     const {request} = serveOnce(cloudcmd, defaultOptions);
     
     await request.put(`/api/v1/pack`, {

@@ -321,7 +321,10 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     reRequire(routePath);
     const cloudcmd = reRequire(cloudcmdPath);
     
-    const {request} = serveOnce(cloudcmd);
+    const {request} = serveOnce(cloudcmd, {
+        configManager: createConfigManager(),
+    });
+    
     const {body} = await request.get('/');
     
     mockRequire.stop('flop');
@@ -411,6 +414,7 @@ test('cloudcmd: route: no termianl: /fs', async (t) => {
     
     const options = {
         config,
+        configManager: createConfigManager(),
     };
     
     const {request} = serveOnce(cloudcmd);
