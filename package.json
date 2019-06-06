@@ -163,7 +163,6 @@
     "eslint-plugin-putout": "^1.0.1",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "fast-async": "^7.0.6",
-    "file-loader": "^3.0.1",
     "gritty": "^4.7.0",
     "gunzip-maybe": "^1.3.1",
     "html-looks-like": "^1.0.2",
