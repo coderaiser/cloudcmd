@@ -223,7 +223,7 @@ function main() {
     const caller = (fn) => fn();
     
     importConfig(config)
-        .then(args.save ? caller(config.save) : noop)
+        .then(args.save ? caller(config.write) : noop)
         .then(startWraped);
 }
 
