@@ -43,7 +43,12 @@ const rules = [{
 },
 ...cssPlugins.map(extract), {
     test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
-    loader: 'url-loader?limit=100000',
+    use: {
+        loader: 'url-loader',
+        options: {
+            limit: 100000,
+        },
+    },
 }];
 
 module.exports = {
