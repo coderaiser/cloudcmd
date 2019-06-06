@@ -1,3 +1,13 @@
+2019.06.06, v12.6.2
+
+fix:
+- (cloudcmd) config: save -> write (#247)
+
+feature:
+- (package) remove file-loader
+- (package) url-loader v2.0.0
+
+
 2019.06.04, v12.6.1
 
 fix:
