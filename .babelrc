@@ -7,7 +7,6 @@
     }],
   ],
   "plugins": [
-    "@babel/plugin-syntax-dynamic-import",
     ["module:fast-async", {
       "compiler": {
         "generators": false,

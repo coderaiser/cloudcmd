@@ -140,7 +140,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@cloudcmd/clipboard": "^1.0.2",
     "@cloudcmd/create-element": "^1.0.0",
