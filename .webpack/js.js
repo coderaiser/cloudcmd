@@ -119,9 +119,7 @@ function externals(context, request, fn) {
     if (!isDev)
         return fn();
     
-    const list = [
-        'es6-promise',
-    ];
+    const list = [];
     
     if (list.includes(request))
         return fn(null, request);

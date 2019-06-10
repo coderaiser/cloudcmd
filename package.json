@@ -156,7 +156,6 @@
     "css-loader": "^2.0.1",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^3.0.2",
-    "es6-promise": "^4.0.5",
     "eslint": "^6.0.0-alpha",
     "eslint-plugin-node": "^9.0.1",
     "eslint-plugin-putout": "^1.0.1",

@@ -20,7 +20,6 @@ const {
 window.Emitify = require('emitify/legacy');
 
 module.exports = window.CloudCmd = (config) => {
-    window.Promise = window.Promise || require('es6-promise');
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     
