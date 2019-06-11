@@ -92,7 +92,7 @@ function show(position, panel) {
             current = refreshButton.parentElement;
     }
     
-    if (!parent || (parent && parent !== current))
+    if (!parent || parent && parent !== current)
         current.appendChild(image);
     
     DOM.show(image);

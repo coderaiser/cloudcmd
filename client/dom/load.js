@@ -105,7 +105,7 @@ module.exports.put = (url, body) => {
         if (!event.lengthComputable)
             return;
         
-        const percent = (event.loaded / event.total) * 100;
+        const percent = event.loaded / event.total * 100;
         const count = Math.round(percent);
         
         emitter.emit('progress', count);
