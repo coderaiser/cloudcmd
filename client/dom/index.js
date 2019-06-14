@@ -628,8 +628,8 @@ function CmdProto() {
         if (!current) {
             panel = DOM.getByDataName('js-left');
         } else {
-            files = current.parentElement,
-            panel = files.parentElement,
+            files = current.parentElement;
+            panel = files.parentElement;
             isLeft = panel.getAttribute('data-name') === 'js-left';
         }
         
@@ -870,7 +870,7 @@ function CmdProto() {
         CloudCmd.loadDir({
             path,
         });
-    },
+    };
     
     this.duplicatePanel = () => {
         const Info = CurrentInfo;
@@ -930,7 +930,7 @@ function CmdProto() {
         });
     };
     
-    this.CurrentInfo = CurrentInfo,
+    this.CurrentInfo = CurrentInfo;
     
     this.updateCurrentInfo = (currentFile) => {
         const info = DOM.CurrentInfo;

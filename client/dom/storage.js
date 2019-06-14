@@ -45,7 +45,7 @@ module.exports.set = (name, data, callback) => {
     exec(callback, error);
     
     return module.exports;
-},
+};
 
 /** Если доступен Storage принимаем из него данные*/
 module.exports.get = (name, callback) => {
@@ -54,7 +54,7 @@ module.exports.get = (name, callback) => {
     exec(callback, null, ret);
     
     return module.exports;
-},
+};
 
 /** функция чистит весь кэш для всех каталогов*/
 module.exports.clear = (callback) => {
