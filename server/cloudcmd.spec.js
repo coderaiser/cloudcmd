@@ -193,7 +193,7 @@ test('cloudcmd: getIndexPath: development', (t) => {
 });
 
 test('cloudcmd: sw', async (t) => {
-    const {status}= await request.get('/sw.js');
+    const {status} = await request.get('/sw.js');
     
     t.equal(status, 200, 'should return sw');
     t.end();

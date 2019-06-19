@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const fs= require('fs');
+const fs = require('fs');
 const readFilesSync = require('@cloudcmd/read-files-sync');
 const isMap = (a) => /\.map$/.test(a);
 const not = (fn) => (a) => !fn(a);

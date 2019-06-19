@@ -7,7 +7,7 @@ const {
     prompt,
     confirm,
     progress,
-}= require('smalltalk');
+} = require('smalltalk');
 
 const title = 'Cloud Commander';
 

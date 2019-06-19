@@ -95,11 +95,9 @@ test('cloudfunc: render', (t) => {
     timeEnd('CloudFunc.buildFromJSON');
     
     if (isNotOk) {
-        console.log(
-            `Error in char number: ${i}\n`,
+        console.log(`Error in char number: ${i}\n`,
             `Expect: ${Expect.substr(i)}\n`,
-            `Result: ${result.substr(i)}`
-        );
+            `Result: ${result.substr(i)}`);
         
         console.log('buildFromJSON: Not OK');
     }

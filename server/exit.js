@@ -2,7 +2,7 @@
 
 const getMessage = (a) => a && a.message || a;
 
-module.exports= (...args) => {
+module.exports = (...args) => {
     const messages = args.map(getMessage);
     
     console.error(...messages);

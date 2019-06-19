@@ -35,12 +35,10 @@ function EventsProto() {
             if (!/element$/.test(type))
                 throw Error('unknown eventName: ' + type);
             
-            parseArgs(
-                args[EVENT_NAME],
+            parseArgs(args[EVENT_NAME],
                 args[ELEMENT],
                 listener,
-                callback
-            );
+                callback);
             break;
         
         case 'string':
@@ -63,12 +61,10 @@ function EventsProto() {
         
         case 'array':
             eventName.forEach((eventName) => {
-                parseArgs(
-                    eventName,
+                parseArgs(eventName,
                     element,
                     listener,
-                    callback
-                );
+                    callback);
             });
             break;
         
@@ -76,12 +72,10 @@ function EventsProto() {
             Object.keys(eventName).forEach((name) => {
                 const eventListener = eventName[name];
                 
-                parseArgs(
-                    name,
+                parseArgs(name,
                     element,
                     eventListener,
-                    callback
-                );
+                    callback);
             });
             
             break;

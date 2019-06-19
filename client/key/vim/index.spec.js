@@ -297,7 +297,7 @@ test('cloudcmd: client: key: set last file current', (t) => {
 
 test('cloudcmd: client: key: set first file current', (t) => {
     const first = 'first';
-    const previousSibling= {
+    const previousSibling = {
         previousSibling: first,
     };
     
