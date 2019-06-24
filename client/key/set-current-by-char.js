@@ -38,12 +38,13 @@ module.exports = function setCurrentByChar(char, charStore) {
             setted = true;
             DOM.setCurrentFile(byName);
             return true;
-        } else {
-            if (skipN === skipCount)
-                firstByName = byName;
-            
-            --skipCount;
         }
+        
+        if (skipN === skipCount)
+            firstByName = byName;
+        
+        --skipCount;
+    
     };
     
     names
