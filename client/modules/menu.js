@@ -267,7 +267,7 @@ function download(type) {
     if (!files.length)
         return alertNoFiles();
     
-    files.forEach((file) => {
+    for (const file of files) {
         const selected = DOM.isSelected(file);
         const isDir = DOM.isCurrentIsDir(file);
         const path = DOM.getCurrentPath(file);
@@ -302,7 +302,7 @@ function download(type) {
         
         if (selected)
             DOM.toggleSelectedFile(file);
-    });
+    }
 }
 
 function getCurrentPosition() {

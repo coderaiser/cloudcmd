@@ -206,12 +206,12 @@ async function onChange(el) {
 }
 
 function onSave(obj) {
-    Object.keys(obj).forEach((name) => {
+    for (const name of Object.keys(obj)) {
         const data = obj[name];
         
         CloudCmd._config(name, data);
         input.setValue(name, data, Element);
-    });
+    }
 }
 
 async function saveHttp(obj) {

@@ -62,7 +62,7 @@ module.exports = (params) => {
     
     checkPlugins(plugins);
     
-    keys.forEach((name) => {
+    for (const name of keys) {
         let value = options[name];
         
         if (/root/.test(name))
@@ -75,7 +75,7 @@ module.exports = (params) => {
             value = prefixer(value);
         
         config(name, value);
-    });
+    }
     
     config('console', defaultValue(config, 'console', options));
     config('configDialog', defaultValue(config, 'configDialog', options));

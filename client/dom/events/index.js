@@ -60,23 +60,24 @@ function EventsProto() {
             break;
         
         case 'array':
-            eventName.forEach((eventName) => {
+            for (const eventName of eventName) {
                 parseArgs(eventName,
                     element,
                     listener,
                     callback);
-            });
+            }
+            
             break;
         
         case 'object':
-            Object.keys(eventName).forEach((name) => {
+            for (const name of Object.keys(eventName)) {
                 const eventListener = eventName[name];
                 
                 parseArgs(name,
                     element,
                     eventListener,
                     callback);
-            });
+            }
             
             break;
         }

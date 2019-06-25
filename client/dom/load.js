@@ -48,10 +48,10 @@ module.exports.ajax = (params) => {
     
     xhr.open(type, p.url, true);
     
-    Object.keys(headers).forEach((name) => {
+    for (const name of Object.keys(headers)) {
         const value = headers[name];
         xhr.setRequestHeader(name, value);
-    });
+    }
     
     if (p.responseType)
         xhr.responseType = p.responseType;

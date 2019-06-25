@@ -229,9 +229,9 @@ async function patchConfig(manage, {name, request, response, cache}) {
 }
 
 function traverse([manage, json]) {
-    Object.keys(json).forEach((name) => {
+    for (const name of Object.keys(json)) {
         manage(name, json[name]);
-    });
+    }
 }
 
 module.exports._cryptoPass = cryptoPass;

@@ -259,9 +259,9 @@ function CloudCmdProto(DOM) {
         if (!modules)
             return;
         
-        modules.local.forEach((module) => {
+        for (const module of modules.local) {
             load(null, module, doBefore[module]);
-        });
+        }
     });
     
     function baseInit(callback) {

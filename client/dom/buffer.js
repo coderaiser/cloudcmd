@@ -36,17 +36,17 @@ function BufferProto() {
     function addCutClass() {
         const files = DOM.getActiveFiles();
         
-        files.forEach((element) => {
+        for (const element of files) {
             element.classList.add(CLASS);
-        });
+        }
     }
     
     function rmCutClass() {
         const files = DOM.getByClassAll(CLASS);
         
-        [...files].forEach((element) => {
+        for (const element of [...files]) {
             element.classList.remove(CLASS);
-        });
+        }
     }
     
     function callIfEnabled(callback) {
