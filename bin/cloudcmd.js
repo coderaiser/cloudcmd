@@ -217,14 +217,14 @@ function main() {
     if (args['show-config'])
         showConfig();
     
-    const startWraped = wraptile(start, options, config);
     const distribute = require('../server/distribute');
     const importConfig = promisify(distribute.import);
     const caller = (fn) => fn();
     
     importConfig(config)
         .then(args.save ? caller(config.write) : noop)
-        .then(startWraped);
+    
+    start(options, config);
 }
 
 function validateRoot(root, config) {
