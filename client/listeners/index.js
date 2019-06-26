@@ -325,10 +325,12 @@ function onDragStart(event) {
         link.href = prefixURL + '/pack' + Info.path + EXT;
     }
     
-    event.dataTransfer.setData('DownloadURL',
+    event.dataTransfer.setData(
+        'DownloadURL',
         'application/octet-stream' + ':' +
         name + ':' +
-        link);
+        link
+    );
 }
 
 function getLIElement(element) {

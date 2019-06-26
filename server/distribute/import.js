@@ -92,36 +92,48 @@ module.exports = (config, options, fn) => {
     const statusStore = fullstore();
     const statusStoreWraped = wraptile(statusStore);
     
-    const onConfig = squad(close,
+    const onConfig = squad(
+        close,
         logWraped(isLog, importStr, `config received from ${colorUrl}`),
         statusStoreWraped('received'),
-        forEachKey(config),);
+        forEachKey(config),
+    );
     
-    const onError = squad(superFn('error'),
+    const onError = squad(
+        superFn('error'),
         logWraped(isLog, config, importStr),
         addUrl(colorUrl),
-        getMessage,);
+        getMessage,
+    );
     
-    const onConnectError = squad(superFn('connect_error'),
+    const onConnectError = squad(
+        superFn('connect_error'),
         logWraped(isLog, importStr),
         addUrl(colorUrl),
-        getDescription,);
+        getDescription,
+    );
     
     const onConnect = emitAuth(importUrl, config, socket);
     const onAccept = logWraped(isLog, importStr,`${connectedStr} to ${colorUrl}`);
-    const onDisconnect = squad(done(fn, statusStore),
+    const onDisconnect = squad(
+        done(fn, statusStore),
         logWraped(isLog, importStr, `${disconnectedStr} from ${colorUrl}`),
         rmListeners(socket, {
             onError,
             onConnect,
             onConfig,
-        }),);
+        }),
+    );
     
-    const onChange = squad(logWraped(isLog, importStr),
-        config,);
+    const onChange = squad(
+        logWraped(isLog, importStr),
+        config,
+    );
     
-    const onReject = squad(superFn('reject'),
-        logWraped(isLog, importStr, tokenRejectedStr),);
+    const onReject = squad(
+        superFn('reject'),
+        logWraped(isLog, importStr, tokenRejectedStr),
+    );
     
     socket.on('connect', onConnect);
     socket.on('accept', onAccept);

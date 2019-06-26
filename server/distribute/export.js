@@ -46,8 +46,10 @@ module.exports = (config, socket) => {
     const distributePrefix = `${prefix}/distribute`;
     const isLog = config('log');
     
-    const onError = squad(logWraped(isLog, exportStr),
-        getMessage,);
+    const onError = squad(
+        logWraped(isLog, exportStr),
+        getMessage,
+    );
     
     const onConnectError = squad(logWraped(isLog, exportStr), getDescription);
     
