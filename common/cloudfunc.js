@@ -41,8 +41,10 @@ module.exports.formatMsg = (msg, name, status) => {
 module.exports.getTitle = (options) => {
     options = options || {};
     
-    const path = options.path || Path();
-    const {name} = options;
+    const {
+        path = Path(),
+        name,
+    } = options;
     
     const array = [
         name || NAME,
@@ -110,6 +112,8 @@ module.exports.buildFromJSON = (params) => {
     const {
         prefix,
         template,
+        sort = 'name',
+        order = 'asc',
     } = params;
     
     const templateFile = template.file;
@@ -119,9 +123,6 @@ module.exports.buildFromJSON = (params) => {
     const path = encode(json.path);
     
     const {files} = json;
-    
-    const sort = params.sort || 'name';
-    const order = params.order || 'asc';
     
     /*
      * Строим путь каталога в котором мы находимся
@@ -196,11 +197,10 @@ module.exports.buildFromJSON = (params) => {
         const {
             type,
             mode,
+            date = '--.--.----',
+            owner = 'root',
         } = file;
         const size = getSize(file);
-        
-        const date = file.date || '--.--.----';
-        const owner = file.owner || 'root';
         
         const linkResult = rendy(templateLink, {
             link,

@@ -43,7 +43,9 @@ module.exports.ajax = (params) => {
     const isArray = itype.array(p.data);
     const isArrayBuf = itype(p.data) === 'arraybuffer';
     const type = p.type || p.method || 'GET';
-    const headers = p.headers || {};
+    const {
+        headers = {},
+    } = p;
     const xhr = new XMLHttpRequest();
     
     xhr.open(type, p.url, true);

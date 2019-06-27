@@ -324,13 +324,15 @@ function CloudCmdProto(DOM) {
             options = {};
         }
         
-        const panel = options.panel || Info.panel;
+        const {
+            panel = Info.panel,
+            currentName,
+        } = options;
         const path = DOM.getCurrentDirPath(panel);
         
         const isRefresh = true;
         const history = false;
         const noCurrent = options ? options.noCurrent : false;
-        const {currentName} = options;
         
         CloudCmd.loadDir({
             path,
