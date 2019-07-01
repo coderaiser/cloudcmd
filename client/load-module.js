@@ -18,8 +18,10 @@ module.exports = function loadModule(params) {
     if (!params)
         return;
     
-    const {path} = params;
-    const name = params.name || path && noJS(pascalCase(path));
+    const {
+        path,
+        name = path && noJS(pascalCase(path)),
+    } = params;
     const doBefore = params.dobefore;
     
     if (CloudCmd[name])
