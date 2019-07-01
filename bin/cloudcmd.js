@@ -7,8 +7,6 @@ const DIR_SERVER = '../server/';
 
 const {promisify} = require('util');
 
-const wraptile = require('wraptile');
-
 const exit = require(DIR_SERVER + 'exit');
 const {
     createConfig,
@@ -222,7 +220,7 @@ function main() {
     const caller = (fn) => fn();
     
     importConfig(config)
-        .then(args.save ? caller(config.write) : noop)
+        .then(args.save ? caller(config.write) : noop);
     
     start(options, config);
 }
