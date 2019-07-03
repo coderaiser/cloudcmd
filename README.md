@@ -1,4 +1,5 @@
 # Cloud Commander v12.6.2 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![OpenCollective](https://opencollective.com/cloudcmd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/cloudcmd/sponsors/badge.svg)](#sponsors)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_shield)
 
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL], [Now][NowURL])
 
@@ -239,3 +240,6 @@ Become a sponsor and get your logo on our README on Github with a link to your s
 
 MIT
 
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_large)
