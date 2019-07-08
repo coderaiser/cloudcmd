@@ -111,11 +111,10 @@ function CloudCmdProto(DOM) {
         
         let panelChanged;
         
-        if (!noCurrent)
-            if (panel && panel !== Info.panel) {
-                DOM.changePanel();
-                panelChanged = true;
-            }
+        if (!noCurrent && panel && panel !== Info.panel) {
+            DOM.changePanel();
+            panelChanged = true;
+        }
         
         let imgPosition;
         
