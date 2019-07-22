@@ -20,8 +20,9 @@ module.exports = function loadModule(params) {
     
     const {
         path,
-        name = path && noJS(pascalCase(path)),
     } = params;
+    
+    const name = path && noJS(pascalCase(path));
     const doBefore = params.dobefore;
     
     if (CloudCmd[name])

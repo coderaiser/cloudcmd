@@ -62,9 +62,9 @@ function EventsProto() {
             break;
         
         case 'array':
-            for (const eventName of eventName) {
+            for (const name of eventName) {
                 parseArgs(
-                    eventName,
+                    name,
                     element,
                     listener,
                     callback
