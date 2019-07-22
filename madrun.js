@@ -3,42 +3,40 @@
 const {
     run,
     parallel,
+    predefined,
 } = require('madrun');
 
 const {version} = require('./package');
+const {eslint} = predefined;
 
-const dirs = [
+const names = [
     'bin/cloudcmd.js',
     'common',
     'server',
-].join(' ');
-
-const dirsTest = [
     'test',
     'bin/release.js',
     'webpack.config.js',
     'cssnano.config.js',
     '.webpack',
+    '.eslintrc.js',
     'madrun.js',
     '{client,server,common}/**/*.spec.js',
-].join(' ');
+];
 
 module.exports = {
     'start': () => 'node bin/cloudcmd.js',
     'start:dev': () => `NODE_ENV=development ${run('start')}`,
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
-    'lint': () => run(['putout', 'lint:*', 'spell']),
-    'lint:server': () => `eslint -c .eslintrc.server ${dirs} --ignore-pattern *.spec.js`,
-    'lint:test': () => `eslint --ignore-pattern '!.*' ${dirsTest}`,
-    'lint:client': () => 'eslint --env browser client static --ignore-pattern .cloudcmd.menu.js',
+    'lint:all': () => run(['lint', 'lint:css', 'spell']),
+    'lint': () => eslint({names}),
     'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
-    'fix:lint': () => run(['putout', 'lint:*'], '--fix'),
+    'fix:lint': () => run('lint', '--fix'),
     'test': () => `tape 'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`,
     'test:client': () => `tape 'test/client/**/*.js`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
-    'wisdom': () => run(['lint', 'build', 'test']),
+    'wisdom': () => run(['lint:all', 'build', 'test']),
     'wisdom:type': () => 'bin/release.js',
     'docker:pull:node': () => 'docker pull node',
     'docker:pull:alpine': () => 'docker pull mhart/alpine-node',
@@ -75,9 +73,7 @@ module.exports = {
     'watch:client': () => run('6to5:client','--watch'),
     'watch:client:dev': () => run('6to5:client:dev', '--watch'),
     'watch:server': () => 'nodemon bin/cloudcmd.js',
-    'watch:lint': () => `nodemon -w client -w server -w webpack.config.js -x ${run(['lint:client', 'lint:server'])}`,
-    'watch:lint:client': () => `nodemon -w client -w webpack.config.js -x ${run('lint:client')}`,
-    'watch:lint:server': () => `nodemon -w server -w common -x ${run('lint:server')}`,
+    'watch:lint': () => `nodemon -w client -w server -w webpack.config.js -x ${run('lint')}`,
     'watch:test': () => `nodemon -w client -w server -w test -w common -x ${run('test')}`,
     'watch:test:client': () => `nodemon -w client -w test/client -x ${run('test:client')}`,
     'watch:test:server': () => `nodemon -w client -w test/client -x ${run('test:server')}`,
