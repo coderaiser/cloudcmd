@@ -1,7 +1,5 @@
 'use strict';
 
-/* global btoa */
-
 module.exports = (str) => {
     if (typeof btoa === 'function')
         return btoa(str);

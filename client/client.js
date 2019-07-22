@@ -243,8 +243,8 @@ function CloudCmdProto(DOM) {
         const showLoad = Images.show.load;
         
         const doBefore = {
-            'edit': showLoad,
-            'menu': showLoad,
+            edit: showLoad,
+            menu: showLoad,
         };
         
         const load = (name, path, dobefore) => {

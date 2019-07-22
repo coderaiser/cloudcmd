@@ -117,8 +117,8 @@ function getMenuData(isAuth) {
     const menu = {
         'Paste': Buffer.paste,
         'New': {
-            'File': DOM.promptNewFile,
-            'Directory': DOM.promptNewDir,
+            File: DOM.promptNewFile,
+            Directory: DOM.promptNewDir,
         },
         'Upload': () => {
             CloudCmd.Upload.show();

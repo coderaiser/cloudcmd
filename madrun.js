@@ -11,6 +11,7 @@ const {eslint} = predefined;
 
 const names = [
     'bin/cloudcmd.js',
+    'client',
     'common',
     'server',
     'test',

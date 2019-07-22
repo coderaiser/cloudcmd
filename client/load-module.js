@@ -18,9 +18,7 @@ module.exports = function loadModule(params) {
     if (!params)
         return;
     
-    const {
-        path,
-    } = params;
+    const {path} = params;
     
     const name = path && noJS(pascalCase(path));
     const doBefore = params.dobefore;

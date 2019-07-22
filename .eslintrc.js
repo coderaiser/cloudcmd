@@ -1,6 +1,9 @@
 'use strict';
 
 module.exports = {
+    env: {
+        browser: true,
+    },
     rules: {
         'no-console': 0,
     },
@@ -19,10 +22,5 @@ module.exports = {
         extends: [
             'plugin:node/recommended',
         ],
-    }, {
-        files: ['client', 'static'],
-        env: {
-            browser: true,
-        },
     }],
 };

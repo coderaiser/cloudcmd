@@ -105,7 +105,7 @@ const create = async () => {
     CloudCmd.on('active-dir', config.if('syncConsolePath', cd(konsole.handler)));
     
     konsole.addShortCuts({
-        'P': () => {
+        P: () => {
             const command = konsole.getPromptText();
             const path = DOM.getCurrentDirPath();
             
