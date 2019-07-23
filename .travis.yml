@@ -4,6 +4,9 @@ node_js:
     - 10
     - 8
 
+cache:
+  npm: false
+
 matrix:
     allow_failures:
         - os: windows
