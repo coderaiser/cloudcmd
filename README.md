@@ -1,4 +1,4 @@
-# Cloud Commander v12.6.2 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![OpenCollective](https://opencollective.com/cloudcmd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/cloudcmd/sponsors/badge.svg)](#sponsors) [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_shield)
+# Cloud Commander v12.6.2 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_shield)
 
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL], [Now][NowURL])
 
@@ -166,74 +166,6 @@ There is a lot ways to be involved in `Cloud Commander` development:
 - if you find a bug or got idea to share [create an issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
 - if you fixed a bug, typo or implemented new feature [create pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
 - if you know languages you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
-
-## Backers
-Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/cloudcmd#backer)]
-
-[![](https://opencollective.com/cloudcmd/backer/0/avatar.svg)](https://opencollective.com/cloudcmd/backer/0/website)
-[![](https://opencollective.com/cloudcmd/backer/1/avatar.svg)](https://opencollective.com/cloudcmd/backer/1/website)
-[![](https://opencollective.com/cloudcmd/backer/2/avatar.svg)](https://opencollective.com/cloudcmd/backer/2/website)
-[![](https://opencollective.com/cloudcmd/backer/3/avatar.svg)](https://opencollective.com/cloudcmd/backer/3/website)
-[![](https://opencollective.com/cloudcmd/backer/4/avatar.svg)](https://opencollective.com/cloudcmd/backer/4/website)
-[![](https://opencollective.com/cloudcmd/backer/5/avatar.svg)](https://opencollective.com/cloudcmd/backer/5/website)
-[![](https://opencollective.com/cloudcmd/backer/6/avatar.svg)](https://opencollective.com/cloudcmd/backer/6/website)
-[![](https://opencollective.com/cloudcmd/backer/7/avatar.svg)](https://opencollective.com/cloudcmd/backer/7/website)
-[![](https://opencollective.com/cloudcmd/backer/8/avatar.svg)](https://opencollective.com/cloudcmd/backer/8/website)
-[![](https://opencollective.com/cloudcmd/backer/9/avatar.svg)](https://opencollective.com/cloudcmd/backer/9/website)
-[![](https://opencollective.com/cloudcmd/backer/10/avatar.svg)](https://opencollective.com/cloudcmd/backer/10/website)
-[![](https://opencollective.com/cloudcmd/backer/11/avatar.svg)](https://opencollective.com/cloudcmd/backer/11/website)
-[![](https://opencollective.com/cloudcmd/backer/12/avatar.svg)](https://opencollective.com/cloudcmd/backer/12/website)
-[![](https://opencollective.com/cloudcmd/backer/13/avatar.svg)](https://opencollective.com/cloudcmd/backer/13/website)
-[![](https://opencollective.com/cloudcmd/backer/14/avatar.svg)](https://opencollective.com/cloudcmd/backer/14/website)
-[![](https://opencollective.com/cloudcmd/backer/15/avatar.svg)](https://opencollective.com/cloudcmd/backer/15/website)
-[![](https://opencollective.com/cloudcmd/backer/16/avatar.svg)](https://opencollective.com/cloudcmd/backer/16/website)
-[![](https://opencollective.com/cloudcmd/backer/17/avatar.svg)](https://opencollective.com/cloudcmd/backer/17/website)
-[![](https://opencollective.com/cloudcmd/backer/18/avatar.svg)](https://opencollective.com/cloudcmd/backer/18/website)
-[![](https://opencollective.com/cloudcmd/backer/19/avatar.svg)](https://opencollective.com/cloudcmd/backer/19/website)
-[![](https://opencollective.com/cloudcmd/backer/20/avatar.svg)](https://opencollective.com/cloudcmd/backer/20/website)
-[![](https://opencollective.com/cloudcmd/backer/21/avatar.svg)](https://opencollective.com/cloudcmd/backer/21/website)
-[![](https://opencollective.com/cloudcmd/backer/22/avatar.svg)](https://opencollective.com/cloudcmd/backer/22/website)
-[![](https://opencollective.com/cloudcmd/backer/23/avatar.svg)](https://opencollective.com/cloudcmd/backer/23/website)
-[![](https://opencollective.com/cloudcmd/backer/24/avatar.svg)](https://opencollective.com/cloudcmd/backer/24/website)
-[![](https://opencollective.com/cloudcmd/backer/25/avatar.svg)](https://opencollective.com/cloudcmd/backer/25/website)
-[![](https://opencollective.com/cloudcmd/backer/26/avatar.svg)](https://opencollective.com/cloudcmd/backer/26/website)
-[![](https://opencollective.com/cloudcmd/backer/27/avatar.svg)](https://opencollective.com/cloudcmd/backer/27/website)
-[![](https://opencollective.com/cloudcmd/backer/28/avatar.svg)](https://opencollective.com/cloudcmd/backer/28/website)
-[![](https://opencollective.com/cloudcmd/backer/29/avatar.svg)](https://opencollective.com/cloudcmd/backer/29/website)
-
-## Sponsors
-Become a sponsor and get your logo on our README on Github with a link to your site. [[Become a sponsor](https://opencollective.com/cloudcmd#sponsor)]
-
-[![](https://opencollective.com/cloudcmd/sponsor/0/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/0/website)
-[![](https://opencollective.com/cloudcmd/sponsor/1/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/1/website)
-[![](https://opencollective.com/cloudcmd/sponsor/2/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/2/website)
-[![](https://opencollective.com/cloudcmd/sponsor/3/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/3/website)
-[![](https://opencollective.com/cloudcmd/sponsor/4/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/4/website)
-[![](https://opencollective.com/cloudcmd/sponsor/5/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/5/website)
-[![](https://opencollective.com/cloudcmd/sponsor/6/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/6/website)
-[![](https://opencollective.com/cloudcmd/sponsor/7/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/7/website)
-[![](https://opencollective.com/cloudcmd/sponsor/8/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/8/website)
-[![](https://opencollective.com/cloudcmd/sponsor/9/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/9/website)
-[![](https://opencollective.com/cloudcmd/sponsor/10/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/10/website)
-[![](https://opencollective.com/cloudcmd/sponsor/11/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/11/website)
-[![](https://opencollective.com/cloudcmd/sponsor/12/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/12/website)
-[![](https://opencollective.com/cloudcmd/sponsor/13/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/13/website)
-[![](https://opencollective.com/cloudcmd/sponsor/14/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/14/website)
-[![](https://opencollective.com/cloudcmd/sponsor/15/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/15/website)
-[![](https://opencollective.com/cloudcmd/sponsor/16/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/16/website)
-[![](https://opencollective.com/cloudcmd/sponsor/17/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/17/website)
-[![](https://opencollective.com/cloudcmd/sponsor/18/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/18/website)
-[![](https://opencollective.com/cloudcmd/sponsor/19/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/19/website)
-[![](https://opencollective.com/cloudcmd/sponsor/20/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/20/website)
-[![](https://opencollective.com/cloudcmd/sponsor/21/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/21/website)
-[![](https://opencollective.com/cloudcmd/sponsor/22/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/22/website)
-[![](https://opencollective.com/cloudcmd/sponsor/23/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/23/website)
-[![](https://opencollective.com/cloudcmd/sponsor/24/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/24/website)
-[![](https://opencollective.com/cloudcmd/sponsor/25/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/25/website)
-[![](https://opencollective.com/cloudcmd/sponsor/26/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/26/website)
-[![](https://opencollective.com/cloudcmd/sponsor/27/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/27/website)
-[![](https://opencollective.com/cloudcmd/sponsor/28/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/28/website)
-[![](https://opencollective.com/cloudcmd/sponsor/29/avatar.svg)](https://opencollective.com/cloudcmd/sponsor/29/website)
 
 ## License
 
