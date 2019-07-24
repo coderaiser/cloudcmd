@@ -717,6 +717,48 @@ app.use(prefix, cloudcmd({
 server.listen(port);
 ```
 
+Here is example with two `Config Managers`:
+
+```js
+const http = require('http');
+const cloudcmd = require('cloudcmd');
+const io = require('socket.io');
+const app = require('express')();
+
+const port = 8000;
+const prefix1 = '/1';
+const prefix2 = '/2';
+
+const {createConfigManager} = cloudcmd;
+
+const server = http.createServer(app);
+const socket1 = io.listen(server, {
+    path: `${prefix1}/socket.io`
+});
+
+const socket2 = io.listen(server, {
+    path: `${prefix2}/socket.io`
+});
+
+const configManager1 = createConfigManager();
+configManager1('name', '1');
+
+const configManager2 = createConfigManager();
+configManager2('name', '2');
+
+app.use(prefix1, cloudcmd({
+    socket: socket1,
+    configManager: configManager1,
+}));
+
+app.use(prefix2, cloudcmd({
+    socket: socket2,
+    configManager: configManager2,
+}));
+
+server.listen(port);
+```
+
 If you want to enable authorization, you can pass credentials to Cloud Commander with a config. To generate a password, you can install `criton` with `npm i criton --save`, and use it (or any other way) to generate a hash of a password.
 
 ```js
