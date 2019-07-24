@@ -673,7 +673,7 @@ const prefix = '/';
 
 const server = http.createServer(app);
 const socket = io.listen(server, {
-    path: `{prefix}socket.io`
+    path: `${prefix}socket.io`
 });
 
 const config = {
