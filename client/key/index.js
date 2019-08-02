@@ -40,7 +40,7 @@ function KeyProto() {
     };
     
     this.bind = () => {
-        Events.addKey(listener);
+        Events.addKey(listener, true);
         Binded = true;
     };
     
@@ -57,7 +57,16 @@ function KeyProto() {
     }
     
     function listener(event) {
-        const {keyCode} = event;
+        const {body} = document;
+        const {
+            keyCode,
+            target,
+        } = event;
+        
+        // chrome double event pass
+        if (target != body)
+            return;
+        
         const alt = event.altKey;
         const ctrl = event.ctrlKey;
         const shift = event.shiftKey;
