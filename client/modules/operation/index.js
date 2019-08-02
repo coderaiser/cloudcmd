@@ -33,7 +33,7 @@ const Operation = {};
 
 let Loaded;
 
-let copyFn = callbackify(RESTful.copy);
+let copyFn = callbackify(RESTful.cp);
 let moveFn = callbackify(RESTful.mv);
 let deleteFn = callbackify(RESTful.delete);
 let extractFn = callbackify(RESTful.extract);
