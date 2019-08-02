@@ -1,3 +1,22 @@
+2019.08.02, v12.6.3
+
+fix:
+- (operation) first copy after startup fails (close #251)
+- (key) chrome keydown event double pass
+- (client) load
+- (cloudcmd) server start when importListen enabled
+
+feature:
+- (cloudcmd) simplify lint
+- (package) markdown-it v9.0.0
+- (package) deepmerge v4.0.0
+- (package) yaspeller v6.0.0
+- (package) css-loader v3.0.0
+- (babel) remove unused @babel/plugin-syntax-dynamic-import
+- (cloudcmd) rm Promise polyfill
+- (package) rm Object.assign polyfill
+
+
 2019.06.06, v12.6.2
 
 fix:
