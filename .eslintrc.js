@@ -1,12 +1,6 @@
 'use strict';
 
 module.exports = {
-    env: {
-        browser: true,
-    },
-    rules: {
-        'no-console': 0,
-    },
     extends: [
         'plugin:putout/recommended',
     ],
@@ -15,12 +9,26 @@ module.exports = {
         'node',
     ],
     overrides: [{
-        files: ['server'],
+        files: ['bin/release.js'],
         rules: {
-            'no-process-exit': 0,
+            'no-console': 'off',
+            'node/shebang': 'off',
         },
         extends: [
             'plugin:node/recommended',
         ],
+    },{
+        files: ['bin/cloudcmd.js'],
+        rules: {
+            'no-console': 'off',
+        },
+        extends: [
+            'plugin:node/recommended',
+        ],
+    }, {
+        files: ['{client,common}/**/*.js'],
+        env: {
+            browser: true,
+        },
     }],
 };

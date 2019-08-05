@@ -3,14 +3,13 @@
 const test = require('supertape');
 const tryToCatch = require('try-to-catch');
 
-const rest = require('.');
 const {
     _formatMsg,
     _getWin32RootMsg,
     _isRootWin32,
     _isRootAll,
     _onPUT,
-} = rest;
+} = require('.');
 
 test('rest: formatMsg', (t) => {
     const result = _formatMsg('hello', 'world');

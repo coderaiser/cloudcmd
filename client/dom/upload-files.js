@@ -5,7 +5,6 @@
 const {eachSeries} = require('execon');
 const wraptile = require('wraptile/legacy');
 
-const DOM = require('.');
 const load = require('./load');
 const Images = require('./images');
 const {alert} = require('./dialog');
@@ -15,7 +14,7 @@ const {FS} = require('../../common/cloudfunc');
 const onEnd = wraptile(_onEnd);
 const loadFile = wraptile(_loadFile);
 
-const {getCurrentDirPath: getPathWhenRootEmpty} = DOM;
+const {getCurrentDirPath: getPathWhenRootEmpty} = require('.');
 
 module.exports = (dir, files) => {
     if (!files) {

@@ -54,6 +54,7 @@
     "lint:css": "madrun lint:css",
     "spell": "madrun spell",
     "fix:lint": "madrun fix:lint",
+    "lint:progress": "madrun lint:progress",
     "test": "madrun test",
     "test:client": "madrun test:client",
     "test:server": "madrun test:server",

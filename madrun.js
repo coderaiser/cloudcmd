@@ -7,7 +7,6 @@ const {
 } = require('madrun');
 
 const {version} = require('./package');
-const {eslint} = predefined;
 
 const names = [
     'bin/cloudcmd.js',
@@ -24,16 +23,19 @@ const names = [
     '{client,server,common}/**/*.spec.js',
 ];
 
+const {putout} = predefined;
+
 module.exports = {
     'start': () => 'node bin/cloudcmd.js',
     'start:dev': () => `NODE_ENV=development ${run('start')}`,
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'lint:all': () => run(['lint', 'lint:css', 'spell']),
-    'lint': () => eslint({names}),
+    'lint': () => putout(names),
     'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
-    'fix:lint': () => run('lint', '--fix'),
+    'fix:lint': () => run(['lint', 'lint:css'], '--fix'),
+    'lint:progress': () => run('lint', '-f progress'),
     'test': () => `tape 'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`,
     'test:client': () => `tape 'test/client/**/*.js`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
