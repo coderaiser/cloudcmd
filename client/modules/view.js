@@ -296,12 +296,9 @@ async function getMediaElement(src) {
     return [null, element];
 }
 
-function check(src, callback) {
+function check(src) {
     if (typeof src !== 'string')
         throw Error('src should be a string!');
-    
-    if (typeof callback !== 'function')
-        throw Error('callback should be a function');
 }
 
 /**
