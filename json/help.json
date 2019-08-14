@@ -42,7 +42,6 @@
     "--dropbox                  ": "enable dropbox integration",
     "--dropbox-token            ": "set dropbox token",
     "--log                      ": "enable logging",
-    "--user-menu                ": "enable user menu",
     "--no-show-config           ": "do not show config values",
     "--no-server                ": "do not start server",
     "--no-auth                  ": "disable authorization",
@@ -71,6 +70,5 @@
     "--no-show-file-name        ": "do not show file name in view and edit",
     "--no-dropbox               ": "disable dropbox integration",
     "--no-dropbox-token         ": "unset dropbox token",
-    "--no-log                   ": "disable logging",
-    "--no-user-menu             ": "disable user menu"
+    "--no-log                   ": "disable logging"
 }

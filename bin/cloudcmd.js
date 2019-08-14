@@ -80,7 +80,6 @@ const args = require('minimist')(argv.slice(2), {
         'import-listen',
         'log',
         'dropbox',
-        'user-menu',
     ],
     default: {
         'server'      : true,
@@ -119,7 +118,6 @@ const args = require('minimist')(argv.slice(2), {
         'one-file-panel': choose(env.bool('one_file_panel'), config('oneFilePanel')),
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
-        'user-menu': choose(env.bool('user_menu'), config('userMenu')),
         'keys-panel': env.bool('keys_panel') || config('keysPanel'),
         'import-token': env('import_token') || config('importToken'),
         'export-token': env('export_token') || config('exportToken'),
@@ -189,7 +187,6 @@ function main() {
     config('importToken', args['import-token']);
     config('importListen', args['import-listen']);
     config('importUrl', args['import-url']);
-    config('userMenu', args['user-menu']);
     
     config('dropbox', args['dropbox']);
     config('dropboxToken', args['dropbox-token'] || '');

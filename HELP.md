@@ -109,7 +109,6 @@ Cloud Commander supports the following command-line parameters:
 | `--dropbox`                   | enable dropbox integration
 | `--dropbox-token`             | set dropbox token
 | `--log`                       | enable logging
-| `--user-menu`                 | enable user menu
 | `--no-show-config`            | do not show config values
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
@@ -138,7 +137,6 @@ Cloud Commander supports the following command-line parameters:
 | `--no-dropbox`                | disable dropbox integration
 | `--no-dropbox-token`          | unset dropbox token
 | `--no-log`                    | disable logging
-| `--no-user-menu`              | disable user menu
 
 For options not specified by command-line parameters, Cloud Commander then reads configuration data from `~/.cloudcmd.json`. It uses port `8000` by default.
 
@@ -425,7 +423,6 @@ Here's a description of all options:
     "dropbox"               : false,    // disable dropbox integration
     "dropboxToken"          : "",       // unset dropbox token
     "log"                   : true,     // logging
-    "userMenu"              : false     // do not show user menu
 }
 ```
 
