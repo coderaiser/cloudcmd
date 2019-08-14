@@ -73,8 +73,8 @@ module.exports = (options) => (emitter) => {
             
             const [cancel] = await Dialog.confirm(error + '\n Continue?');
             
-            if (!cancel)
-                emitter.continue();
+            if (!done && !cancel)
+                return emitter.continue();
             
             emitter.abort();
             progress.remove();
