@@ -1,3 +1,16 @@
+2019.08.14, v13.0.0
+
+fix:
+- (set-listeners) can not continue first error operation error
+- (view) getMediaElement: play video/audio
+
+feature:
+- (cloudcmd) only user menu on f2
+- (cloudcmd) remove plugins
+- (package) putout v5.2.1
+- (package) style-loader v1.0.0
+
+
 2019.08.02, v12.6.3
 
 fix:
