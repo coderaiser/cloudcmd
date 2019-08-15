@@ -9,6 +9,7 @@ const currify = require('currify');
 const squad = require('squad');
 const tryToCatch = require('try-to-catch');
 const wraptile = require('wraptile');
+const compression = require('compression');
 
 const two = currify((f, a, b) => f(a, b));
 const exit = require(DIR_SERVER + 'exit');
@@ -51,6 +52,8 @@ module.exports = async (options, config) => {
     const socketServer = io(server, {
         path: `${prefix}/socket.io`,
     });
+    
+    app.use(compression());
     
     app.use(prefix, cloudcmd({
         config: options,
