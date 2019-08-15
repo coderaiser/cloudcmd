@@ -6,9 +6,12 @@ const fs = require('fs');
 const {join} = require('path');
 const {promisify} = require('util');
 
+const tryCatch = require('try-catch');
 const tryToCatch = require('try-to-catch');
 const currify = require('currify');
 const findUp = require('find-up');
+const putout = require('putout');
+const {codeframe} = putout;
 
 const readFile = promisify(fs.readFile);
 
@@ -49,19 +52,38 @@ async function onGET({req, res, menuName}) {
     
     const homeMenuPath = join(homedir(), menuName);
     const menuPath = currentMenuPath || homeMenuPath;
-    const [e, data] = await tryToCatch(readFile, menuPath, 'utf8');
+    const [e, source] = await tryToCatch(readFile, menuPath, 'utf8');
     
-    if (!e)
-        return res
-            .type('js')
-            .send(data);
-    
-    if (e.code !== 'ENOENT')
+    if (e && e.code !== 'ENOENT')
         return res
             .status(404)
             .send(e.message);
     
-    sendDefaultMenu(res);
+    if (e)
+        return sendDefaultMenu(res);
+    
+    const [parseError, result] = tryCatch(putout, source, {
+        plugins: [
+            'convert-esm-to-commonjs',
+            'strict-mode',
+        ],
+    });
+    
+    if (parseError)
+        return res
+            .type('js')
+            .send(`
+                throw Error(\`<pre>path: ${menuPath}\n\n${codeframe({
+    error: parseError,
+    source,
+    highlightCode: false,
+})}
+                </pre>\`);
+            `);
+    
+    res
+        .type('js')
+        .send(result.code);
 }
 
 function sendDefaultMenu(res) {
