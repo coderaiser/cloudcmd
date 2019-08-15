@@ -47,6 +47,8 @@ async function show() {
     const res = await fetch(`${CloudCmd.prefix}/api/v1/user-menu?dir=${dirPath}`);
     const [error, userMenu] = tryCatch(getUserMenu, await res.text());
     
+    Images.hide();
+    
     if (error)
         return Dialog.alert(`User menu error: ${error.message}`);
     
@@ -73,8 +75,6 @@ async function show() {
     
     const afterShow = () => select.focus();
     const autoSize = true;
-    
-    Images.hide();
     
     CloudCmd.View.show([button, select], {
         autoSize,
