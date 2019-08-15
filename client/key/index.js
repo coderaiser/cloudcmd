@@ -57,15 +57,7 @@ function KeyProto() {
     }
     
     function listener(event) {
-        const {body} = document;
-        const {
-            keyCode,
-            target,
-        } = event;
-        
-        // chrome double event pass
-        if (target != body)
-            return;
+        const {keyCode} = event;
         
         const alt = event.altKey;
         const ctrl = event.ctrlKey;
