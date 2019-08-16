@@ -154,7 +154,7 @@
     "socket.io-client": "^2.1.1",
     "squad": "^3.0.0",
     "table": "^5.0.2",
-    "thread-it": "^1.0.1",
+    "thread-it": "^1.1.0",
     "try-catch": "^2.0.0",
     "try-to-catch": "^1.0.2",
     "tryrequire": "^2.0.1",

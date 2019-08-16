@@ -36,7 +36,13 @@ module.exports = {
     'spell': () => 'yaspeller .',
     'fix:lint': () => run(['lint', 'lint:css'], '--fix'),
     'lint:progress': () => run('lint', '-f progress'),
-    'test': () => `tape 'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`,
+    'test': () => {
+        const env = 'THREAD_IT_COUNT=0';
+        const cmd = 'tape';
+        const names = `'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`;
+        
+        return `${env} ${cmd} ${names}`;
+    },
     'test:client': () => `tape 'test/client/**/*.js`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
