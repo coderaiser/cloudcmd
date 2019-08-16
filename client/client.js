@@ -249,14 +249,22 @@ function CloudCmdProto(DOM) {
         }
     };
     
+    async function saveCurrentName(currentName) {
+        await Storage.set('current-name', currentName);
+    }
+    
     async function baseInit() {
         const files = DOM.getFiles();
         
         CloudCmd.on('current-file', DOM.updateCurrentInfo);
+        CloudCmd.on('current-name', saveCurrentName);
+        
+        const name = await Storage.get('current-name');
+        const currentFile = name && DOM.getCurrentByName(name) || files[0];
         
         /* выделяем строку с первым файлом */
         if (files)
-            DOM.setCurrentFile(files[0], {
+            DOM.setCurrentFile(currentFile, {
                 // when hash is present
                 // it should be handled with this.route
                 // overwre otherwise
@@ -361,7 +369,6 @@ function CloudCmdProto(DOM) {
             if (!newObj)
                 return;
             
-            /* eslint require-atomic-updates:0 */
             options.sort = sort;
             options.order = order;
             
