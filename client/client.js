@@ -19,17 +19,16 @@ const {unregisterSW} = require('./sw/register');
 const jonny = require('jonny/legacy');
 const currify = require('currify/legacy');
 
-const bind = (f, ...a) => () => f(...a);
-const noop = () => {};
 const noJS = (a) => a.replace(/.js$/, '');
+
+const loadCSS = promisify(load.css);
+const loadJS = promisify(load.js);
 
 const {
     apiURL,
     formatMsg,
     buildFromJSON,
 } = require('../common/cloudfunc');
-
-const callbackify = require('../common/callbackify');
 
 const loadModule = require('./load-module');
 
@@ -137,19 +136,7 @@ function CloudCmdProto(DOM) {
      * выполняет весь функционал по
      * инициализации
      */
-    this.init = (prefix, config) => {
-        const func = bind(exec.series, [
-            initModules,
-            baseInit,
-            loadStyle,
-            exec.with(CloudCmd.route, location.hash),
-        ], noop);
-        
-        const funcBefore = (callback) => {
-            const src = prefix + CloudCmd.DIRCLIENT_MODULES + 'polyfill.js';
-            load.js(src, callback);
-        };
-        
+    this.init = async (prefix, config) => {
         CloudCmd.prefix = prefix;
         CloudCmd.prefixURL = `${prefix}${apiURL}`;
         CloudCmd.prefixSocket = config.prefixSocket;
@@ -171,14 +158,21 @@ function CloudCmdProto(DOM) {
         if (config.oneFilePanel)
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
         
-        exec.if(document.body.scrollIntoViewIfNeeded, func, funcBefore);
+        if (!document.body.scrollIntoViewIfNeeded)
+            await loadJS(prefix + CloudCmd.DIRCLIENT_MODULES + 'polyfill.js');
+        
+        await initModules();
+        await baseInit();
+        await loadStyle();
+        
+        CloudCmd.route(location.hash);
     };
     
-    function loadStyle(callback) {
+    async function loadStyle() {
         const {prefix} = CloudCmd;
         const name = prefix + '/dist/cloudcmd.common.css';
         
-        load.css(name, callback);
+        await loadCSS(name);
     }
     
     this.route = (path) => {
@@ -203,12 +197,12 @@ function CloudCmdProto(DOM) {
         CloudCmd.execFromModule(module, 'show');
     };
     
-    this.logOut = () => {
+    this.logOut = async () => {
         const url = CloudCmd.prefix + '/logout';
         const error = () => document.location.reload();
         const {prefix} = CloudCmd;
         
-        DOM.Storage.clear();
+        await DOM.Storage.clear();
         unregisterSW(prefix);
         DOM.load.ajax({
             url,
@@ -216,7 +210,7 @@ function CloudCmdProto(DOM) {
         });
     };
     
-    const initModules = callbackify(async () => {
+    const initModules = async () => {
         exec.if(CloudCmd.Key, () => {
             Key = new CloudCmd.Key();
             CloudCmd.Key = Key;
@@ -253,9 +247,9 @@ function CloudCmdProto(DOM) {
         for (const module of modules.local) {
             load(null, module, doBefore[module]);
         }
-    });
+    };
     
-    function baseInit(callback) {
+    async function baseInit() {
         const files = DOM.getFiles();
         
         CloudCmd.on('current-file', DOM.updateCurrentInfo);
@@ -279,15 +273,12 @@ function CloudCmdProto(DOM) {
         Listeners.initKeysPanel();
         
         if (!CloudCmd.config('dirStorage'))
-            return callback();
+            return;
         
-        Storage.get(dirPath, (error, data) => {
-            if (!data) {
-                data = getJSONfromFileTable();
-                Storage.set(dirPath, data);
-            }
-            callback();
-        });
+        const data = await Storage.get(dirPath);
+        
+        if (!data)
+            await Storage.set(dirPath, getJSONfromFileTable());
     }
     
     function getPanels() {

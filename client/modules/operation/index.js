@@ -412,26 +412,26 @@ async function _processFiles(options, data) {
                 names,
             };
             
-            operation(files, () => {
-                DOM.Storage.remove(from, () => {
-                    const {
-                        panel,
-                        panelPassive,
-                    } = Info;
-                    
-                    const setCurrent = () => {
-                        const currentName = name || data.names[0];
-                        DOM.setCurrentByName(currentName);
-                    };
-                    
-                    if (!Info.isOnePanel)
-                        CloudCmd.refresh({
-                            panel: panelPassive,
-                            noCurrent: true,
-                        });
-                    
-                    CloudCmd.refresh({panel}, setCurrent);
-                });
+            operation(files, async () => {
+                await DOM.Storage.remove(from);
+                
+                const {
+                    panel,
+                    panelPassive,
+                } = Info;
+                
+                const setCurrent = () => {
+                    const currentName = name || data.names[0];
+                    DOM.setCurrentByName(currentName);
+                };
+                
+                if (!Info.isOnePanel)
+                    CloudCmd.refresh({
+                        panel: panelPassive,
+                        noCurrent: true,
+                    });
+                
+                CloudCmd.refresh({panel}, setCurrent);
             });
         }
     }

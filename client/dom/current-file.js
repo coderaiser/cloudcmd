@@ -168,7 +168,6 @@ function unsetCurrentFile(currentFile) {
  */
 module.exports.setCurrentFile = (currentFile, options) => {
     const o = options;
-    const CENTER = true;
     const currentFileWas = DOM.getCurrentFile();
     
     if (!currentFile)
@@ -203,6 +202,7 @@ module.exports.setCurrentFile = (currentFile, options) => {
     }
     
     /* scrolling to current file */
+    const CENTER = true;
     DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
     
     CloudCmd.emit('current-file', currentFile);
@@ -210,6 +210,11 @@ module.exports.setCurrentFile = (currentFile, options) => {
     CloudCmd.emit('current-name', DOM.getCurrentName(currentFile));
     
     return DOM;
+};
+
+this.setCurrentByName = (name) => {
+    const current = DOM.getCurrentByName(name);
+    return DOM.setCurrentFile(current);
 };
 
 /*

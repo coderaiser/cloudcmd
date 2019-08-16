@@ -5,6 +5,7 @@
 const itype = require('itype/legacy');
 const exec = require('execon');
 const jonny = require('jonny/legacy');
+const tryToPromiseAll = require('../../common/try-to-promise-all');
 
 const Util = require('../../common/util');
 const callbackify = require('../../common/callbackify');
@@ -25,15 +26,6 @@ const DOM = {
     ...currentFile,
     ...new CmdProto(),
 };
-
-const read = callbackify(async (...args) => {
-    const [e, data] = await RESTful.read(...args);
-    
-    if (e)
-        throw e;
-    
-    return data;
-});
 
 DOM.Images = Images;
 DOM.load = load;
@@ -262,12 +254,13 @@ function CmdProto() {
      * @callback
      * @currentFile
      */
-    this.loadCurrentHash = (callback, currentFile) => {
+    this.loadCurrentHash = async (currentFile) => {
         const current = currentFile || DOM.getCurrentFile();
         const query = '?hash';
         const link = DOM.getCurrentPath(current);
         
-        read(link + query, callback);
+        const [, data] = await RESTful.read(link + query);
+        return data;
     };
     
     /**
@@ -275,12 +268,13 @@ function CmdProto() {
      * @callback
      * @currentFile
      */
-    this.loadCurrentTime = (callback, currentFile) => {
+    this.loadCurrentTime = async (currentFile) => {
         const current = currentFile || DOM.getCurrentFile();
         const query = '?time';
         const link = DOM.getCurrentPath(current);
         
-        read(link + query, callback);
+        const [, data] = await RESTful.read(link + query);
+        return data;
     };
     
     /**
@@ -314,55 +308,57 @@ function CmdProto() {
         return owner.textContent;
     };
     
+    const mixArgs = (f) => (a, b) => f(b, a);
+    
     /**
      * unified way to get current file content
      *
      * @param callback
      * @param currentFile
      */
-    this.getCurrentData = (callback, currentFile) => {
-        let hash;
+    this.getCurrentData = callbackify(mixArgs(async (callback, currentFile) => {
         const {Dialog} = DOM;
         const Info = DOM.CurrentInfo;
         const current = currentFile || DOM.getCurrentFile();
         const path = DOM.getCurrentPath(current);
         const isDir = DOM.isCurrentIsDir(current);
         
-        const func = (error, data) => {
-            const ONE_MEGABYTE = 1024 * 1024 * 1024;
-            
-            if (!error) {
-                if (itype.object(data))
-                    data = jonny.stringify(data);
-                
-                const {length} = data;
-                
-                if (hash && length < ONE_MEGABYTE)
-                    DOM.saveDataToStorage(path, data, hash);
-            }
-            
-            callback(error, data);
-        };
-        
         if (Info.name === '..') {
             Dialog.alert.noFiles();
             return callback(Error('No files selected!'));
         }
         
-        if (isDir)
-            return read(path, func);
+        if (isDir) {
+            const [e, data] = await RESTful.read(path);
+            
+            if (e)
+                throw e;
+            
+            return data;
+        }
         
-        DOM.checkStorageHash(path, (error, equal, hashNew) => {
-            if (error)
-                return callback(error);
-            
-            if (equal)
-                return DOM.getDataFromStorage(path, callback);
-            
-            hash = hashNew;
-            read(path, func);
-        });
-    };
+        const [hashNew, hash] = await DOM.checkStorageHash(path);
+        
+        if (hash === hashNew)
+            return await DOM.getDataFromStorage(path);
+        
+        let [e, data] = await RESTful.read(path);
+        
+        if (e)
+            return;
+        
+        const ONE_MEGABYTE = 1024 * 1024 * 1024;
+        
+        if (itype.object(data))
+            data = jonny.stringify(data);
+        
+        const {length} = data;
+        
+        if (hash && length < ONE_MEGABYTE)
+            await DOM.saveDataToStorage(path, data, hashNew);
+        
+        return data;
+    }));
     
     /**
      * unified way to get RefreshButton
@@ -372,11 +368,6 @@ function CmdProto() {
         const refresh = DOM.getByDataName('js-refresh', currentPanel);
         
         return refresh;
-    };
-    
-    this.setCurrentByName = (name) => {
-        const current = DOM.getCurrentByName(name);
-        return DOM.setCurrentFile(current);
     };
     
     /**
@@ -530,28 +521,21 @@ function CmdProto() {
     /**
      * check storage hash
      */
-    this.checkStorageHash = (name, callback) => {
-        const {parallel} = exec;
+    this.checkStorageHash = async (name) => {
         const nameHash = name + '-hash';
-        const getStoreHash = exec.with(Storage.get, nameHash);
         
         if (typeof name !== 'string')
             throw Error('name should be a string!');
         
-        if (typeof callback !== 'function')
-            throw Error('callback should be a function!');
+        const [error, loadHash, storeHash] = await tryToPromiseAll([
+            DOM.loadCurrentHash(),
+            Storage.get(nameHash),
+        ]);
         
-        parallel([DOM.loadCurrentHash, getStoreHash], (error, loadHash, storeHash) => {
-            let equal;
-            const isContain = /error/.test(loadHash);
-            
-            if (isContain)
-                error = loadHash;
-            else if (loadHash === storeHash)
-                equal = true;
-            
-            callback(error, equal, loadHash);
-        });
+        if (error)
+            throw error;
+        
+        return [loadHash, storeHash];
     };
     
     /**
@@ -562,25 +546,21 @@ function CmdProto() {
      * @param hash
      * @param callback
      */
-    this.saveDataToStorage = function(name, data, hash, callback) {
+    this.saveDataToStorage = async (name, data, hash) => {
         const isDir = DOM.isCurrentIsDir();
+        
+        if (isDir)
+            return;
+        
+        hash = hash || await DOM.loadCurrentHash();
+        
         const nameHash = name + '-hash';
         const nameData = name + '-data';
         
-        if (isDir)
-            return exec(callback);
+        await Storage.set(nameHash, hash);
+        await Storage.set(nameData, data);
         
-        exec.if(hash, () => {
-            Storage.set(nameHash, hash);
-            Storage.set(nameData, data);
-            
-            exec(callback, hash);
-        }, (callback) => {
-            DOM.loadCurrentHash((error, loadHash) => {
-                hash = loadHash;
-                callback();
-            });
-        });
+        return hash;
     };
     
     /**
@@ -590,7 +570,7 @@ function CmdProto() {
      * @param data
      * @param callback
      */
-    this.getDataFromStorage = (name, callback) => {
+    this.getDataFromStorage = callbackify(async (name, callback) => {
         const nameHash = name + '-hash';
         const nameData = name + '-data';
         const isDir = DOM.isCurrentIsDir();
@@ -598,11 +578,13 @@ function CmdProto() {
         if (isDir)
             return exec(callback);
         
-        exec.parallel([
-            exec.with(Storage.get, nameData),
-            exec.with(Storage.get, nameHash),
-        ], callback);
-    };
+        const result = Promise.all([
+            await Storage.get(nameData),
+            await Storage.get(nameHash),
+        ]);
+        
+        return result;
+    });
     
     this.getFM = () => {
         return DOM.getPanel().parentElement;

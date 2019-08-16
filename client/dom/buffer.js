@@ -3,8 +3,8 @@
 /* global CloudCmd */
 
 const jonny = require('jonny/legacy');
-const exec = require('execon');
 
+const tryToPromiseAll = require('../../common/try-to-promise-all');
 const Storage = require('./storage');
 const DOM = require('./');
 
@@ -58,7 +58,19 @@ function BufferProto() {
         showMessage('Buffer disabled in config!');
     }
     
-    function copy() {
+    async function readBuffer() {
+        const [e, result] = await tryToPromiseAll([
+            Storage.get(COPY),
+            Storage.get(CUT),
+        ]);
+        
+        return [
+            e,
+            ...result,
+        ];
+    }
+    
+    async function copy() {
         const names = getNames();
         const from = Info.dirPath;
         
@@ -67,14 +79,14 @@ function BufferProto() {
         if (!names.length)
             return;
         
-        Storage.remove(CUT)
-            .set(COPY, {
-                from,
-                names,
-            });
+        await Storage.remove(CUT);
+        await Storage.set(COPY, {
+            from,
+            names,
+        });
     }
     
-    function cut() {
+    async function cut() {
         const names = getNames();
         const from = Info.dirPath;
         
@@ -85,11 +97,10 @@ function BufferProto() {
         
         addCutClass();
         
-        Storage
-            .set(CUT, {
-                from,
-                names,
-            });
+        await Storage.set(CUT, {
+            from,
+            names,
+        });
     }
     
     function clear() {
@@ -99,33 +110,28 @@ function BufferProto() {
         rmCutClass();
     }
     
-    function paste() {
-        const copy = Storage.get.bind(Storage, COPY);
-        const cut = Storage.get.bind(Storage, CUT);
+    async function paste() {
+        const [error, cp, ct] = await readBuffer();
         
-        exec.parallel([copy, cut], (error, cp, ct) => {
-            const opStr = cp ? 'copy' : 'move';
-            const opData = cp || ct;
-            const {Operation} = CloudCmd;
-            const msg = 'Path is same!';
-            const path = Info.dirPath;
-            
-            if (!error && !cp && !ct)
-                error = 'Buffer is empty!';
-            
-            if (error)
-                return showMessage(error);
-            
-            const data = jonny.parse(opData);
-            data.to = path;
-            
-            if (data.from === path)
-                return showMessage(msg);
-            
-            Operation.show(opStr, data);
-            clear();
-        });
+        if (error || !cp && !ct)
+            return showMessage(error || 'Buffer is empty!');
+        
+        const opStr = cp ? 'copy' : 'move';
+        const opData = cp || ct;
+        const {Operation} = CloudCmd;
+        const msg = 'Path is same!';
+        const path = Info.dirPath;
+        
+        const data = jonny.parse(opData);
+        data.to = path;
+        
+        if (data.from === path)
+            return showMessage(msg);
+        
+        Operation.show(opStr, data);
+        clear();
     }
     
     return Buffer;
 }
+
