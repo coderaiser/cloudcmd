@@ -1,3 +1,17 @@
+2019.08.16, v13.1.0
+
+fix:
+- (user-menu) hide load on error
+- (key) keys block
+
+feature:
+- (cloudcmd) add ability to remember position of current file on reload
+- (madrun) disable web workers, while testing
+- (user-menu) speed up user menu parsing with help of worker threads
+- (user-menu) add ability to used EcmaScript Modules, improve error handling
+- (server) add compress: speed up client side load
+
+
 2019.08.14, v13.0.1
 
 fix:
