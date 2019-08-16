@@ -6,12 +6,17 @@ const fs = require('fs');
 const {join} = require('path');
 const {promisify} = require('util');
 
-const tryCatch = require('try-catch');
 const tryToCatch = require('try-to-catch');
 const currify = require('currify');
 const findUp = require('find-up');
-const putout = require('putout');
-const {codeframe} = putout;
+const threadIt = require('thread-it');
+const {codeframe} = require('putout');
+const putout = threadIt('putout');
+
+threadIt.init();
+
+// warm up worker cache
+transpile('');
 
 const readFile = promisify(fs.readFile);
 
@@ -62,12 +67,7 @@ async function onGET({req, res, menuName}) {
     if (e)
         return sendDefaultMenu(res);
     
-    const [parseError, result] = tryCatch(putout, source, {
-        plugins: [
-            'convert-esm-to-commonjs',
-            'strict-mode',
-        ],
-    });
+    const [parseError, result] = await transpile(source);
     
     if (parseError)
         return res
@@ -92,3 +92,11 @@ function sendDefaultMenu(res) {
     });
 }
 
+function transpile(source) {
+    return tryToCatch(putout, source, {
+        plugins: [
+            'convert-esm-to-commonjs',
+            'strict-mode',
+        ],
+    });
+}

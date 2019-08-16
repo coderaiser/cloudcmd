@@ -10,6 +10,7 @@ const squad = require('squad');
 const tryToCatch = require('try-to-catch');
 const wraptile = require('wraptile');
 const compression = require('compression');
+const threadIt = require('thread-it');
 
 const two = currify((f, a, b) => f(a, b));
 const exit = require(DIR_SERVER + 'exit');
@@ -21,6 +22,7 @@ const promisifySelf = squad(promisify, bind);
 const shutdown = wraptile(async (promises) => {
     console.log('closing cloudcmd...');
     await Promise.all(promises);
+    threadIt.terminate();
     process.exit(0);
 });
 

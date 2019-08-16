@@ -5,6 +5,7 @@ const {join} = require('path');
 
 const test = require('supertape');
 const serveOnce = require('serve-once');
+const threadIt = require('thread-it');
 
 const userMenu = require('./user-menu');
 const {request} = serveOnce(userMenu);
@@ -20,6 +21,8 @@ test('cloudcmd: user menu', async (t) => {
     const {body} = await request.get(`/api/v1/user-menu?dir=${__dirname}`, {
         options,
     });
+    
+    threadIt.terminate();
     
     t.equal(userMenuFile, body, 'should equal');
     t.end();
