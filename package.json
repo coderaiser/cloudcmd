@@ -180,7 +180,7 @@
     "emitify": "^3.0.2",
     "eslint": "^6.0.0-alpha",
     "eslint-plugin-node": "^9.0.1",
-    "eslint-plugin-putout": "^1.0.1",
+    "eslint-plugin-putout": "^2.0.0",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "fast-async": "^7.0.6",
     "gritty": "^4.7.0",
