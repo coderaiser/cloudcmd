@@ -162,6 +162,7 @@
     "writejson": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/code-frame": "^7.5.5",
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "@cloudcmd/clipboard": "^1.0.2",

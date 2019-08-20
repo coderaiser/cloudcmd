@@ -72,13 +72,16 @@ async function onGET({req, res, menuName}) {
     if (parseError)
         return res
             .type('js')
-            .send(`
-                throw Error(\`<pre>path: ${menuPath}\n\n${codeframe({
-    error: parseError,
-    source,
-    highlightCode: false,
-})}
+            .send(`const e = Error(\`<pre>path: ${menuPath}\n\n${codeframe({
+                error: parseError,
+                source,
+                highlightCode: false,
+            })}
                 </pre>\`);
+                
+                e.code = 'frame';
+                
+                throw e;
             `);
     
     res

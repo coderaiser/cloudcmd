@@ -7,10 +7,13 @@ require('../../../css/user-menu.css');
 const currify = require('currify/legacy');
 const wraptile = require('wraptile/legacy');
 const {promisify} = require('es6-promisify');
+const fullstore = require('fullstore/legacy');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 const tryCatch = require('try-catch');
 const tryToCatch = require('try-to-catch/legacy');
+const parse = require('./parse-error');
+const {codeFrameColumns} = require('@babel/code-frame');
 
 const Images = require('../../dom/images');
 const Dialog = require('../../dom/dialog');
@@ -18,6 +21,7 @@ const getUserMenu = require('./get-user-menu');
 const navigate = require('./navigate');
 
 const loadCSS = promisify(load.css);
+const sourceStore = fullstore();
 
 const Name = 'UserMenu';
 CloudCmd[Name] = module.exports;
@@ -45,12 +49,15 @@ async function show() {
     
     const {dirPath} = CurrentInfo;
     const res = await fetch(`${CloudCmd.prefix}/api/v1/user-menu?dir=${dirPath}`);
-    const [error, userMenu] = tryCatch(getUserMenu, await res.text());
+    const source = await res.text();
+    const [error, userMenu] = tryCatch(getUserMenu, source);
     
     Images.hide();
     
     if (error)
-        return Dialog.alert(`User menu error: ${error.message}`);
+        return Dialog.alert(getCodeFrame({error, source}));
+    
+    sourceStore(source);
     
     const options = Object
         .keys(userMenu)
@@ -132,18 +139,41 @@ const onKeyDown = currify(async (keys, options, userMenu, e) => {
 const runUserMenu = async (value, options, userMenu) => {
     hide();
     
-    const [e] = await tryToCatch(userMenu[value], {
+    const [error] = await tryToCatch(userMenu[value], {
         DOM,
         CloudCmd,
         tryToCatch,
     });
     
-    if (!e)
+    if (!error)
         return;
     
-    if (e.name === 'Error')
-        return Dialog.alert(e.message);
-    
-    return Dialog.alert(e.stack);
+    const source = sourceStore();
+    return Dialog.alert(getCodeFrame({
+        error,
+        source,
+    }));
 };
+
+function getCodeFrame({error, source}) {
+    if (error.code === 'frame')
+        return error.message;
+    
+    const [line, column] = parse(error);
+    const start = {
+        line,
+        column,
+    };
+    
+    const location = {
+        start,
+    };
+    
+    const frame = codeFrameColumns(source, location, {
+        message: error.message,
+        highlightCode: false,
+    });
+    
+    return `<pre>${frame}</pre>`;
+}
 
