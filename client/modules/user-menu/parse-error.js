@@ -8,6 +8,7 @@ module.exports = (error) => {
         columnNumber,
     } = error;
     
+    // thank you firefox
     if (isNumber(lineNumber) && isNumber(columnNumber))
         return [
             lineNumber,
