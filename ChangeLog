@@ -1,3 +1,14 @@
+2019.08.20, v13.2.0
+
+fix:
+- (menu) autoplay on download in firefox
+- (dom) getCurrentData
+
+feature:
+- (user-menu) improve error handling
+- (package) eslint-plugin-putout v2.0.0
+
+
 2019.08.16, v13.1.0
 
 fix:
