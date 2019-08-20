@@ -25,6 +25,8 @@ const names = [
 
 const {putout} = predefined;
 
+const env = 'THREAD_IT_COUNT=0';
+
 module.exports = {
     'start': () => 'node bin/cloudcmd.js',
     'start:dev': () => `NODE_ENV=development ${run('start')}`,
@@ -36,13 +38,13 @@ module.exports = {
     'spell': () => 'yaspeller .',
     'fix:lint': () => run(['lint', 'lint:css'], '--fix'),
     'lint:progress': () => run('lint', '-f progress'),
-    'test': () => {
-        const env = 'THREAD_IT_COUNT=0';
+    'test:base': () => {
         const cmd = 'tape';
         const names = `'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`;
         
-        return `${env} ${cmd} ${names}`;
+        return `${cmd} ${names}`;
     },
+    'test': () => `${env} ${run('test:base')}`,
     'test:client': () => `tape 'test/client/**/*.js`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
@@ -72,7 +74,7 @@ module.exports = {
     'docker:rm:alpine': () => `docker rmi -f coderaiser/cloudcmd:${version}-alpine`,
     'docker:rm:latest-alpine': () => 'docker rmi -f coderaiser/cloudcmd:latest-alpine',
     'docker:rm-old': () => `${parallel('docker:rm:*')} || true`,
-    'coverage': () => `nyc ${run('test')}`,
+    'coverage': () => `${env} nyc ${run('test:base')}`,
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     '6to5': () => 'webpack --progress',
     '6to5:client': () => run('6to5', '--mode production'),
