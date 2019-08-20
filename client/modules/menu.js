@@ -295,6 +295,8 @@ function download(type) {
             src,
         });
         
+        mute(element);
+        
         const {body} = document;
         const removeChild = body.removeChild.bind(body, element);
         
@@ -303,6 +305,21 @@ function download(type) {
         if (selected)
             DOM.toggleSelectedFile(file);
     }
+}
+
+// prevent firefox from auto play
+function mute(element) {
+    element.contentWindow.addEventListener('load', () => {
+        const video = element.contentWindow
+            .document
+            .body
+            .querySelector('audio, video');
+        
+        if (!video)
+            return;
+        
+        video.pause();
+    });
 }
 
 function getCurrentPosition() {
