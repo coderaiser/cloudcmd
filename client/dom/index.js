@@ -3,7 +3,6 @@
 'use strict';
 
 const itype = require('itype/legacy');
-const exec = require('execon');
 const jonny = require('jonny/legacy');
 const tryToPromiseAll = require('../../common/try-to-promise-all');
 
@@ -340,7 +339,7 @@ function CmdProto() {
         const [hashNew, hash] = await DOM.checkStorageHash(path);
         
         if (hash === hashNew)
-            return await DOM.getDataFromStorage(path);
+            return await Storage.get(`${path}-data`);
         
         let [e, data] = await RESTful.read(path);
         
@@ -562,29 +561,6 @@ function CmdProto() {
         
         return hash;
     };
-    
-    /**
-     * save data to storage
-     *
-     * @param name
-     * @param data
-     * @param callback
-     */
-    this.getDataFromStorage = callbackify(async (name, callback) => {
-        const nameHash = name + '-hash';
-        const nameData = name + '-data';
-        const isDir = DOM.isCurrentIsDir();
-        
-        if (isDir)
-            return exec(callback);
-        
-        const result = Promise.all([
-            await Storage.get(nameData),
-            await Storage.get(nameHash),
-        ]);
-        
-        return result;
-    });
     
     this.getFM = () => {
         return DOM.getPanel().parentElement;
