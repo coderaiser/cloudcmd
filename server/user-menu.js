@@ -72,21 +72,25 @@ async function onGET({req, res, menuName}) {
     if (parseError)
         return res
             .type('js')
-            .send(`const e = Error(\`<pre>path: ${menuPath}\n\n${codeframe({
-                error: parseError,
-                source,
-                highlightCode: false,
-            })}
-                </pre>\`);
-                
-                e.code = 'frame';
-                
-                throw e;
-            `);
+            .send(getError(parseError, source));
     
     res
         .type('js')
         .send(result.code);
+}
+
+function getError(parseError, source) {
+    return `
+        const e = Error(\`<pre>${codeframe({
+        error: parseError,
+        source,
+        highlightCode: false,
+    })}</pre>\`);
+        
+        e.code = 'frame';
+        
+        throw e;
+    `;
 }
 
 function sendDefaultMenu(res) {
