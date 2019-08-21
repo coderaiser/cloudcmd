@@ -58,6 +58,11 @@ function KeyProto() {
     async function listener(event) {
         const {keyCode} = event;
         
+        // strange chrome bug calles listener twice
+        // in second time event misses a lot fields
+        if (typeof event.altKey === 'undefined')
+            return;
+        
         const alt = event.altKey;
         const ctrl = event.ctrlKey;
         const shift = event.shiftKey;
