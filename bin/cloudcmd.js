@@ -59,7 +59,6 @@ const args = require('minimist')(argv.slice(2), {
         'server',
         'online',
         'open',
-        'progress',
         'config-dialog',
         'config-auth',
         'console',
@@ -94,7 +93,6 @@ const args = require('minimist')(argv.slice(2), {
         'username'    : env('username') || config('username'),
         'root'        : choose(env('root'), config('root')),
         'prefix'      : config('prefix'),
-        'progress'    : config('progress'),
         'console'     : choose(env.bool('console'), config('console')),
         'contact'     : choose(env.bool('contact'), config('contact')),
         'terminal'    : choose(env.bool('terminal'), config('terminal')),
@@ -159,7 +157,6 @@ function main() {
     config('online', args.online);
     config('open', args.open);
     config('username', args.username);
-    config('progress', args.progress);
     config('console', args.console);
     config('syncConsolePath', args['sync-console-path']);
     config('showFileName', args['show-file-name']);

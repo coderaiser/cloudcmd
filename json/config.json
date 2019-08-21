@@ -18,7 +18,6 @@
     "root": "/",
     "prefix": "",
     "prefixSocket": "",
-    "progress": true,
     "contact": true,
     "confirmCopy": true,
     "confirmMove": true,
