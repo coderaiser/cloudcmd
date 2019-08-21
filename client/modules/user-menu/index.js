@@ -156,7 +156,9 @@ const runUserMenu = async (value, options, userMenu) => {
 };
 
 function getCodeFrame({error, source}) {
-    if (error.code === 'frame')
+    const {code} = error;
+    
+    if (!code || code === 'frame')
         return error.message;
     
     const [line, column] = parse(error);
