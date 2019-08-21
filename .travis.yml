@@ -10,7 +10,6 @@ cache:
 matrix:
     allow_failures:
         - os: windows
-        - node_js: 12
 
 os:
     - linux
