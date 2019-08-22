@@ -2,8 +2,6 @@
 
 'use strict';
 
-const itype = require('itype/legacy');
-const jonny = require('jonny/legacy');
 const tryToPromiseAll = require('../../common/try-to-promise-all');
 
 const Util = require('../../common/util');
@@ -341,16 +339,12 @@ function CmdProto() {
         if (hash === hashNew)
             return await Storage.get(`${path}-data`);
         
-        let [e, data] = await RESTful.read(path);
+        const [e, data] = await RESTful.read(path);
         
         if (e)
             return;
         
         const ONE_MEGABYTE = 1024 * 1024 * 1024;
-        
-        if (itype.object(data))
-            data = jonny.stringify(data);
-        
         const {length} = data;
         
         if (hash && length < ONE_MEGABYTE)

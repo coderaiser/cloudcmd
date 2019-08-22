@@ -16,7 +16,6 @@ const isDev = process.env.NODE_ENV === 'development';
 const Images = require('./dom/images');
 const {unregisterSW} = require('./sw/register');
 
-const jonny = require('jonny/legacy');
 const currify = require('currify/legacy');
 
 const noJS = (a) => a.replace(/.js$/, '');
@@ -345,15 +344,18 @@ function CloudCmdProto(DOM) {
      *
      */
     function ajaxLoad(path, options, panel, callback) {
+        const {Dialog, RESTful} = DOM;
+        
         const create = async (error, json) => {
-            const {RESTful} = DOM;
+            if (error)
+                return Dialog.alert(`Can't get from store: ${e.message}`);
+            
             const name = options.currentName || Info.name;
-            const obj = jonny.parse(json);
             const isRefresh = options.refresh;
             const {noCurrent} = options;
             
             if (!isRefresh && json)
-                return createFileTable(obj, panel, options, callback);
+                return createFileTable(json, panel, options, callback);
             
             const position = DOM.getPanelPosition(panel);
             const sort = CloudCmd.sort[position];
@@ -364,10 +366,10 @@ function CloudCmdProto(DOM) {
                 order,
             });
             
-            const [, newObj] = await RESTful.read(path + query, 'json');
+            const [e, newObj] = await RESTful.read(path + query, 'json');
             
             if (!newObj)
-                return;
+                return Dialog.alert(`Can't read: ${e.message}`);
             
             options.sort = sort;
             options.order = order;

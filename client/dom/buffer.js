@@ -2,8 +2,6 @@
 
 /* global CloudCmd */
 
-const jonny = require('jonny/legacy');
-
 const tryToPromiseAll = require('../../common/try-to-promise-all');
 const Storage = require('./storage');
 const DOM = require('./');
@@ -59,14 +57,15 @@ function BufferProto() {
     }
     
     async function readBuffer() {
-        const [e, result] = await tryToPromiseAll([
+        const [e, cp, ct] = await tryToPromiseAll([
             Storage.get(COPY),
             Storage.get(CUT),
         ]);
         
         return [
             e,
-            ...result,
+            cp,
+            ct,
         ];
     }
     
@@ -74,7 +73,7 @@ function BufferProto() {
         const names = getNames();
         const from = Info.dirPath;
         
-        clear();
+        await clear();
         
         if (!names.length)
             return;
@@ -90,7 +89,7 @@ function BufferProto() {
         const names = getNames();
         const from = Info.dirPath;
         
-        clear();
+        await clear();
         
         if (!names.length)
             return;
@@ -103,9 +102,9 @@ function BufferProto() {
         });
     }
     
-    function clear() {
-        Storage.remove(COPY)
-            .remove(CUT);
+    async function clear() {
+        await Storage.remove(COPY);
+        await Storage.remove(CUT);
         
         rmCutClass();
     }
@@ -117,19 +116,20 @@ function BufferProto() {
             return showMessage(error || 'Buffer is empty!');
         
         const opStr = cp ? 'copy' : 'move';
-        const opData = cp || ct;
+        const data = cp || ct;
         const {Operation} = CloudCmd;
         const msg = 'Path is same!';
-        const path = Info.dirPath;
+        const to = Info.dirPath;
         
-        const data = jonny.parse(opData);
-        data.to = path;
-        
-        if (data.from === path)
+        if (data.from === to)
             return showMessage(msg);
         
-        Operation.show(opStr, data);
-        clear();
+        Operation.show(opStr, {
+            ...data,
+            to,
+        });
+        
+        await clear();
     }
     
     return Buffer;
