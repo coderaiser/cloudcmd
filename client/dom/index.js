@@ -356,11 +356,8 @@ function CmdProto() {
     /**
      * unified way to get RefreshButton
      */
-    this.getRefreshButton = (panel) => {
-        const currentPanel = panel || DOM.getPanel();
-        const refresh = DOM.getByDataName('js-refresh', currentPanel);
-        
-        return refresh;
+    this.getRefreshButton = (panel = DOM.getPanel()) => {
+        return DOM.getByDataName('js-refresh', panel);
     };
     
     /**
