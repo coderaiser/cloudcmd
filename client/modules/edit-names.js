@@ -20,7 +20,6 @@ const rename = currify(_rename);
 
 let Menu;
 
-const EditNames = exec.bind();
 const ConfigView = {
     beforeClose: () => {
         exec.ifExist(Menu, 'hide');
@@ -67,7 +66,7 @@ function keyListener(event) {
     const {Key} = CloudCmd;
     
     if (ctrlMeta && event.keyCode === Key.S)
-        EditNames.hide();
+        hide();
     
     else if (ctrlMeta && event.keyCode === Key.P)
         smalltalk
@@ -88,9 +87,11 @@ function getActiveNames() {
     return DOM.getFilenames(DOM.getActiveFiles());
 }
 
-module.exports.hide = () => {
+module.exports.hide = hide;
+
+function hide() {
     CloudCmd.Edit.hide();
-};
+}
 
 function setListeners() {
     const element = CloudCmd.Edit.getElement();
@@ -175,7 +176,7 @@ function setMenu(event) {
     const menuData = {
         'Save           Ctrl+S' : () => {
             applyNames();
-            EditNames.hide();
+            hide();
         },
         'Go To Line     Ctrl+G' : () => {
             editor.goToLine();
@@ -196,7 +197,7 @@ function setMenu(event) {
             editor.selectAll();
         },
         'Close          Esc'    : () => {
-            EditNames.hide();
+            hide();
         },
     };
     
