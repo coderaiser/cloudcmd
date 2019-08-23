@@ -4,6 +4,7 @@
 
 const KEY = require('../key');
 const Info = DOM.CurrentInfo;
+
 const {Dialog} = DOM;
 
 const fullstore = require('fullstore/legacy');
@@ -30,7 +31,7 @@ const rmFirst = (a) => {
         .join('');
 };
 
-module.exports = (key, event) => {
+module.exports = async (key, event) => {
     const current = Info.element;
     const {keyCode} = event;
     const prevStore = store();
@@ -115,8 +116,9 @@ module.exports = (key, event) => {
     if (key === '/') {
         event.preventDefault();
         
-        Dialog.prompt('Find', '', {cancel: false})
-            .then(find);
+        const [, value] = await Dialog.prompt('Find', '');
+        
+        value && find(value);
         
         return end();
     }
