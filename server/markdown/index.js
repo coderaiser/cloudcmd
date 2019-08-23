@@ -1,7 +1,7 @@
 'use strict';
 
-const DIR_ROOT = __dirname + '/../';
 const fs = require('fs');
+const {join} = require('path');
 const {
     callbackify,
     promisify,
@@ -9,11 +9,19 @@ const {
 
 const pullout = require('pullout');
 const ponse = require('ponse');
-const markdown = require('markdown-it')();
+const threadIt = require('thread-it');
 
 const readFile = promisify(fs.readFile);
+const parse = threadIt(join(__dirname, 'worker'));
 
-const root = require('./root');
+const root = require('../root');
+
+threadIt.init();
+
+// warm up
+parse('');
+
+const DIR_ROOT = __dirname + '/../../';
 
 module.exports = callbackify(async (name, rootDir, request) => {
     check(name, request);
@@ -48,17 +56,8 @@ async function onGET(request, name, root) {
 
 async function onPUT(request) {
     const data = await pullout(request);
-    
     return parse(data);
 }
-
-const parse = promisify((data, callback) => {
-    process.nextTick(() => {
-        const md = markdown.render(data);
-        
-        callback(null, md);
-    });
-});
 
 function check(name, request) {
     if (typeof name !== 'string')

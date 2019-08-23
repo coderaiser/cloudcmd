@@ -7,11 +7,11 @@ const {promisify} = require('util');
 
 const tryToCatch = require('try-to-catch');
 
-const markdown = require('./markdown');
+const markdown = require('.');
 
 const _markdown = promisify(markdown);
-const fixtureDir = path.join(__dirname, 'fixture', 'markdown');
-const cloudcmd = require('..');
+const fixtureDir = path.join(__dirname, 'fixture');
+const cloudcmd = require('../..');
 const config = {
     auth: false,
 };
