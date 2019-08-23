@@ -366,10 +366,10 @@ function CloudCmdProto(DOM) {
                 order,
             });
             
-            const [e, newObj] = await RESTful.read(path + query, 'json');
+            const [, newObj] = await RESTful.read(path + query, 'json');
             
             if (!newObj)
-                return Dialog.alert(`Can't read: ${e.message}`);
+                return; // that's OK, error handled by RESTful
             
             options.sort = sort;
             options.order = order;
