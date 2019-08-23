@@ -4,7 +4,6 @@
 
 CloudCmd.EditNames = exports;
 
-const smalltalk = require('smalltalk');
 const currify = require('currify/legacy');
 const exec = require('execon');
 const supermenu = require('supermenu');
@@ -59,7 +58,7 @@ module.exports.show = (options) => {
     return CloudCmd.Edit;
 };
 
-function keyListener(event) {
+async function keyListener(event) {
     const ctrl = event.ctrlKey;
     const meta = event.metaKey;
     const ctrlMeta = ctrl || meta;
@@ -68,10 +67,10 @@ function keyListener(event) {
     if (ctrlMeta && event.keyCode === Key.S)
         hide();
     
-    else if (ctrlMeta && event.keyCode === Key.P)
-        smalltalk
-            .prompt('Apply pattern:', '[n][e]', {cancel: false})
-            .then(applyPattern);
+    else if (ctrlMeta && event.keyCode === Key.P) {
+        const [, pattern] = await Dialog.prompt('Apply pattern:', '[n][e]');
+        pattern && applyPattern(pattern);
+    }
     
     event.preventDefault();
 }
@@ -209,15 +208,14 @@ function setMenu(event) {
 
 module.exports.isChanged = isChanged;
 
-function isChanged() {
+async function isChanged() {
     const editor = CloudCmd.Edit.getEditor();
     const msg = 'Apply new names?';
     
     if (!editor.isChanged())
         return;
     
-    smalltalk
-        .confirm(msg, {cancel: false})
-        .then(applyNames);
+    const [, names] = await Dialog.confirm(msg);
+    names && applyNames(names);
 }
 
