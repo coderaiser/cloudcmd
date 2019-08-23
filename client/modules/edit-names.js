@@ -215,7 +215,8 @@ function isChanged() {
     if (!editor.isChanged())
         return;
     
-    Dialog.confirm(msg, {cancel: false})
+    smalltalk
+        .confirm(msg, {cancel: false})
         .then(applyNames);
 }
 
