@@ -11,7 +11,7 @@ const currify = require('currify');
 const findUp = require('find-up');
 const threadIt = require('thread-it');
 const {codeframe} = require('putout');
-const putout = threadIt('putout');
+const putout = threadIt(require.resolve('putout'));
 
 threadIt.init();
 
