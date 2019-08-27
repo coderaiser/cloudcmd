@@ -5,8 +5,8 @@
 
 'use strict';
 
-const currify = require('currify/legacy');
-const wraptile = require('wraptile/legacy');
+const currify = require('currify');
+const wraptile = require('wraptile');
 const {promisify} = require('es6-promisify');
 const exec = require('execon');
 const loadJS = require('load.js').js;

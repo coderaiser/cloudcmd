@@ -2,13 +2,13 @@
 
 /* global DOM */
 
-const Emitify = require('emitify/legacy');
+const Emitify = require('emitify');
 const inherits = require('inherits');
-const rendy = require('rendy/legacy');
+const rendy = require('rendy');
 const exec = require('execon');
 const load = require('load.js');
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 
 const pascalCase = require('just-pascal-case');
 const isDev = process.env.NODE_ENV === 'development';
@@ -16,7 +16,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const Images = require('./dom/images');
 const {unregisterSW} = require('./sw/register');
 
-const currify = require('currify/legacy');
+const currify = require('currify');
 
 const noJS = (a) => a.replace(/.js$/, '');
 
@@ -348,7 +348,7 @@ function CloudCmdProto(DOM) {
         
         const create = async (error, json) => {
             if (error)
-                return Dialog.alert(`Can't get from store: ${e.message}`);
+                return Dialog.alert(`Can't get from store: ${error.message}`);
             
             const name = options.currentName || Info.name;
             const isRefresh = options.refresh;

@@ -2,8 +2,8 @@
 
 /* global DOM */
 
-const fullstore = require('fullstore/legacy');
-const limier = require('limier/legacy');
+const fullstore = require('fullstore');
+const limier = require('limier');
 const Info = DOM.CurrentInfo;
 
 const searchStore = fullstore([]);

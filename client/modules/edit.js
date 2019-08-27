@@ -3,7 +3,7 @@
 'use strict';
 
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 const createElement = require('@cloudcmd/create-element');
 const load = require('load.js');
 const loadJS = promisify(load.js);

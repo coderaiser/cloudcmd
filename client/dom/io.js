@@ -2,7 +2,7 @@
 
 /* global CloudCmd*/
 
-const itype = require('itype/legacy');
+const itype = require('itype');
 const {promisify} = require('es6-promisify');
 
 const {FS} = require('../../common/cloudfunc');

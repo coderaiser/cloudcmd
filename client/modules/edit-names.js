@@ -4,7 +4,7 @@
 
 CloudCmd.EditNames = exports;
 
-const currify = require('currify/legacy');
+const currify = require('currify');
 const exec = require('execon');
 const supermenu = require('supermenu');
 const multiRename = require('multi-rename');

@@ -7,8 +7,8 @@ const {
     Images,
 } = DOM;
 
-const forEachKey = require('for-each-key/legacy');
-const wraptile = require('wraptile/legacy');
+const forEachKey = require('for-each-key');
+const wraptile = require('wraptile');
 
 const format = require('./format');
 

@@ -4,12 +4,12 @@
 
 require('../../css/view.css');
 
-const itype = require('itype/legacy');
-const rendy = require('rendy/legacy');
+const itype = require('itype');
+const rendy = require('rendy');
 const exec = require('execon');
-const currify = require('currify/legacy');
+const currify = require('currify');
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 
 const modal = require('@cloudcmd/modal');
 const createElement = require('@cloudcmd/create-element');

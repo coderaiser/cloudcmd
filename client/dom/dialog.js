@@ -1,6 +1,6 @@
 'use strict';
 
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 
 const {
     alert,

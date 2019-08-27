@@ -1,6 +1,6 @@
 'use strict';
 
-const currify = require('currify/legacy');
+const currify = require('currify');
 
 const isType = currify((type, object, name) => {
     return typeof object[name] === type;

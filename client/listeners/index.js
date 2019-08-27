@@ -3,9 +3,9 @@
 'use strict';
 
 const exec = require('execon');
-const itype = require('itype/legacy');
-const currify = require('currify/legacy');
-const tryToCatch = require('try-to-catch/legacy');
+const itype = require('itype');
+const currify = require('currify');
+const tryToCatch = require('try-to-catch');
 const clipboard = require('@cloudcmd/clipboard');
 
 const getRange = require('./get-range');

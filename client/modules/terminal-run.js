@@ -3,8 +3,8 @@
 /* global CloudCmd, gritty */
 
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch/legacy');
-const fullstore = require('fullstore/legacy');
+const tryToCatch = require('try-to-catch');
+const fullstore = require('fullstore');
 
 require('../../css/terminal.css');
 

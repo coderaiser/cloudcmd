@@ -6,7 +6,7 @@ require('../css/columns/name-size-date.css');
 require('../css/columns/name-size.css');
 
 const {promisify} = require('es6-promisify');
-const wraptile = require('wraptile/legacy');
+const wraptile = require('wraptile');
 const load = require('load.js');
 
 const isDev = process.env.NODE_ENV === 'development';

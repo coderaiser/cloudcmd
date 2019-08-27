@@ -3,7 +3,7 @@
 /* global CloudCmd */
 
 const exec = require('execon');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 const {promisify} = require('es6-promisify');
 const loadJS = promisify(require('load.js').js);
 

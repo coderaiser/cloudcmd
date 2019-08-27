@@ -3,7 +3,7 @@
 /* global CloudCmd */
 
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 
 CloudCmd.Markdown = exports;
 

@@ -3,7 +3,7 @@
 'use strict';
 
 const exec = require('execon');
-const wrap = require('wraptile/legacy');
+const wrap = require('wraptile');
 const supermenu = require('supermenu');
 const createElement = require('@cloudcmd/create-element');
 

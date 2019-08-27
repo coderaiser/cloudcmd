@@ -4,14 +4,14 @@
 
 require('../../../css/user-menu.css');
 
-const currify = require('currify/legacy');
-const wraptile = require('wraptile/legacy');
+const currify = require('currify');
+const wraptile = require('wraptile');
 const {promisify} = require('es6-promisify');
-const fullstore = require('fullstore/legacy');
+const fullstore = require('fullstore');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 const tryCatch = require('try-catch');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 const parse = require('./parse-error');
 const {codeFrameColumns} = require('@babel/code-frame');
 

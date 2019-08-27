@@ -2,8 +2,8 @@
 
 'use strict';
 
-const itype = require('itype/legacy');
-const currify = require('currify/legacy');
+const itype = require('itype');
+const currify = require('currify');
 const {promisify} = require('es6-promisify');
 
 const load = require('./load');

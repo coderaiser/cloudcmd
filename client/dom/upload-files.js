@@ -3,7 +3,7 @@
 /* global CloudCmd */
 
 const {eachSeries} = require('execon');
-const wraptile = require('wraptile/legacy');
+const wraptile = require('wraptile');
 
 const load = require('./load');
 const Images = require('./images');

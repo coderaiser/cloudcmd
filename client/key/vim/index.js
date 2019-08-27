@@ -7,7 +7,7 @@ const Info = DOM.CurrentInfo;
 
 const {Dialog} = DOM;
 
-const fullstore = require('fullstore/legacy');
+const fullstore = require('fullstore');
 const store = fullstore('');
 const visual = fullstore(false);
 const {

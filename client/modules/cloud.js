@@ -3,7 +3,7 @@
 'use strict';
 
 const exec = require('execon');
-const currify = require('currify/legacy');
+const currify = require('currify');
 const {promisify} = require('es6-promisify');
 const loadJS = promisify(require('load.js').js);
 

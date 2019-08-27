@@ -4,12 +4,12 @@
 
 require('../../../css/config.css');
 
-const rendy = require('rendy/legacy');
-const currify = require('currify/legacy');
-const wraptile = require('wraptile/legacy');
-const squad = require('squad/legacy');
+const rendy = require('rendy');
+const currify = require('currify');
+const wraptile = require('wraptile');
+const squad = require('squad');
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch/legacy');
+const tryToCatch = require('try-to-catch');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 

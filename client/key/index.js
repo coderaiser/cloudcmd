@@ -12,7 +12,7 @@ const Buffer = require('../dom/buffer');
 const KEY = require('./key');
 const vim = require('./vim');
 const setCurrentByChar = require('./set-current-by-char');
-const fullstore = require('fullstore/legacy');
+const fullstore = require('fullstore');
 const Chars = fullstore();
 
 Chars([]);

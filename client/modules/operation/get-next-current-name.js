@@ -1,6 +1,6 @@
 'use strict';
 
-const currify = require('currify/legacy');
+const currify = require('currify');
 
 const not = currify((array, value) => !~array.indexOf(value));
 const notOneOf = currify((a, b) => a.filter(not(b)));

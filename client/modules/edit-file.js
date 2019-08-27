@@ -4,8 +4,8 @@
 
 CloudCmd.EditFile = exports;
 
-const Format = require('format-io/legacy');
-const fullstore = require('fullstore/legacy');
+const Format = require('format-io');
+const fullstore = require('fullstore');
 const exec = require('execon');
 const supermenu = require('supermenu');
 

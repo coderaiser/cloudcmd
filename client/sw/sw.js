@@ -1,8 +1,8 @@
 'use strict';
 
 const codegen = require('codegen.macro');
-const tryToCatch = require('try-to-catch/legacy');
-const currify = require('currify/legacy');
+const tryToCatch = require('try-to-catch');
+const currify = require('currify');
 
 const isDev = process.env.NODE_ENV === 'development';
 

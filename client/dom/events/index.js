@@ -1,6 +1,6 @@
 'use strict';
 
-const itype = require('itype/legacy');
+const itype = require('itype');
 const EventStore = require('./event-store');
 
 module.exports = new EventsProto();

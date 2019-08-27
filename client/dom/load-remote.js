@@ -3,9 +3,9 @@
 /* global CloudCmd */
 
 const exec = require('execon');
-const rendy = require('rendy/legacy');
-const itype = require('itype/legacy');
-const wraptile = require('wraptile/legacy');
+const rendy = require('rendy');
+const itype = require('itype');
+const wraptile = require('wraptile');
 const load = require('load.js');
 
 const {findObjByNameInArr} = require('../../common/util');
