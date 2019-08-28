@@ -1,3 +1,20 @@
+2019.08.28, v13.3.0
+
+fix:
+- feature(client) remove legacy suffix, use modules as is
+- (client) rm additional dialog
+- (user-menu) putout path
+- (edit-names) hide
+- (vim) find
+
+feature:
+- (cloudcmd) decrease bundle size: disable convertion to es5
+- (client) remove legacy suffix, use modules as is
+- (package) es6-promisify v6.0.2
+- (menu) rm mute: has no sense with new ponse headers
+- (markdown) move out parse to worker
+
+
 2019.08.22, v13.2.1
 
 fix:
