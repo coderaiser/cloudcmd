@@ -123,7 +123,31 @@ async function show(data, options) {
     
     case 'media':
         return viewMedia(path);
+    
+    case 'pdf':
+        return viewPDF(path);
     }
+}
+
+async function viewPDF(src) {
+    const element = createElement('iframe', {
+        src,
+        width: '100%',
+        height: '100%',
+    });
+    
+    element.addEventListener('load', () => {
+        element.contentWindow.addEventListener('keydown', listener);
+    });
+    
+    const options = {
+        ...Config,
+    };
+    
+    if (CloudCmd.config('showFileName'))
+        options.title = Info.name;
+    
+    modal.open(element, options);
 }
 
 async function viewMedia(path) {
@@ -259,7 +283,12 @@ function isVideo(name) {
     return /\.(mp4|avi)$/i.test(name);
 }
 
+const isPDF = (name) => /\.(pdf)$/i.test(name);
+
 function getType(name) {
+    if (isPDF(name))
+        return 'pdf';
+    
     if (isImage(name))
         return 'image';
     
