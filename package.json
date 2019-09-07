@@ -158,7 +158,7 @@
     "try-catch": "^2.0.0",
     "try-to-catch": "^1.0.2",
     "tryrequire": "^2.0.1",
-    "wraptile": "^2.0.0",
+    "wraptile": "^3.0.0",
     "writejson": "^2.0.0"
   },
   "devDependencies": {
