@@ -128,7 +128,7 @@
     "flop": "^6.0.0",
     "for-each-key": "^1.0.1",
     "format-io": "^1.0.0",
-    "fullstore": "^1.0.0",
+    "fullstore": "^2.0.2",
     "http-auth": "^3.2.3",
     "inly": "^3.0.0",
     "jaguar": "^5.0.0",
