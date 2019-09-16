@@ -17,7 +17,7 @@ const {
 } = require('./sw/register');
 
 // prevent additional loading of emitify
-window.Emitify = require('emitify/legacy');
+window.Emitify = require('emitify');
 
 module.exports = window.CloudCmd = (config) => {
     window.Util = require('../common/util');
