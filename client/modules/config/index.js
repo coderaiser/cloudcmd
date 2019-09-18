@@ -44,7 +44,7 @@ const Config = {};
 
 let Template;
 
-const loadCSS = promisify(load.css);
+const loadCSS = load.css;
 
 module.exports.init = async () => {
     if (!CloudCmd.config('configDialog'))

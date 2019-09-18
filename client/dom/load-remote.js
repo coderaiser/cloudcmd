@@ -2,16 +2,14 @@
 
 /* global CloudCmd */
 
-const exec = require('execon');
 const rendy = require('rendy');
 const itype = require('itype');
-const wraptile = require('wraptile');
 const load = require('load.js');
+const tryToCatch = require('try-to-catch');
 
 const {findObjByNameInArr} = require('../../common/util');
 
 const Files = require('./files');
-const parallel = wraptile(load.parallel);
 
 module.exports = (name, options, callback = options) => {
     const {prefix, config} = CloudCmd;
@@ -20,7 +18,7 @@ module.exports = (name, options, callback = options) => {
     if (o.name && window[o.name])
         return callback();
     
-    Files.get('modules').then((modules) => {
+    Files.get('modules').then(async (modules) => {
         const online = config('online') && navigator.onLine;
         const module = findObjByNameInArr(modules.remote, name);
         
@@ -48,23 +46,15 @@ module.exports = (name, options, callback = options) => {
             });
         });
         
-        const on = funcON(localURL, remoteURL, callback);
-        const off = funcOFF(localURL, callback);
+        if (online) {
+            const [e] = await tryToCatch(load.parallel, remoteURL);
+            
+            if (!e)
+                return callback();
+        }
         
-        exec.if(online, on, off);
+        const [e] = await tryToCatch(load.parallel, localURL);
+        callback(e);
     });
 };
-
-function funcOFF(local, callback) {
-    return parallel(local, callback);
-}
-
-function funcON (local, remote,callback) {
-    return parallel(remote, (error) => {
-        if (error)
-            return funcOFF();
-        
-        callback();
-    });
-}
 

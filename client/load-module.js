@@ -4,8 +4,7 @@
 
 const exec = require('execon');
 const tryToCatch = require('try-to-catch');
-const {promisify} = require('es6-promisify');
-const loadJS = promisify(require('load.js').js);
+const loadJS = require('load.js').js;
 
 const pascalCase = require('just-pascal-case');
 const noJS = (a) => a.replace(/.js$/, '');

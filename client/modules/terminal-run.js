@@ -13,8 +13,6 @@ const load = require('load.js');
 const DOM = require('../dom');
 const Images = require('../dom/images');
 
-const loadParallel = promisify(load.parallel);
-
 const {Dialog} = DOM;
 const {
     Key,
@@ -36,7 +34,7 @@ const loadAll = async () => {
     const js = `${prefixGritty}/gritty.js`;
     const css = `${prefix}/dist/terminal.css`;
     
-    const [e] = await tryToCatch(loadParallel, [js, css]);
+    const [e] = await tryToCatch(load.parallel, [js, css]);
     
     if (e) {
         const src = e.target.src.replace(window.location.href, '');

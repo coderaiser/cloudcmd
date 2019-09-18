@@ -1,8 +1,5 @@
 'use strict';
 
-/* global CloudCmd, gritty */
-
-const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch');
 
 require('../../css/terminal.css');
@@ -12,7 +9,7 @@ const load = require('load.js');
 const DOM = require('../dom');
 const Images = require('../dom/images');
 
-const loadParallel = promisify(load.parallel);
+const loadParallel = load.parallel;
 
 const {Dialog} = DOM;
 const {

@@ -20,9 +20,6 @@ const currify = require('currify');
 
 const noJS = (a) => a.replace(/.js$/, '');
 
-const loadCSS = promisify(load.css);
-const loadJS = promisify(load.js);
-
 const {
     apiURL,
     formatMsg,
@@ -158,7 +155,7 @@ function CloudCmdProto(DOM) {
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
         
         if (!document.body.scrollIntoViewIfNeeded)
-            await loadJS(prefix + CloudCmd.DIRCLIENT_MODULES + 'polyfill.js');
+            await load.js(prefix + CloudCmd.DIRCLIENT_MODULES + 'polyfill.js');
         
         await initModules();
         await baseInit();
@@ -171,7 +168,7 @@ function CloudCmdProto(DOM) {
         const {prefix} = CloudCmd;
         const name = prefix + '/dist/cloudcmd.common.css';
         
-        await loadCSS(name);
+        await load.css(name);
     }
     
     this.route = (path) => {

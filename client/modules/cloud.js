@@ -4,8 +4,7 @@
 
 const exec = require('execon');
 const currify = require('currify');
-const {promisify} = require('es6-promisify');
-const loadJS = promisify(require('load.js').js);
+const load = require('load.js');
 
 const {log} = CloudCmd;
 
@@ -62,7 +61,7 @@ async function loadFiles() {
     
     return Promise.all([
         Files.get('modules'),
-        loadJS(js),
+        load.js(js),
     ]);
 }
 

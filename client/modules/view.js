@@ -8,7 +8,6 @@ const itype = require('itype');
 const rendy = require('rendy');
 const exec = require('execon');
 const currify = require('currify');
-const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch');
 
 const modal = require('@cloudcmd/modal');
@@ -31,7 +30,7 @@ const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 const addEvent = lifo(Events.add);
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
-const loadCSS = promisify(load.css);
+const loadCSS = load.css;
 
 module.exports.show = show;
 module.exports.hide = hide;

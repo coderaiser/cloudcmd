@@ -9,7 +9,8 @@ const currify = require('currify');
 const wraptile = require('wraptile');
 const {promisify} = require('es6-promisify');
 const exec = require('execon');
-const loadJS = require('load.js').js;
+const load = require('load.js');
+const tryToCatch = require('try-to-catch');
 
 const {encode} = require('../../../common/entity');
 const callbackify = require('../../../common/callbackify');
@@ -60,7 +61,7 @@ module.exports.init = promisify((callback) => {
     
     exec.series([
         DOM.loadSocket,
-        (callback) => {
+        async (callback) => {
             if (!config('progress') || config('dropbox'))
                 return callback();
             
@@ -68,7 +69,9 @@ module.exports.init = promisify((callback) => {
                 prefix,
                 prefixSocket,
             } = CloudCmd;
-            load(initOperations(prefix, prefixSocket, callback));
+            
+            await tryToCatch(loadAll, initOperations(prefix, prefixSocket));
+            callback();
         },
         (callback) => {
             Loaded = true;
@@ -514,21 +517,16 @@ async function prompt(msg, to, names) {
     return Dialog.prompt(msg, to);
 }
 
-function load(callback) {
+async function loadAll() {
     const {prefix} = CloudCmd;
     const file = `${prefix}/fileop/fileop.js`;
     
-    loadJS(file, (error) => {
-        if (error) {
-            Dialog.alert(error.message);
-            return exec(callback);
-        }
-        
-        Loaded = true;
-        Util.timeEnd(Name + ' load');
-        exec(callback);
-    });
+    const [error] = await tryToCatch(load.js, file);
     
-    Util.time(Name + ' load');
+    if (error)
+        Dialog.alert(error.message);
+    
+    Loaded = true;
+    Util.timeEnd(Name + ' load');
 }
 

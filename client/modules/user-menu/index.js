@@ -6,7 +6,6 @@ require('../../../css/user-menu.css');
 
 const currify = require('currify');
 const wraptile = require('wraptile');
-const {promisify} = require('es6-promisify');
 const fullstore = require('fullstore');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
@@ -20,7 +19,7 @@ const Dialog = require('../../dom/dialog');
 const getUserMenu = require('./get-user-menu');
 const navigate = require('./navigate');
 
-const loadCSS = promisify(load.css);
+const loadCSS = load.css;
 const sourceStore = fullstore();
 
 const Name = 'UserMenu';

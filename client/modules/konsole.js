@@ -8,10 +8,9 @@
 CloudCmd.Konsole = exports;
 
 const exec = require('execon');
-const {promisify} = require('es6-promisify');
 const currify = require('currify');
 const tryToCatch = require('try-to-catch');
-const loadJS = promisify(require('load.js').js);
+const loadJS = require('load.js').js;
 const createElement = require('@cloudcmd/create-element');
 
 const Images = require('../dom/images');

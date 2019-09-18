@@ -5,7 +5,6 @@ require('../css/nojs.css');
 require('../css/columns/name-size-date.css');
 require('../css/columns/name-size.css');
 
-const {promisify} = require('es6-promisify');
 const wraptile = require('wraptile');
 const load = require('load.js');
 
@@ -55,10 +54,9 @@ const onUpdateFound = wraptile(async (config) => {
     
     const {DOM} = window;
     const prefix = getPrefix(config.prefix);
-    const js = promisify(load.js);
     
-    await js(`${prefix}/dist/cloudcmd.common.js`);
-    await js(`${prefix}/dist/cloudcmd.js`);
+    await load.js(`${prefix}/dist/cloudcmd.common.js`);
+    await load.js(`${prefix}/dist/cloudcmd.js`);
     
     console.log('cloudcmd: sw: updated');
     
