@@ -189,7 +189,7 @@
     "html-webpack-plugin": "^3.0.7",
     "inherits": "^2.0.3",
     "just-pascal-case": "^1.1.0",
-    "limier": "^2.0.0",
+    "limier": "^2.0.1",
     "load.js": "^3.0.0",
     "madrun": "^3.0.1",
     "memfs": "^2.9.0",
