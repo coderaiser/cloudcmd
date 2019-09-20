@@ -1,3 +1,28 @@
+2019.09.20, v13.4.1
+
+feature:
+- (package) @cloudcmd/olark v3.0.0
+- (package) format-io v2.0.0
+- (package) limier v3.0.0
+- (package) currify v4.0.0
+- (package) limier v2.0.1
+- (package) load.js v3.0.0
+- (package) @cloudcmd/create-element v2.0.0
+- (package) supermenu v3.0.0
+- (package) smalltalk v4.0.0
+- (package) @cloudcmd/modal v2.0.0
+- (package) putout v6.0.0
+- (package) stylelint-config-standard v19.0.0
+- (package) stylelint v11.0.0
+- (package) markdown-it v10.0.0
+- (package) rm version-io
+- (package) fullstore v2.0.2
+- (package) wraptile v3.0.0
+- (package) rendy v3.0.0
+- (package) eslint-plugin-node v10.0.0
+- (package) restafary v7.0.0
+
+
 2019.09.03, v13.4.0
 
 feature:
