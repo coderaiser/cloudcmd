@@ -127,7 +127,7 @@
     "find-up": "^4.0.0",
     "flop": "^6.0.0",
     "for-each-key": "^1.0.1",
-    "format-io": "^1.0.0",
+    "format-io": "^2.0.0",
     "fullstore": "^2.0.2",
     "http-auth": "^3.2.3",
     "inly": "^3.0.0",
