@@ -168,7 +168,7 @@
     "@cloudcmd/clipboard": "^1.0.2",
     "@cloudcmd/create-element": "^2.0.0",
     "@cloudcmd/modal": "^2.0.0",
-    "@cloudcmd/olark": "^2.0.1",
+    "@cloudcmd/olark": "^3.0.0",
     "@cloudcmd/stub": "^2.0.0",
     "auto-globals": "^1.7.0",
     "babel-loader": "^8.0.0",
