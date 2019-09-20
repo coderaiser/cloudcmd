@@ -189,7 +189,7 @@ Hot keys
 | `Ctrl + R`            | refresh
 | `Ctrl + D`            | clear local storage
 | `Ctrl + A`            | select all files in a panel
-| `Ctrl + M`            | [rename selected files](https://github.com/coderaiser/cloudcmd/releases/tag/v12.0.0) in editor
+| `Ctrl + M`            | [rename selected files](https://github.com/coderaiser/cloudcmd/releases/tag/v12.1.0) in editor
 | `Shift + Ctrl + M`    | rename selected files in vim mode of editor
 | `Ctrl + U`            | swap panels
 | `Ctrl + F3`           | sort by name
