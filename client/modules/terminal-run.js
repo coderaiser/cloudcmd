@@ -121,7 +121,9 @@ function create(createOptions) {
     Socket = socket;
     Terminal = terminal;
     
-    Terminal.on('key', (char, {keyCode, shiftKey}) => {
+    Terminal.onKey(({domEvent}) => {
+        const {keyCode, shiftKey} = domEvent;
+        
         if (commandExit)
             hide();
         
