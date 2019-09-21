@@ -137,7 +137,7 @@
     "markdown-it": "^10.0.0",
     "mellow": "^2.0.0",
     "minimist": "^1.2.0",
-    "nomine": "^3.0.0",
+    "nomine": "^4.0.0",
     "object.omit": "^3.0.0",
     "once": "^1.4.0",
     "onezip": "^3.0.0",
