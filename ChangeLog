@@ -1,3 +1,17 @@
+2019.09.22, v14.0.0
+
+feature:
+- (operation) show progress bar on first operation (#253)
+- (package) pullout v4.0.0
+- (package) console-io v11.0.0
+- (package) flop v7.0.0
+- (package) restbox v2.0.0
+- (package) restafary v8.0.0
+- (package) nomine v4.0.0
+- (cloudcmd) drop support of node < 10
+- (cloudcmd) remove --progress option, make always enabled
+
+
 2019.09.21, v13.4.2
 
 fix:
