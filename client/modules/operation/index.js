@@ -13,9 +13,6 @@ const load = require('load.js');
 const tryToCatch = require('try-to-catch');
 
 const {encode} = require('../../../common/entity');
-const callbackify = require('../../../common/callbackify');
-
-const RESTful = require('../../dom/rest');
 const removeExtension = require('./remove-extension');
 const setListeners = require('./set-listeners');
 const getNextCurrentName = require('./get-next-current-name');
@@ -27,19 +24,18 @@ CloudCmd[Name] = exports;
 
 const {config} = CloudCmd;
 const {Dialog, Images} = DOM;
-const initOperations = wraptile(_initOperations);
-const authCheck = wraptile(_authCheck);
 
+const authCheck = wraptile(_authCheck);
 const Operation = {};
 
 let Loaded;
 
-let copyFn = callbackify(RESTful.cp);
-let moveFn = callbackify(RESTful.mv);
-let deleteFn = callbackify(RESTful.delete);
-let extractFn = callbackify(RESTful.extract);
-let packZipFn = callbackify(RESTful.pack);
-let packTarFn = callbackify(RESTful.pack);
+let copyFn;
+let moveFn;
+let deleteFn;
+let extractFn;
+let packZipFn;
+let packTarFn;
 
 const Info = DOM.CurrentInfo;
 const showLoad = Images.show.load.bind(null, 'top');
@@ -70,8 +66,8 @@ module.exports.init = promisify((callback) => {
                 prefixSocket,
             } = CloudCmd;
             
-            await tryToCatch(loadAll, initOperations(prefix, prefixSocket));
-            callback();
+            await loadAll();
+            initOperations(prefix, prefixSocket, callback);
         },
         (callback) => {
             Loaded = true;
@@ -90,17 +86,20 @@ function _authCheck(spawn, ok) {
     spawn.emit('auth', config('username'), config('password'));
 }
 
-function _initOperations(prefix, socketPrefix, fn) {
+const onConnect = currify((fn, operator) => {
+    setOperations(operator);
+    fn();
+});
+
+function initOperations(prefix, socketPrefix, fn) {
     socketPrefix = `${socketPrefix}/fileop`;
+    
     fileop({prefix, socketPrefix}, (e, operator) => {
-        fn();
-        
-        operator.on('connect', authCheck(operator, onConnect));
-        operator.on('disconnect', onDisconnect);
+        operator.on('connect', authCheck(operator, onConnect(fn)));
     });
 }
 
-function onConnect(operator) {
+function setOperations(operator) {
     packTarFn = ({from, to, names}, callback) => {
         const operation = 'Tar';
         const listen = setListeners({
@@ -183,15 +182,6 @@ function onConnect(operator) {
         operator.extract(from, to)
             .then(listen);
     };
-}
-
-function onDisconnect() {
-    packZipFn = callbackify(RESTful.pack);
-    packTarFn = callbackify(RESTful.pack);
-    deleteFn = callbackify(RESTful.delete);
-    copyFn = callbackify(RESTful.cp);
-    moveFn = callbackify(RESTful.mv);
-    extractFn = callbackify(RESTful.extract);
 }
 
 function getPacker(type) {
@@ -351,7 +341,6 @@ async function _processFiles(options, data) {
     let names = [];
     
     /* eslint no-multi-spaces: 0 */
-    
     if (data) {
         from        = data.from;
         to          = data.to;
@@ -527,6 +516,5 @@ async function loadAll() {
         Dialog.alert(error.message);
     
     Loaded = true;
-    Util.timeEnd(Name + ' load');
 }
 
