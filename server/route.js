@@ -3,7 +3,7 @@
 const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
 
-const fs = require('fs');
+const {realpath} = require('fs').promises;
 const {promisify} = require('util');
 
 const flop = require('flop');
@@ -36,17 +36,17 @@ const {FS} = CloudFunc;
 const Columns = require(`${DIR_SERVER}/columns`);
 const Template = require(`${DIR_SERVER}/template`);
 
+const flopRead = promisify(flop.read);
+
 const tokenize = (fn, a) => (b) => fn(a, b);
 const getReadDir = (config) => {
     if (!config('dropbox'))
-        return promisify(flop.read);
+        return flopRead;
     
     const {readDir} = onceRequire('@cloudcmd/dropbox');
     
     return tokenize(readDir, config('dropboxToken'));
 };
-
-const realpath = promisify(fs.realpath);
 
 /**
  * routing of server queries

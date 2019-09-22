@@ -190,7 +190,9 @@ test('cloudcmd: route: file: fs', async (t) => {
         options,
     });
     
-    t.equal(body, '', 'should equal');
+    const expected = 'EISDIR: illegal operation on a directory, read';
+    
+    t.equal(body, expected, 'should equal');
     t.end();
 });
 
@@ -239,11 +241,10 @@ test('cloudcmd: route: not found', async (t) => {
 
 test('cloudcmd: route: realpath: error', async (t) => {
     const error = 'realpath error';
-    const {realpath} = fs;
+    const {realpath} = fs.promises;
     
-    fs.realpath = (name, fn) => {
-        fn(error);
-        fs.realpath = realpath;
+    fs.promises.realpath = async () => {
+        throw error;
     };
     
     const config = {
@@ -265,8 +266,7 @@ test('cloudcmd: route: realpath: error', async (t) => {
         options,
     });
     
-    /*eslint require-atomic-updates:0*/
-    fs.realpath = realpath;
+    fs.promises.realpath = realpath;
     
     t.ok(/^ENOENT/.test(body), 'should return error');
     t.end();

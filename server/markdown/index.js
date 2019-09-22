@@ -1,17 +1,13 @@
 'use strict';
 
-const fs = require('fs');
+const {readFile} = require('fs').promises;
 const {join} = require('path');
-const {
-    callbackify,
-    promisify,
-} = require('util');
+const {callbackify} = require('util');
 
 const pullout = require('pullout');
 const ponse = require('ponse');
 const threadIt = require('thread-it');
 
-const readFile = promisify(fs.readFile);
 const parse = threadIt(join(__dirname, 'worker'));
 
 const root = require('../root');

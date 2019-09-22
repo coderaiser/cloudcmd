@@ -1,10 +1,9 @@
 'use strict';
 
 const {homedir} = require('os');
-const fs = require('fs');
+const {readFile} = require('fs').promises;
 
 const {join} = require('path');
-const {promisify} = require('util');
 
 const tryToCatch = require('try-to-catch');
 const currify = require('currify');
@@ -17,8 +16,6 @@ threadIt.init();
 
 // warm up worker cache
 transpile('');
-
-const readFile = promisify(fs.readFile);
 
 const URL = '/api/v1/user-menu';
 const DEFAULT_MENU_PATH = join(__dirname, '../static/user-menu.js');
