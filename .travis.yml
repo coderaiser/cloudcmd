@@ -2,7 +2,6 @@ language: node_js
 node_js:
     - 12
     - 10
-    - 8
 
 cache:
   npm: false
@@ -34,7 +33,7 @@ deploy:
     script: npm run docker-ci
     skip_cleanup: true
     on:
-        node: '8'
+        node: '10'
         condition: $TRAVIS_OS_NAME = linux
         tags: true
         all_branches: false
