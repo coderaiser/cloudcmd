@@ -1,12 +1,11 @@
-# Cloud Commander v14.0.0 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Now status][BuildAppveyorIMGURL]][BuildAppveyorURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_shield)
+# Cloud Commander v14.0.0 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_shield)
 
-### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL], [Now][NowURL])
+### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
 
 [NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
 [HerokuURL]:                https://cloudcmd.herokuapp.com/ "Heroku"
-[NowURL]:                   https://cloudcmd.now.sh/ "Now"
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/cloudcmd  "Build Status"
 [BuildStatusIMGURL]:        https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
 
