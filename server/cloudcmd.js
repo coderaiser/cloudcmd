@@ -127,7 +127,7 @@ function _initAuth(config, accept, reject, username, password) {
 }
 
 function listen({prefixSocket, socket, config}) {
-    const root = () => config('root');
+    const root = apart(config, 'root');
     const auth = initAuth(config);
     
     prefixSocket = getPrefix(prefixSocket);
@@ -179,13 +179,13 @@ function cloudcmd({modules, config}) {
     const cache = false;
     const diff = apart(config, 'diff');
     const zip = apart(config, 'zip');
+    const root = apart(config, 'root');
     const dir = DIR_ROOT;
     
     const ponseStatic = ponse.static(dir, {cache});
     
     const dropbox = config('dropbox');
     const dropboxToken = config('dropboxToken');
-    const root = () => config('root');
     
     const funcs = clean([
         config('console') && konsole({
@@ -195,6 +195,7 @@ function cloudcmd({modules, config}) {
         config('terminal') && terminal(config, {}),
         
         edward({
+            root,
             online,
             diff,
             zip,
@@ -203,6 +204,7 @@ function cloudcmd({modules, config}) {
         }),
         
         dword({
+            root,
             online,
             diff,
             zip,
@@ -211,6 +213,7 @@ function cloudcmd({modules, config}) {
         }),
         
         deepword({
+            root,
             online,
             diff,
             zip,
