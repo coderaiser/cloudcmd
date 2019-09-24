@@ -1,3 +1,13 @@
+2019.09.25, v14.0.1
+
+fix:
+- (cloudcmd) wrong editor root on multi instance
+
+feature:
+- (package) deepword v7.0.0
+- (cloudcmd) rm now (zeit/micro/issues/377)
+
+
 2019.09.22, v14.0.0
 
 feature:
