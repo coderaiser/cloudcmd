@@ -1,3 +1,9 @@
+2019.09.25, v14.0.2
+
+fix:
+- (client) change directory with enabled dirStorage (#255)
+
+
 2019.09.25, v14.0.1
 
 fix:
