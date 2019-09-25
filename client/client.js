@@ -340,7 +340,7 @@ function CloudCmdProto(DOM) {
      * @param callback
      *
      */
-    function ajaxLoad(path, options, panel, callback) {
+    async function ajaxLoad(path, options, panel, callback) {
         const {Dialog, RESTful} = DOM;
         
         const create = async (error, json) => {
@@ -392,7 +392,8 @@ function CloudCmdProto(DOM) {
         if (!CloudCmd.config('dirStorage'))
             return create();
         
-        Storage.get(path, create);
+        const data = await Storage.get(path);
+        create(null, data);
     }
     
     /**
