@@ -352,7 +352,7 @@ function CloudCmdProto(DOM) {
             const {noCurrent} = options;
             
             if (!isRefresh && json)
-                return createFileTable(json, panel, options, callback);
+                return await createFileTable(json, panel, options, callback);
             
             const position = DOM.getPanelPosition(panel);
             const sort = CloudCmd.sort[position];
@@ -403,7 +403,7 @@ function CloudCmdProto(DOM) {
      * @param history
      * @param callback
      */
-    async function createFileTable(json, panelParam, options) {
+    async function createFileTable(data, panelParam, options) {
         const {
             history,
             noCurrent,
@@ -413,7 +413,7 @@ function CloudCmdProto(DOM) {
         
         const [
             error,
-            [templFile, templPath, templLink, templPathLink],
+            [file, path, link, pathLink],
         ] = await tryToCatch(Files.get, names);
         
         if (error)
@@ -436,14 +436,14 @@ function CloudCmdProto(DOM) {
         panel.innerHTML = buildFromJSON({
             sort        : options.sort,
             order       : options.order,
-            data        : json,
+            data,
             id          : panel.id,
             prefix,
             template    : {
-                file        : templFile,
-                path        : templPath,
-                pathLink    : templPathLink,
-                link        : templLink,
+                file,
+                path,
+                pathLink,
+                link,
             },
         });
         

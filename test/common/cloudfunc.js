@@ -32,7 +32,7 @@ const TMPL = [
     'link',
 ].map(addHBS);
 
-const JSON_FILES = {
+const data = {
     path  : '/etc/X11/',
     files : [{
         name: 'applnk',
@@ -73,7 +73,7 @@ test('cloudfunc: render', (t) => {
     time('CloudFunc.buildFromJSON');
     const result = CloudFunc.buildFromJSON({
         prefix  : '',
-        data    : JSON_FILES,
+        data,
         template,
     });
     

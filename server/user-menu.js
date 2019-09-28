@@ -27,7 +27,7 @@ module.exports = currify(async({menuName}, req, res, next) => {
     const {method} = req;
     
     if (method === 'GET')
-        return onGET({
+        return await onGET({
             req,
             res,
             menuName,
@@ -76,10 +76,10 @@ async function onGET({req, res, menuName}) {
         .send(result.code);
 }
 
-function getError(parseError, source) {
+function getError(error, source) {
     return `
         const e = Error(\`<pre>${codeframe({
-        error: parseError,
+        error,
         source,
         highlightCode: false,
     })}</pre>\`);

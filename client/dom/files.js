@@ -28,7 +28,7 @@ async function getFile(name) {
     check(name);
     
     if (type === 'string')
-        return getModule(name);
+        return await getModule(name);
     
     if (type === 'array')
         return Promise.all(unaryMap(name, get));

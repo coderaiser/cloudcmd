@@ -28,7 +28,7 @@ const clean = (array) => array.filter(notEmpty);
 
 const noParse = (a) => /\.spec\.js$/.test(a);
 
-const babelDev = {
+const options = {
     babelrc: false,
     plugins: [
         'module:babel-plugin-macros',
@@ -45,7 +45,7 @@ const rules = clean([
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: babelDev,
+        options,
     }]);
 
 const plugins = [

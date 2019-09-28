@@ -13,6 +13,13 @@
         "client/(client|cloudcmd|load-module).js": {
             "remove-console": false
         },
+        "client/modules/config/index.js": {
+            "apply-shorthand-properties": [{
+                "ignore": [
+                    "ONE_MINUTE"
+                ]
+            }]
+        },
         "test/common/cloudfunc.js": {
             "remove-console": false
         }

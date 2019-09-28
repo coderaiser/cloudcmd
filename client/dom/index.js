@@ -173,7 +173,7 @@ function CmdProto() {
         const panel = DOM.getPanel();
         const selected = DOM.getByClassAll(SELECTED_FILE, panel);
         
-        return [...selected];
+        return Array.from(selected);
     };
     
     /*
@@ -182,7 +182,7 @@ function CmdProto() {
     this.unselectFiles = (files) => {
         files = files || DOM.getSelectedFiles();
         
-        [...files].forEach(DOM.toggleSelectedFile);
+        Array.from(files).forEach(DOM.toggleSelectedFile);
     };
     
     /**
@@ -412,7 +412,7 @@ function CmdProto() {
         const from = (a) => a === '..' ? 1 : 0;
         const i = from(name);
         
-        return [...files].slice(i);
+        return Array.from(files).slice(i);
     };
     
     /**
@@ -496,7 +496,7 @@ function CmdProto() {
         const first = files[0] || DOM.getCurrentFile();
         const name = DOM.getCurrentName(first);
         
-        const allFiles = [...files];
+        const allFiles = Array.from(files);
         
         if (name === '..')
             allFiles.shift();
@@ -852,13 +852,13 @@ function CmdProto() {
             panelPassive,
         } = Info;
         
-        const dirPath = DOM.getCurrentDirPath();
+        const path = DOM.getCurrentDirPath();
         const dirPathPassive = DOM.getNotCurrentDirPath();
         
         let currentIndex = files.indexOf(element);
         
         CloudCmd.loadDir({
-            path: dirPath,
+            path,
             panel: panelPassive,
             noCurrent: true,
         });
@@ -901,8 +901,8 @@ function CmdProto() {
         info.parentDirPath  = DOM.getParentDirPath();
         info.element        = current;
         info.ext            = Util.getExt(name);
-        info.files          = [...files.children];
-        info.filesPassive   = [...filesPassive];
+        info.files          = Array.from(files.children);
+        info.filesPassive   = Array.from(filesPassive);
         info.first          = files.firstChild;
         info.getData        = DOM.getCurrentData;
         info.last           = files.lastChild;

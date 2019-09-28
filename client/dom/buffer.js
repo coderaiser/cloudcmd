@@ -42,7 +42,7 @@ function BufferProto() {
     function rmCutClass() {
         const files = DOM.getByClassAll(CLASS);
         
-        for (const element of [...files]) {
+        for (const element of files) {
             element.classList.remove(CLASS);
         }
     }

@@ -27,7 +27,7 @@ module.exports = (dir, files) => {
     if (!n)
         return;
     
-    const array = [...files];
+    const array = Array.from(files);
     const {name} = files[0];
     
     eachSeries(array, loadFile(dir, n), onEnd(name));

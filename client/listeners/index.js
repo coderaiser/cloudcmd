@@ -424,7 +424,7 @@ function dragndrop() {
             return uploadFiles(files);
         
         const isFile = (item) => item.kind === 'file';
-        const dirFiles = [...items].filter(isFile);
+        const dirFiles = Array.from(items).filter(isFile);
         
         if (dirFiles.length)
             return DOM.uploadDirectory(dirFiles);

@@ -16,7 +16,7 @@ module.exports = (items) => {
     if (items.length)
         Images.show('top');
     
-    const entries = [...items].map((item) => {
+    const entries = Array.from(items).map((item) => {
         return item.webkitGetAsEntry();
     });
     

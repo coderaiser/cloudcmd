@@ -173,7 +173,7 @@ async function fillTemplate() {
     const getTarget = ({target}) => target;
     const handleChange = squad(onChange, getTarget);
     
-    [...inputs]
+    Array.from(inputs)
         .map(addKey(onKey))
         .map(addChange(handleChange));
     

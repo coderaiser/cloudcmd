@@ -169,9 +169,9 @@ function indexProcessing(config, options) {
     return data;
 }
 
-function buildIndex(config, html, json) {
+function buildIndex(config, html, data) {
     const panel = CloudFunc.buildFromJSON({
-        data: json,
+        data,
         prefix: getPrefix(config),
         template: Template,
     });

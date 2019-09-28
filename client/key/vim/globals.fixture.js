@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports.getDOM = () => {
-    const resolve = Promise.resolve.bind(Promise);
+    const prompt = Promise.resolve.bind(Promise);
     const CurrentInfo = {
         element: {},
         files: [],
@@ -14,7 +14,7 @@ module.exports.getDOM = () => {
     };
     
     const Dialog = {
-        prompt: resolve,
+        prompt,
     };
     
     return {

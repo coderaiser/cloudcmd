@@ -39,7 +39,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
 const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.html`);
-const defaultHtml = fs.readFileSync(getIndexPath(isDev), 'utf8');
+const html = fs.readFileSync(getIndexPath(isDev), 'utf8');
 
 const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
@@ -249,7 +249,7 @@ function cloudcmd({modules, config}) {
         
         rest(config),
         route(config, {
-            html: defaultHtml,
+            html,
         }),
         
         ponseStatic,
