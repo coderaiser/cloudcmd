@@ -279,7 +279,7 @@ function isAudio(name) {
 }
 
 function isVideo(name) {
-    return /\.(mp4|avi)$/i.test(name);
+    return /\.(mp4|avi|webm)$/i.test(name);
 }
 
 const isPDF = (name) => /\.(pdf)$/i.test(name);
