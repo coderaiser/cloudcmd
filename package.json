@@ -113,7 +113,7 @@
     "chalk": "^2.0.1",
     "compression": "^1.7.4",
     "console-io": "^11.0.0",
-    "copymitter": "^4.0.2",
+    "copymitter": "^5.0.0",
     "criton": "^2.0.0",
     "currify": "^4.0.0",
     "deepmerge": "^4.0.0",
