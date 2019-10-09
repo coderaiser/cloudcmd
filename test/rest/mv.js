@@ -14,6 +14,8 @@ const cloudcmdPath = '../../';
 const dir = cloudcmdPath + 'server/';
 const restPath = dir + 'rest';
 
+const {assign} = Object;
+
 test('cloudcmd: rest: mv', async (t) => {
     const volume = {
         '/fixture/mv.txt': 'hello',
@@ -26,6 +28,9 @@ test('cloudcmd: rest: mv', async (t) => {
         .use(vol)
         .use(fs);
     
+    assign(unionFS, {
+        promises: fs.promises,
+    });
     mockRequire('fs', unionFS);
     
     reRequire('@cloudcmd/rename-files');
