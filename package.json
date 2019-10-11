@@ -197,7 +197,7 @@
     "mkdirp": "^0.5.1",
     "mock-require": "^3.0.1",
     "morgan": "^1.6.1",
-    "multi-rename": "^1.0.0",
+    "multi-rename": "^2.0.0",
     "nodemon": "^1.9.1",
     "nyc": "^14.0.0",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
