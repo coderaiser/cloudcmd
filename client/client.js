@@ -66,8 +66,7 @@ function CloudCmdProto(DOM) {
     this.DIRCLIENT_MODULES = this.DIRCLIENT + 'modules/';
     
     this.MIN_ONE_PANEL_WIDTH = 1155;
-    this.HOST = location.origin ||
-                                  location.protocol + '//' + location.host;
+    this.HOST = location.origin || location.protocol + '//' + location.host;
     
     const TITLE = 'Cloud Commander';
     this.TITLE = TITLE;
