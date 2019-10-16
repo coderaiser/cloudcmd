@@ -42,11 +42,11 @@ module.exports = {
     'test:base': () => {
         const cmd = 'tape';
         const names = `'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`;
-        
+
         return `${cmd} ${names}`;
     },
     'test': () => `${env} ${run('test:base')}`,
-    'test:client': () => `tape 'test/client/**/*.js`,
+    'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
     'wisdom:type': () => 'bin/release.js',
@@ -96,4 +96,3 @@ module.exports = {
     'heroku-postbuild': () => run('6to5:client'),
     'putout': () => 'putout bin client static server common test .cloudcmd.menu.js',
 };
-
