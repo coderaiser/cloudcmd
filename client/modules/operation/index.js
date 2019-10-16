@@ -91,12 +91,11 @@ const onConnect = currify((fn, operator) => {
     fn();
 });
 
-function initOperations(prefix, socketPrefix, fn) {
+async function initOperations(prefix, socketPrefix, fn) {
     socketPrefix = `${socketPrefix}/fileop`;
     
-    fileop({prefix, socketPrefix}, (e, operator) => {
-        operator.on('connect', authCheck(operator, onConnect(fn)));
-    });
+    const operator = await fileop({prefix, socketPrefix});
+    operator.on('connect', authCheck(operator, onConnect(fn)));
 }
 
 function setOperations(operator) {
