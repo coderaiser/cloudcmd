@@ -84,7 +84,9 @@ module.exports = async (options, config) => {
     if (!config('open'))
         return;
     
-    const [openError] = await tryToCatch(opn, url);
+    const [openError] = await tryToCatch(opn, url, {
+        url: true,
+    });
     
     if (openError)
         console.error('cloudcmd --open:', openError.message);
