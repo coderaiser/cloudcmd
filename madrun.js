@@ -42,7 +42,7 @@ module.exports = {
     'test:base': () => {
         const cmd = 'tape';
         const names = `'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`;
-
+        
         return `${cmd} ${names}`;
     },
     'test': () => `${env} ${run('test:base')}`,
