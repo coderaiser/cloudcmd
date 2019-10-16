@@ -1,3 +1,17 @@
+2019.10.16, v14.1.2
+
+fix:
+- (madrun) client test command:  test:client command (#260)
+
+feature:
+- (package) @cloudcmd/fileop v4.0.0
+- (package) inly v4.0.0
+- (package) onezip v4.0.0
+- (package) open v7.0.0
+- (package) multi-rename v2.0.0
+- (package) shortdate v2.0.0
+
+
 2019.10.09, v14.1.1
 
 feature:
