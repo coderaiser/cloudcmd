@@ -19,7 +19,7 @@ const names = [
     'cssnano.config.js',
     '.webpack',
     '.eslintrc.js',
-    'madrun.js',
+    '.madrun.js',
     '{client,server,common}/**/*.spec.js',
 ];
 
