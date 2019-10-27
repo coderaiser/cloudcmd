@@ -1296,5 +1296,5 @@ Special Thanks
     - Russian and Ukrainian translations;
     - config template and style;
     - change order of directories and files;
-    - add ability to not hide path and header when files are scrolling;
+    - add ability to keep path and header when files are scrolling;
 
