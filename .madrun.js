@@ -39,12 +39,14 @@ module.exports = {
     'fix:lint': () => run(['lint', 'lint:css'], '--fix'),
     'lint': () => run('lint:progress'),
     'lint:progress': () => run('lint:base', '-f progress'),
+    
     'test:base': () => {
         const cmd = 'tape';
         const names = `'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`;
         
         return `${cmd} ${names}`;
     },
+    
     'test': () => `${env} ${run('test:base')}`,
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
@@ -61,6 +63,7 @@ module.exports = {
     'docker': () => run(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
     'docker-ci': () => run(['build', 'docker-login', 'docker']),
     'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
+    
     'docker:alpine': () => run([
         'docker:pull:alpine',
         'docker:build:alpine',
@@ -68,6 +71,7 @@ module.exports = {
         'docker:push:alpine',
         'docker:push:alpine:latest',
     ]),
+    
     'docker:tag': () => `docker tag coderaiser/cloudcmd:${version} coderaiser/cloudcmd:latest`,
     'docker:tag:alpine': () => `docker tag coderaiser/cloudcmd:${version}-alpine coderaiser/cloudcmd:latest-alpine`,
     'docker:rm:version': () => `docker rmi -f coderaiser/cloudcmd:${version}`,
@@ -94,5 +98,4 @@ module.exports = {
     'build:client': () => run('6to5:client'),
     'build:client:dev': () => run('6to5:client:dev'),
     'heroku-postbuild': () => run('6to5:client'),
-    'putout': () => 'putout bin client static server common test .cloudcmd.menu.js',
 };

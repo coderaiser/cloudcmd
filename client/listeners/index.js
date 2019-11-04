@@ -326,7 +326,7 @@ function onDragStart(event) {
         'DownloadURL',
         'application/octet-stream' + ':' +
         name + ':' +
-        link
+        link,
     );
 }
 

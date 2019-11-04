@@ -39,7 +39,7 @@ function EventsProto() {
                 args[EVENT_NAME],
                 args[ELEMENT],
                 listener,
-                callback
+                callback,
             );
             break;
         
@@ -67,7 +67,7 @@ function EventsProto() {
                     name,
                     element,
                     listener,
-                    callback
+                    callback,
                 );
             }
             
@@ -81,7 +81,7 @@ function EventsProto() {
                     name,
                     element,
                     eventListener,
-                    callback
+                    callback,
                 );
             }
             
