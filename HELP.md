@@ -443,6 +443,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_AUTH` - enable authentication
 - `CLOUDCMD_USERNAME` - set username
 - `CLOUDCMD_PASSWORD` - set password
+- `CLOUDCMD_PREFIX` - set the path prefix for the url
 - `CLOUDCMD_ROOT` - set root directory
 - `CLOUDCMD_VIM` - enable vim hot keys
 - `CLOUDCMD_CONFIRM_COPY` - confirm copy
