@@ -110,7 +110,7 @@
     "@cloudcmd/move-files": "^3.0.0",
     "@cloudcmd/read-files-sync": "^2.0.0",
     "apart": "^2.0.0",
-    "chalk": "^2.0.1",
+    "chalk": "^3.0.0",
     "compression": "^1.7.4",
     "console-io": "^11.0.0",
     "copymitter": "^5.0.0",
