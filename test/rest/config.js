@@ -31,13 +31,13 @@ test('cloudcmd: rest: config: patch', async (t) => {
         config,
     };
     
-    const json = {
+    const body = {
         auth: false,
     };
     
     const res = await request.patch('/api/v1/config', {
         options,
-        body: json,
+        body,
     });
     
     const result = res.body;
