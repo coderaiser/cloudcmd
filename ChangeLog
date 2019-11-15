@@ -1,3 +1,15 @@
+2019.11.15, v14.2.0
+
+feature:
+- (cloudcmd) add CLOUDCMD_PREFIX
+- (package) chalk v3.0.0
+- (package) eslint-plugin-putout v3.0.0
+- (package) madrun v5.0.0
+- (package) putout v7.0.0
+- (package) madrun v4.0.0
+- (package) try-to-catch v2.0.0
+
+
 2019.10.16, v14.1.2
 
 fix:
