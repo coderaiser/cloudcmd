@@ -176,27 +176,6 @@ test('cloudcmd: route: keys panel', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: file: fs', async (t) => {
-    const root = path.join(fixtureDir, 'empty-file');
-    const config = {
-        root,
-    };
-    
-    const options = {
-        config,
-    };
-    
-    const {body} = await request.get('/', {
-        options,
-    });
-    
-    const expected = 'EISDIR: illegal operation on a directory, read';
-    
-    // body empty on node v10 and v12 on mac os
-    t.ok(!body || body.includes(expected), 'should equal');
-    t.end();
-});
-
 test('cloudcmd: route: symlink', async (t) => {
     const emptyDir = path.join(fixtureDir, 'empty-dir');
     const root = fixtureDir;
