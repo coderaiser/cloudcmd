@@ -180,9 +180,11 @@ function cloudcmd({modules, config}) {
     const diff = apart(config, 'diff');
     const zip = apart(config, 'zip');
     const root = apart(config, 'root');
-    const dir = DIR_ROOT;
     
-    const ponseStatic = ponse.static(dir, {cache});
+    const ponseStatic = ponse.static({
+        cache,
+        root: DIR_ROOT,
+    });
     
     const dropbox = config('dropbox');
     const dropboxToken = config('dropboxToken');
