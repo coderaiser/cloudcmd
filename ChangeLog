@@ -1,3 +1,17 @@
+2019.12.21, v14.2.1
+
+feature:
+- (package) for-each-key v2.0.0
+- (package) jonny v3.0.0
+- (package) jaguar v6.0.0
+- (package) ponse v4.0.0
+- (package) ponse v3.5.1
+- (package) memfs v3.0.1
+- (package) url-loader v3.0.0
+- (package) nodemon v2.0.1
+- (package) stylelint v12.0.0
+
+
 2019.11.15, v14.2.0
 
 feature:
