@@ -1,3 +1,8 @@
+:root {
+    --color: rgba(49, 123, 249);
+    --color-transparent: rgba(49, 123, 249, 0.4);
+}
+
 html {
     height           : 94%;
 }
@@ -42,7 +47,7 @@ body, pre, code {
 
 .panel, .cmd-button {
     border: 1px solid;
-    border-color: rgba(49, 123, 249, 0.4);
+    border-color: var(--color-transparent);
 }
 
 .icon {
@@ -89,7 +94,7 @@ body, pre, code {
     bottom      : 5px;
     left        : 16px;
     font-size   : 10px;
-    color       : rgb(49, 123, 249);
+    color       : var(--color);
     content     : attr(data-progress);
 }
 
@@ -109,7 +114,7 @@ body, pre, code {
 
 .cmd-button:active {
     color: white;
-    background-color: rgb(49, 123, 249);
+    background-color: var(--color);
     transition: ease 0.1s;
 }
 
@@ -159,7 +164,7 @@ a:hover, a:active {
 }
 
 .current-file {
-    box-shadow: 0 0 0 1px rgba(49, 123, 249, 0.4) inset;
+    box-shadow: 0 0 0 1px var(--color-transparent) inset;
 }
 
 .cut-file {

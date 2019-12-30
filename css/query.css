@@ -99,7 +99,7 @@
     
     /* текущий файл под курсором */
     .current-file {
-        background-color: rgba(49, 123, 249, .40);
+        background-color: var(--color-transparent);
         color: white;
     }
     /* делаем иконки под курсом белыми */
