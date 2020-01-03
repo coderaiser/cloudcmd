@@ -8,8 +8,6 @@ const {
 
 const {EnvironmentPlugin} = require('webpack');
 
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-
 const dir = './client';
 const dirModules = './client/modules';
 const modules = './modules';
@@ -51,11 +49,6 @@ const rules = clean([
 const plugins = [
     new EnvironmentPlugin({
         NODE_ENV,
-    }),
-    
-    new ServiceWorkerWebpackPlugin({
-        entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
-        excludes: ['*'],
     }),
 ];
 
