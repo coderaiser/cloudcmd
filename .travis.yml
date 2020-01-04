@@ -21,9 +21,9 @@ os:
 git:
   autocrlf: input
 
-
 script:
-  - npm run lint && npm run build && npm run coverage && npm run report
+  - npm i cross-env -g
+  - npm run lint && cross-env npm run build && npm run coverage && npm run report
 
 notifications:
     email:
