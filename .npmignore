@@ -2,7 +2,7 @@
 *.spec.js
 *.fixture.js*
 manifest.yml
-Dockerfile*
+docker
 docker-compose.yml
 test
 fixture
