@@ -178,7 +178,7 @@
     "coveralls": "^3.0.0",
     "css-loader": "^3.0.0",
     "domtokenlist-shim": "^1.2.0",
-    "emitify": "^3.0.2",
+    "emitify": "^4.0.1",
     "eslint": "^6.0.0-alpha",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-putout": "^3.0.0",
