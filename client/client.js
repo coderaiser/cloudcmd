@@ -38,7 +38,6 @@ load.addErrorListener((e, src) => {
 });
 
 function CloudCmdProto(DOM) {
-    let Key;
     let Listeners;
     
     const log = (...a) => {
@@ -206,19 +205,8 @@ function CloudCmdProto(DOM) {
     };
     
     const initModules = async () => {
-        exec.if(CloudCmd.Key, () => {
-            Key = new CloudCmd.Key();
-            CloudCmd.Key = Key;
-            Key.bind();
-        }, (func) => {
-            /* привязываем клавиши к функциям */
-            const path = 'key.js';
-            
-            loadModule({
-                path,
-                func,
-            });
-        });
+        CloudCmd.Key = new CloudCmd.Key();
+        CloudCmd.Key.bind();
         
         const [, modules] = await tryToCatch(Files.get, 'modules');
         const showLoad = Images.show.load;
