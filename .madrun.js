@@ -71,6 +71,8 @@ module.exports = {
     'docker:build:alpine': () => `docker build -f docker/Dockerfile.alpine -t coderaiser/cloudcmd:${version}-alpine .`,
     'docker:build:arm32': () => `docker build -f docker/arm/Dockerfile.arm32v7 -t coderaiser/cloudcmd:${version}-arm32 .`,
     'docker:build:arm64': () => `docker build -f docker/arm/Dockerfile.arm64v8 -t coderaiser/cloudcmd:${version}-arm64 .`,
+    'docker:manifest:create': () => 'docker manifest create coderaiser/cloudcmd:latest coderaiser/cloudcmd:latest-x64 coderaiser/cloudcmd:latest-arm32 coderaiser/cloudcmd:latest-arm64',
+    'docker:manifest:push': () => 'docker manifest push coderaiser/cloudcmd:latest',
     'docker': () => run(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
     'docker-ci': () => run(['build', 'docker-login', 'docker']),
     'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
@@ -100,7 +102,8 @@ module.exports = {
     ]),
 
     'docker:manifest': () => run([
-        'docker manifest create coderaiser/cloudcmd:latest coderaiser/cloudcmd:latest-x64 coderaiser/cloudcmd:latest-arm32 coderaiser/cloudcmd:latest-arm64'
+        'docker:manifest:create',
+        'docker:manifest:push',
     ]),
 
     'docker:tag': () => `docker tag coderaiser/cloudcmd:${version}-x64 coderaiser/cloudcmd:latest-x64`,
