@@ -6,7 +6,7 @@ const {
     predefined,
 } = require('madrun');
 
-const { version } = require('./package');
+const {version} = require('./package');
 
 const names = [
     'bin/cloudcmd.js',
@@ -23,7 +23,7 @@ const names = [
     '{client,server,common}/**/*.spec.js',
 ];
 
-const { putout } = predefined;
+const {putout} = predefined;
 
 const env = 'THREAD_IT_COUNT=0';
 
@@ -42,14 +42,14 @@ module.exports = {
     'lint': () => run('lint:progress'),
     'lint:progress': () => run('lint:base', '-f progress'),
     'lint:stream': () => run('lint:base', '-f stream'),
-
+    
     'test:base': () => {
         const cmd = 'tape';
         const names = `'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`;
-
+        
         return `${cmd} ${names}`;
     },
-
+    
     'test': () => `${env} ${run('test:base')}`,
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
@@ -78,7 +78,7 @@ module.exports = {
     'docker': () => run(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
     'docker-ci': () => run(['build', 'docker-login', 'docker']),
     'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
-
+    
     'docker:alpine': () => run([
         'docker:pull:alpine',
         'docker:build:alpine',
@@ -86,7 +86,7 @@ module.exports = {
         'docker:push:alpine',
         'docker:push:alpine:latest',
     ]),
-
+    
     'docker:arm32': () => run([
         'docker:pull:arm32',
         'docker:build:arm32',
@@ -94,7 +94,7 @@ module.exports = {
         'docker:push:arm32',
         'docker:push:arm32:latest',
     ]),
-
+    
     'docker:arm64': () => run([
         'docker:pull:arm64',
         'docker:build:arm64',
@@ -102,12 +102,12 @@ module.exports = {
         'docker:push:arm64',
         'docker:push:arm64:latest',
     ]),
-
+    
     'docker:manifest': () => run([
         'docker:manifest:create',
         'docker:manifest:push',
     ]),
-
+    
     'docker:tag': () => `docker tag coderaiser/cloudcmd:${version}-x64 coderaiser/cloudcmd:latest-x64`,
     'docker:tag:alpine': () => `docker tag coderaiser/cloudcmd:${version}-alpine coderaiser/cloudcmd:latest-alpine`,
     'docker:tag:arm32': () => `docker tag coderaiser/cloudcmd:${version}-arm32 coderaiser/cloudcmd:latest-arm32`,
@@ -153,4 +153,4 @@ module.exports = {
 //     'docker:push:arm64': () => dockerPush('arm64', version),
 //     'docker:push:arm64:latest': () => dockerPush('arm64'),
 // };
-// ---- 
+// ----
