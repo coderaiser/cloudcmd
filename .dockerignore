@@ -11,8 +11,7 @@ yarn-error.log
 yarn.lock
 now.json
 
-Dockerfile
-Dockerfile.alpine
+docker
 
 webpack.config.js
 cssnano.config.js

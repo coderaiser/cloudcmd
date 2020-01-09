@@ -63,10 +63,12 @@ module.exports = {
     'docker:push:latest': () => 'docker push coderaiser/cloudcmd:latest-x64',
     'docker:push:alpine': () => `docker push coderaiser/cloudcmd:${version}-alpine`,
     'docker:push:alpine:latest': () => 'docker push coderaiser/cloudcmd:latest-alpine',
+    // ---- Following lines will be replaced by the line in the end, which does not compile yet!
     'docker:push:arm32': () => `docker push coderaiser/cloudcmd:${version}-arm32`,
     'docker:push:arm32:latest': () => 'docker push coderaiser/cloudcmd:latest-arm32',
     'docker:push:arm64': () => `docker push coderaiser/cloudcmd:${version}-arm64`,
     'docker:push:arm64:latest': () => 'docker push coderaiser/cloudcmd:latest-arm64',
+    // ----
     'docker:build': () => `docker build -f docker/Dockerfile -t coderaiser/cloudcmd:${version}-x64 .`,
     'docker:build:alpine': () => `docker build -f docker/Dockerfile.alpine -t coderaiser/cloudcmd:${version}-alpine .`,
     'docker:build:arm32': () => `docker build -f docker/arm/Dockerfile.arm32v7 -t coderaiser/cloudcmd:${version}-arm32 .`,
@@ -139,3 +141,16 @@ module.exports = {
     'build:client:dev': () => run('6to5:client:dev'),
     'heroku-postbuild': () => run('6to5:client'),
 };
+
+// ---- This does not compile!
+// function dockerPush(type, version = 'latest') {
+//     return `docker push coderaiser/cloudcmd:${version}-${type}`;
+// }
+
+// module.exports = {
+//     'docker:push:arm32': () => dockerPush('arm32', version),
+//     'docker:push:arm32:latest': () => dockerPush('arm32'),
+//     'docker:push:arm64': () => dockerPush('arm64', version),
+//     'docker:push:arm64:latest': () => dockerPush('arm64'),
+// };
+// ---- 
