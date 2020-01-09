@@ -7,16 +7,16 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 
-RUN apt-get update && apt-get -y install python2.7 python2.7-dev make g++
+RUN apt-get update && apt-get -y install python3 make g++
 
-ENV PYTHON python2.7
+ENV PYTHON python3
 
 RUN npm config set package-lock false && \
     npm install --production && \
     npm i gritty && \
     npm cache clean --force
     
-RUN apt-get -y remove --purge python2.7 python2.7-dev make g++
+RUN apt-get -y remove --purge python3 make g++
 
 COPY . /usr/src/app
 
