@@ -44,7 +44,6 @@ module.exports = function setCurrentByChar(char, charStore) {
             firstByName = byName;
         
         --skipCount;
-    
     };
     
     names
