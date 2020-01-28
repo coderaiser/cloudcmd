@@ -165,7 +165,7 @@
     "@babel/code-frame": "^7.5.5",
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
-    "@cloudcmd/clipboard": "^1.0.2",
+    "@cloudcmd/clipboard": "^2.0.0",
     "@cloudcmd/create-element": "^2.0.0",
     "@cloudcmd/modal": "^2.0.0",
     "@cloudcmd/olark": "^3.0.0",
