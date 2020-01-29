@@ -236,11 +236,7 @@ function execIfNotUL(callback, event) {
 }
 
 function onClick(event) {
-    const ctrl = event.ctrlKey;
-    
-    if (!ctrl)
-        event.preventDefault();
-    
+    event.preventDefault();
     changePanel(event.target);
 }
 
