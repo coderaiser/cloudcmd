@@ -38,7 +38,7 @@ services:
 before_deploy:
   - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
   - mkdir -p $HOME/.docker
-  - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
+  - echo '{"experimental":"enabled"}' | tee $HOME/.docker/config.json
   - sudo service docker start
 
 deploy:
@@ -46,7 +46,7 @@ deploy:
   script: npm run docker-ci
   skip_cleanup: true
   on:
-    node: "10"
+    node: 12
     condition: $TRAVIS_OS_NAME = linux
     tags: true
     all_branches: false

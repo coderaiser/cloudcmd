@@ -56,7 +56,7 @@ module.exports = {
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
     'wisdom:type': () => 'bin/release.js',
-    'docker:pull:node': () => 'docker pull node',
+    'docker:pull': () => 'docker pull node',
     'docker:pull:alpine': () => 'docker pull mhart/alpine-node',
     'docker:pull:arm32': () => 'docker pull arm32v7/node:slim',
     'docker:pull:arm64': () => 'docker pull arm64v8/node:slim',
@@ -76,16 +76,24 @@ module.exports = {
         const images = [
             `${dockerName}:latest`,
             `${dockerName}:latest-x64`,
-            `${dockerName}:latest-arm32`,
-            `${dockerName}:latest-arm64`,
+            // `${dockerName}:latest-arm32`,
+            // `${dockerName}:latest-arm64`,
         ].join(' ');
         
         return `docker manifest create ${images}`;
     },
     'docker:manifest:push': () => `docker manifest push ${dockerName}:latest`,
-    'docker': () => run(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
+    'docker': () => run(['docker:x64', 'docker:alpine', 'docker:manifest:*']),
     'docker-ci': () => run(['build', 'docker-login', 'docker']),
     'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
+    
+    'docker:x64': () => run([
+        'docker:pull',
+        'docker:build',
+        'docker:tag',
+        'docker:push',
+        'docker:push:latest',
+    ]),
     
     'docker:alpine': () => run([
         'docker:pull:alpine',
@@ -95,6 +103,7 @@ module.exports = {
         'docker:push:alpine:latest',
     ]),
     
+    /*
     'docker:arm32': () => run([
         'docker:pull:arm32',
         'docker:build:arm32',
@@ -110,6 +119,7 @@ module.exports = {
         'docker:push:arm64',
         'docker:push:arm64:latest',
     ]),
+    */
     
     'docker:manifest': () => run([
         'docker:manifest:create',
