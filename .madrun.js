@@ -26,6 +26,7 @@ const names = [
 const {putout} = predefined;
 
 const env = 'THREAD_IT_COUNT=0';
+const dockerName = 'coderaiser/cloudcmd';
 
 module.exports = {
     'start': () => 'node bin/cloudcmd.js',
@@ -71,8 +72,17 @@ module.exports = {
     'docker:build:alpine': () => dockerBuild('docker/Dockerfile.alpine', 'alpine', version),
     'docker:build:arm32': () => dockerBuild('docker/arm/Dockerfile.arm32v7', 'arm32', version),
     'docker:build:arm64': () => dockerBuild('docker/arm/Dockerfile.arm64v8', 'arm64', version),
-    'docker:manifest:create': () => 'docker manifest create coderaiser/cloudcmd:latest coderaiser/cloudcmd:latest-x64 coderaiser/cloudcmd:latest-arm32 coderaiser/cloudcmd:latest-arm64',
-    'docker:manifest:push': () => 'docker manifest push coderaiser/cloudcmd:latest',
+    'docker:manifest:create': () => {
+        const images = [
+            `${dockerName}:latest`,
+            `${dockerName}:latest-x64`,
+            `${dockerName}:latest-arm32`,
+            `${dockerName}:latest-arm64`,
+        ].join(' ');
+        
+        return `docker manifest create ${images}`;
+    },
+    'docker:manifest:push': () => `docker manifest push ${dockerName}:latest`,
     'docker': () => run(['docker:pull*', 'docker:build*', 'docker:tag*', 'docker:push*']),
     'docker-ci': () => run(['build', 'docker-login', 'docker']),
     'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
@@ -119,6 +129,7 @@ module.exports = {
     'docker:rm:arm64': () => dockerRmi('arm64', version),
     'docker:rm:latest-arm64': () => dockerRmi('arm64'),
     'docker:rm-old': () => `${parallel('docker:rm:*')} || true`,
+    
     'coverage': () => `${env} nyc ${run('test:base')}`,
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     '6to5': () => 'webpack --progress',
