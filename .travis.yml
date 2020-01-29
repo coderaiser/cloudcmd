@@ -1,20 +1,20 @@
 language: node_js
 node_js:
-    - 13
-    - 12
-    - 10
+  - 13
+  - 12
+  - 10
 
 cache:
   npm: false
 
 matrix:
-    allow_failures:
-        - os: windows
+  allow_failures:
+    - os: windows
 
 os:
-    - linux
-    - osx
-    - windows
+  - linux
+  - osx
+  - windows
 
 # https://docs.travis-ci.com/user/customizing-the-build/#git-end-of-line-conversion-control
 # need for windows
@@ -26,22 +26,27 @@ script:
   - npm run lint && npm run build && npm run coverage && npm run report
 
 notifications:
-    email:
-        on_success: never
-        on_failure: change
+  email:
+    on_success: never
+    on_failure: change
 
 sudo: required
 
 services:
   - docker
 
-deploy:
-    provider: script
-    script: npm run docker-ci
-    skip_cleanup: true
-    on:
-        node: '10'
-        condition: $TRAVIS_OS_NAME = linux
-        tags: true
-        all_branches: false
+before_deploy:
+  - echo '{"experimental":"enabled"}' | sudo tee /etc/docker/daemon.json
+  - mkdir -p $HOME/.docker
+  - echo '{"experimental":"enabled"}' | sudo tee $HOME/.docker/config.json
+  - sudo service docker start
 
+deploy:
+  provider: script
+  script: npm run docker-ci
+  skip_cleanup: true
+  on:
+    node: "10"
+    condition: $TRAVIS_OS_NAME = linux
+    tags: true
+    all_branches: false

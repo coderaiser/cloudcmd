@@ -1,5 +1,5 @@
-FROM node:alpine
-MAINTAINER Coderaiser
+FROM node
+LABEL maintainer="Coderaiser"
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -8,12 +8,8 @@ COPY package.json /usr/src/app/
 
 RUN npm config set package-lock false && \
     npm install --production && \
-    apk update && \
-    apk add --no-cache bash make g++ python && \
     npm i gritty && \
-    npm cache clean --force && \
-    apk del make g++ python && \
-    rm -rf /usr/include /tmp/* /var/cache/apk/*
+    npm cache clean --force
 
 COPY . /usr/src/app
 
