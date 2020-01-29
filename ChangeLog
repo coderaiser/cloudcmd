@@ -1,3 +1,15 @@
+2020.01.29, v14.3.0
+
+feature:
+- (listeners) improve file select with ctrl + click (#269)
+- (docker) add Dockerfile for arm based clients such as rpi (#268)
+- (package) @cloudcmd/clipboard v2.0.0
+- (package) stylelint v13.0.0
+- (package) emitify v4.0.1
+- (package) nyc v15.0.0
+- (package) eslint-plugin-node v11.0.0
+
+
 2019.12.21, v14.2.1
 
 feature:
