@@ -21,7 +21,7 @@ function _middle(config, authentication, req, res, next) {
         return next();
     
     const success = () => next(/* success */);
-    authentication.check(req, res, success);
+    return authentication.check(success)(req, res);
 }
 
 function _check(config, username, password, callback) {
