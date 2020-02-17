@@ -168,7 +168,7 @@ function _middle(manage, req, res, next) {
     
     switch(req.method) {
     case 'GET':
-        get(manage, req, res, next);
+        get(manage, req, res);
         break;
     
     case 'PATCH':

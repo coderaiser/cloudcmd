@@ -339,7 +339,7 @@ function CloudCmdProto(DOM) {
             const {noCurrent} = options;
             
             if (!isRefresh && json)
-                return await createFileTable(json, panel, options, callback);
+                return await createFileTable(json, panel, options);
             
             const position = DOM.getPanelPosition(panel);
             const sort = CloudCmd.sort[position];

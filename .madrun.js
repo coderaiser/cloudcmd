@@ -40,7 +40,7 @@ module.exports = {
     'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
     'fix:lint': () => run(['lint', 'lint:css'], '--fix'),
-    'lint': () => run('lint:progress'),
+    'lint': () => run('lint:progress', '--cache'),
     'lint:progress': () => run('lint:base', '-f progress'),
     'lint:stream': () => run('lint:base', '-f stream'),
     
