@@ -41,14 +41,16 @@ module.exports.init = () => {
         menuDataFile,
     } = getFileMenuData();
     
-    const NOT_FILE = true;
     const fm = DOM.getFM();
     const menuData = getMenuData(isAuth);
-    const options = getOptions(NOT_FILE);
-    const optionsFile = getOptions();
+    const options = getOptions({type: 'context'});
+    const optionsFile = getOptions({type: 'file'});
     
     MenuContext = supermenu(fm, options, menuData);
     MenuContextFile = supermenu(fm, optionsFile, menuDataFile);
+    
+    MenuContext.addContextMenuListener();
+    MenuContextFile.addContextMenuListener();
     
     Events.addKey(listener);
 };
@@ -91,14 +93,14 @@ function getMenuNameByEl(el) {
     return 'contextFile';
 }
 
-function getOptions(notFile) {
+function getOptions({type}) {
     let name;
     let func;
     
-    if (notFile) {
+    if (type === 'context') {
         name = 'context';
         func = Key.unsetBind;
-    } else {
+    } else if (type === 'file') {
         name = 'contextFile';
     }
     
@@ -205,21 +207,21 @@ function beforeShow(callback, params) {
     });
     
     const menuName = getMenuNameByEl(el);
-    let notShow = menuName === 'contextFile';
     
-    if (params.name === 'contextFile') {
-        notShow = !notShow;
-    }
+    let isShow = menuName !== 'contextFile';
     
-    if (!notShow)
+    if (params.name === 'contextFile')
+        isShow = !isShow;
+    
+    if (isShow)
         MenuShowedName = name;
     
     exec(callback);
     
-    if (!notShow)
-        notShow = isPath(params.x, params.y);
+    if (isShow)
+        isShow = isPath(params.x, params.y);
     
-    return notShow;
+    return isShow;
 }
 
 function beforeClick(name) {

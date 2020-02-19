@@ -203,6 +203,8 @@ function setMenu(event) {
     const element = CloudCmd.Edit.getElement();
     
     Menu = supermenu(element, options, menuData);
+    
+    Menu.addContextMenuListener();
     Menu.show(position.x, position.y);
 }
 
