@@ -1,3 +1,11 @@
+2020.02.21, v14.3.1
+
+feature:
+- (package) supermenu v4.0.1
+- (package) stylelint-config-standard v20.0.0
+- (package) http-auth v4.1.2
+
+
 2020.01.29, v14.3.0
 
 feature:
