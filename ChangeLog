@@ -1,3 +1,12 @@
+2020.02.21, v14.3.2
+
+feature:
+- (package) serve-once v2.0.0
+- (package) edward v12.0.0
+- (package) dword v12.0.0
+- (package) ponse v5.0.0
+
+
 2020.02.21, v14.3.1
 
 feature:
