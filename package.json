@@ -206,7 +206,7 @@
     "request": "^2.76.0",
     "rimraf": "^3.0.0",
     "scroll-into-view-if-needed": "^2.2.5",
-    "serve-once": "^1.5.0",
+    "serve-once": "^2.0.0",
     "serviceworker-webpack-plugin": "^1.0.1",
     "smalltalk": "^4.0.0",
     "style-loader": "^1.0.0",
