@@ -1,22 +1,18 @@
 'use strict';
 
-/* global DOM */
-
 const fullstore = require('fullstore');
 const limier = require('limier');
-const Info = DOM.CurrentInfo;
 
 const searchStore = fullstore([]);
 const searchIndex = fullstore(0);
 
-module.exports.find = (value) => {
-    const names = Info.files.map(DOM.getCurrentName);
+module.exports.find = (value, names) => {
     const result = limier(value, names);
     
     searchStore(result);
     searchIndex(0);
     
-    DOM.setCurrentByName(result[0]);
+    return result;
 };
 
 module.exports.findNext = () => {
@@ -24,7 +20,7 @@ module.exports.findNext = () => {
     const index = next(searchIndex(), names.length);
     
     searchIndex(index);
-    DOM.setCurrentByName(names[searchIndex()]);
+    return names[searchIndex()];
 };
 
 module.exports.findPrevious = () => {
@@ -32,7 +28,7 @@ module.exports.findPrevious = () => {
     const index = previous(searchIndex(), names.length);
     
     searchIndex(index);
-    DOM.setCurrentByName(names[index]);
+    return names[index];
 };
 
 module.exports._next = next;

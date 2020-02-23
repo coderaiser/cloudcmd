@@ -5,11 +5,10 @@ const {join} = require('path');
 const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
-const {reRequire} = mockRequire;
+const {reRequire, stopAll} = mockRequire;
 
 const dir = '../';
 
-const pathKey = join(dir, 'key');
 const pathVim = join(dir, 'vim');
 const pathFind = join(dir, 'vim', 'find');
 
@@ -24,7 +23,6 @@ global.CloudCmd = getCloudCmd();
 const {DOM} = global;
 const {Buffer} = DOM;
 
-const KEY = require(pathKey);
 const vim = require(pathVim);
 
 test('cloudcmd: client: key: set next file: no', (t) => {
@@ -147,7 +145,6 @@ test('cloudcmd: client: key: select +2 files from current before delete', (t) =>
     vim('j', event);
     
     t.ok(setCurrentFile.calledWith(last), 'should set next file');
-    
     t.end();
 });
 
@@ -194,7 +191,6 @@ test('cloudcmd: client: key: set previous file current', (t) => {
     vim('k', {});
     
     t.ok(setCurrentFile.calledWith(previousSibling), 'should set previous file');
-    
     t.end();
 });
 
@@ -343,12 +339,9 @@ test('cloudcmd: client: key: ESC', (t) => {
     global.DOM.CurrentInfo.element = element;
     global.DOM.unselectFiles = unselectFiles ;
     
-    vim('', {
-        keyCode: KEY.ESC,
-    });
+    vim('Escape');
     
     t.ok(unselectFiles.calledWith(), 'should toggle selection');
-    
     t.end();
 });
 
@@ -363,14 +356,11 @@ test('cloudcmd: client: key: Enter', (t) => {
     DOM.CurrentInfo.element = element;
     DOM.setCurrentFile = setCurrentFile;
     
-    vim('', {
-        keyCode: KEY.ENTER,
-    });
+    vim('Enter');
     
-    vim('j', {});
+    vim('j');
     
     t.ok(setCurrentFile.calledWith(nextSibling), 'should set next file');
-    
     t.end();
 });
 
@@ -401,7 +391,7 @@ test('cloudcmd: client: key: n', (t) => {
     
     vim('n', event);
     
-    mockRequire.stop(pathFind);
+    stopAll(pathFind);
     
     t.ok(findNext.calledWith(), 'should call findNext');
     t.end();
@@ -419,7 +409,7 @@ test('cloudcmd: client: key: N', (t) => {
     
     vim('N', event);
     
-    mockRequire.stop(pathFind);
+    stopAll(pathFind);
     
     t.ok(findPrevious.calledWith(), 'should call findPrevious');
     t.end();
