@@ -23,10 +23,12 @@ const noop = () => {};
 
 module.exports = (key, operations) => {
     const prevStore = store();
+    const isVisual = visual();
     const value = store(prevStore.concat(key));
     const {
         escape = noop,
-        move = noop,
+        moveNext = noop,
+        movePrevious = noop,
         remove = noop,
         copy = noop,
         paste = noop,
@@ -46,25 +48,23 @@ module.exports = (key, operations) => {
     }
     
     if (key === 'j') {
-        const [prev, isDelete] = handleDelete(prevStore);
-        const count = getNumber(prev);
+        const {count, isDelete, isVisual} = handleDelete(prevStore);
         
-        !isNaN(count) && move('next', {
-            isDelete,
+        !isNaN(count) && moveNext({
             count,
-            visual,
+            isVisual,
+            isDelete,
         });
         
         return end();
     }
     
     if (key === 'k') {
-        const [prev, isDelete] = handleDelete(prevStore);
-        const count = getNumber(prev);
+        const {count, isDelete, isVisual} = handleDelete(prevStore);
         
-        !isNaN(count) && move('previous', {
+        !isNaN(count) && movePrevious({
             count,
-            visual,
+            isVisual,
             isDelete,
         });
         
@@ -72,11 +72,11 @@ module.exports = (key, operations) => {
     }
     
     if (/^gg$/.test(value)) {
-        const [, isDelete] = handleDelete(prevStore);
+        const {count, isDelete, isVisual} = handleDelete(prevStore);
         
-        move('previous', {
+        movePrevious({
             count: Infinity,
-            visual,
+            isVisual,
             isDelete,
         });
         
@@ -90,9 +90,9 @@ module.exports = (key, operations) => {
     }
     
     if (key === 'G') {
-        move('next', {
+        moveNext({
             count: Infinity,
-            visual,
+            isVisual,
         });
         
         return end();
@@ -142,7 +142,14 @@ function handleDelete(prevStore) {
         prevStore = rmFirst(prevStore);
     }
     
-    return [prevStore, isDelete];
+    const count = getNumber(prevStore);
+    const isVisual = visual();
+    
+    return {
+        count,
+        isDelete,
+        isVisual,
+    };
 }
 
 function getNumber(value) {

@@ -29,10 +29,17 @@ const getOperations = (event) => {
             DOM.toggleSelectedFile(current);
         },
         paste: DOM.Buffer.paste,
-        move: (sibling, {count, visual, isDelete}) => {
-            setCurrent(sibling, {
+        moveNext: ({count, isVisual, isDelete}) => {
+            setCurrent('next', {
                 count,
-                visual,
+                isVisual,
+                isDelete,
+            });
+        },
+        movePrevious: ({count, isVisual, isDelete}) => {
+            setCurrent('previous', {
+                count,
+                isVisual,
                 isDelete,
             });
         },
@@ -70,9 +77,9 @@ function selectFile(current) {
     DOM.selectFile(current);
 }
 
-function setCurrent(sibling, {count, visual, isDelete}) {
+function setCurrent(sibling, {count, isVisual, isDelete}) {
     let current = Info.element;
-    const select = visual() ? selectFile : DOM.unselectFile;
+    const select = isVisual ? selectFile : DOM.unselectFile;
     
     select(current);
     
