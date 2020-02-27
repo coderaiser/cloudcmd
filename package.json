@@ -159,7 +159,7 @@
     "try-to-catch": "^3.0.0",
     "tryrequire": "^2.0.1",
     "wraptile": "^3.0.0",
-    "writejson": "^2.0.0"
+    "writejson": "^3.0.0"
   },
   "devDependencies": {
     "@babel/code-frame": "^7.5.5",
