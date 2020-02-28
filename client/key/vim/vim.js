@@ -48,7 +48,11 @@ module.exports = (key, operations) => {
     }
     
     if (key === 'j') {
-        const {count, isDelete, isVisual} = handleDelete(prevStore);
+        const {
+            count,
+            isDelete,
+            isVisual,
+        } = handleDelete(prevStore);
         
         !isNaN(count) && moveNext({
             count,
@@ -60,7 +64,11 @@ module.exports = (key, operations) => {
     }
     
     if (key === 'k') {
-        const {count, isDelete, isVisual} = handleDelete(prevStore);
+        const {
+            count,
+            isDelete,
+            isVisual,
+        } = handleDelete(prevStore);
         
         !isNaN(count) && movePrevious({
             count,
@@ -72,7 +80,10 @@ module.exports = (key, operations) => {
     }
     
     if (/^gg$/.test(value)) {
-        const {count, isDelete, isVisual} = handleDelete(prevStore);
+        const {
+            isDelete,
+            isVisual,
+        } = handleDelete(prevStore);
         
         movePrevious({
             count: Infinity,

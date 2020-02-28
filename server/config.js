@@ -7,7 +7,6 @@ const DIR = DIR_SERVER + '../';
 const path = require('path');
 const fs = require('fs');
 const Emitter = require('events');
-const {promisify} = require('util');
 const {homedir} = require('os');
 
 const exit = require(DIR_SERVER + 'exit');

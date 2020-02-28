@@ -128,7 +128,7 @@ async function show(data, options) {
     }
 }
 
-async function viewPDF(src) {
+function viewPDF(src) {
     const element = createElement('iframe', {
         src,
         width: '100%',

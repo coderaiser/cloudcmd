@@ -5,7 +5,7 @@ const tryCatch = require('try-catch');
 const {parse, stringify} = JSON;
 const isObj = (a) => typeof a === 'object';
 
-module.exports.set = async (name, data) => {
+module.exports.set = (name, data) => {
     const primitive = !isObj(data) ? data : stringify(data);
     
     localStorage.setItem(name, primitive);
@@ -18,11 +18,11 @@ module.exports.get = async (name) => {
     return result;
 };
 
-module.exports.clear = async () => {
+module.exports.clear = () => {
     localStorage.clear();
 };
 
-module.exports.remove = async(item) => {
+module.exports.remove = (item) => {
     localStorage.removeItem(item);
 };
 
