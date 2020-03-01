@@ -125,7 +125,7 @@
     "express": "^4.13.0",
     "files-io": "^3.0.0",
     "find-up": "^4.0.0",
-    "flop": "^7.0.0",
+    "flop": "^8.0.0",
     "for-each-key": "^2.0.0",
     "format-io": "^2.0.0",
     "fullstore": "^2.0.2",

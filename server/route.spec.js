@@ -6,7 +6,7 @@ const fs = require('fs');
 const tryToCatch = require('try-to-catch');
 const test = require('supertape');
 const mockRequire = require('mock-require');
-const {reRequire} = mockRequire;
+const {reRequire, stopAll} = mockRequire;
 
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 
@@ -259,7 +259,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
         name,
     }];
     
-    const read = (path, fn) => fn(null, {
+    const read = async (path) => ({
         path,
         files,
     });
@@ -277,7 +277,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     
     const {body} = await request.get('/');
     
-    mockRequire.stop('flop');
+    stopAll();
     
     t.ok(body.includes(nameEncoded), 'should encode name');
     t.end();
@@ -289,7 +289,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
         name,
     }];
     
-    const read = (path, fn) => fn(null, {
+    const read = async (path) => ({
         path,
         files,
     });
@@ -304,7 +304,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/');
     
-    mockRequire.stop('flop');
+    stopAll();
     
     t.notOk(body.includes(name), 'should not put not encoded name');
     t.end();
@@ -316,7 +316,7 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
         name,
     }];
     
-    const read = (path, fn) => fn(null, {
+    const read = async (path) => ({
         path,
         files,
     });
@@ -334,7 +334,7 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     
     const {status} = await request.get('/');
     
-    mockRequire.stop('flop');
+    stopAll();
     
     t.equal(status, 200, 'should not hang up');
     t.end();
