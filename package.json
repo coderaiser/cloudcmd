@@ -202,7 +202,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.0",
     "philip": "^2.0.0",
     "place": "^1.1.4",
-    "readjson": "^1.1.3",
+    "readjson": "^2.0.1",
     "request": "^2.76.0",
     "rimraf": "^3.0.0",
     "scroll-into-view-if-needed": "^2.2.5",
