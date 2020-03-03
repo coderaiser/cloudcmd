@@ -4,7 +4,6 @@ const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
 
 const {realpath} = require('fs').promises;
-const {promisify} = require('util');
 
 const {read} = require('flop');
 const ponse = require('ponse');
