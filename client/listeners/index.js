@@ -179,7 +179,7 @@ function isNoCurrent(panel) {
     return namePanel !== nameInfoPanel;
 }
 
-function decodePath(path){
+function decodePath(path) {
     const url = CloudCmd.HOST;
     const {prefix} = CloudCmd;
     const prefixReg = RegExp('^' + prefix + FS);
