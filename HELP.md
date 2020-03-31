@@ -1,4 +1,4 @@
-# Cloud Commander v14.3.5
+# Cloud Commander v14.3.6
 
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
@@ -947,6 +947,7 @@ There are a lot of ways to be involved in `Cloud Commander` development:
 
 Version history
 ---------------
+- *2020.03.31*, **[v14.3.6](//github.com/coderaiser/cloudcmd/releases/tag/v14.3.6)**
 - *2020.03.25*, **[v14.3.5](//github.com/coderaiser/cloudcmd/releases/tag/v14.3.5)**
 - *2020.03.03*, **[v14.3.4](//github.com/coderaiser/cloudcmd/releases/tag/v14.3.4)**
 - *2020.02.23*, **[v14.3.3](//github.com/coderaiser/cloudcmd/releases/tag/v14.3.3)**
