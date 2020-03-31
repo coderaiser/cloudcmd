@@ -463,21 +463,6 @@ function CmdProto() {
     };
     
     /**
-     * check is current file is a directory
-     *
-     * @param currentFile
-     */
-    this.isCurrentIsDir = (currentFile) => {
-        const current = currentFile || DOM.getCurrentFile();
-        const fileType = DOM.getByDataName('js-type', current);
-        
-        return DOM.isContainClass(fileType, [
-            'directory',
-            'directory-link',
-        ]);
-    };
-    
-    /**
      * get link from current (or param) file
      *
      * @param currentFile - current file by default

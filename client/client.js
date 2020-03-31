@@ -472,6 +472,7 @@ function CloudCmdProto(DOM) {
             const owner = DOM.getCurrentOwner(current);
             const mode = DOM.getCurrentMode(current);
             const date = DOM.getCurrentDate(current);
+            const type = DOM.getCurrentType(current);
             
             return {
                 name,
@@ -479,6 +480,7 @@ function CloudCmdProto(DOM) {
                 mode,
                 owner,
                 date,
+                type,
             };
         };
         

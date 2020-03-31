@@ -168,6 +168,78 @@ test('current-file: isCurrentFile', (t) => {
     t.end();
 });
 
+test('current-file: getCurrentType', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM();
+    global.CloudCmd = getCloudCmd();
+    
+    const {getByDataName} = global.DOM;
+    
+    const current = create();
+    
+    currentFile.getCurrentType(current);
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.ok(getByDataName.calledWith('js-type', current));
+    t.end();
+});
+
+test('current-file: isCurrentIsDir: getCurrentType', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM();
+    global.CloudCmd = getCloudCmd();
+    
+    const {getCurrentType} = global.DOM;
+    
+    const current = create();
+    
+    currentFile.isCurrentIsDir(current);
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.ok(getCurrentType.calledWith(current));
+    t.end();
+});
+
+test('current-file: isCurrentIsDir: isContainClass', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM({
+        getCurrentType: stub().returns('file'),
+    });
+    
+    global.CloudCmd = getCloudCmd();
+    
+    const {isContainClass} = global.DOM;
+    
+    const current = create();
+    
+    currentFile.isCurrentIsDir(current);
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.ok(isContainClass.calledWith('file', [
+        'directory',
+        'directory-link',
+    ]));
+    t.end();
+});
+
 function getCloudCmd({emit} = {}) {
     return {
         prefix: '',
@@ -181,12 +253,14 @@ function getDOM({
     getCurrentDirName = stub(),
     getByDataName = stub(),
     isContainClass = stub(),
+    getCurrentType = stub(),
 } = {}) {
     return {
         getCurrentDirPath,
         getCurrentDirName,
         getByDataName,
         isContainClass,
+        getCurrentType,
         CurrentInfo: {
             link,
             dirPath: '/',

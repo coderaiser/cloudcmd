@@ -280,3 +280,23 @@ module.exports.setTitle = (name) => {
     return DOM;
 };
 
+/**
+ * check is current file is a directory
+ *
+ * @param currentFile
+ */
+module.exports.isCurrentIsDir = (currentFile) => {
+    const current = currentFile || DOM.getCurrentFile();
+    const fileType = DOM.getCurrentType(current);
+    
+    return DOM.isContainClass(fileType, [
+        'directory',
+        'directory-link',
+    ]);
+};
+
+module.exports.getCurrentType = (currentFile) => {
+    const current = currentFile || DOM.getCurrentFile();
+    return DOM.getByDataName('js-type', current);
+};
+
