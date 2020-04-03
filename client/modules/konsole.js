@@ -69,11 +69,11 @@ function getEnv() {
     };
 }
 
-function onPath(path) {
+async function onPath(path) {
     if (Info.dirPath === path)
         return;
     
-    CloudCmd.loadDir({
+    await CloudCmd.loadDir({
         path,
     });
 }

@@ -179,6 +179,10 @@ test('current-file: getCurrentType', (t) => {
     
     const {getByDataName} = global.DOM;
     
+    getByDataName.returns({
+        className: 'mini-icon directory',
+    });
+    
     const current = create();
     
     currentFile.getCurrentType(current);
@@ -212,7 +216,53 @@ test('current-file: isCurrentIsDir: getCurrentType', (t) => {
     t.end();
 });
 
-test('current-file: isCurrentIsDir: isContainClass', (t) => {
+test('current-file: isCurrentIsDir: directory', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM({
+        getCurrentType: stub().returns('directory'),
+    });
+    
+    global.CloudCmd = getCloudCmd();
+    
+    const current = create();
+    
+    const result = currentFile.isCurrentIsDir(current);
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.ok(result);
+    t.end();
+});
+
+test('current-file: isCurrentIsDir: directory-link', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM({
+        getCurrentType: stub().returns('directory-link'),
+    });
+    
+    global.CloudCmd = getCloudCmd();
+    
+    const current = create();
+    
+    const result = currentFile.isCurrentIsDir(current);
+    
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.ok(result);
+    t.end();
+});
+
+test('current-file: isCurrentIsDir: file', (t) => {
     const {
         DOM,
         CloudCmd,
@@ -224,19 +274,14 @@ test('current-file: isCurrentIsDir: isContainClass', (t) => {
     
     global.CloudCmd = getCloudCmd();
     
-    const {isContainClass} = global.DOM;
-    
     const current = create();
     
-    currentFile.isCurrentIsDir(current);
+    const result = currentFile.isCurrentIsDir(current);
     
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
     
-    t.ok(isContainClass.calledWith('file', [
-        'directory',
-        'directory-link',
-    ]));
+    t.notOk(result);
     t.end();
 });
 

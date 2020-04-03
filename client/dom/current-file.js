@@ -289,14 +289,16 @@ module.exports.isCurrentIsDir = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
     const fileType = DOM.getCurrentType(current);
     
-    return DOM.isContainClass(fileType, [
-        'directory',
-        'directory-link',
-    ]);
+    return /^directory(-link)?/.test(fileType);
 };
 
 module.exports.getCurrentType = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
-    return DOM.getByDataName('js-type', current);
+    const el = DOM.getByDataName('js-type', current);
+    const type = el.className
+        .split(' ')
+        .pop();
+    
+    return type;
 };
 

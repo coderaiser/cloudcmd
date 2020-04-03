@@ -801,12 +801,12 @@ function CmdProto() {
         if (cancel)
             return;
         
-        CloudCmd.loadDir({
+        await CloudCmd.loadDir({
             path,
         });
     };
     
-    this.duplicatePanel = () => {
+    this.duplicatePanel = async () => {
         const Info = CurrentInfo;
         const {isDir} = Info;
         const panel = Info.panelPassive;
@@ -821,14 +821,14 @@ function CmdProto() {
         
         const path = getPath(isDir);
         
-        CloudCmd.loadDir({
+        await CloudCmd.loadDir({
             path,
             panel,
             noCurrent,
         });
     };
     
-    this.swapPanels = () => {
+    this.swapPanels = async () => {
         const Info = CurrentInfo;
         const {
             panel,
@@ -842,26 +842,25 @@ function CmdProto() {
         
         let currentIndex = files.indexOf(element);
         
-        CloudCmd.loadDir({
+        await CloudCmd.loadDir({
             path,
             panel: panelPassive,
             noCurrent: true,
         });
         
-        CloudCmd.loadDir({
+        await CloudCmd.loadDir({
             path: dirPathPassive,
             panel,
-        }, () => {
-            const {files} = Info;
-            const length = files.length - 1;
-            
-            if (currentIndex > length)
-                currentIndex = length;
-            
-            const el = files[currentIndex];
-            
-            DOM.setCurrentFile(el);
         });
+        
+        const length = Info.files.length - 1;
+        
+        if (currentIndex > length)
+            currentIndex = length;
+        
+        const el = Info.files[currentIndex];
+        
+        DOM.setCurrentFile(el);
     };
     
     this.CurrentInfo = CurrentInfo;

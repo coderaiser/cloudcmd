@@ -192,7 +192,7 @@ function decodePath(path) {
         .replace(NBSP_REG, SPACE) || '/';
 }
 
-function onPathElementClick(panel, event) {
+async function onPathElementClick(panel, event) {
     event.preventDefault();
     
     const element = event.target;
@@ -214,7 +214,7 @@ function onPathElementClick(panel, event) {
     const {href} = element;
     const path = decodePath(href);
     
-    CloudCmd.loadDir({
+    await CloudCmd.loadDir({
         path,
         isRefresh: false,
         panel: noCurrent ? panel : Info.panel,
@@ -264,13 +264,13 @@ function changePanel(element) {
         DOM.changePanel();
 }
 
-function onDblClick(event) {
+async function onDblClick(event) {
     const current = getLIElement(event.target);
     const isDir = DOM.isCurrentIsDir(current);
     const path = DOM.getCurrentPath(current);
     
     if (isDir) {
-        CloudCmd.loadDir({
+        await CloudCmd.loadDir({
             path: path === '/' ? '/' : path + '/',
         });
         
@@ -282,7 +282,7 @@ function onDblClick(event) {
     }
 }
 
-function onTouch(event) {
+async function onTouch(event) {
     const current = getLIElement(event.target);
     const isDir = DOM.isCurrentIsDir(current);
     
@@ -294,7 +294,7 @@ function onTouch(event) {
     if (!isCurrent)
         return;
     
-    CloudCmd.loadDir({
+    await CloudCmd.loadDir({
         path: DOM.getCurrentPath(current),
     });
 }
@@ -470,14 +470,14 @@ function unload() {
 }
 
 function pop() {
-    Events.add('popstate', ({state}) => {
+    Events.add('popstate', async ({state}) => {
         const path = (state || '').replace(FS, '');
         
         if (!path)
             return CloudCmd.route(location.hash);
         
         const history = false;
-        CloudCmd.loadDir({
+        await CloudCmd.loadDir({
             path,
             history,
         });

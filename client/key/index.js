@@ -196,7 +196,9 @@ function KeyProto() {
         
         case Key.F3:
             if (Info.isDir)
-                loadDir({path});
+                await loadDir({
+                    path,
+                });
             else if (shift)
                 CloudCmd.Markdown.show(path);
             else if (ctrlMeta)
@@ -393,7 +395,7 @@ function KeyProto() {
         
         case Key.ENTER:
             if (Info.isDir)
-                loadDir({path});
+                await loadDir({path});
             else
                 CloudCmd.View.show();
             break;
@@ -405,7 +407,7 @@ function KeyProto() {
         
         case Key.BACKSLASH:
             if (ctrlMeta)
-                loadDir({
+                await loadDir({
                     path: '/',
                 });
             break;
