@@ -91,7 +91,7 @@ function CloudCmdProto(DOM) {
      *      }
      * @param callback
      */
-    this.loadDir = (params, callback) => {
+    this.loadDir = promisify((params, callback) => {
         const p = params;
         const refresh = p.isRefresh;
         
@@ -123,7 +123,7 @@ function CloudCmdProto(DOM) {
             noCurrent,
             currentName,
         }, panel, callback);
-    };
+    });
     
     /**
      * Конструктор CloudClient, который
@@ -291,31 +291,27 @@ function CloudCmdProto(DOM) {
         func(...args);
     };
     
-    this.refresh = promisify((options = {}, callback) => {
-        if (!callback && typeof options === 'function') {
-            callback = options;
-            options = {};
-        }
-        
+    this.refresh = async (options = {}) => {
         const {
             panel = Info.panel,
             currentName,
         } = options;
+        
         const path = DOM.getCurrentDirPath(panel);
         
         const isRefresh = true;
         const history = false;
         const noCurrent = options ? options.noCurrent : false;
         
-        CloudCmd.loadDir({
+        await CloudCmd.loadDir({
             path,
             isRefresh,
             history,
             panel,
             noCurrent,
             currentName,
-        }, callback);
-    });
+        });
+    };
     
     /**
      * Функция загружает json-данные о Файловой Системе
@@ -496,11 +492,12 @@ function CloudCmdProto(DOM) {
         return fileTable;
     }
     
-    this.goToParentDir = () => {
+    this.goToParentDir = async () => {
         const {
             dir,
             dirPath,
             parentDirPath,
+            panel,
         } = Info;
         
         if (dirPath === parentDirPath)
@@ -508,14 +505,15 @@ function CloudCmdProto(DOM) {
         
         const path = parentDirPath;
         
-        CloudCmd.loadDir({path}, () => {
-            const {panel} = Info;
-            const current = DOM.getCurrentByName(dir);
-            const [first] = DOM.getFiles(panel);
-            
-            DOM.setCurrentFile(current || first, {
-                history,
-            });
+        await CloudCmd.loadDir({
+            path,
+        });
+        
+        const current = DOM.getCurrentByName(dir);
+        const [first] = DOM.getFiles(panel);
+        
+        DOM.setCurrentFile(current || first, {
+            history,
         });
     };
 }
