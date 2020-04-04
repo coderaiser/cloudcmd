@@ -1,3 +1,10 @@
+2020.04.04, v14.3.8
+
+feature:
+- (client) ajaxLoad: callback -> promise
+- (get-json-from-file-table) mv out from client
+
+
 2020.04.03, v14.3.7
 
 fix:
