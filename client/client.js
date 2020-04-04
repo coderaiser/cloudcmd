@@ -5,9 +5,7 @@
 const Emitify = require('emitify');
 const inherits = require('inherits');
 const rendy = require('rendy');
-const exec = require('execon');
 const load = require('load.js');
-const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch');
 
 const pascalCase = require('just-pascal-case');
@@ -92,7 +90,7 @@ function CloudCmdProto(DOM) {
      *      }
      * @param callback
      */
-    this.loadDir = promisify((params, callback) => {
+    this.loadDir = async (params) => {
         const p = params;
         const refresh = p.isRefresh;
         
@@ -118,13 +116,13 @@ function CloudCmdProto(DOM) {
         Images.show.load(imgPosition, panel);
         
         /* загружаем содержимое каталога */
-        ajaxLoad(p.path, {
+        await ajaxLoad(p.path, {
             refresh,
             history,
             noCurrent,
             currentName,
-        }, panel, callback);
-    });
+        }, panel);
+    };
     
     /**
      * Конструктор CloudClient, который
@@ -324,60 +322,49 @@ function CloudCmdProto(DOM) {
      * @param callback
      *
      */
-    async function ajaxLoad(path, options, panel, callback) {
-        const {Dialog, RESTful} = DOM;
-        
-        const create = async (error, json) => {
-            if (error)
-                return Dialog.alert(`Can't get from store: ${error.message}`);
-            
-            const name = options.currentName || Info.name;
-            const isRefresh = options.refresh;
-            const {noCurrent} = options;
-            
-            if (!isRefresh && json)
-                return await createFileTable(json, panel, options);
-            
-            const position = DOM.getPanelPosition(panel);
-            const sort = CloudCmd.sort[position];
-            const order = CloudCmd.order[position];
-            
-            const query = rendy('?sort={{ sort }}&order={{ order }}', {
-                sort,
-                order,
-            });
-            
-            const [, newObj] = await RESTful.read(path + query, 'json');
-            
-            if (!newObj)
-                return; // that's OK, error handled by RESTful
-            
-            options.sort = sort;
-            options.order = order;
-            
-            await createFileTable(newObj, panel, options);
-            
-            if (isRefresh && !noCurrent)
-                DOM.setCurrentByName(name);
-            
-            exec(callback);
-            
-            if (!CloudCmd.config('dirStorage'))
-                return;
-            
-            Storage.set(path, newObj);
-        };
-        
-        if (!options)
-            options = {};
+    async function ajaxLoad(path, options = {}, panel) {
+        const {RESTful} = DOM;
         
         CloudCmd.log('reading dir: "' + path + '";');
         
-        if (!CloudCmd.config('dirStorage'))
-            return create();
+        const dirStorage = CloudCmd.config('dirStorage');
+        const json = dirStorage && await Storage.get(path);
         
-        const data = await Storage.get(path);
-        create(null, data);
+        const name = options.currentName || Info.name;
+        const {
+            noCurrent,
+            refresh,
+        } = options;
+        
+        if (!refresh && json)
+            return await createFileTable(json, panel, options);
+        
+        const position = DOM.getPanelPosition(panel);
+        const sort = CloudCmd.sort[position];
+        const order = CloudCmd.order[position];
+        
+        const query = rendy('?sort={{ sort }}&order={{ order }}', {
+            sort,
+            order,
+        });
+        
+        const [, newObj] = await RESTful.read(path + query, 'json');
+        
+        if (!newObj)
+            return; // that's OK, error handled by RESTful
+        
+        options.sort = sort;
+        options.order = order;
+        
+        await createFileTable(newObj, panel, options);
+        
+        if (refresh && !noCurrent)
+            DOM.setCurrentByName(name);
+        
+        if (!CloudCmd.config('dirStorage'))
+            return;
+        
+        Storage.set(path, newObj);
     }
     
     /**

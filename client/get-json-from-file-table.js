@@ -1,7 +1,8 @@
 'use strict';
 
 /* global DOM */
-/* global Info */
+
+const Info = DOM.CurrentInfo;
 
 /**
  * Функция генерирует JSON из html-таблицы файлов и
