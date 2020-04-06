@@ -15,16 +15,16 @@ RUN npm config set package-lock false && \
     npm install --production && \
     npm i gritty && \
     npm cache clean --force
-    
+
 RUN apt-get -y remove --purge python3 make g++
 
 COPY . /usr/src/app
 
 WORKDIR /
 
-ENV cloudcmd_terminal true
-ENV cloudcmd_terminal_path gritty
-ENV cloudcmd_open false
+ENV CLOUDCMD_TERMINAL true
+ENV CLOUDCMD_TERMINAL_PATH gritty
+ENV CLOUDCMD_OPEN false
 
 EXPOSE 8000
 
