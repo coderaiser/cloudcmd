@@ -171,6 +171,7 @@
     "@cloudcmd/olark": "^3.0.0",
     "@cloudcmd/stub": "^2.0.0",
     "auto-globals": "^1.7.0",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^2.2.1",
     "clean-css-loader": "^2.0.0",
@@ -223,7 +224,7 @@
     "yaspeller": "^6.0.0"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   },
   "license": "MIT",
   "main": "server/cloudcmd.js",

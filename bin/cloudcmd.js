@@ -209,7 +209,7 @@ async function main() {
     if (args['show-config'])
         showConfig();
     
-    const distribute = require('../server/distribute');
+    const {default: distribute} = await import('../server/distribute/index.js');
     const importConfig = promisify(distribute.import);
     
     await importConfig(config)

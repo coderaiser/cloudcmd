@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+    parser: 'babel-eslint',
     extends: [
         'plugin:putout/recommended',
     ],
