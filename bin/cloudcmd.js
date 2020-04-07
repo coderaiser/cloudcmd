@@ -145,7 +145,7 @@ else if (args.help)
 else
     main();
 
-function main() {
+async function main() {
     if (args.repl)
         repl();
     
@@ -211,10 +211,11 @@ function main() {
     
     const distribute = require('../server/distribute');
     const importConfig = promisify(distribute.import);
-    const caller = (fn) => fn();
     
-    importConfig(config)
-        .then(args.save ? caller(config.write) : noop);
+    await importConfig(config)
+    
+    if (args.save)
+        config.write();
     
     start(options, config);
 }
@@ -304,17 +305,14 @@ function repl() {
     require(DIR_SERVER + 'repl');
 }
 
-function checkUpdate() {
+async function checkUpdate() {
     const load = require('package-json');
     
-    load(Info.name, 'latest')
-        .then(showUpdateInfo)
-        .catch(noop);
+    const {version} = await load(Info.name, 'latest')
+    showUpdateInfo(version);
 }
 
-function showUpdateInfo(data) {
-    const {version} = data;
-    
+function showUpdateInfo(version) {
     if (version === Info.version)
         return;
     
