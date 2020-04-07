@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 
-'use strict';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
-const Info = require('../package');
-const DIR_SERVER = '../server/';
+const Info = require('../package.json');
+const DIR_SERVER = '../server';
 
-const {promisify} = require('util');
+import {promisify} from 'util';
 
-const exit = require(DIR_SERVER + 'exit');
+import exit from '../server/exit.js';
 const {
     createConfig,
     configPath,
-} = require(DIR_SERVER + 'config');
+} = require('../server/config.js');
 
 const config = createConfig({
     configPath,
 });
 
-const env = require(DIR_SERVER + 'env');
-const prefixer = require(DIR_SERVER + '/prefixer');
-
-const noop = () => {};
+import env from '../server/env.js';
+import prefixer from '../server/prefixer.js';
+import superImport from '../server/super-import.js';
 
 const choose = (a, b) => {
     if (a === undefined)
@@ -31,8 +31,10 @@ const choose = (a, b) => {
 
 process.on('unhandledRejection', exit);
 
+import minimist from 'minimist';
+
 const {argv} = process;
-const args = require('minimist')(argv.slice(2), {
+const args = minimist(argv.slice(2), {
     string: [
         'name',
         'port',
@@ -149,7 +151,7 @@ async function main() {
     if (args.repl)
         repl();
     
-    checkUpdate();
+    await checkUpdate();
     port(args.port);
     
     config('name', args.name);
@@ -188,7 +190,7 @@ async function main() {
     config('dropbox', args['dropbox']);
     config('dropboxToken', args['dropbox-token'] || '');
     
-    readConfig(args.config);
+    await readConfig(args.config);
     
     const options = {
         root: config('root'),
@@ -202,14 +204,14 @@ async function main() {
     const password = env('password') || args.password;
     
     if (password)
-        config('password', getPassword(password));
+        config('password', await getPassword(password));
     
     validateRoot(options.root, config);
     
     if (args['show-config'])
-        showConfig();
+        await showConfig();
     
-    const {default: distribute} = await import('../server/distribute/index.js');
+    const distribute = await superImport('../server/distribute');
     const importConfig = promisify(distribute.import);
     
     await importConfig(config)
@@ -220,8 +222,8 @@ async function main() {
     start(options, config);
 }
 
-function validateRoot(root, config) {
-    const validate = require(DIR_SERVER + 'validate');
+async function validateRoot(root, config) {
+    const validate = await superImport(DIR_SERVER + 'validate');
     validate.root(root, config);
     
     if (root === '/')
@@ -230,8 +232,8 @@ function validateRoot(root, config) {
     console.log(`root: ${root}`);
 }
 
-function getPassword(password) {
-    const criton = require('criton');
+async function getPassword(password) {
+    const criton = await superImport('criton');
     return criton(password, config('algo'));
 }
 
@@ -239,13 +241,13 @@ function version() {
     console.log('v' + Info.version);
 }
 
-function start(options, config) {
+async function start(options, config) {
     const SERVER = DIR_SERVER + 'server';
     
     if (!args.server)
         return;
     
-    const server = require(SERVER);
+    const server = await superImport(SERVER);
     server(options, config);
 }
 
@@ -258,70 +260,71 @@ function port(arg) {
     exit('cloudcmd --port: should be a number');
 }
 
-function showConfig() {
-    const show = require('../server/show-config');
+async function showConfig() {
+    const show = await superImport(`${DIR_SERVER}/show-config`);
     const data = show(config('*'));
-    
+
     console.log(data);
 }
 
-function readConfig(name) {
+async function readConfig(name) {
     if (!name)
         return;
-    
-    const fs = require('fs');
-    const tryCatch = require('try-catch');
-    const jju = require('jju');
-    const forEachKey = require('for-each-key');
-    
+
+    const fs = await superImport('fs');
+    const tryCatch = await superImport('try-catch');
+    const jju = await superImport('jju');
+    const forEachKey = await superImport('for-each-key');
+
     const readjsonSync = (name) => jju.parse(fs.readFileSync(name, 'utf8'), {
         mode: 'json',
     });
-    
+
     const [error, data] = tryCatch(readjsonSync, name);
-    
+
     if (error)
         return exit(error.message);
-    
+
     forEachKey(config, data);
 }
 
-function help() {
-    const bin = require('../json/help');
-    const forEachKey = require('for-each-key');
-    const currify = require('currify');
+async function help() {
+    const bin = await superImport('../json/help.json');
+    const forEachKey = await superImport('for-each-key');
+    const currify = await superImport('currify');
+    
     const usage = 'Usage: cloudcmd [options]';
     const url = Info.homepage;
     const log = currify((a, b, c) => console.log(a, b, c));
-    
+
     console.log(usage);
     console.log('Options:');
     forEachKey(log('  %s %s'), bin);
     console.log('\nGeneral help using Cloud Commander: <%s>', url);
 }
 
-function repl() {
+async function repl() {
     console.log('REPL mode enabled (telnet localhost 1337)');
-    require(DIR_SERVER + 'repl');
+    await superImport(DIR_SERVER + 'repl');
 }
 
 async function checkUpdate() {
-    const load = require('package-json');
-    
+    const load = await superImport('package-json');
+
     const {version} = await load(Info.name, 'latest')
-    showUpdateInfo(version);
+    await showUpdateInfo(version);
 }
 
-function showUpdateInfo(version) {
+async function showUpdateInfo(version) {
     if (version === Info.version)
         return;
-    
-    const chalk = require('chalk');
-    
+
+    const chalk = await superImport('chalk');
+
     const latestVersion = chalk.green.bold('v' + version);
     const latest = `update available: ${latestVersion}`;
     const current = chalk.dim(`(current: v${Info.version})`);
-    
+
     console.log('%s %s', latest, current);
 }
 

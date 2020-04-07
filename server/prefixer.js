@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = (value) => {
+export default (value) => {
     if (typeof value !== 'string')
         return '';
     

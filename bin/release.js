@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
-'use strict';
-
 const DIR = '../';
 const Info = require(DIR + 'package');
 
-const minor = require('minor');
-const place = require('place');
-const rendy = require('rendy');
-const shortdate = require('shortdate');
+import minor from 'minor';
+import place from 'place';
+import rendy from 'rendy';
+import shortdate from 'shortdate';
 
 const ERROR = Error('ERROR: version is missing. release --patch|--minor|--major');
 

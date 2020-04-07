@@ -1,4 +1,7 @@
 {
+    "rules": {
+            "convert-commonjs-to-esm": "on"
+    },
     "match": {
         "server": {
             "remove-process-exit": true

@@ -3,8 +3,8 @@
 const {env} = process;
 const up = (a) => a.toUpperCase();
 
-module.exports = parse;
-module.exports.bool = (name) => {
+export default parse;
+export const bool = (name) => {
     const value = parse(name);
     
     if (value === 'true')
