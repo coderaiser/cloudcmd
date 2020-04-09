@@ -57,7 +57,7 @@ module.exports.init = async () => {
 module.exports.show = show;
 module.exports.hide = hide;
 
-function hide () {
+function hide() {
     CloudCmd.View.hide();
 }
 

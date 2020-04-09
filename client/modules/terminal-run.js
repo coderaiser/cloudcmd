@@ -75,7 +75,7 @@ module.exports.show = promisify((options = {}, fn) => {
 
 module.exports.hide = hide;
 
-function hide () {
+function hide() {
     CloudCmd.View.hide();
 }
 

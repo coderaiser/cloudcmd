@@ -20,7 +20,7 @@ transpile('');
 const URL = '/api/v1/user-menu';
 const DEFAULT_MENU_PATH = join(__dirname, '../static/user-menu.js');
 
-module.exports = currify(async({menuName}, req, res, next) => {
+module.exports = currify(async ({menuName}, req, res, next) => {
     if (req.url.indexOf(URL))
         return next();
     
