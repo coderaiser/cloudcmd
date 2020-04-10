@@ -18,6 +18,6 @@ function parse(name) {
     const small = `cloudcmd_${name}`;
     const big = up(small);
     
-    return env[small] || env[big];
+    return env[big] || env[small];
 }
 
