@@ -30,7 +30,7 @@ test('rest: formatMsg: json', (t) => {
 test('rest: getWin32RootMsg', (t) => {
     const {message} = _getWin32RootMsg();
     
-    t.equal(message,'Could not copy from/to root on windows!', 'should return error');
+    t.equal(message, 'Could not copy from/to root on windows!', 'should return error');
     t.end();
 });
 

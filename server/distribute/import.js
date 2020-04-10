@@ -114,7 +114,7 @@ module.exports = (config, options, fn) => {
     );
     
     const onConnect = emitAuth(importUrl, config, socket);
-    const onAccept = logWraped(isLog, importStr,`${connectedStr} to ${colorUrl}`);
+    const onAccept = logWraped(isLog, importStr, `${connectedStr} to ${colorUrl}`);
     const onDisconnect = squad(
         done(fn, statusStore),
         logWraped(isLog, importStr, `${disconnectedStr} from ${colorUrl}`),

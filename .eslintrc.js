@@ -17,7 +17,7 @@ module.exports = {
         extends: [
             'plugin:node/recommended',
         ],
-    },{
+    }, {
         files: ['bin/cloudcmd.js'],
         rules: {
             'no-console': 'off',

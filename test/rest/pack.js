@@ -85,7 +85,7 @@ test('cloudcmd: rest: pack: tar: put: file', async (t) => {
         body: getPackOptions(name),
     });
     
-    const file = fs.createReadStream(join(__dirname,'..', name));
+    const file = fs.createReadStream(join(__dirname, '..', name));
     const extract = tar.extract();
     
     file.pipe(gunzip()).pipe(extract);

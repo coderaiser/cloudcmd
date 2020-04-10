@@ -69,7 +69,7 @@ test('distribute: import: received', async (t) => {
     const {status} = await distribute.import(configManager);
     await done();
     
-    t.equal(status, 'received','should equal');
+    t.equal(status, 'received', 'should equal');
     t.end();
 });
 
@@ -117,7 +117,7 @@ test('distribute: import: received: auth: accept', async (t) => {
     const {status} = await distribute.import(configManager);
     await done();
     
-    t.equal(status, 'received','should equal');
+    t.equal(status, 'received', 'should equal');
     t.end();
 });
 
@@ -139,7 +139,7 @@ test('distribute: import: received: no name', async (t) => {
     const {status} = await distribute.import(configManager);
     await done();
     
-    t.equal(status, 'received','should equal');
+    t.equal(status, 'received', 'should equal');
     t.end();
 });
 
@@ -163,7 +163,7 @@ test('distribute: import: error', async (t) => {
     
     await done();
     
-    t.equal(status, 'connect_error','should equal');
+    t.equal(status, 'connect_error', 'should equal');
     t.end();
 });
 
@@ -185,7 +185,7 @@ test('distribute: import: config:change: no export', async (t) => {
     
     await done();
     
-    t.equal(status, 'connect_error','should equal');
+    t.equal(status, 'connect_error', 'should equal');
     t.end();
 });
 
