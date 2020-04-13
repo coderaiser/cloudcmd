@@ -6,6 +6,7 @@ const Info = require('../package');
 const DIR_SERVER = '../server/';
 
 const {promisify} = require('util');
+const tryToCatch = require('try-to-catch');
 
 const exit = require(DIR_SERVER + 'exit');
 const {
@@ -147,7 +148,6 @@ async function main() {
     if (args.repl)
         repl();
     
-    checkUpdate();
     port(args.port);
     
     config('name', args.name);
@@ -216,6 +216,7 @@ async function main() {
         config.write();
     
     start(options, config);
+    await tryToCatch(checkUpdate);
 }
 
 function validateRoot(root, config) {
