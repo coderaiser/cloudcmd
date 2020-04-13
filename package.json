@@ -220,7 +220,7 @@
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.1",
     "webpack-merge": "^4.1.2",
-    "yaspeller": "^6.0.0"
+    "yaspeller": "^7.0.0"
   },
   "engines": {
     "node": ">=10"
