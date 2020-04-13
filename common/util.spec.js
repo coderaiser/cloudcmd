@@ -93,6 +93,13 @@ test('util: getRegExp', (t) => {
     t.end();
 });
 
+test('util: getRegExp: dots', (t) => {
+    const reg = getRegExp('h.*el?o.*');
+    
+    t.deepEqual(reg, /^h\..*el.?o\..*$/, 'should return regexp');
+    t.end();
+});
+
 test('util: getRegExp: no', (t) => {
     const reg = getRegExp('');
     
