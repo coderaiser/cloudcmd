@@ -1,3 +1,13 @@
+2020.04.13, v14.3.10
+
+fix:
+- (util) getRegExp: multiple dots
+- (cloudcmd) crash on check for update (#286)
+
+feature:
+- (package) yaspeller v7.0.0
+
+
 2020.04.10, v14.3.9
 
 fix:
