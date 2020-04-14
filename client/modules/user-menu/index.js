@@ -11,13 +11,13 @@ const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 const tryCatch = require('try-catch');
 const tryToCatch = require('try-to-catch');
-const parse = require('./parse-error');
 const {codeFrameColumns} = require('@babel/code-frame');
 
 const Images = require('../../dom/images');
 const Dialog = require('../../dom/dialog');
 const getUserMenu = require('./get-user-menu');
 const navigate = require('./navigate');
+const parse = require('./parse-error');
 
 const loadCSS = load.css;
 const sourceStore = fullstore();
