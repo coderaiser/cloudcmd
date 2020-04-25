@@ -1,5 +1,7 @@
 'use strict';
 
+const {once} = require('events');
+
 const test = require('supertape');
 const io = require('socket.io-client');
 
@@ -23,22 +25,20 @@ test('distribute: export', async (t) => {
     const url = `http://localhost:${port}/distribute?port=${1111}`;
     const socket = io.connect(url);
     
-    socket.on('connect', () => {
-        socket.emit('auth', 'a');
-    });
+    await once(socket, 'connect');
+    socket.emit('auth', 'a');
     
-    socket.on('accept', () => {
-        config('vim', false);
-        config('auth', true);
-    });
+    await once(socket, 'accept');
+    config('vim', false);
+    config('auth', true);
     
-    socket.on('change', async () => {
-        socket.close();
-        await done();
-        
-        t.pass('should emit change');
-        t.end();
-    });
+    await once(socket, 'change');
+    
+    socket.close();
+    await done();
+    
+    t.pass('should emit change');
+    t.end();
 });
 
 test('distribute: export: config', async (t) => {
@@ -56,16 +56,16 @@ test('distribute: export: config', async (t) => {
     const url = `http://localhost:${port}/distribute?port=${1111}`;
     const socket = io.connect(url);
     
-    socket.on('connect', () => {
+    socket.once('connect', () => {
         socket.emit('auth', 'a');
     });
     
-    socket.on('config', async (data) => {
-        socket.close();
-        await done();
-        
-        t.equal(typeof data, 'object', 'should emit object');
-        t.end();
-    });
+    const data = await once(socket, 'config');
+    
+    socket.close();
+    await done();
+    
+    t.equal(typeof data, 'object', 'should emit object');
+    t.end();
 });
 

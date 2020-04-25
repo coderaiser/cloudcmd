@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const {once} = require('events');
 
 const test = require('supertape');
 const io = require('socket.io-client');
@@ -18,13 +19,14 @@ test('cloudcmd: console: enabled', async (t) => {
     const socket = io(`http://localhost:${port}/console`);
     
     socket.emit('auth', configFn('username'), configFn('password'));
-    socket.once('data', (data) => {
-        done();
-        socket.close();
-        
-        t.equal(data, 'client #1 console connected\n', 'should emit data event');
-        t.end();
-    });
+    
+    const [data] = await once(socket, 'data');
+    
+    socket.close();
+    await done();
+    
+    t.equal(data, 'client #1 console connected\n', 'should emit data event');
+    t.end();
 });
 
 test('cloudcmd: console: disabled', async (t) => {
@@ -35,12 +37,12 @@ test('cloudcmd: console: disabled', async (t) => {
     const {port, done} = await connect({config});
     const socket = io(`http://localhost:${port}/console`);
     
-    socket.on('error', (error) => {
-        socket.close();
-        done();
-        
-        t.equal(error, 'Invalid namespace', 'should emit error');
-        t.end();
-    });
+    const [error] = await once(socket, 'error');
+    
+    socket.close();
+    await done();
+    
+    t.equal(error, 'Invalid namespace', 'should emit error');
+    t.end();
 });
 
