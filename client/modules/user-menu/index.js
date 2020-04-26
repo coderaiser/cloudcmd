@@ -17,7 +17,9 @@ const Images = require('../../dom/images');
 const Dialog = require('../../dom/dialog');
 const getUserMenu = require('./get-user-menu');
 const navigate = require('./navigate');
-const parse = require('./parse-error');
+const parseError = require('./parse-error');
+const parseUserMenu = require('./parse-user-menu');
+const {runSelected} = require('./run');
 
 const loadCSS = load.css;
 const sourceStore = fullstore();
@@ -37,10 +39,6 @@ module.exports.init = async () => {
 module.exports.show = show;
 module.exports.hide = hide;
 
-const getKey = (a) => a.split(' - ')[0];
-const beginWith = (a) => (b) => a === getKey(b);
-const notPrivate = ([a]) => a !== '_';
-
 const {CurrentInfo} = DOM;
 
 async function show() {
@@ -58,9 +56,15 @@ async function show() {
     
     sourceStore(source);
     
-    const options = Object
-        .keys(userMenu)
-        .filter(notPrivate);
+    const {
+        names,
+        keys,
+        items,
+        settings,
+    } = parseUserMenu(userMenu);
+    
+    if (settings.run)
+        return runSelected(settings.select, items, runUserMenu);
     
     const button = createElement('button', {
         className: 'cloudcmd-user-menu-button',
@@ -69,15 +73,13 @@ async function show() {
     
     const select = createElement('select', {
         className: 'cloudcmd-user-menu',
-        innerHTML: fillTemplate(options),
+        innerHTML: fillTemplate(names),
         size: 10,
     });
     
-    const keys = options.map(getKey);
-    
-    button.addEventListener('click', onButtonClick(options, userMenu, select));
-    select.addEventListener('keydown', onKeyDown(keys, options, userMenu));
-    select.addEventListener('dblclick', onDblClick(options, userMenu));
+    button.addEventListener('click', onButtonClick(items, select));
+    select.addEventListener('keydown', onKeyDown(keys));
+    select.addEventListener('dblclick', onDblClick(userMenu));
     
     const afterShow = () => select.focus();
     const autoSize = true;
@@ -101,22 +103,22 @@ function hide() {
     CloudCmd.View.hide();
 }
 
-const onDblClick = currify(async (options, userMenu, e) => {
+const onDblClick = currify(async (items, e) => {
     const {value} = e.target;
-    await runUserMenu(value, options, userMenu);
+    await runUserMenu(items[value]);
 });
 
-const onButtonClick = wraptile(async (options, userMenu, {value}) => {
-    await runUserMenu(value, options, userMenu);
+const onButtonClick = wraptile(async (items, {value}) => {
+    await runUserMenu(items[value]);
 });
 
-const onKeyDown = currify(async (keys, options, userMenu, e) => {
+const onKeyDown = currify(async (keys, e) => {
     const {
         keyCode,
         target,
     } = e;
     
-    const key = e.key.toUpperCase();
+    const keyName = e.key.toUpperCase();
     
     e.preventDefault();
     e.stopPropagation();
@@ -127,18 +129,18 @@ const onKeyDown = currify(async (keys, options, userMenu, e) => {
         return hide();
     else if (keyCode === Key.ENTER)
         ({value} = target);
-    else if (keys.includes(key))
-        value = options.find(beginWith(key));
+    else if (keys[keyName])
+        value = keys[keyName];
     else
         return navigate(target, e);
     
-    await runUserMenu(value, options, userMenu);
+    await runUserMenu(value);
 });
 
-const runUserMenu = async (value, options, userMenu) => {
+const runUserMenu = async (fn) => {
     hide();
     
-    const [error] = await tryToCatch(userMenu[value], {
+    const [error] = await tryToCatch(fn, {
         DOM,
         CloudCmd,
         tryToCatch,
@@ -160,7 +162,7 @@ function getCodeFrame({error, source}) {
     if (!code || code === 'frame')
         return error.message;
     
-    const [line, column] = parse(error);
+    const [line, column] = parseError(error);
     const start = {
         line,
         column,

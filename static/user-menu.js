@@ -1,7 +1,15 @@
 'use strict';
 
+const RENAME_FILE= 'Rename file';
+
 module.exports = {
-    'F2 - Rename file': async ({DOM}) => {
+    __settings: {
+        select: [
+            RENAME_FILE,
+        ],
+        run: false,
+    },
+    [`F2 - ${RENAME_FILE}`]: async ({DOM}) => {
         await DOM.renameCurrent();
     },
     
