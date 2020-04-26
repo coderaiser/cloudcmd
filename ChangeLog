@@ -1,3 +1,9 @@
+2020.04.27, v14.4.0
+
+feature:
+- (user-menu) add ability to run selected items without showing dialog
+
+
 2020.04.13, v14.3.10
 
 fix:
