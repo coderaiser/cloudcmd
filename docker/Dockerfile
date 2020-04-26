@@ -1,4 +1,4 @@
-FROM node:lts
+FROM node
 LABEL maintainer="Coderaiser"
 
 RUN mkdir -p /usr/src/app
