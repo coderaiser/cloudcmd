@@ -13,6 +13,7 @@ test('cloudcmd: user menu: parse', (t) => {
         '_f': fn,
     });
     
+    const names = ['F2 - Rename file'];
     const keys = {
         F2: fn,
     };
@@ -22,6 +23,7 @@ test('cloudcmd: user menu: parse', (t) => {
     };
     
     const expected = {
+        names,
         keys,
         items,
         settings: __settings,
