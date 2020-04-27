@@ -463,8 +463,16 @@ When you press `F2` Cloud Commander will read a file `.cloudcmd.menu.js` by walk
 Let's consider example `user menu` works file:
 
 ```js
+const RENAME_FILE= 'Rename file';
+
 module.exports = {
-    'F2 - Rename file': async ({DOM}) => {
+    __settings: {
+        select: [
+            RENAME_FILE,
+        ],
+        run: false,
+    },
+    [`F2 - ${RENAME_FILE}`]: async ({DOM}) => {
         await DOM.renameCurrent();
     },
     'D - Build Dev': async ({CloudCmd}) => {
