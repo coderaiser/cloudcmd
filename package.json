@@ -179,7 +179,7 @@
     "css-loader": "^3.0.0",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
-    "eslint": "^6.0.0-alpha",
+    "eslint": "^7.0.0-rc.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-putout": "^4.0.0",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
