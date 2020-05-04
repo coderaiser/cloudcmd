@@ -1,18 +1,17 @@
-/* global CloudCmd */
-
 'use strict';
+
+/* global CloudCmd */
 
 const philip = require('philip');
 
 const Images = require('./images');
 const {FS} = require('../../common/cloudfunc');
 const DOM = require('.');
+const Dialog = require('./dialog');
 
 const {getCurrentDirPath: getPathWhenRootEmpty} = DOM;
 
 module.exports = (items) => {
-    const {Dialog} = DOM;
-    
     if (items.length)
         Images.show('top');
     
@@ -23,6 +22,13 @@ module.exports = (items) => {
     const dirPath = getPathWhenRootEmpty();
     const path = dirPath
         .replace(/\/$/, '');
+    
+    const progress = Dialog.progress('Uploading...');
+    
+    progress.catch(() => {
+        Dialog.alert('Upload aborted');
+        uploader.abort();
+    });
     
     const uploader = philip(entries, (type, name, data, i, n, callback) => {
         const {prefixURL} = CloudCmd;
@@ -47,7 +53,7 @@ module.exports = (items) => {
             const max = next - current;
             const value = current + percent(count, 100, max);
             
-            setProgress(value);
+            progress.setProgress(value);
         });
     });
     
@@ -56,18 +62,11 @@ module.exports = (items) => {
         uploader.abort();
     });
     
-    uploader.on('progress', setProgress);
     uploader.on('end', CloudCmd.refresh);
 };
 
 function percent(i, n, per = 100) {
     return Math.round(i * per / n);
-}
-
-function setProgress(count) {
-    DOM.Images
-        .setProgress(count)
-        .show('top');
 }
 
 function uploadFile(url, data) {
