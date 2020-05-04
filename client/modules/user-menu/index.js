@@ -78,8 +78,11 @@ async function show() {
     });
     
     button.addEventListener('click', onButtonClick(items, select));
-    select.addEventListener('keydown', onKeyDown(keys));
     select.addEventListener('dblclick', onDblClick(userMenu));
+    select.addEventListener('keydown', onKeyDown({
+        keys,
+        userMenu,
+    }));
     
     const afterShow = () => select.focus();
     const autoSize = true;
@@ -112,7 +115,7 @@ const onButtonClick = wraptile(async (items, {value}) => {
     await runUserMenu(items[value]);
 });
 
-const onKeyDown = currify(async (keys, e) => {
+const onKeyDown = currify(async ({keys, userMenu}, e) => {
     const {
         keyCode,
         target,
@@ -128,7 +131,7 @@ const onKeyDown = currify(async (keys, e) => {
     if (keyCode === Key.ESC)
         return hide();
     else if (keyCode === Key.ENTER)
-        ({value} = target);
+        value = userMenu[target.value];
     else if (keys[keyName])
         value = keys[keyName];
     else
