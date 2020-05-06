@@ -1,4 +1,4 @@
-# Cloud Commander v14.5.0 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_shield)
+# Cloud Commander v14.5.1 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fcoderaiser%2Fcloudcmd?ref=badge_shield)
 
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
 
