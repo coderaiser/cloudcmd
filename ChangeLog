@@ -1,3 +1,12 @@
+2020.05.20, v14.6.0
+
+feature:
+- (package) markdown-it v11.0.0
+- (cloudcmd) client: add ability to handle existing file while rename (#289)
+- (package) supertape v2.0.0
+- (package) @cloudcmd/stub v3.0.0
+
+
 2020.05.06, v14.5.1
 
 fix:
