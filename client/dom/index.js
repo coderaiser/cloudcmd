@@ -14,13 +14,14 @@ const RESTful = require('./rest');
 const IO = require('./io');
 const Storage = require('./storage');
 const Dialog = require('./dialog');
+const renameCurrent = require('./operations/rename-current');
 
-const currentFile = require('./current-file');
+const CurrentFile = require('./current-file');
 const DOMTree = require('./dom-tree');
 
 const DOM = {
     ...DOMTree,
-    ...currentFile,
+    ...CurrentFile,
     ...new CmdProto(),
 };
 
@@ -671,44 +672,7 @@ function CmdProto() {
      *
      * @currentFile
      */
-    this.renameCurrent = async (current) => {
-        const {Dialog} = DOM;
-        
-        if (!DOM.isCurrentFile(current))
-            current = DOM.getCurrentFile();
-        
-        const from = DOM.getCurrentName(current);
-        
-        if (from === '..')
-            return Dialog.alert.noFiles();
-        
-        const [cancel, to] = await Dialog.prompt('Rename', from);
-        
-        if (cancel)
-            return;
-        
-        const isExist = !!DOM.getCurrentByName(to);
-        const dirPath = DOM.getCurrentDirPath();
-        
-        if (from === to)
-            return;
-        
-        const files = {
-            from : dirPath + from,
-            to : dirPath + to,
-        };
-        
-        const [e] = await RESTful.mv(files);
-        
-        if (e)
-            return;
-        
-        DOM.setCurrentName(to, current);
-        Storage.remove(dirPath);
-        
-        if (isExist)
-            CloudCmd.refresh();
-    };
+    this.renameCurrent = renameCurrent;
     
     /**
      * unified way to scrollIntoViewIfNeeded
