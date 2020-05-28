@@ -198,7 +198,7 @@ function initConfig(Config, options) {
     
     const names = Object.keys(options);
     for (const name of names) {
-        const isConfig = !!config[name];
+        const isConfig = Boolean(config[name]);
         const item = options[name];
         const isFunc = itype.function(item);
         

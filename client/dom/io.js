@@ -37,7 +37,7 @@ module.exports.delete = promisify((url, data, callback) => {
         data,
         callback,
         imgPosition : {
-            top: !!data,
+            top: Boolean(data),
         },
     });
 });
