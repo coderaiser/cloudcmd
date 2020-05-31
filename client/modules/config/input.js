@@ -26,9 +26,7 @@ module.exports.getName = (element) => {
 };
 
 module.exports.convert = (config) => {
-    const result = {
-        ...config,
-    };
+    const result = config;
     const array = Object.keys(config);
     
     const filtered = array.filter(isBool(config));

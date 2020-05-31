@@ -139,9 +139,7 @@ function viewPDF(src) {
         element.contentWindow.addEventListener('keydown', listener);
     });
     
-    const options = {
-        ...Config,
-    };
+    const options = Config;
     
     if (CloudCmd.config('showFileName'))
         options.title = Info.name;
@@ -176,9 +174,7 @@ function viewFile() {
             return Images.hide();
         
         const element = document.createTextNode(data);
-        const options = {
-            ...Config,
-        };
+        const options = Config;
         
         if (CloudCmd.config('showFileName'))
             options.title = Info.name;
@@ -188,11 +184,7 @@ function viewFile() {
     });
 }
 
-function initConfig(Config, options) {
-    const config = {
-        ...Config,
-    };
-    
+function initConfig(config, options) {
     if (!options)
         return config;
     

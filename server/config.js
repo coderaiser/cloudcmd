@@ -86,9 +86,7 @@ function createConfig({configPath} = {}) {
     
     const configManager = (key, value) => {
         if (key === '*')
-            return {
-                ...config,
-            };
+            return config;
         
         if (value === undefined)
             return config[key];
