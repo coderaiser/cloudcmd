@@ -2,8 +2,7 @@
 
 const test = require('supertape');
 
-const dir = '../../server/';
-const prefixer = require(dir + 'prefixer');
+const prefixer = require('./prefixer');
 
 test('prefixer: prefix without a slash', (t) => {
     t.equal(prefixer('hello'), '/hello', 'should add slash');
