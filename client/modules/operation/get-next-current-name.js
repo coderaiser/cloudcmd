@@ -2,7 +2,7 @@
 
 const currify = require('currify');
 
-const not = currify((array, value) => !~array.indexOf(value));
+const not = currify((array, value) => !array.includes(value));
 const notOneOf = currify((a, b) => a.filter(not(b)));
 
 module.exports = (currentName, names, removedNames) => {

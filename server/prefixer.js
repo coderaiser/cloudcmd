@@ -7,7 +7,7 @@ module.exports = (value) => {
     if (value.length === 1)
         return '';
     
-    if (value && !~value.indexOf('/'))
+    if (value && !value.includes('/'))
         return '/' + value;
     
     return value;

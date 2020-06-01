@@ -47,7 +47,7 @@ module.exports.columns = (type) => {
         .map(addQuotes)
         .join(', ');
     
-    if (!~all.indexOf(type))
+    if (!all.includes(type))
         exit(`cloudcmd --columns: can be only one of: ${names}`);
 };
 
