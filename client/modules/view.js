@@ -355,8 +355,8 @@ function setCurrentByPosition(position) {
         filesPassive,
     } = Info;
     
-    const isFiles = ~files.indexOf(element);
-    const isFilesPassive = ~filesPassive.indexOf(element);
+    const isFiles = files.includes(element);
+    const isFilesPassive = filesPassive.includes(element);
     
     if (!isFiles && !isFilesPassive)
         return;

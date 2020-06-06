@@ -225,13 +225,9 @@ Operation.move = processFiles({
     type: 'move',
 });
 
-Operation.delete = () => {
-    promptDelete();
-};
+Operation.delete = promptDelete;
 
-Operation.deleteSilent = () => {
-    deleteSilent();
-};
+Operation.deleteSilent = deleteSilent;
 
 Operation.pack = () => {
     const isZip = config('packer') === 'zip';

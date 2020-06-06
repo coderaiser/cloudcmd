@@ -20,7 +20,7 @@ function getIdBySrc(src) {
     if (!isStr)
         return;
     
-    if (~src.indexOf(':'))
+    if (src.includes(':'))
         src += '-join';
     
     const num = src.lastIndexOf('/') + 1;
@@ -81,7 +81,7 @@ module.exports.ajax = (params) => {
             return exec(p.error, xhr);
         
         const notText = p.dataType !== 'text';
-        const isContain = ~type.indexOf(TYPE_JSON);
+        const isContain = type.includes(TYPE_JSON);
         
         let data = xhr.response;
         

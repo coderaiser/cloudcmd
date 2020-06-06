@@ -215,7 +215,7 @@ test('cloudcmd: route: not found', async (t) => {
         options,
     });
     
-    t.ok(~body.indexOf('ENOENT: no such file or directory'), 'should return error');
+    t.ok(body.includes('ENOENT: no such file or directory'), 'should return error');
     t.end();
 });
 

@@ -71,7 +71,7 @@ function KeyProto() {
         const isNumpad = /Numpad/.test(event.code);
         
         let char = getChar(event);
-        let isSymbol = ~['.', '_', '-', '+', '='].indexOf(char);
+        let isSymbol = ['.', '_', '-', '+', '='].includes(char);
         
         if (!isSymbol) {
             isSymbol = getSymbol(shift, keyCode);

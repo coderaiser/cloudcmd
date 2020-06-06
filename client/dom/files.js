@@ -1,9 +1,8 @@
-/* global CloudCmd */
-
 'use strict';
 
+/* global CloudCmd */
+
 const itype = require('itype');
-const currify = require('currify');
 const {promisify} = require('es6-promisify');
 
 const load = require('./load');
@@ -18,10 +17,7 @@ const DIR_HTML_FS = DIR_HTML + 'fs/';
 const DIR_JSON = '/json/';
 const timeout = getTimeoutOnce(2000);
 
-const get = currify(getFile);
-const unaryMap = (array, fn) => array.map((a) => fn(a));
-
-module.exports.get = get;
+module.exports.get = getFile;
 
 async function getFile(name) {
     const type = itype(name);
@@ -31,7 +27,7 @@ async function getFile(name) {
         return await getModule(name);
     
     if (type === 'array')
-        return Promise.all(unaryMap(name, get));
+        return Promise.all(name.map(getFile));
 }
 
 function check(name) {

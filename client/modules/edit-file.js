@@ -170,9 +170,7 @@ function getMenuData() {
         'Select All     Ctrl+A' : () => {
             editor.selectAll();
         },
-        'Close          Esc'    : () => {
-            hide();
-        },
+        'Close          Esc'    : hide,
     };
 }
 

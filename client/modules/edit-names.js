@@ -195,9 +195,7 @@ function setMenu(event) {
         'Select All     Ctrl+A' : () => {
             editor.selectAll();
         },
-        'Close          Esc'    : () => {
-            hide();
-        },
+        'Close          Esc'    : hide,
     };
     
     const element = CloudCmd.Edit.getElement();
