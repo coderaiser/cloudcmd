@@ -1,6 +1,6 @@
 'use strict';
 
-const merge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 
 const htmlConfig = require('./.webpack/html');
 const cssConfig = require('./.webpack/css');
