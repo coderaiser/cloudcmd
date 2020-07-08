@@ -30,8 +30,7 @@ const ConfigView = {
 module.exports.init = async () => {
     await CloudCmd.Edit();
     
-    const editor = CloudCmd.Edit.getEditor();
-    setListeners(editor);
+    setListeners();
 };
 
 module.exports.show = (options) => {
@@ -216,6 +215,6 @@ async function isChanged() {
         return;
     
     const [, names] = await Dialog.confirm(msg);
-    names && applyNames(names);
+    names && applyNames();
 }
 
