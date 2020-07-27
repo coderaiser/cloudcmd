@@ -22,7 +22,7 @@ test('distribute: export', async (t) => {
         configManager: config,
     });
     
-    const url = `http://localhost:${port}/distribute?port=${1111}`;
+    const url = `http://localhost:${port}/distribute?port=1111`;
     const socket = io.connect(url);
     
     await once(socket, 'connect');
@@ -53,7 +53,7 @@ test('distribute: export: config', async (t) => {
         config: defaultConfig,
     });
     
-    const url = `http://localhost:${port}/distribute?port=${1111}`;
+    const url = `http://localhost:${port}/distribute?port=1111`;
     const socket = io.connect(url);
     
     socket.once('connect', () => {
