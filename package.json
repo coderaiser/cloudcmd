@@ -176,7 +176,7 @@
     "clean-css-loader": "^2.0.0",
     "codegen.macro": "^4.0.0",
     "coveralls": "^3.0.0",
-    "css-loader": "^3.0.0",
+    "css-loader": "^4.0.0",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
     "eslint": "^7.0.0-rc.0",
