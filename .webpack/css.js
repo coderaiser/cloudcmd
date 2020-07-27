@@ -10,22 +10,30 @@ const {
 const {env} = process;
 const isDev = env.NODE_ENV === 'development';
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const extractCSS = (a) => new ExtractTextPlugin(`${a}.css`);
+const extractCSS = (a) => new MiniCssExtractPlugin({
+    filename: `${a}.css`
+});
+
 const extractMain = extractCSS('[name]');
 
-const cssNames = [
+const cssBase = [
     'nojs',
     'view',
     'config',
     'terminal',
     'user-menu',
+];
+
+const cssNames = [
+    ...cssBase,
     ...getCSSList('columns'),
 ];
 
-const cssPlugins = cssNames.map(extractCSS);
+const cssRules = cssNames.map(extract);
+const cssPlugins = cssBase.map(extractCSS);
 const clean = (a) => a.filter(Boolean);
 
 const plugins = clean([
@@ -37,11 +45,12 @@ const plugins = clean([
 const rules = [{
     test: /\.css$/,
     exclude: /css\/(nojs|view|config|terminal|user-menu|columns.*)\.css/,
-    use: extractMain.extract([
+    use: [
+        MiniCssExtractPlugin.loader,
         'css-loader',
-    ]),
+    ],
 },
-...cssPlugins.map(extract), {
+...cssRules, {
     test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
     use: {
         loader: 'url-loader',
@@ -68,14 +77,13 @@ function getCSSList(dir) {
         .map(addDir);
 }
 
-function extract(extractPlugin) {
-    const {filename} = extractPlugin;
-    
+function extract(filename) {
     return {
         test: RegExp(`css/${filename}`),
-        use: extractPlugin.extract([
+        use: [
+            MiniCssExtractPlugin.loader,
             'css-loader',
-        ]),
+        ],
     };
 }
 
