@@ -63,6 +63,7 @@ metadata:
   annotations:
     dev.okteto.com/generate-host: "true"
 spec:
+  type: ClusterIP
   ports:
     - port: 8080
   selector:

@@ -1,6 +1,0 @@
-name: cloudcmd
-image: coderaiser/cloudcmd
-workdir: /home
-command: ["bash"]
-forward:
-  - 8080:8080
