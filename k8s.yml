@@ -68,21 +68,21 @@ spec:
   selector:
     app: cloudcmd-pv
 
----
+#---
 # ingress is for handling traffic from outside
 # this example will make HTTP and HTTPS endpoints with valid certificate
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: cloudcmd-ingress
-  #labels:
-  #  app.kubernetes.io/instance: "cloudcmd"
-
-spec:
-  rules:
-  - http:
-      paths:
-        - path: /
-          backend:
-            serviceName: cloudcmd
-            servicePort: 8080
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: cloudcmd-ingress
+#  #labels:
+#  #  app.kubernetes.io/instance: "cloudcmd"
+#
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#        - path: /
+#          backend:
+#            serviceName: cloudcmd
+            #servicePort: 8080
