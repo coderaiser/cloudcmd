@@ -1,33 +1,90 @@
+# persistant storage will used to keep data between restarts
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: cloudcmd-storage
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "100Mi"
+
+---
+# deployment is a manager for running container
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world
+  name: cloudcmd-pv
+  labels:
+    app: cloudcmd-pv
 spec:
-  replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
-      app: hello-world
+      app: cloudcmd
   template:
     metadata:
       labels:
-        app: hello-world
+        app: cloudcmd
     spec:
       containers:
-      - image: okteto/hello-world:golang
-        name: hello-world
+        - name: cloudcmd
+          image: coderaiser/cloudcmd:latest
+          env:
+            - name: PORT
+              value: "8080"
+          resources:
+            limits: { memory: "150Mi", cpu: "100m" }
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: cloudcmd-pv
+              mountPath: /storage
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+      volumes:
+        # storage object that we created earlier
+        - name: cloudcmd-pv
+          persistentVolumeClaim:
+            claimName: cloudcmd-storage
 
 ---
-
+# service is create internal DNS record for deployment
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-world
+  name: cloudcmd
   annotations:
-    dev.okteto.com/auto-ingress: "true"
+    dev.okteto.com/generate-host: "true"
 spec:
-  type: ClusterIP  
+  type: ClusterIP
   ports:
-  - name: "hello-world"
-    port: 8080
+    - name: "cloudcmd"
+      port: 8080
   selector:
-    app: hello-world
+    app: cloudcmd-pv
+
+#---
+# ingress is for handling traffic from outside
+# this example will make HTTP and HTTPS endpoints with valid certificate
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: cloudcmd-ingress
+#  #labels:
+#  #  app.kubernetes.io/instance: "cloudcmd"
+#
+#spec:
+#  rules:
+#  - http:
+#      paths:
+#        - path: /
+#          backend:
+#            serviceName: cloudcmd
+            #servicePort: 8080
