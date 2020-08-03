@@ -1,4 +1,4 @@
-name: cloudcmd
+name: xxxx
 image: coderaiser/cloudcmd
 workdir: /
 command: ["bash"]
