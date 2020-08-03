@@ -1,0 +1,5 @@
+icon: https://github.com/okteto/go-getting-started/raw/master/icon.png
+deploy:
+  - kubectl apply -f k8s.yml
+devs:
+  - okteto.yml
