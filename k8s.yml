@@ -56,15 +56,17 @@ spec:
 
 ---
 # service is create internal DNS record for deployment
-#apiVersion: v1
-#kind: Service
-#metadata:
-#  name: cloudcmd
-#spec:
-#  ports:
-#    - port: 8080
-#  selector:
-#    app: cloudcmd-pv
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudcmd
+  annotations:
+    dev.okteto.com/generate-host: "true"
+spec:
+  ports:
+    - port: 8080
+  selector:
+    app: cloudcmd-pv
 
 ---
 # ingress is for handling traffic from outside
@@ -75,8 +77,6 @@ metadata:
   name: cloudcmd-ingress
   #labels:
   #  app.kubernetes.io/instance: "cloudcmd"
-  annotations:
-    dev.okteto.com/generate-host: "true"
 
 spec:
   rules:
