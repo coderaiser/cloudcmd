@@ -23,6 +23,7 @@ bin/release.js
 client
 
 webpack.config.js
+k8s.yml
 
 *.ai
 *.cdr
