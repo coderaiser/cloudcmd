@@ -2,9 +2,6 @@
 
 /* global CloudCmd */
 
-const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch');
-
 CloudCmd.Markdown = exports;
 
 const createElement = require('@cloudcmd/create-element');
@@ -12,8 +9,6 @@ const createElement = require('@cloudcmd/create-element');
 const Images = require('../dom/images');
 const {Markdown} = require('../dom/rest');
 const {alert} = require('../dom/dialog');
-
-const read = promisify(Markdown.read);
 
 module.exports.init = async () => {
     Images.show.load('top');
@@ -38,7 +33,7 @@ async function show(name, options = {}) {
     if (relative)
         name += relativeQuery;
     
-    const [error, innerHTML] = await tryToCatch(read, name);
+    const [error, innerHTML] = await Markdown.read(name);
     Images.hide();
     
     if (error)

@@ -1,8 +1,7 @@
 'use strict';
 
-/* global CloudCmd*/
+/* global CloudCmd */
 
-const itype = require('itype');
 const {promisify} = require('es6-promisify');
 
 const {FS} = require('../../common/cloudfunc');
@@ -23,161 +22,122 @@ function replaceHash(url) {
     return url.replace(/#/g, '%23');
 }
 
-module.exports.delete = promisify((url, data, callback) => {
-    const isFunc = itype.function(data);
-    
-    if (!callback && isFunc) {
-        callback = data;
-        data = null;
-    }
-    
-    sendRequest({
+module.exports.delete = async (url, data) => {
+    return await sendRequest({
         method      : 'DELETE',
         url         : FS + url,
         data,
-        callback,
         imgPosition : {
             top: Boolean(data),
         },
     });
-});
+};
 
-module.exports.patch = promisify((url, data, callback) => {
-    const isFunc = itype.function(data);
-    
-    if (!callback && isFunc) {
-        callback = data;
-        data = null;
-    }
-    
-    sendRequest({
+module.exports.patch = async (url, data) => {
+    return await sendRequest({
         method: 'PATCH',
         url: FS + url,
         data,
-        callback,
         imgPosition,
     });
-});
+};
 
-module.exports.write = promisify((url, data, callback) => {
-    const isFunc = itype.function(data);
-    
-    if (!callback && isFunc) {
-        callback = data;
-        data = null;
-    }
-    
-    sendRequest({
+module.exports.write = async (url, data) => {
+    return await sendRequest({
         method: 'PUT',
         url: FS + url,
         data,
-        callback,
         imgPosition,
     });
-});
+};
 
-module.exports.read = promisify((url, dataType, callback) => {
+module.exports.read = async (url, dataType = 'text') => {
     const notLog = !url.includes('?');
-    const isFunc = itype.function(dataType);
     
-    if (!callback && isFunc) {
-        callback = dataType;
-        dataType = 'text';
-    }
-    
-    sendRequest({
+    return await sendRequest({
         method: 'GET',
         url: FS + url,
-        callback,
         notLog,
         dataType,
     });
-});
+};
 
-module.exports.cp = promisify((data, callback) => {
-    sendRequest({
+module.exports.cp = async (data) => {
+    return await sendRequest({
         method: 'PUT',
         url: '/cp',
         data,
-        callback,
         imgPosition,
     });
-});
+};
 
-module.exports.pack = promisify((data, callback) => {
-    sendRequest({
+module.exports.pack = async (data) => {
+    return await sendRequest({
         method: 'PUT',
         url: '/pack',
         data,
-        callback,
     });
-});
+};
 
-module.exports.extract = promisify((data, callback) => {
-    sendRequest({
-        method      : 'PUT',
-        url         : '/extract',
+module.exports.extract = async (data) => {
+    return await sendRequest({
+        method: 'PUT',
+        url: '/extract',
         data,
-        callback,
     });
-});
+};
 
-module.exports.mv = promisify((data, callback) => {
-    sendRequest({
-        method      : 'PUT',
-        url         : '/mv',
+module.exports.mv = async (data) => {
+    return await sendRequest({
+        method: 'PUT',
+        url: '/mv',
         data,
-        callback,
         imgPosition,
     });
-});
+};
 
 module.exports.Config = {
-    read: promisify((callback) => {
-        sendRequest({
+    read: async () => {
+        return await sendRequest({
             method: 'GET',
             url: '/config',
-            callback,
             imgPosition,
             notLog: true,
         });
-    }),
+    },
     
-    write: promisify((data, callback) => {
-        sendRequest({
+    write: async (data) => {
+        return await sendRequest({
             method: 'PATCH',
             url: '/config',
             data,
-            callback,
             imgPosition,
         });
-    }),
+    },
 };
 
 module.exports.Markdown = {
-    read: promisify((url, callback) => {
-        sendRequest({
+    read: async (url) => {
+        return await sendRequest({
             method: 'GET',
             url: '/markdown' + url,
-            callback,
             imgPosition,
             notLog: true,
         });
-    }),
+    },
     
-    render: promisify((data, callback) => {
-        sendRequest({
+    render: async (data) => {
+        return await sendRequest({
             method: 'PUT',
             url: '/markdown',
             data,
-            callback,
             imgPosition,
             notLog: true,
         });
-    }),
+    },
 };
 
-function sendRequest(params) {
+const sendRequest = promisify((params, callback) => {
     const p = params;
     const {prefixURL} = CloudCmd;
     
@@ -201,7 +161,7 @@ function sendRequest(params) {
             
             const text = status === 404 ? response : statusText;
             
-            p.callback(Error(text));
+            callback(Error(text));
         },
         success: (data) => {
             Images.hide();
@@ -209,8 +169,8 @@ function sendRequest(params) {
             if (!p.notLog)
                 CloudCmd.log(data);
             
-            p.callback(null, data);
+            callback(null, data);
         },
     });
-}
+});
 
