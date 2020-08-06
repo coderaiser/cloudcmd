@@ -61,7 +61,7 @@ kind: Service
 metadata:
   name: cloudcmd
   annotations:
-    dev.okteto.com/generate-host: "true"
+    dev.okteto.com/auto-ingress: "true"
 spec:
   type: ClusterIP
   ports:
