@@ -23,11 +23,11 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: cloudcmd
+      app: cloudcmd-pv
   template:
     metadata:
       labels:
-        app: cloudcmd
+        app: cloudcmd-pv
     spec:
       containers:
         - name: cloudcmd
