@@ -27,6 +27,13 @@ const swap = wraptile((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
 const {apiURL} = CloudFunc;
 
+const UserError = (msg) => {
+    const error = Error(msg);
+    error.code = 'EUSER';
+    
+    return error;
+};
+
 module.exports = currify((config, request, response, next) => {
     const name = ponse.getPathName(request);
     const regExp = RegExp('^' + apiURL);
@@ -99,8 +106,7 @@ function sendData(params, config, callback) {
                     name: p.name,
                     config,
                     body,
-                    callback,
-                });
+                }, callback);
             })
             .catch(callback);
     }
@@ -170,7 +176,7 @@ const getMoveMsg = (files) => {
 };
 
 module.exports._onPUT = onPUT;
-function onPUT({name, config, body, callback}) {
+function onPUT({name, config, body}, callback) {
     checkPut(name, body, callback);
     
     const cmd = getCMD(name);
@@ -179,23 +185,31 @@ function onPUT({name, config, body, callback}) {
     
     switch(cmd) {
     case 'mv': {
-        if (!files.from || !files.to)
-            return callback(body);
+        const {
+            from,
+            to,
+            names,
+        } = files;
         
-        if (isRootAll(rootDir, [files.to, files.from]))
+        if (!from)
+            return callback(UserError('"from" should be filled'));
+        
+        if (!to)
+            return callback(UserError('"to" should be filled'));
+        
+        if (isRootAll(rootDir, [to, from]))
             return callback(getWin32RootMsg());
         
         const msg = getMoveMsg(files);
         const fn = swap(callback, msg);
         
-        const from = root(files.from, rootDir);
-        const to = root(files.to, rootDir);
-        const {names} = files;
+        const fromRooted = root(from, rootDir);
+        const toRooted = root(to, rootDir);
         
         if (!names)
-            return fs.rename(from, to, fn);
+            return fs.rename(fromRooted, toRooted, fn);
         
-        return moveFiles(from, to, names)
+        return moveFiles(fromRooted, toRooted, names)
             .on('error', fn)
             .on('end', fn);
     } case 'cp':

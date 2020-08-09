@@ -112,3 +112,52 @@ test('cloudcmd: rest: mv: rename', async (t) => {
     t.end();
 });
 
+test('cloudcmd: rest: mv: no from', async (t) => {
+    const cloudcmd = reRequire(cloudcmdPath);
+    const {createConfigManager} = cloudcmd;
+    
+    const configManager = createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const files = {};
+    
+    const {body} = await request.put(`/api/v1/mv`, {
+        body: files,
+    });
+    
+    const expected = '"from" should be filled';
+    
+    t.equal(body, expected);
+    t.end();
+});
+
+test('cloudcmd: rest: mv: no to', async (t) => {
+    const cloudcmd = reRequire(cloudcmdPath);
+    const {createConfigManager} = cloudcmd;
+    
+    const configManager = createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const files = {
+        from: '/',
+    };
+    
+    const {body} = await request.put(`/api/v1/mv`, {
+        body: files,
+    });
+    
+    const expected = '"to" should be filled';
+    
+    t.equal(body, expected);
+    t.end();
+});
