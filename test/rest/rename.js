@@ -14,9 +14,7 @@ const cloudcmdPath = '../../';
 const dir = cloudcmdPath + 'server/';
 const restPath = dir + 'rest';
 
-const {assign} = Object;
-
-test('cloudcmd: rest: mv', async (t) => {
+test('cloudcmd: rest: rename', async (t) => {
     const volume = {
         '/fixture/mv.txt': 'hello',
         '/fixture/tmp/a.txt': 'a',
@@ -28,9 +26,6 @@ test('cloudcmd: rest: mv', async (t) => {
         .use(vol)
         .use(fs);
     
-    assign(unionFS, {
-        promises: fs.promises,
-    });
     mockRequire('fs', unionFS);
     
     reRequire('@cloudcmd/rename-files');
@@ -39,8 +34,8 @@ test('cloudcmd: rest: mv', async (t) => {
     
     const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
-    
     const configManager = createConfigManager();
+    
     configManager('auth', false);
     configManager('root', '/');
     
@@ -49,24 +44,23 @@ test('cloudcmd: rest: mv', async (t) => {
     });
     
     const files = {
-        from: '/fixture/',
-        to: '/fixture/tmp/',
-        names: [
-            'mv.txt',
-        ],
+        from: '/fixture/mv.txt',
+        to: '/fixture/tmp/mv.txt',
     };
     
-    const {body} = await request.put(`/api/v1/mv`, {
+    const {body} = await request.put(`/api/v1/rename`, {
         body: files,
     });
     
     mockRequire.stop('fs');
     
-    t.equal(body, 'move: ok("["mv.txt"]")', 'should move');
+    const expected = 'rename: ok("{"from":"/fixture/mv.txt","to":"/fixture/tmp/mv.txt"}")';
+    
+    t.equal(body, expected, 'should move');
     t.end();
 });
 
-test('cloudcmd: rest: mv: no from', async (t) => {
+test('cloudcmd: rest: rename: no from', async (t) => {
     const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
@@ -80,7 +74,7 @@ test('cloudcmd: rest: mv: no from', async (t) => {
     
     const files = {};
     
-    const {body} = await request.put(`/api/v1/mv`, {
+    const {body} = await request.put(`/api/v1/rename`, {
         body: files,
     });
     
@@ -90,7 +84,7 @@ test('cloudcmd: rest: mv: no from', async (t) => {
     t.end();
 });
 
-test('cloudcmd: rest: mv: no to', async (t) => {
+test('cloudcmd: rest: rename: no to', async (t) => {
     const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
@@ -106,7 +100,7 @@ test('cloudcmd: rest: mv: no to', async (t) => {
         from: '/',
     };
     
-    const {body} = await request.put(`/api/v1/mv`, {
+    const {body} = await request.put(`/api/v1/rename`, {
         body: files,
     });
     
@@ -115,3 +109,4 @@ test('cloudcmd: rest: mv: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
+

@@ -542,6 +542,10 @@ Here you can find `API` that can be used in **User Menu**. **DOM** and **CloudCm
 
 - `TerminalRun` - module that shows `Terminal` with a `command` from options and closes terminal when everything is done.
 
+**IO** Files API
+
+- `rename(from, to)` - rename `from` into `to`
+
 ### Distribute
 
 Being able to configure Cloud Commander remotely opens the doors to using it as microservice, and that's what the "distribute" options set out to do.

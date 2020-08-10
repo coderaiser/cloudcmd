@@ -30,6 +30,7 @@ module.exports.cp = handleError(IO.cp);
 module.exports.pack = handleError(IO.pack);
 module.exports.extract = handleError(IO.extract);
 module.exports.mv = handleError(IO.mv);
+module.exports.rename = handleError(IO.rename);
 
 module.exports.Config = {
     read: handleError(IO.Config.read),

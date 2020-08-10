@@ -46,12 +46,11 @@ module.exports = async (current) => {
         return;
     
     const dirPath = getCurrentDirPath();
-    const files = {
-        from : dirPath + from,
-        to : dirPath + to,
-    };
     
-    const [e] = await RESTful.mv(files);
+    const fromFull = `${dirPath}${from}`;
+    const toFull = `${dirPath}${to}`;
+    
+    const [e] = await RESTful.rename(fromFull, toFull);
     
     if (e)
         return;
@@ -61,3 +60,4 @@ module.exports = async (current) => {
     Storage.remove(dirPath);
     CloudCmd.refresh();
 };
+

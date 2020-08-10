@@ -168,9 +168,16 @@ function getCMD(cmd) {
     return cmd;
 }
 
-const getMoveMsg = (files) => {
-    const data = !files.names ? files : files.names.slice();
-    const msg = formatMsg('move', data);
+const getMoveMsg = (names) => {
+    const msg = formatMsg('move', names);
+    return msg;
+};
+
+const getRenameMsg = (from, to) => {
+    const msg = formatMsg('rename', {
+        from,
+        to,
+    });
     
     return msg;
 };
@@ -200,19 +207,19 @@ function onPUT({name, config, body}, callback) {
         if (isRootAll(rootDir, [to, from]))
             return callback(getWin32RootMsg());
         
-        const msg = getMoveMsg(files);
+        const msg = getMoveMsg(names);
         const fn = swap(callback, msg);
         
         const fromRooted = root(from, rootDir);
         const toRooted = root(to, rootDir);
         
-        if (!names)
-            return fs.rename(fromRooted, toRooted, fn);
-        
         return moveFiles(fromRooted, toRooted, names)
             .on('error', fn)
             .on('end', fn);
-    } case 'cp':
+    } case 'rename':
+        return rename(rootDir, files.from, files.to, callback);
+    
+    case 'cp':
         if (!files.from || !files.names || !files.to)
             return callback(body);
         
@@ -247,6 +254,22 @@ function onPUT({name, config, body}, callback) {
         callback();
         break;
     }
+}
+
+function rename(rootDir, from, to, callback) {
+    if (!from)
+        return callback(UserError('"from" should be filled'));
+    
+    if (!to)
+        return callback(UserError('"to" should be filled'));
+    
+    const msg = getRenameMsg(from, to);
+    const fn = swap(callback, msg);
+    
+    const fromRooted = root(from, rootDir);
+    const toRooted = root(to, rootDir);
+    
+    return fs.rename(fromRooted, toRooted, fn);
 }
 
 function pack(from, to, names, config, fn) {
@@ -366,7 +389,6 @@ module.exports._formatMsg = formatMsg;
 
 function formatMsg(msg, data, status) {
     const value = parseData(data);
-    
     return CloudFunc.formatMsg(msg, value, status);
 }
 

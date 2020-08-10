@@ -96,6 +96,18 @@ module.exports.mv = async (data) => {
     });
 };
 
+module.exports.rename = async (from, to) => {
+    return await sendRequest({
+        method: 'PUT',
+        url: '/rename',
+        data: {
+            from,
+            to,
+        },
+        imgPosition,
+    });
+};
+
 module.exports.Config = {
     read: async () => {
         return await sendRequest({
