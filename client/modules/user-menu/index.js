@@ -77,7 +77,7 @@ async function show() {
         size: 10,
     });
     
-    button.addEventListener('click', onButtonClick(items, select));
+    button.addEventListener('click', onButtonClick(userMenu, select));
     select.addEventListener('dblclick', onDblClick(userMenu));
     select.addEventListener('keydown', onKeyDown({
         keys,
