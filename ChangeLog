@@ -1,3 +1,19 @@
+2020.08.10, v14.7.0
+
+fix:
+- (client) user menu: click on user menu title
+- test(cloudcmd) test/server/prefixer -> server/prefixer
+
+feature:
+- (cloudcmd) rest: add rename
+- (rest) mv: improved user errors
+- (client) io: promisify -> async
+- (package) webpack-merge v5.0.8
+- (package) eslint-plugin-putout v5.0.0
+- (package) putout v9.0.0
+- (package) madrun v7.0.0
+
+
 2020.05.20, v14.6.0
 
 feature:
