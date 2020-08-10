@@ -23,7 +23,9 @@ const Images = require('../dom/images');
 
 const {encode} = require('../../common/entity');
 
+const {assign} = Object;
 const {isArray} = Array;
+
 const testRegExp = currify((name, reg) => reg.test(name));
 const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 
@@ -184,7 +186,11 @@ function viewFile() {
     });
 }
 
+const copy = (a) => assign({}, a);
+
 function initConfig(config, options) {
+    config = copy(config);
+    
     if (!options)
         return config;
     

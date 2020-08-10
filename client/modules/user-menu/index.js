@@ -69,11 +69,13 @@ async function show() {
     const button = createElement('button', {
         className: 'cloudcmd-user-menu-button',
         innerText: 'User Menu',
+        notAppend: true,
     });
     
     const select = createElement('select', {
         className: 'cloudcmd-user-menu',
         innerHTML: fillTemplate(names),
+        notAppend: true,
         size: 10,
     });
     
