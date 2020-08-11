@@ -195,6 +195,8 @@ function KeyProto() {
             break;
         
         case Key.F3:
+            event.preventDefault();
+            
             if (Info.isDir)
                 await loadDir({
                     path,
@@ -206,7 +208,6 @@ function KeyProto() {
             else
                 CloudCmd.View.show();
             
-            event.preventDefault();
             break;
         
         case Key.F4:
