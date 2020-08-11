@@ -20,6 +20,9 @@
                 ]
             }]
         },
+        "view.js": {
+            "apply-shorthand-properties": "off"
+        },
         "test/common/cloudfunc.js": {
             "remove-console": false
         }

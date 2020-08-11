@@ -4,10 +4,9 @@
 
 require('../../css/view.css');
 
-const itype = require('itype');
 const rendy = require('rendy');
-const exec = require('execon');
 const currify = require('currify');
+const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
 
 const modal = require('@cloudcmd/modal');
@@ -28,7 +27,14 @@ const {isArray} = Array;
 
 const testRegExp = currify((name, reg) => reg.test(name));
 const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
+const series = wraptile((...a) => {
+    for (const f of a)
+        f();
+});
 
+const isFn = (a) => typeof a === 'function';
+
+const noop = () => {};
 const addEvent = lifo(Events.add);
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
@@ -51,23 +57,24 @@ let TemplateAudio;
 let Overlay;
 
 const Config = {
-    beforeShow: (callback) => {
+    beforeShow: () => {
         Images.hide();
         Key.unsetBind();
-        exec(callback);
     },
-    beforeClose: (callback) => {
+    
+    beforeClose: () => {
         Events.rmKey(listener);
         Key.setBind();
-        exec(callback);
     },
-    afterShow: (callback) => {
+    
+    afterShow: () => {
         El.focus();
-        exec(callback);
     },
+    
     onOverlayClick,
-    afterClose      : exec,
-    autoSize        : false,
+    afterClose: noop,
+    autoSize: false,
+    
     helpers: {
         title: {},
     },
@@ -106,7 +113,7 @@ async function show(data, options) {
         else
             El.append(data);
         
-        modal.open(El, initConfig(Config, options));
+        modal.open(El, initConfig(options));
         return;
     }
     
@@ -141,7 +148,7 @@ function viewPDF(src) {
         element.contentWindow.addEventListener('keydown', listener);
     });
     
-    const options = Config;
+    const options = assign({}, Config);
     
     if (CloudCmd.config('showFileName'))
         options.title = Info.name;
@@ -188,8 +195,9 @@ function viewFile() {
 
 const copy = (a) => assign({}, a);
 
-function initConfig(config, options) {
-    config = copy(config);
+module.exports._initConfig = initConfig;
+function initConfig(options) {
+    const config = copy(Config);
     
     if (!options)
         return config;
@@ -198,17 +206,14 @@ function initConfig(config, options) {
     for (const name of names) {
         const isConfig = Boolean(config[name]);
         const item = options[name];
-        const isFunc = itype.function(item);
         
-        if (!isFunc || !isConfig) {
+        if (!isFn(item) || !isConfig) {
             config[name] = options[name];
             continue;
         }
         
-        const func = config[name];
-        config[name] = () => {
-            exec.series([func, item]);
-        };
+        const fn = config[name];
+        config[name] = series(fn, item);
     }
     
     return config;
