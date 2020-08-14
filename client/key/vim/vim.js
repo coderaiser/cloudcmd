@@ -47,7 +47,7 @@ module.exports = (key, operations) => {
         return end();
     }
     
-    if (key === 'j') {
+    if (key === 'j' || key === 'w') {
         const {
             count,
             isDelete,
@@ -63,7 +63,7 @@ module.exports = (key, operations) => {
         return end();
     }
     
-    if (key === 'k') {
+    if (key === 'k' || key === 'b') {
         const {
             count,
             isDelete,
