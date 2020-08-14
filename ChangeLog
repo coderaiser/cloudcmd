@@ -1,3 +1,11 @@
+2020.08.14, v14.8.0
+
+feature:
+- (cloudcmd) IO.cp -> IO.copy
+- (cloudcmd) IO.mv -> IO.move
+- (package) find-up v5.0.0
+
+
 2020.08.11, v14.7.2
 
 fix:
