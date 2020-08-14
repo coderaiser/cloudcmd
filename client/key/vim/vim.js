@@ -79,7 +79,7 @@ module.exports = (key, operations) => {
         return end();
     }
     
-    if (/^gg$/.test(value)) {
+    if (value === 'gg' || key === '^') {
         const {
             isDelete,
             isVisual,
@@ -100,7 +100,7 @@ module.exports = (key, operations) => {
         return end();
     }
     
-    if (key === 'G') {
+    if (key === 'G' || key === '$') {
         moveNext({
             count: Infinity,
             isVisual,

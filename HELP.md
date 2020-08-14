@@ -216,8 +216,8 @@ When the `--vim` option is provided, or the configuration parameter `vim` is set
 | `j`                   | navigate to next file
 | `k`                   | navigate to previous file
 | `dd`                  | remove current file
-| `G`                   | navigate to bottom file
-| `gg`                  | navigate to top file
+| `G` or `$`            | navigate to bottom file
+| `gg` or `^`           | navigate to top file
 | `v`                   | visual mode
 | `y`                   | copy (selected in visual mode files)
 | `p`                   | paste files

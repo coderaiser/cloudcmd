@@ -270,7 +270,7 @@ test('cloudcmd: client: key: selectFile', (t) => {
     t.end();
 });
 
-test('cloudcmd: client: key: set last file current', (t) => {
+test('cloudcmd: client: key: set last file current: shift + g', (t) => {
     const last = 'last';
     const nextSibling = {
         nextSibling: last,
@@ -291,7 +291,28 @@ test('cloudcmd: client: key: set last file current', (t) => {
     t.end();
 });
 
-test('cloudcmd: client: key: set first file current', (t) => {
+test('cloudcmd: client: key: set last file current: $', (t) => {
+    const last = 'last';
+    const nextSibling = {
+        nextSibling: last,
+    };
+    const element = {
+        nextSibling,
+    };
+    
+    const setCurrentFile = stub();
+    
+    global.DOM.CurrentInfo.element = element;
+    global.DOM.setCurrentFile = setCurrentFile;
+    
+    vim('$', {});
+    
+    t.ok(setCurrentFile.calledWith(last), 'should set last file');
+    
+    t.end();
+});
+
+test('cloudcmd: client: key: set first file current: gg', (t) => {
     const first = 'first';
     const previousSibling = {
         previousSibling: first,
@@ -308,6 +329,28 @@ test('cloudcmd: client: key: set first file current', (t) => {
     
     vim('g', {});
     vim('g', {});
+    
+    t.ok(setCurrentFile.calledWith(first), 'should set first file');
+    
+    t.end();
+});
+
+test('cloudcmd: client: key: set first file current: ^', (t) => {
+    const first = 'first';
+    const previousSibling = {
+        previousSibling: first,
+    };
+    
+    const element = {
+        previousSibling,
+    };
+    
+    const setCurrentFile = stub();
+    
+    global.DOM.CurrentInfo.element = element;
+    global.DOM.setCurrentFile = setCurrentFile;
+    
+    vim('^', {});
     
     t.ok(setCurrentFile.calledWith(first), 'should set first file');
     
