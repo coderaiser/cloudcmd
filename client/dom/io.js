@@ -87,11 +87,15 @@ module.exports.extract = async (data) => {
     });
 };
 
-module.exports.mv = async (data) => {
+module.exports.move = async (from, to, names) => {
     return await sendRequest({
         method: 'PUT',
-        url: '/mv',
-        data,
+        url: '/move',
+        data: {
+            from,
+            to,
+            names,
+        },
         imgPosition,
     });
 };

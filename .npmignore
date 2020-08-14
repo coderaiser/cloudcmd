@@ -6,6 +6,7 @@ docker
 docker-compose.yml
 test
 fixture
+fixture-*
 coverage
 css
 html

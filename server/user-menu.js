@@ -101,6 +101,7 @@ function transpile(source) {
         plugins: [
             'convert-esm-to-commonjs',
             'strict-mode',
+            'cloudcmd',
         ],
     });
 }

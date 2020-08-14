@@ -109,6 +109,7 @@
     "@cloudcmd/fileop": "^4.0.0",
     "@cloudcmd/move-files": "^3.0.0",
     "@cloudcmd/read-files-sync": "^2.0.0",
+    "@putout/plugin-cloudcmd": "^1.0.0",
     "apart": "^2.0.0",
     "chalk": "^4.0.0",
     "compression": "^1.7.4",

@@ -191,7 +191,7 @@ function onPUT({name, config, body}, callback) {
     const rootDir = config('root');
     
     switch(cmd) {
-    case 'mv': {
+    case 'move': {
         const {
             from,
             to,

@@ -1,4 +1,7 @@
 {
+    "ignore": [
+        "fixture*"
+    ],
     "match": {
         "server": {
             "remove-process-exit": true

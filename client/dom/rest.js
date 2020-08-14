@@ -29,7 +29,7 @@ module.exports.read = handleError(IO.read);
 module.exports.cp = handleError(IO.cp);
 module.exports.pack = handleError(IO.pack);
 module.exports.extract = handleError(IO.extract);
-module.exports.mv = handleError(IO.mv);
+module.exports.move = handleError(IO.move);
 module.exports.rename = handleError(IO.rename);
 
 module.exports.Config = {
