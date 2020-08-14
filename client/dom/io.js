@@ -62,11 +62,15 @@ module.exports.read = async (url, dataType = 'text') => {
     });
 };
 
-module.exports.cp = async (data) => {
+module.exports.copy = async (from, to, names) => {
     return await sendRequest({
         method: 'PUT',
-        url: '/cp',
-        data,
+        url: '/copy',
+        data: {
+            from,
+            to,
+            names,
+        },
         imgPosition,
     });
 };

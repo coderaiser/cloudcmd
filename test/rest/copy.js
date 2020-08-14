@@ -19,25 +19,25 @@ const {request} = require('serve-once')(cloudcmd, {
     configManager,
 });
 
-test('cloudcmd: rest: cp', async (t) => {
+test('cloudcmd: rest: copy', async (t) => {
     const tmp = join(fixtureDir, 'tmp');
     const files = {
         from: '/fixture/',
         to: '/fixture/tmp',
         names: [
-            'cp.txt',
+            'copy.txt',
         ],
     };
     
     mkdirSync(tmp);
     
-    const {body} = await request.put(`/api/v1/cp`, {
+    const {body} = await request.put(`/api/v1/copy`, {
         body: files,
     });
     
     rimraf.sync(tmp);
     
-    t.equal(body, 'copy: ok("["cp.txt"]")', 'should return result');
+    t.equal(body, 'copy: ok("["copy.txt"]")', 'should return result');
     t.end();
 });
 

@@ -219,7 +219,7 @@ function onPUT({name, config, body}, callback) {
     } case 'rename':
         return rename(rootDir, files.from, files.to, callback);
     
-    case 'cp':
+    case 'copy':
         if (!files.from || !files.names || !files.to)
             return callback(body);
         
