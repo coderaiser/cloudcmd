@@ -1,3 +1,10 @@
+2020.08.14, v14.9.0
+
+feature:
+- (key) vim: add ability to navigate to next and previous using w and b
+- (key) vim: add ability to navigate using to first and last file using ^ and $
+
+
 2020.08.14, v14.8.0
 
 feature:
