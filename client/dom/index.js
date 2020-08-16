@@ -69,8 +69,8 @@ function CmdProto() {
      * create new folder
      *
      */
-    this.promptNewDir        = function() {
-        promptNew('directory', '?dir');
+    this.promptNewDir = function() {
+        promptNew('directory');
     };
     
     /**
@@ -83,7 +83,7 @@ function CmdProto() {
         promptNew('file');
     };
     
-    async function promptNew(typeName, type) {
+    async function promptNew(typeName) {
         const {Dialog} = DOM;
         const dir = DOM.getCurrentDirPath();
         const msg = 'New ' + typeName || 'File';
@@ -97,22 +97,18 @@ function CmdProto() {
         };
         
         const name = getName();
-        
         const [cancel, currentName] = await Dialog.prompt(msg, name);
         
         if (cancel)
             return;
         
-        const path = (type) => {
-            const result = dir + currentName;
-            
-            if (!type)
-                return result;
-            
-            return result + type;
-        };
+        const path = `${dir}${currentName}`;
         
-        await RESTful.write(path(type));
+        if (typeName === 'directory')
+            await RESTful.createDirectory(path);
+        else
+            await RESTful.write(path);
+        
         await CloudCmd.refresh({
             currentName,
         });

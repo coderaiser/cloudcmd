@@ -25,6 +25,7 @@ const handleError = (promise) => async (...args) => {
 module.exports.delete = handleError(IO.delete);
 module.exports.patch = handleError(IO.patch);
 module.exports.write = handleError(IO.write);
+module.exports.createDirectory = handleError(IO.createDirectory);
 module.exports.read = handleError(IO.read);
 module.exports.copy = handleError(IO.copy);
 module.exports.pack = handleError(IO.pack);

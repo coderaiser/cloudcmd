@@ -547,6 +547,7 @@ Here you can find `API` that can be used in **User Menu**. **DOM** and **CloudCm
 - `rename(from, to)` - rename `from` into `to`
 - `move(from, to, names)` - rename files with a `names` `from` into `to`;
 - `copy(from, to, names)` - copy files with a `names` `from` into `to`;
+- `createDirectory(path)` - create directory with a `path`;
 
 ### Distribute
 
