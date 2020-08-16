@@ -1,3 +1,9 @@
+2020.08.16, v14.9.1
+
+feature:
+- (cloudcmd) add IO.createDirectory (https://github.com/coderaiser/putout/commit/b54b5486f438804120df261dafa8e6985201a4eb)
+
+
 2020.08.14, v14.9.0
 
 feature:
