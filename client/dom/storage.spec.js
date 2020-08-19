@@ -73,3 +73,56 @@ test('cloudcmd: client: storage: setJson', async (t) => {
     t.ok(setItem.calledWith('hello', expected));
     t.end();
 });
+
+test('cloudcmd: client: storage: remove', async (t) => {
+    const {localStorage} = global;
+    const removeItem = stub();
+    
+    global.localStorage = {
+        removeItem,
+    };
+    
+    await storage.remove('hello');
+    global.localStorage = localStorage;
+    
+    t.ok(removeItem.calledWith('hello'), 'should call removeItem');
+    t.end();
+});
+
+test('cloudcmd: client: storage: clear', async (t) => {
+    const {localStorage} = global;
+    const clear = stub();
+    
+    global.localStorage = {
+        clear,
+    };
+    
+    await storage.clear();
+    global.localStorage = localStorage;
+    
+    t.ok(clear.calledWith(), 'should call clear');
+    t.end();
+});
+
+test('cloudcmd: client: storage: removeMatch', async (t) => {
+    const {localStorage} = global;
+    const removeItem = stub();
+    
+    global.localStorage = {
+        removeItem,
+        fileA: 1,
+        fileB: 2,
+    };
+    
+    await storage.removeMatch('file');
+    global.localStorage = localStorage;
+    const {args} = removeItem;
+    const expected = [
+        ['fileA'],
+        ['fileB'],
+    ];
+    
+    t.deepEqual(args, expected);
+    t.end();
+});
+
