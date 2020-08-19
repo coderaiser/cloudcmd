@@ -104,25 +104,3 @@ test('cloudcmd: client: storage: clear', async (t) => {
     t.end();
 });
 
-test('cloudcmd: client: storage: removeMatch', async (t) => {
-    const {localStorage} = global;
-    const removeItem = stub();
-    
-    global.localStorage = {
-        removeItem,
-        fileA: 1,
-        fileB: 2,
-    };
-    
-    await storage.removeMatch('file');
-    global.localStorage = localStorage;
-    const {args} = removeItem;
-    const expected = [
-        ['fileA'],
-        ['fileB'],
-    ];
-    
-    t.deepEqual(args, expected);
-    t.end();
-});
-
