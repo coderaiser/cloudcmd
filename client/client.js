@@ -268,7 +268,7 @@ function CloudCmdProto(DOM) {
         const data = await Storage.get(dirPath);
         
         if (!data)
-            await Storage.set(dirPath, getJsonFromFileTable());
+            await Storage.setJson(dirPath, getJsonFromFileTable());
     }
     
     function getPanels() {
@@ -328,7 +328,7 @@ function CloudCmdProto(DOM) {
         CloudCmd.log('reading dir: "' + path + '";');
         
         const dirStorage = CloudCmd.config('dirStorage');
-        const json = dirStorage && await Storage.get(path);
+        const json = dirStorage && await Storage.getJson(path);
         
         const name = options.currentName || Info.name;
         const {
@@ -364,7 +364,7 @@ function CloudCmdProto(DOM) {
         if (!CloudCmd.config('dirStorage'))
             return;
         
-        Storage.set(path, newObj);
+        Storage.setJson(path, newObj);
     }
     
     /**

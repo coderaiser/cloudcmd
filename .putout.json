@@ -27,7 +27,10 @@
             "apply-shorthand-properties": "off"
         },
         "test/common/cloudfunc.js": {
-            "remove-console": false
+            "remove-console": "off"
+        },
+        "storage.js": {
+            "remove-useless-async": "off"
         }
     }
 }
