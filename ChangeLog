@@ -1,3 +1,9 @@
+2020.08.19, v14.9.2
+
+fix:
+- (cloudcmd) client: edit: json files (#294)
+
+
 2020.08.16, v14.9.1
 
 feature:
