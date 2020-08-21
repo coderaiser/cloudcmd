@@ -1,3 +1,12 @@
+2020.08.21, v14.9.3
+
+fix:
+- (client) dom: buffer: get, set -> getJson, setJson (#295)
+
+feature:
+- (storage) rm unused removeMatch
+
+
 2020.08.19, v14.9.2
 
 fix:
