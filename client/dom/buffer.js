@@ -58,8 +58,8 @@ function BufferProto() {
     
     async function readBuffer() {
         const [e, cp, ct] = await tryToPromiseAll([
-            Storage.get(COPY),
-            Storage.get(CUT),
+            Storage.getJson(COPY),
+            Storage.getJson(CUT),
         ]);
         
         return [
@@ -79,7 +79,7 @@ function BufferProto() {
             return;
         
         await Storage.remove(CUT);
-        await Storage.set(COPY, {
+        await Storage.setJson(COPY, {
             from,
             names,
         });
@@ -96,7 +96,7 @@ function BufferProto() {
         
         addCutClass();
         
-        await Storage.set(CUT, {
+        await Storage.setJson(CUT, {
             from,
             names,
         });
