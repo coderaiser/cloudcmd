@@ -226,7 +226,7 @@
     "yaspeller": "^7.0.0"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "license": "MIT",
   "main": "server/cloudcmd.js",
