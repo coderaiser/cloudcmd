@@ -63,7 +63,7 @@ module.exports = async (options, config) => {
         configManager: config,
     }));
     
-    if (port < 0 || port > 65535)
+    if (port < 0 || port > 65_535)
         return exitPort('port number could be 1..65535, 0 means any available port');
     
     const listen = promisifySelf(server.listen, server);
