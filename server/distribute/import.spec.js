@@ -223,7 +223,6 @@ test('distribute: import: env', async (t) => {
         },
     });
     
-    const {cloudcmd_editor} = process.env;
     process.env.cloudcmd_editor = 'some editor';
     
     configManagerImport('importUrl', `http://localhost:${exporter.port}`);
@@ -233,7 +232,7 @@ test('distribute: import: env', async (t) => {
     await importer.done();
     await exporter.done();
     
-    process.env.cloudcmd_editor = cloudcmd_editor;
+    delete process.env.cloudcmd_editor;
     
     const result = configManagerImport('editor');
     const expected = 'deepword';
