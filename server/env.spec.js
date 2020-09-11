@@ -21,3 +21,11 @@ test('cloudcmd: server: env: bool: upper case first', (t) => {
     t.end();
 });
 
+test('cloudcmd: server: env: bool: snake_case', (t) => {
+    process.env.cloudcmd_config_auth = 'true';
+    
+    const result = env.bool('configAuth');
+    
+    t.ok(result);
+    t.end();
+});

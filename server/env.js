@@ -1,5 +1,7 @@
 'use strict';
 
+const snake = require('just-snake-case');
+
 const {env} = process;
 const up = (a) => a.toUpperCase();
 
@@ -15,7 +17,7 @@ module.exports.bool = (name) => {
 };
 
 function parse(name) {
-    const small = `cloudcmd_${name}`;
+    const small = `cloudcmd_${snake(name)}`;
     const big = up(small);
     
     return env[big] || env[small];

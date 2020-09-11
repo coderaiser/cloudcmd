@@ -9,6 +9,7 @@ const io = require('socket.io-client');
 const forEachKey = currify(require('for-each-key'));
 
 const log = require('./log');
+const env = require('../env');
 
 const {
     importStr,
@@ -22,6 +23,8 @@ const {
     getDescription,
     logWraped,
 } = log;
+
+const {entries} = Object;
 
 const equal = (a, b) => `${a}=${b}`;
 const append = currify((obj, a, b) => obj.value += b && equal(a, b) + '&');
@@ -62,6 +65,16 @@ const emitAuth = wraptile((importUrl, config, socket) => {
     socket.emit('auth', config('importToken'));
 });
 
+const updateConfig = currify((config, data) => {
+    for (const [key, value] of entries(data)) {
+        if (typeof env(key) !== 'undefined') {
+            continue;
+        }
+        
+        config(key, value);
+    }
+});
+
 module.exports = (config, options, fn) => {
     fn = fn || options;
     
@@ -96,7 +109,7 @@ module.exports = (config, options, fn) => {
         close,
         logWraped(isLog, importStr, `config received from ${colorUrl}`),
         statusStoreWraped('received'),
-        forEachKey(config),
+        updateConfig(config),
     );
     
     const onError = squad(

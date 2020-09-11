@@ -3,13 +3,17 @@
 const test = require('supertape');
 const {promisify} = require('util');
 const tryToCatch = require('try-to-catch');
+
 const {connect} = require('../../test/before');
 const {createConfigManager} = require('../cloudcmd');
+
 const distribute = {
     import: promisify(require('./import')),
 };
 
 const config = createConfigManager();
+
+process.on('unhandledRejection', console.log);
 
 test('distribute: import: canceled', async (t) => {
     const {done} = await connect({
@@ -189,5 +193,95 @@ test('distribute: import: config:change: no export', async (t) => {
     t.end();
 });
 
-process.on('unhandledRejection', console.log);
+test('distribute: import: env', async (t) => {
+    const configManager = createConfigManager();
+    const configManagerImport = createConfigManager();
+    
+    const exporter = await connect({
+        configManager,
+        config: {
+            name: 'bill',
+            import: false,
+            importListen: false,
+            export: true,
+            exportToken: 'a',
+            log: false,
+            editor: 'edward',
+        },
+    });
+    
+    const importer = await connect({
+        configManager: configManagerImport,
+        config: {
+            name: 'jack',
+            import: true,
+            importToken: 'a',
+            export: false,
+            importListen: false,
+            log: false,
+            editor: 'deepword',
+        },
+    });
+    
+    const {cloudcmd_editor} = process.env;
+    process.env.cloudcmd_editor = 'some editor';
+    
+    configManagerImport('importUrl', `http://localhost:${exporter.port}`);
+    
+    await distribute.import(configManagerImport);
+    
+    await importer.done();
+    await exporter.done();
+    
+    process.env.cloudcmd_editor = cloudcmd_editor;
+    
+    const result = configManagerImport('editor');
+    const expected = 'deepword';
+    
+    t.equal(expected, result);
+    t.end();
+});
 
+test('distribute: import: no env', async (t) => {
+    const configManager = createConfigManager();
+    const configManagerImport = createConfigManager();
+    
+    const exporter = await connect({
+        configManager,
+        config: {
+            name: 'bill',
+            import: false,
+            importListen: false,
+            export: true,
+            exportToken: 'a',
+            log: false,
+            editor: 'edward',
+        },
+    });
+    
+    const importer = await connect({
+        configManager: configManagerImport,
+        config: {
+            name: 'jack',
+            import: true,
+            importToken: 'a',
+            export: false,
+            importListen: false,
+            log: false,
+            editor: 'deepword',
+        },
+    });
+    
+    configManagerImport('importUrl', `http://localhost:${exporter.port}`);
+    
+    await distribute.import(configManagerImport);
+    
+    await importer.done();
+    await exporter.done();
+    
+    const result = configManagerImport('editor');
+    const expected = 'edward';
+    
+    t.equal(expected, result);
+    t.end();
+});
