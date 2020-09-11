@@ -212,12 +212,11 @@ async function main() {
     
     start(options, config);
     
-    await tryToCatch(checkUpdate);
-    await importConfig(config);
-    
     if (args.save)
         config.write();
     
+    await tryToCatch(checkUpdate);
+    await importConfig(config);
 }
 
 function validateRoot(root, config) {
