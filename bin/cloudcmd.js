@@ -210,13 +210,14 @@ async function main() {
     const distribute = require('../server/distribute');
     const importConfig = promisify(distribute.import);
     
+    start(options, config);
+    
+    await tryToCatch(checkUpdate);
     await importConfig(config);
     
     if (args.save)
         config.write();
     
-    start(options, config);
-    await tryToCatch(checkUpdate);
 }
 
 function validateRoot(root, config) {
