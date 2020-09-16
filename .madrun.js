@@ -34,13 +34,12 @@ module.exports = {
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'lint:all': () => run(['lint', 'lint:css', 'spell']),
-    'lint:base': () => putout({
+    'lint': () => putout({
         names,
     }),
     'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
     'fix:lint': () => run(['lint', 'lint:css'], '--fix'),
-    'lint': () => run('lint:base', '--cache'),
     'lint:stream': () => run('lint:base', '-f stream'),
     
     'test:base': () => {
