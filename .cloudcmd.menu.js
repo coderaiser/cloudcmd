@@ -4,22 +4,43 @@ module.exports = {
     'F2 - Rename file': async ({DOM}) => {
         await DOM.renameCurrent();
     },
-    'D - Build Dev': async ({CloudCmd}) => {
-        await CloudCmd.TerminalRun.show({
-            command: 'npm run build:client:dev',
-            autoClose: false,
-            closeMessage: 'Press any key to close Terminal',
-        });
+    'L - Lint': async ({CloudCmd}) => {
+        const {TerminalRun} = CloudCmd;
+        await run(TerminalRun, 'npm run lint');
+    },
+    'F - Fix Lint': async ({CloudCmd}) => {
+        const {TerminalRun} = CloudCmd;
+        await run(TerminalRun, 'npm run fix:lint');
+    },
+    'T - Test': async ({CloudCmd}) => {
+        const {TerminalRun} = CloudCmd;
         
+        await run(TerminalRun, 'npm run test');
+    },
+    'C - Coverage': async ({CloudCmd}) => {
+        const {TerminalRun} = CloudCmd;
+        
+        await run(TerminalRun, 'npm run coverage');
+    },
+    'D - Build Dev': async ({CloudCmd}) => {
+        const {TerminalRun} = CloudCmd;
+        
+        await run(TerminalRun, 'npm run build:client:dev');
         CloudCmd.refresh();
     },
     'P - Build Prod': async ({CloudCmd}) => {
-        await CloudCmd.TerminalRun.show({
-            command: 'npm run build:client',
-            autoClose: true,
-        });
+        const {TerminalRun} = CloudCmd;
         
+        run(TerminalRun, 'npm run build:client'),
         CloudCmd.refresh();
     },
 };
+
+async function run(TerminalRun, command) {
+    await TerminalRun.show({
+        command,
+        closeMessage: 'Press any key to close Terminal',
+        autoClose: false,
+    });
+}
 
