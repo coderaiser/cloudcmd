@@ -8,7 +8,7 @@ module.exports = {
         await CloudCmd.TerminalRun.show({
             command: 'npm run build:client:dev',
             autoClose: false,
-            closeMessage: 'Press any button to close Terminal',
+            closeMessage: 'Press any key to close Terminal',
         });
         
         CloudCmd.refresh();
