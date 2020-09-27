@@ -165,6 +165,8 @@ a:hover, a:active {
 
 .current-file {
     box-shadow: 0 0 0 1px var(--color-transparent) inset;
+    background-color: rgba(255, 255, 255, 1);
+    filter: invert(1); /* Inverted color for current file selection. */
 }
 
 .cut-file {
