@@ -82,7 +82,7 @@ const prefix = '/';
 
 const server = http.createServer(app);
 const socket = io.listen(server, {
-    path: `${prefix}/socket.io`
+    path: `${prefix}socket.io`
 });
 
 const config = {
@@ -109,7 +109,7 @@ const {
 
 const configManager = createConfigManager({
     configPath,
-}),
+});
 
 app.use(prefix, cloudcmd({
     socket,  // used by Config, Edit (optional) and Console (required)
