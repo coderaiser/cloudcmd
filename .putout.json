@@ -3,6 +3,9 @@
         "fixture*"
     ],
     "match": {
+        ".webpack": {
+            "webpack": "on"
+        },
         "server": {
             "remove-process-exit": true
         },
