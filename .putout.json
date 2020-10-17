@@ -7,17 +7,17 @@
             "webpack": "on"
         },
         "server": {
-            "remove-process-exit": true
+            "remove-process-exit": "on"
         },
         "server/(server|exit).js": {
-            "remove-process-exit": false,
-            "remove-console": false
+            "remove-process-exit": "off",
+            "remove-console": "off"
         },
         "server/(terminal|distribute/log).js": {
-            "remove-console": false
+            "remove-console": "off"
         },
         "client/(client|cloudcmd|load-module).js": {
-            "remove-console": false
+            "remove-console": "off"
         },
         "client/modules/config/index.js": {
             "apply-shorthand-properties": [{
