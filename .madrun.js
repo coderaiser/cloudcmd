@@ -21,6 +21,7 @@ const names = [
     '.eslintrc.js',
     '.madrun.js',
     '{client,server,common}/**/*.spec.js',
+    '*.md',
 ];
 
 const {putout} = predefined;

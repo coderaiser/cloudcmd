@@ -2,24 +2,31 @@
 
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
-[MainURL]:                  http://cloudcmd.io "Main"
-[BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[HerokuURL]:                https://cloudcmd.herokuapp.com/ "Heroku"
-[HEROKU_LIVE_IMG]:          https://status.cloudcmd.io/host/cloudcmd.herokuapp.com/img/file.png "Heroku"
+[MainURL]: http://cloudcmd.io "Main"
 
-[DWORD]:                    https://github.com/cloudcmd/dword "Editor based on CodeMirror"
-[EDWARD]:                   https://github.com/cloudcmd/edward "Editor based on Ace"
-[DEEPWORD]:                 https://github.com/cloudcmd/deepword "Editor based on Monaco"
-[EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
-[TERMUX]:                   https://termux.com "Termux"
-[INLY]:                     https://github.com/coderaiser/node-inly "Extract archive"
+[BlogURL]: http://blog.cloudcmd.io "Blog"
+
+[HerokuURL]: https://cloudcmd.herokuapp.com/ "Heroku"
+
+[HEROKU_LIVE_IMG]: https://status.cloudcmd.io/host/cloudcmd.herokuapp.com/img/file.png "Heroku"
+
+[DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
+
+[EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
+
+[DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
+
+[EDWARD_KEYS]: https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
+
+[TERMUX]: https://termux.com "Termux"
+
+[INLY]: https://github.com/coderaiser/node-inly "Extract archive"
 
 **Cloud Commander** is a file manager for the web. It includes a command-line console and a text editor. Cloud Commander helps you manage your server and work with files, directories and programs in a web browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
-Benefits
----------------
+## Benefits
 
 - Open source (**MIT License**).
 - Has 2 classic panels.
@@ -34,8 +41,7 @@ Benefits
 - Built-in archives pack: **zip** and **tar.gz**.
 - Built-in archives extract: **zip**, **tar**, **gz**, **bz2**, **.tar.gz** and **.tar.bz2** (with help of [inly][INLY]).
 
-Installation
----------------
+## Installation
 
 Installation is very simple:
 
@@ -52,8 +58,8 @@ When in trouble, use:
 npm i cloudcmd -g --force
 ```
 
-Usage
----------------
+## Usage
+
 To start the server, just run the global *npm* binary from your terminal:
 
 ```sh
@@ -142,8 +148,8 @@ To begin using the web client, go to this URL in your browser:
 http://localhost:8000
 ```
 
-Updating the app
----------------
+## Updating the app
+
 If you installed Cloud Commander with `npm`, stop the server. Then, reinstall it with:
 
 ```sh
@@ -152,8 +158,7 @@ npm install cloudcmd -g
 
 Then, start the server again with `cloudcmd` and reload the page.
 
-Hot keys
----------------
+## Hot keys
 
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
@@ -227,12 +232,13 @@ When the `--vim` option is provided, or the configuration parameter `vim` is set
 | `N`                   | navigate to previous found file
 
 Commands can be joined, for example:
+
 - `5j` will navigate **5** files below current;
 - `d5j` will remove next **5** files;
 - `dG` will remove all files from current to bottom;
 
-Drag and drop
----------------
+## Drag and drop
+
 These file operations are accessible with "drag and drop".
 
 | Drag Mouse Button | Key       | Origin    | Destination   |Operation
@@ -242,11 +248,12 @@ These file operations are accessible with "drag and drop".
 | Left              |           | Panel     | Desktop       | download files
 | Left              |           | Desktop   | Panel         | upload files
 
-View
----------------
+## View
+
 ![View](/img/screen/view.png "View")
 
 ### Features
+
 - View images.
 - View text files.
 - Play audio.
@@ -259,8 +266,8 @@ View
 | `F3`                  | open
 | `Esc`                 | close
 
-Edit
----------------
+## Edit
+
 ![Edit](/img/screen/edit.png "Edit")
 
 ### Hot keys
@@ -273,8 +280,8 @@ Edit
 
 For more details see [Edward hotkeys][EDWARD_KEYS].
 
-Console
----------------
+## Console
+
 ![Console](/img/screen/console.png "Console")
 
 ### Hot keys
@@ -287,8 +294,8 @@ Console
 
 For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
 
-Terminal
----------------
+## Terminal
+
 ![Terminal](/img/screen/terminal.png "Terminal")
 
 ### Install
@@ -340,8 +347,7 @@ After that, you can use Cloud Commander's terminal in the same way as a normal s
 | `Shift` + `~`         | open
 | `Shift` + `Esc`       | close
 
-Environment Variables
----------------
+## Environment Variables
 
 Every program executed in Cloud Commander's terminal has these environment variables:
 
@@ -357,8 +363,8 @@ On Unix, you can use it this way:
 /home/coderaiser/cloudcmd/bin/cloudcmd.js
 ```
 
-Configuration
----------------
+## Configuration
+
 ![Config](/img/screen/config.png "Config")
 
 ### Hot keys
@@ -372,7 +378,7 @@ When you change any options, the `~/.cloudcmd.json` file is automatically update
 It can also be edited manually with any text editor.
 Here's a description of all options:
 
-```js
+```json
 {
     "name"                  : "",       // set tab name in web browser
     "auth"                  : false,    // enable http authentication
@@ -428,7 +434,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_NAME` - set tab name in web browser
 - `CLOUDCMD_OPEN` - open web browser when server started
 - `CLOUDCMD_EDITOR` - set editor
-- `CLOUDCMD_COLUMNS` - set visible columns 
+- `CLOUDCMD_COLUMNS` - set visible columns
 - `CLOUDCMD_CONTACT` - enable contact
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_CONFIG_AUTH` - enable auth change in config dialog
@@ -463,10 +469,10 @@ When you press `F2` Cloud Commander will read a file `.cloudcmd.menu.js` by walk
 Let's consider example `user menu` works file:
 
 ```js
-const RENAME_FILE= 'Rename file';
+const RENAME_FILE = 'Rename file';
 
 module.exports = {
-    __settings: {
+    '__settings': {
         select: [
             RENAME_FILE,
         ],
@@ -613,8 +619,8 @@ The *export server* omits the following configuration fields:
 - `log`
 - `configDialog`
 
-Menu
----------------
+## Menu
+
 ![Menu](/img/screen/menu.png "Menu")
 
 Right-mouse click to show a context menu with these items:
@@ -643,14 +649,13 @@ Right-mouse click to show a context menu with these items:
 | `F9`                  | open
 | `Esc`                 | close
 
-One file panel
----------------
+## One file panel
+
 Cloud Commander can work in one panel mode when your screen size can't accommodate a second panel (such as on mobile or tablet), or via the `--one-file-panel` options flag.
 
 ![One file panel](/img/screen/one-file-panel.png "One file panel")
 
-Using as middleware
----------------
+## Using as middleware
 
 Cloud Commander can be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
 
@@ -679,19 +684,19 @@ const prefix = '/';
 
 const server = http.createServer(app);
 const socket = io.listen(server, {
-    path: `${prefix}socket.io`
+    path: `${prefix}socket.io`,
 });
 
 const config = {
-    name: 'cloudcmd :)'
+    name: 'cloudcmd :)',
 };
 
 const filePicker = {
     data: {
         FilePicker: {
-            key: 'key'
-        }
-    }
+            key: 'key',
+        },
+    },
 };
 
 // override option from json/modules.json
@@ -706,14 +711,14 @@ const {
 
 const configManager = createConfigManager({
     configPath,
-}),
+});
 
 app.use(prefix, cloudcmd({
-    socket,  // used by Config, Edit (optional) and Console (required)
-    config,  // config data (optional)
+    socket, // used by Config, Edit (optional) and Console (required)
+    config, // config data (optional)
     modules, // optional
     configManager, // optional
-));
+}));
 
 server.listen(port);
 ```
@@ -734,11 +739,11 @@ const {createConfigManager} = cloudcmd;
 
 const server = http.createServer(app);
 const socket1 = io.listen(server, {
-    path: `${prefix1}/socket.io`
+    path: `${prefix1}/socket.io`,
 });
 
 const socket2 = io.listen(server, {
-    path: `${prefix2}/socket.io`
+    path: `${prefix2}/socket.io`,
 });
 
 const configManager1 = createConfigManager();
@@ -779,8 +784,8 @@ const config = {
     algo, // optional
     auth,
     username,
-    pasword,
-}
+    password,
+};
 ```
 
 Now you're ready to go!
@@ -797,8 +802,8 @@ cloudcmd --username name --password password --auth --save --no-server
 
 This command will create hash of your password and write it to `~/.cloudcmd.json`.
 
-Server
----------------
+## Server
+
 Standard practices dictate that no non-root process get to talk to the internet on a port less than 1024. Despite this, **I suggest you start Cloud Commander as a non-root process**. How can we get around this limitation? There's a couple of fast & easy ways. One of them is port forwarding:
 
 ### Iptables
@@ -819,6 +824,7 @@ target     prot opt source               destination
 REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000
 REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 4430
 ```
+
 If you would want to get things back just clear rules (rule numbers **1** and **2**; in your list they could differ).
 
 ```sh
@@ -827,6 +833,7 @@ iptables -t nat -D PREROUTING 1
 ```
 
 ### nginx
+
 Get [nginx](http://nginx.org/ "nginx"). On Linux, you can run:
 
 ```sh
@@ -877,7 +884,6 @@ For WebSocket support, (nginx >= v1.3.13) modify the `server` block like so:
     }
 ```
 
-
 If you need redirection from **http** to **https**, simply use:
 
 ```sh
@@ -896,14 +902,14 @@ ln -s ./sites-available/io.cloudcmd.io ./sites-enabled
 /etc/init.d/nginx restart
 ```
 
-Deploy
----------------
+## Deploy
+
 `Cloud Commander` can be easily deployed to [Heroku](https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy to Heroku").
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png "Deploy to Heroku")]( https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png "Deploy to Heroku")](https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd)
 
-Docker
----------------
+## Docker
+
 `Cloud Commander` can be used as [docker container](https://hub.docker.com/r/coderaiser/cloudcmd/ "Docker container") like so:
 
 ```sh
@@ -951,8 +957,7 @@ While using Dropbox remember that there is no remote support for the console/ter
 - view
 - edit
 
-Get involved
----------------
+## Get involved
 
 There are a lot of ways to be involved in `Cloud Commander` development:
 
@@ -960,8 +965,8 @@ There are a lot of ways to be involved in `Cloud Commander` development:
 - if you fixed a bug, typo or implemented a new feature, [create a pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
 - if you know a language not currently translated, or would like to improve an existing translation, you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
 
-Version history
----------------
+## Version history
+
 - *2020.08.21*, **[v14.9.3](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.3)**
 - *2020.08.19*, **[v14.9.2](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.2)**
 - *2020.08.16*, **[v14.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.1)**
@@ -1330,12 +1335,11 @@ Version history
 - *2012.07.11*, **[v0.1.1](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.1.zip)**
 - *2012.07.09*, **[v0.1.0](//github.com/cloudcmd/archive/raw/master/cloudcmd-v0.1.0.zip)**
 
-Special Thanks
----------------
+## Special Thanks
+
 - [Olena Zalitok](https://zalitok.github.io/ "Olena Zalitok") for **logo** and **favicon**.
 - [TarZak](https://github.com/tarzak "TarZak")
-    - Russian and Ukrainian translations;
-    - config template and style;
-    - change order of directories and files;
-    - add ability to keep path and header when files are scrolling;
-
+  - Russian and Ukrainian translations;
+  - config template and style;
+  - change order of directories and files;
+  - add ability to keep path and header when files are scrolling;
