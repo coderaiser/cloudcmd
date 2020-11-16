@@ -3,23 +3,14 @@
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
 [MainURL]: http://cloudcmd.io "Main"
-
 [BlogURL]: http://blog.cloudcmd.io "Blog"
-
 [HerokuURL]: https://cloudcmd.herokuapp.com/ "Heroku"
-
 [HEROKU_LIVE_IMG]: https://status.cloudcmd.io/host/cloudcmd.herokuapp.com/img/file.png "Heroku"
-
 [DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
-
 [EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
-
 [DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
-
 [EDWARD_KEYS]: https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
-
 [TERMUX]: https://termux.com "Termux"
-
 [INLY]: https://github.com/coderaiser/node-inly "Extract archive"
 
 **Cloud Commander** is a file manager for the web. It includes a command-line console and a text editor. Cloud Commander helps you manage your server and work with files, directories and programs in a web browser from any computer, mobile or tablet.
@@ -383,7 +374,7 @@ Here's a description of all options:
     "name"                  : "",       // set tab name in web browser
     "auth"                  : false,    // enable http authentication
     "username"              : "root",   // username for authentication
-    "password"              : "toor",   // password hash for authentication
+    "password"              : "toor",   // password hash for authentication
     "algo"                  : "sha512WithRSAEncryption", // cryptographic algorithm
     "editor"                : "edward", // default, could be "dword" or "edward"
     "packer"                : "tar",    // default, could be "tar" or "zip"
@@ -403,27 +394,27 @@ Here's a description of all options:
     "confirmCopy"           : true,     // confirm copy
     "confirmMove"           : true,     // confirm move
     "showConfig"            : false,    // show config at startup
-    "showFileName"          : false     // do not show file name in view and edit
+    "showFileName"          : false,    // do not show file name in view and edit
     "contact"               : true,     // enable contact
     "configDialog"          : true,     // enable config dialog
     "configAuth"            : true,     // enable auth change in config dialog
     "console"               : true,     // enable console
-    "syncConsolePath"       : false     // do not sync console path
+    "syncConsolePath"       : false,    // do not sync console path
     "terminal"              : false,    // disable terminal
-    "terminalPath"          : '',       // path of a terminal
-    "terminalCommand"       : '',       // set command to run in terminal
+    "terminalPath"          : "",       // path of a terminal
+    "terminalCommand"       : "",       // set command to run in terminal
     "terminalAutoRestart"   : true,     // restart command on exit
     "vim"                   : false,    // disable vim hot keys
     "columns"               : "name-size-date-owner-mode", // set visible columns
     "export"                : false,    // enable export of config through a server
     "exportToken"           : "root",   // token used by export server
-    "import"                : false,    // enable import of config 
+    "import"                : false,    // enable import of config
     "import-url"            : "http://localhost:8000",   // url of an export server
     "importToken"           : "root",   // token used to connect to export server
     "importListen"          : false,    // listen on config updates
     "dropbox"               : false,    // disable dropbox integration
     "dropboxToken"          : "",       // unset dropbox token
-    "log"                   : true,     // logging
+    "log"                   : true     // logging
 }
 ```
 
