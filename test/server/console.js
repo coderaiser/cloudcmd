@@ -29,7 +29,7 @@ test('cloudcmd: console: enabled', async (t) => {
     t.end();
 });
 
-test('cloudcmd: console: disabled', async (t) => {
+test.skip('cloudcmd: console: disabled', async (t) => {
     const config = {
         console: false,
     };

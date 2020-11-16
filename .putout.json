@@ -3,6 +3,9 @@
         "fixture*"
     ],
     "match": {
+        "import.spec.js|console.js": {
+            "remove-skip": "off"
+        },
         ".webpack": {
             "webpack": "on"
         },

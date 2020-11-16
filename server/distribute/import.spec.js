@@ -147,7 +147,7 @@ test('distribute: import: received: no name', async (t) => {
     t.end();
 });
 
-test('distribute: import: error', async (t) => {
+test.skip('distribute: import: error', async (t) => {
     const configManager = createConfigManager();
     const {done} = await connect({
         configManager,
@@ -171,7 +171,7 @@ test('distribute: import: error', async (t) => {
     t.end();
 });
 
-test('distribute: import: config:change: no export', async (t) => {
+test.skip('distribute: import: config:change: no export', async (t) => {
     const configManager = createConfigManager();
     const {done} = await connect({
         configManager,

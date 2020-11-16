@@ -131,9 +131,7 @@ function listen({prefixSocket, socket, config}) {
     const auth = initAuth(config);
     
     prefixSocket = getPrefix(prefixSocket);
-    
-    if (config.listen)
-        config.listen(socket, auth);
+    config.listen(socket, auth);
     
     edward.listen(socket, {
         root,

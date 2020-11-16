@@ -36,7 +36,7 @@ function before(options, fn = options) {
         server.close(cb);
     };
     
-    const socket = io.listen(server);
+    const socket = io(server);
     
     app.use(cloudcmd({
         socket,

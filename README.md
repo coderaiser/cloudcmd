@@ -3,31 +3,18 @@
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
 
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
-
 [MainURL]: http://cloudcmd.io "Main"
-
 [BlogURL]: http://blog.cloudcmd.io "Blog"
-
 [HerokuURL]: https://cloudcmd.herokuapp.com/ "Heroku"
-
 [BuildStatusURL]: https://travis-ci.org/coderaiser/cloudcmd "Build Status"
-
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
-
 [BuildAppveyorURL]: https://ci.appveyor.com/project/coderaiser/cloudcmd
-
 [BuildAppveyorIMGURL]: https://ci.appveyor.com/api/projects/status/tse6sc8dxrqxqehi?svg=true
-
 [CodacyURL]: https://www.codacy.com/app/coderaiser/cloudcmd
-
 [CodacyIMG]: https://api.codacy.com/project/badge/Grade/ddda78be780549ce8754f8d47a8c0e36
-
 [GitterURL]: https://gitter.im/cloudcmd/hello
-
 [GitterIMGURL]: https://img.shields.io/gitter/room/coderaiser/cloudcmd.js.svg
-
 [DeployURL]: https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy"
-
 [DeployIMG]: https://www.herokucdn.com/deploy/button.png
 
 **Cloud Commander** a file manager for the web with console and editor.
