@@ -49,7 +49,6 @@
     "--no-name                  ": "set default tab name in web browser",
     "--no-one-file-panel        ": "show two file panels",
     "--no-keys-panel            ": "hide keys panel",
-    "--no-one-file-panel        ": "show two file panels",
     "--no-confirm-copy          ": "do not confirm copy",
     "--no-confirm-move          ": "do not confirm move",
     "--no-config-dialog         ": "disable config dialog",

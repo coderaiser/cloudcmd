@@ -63,11 +63,6 @@
           "value": "",
           "required": false
       },
-      "CLOUDCMD_CONFIG_DIALOG": {
-          "description": "show config dialog",
-          "value": "false",
-          "required": false
-      },
       "CLOUDCMD_ONE_FILE_PANEL": {
           "description": "show one file panel",
           "value": "false",
