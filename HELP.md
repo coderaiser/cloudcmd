@@ -1328,7 +1328,7 @@ There are a lot of ways to be involved in `Cloud Commander` development:
 
 ## Special Thanks
 
-- [Olena Zalitok](https://zalitok.github.io/ "Olena Zalitok") for **logo** and **favicon**.
+- [Olena Zalitok](http://www.linkedin.com/in/olena-zalitok-ux-designer "Olena Zalitok") for **logo** and **favicon**.
 - [TarZak](https://github.com/tarzak "TarZak")
   - Russian and Ukrainian translations;
   - config template and style;
