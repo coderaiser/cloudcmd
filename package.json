@@ -217,7 +217,7 @@
     "stylelint": "^13.0.0",
     "stylelint-config-standard": "^20.0.0",
     "supermenu": "^4.0.1",
-    "supertape": "^2.0.0",
+    "supertape": "^3.1.3",
     "tar-stream": "^2.0.0",
     "unionfs": "^4.0.0",
     "url-loader": "^4.0.0",
