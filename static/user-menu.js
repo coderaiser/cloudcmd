@@ -1,9 +1,9 @@
 'use strict';
 
-const RENAME_FILE= 'Rename file';
+const RENAME_FILE = 'Rename file';
 
 module.exports = {
-    __settings: {
+    '__settings': {
         select: [
             RENAME_FILE,
         ],
@@ -27,7 +27,7 @@ module.exports = {
             CloudCmd,
         });
     },
-    'D - Compare directories': async ({DOM}) => {
+    'D - Compare directories': ({DOM}) => {
         const {
             CurrentInfo,
             getFilenames,

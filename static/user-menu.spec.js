@@ -124,7 +124,7 @@ test('cloudcmd: static: user menu: compare directories', async (t) => {
     t.end();
 });
 
-test('cloudcmd: static: user menu: compare directories: select names', async (t) => {
+test('cloudcmd: static: user menu: compare directories: select names', (t) => {
     const {_selectNames} = defaultMenu;
     const selectFile = stub();
     const file = {};
@@ -142,7 +142,7 @@ test('cloudcmd: static: user menu: compare directories: select names', async (t)
     t.end();
 });
 
-test('cloudcmd: static: user menu: compare directories: select names: getCurrentByName', async (t) => {
+test('cloudcmd: static: user menu: compare directories: select names: getCurrentByName', (t) => {
     const {_selectNames} = defaultMenu;
     const selectFile = stub();
     const getCurrentByName = stub();
@@ -160,7 +160,7 @@ test('cloudcmd: static: user menu: compare directories: select names: getCurrent
     t.end();
 });
 
-test('cloudcmd: static: user menu: compare directories: select names: compare', async (t) => {
+test('cloudcmd: static: user menu: compare directories: select names: compare', (t) => {
     const {_compare} = defaultMenu;
     const a = [1, 2];
     const b = [1, 3];

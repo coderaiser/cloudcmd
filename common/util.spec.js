@@ -89,7 +89,7 @@ test('util: findObjByNameInArr: array', (t) => {
 test('util: getRegExp', (t) => {
     const reg = getRegExp('hel?o.*');
     
-    t.deepEqual(reg, RegExp('^hel.?o\\..*$'), 'should return regexp');
+    t.deepEqual(reg, /^hel.?o\..*$/, 'should return regexp');
     t.end();
 });
 
@@ -103,7 +103,7 @@ test('util: getRegExp: dots', (t) => {
 test('util: getRegExp: no', (t) => {
     const reg = getRegExp('');
     
-    t.deepEqual(reg, RegExp('^$'), 'should return regexp');
+    t.deepEqual(reg, /^$/, 'should return regexp');
     t.end();
 });
 

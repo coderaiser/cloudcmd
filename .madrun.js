@@ -3,28 +3,9 @@
 const {
     run,
     parallel,
-    predefined,
 } = require('madrun');
 
 const {version} = require('./package');
-
-const names = [
-    'bin/cloudcmd.js',
-    'client',
-    'common',
-    'server',
-    'test',
-    'bin/release.js',
-    'webpack.config.js',
-    'cssnano.config.js',
-    '.webpack',
-    '.eslintrc.js',
-    '.madrun.js',
-    '{client,server,common}/**/*.spec.js',
-    '*.md',
-];
-
-const {putout} = predefined;
 
 const env = 'THREAD_IT_COUNT=0';
 const dockerName = 'coderaiser/cloudcmd';
@@ -35,9 +16,7 @@ module.exports = {
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'lint:all': () => run(['lint', 'lint:css', 'spell']),
-    'lint': () => putout({
-        names,
-    }),
+    'lint': () => 'putout .',
     'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
     'fix:lint': () => run(['lint', 'lint:css'], '--fix'),

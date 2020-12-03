@@ -19,6 +19,5 @@ cssnano.config.js
 bin/release.js
 
 client
-legacy
 server_
 

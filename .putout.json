@@ -1,7 +1,9 @@
 {
     "ignore": [
         "fixture*",
-        "dist*"
+        "dist*",
+        "app.json",
+        "fontello.json"
     ],
     "match": {
         "import.spec.js|console.js": {

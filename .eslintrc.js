@@ -26,7 +26,7 @@ module.exports = {
             'plugin:node/recommended',
         ],
     }, {
-        files: ['{client,common}/**/*.js'],
+        files: ['{client,common,static}/**/*.js'],
         env: {
             browser: true,
         },

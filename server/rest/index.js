@@ -87,7 +87,7 @@ function rest(config, request, response) {
  */
 function sendData(params, config, callback) {
     const p = params;
-    const isMD = RegExp('^/markdown').test(p.name);
+    const isMD = /^\/markdown/.test(p.name);
     const rootDir = config('root');
     
     if (isMD)
