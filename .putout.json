@@ -1,6 +1,7 @@
 {
     "ignore": [
-        "fixture*"
+        "fixture*",
+        "dist*"
     ],
     "match": {
         "import.spec.js|console.js": {
