@@ -1,6 +1,8 @@
 'use strict';
 
 const test = require('supertape');
+const tryCatch = require('try-catch');
+
 const datetime = require('./datetime');
 
 test('common: datetime', (t) => {
@@ -9,7 +11,7 @@ test('common: datetime', (t) => {
     
     const expected = '2018.08.17 10:56:48';
     
-    t.equals(result, expected, 'should equal');
+    t.equal(result, expected, 'should equal');
     t.end();
 });
 
@@ -39,14 +41,15 @@ test('common: 0 before number', (t) => {
     
     const expected = '2018.08.17 10:56:08';
     
-    t.equals(result, expected, 'should equal');
+    t.equal(result, expected, 'should equal');
     t.end();
 });
 
 test('common: datetime: wrong args', (t) => {
     const fn = () => datetime({});
+    const [error] = tryCatch(datetime, {});
     
-    t.throws(fn, /date should be instanceof Date!/, 'should throw');
+    t.equal(error.message, 'date should be instanceof Date!', 'should throw');
     t.end();
 });
 
