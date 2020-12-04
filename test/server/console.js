@@ -29,6 +29,7 @@ test('cloudcmd: console: enabled', async (t) => {
     t.end();
 });
 
+// need options to close socket faster
 test.skip('cloudcmd: console: disabled', async (t) => {
     const config = {
         console: false,
@@ -37,12 +38,12 @@ test.skip('cloudcmd: console: disabled', async (t) => {
     const {port, done} = await connect({config});
     const socket = io(`http://localhost:${port}/console`);
     
-    const [error] = await once(socket, 'error');
+    const [error] = await once(socket, 'connect_error');
     
     socket.close();
     await done();
     
-    t.equal(error, 'Invalid namespace', 'should emit error');
+    t.equal(error.message, 'Invalid namespace', 'should emit error');
     t.end();
 });
 
