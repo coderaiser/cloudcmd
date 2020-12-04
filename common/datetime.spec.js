@@ -46,7 +46,6 @@ test('common: 0 before number', (t) => {
 });
 
 test('common: datetime: wrong args', (t) => {
-    const fn = () => datetime({});
     const [error] = tryCatch(datetime, {});
     
     t.equal(error.message, 'date should be instanceof Date!', 'should throw');
