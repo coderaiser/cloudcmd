@@ -1,16 +1,14 @@
-'use strict';
+import {createRequire} from 'module';
+import {run, parallel} from 'madrun';
 
-const {
-    run,
-    parallel,
-} = require('madrun');
+const require = createRequire(import.meta.url);
 
 const {version} = require('./package');
 
 const env = 'THREAD_IT_COUNT=0';
 const dockerName = 'coderaiser/cloudcmd';
 
-module.exports = {
+export default {
     'start': () => 'node bin/cloudcmd.js',
     'start:dev': async () => `NODE_ENV=development ${await run('start')}`,
     'build:start': () => run(['build:client', 'start']),
