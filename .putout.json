@@ -6,7 +6,7 @@
         "fontello.json"
     ],
     "match": {
-        "import.spec.js|console.js": {
+        "{import.spec.js,console.js}": {
             "remove-skip": "off"
         },
         ".webpack": {
@@ -15,14 +15,14 @@
         "server": {
             "remove-process-exit": "on"
         },
-        "server/(server|exit).js": {
+        "server/{server,exit}.js": {
             "remove-process-exit": "off",
             "remove-console": "off"
         },
-        "server/(terminal|distribute/log).js": {
+        "server/{terminal,distribute/log}.js": {
             "remove-console": "off"
         },
-        "client/(client|cloudcmd|load-module).js": {
+        "client/{client,cloudcmd,load-module}.js": {
             "remove-console": "off"
         },
         "client/modules/config/index.js": {

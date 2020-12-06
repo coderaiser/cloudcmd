@@ -12,7 +12,7 @@ const dockerName = 'coderaiser/cloudcmd';
 
 module.exports = {
     'start': () => 'node bin/cloudcmd.js',
-    'start:dev': () => `NODE_ENV=development ${run('start')}`,
+    'start:dev': async () => `NODE_ENV=development ${await run('start')}`,
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'lint:all': () => run(['lint', 'lint:css', 'spell']),
