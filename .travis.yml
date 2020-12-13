@@ -6,20 +6,9 @@ node_js:
 cache:
   npm: false
 
-matrix:
-  allow_failures:
-    - os: windows
-
 os:
   - linux
-  - osx
-  - windows
-
-# https://docs.travis-ci.com/user/customizing-the-build/#git-end-of-line-conversion-control
-# need for windows
-git:
-  autocrlf: input
-
+  - os x 
 
 script:
   - npm run lint && npm run build && npm run coverage && npm run report
