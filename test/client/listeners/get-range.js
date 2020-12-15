@@ -10,7 +10,7 @@ test('cloudcmd: client: listeners: getRange: direct', (t) => {
     const files = [...expected, 'how', 'come'];
     const result = getRange(0, 1, files);
     
-    t.deepEqual(expected, result, 'should return range');
+    t.deepEqual(result, expected, 'should return range');
     t.end();
 });
 
@@ -19,7 +19,7 @@ test('cloudcmd: client: listeners: getRange: reverse', (t) => {
     const files = [...expected, 'how', 'come'];
     const result = getRange(1, 0, files);
     
-    t.deepEqual(expected, result, 'should return range');
+    t.deepEqual(result, expected, 'should return range');
     t.end();
 });
 
@@ -28,7 +28,7 @@ test('cloudcmd: client: listeners: getRange: one', (t) => {
     const files = [...expected, 'how', 'come'];
     const result = getRange(0, 0, files);
     
-    t.deepEqual(expected, result, 'should return range');
+    t.deepEqual(result, expected, 'should return range');
     t.end();
 });
 
