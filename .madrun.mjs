@@ -15,9 +15,8 @@ export default {
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'lint:all': () => run(['lint', 'lint:css', 'spell']),
     'lint': () => 'putout .',
-    'lint:css': () => 'stylelint css/*.css',
     'spell': () => 'yaspeller .',
-    'fix:lint': () => run(['lint', 'lint:css'], '--fix'),
+    'fix:lint': () => run('lint', '--fix'),
     'lint:stream': () => run('lint:base', '-f stream'),
     
     'test:base': () => {
