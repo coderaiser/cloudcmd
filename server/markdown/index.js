@@ -26,10 +26,10 @@ module.exports = callbackify(async (name, rootDir, request) => {
     
     switch(method) {
     case 'GET':
-        return onGET(request, name, rootDir);
+        return await onGET(request, name, rootDir);
     
     case 'PUT':
-        return onPUT(request);
+        return await onPUT(request);
     }
 });
 

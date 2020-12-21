@@ -26,6 +26,6 @@ test('cloudcmd: client: polyfill: scrollIntoViewIfNeaded', (t) => {
             block: 'nearest',
         }];
     
-    t.ok(scroll.calledWith(...args), 'should call scrollIntoViewIfNeaded');
+    t.calledWith(scroll, args, 'should call scrollIntoViewIfNeaded');
     t.end();
 });

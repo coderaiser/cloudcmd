@@ -17,7 +17,7 @@ test('cloudcmd: client: storage: set', async (t) => {
     await storage.set('hello', 'world');
     global.localStorage = localStorage;
     
-    t.ok(setItem.calledWith('hello', 'world'), 'should call setItem');
+    t.calledWith(setItem, ['hello', 'world'], 'should call setItem');
     t.end();
 });
 
@@ -70,7 +70,7 @@ test('cloudcmd: client: storage: setJson', async (t) => {
     await storage.setJson('hello', data);
     global.localStorage = localStorage;
     
-    t.ok(setItem.calledWith('hello', expected));
+    t.calledWith(setItem, ['hello', expected]);
     t.end();
 });
 
@@ -85,7 +85,7 @@ test('cloudcmd: client: storage: remove', async (t) => {
     await storage.remove('hello');
     global.localStorage = localStorage;
     
-    t.ok(removeItem.calledWith('hello'), 'should call removeItem');
+    t.calledWith(removeItem, ['hello'], 'should call removeItem');
     t.end();
 });
 

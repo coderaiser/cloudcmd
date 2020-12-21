@@ -29,7 +29,7 @@ test('cloudcmd: root: mellow', (t) => {
     mockRequire.stopAll(pathConfig);
     reRequire(pathRoot);
     
-    t.ok(pathToWin.calledWith(dir, dirRoot), 'should call mellow');
+    t.calledWith(pathToWin, [dir, dirRoot], 'should call mellow');
     t.end();
 });
 

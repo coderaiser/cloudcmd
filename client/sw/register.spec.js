@@ -18,7 +18,7 @@ test('sw: listen', (t) => {
     
     listenSW(sw, 'hello', 'world');
     
-    t.ok(addEventListener.calledWith('hello', 'world'), 'should call addEventListener');
+    t.calledWith(addEventListener, ['hello', 'world'], 'should call addEventListener');
     t.end();
 });
 
@@ -78,7 +78,7 @@ test('sw: register: registerSW', async (t, {location, navigator}) => {
     
     await registerSW('/hello');
     
-    t.ok(register.calledWith('/hello/sw.js'), 'should call register');
+    t.calledWith(register, ['/hello/sw.js'], 'should call register');
     t.end();
 });
 
@@ -94,7 +94,7 @@ test('sw: register: unregisterSW', async (t, {location, navigator}) => {
     
     await unregisterSW('/hello');
     
-    t.ok(register.calledWith('/hello/sw.js'), 'should call register');
+    t.calledWith(register, ['/hello/sw.js'], 'should call register');
     t.end();
 });
 

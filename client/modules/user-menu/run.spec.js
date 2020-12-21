@@ -17,7 +17,7 @@ test('cloudcmd: client: user menu: run', async (t) => {
     
     await runSelected(selected, items, runUserMenu);
     
-    t.ok(runUserMenu.calledWith(fn));
+    t.calledWith(runUserMenu, [fn]);
     t.end();
 });
 

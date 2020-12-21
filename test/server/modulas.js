@@ -74,7 +74,7 @@ test('cloudcmd: modules: no', (t) => {
     
     fn({url}, {send});
     
-    t.ok(send.calledWith(localModules), 'should have been called with modules');
+    t.calledWith(send, [localModules], 'should have been called with modules');
     t.end();
 });
 

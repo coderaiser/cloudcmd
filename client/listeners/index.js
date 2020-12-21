@@ -17,14 +17,16 @@ const {FS} = require('../../common/cloudfunc');
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
 const SPACE = ' ';
 
-module.exports.init = () => {
-    contextMenu();
-    dragndrop();
-    unload();
-    pop();
-    resize();
-    config();
-    header();
+module.exports.init = async () => {
+    await Promise.all([
+        contextMenu(),
+        dragndrop(),
+        unload(),
+        pop(),
+        resize(),
+        header(),
+        config(),
+    ]);
 };
 
 CloudCmd.Listeners = module.exports;

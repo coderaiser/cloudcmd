@@ -24,9 +24,9 @@ let MSG_CHANGED;
 const isLoading = fullstore();
 
 const ConfigView = {
-    beforeClose: () => {
+    beforeClose: async () => {
         exec.ifExist(Menu, 'hide');
-        isChanged();
+        await isChanged();
     },
 };
 

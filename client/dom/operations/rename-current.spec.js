@@ -18,7 +18,7 @@ test('cloudcmd: client: dom: renameCurrent: isCurrentFile', async (t) => {
     const renameCurrent = reRequire('./rename-current');
     await renameCurrent(current);
     
-    t.ok(isCurrentFile.calledWith(current), 'should call isCurrentFile');
+    t.calledWith(isCurrentFile, [current], 'should call isCurrentFile');
     t.end();
 });
 
@@ -55,7 +55,7 @@ test('cloudcmd: client: dom: renameCurrent: file exist', async (t) => {
     const expected = 'Directory "hello" already exists. Proceed?';
     global.CloudCmd = CloudCmd;
     
-    t.ok(confirm.calledWith(expected), 'should call confirm');
+    t.calledWith(confirm, [expected], 'should call confirm');
     t.end();
 });
 

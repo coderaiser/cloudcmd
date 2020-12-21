@@ -25,7 +25,7 @@ test('vim: ^', (t) => {
         isDelete: false,
     };
     
-    t.ok(movePrevious.calledWith(expected), 'should call movePrevious');
+    t.calledWith(movePrevious, [expected], 'should call movePrevious');
     t.end();
 });
 
@@ -42,7 +42,7 @@ test('vim: w', (t) => {
         isDelete: false,
     };
     
-    t.ok(moveNext.calledWith(expected), 'should call moveNext');
+    t.calledWith(moveNext, [expected], 'should call moveNext');
     t.end();
 });
 
@@ -59,7 +59,7 @@ test('vim: b', (t) => {
         isDelete: false,
     };
     
-    t.ok(movePrevious.calledWith(expected), 'should call movePrevious');
+    t.calledWith(movePrevious, [expected], 'should call movePrevious');
     t.end();
 });
 

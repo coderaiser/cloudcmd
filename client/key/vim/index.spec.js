@@ -36,7 +36,7 @@ test('cloudcmd: client: key: set next file: no', (t) => {
     
     vim('j', {});
     
-    t.ok(setCurrentFile.calledWith(element), 'should set next file');
+    t.calledWith(setCurrentFile, [element], 'should set next file');
     t.end();
 });
 
@@ -53,7 +53,7 @@ test('cloudcmd: client: key: set next file current', (t) => {
     
     vim('j', {});
     
-    t.ok(setCurrentFile.calledWith(nextSibling), 'should set next file');
+    t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
     
     t.end();
 });
@@ -73,7 +73,7 @@ test('cloudcmd: client: key: set next file current', (t) => {
     vim('j', {});
     vim('j', {});
     
-    t.ok(setCurrentFile.calledWith(nextSibling), 'should set next file');
+    t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
     
     t.end();
 });
@@ -92,7 +92,7 @@ test('cloudcmd: client: key: set next file current: g', (t) => {
     vim('g', {});
     vim('j', {});
     
-    t.ok(setCurrentFile.calledWith(nextSibling), 'should ignore g');
+    t.calledWith(setCurrentFile, [nextSibling], 'should ignore g');
     
     t.end();
 });
@@ -116,7 +116,7 @@ test('cloudcmd: client: key: set +2 file current', (t) => {
     vim('2', event);
     vim('j', event);
     
-    t.ok(setCurrentFile.calledWith(last), 'should set next file');
+    t.calledWith(setCurrentFile, [last], 'should set next file');
     
     t.end();
 });
@@ -144,7 +144,7 @@ test('cloudcmd: client: key: select +2 files from current before delete', (t) =>
     vim('2', event);
     vim('j', event);
     
-    t.ok(setCurrentFile.calledWith(last), 'should set next file');
+    t.calledWith(setCurrentFile, [last], 'should set next file');
     t.end();
 });
 
@@ -172,7 +172,7 @@ test('cloudcmd: client: key: delete +2 files from current', (t) => {
     vim('2', event);
     vim('j', event);
     
-    t.ok(show.calledWith('delete'), 'should call delete');
+    t.calledWith(show, ['delete'], 'should call delete');
     
     t.end();
 });
@@ -190,7 +190,7 @@ test('cloudcmd: client: key: set previous file current', (t) => {
     
     vim('k', {});
     
-    t.ok(setCurrentFile.calledWith(previousSibling), 'should set previous file');
+    t.calledWith(setCurrentFile, [previousSibling], 'should set previous file');
     t.end();
 });
 
@@ -266,7 +266,7 @@ test('cloudcmd: client: key: selectFile', (t) => {
     
     vim.selectFile(current);
     
-    t.ok(selectFile.calledWith(current), 'should call selectFile');
+    t.calledWith(selectFile, [current], 'should call selectFile');
     t.end();
 });
 
@@ -286,7 +286,7 @@ test('cloudcmd: client: key: set last file current: shift + g', (t) => {
     
     vim('G', {});
     
-    t.ok(setCurrentFile.calledWith(last), 'should set last file');
+    t.calledWith(setCurrentFile, [last], 'should set last file');
     
     t.end();
 });
@@ -307,7 +307,7 @@ test('cloudcmd: client: key: set last file current: $', (t) => {
     
     vim('$', {});
     
-    t.ok(setCurrentFile.calledWith(last), 'should set last file');
+    t.calledWith(setCurrentFile, [last], 'should set last file');
     
     t.end();
 });
@@ -330,7 +330,7 @@ test('cloudcmd: client: key: set first file current: gg', (t) => {
     vim('g', {});
     vim('g', {});
     
-    t.ok(setCurrentFile.calledWith(first), 'should set first file');
+    t.calledWith(setCurrentFile, [first], 'should set first file');
     
     t.end();
 });
@@ -352,7 +352,7 @@ test('cloudcmd: client: key: set first file current: ^', (t) => {
     
     vim('^', {});
     
-    t.ok(setCurrentFile.calledWith(first), 'should set first file');
+    t.calledWith(setCurrentFile, [first], 'should set first file');
     
     t.end();
 });
@@ -368,7 +368,7 @@ test('cloudcmd: client: key: visual', (t) => {
     
     vim('v', {});
     
-    t.ok(toggleSelectedFile.calledWith(element), 'should toggle selection');
+    t.calledWith(toggleSelectedFile, [element], 'should toggle selection');
     
     t.end();
 });
@@ -403,7 +403,7 @@ test('cloudcmd: client: key: Enter', (t) => {
     
     vim('j');
     
-    t.ok(setCurrentFile.calledWith(nextSibling), 'should set next file');
+    t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
     t.end();
 });
 

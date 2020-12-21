@@ -238,13 +238,13 @@ function onNameChange(name) {
     }));
 }
 
-function onKey({keyCode, target}) {
+async function onKey({keyCode, target}) {
     switch(keyCode) {
     case Key.ESC:
         return hide();
     
     case Key.ENTER:
-        return onChange(target);
+        return await onChange(target);
     }
 }
 

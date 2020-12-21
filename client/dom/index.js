@@ -69,8 +69,8 @@ function CmdProto() {
      * create new folder
      *
      */
-    this.promptNewDir = function() {
-        promptNew('directory');
+    this.promptNewDir = async function() {
+        await promptNew('directory');
     };
     
     /**
@@ -79,8 +79,8 @@ function CmdProto() {
      * @typeName
      * @type
      */
-    this.promptNewFile = () => {
-        promptNew('file');
+    this.promptNewFile = async () => {
+        await promptNew('file');
     };
     
     async function promptNew(typeName) {

@@ -130,7 +130,7 @@ async function show(data, options) {
         return viewImage(prefixURL);
     
     case 'media':
-        return viewMedia(path);
+        return await viewMedia(path);
     
     case 'pdf':
         return viewPDF(path);

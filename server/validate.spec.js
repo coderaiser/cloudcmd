@@ -33,7 +33,7 @@ test('validate: root: config', (t) => {
     
     validate.root('/hello', config);
     
-    t.ok(config.calledWith('dropbox'), 'should call config');
+    t.calledWith(config, ['dropbox'], 'should call config');
     t.end();
 });
 
@@ -64,7 +64,7 @@ test('validate: root: stat', (t) => {
     fs.statSync = statSync;
     
     mockRequire.stop(exitPath);
-    t.ok(fn.calledWith(msg, error), 'should call fn');
+    t.calledWith(fn, [msg, error], 'should call fn');
     t.end();
 });
 
@@ -80,7 +80,7 @@ test('validate: packer: not valid', (t) => {
     
     mockRequire.stop(exitPath);
     
-    t.ok(fn.calledWith(msg), 'should call fn');
+    t.calledWith(fn, [msg], 'should call fn');
     t.end();
 });
 
@@ -96,7 +96,7 @@ test('validate: editor: not valid', (t) => {
     
     mockRequire.stop(exitPath);
     
-    t.ok(fn.calledWith(msg), 'should call fn');
+    t.calledWith(fn, [msg], 'should call fn');
     t.end();
 });
 
@@ -131,7 +131,7 @@ test('validate: columns: wrong', (t) => {
     mockRequire.stop(exitPath);
     mockRequire.stop(columnsPath);
     
-    t.ok(fn.calledWith(msg), 'should call exit');
+    t.calledWith(fn, [msg], 'should call exit');
     t.end();
 });
 

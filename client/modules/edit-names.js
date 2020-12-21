@@ -20,10 +20,10 @@ const rename = currify(_rename);
 let Menu;
 
 const ConfigView = {
-    beforeClose: () => {
+    beforeClose: async () => {
         exec.ifExist(Menu, 'hide');
         DOM.Events.remove('keydown', keyListener);
-        isChanged();
+        await isChanged();
     },
 };
 

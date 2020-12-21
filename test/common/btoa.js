@@ -13,7 +13,7 @@ test('btoa: browser', (t) => {
     
     btoa(str);
     
-    t.ok(global.btoa.calledWith(str), 'should call global.btoa');
+    t.calledWith(global.btoa, [str], 'should call global.btoa');
     t.end();
     
     global.btoa = btoaOriginal;

@@ -18,7 +18,7 @@ const {
 // prevent additional loading of emitify
 window.Emitify = require('emitify');
 
-module.exports = window.CloudCmd = (config) => {
+module.exports = window.CloudCmd = async (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     
@@ -27,7 +27,7 @@ module.exports = window.CloudCmd = (config) => {
     window.DOM = DOM;
     window.CloudCmd = require('./client');
     
-    register(config);
+    await register(config);
     
     require('./listeners');
     require('./key');

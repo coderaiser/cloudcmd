@@ -38,7 +38,7 @@ test('cloudcmd: terminal: enabled', (t) => {
     const terminal = require(terminalPath);
     terminal(arg);
     
-    t.ok(term.calledWith(arg), 'should call terminal');
+    t.calledWith(term, [arg], 'should call terminal');
     t.end();
 });
 

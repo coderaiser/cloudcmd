@@ -67,7 +67,7 @@ module.exports.init = promisify((callback) => {
             } = CloudCmd;
             
             await loadAll();
-            initOperations(prefix, prefixSocket, callback);
+            await initOperations(prefix, prefixSocket, callback);
         },
         (callback) => {
             Loaded = true;

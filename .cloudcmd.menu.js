@@ -28,10 +28,10 @@ module.exports = {
         await run(TerminalRun, 'npm run build:client:dev');
         CloudCmd.refresh();
     },
-    'P - Build Prod': ({CloudCmd}) => {
+    'P - Build Prod': async ({CloudCmd}) => {
         const {TerminalRun} = CloudCmd;
         
-        run(TerminalRun, 'npm run build:client');
+        await run(TerminalRun, 'npm run build:client');
         CloudCmd.refresh();
     },
 };

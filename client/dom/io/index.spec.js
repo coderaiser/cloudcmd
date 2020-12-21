@@ -22,6 +22,6 @@ test('client: dom: io', (t) => {
         url: '/fs/hello?dir',
     };
     
-    t.ok(sendRequest.calledWith(expected));
+    t.calledWith(sendRequest, [expected]);
     t.end();
 });

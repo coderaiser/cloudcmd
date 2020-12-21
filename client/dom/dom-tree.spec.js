@@ -25,7 +25,7 @@ test('dom: isContainClass: contains', (t) => {
     const className = 'hello';
     isContainClass(el, className);
     
-    t.ok(contains.calledWith(className), 'should call contains');
+    t.calledWith(contains, [className], 'should call contains');
     t.end();
 });
 
@@ -40,7 +40,7 @@ test('dom: isContainClass: contains: array', (t) => {
         'hello',
     ]);
     
-    t.ok(contains.calledWith(className), 'should call contains');
+    t.calledWith(contains, [className], 'should call contains');
     t.end();
 });
 

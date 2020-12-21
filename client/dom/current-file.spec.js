@@ -24,7 +24,7 @@ test('current-file: setCurrentName: setAttribute', (t) => {
     
     currentFile.setCurrentName('hello', current);
     
-    t.ok(setAttribute.calledWith('data-name', 'js-file-aGVsbG8='), 'should call setAttribute');
+    t.calledWith(setAttribute, ['data-name', 'js-file-aGVsbG8='], 'should call setAttribute');
     
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
@@ -46,7 +46,7 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     
     currentFile.setCurrentName('ай', current);
     
-    t.ok(setAttribute.calledWith('data-name', 'js-file-JUQwJUIwJUQwJUI5'), 'should call setAttribute');
+    t.calledWith(setAttribute, ['data-name', 'js-file-JUQwJUIwJUQwJUI5'], 'should call setAttribute');
     
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
@@ -71,7 +71,7 @@ test('current-file: emit', (t) => {
     
     currentFile.setCurrentName('hello', current);
     
-    t.ok(emit.calledWith('current-file', current), 'should call emit');
+    t.calledWith(emit, ['current-file', current], 'should call emit');
     
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
@@ -164,7 +164,7 @@ test('current-file: isCurrentFile', (t) => {
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
     
-    t.ok(isContainClass.calledWith(current, _CURRENT_FILE), 'should call isContainClass');
+    t.calledWith(isContainClass, [current, _CURRENT_FILE], 'should call isContainClass');
     t.end();
 });
 
@@ -190,7 +190,7 @@ test('current-file: getCurrentType', (t) => {
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
     
-    t.ok(getByDataName.calledWith('js-type', current));
+    t.calledWith(getByDataName, ['js-type', current]);
     t.end();
 });
 
@@ -212,7 +212,7 @@ test('current-file: isCurrentIsDir: getCurrentType', (t) => {
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
     
-    t.ok(getCurrentType.calledWith(current));
+    t.calledWith(getCurrentType, [current]);
     t.end();
 });
 

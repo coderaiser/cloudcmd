@@ -17,7 +17,7 @@ async function registerSW(prefix) {
     if (!isHTTPS && !isLocalhost)
         return;
     
-    return navigator.serviceWorker.register(`${prefix}/sw.js`);
+    return await navigator.serviceWorker.register(`${prefix}/sw.js`);
 }
 async function unregisterSW(prefix) {
     const reg = await registerSW(prefix);
