@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-const callbackify = require('./callbackify');
+import test from 'supertape';
+import callbackify from './callbackify.js';
 
 test('cloudcmd: common: callbackify: error', (t) => {
     const promise = async () => {

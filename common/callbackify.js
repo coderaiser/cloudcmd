@@ -1,8 +1,6 @@
-'use strict';
-
 const success = (f) => (data) => f(null, data);
 
-module.exports = (promise) => {
+export default (promise) => {
     return (...a) => {
         const fn = a.pop();
         

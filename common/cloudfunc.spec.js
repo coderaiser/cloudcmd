@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-const {_getSize} = require('./cloudfunc');
+import test from 'supertape';
+import {_getSize} from './cloudfunc.js';
 
 test('cloudfunc: getSize: dir', (t) => {
     const type = 'directory';

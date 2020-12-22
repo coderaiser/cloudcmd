@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-const tryToPromiseAll = require('./try-to-promise-all');
+import test from 'supertape';
+import tryToPromiseAll from './try-to-promise-all.js';
 
 const resolve = Promise.resolve.bind(Promise);
 const reject = Promise.reject.bind(Promise);

@@ -1,8 +1,6 @@
-'use strict';
+import shortdate from 'shortdate';
 
-const shortdate = require('shortdate');
-
-module.exports = (date) => {
+export default (date) => {
     date = date || new Date();
     check(date);
     

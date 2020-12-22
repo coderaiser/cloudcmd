@@ -1,5 +1,3 @@
-'use strict';
-
 const Entities = {
     '&nbsp;': ' ',
     '&lt;': '<',
@@ -9,7 +7,7 @@ const Entities = {
 
 const keys = Object.keys(Entities);
 
-module.exports.encode = (str) => {
+export const encode = (str) => {
     for (const code of keys) {
         const char = Entities[code];
         const reg = RegExp(char, 'g');
@@ -20,7 +18,7 @@ module.exports.encode = (str) => {
     return str;
 };
 
-module.exports.decode = (str) => {
+export const decode = (str) => {
     for (const code of keys) {
         const char = Entities[code];
         const reg = RegExp(code, 'g');

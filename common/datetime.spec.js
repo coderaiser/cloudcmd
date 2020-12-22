@@ -1,9 +1,7 @@
-'use strict';
+import test from 'supertape';
+import tryCatch from 'try-catch';
 
-const test = require('supertape');
-const tryCatch = require('try-catch');
-
-const datetime = require('./datetime');
+import datetime from './datetime.js';
 
 test('common: datetime', (t) => {
     const dateStr = 'Fri, 17 Aug 2018 10:56:48';

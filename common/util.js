@@ -1,8 +1,10 @@
-'use strict';
+import exec from 'execon';
 
-const exec = require('execon');
+export {
+    exec,
+};
 
-module.exports.escapeRegExp = (str) => {
+export const escapeRegExp = (str) => {
     const isStr = typeof str === 'string';
     
     if (isStr)
@@ -14,7 +16,7 @@ module.exports.escapeRegExp = (str) => {
 /**
  * get regexp from wild card
  */
-module.exports.getRegExp = (wildcard) => {
+export const getRegExp = (wildcard) => {
     const escaped = '^' + wildcard // search from start of line
         .replace(/\./g, '\\.')
         .replace(/\*/g, '.*')
@@ -23,15 +25,13 @@ module.exports.getRegExp = (wildcard) => {
     return RegExp(escaped);
 };
 
-module.exports.exec = exec;
-
 /**
  * function gets file extension
  *
  * @param name
  * @return ext
  */
-module.exports.getExt = (name) => {
+export const getExt = (name) => {
     const isStr = typeof name === 'string';
     
     if (!isStr)
@@ -51,7 +51,7 @@ module.exports.getExt = (name) => {
  * @param array
  * @param name
  */
-module.exports.findObjByNameInArr = (array, name) => {
+export const findObjByNameInArr = (array, name) => {
     let ret;
     
     if (!Array.isArray(array))
@@ -89,7 +89,7 @@ module.exports.findObjByNameInArr = (array, name) => {
  * start timer
  * @param name
  */
-module.exports.time = (name) => {
+export const time = (name) => {
     exec.ifExist(console, 'time', [name]);
 };
 
@@ -97,7 +97,7 @@ module.exports.time = (name) => {
  * stop timer
  * @param name
  */
-module.exports.timeEnd = (name) => {
+export const timeEnd = (name) => {
     exec.ifExist(console, 'timeEnd', [name]);
 };
 

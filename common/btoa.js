@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (str) => {
+export default (str) => {
     if (typeof btoa === 'function')
         return btoa(str);
     

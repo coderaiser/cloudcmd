@@ -1,9 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const {reRequire} = require('mock-require');
-const tryCatch = require('try-catch');
-const Util = require('./util');
+import test from 'supertape';
+import tryCatch from 'try-catch';
+import * as Util from './util.js';
 
 const {
     findObjByNameInArr,
@@ -119,18 +116,6 @@ test('util: escapeRegExp: no str', (t) => {
 
 test('util: escapeRegExp', (t) => {
     t.equal(escapeRegExp('#hello'), '\\#hello', 'should equal');
-    t.end();
-});
-
-test('util: scope', (t) => {
-    global.window = {};
-    
-    reRequire('./util');
-    
-    t.pass('should set window in scope');
-    
-    delete global.window;
-    
     t.end();
 });
 
