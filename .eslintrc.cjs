@@ -1,7 +1,19 @@
-'use strict';
-
 module.exports = {
+    parser: '@babel/eslint-parser',
+    parserOptions: {
+        sourceType: 'module',
+        babelOptions: {
+            sourceType: 'module',
+            plugins: [
+                '@babel/plugin-syntax-top-level-await',
+            ],
+        },
+    },
+    rules: {
+        'node/no-unsupported-features/es-syntax': 'off',
+    },
     extends: [
+        'plugin:node/recommended',
         'plugin:putout/recommended',
     ],
     plugins: [
@@ -14,17 +26,11 @@ module.exports = {
             'no-console': 'off',
             'node/shebang': 'off',
         },
-        extends: [
-            'plugin:node/recommended',
-        ],
     }, {
         files: ['bin/cloudcmd.js'],
         rules: {
             'no-console': 'off',
         },
-        extends: [
-            'plugin:node/recommended',
-        ],
     }, {
         files: ['{client,common,static}/**/*.js'],
         env: {

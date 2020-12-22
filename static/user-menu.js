@@ -1,8 +1,6 @@
-'use strict';
-
 const RENAME_FILE = 'Rename file';
 
-module.exports = {
+export default {
     '__settings': {
         select: [
             RENAME_FILE,
@@ -78,7 +76,7 @@ async function readDefaultMenu({prefix}) {
     return data;
 }
 
-module.exports._selectNames = selectNames;
+export const _selectNames = selectNames;
 function selectNames(names, panel, {selectFile, getCurrentByName}) {
     for (const name of names) {
         const file = getCurrentByName(name, panel);
@@ -86,7 +84,7 @@ function selectNames(names, panel, {selectFile, getCurrentByName}) {
     }
 }
 
-module.exports._compare = compare;
+export const _compare = compare;
 function compare(a, b) {
     const result = [];
     

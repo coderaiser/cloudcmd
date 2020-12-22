@@ -1,10 +1,12 @@
 {
     "ignore": [
         "fixture*",
-        "dist*",
         "app.json",
         "fontello.json"
     ],
+    "rules": {
+        "convert-commonjs-to-esm": "on"
+    },
     "match": {
         "{import.spec.js,console.js}": {
             "remove-skip": "off"
@@ -24,16 +26,6 @@
         },
         "client/{client,cloudcmd,load-module}.js": {
             "remove-console": "off"
-        },
-        "client/modules/config/index.js": {
-            "apply-shorthand-properties": [{
-                "ignore": [
-                    "ONE_MINUTE"
-                ]
-            }]
-        },
-        "view.js": {
-            "apply-shorthand-properties": "off"
         },
         "test/common/cloudfunc.js": {
             "remove-console": "off"

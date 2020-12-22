@@ -1,12 +1,11 @@
-'use strict';
+import autoGlobals from 'auto-globals';
+import supertape from 'supertape';
+import stub from '@cloudcmd/stub';
+import tryToCatch from 'try-to-catch';
+import wraptile from 'wraptile';
 
-const autoGlobals = require('auto-globals');
-const test = autoGlobals(require('supertape'));
-const stub = require('@cloudcmd/stub');
-const tryToCatch = require('try-to-catch');
-const wraptile = require('wraptile');
-
-const defaultMenu = require('./user-menu');
+import defaultMenu from './user-menu.js';
+console.log(defaultMenu);
 
 const {create} = autoGlobals;
 
@@ -14,6 +13,8 @@ const {_data} = defaultMenu;
 const reject = wraptile(async (a) => {
     throw Error(a);
 });
+
+const test = autoGlobals(supertape);
 
 test('cloudcmd: static: user menu: Rename', async (t) => {
     const name = 'F2 - Rename file';
@@ -124,8 +125,8 @@ test('cloudcmd: static: user menu: compare directories', async (t) => {
     t.end();
 });
 
-test('cloudcmd: static: user menu: compare directories: select names', (t) => {
-    const {_selectNames} = defaultMenu;
+test('cloudcmd: static: user menu: compare directories: select names', async (t) => {
+    const {_selectNames} = await import('./user-menu.js');
     const selectFile = stub();
     const file = {};
     const getCurrentByName = stub().returns(file);
@@ -142,8 +143,8 @@ test('cloudcmd: static: user menu: compare directories: select names', (t) => {
     t.end();
 });
 
-test('cloudcmd: static: user menu: compare directories: select names: getCurrentByName', (t) => {
-    const {_selectNames} = defaultMenu;
+test('cloudcmd: static: user menu: compare directories: select names: getCurrentByName', async (t) => {
+    const {_selectNames} = await import('./user-menu.js');
     const selectFile = stub();
     const getCurrentByName = stub();
     
@@ -160,8 +161,8 @@ test('cloudcmd: static: user menu: compare directories: select names: getCurrent
     t.end();
 });
 
-test('cloudcmd: static: user menu: compare directories: select names: compare', (t) => {
-    const {_compare} = defaultMenu;
+test('cloudcmd: static: user menu: compare directories: select names: compare', async (t) => {
+    const {_compare} = await import('./user-menu.js');
     const a = [1, 2];
     const b = [1, 3];
     
