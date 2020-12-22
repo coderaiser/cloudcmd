@@ -1,16 +1,17 @@
-'use strict';
+import {readFile} from 'fs/promises';
+import {join, dirname} from 'path';
+import {callbackify} from 'util';
+import {fileURLToPath} from 'url';
 
-const {readFile} = require('fs').promises;
-const {join} = require('path');
-const {callbackify} = require('util');
+import pullout from 'pullout';
+import ponse from 'ponse';
+import threadIt from 'thread-it';
 
-const pullout = require('pullout');
-const ponse = require('ponse');
-const threadIt = require('thread-it');
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const parse = threadIt(join(__dirname, 'worker'));
+const parse = threadIt(join(__dirname, 'worker.cjs'));
 
-const root = require('../root');
+import root from '../root.js';
 
 threadIt.init();
 
@@ -19,7 +20,7 @@ parse('');
 
 const DIR_ROOT = __dirname + '/../../';
 
-module.exports = callbackify(async (name, rootDir, request) => {
+export default callbackify(async (name, rootDir, request) => {
     check(name, request);
     
     const {method} = request;

@@ -1,15 +1,13 @@
-'use strict';
+import path from 'path';
 
-const path = require('path');
-
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-const {reRequire} = require('mock-require');
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
+import {reRequire} from 'mock-require';
 
 const DIR = './';
 const cloudcmdPath = DIR + 'cloudcmd';
 
-const cloudcmd = require(cloudcmdPath);
+import cloudcmd from './cloudcmd.js';
 const {
     createConfigManager,
     _getPrefix,

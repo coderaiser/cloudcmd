@@ -1,8 +1,9 @@
-'use strict';
+import {join, dirname} from 'path';
+import {fileURLToPath} from 'url';
+import readFilesSync from '@cloudcmd/read-files-sync';
 
-const path = require('path');
-const readFilesSync = require('@cloudcmd/read-files-sync');
-const templatePath = path.join(__dirname, '..', 'tmpl/fs');
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const templatePath = join(__dirname, '..', 'tmpl/fs');
 
-module.exports = readFilesSync(templatePath, 'utf8');
+export default readFilesSync(templatePath, 'utf8');
 

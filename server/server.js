@@ -1,23 +1,31 @@
-'use strict';
+import cloudcmd from './cloudcmd.js';
 
-const DIR_SERVER = './';
-const cloudcmd = require(DIR_SERVER + 'cloudcmd');
+import http from 'http';
+import {createRequire} from 'module';
 
-const http = require('http');
-const {promisify} = require('util');
-const currify = require('currify');
-const squad = require('squad');
-const tryToCatch = require('try-to-catch');
-const wraptile = require('wraptile');
-const compression = require('compression');
-const threadIt = require('thread-it');
+import {promisify} from 'util';
+import currify from 'currify';
+import squad from 'squad';
+import tryToCatch from 'try-to-catch';
+import wraptile from 'wraptile';
+import compression from 'compression';
+import threadIt from 'thread-it';
 
 const two = currify((f, a, b) => f(a, b));
-const exit = require(DIR_SERVER + 'exit');
+import exit from './exit.js';
 
 const exitPort = two(exit, 'cloudcmd --port: %s');
 const bind = (f, self) => f.bind(self);
 const promisifySelf = squad(promisify, bind);
+
+import opn from 'open';
+import express from 'express';
+
+const require = createRequire(import.meta.url);
+const io = require('socket.io');
+
+import tryRequire from 'tryrequire';
+const logger = tryRequire('morgan');
 
 const shutdown = wraptile(async (promises) => {
     console.log('closing cloudcmd...');
@@ -26,14 +34,7 @@ const shutdown = wraptile(async (promises) => {
     process.exit(0);
 });
 
-const opn = require('open');
-const express = require('express');
-const io = require('socket.io');
-
-const tryRequire = require('tryrequire');
-const logger = tryRequire('morgan');
-
-module.exports = async (options, config) => {
+export default async (options, config) => {
     const prefix = config('prefix');
     const port = process.env.PORT || /* c9           */
                  config('port');

@@ -18,7 +18,6 @@ import prefixer from '../server/prefixer.js';
 import minimist from 'minimist';
 
 const Info = await readjson(new URL('../package.json', import.meta.url));
-console.log(Info);
 
 const {argv} = process;
 
@@ -28,8 +27,6 @@ const choose = (a, b) => {
     
     return a;
 };
-
-console.log('---->', env);
 
 process.on('unhandledRejection', exit);
 
@@ -245,7 +242,7 @@ async function start(options, config) {
     if (!args.server)
         return;
     
-    const server = await import('../server/server.js');
+    const {default: server} = await import('../server/server.js');
     server(options, config);
 }
 

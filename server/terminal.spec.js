@@ -1,13 +1,11 @@
-'use strict';
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-
-const mockRequire = require('mock-require');
+import mockRequire from 'mock-require';
 
 const terminalPath = './terminal';
-const terminal = require('./terminal');
-const {createConfigManager} = require('./cloudcmd');
+import terminal from './terminal.js';
+import {createConfigManager} from './cloudcmd.js';
 
 test('cloudcmd: terminal: disabled', (t) => {
     const config = createConfigManager();
@@ -29,13 +27,13 @@ test('cloudcmd: terminal: disabled: listen', (t) => {
     t.end();
 });
 
-test('cloudcmd: terminal: enabled', (t) => {
+test('cloudcmd: terminal: enabled', async (t) => {
     const term = stub();
     const arg = 'hello';
     
     mockRequire(terminalPath, term);
     
-    const terminal = require(terminalPath);
+    const terminal = await import(terminalPath);
     terminal(arg);
     
     t.calledWith(term, [arg], 'should call terminal');

@@ -1,11 +1,6 @@
-'use strict';
+import {table, getBorderCharacters} from 'table';
 
-const {
-    table,
-    getBorderCharacters,
-} = require('table');
-
-module.exports = (config) => {
+export default (config) => {
     check(config);
     
     const data = Object.keys(config).map((name) => {

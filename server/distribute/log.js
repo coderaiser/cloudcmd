@@ -1,30 +1,24 @@
-'use strict';
+import wraptile from 'wraptile';
+import chalk from 'chalk';
 
-const wraptile = require('wraptile');
-const chalk = require('chalk');
-
-const datetime = require('../../common/datetime');
+import datetime from '../../common/datetime.js';
 
 const log = (isLog, name, msg) => isLog && console.log(`${datetime()} -> ${name}: ${msg}`);
-const makeColor = (a, color) => chalk.rgb(color || stringToRGB(a))(a);
-const getMessage = (e) => e.message || e;
-const getDescription = (e) => `${e.type}: ${e.description}`;
+export const makeColor = (a, color) => chalk.rgb(color || stringToRGB(a))(a);
+export const getMessage = (e) => e.message || e;
+export const getDescription = (e) => `${e.type}: ${e.description}`;
 
-module.exports = log;
-module.exports.logWraped = wraptile(log);
-module.exports.stringToRGB = stringToRGB;
-module.exports.makeColor = makeColor;
-module.exports.getMessage = getMessage;
-module.exports.getDescription = getDescription;
+export default log;
+export const logWraped = wraptile(log);
 
-module.exports.importStr = 'import';
-module.exports.exportStr = 'export';
-module.exports.connectedStr = chalk.green('connected');
-module.exports.disconnectedStr = chalk.red('disconnected');
-module.exports.tokenRejectedStr = chalk.red('token rejected');
-module.exports.authTryStr = chalk.yellow('try to auth');
+export const importStr = 'import';
+export const exportStr = 'export';
+export const connectedStr = chalk.green('connected');
+export const disconnectedStr = chalk.red('disconnected');
+export const tokenRejectedStr = chalk.red('token rejected');
+export const authTryStr = chalk.yellow('try to auth');
 
-function stringToRGB(a) {
+export function stringToRGB(a) {
     return [
         a.charCodeAt(0),
         a.length,

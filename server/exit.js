@@ -1,8 +1,6 @@
-'use strict';
-
 const getMessage = (a) => a && a.message || a;
 
-module.exports = (...args) => {
+export default (...args) => {
     const messages = args.map(getMessage);
     
     console.error(...messages);

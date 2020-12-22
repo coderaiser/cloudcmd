@@ -1,15 +1,13 @@
-'use strict';
+import fs from 'fs';
+import {join} from 'path';
 
-const fs = require('fs');
-const {join} = require('path');
+import test from 'supertape';
+import serveOnce from 'serve-once';
+import threadIt from 'thread-it';
+import stub from '@cloudcmd/stub';
+import {reRequire} from 'mock-require';
 
-const test = require('supertape');
-const serveOnce = require('serve-once');
-const threadIt = require('thread-it');
-const stub = require('@cloudcmd/stub');
-const {reRequire} = require('mock-require');
-
-const userMenu = require('./user-menu');
+import userMenu from './user-menu.js';
 const {request} = serveOnce(userMenu);
 
 const {readFileSync} = fs;

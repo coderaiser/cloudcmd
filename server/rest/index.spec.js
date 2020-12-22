@@ -1,15 +1,7 @@
-'use strict';
+import test from 'supertape';
+import tryToCatch from 'try-to-catch';
 
-const test = require('supertape');
-const tryToCatch = require('try-to-catch');
-
-const {
-    _formatMsg,
-    _getWin32RootMsg,
-    _isRootWin32,
-    _isRootAll,
-    _onPUT,
-} = require('.');
+import {_formatMsg, _getWin32RootMsg, _isRootWin32, _isRootAll, _onPUT} from '.';
 
 test('rest: formatMsg', (t) => {
     const result = _formatMsg('hello', 'world');

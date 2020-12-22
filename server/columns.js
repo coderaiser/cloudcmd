@@ -1,10 +1,11 @@
-'use strict';
+import {join, dirname} from 'path';
+import fs from 'fs';
+import readFilesSync from '@cloudcmd/read-files-sync';
+import {fileURLToPath} from 'url';
 
-const path = require('path');
-const fs = require('fs');
-const readFilesSync = require('@cloudcmd/read-files-sync');
 const isMap = (a) => /\.map$/.test(a);
 const not = (fn) => (a) => !fn(a);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const defaultColumns = {
     '': '',
@@ -15,14 +16,14 @@ const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
 const dist = getDist(isDev);
-const columnsDir = path.join(__dirname, '..', dist, 'columns');
+const columnsDir = join(__dirname, '..', dist, 'columns');
 
 const names = fs.readdirSync(columnsDir)
     .filter(not(isMap));
 
 const columns = readFilesSync(columnsDir, names, 'utf8');
 
-module.exports = {
+export default {
     ...columns,
     ...defaultColumns,
 };

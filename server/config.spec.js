@@ -1,21 +1,13 @@
-'use strict';
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-
-const root = '../';
-const configPath = './config';
-
-const {
-    createConfig,
-    _cryptoPass,
-} = require(configPath);
+import {createConfig, _cryptoPass} from './config.js';
 const config = createConfig();
 
-const {apiURL} = require(root + 'common/cloudfunc');
+import {apiURL} from '../common/cloudfunc.js';
 
-const fixture = require('./config.fixture');
-const {connect} = require('../test/before');
+import fixture from './config.fixture.js';
+import {connect} from '../test/before.js';
 
 test('config: manage', (t) => {
     t.equal(undefined, config(), 'should return "undefined"');

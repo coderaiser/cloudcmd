@@ -1,8 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const exit = require('./exit');
-const stub = require('@cloudcmd/stub');
+import test from 'supertape';
+import exit from './exit.js';
+import stub from '@cloudcmd/stub';
 
 test('cloudcmd: exit: process.exit', (t) => {
     const {exit:exitOriginal} = process;

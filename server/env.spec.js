@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-const env = require('./env');
+import test from 'supertape';
+import env from './env.js';
 
 test('cloudcmd: server: env: bool: upper case first', (t) => {
     const {

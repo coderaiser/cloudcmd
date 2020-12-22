@@ -1,9 +1,9 @@
-'use strict';
+import deepmerge from 'deepmerge';
+import readjson from 'readjson';
 
-const deepmerge = require('deepmerge');
-const originalModules = require('../json/modules');
+const originalModules = await readjson(new URL('../json/modules.json', import.meta.url));
 
-module.exports = (modules) => {
+export default (modules) => {
     const result = deepmerge(originalModules, modules || {});
     
     return (req, res, next) => {

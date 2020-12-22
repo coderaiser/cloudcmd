@@ -1,11 +1,9 @@
-'use strict';
+import test from 'supertape';
+import {promisify} from 'util';
+import tryToCatch from 'try-to-catch';
 
-const test = require('supertape');
-const {promisify} = require('util');
-const tryToCatch = require('try-to-catch');
-
-const {connect} = require('../../test/before');
-const {createConfigManager} = require('../cloudcmd');
+import {connect} from '../../test/before.js';
+import {createConfigManager} from '../cloudcmd.js';
 
 const distribute = {
     import: promisify(require('./import')),
@@ -237,7 +235,7 @@ test('distribute: import: env', async (t) => {
     const result = configManagerImport('editor');
     const expected = 'deepword';
     
-    t.equal(expected, result);
+    t.equal(result, expected);
     t.end();
 });
 
@@ -281,6 +279,6 @@ test('distribute: import: no env', async (t) => {
     const result = configManagerImport('editor');
     const expected = 'edward';
     
-    t.equal(expected, result);
+    t.equal(result, expected);
     t.end();
 });

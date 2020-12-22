@@ -1,11 +1,9 @@
-'use strict';
+import fs from 'fs';
 
-const fs = require('fs');
-
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-const tryCatch = require('try-catch');
-const mockRequire = require('mock-require');
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
+import tryCatch from 'try-catch';
+import mockRequire from 'mock-require';
 const {reRequire} = mockRequire;
 
 const dir = '..';
@@ -13,10 +11,9 @@ const dir = '..';
 const validatePath = `${dir}/server/validate`;
 const exitPath = `${dir}/server/exit`;
 const columnsPath = `${dir}/server/columns`;
-const cloudcmdPath = `${dir}/server/cloudcmd`;
 
-const validate = require(validatePath);
-const cloudcmd = require(cloudcmdPath);
+import validate from '../server/validate.js';
+import cloudcmd from '../server/cloudcmd.js';
 
 test('validate: root: bad', (t) => {
     const config = {
@@ -100,11 +97,11 @@ test('validate: editor: not valid', (t) => {
     t.end();
 });
 
-test('validate: columns', (t) => {
+test('validate: columns', async (t) => {
     const fn = stub();
     mockRequire(exitPath, fn);
     
-    const {columns} = require(validatePath);
+    const {columns} = await import(validatePath);
     
     columns('name-size-date');
     

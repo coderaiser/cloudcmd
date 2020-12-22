@@ -1,17 +1,15 @@
-'use strict';
+import fs from 'fs';
+import path from 'path';
+import test from 'supertape';
+import {promisify} from 'util';
 
-const fs = require('fs');
-const path = require('path');
-const test = require('supertape');
-const {promisify} = require('util');
+import tryToCatch from 'try-to-catch';
 
-const tryToCatch = require('try-to-catch');
-
-const markdown = require('.');
+import markdown from '.';
 
 const _markdown = promisify(markdown);
 const fixtureDir = path.join(__dirname, 'fixture');
-const cloudcmd = require('../..');
+import cloudcmd from '../...js';
 const config = {
     auth: false,
 };

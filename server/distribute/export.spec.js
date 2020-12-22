@@ -1,11 +1,9 @@
-'use strict';
+import {once} from 'events';
 
-const {once} = require('events');
+import test from 'supertape';
+import io from 'socket.io-client';
 
-const test = require('supertape');
-const io = require('socket.io-client');
-
-const {connect} = require('../../test/before');
+import {connect} from '../../test/before.js';
 const config = require('../config').createConfig();
 
 test('distribute: export', async (t) => {

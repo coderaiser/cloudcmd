@@ -1,39 +1,42 @@
-'use strict';
+import path from 'path';
+import fs from 'fs';
+import {fileURLToPath} from 'url';
+
+import {apiURL} from './../common/cloudfunc.js';
+import authentication from './auth.js';
+import {createConfig, configPath} from './config.js';
+
+export {
+    createConfig,
+    configPath,
+};
+
+import modulas from './modulas.js';
+import userMenu from './user-menu.js';
+import rest from './rest/index.js';
+import route from './route.js';
+import * as validate from './validate.js';
+import prefixer from './prefixer.js';
+import terminal from './terminal.js';
+import distributeExport from './distribute/export.js';
+
+import currify from 'currify';
+import apart from 'apart';
+import ponse from 'ponse';
+import restafary from 'restafary';
+import restbox from 'restbox';
+import konsole from 'console-io';
+import edward from 'edward';
+import dword from 'dword';
+import deepword from 'deepword';
+import nomine from 'nomine';
+import fileop from '@cloudcmd/fileop';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const DIR = __dirname + '/';
 const DIR_ROOT = DIR + '../';
-const DIR_COMMON = DIR + '../common/';
-
-const path = require('path');
-const fs = require('fs');
-
-const cloudfunc = require(DIR_COMMON + 'cloudfunc');
-const authentication = require(DIR + 'auth');
-const {
-    createConfig,
-    configPath,
-} = require(DIR + 'config');
-
-const modulas = require(DIR + 'modulas');
-const userMenu = require(DIR + 'user-menu');
-const rest = require(DIR + 'rest');
-const route = require(DIR + 'route');
-const validate = require(DIR + 'validate');
-const prefixer = require(DIR + 'prefixer');
-const terminal = require(DIR + 'terminal');
-const distribute = require(DIR + 'distribute');
-
-const currify = require('currify');
-const apart = require('apart');
-const ponse = require('ponse');
-const restafary = require('restafary');
-const restbox = require('restbox');
-const konsole = require('console-io');
-const edward = require('edward');
-const dword = require('dword');
-const deepword = require('deepword');
-const nomine = require('nomine');
-const fileop = require('@cloudcmd/fileop');
 
 const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
@@ -45,7 +48,7 @@ const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
 
-module.exports = (params) => {
+export default (params) => {
     const p = params || {};
     const options = p.config || {};
     const config = p.configManager || createConfig({
@@ -89,10 +92,9 @@ module.exports = (params) => {
     });
 };
 
-module.exports.createConfigManager = createConfig;
-module.exports.configPath = configPath;
+export const createConfigManager = createConfig;
 
-module.exports._getIndexPath = getIndexPath;
+export const _getIndexPath = getIndexPath;
 
 function defaultValue(config, name, options) {
     const value = options[name];
@@ -104,7 +106,7 @@ function defaultValue(config, name, options) {
     return value;
 }
 
-module.exports._getPrefix = getPrefix;
+export const _getPrefix = getPrefix;
 function getPrefix(prefix) {
     if (typeof prefix === 'function')
         return prefix() || '';
@@ -112,8 +114,7 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-module.exports._initAuth = _initAuth;
-function _initAuth(config, accept, reject, username, password) {
+export function _initAuth(config, accept, reject, username, password) {
     if (!config('auth'))
         return accept();
     
@@ -169,7 +170,7 @@ function listen({prefixSocket, socket, config}) {
         autoRestart: config('terminalAutoRestart'),
     });
     
-    distribute.export(config, socket);
+    distributeExport(config, socket);
 }
 
 function cloudcmd({modules, config}) {
@@ -233,13 +234,13 @@ function cloudcmd({modules, config}) {
         modules && modulas(modules),
         
         config('dropbox') && restbox({
-            prefix: cloudfunc.apiURL,
+            prefix: apiURL,
             root,
             token: dropboxToken,
         }),
         
         restafary({
-            prefix: cloudfunc.apiURL + '/fs',
+            prefix: apiURL + '/fs',
             root,
         }),
         
@@ -265,7 +266,7 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
-module.exports._replaceDist = replaceDist;
+export const _replaceDist = replaceDist;
 function replaceDist(url) {
     if (!isDev)
         return url;

@@ -1,11 +1,9 @@
-'use strict';
+import path from 'path';
+import fs from 'fs';
 
-const path = require('path');
-const fs = require('fs');
-
-const tryToCatch = require('try-to-catch');
-const test = require('supertape');
-const mockRequire = require('mock-require');
+import tryToCatch from 'try-to-catch';
+import test from 'supertape';
+import mockRequire from 'mock-require';
 const {reRequire, stopAll} = mockRequire;
 
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
@@ -13,9 +11,9 @@ const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 const routePath = './route';
 const cloudcmdPath = './cloudcmd';
 
-const cloudcmd = require(cloudcmdPath);
+import cloudcmd from './cloudcmd.js';
 const {createConfigManager} = cloudcmd;
-const serveOnce = require('serve-once');
+import serveOnce from 'serve-once';
 const defaultConfig = {
     auth: false,
     dropbox: false,

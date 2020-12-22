@@ -1,9 +1,7 @@
-'use strict';
+import net from 'net';
+import repl from 'repl';
 
-const net = require('net');
-const repl = require('repl');
-
-module.exports = net.createServer((socket) => {
+export default net.createServer((socket) => {
     const {pid} = process;
     const addr = socket.remoteAddress;
     const port = socket.remotePort;

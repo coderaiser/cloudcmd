@@ -1,24 +1,21 @@
-'use strict';
+import {realpath} from 'fs/promises';
+import {createRequire} from 'module';
 
-const DIR_SERVER = './';
-const DIR_COMMON = '../common/';
+import {read} from 'flop';
+import ponse from 'ponse';
+import rendy from 'rendy';
+import format from 'format-io';
+import currify from 'currify';
+import tryToCatch from 'try-to-catch';
+import once from 'once';
 
-const {realpath} = require('fs').promises;
-
-const {read} = require('flop');
-const ponse = require('ponse');
-const rendy = require('rendy');
-const format = require('format-io');
-const currify = require('currify');
-const tryToCatch = require('try-to-catch');
-const once = require('once');
-
-const root = require(DIR_SERVER + 'root');
-const prefixer = require(DIR_SERVER + 'prefixer');
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
+import root from './root.js';
+import prefixer from './prefixer.js';
+import * as CloudFunc from '../common/cloudfunc.js';
 
 const getPrefix = (config) => prefixer(config('prefix'));
 
+const require = createRequire(import.meta.url);
 const onceRequire = once(require);
 
 const sendIndex = (params, data) => {
@@ -32,8 +29,8 @@ const sendIndex = (params, data) => {
 
 const {FS} = CloudFunc;
 
-const Columns = require(`${DIR_SERVER}/columns`);
-const Template = require(`${DIR_SERVER}/template`);
+import Columns from './/columns.js';
+import Template from './/template.js';
 
 const tokenize = (fn, a) => (b) => fn(a, b);
 const getReadDir = (config) => {
@@ -48,7 +45,7 @@ const getReadDir = (config) => {
 /**
  * routing of server queries
  */
-module.exports = currify((config, options, request, response, next) => {
+export default currify((config, options, request, response, next) => {
     const name = ponse.getPathName(request);
     const isFS = RegExp('^/$|^' + FS).test(name);
     
@@ -59,7 +56,7 @@ module.exports = currify((config, options, request, response, next) => {
         .catch(next);
 });
 
-module.exports._getReadDir = getReadDir;
+export const _getReadDir = getReadDir;
 
 async function route({config, options, request, response}) {
     const name = ponse.getPathName(request);
@@ -179,7 +176,7 @@ function buildIndex(config, html, data) {
     });
 }
 
-module.exports._hideKeysPanel = hideKeysPanel;
+export const _hideKeysPanel = hideKeysPanel;
 function hideKeysPanel(html) {
     const keysPanel = '<div id="js-keyspanel" class="{{ className }}"';
     const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';

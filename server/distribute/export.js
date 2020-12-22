@@ -1,11 +1,9 @@
-'use strict';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import squad from 'squad';
+import omit from 'object.omit';
 
-const currify = require('currify');
-const wraptile = require('wraptile');
-const squad = require('squad');
-const omit = require('object.omit');
-
-const log = require('./log');
+import log from './log.js';
 
 const {
     exportStr,
@@ -38,7 +36,7 @@ const omitList = [
 
 const omitConfig = (config) => omit(config, omitList);
 
-module.exports = (config, socket) => {
+export default (config, socket) => {
     if (!config('export'))
         return;
     

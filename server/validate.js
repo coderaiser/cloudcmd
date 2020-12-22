@@ -1,11 +1,9 @@
-'use strict';
+import tryCatch from 'try-catch';
 
-const tryCatch = require('try-catch');
+import exit from './exit.js';
+import columnsData from './columns.js';
 
-const exit = require('./exit');
-const columns = require('./columns');
-
-module.exports.root = (dir, config) => {
+export const root = async (dir, config) => {
     if (typeof dir !== 'string')
         throw Error('dir should be a string');
     
@@ -15,31 +13,31 @@ module.exports.root = (dir, config) => {
     if (config('dropbox'))
         return;
     
-    const {statSync} = require('fs');
+    const {statSync} = await import('fs');
     const [error] = tryCatch(statSync, dir);
     
     if (error)
         return exit('cloudcmd --root: %s', error.message);
 };
 
-module.exports.editor = (name) => {
+export const editor = (name) => {
     const reg = /^(dword|edward|deepword)$/;
     
     if (!reg.test(name))
         exit('cloudcmd --editor: could be "dword", "edward" or "deepword" only');
 };
 
-module.exports.packer = (name) => {
+export const packer = (name) => {
     const reg = /^(tar|zip)$/;
     
     if (!reg.test(name))
         exit('cloudcmd --packer: could be "tar" or "zip" only');
 };
 
-module.exports.columns = (type) => {
+export const columns = (type) => {
     const addQuotes = (a) => `"${a}"`;
     const all = Object
-        .keys(columns)
+        .keys(columnsData)
         .concat('');
     
     const names = all

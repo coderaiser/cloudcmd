@@ -1,8 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const log = require('./log');
-const {createConfig} = require('../config');
+import test from 'supertape';
+import log from './log.js';
+import {createConfig} from '../config.js';
 
 test('distribute: log: getMessage', (t) => {
     const e = 'hello';

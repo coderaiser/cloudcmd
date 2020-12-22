@@ -1,28 +1,26 @@
-'use strict';
+import {join, dirname} from 'path';
+import fs from 'fs';
+import Emitter from 'events';
+import {homedir} from 'os';
+import {fileURLToPath} from 'url';
 
-const DIR_SERVER = __dirname + '/';
-const DIR_COMMON = '../common/';
-const DIR = DIR_SERVER + '../';
+import exit from './exit.js';
+import * as CloudFunc from '../common/cloudfunc.js';
 
-const path = require('path');
-const fs = require('fs');
-const Emitter = require('events');
-const {homedir} = require('os');
+import currify from 'currify';
+import wraptile from 'wraptile';
+import tryToCatch from 'try-to-catch';
+import pullout from 'pullout';
+import ponse from 'ponse';
+import jonny from 'jonny';
+import jju from 'jju';
+import writejson from 'writejson';
+import tryCatch from 'try-catch';
+import criton from 'criton';
+import readjson from 'readjson';
 
-const exit = require(DIR_SERVER + 'exit');
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
-
-const currify = require('currify');
-const wraptile = require('wraptile');
-const tryToCatch = require('try-to-catch');
-const pullout = require('pullout');
-const ponse = require('ponse');
-const jonny = require('jonny');
-const jju = require('jju');
-const writejson = require('writejson');
-const tryCatch = require('try-catch');
-const criton = require('criton');
 const HOME = homedir();
+const DIR = dirname(fileURLToPath(import.meta.url));
 
 const resolve = Promise.resolve.bind(Promise);
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
@@ -31,26 +29,19 @@ const {apiURL} = CloudFunc;
 
 const key = (a) => Object.keys(a).pop();
 
-const ConfigPath = path.join(DIR, 'json/config.json');
-const ConfigHome = path.join(HOME, '.cloudcmd.json');
+const ConfigPath = join(DIR, '..', 'json/config.json');
 
 const connection = currify(_connection);
 const connectionWraped = wraptile(_connection);
 const middle = currify(_middle);
 
-const readjsonSync = (name) => {
-    return jju.parse(fs.readFileSync(name, 'utf8'), {
-        mode: 'json',
-    });
-};
-
-const rootConfig = readjsonSync(ConfigPath);
+const rootConfig = readjson.sync(ConfigPath);
 
 function read(filename) {
     if (!filename)
         return rootConfig;
     
-    const [error, configHome] = tryCatch(readjsonSync, filename);
+    const [error, configHome] = tryCatch(readjson.sync, filename);
     
     if (error && error.code !== 'ENOENT')
         exit(`cloudcmd --config ${filename}: ${error.message}`);
@@ -61,8 +52,7 @@ function read(filename) {
     };
 }
 
-module.exports.createConfig = createConfig;
-module.exports.configPath = ConfigHome;
+export const configPath = join(HOME, '.cloudcmd.json');
 
 const manageListen = currify((manage, socket, auth) => {
     if (!manage('configDialog'))
@@ -80,7 +70,7 @@ function initWrite(filename, configManager) {
     return resolve;
 }
 
-function createConfig({configPath} = {}) {
+export function createConfig({configPath} = {}) {
     const config = {};
     const changeEmitter = new Emitter();
     
@@ -231,7 +221,7 @@ function traverse([manage, json]) {
     }
 }
 
-module.exports._cryptoPass = cryptoPass;
+export const _cryptoPass = cryptoPass;
 function cryptoPass(manage, json) {
     const algo = manage('algo');
     

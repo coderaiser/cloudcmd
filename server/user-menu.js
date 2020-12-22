@@ -1,16 +1,17 @@
-'use strict';
+import {homedir} from 'os';
+import {readFile} from 'fs/promises';
+import {fileURLToPath} from 'url';
+import {join, dirname} from 'path';
+import {createRequire} from 'module';
 
-const {homedir} = require('os');
-const {readFile} = require('fs').promises;
+import tryToCatch from 'try-to-catch';
+import currify from 'currify';
+import findUp from 'find-up';
+import threadIt from 'thread-it';
+import {codeframe} from 'putout';
 
-const {join} = require('path');
-
-const tryToCatch = require('try-to-catch');
-const currify = require('currify');
-const findUp = require('find-up');
-const threadIt = require('thread-it');
-const {codeframe} = require('putout');
-const putout = threadIt(require.resolve('putout'));
+const {resolve} = createRequire(import.meta.url);
+const putout = threadIt(resolve('putout'));
 
 threadIt.init();
 
@@ -18,9 +19,10 @@ threadIt.init();
 transpile('');
 
 const URL = '/api/v1/user-menu';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const DEFAULT_MENU_PATH = join(__dirname, '../static/user-menu.js');
 
-module.exports = currify(async ({menuName}, req, res, next) => {
+export default currify(async ({menuName}, req, res, next) => {
     if (req.url.indexOf(URL))
         return next();
     

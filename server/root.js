@@ -1,8 +1,6 @@
-'use strict';
+import mellow from 'mellow';
 
-const mellow = require('mellow');
-
-module.exports = (dir, root) => {
+export default (dir, root) => {
     return mellow.pathToWin(dir, root || '/');
 };
 
