@@ -1,16 +1,11 @@
-'use strict';
-
 let SelectType = '*.*';
 
-const {getRegExp} = require('../../common/util');
-const {
-    alert,
-    prompt,
-} = require('./dialog');
+import {getRegExp} from '../../common/util.js';
+import {alert, prompt} from './dialog.js';
 
-const DOM = require('.');
+import DOM from '.';
 
-module.exports = async (msg, files) => {
+export default async (msg, files) => {
     if (!files)
         return;
     

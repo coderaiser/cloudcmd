@@ -1,37 +1,34 @@
-'use strict';
+import('../css/main.css');
+import('../css/nojs.css');
+import('../css/columns/name-size-date.css');
+import('../css/columns/name-size.css');
 
-require('../css/main.css');
-require('../css/nojs.css');
-require('../css/columns/name-size-date.css');
-require('../css/columns/name-size.css');
-
-const wraptile = require('wraptile');
-const load = require('load.js');
+import wraptile from 'wraptile';
+import load from 'load.js';
 
 const isDev = process.env.NODE_ENV === 'development';
 
-const {
-    registerSW,
-    listenSW,
-} = require('./sw/register');
+import {registerSW, listenSW} from './sw/register.js';
 
 // prevent additional loading of emitify
-window.Emitify = require('emitify');
+window.Emitify = await import('emitify');
 
-module.exports = window.CloudCmd = async (config) => {
-    window.Util = require('../common/util');
-    window.CloudFunc = require('../common/cloudfunc');
+export default window.CloudCmd = async (config) => {
+    window.Util = await import('../common/util');
+    window.CloudFunc = await iimport('../common/cloudfunc');
     
-    const DOM = require('./dom');
+    const DOM = await import('./dom');
     
     window.DOM = DOM;
     window.CloudCmd = require('./client');
     
     await register(config);
     
-    require('./listeners');
-    require('./key');
-    require('./sort');
+    await Promise.all([
+        import('./listeners'),
+        import('./key');
+        import('./sort');
+    ]);
     
     const prefix = getPrefix(config.prefix);
     

@@ -1,15 +1,13 @@
-'use strict';
-
 /* global CloudCmd */
 /* global DOM */
 
-const vim = require('./vim');
-const finder = require('./find');
+import vim from './vim.js';
+import finder from './find.js';
 
 const Info = DOM.CurrentInfo;
 const {Dialog} = DOM;
 
-module.exports = async (key, event) => {
+export default async (key, event) => {
     const operations = getOperations(event);
     await vim(key, operations);
 };
@@ -66,9 +64,7 @@ const getOperations = (event) => {
     };
 };
 
-module.exports.selectFile = selectFile;
-
-function selectFile(current) {
+export function selectFile(current) {
     const name = DOM.getCurrentName(current);
     
     if (name === '..')

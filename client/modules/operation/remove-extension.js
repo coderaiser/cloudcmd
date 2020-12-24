@@ -1,8 +1,6 @@
-'use strict';
+import {getExt} from '../../../common/util.js';
 
-const {getExt} = require('../../../common/util');
-
-module.exports = (name) => {
+export default (name) => {
     const ext = getExtension(name);
     
     return name.replace(ext, '');

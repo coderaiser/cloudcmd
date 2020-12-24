@@ -1,19 +1,17 @@
-'use strict';
-
 /* global CloudCmd */
 
-const exec = require('execon');
-const tryToCatch = require('try-to-catch');
+import exec from 'execon';
+import tryToCatch from 'try-to-catch';
 const loadJS = require('load.js').js;
 
-const pascalCase = require('just-pascal-case');
+import pascalCase from 'just-pascal-case';
 const noJS = (a) => a.replace(/.js$/, '');
 
 /**
  * function load modules
  * @params = {name, path, func, dobefore, arg}
  */
-module.exports = function loadModule(params) {
+export default function loadModule(params) {
     if (!params)
         return;
     
@@ -56,5 +54,5 @@ module.exports = function loadModule(params) {
         
         await a.show(...args);
     };
-};
+}
 

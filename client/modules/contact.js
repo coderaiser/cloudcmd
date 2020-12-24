@@ -1,20 +1,15 @@
 /* global CloudCmd */
 /* global DOM */
 
-'use strict';
-
 CloudCmd.Contact = exports;
 
-const olark = require('@cloudcmd/olark');
-const Images = require('../dom/images');
+import olark from '@cloudcmd/olark';
+import Images from '../dom/images.js';
 
 const {Events} = DOM;
 const {Key} = CloudCmd;
 
-module.exports.show = show;
-module.exports.hide = hide;
-
-module.exports.init = () => {
+export const init = () => {
     Events.addKey(onKey);
     
     olark.identify('6216-545-10-4223');
@@ -23,14 +18,14 @@ module.exports.init = () => {
     olark('api.box.onShrink', hide);
 };
 
-function show() {
+export function show() {
     Key.unsetBind();
     Images.hide();
     
     olark('api.box.expand');
 }
 
-function hide() {
+export function hide() {
     Key.setBind();
     olark('api.box.hide');
 }

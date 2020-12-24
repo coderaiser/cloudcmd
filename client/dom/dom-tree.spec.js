@@ -1,10 +1,8 @@
-'use strict';
+import test from 'supertape';
+import {create} from 'auto-globals';
+import tryCatch from 'try-catch';
 
-const test = require('supertape');
-const {create} = require('auto-globals');
-const tryCatch = require('try-catch');
-
-const {isContainClass} = require('./dom-tree');
+import {isContainClass} from './dom-tree.js';
 
 test('dom: isContainClass: no element', (t) => {
     const [e] = tryCatch(isContainClass);

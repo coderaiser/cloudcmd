@@ -1,17 +1,15 @@
-'use strict';
-
 /* global CloudCmd, gritty */
 
-const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch');
-const fullstore = require('fullstore');
+import '../../css/terminal.css';
 
-require('../../css/terminal.css');
+import {promisify} from 'es6-promisify';
+import tryToCatch from 'try-to-catch';
+import fullstore from 'fullstore';
 
-const exec = require('execon');
-const load = require('load.js');
-const DOM = require('../dom');
-const Images = require('../dom/images');
+import exec from 'execon';
+import load from 'load.js';
+import DOM from '../dom/index.js';
+import Images from '../dom/images.js';
 
 const {Dialog} = DOM;
 const {
@@ -19,7 +17,11 @@ const {
     config,
 } = CloudCmd;
 
-CloudCmd.TerminalRun = exports;
+CloudCmd.TerminalRun = {
+    init,
+    show,
+    hide,
+};
 
 let Loaded;
 let Terminal;
@@ -44,7 +46,7 @@ const loadAll = async () => {
     Loaded = true;
 };
 
-module.exports.init = async () => {
+export async function init() {
     if (!config('terminal'))
         return;
     
@@ -52,9 +54,9 @@ module.exports.init = async () => {
     
     await CloudCmd.View();
     await loadAll();
-};
+}
 
-module.exports.show = promisify((options = {}, fn) => {
+export const show = promisify((options = {}, fn) => {
     if (!Loaded)
         return;
     
@@ -73,9 +75,7 @@ module.exports.show = promisify((options = {}, fn) => {
     });
 });
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 

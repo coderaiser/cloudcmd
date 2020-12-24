@@ -1,12 +1,10 @@
-'use strict';
-
 /* global CloudCmd */
 
-const itype = require('itype');
-const {promisify} = require('es6-promisify');
+import itype from 'itype';
+import {promisify} from 'es6-promisify';
 
-const load = require('./load');
-const RESTful = require('./rest');
+import load from './load.js';
+import RESTful from './rest.js';
 
 const Promises = {};
 const FILES_JSON = 'config|modules';
@@ -17,7 +15,7 @@ const DIR_HTML_FS = DIR_HTML + 'fs/';
 const DIR_JSON = '/json/';
 const timeout = getTimeoutOnce(2000);
 
-module.exports.get = getFile;
+export const get = getFile;
 
 async function getFile(name) {
     const type = itype(name);

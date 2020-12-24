@@ -1,23 +1,21 @@
 /* global CloudCmd */
 
-'use strict';
+import tryToPromiseAll from '../../common/try-to-promise-all.js';
 
-const tryToPromiseAll = require('../../common/try-to-promise-all');
+import Util from '../../common/util.js';
+import callbackify from '../../common/callbackify.js';
 
-const Util = require('../../common/util');
-const callbackify = require('../../common/callbackify');
+import Images from './images.js';
+import load from './load.js';
+import Files from './files.js';
+import RESTful from './rest.js';
+import IO from './io.js';
+import Storage from './storage.js';
+import Dialog from './dialog.js';
+import renameCurrent from './operations/rename-current.js';
 
-const Images = require('./images');
-const load = require('./load');
-const Files = require('./files');
-const RESTful = require('./rest');
-const IO = require('./io');
-const Storage = require('./storage');
-const Dialog = require('./dialog');
-const renameCurrent = require('./operations/rename-current');
-
-const CurrentFile = require('./current-file');
-const DOMTree = require('./dom-tree');
+import CurrentFile from './current-file.js';
+import DOMTree from './dom-tree.js';
 
 const DOM = {
     ...DOMTree,
@@ -33,14 +31,14 @@ DOM.IO = IO;
 DOM.Storage = Storage;
 DOM.Dialog = Dialog;
 
-module.exports = DOM;
+export default DOM;
 
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
 DOM.Events = require('./events');
 
-const loadRemote = require('./load-remote');
-const selectByPattern = require('./select-by-pattern');
+import loadRemote from './load-remote.js';
+import selectByPattern from './select-by-pattern.js';
 
 function CmdProto() {
     const CurrentInfo = {};

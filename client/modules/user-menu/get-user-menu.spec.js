@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-const getUserMenu = require('./get-user-menu');
+import test from 'supertape';
+import getUserMenu from './get-user-menu.js';
 
 test('user-menu: getUserMenu', (t) => {
     const menu = `module.exports = {

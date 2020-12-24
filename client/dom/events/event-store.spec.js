@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-const eventStore = require('./event-store');
+import test from 'supertape';
+import eventStore from './event-store.js';
 
 test('event-store: get', (t) => {
     const el = {};

@@ -1,8 +1,6 @@
-'use strict';
-
-const codegen = require('codegen.macro');
-const tryToCatch = require('try-to-catch');
-const currify = require('currify');
+import codegen from 'codegen.macro';
+import tryToCatch from 'try-to-catch';
+import currify from 'currify';
 
 const isDev = process.env.NODE_ENV === 'development';
 

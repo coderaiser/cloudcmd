@@ -1,13 +1,11 @@
-'use strict';
-
 /* global CloudCmd, DOM */
 
 CloudCmd.EditNames = exports;
 
-const currify = require('currify');
-const exec = require('execon');
-const supermenu = require('supermenu');
-const multiRename = require('multi-rename');
+import currify from 'currify';
+import exec from 'execon';
+import supermenu from 'supermenu';
+import multiRename from 'multi-rename';
 
 const reject = Promise.reject.bind(Promise);
 
@@ -27,13 +25,13 @@ const ConfigView = {
     },
 };
 
-module.exports.init = async () => {
+export const init = async () => {
     await CloudCmd.Edit();
     
     setListeners();
 };
 
-module.exports.show = (options) => {
+export const show = (options) => {
     const names = getActiveNames().join('\n');
     const config = {
         ...ConfigView,
@@ -85,9 +83,7 @@ function getActiveNames() {
     return DOM.getFilenames(DOM.getActiveFiles());
 }
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.Edit.hide();
 }
 
@@ -205,9 +201,7 @@ function setMenu(event) {
     Menu.show(position.x, position.y);
 }
 
-module.exports.isChanged = isChanged;
-
-async function isChanged() {
+export async function isChanged() {
     const editor = CloudCmd.Edit.getEditor();
     const msg = 'Apply new names?';
     

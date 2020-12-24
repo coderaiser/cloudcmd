@@ -1,8 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-const {runSelected} = require('./run');
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
+import {runSelected} from './run.js';
 
 test('cloudcmd: client: user menu: run', async (t) => {
     const runUserMenu = stub();

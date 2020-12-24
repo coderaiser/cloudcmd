@@ -1,15 +1,13 @@
 /* global CloudCmd */
 
-'use strict';
-
-const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch');
-const createElement = require('@cloudcmd/create-element');
-const load = require('load.js');
+import {promisify} from 'es6-promisify';
+import tryToCatch from 'try-to-catch';
+import createElement from '@cloudcmd/create-element';
+import load from 'load.js';
 const loadJS = load.js;
 
-const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
-const {time, timeEnd} = require('../../common/util');
+import {MAX_FILE_SIZE as maxSize} from '../../common/cloudfunc.js';
+import {time, timeEnd} from '../../common/util.js';
 
 const Name = 'Edit';
 
@@ -29,7 +27,7 @@ const ConfigView = {
     },
 };
 
-module.exports.init = async () => {
+export const init = async () => {
     const element = create();
     
     await CloudCmd.View();
@@ -76,7 +74,7 @@ function initConfig(options = {}) {
     return config;
 }
 
-module.exports.show = (options) => {
+export const show = (options) => {
     if (Loading)
         return;
     
@@ -88,17 +86,15 @@ module.exports.show = (options) => {
         });
 };
 
-module.exports.getEditor = getEditor;
-
-function getEditor() {
+export function getEditor() {
     return editor;
 }
 
-module.exports.getElement = () => {
+export const getElement = () => {
     return Element;
 };
 
-module.exports.hide = () => {
+export const hide = () => {
     CloudCmd.View.hide();
 };
 

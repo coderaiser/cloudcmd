@@ -1,10 +1,14 @@
-'use strict';
-
-const currify = require('currify');
+import currify from 'currify';
 
 const DOM = module.exports;
 
 /**
+ * check class of element
+ *
+ * @param element
+ * @param className
+ */
+export /**
  * check class of element
  *
  * @param element
@@ -25,14 +29,12 @@ const isContainClass = (element, className) => {
     return classList.contains(className);
 };
 
-module.exports.isContainClass = isContainClass;
-
 /**
  * Function search element by tag
  * @param tag - className
  * @param element - element
  */
-module.exports.getByTag = (tag, element = document) => {
+export const getByTag = (tag, element = document) => {
     return element.getElementsByTagName(tag);
 };
 
@@ -40,7 +42,7 @@ module.exports.getByTag = (tag, element = document) => {
  * Function search element by id
  * @param Id - id
  */
-module.exports.getById = (id, element = document) => {
+export const getById = (id, element = document) => {
     return element.querySelector('#' + id);
 };
 
@@ -49,11 +51,11 @@ module.exports.getById = (id, element = document) => {
  * @param className - className
  * @param element - element
  */
-module.exports.getByClass = (className, element = document) => {
+export const getByClass = (className, element = document) => {
     return DOM.getByClassAll(className, element)[0];
 };
 
-module.exports.getByDataName = (attribute, element = document) => {
+export const getByDataName = (attribute, element = document) => {
     const selector = '[' + 'data-name="' + attribute + '"]';
     return element.querySelector(selector);
 };
@@ -63,7 +65,7 @@ module.exports.getByDataName = (attribute, element = document) => {
  * @param pClass - className
  * @param element - element
  */
-module.exports.getByClassAll = (className, element) => {
+export const getByClassAll = (className, element) => {
     return (element || document).getElementsByClassName(className);
 };
 
@@ -72,12 +74,12 @@ module.exports.getByClassAll = (className, element) => {
  *
  * @param element
  */
-module.exports.hide = (element) => {
+export const hide = (element) => {
     element.classList.add('hidden');
     return DOM;
 };
 
-module.exports.show = (element) => {
+export const show = (element) => {
     element.classList.remove('hidden');
     return DOM;
 };

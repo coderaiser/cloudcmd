@@ -1,19 +1,14 @@
-'use strict';
-
 /* global CloudCmd */
 
 CloudCmd.Help = exports;
 
-const Images = require('../dom/images');
+import Images from '../dom/images.js';
 
-module.exports.init = () => {
+export const init = () => {
     Images.show.load('top');
 };
 
-module.exports.show = show;
-module.exports.hide = hide;
-
-function show() {
+export function show() {
     const positionLoad = 'top';
     const relative = true;
     
@@ -25,7 +20,7 @@ function show() {
         });
 }
 
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 

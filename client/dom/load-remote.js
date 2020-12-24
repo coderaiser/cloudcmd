@@ -1,17 +1,15 @@
-'use strict';
-
 /* global CloudCmd */
 
-const rendy = require('rendy');
-const itype = require('itype');
-const load = require('load.js');
-const tryToCatch = require('try-to-catch');
+import rendy from 'rendy';
+import itype from 'itype';
+import load from 'load.js';
+import tryToCatch from 'try-to-catch';
 
-const {findObjByNameInArr} = require('../../common/util');
+import {findObjByNameInArr} from '../../common/util.js';
 
-const Files = require('./files');
+import Files from './files.js';
 
-module.exports = (name, options, callback = options) => {
+export default (name, options, callback = options) => {
     const {prefix, config} = CloudCmd;
     const o = options;
     

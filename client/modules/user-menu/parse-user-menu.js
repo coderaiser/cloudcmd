@@ -1,8 +1,6 @@
-'use strict';
-
 const {entries, assign} = Object;
 
-module.exports = (userMenu) => {
+export default (userMenu) => {
     const names = [];
     const keys = {};
     const items = {};

@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+export default {
     BACKSPACE   : 8,
     TAB         : 9,
     ENTER       : 13,

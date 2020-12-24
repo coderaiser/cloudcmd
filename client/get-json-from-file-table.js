@@ -1,5 +1,3 @@
-'use strict';
-
 /* global DOM */
 
 const Info = DOM.CurrentInfo;
@@ -8,7 +6,7 @@ const Info = DOM.CurrentInfo;
  * Функция генерирует JSON из html-таблицы файлов и
  * используеться при первом заходе в корень
  */
-module.exports = () => {
+export default () => {
     const path = DOM.getCurrentDirPath();
     const infoFiles = Info.files || [];
     

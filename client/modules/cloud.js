@@ -1,23 +1,21 @@
 /* global CloudCmd, filepicker */
 
-'use strict';
-
-const exec = require('execon');
-const currify = require('currify');
-const load = require('load.js');
+import exec from 'execon';
+import currify from 'currify';
+import load from 'load.js';
 
 const {log} = CloudCmd;
 
-const {ajax} = require('../dom/load');
-const Files = require('../dom/files');
-const Images = require('../dom/images');
+import {ajax} from '../dom/load.js';
+import Files from '../dom/files.js';
+import Images from '../dom/images.js';
 
 const upload = currify(_upload);
 
 const Name = 'Cloud';
 CloudCmd[Name] = module.exports;
 
-module.exports.init = async () => {
+export const init = async () => {
     const [modules] = await loadFiles();
     const {key} = modules.data.FilePicker;
     
@@ -25,7 +23,7 @@ module.exports.init = async () => {
     Images.hide();
 };
 
-module.exports.uploadFile = (filename, data) => {
+export const uploadFile = (filename, data) => {
     const mimetype = '';
     
     filepicker.store(data, {
@@ -36,7 +34,7 @@ module.exports.uploadFile = (filename, data) => {
     });
 };
 
-module.exports.saveFile = (callback) => {
+export const saveFile = (callback) => {
     filepicker.pick(upload(callback));
 };
 

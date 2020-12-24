@@ -1,5 +1,3 @@
-'use strict';
-
 /* global CloudCmd */
 /* global Util */
 /* global DOM */
@@ -7,13 +5,13 @@
 
 CloudCmd.Konsole = exports;
 
-const exec = require('execon');
-const currify = require('currify');
-const tryToCatch = require('try-to-catch');
+import exec from 'execon';
+import currify from 'currify';
+import tryToCatch from 'try-to-catch';
 const loadJS = require('load.js').js;
-const createElement = require('@cloudcmd/create-element');
+import createElement from '@cloudcmd/create-element';
 
-const Images = require('../dom/images');
+import Images from '../dom/images.js';
 const {
     Dialog,
     CurrentInfo:Info,
@@ -31,7 +29,7 @@ const Name = 'Konsole';
 let Element;
 let Loaded;
 
-module.exports.init = async () => {
+export const init = async () => {
     if (!config('console'))
         return;
     
@@ -42,11 +40,11 @@ module.exports.init = async () => {
     await create();
 };
 
-module.exports.hide = () => {
+export const hide = () => {
     CloudCmd.View.hide();
 };
 
-module.exports.clear = () => {
+export const clear = () => {
     konsole.clear();
 };
 
@@ -121,7 +119,7 @@ function authCheck(konsole) {
     });
 }
 
-module.exports.show = (callback) => {
+export const show = (callback) => {
     if (!Loaded)
         return;
     

@@ -1,23 +1,21 @@
 /* global DOM, CloudCmd */
 
-'use strict';
+import exec from 'execon';
+import itype from 'itype';
+import currify from 'currify';
+import tryToCatch from 'try-to-catch';
+import clipboard from '@cloudcmd/clipboard';
 
-const exec = require('execon');
-const itype = require('itype');
-const currify = require('currify');
-const tryToCatch = require('try-to-catch');
-const clipboard = require('@cloudcmd/clipboard');
-
-const getRange = require('./get-range');
+import getRange from './get-range.js';
 const getIndex = currify(require('./get-index'));
-const uploadFiles = require('../dom/upload-files');
+import uploadFiles from '../dom/upload-files.js';
 
-const {FS} = require('../../common/cloudfunc');
+import {FS} from '../../common/cloudfunc.js';
 
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
 const SPACE = ' ';
 
-module.exports.init = async () => {
+export const init = async () => {
     await Promise.all([
         contextMenu(),
         dragndrop(),
@@ -108,7 +106,7 @@ async function config() {
     EXT = DOM.getPackerExt(type);
 }
 
-module.exports.initKeysPanel = () => {
+export const initKeysPanel = () => {
     const keysElement = DOM.getById('js-keyspanel');
     
     if (!keysElement)
@@ -154,7 +152,7 @@ const getPanel = (side) => {
     return DOM.getByDataName('js-' + side);
 };
 
-module.exports.setOnPanel = (side) => {
+export const setOnPanel = (side) => {
     const panel = getPanel(side);
     
     const filesElement = DOM.getByDataName('js-files', panel);

@@ -1,16 +1,10 @@
-'use strict';
+import test from 'supertape';
 
-const test = require('supertape');
-const dir = './';
-
-const {getDOM} = require('./globals.fixture');
+import {getDOM} from './globals.fixture.js';
 
 global.DOM = getDOM();
 
-const {
-    _next,
-    _previous,
-} = require(dir + 'find');
+import {_next, _previous} from './find.js';
 
 test('cloudcmd: client: vim: _next', (t) => {
     const result = _next(1, 2);

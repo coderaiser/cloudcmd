@@ -1,9 +1,7 @@
-'use strict';
+import itype from 'itype';
+import EventStore from './event-store.js';
 
-const itype = require('itype');
-const EventStore = require('./event-store');
-
-module.exports = new EventsProto();
+export default new EventsProto();
 
 function EventsProto() {
     const Events = this;

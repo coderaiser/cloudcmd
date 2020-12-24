@@ -1,35 +1,29 @@
-'use strict';
-
 /* global DOM */
 
-const Emitify = require('emitify');
-const inherits = require('inherits');
-const rendy = require('rendy');
-const load = require('load.js');
-const tryToCatch = require('try-to-catch');
+import Emitify from 'emitify';
+import inherits from 'inherits';
+import rendy from 'rendy';
+import load from 'load.js';
+import tryToCatch from 'try-to-catch';
 
-const pascalCase = require('just-pascal-case');
+import pascalCase from 'just-pascal-case';
 const isDev = process.env.NODE_ENV === 'development';
 
-const Images = require('./dom/images');
-const {unregisterSW} = require('./sw/register');
-const getJsonFromFileTable = require('./get-json-from-file-table');
+import Images from './dom/images.js';
+import {unregisterSW} from './sw/register.js';
+import getJsonFromFileTable from './get-json-from-file-table.js';
 
-const currify = require('currify');
+import currify from 'currify';
 
 const noJS = (a) => a.replace(/.js$/, '');
 
-const {
-    apiURL,
-    formatMsg,
-    buildFromJSON,
-} = require('../common/cloudfunc');
+import {apiURL, formatMsg, buildFromJSON} from '../common/cloudfunc.js';
 
-const loadModule = require('./load-module');
+import loadModule from './load-module.js';
 
 inherits(CloudCmdProto, Emitify);
 
-module.exports = new CloudCmdProto(DOM);
+export default new CloudCmdProto(DOM);
 
 load.addErrorListener((e, src) => {
     const msg = `file ${src} could not be loaded`;

@@ -1,16 +1,14 @@
-'use strict';
-
 /* global CloudCmd */
 /* global gritty */
 
-const tryToCatch = require('try-to-catch');
+import tryToCatch from 'try-to-catch';
 
-require('../../css/terminal.css');
+import('../../css/terminal.css');
 
-const exec = require('execon');
-const load = require('load.js');
-const DOM = require('../dom');
-const Images = require('../dom/images');
+import exec from 'execon';
+import load from 'load.js';
+import DOM from '../dom/index.js';
+import Images from '../dom/images.js';
 
 const loadParallel = load.parallel;
 
@@ -20,7 +18,11 @@ const {
     config,
 } = CloudCmd;
 
-CloudCmd.Terminal = exports;
+CloudCmd.Terminal = {
+    init,
+    show,
+    hide,
+};
 
 let Loaded;
 let Terminal;
@@ -43,7 +45,7 @@ const loadAll = async () => {
     Loaded = true;
 };
 
-module.exports.init = async () => {
+export async function init() {
     if (!config('terminal'))
         return;
     
@@ -52,12 +54,9 @@ module.exports.init = async () => {
     await CloudCmd.View();
     await loadAll();
     await create();
-};
+}
 
-module.exports.show = show;
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 
@@ -110,7 +109,7 @@ function authCheck(spawn) {
     });
 }
 
-function show() {
+export function show() {
     if (!Loaded)
         return;
     

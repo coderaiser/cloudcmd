@@ -192,6 +192,7 @@
     "html-looks-like": "^1.0.2",
     "html-webpack-plugin": "^4.0.1",
     "inherits": "^2.0.3",
+    "itype": "^3.0.1",
     "just-capitalize": "^1.0.0",
     "just-pascal-case": "^1.1.0",
     "limier": "^3.0.0",
@@ -220,8 +221,8 @@
     "tar-stream": "^2.0.0",
     "unionfs": "^4.0.0",
     "url-loader": "^4.0.0",
-    "webpack": "^4.0.0",
-    "webpack-cli": "^3.0.1",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0",
     "webpack-merge": "^5.0.8",
     "yaspeller": "^7.0.0"
   },

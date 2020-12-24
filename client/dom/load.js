@@ -1,14 +1,16 @@
-'use strict';
-
-const itype = require('itype');
-const jonny = require('jonny');
-const Emitify = require('emitify');
-const exec = require('execon');
-const Images = require('./images');
-
-module.exports.getIdBySrc = getIdBySrc;
+import itype from 'itype';
+import jonny from 'jonny';
+import Emitify from 'emitify';
+import exec from 'execon';
+import Images from './images.js';
 
 /**
+ * Function gets id by src
+ * @param src
+ *
+ * Example: http://domain.com/1.js -> 1_js
+ */
+export /**
  * Function gets id by src
  * @param src
  *
@@ -37,7 +39,7 @@ function getIdBySrc(src) {
  *
  * @param params
  */
-module.exports.ajax = (params) => {
+export const ajax = (params) => {
     const p = params;
     const isObject = itype.object(p.data);
     const isArray = itype.array(p.data);
@@ -94,7 +96,7 @@ module.exports.ajax = (params) => {
     xhr.send(data);
 };
 
-module.exports.put = (url, body) => {
+export const put = (url, body) => {
     const emitter = Emitify();
     const xhr = new XMLHttpRequest();
     

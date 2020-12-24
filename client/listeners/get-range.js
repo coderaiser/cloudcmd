@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (indexFrom, indexTo, files) => {
+export default (indexFrom, indexTo, files) => {
     if (indexFrom < indexTo)
         return files.slice(indexFrom, indexTo + 1);
     

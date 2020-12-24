@@ -1,13 +1,11 @@
-'use strict';
-
-const test = require('supertape');
-const {create} = require('auto-globals');
-const stub = require('@cloudcmd/stub');
+import test from 'supertape';
+import {create} from 'auto-globals';
+import stub from '@cloudcmd/stub';
 const id = (a) => a;
-const wraptile = require('wraptile');
+import wraptile from 'wraptile';
 const returns = wraptile(id);
 
-const currentFile = require('./current-file');
+import currentFile from './current-file.js';
 const {_CURRENT_FILE} = currentFile;
 
 test('current-file: setCurrentName: setAttribute', (t) => {

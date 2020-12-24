@@ -1,13 +1,8 @@
-'use strict';
-
-module.exports.registerSW = registerSW;
-module.exports.unregisterSW = unregisterSW;
-
-module.exports.listenSW = (sw, ...args) => {
+export const listenSW = (sw, ...args) => {
     sw && sw.addEventListener(...args);
 };
 
-async function registerSW(prefix) {
+export async function registerSW(prefix) {
     if (!navigator.serviceWorker)
         return;
     
@@ -19,7 +14,7 @@ async function registerSW(prefix) {
     
     return await navigator.serviceWorker.register(`${prefix}/sw.js`);
 }
-async function unregisterSW(prefix) {
+export async function unregisterSW(prefix) {
     const reg = await registerSW(prefix);
     reg && reg.unregister(prefix);
 }

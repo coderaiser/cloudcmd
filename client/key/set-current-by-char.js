@@ -1,11 +1,9 @@
 /* global DOM */
 
-'use strict';
-
 const Info = DOM.CurrentInfo;
-const {escapeRegExp} = require('../../common/util');
+import {escapeRegExp} from '../../common/util.js';
 
-module.exports = function setCurrentByChar(char, charStore) {
+export default function setCurrentByChar(char, charStore) {
     let firstByName;
     let skipCount = 0;
     let setted = false;
@@ -55,5 +53,5 @@ module.exports = function setCurrentByChar(char, charStore) {
         DOM.setCurrentFile(firstByName);
         charStore([char]);
     }
-};
+}
 

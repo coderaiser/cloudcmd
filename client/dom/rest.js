@@ -1,12 +1,10 @@
-'use strict';
+import tryToCatch from 'try-to-catch';
 
-const tryToCatch = require('try-to-catch');
+import {encode} from '../../common/entity.js';
 
-const {encode} = require('../../common/entity');
-
-const Images = require('./images');
-const IO = require('./io');
-const Dialog = require('./dialog');
+import Images from './images.js';
+import IO from './io.js';
+import Dialog from './dialog.js';
 
 const handleError = (promise) => async (...args) => {
     const [e, data] = await tryToCatch(promise, ...args);
@@ -22,23 +20,23 @@ const handleError = (promise) => async (...args) => {
     return [e, data];
 };
 
-module.exports.delete = handleError(IO.delete);
-module.exports.patch = handleError(IO.patch);
-module.exports.write = handleError(IO.write);
-module.exports.createDirectory = handleError(IO.createDirectory);
-module.exports.read = handleError(IO.read);
-module.exports.copy = handleError(IO.copy);
-module.exports.pack = handleError(IO.pack);
-module.exports.extract = handleError(IO.extract);
-module.exports.move = handleError(IO.move);
-module.exports.rename = handleError(IO.rename);
+export const remove = handleError(IO.remove);
+export const patch = handleError(IO.patch);
+export const write = handleError(IO.write);
+export const createDirectory = handleError(IO.createDirectory);
+export const read = handleError(IO.read);
+export const copy = handleError(IO.copy);
+export const pack = handleError(IO.pack);
+export const extract = handleError(IO.extract);
+export const move = handleError(IO.move);
+export const rename = handleError(IO.rename);
 
-module.exports.Config = {
+export const Config = {
     read: handleError(IO.Config.read),
     write: handleError(IO.Config.write),
 };
 
-module.exports.Markdown = {
+export const Markdown = {
     read: handleError(IO.Markdown.read),
     render: handleError(IO.Markdown.render),
 };

@@ -1,13 +1,6 @@
-'use strict';
+import {J, K, UP, DOWN} from '../../key/key.js';
 
-const {
-    J,
-    K,
-    UP,
-    DOWN,
-} = require('../../key/key.js');
-
-module.exports = (el, {keyCode}) => {
+export default (el, {keyCode}) => {
     if (keyCode === DOWN || keyCode === J)
         return down(el);
     

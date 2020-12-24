@@ -1,26 +1,23 @@
-'use strict';
-
 /* global CloudCmd, DOM */
 
-require('../../css/view.css');
+import('../../css/view.css');
 
-const rendy = require('rendy');
-const currify = require('currify');
-const wraptile = require('wraptile');
-const tryToCatch = require('try-to-catch');
+import rendy from 'rendy';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import tryToCatch from 'try-to-catch';
 
-const modal = require('@cloudcmd/modal');
-const createElement = require('@cloudcmd/create-element');
+import modal from '@cloudcmd/modal';
+import createElement from '@cloudcmd/create-element';
 
-const {time} = require('../../common/util');
-const {FS} = require('../../common/cloudfunc');
+import {FS} from '../../common/cloudfunc.js';
 
-const Files = require('../dom/files');
-const Events = require('../dom/events');
-const load = require('load.js');
-const Images = require('../dom/images');
+import Files from '../dom/files.js';
+import Events from '../dom/events/index.js';
+import load from 'load.js';
+import Images from '../dom/images.js';
 
-const {encode} = require('../../common/entity');
+import {encode} from '../../common/entity.js';
 
 const {assign} = Object;
 const {isArray} = Array;
@@ -40,13 +37,13 @@ const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
 const loadCSS = load.css;
 
-module.exports.show = show;
-module.exports.hide = hide;
-
 let Loading = false;
 
-const Name = 'View';
-CloudCmd[Name] = module.exports;
+CloudCmd.View = {
+    init,
+    show,
+    hide,
+};
 
 const Info = DOM.CurrentInfo;
 const {Key} = CloudCmd;
@@ -80,7 +77,7 @@ const Config = {
     },
 };
 
-module.exports.init = async () => {
+export async function init() {
     await loadAll();
     
     const events = [
@@ -89,9 +86,9 @@ module.exports.init = async () => {
     ];
     
     events.forEach(addEvent(Overlay, onOverlayClick));
-};
+}
 
-async function show(data, options) {
+export async function show(data, options) {
     const prefixURL = CloudCmd.prefixURL + FS;
     
     if (Loading)
@@ -195,7 +192,7 @@ function viewFile() {
 
 const copy = (a) => assign({}, a);
 
-module.exports._initConfig = initConfig;
+export const _initConfig = initConfig;
 function initConfig(options) {
     const config = copy(Config);
     
@@ -219,7 +216,7 @@ function initConfig(options) {
     return config;
 }
 
-function hide() {
+export function hide() {
     modal.close();
 }
 
@@ -338,8 +335,6 @@ function check(src) {
  */
 async function loadAll() {
     const {prefix} = CloudCmd;
-    
-    time(Name + ' load');
     
     Loading = true;
     await loadCSS(`${prefix}/dist/view.css`);

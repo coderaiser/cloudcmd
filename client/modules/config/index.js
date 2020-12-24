@@ -1,28 +1,29 @@
-'use strict';
-
 /* global CloudCmd, DOM, io */
 
-require('../../../css/config.css');
+import('../../../css/config.css');
 
-const rendy = require('rendy');
-const currify = require('currify');
-const wraptile = require('wraptile');
-const squad = require('squad');
-const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch');
-const load = require('load.js');
-const createElement = require('@cloudcmd/create-element');
+import rendy from 'rendy';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import squad from 'squad';
+import {promisify} from 'es6-promisify';
+import tryToCatch from 'try-to-catch';
+import load from 'load.js';
+import createElement from '@cloudcmd/create-element';
 
-const input = require('./input');
-const Images = require('../../dom/images');
-const Events = require('../../dom/events');
-const Files = require('../../dom/files');
+import input from './input.js';
+import Images from '../../dom/images.js';
+import Events from '../../dom/events/index.js';
+import Files from '../../dom/files.js';
 
-const {getTitle} = require('../../../common/cloudfunc');
+import {getTitle} from '../../../common/cloudfunc.js';
 const {Dialog, setTitle} = DOM;
 
-const Name = 'Config';
-CloudCmd[Name] = module.exports;
+CloudCmd.Config = {
+    init,
+    show,
+    hide,
+};
 
 const loadSocket = promisify(DOM.loadSocket);
 
@@ -46,7 +47,7 @@ let Template;
 
 const loadCSS = load.css;
 
-module.exports.init = async () => {
+export async function init() {
     if (!CloudCmd.config('configDialog'))
         return;
     
@@ -62,7 +63,7 @@ module.exports.init = async () => {
     ]);
     
     initSocket();
-};
+}
 
 const {
     config,
@@ -125,9 +126,7 @@ function authCheck(socket) {
 
 Config.save = saveHttp;
 
-module.exports.show = show;
-
-async function show() {
+export async function show() {
     if (!CloudCmd.config('configDialog'))
         return;
     
@@ -184,9 +183,7 @@ async function fillTemplate() {
     });
 }
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 

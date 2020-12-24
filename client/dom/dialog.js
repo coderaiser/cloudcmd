@@ -1,27 +1,25 @@
-'use strict';
+import tryToCatch from 'try-to-catch';
 
-const tryToCatch = require('try-to-catch');
-
-const {
-    alert,
-    prompt,
-    confirm,
-    progress,
-} = require('smalltalk');
+import {alert, prompt, confirm, progress} from 'smalltalk';
 
 const title = 'Cloud Commander';
 
-module.exports.alert = (...a) => alert(title, ...a, {
+const customAlert = (...a) => alert(title, ...a, {
     cancel: false,
 });
 
-module.exports.prompt = (...a) => tryToCatch(prompt, title, ...a);
-module.exports.confirm = (...a) => tryToCatch(confirm, title, ...a);
-module.exports.progress = (...a) => progress(title, ...a);
-
-module.exports.alert.noFiles = () => {
+customAlert.noFiles = () => {
     return alert(title, 'No files selected!', {
         cancel: false,
     });
 };
 
+const customPrompt = (...a) => tryToCatch(prompt, title, ...a);
+const customConfirm = (...a) => tryToCatch(confirm, title, ...a);
+const customProgress = (...a) => progress(title, ...a);
+export {
+    customAlert as alert,
+    customPrompt as prompt,
+    customConfirm as confirm,
+    customProgress as progress,
+}

@@ -1,12 +1,10 @@
-'use strict';
-
-const fullstore = require('fullstore');
-const limier = require('limier');
+import fullstore from 'fullstore';
+import limier from 'limier';
 
 const searchStore = fullstore([]);
 const searchIndex = fullstore(0);
 
-module.exports.find = (value, names) => {
+export const find = (value, names) => {
     const result = limier(value, names);
     
     searchStore(result);
@@ -15,7 +13,7 @@ module.exports.find = (value, names) => {
     return result;
 };
 
-module.exports.findNext = () => {
+export const findNext = () => {
     const names = searchStore();
     const index = next(searchIndex(), names.length);
     
@@ -23,7 +21,7 @@ module.exports.findNext = () => {
     return names[searchIndex()];
 };
 
-module.exports.findPrevious = () => {
+export const findPrevious = () => {
     const names = searchStore();
     const index = previous(searchIndex(), names.length);
     
@@ -31,8 +29,8 @@ module.exports.findPrevious = () => {
     return names[index];
 };
 
-module.exports._next = next;
-module.exports._previous = previous;
+export const _next = next;
+export const _previous = previous;
 
 function next(index, length) {
     if (index === length - 1)

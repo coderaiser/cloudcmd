@@ -1,8 +1,6 @@
 /* global DOM */
 
-'use strict';
-
-const createElement = require('@cloudcmd/create-element');
+import createElement from '@cloudcmd/create-element';
 
 const Images = module.exports;
 
@@ -14,7 +12,7 @@ function getLoadingType() {
     return isSVG() ? '-svg' : '-gif';
 }
 
-module.exports.get = getElement;
+export const get = getElement;
 
 /**
  * check SVG SMIL animation support
@@ -43,7 +41,7 @@ function getElement() {
 }
 
 /* Функция создаёт картинку загрузки */
-module.exports.loading = () => {
+export const loading = () => {
     const element = getElement();
     const {classList} = element;
     const loadingImage = LOADING + getLoadingType();
@@ -55,7 +53,7 @@ module.exports.loading = () => {
 };
 
 /* Функция создаёт картинку ошибки загрузки */
-module.exports.error = () => {
+export const error = () => {
     const element = getElement();
     const {classList} = element;
     const loadingImage = LOADING + getLoadingType();
@@ -66,11 +64,14 @@ module.exports.error = () => {
     return element;
 };
 
-module.exports.show = show;
 module.exports.show.load = show;
-module.exports.show.error = error;
+module.exports.show.error = showError;
 
 /**
+* Function shows loading spinner
+* position = {top: true};
+*/
+export /**
 * Function shows loading spinner
 * position = {top: true};
 */
@@ -100,7 +101,7 @@ function show(position, panel) {
     return image;
 }
 
-function error(text) {
+function showError(text) {
     const image = Images.error();
     
     DOM.show(image);
@@ -112,7 +113,7 @@ function error(text) {
 /**
 * hide load image
 */
-module.exports.hide = () => {
+export const hide = () => {
     const element = Images.get();
     
     DOM.hide(element);
@@ -120,7 +121,7 @@ module.exports.hide = () => {
     return Images;
 };
 
-module.exports.setProgress = (value, title) => {
+export const setProgress = (value, title) => {
     const DATA = 'data-progress';
     const element = Images.get();
     
@@ -135,7 +136,7 @@ module.exports.setProgress = (value, title) => {
     return Images;
 };
 
-module.exports.clearProgress = () => {
+export const clearProgress = () => {
     const DATA = 'data-progress';
     const element = Images.get();
     

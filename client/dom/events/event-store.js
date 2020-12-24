@@ -1,8 +1,6 @@
-'use strict';
-
 let list = [];
 
-module.exports.add = (el, name, fn) => {
+export const add = (el, name, fn) => {
     list.push([
         el,
         name,
@@ -10,11 +8,11 @@ module.exports.add = (el, name, fn) => {
     ]);
 };
 
-module.exports.clear = () => {
+export const clear = () => {
     list = [];
 };
 
-module.exports.get = () => {
+export const get = () => {
     return list;
 };
 

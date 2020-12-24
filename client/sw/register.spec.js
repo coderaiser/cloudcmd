@@ -1,13 +1,11 @@
-'use strict';
-
-const autoGlobals = require('auto-globals');
-const tape = require('supertape');
+import autoGlobals from 'auto-globals';
+import tape from 'supertape';
 
 const test = autoGlobals(tape);
 
-const stub = require('@cloudcmd/stub');
-const tryCatch = require('try-catch');
-const {reRequire} = require('mock-require');
+import stub from '@cloudcmd/stub';
+import tryCatch from 'try-catch';
+import {reRequire} from 'mock-require';
 
 test('sw: listen', (t) => {
     const {listenSW} = reRequire('./register');

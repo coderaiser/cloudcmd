@@ -1,23 +1,22 @@
 /* global CloudCmd, DOM */
 
-'use strict';
+import Files from '../dom/files.js';
+import Images from '../dom/images.js';
+import uploadFiles from '../dom/upload-files.js';
+import createElement from '@cloudcmd/create-element';
 
-CloudCmd.Upload = exports;
-
-const Files = require('../dom/files');
-const Images = require('../dom/images');
-const uploadFiles = require('../dom/upload-files');
-const createElement = require('@cloudcmd/create-element');
-
-module.exports.init = async () => {
-    Images.show.load('top');
-    await CloudCmd.View();
+CloudCmd.Upload = {
+    init,
+    show,
+    hide,
 };
 
-module.exports.show = show;
-module.exports.hide = hide;
+export async function init() {
+    Images.show.load('top');
+    await CloudCmd.View();
+}
 
-async function show() {
+export async function show() {
     Images.show.load('top');
     
     const innerHTML = await Files.get('upload');
@@ -49,7 +48,7 @@ async function show() {
     });
 }
 
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 

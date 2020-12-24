@@ -1,7 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-const removeExtension = require(`./remove-extension`);
+import test from 'supertape';
+import removeExtension from './remove-extension.js';
 
 test('cloudcmd: client: modules: operation: removeExtension: .tar.gz', (t) => {
     const name = 'hello';

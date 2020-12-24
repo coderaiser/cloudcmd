@@ -1,8 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const mockRequire = require('mock-require');
-const stub = require('@cloudcmd/stub');
+import test from 'supertape';
+import mockRequire from 'mock-require';
+import stub from '@cloudcmd/stub';
 
 test('cloudcmd: client: polyfill: scrollIntoViewIfNeaded', (t) => {
     const {DOM} = global;

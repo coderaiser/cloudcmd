@@ -1,7 +1,5 @@
-'use strict';
-
 /* global CloudCmd */
-const DOM = require('./dom');
+import DOM from './dom.js';
 
 const Info = DOM.CurrentInfo;
 

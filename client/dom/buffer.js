@@ -1,12 +1,10 @@
-'use strict';
-
 /* global CloudCmd */
 
-const tryToPromiseAll = require('../../common/try-to-promise-all');
-const Storage = require('./storage');
-const DOM = require('./');
+import tryToPromiseAll from '../../common/try-to-promise-all.js';
+import Storage from './storage.js';
+import DOM from './.js';
 
-module.exports = new BufferProto();
+export default new BufferProto();
 
 function BufferProto() {
     const Info = DOM.CurrentInfo;

@@ -1,8 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-const parse = require('./parse-user-menu');
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
+import parse from './parse-user-menu.js';
 
 test('cloudcmd: user menu: parse', (t) => {
     const fn = stub();

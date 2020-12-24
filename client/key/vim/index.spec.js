@@ -1,10 +1,10 @@
-'use strict';
+import {join} from 'path';
 
-const {join} = require('path');
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
+import mockRequire from 'mock-require';
+import vim from './index.js';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-const mockRequire = require('mock-require');
 const {reRequire, stopAll} = mockRequire;
 
 const dir = '../';
@@ -12,18 +12,13 @@ const dir = '../';
 const pathVim = join(dir, 'vim');
 const pathFind = join(dir, 'vim', 'find');
 
-const {
-    getDOM,
-    getCloudCmd,
-} = require('./globals.fixture');
+import {getDOM, getCloudCmd} from './globals.fixture.js';
 
 global.DOM = getDOM();
 global.CloudCmd = getCloudCmd();
 
 const {DOM} = global;
 const {Buffer} = DOM;
-
-const vim = require(pathVim);
 
 test('cloudcmd: client: key: set next file: no', (t) => {
     const element = {

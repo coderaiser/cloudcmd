@@ -1,8 +1,6 @@
-'use strict';
-
 const isNumber = (a) => typeof a === 'number';
 
-module.exports = (error) => {
+export default (error) => {
     const {
         lineNumber,
         columnNumber,

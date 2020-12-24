@@ -1,23 +1,13 @@
-'use strict';
-
 /* global CloudCmd */
 
-const capitalize = require('just-capitalize');
+import capitalize from 'just-capitalize';
 
-const Dialog = require('../dialog');
-const Storage = require('../storage');
-const RESTful = require('../rest');
-const {
-    isCurrentFile,
-    getCurrentName,
-    getCurrentFile,
-    getCurrentByName,
-    getCurrentType,
-    getCurrentDirPath,
-    setCurrentName,
-} = require('../current-file');
+import Dialog from '../dialog.js';
+import Storage from '../storage.js';
+import RESTful from '../rest.js';
+import {isCurrentFile, getCurrentName, getCurrentFile, getCurrentByName, getCurrentType, getCurrentDirPath, setCurrentName} from '../current-file.js';
 
-module.exports = async (current) => {
+export default async (current) => {
     if (!isCurrentFile(current))
         current = getCurrentFile();
     

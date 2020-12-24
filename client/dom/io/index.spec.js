@@ -1,8 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-const mockRequire = require('mock-require');
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
+import mockRequire from 'mock-require';
 
 const {reRequire} = mockRequire;
 

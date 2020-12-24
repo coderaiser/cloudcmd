@@ -1,13 +1,11 @@
-'use strict';
-
-const {FS} = require('../../../common/cloudfunc');
-const sendRequest = require('./send-request');
+import {FS} from '../../../common/cloudfunc.js';
+import sendRequest from './send-request.js';
 
 const imgPosition = {
     top: true,
 };
 
-module.exports.delete = async (url, data) => {
+export const remove = async (url, data) => {
     return await sendRequest({
         method      : 'DELETE',
         url         : FS + url,
@@ -18,7 +16,7 @@ module.exports.delete = async (url, data) => {
     });
 };
 
-module.exports.patch = async (url, data) => {
+export const patch = async (url, data) => {
     return await sendRequest({
         method: 'PATCH',
         url: FS + url,
@@ -27,7 +25,7 @@ module.exports.patch = async (url, data) => {
     });
 };
 
-module.exports.write = async (url, data) => {
+export const write = async (url, data) => {
     return await sendRequest({
         method: 'PUT',
         url: FS + url,
@@ -36,7 +34,7 @@ module.exports.write = async (url, data) => {
     });
 };
 
-module.exports.createDirectory = async (url) => {
+export const createDirectory = async (url) => {
     return await sendRequest({
         method: 'PUT',
         url: `${FS}${url}?dir`,
@@ -44,7 +42,7 @@ module.exports.createDirectory = async (url) => {
     });
 };
 
-module.exports.read = async (url, dataType = 'text') => {
+export const read = async (url, dataType = 'text') => {
     const notLog = !url.includes('?');
     
     return await sendRequest({
@@ -55,7 +53,7 @@ module.exports.read = async (url, dataType = 'text') => {
     });
 };
 
-module.exports.copy = async (from, to, names) => {
+export const copy = async (from, to, names) => {
     return await sendRequest({
         method: 'PUT',
         url: '/copy',
@@ -68,7 +66,7 @@ module.exports.copy = async (from, to, names) => {
     });
 };
 
-module.exports.pack = async (data) => {
+export const pack = async (data) => {
     return await sendRequest({
         method: 'PUT',
         url: '/pack',
@@ -76,7 +74,7 @@ module.exports.pack = async (data) => {
     });
 };
 
-module.exports.extract = async (data) => {
+export const extract = async (data) => {
     return await sendRequest({
         method: 'PUT',
         url: '/extract',
@@ -84,7 +82,7 @@ module.exports.extract = async (data) => {
     });
 };
 
-module.exports.move = async (from, to, names) => {
+export const move = async (from, to, names) => {
     return await sendRequest({
         method: 'PUT',
         url: '/move',
@@ -97,7 +95,7 @@ module.exports.move = async (from, to, names) => {
     });
 };
 
-module.exports.rename = async (from, to) => {
+export const rename = async (from, to) => {
     return await sendRequest({
         method: 'PUT',
         url: '/rename',
@@ -109,7 +107,7 @@ module.exports.rename = async (from, to) => {
     });
 };
 
-module.exports.Config = {
+export const Config = {
     read: async () => {
         return await sendRequest({
             method: 'GET',
@@ -129,7 +127,7 @@ module.exports.Config = {
     },
 };
 
-module.exports.Markdown = {
+export const Markdown = {
     read: async (url) => {
         return await sendRequest({
             method: 'GET',

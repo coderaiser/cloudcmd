@@ -1,9 +1,7 @@
-'use strict';
+import('css-modules-require-hook/preset');
 
-require('css-modules-require-hook/preset');
-
-const test = require('supertape');
-const {reRequire} = require('mock-require');
+import test from 'supertape';
+import {reRequire} from 'mock-require';
 
 test('cloudcmd: client: view: initConfig', (t) => {
     let config;

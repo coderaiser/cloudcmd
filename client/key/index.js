@@ -1,18 +1,16 @@
 /* global CloudCmd, DOM */
 
-'use strict';
-
 const Info = DOM.CurrentInfo;
 
-const exec = require('execon');
-const clipboard = require('@cloudcmd/clipboard');
+import exec from 'execon';
+import clipboard from '@cloudcmd/clipboard';
 
-const Events = require('../dom/events');
-const Buffer = require('../dom/buffer');
-const KEY = require('./key');
-const vim = require('./vim');
-const setCurrentByChar = require('./set-current-by-char');
-const fullstore = require('fullstore');
+import Events from '../dom/events.js';
+import Buffer from '../dom/buffer.js';
+import KEY from './key.js';
+import vim from './vim.js';
+import setCurrentByChar from './set-current-by-char.js';
+import fullstore from 'fullstore';
 const Chars = fullstore();
 
 Chars([]);

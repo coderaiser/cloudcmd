@@ -1,22 +1,20 @@
-'use strict';
-
 /* global CloudCmd */
 
-const {eachSeries} = require('execon');
-const wraptile = require('wraptile');
+import {eachSeries} from 'execon';
+import wraptile from 'wraptile';
 
-const load = require('./load');
-const Images = require('./images');
-const {alert} = require('./dialog');
+import load from './load.js';
+import Images from './images.js';
+import {alert} from './dialog.js';
 
-const {FS} = require('../../common/cloudfunc');
+import {FS} from '../../common/cloudfunc.js';
 
 const onEnd = wraptile(_onEnd);
 const loadFile = wraptile(_loadFile);
 
-const {getCurrentDirPath: getPathWhenRootEmpty} = require('.');
+import {getCurrentDirPath as getPathWhenRootEmpty} from '.';
 
-module.exports = (dir, files) => {
+export default (dir, files) => {
     if (!files) {
         files = dir;
         dir = getPathWhenRootEmpty();

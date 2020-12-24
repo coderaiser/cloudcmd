@@ -5,7 +5,8 @@
         "fontello.json"
     ],
     "rules": {
-        "convert-commonjs-to-esm": "on"
+        "convert-commonjs-to-esm": "on",
+        "remove-empty/import": "off"
     },
     "match": {
         "{import.spec.js,console.js}": {

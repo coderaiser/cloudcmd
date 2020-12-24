@@ -1,5 +1,3 @@
-'use strict';
-
 /* global DOM */
 
 const {
@@ -7,12 +5,12 @@ const {
     Images,
 } = DOM;
 
-const forEachKey = require('for-each-key');
-const wraptile = require('wraptile');
+import forEachKey from 'for-each-key';
+import wraptile from 'wraptile';
 
-const format = require('./format');
+import format from './format.js';
 
-module.exports = (options) => (emitter) => {
+export default (options) => (emitter) => {
     const {
         operation,
         callback,

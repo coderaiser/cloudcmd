@@ -1,13 +1,11 @@
-'use strict';
-
 /* global CloudCmd */
 
-const {promisify} = require('es6-promisify');
+import {promisify} from 'es6-promisify';
 
-const Images = require('../images');
-const load = require('../load');
+import Images from '../images.js';
+import load from '../load.js';
 
-module.exports = promisify((params, callback) => {
+export default promisify((params, callback) => {
     const p = params;
     const {prefixURL} = CloudCmd;
     
@@ -44,7 +42,7 @@ module.exports = promisify((params, callback) => {
     });
 });
 
-module.exports._replaceHash = replaceHash;
+export const _replaceHash = replaceHash;
 function replaceHash(url) {
     /*
      * if we send ajax request -

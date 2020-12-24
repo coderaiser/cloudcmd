@@ -1,9 +1,7 @@
-'use strict';
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-
-const vim = require('./vim');
+import vim from './vim.js';
 
 test('vim: no operations', (t) => {
     const result = vim('hello', {});

@@ -1,8 +1,6 @@
-'use strict';
-
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
-const storage = require('./storage');
+import test from 'supertape';
+import stub from '@cloudcmd/stub';
+import storage from './storage.js';
 
 const {stringify} = JSON;
 

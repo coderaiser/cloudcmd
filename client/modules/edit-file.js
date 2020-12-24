@@ -1,13 +1,11 @@
-'use strict';
-
 /* global CloudCmd, DOM*/
 
 CloudCmd.EditFile = exports;
 
-const Format = require('format-io');
-const fullstore = require('fullstore');
-const exec = require('execon');
-const supermenu = require('supermenu');
+import Format from 'format-io';
+import fullstore from 'fullstore';
+import exec from 'execon';
+import supermenu from 'supermenu';
 
 const Info = DOM.CurrentInfo;
 
@@ -30,7 +28,7 @@ const ConfigView = {
     },
 };
 
-module.exports.init = async () => {
+export const init = async () => {
     isLoading(true);
     
     await CloudCmd.Edit();
@@ -51,7 +49,7 @@ function getName() {
     return name;
 }
 
-module.exports.show = (options) => {
+export const show = (options) => {
     if (isLoading())
         return;
     
@@ -90,9 +88,7 @@ module.exports.show = (options) => {
     return CloudCmd.Edit;
 };
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.Edit.hide();
 }
 
@@ -178,9 +174,7 @@ function setMsgChanged(name) {
     MSG_CHANGED = 'Do you want to save changes to ' + name + '?';
 }
 
-module.exports.isChanged = isChanged;
-
-async function isChanged() {
+export async function isChanged() {
     const editor = CloudCmd.Edit.getEditor();
     const is = editor.isChanged();
     

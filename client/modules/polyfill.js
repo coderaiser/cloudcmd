@@ -1,10 +1,8 @@
-'use strict';
-
 /* global DOM */
 
-require('domtokenlist-shim');
+import 'domtokenlist-shim';
+import scrollIntoViewIfNeeded from 'scroll-into-view-if-needed';
 
-const scrollIntoViewIfNeeded = require('scroll-into-view-if-needed').default;
 DOM.scrollIntoViewIfNeeded = (el) => scrollIntoViewIfNeeded(el, {
     block: 'nearest',
 });

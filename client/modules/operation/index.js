@@ -3,24 +3,19 @@
 /* global DOM */
 /* global fileop */
 
-'use strict';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import {promisify} from 'es6-promisify';
+import exec from 'execon';
+import load from 'load.js';
+import tryToCatch from 'try-to-catch';
 
-const currify = require('currify');
-const wraptile = require('wraptile');
-const {promisify} = require('es6-promisify');
-const exec = require('execon');
-const load = require('load.js');
-const tryToCatch = require('try-to-catch');
-
-const {encode} = require('../../../common/entity');
-const removeExtension = require('./remove-extension');
-const setListeners = require('./set-listeners');
-const getNextCurrentName = require('./get-next-current-name');
+import {encode} from '../../../common/entity.js';
+import removeExtension from './remove-extension.js';
+import setListeners from './set-listeners.js';
+import getNextCurrentName from './get-next-current-name.js';
 
 const removeQuery = (a) => a.replace(/\?.*/, '');
-
-const Name = 'Operation';
-CloudCmd[Name] = exports;
 
 const {config} = CloudCmd;
 const {Dialog, Images} = DOM;
@@ -52,7 +47,7 @@ const noFilesCheck = () => {
     return is;
 };
 
-module.exports.init = promisify((callback) => {
+export const init = promisify((callback) => {
     showLoad();
     
     exec.series([
@@ -76,6 +71,12 @@ module.exports.init = promisify((callback) => {
         },
     ], callback);
 });
+
+CloudCmd.Operation = {
+    init,
+    show,
+    hide,
+};
 
 function _authCheck(spawn, ok) {
     const accept = wraptile(ok);
@@ -190,11 +191,11 @@ function getPacker(type) {
     return packTarFn;
 }
 
-module.exports.hide = () => {
+export function hide() {
     CloudCmd.View.hide();
-};
+}
 
-module.exports.show = (operation, data) => {
+export function show(operation, data) {
     if (!Loaded)
         return;
     
@@ -215,7 +216,7 @@ module.exports.show = (operation, data) => {
     
     if (operation === 'extract')
         return Operation.extract();
-};
+}
 
 Operation.copy = processFiles({
     type: 'copy',

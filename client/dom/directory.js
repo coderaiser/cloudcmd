@@ -1,17 +1,15 @@
-'use strict';
-
 /* global CloudCmd */
 
-const philip = require('philip');
+import philip from 'philip';
 
-const Images = require('./images');
-const {FS} = require('../../common/cloudfunc');
-const DOM = require('.');
-const Dialog = require('./dialog');
+import Images from './images.js';
+import {FS} from '../../common/cloudfunc.js';
+import DOM from '.';
+import Dialog from './dialog.js';
 
 const {getCurrentDirPath: getPathWhenRootEmpty} = DOM;
 
-module.exports = (items) => {
+export default (items) => {
     if (items.length)
         Images.show('top');
     
