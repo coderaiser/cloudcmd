@@ -4,7 +4,7 @@ module.exports.registerSW = registerSW;
 module.exports.unregisterSW = unregisterSW;
 
 module.exports.listenSW = (sw, ...args) => {
-    sw && sw.addEventListener(...args);
+    sw?.addEventListener(...args);
 };
 
 async function registerSW(prefix) {
@@ -21,6 +21,6 @@ async function registerSW(prefix) {
 }
 async function unregisterSW(prefix) {
     const reg = await registerSW(prefix);
-    reg && reg.unregister(prefix);
+    reg?.unregister(prefix);
 }
 

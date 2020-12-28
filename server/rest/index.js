@@ -70,7 +70,7 @@ function rest(config, request, response) {
         if (options.query)
             params.query = options.query;
         
-        if (error && error.code)
+        if (error?.code)
             return ponse.sendError(error, params);
         
         if (error)

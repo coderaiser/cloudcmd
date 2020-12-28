@@ -638,7 +638,7 @@ function CmdProto() {
         if (!current)
             DOM.getCurrentFile();
         
-        const parent = current && current.parentElement;
+        const parent = current?.parentElement;
         const name = DOM.getCurrentName(current);
         
         if (current && name !== '..') {
@@ -685,7 +685,7 @@ function CmdProto() {
     
     /* scroll on one page */
     this.scrollByPages = (element, pPages) => {
-        const ret = element && element.scrollByPages && pPages;
+        const ret = element?.scrollByPages && pPages;
         
         if (ret)
             element.scrollByPages(pPages);

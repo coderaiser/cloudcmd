@@ -1,6 +1,6 @@
 'use strict';
 
-const getMessage = (a) => a && a.message || a;
+const getMessage = (a) => a?.message || a;
 
 module.exports = (...args) => {
     const messages = args.map(getMessage);

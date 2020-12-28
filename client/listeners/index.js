@@ -103,7 +103,7 @@ function getPath(el, path = []) {
 
 async function config() {
     const [, config] = await tryToCatch(DOM.Files.get, 'config');
-    const type = config && config.packer;
+    const type = config?.packer;
     
     EXT = DOM.getPackerExt(type);
 }
@@ -461,7 +461,7 @@ function dragndrop() {
 function unload() {
     DOM.Events.add(['unload', 'beforeunload'], (event) => {
         const {Key} = CloudCmd;
-        const isBind = Key && Key.isBind();
+        const isBind = Key?.isBind();
         
         if (isBind)
             return;
