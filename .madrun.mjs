@@ -23,7 +23,7 @@ export default {
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
-    'wisdom:type': () => 'bin/release.js',
+    'wisdom:type': () => 'bin/release.mjs',
     'docker:pull': () => 'docker pull node',
     'docker:pull:alpine': () => 'docker pull mhart/alpine-node',
     'docker:pull:arm32': () => 'docker pull arm32v7/node:slim',
