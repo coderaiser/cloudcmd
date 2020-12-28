@@ -13,19 +13,12 @@ export default {
     'start:dev': async () => `NODE_ENV=development ${await run('start')}`,
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
-    'lint:all': () => run(['lint', 'lint:css', 'spell']),
+    'lint:all': () => run(['lint', 'spell']),
     'lint': () => 'putout .',
     'spell': () => 'yaspeller .',
     'fix:lint': () => run('lint', '--fix'),
     'lint:stream': () => run('lint:base', '-f stream'),
-    
-    'test:base': () => {
-        const cmd = 'tape';
-        const names = `'test/**/*.js' '{client,static,common,server}/**/*.spec.js'`;
-        
-        return `${cmd} ${names}`;
-    },
-    
+    'test:base': () => `tape 'test/**/*.js' '{client,static,common,server}/**/*.spec.js' -f fail`,
     'test': async () => `${env} ${await run('test:base')}`,
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
