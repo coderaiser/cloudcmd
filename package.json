@@ -38,12 +38,6 @@
   "bin": {
     "cloudcmd": "bin/cloudcmd.mjs"
   },
-  "nyc": {
-    "exclude": [
-      "**/*.spec.js",
-      "test"
-    ]
-  },
   "scripts": {
     "start": "madrun start",
     "start:dev": "madrun start:dev",
@@ -173,7 +167,7 @@
     "@cloudcmd/modal": "^2.0.0",
     "@cloudcmd/olark": "^3.0.0",
     "@cloudcmd/stub": "^3.0.0",
-    "auto-globals": "^1.7.0",
+    "auto-globals": "^2.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^3.0.0",
     "clean-css-loader": "^2.0.0",
