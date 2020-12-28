@@ -36,7 +36,7 @@
     "server"
   ],
   "bin": {
-    "cloudcmd": "bin/cloudcmd.js"
+    "cloudcmd": "bin/cloudcmd.mjs"
   },
   "nyc": {
     "exclude": [
@@ -152,6 +152,7 @@
     "restafary": "^8.0.0",
     "restbox": "^2.0.0",
     "shortdate": "^2.0.0",
+    "simport": "^1.0.1",
     "socket.io": "^3.0.1",
     "socket.io-client": "^3.0.1",
     "squad": "^3.0.0",
