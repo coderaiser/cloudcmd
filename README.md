@@ -69,9 +69,9 @@ npm i cloudcmd express socket.io -S
 And create `index.js`:
 
 ```js
-const http = require('http');
-const cloudcmd = require('cloudcmd');
-const io = require('socket.io');
+import http from 'http';
+import cloudcmd from 'cloudcmd';
+import io from 'socket.io';
 const app = require('express')();
 
 const port = 1337;

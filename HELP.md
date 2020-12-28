@@ -462,7 +462,7 @@ Let's consider example `user menu` works file:
 ```js
 const RENAME_FILE = 'Rename file';
 
-module.exports = {
+export default {
     '__settings': {
         select: [
             RENAME_FILE,
@@ -665,9 +665,9 @@ npm i cloudcmd express socket.io -S
 And create `index.js`:
 
 ```js
-const http = require('http');
-const cloudcmd = require('cloudcmd');
-const io = require('socket.io');
+import http from 'http';
+import cloudcmd from 'cloudcmd';
+import io from 'socket.io';
 const app = require('express')();
 
 const port = 1337;
@@ -717,9 +717,9 @@ server.listen(port);
 Here is example with two `Config Managers`:
 
 ```js
-const http = require('http');
-const cloudcmd = require('cloudcmd');
-const io = require('socket.io');
+import http from 'http';
+import cloudcmd from 'cloudcmd';
+import io from 'socket.io';
 const app = require('express')();
 
 const port = 8000;
@@ -759,7 +759,7 @@ server.listen(port);
 If you want to enable authorization, you can pass credentials to Cloud Commander with a config. To generate a password, you can install `criton` with `npm i criton --save`, and use it (or any other way) to generate a hash of a password.
 
 ```js
-const criton = require('criton');
+import criton from 'criton';
 const algo = 'sha512WithRSAEncryption'; // default
 
 // you can generate a hash dynamically
