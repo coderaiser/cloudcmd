@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
-import Info from '../package.js';
-
+import {createSimport} from 'simport';
 import minor from 'minor';
 import place from 'place';
 import rendy from 'rendy';
 import shortdate from 'shortdate';
+
+const simport = createSimport(import.meta.url);
+
+const Info = await simport('../package.json');
 
 const ERROR = Error('ERROR: version is missing. release --patch|--minor|--major');
 
