@@ -29,10 +29,7 @@ const clean = (array) => array.filter(notEmpty);
 const noParse = (a) => /\.spec\.js$/.test(a);
 
 const options = {
-    babelrc: false,
-    plugins: [
-        'module:babel-plugin-macros',
-    ],
+    babelrc: true,
 };
 
 const rules = clean([

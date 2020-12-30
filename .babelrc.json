@@ -4,5 +4,6 @@
   ],
   "plugins": [
     "module:babel-plugin-macros",
+    "@babel/plugin-proposal-optional-chaining"
   ]
 }
