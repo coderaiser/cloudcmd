@@ -1,3 +1,25 @@
+@media only screen and (min-width: 1600px) {
+    .name {
+        width: 40%;
+    }
+    
+    .size {
+        width: 10%;
+    }
+    
+    .date {
+        width: 15%
+    }
+    
+    .owner {
+        width: 12%
+    }
+    
+    .mode {
+        width: 15%
+    }
+}
+
 @media only screen and (max-height: 900px) and (max-width: 600px) {
     .fm {
         height: 85%;
