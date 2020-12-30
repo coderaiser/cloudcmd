@@ -1,9 +1,9 @@
 {
-  "presets": [
-    "@babel/preset-env"
-  ],
-  "plugins": [
-    "module:babel-plugin-macros",
-    "@babel/plugin-proposal-optional-chaining"
-  ]
+    "presets": [
+        "@babel/preset-env"
+    ],
+    "plugins": [
+        "module:babel-plugin-macros",
+        "@babel/plugin-proposal-optional-chaining"
+    ]
 }
