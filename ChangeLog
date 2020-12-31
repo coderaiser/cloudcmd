@@ -1,3 +1,9 @@
+2020.12.31, v15.0.2
+
+fix:
+- (cloudcmd) criton: crash when password set (#310)
+
+
 2020.12.30, v15.0.1
 
 fix:
