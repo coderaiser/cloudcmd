@@ -231,7 +231,7 @@ async function validateRoot(root, config) {
 }
 
 async function getPassword(password) {
-    const criton = await import('criton');
+    const criton = await simport('criton');
     return criton(password, config('algo'));
 }
 
