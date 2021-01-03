@@ -1,7 +1,50 @@
 'use strict';
 
+const {join} = require('path');
+const {readFileSync} = require('fs');
+
 const test = require('supertape');
-const {_getSize} = require('./cloudfunc');
+const montag = require('montag');
+
+const {_getSize, getPathLink} = require('./cloudfunc');
+
+const templatePath = join(__dirname, '../tmpl/fs');
+const template = {
+    pathLink: readFileSync(`${templatePath}/pathLink.hbs`, 'utf8'),
+};
+
+test('cloudfunc: getPathLink: /', (t) => {
+    const {pathLink} = template;
+    const result = getPathLink('/', '', pathLink);
+    const expected = montag`
+        <a data-name="js-path-link" href="/fs/" title="/">/</a>
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('cloudfunc: getPathLink: /hello/world', (t) => {
+    const {pathLink} = template;
+    const result = getPathLink('/hello/world', '', pathLink);
+    const expected = montag`
+        <a data-name="js-path-link" href="/fs/" title="/">/</a>hello/
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('cloudfunc: getPathLink: prefix', (t) => {
+    const {pathLink} = template;
+    const result = getPathLink('/hello/world', '/cloudcmd', pathLink);
+    const expected = montag`
+        <a data-name="js-path-link" href="/cloudcmd/fs/" title="/">/</a>hello/
+    `;
+    
+    t.equal(result, expected);
+    t.end();
+});
 
 test('cloudfunc: getSize: dir', (t) => {
     const type = 'directory';
