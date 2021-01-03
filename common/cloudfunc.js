@@ -72,30 +72,34 @@ function getPathLink(url, prefix, template) {
         .slice(1, -1);
     
     const allNames = ['/', ...names];
-    const length = allNames.length - 1;
+    const lines = [];
+    const n = allNames.length;
     
     let path = '/';
     
-    const pathHTML = allNames.map((name, index) => {
-        const isLast = index === length;
+    for (let i = 0; i < n; i++) {
+        const name = allNames[i];
+        const isLast = i === n - 1;
         
-        if (index)
+        if (i)
             path += name + '/';
         
-        if (index && isLast)
-            return name + '/';
+        if (i && isLast) {
+            lines.push(name + '/');
+            continue;
+        }
         
-        const slash = index ? '/' : '';
+        const slash = i ? '/' : '';
         
-        return rendy(template, {
+        lines.push(rendy(template, {
             path,
             name,
             slash,
             prefix,
-        });
-    }).join('');
+        }));
+    }
     
-    return pathHTML;
+    return lines.join('');
 }
 
 const getDataName = (name) => {
