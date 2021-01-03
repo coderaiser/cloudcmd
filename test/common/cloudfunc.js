@@ -105,9 +105,9 @@ test('cloudfunc: render', (t) => {
         console.log('buildFromJSON: Not OK');
     }
     
-    t.equal(Expect, result, 'should be equal rendered json data');
+    t.equal(result, Expect, 'should be equal rendered json data');
     
-    htmlLooksLike(Expect, result);
+    htmlLooksLike(result, Expect);
     
     t.end();
 });
