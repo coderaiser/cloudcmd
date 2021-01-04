@@ -9,7 +9,7 @@ const env = 'THREAD_IT_COUNT=0';
 const dockerName = 'coderaiser/cloudcmd';
 
 export default {
-    'start': () => 'node bin/cloudcmd.js',
+    'start': () => 'node bin/cloudcmd.mjs',
     'start:dev': async () => `NODE_ENV=development ${await run('start')}`,
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
