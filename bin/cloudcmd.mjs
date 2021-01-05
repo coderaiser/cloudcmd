@@ -217,7 +217,7 @@ async function main() {
         config.write();
     
     await tryToCatch(checkUpdate);
-    await importConfig(config);
+    await simportConfig(config);
 }
 
 async function validateRoot(root, config) {
@@ -270,7 +270,7 @@ async function readConfig(name) {
         return;
     
     const tryToCatch = await simport('try-to-catch');
-    const forEachKey = await import('for-each-key');
+    const forEachKey = await simport('for-each-key');
     
     const [error, data] = await tryToCatch(simport, name);
     
