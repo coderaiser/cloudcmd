@@ -217,7 +217,7 @@ async function main() {
         config.write();
     
     await tryToCatch(checkUpdate);
-    await simportConfig(config);
+    await importConfig(config);
 }
 
 async function validateRoot(root, config) {
