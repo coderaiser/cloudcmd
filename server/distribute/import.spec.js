@@ -147,7 +147,7 @@ test('distribute: import: received: no name', async (t) => {
     t.end();
 });
 
-test.skip('distribute: import: error', async (t) => {
+test('distribute: import: error', async (t) => {
     const configManager = createConfigManager();
     const {done} = await connect({
         configManager,
@@ -171,7 +171,7 @@ test.skip('distribute: import: error', async (t) => {
     t.end();
 });
 
-test.skip('distribute: import: config:change: no export', async (t) => {
+test('distribute: import: config:change: no export', async (t) => {
     const configManager = createConfigManager();
     const {done} = await connect({
         configManager,
@@ -237,7 +237,7 @@ test('distribute: import: env', async (t) => {
     const result = configManagerImport('editor');
     const expected = 'deepword';
     
-    t.equal(expected, result);
+    t.equal(result, expected);
     t.end();
 });
 
@@ -281,6 +281,6 @@ test('distribute: import: no env', async (t) => {
     const result = configManagerImport('editor');
     const expected = 'edward';
     
-    t.equal(expected, result);
+    t.equal(result, expected);
     t.end();
 });

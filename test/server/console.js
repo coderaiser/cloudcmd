@@ -30,7 +30,7 @@ test('cloudcmd: console: enabled', async (t) => {
 });
 
 // need options to close socket faster
-test.skip('cloudcmd: console: disabled', async (t) => {
+test('cloudcmd: console: disabled', async (t) => {
     const config = {
         console: false,
     };
