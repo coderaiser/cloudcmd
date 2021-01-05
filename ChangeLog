@@ -1,3 +1,13 @@
+2021.01.05, v15.0.3
+
+fix:
+- (cloudcmd) validateRoot: import -> simport: forEachKey is not a function (#311)
+
+feature:
+- (package) onezip v5.0.0
+- (package) socket.io v3.0.5 (socketio/socket.io#3720)
+
+
 2020.12.31, v15.0.2
 
 fix:
