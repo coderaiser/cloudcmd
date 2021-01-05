@@ -34,19 +34,19 @@ const TMPL = [
 ].map(addHBS);
 
 const data = {
-    path  : '/etc/X11/',
-    files : [{
+    path: '/etc/X11/',
+    files: [{
         name: 'applnk',
         size: '4.0.0kb',
         date: '21.02.2016',
-        uid : 0,
+        uid: 0,
         mode: 'rwx r-x r-x',
         type: 'directory',
     }, {
         name: 'ай',
         size: '1.30kb',
         date: 0,
-        uid : 0,
+        uid: 0,
         mode: 'rwx r-x r-x',
         type: 'file',
     }],
@@ -73,7 +73,7 @@ test('cloudfunc: render', (t) => {
     
     time('CloudFunc.buildFromJSON');
     const result = CloudFunc.buildFromJSON({
-        prefix  : '',
+        prefix: '',
         data,
         template,
     });

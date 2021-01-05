@@ -7,7 +7,7 @@
     "editor": "edward",
     "packer": "tar",
     "diff": true,
-    "zip" : true,
+    "zip": true,
     "buffer": true,
     "dirStorage": false,
     "online": false,
@@ -44,4 +44,3 @@
     "dropbox": false,
     "dropboxToken": ""
 }
-

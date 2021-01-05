@@ -135,9 +135,9 @@ module.exports.buildFromJSON = (params) => {
     const htmlPath = getPathLink(path, prefix, template.pathLink);
     
     let fileTable = rendy(template.path, {
-        link        : prefix + FS + path,
-        fullPath    : path,
-        path        : htmlPath,
+        link: prefix + FS + path,
+        fullPath: path,
+        path: htmlPath,
     });
     
     const owner = 'owner';
@@ -150,10 +150,10 @@ module.exports.buildFromJSON = (params) => {
     const date = getFieldName('date');
     
     const header = rendy(templateFile, {
-        tag         : 'div',
-        attribute   : 'data-name="js-fm-header" ',
-        className   : 'fm-header',
-        type        : '',
+        tag: 'div',
+        attribute: 'data-name="js-fm-header" ',
+        className: 'fm-header',
+        type: '',
         name,
         size,
         date,
@@ -173,8 +173,8 @@ module.exports.buildFromJSON = (params) => {
         
         const linkResult = rendy(template.link, {
             link,
-            title       : '..',
-            name        : '..',
+            title: '..',
+            name: '..',
         });
         
         const dataName = 'data-name="js-file-.." ';
@@ -182,15 +182,15 @@ module.exports.buildFromJSON = (params) => {
         
         /* Сохраняем путь к каталогу верхнего уровня*/
         fileTable += rendy(template.file, {
-            tag         : 'li',
+            tag: 'li',
             attribute,
-            className   : '',
-            type        : 'directory',
-            name        : linkResult,
-            size        : '&lt;dir&gt;',
-            date        : '--.--.----',
-            owner       : '.',
-            mode        : '--- --- ---',
+            className: '',
+            type: 'directory',
+            name: linkResult,
+            size: '&lt;dir&gt;',
+            date: '--.--.----',
+            owner: '.',
+            mode: '--- --- ---',
         });
     }
     

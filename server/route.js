@@ -137,18 +137,18 @@ function indexProcessing(config, options) {
             .replace('icon-terminal', 'icon-terminal none');
     
     const left = rendy(Template.panel, {
-        side        : 'left',
-        content     : panel,
-        className   : !oneFilePanel ? '' : 'panel-single',
+        side: 'left',
+        content: panel,
+        className: !oneFilePanel ? '' : 'panel-single',
     });
     
     let right = '';
     
     if (!oneFilePanel)
         right = rendy(Template.panel, {
-            side        : 'right',
-            content     : panel,
-            className   : '',
+            side: 'right',
+            content: panel,
+            className: '',
         });
     
     const name = config('name');

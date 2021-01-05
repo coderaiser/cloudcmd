@@ -186,10 +186,10 @@ function get(manage, request, response) {
     const data = jonny.stringify(manage('*'));
     
     ponse.send(data, {
-        name    : 'config.json',
+        name: 'config.json',
         request,
         response,
-        cache   : false,
+        cache: false,
     });
 }
 

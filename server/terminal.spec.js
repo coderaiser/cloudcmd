@@ -43,7 +43,7 @@ test('cloudcmd: terminal: enabled', (t) => {
 });
 
 test('cloudcmd: terminal: enabled: no string', (t) => {
-    const {log:originalLog} = console;
+    const {log: originalLog} = console;
     const log = stub();
     
     console.log = log;

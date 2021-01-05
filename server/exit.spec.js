@@ -5,7 +5,7 @@ const exit = require('./exit');
 const stub = require('@cloudcmd/stub');
 
 test('cloudcmd: exit: process.exit', (t) => {
-    const {exit:exitOriginal} = process;
+    const {exit: exitOriginal} = process;
     process.exit = stub();
     
     exit();
@@ -16,7 +16,7 @@ test('cloudcmd: exit: process.exit', (t) => {
 });
 
 test('cloudcmd: exit: console.error', (t) => {
-    const {exit:exitOriginal} = process;
+    const {exit: exitOriginal} = process;
     const {error} = console;
     
     console.error = stub();
@@ -32,7 +32,7 @@ test('cloudcmd: exit: console.error', (t) => {
 });
 
 test('cloudcmd: exit.error: console.error: error', (t) => {
-    const {exit:exitOriginal} = process;
+    const {exit: exitOriginal} = process;
     const {error} = console;
     
     console.error = stub();

@@ -8,6 +8,9 @@ module.exports = {
         'putout',
         'node',
     ],
+    rules: {
+        'key-spacing': 'off',
+    },
     overrides: [{
         files: ['bin/release.js'],
         rules: {
