@@ -7,6 +7,7 @@ const {
 } = require('path');
 
 const {EnvironmentPlugin} = require('webpack');
+const WebpackBar = require('webpackbar');
 
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
@@ -54,6 +55,8 @@ const plugins = [
         entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
         excludes: ['*'],
     }),
+    
+    new WebpackBar(),
 ];
 
 const splitChunks = {
