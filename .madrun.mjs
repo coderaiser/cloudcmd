@@ -15,6 +15,8 @@ export default {
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'lint:all': () => run(['lint', 'spell']),
     'lint': () => 'putout .',
+    'fresh:lint': () => run('lint', '--fresh'),
+    'lint:fresh': () => run('lint', '--fresh'),
     'spell': () => 'yaspeller .',
     'fix:lint': () => run('lint', '--fix'),
     'lint:stream': () => run('lint:base', '-f stream'),
@@ -40,6 +42,7 @@ export default {
     'docker:build:alpine': () => dockerBuild('docker/Dockerfile.alpine', 'alpine', version),
     'docker:build:arm32': () => dockerBuild('docker/arm/Dockerfile.arm32v7', 'arm32', version),
     'docker:build:arm64': () => dockerBuild('docker/arm/Dockerfile.arm64v8', 'arm64', version),
+    
     'docker:manifest:create': () => {
         const images = [
             `${dockerName}:latest`,
@@ -50,6 +53,7 @@ export default {
         
         return `docker manifest create ${images}`;
     },
+    
     'docker:manifest:push': () => `docker manifest push ${dockerName}:latest`,
     'docker': () => run(['docker:x64', 'docker:alpine', 'docker:manifest:*']),
     'docker-ci': () => run(['build', 'docker-login', 'docker']),
@@ -107,7 +111,6 @@ export default {
     'docker:rm:arm64': () => dockerRmi('arm64', version),
     'docker:rm:latest-arm64': () => dockerRmi('arm64'),
     'docker:rm-old': async () => `${await parallel('docker:rm:*')} || true`,
-    
     'coverage': async () => `${env} nyc ${await run('test:base')}`,
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     '6to5': () => 'webpack --progress',
