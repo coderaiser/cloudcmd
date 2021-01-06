@@ -1,3 +1,9 @@
+2021.01.07, v15.1.0
+
+feature:
+- (cloudcmd) add ability to read zip files like directories (#309)
+
+
 2021.01.05, v15.0.4
 
 feature:
