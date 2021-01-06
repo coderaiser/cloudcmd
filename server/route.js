@@ -3,15 +3,17 @@
 const DIR_SERVER = './';
 const DIR_COMMON = '../common/';
 
-const {realpath} = require('fs').promises;
+const {extname} = require('path');
 
-const {read} = require('flop');
+const {read} = require('redzip');
 const ponse = require('ponse');
 const rendy = require('rendy');
 const format = require('format-io');
 const currify = require('currify');
 const tryToCatch = require('try-to-catch');
 const once = require('once');
+const pipe = require('pipe-io');
+const {contentType} = require('mime-types');
 
 const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
@@ -77,25 +79,27 @@ async function route({config, options, request, response}) {
     const fullPath = root(rootName, config('root'));
     
     const read = getReadDir(config);
-    const [error, dir] = await tryToCatch(read, fullPath);
+    const [error, stream] = await tryToCatch(read, fullPath);
     const {html} = options;
     
-    if (!error)
-        return sendIndex(p, buildIndex(config, html, {
-            ...dir,
-            path: format.addSlashToEnd(rootName),
-        }));
-    
-    if (error.code !== 'ENOTDIR')
+    if (error)
         return ponse.sendError(error, p);
     
-    const [realPathError, pathReal] = await tryToCatch(realpath, fullPath);
+    if (stream.type === 'directory') {
+        const {files} = stream;
+        
+        return sendIndex(p, buildIndex(config, html, {
+            files,
+            path: format.addSlashToEnd(rootName),
+        }));
+    }
     
-    ponse.sendFile({
-        ...p,
-        name: realPathError ? name : pathReal,
-        gzip: false,
-    });
+    response.setHeader('Content-Type', contentType(extname(fullPath)));
+    
+    await pipe([
+        stream,
+        response,
+    ]);
 }
 
 /**

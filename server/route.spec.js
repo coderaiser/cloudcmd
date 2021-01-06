@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 const tryToCatch = require('try-to-catch');
-const test = require('supertape');
+const {test, stub} = require('supertape');
 const mockRequire = require('mock-require');
 const {reRequire, stopAll} = mockRequire;
 
@@ -219,39 +219,6 @@ test('cloudcmd: route: not found', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: realpath: error', async (t) => {
-    const error = 'realpath error';
-    const {realpath} = fs.promises;
-    
-    fs.promises.realpath = async () => {
-        throw error;
-    };
-    
-    const config = {
-        root: fixtureDir,
-    };
-    
-    const options = {
-        config,
-    };
-    
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
-    
-    const {request} = serveOnce(cloudcmd, {
-        config: defaultConfig,
-    });
-    
-    const {body} = await request.get('/fs/empty-file', {
-        options,
-    });
-    
-    fs.promises.realpath = realpath;
-    
-    t.ok(/^ENOENT/.test(body), 'should return error');
-    t.end();
-});
-
 test('cloudcmd: route: sendIndex: encode', async (t) => {
     const name = '"><svg onload=alert(3);>';
     const nameEncoded = '&quot;&gt;&lt;svg&nbsp;onload=alert(3);&gt;';
@@ -259,12 +226,12 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
         name,
     }];
     
-    const read = async (path) => ({
-        path,
+    const read = stub().returns({
+        type: 'directory',
         files,
     });
     
-    mockRequire('flop', {
+    mockRequire('redzip', {
         read,
     });
     

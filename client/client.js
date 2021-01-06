@@ -7,6 +7,7 @@ const inherits = require('inherits');
 const rendy = require('rendy');
 const load = require('load.js');
 const tryToCatch = require('try-to-catch');
+const {addSlashToEnd} = require('format-io');
 
 const pascalCase = require('just-pascal-case');
 const isDev = process.env.NODE_ENV === 'development';
@@ -114,9 +115,11 @@ function CloudCmdProto(DOM) {
             imgPosition = 'top';
         
         Images.show.load(imgPosition, panel);
+        const path = addSlashToEnd(p.path);
+        console.log(path);
         
         /* загружаем содержимое каталога */
-        await ajaxLoad(p.path, {
+        await ajaxLoad(path, {
             refresh,
             history,
             noCurrent,

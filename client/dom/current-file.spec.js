@@ -299,10 +299,12 @@ function getDOM({
     getByDataName = stub(),
     isContainClass = stub(),
     getCurrentType = stub(),
+    getCurrentPath = stub(),
 } = {}) {
     return {
         getCurrentDirPath,
         getCurrentDirName,
+        getCurrentPath,
         getByDataName,
         isContainClass,
         getCurrentType,

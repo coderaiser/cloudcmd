@@ -267,21 +267,18 @@ function changePanel(element) {
 }
 
 async function onDblClick(event) {
+    event.preventDefault();
+    
     const current = getLIElement(event.target);
     const isDir = DOM.isCurrentIsDir(current);
     const path = DOM.getCurrentPath(current);
     
-    if (isDir) {
-        await CloudCmd.loadDir({
-            path: path === '/' ? '/' : path + '/',
-        });
-        
-        event.preventDefault();
-    } else {
-        CloudCmd.View.show();
-        
-        event.preventDefault();
-    }
+    if (!isDir)
+        return CloudCmd.View.show();
+    
+    await CloudCmd.loadDir({
+        path,
+    });
 }
 
 async function onTouch(event) {

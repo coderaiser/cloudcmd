@@ -287,9 +287,13 @@ module.exports.setTitle = (name) => {
  */
 module.exports.isCurrentIsDir = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
+    const path = DOM.getCurrentPath(current);
     const fileType = DOM.getCurrentType(current);
     
-    return /^directory(-link)?/.test(fileType);
+    const isZip = /\.zip$/.test(path);
+    const isDir = /^directory(-link)?/.test(fileType);
+    
+    return isDir || isZip;
 };
 
 module.exports.getCurrentType = (currentFile) => {
