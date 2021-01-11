@@ -17,8 +17,6 @@ const {
     disconnectedStr,
     tokenRejectedStr,
     authTryStr,
-    makeColor,
-    stringToRGB,
     getMessage,
     getDescription,
     logWraped,
@@ -35,13 +33,6 @@ const wrapApply = (f, disconnect) => (status) => () => f(null, {
 
 const closeIfNot = wraptile((socket, is) => !is && socket.close());
 const addUrl = currify((url, a) => `${url}: ${a}`);
-
-const getColorUrl = (url, name) => {
-    if (!name)
-        return url;
-    
-    return makeColor(url, stringToRGB(name));
-};
 
 const rmListeners = wraptile((socket, listeners) => {
     socket.removeListener('connect', listeners.onConnect);
@@ -99,7 +90,7 @@ module.exports = (config, options, fn) => {
     });
     
     const superFn = wrapApply(fn, socket.close.bind(socket));
-    const colorUrl = getColorUrl(importUrl, name);
+    const colorUrl = importUrl;
     const close = closeIfNot(socket, importListen);
     
     const statusStore = fullstore();

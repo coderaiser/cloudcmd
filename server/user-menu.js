@@ -1,7 +1,7 @@
 'use strict';
 
 const {homedir} = require('os');
-const {readFile} = require('fs').promises;
+const {readFile} = require('fs/promises');
 
 const {join} = require('path');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const {readFile} = require('fs').promises;
+const {readFile} = require('fs/promises');
 const {join} = require('path');
 const {callbackify} = require('util');
 

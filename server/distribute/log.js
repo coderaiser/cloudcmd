@@ -6,9 +6,9 @@ const chalk = require('chalk');
 const datetime = require('../../common/datetime');
 
 const log = (isLog, name, msg) => isLog && console.log(`${datetime()} -> ${name}: ${msg}`);
-const makeColor = (a, color) => chalk.rgb(color || stringToRGB(a))(a);
+const makeColor = (a) => chalk.blue(a);
 const getMessage = (e) => e.message || e;
-const getDescription = (e) => `${e.type}: ${e.description}`;
+const getDescription = (e) => e.message;
 
 module.exports = log;
 module.exports.logWraped = wraptile(log);
