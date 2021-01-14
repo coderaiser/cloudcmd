@@ -116,7 +116,6 @@ function CloudCmdProto(DOM) {
         
         Images.show.load(imgPosition, panel);
         const path = addSlashToEnd(p.path);
-        console.log(path);
         
         /* загружаем содержимое каталога */
         await ajaxLoad(path, {
