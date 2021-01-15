@@ -259,7 +259,7 @@ function getSize(file) {
         type,
     } = file;
     
-    if (/^directory$/.test(type))
+    if (type === 'directory')
         return '&lt;dir&gt;';
     
     if (/link/.test(type))

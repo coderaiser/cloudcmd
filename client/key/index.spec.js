@@ -38,7 +38,6 @@ test('cloudcmd: client: key: enable vim', async (t) => {
 });
 
 test('cloudcmd: client: key: disable vim', async (t) => {
-    const vim = stub();
     const _config = stub();
     
     const {_listener, setBind} = reRequire('.');

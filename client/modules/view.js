@@ -79,6 +79,7 @@ const Config = {
         title: {},
     },
 };
+module.exports._Config = Config;
 
 module.exports.init = async () => {
     await loadAll();
@@ -126,6 +127,9 @@ async function show(data, options) {
     default:
         return viewFile();
     
+    case 'html':
+        return viewHtml(path);
+    
     case 'image':
         return viewImage(prefixURL);
     
@@ -137,7 +141,8 @@ async function show(data, options) {
     }
 }
 
-function viewPDF(src) {
+module.exports._createIframe = createIframe;
+function createIframe(src) {
     const element = createElement('iframe', {
         src,
         width: '100%',
@@ -147,6 +152,15 @@ function viewPDF(src) {
     element.addEventListener('load', () => {
         element.contentWindow.addEventListener('keydown', listener);
     });
+}
+
+module.exports._viewHtml = viewHtml;
+function viewHtml(src) {
+    modal.open(createIframe(src), Config);
+}
+
+function viewPDF(src) {
+    const element = createIframe(src);
     
     const options = assign({}, Config);
     
@@ -285,7 +299,8 @@ function isVideo(name) {
     return /\.(mp4|avi|webm)$/i.test(name);
 }
 
-const isPDF = (name) => /\.(pdf)$/i.test(name);
+const isPDF = (name) => /\.pdf$/i.test(name);
+const isHTML = (name) => /\.html/.test(name);
 
 function getType(name) {
     if (isPDF(name))
@@ -296,6 +311,9 @@ function getType(name) {
     
     if (isMedia(name))
         return 'media';
+    
+    if (isHTML(name))
+        return 'html';
 }
 
 async function getMediaElement(src) {

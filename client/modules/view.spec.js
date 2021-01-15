@@ -2,8 +2,11 @@
 
 require('css-modules-require-hook/preset');
 
-const test = require('supertape');
-const {reRequire} = require('mock-require');
+const autoGlobals = require('auto-globals');
+const test = autoGlobals(require('supertape'));
+const stub = require('@cloudcmd/stub');
+const mockRequire = require('mock-require');
+const {reRequire} = mockRequire;
 
 test('cloudcmd: client: view: initConfig', (t) => {
     let config;
@@ -47,6 +50,33 @@ test('cloudcmd: client: view: initConfig: no options', (t) => {
     global.DOM = DOM;
     
     t.equal(typeof config, 'object', 'should equal');
+    t.end();
+});
+
+test('cloudcmd: client: view: html', (t) => {
+    const {CloudCmd, DOM} = global;
+    
+    global.CloudCmd = {};
+    global.DOM = {};
+    const open = stub();
+    
+    mockRequire('@cloudcmd/modal', {
+        open,
+    });
+    
+    const {
+        _viewHtml,
+        _createIframe,
+        _Config,
+    } = reRequire('./view');
+    
+    const src = '/hello.html';
+    _viewHtml(src);
+    
+    global.CloudCmd = CloudCmd;
+    global.DOM = DOM;
+    
+    t.calledWith(open, [_createIframe(src), _Config]);
     t.end();
 });
 
