@@ -1,3 +1,14 @@
+2021.01.16, v15.2.0
+
+fix:
+- (server) distribute: simplify colors
+
+feature:
+- (cloudcmd) add ability to open html files using F3
+- (cloudcmd) add ability to toggle vim hotkes using Esc
+- (package) @cloudcmd/fileop v5.0.0
+
+
 2021.01.07, v15.1.0
 
 feature:
