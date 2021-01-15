@@ -8,15 +8,15 @@ const rendy = require('rendy');
 const load = require('load.js');
 const tryToCatch = require('try-to-catch');
 const {addSlashToEnd} = require('format-io');
-
 const pascalCase = require('just-pascal-case');
+const currify = require('currify');
+
 const isDev = process.env.NODE_ENV === 'development';
 
 const Images = require('./dom/images');
 const {unregisterSW} = require('./sw/register');
 const getJsonFromFileTable = require('./get-json-from-file-table');
-
-const currify = require('currify');
+const Key = require('./key');
 
 const noJS = (a) => a.replace(/.js$/, '');
 
@@ -206,7 +206,7 @@ function CloudCmdProto(DOM) {
     };
     
     const initModules = async () => {
-        CloudCmd.Key = new CloudCmd.Key();
+        CloudCmd.Key = Key;
         CloudCmd.Key.bind();
         
         const [, modules] = await tryToCatch(Files.get, 'modules');

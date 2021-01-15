@@ -201,7 +201,7 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `Insert`              | select current file (and move to next)
 | `F9`                  | context menu
 | `~`                   | console
-| `Ctrl + Click`        | open file on new tab
+| `Esc`                 | toggle vim hot keys
 
 ### Vim
 

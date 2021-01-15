@@ -4,6 +4,7 @@ module.exports = {
     BACKSPACE   : 8,
     TAB         : 9,
     ENTER       : 13,
+    CAPSLOCK    : 20,
     ESC         : 27,
     
     SPACE       : 32,
