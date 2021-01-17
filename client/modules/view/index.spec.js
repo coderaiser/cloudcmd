@@ -80,3 +80,42 @@ test('cloudcmd: client: view: html', (t) => {
     t.end();
 });
 
+test('cloudcmd: client: view: createIframe', (t) => {
+    const addEventListener = stub();
+    const el = {
+        addEventListener,
+    };
+    const createElement = stub().returns(el);
+    
+    mockRequire('@cloudcmd/create-element', createElement);
+    const {_createIframe} = reRequire('.');
+    
+    const src = '/hello.html';
+    _createIframe(src);
+    
+    const expected = {
+        src,
+        height: '100%',
+        width: '100%',
+    };
+    
+    t.calledWith(createElement, ['iframe', expected]);
+    t.end();
+});
+
+test('cloudcmd: client: view: createIframe: returns', (t) => {
+    const addEventListener = stub();
+    const el = {
+        addEventListener,
+    };
+    const createElement = stub().returns(el);
+    
+    mockRequire('@cloudcmd/create-element', createElement);
+    const {_createIframe} = reRequire('.');
+    
+    const src = '/hello.html';
+    const result = _createIframe(src);
+    
+    t.equal(result, el);
+    t.end();
+});

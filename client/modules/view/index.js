@@ -158,6 +158,8 @@ function createIframe(src) {
     element.addEventListener('load', () => {
         element.contentWindow.addEventListener('keydown', listener);
     });
+    
+    return element;
 }
 
 module.exports._viewHtml = viewHtml;
