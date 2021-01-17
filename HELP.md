@@ -156,6 +156,7 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `F1`                  | help
 | `F2`                  | show `user menu`
 | `F3`                  | view, change directory
+| `Shift + F3`          | view raw file, change directory
 | `F4`                  | edit
 | `Shift + F4`          | edit in "vim" mode
 | `F5`                  | copy

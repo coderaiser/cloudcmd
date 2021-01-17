@@ -95,7 +95,7 @@ module.exports.init = async () => {
     events.forEach(addEvent(Overlay, onOverlayClick));
 };
 
-async function show(data, options) {
+async function show(data, options = {}) {
     const prefixURL = CloudCmd.prefixURL + FS;
     
     if (Loading)
@@ -124,7 +124,7 @@ async function show(data, options) {
     Images.show.load();
     
     const path = prefixURL + Info.path;
-    const type = getType(path);
+    const type = options.raw ? '' : getType(path);
     
     switch(type) {
     default:

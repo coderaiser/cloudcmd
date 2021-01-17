@@ -198,7 +198,9 @@ async function switchKey(event) {
                 path,
             });
         else if (shift)
-            CloudCmd.Markdown.show(path);
+            CloudCmd.View.show(null, {
+                raw: true,
+            });
         else if (ctrlMeta)
             CloudCmd.sortPanel('name');
         else
