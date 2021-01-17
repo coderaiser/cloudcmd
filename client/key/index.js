@@ -17,9 +17,14 @@ const {createBinder} = require('./binder');
 
 const fullstore = require('fullstore');
 const Chars = fullstore();
-const isVimEnabled = fullstore(false);
 
-const toggleVim = (keyCode) => keyCode === KEY.ESC && isVimEnabled(!isVimEnabled());
+const toggleVim = (keyCode) => {
+    const {_config, config} = CloudCmd;
+    
+    if (keyCode === KEY.ESC) {
+        _config('vim', !config('vim'));
+    }
+}
 
 Chars([]);
 
@@ -72,7 +77,7 @@ async function listener(event) {
         return;
     
     toggleVim(keyCode);
-    const isVim = isVimEnabled() || CloudCmd.config('vim');
+    const isVim = CloudCmd.config('vim');
     
     if (!isVim && !isNumpad && !alt && !ctrl && !meta && (isBetween || symbol))
         return setCurrentByChar(char, Chars);
