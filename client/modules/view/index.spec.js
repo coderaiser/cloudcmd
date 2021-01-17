@@ -17,7 +17,7 @@ test('cloudcmd: client: view: initConfig', (t) => {
     global.CloudCmd = {};
     global.DOM = {};
     
-    const {_initConfig} = reRequire('./view');
+    const {_initConfig} = reRequire('.');
     
     const afterClose = () => ++i;
     const options = {
@@ -43,7 +43,7 @@ test('cloudcmd: client: view: initConfig: no options', (t) => {
     global.CloudCmd = {};
     global.DOM = {};
     
-    const {_initConfig} = reRequire('./view');
+    const {_initConfig} = reRequire('.');
     const config = _initConfig();
     
     global.CloudCmd = CloudCmd;
@@ -68,7 +68,7 @@ test('cloudcmd: client: view: html', (t) => {
         _viewHtml,
         _createIframe,
         _Config,
-    } = reRequire('./view');
+    } = reRequire('.');
     
     const src = '/hello.html';
     _viewHtml(src);

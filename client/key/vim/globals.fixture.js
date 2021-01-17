@@ -1,5 +1,7 @@
 'use strict';
 
+const noop = () => {};
+
 module.exports.getDOM = () => {
     const prompt = Promise.resolve.bind(Promise);
     const CurrentInfo = {
@@ -7,7 +9,6 @@ module.exports.getDOM = () => {
         files: [],
     };
     
-    const noop = () => {};
     const Buffer = {
         copy: noop,
         paste: noop,
@@ -38,6 +39,9 @@ module.exports.getCloudCmd = () => {
         Operation:  {
             show,
         },
+        
+        config: noop,
+        _config: noop,
     };
 };
 

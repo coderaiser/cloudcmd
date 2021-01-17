@@ -158,7 +158,6 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `F3`                  | view, change directory
 | `Shift + F3`          | view raw file, change directory
 | `F4`                  | edit
-| `Shift + F4`          | edit in "vim" mode
 | `F5`                  | copy
 | `Alt` + `F5`          | pack
 | `F6`                  | rename/move
@@ -182,7 +181,6 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `Ctrl + D`            | clear local storage
 | `Ctrl + A`            | select all files in a panel
 | `Ctrl + M`            | [rename selected files](https://github.com/coderaiser/cloudcmd/releases/tag/v12.1.0) in editor
-| `Shift + Ctrl + M`    | rename selected files in vim mode of editor
 | `Ctrl + U`            | swap panels
 | `Ctrl + F3`           | sort by name
 | `Ctrl + F5`           | sort by date
@@ -201,7 +199,7 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `Insert`              | select current file (and move to next)
 | `F9`                  | context menu
 | `~`                   | console
-| `Esc`                 | toggle vim hot keys
+| `Esc`                 | toggle vim hotkeys (`file manager`, `editor`)
 
 ### Vim
 

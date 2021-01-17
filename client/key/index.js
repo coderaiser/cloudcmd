@@ -1,10 +1,9 @@
-/* global CloudCmd, DOM */
-
 'use strict';
+
+/* global CloudCmd, DOM */
 
 const Info = DOM.CurrentInfo;
 
-const exec = require('execon');
 const clipboard = require('@cloudcmd/clipboard');
 
 const Buffer = require('../dom/buffer');
@@ -130,7 +129,11 @@ async function switchKey(event) {
         isDir,
     } = Info;
     
-    const {Operation, loadDir} = CloudCmd;
+    const {
+        Operation,
+        loadDir,
+        config,
+    } = CloudCmd;
     const {keyCode} = event;
     
     const alt = event.altKey;
@@ -209,7 +212,7 @@ async function switchKey(event) {
         break;
     
     case KEY.F4:
-        if (shift)
+        if (config('vim'))
             CloudCmd.EditFileVim.show();
         else
             CloudCmd.EditFile.show();
@@ -429,7 +432,7 @@ async function switchKey(event) {
     
     case KEY.M:
         if (ctrlMeta) {
-            if (shift)
+            if (config('vim'))
                 CloudCmd.EditNamesVim.show();
             else
                 CloudCmd.EditNames.show();
