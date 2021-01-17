@@ -28,12 +28,12 @@ jobs:
             - name: Available platforms
               run: echo ${{ steps.buildx.outputs.platforms }}
 
-            - name: Run Buildx
-              run: |
-                  docker buildx build \
-                    --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 \
-                    --output "type=image,push=false" \
-                    --file ./docker/Dockerfile
+            # - name: Run Buildx
+            #   run: |
+            #       docker buildx build \
+            #         --platform="linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64" \
+            #         --output="type=image,push=false" \
+            #         --file=docker/Dockerfile .
 
             - name: Build and push
               uses: docker/build-push-action@v2
