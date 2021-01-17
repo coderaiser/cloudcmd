@@ -225,7 +225,7 @@ function CmdProto() {
      * get size
      * @currentFile
      */
-    this.loadCurrentSize = callbackify(async (currentFile) => {
+    this.loadCurrentSize = async (currentFile) => {
         const current = currentFile || DOM.getCurrentFile();
         const query = '?size';
         const link = DOM.getCurrentPath(current);
@@ -241,7 +241,7 @@ function CmdProto() {
         Images.hide();
         
         return current;
-    });
+    };
     
     /**
      * load hash

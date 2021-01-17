@@ -281,18 +281,18 @@ async function switchKey(event) {
         break;
     
     case KEY.SPACE:
+        event.preventDefault();
+        
         if (!isDir || name === '..')
             isSelected = true;
         else
             isSelected = DOM.isSelected(current);
         
-        exec.if(isSelected, () => {
-            DOM.toggleSelectedFile(current);
-        }, (callback) => {
-            DOM.loadCurrentSize(current, callback);
-        });
+        if (!isSelected)
+            await DOM.loadCurrentSize(current);
         
-        event.preventDefault();
+        DOM.toggleSelectedFile(current);
+        
         break;
     
     case KEY.U:
