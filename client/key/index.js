@@ -24,7 +24,7 @@ const toggleVim = (keyCode) => {
     if (keyCode === KEY.ESC) {
         _config('vim', !config('vim'));
     }
-}
+};
 
 Chars([]);
 

@@ -2,30 +2,34 @@
 
 /* global CloudCmd, DOM */
 
-require('../../css/view.css');
+require('../../../css/view.css');
 
 const rendy = require('rendy');
 const currify = require('currify');
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
+const load = require('load.js');
 
 const modal = require('@cloudcmd/modal');
 const createElement = require('@cloudcmd/create-element');
 
-const {time} = require('../../common/util');
-const {FS} = require('../../common/cloudfunc');
+const {time} = require('../../../common/util');
+const {FS} = require('../../../common/cloudfunc');
+const {
+    isImage,
+    isAudio,
+    getType,
+} = require('./types');
 
-const Files = require('../dom/files');
-const Events = require('../dom/events');
-const load = require('load.js');
-const Images = require('../dom/images');
+const Files = require('../../dom/files');
+const Events = require('../../dom/events');
+const Images = require('../../dom/images');
 
-const {encode} = require('../../common/entity');
+const {encode} = require('../../../common/entity');
 
 const {assign} = Object;
 const {isArray} = Array;
 
-const testRegExp = currify((name, reg) => reg.test(name));
 const lifo = currify((fn, el, cb, name) => fn(name, el, cb));
 const series = wraptile((...a) => {
     for (const f of a)
@@ -36,7 +40,6 @@ const isFn = (a) => typeof a === 'function';
 
 const noop = () => {};
 const addEvent = lifo(Events.add);
-const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
 const loadCSS = load.css;
 
@@ -126,6 +129,9 @@ async function show(data, options) {
     switch(type) {
     default:
         return viewFile();
+    
+    case 'markdown':
+        return await CloudCmd.Markdown.show(Info.path);
     
     case 'html':
         return viewHtml(path);
@@ -269,51 +275,6 @@ function viewImage(prefixURL) {
     };
     
     modal.open(titles, config);
-}
-
-function isImage(name) {
-    const images = [
-        'jp(e|g|eg)',
-        'gif',
-        'png',
-        'bmp',
-        'webp',
-        'svg',
-        'ico',
-    ];
-    
-    return images
-        .map(getRegExp)
-        .some(testRegExp(name));
-}
-
-function isMedia(name) {
-    return isAudio(name) || isVideo(name);
-}
-
-function isAudio(name) {
-    return /\.(mp3|ogg|m4a)$/i.test(name);
-}
-
-function isVideo(name) {
-    return /\.(mp4|avi|webm)$/i.test(name);
-}
-
-const isPDF = (name) => /\.pdf$/i.test(name);
-const isHTML = (name) => /\.html/.test(name);
-
-function getType(name) {
-    if (isPDF(name))
-        return 'pdf';
-    
-    if (isImage(name))
-        return 'image';
-    
-    if (isMedia(name))
-        return 'media';
-    
-    if (isHTML(name))
-        return 'html';
 }
 
 async function getMediaElement(src) {

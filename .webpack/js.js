@@ -80,7 +80,7 @@ module.exports = {
         [modules + '/edit-names']: `${dirModules}/edit-names.js`,
         [modules + '/edit-names-vim']: `${dirModules}/edit-names-vim.js`,
         [modules + '/menu']: `${dirModules}/menu.js`,
-        [modules + '/view']: `${dirModules}/view.js`,
+        [modules + '/view']: `${dirModules}/view/index.js`,
         [modules + '/help']: `${dirModules}/help.js`,
         [modules + '/markdown']: `${dirModules}/markdown.js`,
         [modules + '/config']: `${dirModules}/config/index.js`,
