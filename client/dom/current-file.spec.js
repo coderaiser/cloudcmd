@@ -54,6 +54,32 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     t.end();
 });
 
+
+test('current-file: getCurrentName', (t) => {
+    const {
+        DOM,
+        CloudCmd,
+    } = global;
+    
+    global.DOM = getDOM();
+    global.CloudCmd = getCloudCmd();
+    
+    const current = create();
+
+    let filename = "hello world.txt"
+    
+    // Should have basic symmetry, and be resilient to changes in title
+    currentFile.setCurrentName(filename, current);
+    current.setAttribute("title", "not_at_all_correct");
+    t.equal(currentFile.getCurrentName(current), filename);
+
+    global.DOM = DOM;
+    global.CloudCmd = CloudCmd;
+    
+    t.end();
+});
+
+
 test('current-file: emit', (t) => {
     const {
         DOM,

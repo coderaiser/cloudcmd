@@ -41,7 +41,7 @@ module.exports.setCurrentName = (name, current) => {
     link.href = dir + encoded;
     link.innerHTML = encoded;
     
-    current.setAttribute('data-name', 'js-file-' + btoa(encodeURI(name)));
+    current.setAttribute('data-name', this.createNameAttribute(name));
     CloudCmd.emit('current-file', current);
     
     return link;
@@ -58,13 +58,30 @@ module.exports.getCurrentName = (currentFile) => {
     if (!current)
         return '';
     
-    const link = DOM.getCurrentLink(current);
+    const name_attr = current.getAttribute("data-name");
     
-    if (!link)
+    if (!name_attr)
         return '';
     
-    return decode(link.title)
-        .replace(NBSP_REG, SPACE);
+    return this.parseNameAttribute(name_attr);
+};
+
+/** 
+ * Generate a `data-name` attribute for the given filename
+ * @param name The string name to encode
+ */
+module.exports.createNameAttribute = (name) => {
+    let encoded = btoa(encodeURI(name));
+    return `js-file-${encoded}`;
+};
+
+/**
+ * Parse a `data-name` attribute string back into the original filename
+ * @param attribute The string we wish to decode
+ */
+module.exports.parseNameAttribute = (attribute) => {
+    attribute = attribute.replace("js-file-", "");
+    return decodeURI(atob(attribute));
 };
 
 /**
