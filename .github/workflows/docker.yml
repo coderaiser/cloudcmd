@@ -9,6 +9,23 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v2
 
+            - name: Use Node.js 14.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 14.x
+
+            - name: NPM Install
+              run: |
+                  npm install
+
+            - name: NPM Lint
+              run: |
+                  npm run lint
+
+            - name: NPM Build
+              run: |
+                  npm run build
+
             - name: Set up QEMU
               uses: docker/setup-qemu-action@v1
 
@@ -31,9 +48,10 @@ jobs:
             # - name: Run Buildx
             #   run: |
             #       docker buildx build \
-            #         --platform="linux/amd64,linux/arm/v7,linux/arm64" \
-            #         --output="type=image,push=false" \
-            #         --file=docker/Dockerfile .
+            #         --platform linux/amd64,linux/arm/v7,linux/arm64 \
+            #         --output "type=image,push=true" \
+            #         --file docker/Dockerfile \
+            #         -t coderaiser/cloudcmd:latest .
 
             - name: Build and push
               uses: docker/build-push-action@v2
