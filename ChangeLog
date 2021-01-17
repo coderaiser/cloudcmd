@@ -1,3 +1,13 @@
+2021.01.17, v15.3.1
+
+fix:
+- (view) view html, pdf
+
+feature:
+- (package) dword v13.0.0
+- (modules) socket.io v3.1.0
+
+
 2021.01.17, v15.3.0
 
 feature:
