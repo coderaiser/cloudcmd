@@ -1,3 +1,10 @@
+2021.01.18, v15.3.3
+
+fix:
+- (dom) bug in Firefox with Imagus extension enabled: change getCurrentName to read from `data-name` instead of `title` (#313)
+- (client) dom: goToDirectory
+
+
 2021.01.18, v15.3.2
 
 fix:
