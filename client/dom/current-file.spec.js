@@ -54,6 +54,16 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     t.end();
 });
 
+test('current-file: getCurrentName', (t) => {
+    const current = create();
+    current.getAttribute.returns('js-file-Ymlu');
+    
+    const result = currentFile.getCurrentName(current);
+    
+    t.equal(result, 'bin');
+    t.end();
+});
+
 test('current-file: emit', (t) => {
     const {
         DOM,

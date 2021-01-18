@@ -1,9 +1,14 @@
+/**
+ * Parse a `data-name` attribute string back into the original filename
+ * @param attribute The string we wish to decode
+ */
+
 'use strict';
 
 /* global DOM */
 /* global CloudCmd */
 
-const btoa = require('../../common/btoa');
+const {atob, btoa} = require('../../common/base64');
 const createElement = require('@cloudcmd/create-element');
 
 const {
@@ -41,7 +46,7 @@ module.exports.setCurrentName = (name, current) => {
     link.href = dir + encoded;
     link.innerHTML = encoded;
     
-    current.setAttribute('data-name', 'js-file-' + btoa(encodeURI(name)));
+    current.setAttribute('data-name', createNameAttribute(name));
     CloudCmd.emit('current-file', current);
     
     return link;
@@ -58,13 +63,25 @@ module.exports.getCurrentName = (currentFile) => {
     if (!current)
         return '';
     
-    const link = DOM.getCurrentLink(current);
-    
-    if (!link)
-        return '';
-    
-    return decode(link.title)
-        .replace(NBSP_REG, SPACE);
+    return parseNameAttribute(current.getAttribute('data-name'));
+};
+
+/**
+ * Generate a `data-name` attribute for the given filename
+ * @param name The string name to encode
+ */
+const createNameAttribute = (name) => {
+    const encoded = btoa(encodeURI(name));
+    return `js-file-${encoded}`;
+};
+
+/**
+ * Parse a `data-name` attribute string back into the original filename
+ * @param attribute The string we wish to decode
+ */
+const parseNameAttribute = (attribute) => {
+    attribute = attribute.replace('js-file-', '');
+    return decodeURI(atob(attribute));
 };
 
 /**

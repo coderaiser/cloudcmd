@@ -188,6 +188,7 @@
     "auto-globals": "^2.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^3.0.0",
+    "cheerio": "^1.0.0-rc.5",
     "clean-css-loader": "^2.0.0",
     "codegen.macro": "^4.0.0",
     "coveralls": "^3.0.0",
