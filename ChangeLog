@@ -1,3 +1,9 @@
+2021.01.18, v15.3.2
+
+fix:
+- (client) dom: goToDirectory
+
+
 2021.01.17, v15.3.1
 
 fix:
