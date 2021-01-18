@@ -49,9 +49,8 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: |
-            team0/cloudcmd:latest
-            team0/cloudcmd:${{ steps.npm-build.outputs.version }}
-          # TODO: change me
+            coderaiser/cloudcmd:latest
+            coderaiser/cloudcmd:${{ steps.npm-build.outputs.version }}
 
       - name: Build and push alpine-image
         uses: docker/build-push-action@v2
@@ -61,6 +60,5 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: |
-            team0/cloudcmd-alpine:latest
-            team0/cloudcmd-alpine:${{ steps.npm-build.outputs.version }}
-          # TODO: change me
+            coderaiser/cloudcmd-alpine:latest
+            coderaiser/cloudcmd-alpine:${{ steps.npm-build.outputs.version }}
