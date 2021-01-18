@@ -9,8 +9,6 @@ const testEnv = {
     THREAD_IT_COUNT: 0,
 };
 
-const dockerName = 'coderaiser/cloudcmd';
-
 export default {
     'start': () => 'node bin/cloudcmd.mjs',
     'start:dev': async () => await run('start', null, {
@@ -31,91 +29,6 @@ export default {
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
     'wisdom:type': () => 'bin/release.mjs',
-    'docker:pull': () => 'docker pull node',
-    'docker:pull:alpine': () => 'docker pull mhart/alpine-node',
-    'docker:pull:arm32': () => 'docker pull arm32v7/node:slim',
-    'docker:pull:arm64': () => 'docker pull arm64v8/node:slim',
-    'docker:push': () => dockerPush('x64', version),
-    'docker:push:latest': () => dockerPush('x64'),
-    'docker:push:alpine': () => dockerPush('alpine', version),
-    'docker:push:alpine:latest': () => dockerPush('alpine'),
-    'docker:push:arm32': () => dockerPush('arm32', version),
-    'docker:push:arm32:latest': () => dockerPush('arm32'),
-    'docker:push:arm64': () => dockerPush('arm64', version),
-    'docker:push:arm64:latest': () => dockerPush('arm64'),
-    'docker:build': () => dockerBuild('docker/Dockerfile', 'x64', version),
-    'docker:build:alpine': () => dockerBuild('docker/Dockerfile.alpine', 'alpine', version),
-    'docker:build:arm32': () => dockerBuild('docker/arm/Dockerfile.arm32v7', 'arm32', version),
-    'docker:build:arm64': () => dockerBuild('docker/arm/Dockerfile.arm64v8', 'arm64', version),
-    
-    'docker:manifest:create': () => {
-        const images = [
-            `${dockerName}:latest`,
-            `${dockerName}:latest-x64`,
-            // `${dockerName}:latest-arm32`,
-            // `${dockerName}:latest-arm64`,
-        ].join(' ');
-        
-        return `docker manifest create ${images}`;
-    },
-    
-    'docker:manifest:push': () => `docker manifest push ${dockerName}:latest`,
-    'docker': () => run(['docker:x64', 'docker:alpine', 'docker:manifest:*']),
-    'docker-ci': () => run(['build', 'docker-login', 'docker']),
-    'docker-login': () => 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD',
-    
-    'docker:x64': () => run([
-        'docker:pull',
-        'docker:build',
-        'docker:tag',
-        'docker:push',
-        'docker:push:latest',
-    ]),
-    
-    'docker:alpine': () => run([
-        'docker:pull:alpine',
-        'docker:build:alpine',
-        'docker:tag:alpine',
-        'docker:push:alpine',
-        'docker:push:alpine:latest',
-    ]),
-    
-    /*
-    'docker:arm32': () => run([
-        'docker:pull:arm32',
-        'docker:build:arm32',
-        'docker:tag:arm32',
-        'docker:push:arm32',
-        'docker:push:arm32:latest',
-    ]),
-    
-    'docker:arm64': () => run([
-        'docker:pull:arm64',
-        'docker:build:arm64',
-        'docker:tag:arm64',
-        'docker:push:arm64',
-        'docker:push:arm64:latest',
-    ]),
-    */
-    
-    'docker:manifest': () => run([
-        'docker:manifest:create',
-        'docker:manifest:push',
-    ]),
-    
-    'docker:tag': () => dockerTag('x64', version),
-    'docker:tag:alpine': () => dockerTag('alpine', version),
-    'docker:tag:arm32': () => dockerTag('arm32', version),
-    'docker:tag:arm64': () => dockerTag('arm64', version),
-    'docker:rm:version': () => dockerRmi('x64', version),
-    'docker:rm:latest': () => dockerRmi('x64'),
-    'docker:rm:alpine': () => dockerRmi('alpine', version),
-    'docker:rm:latest-alpine': () => dockerRmi('alpine'),
-    'docker:rm:arm32': () => dockerRmi('arm32', version),
-    'docker:rm:latest-arm32': () => dockerRmi('arm32'),
-    'docker:rm:arm64': () => dockerRmi('arm64', version),
-    'docker:rm:latest-arm64': () => dockerRmi('arm64'),
-    'docker:rm-old': async () => `${await parallel('docker:rm:*')} || true`,
     'coverage': async () => [testEnv, `nyc ${await cutEnv('test')}`],
     'report': () => 'nyc report --reporter=text-lcov | coveralls',
     '6to5': () => 'webpack --progress',
@@ -137,19 +50,3 @@ export default {
     'build:client:dev': () => run('6to5:client:dev'),
     'heroku-postbuild': () => run('6to5:client'),
 };
-
-function dockerPush(type, version = 'latest') {
-    return `docker push coderaiser/cloudcmd:${version}-${type}`;
-}
-
-function dockerBuild(file, type, version) {
-    return `docker build -f ${file} -t coderaiser/cloudcmd:${version}-${type} .`;
-}
-
-function dockerTag(type, version) {
-    return `docker tag coderaiser/cloudcmd:${version}-${type} coderaiser/cloudcmd:latest-${type}`;
-}
-
-function dockerRmi(type, version = 'latest') {
-    return `docker rmi -f coderaiser/cloudcmd:${version}-${type}`;
-}
