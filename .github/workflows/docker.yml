@@ -50,7 +50,7 @@ jobs:
           push: true
           tags: |
             team0/cloudcmd:latest
-            team0/cloudcmd:"${{ steps.npm-build.outputs.version }}"
+            team0/cloudcmd:${{ steps.npm-build.outputs.version }}
           # TODO: change me
 
       - name: Build and push alpine-image
@@ -62,5 +62,5 @@ jobs:
           push: true
           tags: |
             team0/cloudcmd-alpine:latest
-            team0/cloudcmd-alpine:"${{ steps.npm-build.outputs.version }}"
+            team0/cloudcmd-alpine:${{ steps.npm-build.outputs.version }}
           # TODO: change me
