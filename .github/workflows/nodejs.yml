@@ -4,34 +4,32 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    
-    - name: install
-      run: |
-        npm install
-    
-    - name: lint
-      run: |
-        npm run lint
-    
-    - name: build
-      run: |
-        npm run build
-        npm test
-    
-    - name: test
-      run: |
-        npm test
+      - uses: actions/checkout@master
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
 
-    - name: coverage
-      run: |
-        npm run coverage
+      - name: install
+        run: |
+          npm install
 
+      - name: lint
+        run: |
+          npm run lint
+
+      - name: build
+        run: |
+          npm run build
+          npm test
+
+      - name: test
+        run: |
+          npm test
+
+      - name: coverage
+        run: |
+          npm run coverage
