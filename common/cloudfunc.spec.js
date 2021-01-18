@@ -5,13 +5,49 @@ const {readFileSync} = require('fs');
 
 const test = require('supertape');
 const montag = require('montag');
+const cheerio = require('cheerio');
 
-const {_getSize, getPathLink} = require('./cloudfunc');
+const {
+    _getSize,
+    getPathLink,
+    buildFromJSON,
+} = require('./cloudfunc');
 
 const templatePath = join(__dirname, '../tmpl/fs');
 const template = {
     pathLink: readFileSync(`${templatePath}/pathLink.hbs`, 'utf8'),
+    path: readFileSync(`${templatePath}/path.hbs`, 'utf8'),
+    file: readFileSync(`${templatePath}/file.hbs`, 'utf8'),
+    link: readFileSync(`${templatePath}/link.hbs`, 'utf8'),
 };
+
+test('cloudfunc: buildFromJSON: ..', (t) => {
+    const data = {
+        path: '/media/',
+        files: [{
+            date: '30.08.2016',
+            mode: 'rwx rwx rwx',
+            name: 'floppy',
+            owner: 'root',
+            size: '7b',
+            type: 'directory-link',
+        }],
+    };
+    
+    const html = buildFromJSON({
+        prefix: '',
+        template,
+        data,
+    });
+    
+    const $ = cheerio.load(html);
+    const el = $('[data-name="js-file-Li4="]');
+    const result = el.find('[data-name="js-name"]').text();
+    const expected = '..';
+    
+    t.equal(result, expected);
+    t.end();
+});
 
 test('cloudfunc: getPathLink: /', (t) => {
     const {pathLink} = template;

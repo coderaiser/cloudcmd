@@ -4,7 +4,7 @@ const rendy = require('rendy');
 const currify = require('currify');
 const store = require('fullstore');
 const {encode} = require('./entity');
-const btoa = require('./btoa');
+const {btoa} = require('./base64');
 
 const getHeaderField = currify(_getHeaderField);
 
@@ -177,7 +177,7 @@ module.exports.buildFromJSON = (params) => {
             name: '..',
         });
         
-        const dataName = 'data-name="js-file-.." ';
+        const dataName = getDataName('..');
         const attribute = 'draggable="true" ' + dataName;
         
         /* Сохраняем путь к каталогу верхнего уровня*/
