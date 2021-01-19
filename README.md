@@ -120,7 +120,7 @@ server.listen(port);
 
 ## Docker
 
-The docker images are provided for mutliple architectures and types. The following list shows all existing images:
+The docker images are provided for multiple architectures and types. The following list shows all existing images:
 | Architecture   | Type         |
 |----------------|--------------|
 | amd64          | linux        |
