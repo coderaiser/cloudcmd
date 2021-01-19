@@ -3,7 +3,7 @@ name: Docker CI
 on:
   push:
     tags:
-    - '*'
+      - "*"
 
 jobs:
   buildx:
@@ -63,5 +63,5 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: |
-            coderaiser/cloudcmd-alpine:latest
-            coderaiser/cloudcmd-alpine:${{ steps.npm-build.outputs.version }}
+            coderaiser/cloudcmd:latest-alpine
+            coderaiser/cloudcmd:${{ steps.npm-build.outputs.version }}-alpine
