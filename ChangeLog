@@ -1,3 +1,16 @@
+2021.01.19, v15.3.4
+
+fix:
+- (docker) images: change alpine images to be part of master image (#316)
+- (dom) bug in Firefox with Imagus extension enabled: change getCurrentName to read from `data-name` instead of `title` (#313)
+
+feature:
+- (package) deepword v8.0.0
+- (package) console-io v13.0.0
+- (package) edward v13.0.0
+- (docker) add support of multi-arch builds (#291)
+
+
 2021.01.18, v15.3.3
 
 fix:
