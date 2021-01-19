@@ -1,3 +1,9 @@
+2021.01.19, v15.4.0
+
+feature:
+- (cloudcmd) add abilit to parse markdown inside zip archives
+
+
 2021.01.19, v15.3.4
 
 fix:
