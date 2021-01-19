@@ -1,16 +1,17 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
-const test = require('supertape');
+const {join} = require('path');
 const {promisify} = require('util');
 
 const tryToCatch = require('try-to-catch');
+const serveOnce = require('serve-once');
+const test = require('supertape');
 
 const markdown = require('.');
 
 const _markdown = promisify(markdown);
-const fixtureDir = path.join(__dirname, 'fixture');
+const fixtureDir = join(__dirname, 'fixture');
 const cloudcmd = require('../..');
 const config = {
     auth: false,
@@ -45,8 +46,8 @@ test('cloudcmd: markdown: relative', async (t) => {
 });
 
 test('cloudcmd: markdown: put', async (t) => {
-    const md = path.join(fixtureDir, 'markdown.md');
-    const html = path.join(fixtureDir, 'markdown.html');
+    const md = join(fixtureDir, 'markdown.md');
+    const html = join(fixtureDir, 'markdown.html');
     
     const mdStream = fs.createReadStream(md);
     const htmlFile = fs.readFileSync(html, 'utf8');
@@ -60,7 +61,7 @@ test('cloudcmd: markdown: put', async (t) => {
 });
 
 test('cloudcmd: markdown: put: error', async (t) => {
-    const md = path.join(fixtureDir, 'markdown-not-exist.md');
+    const md = join(fixtureDir, 'markdown-not-exist.md');
     
     const name = 'hello';
     const mdStream = fs.createReadStream(md);
@@ -88,3 +89,38 @@ test('cloudcmd: markdown: no request', async (t) => {
     t.end();
 });
 
+test('cloudcmd: markdown: zip', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    const fixtureDir = join(__dirname, 'fixture');
+    const config = {
+        auth: false,
+        root: fixtureDir,
+    };
+    
+    const {request} = serveOnce(cloudcmd, {
+        config,
+        configManager,
+    });
+    const {body} = await request.get('/api/v1/markdown/markdown.md');
+    
+    t.equal(body, '<h1>hello</h1>\n');
+    t.end();
+});
+
+test('cloudcmd: markdown: zip', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    const fixtureDir = join(__dirname, 'fixture');
+    const config = {
+        auth: false,
+        root: fixtureDir,
+    };
+    
+    const {request} = serveOnce(cloudcmd, {
+        config,
+        configManager,
+    });
+    const {body} = await request.get('/api/v1/markdown/markdown.zip/markdown.md');
+    
+    t.equal(body, '<h1>hello</h1>\n');
+    t.end();
+});

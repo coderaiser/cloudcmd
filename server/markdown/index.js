@@ -1,12 +1,12 @@
 'use strict';
 
-const {readFile} = require('fs/promises');
 const {join} = require('path');
 const {callbackify} = require('util');
 
 const pullout = require('pullout');
 const ponse = require('ponse');
 const threadIt = require('thread-it');
+const {read} = require('redzip');
 
 const parse = threadIt(join(__dirname, 'worker'));
 
@@ -45,7 +45,8 @@ function parseName(query, name, rootDir) {
 async function onGET(request, name, root) {
     const query = ponse.getQuery(request);
     const fileName = parseName(query, name, root);
-    const data = await readFile(fileName, 'utf8');
+    const stream = await read(fileName);
+    const data = await pullout(stream);
     
     return parse(data);
 }
