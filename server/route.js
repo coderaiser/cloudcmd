@@ -5,7 +5,7 @@ const DIR_COMMON = '../common/';
 
 const {extname} = require('path');
 
-const {read} = require('redzip');
+const {read} = require('win32');
 const ponse = require('ponse');
 const rendy = require('rendy');
 const format = require('format-io');

@@ -99,7 +99,6 @@
     "express": "^4.13.0",
     "files-io": "^3.0.0",
     "find-up": "^5.0.0",
-    "flop": "^9.0.0",
     "for-each-key": "^2.0.0",
     "format-io": "^2.0.0",
     "fullstore": "^3.0.0",
@@ -135,6 +134,7 @@
     "try-catch": "^3.0.0",
     "try-to-catch": "^3.0.0",
     "tryrequire": "^3.0.0",
+    "win32": "^5.0.1",
     "wraptile": "^3.0.0",
     "writejson": "^3.0.0"
   },

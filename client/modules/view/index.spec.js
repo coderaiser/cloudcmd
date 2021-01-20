@@ -66,7 +66,6 @@ test('cloudcmd: client: view: html', (t) => {
     
     const {
         _viewHtml,
-        _createIframe,
         _Config,
     } = reRequire('.');
     
@@ -76,7 +75,10 @@ test('cloudcmd: client: view: html', (t) => {
     global.CloudCmd = CloudCmd;
     global.DOM = DOM;
     
-    t.calledWith(open, [_createIframe(src), _Config]);
+    const [first] = open.args;
+    const [arg] = first;
+    
+    t.deepEqual(first, [arg, _Config]);
     t.end();
 });
 

@@ -231,7 +231,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
         files,
     });
     
-    mockRequire('redzip', {
+    mockRequire('win32', {
         read,
     });
     
