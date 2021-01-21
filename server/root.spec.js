@@ -10,10 +10,10 @@ const pathRoot = './root';
 
 test('cloudcmd: root: mellow', (t) => {
     const config = stub().returns('');
-    const pathToWin = stub();
+    const webToWin = stub();
     
     const mellow = {
-        pathToWin,
+        webToWin,
     };
     
     mockRequire('mellow', mellow);
@@ -29,7 +29,7 @@ test('cloudcmd: root: mellow', (t) => {
     mockRequire.stopAll(pathConfig);
     reRequire(pathRoot);
     
-    t.calledWith(pathToWin, [dir, dirRoot], 'should call mellow');
+    t.calledWith(webToWin, [dir, dirRoot], 'should call mellow');
     t.end();
 });
 
