@@ -6,10 +6,11 @@ const defaultPreset = require('cssnano-preset-default');
 
 module.exports = defaultPreset({
     svgo: {
-        plugins: [
-            {convertPathData: false},
-            {convertShapeToPath: false},
-        ],
+        plugins: [{
+            convertPathData: false,
+        }, {
+            convertShapeToPath: false,
+        }],
     },
 });
 
