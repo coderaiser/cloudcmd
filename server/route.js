@@ -10,6 +10,7 @@ const ponse = require('ponse');
 const rendy = require('rendy');
 const format = require('format-io');
 const currify = require('currify');
+const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
 const once = require('once');
 const pipe = require('pipe-io');
@@ -37,14 +38,13 @@ const {FS} = CloudFunc;
 const Columns = require(`${DIR_SERVER}/columns`);
 const Template = require(`${DIR_SERVER}/template`);
 
-const tokenize = (fn, a) => (b) => fn(a, b);
 const getReadDir = (config) => {
     if (!config('dropbox'))
         return read;
     
     const {readDir} = onceRequire('@cloudcmd/dropbox');
     
-    return tokenize(readDir, config('dropboxToken'));
+    return wraptile(readDir, config('dropboxToken'));
 };
 
 /**
