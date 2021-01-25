@@ -16,7 +16,7 @@ test('cloudcmd: rest: fs: path', async (t) => {
     
     const {path} = body;
     
-    t.equal('/', path, 'should dir path be "/"');
+    t.equal(path, '/', 'should dir path be "/"');
     t.end();
 });
 
