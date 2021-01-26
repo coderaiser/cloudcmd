@@ -1,7 +1,4 @@
 {
-    "rules": {
-        "apply-optional-chaining": "on"
-    },
     "ignore": [
         "fixture*",
         "app.json",
