@@ -51,7 +51,7 @@ function getName() {
     return name;
 }
 
-module.exports.show = (options) => {
+module.exports.show = async (options) => {
     if (isLoading())
         return;
     
@@ -69,23 +69,24 @@ module.exports.show = (options) => {
         .getEditor()
         .setOption('keyMap', 'default');
     
-    Info.getData((error, data) => {
-        const {path} = Info;
-        const name = getName();
-        
-        if (error)
-            return Images.hide();
-        
-        setMsgChanged(name);
-        
-        CloudCmd.Edit
-            .getEditor()
-            .setValueFirst(path, data)
-            .setModeForPath(name)
-            .enableKey();
-        
-        CloudCmd.Edit.show(optionsEdit);
-    });
+    const [error, data] = await Info.getData();
+    
+    if (error) {
+        Images.hide();
+        return CloudCmd.Edit;
+    }
+    
+    const {path} = Info;
+    const name = getName();
+    setMsgChanged(name);
+    
+    CloudCmd.Edit
+        .getEditor()
+        .setValueFirst(path, data)
+        .setModeForPath(name)
+        .enableKey();
+    
+    CloudCmd.Edit.show(optionsEdit);
     
     return CloudCmd.Edit;
 };

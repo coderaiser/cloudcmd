@@ -20,11 +20,13 @@ module.exports.init = async () => {
     await CloudCmd.EditFile();
 };
 
-module.exports.show = () => {
+module.exports.show = async () => {
     Events.addKey(listener);
     
-    CloudCmd.EditFile
-        .show(ConfigView)
+    const editFile = await CloudCmd.EditFile
+        .show(ConfigView);
+    
+    editFile
         .getEditor()
         .setKeyMap('vim');
 };

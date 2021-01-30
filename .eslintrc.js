@@ -21,6 +21,11 @@ module.exports = {
             'plugin:node/recommended',
         ],
     }, {
+        files: ['client/dom/index.js'],
+        rules: {
+            'no-multi-spaces': 'off',
+        },
+    }, {
         files: ['bin/cloudcmd.js'],
         rules: {
             'no-console': 'off',

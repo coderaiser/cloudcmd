@@ -137,14 +137,16 @@ function getMenuData(isAuth) {
 
 function getFileMenuData() {
     const isAuth = CloudCmd.config('auth');
-    const show = wrap((name) => {
-        CloudCmd[name].show();
-    });
     
     const menuBottom = getMenuData(isAuth);
     const menuTop = {
-        'View': show('View'),
-        'Edit': show('EditFile'),
+        'View': () => {
+            CloudCmd.View.show();
+        },
+        'Edit': () => {
+            const name = config('vim') ? 'EditFileVim' : 'EditFile';
+            CloudCmd[name].show();
+        },
         'Rename': () => {
             setTimeout(DOM.renameCurrent, 100);
         },
@@ -228,16 +230,15 @@ function beforeClick(name) {
     return MenuShowedName !== name;
 }
 
-function _uploadTo(nameModule) {
-    Info.getData((error, data) => {
-        if (error)
-            return;
-        
-        const {name} = Info;
-        
-        CloudCmd.execFromModule(nameModule, 'uploadFile', name, data);
-    });
+async function _uploadTo(nameModule) {
+    const [error, data] = await Info.getData();
     
+    if (error)
+        return;
+    
+    const {name} = Info;
+    
+    CloudCmd.execFromModule(nameModule, 'uploadFile', name, data);
     CloudCmd.log('Uploading to ' + name + '...');
 }
 

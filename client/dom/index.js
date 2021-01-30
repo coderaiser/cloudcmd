@@ -1,11 +1,8 @@
-/* global CloudCmd */
-
 'use strict';
 
-const tryToPromiseAll = require('../../common/try-to-promise-all');
+/* global CloudCmd */
 
 const Util = require('../../common/util');
-const callbackify = require('../../common/callbackify');
 
 const Images = require('./images');
 const load = require('./load');
@@ -302,15 +299,12 @@ module.exports.getCurrentOwner = (currentFile) => {
     return owner.textContent;
 };
 
-const mixArgs = (f) => (a, b) => f(b, a);
-
 /**
  * unified way to get current file content
  *
- * @param callback
  * @param currentFile
  */
-module.exports.getCurrentData = callbackify(mixArgs(async (callback, currentFile) => {
+module.exports.getCurrentData = async (currentFile) => {
     const {Dialog} = DOM;
     const Info = DOM.CurrentInfo;
     const current = currentFile || DOM.getCurrentFile();
@@ -319,27 +313,24 @@ module.exports.getCurrentData = callbackify(mixArgs(async (callback, currentFile
     
     if (Info.name === '..') {
         Dialog.alert.noFiles();
-        return callback(Error('No files selected!'));
+        return [Error('No Files')];
     }
     
-    if (isDir) {
-        const [e, data] = await RESTful.read(path);
-        
-        if (e)
-            throw e;
-        
-        return data;
-    }
+    if (isDir)
+        return await RESTful.read(path);
     
     const [hashNew, hash] = await DOM.checkStorageHash(path);
     
+    if (!hashNew)
+        return [Error(`Can't get hash of a file`)];
+    
     if (hash === hashNew)
-        return await Storage.get(`${path}-data`);
+        return [null, await Storage.get(`${path}-data`)];
     
     const [e, data] = await RESTful.read(path);
     
     if (e)
-        return;
+        return [e, null];
     
     const ONE_MEGABYTE = 1024 * 1024 * 1024;
     const {length} = data;
@@ -347,8 +338,8 @@ module.exports.getCurrentData = callbackify(mixArgs(async (callback, currentFile
     if (hash && length < ONE_MEGABYTE)
         await DOM.saveDataToStorage(path, data, hashNew);
     
-    return data;
-}));
+    return [null, data];
+};
 
 /**
  * unified way to get RefreshButton
@@ -499,13 +490,10 @@ module.exports.checkStorageHash = async (name) => {
     if (typeof name !== 'string')
         throw Error('name should be a string!');
     
-    const [error, loadHash, storeHash] = await tryToPromiseAll([
+    const [loadHash, storeHash] = await Promise.all([
         DOM.loadCurrentHash(),
         Storage.get(nameHash),
     ]);
-    
-    if (error)
-        throw error;
     
     return [loadHash, storeHash];
 };
@@ -837,8 +825,6 @@ module.exports.updateCurrentInfo = (currentFile) => {
     
     const filesPassive = DOM.getFiles(panelPassive);
     const name = DOM.getCurrentName(current);
-    
-    /* eslint no-multi-spaces:0 */
     
     info.dir            = DOM.getCurrentDirName();
     info.dirPath        = DOM.getCurrentDirPath();

@@ -128,7 +128,7 @@ async function show(data, options = {}) {
     
     switch(type) {
     default:
-        return viewFile();
+        return await viewFile();
     
     case 'markdown':
         return await CloudCmd.Markdown.show(Info.path);
@@ -199,20 +199,20 @@ async function viewMedia(path) {
     modal.open(element, allConfig);
 }
 
-function viewFile() {
-    Info.getData((error, data) => {
-        if (error)
-            return Images.hide();
-        
-        const element = document.createTextNode(data);
-        const options = Config;
-        
-        if (CloudCmd.config('showFileName'))
-            options.title = Info.name;
-        
-        El.append(element);
-        modal.open(El, options);
-    });
+async function viewFile() {
+    const [error, data] = await Info.getData();
+    
+    if (error)
+        return Images.hide();
+    
+    const element = document.createTextNode(data);
+    const options = Config;
+    
+    if (CloudCmd.config('showFileName'))
+        options.title = Info.name;
+    
+    El.append(element);
+    modal.open(El, options);
 }
 
 const copy = (a) => assign({}, a);
