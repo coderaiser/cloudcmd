@@ -666,8 +666,9 @@ And create `index.js`:
 import http from 'http';
 import cloudcmd from 'cloudcmd';
 import io from 'socket.io';
-const app = require('express')();
+import express from 'express';
 
+const app = express();
 const port = 1337;
 const prefix = '/';
 
