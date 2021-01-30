@@ -1,3 +1,12 @@
+2021.01.30, v15.5.0
+
+feature:
+- (package) style-loader v2.0.0
+- (cloudcmd) improve error handling when viewing or editing a file
+- (package) putout v14.0.0
+- (package) eslint-plugin-putout v7.0.0
+
+
 2021.01.26, v15.4.4
 
 feature:
