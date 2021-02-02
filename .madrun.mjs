@@ -1,4 +1,7 @@
-import {run, cutEnv} from 'madrun';
+import {
+    run,
+    cutEnv,
+} from 'madrun';
 
 const testEnv = {
     THREAD_IT_COUNT: 0,

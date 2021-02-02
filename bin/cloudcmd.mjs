@@ -8,7 +8,10 @@ import tryToCatch from 'try-to-catch';
 import {createSimport} from 'simport';
 
 import exit from '../server/exit.js';
-import {createConfig, configPath} from '../server/config.js';
+import {
+    createConfig,
+    configPath,
+} from '../server/config.js';
 
 const config = createConfig({
     configPath,
