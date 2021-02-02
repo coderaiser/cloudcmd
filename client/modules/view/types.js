@@ -46,7 +46,7 @@ function isMedia(name) {
     return isAudio(name) || isVideo(name);
 }
 
-module.exports.isAudiot = isAudio;
+module.exports.isAudio = isAudio;
 function isAudio(name) {
     return /\.(mp3|ogg|m4a)$/i.test(name);
 }
