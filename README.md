@@ -1,4 +1,4 @@
-# Cloud Commander v15.5.2 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
+# Cloud Commander v15.6.0 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
 ### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
 
