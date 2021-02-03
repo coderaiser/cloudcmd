@@ -63,7 +63,9 @@ function isVideo(name) {
 
 module.exports._detectType = detectType;
 async function detectType(path) {
-    const {headers} = await fetch(path);
+    const {headers} = await fetch(path, {
+        method: 'HEAD',
+    });
     
     for (const [name, value] of headers) {
         if (name === 'content-type')

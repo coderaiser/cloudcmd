@@ -27,8 +27,13 @@ test('cloudcmd: client: view: types: detectType', async (t) => {
     await _detectType('/hello');
     
     global.fetch = originalFetch;
+    const expected = [
+        '/hello', {
+            method: 'HEAD',
+        }
+    ];
     
-    t.calledWith(fetch, ['/hello']);
+    t.calledWith(fetch, expected);
     t.end();
 });
 
