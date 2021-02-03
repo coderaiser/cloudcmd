@@ -30,7 +30,7 @@ test('cloudcmd: client: view: types: detectType', async (t) => {
     const expected = [
         '/hello', {
             method: 'HEAD',
-        }
+        },
     ];
     
     t.calledWith(fetch, expected);
