@@ -124,7 +124,7 @@ async function show(data, options = {}) {
     Images.show.load();
     
     const path = prefixURL + Info.path;
-    const type = options.raw ? '' : getType(path);
+    const type = options.raw ? '' : await getType(path);
     
     switch(type) {
     default:
@@ -137,7 +137,7 @@ async function show(data, options = {}) {
         return viewHtml(path);
     
     case 'image':
-        return viewImage(prefixURL);
+        return viewImage(Info.path, prefixURL);
     
     case 'media':
         return await viewMedia(path);
@@ -245,17 +245,18 @@ function hide() {
     modal.close();
 }
 
-function viewImage(prefixURL) {
+function viewImage(path, prefixURL) {
+    const isSupportedImage = (a) => isImage(a) || a === path;
     const makeTitle = (path) => {
         return {
-            href: prefixURL + path,
+            href: `${prefixURL}${path}`,
             title: encode(basename(path)),
         };
     };
     
     const names = Info.files
         .map(DOM.getCurrentPath)
-        .filter(isImage);
+        .filter(isSupportedImage);
     
     const titles = names
         .map(makeTitle);
