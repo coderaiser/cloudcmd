@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NAME: putout
 
     steps:
       - uses: actions/checkout@master
@@ -13,23 +15,37 @@ jobs:
         with:
           node-version: 14.x
 
-      - name: install
-        run: |
+      - name: Install Redrun
+        run:
+          npm i redrun -g
+      
+      - name: Install
+        run:
           npm install
 
-      - name: lint
-        run: |
-          npm run lint
+      - name: Lint
+        run:
+          redrun fix:lint
+    
+      - name: Commit fixes
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'chore(${{ env.NAME }}) lint using actions'
 
-      - name: build
-        run: |
-          npm run build
-          npm test
+      - name: Build
+        run:
+          redrun build
 
-      - name: test
-        run: |
-          npm test
+      - name: Test
+        run:
+          redrun test
 
-      - name: coverage
-        run: |
-          npm run coverage
+      - name: Coverage
+        run:
+          redrun coverage coverage:report
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
