@@ -163,7 +163,7 @@ docker-compose up
 
 ## Documentation
 
-https://cloudcmd.io/
+More documentation you can find on https://cloudcmd.io/.
 
 
 ## Get involved
