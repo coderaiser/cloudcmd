@@ -22,6 +22,7 @@ manifest.yml
 bin/release.js
 
 client
+img/logo/cloudcmd-hq.png
 
 webpack.config.js
 
