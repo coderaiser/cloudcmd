@@ -12,8 +12,6 @@ import shortdate from 'shortdate';
 const simport = createSimport(import.meta.url);
 const place = promisify(_place);
 
-debugger;
-
 const Info = await simport('../package.json');
 
 await main();
@@ -31,7 +29,7 @@ async function main() {
     
     if (error)
         return console.error(error);
-        
+    
     await replaceVersion('README.md', version, versionNew);
     await replaceVersion('HELP.md', version, versionNew);
     
@@ -43,7 +41,7 @@ async function main() {
     await replaceVersion('HELP.md', history, historyNew);
 }
 
-async function replaceVersion(name, version, versionNew, callback) {
+async function replaceVersion(name, version, versionNew) {
     const [error] = await tryToCatch(place, name, version, versionNew);
     
     if (error)
@@ -72,5 +70,5 @@ function getVersionNew(last, match) {
         return minor(match, Info.version);
     
     return last.substr(3);
-};
+}
 
