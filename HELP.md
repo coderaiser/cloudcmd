@@ -957,7 +957,25 @@ There are a lot of ways to be involved in `Cloud Commander` development:
 - if you know a language not currently translated, or would like to improve an existing translation, you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
 
 ## Version history
-
+- *2021.02.03*, **[v15.6.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.6.0)**
+- *2021.02.02*, **[v15.5.2](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.2)**
+- *2021.01.31*, **[v15.5.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.1)**
+- *2021.01.30*, **[v15.5.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.0)**
+- *2021.01.26*, **[v15.4.4](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.4)**
+- *2021.01.25*, **[v15.4.3](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.3)**
+- *2021.01.21*, **[v15.4.2](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.2)**
+- *2021.01.20*, **[v15.4.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.1)**
+- *2021.01.19*, **[v15.4.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.0)**
+- *2021.01.19*, **[v15.3.4](//github.com/coderaiser/cloudcmd/releases/tag/v15.3.4)**
+- *2021.01.17*, **[v15.3.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.3.1)**
+- *2021.01.17*, **[v15.3.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.3.0)**
+- *2021.01.16*, **[v15.2.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.2.0)**
+- *2021.01.07*, **[v15.1.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.1.0)**
+- *2021.01.05*, **[v15.0.4](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.4)**
+- *2020.01.05*, **[v15.0.3](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.3)**
+- *2020.12.31*, **[v15.0.2](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.2)**
+- *2020.12.30*, **[v15.0.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.1)**
+- *2020.12.28*, **[v15.0.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.0)**
 - *2020.08.21*, **[v14.9.3](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.3)**
 - *2020.08.19*, **[v14.9.2](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.2)**
 - *2020.08.16*, **[v14.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.1)**
