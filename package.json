@@ -57,6 +57,7 @@
     "wisdom": "madrun wisdom",
     "wisdom:type": "madrun wisdom:type",
     "coverage": "madrun coverage",
+    "coverage:report": "madrun coverage:report",
     "report": "madrun report",
     "6to5": "madrun 6to5",
     "6to5:client": "madrun 6to5:client",
