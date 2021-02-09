@@ -951,6 +951,7 @@ While using Dropbox remember that there is no remote support for the console/ter
 
 There are a lot of ways to be involved in `Cloud Commander` development:
 
+- support project on patreon: https://patreon.com/coderaiser;
 - if you find a bug or have an idea to share, [create an issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
 - if you fixed a bug, typo or implemented a new feature, [create a pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
 - if you know a language not currently translated, or would like to improve an existing translation, you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
