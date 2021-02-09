@@ -12,6 +12,7 @@ modules/emitify
 
 *.swp
 .putoutcache
+.DS_Store
 
 dist
 dist-dev
