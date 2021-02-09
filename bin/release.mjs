@@ -1,24 +1,25 @@
 #!/usr/bin/env node
 
+import {promisify} from 'util';
+
+import tryToCatch from 'try-to-catch';
 import {createSimport} from 'simport';
 import minor from 'minor';
-import place from 'place';
+import _place from 'place';
 import rendy from 'rendy';
 import shortdate from 'shortdate';
 
 const simport = createSimport(import.meta.url);
+const place = promisify(_place);
+
+debugger;
 
 const Info = await simport('../package.json');
 
-const ERROR = Error('ERROR: version is missing. release --patch|--minor|--major');
+await main();
 
-main((error) => {
-    if (error)
-        console.error(error.message);
-});
-
-function main(callback) {
-    const history = 'Version history\n---------------\n';
+async function main() {
+    const history = '## Version history\n\n';
     const link = '//github.com/coderaiser/cloudcmd/releases/tag/';
     const template = '- *{{ date }}*, ' +
                       '**[v{{ version }}]' +
@@ -26,42 +27,44 @@ function main(callback) {
     
     const {version} = Info;
     
-    cl((error, versionNew) => {
-        if (error)
-            return callback(error);
+    const [error, versionNew] = await tryToCatch(cl);
+    
+    if (error)
+        return console.error(error);
         
-        replaceVersion('README.md', version, versionNew, callback);
-        replaceVersion('HELP.md', version, versionNew, () => {
-            const historyNew = history + rendy(template, {
-                date    : shortdate(),
-                version : versionNew,
-            });
-            
-            replaceVersion('HELP.md', history, historyNew, callback);
-        });
+    await replaceVersion('README.md', version, versionNew);
+    await replaceVersion('HELP.md', version, versionNew);
+    
+    const historyNew = history + rendy(template, {
+        date    : shortdate(),
+        version : versionNew,
     });
+    
+    await replaceVersion('HELP.md', history, historyNew);
 }
 
-function replaceVersion(name, version, versionNew, callback) {
-    place(name, version, versionNew, (error) => {
-        if (error)
-            return callback(error);
-        
-        callback(null, 'done: ' + name);
-    });
+async function replaceVersion(name, version, versionNew, callback) {
+    const [error] = await tryToCatch(place, name, version, versionNew);
+    
+    if (error)
+        return console.error(error);
+    
+    console.log('done: ' + name);
 }
 
-function cl(callback) {
+async function cl() {
     const {argv} = process;
     const length = argv.length - 1;
     const last = process.argv[length];
     const regExp = /^--(major|minor|patch)$/;
     const [, match] = last.match(regExp) || [];
     
-    if (!regExp.test(last))
-        return callback(ERROR);
+    console.log(last);
     
-    callback(null, getVersionNew(last, match));
+    if (!regExp.test(last))
+        throw Error('ERROR: version is missing. release --patch|--minor|--major');
+    
+    return getVersionNew(last, match);
 }
 
 function getVersionNew(last, match) {
@@ -69,5 +72,5 @@ function getVersionNew(last, match) {
         return minor(match, Info.version);
     
     return last.substr(3);
-}
+};
 
