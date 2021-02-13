@@ -1,5 +1,6 @@
 {
     "ignore": [
+        "html",
         "fixture*",
         "app.json",
         "fontello.json"
