@@ -27,9 +27,9 @@ export default {
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
     'wisdom:type': () => 'bin/release.mjs',
-    'coverage': async () => [testEnv, `nyc ${await cutEnv('test')}`],
+    'coverage': async () => [testEnv, `c8 ${await cutEnv('test')}`],
     'coverage:report': () => 'nyc report --reporter=lcov',
-    'report': () => 'nyc report --reporter=text-lcov | coveralls',
+    'report': () => 'c8 report --reporter=text-lcov | coveralls',
     '6to5': () => 'webpack --progress',
     '6to5:client': () => run('6to5', '--mode production'),
     '6to5:client:dev': async () => await run('6to5', '--mode development', {
