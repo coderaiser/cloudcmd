@@ -28,7 +28,7 @@ export default {
     'wisdom': () => run(['lint:all', 'build', 'test']),
     'wisdom:type': () => 'bin/release.mjs',
     'coverage': async () => [testEnv, `c8 ${await cutEnv('test')}`],
-    'coverage:report': () => 'nyc report --reporter=lcov',
+    'coverage:report': () => 'c8 report --reporter=lcov',
     'report': () => 'c8 report --reporter=text-lcov | coveralls',
     '6to5': () => 'webpack --progress',
     '6to5:client': () => run('6to5', '--mode production'),
