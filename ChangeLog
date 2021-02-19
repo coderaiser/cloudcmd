@@ -1,3 +1,16 @@
+2021.02.19, v15.7.0
+
+fix:
+- chore(github-actions) add ability to autofix lint
+
+feature:
+- (package) @cloudcmd/move-files v4.0.0
+- (package) putout v15.0.0
+- (package) copymitter v6.0.0
+- (package) @cloudcmd/olark v3.0.2
+- (client) view: unknown file type: method: GET -> HEAD: speed up
+
+
 2021.02.03, v15.6.0
 
 feature:
