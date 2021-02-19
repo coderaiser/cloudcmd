@@ -81,7 +81,7 @@
   "dependencies": {
     "@cloudcmd/dropbox": "^4.0.1",
     "@cloudcmd/fileop": "^5.0.0",
-    "@cloudcmd/move-files": "^3.0.0",
+    "@cloudcmd/move-files": "^4.0.0",
     "@cloudcmd/read-files-sync": "^2.0.0",
     "@putout/plugin-cloudcmd": "^1.2.0",
     "apart": "^2.0.0",
