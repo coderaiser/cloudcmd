@@ -1,3 +1,9 @@
+2021.02.21, v15.7.1
+
+fix:
+- (cloudcmd) prefix env has no effect (#328)
+
+
 2021.02.19, v15.7.0
 
 fix:
