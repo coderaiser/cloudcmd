@@ -95,7 +95,7 @@ const args = require('minimist')(argv.slice(2), {
         'zip'         : config('zip'),
         'username'    : env('username') || config('username'),
         'root'        : choose(env('root'), config('root')),
-        'prefix'      : choose(env('cloudcmd_prefix'), config('prefix')),
+        'prefix'      : choose(env('prefix'), config('prefix')),
         'console'     : choose(env.bool('console'), config('console')),
         'contact'     : choose(env.bool('contact'), config('contact')),
         'terminal'    : choose(env.bool('terminal'), config('terminal')),
