@@ -34,7 +34,6 @@ const dword = require('dword');
 const deepword = require('deepword');
 const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
-//const readzip = require('readzip/lib/middle.js');
 
 const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
@@ -238,13 +237,6 @@ function cloudcmd({modules, config}) {
             root,
             token: dropboxToken,
         }),
-        
-        /*
-        readzip({
-            prefix: cloudfunc.apiURL + '/fs',
-            root,
-        }),
-        */
         
         restafary({
             prefix: cloudfunc.apiURL + '/fs',
