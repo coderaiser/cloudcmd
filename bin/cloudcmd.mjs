@@ -6,6 +6,7 @@ import {createRequire} from 'module';
 import {promisify} from 'util';
 import tryToCatch from 'try-to-catch';
 import {createSimport} from 'simport';
+import parse from 'yargs-parser';
 
 import exit from '../server/exit.js';
 import {
@@ -34,8 +35,21 @@ const require = createRequire(import.meta.url);
 
 const Info = require('../package.json');
 
-const {argv} = process;
-const args = require('minimist')(argv.slice(2), {
+const maybeRoot = (a) => {
+    if (a === '.')
+        return process.cwd();
+    
+    return a;
+};
+
+const yargsOptions = {
+    configuration: {
+        'strip-aliased': true,
+        'strip-dashed': true,
+    },
+    coerce: {
+        root: maybeRoot,
+    },
     string: [
         'name',
         'port',
@@ -81,6 +95,7 @@ const args = require('minimist')(argv.slice(2), {
         'import',
         'import-listen',
         'log',
+        'zip',
         'dropbox',
     ],
     default: {
@@ -127,19 +142,19 @@ const args = require('minimist')(argv.slice(2), {
         'dropbox-token': config('dropboxToken'),
     },
     alias: {
-        v: 'version',
-        h: 'help',
-        p: 'password',
-        o: 'online',
-        u: 'username',
-        s: 'save',
-        a: 'auth',
-        c: 'config',
+        version: 'v',
+        help: 'h',
+        password: 'p',
+        online: 'o',
+        username: 'u',
+        save: 's',
+        auth: 'a',
+        config: 'c',
     },
-    unknown: (cmd) => {
-        exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
-    },
-});
+};
+
+const {argv} = process;
+const args = parse(argv.slice(2), yargsOptions);
 
 if (args.version)
     version();
@@ -149,6 +164,16 @@ else
     main();
 
 async function main() {
+    const validateArgs = await simport('@putout/cli-validate-args');
+    
+    const error = await validateArgs(args, [
+        ...yargsOptions.boolean,
+        ...yargsOptions.string,
+    ]);
+    
+    if (error)
+        return exit(error);
+    
     if (args.repl)
         repl();
     

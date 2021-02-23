@@ -83,6 +83,7 @@
     "@cloudcmd/fileop": "^5.0.0",
     "@cloudcmd/move-files": "^4.0.0",
     "@cloudcmd/read-files-sync": "^2.0.0",
+    "@putout/cli-validate-args": "^1.0.1",
     "@putout/plugin-cloudcmd": "^1.2.0",
     "apart": "^2.0.0",
     "chalk": "^4.0.0",
@@ -111,7 +112,6 @@
     "just-snake-case": "^1.1.0",
     "markdown-it": "^12.0.0",
     "mellow": "^3.0.0",
-    "minimist": "^1.2.0",
     "nomine": "^4.0.0",
     "object.omit": "^3.0.0",
     "once": "^1.4.0",
@@ -137,7 +137,8 @@
     "tryrequire": "^3.0.0",
     "win32": "^5.1.11",
     "wraptile": "^3.0.0",
-    "writejson": "^3.0.0"
+    "writejson": "^3.0.0",
+    "yargs-parser": "^20.2.5"
   },
   "devDependencies": {
     "@babel/code-frame": "^7.5.5",
