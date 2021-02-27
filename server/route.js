@@ -95,6 +95,7 @@ async function route({config, options, request, response}) {
     }
     
     response.setHeader('Content-Type', contentType(extname(fullPath)));
+    //response.setHeader('Content-Length', contentLength);
     
     await pipe([
         stream,
