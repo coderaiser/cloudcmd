@@ -255,20 +255,6 @@ module.exports.loadCurrentHash = async (currentFile) => {
 };
 
 /**
- * load current modification time of file
- * @callback
- * @currentFile
- */
-module.exports.loadCurrentTime = async (currentFile) => {
-    const current = currentFile || DOM.getCurrentFile();
-    const query = '?time';
-    const link = DOM.getCurrentPath(current);
-    
-    const [, data] = await RESTful.read(link + query);
-    return data;
-};
-
-/**
  * set size
  * @currentFile
  */
