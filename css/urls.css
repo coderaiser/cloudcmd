@@ -45,6 +45,10 @@
     background-image: url(../img/file.png);
 }
 
+.archive, .archive-link {
+    background-image: url(../img/archive.png);
+}
+
 .file-link {
     background-image: url(../img/file-link.png);
 }
