@@ -28,7 +28,7 @@
     content     : '\e806  ';
 }
 
-.icon-directory::before {
+.icon-directory {
     font-family : 'Fontello';
     content     : '\e807  ';
 }
@@ -58,7 +58,7 @@
     content     : '\e80c  ';
 }
 
-.icon-file::before {
+.icon-file::before, {
     font-family : 'Fontello';
     content     : '\e80d  ';
 }
@@ -137,3 +137,4 @@
     font-family : 'Fontello';
     content     : '\e81c  ';
 }
+

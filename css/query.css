@@ -163,6 +163,15 @@
         background-image: none;
     }
     
+    .archive, .archive-link {
+        background-image: none;
+    }
+    
+    .archive::before, .archive-link {
+        color: rgba(26, 224, 124, 0.56);
+        content: '\e81d';
+    }
+    
     /* убираем заголовок */
     .fm-header {
         display: none;
