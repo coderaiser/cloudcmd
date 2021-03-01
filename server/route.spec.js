@@ -411,7 +411,7 @@ test('cloudcmd: route: dropbox', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: content type', async (t) => {
+test('cloudcmd: route: content length', async (t) => {
     const options = {
         root: fixtureDir,
     };
@@ -422,7 +422,7 @@ test('cloudcmd: route: content type', async (t) => {
     
     const result = headers.get('content-length');
     
-    t.equal(result, '78');
+    t.ok(result);
     t.end();
 });
 
