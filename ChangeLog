@@ -1,3 +1,13 @@
+2021.03.01, v15.9.0
+
+feature:
+- feature(cloudcmd) add archive icon
+- feature(client) rm unused loadCurrentTime
+- feature(package) win32 v6.0.0
+- feature(package) redzip v2.0.0
+
+
+
 2021.02.27, v15.8.1
 
 feature:
