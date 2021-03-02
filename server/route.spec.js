@@ -257,8 +257,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
         configManager: createConfigManager(),
     });
     
-    const response = await request.get('/');
-    const {body} = response;
+    const {body} = await request.get('/');
     
     stopAll();
     
