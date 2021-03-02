@@ -6,6 +6,9 @@
         "fontello.json"
     ],
     "match": {
+        "*.js": {
+            "convert-esm-to-commonjs": "on"
+        },
         "*.md": {
             "convert-commonjs-to-esm": "on"
         },

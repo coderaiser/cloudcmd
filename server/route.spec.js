@@ -1,5 +1,7 @@
 'use strict';
 
+const {Readable} = require('stream');
+
 const path = require('path');
 const fs = require('fs');
 
@@ -24,6 +26,10 @@ const defaultConfig = {
 const {request} = serveOnce(cloudcmd, {
     config: defaultConfig,
 });
+
+const {stringify} = JSON;
+
+const {assign} = Object;
 
 test('cloudcmd: route: buttons: no console', async (t) => {
     const options = {
@@ -222,14 +228,23 @@ test('cloudcmd: route: not found', async (t) => {
 test('cloudcmd: route: sendIndex: encode', async (t) => {
     const name = '"><svg onload=alert(3);>';
     const nameEncoded = '&quot;&gt;&lt;svg&nbsp;onload=alert(3);&gt;';
+    const path = '/';
     const files = [{
         name,
     }];
     
-    const read = stub().returns({
-        type: 'directory',
+    const stream = Readable.from(stringify({
+        path,
         files,
+    }));
+    
+    assign(stream, {
+        path,
+        files,
+        type: 'directory',
     });
+    
+    const read = stub().resolves(stream);
     
     mockRequire('win32', {
         read,
@@ -242,7 +257,8 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
         configManager: createConfigManager(),
     });
     
-    const {body} = await request.get('/');
+    const response = await request.get('/');
+    const {body} = response;
     
     stopAll();
     
@@ -252,16 +268,25 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
 
 test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     const name = '"><svg onload=alert(3);>';
+    const path = '/';
     const files = [{
         name,
     }];
     
-    const read = async (path) => ({
+    const stream = Readable.from(stringify({
         path,
         files,
+    }));
+    
+    assign(stream, {
+        path,
+        files,
+        type: 'directory',
     });
     
-    mockRequire('flop', {
+    const read = stub().resolves(stream);
+    
+    mockRequire('win32', {
         read,
     });
     
@@ -279,16 +304,25 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
 
 test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     const name = '$$$\'&quot;';
+    const path = '/';
     const files = [{
         name,
     }];
     
-    const read = async (path) => ({
+    const stream = Readable.from(stringify({
         path,
         files,
+    }));
+    
+    assign(stream, {
+        path,
+        files,
+        type: 'directory',
     });
     
-    mockRequire('flop', {
+    const read = stub().resolves(stream);
+    
+    mockRequire('win32', {
         read,
     });
     
