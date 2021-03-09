@@ -5,6 +5,7 @@ const {readFile} = require('fs/promises');
 
 const {join} = require('path');
 
+const montag = require('montag');
 const tryToCatch = require('try-to-catch');
 const currify = require('currify');
 const findUp = require('find-up');
@@ -77,8 +78,8 @@ async function onGET({req, res, menuName}) {
 }
 
 function getError(error, source) {
-    return `
-        const e = Error(\`<pre>${codeframe({
+    return montag`
+            const e = Error(\`<pre>${codeframe({
         error,
         source,
         highlightCode: false,
@@ -96,8 +97,8 @@ function sendDefaultMenu(res) {
     });
 }
 
-function transpile(source) {
-    return tryToCatch(putout, source, {
+async function transpile(source) {
+    return await tryToCatch(putout, source, {
         plugins: [
             'convert-esm-to-commonjs',
             'strict-mode',
@@ -105,3 +106,4 @@ function transpile(source) {
         ],
     });
 }
+
