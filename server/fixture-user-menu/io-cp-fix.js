@@ -1,2 +1,4 @@
 'use strict';
-await IO.copy(dirPath, mp3Dir, mp3Names);
+async function copy() {
+    await IO.copy(dirPath, mp3Dir, mp3Names);
+}

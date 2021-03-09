@@ -6,6 +6,9 @@
         "fontello.json"
     ],
     "match": {
+        "route.spec.js": {
+            "tape/convert-ok-to-match": "off"
+        },
         "*.js": {
             "convert-esm-to-commonjs": "on"
         },

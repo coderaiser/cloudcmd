@@ -58,7 +58,7 @@ test('cloudcmd: terminal: enabled: no string', (t) => {
     const msg = 'cloudcmd --terminal: Cannot find module \'hello\'';
     const [arg] = log.args[0];
     
-    t.ok(arg.includes(msg), 'should call with msg');
+    t.match(arg, RegExp(msg), 'should call with msg');
     t.end();
 });
 
