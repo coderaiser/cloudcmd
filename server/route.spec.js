@@ -459,7 +459,10 @@ test('cloudcmd: route: content length', async (t) => {
 });
 
 test('cloudcmd: route: read: root', async (t) => {
-    const read = stub();
+    const stream = Readable.from('hello');
+    stream.contentLength = 5;
+    
+    const read = stub().returns(stream);
     
     mockRequire('win32', {
         read,
