@@ -1,3 +1,14 @@
+2021.03.16, v15.9.2
+
+fix:
+- (route) unable to navigate between folders (#333)
+
+feature:
+- (package) open v8.0.2
+- (package) socket.io-client v4.0.0
+- (package) socket.io v4.0.0
+
+
 2021.03.01, v15.9.1
 
 feature:

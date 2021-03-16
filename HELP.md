@@ -1,4 +1,4 @@
-# Cloud Commander v15.9.1
+# Cloud Commander v15.9.2
 
 ### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
 
