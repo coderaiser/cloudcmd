@@ -28,7 +28,6 @@ const {request} = serveOnce(cloudcmd, {
 });
 
 const {stringify} = JSON;
-
 const {assign} = Object;
 
 test('cloudcmd: route: buttons: no console', async (t) => {
@@ -456,6 +455,38 @@ test('cloudcmd: route: content length', async (t) => {
     const result = headers.get('content-length');
     
     t.ok(result);
+    t.end();
+});
+
+test('cloudcmd: route: read: root', async (t) => {
+    const read = stub();
+    
+    mockRequire('win32', {
+        read,
+    });
+    
+    reRequire(routePath);
+    
+    const cloudcmd = reRequire(cloudcmdPath);
+    const configManager = createConfigManager();
+    const root = '/hello';
+    configManager('root', root);
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    await request.get('/fs/route.js');
+    
+    stopAll();
+    
+    const expected = [
+        '/hello/route.js', {
+            root,
+        },
+    ];
+    
+    t.calledWith(read, expected);
     t.end();
 });
 

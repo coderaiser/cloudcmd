@@ -79,7 +79,10 @@ async function route({config, options, request, response}) {
     const fullPath = root(rootName, config('root'));
     
     const read = getReadDir(config);
-    const [error, stream] = await tryToCatch(read, fullPath);
+    const [error, stream] = await tryToCatch(read, fullPath, {
+        root: config('root'),
+    });
+    
     const {html} = options;
     
     if (error)
