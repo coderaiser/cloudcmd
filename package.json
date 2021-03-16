@@ -116,7 +116,7 @@
     "object.omit": "^3.0.0",
     "once": "^1.4.0",
     "onezip": "^5.0.0",
-    "open": "^7.0.0",
+    "open": "^8.0.2",
     "package-json": "^6.0.0",
     "ponse": "^6.0.0",
     "pullout": "^4.0.0",
