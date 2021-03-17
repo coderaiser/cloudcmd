@@ -104,7 +104,7 @@
     "for-each-key": "^2.0.0",
     "format-io": "^2.0.0",
     "fullstore": "^3.0.0",
-    "http-auth": "^4.1.2",
+    "http-auth": "4.1.2 || >4.1.3",
     "inly": "^4.0.0",
     "jaguar": "^6.0.0",
     "jju": "^1.3.0",
