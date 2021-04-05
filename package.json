@@ -128,7 +128,7 @@
     "shortdate": "^2.0.0",
     "simport": "^1.0.1",
     "socket.io": "^4.0.0",
-    "socket.io-client": "^4.0.0",
+    "socket.io-client": "^4.0.1",
     "squad": "^3.0.0",
     "table": "^6.0.1",
     "thread-it": "^1.1.0",
