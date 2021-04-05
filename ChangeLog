@@ -1,3 +1,9 @@
+2021.04.05, v15.9.4
+feature:
+- (package) socket.io-client v4.0.1
+- (package) open v8.0.5
+- (package) putout v16.4.0
+
 2021.03.17, v15.9.3
 
 fix:
