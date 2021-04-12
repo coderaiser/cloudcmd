@@ -99,7 +99,7 @@ module.exports.put = (url, body) => {
     const xhr = new XMLHttpRequest();
     
     url = encodeURI(url)
-        .replace('#', '%23');
+        .replace(/#/g, '%23');
     
     xhr.open('put', url, true);
     
