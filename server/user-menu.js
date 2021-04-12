@@ -51,7 +51,7 @@ async function onGET({req, res, menuName}) {
     if (errorFind && errorFind.code !== 'ENOENT')
         return res
             .status(404)
-            .send(e.message);
+            .send(errorFind.message);
     
     const homeMenuPath = join(homedir(), menuName);
     const menuPath = currentMenuPath || homeMenuPath;
