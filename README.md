@@ -71,7 +71,7 @@ And create `index.js`:
 ```js
 import http from 'http';
 import cloudcmd from 'cloudcmd';
-import io from 'socket.io';
+import {Server} from 'socket.io';
 import express from 'express';
 
 const app = express();
@@ -80,7 +80,7 @@ const port = 1337;
 const prefix = '/';
 
 const server = http.createServer(app);
-const socket = io.listen(server, {
+const socket = new Server(server, {
     path: `${prefix}socket.io`,
 });
 

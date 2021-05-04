@@ -665,7 +665,7 @@ And create `index.js`:
 ```js
 import http from 'http';
 import cloudcmd from 'cloudcmd';
-import io from 'socket.io';
+import {Server} from 'socket.io';
 import express from 'express';
 
 const app = express();
@@ -673,7 +673,7 @@ const port = 1337;
 const prefix = '/';
 
 const server = http.createServer(app);
-const socket = io.listen(server, {
+const socket = new Server(server, {
     path: `${prefix}socket.io`,
 });
 
@@ -718,9 +718,10 @@ Here is example with two `Config Managers`:
 ```js
 import http from 'http';
 import cloudcmd from 'cloudcmd';
-import io from 'socket.io';
-const app = require('express')();
+import {Server} from 'socket.io';
+import express from 'express';
 
+const app = express();
 const port = 8000;
 const prefix1 = '/1';
 const prefix2 = '/2';
@@ -728,11 +729,11 @@ const prefix2 = '/2';
 const {createConfigManager} = cloudcmd;
 
 const server = http.createServer(app);
-const socket1 = io.listen(server, {
+const socket1 = new Server(server, {
     path: `${prefix1}/socket.io`,
 });
 
-const socket2 = io.listen(server, {
+const socket2 = new Server(server, {
     path: `${prefix2}/socket.io`,
 });
 
