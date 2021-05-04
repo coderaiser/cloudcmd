@@ -66,7 +66,9 @@ function initConfig(options = {}) {
     
     checkFn('options.afterShow', options.afterShow);
     
-    const afterShow = {config};
+    const afterShow = {
+        config,
+    };
     
     config.afterShow = () => {
         afterShow();

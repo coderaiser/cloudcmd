@@ -37,5 +37,10 @@
         "storage.js": {
             "remove-useless-async": "off"
         }
+    },
+    "match": {
+        "docker.yml": {
+            "github/set-node-versions": "off"
+        }
     }
 }
