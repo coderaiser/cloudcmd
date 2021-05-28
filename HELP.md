@@ -948,6 +948,43 @@ While using Dropbox remember that there is no remote support for the console/ter
 - view
 - edit
 
+## Automatically start cloudcmd on boot (for systemd users)
+
+First, locate the command to run cloudcmd
+
+```sh
+which cloudcmd
+```
+take note of the result and create a systemd entry by executing
+
+```sh
+sudo nano /etc/systemd/system/cloudcmd.service
+```
+and use this template
+
+```
+[Unit]
+Description = Cloud Commander
+
+[Service]
+TimeoutStartSec = 0
+Restart = always
+ExecStart = THE RESULT OF which cloudcmd WE'VE EXECUTED EARLIER
+User = YOUR_USER
+
+[Install]
+WantedBy = multi-user.target
+```
+Don't forget to change the line for `ExecStart` and `User`
+
+Save the changes and exit editor.
+
+You may now enable cloudcmd and set it to autostart on boot by running:
+
+```sh
+sudo systemctl enable --now cloudcmd
+```
+
 ## Get involved
 
 There are a lot of ways to be involved in `Cloud Commander` development:
