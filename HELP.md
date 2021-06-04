@@ -985,6 +985,90 @@ You may now enable cloudcmd and set it to autostart on boot by running:
 sudo systemctl enable --now cloudcmd
 ```
 
+## Automatically start cloudcmd on (for FreeBSD users)
+
+First, locate the command to run cloudcmd
+
+```
+which cloudcmd
+```
+
+take note of the result and create a rc script
+
+```
+vi /usr/local/etc/rc.d/cloudcmd
+```
+and use this template
+
+```
+!/bin/sh
+#
+# PROVIDE: cloudcmd
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+# Author: IhatemyISP (ihatemyisp.net)
+# Version: 1.0.0
+
+# Description:
+#    This script runs Cloud Commander as a service under the supplied user on boot
+
+#    1) Place file in /usr/local/etc/rc.d/
+#    2) Add cloudcmd_enable="YES" to /etc/rc.conf
+#    3) (Optional) To run as non-root, add cloudcmd_runAs="user" to /etc/rc.conf
+#    4) (Optional) To pass Cloud Commander args, add cloudcmd_args="" to /etc/rc.conf
+
+# Freebsd rc library
+. /etc/rc.subr
+
+# General Info
+name="cloudcmd"            # Safe name of program
+program_name="cloudcmd"   # Name of exec
+title="CloudCommander"          # Title to display in top/htop
+
+# RC.config vars
+load_rc_config $name      # Loading rc config vars
+: ${cloudcmd_enable="NO"}  # Default: Do not enable Cloud Commander
+: ${cloudcmd_runAs="root"} # Default: Run Cloud Commander as root
+
+# Freebsd Setup
+rcvar=cloudcmd_enable                   # Enables the rc.conf YES/NO flag
+pidfile="/var/run/${program_name}.pid" # PID file location
+
+# Env Setup
+export HOME=$( getent passwd "$cloudcmd_runAs" | cut -d: -f6 ) # Gets the home directory of the runAs user
+
+# Command Setup
+exec_path="/usr/local/bin/${program_name}" # Path to the cloudcmd exec, /usr/local/bin/ when installed globally
+output_file="/var/log/${program_name}.log" # Path to Cloud Commander output file
+
+# Command
+command="/usr/sbin/daemon"
+command_args="-r -t ${title} -u ${cloudcmd_runAs} -o ${output_file} -P ${pidfile} ${exec_path} ${cloudcmd_args}"
+
+# Loading Config
+load_rc_config ${name}
+run_rc_command "$1"
+```
+
+Enable autostart
+
+```
+echo cloudcmd_enable="YES" >> /etc/rc.conf
+```
+
+(Optional) Set user to run Cloud Commander as (default is root)
+
+```
+echo cloudcmd_runAs="user" >> /etc/rc.conf
+```
+
+Start the service (or just reboot)
+
+```
+service cloudcmd start
+```
+
 ## Get involved
 
 There are a lot of ways to be involved in `Cloud Commander` development:
