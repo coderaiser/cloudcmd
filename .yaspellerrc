@@ -29,6 +29,7 @@
         "Zalitok",
         "WebSocket",
         "auth",
+        "autostart",
         "binded",
         "cd",
         "cloudcmd",
@@ -56,6 +57,7 @@
         "npm",
         "or io",
         "patreon",
+        "rc",
         "refactor",
         "sexualized",
         "sslPort",
@@ -64,6 +66,7 @@
         "v0",
         "v1",
         "v2",
-        "yml"
+        "yml",
+        "systemd"
     ]
 }
