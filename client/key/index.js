@@ -261,6 +261,7 @@ async function switchKey(event) {
             Operation.show('extract');
         else
             CloudCmd.Menu.show();
+        
         event.preventDefault();
         break;
     

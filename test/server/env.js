@@ -21,7 +21,7 @@ test('env: big', (t) => {
 
 test('env: bool: false', (t) => {
     process.env.cloudcmd_terminal = 'false';
-    t.equal(env.bool('terminal'), false, 'should return false');
+    t.notOk(env.bool('terminal'), 'should return false');
     
     delete process.env.cloudcmd_terminal;
     t.end();
@@ -30,7 +30,7 @@ test('env: bool: false', (t) => {
 test('env: bool: true', (t) => {
     process.env.cloudcmd_terminal = 'true';
     
-    t.equal(env.bool('terminal'), true, 'should be true');
+    t.ok(env.bool('terminal'), 'should be true');
     
     delete process.env.cloudcmd_terminal;
     t.end();

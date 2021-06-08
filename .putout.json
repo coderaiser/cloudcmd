@@ -22,10 +22,9 @@
             "remove-process-exit": "on"
         },
         "server/{server,exit}.js": {
-            "remove-process-exit": "off",
-            "remove-console": "off"
+            "remove-process-exit": "off"
         },
-        "server/{terminal,distribute/log}.js": {
+        "server/{server,exit,terminal,distribute/log}.js": {
             "remove-console": "off"
         },
         "client/{client,cloudcmd,load-module}.js": {
@@ -36,9 +35,7 @@
         },
         "storage.js": {
             "remove-useless-async": "off"
-        }
-    },
-    "match": {
+        },
         "docker.yml": {
             "github/set-node-versions": "off"
         }

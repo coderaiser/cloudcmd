@@ -101,7 +101,7 @@ async function show(data, options = {}) {
     if (Loading)
         return;
     
-    if (!options || options.bindKeys !== false)
+    if (!options || options.bindKeys)
         Events.addKey(listener);
     
     El = createElement('div', {

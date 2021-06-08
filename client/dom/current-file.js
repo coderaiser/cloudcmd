@@ -212,7 +212,7 @@ module.exports.setCurrentFile = (currentFile, options) => {
          * but it should be false
          * to prevent default behavior
          */
-        if (!o || o.history !== false) {
+        if (!o || o.history) {
             const historyPath = path === '/' ? path : FS + path;
             DOM.setHistory(historyPath, null, historyPath);
         }
