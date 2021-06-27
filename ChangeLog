@@ -1,3 +1,14 @@
+2021.06.27, v15.9.7
+
+fix:
+- (config) rm broadcast: cannot change config
+- (view) close modals using ESC
+
+feature:
+- (package) package-json v7.0.0
+- (config) add more descriptive titles
+
+
 2021.06.13, v15.9.6
 
 feature:
