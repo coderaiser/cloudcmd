@@ -133,7 +133,6 @@ function _connection(manage, socket) {
         
         const send = () => {
             const data = CloudFunc.formatMsg('config', key(json));
-            socket.broadcast.send(json);
             socket.send(json);
             socket.emit('log', data);
         };
