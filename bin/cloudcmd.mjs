@@ -139,7 +139,7 @@ const yargsOptions = {
         'export-token': env('export_token') || config('exportToken'),
         
         'dropbox': config('dropbox'),
-        'dropbox-token': config('dropboxToken'),
+        'dropbox-token': config('dropboxToken') || '',
     },
     alias: {
         version: 'v',
@@ -185,35 +185,35 @@ async function main() {
     config('open', args.open);
     config('username', args.username);
     config('console', args.console);
-    config('syncConsolePath', args['sync-console-path']);
-    config('showFileName', args['show-file-name']);
+    config('syncConsolePath', args.syncConsolePath);
+    config('showFileName', args.showFileName);
     config('contact', args.contact);
     config('terminal', args.terminal);
-    config('terminalPath', args['terminal-path']);
-    config('terminalCommand', args['terminal-command']);
-    config('terminalAutoRestart', args['terminal-auto-restart']);
+    config('terminalPath', args.terminalPath);
+    config('terminalCommand', args.terminalCommand);
+    config('terminalAutoRestart', args.terminalAutoRestart);
     config('editor', args.editor);
     config('prefix', prefixer(args.prefix));
-    config('prefixSocket', prefixer(args['prefix-socket']));
+    config('prefixSocket', prefixer(args.prefixSocket));
     config('root', args.root || '/');
     config('vim', args.vim);
     config('columns', args.columns);
     config('log', args.log);
-    config('confirmCopy', args['confirm-copy']);
-    config('confirmMove', args['confirm-move']);
-    config('oneFilePanel', args['one-file-panel']);
-    config('configDialog', args['config-dialog']);
-    config('configAuth', args['config-auth']);
-    config('keysPanel', args['keys-panel']);
+    config('confirmCopy', args.confirmCopy);
+    config('confirmMove', args.confirmMove);
+    config('oneFilePanel', args.oneFilePanel);
+    config('configDialog', args.configDialog);
+    config('configAuth', args.configAuth);
+    config('keysPanel', args.keysPanel);
     config('export', args.export);
-    config('exportToken', args['export-token']);
+    config('exportToken', args.exportToken);
     config('import', args.import);
-    config('importToken', args['import-token']);
-    config('importListen', args['import-listen']);
-    config('importUrl', args['import-url']);
+    config('importToken', args.importToken);
+    config('importListen', args.importListen);
+    config('importUrl', args.importUrl);
     
-    config('dropbox', args['dropbox']);
-    config('dropboxToken', args['dropbox-token'] || '');
+    config('dropbox', args.dropbox);
+    config('dropboxToken', args.dropboxToken);
     
     await readConfig(args.config);
     
@@ -233,7 +233,7 @@ async function main() {
     
     await validateRoot(options.root, config);
     
-    if (args['show-config'])
+    if (args.showConfig)
         await showConfig();
     
     const distribute = await simport('../server/distribute/index.js');
