@@ -71,7 +71,7 @@ test('cloudcmd: markdown: put: error', async (t) => {
     
     const [e] = await tryToCatch(_markdown, name, '/', mdStream);
     
-    t.match(e.message, /ENOENT: no such file or directory/, 'should emit error');
+    t.match(e.message, 'ENOENT: no such file or directory', 'should emit error');
     t.end();
 });
 
