@@ -247,12 +247,10 @@ function hide() {
 
 function viewImage(path, prefixURL) {
     const isSupportedImage = (a) => isImage(a) || a === path;
-    const makeTitle = (path) => {
-        return {
-            href: `${prefixURL}${path}`,
-            title: encode(basename(path)),
-        };
-    };
+    const makeTitle = (path) => ({
+        href: `${prefixURL}${path}`,
+        title: encode(basename(path)),
+    });
     
     const names = Info.files
         .map(DOM.getCurrentPath)

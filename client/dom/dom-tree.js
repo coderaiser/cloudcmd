@@ -49,9 +49,7 @@ module.exports.getById = (id, element = document) => {
  * @param className - className
  * @param element - element
  */
-module.exports.getByClass = (className, element = document) => {
-    return DOM.getByClassAll(className, element)[0];
-};
+module.exports.getByClass = (className, element = document) => DOM.getByClassAll(className, element)[0];
 
 module.exports.getByDataName = (attribute, element = document) => {
     const selector = '[' + 'data-name="' + attribute + '"]';

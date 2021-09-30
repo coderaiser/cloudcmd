@@ -52,7 +52,7 @@ test('cloudcmd: getPrefix', (t) => {
     const value = 'hello';
     const result = _getPrefix(value);
     
-    t.equal(result, value, 'should equal');
+    t.equal(result, value);
     t.end();
 });
 
@@ -61,7 +61,7 @@ test('cloudcmd: getPrefix: function', (t) => {
     const fn = () => value;
     const result = _getPrefix(fn);
     
-    t.equal(result, value, 'should equal');
+    t.equal(result, value);
     t.end();
 });
 
@@ -70,7 +70,7 @@ test('cloudcmd: getPrefix: function: empty', (t) => {
     const fn = () => value;
     const result = _getPrefix(fn);
     
-    t.equal(result, '', 'should equal');
+    t.equal(result, '');
     t.end();
 });
 
@@ -86,7 +86,7 @@ test('cloudcmd: replaceDist', (t) => {
     
     process.env.NODE_ENV = NODE_ENV;
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });
 
@@ -100,7 +100,7 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
     
     reset();
     
-    t.equal(result, url, 'should equal');
+    t.equal(result, url);
     t.end();
 });
 

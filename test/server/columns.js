@@ -12,7 +12,7 @@ test('columns', (t) => {
     
     process.env.NODE_ENV = NODE_ENV;
     
-    t.equal(columns[''], '', 'should equal');
+    t.equal(columns[''], '');
     t.end();
 });
 
@@ -25,7 +25,7 @@ test('columns: dev', (t) => {
     
     process.env.NODE_ENV = NODE_ENV;
     
-    t.equal(columns['name-size-date'], css, 'should equal');
+    t.equal(columns['name-size-date'], css);
     t.end();
 });
 

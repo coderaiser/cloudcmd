@@ -96,9 +96,7 @@ function getEditor() {
     return editor;
 }
 
-module.exports.getElement = () => {
-    return Element;
-};
+module.exports.getElement = () => Element;
 
 module.exports.hide = () => {
     CloudCmd.View.hide();

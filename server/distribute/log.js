@@ -32,9 +32,7 @@ function stringToRGB(a) {
     ];
 }
 
-const add = (a, b) => {
-    return a + b.charCodeAt(0);
-};
+const add = (a, b) => a + b.charCodeAt(0);
 
 function crc(a) {
     return a

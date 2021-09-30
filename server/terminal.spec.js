@@ -74,7 +74,7 @@ test('cloudcmd: terminal: no arg', (t) => {
     
     mockRequire.stop('gritty');
     
-    t.equal(result, gritty, 'should equal');
+    t.equal(result, gritty);
     t.end();
 });
 

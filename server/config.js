@@ -114,7 +114,7 @@ function createConfig({configPath} = {}) {
     return configManager;
 }
 
-const write = async (filename, config) => {
+const write = (filename, config) => {
     return writejson(filename, config('*'), {mode: 0o600});
 };
 

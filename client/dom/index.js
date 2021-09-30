@@ -509,9 +509,7 @@ module.exports.saveDataToStorage = async (name, data, hash) => {
     return hash;
 };
 
-module.exports.getFM = () => {
-    return DOM.getPanel().parentElement;
-};
+module.exports.getFM = () => DOM.getPanel().parentElement;
 
 module.exports.getPanelPosition = (panel) => {
     panel = panel || DOM.getPanel();

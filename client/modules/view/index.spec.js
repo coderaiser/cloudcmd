@@ -49,7 +49,7 @@ test('cloudcmd: client: view: initConfig: no options', (t) => {
     global.CloudCmd = CloudCmd;
     global.DOM = DOM;
     
-    t.equal(typeof config, 'object', 'should equal');
+    t.equal(typeof config, 'object');
     t.end();
 });
 

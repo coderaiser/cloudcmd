@@ -40,7 +40,7 @@ test('env: bool: undefined', (t) => {
     const {cloudcmd_terminal} = process.env;
     process.env.cloudcmd_terminal = undefined;
     
-    t.equal(env.bool('terminal'), undefined, 'should be undefined');
+    t.notOk(env.bool('terminal'), 'should be undefined');
     
     process.env.cloudcmd_terminal = cloudcmd_terminal;
     t.end();

@@ -56,7 +56,7 @@ function _upload(callback, file) {
     });
 }
 
-async function loadFiles() {
+function loadFiles() {
     const js = '//api.filepicker.io/v2/filepicker.js';
     
     return Promise.all([

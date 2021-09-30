@@ -8,9 +8,7 @@ const {
 module.exports = (config) => {
     check(config);
     
-    const data = Object.keys(config).map((name) => {
-        return [name, config[name]];
-    });
+    const data = Object.keys(config).map((name) => [name, config[name]]);
     
     if (!data.length)
         return '';

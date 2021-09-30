@@ -150,7 +150,7 @@ test('current-file: isCurrentFile: no', (t) => {
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
     
-    t.equal(result, expect, 'should equal');
+    t.equal(result, expect);
     t.end();
 });
 

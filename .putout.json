@@ -34,7 +34,7 @@
             "remove-console": "off"
         },
         "storage.js": {
-            "remove-useless-async": "off"
+            "promises/remove-useless-async": "off"
         },
         "docker.yml": {
             "github/set-node-versions": "off"

@@ -269,9 +269,7 @@ async function promptDelete() {
     } else {
         const current = DOM.getCurrentFile();
         const isDir = DOM.isCurrentIsDir(current);
-        const getType = (isDir) => {
-            return isDir ? 'directory' : 'file';
-        };
+        const getType = (isDir) => isDir ? 'directory' : 'file';
         
         const type = getType(isDir) + ' ';
         
@@ -369,7 +367,7 @@ async function _processFiles(options, data) {
     const operation = isCopy ? copyFn : moveFn;
     
     if (shouldAsk && config(option)) {
-        const [cancel, newTo] = await prompt(title, to, names.map(encode));
+        const [cancel, newTo] = prompt(title, to, names.map(encode));
         
         if (!cancel)
             ask(newTo);
@@ -485,7 +483,7 @@ function twopack(operation, type) {
     });
 }
 
-async function prompt(msg, to, names) {
+function prompt(msg, to, names) {
     const n = names.length;
     const [name] = names;
     
