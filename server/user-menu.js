@@ -8,7 +8,6 @@ const {join} = require('path');
 const montag = require('montag');
 const tryToCatch = require('try-to-catch');
 const currify = require('currify');
-const findUp = require('find-up');
 const threadIt = require('thread-it');
 const {codeframe} = require('putout');
 const putout = threadIt(require.resolve('putout'));
@@ -44,6 +43,7 @@ async function onGET({req, res, menuName}) {
     if (url === '/default')
         return sendDefaultMenu(res);
     
+    const {findUp} = await import('find-up');
     const [errorFind, currentMenuPath] = await tryToCatch(findUp, [
         menuName,
     ], {cwd: dir});
