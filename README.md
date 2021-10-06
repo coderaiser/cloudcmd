@@ -1,11 +1,10 @@
 # Cloud Commander v15.9.8 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
-### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL]
 
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
 [MainURL]: http://cloudcmd.io "Main"
 [BlogURL]: http://blog.cloudcmd.io "Blog"
-[HerokuURL]: https://cloudcmd.herokuapp.com/ "Heroku"
 [BuildStatusURL]: https://travis-ci.org/coderaiser/cloudcmd "Build Status"
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
 [BuildAppveyorURL]: https://ci.appveyor.com/project/coderaiser/cloudcmd
