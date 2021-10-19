@@ -50,6 +50,7 @@ test('rest: isRootAll', (t) => {
 
 test('rest: onPUT: no args', async (t) => {
     const [e] = await tryToCatch(_onPUT, {});
+    
     t.equal(e.message, 'name should be a string!', 'should throw when no args');
     t.end();
 });

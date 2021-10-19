@@ -24,6 +24,7 @@ test('validate: root: bad', (t) => {
     };
     
     const [e] = tryCatch(cloudcmd, {config});
+    
     t.equal(e.message, 'dir should be a string', 'should throw');
     t.end();
 });
@@ -64,6 +65,7 @@ test('validate: root: stat', (t) => {
     fs.statSync = statSync;
     
     mockRequire.stop(exitPath);
+    
     t.calledWith(fn, [msg, error], 'should call fn');
     t.end();
 });

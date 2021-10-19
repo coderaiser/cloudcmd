@@ -41,6 +41,7 @@ test('cloudcmd: static: user menu: IO.write', async (t) => {
     });
     
     const path = '/.cloudcmd.menu.js';
+    
     t.calledWith(write, [path, _data], 'should call IO.write');
     t.end();
 });
@@ -72,6 +73,7 @@ test('cloudcmd: static: user menu: setCurrentByName', async (t) => {
     });
     
     const fileName = '.cloudcmd.menu.js';
+    
     t.calledWith(setCurrentByName, [fileName], 'should call DOM.setCurrentByName');
     t.end();
 });
@@ -120,6 +122,7 @@ test('cloudcmd: static: user menu: compare directories', async (t) => {
     });
     
     const {files} = DOM.CurrentInfo.files;
+    
     t.calledWith(DOM.getFilenames, [files], 'should call getFilenames');
     t.end();
 });

@@ -31,6 +31,7 @@ test('common: datetime: no arg', (t) => {
     datetime();
     
     global.Date = Date;
+    
     t.ok(called, 'should call new Date');
     t.end();
 });

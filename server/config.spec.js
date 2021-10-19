@@ -102,6 +102,7 @@ test('config: middle: no', (t) => {
     };
     
     middle(req, res, next);
+    
     t.ok(next.calledWith(), 'should call next');
     t.end();
 });
