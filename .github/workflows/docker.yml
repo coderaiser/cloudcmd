@@ -1,49 +1,39 @@
 name: Docker CI
-
 on:
   push:
     tags:
       - "*"
-
 jobs:
   buildx:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
       - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: 16.x
-
       - name: NPM Install
         run: |
           npm install
-
       - name: NPM Lint
         run: |
           npm run lint
-
       - name: NPM Build
         id: npm-build
-        run: |
+        run: >
           npm run build
-          echo "::set-output name=version::$(grep '"version":' package.json -m1 | cut -d\" -f4)"
 
+          echo "::set-output name=version::$(grep '"version":' package.json -m1 | cut -d\" -f4)"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-
-      # Docker Username and Password have to be set as secrets in GitHub repo.
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
-
       - name: Build and push base-image
         uses: docker/build-push-action@v2
         with:
@@ -54,7 +44,6 @@ jobs:
           tags: |
             coderaiser/cloudcmd:latest
             coderaiser/cloudcmd:${{ steps.npm-build.outputs.version }}
-
       - name: Build and push alpine-image
         uses: docker/build-push-action@v2
         with:

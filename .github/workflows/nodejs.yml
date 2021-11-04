@@ -1,57 +1,40 @@
 name: Node CI
-
-on: [push]
-
+on:
+  - push
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       NAME: cloudcmd
-    
     strategy:
       matrix:
         node-version:
           - 14.x
           - 16.x
+          - 17.x
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-
       - name: Install Redrun
-        run:
-          npm i redrun -g
-      
+        run: npm i redrun -g
       - name: Install
-        run:
-          npm install
-
+        run: npm install
       - name: Lint
-        run:
-          redrun fix:lint
-    
+        run: redrun fix:lint
       - name: Commit fixes
         uses: EndBug/add-and-commit@v7
         with:
-          message: 'chore(${{ env.NAME }}) lint using actions'
-
+          message: chore(${{ env.NAME }}) lint using actions
       - name: Build
-        run:
-          redrun build
-
+        run: redrun build
       - name: Test
-        run:
-          redrun test
-
+        run: redrun test
       - name: Coverage
-        run:
-          redrun coverage coverage:report
-
+        run: redrun coverage coverage:report
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
