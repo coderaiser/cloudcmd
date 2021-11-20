@@ -301,7 +301,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
 });
 
 test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
-    const name = '$$$\'&quot;';
+    const name = `$$$'&quot;`;
     const path = '/';
     const files = [{
         name,

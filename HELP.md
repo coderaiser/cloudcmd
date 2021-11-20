@@ -955,11 +955,13 @@ First, locate the command to run cloudcmd
 ```sh
 which cloudcmd
 ```
+
 take note of the result and create a systemd entry by executing
 
 ```sh
 sudo nano /etc/systemd/system/cloudcmd.service
 ```
+
 and use this template
 
 ```
@@ -975,6 +977,7 @@ User = YOUR_USER
 [Install]
 WantedBy = multi-user.target
 ```
+
 Don't forget to change the line for `ExecStart` and `User`
 
 Save the changes and exit editor.
@@ -998,6 +1001,7 @@ take note of the result and create a rc script
 ```
 vi /usr/local/etc/rc.d/cloudcmd
 ```
+
 and use this template
 
 ```
@@ -1079,6 +1083,7 @@ There are a lot of ways to be involved in `Cloud Commander` development:
 - if you know a language not currently translated, or would like to improve an existing translation, you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
 
 ## Version history
+
 - *2021.02.03*, **[v15.6.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.6.0)**
 - *2021.02.02*, **[v15.5.2](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.2)**
 - *2021.01.31*, **[v15.5.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.1)**

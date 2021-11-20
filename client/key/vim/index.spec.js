@@ -26,8 +26,7 @@ const {Buffer} = DOM;
 const vim = require(pathVim);
 
 test('cloudcmd: client: key: set next file: no', (t) => {
-    const element = {
-    };
+    const element = {};
     
     const setCurrentFile = stub();
     
@@ -358,8 +357,7 @@ test('cloudcmd: client: key: set first file current: ^', (t) => {
 });
 
 test('cloudcmd: client: key: visual', (t) => {
-    const element = {
-    };
+    const element = {};
     
     const toggleSelectedFile = stub();
     
@@ -374,8 +372,7 @@ test('cloudcmd: client: key: visual', (t) => {
 });
 
 test('cloudcmd: client: key: ESC', (t) => {
-    const element = {
-    };
+    const element = {};
     
     const unselectFiles = stub();
     

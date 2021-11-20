@@ -165,7 +165,6 @@ docker-compose up
 
 More documentation you can find on https://cloudcmd.io/.
 
-
 ## Get involved
 
 There is a lot ways to be involved in `Cloud Commander` development:

@@ -382,7 +382,12 @@ function CloudCmdProto(DOM) {
             noCurrent,
         } = options;
         
-        const names = ['file', 'path', 'link', 'pathLink'];
+        const names = [
+            'file',
+            'path',
+            'link',
+            'pathLink',
+        ];
         
         const [
             error,
