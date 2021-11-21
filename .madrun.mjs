@@ -7,6 +7,19 @@ const testEnv = {
     THREAD_IT_COUNT: 0,
 };
 
+const is17 = /^v17/.test(process.version);
+
+// fix for ERR_OSSL_EVP_UNSUPPORTED on node v17
+// flag '--openssl-legacy-provider' not supported
+// on earlier version of node.js
+//
+// https://stackoverflow.com/a/69746937/4536327
+const buildEnv = {
+    ...is17 && {
+        NODE_OPTIONS: '--openssl-legacy-provider',
+    },
+};
+
 export default {
     'start': () => 'node bin/cloudcmd.mjs',
     'start:dev': async () => await run('start', null, {
@@ -31,7 +44,7 @@ export default {
     'coverage': async () => [testEnv, `c8 ${await cutEnv('test')}`],
     'coverage:report': () => 'c8 report --reporter=lcov',
     'report': () => 'c8 report --reporter=lcov',
-    '6to5': () => 'webpack --progress',
+    '6to5': () => [buildEnv, 'webpack --progress'],
     '6to5:client': () => run('6to5', '--mode production'),
     '6to5:client:dev': async () => await run('6to5', '--mode development', {
         NODE_ENV: 'development',
@@ -45,7 +58,7 @@ export default {
     'watch:test:client': async () => `nodemon -w client -w test/client -x ${await run('test:client')}`,
     'watch:test:server': async () => `nodemon -w client -w test/client -x ${await run('test:server')}`,
     'watch:coverage': async () => [testEnv, `nodemon -w server -w test -w common -x ${await cutEnv('coverage')}`],
-    'build': () => run('6to5:*'),
+    'build': async () => run('6to5:*'),
     'build:client': () => run('6to5:client'),
     'build:client:dev': () => run('6to5:client:dev'),
     'heroku-postbuild': () => run('6to5:client'),
