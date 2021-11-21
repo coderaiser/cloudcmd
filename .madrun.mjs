@@ -14,10 +14,8 @@ const is17 = /^v17/.test(process.version);
 // on earlier version of node.js
 //
 // https://stackoverflow.com/a/69746937/4536327
-const buildEnv = {
-    ...is17 && {
-        NODE_OPTIONS: '--openssl-legacy-provider',
-    },
+const buildEnv = is17 && {
+    NODE_OPTIONS: '--openssl-legacy-provider',
 };
 
 export default {
