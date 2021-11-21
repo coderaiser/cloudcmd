@@ -1,3 +1,18 @@
+2021.11.22, v15.9.9
+
+feature:
+- (package) putout v22.0.2
+- (package) yargs-parser v21.0.0
+- (package) yaspeller v8.0.0
+- (package) eslint-plugin-putout v11.1.0
+- (package) putout v21.1.2
+- (package) eslint v8.0.1
+- (package) eslint-plugin-putout v10.3.0
+- (package) find-up v6.1.0
+- (package) putout v20.5.1
+- (package) supertape v6.9.1
+- (package) eslint-plugin-putout v9.0.1
+
 2021.08.09, v15.9.8
 
 fix:
