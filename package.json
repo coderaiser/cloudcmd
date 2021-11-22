@@ -158,7 +158,7 @@
     "clean-css-loader": "^4.1.1",
     "codegen.macro": "^4.0.0",
     "coveralls": "^3.0.0",
-    "css-loader": "^3.0.0",
+    "css-loader": "^6.5.1",
     "css-modules-require-hook": "^4.2.3",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
