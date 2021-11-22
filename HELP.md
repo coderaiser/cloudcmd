@@ -1,11 +1,10 @@
 # Cloud Commander v15.9.9
 
-### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL]
 
 [MainURL]: http://cloudcmd.io "Main"
 [BlogURL]: http://blog.cloudcmd.io "Blog"
-[HerokuURL]: https://cloudcmd.herokuapp.com/ "Heroku"
-[HEROKU_LIVE_IMG]: https://status.cloudcmd.io/host/cloudcmd.herokuapp.com/img/file.png "Heroku"
+
 [DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
 [DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
