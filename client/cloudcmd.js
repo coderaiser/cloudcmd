@@ -10,10 +10,12 @@ const load = require('load.js');
 
 const isDev = process.env.NODE_ENV === 'development';
 
+/*
 const {
     registerSW,
     listenSW,
 } = require('./sw/register');
+*/
 
 // prevent additional loading of emitify
 window.Emitify = require('emitify');
@@ -29,7 +31,7 @@ module.exports = window.CloudCmd = async (config) => {
     
     await register(config);
     
-    require('./listeners');
+    //require('./listeners');
     require('./key');
     require('./sort');
     
@@ -64,10 +66,12 @@ const onUpdateFound = wraptile(async (config) => {
     window.CloudCmd(config);
 });
 
+/*
 async function register(config) {
     const {prefix} = config;
     const sw = await registerSW(prefix);
     
     listenSW(sw, 'updatefound', onUpdateFound(config));
 }
+*/
 
