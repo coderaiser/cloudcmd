@@ -4,7 +4,6 @@
 
 [MainURL]: http://cloudcmd.io "Main"
 [BlogURL]: http://blog.cloudcmd.io "Blog"
-
 [DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
 [DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
