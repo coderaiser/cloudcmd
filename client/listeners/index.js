@@ -125,7 +125,7 @@ module.exports.initKeysPanel = () => {
         
         const clickFuncs = {
             'f1'        : CloudCmd.Help.show,
-            'f2'        : initF2,
+            'f2'        : CloudCmd.UserMenu.show,
             'f3'        : CloudCmd.View.show,
             'f4'        : CloudCmd.EditFile.show,
             'f5'        : operation('copy'),
@@ -142,10 +142,6 @@ module.exports.initKeysPanel = () => {
         exec(clickFuncs[id]);
     });
 };
-
-function initF2() {
-    CloudCmd.UserMenu.show();
-}
 
 const getPanel = (side) => {
     if (!itype.string(side))
