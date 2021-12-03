@@ -164,7 +164,7 @@
     "emitify": "^4.0.1",
     "eslint": "^8.0.1",
     "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-putout": "^11.1.0",
+    "eslint-plugin-putout": "^12.2.0",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "gritty": "^6.0.0",
     "gunzip-maybe": "^1.3.1",
