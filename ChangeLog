@@ -1,3 +1,10 @@
+2021.12.04, v15.9.10
+
+fix:
+- (client) operation: move and copy not working (#358)
+feature:
+- (package) eslint-plugin-putout v12.2.0
+
 2021.11.22, v15.9.9
 
 feature:
