@@ -82,7 +82,7 @@ function _authCheck(spawn, ok) {
     const alertDialog = wraptile(Dialog.alert);
     
     spawn.on('accept', accept(spawn));
-    spawn.on('reject', alertDialog ('Wrong credentials!'));
+    spawn.on('reject', alertDialog('Wrong credentials!'));
     spawn.emit('auth', config('username'), config('password'));
 }
 
@@ -367,7 +367,7 @@ async function _processFiles(options, data) {
     const operation = isCopy ? copyFn : moveFn;
     
     if (shouldAsk && config(option)) {
-        const [cancel, newTo] = prompt(title, to, names.map(encode));
+        const [cancel, newTo] = await prompt(title, to, names.map(encode));
         
         if (!cancel)
             ask(newTo);
@@ -483,7 +483,7 @@ function twopack(operation, type) {
     });
 }
 
-function prompt(msg, to, names) {
+async function prompt(msg, to, names) {
     const n = names.length;
     const [name] = names;
     
@@ -496,7 +496,7 @@ function prompt(msg, to, names) {
     
     msg += ' to';
     
-    return Dialog.prompt(msg, to);
+    return await Dialog.prompt(msg, to);
 }
 
 async function loadAll() {
