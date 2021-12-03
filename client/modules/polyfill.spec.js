@@ -4,6 +4,8 @@ const test = require('supertape');
 const mockRequire = require('mock-require');
 const stub = require('@cloudcmd/stub');
 
+const {stopAll} = mockRequire;
+
 test('cloudcmd: client: polyfill: scrollIntoViewIfNeaded', (t) => {
     const {DOM} = global;
     const scroll = stub();
@@ -25,6 +27,8 @@ test('cloudcmd: client: polyfill: scrollIntoViewIfNeaded', (t) => {
         el, {
             block: 'nearest',
         }];
+    
+    stopAll();
     
     t.calledWith(scroll, args, 'should call scrollIntoViewIfNeaded');
     t.end();

@@ -3,7 +3,7 @@
 const test = require('supertape');
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
-const {reRequire} = mockRequire;
+const {reRequire, stopAll} = mockRequire;
 
 const pathConfig = './config';
 const pathRoot = './root';
@@ -28,6 +28,8 @@ test('cloudcmd: root: mellow', (t) => {
     mockRequire.stop('mellow');
     mockRequire.stopAll(pathConfig);
     reRequire(pathRoot);
+    
+    stopAll();
     
     t.calledWith(webToWin, [dir, dirRoot], 'should call mellow');
     t.end();

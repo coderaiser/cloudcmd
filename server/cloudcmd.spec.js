@@ -112,6 +112,7 @@ test('cloudcmd: auth: reject', (t) => {
     
     const username = 'root';
     const password = 'toor';
+    
     config('auth', true);
     config('username', username);
     config('password', password);

@@ -7,7 +7,7 @@ const {Volume} = require('memfs');
 const {ufs} = require('unionfs');
 
 const mockRequire = require('mock-require');
-const {reRequire} = mockRequire;
+const {reRequire, stopAll} = mockRequire;
 const serveOnce = require('serve-once');
 
 const cloudcmdPath = '../../';
@@ -55,6 +55,8 @@ test('cloudcmd: rest: rename', async (t) => {
     mockRequire.stop('fs');
     
     const expected = 'rename: ok("{"from":"/fixture/mv.txt","to":"/fixture/tmp/mv.txt"}")';
+    
+    stopAll();
     
     t.equal(body, expected, 'should move');
     t.end();

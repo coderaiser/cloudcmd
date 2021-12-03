@@ -53,7 +53,6 @@ test('cloudcmd: client: key: set next file current', (t) => {
     vim('j', {});
     
     t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
-    
     t.end();
 });
 
@@ -73,7 +72,6 @@ test('cloudcmd: client: key: set next file current', (t) => {
     vim('j', {});
     
     t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
-    
     t.end();
 });
 
@@ -92,7 +90,6 @@ test('cloudcmd: client: key: set next file current: g', (t) => {
     vim('j', {});
     
     t.calledWith(setCurrentFile, [nextSibling], 'should ignore g');
-    
     t.end();
 });
 
@@ -116,7 +113,6 @@ test('cloudcmd: client: key: set +2 file current', (t) => {
     vim('j', event);
     
     t.calledWith(setCurrentFile, [last], 'should set next file');
-    
     t.end();
 });
 
@@ -172,7 +168,6 @@ test('cloudcmd: client: key: delete +2 files from current', (t) => {
     vim('j', event);
     
     t.calledWith(show, ['delete'], 'should call delete');
-    
     t.end();
 });
 
@@ -201,7 +196,6 @@ test('cloudcmd: client: key: copy: no', (t) => {
     vim('y', {});
     
     t.notOk(copy.called, 'should not copy files');
-    
     t.end();
 });
 
@@ -237,7 +231,6 @@ test('cloudcmd: client: key: paste', (t) => {
     vim('p', {});
     
     t.ok(paste.calledWith(), 'should paste files');
-    
     t.end();
 });
 
@@ -286,7 +279,6 @@ test('cloudcmd: client: key: set last file current: shift + g', (t) => {
     vim('G', {});
     
     t.calledWith(setCurrentFile, [last], 'should set last file');
-    
     t.end();
 });
 
@@ -307,7 +299,6 @@ test('cloudcmd: client: key: set last file current: $', (t) => {
     vim('$', {});
     
     t.calledWith(setCurrentFile, [last], 'should set last file');
-    
     t.end();
 });
 
@@ -330,7 +321,6 @@ test('cloudcmd: client: key: set first file current: gg', (t) => {
     vim('g', {});
     
     t.calledWith(setCurrentFile, [first], 'should set first file');
-    
     t.end();
 });
 
@@ -352,7 +342,6 @@ test('cloudcmd: client: key: set first file current: ^', (t) => {
     vim('^', {});
     
     t.calledWith(setCurrentFile, [first], 'should set first file');
-    
     t.end();
 });
 
@@ -367,7 +356,6 @@ test('cloudcmd: client: key: visual', (t) => {
     vim('v', {});
     
     t.calledWith(toggleSelectedFile, [element], 'should toggle selection');
-    
     t.end();
 });
 
@@ -431,7 +419,7 @@ test('cloudcmd: client: key: n', (t) => {
     
     vim('n', event);
     
-    stopAll(pathFind);
+    stopAll();
     
     t.ok(findNext.calledWith(), 'should call findNext');
     t.end();
@@ -449,7 +437,7 @@ test('cloudcmd: client: key: N', (t) => {
     
     vim('N', event);
     
-    stopAll(pathFind);
+    stopAll();
     
     t.ok(findPrevious.calledWith(), 'should call findPrevious');
     t.end();
