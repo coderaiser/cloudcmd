@@ -1,4 +1,11 @@
 {
+    "rules": {
+        "declare-undefined-variables": ["on", {
+            "declarations": {
+                "stopAll": "const {stopAll} = mockRequire"
+            }
+        }]
+    },
     "ignore": [
         "html",
         "fixture*",
