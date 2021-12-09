@@ -120,8 +120,10 @@ module.exports.put = (url, body) => {
         if (!over)
             return;
         
-        if (xhr.status === OK)
+        if (xhr.status === OK) {
+            emitter.emit('progress', 100);
             return emitter.emit('end');
+        }
         
         const error = Error(xhr.responseText);
         emitter.emit('error', error);
