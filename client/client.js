@@ -41,7 +41,7 @@ function CloudCmdProto(DOM) {
     let Listeners;
     
     const log = (...a) => {
-        if (!isDev )
+        if (!isDev)
             return;
         
         console.log(...a);
