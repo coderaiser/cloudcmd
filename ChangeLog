@@ -1,3 +1,8 @@
+2021.12.09, v15.9.11
+
+fix:
+- (client) load: Upload stuck for zero byte files (#359)
+
 2021.12.04, v15.9.10
 
 fix:
