@@ -45,6 +45,9 @@ const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
 
+const isUndefined = (a) => typeof a === 'undefined';
+const isFn = (a) => typeof a === 'function';
+
 module.exports = (params) => {
     const p = params || {};
     const options = p.config || {};
@@ -98,7 +101,7 @@ function defaultValue(config, name, options) {
     const value = options[name];
     const previous = config(name);
     
-    if (typeof value === 'undefined')
+    if (isUndefined(value))
         return previous;
     
     return value;
@@ -106,7 +109,7 @@ function defaultValue(config, name, options) {
 
 module.exports._getPrefix = getPrefix;
 function getPrefix(prefix) {
-    if (typeof prefix === 'function')
+    if (isFn(prefix))
         return prefix() || '';
     
     return prefix || '';

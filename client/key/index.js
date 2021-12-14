@@ -25,6 +25,8 @@ const toggleVim = (keyCode) => {
     }
 };
 
+const isUndefined = (a) => typeof a === 'undefined';
+
 Chars([]);
 
 const {assign} = Object;
@@ -61,7 +63,7 @@ async function listener(event) {
     
     // strange chrome bug calles listener twice
     // in second time event misses a lot fields
-    if (typeof event.altKey === 'undefined')
+    if (isUndefined(event.altKey))
         return;
     
     const alt = event.altKey;
