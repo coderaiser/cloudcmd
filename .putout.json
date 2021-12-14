@@ -1,11 +1,4 @@
 {
-    "rules": {
-        "declare-undefined-variables": ["on", {
-            "declarations": {
-                "stopAll": "const {stopAll} = mockRequire"
-            }
-        }]
-    },
     "ignore": [
         "html",
         "fixture*",
@@ -13,6 +6,9 @@
         "fontello.json"
     ],
     "match": {
+        "base64": {
+            "convert-typeof-to-is-type": "off"
+        },
         "route.spec.js": {
             "tape/convert-ok-to-match": "off"
         },
