@@ -1,7 +1,5 @@
 'use strict';
 
-const isFn = (a) => typeof a === 'function';
-
 module.exports.btoa = (str) => {
     if (typeof btoa === 'function')
         return btoa(str);
@@ -12,7 +10,7 @@ module.exports.btoa = (str) => {
 };
 
 module.exports.atob = (str) => {
-    if (isFn(atob))
+    if (typeof atob === 'function')
         return atob(str);
     
     return Buffer
