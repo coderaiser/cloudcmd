@@ -3,7 +3,7 @@
 const isFn = (a) => typeof a === 'function';
 
 module.exports.btoa = (str) => {
-    if (isFn(btoa))
+    if (typeof btoa === 'function')
         return btoa(str);
     
     return Buffer
