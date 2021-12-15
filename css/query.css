@@ -130,7 +130,7 @@
     }
     
     .file::before, .file-link::before {
-        color: rgba(26, 224, 124, 0.56);
+        color: rgb(26 224 124 / 56%);
         content: '\e80d';
     }
     
@@ -140,7 +140,7 @@
     
     /* меняем иконки на шрифтовые */
     .mini-icon {
-        color           : rgba(246, 224, 124, 0.56);
+        color           : rgb(246 224 124 / 56%);
         font            : 16px 'Fontello';
         background-image: none;
         padding         : 1%;
@@ -168,7 +168,7 @@
     }
     
     .archive::before, .archive-link {
-        color: rgba(26, 224, 124, 0.56);
+        color: rgb(26 224 124 / 56%);
         content: '\e81d';
     }
     
