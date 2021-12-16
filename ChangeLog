@@ -1,3 +1,8 @@
+2021.12.16, v15.9.12
+
+fix:
+- (client) loadDir: history enabled by default
+
 2021.12.09, v15.9.11
 
 fix:
