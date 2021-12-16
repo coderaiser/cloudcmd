@@ -97,7 +97,7 @@ function CloudCmdProto(DOM) {
         
         const {
             panel,
-            history,
+            history = true,
             noCurrent,
             currentName,
         } = p;
