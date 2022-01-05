@@ -1,4 +1,4 @@
-FROM node
+FROM node:lts-buster-slim
 LABEL maintainer="Coderaiser"
 
 RUN mkdir -p /usr/src/app
