@@ -16,3 +16,4 @@ modules/emitify
 dist
 dist-dev
 
+.idea
