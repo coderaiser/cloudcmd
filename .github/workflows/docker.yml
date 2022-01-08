@@ -16,9 +16,9 @@ jobs:
       - name: Install Redrun
         run: npm i redrun -g
       - name: NPM Install
-        run: Lint
+        run: npm install
       - name: Lint
-        run: redrun fix:lint
+        run: redrun lint
       - name: Build
         id: build
         run: >
