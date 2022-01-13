@@ -70,8 +70,6 @@ async function keyListener(event) {
         const [, pattern] = await Dialog.prompt('Apply pattern:', '[n][e]');
         pattern && applyPattern(pattern);
     }
-    
-    event.preventDefault();
 }
 
 function applyPattern(pattern) {
