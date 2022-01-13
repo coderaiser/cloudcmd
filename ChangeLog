@@ -1,3 +1,13 @@
+2022.01.13, v15.9.14
+
+fix:
+- (cloudcmd) client: edit-names in vim mode
+- (docker) images: make dockerfiles use node:lts-buster and node:lts-buster-slim for alpine (#363)
+- (docker) images: make dockerfiles use node:lts-buster-slim as base image (#357)
+feature:
+- (package) eslint-plugin-putout v13.0.1
+- (package) putout v24.0.2
+
 2021.12.23, v15.9.13
 
 feature:
