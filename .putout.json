@@ -22,10 +22,10 @@
             "webpack": "on"
         },
         "server": {
-            "remove-process-exit": "on"
+            "nodejs/remove-process-exit": "on"
         },
         "server/{server,exit}.js": {
-            "remove-process-exit": "off"
+            "nodejs/emove-process-exit": "off"
         },
         "server/{server,exit,terminal,distribute/log}.js": {
             "remove-console": "off"
