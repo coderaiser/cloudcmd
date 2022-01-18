@@ -9,7 +9,7 @@ COPY package.json /usr/src/app/
 RUN npm config set package-lock false && \
     npm install --production && \
     apt update && \
-    apt install -y make g++ python3 && \
+    apt install -y make nano mc g++ python3 && \
     npm i gritty && \
     npm cache clean --force && \
     apt remove -y make g++ python3 && \
@@ -24,6 +24,13 @@ ENV cloudcmd_terminal_path gritty
 ENV cloudcmd_open false
 
 EXPOSE 8000
+
+COPY cloudcmd.css /root/cloudcmd.css
+
+COPY cloudcmd.css /usr/src/app/dist/cloudcmd.css
+COPY banner.png /usr/src/app/
+COPY favicon.ico /usr/src/app/
+
 
 ENTRYPOINT ["/usr/src/app/bin/cloudcmd.mjs"]
 
