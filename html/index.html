@@ -1,42 +1,49 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="robots" content="noindex,nofollow">
-        <meta name="theme-color" content="rgb(49,123,249)">
-        <!-- mobile first design -->
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="icon" href="{{ prefix }}/favicon.ico">
-        
-        <link rel=stylesheet href="{{ prefix }}/dist/cloudcmd.css">
-        <noscript>
-            <link rel=stylesheet href="{{ prefix }}/dist/nojs.css">
-        </noscript>
-        <style data-name="columns">
-            {{ columns }}
-        </style>
-    </head>
-    <body>
-        <div class="fm">{{ fm }}</div>
-        <div id="js-keyspanel" class="keyspanel">
-            <button id=f1      class="cmd-button reduce-text icon-help"      title="Help"            >F1</button>
-            <button id=f2      class="cmd-button reduce-text icon-user-menu" title="User Menu"       >F2</button>
-            <button id=f3      class="cmd-button reduce-text icon-view"      title="View"            >F3</button>
-            <button id=f4      class="cmd-button reduce-text icon-edit "     title="Edit"            >F4</button>
-            <button id=f5      class="cmd-button reduce-text icon-copy"      title="Copy"            >F5</button>
-            <button id=f6      class="cmd-button reduce-text icon-move"      title="Move"            >F6</button>
-            <button id=f7      class="cmd-button reduce-text icon-directory" title="New Directory"   >F7</button>
-            <button id=f8      class="cmd-button reduce-text icon-delete"    title="Delete"          >F8</button>
-            <button id=f9      class="cmd-button reduce-text icon-menu"      title="Menu"            >F9</button>
-            <button id=f10     class="cmd-button reduce-text icon-config"    title="Config"          >F10</button>
-            <button id=~       class="cmd-button reduce-text icon-console"   title="Console"         >~</button>
-            <button id=shift~  class="cmd-button reduce-text icon-terminal"  title="Terminal"        >⇧ ~</button>
-            <button id=contact class="cmd-button reduce-text icon-contact"   title="Contact"         ></button>
-        </div>
-        <script src="{{ prefix }}/dist/cloudcmd.common.js"></script>
-        <script src="{{ prefix }}/dist/cloudcmd.js"></script>
-        <script>
-            CloudCmd({{ config }});
-        </script>
-    </body>
-</html>
+<meta charset="utf-8" /><meta name="robots" content="noindex,nofollow" />
+<meta name="theme-color" content="rgb(49,123,249)" />
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport" />
+<link rel="icon" href="{{ prefix }}/favicon.ico" />
+<link rel="stylesheet" href="{{ prefix }}/dist/cloudcmd.css" />
+<noscript>
+	<link rel="stylesheet" href="{{ prefix }}/dist/nojs.css" />
+</noscript>
+<style data-name="columns">
+    {{ columns }}
+</style>
+
+
+	<div style="
+			color: #7e7e7e;
+			font-size: 18px;
+			z-index: 5000;
+			font-family: Arial Black, sans-serif;
+			padding-left: 14px;
+			margin-top: -8px; ">
+			
+	<a href="http://192.168.0.113:8000/"><img class= "logotype" src="/banner.png" ></a>		
+		
+	 <button class="cmd-buttonhr reduce-text"><a href="http://192.168.0.113:8000/fs/UNRAID/mnt/cache/">cache</a></button>
+	 <button class="cmd-buttonhr reduce-text"><a href="http://192.168.0.113:8000/fs/UNRAID/mnt/cache/appdata/">appdata</a></button>
+	 <button class="cmd-buttonhr reduce-text"><a href="http://192.168.0.113:8000/fs/UNRAID/mnt/cache/appdata/swag/www/">www</a></button>
+	 <button class="cmd-buttonhr reduce-text"><a href="http://192.168.0.113:8000/fs/UNRAID/mnt/user/downloads/">downloads</a></button>
+	 <button class="cmd-buttonhr reduce-text"><a href="http://192.168.0.113:8000/fs/UNRAID/mnt/user/downloads/torrents2/watch/">watch</a></button>
+	 <button class="cmd-buttonhr reduce-text"><a href="http://192.168.0.113:8000/fs/UNRAID/mnt/user/Media/">Media</a></button>
+	 <button class="cmd-buttonhr reduce-text"><a style="color: #9d2700;" href="http://192.168.0.113:8000/fs/UNRAID/boot/">flash</a></button>
+	 
+</div>
+
+<div class="fm">{{ fm }}</div>
+<div id="js-keyspanel" class="keyspanel">
+    <button id="f1" class="cmd-button reduce-text icon-help" title="Help">F1</button> <button id="f2" class="cmd-button reduce-text icon-user-menu" title="User Menu">F2</button>
+    <button id="f3" class="cmd-button reduce-text icon-view" title="View">F3</button> <button id="f4" class="cmd-button reduce-text icon-edit" title="Edit">F4</button>
+    <button id="f5" class="cmd-button reduce-text icon-copy" title="Copy">F5</button> <button id="f6" class="cmd-button reduce-text icon-move" title="Move">F6</button>
+    <button id="f7" class="cmd-button reduce-text icon-directory" title="New Directory">F7</button> <button id="f8" class="cmd-button reduce-text icon-delete" title="Delete">F8</button>
+    <button id="f9" class="cmd-button reduce-text icon-menu" title="Menu">F9</button> <button id="f10" class="cmd-button reduce-text icon-config" title="Config">F10</button>
+    <button id="~" class="cmd-button reduce-text icon-console" title="Console">~</button> <button id="shift~" class="cmd-button reduce-text icon-terminal" title="Terminal">⇧ ~</button>
+    <button id="contact" class="cmd-button reduce-text icon-contact" title="Contact"></button>
+</div>
+<script src="{{ prefix }}/dist/cloudcmd.common.js"></script>
+<script src="{{ prefix }}/dist/cloudcmd.js"></script>
+<script>
+    CloudCmd({{ config }});
+</script>
