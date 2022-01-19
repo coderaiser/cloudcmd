@@ -253,13 +253,11 @@ margin-top: 5px;
  float:left;
  width:12%;
  margin-right:27px;
- text-align:right;
- color: #616161;
+ text-align:right
 }
 .date {
  float:left;
- width:19%;
- color: #616161;
+ width:19%
 }
 .owner {
  display:inline-block;
