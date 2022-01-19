@@ -221,8 +221,7 @@ margin-top: 5px;
 }
 .selected-file,
 .selected-file .name>a {
-color: #c60000;
-font-weight: bold;
+ color:#fe9fe0
 }
 .panel-right {
  float:left;
@@ -254,11 +253,13 @@ font-weight: bold;
  float:left;
  width:12%;
  margin-right:27px;
- text-align:right
+ text-align:right;
+ color: #616161;
 }
 .date {
  float:left;
- width:19%
+ width:19%;
+ color: #616161;
 }
 .owner {
  display:inline-block;
@@ -311,10 +312,14 @@ font-weight: bold;
  font-family:Fontello;
  content:"\e806  "
 }
-.icon-directory {
+
+/*
+.icon-directory:before {
  font-family:Fontello;
  content:"\e807  "
 }
+*/
+
 .icon-delete:before {
  font-family:Fontello;
  content:"\e808  "
