@@ -221,7 +221,8 @@ margin-top: 5px;
 }
 .selected-file,
 .selected-file .name>a {
- color:#fe9fe0
+color: #c60000;
+font-weight: bold;
 }
 .panel-right {
  float:left;
