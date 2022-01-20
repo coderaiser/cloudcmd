@@ -28,7 +28,7 @@
     content     : '\e806  ';
 }
 
-.icon-directory {
+.icon-directory::before {
     font-family : 'Fontello';
     content     : '\e807  ';
 }
