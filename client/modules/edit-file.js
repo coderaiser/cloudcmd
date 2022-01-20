@@ -78,6 +78,7 @@ module.exports.show = async (options) => {
     
     const {path} = Info;
     const name = getName();
+    
     setMsgChanged(name);
     
     CloudCmd.Edit

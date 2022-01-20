@@ -476,6 +476,7 @@ test('cloudcmd: route: read: root', async (t) => {
     const cloudcmd = reRequire(cloudcmdPath);
     const configManager = createConfigManager();
     const root = '/hello';
+    
     configManager('root', root);
     
     const {request} = serveOnce(cloudcmd, {

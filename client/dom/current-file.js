@@ -220,6 +220,7 @@ module.exports.setCurrentFile = (currentFile, options) => {
     
     /* scrolling to current file */
     const CENTER = true;
+    
     DOM.scrollIntoViewIfNeeded(currentFile, CENTER);
     
     CloudCmd.emit('current-file', currentFile);

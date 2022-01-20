@@ -58,6 +58,7 @@ test('cloudcmd: client: key: disable vim', async (t) => {
     
     const {CloudCmd} = global;
     const {config} = CloudCmd;
+    
     CloudCmd.config = _config;
     
     setBind();
