@@ -141,10 +141,11 @@ padding-right: 9px;
 padding-bottom: 0px;
 padding-left: 9px;
  border-radius: 6px !important;
- box-shadow: none !important;
- -webkit-box-shadow: none !important;
+
+
   border:1px solid #bbbbbb  !important;
   vertical-align: top;
+  box-shadow: 0 0 3px rgba(0,0,0,.3);
 }
 .cmd-buttonhr:hover {
  border:1px solid #aaaaaa !important;
@@ -311,12 +312,12 @@ margin-top: 5px;
  content:"\e806  "
 }
 
-/*
-.icon-directory:before {
+
+.icon-directory::before {
  font-family:Fontello;
  content:"\e807  "
 }
-*/
+
 
 .icon-delete:before {
  font-family:Fontello;
