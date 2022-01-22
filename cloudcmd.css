@@ -214,7 +214,7 @@ margin-top: 5px;
 }
 .current-file {
  /* box-shadow:0 0 0 1px var(--color-transparent) inset */
- background-color: #ffedd2;
+ background-color: #fff3d9;
  color: #d40000;
 }
 .cut-file {
