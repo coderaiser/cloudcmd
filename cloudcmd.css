@@ -215,14 +215,14 @@ margin-top: 5px;
 .current-file {
  /* box-shadow:0 0 0 1px var(--color-transparent) inset */
  background-color: #ffedd2;
- 
+ color: #d40000;
 }
 .cut-file {
  opacity:.7
 }
 .selected-file,
 .selected-file .name>a {
- color:#fe9fe0
+ color:#d40000
 }
 .panel-right {
  float:left;
@@ -238,7 +238,7 @@ margin-top: 5px;
  width:98%
 }
 .selected-panel {
- border-color:rgba(254,159,224,.4)
+ border-color:rgba(254,159,224,.4);
 }
 .keyspanel {
  text-align:center
