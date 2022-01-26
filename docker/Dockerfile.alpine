@@ -2,20 +2,36 @@ FROM node:lts-buster-slim
 LABEL maintainer="Coderaiser"
 
 RUN mkdir -p /usr/src/app
+
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 
-RUN npm config set package-lock false && \
+
+RUN npm root set package-lock false && \
     npm install --production && \
     apt update && \
-    apt install -y make nano mc g++ python3 && \
+    apt install -y make bash nano mc g++ python3 && \
     npm i gritty && \
     npm cache clean --force && \
     apt remove -y make g++ python3 && \
     rm -rf /usr/include /tmp/* /var/cache/apt/*
 
 COPY . /usr/src/app
+
+RUN mkdir -p /config
+
+# Define mountable directories.
+VOLUME ["/config"]
+
+COPY cloudcmd.css /usr/src/app/dist/
+
+COPY docker-entrypoint.sh /usr/local/bin/
+COPY update.sh /usr/local/bin/
+
+RUN chmod +u /usr/local/bin/docker-entrypoint.sh
+RUN chmod +u /usr/local/bin/update.sh
+
 
 WORKDIR /
 
@@ -25,12 +41,47 @@ ENV cloudcmd_open false
 
 EXPOSE 8000
 
-COPY cloudcmd.css /root/cloudcmd.css
 
-COPY cloudcmd.css /usr/src/app/dist/cloudcmd.css
-COPY banner.png /usr/src/app/
-COPY favicon.ico /usr/src/app/
+#ENTRYPOINT ["/usr/src/app/bin/cloudcmd.mjs"]
+
+#RUN /root/customcss.sh
+
+#RUN cp -n /usr/src/app/cloudcmd.css /config/cloudcmd.css
+#RUN cp -n /usr/src/app/dist/index.html /config/index.html
+
+#RUN cp /usr/src/app/banner.png /config/banner.png
+#RUN cp /usr/src/app/favicon.ico /config/favicon.ico
+
+#RUN cp /config/cloudcmd.css /usr/src/app/dist/cloudcmd.css
+#RUN cp /config/index.html /usr/src/app/dist/index.html 
 
 
-ENTRYPOINT ["/usr/src/app/bin/cloudcmd.mjs"]
 
+
+
+ENTRYPOINT ["sh","/usr/local/bin/docker-entrypoint.sh"]
+
+#==============================================================
+#   Instructions how to compile and build docker
+#==============================================================
+
+# All commands need to executed from the root of the repository.
+#git@github.com:coderaiser/cloudcmd.git
+
+
+#cd cloudcmd
+
+# Install NPM packages
+#npm i redrun -g
+#npm install
+
+# Build the artifact
+#redrun build
+
+# docker build --file docker/Dockerfile.alpine -t cloudcommander .
+# docker run -dp 8000 cloudcommander
+#	To push to repo:
+#	docker login
+#	docker tag cloudcommander hernandito/cloudcommander
+#	docker push hernandito/cloudcommander:latest
+#
