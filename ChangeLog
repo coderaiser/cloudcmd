@@ -1,3 +1,12 @@
+2022.02.19, v16.0.0
+
+feature:
+- (cloudcmd) drop support of node < 16
+- (package) supertape v7.1.0
+- (package) eslint-plugin-putout v13.11.0
+- (package) madrun v9.0.0
+- (package) putout v25.0.1
+
 2022.01.20, v15.9.15
 
 fix:
