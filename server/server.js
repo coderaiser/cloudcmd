@@ -35,12 +35,12 @@ const logger = tryRequire('morgan');
 
 module.exports = async (options, config) => {
     const prefix = config('prefix');
-    const port = process.env.PORT || /* c9           */
-                 config('port');
+    const port = process.env.PORT /* c9           */
+                 || config('port');
     
-    const ip = process.env.IP || /* c9           */
-                config('ip') ||
-                '0.0.0.0';
+    const ip = process.env.IP /* c9           */
+                || config('ip')
+                || '0.0.0.0';
     
     const app = express();
     const server = http.createServer(app);

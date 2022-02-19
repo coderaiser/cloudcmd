@@ -830,7 +830,6 @@ module.exports.updateCurrentInfo = (currentFile) => {
     info.isDir          = DOM.isCurrentIsDir();
     info.isSelected     = DOM.isSelected(current);
     info.panelPosition  = DOM.getPanel().dataset.name.replace('js-', '');
-    info.isOnePanel     =
-        info.panel.getAttribute('data-name') ===
+    info.isOnePanel     =        info.panel.getAttribute('data-name') ===
         info.panelPassive.getAttribute('data-name');
 };

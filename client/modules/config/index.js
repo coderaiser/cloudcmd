@@ -228,8 +228,7 @@ function onAuthChange(checked) {
     const elUsername = input.getElementByName('username', Element);
     const elPassword = input.getElementByName('password', Element);
     
-    elUsername.disabled =
-    elPassword.disabled = !checked;
+    elUsername.disabled = elPassword.disabled = !checked;
 }
 
 function onNameChange(name) {

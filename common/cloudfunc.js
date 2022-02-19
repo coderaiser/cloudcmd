@@ -253,12 +253,7 @@ function getAttribute(type) {
 }
 
 module.exports._getSize = getSize;
-function getSize(file) {
-    const {
-        size,
-        type,
-    } = file;
-    
+function getSize({size, type}) {
     if (type === 'directory')
         return '&lt;dir&gt;';
     
