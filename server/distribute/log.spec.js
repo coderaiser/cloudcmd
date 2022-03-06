@@ -32,5 +32,5 @@ test('distribute: log: config', (t) => {
     
     t.end();
 }, {
-    checkAssertionsCount: false
+    checkAssertionsCount: false,
 });
