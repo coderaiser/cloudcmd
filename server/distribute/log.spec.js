@@ -31,4 +31,6 @@ test('distribute: log: config', (t) => {
     config('log', logOriginal);
     
     t.end();
+}, {
+    checkAssertionsCount: false
 });

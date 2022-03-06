@@ -5,7 +5,7 @@ const fs = require('fs');
 const {reRequire} = require('mock-require');
 const columnsPath = '../../server/columns';
 
-test('columns', (t) => {
+test('columns: prod', (t) => {
     const {NODE_ENV} = process.env;
     process.env.NODE_ENV = '';
     const columns = reRequire(columnsPath);

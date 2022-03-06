@@ -13,7 +13,8 @@ test('cloudcmd: common: callbackify: error', async (t) => {
     const promise = stub().rejects(Error('hello'));
     
     const fn = callbackify(promise);
-    const [error] = await tryToCatch(promisify(fn));
+    const newPromise = promisify(fn);
+    const [error] = await tryToCatch(newPromise);
     
     t.equal(error.message, 'hello');
     t.end();

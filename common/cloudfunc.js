@@ -229,7 +229,8 @@ module.exports.buildFromJSON = (params) => {
                 owner,
                 mode,
             });
-        }).join('');
+        })
+        .join('');
     
     fileTable += '</ul>';
     
