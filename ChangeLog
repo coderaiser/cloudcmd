@@ -1,3 +1,13 @@
+2022.04.22, v16.0.1
+
+feature:
+- (package) dword v14.0.0
+- (package) restafary v11.0.0
+- (package) @cloudcmd/stub v4.0.1
+- (package) win32 v7.0.0
+- (package) eslint-plugin-putout v14.4.0
+
+
 2022.02.19, v16.0.0
 
 feature:
