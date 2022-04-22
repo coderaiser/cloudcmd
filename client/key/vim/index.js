@@ -91,6 +91,7 @@ function setCurrent(sibling, {count, isVisual, isDelete}) {
     select(current);
     
     const position = `${sibling}Sibling`;
+    
     for (let i = 0; i < count; i++) {
         const next = current[position];
         

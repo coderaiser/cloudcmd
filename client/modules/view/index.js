@@ -225,6 +225,7 @@ function initConfig(options) {
         return config;
     
     const names = Object.keys(options);
+    
     for (const name of names) {
         const isConfig = Boolean(config[name]);
         const item = options[name];
