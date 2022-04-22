@@ -302,6 +302,23 @@ function getCloudCmd({emit} = {}) {
     };
 }
 
+test('current-file: parseNameAttribute', (t) => {
+    const result = currentFile._parseNameAttribute('js-file-aGVsbG8mbmJzcDt3b3JsZA==');
+    const expected = 'hello\xa0world';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('current-file: parseHrefAttribute', (t) => {
+    const prefix = '/api/v1';
+    const result = currentFile._parseHrefAttribute(prefix, '/api/v1/fs/hello&nbsp;world');
+    const expected = '/hello\xa0world';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 function getDOM({
     link = {},
     getCurrentDirPath = stub(),

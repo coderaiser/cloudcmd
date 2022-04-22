@@ -1,8 +1,3 @@
-/**
- * Parse a `data-name` attribute string back into the original filename
- * @param attribute The string we wish to decode
- */
-
 'use strict';
 
 /* global DOM */
@@ -24,8 +19,8 @@ const {
 let Title;
 
 const CURRENT_FILE = 'current-file';
-const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
-const SPACE = ' ';
+const encodeNBSP = (a) => a?.replace('\xa0', '&nbsp;');
+const decodeNBSP = (a) => a?.replace('&nbsp;', '\xa0');
 
 module.exports._CURRENT_FILE = CURRENT_FILE;
 
@@ -81,16 +76,22 @@ const createNameAttribute = (name) => {
  */
 const parseNameAttribute = (attribute) => {
     attribute = attribute.replace('js-file-', '');
-    return decodeURI(atob(attribute));
+    return decodeNBSP(decodeURI(atob(attribute)));
 };
+module.exports._parseNameAttribute = parseNameAttribute;
+
+const parseHrefAttribute = (prefix, attribute) => {
+    attribute = attribute.replace(RegExp('^' + prefix + FS), '');
+    return decode(decodeNBSP(attribute));
+};
+module.exports._parseHrefAttribute = parseHrefAttribute;
 
 /**
  * get current direcotory path
  */
 module.exports.getCurrentDirPath = (panel = DOM.getPanel()) => {
     const path = DOM.getByDataName('js-path', panel);
-    return path.textContent
-        .replace(NBSP_REG, SPACE);
+    return path.textContent;
 };
 
 /**
@@ -103,12 +104,7 @@ module.exports.getCurrentPath = (currentFile) => {
     const [element] = DOM.getByTag('a', current);
     const {prefix} = CloudCmd;
     
-    const path = element
-        .getAttribute('href')
-        .replace(RegExp('^' + prefix + FS), '')
-        .replace(NBSP_REG, SPACE);
-    
-    return decode(path);
+    return parseHrefAttribute(prefix, element.getAttribute('href'));
 };
 
 /**
@@ -161,8 +157,9 @@ module.exports.getCurrentFile = () => {
 /**
  * get current file by name
  */
+
 module.exports.getCurrentByName = (name, panel = DOM.CurrentInfo.panel) => {
-    const dataName = 'js-file-' + btoa(encodeURI(name));
+    const dataName = 'js-file-' + btoa(encodeURI(encodeNBSP(name)));
     return DOM.getByDataName(dataName, panel);
 };
 

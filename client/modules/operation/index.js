@@ -405,18 +405,15 @@ async function _processFiles(options, data) {
                     panelPassive,
                 } = Info;
                 
-                const setCurrent = () => {
-                    const currentName = name || data.names[0];
-                    DOM.setCurrentByName(currentName);
-                };
-                
                 if (!Info.isOnePanel)
                     CloudCmd.refresh({
                         panel: panelPassive,
                         noCurrent: true,
                     });
                 
-                CloudCmd.refresh({panel}, setCurrent);
+                CloudCmd.refresh({
+                    panel,
+                });
             });
         }
     }

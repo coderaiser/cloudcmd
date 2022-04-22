@@ -229,7 +229,7 @@ test('cloudcmd: route: not found', async (t) => {
 
 test('cloudcmd: route: sendIndex: encode', async (t) => {
     const name = '"><svg onload=alert(3);>';
-    const nameEncoded = '&quot;&gt;&lt;svg&nbsp;onload=alert(3);&gt;';
+    const nameEncoded = '&quot;&gt;&lt;svg onload=alert(3);&gt;';
     const path = '/';
     const files = [{
         name,

@@ -149,16 +149,6 @@ module.exports.getNotCurrentDirPath = () => {
 };
 
 /**
- * get current file by name
- */
-module.exports.getCurrentByName = (name, panel = CurrentInfo.panel) => {
-    const dataName = 'js-file-' + btoa(encodeURI(name));
-    const element = DOM.getByDataName(dataName, panel);
-    
-    return element;
-};
-
-/**
  * unified way to get selected files
  *
  * @currentFile
