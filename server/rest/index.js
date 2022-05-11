@@ -87,7 +87,7 @@ function rest(config, request, response) {
  */
 function sendData(params, config, callback) {
     const p = params;
-    const isMD = /^\/markdown/.test(p.name);
+    const isMD = p.name.startsWith('/markdown');
     const rootDir = config('root');
     
     if (isMD)
@@ -122,7 +122,7 @@ function onGET(params, config, callback) {
     if (p.name[0] === '/')
         cmd = p.name.replace('/', '');
     
-    if (/^pack/.test(cmd)) {
+    if (cmd.startsWith('pack')) {
         cmd = cmd.replace(/^pack/, '');
         streamPack(root(cmd, rootDir), p.response, packer);
         return;

@@ -27,14 +27,14 @@ const {request} = require('serve-once')(cloudcmd, {
 test('cloudcmd: markdown: error', async (t) => {
     const {body} = await request.get('/api/v1/markdown/not-found');
     
-    t.ok(/ENOENT/.test(body), 'should not found');
+    t.match(body, 'ENOENT', 'should not found');
     t.end();
 });
 
 test('cloudcmd: markdown: relative: error', async (t) => {
     const {body} = await request.get('/api/v1/markdown/not-found?relative');
     
-    t.ok(/ENOENT/.test(body), 'should not found');
+    t.match(body, 'ENOENT', 'should not found');
     t.end();
 });
 

@@ -137,7 +137,7 @@ test('cloudcmd: rest: pack: tar: put: error', async (t) => {
         ]),
     });
     
-    t.ok(/^ENOENT: no such file or directory/.test(body), 'should return error');
+    t.match(body, /^ENOENT: no such file or directory/, 'should return error');
     t.end();
 });
 
@@ -219,7 +219,7 @@ test('cloudcmd: rest: pack: zip: put: error', async (t) => {
         ]),
     });
     
-    t.ok(/^ENOENT: no such file or directory/.test(body), 'should return error');
+    t.match(body, /^ENOENT: no such file or directory/, 'should return error');
     t.end();
 });
 

@@ -36,8 +36,8 @@ function check(name) {
 }
 
 function getModule(name) {
-    const regExpHTML = new RegExp(FILES_HTML + '|' + FILES_HTML_ROOT);
-    const regExpJSON = new RegExp(FILES_JSON);
+    const regExpHTML = RegExp(FILES_HTML + '|' + FILES_HTML_ROOT);
+    const regExpJSON = RegExp(FILES_JSON);
     
     const isHTML = regExpHTML.test(name);
     const isJSON = regExpJSON.test(name);
@@ -54,7 +54,7 @@ function getModule(name) {
 
 function getPath(name, isHTML, isJSON) {
     let path;
-    const regExp = new RegExp(FILES_HTML_ROOT);
+    const regExp = RegExp(FILES_HTML_ROOT);
     const isRoot = regExp.test(name);
     
     if (isHTML) {

@@ -14,7 +14,7 @@ module.exports = (userMenu) => {
             continue;
         }
         
-        if (/^_/.test(str)) {
+        if (str.startsWith('_')) {
             continue;
         }
         
