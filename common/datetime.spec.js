@@ -19,14 +19,13 @@ test('common: datetime: no arg', (t) => {
     const {Date} = global;
     
     let called = false;
-    const myDate = class extends Date {
+    
+    global.Date = class extends Date {
         constructor() {
             super();
             called = true;
         }
     };
-    
-    global.Date = myDate;
     
     datetime();
     

@@ -22,9 +22,7 @@ module.exports = window.CloudCmd = async (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     
-    const DOM = require('./dom');
-    
-    window.DOM = DOM;
+    window.DOM = require('./dom');
     window.CloudCmd = require('./client');
     
     await register(config);

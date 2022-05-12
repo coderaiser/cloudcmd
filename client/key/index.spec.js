@@ -13,19 +13,15 @@ const {
     getCloudCmd,
 } = require('./vim/globals.fixture');
 
-const DOM = getDOM();
-const CloudCmd = getCloudCmd();
-
-global.DOM = DOM;
-global.CloudCmd = CloudCmd;
+global.DOM = getDOM();
+global.CloudCmd = getCloudCmd();
 
 test('cloudcmd: client: key: enable vim', async (t) => {
     const vim = stub();
-    const configStub = stub().returns(true);
     const {CloudCmd} = global;
     const {config} = CloudCmd;
     
-    CloudCmd.config = configStub;
+    CloudCmd.config = stub().returns(true);
     mockRequire('./vim', vim);
     const {_listener, setBind} = reRequire('.');
     

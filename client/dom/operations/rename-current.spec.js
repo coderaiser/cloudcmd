@@ -29,11 +29,9 @@ test('cloudcmd: client: dom: renameCurrent: file exist', async (t) => {
     const name = 'hello';
     const {CloudCmd} = global;
     
-    const CloudCmdStub = {
+    global.CloudCmd = {
         refresh: stub(),
     };
-    
-    global.CloudCmd = CloudCmdStub;
     
     const prompt = stub().returns([null, name]);
     const confirm = stub().returns([true]);

@@ -22,7 +22,6 @@ module.exports.hide = () => {
 };
 
 async function show(name, options = {}) {
-    const relativeQuery = '?relative';
     const {
         positionLoad,
         relative,
@@ -31,7 +30,7 @@ async function show(name, options = {}) {
     Images.show.load(positionLoad);
     
     if (relative)
-        name += relativeQuery;
+        name += '?relative';
     
     const [error, innerHTML] = await Markdown.read(name);
     Images.hide();

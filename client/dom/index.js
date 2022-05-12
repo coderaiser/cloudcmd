@@ -5,12 +5,8 @@
 const Util = require('../../common/util');
 
 const Images = require('./images');
-const load = require('./load');
-const Files = require('./files');
 const RESTful = require('./rest');
-const IO = require('./io');
 const Storage = require('./storage');
-const Dialog = require('./dialog');
 const renameCurrent = require('./operations/rename-current');
 
 const CurrentFile = require('./current-file');
@@ -26,12 +22,12 @@ const DOM = {
 const CurrentInfo = {};
 
 DOM.Images = Images;
-DOM.load = load;
-DOM.Files = Files;
+DOM.load = require('./load');
+DOM.Files = require('./files');
 DOM.RESTful = RESTful;
-DOM.IO = IO;
+DOM.IO = require('./io');
 DOM.Storage = Storage;
-DOM.Dialog = Dialog;
+DOM.Dialog = require('./dialog');
 DOM.CurrentInfo = CurrentInfo;
 
 module.exports = DOM;
@@ -791,7 +787,6 @@ module.exports.updateCurrentInfo = (currentFile) => {
     const info = DOM.CurrentInfo;
     const current = currentFile || DOM.getCurrentFile();
     const files = current.parentElement;
-    const panel = files.parentElement || DOM.getPanel();
     
     const panelPassive = DOM.getPanel({
         active: false,
@@ -814,7 +809,7 @@ module.exports.updateCurrentInfo = (currentFile) => {
     info.mode           = DOM.getCurrentMode(current);
     info.name           = name;
     info.path           = DOM.getCurrentPath(current);
-    info.panel          = panel;
+    info.panel          = files.parentElement || DOM.getPanel();
     info.panelPassive   = panelPassive;
     info.size           = DOM.getCurrentSize(current);
     info.isDir          = DOM.isCurrentIsDir();

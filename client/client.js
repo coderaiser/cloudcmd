@@ -40,13 +40,6 @@ load.addErrorListener((e, src) => {
 function CloudCmdProto(DOM) {
     let Listeners;
     
-    const log = (...a) => {
-        if (!isDev)
-            return;
-        
-        console.log(...a);
-    };
-    
     Emitify.call(this);
     
     const CloudCmd = this;
@@ -57,7 +50,12 @@ function CloudCmdProto(DOM) {
         Files,
     } = DOM;
     
-    this.log = log;
+    this.log = (...a) => {
+        if (!isDev)
+            return;
+        
+        console.log(...a);
+    };
     this.prefix = '';
     this.prefixSocket = '';
     this.prefixURL = '';
@@ -67,8 +65,7 @@ function CloudCmdProto(DOM) {
     this.MIN_ONE_PANEL_WIDTH = 1155;
     this.HOST = location.origin || location.protocol + '//' + location.host;
     
-    const TITLE = 'Cloud Commander';
-    this.TITLE = TITLE;
+    this.TITLE = 'Cloud Commander';
     
     this.sort = {
         left: 'name',

@@ -68,7 +68,6 @@ let Expect = '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
 
 test('cloudfunc: render', (t) => {
     const template = readFilesSync(FS_DIR, TMPL, 'utf8');
-    const expect = fs.readFileSync(EXPECT_PATH, 'utf8');
     
     time('CloudFunc.buildFromJSON');
     const result = CloudFunc.buildFromJSON({
@@ -77,7 +76,7 @@ test('cloudfunc: render', (t) => {
         template,
     });
     
-    Expect += expect;
+    Expect += fs.readFileSync(EXPECT_PATH, 'utf8');
     
     let i;
     const isNotOk = Expect

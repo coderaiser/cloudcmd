@@ -235,10 +235,9 @@ test('cloudcmd: client: key: paste', (t) => {
 });
 
 test('cloudcmd: client: key: selectFile: ..', (t) => {
-    const selectFile = stub();
     const getCurrentName = stub();
     
-    DOM.selectFile = selectFile;
+    DOM.selectFile = stub();
     DOM.getCurrentName = () => '..';
     
     const current = {};
