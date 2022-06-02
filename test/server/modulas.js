@@ -1,8 +1,10 @@
 'use strict';
 
 const {join} = require('path');
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 
 const cloudcmdPath = join(__dirname, '..', '..');
 const modulesPath = join(cloudcmdPath, 'json', 'modules.json');

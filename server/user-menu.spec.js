@@ -3,10 +3,12 @@
 const fs = require('fs');
 const {join} = require('path');
 
-const test = require('supertape');
+const {
+    test,
+    stub,
+} = require('supertape');
 const serveOnce = require('serve-once');
 const threadIt = require('thread-it');
-const stub = require('@cloudcmd/stub');
 const {reRequire} = require('mock-require');
 
 const userMenu = require('./user-menu');

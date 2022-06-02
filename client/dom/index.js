@@ -304,7 +304,7 @@ module.exports.getCurrentData = async (currentFile) => {
     if (e)
         return [e, null];
     
-    const ONE_MEGABYTE = 1024 * 1024 * 1024;
+    const ONE_MEGABYTE = 1024 ** 2 * 1024;
     const {length} = data;
     
     if (hash && length < ONE_MEGABYTE)

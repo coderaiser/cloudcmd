@@ -1,8 +1,10 @@
 'use strict';
 
-const test = require('supertape');
+const {
+    test,
+    stub,
+} = require('supertape');
 const {create} = require('auto-globals');
-const stub = require('@cloudcmd/stub');
 const id = (a) => a;
 const wraptile = require('wraptile');
 const returns = wraptile(id);

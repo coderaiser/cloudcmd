@@ -1,7 +1,9 @@
 'use strict';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 
 const {btoa, atob} = require('./base64');
 
