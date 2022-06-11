@@ -132,7 +132,7 @@
     "socket.io-client": "^4.0.1",
     "squad": "^3.0.0",
     "table": "^6.0.1",
-    "thread-it": "^1.1.0",
+    "thread-it": "^2.0.0",
     "try-catch": "^3.0.0",
     "try-to-catch": "^3.0.0",
     "tryrequire": "^3.0.0",
