@@ -43,7 +43,7 @@ jobs:
       - name: Commit fixes
         uses: EndBug/add-and-commit@v7
         with:
-          message: chore(${{ env.NAME }}) lint using actions
+          message: 'chore(${{ env.NAME }}) actions: lint ☘️'
       - name: Build
         run: redrun build
       - name: Test
