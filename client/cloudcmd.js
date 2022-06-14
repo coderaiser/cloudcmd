@@ -8,12 +8,12 @@ require('../css/columns/name-size.css');
 const wraptile = require('wraptile');
 const load = require('load.js');
 
-const isDev = process.env.NODE_ENV === 'development';
-
 const {
     registerSW,
     listenSW,
 } = require('./sw/register');
+
+const isDev = process.env.NODE_ENV === 'development';
 
 // prevent additional loading of emitify
 window.Emitify = require('emitify');

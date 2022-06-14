@@ -3,9 +3,9 @@
 require('css-modules-require-hook/preset');
 
 const autoGlobals = require('auto-globals');
-const test = autoGlobals(require('supertape'));
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
+const test = autoGlobals(require('supertape'));
 const {reRequire, stopAll} = mockRequire;
 
 test('cloudcmd: client: view: initConfig', (t) => {

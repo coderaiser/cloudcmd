@@ -3,11 +3,11 @@
 const autoGlobals = require('auto-globals');
 const tape = require('supertape');
 
-const test = autoGlobals(tape);
-
 const stub = require('@cloudcmd/stub');
+
 const tryCatch = require('try-catch');
 const {reRequire} = require('mock-require');
+const test = autoGlobals(tape);
 
 test('sw: listen', (t) => {
     const {listenSW} = reRequire('./register');

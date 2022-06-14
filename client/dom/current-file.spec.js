@@ -5,11 +5,11 @@ const {
     stub,
 } = require('supertape');
 const {create} = require('auto-globals');
-const id = (a) => a;
 const wraptile = require('wraptile');
-const returns = wraptile(id);
-
 const currentFile = require('./current-file');
+const id = (a) => a;
+
+const returns = wraptile(id);
 const {_CURRENT_FILE} = currentFile;
 
 test('current-file: setCurrentName: setAttribute', (t) => {

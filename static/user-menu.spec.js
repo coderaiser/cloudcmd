@@ -1,12 +1,12 @@
 'use strict';
 
 const autoGlobals = require('auto-globals');
-const test = autoGlobals(require('supertape'));
 const stub = require('@cloudcmd/stub');
 const tryToCatch = require('try-to-catch');
 const wraptile = require('wraptile');
-
 const defaultMenu = require('./user-menu');
+
+const test = autoGlobals(require('supertape'));
 
 const {create} = autoGlobals;
 
@@ -173,7 +173,7 @@ test('cloudcmd: static: user menu: compare directories: select names: compare', 
         2,
     ];
     
-    t.deepEqual(result, expected, 'should equal');
+    t.deepEqual(result, expected);
     t.end();
 });
 

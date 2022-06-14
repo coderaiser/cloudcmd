@@ -8,9 +8,9 @@ const ponse = require('ponse');
 const threadIt = require('thread-it');
 const {read} = require('redzip');
 
-const parse = threadIt(join(__dirname, 'worker'));
-
 const root = require('../root');
+
+const parse = threadIt(join(__dirname, 'worker'));
 
 threadIt.init();
 

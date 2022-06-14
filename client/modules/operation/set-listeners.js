@@ -2,15 +2,15 @@
 
 /* global DOM */
 
+const forEachKey = require('for-each-key');
+
+const wraptile = require('wraptile');
+const format = require('./format');
+
 const {
     Dialog,
     Images,
 } = DOM;
-
-const forEachKey = require('for-each-key');
-const wraptile = require('wraptile');
-
-const format = require('./format');
 
 module.exports = (options) => (emitter) => {
     const {

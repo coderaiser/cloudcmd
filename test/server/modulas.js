@@ -42,7 +42,7 @@ test('cloudcmd: modules', async (t) => {
         options,
     });
     
-    t.deepEqual(body, expected, 'should equal');
+    t.deepEqual(body, expected);
     t.end();
 });
 

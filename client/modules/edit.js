@@ -6,10 +6,10 @@ const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch');
 const createElement = require('@cloudcmd/create-element');
 const load = require('load.js');
-const loadJS = load.js;
-
 const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
+
 const {time, timeEnd} = require('../../common/util');
+const loadJS = load.js;
 
 const Name = 'Edit';
 

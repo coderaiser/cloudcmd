@@ -14,10 +14,9 @@ const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
 const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
 const cloudcmdPath = '../..';
 
-const fixture = {
-    tar: fs.readFileSync(pathTarFixture),
-    zip: fs.readFileSync(pathZipFixture),
-};
+const cloudcmd = require(cloudcmdPath);
+
+const serveOnce = require('serve-once');
 
 const defaultOptions = {
     config: {
@@ -26,9 +25,10 @@ const defaultOptions = {
     },
 };
 
-const cloudcmd = require(cloudcmdPath);
-
-const serveOnce = require('serve-once');
+const fixture = {
+    tar: fs.readFileSync(pathTarFixture),
+    zip: fs.readFileSync(pathZipFixture),
+};
 const {request} = serveOnce(cloudcmd, defaultOptions);
 
 const once = promisify((name, extract, fn) => {

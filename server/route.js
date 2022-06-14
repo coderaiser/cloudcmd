@@ -20,9 +20,11 @@ const root = require(DIR_SERVER + 'root');
 const prefixer = require(DIR_SERVER + 'prefixer');
 const CloudFunc = require(DIR_COMMON + 'cloudfunc');
 
-const getPrefix = (config) => prefixer(config('prefix'));
+const Columns = require(`${DIR_SERVER}/columns`);
 
-const onceRequire = once(require);
+const Template = require(`${DIR_SERVER}/template`);
+
+const {FS} = CloudFunc;
 
 const sendIndex = (params, data) => {
     const ponseParams = {
@@ -33,10 +35,8 @@ const sendIndex = (params, data) => {
     ponse.send(data, ponseParams);
 };
 
-const {FS} = CloudFunc;
-
-const Columns = require(`${DIR_SERVER}/columns`);
-const Template = require(`${DIR_SERVER}/template`);
+const onceRequire = once(require);
+const getPrefix = (config) => prefixer(config('prefix'));
 
 const getReadDir = (config) => {
     if (!config('dropbox'))

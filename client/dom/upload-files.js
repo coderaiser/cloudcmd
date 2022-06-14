@@ -11,10 +11,10 @@ const {alert} = require('./dialog');
 
 const {FS} = require('../../common/cloudfunc');
 
-const onEnd = wraptile(_onEnd);
+const {getCurrentDirPath: getPathWhenRootEmpty} = require('.');
 const loadFile = wraptile(_loadFile);
 
-const {getCurrentDirPath: getPathWhenRootEmpty} = require('.');
+const onEnd = wraptile(_onEnd);
 
 module.exports = (dir, files) => {
     if (!files) {

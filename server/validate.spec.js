@@ -8,17 +8,17 @@ const {
 } = require('supertape');
 const tryCatch = require('try-catch');
 const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
-
 const dir = '..';
 
 const validatePath = `${dir}/server/validate`;
-const exitPath = `${dir}/server/exit`;
-const columnsPath = `${dir}/server/columns`;
-const cloudcmdPath = `${dir}/server/cloudcmd`;
 
+const cloudcmdPath = `${dir}/server/cloudcmd`;
 const validate = require(validatePath);
 const cloudcmd = require(cloudcmdPath);
+const columnsPath = `${dir}/server/columns`;
+
+const exitPath = `${dir}/server/exit`;
+const {reRequire, stopAll} = mockRequire;
 
 test('validate: root: bad', (t) => {
     const config = {

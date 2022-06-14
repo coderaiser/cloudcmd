@@ -4,14 +4,14 @@ const test = require('supertape');
 const criton = require('criton');
 
 const cloudcmd = require('..');
-const configFn = cloudcmd.createConfigManager();
-
 const config = {
     auth: false,
 };
+
 const {request} = require('serve-once')(cloudcmd, {
     config,
 });
+const configFn = cloudcmd.createConfigManager();
 
 test('cloudcmd: static', async (t) => {
     const name = 'package.json';

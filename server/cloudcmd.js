@@ -1,20 +1,19 @@
 'use strict';
 
 const DIR = __dirname + '/';
-const DIR_ROOT = DIR + '../';
 const DIR_COMMON = DIR + '../common/';
-
 const path = require('path');
-const fs = require('fs');
 
+const fs = require('fs');
 const cloudfunc = require(DIR_COMMON + 'cloudfunc');
+
 const authentication = require(DIR + 'auth');
 const {
     createConfig,
     configPath,
 } = require(DIR + 'config');
-
 const modulas = require(DIR + 'modulas');
+
 const userMenu = require(DIR + 'user-menu');
 const rest = require(DIR + 'rest');
 const route = require(DIR + 'route');
@@ -22,8 +21,8 @@ const validate = require(DIR + 'validate');
 const prefixer = require(DIR + 'prefixer');
 const terminal = require(DIR + 'terminal');
 const distribute = require(DIR + 'distribute');
-
 const currify = require('currify');
+
 const apart = require('apart');
 const ponse = require('ponse');
 const restafary = require('restafary');
@@ -34,6 +33,7 @@ const dword = require('dword');
 const deepword = require('deepword');
 const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
+const DIR_ROOT = DIR + '../';
 
 const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';

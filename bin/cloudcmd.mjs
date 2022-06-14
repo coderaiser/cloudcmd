@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-const DIR_SERVER = '../server/';
-
 import {createRequire} from 'module';
 import {promisify} from 'util';
 import tryToCatch from 'try-to-catch';
@@ -14,12 +12,16 @@ import {
     configPath,
 } from '../server/config.js';
 
-const config = createConfig({
-    configPath,
-});
-
 import env from '../server/env.js';
 import prefixer from '../server/prefixer.js';
+
+process.on('unhandledRejection', exit);
+
+const require = createRequire(import.meta.url);
+
+const Info = require('../package.json');
+
+const simport = createSimport(import.meta.url);
 
 const choose = (a, b) => {
     if (a === undefined)
@@ -28,12 +30,11 @@ const choose = (a, b) => {
     return a;
 };
 
-process.on('unhandledRejection', exit);
+const config = createConfig({
+    configPath,
+});
 
-const simport = createSimport(import.meta.url);
-const require = createRequire(import.meta.url);
-
-const Info = require('../package.json');
+const DIR_SERVER = '../server/';
 
 const maybeRoot = (a) => {
     if (a === '.')

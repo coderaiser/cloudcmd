@@ -8,19 +8,19 @@ const fs = require('fs');
 const tryToCatch = require('try-to-catch');
 const {test, stub} = require('supertape');
 const mockRequire = require('mock-require');
+const cloudcmdPath = './cloudcmd';
+
+const cloudcmd = require(cloudcmdPath);
+
+const serveOnce = require('serve-once');
+const {createConfigManager} = cloudcmd;
+
+const routePath = './route';
+const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 const {
     reRequire,
     stopAll,
 } = mockRequire;
-
-const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
-
-const routePath = './route';
-const cloudcmdPath = './cloudcmd';
-
-const cloudcmd = require(cloudcmdPath);
-const {createConfigManager} = cloudcmd;
-const serveOnce = require('serve-once');
 const defaultConfig = {
     auth: false,
     dropbox: false,

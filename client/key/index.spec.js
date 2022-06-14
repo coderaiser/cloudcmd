@@ -1,17 +1,17 @@
 'use strict';
 
 const autoGlobals = require('auto-globals');
-const test = autoGlobals(require('supertape'));
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
-
 const {ESC} = require('./key');
-
 const {
     getDOM,
     getCloudCmd,
 } = require('./vim/globals.fixture');
+
+const {reRequire, stopAll} = mockRequire;
+
+const test = autoGlobals(require('supertape'));
 
 global.DOM = getDOM();
 global.CloudCmd = getCloudCmd();

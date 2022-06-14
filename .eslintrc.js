@@ -2,7 +2,7 @@
 
 module.exports = {
     extends: [
-        'plugin:putout/recommended',
+        'plugin:putout/safe',
     ],
     plugins: [
         'putout',

@@ -7,12 +7,10 @@ const {
     stub,
 } = require('supertape');
 const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
 
 const dir = '../';
 
 const pathVim = join(dir, 'vim');
-const pathFind = join(dir, 'vim', 'find');
 
 const {
     getDOM,
@@ -22,10 +20,13 @@ const {
 global.DOM = getDOM();
 global.CloudCmd = getCloudCmd();
 
-const {DOM} = global;
-const {Buffer} = DOM;
-
 const vim = require(pathVim);
+
+const {DOM} = global;
+
+const {Buffer} = DOM;
+const pathFind = join(dir, 'vim', 'find');
+const {reRequire, stopAll} = mockRequire;
 
 test('cloudcmd: client: key: set next file: no', (t) => {
     const element = {};

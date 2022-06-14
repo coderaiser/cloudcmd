@@ -9,10 +9,10 @@ const tryToCatch = require('try-to-catch');
 const clipboard = require('@cloudcmd/clipboard');
 
 const getRange = require('./get-range');
-const getIndex = currify(require('./get-index'));
 const uploadFiles = require('../dom/upload-files');
-
 const {FS} = require('../../common/cloudfunc');
+
+const getIndex = currify(require('./get-index'));
 
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
 const SPACE = ' ';

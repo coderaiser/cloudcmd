@@ -2,19 +2,19 @@
 
 /* global CloudCmd, DOM */
 
-const Info = DOM.CurrentInfo;
-
 const clipboard = require('@cloudcmd/clipboard');
 
 const Buffer = require('../dom/buffer');
-const Events = require('../dom/events');
 
+const Events = require('../dom/events');
 const KEY = require('./key');
+
 const vim = require('./vim');
 const setCurrentByChar = require('./set-current-by-char');
 const {createBinder} = require('./binder');
-
 const fullstore = require('fullstore');
+
+const Info = DOM.CurrentInfo;
 const Chars = fullstore();
 
 const toggleVim = (keyCode) => {

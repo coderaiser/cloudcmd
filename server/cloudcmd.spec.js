@@ -12,18 +12,18 @@ const DIR = './';
 const cloudcmdPath = DIR + 'cloudcmd';
 
 const cloudcmd = require(cloudcmdPath);
-const {
-    createConfigManager,
-    _getPrefix,
-    _initAuth,
-} = cloudcmd;
-
 const {request} = require('serve-once')(cloudcmd, {
     config: {
         auth: false,
         dropbox: false,
     },
 });
+
+const {
+    createConfigManager,
+    _getPrefix,
+    _initAuth,
+} = cloudcmd;
 
 test('cloudcmd: defaults: config', (t) => {
     const configManager = createConfigManager();

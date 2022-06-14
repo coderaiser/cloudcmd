@@ -10,19 +10,19 @@ const test = require('supertape');
 
 const markdown = require('.');
 
-const _markdown = promisify(markdown);
-const fixtureDir = join(__dirname, 'fixture');
 const cloudcmd = require('../..');
 const config = {
     auth: false,
 };
-
 const configManager = cloudcmd.createConfigManager();
-
 const {request} = require('serve-once')(cloudcmd, {
     config,
     configManager,
 });
+
+const fixtureDir = join(__dirname, 'fixture');
+
+const _markdown = promisify(markdown);
 
 test('cloudcmd: markdown: error', async (t) => {
     const {body} = await request.get('/api/v1/markdown/not-found');

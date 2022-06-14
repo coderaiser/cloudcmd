@@ -7,9 +7,9 @@ const {
 
 const mockRequire = require('mock-require');
 
-const terminalPath = './terminal';
 const terminal = require('./terminal');
 const {createConfigManager} = require('./cloudcmd');
+const terminalPath = './terminal';
 
 const {stopAll} = mockRequire;
 

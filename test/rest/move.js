@@ -7,8 +7,8 @@ const {Volume} = require('memfs');
 const {ufs} = require('unionfs');
 
 const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
 const serveOnce = require('serve-once');
+const {reRequire, stopAll} = mockRequire;
 
 const cloudcmdPath = '../../';
 const dir = cloudcmdPath + 'server/';

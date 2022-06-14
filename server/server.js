@@ -12,25 +12,25 @@ const wraptile = require('wraptile');
 const compression = require('compression');
 const threadIt = require('thread-it');
 
-const two = currify((f, a, b) => f(a, b));
 const exit = require(DIR_SERVER + 'exit');
+const opn = require('open');
 
-const exitPort = two(exit, 'cloudcmd --port: %s');
+const express = require('express');
+const io = require('socket.io');
+const tryRequire = require('tryrequire');
+
 const bind = (f, self) => f.bind(self);
-const promisifySelf = squad(promisify, bind);
 
+const two = currify((f, a, b) => f(a, b));
 const shutdown = wraptile(async (promises) => {
     console.log('closing cloudcmd...');
     await Promise.all(promises);
     threadIt.terminate();
     process.exit(0);
 });
+const promisifySelf = squad(promisify, bind);
 
-const opn = require('open');
-const express = require('express');
-const io = require('socket.io');
-
-const tryRequire = require('tryrequire');
+const exitPort = two(exit, 'cloudcmd --port: %s');
 const logger = tryRequire('morgan');
 
 module.exports = async (options, config) => {

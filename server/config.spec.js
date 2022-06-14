@@ -12,12 +12,12 @@ const {
     createConfig,
     _cryptoPass,
 } = require(configPath);
-const config = createConfig();
-
 const {apiURL} = require(root + 'common/cloudfunc');
 
 const fixture = require('./config.fixture');
+
 const {connect} = require('../test/before');
+const config = createConfig();
 
 test('config: manage', (t) => {
     t.equal(undefined, config(), 'should return "undefined"');
