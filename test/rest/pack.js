@@ -10,13 +10,13 @@ const tar = require('tar-stream');
 const gunzip = require('gunzip-maybe');
 const pullout = require('pullout');
 
-const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
-const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
 const cloudcmdPath = '../..';
-
 const cloudcmd = require(cloudcmdPath);
-
 const serveOnce = require('serve-once');
+
+const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
+
+const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
 
 const defaultOptions = {
     config: {
