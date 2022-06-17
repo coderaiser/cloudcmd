@@ -1,3 +1,11 @@
+2022.06.17, v16.2.0
+
+feature:
+- (package) markdown-it v13.0.1
+- (cloudcmd) server: convert to ESM
+- (package) thread-it v2.0.0
+
+
 2022.05.12, v16.1.1
 
 feature:
