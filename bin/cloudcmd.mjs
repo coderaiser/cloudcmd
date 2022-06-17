@@ -269,7 +269,7 @@ function version() {
 }
 
 async function start(options, config) {
-    const SERVER = DIR_SERVER + 'server.js';
+    const SERVER = DIR_SERVER + 'server.mjs';
     
     if (!args.server)
         return;

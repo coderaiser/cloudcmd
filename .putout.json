@@ -25,9 +25,9 @@
             "nodejs/remove-process-exit": "on"
         },
         "server/{server,exit}.js": {
-            "nodejs/emove-process-exit": "off"
+            "nodejs/remove-process-exit": "off"
         },
-        "server/{server,exit,terminal,distribute/log}.js": {
+        "server/{server,exit,terminal,distribute/log}.{js,mjs}": {
             "remove-console": "off"
         },
         "client/{client,cloudcmd,load-module}.js": {
