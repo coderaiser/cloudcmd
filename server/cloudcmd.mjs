@@ -25,7 +25,7 @@ const rest = require(DIR + 'rest');
 const route = require(DIR + 'route');
 const validate = require(DIR + 'validate');
 const prefixer = require(DIR + 'prefixer');
-const terminal = require(DIR + 'terminal');
+import terminal from './terminal.mjs';
 const distribute = require(DIR + 'distribute');
 const currify = require('currify');
 

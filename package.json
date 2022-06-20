@@ -163,6 +163,7 @@
     "css-modules-require-hook": "^4.2.3",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
+    "escover": "^2.2.0",
     "eslint": "^8.0.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-putout": "^14.4.0",

@@ -5,6 +5,7 @@ import {
 
 const testEnv = {
     THREAD_IT_COUNT: 0,
+    SUPERTAPE_CHECK_DUPLICATES: 0,
 };
 
 const is17 = /^v1[78]/.test(process.version);
@@ -34,7 +35,7 @@ export default {
     'spell': () => 'yaspeller . || true',
     'fix:lint': () => run('lint', '--fix'),
     'lint:stream': () => run('lint', '-f stream'),
-    'test': () => [testEnv, `tape --no-check-duplicates 'test/**/*.js' '{client,static,common,server}/**/*.spec.{js,mjs}' -f fail`],
+    'test': () => [testEnv, `escover tape 'test/**/*.js' '{client,static,common,server}/**/*.spec.{js,mjs}' -f fail`],
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),

@@ -1,7 +1,6 @@
 'use strict';
 
 const test = require('supertape');
-
 const prefixer = require('./prefixer');
 
 test('prefixer: prefix without a slash', (t) => {

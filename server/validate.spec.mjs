@@ -1,24 +1,27 @@
-'use strict';
-
-const fs = require('fs');
+import {createMockImport} from 'mock-import';
 
 const {
+    stopAll,
+    reImport,
+    mockImport,
+} = createMockImport(import.meta.url);
+
+import fs from 'fs';
+
+import {
     test,
     stub,
-} = require('supertape');
-const tryCatch = require('try-catch');
-const mockRequire = require('mock-require');
+} from 'supertape';
+import tryCatch from 'try-catch';
 const dir = '..';
 
 const validatePath = `${dir}/server/validate`;
 
-const cloudcmdPath = `${dir}/server/cloudcmd`;
-const validate = require(validatePath);
-const cloudcmd = require(cloudcmdPath);
+import validate from '../server/validate.js';
+import cloudcmd from '../server/cloudcmd.mjs';
 const columnsPath = `${dir}/server/columns`;
 
 const exitPath = `${dir}/server/exit`;
-const {reRequire, stopAll} = mockRequire;
 
 test('validate: root: bad', (t) => {
     const config = {
@@ -48,7 +51,7 @@ test('validate: root: /', (t) => {
     t.end();
 });
 
-test('validate: root: stat', (t) => {
+test('validate: root: stat', async (t) => {
     const fn = stub();
     const {statSync} = fs;
     
@@ -57,9 +60,9 @@ test('validate: root: stat', (t) => {
         throw Error(error);
     };
     
-    mockRequire(exitPath, fn);
+    mockImport(exitPath, fn);
     
-    const {root} = reRequire(validatePath);
+    const {root} = await reImport(validatePath);
     
     root('hello', fn);
     
@@ -72,12 +75,12 @@ test('validate: root: stat', (t) => {
     t.end();
 });
 
-test('validate: packer: not valid', (t) => {
+test('validate: packer: not valid', async (t) => {
     const fn = stub();
     
-    mockRequire(exitPath, fn);
+    mockImport(exitPath, fn);
     
-    const {packer} = reRequire(validatePath);
+    const {packer} = await reImport(validatePath);
     const msg = 'cloudcmd --packer: could be "tar" or "zip" only';
     
     packer('hello');
@@ -88,12 +91,12 @@ test('validate: packer: not valid', (t) => {
     t.end();
 });
 
-test('validate: editor: not valid', (t) => {
+test('validate: editor: not valid', async (t) => {
     const fn = stub();
     
-    mockRequire(exitPath, fn);
+    mockImport(exitPath, fn);
     
-    const {editor} = reRequire(validatePath);
+    const {editor} = await reImport(validatePath);
     const msg = 'cloudcmd --editor: could be "dword", "edward" or "deepword" only';
     
     editor('hello');
@@ -104,11 +107,11 @@ test('validate: editor: not valid', (t) => {
     t.end();
 });
 
-test('validate: columns', (t) => {
+test('validate: columns', async (t) => {
     const fn = stub();
-    mockRequire(exitPath, fn);
+    mockImport(exitPath, fn);
     
-    const {columns} = require(validatePath);
+    const {columns} = await import(validatePath);
     
     columns('name-size-date');
     
@@ -118,16 +121,16 @@ test('validate: columns', (t) => {
     t.end();
 });
 
-test('validate: columns: wrong', (t) => {
+test('validate: columns: wrong', async (t) => {
     const fn = stub();
     
-    mockRequire(exitPath, fn);
-    mockRequire(columnsPath, {
+    mockImport(exitPath, fn);
+    mockImport(columnsPath, {
         'name-size-date': '',
         'name-size': '',
     });
     
-    const {columns} = reRequire(validatePath);
+    const {columns} = await reImport(validatePath);
     const msg = 'cloudcmd --columns: can be only one of: "name-size-date", "name-size"';
     
     columns('hello');

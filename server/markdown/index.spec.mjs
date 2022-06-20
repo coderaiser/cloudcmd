@@ -25,7 +25,7 @@ const fixtureDir = new URL('fixture', import.meta.url).pathname;
 
 const _markdown = promisify(markdown);
 
-test('cloudcmd: markdown: error', async (t) => {
+test.only('cloudcmd: markdown: error', async (t) => {
     const {body} = await request.get('/api/v1/markdown/not-found');
     
     t.match(body, 'ENOENT', 'should not found');
