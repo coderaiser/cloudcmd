@@ -662,7 +662,10 @@ And create `index.js`:
 
 ```js
 import http from 'http';
-import cloudcmd from 'cloudcmd';
+import cloudcmd, {
+    createConfigManager,
+    configPath,
+} from 'cloudcmd';
 import {Server} from 'socket.io';
 import express from 'express';
 
@@ -692,16 +695,11 @@ const modules = {
     filePicker,
 };
 
-const {
-    createConfigManager,
-    configPath,
-} = cloudcmd;
-
 const configManager = createConfigManager({
     configPath,
 });
 
-app.use(prefix, cloudcmd({
+app.use(prefix, await cloudcmd({
     socket, // used by Config, Edit (optional) and Console (required)
     config, // config data (optional)
     modules, // optional

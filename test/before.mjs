@@ -1,23 +1,26 @@
-'use strict';
+import {dirname} from 'path';
+import {fileURLToPath} from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const http = require('http');
-const os = require('os');
+import http from 'http';
+import os from 'os';
 
-const express = require('express');
-const io = require('socket.io');
-const writejson = require('writejson');
-const readjson = require('readjson');
-const {promisify} = require('util');
+import express from 'express';
+import {Server} from 'socket.io';
+import writejson from 'writejson';
+import readjson from 'readjson';
+import {promisify} from 'util';
 
 process.env.NODE_ENV = 'development';
 
-const cloudcmd = require('../server/cloudcmd');
+import cloudcmd from '../server/cloudcmd.mjs';
 const {assign} = Object;
 
 const pathConfig = os.homedir() + '/.cloudcmd.json';
 const currentConfig = readjson.sync.try(pathConfig);
 
-module.exports = before;
+export default before;
 
 function before(options, fn = options) {
     const {
@@ -36,7 +39,7 @@ function before(options, fn = options) {
         server.close(cb);
     };
     
-    const socket = io(server);
+    const socket = new Server(server);
     
     app.use(cloudcmd({
         socket,
@@ -51,7 +54,7 @@ function before(options, fn = options) {
     });
 }
 
-module.exports.connect = promisify((options, fn = options) => {
+export const connect = promisify((options, fn = options) => {
     before(options, (port, done) => {
         fn(null, {port, done});
     });

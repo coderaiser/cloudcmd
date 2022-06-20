@@ -1,17 +1,23 @@
-'use strict';
+import {fileURLToPath} from 'url';
+const __filename = fileURLToPath(import.meta.url);
+import {createRequire} from 'module';
+import path from 'path';
+const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
 
 const DIR = __dirname + '/';
 const DIR_COMMON = DIR + '../common/';
-const path = require('path');
 
 const fs = require('fs');
 const cloudfunc = require(DIR_COMMON + 'cloudfunc');
 
 const authentication = require(DIR + 'auth');
-const {
+
+export const {
     createConfig,
     configPath,
 } = require(DIR + 'config');
+
 const modulas = require(DIR + 'modulas');
 
 const userMenu = require(DIR + 'user-menu');
@@ -33,6 +39,11 @@ const dword = require('dword');
 const deepword = require('deepword');
 const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
+
+export const createConfigManager = createConfig;
+
+const {assign} = Object;
+
 const DIR_ROOT = DIR + '../';
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -48,7 +59,18 @@ const clean = (a) => a.filter(notEmpty);
 const isUndefined = (a) => typeof a === 'undefined';
 const isFn = (a) => typeof a === 'function';
 
-module.exports = (params) => {
+export default exports;
+
+assign(exports, {
+    createConfigManager,
+    configPath,
+});
+
+export {
+    exports as cloudcmd,
+}
+
+async function exports(params) {
     const p = params || {};
     const options = p.config || {};
     const config = p.configManager || createConfig({
@@ -80,7 +102,7 @@ module.exports = (params) => {
     const prefixSocket = prefixer(options.prefixSocket);
     
     if (p.socket)
-        listen({
+        await listen({
             prefixSocket,
             config,
             socket: p.socket,
@@ -90,12 +112,9 @@ module.exports = (params) => {
         modules,
         config,
     });
-};
+}
 
-module.exports.createConfigManager = createConfig;
-module.exports.configPath = configPath;
-
-module.exports._getIndexPath = getIndexPath;
+export const _getIndexPath = getIndexPath;
 
 function defaultValue(config, name, options) {
     const value = options[name];
@@ -107,7 +126,8 @@ function defaultValue(config, name, options) {
     return value;
 }
 
-module.exports._getPrefix = getPrefix;
+export const _getPrefix = getPrefix;
+
 function getPrefix(prefix) {
     if (isFn(prefix))
         return prefix() || '';
@@ -115,8 +135,7 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-module.exports._initAuth = _initAuth;
-function _initAuth(config, accept, reject, username, password) {
+export function _initAuth(config, accept, reject, username, password) {
     if (!config('auth'))
         return accept();
     
@@ -129,7 +148,7 @@ function _initAuth(config, accept, reject, username, password) {
     reject();
 }
 
-function listen({prefixSocket, socket, config}) {
+async function listen({prefixSocket, socket, config}) {
     const root = apart(config, 'root');
     const auth = initAuth(config);
     
@@ -165,7 +184,7 @@ function listen({prefixSocket, socket, config}) {
         prefix: prefixSocket + '/fileop',
     });
     
-    config('terminal') && terminal(config).listen(socket, {
+    config('terminal') && (await terminal(config)).listen(socket, {
         auth,
         prefix: prefixSocket + '/gritty',
         command: config('terminalCommand'),
@@ -268,7 +287,8 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
-module.exports._replaceDist = replaceDist;
+export const _replaceDist = replaceDist;
+
 function replaceDist(url) {
     if (!isDev)
         return url;

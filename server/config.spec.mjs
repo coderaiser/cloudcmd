@@ -1,22 +1,19 @@
-'use strict';
-
-const {
+import {createRequire} from 'module';
+import {
     test,
     stub,
-} = require('supertape');
+} from 'supertape';
 
-const root = '../';
-const configPath = './config';
-
-const {
+import {
     createConfig,
     _cryptoPass,
-} = require(configPath);
-const {apiURL} = require(root + 'common/cloudfunc');
+} from './config.js';
+import {apiURL} from '../common/cloudfunc.js';
+import {connect} from '../test/before.mjs';
+const require = createRequire(import.meta.url);
 
-const fixture = require('./config.fixture');
+const fixture = require('./config.fixture.json');
 
-const {connect} = require('../test/before');
 const config = createConfig();
 
 test('config: manage', (t) => {
@@ -39,7 +36,7 @@ test('config: manage: get', async (t) => {
     t.end();
 });
 
-test('config: manage: get', async (t) => {
+test('config: manage: get: change', async (t) => {
     const editor = 'deepword';
     const conf = {
         editor,

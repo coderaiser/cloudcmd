@@ -1,16 +1,17 @@
-'use strict';
+import serveOnce from 'serve-once';
 
-const test = require('supertape');
-const criton = require('criton');
+import test from 'supertape';
+import criton from 'criton';
 
-const cloudcmd = require('..');
+import cloudcmd from '../server/cloudcmd.mjs';
 const config = {
     auth: false,
 };
 
-const {request} = require('serve-once')(cloudcmd, {
+const {request} = serveOnce(cloudcmd, {
     config,
 });
+
 const configFn = cloudcmd.createConfigManager();
 
 test('cloudcmd: static', async (t) => {

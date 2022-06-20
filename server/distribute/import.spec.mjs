@@ -1,11 +1,12 @@
-'use strict';
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
 
-const test = require('supertape');
-const {promisify} = require('util');
-const tryToCatch = require('try-to-catch');
+import test from 'supertape';
+import {promisify} from 'util';
+import tryToCatch from 'try-to-catch';
 
-const {connect} = require('../../test/before');
-const {createConfigManager} = require('../cloudcmd');
+import {connect} from '../../test/before.mjs';
+import {createConfigManager} from '../cloudcmd.mjs';
 
 const distribute = {
     import: promisify(require('./import')),

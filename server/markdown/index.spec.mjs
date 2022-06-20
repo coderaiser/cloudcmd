@@ -1,16 +1,17 @@
-'use strict';
+import {createRequire} from 'module';
+const require = createRequire(import.meta.url);
 
-const fs = require('fs');
-const {join} = require('path');
-const {promisify} = require('util');
+import fs from 'fs';
+import {join} from 'path';
+import {promisify} from 'util';
 
-const tryToCatch = require('try-to-catch');
-const serveOnce = require('serve-once');
-const test = require('supertape');
+import tryToCatch from 'try-to-catch';
+import serveOnce from 'serve-once';
+import test from 'supertape';
 
-const markdown = require('.');
+import markdown from './index.js';
 
-const cloudcmd = require('../..');
+import cloudcmd from '../cloudcmd.mjs';
 const config = {
     auth: false,
 };
@@ -20,7 +21,7 @@ const {request} = require('serve-once')(cloudcmd, {
     configManager,
 });
 
-const fixtureDir = join(__dirname, 'fixture');
+const fixtureDir = new URL('fixture', import.meta.url).pathname;
 
 const _markdown = promisify(markdown);
 
@@ -89,9 +90,9 @@ test('cloudcmd: markdown: no request', async (t) => {
     t.end();
 });
 
-test('cloudcmd: markdown: zip', async (t) => {
+test('cloudcmd: markdown: no zip', async (t) => {
     const configManager = cloudcmd.createConfigManager();
-    const fixtureDir = join(__dirname, 'fixture');
+    const fixtureDir = new URL('fixture', import.meta.url).pathname;
     const config = {
         auth: false,
         root: fixtureDir,
@@ -109,7 +110,7 @@ test('cloudcmd: markdown: zip', async (t) => {
 
 test('cloudcmd: markdown: zip', async (t) => {
     const configManager = cloudcmd.createConfigManager();
-    const fixtureDir = join(__dirname, 'fixture');
+    const fixtureDir = new URL('fixture', import.meta.url).pathname;
     const config = {
         auth: false,
         root: fixtureDir,

@@ -179,6 +179,7 @@
     "madrun": "^9.0.0",
     "memfs": "^3.0.1",
     "minor": "^1.2.2",
+    "mock-import": "^3.0.2",
     "mock-require": "^3.0.1",
     "morgan": "^1.6.1",
     "multi-rename": "^2.0.0",

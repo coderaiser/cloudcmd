@@ -1,6 +1,5 @@
-'use strict';
-
-const tryCatch = require('try-catch');
+import simpleImport from './simple-import.js';
+import tryToCatch from 'try-catch';
 
 const noop = (req, res, next) => {
     next && next();
@@ -8,11 +7,11 @@ const noop = (req, res, next) => {
 
 noop.listen = noop;
 
-module.exports = (config, arg) => {
+export default async (config, arg) => {
     if (!config('terminal'))
         return noop;
     
-    const [e, terminalModule] = tryCatch(require, config('terminalPath'));
+    const [e, terminalModule] = await tryToCatch(simpleImport, config('terminalPath'));
     
     if (!e && !arg)
         return terminalModule;

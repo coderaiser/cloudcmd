@@ -1,29 +1,35 @@
-'use strict';
+import {dirname} from 'path';
+import {fileURLToPath} from 'url';
+import serveOnce from 'serve-once';
+const __filename = fileURLToPath(import.meta.url);
+import {createMockImport} from 'mock-import';
+const __dirname = dirname(__filename);
 
-const path = require('path');
+const {reImport} = createMockImport(import.meta.url);
 
-const {
+import path from 'path';
+
+import {
     test,
     stub,
-} = require('supertape');
-const {reRequire} = require('mock-require');
+} from 'supertape';
 
 const DIR = './';
-const cloudcmdPath = DIR + 'cloudcmd';
+const cloudcmdPath = DIR + 'cloudcmd.mjs';
 
-const cloudcmd = require(cloudcmdPath);
-const {request} = require('serve-once')(cloudcmd, {
+import cloudcmd, {
+    createConfigManager,
+    _getPrefix,
+    _initAuth,
+    _getIndexPath,
+} from './cloudcmd.mjs';
+
+const {request} = serveOnce(cloudcmd, {
     config: {
         auth: false,
         dropbox: false,
     },
 });
-
-const {
-    createConfigManager,
-    _getPrefix,
-    _initAuth,
-} = cloudcmd;
 
 test('cloudcmd: defaults: config', (t) => {
     const configManager = createConfigManager();
@@ -76,11 +82,11 @@ test('cloudcmd: getPrefix: function: empty', (t) => {
     t.end();
 });
 
-test('cloudcmd: replaceDist', (t) => {
+test('cloudcmd: replaceDist', async (t) => {
     const {NODE_ENV} = process.env;
     process.env.NODE_ENV = 'development';
     
-    const {_replaceDist} = reRequire(cloudcmdPath);
+    const {_replaceDist} = await reImport(cloudcmdPath);
     
     const url = '/dist/hello';
     const result = _replaceDist(url);
@@ -92,12 +98,11 @@ test('cloudcmd: replaceDist', (t) => {
     t.end();
 });
 
-test('cloudcmd: replaceDist: !isDev', (t) => {
+test('cloudcmd: replaceDist: !isDev', async (t) => {
     const url = '/dist/hello';
-    const cloudcmdPath = DIR + 'cloudcmd';
     
     const reset = cleanNodeEnv();
-    const {_replaceDist} = reRequire(cloudcmdPath);
+    const {_replaceDist} = await reImport('./cloudcmd.mjs');
     const result = _replaceDist(url);
     
     reset();
@@ -167,7 +172,7 @@ test('cloudcmd: getIndexPath: production', (t) => {
     const isDev = false;
     const name = path.join(__dirname, '..', 'dist', 'index.html');
     
-    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.equal(_getIndexPath(isDev), name);
     t.end();
 });
 
@@ -175,7 +180,7 @@ test('cloudcmd: getIndexPath: development', (t) => {
     const isDev = true;
     const name = path.join(__dirname, '..', 'dist-dev', 'index.html');
     
-    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.equal(_getIndexPath(isDev), name);
     t.end();
 });
 

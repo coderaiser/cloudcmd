@@ -1,4 +1,4 @@
-import cloudcmd from './cloudcmd.js';
+import cloudcmd from './cloudcmd.mjs';
 
 import http from 'http';
 import {promisify} from 'util';

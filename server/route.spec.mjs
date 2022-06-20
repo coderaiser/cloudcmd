@@ -1,26 +1,34 @@
-'use strict';
+import {createMockImport} from 'mock-import';
+import {dirname} from 'path';
+import {fileURLToPath} from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const {Readable} = require('stream');
+import {Readable} from 'stream';
+import path from 'path';
+import fs from 'fs';
 
-const path = require('path');
-const fs = require('fs');
+import tryToCatch from 'try-to-catch';
+import {
+    test,
+    stub,
+} from 'supertape';
+const cloudcmdPath = './cloudcmd.mjs';
 
-const tryToCatch = require('try-to-catch');
-const {test, stub} = require('supertape');
-const mockRequire = require('mock-require');
-const cloudcmdPath = './cloudcmd';
+import cloudcmd, {
+    createConfigManager,
+} from './cloudcmd.mjs';
 
-const cloudcmd = require(cloudcmdPath);
+import serveOnce from 'serve-once';
 
-const serveOnce = require('serve-once');
-const {createConfigManager} = cloudcmd;
+const {
+    reImport,
+    mockImport,
+    stopAll,
+} = createMockImport(import.meta.url);
 
 const routePath = './route';
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
-const {
-    reRequire,
-    stopAll,
-} = mockRequire;
 const defaultConfig = {
     auth: false,
     dropbox: false,
@@ -44,7 +52,7 @@ test('cloudcmd: route: buttons: no console', async (t) => {
         options,
     });
     
-    t.ok(/icon-console none/.test(body), 'should hide console');
+    t.match(body, 'icon-console none', 'should hide console');
     t.end();
 });
 
@@ -78,7 +86,7 @@ test('cloudcmd: route: buttons: no config', async (t) => {
         options,
     });
     
-    t.ok(/icon-config none/.test(body), 'should hide config');
+    t.match(body, 'icon-config none', 'should hide config');
     t.end();
 });
 
@@ -95,7 +103,7 @@ test('cloudcmd: route: buttons: no contact', async (t) => {
         options,
     });
     
-    t.ok(/icon-contact none/.test(body), 'should hide contact');
+    t.match(body, 'icon-contact none', 'should hide contact');
     t.end();
 });
 
@@ -112,7 +120,7 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
         options,
     });
     
-    t.ok(/icon-move none/.test(body), 'should hide move button');
+    t.match(body, 'icon-move none', 'should hide move button');
     t.end();
 });
 
@@ -146,7 +154,7 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
         options,
     });
     
-    t.ok(/icon-copy none/.test(body), 'should hide copy button');
+    t.match(body, 'icon-copy none', 'should hide copy button');
     t.end();
 });
 
@@ -163,7 +171,7 @@ test('cloudcmd: route: keys panel: hide', async (t) => {
         options,
     });
     
-    t.ok(/keyspanel hidden/.test(body), 'should hide keyspanel');
+    t.match(body, 'keyspanel hidden', 'should hide keyspanel');
     t.end();
 });
 
@@ -248,12 +256,12 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
+    await reImport(routePath);
+    const cloudcmd = await reImport(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd, {
         configManager: createConfigManager(),
@@ -263,7 +271,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     
     stopAll();
     
-    t.ok(body.includes(nameEncoded), 'should encode name');
+    t.match(body, nameEncoded, 'should encode name');
     t.end();
 });
 
@@ -287,12 +295,12 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
+    await reImport(routePath);
+    const cloudcmd = await reImport(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/');
@@ -323,12 +331,12 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
+    await reImport(routePath);
+    const cloudcmd = await reImport(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd, {
         config: defaultConfig,
@@ -355,7 +363,7 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
         options,
     });
     
-    t.ok(/icon-terminal none/.test(body), 'should hide terminal');
+    t.match(body, 'icon-terminal none', 'should hide terminal');
     t.end();
 });
 
@@ -374,7 +382,7 @@ test('cloudcmd: route: no termianl: /fs', async (t) => {
         options,
     });
     
-    t.ok(/icon-terminal none/.test(body), 'should hide terminal');
+    t.match(body, 'icon-terminal none', 'should hide terminal');
     t.end();
 });
 
@@ -392,7 +400,7 @@ test('cloudcmd: route: buttons: terminal: can not load', async (t) => {
         options,
     });
     
-    t.ok(/icon-terminal none/.test(body), 'should not enable terminal');
+    t.match(body, 'icon-terminal none', 'should not enable terminal');
     t.end();
 });
 
@@ -437,12 +445,12 @@ test('cloudcmd: route: dropbox', async (t) => {
     config('dropbox', true);
     config('dropboxToken', '');
     
-    const {_getReadDir} = reRequire(routePath);
+    const {_getReadDir} = await reImport(routePath);
     
     const readdir = _getReadDir(config);
     const [e] = await tryToCatch(readdir, '/root');
     
-    t.ok(/token/.test(e.message), 'should contain word token in message');
+    t.match(e.message, 'token', 'should contain word token in message');
     t.end();
 });
 
@@ -467,13 +475,13 @@ test('cloudcmd: route: read: root', async (t) => {
     
     const read = stub().returns(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
+    await reImport(routePath);
     
-    const cloudcmd = reRequire(cloudcmdPath);
+    const {cloudcmd} = await reImport(cloudcmdPath);
     const configManager = createConfigManager();
     const root = '/hello';
     
