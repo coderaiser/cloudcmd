@@ -1,10 +1,11 @@
 # Cloud Commander v16.3.0 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
-### [Main][MainURL] [Blog][BlogURL]
+### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL]
 
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
-[MainURL]: http://cloudcmd.io "Main"
-[BlogURL]: http://blog.cloudcmd.io "Blog"
+[MainURL]: https://cloudcmd.io "Main"
+[BlogURL]: https://blog.cloudcmd.io "Blog"
+[SupportURL]: https://patreon.com/coderaiser
 [BuildStatusURL]: https://travis-ci.org/coderaiser/cloudcmd "Build Status"
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
 [BuildAppveyorURL]: https://ci.appveyor.com/project/coderaiser/cloudcmd
