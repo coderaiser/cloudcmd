@@ -5,7 +5,7 @@
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
 [MainURL]: https://cloudcmd.io "Main"
 [BlogURL]: https://blog.cloudcmd.io "Blog"
-[SupportURL]: https://patreon.com/coderaiser
+[SupportURL]: https://patreon.com/coderaiser "Patreon"
 [BuildStatusURL]: https://travis-ci.org/coderaiser/cloudcmd "Build Status"
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
 [BuildAppveyorURL]: https://ci.appveyor.com/project/coderaiser/cloudcmd
