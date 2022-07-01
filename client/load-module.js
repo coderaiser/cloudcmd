@@ -55,7 +55,7 @@ module.exports = function loadModule(params) {
         if (e)
             return console.error(e);
         
-        await a.show(...args);
+        return await a.show(...args);
     };
 };
 
