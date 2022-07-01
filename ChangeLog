@@ -1,3 +1,9 @@
+2022.07.01, v16.3.0
+
+feature:
+- (cloudcmd) terminal-run: return -1, when not load
+
+
 2022.06.17, v16.2.0
 
 feature:
