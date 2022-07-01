@@ -170,6 +170,7 @@ async function switchKey(event) {
             Operation.show('delete:silent');
         else
             Operation.show('delete');
+
         break;
     
     case KEY.ASTERISK:
@@ -306,6 +307,7 @@ async function switchKey(event) {
             DOM.swapPanels();
             event.preventDefault();
         }
+
         break;
     
     /* navigation on file table:        *
@@ -403,6 +405,7 @@ async function switchKey(event) {
             await loadDir({path});
         else
             CloudCmd.View.show();
+
         break;
     
     case KEY.BACKSPACE:
@@ -415,6 +418,7 @@ async function switchKey(event) {
             await loadDir({
                 path: '/',
             });
+
         break;
     
     case KEY.A:
@@ -468,26 +472,31 @@ async function switchKey(event) {
             CloudCmd.refresh();
             event.preventDefault();
         }
+
         break;
     
     case KEY.C:
         if (ctrlMeta)
             Buffer.copy();
+
         break;
     
     case KEY.X:
         if (ctrlMeta)
             Buffer.cut();
+
         break;
     
     case KEY.V:
         if (ctrlMeta)
             Buffer.paste();
+
         break;
     
     case KEY.Z:
         if (ctrlMeta)
             Buffer.clear();
+
         break;
     
     /* чистим хранилище */
@@ -498,6 +507,7 @@ async function switchKey(event) {
             CloudCmd.log('storage cleared');
             event.preventDefault();
         }
+
         break;
     }
 }

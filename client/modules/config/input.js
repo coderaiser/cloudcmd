@@ -2,7 +2,7 @@
 
 const currify = require('currify');
 
-const isType = currify((type, object, name) => typeof object[name] === type);
+const isType = currify((type, object, name) => type === typeof object[name]);
 
 const isBool = isType('boolean');
 
