@@ -15,9 +15,6 @@ const {
 
 const isDev = process.env.NODE_ENV === 'development';
 
-// prevent additional loading of emitify
-window.Emitify = require('emitify');
-
 module.exports = window.CloudCmd = async (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
