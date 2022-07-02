@@ -1,9 +1,10 @@
 # Cloud Commander v16.3.1
 
-### [Main][MainURL] [Blog][BlogURL]
+### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL]
 
-[MainURL]: http://cloudcmd.io "Main"
-[BlogURL]: http://blog.cloudcmd.io "Blog"
+[MainURL]: https://cloudcmd.io "Main"
+[BlogURL]: https://blog.cloudcmd.io "Blog"
+[SupportURL]: https://patreon.com/coderaiser "Patreon"
 [DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
 [DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
