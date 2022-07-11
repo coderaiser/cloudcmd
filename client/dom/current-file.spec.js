@@ -142,17 +142,16 @@ test('current-file: isCurrentFile: no', (t) => {
         DOM,
         CloudCmd,
     } = global;
-    
+
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
-    
+
     const result = currentFile.isCurrentFile();
-    const expect = false;
-    
+
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
-    
-    t.equal(result, expect);
+
+    t.notOk(result);
     t.end();
 });
 
