@@ -1,6 +1,6 @@
 # Cloud Commander v16.4.0 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
-### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL] [Demo](DemoURL)
+### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL] [Demo][DemoURL]
 
 [MainURL]: https://cloudcmd.io "Main"
 [BlogURL]: https://blog.cloudcmd.io "Blog"
