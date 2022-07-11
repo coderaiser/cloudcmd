@@ -1,3 +1,9 @@
+2022.07.11, v16.4.0
+
+feature:
+- (cloudcmd) env: add ability to pass 0 and 1
+
+
 2022.07.02, v16.3.1
 
 fix:
