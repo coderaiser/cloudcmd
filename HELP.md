@@ -449,7 +449,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_IMPORT` - enable import of config
 - `CLOUDCMD_IMPORT_TOKEN` - authorization  token used to connect to export server
 - `CLOUDCMD_IMPORT_URL` - url of an import server
-- `CLOUDCMD_IMPORT_LISTEN`- enable listen on config updates from import server
+- `CLOUDCMD_IMPORT_LISTEN` - enable listen on config updates from import server
 
 ### User Menu
 
