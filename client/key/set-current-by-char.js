@@ -37,6 +37,7 @@ module.exports = function setCurrentByChar(char, charStore) {
         if (!skipCount) {
             setted = true;
             DOM.setCurrentFile(byName);
+            
             return true;
         }
         

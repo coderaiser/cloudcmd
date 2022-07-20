@@ -182,6 +182,7 @@ function CloudCmdProto(DOM) {
         if (file && !current) {
             const msg = formatMsg('set current file', file, 'error');
             CloudCmd.log(msg);
+            
             return;
         }
         

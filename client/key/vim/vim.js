@@ -44,6 +44,7 @@ module.exports = (key, operations) => {
     if (key === 'Escape') {
         visual(false);
         escape();
+        
         return end();
     }
     
@@ -97,6 +98,7 @@ module.exports = (key, operations) => {
     if (key === 'd' && (visual() || prevStore === 'd')) {
         stopVisual();
         remove();
+        
         return end();
     }
     
@@ -115,6 +117,7 @@ module.exports = (key, operations) => {
         
         stopVisual();
         copy();
+        
         return end();
     }
     
@@ -126,6 +129,7 @@ module.exports = (key, operations) => {
     if (/^v$/i.test(key)) {
         visual(!visual());
         select();
+        
         return end();
     }
     

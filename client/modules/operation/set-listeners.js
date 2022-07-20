@@ -68,6 +68,7 @@ module.exports = (options) => (emitter) => {
                 listeners.end(error);
                 Dialog.alert(error);
                 progress.remove();
+                
                 return;
             }
             
