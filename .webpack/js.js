@@ -93,6 +93,7 @@ module.exports = {
         [modules + '/cloud']: `${dirModules}/cloud.js`,
         [modules + '/user-menu']: `${dirModules}/user-menu/index.js`,
         [modules + '/polyfill']: `${dirModules}/polyfill.js`,
+        [modules + '/command-line']: `${dirModules}/command-line.js`,
     },
     output: {
         filename: '[name].js',

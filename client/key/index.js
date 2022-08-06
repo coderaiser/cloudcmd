@@ -499,6 +499,11 @@ async function switchKey(event) {
 
         break;
     
+    case KEY.COLON:
+        CloudCmd.CommandLine.show();
+        event.preventDefault();
+        break;
+    
     /* чистим хранилище */
     case KEY.D:
         if (ctrlMeta) {

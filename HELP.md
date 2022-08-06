@@ -172,6 +172,7 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `*`                   | select/unselect all
 | `+`                   | expand selection
 | `-`                   | shrink selection
+| `:`                   | open Command Line
 | `Ctrl + X`            | cut to buffer
 | `Ctrl + C`            | copy to buffer
 | `Ctrl + V`            | paste from buffer

@@ -25,8 +25,6 @@ module.exports = {
     
     SEMICOLON   : 52,
     
-    COLON       : 54,
-    
     A           : 65,
     
     C           : 67,
@@ -70,6 +68,7 @@ module.exports = {
     F9          : 120,
     F10         : 121,
     
+    COLON       : 186,
     EQUAL       : 187,
     HYPHEN      : 189,
     DOT         : 190,
