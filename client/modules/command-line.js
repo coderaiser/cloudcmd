@@ -4,7 +4,6 @@
 
 CloudCmd.CommandLine = exports;
 
-const Images = require('../dom/images');
 const Dialog = require('../dom/dialog');
 
 module.exports.init = () => {};
