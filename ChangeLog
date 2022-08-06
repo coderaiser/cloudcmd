@@ -1,3 +1,10 @@
+2022.08.06, v16.5.0
+
+feature:
+- client: add Command Line
+- package: add funding
+- (package) gritty v7.0.0
+
 2022.07.20, v16.4.1
 
 feature:
