@@ -33,6 +33,9 @@
         "client/{client,cloudcmd,load-module}.js": {
             "remove-console": "off"
         },
+        "client/sw": {
+            "remove-console": "off"
+        },
         "test/common/cloudfunc.js": {
             "remove-console": "off"
         },
