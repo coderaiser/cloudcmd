@@ -1,3 +1,10 @@
+2022.10.09, v16.6.0
+
+feature:
+- package: @cloudcmd/fileop v6.0.0
+- package: @cloudcmd/move-files v6.0.0
+- package: copymitter v7.0.0
+
 2022.08.06, v16.5.0
 
 feature:
