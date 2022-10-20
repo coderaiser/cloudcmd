@@ -160,7 +160,6 @@
     "cheerio": "^1.0.0-rc.5",
     "clean-css-loader": "^2.0.0",
     "codegen.macro": "^4.0.0",
-    "coveralls": "^3.0.0",
     "css-loader": "^3.0.0",
     "css-modules-require-hook": "^4.2.3",
     "domtokenlist-shim": "^1.2.0",
