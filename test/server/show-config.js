@@ -19,7 +19,7 @@ test('cloudcmd: show-config: bad arguments', (t) => {
     t.end();
 });
 
-test('cloudcmd: show-config: return', (t) => {
+test('cloudcmd: show-config: empty: return', (t) => {
     t.equal(showConfig({}), '', 'should return string');
     t.end();
 });

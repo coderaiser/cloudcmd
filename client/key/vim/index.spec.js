@@ -42,7 +42,7 @@ test('cloudcmd: client: key: set next file: no', (t) => {
     t.end();
 });
 
-test('cloudcmd: client: key: set next file current', (t) => {
+test('cloudcmd: client: key: set next file current: j', (t) => {
     const nextSibling = 'hello';
     const element = {
         nextSibling,
@@ -59,7 +59,7 @@ test('cloudcmd: client: key: set next file current', (t) => {
     t.end();
 });
 
-test('cloudcmd: client: key: set next file current', (t) => {
+test('cloudcmd: client: key: set next file current: mjj', (t) => {
     const nextSibling = 'hello';
     const element = {
         nextSibling,

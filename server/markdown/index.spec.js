@@ -89,7 +89,7 @@ test('cloudcmd: markdown: no request', async (t) => {
     t.end();
 });
 
-test('cloudcmd: markdown: zip', async (t) => {
+test('cloudcmd: markdown', async (t) => {
     const configManager = cloudcmd.createConfigManager();
     const fixtureDir = join(__dirname, 'fixture');
     const config = {

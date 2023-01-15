@@ -121,7 +121,7 @@ test('cloudfunc: formatMsg', (t) => {
     t.end();
 });
 
-test('cloudfunc: formatMsg', (t) => {
+test('cloudfunc: formatMsg: no name', (t) => {
     const msg = 'hello';
     const name = null;
     const status = 'ok';

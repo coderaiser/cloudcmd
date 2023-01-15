@@ -116,24 +116,7 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: buttons: no one file panel: move', async (t) => {
-    const config = {
-        oneFilePanel: false,
-    };
-    
-    const options = {
-        config,
-    };
-    
-    const {body} = await request.get('/', {
-        options,
-    });
-    
-    t.notOk(/icon-move none/.test(body), 'should not hide move button');
-    t.end();
-});
-
-test('cloudcmd: route: buttons: one file panel: move', async (t) => {
+test('cloudcmd: route: buttons: one file panel: copy', async (t) => {
     const config = {
         oneFilePanel: true,
     };

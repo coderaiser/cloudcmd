@@ -34,7 +34,7 @@ export default {
     'spell': () => 'yaspeller . || true',
     'fix:lint': () => run('lint', '--fix'),
     'lint:stream': () => run('lint', '-f stream'),
-    'test': () => [testEnv, `tape --no-check-duplicates 'test/**/*.js' '{client,static,common,server}/**/*.spec.js' -f fail`],
+    'test': () => [testEnv, `tape 'test/**/*.js' '{client,static,common,server}/**/*.spec.js' -f fail`],
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),

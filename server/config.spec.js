@@ -39,7 +39,7 @@ test('config: manage: get', async (t) => {
     t.end();
 });
 
-test('config: manage: get', async (t) => {
+test('config: manage: get: config', async (t) => {
     const editor = 'deepword';
     const conf = {
         editor,
