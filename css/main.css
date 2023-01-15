@@ -1,8 +1,8 @@
-@import './urls.css';
-@import './reset.css';
-@import './style.css';
-@import './icons.css';
-@import './help.css';
-@import './query.css';
-@import './supports.css';
+@import url('./urls.css');
+@import url('./reset.css');
+@import url('./style.css');
+@import url('./icons.css');
+@import url('./help.css');
+@import url('./query.css');
+@import url('./supports.css');
 
