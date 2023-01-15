@@ -1,3 +1,11 @@
+2023.01.15, v16.7.0
+
+feature:
+- package: @cloudcmd/modal v3.0.0: add ability to not set cursor when close the modal
+- package: auto-globals v3.0.0
+- package: rimraf v4.0.5
+- user-menu: rm border
+
 2022.10.20, v16.6.1
 
 feature:
