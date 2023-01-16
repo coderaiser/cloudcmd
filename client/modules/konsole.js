@@ -71,9 +71,7 @@ async function onPath(path) {
     if (Info.dirPath === path)
         return;
     
-    await CloudCmd.loadDir({
-        path,
-    });
+    await CloudCmd.changeDir(path);
 }
 
 const getDirPath = () => {

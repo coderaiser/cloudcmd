@@ -133,7 +133,7 @@ async function switchKey(event) {
     
     const {
         Operation,
-        loadDir,
+        changeDir,
         config,
     } = CloudCmd;
     const {keyCode} = event;
@@ -200,9 +200,7 @@ async function switchKey(event) {
         event.preventDefault();
         
         if (Info.isDir)
-            await loadDir({
-                path,
-            });
+            await changeDir(path);
         else if (shift)
             CloudCmd.View.show(null, {
                 raw: true,
@@ -402,7 +400,7 @@ async function switchKey(event) {
     
     case KEY.ENTER:
         if (Info.isDir)
-            await loadDir({path});
+            await changeDir(path);
         else
             CloudCmd.View.show();
 
@@ -415,9 +413,7 @@ async function switchKey(event) {
     
     case KEY.BACKSLASH:
         if (ctrlMeta)
-            await loadDir({
-                path: '/',
-            });
+            await changeDir('/');
 
         break;
     

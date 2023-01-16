@@ -77,28 +77,8 @@ function CloudCmdProto(DOM) {
         right: 'asc',
     };
     
-    /**
-     * Функция привязываеться ко всем ссылкам и
-     *  загружает содержимое каталогов
-     *
-     * @param params - {
-     *          paramLink - ссылка
-     *          needRefresh - необходимость обязательной загрузки данных с сервера
-     *          panel
-     *      }
-     * @param callback
-     */
-    this.loadDir = async (params) => {
-        const p = params;
-        const refresh = p.isRefresh;
-        
-        const {
-            panel,
-            history = true,
-            noCurrent,
-            currentName,
-        } = p;
-        
+    this.changeDir = async (path, {isRefresh, panel, history = true, noCurrent, currentName} = {}) => {
+        const refresh = isRefresh;
         let panelChanged;
         
         if (!noCurrent && panel && panel !== Info.panel) {
@@ -112,10 +92,9 @@ function CloudCmdProto(DOM) {
             imgPosition = 'top';
         
         Images.show.load(imgPosition, panel);
-        const path = addSlashToEnd(p.path);
         
         /* загружаем содержимое каталога */
-        await ajaxLoad(path, {
+        await ajaxLoad(addSlashToEnd(path), {
             refresh,
             history,
             noCurrent,
@@ -302,8 +281,7 @@ function CloudCmdProto(DOM) {
         const history = false;
         const noCurrent = options ? options.noCurrent : false;
         
-        await CloudCmd.loadDir({
-            path,
+        await CloudCmd.changeDir(path, {
             isRefresh,
             history,
             panel,
@@ -455,9 +433,7 @@ function CloudCmdProto(DOM) {
         
         const path = parentDirPath;
         
-        await CloudCmd.loadDir({
-            path,
-        });
+        await CloudCmd.changeDir(path);
         
         const current = DOM.getCurrentByName(dir);
         const [first] = DOM.getFiles(panel);

@@ -719,9 +719,7 @@ module.exports.goToDirectory = async () => {
     if (cancel)
         return;
     
-    await CloudCmd.loadDir({
-        path,
-    });
+    await CloudCmd.changeDir(path);
 };
 
 module.exports.duplicatePanel = async () => {
@@ -739,8 +737,7 @@ module.exports.duplicatePanel = async () => {
     
     const path = getPath(isDir);
     
-    await CloudCmd.loadDir({
-        path,
+    await CloudCmd.changeDir(path, {
         panel,
         noCurrent,
     });
@@ -760,14 +757,12 @@ module.exports.swapPanels = async () => {
     
     let currentIndex = files.indexOf(element);
     
-    await CloudCmd.loadDir({
-        path,
+    await CloudCmd.changeDir(path, {
         panel: panelPassive,
         noCurrent: true,
     });
     
-    await CloudCmd.loadDir({
-        path: dirPathPassive,
+    await CloudCmd.changeDir(dirPathPassive, {
         panel,
     });
     
