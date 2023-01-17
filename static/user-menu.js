@@ -37,22 +37,23 @@ module.exports = {
     },
     
     'C - Create User Menu File': async ({DOM, CloudCmd}) => {
-        const {Dialog} = DOM;
-        const currentFile = DOM.getCurrentByName('.cloudcmd.menu.js')
-        
+        const {
+            Dialog,
+            CurrentInfo,
+        } = DOM;
+        const currentFile = DOM.getCurrentByName('.cloudcmd.menu.js');
+
         if (currentFile) {
             const [cancel] = await Dialog.confirm(`Looks like file '.cloudcmd.menu.js' already exists. Overwrite?`);
             
             if (cancel)
                 return;
         }
-        
-        const {CurrentInfo} = DOM;
+
         const {dirPath} = CurrentInfo;
         const path = `${dirPath}.cloudcmd.menu.js`;
         const {prefix} = CloudCmd;
-        
-        
+
         const data = await readDefaultMenu({prefix});
         await createDefaultMenu({
             path,

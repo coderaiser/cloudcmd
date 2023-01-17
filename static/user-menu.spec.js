@@ -45,39 +45,55 @@ test('cloudcmd: static: user menu: R', (t) => {
     t.end();
 });
 
-test('cloudcmd: static: user menu: F6', (t) => {
+test('cloudcmd: static: user menu: F6', async (t) => {
     const name = 'F6 - Copy URL to current file';
+    const DOM = {};
 
     const fn = defaultMenu[name];
-
-    t.ok(fn);
+    const [error] = await tryToCatch(fn, {
+        DOM,
+    });
+    
+    t.equal(error.code, 'ERR_UNSUPPORTED_ESM_URL_SCHEME');
     t.end();
 });
 
-test('cloudcmd: static: user menu: Y', (t) => {
+test('cloudcmd: static: user menu: Y', async (t) => {
     const name = 'Y - Convert YouTube to MP3';
+    const DOM = {};
 
     const fn = defaultMenu[name];
-
-    t.ok(fn);
+    const [error] = await tryToCatch(fn, {
+        DOM,
+    });
+    
+    t.equal(error.code, 'ERR_UNSUPPORTED_ESM_URL_SCHEME');
     t.end();
 });
 
-test('cloudcmd: static: user menu: F', (t) => {
+test('cloudcmd: static: user menu: F', async (t) => {
     const name = 'F - Convert flac to mp3 [ffmpeg]';
+    const DOM = {};
 
     const fn = defaultMenu[name];
-
-    t.ok(fn);
+    const [error] = await tryToCatch(fn, {
+        DOM,
+    });
+    
+    t.equal(error.code, 'ERR_UNSUPPORTED_ESM_URL_SCHEME');
     t.end();
 });
 
-test('cloudcmd: static: user menu: M', (t) => {
+test('cloudcmd: static: user menu: M', async (t) => {
     const name = 'M - Convert mpeg to mp3 [ffmpeg]';
+    const DOM = {};
 
     const fn = defaultMenu[name];
-
-    t.ok(fn);
+    const [error] = await tryToCatch(fn, {
+        DOM,
+    });
+    
+    t.equal(error.code, 'ERR_UNSUPPORTED_ESM_URL_SCHEME');
     t.end();
 });
 
@@ -95,6 +111,54 @@ test('cloudcmd: static: user menu: IO.write', async (t) => {
     const path = '/.cloudcmd.menu.js';
     
     t.calledWith(write, [path, _data], 'should call IO.write');
+    t.end();
+});
+
+test('cloudcmd: static: user menu: C: exists: ok', async (t) => {
+    const name = 'C - Create User Menu File';
+    const DOM = getDOM();
+    const CloudCmd = getCloudCmd();
+    const {
+        Dialog,
+        getCurrentByName,
+    } = DOM;
+    const {confirm} = Dialog;
+    const {write} = DOM.IO;
+    
+    getCurrentByName.returns({});
+    confirm.resolves([]);
+    
+    await defaultMenu[name]({
+        DOM,
+        CloudCmd,
+    });
+    
+    const path = '/.cloudcmd.menu.js';
+    
+    t.calledWith(write, [path, _data], 'should call IO.write');
+    t.end();
+});
+
+test('cloudcmd: static: user menu: C: exists: cancel', async (t) => {
+    const name = 'C - Create User Menu File';
+    const DOM = getDOM();
+    const CloudCmd = getCloudCmd();
+    const {
+        Dialog,
+        getCurrentByName,
+    } = DOM;
+    const {confirm} = Dialog;
+    const {write} = DOM.IO;
+
+    getCurrentByName.returns({});
+    confirm.resolves([Error('cancel')]);
+
+    await defaultMenu[name]({
+        DOM,
+        CloudCmd,
+    });
+
+    t.notCalled(write);
     t.end();
 });
 
@@ -234,6 +298,10 @@ function getDOM() {
         write: stub(),
     };
     
+    const Dialog = {
+        confirm: stub(),
+    };
+    
     const CurrentInfo = {
         dirPath: '/',
         files: [],
@@ -244,6 +312,7 @@ function getDOM() {
     
     return {
         IO,
+        Dialog,
         CurrentInfo,
         setCurrentByName: stub(),
         getFilenames: stub().returns([]),
