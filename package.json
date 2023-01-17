@@ -191,7 +191,7 @@
     "readjson": "^2.0.1",
     "request": "^2.76.0",
     "rimraf": "^4.0.5",
-    "scroll-into-view-if-needed": "^2.2.5",
+    "scroll-into-view-if-needed": "^3.0.4",
     "serve-once": "^2.0.0",
     "serviceworker-webpack-plugin": "^1.0.1",
     "smalltalk": "^4.0.0",
