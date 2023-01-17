@@ -1,6 +1,7 @@
 'use strict';
 
 const RENAME_FILE = 'Rename file';
+const CDN = 'https://cdn.jsdelivr.net/gh/cloudcmd/user-menu@';
 
 module.exports = {
     '__settings': {
@@ -13,11 +14,44 @@ module.exports = {
         await DOM.renameCurrent();
     },
     
+    'F6 - Copy URL to current file': async ({DOM}) => {
+        const {copyURLToCurrentFile} = await import(`${CDN}@1.1.0/menu/copy-url-to-current-file.js`);
+        await copyURLToCurrentFile({DOM});
+    },
+    
+    'R - cd /': async ({CloudCmd}) => {
+        await CloudCmd.changeDir('/');
+    },
+    'Y - Convert YouTube to MP3': async ({CloudCmd, DOM}) => {
+        const {convertYouTubeToMp3} = await import(`${CDN}@v1.1.0/menu/convert-youtube-to-mp3.js`);
+        await convertYouTubeToMp3({CloudCmd, DOM});
+    },
+    
+    'F - Convert flac to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
+        const {convertFlacToMp3} = await import(`${CDN}@v1.1.0/menu/ffmpeg.js`);
+        await convertFlacToMp3({CloudCmd, DOM});
+    },
+    'M - Convert mpeg to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
+        const {convertMp4ToMp3} = await import(`${CDN}@v1.1.0/menu/ffmpeg.js`);
+        await convertMp4ToMp3({CloudCmd, DOM});
+    },
+    
     'C - Create User Menu File': async ({DOM, CloudCmd}) => {
+        const {Dialog} = DOM;
+        const currentFile = DOM.getCurrentByName('.cloudcmd.menu.js')
+        
+        if (currentFile) {
+            const [cancel] = await Dialog.confirm(`Looks like file '.cloudcmd.menu.js' already exists. Overwrite?`);
+            
+            if (cancel)
+                return;
+        }
+        
         const {CurrentInfo} = DOM;
         const {dirPath} = CurrentInfo;
         const path = `${dirPath}.cloudcmd.menu.js`;
         const {prefix} = CloudCmd;
+        
         
         const data = await readDefaultMenu({prefix});
         await createDefaultMenu({

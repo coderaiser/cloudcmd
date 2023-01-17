@@ -9,8 +9,8 @@ const defaultMenu = require('./user-menu');
 const test = autoGlobals(require('supertape'));
 
 const {create} = autoGlobals;
-
 const {_data} = defaultMenu;
+
 const reject = wraptile(async (a) => {
     throw Error(a);
 });
@@ -26,6 +26,58 @@ test('cloudcmd: static: user menu: Rename', async (t) => {
     });
     
     t.ok(renameCurrent.called, 'should call renameCurrent');
+    t.end();
+});
+
+test('cloudcmd: static: user menu: R', (t) => {
+    const name = 'R - cd /';
+    const changeDir = stub();
+    const CloudCmd = {
+        changeDir,
+    };
+    
+    const fn = defaultMenu[name];
+    fn({
+        CloudCmd,
+    });
+    
+    t.calledWith(changeDir, ['/']);
+    t.end();
+});
+
+test('cloudcmd: static: user menu: F6', (t) => {
+    const name = 'F6 - Copy URL to current file';
+
+    const fn = defaultMenu[name];
+
+    t.ok(fn);
+    t.end();
+});
+
+test('cloudcmd: static: user menu: Y', (t) => {
+    const name = 'Y - Convert YouTube to MP3';
+
+    const fn = defaultMenu[name];
+
+    t.ok(fn);
+    t.end();
+});
+
+test('cloudcmd: static: user menu: F', (t) => {
+    const name = 'F - Convert flac to mp3 [ffmpeg]';
+
+    const fn = defaultMenu[name];
+
+    t.ok(fn);
+    t.end();
+});
+
+test('cloudcmd: static: user menu: M', (t) => {
+    const name = 'M - Convert mpeg to mp3 [ffmpeg]';
+
+    const fn = defaultMenu[name];
+
+    t.ok(fn);
     t.end();
 });
 
