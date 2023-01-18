@@ -31,7 +31,7 @@ module.exports = {
             'no-console': 'off',
         },
         extends: [
-            'plugin:node/recommended',
+            'plugin:n/recommended',
         ],
     }, {
         files: ['{client,common,static}/**/*.js'],
