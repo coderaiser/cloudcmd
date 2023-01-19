@@ -1,3 +1,12 @@
+2023.01.19, v16.10.0
+
+fix:
+- lint: eslint-plugin-node -> eslint-plugin-n
+- lint: eslint-plugin-node -> eslint-plugin-n
+
+feature:
+- client: user-menu: navigate: add support of \D + [JK] to speed up vim navigation
+
 2023.01.18, v16.9.1
 
 fix:
