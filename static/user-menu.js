@@ -1,7 +1,7 @@
 'use strict';
 
 const RENAME_FILE = 'Rename file';
-const CDN = 'https://cdn.jsdelivr.net/gh/cloudcmd/user-menu@1.1.1';
+const CDN = 'https://cdn.jsdelivr.net/gh/cloudcmd/user-menu@1.2.4';
 
 module.exports = {
     '__settings': {
@@ -31,9 +31,14 @@ module.exports = {
         const {convertFlacToMp3} = await import(`${CDN}/menu/ffmpeg.js`);
         await convertFlacToMp3({CloudCmd, DOM});
     },
-    'M - Convert mpeg to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
+    'M - Convert mp4 to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
         const {convertMp4ToMp3} = await import(`${CDN}/menu/ffmpeg.js`);
         await convertMp4ToMp3({CloudCmd, DOM});
+    },
+
+    'O - Convert mov to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
+        const {convertMovToMp3} = await import(`${CDN}/menu/ffmpeg.js`);
+        await convertMovToMp3({CloudCmd, DOM});
     },
 
     'C - Create User Menu File': async ({DOM, CloudCmd}) => {

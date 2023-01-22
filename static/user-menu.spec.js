@@ -85,7 +85,20 @@ test('cloudcmd: static: user menu: F', async (t) => {
 });
 
 test('cloudcmd: static: user menu: M', async (t) => {
-    const name = 'M - Convert mpeg to mp3 [ffmpeg]';
+    const name = 'M - Convert mp4 to mp3 [ffmpeg]';
+    const DOM = {};
+
+    const fn = defaultMenu[name];
+    const [error] = await tryToCatch(fn, {
+        DOM,
+    });
+    
+    t.equal(error.code, 'ERR_UNSUPPORTED_ESM_URL_SCHEME');
+    t.end();
+});
+
+test('cloudcmd: static: user menu: O', async (t) => {
+    const name = 'O - Convert mov to mp3 [ffmpeg]';
     const DOM = {};
 
     const fn = defaultMenu[name];
