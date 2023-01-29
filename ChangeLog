@@ -1,3 +1,8 @@
+2023.01.29, v16.12.0
+
+feature:
+- client: vim: add ability to create directory with 'md', and create file with 'mf'
+
 2023.01.22, v16.11.0
 
 fix:
