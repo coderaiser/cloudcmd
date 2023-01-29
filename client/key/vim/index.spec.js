@@ -22,6 +22,7 @@ global.CloudCmd = getCloudCmd();
 
 const vim = require(pathVim);
 
+const {assign} = Object;
 const {DOM} = global;
 
 const {Buffer} = DOM;
@@ -405,7 +406,31 @@ test('cloudcmd: client: key: /', (t) => {
         preventDefault,
     });
     
-    t.ok(preventDefault.calledWith(), 'should call preventDefault');
+    t.calledWithNoArgs(preventDefault, 'should call preventDefault');
+    t.end();
+});
+
+test('cloudcmd: client: find', (t) => {
+    assign(DOM.Dialog, {
+        prompt: stub().returns([]),
+    });
+    
+    const setCurrentByName = stub();
+    
+    assign(DOM, {
+        setCurrentByName,
+    });
+    
+    const vim = reRequire(pathVim);
+    const event = {
+        preventDefault: stub(),
+    };
+    
+    vim('/', event);
+    
+    stopAll();
+    
+    t.notCalled(setCurrentByName);
     t.end();
 });
 
@@ -442,6 +467,42 @@ test('cloudcmd: client: key: N', (t) => {
     stopAll();
     
     t.ok(findPrevious.calledWith(), 'should call findPrevious');
+    t.end();
+});
+
+test('cloudcmd: client: key: make directory', (t) => {
+    const vim = reRequire(pathVim);
+    
+    assign(DOM, {
+        promptNewDir: stub(),
+    });
+    
+    const event = {
+        stopImmediatePropagation: stub(),
+        preventDefault: stub(),
+    };
+    vim('m', event);
+    vim('d', event);
+    
+    t.calledWithNoArgs(DOM.promptNewDir);
+    t.end();
+});
+
+test('cloudcmd: client: key: make file', (t) => {
+    const vim = reRequire(pathVim);
+    
+    assign(DOM, {
+        promptNewFile: stub(),
+    });
+    
+    const event = {
+        stopImmediatePropagation: stub(),
+        preventDefault: stub(),
+    };
+    vim('m', event);
+    vim('f', event);
+    
+    t.calledWithNoArgs(DOM.promptNewDir);
     t.end();
 });
 

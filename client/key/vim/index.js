@@ -21,6 +21,18 @@ const getOperations = (event) => ({
         CloudCmd.Operation.show('delete');
     },
     
+    makeDirectory: () => {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        DOM.promptNewDir();
+    },
+    
+    makeFile: () => {
+        event.stopImmediatePropagation();
+        event.preventDefault();
+        DOM.promptNewFile();
+    },
+    
     copy: () => {
         DOM.Buffer.copy();
         DOM.unselectFiles();

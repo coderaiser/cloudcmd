@@ -36,6 +36,8 @@ module.exports = (key, operations) => {
         find = noop,
         findNext = noop,
         findPrevious = noop,
+        makeFile = noop,
+        makeDirectory = noop,
     } = operations;
     
     if (key === 'Enter')
@@ -92,6 +94,16 @@ module.exports = (key, operations) => {
             isDelete,
         });
         
+        return end();
+    }
+    
+    if (value === 'md') {
+        makeDirectory();
+        return end();
+    }
+    
+    if (value === 'mf') {
+        makeFile();
         return end();
     }
     

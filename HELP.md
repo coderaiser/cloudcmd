@@ -220,6 +220,8 @@ When the `--vim` option is provided, or the configuration parameter `vim` is set
 | `/`                   | find file in current directory
 | `n`                   | navigate to next found file
 | `N`                   | navigate to previous found file
+| `md`                  | make directory
+| `mf`                  | make file
 
 Commands can be joined, for example:
 
