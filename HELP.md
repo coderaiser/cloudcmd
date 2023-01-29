@@ -222,6 +222,7 @@ When the `--vim` option is provided, or the configuration parameter `vim` is set
 | `N`                   | navigate to previous found file
 | `md`                  | make directory
 | `mf`                  | make file
+| `tt`                  | show terminal
 
 Commands can be joined, for example:
 
