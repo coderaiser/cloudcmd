@@ -525,3 +525,18 @@ test('cloudcmd: client: vim: terminal', (t) => {
     t.end();
 });
 
+test('cloudcmd: client: vim: edit', (t) => {
+    assign(CloudCmd, {
+        EditFileVim: {
+            show: stub(),
+        },
+    });
+
+    const event = {
+    };
+    vim('e', event);
+
+    t.calledWithNoArgs(CloudCmd.EditFileVim.show);
+    t.end();
+});
+

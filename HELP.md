@@ -223,6 +223,7 @@ When the `--vim` option is provided, or the configuration parameter `vim` is set
 | `md`                  | make directory
 | `mf`                  | make file
 | `tt`                  | show terminal
+| `e`                   | edit file
 
 Commands can be joined, for example:
 

@@ -37,6 +37,10 @@ const getOperations = (event) => ({
         CloudCmd.Terminal.show();
     },
 
+    edit: () => {
+        CloudCmd.EditFileVim.show();
+    },
+
     copy: () => {
         DOM.Buffer.copy();
         DOM.unselectFiles();

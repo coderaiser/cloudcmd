@@ -39,6 +39,7 @@ module.exports = (key, operations) => {
         makeFile = noop,
         makeDirectory = noop,
         terminal = noop,
+        edit = noop,
     } = operations;
 
     if (key === 'Enter')
@@ -105,6 +106,11 @@ module.exports = (key, operations) => {
 
     if (value === 'tt') {
         terminal();
+        return end();
+    }
+
+    if (value === 'e') {
+        edit();
         return end();
     }
 
