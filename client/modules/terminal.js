@@ -31,7 +31,7 @@ const loadAll = async () => {
     
     const prefixGritty = getPrefix();
     const js = `${prefixGritty}/gritty.js`;
-    const css = `${prefix}/dist/terminal.css`;
+    const css = `${prefix}/dist/modules/terminal.css`;
     
     const [e] = await tryToCatch(loadParallel, [js, css]);
     

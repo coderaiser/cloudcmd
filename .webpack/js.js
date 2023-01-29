@@ -9,7 +9,7 @@ const {
 const {EnvironmentPlugin} = require('webpack');
 const WebpackBar = require('webpackbar');
 
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const ServiceWorkerWebpackPlugin2 = require('serviceworker-webpack-plugin2');
 
 const dir = './client';
 const dirModules = './client/modules';
@@ -51,10 +51,12 @@ const plugins = [
         NODE_ENV,
     }),
     
-    new ServiceWorkerWebpackPlugin({
+    /*
+    new ServiceWorkerWebpackPlugin2({
         entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
         excludes: ['*'],
     }),
+    */
     
     new WebpackBar(),
 ];
@@ -67,6 +69,7 @@ const splitChunks = {
 module.exports = {
     resolve: {
         symlinks: false,
+        fallback: { "path": require.resolve("path-browserify") }
     },
     devtool,
     optimization: {
@@ -116,7 +119,7 @@ module.exports = {
     },
 };
 
-function externals(context, request, fn) {
+function externals({request}, fn) {
     if (!isDev)
         return fn();
     

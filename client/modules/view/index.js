@@ -323,7 +323,7 @@ async function loadAll() {
     time(Name + ' load');
     
     Loading = true;
-    await loadCSS(`${prefix}/dist/view.css`);
+    await loadCSS(`${prefix}/dist/modules/view.css`);
     Loading = false;
 }
 

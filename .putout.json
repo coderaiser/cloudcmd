@@ -1,6 +1,7 @@
 {
     "plugins": [
-        "cloudcmd"
+        "cloudcmd",
+        "webpack"
     ],
     "ignore": [
         "html",

@@ -141,7 +141,7 @@ function CloudCmdProto(DOM) {
     
     async function loadStyle() {
         const {prefix} = CloudCmd;
-        const name = prefix + '/dist/cloudcmd.common.css';
+        const name = prefix + '/dist/modules/cloud.css';
         
         await load.css(name);
     }

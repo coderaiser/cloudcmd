@@ -57,7 +57,7 @@ module.exports.init = async () => {
     [Template] = await Promise.all([
         Files.get('config-tmpl'),
         loadSocket(),
-        loadCSS(prefix + '/dist/config.css'),
+        loadCSS(prefix + '/dist/modules/config.css'),
         CloudCmd.View(),
     ]);
     
