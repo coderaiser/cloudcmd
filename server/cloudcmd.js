@@ -36,7 +36,7 @@ const fileop = require('@cloudcmd/fileop');
 const DIR_ROOT = DIR + '../';
 
 const isDev = process.env.NODE_ENV === 'development';
-const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
+const getDist = () => 'html';//(isDev) => isDev ? 'dist-dev' : 'dist';
 
 const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.html`);
 const html = fs.readFileSync(getIndexPath(isDev), 'utf8');

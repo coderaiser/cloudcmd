@@ -50,8 +50,7 @@ const onUpdateFound = wraptile(async (config) => {
     const {DOM} = window;
     const prefix = getPrefix(config.prefix);
     
-    await load.js(`${prefix}/dist/cloudcmd.common.js`);
-    await load.js(`${prefix}/dist/cloudcmd.js`);
+    await load.js(`${prefix}/dist/client/cloudcmd.js`);
     
     console.log('cloudcmd: sw: updated');
     

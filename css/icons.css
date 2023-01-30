@@ -58,7 +58,7 @@
     content     : '\e80c  ';
 }
 
-.icon-file::before, {
+.icon-file::before {
     font-family : 'Fontello';
     content     : '\e80d  ';
 }

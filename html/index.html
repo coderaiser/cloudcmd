@@ -8,9 +8,9 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" href="{{ prefix }}/favicon.ico">
         
-        <link rel=stylesheet href="{{ prefix }}/dist/cloudcmd.css">
+        <link rel=stylesheet href="{{ prefix }}/dist/client/cloudcmd.css">
         <noscript>
-            <link rel=stylesheet href="{{ prefix }}/dist/nojs.css">
+            <link rel=stylesheet href="{{ prefix }}/dist/css/nojs.css">
         </noscript>
         <style data-name="columns">
             {{ columns }}
@@ -33,8 +33,7 @@
             <button id=shift~  class="cmd-button reduce-text icon-terminal"  title="Terminal"        >⇧ ~</button>
             <button id=contact class="cmd-button reduce-text icon-contact"   title="Contact"         ></button>
         </div>
-        <script src="{{ prefix }}/dist/cloudcmd.common.js"></script>
-        <script src="{{ prefix }}/dist/cloudcmd.js"></script>
+        <script src="{{ prefix }}/dist/client/cloudcmd.js"></script>
         <script>
             CloudCmd({{ config }});
         </script>
