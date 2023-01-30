@@ -1,3 +1,9 @@
+2023.01.30, v16.13.1
+
+feature:
+- client: add DIR_DIST
+- client: DIRCLIENT -> DIR_CLIENT
+
 2023.01.29, v16.13.0
 
 feature:
