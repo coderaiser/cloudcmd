@@ -29,7 +29,7 @@ module.exports = function loadModule(params) {
         exec(doBefore);
 
         const {prefix} = CloudCmd;
-        const pathFull = prefix + CloudCmd.DIR_CLIENT_MODULES + path + '.js';
+        const pathFull = prefix + CloudCmd.DIR_MODULES + path + '.js';
 
         return loadJS(pathFull).then(async () => {
             const newModule = async (f) => f && f();
