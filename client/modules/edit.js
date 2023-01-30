@@ -31,7 +31,7 @@ const ConfigView = {
 
 module.exports.init = async () => {
     const element = create();
-    
+
     await CloudCmd.View();
     await loadFiles(element);
 };
@@ -44,9 +44,9 @@ function create() {
             'font-family: "Droid Sans Mono";',
         notAppend: true,
     });
-    
+
     Element = element;
-    
+
     return element;
 }
 
@@ -60,30 +60,26 @@ function initConfig(options = {}) {
         ...options,
         ...ConfigView,
     };
-    
+
     if (!options.afterShow)
         return config;
-    
+
     checkFn('options.afterShow', options.afterShow);
-    
-    const afterShow = {
-        config,
-    };
-    
+
     config.afterShow = () => {
-        afterShow();
+        ConfigView.afterShow();
         options.afterShow();
     };
-    
+
     return config;
 }
 
 module.exports.show = (options) => {
     if (Loading)
         return;
-    
+
     CloudCmd.View.show(Element, initConfig(options));
-    
+
     getEditor()
         .setOptions({
             fontSize: 16,
@@ -107,11 +103,11 @@ const loadFiles = async (element) => {
     const socketPath = CloudCmd.prefix;
     const prefixSocket = `${CloudCmd.prefixSocket}/${EditorName}`;
     const url = `${prefix}/${EditorName}.js`;
-    
+
     time(Name + ' load');
-    
+
     await loadJS(url);
-    
+
     const word = promisify(window[EditorName]);
     const [ed] = await tryToCatch(word, element, {
         maxSize,
@@ -119,7 +115,7 @@ const loadFiles = async (element) => {
         prefixSocket,
         socketPath,
     });
-    
+
     timeEnd(Name + ' load');
     editor = ed;
     Loading = false;

@@ -25,25 +25,24 @@ module.exports = function loadModule(params) {
     if (CloudCmd[name])
         return;
 
-    CloudCmd[name] = () => {
+    CloudCmd[name] = async () => {
         exec(doBefore);
 
-        const {prefix} = CloudCmd;
-        const pathFull = prefix + CloudCmd.DIR_MODULES + path + '.js';
+        const {DIR_MODULES} = CloudCmd;
+        const pathFull = `${DIR_MODULES}/${path}.js`;
 
-        return loadJS(pathFull).then(async () => {
-            const newModule = async (f) => f && f();
-            const module = CloudCmd[name];
+        await loadJS(pathFull);
+        const newModule = async (f) => f && f();
+        const module = CloudCmd[name];
 
-            Object.assign(newModule, module);
+        Object.assign(newModule, module);
 
-            CloudCmd[name] = newModule;
+        CloudCmd[name] = newModule;
+        CloudCmd.log('init', name);
 
-            CloudCmd.log('init', name);
-            await module.init();
+        await module.init();
 
-            return newModule;
-        });
+        return newModule;
     };
 
     CloudCmd[name].show = async (...args) => {

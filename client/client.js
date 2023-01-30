@@ -59,8 +59,6 @@ function CloudCmdProto(DOM) {
     this.prefix = '';
     this.prefixSocket = '';
     this.prefixURL = '';
-    this.DIR_CLIENT = '/dist/';
-    this.DIR_MODULES = this.DIR_CLIENT + 'modules/';
 
     this.MIN_ONE_PANEL_WIDTH = 1155;
     this.HOST = location.origin || location.protocol + '//' + location.host;
@@ -111,6 +109,8 @@ function CloudCmdProto(DOM) {
         CloudCmd.prefix = prefix;
         CloudCmd.prefixURL = `${prefix}${apiURL}`;
         CloudCmd.prefixSocket = config.prefixSocket;
+        CloudCmd.DIR_DIST = `${prefix}/dist`;
+        CloudCmd.DIR_MODULES = `${this.DIR_DIST}/modules`;
 
         CloudCmd.config = (key) => config[key];
         CloudCmd.config.if = currify((key, fn, a) => config[key] && fn(a));
@@ -130,7 +130,7 @@ function CloudCmdProto(DOM) {
             CloudCmd.MIN_ONE_PANEL_WIDTH = Infinity;
 
         if (!document.body.scrollIntoViewIfNeeded)
-            await load.js(prefix + CloudCmd.DIR_MODULES + 'polyfill.js');
+            await load.js(`${CloudCmd.DIR_MODULES}/polyfill.js`);
 
         await initModules();
         await baseInit();
