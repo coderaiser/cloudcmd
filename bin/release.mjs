@@ -47,7 +47,7 @@ async function replaceVersion(name, version, versionNew) {
     if (error)
         return console.error(error);
     
-    console.log('done: ' + name);
+    console.log(`done: ${name}`);
 }
 
 async function cl() {

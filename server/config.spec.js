@@ -12,7 +12,7 @@ const {
     createConfig,
     _cryptoPass,
 } = require(configPath);
-const {apiURL} = require(root + 'common/cloudfunc');
+const {apiURL} = require(`${root}common/cloudfunc`);
 
 const fixture = require('./config.fixture');
 

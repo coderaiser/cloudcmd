@@ -421,7 +421,7 @@ async function _processFiles(options, data) {
 
 function checkEmpty(name, operation) {
     if (!operation)
-        throw Error(name + ' could not be empty!');
+        throw Error(`${name} could not be empty!`);
 }
 
 function twopack(operation, type) {
@@ -487,9 +487,9 @@ async function prompt(msg, to, names) {
     msg += ' ';
     
     if (names.length > 1)
-        msg     += n + ' file(s)';
+        msg     += `${n} file(s)`;
     else
-        msg     += '"' + name + '"';
+        msg     += `"${name}"`;
     
     msg += ' to';
     

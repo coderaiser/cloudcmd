@@ -52,7 +52,7 @@ function create() {
 
 function checkFn(name, fn) {
     if (typeof fn !== 'function')
-        throw Error(name + ' should be a function!');
+        throw Error(`${name} should be a function!`);
 }
 
 function initConfig(options = {}) {
@@ -104,7 +104,7 @@ const loadFiles = async (element) => {
     const prefixSocket = `${CloudCmd.prefixSocket}/${EditorName}`;
     const url = `${prefix}/${EditorName}.js`;
 
-    time(Name + ' load');
+    time(`${Name} load`);
 
     await loadJS(url);
 
@@ -116,7 +116,7 @@ const loadFiles = async (element) => {
         socketPath,
     });
 
-    timeEnd(Name + ' load');
+    timeEnd(`${Name} load`);
     editor = ed;
     Loading = false;
 };

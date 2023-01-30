@@ -79,7 +79,7 @@ module.exports.promptNewFile = async () => {
 async function promptNew(typeName) {
     const {Dialog} = DOM;
     const dir = DOM.getCurrentDirPath();
-    const msg = 'New ' + typeName || 'File';
+    const msg = `New ${typeName}` || 'File';
     const getName = () => {
         const name = DOM.getCurrentName();
         
@@ -115,7 +115,7 @@ module.exports.getCurrentDirName = () => {
         .replace(/\/$/, '');
     
     const substr  = href.substr(href, href.lastIndexOf('/'));
-    const ret     = href.replace(substr + '/', '') || '/';
+    const ret     = href.replace(`${substr}/`, '') || '/';
     
     return ret;
 };
@@ -457,7 +457,7 @@ module.exports.getFilenames = (files) => {
  * check storage hash
  */
 module.exports.checkStorageHash = async (name) => {
-    const nameHash = name + '-hash';
+    const nameHash = `${name}-hash`;
     
     if (typeof name !== 'string')
         throw Error('name should be a string!');
@@ -486,8 +486,8 @@ module.exports.saveDataToStorage = async (name, data, hash) => {
     
     hash = hash || await DOM.loadCurrentHash();
     
-    const nameHash = name + '-hash';
-    const nameData = name + '-data';
+    const nameHash = `${name}-hash`;
+    const nameData = `${name}-data`;
     
     await Storage.set(nameHash, hash);
     await Storage.set(nameData, data);

@@ -133,14 +133,14 @@ module.exports.show = (callback) => {
 };
 
 const load = async () => {
-    Util.time(Name + ' load');
+    Util.time(`${Name} load`);
     
     const prefix = getPrefix();
-    const url = prefix + '/console.js';
+    const url = `${prefix}/console.js`;
     const [error] = await tryToCatch(loadJS, url);
     
     Loaded = true;
-    Util.timeEnd(Name + ' load');
+    Util.timeEnd(`${Name} load`);
     
     if (error)
         return Dialog.alert(error.message, {

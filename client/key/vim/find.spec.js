@@ -10,7 +10,7 @@ global.DOM = getDOM();
 const {
     _next,
     _previous,
-} = require(dir + 'find');
+} = require(`${dir}find`);
 
 test('cloudcmd: client: vim: _next', (t) => {
     const result = _next(1, 2);

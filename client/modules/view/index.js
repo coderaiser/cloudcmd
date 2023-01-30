@@ -320,7 +320,7 @@ function check(src) {
 async function loadAll() {
     const {DIR_DIST} = CloudCmd;
 
-    time(Name + ' load');
+    time(`${Name} load`);
 
     Loading = true;
     await loadCSS(`${DIR_DIST}/view.css`);

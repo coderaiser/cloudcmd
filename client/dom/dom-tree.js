@@ -41,7 +41,7 @@ module.exports.getByTag = (tag, element = document) => {
  * @param Id - id
  */
 module.exports.getById = (id, element = document) => {
-    return element.querySelector('#' + id);
+    return element.querySelector(`#${id}`);
 };
 
 /**

@@ -250,7 +250,7 @@ async function main() {
 }
 
 async function validateRoot(root, config) {
-    const validate = await simport(DIR_SERVER + 'validate.js');
+    const validate = await simport(`${DIR_SERVER}validate.js`);
     validate.root(root, config);
     
     if (root === '/')
@@ -269,7 +269,7 @@ function version() {
 }
 
 async function start(options, config) {
-    const SERVER = DIR_SERVER + 'server.mjs';
+    const SERVER = `${DIR_SERVER}server.mjs`;
     
     if (!args.server)
         return;
@@ -326,7 +326,7 @@ async function help() {
 
 function repl() {
     console.log('REPL mode enabled (telnet localhost 1337)');
-    require(DIR_SERVER + 'repl');
+    require(`${DIR_SERVER}repl`);
 }
 
 async function checkUpdate() {
@@ -342,7 +342,7 @@ async function showUpdateInfo(version) {
     
     const chalk = await simport('chalk');
     
-    const latestVersion = chalk.green.bold('v' + version);
+    const latestVersion = chalk.green.bold(`v${version}`);
     const latest = `update available: ${latestVersion}`;
     const current = chalk.dim(`(current: v${Info.version})`);
     

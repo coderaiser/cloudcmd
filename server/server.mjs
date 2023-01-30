@@ -46,7 +46,7 @@ export default async (options, config) => {
         app.use(logger('dev'));
     
     if (prefix)
-        app.get('/', (req, res) => res.redirect(prefix + '/'));
+        app.get('/', (req, res) => res.redirect(`${prefix}/`));
     
     const socketServer = new Server(server, {
         path: `${prefix}/socket.io`,

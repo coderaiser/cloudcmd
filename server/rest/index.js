@@ -1,14 +1,14 @@
 'use strict';
 
 const DIR = '../';
-const DIR_COMMON = DIR + '../common/';
+const DIR_COMMON = `${DIR}../common/`;
 
 const path = require('path');
 const fs = require('fs');
 
-const root = require(DIR + 'root');
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
-const markdown = require(DIR + 'markdown');
+const root = require(`${DIR}root`);
+const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
+const markdown = require(`${DIR}markdown`);
 const info = require('./info');
 
 const jaguar = require('jaguar');
@@ -36,7 +36,7 @@ const UserError = (msg) => {
 
 module.exports = currify((config, request, response, next) => {
     const name = ponse.getPathName(request);
-    const regExp = RegExp('^' + apiURL);
+    const regExp = RegExp(`^${apiURL}`);
     const is = regExp.test(name);
     
     if (!is)

@@ -17,7 +17,7 @@ threadIt.init();
 // warm up
 parse('');
 
-const DIR_ROOT = __dirname + '/../../';
+const DIR_ROOT = `${__dirname}/../../`;
 
 module.exports = callbackify(async (name, rootDir, request) => {
     check(name, request);

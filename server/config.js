@@ -1,15 +1,15 @@
 'use strict';
 
-const DIR_SERVER = __dirname + '/';
+const DIR_SERVER = `${__dirname}/`;
 const DIR_COMMON = '../common/';
 const path = require('path');
 
 const fs = require('fs');
 const Emitter = require('events');
 const {homedir} = require('os');
-const exit = require(DIR_SERVER + 'exit');
+const exit = require(`${DIR_SERVER}exit`);
 
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
+const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
 const currify = require('currify');
 
 const wraptile = require('wraptile');
@@ -21,7 +21,7 @@ const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');
 const criton = require('criton');
-const DIR = DIR_SERVER + '../';
+const DIR = `${DIR_SERVER}../`;
 const HOME = homedir();
 
 const resolve = Promise.resolve.bind(Promise);
@@ -146,7 +146,7 @@ function _connection(manage, socket) {
 function listen(manage, sock, auth) {
     const prefix = manage('prefixSocket');
     
-    sock.of(prefix + '/config')
+    sock.of(`${prefix}/config`)
         .on('connection', (socket) => {
             if (!manage('auth'))
                 return connection(manage, socket);

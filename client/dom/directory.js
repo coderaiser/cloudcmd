@@ -72,6 +72,6 @@ function uploadFile(url, data) {
 }
 
 function uploadDir(url) {
-    return DOM.load.put(url + '?dir');
+    return DOM.load.put(`${url}?dir`);
 }
 

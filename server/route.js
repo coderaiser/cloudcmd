@@ -16,9 +16,9 @@ const once = require('once');
 const pipe = require('pipe-io');
 const {contentType} = require('mime-types');
 
-const root = require(DIR_SERVER + 'root');
-const prefixer = require(DIR_SERVER + 'prefixer');
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
+const root = require(`${DIR_SERVER}root`);
+const prefixer = require(`${DIR_SERVER}prefixer`);
+const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
 
 const Columns = require(`${DIR_SERVER}/columns`);
 
@@ -52,7 +52,7 @@ const getReadDir = (config) => {
  */
 module.exports = currify((config, options, request, response, next) => {
     const name = ponse.getPathName(request);
-    const isFS = RegExp('^/$|^' + FS).test(name);
+    const isFS = RegExp(`^/$|^${FS}`).test(name);
     
     if (!isFS)
         return next();

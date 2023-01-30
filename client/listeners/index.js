@@ -147,7 +147,7 @@ const getPanel = (side) => {
     if (!itype.string(side))
         return side;
     
-    return DOM.getByDataName('js-' + side);
+    return DOM.getByDataName(`js-${side}`);
 };
 
 module.exports.setOnPanel = (side) => {

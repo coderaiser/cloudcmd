@@ -33,7 +33,7 @@ function EventsProto() {
         switch(type) {
         default:
             if (!type.endsWith('element'))
-                throw Error('unknown eventName: ' + type);
+                throw Error(`unknown eventName: ${type}`);
             
             parseArgs(
                 args[EVENT_NAME],

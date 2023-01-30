@@ -462,7 +462,7 @@ test('cloudcmd: client: key: N', (t) => {
         findPrevious,
     });
 
-    const vim = reRequire(dir + 'vim');
+    const vim = reRequire(`${dir}vim`);
     const event = {};
 
     vim('N', event);

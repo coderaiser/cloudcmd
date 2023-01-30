@@ -141,7 +141,7 @@ function CloudCmdProto(DOM) {
 
     async function loadStyle() {
         const {prefix} = CloudCmd;
-        const name = prefix + '/dist/cloudcmd.common.css';
+        const name = `${prefix}/dist/cloudcmd.common.css`;
 
         await load.css(name);
     }
@@ -303,7 +303,7 @@ function CloudCmdProto(DOM) {
     async function ajaxLoad(path, options = {}, panel) {
         const {RESTful} = DOM;
 
-        CloudCmd.log('reading dir: "' + path + '";');
+        CloudCmd.log(`reading dir: "${path}";`);
 
         const dirStorage = CloudCmd.config('dirStorage');
         const json = dirStorage && await Storage.getJson(path);

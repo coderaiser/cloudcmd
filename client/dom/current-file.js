@@ -115,7 +115,7 @@ module.exports.getCurrentDirName = () => {
         .replace(/\/$/, '');
     
     const substr = href.substr(href, href.lastIndexOf('/'));
-    const ret = href.replace(substr + '/', '') || '/';
+    const ret = href.replace(`${substr}/`, '') || '/';
     
     return ret;
 };

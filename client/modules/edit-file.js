@@ -177,7 +177,7 @@ function getMenuData() {
 }
 
 function setMsgChanged(name) {
-    MSG_CHANGED = 'Do you want to save changes to ' + name + '?';
+    MSG_CHANGED = `Do you want to save changes to ${name}?`;
 }
 
 module.exports.isChanged = isChanged;

@@ -57,7 +57,7 @@ module.exports.init = async () => {
     [Template] = await Promise.all([
         Files.get('config-tmpl'),
         loadSocket(),
-        loadCSS(prefix + '/dist/config.css'),
+        loadCSS(`${prefix}/dist/config.css`),
         CloudCmd.View(),
     ]);
     
@@ -94,7 +94,7 @@ function initSocket() {
     const socket = io.connect(href + prefixSocket + '/config', {
         reconnectionAttempts: Infinity,
         reconnectionDelay: ONE_MINUTE,
-        path: prefix + '/socket.io',
+        path: `${prefix}/socket.io`,
     });
     
     const save = (data) => {
@@ -148,9 +148,9 @@ async function fillTemplate() {
         ...obj
     } = input.convert(config);
     
-    obj[editor + '-selected'] = 'selected';
-    obj[packer + '-selected'] = 'selected';
-    obj[columns + '-selected'] = 'selected';
+    obj[`${editor}-selected`] = 'selected';
+    obj[`${packer}-selected`] = 'selected';
+    obj[`${columns}-selected`] = 'selected';
     obj.configAuth = configAuth ? '' : 'hidden';
     
     const innerHTML = rendy(Template, obj);

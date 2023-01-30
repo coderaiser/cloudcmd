@@ -9,7 +9,7 @@ const {
 const {reRequire} = require('mock-require');
 
 const DIR = './';
-const cloudcmdPath = DIR + 'cloudcmd';
+const cloudcmdPath = `${DIR}cloudcmd`;
 
 const cloudcmd = require(cloudcmdPath);
 const {request} = require('serve-once')(cloudcmd, {
@@ -94,7 +94,7 @@ test('cloudcmd: replaceDist', (t) => {
 
 test('cloudcmd: replaceDist: !isDev', (t) => {
     const url = '/dist/hello';
-    const cloudcmdPath = DIR + 'cloudcmd';
+    const cloudcmdPath = `${DIR}cloudcmd`;
     
     const reset = cleanNodeEnv();
     const {_replaceDist} = reRequire(cloudcmdPath);

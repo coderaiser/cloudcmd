@@ -12,7 +12,7 @@ module.exports = function setCurrentByChar(char, charStore) {
     let i = 0;
     
     const escapeChar = escapeRegExp(char);
-    const regExp = new RegExp('^' + escapeChar + '.*$', 'i');
+    const regExp = new RegExp(`^${escapeChar}.*$`, 'i');
     const {files} = Info;
     const chars = charStore();
     const n = chars.length;

@@ -3,14 +3,14 @@
 const fs = require('fs');
 const tryCatch = require('try-catch');
 
-const DIR = __dirname + '/../../';
-const COMMONDIR = DIR + 'common/';
+const DIR = `${__dirname}/../../`;
+const COMMONDIR = `${DIR}common/`;
 const {
     time,
     timeEnd,
-} = require(COMMONDIR + 'util');
+} = require(`${COMMONDIR}util`);
 
-const CloudFuncPath = COMMONDIR + 'cloudfunc';
+const CloudFuncPath = `${COMMONDIR}cloudfunc`;
 
 const CloudFunc = require(CloudFuncPath);
 
@@ -20,10 +20,10 @@ const {reRequire} = require('mock-require');
 const htmlLooksLike = require('html-looks-like');
 
 const readFilesSync = require('@cloudcmd/read-files-sync');
-const TMPLDIR = DIR + 'tmpl/';
+const TMPLDIR = `${DIR}tmpl/`;
 
-const FS_DIR = TMPLDIR + 'fs/';
-const EXPECT_PATH = __dirname + '/cloudfunc.html';
+const FS_DIR = `${TMPLDIR}fs/`;
+const EXPECT_PATH = `${__dirname}/cloudfunc.html`;
 
 const addHBS = (a) => `${a}.hbs`;
 const TMPL = [
