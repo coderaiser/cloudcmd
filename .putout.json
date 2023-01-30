@@ -8,6 +8,9 @@
         "app.json",
         "fontello.json"
     ],
+    "rules": {
+        "webpack/apply-externals": "off"
+    },
     "match": {
         "base64": {
             "convert-typeof-to-is-type": "off"

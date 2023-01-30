@@ -116,7 +116,7 @@ module.exports = {
     },
 };
 
-function externals({request}, fn) {
+function externals(context, request, fn) {
     if (!isDev)
         return fn();
     
