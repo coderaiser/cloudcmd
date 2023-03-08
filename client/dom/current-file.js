@@ -78,6 +78,7 @@ const parseNameAttribute = (attribute) => {
     attribute = attribute.replace('js-file-', '');
     return decodeNBSP(decodeURI(atob(attribute)));
 };
+
 module.exports._parseNameAttribute = parseNameAttribute;
 
 const parseHrefAttribute = (prefix, attribute) => {

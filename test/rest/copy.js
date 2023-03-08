@@ -11,6 +11,7 @@ const config = {
 
 const cloudcmd = require('../..');
 const configManager = cloudcmd.createConfigManager();
+
 configManager('auth', false);
 
 const {request} = require('serve-once')(cloudcmd, {

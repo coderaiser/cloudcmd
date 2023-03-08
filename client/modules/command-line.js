@@ -6,7 +6,9 @@ CloudCmd.CommandLine = exports;
 
 const Dialog = require('../dom/dialog');
 
-module.exports.init = () => {};
+const noop = () => {};
+
+module.exports.init = noop;
 
 module.exports.show = show;
 module.exports.hide = hide;

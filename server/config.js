@@ -107,8 +107,7 @@ function createConfig({configPath} = {}) {
     };
     
     configManager.unsubscribe = (fn) => {
-        // replace to off on node v10
-        changeEmitter.removeListener('change', fn);
+        changeEmitter.off('change', fn);
     };
     
     return configManager;
