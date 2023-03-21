@@ -50,6 +50,9 @@
         },
         "docker.yml": {
             "github/set-node-versions": "off"
+        },
+        "vim.js": {
+            "merge-duplicate-functions": "off"
         }
     }
 }
