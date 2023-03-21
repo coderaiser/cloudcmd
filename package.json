@@ -169,7 +169,7 @@
     "emitify": "^4.0.1",
     "eslint": "^8.0.1",
     "eslint-plugin-n": "^15.2.4",
-    "eslint-plugin-putout": "^16.0.0",
+    "eslint-plugin-putout": "^17.1.0",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "gritty": "^7.0.0",
     "gunzip-maybe": "^1.3.1",
