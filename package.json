@@ -195,7 +195,7 @@
     "rimraf": "^4.0.5",
     "scroll-into-view-if-needed": "^3.0.4",
     "serve-once": "^2.0.0",
-    "serviceworker-webpack-plugin": "^1.0.1",
+    "service-worker-webpack": "^1.0.0",
     "smalltalk": "^4.0.0",
     "style-loader": "^2.0.0",
     "supermenu": "^4.0.1",
