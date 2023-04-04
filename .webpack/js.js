@@ -9,7 +9,7 @@ const {
 const {EnvironmentPlugin} = require('webpack');
 const WebpackBar = require('webpackbar');
 
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+const { ServiceWorkerPlugin } = require('service-worker-webpack');
 
 const dir = './client';
 const dirModules = './client/modules';
@@ -51,10 +51,7 @@ const plugins = [
         NODE_ENV,
     }),
     
-    new ServiceWorkerWebpackPlugin({
-        entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
-        excludes: ['*'],
-    }),
+    new ServiceWorkerPlugin(),
     
     new WebpackBar(),
 ];
