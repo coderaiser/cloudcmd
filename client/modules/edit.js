@@ -2,6 +2,8 @@
 
 'use strict';
 
+const montag = require('montag');
+
 const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch');
 const createElement = require('@cloudcmd/create-element');
@@ -38,10 +40,11 @@ module.exports.init = async () => {
 
 function create() {
     const element = createElement('div', {
-        style:
-            'width      : 100%;' +
-            'height     : 100%;' +
-            'font-family: "Droid Sans Mono";',
+        style: montag`
+            width: 100%;
+            height: 100%;
+            font-family: "Droid Sans Mono";
+        `,
         notAppend: true,
     });
 

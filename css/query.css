@@ -1,4 +1,4 @@
-@media only screen and (min-width: 1600px) {
+@media only screen and (width >= 1600px) {
     .name {
         width: 40%;
     }
@@ -20,7 +20,7 @@
     }
 }
 
-@media only screen and (max-height: 900px) and (max-width: 600px) {
+@media only screen and (height <= 900px) and (width <= 600px) {
     .fm {
         height: 85%;
     }
@@ -30,7 +30,7 @@
     }
 }
 
-@media only screen and (min-height: 550px) and (max-width: 600px) {
+@media only screen and (height >= 550px) and (width <= 600px) {
     .fm {
         height: 80%;
     }
@@ -40,43 +40,43 @@
     }
 }
 
-@media only screen and (max-height: 750px) and (max-width: 600px) {
+@media only screen and (height <= 750px) and (width <= 600px) {
     .fm {
         height: 75%;
     }
 }
 
-@media only screen and (max-height: 450px) and (max-width: 600px) {
+@media only screen and (height <= 450px) and (width <= 600px) {
     .fm {
         height: 75%;
     }
 }
 
-@media only screen and (max-height: 550px) and (max-width: 600px) {
+@media only screen and (height <= 550px) and (width <= 600px) {
     .fm {
         height: 65%;
     }
 }
 
-@media only screen and (max-height: 550px) and (max-width: 550px) {
+@media only screen and (height <= 550px) and (width <= 550px) {
     .fm {
         height: 70%;
     }
 }
 
-@media only screen and (min-height: 850px) and (min-width: 650px) {
+@media only screen and (height >= 850px) and (width >= 650px) {
     .fm {
         height: 95%;
     }
 }
 
-@media only screen and (max-height: 850px) {
+@media only screen and (height <= 850px) {
     .files {
         height: 90%;
     }
 }
 
-@media only screen and (max-height: 700px) and (min-width: 600px) {
+@media only screen and (height <= 700px) and (width >= 600px) {
     .fm {
         height: 85%;
     }
@@ -86,13 +86,13 @@
     }
 }
 
-@media only screen and (max-height: 450px) {
+@media only screen and (height <= 450px) {
     .fm {
         height: 65%;
     }
 }
 
-@media only screen and (max-height: 640px) and (max-width: 360px) {
+@media only screen and (height <= 640px) and (width <= 360px) {
     .fm {
         height: 75%;
     }
@@ -114,7 +114,7 @@
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (width <= 600px) {
     .panel {
         font-size: 26px;
     }
@@ -183,19 +183,19 @@
     }
 }
 
-@media only screen and (min-width: 601px) and (max-width: 785px) {
+@media only screen and (width >= 601px) and (width <= 785px) {
     .cmd-button {
         width: 13%;
     }
 }
 
-@media only screen and (min-width: 786px) and (max-width: 1155px) {
+@media only screen and (width >= 786px) and (width <= 1155px) {
     .cmd-button {
         width: 10%;
     }
 }
 
-@media only screen and (max-width: 1155px) {
+@media only screen and (width <= 1155px) {
     .panel {
         width: 98%;
     }

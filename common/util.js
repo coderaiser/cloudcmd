@@ -15,10 +15,10 @@ module.exports.escapeRegExp = (str) => {
  * get regexp from wild card
  */
 module.exports.getRegExp = (wildcard) => {
-    const escaped = '^' + wildcard // search from start of line
+    const escaped = `^${wildcard // search from start of line
         .replace(/\./g, '\\.')
         .replace(/\*/g, '.*')
-        .replace('?', '.?') + '$'; // search to end of line
+        .replace('?', '.?')}$`; // search to end of line
     
     return RegExp(escaped);
 };
