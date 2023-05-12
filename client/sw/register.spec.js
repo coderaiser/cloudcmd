@@ -70,6 +70,23 @@ test('sw: register: registerSW: http', async (t, {location, navigator}) => {
     t.end();
 });
 
+test('sw: register: registerSW: https self-signed', async (t, {location, navigator}) => {
+    Object.assign(location, {
+        protocol: 'https',
+        hostname: 'self-signed.badssl.com',
+    });
+    
+    const {register} = navigator.serviceWorker;
+    
+    const {registerSW} = reRequire('./register');
+    
+    await registerSW();
+    
+    t.pass('should not call register');
+    t.end();
+});
+
+
 test('sw: register: registerSW', async (t, {location, navigator}) => {
     location.hostname = 'localhost';
     
