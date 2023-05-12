@@ -1,5 +1,7 @@
 'use strict';
 
+const tryToCatch = require('try-to-catch');
+
 module.exports.registerSW = registerSW;
 module.exports.unregisterSW = unregisterSW;
 
@@ -17,7 +19,12 @@ async function registerSW(prefix) {
     if (!isHTTPS && !isLocalhost)
         return;
     
-    return await navigator.serviceWorker.register(`${prefix}/sw.js`);
+    const [e, sw] =  await tryToCatch(navigator.serviceWorker.register,`${prefix}/sw.js`);
+    
+    if(e)
+        return;
+
+    return sw;
 }
 
 async function unregisterSW(prefix) {
