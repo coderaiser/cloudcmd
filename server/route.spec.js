@@ -425,7 +425,7 @@ test('cloudcmd: route: dropbox', async (t) => {
     const readdir = _getReadDir(config);
     const [e] = await tryToCatch(readdir, '/root');
     
-    t.ok(/token/.test(e.message), 'should contain word token in message');
+    t.ok(/API/.test(e.message), 'should contain word token in message');
     t.end();
 });
 
