@@ -2,19 +2,19 @@
 
 /* global CloudCmd, DOM */
 
-const Info = DOM.CurrentInfo;
-
 const clipboard = require('@cloudcmd/clipboard');
 
 const Buffer = require('../dom/buffer');
-const Events = require('../dom/events');
 
+const Events = require('../dom/events');
 const KEY = require('./key');
+
 const vim = require('./vim');
 const setCurrentByChar = require('./set-current-by-char');
 const {createBinder} = require('./binder');
-
 const fullstore = require('fullstore');
+
+const Info = DOM.CurrentInfo;
 const Chars = fullstore();
 
 const toggleVim = (keyCode) => {
@@ -24,6 +24,8 @@ const toggleVim = (keyCode) => {
         _config('vim', !config('vim'));
     }
 };
+
+const isUndefined = (a) => typeof a === 'undefined';
 
 Chars([]);
 
@@ -61,7 +63,7 @@ async function listener(event) {
     
     // strange chrome bug calles listener twice
     // in second time event misses a lot fields
-    if (typeof event.altKey === 'undefined')
+    if (isUndefined(event.altKey))
         return;
     
     const alt = event.altKey;
@@ -131,7 +133,7 @@ async function switchKey(event) {
     
     const {
         Operation,
-        loadDir,
+        changeDir,
         config,
     } = CloudCmd;
     const {keyCode} = event;
@@ -168,6 +170,7 @@ async function switchKey(event) {
             Operation.show('delete:silent');
         else
             Operation.show('delete');
+
         break;
     
     case KEY.ASTERISK:
@@ -197,9 +200,7 @@ async function switchKey(event) {
         event.preventDefault();
         
         if (Info.isDir)
-            await loadDir({
-                path,
-            });
+            await changeDir(path);
         else if (shift)
             CloudCmd.View.show(null, {
                 raw: true,
@@ -261,6 +262,7 @@ async function switchKey(event) {
             Operation.show('extract');
         else
             CloudCmd.Menu.show();
+        
         event.preventDefault();
         break;
     
@@ -303,6 +305,7 @@ async function switchKey(event) {
             DOM.swapPanels();
             event.preventDefault();
         }
+
         break;
     
     /* navigation on file table:        *
@@ -397,9 +400,10 @@ async function switchKey(event) {
     
     case KEY.ENTER:
         if (Info.isDir)
-            await loadDir({path});
+            await changeDir(path);
         else
             CloudCmd.View.show();
+
         break;
     
     case KEY.BACKSPACE:
@@ -409,9 +413,8 @@ async function switchKey(event) {
     
     case KEY.BACKSLASH:
         if (ctrlMeta)
-            await loadDir({
-                path: '/',
-            });
+            await changeDir('/');
+
         break;
     
     case KEY.A:
@@ -465,26 +468,36 @@ async function switchKey(event) {
             CloudCmd.refresh();
             event.preventDefault();
         }
+
         break;
     
     case KEY.C:
         if (ctrlMeta)
             Buffer.copy();
+
         break;
     
     case KEY.X:
         if (ctrlMeta)
             Buffer.cut();
+
         break;
     
     case KEY.V:
         if (ctrlMeta)
             Buffer.paste();
+
         break;
     
     case KEY.Z:
         if (ctrlMeta)
             Buffer.clear();
+
+        break;
+    
+    case KEY.COLON:
+        CloudCmd.CommandLine.show();
+        event.preventDefault();
         break;
     
     /* чистим хранилище */
@@ -495,6 +508,7 @@ async function switchKey(event) {
             CloudCmd.log('storage cleared');
             event.preventDefault();
         }
+
         break;
     }
 }

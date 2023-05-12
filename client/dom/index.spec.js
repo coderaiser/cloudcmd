@@ -11,10 +11,10 @@ global.CloudCmd = {};
 test('cloudcmd: client: dom: goToDirectory', async (t) => {
     const path = '';
     const {CloudCmd} = global;
-    const loadDir = stub();
+    const changeDir = stub();
     const prompt = stub().returns([null, path]);
     
-    CloudCmd.loadDir = loadDir;
+    CloudCmd.changeDir = changeDir;
     
     mockRequire('./dialog', {
         prompt,
@@ -26,7 +26,7 @@ test('cloudcmd: client: dom: goToDirectory', async (t) => {
     
     stopAll();
     
-    t.calledWith(loadDir, [{path}]);
+    t.calledWith(changeDir, [path]);
     t.end();
 });
 

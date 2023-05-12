@@ -1,21 +1,26 @@
 'use strict';
 
+const {Readable} = require('stream');
+
 const path = require('path');
 const fs = require('fs');
 
 const tryToCatch = require('try-to-catch');
 const {test, stub} = require('supertape');
 const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
-
-const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
-
-const routePath = './route';
 const cloudcmdPath = './cloudcmd';
 
 const cloudcmd = require(cloudcmdPath);
-const {createConfigManager} = cloudcmd;
+
 const serveOnce = require('serve-once');
+const {createConfigManager} = cloudcmd;
+
+const routePath = './route';
+const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
+const {
+    reRequire,
+    stopAll,
+} = mockRequire;
 const defaultConfig = {
     auth: false,
     dropbox: false,
@@ -24,6 +29,9 @@ const defaultConfig = {
 const {request} = serveOnce(cloudcmd, {
     config: defaultConfig,
 });
+
+const {stringify} = JSON;
+const {assign} = Object;
 
 test('cloudcmd: route: buttons: no console', async (t) => {
     const options = {
@@ -108,24 +116,7 @@ test('cloudcmd: route: buttons: one file panel: move', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: buttons: no one file panel: move', async (t) => {
-    const config = {
-        oneFilePanel: false,
-    };
-    
-    const options = {
-        config,
-    };
-    
-    const {body} = await request.get('/', {
-        options,
-    });
-    
-    t.notOk(/icon-move none/.test(body), 'should not hide move button');
-    t.end();
-});
-
-test('cloudcmd: route: buttons: one file panel: move', async (t) => {
+test('cloudcmd: route: buttons: one file panel: copy', async (t) => {
     const config = {
         oneFilePanel: true,
     };
@@ -215,21 +206,30 @@ test('cloudcmd: route: not found', async (t) => {
         options,
     });
     
-    t.ok(body.includes('ENOENT: no such file or directory'), 'should return error');
+    t.match(body, 'ENOENT: no such file or directory', 'should return error');
     t.end();
 });
 
 test('cloudcmd: route: sendIndex: encode', async (t) => {
     const name = '"><svg onload=alert(3);>';
-    const nameEncoded = '&quot;&gt;&lt;svg&nbsp;onload=alert(3);&gt;';
+    const nameEncoded = '&quot;&gt;&lt;svg onload=alert(3);&gt;';
+    const path = '/';
     const files = [{
         name,
     }];
     
-    const read = stub().returns({
-        type: 'directory',
+    const stream = Readable.from(stringify({
+        path,
         files,
+    }));
+    
+    assign(stream, {
+        path,
+        files,
+        type: 'directory',
     });
+    
+    const read = stub().resolves(stream);
     
     mockRequire('win32', {
         read,
@@ -252,16 +252,25 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
 
 test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     const name = '"><svg onload=alert(3);>';
+    const path = '/';
     const files = [{
         name,
     }];
     
-    const read = async (path) => ({
+    const stream = Readable.from(stringify({
         path,
         files,
+    }));
+    
+    assign(stream, {
+        path,
+        files,
+        type: 'directory',
     });
     
-    mockRequire('flop', {
+    const read = stub().resolves(stream);
+    
+    mockRequire('win32', {
         read,
     });
     
@@ -278,17 +287,26 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
 });
 
 test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
-    const name = '$$$\'&quot;';
+    const name = `$$$'&quot;`;
+    const path = '/';
     const files = [{
         name,
     }];
     
-    const read = async (path) => ({
+    const stream = Readable.from(stringify({
         path,
         files,
+    }));
+    
+    assign(stream, {
+        path,
+        files,
+        type: 'directory',
     });
     
-    mockRequire('flop', {
+    const read = stub().resolves(stream);
+    
+    mockRequire('win32', {
         read,
     });
     
@@ -408,6 +426,57 @@ test('cloudcmd: route: dropbox', async (t) => {
     const [e] = await tryToCatch(readdir, '/root');
     
     t.ok(/token/.test(e.message), 'should contain word token in message');
+    t.end();
+});
+
+test('cloudcmd: route: content length', async (t) => {
+    const options = {
+        root: fixtureDir,
+    };
+    
+    const {headers} = await request.get('/route.js', {
+        options,
+    });
+    
+    const result = headers.get('content-length');
+    
+    t.ok(result);
+    t.end();
+});
+
+test('cloudcmd: route: read: root', async (t) => {
+    const stream = Readable.from('hello');
+    stream.contentLength = 5;
+    
+    const read = stub().returns(stream);
+    
+    mockRequire('win32', {
+        read,
+    });
+    
+    reRequire(routePath);
+    
+    const cloudcmd = reRequire(cloudcmdPath);
+    const configManager = createConfigManager();
+    const root = '/hello';
+    
+    configManager('root', root);
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    await request.get('/fs/route.js');
+    
+    const expected = [
+        '/hello/route.js', {
+            root,
+        },
+    ];
+    
+    stopAll();
+    
+    t.calledWith(read, expected);
     t.end();
 });
 

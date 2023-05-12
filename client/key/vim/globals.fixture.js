@@ -29,6 +29,8 @@ module.exports.getDOM = () => {
         getCurrentName: noop,
         setCurrentByName: noop,
         toggleSelectedFile: noop,
+        prompNewDirectory: noop,
+        promptNewFile: noop,
     };
 };
 

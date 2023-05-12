@@ -1,7 +1,9 @@
 'use strict';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 const {runSelected} = require('./run');
 
 test('cloudcmd: client: user menu: run', async (t) => {

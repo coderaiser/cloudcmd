@@ -1,8 +1,10 @@
 'use strict';
 
 const {join} = require('path');
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 
 const cloudcmdPath = join(__dirname, '..', '..');
 const modulesPath = join(cloudcmdPath, 'json', 'modules.json');
@@ -40,7 +42,7 @@ test('cloudcmd: modules', async (t) => {
         options,
     });
     
-    t.deepEqual(body, expected, 'should equal');
+    t.deepEqual(body, expected);
     t.end();
 });
 

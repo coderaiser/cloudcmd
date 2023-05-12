@@ -16,13 +16,15 @@ const once = require('once');
 const pipe = require('pipe-io');
 const {contentType} = require('mime-types');
 
-const root = require(DIR_SERVER + 'root');
-const prefixer = require(DIR_SERVER + 'prefixer');
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
+const root = require(`${DIR_SERVER}root`);
+const prefixer = require(`${DIR_SERVER}prefixer`);
+const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
 
-const getPrefix = (config) => prefixer(config('prefix'));
+const Columns = require(`${DIR_SERVER}/columns`);
 
-const onceRequire = once(require);
+const Template = require(`${DIR_SERVER}/template`);
+
+const {FS} = CloudFunc;
 
 const sendIndex = (params, data) => {
     const ponseParams = {
@@ -33,10 +35,8 @@ const sendIndex = (params, data) => {
     ponse.send(data, ponseParams);
 };
 
-const {FS} = CloudFunc;
-
-const Columns = require(`${DIR_SERVER}/columns`);
-const Template = require(`${DIR_SERVER}/template`);
+const onceRequire = once(require);
+const getPrefix = (config) => prefixer(config('prefix'));
 
 const getReadDir = (config) => {
     if (!config('dropbox'))
@@ -52,7 +52,7 @@ const getReadDir = (config) => {
  */
 module.exports = currify((config, options, request, response, next) => {
     const name = ponse.getPathName(request);
-    const isFS = RegExp('^/$|^' + FS).test(name);
+    const isFS = RegExp(`^/$|^${FS}`).test(name);
     
     if (!isFS)
         return next();
@@ -79,7 +79,10 @@ async function route({config, options, request, response}) {
     const fullPath = root(rootName, config('root'));
     
     const read = getReadDir(config);
-    const [error, stream] = await tryToCatch(read, fullPath);
+    const [error, stream] = await tryToCatch(read, fullPath, {
+        root: config('root'),
+    });
+    
     const {html} = options;
     
     if (error)
@@ -94,6 +97,9 @@ async function route({config, options, request, response}) {
         }));
     }
     
+    const {contentLength} = stream;
+    
+    response.setHeader('Content-Length', contentLength);
     response.setHeader('Content-Type', contentType(extname(fullPath)));
     
     await pipe([

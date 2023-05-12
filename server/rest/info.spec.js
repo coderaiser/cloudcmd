@@ -1,8 +1,10 @@
 'use strict';
 
-const test = require('supertape');
+const {
+    test,
+    stub,
+} = require('supertape');
 const info = require('./info');
-const stub = require('@cloudcmd/stub');
 
 test('cloudcmd: rest: info', (t) => {
     const {memoryUsage} = process;

@@ -14,7 +14,7 @@ test('event-store: get', (t) => {
         [el, name, fn],
     ];
     
-    t.deepEqual(result, expected, 'should equal');
+    t.deepEqual(result, expected);
     t.end();
 });
 
@@ -29,6 +29,6 @@ test('event-store: clear', (t) => {
     const result = eventStore.get();
     const expected = [];
     
-    t.deepEqual(result, expected, 'should equal');
+    t.deepEqual(result, expected);
     t.end();
 });

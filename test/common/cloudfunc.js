@@ -3,27 +3,27 @@
 const fs = require('fs');
 const tryCatch = require('try-catch');
 
-const DIR = __dirname + '/../../';
-const COMMONDIR = DIR + 'common/';
-const TMPLDIR = DIR + 'tmpl/';
-
+const DIR = `${__dirname}/../../`;
+const COMMONDIR = `${DIR}common/`;
 const {
     time,
     timeEnd,
-} = require(COMMONDIR + 'util');
+} = require(`${COMMONDIR}util`);
 
-const CloudFuncPath = COMMONDIR + 'cloudfunc';
+const CloudFuncPath = `${COMMONDIR}cloudfunc`;
 
 const CloudFunc = require(CloudFuncPath);
 
 const test = require('supertape');
+
 const {reRequire} = require('mock-require');
-
 const htmlLooksLike = require('html-looks-like');
-const readFilesSync = require('@cloudcmd/read-files-sync');
 
-const FS_DIR = TMPLDIR + 'fs/';
-const EXPECT_PATH = __dirname + '/cloudfunc.html';
+const readFilesSync = require('@cloudcmd/read-files-sync');
+const TMPLDIR = `${DIR}tmpl/`;
+
+const FS_DIR = `${TMPLDIR}fs/`;
+const EXPECT_PATH = `${__dirname}/cloudfunc.html`;
 
 const addHBS = (a) => `${a}.hbs`;
 const TMPL = [
@@ -52,8 +52,7 @@ const data = {
     }],
 };
 
-let Expect =
-    '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
+let Expect = '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
         '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"' +
         ' title="copy path (Ctrl+P)">' +
         '</span>' +
@@ -69,7 +68,6 @@ let Expect =
 
 test('cloudfunc: render', (t) => {
     const template = readFilesSync(FS_DIR, TMPL, 'utf8');
-    const expect = fs.readFileSync(EXPECT_PATH, 'utf8');
     
     time('CloudFunc.buildFromJSON');
     const result = CloudFunc.buildFromJSON({
@@ -78,7 +76,7 @@ test('cloudfunc: render', (t) => {
         template,
     });
     
-    Expect += expect;
+    Expect += fs.readFileSync(EXPECT_PATH, 'utf8');
     
     let i;
     const isNotOk = Expect
@@ -123,7 +121,7 @@ test('cloudfunc: formatMsg', (t) => {
     t.end();
 });
 
-test('cloudfunc: formatMsg', (t) => {
+test('cloudfunc: formatMsg: no name', (t) => {
     const msg = 'hello';
     const name = null;
     const status = 'ok';

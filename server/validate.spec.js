@@ -2,21 +2,23 @@
 
 const fs = require('fs');
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 const tryCatch = require('try-catch');
 const mockRequire = require('mock-require');
-const {reRequire} = mockRequire;
-
 const dir = '..';
 
 const validatePath = `${dir}/server/validate`;
-const exitPath = `${dir}/server/exit`;
-const columnsPath = `${dir}/server/columns`;
-const cloudcmdPath = `${dir}/server/cloudcmd`;
 
+const cloudcmdPath = `${dir}/server/cloudcmd`;
 const validate = require(validatePath);
 const cloudcmd = require(cloudcmdPath);
+const columnsPath = `${dir}/server/columns`;
+
+const exitPath = `${dir}/server/exit`;
+const {reRequire, stopAll} = mockRequire;
 
 test('validate: root: bad', (t) => {
     const config = {
@@ -24,6 +26,7 @@ test('validate: root: bad', (t) => {
     };
     
     const [e] = tryCatch(cloudcmd, {config});
+    
     t.equal(e.message, 'dir should be a string', 'should throw');
     t.end();
 });
@@ -63,7 +66,8 @@ test('validate: root: stat', (t) => {
     const msg = 'cloudcmd --root: %s';
     fs.statSync = statSync;
     
-    mockRequire.stop(exitPath);
+    stopAll();
+    
     t.calledWith(fn, [msg, error], 'should call fn');
     t.end();
 });
@@ -78,7 +82,7 @@ test('validate: packer: not valid', (t) => {
     
     packer('hello');
     
-    mockRequire.stop(exitPath);
+    stopAll();
     
     t.calledWith(fn, [msg], 'should call fn');
     t.end();
@@ -94,7 +98,7 @@ test('validate: editor: not valid', (t) => {
     
     editor('hello');
     
-    mockRequire.stop(exitPath);
+    stopAll();
     
     t.calledWith(fn, [msg], 'should call fn');
     t.end();
@@ -108,7 +112,7 @@ test('validate: columns', (t) => {
     
     columns('name-size-date');
     
-    mockRequire.stop(exitPath);
+    stopAll();
     
     t.notOk(fn.called, 'should not call exit');
     t.end();
@@ -128,8 +132,7 @@ test('validate: columns: wrong', (t) => {
     
     columns('hello');
     
-    mockRequire.stop(exitPath);
-    mockRequire.stop(columnsPath);
+    stopAll();
     
     t.calledWith(fn, [msg], 'should call exit');
     t.end();

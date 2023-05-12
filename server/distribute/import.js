@@ -6,10 +6,11 @@ const squad = require('squad');
 const fullstore = require('fullstore');
 
 const io = require('socket.io-client');
-const forEachKey = currify(require('for-each-key'));
-
 const log = require('./log');
+
 const env = require('../env');
+const noop = () => {};
+const forEachKey = currify(require('for-each-key'));
 
 const {
     importStr,
@@ -43,7 +44,7 @@ const rmListeners = wraptile((socket, listeners) => {
 
 const canceled = (f) => f(null, {
     status: 'canceled',
-    disconnect: () => {},
+    disconnect: noop,
 });
 
 const done = wraptile((fn, store) => fn(null, {

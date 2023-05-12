@@ -2,8 +2,8 @@
 
 'use strict';
 
-const Info = DOM.CurrentInfo;
 const {escapeRegExp} = require('../../common/util');
+const Info = DOM.CurrentInfo;
 
 module.exports = function setCurrentByChar(char, charStore) {
     let firstByName;
@@ -12,7 +12,7 @@ module.exports = function setCurrentByChar(char, charStore) {
     let i = 0;
     
     const escapeChar = escapeRegExp(char);
-    const regExp = new RegExp('^' + escapeChar + '.*$', 'i');
+    const regExp = new RegExp(`^${escapeChar}.*$`, 'i');
     const {files} = Info;
     const chars = charStore();
     const n = chars.length;
@@ -37,6 +37,7 @@ module.exports = function setCurrentByChar(char, charStore) {
         if (!skipCount) {
             setted = true;
             DOM.setCurrentFile(byName);
+            
             return true;
         }
         

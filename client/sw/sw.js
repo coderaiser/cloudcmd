@@ -15,7 +15,7 @@ const respondWith = currify((f, e) => {
     const {url} = request;
     const pathname = getPathName(url);
     
-    if (/\/$/.test(url) || /\^\/fs/.test(pathname))
+    if (url.endsWith('/') || /\^\/fs/.test(pathname))
         return;
     
     if (!isGet(request))
@@ -24,7 +24,7 @@ const respondWith = currify((f, e) => {
     if (!isBasic(request))
         return;
     
-    if (/^\/api/.test(pathname))
+    if (pathname.startsWith('/api'))
         return;
     
     if (/^socket.io/.test(pathname))

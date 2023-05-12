@@ -14,7 +14,5 @@ module.exports.clear = () => {
     list = [];
 };
 
-module.exports.get = () => {
-    return list;
-};
+module.exports.get = () => list;
 

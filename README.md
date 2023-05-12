@@ -1,11 +1,12 @@
-# Cloud Commander v15.5.1 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
+# Cloud Commander v16.14.1 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL]
 
-### [Main][MainURL] [Blog][BlogURL] Live([Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL] [Demo][DemoURL]
 
+[MainURL]: https://cloudcmd.io "Main"
+[BlogURL]: https://blog.cloudcmd.io "Blog"
+[SupportURL]: https://patreon.com/coderaiser "Patreon"
+[DemoURL]: https://cloudcmd.onrender.com/
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
-[MainURL]: http://cloudcmd.io "Main"
-[BlogURL]: http://blog.cloudcmd.io "Blog"
-[HerokuURL]: https://cloudcmd.herokuapp.com/ "Heroku"
 [BuildStatusURL]: https://travis-ci.org/coderaiser/cloudcmd "Build Status"
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
 [BuildAppveyorURL]: https://ci.appveyor.com/project/coderaiser/cloudcmd
@@ -71,7 +72,7 @@ And create `index.js`:
 ```js
 import http from 'http';
 import cloudcmd from 'cloudcmd';
-import io from 'socket.io';
+import {Server} from 'socket.io';
 import express from 'express';
 
 const app = express();
@@ -80,7 +81,7 @@ const port = 1337;
 const prefix = '/';
 
 const server = http.createServer(app);
-const socket = io.listen(server, {
+const socket = new Server(server, {
     path: `${prefix}socket.io`,
 });
 
@@ -123,6 +124,7 @@ server.listen(port);
 ## Docker
 
 The docker images are provided for multiple architectures and types. The following list shows all existing images:
+
 | Architecture   | Type         |
 |----------------|--------------|
 | amd64          | linux        |
@@ -161,10 +163,15 @@ When you create this file run:
 docker-compose up
 ```
 
+## Documentation
+
+More documentation you can find on https://cloudcmd.io/.
+
 ## Get involved
 
 There is a lot ways to be involved in `Cloud Commander` development:
 
+- support project on patreon: https://patreon.com/coderaiser;
 - if you find a bug or got idea to share [create an issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
 - if you fixed a bug, typo or implemented new feature [create pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
 - if you know languages you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");

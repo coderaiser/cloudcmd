@@ -1,13 +1,15 @@
 'use strict';
 
-const test = require('supertape');
+const {
+    test,
+    stub,
+} = require('supertape');
 const {create} = require('auto-globals');
-const stub = require('@cloudcmd/stub');
-const id = (a) => a;
 const wraptile = require('wraptile');
-const returns = wraptile(id);
-
 const currentFile = require('./current-file');
+const id = (a) => a;
+
+const returns = wraptile(id);
 const {_CURRENT_FILE} = currentFile;
 
 test('current-file: setCurrentName: setAttribute', (t) => {
@@ -140,17 +142,16 @@ test('current-file: isCurrentFile: no', (t) => {
         DOM,
         CloudCmd,
     } = global;
-    
+
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
-    
+
     const result = currentFile.isCurrentFile();
-    const expect = false;
-    
+
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
-    
-    t.equal(result, expect, 'should equal');
+
+    t.notOk(result);
     t.end();
 });
 
@@ -301,6 +302,23 @@ function getCloudCmd({emit} = {}) {
         emit: emit || stub(),
     };
 }
+
+test('current-file: parseNameAttribute', (t) => {
+    const result = currentFile._parseNameAttribute('js-file-aGVsbG8mbmJzcDt3b3JsZA==');
+    const expected = 'hello\xa0world';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('current-file: parseHrefAttribute', (t) => {
+    const prefix = '/api/v1';
+    const result = currentFile._parseHrefAttribute(prefix, '/api/v1/fs/hello&nbsp;world');
+    const expected = '/hello\xa0world';
+    
+    t.equal(result, expected);
+    t.end();
+});
 
 function getDOM({
     link = {},

@@ -2,15 +2,15 @@
 
 /* global DOM */
 
+const forEachKey = require('for-each-key');
+
+const wraptile = require('wraptile');
+const format = require('./format');
+
 const {
     Dialog,
     Images,
 } = DOM;
-
-const forEachKey = require('for-each-key');
-const wraptile = require('wraptile');
-
-const format = require('./format');
 
 module.exports = (options) => (emitter) => {
     const {
@@ -68,10 +68,12 @@ module.exports = (options) => (emitter) => {
                 listeners.end(error);
                 Dialog.alert(error);
                 progress.remove();
+                
                 return;
             }
             
-            const [cancel] = await Dialog.confirm(error + '\n Continue?');
+            const [cancel] = await Dialog.confirm(`${error}
+ Continue?`);
             
             if (!done && !cancel)
                 return emitter.continue();

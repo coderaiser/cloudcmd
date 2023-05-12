@@ -239,7 +239,7 @@ async function _uploadTo(nameModule) {
     const {name} = Info;
     
     CloudCmd.execFromModule(nameModule, 'uploadFile', name, data);
-    CloudCmd.log('Uploading to ' + name + '...');
+    CloudCmd.log(`Uploading to ${name}...`);
 }
 
 function uploadFromCloud() {
@@ -275,7 +275,7 @@ function download(type) {
         const isDir = DOM.isCurrentIsDir(file);
         const path = DOM.getCurrentPath(file);
         
-        CloudCmd.log('downloading file ' + path + '...');
+        CloudCmd.log(`downloading file ${path}...`);
         /*
           * if we send ajax request -
           * no need in hash so we escape #

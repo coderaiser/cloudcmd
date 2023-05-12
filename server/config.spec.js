@@ -1,7 +1,9 @@
 'use strict';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 
 const root = '../';
 const configPath = './config';
@@ -10,12 +12,12 @@ const {
     createConfig,
     _cryptoPass,
 } = require(configPath);
-const config = createConfig();
-
-const {apiURL} = require(root + 'common/cloudfunc');
+const {apiURL} = require(`${root}common/cloudfunc`);
 
 const fixture = require('./config.fixture');
+
 const {connect} = require('../test/before');
+const config = createConfig();
 
 test('config: manage', (t) => {
     t.equal(undefined, config(), 'should return "undefined"');
@@ -37,7 +39,7 @@ test('config: manage: get', async (t) => {
     t.end();
 });
 
-test('config: manage: get', async (t) => {
+test('config: manage: get: config', async (t) => {
     const editor = 'deepword';
     const conf = {
         editor,
@@ -102,6 +104,7 @@ test('config: middle: no', (t) => {
     };
     
     middle(req, res, next);
+    
     t.ok(next.calledWith(), 'should call next');
     t.end();
 });

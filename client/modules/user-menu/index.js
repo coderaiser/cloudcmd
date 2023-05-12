@@ -132,7 +132,8 @@ const onKeyDown = currify(async ({keys, userMenu}, e) => {
     
     if (keyCode === Key.ESC)
         return hide();
-    else if (keyCode === Key.ENTER)
+    
+    if (keyCode === Key.ENTER)
         value = userMenu[target.value];
     else if (keys[keyName])
         value = keys[keyName];

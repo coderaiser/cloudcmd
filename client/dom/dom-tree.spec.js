@@ -8,12 +8,14 @@ const {isContainClass} = require('./dom-tree');
 
 test('dom: isContainClass: no element', (t) => {
     const [e] = tryCatch(isContainClass);
+    
     t.equal(e.message, 'element could not be empty!', 'should throw when no element');
     t.end();
 });
 
 test('dom: isContainClass: no className', (t) => {
     const [e] = tryCatch(isContainClass, {});
+    
     t.equal(e.message, 'className could not be empty!', 'should throw when no element');
     t.end();
 });

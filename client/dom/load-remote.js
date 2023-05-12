@@ -36,9 +36,7 @@ module.exports = (name, options, callback = options) => {
             local = [module.local];
         }
         
-        const localURL = local.map((url) => {
-            return prefix + url;
-        });
+        const localURL = local.map((url) => prefix + url);
         
         const remoteURL = remoteTmpls.map((tmpl) => {
             return rendy(tmpl, {

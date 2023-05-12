@@ -2,11 +2,11 @@
 
 module.exports = {
     extends: [
-        'plugin:putout/recommended',
+        'plugin:putout/safe',
     ],
     plugins: [
         'putout',
-        'node',
+        'n',
     ],
     rules: {
         'key-spacing': 'off',
@@ -15,10 +15,10 @@ module.exports = {
         files: ['bin/release.js'],
         rules: {
             'no-console': 'off',
-            'node/shebang': 'off',
+            'n/shebang': 'off',
         },
         extends: [
-            'plugin:node/recommended',
+            'plugin:n/recommended',
         ],
     }, {
         files: ['client/dom/index.js'],
@@ -31,7 +31,7 @@ module.exports = {
             'no-console': 'off',
         },
         extends: [
-            'plugin:node/recommended',
+            'plugin:n/recommended',
         ],
     }, {
         files: ['{client,common,static}/**/*.js'],

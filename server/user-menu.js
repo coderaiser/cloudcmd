@@ -5,9 +5,9 @@ const {readFile} = require('fs/promises');
 
 const {join} = require('path');
 
+const montag = require('montag');
 const tryToCatch = require('try-to-catch');
 const currify = require('currify');
-const findUp = require('find-up');
 const threadIt = require('thread-it');
 const {codeframe} = require('putout');
 const putout = threadIt(require.resolve('putout'));
@@ -43,6 +43,7 @@ async function onGET({req, res, menuName}) {
     if (url === '/default')
         return sendDefaultMenu(res);
     
+    const {findUp} = await import('find-up');
     const [errorFind, currentMenuPath] = await tryToCatch(findUp, [
         menuName,
     ], {cwd: dir});
@@ -50,7 +51,7 @@ async function onGET({req, res, menuName}) {
     if (errorFind && errorFind.code !== 'ENOENT')
         return res
             .status(404)
-            .send(e.message);
+            .send(errorFind.message);
     
     const homeMenuPath = join(homedir(), menuName);
     const menuPath = currentMenuPath || homeMenuPath;
@@ -77,8 +78,8 @@ async function onGET({req, res, menuName}) {
 }
 
 function getError(error, source) {
-    return `
-        const e = Error(\`<pre>${codeframe({
+    return montag`
+            const e = Error(\`<pre>${codeframe({
         error,
         source,
         highlightCode: false,
@@ -96,8 +97,8 @@ function sendDefaultMenu(res) {
     });
 }
 
-function transpile(source) {
-    return tryToCatch(putout, source, {
+async function transpile(source) {
+    return await tryToCatch(putout, source, {
         plugins: [
             'convert-esm-to-commonjs',
             'strict-mode',
@@ -105,3 +106,4 @@ function transpile(source) {
         ],
     });
 }
+

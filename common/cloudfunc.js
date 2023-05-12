@@ -29,9 +29,9 @@ module.exports.formatMsg = (msg, name, status) => {
     name = name || '';
     
     if (name)
-        name = '("' + name + '")';
+        name = `("${name}")`;
     
-    return msg + ': ' + status + name;
+    return `${msg}: ${status}${name}`;
 };
 
 /**
@@ -82,10 +82,10 @@ function getPathLink(url, prefix, template) {
         const isLast = i === n - 1;
         
         if (i)
-            path += name + '/';
+            path += `${name}/`;
         
         if (i && isLast) {
-            lines.push(name + '/');
+            lines.push(`${name}/`);
             continue;
         }
         
@@ -164,7 +164,7 @@ module.exports.buildFromJSON = (params) => {
     /* сохраняем путь */
     Path(path);
     
-    fileTable += header + '<ul data-name="js-files" class="files">';
+    fileTable += `${header}<ul data-name="js-files" class="files">`;
     
     /* Если мы не в корне */
     if (path !== '/') {
@@ -178,7 +178,7 @@ module.exports.buildFromJSON = (params) => {
         });
         
         const dataName = getDataName('..');
-        const attribute = 'draggable="true" ' + dataName;
+        const attribute = `draggable="true" ${dataName}`;
         
         /* Сохраняем путь к каталогу верхнего уровня*/
         fileTable += rendy(template.file, {
@@ -229,7 +229,8 @@ module.exports.buildFromJSON = (params) => {
                 owner,
                 mode,
             });
-        }).join('');
+        })
+        .join('');
     
     fileTable += '</ul>';
     
@@ -253,12 +254,7 @@ function getAttribute(type) {
 }
 
 module.exports._getSize = getSize;
-function getSize(file) {
-    const {
-        size,
-        type,
-    } = file;
-    
+function getSize({size, type}) {
     if (type === 'directory')
         return '&lt;dir&gt;';
     

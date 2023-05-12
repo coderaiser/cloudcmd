@@ -56,7 +56,7 @@ module.exports.init = async () => {
 
 module.exports.show = promisify((options = {}, fn) => {
     if (!Loaded)
-        return;
+        return fn(null, -1);
     
     if (!config('terminal'))
         return;

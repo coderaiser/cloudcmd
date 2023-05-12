@@ -1,6 +1,7 @@
 .cloudcmd-user-menu {
     font-size: 16px;
     font-family: 'Droid Sans Mono', 'Ubuntu Mono', 'Consolas', monospace;
+    border: 0;
 }
 
 .cloudcmd-user-menu:focus {

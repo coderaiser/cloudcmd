@@ -5,12 +5,8 @@
 const Util = require('../../common/util');
 
 const Images = require('./images');
-const load = require('./load');
-const Files = require('./files');
 const RESTful = require('./rest');
-const IO = require('./io');
 const Storage = require('./storage');
-const Dialog = require('./dialog');
 const renameCurrent = require('./operations/rename-current');
 
 const CurrentFile = require('./current-file');
@@ -26,12 +22,12 @@ const DOM = {
 const CurrentInfo = {};
 
 DOM.Images = Images;
-DOM.load = load;
-DOM.Files = Files;
+DOM.load = require('./load');
+DOM.Files = require('./files');
 DOM.RESTful = RESTful;
-DOM.IO = IO;
+DOM.IO = require('./io');
 DOM.Storage = Storage;
-DOM.Dialog = Dialog;
+DOM.Dialog = require('./dialog');
 DOM.CurrentInfo = CurrentInfo;
 
 module.exports = DOM;
@@ -83,7 +79,7 @@ module.exports.promptNewFile = async () => {
 async function promptNew(typeName) {
     const {Dialog} = DOM;
     const dir = DOM.getCurrentDirPath();
-    const msg = 'New ' + typeName || 'File';
+    const msg = `New ${typeName}` || 'File';
     const getName = () => {
         const name = DOM.getCurrentName();
         
@@ -119,7 +115,7 @@ module.exports.getCurrentDirName = () => {
         .replace(/\/$/, '');
     
     const substr  = href.substr(href, href.lastIndexOf('/'));
-    const ret     = href.replace(substr + '/', '') || '/';
+    const ret     = href.replace(`${substr}/`, '') || '/';
     
     return ret;
 };
@@ -146,16 +142,6 @@ module.exports.getNotCurrentDirPath = () => {
     const path = DOM.getCurrentDirPath(panel);
     
     return path;
-};
-
-/**
- * get current file by name
- */
-module.exports.getCurrentByName = (name, panel = CurrentInfo.panel) => {
-    const dataName = 'js-file-' + btoa(encodeURI(name));
-    const element = DOM.getByDataName(dataName, panel);
-    
-    return element;
 };
 
 /**
@@ -255,20 +241,6 @@ module.exports.loadCurrentHash = async (currentFile) => {
 };
 
 /**
- * load current modification time of file
- * @callback
- * @currentFile
- */
-module.exports.loadCurrentTime = async (currentFile) => {
-    const current = currentFile || DOM.getCurrentFile();
-    const query = '?time';
-    const link = DOM.getCurrentPath(current);
-    
-    const [, data] = await RESTful.read(link + query);
-    return data;
-};
-
-/**
  * set size
  * @currentFile
  */
@@ -332,7 +304,7 @@ module.exports.getCurrentData = async (currentFile) => {
     if (e)
         return [e, null];
     
-    const ONE_MEGABYTE = 1024 * 1024 * 1024;
+    const ONE_MEGABYTE = 1024 ** 2 * 1024;
     const {length} = data;
     
     if (hash && length < ONE_MEGABYTE)
@@ -485,7 +457,7 @@ module.exports.getFilenames = (files) => {
  * check storage hash
  */
 module.exports.checkStorageHash = async (name) => {
-    const nameHash = name + '-hash';
+    const nameHash = `${name}-hash`;
     
     if (typeof name !== 'string')
         throw Error('name should be a string!');
@@ -514,8 +486,8 @@ module.exports.saveDataToStorage = async (name, data, hash) => {
     
     hash = hash || await DOM.loadCurrentHash();
     
-    const nameHash = name + '-hash';
-    const nameData = name + '-data';
+    const nameHash = `${name}-hash`;
+    const nameData = `${name}-data`;
     
     await Storage.set(nameHash, hash);
     await Storage.set(nameData, data);
@@ -523,9 +495,7 @@ module.exports.saveDataToStorage = async (name, data, hash) => {
     return hash;
 };
 
-module.exports.getFM = () => {
-    return DOM.getPanel().parentElement;
-};
+module.exports.getFM = () => DOM.getPanel().parentElement;
 
 module.exports.getPanelPosition = (panel) => {
     panel = panel || DOM.getPanel();
@@ -749,9 +719,7 @@ module.exports.goToDirectory = async () => {
     if (cancel)
         return;
     
-    await CloudCmd.loadDir({
-        path,
-    });
+    await CloudCmd.changeDir(path);
 };
 
 module.exports.duplicatePanel = async () => {
@@ -769,8 +737,7 @@ module.exports.duplicatePanel = async () => {
     
     const path = getPath(isDir);
     
-    await CloudCmd.loadDir({
-        path,
+    await CloudCmd.changeDir(path, {
         panel,
         noCurrent,
     });
@@ -790,14 +757,12 @@ module.exports.swapPanels = async () => {
     
     let currentIndex = files.indexOf(element);
     
-    await CloudCmd.loadDir({
-        path,
+    await CloudCmd.changeDir(path, {
         panel: panelPassive,
         noCurrent: true,
     });
     
-    await CloudCmd.loadDir({
-        path: dirPathPassive,
+    await CloudCmd.changeDir(dirPathPassive, {
         panel,
     });
     
@@ -817,7 +782,6 @@ module.exports.updateCurrentInfo = (currentFile) => {
     const info = DOM.CurrentInfo;
     const current = currentFile || DOM.getCurrentFile();
     const files = current.parentElement;
-    const panel = files.parentElement || DOM.getPanel();
     
     const panelPassive = DOM.getPanel({
         active: false,
@@ -840,13 +804,12 @@ module.exports.updateCurrentInfo = (currentFile) => {
     info.mode           = DOM.getCurrentMode(current);
     info.name           = name;
     info.path           = DOM.getCurrentPath(current);
-    info.panel          = panel;
+    info.panel          = files.parentElement || DOM.getPanel();
     info.panelPassive   = panelPassive;
     info.size           = DOM.getCurrentSize(current);
     info.isDir          = DOM.isCurrentIsDir();
     info.isSelected     = DOM.isSelected(current);
     info.panelPosition  = DOM.getPanel().dataset.name.replace('js-', '');
-    info.isOnePanel     =
-        info.panel.getAttribute('data-name') ===
+    info.isOnePanel     =        info.panel.getAttribute('data-name') ===
         info.panelPassive.getAttribute('data-name');
 };

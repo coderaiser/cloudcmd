@@ -10,31 +10,31 @@ const test = require('supertape');
 
 const markdown = require('.');
 
-const _markdown = promisify(markdown);
-const fixtureDir = join(__dirname, 'fixture');
 const cloudcmd = require('../..');
 const config = {
     auth: false,
 };
-
 const configManager = cloudcmd.createConfigManager();
-
 const {request} = require('serve-once')(cloudcmd, {
     config,
     configManager,
 });
 
+const fixtureDir = join(__dirname, 'fixture');
+
+const _markdown = promisify(markdown);
+
 test('cloudcmd: markdown: error', async (t) => {
     const {body} = await request.get('/api/v1/markdown/not-found');
     
-    t.ok(/ENOENT/.test(body), 'should not found');
+    t.match(body, 'ENOENT', 'should not found');
     t.end();
 });
 
 test('cloudcmd: markdown: relative: error', async (t) => {
     const {body} = await request.get('/api/v1/markdown/not-found?relative');
     
-    t.ok(/ENOENT/.test(body), 'should not found');
+    t.match(body, 'ENOENT', 'should not found');
     t.end();
 });
 
@@ -71,7 +71,7 @@ test('cloudcmd: markdown: put: error', async (t) => {
     
     const [e] = await tryToCatch(_markdown, name, '/', mdStream);
     
-    t.ok(e.message.includes('ENOENT: no such file or directory'), 'should emit error');
+    t.match(e.message, 'ENOENT: no such file or directory', 'should emit error');
     t.end();
 });
 
@@ -89,7 +89,7 @@ test('cloudcmd: markdown: no request', async (t) => {
     t.end();
 });
 
-test('cloudcmd: markdown: zip', async (t) => {
+test('cloudcmd: markdown', async (t) => {
     const configManager = cloudcmd.createConfigManager();
     const fixtureDir = join(__dirname, 'fixture');
     const config = {

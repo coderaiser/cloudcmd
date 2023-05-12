@@ -5,19 +5,21 @@ const {join} = require('path');
 const test = require('supertape');
 const rimraf = require('rimraf');
 
-const fixtureDir = join(__dirname, '..', 'fixture') + '/';
 const config = {
     root: join(__dirname, '..'),
 };
 
 const cloudcmd = require('../..');
 const configManager = cloudcmd.createConfigManager();
+
 configManager('auth', false);
 
 const {request} = require('serve-once')(cloudcmd, {
     config,
     configManager,
 });
+
+const fixtureDir = join(__dirname, '..', 'fixture') + '/';
 
 test('cloudcmd: rest: copy', async (t) => {
     const tmp = join(fixtureDir, 'tmp');

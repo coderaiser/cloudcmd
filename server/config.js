@@ -1,18 +1,17 @@
 'use strict';
 
-const DIR_SERVER = __dirname + '/';
+const DIR_SERVER = `${__dirname}/`;
 const DIR_COMMON = '../common/';
-const DIR = DIR_SERVER + '../';
-
 const path = require('path');
+
 const fs = require('fs');
 const Emitter = require('events');
 const {homedir} = require('os');
+const exit = require(`${DIR_SERVER}exit`);
 
-const exit = require(DIR_SERVER + 'exit');
-const CloudFunc = require(DIR_COMMON + 'cloudfunc');
-
+const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
 const currify = require('currify');
+
 const wraptile = require('wraptile');
 const tryToCatch = require('try-to-catch');
 const pullout = require('pullout');
@@ -22,6 +21,7 @@ const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');
 const criton = require('criton');
+const DIR = `${DIR_SERVER}../`;
 const HOME = homedir();
 
 const resolve = Promise.resolve.bind(Promise);
@@ -107,14 +107,13 @@ function createConfig({configPath} = {}) {
     };
     
     configManager.unsubscribe = (fn) => {
-        // replace to off on node v10
-        changeEmitter.removeListener('change', fn);
+        changeEmitter.off('change', fn);
     };
     
     return configManager;
 }
 
-const write = async (filename, config) => {
+const write = (filename, config) => {
     return writejson(filename, config('*'), {mode: 0o600});
 };
 
@@ -133,7 +132,6 @@ function _connection(manage, socket) {
         
         const send = () => {
             const data = CloudFunc.formatMsg('config', key(json));
-            socket.broadcast.send(json);
             socket.send(json);
             socket.emit('log', data);
         };
@@ -147,7 +145,7 @@ function _connection(manage, socket) {
 function listen(manage, sock, auth) {
     const prefix = manage('prefixSocket');
     
-    sock.of(prefix + '/config')
+    sock.of(`${prefix}/config`)
         .on('connection', (socket) => {
             if (!manage('auth'))
                 return connection(manage, socket);

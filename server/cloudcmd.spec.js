@@ -2,26 +2,28 @@
 
 const path = require('path');
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 const {reRequire} = require('mock-require');
 
 const DIR = './';
-const cloudcmdPath = DIR + 'cloudcmd';
+const cloudcmdPath = `${DIR}cloudcmd`;
 
 const cloudcmd = require(cloudcmdPath);
-const {
-    createConfigManager,
-    _getPrefix,
-    _initAuth,
-} = cloudcmd;
-
 const {request} = require('serve-once')(cloudcmd, {
     config: {
         auth: false,
         dropbox: false,
     },
 });
+
+const {
+    createConfigManager,
+    _getPrefix,
+    _initAuth,
+} = cloudcmd;
 
 test('cloudcmd: defaults: config', (t) => {
     const configManager = createConfigManager();
@@ -52,7 +54,7 @@ test('cloudcmd: getPrefix', (t) => {
     const value = 'hello';
     const result = _getPrefix(value);
     
-    t.equal(result, value, 'should equal');
+    t.equal(result, value);
     t.end();
 });
 
@@ -61,7 +63,7 @@ test('cloudcmd: getPrefix: function', (t) => {
     const fn = () => value;
     const result = _getPrefix(fn);
     
-    t.equal(result, value, 'should equal');
+    t.equal(result, value);
     t.end();
 });
 
@@ -70,7 +72,7 @@ test('cloudcmd: getPrefix: function: empty', (t) => {
     const fn = () => value;
     const result = _getPrefix(fn);
     
-    t.equal(result, '', 'should equal');
+    t.equal(result, '');
     t.end();
 });
 
@@ -86,13 +88,13 @@ test('cloudcmd: replaceDist', (t) => {
     
     process.env.NODE_ENV = NODE_ENV;
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });
 
 test('cloudcmd: replaceDist: !isDev', (t) => {
     const url = '/dist/hello';
-    const cloudcmdPath = DIR + 'cloudcmd';
+    const cloudcmdPath = `${DIR}cloudcmd`;
     
     const reset = cleanNodeEnv();
     const {_replaceDist} = reRequire(cloudcmdPath);
@@ -100,7 +102,7 @@ test('cloudcmd: replaceDist: !isDev', (t) => {
     
     reset();
     
-    t.equal(result, url, 'should equal');
+    t.equal(result, url);
     t.end();
 });
 
@@ -112,6 +114,7 @@ test('cloudcmd: auth: reject', (t) => {
     
     const username = 'root';
     const password = 'toor';
+    
     config('auth', true);
     config('username', username);
     config('password', password);

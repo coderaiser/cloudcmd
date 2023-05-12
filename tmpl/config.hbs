@@ -1,5 +1,5 @@
 <ul class="list">
-    <li {{ configAuth }}>
+    <li {{ configAuth }} title="Authentication">
         <label>
             <input data-name="js-auth" type="checkbox" {{ auth }} >
             Auth
@@ -25,7 +25,7 @@
             title="Password"
             autocomplete="current-password">
     </li>
-    <li>
+    <li title="Should an Editor send patches to server (speed up data transfer)">
         <label>
             <input
                 data-name="js-diff"
@@ -34,7 +34,7 @@
             Diff
         </label>
     </li>
-    <li>
+    <li title="Pack text data transferred by an Editor">
         <label>
             <input
                 data-name="js-zip"
@@ -43,21 +43,21 @@
             Zip
          </label>
     </li>
-    <li>
-        <select data-name="js-columns" class="form-control full-width" title="Columns">
+    <li title="Visible Columns">
+        <select data-name="js-columns" class="form-control full-width" title="Visible Columns">
             <option {{ name-size-date-owner-mode-selected }}>name-size-date-owner-mode</option>
             <option {{ name-size-date-selected }}>name-size-date</option>
             <option {{ name-size-selected }}>name-size</option>
         </select>
     </li>
-    <li>
+    <li title="Editor: Edward(Ace-based), Dword(Codemirror-based), Deepword(Monaco-based)">
         <select data-name="js-editor" class="form-control full-width" title="Editor">
             <option {{ edward-selected }}>edward</option>
             <option {{ dword-selected }}>dword</option>
             <option {{ deepword-selected }}>deepword</option>
         </select>
     </li>
-    <li>
+    <li title="Navigate and edit files using hotkeys of legendary editor">
         <label>
             <input
                 data-name="js-vim"
@@ -66,43 +66,43 @@
             Vim
         </label>
     </li>
-    <li>
+    <li title="Inner buffer used to copy files">
         <label>
             <input data-name="js-buffer" type="checkbox" {{ buffer }}>
             Buffer
         </label>
     </li>
-    <li>
+    <li title="Store filenames of directories (can be cleared with Ctrl+D and refreshed with Ctr+R)">
         <label>
             <input data-name="js-dirStorage" type="checkbox" {{ dirStorage }} >
             Directory Storage
         </label>
     </li>
-    <li>
+    <li title="Load dependencies from CDN (faster, but requires internet)">
         <label>
             <input data-name="js-online" type="checkbox" {{ online }}>
             Online
         </label>
     </li>
-    <li>
+    <li title="Packer support for pack operations">
         <select data-name="js-packer" class="form-control full-width" title="Packer">
             <option {{ tar-selected }}>tar</option>
             <option {{ zip-selected }}>zip</option>
         </select>
     </li>
-    <li>
+    <li title="Show only one panel (when two is to many)">
         <label>
             <input data-name="js-oneFilePanel" type="checkbox" {{ oneFilePanel }}>
             One File Panel
         </label>
     </li>
-    <li>
+    <li title="Show bottom keys panel">
         <label>
             <input data-name="js-keysPanel" type="checkbox" {{ keysPanel }}>
             Keys panel
         </label>
     </li>
-     <li>
+     <li title="Name of Cloud Commander instance">
         <input
             data-name="js-name"
             title="Name"
@@ -110,7 +110,7 @@
             placeholder="name"
             class="form-control">
     </li>
-     <li>
+     <li title="Root directory">
         <input
             data-name="js-root"
             title="Root"
@@ -118,7 +118,7 @@
             placeholder="root"
             class="form-control">
     </li>
-    <li>
+    <li title="Port used by server">
         <input
             data-name="js-port"
             min="0"
@@ -129,25 +129,25 @@
             placeholder="Port"
             class="form-control">
     </li>
-    <li>
+    <li title="Show file name while Viewing a file">
         <label>
             <input data-name="js-showFileName" type="checkbox" {{ showFileName }}>
             Show File Name
         </label>
     </li>
-    <li>
+    <li title="Confirm copy in Copy Dialog">
         <label>
             <input data-name="js-confirmCopy" type="checkbox" {{ confirmCopy }}>
             Confirm Copy
         </label>
     </li>
-    <li>
+    <li title="Confirm move in Move Dialog">
         <label>
             <input data-name="js-confirmMove" type="checkbox" {{ confirmMove }}>
             Confirm Move
         </label>
     </li>
-    <li>
+    <li title="Synchronize path of current directory with Console">
         <label>
             <input data-name="js-syncConsolePath" type="checkbox" {{ syncConsolePath }}>
             Sync Console Path

@@ -9,10 +9,10 @@ const tryToCatch = require('try-to-catch');
 const clipboard = require('@cloudcmd/clipboard');
 
 const getRange = require('./get-range');
-const getIndex = currify(require('./get-index'));
 const uploadFiles = require('../dom/upload-files');
-
 const {FS} = require('../../common/cloudfunc');
+
+const getIndex = currify(require('./get-index'));
 
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
 const SPACE = ' ';
@@ -125,7 +125,7 @@ module.exports.initKeysPanel = () => {
         
         const clickFuncs = {
             'f1'        : CloudCmd.Help.show,
-            'f2'        : initF2,
+            'f2'        : CloudCmd.UserMenu.show,
             'f3'        : CloudCmd.View.show,
             'f4'        : CloudCmd.EditFile.show,
             'f5'        : operation('copy'),
@@ -143,15 +143,11 @@ module.exports.initKeysPanel = () => {
     });
 };
 
-function initF2() {
-    CloudCmd.UserMenu.show();
-}
-
 const getPanel = (side) => {
     if (!itype.string(side))
         return side;
     
-    return DOM.getByDataName('js-' + side);
+    return DOM.getByDataName(`js-${side}`);
 };
 
 module.exports.setOnPanel = (side) => {
@@ -216,8 +212,7 @@ async function onPathElementClick(panel, event) {
     const {href} = element;
     const path = decodePath(href);
     
-    await CloudCmd.loadDir({
-        path,
+    await CloudCmd.changeDir(path, {
         isRefresh: false,
         panel: noCurrent ? panel : Info.panel,
     });
@@ -276,9 +271,7 @@ async function onDblClick(event) {
     if (!isDir)
         return CloudCmd.View.show();
     
-    await CloudCmd.loadDir({
-        path,
-    });
+    await CloudCmd.changeDir(path);
 }
 
 async function onTouch(event) {
@@ -293,9 +286,7 @@ async function onTouch(event) {
     if (!isCurrent)
         return;
     
-    await CloudCmd.loadDir({
-        path: DOM.getCurrentPath(current),
-    });
+    await CloudCmd.changeDir(DOM.getCurrentPath(current));
 }
 
 /*
@@ -476,8 +467,7 @@ function pop() {
             return CloudCmd.route(location.hash);
         
         const history = false;
-        await CloudCmd.loadDir({
-            path,
+        await CloudCmd.changeDir(path, {
             history,
         });
     });

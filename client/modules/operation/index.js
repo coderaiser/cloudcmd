@@ -82,7 +82,7 @@ function _authCheck(spawn, ok) {
     const alertDialog = wraptile(Dialog.alert);
     
     spawn.on('accept', accept(spawn));
-    spawn.on('reject', alertDialog ('Wrong credentials!'));
+    spawn.on('reject', alertDialog('Wrong credentials!'));
     spawn.emit('auth', config('username'), config('password'));
 }
 
@@ -269,9 +269,7 @@ async function promptDelete() {
     } else {
         const current = DOM.getCurrentFile();
         const isDir = DOM.isCurrentIsDir(current);
-        const getType = (isDir) => {
-            return isDir ? 'directory' : 'file';
-        };
+        const getType = (isDir) => isDir ? 'directory' : 'file';
         
         const type = getType(isDir) + ' ';
         
@@ -407,18 +405,15 @@ async function _processFiles(options, data) {
                     panelPassive,
                 } = Info;
                 
-                const setCurrent = () => {
-                    const currentName = name || data.names[0];
-                    DOM.setCurrentByName(currentName);
-                };
-                
                 if (!Info.isOnePanel)
                     CloudCmd.refresh({
                         panel: panelPassive,
                         noCurrent: true,
                     });
                 
-                CloudCmd.refresh({panel}, setCurrent);
+                CloudCmd.refresh({
+                    panel,
+                });
             });
         }
     }
@@ -426,7 +421,7 @@ async function _processFiles(options, data) {
 
 function checkEmpty(name, operation) {
     if (!operation)
-        throw Error(name + ' could not be empty!');
+        throw Error(`${name} could not be empty!`);
 }
 
 function twopack(operation, type) {
@@ -492,13 +487,13 @@ async function prompt(msg, to, names) {
     msg += ' ';
     
     if (names.length > 1)
-        msg     += n + ' file(s)';
+        msg     += `${n} file(s)`;
     else
-        msg     += '"' + name + '"';
+        msg     += `"${name}"`;
     
     msg += ' to';
     
-    return Dialog.prompt(msg, to);
+    return await Dialog.prompt(msg, to);
 }
 
 async function loadAll() {

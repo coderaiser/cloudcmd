@@ -133,7 +133,7 @@ module.exports.Markdown = {
     read: async (url) => {
         return await sendRequest({
             method: 'GET',
-            url: '/markdown' + url,
+            url: `/markdown${url}`,
             imgPosition,
             notLog: true,
         });

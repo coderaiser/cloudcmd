@@ -1,5 +1,7 @@
 'use strict';
 
+const fullstore = require('fullstore');
+
 const {
     J,
     K,
@@ -7,29 +9,50 @@ const {
     DOWN,
 } = require('../../key/key.js');
 
-module.exports = (el, {keyCode}) => {
-    if (keyCode === DOWN || keyCode === J)
-        return down(el);
-    
-    if (keyCode === UP || keyCode === K)
-        return up(el);
+const store = fullstore(1);
+const isDigit = (a) => /^\d+$/.test(a);
+
+module.exports = (el, {key, keyCode}) => {
+    if (isDigit(key)) {
+        store(Number(key));
+    }
+
+    if (keyCode === DOWN || keyCode === J) {
+        const count = store();
+        store(1);
+
+        return down(el, count);
+    }
+
+    if (keyCode === UP || keyCode === K) {
+        const count = store();
+        store(1);
+
+        return up(el, count);
+    }
 };
 
-function down(el) {
+function down(el, count) {
     const {length} = el;
-    
+
     if (el.selectedIndex === length - 1)
         el.selectedIndex = 0;
     else
-        ++el.selectedIndex;
+        el.selectedIndex += count;
+
+    if (el.selectedIndex < 0)
+        el.selectedIndex = length - 1;
 }
 
-function up(el) {
+function up(el, count) {
     const {length} = el;
-    
+
     if (!el.selectedIndex)
         el.selectedIndex = length - 1;
     else
-        --el.selectedIndex;
+        el.selectedIndex -= count;
+
+    if (el.selectedIndex < 0)
+        el.selectedIndex = 0;
 }
 

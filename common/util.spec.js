@@ -113,12 +113,12 @@ test('util: getRegExp: no', (t) => {
 });
 
 test('util: escapeRegExp: no str', (t) => {
-    t.equal(escapeRegExp(1), 1, 'should equal');
+    t.equal(escapeRegExp(1), 1);
     t.end();
 });
 
 test('util: escapeRegExp', (t) => {
-    t.equal(escapeRegExp('#hello'), '\\#hello', 'should equal');
+    t.equal(escapeRegExp('#hello'), '\\#hello');
     t.end();
 });
 

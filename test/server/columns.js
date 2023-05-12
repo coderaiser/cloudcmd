@@ -5,14 +5,14 @@ const fs = require('fs');
 const {reRequire} = require('mock-require');
 const columnsPath = '../../server/columns';
 
-test('columns', (t) => {
+test('columns: prod', (t) => {
     const {NODE_ENV} = process.env;
     process.env.NODE_ENV = '';
     const columns = reRequire(columnsPath);
     
     process.env.NODE_ENV = NODE_ENV;
     
-    t.equal(columns[''], '', 'should equal');
+    t.equal(columns[''], '');
     t.end();
 });
 
@@ -25,7 +25,7 @@ test('columns: dev', (t) => {
     
     process.env.NODE_ENV = NODE_ENV;
     
-    t.equal(columns['name-size-date'], css, 'should equal');
+    t.equal(columns['name-size-date'], css);
     t.end();
 });
 

@@ -1,10 +1,26 @@
 {
+    "plugins": [
+        "cloudcmd"
+    ],
     "ignore": [
+        "html",
         "fixture*",
         "app.json",
         "fontello.json"
     ],
+    "rules": {
+        "webpack/apply-externals": "off"
+    },
     "match": {
+        "base64": {
+            "convert-typeof-to-is-type": "off"
+        },
+        "route.spec.js": {
+            "tape/convert-ok-to-match": "off"
+        },
+        "*.js": {
+            "convert-esm-to-commonjs": "on"
+        },
         "*.md": {
             "convert-commonjs-to-esm": "on"
         },
@@ -12,23 +28,31 @@
             "webpack": "on"
         },
         "server": {
-            "remove-process-exit": "on"
+            "nodejs/remove-process-exit": "on"
         },
         "server/{server,exit}.js": {
-            "remove-process-exit": "off",
-            "remove-console": "off"
+            "nodejs/remove-process-exit": "off"
         },
-        "server/{terminal,distribute/log}.js": {
+        "server/{server,exit,terminal,distribute/log}.{js,mjs}": {
             "remove-console": "off"
         },
         "client/{client,cloudcmd,load-module}.js": {
+            "remove-console": "off"
+        },
+        "client/sw": {
             "remove-console": "off"
         },
         "test/common/cloudfunc.js": {
             "remove-console": "off"
         },
         "storage.js": {
-            "remove-useless-async": "off"
+            "promises/remove-useless-async": "off"
+        },
+        "docker.yml": {
+            "github/set-node-versions": "off"
+        },
+        "vim.js": {
+            "merge-duplicate-functions": "off"
         }
     }
 }

@@ -92,7 +92,7 @@ test('cloudfunc: getSize: dir', (t) => {
     
     const expected = '&lt;dir&gt;';
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });
 
@@ -106,7 +106,7 @@ test('cloudfunc: getSize: link: dir', (t) => {
     
     const expected = '&lt;link&gt;';
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });
 
@@ -120,7 +120,7 @@ test('cloudfunc: getSize: link: file', (t) => {
     
     const expected = '&lt;link&gt;';
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });
 
@@ -134,6 +134,6 @@ test('cloudfunc: getSize: file', (t) => {
     
     const expected = '100.00kb';
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });

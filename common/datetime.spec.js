@@ -11,7 +11,7 @@ test('common: datetime', (t) => {
     
     const expected = '2018.08.17 10:56:48';
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });
 
@@ -19,18 +19,18 @@ test('common: datetime: no arg', (t) => {
     const {Date} = global;
     
     let called = false;
-    const myDate = class extends Date {
+    
+    global.Date = class extends Date {
         constructor() {
             super();
             called = true;
         }
     };
     
-    global.Date = myDate;
-    
     datetime();
     
     global.Date = Date;
+    
     t.ok(called, 'should call new Date');
     t.end();
 });
@@ -41,7 +41,7 @@ test('common: 0 before number', (t) => {
     
     const expected = '2018.08.17 10:56:08';
     
-    t.equal(result, expected, 'should equal');
+    t.equal(result, expected);
     t.end();
 });
 

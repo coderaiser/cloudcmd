@@ -13,18 +13,18 @@ const FILES_JSON = 'config|modules';
 const FILES_HTML = 'file|path|link|pathLink|media';
 const FILES_HTML_ROOT = 'view/media-tmpl|config-tmpl|upload';
 const DIR_HTML = '/tmpl/';
-const DIR_HTML_FS = DIR_HTML + 'fs/';
+const DIR_HTML_FS = `${DIR_HTML}fs/`;
 const DIR_JSON = '/json/';
 const timeout = getTimeoutOnce(2000);
 
 module.exports.get = getFile;
 
-async function getFile(name) {
+function getFile(name) {
     const type = itype(name);
     check(name);
     
     if (type === 'string')
-        return await getModule(name);
+        return getModule(name);
     
     if (type === 'array')
         return Promise.all(name.map(getFile));
@@ -35,9 +35,9 @@ function check(name) {
         throw Error('name could not be empty!');
 }
 
-async function getModule(name) {
-    const regExpHTML = new RegExp(FILES_HTML + '|' + FILES_HTML_ROOT);
-    const regExpJSON = new RegExp(FILES_JSON);
+function getModule(name) {
+    const regExpHTML = RegExp(FILES_HTML + '|' + FILES_HTML_ROOT);
+    const regExpJSON = RegExp(FILES_JSON);
     
     const isHTML = regExpHTML.test(name);
     const isJSON = regExpJSON.test(name);
@@ -54,7 +54,7 @@ async function getModule(name) {
 
 function getPath(name, isHTML, isJSON) {
     let path;
-    const regExp = new RegExp(FILES_HTML_ROOT);
+    const regExp = RegExp(FILES_HTML_ROOT);
     const isRoot = regExp.test(name);
     
     if (isHTML) {
@@ -72,8 +72,8 @@ function getPath(name, isHTML, isJSON) {
 }
 
 function showError(name) {
-    const str = 'Wrong file name: ' + name;
-    const error = new Error(str);
+    const str = `Wrong file name: ${name}`;
+    const error = Error(str);
     
     throw error;
 }

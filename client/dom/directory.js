@@ -15,9 +15,7 @@ module.exports = (items) => {
     if (items.length)
         Images.show('top');
     
-    const entries = Array.from(items).map((item) => {
-        return item.webkitGetAsEntry();
-    });
+    const entries = Array.from(items).map((item) => item.webkitGetAsEntry());
     
     const dirPath = getPathWhenRootEmpty();
     const path = dirPath
@@ -74,6 +72,6 @@ function uploadFile(url, data) {
 }
 
 function uploadDir(url) {
-    return DOM.load.put(url + '?dir');
+    return DOM.load.put(`${url}?dir`);
 }
 

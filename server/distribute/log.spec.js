@@ -8,7 +8,7 @@ test('distribute: log: getMessage', (t) => {
     const e = 'hello';
     const result = log.getMessage(e);
     
-    t.equal(e, result, 'should equal');
+    t.equal(e, result);
     t.end();
 });
 
@@ -18,7 +18,7 @@ test('distribute: log: getMessage: message', (t) => {
         message,
     });
     
-    t.equal(result, message, 'should equal');
+    t.equal(result, message);
     t.end();
 });
 
@@ -31,4 +31,6 @@ test('distribute: log: config', (t) => {
     config('log', logOriginal);
     
     t.end();
+}, {
+    checkAssertionsCount: false,
 });

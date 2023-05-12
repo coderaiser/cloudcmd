@@ -127,7 +127,7 @@ module.exports.setProgress = (value, title) => {
     if (!element)
         return Images;
     
-    element.setAttribute(DATA, value + '%');
+    element.setAttribute(DATA, `${value}%`);
     
     if (title)
         element.title = title;

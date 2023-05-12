@@ -6,7 +6,7 @@ const tryToPromiseAll = require('./try-to-promise-all');
 const resolve = Promise.resolve.bind(Promise);
 const reject = Promise.reject.bind(Promise);
 
-test('try-to-promise-all', async (t) => {
+test('commons: try-to-promise-all', async (t) => {
     const [, ...result] = await tryToPromiseAll([
         resolve('a'),
         resolve('b'),
@@ -18,7 +18,7 @@ test('try-to-promise-all', async (t) => {
     t.end();
 });
 
-test('try-to-promise-all: error', async (t) => {
+test('commons: try-to-promise-all: error', async (t) => {
     const [e] = await tryToPromiseAll([
         reject('a'),
     ]);

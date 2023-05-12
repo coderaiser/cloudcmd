@@ -49,6 +49,14 @@
     background-image: url(../img/file-link.png);
 }
 
+.archive {
+    background-image: url(../img/archive.png);
+}
+
+.archive-link {
+    background-image: url(../img/archive-link.png);
+}
+
 .loading-svg {
     background: url(../img/spinner.svg);
 }

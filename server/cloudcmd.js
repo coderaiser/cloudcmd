@@ -1,29 +1,28 @@
 'use strict';
 
-const DIR = __dirname + '/';
-const DIR_ROOT = DIR + '../';
-const DIR_COMMON = DIR + '../common/';
-
+const DIR = `${__dirname}/`;
+const DIR_COMMON = `${DIR}../common/`;
 const path = require('path');
-const fs = require('fs');
 
-const cloudfunc = require(DIR_COMMON + 'cloudfunc');
-const authentication = require(DIR + 'auth');
+const fs = require('fs');
+const cloudfunc = require(`${DIR_COMMON}cloudfunc`);
+
+const authentication = require(`${DIR}auth`);
 const {
     createConfig,
     configPath,
-} = require(DIR + 'config');
+} = require(`${DIR}config`);
+const modulas = require(`${DIR}modulas`);
 
-const modulas = require(DIR + 'modulas');
-const userMenu = require(DIR + 'user-menu');
-const rest = require(DIR + 'rest');
-const route = require(DIR + 'route');
-const validate = require(DIR + 'validate');
-const prefixer = require(DIR + 'prefixer');
-const terminal = require(DIR + 'terminal');
-const distribute = require(DIR + 'distribute');
-
+const userMenu = require(`${DIR}user-menu`);
+const rest = require(`${DIR}rest`);
+const route = require(`${DIR}route`);
+const validate = require(`${DIR}validate`);
+const prefixer = require(`${DIR}prefixer`);
+const terminal = require(`${DIR}terminal`);
+const distribute = require(`${DIR}distribute`);
 const currify = require('currify');
+
 const apart = require('apart');
 const ponse = require('ponse');
 const restafary = require('restafary');
@@ -34,7 +33,7 @@ const dword = require('dword');
 const deepword = require('deepword');
 const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
-//const readzip = require('readzip/lib/middle.js');
+const DIR_ROOT = `${DIR}../`;
 
 const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
@@ -45,6 +44,9 @@ const html = fs.readFileSync(getIndexPath(isDev), 'utf8');
 const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
+
+const isUndefined = (a) => typeof a === 'undefined';
+const isFn = (a) => typeof a === 'function';
 
 module.exports = (params) => {
     const p = params || {};
@@ -99,7 +101,7 @@ function defaultValue(config, name, options) {
     const value = options[name];
     const previous = config(name);
     
-    if (typeof value === 'undefined')
+    if (isUndefined(value))
         return previous;
     
     return value;
@@ -107,7 +109,7 @@ function defaultValue(config, name, options) {
 
 module.exports._getPrefix = getPrefix;
 function getPrefix(prefix) {
-    if (typeof prefix === 'function')
+    if (isFn(prefix))
         return prefix() || '';
     
     return prefix || '';
@@ -137,35 +139,35 @@ function listen({prefixSocket, socket, config}) {
     edward.listen(socket, {
         root,
         auth,
-        prefixSocket: prefixSocket + '/edward',
+        prefixSocket: `${prefixSocket}/edward`,
     });
     
     dword.listen(socket, {
         root,
         auth,
-        prefixSocket: prefixSocket + '/dword',
+        prefixSocket: `${prefixSocket}/dword`,
     });
     
     deepword.listen(socket, {
         root,
         auth,
-        prefixSocket: prefixSocket + '/deepword',
+        prefixSocket: `${prefixSocket}/deepword`,
     });
     
     config('console') && konsole.listen(socket, {
         auth,
-        prefixSocket: prefixSocket + '/console',
+        prefixSocket: `${prefixSocket}/console`,
     });
     
     fileop.listen(socket, {
         root,
         auth,
-        prefix: prefixSocket + '/fileop',
+        prefix: `${prefixSocket}/fileop`,
     });
     
     config('terminal') && terminal(config).listen(socket, {
         auth,
-        prefix: prefixSocket + '/gritty',
+        prefix: `${prefixSocket}/gritty`,
         command: config('terminalCommand'),
         autoRestart: config('terminalAutoRestart'),
     });
@@ -238,13 +240,6 @@ function cloudcmd({modules, config}) {
             root,
             token: dropboxToken,
         }),
-        
-        /*
-        readzip({
-            prefix: cloudfunc.apiURL + '/fs',
-            root,
-        }),
-        */
         
         restafary({
             prefix: cloudfunc.apiURL + '/fs',

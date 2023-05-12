@@ -6,11 +6,11 @@ const exec = require('execon');
 const currify = require('currify');
 const load = require('load.js');
 
-const {log} = CloudCmd;
-
 const {ajax} = require('../dom/load');
+
 const Files = require('../dom/files');
 const Images = require('../dom/images');
+const {log} = CloudCmd;
 
 const upload = currify(_upload);
 
@@ -56,7 +56,7 @@ function _upload(callback, file) {
     });
 }
 
-async function loadFiles() {
+function loadFiles() {
     const js = '//api.filepicker.io/v2/filepicker.js';
     
     return Promise.all([

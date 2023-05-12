@@ -1,31 +1,27 @@
 'use strict';
 
 const autoGlobals = require('auto-globals');
-const test = autoGlobals(require('supertape'));
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
-const {reRequire, stopAll} = mockRequire;
-
 const {ESC} = require('./key');
-
 const {
     getDOM,
     getCloudCmd,
 } = require('./vim/globals.fixture');
 
-const DOM = getDOM();
-const CloudCmd = getCloudCmd();
+const {reRequire, stopAll} = mockRequire;
 
-global.DOM = DOM;
-global.CloudCmd = CloudCmd;
+const test = autoGlobals(require('supertape'));
+
+global.DOM = getDOM();
+global.CloudCmd = getCloudCmd();
 
 test('cloudcmd: client: key: enable vim', async (t) => {
     const vim = stub();
-    const configStub = stub().returns(true);
     const {CloudCmd} = global;
     const {config} = CloudCmd;
     
-    CloudCmd.config = configStub;
+    CloudCmd.config = stub().returns(true);
     mockRequire('./vim', vim);
     const {_listener, setBind} = reRequire('.');
     
@@ -58,6 +54,7 @@ test('cloudcmd: client: key: disable vim', async (t) => {
     
     const {CloudCmd} = global;
     const {config} = CloudCmd;
+    
     CloudCmd.config = _config;
     
     setBind();

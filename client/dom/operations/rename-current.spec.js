@@ -1,10 +1,12 @@
 'use strict';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 const mockRequire = require('mock-require');
 
-const {reRequire} = mockRequire;
+const {reRequire, stopAll} = mockRequire;
 
 test('cloudcmd: client: dom: renameCurrent: isCurrentFile', async (t) => {
     const current = {};
@@ -18,6 +20,8 @@ test('cloudcmd: client: dom: renameCurrent: isCurrentFile', async (t) => {
     const renameCurrent = reRequire('./rename-current');
     await renameCurrent(current);
     
+    stopAll();
+    
     t.calledWith(isCurrentFile, [current], 'should call isCurrentFile');
     t.end();
 });
@@ -27,11 +31,9 @@ test('cloudcmd: client: dom: renameCurrent: file exist', async (t) => {
     const name = 'hello';
     const {CloudCmd} = global;
     
-    const CloudCmdStub = {
+    global.CloudCmd = {
         refresh: stub(),
     };
-    
-    global.CloudCmd = CloudCmdStub;
     
     const prompt = stub().returns([null, name]);
     const confirm = stub().returns([true]);
@@ -54,6 +56,8 @@ test('cloudcmd: client: dom: renameCurrent: file exist', async (t) => {
     
     const expected = 'Directory "hello" already exists. Proceed?';
     global.CloudCmd = CloudCmd;
+    
+    stopAll();
     
     t.calledWith(confirm, [expected], 'should call confirm');
     t.end();

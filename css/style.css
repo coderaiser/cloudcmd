@@ -1,6 +1,6 @@
 :root {
-    --color: rgba(49, 123, 249);
-    --color-transparent: rgba(49, 123, 249, 0.4);
+    --color: rgb(49 123 249);
+    --color-transparent: rgb(49 123 249 / 40%);
 }
 
 html {
@@ -29,7 +29,7 @@ body, pre, code {
 
 .fm, .keyspanel {
     cursor              : default;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
     -webkit-user-select : none;
     -moz-user-select    : none;
     -ms-user-select     : none;
@@ -76,7 +76,7 @@ body, pre, code {
 .error::before {
     font-family : 'Fontello';
     font-size   : 14px;
-    color       : rgb(222, 41, 41);
+    color       : rgb(222 41 41);
     cursor      : default;
     content     : '\e800';
 }
@@ -172,7 +172,7 @@ a:hover, a:active {
 }
 
 .selected-file, .selected-file .name > a {
-    color: rgb(254, 159, 224);
+    color: rgb(254 159 224);
 }
 
 .panel-right {
@@ -190,7 +190,7 @@ a:hover, a:active {
 }
 
 .selected-panel {
-    border-color: rgba(254, 159, 224, .40);
+    border-color: rgb(254 159 224 / 40%);
 }
 
 .keyspanel {

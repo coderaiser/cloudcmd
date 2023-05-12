@@ -8,23 +8,18 @@ require('../css/columns/name-size.css');
 const wraptile = require('wraptile');
 const load = require('load.js');
 
-const isDev = process.env.NODE_ENV === 'development';
-
 const {
     registerSW,
     listenSW,
 } = require('./sw/register');
 
-// prevent additional loading of emitify
-window.Emitify = require('emitify');
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = window.CloudCmd = async (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     
-    const DOM = require('./dom');
-    
-    window.DOM = DOM;
+    window.DOM = require('./dom');
     window.CloudCmd = require('./client');
     
     await register(config);

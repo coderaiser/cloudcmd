@@ -1,10 +1,12 @@
 'use strict';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 const mockRequire = require('mock-require');
 
-const {reRequire} = mockRequire;
+const {reRequire, stopAll} = mockRequire;
 
 test('client: dom: io', (t) => {
     const sendRequest = stub();
@@ -21,6 +23,8 @@ test('client: dom: io', (t) => {
         method: 'PUT',
         url: '/fs/hello?dir',
     };
+    
+    stopAll();
     
     t.calledWith(sendRequest, [expected]);
     t.end();

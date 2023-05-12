@@ -1,31 +1,33 @@
 'use strict';
 
-const test = require('supertape');
-const callbackify = require('./callbackify');
+const tryToCatch = require('try-to-catch');
 
-test('cloudcmd: common: callbackify: error', (t) => {
-    const promise = async () => {
-        throw Error('hello');
-    };
+const {
+    test,
+    stub,
+} = require('supertape');
+const callbackify = require('./callbackify');
+const {promisify} = require('util');
+
+test('cloudcmd: common: callbackify: error', async (t) => {
+    const promise = stub().rejects(Error('hello'));
     
     const fn = callbackify(promise);
+    const newPromise = promisify(fn);
+    const [error] = await tryToCatch(newPromise);
     
-    fn((e) => {
-        t.equal(e.message, 'hello');
-        t.end();
-    });
+    t.equal(error.message, 'hello');
+    t.end();
 });
 
-test('cloudcmd: common: callbackify', (t) => {
-    const promise = async () => {
-        return 'hi';
-    };
+test('cloudcmd: common: callbackify', async (t) => {
+    const promise = stub().resolves('hi');
     
     const fn = callbackify(promise);
+    const promiseAgain = promisify(fn);
+    const data = await promiseAgain();
     
-    fn((e, data) => {
-        t.equal(data, 'hi');
-        t.end();
-    });
+    t.equal(data, 'hi');
+    t.end();
 });
 

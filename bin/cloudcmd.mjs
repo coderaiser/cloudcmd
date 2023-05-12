@@ -1,21 +1,27 @@
 #!/usr/bin/env node
 
-const DIR_SERVER = '../server/';
-
 import {createRequire} from 'module';
 import {promisify} from 'util';
 import tryToCatch from 'try-to-catch';
 import {createSimport} from 'simport';
+import parse from 'yargs-parser';
 
 import exit from '../server/exit.js';
-import {createConfig, configPath} from '../server/config.js';
-
-const config = createConfig({
+import {
+    createConfig,
     configPath,
-});
+} from '../server/config.js';
 
 import env from '../server/env.js';
 import prefixer from '../server/prefixer.js';
+
+process.on('unhandledRejection', exit);
+
+const require = createRequire(import.meta.url);
+
+const Info = require('../package.json');
+
+const simport = createSimport(import.meta.url);
 
 const choose = (a, b) => {
     if (a === undefined)
@@ -24,15 +30,27 @@ const choose = (a, b) => {
     return a;
 };
 
-process.on('unhandledRejection', exit);
+const config = createConfig({
+    configPath,
+});
 
-const simport = createSimport(import.meta.url);
-const require = createRequire(import.meta.url);
+const DIR_SERVER = '../server/';
 
-const Info = require('../package.json');
+const maybeRoot = (a) => {
+    if (a === '.')
+        return process.cwd();
+    
+    return a;
+};
 
-const {argv} = process;
-const args = require('minimist')(argv.slice(2), {
+const yargsOptions = {
+    configuration: {
+        'strip-aliased': true,
+        'strip-dashed': true,
+    },
+    coerce: {
+        root: maybeRoot,
+    },
     string: [
         'name',
         'port',
@@ -78,6 +96,7 @@ const args = require('minimist')(argv.slice(2), {
         'import',
         'import-listen',
         'log',
+        'zip',
         'dropbox',
     ],
     default: {
@@ -92,7 +111,7 @@ const args = require('minimist')(argv.slice(2), {
         'zip'         : config('zip'),
         'username'    : env('username') || config('username'),
         'root'        : choose(env('root'), config('root')),
-        'prefix'      : choose(env('cloudcmd_prefix'), config('prefix')),
+        'prefix'      : choose(env('prefix'), config('prefix')),
         'console'     : choose(env.bool('console'), config('console')),
         'contact'     : choose(env.bool('contact'), config('contact')),
         'terminal'    : choose(env.bool('terminal'), config('terminal')),
@@ -121,22 +140,22 @@ const args = require('minimist')(argv.slice(2), {
         'export-token': env('export_token') || config('exportToken'),
         
         'dropbox': config('dropbox'),
-        'dropbox-token': config('dropboxToken'),
+        'dropbox-token': config('dropboxToken') || '',
     },
     alias: {
-        v: 'version',
-        h: 'help',
-        p: 'password',
-        o: 'online',
-        u: 'username',
-        s: 'save',
-        a: 'auth',
-        c: 'config',
+        version: 'v',
+        help: 'h',
+        password: 'p',
+        online: 'o',
+        username: 'u',
+        save: 's',
+        auth: 'a',
+        config: 'c',
     },
-    unknown: (cmd) => {
-        exit('\'%s\' is not a cloudcmd option. See \'cloudcmd --help\'.', cmd);
-    },
-});
+};
+
+const {argv} = process;
+const args = parse(argv.slice(2), yargsOptions);
 
 if (args.version)
     version();
@@ -146,6 +165,16 @@ else
     main();
 
 async function main() {
+    const validateArgs = await simport('@putout/cli-validate-args');
+    
+    const error = await validateArgs(args, [
+        ...yargsOptions.boolean,
+        ...yargsOptions.string,
+    ]);
+    
+    if (error)
+        return exit(error);
+    
     if (args.repl)
         repl();
     
@@ -157,35 +186,35 @@ async function main() {
     config('open', args.open);
     config('username', args.username);
     config('console', args.console);
-    config('syncConsolePath', args['sync-console-path']);
-    config('showFileName', args['show-file-name']);
+    config('syncConsolePath', args.syncConsolePath);
+    config('showFileName', args.showFileName);
     config('contact', args.contact);
     config('terminal', args.terminal);
-    config('terminalPath', args['terminal-path']);
-    config('terminalCommand', args['terminal-command']);
-    config('terminalAutoRestart', args['terminal-auto-restart']);
+    config('terminalPath', args.terminalPath);
+    config('terminalCommand', args.terminalCommand);
+    config('terminalAutoRestart', args.terminalAutoRestart);
     config('editor', args.editor);
     config('prefix', prefixer(args.prefix));
-    config('prefixSocket', prefixer(args['prefix-socket']));
+    config('prefixSocket', prefixer(args.prefixSocket));
     config('root', args.root || '/');
     config('vim', args.vim);
     config('columns', args.columns);
     config('log', args.log);
-    config('confirmCopy', args['confirm-copy']);
-    config('confirmMove', args['confirm-move']);
-    config('oneFilePanel', args['one-file-panel']);
-    config('configDialog', args['config-dialog']);
-    config('configAuth', args['config-auth']);
-    config('keysPanel', args['keys-panel']);
+    config('confirmCopy', args.confirmCopy);
+    config('confirmMove', args.confirmMove);
+    config('oneFilePanel', args.oneFilePanel);
+    config('configDialog', args.configDialog);
+    config('configAuth', args.configAuth);
+    config('keysPanel', args.keysPanel);
     config('export', args.export);
-    config('exportToken', args['export-token']);
+    config('exportToken', args.exportToken);
     config('import', args.import);
-    config('importToken', args['import-token']);
-    config('importListen', args['import-listen']);
-    config('importUrl', args['import-url']);
+    config('importToken', args.importToken);
+    config('importListen', args.importListen);
+    config('importUrl', args.importUrl);
     
-    config('dropbox', args['dropbox']);
-    config('dropboxToken', args['dropbox-token'] || '');
+    config('dropbox', args.dropbox);
+    config('dropboxToken', args.dropboxToken);
     
     await readConfig(args.config);
     
@@ -205,7 +234,7 @@ async function main() {
     
     await validateRoot(options.root, config);
     
-    if (args['show-config'])
+    if (args.showConfig)
         await showConfig();
     
     const distribute = await simport('../server/distribute/index.js');
@@ -221,7 +250,7 @@ async function main() {
 }
 
 async function validateRoot(root, config) {
-    const validate = await simport(DIR_SERVER + 'validate.js');
+    const validate = await simport(`${DIR_SERVER}validate.js`);
     validate.root(root, config);
     
     if (root === '/')
@@ -240,7 +269,7 @@ function version() {
 }
 
 async function start(options, config) {
-    const SERVER = DIR_SERVER + 'server.js';
+    const SERVER = `${DIR_SERVER}server.mjs`;
     
     if (!args.server)
         return;
@@ -297,7 +326,7 @@ async function help() {
 
 function repl() {
     console.log('REPL mode enabled (telnet localhost 1337)');
-    require(DIR_SERVER + 'repl');
+    require(`${DIR_SERVER}repl`);
 }
 
 async function checkUpdate() {
@@ -313,7 +342,7 @@ async function showUpdateInfo(version) {
     
     const chalk = await simport('chalk');
     
-    const latestVersion = chalk.green.bold('v' + version);
+    const latestVersion = chalk.green.bold(`v${version}`);
     const latest = `update available: ${latestVersion}`;
     const current = chalk.dim(`(current: v${Info.version})`);
     

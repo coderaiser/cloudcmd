@@ -1,9 +1,9 @@
 'use strict';
 
-const {env} = process;
-const isDev = env.NODE_ENV === 'development';
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const {env} = process;
+
+const isDev = env.NODE_ENV === 'development';
 
 const plugins = [
     new HtmlWebpackPlugin({

@@ -1,7 +1,9 @@
 'use strict';
 
-const test = require('supertape');
-const stub = require('@cloudcmd/stub');
+const {
+    test,
+    stub,
+} = require('supertape');
 const parse = require('./parse-user-menu');
 
 test('cloudcmd: user menu: parse', (t) => {

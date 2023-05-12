@@ -1,3 +1,334 @@
+2023.03.21, v16.14.1
+
+feature:
+- b336a472 package: eslint-plugin-putout v17.1.0
+- 019e15b8 package: @cloudcmd/fileop v7.0.0
+- 64354300 package: copymitter v8.0.1
+- 27437880 package: @cloudcmd/move-files v7.0.0
+
+2023.03.08, v16.14.0
+
+feature:
+- 6b22b241 package: putout v29.0.3
+
+2023.01.30, v16.13.1
+
+feature:
+- client: add DIR_DIST
+- client: DIRCLIENT -> DIR_CLIENT
+
+2023.01.29, v16.13.0
+
+feature:
+- client: key: vim: open editor with 'e'
+- client: vim: add ability to show terminal with 'tt'
+
+2023.01.29, v16.12.0
+
+feature:
+- client: vim: add ability to create directory with 'md', and create file with 'mf'
+
+2023.01.22, v16.11.0
+
+fix:
+- lint: eslint-plugin-node -> eslint-plugin-n
+
+feature:
+- user-menu: add support of mov
+- client: user-menu: navigate: add support of \D + [JK] to speed up vim navigation
+
+2023.01.19, v16.10.0
+
+fix:
+- lint: eslint-plugin-node -> eslint-plugin-n
+
+feature:
+- client: user-menu: navigate: add support of \D + [JK] to speed up vim navigation
+
+2023.01.18, v16.9.1
+
+fix:
+- static: user-menu: convert flac to mp3
+
+2023.01.17, v16.9.0
+
+feature:
+- package: scroll-into-view-if-needed v3.0.4
+- package: tar-stream v3.0.0
+- static: user-menu: add recipes from Cookbook
+
+2023.01.16, v16.8.0
+
+feature:
+- package: @putout/plugin-cloudcmd v2.0.0: CloudCmd.loadDir() -> CloudCmd.changeDir()'
+
+2023.01.15, v16.7.0
+
+feature:
+- package: @cloudcmd/modal v3.0.0: add ability to not set cursor when close the modal
+- package: auto-globals v3.0.0
+- package: rimraf v4.0.5
+- user-menu: rm border
+
+2022.10.20, v16.6.1
+
+feature:
+- package: package-json v8.1.0
+- package: supertape v8.1.0
+- package: putout v28.0.0
+
+2022.10.09, v16.6.0
+
+feature:
+- package: @cloudcmd/fileop v6.0.0
+- package: @cloudcmd/move-files v6.0.0
+- package: copymitter v7.0.0
+
+2022.08.06, v16.5.0
+
+feature:
+- client: add Command Line
+- package: add funding
+- (package) gritty v7.0.0
+
+2022.07.20, v16.4.1
+
+feature:
+- (package) eslint-plugin-n v15.2.4
+- (package) putout v27.0.1
+- (package) eslint-plugin-putout v16.0.0
+
+
+2022.07.11, v16.4.0
+
+feature:
+- (cloudcmd) env: add ability to pass 0 and 1
+
+
+2022.07.02, v16.3.1
+
+fix:
+- (client) cloudcmd: rm window.Emitify
+
+
+2022.07.01, v16.3.0
+
+feature:
+- (cloudcmd) terminal-run: return -1, when not load
+
+
+2022.06.17, v16.2.0
+
+feature:
+- (package) markdown-it v13.0.1
+- (cloudcmd) server: convert to ESM
+- (package) thread-it v2.0.0
+
+
+2022.05.12, v16.1.1
+
+feature:
+- (package) edward v14.0.0
+- (package) putout v26.0.1
+
+
+2022.04.23, v16.1.0
+
+feature:
+- (cloudcmd) improve support of NBSP
+
+
+2022.04.22, v16.0.1
+
+feature:
+- (package) dword v14.0.0
+- (package) restafary v11.0.0
+- (package) @cloudcmd/stub v4.0.1
+- (package) win32 v7.0.0
+- (package) eslint-plugin-putout v14.4.0
+
+
+2022.02.19, v16.0.0
+
+feature:
+- (cloudcmd) drop support of node < 16
+- (package) supertape v7.1.0
+- (package) eslint-plugin-putout v13.11.0
+- (package) madrun v9.0.0
+- (package) putout v25.0.1
+
+2022.01.20, v15.9.15
+
+fix:
+- (css) icons (#368)
+
+2022.01.13, v15.9.14
+
+fix:
+- (cloudcmd) client: edit-names in vim mode
+- (docker) images: make dockerfiles use node:lts-buster and node:lts-buster-slim for alpine (#363)
+- (docker) images: make dockerfiles use node:lts-buster-slim as base image (#357)
+feature:
+- (package) eslint-plugin-putout v13.0.1
+- (package) putout v24.0.2
+
+2021.12.23, v15.9.13
+
+feature:
+- (package) putout v23.0.0
+
+2021.12.16, v15.9.12
+
+fix:
+- (client) loadDir: history enabled by default
+
+2021.12.09, v15.9.11
+
+fix:
+- (client) load: Upload stuck for zero byte files (#359)
+
+2021.12.04, v15.9.10
+
+fix:
+- (client) operation: move and copy not working (#358)
+feature:
+- (package) eslint-plugin-putout v12.2.0
+
+2021.11.22, v15.9.9
+
+feature:
+- (package) putout v22.0.2
+- (package) yargs-parser v21.0.0
+- (package) yaspeller v8.0.0
+- (package) eslint-plugin-putout v11.1.0
+- (package) putout v21.1.2
+- (package) eslint v8.0.1
+- (package) eslint-plugin-putout v10.3.0
+- (package) find-up v6.1.0
+- (package) putout v20.5.1
+- (package) supertape v6.9.1
+- (package) eslint-plugin-putout v9.0.1
+
+2021.08.09, v15.9.8
+
+fix:
+- (cloudcmd) args: snake case -> camelCase: yargs strip dashed
+
+
+2021.06.27, v15.9.7
+
+fix:
+- (config) rm broadcast: cannot change config
+- (view) close modals using ESC
+
+feature:
+- (package) package-json v7.0.0
+- (config) add more descriptive titles
+
+
+2021.06.13, v15.9.6
+
+feature:
+- (package) @cloudcmd/move-files v5.0.0
+
+
+2021.06.08, v15.9.5
+
+fix:
+- (load) put: replace #: single -> multiple
+- (server) user-menu: e.message -> errorFind.message
+
+feature:
+- (package) eslint-plugin-putout v8.0.1
+- (package) es6-promisify v7.0.0
+- (package) putout v18.0.1
+- (package) putout v17.0.0
+
+
+2021.04.05, v15.9.4
+feature:
+- (package) socket.io-client v4.0.1
+- (package) open v8.0.5
+- (package) putout v16.4.0
+
+2021.03.17, v15.9.3
+
+fix:
+- (cloudcmd) Docker latest-alpine (15.9.2) stopped with errors (#337)
+
+
+2021.03.16, v15.9.2
+
+fix:
+- (route) unable to navigate between folders (#333)
+
+feature:
+- (package) open v8.0.2
+- (package) socket.io-client v4.0.0
+- (package) socket.io v4.0.0
+
+
+2021.03.01, v15.9.1
+
+feature:
+- (cloudcmd) icons: add archive icon for small screens
+- (cloudcmd) add archive-link image
+
+
+2021.03.01, v15.9.0
+
+feature:
+- feature(cloudcmd) add archive icon
+- feature(client) rm unused loadCurrentTime
+- feature(package) win32 v6.0.0
+- feature(package) redzip v2.0.0
+
+
+
+2021.02.27, v15.8.1
+
+feature:
+- (package) restafary v9.7.0 (#330)
+
+
+2021.02.23, v15.8.0
+
+feature:
+- (cloudcmd) add ability to suggest option, when wrong provided
+- (package) supertape v5.0.0
+
+
+2021.02.21, v15.7.1
+
+fix:
+- (cloudcmd) prefix env has no effect (#328)
+
+
+2021.02.19, v15.7.0
+
+fix:
+- chore(github-actions) add ability to autofix lint
+
+feature:
+- (package) @cloudcmd/move-files v4.0.0
+- (package) putout v15.0.0
+- (package) copymitter v6.0.0
+- (package) @cloudcmd/olark v3.0.2
+- (client) view: unknown file type: method: GET -> HEAD: speed up
+
+
+2021.02.03, v15.6.0
+
+feature:
+- (client) view: add ability to detect file type when extension is missing (coderaiser/cloudcmd#287)
+
+
+2021.02.02, v15.5.2
+
+fix:
+- (client) view: isAudio (#322)
+
+
 2021.01.31, v15.5.1
 
 fix:

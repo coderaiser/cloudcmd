@@ -51,7 +51,7 @@ module.exports.init = async () => {
     
     await CloudCmd.View();
     await loadAll();
-    await create();
+    create();
 };
 
 module.exports.show = show;

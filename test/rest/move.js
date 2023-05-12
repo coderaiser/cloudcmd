@@ -7,12 +7,12 @@ const {Volume} = require('memfs');
 const {ufs} = require('unionfs');
 
 const mockRequire = require('mock-require');
-const {reRequire} = mockRequire;
 const serveOnce = require('serve-once');
+const {reRequire, stopAll} = mockRequire;
 
 const cloudcmdPath = '../../';
-const dir = cloudcmdPath + 'server/';
-const restPath = dir + 'rest';
+const dir = `${cloudcmdPath}server/`;
+const restPath = `${dir}rest`;
 
 const {assign} = Object;
 
@@ -60,7 +60,7 @@ test('cloudcmd: rest: move', async (t) => {
         body: files,
     });
     
-    mockRequire.stop('fs');
+    stopAll();
     
     t.equal(body, 'move: ok("["move.txt"]")', 'should move');
     t.end();

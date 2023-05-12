@@ -1,46 +1,43 @@
-'use strict';
+import cloudcmd from './cloudcmd.js';
 
-const DIR_SERVER = './';
-const cloudcmd = require(DIR_SERVER + 'cloudcmd');
+import http from 'http';
+import {promisify} from 'util';
+import currify from 'currify';
+import squad from 'squad';
+import tryToCatch from 'try-to-catch';
+import wraptile from 'wraptile';
+import compression from 'compression';
+import threadIt from 'thread-it';
 
-const http = require('http');
-const {promisify} = require('util');
-const currify = require('currify');
-const squad = require('squad');
-const tryToCatch = require('try-to-catch');
-const wraptile = require('wraptile');
-const compression = require('compression');
-const threadIt = require('thread-it');
+import exit from './exit.js';
+import opn from 'open';
+
+import express from 'express';
+import {Server} from 'socket.io';
+import tryRequire from 'tryrequire';
+
+const bind = (f, self) => f.bind(self);
 
 const two = currify((f, a, b) => f(a, b));
-const exit = require(DIR_SERVER + 'exit');
-
-const exitPort = two(exit, 'cloudcmd --port: %s');
-const bind = (f, self) => f.bind(self);
-const promisifySelf = squad(promisify, bind);
-
 const shutdown = wraptile(async (promises) => {
     console.log('closing cloudcmd...');
     await Promise.all(promises);
     threadIt.terminate();
     process.exit(0);
 });
+const promisifySelf = squad(promisify, bind);
 
-const opn = require('open');
-const express = require('express');
-const io = require('socket.io');
-
-const tryRequire = require('tryrequire');
+const exitPort = two(exit, 'cloudcmd --port: %s');
 const logger = tryRequire('morgan');
 
-module.exports = async (options, config) => {
+export default async (options, config) => {
     const prefix = config('prefix');
-    const port = process.env.PORT || /* c9           */
-                 config('port');
+    const port = process.env.PORT /* c9           */
+                 || config('port');
     
-    const ip = process.env.IP || /* c9           */
-                config('ip') ||
-                '0.0.0.0';
+    const ip = process.env.IP /* c9           */
+                || config('ip')
+                || '0.0.0.0';
     
     const app = express();
     const server = http.createServer(app);
@@ -49,9 +46,9 @@ module.exports = async (options, config) => {
         app.use(logger('dev'));
     
     if (prefix)
-        app.get('/', (req, res) => res.redirect(prefix + '/'));
+        app.get('/', (req, res) => res.redirect(`${prefix}/`));
     
-    const socketServer = io(server, {
+    const socketServer = new Server(server, {
         path: `${prefix}/socket.io`,
     });
     
@@ -79,14 +76,13 @@ module.exports = async (options, config) => {
     const host = config('ip') || 'localhost';
     const port0 = port || server.address().port;
     const url = `http://${host}:${port0}${prefix}/`;
+    
     console.log(`url: ${url}`);
     
     if (!config('open'))
         return;
     
-    const [openError] = await tryToCatch(opn, url, {
-        url: true,
-    });
+    const [openError] = await tryToCatch(opn, url);
     
     if (openError)
         console.error('cloudcmd --open:', openError.message);

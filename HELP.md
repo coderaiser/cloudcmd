@@ -1,11 +1,11 @@
-# Cloud Commander v15.5.1
+# Cloud Commander v16.14.1
 
-### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL] [Demo][DemoURL]
 
-[MainURL]: http://cloudcmd.io "Main"
-[BlogURL]: http://blog.cloudcmd.io "Blog"
-[HerokuURL]: https://cloudcmd.herokuapp.com/ "Heroku"
-[HEROKU_LIVE_IMG]: https://status.cloudcmd.io/host/cloudcmd.herokuapp.com/img/file.png "Heroku"
+[MainURL]: https://cloudcmd.io "Main"
+[BlogURL]: https://blog.cloudcmd.io "Blog"
+[SupportURL]: https://patreon.com/coderaiser "Patreon"
+[DemoURL]: https://cloudcmd.onrender.com/
 [DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
 [DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
@@ -172,6 +172,7 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `*`                   | select/unselect all
 | `+`                   | expand selection
 | `-`                   | shrink selection
+| `:`                   | open Command Line
 | `Ctrl + X`            | cut to buffer
 | `Ctrl + C`            | copy to buffer
 | `Ctrl + V`            | paste from buffer
@@ -219,6 +220,10 @@ When the `--vim` option is provided, or the configuration parameter `vim` is set
 | `/`                   | find file in current directory
 | `n`                   | navigate to next found file
 | `N`                   | navigate to previous found file
+| `md`                  | make directory
+| `mf`                  | make file
+| `tt`                  | show terminal
+| `e`                   | edit file
 
 Commands can be joined, for example:
 
@@ -449,7 +454,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_IMPORT` - enable import of config
 - `CLOUDCMD_IMPORT_TOKEN` - authorization  token used to connect to export server
 - `CLOUDCMD_IMPORT_URL` - url of an import server
-- `CLOUDCMD_IMPORT_LISTEN`- enable listen on config updates from import server
+- `CLOUDCMD_IMPORT_LISTEN` - enable listen on config updates from import server
 
 ### User Menu
 
@@ -665,7 +670,7 @@ And create `index.js`:
 ```js
 import http from 'http';
 import cloudcmd from 'cloudcmd';
-import io from 'socket.io';
+import {Server} from 'socket.io';
 import express from 'express';
 
 const app = express();
@@ -673,7 +678,7 @@ const port = 1337;
 const prefix = '/';
 
 const server = http.createServer(app);
-const socket = io.listen(server, {
+const socket = new Server(server, {
     path: `${prefix}socket.io`,
 });
 
@@ -718,9 +723,10 @@ Here is example with two `Config Managers`:
 ```js
 import http from 'http';
 import cloudcmd from 'cloudcmd';
-import io from 'socket.io';
-const app = require('express')();
+import {Server} from 'socket.io';
+import express from 'express';
 
+const app = express();
 const port = 8000;
 const prefix1 = '/1';
 const prefix2 = '/2';
@@ -728,11 +734,11 @@ const prefix2 = '/2';
 const {createConfigManager} = cloudcmd;
 
 const server = http.createServer(app);
-const socket1 = io.listen(server, {
+const socket1 = new Server(server, {
     path: `${prefix1}/socket.io`,
 });
 
-const socket2 = io.listen(server, {
+const socket2 = new Server(server, {
     path: `${prefix2}/socket.io`,
 });
 
@@ -947,16 +953,191 @@ While using Dropbox remember that there is no remote support for the console/ter
 - view
 - edit
 
+## Automatically start cloudcmd on boot for `systemd`
+
+First, locate the command to run cloudcmd
+
+```sh
+which cloudcmd
+```
+
+take note of the result and create a systemd entry by executing
+
+```sh
+sudo nano /etc/systemd/system/cloudcmd.service
+```
+
+and use this template
+
+```
+[Unit]
+Description = Cloud Commander
+
+[Service]
+TimeoutStartSec = 0
+Restart = always
+ExecStart = THE RESULT OF which cloudcmd WE'VE EXECUTED EARLIER
+User = YOUR_USER
+
+[Install]
+WantedBy = multi-user.target
+```
+
+Don't forget to change the line for `ExecStart` and `User`
+
+Save the changes and exit editor.
+
+You may now enable cloudcmd and set it to autostart on boot by running:
+
+```sh
+sudo systemctl enable --now cloudcmd
+```
+
+## Automatically start cloudcmd on boot for `FreeBSD`
+
+First, locate the command to run cloudcmd
+
+```
+which cloudcmd
+```
+
+take note of the result and create a rc script
+
+```
+vi /usr/local/etc/rc.d/cloudcmd
+```
+
+and use this template
+
+```
+!/bin/sh
+#
+# PROVIDE: cloudcmd
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+# Author: IhatemyISP (ihatemyisp.net)
+# Version: 1.0.0
+
+# Description:
+#    This script runs Cloud Commander as a service under the supplied user on boot
+
+#    1) Place file in /usr/local/etc/rc.d/
+#    2) Add cloudcmd_enable="YES" to /etc/rc.conf
+#    3) (Optional) To run as non-root, add cloudcmd_runAs="user" to /etc/rc.conf
+#    4) (Optional) To pass Cloud Commander args, add cloudcmd_args="" to /etc/rc.conf
+
+# Freebsd rc library
+. /etc/rc.subr
+
+# General Info
+name="cloudcmd"            # Safe name of program
+program_name="cloudcmd"   # Name of exec
+title="CloudCommander"          # Title to display in top/htop
+
+# RC.config vars
+load_rc_config $name      # Loading rc config vars
+: ${cloudcmd_enable="NO"}  # Default: Do not enable Cloud Commander
+: ${cloudcmd_runAs="root"} # Default: Run Cloud Commander as root
+
+# Freebsd Setup
+rcvar=cloudcmd_enable                   # Enables the rc.conf YES/NO flag
+pidfile="/var/run/${program_name}.pid" # PID file location
+
+# Env Setup
+export HOME=$( getent passwd "$cloudcmd_runAs" | cut -d: -f6 ) # Gets the home directory of the runAs user
+
+# Command Setup
+exec_path="/usr/local/bin/${program_name}" # Path to the cloudcmd exec, /usr/local/bin/ when installed globally
+output_file="/var/log/${program_name}.log" # Path to Cloud Commander output file
+
+# Command
+command="/usr/sbin/daemon"
+command_args="-r -t ${title} -u ${cloudcmd_runAs} -o ${output_file} -P ${pidfile} ${exec_path} ${cloudcmd_args}"
+
+# Loading Config
+load_rc_config ${name}
+run_rc_command "$1"
+```
+
+Enable autostart
+
+```
+echo cloudcmd_enable="YES" >> /etc/rc.conf
+```
+
+(Optional) Set user to run Cloud Commander as (default is root)
+
+```
+echo cloudcmd_runAs="user" >> /etc/rc.conf
+```
+
+Start the service (or just reboot)
+
+```
+service cloudcmd start
+```
+
 ## Get involved
 
 There are a lot of ways to be involved in `Cloud Commander` development:
 
+- support project on patreon: https://patreon.com/coderaiser;
 - if you find a bug or have an idea to share, [create an issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
 - if you fixed a bug, typo or implemented a new feature, [create a pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
 - if you know a language not currently translated, or would like to improve an existing translation, you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
 
 ## Version history
 
+- *2023.03.21*, **[v16.14.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.14.1)**
+- *2023.03.08*, **[v16.14.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.14.0)**
+- *2023.01.30*, **[v16.13.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.13.1)**
+- *2023.01.29*, **[v16.13.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.13.0)**
+- *2023.01.29*, **[v16.12.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.12.0)**
+- *2023.01.22*, **[v16.11.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.11.0)**
+- *2023.01.19*, **[v16.10.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.10.0)**
+- *2023.01.18*, **[v16.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.9.1)**
+- *2023.01.17*, **[v16.9.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.9.0)**
+- *2023.01.16*, **[v16.8.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.8.0)**
+- *2023.01.15*, **[v16.7.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.7.0)**
+- *2022.10.20*, **[v16.6.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.6.1)**
+- *2022.10.09*, **[v16.6.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.6.0)**
+- *2022.08.06*, **[v16.5.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.5.0)**
+- *2022.07.20*, **[v16.4.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.4.1)**
+- *2022.07.11*, **[v16.4.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.4.0)**
+- *2022.07.02*, **[v16.3.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.3.1)**
+- *2022.07.01*, **[v16.3.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.3.0)**
+- *2022.06.17*, **[v16.2.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.2.0)**
+- *2022.05.12*, **[v16.1.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.1.1)**
+- *2022.04.23*, **[v16.1.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.1.0)**
+- *2022.04.22*, **[v16.0.1](//github.com/coderaiser/cloudcmd/releases/tag/v16.0.1)**
+- *2022.02.19*, **[v16.0.0](//github.com/coderaiser/cloudcmd/releases/tag/v16.0.0)**
+- *2022.01.20*, **[v15.9.15](//github.com/coderaiser/cloudcmd/releases/tag/v15.9.15)**
+- *2022.01.13*, **[v15.9.14](//github.com/coderaiser/cloudcmd/releases/tag/v15.9.14)**
+- *2021.12.23*, **[v15.9.13](//github.com/coderaiser/cloudcmd/releases/tag/v15.9.13)**
+- *2021.12.16*, **[v15.9.12](//github.com/coderaiser/cloudcmd/releases/tag/v15.9.12)**
+- *2021.12.09*, **[v15.9.11](//github.com/coderaiser/cloudcmd/releases/tag/v15.9.11)**
+- *2021.12.04*, **[v15.9.10](//github.com/coderaiser/cloudcmd/releases/tag/v15.9.10)**
+- *2021.11.22*, **[v15.9.9](//github.com/coderaiser/cloudcmd/releases/tag/v15.9.9)**
+- *2021.02.03*, **[v15.6.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.6.0)**
+- *2021.02.02*, **[v15.5.2](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.2)**
+- *2021.01.31*, **[v15.5.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.1)**
+- *2021.01.30*, **[v15.5.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.5.0)**
+- *2021.01.26*, **[v15.4.4](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.4)**
+- *2021.01.25*, **[v15.4.3](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.3)**
+- *2021.01.21*, **[v15.4.2](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.2)**
+- *2021.01.20*, **[v15.4.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.1)**
+- *2021.01.19*, **[v15.4.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.4.0)**
+- *2021.01.19*, **[v15.3.4](//github.com/coderaiser/cloudcmd/releases/tag/v15.3.4)**
+- *2021.01.17*, **[v15.3.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.3.1)**
+- *2021.01.17*, **[v15.3.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.3.0)**
+- *2021.01.16*, **[v15.2.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.2.0)**
+- *2021.01.07*, **[v15.1.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.1.0)**
+- *2021.01.05*, **[v15.0.4](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.4)**
+- *2020.01.05*, **[v15.0.3](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.3)**
+- *2020.12.31*, **[v15.0.2](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.2)**
+- *2020.12.30*, **[v15.0.1](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.1)**
+- *2020.12.28*, **[v15.0.0](//github.com/coderaiser/cloudcmd/releases/tag/v15.0.0)**
 - *2020.08.21*, **[v14.9.3](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.3)**
 - *2020.08.19*, **[v14.9.2](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.2)**
 - *2020.08.16*, **[v14.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v14.9.1)**

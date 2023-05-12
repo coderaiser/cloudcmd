@@ -1,35 +1,53 @@
 name: Node CI
-
-on: [push]
-
+on:
+  - push
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      NAME: cloudcmd
+    strategy:
+      matrix:
+        node-version:
+          - 16.x
+          - 18.x
+          - 19.x
     steps:
-      - uses: actions/checkout@master
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
-
-      - name: install
-        run: |
-          npm install
-
-      - name: lint
-        run: |
-          npm run lint
-
-      - name: build
-        run: |
-          npm run build
-          npm test
-
-      - name: test
-        run: |
-          npm test
-
-      - name: coverage
-        run: |
-          npm run coverage
+          node-version: ${{ matrix.node-version }}
+      - name: Install Redrun
+        run: npm i redrun -g
+      - name: Install
+        run: npm install
+      - name: Lint
+        run: redrun fix:lint
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+      - name: Typos Install
+        run: cargo install typos-cli || echo 'already installed'
+      - name: Typos
+        run: typos --write-changes
+      - name: Commit fixes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "chore: ${{ env.NAME }}: actions: lint ☘️"
+      - name: Build
+        run: redrun build
+      - name: Test
+        run: redrun test
+      - name: Coverage
+        run: redrun coverage coverage:report
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}

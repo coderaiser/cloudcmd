@@ -16,7 +16,7 @@
 
 .view-overlay {
     display     : block;
-    background  : rgba(255, 255, 255, 0.1);
+    background  : rgb(255 255 255 / 10%);
 }
 
 .media, video {
