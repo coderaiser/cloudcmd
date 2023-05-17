@@ -1,3 +1,9 @@
+2023.05.17, v16.15.0
+
+feature:
+- a1bf40bd package: open v9.1.0
+- ef608853 client: self signed certs on Chrome (#393)
+
 2023.03.21, v16.14.1
 
 feature:
