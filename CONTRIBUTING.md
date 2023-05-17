@@ -4,12 +4,12 @@ Format of the commit message: **type(scope) subject**
 
 **Type**:
 
-- feature(scope) subject
-- fix(scope) subject
-- docs(scope) subject
-- refactor(scope) subject
-- test(scope) subject
-- chore(scope) subject
+- feature: scope: subject
+- fix: scope: subject
+- docs: scope: subject
+- refactor: scope: subject
+- test: scope: subject
+- chore: scope: subject
 
 **Scope**:
 Scope could be anything specifying place of the commit change.
