@@ -80,7 +80,7 @@ test('sw: register: registerSW: https self-signed', async (t, {location, navigat
     
     const {registerSW} = reRequire('./register');
     
-    await registerSW();
+    const result = await registerSW();
     
     t.pass('should not call register');
     t.end();
