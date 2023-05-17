@@ -77,6 +77,7 @@ test('sw: register: registerSW: https self-signed', async (t, {location, navigat
     });
     
     const {register} = navigator.serviceWorker;
+    register.throws(Error('Cannot register service worker!'));
     
     const {registerSW} = reRequire('./register');
     
