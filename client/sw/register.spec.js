@@ -70,6 +70,24 @@ test('sw: register: registerSW: http', async (t, {location, navigator}) => {
     t.end();
 });
 
+test('sw: register: registerSW: https self-signed', async (t, {location, navigator}) => {
+    Object.assign(location, {
+        protocol: 'https',
+        hostname: 'self-signed.badssl.com',
+    });
+    
+    const {register} = navigator.serviceWorker;
+    register.throws(Error('Cannot register service worker!'));
+    
+    const {registerSW} = reRequire('./register');
+    
+    const result = await registerSW();
+    
+    t.notOk(result, 'should not throw');
+    t.end();
+});
+
+
 test('sw: register: registerSW', async (t, {location, navigator}) => {
     location.hostname = 'localhost';
     
