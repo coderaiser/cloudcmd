@@ -82,7 +82,7 @@ test('sw: register: registerSW: https self-signed', async (t, {location, navigat
     
     const result = await registerSW();
     
-    t.pass('should not call register');
+    t.notOk(result, 'should not throw');
     t.end();
 });
 
