@@ -21,7 +21,7 @@ async function registerSW(prefix) {
     
     const {serviceWorker} = navigator;
     const register = serviceWorker.register.bind(serviceWorker);
-    const [e, sw] =  await tryToCatch(register,`${prefix}/sw.js`);
+    const [e, sw] = await tryToCatch(register, `${prefix}/sw.js`);
     
     if (e)
         return null;

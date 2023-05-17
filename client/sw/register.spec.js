@@ -87,7 +87,6 @@ test('sw: register: registerSW: https self-signed', async (t, {location, navigat
     t.end();
 });
 
-
 test('sw: register: registerSW', async (t, {location, navigator}) => {
     location.hostname = 'localhost';
     
