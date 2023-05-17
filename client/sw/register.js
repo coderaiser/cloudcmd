@@ -21,7 +21,7 @@ async function registerSW(prefix) {
     
     const [e, sw] =  await tryToCatch(navigator.serviceWorker.register,`${prefix}/sw.js`);
     
-    if(e)
+    if (e)
         return null;
 
     return sw;
