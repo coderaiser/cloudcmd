@@ -19,7 +19,9 @@ async function registerSW(prefix) {
     if (!isHTTPS && !isLocalhost)
         return;
     
-    const [e, sw] =  await tryToCatch(navigator.serviceWorker.register,`${prefix}/sw.js`);
+    const {serviceWorker} = navigator;
+    const register = serviceWorker.register.bind(serviceWorker);
+    const [e, sw] =  await tryToCatch(register,`${prefix}/sw.js`);
     
     if (e)
         return null;
