@@ -168,7 +168,7 @@
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
     "eslint": "^8.0.1",
-    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-putout": "^18.0.0",
     "extract-text-webpack-plugin": "^4.0.0-alpha.0",
     "gritty": "^7.0.0",
