@@ -43,4 +43,3 @@ async function run(TerminalRun, command) {
         autoClose: false,
     });
 }
-
