@@ -1,3 +1,13 @@
+2023.07.09, v16.16.0
+
+feature:
+- c4f56c59 package: memfs v4.2.0
+- 0e663e1d package: @putout/plugin-cloudcmd v3.1.1
+- ff9265b7 package: c8 v8.0.0
+- 22aa337a package: eslint-plugin-n v16.0.1
+- 13350b55 package: eslint-plugin-putout v18.0.0
+- ce196abf package: putout v30.1.1
+
 2023.05.17, v16.15.0
 
 feature:
