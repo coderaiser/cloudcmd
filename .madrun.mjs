@@ -8,13 +8,14 @@ const testEnv = {
 };
 
 const is17 = /^v1[789]/.test(process.version);
+const is20 = /^v2/.test(process.version);
 
 // fix for ERR_OSSL_EVP_UNSUPPORTED on node v17
 // flag '--openssl-legacy-provider' not supported
 // on earlier version of node.js
 //
 // https://stackoverflow.com/a/69746937/4536327
-const buildEnv = is17 && {
+const buildEnv = (is17 || is20) && {
     NODE_OPTIONS: '--openssl-legacy-provider',
 };
 
