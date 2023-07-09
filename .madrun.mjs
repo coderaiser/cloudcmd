@@ -8,7 +8,7 @@ const testEnv = {
 };
 
 const is17 = /^v1[789]/.test(process.version);
-const is20 = /^v2/.test(process.version);
+const is20 = process.version.startsWith('v2');
 
 // fix for ERR_OSSL_EVP_UNSUPPORTED on node v17
 // flag '--openssl-legacy-provider' not supported

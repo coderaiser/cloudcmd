@@ -49,8 +49,7 @@ function before(options, fn = options) {
     
     server.listen(() => {
         fn(server
-            .address()
-            .port, promisify(after));
+            .address().port, promisify(after));
     });
 }
 

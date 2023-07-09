@@ -18,6 +18,7 @@ test('cloudcmd: console: enabled', async (t) => {
     const {port, done} = await connect({
         config,
     });
+    
     const socket = io(`http://localhost:${port}/console`);
     
     socket.emit('auth', configFn('username'), configFn('password'));
@@ -39,6 +40,7 @@ test('cloudcmd: console: disabled', async (t) => {
     const {port, done} = await connect({
         config,
     });
+    
     const socket = io(`http://localhost:${port}/console`);
     
     const [error] = await once(socket, 'connect_error');

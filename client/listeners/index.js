@@ -216,10 +216,8 @@ async function onPathElementClick(panel, event) {
 function copyPath(el) {
     clipboard
         .writeText(el
-            .parentElement
-            .title)
-        .then(CloudCmd
-            .log)
+            .parentElement.title)
+        .then(CloudCmd.log)
         .catch(CloudCmd.log);
 }
 
@@ -402,6 +400,7 @@ function dragndrop() {
             return uploadFiles(files);
         
         const isFile = (item) => item.kind === 'file';
+        
         const dirFiles = Array
             .from(items)
             .filter(isFile);

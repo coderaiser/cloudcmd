@@ -95,6 +95,7 @@ test('cloudcmd: /cloudcmd.js: auth: no password', async (t) => {
     const encoded = Buffer
         .from(`${username}:`)
         .toString('base64');
+    
     const authorization = `Basic ${encoded}`;
     
     const {status} = await request.get(`/${name}`, {

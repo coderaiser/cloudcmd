@@ -327,6 +327,7 @@ function CloudCmdProto(DOM) {
         if (!newObj)
             // that's OK, error handled by RESTful
             return;
+        
         options.sort = sort;
         options.order = order;
         

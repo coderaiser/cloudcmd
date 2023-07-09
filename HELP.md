@@ -500,6 +500,7 @@ export default {
         const data = await readDefaultMenu({
             prefix,
         });
+        
         await createDefaultMenu({
             path,
             data,

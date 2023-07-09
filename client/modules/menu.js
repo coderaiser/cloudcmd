@@ -37,9 +37,11 @@ module.exports.init = () => {
     
     const fm = DOM.getFM();
     const menuData = getMenuData(isAuth);
+    
     const options = getOptions({
         type: 'context',
     });
+    
     const optionsFile = getOptions({
         type: 'file',
     });

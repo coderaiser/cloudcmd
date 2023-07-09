@@ -14,6 +14,7 @@ module.exports = {
     
     'F6 - Copy URL to current file': async ({DOM}) => {
         const {copyURLToCurrentFile} = await import(`${CDN}/menu/copy-url-to-current-file.js`);
+        
         await copyURLToCurrentFile({
             DOM,
         });
@@ -24,6 +25,7 @@ module.exports = {
     },
     'Y - Convert YouTube to MP3': async ({CloudCmd, DOM}) => {
         const {convertYouTubeToMp3} = await import(`${CDN}/menu/convert-youtube-to-mp3.js`);
+        
         await convertYouTubeToMp3({
             CloudCmd,
             DOM,
@@ -32,6 +34,7 @@ module.exports = {
     
     'F - Convert flac to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
         const {convertFlacToMp3} = await import(`${CDN}/menu/ffmpeg.js`);
+        
         await convertFlacToMp3({
             CloudCmd,
             DOM,
@@ -39,6 +42,7 @@ module.exports = {
     },
     'M - Convert mp4 to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
         const {convertMp4ToMp3} = await import(`${CDN}/menu/ffmpeg.js`);
+        
         await convertMp4ToMp3({
             CloudCmd,
             DOM,
@@ -47,6 +51,7 @@ module.exports = {
     
     'O - Convert mov to mp3 [ffmpeg]': async ({CloudCmd, DOM}) => {
         const {convertMovToMp3} = await import(`${CDN}/menu/ffmpeg.js`);
+        
         await convertMovToMp3({
             CloudCmd,
             DOM,
@@ -72,6 +77,7 @@ module.exports = {
         const data = await readDefaultMenu({
             prefix,
         });
+        
         await createDefaultMenu({
             path,
             data,

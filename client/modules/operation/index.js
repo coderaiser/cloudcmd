@@ -96,6 +96,7 @@ async function initOperations(prefix, socketPrefix, fn) {
         prefix,
         socketPrefix,
     });
+    
     operator.on('connect', authCheck(operator, onConnect(fn)));
 }
 

@@ -101,8 +101,7 @@ function sendData(params, config, callback) {
         return onGET(params, config, callback);
     
     case 'PUT':
-        return pullout(p
-            .request)
+        return pullout(p.request)
             .then((body) => {
                 onPUT({
                     name: p.name,

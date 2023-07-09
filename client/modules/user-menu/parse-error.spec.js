@@ -27,6 +27,7 @@ test('user-menu: parse-error: stack', (t) => {
     const result = parseError({
         stack,
     });
+    
     const expected = [1, 2];
     
     t.deepEqual(result, expected);

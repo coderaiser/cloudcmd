@@ -142,6 +142,7 @@ module.exports.getNotCurrentDirPath = () => {
     const panel = DOM.getPanel({
         active: false,
     });
+    
     const path = DOM.getCurrentDirPath(panel);
     
     return path;

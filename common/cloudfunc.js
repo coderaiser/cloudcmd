@@ -71,6 +71,7 @@ function getPathLink(url, prefix, template) {
         '/',
         ...names,
     ];
+    
     const lines = [];
     const n = allNames.length;
     

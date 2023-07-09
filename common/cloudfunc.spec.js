@@ -43,9 +43,11 @@ test('cloudfunc: buildFromJSON: ..', (t) => {
     
     const $ = cheerio.load(html);
     const el = $('[data-name="js-file-Li4="]');
+    
     const result = el
         .find('[data-name="js-name"]')
         .text();
+    
     const expected = '..';
     
     t.equal(result, expected);
