@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 const Util = require('../../common/util');
 
 const Images = require('./images');
@@ -41,8 +40,8 @@ const selectByPattern = require('./select-by-pattern');
 
 const SELECTED_FILE = 'selected-file';
 const TabPanel = {
-    'js-left'        : null,
-    'js-right'       : null,
+    'js-left': null,
+    'js-right': null,
 };
 
 module.exports.loadRemote = (name, options, callback) => {
@@ -52,7 +51,7 @@ module.exports.loadRemote = (name, options, callback) => {
 
 module.exports.loadSocket = (callback) => {
     DOM.loadRemote('socket', {
-        name    : 'io',
+        name: 'io',
     }, callback);
     
     return DOM;
@@ -80,6 +79,7 @@ async function promptNew(typeName) {
     const {Dialog} = DOM;
     const dir = DOM.getCurrentDirPath();
     const msg = `New ${typeName}` || 'File';
+    
     const getName = () => {
         const name = DOM.getCurrentName();
         
@@ -111,11 +111,12 @@ async function promptNew(typeName) {
  * get current direcotory name
  */
 module.exports.getCurrentDirName = () => {
-    const href = DOM.getCurrentDirPath()
+    const href = DOM
+        .getCurrentDirPath()
         .replace(/\/$/, '');
     
-    const substr  = href.substr(href, href.lastIndexOf('/'));
-    const ret     = href.replace(`${substr}/`, '') || '/';
+    const substr = href.substr(href, href.lastIndexOf('/'));
+    const ret = href.replace(`${substr}/`, '') || '/';
     
     return ret;
 };
@@ -138,7 +139,9 @@ module.exports.getParentDirPath = (panel) => {
  * get not current direcotory path
  */
 module.exports.getNotCurrentDirPath = () => {
-    const panel = DOM.getPanel({active: false});
+    const panel = DOM.getPanel({
+        active: false,
+    });
     const path = DOM.getCurrentDirPath(panel);
     
     return path;
@@ -162,7 +165,9 @@ module.exports.getSelectedFiles = () => {
 module.exports.unselectFiles = (files) => {
     files = files || DOM.getSelectedFiles();
     
-    Array.from(files).forEach(DOM.toggleSelectedFile);
+    Array
+        .from(files)
+        .forEach(DOM.toggleSelectedFile);
 };
 
 /**
@@ -183,9 +188,7 @@ module.exports.getActiveFiles = () => {
 
 module.exports.getCurrentDate = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
-    const date = DOM
-        .getByDataName('js-date', current)
-        .textContent;
+    const date = DOM.getByDataName('js-date', current).textContent;
     
     return date;
 };
@@ -196,8 +199,10 @@ module.exports.getCurrentDate = (currentFile) => {
  */
 module.exports.getCurrentSize = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
+    
     /* если это папка - возвращаем слово dir вместо размера*/
-    const size = DOM.getByDataName('js-size', current)
+    const size = DOM
+        .getByDataName('js-size', current)
         .textContent
         .replace(/^<|>$/g, '');
     
@@ -237,6 +242,7 @@ module.exports.loadCurrentHash = async (currentFile) => {
     const link = DOM.getCurrentPath(current);
     
     const [, data] = await RESTful.read(link + query);
+    
     return data;
 };
 
@@ -285,7 +291,9 @@ module.exports.getCurrentData = async (currentFile) => {
     
     if (Info.name === '..') {
         Dialog.alert.noFiles();
-        return [Error('No Files')];
+        return [
+            Error('No Files'),
+        ];
     }
     
     if (isDir)
@@ -294,7 +302,9 @@ module.exports.getCurrentData = async (currentFile) => {
     const [hashNew, hash] = await DOM.checkStorageHash(path);
     
     if (!hashNew)
-        return [Error(`Can't get hash of a file`)];
+        return [
+            Error(`Can't get hash of a file`),
+        ];
     
     if (hash === hashNew)
         return [null, await Storage.get(`${path}-data`)];
@@ -302,7 +312,10 @@ module.exports.getCurrentData = async (currentFile) => {
     const [e, data] = await RESTful.read(path);
     
     if (e)
-        return [e, null];
+        return [
+            e,
+            null,
+        ];
     
     const ONE_MEGABYTE = 1024 ** 2 * 1024;
     const {length} = data;
@@ -353,13 +366,17 @@ module.exports.toggleSelectedFile = (currentFile) => {
 };
 
 module.exports.toggleAllSelectedFiles = () => {
-    DOM.getAllFiles().map(DOM.toggleSelectedFile);
+    DOM
+        .getAllFiles()
+        .map(DOM.toggleSelectedFile);
     
     return Cmd;
 };
 
 module.exports.selectAllFiles = () => {
-    DOM.getAllFiles().map(DOM.selectFile);
+    DOM
+        .getAllFiles()
+        .map(DOM.selectFile);
     
     return Cmd;
 };
@@ -372,7 +389,9 @@ module.exports.getAllFiles = () => {
     const from = (a) => a === '..' ? 1 : 0;
     const i = from(name);
     
-    return Array.from(files).slice(i);
+    return Array
+        .from(files)
+        .slice(i);
 };
 
 /**
@@ -418,7 +437,7 @@ module.exports.setHistory = (data, title, url) => {
 module.exports.isSelected = (selected) => {
     if (!selected)
         return false;
-    
+
     return DOM.isContainClass(selected, SELECTED_FILE);
 };
 
@@ -550,7 +569,9 @@ module.exports.getFiles = (element) => {
  * shows panel right or left (or active)
  */
 module.exports.showPanel = (active) => {
-    const panel = DOM.getPanel({active});
+    const panel = DOM.getPanel({
+        active,
+    });
     
     if (!panel)
         return false;
@@ -627,7 +648,6 @@ module.exports.deleteSelected = (selected) => {
  * @currentFile
  */
 module.exports.renameCurrent = renameCurrent;
-
 /**
  * unified way to scrollIntoViewIfNeeded
  * (native suporte by webkit only)
@@ -702,7 +722,7 @@ module.exports.changePanel = () => {
 module.exports.getPackerExt = (type) => {
     if (type === 'zip')
         return '.zip';
-    
+
     return '.tar.gz';
 };
 
@@ -711,10 +731,7 @@ module.exports.goToDirectory = async () => {
     const {Dialog} = DOM;
     const {dirPath} = CurrentInfo;
     
-    const [
-        cancel,
-        path = dirPath,
-    ] = await Dialog.prompt(msg, dirPath);
+    const [cancel, path = dirPath] = await Dialog.prompt(msg, dirPath);
     
     if (cancel)
         return;
@@ -731,7 +748,7 @@ module.exports.duplicatePanel = async () => {
     const getPath = (isDir) => {
         if (isDir)
             return Info.path;
-        
+
         return Info.dirPath;
     };
     
@@ -790,26 +807,29 @@ module.exports.updateCurrentInfo = (currentFile) => {
     const filesPassive = DOM.getFiles(panelPassive);
     const name = DOM.getCurrentName(current);
     
-    info.dir            = DOM.getCurrentDirName();
-    info.dirPath        = DOM.getCurrentDirPath();
-    info.parentDirPath  = DOM.getParentDirPath();
-    info.element        = current;
-    info.ext            = Util.getExt(name);
-    info.files          = Array.from(files.children);
-    info.filesPassive   = Array.from(filesPassive);
-    info.first          = files.firstChild;
-    info.getData        = DOM.getCurrentData;
-    info.last           = files.lastChild;
-    info.link           = DOM.getCurrentLink(current);
-    info.mode           = DOM.getCurrentMode(current);
-    info.name           = name;
-    info.path           = DOM.getCurrentPath(current);
-    info.panel          = files.parentElement || DOM.getPanel();
-    info.panelPassive   = panelPassive;
-    info.size           = DOM.getCurrentSize(current);
-    info.isDir          = DOM.isCurrentIsDir();
-    info.isSelected     = DOM.isSelected(current);
-    info.panelPosition  = DOM.getPanel().dataset.name.replace('js-', '');
-    info.isOnePanel     =        info.panel.getAttribute('data-name') ===
-        info.panelPassive.getAttribute('data-name');
+    info.dir = DOM.getCurrentDirName();
+    info.dirPath = DOM.getCurrentDirPath();
+    info.parentDirPath = DOM.getParentDirPath();
+    info.element = current;
+    info.ext = Util.getExt(name);
+    info.files = Array.from(files.children);
+    info.filesPassive = Array.from(filesPassive);
+    info.first = files.firstChild;
+    info.getData = DOM.getCurrentData;
+    info.last = files.lastChild;
+    info.link = DOM.getCurrentLink(current);
+    info.mode = DOM.getCurrentMode(current);
+    info.name = name;
+    info.path = DOM.getCurrentPath(current);
+    info.panel = files.parentElement || DOM.getPanel();
+    info.panelPassive = panelPassive;
+    info.size = DOM.getCurrentSize(current);
+    info.isDir = DOM.isCurrentIsDir();
+    info.isSelected = DOM.isSelected(current);
+    info.panelPosition = DOM
+        .getPanel()
+        .dataset
+        .name
+        .replace('js-', '');
+    info.isOnePanel = info.panel.getAttribute('data-name') === info.panelPassive.getAttribute('data-name');
 };

@@ -38,4 +38,3 @@ test('cloudcmd: show-config: return', (t) => {
     t.equal(showConfig(config), result, 'should return table');
     t.end();
 });
-

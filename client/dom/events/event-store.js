@@ -15,4 +15,3 @@ module.exports.clear = () => {
 };
 
 module.exports.get = () => list;
-

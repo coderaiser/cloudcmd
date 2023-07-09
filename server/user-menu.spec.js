@@ -3,10 +3,8 @@
 const fs = require('fs');
 const {join} = require('path');
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const serveOnce = require('serve-once');
 const threadIt = require('thread-it');
 const {reRequire} = require('mock-require');
@@ -88,4 +86,3 @@ test('cloudcmd: user menu: io.cp', async (t) => {
     t.equal(fixtureCopyFix, body);
     t.end();
 });
-

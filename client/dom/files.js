@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 const itype = require('itype');
 const {promisify} = require('es6-promisify');
 
@@ -49,6 +48,7 @@ function getModule(name) {
         return getConfig();
     
     const path = getPath(name, isHTML, isJSON);
+    
     return getSystemFile(path);
 }
 
@@ -137,4 +137,3 @@ function getTimeoutOnce(time) {
         }, time);
     };
 }
-

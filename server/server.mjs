@@ -1,5 +1,4 @@
 import cloudcmd from './cloudcmd.js';
-
 import http from 'http';
 import {promisify} from 'util';
 import currify from 'currify';
@@ -8,10 +7,8 @@ import tryToCatch from 'try-to-catch';
 import wraptile from 'wraptile';
 import compression from 'compression';
 import threadIt from 'thread-it';
-
 import exit from './exit.js';
 import opn from 'open';
-
 import express from 'express';
 import {Server} from 'socket.io';
 import tryRequire from 'tryrequire';
@@ -25,6 +22,7 @@ const shutdown = wraptile(async (promises) => {
     threadIt.terminate();
     process.exit(0);
 });
+
 const promisifySelf = squad(promisify, bind);
 
 const exitPort = two(exit, 'cloudcmd --port: %s');
@@ -32,12 +30,9 @@ const logger = tryRequire('morgan');
 
 export default async (options, config) => {
     const prefix = config('prefix');
-    const port = process.env.PORT /* c9           */
-                 || config('port');
+    const port = process.env.PORT /* c9           */ || config('port');
     
-    const ip = process.env.IP /* c9           */
-                || config('ip')
-                || '0.0.0.0';
+    const ip = process.env.IP /* c9           */ || config('ip') || '0.0.0.0';
     
     const app = express();
     const server = http.createServer(app);
@@ -87,4 +82,3 @@ export default async (options, config) => {
     if (openError)
         console.error('cloudcmd --open:', openError.message);
 };
-

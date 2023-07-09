@@ -9,4 +9,3 @@ module.exports = (indexFrom, indexTo, files) => {
     
     return [files[indexFrom]];
 };
-

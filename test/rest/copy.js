@@ -26,9 +26,7 @@ test('cloudcmd: rest: copy', async (t) => {
     const files = {
         from: '/fixture/',
         to: '/fixture/tmp',
-        names: [
-            'copy.txt',
-        ],
+        names: ['copy.txt'],
     };
     
     mkdirSync(tmp);
@@ -42,4 +40,3 @@ test('cloudcmd: rest: copy', async (t) => {
     t.equal(body, 'copy: ok("["copy.txt"]")', 'should return result');
     t.end();
 });
-

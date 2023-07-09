@@ -26,4 +26,3 @@ test('cloudcmd: entity: encode quote', (t) => {
     t.equal(result, expected, 'should encode entity');
     t.end();
 });
-

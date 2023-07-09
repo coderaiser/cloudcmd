@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
 
 const {btoa, atob} = require('./base64');
 
@@ -54,4 +51,3 @@ test('atob: node', (t) => {
     t.equal(result, expected, 'should encode base64');
     t.end();
 });
-

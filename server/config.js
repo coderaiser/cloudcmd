@@ -76,7 +76,7 @@ const manageListen = currify((manage, socket, auth) => {
 function initWrite(filename, configManager) {
     if (filename)
         return write.bind(null, filename, configManager);
-    
+
     return resolve;
 }
 
@@ -114,7 +114,9 @@ function createConfig({configPath} = {}) {
 }
 
 const write = (filename, config) => {
-    return writejson(filename, config('*'), {mode: 0o600});
+    return writejson(filename, config('*'), {
+        mode: 0o600,
+    });
 };
 
 function _connection(manage, socket) {
@@ -136,7 +138,8 @@ function _connection(manage, socket) {
             socket.emit('log', data);
         };
         
-        manage.write()
+        manage
+            .write()
             .then(send)
             .catch(emit(socket, 'err'));
     });
@@ -145,11 +148,12 @@ function _connection(manage, socket) {
 function listen(manage, sock, auth) {
     const prefix = manage('prefixSocket');
     
-    sock.of(`${prefix}/config`)
+    sock
+        .of(`${prefix}/config`)
         .on('connection', (socket) => {
             if (!manage('auth'))
                 return connection(manage, socket);
-            
+        
             const reject = () => socket.emit('reject');
             socket.on('auth', auth(connectionWraped(manage, socket), reject));
         });
@@ -243,4 +247,3 @@ function cryptoPass(manage, json) {
         password,
     }];
 }
-

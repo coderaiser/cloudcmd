@@ -23,15 +23,14 @@ test('cloudcmd: client: view: types: detectType', async (t) => {
     });
     
     const originalFetch = global.fetch;
+    
     global.fetch = fetch;
     await _detectType('/hello');
     
     global.fetch = originalFetch;
-    const expected = [
-        '/hello', {
-            method: 'HEAD',
-        },
-    ];
+    const expected = ['/hello', {
+        method: 'HEAD',
+    }];
     
     t.calledWith(fetch, expected);
     t.end();
@@ -39,6 +38,7 @@ test('cloudcmd: client: view: types: detectType', async (t) => {
 
 test('cloudcmd: client: view: types: detectType: found', async (t) => {
     const originalFetch = global.fetch;
+    
     global.fetch = stub().returns({
         headers: [
             ['content-type', 'image/png'],
@@ -51,4 +51,3 @@ test('cloudcmd: client: view: types: detectType: found', async (t) => {
     t.equal(result, '.png');
     t.end();
 });
-

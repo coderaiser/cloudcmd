@@ -7,7 +7,6 @@ const exec = require('execon');
 const Images = require('./images');
 
 module.exports.getIdBySrc = getIdBySrc;
-
 /**
  * Function gets id by src
  * @param src
@@ -25,6 +24,7 @@ function getIdBySrc(src) {
     
     const num = src.lastIndexOf('/') + 1;
     const sub = src.substr(src, num);
+    
     const id = src
         .replace(sub, '')
         .replace(/\./g, '-');
@@ -43,9 +43,9 @@ module.exports.ajax = (params) => {
     const isArray = itype.array(p.data);
     const isArrayBuf = itype(p.data) === 'arraybuffer';
     const type = p.type || p.method || 'GET';
-    const {
-        headers = {},
-    } = p;
+    
+    const {headers = {}} = p;
+    
     const xhr = new XMLHttpRequest();
     
     xhr.open(type, p.url, true);
@@ -98,8 +98,7 @@ module.exports.put = (url, body) => {
     const emitter = Emitify();
     const xhr = new XMLHttpRequest();
     
-    url = encodeURI(url)
-        .replace(/#/g, '%23');
+    url = encodeURI(url).replace(/#/g, '%23');
     
     xhr.open('put', url, true);
     
@@ -133,4 +132,3 @@ module.exports.put = (url, body) => {
     
     return emitter;
 };
-

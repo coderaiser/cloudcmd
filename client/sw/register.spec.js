@@ -114,4 +114,3 @@ test('sw: register: unregisterSW', async (t, {location, navigator}) => {
     t.calledWith(register, ['/hello/sw.js'], 'should call register');
     t.end();
 });
-

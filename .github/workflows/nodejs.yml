@@ -48,6 +48,6 @@ jobs:
       - name: Coverage
         run: redrun coverage coverage:report
       - name: Coveralls
-        uses: coverallsapp/github-action@master
+        uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

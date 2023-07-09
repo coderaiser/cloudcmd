@@ -1,10 +1,7 @@
 'use strict';
 
 const {join} = require('path');
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
 
 const cloudcmdPath = join(__dirname, '..', '..');
 const modulesPath = join(cloudcmdPath, 'json', 'modules.json');
@@ -28,6 +25,7 @@ test('cloudcmd: modules', async (t) => {
             },
         },
     };
+    
     const options = {
         modules,
     };
@@ -74,9 +72,10 @@ test('cloudcmd: modules: no', (t) => {
     const url = '/json/modules.json';
     const send = stub();
     
-    fn({url}, {send});
+    fn({url}, {
+        send,
+    });
     
     t.calledWith(send, [localModules], 'should have been called with modules');
     t.end();
 });
-

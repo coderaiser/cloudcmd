@@ -1,9 +1,7 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const parse = require('./parse-user-menu');
 
 test('cloudcmd: user menu: parse', (t) => {
@@ -15,7 +13,10 @@ test('cloudcmd: user menu: parse', (t) => {
         '_f': fn,
     });
     
-    const names = ['F2 - Rename file'];
+    const names = [
+        'F2 - Rename file',
+    ];
+    
     const keys = {
         F2: fn,
     };

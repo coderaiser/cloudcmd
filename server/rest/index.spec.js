@@ -73,4 +73,3 @@ test('rest: onPUT: no callback', async (t) => {
     t.equal(e.message, 'callback should be a function!', 'should throw when no callback');
     t.end();
 });
-

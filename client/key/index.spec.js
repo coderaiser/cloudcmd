@@ -4,10 +4,8 @@ const autoGlobals = require('auto-globals');
 const stub = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
 const {ESC} = require('./key');
-const {
-    getDOM,
-    getCloudCmd,
-} = require('./vim/globals.fixture');
+
+const {getDOM, getCloudCmd} = require('./vim/globals.fixture');
 
 const {reRequire, stopAll} = mockRequire;
 
@@ -66,4 +64,3 @@ test('cloudcmd: client: key: disable vim', async (t) => {
     t.calledWith(_config, ['vim']);
     t.end();
 });
-

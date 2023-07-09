@@ -11,4 +11,3 @@ module.exports = async (a) => {
         ...result,
     ];
 };
-

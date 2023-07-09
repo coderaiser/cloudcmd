@@ -16,4 +16,3 @@ module.exports = (currentName, names, removedNames) => {
     
     return nextNames[length - 1];
 };
-

@@ -8,4 +8,3 @@ module.exports = (...args) => {
     console.error(...messages);
     process.exit(1);
 };
-

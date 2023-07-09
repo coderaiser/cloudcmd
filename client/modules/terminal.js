@@ -2,7 +2,6 @@
 
 /* global CloudCmd */
 /* global gritty */
-
 const tryToCatch = require('try-to-catch');
 
 require('../../css/terminal.css');
@@ -15,10 +14,7 @@ const Images = require('../dom/images');
 const loadParallel = load.parallel;
 
 const {Dialog} = DOM;
-const {
-    Key,
-    config,
-} = CloudCmd;
+const {Key, config} = CloudCmd;
 
 CloudCmd.Terminal = exports;
 
@@ -123,4 +119,3 @@ function show() {
         },
     });
 }
-

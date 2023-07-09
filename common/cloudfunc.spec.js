@@ -14,6 +14,7 @@ const {
 } = require('./cloudfunc');
 
 const templatePath = join(__dirname, '../tmpl/fs');
+
 const template = {
     pathLink: readFileSync(`${templatePath}/pathLink.hbs`, 'utf8'),
     path: readFileSync(`${templatePath}/path.hbs`, 'utf8'),
@@ -42,7 +43,9 @@ test('cloudfunc: buildFromJSON: ..', (t) => {
     
     const $ = cheerio.load(html);
     const el = $('[data-name="js-file-Li4="]');
-    const result = el.find('[data-name="js-name"]').text();
+    const result = el
+        .find('[data-name="js-name"]')
+        .text();
     const expected = '..';
     
     t.equal(result, expected);

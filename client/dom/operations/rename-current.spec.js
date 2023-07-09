@@ -1,9 +1,7 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const mockRequire = require('mock-require');
 
 const {reRequire, stopAll} = mockRequire;
@@ -55,6 +53,7 @@ test('cloudcmd: client: dom: renameCurrent: file exist', async (t) => {
     await renameCurrent();
     
     const expected = 'Directory "hello" already exists. Proceed?';
+    
     global.CloudCmd = CloudCmd;
     
     stopAll();
@@ -98,4 +97,3 @@ const stubCurrentFile = (fns = {}) => {
         setCurrentName,
     };
 };
-

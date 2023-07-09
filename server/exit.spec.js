@@ -1,13 +1,12 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const exit = require('./exit');
 
 test('cloudcmd: exit: process.exit', (t) => {
     const {exit: exitOriginal} = process;
+    
     process.exit = stub();
     
     exit();
@@ -48,4 +47,3 @@ test('cloudcmd: exit.error: console.error: error', (t) => {
     
     t.end();
 });
-

@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 services:
   web:
     ports:
@@ -7,4 +7,3 @@ services:
       - ~:/root
       - /:/mnt/fs
     image: coderaiser/cloudcmd
-

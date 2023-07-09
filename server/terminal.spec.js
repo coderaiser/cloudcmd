@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
 
 const mockRequire = require('mock-require');
 
@@ -84,4 +81,3 @@ test('cloudcmd: terminal: no arg', (t) => {
     t.equal(result, gritty);
     t.end();
 });
-

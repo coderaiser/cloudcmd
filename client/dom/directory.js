@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 const philip = require('philip');
 
 const Images = require('./images');
@@ -15,11 +14,12 @@ module.exports = (items) => {
     if (items.length)
         Images.show('top');
     
-    const entries = Array.from(items).map((item) => item.webkitGetAsEntry());
+    const entries = Array
+        .from(items)
+        .map((item) => item.webkitGetAsEntry());
     
     const dirPath = getPathWhenRootEmpty();
-    const path = dirPath
-        .replace(/\/$/, '');
+    const path = dirPath.replace(/\/$/, '');
     
     const progress = Dialog.progress('Uploading...');
     
@@ -74,4 +74,3 @@ function uploadFile(url, data) {
 function uploadDir(url) {
     return DOM.load.put(`${url}?dir`);
 }
-

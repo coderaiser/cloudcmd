@@ -69,9 +69,10 @@ async function detectType(path) {
     
     for (const [name, value] of headers) {
         if (name === 'content-type')
-            return `.${value.split('/').pop()}`;
+            return `.${value
+                .split('/')
+                .pop()}`;
     }
     
     return '';
 }
-

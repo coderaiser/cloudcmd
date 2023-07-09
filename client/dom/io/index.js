@@ -9,10 +9,10 @@ const imgPosition = {
 
 module.exports.delete = async (url, data) => {
     return await sendRequest({
-        method      : 'DELETE',
-        url         : FS + url,
+        method: 'DELETE',
+        url: FS + url,
         data,
-        imgPosition : {
+        imgPosition: {
             top: Boolean(data),
         },
     });
@@ -149,4 +149,3 @@ module.exports.Markdown = {
         });
     },
 };
-

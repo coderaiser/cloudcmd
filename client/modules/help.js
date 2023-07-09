@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 CloudCmd.Help = exports;
 
 const Images = require('../dom/images');
@@ -17,15 +16,12 @@ function show() {
     const positionLoad = 'top';
     const relative = true;
     
-    CloudCmd
-        .Markdown
-        .show('/HELP.md', {
-            positionLoad,
-            relative,
-        });
+    CloudCmd.Markdown.show('/HELP.md', {
+        positionLoad,
+        relative,
+    });
 }
 
 function hide() {
     CloudCmd.View.hide();
 }
-

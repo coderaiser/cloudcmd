@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 CloudCmd.EditFileVim = exports;
 
 const Events = require('../dom/events');
@@ -23,8 +22,7 @@ module.exports.init = async () => {
 module.exports.show = async () => {
     Events.addKey(listener);
     
-    const editFile = await CloudCmd.EditFile
-        .show(ConfigView);
+    const editFile = await CloudCmd.EditFile.show(ConfigView);
     
     editFile
         .getEditor()
@@ -38,14 +36,10 @@ function hide() {
 }
 
 function listener(event) {
-    const {
-        keyCode,
-        shiftKey,
-    } = event;
+    const {keyCode, shiftKey} = event;
     
     if (shiftKey && keyCode === Key.ESC) {
         event.preventDefault();
         hide();
     }
 }
-

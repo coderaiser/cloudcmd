@@ -25,4 +25,3 @@ module.exports = (config, arg) => {
     
     return noop;
 };
-

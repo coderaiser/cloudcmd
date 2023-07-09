@@ -3,10 +3,7 @@
 let SelectType = '*.*';
 
 const {getRegExp} = require('../../common/util');
-const {
-    alert,
-    prompt,
-} = require('./dialog');
+const {alert, prompt} = require('./dialog');
 
 const DOM = require('.');
 
@@ -15,8 +12,6 @@ module.exports = async (msg, files) => {
         return;
     
     const allMsg = `Specify file type for ${msg} selection`;
-    
-    /* eslint require-atomic-updates: 0 */
     const [cancel, type] = await prompt(allMsg, SelectType);
     
     if (cancel)
@@ -48,4 +43,3 @@ module.exports = async (msg, files) => {
     if (!matches)
         alert('No matches found!');
 };
-

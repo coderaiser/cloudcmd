@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 CloudCmd.CommandLine = exports;
 
 const Dialog = require('../dom/dialog');
@@ -34,6 +33,4 @@ async function show() {
     }
 }
 
-function hide() {
-}
-
+function hide() {}

@@ -29,4 +29,3 @@ test('cloudcmd: client: dom: goToDirectory', async (t) => {
     t.calledWith(changeDir, [path]);
     t.end();
 });
-

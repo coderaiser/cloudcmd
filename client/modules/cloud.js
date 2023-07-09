@@ -15,6 +15,7 @@ const {log} = CloudCmd;
 const upload = currify(_upload);
 
 const Name = 'Cloud';
+
 CloudCmd[Name] = module.exports;
 
 module.exports.init = async () => {
@@ -41,10 +42,7 @@ module.exports.saveFile = (callback) => {
 };
 
 function _upload(callback, file) {
-    const {
-        url,
-        filename,
-    } = file;
+    const {url, filename} = file;
     
     const responseType = 'arraybuffer';
     const success = exec.with(callback, filename);
@@ -64,4 +62,3 @@ function loadFiles() {
         load.js(js),
     ]);
 }
-

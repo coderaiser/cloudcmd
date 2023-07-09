@@ -11,10 +11,7 @@ const {FS} = require('../../common/cloudfunc');
 const {getIdBySrc} = require('../dom/load');
 const RESTful = require('../dom/rest');
 
-const {
-    config,
-    Key,
-} = CloudCmd;
+const {config, Key} = CloudCmd;
 
 const {
     Buffer,
@@ -36,15 +33,16 @@ module.exports.ENABLED = false;
 CloudCmd.Menu = exports;
 
 module.exports.init = () => {
-    const {
-        isAuth,
-        menuDataFile,
-    } = getFileMenuData();
+    const {isAuth, menuDataFile} = getFileMenuData();
     
     const fm = DOM.getFM();
     const menuData = getMenuData(isAuth);
-    const options = getOptions({type: 'context'});
-    const optionsFile = getOptions({type: 'file'});
+    const options = getOptions({
+        type: 'context',
+    });
+    const optionsFile = getOptions({
+        type: 'file',
+    });
     
     MenuContext = supermenu(fm, options, menuData);
     MenuContextFile = supermenu(fm, optionsFile, menuDataFile);
@@ -77,7 +75,7 @@ function getPosition(position) {
             x: position.x,
             y: position.y,
         };
-    
+
     return getCurrentPosition();
 }
 
@@ -105,9 +103,9 @@ function getOptions({type}) {
     }
     
     const options = {
-        icon        : true,
-        beforeClose : Key.setBind,
-        beforeShow  : exec.with(beforeShow, func),
+        icon: true,
+        beforeClose: Key.setBind,
+        beforeShow: exec.with(beforeShow, func),
         beforeClick,
         name,
     };
@@ -252,7 +250,9 @@ function uploadFromCloud() {
         if (e)
             return;
         
-        await CloudCmd.refresh({currentName});
+        await CloudCmd.refresh({
+            currentName,
+        });
     });
 }
 
@@ -292,7 +292,7 @@ function download(type) {
             src = prefixURL + FS + encodedPath + '?download';
         
         const element = createElement('iframe', {
-            id : id + '-' + date,
+            id: id + '-' + date,
             async: false,
             className: 'hidden',
             src,
@@ -321,10 +321,7 @@ function getCurrentPosition() {
 }
 
 function listener(event) {
-    const {
-        F9,
-        ESC,
-    } = Key;
+    const {F9, ESC} = Key;
     
     const key = event.keyCode;
     const isBind = Key.isBind();

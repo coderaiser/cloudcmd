@@ -11,8 +11,7 @@ module.exports.getElementByName = getElementByName;
 function getElementByName(selector, element) {
     const str = `[data-name="js-${selector}"]`;
     
-    return element
-        .querySelector(str);
+    return element.querySelector(str);
 }
 
 module.exports.getName = (element) => {
@@ -40,7 +39,7 @@ module.exports.convert = (config) => {
 function setState(state) {
     if (state)
         return ' checked';
-    
+
     return '';
 }
 
@@ -74,4 +73,3 @@ module.exports.setValue = (name, value, element) => {
         break;
     }
 };
-

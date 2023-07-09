@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 const {promisify} = require('es6-promisify');
 
 const Images = require('../images');
@@ -17,17 +16,14 @@ module.exports = promisify((params, callback) => {
     p.url = replaceHash(p.url);
     
     load.ajax({
-        method      : p.method,
-        url         : p.url,
-        data        : p.data,
-        dataType    : p.dataType,
-        error       : (jqXHR) => {
+        method: p.method,
+        url: p.url,
+        data: p.data,
+        dataType: p.dataType,
+        error: (jqXHR) => {
             const response = jqXHR.responseText;
             
-            const {
-                statusText,
-                status,
-            } = jqXHR;
+            const {statusText, status} = jqXHR;
             
             const text = status === 404 ? response : statusText;
             
@@ -52,4 +48,3 @@ function replaceHash(url) {
      */
     return url.replace(/#/g, '%23');
 }
-

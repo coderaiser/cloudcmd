@@ -64,12 +64,10 @@ test('cloudcmd: client: view: html', (t) => {
         open,
     });
     
-    const {
-        _viewHtml,
-        _Config,
-    } = reRequire('.');
+    const {_viewHtml, _Config} = reRequire('.');
     
     const src = '/hello.html';
+    
     _viewHtml(src);
     
     global.CloudCmd = CloudCmd;
@@ -89,6 +87,7 @@ test('cloudcmd: client: view: createIframe', (t) => {
     const el = {
         addEventListener,
     };
+    
     const createElement = stub().returns(el);
     
     mockRequire('@cloudcmd/create-element', createElement);
@@ -114,6 +113,7 @@ test('cloudcmd: client: view: createIframe: returns', (t) => {
     const el = {
         addEventListener,
     };
+    
     const createElement = stub().returns(el);
     
     mockRequire('@cloudcmd/create-element', createElement);

@@ -42,4 +42,3 @@ module.exports.Markdown = {
     read: handleError(IO.Markdown.read),
     render: handleError(IO.Markdown.render),
 };
-

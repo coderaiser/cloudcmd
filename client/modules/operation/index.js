@@ -20,6 +20,7 @@ const getNextCurrentName = require('./get-next-current-name');
 const removeQuery = (a) => a.replace(/\?.*/, '');
 
 const Name = 'Operation';
+
 CloudCmd[Name] = exports;
 
 const {config} = CloudCmd;
@@ -61,10 +62,7 @@ module.exports.init = promisify((callback) => {
             if (config('dropbox'))
                 return callback();
             
-            const {
-                prefix,
-                prefixSocket,
-            } = CloudCmd;
+            const {prefix, prefixSocket} = CloudCmd;
             
             await loadAll();
             await initOperations(prefix, prefixSocket, callback);
@@ -94,7 +92,10 @@ const onConnect = currify((fn, operator) => {
 async function initOperations(prefix, socketPrefix, fn) {
     socketPrefix = `${socketPrefix}/fileop`;
     
-    const operator = await fileop({prefix, socketPrefix});
+    const operator = await fileop({
+        prefix,
+        socketPrefix,
+    });
     operator.on('connect', authCheck(operator, onConnect(fn)));
 }
 
@@ -109,7 +110,8 @@ function setOperations(operator) {
             to,
         });
         
-        operator.tar(from, to, names)
+        operator
+            .tar(from, to, names)
             .then(listen);
     };
     
@@ -123,7 +125,8 @@ function setOperations(operator) {
             to,
         });
         
-        operator.zip(from, to, names)
+        operator
+            .zip(from, to, names)
             .then(listen);
     };
     
@@ -137,7 +140,8 @@ function setOperations(operator) {
             from,
         });
         
-        operator.remove(from, files)
+        operator
+            .remove(from, files)
             .then(listen);
     };
     
@@ -151,7 +155,8 @@ function setOperations(operator) {
             names,
         });
         
-        operator.copy(from, to, names)
+        operator
+            .copy(from, to, names)
             .then(listen);
     };
     
@@ -164,7 +169,8 @@ function setOperations(operator) {
             to,
         });
         
-        operator.move(from, to, names)
+        operator
+            .move(from, to, names)
             .then(listen);
     };
     
@@ -178,7 +184,8 @@ function setOperations(operator) {
             to,
         });
         
-        operator.extract(from, to)
+        operator
+            .extract(from, to)
             .then(listen);
     };
 }
@@ -186,7 +193,7 @@ function setOperations(operator) {
 function getPacker(type) {
     if (type === 'zip')
         return packZipFn;
-    
+
     return packTarFn;
 }
 
@@ -274,6 +281,7 @@ async function promptDelete() {
         const type = getType(isDir) + ' ';
         
         const name = DOM.getCurrentName(current);
+        
         msg = msgAsk + msgSel + type + name + '?';
     }
     
@@ -333,20 +341,19 @@ async function _processFiles(options, data) {
     
     let names = [];
     
-    /* eslint no-multi-spaces: 0 */
     if (data) {
-        from        = data.from;
-        to          = data.to;
-        names       = data.names;
-        panel       = Info.panel;
+        from = data.from;
+        to = data.to;
+        names = data.names;
+        panel = Info.panel;
     } else {
-        from        = Info.dirPath;
-        to          = DOM.getNotCurrentDirPath();
-        selFiles    = DOM.getSelectedFiles();
-        names       = DOM.getFilenames(selFiles);
-        data        = {};
-        shouldAsk   = true;
-        panel       = Info.panelPassive;
+        from = Info.dirPath;
+        to = DOM.getNotCurrentDirPath();
+        selFiles = DOM.getSelectedFiles();
+        names = DOM.getFilenames(selFiles);
+        data = {};
+        shouldAsk = true;
+        panel = Info.panelPassive;
     }
     
     if (!names.length)
@@ -383,10 +390,14 @@ async function _processFiles(options, data) {
         if (ok && !shouldAsk || !sameName)
             return go();
         
-        const str = `"${ name }" already exist. Overwrite?`;
+        const str = `"${name}" already exist. Overwrite?`;
         const cancel = false;
         
-        Dialog.confirm(str, {cancel}).then(go);
+        Dialog
+            .confirm(str, {
+                cancel,
+            })
+            .then(go);
         
         function go() {
             showLoad();
@@ -400,10 +411,7 @@ async function _processFiles(options, data) {
             operation(files, async () => {
                 await DOM.Storage.remove(from);
                 
-                const {
-                    panel,
-                    panelPassive,
-                } = Info;
+                const {panel, panelPassive} = Info;
                 
                 if (!Info.isOnePanel)
                     CloudCmd.refresh({
@@ -429,10 +437,7 @@ function twopack(operation, type) {
     let fileFrom;
     let currentName = Info.name;
     
-    const {
-        path,
-        dirPath,
-    } = Info;
+    const {path, dirPath} = Info;
     
     const activeFiles = DOM.getActiveFiles();
     const names = DOM.getFilenames(activeFiles);
@@ -446,7 +451,7 @@ function twopack(operation, type) {
     case 'extract':
         op = extractFn;
         
-        fileFrom   = {
+        fileFrom = {
             from: path,
             to: dirPath,
         };
@@ -459,7 +464,7 @@ function twopack(operation, type) {
         op = getPacker(type);
         
         if (names.length > 1)
-            currentName  = Info.dir;
+            currentName = Info.dir;
         
         currentName += DOM.getPackerExt(type);
         
@@ -487,9 +492,9 @@ async function prompt(msg, to, names) {
     msg += ' ';
     
     if (names.length > 1)
-        msg     += `${n} file(s)`;
+        msg += `${n} file(s)`;
     else
-        msg     += `"${name}"`;
+        msg += `"${name}"`;
     
     msg += ' to';
     
@@ -507,4 +512,3 @@ async function loadAll() {
     
     Loaded = true;
 }
-

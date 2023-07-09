@@ -7,6 +7,7 @@ const columnsPath = '../../server/columns';
 
 test('columns: prod', (t) => {
     const {NODE_ENV} = process.env;
+    
     process.env.NODE_ENV = '';
     const columns = reRequire(columnsPath);
     
@@ -18,6 +19,7 @@ test('columns: prod', (t) => {
 
 test('columns: dev', (t) => {
     const {NODE_ENV} = process.env;
+    
     process.env.NODE_ENV = 'development';
     
     const columns = reRequire(columnsPath);
@@ -28,4 +30,3 @@ test('columns: dev', (t) => {
     t.equal(columns['name-size-date'], css);
     t.end();
 });
-

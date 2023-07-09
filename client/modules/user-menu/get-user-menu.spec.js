@@ -18,4 +18,3 @@ test('user-menu: getUserMenu', (t) => {
     t.equal(key, 'F2 - Rename file');
     t.end();
 });
-

@@ -26,4 +26,3 @@ test('cloudcmd: client: modules: operation: removeExtension: .bz2', (t) => {
     t.equal(removeExtension(fullName), name, 'should remove .bz2');
     t.end();
 });
-

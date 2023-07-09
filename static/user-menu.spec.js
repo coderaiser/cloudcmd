@@ -37,6 +37,7 @@ test('cloudcmd: static: user menu: R', (t) => {
     };
     
     const fn = defaultMenu[name];
+    
     fn({
         CloudCmd,
     });
@@ -48,7 +49,7 @@ test('cloudcmd: static: user menu: R', (t) => {
 test('cloudcmd: static: user menu: F6', async (t) => {
     const name = 'F6 - Copy URL to current file';
     const DOM = {};
-
+    
     const fn = defaultMenu[name];
     const [error] = await tryToCatch(fn, {
         DOM,
@@ -61,7 +62,7 @@ test('cloudcmd: static: user menu: F6', async (t) => {
 test('cloudcmd: static: user menu: Y', async (t) => {
     const name = 'Y - Convert YouTube to MP3';
     const DOM = {};
-
+    
     const fn = defaultMenu[name];
     const [error] = await tryToCatch(fn, {
         DOM,
@@ -74,7 +75,7 @@ test('cloudcmd: static: user menu: Y', async (t) => {
 test('cloudcmd: static: user menu: F', async (t) => {
     const name = 'F - Convert flac to mp3 [ffmpeg]';
     const DOM = {};
-
+    
     const fn = defaultMenu[name];
     const [error] = await tryToCatch(fn, {
         DOM,
@@ -87,7 +88,7 @@ test('cloudcmd: static: user menu: F', async (t) => {
 test('cloudcmd: static: user menu: M', async (t) => {
     const name = 'M - Convert mp4 to mp3 [ffmpeg]';
     const DOM = {};
-
+    
     const fn = defaultMenu[name];
     const [error] = await tryToCatch(fn, {
         DOM,
@@ -100,7 +101,7 @@ test('cloudcmd: static: user menu: M', async (t) => {
 test('cloudcmd: static: user menu: O', async (t) => {
     const name = 'O - Convert mov to mp3 [ffmpeg]';
     const DOM = {};
-
+    
     const fn = defaultMenu[name];
     const [error] = await tryToCatch(fn, {
         DOM,
@@ -131,10 +132,12 @@ test('cloudcmd: static: user menu: C: exists: ok', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
+    
     const {
         Dialog,
         getCurrentByName,
     } = DOM;
+    
     const {confirm} = Dialog;
     const {write} = DOM.IO;
     
@@ -156,21 +159,23 @@ test('cloudcmd: static: user menu: C: exists: cancel', async (t) => {
     const name = 'C - Create User Menu File';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
+    
     const {
         Dialog,
         getCurrentByName,
     } = DOM;
+    
     const {confirm} = Dialog;
     const {write} = DOM.IO;
-
+    
     getCurrentByName.returns({});
     confirm.resolves([Error('cancel')]);
-
+    
     await defaultMenu[name]({
         DOM,
         CloudCmd,
     });
-
+    
     t.notCalled(write);
     t.end();
 });
@@ -298,9 +303,7 @@ test('cloudcmd: static: user menu: compare directories: select names: compare', 
     const b = [1, 3];
     
     const result = _compare(a, b);
-    const expected = [
-        2,
-    ];
+    const expected = [2];
     
     t.deepEqual(result, expected);
     t.end();
@@ -342,4 +345,3 @@ function getCloudCmd() {
         },
     };
 }
-

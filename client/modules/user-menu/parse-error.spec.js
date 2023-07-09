@@ -24,7 +24,9 @@ test('user-menu: parse-error: stack', (t) => {
         at AsyncFunction.show (index.js:67)
     `;
     
-    const result = parseError({stack});
+    const result = parseError({
+        stack,
+    });
     const expected = [1, 2];
     
     t.deepEqual(result, expected);

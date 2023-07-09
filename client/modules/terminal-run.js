@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd, gritty */
-
 const {promisify} = require('es6-promisify');
 const tryToCatch = require('try-to-catch');
 const fullstore = require('fullstore');
@@ -14,10 +13,7 @@ const DOM = require('../dom');
 const Images = require('../dom/images');
 
 const {Dialog} = DOM;
-const {
-    Key,
-    config,
-} = CloudCmd;
+const {Key, config} = CloudCmd;
 
 CloudCmd.TerminalRun = exports;
 
@@ -152,4 +148,3 @@ function authCheck(spawn) {
         Dialog.alert('Wrong credentials!');
     });
 }
-

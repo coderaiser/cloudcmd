@@ -104,4 +104,3 @@ test('cloudcmd: rest: config: patch: save config', async (t) => {
     t.equal(configManager('editor'), 'dword', 'should change config file on patch');
     t.end();
 });
-

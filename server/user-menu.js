@@ -13,7 +13,6 @@ const {codeframe} = require('putout');
 const putout = threadIt(require.resolve('putout'));
 
 threadIt.init();
-
 // warm up worker cache
 transpile('');
 
@@ -44,9 +43,10 @@ async function onGET({req, res, menuName}) {
         return sendDefaultMenu(res);
     
     const {findUp} = await import('find-up');
-    const [errorFind, currentMenuPath] = await tryToCatch(findUp, [
-        menuName,
-    ], {cwd: dir});
+    
+    const [errorFind, currentMenuPath] = await tryToCatch(findUp, [menuName], {
+        cwd: dir,
+    });
     
     if (errorFind && errorFind.code !== 'ENOENT')
         return res
@@ -106,4 +106,3 @@ async function transpile(source) {
         ],
     });
 }
-

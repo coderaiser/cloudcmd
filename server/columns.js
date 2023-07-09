@@ -17,7 +17,8 @@ const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 const dist = getDist(isDev);
 const columnsDir = path.join(__dirname, '..', dist, 'columns');
 
-const names = fs.readdirSync(columnsDir)
+const names = fs
+    .readdirSync(columnsDir)
     .filter(not(isMap));
 
 const columns = readFilesSync(columnsDir, names, 'utf8');
@@ -26,4 +27,3 @@ module.exports = {
     ...columns,
     ...defaultColumns,
 };
-

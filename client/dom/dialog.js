@@ -24,4 +24,3 @@ module.exports.alert.noFiles = () => {
         cancel: false,
     });
 };
-

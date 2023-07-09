@@ -26,4 +26,3 @@ module.exports.clear = () => {
 module.exports.remove = (item) => {
     localStorage.removeItem(item);
 };
-

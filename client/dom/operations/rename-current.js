@@ -1,12 +1,12 @@
 'use strict';
 
 /* global CloudCmd */
-
 const capitalize = require('just-capitalize');
 
 const Dialog = require('../dialog');
 const Storage = require('../storage');
 const RESTful = require('../rest');
+
 const {
     isCurrentFile,
     getCurrentName,
@@ -60,4 +60,3 @@ module.exports = async (current) => {
     Storage.remove(dirPath);
     CloudCmd.refresh();
 };
-

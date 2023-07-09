@@ -20,7 +20,8 @@ function _middle(config, authentication, req, res, next) {
     if (!is)
         return next();
     
-    const success = () => next(/* success */);
+    const success = () => next();
+    
     return authentication.check(success)(req, res);
 }
 
@@ -38,4 +39,3 @@ function _check(config, username, password, callback) {
     
     callback(sameName && samePass);
 }
-

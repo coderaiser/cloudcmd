@@ -19,4 +19,3 @@ test('cloudcmd: rest: fs: path', async (t) => {
     t.equal(path, '/', 'should dir path be "/"');
     t.end();
 });
-

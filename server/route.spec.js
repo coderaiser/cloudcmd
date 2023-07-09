@@ -17,10 +17,9 @@ const {createConfigManager} = cloudcmd;
 
 const routePath = './route';
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
-const {
-    reRequire,
-    stopAll,
-} = mockRequire;
+
+const {reRequire, stopAll} = mockRequire;
+
 const defaultConfig = {
     auth: false,
     dropbox: false,
@@ -214,6 +213,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     const name = '"><svg onload=alert(3);>';
     const nameEncoded = '&quot;&gt;&lt;svg onload=alert(3);&gt;';
     const path = '/';
+    
     const files = [{
         name,
     }];
@@ -353,6 +353,7 @@ test('cloudcmd: route: no termianl: /fs', async (t) => {
     };
     
     const {request} = serveOnce(cloudcmd);
+    
     const {body} = await request.get('/fs', {
         options,
     });
@@ -407,6 +408,7 @@ test('cloudcmd: route: buttons: contact', async (t) => {
     };
     
     const {request} = serveOnce(cloudcmd);
+    
     const {body} = await request.get('/', {
         options,
     });
@@ -446,6 +448,7 @@ test('cloudcmd: route: content length', async (t) => {
 
 test('cloudcmd: route: read: root', async (t) => {
     const stream = Readable.from('hello');
+    
     stream.contentLength = 5;
     
     const read = stub().returns(stream);
@@ -468,15 +471,12 @@ test('cloudcmd: route: read: root', async (t) => {
     
     await request.get('/fs/route.js');
     
-    const expected = [
-        '/hello/route.js', {
-            root,
-        },
-    ];
+    const expected = ['/hello/route.js', {
+        root,
+    }];
     
     stopAll();
     
     t.calledWith(read, expected);
     t.end();
 });
-

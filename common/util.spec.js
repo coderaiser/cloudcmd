@@ -56,9 +56,7 @@ test('util: findObjByNameInArr: object', (t) => {
         name,
     };
     
-    const array = [
-        obj,
-    ];
+    const array = [obj];
     
     const result = findObjByNameInArr(array, name);
     
@@ -79,10 +77,8 @@ test('util: findObjByNameInArr: array', (t) => {
     };
     
     const array = [
-        name, [
-            obj,
-            item,
-        ],
+        name,
+        [obj, item],
     ];
     
     const result = findObjByNameInArr(array, name);
@@ -133,4 +129,3 @@ test('util: scope', (t) => {
     
     t.end();
 });
-

@@ -9,4 +9,3 @@ module.exports = (promise) => (...a) => {
         .then(success(fn))
         .catch(fn);
 };
-

@@ -111,4 +111,3 @@ test('cloudcmd: rest: rename: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
-

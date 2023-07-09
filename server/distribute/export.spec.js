@@ -68,4 +68,3 @@ test('distribute: export: config', async (t) => {
     t.equal(typeof data, 'object', 'should emit object');
     t.end();
 });
-

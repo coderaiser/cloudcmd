@@ -5,4 +5,3 @@ module.exports.runSelected = async (selectedItems, items, runUserMenu) => {
         await runUserMenu(items[selected]);
     }
 };
-

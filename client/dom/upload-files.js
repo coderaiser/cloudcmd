@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 const {eachSeries} = require('execon');
 const wraptile = require('wraptile');
 
@@ -55,13 +54,14 @@ function _loadFile(dir, n, file, callback) {
     
     ++i;
     
-    load.put(api + path, file)
+    load
+        .put(api + path, file)
         .on('error', showError)
         .on('end', callback)
         .on('progress', (count) => {
             const max = step(n);
             const value = (i - 1) * max + percent(count, 100, max);
-            
+        
             Images.show.load('top');
             Images.setProgress(Math.round(value));
         });
@@ -70,4 +70,3 @@ function _loadFile(dir, n, file, callback) {
 function showError({message}) {
     alert(message);
 }
-

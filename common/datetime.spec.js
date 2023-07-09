@@ -51,4 +51,3 @@ test('common: datetime: wrong args', (t) => {
     t.equal(error.message, 'date should be instanceof Date!', 'should throw');
     t.end();
 });
-

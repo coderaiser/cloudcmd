@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd, DOM*/
-
 CloudCmd.EditFile = exports;
 
 const Format = require('format-io');
@@ -11,10 +10,7 @@ const supermenu = require('supermenu');
 
 const Info = DOM.CurrentInfo;
 
-const {
-    Dialog,
-    Images,
-} = DOM;
+const {Dialog, Images} = DOM;
 
 const {config} = CloudCmd;
 
@@ -65,7 +61,8 @@ module.exports.show = async (options) => {
     
     Images.show.load();
     
-    CloudCmd.Edit
+    CloudCmd
+        .Edit
         .getEditor()
         .setOption('keyMap', 'default');
     
@@ -81,7 +78,8 @@ module.exports.show = async (options) => {
     
     setMsgChanged(name);
     
-    CloudCmd.Edit
+    CloudCmd
+        .Edit
         .getEditor()
         .setValueFirst(path, data)
         .setModeForPath(name)
@@ -133,7 +131,8 @@ function setMenu(event) {
         },
         
         afterClick: () => {
-            CloudCmd.Edit
+            CloudCmd
+                .Edit
                 .getEditor()
                 .focus();
         },
@@ -151,28 +150,28 @@ function getMenuData() {
     const editor = CloudCmd.Edit.getEditor();
     
     return {
-        'Save           Ctrl+S' : () => {
+        'Save           Ctrl+S': () => {
             editor.save();
         },
-        'Go To Line     Ctrl+G' : () => {
+        'Go To Line     Ctrl+G': () => {
             editor.goToLine();
         },
-        'Cut            Ctrl+X' : () => {
+        'Cut            Ctrl+X': () => {
             editor.cutToClipboard();
         },
-        'Copy           Ctrl+C' : () => {
+        'Copy           Ctrl+C': () => {
             editor.copyToClipboard();
         },
-        'Paste          Ctrl+V' : () => {
+        'Paste          Ctrl+V': () => {
             editor.pasteFromClipboard();
         },
-        'Delete         Del'    : () => {
+        'Delete         Del': () => {
             editor.remove('right');
         },
-        'Select All     Ctrl+A' : () => {
+        'Select All     Ctrl+A': () => {
             editor.selectAll();
         },
-        'Close          Esc'    : hide,
+        'Close          Esc': hide,
     };
 }
 
@@ -196,4 +195,3 @@ async function isChanged() {
     
     editor.save();
 }
-

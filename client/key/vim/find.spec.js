@@ -7,10 +7,7 @@ const {getDOM} = require('./globals.fixture');
 
 global.DOM = getDOM();
 
-const {
-    _next,
-    _previous,
-} = require(`${dir}find`);
+const {_next, _previous} = require(`${dir}find`);
 
 test('cloudcmd: client: vim: _next', (t) => {
     const result = _next(1, 2);
@@ -25,4 +22,3 @@ test('cloudcmd: client: vim: _previous', (t) => {
     t.equal(result, 1, 'should return 1');
     t.end();
 });
-

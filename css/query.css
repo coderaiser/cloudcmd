@@ -103,7 +103,7 @@
 }
 
 /* iphone 6 landscape */
-@media only screen and (min-device-width: 375px) and (max-device-width: 667px) and (orientation: landscape),
+@media only screen and (device-width >= 375px) and (device-width <= 667px) and (orientation: landscape),
     @media only screen and (max-height: 360px) and (max-width: 640px) {
     .fm {
         height: 55%;

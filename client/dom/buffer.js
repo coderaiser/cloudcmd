@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 const tryToPromiseAll = require('../../common/try-to-promise-all');
 const Storage = require('./storage');
 const DOM = require('./');
@@ -13,24 +12,25 @@ function BufferProto() {
     const CLASS = 'cut-file';
     const COPY = 'copy';
     const CUT = 'cut';
+    
     const Buffer = {
-        cut     : callIfEnabled.bind(null, cut),
-        copy    : callIfEnabled.bind(null, copy),
-        clear   : callIfEnabled.bind(null, clear),
-        paste   : callIfEnabled.bind(null, paste),
+        cut: callIfEnabled.bind(null, cut),
+        copy: callIfEnabled.bind(null, copy),
+        clear: callIfEnabled.bind(null, clear),
+        paste: callIfEnabled.bind(null, paste),
     };
     
     function showMessage(msg) {
         DOM.Dialog.alert(msg);
     }
-    
+
     function getNames() {
         const files = DOM.getActiveFiles();
         const names = DOM.getFilenames(files);
         
         return names;
     }
-    
+
     function addCutClass() {
         const files = DOM.getActiveFiles();
         
@@ -38,7 +38,7 @@ function BufferProto() {
             element.classList.add(CLASS);
         }
     }
-    
+
     function rmCutClass() {
         const files = DOM.getByClassAll(CLASS);
         
@@ -46,7 +46,7 @@ function BufferProto() {
             element.classList.remove(CLASS);
         }
     }
-    
+
     function callIfEnabled(callback) {
         const is = CloudCmd.config('buffer');
         
@@ -55,7 +55,7 @@ function BufferProto() {
         
         showMessage('Buffer disabled in config!');
     }
-    
+
     async function readBuffer() {
         const [e, cp, ct] = await tryToPromiseAll([
             Storage.getJson(COPY),
@@ -68,7 +68,7 @@ function BufferProto() {
             ct,
         ];
     }
-    
+
     async function copy() {
         const names = getNames();
         const from = Info.dirPath;
@@ -84,7 +84,7 @@ function BufferProto() {
             names,
         });
     }
-    
+
     async function cut() {
         const names = getNames();
         const from = Info.dirPath;
@@ -101,14 +101,14 @@ function BufferProto() {
             names,
         });
     }
-    
+
     async function clear() {
         await Storage.remove(COPY);
         await Storage.remove(CUT);
         
         rmCutClass();
     }
-    
+
     async function paste() {
         const [error, cp, ct] = await readBuffer();
         
@@ -131,7 +131,6 @@ function BufferProto() {
         
         await clear();
     }
-    
+
     return Buffer;
 }
-

@@ -31,6 +31,7 @@ module.exports = function setCurrentByChar(char, charStore) {
     const isTest = (a) => regExp.test(a);
     const isRoot = (a) => a === '..';
     const not = (f) => (a) => !f(a);
+    
     const setCurrent = (name) => {
         const byName = DOM.getCurrentByName(name);
         
@@ -57,4 +58,3 @@ module.exports = function setCurrentByChar(char, charStore) {
         charStore([char]);
     }
 };
-

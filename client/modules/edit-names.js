@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd, DOM */
-
 CloudCmd.EditNames = exports;
 
 const currify = require('currify');
@@ -45,7 +44,8 @@ module.exports.show = (options) => {
     
     DOM.Events.addKey(keyListener);
     
-    CloudCmd.Edit
+    CloudCmd
+        .Edit
         .getEditor()
         .setValueFirst('edit-names', names)
         .setMode()
@@ -65,7 +65,6 @@ async function keyListener(event) {
     
     if (ctrlMeta && event.keyCode === Key.S)
         hide();
-    
     else if (ctrlMeta && event.keyCode === Key.P) {
         const [, pattern] = await Dialog.prompt('Apply pattern:', '[n][e]');
         pattern && applyPattern(pattern);
@@ -107,7 +106,8 @@ function applyNames() {
     
     const root = CloudCmd.config('root');
     
-    Promise.resolve(root)
+    Promise
+        .resolve(root)
         .then(rename(dir, from, to))
         .then(refresh(to, nameIndex))
         .catch(alert);
@@ -115,7 +115,9 @@ function applyNames() {
 
 function _refresh(to, nameIndex, res) {
     if (res.status === 404)
-        return res.text().then(reject);
+        return res
+            .text()
+            .then(reject);
     
     const currentName = to[nameIndex];
     
@@ -127,7 +129,7 @@ function _refresh(to, nameIndex, res) {
 function getDir(root, dir) {
     if (root === '/')
         return dir;
-    
+
     return root + dir;
 }
 
@@ -158,6 +160,7 @@ function setMenu(event) {
         return;
     
     const editor = CloudCmd.Edit.getEditor();
+    
     const options = {
         beforeShow: (params) => {
             params.x -= 18;
@@ -170,29 +173,29 @@ function setMenu(event) {
     };
     
     const menuData = {
-        'Save           Ctrl+S' : () => {
+        'Save           Ctrl+S': () => {
             applyNames();
             hide();
         },
-        'Go To Line     Ctrl+G' : () => {
+        'Go To Line     Ctrl+G': () => {
             editor.goToLine();
         },
-        'Cut            Ctrl+X' : () => {
+        'Cut            Ctrl+X': () => {
             editor.cutToClipboard();
         },
-        'Copy           Ctrl+C' : () => {
+        'Copy           Ctrl+C': () => {
             editor.copyToClipboard();
         },
-        'Paste          Ctrl+V' : () => {
+        'Paste          Ctrl+V': () => {
             editor.pasteFromClipboard();
         },
-        'Delete         Del'    : () => {
+        'Delete         Del': () => {
             editor.remove('right');
         },
-        'Select All     Ctrl+A' : () => {
+        'Select All     Ctrl+A': () => {
             editor.selectAll();
         },
-        'Close          Esc'    : hide,
+        'Close          Esc': hide,
     };
     
     const element = CloudCmd.Edit.getElement();
@@ -215,4 +218,3 @@ async function isChanged() {
     const [, names] = await Dialog.confirm(msg);
     names && applyNames();
 }
-

@@ -17,4 +17,3 @@ function getExtension(name) {
     
     return getExt(name);
 }
-

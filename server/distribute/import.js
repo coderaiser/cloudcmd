@@ -27,6 +27,7 @@ const {entries} = Object;
 
 const equal = (a, b) => `${a}=${b}`;
 const append = currify((obj, a, b) => obj.value += b && equal(a, b) + '&');
+
 const wrapApply = (f, disconnect) => (status) => () => f(null, {
     status,
     disconnect,
@@ -85,6 +86,7 @@ module.exports = (config, options, fn) => {
     });
     
     const url = `${importUrl}/distribute?${query}`;
+    
     const socket = io.connect(url, {
         ...options,
         rejectUnauthorized: false,
@@ -97,48 +99,42 @@ module.exports = (config, options, fn) => {
     const statusStore = fullstore();
     const statusStoreWraped = wraptile(statusStore);
     
-    const onConfig = squad(
-        close,
-        logWraped(isLog, importStr, `config received from ${colorUrl}`),
-        statusStoreWraped('received'),
-        updateConfig(config),
-    );
+    const onConfig = squad(close, logWraped(isLog, importStr, `config received from ${colorUrl}`), statusStoreWraped('received'), updateConfig(config));
     
-    const onError = squad(
-        superFn('error'),
-        logWraped(isLog, config, importStr),
-        addUrl(colorUrl),
-        getMessage,
-    );
+    const onError = squad(superFn('error'), logWraped(isLog, config, importStr), addUrl(colorUrl), getMessage);
     
-    const onConnectError = squad(
-        superFn('connect_error'),
-        logWraped(isLog, importStr),
-        addUrl(colorUrl),
-        getDescription,
-    );
+    const onConnectError = squad(superFn('connect_error'), logWraped(isLog, importStr), addUrl(colorUrl), getDescription);
     
     const onConnect = emitAuth(importUrl, config, socket);
     const onAccept = logWraped(isLog, importStr, `${connectedStr} to ${colorUrl}`);
+    
     const onDisconnect = squad(
-        done(fn, statusStore),
-        logWraped(isLog, importStr, `${disconnectedStr} from ${colorUrl}`),
-        rmListeners(socket, {
-            onError,
-            onConnect,
-            onConfig,
-        }),
+        done(
+            fn,
+            statusStore,
+        ),
+        logWraped(
+            isLog,
+            importStr,
+            `${disconnectedStr} from ${colorUrl}`,
+        ),
+        rmListeners(
+            socket,
+            {
+                onError,
+                onConnect,
+                onConfig,
+            },
+        ),
     );
     
-    const onChange = squad(
-        logWraped(isLog, importStr),
-        config,
-    );
+    const onChange = squad(logWraped(isLog, importStr), config);
     
-    const onReject = squad(
-        superFn('reject'),
-        logWraped(isLog, importStr, tokenRejectedStr),
-    );
+    const onReject = squad(superFn('reject'), logWraped(
+        isLog,
+        importStr,
+        tokenRejectedStr,
+    ));
     
     socket.on('connect', onConnect);
     socket.on('accept', onAccept);
@@ -165,4 +161,3 @@ function toLine(obj) {
     
     return result.value.slice(start, backward * end);
 }
-

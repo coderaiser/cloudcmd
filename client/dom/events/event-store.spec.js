@@ -10,8 +10,13 @@ test('event-store: get', (t) => {
     
     eventStore.add(el, name, fn);
     const result = eventStore.get();
+    
     const expected = [
-        [el, name, fn],
+        [
+            el,
+            name,
+            fn,
+        ],
     ];
     
     t.deepEqual(result, expected);

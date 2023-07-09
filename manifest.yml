@@ -1,4 +1,3 @@
----
 applications:
   .:
     name: cloudcmd
@@ -7,7 +6,7 @@ applications:
       info:
         mem: 512M
         description: Node.js Application
-        exec:
+        exec: null
     url: ${name}.${target-base}
     mem: 128M
     instances: 2

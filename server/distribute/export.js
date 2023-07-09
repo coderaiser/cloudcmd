@@ -46,14 +46,12 @@ module.exports = (config, socket) => {
     const distributePrefix = `${prefix}/distribute`;
     const isLog = config('log');
     
-    const onError = squad(
-        logWraped(isLog, exportStr),
-        getMessage,
-    );
+    const onError = squad(logWraped(isLog, exportStr), getMessage);
     
     const onConnectError = squad(logWraped(isLog, exportStr), getDescription);
     
-    socket.of(distributePrefix)
+    socket
+        .of(distributePrefix)
         .on('connection', onConnection(push, config))
         .on('error', onError)
         .on('connect_error', onConnectError);
@@ -90,7 +88,11 @@ const connectPush = wraptile((push, config, socket) => {
     const host = getHost(socket);
     const subscription = push(socket);
     
-    socket.on('disconnect', onDisconnect(subscription, config, host));
+    socket.on('disconnect', onDisconnect(
+        subscription,
+        config,
+        host,
+    ));
     
     log(isLog, exportStr, `${connectedStr} to ${host}`);
     socket.emit('config', omitConfig(config('*')));
@@ -125,4 +127,3 @@ const onDisconnect = wraptile((subscription, config, host) => {
     config.unsubscribe(subscription);
     log(isLog, exportStr, `${disconnectedStr} from ${host}`);
 });
-

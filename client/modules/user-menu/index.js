@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd, DOM */
-
 require('../../../css/user-menu.css');
 
 const currify = require('currify');
@@ -25,6 +24,7 @@ const loadCSS = load.css;
 const sourceStore = fullstore();
 
 const Name = 'UserMenu';
+
 CloudCmd[Name] = module.exports;
 
 const {Key} = CloudCmd;
@@ -52,7 +52,10 @@ async function show() {
     Images.hide();
     
     if (error)
-        return Dialog.alert(getCodeFrame({error, source}));
+        return Dialog.alert(getCodeFrame({
+            error,
+            source,
+        }));
     
     sourceStore(source);
     
@@ -118,10 +121,7 @@ const onButtonClick = wraptile(async (items, {value}) => {
 });
 
 const onKeyDown = currify(async ({keys, userMenu}, e) => {
-    const {
-        keyCode,
-        target,
-    } = e;
+    const {keyCode, target} = e;
     
     const keyName = e.key.toUpperCase();
     
@@ -156,6 +156,7 @@ const runUserMenu = async (fn) => {
         return;
     
     const source = sourceStore();
+    
     return Dialog.alert(getCodeFrame({
         error,
         source,
@@ -169,6 +170,7 @@ function getCodeFrame({error, source}) {
         return error.message;
     
     const [line, column] = parseError(error);
+    
     const start = {
         line,
         column,
@@ -185,4 +187,3 @@ function getCodeFrame({error, source}) {
     
     return `<pre>${frame}</pre>`;
 }
-

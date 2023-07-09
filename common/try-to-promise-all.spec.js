@@ -12,7 +12,10 @@ test('commons: try-to-promise-all', async (t) => {
         resolve('b'),
     ]);
     
-    const expected = ['a', 'b'];
+    const expected = [
+        'a',
+        'b',
+    ];
     
     t.deepEqual(result, expected);
     t.end();
@@ -26,4 +29,3 @@ test('commons: try-to-promise-all: error', async (t) => {
     t.equal(e, 'a');
     t.end();
 });
-

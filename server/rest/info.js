@@ -14,4 +14,3 @@ module.exports = (prefix) => ({
     prefix,
     memory: getMemory(),
 });
-

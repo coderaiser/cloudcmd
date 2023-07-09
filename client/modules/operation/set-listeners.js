@@ -1,16 +1,12 @@
 'use strict';
 
 /* global DOM */
-
 const forEachKey = require('for-each-key');
 
 const wraptile = require('wraptile');
 const format = require('./format');
 
-const {
-    Dialog,
-    Images,
-} = DOM;
+const {Dialog, Images} = DOM;
 
 module.exports = (options) => (emitter) => {
     const {
@@ -28,6 +24,7 @@ module.exports = (options) => (emitter) => {
         emitter.abort();
         
         const msg = `${operation} aborted`;
+        
         lastError = true;
         
         Dialog.alert(msg, {
@@ -85,4 +82,3 @@ module.exports = (options) => (emitter) => {
     
     forEachKey(on, listeners);
 };
-

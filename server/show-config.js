@@ -8,7 +8,12 @@ const {
 module.exports = (config) => {
     check(config);
     
-    const data = Object.keys(config).map((name) => [name, config[name]]);
+    const data = Object
+        .keys(config)
+        .map((name) => [
+            name,
+            config[name],
+        ]);
     
     if (!data.length)
         return '';
@@ -31,4 +36,3 @@ function check(config) {
     if (typeof config !== 'object')
         throw Error('config should be an object!');
 }
-

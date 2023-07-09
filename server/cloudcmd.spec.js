@@ -2,10 +2,8 @@
 
 const path = require('path');
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const {reRequire} = require('mock-require');
 
 const DIR = './';
@@ -78,6 +76,7 @@ test('cloudcmd: getPrefix: function: empty', (t) => {
 
 test('cloudcmd: replaceDist', (t) => {
     const {NODE_ENV} = process.env;
+    
     process.env.NODE_ENV = 'development';
     
     const {_replaceDist} = reRequire(cloudcmdPath);
@@ -188,6 +187,7 @@ test('cloudcmd: sw', async (t) => {
 
 function cleanNodeEnv() {
     const {NODE_ENV} = process.env;
+    
     process.env.NODE_ENV = '';
     
     const reset = () => {
@@ -196,4 +196,3 @@ function cleanNodeEnv() {
     
     return reset;
 }
-

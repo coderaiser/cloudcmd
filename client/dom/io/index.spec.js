@@ -1,9 +1,7 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const mockRequire = require('mock-require');
 
 const {reRequire, stopAll} = mockRequire;

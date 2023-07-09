@@ -39,4 +39,3 @@ function onKey({keyCode}) {
     if (keyCode === Key.ESC)
         hide();
 }
-

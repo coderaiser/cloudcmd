@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 CloudCmd.EditNamesVim = exports;
 
 const Events = require('../dom/events');
@@ -22,7 +21,8 @@ module.exports.init = async () => {
 module.exports.show = () => {
     Events.addKey(listener);
     
-    CloudCmd.EditNames
+    CloudCmd
+        .EditNames
         .show(ConfigView)
         .getEditor()
         .setKeyMap('vim');
@@ -35,14 +35,10 @@ function hide() {
 }
 
 function listener(event) {
-    const {
-        keyCode,
-        shiftKey,
-    } = event;
+    const {keyCode, shiftKey} = event;
     
     if (shiftKey && keyCode === Key.ESC) {
         event.preventDefault();
         hide();
     }
 }
-

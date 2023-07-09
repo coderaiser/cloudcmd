@@ -5,13 +5,11 @@ import {promisify} from 'util';
 import tryToCatch from 'try-to-catch';
 import {createSimport} from 'simport';
 import parse from 'yargs-parser';
-
 import exit from '../server/exit.js';
 import {
     createConfig,
     configPath,
 } from '../server/config.js';
-
 import env from '../server/env.js';
 import prefixer from '../server/prefixer.js';
 
@@ -26,7 +24,7 @@ const simport = createSimport(import.meta.url);
 const choose = (a, b) => {
     if (a === undefined)
         return b;
-    
+
     return a;
 };
 
@@ -39,7 +37,7 @@ const DIR_SERVER = '../server/';
 const maybeRoot = (a) => {
     if (a === '.')
         return process.cwd();
-    
+
     return a;
 };
 
@@ -100,29 +98,29 @@ const yargsOptions = {
         'dropbox',
     ],
     default: {
-        'server'      : true,
-        'name'        : choose(env('name'), config('name')),
-        'auth'        : choose(env.bool('auth'), config('auth')),
-        'port'        : config('port'),
-        'online'      : config('online'),
-        'open'        : choose(env.bool('open'), config('open')),
-        'editor'      : env('editor') || config('editor'),
-        'packer'      : config('packer') || 'tar',
-        'zip'         : config('zip'),
-        'username'    : env('username') || config('username'),
-        'root'        : choose(env('root'), config('root')),
-        'prefix'      : choose(env('prefix'), config('prefix')),
-        'console'     : choose(env.bool('console'), config('console')),
-        'contact'     : choose(env.bool('contact'), config('contact')),
-        'terminal'    : choose(env.bool('terminal'), config('terminal')),
-        'columns'     : env('columns') || config('columns') || '',
-        'vim'         : choose(env.bool('vim'), config('vim')),
-        'log'         : config('log'),
+        'server': true,
+        'name': choose(env('name'), config('name')),
+        'auth': choose(env.bool('auth'), config('auth')),
+        'port': config('port'),
+        'online': config('online'),
+        'open': choose(env.bool('open'), config('open')),
+        'editor': env('editor') || config('editor'),
+        'packer': config('packer') || 'tar',
+        'zip': config('zip'),
+        'username': env('username') || config('username'),
+        'root': choose(env('root'), config('root')),
+        'prefix': choose(env('prefix'), config('prefix')),
+        'console': choose(env.bool('console'), config('console')),
+        'contact': choose(env.bool('contact'), config('contact')),
+        'terminal': choose(env.bool('terminal'), config('terminal')),
+        'columns': env('columns') || config('columns') || '',
+        'vim': choose(env.bool('vim'), config('vim')),
+        'log': config('log'),
         
         'import-url': env('import_url') || config('importUrl'),
         'import-listen': choose(env.bool('import_listen'), config('importListen')),
-        'import'      : choose(env.bool('import'), config('import')),
-        'export'      : choose(env.bool('export'), config('export')),
+        'import': choose(env.bool('import'), config('import')),
+        'export': choose(env.bool('export'), config('export')),
         
         'prefix-socket': config('prefixSocket'),
         'show-file-name': choose(env.bool('show_file_name'), config('showFileName')),
@@ -348,4 +346,3 @@ async function showUpdateInfo(version) {
     
     console.log('%s %s', latest, current);
 }
-

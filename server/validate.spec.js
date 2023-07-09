@@ -2,10 +2,8 @@
 
 const fs = require('fs');
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const tryCatch = require('try-catch');
 const mockRequire = require('mock-require');
 const dir = '..';
@@ -25,7 +23,9 @@ test('validate: root: bad', (t) => {
         root: Math.random(),
     };
     
-    const [e] = tryCatch(cloudcmd, {config});
+    const [e] = tryCatch(cloudcmd, {
+        config,
+    });
     
     t.equal(e.message, 'dir should be a string', 'should throw');
     t.end();
@@ -53,6 +53,7 @@ test('validate: root: stat', (t) => {
     const {statSync} = fs;
     
     const error = 'ENOENT';
+    
     fs.statSync = () => {
         throw Error(error);
     };
@@ -64,6 +65,7 @@ test('validate: root: stat', (t) => {
     root('hello', fn);
     
     const msg = 'cloudcmd --root: %s';
+    
     fs.statSync = statSync;
     
     stopAll();
@@ -137,4 +139,3 @@ test('validate: columns: wrong', (t) => {
     t.calledWith(fn, [msg], 'should call exit');
     t.end();
 });
-

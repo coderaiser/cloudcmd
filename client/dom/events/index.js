@@ -11,7 +11,7 @@ function EventsProto() {
     const getEventOptions = (eventName) => {
         if (eventName !== 'touchstart')
             return false;
-        
+
         return {
             passive: true,
         };
@@ -35,12 +35,7 @@ function EventsProto() {
             if (!type.endsWith('element'))
                 throw Error(`unknown eventName: ${type}`);
             
-            parseArgs(
-                args[EVENT_NAME],
-                args[ELEMENT],
-                listener,
-                callback,
-            );
+            parseArgs(args[EVENT_NAME], args[ELEMENT], listener, callback);
             break;
         
         case 'string':
@@ -62,33 +57,25 @@ function EventsProto() {
             break;
         
         case 'array':
+            
             for (const name of eventName) {
-                parseArgs(
-                    name,
-                    element,
-                    listener,
-                    callback,
-                );
+                parseArgs(name, element, listener, callback);
             }
             
             break;
         
         case 'object':
+            
             for (const name of Object.keys(eventName)) {
                 const eventListener = eventName[name];
                 
-                parseArgs(
-                    name,
-                    element,
-                    eventListener,
-                    callback,
-                );
+                parseArgs(name, element, eventListener, callback);
             }
             
             break;
         }
     }
-    
+
     /**
      * safe add event listener
      *
@@ -108,7 +95,7 @@ function EventsProto() {
         
         return Events;
     };
-    
+
     /**
      * safe add event listener
      *
@@ -131,7 +118,7 @@ function EventsProto() {
         
         return Events;
     };
-    
+
     /**
      * safe remove event listener
      *
@@ -148,7 +135,7 @@ function EventsProto() {
         
         return Events;
     };
-    
+
     /**
      * remove all added event listeners
      *
@@ -162,7 +149,7 @@ function EventsProto() {
         
         EventStore.clear();
     };
-    
+
     /**
      * safe add event keydown listener
      *
@@ -170,11 +157,14 @@ function EventsProto() {
      */
     this.addKey = function(...argsArr) {
         const name = 'keydown';
-        const args = [name, ...argsArr];
+        const args = [
+            name,
+            ...argsArr,
+        ];
         
         return Events.add(...args);
     };
-    
+
     /**
      * safe remove event click listener
      *
@@ -182,11 +172,14 @@ function EventsProto() {
      */
     this.rmKey = function(...argsArr) {
         const name = 'keydown';
-        const args = [name, ...argsArr];
+        const args = [
+            name,
+            ...argsArr,
+        ];
         
         return Events.remove(...args);
     };
-    
+
     /**
      * safe add event click listener
      *
@@ -194,11 +187,14 @@ function EventsProto() {
      */
     this.addClick = function(...argsArr) {
         const name = 'click';
-        const args = [name, ...argsArr];
+        const args = [
+            name,
+            ...argsArr,
+        ];
         
         return Events.add(...args);
     };
-    
+
     /**
      * safe remove event click listener
      *
@@ -206,18 +202,24 @@ function EventsProto() {
      */
     this.rmClick = function(...argsArr) {
         const name = 'click';
-        const args = [name, ...argsArr];
+        const args = [
+            name,
+            ...argsArr,
+        ];
         
         return Events.remove(...args);
     };
     
     this.addContextMenu = function(...argsArr) {
         const name = 'contextmenu';
-        const args = [name, ...argsArr];
+        const args = [
+            name,
+            ...argsArr,
+        ];
         
         return Events.add(...args);
     };
-    
+
     /**
      * safe add event click listener
      *
@@ -225,11 +227,14 @@ function EventsProto() {
      */
     this.addError = function(...argsArr) {
         const name = 'error';
-        const args = [name, ...argsArr];
+        const args = [
+            name,
+            ...argsArr,
+        ];
         
         return Events.add(...args);
     };
-    
+
     /**
      * safe add load click listener
      *
@@ -237,7 +242,10 @@ function EventsProto() {
      */
     this.addLoad = function(...argsArr) {
         const name = 'load';
-        const args = [name, ...argsArr];
+        const args = [
+            name,
+            ...argsArr,
+        ];
         
         return Events.add(...args);
     };
@@ -247,4 +255,3 @@ function EventsProto() {
             throw Error('type could not be empty!');
     }
 }
-

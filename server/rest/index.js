@@ -29,6 +29,7 @@ const {apiURL} = CloudFunc;
 
 const UserError = (msg) => {
     const error = Error(msg);
+    
     error.code = 'EUSER';
     
     return error;
@@ -100,7 +101,8 @@ function sendData(params, config, callback) {
         return onGET(params, config, callback);
     
     case 'PUT':
-        return pullout(p.request)
+        return pullout(p
+            .request)
             .then((body) => {
                 onPUT({
                     name: p.name,
@@ -147,7 +149,7 @@ function onGET(params, config, callback) {
 function getPackReg(packer) {
     if (packer === 'zip')
         return /\.zip$/;
-    
+
     return /\.tar\.gz$/;
 }
 
@@ -155,6 +157,7 @@ function streamPack(cmd, response, packer) {
     const noop = () => {};
     const filename = cmd.replace(getPackReg(packer), '');
     const dir = path.dirname(filename);
+    
     const names = [
         path.basename(filename),
     ];
@@ -165,7 +168,7 @@ function streamPack(cmd, response, packer) {
 function getCMD(cmd) {
     if (cmd[0] === '/')
         return cmd.slice(1);
-    
+
     return cmd;
 }
 
@@ -217,7 +220,9 @@ function onPUT({name, config, body}, callback) {
         return moveFiles(fromRooted, toRooted, names)
             .on('error', fn)
             .on('end', fn);
-    } case 'rename':
+    }
+    
+    case 'rename':
         return rename(rootDir, files.from, files.to, callback);
     
     case 'copy':
@@ -329,7 +334,7 @@ function operation(op, packer, from, to, names, fn) {
     
     const [name] = names;
     pack.on('progress', (count) => {
-        process.stdout.write(`\r${ op } "${ name }": ${ count }%`);
+        process.stdout.write(`\r${op} "${name}": ${count}%`);
     });
     
     pack.on('end', () => {
@@ -403,4 +408,3 @@ function checkPut(name, body, callback) {
     if (typeof callback !== 'function')
         throw Error('callback should be a function!');
 }
-

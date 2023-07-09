@@ -39,4 +39,3 @@ function crc(a) {
         .split('')
         .reduce(add, 0);
 }
-

@@ -13,4 +13,3 @@ module.exports = (modules) => {
         res.send(result);
     };
 };
-

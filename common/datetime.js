@@ -15,7 +15,7 @@ module.exports = (date) => {
 const addZero = (a) => {
     if (a > 9)
         return a;
-    
+
     return `0${a}`;
 };
 

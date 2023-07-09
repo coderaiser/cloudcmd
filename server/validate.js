@@ -50,4 +50,3 @@ module.exports.columns = (type) => {
     if (!all.includes(type))
         exit(`cloudcmd --columns: can be only one of: ${names}`);
 };
-

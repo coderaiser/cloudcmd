@@ -38,7 +38,7 @@ module.exports.getCloudCmd = () => {
     const show = () => {};
     
     return {
-        Operation:  {
+        Operation: {
             show,
         },
         
@@ -46,4 +46,3 @@ module.exports.getCloudCmd = () => {
         _config: noop,
     };
 };
-

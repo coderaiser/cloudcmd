@@ -5,10 +5,8 @@ const tryCatch = require('try-catch');
 
 const DIR = `${__dirname}/../../`;
 const COMMONDIR = `${DIR}common/`;
-const {
-    time,
-    timeEnd,
-} = require(`${COMMONDIR}util`);
+
+const {time, timeEnd} = require(`${COMMONDIR}util`);
 
 const CloudFuncPath = `${COMMONDIR}cloudfunc`;
 
@@ -53,17 +51,17 @@ const data = {
 };
 
 let Expect = '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
-        '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"' +
-        ' title="copy path (Ctrl+P)">' +
-        '</span>' +
-        '<a data-name="js-refresh" href="/fs/etc/X11/" ' +
-        'class="path-icon icon-refresh" title="refresh (Ctrl+R)"></a>' +
-        '<span data-name="js-links" class=links>' +
-            '<a data-name="js-path-link" href="/fs/" title="/">/</a>' +
-            '<a data-name="js-path-link" href="/fs/etc/" title="/etc/">' +
-                'etc' +
-            '</a>/X11/' +
-        '</span>' +
+    '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"' +
+    ' title="copy path (Ctrl+P)">' +
+    '</span>' +
+    '<a data-name="js-refresh" href="/fs/etc/X11/" ' +
+    'class="path-icon icon-refresh" title="refresh (Ctrl+R)"></a>' +
+    '<span data-name="js-links" class=links>' +
+    '<a data-name="js-path-link" href="/fs/" title="/">/</a>' +
+    '<a data-name="js-path-link" href="/fs/etc/" title="/etc/">' +
+    'etc' +
+    '</a>/X11/' +
+    '</span>' +
     '</div>';
 
 test('cloudfunc: render', (t) => {
@@ -83,22 +81,18 @@ test('cloudfunc: render', (t) => {
         .split('')
         .some((item, number) => {
             const ret = result[number] !== item;
-            
+        
             if (ret) {
                 i = number;
             }
-            
+
             return ret;
         });
     
     timeEnd('CloudFunc.buildFromJSON');
     
     if (isNotOk) {
-        console.log(
-            `Error in char number: ${i}\n`,
-            `Expect: ${Expect.substr(i)}\n`,
-            `Result: ${result.substr(i)}`,
-        );
+        console.log(`Error in char number: ${i}\n`, `Expect: ${Expect.substr(i)}\n`, `Result: ${result.substr(i)}`);
         
         console.log('buildFromJSON: Not OK');
     }
@@ -208,4 +202,3 @@ test('cloudfunc: getDotDot: two levels deep', (t) => {
     t.equal(dotDot, '/home', 'should return up level');
     t.end();
 });
-

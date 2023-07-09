@@ -1,17 +1,12 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
 
 const root = '../';
 const configPath = './config';
 
-const {
-    createConfig,
-    _cryptoPass,
-} = require(configPath);
+const {createConfig, _cryptoPass} = require(configPath);
+
 const {apiURL} = require(`${root}common/cloudfunc`);
 
 const fixture = require('./config.fixture');
@@ -29,7 +24,9 @@ test('config: manage: get', async (t) => {
     const configManager = createConfig();
     
     const {done} = await connect({
-        config: {editor},
+        config: {
+            editor,
+        },
         configManager,
     });
     
@@ -45,7 +42,9 @@ test('config: manage: get: config', async (t) => {
         editor,
     };
     
-    const {done} = await connect({config: conf});
+    const {done} = await connect({
+        config: conf,
+    });
     
     config('editor', 'dword');
     done();
@@ -98,6 +97,7 @@ test('config: middle: no', (t) => {
     const res = null;
     const url = `${apiURL}/config`;
     const method = 'POST';
+    
     const req = {
         url,
         method,
@@ -108,4 +108,3 @@ test('config: middle: no', (t) => {
     t.ok(next.calledWith(), 'should call next');
     t.end();
 });
-

@@ -44,18 +44,17 @@ const rules = clean([
         exclude: /node_modules/,
         loader: 'babel-loader',
         options,
-    }]);
+    },
+]);
 
 const plugins = [
     new EnvironmentPlugin({
         NODE_ENV,
     }),
-    
     new ServiceWorkerWebpackPlugin({
         entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
         excludes: ['*'],
     }),
-    
     new WebpackBar(),
 ];
 
@@ -102,9 +101,7 @@ module.exports = {
         devtoolModuleFilenameTemplate,
         publicPath: '/dist/',
     },
-    externals: [
-        externals,
-    ],
+    externals: [externals],
     module: {
         rules,
         noParse,
@@ -132,4 +129,3 @@ function devtoolModuleFilenameTemplate(info) {
     const resource = info.absoluteResourcePath.replace(rootDir + sep, '');
     return `file://cloudcmd/${resource}`;
 }
-

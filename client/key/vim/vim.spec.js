@@ -1,9 +1,6 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
 
 const vim = require('./vim');
 
@@ -64,4 +61,3 @@ test('vim: b', (t) => {
     t.calledWith(movePrevious, [expected], 'should call movePrevious');
     t.end();
 });
-

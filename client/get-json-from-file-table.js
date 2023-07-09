@@ -1,7 +1,6 @@
 'use strict';
 
 /* global DOM */
-
 const Info = DOM.CurrentInfo;
 
 /**
@@ -46,4 +45,3 @@ module.exports = () => {
     
     return fileTable;
 };
-

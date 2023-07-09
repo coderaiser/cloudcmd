@@ -16,15 +16,16 @@ module.exports.escapeRegExp = (str) => {
  */
 module.exports.getRegExp = (wildcard) => {
     const escaped = `^${wildcard // search from start of line
+
         .replace(/\./g, '\\.')
         .replace(/\*/g, '.*')
-        .replace('?', '.?')}$`; // search to end of line
+        .replace('?', '.?')}$`;
     
+    // search to end of line
     return RegExp(escaped);
 };
 
 module.exports.exec = exec;
-
 /**
  * function gets file extension
  *
@@ -100,4 +101,3 @@ module.exports.time = (name) => {
 module.exports.timeEnd = (name) => {
     exec.ifExist(console, 'timeEnd', [name]);
 };
-

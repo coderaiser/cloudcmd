@@ -4,7 +4,6 @@
 /* global Util */
 /* global DOM */
 /* global Console */
-
 CloudCmd.Konsole = exports;
 
 const exec = require('execon');
@@ -14,10 +13,7 @@ const loadJS = require('load.js').js;
 const createElement = require('@cloudcmd/create-element');
 
 const Images = require('../dom/images');
-const {
-    Dialog,
-    CurrentInfo:Info,
-} = DOM;
+const {Dialog, CurrentInfo: Info} = DOM;
 
 const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
 
@@ -147,4 +143,3 @@ const load = async () => {
             cancel: false,
         });
 };
-

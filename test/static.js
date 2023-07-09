@@ -11,6 +11,7 @@ const config = {
 const {request} = require('serve-once')(cloudcmd, {
     config,
 });
+
 const configFn = cloudcmd.createConfigManager();
 
 test('cloudcmd: static', async (t) => {
@@ -42,6 +43,7 @@ test('cloudcmd: prefix: wrong', async (t) => {
     };
     
     const name = Math.random();
+    
     const {status} = await request.get(`/${name}`, {
         options,
     });
@@ -65,6 +67,7 @@ test('cloudcmd: /cloudcmd.js: auth: access denied', async (t) => {
     const config = {
         auth: true,
     };
+    
     const options = {
         config,
     };
@@ -84,11 +87,14 @@ test('cloudcmd: /cloudcmd.js: auth: no password', async (t) => {
         auth: true,
         username,
     };
+    
     const options = {
         config,
     };
     
-    const encoded = Buffer.from(`${username}:`).toString('base64');
+    const encoded = Buffer
+        .from(`${username}:`)
+        .toString('base64');
     const authorization = `Basic ${encoded}`;
     
     const {status} = await request.get(`/${name}`, {
@@ -107,11 +113,13 @@ test('cloudcmd: /cloudcmd.js: auth: access granted', async (t) => {
     const username = 'hello';
     const password = 'world';
     const algo = configFn('algo');
+    
     const config = {
         auth: true,
         username,
         password: criton(password, algo),
     };
+    
     const options = {
         config,
     };
@@ -140,4 +148,3 @@ test('cloudcmd: /logout', async (t) => {
     t.equal(status, 401, 'should return 401');
     t.end();
 });
-

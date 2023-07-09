@@ -52,12 +52,10 @@ const execAll = currify((funcs, event) => {
 
 const Info = DOM.CurrentInfo;
 const {Events} = DOM;
+
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
-    click: execAll([
-        onClick,
-        unselect,
-    ]),
+    click: execAll([onClick, unselect]),
     dragstart: exec.with(execIfNotUL, onDragStart),
     dblclick: exec.with(execIfNotUL, onDblClick),
     touchstart: exec.with(execIfNotUL, onTouch),
@@ -79,8 +77,7 @@ function header() {
         if (parent.dataset.name !== 'js-fm-header')
             return;
         
-        const name = (el.dataset.name || '')
-            .replace('js-', '');
+        const name = (el.dataset.name || '').replace('js-', '');
         
         if (!/^(name|size|date)$/.test(name))
             return;
@@ -97,7 +94,7 @@ function header() {
 function getPath(el, path = []) {
     if (!el)
         return path;
-    
+
     return getPath(el.parentElement, path.concat(el));
 }
 
@@ -124,19 +121,19 @@ module.exports.initKeysPanel = () => {
         };
         
         const clickFuncs = {
-            'f1'        : CloudCmd.Help.show,
-            'f2'        : CloudCmd.UserMenu.show,
-            'f3'        : CloudCmd.View.show,
-            'f4'        : CloudCmd.EditFile.show,
-            'f5'        : operation('copy'),
-            'f6'        : operation('move'),
-            'f7'        : DOM.promptNewDir,
-            'f8'        : operation('delete'),
-            'f9'        : CloudCmd.Menu.show,
-            'f10'       : CloudCmd.Config.show,
-            '~'         : CloudCmd.Konsole.show,
-            'shift~'    : CloudCmd.Terminal.show,
-            'contact'   : CloudCmd.Contact.show,
+            'f1': CloudCmd.Help.show,
+            'f2': CloudCmd.UserMenu.show,
+            'f3': CloudCmd.View.show,
+            'f4': CloudCmd.EditFile.show,
+            'f5': operation('copy'),
+            'f6': operation('move'),
+            'f7': DOM.promptNewDir,
+            'f8': operation('delete'),
+            'f9': CloudCmd.Menu.show,
+            'f10': CloudCmd.Config.show,
+            '~': CloudCmd.Konsole.show,
+            'shift~': CloudCmd.Terminal.show,
+            'contact': CloudCmd.Contact.show,
         };
         
         exec(clickFuncs[id]);
@@ -146,7 +143,7 @@ module.exports.initKeysPanel = () => {
 const getPanel = (side) => {
     if (!itype.string(side))
         return side;
-    
+
     return DOM.getByDataName(`js-${side}`);
 };
 
@@ -182,10 +179,8 @@ function decodePath(path) {
     const {prefix} = CloudCmd;
     const prefixReg = RegExp('^' + prefix + FS);
     
-    return decodeURI(path)
-        .replace(url, '')
-        .replace(prefixReg, '')
-    // browser doesn't replace % -> %25% do it for him
+    return decodeURI(path).replace(url, '')
+        .replace(prefixReg, '') // browser doesn't replace % -> %25% do it for him
         .replace('%%', '%25%')
         .replace(NBSP_REG, SPACE) || '/';
 }
@@ -219,8 +214,12 @@ async function onPathElementClick(panel, event) {
 }
 
 function copyPath(el) {
-    clipboard.writeText(el.parentElement.title)
-        .then(CloudCmd.log)
+    clipboard
+        .writeText(el
+            .parentElement
+            .title)
+        .then(CloudCmd
+            .log)
         .catch(CloudCmd.log);
 }
 
@@ -308,12 +307,8 @@ function onDragStart(event) {
         link.href = prefixURL + '/pack' + Info.path + EXT;
     }
     
-    event.dataTransfer.setData(
-        'DownloadURL',
-        'application/octet-stream' + ':' +
-        name + ':' +
-        link,
-    );
+    event.dataTransfer.setData('DownloadURL', 'application/octet-stream' + ':' + name +
+    ':' + link);
 }
 
 function getLIElement(element) {
@@ -397,10 +392,7 @@ function dragndrop() {
     };
     
     const onDrop = (event) => {
-        const {
-            files,
-            items,
-        } = event.dataTransfer;
+        const {files, items} = event.dataTransfer;
         
         const {length: filesCount} = files;
         
@@ -410,7 +402,9 @@ function dragndrop() {
             return uploadFiles(files);
         
         const isFile = (item) => item.kind === 'file';
-        const dirFiles = Array.from(items).filter(isFile);
+        const dirFiles = Array
+            .from(items)
+            .filter(isFile);
         
         if (dirFiles.length)
             return DOM.uploadDirectory(dirFiles);
@@ -467,6 +461,7 @@ function pop() {
             return CloudCmd.route(location.hash);
         
         const history = false;
+        
         await CloudCmd.changeDir(path, {
             history,
         });
@@ -495,4 +490,3 @@ function resize() {
         DOM.changePanel();
     });
 }
-

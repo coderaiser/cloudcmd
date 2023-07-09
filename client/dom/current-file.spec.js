@@ -1,9 +1,7 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const {create} = require('auto-globals');
 const wraptile = require('wraptile');
 const currentFile = require('./current-file');
@@ -13,10 +11,7 @@ const returns = wraptile(id);
 const {_CURRENT_FILE} = currentFile;
 
 test('current-file: setCurrentName: setAttribute', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
@@ -35,10 +30,7 @@ test('current-file: setCurrentName: setAttribute', (t) => {
 });
 
 test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
@@ -67,10 +59,7 @@ test('current-file: getCurrentName', (t) => {
 });
 
 test('current-file: emit', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     const emit = stub();
     
@@ -92,10 +81,7 @@ test('current-file: emit', (t) => {
 });
 
 test('current-file: setCurrentName: return', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     const link = {};
     
@@ -138,28 +124,22 @@ test('current-file: getParentDirPath: result', (t) => {
 });
 
 test('current-file: isCurrentFile: no', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
-
+    const {DOM, CloudCmd} = global;
+    
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
-
+    
     const result = currentFile.isCurrentFile();
-
+    
     global.DOM = DOM;
     global.CloudCmd = CloudCmd;
-
+    
     t.notOk(result);
     t.end();
 });
 
 test('current-file: isCurrentFile', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     const isContainClass = stub();
     
@@ -180,10 +160,7 @@ test('current-file: isCurrentFile', (t) => {
 });
 
 test('current-file: getCurrentType', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
@@ -206,10 +183,7 @@ test('current-file: getCurrentType', (t) => {
 });
 
 test('current-file: isCurrentIsDir: getCurrentType', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
@@ -228,10 +202,7 @@ test('current-file: isCurrentIsDir: getCurrentType', (t) => {
 });
 
 test('current-file: isCurrentIsDir: directory', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     global.DOM = getDOM({
         getCurrentType: stub().returns('directory'),
@@ -251,10 +222,7 @@ test('current-file: isCurrentIsDir: directory', (t) => {
 });
 
 test('current-file: isCurrentIsDir: directory-link', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     global.DOM = getDOM({
         getCurrentType: stub().returns('directory-link'),
@@ -274,10 +242,7 @@ test('current-file: isCurrentIsDir: directory-link', (t) => {
 });
 
 test('current-file: isCurrentIsDir: file', (t) => {
-    const {
-        DOM,
-        CloudCmd,
-    } = global;
+    const {DOM, CloudCmd} = global;
     
     global.DOM = getDOM({
         getCurrentType: stub().returns('file'),
@@ -320,15 +285,7 @@ test('current-file: parseHrefAttribute', (t) => {
     t.end();
 });
 
-function getDOM({
-    link = {},
-    getCurrentDirPath = stub(),
-    getCurrentDirName = stub(),
-    getByDataName = stub(),
-    isContainClass = stub(),
-    getCurrentType = stub(),
-    getCurrentPath = stub(),
-} = {}) {
+function getDOM({link = {}, getCurrentDirPath = stub(), getCurrentDirName = stub(), getByDataName = stub(), isContainClass = stub(), getCurrentType = stub(), getCurrentPath = stub()} = {}) {
     return {
         getCurrentDirPath,
         getCurrentDirName,
@@ -342,4 +299,3 @@ function getDOM({
         },
     };
 }
-

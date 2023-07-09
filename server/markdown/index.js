@@ -13,7 +13,6 @@ const root = require('../root');
 const parse = threadIt(join(__dirname, 'worker'));
 
 threadIt.init();
-
 // warm up
 parse('');
 
@@ -63,4 +62,3 @@ function check(name, request) {
     if (!request)
         throw Error('request could not be empty!');
 }
-

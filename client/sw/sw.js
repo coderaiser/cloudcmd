@@ -45,7 +45,7 @@ const createRequest = (a) => new Request(a, {
 const getRequest = (a, request) => {
     if (a !== '/')
         return request;
-    
+
     return createRequest('/');
 };
 
@@ -97,4 +97,3 @@ async function addToCache(request, response) {
     const cache = await caches.open(NAME);
     return cache.put(request, response);
 }
-

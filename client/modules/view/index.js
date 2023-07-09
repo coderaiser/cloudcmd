@@ -1,6 +1,6 @@
-'use strict';
-
 /* global CloudCmd, DOM */
+
+'use strict';
 
 require('../../../css/view.css');
 
@@ -15,6 +15,7 @@ const createElement = require('@cloudcmd/create-element');
 
 const {time} = require('../../../common/util');
 const {FS} = require('../../../common/cloudfunc');
+
 const {
     isImage,
     isAudio,
@@ -49,6 +50,7 @@ module.exports.hide = hide;
 let Loading = false;
 
 const Name = 'View';
+
 CloudCmd[Name] = module.exports;
 
 const Info = DOM.CurrentInfo;
@@ -64,84 +66,88 @@ const Config = {
         Images.hide();
         Key.unsetBind();
     },
-
+    
     beforeClose: () => {
         Events.rmKey(listener);
         Key.setBind();
     },
-
+    
     afterShow: () => {
         El.focus();
     },
-
+    
     onOverlayClick,
     afterClose: noop,
     autoSize: false,
-
+    
     helpers: {
         title: {},
     },
 };
+
 module.exports._Config = Config;
 
 module.exports.init = async () => {
     await loadAll();
-
+    
     const events = [
         'click',
         'contextmenu',
     ];
-
-    events.forEach(addEvent(Overlay, onOverlayClick));
+    
+    events.forEach(addEvent(
+        Overlay,
+        onOverlayClick,
+    ));
 };
 
 async function show(data, options = {}) {
     const prefixURL = CloudCmd.prefixURL + FS;
-
+    
     if (Loading)
         return;
-
+    
     if (!options || options.bindKeys !== false)
         Events.addKey(listener);
-
+    
     El = createElement('div', {
         className: 'view',
         notAppend: true,
     });
-
+    
     El.tabIndex = 0;
-
+    
     if (data) {
         if (isArray(data))
             El.append(...data);
         else
             El.append(data);
-
+        
         modal.open(El, initConfig(options));
         return;
     }
-
+    
     Images.show.load();
-
+    
     const path = prefixURL + Info.path;
     const type = options.raw ? '' : await getType(path);
-
+    
     switch(type) {
     default:
         return await viewFile();
-
+    
     case 'markdown':
         return await CloudCmd.Markdown.show(Info.path);
-
+    
     case 'html':
         return viewHtml(path);
-
+    
     case 'image':
         return viewImage(Info.path, prefixURL);
-
+    
     case 'media':
         return await viewMedia(path);
-
+    
     case 'pdf':
         return viewPDF(path);
     }
@@ -154,11 +160,11 @@ function createIframe(src) {
         width: '100%',
         height: '100%',
     });
-
+    
     element.addEventListener('load', () => {
         element.contentWindow.addEventListener('keydown', listener);
     });
-
+    
     return element;
 }
 
@@ -169,21 +175,21 @@ function viewHtml(src) {
 
 function viewPDF(src) {
     const element = createIframe(src);
-
+    
     const options = assign({}, Config);
-
+    
     if (CloudCmd.config('showFileName'))
         options.title = Info.name;
-
+    
     modal.open(element, options);
 }
 
 async function viewMedia(path) {
     const [e, element] = await getMediaElement(path);
-
+    
     if (e)
         return alert(e);
-
+    
     const allConfig = {
         ...Config,
         ...{
@@ -195,22 +201,22 @@ async function viewMedia(path) {
             },
         },
     };
-
+    
     modal.open(element, allConfig);
 }
 
 async function viewFile() {
     const [error, data] = await Info.getData();
-
+    
     if (error)
         return Images.hide();
-
+    
     const element = document.createTextNode(data);
     const options = Config;
-
+    
     if (CloudCmd.config('showFileName'))
         options.title = Info.name;
-
+    
     El.append(element);
     modal.open(El, options);
 }
@@ -220,25 +226,26 @@ const copy = (a) => assign({}, a);
 module.exports._initConfig = initConfig;
 function initConfig(options) {
     const config = copy(Config);
-
+    
     if (!options)
         return config;
-
+    
     const names = Object.keys(options);
-
+    
     for (const name of names) {
         const isConfig = Boolean(config[name]);
         const item = options[name];
-
+        
         if (!isFn(item) || !isConfig) {
             config[name] = options[name];
             continue;
         }
-
+        
         const fn = config[name];
+        
         config[name] = series(fn, item);
     }
-
+    
     return config;
 }
 
@@ -252,59 +259,60 @@ function viewImage(path, prefixURL) {
         href: `${prefixURL}${path}`,
         title: encode(basename(path)),
     });
-
-    const names = Info.files
+    
+    const names = Info
+        .files
         .map(DOM.getCurrentPath)
         .filter(isSupportedImage);
-
-    const titles = names
-        .map(makeTitle);
-
+    
+    const titles = names.map(makeTitle);
+    
     const index = names.indexOf(Info.path);
+    
     const imageConfig = {
         index,
-        autoSize    : true,
-        arrows      : true,
-        keys        : true,
-        helpers     : {
-            title   : {},
+        autoSize: true,
+        arrows: true,
+        keys: true,
+        helpers: {
+            title: {},
         },
     };
-
+    
     const config = {
         ...Config,
         ...imageConfig,
     };
-
+    
     modal.open(titles, config);
 }
 
 async function getMediaElement(src) {
     check(src);
-
+    
     const [error, template] = await tryToCatch(Files.get, 'view/media-tmpl');
-
+    
     if (error)
         return [error];
-
+    
     const {name} = Info;
-
+    
     if (!TemplateAudio)
         TemplateAudio = template;
-
+    
     const is = isAudio(name);
     const type = is ? 'audio' : 'video';
-
+    
     const innerHTML = rendy(TemplateAudio, {
         src,
         type,
         name,
     });
-
+    
     const element = createElement('div', {
         innerHTML,
     });
-
+    
     return [null, element];
 }
 
@@ -319,9 +327,9 @@ function check(src) {
  */
 async function loadAll() {
     const {DIR_DIST} = CloudCmd;
-
+    
     time(`${Name} load`);
-
+    
     Loading = true;
     await loadCSS(`${DIR_DIST}/view.css`);
     Loading = false;
@@ -332,32 +340,29 @@ function onOverlayClick(event) {
         x: event.clientX,
         y: event.clientY,
     };
-
+    
     setCurrentByPosition(position);
 }
 
 function setCurrentByPosition(position) {
     const element = DOM.getCurrentByPosition(position);
-
+    
     if (!element)
         return;
-
-    const {
-        files,
-        filesPassive,
-    } = Info;
-
+    
+    const {files, filesPassive} = Info;
+    
     const isFiles = files.includes(element);
     const isFilesPassive = filesPassive.includes(element);
-
+    
     if (!isFiles && !isFilesPassive)
         return;
-
+    
     const isCurrent = DOM.isCurrentFile(element);
-
+    
     if (isCurrent)
         return;
-
+    
     DOM.setCurrentFile(element);
 }
 
@@ -365,4 +370,3 @@ function listener({keyCode}) {
     if (keyCode === Key.ESC)
         hide();
 }
-

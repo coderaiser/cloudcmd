@@ -3,17 +3,11 @@
 const isNumber = (a) => typeof a === 'number';
 
 module.exports = (error) => {
-    const {
-        lineNumber,
-        columnNumber,
-    } = error;
+    const {lineNumber, columnNumber} = error;
     
     // thank you firefox
     if (isNumber(lineNumber) && isNumber(columnNumber))
-        return [
-            lineNumber,
-            columnNumber,
-        ];
+        return [lineNumber, columnNumber];
     
     const before = error.stack.indexOf('>');
     const str = error.stack.slice(before + 1);
@@ -27,4 +21,3 @@ module.exports = (error) => {
         Number(column),
     ];
 };
-

@@ -1,7 +1,6 @@
 'use strict';
 
 /* global CloudCmd */
-
 CloudCmd.Markdown = exports;
 
 const createElement = require('@cloudcmd/create-element');
@@ -22,10 +21,7 @@ module.exports.hide = () => {
 };
 
 async function show(name, options = {}) {
-    const {
-        positionLoad,
-        relative,
-    } = options;
+    const {positionLoad, relative} = options;
     
     Images.show.load(positionLoad);
     
@@ -41,6 +37,7 @@ async function show(name, options = {}) {
         });
     
     const className = 'help';
+    
     const div = createElement('div', {
         className,
         innerHTML,
@@ -48,4 +45,3 @@ async function show(name, options = {}) {
     
     CloudCmd.View.show(div);
 }
-

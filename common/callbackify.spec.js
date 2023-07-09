@@ -2,10 +2,8 @@
 
 const tryToCatch = require('try-to-catch');
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const callbackify = require('./callbackify');
 const {promisify} = require('util');
 
@@ -30,4 +28,3 @@ test('cloudcmd: common: callbackify', async (t) => {
     t.equal(data, 'hi');
     t.end();
 });
-

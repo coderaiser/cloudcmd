@@ -25,7 +25,7 @@ async function registerSW(prefix) {
     
     if (e)
         return null;
-
+    
     return sw;
 }
 
@@ -33,4 +33,3 @@ async function unregisterSW(prefix) {
     const reg = await registerSW(prefix);
     reg?.unregister(prefix);
 }
-

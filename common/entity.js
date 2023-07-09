@@ -1,7 +1,7 @@
 'use strict';
 
 const Entities = {
-//    '&nbsp;': ' ',
+    //    '&nbsp;': ' ',
     '&lt;': '<',
     '&gt;': '>',
     '&quot;': '"',
@@ -30,4 +30,3 @@ module.exports.decode = (str) => {
     
     return str;
 };
-

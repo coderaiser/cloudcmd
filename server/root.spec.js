@@ -1,9 +1,7 @@
 'use strict';
 
-const {
-    test,
-    stub,
-} = require('supertape');
+const {test, stub} = require('supertape');
+
 const mockRequire = require('mock-require');
 const {reRequire, stopAll} = mockRequire;
 
@@ -36,4 +34,3 @@ test('cloudcmd: root: mellow', (t) => {
     t.calledWith(webToWin, [dir, dirRoot], 'should call mellow');
     t.end();
 });
-

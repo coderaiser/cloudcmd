@@ -8,10 +8,8 @@ const fs = require('fs');
 const cloudfunc = require(`${DIR_COMMON}cloudfunc`);
 
 const authentication = require(`${DIR}auth`);
-const {
-    createConfig,
-    configPath,
-} = require(`${DIR}config`);
+const {createConfig, configPath} = require(`${DIR}config`);
+
 const modulas = require(`${DIR}modulas`);
 
 const userMenu = require(`${DIR}user-menu`);
@@ -111,7 +109,7 @@ module.exports._getPrefix = getPrefix;
 function getPrefix(prefix) {
     if (isFn(prefix))
         return prefix() || '';
-    
+
     return prefix || '';
 }
 
@@ -194,9 +192,7 @@ function cloudcmd({modules, config}) {
         config('console') && konsole({
             online,
         }),
-        
         config('terminal') && terminal(config, {}),
-        
         edward({
             root,
             online,
@@ -205,7 +201,6 @@ function cloudcmd({modules, config}) {
             dropbox,
             dropboxToken,
         }),
-        
         dword({
             root,
             online,
@@ -214,7 +209,6 @@ function cloudcmd({modules, config}) {
             dropbox,
             dropboxToken,
         }),
-        
         deepword({
             root,
             online,
@@ -223,38 +217,30 @@ function cloudcmd({modules, config}) {
             dropbox,
             dropboxToken,
         }),
-        
         fileop(),
         nomine(),
-        
         setUrl,
         setSW,
         logout,
         authentication(config),
         config.middle,
-        
         modules && modulas(modules),
-        
         config('dropbox') && restbox({
             prefix: cloudfunc.apiURL,
             root,
             token: dropboxToken,
         }),
-        
         restafary({
             prefix: cloudfunc.apiURL + '/fs',
             root,
         }),
-        
         userMenu({
             menuName: '.cloudcmd.menu.js',
         }),
-        
         rest(config),
         route(config, {
             html,
         }),
-        
         ponseStatic,
     ]);
     
@@ -272,7 +258,7 @@ module.exports._replaceDist = replaceDist;
 function replaceDist(url) {
     if (!isDev)
         return url;
-    
+
     return url.replace(/^\/dist\//, '/dist-dev/');
 }
 
@@ -294,4 +280,3 @@ function setSW(req, res, next) {
     
     next();
 }
-
