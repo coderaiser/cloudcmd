@@ -45,7 +45,7 @@ const createRequest = (a) => new Request(a, {
 const getRequest = (a, request) => {
     if (a !== '/')
         return request;
-
+    
     return createRequest('/');
 };
 

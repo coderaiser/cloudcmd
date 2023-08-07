@@ -39,7 +39,7 @@ module.exports.convert = (config) => {
 function setState(state) {
     if (state)
         return ' checked';
-
+    
     return '';
 }
 

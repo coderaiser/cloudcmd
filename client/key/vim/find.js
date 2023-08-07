@@ -37,13 +37,13 @@ module.exports._previous = previous;
 function next(index, length) {
     if (index === length - 1)
         return 0;
-
+    
     return ++index;
 }
 
 function previous(index, length) {
     if (!index)
         return length - 1;
-
+    
     return --index;
 }

@@ -85,7 +85,7 @@ test('cloudfunc: render', (t) => {
             if (ret) {
                 i = number;
             }
-
+        
             return ret;
         });
     

@@ -129,7 +129,7 @@ function _refresh(to, nameIndex, res) {
 function getDir(root, dir) {
     if (root === '/')
         return dir;
-
+    
     return root + dir;
 }
 

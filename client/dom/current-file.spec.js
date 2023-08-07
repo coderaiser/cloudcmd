@@ -285,7 +285,15 @@ test('current-file: parseHrefAttribute', (t) => {
     t.end();
 });
 
-function getDOM({link = {}, getCurrentDirPath = stub(), getCurrentDirName = stub(), getByDataName = stub(), isContainClass = stub(), getCurrentType = stub(), getCurrentPath = stub()} = {}) {
+function getDOM({
+    link = {},
+    getCurrentDirPath = stub(),
+    getCurrentDirName = stub(),
+    getByDataName = stub(),
+    isContainClass = stub(),
+    getCurrentType = stub(),
+    getCurrentPath = stub(),
+} = {}) {
     return {
         getCurrentDirPath,
         getCurrentDirName,

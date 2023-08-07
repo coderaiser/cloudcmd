@@ -194,7 +194,7 @@ function setOperations(operator) {
 function getPacker(type) {
     if (type === 'zip')
         return packZipFn;
-
+    
     return packTarFn;
 }
 

@@ -11,7 +11,7 @@ function EventsProto() {
     const getEventOptions = (eventName) => {
         if (eventName !== 'touchstart')
             return false;
-
+        
         return {
             passive: true,
         };
