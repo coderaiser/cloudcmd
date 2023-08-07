@@ -7,16 +7,16 @@
 [SupportURL]: https://patreon.com/coderaiser "Patreon"
 [DemoURL]: https://cloudcmd.onrender.com/
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
-[BuildStatusURL]: https://travis-ci.org/coderaiser/cloudcmd "Build Status"
+[BuildStatusURL]: https://github.com/coderaiser/cloudcmd/actions/workflows/nodejs.yml/badge.svg "Build Status"
 [BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
-[BuildAppveyorURL]: https://ci.appveyor.com/project/coderaiser/cloudcmd
-[BuildAppveyorIMGURL]: https://ci.appveyor.com/api/projects/status/tse6sc8dxrqxqehi?svg=true
 [CodacyURL]: https://www.codacy.com/app/coderaiser/cloudcmd
 [CodacyIMG]: https://api.codacy.com/project/badge/Grade/ddda78be780549ce8754f8d47a8c0e36
 [GitterURL]: https://gitter.im/cloudcmd/hello
 [GitterIMGURL]: https://img.shields.io/gitter/room/coderaiser/cloudcmd.js.svg
 [DeployURL]: https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy"
 [DeployIMG]: https://www.herokucdn.com/deploy/button.png
+
+[![Node CI]()](https://github.com/coderaiser/cloudcmd/actions/workflows/nodejs.yml)
 
 **Cloud Commander** a file manager for the web with console and editor.
 
