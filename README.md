@@ -7,8 +7,8 @@
 [SupportURL]: https://patreon.com/coderaiser "Patreon"
 [DemoURL]: https://cloudcmd.onrender.com/
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
-[BuildStatusURL]: https://github.com/coderaiser/cloudcmd/actions/workflows/nodejs.yml/badge.svg "Build Status"
-[BuildStatusIMGURL]: https://img.shields.io/travis/coderaiser/cloudcmd.svg?style=flat-squere&longCache=true
+[BuildStatusURL]: https://github.com/coderaiser/cloudcmd/actions/workflows/nodejs.yml "Build Status"
+[BuildStatusIMGURL]: https://github.com/coderaiser/cloudcmd/actions/workflows/nodejs.yml/badge.svg
 [CodacyURL]: https://www.codacy.com/app/coderaiser/cloudcmd
 [CodacyIMG]: https://api.codacy.com/project/badge/Grade/ddda78be780549ce8754f8d47a8c0e36
 [GitterURL]: https://gitter.im/cloudcmd/hello
