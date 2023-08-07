@@ -147,15 +147,13 @@
     "yargs-parser": "^21.0.0"
   },
   "devDependencies": {
-    "@babel/code-frame": "^7.5.5",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
     "@babel/preset-env": "^7.0.0",
     "@cloudcmd/clipboard": "^2.0.0",
     "@cloudcmd/create-element": "^2.0.0",
     "@cloudcmd/modal": "^3.0.0",
     "@cloudcmd/olark": "^3.0.2",
     "@cloudcmd/stub": "^4.0.1",
+    "@putout/babel": "^1.0.5",
     "auto-globals": "^3.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^3.0.0",
