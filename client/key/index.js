@@ -111,9 +111,8 @@ function getSymbol(shift, keyCode) {
 function fromCharCode(keyIdentifier) {
     const code = keyIdentifier.substring(2);
     const hex = parseInt(code, 16);
-    const char = String.fromCharCode(hex);
     
-    return char;
+    return String.fromCharCode(hex);
 }
 
 async function switchKey(event) {

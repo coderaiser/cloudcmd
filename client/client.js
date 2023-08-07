@@ -278,7 +278,7 @@ function CloudCmdProto(DOM) {
         
         const isRefresh = true;
         const history = false;
-        const noCurrent = options ? options.noCurrent : false;
+        const noCurrent = options?.noCurrent;
         
         await CloudCmd.changeDir(path, {
             isRefresh,

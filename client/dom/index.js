@@ -1,5 +1,6 @@
 'use strict';
 
+const isString = (a) => typeof a === 'string';
 /* global CloudCmd */
 const Util = require('../../common/util');
 
@@ -116,9 +117,8 @@ module.exports.getCurrentDirName = () => {
         .replace(/\/$/, '');
     
     const substr = href.substr(href, href.lastIndexOf('/'));
-    const ret = href.replace(`${substr}/`, '') || '/';
     
-    return ret;
+    return href.replace(`${substr}/`, '') || '/';
 };
 
 /**
@@ -143,9 +143,7 @@ module.exports.getNotCurrentDirPath = () => {
         active: false,
     });
     
-    const path = DOM.getCurrentDirPath(panel);
-    
-    return path;
+    return DOM.getCurrentDirPath(panel);
 };
 
 /**
@@ -189,9 +187,8 @@ module.exports.getActiveFiles = () => {
 
 module.exports.getCurrentDate = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
-    const date = DOM.getByDataName('js-date', current).textContent;
     
-    return date;
+    return DOM.getByDataName('js-date', current).textContent;
 };
 
 /**
@@ -438,7 +435,7 @@ module.exports.setHistory = (data, title, url) => {
 module.exports.isSelected = (selected) => {
     if (!selected)
         return false;
-
+    
     return DOM.isContainClass(selected, SELECTED_FILE);
 };
 
@@ -479,7 +476,7 @@ module.exports.getFilenames = (files) => {
 module.exports.checkStorageHash = async (name) => {
     const nameHash = `${name}-hash`;
     
-    if (typeof name !== 'string')
+    if (!isString(name))
         throw Error('name should be a string!');
     
     const [loadHash, storeHash] = await Promise.all([
@@ -723,7 +720,7 @@ module.exports.changePanel = () => {
 module.exports.getPackerExt = (type) => {
     if (type === 'zip')
         return '.zip';
-
+    
     return '.tar.gz';
 };
 
@@ -749,7 +746,7 @@ module.exports.duplicatePanel = async () => {
     const getPath = (isDir) => {
         if (isDir)
             return Info.path;
-
+        
         return Info.dirPath;
     };
     

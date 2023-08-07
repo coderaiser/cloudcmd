@@ -94,7 +94,7 @@ function header() {
 function getPath(el, path = []) {
     if (!el)
         return path;
-
+    
     return getPath(el.parentElement, path.concat(el));
 }
 
@@ -115,9 +115,8 @@ module.exports.initKeysPanel = () => {
         const {id} = target;
         const operation = (name) => {
             const {Operation} = CloudCmd;
-            const fn = Operation.show.bind(null, name);
             
-            return fn;
+            return Operation.show.bind(null, name);
         };
         
         const clickFuncs = {
@@ -143,7 +142,7 @@ module.exports.initKeysPanel = () => {
 const getPanel = (side) => {
     if (!itype.string(side))
         return side;
-
+    
     return DOM.getByDataName(`js-${side}`);
 };
 

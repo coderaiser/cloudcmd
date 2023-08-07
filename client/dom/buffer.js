@@ -26,9 +26,8 @@ function BufferProto() {
 
     function getNames() {
         const files = DOM.getActiveFiles();
-        const names = DOM.getFilenames(files);
         
-        return names;
+        return DOM.getFilenames(files);
     }
 
     function addCutClass() {

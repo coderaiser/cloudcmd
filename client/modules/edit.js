@@ -2,6 +2,7 @@
 
 'use strict';
 
+const isFn = (a) => typeof a === 'function';
 const montag = require('montag');
 
 const {promisify} = require('es6-promisify');
@@ -54,7 +55,7 @@ function create() {
 }
 
 function checkFn(name, fn) {
-    if (typeof fn !== 'function')
+    if (!isFn(fn))
         throw Error(`${name} should be a function!`);
 }
 

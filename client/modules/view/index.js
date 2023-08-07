@@ -2,6 +2,7 @@
 
 'use strict';
 
+const isString = (a) => typeof a === 'string';
 require('../../../css/view.css');
 
 const rendy = require('rendy');
@@ -317,7 +318,7 @@ async function getMediaElement(src) {
 }
 
 function check(src) {
-    if (typeof src !== 'string')
+    if (!isString(src))
         throw Error('src should be a string!');
 }
 

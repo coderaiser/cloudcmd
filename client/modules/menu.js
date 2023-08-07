@@ -77,7 +77,7 @@ function getPosition(position) {
             x: position.x,
             y: position.y,
         };
-
+    
     return getCurrentPosition();
 }
 
@@ -196,9 +196,8 @@ function isPath(x, y) {
     
     const el = document.elementFromPoint(x, y);
     const elements = panel.querySelectorAll('[data-name="js-path"] *');
-    const is = ~[].indexOf.call(elements, el);
     
-    return is;
+    return ~[].indexOf.call(elements, el);
 }
 
 function beforeShow(callback, params) {

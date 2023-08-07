@@ -75,9 +75,7 @@ function getHost() {
         protocol,
     } = location;
     
-    const href = origin || `${protocol}//${host}`;
-    
-    return href;
+    return origin || `${protocol}//${host}`;
 }
 
 function initSocket() {

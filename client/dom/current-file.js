@@ -109,9 +109,8 @@ module.exports.getCurrentDirName = () => {
         .replace(/\/$/, '');
     
     const substr = href.substr(href, href.lastIndexOf('/'));
-    const ret = href.replace(`${substr}/`, '') || '/';
     
-    return ret;
+    return href.replace(`${substr}/`, '') || '/';
 };
 
 /**
@@ -266,7 +265,7 @@ module.exports.getCurrentByPosition = ({x, y}) => {
 module.exports.isCurrentFile = (currentFile) => {
     if (!currentFile)
         return false;
-
+    
     return DOM.isContainClass(currentFile, CURRENT_FILE);
 };
 
