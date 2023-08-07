@@ -1,3 +1,10 @@
+2023.08.07, v16.16.1
+
+feature:
+- d63169cc package: @putout/babel v1.0.5
+- bb9276be package: eslint-plugin-putout v19.0.3
+- 9aed5f75 package: putout v31.0.3
+
 2023.07.09, v16.16.0
 
 feature:
