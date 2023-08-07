@@ -1,12 +1,13 @@
 'use strict';
 
+const isString = (a) => typeof a === 'string';
 const tryCatch = require('try-catch');
 
 const exit = require('./exit');
 const columns = require('./columns');
 
 module.exports.root = (dir, config) => {
-    if (typeof dir !== 'string')
+    if (!isString(dir))
         throw Error('dir should be a string');
     
     if (dir === '/')

@@ -1,5 +1,6 @@
 'use strict';
 
+const isString = (a) => typeof a === 'string';
 const {join} = require('path');
 const {callbackify} = require('util');
 
@@ -56,7 +57,7 @@ async function onPUT(request) {
 }
 
 function check(name, request) {
-    if (typeof name !== 'string')
+    if (!isString(name))
         throw Error('name should be string!');
     
     if (!request)

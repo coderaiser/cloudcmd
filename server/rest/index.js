@@ -1,5 +1,7 @@
 'use strict';
 
+const isFn = (a) => typeof a === 'function';
+const isString = (a) => typeof a === 'string';
 const DIR = '../';
 const DIR_COMMON = `${DIR}../common/`;
 
@@ -148,7 +150,7 @@ function onGET(params, config, callback) {
 function getPackReg(packer) {
     if (packer === 'zip')
         return /\.zip$/;
-
+    
     return /\.tar\.gz$/;
 }
 
@@ -167,14 +169,11 @@ function streamPack(cmd, response, packer) {
 function getCMD(cmd) {
     if (cmd[0] === '/')
         return cmd.slice(1);
-
+    
     return cmd;
 }
 
-const getMoveMsg = (names) => {
-    const msg = formatMsg('move', names);
-    return msg;
-};
+const getMoveMsg = (names) => formatMsg('move', names);
 
 const getRenameMsg = (from, to) => {
     const msg = formatMsg('rename', {
@@ -376,9 +375,8 @@ module.exports._getWin32RootMsg = getWin32RootMsg;
 
 function getWin32RootMsg() {
     const message = 'Could not copy from/to root on windows!';
-    const error = Error(message);
     
-    return error;
+    return Error(message);
 }
 
 function parseData(data) {
@@ -398,12 +396,12 @@ function formatMsg(msg, data, status) {
 }
 
 function checkPut(name, body, callback) {
-    if (typeof name !== 'string')
+    if (!isString(name))
         throw Error('name should be a string!');
     
-    if (typeof body !== 'string')
+    if (!isString(body))
         throw Error('body should be a string!');
     
-    if (typeof callback !== 'function')
+    if (!isFn(callback))
         throw Error('callback should be a function!');
 }
