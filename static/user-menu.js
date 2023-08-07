@@ -131,9 +131,8 @@ async function createDefaultMenu({path, data, DOM, CloudCmd}) {
 
 async function readDefaultMenu({prefix}) {
     const res = await fetch(`${prefix}/api/v1/user-menu/default`);
-    const data = await res.text();
     
-    return data;
+    return await res.text();
 }
 
 module.exports._selectNames = selectNames;

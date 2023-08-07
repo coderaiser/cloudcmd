@@ -249,7 +249,7 @@ function updateField(file) {
 function getAttribute(type) {
     if (type === 'directory')
         return '';
-
+    
     return 'target="_blank" ';
 }
 

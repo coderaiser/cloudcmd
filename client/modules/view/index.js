@@ -2,7 +2,6 @@
 
 'use strict';
 
-const isString = (a) => typeof a === 'string';
 require('../../../css/view.css');
 
 const rendy = require('rendy');
@@ -28,7 +27,7 @@ const Events = require('../../dom/events');
 const Images = require('../../dom/images');
 
 const {encode} = require('../../../common/entity');
-
+const isString = (a) => typeof a === 'string';
 const {assign} = Object;
 const {isArray} = Array;
 

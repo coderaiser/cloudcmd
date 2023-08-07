@@ -2,7 +2,6 @@
 
 'use strict';
 
-const isFn = (a) => typeof a === 'function';
 const montag = require('montag');
 
 const {promisify} = require('es6-promisify');
@@ -12,6 +11,7 @@ const load = require('load.js');
 const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
 
 const {time, timeEnd} = require('../../common/util');
+const isFn = (a) => typeof a === 'function';
 const loadJS = load.js;
 
 const Name = 'Edit';

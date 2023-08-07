@@ -109,7 +109,7 @@ module.exports._getPrefix = getPrefix;
 function getPrefix(prefix) {
     if (isFn(prefix))
         return prefix() || '';
-
+    
     return prefix || '';
 }
 
@@ -258,7 +258,7 @@ module.exports._replaceDist = replaceDist;
 function replaceDist(url) {
     if (!isDev)
         return url;
-
+    
     return url.replace(/^\/dist\//, '/dist-dev/');
 }
 

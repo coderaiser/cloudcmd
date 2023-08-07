@@ -68,6 +68,6 @@ async function cl() {
 function getVersionNew(last, match) {
     if (match)
         return minor(match, Info.version);
-
+    
     return last.substr(3);
 }

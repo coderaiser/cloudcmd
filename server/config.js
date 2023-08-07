@@ -76,7 +76,7 @@ const manageListen = currify((manage, socket, auth) => {
 function initWrite(filename, configManager) {
     if (filename)
         return write.bind(null, filename, configManager);
-
+    
     return resolve;
 }
 

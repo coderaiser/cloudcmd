@@ -1,6 +1,5 @@
 'use strict';
 
-const isString = (a) => typeof a === 'string';
 /* global CloudCmd */
 const Util = require('../../common/util');
 
@@ -38,8 +37,9 @@ DOM.Events = require('./events');
 
 const loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');
-
+const isString = (a) => typeof a === 'string';
 const SELECTED_FILE = 'selected-file';
+
 const TabPanel = {
     'js-left': null,
     'js-right': null,

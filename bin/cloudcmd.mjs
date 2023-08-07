@@ -24,7 +24,7 @@ const simport = createSimport(import.meta.url);
 const choose = (a, b) => {
     if (a === undefined)
         return b;
-
+    
     return a;
 };
 
@@ -37,7 +37,7 @@ const DIR_SERVER = '../server/';
 const maybeRoot = (a) => {
     if (a === '.')
         return process.cwd();
-
+    
     return a;
 };
 

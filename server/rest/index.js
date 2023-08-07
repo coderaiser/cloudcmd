@@ -1,7 +1,5 @@
 'use strict';
 
-const isFn = (a) => typeof a === 'function';
-const isString = (a) => typeof a === 'string';
 const DIR = '../';
 const DIR_COMMON = `${DIR}../common/`;
 
@@ -24,7 +22,8 @@ const ponse = require('ponse');
 
 const copymitter = require('copymitter');
 const moveFiles = require('@cloudcmd/move-files');
-
+const isString = (a) => typeof a === 'string';
+const isFn = (a) => typeof a === 'function';
 const swap = wraptile((fn, a, b) => fn(b, a));
 const isWin32 = process.platform === 'win32';
 const {apiURL} = CloudFunc;
