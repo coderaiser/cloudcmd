@@ -3,6 +3,7 @@
         "@babel/preset-env"
     ],
     "plugins": [
-        "module:babel-plugin-macros"
+        "module:babel-plugin-macros",
+        "@babel/plugin-proposal-optional-chaining"
     ]
 }

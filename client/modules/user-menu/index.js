@@ -10,7 +10,7 @@ const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 const tryCatch = require('try-catch');
 const tryToCatch = require('try-to-catch');
-const {codeFrameColumns} = require('@putout/babel');
+const {codeFrameColumns} = require('@babel/code-frame');
 
 const Images = require('../../dom/images');
 const Dialog = require('../../dom/dialog');

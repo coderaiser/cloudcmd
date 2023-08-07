@@ -85,6 +85,8 @@
   },
   "subdomain": "cloudcmd",
   "dependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@cloudcmd/dropbox": "^4.0.1",
     "@cloudcmd/fileop": "^7.0.0",
     "@cloudcmd/move-files": "^7.0.0",
@@ -147,6 +149,7 @@
     "yargs-parser": "^21.0.0"
   },
   "devDependencies": {
+    "@babel/code-frame": "^7.22.5",
     "@babel/preset-env": "^7.0.0",
     "@cloudcmd/clipboard": "^2.0.0",
     "@cloudcmd/create-element": "^2.0.0",
