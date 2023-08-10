@@ -96,7 +96,7 @@
     "apart": "^2.0.0",
     "chalk": "^4.0.0",
     "compression": "^1.7.4",
-    "console-io": "^13.0.0",
+    "console-io": "^14.0.0",
     "copymitter": "^8.0.1",
     "criton": "^2.0.0",
     "currify": "^4.0.0",
