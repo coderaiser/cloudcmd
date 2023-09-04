@@ -1,4 +1,4 @@
-FROM node:lts-buster
+FROM oven/bun
 LABEL maintainer="Coderaiser"
 
 RUN mkdir -p /usr/src/app
@@ -6,10 +6,9 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 
-RUN npm config set package-lock false && \
-    npm install --production && \
-    npm i gritty && \
-    npm cache clean --force
+RUN bun install --production --no-save && \
+    bun i gritty --no-save && \
+    bun pm cache rm
 
 COPY . /usr/src/app
 
