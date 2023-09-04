@@ -1,3 +1,8 @@
+2023.09.04, v16.17.1
+
+fix:
+- eb3f037a docker: bun -> node
+
 2023.09.04, v16.17.0
 
 feature:
