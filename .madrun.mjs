@@ -6,6 +6,7 @@ import {
 
 const testEnv = {
     THREAD_IT_COUNT: 0,
+    SUPERTAPE_TIMEOUT: 7000,
 };
 
 const is17 = /^v1[789]/.test(process.version);
