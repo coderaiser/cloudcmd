@@ -1,8 +1,8 @@
-import process from 'node:process';
 import {
     run,
     cutEnv,
 } from 'madrun';
+import process from 'node:process';
 
 const testEnv = {
     THREAD_IT_COUNT: 0,

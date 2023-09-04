@@ -1,5 +1,7 @@
 {
-    "plugins": ["cloudcmd"],
+    "plugins": [
+        "cloudcmd"
+    ],
     "ignore": [
         "html",
         "fixture*",
@@ -7,7 +9,9 @@
         "fontello.json"
     ],
     "rules": {
-        "webpack/apply-externals": "off"
+        "webpack/apply-externals": "off",
+        "github/convert-npm-to-bun": "off",
+        "github/install-bun": "off"
     },
     "match": {
         "base64": {

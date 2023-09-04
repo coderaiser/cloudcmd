@@ -14,9 +14,9 @@ jobs:
         with:
           node-version: 16.x
       - name: Install Redrun
-        run: bun i redrun -g --no-save
+        run: npm i redrun -g
       - name: NPM Install
-        run: bun i --no-save
+        run: npm install
       - name: Lint
         run: redrun lint
       - name: Build
