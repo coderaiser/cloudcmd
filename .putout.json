@@ -1,7 +1,5 @@
 {
-    "plugins": [
-        "cloudcmd"
-    ],
+    "plugins": ["cloudcmd"],
     "ignore": [
         "html",
         "fixture*",
