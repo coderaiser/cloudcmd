@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const http = require('http');
 const os = require('os');
 

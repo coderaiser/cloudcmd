@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const path = require('path');
 const fs = require('fs');
 const readFilesSync = require('@cloudcmd/read-files-sync');

@@ -1,6 +1,6 @@
 import cloudcmd from './cloudcmd.js';
-import http from 'http';
-import {promisify} from 'util';
+import http from 'node:http';
+import {promisify} from 'node:util';
 import currify from 'currify';
 import squad from 'squad';
 import tryToCatch from 'try-to-catch';
@@ -12,6 +12,7 @@ import opn from 'open';
 import express from 'express';
 import {Server} from 'socket.io';
 import tryRequire from 'tryrequire';
+import process from 'node:process';
 
 const bind = (f, self) => f.bind(self);
 

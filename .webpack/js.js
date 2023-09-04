@@ -11,11 +11,10 @@ const WebpackBar = require('webpackbar');
 
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
-const dir = './client';
-const dirModules = './client/modules';
+const {env} = require('process');
 const modules = './modules';
-
-const {env} = process;
+const dirModules = './client/modules';
+const dir = './client';
 const {NODE_ENV} = env;
 const isDev = NODE_ENV === 'development';
 

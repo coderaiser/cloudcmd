@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 require('../css/main.css');
 require('../css/nojs.css');
 require('../css/columns/name-size-date.css');

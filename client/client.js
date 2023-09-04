@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 /* global DOM */
 const Emitify = require('emitify');
 const inherits = require('inherits');

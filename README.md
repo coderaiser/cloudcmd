@@ -68,7 +68,7 @@ npm i cloudcmd express socket.io -S
 And create `index.js`:
 
 ```js
-import http from 'http';
+import http from 'node:http';
 import cloudcmd from 'cloudcmd';
 import {Server} from 'socket.io';
 import express from 'express';

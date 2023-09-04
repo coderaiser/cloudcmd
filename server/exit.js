@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const getMessage = (a) => a?.message || a;
 
 module.exports = (...args) => {

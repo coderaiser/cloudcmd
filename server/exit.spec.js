@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const {test, stub} = require('supertape');
 
 const exit = require('./exit');

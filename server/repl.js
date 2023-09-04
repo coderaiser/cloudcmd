@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const net = require('net');
 const repl = require('repl');
 

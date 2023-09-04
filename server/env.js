@@ -2,7 +2,7 @@
 
 const snake = require('just-snake-case');
 
-const {env} = process;
+const {env} = require('process');
 const up = (a) => a.toUpperCase();
 
 module.exports = parse;

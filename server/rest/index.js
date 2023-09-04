@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const DIR = '../';
 const DIR_COMMON = `${DIR}../common/`;
 

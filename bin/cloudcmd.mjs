@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
-import {createRequire} from 'module';
-import {promisify} from 'util';
+import {createRequire} from 'node:module';
+import {promisify} from 'node:util';
 import tryToCatch from 'try-to-catch';
 import {createSimport} from 'simport';
 import parse from 'yargs-parser';
+import process from 'node:process';
 import exit from '../server/exit.js';
 import {
     createConfig,

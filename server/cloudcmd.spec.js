@@ -1,5 +1,6 @@
 'use strict';
 
+const process = require('process');
 const path = require('path');
 
 const {test, stub} = require('supertape');
