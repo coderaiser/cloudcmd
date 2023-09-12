@@ -7,9 +7,7 @@
         "fontello.json"
     ],
     "rules": {
-        "webpack/apply-externals": "off",
-        "github/convert-npm-to-bun": "off",
-        "github/install-bun": "off"
+        "webpack/apply-externals": "off"
     },
     "match": {
         "base64": {
