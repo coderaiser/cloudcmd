@@ -1,3 +1,12 @@
+2023.09.22, v16.17.6
+
+feature:
+- 570cb8c0 package: nodemon v3.0.1
+- 828d10a8 package: rimraf v5.0.1
+- 88908b35 package: eslint-plugin-putout v20.0.0
+- 93f4a07e package: putout v32.0.6
+- a5f93523 github actions: use bun
+
 2023.09.06, v16.17.5
 
 feature:
