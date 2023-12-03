@@ -14,9 +14,8 @@ module.exports = (userMenu) => {
             continue;
         }
         
-        if (str.startsWith('_')) {
+        if (str.startsWith('_'))
             continue;
-        }
         
         names.push(str);
         const [key, name] = str.split(' - ');

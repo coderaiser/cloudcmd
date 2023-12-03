@@ -178,7 +178,8 @@ function decodePath(path) {
     const {prefix} = CloudCmd;
     const prefixReg = RegExp('^' + prefix + FS);
     
-    return decodeURI(path).replace(url, '')
+    return decodeURI(path)
+        .replace(url, '')
         .replace(prefixReg, '') // browser doesn't replace % -> %25% do it for him
         .replace('%%', '%25%')
         .replace(NBSP_REG, SPACE) || '/';

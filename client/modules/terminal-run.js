@@ -123,9 +123,8 @@ function create(createOptions) {
         if (commandExit)
             hide();
         
-        if (shiftKey && keyCode === Key.ESC) {
+        if (shiftKey && keyCode === Key.ESC)
             hide();
-        }
     });
     
     Socket.on('exit', (code) => {

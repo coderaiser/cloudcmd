@@ -60,9 +60,8 @@ const emitAuth = wraptile((importUrl, config, socket) => {
 
 const updateConfig = currify((config, data) => {
     for (const [key, value] of entries(data)) {
-        if (typeof env(key) !== 'undefined') {
+        if (typeof env(key) !== 'undefined')
             continue;
-        }
         
         config(key, value);
     }

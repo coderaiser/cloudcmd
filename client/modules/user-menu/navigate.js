@@ -13,9 +13,8 @@ const store = fullstore(1);
 const isDigit = (a) => /^\d+$/.test(a);
 
 module.exports = (el, {key, keyCode}) => {
-    if (isDigit(key)) {
+    if (isDigit(key))
         store(Number(key));
-    }
     
     if (keyCode === DOWN || keyCode === J) {
         const count = store();

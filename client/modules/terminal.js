@@ -90,9 +90,8 @@ function create() {
     Terminal.onKey(({domEvent}) => {
         const {keyCode, shiftKey} = domEvent;
         
-        if (shiftKey && keyCode === Key.ESC) {
+        if (shiftKey && keyCode === Key.ESC)
             hide();
-        }
     });
     
     Socket.on('connect', exec.with(authCheck, socket));

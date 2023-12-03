@@ -82,9 +82,8 @@ test('cloudfunc: render', (t) => {
         .some((item, number) => {
             const ret = result[number] !== item;
         
-            if (ret) {
+            if (ret)
                 i = number;
-            }
         
             return ret;
         });

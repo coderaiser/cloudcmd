@@ -16,9 +16,8 @@ async function show() {
     const [, cmd] = await Dialog.prompt('Command Line', '');
     const TERMINAL = '^(t|terminal)';
     
-    if (RegExp(`${TERMINAL}$`).test(cmd)) {
+    if (RegExp(`${TERMINAL}$`).test(cmd))
         return await CloudCmd.Terminal.show();
-    }
     
     if (RegExp(TERMINAL).test(cmd)) {
         const command = cmd.replace(RegExp(`${TERMINAL} `), '');

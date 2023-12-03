@@ -19,9 +19,8 @@ const Chars = fullstore();
 const toggleVim = (keyCode) => {
     const {_config, config} = CloudCmd;
     
-    if (keyCode === KEY.ESC) {
+    if (keyCode === KEY.ESC)
         _config('vim', !config('vim'));
-    }
 };
 
 const isUndefined = (a) => typeof a === 'undefined';

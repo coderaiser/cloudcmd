@@ -16,11 +16,8 @@
         "route.spec.js": {
             "tape/convert-ok-to-match": "off"
         },
-        "*.js": {
-            "convert-esm-to-commonjs": "on"
-        },
         "*.md": {
-            "convert-commonjs-to-esm": "on"
+            "nodejs/convert-commonjs-to-esm": "on"
         },
         ".webpack": {
             "webpack": "on"
