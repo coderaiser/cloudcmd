@@ -1,3 +1,10 @@
+2023.12.04, v16.17.8
+
+feature:
+- 93aa7278 yaspeller: rm
+- af9c916e cloudcmd: eslint-plugin-putout v21.0.2
+- 01dccbfd cloudcmd: putout v33.13.3
+
 2023.10.12, v16.17.7
 
 feature:
