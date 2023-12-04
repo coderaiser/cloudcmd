@@ -19,7 +19,7 @@ jobs:
       - name: Install Redrun
         run: bun i redrun -g --no-save
       - name: NPM Install
-        run: bun i --no-save
+        run: npm i
       - name: Lint
         run: redrun lint
       - name: Build
