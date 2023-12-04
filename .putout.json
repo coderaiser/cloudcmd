@@ -13,9 +13,6 @@
         "base64": {
             "convert-typeof-to-is-type": "off"
         },
-        "route.spec.js": {
-            "tape/convert-ok-to-match": "off"
-        },
         "*.md": {
             "nodejs/convert-commonjs-to-esm": "on"
         },

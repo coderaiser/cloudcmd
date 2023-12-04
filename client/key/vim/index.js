@@ -28,46 +28,46 @@ const getOperations = (event, deps) => {
         toggleSelectedFile,
         Buffer = {},
     } = deps;
-
+    
     return {
         escape: unselectFiles,
-
+        
         remove: () => {
             Operation.show('delete');
         },
-
+        
         makeDirectory: () => {
             event.stopImmediatePropagation();
             event.preventDefault();
             DOM.promptNewDir();
         },
-
+        
         makeFile: () => {
             event.stopImmediatePropagation();
             event.preventDefault();
             DOM.promptNewFile();
         },
-
+        
         terminal: () => {
             CloudCmd.Terminal.show();
         },
-
+        
         edit: () => {
             CloudCmd.EditFileVim.show();
         },
-
+        
         copy: () => {
             Buffer.copy();
             unselectFiles();
         },
-
+        
         select: () => {
             const current = Info.element;
             toggleSelectedFile(current);
         },
-
+        
         paste: Buffer.paste,
-
+        
         moveNext: ({count, isVisual, isDelete}) => {
             setCurrent('next', {
                 count,
@@ -80,7 +80,7 @@ const getOperations = (event, deps) => {
                 Operation,
             });
         },
-
+        
         movePrevious: ({count, isVisual, isDelete}) => {
             setCurrent('previous', {
                 count,
@@ -93,25 +93,25 @@ const getOperations = (event, deps) => {
                 Operation,
             });
         },
-
+        
         find: async () => {
             event.preventDefault();
             const [, value] = await Dialog.prompt('Find', '');
-
+            
             if (!value)
                 return;
-
+            
             const names = Info.files.map(getCurrentName);
             const [result] = finder.find(value, names);
-
+            
             setCurrentByName(result);
         },
-
+        
         findNext: () => {
             const name = finder.findNext();
             setCurrentByName(name);
         },
-
+        
         findPrevious: () => {
             const name = finder.findPrevious();
             setCurrentByName(name);
@@ -123,33 +123,33 @@ module.exports.selectFile = selectFileNotParent;
 
 function selectFileNotParent(current, {getCurrentName, selectFile} = DOM) {
     const name = getCurrentName(current);
-
+    
     if (name === '..')
         return;
-
+    
     selectFile(current);
 }
 
 function setCurrent(sibling, {count, isVisual, isDelete}, {Info, setCurrentFile, unselectFiles, Operation}) {
     let current = Info.element;
     const select = isVisual ? selectFileNotParent : unselectFiles;
-
+    
     select(current);
-
+    
     const position = `${sibling}Sibling`;
-
+    
     for (let i = 0; i < count; i++) {
         const next = current[position];
-
+        
         if (!next)
             break;
-
+        
         current = next;
         select(current);
     }
-
+    
     setCurrentFile(current);
-
+    
     if (isDelete)
         Operation.show('delete');
 }
