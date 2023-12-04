@@ -27,6 +27,7 @@ const notEmpty = (a) => a;
 const clean = (array) => array.filter(notEmpty);
 
 const noParse = (a) => /\.spec\.js$/.test(a);
+const convertToWebpack5Externals = (fn) => (context, request, cb) => fn({context, request}, cb);
 
 const options = {
     babelrc: true,
@@ -100,7 +101,7 @@ module.exports = {
         devtoolModuleFilenameTemplate,
         publicPath: '/dist/',
     },
-    externals: [externals],
+    externals: [convertToWebpack5Externals(externals)],
     module: {
         rules,
         noParse,
@@ -112,7 +113,7 @@ module.exports = {
     },
 };
 
-function externals(context, request, fn) {
+function externals({request}, fn) {
     if (!isDev)
         return fn();
     
