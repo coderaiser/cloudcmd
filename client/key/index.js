@@ -2,16 +2,15 @@
 
 /* global CloudCmd, DOM */
 const clipboard = require('@cloudcmd/clipboard');
+const fullstore = require('fullstore');
 
 const Buffer = require('../dom/buffer');
-
 const Events = require('../dom/events');
 const KEY = require('./key');
 
 const vim = require('./vim');
 const setCurrentByChar = require('./set-current-by-char');
 const {createBinder} = require('./binder');
-const fullstore = require('fullstore');
 
 const Info = DOM.CurrentInfo;
 const Chars = fullstore();
@@ -28,7 +27,6 @@ const isUndefined = (a) => typeof a === 'undefined';
 Chars([]);
 
 const {assign} = Object;
-
 const binder = createBinder();
 
 module.exports = assign(binder, KEY);

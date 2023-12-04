@@ -16,6 +16,6 @@ test('cloudcmd: rest: info', (t) => {
     
     process.memoryUsage = memoryUsage;
     
-    t.ok(_memoryUsage.calledWith(), 'should call memoryUsage');
+    t.calledWithNoArgs(_memoryUsage, 'should call memoryUsage');
     t.end();
 });

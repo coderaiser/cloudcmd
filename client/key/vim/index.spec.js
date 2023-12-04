@@ -1,9 +1,7 @@
 'use strict';
 
 const {join} = require('path');
-
 const {test, stub} = require('supertape');
-
 const mockRequire = require('mock-require');
 
 const dir = '../';
@@ -18,27 +16,31 @@ global.CloudCmd = getCloudCmd();
 const vim = require(pathVim);
 
 const {assign} = Object;
-const {DOM, CloudCmd} = global;
-
+const {DOM} = global;
 const {Buffer} = DOM;
 const pathFind = join(dir, 'vim', 'find');
 const {reRequire, stopAll} = mockRequire;
 
 test('cloudcmd: client: key: set next file: no', (t) => {
     const element = {};
-    
     const setCurrentFile = stub();
+    const unselectFiles = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const Info = {
+        element,
+    };
     
-    vim('j', {});
+    vim('j', {}, {
+        Info,
+        setCurrentFile,
+        unselectFiles,
+    });
     
     t.calledWith(setCurrentFile, [element], 'should set next file');
     t.end();
 });
 
-test('cloudcmd: client: key: set next file current: j', (t) => {
+test('cloudcmd: client: key: set next file current: j', async (t) => {
     const nextSibling = 'hello';
     const element = {
         nextSibling,
@@ -46,10 +48,15 @@ test('cloudcmd: client: key: set next file current: j', (t) => {
     
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const Info = {
+        element,
+    };
     
-    vim('j', {});
+    await vim('j', {}, {
+        Info,
+        setCurrentFile,
+        unselectFiles: stub(),
+    });
     
     t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
     t.end();
@@ -63,12 +70,19 @@ test('cloudcmd: client: key: set next file current: mjj', (t) => {
     
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const Info = {
+        element,
+    };
     
-    vim('m', {});
-    vim('j', {});
-    vim('j', {});
+    const deps = {
+        Info,
+        setCurrentFile,
+        unselectFiles: stub(),
+    };
+    
+    vim('m', {}, deps);
+    vim('j', {}, deps);
+    vim('j', {}, deps);
     
     t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
     t.end();
@@ -82,11 +96,18 @@ test('cloudcmd: client: key: set next file current: g', (t) => {
     
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const Info = {
+        element,
+    };
     
-    vim('g', {});
-    vim('j', {});
+    const deps = {
+        Info,
+        setCurrentFile,
+        unselectFiles: stub(),
+    };
+    
+    vim('g', {}, deps);
+    vim('j', {}, deps);
     
     t.calledWith(setCurrentFile, [nextSibling], 'should ignore g');
     t.end();
@@ -94,23 +115,23 @@ test('cloudcmd: client: key: set next file current: g', (t) => {
 
 test('cloudcmd: client: key: set +2 file current', (t) => {
     const last = {};
-    const nextSibling = {
-        nextSibling: last,
-    };
-    
-    const element = {
-        nextSibling,
-    };
-    
     const setCurrentFile = stub();
+    const element = {};
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const Info = {
+        element,
+    };
+    
+    const deps = {
+        setCurrentFile,
+        Info,
+        unselectFiles: stub(),
+    };
     
     const event = {};
     
-    vim('2', event);
-    vim('j', event);
+    vim('2', event, deps);
+    vim('j', event, deps);
     
     t.calledWith(setCurrentFile, [last], 'should set next file');
     t.end();
@@ -128,17 +149,30 @@ test('cloudcmd: client: key: select +2 files from current before delete', (t) =>
     
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
-    global.DOM.selectFile = stub();
-    global.DOM.getCurrentName = () => false;
-    global.CloudCmd.Operation.show = stub();
+    const Info = {
+        element,
+    };
+    
+    const Operation = {
+        show: stub(),
+    };
+    
+    const selectFile = stub();
+    const getCurrentName = stub().returns('x');
     
     const event = {};
     
-    vim('d', event);
-    vim('2', event);
-    vim('j', event);
+    const deps = {
+        Info,
+        setCurrentFile,
+        selectFile,
+        getCurrentName,
+        Operation,
+    };
+    
+    vim('d', event, deps);
+    vim('2', event, deps);
+    vim('j', event, deps);
     
     t.calledWith(setCurrentFile, [last], 'should set next file');
     t.end();
@@ -157,17 +191,24 @@ test('cloudcmd: client: key: delete +2 files from current', (t) => {
     const setCurrentFile = stub();
     const show = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
-    global.DOM.selectFile = stub();
-    global.DOM.getCurrentName = () => false;
-    global.CloudCmd.Operation.show = show;
+    const deps = {
+        Info: {
+            element,
+        },
+        Operation: {
+            show,
+        },
+        setCurrentFile,
+        selectFile: stub(),
+        getCurrentName: stub().returns('x'),
+        unselectFiles: stub(),
+    };
     
     const event = {};
     
-    vim('d', event);
-    vim('2', event);
-    vim('j', event);
+    vim('d', event, deps);
+    vim('2', event, deps);
+    vim('j', event, deps);
     
     t.calledWith(show, ['delete'], 'should call delete');
     t.end();
@@ -180,11 +221,19 @@ test('cloudcmd: client: key: set previous file current', (t) => {
     };
     
     const setCurrentFile = stub();
+    const unselectFiles = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const Info = {
+        element,
+    };
     
-    vim('k', {});
+    const deps = {
+        Info,
+        setCurrentFile,
+        unselectFiles,
+    };
+    
+    vim('k', {}, deps);
     
     t.calledWith(setCurrentFile, [previousSibling], 'should set previous file');
     t.end();
@@ -193,35 +242,63 @@ test('cloudcmd: client: key: set previous file current', (t) => {
 test('cloudcmd: client: key: copy: no', (t) => {
     const copy = stub();
     
-    Buffer.copy = copy;
+    vim('y', {}, {
+        unselectFiles: stub(),
+        Buffer: {
+            copy,
+        },
+    });
     
-    vim('y', {});
-    
-    t.notOk(copy.called, 'should not copy files');
+    t.notCalled(copy, 'should not copy files');
     t.end();
 });
 
 test('cloudcmd: client: key: copy', (t) => {
     const copy = stub();
+    const Info = {
+        element: {},
+    };
     
-    Buffer.copy = copy;
+    const toggleSelectedFile = stub();
+    const unselectFiles = stub();
     
-    vim('v', {});
-    vim('y', {});
+    const deps = {
+        Info,
+        unselectFiles,
+        toggleSelectedFile,
+        Buffer: {
+            copy,
+        },
+    };
     
-    t.ok(copy.calledWith(), 'should copy files');
+    vim('v', {}, deps);
+    vim('y', {}, deps);
+    
+    t.calledWithNoArgs(copy, 'should copy files');
     t.end();
 });
 
 test('cloudcmd: client: key: copy: unselectFiles', (t) => {
     const unselectFiles = stub();
+    const Info = {
+        element: {},
+    };
     
-    DOM.unselectFiles = unselectFiles;
+    const toggleSelectedFile = stub();
     
-    vim('v', {});
-    vim('y', {});
+    const deps = {
+        Info,
+        unselectFiles,
+        toggleSelectedFile,
+        Buffer: {
+            copy: stub(),
+        },
+    };
     
-    t.ok(unselectFiles.calledWith(), 'should unselect files');
+    vim('v', {}, deps);
+    vim('y', {}, deps);
+    
+    t.calledWithNoArgs(unselectFiles, 'should unselect files');
     t.end();
 });
 
@@ -230,40 +307,43 @@ test('cloudcmd: client: key: paste', (t) => {
     
     Buffer.paste = paste;
     
-    vim('p', {});
+    vim('p', {}, {
+        Buffer,
+    });
     
-    t.ok(paste.calledWith(), 'should paste files');
+    t.calledWithNoArgs(paste, 'should paste files');
     t.end();
 });
 
 test('cloudcmd: client: key: selectFile: ..', (t) => {
-    const getCurrentName = stub();
-    
-    DOM.selectFile = stub();
-    DOM.getCurrentName = () => '..';
-    
+    const getCurrentName = stub().returns('..');
+    const selectFile = stub();
     const current = {};
-    vim.selectFile(current);
     
-    t.notOk(getCurrentName.called, 'should not call selectFile');
+    vim.selectFile(current, {
+        selectFile,
+        getCurrentName,
+    });
+    
+    t.notCalled(selectFile, 'should not call selectFile');
     t.end();
 });
 
 test('cloudcmd: client: key: selectFile', (t) => {
     const selectFile = stub();
-    
-    DOM.selectFile = selectFile;
-    DOM.getCurrentName = (a) => a.name;
-    
+    const getCurrentName = stub().returns('x');
     const current = {};
     
-    vim.selectFile(current);
+    vim.selectFile(current, {
+        selectFile,
+        getCurrentName,
+    });
     
     t.calledWith(selectFile, [current], 'should call selectFile');
     t.end();
 });
 
-test('cloudcmd: client: key: set last file current: shift + g', (t) => {
+test('cloudcmd: client: key: set last file current: shift + g', async (t) => {
     const last = 'last';
     const nextSibling = {
         nextSibling: last,
@@ -275,10 +355,13 @@ test('cloudcmd: client: key: set last file current: shift + g', (t) => {
     
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
-    
-    vim('G', {});
+    await vim('G', {}, {
+        Info: {
+            element,
+        },
+        setCurrentFile,
+        unselectFiles: stub(),
+    });
     
     t.calledWith(setCurrentFile, [last], 'should set last file');
     t.end();
@@ -296,10 +379,13 @@ test('cloudcmd: client: key: set last file current: $', (t) => {
     
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
-    
-    vim('$', {});
+    vim('$', {}, {
+        Info: {
+            element,
+        },
+        setCurrentFile,
+        unselectFiles: stub(),
+    });
     
     t.calledWith(setCurrentFile, [last], 'should set last file');
     t.end();
@@ -315,19 +401,30 @@ test('cloudcmd: client: key: set first file current: gg', (t) => {
         previousSibling,
     };
     
+    const Operation = {
+        show: stub(),
+    };
+    
+    const unselectFiles = stub();
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const deps = {
+        Operation,
+        unselectFiles,
+        setCurrentFile,
+        Info: {
+            element,
+        },
+    };
     
-    vim('g', {});
-    vim('g', {});
+    vim('g', {}, deps);
+    vim('g', {}, deps);
     
     t.calledWith(setCurrentFile, [first], 'should set first file');
     t.end();
 });
 
-test('cloudcmd: client: key: set first file current: ^', (t) => {
+test('cloudcmd: client: key: set first file current: ^', async (t) => {
     const first = 'first';
     const previousSibling = {
         previousSibling: first,
@@ -337,12 +434,23 @@ test('cloudcmd: client: key: set first file current: ^', (t) => {
         previousSibling,
     };
     
+    const Operation = {
+        show: stub(),
+    };
+    
+    const unselectFiles = stub();
     const setCurrentFile = stub();
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.setCurrentFile = setCurrentFile;
+    const deps = {
+        setCurrentFile,
+        Info: {
+            element,
+        },
+        unselectFiles,
+        Operation,
+    };
     
-    vim('^', {});
+    await vim('^', {}, deps);
     
     t.calledWith(setCurrentFile, [first], 'should set first file');
     t.end();
@@ -350,13 +458,15 @@ test('cloudcmd: client: key: set first file current: ^', (t) => {
 
 test('cloudcmd: client: key: visual', (t) => {
     const element = {};
-    
     const toggleSelectedFile = stub();
+    const Info = {
+        element,
+    };
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.toggleSelectedFile = toggleSelectedFile;
-    
-    vim('v', {});
+    vim('v', {}, {
+        Info,
+        toggleSelectedFile,
+    });
     
     t.calledWith(toggleSelectedFile, [element], 'should toggle selection');
     t.end();
@@ -364,32 +474,44 @@ test('cloudcmd: client: key: visual', (t) => {
 
 test('cloudcmd: client: key: ESC', (t) => {
     const element = {};
-    
     const unselectFiles = stub();
+    const Info = {
+        element,
+    };
     
-    global.DOM.CurrentInfo.element = element;
-    global.DOM.unselectFiles = unselectFiles;
+    vim('Escape', null, {
+        Info,
+        unselectFiles,
+    });
     
-    vim('Escape');
-    
-    t.ok(unselectFiles.calledWith(), 'should toggle selection');
+    t.calledWithNoArgs(unselectFiles, 'should toggle selection');
     t.end();
 });
 
-test('cloudcmd: client: key: Enter', (t) => {
+test('cloudcmd: client: key: Enter', async (t) => {
     const nextSibling = 'hello';
     const element = {
         nextSibling,
     };
     
+    const unselectFiles = stub();
     const setCurrentFile = stub();
     
-    DOM.CurrentInfo.element = element;
-    DOM.setCurrentFile = setCurrentFile;
+    const Info = {
+        element,
+    };
     
-    vim('Enter');
+    await vim('Enter', null, {
+        Info,
+        setCurrentFile,
+        unselectFiles,
+    });
     
-    vim('j');
+    await vim('j', null, {
+        Info,
+        setCurrentFile,
+        unselectFiles,
+    });
     
     t.calledWith(setCurrentFile, [nextSibling], 'should set next file');
     t.end();
@@ -449,7 +571,7 @@ test('cloudcmd: client: key: n', (t) => {
     
     stopAll();
     
-    t.ok(findNext.calledWith(), 'should call findNext');
+    t.calledWithNoArgs(findNext, 'should call findNext');
     t.end();
 });
 
@@ -467,12 +589,13 @@ test('cloudcmd: client: key: N', (t) => {
     
     stopAll();
     
-    t.ok(findPrevious.calledWith(), 'should call findPrevious');
+    t.calledWithNoArgs(findPrevious, 'should call findPrevious');
     t.end();
 });
 
-test('cloudcmd: client: key: make directory', (t) => {
+test('cloudcmd: client: key: make directory', async (t) => {
     const vim = reRequire(pathVim);
+    const {DOM} = global;
     
     assign(DOM, {
         promptNewDir: stub(),
@@ -483,8 +606,8 @@ test('cloudcmd: client: key: make directory', (t) => {
         preventDefault: stub(),
     };
     
-    vim('m', event);
-    vim('d', event);
+    await vim('m', event);
+    await vim('d', event);
     
     t.calledWithNoArgs(DOM.promptNewDir);
     t.end();
@@ -492,6 +615,7 @@ test('cloudcmd: client: key: make directory', (t) => {
 
 test('cloudcmd: client: key: make file', (t) => {
     const vim = reRequire(pathVim);
+    const {DOM} = global;
     
     assign(DOM, {
         promptNewFile: stub(),
@@ -510,6 +634,8 @@ test('cloudcmd: client: key: make file', (t) => {
 });
 
 test('cloudcmd: client: vim: terminal', (t) => {
+    const {CloudCmd} = global;
+    
     assign(CloudCmd, {
         Terminal: {
             show: stub(),
@@ -525,7 +651,12 @@ test('cloudcmd: client: vim: terminal', (t) => {
     t.end();
 });
 
-test('cloudcmd: client: vim: edit', (t) => {
+test('cloudcmd: client: vim: edit', async (t) => {
+    global.DOM = getDOM();
+    global.CloudCmd = getCloudCmd();
+    
+    const {CloudCmd} = global;
+    
     assign(CloudCmd, {
         EditFileVim: {
             show: stub(),
@@ -534,7 +665,7 @@ test('cloudcmd: client: vim: edit', (t) => {
     
     const event = {};
     
-    vim('e', event);
+    await vim('e', event);
     
     t.calledWithNoArgs(CloudCmd.EditFileVim.show);
     t.end();

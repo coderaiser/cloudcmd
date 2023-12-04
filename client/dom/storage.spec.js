@@ -103,6 +103,6 @@ test('cloudcmd: client: storage: clear', async (t) => {
     await storage.clear();
     global.localStorage = localStorage;
     
-    t.ok(clear.calledWith(), 'should call clear');
+    t.calledWithNoArgs(clear, 'should call clear');
     t.end();
 });

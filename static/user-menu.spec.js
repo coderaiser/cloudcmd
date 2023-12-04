@@ -191,7 +191,7 @@ test('cloudcmd: static: user menu: refresh', async (t) => {
         CloudCmd,
     });
     
-    t.ok(refresh.calledWith(), 'should call CloudCmd.refresh');
+    t.calledWithNoArgs(refresh, 'should call CloudCmd.refresh');
     t.end();
 });
 
@@ -241,7 +241,7 @@ test('cloudcmd: static: user menu: no EditFile.show', async (t) => {
         CloudCmd,
     });
     
-    t.notOk(EditFile.show.called, 'should not call EditFile.show');
+    t.notCalled(EditFile.show, 'should not call EditFile.show');
     t.end();
 });
 

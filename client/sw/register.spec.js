@@ -50,7 +50,7 @@ test('sw: register: registerSW: no https', async (t, {location, navigator}) => {
     
     await registerSW();
     
-    t.notOk(register.called, 'should not call register');
+    t.notCalled(register, 'should not call register');
     t.end();
 });
 
@@ -66,7 +66,7 @@ test('sw: register: registerSW: http', async (t, {location, navigator}) => {
     
     await registerSW();
     
-    t.notOk(register.called, 'should not call register');
+    t.notCalled(register, 'should not call register');
     t.end();
 });
 

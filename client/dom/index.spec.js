@@ -1,6 +1,6 @@
 'use strict';
 
-require('css-modules-require-hook');
+require('css-modules-require-hook/preset');
 
 const {test, stub} = require('supertape');
 const mockRequire = require('mock-require');

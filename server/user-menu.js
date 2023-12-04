@@ -99,8 +99,11 @@ function sendDefaultMenu(res) {
 
 async function transpile(source) {
     return await tryToCatch(putout, source, {
+        rules: {
+            'nodejs/convert-esm-to-commonjs': 'on',
+        },
         plugins: [
-            'convert-esm-to-commonjs',
+            'nodejs',
             'strict-mode',
             'cloudcmd',
         ],

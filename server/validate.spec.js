@@ -44,7 +44,7 @@ test('validate: root: /', (t) => {
     const fn = stub();
     validate.root('/', fn);
     
-    t.notOk(fn.called, 'should not call fn');
+    t.notCalled(fn, 'should not call fn');
     t.end();
 });
 
@@ -116,7 +116,7 @@ test('validate: columns', (t) => {
     
     stopAll();
     
-    t.notOk(fn.called, 'should not call exit');
+    t.notCalled(fn, 'should not call exit');
     t.end();
 });
 
