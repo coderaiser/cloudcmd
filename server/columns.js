@@ -16,7 +16,7 @@ const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
 const dist = getDist(isDev);
-const columnsDir = path.join(__dirname, '..', dist, 'columns');
+const columnsDir = path.join(__dirname, '..', 'css', 'columns');
 
 const names = fs
     .readdirSync(columnsDir)

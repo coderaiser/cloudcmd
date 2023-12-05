@@ -1,4 +1,4 @@
-'use strict';
+'se strict';
 
 const fs = require('fs');
 const {
@@ -7,14 +7,11 @@ const {
     join,
 } = require('path');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const {env} = require('process');
+const {env} = process;
 const isDev = env.NODE_ENV === 'development';
-
-const extractCSS = (a) => new ExtractTextPlugin(`${a}.css`);
-const extractMain = extractCSS('[name]');
 
 const cssNames = [
     'nojs',
@@ -25,20 +22,17 @@ const cssNames = [
     ...getCSSList('columns'),
 ];
 
-const cssPlugins = cssNames.map(extractCSS);
-const clean = (a) => a.filter(Boolean);
-
-const plugins = clean([
-    ...cssPlugins,
-    extractMain,
-    !isDev && new OptimizeCssAssetsPlugin(),
-]);
+const plugins = [
+    new MiniCssExtractPlugin({
+        chunkFilename: '[name].css',
+    }),
+    new CssMinimizerPlugin(),
+];
 
 const rules = [{
     test: /\.css$/,
-    exclude: /css\/(nojs|view|config|terminal|user-menu|columns.*)\.css/,
-    use: extractMain.extract(['css-loader']),
-}, ...cssPlugins.map(extract), {
+    use: [MiniCssExtractPlugin.loader, "css-loader"],
+}, /*{
     test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
     use: {
         loader: 'url-loader',
@@ -46,12 +40,28 @@ const rules = [{
             limit: 100_000,
         },
     },
-}];
+}*/];
 
 module.exports = {
     plugins,
     module: {
         rules,
+    },
+    optimization: {
+        splitChunks: {
+          cacheGroups: {
+            cloudcmdCommon: {
+              type: "css/mini-extract",
+              name: "cloudcmd.common",
+              chunks: (chunk) => {
+                  //return !/css\/(nojs|view|config|terminal|user-menu|columns.*)\.css/.test(name)
+                  console.log(chunk);
+                return !chunk.name.includes('modules');
+              },
+              enforce: true,
+            },
+          },
+        },
     },
 };
 
@@ -60,17 +70,8 @@ function getCSSList(dir) {
     const addDir = (name) => `${dir}/${name}`;
     const rootDir = join(__dirname, '..');
     
-    return fs
-        .readdirSync(`${rootDir}/css/${dir}`)
+    return fs.readdirSync(`${rootDir}/css/${dir}`)
         .map(base)
         .map(addDir);
 }
 
-function extract(extractPlugin) {
-    const {filename} = extractPlugin;
-    
-    return {
-        test: RegExp(`css/${filename}`),
-        use: extractPlugin.extract(['css-loader']),
-    };
-}

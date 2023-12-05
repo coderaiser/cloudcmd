@@ -1,6 +1,7 @@
 'use strict';
 
 const tryToCatch = require('try-to-catch');
+const {Workbox} = require('workbox-window');
 
 module.exports.registerSW = registerSW;
 module.exports.unregisterSW = unregisterSW;
@@ -20,8 +21,11 @@ async function registerSW(prefix) {
         return;
     
     const {serviceWorker} = navigator;
-    const register = serviceWorker.register.bind(serviceWorker);
-    const [e, sw] = await tryToCatch(register, `${prefix}/sw.js`);
+    //const register = serviceWorker.register.bind(serviceWorker);
+    //const [e, sw] = await tryToCatch(register, `${prefix}/sw.js`);
+     const wb = new Workbox(`${prefix}/sw.js`);
+     const register = wb.register.bind(wb);
+    const [e, sw] = await tryToCatch(register);
     
     if (e)
         return null;
