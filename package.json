@@ -206,7 +206,7 @@
     "unionfs": "^4.0.0",
     "url-loader": "^4.0.0",
     "webpack": "^5.89.0",
-    "webpack-cli": "^3.0.1",
+    "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.0.8",
     "webpackbar": "^5.0.0-3"
   },
