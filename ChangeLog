@@ -1,3 +1,10 @@
+2023.12.08, v16.18.0
+
+feature:
+- 4462f269 cloudcmd: markdown-it v14.0.0
+- 0cc76bd4 cloudcmd: philip v3.0.0: decrease bundle size
+- 656ebd87 client: move out set-current
+
 2023.12.04, v16.17.9
 
 fix:
