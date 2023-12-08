@@ -189,7 +189,7 @@
     "multi-rename": "^2.0.0",
     "nodemon": "^3.0.1",
     "optimize-css-assets-webpack-plugin": "^5.0.0",
-    "philip": "^2.0.0",
+    "philip": "^3.0.0",
     "place": "^1.1.4",
     "readjson": "^2.0.1",
     "request": "^2.76.0",
