@@ -61,7 +61,7 @@ test('cloudcmd: user menu: io.mv', async (t) => {
     threadIt.terminate();
     fs.promises.readFile = readFile;
     
-    t.equal(fixtureMoveFix, body);
+    t.equal(body, fixtureMoveFix);
     t.end();
 });
 
@@ -83,6 +83,6 @@ test('cloudcmd: user menu: io.cp', async (t) => {
     threadIt.terminate();
     fs.promises.readFile = readFile;
     
-    t.equal(fixtureCopyFix, body);
+    t.equal(body, fixtureCopyFix);
     t.end();
 });
