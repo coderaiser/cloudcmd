@@ -19,9 +19,7 @@ const {contentType} = require('mime-types');
 const root = require(`${DIR_SERVER}root`);
 const prefixer = require(`${DIR_SERVER}prefixer`);
 const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
-
 const Columns = require(`${DIR_SERVER}/columns`);
-
 const Template = require(`${DIR_SERVER}/template`);
 
 const {FS} = CloudFunc;
