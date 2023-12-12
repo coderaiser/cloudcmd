@@ -7,8 +7,7 @@
         "fontello.json"
     ],
     "rules": {
-        "github/convert-npm-to-bun": "off",
-        "github/set-node-versions": "off"
+        "github/convert-npm-to-bun": "off"
     },
     "match": {
         "base64": {

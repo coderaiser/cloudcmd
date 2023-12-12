@@ -210,7 +210,7 @@
     "webpackbar": "^5.0.0-3"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "license": "MIT",
   "main": "server/cloudcmd.js",
