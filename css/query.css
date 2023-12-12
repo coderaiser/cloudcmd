@@ -102,10 +102,10 @@
     }
 }
 
-/* stylelint-disable */
 /* iphone 6 landscape */
-@media only screen and (device-width >= 375px) and (device-width <= 667px) and (orientation: landscape),
-    @media only screen and (max-height: 360px) and (max-width: 640px) {
+@media 
+ only screen and (device-width >= 375px) and (device-width <= 667px) and (orientation: landscape),
+ only screen and (max-height: 360px) and (max-width: 640px) {
     .fm {
         height: 55%;
     }
@@ -114,7 +114,6 @@
         height: 60%;
     }
 }
-/* stylelint-enable*/
 
 @media only screen and (width <= 600px) {
     .panel {
