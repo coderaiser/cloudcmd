@@ -86,7 +86,7 @@
   "subdomain": "cloudcmd",
   "dependencies": {
     "@babel/core": "^7.22.9",
-    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/plugin-transform-optional-chaining": "^7.21.0",
     "@cloudcmd/dropbox": "^4.0.1",
     "@cloudcmd/fileop": "^7.0.0",
     "@cloudcmd/move-files": "^7.0.0",

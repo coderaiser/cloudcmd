@@ -4,6 +4,6 @@
     ],
     "plugins": [
         "module:babel-plugin-macros",
-        "@babel/plugin-proposal-optional-chaining"
+        "@babel/plugin-transform-optional-chaining"
     ]
 }
