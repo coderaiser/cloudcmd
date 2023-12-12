@@ -4,19 +4,21 @@
 }
 
 html {
-    height           : 94%;
+    height: 94%;
 }
 
 body {
-    width               : 100%;
-    height              : 95%;
-    overflow            : hidden;
-    background-color    : white;
+    width: 100%;
+    height: 95%;
+    overflow: hidden;
+    background-color: white;
 }
 
-body, pre, code {
-    font-family     : 'Droid Sans Mono', 'Ubuntu Mono', 'Consolas', monospace;
-    font-size       : 16px;
+body,
+pre,
+code {
+    font-family: 'Droid Sans Mono', 'Ubuntu Mono', 'Consolas', monospace;
+    font-size: 16px;
 }
 
 .hidden {
@@ -27,31 +29,33 @@ body, pre, code {
     display: none;
 }
 
-.fm, .keyspanel {
-    cursor              : default;
+.fm,
+.keyspanel {
+    cursor: default;
     -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
-    -webkit-user-select : none;
-    -moz-user-select    : none;
-    -ms-user-select     : none;
-    -o-user-select      : none;
-    user-select         : none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .links {
-    -webkit-user-select : initial;
-    -moz-user-select    : initial;
-    -ms-user-select     : initial;
-    -o-user-select      : initial;
-    user-select         : text;
+    -webkit-user-select: initial;
+    -moz-user-select: initial;
+    -ms-user-select: initial;
+    -o-user-select: initial;
+    user-select: text;
 }
 
-.panel, .cmd-button {
+.panel,
+.cmd-button {
     border: 1px solid;
     border-color: var(--color-transparent);
 }
 
 .icon {
-    margin-left : 0.5%;
+    margin-left: 0.5%;
     cursor: default;
 }
 
@@ -69,33 +73,33 @@ body, pre, code {
 }
 
 .path-icon:hover {
-    color : #06e;
+    color: #06e;
     cursor: pointer;
 }
 
 .error::before {
-    font-family : 'Fontello';
-    font-size   : 14px;
-    color       : rgb(222 41 41);
-    cursor      : default;
-    content     : '\e800';
+    font-family: 'Fontello';
+    font-size: 14px;
+    color: rgb(222 41 41);
+    cursor: default;
+    content: '\e800';
 }
 
 .loading {
-    position        : relative;
-    display         : inline-block;
-    width           : 16px;
-    height          : 16px;
-    vertical-align  : middle;
+    position: relative;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
 }
 
 .loading::after {
-    position    : relative;
-    bottom      : 5px;
-    left        : 16px;
-    font-size   : 10px;
-    color       : var(--color);
-    content     : attr(data-progress);
+    position: relative;
+    bottom: 5px;
+    left: 16px;
+    font-size: 10px;
+    color: var(--color);
+    content: attr(data-progress);
 }
 
 .cmd-button {
@@ -126,7 +130,8 @@ a {
     text-decoration: none;
 }
 
-a:hover, a:active {
+a:hover,
+a:active {
     color: #06e;
     text-decoration: none;
 }
@@ -150,7 +155,7 @@ a:hover, a:active {
 }
 
 .fm {
-    width : 98%;
+    width: 98%;
     height: 90%;
     margin: 26px auto 0;
 }
@@ -171,7 +176,8 @@ a:hover, a:active {
     opacity: 0.7;
 }
 
-.selected-file, .selected-file .name > a {
+.selected-file,
+.selected-file .name > a {
     color: rgb(254 159 224);
 }
 
@@ -219,14 +225,14 @@ a:hover, a:active {
 }
 
 .owner {
-    display         : inline-block;
-    width           : 13%;
+    display: inline-block;
+    width: 13%;
     /* when inline-block
      * vertical align should be
      * set top to prevent additional
      * spaces behind lines
      */
-    vertical-align  : top;
+    vertical-align: top;
 }
 
 .mode {
@@ -235,9 +241,9 @@ a:hover, a:active {
 }
 
 .reduce-text {
-    overflow        : hidden;
-    text-overflow   : ellipsis;
-    white-space     : nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .files {
@@ -252,4 +258,3 @@ a:hover, a:active {
 .files li {
     overflow: hidden;
 }
-

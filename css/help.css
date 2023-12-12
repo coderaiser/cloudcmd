@@ -1,12 +1,12 @@
 .help {
-    margin          : 25px;
-    white-space     : normal;
+    margin: 25px;
+    white-space: normal;
 }
 
 .help li {
-    list-style-type : disc;
+    list-style-type: disc;
 }
 
 .help img {
-    max-width       : 100%;
+    max-width: 100%;
 }

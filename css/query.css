@@ -2,19 +2,19 @@
     .name {
         width: 40%;
     }
-    
+
     .size {
         width: 10%;
     }
-    
+
     .date {
         width: 15%;
     }
-    
+
     .owner {
         width: 12%;
     }
-    
+
     .mode {
         width: 15%;
     }
@@ -24,7 +24,7 @@
     .fm {
         height: 85%;
     }
-    
+
     .files {
         height: 90%;
     }
@@ -34,7 +34,7 @@
     .fm {
         height: 80%;
     }
-    
+
     .files {
         height: 90%;
     }
@@ -80,7 +80,7 @@
     .fm {
         height: 85%;
     }
-    
+
     .files {
         height: 90%;
     }
@@ -96,29 +96,31 @@
     .fm {
         height: 75%;
     }
-    
+
     .files {
         height: 90%;
     }
 }
 
+/* stylelint-disable */
 /* iphone 6 landscape */
 @media only screen and (device-width >= 375px) and (device-width <= 667px) and (orientation: landscape),
     @media only screen and (max-height: 360px) and (max-width: 640px) {
     .fm {
         height: 55%;
     }
-    
+
     .files {
         height: 60%;
     }
 }
+/* stylelint-enable*/
 
 @media only screen and (width <= 600px) {
     .panel {
         font-size: 26px;
     }
-    
+
     /* текущий файл под курсором */
     .current-file {
         background-color: var(--color-transparent);
@@ -128,55 +130,64 @@
     .current-file a {
         color: white;
     }
-    
-    .file::before, .file-link::before {
+
+    .file::before,
+    .file-link::before {
         color: rgb(26 224 124 / 56%);
         content: '\e80d';
     }
-    
-    .current-file .file::before, .file-link::before {
+
+    .current-file .file::before,
+    .file-link::before {
         color: white;
     }
-    
+
     /* меняем иконки на шрифтовые */
     .mini-icon {
-        color           : rgb(246 224 124 / 56%);
-        font            : 16px 'Fontello';
+        color: rgb(246 224 124 / 56%);
+        font: 16px 'Fontello';
         background-image: none;
-        padding         : 1%;
+        padding: 1%;
     }
-    
-    .size, .date, .owner, .mode {
+
+    .size,
+    .date,
+    .owner,
+    .mode {
         display: none;
     }
-    
+
     .name {
         width: 90%;
         display: inline-block;
     }
-    
-    .directory::before, .directory-link::before {
+
+    .directory::before,
+    .directory-link::before {
         content: '\e807';
     }
-    
-    .file, .file-link {
+
+    .file,
+    .file-link {
         background-image: none;
     }
-    
-    .archive, .archive-link {
+
+    .archive,
+    .archive-link {
         background-image: none;
     }
-    
-    .archive::before, .archive-link {
+
+    .archive::before,
+    .archive-link {
         color: rgb(26 224 124 / 56%);
         content: '\e81d';
     }
-    
+
     /* убираем заголовок */
     .fm-header {
         display: none;
     }
-    
+
     /* выводим заголовки рядом с полями */
     .cmd-button {
         width: 20%;
@@ -200,7 +211,9 @@
         width: 98%;
     }
     /* если правая панель не помещаеться - прячем её */
-    .panel-right, .cmd-button#f5, .cmd-button#f6 {
+    .panel-right,
+    .cmd-button#f5,
+    .cmd-button#f6 {
         display: none;
     }
 }
@@ -212,23 +225,24 @@
         padding: 0;
         border: none;
     }
-    
-    .keyspanel, .panel-right {
+
+    .keyspanel,
+    .panel-right {
         display: none;
     }
-    
+
     .files {
         overflow-y: visible;
     }
-    
+
     .current-file {
         box-shadow: 0 0;
     }
-    
+
     .path-icon {
         display: none;
     }
-    
+
     .mini-icon {
         display: none;
     }

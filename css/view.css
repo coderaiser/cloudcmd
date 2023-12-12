@@ -15,11 +15,12 @@
 }
 
 .view-overlay {
-    display     : block;
-    background  : rgb(255 255 255 / 10%);
+    display: block;
+    background: rgb(255 255 255 / 10%);
 }
 
-.media, video {
+.media,
+video {
     width: 100%;
 }
 

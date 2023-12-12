@@ -17,20 +17,23 @@
 }
 
 @font-face {
-    font-family     : 'Droid Sans Mono';
-    src             : url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot);
-    src             :
+    font-family: 'Droid Sans Mono';
+    src: url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot);
+    src:
         local('Droid Sans Mono'),
         local('DroidSansMono'),
         url(../font/DroidSansMono.eot) format('embedded-opentype'),
-        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot?#iefix) format('embedded-opentype'),
-        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot) format('embedded-opentype'),
+        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot?#iefix)
+            format('embedded-opentype'),
+        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJTwtzT4qNq-faudv5qbO9-U.eot)
+            format('embedded-opentype'),
         url(../font/DroidSansMono.woff2) format('woff2'),
         url(../font/DroidSansMono.woff) format('woff'),
-        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff) format('woff'),
+        url(https://themes.googleusercontent.com/static/fonts/droidsansmono/v5/ns-m2xQYezAtqh7ai59hJUYuTAAIFFn5GTWtryCmBQ4.woff)
+            format('woff'),
         local('Consolas');
-    font-style      : normal;
-    font-weight     : 400;
+    font-style: normal;
+    font-weight: 400;
 }
 
 .directory {
@@ -64,4 +67,3 @@
 .loading-gif {
     background: url(../img/spinner.gif);
 }
-
