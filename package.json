@@ -108,7 +108,7 @@
     "execon": "^1.2.0",
     "express": "^4.13.0",
     "files-io": "^4.0.0",
-    "find-up": "^6.1.0",
+    "find-up": "^7.0.0",
     "for-each-key": "^2.0.0",
     "format-io": "^2.0.0",
     "fullstore": "^3.0.0",
