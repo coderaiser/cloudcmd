@@ -17,9 +17,9 @@ jobs:
         with:
           node-version: 18.x
       - name: Install Redrun
-        run: bun i redrun -g --no-save
+        run: bun i yarn redrun -g --no-save
       - name: NPM Install
-        run: npm i
+        run: yarn --no-lockfile
       - name: Lint
         run: redrun lint
       - name: Build
