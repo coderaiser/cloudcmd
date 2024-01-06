@@ -31,12 +31,14 @@ function getMinifyHtmlOptions() {
         /* оставляем, поскольку у нас
          * в элемент fm генерируеться
          * таблица файлов
+         * Keep it, since in the fm element
+         * a file table is generated
          */
         removeEmptyElements: false,
         removeOptionalTags: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-        
+
         minifyJS: true,
     };
 }

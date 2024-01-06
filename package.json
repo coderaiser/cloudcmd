@@ -37,9 +37,7 @@
     "pack",
     "server"
   ],
-  "bin": {
-    "cloudcmd": "bin/cloudcmd.mjs"
-  },
+  "bin": "bin/cloudcmd.mjs",
   "scripts": {
     "start": "madrun start",
     "start:dev": "madrun start:dev",
@@ -146,7 +144,7 @@
     "win32": "^7.0.0",
     "wraptile": "^3.0.0",
     "writejson": "^3.0.0",
-    "yargs-parser": "^21.0.0"
+    "yargs": "^17.7.0"
   },
   "devDependencies": {
     "@babel/code-frame": "^7.22.5",

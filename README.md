@@ -20,30 +20,38 @@
 
 ![Cloud Commander](https://cloudcmd.io/img/logo/cloudcmd.png "Cloud Commander")
 
-## Install
+## Installation
 
-```
+- Stable release
+```sh
 npm i cloudcmd -g
 ```
-
-## Start
+- OR from source
+```sh
+npm_config_build_from_source=true npm i coderaiser/cloudcmd
+```
 
 For starting just type in console:
-
 ```sh
 cloudcmd
 ```
 
-## How to use?
-
 Open url `http://localhost:8000` in browser.
-
-### View
 
 You will see something similar to this.
 ![View](https://cloudcmd.io/img/screen/view.png "View")
 
-## Deploy
+## Development
+
+```sh
+yarn
+```
+
+```sh
+yarn run build
+```
+
+## Deployment
 
 `Cloud Commander` could be easily deployed to [Heroku][DeployURL].
 

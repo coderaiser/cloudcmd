@@ -320,7 +320,7 @@ Then get the path of `gritty` with:
 gritty --path
 ```
 
-It will returns something like:
+It will return something like:
 
 ```sh
 C:\Users\coderaiser\AppData\Roaming\npm\node_modules\gritty
@@ -479,7 +479,7 @@ export default {
             autoClose: false, // optional
             closeMessage: 'Press any button to close Terminal', // optional
         });
-        
+
         await CloudCmd.refresh();
     },
     'P - Build Prod': async ({CloudCmd}) => {
@@ -487,20 +487,20 @@ export default {
             command: 'npm run build:client',
             autoClose: true, // optional
         });
-        
+
         await CloudCmd.refresh();
     },
     'C - Create User Menu File': async ({DOM, CloudCmd}) => {
         const {CurrentInfo} = DOM;
-        
+
         const {dirPath} = CurrentInfo;
         const path = `${dirPath}.cloudcmd.menu.js`;
         const {prefix} = CloudCmd;
-        
+
         const data = await readDefaultMenu({
             prefix,
         });
-        
+
         await createDefaultMenu({
             path,
             data,
@@ -512,19 +512,19 @@ export default {
 
 async function createDefaultMenu({path, data, DOM, CloudCmd}) {
     const {IO} = DOM;
-    
+
     await IO.write(path, data);
     await CloudCmd.refresh();
-    
+
     DOM.setCurrentByName('.cloudcmd.menu.js');
-    
+
     await CloudCmd.EditFile.show();
 }
 
 async function readDefaultMenu({prefix}) {
     const res = await fetch(`${prefix}/api/v1/user-menu/default`);
     const data = await res.text();
-    
+
     return data;
 }
 ```
