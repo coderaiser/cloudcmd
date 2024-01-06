@@ -116,12 +116,12 @@ module.exports = {
 function externals({request}, fn) {
     if (!isDev)
         return fn();
-
+    
     const list = [];
-
+    
     if (list.includes(request))
         return fn(null, request);
-
+    
     fn();
 }
 

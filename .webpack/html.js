@@ -38,7 +38,7 @@ function getMinifyHtmlOptions() {
         removeOptionalTags: true,
         removeScriptTypeAttributes: true,
         removeStyleLinkTypeAttributes: true,
-
+        
         minifyJS: true,
     };
 }

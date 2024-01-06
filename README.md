@@ -23,15 +23,19 @@
 ## Installation
 
 - Stable release
+
 ```sh
 npm i cloudcmd -g
 ```
+
 - OR from source
+
 ```sh
 npm_config_build_from_source=true npm i coderaiser/cloudcmd
 ```
 
 For starting just type in console:
+
 ```sh
 cloudcmd
 ```
