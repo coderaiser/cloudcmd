@@ -124,7 +124,7 @@
     "object.omit": "^3.0.0",
     "once": "^1.4.0",
     "onezip": "^5.0.0",
-    "open": "^9.1.0",
+    "open": "^10.0.3",
     "package-json": "^8.1.0",
     "ponse": "^7.0.0",
     "pullout": "^4.0.0",
