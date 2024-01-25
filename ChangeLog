@@ -1,3 +1,11 @@
+2024.01.25, v17.0.1
+
+feature:
+- d79a5776 cloudcmd: putout v35.0.0
+- 8d92aa91 cloudcmd: package-json v9.0.0
+- 5ab5576e cloudcmd: open v10.0.3
+- c5cfe68c cloudcmd: c8 v9.1.0
+
 2023.12.12, v17.0.0
 
 feature:
