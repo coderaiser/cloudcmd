@@ -1,3 +1,11 @@
+2024.02.02, v17.0.4
+
+feature:
+- 7ce95450 cloudcmd: deepword v9.0.0
+- 1c73e525 cloudcmd: edward v15.0.0
+- da967f08 cloudcmd: dword v15.0.0
+- f0a6109a cloudcmd: restafary v12.0.0
+
 2024.02.01, v17.0.3
 
 feature:
