@@ -80,6 +80,7 @@ const yargsOptions = {
         'config-auth',
         'console',
         'sync-console-path',
+        'readonly',
         'contact',
         'terminal',
         'terminal-auto-restart',
@@ -105,6 +106,7 @@ const yargsOptions = {
         'port': config('port'),
         'online': config('online'),
         'open': choose(env.bool('open'), config('open')),
+        'readonly': env.bool('readonly') || config('readonly'),
         'editor': env('editor') || config('editor'),
         'packer': config('packer') || 'tar',
         'zip': config('zip'),
@@ -205,6 +207,8 @@ async function main() {
     config('configDialog', args.configDialog);
     config('configAuth', args.configAuth);
     config('keysPanel', args.keysPanel);
+    config('readonly', args.readonly);
+    
     config('export', args.export);
     config('exportToken', args.exportToken);
     config('import', args.import);

@@ -111,6 +111,7 @@ async function route({config, options, request, response}) {
  * additional processing of index file
  */
 function indexProcessing(config, options) {
+    const readonly = config('readonly');
     const oneFilePanel = config('oneFilePanel');
     const noKeysPanel = !config('keysPanel');
     const noContact = !config('contact');
@@ -124,10 +125,18 @@ function indexProcessing(config, options) {
     if (noKeysPanel)
         data = hideKeysPanel(data);
     
-    if (oneFilePanel)
+    if (readonly) {
+        data = data
+            .replace('icon-move', 'icon-move none')
+            .replace('icon-copy', 'icon-copy none')
+            .replace('icon-edit', 'icon-edit none')
+            .replace('icon-directory', 'icon-directory none')
+            .replace('icon-delete', 'icon-delete none');
+    } else if (oneFilePanel) {
         data = data
             .replace('icon-move', 'icon-move none')
             .replace('icon-copy', 'icon-copy none');
+    }
     
     if (noContact)
         data = data.replace('icon-contact', 'icon-contact none');

@@ -43,6 +43,7 @@ const html = fs.readFileSync(getIndexPath(isDev), 'utf8');
 const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
 const clean = (a) => a.filter(notEmpty);
+const createReadonly = (config) => () => config('readonly');
 
 const isUndefined = (a) => typeof a === 'undefined';
 const isFn = (a) => typeof a === 'function';
@@ -131,6 +132,7 @@ function _initAuth(config, accept, reject, username, password) {
 function listen({prefixSocket, socket, config}) {
     const root = apart(config, 'root');
     const auth = initAuth(config);
+    const readonly = createReadonly(config);
     
     prefixSocket = getPrefix(prefixSocket);
     config.listen(socket, auth);
@@ -138,18 +140,21 @@ function listen({prefixSocket, socket, config}) {
     edward.listen(socket, {
         root,
         auth,
+        readonly,
         prefixSocket: `${prefixSocket}/edward`,
     });
     
     dword.listen(socket, {
         root,
         auth,
+        readonly,
         prefixSocket: `${prefixSocket}/dword`,
     });
     
     deepword.listen(socket, {
         root,
         auth,
+        readonly,
         prefixSocket: `${prefixSocket}/deepword`,
     });
     
@@ -161,6 +166,7 @@ function listen({prefixSocket, socket, config}) {
     fileop.listen(socket, {
         root,
         auth,
+        readonly,
         prefix: `${prefixSocket}/fileop`,
     });
     
@@ -180,6 +186,7 @@ function cloudcmd({modules, config}) {
     const diff = apart(config, 'diff');
     const zip = apart(config, 'zip');
     const root = apart(config, 'root');
+    const readonly = createReadonly(config);
     
     const ponseStatic = ponse.static({
         cache,
@@ -201,6 +208,7 @@ function cloudcmd({modules, config}) {
             zip,
             dropbox,
             dropboxToken,
+            readonly,
         }),
         dword({
             root,
@@ -209,6 +217,7 @@ function cloudcmd({modules, config}) {
             zip,
             dropbox,
             dropboxToken,
+            readonly,
         }),
         deepword({
             root,
@@ -217,6 +226,7 @@ function cloudcmd({modules, config}) {
             zip,
             dropbox,
             dropboxToken,
+            readonly,
         }),
         fileop(),
         nomine(),
@@ -233,6 +243,7 @@ function cloudcmd({modules, config}) {
         }),
         restafary({
             prefix: cloudfunc.apiURL + '/fs',
+            readonly,
             root,
         }),
         userMenu({

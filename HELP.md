@@ -88,6 +88,7 @@ Cloud Commander supports the following command-line parameters:
 | `--config-auth`               | enable auth change in config dialog
 | `--console`                   | enable console
 | `--sync-console-path`         | sync console path
+| `--readonly`                  | disable ui related to filesystem modifications
 | `--terminal`                  | enable terminal
 | `--terminal-path`             | set terminal path
 | `--terminal-command`          | set command to run in terminal (shell by default)
@@ -403,6 +404,7 @@ Here's a description of all options:
     "configAuth": true, // enable auth change in config dialog
     "console": true, // enable console
     "syncConsolePath": false, // do not sync console path
+    "readonly": false, // disable ui related to filesystem modifications
     "terminal": false, // disable terminal
     "terminalPath": "", // path of a terminal
     "terminalCommand": "", // set command to run in terminal

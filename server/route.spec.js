@@ -166,6 +166,23 @@ test('cloudcmd: route: keys panel', async (t) => {
     t.end();
 });
 
+test('cloudcmd: route: readonly', async (t) => {
+    const config = {
+        readonly: true,
+    };
+    
+    const options = {
+        config,
+    };
+    
+    const {body} = await request.get('/', {
+        options,
+    });
+    
+    t.match(body, 'icon-edit none', 'should hide edit');
+    t.end();
+});
+
 test('cloudcmd: route: symlink', async (t) => {
     const emptyDir = path.join(fixtureDir, 'empty-dir');
     const root = fixtureDir;

@@ -54,6 +54,9 @@ const noFilesCheck = () => {
 };
 
 module.exports.init = promisify((callback) => {
+    if (config('readonly'))
+        return;
+    
     showLoad();
     
     exec.series([

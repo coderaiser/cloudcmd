@@ -169,15 +169,37 @@ function getFileMenuData() {
         },
     };
     
-    const menuDataFile = {
+    const menuDataFile = maybeReadonly({
         ...menuTop,
         ...menuBottom,
-    };
+    });
     
     return {
         isAuth,
         menuDataFile,
     };
+}
+
+function maybeReadonly(menu) {
+    const operations = [
+        'Edit',
+        'Rename',
+        'Delete',
+        'Pack',
+        'Extract',
+        'Cut',
+        'Copy',
+        'Paste',
+        'New',
+        'Upload',
+        'Upload From Cloud',
+    ];
+    
+    for (const operation of operations) {
+        delete menu[operation];
+    }
+    
+    return menu;
 }
 
 function isCurrent(yesFn, noFn) {

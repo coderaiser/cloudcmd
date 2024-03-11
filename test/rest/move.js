@@ -113,3 +113,30 @@ test('cloudcmd: rest: move: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
+
+test('cloudcmd: rest: readonly', async (t) => {
+    const cloudcmd = reRequire(cloudcmdPath);
+    const {createConfigManager} = cloudcmd;
+    
+    const configManager = createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/');
+    configManager('readonly', true);
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const files = {
+        from: '/',
+    };
+    
+    const {body} = await request.put(`/api/v1/move`, {
+        body: files,
+    });
+    
+    const expected = '"readonly" mode enabled';
+    
+    t.equal(body, expected);
+    t.end();
+});

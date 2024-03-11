@@ -188,6 +188,9 @@ module.exports._onPUT = onPUT;
 function onPUT({name, config, body}, callback) {
     checkPut(name, body, callback);
     
+    if (config('readonly'))
+        callback(UserError('"readonly" mode enabled'));
+    
     const cmd = getCMD(name);
     const files = json.parse(body);
     const rootDir = config('root');
