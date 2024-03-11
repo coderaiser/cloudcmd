@@ -1,4 +1,4 @@
-FROM node:lts-buster-slim
+FROM node:alpine
 LABEL maintainer="Coderaiser"
 
 RUN mkdir -p /usr/src/app
@@ -8,12 +8,12 @@ COPY package.json /usr/src/app/
 
 RUN npm config set package-lock false && \
     npm install --production && \
-    apt update && \
-    apt install -y make g++ python3 && \
+    apk update && \
+    apk add --no-cache bash make g++ python3 && \
     npm i gritty && \
     npm cache clean --force && \
-    apt remove -y make g++ python3 && \
-    rm -rf /usr/include /tmp/* /var/cache/apt/*
+    apk del make g++ python3 && \
+    rm -rf /usr/include /tmp/* /var/cache/apk/*
 
 COPY . /usr/src/app
 
