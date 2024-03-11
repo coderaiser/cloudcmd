@@ -1,3 +1,8 @@
+2024.03.11, v17.0.6
+
+fix:
+- d928c0b8 cloudcmd: ocker: revert alpine (#406)
+
 2024.03.11, v17.0.5
 
 fix:
