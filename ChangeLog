@@ -1,3 +1,9 @@
+2024.03.12, v17.0.7
+
+feature:
+- 97627dc2 cloudcmd: auto-globals v4.0.0
+- 683c865e cloudcmd: gritty v8.0.0
+
 2024.03.11, v17.0.6
 
 fix:
