@@ -26,7 +26,7 @@ jobs:
         run: yarn --no-lockfile
       - name: Lint
         run: redrun fix:lint
-      - uses: actions/cache@v3
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/bin/
