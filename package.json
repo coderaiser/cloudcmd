@@ -127,7 +127,7 @@
     "open": "^10.0.3",
     "package-json": "^9.0.0",
     "ponse": "^7.0.0",
-    "pullout": "^4.0.0",
+    "pullout": "^5.0.0",
     "putout": "^35.0.0",
     "redzip": "^3.0.0",
     "rendy": "^4.1.3",
