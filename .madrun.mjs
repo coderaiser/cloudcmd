@@ -1,7 +1,4 @@
-import {
-    run,
-    cutEnv,
-} from 'madrun';
+import {run, cutEnv} from 'madrun';
 import process from 'node:process';
 
 const testEnv = {

@@ -7,10 +7,7 @@ import {createSimport} from 'simport';
 import parse from 'yargs-parser';
 import process from 'node:process';
 import exit from '../server/exit.js';
-import {
-    createConfig,
-    configPath,
-} from '../server/config.js';
+import {createConfig, configPath} from '../server/config.js';
 import env from '../server/env.js';
 import prefixer from '../server/prefixer.js';
 
