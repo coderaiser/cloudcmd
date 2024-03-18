@@ -2,7 +2,7 @@
 
 const process = require('process');
 const test = require('supertape');
-const env = require('../../server/env');
+const env = require('../../server/env.js');
 
 test('env: small', (t) => {
     process.env.cloudcmd_hello = 'world';

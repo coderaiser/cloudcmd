@@ -1,23 +1,16 @@
-'use strict';
+import {mkdirSync} from 'node:fs';
+import {join, dirname} from 'node:path';
+import test from 'supertape';
+import {rimraf} from 'rimraf';
+import {fileURLToPath} from 'node:url';
+import cloudcmd from '../../server/cloudcmd.mjs';
 
-const {mkdirSync} = require('fs');
-const {join} = require('path');
-const test = require('supertape');
-const rimraf = require('rimraf');
+const __filename = fileURLToPath(import.meta.url);
 
-const config = {
-    root: join(__dirname, '..'),
-};
-
-const cloudcmd = require('../..');
+const __dirname = dirname(__filename);
 const configManager = cloudcmd.createConfigManager();
 
 configManager('auth', false);
-
-const {request} = require('serve-once')(cloudcmd, {
-    config,
-    configManager,
-});
 
 const fixtureDir = join(__dirname, '..', 'fixture') + '/';
 

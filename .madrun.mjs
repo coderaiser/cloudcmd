@@ -1,5 +1,5 @@
-import {run, cutEnv} from 'madrun';
 import process from 'node:process';
+import {run, cutEnv} from 'madrun';
 
 const testEnv = {
     THREAD_IT_COUNT: 0,
@@ -33,9 +33,9 @@ export default {
     'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': () => run('lint', '--fix'),
     'lint:stream': () => run('lint', '-f stream'),
-    'test': () => [testEnv, `tape 'test/**/*.js' '{client,static,common,server}/**/*.spec.js' -f fail`],
+    'test': () => [testEnv, `escover tape 'test/**/*.{js,mjs}' '{client,static,common,server}/**/*.spec.{js,mjs}' -f fail`],
     'test:client': () => `tape 'test/client/**/*.js'`,
-    'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
+    'test:server': () => `tape 'test/**/*.{js,mjs}' 'server/**/*.spec.{js,mjs}' 'common/**/*.spec.{js,mjs}'`,
     'wisdom': () => run(['lint:all', 'build', 'test']),
     'wisdom:type': () => 'bin/release.mjs',
     'coverage': async () => [testEnv, `c8 ${await cutEnv('test')}`],

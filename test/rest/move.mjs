@@ -1,18 +1,19 @@
-'use strict';
+import {createMockImport} from 'mock-import';
+import fs from 'node:fs';
+import test from 'supertape';
+import {Volume} from 'memfs';
+import {ufs} from 'unionfs';
+import serveOnce from 'serve-once';
 
-const fs = require('fs');
+const {
+    stopAll,
+    mockImport,
+    reImport,
+} = createMockImport(import.meta.url);
 
-const test = require('supertape');
-const {Volume} = require('memfs');
-const {ufs} = require('unionfs');
-
-const mockRequire = require('mock-require');
-const serveOnce = require('serve-once');
-const {reRequire, stopAll} = mockRequire;
-
-const cloudcmdPath = '../../';
-const dir = `${cloudcmdPath}server/`;
-const restPath = `${dir}rest`;
+const dir = `../../server/`;
+const cloudcmdPath = `${dir}cloudcmd.mjs`;
+const restPath = `${dir}rest/index.js`;
 
 const {assign} = Object;
 
@@ -31,14 +32,17 @@ test('cloudcmd: rest: move', async (t) => {
     assign(unionFS, {
         promises: fs.promises,
     });
-    mockRequire('fs', unionFS);
     
-    reRequire('@cloudcmd/rename-files');
-    reRequire('@cloudcmd/move-files');
-    reRequire(restPath);
+    mockImport('fs', unionFS);
     
-    const cloudcmd = reRequire(cloudcmdPath);
-    const {createConfigManager} = cloudcmd;
+    await reImport('@cloudcmd/rename-files');
+    await reImport('@cloudcmd/move-files');
+    await reImport(restPath);
+    
+    const {
+        cloudcmd,
+        createConfigManager,
+    } = await reImport(cloudcmdPath);
     
     const configManager = createConfigManager();
     configManager('auth', false);
@@ -65,7 +69,8 @@ test('cloudcmd: rest: move', async (t) => {
 });
 
 test('cloudcmd: rest: move: no from', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
+    const {cloudcmd} = await reImport(cloudcmdPath);
+    
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();
@@ -89,7 +94,7 @@ test('cloudcmd: rest: move: no from', async (t) => {
 });
 
 test('cloudcmd: rest: move: no to', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
+    const {cloudcmd} = await reImport(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();

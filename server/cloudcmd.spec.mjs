@@ -1,34 +1,32 @@
-'use strict';
+import process from 'node:process';
+import path, {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {createMockImport} from 'mock-import';
+import serveOnce from 'serve-once';
+import {test, stub} from 'supertape';
+import cloudcmd, {
+    createConfigManager,
+    _getIndexPath,
+    _getPrefix,
+    _initAuth,
+} from './cloudcmd.mjs';
 
-const process = require('process');
-const path = require('path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const {test, stub} = require('supertape');
+const {reImport} = createMockImport(import.meta.url);
 
-const {reRequire} = require('mock-require');
-
-const DIR = './';
-const cloudcmdPath = `${DIR}cloudcmd`;
-
-const cloudcmd = require(cloudcmdPath);
-const {request} = require('serve-once')(cloudcmd, {
+const {request} = serveOnce(cloudcmd, {
     config: {
         auth: false,
         dropbox: false,
     },
 });
 
-const {
-    createConfigManager,
-    _getPrefix,
-    _initAuth,
-} = cloudcmd;
-
 test('cloudcmd: defaults: config', (t) => {
     const configManager = createConfigManager();
     
     configManager('configDialog', false);
-    
     cloudcmd({
         configManager,
     });
@@ -75,12 +73,12 @@ test('cloudcmd: getPrefix: function: empty', (t) => {
     t.end();
 });
 
-test('cloudcmd: replaceDist', (t) => {
+test('cloudcmd: replaceDist', async (t) => {
     const {NODE_ENV} = process.env;
     
     process.env.NODE_ENV = 'development';
     
-    const {_replaceDist} = reRequire(cloudcmdPath);
+    const {_replaceDist} = await reImport('./cloudcmd.mjs');
     
     const url = '/dist/hello';
     const result = _replaceDist(url);
@@ -92,12 +90,10 @@ test('cloudcmd: replaceDist', (t) => {
     t.end();
 });
 
-test('cloudcmd: replaceDist: !isDev', (t) => {
+test('cloudcmd: replaceDist: !isDev', async (t) => {
     const url = '/dist/hello';
-    const cloudcmdPath = `${DIR}cloudcmd`;
-    
     const reset = cleanNodeEnv();
-    const {_replaceDist} = reRequire(cloudcmdPath);
+    const {_replaceDist} = await reImport('./cloudcmd.mjs');
     const result = _replaceDist(url);
     
     reset();
@@ -167,7 +163,7 @@ test('cloudcmd: getIndexPath: production', (t) => {
     const isDev = false;
     const name = path.join(__dirname, '..', 'dist', 'index.html');
     
-    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.equal(_getIndexPath(isDev), name);
     t.end();
 });
 
@@ -175,7 +171,7 @@ test('cloudcmd: getIndexPath: development', (t) => {
     const isDev = true;
     const name = path.join(__dirname, '..', 'dist-dev', 'index.html');
     
-    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.equal(_getIndexPath(isDev), name);
     t.end();
 });
 

@@ -1,11 +1,9 @@
-'use strict';
+import serveOnce from 'serve-once';
+import test from 'supertape';
+import cloudcmd from '../../server/cloudcmd.mjs';
 
-const test = require('supertape');
-
-const cloudcmd = require('../..');
 const configManager = cloudcmd.createConfigManager();
-
-const {request} = require('serve-once')(cloudcmd, {
+const {request} = serveOnce(cloudcmd, {
     config: {
         auth: false,
     },

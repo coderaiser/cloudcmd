@@ -1,44 +1,44 @@
-'use strict';
+import {join} from 'node:path';
+import process from 'node:process';
+import {readFileSync} from 'node:fs';
+import currify from 'currify';
+import apart from 'apart';
+import ponse from 'ponse';
+import restafary from 'restafary';
+import restbox from 'restbox';
+import konsole from 'console-io';
+import edward from 'edward';
+import dword from 'dword';
+import deepword from 'deepword';
+import nomine from 'nomine';
+import fileop from '@cloudcmd/fileop';
+import cloudfunc from '../common/cloudfunc.js';
+import authentication from './auth.js';
+import modulas from './modulas.js';
+import userMenu from './user-menu.js';
+import rest from './rest/index.js';
+import route from './route.js';
+import validate from './validate.js';
+import prefixer from './prefixer.js';
+import terminal from './terminal.js';
+import distribute from './distribute/index.js';
+import {createConfig, configPath} from './config.js';
 
-const process = require('process');
-const DIR = `${__dirname}/`;
-const DIR_COMMON = `${DIR}../common/`;
-const path = require('path');
+const {assign} = Object;
 
-const fs = require('fs');
-const cloudfunc = require(`${DIR_COMMON}cloudfunc`);
+export {
+    createConfig,
+    configPath,
+    CloudCmdMiddleware as cloudcmd,
+};
 
-const authentication = require(`${DIR}auth`);
-const {createConfig, configPath} = require(`${DIR}config`);
-
-const modulas = require(`${DIR}modulas`);
-
-const userMenu = require(`${DIR}user-menu`);
-const rest = require(`${DIR}rest`);
-const route = require(`${DIR}route`);
-const validate = require(`${DIR}validate`);
-const prefixer = require(`${DIR}prefixer`);
-const terminal = require(`${DIR}terminal`);
-const distribute = require(`${DIR}distribute`);
-const currify = require('currify');
-
-const apart = require('apart');
-const ponse = require('ponse');
-const restafary = require('restafary');
-const restbox = require('restbox');
-const konsole = require('console-io');
-const edward = require('edward');
-const dword = require('dword');
-const deepword = require('deepword');
-const nomine = require('nomine');
-const fileop = require('@cloudcmd/fileop');
-const DIR_ROOT = `${DIR}../`;
+const DIR_ROOT = new URL('..', import.meta.url).pathname;
 
 const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
-const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.html`);
-const html = fs.readFileSync(getIndexPath(isDev), 'utf8');
+const getIndexPath = (isDev) => join(DIR_ROOT, `${getDist(isDev)}/index.html`);
+const html = readFileSync(getIndexPath(isDev), 'utf8');
 
 const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
@@ -47,7 +47,7 @@ const clean = (a) => a.filter(notEmpty);
 const isUndefined = (a) => typeof a === 'undefined';
 const isFn = (a) => typeof a === 'function';
 
-module.exports = (params) => {
+export default function CloudCmdMiddleware(params) {
     const p = params || {};
     const options = p.config || {};
     const config = p.configManager || createConfig({
@@ -55,7 +55,6 @@ module.exports = (params) => {
     });
     
     const {modules} = p;
-    
     const keys = Object.keys(options);
     
     for (const name of keys) {
@@ -89,12 +88,11 @@ module.exports = (params) => {
         modules,
         config,
     });
-};
+}
 
-module.exports.createConfigManager = createConfig;
-module.exports.configPath = configPath;
+export const createConfigManager = createConfig;
 
-module.exports._getIndexPath = getIndexPath;
+export const _getIndexPath = getIndexPath;
 
 function defaultValue(config, name, options) {
     const value = options[name];
@@ -106,7 +104,12 @@ function defaultValue(config, name, options) {
     return value;
 }
 
-module.exports._getPrefix = getPrefix;
+export const _getPrefix = getPrefix;
+
+assign(CloudCmdMiddleware, {
+    createConfigManager,
+});
+
 function getPrefix(prefix) {
     if (isFn(prefix))
         return prefix() || '';
@@ -114,8 +117,7 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-module.exports._initAuth = _initAuth;
-function _initAuth(config, accept, reject, username, password) {
+export function _initAuth(config, accept, reject, username, password) {
     if (!config('auth'))
         return accept();
     
@@ -255,7 +257,8 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
-module.exports._replaceDist = replaceDist;
+export const _replaceDist = replaceDist;
+
 function replaceDist(url) {
     if (!isDev)
         return url;

@@ -1,19 +1,19 @@
-'use strict';
+import {createMockImport} from 'mock-import';
+import {fileURLToPath} from 'node:url';
+import fs from 'node:fs';
+import {join, dirname} from 'node:path';
+import {promisify} from 'node:util';
+import test from 'supertape';
+import tar from 'tar-stream';
+import gunzip from 'gunzip-maybe';
+import pullout from 'pullout';
+import serveOnce from 'serve-once';
+import cloudcmd from '../../server/cloudcmd.mjs';
 
-const fs = require('fs');
-const {join} = require('path');
-const {promisify} = require('util');
-
-const {reRequire} = require('mock-require');
-const test = require('supertape');
-const tar = require('tar-stream');
-const gunzip = require('gunzip-maybe');
-const pullout = require('pullout');
-
-const cloudcmdPath = '../..';
-const cloudcmd = require(cloudcmdPath);
-const serveOnce = require('serve-once');
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const cloudcmdPath = '../../server/cloudcmd.mjs';
+const {reImport} = createMockImport(import.meta.url);
 const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
 
 const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
@@ -21,7 +21,7 @@ const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
 const defaultOptions = {
     config: {
         auth: false,
-        root: join(__dirname, '..'),
+        root: new URL('..', import.meta.url).pathname,
     },
 };
 
@@ -48,7 +48,7 @@ test('cloudcmd: rest: pack: tar: get', async (t) => {
         config,
     };
     
-    const cloudcmd = reRequire(cloudcmdPath);
+    const {cloudcmd} = await reImport(cloudcmdPath);
     const {request} = serveOnce(cloudcmd, defaultOptions);
     
     const {body} = await request.get(`/api/v1/pack/fixture/pack`, {

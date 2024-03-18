@@ -1,24 +1,26 @@
-'use strict';
+import {createMockImport} from 'mock-import';
+import {Readable} from 'node:stream';
+import path, {dirname} from 'node:path';
+import fs from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import tryToCatch from 'try-to-catch';
+import serveOnce from 'serve-once';
+import {test, stub} from 'supertape';
+import cloudcmd from './cloudcmd.mjs';
 
-const {Readable} = require('stream');
+const {
+    stopAll,
+    reImport,
+    mockImport,
+} = createMockImport(import.meta.url);
 
-const path = require('path');
-const fs = require('fs');
-
-const tryToCatch = require('try-to-catch');
-const {test, stub} = require('supertape');
-const mockRequire = require('mock-require');
-const cloudcmdPath = './cloudcmd';
-
-const cloudcmd = require(cloudcmdPath);
-
-const serveOnce = require('serve-once');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const cloudcmdPath = './cloudcmd.mjs';
 const {createConfigManager} = cloudcmd;
 
 const routePath = './route';
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
-
-const {reRequire, stopAll} = mockRequire;
 
 const defaultConfig = {
     auth: false,
@@ -231,12 +233,12 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
+    await reImport(routePath);
+    const cloudcmd = await reImport(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd, {
         configManager: createConfigManager(),
@@ -270,12 +272,12 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
+    await reImport(routePath);
+    const cloudcmd = await reImport(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/');
@@ -306,12 +308,12 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
+    await reImport(routePath);
+    const cloudcmd = await reImport(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd, {
         config: defaultConfig,
@@ -422,7 +424,7 @@ test('cloudcmd: route: dropbox', async (t) => {
     config('dropbox', true);
     config('dropboxToken', '');
     
-    const {_getReadDir} = reRequire(routePath);
+    const {_getReadDir} = await reImport(routePath);
     
     const readdir = _getReadDir(config);
     const [e] = await tryToCatch(readdir, '/root');
@@ -453,13 +455,13 @@ test('cloudcmd: route: read: root', async (t) => {
     
     const read = stub().returns(stream);
     
-    mockRequire('win32', {
+    mockImport('win32', {
         read,
     });
     
-    reRequire(routePath);
+    await reImport(routePath);
     
-    const cloudcmd = reRequire(cloudcmdPath);
+    const cloudcmd = await reImport(cloudcmdPath);
     const configManager = createConfigManager();
     const root = '/hello';
     

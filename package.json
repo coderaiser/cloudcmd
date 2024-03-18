@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/coderaiser/cloudcmd.git"
   },
-  "main": "server/cloudcmd.js",
+  "main": "server/cloudcmd.mjs",
   "keywords": [
     "console",
     "terminal",
@@ -170,6 +170,7 @@
     "css-modules-require-hook": "^4.2.3",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
+    "escover": "^4.1.0",
     "eslint": "^8.0.1",
     "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-putout": "^22.0.0",
@@ -186,6 +187,7 @@
     "madrun": "^10.0.0",
     "memfs": "^4.2.0",
     "minor": "^1.2.2",
+    "mock-import": "^4.0.3",
     "mock-require": "^3.0.1",
     "morgan": "^1.6.1",
     "multi-rename": "^2.0.0",
@@ -195,7 +197,6 @@
     "place": "^1.1.4",
     "readjson": "^2.0.1",
     "redlint": "^3.13.1",
-    "request": "^2.76.0",
     "rimraf": "^5.0.1",
     "scroll-into-view-if-needed": "^3.0.4",
     "serve-once": "^3.0.1",

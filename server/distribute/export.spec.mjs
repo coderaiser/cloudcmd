@@ -1,12 +1,10 @@
-'use strict';
+import {once} from 'node:events';
+import test from 'supertape';
+import io from 'socket.io-client';
+import {connect} from '../../test/before.mjs';
+import Config from '../config.js';
 
-const {once} = require('events');
-
-const test = require('supertape');
-const io = require('socket.io-client');
-
-const {connect} = require('../../test/before');
-const config = require('../config').createConfig();
+const config = Config.createConfig();
 
 test('distribute: export', async (t) => {
     const defaultConfig = {

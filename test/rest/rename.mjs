@@ -1,17 +1,19 @@
-'use strict';
+import {createMockImport} from 'mock-import';
+import fs from 'node:fs';
+import test from 'supertape';
+import {Volume} from 'memfs';
+import {ufs} from 'unionfs';
+import mockRequire from 'mock-require';
+import serveOnce from 'serve-once';
 
-const fs = require('fs');
+const {
+    stopAll,
+    mockImport,
+    reImport,
+} = createMockImport(import.meta.url);
 
-const test = require('supertape');
-const {Volume} = require('memfs');
-const {ufs} = require('unionfs');
-
-const mockRequire = require('mock-require');
-const serveOnce = require('serve-once');
-const {reRequire, stopAll} = mockRequire;
-
-const cloudcmdPath = '../../';
-const dir = `${cloudcmdPath}server/`;
+const dir = `../../server/`;
+const cloudcmdPath = `${dir}cloudcmd.mjs`;
 const restPath = `${dir}rest`;
 
 test('cloudcmd: rest: rename', async (t) => {
@@ -26,13 +28,13 @@ test('cloudcmd: rest: rename', async (t) => {
         .use(vol)
         .use(fs);
     
-    mockRequire('fs', unionFS);
+    mockImport('fs', unionFS);
     
-    reRequire('@cloudcmd/rename-files');
-    reRequire('@cloudcmd/move-files');
-    reRequire(restPath);
+    await reImport('@cloudcmd/rename-files');
+    await reImport('@cloudcmd/move-files');
+    await reImport(restPath);
     
-    const cloudcmd = reRequire(cloudcmdPath);
+    const {cloudcmd} = await reImport(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     const configManager = createConfigManager();
     
@@ -63,7 +65,7 @@ test('cloudcmd: rest: rename', async (t) => {
 });
 
 test('cloudcmd: rest: rename: no from', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
+    const {cloudcmd} = await reImport(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();
@@ -87,7 +89,7 @@ test('cloudcmd: rest: rename: no from', async (t) => {
 });
 
 test('cloudcmd: rest: rename: no to', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
+    const {cloudcmd} = await reImport(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();

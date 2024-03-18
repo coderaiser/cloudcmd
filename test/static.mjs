@@ -1,14 +1,13 @@
-'use strict';
+import serveOnce from 'serve-once';
+import test from 'supertape';
+import criton from 'criton';
+import cloudcmd from '../server/cloudcmd.mjs';
 
-const test = require('supertape');
-const criton = require('criton');
-
-const cloudcmd = require('..');
 const config = {
     auth: false,
 };
 
-const {request} = require('serve-once')(cloudcmd, {
+const {request} = serveOnce(cloudcmd, {
     config,
 });
 
