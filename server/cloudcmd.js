@@ -1,5 +1,6 @@
 'use strict';
 
+const fullstore = require('fullstore');
 const process = require('process');
 const DIR = `${__dirname}/`;
 const DIR_COMMON = `${DIR}../common/`;
@@ -34,11 +35,12 @@ const nomine = require('nomine');
 const fileop = require('@cloudcmd/fileop');
 const DIR_ROOT = `${DIR}../`;
 
-const isDev = process.env.NODE_ENV === 'development';
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
+const isDev = fullstore(process.env.NODE_ENV === 'development');
+
 const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.html`);
-const html = fs.readFileSync(getIndexPath(isDev), 'utf8');
+const html = fs.readFileSync(getIndexPath(isDev()), 'utf8');
 
 const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;
@@ -255,9 +257,10 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
+module.exports._isDev = isDev;
 module.exports._replaceDist = replaceDist;
 function replaceDist(url) {
-    if (!isDev)
+    if (!isDev())
         return url;
     
     return url.replace(/^\/dist\//, '/dist-dev/');
