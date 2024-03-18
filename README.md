@@ -126,10 +126,8 @@ The docker images are provided for multiple architectures and types. The followi
 | Architecture   | Type         |
 |----------------|--------------|
 | amd64          | linux        |
-| arm/v7         | linux        |
 | arm64 (arm/v8) | linux        |
 | amd64          | linux-alpine |
-| arm/v7         | linux-alpine |
 | arm64 (arm/v8) | linux-alpine |
 
 `Cloud Commander` could be used as a [docker container](https://hub.docker.com/r/coderaiser/cloudcmd/ "Docker container") this way:
