@@ -8,7 +8,7 @@ const express = require('express');
 const io = require('socket.io');
 const writejson = require('writejson');
 const readjson = require('readjson');
-const {promisify} = require('util');
+const {promisify} = require('node:util');
 
 process.env.NODE_ENV = 'development';
 

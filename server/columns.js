@@ -1,9 +1,9 @@
 'use strict';
 
 const fullstore = require('fullstore');
-const process = require('process');
-const path = require('path');
-const fs = require('fs');
+const process = require('node:process');
+const path = require('node:path');
+const fs = require('node:fs');
 
 const {nanomemoize} = require('nano-memoize');
 const readFilesSync = require('@cloudcmd/read-files-sync');
@@ -23,7 +23,7 @@ module.exports.isDev = _isDev;
 
 module.exports.getColumns = ({isDev = _isDev()} = {}) => {
     const columns = readFilesSyncMemo(isDev);
-
+    
     return {
         ...columns,
         ...defaultColumns,
@@ -36,6 +36,6 @@ const readFilesSyncMemo = nanomemoize((isDev) => {
     const names = fs
         .readdirSync(columnsDir)
         .filter(not(isMap));
-
+    
     return readFilesSync(columnsDir, names, 'utf8');
 });

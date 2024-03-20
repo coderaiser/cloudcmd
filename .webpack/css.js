@@ -10,7 +10,7 @@ const {
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-const {env} = require('process');
+const {env} = require('node:process');
 const isDev = env.NODE_ENV === 'development';
 
 const extractCSS = (a) => new ExtractTextPlugin(`${a}.css`);

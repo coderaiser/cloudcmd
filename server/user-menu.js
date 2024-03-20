@@ -1,9 +1,9 @@
 'use strict';
 
-const {homedir} = require('os');
-const {readFile} = require('fs/promises');
+const {homedir} = require('node:os');
+const {readFile} = require('node:fs/promises');
 
-const {join} = require('path');
+const {join} = require('node:path');
 
 const montag = require('montag');
 const tryToCatch = require('try-to-catch');

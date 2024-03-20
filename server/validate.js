@@ -9,30 +9,30 @@ const isString = (a) => typeof a === 'string';
 module.exports.root = (dir, config) => {
     if (!isString(dir))
         throw Error('dir should be a string');
-
+    
     if (dir === '/')
         return;
-
+    
     if (config('dropbox'))
         return;
-
-    const {statSync} = require('fs');
+    
+    const {statSync} = require('node:fs');
     const [error] = tryCatch(statSync, dir);
-
+    
     if (error)
         return exit('cloudcmd --root: %s', error.message);
 };
 
 module.exports.editor = (name) => {
     const reg = /^(dword|edward|deepword)$/;
-
+    
     if (!reg.test(name))
         exit('cloudcmd --editor: could be "dword", "edward" or "deepword" only');
 };
 
 module.exports.packer = (name) => {
     const reg = /^(tar|zip)$/;
-
+    
     if (!reg.test(name))
         exit('cloudcmd --packer: could be "tar" or "zip" only');
 };
@@ -42,12 +42,12 @@ module.exports.columns = (type) => {
     const all = Object
         .keys(getColumns())
         .concat('');
-
+    
     const names = all
         .filter(Boolean)
         .map(addQuotes)
         .join(', ');
-
+    
     if (!all.includes(type))
         exit(`cloudcmd --columns: can be only one of: ${names}`);
 };

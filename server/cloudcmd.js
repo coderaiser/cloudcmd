@@ -1,12 +1,12 @@
 'use strict';
 
 const fullstore = require('fullstore');
-const process = require('process');
+const process = require('node:process');
 const DIR = `${__dirname}/`;
 const DIR_COMMON = `${DIR}../common/`;
-const path = require('path');
+const path = require('node:path');
 
-const fs = require('fs');
+const fs = require('node:fs');
 const cloudfunc = require(`${DIR_COMMON}cloudfunc`);
 
 const authentication = require(`${DIR}auth`);

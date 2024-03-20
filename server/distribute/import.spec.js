@@ -2,7 +2,7 @@
 
 const process = require('node:process');
 const test = require('supertape');
-const {promisify} = require('util');
+const {promisify} = require('node:util');
 const tryToCatch = require('try-to-catch');
 
 const {connect} = require('../../test/before');
