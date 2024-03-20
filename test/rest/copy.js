@@ -1,7 +1,7 @@
 'use strict';
 
-const {mkdirSync} = require('fs');
-const {join} = require('path');
+const {mkdirSync} = require('node:fs');
+const {join} = require('node:path');
 const test = require('supertape');
 const rimraf = require('rimraf');
 

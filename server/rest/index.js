@@ -1,11 +1,11 @@
 'use strict';
 
-const process = require('process');
+const process = require('node:process');
 const DIR = '../';
 const DIR_COMMON = `${DIR}../common/`;
 
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 
 const root = require(`${DIR}root`);
 const CloudFunc = require(`${DIR_COMMON}cloudfunc`);

@@ -1,6 +1,6 @@
 'use strict';
 
-const process = require('process');
+const process = require('node:process');
 const test = require('supertape');
 const env = require('../../server/env');
 

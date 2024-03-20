@@ -1,6 +1,6 @@
 'use strict';
 
-const path = require('path');
+const path = require('node:path');
 const {test, stub} = require('supertape');
 const cloudcmd = require('./cloudcmd.js');
 

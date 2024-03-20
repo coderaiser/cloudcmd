@@ -1,7 +1,7 @@
 'use strict';
 
-const {join} = require('path');
-const {callbackify} = require('util');
+const {join} = require('node:path');
+const {callbackify} = require('node:util');
 
 const pullout = require('pullout');
 const ponse = require('ponse');

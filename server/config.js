@@ -2,11 +2,11 @@
 
 const DIR_SERVER = `${__dirname}/`;
 const DIR_COMMON = '../common/';
-const path = require('path');
+const path = require('node:path');
 
-const fs = require('fs');
-const Emitter = require('events');
-const {homedir} = require('os');
+const fs = require('node:fs');
+const Emitter = require('node:events');
+const {homedir} = require('node:os');
 const exit = require(`${DIR_SERVER}exit`);
 
 const CloudFunc = require(`${DIR_COMMON}cloudfunc`);

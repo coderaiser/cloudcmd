@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('node:fs');
 const tryCatch = require('try-catch');
 
 const DIR = `${__dirname}/../../`;

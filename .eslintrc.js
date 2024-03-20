@@ -10,6 +10,7 @@ module.exports = {
     ],
     rules: {
         'key-spacing': 'off',
+        'n/prefer-node-protocol': 'error',
     },
     overrides: [{
         files: ['bin/release.js'],

@@ -1,8 +1,8 @@
 'use strict';
 
-const process = require('process');
-const http = require('http');
-const os = require('os');
+const process = require('node:process');
+const http = require('node:http');
+const os = require('node:os');
 
 const express = require('express');
 const io = require('socket.io');

@@ -4,7 +4,7 @@ const {
     resolve,
     sep,
     join,
-} = require('path');
+} = require('node:path');
 
 const {EnvironmentPlugin} = require('webpack');
 const WebpackBar = require('webpackbar');

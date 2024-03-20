@@ -1,7 +1,7 @@
 'use strict';
 
-const fs = require('fs');
-const {join} = require('path');
+const fs = require('node:fs');
+const {join} = require('node:path');
 
 const {test, stub} = require('supertape');
 

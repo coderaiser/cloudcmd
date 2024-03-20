@@ -1,8 +1,8 @@
 'use strict';
 
-const process = require('process');
-const net = require('net');
-const repl = require('repl');
+const process = require('node:process');
+const net = require('node:net');
+const repl = require('node:repl');
 
 module.exports = net
     .createServer((socket) => {

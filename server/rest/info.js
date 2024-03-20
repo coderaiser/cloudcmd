@@ -1,6 +1,6 @@
 'use strict';
 
-const process = require('process');
+const process = require('node:process');
 const format = require('format-io');
 
 const {version} = require('../../package');

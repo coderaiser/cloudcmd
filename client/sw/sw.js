@@ -1,6 +1,6 @@
 'use strict';
 
-const process = require('process');
+const process = require('node:process');
 const codegen = require('codegen.macro');
 const tryToCatch = require('try-to-catch');
 const currify = require('currify');

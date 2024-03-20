@@ -1,6 +1,6 @@
 'use strict';
 
-const {join} = require('path');
+const {join} = require('node:path');
 const {test, stub} = require('supertape');
 
 const cloudcmdPath = join(__dirname, '..', '..');

@@ -1,11 +1,11 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('node:fs');
 const {
     basename,
     extname,
     join,
-} = require('path');
+} = require('node:path');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');

@@ -1,6 +1,6 @@
 'use strict';
 
-const process = require('process');
+const process = require('node:process');
 
 /* global DOM */
 const Emitify = require('emitify');

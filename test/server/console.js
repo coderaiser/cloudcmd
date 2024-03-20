@@ -1,7 +1,7 @@
 'use strict';
 
-const path = require('path');
-const {once} = require('events');
+const path = require('node:path');
+const {once} = require('node:events');
 
 const test = require('supertape');
 const io = require('socket.io-client');

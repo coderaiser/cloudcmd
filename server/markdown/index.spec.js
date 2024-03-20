@@ -1,8 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-const {join} = require('path');
-const {promisify} = require('util');
+const fs = require('node:fs');
+const {join} = require('node:path');
+const {promisify} = require('node:util');
 
 const tryToCatch = require('try-to-catch');
 const serveOnce = require('serve-once');

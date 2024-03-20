@@ -1,6 +1,6 @@
 'use strict';
 
-const {extname} = require('path');
+const {extname} = require('node:path');
 const currify = require('currify');
 const testRegExp = currify((name, reg) => reg.test(name));
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');

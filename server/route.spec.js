@@ -1,9 +1,9 @@
 'use strict';
 
-const {Readable} = require('stream');
+const {Readable} = require('node:stream');
 
-const path = require('path');
-const fs = require('fs');
+const path = require('node:path');
+const fs = require('node:fs');
 
 const tryToCatch = require('try-to-catch');
 const {test, stub} = require('supertape');

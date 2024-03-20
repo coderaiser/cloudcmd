@@ -1,6 +1,6 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('node:fs');
 
 const test = require('supertape');
 const {Volume} = require('memfs');

@@ -1,6 +1,6 @@
 'use strict';
 
-const {once} = require('events');
+const {once} = require('node:events');
 
 const test = require('supertape');
 const io = require('socket.io-client');
