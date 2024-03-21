@@ -2,6 +2,6 @@
 
 const mellow = require('mellow');
 
-module.exports = (dir, root) => {
-    return mellow.webToWin(dir, root || '/');
+module.exports = (dir, root, {webToWin = mellow.webToWin} = {}) => {
+    return webToWin(dir, root || '/');
 };
