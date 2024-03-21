@@ -1,3 +1,10 @@
+2024.03.21, v17.1.6
+
+feature:
+- e01ee457 server: route: get rid of mock-require
+- c7f90901 root: get rid of mock-require
+- fcce26d4 cloudfunc: get rid of mock-require
+
 2024.03.20, v17.1.5
 
 feature:
