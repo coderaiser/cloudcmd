@@ -11,7 +11,7 @@ const {time, timeEnd} = require(`../../common/util`);
 const CloudFunc = require('../../common/cloudfunc.js');
 
 const DIR = `${__dirname}/../../`;
-const CloudFuncPath = `cloudfunc`;
+
 const TMPLDIR = `${DIR}tmpl/`;
 
 const FS_DIR = `${TMPLDIR}fs/`;
@@ -193,4 +193,3 @@ test('cloudfunc: getDotDot: two levels deep', (t) => {
     t.equal(dotDot, '/home', 'should return up level');
     t.end();
 });
-

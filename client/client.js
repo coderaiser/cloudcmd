@@ -103,7 +103,7 @@ function CloudCmdProto(DOM) {
             currentName,
         }, panel);
     };
-
+    
     /**
      * Конструктор CloudClient, который
      * выполняет весь функционал по
@@ -148,7 +148,7 @@ function CloudCmdProto(DOM) {
         
         await load.css(name);
     }
-
+    
     this.route = (path) => {
         const query = path.split('/');
         
@@ -216,7 +216,7 @@ function CloudCmdProto(DOM) {
     async function saveCurrentName(currentName) {
         await Storage.set('current-name', currentName);
     }
-
+    
     async function baseInit() {
         const files = DOM.getFiles();
         
@@ -253,7 +253,7 @@ function CloudCmdProto(DOM) {
         if (!data)
             await Storage.setJson(dirPath, getJsonFromFileTable());
     }
-
+    
     function getPanels() {
         const panels = ['left'];
         
@@ -265,7 +265,7 @@ function CloudCmdProto(DOM) {
             'right',
         ];
     }
-
+    
     this.execFromModule = async (moduleName, funcName, ...args) => {
         await CloudCmd[moduleName]();
         
@@ -290,7 +290,7 @@ function CloudCmdProto(DOM) {
             currentName,
         });
     };
-
+    
     /**
      * Функция загружает json-данные о Файловой Системе
      * через ajax-запрос.
@@ -343,7 +343,7 @@ function CloudCmdProto(DOM) {
         
         Storage.setJson(path, newObj);
     }
-
+    
     /**
      * Функция строит файловую таблицу
      * @param json  - данные о файлах
@@ -409,7 +409,7 @@ function CloudCmdProto(DOM) {
             CloudCmd.emit('active-dir', Info.dirPath);
         }
     }
-
+    
     this.goToParentDir = async () => {
         const {
             dir,

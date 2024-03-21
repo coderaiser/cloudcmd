@@ -153,7 +153,7 @@ function listen(manage, sock, auth) {
         .on('connection', (socket) => {
             if (!manage('auth'))
                 return connection(manage, socket);
-        
+            
             const reject = () => socket.emit('reject');
             socket.on('auth', auth(connectionWraped(manage, socket), reject));
         });

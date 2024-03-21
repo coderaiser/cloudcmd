@@ -75,7 +75,7 @@ function EventsProto() {
             break;
         }
     }
-
+    
     /**
      * safe add event listener
      *
@@ -95,7 +95,7 @@ function EventsProto() {
         
         return Events;
     };
-
+    
     /**
      * safe add event listener
      *
@@ -118,7 +118,7 @@ function EventsProto() {
         
         return Events;
     };
-
+    
     /**
      * safe remove event listener
      *
@@ -135,7 +135,7 @@ function EventsProto() {
         
         return Events;
     };
-
+    
     /**
      * remove all added event listeners
      *
@@ -149,7 +149,7 @@ function EventsProto() {
         
         EventStore.clear();
     };
-
+    
     /**
      * safe add event keydown listener
      *
@@ -164,7 +164,7 @@ function EventsProto() {
         
         return Events.add(...args);
     };
-
+    
     /**
      * safe remove event click listener
      *
@@ -179,7 +179,7 @@ function EventsProto() {
         
         return Events.remove(...args);
     };
-
+    
     /**
      * safe add event click listener
      *
@@ -194,7 +194,7 @@ function EventsProto() {
         
         return Events.add(...args);
     };
-
+    
     /**
      * safe remove event click listener
      *
@@ -219,7 +219,7 @@ function EventsProto() {
         
         return Events.add(...args);
     };
-
+    
     /**
      * safe add event click listener
      *
@@ -234,7 +234,7 @@ function EventsProto() {
         
         return Events.add(...args);
     };
-
+    
     /**
      * safe add load click listener
      *

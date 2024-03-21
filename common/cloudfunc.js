@@ -165,7 +165,7 @@ module.exports.buildFromJSON = (params) => {
     Path(path);
     
     fileTable += `${header}<ul data-name="js-files" class="files">`;
-
+    
     /* Если мы не в корне */
     if (path !== '/') {
         const dotDot = getDotDot(path);
@@ -199,7 +199,7 @@ module.exports.buildFromJSON = (params) => {
         .map((file) => {
             const name = encode(file.name);
             const link = prefix + FS + path + name;
-        
+            
             const {
                 type,
                 mode,
@@ -207,17 +207,17 @@ module.exports.buildFromJSON = (params) => {
                 owner,
                 size,
             } = file;
-        
+            
             const linkResult = rendy(templateLink, {
                 link,
                 title: name,
                 name,
                 attribute: getAttribute(file.type),
             });
-        
+            
             const dataName = getDataName(file.name);
             const attribute = `draggable="true" ${dataName}`;
-        
+            
             return rendy(templateFile, {
                 tag: 'li',
                 attribute,

@@ -61,7 +61,7 @@ function _loadFile(dir, n, file, callback) {
         .on('progress', (count) => {
             const max = step(n);
             const value = (i - 1) * max + percent(count, 100, max);
-        
+            
             Images.show.load('top');
             Images.setProgress(Math.round(value));
         });

@@ -196,7 +196,7 @@ module.exports.setCurrentFile = (currentFile, options) => {
             name,
             path,
         }));
-
+        
         /* history could be present
          * but it should be false
          * to prevent default behavior

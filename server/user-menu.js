@@ -84,9 +84,9 @@ function getError(error, source) {
         source,
         highlightCode: false,
     })}</pre>\`);
-
+        
         e.code = 'frame';
-
+        
         throw e;
     `;
 }

@@ -23,13 +23,13 @@ function BufferProto() {
     function showMessage(msg) {
         DOM.Dialog.alert(msg);
     }
-
+    
     function getNames() {
         const files = DOM.getActiveFiles();
         
         return DOM.getFilenames(files);
     }
-
+    
     function addCutClass() {
         const files = DOM.getActiveFiles();
         
@@ -37,7 +37,7 @@ function BufferProto() {
             element.classList.add(CLASS);
         }
     }
-
+    
     function rmCutClass() {
         const files = DOM.getByClassAll(CLASS);
         
@@ -45,7 +45,7 @@ function BufferProto() {
             element.classList.remove(CLASS);
         }
     }
-
+    
     function callIfEnabled(callback) {
         const is = CloudCmd.config('buffer');
         
@@ -54,7 +54,7 @@ function BufferProto() {
         
         showMessage('Buffer disabled in config!');
     }
-
+    
     async function readBuffer() {
         const [e, cp, ct] = await tryToPromiseAll([
             Storage.getJson(COPY),
@@ -67,7 +67,7 @@ function BufferProto() {
             ct,
         ];
     }
-
+    
     async function copy() {
         const names = getNames();
         const from = Info.dirPath;
@@ -83,7 +83,7 @@ function BufferProto() {
             names,
         });
     }
-
+    
     async function cut() {
         const names = getNames();
         const from = Info.dirPath;
@@ -100,14 +100,14 @@ function BufferProto() {
             names,
         });
     }
-
+    
     async function clear() {
         await Storage.remove(COPY);
         await Storage.remove(CUT);
         
         rmCutClass();
     }
-
+    
     async function paste() {
         const [error, cp, ct] = await readBuffer();
         
@@ -130,6 +130,6 @@ function BufferProto() {
         
         await clear();
     }
-
+    
     return Buffer;
 }
