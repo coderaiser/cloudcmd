@@ -1,5 +1,6 @@
 'use strict';
 
+const {join} = require('node:path');
 const fullstore = require('fullstore');
 const process = require('node:process');
 const path = require('node:path');
@@ -31,8 +32,10 @@ const validate = require(`./validate`);
 const prefixer = require(`./prefixer`);
 const terminal = require(`./terminal`);
 const distribute = require(`./distribute`);
-const DIR_ROOT = `../`;
+const {createDepStore} = require('./depstore');
+const {assign} = Object;
 const DIR = `${__dirname}/`;
+const DIR_ROOT = join(DIR, '..');
 const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
 const isDev = fullstore(process.env.NODE_ENV === 'development');
@@ -47,7 +50,9 @@ const clean = (a) => a.filter(notEmpty);
 const isUndefined = (a) => typeof a === 'undefined';
 const isFn = (a) => typeof a === 'function';
 
-module.exports = (params) => {
+module.exports = cloudcmd;
+
+function cloudcmd(params) {
     const p = params || {};
     const options = p.config || {};
     const config = p.configManager || createConfig({
@@ -84,11 +89,17 @@ module.exports = (params) => {
             socket: p.socket,
         });
     
-    return cloudcmd({
+    return cloudcmdMiddle({
         modules,
         config,
     });
-};
+}
+
+const depStore = createDepStore();
+
+assign(cloudcmd, {
+    depStore,
+});
 
 module.exports.createConfigManager = createConfig;
 module.exports.configPath = configPath;
@@ -173,7 +184,7 @@ function listen({prefixSocket, socket, config}) {
     distribute.export(config, socket);
 }
 
-function cloudcmd({modules, config}) {
+function cloudcmdMiddle({modules, config}) {
     const online = apart(config, 'online');
     const cache = false;
     const diff = apart(config, 'diff');
@@ -240,6 +251,7 @@ function cloudcmd({modules, config}) {
         rest(config),
         route(config, {
             html,
+            win32: depStore('win32'),
         }),
         ponseStatic,
     ]);

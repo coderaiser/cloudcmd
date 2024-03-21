@@ -7,18 +7,14 @@ const fs = require('node:fs');
 
 const tryToCatch = require('try-to-catch');
 const {test, stub} = require('supertape');
-const mockRequire = require('mock-require');
-const cloudcmdPath = './cloudcmd';
 
-const cloudcmd = require(cloudcmdPath);
+const cloudcmd = require('./cloudcmd');
 
 const serveOnce = require('serve-once');
-const {createConfigManager} = cloudcmd;
 
-const routePath = './route';
+const {_getReadDir} = require('./route');
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
-
-const {reRequire, stopAll} = mockRequire;
+const {createConfigManager} = cloudcmd;
 
 const defaultConfig = {
     auth: false,
@@ -231,12 +227,9 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    cloudcmd.depStore('win32', {
         read,
     });
-    
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd, {
         configManager: createConfigManager(),
@@ -244,7 +237,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
     
     const {body} = await request.get('/');
     
-    stopAll();
+    cloudcmd.depStore();
     
     t.match(body, nameEncoded, 'should encode name');
     t.end();
@@ -270,17 +263,14 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    cloudcmd.depStore('win32', {
         read,
     });
-    
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
     
     const {request} = serveOnce(cloudcmd);
     const {body} = await request.get('/');
     
-    stopAll();
+    cloudcmd.depStore();
     
     t.notOk(body.includes(name), 'should not put not encoded name');
     t.end();
@@ -306,20 +296,16 @@ test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     
     const read = stub().resolves(stream);
     
-    mockRequire('win32', {
+    cloudcmd.depStore('win32', {
         read,
     });
-    
-    reRequire(routePath);
-    const cloudcmd = reRequire(cloudcmdPath);
-    
     const {request} = serveOnce(cloudcmd, {
         config: defaultConfig,
     });
     
     const {status} = await request.get('/');
     
-    stopAll();
+    cloudcmd.depStore();
     
     t.equal(status, 200, 'should not hang up');
     t.end();
@@ -422,8 +408,6 @@ test('cloudcmd: route: dropbox', async (t) => {
     config('dropbox', true);
     config('dropboxToken', '');
     
-    const {_getReadDir} = reRequire(routePath);
-    
     const readdir = _getReadDir(config);
     const [e] = await tryToCatch(readdir, '/root');
     
@@ -452,14 +436,10 @@ test('cloudcmd: route: read: root', async (t) => {
     stream.contentLength = 5;
     
     const read = stub().returns(stream);
-    
-    mockRequire('win32', {
+    cloudcmd.depStore('win32', {
         read,
     });
     
-    reRequire(routePath);
-    
-    const cloudcmd = reRequire(cloudcmdPath);
     const configManager = createConfigManager();
     const root = '/hello';
     
@@ -470,12 +450,11 @@ test('cloudcmd: route: read: root', async (t) => {
     });
     
     await request.get('/fs/route.js');
+    cloudcmd.depStore();
     
     const expected = ['/hello/route.js', {
         root,
     }];
-    
-    stopAll();
     
     t.calledWith(read, expected);
     t.end();

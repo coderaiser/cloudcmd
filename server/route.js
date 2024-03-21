@@ -2,7 +2,7 @@
 
 const {extname} = require('node:path');
 
-const {read} = require('win32');
+const _win32 = require('win32');
 const ponse = require('ponse');
 const rendy = require('rendy');
 const format = require('format-io');
@@ -34,9 +34,9 @@ const sendIndex = (params, data) => {
 const onceRequire = once(require);
 const getPrefix = (config) => prefixer(config('prefix'));
 
-const getReadDir = (config) => {
+const getReadDir = (config, {win32 = _win32} = {}) => {
     if (!config('dropbox'))
-        return read;
+        return win32.read;
     
     const {readDir} = onceRequire('@cloudcmd/dropbox');
     
@@ -78,12 +78,14 @@ async function route({config, options, request, response}) {
     const rootName = name.replace(CloudFunc.FS, '') || '/';
     const fullPath = root(rootName, config('root'));
     
-    const read = getReadDir(config);
+    const {html, win32} = options;
+    const read = getReadDir(config, {
+        win32,
+    });
+    
     const [error, stream] = await tryToCatch(read, fullPath, {
         root: config('root'),
     });
-    
-    const {html} = options;
     
     if (error)
         return ponse.sendError(error, p);
