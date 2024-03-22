@@ -6,10 +6,9 @@ const test = require('supertape');
 const {Volume} = require('memfs');
 const {ufs} = require('unionfs');
 
-const mockRequire = require('mock-require');
 const serveOnce = require('serve-once');
-const {reRequire, stopAll} = mockRequire;
 
+const cloudcmd = require('../../server/cloudcmd.js');
 const cloudcmdPath = '../../';
 const dir = `${cloudcmdPath}server/`;
 const restPath = `${dir}rest`;
@@ -26,19 +25,13 @@ test('cloudcmd: rest: rename', async (t) => {
         .use(vol)
         .use(fs);
     
-    mockRequire('node:fs', unionFS);
-    
-    reRequire('@cloudcmd/rename-files');
-    reRequire('@cloudcmd/move-files');
-    reRequire(restPath);
-    
-    const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     const configManager = createConfigManager();
     
     configManager('auth', false);
     configManager('root', '/');
     
+    cloudcmd.depStore('fs', unionFS);
     const {request} = serveOnce(cloudcmd, {
         configManager,
     });
@@ -52,18 +45,15 @@ test('cloudcmd: rest: rename', async (t) => {
         body: files,
     });
     
-    mockRequire.stopAll();
+    cloudcmd.depStore();
     
     const expected = 'rename: ok("{"from":"/fixture/mv.txt","to":"/fixture/tmp/mv.txt"}")';
-    
-    stopAll();
     
     t.equal(body, expected, 'should move');
     t.end();
 });
 
 test('cloudcmd: rest: rename: no from', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();
@@ -87,7 +77,6 @@ test('cloudcmd: rest: rename: no from', async (t) => {
 });
 
 test('cloudcmd: rest: rename: no to', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();
@@ -111,3 +100,4 @@ test('cloudcmd: rest: rename: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
+

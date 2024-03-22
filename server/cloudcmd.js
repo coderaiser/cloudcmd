@@ -26,7 +26,7 @@ const {createConfig, configPath} = require(`./config`);
 const modulas = require(`./modulas`);
 
 const userMenu = require(`./user-menu`);
-const rest = require(`./rest`);
+const rest = require(`./rest/index.js`);
 const route = require(`./route`);
 const validate = require(`./validate`);
 const prefixer = require(`./prefixer`);
@@ -248,7 +248,11 @@ function cloudcmdMiddle({modules, config}) {
         userMenu({
             menuName: '.cloudcmd.menu.js',
         }),
-        rest(config),
+        rest({
+            config,
+            fs: depStore('fs'),
+            moveFiles: depStore('moveFiles'),
+        }),
         route(config, {
             html,
             win32: depStore('win32'),
