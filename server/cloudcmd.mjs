@@ -1,8 +1,8 @@
 import path, {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import fullstore from 'fullstore';
 import process from 'node:process';
 import fs from 'node:fs';
+import fullstore from 'fullstore';
 import currify from 'currify';
 import apart from 'apart';
 import ponse from 'ponse';
