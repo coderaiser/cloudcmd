@@ -1,18 +1,15 @@
-'use strict';
+import path, {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {Readable} from 'node:stream';
+import fs from 'node:fs';
+import tryToCatch from 'try-to-catch';
+import {test, stub} from 'supertape';
+import serveOnce from 'serve-once';
+import cloudcmd from './cloudcmd.mjs';
+import {_getReadDir} from './route.js';
 
-const {Readable} = require('node:stream');
-
-const path = require('node:path');
-const fs = require('node:fs');
-
-const tryToCatch = require('try-to-catch');
-const {test, stub} = require('supertape');
-
-const cloudcmd = require('./cloudcmd');
-
-const serveOnce = require('serve-once');
-
-const {_getReadDir} = require('./route');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const fixtureDir = path.join(__dirname, '..', 'test', 'fixture');
 const {createConfigManager} = cloudcmd;
 

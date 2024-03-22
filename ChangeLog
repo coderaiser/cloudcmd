@@ -5587,7 +5587,7 @@ fix:
 - (rest) onDelete: func(null, body) -> func
 - (rest) onStat: add var
 - (cloudcmd) change index path
-- (server) start: url -> URL
+- (server) start: url -> PREFIX
 - (server) start: SSLPort -> sslPort
 - (server) start: Port -> port
 - (dom) getCurrentDirPath: "," -> ";"

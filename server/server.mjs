@@ -1,18 +1,18 @@
-import cloudcmd from './cloudcmd.js';
 import http from 'node:http';
 import {promisify} from 'node:util';
+import process from 'node:process';
 import currify from 'currify';
 import squad from 'squad';
 import tryToCatch from 'try-to-catch';
-import wraptile from 'wraptile';
-import compression from 'compression';
-import threadIt from 'thread-it';
-import exit from './exit.js';
 import opn from 'open';
 import express from 'express';
 import {Server} from 'socket.io';
 import tryRequire from 'tryrequire';
-import process from 'node:process';
+import wraptile from 'wraptile';
+import compression from 'compression';
+import threadIt from 'thread-it';
+import exit from './exit.js';
+import cloudcmd from './cloudcmd.mjs';
 
 const bind = (f, self) => f.bind(self);
 

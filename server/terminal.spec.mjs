@@ -1,9 +1,6 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-
-const terminal = require('./terminal');
-const {createConfigManager} = require('./cloudcmd');
+import {test, stub} from 'supertape';
+import terminal from './terminal.js';
+import {createConfigManager} from './cloudcmd.mjs';
 
 test('cloudcmd: terminal: disabled', (t) => {
     const config = createConfigManager();

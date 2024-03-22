@@ -1,38 +1,34 @@
-'use strict';
+import path, {dirname, join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import fullstore from 'fullstore';
+import process from 'process';
+import fs from 'node:fs';
+import currify from 'currify';
+import apart from 'apart';
+import ponse from 'ponse';
+import restafary from 'restafary';
+import restbox from 'restbox';
+import konsole from 'console-io';
+import edward from 'edward';
+import dword from 'dword';
+import deepword from 'deepword';
+import nomine from 'nomine';
+import fileop from '@cloudcmd/fileop';
+import cloudfunc from '../common/cloudfunc.js';
+import authentication from './auth.js';
+import {createConfig, configPath} from './config.js';
+import modulas from './modulas.js';
+import userMenu from './user-menu.mjs';
+import rest from './rest/index.js';
+import route from './route.js';
+import validate from './validate.js';
+import prefixer from './prefixer.js';
+import terminal from './terminal.js';
+import distribute from './distribute/index.js';
+import {createDepStore} from './depstore.js';
 
-const {join} = require('node:path');
-const fullstore = require('fullstore');
-const process = require('node:process');
-const path = require('node:path');
-const fs = require('node:fs');
-
-const currify = require('currify');
-const apart = require('apart');
-const ponse = require('ponse');
-const restafary = require('restafary');
-const restbox = require('restbox');
-const konsole = require('console-io');
-const edward = require('edward');
-const dword = require('dword');
-const deepword = require('deepword');
-const nomine = require('nomine');
-const fileop = require('@cloudcmd/fileop');
-
-const cloudfunc = require('../common/cloudfunc');
-
-const authentication = require('./auth');
-const {createConfig, configPath} = require(`./config`);
-
-const modulas = require(`./modulas`);
-
-const userMenu = require(`./user-menu`);
-const rest = require(`./rest/index.js`);
-const route = require(`./route`);
-const validate = require(`./validate`);
-const prefixer = require(`./prefixer`);
-const terminal = require(`./terminal`);
-const distribute = require(`./distribute`);
-const {createDepStore} = require('./depstore');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const {assign} = Object;
 const DIR = `${__dirname}/`;
 const DIR_ROOT = join(DIR, '..');
@@ -50,7 +46,7 @@ const clean = (a) => a.filter(notEmpty);
 const isUndefined = (a) => typeof a === 'undefined';
 const isFn = (a) => typeof a === 'function';
 
-module.exports = cloudcmd;
+export default cloudcmd;
 
 function cloudcmd(params) {
     const p = params || {};
@@ -97,14 +93,13 @@ function cloudcmd(params) {
 
 const depStore = createDepStore();
 
-assign(cloudcmd, {
-    depStore,
-});
 
-module.exports.createConfigManager = createConfig;
-module.exports.configPath = configPath;
+export const createConfigManager = createConfig;
+export {
+    configPath,
+};
 
-module.exports._getIndexPath = getIndexPath;
+export const _getIndexPath = getIndexPath;
 
 function defaultValue(config, name, options) {
     const value = options[name];
@@ -116,7 +111,8 @@ function defaultValue(config, name, options) {
     return value;
 }
 
-module.exports._getPrefix = getPrefix;
+export const _getPrefix = getPrefix;
+
 function getPrefix(prefix) {
     if (isFn(prefix))
         return prefix() || '';
@@ -124,8 +120,7 @@ function getPrefix(prefix) {
     return prefix || '';
 }
 
-module.exports._initAuth = _initAuth;
-function _initAuth(config, accept, reject, username, password) {
+export function _initAuth(config, accept, reject, username, password) {
     if (!config('auth'))
         return accept();
     
@@ -270,8 +265,9 @@ function logout(req, res, next) {
     res.sendStatus(401);
 }
 
-module.exports._isDev = isDev;
-module.exports._replaceDist = replaceDist;
+export const _isDev = isDev;
+export const _replaceDist = replaceDist;
+
 function replaceDist(url) {
     if (!isDev())
         return url;
@@ -297,3 +293,8 @@ function setSW(req, res, next) {
     
     next();
 }
+
+assign(cloudcmd, {
+    depStore,
+    createConfigManager,
+});

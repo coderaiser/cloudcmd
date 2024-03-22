@@ -1,16 +1,21 @@
-'use strict';
+import {createRequire} from 'node:module';
+import {dirname, join} from 'node:path';
+import {fileURLToPath} from 'node:url';
 
-const {join} = require('node:path');
-const {test, stub} = require('supertape');
+import serveOnce from 'serve-once';
+import {test, stub} from 'supertape';
 
+import cloudcmd from '../../server/cloudcmd.mjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
 const cloudcmdPath = join(__dirname, '..', '..');
+
 const modulesPath = join(cloudcmdPath, 'json', 'modules.json');
-
 const localModules = require(modulesPath);
-const modulas = require(`${cloudcmdPath}/server/modulas`);
-
-const cloudcmd = require(cloudcmdPath);
-const {request} = require('serve-once')(cloudcmd, {
+const modulas = require(`../../server/modulas`);
+const {request} = serveOnce(cloudcmd, {
     config: {
         auth: false,
         dropbox: false,

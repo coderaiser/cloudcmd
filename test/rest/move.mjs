@@ -1,28 +1,10 @@
-'use strict';
-
-const wait = require('@iocmd/wait');
-const {EventEmitter} = require('node:events');
-const fs = require('node:fs');
-
-const {test, stub} = require('supertape');
-const {Volume} = require('memfs');
-const {ufs} = require('unionfs');
-const serveOnce = require('serve-once');
-
-const cloudcmd = require('../../server/cloudcmd.js');
+import wait from '@iocmd/wait';
+import {EventEmitter} from 'node:events';
+import {test, stub} from 'supertape';
+import serveOnce from 'serve-once';
+import cloudcmd from '../../server/cloudcmd.mjs';
 
 test('cloudcmd: rest: move', async (t) => {
-    const volume = {
-        '/fixture/move.txt': 'hello',
-        '/fixture/tmp/a.txt': 'a',
-    };
-    
-    const vol = Volume.fromJSON(volume, '/');
-    
-    const unionFS = ufs
-        .use(vol)
-        .use(fs);
-    
     const move = new EventEmitter();
     const moveFiles = stub().returns(move);
     
@@ -103,4 +85,3 @@ test('cloudcmd: rest: move: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
-

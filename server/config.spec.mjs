@@ -1,17 +1,12 @@
-'use strict';
+import {createRequire} from 'node:module';
+import {test, stub} from 'supertape';
+import {createConfig, _cryptoPass} from './config.js';
+import {apiURL} from '../common/cloudfunc.js';
+import {connect} from '../test/before.mjs';
 
-const {test, stub} = require('supertape');
+const require = createRequire(import.meta.url);
+const fixture = require('./config.fixture.json');
 
-const root = '../';
-const configPath = './config';
-
-const {createConfig, _cryptoPass} = require(configPath);
-
-const {apiURL} = require(`${root}common/cloudfunc`);
-
-const fixture = require('./config.fixture');
-
-const {connect} = require('../test/before');
 const config = createConfig();
 
 test('config: manage', (t) => {

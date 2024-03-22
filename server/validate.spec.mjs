@@ -1,10 +1,7 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-const tryCatch = require('try-catch');
-
-const validate = require('./validate');
-const cloudcmd = require('./cloudcmd');
+import {test, stub} from 'supertape';
+import tryCatch from 'try-catch';
+import validate from './validate.js';
+import cloudcmd from './cloudcmd.mjs';
 
 test('validate: root: bad', (t) => {
     const config = {

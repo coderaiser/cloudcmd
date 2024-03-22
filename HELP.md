@@ -133,7 +133,7 @@ Cloud Commander supports the following command-line parameters:
 
 For options not specified by command-line parameters, Cloud Commander then reads configuration data from `~/.cloudcmd.json`. It uses port `8000` by default.
 
-To begin using the web client, go to this URL in your browser:
+To begin using the web client, go to this PREFIX in your browser:
 
 ```
 http://localhost:8000

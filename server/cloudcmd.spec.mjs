@@ -1,23 +1,25 @@
-'use strict';
-
-const path = require('node:path');
-const {test, stub} = require('supertape');
-const cloudcmd = require('./cloudcmd.js');
-
-const {request} = require('serve-once')(cloudcmd, {
-    config: {
-        auth: false,
-        dropbox: false,
-    },
-});
-
-const {
+import path, {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import serveOnce from 'serve-once';
+import {test, stub} from 'supertape';
+import cloudcmd, {
     _isDev,
     _replaceDist,
     createConfigManager,
     _getPrefix,
     _initAuth,
-} = cloudcmd;
+    _getIndexPath,
+} from './cloudcmd.mjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const {request} = serveOnce(cloudcmd, {
+    config: {
+        auth: false,
+        dropbox: false,
+    },
+});
 
 test('cloudcmd: defaults: config', (t) => {
     const configManager = createConfigManager();
@@ -158,7 +160,7 @@ test('cloudcmd: getIndexPath: production', (t) => {
     const isDev = false;
     const name = path.join(__dirname, '..', 'dist', 'index.html');
     
-    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.equal(_getIndexPath(isDev), name);
     t.end();
 });
 
@@ -166,7 +168,7 @@ test('cloudcmd: getIndexPath: development', (t) => {
     const isDev = true;
     const name = path.join(__dirname, '..', 'dist-dev', 'index.html');
     
-    t.equal(cloudcmd._getIndexPath(isDev), name);
+    t.equal(_getIndexPath(isDev), name);
     t.end();
 });
 
