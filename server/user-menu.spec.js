@@ -7,11 +7,9 @@ const {test, stub} = require('supertape');
 
 const serveOnce = require('serve-once');
 const threadIt = require('thread-it');
-const {reRequire} = require('mock-require');
 
 const userMenu = require('./user-menu');
 const {request} = serveOnce(userMenu);
-
 const {readFileSync} = fs;
 
 const userMenuPath = join(__dirname, '..', '.cloudcmd.menu.js');
@@ -37,51 +35,39 @@ test('cloudcmd: user menu', async (t) => {
         options,
     });
     
-    threadIt.terminate();
-    
     t.equal(userMenuFile, body);
     t.end();
 });
 
 test('cloudcmd: user menu: io.mv', async (t) => {
+    const readFile = stub().returns(fixtureMove);
     const options = {
         menuName: '.cloudcmd.menu.js',
+        readFile,
     };
     
-    const {readFile} = fs.promises;
-    
-    fs.promises.readFile = stub().returns(fixtureMove);
-    const userMenu = reRequire('./user-menu');
     const {request} = serveOnce(userMenu);
-    
     const {body} = await request.get(`/api/v1/user-menu?dir=${__dirname}`, {
         options,
     });
-    
-    threadIt.terminate();
-    fs.promises.readFile = readFile;
     
     t.equal(body, fixtureMoveFix);
     t.end();
 });
 
 test('cloudcmd: user menu: io.cp', async (t) => {
+    const readFile = stub().returns(fixtureCopy);
     const options = {
         menuName: '.cloudcmd.menu.js',
+        readFile,
     };
     
-    const {readFile} = fs.promises;
-    
-    fs.promises.readFile = stub().returns(fixtureCopy);
-    const userMenu = reRequire('./user-menu');
     const {request} = serveOnce(userMenu);
-    
     const {body} = await request.get(`/api/v1/user-menu?dir=${__dirname}`, {
         options,
     });
     
     threadIt.terminate();
-    fs.promises.readFile = readFile;
     
     t.equal(body, fixtureCopyFix);
     t.end();

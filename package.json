@@ -188,6 +188,7 @@
     "memfs": "^4.2.0",
     "minor": "^1.2.2",
     "mock-require": "^3.0.1",
+    "montag": "^1.2.1",
     "morgan": "^1.6.1",
     "multi-rename": "^2.0.0",
     "nodemon": "^3.0.1",

@@ -1,7 +1,8 @@
 'use strict';
 
+const once = require('once');
 const {homedir} = require('node:os');
-const {readFile} = require('node:fs/promises');
+const {readFile: _readFile, readFile} = require('node:fs/promises');
 
 const {join} = require('node:path');
 
@@ -13,13 +14,14 @@ const {codeframe} = require('putout');
 const putout = threadIt(require.resolve('putout'));
 
 threadIt.init();
+
 // warm up worker cache
 transpile('');
 
 const URL = '/api/v1/user-menu';
 const DEFAULT_MENU_PATH = join(__dirname, '../static/user-menu.js');
 
-module.exports = currify(async ({menuName}, req, res, next) => {
+module.exports = currify(async ({menuName, readFile = _readFile}, req, res, next) => {
     if (req.url.indexOf(URL))
         return next();
     
@@ -30,12 +32,13 @@ module.exports = currify(async ({menuName}, req, res, next) => {
             req,
             res,
             menuName,
+            readFile,
         });
     
     next();
 });
 
-async function onGET({req, res, menuName}) {
+async function onGET({req, res, menuName, readFile}) {
     const {dir} = req.query;
     const url = req.url.replace(URL, '');
     
@@ -65,6 +68,7 @@ async function onGET({req, res, menuName}) {
     if (e)
         return sendDefaultMenu(res);
     
+    debugger;
     const [parseError, result] = await transpile(source);
     
     if (parseError)
@@ -108,3 +112,4 @@ async function transpile(source) {
         ],
     });
 }
+
