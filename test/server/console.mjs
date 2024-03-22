@@ -1,12 +1,14 @@
-'use strict';
+import path, {dirname} from 'node:path';
+import {once} from 'node:events';
+import test from 'supertape';
+import {fileURLToPath} from 'node:url';
+import {createRequire} from 'node:module';
+import io from 'socket.io-client';
+import {connect} from '../before.mjs';
 
-const path = require('node:path');
-const {once} = require('node:events');
-
-const test = require('supertape');
-const io = require('socket.io-client');
-
-const {connect} = require('../before');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
 const configPath = path.join(__dirname, '../..', 'server', 'config');
 const configFn = require(configPath).createConfig();
 

@@ -1,20 +1,19 @@
-'use strict';
+import {dirname, join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {test, stub} from 'supertape';
+import serveOnce from 'serve-once';
+import threadIt from 'thread-it';
+import userMenu from './user-menu.mjs';
+import {readFileSync} from 'node:fs';
 
-const {join} = require('node:path');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const {test, stub} = require('supertape');
-
-const serveOnce = require('serve-once');
-const threadIt = require('thread-it');
-
-const userMenu = require('./user-menu');
-
-const {readFileSync} = require('node:fs');
 const {request} = serveOnce(userMenu);
 const userMenuPath = join(__dirname, '..', '.cloudcmd.menu.js');
 const userMenuFile = readFileSync(userMenuPath, 'utf8');
 
-const fixtureDir = join(__dirname, 'fixture-user-menu');
+const fixtureDir = new URL('fixture-user-menu', import.meta.url).pathname;
 const fixtureMoveName = join(fixtureDir, 'io-mv.js');
 const fixtureMoveFixName = join(fixtureDir, 'io-mv-fix.js');
 const fixtureCopyName = join(fixtureDir, 'io-cp.js');

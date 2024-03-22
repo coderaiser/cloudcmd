@@ -1,18 +1,16 @@
-'use strict';
+import fs from 'node:fs';
+import {join, dirname} from 'node:path';
+import {promisify} from 'node:util';
+import test from 'supertape';
+import tar from 'tar-stream';
+import gunzip from 'gunzip-maybe';
+import pullout from 'pullout';
+import cloudcmd from '../../server/cloudcmd.mjs';
+import serveOnce from 'serve-once';
+import {fileURLToPath} from 'node:url';
 
-const mockRequire = require('mock-require');
-const fs = require('node:fs');
-const {join} = require('node:path');
-const {promisify} = require('node:util');
-
-const test = require('supertape');
-const tar = require('tar-stream');
-const gunzip = require('gunzip-maybe');
-const pullout = require('pullout');
-
-const cloudcmd = require('../../server/cloudcmd.js');
-const serveOnce = require('serve-once');
-const {reRequire} = mockRequire;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
 
 const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
@@ -20,7 +18,7 @@ const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
 const defaultOptions = {
     config: {
         auth: false,
-        root: join(__dirname, '..'),
+        root: new URL('..', import.meta.url).pathname,
     },
 };
 
@@ -38,7 +36,6 @@ const once = promisify((name, extract, fn) => {
 });
 
 test('cloudcmd: rest: pack: tar: get', async (t) => {
-    debugger;
     const config = {
         packer: 'tar',
         auth: false,
@@ -67,7 +64,9 @@ test('cloudcmd: rest: pack: tar: get', async (t) => {
     
     t.equal(file, data, 'should pack data');
     t.end();
-}, {timeout: 7000});
+}, {
+    timeout: 7000,
+});
 
 test('cloudcmd: rest: pack: tar: put: file', async (t) => {
     const config = {
@@ -233,4 +232,3 @@ function getPackOptions(to, names = ['pack']) {
         from: '/fixture',
     };
 }
-

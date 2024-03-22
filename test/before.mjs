@@ -1,24 +1,25 @@
-'use strict';
+import process from 'node:process';
+import http from 'node:http';
+import os from 'node:os';
+import express from 'express';
+import {Server} from 'socket.io';
+import writejson from 'writejson';
+import readjson from 'readjson';
+import {promisify} from 'node:util';
+import {fileURLToPath} from 'node:url';
+import {dirname} from 'node:path';
+import cloudcmd from '../server/cloudcmd.mjs';
 
-const process = require('node:process');
-const http = require('node:http');
-const os = require('node:os');
-
-const express = require('express');
-const io = require('socket.io');
-const writejson = require('writejson');
-const readjson = require('readjson');
-const {promisify} = require('node:util');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 process.env.NODE_ENV = 'development';
-
-const cloudcmd = require('../server/cloudcmd');
 const {assign} = Object;
 
 const pathConfig = os.homedir() + '/.cloudcmd.json';
 const currentConfig = readjson.sync.try(pathConfig);
 
-module.exports = before;
+export default before;
 
 function before(options, fn = options) {
     const {
@@ -38,7 +39,7 @@ function before(options, fn = options) {
         server.close(cb);
     };
     
-    const socket = io(server);
+    const socket = new Server(server);
     
     app.use(cloudcmd({
         socket,
@@ -54,7 +55,7 @@ function before(options, fn = options) {
     });
 }
 
-module.exports.connect = promisify((options, fn = options) => {
+export const connect = promisify((options, fn = options) => {
     before(options, (port, done) => {
         fn(null, {
             port,

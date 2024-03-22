@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/coderaiser/cloudcmd.git"
   },
-  "main": "server/cloudcmd.js",
+  "main": "server/cloudcmd.mjs",
   "keywords": [
     "console",
     "terminal",

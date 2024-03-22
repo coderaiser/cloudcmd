@@ -1,17 +1,9 @@
-'use strict';
-
-const fs = require('node:fs');
-
-const test = require('supertape');
-const {Volume} = require('memfs');
-const {ufs} = require('unionfs');
-
-const serveOnce = require('serve-once');
-
-const cloudcmd = require('../../server/cloudcmd.js');
-const cloudcmdPath = '../../';
-const dir = `${cloudcmdPath}server/`;
-const restPath = `${dir}rest`;
+import fs from 'node:fs';
+import test from 'supertape';
+import {Volume} from 'memfs';
+import {ufs} from 'unionfs';
+import serveOnce from 'serve-once';
+import cloudcmd from '../../server/cloudcmd.mjs';
 
 test('cloudcmd: rest: rename', async (t) => {
     const volume = {
@@ -100,4 +92,3 @@ test('cloudcmd: rest: rename: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
-

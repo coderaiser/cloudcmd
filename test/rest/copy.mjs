@@ -1,24 +1,23 @@
-'use strict';
+import {dirname, join} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import serveOnce from 'serve-once';
+import {mkdirSync} from 'node:fs';
+import test from 'supertape';
+import {rimraf} from 'rimraf';
+import cloudcmd from '../../server/cloudcmd.mjs';
 
-const {mkdirSync} = require('node:fs');
-const {join} = require('node:path');
-const test = require('supertape');
-const rimraf = require('rimraf');
-
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const config = {
-    root: join(__dirname, '..'),
+    root: new URL('..', import.meta.url).pathname,
 };
-
-const cloudcmd = require('../..');
 const configManager = cloudcmd.createConfigManager();
 
 configManager('auth', false);
-
-const {request} = require('serve-once')(cloudcmd, {
+const {request} = serveOnce(cloudcmd, {
     config,
     configManager,
 });
-
 const fixtureDir = join(__dirname, '..', 'fixture') + '/';
 
 test('cloudcmd: rest: copy', async (t) => {
