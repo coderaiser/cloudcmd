@@ -6,9 +6,11 @@ import cloudcmd from '../server/cloudcmd.mjs';
 const config = {
     auth: false,
 };
+
 const {request} = serveOnce(cloudcmd, {
     config,
 });
+
 const configFn = cloudcmd.createConfigManager();
 
 test('cloudcmd: static', async (t) => {
