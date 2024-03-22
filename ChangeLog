@@ -1,3 +1,12 @@
+2024.03.22, v17.2.0
+
+feature:
+- 3e565109 convert to ESM
+- 770a0812 pack: get rid of mock-require
+- 25d8faea rest: get rid of mock-require
+- 401a669a user-menu: get rid of mock-require
+- 4e32241d terminal: get rid of mock-require
+
 2024.03.21, v17.1.6
 
 feature:
