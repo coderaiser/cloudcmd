@@ -1,8 +1,7 @@
 'use strict';
 
-const once = require('once');
 const {homedir} = require('node:os');
-const {readFile: _readFile, readFile} = require('node:fs/promises');
+const {readFile: _readFile} = require('node:fs/promises');
 
 const {join} = require('node:path');
 
@@ -14,7 +13,6 @@ const {codeframe} = require('putout');
 const putout = threadIt(require.resolve('putout'));
 
 threadIt.init();
-
 // warm up worker cache
 transpile('');
 
@@ -68,7 +66,6 @@ async function onGET({req, res, menuName, readFile}) {
     if (e)
         return sendDefaultMenu(res);
     
-    debugger;
     const [parseError, result] = await transpile(source);
     
     if (parseError)
@@ -112,4 +109,3 @@ async function transpile(source) {
         ],
     });
 }
-

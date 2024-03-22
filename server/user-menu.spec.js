@@ -1,6 +1,5 @@
 'use strict';
 
-const fs = require('node:fs');
 const {join} = require('node:path');
 
 const {test, stub} = require('supertape');
@@ -9,9 +8,9 @@ const serveOnce = require('serve-once');
 const threadIt = require('thread-it');
 
 const userMenu = require('./user-menu');
-const {request} = serveOnce(userMenu);
-const {readFileSync} = fs;
 
+const {readFileSync} = require('node:fs');
+const {request} = serveOnce(userMenu);
 const userMenuPath = join(__dirname, '..', '.cloudcmd.menu.js');
 const userMenuFile = readFileSync(userMenuPath, 'utf8');
 
@@ -47,6 +46,7 @@ test('cloudcmd: user menu: io.mv', async (t) => {
     };
     
     const {request} = serveOnce(userMenu);
+    
     const {body} = await request.get(`/api/v1/user-menu?dir=${__dirname}`, {
         options,
     });
@@ -63,6 +63,7 @@ test('cloudcmd: user menu: io.cp', async (t) => {
     };
     
     const {request} = serveOnce(userMenu);
+    
     const {body} = await request.get(`/api/v1/user-menu?dir=${__dirname}`, {
         options,
     });
