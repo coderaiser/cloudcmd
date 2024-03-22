@@ -8,9 +8,11 @@ import cloudcmd from '../../server/cloudcmd.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
 const config = {
     root: new URL('..', import.meta.url).pathname,
 };
+
 const configManager = cloudcmd.createConfigManager();
 
 configManager('auth', false);
@@ -18,6 +20,7 @@ const {request} = serveOnce(cloudcmd, {
     config,
     configManager,
 });
+
 const fixtureDir = join(__dirname, '..', 'fixture') + '/';
 
 test('cloudcmd: rest: copy', async (t) => {

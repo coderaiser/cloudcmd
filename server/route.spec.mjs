@@ -325,7 +325,7 @@ test('cloudcmd: route: buttons: no terminal', async (t) => {
     t.end();
 });
 
-test('cloudcmd: route: no termianl: /fs', async (t) => {
+test('cloudcmd: route: no terminal: /fs', async (t) => {
     const config = {
         terminal: false,
     };

@@ -1,10 +1,8 @@
 import {createRequire} from 'node:module';
 import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
-
 import serveOnce from 'serve-once';
 import {test, stub} from 'supertape';
-
 import cloudcmd from '../../server/cloudcmd.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -15,6 +13,7 @@ const cloudcmdPath = join(__dirname, '..', '..');
 const modulesPath = join(cloudcmdPath, 'json', 'modules.json');
 const localModules = require(modulesPath);
 const modulas = require(`../../server/modulas`);
+
 const {request} = serveOnce(cloudcmd, {
     config: {
         auth: false,
