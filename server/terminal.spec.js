@@ -2,13 +2,8 @@
 
 const {test, stub} = require('supertape');
 
-const mockRequire = require('mock-require');
-
 const terminal = require('./terminal');
 const {createConfigManager} = require('./cloudcmd');
-const terminalPath = './terminal';
-
-const {stopAll} = mockRequire;
 
 test('cloudcmd: terminal: disabled', (t) => {
     const config = createConfigManager();
@@ -33,13 +28,12 @@ test('cloudcmd: terminal: disabled: listen', (t) => {
 test('cloudcmd: terminal: enabled', (t) => {
     const term = stub();
     const arg = 'hello';
+    const config = stub().returns(true);
+    const getModule = stub().returns(term);
     
-    mockRequire(terminalPath, term);
-    
-    const terminal = require(terminalPath);
-    terminal(arg);
-    
-    stopAll();
+    terminal(config, arg, {
+        getModule,
+    });
     
     t.calledWith(term, [arg], 'should call terminal');
     t.end();
@@ -67,16 +61,15 @@ test('cloudcmd: terminal: enabled: no string', (t) => {
 
 test('cloudcmd: terminal: no arg', (t) => {
     const gritty = {};
-    
-    mockRequire('gritty', gritty);
+    const getModule = stub().returns(gritty);
     const config = createConfigManager();
     
     config('terminal', true);
     config('terminalPath', 'gritty');
     
-    const result = terminal(config);
-    
-    stopAll();
+    const result = terminal(config, '', {
+        getModule,
+    });
     
     t.equal(result, gritty);
     t.end();
