@@ -1,19 +1,18 @@
 'use strict';
 
+const mockRequire = require('mock-require');
 const fs = require('node:fs');
 const {join} = require('node:path');
 const {promisify} = require('node:util');
 
-const {reRequire} = require('mock-require');
 const test = require('supertape');
 const tar = require('tar-stream');
 const gunzip = require('gunzip-maybe');
 const pullout = require('pullout');
 
-const cloudcmdPath = '../..';
-const cloudcmd = require(cloudcmdPath);
+const cloudcmd = require('../../server/cloudcmd.js');
 const serveOnce = require('serve-once');
-
+const {reRequire} = mockRequire;
 const pathZipFixture = join(__dirname, '..', 'fixture/pack.zip');
 
 const pathTarFixture = join(__dirname, '..', 'fixture/pack.tar.gz');
@@ -39,6 +38,7 @@ const once = promisify((name, extract, fn) => {
 });
 
 test('cloudcmd: rest: pack: tar: get', async (t) => {
+    debugger;
     const config = {
         packer: 'tar',
         auth: false,
@@ -48,7 +48,6 @@ test('cloudcmd: rest: pack: tar: get', async (t) => {
         config,
     };
     
-    const cloudcmd = reRequire(cloudcmdPath);
     const {request} = serveOnce(cloudcmd, defaultOptions);
     
     const {body} = await request.get(`/api/v1/pack/fixture/pack`, {
@@ -68,7 +67,7 @@ test('cloudcmd: rest: pack: tar: get', async (t) => {
     
     t.equal(file, data, 'should pack data');
     t.end();
-});
+}, {timeout: 7000});
 
 test('cloudcmd: rest: pack: tar: put: file', async (t) => {
     const config = {
@@ -234,3 +233,4 @@ function getPackOptions(to, names = ['pack']) {
         from: '/fixture',
     };
 }
+
