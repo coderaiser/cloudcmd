@@ -1,16 +1,9 @@
 'use strict';
 
-const process = require('node:process');
-const DIR = '../';
-const DIR_COMMON = `${DIR}../common/`;
-
 const path = require('node:path');
-const fs = require('node:fs');
+const _fs = require('node:fs');
 
-const root = require(`${DIR}root`);
-const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
-const markdown = require(`${DIR}markdown`);
-const info = require('./info');
+const process = require('node:process');
 
 const jaguar = require('jaguar');
 const onezip = require('onezip');
@@ -22,7 +15,13 @@ const json = require('jonny');
 const ponse = require('ponse');
 
 const copymitter = require('copymitter');
-const moveFiles = require('@cloudcmd/move-files');
+const _moveFiles = require('@cloudcmd/move-files');
+
+const root = require(`../root`);
+const CloudFunc = require(`../../common/cloudfunc`);
+const markdown = require(`../markdown/index.js`);
+const info = require('./info');
+
 const isString = (a) => typeof a === 'string';
 const isFn = (a) => typeof a === 'function';
 const swap = wraptile((fn, a, b) => fn(b, a));
@@ -37,7 +36,7 @@ const UserError = (msg) => {
     return error;
 };
 
-module.exports = currify((config, request, response, next) => {
+module.exports = currify(({config, fs = _fs, moveFiles = _moveFiles}, request, response, next) => {
     const name = ponse.getPathName(request);
     const regExp = RegExp(`^${apiURL}`);
     const is = regExp.test(name);
@@ -45,10 +44,10 @@ module.exports = currify((config, request, response, next) => {
     if (!is)
         return next();
     
-    rest(config, request, response);
+    rest({fs, config, moveFiles}, request, response);
 });
 
-function rest(config, request, response) {
+function rest({fs, config, moveFiles}, request, response) {
     const name = ponse.getPathName(request);
     const params = {
         request,
@@ -56,7 +55,7 @@ function rest(config, request, response) {
         name: name.replace(apiURL, '') || '/',
     };
     
-    sendData(params, config, (error, options, data) => {
+    sendData(params, {fs, config, moveFiles}, (error, options, data) => {
         params.gzip = !error;
         
         if (!data) {
@@ -87,8 +86,10 @@ function rest(config, request, response) {
  * getting data on method and command
  *
  * @param params {name, method, body, requrest, response}
+ * @param config {}
+ * @param callback
  */
-function sendData(params, config, callback) {
+function sendData(params, {fs, config, moveFiles}, callback) {
     const p = params;
     const isMD = p.name.startsWith('/markdown');
     const rootDir = config('root');
@@ -107,6 +108,8 @@ function sendData(params, config, callback) {
             .then((body) => {
                 onPUT({
                     name: p.name,
+                    fs,
+                    moveFiles,
                     config,
                     body,
                 }, callback);
@@ -185,7 +188,7 @@ const getRenameMsg = (from, to) => {
 };
 
 module.exports._onPUT = onPUT;
-function onPUT({name, config, body}, callback) {
+function onPUT({name, fs, moveFiles, config, body}, callback) {
     checkPut(name, body, callback);
     
     const cmd = getCMD(name);
@@ -221,7 +224,7 @@ function onPUT({name, config, body}, callback) {
     }
     
     case 'rename':
-        return rename(rootDir, files.from, files.to, callback);
+        return rename(rootDir, files.from, files.to, fs, callback);
     
     case 'copy':
         if (!files.from || !files.names || !files.to)
@@ -260,7 +263,7 @@ function onPUT({name, config, body}, callback) {
     }
 }
 
-function rename(rootDir, from, to, callback) {
+function rename(rootDir, from, to, fs, callback) {
     if (!from)
         return callback(UserError('"from" should be filled'));
     

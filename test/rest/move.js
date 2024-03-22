@@ -1,20 +1,15 @@
 'use strict';
 
+const wait = require('@iocmd/wait');
+const {EventEmitter} = require('node:events');
 const fs = require('node:fs');
 
-const test = require('supertape');
+const {test, stub} = require('supertape');
 const {Volume} = require('memfs');
 const {ufs} = require('unionfs');
-
-const mockRequire = require('mock-require');
 const serveOnce = require('serve-once');
-const {reRequire, stopAll} = mockRequire;
 
-const cloudcmdPath = '../../';
-const dir = `${cloudcmdPath}server/`;
-const restPath = `${dir}rest`;
-
-const {assign} = Object;
+const cloudcmd = require('../../server/cloudcmd.js');
 
 test('cloudcmd: rest: move', async (t) => {
     const volume = {
@@ -28,17 +23,11 @@ test('cloudcmd: rest: move', async (t) => {
         .use(vol)
         .use(fs);
     
-    assign(unionFS, {
-        promises: fs.promises,
-    });
-    mockRequire('fs', unionFS);
+    const move = new EventEmitter();
+    const moveFiles = stub().returns(move);
     
-    reRequire('@cloudcmd/rename-files');
-    reRequire('@cloudcmd/move-files');
-    reRequire(restPath);
-    
-    const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
+    cloudcmd.depStore('moveFiles', moveFiles);
     
     const configManager = createConfigManager();
     configManager('auth', false);
@@ -54,18 +43,20 @@ test('cloudcmd: rest: move', async (t) => {
         names: ['move.txt'],
     };
     
-    const {body} = await request.put(`/api/v1/move`, {
-        body: files,
-    });
+    const emit = move.emit.bind(move);
     
-    stopAll();
+    const [{body}] = await Promise.all([
+        request.put(`/api/v1/move`, {
+            body: files,
+        }),
+        wait(1000, emit, 'end'),
+    ]);
     
     t.equal(body, 'move: ok("["move.txt"]")', 'should move');
     t.end();
 });
 
 test('cloudcmd: rest: move: no from', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();
@@ -89,7 +80,6 @@ test('cloudcmd: rest: move: no from', async (t) => {
 });
 
 test('cloudcmd: rest: move: no to', async (t) => {
-    const cloudcmd = reRequire(cloudcmdPath);
     const {createConfigManager} = cloudcmd;
     
     const configManager = createConfigManager();
@@ -113,3 +103,4 @@ test('cloudcmd: rest: move: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
+
