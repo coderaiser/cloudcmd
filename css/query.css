@@ -121,7 +121,7 @@
     
     /* текущий файл под курсором */
     .current-file {
-        background-color: var(--color-transparent);
+        background-color: var(--border-color);
         color: white;
     }
     /* делаем иконки под курсом белыми */
