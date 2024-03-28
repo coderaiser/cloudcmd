@@ -6,7 +6,7 @@ body {
     width: 100%;
     height: 95%;
     overflow: hidden;
-    background-color: white;
+    background-color: var(--background-color);
 }
 
 body,
@@ -93,7 +93,7 @@ code {
     bottom: 5px;
     left: 16px;
     font-size: 10px;
-    color: var(--icon-color);
+    color: var(--text-color);
     content: attr(data-progress);
 }
 
@@ -113,7 +113,7 @@ code {
 
 .cmd-button:active {
     color: white;
-    background-color: var(--icon-color);
+    background-color: var(--text-color);
     transition: ease 0.1s;
 }
 
@@ -157,6 +157,7 @@ a:active {
 
 .fm-header {
     font-weight: bold;
+    color: var(--column-color);
 }
 
 .panel-left {
@@ -203,6 +204,10 @@ a:active {
     width: 26%;
 }
 
+.name a {
+    color: var(--text-color);
+}
+
 .name a:hover {
     cursor: default;
 }
@@ -212,11 +217,13 @@ a:active {
     width: 12%;
     margin-right: 27px;
     text-align: right;
+    color: var(--column-color);
 }
 
 .date {
     float: left;
     width: 19%;
+    color: var(--column-color);
 }
 
 .owner {
@@ -228,11 +235,13 @@ a:active {
      * spaces behind lines
      */
     vertical-align: top;
+    color: var(--column-color);
 }
 
 .mode {
     float: right;
     width: 18%;
+    color: var(--column-color);
 }
 
 .reduce-text {
