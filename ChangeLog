@@ -1,3 +1,13 @@
+2024.03.29, v17.2.1
+
+fix:
+- cc134464 client: vim: space
+
+feature:
+- e3f89e88 dark mode: add
+- c45b23fe css: vars: add
+- b1f74c00 css: add vars
+
 2024.03.22, v17.2.0
 
 feature:
