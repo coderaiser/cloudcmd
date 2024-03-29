@@ -430,6 +430,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_OPEN` - open web browser when server started
 - `CLOUDCMD_EDITOR` - set editor
 - `CLOUDCMD_COLUMNS` - set visible themes
+- `CLOUDCMD_THEME` - set themes "light" or "dark"
 - `CLOUDCMD_CONTACT` - enable contact
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_CONFIG_AUTH` - enable auth change in config dialog
