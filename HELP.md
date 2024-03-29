@@ -93,7 +93,8 @@ Cloud Commander supports the following command-line parameters:
 | `--terminal-command`          | set command to run in terminal (shell by default)
 | `--terminal-auto-restart`     | restart command on exit
 | `--vim`                       | enable vim hot keys
-| `--themes`                   | set visible themes
+| `--columns`                   | set visible columns
+| `--theme`                     | set theme 'light' or 'dark'"
 | `--export`                    | enable export of config through a server
 | `--export-token`              | authorization token used by export server
 | `--import`                    | enable import of config
