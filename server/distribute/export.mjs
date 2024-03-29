@@ -10,7 +10,7 @@ import log, {
     makeColor,
     getMessage,
     getDescription,
-    logWraped,
+    logWrapped,
 } from './log.mjs';
 
 const omitList = [
@@ -41,9 +41,9 @@ export const distributeExport = (config, socket) => {
     const distributePrefix = `${prefix}/distribute`;
     const isLog = config('log');
     
-    const onError = squad(logWraped(isLog, exportStr), getMessage);
+    const onError = squad(logWrapped(isLog, exportStr), getMessage);
     
-    const onConnectError = squad(logWraped(isLog, exportStr), getDescription);
+    const onConnectError = squad(logWrapped(isLog, exportStr), getDescription);
     
     socket
         .of(distributePrefix)

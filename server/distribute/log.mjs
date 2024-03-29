@@ -12,7 +12,7 @@ export const getDescription = (e) => e.message;
 
 export default log;
 
-export const logWraped = wraptile(log);
+export const logWrapped = wraptile(log);
 
 export const importStr = 'import';
 export const exportStr = 'export';
@@ -43,7 +43,7 @@ assign(log, {
     getDescription,
     authTryStr,
     stringToRGB,
-    logWraped,
+    logWrapped,
     importStr,
     exportStr,
     connectedStr,

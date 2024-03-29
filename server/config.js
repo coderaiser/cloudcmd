@@ -35,7 +35,7 @@ const ConfigPath = path.join(DIR, 'json/config.json');
 const ConfigHome = path.join(HOME, '.cloudcmd.json');
 
 const connection = currify(_connection);
-const connectionWraped = wraptile(_connection);
+const connectionWrapped = wraptile(_connection);
 const middle = currify(_middle);
 
 const readjsonSync = (name) => {
@@ -155,7 +155,7 @@ function listen(manage, sock, auth) {
                 return connection(manage, socket);
             
             const reject = () => socket.emit('reject');
-            socket.on('auth', auth(connectionWraped(manage, socket), reject));
+            socket.on('auth', auth(connectionWrapped(manage, socket), reject));
         });
 }
 

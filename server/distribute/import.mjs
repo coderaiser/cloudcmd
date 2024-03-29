@@ -18,7 +18,7 @@ const {
     authTryStr,
     getMessage,
     getDescription,
-    logWraped,
+    logWrapped,
 } = log;
 
 const {entries} = Object;
@@ -94,23 +94,23 @@ export const distributeImport = (config, options, fn) => {
     const close = closeIfNot(socket, importListen);
     
     const statusStore = fullstore();
-    const statusStoreWraped = wraptile(statusStore);
+    const statusStoreWrapped = wraptile(statusStore);
     
-    const onConfig = squad(close, logWraped(isLog, importStr, `config received from ${colorUrl}`), statusStoreWraped('received'), updateConfig(config));
+    const onConfig = squad(close, logWrapped(isLog, importStr, `config received from ${colorUrl}`), statusStoreWrapped('received'), updateConfig(config));
     
-    const onError = squad(superFn('error'), logWraped(isLog, config, importStr), addUrl(colorUrl), getMessage);
+    const onError = squad(superFn('error'), logWrapped(isLog, config, importStr), addUrl(colorUrl), getMessage);
     
-    const onConnectError = squad(superFn('connect_error'), logWraped(isLog, importStr), addUrl(colorUrl), getDescription);
+    const onConnectError = squad(superFn('connect_error'), logWrapped(isLog, importStr), addUrl(colorUrl), getDescription);
     
     const onConnect = emitAuth(importUrl, config, socket);
-    const onAccept = logWraped(isLog, importStr, `${connectedStr} to ${colorUrl}`);
+    const onAccept = logWrapped(isLog, importStr, `${connectedStr} to ${colorUrl}`);
     
     const onDisconnect = squad(
         done(
             fn,
             statusStore,
         ),
-        logWraped(
+        logWrapped(
             isLog,
             importStr,
             `${disconnectedStr} from ${colorUrl}`,
@@ -125,9 +125,9 @@ export const distributeImport = (config, options, fn) => {
         ),
     );
     
-    const onChange = squad(logWraped(isLog, importStr), config);
+    const onChange = squad(logWrapped(isLog, importStr), config);
     
-    const onReject = squad(superFn('reject'), logWraped(
+    const onReject = squad(superFn('reject'), logWrapped(
         isLog,
         importStr,
         tokenRejectedStr,
