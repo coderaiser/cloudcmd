@@ -11,6 +11,24 @@ test('vim: no operations', (t) => {
     t.end();
 });
 
+test('vim: space', (t) => {
+    const moveNext = stub();
+    
+    vim(' ');
+    vim('j', {
+        moveNext,
+    });
+    
+    const args = [{
+        count: 1,
+        isDelete: false,
+        isVisual: false,
+    }];
+    
+    t.calledWith(moveNext, args);
+    t.end();
+});
+
 test('vim: ^', (t) => {
     const movePrevious = stub();
     

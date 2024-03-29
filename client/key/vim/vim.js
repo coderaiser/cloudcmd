@@ -21,7 +21,7 @@ const rmFirst = (a) => {
 
 const noop = () => {};
 
-module.exports = (key, operations) => {
+module.exports = (key, operations = {}) => {
     const prevStore = store();
     const isVisual = visual();
     const value = store(prevStore.concat(key));
@@ -169,6 +169,9 @@ module.exports = (key, operations) => {
         findPrevious();
         return end();
     }
+    
+    if (key === ' ')
+        return end();
 };
 
 function handleDelete(prevStore) {
