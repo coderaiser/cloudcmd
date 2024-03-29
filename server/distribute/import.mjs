@@ -1,16 +1,14 @@
-'use strict';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import squad from 'squad';
+import fullstore from 'fullstore';
+import io from 'socket.io-client';
+import log from './log.mjs';
+import env from '../env.js';
+import _forEachKey from 'for-each-key';
 
-const currify = require('currify');
-const wraptile = require('wraptile');
-const squad = require('squad');
-const fullstore = require('fullstore');
-
-const io = require('socket.io-client');
-const log = require('./log');
-
-const env = require('../env');
 const noop = () => {};
-const forEachKey = currify(require('for-each-key'));
+const forEachKey = currify(_forEachKey);
 
 const {
     importStr,
@@ -67,7 +65,7 @@ const updateConfig = currify((config, data) => {
     }
 });
 
-module.exports = (config, options, fn) => {
+export const distributeImport = (config, options, fn) => {
     fn = fn || options;
     
     if (!config('import'))

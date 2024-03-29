@@ -241,8 +241,8 @@ async function main() {
     if (args.showConfig)
         await showConfig();
     
-    const distribute = await simport('../server/distribute/index.js');
-    const importConfig = promisify(distribute.import);
+    const {distributeImport} = await simport('../server/distribute/import.mjs');
+    const importConfig = promisify(distributeImport);
     
     await start(options, config);
     

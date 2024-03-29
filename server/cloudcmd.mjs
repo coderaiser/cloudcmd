@@ -24,7 +24,7 @@ import route from './route.mjs';
 import * as validate from './validate.mjs';
 import prefixer from './prefixer.js';
 import terminal from './terminal.js';
-import distribute from './distribute/index.js';
+import {distributeExport} from './distribute/export.mjs';
 import {createDepStore} from './depstore.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -175,7 +175,7 @@ function listen({prefixSocket, socket, config}) {
         autoRestart: config('terminalAutoRestart'),
     });
     
-    distribute.export(config, socket);
+    distributeExport(config, socket);
 }
 
 function cloudcmdMiddle({modules, config}) {

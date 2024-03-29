@@ -1,13 +1,8 @@
-'use strict';
-
-const currify = require('currify');
-const wraptile = require('wraptile');
-const squad = require('squad');
-const omit = require('object.omit');
-
-const log = require('./log');
-
-const {
+import currify from 'currify';
+import wraptile from 'wraptile';
+import squad from 'squad';
+import omit from 'object.omit';
+import log, {
     exportStr,
     connectedStr,
     disconnectedStr,
@@ -16,7 +11,7 @@ const {
     getMessage,
     getDescription,
     logWraped,
-} = log;
+} from './log.mjs';
 
 const omitList = [
     'auth',
@@ -38,7 +33,7 @@ const omitList = [
 
 const omitConfig = (config) => omit(config, omitList);
 
-module.exports = (config, socket) => {
+export const distributeExport = (config, socket) => {
     if (!config('export'))
         return;
     

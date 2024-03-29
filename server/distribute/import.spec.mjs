@@ -1,15 +1,13 @@
-import {createRequire} from 'node:module';
 import process from 'node:process';
 import test from 'supertape';
 import {promisify} from 'node:util';
 import tryToCatch from 'try-to-catch';
 import {connect} from '../../test/before.mjs';
 import {createConfigManager} from '../cloudcmd.mjs';
-
-const require = createRequire(import.meta.url);
+import {distributeImport} from './import.mjs';
 
 const distribute = {
-    import: promisify(require('./import')),
+    import: promisify(distributeImport),
 };
 
 const config = createConfigManager();
