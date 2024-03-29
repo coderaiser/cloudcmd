@@ -41,6 +41,7 @@ code {
     -ms-user-select: initial;
     -o-user-select: initial;
     user-select: text;
+    color: var(--column-color);
 }
 
 .panel,

@@ -1,6 +1,6 @@
 import {test, stub} from 'supertape';
 import tryCatch from 'try-catch';
-import validate from './validate.js';
+import * as validate from './validate.mjs';
 import cloudcmd from './cloudcmd.mjs';
 
 test('validate: root: bad', (t) => {
@@ -97,6 +97,35 @@ test('validate: columns: wrong', (t) => {
     validate.columns('hello', {
         exit,
         getColumns,
+    });
+    
+    t.calledWith(exit, [msg], 'should call exit');
+    t.end();
+});
+
+test('validate: theme', (t) => {
+    const exit = stub();
+    
+    validate.theme('dark', {
+        exit,
+    });
+    
+    t.notCalled(exit, 'should not call exit');
+    t.end();
+});
+
+test('validate: theme: wrong', (t) => {
+    const getThemes = stub().returns({
+        light: '',
+        dark: '',
+    });
+    
+    const exit = stub();
+    const msg = 'cloudcmd --theme: can be only one of: "light", "dark"';
+    
+    validate.theme('hello', {
+        exit,
+        getThemes,
     });
     
     t.calledWith(exit, [msg], 'should call exit');

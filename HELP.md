@@ -93,7 +93,7 @@ Cloud Commander supports the following command-line parameters:
 | `--terminal-command`          | set command to run in terminal (shell by default)
 | `--terminal-auto-restart`     | restart command on exit
 | `--vim`                       | enable vim hot keys
-| `--columns`                   | set visible columns
+| `--themes`                   | set visible themes
 | `--export`                    | enable export of config through a server
 | `--export-token`              | authorization token used by export server
 | `--import`                    | enable import of config
@@ -122,7 +122,7 @@ Cloud Commander supports the following command-line parameters:
 | `--no-terminal-command`       | set default shell to run in terminal
 | `--no-terminal-auto-restart`  | do not restart command on exit
 | `--no-vim`                    | disable vim hot keys
-| `--no-columns`                | set default visible columns
+| `--no-themes`                | set default visible themes
 | `--no-export`                 | disable export config through a server
 | `--no-import`                 | disable import of config
 | `--no-import-listen`          | disable listen on config updates from import server
@@ -408,7 +408,7 @@ Here's a description of all options:
     "terminalCommand": "", // set command to run in terminal
     "terminalAutoRestart": true, // restart command on exit
     "vim": false, // disable vim hot keys
-    "columns": "name-size-date-owner-mode", // set visible columns
+    "themes": "name-size-date-owner-mode", // set visible themes
     "export": false, // enable export of config through a server
     "exportToken": "root", // token used by export server
     "import": false, // enable import of config
@@ -428,7 +428,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_NAME` - set tab name in web browser
 - `CLOUDCMD_OPEN` - open web browser when server started
 - `CLOUDCMD_EDITOR` - set editor
-- `CLOUDCMD_COLUMNS` - set visible columns
+- `CLOUDCMD_COLUMNS` - set visible themes
 - `CLOUDCMD_CONTACT` - enable contact
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_CONFIG_AUTH` - enable auth change in config dialog

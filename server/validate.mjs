@@ -1,13 +1,12 @@
-'use strict';
+import {statSync as _statSync} from 'node:fs';
+import tryCatch from 'try-catch';
+import _exit from './exit.js';
+import {getColumns as _getColumns} from './columns.mjs';
+import {getThemes as _getThemes} from './theme.mjs';
 
-const {statSync: _statSync} = require('node:fs');
-const tryCatch = require('try-catch');
-
-const _exit = require('./exit');
-const {getColumns: _getColumns} = require('./columns');
 const isString = (a) => typeof a === 'string';
 
-module.exports.root = (dir, config, {exit = _exit, statSync = _statSync} = {}) => {
+export const root = (dir, config, {exit = _exit, statSync = _statSync} = {}) => {
     if (!isString(dir))
         throw Error('dir should be a string');
     
@@ -23,21 +22,21 @@ module.exports.root = (dir, config, {exit = _exit, statSync = _statSync} = {}) =
         return exit('cloudcmd --root: %s', error.message);
 };
 
-module.exports.editor = (name, {exit = _exit} = {}) => {
+export const editor = (name, {exit = _exit} = {}) => {
     const reg = /^(dword|edward|deepword)$/;
     
     if (!reg.test(name))
         exit('cloudcmd --editor: could be "dword", "edward" or "deepword" only');
 };
 
-module.exports.packer = (name, {exit = _exit} = {}) => {
+export const packer = (name, {exit = _exit} = {}) => {
     const reg = /^(tar|zip)$/;
     
     if (!reg.test(name))
         exit('cloudcmd --packer: could be "tar" or "zip" only');
 };
 
-module.exports.columns = (type, {exit = _exit, getColumns = _getColumns} = {}) => {
+export const columns = (type, {exit = _exit, getColumns = _getColumns} = {}) => {
     const addQuotes = (a) => `"${a}"`;
     const all = Object
         .keys(getColumns())
@@ -50,4 +49,19 @@ module.exports.columns = (type, {exit = _exit, getColumns = _getColumns} = {}) =
     
     if (!all.includes(type))
         exit(`cloudcmd --columns: can be only one of: ${names}`);
+};
+
+export const theme = (type, {exit = _exit, getThemes = _getThemes} = {}) => {
+    const addQuotes = (a) => `"${a}"`;
+    const all = Object
+        .keys(getThemes())
+        .concat('');
+    
+    const names = all
+        .filter(Boolean)
+        .map(addQuotes)
+        .join(', ');
+    
+    if (!all.includes(type))
+        exit(`cloudcmd --theme: can be only one of: ${names}`);
 };

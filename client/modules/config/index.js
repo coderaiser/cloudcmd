@@ -137,6 +137,7 @@ async function fillTemplate() {
         editor,
         packer,
         columns,
+        theme,
         configAuth,
         ...obj
     } = input.convert(config);
@@ -144,6 +145,7 @@ async function fillTemplate() {
     obj[`${editor}-selected`] = 'selected';
     obj[`${packer}-selected`] = 'selected';
     obj[`${columns}-selected`] = 'selected';
+    obj[`${theme}-selected`] = 'selected';
     obj.configAuth = configAuth ? '' : 'hidden';
     
     const innerHTML = rendy(Template, obj);

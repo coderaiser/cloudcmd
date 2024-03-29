@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 
+import process from 'node:process';
 import {createRequire} from 'node:module';
 import {promisify} from 'node:util';
 import tryToCatch from 'try-to-catch';
 import {createSimport} from 'simport';
 import parse from 'yargs-parser';
-import process from 'node:process';
 import exit from '../server/exit.js';
 import {createConfig, configPath} from '../server/config.js';
 import env from '../server/env.js';
 import prefixer from '../server/prefixer.js';
+import * as validate from '../server/validate.mjs';
 
 process.on('unhandledRejection', exit);
 
@@ -61,6 +62,7 @@ const yargsOptions = {
         'terminal-path',
         'terminal-command',
         'columns',
+        'theme',
         'import-url',
         'import-token',
         'export-token',
@@ -112,6 +114,7 @@ const yargsOptions = {
         'contact': choose(env.bool('contact'), config('contact')),
         'terminal': choose(env.bool('terminal'), config('terminal')),
         'columns': env('columns') || config('columns') || '',
+        'theme': env('theme') || config('theme') || '',
         'vim': choose(env.bool('vim'), config('vim')),
         'log': config('log'),
         
@@ -174,6 +177,9 @@ async function main() {
     if (args.repl)
         repl();
     
+    validate.columns(args.columns);
+    validate.theme(args.theme);
+    
     port(args.port);
     
     config('name', args.name);
@@ -194,6 +200,7 @@ async function main() {
     config('prefixSocket', prefixer(args.prefixSocket));
     config('root', args.root || '/');
     config('vim', args.vim);
+    config('theme', args.theme);
     config('columns', args.columns);
     config('log', args.log);
     config('confirmCopy', args.confirmCopy);
@@ -221,6 +228,7 @@ async function main() {
         prefix: config('prefix'),
         prefixSocket: config('prefixSocket'),
         columns: config('columns'),
+        theme: config('theme'),
     };
     
     const password = env('password') || args.password;
@@ -228,7 +236,7 @@ async function main() {
     if (password)
         config('password', await getPassword(password));
     
-    await validateRoot(options.root, config);
+    validateRoot(options.root, config);
     
     if (args.showConfig)
         await showConfig();
@@ -245,8 +253,7 @@ async function main() {
     await importConfig(config);
 }
 
-async function validateRoot(root, config) {
-    const validate = await simport(`${DIR_SERVER}validate.js`);
+function validateRoot(root, config) {
     validate.root(root, config);
     
     if (root === '/')

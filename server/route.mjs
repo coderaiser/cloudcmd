@@ -13,8 +13,9 @@ import {contentType} from 'mime-types';
 import root from './root.js';
 import prefixer from './prefixer.js';
 import CloudFunc from '../common/cloudfunc.js';
-import {getColumns} from './columns.js';
 import Template from './template.js';
+import {getColumns} from './columns.mjs';
+import {getThemes} from './theme.mjs';
 
 const require = createRequire(import.meta.url);
 const {stringify} = JSON;
@@ -164,6 +165,7 @@ function indexProcessing(config, options) {
         prefix: getPrefix(config),
         config: stringify(config('*')),
         columns: getColumns()[config('columns')],
+        themes: getThemes()[config('theme')],
     });
     
     return data;

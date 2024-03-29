@@ -21,7 +21,7 @@ import modulas from './modulas.js';
 import userMenu from './user-menu.mjs';
 import rest from './rest/index.js';
 import route from './route.mjs';
-import validate from './validate.js';
+import * as validate from './validate.mjs';
 import prefixer from './prefixer.js';
 import terminal from './terminal.js';
 import distribute from './distribute/index.js';
@@ -64,7 +64,7 @@ function cloudcmd(params) {
         if (/root/.test(name))
             validate.root(value, config);
         
-        if (/editor|packer|columns/.test(name))
+        if (/editor|packer|themes/.test(name))
             validate[name](value);
         
         if (/prefix/.test(name))

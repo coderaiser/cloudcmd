@@ -34,6 +34,7 @@
     "showFileName": false,
     "vim": false,
     "columns": "name-size-date-owner-mode",
+    "theme": "light",
     "export": false,
     "exportToken": "root",
     "import": false,

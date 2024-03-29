@@ -32,6 +32,7 @@
     "--terminal-auto-restart    ": "restart command on exit",
     "--vim                      ": "enable vim hot keys",
     "--columns                  ": "set visible columns",
+    "--theme                    ": "set theme 'light' or 'dark'",
     "--export                   ": "enable export of config through a server",
     "--export-token             ": "authorization token used by export server",
     "--import                   ": "enable import of config",
