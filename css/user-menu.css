@@ -9,7 +9,7 @@
 }
 
 .cloudcmd-user-menu > option:checked {
-    box-shadow: 20px -20px 0 2px var(--text-color) inset;
+    box-shadow: 20px -20px 0 2px var(--selected-menu-item-color) inset;
 }
 
 .cloudcmd-user-menu-button {

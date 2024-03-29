@@ -6,7 +6,7 @@ body {
     width: 100%;
     height: 95%;
     overflow: hidden;
-    background-color: var(--background-color);
+    background-color: var(--background);
 }
 
 body,
@@ -60,7 +60,7 @@ code {
 
 .path-icon {
     position: relative;
-    color: #222;
+    color: var(--icon-color);
 }
 
 .path-icon:active {
@@ -93,7 +93,7 @@ code {
     bottom: 5px;
     left: 16px;
     font-size: 10px;
-    color: var(--text-color);
+    color: var(--link-color);
     content: attr(data-progress);
 }
 
@@ -101,8 +101,8 @@ code {
     width: 5%;
     height: 30px;
     margin: 20px 2px 0;
-    color: #222;
-    background-color: white;
+    color: var(--icon-color);
+    background-color: var(--button-background);
     transition: ease 0.1s;
 }
 
@@ -113,7 +113,7 @@ code {
 
 .cmd-button:active {
     color: white;
-    background-color: var(--text-color);
+    background-color: var(--link-color);
     transition: ease 0.1s;
 }
 
@@ -205,7 +205,7 @@ a:active {
 }
 
 .name a {
-    color: var(--text-color);
+    color: var(--link-color);
 }
 
 .name a:hover {

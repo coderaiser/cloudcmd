@@ -1,6 +1,45 @@
 :root {
-    --text-color: #317bf9;
+    --link-color: #317bf9;
     --border-color: rgb(49 123 249 / 40%);
-    --background-color: #22272e;
-    --column-color: #c6d1df;
+    --background: #22272e;
+    --column-color: #727e8c;
+    --icon-color: #478be6;
+    --button-background: #22272e;
+    --internal-background: #373e47;
+}
+
+.view {
+    background: var(--internal-background) !important;
+    color: var(--column-color) !important;
+}
+.view a {
+    color: var(--link-color) !important;
+}
+
+.smalltalk .page, .smalltalk header, .smalltalk .button-strip  button, .smalltalk input{
+    background: var(--internal-background) !important;
+    color: var(--link-color) !important;
+    text-shadow: none !important;
+}
+
+.cloudcmd-user-menu, .cloudcmd-user-menu-button {
+    background: var(--internal-background) !important;
+    color: var(--link-color) !important;
+}
+
+.jqconsole {
+    background: #373e47 !important;
+}
+
+.jqconsole-prompt {
+    color: var(--column-color) !important;
+}
+
+.log-msg {
+    color: var(--column-color) !important;
+}
+
+.menu {
+    color: var(--link-color) !important;
+    background: var(--internal-background) !important;
 }

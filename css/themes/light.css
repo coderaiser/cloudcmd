@@ -1,6 +1,9 @@
 :root {
-    --text-color: blue;
+    --link-color: blue;
+    --selected-menu-item-color: #317bf9;
     --border-color: rgb(49 123 249 / 40%);
-    --background-color: white;
+    --background: white;
     --column-color: black;
+    --icon-color: #222;
+    --button-background: white;
 }
