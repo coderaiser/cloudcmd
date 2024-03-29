@@ -16,13 +16,17 @@
     color: var(--link-color) !important;
 }
 
-.smalltalk .page, .smalltalk header, .smalltalk .button-strip  button, .smalltalk input{
+.smalltalk .page,
+.smalltalk header,
+.smalltalk .button-strip button,
+.smalltalk input {
     background: var(--internal-background) !important;
     color: var(--link-color) !important;
     text-shadow: none !important;
 }
 
-.cloudcmd-user-menu, .cloudcmd-user-menu-button {
+.cloudcmd-user-menu,
+.cloudcmd-user-menu-button {
     background: var(--internal-background) !important;
     color: var(--link-color) !important;
 }

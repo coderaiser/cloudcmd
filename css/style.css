@@ -172,6 +172,19 @@ a:active {
     opacity: 0.7;
 }
 
+.name {
+    float: left;
+    width: 26%;
+}
+
+.name a {
+    color: var(--link-color);
+}
+
+.name a:hover {
+    cursor: default;
+}
+
 .selected-file,
 .selected-file .name > a {
     color: rgb(254 159 224);
@@ -197,19 +210,6 @@ a:active {
 
 .keyspanel {
     text-align: center;
-}
-
-.name {
-    float: left;
-    width: 26%;
-}
-
-.name a {
-    color: var(--link-color);
-}
-
-.name a:hover {
-    cursor: default;
 }
 
 .size {
