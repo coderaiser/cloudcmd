@@ -6,7 +6,7 @@ import tryToCatch from 'try-to-catch';
 import {test, stub} from 'supertape';
 import serveOnce from 'serve-once';
 import cloudcmd from './cloudcmd.mjs';
-import {_getReadDir} from './route.js';
+import {_getReadDir} from './route.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

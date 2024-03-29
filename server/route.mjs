@@ -1,24 +1,22 @@
-'use strict';
+import {createRequire} from 'node:module';
+import {extname} from 'node:path';
+import _win32 from 'win32';
+import ponse from 'ponse';
+import rendy from 'rendy';
+import format from 'format-io';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import tryToCatch from 'try-to-catch';
+import once from 'once';
+import pipe from 'pipe-io';
+import {contentType} from 'mime-types';
+import root from './root.js';
+import prefixer from './prefixer.js';
+import CloudFunc from '../common/cloudfunc.js';
+import {getColumns} from './columns.js';
+import Template from './template.js';
 
-const {extname} = require('node:path');
-
-const _win32 = require('win32');
-const ponse = require('ponse');
-const rendy = require('rendy');
-const format = require('format-io');
-const currify = require('currify');
-const wraptile = require('wraptile');
-const tryToCatch = require('try-to-catch');
-const once = require('once');
-const pipe = require('pipe-io');
-const {contentType} = require('mime-types');
-
-const root = require(`./root`);
-const prefixer = require(`./prefixer`);
-const CloudFunc = require(`../common/cloudfunc`);
-const {getColumns} = require(`./columns`);
-const Template = require(`./template`);
-
+const require = createRequire(import.meta.url);
 const {stringify} = JSON;
 const {FS} = CloudFunc;
 
@@ -46,7 +44,7 @@ const getReadDir = (config, {win32 = _win32} = {}) => {
 /**
  * routing of server queries
  */
-module.exports = currify((config, options, request, response, next) => {
+export default currify((config, options, request, response, next) => {
     const name = ponse.getPathName(request);
     const isFS = RegExp(`^/$|^${FS}`).test(name);
     
@@ -61,7 +59,7 @@ module.exports = currify((config, options, request, response, next) => {
     }).catch(next);
 });
 
-module.exports._getReadDir = getReadDir;
+export const _getReadDir = getReadDir;
 
 async function route({config, options, request, response}) {
     const name = ponse.getPathName(request);
@@ -184,7 +182,8 @@ function buildIndex(config, html, data) {
     });
 }
 
-module.exports._hideKeysPanel = hideKeysPanel;
+export const _hideKeysPanel = hideKeysPanel;
+
 function hideKeysPanel(html) {
     const keysPanel = '<div id="js-keyspanel" class="{{ className }}"';
     const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';

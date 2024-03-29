@@ -20,7 +20,7 @@ import {createConfig, configPath} from './config.js';
 import modulas from './modulas.js';
 import userMenu from './user-menu.mjs';
 import rest from './rest/index.js';
-import route from './route.js';
+import route from './route.mjs';
 import validate from './validate.js';
 import prefixer from './prefixer.js';
 import terminal from './terminal.js';
