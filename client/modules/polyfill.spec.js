@@ -23,9 +23,11 @@ test('cloudcmd: client: polyfill: scrollIntoViewIfNeaded', (t) => {
     mockRequire.stop('scroll-into-view-if-neaded');
     global.DOM = DOM;
     
-    const args = [el, {
-        block: 'nearest',
-    }];
+    const args = [
+        el, {
+            block: 'nearest',
+        },
+    ];
     
     stopAll();
     

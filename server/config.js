@@ -242,8 +242,10 @@ function cryptoPass(manage, json) {
     
     const password = criton(json.password, algo);
     
-    return [manage, {
-        ...json,
-        password,
-    }];
+    return [
+        manage, {
+            ...json,
+            password,
+        },
+    ];
 }

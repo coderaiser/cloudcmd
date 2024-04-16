@@ -30,3 +30,4 @@ webpack.config.js
 *.cdr
 *.eps
 
+*.config.*
