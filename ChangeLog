@@ -1,3 +1,11 @@
+2024.04.17, v17.4.0
+
+fix:
+- 6fb21020 server: route: path traversal
+
+feature:
+- 37ab7068 publish container image to GHCR (#409)
+
 2024.04.03, v17.3.3
 
 feature:
