@@ -77,7 +77,11 @@ async function route({config, options, request, response}) {
     const rootName = name.replace(CloudFunc.FS, '') || '/';
     const fullPath = root(rootName, config('root'));
     
+    if (fullPath.indexOf(config('root')))
+        return ponse.sendError(Error(`Path '${fullPath}' beyond root '${config('root')}'`), p);
+    
     const {html, win32} = options;
+    
     const read = getReadDir(config, {
         win32,
     });
