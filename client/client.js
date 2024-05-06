@@ -82,6 +82,7 @@ function CloudCmdProto(DOM) {
             noCurrent,
             currentName,
         } = overrides;
+        
         const refresh = isRefresh;
         let panelChanged;
         

@@ -46,6 +46,7 @@ export const columns = (type, overrides = {}) => {
         exit = _exit,
         getColumns = _getColumns,
     } = overrides;
+    
     const addQuotes = (a) => `"${a}"`;
     const all = Object
         .keys(getColumns())
@@ -65,6 +66,7 @@ export const theme = (type, overrides = {}) => {
         exit = _exit,
         getThemes = _getThemes,
     } = overrides;
+    
     const addQuotes = (a) => `"${a}"`;
     const all = Object
         .keys(getThemes())
