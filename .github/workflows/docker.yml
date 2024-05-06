@@ -27,11 +27,9 @@ jobs:
         run: redrun lint
       - name: Build
         id: build
-        run: >
+        run: |
           redrun build
-
-          echo "::set-output name=version::$(grep '"version":' package.json -m1
-          | cut -d\" -f4)"
+          echo "::set-output name=version::$(grep '"version":' package.json -m1 | cut -d\" -f4)"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx

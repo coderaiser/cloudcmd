@@ -74,13 +74,14 @@ function CloudCmdProto(DOM) {
         right: 'asc',
     };
     
-    this.changeDir = async (path, {
-        isRefresh,
-        panel,
-        history = true,
-        noCurrent,
-        currentName,
-    } = {}) => {
+    this.changeDir = async (path, overrides = {}) => {
+        const {
+            isRefresh,
+            panel,
+            history = true,
+            noCurrent,
+            currentName,
+        } = overrides;
         const refresh = isRefresh;
         let panelChanged;
         

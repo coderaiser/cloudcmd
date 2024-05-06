@@ -12,7 +12,11 @@ function _getModule(a) {
     return require(a);
 }
 
-module.exports = (config, arg, {getModule = _getModule} = {}) => {
+module.exports = (config, arg, overrides = {}) => {
+    const {
+        getModule = _getModule,
+    } = overrides;
+    
     if (!config('terminal'))
         return noop;
     

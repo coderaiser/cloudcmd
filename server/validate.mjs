@@ -6,7 +6,12 @@ import {getThemes as _getThemes} from './theme.mjs';
 
 const isString = (a) => typeof a === 'string';
 
-export const root = (dir, config, {exit = _exit, statSync = _statSync} = {}) => {
+export const root = (dir, config, overrides = {}) => {
+    const {
+        exit = _exit,
+        statSync = _statSync,
+    } = overrides;
+    
     if (!isString(dir))
         throw Error('dir should be a string');
     
@@ -36,7 +41,11 @@ export const packer = (name, {exit = _exit} = {}) => {
         exit('cloudcmd --packer: could be "tar" or "zip" only');
 };
 
-export const columns = (type, {exit = _exit, getColumns = _getColumns} = {}) => {
+export const columns = (type, overrides = {}) => {
+    const {
+        exit = _exit,
+        getColumns = _getColumns,
+    } = overrides;
     const addQuotes = (a) => `"${a}"`;
     const all = Object
         .keys(getColumns())
@@ -51,7 +60,11 @@ export const columns = (type, {exit = _exit, getColumns = _getColumns} = {}) => 
         exit(`cloudcmd --columns: can be only one of: ${names}`);
 };
 
-export const theme = (type, {exit = _exit, getThemes = _getThemes} = {}) => {
+export const theme = (type, overrides = {}) => {
+    const {
+        exit = _exit,
+        getThemes = _getThemes,
+    } = overrides;
     const addQuotes = (a) => `"${a}"`;
     const all = Object
         .keys(getThemes())
