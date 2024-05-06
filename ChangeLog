@@ -1,3 +1,9 @@
+2024.05.06, v17.4.1
+
+feature:
+- 154b4bd6 cloudcmd: @cloudcmd/move-files v8.0.0
+- c409a2db cloudcmd: copymitter v9.0.0
+
 2024.04.17, v17.4.0
 
 fix:
