@@ -63,9 +63,9 @@ async function keyListener(event) {
     const ctrlMeta = ctrl || meta;
     const {Key} = CloudCmd;
     
-    if (ctrlMeta && event.keyCode === Key.S)
+    if (ctrlMeta && event.keyCode === Key.S) {
         hide();
-    else if (ctrlMeta && event.keyCode === Key.P) {
+    } else if (ctrlMeta && event.keyCode === Key.P) {
         const [, pattern] = await Dialog.prompt('Apply pattern:', '[n][e]');
         pattern && applyPattern(pattern);
     }
