@@ -163,7 +163,7 @@
     "auto-globals": "^4.0.0",
     "babel-loader": "^8.0.0",
     "babel-plugin-macros": "^3.0.0",
-    "c8": "^9.1.0",
+    "c8": "^10.1.2",
     "cheerio": "^1.0.0-rc.5",
     "clean-css-loader": "^2.0.0",
     "codegen.macro": "^4.0.0",
