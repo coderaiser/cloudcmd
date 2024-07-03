@@ -1,7 +1,7 @@
 import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import serveOnce from 'serve-once';
 import {mkdirSync} from 'node:fs';
+import serveOnce from 'serve-once';
 import test from 'supertape';
 import {rimraf} from 'rimraf';
 import cloudcmd from '../../server/cloudcmd.mjs';

@@ -1,7 +1,7 @@
 import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import test from 'supertape';
 import fs from 'node:fs';
+import test from 'supertape';
 import {getThemes, isDev} from './theme.mjs';
 
 const __filename = fileURLToPath(import.meta.url);

@@ -1,6 +1,6 @@
 import process from 'node:process';
-import test from 'supertape';
 import {promisify} from 'node:util';
+import test from 'supertape';
 import tryToCatch from 'try-to-catch';
 import {connect} from '../../test/before.mjs';
 import {createConfigManager} from '../cloudcmd.mjs';

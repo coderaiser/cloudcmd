@@ -1,13 +1,13 @@
 import fs from 'node:fs';
 import {join, dirname} from 'node:path';
 import {promisify} from 'node:util';
+import {fileURLToPath} from 'node:url';
 import test from 'supertape';
 import tar from 'tar-stream';
 import gunzip from 'gunzip-maybe';
 import pullout from 'pullout';
-import cloudcmd from '../../server/cloudcmd.mjs';
 import serveOnce from 'serve-once';
-import {fileURLToPath} from 'node:url';
+import cloudcmd from '../../server/cloudcmd.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

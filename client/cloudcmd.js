@@ -10,7 +10,7 @@ const {registerSW, listenSW} = require('./sw/register');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = window.CloudCmd = async (config) => {
+module.exports = async (config) => {
     window.Util = require('../common/util');
     window.CloudFunc = require('../common/cloudfunc');
     
@@ -27,6 +27,7 @@ module.exports = window.CloudCmd = async (config) => {
     
     window.CloudCmd.init(prefix, config);
 };
+window.CloudCmd = module.exports;
 
 function getPrefix(prefix) {
     if (!prefix)

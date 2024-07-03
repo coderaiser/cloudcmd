@@ -1,8 +1,8 @@
 import path, {dirname} from 'node:path';
 import {once} from 'node:events';
-import test from 'supertape';
 import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
+import test from 'supertape';
 import io from 'socket.io-client';
 import {connect} from '../before.mjs';
 

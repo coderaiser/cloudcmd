@@ -1,7 +1,7 @@
 import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import test from 'supertape';
 import fs from 'node:fs';
+import test from 'supertape';
 import {getColumns, isDev} from './columns.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
