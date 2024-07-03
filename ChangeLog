@@ -1,3 +1,13 @@
+2024.07.03, v17.4.2
+
+feature:
+- ba2d0b36 cloudcmd: just-snake-case v3.2.0
+- 4cc47e30 cloudcmd: just-capitalize v3.2.0
+- d8451e56 cloudcmd: just-pascal-case v3.2.0
+- 6abf327d cloudcmd: package-json v10.0.0
+- 2ae6ad34 docker: Dockerimage update Debian12 (#414)
+- 05ef0ae4 cloudcmd: c8 v10.1.2
+
 2024.05.06, v17.4.1
 
 feature:
