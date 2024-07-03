@@ -1,4 +1,4 @@
-FROM node:lts-buster
+FROM node:lts-bullseye
 LABEL maintainer="Coderaiser"
 
 RUN mkdir -p /usr/src/app
