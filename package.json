@@ -180,7 +180,7 @@
     "html-looks-like": "^1.0.2",
     "html-webpack-plugin": "^4.0.1",
     "inherits": "^2.0.3",
-    "just-capitalize": "^1.0.0",
+    "just-capitalize": "^3.2.0",
     "just-pascal-case": "^3.2.0",
     "limier": "^3.0.0",
     "load.js": "^3.0.0",
