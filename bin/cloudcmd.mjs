@@ -164,7 +164,7 @@ else
     main();
 
 async function main() {
-    const validateArgs = await simport('@putout/cli-validate-args');
+    const {validateArgs} = await simport('@putout/cli-validate-args');
     
     const error = await validateArgs(args, [
         ...yargsOptions.boolean,
