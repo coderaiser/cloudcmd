@@ -198,7 +198,7 @@
     "readjson": "^2.0.1",
     "redlint": "^3.13.1",
     "request": "^2.76.0",
-    "rimraf": "^6.0.1",
+    "rimraf": "^5.0.1",
     "scroll-into-view-if-needed": "^3.0.4",
     "serve-once": "^3.0.1",
     "serviceworker-webpack-plugin": "^1.0.1",
