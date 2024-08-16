@@ -215,7 +215,7 @@
     "webpackbar": "^5.0.0-3"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "license": "MIT",
   "publishConfig": {
