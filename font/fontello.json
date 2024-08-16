@@ -181,6 +181,18 @@
       "src": "fontawesome"
     },
     {
+      "uid": "e15f0d620a7897e2035c18c80142f6d9",
+      "css": "link-ext",
+      "code": 59421,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "e35de5ea31cd56970498e33efbcb8e36",
+      "css": "link-ext-alt",
+      "code": 59422,
+      "src": "fontawesome"
+    },
+    {
       "uid": "60617c8adc1e7eb3c444a5491dd13f57",
       "css": "attention-circled-1",
       "code": 59395,

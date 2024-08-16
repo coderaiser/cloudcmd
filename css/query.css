@@ -129,15 +129,14 @@
         color: white;
     }
     
-    .file::before,
-    .file-link::before {
+    .file::before {
         color: rgb(26 224 124 / 56%);
         content: '\e80d';
     }
     
-    .current-file .file::before,
     .file-link::before {
-        color: white;
+        color: rgb(26 224 124 / 56%);
+        content: '\e81d';
     }
     
     /* меняем иконки на шрифтовые */
@@ -160,9 +159,12 @@
         display: inline-block;
     }
     
-    .directory::before,
-    .directory-link::before {
+    .directory::before {
         content: '\e807';
+    }
+    
+    .directory-link::before {
+        content: '\e81e';
     }
     
     .file,
