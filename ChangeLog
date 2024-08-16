@@ -1,3 +1,9 @@
+2024.08.16, v18.0.0
+
+feature:
+- 5e93bcca cloudcmd: rimraf v6.0.1
+- 74d1eb7e drop support of node < 20
+
 2024.08.16, v17.4.4
 
 fix:
