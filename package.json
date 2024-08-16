@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "18.0.0",
+  "version": "18.0.1",
   "type": "commonjs",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "File manager for the web with console and editor",

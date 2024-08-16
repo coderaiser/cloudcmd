@@ -1,3 +1,11 @@
+2024.08.16, v18.0.1
+
+fix:
+- 62ed8411 bin: validateArgs is not a function (#147)
+
+feature:
+- 9ec94dee cloudcmd: chalk v5.3.0
+
 2024.08.16, v18.0.0
 
 feature:
