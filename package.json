@@ -92,7 +92,7 @@
     "@cloudcmd/fileop": "^8.0.0",
     "@cloudcmd/move-files": "^8.0.0",
     "@cloudcmd/read-files-sync": "^2.0.0",
-    "@putout/cli-validate-args": "^1.0.1",
+    "@putout/cli-validate-args": "^2.0.0",
     "@putout/plugin-cloudcmd": "^3.1.1",
     "apart": "^2.0.0",
     "chalk": "^4.0.0",
