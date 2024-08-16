@@ -1,3 +1,11 @@
+2024.08.16, v17.4.4
+
+fix:
+- a6aa9bbc revert rimraf v6.0.1
+
+feature:
+- 282b3d5c cloudcmd: @putout/cli-validate-args v2.0.0
+
 2024.07.27, v17.4.3
 
 feature:
