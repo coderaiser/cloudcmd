@@ -1,3 +1,8 @@
+2024.08.17, v18.1.0
+
+feature:
+- ddf4542b cloudcmd: add ability to hide dot files (#307)
+
 2024.08.16, v18.0.2
 
 feature:
