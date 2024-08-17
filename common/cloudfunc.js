@@ -203,7 +203,9 @@ module.exports.buildFromJSON = (params) => {
     }
     
     fileTable += files
-        .filter(filterOutDotFiles({showDotFiles}))
+        .filter(filterOutDotFiles({
+            showDotFiles,
+        }))
         .map(updateField)
         .map((file) => {
             const name = encode(file.name);

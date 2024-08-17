@@ -524,4 +524,3 @@ async function switchKey(event) {
         break;
     }
 }
-
