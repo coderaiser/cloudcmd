@@ -510,5 +510,18 @@ async function switchKey(event) {
         }
         
         break;
+    
+    case KEY.DOT:
+        if (meta && shift) {
+            const showDotFiles = !CloudCmd.config('showDotFiles');
+            CloudCmd._config('showDotFiles', showDotFiles);
+            CloudCmd.refresh();
+            await DOM.RESTful.Config.write({
+                showDotFiles,
+            });
+        }
+        
+        break;
     }
 }
+

@@ -59,78 +59,79 @@ cloudcmd
 
 Cloud Commander supports the following command-line parameters:
 
-|Parameter                      |Operation
-|:------------------------------|:------------------------------
-| `-h, --help`                  | display help and exit
-| `-v, --version`               | display version and exit
-| `-s, --save`                  | save configuration
-| `-o, --online`                | load scripts from remote servers
-| `-a, --auth`                  | enable authorization
-| `-u, --username`              | set username
-| `-p, --password`              | set password
-| `-c, --config`                | configuration file path
-| `--show-config`               | show config values
-| `--show-file-name`            | show file name in view and edit
-| `--editor`                    | set editor: "dword", "edward" or "deepword"
-| `--packer`                    | set packer: "tar" or "zip"
-| `--root`                      | set root directory
-| `--prefix`                    | set url prefix
-| `--prefix-socket`             | set prefix for url connection
-| `--port`                      | set port number
-| `--confirm-copy`              | confirm copy
-| `--confirm-move`              | confirm move
-| `--open`                      | open web browser when server starts
-| `--name`                      | set tab name in web browser
-| `--one-file-panel`            | show one file panel
-| `--keys-panel`                | show keys panel
-| `--contact`                   | enable contact
-| `--config-dialog`             | enable config dialog
-| `--config-auth`               | enable auth change in config dialog
-| `--console`                   | enable console
-| `--sync-console-path`         | sync console path
-| `--terminal`                  | enable terminal
-| `--terminal-path`             | set terminal path
-| `--terminal-command`          | set command to run in terminal (shell by default)
-| `--terminal-auto-restart`     | restart command on exit
-| `--vim`                       | enable vim hot keys
-| `--columns`                   | set visible columns
-| `--theme`                     | set theme 'light' or 'dark'"
-| `--export`                    | enable export of config through a server
-| `--export-token`              | authorization token used by export server
-| `--import`                    | enable import of config
-| `--import-token`              | authorization  token used to connect to export server
-| `--import-url`                | url of an import server
-| `--import-listen`             | enable listen on config updates from import server
-| `--dropbox`                   | enable dropbox integration
-| `--dropbox-token`             | set dropbox token
-| `--log`                       | enable logging
-| `--no-show-config`            | do not show config values
-| `--no-server`                 | do not start server
-| `--no-auth`                   | disable authorization
-| `--no-online`                 | load scripts from local server
-| `--no-open`                   | do not open web browser when server started
-| `--no-name`                   | set default tab name in web browser
-| `--no-keys-panel`             | hide keys panel
-| `--no-one-file-panel`         | show two file panels
-| `--no-confirm-copy`           | do not confirm copy
-| `--no-confirm-move`           | do not confirm move
-| `--no-config-dialog`          | disable config dialog
-| `--no-config-auth`            | disable auth change in config dialog
-| `--no-console`                | disable console
-| `--no-sync-console-path`      | do not sync console path
-| `--no-contact`                | disable contact
-| `--no-terminal`               | disable terminal
-| `--no-terminal-command`       | set default shell to run in terminal
-| `--no-terminal-auto-restart`  | do not restart command on exit
-| `--no-vim`                    | disable vim hot keys
+| Parameter                    |Operation
+|:-----------------------------|:------------------------------
+| `-h, --help`                 | display help and exit
+| `-v, --version`              | display version and exit
+| `-s, --save`                 | save configuration
+| `-o, --online`               | load scripts from remote servers
+| `-a, --auth`                 | enable authorization
+| `-u, --username`             | set username
+| `-p, --password`             | set password
+| `-c, --config`               | configuration file path
+| `--show-config`              | show config values
+| `--show-dot-files`           | show dot files
+| `--show-file-name`           | show file name in view and edit
+| `--editor`                   | set editor: "dword", "edward" or "deepword"
+| `--packer`                   | set packer: "tar" or "zip"
+| `--root`                     | set root directory
+| `--prefix`                   | set url prefix
+| `--prefix-socket`            | set prefix for url connection
+| `--port`                     | set port number
+| `--confirm-copy`             | confirm copy
+| `--confirm-move`             | confirm move
+| `--open`                     | open web browser when server starts
+| `--name`                     | set tab name in web browser
+| `--one-file-panel`           | show one file panel
+| `--keys-panel`               | show keys panel
+| `--contact`                  | enable contact
+| `--config-dialog`            | enable config dialog
+| `--config-auth`              | enable auth change in config dialog
+| `--console`                  | enable console
+| `--sync-console-path`        | sync console path
+| `--terminal`                 | enable terminal
+| `--terminal-path`            | set terminal path
+| `--terminal-command`         | set command to run in terminal (shell by default)
+| `--terminal-auto-restart`    | restart command on exit
+| `--vim`                      | enable vim hot keys
+| `--columns`                  | set visible columns
+| `--theme`                    | set theme 'light' or 'dark'"
+| `--export`                   | enable export of config through a server
+| `--export-token`             | authorization token used by export server
+| `--import`                   | enable import of config
+| `--import-token`             | authorization  token used to connect to export server
+| `--import-url`               | url of an import server
+| `--import-listen`            | enable listen on config updates from import server
+| `--dropbox`                  | enable dropbox integration
+| `--dropbox-token`            | set dropbox token
+| `--log`                      | enable logging
+| `--no-show-config`           | do not show config values
+| `--no-server`                | do not start server
+| `--no-auth`                  | disable authorization
+| `--no-online`                | load scripts from local server
+| `--no-open`                  | do not open web browser when server started
+| `--no-name`                  | set default tab name in web browser
+| `--no-keys-panel`            | hide keys panel
+| `--no-one-file-panel`        | show two file panels
+| `--no-confirm-copy`          | do not confirm copy
+| `--no-confirm-move`          | do not confirm move
+| `--no-config-dialog`         | disable config dialog
+| `--no-config-auth`           | disable auth change in config dialog
+| `--no-console`               | disable console
+| `--no-sync-console-path`     | do not sync console path
+| `--no-contact`               | disable contact
+| `--no-terminal`              | disable terminal
+| `--no-terminal-command`      | set default shell to run in terminal
+| `--no-terminal-auto-restart` | do not restart command on exit
+| `--no-vim`                   | disable vim hot keys
 | `--no-themes`                | set default visible themes
-| `--no-export`                 | disable export config through a server
-| `--no-import`                 | disable import of config
-| `--no-import-listen`          | disable listen on config updates from import server
-| `--no-show-file-name`         | do not show file name in view and edit
-| `--no-dropbox`                | disable dropbox integration
-| `--no-dropbox-token`          | unset dropbox token
-| `--no-log`                    | disable logging
+| `--no-export`                | disable export config through a server
+| `--no-import`                | disable import of config
+| `--no-import-listen`         | disable listen on config updates from import server
+| `--no-show-file-name`        | do not show file name in view and edit
+| `--no-dropbox`               | disable dropbox integration
+| `--no-dropbox-token`         | unset dropbox token
+| `--no-log`                   | disable logging
 
 For options not specified by command-line parameters, Cloud Commander then reads configuration data from `~/.cloudcmd.json`. It uses port `8000` by default.
 
@@ -152,56 +153,57 @@ Then, start the server again with `cloudcmd` and reload the page.
 
 ## Hot keys
 
-|Key                    |Operation
-|:----------------------|:--------------------------------------------
-| `F1`                  | help
-| `F2`                  | show `user menu`
-| `F3`                  | view, change directory
-| `Shift + F3`          | view raw file, change directory
-| `F4`                  | edit
-| `F5`                  | copy
-| `Alt` + `F5`          | pack
-| `F6`                  | rename/move
-| `Shift` + `F6`        | rename current file
-| `F7`                  | new directory
-| `Shift + F7`          | new file
-| `F8`, `Delete`        | remove
-| `Shift + Delete`      | remove without prompt
-| `F9`                  | menu
-| `Alt` + `F9`          | extract
-| `F10`                 | config
-| `*`                   | select/unselect all
-| `+`                   | expand selection
-| `-`                   | shrink selection
-| `:`                   | open Command Line
-| `Ctrl + X`            | cut to buffer
-| `Ctrl + C`            | copy to buffer
-| `Ctrl + V`            | paste from buffer
-| `Ctrl + Z`            | clear buffer
-| `Ctrl + P`            | copy path
-| `Ctrl + R`            | refresh
-| `Ctrl + D`            | clear local storage
-| `Ctrl + A`            | select all files in a panel
-| `Ctrl + M`            | [rename selected files](https://github.com/coderaiser/cloudcmd/releases/tag/v12.1.0) in editor
-| `Ctrl + U`            | swap panels
-| `Ctrl + F3`           | sort by name
-| `Ctrl + F5`           | sort by date
-| `Ctrl + F6`           | sort by size
-| `Up`, `Down`          | file system navigation
-| `Enter`               | change directory/view file
-| `Alt + Left/Right`    | show content of directory under cursor in target panel
-| `Alt + G`             | go to directory
-| `Ctrl + \`            | go to the root directory
-| `Tab`                 | move via panels
-| `Page Up`             | up on one page
-| `Page Down`           | down on one page
-| `Home`                | to begin of list
-| `End`                 | to end of list
-| `Space`               | select current file (and get size of directory)
-| `Insert`              | select current file (and move to next)
-| `F9`                  | context menu
-| `~`                   | console
-| `Esc`                 | toggle vim hotkeys (`file manager`, `editor`)
+| Key                  |Operation
+|:---------------------|:--------------------------------------------
+| `F1`                 | help
+| `F2`                 | show `user menu`
+| `F3`                 | view, change directory
+| `Shift + F3`         | view raw file, change directory
+| `F4`                 | edit
+| `F5`                 | copy
+| `Alt` + `F5`         | pack
+| `F6`                 | rename/move
+| `Shift` + `F6`       | rename current file
+| `F7`                 | new directory
+| `Shift + F7`         | new file
+| `F8`, `Delete`       | remove
+| `Shift + Delete`     | remove without prompt
+| `F9`                 | menu
+| `Alt` + `F9`         | extract
+| `F10`                | config
+| `*`                  | select/unselect all
+| `+`                  | expand selection
+| `-`                  | shrink selection
+| `:`                  | open Command Line
+| `Ctrl + X`           | cut to buffer
+| `Ctrl + C`           | copy to buffer
+| `Ctrl + V`           | paste from buffer
+| `Ctrl + Z`           | clear buffer
+| `Ctrl + P`           | copy path
+| `Ctrl + R`           | refresh
+| `Ctrl + D`           | clear local storage
+| `Ctrl + A`           | select all files in a panel
+| `Ctrl + M`           | [rename selected files](https://github.com/coderaiser/cloudcmd/releases/tag/v12.1.0) in editor
+| `Ctrl + U`           | swap panels
+| `Ctrl + F3`          | sort by name
+| `Ctrl + F5`          | sort by date
+| `Ctrl + F6`          | sort by size
+| `Ctrl + Command + .` | show/hide dot files
+| `Up`, `Down`         | file system navigation
+| `Enter`              | change directory/view file
+| `Alt + Left/Right`   | show content of directory under cursor in target panel
+| `Alt + G`            | go to directory
+| `Ctrl + \`           | go to the root directory
+| `Tab`                | move via panels
+| `Page Up`            | up on one page
+| `Page Down`          | down on one page
+| `Home`               | to begin of list
+| `End`                | to end of list
+| `Space`              | select current file (and get size of directory)
+| `Insert`             | select current file (and move to next)
+| `F9`                 | context menu
+| `~`                  | console
+| `Esc`                | toggle vim hotkeys (`file manager`, `editor`)
 
 ### Vim
 
@@ -398,6 +400,7 @@ Here's a description of all options:
     "confirmCopy": true, // confirm copy
     "confirmMove": true, // confirm move
     "showConfig": false, // show config at startup
+    "showDotFiles": true, // show dot files
     "showFileName": false, // do not show file name in view and edit
     "contact": true, // enable contact
     "configDialog": true, // enable config dialog

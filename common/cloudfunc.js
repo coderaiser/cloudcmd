@@ -16,6 +16,13 @@ const Path = store();
 
 Path('/');
 
+const filterOutDotFiles = ({showDotFiles}) => ({name}) => {
+    if (showDotFiles)
+        return true;
+    
+    return !name.startsWith('.');
+};
+
 module.exports.FS = FS;
 module.exports.apiURL = '/api/v1';
 module.exports.MAX_FILE_SIZE = 500 * 1024;
@@ -118,6 +125,7 @@ module.exports.buildFromJSON = (params) => {
         template,
         sort = 'name',
         order = 'asc',
+        showDotFiles,
     } = params;
     
     const templateFile = template.file;
@@ -195,6 +203,7 @@ module.exports.buildFromJSON = (params) => {
     }
     
     fileTable += files
+        .filter(filterOutDotFiles({showDotFiles}))
         .map(updateField)
         .map((file) => {
             const name = encode(file.name);

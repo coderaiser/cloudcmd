@@ -180,6 +180,7 @@ function buildIndex(config, html, data) {
         data,
         prefix: getPrefix(config),
         template: Template,
+        showDotFiles: config('showDotFiles'),
     });
     
     return indexProcessing(config, {

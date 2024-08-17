@@ -30,6 +30,7 @@
     "terminalPath": "",
     "terminalCommand": "",
     "terminalAutoRestart": true,
+    "showDotFiles": true,
     "showConfig": false,
     "showFileName": false,
     "vim": false,

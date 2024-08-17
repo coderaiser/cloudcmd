@@ -103,6 +103,7 @@ function CloudCmdProto(DOM) {
             history,
             noCurrent,
             currentName,
+            showDotFiles: CloudCmd.config('showDotFiles'),
         }, panel);
     };
     
@@ -300,7 +301,6 @@ function CloudCmdProto(DOM) {
      * @param options
      * { refresh, history } - необходимость обновить данные о каталоге
      * @param panel
-     * @param callback
      *
      */
     async function ajaxLoad(path, options = {}, panel) {
@@ -348,13 +348,16 @@ function CloudCmdProto(DOM) {
     
     /**
      * Функция строит файловую таблицу
-     * @param json  - данные о файлах
+     * @param data - данные о файлах
      * @param panelParam
-     * @param history
-     * @param callback
+     * @param options - history, noCurrent, showDotFiles
      */
     async function createFileTable(data, panelParam, options) {
-        const {history, noCurrent} = options;
+        const {
+            history,
+            noCurrent,
+            showDotFiles,
+        } = options;
         
         const names = [
             'file',
@@ -385,6 +388,7 @@ function CloudCmdProto(DOM) {
             data,
             id: panel.id,
             prefix,
+            showDotFiles,
             template: {
                 file,
                 path,

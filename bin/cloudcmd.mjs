@@ -86,6 +86,7 @@ const yargsOptions = {
         'confirm-copy',
         'confirm-move',
         'show-config',
+        'show-dot-files',
         'show-file-name',
         'vim',
         'keys-panel',
@@ -124,6 +125,7 @@ const yargsOptions = {
         'export': choose(env.bool('export'), config('export')),
         
         'prefix-socket': config('prefixSocket'),
+        'show-dot-files': choose(env.bool('show_dot_files'), config('showDotFiles')),
         'show-file-name': choose(env.bool('show_file_name'), config('showFileName')),
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
@@ -189,6 +191,7 @@ async function main() {
     config('username', args.username);
     config('console', args.console);
     config('syncConsolePath', args.syncConsolePath);
+    config('showDotFiles', args.showDotFiles);
     config('showFileName', args.showFileName);
     config('contact', args.contact);
     config('terminal', args.terminal);
