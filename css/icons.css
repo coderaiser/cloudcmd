@@ -83,6 +83,11 @@
     content: '\e811  ';
 }
 
+.icon-toggle-file-selection::before {
+    font-family: 'Fontello';
+    content: '\e81f  ';
+}
+
 .icon-unselect-all::before {
     font-family: 'Fontello';
     content: '\e812  ';

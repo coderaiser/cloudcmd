@@ -126,6 +126,7 @@ function getMenuData(isAuth) {
             CloudCmd.Upload.show();
         },
         'Upload From Cloud': uploadFromCloud,
+        'Toggle File Selection': DOM.toggleSelectedFile,
         '(Un)Select All': DOM.toggleAllSelectedFiles,
     };
     
