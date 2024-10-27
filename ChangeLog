@@ -1,3 +1,9 @@
+2024.10.27, v18.2.0
+
+feature:
+- ac9abbd3 cloudcmd: eslint-plugin-putout v23.1.0
+- 4bc5a783 cloudcmd: add context menu option to toggle file selection (#420)
+
 2024.08.17, v18.1.0
 
 feature:
