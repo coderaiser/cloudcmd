@@ -8,7 +8,7 @@
   "funding": "https://opencollective.com/cloudcmd",
   "repository": {
     "type": "git",
-    "url": "git://github.com/coderaiser/cloudcmd.git"
+    "url": "git+https://github.com/coderaiser/cloudcmd.git"
   },
   "main": "server/cloudcmd.mjs",
   "keywords": [

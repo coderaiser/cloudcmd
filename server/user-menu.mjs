@@ -79,11 +79,11 @@ async function onGET({req, res, menuName, readFile}) {
 
 function getError(error, source) {
     return montag`
-            const e = Error(\`<pre>${codeframe({
-        error,
-        source,
-        highlightCode: false,
-    })}</pre>\`);
+        const e = Error(\`<pre>${codeframe({
+            error,
+            source,
+            highlightCode: false,
+        })}</pre>\`);
         
         e.code = 'frame';
         
