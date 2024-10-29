@@ -60,6 +60,7 @@ function CloudCmdProto(DOM) {
     this.prefixURL = '';
     
     this.MIN_ONE_PANEL_WIDTH = 1155;
+    this.MOBILE_ONE_PANEL_WIDTH = 600;
     this.HOST = location.origin || location.protocol + '//' + location.host;
     
     this.TITLE = 'Cloud Commander';

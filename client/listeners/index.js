@@ -55,7 +55,7 @@ const {Events} = DOM;
 
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
-    click: execAll([onClick, unselect]),
+    click: execAll([onClick, function(e)  { if (window.innerWidth > CloudCmd.MOBILE_ONE_PANEL_WIDTH) { unselect(e); } }]),
     dragstart: exec.with(execIfNotUL, onDragStart),
     dblclick: exec.with(execIfNotUL, onDblClick),
     touchstart: exec.with(execIfNotUL, onTouch),
