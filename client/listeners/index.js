@@ -55,7 +55,7 @@ const {Events} = DOM;
 
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
-    click: execAll([onClick, function(e)  { if (window.innerWidth > CloudCmd.MOBILE_ONE_PANEL_WIDTH) { unselect(e); } }]),
+    click: execAll([onClick, exec.with(execIfNotMobile, unselect)]),
     dragstart: exec.with(execIfNotUL, onDragStart),
     dblclick: exec.with(execIfNotUL, onDblClick),
     touchstart: exec.with(execIfNotUL, onTouch),
@@ -219,6 +219,12 @@ function copyPath(el) {
             .parentElement.title)
         .then(CloudCmd.log)
         .catch(CloudCmd.log);
+}
+
+function execIfNotMobile(callback , event)
+{
+    if (window.innerWidth > CloudCmd.MOBILE_ONE_PANEL_WIDTH)
+        callback(event);
 }
 
 function execIfNotUL(callback, event) {
