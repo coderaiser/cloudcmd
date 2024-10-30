@@ -221,8 +221,7 @@ function copyPath(el) {
         .catch(CloudCmd.log);
 }
 
-function execIfNotMobile(callback , event)
-{
+function execIfNotMobile(callback, event) {
     if (window.innerWidth > CloudCmd.MOBILE_ONE_PANEL_WIDTH)
         callback(event);
 }
