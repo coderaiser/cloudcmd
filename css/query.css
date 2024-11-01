@@ -23,6 +23,7 @@
     --mobile-max-width: 600px;
     --min-one-panel-width: 1155px;
 }
+
 @media only screen and (height <= 900px) and (width <= 600px) {
     .fm {
         height: 85%;

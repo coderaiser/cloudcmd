@@ -59,9 +59,10 @@ function CloudCmdProto(DOM) {
     this.prefixSocket = '';
     this.prefixURL = '';
     
-    var bodyStyle = getComputedStyle(document.body);
-    this.MIN_ONE_PANEL_WIDTH = bodyStyle.getPropertyValue("--min-one-panel-width");
-    this.MOBILE_ONE_PANEL_WIDTH = bodyStyle.getPropertyValue('--mobile-max-width')
+    const bodyStyle = getComputedStyle(document.body);
+    
+    this.MIN_ONE_PANEL_WIDTH = bodyStyle.getPropertyValue('--min-one-panel-width');
+    this.MOBILE_ONE_PANEL_WIDTH = bodyStyle.getPropertyValue('--mobile-max-width');
     
     this.HOST = location.origin || location.protocol + '//' + location.host;
     
