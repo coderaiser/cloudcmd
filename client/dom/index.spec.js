@@ -38,7 +38,9 @@ test('cloudcmd: client: dom: getCSSVar', (t) => {
     global.getComputedStyle = stub().returns({
         getPropertyValue,
     });
-    const result = getCSSVar('hello', {body});
+    const result = getCSSVar('hello', {
+        body,
+    });
     delete global.getComputedStyle;
     
     t.notOk(result);
@@ -52,7 +54,9 @@ test('cloudcmd: client: dom: getCSSVar: 1', (t) => {
     global.getComputedStyle = stub().returns({
         getPropertyValue,
     });
-    const result = getCSSVar('hello', {body});
+    const result = getCSSVar('hello', {
+        body,
+    });
     
     delete global.getComputedStyle;
     
