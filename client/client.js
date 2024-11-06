@@ -59,15 +59,8 @@ function CloudCmdProto(DOM) {
     this.prefixSocket = '';
     this.prefixURL = '';
     
-    const bodyStyle = getComputedStyle(document.body);
-    
-    this.MIN_ONE_PANEL_WIDTH = bodyStyle.getPropertyValue('--min-one-panel-width');
-    this.MOBILE_ONE_PANEL_WIDTH = bodyStyle.getPropertyValue('--mobile-max-width');
-    
+    this.MIN_ONE_PANEL_WIDTH = DOM.getCSSVar('min-one-panel-width');
     this.HOST = location.origin || location.protocol + '//' + location.host;
-    
-    this.TITLE = 'Cloud Commander';
-    
     this.sort = {
         left: 'name',
         right: 'name',

@@ -520,6 +520,11 @@ module.exports.getPanelPosition = (panel) => {
     return panel.dataset.name.replace('js-', '');
 };
 
+module.exports.getCSSVar = (name, {body = document.body} = {}) => {
+    const bodyStyle = getComputedStyle(body);
+    return bodyStyle.getPropertyValue(`--${name}`);
+};
+
 /** function getting panel active, or passive
  * @param options = {active: true}
  */

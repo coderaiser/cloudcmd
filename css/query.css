@@ -19,9 +19,10 @@
         width: 15%;
     }
 }
+
 :root {
-    --mobile-max-width: 600px;
     --min-one-panel-width: 1155px;
+    --is-mobile: 0;
 }
 
 @media only screen and (height <= 900px) and (width <= 600px) {
@@ -53,6 +54,12 @@
 @media only screen and (height <= 450px) and (width <= 600px) {
     .fm {
         height: 75%;
+    }
+}
+
+@media only screen and (width <= 600px) {
+    :root {
+        --is-mobile: 1;
     }
 }
 

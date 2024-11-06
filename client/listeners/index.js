@@ -222,7 +222,9 @@ function copyPath(el) {
 }
 
 function execIfNotMobile(callback, event) {
-    if (window.innerWidth > CloudCmd.MOBILE_ONE_PANEL_WIDTH)
+    const isMobile = DOM.getCSSVar('is-mobile');
+    
+    if (!isMobile)
         callback(event);
 }
 
