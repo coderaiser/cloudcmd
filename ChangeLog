@@ -1,3 +1,11 @@
+2024.11.06, v18.2.1
+
+feature:
+- a733d814 css: --is-mobile: add
+- f22120dc cloudcmd: prevent unselect being fired on panel click when in mobile view (#422)
+- 1a0af863 docker: add image source label to dockerfiles (#421)
+- 0446a74d docker: add image source label to dockerfiles (#419)
+
 2024.10.27, v18.2.0
 
 feature:
