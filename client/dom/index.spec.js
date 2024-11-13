@@ -41,6 +41,7 @@ test('cloudcmd: client: dom: getCSSVar', (t) => {
     const result = getCSSVar('hello', {
         body,
     });
+    
     delete global.getComputedStyle;
     
     t.notOk(result);

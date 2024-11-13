@@ -3,12 +3,9 @@
     "name": "Cloud Commander",
     "display": "standalone",
     "start_url": "..",
-    "icons": [
-      {
+    "icons": [{
         "src": "../img/favicon/favicon-256.png",
         "type": "image/png",
         "sizes": "256x256"
-      }
-    ]
-  }
-  
+    }]
+}
