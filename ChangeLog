@@ -1,3 +1,8 @@
+2024.11.14, v18.3.0
+
+feature:
+- 71dc8dd6 cloudcmd: Add support for Progressive Web App (#426)
+
 2024.11.06, v18.2.1
 
 feature:
