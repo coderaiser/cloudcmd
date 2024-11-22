@@ -1,3 +1,8 @@
+2024.11.22, v18.4.0
+
+fix:
+- dff02672 cloudcmd: make manifest.json accessible when authentication is enabled (#428)
+
 2024.11.14, v18.3.0
 
 feature:
