@@ -17,7 +17,7 @@ module.exports = (config) => {
 function _middle(config, authentication, req, res, next) {
     const is = config('auth');
     
-    if (!is)
+    if (!is || req.originalUrl.startsWith("/public/"))
         return next();
     
     const success = () => next();

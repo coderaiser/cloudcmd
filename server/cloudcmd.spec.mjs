@@ -178,3 +178,20 @@ test('cloudcmd: sw', async (t) => {
     t.equal(status, 200, 'should return sw');
     t.end();
 });
+
+test('cloudcmd: manifest.json', async (t) => {
+    const config = {
+        auth: true,
+    };
+    
+    const options = {
+        config,
+    };       
+
+    const {status} = await request.get('/public/manifest.json', {
+        options,
+    });
+
+    t.equal(status, 200, 'should return manifest.json even when authentication is enabled');
+    t.end();
+});
