@@ -186,12 +186,12 @@ test('cloudcmd: manifest.json', async (t) => {
     
     const options = {
         config,
-    };       
-
+    };
+    
     const {status} = await request.get('/public/manifest.json', {
         options,
     });
-
+    
     t.equal(status, 200, 'should return manifest.json even when authentication is enabled');
     t.end();
 });
