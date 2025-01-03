@@ -1,8 +1,8 @@
 'use strict';
 
+const {env} = require('node:process');
 const snake = require('just-snake-case');
 
-const {env} = require('node:process');
 const up = (a) => a.toUpperCase();
 
 module.exports = parse;

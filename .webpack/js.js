@@ -6,12 +6,12 @@ const {
     join,
 } = require('node:path');
 
+const {env} = require('node:process');
 const {EnvironmentPlugin} = require('webpack');
 const WebpackBar = require('webpackbar');
 
 const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
-const {env} = require('node:process');
 const modules = './modules';
 const dirModules = './client/modules';
 const dir = './client';

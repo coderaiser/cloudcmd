@@ -7,9 +7,7 @@ const path = require('node:path');
 const fs = require('node:fs');
 const Emitter = require('node:events');
 const {homedir} = require('node:os');
-const exit = require(`${DIR_SERVER}exit`);
 
-const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
 const currify = require('currify');
 
 const wraptile = require('wraptile');
@@ -21,6 +19,10 @@ const jju = require('jju');
 const writejson = require('writejson');
 const tryCatch = require('try-catch');
 const criton = require('criton');
+const exit = require(`${DIR_SERVER}exit`);
+
+const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
+
 const DIR = `${DIR_SERVER}../`;
 const HOME = homedir();
 
