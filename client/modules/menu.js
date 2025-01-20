@@ -226,9 +226,7 @@ function beforeShow(callback, params) {
     return isShow;
 }
 
-function beforeClick(name) {
-    return MenuShowedName !== name;
-}
+const beforeClick = (name) => MenuShowedName !== name;
 
 async function _uploadTo(nameModule) {
     const [error, data] = await Info.getData();

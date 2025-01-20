@@ -46,22 +46,18 @@ module.exports.clear = () => {
     konsole.clear();
 };
 
-function getPrefix() {
-    return CloudCmd.prefix + '/console';
-}
+const getPrefix = () => CloudCmd.prefix + '/console';
 
 function getPrefixSocket() {
     return CloudCmd.prefixSocket + '/console';
 }
 
-function getEnv() {
-    return {
-        ACTIVE_DIR: DOM.getCurrentDirPath.bind(DOM),
-        PASSIVE_DIR: DOM.getNotCurrentDirPath.bind(DOM),
-        CURRENT_NAME: DOM.getCurrentName.bind(DOM),
-        CURRENT_PATH: () => Info.path,
-    };
-}
+const getEnv = () => ({
+    ACTIVE_DIR: DOM.getCurrentDirPath.bind(DOM),
+    PASSIVE_DIR: DOM.getNotCurrentDirPath.bind(DOM),
+    CURRENT_NAME: DOM.getCurrentName.bind(DOM),
+    CURRENT_PATH: () => Info.path,
+});
 
 async function onPath(path) {
     if (Info.dirPath === path)

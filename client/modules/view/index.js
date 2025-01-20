@@ -55,7 +55,10 @@ CloudCmd[Name] = module.exports;
 
 const Info = DOM.CurrentInfo;
 const {Key} = CloudCmd;
-const basename = (a) => a.split('/').pop();
+
+const basename = (a) => a
+    .split('/')
+    .pop();
 
 let El;
 let TemplateAudio;

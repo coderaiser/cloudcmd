@@ -10,9 +10,7 @@ const LOADING = 'loading';
 const HIDDEN = 'hidden';
 const ERROR = 'error';
 
-function getLoadingType() {
-    return isSVG() ? '-svg' : '-gif';
-}
+const getLoadingType = () => isSVG() ? '-svg' : '-gif';
 
 module.exports.get = getElement;
 /**

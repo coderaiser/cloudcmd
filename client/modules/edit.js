@@ -11,6 +11,7 @@ const load = require('load.js');
 const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc');
 
 const {time, timeEnd} = require('../../common/util');
+const getEditor = () => editor;
 const isFn = (a) => typeof a === 'function';
 const loadJS = load.js;
 
@@ -90,10 +91,6 @@ module.exports.show = (options) => {
 };
 
 module.exports.getEditor = getEditor;
-
-function getEditor() {
-    return editor;
-}
 
 module.exports.getElement = () => Element;
 

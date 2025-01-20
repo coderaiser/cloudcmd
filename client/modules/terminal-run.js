@@ -75,22 +75,18 @@ function hide() {
     CloudCmd.View.hide();
 }
 
-function getPrefix() {
-    return CloudCmd.prefix + '/gritty';
-}
+const getPrefix = () => CloudCmd.prefix + '/gritty';
 
 function getPrefixSocket() {
     return CloudCmd.prefixSocket + '/gritty';
 }
 
-function getEnv() {
-    return {
-        ACTIVE_DIR: DOM.getCurrentDirPath,
-        PASSIVE_DIR: DOM.getNotCurrentDirPath,
-        CURRENT_NAME: DOM.getCurrentName,
-        CURRENT_PATH: DOM.getCurrentPath,
-    };
-}
+const getEnv = () => ({
+    ACTIVE_DIR: DOM.getCurrentDirPath,
+    PASSIVE_DIR: DOM.getNotCurrentDirPath,
+    CURRENT_NAME: DOM.getCurrentName,
+    CURRENT_PATH: DOM.getCurrentPath,
+});
 
 function create(createOptions) {
     const {

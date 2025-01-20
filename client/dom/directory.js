@@ -63,14 +63,8 @@ module.exports = (items) => {
     uploader.on('end', CloudCmd.refresh);
 };
 
-function percent(i, n, per = 100) {
-    return Math.round(i * per / n);
-}
+const percent = (i, n, per = 100) => Math.round(i * per / n);
 
-function uploadFile(url, data) {
-    return DOM.load.put(url, data);
-}
+const uploadFile = (url, data) => DOM.load.put(url, data);
 
-function uploadDir(url) {
-    return DOM.load.put(`${url}?dir`);
-}
+const uploadDir = (url) => DOM.load.put(`${url}?dir`);

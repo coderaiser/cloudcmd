@@ -261,12 +261,10 @@ test('current-file: isCurrentIsDir: file', (t) => {
     t.end();
 });
 
-function getCloudCmd({emit} = {}) {
-    return {
-        prefix: '',
-        emit: emit || stub(),
-    };
-}
+const getCloudCmd = ({emit} = {}) => ({
+    prefix: '',
+    emit: emit || stub(),
+});
 
 test('current-file: parseNameAttribute', (t) => {
     const result = currentFile._parseNameAttribute('js-file-aGVsbG8mbmJzcDt3b3JsZA==');

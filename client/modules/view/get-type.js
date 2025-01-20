@@ -45,9 +45,7 @@ function isMedia(name) {
     return isAudio(name) || isVideo(name);
 }
 
-function isAudio(name) {
-    return /\.(mp3|ogg|m4a)$/i.test(name);
-}
+const isAudio = (name) => /\.(mp3|ogg|m4a)$/i.test(name);
 
 function isVideo(name) {
     return /\.(mp4|avi|webm)$/i.test(name);
