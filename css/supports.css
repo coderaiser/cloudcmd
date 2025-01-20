@@ -1,6 +1,6 @@
 @supports (overflow: overlay) {
     .files {
-        overflow-y: overlay;
+        overflow-y: auto;
     }
     
     .fm-header {

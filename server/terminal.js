@@ -8,9 +8,7 @@ const noop = (req, res, next) => {
 
 noop.listen = noop;
 
-function _getModule(a) {
-    return require(a);
-}
+const _getModule = (a) => require(a);
 
 module.exports = (config, arg, overrides = {}) => {
     const {

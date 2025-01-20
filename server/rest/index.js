@@ -21,7 +21,8 @@ const root = require(`../root`);
 const CloudFunc = require(`../../common/cloudfunc`);
 const markdown = require(`../markdown/index.js`);
 const info = require('./info');
-
+const isUndefined = (a) => typeof a === 'undefined';
+const isRootAll = (root, names) => names.some(isRootWin32(root));
 const isString = (a) => typeof a === 'string';
 const isFn = (a) => typeof a === 'function';
 const swap = wraptile((fn, a, b) => fn(b, a));
@@ -66,7 +67,7 @@ function rest({fs, config, moveFiles}, request, response) {
         if (options.name)
             params.name = options.name;
         
-        if (options.gzip !== undefined)
+        if (!isUndefined(options.gzip))
             params.gzip = options.gzip;
         
         if (options.query)
@@ -369,10 +370,6 @@ const isRootWin32 = currify((root, path) => {
 
 module.exports._isRootWin32 = isRootWin32;
 module.exports._isRootAll = isRootAll;
-
-function isRootAll(root, names) {
-    return names.some(isRootWin32(root));
-}
 
 module.exports._getWin32RootMsg = getWin32RootMsg;
 

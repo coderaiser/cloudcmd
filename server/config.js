@@ -22,7 +22,7 @@ const criton = require('criton');
 const exit = require(`${DIR_SERVER}exit`);
 
 const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
-
+const isUndefined = (a) => typeof a === 'undefined';
 const DIR = `${DIR_SERVER}../`;
 const HOME = homedir();
 
@@ -31,7 +31,9 @@ const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
 const {apiURL} = CloudFunc;
 
-const key = (a) => Object.keys(a).pop();
+const key = (a) => Object
+    .keys(a)
+    .pop();
 
 const ConfigPath = path.join(DIR, 'json/config.json');
 const ConfigHome = path.join(HOME, '.cloudcmd.json');
@@ -90,7 +92,7 @@ function createConfig({configPath} = {}) {
         if (key === '*')
             return config;
         
-        if (value === undefined)
+        if (isUndefined(value))
             return config[key];
         
         config[key] = value;

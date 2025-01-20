@@ -337,11 +337,9 @@ function getDOM() {
     };
 }
 
-function getCloudCmd() {
-    return {
-        refresh: stub(),
-        EditFile: {
-            show: stub(),
-        },
-    };
-}
+const getCloudCmd = () => ({
+    refresh: stub(),
+    EditFile: {
+        show: stub(),
+    },
+});

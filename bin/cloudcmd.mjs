@@ -17,11 +17,11 @@ process.on('unhandledRejection', exit);
 const require = createRequire(import.meta.url);
 
 const Info = require('../package.json');
-
+const isUndefined = (a) => typeof a === 'undefined';
 const simport = createSimport(import.meta.url);
 
 const choose = (a, b) => {
-    if (a === undefined)
+    if (isUndefined(a))
         return b;
     
     return a;

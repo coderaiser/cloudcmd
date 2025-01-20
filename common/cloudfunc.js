@@ -248,14 +248,12 @@ module.exports.buildFromJSON = (params) => {
     return fileTable;
 };
 
-function updateField(file) {
-    return {
-        ...file,
-        date: file.date || '--.--.----',
-        owner: file.owner || 'root',
-        size: getSize(file),
-    };
-}
+const updateField = (file) => ({
+    ...file,
+    date: file.date || '--.--.----',
+    owner: file.owner || 'root',
+    size: getSize(file),
+});
 
 function getAttribute(type) {
     if (type === 'directory')
