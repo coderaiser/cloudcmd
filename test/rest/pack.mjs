@@ -224,10 +224,8 @@ test('cloudcmd: rest: pack: zip: put: error', async (t) => {
     t.end();
 });
 
-function getPackOptions(to, names = ['pack']) {
-    return {
-        to,
-        names,
-        from: '/fixture',
-    };
-}
+const getPackOptions = (to, names = ['pack']) => ({
+    to,
+    names,
+    from: '/fixture',
+});

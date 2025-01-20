@@ -64,9 +64,7 @@ export const connect = promisify((options, fn = options) => {
     });
 });
 
-function defaultConfig() {
-    return {
-        auth: false,
-        root: __dirname,
-    };
-}
+const defaultConfig = () => ({
+    auth: false,
+    root: __dirname,
+});
