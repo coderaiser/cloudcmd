@@ -34,4 +34,5 @@ module.exports = {
             browser: true,
         },
     }],
+    ignorePatterns: ['*.md{js}'],
 };
