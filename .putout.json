@@ -7,7 +7,6 @@
         "fontello.json"
     ],
     "rules": {
-        "github/convert-npm-to-bun": "off",
         "github/set-node-versions": "off"
     },
     "match": {

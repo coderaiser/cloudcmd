@@ -21,9 +21,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Redrun
-        run: bun i yarn redrun -g --no-save
+        run: bun i redrun -g --no-save
       - name: Install
-        run: yarn --no-lockfile
+        run: bun i --no-save
       - name: Lint
         run: redrun fix:lint
       - uses: actions/cache@v4

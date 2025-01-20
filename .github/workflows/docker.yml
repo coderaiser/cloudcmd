@@ -20,9 +20,9 @@ jobs:
         with:
           node-version: 22.x
       - name: Install Redrun
-        run: bun i yarn redrun -g --no-save
+        run: bun i redrun -g --no-save
       - name: NPM Install
-        run: yarn --no-lockfile
+        run: bun i --no-save
       - name: Lint
         run: redrun lint
       - name: Build
