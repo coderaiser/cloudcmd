@@ -1,3 +1,11 @@
+2025.01.20, v18.5.0
+
+fix:
+- ad8e55d8 client: themes -> columns (#434)
+
+feature:
+- 2fc503f7 cloudcmd: @putout/babel v3.0.0
+
 2024.12.13, v18.4.1
 
 feature:
