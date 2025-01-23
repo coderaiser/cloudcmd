@@ -105,25 +105,15 @@ export const distributeImport = (config, options, fn) => {
     const onConnect = emitAuth(importUrl, config, socket);
     const onAccept = logWrapped(isLog, importStr, `${connectedStr} to ${colorUrl}`);
     
-    const onDisconnect = squad(
-        done(
-            fn,
-            statusStore,
-        ),
-        logWrapped(
-            isLog,
-            importStr,
-            `${disconnectedStr} from ${colorUrl}`,
-        ),
-        rmListeners(
-            socket,
-            {
-                onError,
-                onConnect,
-                onConfig,
-            },
-        ),
-    );
+    const onDisconnect = squad(...[
+        done(fn, statusStore),
+        logWrapped(isLog, importStr, `${disconnectedStr} from ${colorUrl}`),
+        rmListeners(socket, {
+            onError,
+            onConnect,
+            onConfig,
+        }),
+    ]);
     
     const onChange = squad(logWrapped(isLog, importStr), config);
     
