@@ -1,3 +1,10 @@
+2025.02.03, v18.5.1
+
+feature:
+- 467f0a79 cloudcmd: webpack-merge v6.0.1
+- 353a1fb6 cloudcmd: putout v38.0.5
+- 8e98b778 cloudcmd: eslint-plugin-putout v24.0.0
+
 2025.01.20, v18.5.0
 
 fix:
