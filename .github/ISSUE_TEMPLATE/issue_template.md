@@ -58,7 +58,7 @@ body:
   label: Work on this issue
   options:
   - label: 💪 **I'm willing to work on this issue**
-  required: false
+    required: false
 
 ***
 
