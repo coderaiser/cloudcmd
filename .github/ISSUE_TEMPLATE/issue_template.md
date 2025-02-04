@@ -1,3 +1,5 @@
+---------------------
+
 name: Tracking issue
 about: Create an issue with bug report or feature request.
 title: ""
@@ -59,9 +61,7 @@ body:
   options:
   - label: 💪 **I'm willing to work on this issue**
     required: false
-
-***
-
+---------------------
 - **Version** (`cloudcmd -v`):
 - **Node Version** `node -v`:
 - **OS** (`uname -a` on Linux):
