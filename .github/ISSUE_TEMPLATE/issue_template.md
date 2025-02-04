@@ -1,5 +1,3 @@
-***
-
 name: Tracking issue
 about: Create an issue with bug report or feature request.
 title: ""
