@@ -1,3 +1,11 @@
+---
+name: Tracking issue
+about: Use this template for tracking new features.
+title: "[DATE]: [FEATURE NAME]"
+labels: needs triage
+assignees: coderaiser
+---
+
 - **Version** (`cloudcmd -v`):
 - **Node Version** `node -v`:
 - **OS** (`uname -a` on Linux):
