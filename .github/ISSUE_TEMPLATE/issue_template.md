@@ -13,5 +13,9 @@ assignees: coderaiser
 - **Browser name/version**:
 - **Used Command Line Parameters**:
 - **Changed Config**:
-- [ ] **I'm ready to donate on [Patreon](https://patreon.com/coderaiser) 🎁**
-- [ ] **I'm willing to work on this issue 💪**
+```json
+{}
+```
+- [ ] 🎁 **I'm ready to donate on https://opencollective.com/cloudcmd**
+- [ ] 🎁 **I'm ready to donate on https://ko-fi.com/coderaiser**
+- [ ] 💪 **I'm willing to work on this issue**
