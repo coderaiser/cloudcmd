@@ -196,7 +196,7 @@
     "philip": "^3.0.0",
     "place": "^1.1.4",
     "readjson": "^2.0.1",
-    "redlint": "^3.13.1",
+    "redlint": "^4.1.1",
     "request": "^2.76.0",
     "rimraf": "^6.0.1",
     "scroll-into-view-if-needed": "^3.0.4",
