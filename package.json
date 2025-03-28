@@ -158,6 +158,7 @@
     "@cloudcmd/olark": "^3.0.2",
     "@cloudcmd/stub": "^4.0.1",
     "@putout/babel": "^3.0.0",
+    "@putout/plugin-cloudcmd": "^4.0.0",
     "@types/node-fetch": "^2.6.11",
     "auto-globals": "^4.0.0",
     "babel-loader": "^8.0.0",
