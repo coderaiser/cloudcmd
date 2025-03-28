@@ -276,6 +276,7 @@ function download(type) {
         const path = DOM.getCurrentPath(file);
         
         CloudCmd.log(`downloading file ${path}...`);
+        
         /*
           * if we send ajax request -
           * no need in hash so we escape #

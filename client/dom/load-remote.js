@@ -29,7 +29,7 @@ module.exports = (name, options, callback = options) => {
         
         if (isArray) {
             remoteTmpls = module.remote;
-            local = module.local;
+            ({local} = module);
         } else {
             remoteTmpls = [module.remote];
             local = [module.local];

@@ -3,12 +3,7 @@
 const test = require('supertape');
 const navigate = require('./navigate');
 
-const {
-    UP,
-    DOWN,
-    J,
-    K,
-} = require('../../key/key.js');
+const {UP, DOWN, J, K} = require('../../key/key.js');
 
 test('cloudcmd: user-menu: navigate: DOWN', (t) => {
     const el = {

@@ -216,7 +216,7 @@ async function onPathElementClick(panel, event) {
 function copyPath(el) {
     clipboard
         .writeText(el
-            .parentElement.title)
+        .parentElement.title)
         .then(CloudCmd.log)
         .catch(CloudCmd.log);
 }

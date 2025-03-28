@@ -94,6 +94,7 @@ function CloudCmdProto(DOM) {
             imgPosition = 'top';
         
         Images.show.load(imgPosition, panel);
+        
         /* загружаем содержимое каталога */
         await ajaxLoad(addSlashToEnd(path), {
             refresh,
@@ -237,7 +238,7 @@ function CloudCmdProto(DOM) {
         
         const dirPath = DOM.getCurrentDirPath();
         
-        Listeners = CloudCmd.Listeners;
+        ({Listeners} = CloudCmd);
         Listeners.init();
         
         const panels = getPanels();

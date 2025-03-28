@@ -343,10 +343,13 @@ async function _processFiles(options, data) {
     let names = [];
     
     if (data) {
-        from = data.from;
-        to = data.to;
-        names = data.names;
-        panel = Info.panel;
+        ({
+            from,
+            to,
+            names,
+        } = data);
+        
+        ({panel} = Info);
     } else {
         from = Info.dirPath;
         to = DOM.getNotCurrentDirPath();

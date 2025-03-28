@@ -63,7 +63,7 @@ module.exports.ajax = (params) => {
     if (!isArrayBuf && isObject || isArray)
         data = jonny.stringify(p.data);
     else
-        data = p.data;
+        ({data} = p);
     
     xhr.onreadystatechange = (event) => {
         const xhr = event.target;
