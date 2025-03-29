@@ -11,9 +11,9 @@ module.exports = (config) => {
     const data = Object
         .keys(config)
         .map((name) => [
-            name,
-            config[name],
-        ]);
+        name,
+        config[name],
+    ]);
     
     if (!data.length)
         return '';

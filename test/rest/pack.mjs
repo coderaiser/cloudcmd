@@ -170,7 +170,7 @@ test('cloudcmd: rest: pack: zip: put: file', async (t) => {
         config,
     };
     
-    const name = String(Math.random()) + '.zip';
+    const name = `${Math.random()}.zip`;
     
     await request.put(`/api/v1/pack`, {
         options,
@@ -192,7 +192,7 @@ test('cloudcmd: rest: pack: zip: put: response', async (t) => {
         config,
     };
     
-    const name = String(Math.random()) + '.zip';
+    const name = `${Math.random()}.zip`;
     
     const {body} = await request.put(`/api/v1/pack`, {
         options,
