@@ -1,3 +1,15 @@
+2025.04.10, v18.5.2
+
+feature:
+- 8450bfa6 cloudcmd: putout v40.0.3
+- 51f51b54 cloudcmd: @putout/plugin-cloudcmd v4.0.0
+- 08ab63d7 cloudcmd: supertape v11.0.4
+- e7cc9b92 cloudcmd: redlint v4.1.1
+- 368c9bb8 cloudcmd: eslint v9.23.0
+- 43fd5ed6 cloudcmd: madrun v11.0.0
+- f774d5b2 cloudcmd: eslint-plugin-putout v26.1.0
+- b0a7fc16 cloudcmd: putout v39.3.0
+
 2025.02.03, v18.5.1
 
 feature:
