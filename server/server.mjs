@@ -10,7 +10,6 @@ import {Server} from 'socket.io';
 import tryRequire from 'tryrequire';
 import wraptile from 'wraptile';
 import compression from 'compression';
-import threadIt from 'thread-it';
 import exit from './exit.js';
 import cloudcmd from './cloudcmd.mjs';
 
@@ -20,7 +19,6 @@ const two = currify((f, a, b) => f(a, b));
 const shutdown = wraptile(async (promises) => {
     console.log('closing cloudcmd...');
     await Promise.all(promises);
-    threadIt.terminate();
     process.exit(0);
 });
 

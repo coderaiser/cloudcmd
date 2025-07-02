@@ -5,13 +5,10 @@ import {join} from 'node:path';
 import montag from 'montag';
 import tryToCatch from 'try-to-catch';
 import currify from 'currify';
-import threadIt from 'thread-it';
-import {codeframe} from 'putout';
+import {putout, codeframe} from 'putout';
 
 const require = createRequire(import.meta.url);
-const putout = threadIt(require.resolve('putout'));
 
-threadIt.init();
 // warm up worker cache
 transpile('');
 

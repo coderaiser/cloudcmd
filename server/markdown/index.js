@@ -5,14 +5,12 @@ const {callbackify} = require('node:util');
 
 const pullout = require('pullout');
 const ponse = require('ponse');
-const threadIt = require('thread-it');
 const {read} = require('redzip');
 
 const root = require('../root');
 const isString = (a) => typeof a === 'string';
-const parse = threadIt(join(__dirname, 'worker'));
+const parse = require('./worker');
 
-threadIt.init();
 // warm up
 parse('');
 
