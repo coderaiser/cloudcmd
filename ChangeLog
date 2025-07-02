@@ -1,3 +1,16 @@
+2025.07.02, v18.6.0
+
+feature:
+- 2eb3dc66 cloudcmd: @iocmd/wait v2.1.0
+- 1679b788 cloudcmd: webpackbar v7.0.0
+- 9a4cf388 cloudcmd: eslint-plugin-putout v27.2.1
+- f4b0f92f cloudcmd: express v5.1.0
+- 4ab4be12 thread-it: get rid (#438)
+- 99ad0c21 cloudcmd: rm @putout/babel
+- 8ccec23d cloudcmd: help: require -> import
+- 2a97ac66 cloudcmd: yargs-parser v22.0.0
+- b26c8bba cloudcmd: thread-it v3.0.0
+
 2025.04.10, v18.5.2
 
 feature:
