@@ -211,7 +211,7 @@
     "webpack": "^4.0.0",
     "webpack-cli": "^3.0.1",
     "webpack-merge": "^6.0.1",
-    "webpackbar": "^5.0.0-3"
+    "webpackbar": "^7.0.0"
   },
   "engines": {
     "node": ">=20"
