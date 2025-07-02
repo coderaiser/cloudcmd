@@ -156,6 +156,7 @@
     "@cloudcmd/modal": "^3.0.0",
     "@cloudcmd/olark": "^3.0.2",
     "@cloudcmd/stub": "^4.0.1",
+    "@iocmd/wait": "^2.1.0",
     "@putout/plugin-cloudcmd": "^4.0.0",
     "@types/node-fetch": "^2.6.11",
     "auto-globals": "^4.0.0",

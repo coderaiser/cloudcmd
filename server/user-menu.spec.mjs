@@ -3,7 +3,6 @@ import {fileURLToPath} from 'node:url';
 import {readFileSync} from 'node:fs';
 import {test, stub} from 'supertape';
 import serveOnce from 'serve-once';
-import threadIt from 'thread-it';
 import userMenu from './user-menu.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -66,8 +65,6 @@ test('cloudcmd: user menu: io.cp', async (t) => {
     const {body} = await request.get(`/api/v1/user-menu?dir=${__dirname}`, {
         options,
     });
-    
-    threadIt.terminate();
     
     t.equal(body, fixtureCopyFix);
     t.end();
