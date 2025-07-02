@@ -147,7 +147,7 @@
     "win32": "^7.0.0",
     "wraptile": "^3.0.0",
     "writejson": "^3.0.0",
-    "yargs-parser": "^21.0.0"
+    "yargs-parser": "^22.0.0"
   },
   "devDependencies": {
     "@babel/code-frame": "^7.22.5",
