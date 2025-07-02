@@ -29,8 +29,9 @@ const getOperations = (event, deps) => {
         setCurrentFile,
         setCurrentByName,
         getCurrentName,
+        
         toggleSelectedFile,
-        Buffer = {},
+                Buffer = {},
     } = deps;
     
     return {

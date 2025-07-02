@@ -318,9 +318,10 @@ async function readConfig(name) {
 async function help() {
     const {default: bin} = await import('../json/help.json', {
         with: {
-            type: 'json'
-        }
+            type: 'json',
+        },
     });
+    
     const forEachKey = await simport('for-each-key');
     const currify = await simport('currify');
     

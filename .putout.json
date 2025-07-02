@@ -6,9 +6,6 @@
         "app.json",
         "fontello.json"
     ],
-    "rules": {
-        "github/set-node-versions": "off"
-    },
     "match": {
         "base64": {
             "types/convert-typeof-to-is-type": "off"

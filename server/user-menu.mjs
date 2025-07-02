@@ -1,4 +1,3 @@
-import {createRequire} from 'node:module';
 import {homedir} from 'node:os';
 import {readFile as _readFile} from 'node:fs/promises';
 import {join} from 'node:path';
@@ -6,8 +5,6 @@ import montag from 'montag';
 import tryToCatch from 'try-to-catch';
 import currify from 'currify';
 import {putout, codeframe} from 'putout';
-
-const require = createRequire(import.meta.url);
 
 // warm up worker cache
 transpile('');

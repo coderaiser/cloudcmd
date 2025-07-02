@@ -6,16 +6,16 @@ const {btoa, atob} = require('./base64');
 
 test('btoa: browser', (t) => {
     const btoaOriginal = global.btoa;
+    const btoaStub = stub();
     const str = 'hello';
     
-    global.btoa = stub();
+    global.btoa = btoaStub;
     
     btoa(str);
-    
-    t.calledWith(global.btoa, [str], 'should call global.btoa');
-    t.end();
-    
     global.btoa = btoaOriginal;
+    
+    t.calledWith(btoaStub, [str], 'should call global.btoa');
+    t.end();
 });
 
 test('btoa: node', (t) => {
@@ -30,16 +30,18 @@ test('btoa: node', (t) => {
 
 test('atob: browser', (t) => {
     const atobOriginal = global.atob;
+    const atobStub = stub();
+    
     const str = 'hello';
     
-    global.atob = stub();
+    global.atob = atobStub;
     
     atob(str);
     
-    t.calledWith(global.atob, [str], 'should call global.btoa');
-    t.end();
-    
     global.atob = atobOriginal;
+    
+    t.calledWith(atobStub, [str], 'should call global.btoa');
+    t.end();
 });
 
 test('atob: node', (t) => {

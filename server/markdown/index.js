@@ -1,6 +1,5 @@
 'use strict';
 
-const {join} = require('node:path');
 const {callbackify} = require('node:util');
 
 const pullout = require('pullout');
@@ -8,8 +7,9 @@ const ponse = require('ponse');
 const {read} = require('redzip');
 
 const root = require('../root');
-const isString = (a) => typeof a === 'string';
+
 const parse = require('./worker');
+const isString = (a) => typeof a === 'string';
 
 // warm up
 parse('');
