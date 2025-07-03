@@ -157,6 +157,7 @@
     "@cloudcmd/olark": "^3.0.2",
     "@cloudcmd/stub": "^4.0.1",
     "@iocmd/wait": "^2.1.0",
+    "@putout/eslint-flat": "^3.0.1",
     "@putout/plugin-cloudcmd": "^4.0.0",
     "@types/node-fetch": "^2.6.11",
     "auto-globals": "^4.0.0",
@@ -215,7 +216,7 @@
     "webpackbar": "^7.0.0"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=20.19"
   },
   "license": "MIT",
   "publishConfig": {
