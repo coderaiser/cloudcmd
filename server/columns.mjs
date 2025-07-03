@@ -9,7 +9,7 @@ import readFilesSync from '@cloudcmd/read-files-sync';
 const {nanomemoize} = nanomemoizeDefault;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const isMap = (a) => /\.map$/.test(a);
+const isMap = (a) => /\.(map|js)$/.test(a);
 const not = (fn) => (a) => !fn(a);
 
 const defaultColumns = {

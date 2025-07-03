@@ -138,17 +138,10 @@ function CloudCmdProto(DOM) {
         
         await initModules();
         await baseInit();
-        await loadStyle();
         
         CloudCmd.route(location.hash);
     };
     
-    async function loadStyle() {
-        const {prefix} = CloudCmd;
-        const name = `${prefix}/dist/cloudcmd.common.css`;
-        
-        await load.css(name);
-    }
     
     this.route = (path) => {
         const query = path.split('/');

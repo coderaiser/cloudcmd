@@ -52,12 +52,12 @@ module.exports.init = async () => {
     
     showLoad();
     
-    const {prefix} = CloudCmd;
+    const {DIR_DIST} = CloudCmd;
     
     [Template] = await Promise.all([
         Files.get('config-tmpl'),
         loadSocket(),
-        loadCSS(`${prefix}/dist/config.css`),
+        loadCSS(`${DIR_DIST}/config.css`),
         CloudCmd.View(),
     ]);
     

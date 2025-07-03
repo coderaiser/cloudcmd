@@ -1,7 +1,7 @@
 'use strict';
 
 const process = require('node:process');
-require('./css');
+require('../css/main.css');
 
 const wraptile = require('wraptile');
 const load = require('load.js');

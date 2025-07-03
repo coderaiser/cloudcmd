@@ -7,13 +7,17 @@ const {
 } = require('node:path');
 
 const {env} = require('node:process');
-const {EnvironmentPlugin} = require('webpack');
+const {
+    EnvironmentPlugin,
+    NormalModuleReplacementPlugin,
+} = require('webpack');
 const WebpackBar = require('webpackbar');
-
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const modules = './modules';
 const dirModules = './client/modules';
+const dirCss = './css';
+const dirThemes = `${dirCss}/themes`;
+const dirColumns = `${dirCss}/columns`;
 const dir = './client';
 const {NODE_ENV} = env;
 const isDev = NODE_ENV === 'development';
@@ -46,19 +50,43 @@ const rules = clean([
 ]);
 
 const plugins = [
+    new NormalModuleReplacementPlugin(/^node:/, (resource) => {
+        resource.request = resource.request.replace(/^node:/, '');
+    }),
     new EnvironmentPlugin({
         NODE_ENV,
-    }),
-    new ServiceWorkerWebpackPlugin({
-        entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
-        excludes: ['*'],
     }),
     new WebpackBar(),
 ];
 
 const splitChunks = {
-    name: 'cloudcmd.common',
     chunks: 'all',
+    cacheGroups: {
+        abcCommon: {
+            name: 'cloudcmd.common',
+            chunks: (chunk) => {
+                const lazyChunks = [
+                    'nojs',
+                    'view',
+                    'edit',
+                    'terminal',
+                    'config',
+                    'user-menu',
+                    'help',
+                    'themes/dark',
+                    'themes/light',
+                    'columns/name-size',
+                    'columns/name-size-date',
+                ];
+
+                return !lazyChunks.includes(chunk.name);
+            },
+            minChunks: 1,
+            enforce: true,
+            priority: -1,
+            reuseExistingChunk: true,
+        },
+    },
 };
 
 module.exports = {
@@ -68,12 +96,27 @@ module.exports = {
             'node:process': 'process',
             'node:path': 'path',
         },
+        fallback: {
+            'path': require.resolve('path-browserify'),
+            'process': require.resolve('process/browser'),
+        },
     },
     devtool,
     optimization: {
         splitChunks,
     },
     entry: {
+        'themes/dark': `${dirThemes}/dark.css`,
+        'themes/light': `${dirThemes}/light.css`,
+        'columns/name-size': `${dirColumns}/name-size.css`,
+        'columns/name-size-date': `${dirColumns}/name-size-date.css`,
+        'nojs': `${dirCss}/nojs.css`,
+        help: `${dirCss}/help.css`,
+        view: `${dirCss}/view.css`,
+        config: `${dirCss}/config.css`,
+        terminal: `${dirCss}/terminal.css`,
+        'user-menu': `${dirCss}/user-menu.css`,
+        sw: `${dir}/sw/sw.js`,
         cloudcmd: `${dir}/cloudcmd.js`,
         [`${modules}/edit`]: `${dirModules}/edit.js`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.js`,

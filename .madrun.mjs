@@ -16,6 +16,7 @@ const is20 = process.version.startsWith('v2');
 // https://stackoverflow.com/a/69746937/4536327
 const buildEnv = (is17 || is20) && {
     NODE_OPTIONS: '--openssl-legacy-provider',
+    NODE_ENV: 'production',
 };
 
 export default {
@@ -56,6 +57,7 @@ export default {
     'watch:test:server': async () => `nodemon -w client -w test/client -x ${await run('test:server')}`,
     'watch:coverage': async () => [testEnv, `nodemon -w server -w test -w common -x ${await cutEnv('coverage')}`],
     'build': async () => run('6to5:*'),
+    'postbuild': () => 'node .webpack/cp.mjs',
     'build:dev': async () => run('build:client:dev'),
     'build:client': () => run('6to5:client'),
     'build:client:dev': () => run('6to5:client:dev'),

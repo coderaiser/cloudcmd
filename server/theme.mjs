@@ -8,7 +8,7 @@ import readFilesSync from '@cloudcmd/read-files-sync';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const isMap = (a) => /\.map$/.test(a);
+const isMap = (a) => /\.(map|js)$/.test(a);
 const not = (fn) => (a) => !fn(a);
 
 const _isDev = fullstore(process.env.NODE_ENV === 'development');
@@ -29,5 +29,7 @@ const readFilesSyncMemo = nanomemoize((isDev) => {
         .readdirSync(themesDir)
         .filter(not(isMap));
     
-    return readFilesSync(themesDir, names, 'utf8');
+    const a = readFilesSync(themesDir, names, 'utf8');
+    
+    return a;
 });
