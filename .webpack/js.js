@@ -7,10 +7,10 @@ const {
 } = require('node:path');
 
 const {env} = require('node:process');
-const {EnvironmentPlugin} = require('webpack');
+const {EnvironmentPlugin, NormalModuleReplacementPlugin} = require('webpack');
 const WebpackBar = require('webpackbar');
 
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+//const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const modules = './modules';
 const dirModules = './client/modules';
@@ -46,13 +46,18 @@ const rules = clean([
 ]);
 
 const plugins = [
+    new NormalModuleReplacementPlugin(/^node:/, (resource) => {
+         resource.request = resource.request.replace(/^node:/, '');
+     }),
     new EnvironmentPlugin({
         NODE_ENV,
     }),
+    /*
     new ServiceWorkerWebpackPlugin({
         entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
         excludes: ['*'],
     }),
+    */
     new WebpackBar(),
 ];
 
@@ -68,13 +73,19 @@ module.exports = {
             'node:process': 'process',
             'node:path': 'path',
         },
+        fallback: {
+            "path": require.resolve("path-browserify"),
+            "process": require.resolve("process/browser")
+        }
     },
     devtool,
     optimization: {
         splitChunks,
     },
     entry: {
+        'nojs': './css/nojs.css',
         cloudcmd: `${dir}/cloudcmd.js`,
+        sw: `${dir}/sw/sw.js`,
         [`${modules}/edit`]: `${dirModules}/edit.js`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.js`,
         [`${modules}/edit-file-vim`]: `${dirModules}/edit-file-vim.js`,

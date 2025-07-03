@@ -329,12 +329,12 @@ function check(src) {
  * @callback   -  executes, when everything loaded
  */
 async function loadAll() {
-    const {DIR_DIST} = CloudCmd;
+    const {DIR_MODULES} = CloudCmd;
     
     time(`${Name} load`);
     
     Loading = true;
-    await loadCSS(`${DIR_DIST}/view.css`);
+    await loadCSS(`${DIR_MODULES}/view.css`);
     Loading = false;
 }
 
