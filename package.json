@@ -209,7 +209,7 @@
     "tar-stream": "^3.0.0",
     "unionfs": "^4.0.0",
     "url-loader": "^4.0.0",
-    "webpack": "^4.0.0",
+    "webpack": "^5.99.9",
     "webpack-cli": "^3.0.1",
     "webpack-merge": "^6.0.1",
     "webpackbar": "^7.0.0"
