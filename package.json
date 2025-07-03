@@ -203,7 +203,7 @@
     "serve-once": "^3.0.1",
     "serviceworker-webpack-plugin": "^1.0.1",
     "smalltalk": "^4.0.0",
-    "style-loader": "^2.0.0",
+    "style-loader": "^4.0.0",
     "supermenu": "^4.0.1",
     "supertape": "^11.0.4",
     "tar-stream": "^3.0.0",
