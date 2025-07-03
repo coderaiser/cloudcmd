@@ -7,11 +7,13 @@ const {
 } = require('node:path');
 
 const {env} = require('node:process');
-const {EnvironmentPlugin, NormalModuleReplacementPlugin} = require('webpack');
+const {
+    EnvironmentPlugin,
+    NormalModuleReplacementPlugin,
+} = require('webpack');
 const WebpackBar = require('webpackbar');
 
 //const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-
 const modules = './modules';
 const dirModules = './client/modules';
 const dir = './client';
@@ -47,18 +49,17 @@ const rules = clean([
 
 const plugins = [
     new NormalModuleReplacementPlugin(/^node:/, (resource) => {
-         resource.request = resource.request.replace(/^node:/, '');
-     }),
+        resource.request = resource.request.replace(/^node:/, '');
+    }),
     new EnvironmentPlugin({
         NODE_ENV,
     }),
-    /*
+        /*
     new ServiceWorkerWebpackPlugin({
         entry: join(__dirname, '..', 'client', 'sw', 'sw.js'),
         excludes: ['*'],
     }),
-    */
-    new WebpackBar(),
+    */new WebpackBar(),
 ];
 
 const splitChunks = {
@@ -74,9 +75,9 @@ module.exports = {
             'node:path': 'path',
         },
         fallback: {
-            "path": require.resolve("path-browserify"),
-            "process": require.resolve("process/browser")
-        }
+            'path': require.resolve('path-browserify'),
+            'process': require.resolve('process/browser'),
+        },
     },
     devtool,
     optimization: {
