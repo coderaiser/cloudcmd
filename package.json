@@ -185,6 +185,7 @@
     "load.js": "^3.0.0",
     "madrun": "^11.0.0",
     "memfs": "^4.2.0",
+    "mini-css-extract-plugin": "^2.9.2",
     "minor": "^1.2.2",
     "mock-require": "^3.0.1",
     "montag": "^1.2.1",
