@@ -86,7 +86,7 @@
   },
   "subdomain": "cloudcmd",
   "dependencies": {
-    "@babel/core": "^7.22.9",
+    "@babel/core": "^8.0.0-beta.1",
     "@babel/plugin-transform-optional-chaining": "^7.21.0",
     "@cloudcmd/dropbox": "^5.0.1",
     "@cloudcmd/fileop": "^8.0.0",
@@ -172,6 +172,7 @@
     "codegen.macro": "^4.0.0",
     "css-loader": "^3.0.0",
     "css-modules-require-hook": "^4.2.3",
+    "cssnano-preset-default": "^7.0.7",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
     "eslint": "^9.23.0",

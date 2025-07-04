@@ -1,5 +1,6 @@
 .*
 *.spec.*
+*.config.*
 *.fixture.js*
 manifest.yml
 docker
@@ -13,7 +14,6 @@ html
 yarn-error.log
 yarn.lock
 now.json
-cssnano.config.js
 
 app.json
 bower.json
