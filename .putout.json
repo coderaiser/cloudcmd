@@ -4,7 +4,8 @@
         "html",
         "fixture*",
         "app.json",
-        "fontello.json"
+        "fontello.json",
+        "*.md"
     ],
     "match": {
         "base64": {
