@@ -1,3 +1,12 @@
+2025.07.04, v18.6.1
+
+feature:
+- 9eafa189 cloudcmd: http-auth v4.2.1
+- e99d0847 cloudcmd: montag v1.2.1
+- b77e9c91 cloudcmd: pipe-io v4.0.1
+- 4b476a6d cloudcmd: globals v16.3.0
+- 2057065d cloudcmd: @putout/eslint-flat v3.0.1
+
 2025.07.02, v18.6.0
 
 feature:
