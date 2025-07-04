@@ -263,8 +263,7 @@ function viewImage(path, prefixURL) {
         title: encode(basename(path)),
     });
     
-    const names = Info
-        .files
+    const names = Info.files
         .map(DOM.getCurrentPath)
         .filter(isSupportedImage);
     

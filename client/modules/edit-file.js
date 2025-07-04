@@ -61,8 +61,7 @@ module.exports.show = async (options) => {
     
     Images.show.load();
     
-    CloudCmd
-        .Edit
+    CloudCmd.Edit
         .getEditor()
         .setOption('keyMap', 'default');
     
@@ -78,8 +77,7 @@ module.exports.show = async (options) => {
     
     setMsgChanged(name);
     
-    CloudCmd
-        .Edit
+    CloudCmd.Edit
         .getEditor()
         .setValueFirst(path, data)
         .setModeForPath(name)
@@ -131,8 +129,7 @@ function setMenu(event) {
         },
         
         afterClick: () => {
-            CloudCmd
-                .Edit
+            CloudCmd.Edit
                 .getEditor()
                 .focus();
         },

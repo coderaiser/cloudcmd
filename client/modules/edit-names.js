@@ -44,8 +44,7 @@ module.exports.show = (options) => {
     
     DOM.Events.addKey(keyListener);
     
-    CloudCmd
-        .Edit
+    CloudCmd.Edit
         .getEditor()
         .setValueFirst('edit-names', names)
         .setMode()

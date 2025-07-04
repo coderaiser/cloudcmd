@@ -21,8 +21,7 @@ module.exports.init = async () => {
 module.exports.show = () => {
     Events.addKey(listener);
     
-    CloudCmd
-        .EditNames
+    CloudCmd.EditNames
         .show(ConfigView)
         .getEditor()
         .setKeyMap('vim');
