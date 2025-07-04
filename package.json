@@ -120,6 +120,7 @@
     "just-snake-case": "^3.2.0",
     "markdown-it": "^14.0.0",
     "mellow": "^3.0.0",
+    "mime-types": "^3.0.1",
     "montag": "^1.2.1",
     "nano-memoize": "^3.0.16",
     "nomine": "^4.0.0",

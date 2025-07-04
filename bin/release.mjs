@@ -19,8 +19,8 @@ await main();
 async function main() {
     const history = '## Version history\n\n';
     const link = '//github.com/coderaiser/cloudcmd/releases/tag/';
-    const template =
-        '- *{{ date }}*, ' +
+    const template = '- ' +
+        '*{{ date }}*, ' +
         '**[v{{ version }}]' +
         '(' + link +
         'v{{ version }})**\n';

@@ -2,7 +2,12 @@
 
 const fullstore = require('fullstore');
 
-const {J, K, UP, DOWN} = require('../../key/key.js');
+const {
+    J,
+    K,
+    UP,
+    DOWN,
+} = require('../../key/key.js');
 
 const store = fullstore(1);
 const isDigit = (a) => /^\d+$/.test(a);

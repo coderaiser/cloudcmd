@@ -215,8 +215,7 @@ async function onPathElementClick(panel, event) {
 
 function copyPath(el) {
     clipboard
-        .writeText(el
-        .parentElement.title)
+        .writeText(el.parentElement.title)
         .then(CloudCmd.log)
         .catch(CloudCmd.log);
 }
@@ -422,7 +421,7 @@ function dragndrop() {
     };
     
     /**
-     * In Mac OS Chrome dropEffect = 'none'
+     * In macOS Chrome dropEffect = 'none'
      * so drop do not firing up when try
      * to upload file from download bar
      */

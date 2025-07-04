@@ -1,5 +1,5 @@
 .*
-*.spec.js
+*.spec.*
 *.fixture.js*
 manifest.yml
 docker
@@ -19,7 +19,7 @@ app.json
 bower.json
 manifest.yml
 
-bin/release.js
+bin/release.mjs
 
 client
 img/logo/cloudcmd-hq.png

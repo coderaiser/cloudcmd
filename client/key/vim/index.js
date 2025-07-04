@@ -31,7 +31,7 @@ const getOperations = (event, deps) => {
         getCurrentName,
         
         toggleSelectedFile,
-                Buffer = {},
+        Buffer = {},
     } = deps;
     
     return {

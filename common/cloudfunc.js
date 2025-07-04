@@ -173,6 +173,7 @@ module.exports.buildFromJSON = (params) => {
     Path(path);
     
     fileTable += `${header}<ul data-name="js-files" class="files">`;
+    
     /* Если мы не в корне */
     if (path !== '/') {
         const dotDot = getDotDot(path);
@@ -203,43 +204,43 @@ module.exports.buildFromJSON = (params) => {
     
     fileTable += files
         .filter(filterOutDotFiles({
-        showDotFiles,
-    }))
+            showDotFiles,
+        }))
         .map(updateField)
         .map((file) => {
-        const name = encode(file.name);
-        const link = prefix + FS + path + name;
-        
-        const {
-            type,
-            mode,
-            date,
-            owner,
-            size,
-        } = file;
-        
-        const linkResult = rendy(templateLink, {
-            link,
-            title: name,
-            name,
-            attribute: getAttribute(file.type),
-        });
-        
-        const dataName = getDataName(file.name);
-        const attribute = `draggable="true" ${dataName}`;
-        
-        return rendy(templateFile, {
-            tag: 'li',
-            attribute,
-            className: '',
-            type,
-            name: linkResult,
-            size,
-            date,
-            owner,
-            mode,
-        });
-    })
+            const name = encode(file.name);
+            const link = prefix + FS + path + name;
+            
+            const {
+                type,
+                mode,
+                date,
+                owner,
+                size,
+            } = file;
+            
+            const linkResult = rendy(templateLink, {
+                link,
+                title: name,
+                name,
+                attribute: getAttribute(file.type),
+            });
+            
+            const dataName = getDataName(file.name);
+            const attribute = `draggable="true" ${dataName}`;
+            
+            return rendy(templateFile, {
+                tag: 'li',
+                attribute,
+                className: '',
+                type,
+                name: linkResult,
+                size,
+                date,
+                owner,
+                mode,
+            });
+        })
         .join('');
     
     fileTable += '</ul>';

@@ -44,8 +44,7 @@ const data = {
     }],
 };
 
-let Expect =
-    '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
+let Expect = '<div data-name="js-path" class="reduce-text" title="/etc/X11/">' +
     '<span data-name="js-copy-path" class="path-icon icon-copy-to-clipboard"' +
     ' title="copy path (Ctrl+P)">' +
     '</span>' +
@@ -75,13 +74,13 @@ test('cloudfunc: render', (t) => {
     const isNotOk = Expect
         .split('')
         .some((item, number) => {
-        const ret = result[number] !== item;
-        
-        if (ret)
-            i = number;
-        
-        return ret;
-    });
+            const ret = result[number] !== item;
+            
+            if (ret)
+                i = number;
+            
+            return ret;
+        });
     
     timeEnd('CloudFunc.buildFromJSON');
     
