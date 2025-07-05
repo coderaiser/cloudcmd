@@ -23,7 +23,7 @@ test('columns: dev', (t) => {
     
     const css = fs.readFileSync(`${__dirname}/../css/columns/name-size-date.css`, 'utf8');
     
-    t.ok(columns['name-size-date'].includes(css));
+    t.match(columns['name-size-date'], css);
     t.end();
 });
 
@@ -35,6 +35,6 @@ test('columns: no args', (t) => {
     const css = fs.readFileSync(`${__dirname}/../css/columns/name-size-date.css`, 'utf8');
     isDev(currentIsDev);
     
-    t.ok(columns['name-size-date'].includes(css));
+    t.match(columns['name-size-date'], css);
     t.end();
 });
