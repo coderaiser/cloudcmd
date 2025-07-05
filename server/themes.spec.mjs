@@ -13,8 +13,9 @@ test('themes: dev', (t) => {
     });
     
     const css = fs.readFileSync(`${__dirname}/../css/themes/dark.css`, 'utf8');
+    const result = themes.dark.includes(css);
     
-    t.match(themes.dark, css);
+    t.ok(result);
     t.end();
 });
 
