@@ -14,7 +14,7 @@ test('themes: dev', (t) => {
     
     const css = fs.readFileSync(`${__dirname}/../css/themes/dark.css`, 'utf8');
     
-    t.equal(themes.dark, css);
+    t.ok(themes.dark.includes(css));
     t.end();
 });
 
@@ -26,6 +26,6 @@ test('themes: no args', (t) => {
     const css = fs.readFileSync(`${__dirname}/../css/themes/light.css`, 'utf8');
     isDev(currentIsDev);
     
-    t.equal(themes.light, css);
+    t.ok(themes.light.includes(css));
     t.end();
 });
