@@ -326,14 +326,11 @@ function listener(event) {
     
     const key = event.keyCode;
     const isBind = Key.isBind();
-    
-    if (!isBind)
-        return;
-    
+
     if (key === ESC)
         return hide();
     
-    if (key === F9) {
+    if (isBind && key === F9) {
         const position = getCurrentPosition();
         MenuContext.show(position.x, position.y);
         
