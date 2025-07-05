@@ -1,3 +1,24 @@
+2025.07.05, v18.7.0
+
+fix:
+- b1e231a5 client: menu: close: ESC
+
+feature:
+- 546d0610 cloudcmd: process v0.11.10
+- 121b114e cloudcmd: path-browserify v1.0.1
+- 8592cedc cloudcmd: mini-css-extract-plugin v2.9.2
+- a53ab67b cloudcmd: webpack-cli v6.0.1
+- de2cedd9 cloudcmd: webpack v5.99.9
+- da545ea4 cloudcmd: style-loader v4.0.0
+- db6e8334 cloudcmd: optimize-css-assets-webpack-plugin v6.0.1
+- 2f0c1a61 cloudcmd: html-webpack-plugin v5.6.3
+- e100dcf6 cloudcmd: extract-text-webpack-plugin v3.0.2
+- 76c40008 cloudcmd: css-loader v7.1.2
+- fb5e5a32 cloudcmd: clean-css-loader v4.2.1
+- 8551cd54 cloudcmd: babel-loader v10.0.0
+- c9380319 webpack 5
+- ddc94adb cloudcmd: eslint-plugin-putout v28.0.0
+
 2025.07.04, v18.6.1
 
 feature:
