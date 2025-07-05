@@ -57,7 +57,6 @@ export default {
     'watch:test:server': async () => `nodemon -w client -w test/client -x ${await run('test:server')}`,
     'watch:coverage': async () => [testEnv, `nodemon -w server -w test -w common -x ${await cutEnv('coverage')}`],
     'build': async () => run('6to5:*'),
-    'postbuild': () => 'node .webpack/cp.mjs',
     'build:dev': async () => run('build:client:dev'),
     'build:client': () => run('6to5:client'),
     'build:client:dev': () => run('6to5:client:dev'),
