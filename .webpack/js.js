@@ -11,6 +11,7 @@ const {
     EnvironmentPlugin,
     NormalModuleReplacementPlugin,
 } = require('webpack');
+
 const WebpackBar = require('webpackbar');
 
 const modules = './modules';
@@ -78,7 +79,7 @@ const splitChunks = {
                     'columns/name-size',
                     'columns/name-size-date',
                 ];
-
+                
                 return !lazyChunks.includes(chunk.name);
             },
             minChunks: 1,
@@ -97,8 +98,8 @@ module.exports = {
             'node:path': 'path',
         },
         fallback: {
-            'path': require.resolve('path-browserify'),
-            'process': require.resolve('process/browser'),
+            path: require.resolve('path-browserify'),
+            process: require.resolve('process/browser'),
         },
     },
     devtool,
@@ -111,13 +112,13 @@ module.exports = {
         'columns/name-size': `${dirColumns}/name-size.css`,
         'columns/name-size-date': `${dirColumns}/name-size-date.css`,
         'nojs': `${dirCss}/nojs.css`,
-        help: `${dirCss}/help.css`,
-        view: `${dirCss}/view.css`,
-        config: `${dirCss}/config.css`,
-        terminal: `${dirCss}/terminal.css`,
+        'help': `${dirCss}/help.css`,
+        'view': `${dirCss}/view.css`,
+        'config': `${dirCss}/config.css`,
+        'terminal': `${dirCss}/terminal.css`,
         'user-menu': `${dirCss}/user-menu.css`,
-        sw: `${dir}/sw/sw.js`,
-        cloudcmd: `${dir}/cloudcmd.js`,
+        'sw': `${dir}/sw/sw.js`,
+        'cloudcmd': `${dir}/cloudcmd.js`,
         [`${modules}/edit`]: `${dirModules}/edit.js`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.js`,
         [`${modules}/edit-file-vim`]: `${dirModules}/edit-file-vim.js`,

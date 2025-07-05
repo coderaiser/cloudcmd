@@ -29,7 +29,5 @@ const readFilesSyncMemo = nanomemoize((isDev) => {
         .readdirSync(themesDir)
         .filter(not(isMap));
     
-    const a = readFilesSync(themesDir, names, 'utf8');
-    
-    return a;
+    return readFilesSync(themesDir, names, 'utf8');
 });

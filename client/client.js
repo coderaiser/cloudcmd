@@ -142,7 +142,6 @@ function CloudCmdProto(DOM) {
         CloudCmd.route(location.hash);
     };
     
-    
     this.route = (path) => {
         const query = path.split('/');
         

@@ -326,7 +326,7 @@ function listener(event) {
     
     const key = event.keyCode;
     const isBind = Key.isBind();
-
+    
     if (key === ESC)
         return hide();
     
