@@ -197,6 +197,7 @@
     "philip": "^3.0.0",
     "place": "^1.1.4",
     "postcss": "^8.5.3",
+    "process": "^0.11.10",
     "readjson": "^2.0.1",
     "redlint": "^4.1.1",
     "request": "^2.76.0",
