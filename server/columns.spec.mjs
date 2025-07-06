@@ -1,4 +1,4 @@
-import {join, dirname} from 'node:path';
+import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import fs from 'node:fs';
 import test from 'supertape';
@@ -6,7 +6,6 @@ import {getColumns, isDev} from './columns.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const distDir = join(__dirname, '..', 'dist-dev');
 
 test('columns: prod', (t) => {
     const columns = getColumns({
@@ -22,7 +21,7 @@ test('columns: dev', (t) => {
         isDev: true,
     });
     
-    const css = fs.readFileSync(`${distDir}/columns/name-size-date.css`, 'utf8');
+    const css = fs.readFileSync(`${__dirname}/../css/columns/name-size-date.css`, 'utf8');
     
     t.match(columns['name-size-date'], css);
     t.end();
@@ -33,7 +32,7 @@ test('columns: no args', (t) => {
     isDev(true);
     const columns = getColumns();
     
-    const css = fs.readFileSync(`${distDir}/columns/name-size-date.css`, 'utf8');
+    const css = fs.readFileSync(`${__dirname}/../css/columns/name-size-date.css`, 'utf8');
     isDev(currentIsDev);
     
     t.match(columns['name-size-date'], css);

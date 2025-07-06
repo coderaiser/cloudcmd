@@ -13,7 +13,6 @@ const {
 } = require('webpack');
 
 const WebpackBar = require('webpackbar');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 const modules = './modules';
 const dirModules = './client/modules';
@@ -106,18 +105,6 @@ module.exports = {
     devtool,
     optimization: {
         splitChunks,
-        minimize: true,
-        minimizer: [
-            new CssMinimizerPlugin({
-                minimizerOptions: {
-                    preset: ['default', {
-                        discardComments: {
-                            removeAll: true,
-                        },
-                    }],
-                },
-            }),
-        ],
     },
     entry: {
         'themes/dark': `${dirThemes}/dark.css`,
