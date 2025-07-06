@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 
 RUN npm config set package-lock false && \
-    npm install --production && \
+    npm install --production -f && \
     npm i gritty && \
     npm cache clean --force
 
