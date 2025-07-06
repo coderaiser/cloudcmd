@@ -67,6 +67,7 @@ const splitChunks = {
             name: 'cloudcmd.common',
             chunks: (chunk) => {
                 const lazyChunks = [
+                    'sw',
                     'nojs',
                     'view',
                     'edit',
