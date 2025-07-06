@@ -1,3 +1,12 @@
+2025.07.06, v18.7.1
+
+fix:
+- 784bb2eb build: sw
+
+feature:
+- 8f52376d cloudcmd: revert: optimize-css-assets-webpack-plugin -> css-minimizer-webpack-plugin: broken spinner
+- 82008749 cloudcmd: optimize-css-assets-webpack-plugin -> css-minimizer-webpack-plugin
+
 2025.07.05, v18.7.0
 
 fix:
