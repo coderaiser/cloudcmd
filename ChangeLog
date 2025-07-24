@@ -1,3 +1,9 @@
+2025.07.24, v18.7.2
+
+feature:
+- 2e775908 cloudcmd: html-looks-like: remove
+- bb6a7a28 docker: npm -> bun
+
 2025.07.06, v18.7.1
 
 fix:
