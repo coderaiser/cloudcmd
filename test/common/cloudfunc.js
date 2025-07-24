@@ -4,7 +4,6 @@ const fs = require('node:fs');
 
 const tryCatch = require('try-catch');
 const test = require('supertape');
-const htmlLooksLike = require('html-looks-like');
 const readFilesSync = require('@cloudcmd/read-files-sync');
 
 const {time, timeEnd} = require(`../../common/util`);
@@ -90,9 +89,6 @@ test('cloudfunc: render', (t) => {
     }
     
     t.equal(result, Expect, 'should be equal rendered json data');
-    
-    htmlLooksLike(result, Expect);
-    
     t.end();
 });
 
