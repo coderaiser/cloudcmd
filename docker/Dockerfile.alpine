@@ -7,12 +7,12 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 
-RUN npm config set package-lock false && \
-    npm install --production -f && \
-    apk update && \
-    apk add --no-cache bash make g++ python3 && \
-    npm i gritty && \
-    npm cache clean --force && \
+RUN apk update && \
+    apk add --no-cache curl bash make g++ python3 && \
+    curl -fsSL https://bun.com/install | bash && \
+    ~/.bun/bin/bun i --production --no-save && \
+    PATH=$PATH:~/.bun/bin bun i gritty --no-save && \
+    ~/.bun/bin/bun pm cache rm && \
     apk del make g++ python3 && \
     rm -rf /usr/include /tmp/* /var/cache/apk/*
 

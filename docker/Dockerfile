@@ -7,10 +7,10 @@ WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 
-RUN npm config set package-lock false && \
-    npm install --production -f && \
-    npm i gritty && \
-    npm cache clean --force
+RUN curl -fsSL https://bun.com/install | bash && \
+    ~/.bun/bin/bun i --production --no-save && \
+    PATH=$PATH:~/.bun/bin bun i gritty --no-save && \
+    ~/.bun/bin/bun pm cache rm
 
 COPY . /usr/src/app
 
