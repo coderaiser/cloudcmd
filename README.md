@@ -5,7 +5,7 @@
 [MainURL]: https://cloudcmd.io "Main"
 [BlogURL]: https://blog.cloudcmd.io "Blog"
 [SupportURL]: https://patreon.com/coderaiser "Patreon"
-[DemoURL]: https://cloudcmd.onrender.com/
+[DemoURL]: https://cloudcmd-zdp6.onrender.com
 [NPM_INFO_IMG]: https://nodei.co/npm/cloudcmd.png
 [BuildStatusURL]: https://github.com/coderaiser/cloudcmd/actions/workflows/nodejs.yml "Build Status"
 [BuildStatusIMGURL]: https://github.com/coderaiser/cloudcmd/actions/workflows/nodejs.yml/badge.svg
