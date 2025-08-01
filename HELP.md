@@ -5,7 +5,7 @@
 [MainURL]: https://cloudcmd.io "Main"
 [BlogURL]: https://blog.cloudcmd.io "Blog"
 [SupportURL]: https://patreon.com/coderaiser "Patreon"
-[DemoURL]: https://cloudcmd.onrender.com/
+[DemoURL]: https://cloudcmd-zdp6.onrender.com/
 [DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
 [DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
