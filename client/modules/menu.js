@@ -202,6 +202,8 @@ function isPath(x, y) {
 }
 
 function beforeShow(callback, params) {
+    Key.unsetBind();
+    
     const {name} = params;
     const el = DOM.getCurrentByPosition({
         x: params.x,
@@ -327,8 +329,10 @@ function listener(event) {
     const key = event.keyCode;
     const isBind = Key.isBind();
     
-    if (key === ESC)
+    if (key === ESC) {
+        Key.setBind();
         return hide();
+    }
     
     if (isBind && key === F9) {
         const position = getCurrentPosition();
