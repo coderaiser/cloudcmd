@@ -323,10 +323,6 @@ function check(src) {
         throw Error('src should be a string!');
 }
 
-/**
- * function loads css and js of FancyBox
- * @callback   -  executes, when everything loaded
- */
 async function loadAll() {
     const {DIR_DIST} = CloudCmd;
     
