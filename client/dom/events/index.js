@@ -80,7 +80,7 @@ function EventsProto() {
      * safe add event listener
      *
      * @param type
-     * @param element {document by default}
+     * @param element - document by default
      * @param listener
      */
     this.add = (type, element, listener) => {
@@ -101,7 +101,7 @@ function EventsProto() {
      *
      * @param type
      * @param listener
-     * @param element {document by default}
+     * @param element - document by default
      */
     this.addOnce = (type, element, listener) => {
         const once = (event) => {
@@ -124,7 +124,7 @@ function EventsProto() {
      *
      * @param type
      * @param listener
-     * @param element {document by default}
+     * @param element - document by default
      */
     this.remove = (type, element, listener) => {
         checkType(type);
@@ -138,8 +138,6 @@ function EventsProto() {
     
     /**
      * remove all added event listeners
-     *
-     * @param listener
      */
     this.removeAll = () => {
         const events = EventStore.get();
@@ -153,101 +151,44 @@ function EventsProto() {
     /**
      * safe add event keydown listener
      *
-     * @param listener
+     * @param args
      */
-    this.addKey = function(...argsArr) {
-        const name = 'keydown';
-        const args = [
-            name,
-            ...argsArr,
-        ];
-        
-        return Events.add(...args);
+    this.addKey = function(...args) {
+        return Events.add('keydown', ...args);
     };
     
     /**
      * safe remove event click listener
      *
-     * @param listener
+     * @param args
      */
-    this.rmKey = function(...argsArr) {
-        const name = 'keydown';
-        const args = [
-            name,
-            ...argsArr,
-        ];
-        
-        return Events.remove(...args);
+    this.rmKey = function(...args) {
+        return Events.remove('keydown', ...args);
     };
     
     /**
      * safe add event click listener
-     *
-     * @param listener
      */
-    this.addClick = function(...argsArr) {
-        const name = 'click';
-        const args = [
-            name,
-            ...argsArr,
-        ];
-        
-        return Events.add(...args);
+    this.addClick = function(...args) {
+        return Events.add('click', ...args);
     };
     
     /**
      * safe remove event click listener
-     *
-     * @param listener
      */
-    this.rmClick = function(...argsArr) {
-        const name = 'click';
-        const args = [
-            name,
-            ...argsArr,
-        ];
-        
-        return Events.remove(...args);
+    this.rmClick = function(...args) {
+        return Events.remove('click', ...args);
     };
     
-    this.addContextMenu = function(...argsArr) {
-        const name = 'contextmenu';
-        const args = [
-            name,
-            ...argsArr,
-        ];
-        
-        return Events.add(...args);
+    this.addContextMenu = function(...args) {
+        return Events.add('contextmenu', ...args);
     };
     
     /**
-     * safe add event click listener
-     *
-     * @param listener
+     * safe add load listener
      */
-    this.addError = function(...argsArr) {
-        const name = 'error';
-        const args = [
-            name,
-            ...argsArr,
-        ];
-        
-        return Events.add(...args);
-    };
-    
-    /**
-     * safe add load click listener
-     *
-     * @param listener
-     */
-    this.addLoad = function(...argsArr) {
-        const name = 'load';
-        const args = [
-            name,
-            ...argsArr,
-        ];
-        
-        return Events.add(...args);
+    this.addLoad = function(...args) {
+        return Events.add('load', ...args);
     };
     
     function checkType(type) {
