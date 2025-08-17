@@ -248,7 +248,7 @@ function toggleSelect(key, files) {
     
     const [file] = files;
     
-    if (isMac && key.meta || key.ctrl)
+    if (isMac && key.meta)
         return DOM.toggleSelectedFile(file);
     
     if (key.shift)
