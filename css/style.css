@@ -187,6 +187,7 @@ a:active {
 }
 
 .selected-file,
+.selected-file > span,
 .selected-file .name > a {
     color: rgb(254 159 224);
 }
