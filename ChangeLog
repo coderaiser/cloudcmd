@@ -1,3 +1,10 @@
+2025.08.30, v18.7.4
+
+fix:
+- a6d18ddb select file: name -> line
+- 2077468a client: listeners: click: avoid select on conext menu
+- 64e4aba4 client: menu: before show: unsetBind
+
 2025.07.26, v18.7.3
 
 fix:
