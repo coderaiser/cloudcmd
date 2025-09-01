@@ -213,6 +213,7 @@ function beforeShow(callback, params) {
             y: params.y,
         },
     } = params;
+    
     const {x, y} = position;
     
     const el = DOM.getCurrentByPosition({
