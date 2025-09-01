@@ -111,7 +111,10 @@ module.exports.initKeysPanel = () => {
     if (!keysElement)
         return;
     
-    Events.addClick(keysElement, ({target}) => {
+    Events.addClick(keysElement, (event) => {
+        event.stopPropagation();
+        
+        const {target} = event;
         const {id} = target;
         const operation = (name) => {
             const {Operation} = CloudCmd;

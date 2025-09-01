@@ -26,6 +26,12 @@ module.exports = async (config) => {
     const prefix = getPrefix(config.prefix);
     
     window.CloudCmd.init(prefix, config);
+    
+    if (window.CloudCmd.config('menu') === 'aleman')
+        setTimeout(() => {
+            import('https://esm.sh/@putout/processor-html');
+            import('https://esm.sh/@putout/bundle');
+        }, 100);
 };
 window.CloudCmd = module.exports;
 
@@ -61,3 +67,4 @@ async function register(config) {
     
     listenSW(sw, 'updatefound', onUpdateFound(config));
 }
+

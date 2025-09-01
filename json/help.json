@@ -20,6 +20,7 @@
     "--confirm-move             ": "confirm move",
     "--open                     ": "open web browser when server started",
     "--name                     ": "set tab name in web browser",
+    "--menu                     ": "set menu: \"supermenu\" or \"aleman\"",
     "--one-file-panel           ": "show one file panel",
     "--keys-panel               ": "show keys panel",
     "--config-dialog            ": "enable config dialog",

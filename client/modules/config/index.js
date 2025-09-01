@@ -135,6 +135,7 @@ async function fillTemplate() {
     
     const {
         editor,
+        menu,
         packer,
         columns,
         theme,
@@ -142,6 +143,7 @@ async function fillTemplate() {
         ...obj
     } = input.convert(config);
     
+    obj[`${menu}-selected`] = 'selected';
     obj[`${editor}-selected`] = 'selected';
     obj[`${packer}-selected`] = 'selected';
     obj[`${columns}-selected`] = 'selected';

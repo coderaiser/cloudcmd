@@ -62,6 +62,7 @@ const yargsOptions = {
         'terminal-path',
         'terminal-command',
         'columns',
+        'menu',
         'theme',
         'import-url',
         'import-token',
@@ -106,6 +107,7 @@ const yargsOptions = {
         'online': config('online'),
         'open': choose(env.bool('open'), config('open')),
         'editor': env('editor') || config('editor'),
+        'menu': env('menu') || config('menu'),
         'packer': config('packer') || 'tar',
         'zip': config('zip'),
         'username': env('username') || config('username'),
@@ -199,6 +201,7 @@ async function main() {
     config('terminalCommand', args.terminalCommand);
     config('terminalAutoRestart', args.terminalAutoRestart);
     config('editor', args.editor);
+    config('menu', args.menu);
     config('prefix', prefixer(args.prefix));
     config('prefixSocket', prefixer(args.prefixSocket));
     config('root', args.root || '/');
@@ -232,6 +235,7 @@ async function main() {
         prefixSocket: config('prefixSocket'),
         columns: config('columns'),
         theme: config('theme'),
+        menu: config('menu'),
     };
     
     const password = env('password') || args.password;

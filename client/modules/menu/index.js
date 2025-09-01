@@ -4,12 +4,11 @@
 
 const exec = require('execon');
 const wrap = require('wraptile');
-const supermenu = require('supermenu');
 const createElement = require('@cloudcmd/create-element');
 
-const {FS} = require('../../common/cloudfunc');
-const {getIdBySrc} = require('../dom/load');
-const RESTful = require('../dom/rest');
+const {FS} = require('../../../common/cloudfunc');
+const {getIdBySrc} = require('../../dom/load');
+const RESTful = require('../../dom/rest');
 
 const {config, Key} = CloudCmd;
 
@@ -32,7 +31,7 @@ module.exports.ENABLED = false;
 
 CloudCmd.Menu = exports;
 
-module.exports.init = () => {
+module.exports.init = async () => {
     const {isAuth, menuDataFile} = getFileMenuData();
     
     const fm = DOM.getFM();
@@ -46,8 +45,9 @@ module.exports.init = () => {
         type: 'file',
     });
     
-    MenuContext = supermenu(fm, options, menuData);
-    MenuContextFile = supermenu(fm, optionsFile, menuDataFile);
+    const {createCloudMenu} = await import('./cloudmenu.mjs');
+    MenuContext = await createCloudMenu(fm, options, menuData);
+    MenuContextFile = await createCloudMenu(fm, optionsFile, menuDataFile);
     
     MenuContext.addContextMenuListener();
     MenuContextFile.addContextMenuListener();
@@ -107,6 +107,7 @@ function getOptions({type}) {
     const options = {
         icon: true,
         beforeClose: Key.setBind,
+        beforeHide: Key.setBind,
         beforeShow: exec.with(beforeShow, func),
         beforeClick,
         name,
@@ -198,16 +199,17 @@ function isPath(x, y) {
     const el = document.elementFromPoint(x, y);
     const elements = panel.querySelectorAll('[data-name="js-path"] *');
     
-    return ~[].indexOf.call(elements, el);
+    return !~[].indexOf.call(elements, el);
 }
 
 function beforeShow(callback, params) {
     Key.unsetBind();
     
-    const {name} = params;
+    const {name, position = {x: params.x, y: params.y}} = params;
+    const {x, y} = position;
     const el = DOM.getCurrentByPosition({
-        x: params.x,
-        y: params.y,
+        x,
+        y,
     });
     
     const menuName = getMenuNameByEl(el);
@@ -223,7 +225,7 @@ function beforeShow(callback, params) {
     exec(callback);
     
     if (isShow)
-        isShow = isPath(params.x, params.y);
+        isShow = isPath(x, y);
     
     return isShow;
 }
@@ -341,3 +343,4 @@ function listener(event) {
         event.preventDefault();
     }
 }
+

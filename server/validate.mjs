@@ -34,6 +34,13 @@ export const editor = (name, {exit = _exit} = {}) => {
         exit('cloudcmd --editor: could be "dword", "edward" or "deepword" only');
 };
 
+export const menu = (name, {exit = _exit} = {}) => {
+    const reg = /^(supermenu|aleman)$/;
+    
+    if (!reg.test(name))
+        exit('cloudcmd --menu: could be "supermenu" or "aleman" only');
+};
+
 export const packer = (name, {exit = _exit} = {}) => {
     const reg = /^(tar|zip)$/;
     
