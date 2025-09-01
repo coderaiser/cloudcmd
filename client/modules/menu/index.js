@@ -46,6 +46,7 @@ module.exports.init = async () => {
     });
     
     const {createCloudMenu} = await import('./cloudmenu.mjs');
+    
     MenuContext = await createCloudMenu(fm, options, menuData);
     MenuContextFile = await createCloudMenu(fm, optionsFile, menuDataFile);
     
@@ -205,8 +206,15 @@ function isPath(x, y) {
 function beforeShow(callback, params) {
     Key.unsetBind();
     
-    const {name, position = {x: params.x, y: params.y}} = params;
+    const {
+        name,
+        position = {
+            x: params.x,
+            y: params.y,
+        },
+    } = params;
     const {x, y} = position;
+    
     const el = DOM.getCurrentByPosition({
         x,
         y,
@@ -343,4 +351,3 @@ function listener(event) {
         event.preventDefault();
     }
 }
-

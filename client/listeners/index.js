@@ -116,6 +116,7 @@ module.exports.initKeysPanel = () => {
         
         const {target} = event;
         const {id} = target;
+        
         const operation = (name) => {
             const {Operation} = CloudCmd;
             
