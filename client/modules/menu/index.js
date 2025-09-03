@@ -47,8 +47,10 @@ module.exports.init = async () => {
     
     const {createCloudMenu} = await import('./cloudmenu.mjs');
     
-    MenuContext = await createCloudMenu(fm, options, menuData);
-    MenuContextFile = await createCloudMenu(fm, optionsFile, menuDataFile);
+    const {name} = fm.dataset;
+    
+    MenuContext = await createCloudMenu(name, options, menuData);
+    MenuContextFile = await createCloudMenu(name, optionsFile, menuDataFile);
     
     MenuContext.addContextMenuListener();
     MenuContextFile.addContextMenuListener();
@@ -352,3 +354,4 @@ function listener(event) {
         event.preventDefault();
     }
 }
+

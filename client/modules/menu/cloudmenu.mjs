@@ -21,5 +21,10 @@ async function loadMenu() {
         return createMenu;
     }
     
-    return supermenu;
+    return createSupermenu;
+}
+
+function createSupermenu(name, options, menuData) {
+    const element = document.querySelector('[data-name="js-fm"]');
+    return supermenu(element, options, menuData);
 }
