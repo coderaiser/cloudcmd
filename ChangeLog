@@ -1,3 +1,9 @@
+2025.09.14, v19.0.0
+
+feature:
+- 50b19dcc cloudcmd: menu: default: supermenu -> aleman
+- 5970f10a cloudcmd: drop support of node < 22
+
 2025.09.14, v18.8.11
 
 feature:
