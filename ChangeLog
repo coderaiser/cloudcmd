@@ -1,3 +1,11 @@
+2025.09.14, v19.0.1
+
+fix:
+- fc6304a1 tmpl: config: aleman, supermenu
+
+feature:
+- a05ecdb4 cloudcmd: aleman v1.10.0
+
 2025.09.14, v19.0.0
 
 feature:
