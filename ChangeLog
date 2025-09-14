@@ -1,3 +1,9 @@
+2025.09.14, v18.8.11
+
+feature:
+- b0360d8e cloudcmd: aleman v1.9.1
+- 00a20129 cloudcmd: html: importsmap: add
+
 2025.09.14, v18.8.10
 
 feature:
