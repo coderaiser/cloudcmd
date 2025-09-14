@@ -190,7 +190,8 @@ Then, start the server again with `cloudcmd` and reload the page.
 | `Ctrl + F5`          | sort by date
 | `Ctrl + F6`          | sort by size
 | `Ctrl + Command + .` | show/hide dot files
-| `Up`, `Down`         | file system navigation
+| `Up`                 | move cursor up
+| `Down`               | move cursor down
 | `Enter`              | change directory/view file
 | `Alt + Left/Right`   | show content of directory under cursor in target panel
 | `Alt + G`            | go to directory
@@ -646,10 +647,20 @@ Right-mouse click to show a context menu with these items:
 
 ### Hot keys
 
-|Key                    |Operation
-|:----------------------|:--------------------------------------------
-| `F9`                  | open
-| `Esc`                 | close
+| Key          | Operation               |
+|:-------------|:------------------------|
+| `F9`         | open                    |
+| `Esc`        | close                   |
+| `Up`, `j`    | move cursor up          |
+| `Down`, `k`  | move cursor down        |
+| `Left`, `h`  | close submenu           |
+| `Right`, `l` | open submenu            |
+| `G` or `$`   | navigate to bottom file |
+| `gg` or `^`  | navigate to top file    |
+
+Commands can be joined, for example:
+
+- `5j` will navigate **5** items below current;
 
 ## One file panel
 
