@@ -1,3 +1,8 @@
+2025.09.14, v18.8.10
+
+feature:
+- ddf9e455 cloudcmd: aleman v1.9.0
+
 2025.09.14, v18.8.9
 
 feature:
