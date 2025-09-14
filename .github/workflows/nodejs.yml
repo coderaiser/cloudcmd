@@ -11,6 +11,7 @@ jobs:
         node-version:
           - 20.x
           - 22.x
+          - 24.x
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
