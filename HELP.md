@@ -655,8 +655,8 @@ Right-mouse click to show a context menu with these items:
 | `Down`, `k`  | move cursor down        |
 | `Left`, `h`  | close submenu           |
 | `Right`, `l` | open submenu            |
-| `G` or `$`   | navigate to bottom file |
-| `gg` or `^`  | navigate to top file    |
+| `G` or `$`   | navigate to bottom      |
+| `gg` or `^`  | navigate to top         |
 
 Commands can be joined, for example:
 
