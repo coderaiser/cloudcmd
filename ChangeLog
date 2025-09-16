@@ -1,3 +1,11 @@
+2025.09.16, v19.0.5
+
+fix:
+- 64df81bc cloudcmd: client: listeners: f9: stopPropagation
+
+feature:
+- 38dd5101 cloudcmd: aleman v1.12.4
+
 2025.09.15, v19.0.4
 
 feature:
