@@ -112,8 +112,6 @@ module.exports.initKeysPanel = () => {
         return;
     
     Events.addClick(keysElement, (event) => {
-        event.stopPropagation();
-        
         const {target} = event;
         const {id} = target;
         
@@ -132,7 +130,10 @@ module.exports.initKeysPanel = () => {
             'f6': operation('move'),
             'f7': DOM.promptNewDir,
             'f8': operation('delete'),
-            'f9': CloudCmd.Menu.show,
+            'f9': () => {
+                event.stopPropagation();
+                CloudCmd.Menu.show();
+            },
             'f10': CloudCmd.Config.show,
             '~': CloudCmd.Konsole.show,
             'shift~': CloudCmd.Terminal.show,
