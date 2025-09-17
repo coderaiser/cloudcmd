@@ -151,7 +151,7 @@ function CloudCmdProto(DOM) {
         const [kebabModule] = query;
         const module = noJS(pascalCase(kebabModule.slice(1)));
         
-        const file = query[1];
+        const [, file] = query;
         const current = DOM.getCurrentByName(file);
         
         if (file && !current) {
