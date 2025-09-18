@@ -1,11 +1,11 @@
 'use strict';
 
 module.exports.createDepStore = () => {
-    let deps = {};
+    const deps = {};
     
     return (name, value) => {
         if (!name)
-            return deps = {};
+            return false;
         
         if (!value)
             return deps[name];
