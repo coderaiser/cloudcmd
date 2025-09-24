@@ -109,6 +109,7 @@ function getOptions({type}) {
     
     const options = {
         icon: true,
+        infiniteScroll: false,
         beforeClose: Key.setBind,
         beforeHide: Key.setBind,
         beforeShow: exec.with(beforeShow, func),
