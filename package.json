@@ -89,7 +89,7 @@
     "@cloudcmd/move-files": "^8.0.0",
     "@cloudcmd/read-files-sync": "^2.0.0",
     "@putout/cli-validate-args": "^2.0.0",
-    "aleman": "^1.16.1",
+    "aleman": "^1.16.2",
     "apart": "^2.0.0",
     "chalk": "^5.3.0",
     "compression": "^1.7.4",
