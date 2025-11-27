@@ -1,3 +1,11 @@
+2025.11.27, v19.0.14
+
+fix:
+- 2a525e9b aleman: copy paste in text editor (#449)
+
+feature:
+- 3ceb9a8c cloudcmd: open v11.0.0
+
 2025.09.26, v19.0.13
 
 feature:
