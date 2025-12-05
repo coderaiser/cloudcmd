@@ -174,7 +174,7 @@
     "emitify": "^4.0.1",
     "eslint": "^9.23.0",
     "eslint-plugin-n": "^17.0.0-4",
-    "eslint-plugin-putout": "^28.0.0",
+    "eslint-plugin-putout": "^29.0.2",
     "globals": "^16.3.0",
     "gritty": "^8.0.0",
     "gunzip-maybe": "^1.3.1",
