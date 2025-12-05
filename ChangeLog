@@ -1,3 +1,10 @@
+2025.12.05, v19.0.16
+
+feature:
+- 14ec19e8 cloudcmd: find-up v8.0.0
+- e6a00979 cloudcmd: eslint-plugin-putout v29.0.2
+- 5b5352c7 cloudcmd: putout v41.0.0
+
 2025.11.28, v19.0.15
 
 feature:
