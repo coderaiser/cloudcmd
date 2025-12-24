@@ -1,0 +1,14 @@
+{
+    "tasks": {
+        "start": "deno run -P=cloudcmd bin/cloudcmd.mjs"
+    },
+    "permissions": {
+        "cloudcmd": {
+            "env": true,
+            "read": true,
+            "sys": true,
+            "net": true,
+            "run": true
+        }
+    }
+}

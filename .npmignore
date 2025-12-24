@@ -18,6 +18,7 @@ now.json
 app.json
 bower.json
 manifest.yml
+deno.json
 
 bin/release.mjs
 
