@@ -3,9 +3,10 @@ import {fileURLToPath} from 'node:url';
 import process from 'node:process';
 import fs from 'node:fs';
 import fullstore from 'fullstore';
-import nanomemoizeDefault from 'nano-memoize';
+import * as nanomemoizeDefault from 'nano-memoize';
 import readFilesSync from '@cloudcmd/read-files-sync';
 
+const nanomemoize = nanomemoizeDefault.default.nanomemoize || nanomemoizeDefault.default;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const isMap = (a) => /\.(map|js)$/.test(a);
@@ -19,8 +20,6 @@ export const isDev = _isDev;
 export const getThemes = ({isDev = _isDev()} = {}) => {
     return readFilesSyncMemo(isDev);
 };
-
-const {nanomemoize} = nanomemoizeDefault;
 
 const readFilesSyncMemo = nanomemoize((isDev) => {
     const dist = getDist(isDev);
