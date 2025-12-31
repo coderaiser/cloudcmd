@@ -141,7 +141,7 @@
     "squad": "^3.0.0",
     "table": "^6.0.1",
     "try-catch": "^4.0.4",
-    "try-to-catch": "^3.0.0",
+    "try-to-catch": "^4.0.0",
     "tryrequire": "^3.0.0",
     "win32": "^7.0.0",
     "wraptile": "^3.0.0",
