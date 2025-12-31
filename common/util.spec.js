@@ -2,7 +2,7 @@
 
 const test = require('supertape');
 const {reRequire} = require('mock-require');
-const tryCatch = require('try-catch');
+const {tryCatch} = require('try-catch');
 const Util = require('./util');
 
 const {
@@ -119,13 +119,13 @@ test('util: escapeRegExp', (t) => {
 });
 
 test('util: scope', (t) => {
-    global.window = {};
+    globalThis.window = {};
     
     reRequire('./util');
     
     t.pass('should set window in scope');
     
-    delete global.window;
+    delete globalThis.window;
     
     t.end();
 });

@@ -296,7 +296,7 @@ module.exports.isCurrentIsDir = (currentFile) => {
     const path = DOM.getCurrentPath(current);
     const fileType = DOM.getCurrentType(current);
     
-    const isZip = /\.zip$/.test(path);
+    const isZip = path.endsWith('.zip');
     const isDir = /^directory(-link)?/.test(fileType);
     
     return isDir || isZip;

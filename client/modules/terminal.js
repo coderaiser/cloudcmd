@@ -2,7 +2,7 @@
 
 /* global CloudCmd */
 /* global gritty */
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 
 require('../../css/terminal.css');
 

@@ -5,7 +5,7 @@ const testRegExp = currify((name, reg) => reg.test(name));
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
 
 const isPDF = (a) => /\.pdf$/i.test(a);
-const isHTML = (a) => /\.html$/.test(a);
+const isHTML = (a) => a.endsWith('.html');
 const isMarkdown = (a) => /.\.md$/.test(a);
 
 module.exports = (name) => {

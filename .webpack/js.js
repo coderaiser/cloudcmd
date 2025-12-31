@@ -31,7 +31,7 @@ const devtool = isDev ? 'eval' : 'source-map';
 const notEmpty = (a) => a;
 const clean = (array) => array.filter(notEmpty);
 
-const noParse = (a) => /\.spec\.js$/.test(a);
+const noParse = (a) => a.endsWith('.spec.js');
 const options = {
     babelrc: true,
 };

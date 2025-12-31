@@ -1,5 +1,5 @@
 import {test, stub} from 'supertape';
-import tryCatch from 'try-catch';
+import {tryCatch} from 'try-catch';
 import * as validate from './validate.mjs';
 import cloudcmd from './cloudcmd.mjs';
 

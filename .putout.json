@@ -46,6 +46,9 @@
         },
         "vim.js": {
             "merge-duplicate-functions": "off"
+        },
+        "common": {
+            "nodejs/declare": "off"
         }
     }
 }

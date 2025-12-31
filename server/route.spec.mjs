@@ -2,7 +2,7 @@ import path, {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {Readable} from 'node:stream';
 import fs from 'node:fs';
-import tryToCatch from 'try-to-catch';
+import {tryToCatch} from 'try-to-catch';
 import {test, stub} from 'supertape';
 import serveOnce from 'serve-once';
 import cloudcmd from './cloudcmd.mjs';

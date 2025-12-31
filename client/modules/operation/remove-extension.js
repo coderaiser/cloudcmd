@@ -9,10 +9,10 @@ module.exports = (name) => {
 };
 
 function getExtension(name) {
-    if (/\.tar\.gz$/.test(name))
+    if (name.endsWith('.tar.gz'))
         return '.tar.gz';
     
-    if (/\.tar\.bz2$/.test(name))
+    if (name.endsWith('.tar.bz2'))
         return '.tar.bz2';
     
     return getExt(name);

@@ -8,7 +8,7 @@ CloudCmd.Konsole = exports;
 
 const exec = require('execon');
 const currify = require('currify');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const loadJS = require('load.js').js;
 const createElement = require('@cloudcmd/create-element');
 

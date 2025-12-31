@@ -2,7 +2,7 @@
 
 const autoGlobals = require('auto-globals');
 const stub = require('@cloudcmd/stub');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const wraptile = require('wraptile');
 const defaultMenu = require('./user-menu');
 

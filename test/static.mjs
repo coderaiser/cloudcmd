@@ -1,3 +1,4 @@
+import {Buffer} from 'node:buffer';
 import serveOnce from 'serve-once';
 import test from 'supertape';
 import criton from 'criton';

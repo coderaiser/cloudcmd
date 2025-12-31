@@ -2,7 +2,7 @@ import {homedir} from 'node:os';
 import {readFile as _readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import montag from 'montag';
-import tryToCatch from 'try-to-catch';
+import {tryToCatch} from 'try-to-catch';
 import currify from 'currify';
 import {putout, codeframe} from 'putout';
 

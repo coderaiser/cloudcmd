@@ -8,7 +8,7 @@ const currify = require('currify');
 const wraptile = require('wraptile');
 const squad = require('squad');
 const {promisify} = require('es6-promisify');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 

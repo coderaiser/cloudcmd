@@ -8,8 +8,8 @@ const wraptile = require('wraptile');
 const fullstore = require('fullstore');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
-const tryCatch = require('try-catch');
-const tryToCatch = require('try-to-catch');
+const {tryCatch} = require('try-catch');
+const {tryToCatch} = require('try-to-catch');
 const {codeFrameColumns} = require('@babel/code-frame');
 
 const Images = require('../../dom/images');

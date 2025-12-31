@@ -6,7 +6,7 @@ import rendy from 'rendy';
 import format from 'format-io';
 import currify from 'currify';
 import wraptile from 'wraptile';
-import tryToCatch from 'try-to-catch';
+import {tryToCatch} from 'try-to-catch';
 import once from 'once';
 import pipe from 'pipe-io';
 import {contentType} from 'mime-types';

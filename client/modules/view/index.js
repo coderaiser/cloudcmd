@@ -7,7 +7,7 @@ require('../../../css/view.css');
 const rendy = require('rendy');
 const currify = require('currify');
 const wraptile = require('wraptile');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const load = require('load.js');
 
 const modal = require('@cloudcmd/modal');

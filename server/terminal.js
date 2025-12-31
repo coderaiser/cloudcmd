@@ -1,6 +1,6 @@
 'use strict';
 
-const tryCatch = require('try-catch');
+const {tryCatch} = require('try-catch');
 
 const noop = (req, res, next) => {
     next && next();

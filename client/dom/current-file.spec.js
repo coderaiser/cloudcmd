@@ -291,7 +291,7 @@ function getDOM(overrides = {}) {
         getByDataName = stub(),
         isContainClass = stub(),
         getCurrentType = stub(),
-        getCurrentPath = stub(),
+        getCurrentPath = stub().returns(''),
     } = overrides;
     
     return {

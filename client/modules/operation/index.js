@@ -10,7 +10,7 @@ const wraptile = require('wraptile');
 const {promisify} = require('es6-promisify');
 const exec = require('execon');
 const load = require('load.js');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 
 const {encode} = require('../../../common/entity');
 const removeExtension = require('./remove-extension');

@@ -2,7 +2,7 @@
 
 /* global CloudCmd */
 const exec = require('execon');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const loadJS = require('load.js').js;
 
 const pascalCase = require('just-pascal-case');

@@ -1,6 +1,6 @@
 'use strict';
 
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 
 module.exports.registerSW = registerSW;
 module.exports.unregisterSW = unregisterSW;

@@ -11,13 +11,13 @@ const {homedir} = require('node:os');
 const currify = require('currify');
 
 const wraptile = require('wraptile');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 const pullout = require('pullout');
 const ponse = require('ponse');
 const jonny = require('jonny');
 const jju = require('jju');
 const writejson = require('writejson');
-const tryCatch = require('try-catch');
+const {tryCatch} = require('try-catch');
 const criton = require('criton');
 const exit = require(`${DIR_SERVER}exit`);
 

@@ -2,7 +2,7 @@
 
 import {promisify} from 'node:util';
 import process from 'node:process';
-import tryToCatch from 'try-to-catch';
+import {tryToCatch} from 'try-to-catch';
 import {createSimport} from 'simport';
 import minor from 'minor';
 import _place from 'place';

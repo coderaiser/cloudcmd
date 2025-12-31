@@ -3,7 +3,7 @@ import {promisify} from 'node:util';
 import process from 'node:process';
 import currify from 'currify';
 import squad from 'squad';
-import tryToCatch from 'try-to-catch';
+import {tryToCatch} from 'try-to-catch';
 import opn from 'open';
 import express from 'express';
 import {Server} from 'socket.io';

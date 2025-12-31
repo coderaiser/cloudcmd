@@ -1,7 +1,7 @@
 'use strict';
 
 const test = require('supertape');
-const tryCatch = require('try-catch');
+const {tryCatch} = require('try-catch');
 
 const datetime = require('./datetime');
 
@@ -16,11 +16,11 @@ test('common: datetime', (t) => {
 });
 
 test('common: datetime: no arg', (t) => {
-    const {Date} = global;
+    const {Date} = globalThis;
     
     let called = false;
     
-    global.Date = class extends Date {
+    globalThis.Date = class extends Date {
         constructor() {
             super();
             called = true;
@@ -29,7 +29,7 @@ test('common: datetime: no arg', (t) => {
     
     datetime();
     
-    global.Date = Date;
+    globalThis.Date = Date;
     
     t.ok(called, 'should call new Date');
     t.end();

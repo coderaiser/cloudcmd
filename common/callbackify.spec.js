@@ -1,7 +1,7 @@
 'use strict';
 
 const {promisify} = require('node:util');
-const tryToCatch = require('try-to-catch');
+const {tryToCatch} = require('try-to-catch');
 
 const {test, stub} = require('supertape');
 

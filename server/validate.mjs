@@ -1,5 +1,5 @@
 import {statSync as _statSync} from 'node:fs';
-import tryCatch from 'try-catch';
+import {tryCatch} from 'try-catch';
 import _exit from './exit.js';
 import {getColumns as _getColumns} from './columns.mjs';
 import {getThemes as _getThemes} from './theme.mjs';

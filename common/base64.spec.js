@@ -1,20 +1,19 @@
 'use strict';
 
 const {test, stub} = require('supertape');
-
 const {btoa, atob} = require('./base64');
 
 test('btoa: browser', (t) => {
-    const btoaOriginal = global.btoa;
+    const btoaOriginal = globalThis.btoa;
     const btoaStub = stub();
     const str = 'hello';
     
-    global.btoa = btoaStub;
+    globalThis.btoa = btoaStub;
     
     btoa(str);
-    global.btoa = btoaOriginal;
+    globalThis.btoa = btoaOriginal;
     
-    t.calledWith(btoaStub, [str], 'should call global.btoa');
+    t.calledWith(btoaStub, [str], 'should call globalThis.btoa');
     t.end();
 });
 
@@ -29,18 +28,18 @@ test('btoa: node', (t) => {
 });
 
 test('atob: browser', (t) => {
-    const atobOriginal = global.atob;
+    const atobOriginal = globalThis.atob;
     const atobStub = stub();
     
     const str = 'hello';
     
-    global.atob = atobStub;
+    globalThis.atob = atobStub;
     
     atob(str);
     
-    global.atob = atobOriginal;
+    globalThis.atob = atobOriginal;
     
-    t.calledWith(atobStub, [str], 'should call global.btoa');
+    t.calledWith(atobStub, [str], 'should call globalThis.btoa');
     t.end();
 });
 
