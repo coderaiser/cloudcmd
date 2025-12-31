@@ -1,3 +1,12 @@
+2025.12.31, v19.1.0
+
+feature:
+- 0ff16314 cloudcmd: redlint v5.0.0
+- 43edba8c cloudcmd: try-to-catch v4.0.0
+- 06f3b782 cloudcmd: try-catch v4.0.4
+- dfcd6557 deno config: add
+- ab20a462 server: bun support (oven-sh/bun#25674)
+
 2025.12.24, v19.0.17
 
 feature:
