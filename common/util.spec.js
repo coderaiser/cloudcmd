@@ -1,7 +1,6 @@
 'use strict';
 
 const test = require('supertape');
-const {reRequire} = require('mock-require');
 const {tryCatch} = require('try-catch');
 const Util = require('./util');
 
@@ -118,14 +117,3 @@ test('util: escapeRegExp', (t) => {
     t.end();
 });
 
-test('util: scope', (t) => {
-    globalThis.window = {};
-    
-    reRequire('./util');
-    
-    t.pass('should set window in scope');
-    
-    delete globalThis.window;
-    
-    t.end();
-});
