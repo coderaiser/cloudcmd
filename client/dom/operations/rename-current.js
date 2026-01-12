@@ -3,21 +3,29 @@
 /* global CloudCmd */
 const capitalize = require('just-capitalize');
 
-const Dialog = require('../dialog');
+const _Dialog = require('../dialog');
 const Storage = require('../storage');
 const RESTful = require('../rest');
 
-const {
-    isCurrentFile,
-    getCurrentName,
-    getCurrentFile,
-    getCurrentByName,
-    getCurrentType,
-    getCurrentDirPath,
-    setCurrentName,
-} = require('../current-file');
+const _currentFile = require('../current-file');
 
-module.exports = async (current) => {
+module.exports = async (current, overrides = {}) => {
+    const {
+        refresh = CloudCmd.refresh,
+        Dialog = _Dialog,
+        currentFile = _currentFile,
+    } = overrides;
+    
+    const {
+        isCurrentFile,
+        getCurrentName,
+        getCurrentFile,
+        getCurrentByName,
+        getCurrentType,
+        getCurrentDirPath,
+        setCurrentName,
+    } = currentFile;
+    
     if (!isCurrentFile(current))
         current = getCurrentFile();
     
@@ -58,5 +66,5 @@ module.exports = async (current) => {
     setCurrentName(to, current);
     
     Storage.remove(dirPath);
-    CloudCmd.refresh();
+    refresh();
 };

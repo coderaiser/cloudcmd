@@ -2,23 +2,20 @@
 
 const {test, stub} = require('supertape');
 
-const mockRequire = require('mock-require');
-
-const {reRequire, stopAll} = mockRequire;
+const renameCurrent = require('./rename-current');
 
 test('cloudcmd: client: dom: renameCurrent: isCurrentFile', async (t) => {
     const current = {};
     const isCurrentFile = stub();
     
-    mockRequire('../dialog', stubDialog());
-    mockRequire('../current-file', stubCurrentFile({
+    const currentFile = stubCurrentFile({
         isCurrentFile,
-    }));
+    });
     
-    const renameCurrent = reRequire('./rename-current');
-    await renameCurrent(current);
-    
-    stopAll();
+    await renameCurrent(current, {
+        Dialog: stubDialog(),
+        currentFile,
+    });
     
     t.calledWith(isCurrentFile, [current], 'should call isCurrentFile');
     t.end();
@@ -27,11 +24,6 @@ test('cloudcmd: client: dom: renameCurrent: isCurrentFile', async (t) => {
 test('cloudcmd: client: dom: renameCurrent: file exist', async (t) => {
     const current = {};
     const name = 'hello';
-    const {CloudCmd} = global;
-    
-    global.CloudCmd = {
-        refresh: stub(),
-    };
     
     const prompt = stub().returns([null, name]);
     const confirm = stub().returns([true]);
@@ -39,24 +31,22 @@ test('cloudcmd: client: dom: renameCurrent: file exist', async (t) => {
     const getCurrentByName = stub().returns(current);
     const getCurrentType = stub().returns('directory');
     
-    mockRequire('../dialog', stubDialog({
+    const Dialog = stubDialog({
         confirm,
         prompt,
-    }));
+    });
     
-    mockRequire('../current-file', stubCurrentFile({
+    const currentFile = stubCurrentFile({
         getCurrentByName,
         getCurrentType,
-    }));
+    });
     
-    const renameCurrent = reRequire('./rename-current');
-    await renameCurrent();
+    await renameCurrent(null, {
+        Dialog,
+        currentFile,
+    });
     
     const expected = 'Directory "hello" already exists. Proceed?';
-    
-    global.CloudCmd = CloudCmd;
-    
-    stopAll();
     
     t.calledWith(confirm, [expected], 'should call confirm');
     t.end();
