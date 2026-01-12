@@ -1,3 +1,12 @@
+2026.01.12, v19.1.1
+
+feature:
+- 5cc6f79d cloudcmd: @cloudcmd/stub v5.0.0
+- 024bc413 cloudcmd: fullstore v4.0.0
+- 53f6f9e7 cloudcmd: globals v17.0.0
+- 6d21c539 cloudcmd: madrun v12.1.0
+- 253389ea cloudcmd: supertape v12.0.0
+
 2025.12.31, v19.1.0
 
 feature:
