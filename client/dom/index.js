@@ -729,17 +729,19 @@ module.exports.getPackerExt = (type) => {
     return '.tar.gz';
 };
 
-module.exports.goToDirectory = async () => {
-    const msg = 'Go to directory:';
+module.exports.goToDirectory = async (overrides = {}) => {
     const {Dialog} = DOM;
+    const {prompt = Dialog.prompt, changeDir = CloudCmd.changeDir} = overrides;
+    
+    const msg = 'Go to directory:';
     const {dirPath} = CurrentInfo;
     
-    const [cancel, path = dirPath] = await Dialog.prompt(msg, dirPath);
+    const [cancel, path = dirPath] = await prompt(msg, dirPath);
     
     if (cancel)
         return;
     
-    await CloudCmd.changeDir(path);
+    await changeDir(path);
 };
 
 module.exports.duplicatePanel = async () => {
