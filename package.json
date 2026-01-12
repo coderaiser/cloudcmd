@@ -108,7 +108,7 @@
     "find-up": "^8.0.0",
     "for-each-key": "^2.0.0",
     "format-io": "^2.0.0",
-    "fullstore": "^3.0.0",
+    "fullstore": "^4.0.0",
     "http-auth": "^4.2.1",
     "inly": "^5.0.0",
     "jaguar": "^6.0.0",

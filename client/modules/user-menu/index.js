@@ -5,7 +5,7 @@ require('../../../css/user-menu.css');
 
 const currify = require('currify');
 const wraptile = require('wraptile');
-const fullstore = require('fullstore');
+const {fullstore} = require('fullstore');
 const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 const {tryCatch} = require('try-catch');

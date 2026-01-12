@@ -1,6 +1,6 @@
 'use strict';
 
-const fullstore = require('fullstore');
+const {fullstore} = require('fullstore');
 
 const {
     J,

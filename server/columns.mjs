@@ -2,7 +2,7 @@ import path, {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import process from 'node:process';
 import fs from 'node:fs';
-import fullstore from 'fullstore';
+import {fullstore} from 'fullstore';
 import * as nanomemoizeDefault from 'nano-memoize';
 import readFilesSync from '@cloudcmd/read-files-sync';
 

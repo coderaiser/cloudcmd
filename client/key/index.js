@@ -2,7 +2,7 @@
 
 /* global CloudCmd, DOM */
 const clipboard = require('@cloudcmd/clipboard');
-const fullstore = require('fullstore');
+const {fullstore} = require('fullstore');
 
 const Buffer = require('../dom/buffer');
 const Events = require('../dom/events');

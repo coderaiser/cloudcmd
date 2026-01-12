@@ -116,4 +116,3 @@ test('util: escapeRegExp', (t) => {
     t.equal(escapeRegExp('#hello'), '\\#hello');
     t.end();
 });
-
