@@ -1,18 +1,14 @@
 'use strict';
 
 const {test, stub} = require('supertape');
-
-const mockRequire = require('mock-require');
-
-const {reRequire, stopAll} = mockRequire;
+const io = require('.');
 
 test('client: dom: io', (t) => {
     const sendRequest = stub();
-    mockRequire('./send-request', sendRequest);
     
-    const io = reRequire('.');
-    
-    io.createDirectory('/hello');
+    io.createDirectory('/hello', {
+        sendRequest,
+    });
     
     const expected = {
         imgPosition: {
@@ -21,8 +17,6 @@ test('client: dom: io', (t) => {
         method: 'PUT',
         url: '/fs/hello?dir',
     };
-    
-    stopAll();
     
     t.calledWith(sendRequest, [expected]);
     t.end();

@@ -1,14 +1,14 @@
 'use strict';
 
 const {FS} = require('../../../common/cloudfunc');
-const sendRequest = require('./send-request');
+const _sendRequest = require('./send-request');
 
 const imgPosition = {
     top: true,
 };
 
 module.exports.delete = async (url, data) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'DELETE',
         url: FS + url,
         data,
@@ -19,7 +19,7 @@ module.exports.delete = async (url, data) => {
 };
 
 module.exports.patch = async (url, data) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'PATCH',
         url: FS + url,
         data,
@@ -28,7 +28,7 @@ module.exports.patch = async (url, data) => {
 };
 
 module.exports.write = async (url, data) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'PUT',
         url: FS + url,
         data,
@@ -36,7 +36,11 @@ module.exports.write = async (url, data) => {
     });
 };
 
-module.exports.createDirectory = async (url) => {
+module.exports.createDirectory = async (url, overrides = {}) => {
+    const {
+        sendRequest = _sendRequest,
+    } = overrides;
+    
     return await sendRequest({
         method: 'PUT',
         url: `${FS}${url}?dir`,
@@ -47,7 +51,7 @@ module.exports.createDirectory = async (url) => {
 module.exports.read = async (url, dataType = 'text') => {
     const notLog = !url.includes('?');
     
-    return await sendRequest({
+    return await _sendRequest({
         method: 'GET',
         url: FS + url,
         notLog,
@@ -56,7 +60,7 @@ module.exports.read = async (url, dataType = 'text') => {
 };
 
 module.exports.copy = async (from, to, names) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'PUT',
         url: '/copy',
         data: {
@@ -69,7 +73,7 @@ module.exports.copy = async (from, to, names) => {
 };
 
 module.exports.pack = async (data) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'PUT',
         url: '/pack',
         data,
@@ -77,7 +81,7 @@ module.exports.pack = async (data) => {
 };
 
 module.exports.extract = async (data) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'PUT',
         url: '/extract',
         data,
@@ -85,7 +89,7 @@ module.exports.extract = async (data) => {
 };
 
 module.exports.move = async (from, to, names) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'PUT',
         url: '/move',
         data: {
@@ -98,7 +102,7 @@ module.exports.move = async (from, to, names) => {
 };
 
 module.exports.rename = async (from, to) => {
-    return await sendRequest({
+    return await _sendRequest({
         method: 'PUT',
         url: '/rename',
         data: {
@@ -111,7 +115,7 @@ module.exports.rename = async (from, to) => {
 
 module.exports.Config = {
     read: async () => {
-        return await sendRequest({
+        return await _sendRequest({
             method: 'GET',
             url: '/config',
             imgPosition,
@@ -120,7 +124,7 @@ module.exports.Config = {
     },
     
     write: async (data) => {
-        return await sendRequest({
+        return await _sendRequest({
             method: 'PATCH',
             url: '/config',
             data,
@@ -131,7 +135,7 @@ module.exports.Config = {
 
 module.exports.Markdown = {
     read: async (url) => {
-        return await sendRequest({
+        return await _sendRequest({
             method: 'GET',
             url: `/markdown${url}`,
             imgPosition,
@@ -140,7 +144,7 @@ module.exports.Markdown = {
     },
     
     render: async (data) => {
-        return await sendRequest({
+        return await _sendRequest({
             method: 'PUT',
             url: '/markdown',
             data,
