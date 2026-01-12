@@ -3,7 +3,7 @@
 const autoGlobals = require('auto-globals');
 const tape = require('supertape');
 
-const stub = require('@cloudcmd/stub');
+const {stub} = require('@cloudcmd/stub');
 
 const {tryCatch} = require('try-catch');
 const {reRequire} = require('mock-require');

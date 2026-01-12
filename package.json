@@ -156,7 +156,7 @@
     "@cloudcmd/create-element": "^2.0.0",
     "@cloudcmd/modal": "^3.0.0",
     "@cloudcmd/olark": "^3.0.2",
-    "@cloudcmd/stub": "^4.0.1",
+    "@cloudcmd/stub": "^5.0.0",
     "@iocmd/wait": "^2.1.0",
     "@putout/eslint-flat": "^3.0.1",
     "@putout/plugin-cloudcmd": "^4.0.0",

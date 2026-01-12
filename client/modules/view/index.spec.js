@@ -3,7 +3,7 @@
 require('css-modules-require-hook/preset');
 
 const autoGlobals = require('auto-globals');
-const stub = require('@cloudcmd/stub');
+const {stub} = require('@cloudcmd/stub');
 const mockRequire = require('mock-require');
 const test = autoGlobals(require('supertape'));
 const {reRequire, stopAll} = mockRequire;
