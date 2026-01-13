@@ -6,11 +6,15 @@ const tape = require('supertape');
 const {stub} = require('@cloudcmd/stub');
 
 const {tryCatch} = require('try-catch');
-const {reRequire} = require('mock-require');
+const {
+    listenSW,
+    registerSW,
+    unregisterSW,
+} = require('./register');
+
 const test = autoGlobals(tape);
 
 test('sw: listen', (t) => {
-    const {listenSW} = reRequire('./register');
     const addEventListener = stub();
     const sw = {
         addEventListener,
@@ -23,7 +27,6 @@ test('sw: listen', (t) => {
 });
 
 test('sw: lesten: no sw', (t) => {
-    const {listenSW} = reRequire('./register');
     const [e] = tryCatch(listenSW, null, 'hello', 'world');
     
     t.notOk(e, 'should not throw');
@@ -31,8 +34,6 @@ test('sw: lesten: no sw', (t) => {
 });
 
 test('sw: register: registerSW: no serviceWorker', async (t, {navigator}) => {
-    const {registerSW} = reRequire('./register');
-    
     delete navigator.serviceWorker;
     
     await registerSW();
@@ -45,8 +46,6 @@ test('sw: register: registerSW: no https', async (t, {location, navigator}) => {
     const {register} = navigator.serviceWorker;
     
     location.protocol = 'http:';
-    
-    const {registerSW} = reRequire('./register');
     
     await registerSW();
     
@@ -61,8 +60,6 @@ test('sw: register: registerSW: http', async (t, {location, navigator}) => {
     });
     
     const {register} = navigator.serviceWorker;
-    
-    const {registerSW} = reRequire('./register');
     
     await registerSW();
     
@@ -79,8 +76,6 @@ test('sw: register: registerSW: https self-signed', async (t, {location, navigat
     const {register} = navigator.serviceWorker;
     register.throws(Error('Cannot register service worker!'));
     
-    const {registerSW} = reRequire('./register');
-    
     const result = await registerSW();
     
     t.notOk(result, 'should not throw');
@@ -91,8 +86,6 @@ test('sw: register: registerSW', async (t, {location, navigator}) => {
     location.hostname = 'localhost';
     
     const {register} = navigator.serviceWorker;
-    const {registerSW} = reRequire('./register');
-    
     await registerSW('/hello');
     
     t.calledWith(register, ['/hello/sw.js'], 'should call register');
@@ -106,8 +99,6 @@ test('sw: register: unregisterSW', async (t, {location, navigator}) => {
     const {register} = serviceWorker;
     
     register.returns(serviceWorker);
-    
-    const {unregisterSW} = reRequire('./register');
     
     await unregisterSW('/hello');
     
