@@ -9,6 +9,9 @@ const {
     selectFileNotParent,
 } = require('./set-current');
 
+const {DOM = {}, CloudCmd = {},
+} = globalThis;
+
 const {Dialog} = DOM;
 
 const DEPS = {

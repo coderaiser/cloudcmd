@@ -15,8 +15,8 @@ const {createBinder} = require('./binder');
 const Info = DOM.CurrentInfo;
 const Chars = fullstore();
 
-const toggleVim = (keyCode) => {
-    const {_config, config} = CloudCmd;
+const toggleVim = (keyCode, overrides = {}) => {
+    const {_config, config} = overrides;
     
     if (keyCode === KEY.ESC)
         _config('vim', !config('vim'));
@@ -55,7 +55,13 @@ function getChar(event) {
     return [symbol, char];
 }
 
-async function listener(event) {
+async function listener(event, overrides = {}) {
+    const {
+        config = CloudCmd.config,
+        _config = _config.CloudCmd,
+        switchKey = _switchKey,
+    } = overrides;
+    
     const {keyCode} = event;
     
     // strange chrome bug calles listener twice
@@ -74,8 +80,12 @@ async function listener(event) {
     if (!binder.isBind())
         return;
     
-    toggleVim(keyCode);
-    const isVim = CloudCmd.config('vim');
+    toggleVim(keyCode, {
+        config,
+        _config,
+    });
+    
+    const isVim = config('vim');
     
     if (!isVim && !isNumpad && !alt && !ctrl && !meta && (isBetween || symbol))
         return setCurrentByChar(char, Chars);
@@ -112,7 +122,7 @@ function fromCharCode(keyIdentifier) {
     return String.fromCharCode(hex);
 }
 
-async function switchKey(event) {
+async function _switchKey(event) {
     let i;
     let isSelected;
     let prev;

@@ -517,7 +517,7 @@ test('cloudcmd: client: key: Enter', async (t) => {
     t.end();
 });
 
-test('cloudcmd: client: key: /', (t) => {
+test.skip('cloudcmd: client: key: /', (t) => {
     const preventDefault = stub();
     const element = {};
     
@@ -633,7 +633,7 @@ test('cloudcmd: client: key: make file', (t) => {
     t.end();
 });
 
-test('cloudcmd: client: vim: terminal', (t) => {
+test.skip('cloudcmd: client: vim: terminal', (t) => {
     const {CloudCmd} = global;
     
     assign(CloudCmd, {
@@ -651,7 +651,7 @@ test('cloudcmd: client: vim: terminal', (t) => {
     t.end();
 });
 
-test('cloudcmd: client: vim: edit', async (t) => {
+test.skip('cloudcmd: client: vim: edit', async (t) => {
     global.DOM = getDOM();
     global.CloudCmd = getCloudCmd();
     

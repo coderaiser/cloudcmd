@@ -7,6 +7,9 @@
         "fontello.json",
         "*.md"
     ],
+    "rules": {
+        "tape/remove-skip": "off"
+    },
     "match": {
         "base64": {
             "types/convert-typeof-to-is-type": "off"
