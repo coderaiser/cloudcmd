@@ -1,10 +1,20 @@
 'use strict';
 
-/* global DOM */
 require('domtokenlist-shim');
 
-const scrollIntoViewIfNeeded = require('scroll-into-view-if-needed');
+const _scrollIntoViewIfNeeded = require('scroll-into-view-if-needed');
 
-DOM.scrollIntoViewIfNeeded = (el) => scrollIntoViewIfNeeded(el, {
-    block: 'nearest',
-});
+globalThis.DOM = globalThis.DOM || {};
+
+const scrollIntoViewIfNeeded = (el, overrides = {}) => {
+    const {
+        scroll = _scrollIntoViewIfNeeded,
+    } = overrides;
+    
+    return scroll(el, {
+        block: 'nearest',
+    });
+};
+
+globalThis.DOM.scrollIntoViewIfNeeded = scrollIntoViewIfNeeded;
+module.exports.scrollIntoViewIfNeeded = scrollIntoViewIfNeeded;
