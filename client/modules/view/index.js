@@ -2,6 +2,9 @@
 
 'use strict';
 
+const CloudCmd = globalThis.CloudCmd || {};
+const DOM = globalThis.DOM || {};
+
 require('../../../css/view.css');
 
 const rendy = require('rendy');
@@ -10,8 +13,8 @@ const wraptile = require('wraptile');
 const {tryToCatch} = require('try-to-catch');
 const load = require('load.js');
 
-const modal = require('@cloudcmd/modal');
-const createElement = require('@cloudcmd/create-element');
+const _modal = require('@cloudcmd/modal');
+const _createElement = require('@cloudcmd/create-element');
 
 const {time} = require('../../../common/util');
 const {FS} = require('../../../common/cloudfunc');
@@ -113,7 +116,7 @@ async function show(data, options = {}) {
     if (!options || options.bindKeys !== false)
         Events.addKey(listener);
     
-    El = createElement('div', {
+    El = _createElement('div', {
         className: 'view',
         notAppend: true,
     });
@@ -126,7 +129,7 @@ async function show(data, options = {}) {
         else
             El.append(data);
         
-        modal.open(El, initConfig(options));
+        _modal.open(El, initConfig(options));
         return;
     }
     
@@ -157,7 +160,10 @@ async function show(data, options = {}) {
 }
 
 module.exports._createIframe = createIframe;
-function createIframe(src) {
+function createIframe(src, overrides = {}) {
+    const {
+        createElement = _createElement,
+    } = overrides;
     const element = createElement('iframe', {
         src,
         width: '100%',
@@ -172,7 +178,8 @@ function createIframe(src) {
 }
 
 module.exports._viewHtml = viewHtml;
-function viewHtml(src) {
+function viewHtml(src, overrides = {}) {
+    const {modal = _modal} = overrides;
     modal.open(createIframe(src), Config);
 }
 
@@ -184,7 +191,7 @@ function viewPDF(src) {
     if (CloudCmd.config('showFileName'))
         options.title = Info.name;
     
-    modal.open(element, options);
+    _modal.open(element, options);
 }
 
 async function viewMedia(path) {
@@ -205,7 +212,7 @@ async function viewMedia(path) {
         },
     };
     
-    modal.open(element, allConfig);
+    _modal.open(element, allConfig);
 }
 
 async function viewFile() {
@@ -221,7 +228,7 @@ async function viewFile() {
         options.title = Info.name;
     
     El.append(element);
-    modal.open(El, options);
+    _modal.open(El, options);
 }
 
 const copy = (a) => assign({}, a);
@@ -253,7 +260,7 @@ function initConfig(options) {
 }
 
 function hide() {
-    modal.close();
+    _modal.close();
 }
 
 function viewImage(path, prefixURL) {
@@ -286,7 +293,7 @@ function viewImage(path, prefixURL) {
         ...imageConfig,
     };
     
-    modal.open(titles, config);
+    _modal.open(titles, config);
 }
 
 async function getMediaElement(src) {
@@ -311,7 +318,7 @@ async function getMediaElement(src) {
         name,
     });
     
-    const element = createElement('div', {
+    const element = _createElement('div', {
         innerHTML,
     });
     

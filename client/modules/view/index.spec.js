@@ -4,20 +4,18 @@ require('css-modules-require-hook/preset');
 
 const autoGlobals = require('auto-globals');
 const {stub} = require('@cloudcmd/stub');
-const mockRequire = require('mock-require');
+
 const test = autoGlobals(require('supertape'));
-const {reRequire, stopAll} = mockRequire;
+const {
+    _initConfig,
+    _viewHtml,
+    _Config,
+    _createIframe,
+} = require('.');
 
 test('cloudcmd: client: view: initConfig', (t) => {
     let config;
     let i = 0;
-    
-    const {CloudCmd, DOM} = global;
-    
-    global.CloudCmd = {};
-    global.DOM = {};
-    
-    const {_initConfig} = reRequire('.');
     
     const afterClose = () => ++i;
     const options = {
@@ -30,53 +28,31 @@ test('cloudcmd: client: view: initConfig', (t) => {
     config = _initConfig(options);
     config.afterClose();
     
-    global.CloudCmd = CloudCmd;
-    global.DOM = DOM;
-    
     t.equal(i, 2, 'should not change default config');
     t.end();
 });
 
 test('cloudcmd: client: view: initConfig: no options', (t) => {
-    const {CloudCmd, DOM} = global;
-    
-    global.CloudCmd = {};
-    global.DOM = {};
-    
-    const {_initConfig} = reRequire('.');
     const config = _initConfig();
-    
-    global.CloudCmd = CloudCmd;
-    global.DOM = DOM;
     
     t.equal(typeof config, 'object');
     t.end();
 });
 
 test('cloudcmd: client: view: html', (t) => {
-    const {CloudCmd, DOM} = global;
-    
-    global.CloudCmd = {};
-    global.DOM = {};
     const open = stub();
-    
-    mockRequire('@cloudcmd/modal', {
+    const modal = {
         open,
-    });
-    
-    const {_viewHtml, _Config} = reRequire('.');
+    };
     
     const src = '/hello.html';
     
-    _viewHtml(src);
-    
-    global.CloudCmd = CloudCmd;
-    global.DOM = DOM;
+    _viewHtml(src, {
+        modal,
+    });
     
     const [first] = open.args;
     const [arg] = first;
-    
-    stopAll();
     
     t.deepEqual(first, [arg, _Config]);
     t.end();
@@ -89,20 +65,17 @@ test('cloudcmd: client: view: createIframe', (t) => {
     };
     
     const createElement = stub().returns(el);
-    
-    mockRequire('@cloudcmd/create-element', createElement);
-    const {_createIframe} = reRequire('.');
-    
     const src = '/hello.html';
-    _createIframe(src);
+    
+    _createIframe(src, {
+        createElement,
+    });
     
     const expected = {
         src,
         height: '100%',
         width: '100%',
     };
-    
-    stopAll();
     
     t.calledWith(createElement, ['iframe', expected]);
     t.end();
@@ -116,13 +89,10 @@ test('cloudcmd: client: view: createIframe: returns', (t) => {
     
     const createElement = stub().returns(el);
     
-    mockRequire('@cloudcmd/create-element', createElement);
-    const {_createIframe} = reRequire('.');
-    
     const src = '/hello.html';
-    const result = _createIframe(src);
-    
-    stopAll();
+    const result = _createIframe(src, {
+        createElement,
+    });
     
     t.equal(result, el);
     t.end();
