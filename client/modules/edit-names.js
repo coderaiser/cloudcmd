@@ -1,20 +1,16 @@
 'use strict';
 
+const {tryToCatch} = require('try-to-catch');
+
 /* global CloudCmd, DOM */
 CloudCmd.EditNames = exports;
 
-const currify = require('currify');
 const exec = require('execon');
 const supermenu = require('supermenu');
 const multiRename = require('multi-rename');
 
-const reject = Promise.reject.bind(Promise);
-
 const Info = DOM.CurrentInfo;
 const {Dialog} = DOM;
-
-const refresh = currify(_refresh);
-const rename = currify(_rename);
 
 let Menu;
 
@@ -93,7 +89,7 @@ function setListeners() {
     DOM.Events.addOnce('contextmenu', element, setMenu);
 }
 
-function applyNames() {
+async function applyNames() {
     const dir = Info.dirPath;
     const from = getActiveNames();
     const nameIndex = from.indexOf(Info.name);
@@ -105,18 +101,18 @@ function applyNames() {
     
     const root = CloudCmd.config('root');
     
-    Promise
-        .resolve(root)
-        .then(rename(dir, from, to))
-        .then(refresh(to, nameIndex))
-        .catch(alert);
+    const response = rename(dir, from, to, root);
+    const [error] = await tryToCatch(refresh, to, nameIndex, response);
+    
+    if (error)
+        alert(error);
 }
 
-function _refresh(to, nameIndex, res) {
-    if (res.status === 404)
-        return res
-            .text()
-            .then(reject);
+function refresh(to, nameIndex, res) {
+    if (res.status === 404) {
+        const error = res.text();
+        throw error;
+    }
     
     const currentName = to[nameIndex];
     
@@ -132,7 +128,7 @@ function getDir(root, dir) {
     return root + dir;
 }
 
-function _rename(path, from, to, root) {
+function rename(path, from, to, root) {
     const dir = getDir(root, path);
     const {prefix} = CloudCmd;
     
@@ -172,8 +168,8 @@ function setMenu(event) {
     };
     
     const menuData = {
-        'Save           Ctrl+S': () => {
-            applyNames();
+        'Save           Ctrl+S': async () => {
+            await applyNames();
             hide();
         },
         'Go To Line     Ctrl+G': () => {
@@ -214,6 +210,7 @@ async function isChanged() {
     if (!editor.isChanged())
         return;
     
-    const [, names] = await Dialog.confirm(msg);
-    names && applyNames();
+    const [cancel] = await Dialog.confirm(msg);
+    
+    !cancel && await applyNames();
 }
