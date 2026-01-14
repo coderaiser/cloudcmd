@@ -58,7 +58,7 @@ function getChar(event) {
 async function listener(event, overrides = {}) {
     const {
         config = CloudCmd.config,
-        _config = _config.CloudCmd,
+        _config = CloudCmd._config,
         switchKey = _switchKey,
     } = overrides;
     
