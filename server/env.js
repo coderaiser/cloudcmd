@@ -5,7 +5,7 @@ const snake = require('just-snake-case');
 
 const up = (a) => a.toUpperCase();
 
-module.exports = parse;
+module.exports.parse = parse;
 module.exports.bool = (name) => {
     const value = parse(name);
     

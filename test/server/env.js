@@ -6,7 +6,7 @@ const env = require('../../server/env');
 
 test('env: small', (t) => {
     process.env.cloudcmd_hello = 'world';
-    t.equal(env('hello'), 'world', 'should parse string from env');
+    t.equal(env.parse('hello'), 'world', 'should parse string from env');
     
     delete process.env.cloudcmd_hello;
     t.end();
@@ -14,7 +14,7 @@ test('env: small', (t) => {
 
 test('env: big', (t) => {
     process.env.CLOUDCMD_HELLO = 'world';
-    t.equal(env('hello'), 'world', 'should parse string from env');
+    t.equal(env.parse('hello'), 'world', 'should parse string from env');
     
     delete process.env.CLOUDCMD_HELLO;
     t.end();

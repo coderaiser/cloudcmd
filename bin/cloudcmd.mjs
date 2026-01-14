@@ -101,27 +101,27 @@ const yargsOptions = {
     ],
     default: {
         'server': true,
-        'name': choose(env('name'), config('name')),
+        'name': choose(env.parse('name'), config('name')),
         'auth': choose(env.bool('auth'), config('auth')),
         'port': config('port'),
         'online': config('online'),
         'open': choose(env.bool('open'), config('open')),
-        'editor': env('editor') || config('editor'),
-        'menu': env('menu') || config('menu'),
+        'editor': env.parse('editor') || config('editor'),
+        'menu': env.parse('menu') || config('menu'),
         'packer': config('packer') || 'tar',
         'zip': config('zip'),
-        'username': env('username') || config('username'),
-        'root': choose(env('root'), config('root')),
-        'prefix': choose(env('prefix'), config('prefix')),
+        'username': env.parse('username') || config('username'),
+        'root': choose(env.parse('root'), config('root')),
+        'prefix': choose(env.parse('prefix'), config('prefix')),
         'console': choose(env.bool('console'), config('console')),
         'contact': choose(env.bool('contact'), config('contact')),
         'terminal': choose(env.bool('terminal'), config('terminal')),
-        'columns': env('columns') || config('columns') || '',
-        'theme': env('theme') || config('theme') || '',
+        'columns': env.parse('columns') || config('columns') || '',
+        'theme': env.parse('theme') || config('theme') || '',
         'vim': choose(env.bool('vim'), config('vim')),
         'log': config('log'),
         
-        'import-url': env('import_url') || config('importUrl'),
+        'import-url': env.parse('import_url') || config('importUrl'),
         'import-listen': choose(env.bool('import_listen'), config('importListen')),
         'import': choose(env.bool('import'), config('import')),
         'export': choose(env.bool('export'), config('export')),
@@ -132,15 +132,15 @@ const yargsOptions = {
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'config-auth': choose(env.bool('config_auth'), config('configAuth')),
-        'terminal-path': env('terminal_path') || config('terminalPath'),
-        'terminal-command': env('terminal_command') || config('terminalCommand'),
+        'terminal-path': env.parse('terminal_path') || config('terminalPath'),
+        'terminal-command': env.parse('terminal_command') || config('terminalCommand'),
         'terminal-auto-restart': choose(env.bool('terminal_auto_restart'), config('terminalAutoRestart')),
         'one-file-panel': choose(env.bool('one_file_panel'), config('oneFilePanel')),
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
         'keys-panel': env.bool('keys_panel') || config('keysPanel'),
-        'import-token': env('import_token') || config('importToken'),
-        'export-token': env('export_token') || config('exportToken'),
+        'import-token': env.parse('import_token') || config('importToken'),
+        'export-token': env.parse('export_token') || config('exportToken'),
         
         'dropbox': config('dropbox'),
         'dropbox-token': config('dropboxToken') || '',
@@ -238,7 +238,7 @@ async function main() {
         menu: config('menu'),
     };
     
-    const password = env('password') || args.password;
+    const password = env.parse('password') || args.password;
     
     if (password)
         config('password', await getPassword(password));
