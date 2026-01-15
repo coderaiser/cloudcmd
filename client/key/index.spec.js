@@ -15,7 +15,7 @@ const {stub} = supertape;
 global.DOM = getDOM();
 global.CloudCmd = getCloudCmd();
 
-test.skip('cloudcmd: client: key: enable vim', async (t) => {
+test('cloudcmd: client: key: enable vim', async (t) => {
     const vim = stub();
     const config = stub().returns(true);
     const _config = stub();

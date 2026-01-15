@@ -8,7 +8,7 @@ const Buffer = require('../dom/buffer');
 const Events = require('../dom/events');
 const KEY = require('./key');
 
-const vim = require('./vim');
+const _vim = require('./vim');
 const setCurrentByChar = require('./set-current-by-char');
 const {createBinder} = require('./binder');
 
@@ -60,6 +60,7 @@ async function listener(event, overrides = {}) {
         config = CloudCmd.config,
         _config = CloudCmd._config,
         switchKey = _switchKey,
+        vim = _vim,
     } = overrides;
     
     const {keyCode} = event;
@@ -97,7 +98,7 @@ async function listener(event, overrides = {}) {
         return;
     
     if (isVim)
-        vim(char, event);
+        await vim(char, event);
 }
 
 function getSymbol(shift, keyCode) {
