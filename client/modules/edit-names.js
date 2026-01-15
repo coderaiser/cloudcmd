@@ -7,7 +7,7 @@ CloudCmd.EditNames = exports;
 
 const exec = require('execon');
 const supermenu = require('supermenu');
-const multiRename = require('multi-rename');
+const {multiRename} = require('multi-rename');
 
 const Info = DOM.CurrentInfo;
 const {Dialog} = DOM;
