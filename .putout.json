@@ -8,7 +8,8 @@
         "*.md"
     ],
     "rules": {
-        "tape/remove-skip": "off"
+        "tape/remove-skip": "off",
+        "package-json/add-type": "off"
     },
     "match": {
         "base64": {

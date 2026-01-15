@@ -15,7 +15,7 @@ const currify = require('currify');
 const Images = require('./dom/images');
 
 const {unregisterSW} = require('./sw/register');
-const getJsonFromFileTable = require('./get-json-from-file-table');
+const {getJsonFromFileTable} = require('./get-json-from-file-table.mjs');
 const Key = require('./key');
 
 const {
