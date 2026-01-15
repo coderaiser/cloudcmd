@@ -32,7 +32,7 @@ module.exports.init = async () => {
 CloudCmd.Listeners = module.exports;
 
 const unselect = (event) => {
-    const isMac = /Mac/.test(window.navigator.platform);
+    const isMac = /Mac/.test(globalThis.navigator.platform);
     const {
         shiftKey,
         metaKey,
@@ -246,7 +246,7 @@ function onClick(event) {
 }
 
 function toggleSelect(key, files) {
-    const isMac = /Mac/.test(window.navigator.platform);
+    const isMac = /Mac/.test(globalThis.navigator.platform);
     
     if (!key)
         throw Error('key should not be undefined!');
@@ -480,7 +480,7 @@ function pop() {
 
 function resize() {
     Events.add('resize', () => {
-        const is = window.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH;
+        const is = globalThis.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH;
         
         if (!is)
             return;

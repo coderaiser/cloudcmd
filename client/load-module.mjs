@@ -1,10 +1,9 @@
 /* global CloudCmd */
 import exec from 'execon';
 import {tryToCatch} from 'try-to-catch';
-import {js} from 'load.js';
+import {js as loadJS} from 'load.js';
 import pascalCase from 'just-pascal-case';
 
-const loadJS = js;
 const noJS = (a) => a.replace(/.js$/, '');
 
 /**
@@ -50,9 +49,8 @@ export const loadModule = (params) => {
         const [e, a] = await tryToCatch(m);
         
         if (e)
-            return console.error(e);
+            return;
         
         return await a.show(...args);
     };
 };
-

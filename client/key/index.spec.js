@@ -12,8 +12,8 @@ const {getDOM, getCloudCmd} = require('./vim/globals.fixture');
 const test = autoGlobals(supertape);
 const {stub} = supertape;
 
-global.DOM = getDOM();
-global.CloudCmd = getCloudCmd();
+globalThis.DOM = getDOM();
+globalThis.CloudCmd = getCloudCmd();
 
 test('cloudcmd: client: key: enable vim', async (t) => {
     const vim = stub();

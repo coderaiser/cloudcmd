@@ -11,10 +11,10 @@ const returns = wraptile(id);
 const {_CURRENT_FILE} = currentFile;
 
 test('current-file: setCurrentName: setAttribute', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM();
-    global.CloudCmd = getCloudCmd();
+    globalThis.DOM = getDOM();
+    globalThis.CloudCmd = getCloudCmd();
     
     const current = create();
     const {setAttribute} = current;
@@ -23,17 +23,17 @@ test('current-file: setCurrentName: setAttribute', (t) => {
     
     t.calledWith(setAttribute, ['data-name', 'js-file-aGVsbG8='], 'should call setAttribute');
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.end();
 });
 
 test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM();
-    global.CloudCmd = getCloudCmd();
+    globalThis.DOM = getDOM();
+    globalThis.CloudCmd = getCloudCmd();
     
     const current = create();
     const {setAttribute} = current;
@@ -42,8 +42,8 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     
     t.calledWith(setAttribute, ['data-name', 'js-file-JUQwJUIwJUQwJUI5'], 'should call setAttribute');
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.end();
 });
@@ -59,12 +59,12 @@ test('current-file: getCurrentName', (t) => {
 });
 
 test('current-file: emit', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
     const emit = stub();
     
-    global.DOM = getDOM();
-    global.CloudCmd = getCloudCmd({
+    globalThis.DOM = getDOM();
+    globalThis.CloudCmd = getCloudCmd({
         emit,
     });
     
@@ -74,22 +74,22 @@ test('current-file: emit', (t) => {
     
     t.calledWith(emit, ['current-file', current], 'should call emit');
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.end();
 });
 
 test('current-file: setCurrentName: return', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
     const link = {};
     
-    global.DOM = getDOM({
+    globalThis.DOM = getDOM({
         link,
     });
     
-    global.CloudCmd = getCloudCmd();
+    globalThis.CloudCmd = getCloudCmd();
     
     const current = create();
     
@@ -97,19 +97,19 @@ test('current-file: setCurrentName: return', (t) => {
     
     t.equal(result, link, 'should return link');
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.end();
 });
 
 test('current-file: getParentDirPath: result', (t) => {
-    const {DOM} = global;
+    const {DOM} = globalThis;
     
     const getCurrentDirPath = returns('/D/Films/+++favorite films/');
     const getCurrentDirName = returns('+++favorite films');
     
-    global.DOM = getDOM({
+    globalThis.DOM = getDOM({
         getCurrentDirPath,
         getCurrentDirName,
     });
@@ -117,55 +117,55 @@ test('current-file: getParentDirPath: result', (t) => {
     const result = currentFile.getParentDirPath();
     const expected = '/D/Films/';
     
-    global.DOM = DOM;
+    globalThis.DOM = DOM;
     
     t.equal(result, expected, 'should return parent dir path');
     t.end();
 });
 
 test('current-file: isCurrentFile: no', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM();
-    global.CloudCmd = getCloudCmd();
+    globalThis.DOM = getDOM();
+    globalThis.CloudCmd = getCloudCmd();
     
     const result = currentFile.isCurrentFile();
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.notOk(result);
     t.end();
 });
 
 test('current-file: isCurrentFile', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
     const isContainClass = stub();
     
-    global.DOM = getDOM({
+    globalThis.DOM = getDOM({
         isContainClass,
     });
     
-    global.CloudCmd = getCloudCmd();
+    globalThis.CloudCmd = getCloudCmd();
     
     const current = {};
     currentFile.isCurrentFile(current);
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.calledWith(isContainClass, [current, _CURRENT_FILE], 'should call isContainClass');
     t.end();
 });
 
 test('current-file: getCurrentType', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM();
-    global.CloudCmd = getCloudCmd();
+    globalThis.DOM = getDOM();
+    globalThis.CloudCmd = getCloudCmd();
     
-    const {getByDataName} = global.DOM;
+    const {getByDataName} = globalThis.DOM;
     
     getByDataName.returns({
         className: 'mini-icon directory',
@@ -175,87 +175,87 @@ test('current-file: getCurrentType', (t) => {
     
     currentFile.getCurrentType(current);
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.calledWith(getByDataName, ['js-type', current]);
     t.end();
 });
 
 test('current-file: isCurrentIsDir: getCurrentType', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM();
-    global.CloudCmd = getCloudCmd();
+    globalThis.DOM = getDOM();
+    globalThis.CloudCmd = getCloudCmd();
     
-    const {getCurrentType} = global.DOM;
+    const {getCurrentType} = globalThis.DOM;
     
     const current = create();
     
     currentFile.isCurrentIsDir(current);
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.calledWith(getCurrentType, [current]);
     t.end();
 });
 
 test('current-file: isCurrentIsDir: directory', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM({
+    globalThis.DOM = getDOM({
         getCurrentType: stub().returns('directory'),
     });
     
-    global.CloudCmd = getCloudCmd();
+    globalThis.CloudCmd = getCloudCmd();
     
     const current = create();
     
     const result = currentFile.isCurrentIsDir(current);
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.ok(result);
     t.end();
 });
 
 test('current-file: isCurrentIsDir: directory-link', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM({
+    globalThis.DOM = getDOM({
         getCurrentType: stub().returns('directory-link'),
     });
     
-    global.CloudCmd = getCloudCmd();
+    globalThis.CloudCmd = getCloudCmd();
     
     const current = create();
     
     const result = currentFile.isCurrentIsDir(current);
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.ok(result);
     t.end();
 });
 
 test('current-file: isCurrentIsDir: file', (t) => {
-    const {DOM, CloudCmd} = global;
+    const {DOM, CloudCmd} = globalThis;
     
-    global.DOM = getDOM({
+    globalThis.DOM = getDOM({
         getCurrentType: stub().returns('file'),
     });
     
-    global.CloudCmd = getCloudCmd();
+    globalThis.CloudCmd = getCloudCmd();
     
     const current = create();
     
     const result = currentFile.isCurrentIsDir(current);
     
-    global.DOM = DOM;
-    global.CloudCmd = CloudCmd;
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
     
     t.notOk(result);
     t.end();

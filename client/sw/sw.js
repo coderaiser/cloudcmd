@@ -50,14 +50,14 @@ const getRequest = (a, request) => {
     return createRequest('/');
 };
 
-self.addEventListener('install', wait(onInstall));
-self.addEventListener('fetch', respondWith(onFetch));
-self.addEventListener('activate', wait(onActivate));
+globalThis.addEventListener('install', wait(onInstall));
+globalThis.addEventListener('fetch', respondWith(onFetch));
+globalThis.addEventListener('activate', wait(onActivate));
 
 async function onActivate() {
     console.info(`cloudcmd: sw: activate: ${NAME}`);
     
-    await self.clients.claim();
+    await globalThis.clients.claim();
     const keys = await caches.keys();
     const deleteCache = caches.delete.bind(caches);
     
@@ -67,7 +67,7 @@ async function onActivate() {
 async function onInstall() {
     console.info(`cloudcmd: sw: install: ${NAME}`);
     
-    await self.skipWaiting();
+    await globalThis.skipWaiting();
 }
 
 async function onFetch(event) {

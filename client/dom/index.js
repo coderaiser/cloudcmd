@@ -416,7 +416,7 @@ module.exports.shrinkSelection = () => {
  * setting history wrapper
  */
 module.exports.setHistory = (data, title, url) => {
-    const ret = window.history;
+    const ret = globalThis.history;
     const {prefix} = CloudCmd;
     
     url = prefix + url;
@@ -554,7 +554,7 @@ module.exports.getPanel = (options) => {
      * then always work with passive
      * panel
      */
-    if (window.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH)
+    if (globalThis.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH)
         panel = DOM.getByDataName('js-left');
     
     if (!panel)

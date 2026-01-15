@@ -12,11 +12,11 @@ const {initSortPanel, sortPanel} = require('./sort.mjs');
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = async (config) => {
-    window.Util = require('../common/util');
-    window.CloudFunc = require('../common/cloudfunc');
+    globalThis.Util = require('../common/util');
+    globalThis.CloudFunc = require('../common/cloudfunc');
     
-    window.DOM = require('./dom');
-    window.CloudCmd = require('./client');
+    globalThis.DOM = require('./dom');
+    globalThis.CloudCmd = require('./client');
     
     await register(config);
     
@@ -29,13 +29,13 @@ module.exports = async (config) => {
     
     globalThis.CloudCmd.init(prefix, config);
     
-    if (window.CloudCmd.config('menu') === 'aleman')
+    if (globalThis.CloudCmd.config('menu') === 'aleman')
         setTimeout(() => {
             import('https://esm.sh/@putout/processor-html');
             import('https://esm.sh/@putout/bundle');
         }, 100);
 };
-window.CloudCmd = module.exports;
+globalThis.CloudCmd = module.exports;
 
 function getPrefix(prefix) {
     if (!prefix)
@@ -51,7 +51,7 @@ const onUpdateFound = wraptile(async (config) => {
     if (isDev)
         return;
     
-    const {DOM} = window;
+    const {DOM} = globalThis;
     const prefix = getPrefix(config.prefix);
     
     await load.js(`${prefix}/dist/cloudcmd.common.js`);
@@ -60,7 +60,7 @@ const onUpdateFound = wraptile(async (config) => {
     console.log('cloudcmd: sw: updated');
     
     DOM.Events.removeAll();
-    window.CloudCmd(config);
+    globalThis.CloudCmd(config);
 });
 
 async function register(config) {

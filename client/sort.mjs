@@ -7,7 +7,7 @@ const sortPrevious = fullstore();
 const {getPanel} = DOM;
 
 export const initSortPanel = () => {
-    const {sort, order} = CloudCmd;
+    const {sort} = CloudCmd;
     const position = DOM.getPanelPosition();
     
     sortPrevious(sort[position]);
@@ -34,4 +34,3 @@ export const sortPanel = (name, panel = getPanel()) => {
         noCurrent,
     });
 };
-

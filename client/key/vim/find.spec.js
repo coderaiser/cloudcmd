@@ -5,7 +5,7 @@ const dir = './';
 
 const {getDOM} = require('./globals.fixture');
 
-global.DOM = getDOM();
+globalThis.DOM = getDOM();
 
 const {_next, _previous} = require(`${dir}find`);
 

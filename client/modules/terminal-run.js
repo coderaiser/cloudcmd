@@ -33,7 +33,7 @@ const loadAll = async () => {
     const [e] = await tryToCatch(load.parallel, [js, css]);
     
     if (e) {
-        const src = e.target.src.replace(window.location.href, '');
+        const src = e.target.src.replace(globalThis.location.href, '');
         return Dialog.alert(`file ${src} could not be loaded`);
     }
     

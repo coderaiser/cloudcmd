@@ -10,13 +10,13 @@ const pathVim = join(dir, 'vim');
 
 const {getDOM, getCloudCmd} = require('./globals.fixture');
 
-global.DOM = getDOM();
-global.CloudCmd = getCloudCmd();
+globalThis.DOM = getDOM();
+globalThis.CloudCmd = getCloudCmd();
 
 const vim = require(pathVim);
 
 const {assign} = Object;
-const {DOM} = global;
+const {DOM} = globalThis;
 const {Buffer} = DOM;
 const pathFind = join(dir, 'vim', 'find');
 const {reRequire, stopAll} = mockRequire;
@@ -595,7 +595,7 @@ test('cloudcmd: client: key: N', (t) => {
 
 test('cloudcmd: client: key: make directory', async (t) => {
     const vim = reRequire(pathVim);
-    const {DOM} = global;
+    const {DOM} = globalThis;
     
     assign(DOM, {
         promptNewDir: stub(),
@@ -615,7 +615,7 @@ test('cloudcmd: client: key: make directory', async (t) => {
 
 test('cloudcmd: client: key: make file', (t) => {
     const vim = reRequire(pathVim);
-    const {DOM} = global;
+    const {DOM} = globalThis;
     
     assign(DOM, {
         promptNewFile: stub(),
@@ -634,7 +634,7 @@ test('cloudcmd: client: key: make file', (t) => {
 });
 
 test.skip('cloudcmd: client: vim: terminal', (t) => {
-    const {CloudCmd} = global;
+    const {CloudCmd} = globalThis;
     
     assign(CloudCmd, {
         Terminal: {
@@ -652,10 +652,10 @@ test.skip('cloudcmd: client: vim: terminal', (t) => {
 });
 
 test.skip('cloudcmd: client: vim: edit', async (t) => {
-    global.DOM = getDOM();
-    global.CloudCmd = getCloudCmd();
+    globalThis.DOM = getDOM();
+    globalThis.CloudCmd = getCloudCmd();
     
-    const {CloudCmd} = global;
+    const {CloudCmd} = globalThis;
     
     assign(CloudCmd, {
         EditFileVim: {

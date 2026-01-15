@@ -14,7 +14,7 @@ export const createCloudMenu = async (fm, options, menuData) => {
 
 async function loadMenu() {
     if (CloudCmd.config('menu') === 'aleman') {
-        const {host, protocol} = window.location;
+        const {host, protocol} = globalThis.location;
         const url = `${protocol}//${host}/node_modules/aleman/menu/menu.js`;
         const {createMenu} = await import(/* webpackIgnore: true */url);
         
