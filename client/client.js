@@ -24,7 +24,7 @@ const {
     buildFromJSON,
 } = require('../common/cloudfunc');
 
-const loadModule = require('./load-module');
+const {loadModule} = require('./load-module.mjs');
 
 const noJS = (a) => a.replace(/.js$/, '');
 
