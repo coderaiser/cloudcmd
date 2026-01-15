@@ -7,6 +7,7 @@ const wraptile = require('wraptile');
 const load = require('load.js');
 
 const {registerSW, listenSW} = require('./sw/register');
+const {initSortPanel, sortPanel} = require('./sort.mjs');
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -21,11 +22,12 @@ module.exports = async (config) => {
     
     require('./listeners');
     require('./key');
-    require('./sort');
     
+    initSortPanel();
+    globalThis.CloudCmd.sortPanel = sortPanel;
     const prefix = getPrefix(config.prefix);
     
-    window.CloudCmd.init(prefix, config);
+    globalThis.CloudCmd.init(prefix, config);
     
     if (window.CloudCmd.config('menu') === 'aleman')
         setTimeout(() => {
