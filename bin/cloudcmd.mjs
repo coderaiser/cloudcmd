@@ -7,7 +7,7 @@ import {tryToCatch} from 'try-to-catch';
 import {createSimport} from 'simport';
 import parse from 'yargs-parser';
 import exit from '../server/exit.js';
-import {createConfig, configPath} from '../server/config.js';
+import {createConfig, configPath} from '../server/config.mjs';
 import * as env from '../server/env.mjs';
 import prefixer from '../server/prefixer.js';
 import * as validate from '../server/validate.mjs';

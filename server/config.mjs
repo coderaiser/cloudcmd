@@ -1,7 +1,12 @@
-'use strict';
+import {fileURLToPath} from 'node:url';
+import {dirname} from 'node:path';
+import {createRequire} from 'node:module';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const require = createRequire(import.meta.url);
 const DIR_SERVER = `${__dirname}/`;
-const DIR_COMMON = '../common/';
+
 const path = require('node:path');
 
 const fs = require('node:fs');
@@ -21,7 +26,7 @@ const {tryCatch} = require('try-catch');
 const criton = require('criton');
 const exit = require(`${DIR_SERVER}exit`);
 
-const CloudFunc = require(`${DIR_COMMON}cloudfunc`);
+const CloudFunc = require('../common/cloudfunc.mjs');
 const isUndefined = (a) => typeof a === 'undefined';
 const DIR = `${DIR_SERVER}../`;
 const HOME = homedir();
@@ -36,7 +41,6 @@ const key = (a) => Object
     .pop();
 
 const ConfigPath = path.join(DIR, 'json/config.json');
-const ConfigHome = path.join(HOME, '.cloudcmd.json');
 
 const connection = currify(_connection);
 const connectionWrapped = wraptile(_connection);
@@ -65,8 +69,7 @@ function read(filename) {
     };
 }
 
-module.exports.createConfig = createConfig;
-module.exports.configPath = ConfigHome;
+export const configPath = path.join(HOME, '.cloudcmd.json');
 
 const manageListen = currify((manage, socket, auth) => {
     if (!manage('configDialog'))
@@ -84,7 +87,7 @@ function initWrite(filename, configManager) {
     return resolve;
 }
 
-function createConfig({configPath} = {}) {
+export function createConfig({configPath} = {}) {
     const config = {};
     const changeEmitter = new Emitter();
     
@@ -237,7 +240,8 @@ function traverse([manage, json]) {
     }
 }
 
-module.exports._cryptoPass = cryptoPass;
+export const _cryptoPass = cryptoPass;
+
 function cryptoPass(manage, json) {
     const algo = manage('algo');
     

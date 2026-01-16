@@ -4,7 +4,7 @@
 const philip = require('philip');
 
 const Images = require('./images');
-const {FS} = require('../../common/cloudfunc');
+const {FS} = require('../../common/cloudfunc.mjs');
 const DOM = require('.');
 const Dialog = require('./dialog');
 

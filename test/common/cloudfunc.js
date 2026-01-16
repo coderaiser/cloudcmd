@@ -7,7 +7,7 @@ const test = require('supertape');
 const readFilesSync = require('@cloudcmd/read-files-sync');
 
 const {time, timeEnd} = require(`../../common/util`);
-const CloudFunc = require('../../common/cloudfunc.js');
+const CloudFunc = require('../../common/cloudfunc.mjs');
 
 const DIR = `${__dirname}/../../`;
 

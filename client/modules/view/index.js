@@ -17,7 +17,7 @@ const _modal = require('@cloudcmd/modal');
 const _createElement = require('@cloudcmd/create-element');
 
 const {time} = require('../../../common/util');
-const {FS} = require('../../../common/cloudfunc');
+const {FS} = require('../../../common/cloudfunc.mjs');
 
 const {
     isImage,

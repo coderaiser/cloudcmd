@@ -13,7 +13,7 @@ const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = async (config) => {
     globalThis.Util = require('../common/util');
-    globalThis.CloudFunc = require('../common/cloudfunc');
+    globalThis.CloudFunc = require('../common/cloudfunc.mjs');
     
     globalThis.DOM = require('./dom');
     globalThis.CloudCmd = require('./client');

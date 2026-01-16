@@ -6,7 +6,7 @@ const exec = require('execon');
 const wrap = require('wraptile');
 const createElement = require('@cloudcmd/create-element');
 
-const {FS} = require('../../../common/cloudfunc');
+const {FS} = require('../../../common/cloudfunc.mjs');
 const {getIdBySrc} = require('../../dom/load');
 const RESTful = require('../../dom/rest');
 

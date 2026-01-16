@@ -1,16 +1,16 @@
-'use strict';
+import rendy from 'rendy';
+import currify from 'currify';
+import store from 'fullstore';
+import {encode} from './entity.js';
 
-const rendy = require('rendy');
-const currify = require('currify');
-const store = require('fullstore');
-const {encode} = require('./entity');
-
-const getHeaderField = currify(_getHeaderField);
+export const getHeaderField = currify(_getHeaderField);
 
 /* КОНСТАНТЫ (общие для клиента и сервера)*/
 /* название программы */
 const NAME = 'Cloud Commander';
-const FS = '/fs';
+
+export const FS = '/fs';
+
 const Path = store();
 
 Path('/');
@@ -22,14 +22,10 @@ const filterOutDotFiles = ({showDotFiles}) => ({name}) => {
     return !name.startsWith('.');
 };
 
-module.exports.FS = FS;
-module.exports.apiURL = '/api/v1';
-module.exports.MAX_FILE_SIZE = 500 * 1024;
-module.exports.getHeaderField = getHeaderField;
-module.exports.getPathLink = getPathLink;
-module.exports.getDotDot = getDotDot;
+export const apiURL = '/api/v1';
+export const MAX_FILE_SIZE = 500 * 1024;
 
-module.exports.formatMsg = (msg, name, status) => {
+export const formatMsg = (msg, name, status) => {
     status = status || 'ok';
     name = name || '';
     
@@ -43,7 +39,7 @@ module.exports.formatMsg = (msg, name, status) => {
  * Функция возвращает заголовок веб страницы
  * @path
  */
-module.exports.getTitle = (options) => {
+export const getTitle = (options) => {
     options = options || {};
     
     const {path = Path(), name} = options;
@@ -62,7 +58,7 @@ module.exports.getTitle = (options) => {
  * возвращаеться массив каталогов
  * @param url -  адрес каталога
  */
-function getPathLink(url, prefix, template) {
+export function getPathLink(url, prefix, template) {
     if (!url)
         throw Error('url could not be empty!');
     
@@ -108,9 +104,7 @@ function getPathLink(url, prefix, template) {
     return lines.join('');
 }
 
-module.exports._getDataName = _getDataName;
-
-function _getDataName(name) {
+export function _getDataName(name) {
     const encoded = btoa(encodeURI(name));
     return `data-name="js-file-${encoded}" `;
 }
@@ -119,7 +113,7 @@ function _getDataName(name) {
  * @param params - информация о файлах
  *
  */
-module.exports.buildFromJSON = (params) => {
+export const buildFromJSON = (params) => {
     const {
         prefix,
         template,
@@ -262,7 +256,8 @@ function getAttribute(type) {
     return 'target="_blank" ';
 }
 
-module.exports._getSize = getSize;
+export const _getSize = getSize;
+
 function getSize({size, type}) {
     if (type === 'directory')
         return '&lt;dir&gt;';
@@ -285,7 +280,7 @@ function _getHeaderField(sort, order, name) {
     return `${name}${arrow}`;
 }
 
-function getDotDot(path) {
+export function getDotDot(path) {
     // убираем последний слеш и каталог в котором мы сейчас находимся
     const lastSlash = path.substr(path, path.lastIndexOf('/'));
     const dotDot = lastSlash.substr(lastSlash, lastSlash.lastIndexOf('/'));

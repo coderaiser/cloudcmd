@@ -1,20 +1,15 @@
-'use strict';
-
-const {join} = require('node:path');
-const {readFileSync} = require('node:fs');
-
-const test = require('supertape');
-const montag = require('montag');
-const cheerio = require('cheerio');
-
-const {
+import {readFileSync} from 'node:fs';
+import test from 'supertape';
+import montag from 'montag';
+import cheerio from 'cheerio';
+import {
     _getSize,
     getPathLink,
     buildFromJSON,
     _getDataName,
-} = require('./cloudfunc');
+} from './cloudfunc.mjs';
 
-const templatePath = join(__dirname, '../tmpl/fs');
+const templatePath = new URL('../tmpl/fs', import.meta.url).pathname;
 
 const template = {
     pathLink: readFileSync(`${templatePath}/pathLink.hbs`, 'utf8'),

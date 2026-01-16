@@ -1,6 +1,6 @@
 'use strict';
 
-const {FS} = require('../../../common/cloudfunc');
+const {FS} = require('../../../common/cloudfunc.mjs');
 const _sendRequest = require('./send-request');
 
 const imgPosition = {

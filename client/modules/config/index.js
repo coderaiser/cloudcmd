@@ -17,7 +17,7 @@ const Images = require('../../dom/images');
 const Events = require('../../dom/events');
 const Files = require('../../dom/files');
 
-const {getTitle} = require('../../../common/cloudfunc');
+const {getTitle} = require('../../../common/cloudfunc.mjs');
 const {Dialog, setTitle} = DOM;
 
 const Name = 'Config';

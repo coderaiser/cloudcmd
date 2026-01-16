@@ -22,7 +22,7 @@ const {
     apiURL,
     formatMsg,
     buildFromJSON,
-} = require('../common/cloudfunc');
+} = require('../common/cloudfunc.mjs');
 
 const {loadModule} = require('./load-module.mjs');
 

@@ -8,7 +8,7 @@ const load = require('./load');
 const Images = require('./images');
 const {alert} = require('./dialog');
 
-const {FS} = require('../../common/cloudfunc');
+const {FS} = require('../../common/cloudfunc.mjs');
 
 const {getCurrentDirPath: getPathWhenRootEmpty} = require('.');
 const loadFile = wraptile(_loadFile);

@@ -10,7 +10,7 @@ const clipboard = require('@cloudcmd/clipboard');
 
 const getRange = require('./get-range');
 const uploadFiles = require('../dom/upload-files');
-const {FS} = require('../../common/cloudfunc');
+const {FS} = require('../../common/cloudfunc.mjs');
 
 const getIndex = currify(require('./get-index'));
 

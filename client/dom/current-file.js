@@ -4,7 +4,7 @@
 /* global CloudCmd */
 const createElement = require('@cloudcmd/create-element');
 const {encode, decode} = require('../../common/entity');
-const {getTitle, FS} = require('../../common/cloudfunc');
+const {getTitle, FS} = require('../../common/cloudfunc.mjs');
 
 let Title;
 

@@ -1,26 +1,21 @@
-'use strict';
+import path from 'node:path';
+import _fs from 'node:fs';
+import process from 'node:process';
+import jaguar from 'jaguar';
+import onezip from 'onezip';
+import inly from 'inly';
+import wraptile from 'wraptile';
+import currify from 'currify';
+import pullout from 'pullout';
+import json from 'jonny';
+import ponse from 'ponse';
+import copymitter from 'copymitter';
+import _moveFiles from '@cloudcmd/move-files';
+import root from '../root.js';
+import * as CloudFunc from '../../common/cloudfunc.mjs';
+import markdown from '../markdown/index.js';
+import info from './info.js';
 
-const path = require('node:path');
-const _fs = require('node:fs');
-
-const process = require('node:process');
-
-const jaguar = require('jaguar');
-const onezip = require('onezip');
-const inly = require('inly');
-const wraptile = require('wraptile');
-const currify = require('currify');
-const pullout = require('pullout');
-const json = require('jonny');
-const ponse = require('ponse');
-
-const copymitter = require('copymitter');
-const _moveFiles = require('@cloudcmd/move-files');
-
-const root = require(`../root`);
-const CloudFunc = require(`../../common/cloudfunc`);
-const markdown = require(`../markdown/index.js`);
-const info = require('./info');
 const isUndefined = (a) => typeof a === 'undefined';
 const isRootAll = (root, names) => names.some(isRootWin32(root));
 const isString = (a) => typeof a === 'string';
@@ -37,7 +32,7 @@ const UserError = (msg) => {
     return error;
 };
 
-module.exports = currify(({config, fs = _fs, moveFiles = _moveFiles}, request, response, next) => {
+export default currify(({config, fs = _fs, moveFiles = _moveFiles}, request, response, next) => {
     const name = ponse.getPathName(request);
     const regExp = RegExp(`^${apiURL}`);
     const is = regExp.test(name);
@@ -188,7 +183,8 @@ const getRenameMsg = (from, to) => {
     return msg;
 };
 
-module.exports._onPUT = onPUT;
+export const _onPUT = onPUT;
+
 function onPUT({name, fs, moveFiles, config, body}, callback) {
     checkPut(name, body, callback);
     
@@ -368,10 +364,10 @@ const isRootWin32 = currify((root, path) => {
     return isWin32 && isRoot && isConfig;
 });
 
-module.exports._isRootWin32 = isRootWin32;
-module.exports._isRootAll = isRootAll;
+export const _isRootWin32 = isRootWin32;
+export const _isRootAll = isRootAll;
 
-module.exports._getWin32RootMsg = getWin32RootMsg;
+export const _getWin32RootMsg = getWin32RootMsg;
 
 function getWin32RootMsg() {
     const message = 'Could not copy from/to root on windows!';
@@ -388,7 +384,7 @@ function parseData(data) {
     return json.stringify(data);
 }
 
-module.exports._formatMsg = formatMsg;
+export const _formatMsg = formatMsg;
 
 function formatMsg(msg, data, status) {
     const value = parseData(data);
