@@ -12,7 +12,7 @@ const {
 const {DOM = {}, CloudCmd = {},
 } = globalThis;
 
-const {Dialog} = DOM;
+const {Dialog = {}} = DOM;
 
 const DEPS = {
     ...DOM,
@@ -21,7 +21,7 @@ const DEPS = {
 
 module.exports = async (key, event, deps = DEPS) => {
     const operations = getOperations(event, deps);
-    await vim(key, operations);
+    await vim(key, operations, deps);
 };
 
 const getOperations = (event, deps) => {
@@ -32,6 +32,8 @@ const getOperations = (event, deps) => {
         setCurrentFile,
         setCurrentByName,
         getCurrentName,
+        prompt = Dialog.prompt,
+        preventDefault = event?.preventDefault?.bind(event),
         
         toggleSelectedFile,
         Buffer = {},
@@ -103,8 +105,8 @@ const getOperations = (event, deps) => {
         },
         
         find: async () => {
-            event.preventDefault();
-            const [, value] = await Dialog.prompt('Find', '');
+            preventDefault();
+            const [, value] = await prompt('Find', '');
             
             if (!value)
                 return;

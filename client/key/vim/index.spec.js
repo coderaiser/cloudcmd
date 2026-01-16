@@ -13,7 +13,7 @@ const {getDOM, getCloudCmd} = require('./globals.fixture');
 globalThis.DOM = getDOM();
 globalThis.CloudCmd = getCloudCmd();
 
-const vim = require(pathVim);
+const vim = require('./index.js');
 
 const {assign} = Object;
 const {DOM} = globalThis;
@@ -517,18 +517,27 @@ test('cloudcmd: client: key: Enter', async (t) => {
     t.end();
 });
 
-test.skip('cloudcmd: client: key: /', (t) => {
+test('cloudcmd: client: key: /', (t) => {
     const preventDefault = stub();
     const element = {};
+    const Info = {
+        element,
+        files: [],
+    };
     
-    DOM.CurrentInfo.element = element;
-    DOM.getCurrentName = () => '';
-    
-    vim('/', {
+    const getCurrentName = stub().returns('');
+    const event = {
         preventDefault,
+    };
+    const prompt = stub().returns([]);
+    
+    vim('/', event, {
+        getCurrentName,
+        Info,
+        prompt,
     });
     
-    t.calledWithNoArgs(preventDefault, 'should call preventDefault');
+    t.calledWithNoArgs(preventDefault);
     t.end();
 });
 
