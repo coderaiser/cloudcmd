@@ -1,7 +1,7 @@
 import {once} from 'node:events';
 import test from 'supertape';
 import io from 'socket.io-client';
-import Config from '../config.js';
+import * as Config from '../config.mjs';
 import {connect} from '../../test/before.mjs';
 
 const config = Config.createConfig();

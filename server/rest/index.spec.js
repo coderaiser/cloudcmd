@@ -9,7 +9,7 @@ const {
     _isRootWin32,
     _isRootAll,
     _onPUT,
-} = require('.');
+} = require('./index.mjs');
 
 test('rest: formatMsg', (t) => {
     const result = _formatMsg('hello', 'world');

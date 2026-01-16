@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module';
 import {test, stub} from 'supertape';
-import {createConfig, _cryptoPass} from './config.js';
-import {apiURL} from '../common/cloudfunc.js';
+import {createConfig, _cryptoPass} from './config.mjs';
+import {apiURL} from '../common/cloudfunc.mjs';
 import {connect} from '../test/before.mjs';
 
 const require = createRequire(import.meta.url);

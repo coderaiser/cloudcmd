@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs';
 import test from 'supertape';
 import montag from 'montag';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import {
     _getSize,
     getPathLink,

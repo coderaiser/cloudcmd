@@ -1,16 +1,10 @@
-import path, {dirname} from 'node:path';
 import {once} from 'node:events';
-import {fileURLToPath} from 'node:url';
-import {createRequire} from 'node:module';
 import test from 'supertape';
 import io from 'socket.io-client';
 import {connect} from '../before.mjs';
+import {createConfig} from '../../server/config.mjs';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const require = createRequire(import.meta.url);
-const configPath = path.join(__dirname, '../..', 'server', 'config');
-const configFn = require(configPath).createConfig();
+const configFn = createConfig();
 
 test('cloudcmd: console: enabled', async (t) => {
     const config = {

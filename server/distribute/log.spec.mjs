@@ -1,6 +1,6 @@
 import test from 'supertape';
 import log from './log.mjs';
-import {createConfig} from '../config.js';
+import {createConfig} from '../config.mjs';
 
 test('distribute: log: getMessage', (t) => {
     const e = 'hello';
