@@ -1,9 +1,7 @@
-'use strict';
-
 // used by OptimizeCssAssetsPlugin
-const defaultPreset = require('cssnano-preset-default');
+import defaultPreset from 'cssnano-preset-default';
 
-module.exports = defaultPreset({
+export default defaultPreset({
     svgo: {
         plugins: [{
             convertPathData: false,

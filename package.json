@@ -169,6 +169,7 @@
     "codegen.macro": "^4.0.0",
     "css-loader": "^7.1.2",
     "css-modules-require-hook": "^4.2.3",
+    "cssnano-preset-default": "^7.0.10",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
     "eslint": "^9.23.0",

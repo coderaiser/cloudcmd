@@ -1,18 +1,12 @@
-'use strict';
+import {resolve, sep} from 'node:path';
+import {env} from 'node:process';
+import webpack from 'webpack';
+import WebpackBar from 'webpackbar';
 
-const {
-    resolve,
-    sep,
-    join,
-} = require('node:path');
-
-const {env} = require('node:process');
 const {
     EnvironmentPlugin,
     NormalModuleReplacementPlugin,
-} = require('webpack');
-
-const WebpackBar = require('webpackbar');
+} = webpack;
 
 const modules = './modules';
 const dirModules = './client/modules';
@@ -23,7 +17,7 @@ const dir = './client';
 const {NODE_ENV} = env;
 const isDev = NODE_ENV === 'development';
 
-const rootDir = join(__dirname, '..');
+const rootDir = new URL('..', import.meta.url).pathname;
 const dist = resolve(rootDir, 'dist');
 const distDev = resolve(rootDir, 'dist-dev');
 const devtool = isDev ? 'eval' : 'source-map';
@@ -92,7 +86,7 @@ const splitChunks = {
     },
 };
 
-module.exports = {
+export default {
     resolve: {
         symlinks: false,
         alias: {
@@ -100,8 +94,8 @@ module.exports = {
             'node:path': 'path',
         },
         fallback: {
-            path: require.resolve('path-browserify'),
-            process: require.resolve('process/browser'),
+            path: import.meta.resolve('path-browserify'),
+            process: import.meta.resolve('process/browser'),
         },
     },
     devtool,

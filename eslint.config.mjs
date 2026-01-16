@@ -18,10 +18,7 @@ export const match = {
     },
     'bin/cloudcmd.js': {
         'no-console': 'off',
-    },
-    'cssnano.config.js': {
-        'n/no-extraneous-require': 'off',
-    },
+    }
 };
 export default defineConfig([
     safeAlign, {

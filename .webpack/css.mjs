@@ -1,9 +1,6 @@
-'use strict';
-
-const {env} = require('node:process');
-
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import {env} from 'node:process';
+import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const isDev = env.NODE_ENV === 'development';
 
@@ -29,7 +26,7 @@ const rules = [{
     type: 'asset/inline',
 }];
 
-module.exports = {
+export default {
     plugins,
     module: {
         rules,

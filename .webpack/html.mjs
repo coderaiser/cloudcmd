@@ -1,21 +1,15 @@
-'use strict';
-
-const {env} = require('node:process');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import {env} from 'node:process';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const isDev = env.NODE_ENV === 'development';
 
-const plugins = [
+export const plugins = [
     new HtmlWebpackPlugin({
         inject: false,
         template: 'html/index.html',
         minify: !isDev && getMinifyHtmlOptions(),
     }),
 ];
-
-module.exports = {
-    plugins,
-};
 
 function getMinifyHtmlOptions() {
     return {
