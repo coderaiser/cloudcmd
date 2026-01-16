@@ -17,7 +17,7 @@ import fileop from '@cloudcmd/fileop';
 import cloudfunc from '../common/cloudfunc.js';
 import authentication from './auth.js';
 import {createConfig, configPath} from './config.js';
-import modulas from './modulas.js';
+import modulas from './modulas.mjs';
 import userMenu from './user-menu.mjs';
 import rest from './rest/index.js';
 import route from './route.mjs';

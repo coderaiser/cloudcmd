@@ -1,9 +1,9 @@
-'use strict';
+import deepmerge from 'deepmerge';
+import originalModules from '../json/modules.json' with {
+    type: 'json',
+};
 
-const deepmerge = require('deepmerge');
-const originalModules = require('../json/modules');
-
-module.exports = (modules) => {
+export default (modules) => {
     const result = deepmerge(originalModules, modules || {});
     
     return (req, res, next) => {
