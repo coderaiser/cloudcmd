@@ -5,7 +5,7 @@ import {fullstore} from 'fullstore';
 import io from 'socket.io-client';
 import _forEachKey from 'for-each-key';
 import log from './log.mjs';
-import env from '../env.js';
+import * as env from '../env.mjs';
 
 const noop = () => {};
 const forEachKey = currify(_forEachKey);
