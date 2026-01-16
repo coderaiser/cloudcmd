@@ -1,3 +1,13 @@
+2026.01.16, v19.1.6
+
+fix:
+- a523ef65 tests
+
+feature:
+- 64654e8d common: cloudfunc: migrate to ESM
+- add31607 common: cloudfunc: get rid of bas64
+- e36de00c modulas: migrate to ESM
+
 2026.01.16, v19.1.5
 
 feature:
