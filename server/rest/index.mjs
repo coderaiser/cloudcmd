@@ -81,7 +81,7 @@ function rest({fs, config, moveFiles}, request, response) {
 /**
  * getting data on method and command
  *
- * @param params {name, method, body, requrest, response}
+ * @param params {name, method, body, request, response}
  * @param config {}
  * @param callback
  */

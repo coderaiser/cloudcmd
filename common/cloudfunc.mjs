@@ -108,6 +108,7 @@ export function _getDataName(name) {
     const encoded = btoa(encodeURI(name));
     return `data-name="js-file-${encoded}" `;
 }
+
 /**
  * Функция строит таблицу файлв из JSON-информации о файлах
  * @param params - информация о файлах
