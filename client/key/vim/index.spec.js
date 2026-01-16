@@ -526,9 +526,11 @@ test('cloudcmd: client: key: /', (t) => {
     };
     
     const getCurrentName = stub().returns('');
+    
     const event = {
         preventDefault,
     };
+    
     const prompt = stub().returns([]);
     
     vim('/', event, {
