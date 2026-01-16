@@ -18,7 +18,7 @@ export const match = {
     },
     'bin/cloudcmd.js': {
         'no-console': 'off',
-    }
+    },
 };
 export default defineConfig([
     safeAlign, {

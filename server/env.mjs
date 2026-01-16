@@ -24,4 +24,4 @@ export const parse = (name) => {
     const big = up(small);
     
     return env[big] || env[small];
-}
+};
