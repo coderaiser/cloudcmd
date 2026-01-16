@@ -4,7 +4,6 @@ const rendy = require('rendy');
 const currify = require('currify');
 const store = require('fullstore');
 const {encode} = require('./entity');
-const {btoa} = require('./base64');
 
 const getHeaderField = currify(_getHeaderField);
 
@@ -109,7 +108,9 @@ function getPathLink(url, prefix, template) {
     return lines.join('');
 }
 
-const getDataName = (name) => {
+module.exports._getDataName = _getDataName;
+
+function _getDataName(name) {
     const encoded = btoa(encodeURI(name));
     return `data-name="js-file-${encoded}" `;
 };
@@ -185,7 +186,7 @@ module.exports.buildFromJSON = (params) => {
             name: '..',
         });
         
-        const dataName = getDataName('..');
+        const dataName = _getDataName('..');
         const attribute = `draggable="true" ${dataName}`;
         
         /* Сохраняем путь к каталогу верхнего уровня*/
@@ -226,7 +227,7 @@ module.exports.buildFromJSON = (params) => {
                 attribute: getAttribute(file.type),
             });
             
-            const dataName = getDataName(file.name);
+            const dataName = _getDataName(file.name);
             const attribute = `draggable="true" ${dataName}`;
             
             return rendy(templateFile, {

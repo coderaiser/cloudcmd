@@ -11,6 +11,7 @@ const {
     _getSize,
     getPathLink,
     buildFromJSON,
+    _getDataName,
 } = require('./cloudfunc');
 
 const templatePath = join(__dirname, '../tmpl/fs');
@@ -171,6 +172,14 @@ test('cloudfunc: buildFromJSON: showDotFiles: false', (t) => {
         .text();
     
     const expected = '';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('cloudfunc: _getDataName', (t) => {
+    const result = _getDataName('s');
+    const expected = 'data-name="js-file-cw==" ';
     
     t.equal(result, expected);
     t.end();

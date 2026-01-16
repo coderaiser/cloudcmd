@@ -3,10 +3,7 @@
 /* global DOM */
 /* global CloudCmd */
 const createElement = require('@cloudcmd/create-element');
-const {atob, btoa} = require('../../common/base64');
-
 const {encode, decode} = require('../../common/entity');
-
 const {getTitle, FS} = require('../../common/cloudfunc');
 
 let Title;
