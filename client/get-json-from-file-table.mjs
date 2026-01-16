@@ -8,29 +8,6 @@ export const getJsonFromFileTable = () => {
     const path = DOM.getCurrentDirPath();
     const infoFiles = Info.files || [];
     
-    const notParent = (current) => {
-        const name = DOM.getCurrentName(current);
-        return name !== '..';
-    };
-    
-    const parse = (current) => {
-        const name = DOM.getCurrentName(current);
-        const size = DOM.getCurrentSize(current);
-        const owner = DOM.getCurrentOwner(current);
-        const mode = DOM.getCurrentMode(current);
-        const date = DOM.getCurrentDate(current);
-        const type = DOM.getCurrentType(current);
-        
-        return {
-            name,
-            size,
-            mode,
-            owner,
-            date,
-            type,
-        };
-    };
-    
     const files = infoFiles
         .filter(notParent)
         .map(parse);
@@ -41,4 +18,27 @@ export const getJsonFromFileTable = () => {
     };
     
     return fileTable;
+};
+
+const notParent = (current) => {
+    const name = DOM.getCurrentName(current);
+    return name !== '..';
+};
+    
+const parse = (current) => {
+    const name = DOM.getCurrentName(current);
+    const size = DOM.getCurrentSize(current);
+    const owner = DOM.getCurrentOwner(current);
+    const mode = DOM.getCurrentMode(current);
+    const date = DOM.getCurrentDate(current);
+    const type = DOM.getCurrentType(current);
+        
+    return {
+        name,
+        size,
+        mode,
+        owner,
+        date,
+        type,
+    };
 };
