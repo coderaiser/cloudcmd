@@ -14,7 +14,7 @@ const createElement = require('@cloudcmd/create-element');
 
 const input = require('./input');
 const Images = require('../../dom/images');
-const Events = require('../../dom/events/index.mjs');
+const Events = require('#dom/events');
 const Files = require('../../dom/files');
 
 const {getTitle} = require('../../../common/cloudfunc.mjs');

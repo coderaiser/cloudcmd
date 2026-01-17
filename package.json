@@ -217,6 +217,11 @@
     "webpack-merge": "^6.0.1",
     "webpackbar": "^7.0.0"
   },
+  "imports": {
+    "#dom/events": {
+      "default": "./client/dom/events/index.mjs"
+    }
+  },
   "engines": {
     "node": ">=22"
   },

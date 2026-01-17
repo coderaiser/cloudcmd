@@ -72,4 +72,3 @@ async function register(config) {
     
     listenSW(sw, 'updatefound', onUpdateFound(config));
 }
-

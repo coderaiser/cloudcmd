@@ -5,7 +5,7 @@ const clipboard = require('@cloudcmd/clipboard');
 const {fullstore} = require('fullstore');
 
 const Buffer = require('../dom/buffer');
-const Events = require('../dom/events/index.mjs');
+const Events = require('#dom/events');
 const KEY = require('./key');
 
 const _vim = require('./vim');

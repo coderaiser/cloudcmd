@@ -11,7 +11,7 @@ const clipboard = require('@cloudcmd/clipboard');
 const getRange = require('./get-range');
 const uploadFiles = require('../dom/upload-files');
 const {FS} = require('../../common/cloudfunc.mjs');
-const Events = require('../dom/events/index.mjs');
+const Events = require('#dom/events');
 
 const getIndex = currify(require('./get-index'));
 
