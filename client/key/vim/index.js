@@ -21,6 +21,7 @@ module.exports = (key, event, overrides = {}) => {
     };
     
     const operations = getOperations(event, deps);
+    
     vim(key, operations, deps);
 };
 
