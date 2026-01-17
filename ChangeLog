@@ -1,3 +1,11 @@
+2026.01.17, v19.1.7
+
+feature:
+- 23a6a698 client: dom/events -> #dom/events
+- 9cebb241 client: dom: events: migrate to ESM
+- a94fa0d4 client: cloudcmd: migrate to ESM
+- 3bdf47a5 client: migrate to ESM
+
 2026.01.16, v19.1.6
 
 fix:
