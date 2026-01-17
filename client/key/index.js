@@ -12,7 +12,6 @@ const _vim = require('./vim');
 const setCurrentByChar = require('./set-current-by-char');
 const {createBinder} = require('./binder');
 
-const Info = DOM.CurrentInfo;
 const Chars = fullstore();
 
 const toggleVim = (keyCode, overrides = {}) => {
@@ -124,6 +123,7 @@ function fromCharCode(keyIdentifier) {
 }
 
 async function _switchKey(event) {
+    const Info = DOM.CurrentInfo;
     let i;
     let isSelected;
     let prev;

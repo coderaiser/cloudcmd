@@ -3,9 +3,9 @@
 'use strict';
 
 const {escapeRegExp} = require('../../common/util');
-const Info = DOM.CurrentInfo;
 
 module.exports = function setCurrentByChar(char, charStore) {
+    const Info = DOM.CurrentInfo;
     let firstByName;
     let skipCount = 0;
     let setted = false;

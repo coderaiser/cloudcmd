@@ -8,15 +8,20 @@ const load = require('load.js');
 
 const {registerSW, listenSW} = require('./sw/register');
 const {initSortPanel, sortPanel} = require('./sort.mjs');
+const Util = require('../common/util');
+const CloudFunc = require('../common/cloudfunc.mjs');
+const DOM = require('./dom');
+const {createCloudCmd} = require('./client.mjs');
 
 const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = async (config) => {
-    globalThis.Util = require('../common/util');
-    globalThis.CloudFunc = require('../common/cloudfunc.mjs');
-    
-    globalThis.DOM = require('./dom');
-    globalThis.CloudCmd = require('./client');
+module.exports = init;
+
+async function init(config) {
+    globalThis.CloudCmd = createCloudCmd(DOM);
+    globalThis.DOM = DOM;
+    globalThis.Util = Util;
+    globalThis.CloudFunc = CloudFunc;
     
     await register(config);
     
@@ -34,8 +39,9 @@ module.exports = async (config) => {
             import('https://esm.sh/@putout/processor-html');
             import('https://esm.sh/@putout/bundle');
         }, 100);
-};
-globalThis.CloudCmd = module.exports;
+}
+
+globalThis.CloudCmd = init;
 
 function getPrefix(prefix) {
     if (!prefix)

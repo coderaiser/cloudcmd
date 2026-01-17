@@ -1,30 +1,24 @@
-'use strict';
-
-const process = require('node:process');
+import process from 'node:process';
 
 /* global DOM */
-const Emitify = require('emitify');
-const inherits = require('inherits');
-const rendy = require('rendy');
-const load = require('load.js');
-const {tryToCatch} = require('try-to-catch');
-const {addSlashToEnd} = require('format-io');
-const pascalCase = require('just-pascal-case');
-const currify = require('currify');
-
-const Images = require('./dom/images');
-
-const {unregisterSW} = require('./sw/register');
-const {getJsonFromFileTable} = require('./get-json-from-file-table.mjs');
-const Key = require('./key');
-
-const {
+import Emitify from 'emitify';
+import inherits from 'inherits';
+import rendy from 'rendy';
+import load from 'load.js';
+import {tryToCatch} from 'try-to-catch';
+import {addSlashToEnd} from 'format-io';
+import pascalCase from 'just-pascal-case';
+import currify from 'currify';
+import Images from './dom/images.js';
+import {unregisterSW} from './sw/register.js';
+import {getJsonFromFileTable} from './get-json-from-file-table.mjs';
+import Key from './key/index.js';
+import {
     apiURL,
     formatMsg,
     buildFromJSON,
-} = require('../common/cloudfunc.mjs');
-
-const {loadModule} = require('./load-module.mjs');
+} from '../common/cloudfunc.mjs';
+import {loadModule} from './load-module.mjs';
 
 const noJS = (a) => a.replace(/.js$/, '');
 
@@ -32,7 +26,9 @@ const isDev = process.env.NODE_ENV === 'development';
 
 inherits(CloudCmdProto, Emitify);
 
-module.exports = new CloudCmdProto(DOM);
+export const createCloudCmd = (DOM) => {
+    return new CloudCmdProto(DOM);
+};
 
 load.addErrorListener((e, src) => {
     const msg = `file ${src} could not be loaded`;
@@ -49,11 +45,9 @@ function CloudCmdProto(DOM) {
     
     const {Storage, Files} = DOM;
     
-    this.log = (...a) => {
+    this.log = () => {
         if (!isDev)
             return;
-        
-        console.log(...a);
     };
     this.prefix = '';
     this.prefixSocket = '';
