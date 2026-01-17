@@ -114,7 +114,7 @@ export default {
         'terminal': `${dirCss}/terminal.css`,
         'user-menu': `${dirCss}/user-menu.css`,
         'sw': `${dir}/sw/sw.js`,
-        'cloudcmd': `${dir}/cloudcmd.js`,
+        'cloudcmd': `${dir}/cloudcmd.mjs`,
         [`${modules}/edit`]: `${dirModules}/edit.js`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.js`,
         [`${modules}/edit-file-vim`]: `${dirModules}/edit-file-vim.js`,

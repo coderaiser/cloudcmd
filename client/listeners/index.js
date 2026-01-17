@@ -29,8 +29,6 @@ module.exports.init = async () => {
     ]);
 };
 
-CloudCmd.Listeners = module.exports;
-
 const unselect = (event) => {
     const isMac = /Mac/.test(globalThis.navigator.platform);
     const {
@@ -50,9 +48,6 @@ const execAll = currify((funcs, event) => {
         fn(event);
 });
 
-const Info = DOM.CurrentInfo;
-const {Events} = DOM;
-
 const EventsFiles = {
     mousedown: exec.with(execIfNotUL, setCurrentFileByEvent),
     click: execAll([onClick, exec.with(execIfNotMobile, unselect)]),
@@ -69,6 +64,8 @@ function header() {
     const isPanel = (el) => {
         return /^js-(left|right)$/.test(el.dataset.name);
     };
+    
+    const {Events} = DOM;
     
     Events.addClick(fm, (event) => {
         const el = event.target;
@@ -106,6 +103,7 @@ async function config() {
 }
 
 module.exports.initKeysPanel = () => {
+    const {Events} = DOM;
     const keysElement = DOM.getById('js-keyspanel');
     
     if (!keysElement)
@@ -152,6 +150,7 @@ const getPanel = (side) => {
 };
 
 module.exports.setOnPanel = (side) => {
+    const {Events} = DOM;
     const panel = getPanel(side);
     
     const filesElement = DOM.getByDataName('js-files', panel);
@@ -167,6 +166,7 @@ function getPathListener(panel) {
 }
 
 function isNoCurrent(panel) {
+    const Info = DOM.CurrentInfo;
     const infoPanel = Info.panel;
     
     if (!infoPanel)
@@ -191,6 +191,7 @@ function decodePath(path) {
 }
 
 async function onPathElementClick(panel, event) {
+    const Info = DOM.CurrentInfo;
     event.preventDefault();
     
     const element = event.target;
@@ -261,6 +262,7 @@ function toggleSelect(key, files) {
 }
 
 function changePanel(element) {
+    const Info = DOM.CurrentInfo;
     const {panel} = Info;
     const files = DOM.getByDataName('js-files', panel);
     const ul = getULElement(element);
@@ -302,6 +304,7 @@ async function onTouch(event) {
   * in Chrome (HTML5)
   */
 function onDragStart(event) {
+    const Info = DOM.CurrentInfo;
     const {prefixURL} = CloudCmd;
     const element = getLIElement(event.target);
     const {isDir} = Info;
@@ -338,6 +341,7 @@ function getULElement(element) {
 }
 
 function setCurrentFileByEvent(event) {
+    const Info = DOM.CurrentInfo;
     const BUTTON_LEFT = 0;
     
     const key = {
@@ -376,6 +380,7 @@ function getFilesRange(from, to) {
 }
 
 function contextMenu() {
+    const {Events} = DOM;
     const fm = DOM.getFM();
     
     Events.addOnce('contextmenu', fm, (event) => {
@@ -391,6 +396,7 @@ function contextMenu() {
 }
 
 function dragndrop() {
+    const {Events} = DOM;
     const panels = DOM.getByClassAll('panel');
     const select = ({target}) => {
         target.classList.add('selected-panel');
@@ -464,7 +470,7 @@ function unload() {
 }
 
 function pop() {
-    Events.add('popstate', async ({state}) => {
+    DOM.Events.add('popstate', async ({state}) => {
         const path = (state || '').replace(FS, '');
         
         if (!path)
@@ -479,7 +485,8 @@ function pop() {
 }
 
 function resize() {
-    Events.add('resize', () => {
+    DOM.Events.add('resize', () => {
+        const Info = DOM.CurrentInfo;
         const is = globalThis.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH;
         
         if (!is)

@@ -1,32 +1,31 @@
-'use strict';
-
-const process = require('node:process');
-require('../css/main.css');
-
-const wraptile = require('wraptile');
-const load = require('load.js');
-
-const {registerSW, listenSW} = require('./sw/register');
-const {initSortPanel, sortPanel} = require('./sort.mjs');
-const Util = require('../common/util');
-const CloudFunc = require('../common/cloudfunc.mjs');
-const DOM = require('./dom');
-const {createCloudCmd} = require('./client.mjs');
+import process from 'node:process';
+import wraptile from 'wraptile';
+import load from 'load.js';
+import '../css/main.css';
+import {registerSW, listenSW} from './sw/register.js';
+import {initSortPanel, sortPanel} from './sort.mjs';
+import Util from '../common/util.js';
+import * as CloudFunc from '../common/cloudfunc.mjs';
+import DOM from './dom/index.js';
+import {createCloudCmd} from './client.mjs';
+import * as Listeners from './listeners/index.js';
 
 const isDev = process.env.NODE_ENV === 'development';
 
-module.exports = init;
+export default init;
+
+globalThis.CloudCmd = init;
 
 async function init(config) {
-    globalThis.CloudCmd = createCloudCmd(DOM);
+    globalThis.CloudCmd = createCloudCmd({
+        DOM,
+        Listeners,
+    });
     globalThis.DOM = DOM;
     globalThis.Util = Util;
     globalThis.CloudFunc = CloudFunc;
     
     await register(config);
-    
-    require('./listeners');
-    require('./key');
     
     initSortPanel();
     globalThis.CloudCmd.sortPanel = sortPanel;
@@ -40,8 +39,6 @@ async function init(config) {
             import('https://esm.sh/@putout/bundle');
         }, 100);
 }
-
-globalThis.CloudCmd = init;
 
 function getPrefix(prefix) {
     if (!prefix)
@@ -75,3 +72,4 @@ async function register(config) {
     
     listenSW(sw, 'updatefound', onUpdateFound(config));
 }
+

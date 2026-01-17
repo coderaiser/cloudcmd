@@ -26,8 +26,11 @@ const isDev = process.env.NODE_ENV === 'development';
 
 inherits(CloudCmdProto, Emitify);
 
-export const createCloudCmd = (DOM) => {
-    return new CloudCmdProto(DOM);
+export const createCloudCmd = ({DOM, Listeners}) => {
+    return new CloudCmdProto({
+        DOM,
+        Listeners,
+    });
 };
 
 load.addErrorListener((e, src) => {
@@ -35,9 +38,7 @@ load.addErrorListener((e, src) => {
     Images.show.error(msg);
 });
 
-function CloudCmdProto(DOM) {
-    let Listeners;
-    
+function CloudCmdProto({DOM, Listeners}) {
     Emitify.call(this);
     
     const CloudCmd = this;
@@ -224,7 +225,6 @@ function CloudCmdProto(DOM) {
         
         const dirPath = DOM.getCurrentDirPath();
         
-        ({Listeners} = CloudCmd);
         Listeners.init();
         
         const panels = getPanels();
