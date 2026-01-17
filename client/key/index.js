@@ -97,7 +97,7 @@ async function listener(event, overrides = {}) {
         return;
     
     if (isVim)
-        await vim(char, event);
+        vim(char, event);
 }
 
 function getSymbol(shift, keyCode) {

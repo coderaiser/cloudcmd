@@ -9,30 +9,31 @@ const {
     selectFileNotParent,
 } = require('./set-current');
 
-const {DOM = {}, CloudCmd = {},
-} = globalThis;
-
-const {Dialog = {}} = DOM;
-
-const DEPS = {
-    ...DOM,
-    ...CloudCmd,
-};
-
-module.exports = async (key, event, deps = DEPS) => {
+module.exports = (key, event, overrides = {}) => {
+    const defaults = {
+        ...globalThis.DOM,
+        ...globalThis.CloudCmd,
+    };
+    
+    const deps = {
+        ...defaults,
+        ...overrides,
+    };
+    
     const operations = getOperations(event, deps);
-    await vim(key, operations, deps);
+    vim(key, operations, deps);
 };
 
 const getOperations = (event, deps) => {
     const {
-        Info = DOM.CurrentInfo,
+        Info = globalThis.DOM.CurrentInfo,
+        CloudCmd = globalThis.CloudCmd,
         Operation,
         unselectFiles,
         setCurrentFile,
         setCurrentByName,
         getCurrentName,
-        prompt = Dialog.prompt,
+        prompt = globalThis.DOM.Dialog.prompt,
         preventDefault = event?.preventDefault?.bind(event),
         
         toggleSelectedFile,

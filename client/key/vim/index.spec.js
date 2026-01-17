@@ -644,19 +644,21 @@ test('cloudcmd: client: key: make file', (t) => {
     t.end();
 });
 
-test.skip('cloudcmd: client: vim: terminal', (t) => {
-    const {CloudCmd} = globalThis;
-    
-    assign(CloudCmd, {
+test('cloudcmd: client: vim: terminal', (t) => {
+    const CloudCmd = {
         Terminal: {
             show: stub(),
         },
-    });
+    };
     
     const event = {};
     
-    vim('t', event);
-    vim('t', event);
+    vim('t', event, {
+        CloudCmd,
+    });
+    vim('t', event, {
+        CloudCmd,
+    });
     
     t.calledWithNoArgs(CloudCmd.Terminal.show);
     t.end();
