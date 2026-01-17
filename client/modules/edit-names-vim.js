@@ -3,7 +3,7 @@
 /* global CloudCmd */
 CloudCmd.EditNamesVim = exports;
 
-const Events = require('../dom/events');
+const Events = require('../dom/events/index.mjs');
 const {Key} = CloudCmd;
 
 const ConfigView = {

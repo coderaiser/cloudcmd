@@ -26,7 +26,7 @@ const {
 } = require('./types');
 
 const Files = require('../../dom/files');
-const Events = require('../../dom/events');
+const Events = require('../../dom/events/index.mjs');
 const Images = require('../../dom/images');
 
 const {encode} = require('../../../common/entity');

@@ -33,7 +33,7 @@ module.exports = DOM;
 
 DOM.uploadDirectory = require('./directory');
 DOM.Buffer = require('./buffer');
-DOM.Events = require('./events');
+DOM.Events = require('./events/index.mjs');
 
 const loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');

@@ -11,6 +11,7 @@ const clipboard = require('@cloudcmd/clipboard');
 const getRange = require('./get-range');
 const uploadFiles = require('../dom/upload-files');
 const {FS} = require('../../common/cloudfunc.mjs');
+const Events = require('../dom/events/index.mjs');
 
 const getIndex = currify(require('./get-index'));
 
@@ -65,8 +66,6 @@ function header() {
         return /^js-(left|right)$/.test(el.dataset.name);
     };
     
-    const {Events} = DOM;
-    
     Events.addClick(fm, (event) => {
         const el = event.target;
         const parent = el.parentElement;
@@ -103,7 +102,6 @@ async function config() {
 }
 
 module.exports.initKeysPanel = () => {
-    const {Events} = DOM;
     const keysElement = DOM.getById('js-keyspanel');
     
     if (!keysElement)
@@ -150,7 +148,6 @@ const getPanel = (side) => {
 };
 
 module.exports.setOnPanel = (side) => {
-    const {Events} = DOM;
     const panel = getPanel(side);
     
     const filesElement = DOM.getByDataName('js-files', panel);
@@ -380,7 +377,6 @@ function getFilesRange(from, to) {
 }
 
 function contextMenu() {
-    const {Events} = DOM;
     const fm = DOM.getFM();
     
     Events.addOnce('contextmenu', fm, (event) => {
@@ -396,7 +392,6 @@ function contextMenu() {
 }
 
 function dragndrop() {
-    const {Events} = DOM;
     const panels = DOM.getByClassAll('panel');
     const select = ({target}) => {
         target.classList.add('selected-panel');
@@ -457,7 +452,7 @@ function dragndrop() {
 }
 
 function unload() {
-    DOM.Events.add(['unload', 'beforeunload'], (event) => {
+    Events.add(['unload', 'beforeunload'], (event) => {
         const {Key} = CloudCmd;
         const isBind = Key?.isBind();
         
@@ -470,7 +465,7 @@ function unload() {
 }
 
 function pop() {
-    DOM.Events.add('popstate', async ({state}) => {
+    Events.add('popstate', async ({state}) => {
         const path = (state || '').replace(FS, '');
         
         if (!path)
@@ -485,7 +480,7 @@ function pop() {
 }
 
 function resize() {
-    DOM.Events.add('resize', () => {
+    Events.add('resize', () => {
         const Info = DOM.CurrentInfo;
         const is = globalThis.innerWidth < CloudCmd.MIN_ONE_PANEL_WIDTH;
         
