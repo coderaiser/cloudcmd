@@ -7,16 +7,18 @@ const COPY = 'copy';
 const CUT = 'cut';
 
 function showMessage(msg) {
-    DOM.Dialog.alert(msg);
+    globalThis.DOM.Dialog.alert(msg);
 }
 
 function getNames() {
+    const {DOM} = globalThis;
     const files = DOM.getActiveFiles();
     
     return DOM.getFilenames(files);
 }
 
 function addCutClass() {
+    const {DOM} = globalThis;
     const files = DOM.getActiveFiles();
     
     for (const element of files) {
@@ -25,6 +27,7 @@ function addCutClass() {
 }
 
 function rmCutClass() {
+    const {DOM} = globalThis;
     const files = DOM.getByClassAll(CLASS);
     
     for (const element of files) {
