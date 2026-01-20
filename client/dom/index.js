@@ -32,7 +32,7 @@ DOM.CurrentInfo = CurrentInfo;
 module.exports = DOM;
 
 DOM.uploadDirectory = require('./directory');
-DOM.Buffer = require('./buffer');
+DOM.Buffer = require('./buffer.mjs');
 DOM.Events = require('#dom/events');
 
 const loadRemote = require('./load-remote');
