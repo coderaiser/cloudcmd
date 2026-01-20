@@ -1,3 +1,14 @@
+2026.01.20, v19.1.8
+
+fix:
+- 8a769fd5 client: modules: operation: no update after copy
+
+feature:
+- d574a93d client: key: migrate to ESM
+- 3b409074 client: modules: operation: migrate to ESM
+- 3b6b0b5a client: buffer: migrate to ESM
+- 8876f050 cloudcmd: eslint-plugin-putout v30.0.0
+
 2026.01.17, v19.1.7
 
 feature:
