@@ -127,7 +127,7 @@ export default {
         [`${modules}/config`]: `${dirModules}/config/index.js`,
         [`${modules}/contact`]: `${dirModules}/contact.js`,
         [`${modules}/upload`]: `${dirModules}/upload.js`,
-        [`${modules}/operation`]: `${dirModules}/operation/index.js`,
+        [`${modules}/operation`]: `${dirModules}/operation/index.mjs`,
         [`${modules}/konsole`]: `${dirModules}/konsole.js`,
         [`${modules}/terminal`]: `${dirModules}/terminal.js`,
         [`${modules}/terminal-run`]: `${dirModules}/terminal-run.js`,

@@ -1,27 +1,19 @@
-/* global CloudCmd */
-/* global Util */
-/* global DOM */
-/* global fileop */
+import currify from 'currify';
+import wraptile from 'wraptile';
+import {promisify} from 'es6-promisify';
+import exec from 'execon';
+import load from 'load.js';
+import {tryToCatch} from 'try-to-catch';
+import {encode} from '../../../common/entity.js';
+import removeExtension from './remove-extension.js';
+import setListeners from './set-listeners.js';
+import getNextCurrentName from './get-next-current-name.js';
 
-'use strict';
-
-const currify = require('currify');
-const wraptile = require('wraptile');
-const {promisify} = require('es6-promisify');
-const exec = require('execon');
-const load = require('load.js');
-const {tryToCatch} = require('try-to-catch');
-
-const {encode} = require('../../../common/entity');
-const removeExtension = require('./remove-extension');
-const setListeners = require('./set-listeners');
-const getNextCurrentName = require('./get-next-current-name');
+const {DOM, CloudCmd} = globalThis;
 
 const removeQuery = (a) => a.replace(/\?.*/, '');
 
 const Name = 'Operation';
-
-CloudCmd[Name] = exports;
 
 const {config} = CloudCmd;
 const {Dialog, Images} = DOM;
@@ -53,7 +45,7 @@ const noFilesCheck = () => {
     return is;
 };
 
-module.exports.init = promisify((callback) => {
+export const init = promisify((callback) => {
     showLoad();
     
     exec.series([
@@ -92,7 +84,7 @@ const onConnect = currify((fn, operator) => {
 async function initOperations(prefix, socketPrefix, fn) {
     socketPrefix = `${socketPrefix}/fileop`;
     
-    const operator = await fileop({
+    const operator = await globalThis.fileop({
         prefix,
         socketPrefix,
     });
@@ -198,11 +190,11 @@ function getPacker(type) {
     return packTarFn;
 }
 
-module.exports.hide = () => {
+export const hide = () => {
     CloudCmd.View.hide();
 };
 
-module.exports.show = (operation, data) => {
+export const show = (operation, data) => {
     if (!Loaded)
         return;
     
@@ -411,8 +403,11 @@ async function _processFiles(options, data) {
                 to,
                 names,
             };
+            debugger;
             
             operation(files, async () => {
+                console.log('sssss');
+                debugger;
                 await DOM.Storage.remove(from);
                 
                 const {panel, panelPassive} = Info;
@@ -505,8 +500,14 @@ async function prompt(msg, to, names) {
     return await Dialog.prompt(msg, to);
 }
 
+globalThis.CloudCmd[Name] = {
+    init,
+    hide,
+    show,
+};
+
 async function loadAll() {
-    const {prefix} = CloudCmd;
+    const {prefix} = globalThis.CloudCmd;
     const file = `${prefix}/fileop/fileop.js`;
     
     const [error] = await tryToCatch(load.js, file);
