@@ -403,11 +403,8 @@ async function _processFiles(options, data) {
                 to,
                 names,
             };
-            debugger;
             
             operation(files, async () => {
-                console.log('sssss');
-                debugger;
                 await DOM.Storage.remove(from);
                 
                 const {panel, panelPassive} = Info;

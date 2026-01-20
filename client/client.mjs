@@ -12,7 +12,7 @@ import currify from 'currify';
 import Images from './dom/images.js';
 import {unregisterSW} from './sw/register.js';
 import {getJsonFromFileTable} from './get-json-from-file-table.mjs';
-import Key from './key/index.js';
+import {Key} from './key/index.mjs';
 import {
     apiURL,
     formatMsg,

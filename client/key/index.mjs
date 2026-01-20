@@ -1,16 +1,12 @@
-'use strict';
-
 /* global CloudCmd, DOM */
-const clipboard = require('@cloudcmd/clipboard');
-const {fullstore} = require('fullstore');
-
-const Buffer = require('../dom/buffer.mjs');
-const Events = require('#dom/events');
-const KEY = require('./key');
-
-const _vim = require('./vim');
-const setCurrentByChar = require('./set-current-by-char');
-const {createBinder} = require('./binder');
+import clipboard from '@cloudcmd/clipboard';
+import {fullstore} from 'fullstore';
+import * as Events from '#dom/events';
+import * as Buffer from '../dom/buffer.mjs';
+import KEY from './key.js';
+import _vim from './vim/index.js';
+import setCurrentByChar from './set-current-by-char.js';
+import {createBinder} from './binder.js';
 
 const Chars = fullstore();
 
@@ -28,13 +24,16 @@ Chars([]);
 const {assign} = Object;
 const binder = createBinder();
 
-module.exports = assign(binder, KEY);
-module.exports.bind = () => {
+const bind = () => {
     Events.addKey(listener, true);
     binder.setBind();
 };
 
-module.exports._listener = listener;
+export const Key = assign(binder, KEY, {
+    bind,
+});
+
+export const _listener = listener;
 
 function getChar(event) {
     /*

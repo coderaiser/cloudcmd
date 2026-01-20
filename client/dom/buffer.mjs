@@ -1,9 +1,7 @@
-/* global CloudCmd */
+/* global CloudCmd*/
 import tryToPromiseAll from '../../common/try-to-promise-all.js';
 import Storage from './storage.js';
-import DOM from './index.js';
 
-const Info = DOM.CurrentInfo;
 const CLASS = 'cut-file';
 const COPY = 'copy';
 const CUT = 'cut';
@@ -57,6 +55,7 @@ async function readBuffer() {
 }
 
 export const copy = checkEnabled(async () => {
+    const Info = globalThis.DOM.CurrentInfo;
     const names = getNames();
     const from = Info.dirPath;
     
@@ -73,6 +72,7 @@ export const copy = checkEnabled(async () => {
 });
 
 export const cut = checkEnabled(async () => {
+    const Info = globalThis.DOM.CurrentInfo;
     const names = getNames();
     const from = Info.dirPath;
     
@@ -97,6 +97,7 @@ export const clear = checkEnabled(async () => {
 });
 
 export const paste = checkEnabled(async () => {
+    const Info = globalThis.DOM.CurrentInfo;
     const [error, cp, ct] = await readBuffer();
     
     if (error || !cp && !ct)

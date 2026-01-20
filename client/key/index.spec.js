@@ -7,7 +7,8 @@ const supertape = require('supertape');
 
 const {ESC} = require('./key');
 
-const {_listener, setBind} = require('.');
+const {Key, _listener} = require('./index.mjs');
+
 const {getDOM, getCloudCmd} = require('./vim/globals.fixture');
 const test = autoGlobals(supertape);
 const {stub} = supertape;
@@ -26,7 +27,7 @@ test('cloudcmd: client: key: enable vim', async (t) => {
         altKey: false,
     };
     
-    setBind();
+    Key.setBind();
     
     await _listener(event, {
         vim,
@@ -48,7 +49,7 @@ test('cloudcmd: client: key: disable vim', async (t) => {
         altKey: false,
     };
     
-    setBind();
+    Key.setBind();
     await _listener(event, {
         config,
         _config,
