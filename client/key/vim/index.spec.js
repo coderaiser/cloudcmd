@@ -664,7 +664,7 @@ test('cloudcmd: client: vim: terminal', (t) => {
     t.end();
 });
 
-test.skip('cloudcmd: client: vim: edit', async (t) => {
+test('cloudcmd: client: vim: edit', async (t) => {
     globalThis.DOM = getDOM();
     globalThis.CloudCmd = getCloudCmd();
     
