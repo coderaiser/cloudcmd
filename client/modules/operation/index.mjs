@@ -6,7 +6,7 @@ import load from 'load.js';
 import {tryToCatch} from 'try-to-catch';
 import {encode} from '../../../common/entity.js';
 import removeExtension from './remove-extension.js';
-import setListeners from './set-listeners.js';
+import {setListeners} from './set-listeners.mjs';
 import getNextCurrentName from './get-next-current-name.js';
 
 const {DOM, CloudCmd} = globalThis;

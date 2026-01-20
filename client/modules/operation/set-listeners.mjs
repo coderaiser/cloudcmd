@@ -1,14 +1,11 @@
-'use strict';
-
 /* global DOM */
-const forEachKey = require('for-each-key');
-
-const wraptile = require('wraptile');
-const format = require('./format');
+import forEachKey from 'for-each-key';
+import wraptile from 'wraptile';
+import format from './format.js';
 
 const {Dialog, Images} = DOM;
 
-module.exports = (options) => (emitter) => {
+export const setListeners = (options) => (emitter) => {
     const {
         operation,
         callback,
@@ -43,10 +40,12 @@ module.exports = (options) => (emitter) => {
         operation,
     }));
     
+    let noProgress = true;
     const listeners = {
         progress: (value) => {
             done = value === 100;
             progress.setProgress(value);
+            noProgress = false;
         },
         
         end: () => {
@@ -54,7 +53,7 @@ module.exports = (options) => (emitter) => {
             forEachKey(removeListener, listeners);
             progress.remove();
             
-            if (lastError || done)
+            if (lastError || done || noProgress)
                 callback();
         },
         
