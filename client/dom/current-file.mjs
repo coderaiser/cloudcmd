@@ -1,10 +1,8 @@
-'use strict';
-
 /* global DOM */
 /* global CloudCmd */
-const createElement = require('@cloudcmd/create-element');
-const {encode, decode} = require('../../common/entity');
-const {getTitle, FS} = require('../../common/cloudfunc.mjs');
+import createElement from '@cloudcmd/create-element';
+import {encode, decode} from '../../common/entity.js';
+import {getTitle, FS} from '../../common/cloudfunc.mjs';
 
 let Title;
 
@@ -12,14 +10,15 @@ const CURRENT_FILE = 'current-file';
 const encodeNBSP = (a) => a?.replace('\xa0', '&nbsp;');
 const decodeNBSP = (a) => a?.replace('&nbsp;', '\xa0');
 
-module.exports._CURRENT_FILE = CURRENT_FILE;
+export const _CURRENT_FILE = CURRENT_FILE;
+
 /**
  * set name from current (or param) file
  *
  * @param name
  * @param current
  */
-module.exports.setCurrentName = (name, current) => {
+export const setCurrentName = (name, current) => {
     const Info = DOM.CurrentInfo;
     const {link} = Info;
     const {prefix} = CloudCmd;
@@ -41,7 +40,7 @@ module.exports.setCurrentName = (name, current) => {
  *
  * @param currentFile
  */
-module.exports.getCurrentName = (currentFile) => {
+export const getCurrentName = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
     
     if (!current)
@@ -68,18 +67,19 @@ const parseNameAttribute = (attribute) => {
     return decodeNBSP(decodeURI(atob(attribute)));
 };
 
-module.exports._parseNameAttribute = parseNameAttribute;
+export const _parseNameAttribute = parseNameAttribute;
 
 const parseHrefAttribute = (prefix, attribute) => {
     attribute = attribute.replace(RegExp('^' + prefix + FS), '');
     return decode(decodeNBSP(attribute));
 };
 
-module.exports._parseHrefAttribute = parseHrefAttribute;
+export const _parseHrefAttribute = parseHrefAttribute;
+
 /**
  * get current direcotory path
  */
-module.exports.getCurrentDirPath = (panel = DOM.getPanel()) => {
+export const getCurrentDirPath = (panel = DOM.getPanel()) => {
     const path = DOM.getByDataName('js-path', panel);
     return path.textContent;
 };
@@ -89,7 +89,7 @@ module.exports.getCurrentDirPath = (panel = DOM.getPanel()) => {
  *
  * @param currentFile - current file by default
  */
-module.exports.getCurrentPath = (currentFile) => {
+export const getCurrentPath = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
     const [element] = DOM.getByTag('a', current);
     const {prefix} = CloudCmd;
@@ -100,7 +100,7 @@ module.exports.getCurrentPath = (currentFile) => {
 /**
  * get current direcotory name
  */
-module.exports.getCurrentDirName = () => {
+export const getCurrentDirName = () => {
     const href = DOM
         .getCurrentDirPath()
         .replace(/\/$/, '');
@@ -113,7 +113,7 @@ module.exports.getCurrentDirName = () => {
 /**
  * get current direcotory path
  */
-module.exports.getParentDirPath = (panel) => {
+export const getParentDirPath = (panel) => {
     const path = DOM.getCurrentDirPath(panel);
     const dirName = DOM.getCurrentDirName() + '/';
     const index = path.lastIndexOf(dirName);
@@ -127,7 +127,7 @@ module.exports.getParentDirPath = (panel) => {
 /**
  * get not current direcotory path
  */
-module.exports.getNotCurrentDirPath = () => {
+export const getNotCurrentDirPath = () => {
     const panel = DOM.getPanel({
         active: false,
     });
@@ -140,14 +140,14 @@ module.exports.getNotCurrentDirPath = () => {
  *
  * @currentFile
  */
-module.exports.getCurrentFile = () => {
+export const getCurrentFile = () => {
     return DOM.getByClass(CURRENT_FILE);
 };
 
 /**
  * get current file by name
  */
-module.exports.getCurrentByName = (name, panel = DOM.CurrentInfo.panel) => {
+export const getCurrentByName = (name, panel = DOM.CurrentInfo.panel) => {
     const dataName = 'js-file-' + btoa(encodeURI(encodeNBSP(name)));
     return DOM.getByDataName(dataName, panel);
 };
@@ -169,7 +169,7 @@ function unsetCurrentFile(currentFile) {
 /**
  * unified way to set current file
  */
-module.exports.setCurrentFile = (currentFile, options) => {
+export const setCurrentFile = (currentFile, options) => {
     const o = options;
     const currentFileWas = DOM.getCurrentFile();
     
@@ -216,7 +216,7 @@ module.exports.setCurrentFile = (currentFile, options) => {
     return DOM;
 };
 
-this.setCurrentByName = (name) => {
+export const setCurrentByName = (name) => {
     const current = DOM.getCurrentByName(name);
     return DOM.setCurrentFile(current);
 };
@@ -227,7 +227,7 @@ this.setCurrentByName = (name) => {
   * @param layer    - element
   * @param          - position {x, y}
   */
-module.exports.getCurrentByPosition = ({x, y}) => {
+export const getCurrentByPosition = ({x, y}) => {
     const element = document.elementFromPoint(x, y);
     
     const getEl = (el) => {
@@ -259,7 +259,7 @@ module.exports.getCurrentByPosition = ({x, y}) => {
  *
  * @param currentFile
  */
-module.exports.isCurrentFile = (currentFile) => {
+export const isCurrentFile = (currentFile) => {
     if (!currentFile)
         return false;
     
@@ -271,7 +271,7 @@ module.exports.isCurrentFile = (currentFile) => {
  *
  * @param name
  */
-module.exports.setTitle = (name) => {
+export const setTitle = (name) => {
     if (!Title)
         Title = DOM.getByTag('title')[0] || createElement('title', {
             innerHTML: name,
@@ -288,7 +288,7 @@ module.exports.setTitle = (name) => {
  *
  * @param currentFile
  */
-module.exports.isCurrentIsDir = (currentFile) => {
+export const isCurrentIsDir = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
     const path = DOM.getCurrentPath(current);
     const fileType = DOM.getCurrentType(current);
@@ -299,7 +299,7 @@ module.exports.isCurrentIsDir = (currentFile) => {
     return isDir || isZip;
 };
 
-module.exports.getCurrentType = (currentFile) => {
+export const getCurrentType = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
     const el = DOM.getByDataName('js-type', current);
     const type = el.className

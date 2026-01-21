@@ -1,10 +1,8 @@
-'use strict';
+import {test, stub} from 'supertape';
+import {create} from 'auto-globals';
+import wraptile from 'wraptile';
+import * as currentFile from './current-file.mjs';
 
-const {test, stub} = require('supertape');
-
-const {create} = require('auto-globals');
-const wraptile = require('wraptile');
-const currentFile = require('./current-file');
 const id = (a) => a;
 
 const returns = wraptile(id);
@@ -307,3 +305,4 @@ function getDOM(overrides = {}) {
         },
     };
 }
+

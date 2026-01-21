@@ -7,7 +7,7 @@ const _Dialog = require('../dialog');
 const Storage = require('../storage');
 const RESTful = require('../rest');
 
-const _currentFile = require('../current-file');
+const _currentFile = require('../current-file.mjs');
 
 module.exports = async (current, overrides = {}) => {
     const {
