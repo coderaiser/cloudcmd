@@ -1,3 +1,11 @@
+2026.01.21, v19.1.9
+
+feature:
+- 75ad4415 cloudcmd: @putout/eslint-flat v4.0.0
+- c5d9bd7c client: key: vim: get rid of mock-require
+- f437a52f client: images: migrate to EMS
+- 7192a56e client: dom: current-file: migrate to ESM
+
 2026.01.20, v19.1.8
 
 fix:
