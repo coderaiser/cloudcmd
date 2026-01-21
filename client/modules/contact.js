@@ -6,7 +6,7 @@
 CloudCmd.Contact = exports;
 
 const olark = require('@cloudcmd/olark');
-const Images = require('../dom/images');
+const Images = require('../dom/images.mjs');
 
 const {Events} = DOM;
 const {Key} = CloudCmd;

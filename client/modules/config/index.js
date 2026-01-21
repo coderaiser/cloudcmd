@@ -13,7 +13,7 @@ const load = require('load.js');
 const createElement = require('@cloudcmd/create-element');
 
 const input = require('./input');
-const Images = require('../../dom/images');
+const Images = require('../../dom/images.mjs');
 const Events = require('#dom/events');
 const Files = require('../../dom/files');
 

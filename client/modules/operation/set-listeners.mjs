@@ -41,6 +41,7 @@ export const setListeners = (options) => (emitter) => {
     }));
     
     let noProgress = true;
+    
     const listeners = {
         progress: (value) => {
             done = value === 100;

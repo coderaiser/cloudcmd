@@ -4,7 +4,7 @@ const itype = require('itype');
 const jonny = require('jonny');
 const Emitify = require('emitify');
 const exec = require('execon');
-const Images = require('./images');
+const Images = require('./images.mjs');
 
 module.exports.getIdBySrc = getIdBySrc;
 /**

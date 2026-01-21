@@ -4,7 +4,7 @@ const {tryToCatch} = require('try-to-catch');
 
 const {encode} = require('../../common/entity');
 
-const Images = require('./images');
+const Images = require('./images.mjs');
 const IO = require('./io');
 const Dialog = require('./dialog');
 

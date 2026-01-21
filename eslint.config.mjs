@@ -33,9 +33,7 @@ export default defineConfig([
     }, {
         files: ['{client,common,static}/**/*.js'],
         languageOptions: {
-            globals: {
-                ...globals.browser,
-            },
+            globals: globals.browser,
         },
     },
     ...matchToFlat(match),

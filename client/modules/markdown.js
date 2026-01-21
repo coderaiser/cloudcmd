@@ -5,7 +5,7 @@ CloudCmd.Markdown = exports;
 
 const createElement = require('@cloudcmd/create-element');
 
-const Images = require('../dom/images');
+const Images = require('../dom/images.mjs');
 const {Markdown} = require('../dom/rest');
 const {alert} = require('../dom/dialog');
 

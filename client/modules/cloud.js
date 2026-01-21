@@ -9,7 +9,7 @@ const load = require('load.js');
 const {ajax} = require('../dom/load');
 
 const Files = require('../dom/files');
-const Images = require('../dom/images');
+const Images = require('../dom/images.mjs');
 const {log} = CloudCmd;
 
 const upload = currify(_upload);

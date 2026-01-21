@@ -3,7 +3,7 @@
 /* global CloudCmd */
 const Util = require('../../common/util');
 
-const Images = require('./images');
+const Images = require('./images.mjs');
 const RESTful = require('./rest');
 const Storage = require('./storage');
 const renameCurrent = require('./operations/rename-current');

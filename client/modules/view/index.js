@@ -27,7 +27,7 @@ const {
 
 const Files = require('../../dom/files');
 const Events = require('#dom/events');
-const Images = require('../../dom/images');
+const Images = require('../../dom/images.mjs');
 
 const {encode} = require('../../../common/entity');
 const isString = (a) => typeof a === 'string';

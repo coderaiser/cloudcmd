@@ -5,7 +5,7 @@ const {eachSeries} = require('execon');
 const wraptile = require('wraptile');
 
 const load = require('./load');
-const Images = require('./images');
+const Images = require('./images.mjs');
 const {alert} = require('./dialog');
 
 const {FS} = require('../../common/cloudfunc.mjs');

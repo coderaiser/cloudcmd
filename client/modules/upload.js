@@ -6,7 +6,7 @@ CloudCmd.Upload = exports;
 
 const createElement = require('@cloudcmd/create-element');
 const Files = require('../dom/files');
-const Images = require('../dom/images');
+const Images = require('../dom/images.mjs');
 const uploadFiles = require('../dom/upload-files');
 
 module.exports.init = async () => {

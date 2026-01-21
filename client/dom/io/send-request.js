@@ -3,7 +3,7 @@
 /* global CloudCmd */
 const {promisify} = require('es6-promisify');
 
-const Images = require('../images');
+const Images = require('../images.mjs');
 const load = require('../load');
 
 module.exports = promisify((params, callback) => {

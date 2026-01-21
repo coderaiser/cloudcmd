@@ -305,4 +305,3 @@ function getDOM(overrides = {}) {
         },
     };
 }
-
