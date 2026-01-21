@@ -570,17 +570,13 @@ test('cloudcmd: client: find', (t) => {
 
 test('cloudcmd: client: key: n', (t) => {
     const findNext = stub();
+    const createFindNext = stub().returns(findNext);
     
-    mockRequire(pathFind, {
-        findNext,
-    });
-    
-    const vim = reRequire(pathVim);
     const event = {};
     
-    vim('n', event);
-    
-    stopAll();
+    vim('n', event, {
+        createFindNext,
+    });
     
     t.calledWithNoArgs(findNext, 'should call findNext');
     t.end();

@@ -39,9 +39,13 @@ const getOperations = (event, deps) => {
         
         toggleSelectedFile,
         Buffer = {},
+        createFindNext = _createFindNext,
     } = deps;
     
     return {
+        findNext: createFindNext({
+            setCurrentByName,
+        }),
         escape: unselectFiles,
         
         remove: () => {
@@ -119,11 +123,6 @@ const getOperations = (event, deps) => {
             setCurrentByName(result);
         },
         
-        findNext: () => {
-            const name = finder.findNext();
-            setCurrentByName(name);
-        },
-        
         findPrevious: () => {
             const name = finder.findPrevious();
             setCurrentByName(name);
@@ -132,3 +131,10 @@ const getOperations = (event, deps) => {
 };
 
 module.exports.selectFile = selectFileNotParent;
+
+const _createFindNext = (overrides = {}) => () => {
+    const {setCurrentByName} = overrides;
+    const name = finder.findNext();
+    
+    setCurrentByName(name);
+};
