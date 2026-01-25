@@ -5,7 +5,7 @@ require('css-modules-require-hook/preset');
 const autoGlobals = require('auto-globals');
 const supertape = require('supertape');
 
-const {ESC} = require('./key');
+const {ESC} = require('./key.mjs');
 
 const {Key, _listener} = require('./index.mjs');
 

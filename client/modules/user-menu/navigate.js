@@ -7,7 +7,7 @@ const {
     K,
     UP,
     DOWN,
-} = require('../../key/key.js');
+} = require('../../key/key.mjs');
 
 const store = fullstore(1);
 const isDigit = (a) => /^\d+$/.test(a);

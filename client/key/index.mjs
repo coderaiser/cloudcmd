@@ -3,7 +3,7 @@ import clipboard from '@cloudcmd/clipboard';
 import {fullstore} from 'fullstore';
 import * as Events from '#dom/events';
 import * as Buffer from '../dom/buffer.mjs';
-import KEY from './key.js';
+import * as KEY from './key.mjs';
 import _vim from './vim/index.js';
 import setCurrentByChar from './set-current-by-char.js';
 import {createBinder} from './binder.js';

@@ -8,7 +8,7 @@ const {
     DOWN,
     J,
     K,
-} = require('../../key/key.js');
+} = require('../../key/key.mjs');
 
 test('cloudcmd: user-menu: navigate: DOWN', (t) => {
     const el = {
