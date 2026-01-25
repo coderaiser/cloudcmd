@@ -615,12 +615,7 @@ test('cloudcmd: client: key: make directory', async (t) => {
 });
 
 test('cloudcmd: client: key: make file', (t) => {
-    const vim = reRequire(pathVim);
-    const {DOM} = globalThis;
-    
-    assign(DOM, {
-        promptNewFile: stub(),
-    });
+    const promptNewFile = stub();
     
     const event = {
         stopImmediatePropagation: stub(),
@@ -628,9 +623,11 @@ test('cloudcmd: client: key: make file', (t) => {
     };
     
     vim('m', event);
-    vim('f', event);
+    vim('f', event, {
+        promptNewFile,
+    });
     
-    t.calledWithNoArgs(DOM.promptNewDir);
+    t.calledWithNoArgs(promptNewFile);
     t.end();
 });
 

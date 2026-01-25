@@ -8,6 +8,7 @@ const {
     setCurrent,
     selectFileNotParent,
 } = require('./set-current');
+const {promptNewFile} = require('../../dom');
 
 module.exports = (key, event, overrides = {}) => {
     const defaults = {
@@ -36,14 +37,22 @@ const getOperations = (event, deps) => {
         getCurrentName,
         prompt = globalThis.DOM.Dialog.prompt,
         preventDefault = event?.preventDefault?.bind(event),
+        stopImmediatePropagation = event?.preventDefault?.bind(event),
+        promptNewFile = DOM.promptNewFile,
         
         toggleSelectedFile,
         Buffer = {},
         createFindNext = _createFindNext,
         createFindPrevious = _createFindPrevious,
+        createMakeFile = _createMakeFile,
     } = deps;
     
     return {
+        makeFile: createMakeFile({
+            promptNewFile,
+            preventDefault,
+            stopImmediatePropagation,
+        }),
         findNext: createFindNext({
             setCurrentByName,
         }),
@@ -60,12 +69,6 @@ const getOperations = (event, deps) => {
             event.stopImmediatePropagation();
             event.preventDefault();
             DOM.promptNewDir();
-        },
-        
-        makeFile: () => {
-            event.stopImmediatePropagation();
-            event.preventDefault();
-            DOM.promptNewFile();
         },
         
         terminal: () => {
@@ -143,4 +146,16 @@ const _createFindNext = (overrides = {}) => () => {
     const name = finder.findNext();
     
     setCurrentByName(name);
+};
+
+const _createMakeFile = (overrides = {}) => () => {
+    const {
+        promptNewFile,
+        stopImmediatePropagation,
+        preventDefault,
+    } = overrides;
+    
+    stopImmediatePropagation();
+    preventDefault();
+    promptNewFile();
 };
