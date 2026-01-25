@@ -1,3 +1,10 @@
+2026.01.25, v19.1.11
+
+feature:
+- f849b842 client: listeners: migrate to ESM
+- 091f9017 client: listeners: simplify
+- 3c1a82e7 client: key: view: get rid of mock-require
+
 2026.01.25, v19.1.10
 
 feature:
