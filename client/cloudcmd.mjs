@@ -8,7 +8,7 @@ import Util from '../common/util.js';
 import * as CloudFunc from '../common/cloudfunc.mjs';
 import DOM from './dom/index.js';
 import {createCloudCmd} from './client.mjs';
-import * as Listeners from './listeners/index.js';
+import * as Listeners from './listeners/index.mjs';
 
 const isDev = process.env.NODE_ENV === 'development';
 

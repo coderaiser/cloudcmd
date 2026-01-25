@@ -8,7 +8,6 @@ const {
     setCurrent,
     selectFileNotParent,
 } = require('./set-current');
-const {promptNewFile} = require('../../dom');
 
 module.exports = (key, event, overrides = {}) => {
     const defaults = {

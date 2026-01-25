@@ -1,9 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-
-const dir = '../../../client/listeners';
-const getIndex = require(`${dir}/get-index`);
+import test from 'supertape';
+import {getIndex} from './get-index.mjs';
 
 test('cloudcmd: client: listeners: getIndex: not found', (t) => {
     const array = ['hello'];
@@ -21,3 +17,4 @@ test('cloudcmd: client: listeners: getIndex: found', (t) => {
     t.equal(getIndex(array, 'world'), 1, 'should return index');
     t.end();
 });
+

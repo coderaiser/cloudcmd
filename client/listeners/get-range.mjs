@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (indexFrom, indexTo, files) => {
+export const getRange = (indexFrom, indexTo, files) => {
     if (indexFrom < indexTo)
         return files.slice(indexFrom, indexTo + 1);
     

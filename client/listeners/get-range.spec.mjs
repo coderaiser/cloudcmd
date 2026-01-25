@@ -1,9 +1,5 @@
-'use strict';
-
-const test = require('supertape');
-
-const dir = '../../../client/listeners';
-const getRange = require(`${dir}/get-range`);
+import test from 'supertape';
+import {getRange} from './get-range.mjs';
 
 test('cloudcmd: client: listeners: getRange: direct', (t) => {
     const expected = [
@@ -54,3 +50,4 @@ test('cloudcmd: client: listeners: getRange: one', (t) => {
     t.deepEqual(result, expected, 'should return range');
     t.end();
 });
+

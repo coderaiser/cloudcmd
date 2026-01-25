@@ -12,7 +12,7 @@ export const match = {
     'client/dom/index.js': {
         'no-multi-spaces': 'off',
     },
-    '{client,static}/**/*.js': {
+    '{client,static}/**/*.{js,mjs}': {
         'n/no-extraneous-require': 'off',
         'n/no-unsupported-features/node-builtins': 'off',
     },
