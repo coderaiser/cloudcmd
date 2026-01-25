@@ -2,7 +2,6 @@
 
 const {join} = require('node:path');
 const {test, stub} = require('supertape');
-const mockRequire = require('mock-require');
 
 const dir = '../';
 
@@ -18,8 +17,8 @@ const vim = require('./index.js');
 const {assign} = Object;
 const {DOM} = globalThis;
 const {Buffer} = DOM;
-const pathFind = join(dir, 'vim', 'find');
-const {reRequire, stopAll} = mockRequire;
+
+const {reRequire, stopAll} = require('mock-require');
 
 test('cloudcmd: client: key: set next file: no', (t) => {
     const element = {};
@@ -584,19 +583,14 @@ test('cloudcmd: client: key: n', (t) => {
 
 test('cloudcmd: client: key: N', (t) => {
     const findPrevious = stub();
-    
-    mockRequire(pathFind, {
-        findPrevious,
-    });
-    
-    const vim = reRequire(`${dir}vim`);
+    const createFindPrevious = stub().returns(findPrevious);
     const event = {};
     
-    vim('N', event);
+    vim('N', event, {
+        createFindPrevious,
+    });
     
-    stopAll();
-    
-    t.calledWithNoArgs(findPrevious, 'should call findPrevious');
+    t.calledWithNoArgs(findPrevious);
     t.end();
 });
 
