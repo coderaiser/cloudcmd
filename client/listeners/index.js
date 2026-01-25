@@ -19,15 +19,13 @@ const NBSP_REG = RegExp(String.fromCharCode(160), 'g');
 const SPACE = ' ';
 
 module.exports.init = async () => {
-    await Promise.all([
-        contextMenu(),
-        dragndrop(),
-        unload(),
-        pop(),
-        resize(),
-        header(),
-        config(),
-    ]);
+    contextMenu();
+    dragndrop();
+    unload();
+    pop();
+    resize();
+    header();
+    await config();
 };
 
 const unselect = (event) => {
@@ -502,3 +500,4 @@ function resize() {
         DOM.changePanel();
     });
 }
+
