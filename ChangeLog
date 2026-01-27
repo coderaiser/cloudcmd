@@ -1,3 +1,8 @@
+2026.01.27, v19.1.13
+
+feature:
+- 41b5a96f client: load: migrate to ESM
+
 2026.01.27, v19.1.12
 
 feature:
