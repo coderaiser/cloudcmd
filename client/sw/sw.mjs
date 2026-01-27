@@ -1,9 +1,7 @@
-'use strict';
-
-const process = require('node:process');
-const codegen = require('codegen.macro');
-const {tryToCatch} = require('try-to-catch');
-const currify = require('currify');
+import process from 'node:process';
+import codegen from 'codegen.macro';
+import {tryToCatch} from 'try-to-catch';
+import currify from 'currify';
 
 const isDev = process.env.NODE_ENV === 'development';
 
@@ -98,3 +96,4 @@ async function addToCache(request, response) {
     const cache = await caches.open(NAME);
     return cache.put(request, response);
 }
+

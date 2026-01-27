@@ -32,12 +32,12 @@ const options = {
 
 const rules = clean([
     !isDev && {
-        test: /\.js$/,
+        test: /\.[mc]?js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
     },
     isDev && {
-        test: /\.js$/,
+        test: /\.[mc]?js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
         options,
@@ -113,7 +113,7 @@ export default {
         'config': `${dirCss}/config.css`,
         'terminal': `${dirCss}/terminal.css`,
         'user-menu': `${dirCss}/user-menu.css`,
-        'sw': `${dir}/sw/sw.js`,
+        'sw': `${dir}/sw/sw.mjs`,
         'cloudcmd': `${dir}/cloudcmd.mjs`,
         [`${modules}/edit`]: `${dirModules}/edit.js`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.js`,

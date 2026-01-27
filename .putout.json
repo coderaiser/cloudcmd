@@ -11,6 +11,9 @@
         "package-json/add-type": "off"
     },
     "match": {
+        ".filesystem.json": {
+            "nodejs/rename-file-cjs-to-js": "off"
+        },
         "base64": {
             "types/convert-typeof-to-is-type": "off"
         },

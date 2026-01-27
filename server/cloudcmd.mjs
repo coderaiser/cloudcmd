@@ -285,10 +285,12 @@ function setUrl(req, res, next) {
 
 function setSW(req, res, next) {
     const {url} = req;
-    const isSW = /^\/sw\.js(\.map)?$/.test(url);
+    const isSW = /^\/sw\.[mc]?js(\.map)?$/.test(url);
     
-    if (isSW)
+    if (isSW) {
+        const url = req.url.replace(/[cm]js/, 'js');
         req.url = replaceDist(`/dist${url}`);
+    }
     
     next();
 }
