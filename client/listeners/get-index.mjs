@@ -8,4 +8,3 @@ export const getIndex = currify((array, item) => {
     
     return index;
 });
-

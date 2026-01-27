@@ -1,16 +1,12 @@
-'use strict';
-
-const autoGlobals = require('auto-globals');
-const tape = require('supertape');
-
-const {stub} = require('@cloudcmd/stub');
-
-const {tryCatch} = require('try-catch');
-const {
+import autoGlobals from 'auto-globals';
+import tape from 'supertape';
+import {stub} from '@cloudcmd/stub';
+import {tryCatch} from 'try-catch';
+import {
     listenSW,
     registerSW,
     unregisterSW,
-} = require('./register');
+} from './register.mjs';
 
 const test = autoGlobals(tape);
 

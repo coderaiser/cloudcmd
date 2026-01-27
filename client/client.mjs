@@ -10,7 +10,7 @@ import {addSlashToEnd} from 'format-io';
 import pascalCase from 'just-pascal-case';
 import currify from 'currify';
 import * as Images from './dom/images.mjs';
-import {unregisterSW} from './sw/register.js';
+import {unregisterSW} from './sw/register.mjs';
 import {getJsonFromFileTable} from './get-json-from-file-table.mjs';
 import {Key} from './key/index.mjs';
 import {

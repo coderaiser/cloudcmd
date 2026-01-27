@@ -50,4 +50,3 @@ test('cloudcmd: client: listeners: getRange: one', (t) => {
     t.deepEqual(result, expected, 'should return range');
     t.end();
 });
-

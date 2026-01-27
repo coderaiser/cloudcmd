@@ -2,7 +2,7 @@ import process from 'node:process';
 import wraptile from 'wraptile';
 import load from 'load.js';
 import '../css/main.css';
-import {registerSW, listenSW} from './sw/register.js';
+import {registerSW, listenSW} from './sw/register.mjs';
 import {initSortPanel, sortPanel} from './sort.mjs';
 import Util from '../common/util.js';
 import * as CloudFunc from '../common/cloudfunc.mjs';

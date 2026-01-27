@@ -1,15 +1,10 @@
-'use strict';
+import {tryToCatch} from 'try-to-catch';
 
-const {tryToCatch} = require('try-to-catch');
-
-module.exports.registerSW = registerSW;
-module.exports.unregisterSW = unregisterSW;
-
-module.exports.listenSW = (sw, ...args) => {
+export const listenSW = (sw, ...args) => {
     sw?.addEventListener(...args);
 };
 
-async function registerSW(prefix) {
+export async function registerSW(prefix) {
     if (!navigator.serviceWorker)
         return;
     
@@ -29,7 +24,7 @@ async function registerSW(prefix) {
     return sw;
 }
 
-async function unregisterSW(prefix) {
+export async function unregisterSW(prefix) {
     const reg = await registerSW(prefix);
     reg?.unregister(prefix);
 }

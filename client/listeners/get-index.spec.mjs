@@ -17,4 +17,3 @@ test('cloudcmd: client: listeners: getIndex: found', (t) => {
     t.equal(getIndex(array, 'world'), 1, 'should return index');
     t.end();
 });
-
