@@ -1,3 +1,9 @@
+2026.01.27, v19.1.12
+
+feature:
+- 27a52d33 client: sw: migrate to ESM
+- 6b049d95 client: sw: register: migrate to ESM
+
 2026.01.25, v19.1.11
 
 feature:
