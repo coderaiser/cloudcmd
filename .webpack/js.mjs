@@ -124,7 +124,7 @@ export default {
         [`${modules}/view`]: `${dirModules}/view/index.js`,
         [`${modules}/help`]: `${dirModules}/help.js`,
         [`${modules}/markdown`]: `${dirModules}/markdown.js`,
-        [`${modules}/config`]: `${dirModules}/config/index.js`,
+        [`${modules}/config`]: `${dirModules}/config/index.mjs`,
         [`${modules}/contact`]: `${dirModules}/contact.js`,
         [`${modules}/upload`]: `${dirModules}/upload.js`,
         [`${modules}/operation`]: `${dirModules}/operation/index.mjs`,

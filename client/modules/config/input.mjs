@@ -1,20 +1,15 @@
-'use strict';
-
-const currify = require('currify');
+import currify from 'currify';
 
 const isType = currify((type, object, name) => type === typeof object[name]);
-
 const isBool = isType('boolean');
 
-module.exports.getElementByName = getElementByName;
-
-function getElementByName(selector, element) {
+export function getElementByName(selector, element) {
     const str = `[data-name="js-${selector}"]`;
     
     return element.querySelector(str);
 }
 
-module.exports.getName = (element) => {
+export const getName = (element) => {
     const name = element
         .getAttribute('data-name')
         .replace(/^js-/, '');
@@ -22,7 +17,7 @@ module.exports.getName = (element) => {
     return name;
 };
 
-module.exports.convert = (config) => {
+export const convert = (config) => {
     const result = config;
     const array = Object.keys(config);
     
@@ -43,7 +38,7 @@ function setState(state) {
     return '';
 }
 
-module.exports.getValue = (name, element) => {
+export const getValue = (name, element) => {
     const el = getElementByName(name, element);
     const {type} = el;
     
@@ -59,7 +54,7 @@ module.exports.getValue = (name, element) => {
     }
 };
 
-module.exports.setValue = (name, value, element) => {
+export const setValue = (name, value, element) => {
     const el = getElementByName(name, element);
     const {type} = el;
     

@@ -1,28 +1,22 @@
-'use strict';
-
 /* global CloudCmd, DOM, io */
-require('../../../css/config.css');
+import rendy from 'rendy';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import squad from 'squad';
+import {promisify} from 'es6-promisify';
+import {tryToCatch} from 'try-to-catch';
+import load from 'load.js';
+import createElement from '@cloudcmd/create-element';
+import * as Events from '#dom/events';
+import '../../../css/config.css';
+import * as input from './input.mjs';
+import * as Images from '../../dom/images.mjs';
+import Files from '../../dom/files.js';
+import {getTitle} from '../../../common/cloudfunc.mjs';
 
-const rendy = require('rendy');
-const currify = require('currify');
-const wraptile = require('wraptile');
-const squad = require('squad');
-const {promisify} = require('es6-promisify');
-const {tryToCatch} = require('try-to-catch');
-const load = require('load.js');
-const createElement = require('@cloudcmd/create-element');
-
-const input = require('./input');
-const Images = require('../../dom/images.mjs');
-const Events = require('#dom/events');
-const Files = require('../../dom/files');
-
-const {getTitle} = require('../../../common/cloudfunc.mjs');
 const {Dialog, setTitle} = DOM;
 
 const Name = 'Config';
-
-CloudCmd[Name] = module.exports;
 
 const loadSocket = promisify(DOM.loadSocket);
 
@@ -46,7 +40,7 @@ let Template;
 
 const loadCSS = load.css;
 
-module.exports.init = async () => {
+export const init = async () => {
     if (!CloudCmd.config('configDialog'))
         return;
     
@@ -118,9 +112,7 @@ function authCheck(socket) {
 
 Config.save = saveHttp;
 
-module.exports.show = show;
-
-async function show() {
+export async function show() {
     if (!CloudCmd.config('configDialog'))
         return;
     
@@ -183,9 +175,7 @@ async function fillTemplate() {
     });
 }
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 
@@ -246,3 +236,9 @@ async function onKey({keyCode, target}) {
         return await onChange(target);
     }
 }
+
+CloudCmd[Name] = {
+    init,
+    show,
+    hide,
+};
