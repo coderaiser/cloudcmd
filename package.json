@@ -219,7 +219,8 @@
     "webpackbar": "^7.0.0"
   },
   "imports": {
-    "#dom/events": "./client/dom/events/index.mjs"
+    "#dom/events": "./client/dom/events/index.mjs",
+    "#dom/load": "./client/dom/load.mjs"
   },
   "engines": {
     "node": ">=22"

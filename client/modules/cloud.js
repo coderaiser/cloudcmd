@@ -6,7 +6,7 @@ const exec = require('execon');
 const currify = require('currify');
 const load = require('load.js');
 
-const {ajax} = require('../dom/load');
+const {ajax} = require('#dom/load');
 
 const Files = require('../dom/files');
 const Images = require('../dom/images.mjs');

@@ -4,7 +4,7 @@
 const itype = require('itype');
 const {promisify} = require('es6-promisify');
 
-const load = require('./load');
+const load = require('#dom/load');
 const RESTful = require('./rest');
 
 const Promises = {};

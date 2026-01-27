@@ -4,7 +4,7 @@
 const {promisify} = require('es6-promisify');
 
 const Images = require('../images.mjs');
-const load = require('../load');
+const load = require('#dom/load');
 
 module.exports = promisify((params, callback) => {
     const p = params;
@@ -46,5 +46,5 @@ function replaceHash(url) {
      * if we send ajax request -
      * no need in hash so we escape #
      */
-    return url.replace(/#/g, '%23');
+    return url.replace(/#/g, '%' + '23');
 }

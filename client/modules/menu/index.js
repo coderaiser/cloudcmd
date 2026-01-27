@@ -7,7 +7,7 @@ const wrap = require('wraptile');
 const createElement = require('@cloudcmd/create-element');
 
 const {FS} = require('../../../common/cloudfunc.mjs');
-const {getIdBySrc} = require('../../dom/load');
+const {getIdBySrc} = require('#dom/load');
 const RESTful = require('../../dom/rest');
 
 const {config, Key} = CloudCmd;
@@ -298,7 +298,7 @@ function download(type) {
           * no need in hash so we escape #
           * and all other characters, like "%"
           */
-        const encodedPath = encodeURI(path).replace(/#/g, '%23');
+        const encodedPath = encodeURI(path).replace(/#/g, '#');
         const id = getIdBySrc(path);
         
         let src;

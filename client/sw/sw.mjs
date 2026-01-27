@@ -96,4 +96,3 @@ async function addToCache(request, response) {
     const cache = await caches.open(NAME);
     return cache.put(request, response);
 }
-

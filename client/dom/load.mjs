@@ -1,19 +1,16 @@
-'use strict';
+import itype from 'itype';
+import jonny from 'jonny';
+import Emitify from 'emitify';
+import exec from 'execon';
+import * as Images from './images.mjs';
 
-const itype = require('itype');
-const jonny = require('jonny');
-const Emitify = require('emitify');
-const exec = require('execon');
-const Images = require('./images.mjs');
-
-module.exports.getIdBySrc = getIdBySrc;
 /**
  * Function gets id by src
  * @param src
  *
  * Example: http://domain.com/1.js -> 1_js
  */
-function getIdBySrc(src) {
+export function getIdBySrc(src) {
     const isStr = itype.string(src);
     
     if (!isStr)
@@ -37,7 +34,7 @@ function getIdBySrc(src) {
  *
  * @param params
  */
-module.exports.ajax = (params) => {
+export const ajax = (params) => {
     const p = params;
     const isObject = itype.object(p.data);
     const isArray = itype.array(p.data);
@@ -94,11 +91,11 @@ module.exports.ajax = (params) => {
     xhr.send(data);
 };
 
-module.exports.put = (url, body) => {
+export const put = (url, body) => {
     const emitter = Emitify();
     const xhr = new XMLHttpRequest();
     
-    url = encodeURI(url).replace(/#/g, '%23');
+    url = encodeURI(url).replace(/#/g, '#');
     
     xhr.open('put', url, true);
     
