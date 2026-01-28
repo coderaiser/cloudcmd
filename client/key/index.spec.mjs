@@ -1,15 +1,9 @@
-'use strict';
+import autoGlobals from 'auto-globals';
+import supertape from 'supertape';
+import {ESC} from './key.mjs';
+import {Key, _listener} from './index.mjs';
+import {getDOM, getCloudCmd} from './vim/globals.fixture.js';
 
-require('css-modules-require-hook/preset');
-
-const autoGlobals = require('auto-globals');
-const supertape = require('supertape');
-
-const {ESC} = require('./key.mjs');
-
-const {Key, _listener} = require('./index.mjs');
-
-const {getDOM, getCloudCmd} = require('./vim/globals.fixture');
 const test = autoGlobals(supertape);
 const {stub} = supertape;
 
