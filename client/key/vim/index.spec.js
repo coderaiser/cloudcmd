@@ -1,11 +1,6 @@
 'use strict';
 
-const {join} = require('node:path');
 const {test, stub} = require('supertape');
-
-const dir = '../';
-
-const pathVim = join(dir, 'vim');
 
 const {getDOM, getCloudCmd} = require('./globals.fixture');
 

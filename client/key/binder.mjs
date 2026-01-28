@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports.createBinder = () => {
+export const createBinder = () => {
     let binded = false;
     
     return {
