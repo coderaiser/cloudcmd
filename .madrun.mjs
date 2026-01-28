@@ -36,7 +36,9 @@ export default {
     'test': () => [testEnv, `tape 'test/**/*.{js,mjs}' '{client,static,common,server}/**/*.spec.{js,mjs}' -f fail`],
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
-    'wisdom': () => run(['lint:all', 'build', 'test']),
+    'wisdom': () => run(['lint:all', 'build', 'test'], null, {
+        CI: 1,
+    }),
     'wisdom:type': () => 'bin/release.mjs',
     'coverage': async () => [testEnv, `c8 ${await cutEnv('test')}`],
     'coverage:report': () => 'c8 report --reporter=lcov',
