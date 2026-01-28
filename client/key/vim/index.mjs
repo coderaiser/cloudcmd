@@ -1,15 +1,13 @@
-'use strict';
-
 /* global CloudCmd */
 /* global DOM */
-const vim = require('./vim');
-const finder = require('./find');
-const {
+import vim from './vim.mjs';
+import * as finder from './find.mjs';
+import {
     setCurrent,
     selectFileNotParent,
-} = require('./set-current');
+} from './set-current.mjs';
 
-module.exports = (key, event, overrides = {}) => {
+export default (key, event, overrides = {}) => {
     const defaults = {
         ...globalThis.DOM,
         ...globalThis.CloudCmd,
@@ -131,7 +129,7 @@ const getOperations = (event, deps) => {
     };
 };
 
-module.exports.selectFile = selectFileNotParent;
+export const selectFile = selectFileNotParent;
 
 const _createFindPrevious = (overrides = {}) => () => {
     const {setCurrentByName} = overrides;

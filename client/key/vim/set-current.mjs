@@ -1,8 +1,5 @@
-'use strict';
-
 /* global DOM */
-module.exports.selectFileNotParent = selectFileNotParent;
-function selectFileNotParent(current, {getCurrentName, selectFile} = DOM) {
+export function selectFileNotParent(current, {getCurrentName, selectFile} = DOM) {
     const name = getCurrentName(current);
     
     if (name === '..')
@@ -11,7 +8,7 @@ function selectFileNotParent(current, {getCurrentName, selectFile} = DOM) {
     selectFile(current);
 }
 
-module.exports.setCurrent = (sibling, {count, isVisual, isDelete}, {Info, setCurrentFile, unselectFiles, Operation}) => {
+export const setCurrent = (sibling, {count, isVisual, isDelete}, {Info, setCurrentFile, unselectFiles, Operation}) => {
     let current = Info.element;
     const select = isVisual ? selectFileNotParent : unselectFiles;
     

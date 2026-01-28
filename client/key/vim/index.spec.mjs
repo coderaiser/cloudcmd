@@ -1,13 +1,9 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-
-const {getDOM, getCloudCmd} = require('./globals.fixture');
+import {test, stub} from 'supertape';
+import {getDOM, getCloudCmd} from './globals.fixture.mjs';
+import vim, {selectFile as vimSelectFile} from './index.mjs';
 
 globalThis.DOM = getDOM();
 globalThis.CloudCmd = getCloudCmd();
-
-const vim = require('./index.js');
 
 const {assign} = Object;
 const {DOM} = globalThis;
@@ -312,7 +308,7 @@ test('cloudcmd: client: key: selectFile: ..', (t) => {
     const selectFile = stub();
     const current = {};
     
-    vim.selectFile(current, {
+    vimSelectFile(current, {
         selectFile,
         getCurrentName,
     });
@@ -326,7 +322,7 @@ test('cloudcmd: client: key: selectFile', (t) => {
     const getCurrentName = stub().returns('x');
     const current = {};
     
-    vim.selectFile(current, {
+    vimSelectFile(current, {
         selectFile,
         getCurrentName,
     });

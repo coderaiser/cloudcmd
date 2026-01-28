@@ -1,6 +1,5 @@
-'use strict';
+import {fullstore} from 'fullstore';
 
-const {fullstore} = require('fullstore');
 const store = fullstore('');
 const visual = fullstore(false);
 
@@ -21,7 +20,7 @@ const rmFirst = (a) => {
 
 const noop = () => {};
 
-module.exports = (key, operations = {}) => {
+export default (key, operations = {}) => {
     const prevStore = store();
     const isVisual = visual();
     const value = store(prevStore.concat(key));

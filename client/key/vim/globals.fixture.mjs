@@ -1,8 +1,6 @@
-'use strict';
-
 const noop = () => {};
 
-module.exports.getDOM = () => {
+export const getDOM = () => {
     const prompt = Promise.resolve.bind(Promise);
     const CurrentInfo = {
         element: {},
@@ -34,7 +32,7 @@ module.exports.getDOM = () => {
     };
 };
 
-module.exports.getCloudCmd = () => {
+export const getCloudCmd = () => {
     const show = () => {};
     
     return {

@@ -1,8 +1,5 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-
-const vim = require('./vim');
+import {test, stub} from 'supertape';
+import vim from './vim.mjs';
 
 test('vim: no operations', (t) => {
     const result = vim('hello', {});

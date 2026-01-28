@@ -2,7 +2,7 @@ import autoGlobals from 'auto-globals';
 import supertape from 'supertape';
 import {ESC} from './key.mjs';
 import {Key, _listener} from './index.mjs';
-import {getDOM, getCloudCmd} from './vim/globals.fixture.js';
+import {getDOM, getCloudCmd} from './vim/globals.fixture.mjs';
 
 const test = autoGlobals(supertape);
 const {stub} = supertape;
