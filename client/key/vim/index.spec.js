@@ -18,7 +18,7 @@ const {assign} = Object;
 const {DOM} = globalThis;
 const {Buffer} = DOM;
 
-const {reRequire, stopAll} = require('mock-require');
+const {reRequire} = require('mock-require');
 
 test('cloudcmd: client: key: set next file: no', (t) => {
     const element = {};
@@ -553,15 +553,11 @@ test('cloudcmd: client: find', (t) => {
         setCurrentByName,
     });
     
-    const vim = reRequire(pathVim);
-    
     const event = {
         preventDefault: stub(),
     };
     
     vim('/', event);
-    
-    stopAll();
     
     t.notCalled(setCurrentByName);
     t.end();
