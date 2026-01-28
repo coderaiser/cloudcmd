@@ -46,5 +46,5 @@ function replaceHash(url) {
      * if we send ajax request -
      * no need in hash so we escape #
      */
-    return url.replace(/#/g, '%' + '23');
+    return url.replace(/#/g, '%23');
 }
