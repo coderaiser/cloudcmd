@@ -1,3 +1,9 @@
+2026.01.28, v19.1.14
+
+feature:
+- f8a63b5a client: key: binder: migrate to ESM
+- 2cc97f33 client: cloud: migrate to ESM
+
 2026.01.27, v19.1.13
 
 feature:
