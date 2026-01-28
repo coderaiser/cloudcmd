@@ -31,7 +31,7 @@ export default {
     'watch:lint': () => 'nodemon -w client -w server -w test -w common -w .webpack -x "putout -s"',
     'fresh:lint': () => run('lint', '--fresh'),
     'lint:fresh': () => run('lint', '--fresh'),
-    'fix:lint': async () => `redlint fix && putout --fix .`,
+    'fix:lint': async () => `putout --fix . && redlint fix`,
     'lint:stream': () => run('lint', '-f stream'),
     'test': () => [testEnv, `tape 'test/**/*.{js,mjs}' '{client,static,common,server}/**/*.spec.{js,mjs}' -f fail`],
     'test:client': () => `tape 'test/client/**/*.js'`,
