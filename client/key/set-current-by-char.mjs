@@ -1,14 +1,11 @@
 /* global DOM */
+import {escapeRegExp} from '../../common/util.js';
 
-'use strict';
-
-const {escapeRegExp} = require('../../common/util');
-
-module.exports = function setCurrentByChar(char, charStore) {
+export default function setCurrentByChar(char, charStore) {
     const Info = DOM.CurrentInfo;
     let firstByName;
     let skipCount = 0;
-    let setted = false;
+    let set = false;
     let i = 0;
     
     const escapeChar = escapeRegExp(char);
@@ -36,7 +33,7 @@ module.exports = function setCurrentByChar(char, charStore) {
         const byName = DOM.getCurrentByName(name);
         
         if (!skipCount) {
-            setted = true;
+            set = true;
             DOM.setCurrentFile(byName);
             
             return true;
@@ -53,8 +50,8 @@ module.exports = function setCurrentByChar(char, charStore) {
         .filter(not(isRoot))
         .some(setCurrent);
     
-    if (!setted) {
+    if (!set) {
         DOM.setCurrentFile(firstByName);
         charStore([char]);
     }
-};
+}

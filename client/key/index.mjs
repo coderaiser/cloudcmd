@@ -5,7 +5,7 @@ import * as Events from '#dom/events';
 import * as Buffer from '../dom/buffer.mjs';
 import * as KEY from './key.mjs';
 import _vim from './vim/index.js';
-import setCurrentByChar from './set-current-by-char.js';
+import setCurrentByChar from './set-current-by-char.mjs';
 import {createBinder} from './binder.mjs';
 
 const Chars = fullstore();
