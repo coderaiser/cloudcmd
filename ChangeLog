@@ -1,3 +1,8 @@
+2026.01.28, v19.1.16
+
+fix:
+- 4c242631 css: spinner: do not minify svg
+
 2026.01.28, v19.1.15
 
 feature:
