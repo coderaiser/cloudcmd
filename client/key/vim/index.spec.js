@@ -18,8 +18,6 @@ const {assign} = Object;
 const {DOM} = globalThis;
 const {Buffer} = DOM;
 
-const {reRequire} = require('mock-require');
-
 test('cloudcmd: client: key: set next file: no', (t) => {
     const element = {};
     const setCurrentFile = stub();
@@ -591,7 +589,6 @@ test('cloudcmd: client: key: N', (t) => {
 });
 
 test('cloudcmd: client: key: make directory', async (t) => {
-    const vim = reRequire(pathVim);
     const {DOM} = globalThis;
     
     assign(DOM, {
