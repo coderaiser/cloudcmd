@@ -9,7 +9,7 @@ export const match = {
         'no-console': 'off',
         'n/hashbang': 'off',
     },
-    'client/dom/index.js': {
+    'client/dom/index.*': {
         'no-multi-spaces': 'off',
     },
     '{client,static}/**/*.{js,mjs}': {

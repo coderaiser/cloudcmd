@@ -6,7 +6,7 @@ const {tryCatch} = require('try-catch');
 const test = require('supertape');
 const readFilesSync = require('@cloudcmd/read-files-sync');
 
-const {time, timeEnd} = require(`../../common/util`);
+const {time, timeEnd} = require(`../../common/util.mjs`);
 const CloudFunc = require('../../common/cloudfunc.mjs');
 
 const DIR = `${__dirname}/../../`;

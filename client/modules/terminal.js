@@ -8,7 +8,7 @@ require('../../css/terminal.css');
 
 const exec = require('execon');
 const load = require('load.js');
-const DOM = require('../dom');
+const DOM = require('../dom/index.mjs');
 const Images = require('../dom/images.mjs');
 
 const loadParallel = load.parallel;

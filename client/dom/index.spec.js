@@ -3,7 +3,7 @@
 require('css-modules-require-hook/preset');
 
 const {test, stub} = require('supertape');
-const {getCSSVar, goToDirectory} = require('./index');
+const {getCSSVar, goToDirectory} = require('./index.mjs');
 
 globalThis.CloudCmd = {};
 

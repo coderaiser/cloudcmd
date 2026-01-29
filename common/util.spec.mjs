@@ -1,19 +1,16 @@
-'use strict';
-
-const test = require('supertape');
-const {tryCatch} = require('try-catch');
-const Util = require('./util');
-
-const {
+import test from 'supertape';
+import {tryCatch} from 'try-catch';
+import {
     findObjByNameInArr,
     getRegExp,
     escapeRegExp,
-} = Util;
+    getExt,
+} from '#common/util';
 
 test('getExt: no extension', (t) => {
     const EXT = '';
-    const name = 'file-withot-extension';
-    const ext = Util.getExt(name);
+    const name = 'file-without-extension';
+    const ext = getExt(name);
     
     t.equal(ext, EXT, 'should return "" when extension is none');
     t.end();
@@ -22,14 +19,14 @@ test('getExt: no extension', (t) => {
 test('getExt: return extension', (t) => {
     const EXT = '.png';
     const name = 'picture.png';
-    const ext = Util.getExt(name);
+    const ext = getExt(name);
     
     t.equal(ext, EXT, 'should return ".png" in files "picture.png"');
     t.end();
 });
 
 test('util: getExt: no name', (t) => {
-    const ext = Util.getExt();
+    const ext = getExt();
     
     t.equal(ext, '', 'should return empty string');
     t.end();

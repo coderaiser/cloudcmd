@@ -1,5 +1,5 @@
 /* global DOM */
-import {escapeRegExp} from '../../common/util.js';
+import {escapeRegExp} from '#common/util';
 
 export default function setCurrentByChar(char, charStore) {
     const Info = DOM.CurrentInfo;

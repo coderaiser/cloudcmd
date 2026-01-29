@@ -1,13 +1,14 @@
-'use strict';
+import {alert, prompt} from '#dom/dialog';
+import {getRegExp} from '#common/util';
+import {getCurrentName} from './current-file.mjs';
+import {
+    isSelected,
+    toggleSelectedFile,
+} from './cmd.mjs';
 
 let SelectType = '*.*';
 
-const {getRegExp} = require('../../common/util');
-const {alert, prompt} = require('#dom/dialog');
-
-const DOM = require('.');
-
-module.exports = async (msg, files) => {
+export const selectByPattern = async (msg, files) => {
     if (!files)
         return;
     
@@ -23,21 +24,21 @@ module.exports = async (msg, files) => {
     let matches = 0;
     
     for (const current of files) {
-        const name = DOM.getCurrentName(current);
+        const name = getCurrentName(current);
         
         if (name === '..' || !regExp.test(name))
             continue;
         
         ++matches;
         
-        let isSelected = DOM.isSelected(current);
+        let selected = isSelected(current);
         const shouldSel = msg === 'expand';
         
         if (shouldSel)
-            isSelected = !isSelected;
+            selected = !selected;
         
-        if (isSelected)
-            DOM.toggleSelectedFile(current);
+        if (selected)
+            toggleSelectedFile(current);
     }
     
     if (!matches)

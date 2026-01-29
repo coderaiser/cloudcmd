@@ -1,12 +1,12 @@
 import process from 'node:process';
 import wraptile from 'wraptile';
 import load from 'load.js';
+import * as Util from '#common/util';
 import '../css/main.css';
 import {registerSW, listenSW} from './sw/register.mjs';
 import {initSortPanel, sortPanel} from './sort.mjs';
-import Util from '../common/util.js';
 import * as CloudFunc from '../common/cloudfunc.mjs';
-import DOM from './dom/index.js';
+import DOM from './dom/index.mjs';
 import {createCloudCmd} from './client.mjs';
 import * as Listeners from './listeners/index.mjs';
 

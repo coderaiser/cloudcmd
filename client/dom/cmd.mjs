@@ -1,5 +1,4 @@
 /* global DOM */
-
 const SELECTED_FILE = 'selected-file';
 const Cmd = {
     getSelectedFiles,
@@ -82,4 +81,3 @@ export function getSelectedFiles() {
     
     return Array.from(selected);
 }
-

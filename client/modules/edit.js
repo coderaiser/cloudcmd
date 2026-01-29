@@ -10,7 +10,7 @@ const createElement = require('@cloudcmd/create-element');
 const load = require('load.js');
 const {MAX_FILE_SIZE: maxSize} = require('../../common/cloudfunc.mjs');
 
-const {time, timeEnd} = require('../../common/util');
+const {time, timeEnd} = require('#common/util');
 const getEditor = () => editor;
 const isFn = (a) => typeof a === 'function';
 const loadJS = load.js;

@@ -6,7 +6,7 @@ const itype = require('itype');
 const load = require('load.js');
 const {tryToCatch} = require('try-to-catch');
 
-const {findObjByNameInArr} = require('../../common/util');
+const {findObjByNameInArr} = require('#common/util');
 
 const Files = require('#dom/files');
 

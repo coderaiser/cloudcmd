@@ -8,10 +8,10 @@ import {tryToCatch} from 'try-to-catch';
 import load from 'load.js';
 import createElement from '@cloudcmd/create-element';
 import * as Events from '#dom/events';
+import * as Files from '#dom/files';
 import '../../../css/config.css';
 import * as input from './input.mjs';
 import * as Images from '../../dom/images.mjs';
-import * as Files from '#dom/files';
 import {getTitle} from '../../../common/cloudfunc.mjs';
 
 const {Dialog, setTitle} = DOM;

@@ -9,8 +9,8 @@ const Images = require('./images.mjs');
 const {alert} = require('#dom/dialog');
 
 const {FS} = require('../../common/cloudfunc.mjs');
+const {getCurrentDirPath} = require('./current-file.mjs');
 
-const {getCurrentDirPath: getPathWhenRootEmpty} = require('.');
 const loadFile = wraptile(_loadFile);
 
 const onEnd = wraptile(_onEnd);
@@ -18,7 +18,7 @@ const onEnd = wraptile(_onEnd);
 module.exports = (dir, files) => {
     if (!files) {
         files = dir;
-        dir = getPathWhenRootEmpty();
+        dir = getCurrentDirPath();
     }
     
     const n = files.length;

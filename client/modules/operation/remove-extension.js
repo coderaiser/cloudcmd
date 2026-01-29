@@ -1,6 +1,6 @@
 'use strict';
 
-const {getExt} = require('../../../common/util');
+const {getExt} = require('#common/util');
 
 module.exports = (name) => {
     const ext = getExtension(name);
