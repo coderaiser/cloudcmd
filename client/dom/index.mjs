@@ -5,8 +5,8 @@ import * as Dialog from '#dom/dialog';
 import * as Events from '#dom/events';
 import {getExt} from '#common/util';
 import * as Storage from '#dom/storage';
-import * as Images from './images.mjs';
 import * as RESTful from '#dom/rest';
+import * as Images from './images.mjs';
 import renameCurrent from './operations/rename-current.js';
 import * as CurrentFile from './current-file.mjs';
 import * as DOMTree from './dom-tree.mjs';
@@ -14,7 +14,7 @@ import * as Cmd from './cmd.mjs';
 import IO from './io/index.js';
 import {uploadDirectory} from './directory.mjs';
 import * as Buffer from './buffer.mjs';
-import _loadRemote from './load-remote.js';
+import {loadRemote as _loadRemote} from './load-remote.mjs';
 import {selectByPattern} from './select-by-pattern.mjs';
 
 const {assign} = Object;

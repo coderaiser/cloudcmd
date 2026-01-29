@@ -57,6 +57,7 @@ export default {
     'watch:test:client': async () => `nodemon -w client -w test/client -x ${await run('test:client')}`,
     'watch:test:server': async () => `nodemon -w client -w test/client -x ${await run('test:server')}`,
     'watch:coverage': async () => [testEnv, `nodemon -w server -w test -w common -x ${await cutEnv('coverage')}`],
+    'watch:fix:lint': async () => `nodemon -w client -w server -w test -w common -x '${await run('fix:lint')}'`,
     'build': async () => run('6to5:*'),
     'build:dev': async () => run('build:client:dev'),
     'build:client': () => run('6to5:client'),

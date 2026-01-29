@@ -53,6 +53,9 @@ const plugins = [
         NODE_ENV,
     }),
     new WebpackBar(),
+    new webpack.ProvidePlugin({
+        process: 'process/browser',
+    }),
 ];
 
 const splitChunks = {
@@ -96,6 +99,7 @@ export default {
         fallback: {
             path: import.meta.resolve('path-browserify'),
             process: import.meta.resolve('process/browser'),
+            util: import.meta.resolve('util'),
         },
     },
     devtool,
