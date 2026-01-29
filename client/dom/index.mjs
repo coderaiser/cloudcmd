@@ -6,7 +6,7 @@ import * as Events from '#dom/events';
 import {getExt} from '#common/util';
 import * as Images from './images.mjs';
 import RESTful from './rest.js';
-import Storage from './storage.js';
+import * as Storage from '#dom/storage';
 import renameCurrent from './operations/rename-current.js';
 import * as CurrentFile from './current-file.mjs';
 import * as DOMTree from './dom-tree.mjs';
@@ -23,9 +23,6 @@ const DOM = {
     getCurrentDirName,
     getNotCurrentDirPath,
     getParentDirPath,
-    load,
-    RESTful,
-    Storage,
     loadRemote,
     loadSocket,
     promptNewDir,
@@ -497,6 +494,7 @@ export function getFM() {
     const {parentElement} = DOM.getPanel();
     return parentElement;
 }
+
 export function getPanelPosition(panel) {
     panel = panel || DOM.getPanel();
     

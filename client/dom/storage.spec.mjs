@@ -1,8 +1,5 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-
-const storage = require('./storage');
+import {test, stub} from 'supertape';
+import * as storage from '#dom/storage';
 
 const {stringify} = JSON;
 

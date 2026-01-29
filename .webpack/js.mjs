@@ -126,7 +126,7 @@ export default {
         [`${modules}/markdown`]: `${dirModules}/markdown.js`,
         [`${modules}/config`]: `${dirModules}/config/index.mjs`,
         [`${modules}/contact`]: `${dirModules}/contact.js`,
-        [`${modules}/upload`]: `${dirModules}/upload.js`,
+        [`${modules}/upload`]: `${dirModules}/upload.mjs`,
         [`${modules}/operation`]: `${dirModules}/operation/index.mjs`,
         [`${modules}/konsole`]: `${dirModules}/konsole.js`,
         [`${modules}/terminal`]: `${dirModules}/terminal.js`,

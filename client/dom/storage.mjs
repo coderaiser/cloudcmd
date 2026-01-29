@@ -1,28 +1,26 @@
-'use strict';
-
 const {parse, stringify} = JSON;
 
-module.exports.set = async (name, data) => {
+export const set = (name, data) => {
     localStorage.setItem(name, data);
 };
 
-module.exports.setJson = async (name, data) => {
+export const setJson = (name, data) => {
     localStorage.setItem(name, stringify(data));
 };
 
-module.exports.get = async (name) => {
+export const get = (name) => {
     return localStorage.getItem(name);
 };
 
-module.exports.getJson = async (name) => {
+export const getJson = (name) => {
     const data = localStorage.getItem(name);
     return parse(data);
 };
 
-module.exports.clear = () => {
+export const clear = () => {
     localStorage.clear();
 };
 
-module.exports.remove = (item) => {
+export const remove = (item) => {
     localStorage.removeItem(item);
 };
