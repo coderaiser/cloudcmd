@@ -1,47 +1,44 @@
-'use strict';
-
 /* global CloudCmd, DOM */
-require('../../../css/user-menu.css');
-
-const currify = require('currify');
-const wraptile = require('wraptile');
-const {fullstore} = require('fullstore');
-const load = require('load.js');
-const createElement = require('@cloudcmd/create-element');
-const {tryCatch} = require('try-catch');
-const {tryToCatch} = require('try-to-catch');
-const {codeFrameColumns} = require('@babel/code-frame');
-
-const Images = require('../../dom/images.mjs');
-const Dialog = require('#dom/dialog');
-const getUserMenu = require('./get-user-menu');
-const navigate = require('./navigate');
-const parseError = require('./parse-error');
-const parseUserMenu = require('./parse-user-menu');
-const {runSelected} = require('./run');
+import currify from 'currify';
+import wraptile from 'wraptile';
+import {fullstore} from 'fullstore';
+import load from 'load.js';
+import createElement from '@cloudcmd/create-element';
+import {tryCatch} from 'try-catch';
+import {tryToCatch} from 'try-to-catch';
+import {codeFrameColumns} from '@babel/code-frame';
+import * as Dialog from '#dom/dialog';
+import '../../../css/user-menu.css';
+import * as Images from '../../dom/images.mjs';
+import {getUserMenu} from './get-user-menu.mjs';
+import {navigate} from './navigate.mjs';
+import {parseError} from './parse-error.mjs';
+import {parseUserMenu} from './parse-user-menu.mjs';
+import {runSelected} from './run.mjs';
 
 const loadCSS = load.css;
 const sourceStore = fullstore();
 
 const Name = 'UserMenu';
 
-CloudCmd[Name] = module.exports;
+CloudCmd[Name] = {
+    init,
+    show,
+    hide,
+};
 
 const {Key} = CloudCmd;
 
-module.exports.init = async () => {
+export async function init() {
     await Promise.all([
         loadCSS(`${CloudCmd.prefix}/dist/user-menu.css`),
         CloudCmd.View(),
     ]);
-};
-
-module.exports.show = show;
-module.exports.hide = hide;
+}
 
 const {CurrentInfo} = DOM;
 
-async function show() {
+export async function show() {
     Images.show.load('top');
     
     const {dirPath} = CurrentInfo;
@@ -107,7 +104,7 @@ function fillTemplate(options) {
     return result.join('');
 }
 
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 

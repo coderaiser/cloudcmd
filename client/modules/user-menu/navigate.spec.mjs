@@ -1,14 +1,11 @@
-'use strict';
-
-const test = require('supertape');
-const navigate = require('./navigate');
-
-const {
+import test from 'supertape';
+import {navigate} from './navigate.mjs';
+import {
     UP,
     DOWN,
     J,
     K,
-} = require('../../key/key.mjs');
+} from '../../key/key.mjs';
 
 test('cloudcmd: user-menu: navigate: DOWN', (t) => {
     const el = {

@@ -1,18 +1,15 @@
-'use strict';
-
-const {fullstore} = require('fullstore');
-
-const {
+import {fullstore} from 'fullstore';
+import {
     J,
     K,
     UP,
     DOWN,
-} = require('../../key/key.mjs');
+} from '../../key/key.mjs';
 
 const store = fullstore(1);
 const isDigit = (a) => /^\d+$/.test(a);
 
-module.exports = (el, {key, keyCode}) => {
+export const navigate = (el, {key, keyCode}) => {
     if (isDigit(key))
         store(Number(key));
     

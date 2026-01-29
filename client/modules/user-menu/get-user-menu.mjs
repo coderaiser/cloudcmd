@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (menuFn) => {
+export const getUserMenu = (menuFn) => {
     const module = {};
     const fn = Function('module', menuFn);
     

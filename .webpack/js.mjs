@@ -136,7 +136,7 @@ export default {
         [`${modules}/terminal`]: `${dirModules}/terminal.js`,
         [`${modules}/terminal-run`]: `${dirModules}/terminal-run.js`,
         [`${modules}/cloud`]: `${dirModules}/cloud.mjs`,
-        [`${modules}/user-menu`]: `${dirModules}/user-menu/index.js`,
+        [`${modules}/user-menu`]: `${dirModules}/user-menu/index.mjs`,
         [`${modules}/polyfill`]: `${dirModules}/polyfill.js`,
         [`${modules}/command-line`]: `${dirModules}/command-line.js`,
     },

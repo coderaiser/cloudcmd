@@ -1,13 +1,10 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-
-const parse = require('./parse-user-menu');
+import {test, stub} from 'supertape';
+import {parseUserMenu} from './parse-user-menu.mjs';
 
 test('cloudcmd: user menu: parse', (t) => {
     const fn = stub();
     const __settings = {};
-    const result = parse({
+    const result = parseUserMenu({
         __settings,
         'F2 - Rename file': fn,
         '_f': fn,
