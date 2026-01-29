@@ -11,7 +11,7 @@ const renameCurrent = require('./operations/rename-current');
 const CurrentFile = require('./current-file.mjs');
 const DOMTree = require('./dom-tree.mjs');
 
-const Cmd = module.exports;
+const Cmd = require('./cmd.mjs');
 const DOM = {
     ...DOMTree,
     ...CurrentFile,
@@ -47,7 +47,6 @@ DOM.Events = Events;
 const _loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');
 const isString = (a) => typeof a === 'string';
-const SELECTED_FILE = 'selected-file';
 
 const TabPanel = {
     'js-left': null,
@@ -118,7 +117,7 @@ async function promptNew(typeName) {
 }
 
 /**
- * get current direcotory name
+ * get current directory name
  */
 module.exports.getCurrentDirName = () => {
     const href = DOM
@@ -131,7 +130,7 @@ module.exports.getCurrentDirName = () => {
 };
 
 /**
- * get current direcotory path
+ * get current directory path
  */
 module.exports.getParentDirPath = (panel) => {
     const path = DOM.getCurrentDirPath(panel);
@@ -145,7 +144,7 @@ module.exports.getParentDirPath = (panel) => {
 };
 
 /**
- * get not current direcotory path
+ * get not current directory path
  */
 module.exports.getNotCurrentDirPath = () => {
     const panel = DOM.getPanel({
@@ -153,18 +152,6 @@ module.exports.getNotCurrentDirPath = () => {
     });
     
     return DOM.getCurrentDirPath(panel);
-};
-
-/**
- * unified way to get selected files
- *
- * @currentFile
- */
-module.exports.getSelectedFiles = () => {
-    const panel = DOM.getPanel();
-    const selected = DOM.getByClassAll(SELECTED_FILE, panel);
-    
-    return Array.from(selected);
 };
 
 /*
@@ -340,54 +327,6 @@ module.exports.getRefreshButton = (panel = DOM.getPanel()) => {
     return DOM.getByDataName('js-refresh', panel);
 };
 
-/**
- * select current file
- * @param currentFile
- */
-module.exports.selectFile = (currentFile) => {
-    const current = currentFile || DOM.getCurrentFile();
-    
-    current.classList.add(SELECTED_FILE);
-    
-    return Cmd;
-};
-
-module.exports.unselectFile = (currentFile) => {
-    const current = currentFile || DOM.getCurrentFile();
-    
-    current.classList.remove(SELECTED_FILE);
-    
-    return Cmd;
-};
-
-module.exports.toggleSelectedFile = (currentFile) => {
-    const current = currentFile || DOM.getCurrentFile();
-    const name = DOM.getCurrentName(current);
-    
-    if (name === '..')
-        return Cmd;
-    
-    current.classList.toggle(SELECTED_FILE);
-    
-    return Cmd;
-};
-
-module.exports.toggleAllSelectedFiles = () => {
-    DOM
-        .getAllFiles()
-        .map(DOM.toggleSelectedFile);
-    
-    return Cmd;
-};
-
-module.exports.selectAllFiles = () => {
-    DOM
-        .getAllFiles()
-        .map(DOM.selectFile);
-    
-    return Cmd;
-};
-
 module.exports.getAllFiles = () => {
     const panel = DOM.getPanel();
     const files = DOM.getFiles(panel);
@@ -434,18 +373,6 @@ module.exports.setHistory = (data, title, url) => {
         history.pushState(data, title, url);
     
     return ret;
-};
-
-/**
- * selected file check
- *
- * @param currentFile
- */
-module.exports.isSelected = (currentFile) => {
-    if (!currentFile)
-        return false;
-    
-    return DOM.isContainClass(currentFile, SELECTED_FILE);
 };
 
 /**
