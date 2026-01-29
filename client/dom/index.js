@@ -31,7 +31,7 @@ DOM.CurrentInfo = CurrentInfo;
 
 module.exports = DOM;
 
-DOM.uploadDirectory = require('./directory');
+DOM.uploadDirectory = require('./directory.mjs');
 DOM.Buffer = require('./buffer.mjs');
 DOM.Events = require('#dom/events');
 

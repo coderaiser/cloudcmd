@@ -1,16 +1,10 @@
-'use strict';
+/* global DOM, CloudCmd */
+import philip from 'philip';
+import * as Dialog from '#dom/dialog';
+import * as Images from './images.mjs';
+import {FS} from '../../common/cloudfunc.mjs';
 
-/* global CloudCmd */
-const philip = require('philip');
-
-const Images = require('./images.mjs');
-const {FS} = require('../../common/cloudfunc.mjs');
-const DOM = require('.');
-const Dialog = require('#dom/dialog');
-
-const {getCurrentDirPath: getPathWhenRootEmpty} = DOM;
-
-module.exports = (items) => {
+export default (items) => {
     if (items.length)
         Images.show('top');
     
@@ -18,7 +12,7 @@ module.exports = (items) => {
         .from(items)
         .map((item) => item.webkitGetAsEntry());
     
-    const dirPath = getPathWhenRootEmpty();
+    const dirPath = DOM.getCurrentDirPath();
     const path = dirPath.replace(/\/$/, '');
     
     const progress = Dialog.progress('Uploading...');
