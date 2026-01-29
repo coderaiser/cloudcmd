@@ -20,22 +20,31 @@ const DOM = {
 
 const CurrentInfo = {};
 
+const load = require('#dom/load');
+const Files = require('#dom/files');
+const IO = require('./io');
+const Dialog = require('#dom/dialog');
+
 DOM.Images = Images;
-DOM.load = require('#dom/load');
-DOM.Files = require('#dom/files');
+DOM.load = load;
+DOM.Files = Files;
 DOM.RESTful = RESTful;
-DOM.IO = require('./io');
+DOM.IO = IO;
 DOM.Storage = Storage;
-DOM.Dialog = require('#dom/dialog');
+DOM.Dialog = Dialog;
 DOM.CurrentInfo = CurrentInfo;
 
 module.exports = DOM;
 
-DOM.uploadDirectory = require('./directory.mjs');
-DOM.Buffer = require('./buffer.mjs');
-DOM.Events = require('#dom/events');
+const {uploadDirectory} = require('./directory.mjs');
+const Buffer = require('./buffer.mjs');
+const Events = require('#dom/events');
 
-const loadRemote = require('./load-remote');
+DOM.uploadDirectory = uploadDirectory;
+DOM.Buffer = Buffer;
+DOM.Events = Events;
+
+const _loadRemote = require('./load-remote');
 const selectByPattern = require('./select-by-pattern');
 const isString = (a) => typeof a === 'string';
 const SELECTED_FILE = 'selected-file';
@@ -46,7 +55,7 @@ const TabPanel = {
 };
 
 module.exports.loadRemote = (name, options, callback) => {
-    loadRemote(name, options, callback);
+    _loadRemote(name, options, callback);
     return DOM;
 };
 
@@ -395,21 +404,21 @@ module.exports.getAllFiles = () => {
 /**
  * open dialog with expand selection
  */
-module.exports.expandSelection = () => {
+module.exports.expandSelection = async () => {
     const msg = 'expand';
     const {files} = CurrentInfo;
     
-    selectByPattern(msg, files);
+    await selectByPattern(msg, files);
 };
 
 /**
  * open dialog with shrink selection
  */
-module.exports.shrinkSelection = () => {
+module.exports.shrinkSelection = async () => {
     const msg = 'shrink';
     const {files} = CurrentInfo;
     
-    selectByPattern(msg, files);
+    await selectByPattern(msg, files);
 };
 
 /**
@@ -432,11 +441,11 @@ module.exports.setHistory = (data, title, url) => {
  *
  * @param currentFile
  */
-module.exports.isSelected = (selected) => {
-    if (!selected)
+module.exports.isSelected = (currentFile) => {
+    if (!currentFile)
         return false;
     
-    return DOM.isContainClass(selected, SELECTED_FILE);
+    return DOM.isContainClass(currentFile, SELECTED_FILE);
 };
 
 /**

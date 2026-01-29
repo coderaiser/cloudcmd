@@ -4,7 +4,7 @@ import * as Dialog from '#dom/dialog';
 import * as Images from './images.mjs';
 import {FS} from '../../common/cloudfunc.mjs';
 
-export default (items) => {
+export const uploadDirectory = (items) => {
     if (items.length)
         Images.show('top');
     
