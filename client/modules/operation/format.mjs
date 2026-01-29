@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = (operation, from, to) => {
+export const format = (operation, from, to) => {
     if (!to)
         return `${operation} ${from}`;
     

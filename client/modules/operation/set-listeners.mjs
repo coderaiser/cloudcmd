@@ -1,7 +1,7 @@
 /* global DOM */
 import forEachKey from 'for-each-key';
 import wraptile from 'wraptile';
-import format from './format.js';
+import {format} from './format.mjs';
 
 const {Dialog, Images} = DOM;
 

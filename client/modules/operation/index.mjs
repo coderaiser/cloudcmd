@@ -5,9 +5,9 @@ import exec from 'execon';
 import load from 'load.js';
 import {tryToCatch} from 'try-to-catch';
 import {encode} from '../../../common/entity.js';
-import removeExtension from './remove-extension.js';
+import {removeExtension} from './remove-extension.mjs';
 import {setListeners} from './set-listeners.mjs';
-import getNextCurrentName from './get-next-current-name.js';
+import {getNextCurrentName} from './get-next-current-name.mjs';
 
 const {DOM, CloudCmd} = globalThis;
 

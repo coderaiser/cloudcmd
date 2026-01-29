@@ -1,11 +1,9 @@
-'use strict';
-
-const currify = require('currify');
+import currify from 'currify';
 
 const not = currify((array, value) => !array.includes(value));
 const notOneOf = currify((a, b) => a.filter(not(b)));
 
-module.exports = (currentName, names, removedNames) => {
+export const getNextCurrentName = (currentName, names, removedNames) => {
     const i = names.indexOf(currentName);
     
     const nextNames = notOneOf(names, removedNames);
