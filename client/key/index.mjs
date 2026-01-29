@@ -63,7 +63,7 @@ async function listener(event, overrides = {}) {
     
     const {keyCode} = event;
     
-    // strange chrome bug calles listener twice
+    // strange chrome bug calls listener twice
     // in second time event misses a lot fields
     if (isUndefined(event.altKey))
         return;

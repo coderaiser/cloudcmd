@@ -1,2 +1,2 @@
 [files]
-extend-exclude= ["ChangeLog", "*.js"]
+extend-exclude= ["ChangeLog"]

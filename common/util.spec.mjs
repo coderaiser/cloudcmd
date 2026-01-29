@@ -84,9 +84,9 @@ test('util: findObjByNameInArr: array', (t) => {
 });
 
 test('util: getRegExp', (t) => {
-    const reg = getRegExp('hel?o.*');
+    const reg = getRegExp('help?o.*');
     
-    t.deepEqual(reg, /^hel.?o\..*$/, 'should return regexp');
+    t.deepEqual(reg, /^help.?o\..*$/, 'should return regexp');
     t.end();
 });
 
