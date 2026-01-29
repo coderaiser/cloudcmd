@@ -6,7 +6,7 @@ import {tryToCatch} from 'try-to-catch';
 import clipboard from '@cloudcmd/clipboard';
 import * as Events from '#dom/events';
 import {getRange} from './get-range.mjs';
-import uploadFiles from '../dom/upload-files.js';
+import {uploadFiles} from '#dom/upload-files';
 import {FS} from '../../common/cloudfunc.mjs';
 import {getIndex} from './get-index.mjs';
 

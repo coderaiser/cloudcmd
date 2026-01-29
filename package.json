@@ -222,6 +222,7 @@
     "#dom/load": "./client/dom/load.mjs",
     "#dom/dialog": "./client/dom/dialog.mjs",
     "#dom/files": "./client/dom/files.mjs",
+    "#dom/upload-files": "./client/dom/upload-files.mjs",
     "#common/util": "./common/util.mjs"
   },
   "engines": {

@@ -1,21 +1,16 @@
-'use strict';
-
 /* global CloudCmd */
-const {eachSeries} = require('execon');
-const wraptile = require('wraptile');
-
-const load = require('#dom/load');
-const Images = require('./images.mjs');
-const {alert} = require('#dom/dialog');
-
-const {FS} = require('../../common/cloudfunc.mjs');
-const {getCurrentDirPath} = require('./current-file.mjs');
+import {eachSeries} from 'execon';
+import wraptile from 'wraptile';
+import * as load from '#dom/load';
+import {alert} from '#dom/dialog';
+import * as Images from './images.mjs';
+import {FS} from '../../common/cloudfunc.mjs';
+import {getCurrentDirPath} from './current-file.mjs';
 
 const loadFile = wraptile(_loadFile);
-
 const onEnd = wraptile(_onEnd);
 
-module.exports = (dir, files) => {
+export const uploadFiles = (dir, files) => {
     if (!files) {
         files = dir;
         dir = getCurrentDirPath();
