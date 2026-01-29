@@ -11,7 +11,7 @@ import * as Events from '#dom/events';
 import '../../../css/config.css';
 import * as input from './input.mjs';
 import * as Images from '../../dom/images.mjs';
-import Files from '../../dom/files.js';
+import * as Files from '#dom/files';
 import {getTitle} from '../../../common/cloudfunc.mjs';
 
 const {Dialog, setTitle} = DOM;

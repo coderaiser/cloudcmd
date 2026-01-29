@@ -3,7 +3,7 @@ import exec from 'execon';
 import currify from 'currify';
 import load from 'load.js';
 import {ajax} from '#dom/load';
-import Files from '../dom/files.js';
+import * as Files from '#dom/files';
 import * as Images from '../dom/images.mjs';
 
 const {log} = CloudCmd;

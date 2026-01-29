@@ -25,7 +25,7 @@ const {
     getType,
 } = require('./types');
 
-const Files = require('../../dom/files');
+const Files = require('#dom/files');
 const Events = require('#dom/events');
 const Images = require('../../dom/images.mjs');
 

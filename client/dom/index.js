@@ -22,7 +22,7 @@ const CurrentInfo = {};
 
 DOM.Images = Images;
 DOM.load = require('#dom/load');
-DOM.Files = require('./files');
+DOM.Files = require('#dom/files');
 DOM.RESTful = RESTful;
 DOM.IO = require('./io');
 DOM.Storage = Storage;

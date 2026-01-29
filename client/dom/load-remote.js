@@ -8,7 +8,7 @@ const {tryToCatch} = require('try-to-catch');
 
 const {findObjByNameInArr} = require('../../common/util');
 
-const Files = require('./files');
+const Files = require('#dom/files');
 
 module.exports = (name, options, callback = options) => {
     const {prefix, config} = CloudCmd;

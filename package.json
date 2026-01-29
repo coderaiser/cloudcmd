@@ -220,7 +220,8 @@
   "imports": {
     "#dom/events": "./client/dom/events/index.mjs",
     "#dom/load": "./client/dom/load.mjs",
-    "#dom/dialog": "./client/dom/dialog.mjs"
+    "#dom/dialog": "./client/dom/dialog.mjs",
+    "#dom/files": "./client/dom/files.mjs"
   },
   "engines": {
     "node": ">=22"
