@@ -1,14 +1,10 @@
 /* global CloudCmd, DOM */
-
-'use strict';
-
-const exec = require('execon');
-const wrap = require('wraptile');
-const createElement = require('@cloudcmd/create-element');
-
-const {FS} = require('../../../common/cloudfunc.mjs');
-const {getIdBySrc} = require('#dom/load');
-const RESTful = require('#dom/rest');
+import exec from 'execon';
+import wrap from 'wraptile';
+import createElement from '@cloudcmd/create-element';
+import {getIdBySrc} from '#dom/load';
+import * as RESTful from '#dom/rest';
+import {FS} from '../../../common/cloudfunc.mjs';
 
 const {config, Key} = CloudCmd;
 
@@ -27,11 +23,15 @@ let MenuShowedName;
 let MenuContext;
 let MenuContextFile;
 
-module.exports.ENABLED = false;
+export const ENABLED = false;
 
-CloudCmd.Menu = exports;
+CloudCmd.Menu = {
+    init,
+    show,
+    hide,
+};
 
-module.exports.init = async () => {
+export async function init() {
     const {isAuth, menuDataFile} = getFileMenuData();
     
     const fm = DOM.getFM();
@@ -56,23 +56,21 @@ module.exports.init = async () => {
     MenuContextFile.addContextMenuListener();
     
     Events.addKey(listener);
-};
+}
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     MenuContext.hide();
     MenuContextFile.hide();
 }
 
-module.exports.show = (position) => {
+export function show(position) {
     const {x, y} = getPosition(position);
     
     MenuContext.show(x, y);
     MenuContextFile.show(x, y);
     
     Images.hide();
-};
+}
 
 function getPosition(position) {
     if (position)
