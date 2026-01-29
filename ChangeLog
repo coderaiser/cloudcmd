@@ -1,3 +1,15 @@
+2026.01.30, v19.1.18
+
+feature:
+- 73fa4961 client: modules: user-menu: migrate to ESM
+- ebfdf8c0 client: modules: operation: migrate to ESM
+- ad683171 client: modules: menu: migrate to ESM
+- 0054cfa3 client: dom: load-remote: migrate to ESM
+- e4d0ece0 client: dom: rest: migrate to ESM
+- c704ffe4 client: dom: storage: migrate to ESM
+- 5182cb81 client: modules: upload: migrate to ESM
+- 9543f1ad client: dom: upload-files: migrate to ESM
+
 2026.01.29, v19.1.17
 
 feature:
