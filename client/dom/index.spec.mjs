@@ -1,9 +1,5 @@
-'use strict';
-
-require('css-modules-require-hook/preset');
-
-const {test, stub} = require('supertape');
-const {getCSSVar, goToDirectory} = require('./index.mjs');
+import {test, stub} from 'supertape';
+import {getCSSVar, goToDirectory} from './index.mjs';
 
 globalThis.CloudCmd = {};
 
