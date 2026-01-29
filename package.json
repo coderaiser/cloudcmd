@@ -224,6 +224,7 @@
     "#dom/files": "./client/dom/files.mjs",
     "#dom/upload-files": "./client/dom/upload-files.mjs",
     "#dom/storage": "./client/dom/storage.mjs",
+    "#dom/rest": "./client/dom/rest.mjs",
     "#common/util": "./common/util.mjs"
   },
   "engines": {

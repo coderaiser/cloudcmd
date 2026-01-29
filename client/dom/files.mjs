@@ -2,7 +2,7 @@
 import itype from 'itype';
 import {promisify} from 'es6-promisify';
 import * as load from '#dom/load';
-import RESTful from './rest.js';
+import * as RESTful from '#dom/rest';
 
 const Promises = {};
 const FILES_JSON = 'config|modules';

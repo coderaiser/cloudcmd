@@ -8,7 +8,7 @@ const createElement = require('@cloudcmd/create-element');
 
 const {FS} = require('../../../common/cloudfunc.mjs');
 const {getIdBySrc} = require('#dom/load');
-const RESTful = require('../../dom/rest');
+const RESTful = require('#dom/rest');
 
 const {config, Key} = CloudCmd;
 

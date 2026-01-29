@@ -1,6 +1,6 @@
 /* global CloudCmd*/
-import tryToPromiseAll from '../../common/try-to-promise-all.js';
 import * as Storage from '#dom/storage';
+import tryToPromiseAll from '../../common/try-to-promise-all.js';
 
 const CLASS = 'cut-file';
 const COPY = 'copy';

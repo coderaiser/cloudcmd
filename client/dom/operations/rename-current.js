@@ -5,7 +5,7 @@ const capitalize = require('just-capitalize');
 
 const _Dialog = require('#dom/dialog');
 const Storage = require('#dom/storage');
-const RESTful = require('../rest');
+const RESTful = require('#dom/rest');
 
 const _currentFile = require('../current-file.mjs');
 
