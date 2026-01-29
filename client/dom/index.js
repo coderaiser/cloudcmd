@@ -9,7 +9,7 @@ const Storage = require('./storage');
 const renameCurrent = require('./operations/rename-current');
 
 const CurrentFile = require('./current-file.mjs');
-const DOMTree = require('./dom-tree');
+const DOMTree = require('./dom-tree.mjs');
 
 const Cmd = module.exports;
 const DOM = {

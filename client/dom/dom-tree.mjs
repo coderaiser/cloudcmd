@@ -1,8 +1,15 @@
-'use strict';
+import currify from 'currify';
 
-const currify = require('currify');
-
-const DOM = module.exports;
+const DOM = {
+    show,
+    hide,
+    getByClass,
+    getByClassAll,
+    getByDataName,
+    getById,
+    getByTag,
+    isContainClass,
+};
 
 /**
  * check class of element
@@ -10,7 +17,7 @@ const DOM = module.exports;
  * @param element
  * @param className
  */
-const isContainClass = (element, className) => {
+export function isContainClass(element, className) {
     if (!element)
         throw Error('element could not be empty!');
     
@@ -26,58 +33,60 @@ const isContainClass = (element, className) => {
     const {classList} = element;
     
     return classList.contains(className);
-};
+}
 
-module.exports.isContainClass = isContainClass;
 /**
  * Function search element by tag
  * @param tag - className
  * @param element - element
  */
-module.exports.getByTag = (tag, element = document) => {
+export function getByTag(tag, element = document) {
     return element.getElementsByTagName(tag);
-};
+}
 
 /**
  * Function search element by id
- * @param Id - id
+ * @param id
+ * @param element
  */
-module.exports.getById = (id, element = document) => {
+export function getById(id, element = document) {
     return element.querySelector(`#${id}`);
-};
+}
 
 /**
  * Function search first element by class name
  * @param className - className
  * @param element - element
  */
-module.exports.getByClass = (className, element = document) => DOM.getByClassAll(className, element)[0];
+export function getByClass(className, element = document) {
+    return DOM.getByClassAll(className, element)[0];
+}
 
-module.exports.getByDataName = (attribute, element = document) => {
+export function getByDataName(attribute, element = document) {
     const selector = '[' + 'data-name="' + attribute + '"]';
     return element.querySelector(selector);
-};
+}
 
 /**
  * Function search element by class name
- * @param pClass - className
- * @param element - element
+ * @param className
+ * @param element
  */
-module.exports.getByClassAll = (className, element) => {
+export function getByClassAll(className, element) {
     return (element || document).getElementsByClassName(className);
-};
+}
 
 /**
  * add class=hidden to element
  *
  * @param element
  */
-module.exports.hide = (element) => {
+export function hide(element) {
     element.classList.add('hidden');
     return DOM;
-};
+}
 
-module.exports.show = (element) => {
+export function show(element) {
     element.classList.remove('hidden');
     return DOM;
-};
+}
