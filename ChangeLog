@@ -1,3 +1,14 @@
+2026.01.29, v19.1.17
+
+feature:
+- f9c28319 client: dom: migrate to ESM
+- 9d2c4e4a client: dom: cmd: move out
+- 5a2aa70f client: dom: simplify require
+- dee50a85 client: dom: files: migrate to ESM
+- 23c0d770 client: dom: dom-tree: migrate to ESM
+- cf2c6415 client: directory: migrate to ESM
+- 0eb802e7 client: dom: dialog: migrate to ESM
+
 2026.01.28, v19.1.16
 
 fix:
