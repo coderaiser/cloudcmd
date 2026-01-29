@@ -26,7 +26,7 @@ DOM.Files = require('./files');
 DOM.RESTful = RESTful;
 DOM.IO = require('./io');
 DOM.Storage = Storage;
-DOM.Dialog = require('./dialog');
+DOM.Dialog = require('#dom/dialog');
 DOM.CurrentInfo = CurrentInfo;
 
 module.exports = DOM;

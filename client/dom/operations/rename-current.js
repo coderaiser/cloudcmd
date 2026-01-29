@@ -3,7 +3,7 @@
 /* global CloudCmd */
 const capitalize = require('just-capitalize');
 
-const _Dialog = require('../dialog');
+const _Dialog = require('#dom/dialog');
 const Storage = require('../storage');
 const RESTful = require('../rest');
 

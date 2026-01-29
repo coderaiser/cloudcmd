@@ -3,7 +3,7 @@
 /* global CloudCmd */
 CloudCmd.CommandLine = exports;
 
-const Dialog = require('../dom/dialog');
+const Dialog = require('#dom/dialog');
 
 const noop = () => {};
 

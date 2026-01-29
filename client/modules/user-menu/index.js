@@ -13,7 +13,7 @@ const {tryToCatch} = require('try-to-catch');
 const {codeFrameColumns} = require('@babel/code-frame');
 
 const Images = require('../../dom/images.mjs');
-const Dialog = require('../../dom/dialog');
+const Dialog = require('#dom/dialog');
 const getUserMenu = require('./get-user-menu');
 const navigate = require('./navigate');
 const parseError = require('./parse-error');

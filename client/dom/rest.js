@@ -6,7 +6,7 @@ const {encode} = require('../../common/entity');
 
 const Images = require('./images.mjs');
 const IO = require('./io');
-const Dialog = require('./dialog');
+const Dialog = require('#dom/dialog');
 
 const handleError = (promise) => async (...args) => {
     const [e, data] = await tryToCatch(promise, ...args);

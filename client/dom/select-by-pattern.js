@@ -3,7 +3,7 @@
 let SelectType = '*.*';
 
 const {getRegExp} = require('../../common/util');
-const {alert, prompt} = require('./dialog');
+const {alert, prompt} = require('#dom/dialog');
 
 const DOM = require('.');
 

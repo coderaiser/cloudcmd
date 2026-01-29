@@ -7,7 +7,7 @@ const createElement = require('@cloudcmd/create-element');
 
 const Images = require('../dom/images.mjs');
 const {Markdown} = require('../dom/rest');
-const {alert} = require('../dom/dialog');
+const {alert} = require('#dom/dialog');
 
 module.exports.init = async () => {
     Images.show.load('top');

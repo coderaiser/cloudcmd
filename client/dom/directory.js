@@ -6,7 +6,7 @@ const philip = require('philip');
 const Images = require('./images.mjs');
 const {FS} = require('../../common/cloudfunc.mjs');
 const DOM = require('.');
-const Dialog = require('./dialog');
+const Dialog = require('#dom/dialog');
 
 const {getCurrentDirPath: getPathWhenRootEmpty} = DOM;
 

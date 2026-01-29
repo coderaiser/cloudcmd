@@ -219,7 +219,8 @@
   },
   "imports": {
     "#dom/events": "./client/dom/events/index.mjs",
-    "#dom/load": "./client/dom/load.mjs"
+    "#dom/load": "./client/dom/load.mjs",
+    "#dom/dialog": "./client/dom/dialog.mjs"
   },
   "engines": {
     "node": ">=22"
