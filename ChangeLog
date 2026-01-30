@@ -1,3 +1,8 @@
+2026.01.30, v19.1.19
+
+feature:
+- 2a0feac7 cloudcmd: @cloudcmd/modal v4.0.0
+
 2026.01.30, v19.1.18
 
 feature:
