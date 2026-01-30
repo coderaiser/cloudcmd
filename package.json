@@ -155,7 +155,7 @@
     "@babel/preset-env": "^7.0.0",
     "@cloudcmd/clipboard": "^2.0.0",
     "@cloudcmd/create-element": "^2.0.0",
-    "@cloudcmd/modal": "^3.0.0",
+    "@cloudcmd/modal": "^4.0.0",
     "@cloudcmd/olark": "^3.0.2",
     "@cloudcmd/stub": "^5.0.0",
     "@iocmd/wait": "^2.1.0",

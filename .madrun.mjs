@@ -3,6 +3,7 @@ import {run, cutEnv} from 'madrun';
 
 const testEnv = {
     SUPERTAPE_TIMEOUT: 7000,
+    NODE_OPTIONS: '"--import supertape/css"',
 };
 
 const is17 = /^v1[789]/.test(process.version);
