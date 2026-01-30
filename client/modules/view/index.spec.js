@@ -4,8 +4,8 @@ require('css-modules-require-hook/preset');
 
 const autoGlobals = require('auto-globals');
 const {stub} = require('@cloudcmd/stub');
-
-const test = autoGlobals(require('supertape'));
+const {test: tape} = require('supertape');
+const test = autoGlobals(tape);
 const {
     _initConfig,
     _viewHtml,

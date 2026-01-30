@@ -1,13 +1,12 @@
 'use strict';
 
-const autoGlobals = require('auto-globals');
 const {stub} = require('@cloudcmd/stub');
 const {tryToCatch} = require('try-to-catch');
 const wraptile = require('wraptile');
+const {test: tape} = require('supertape');
+const autoGlobals = require('auto-globals');
 const defaultMenu = require('./user-menu');
-
-const test = autoGlobals(require('supertape'));
-
+const test = autoGlobals(tape);
 const {create} = autoGlobals;
 const {_data} = defaultMenu;
 

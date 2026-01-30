@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('supertape');
+const {test} = require('supertape');
 const {_replaceHash} = require('./send-request');
 
 test('cloudcmd: client: io: replaceHash', (t) => {

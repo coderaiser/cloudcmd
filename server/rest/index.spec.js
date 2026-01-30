@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('supertape');
+const {test} = require('supertape');
 const {tryToCatch} = require('try-to-catch');
 
 const {

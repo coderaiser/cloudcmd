@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('supertape');
+const {test} = require('supertape');
 const eventStore = require('./event-store');
 
 test('event-store: get', (t) => {

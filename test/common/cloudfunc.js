@@ -3,7 +3,7 @@
 const fs = require('node:fs');
 
 const {tryCatch} = require('try-catch');
-const test = require('supertape');
+const {test} = require('supertape');
 const readFilesSync = require('@cloudcmd/read-files-sync');
 
 const {time, timeEnd} = require(`../../common/util.mjs`);

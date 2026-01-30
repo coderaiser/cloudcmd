@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('supertape');
+const {test} = require('supertape');
 const {tryCatch} = require('try-catch');
 
 const datetime = require('./datetime');

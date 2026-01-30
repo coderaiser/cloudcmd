@@ -1,7 +1,7 @@
 'use strict';
 
 const process = require('node:process');
-const test = require('supertape');
+const {test} = require('supertape');
 const env = require('../../server/env.mjs');
 
 test('env: small', (t) => {

@@ -1,6 +1,6 @@
 'use strict';
 
-const test = require('supertape');
+const {test} = require('supertape');
 const tryToPromiseAll = require('./try-to-promise-all');
 
 const resolve = Promise.resolve.bind(Promise);

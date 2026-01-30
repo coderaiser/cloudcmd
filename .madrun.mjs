@@ -1,10 +1,11 @@
 import process from 'node:process';
 import {run, cutEnv} from 'madrun';
+import {defineEnv} from 'supertape/env';
 
-const testEnv = {
-    SUPERTAPE_TIMEOUT: 7000,
-    NODE_OPTIONS: '"--import supertape/css"',
-};
+const testEnv = defineEnv({
+    timeout: 7000,
+    css: true,
+});
 
 const is17 = /^v1[789]/.test(process.version);
 const is20 = process.version.startsWith('v2');
@@ -27,12 +28,12 @@ export default {
     'build:start': () => run(['build:client', 'start']),
     'build:start:dev': () => run(['build:client:dev', 'start:dev']),
     'lint:all': () => run('lint:progress'),
-    'lint': () => 'redlint scan; putout .',
+    'lint': () => 'redlint scan; putout . --rulesdir rules',
     'lint:progress': () => run('lint', '-f progress'),
     'watch:lint': () => 'nodemon -w client -w server -w test -w common -w .webpack -x "putout -s"',
     'fresh:lint': () => run('lint', '--fresh'),
     'lint:fresh': () => run('lint', '--fresh'),
-    'fix:lint': async () => `putout --fix . && redlint fix`,
+    'fix:lint': async () => `putout --rulesdir rules --fix . && redlint fix`,
     'lint:stream': () => run('lint', '-f stream'),
     'test': () => [testEnv, `tape 'test/**/*.{js,mjs}' '{client,static,common,server}/**/*.spec.{js,mjs}' -f fail`],
     'test:client': () => `tape 'test/client/**/*.js'`,
