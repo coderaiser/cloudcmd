@@ -1,3 +1,10 @@
+2026.01.31, v19.1.20
+
+feature:
+- c1014c9c client: dom: operations: rename-current: migrate to ESM
+- 2e486f8b cloudcmd: restafary v13.0.0
+- 6addb29f cloudcmd: redzip v4.0.0
+
 2026.01.30, v19.1.19
 
 feature:
