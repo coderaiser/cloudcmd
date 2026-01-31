@@ -1,8 +1,5 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-
-const renameCurrent = require('./rename-current');
+import {test, stub} from 'supertape';
+import renameCurrent from './rename-current.mjs';
 
 test('cloudcmd: client: dom: renameCurrent: isCurrentFile', async (t) => {
     const current = {};
@@ -87,3 +84,4 @@ const stubCurrentFile = (fns = {}) => {
         setCurrentName,
     };
 };
+

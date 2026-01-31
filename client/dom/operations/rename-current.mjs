@@ -1,15 +1,11 @@
-'use strict';
-
 /* global CloudCmd */
-const capitalize = require('just-capitalize');
+import capitalize from 'just-capitalize';
+import * as _Dialog from '#dom/dialog';
+import * as Storage from '#dom/storage';
+import * as RESTful from '#dom/rest';
+import * as _currentFile from '../current-file.mjs';
 
-const _Dialog = require('#dom/dialog');
-const Storage = require('#dom/storage');
-const RESTful = require('#dom/rest');
-
-const _currentFile = require('../current-file.mjs');
-
-module.exports = async (current, overrides = {}) => {
+export default async (current, overrides = {}) => {
     const {
         refresh = CloudCmd.refresh,
         Dialog = _Dialog,

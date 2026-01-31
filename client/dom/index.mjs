@@ -7,7 +7,7 @@ import {getExt} from '#common/util';
 import * as Storage from '#dom/storage';
 import * as RESTful from '#dom/rest';
 import * as Images from './images.mjs';
-import renameCurrent from './operations/rename-current.js';
+import renameCurrent from './operations/rename-current.mjs';
 import * as CurrentFile from './current-file.mjs';
 import * as DOMTree from './dom-tree.mjs';
 import * as Cmd from './cmd.mjs';
