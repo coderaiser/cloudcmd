@@ -138,7 +138,7 @@ export default {
         [`${modules}/cloud`]: `${dirModules}/cloud.mjs`,
         [`${modules}/user-menu`]: `${dirModules}/user-menu/index.mjs`,
         [`${modules}/polyfill`]: `${dirModules}/polyfill.js`,
-        [`${modules}/command-line`]: `${dirModules}/command-line.js`,
+        [`${modules}/command-line`]: `${dirModules}/command-line.mjs`,
     },
     output: {
         filename: '[name].js',

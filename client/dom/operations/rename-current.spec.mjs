@@ -84,4 +84,3 @@ const stubCurrentFile = (fns = {}) => {
         setCurrentName,
     };
 };
-

@@ -705,7 +705,10 @@ export function getPackerExt(type) {
 
 export async function goToDirectory(overrides = {}) {
     const {Dialog} = DOM;
-    const {prompt = Dialog.prompt, changeDir = CloudCmd.changeDir} = overrides;
+    const {
+        prompt = Dialog.prompt,
+        changeDir = CloudCmd.changeDir,
+    } = overrides;
     
     const msg = 'Go to directory:';
     const {dirPath} = CurrentInfo;

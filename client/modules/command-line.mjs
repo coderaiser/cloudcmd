@@ -1,18 +1,15 @@
-'use strict';
-
 /* global CloudCmd */
-CloudCmd.CommandLine = exports;
+import * as Dialog from '#dom/dialog';
 
-const Dialog = require('#dom/dialog');
+export const init = () => {};
 
-const noop = () => {};
+CloudCmd.CommandLine = {
+    init,
+    show,
+    hide,
+};
 
-module.exports.init = noop;
-
-module.exports.show = show;
-module.exports.hide = hide;
-
-async function show() {
+export async function show() {
     const [, cmd] = await Dialog.prompt('Command Line', '');
     const TERMINAL = '^(t|terminal)';
     
@@ -32,4 +29,4 @@ async function show() {
     }
 }
 
-function hide() {}
+export function hide() {}
