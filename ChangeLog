@@ -1,3 +1,14 @@
+2026.02.02, v19.1.21
+
+feature:
+- e3ad330e client: konsole: migrate to ESM
+- 983fd9af client: edit: migrate to ESM
+- ebabad94 common: entity: migrate to ESM
+- c3b71653 client: dom: images -> #images
+- 8cad7514 common: cloudfunc -> #common/cloudfunc
+- 1f174870 client: view: migrate to ESM
+- 7173f6cb cloudcmd: smalltalk v5.0.0
+
 2026.01.31, v19.1.20
 
 feature:
