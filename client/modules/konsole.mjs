@@ -1,18 +1,20 @@
-'use strict';
-
 /* global CloudCmd */
 /* global Util */
 /* global DOM */
 /* global Console */
-CloudCmd.Konsole = exports;
+import exec from 'execon';
+import currify from 'currify';
+import {tryToCatch} from 'try-to-catch';
+import {js as loadJS} from 'load.js';
+import createElement from '@cloudcmd/create-element';
+import * as Images from '#dom/images';
 
-const exec = require('execon');
-const currify = require('currify');
-const {tryToCatch} = require('try-to-catch');
-const loadJS = require('load.js').js;
-const createElement = require('@cloudcmd/create-element');
+CloudCmd.Konsole = {
+    init,
+    show,
+    hide,
+};
 
-const Images = require('#dom/images');
 const {Dialog, CurrentInfo: Info} = DOM;
 
 const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';
@@ -27,7 +29,7 @@ const Name = 'Konsole';
 let Element;
 let Loaded;
 
-module.exports.init = async () => {
+export async function init() {
     if (!config('console'))
         return;
     
@@ -36,13 +38,13 @@ module.exports.init = async () => {
     await CloudCmd.View();
     await load();
     await create();
-};
+}
 
-module.exports.hide = () => {
+export function hide() {
     CloudCmd.View.hide();
-};
+}
 
-module.exports.clear = () => {
+export const clear = () => {
     konsole.clear();
 };
 
@@ -109,7 +111,7 @@ function authCheck(konsole) {
     });
 }
 
-module.exports.show = (callback) => {
+export function show(callback) {
     if (!Loaded)
         return;
     
@@ -122,7 +124,7 @@ module.exports.show = (callback) => {
             exec(callback);
         },
     });
-};
+}
 
 const load = async () => {
     Util.time(`${Name} load`);

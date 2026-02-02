@@ -132,7 +132,7 @@ export default {
         [`${modules}/contact`]: `${dirModules}/contact.js`,
         [`${modules}/upload`]: `${dirModules}/upload.mjs`,
         [`${modules}/operation`]: `${dirModules}/operation/index.mjs`,
-        [`${modules}/konsole`]: `${dirModules}/konsole.js`,
+        [`${modules}/konsole`]: `${dirModules}/konsole.mjs`,
         [`${modules}/terminal`]: `${dirModules}/terminal.js`,
         [`${modules}/terminal-run`]: `${dirModules}/terminal-run.js`,
         [`${modules}/cloud`]: `${dirModules}/cloud.mjs`,
