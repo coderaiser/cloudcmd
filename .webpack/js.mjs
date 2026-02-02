@@ -121,7 +121,7 @@ export default {
         'cloudcmd': `${dir}/cloudcmd.mjs`,
         [`${modules}/edit`]: `${dirModules}/edit.mjs`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.js`,
-        [`${modules}/edit-file-vim`]: `${dirModules}/edit-file-vim.js`,
+        [`${modules}/edit-file-vim`]: `${dirModules}/edit-file-vim.mjs`,
         [`${modules}/edit-names`]: `${dirModules}/edit-names.js`,
         [`${modules}/edit-names-vim`]: `${dirModules}/edit-names-vim.mjs`,
         [`${modules}/menu`]: `${dirModules}/menu/index.mjs`,
