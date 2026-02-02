@@ -1,35 +1,26 @@
 /* global CloudCmd, DOM */
-
-'use strict';
-
-const CloudCmd = globalThis.CloudCmd || {};
-const DOM = globalThis.DOM || {};
-
-require('../../../css/view.css');
-
-const rendy = require('rendy');
-const currify = require('currify');
-const wraptile = require('wraptile');
-const {tryToCatch} = require('try-to-catch');
-const load = require('load.js');
-
-const _modal = require('@cloudcmd/modal');
-const _createElement = require('@cloudcmd/create-element');
-
-const {time} = require('#common/util');
-const {FS} = require('../../../common/cloudfunc.mjs');
-
-const {
+import rendy from 'rendy';
+import currify from 'currify';
+import wraptile from 'wraptile';
+import {tryToCatch} from 'try-to-catch';
+import load from 'load.js';
+import * as _modal from '@cloudcmd/modal';
+import _createElement from '@cloudcmd/create-element';
+import {time} from '#common/util';
+import * as Files from '#dom/files';
+import * as Events from '#dom/events';
+import '../../../css/view.css';
+import {FS} from '../../../common/cloudfunc.mjs';
+import {
     isImage,
     isAudio,
     getType,
-} = require('./types');
+} from './types.mjs';
+import * as Images from '../../dom/images.mjs';
+import {encode} from '../../../common/entity.js';
 
-const Files = require('#dom/files');
-const Events = require('#dom/events');
-const Images = require('../../dom/images.mjs');
-
-const {encode} = require('../../../common/entity');
+const CloudCmd = globalThis.CloudCmd || {};
+const DOM = globalThis.DOM || {};
 const isString = (a) => typeof a === 'string';
 const {assign} = Object;
 const {isArray} = Array;
@@ -47,14 +38,15 @@ const addEvent = lifo(Events.add);
 
 const loadCSS = load.css;
 
-module.exports.show = show;
-module.exports.hide = hide;
-
 let Loading = false;
 
 const Name = 'View';
 
-CloudCmd[Name] = module.exports;
+CloudCmd[Name] = {
+    init,
+    show,
+    hide,
+};
 
 const Info = DOM.CurrentInfo;
 const {Key} = CloudCmd;
@@ -91,9 +83,9 @@ const Config = {
     },
 };
 
-module.exports._Config = Config;
+export const _Config = Config;
 
-module.exports.init = async () => {
+export async function init() {
     await loadAll();
     
     const events = [
@@ -105,9 +97,9 @@ module.exports.init = async () => {
         Overlay,
         onOverlayClick,
     ));
-};
+}
 
-async function show(data, options = {}) {
+export async function show(data, options = {}) {
     const prefixURL = CloudCmd.prefixURL + FS;
     
     if (Loading)
@@ -159,7 +151,8 @@ async function show(data, options = {}) {
     }
 }
 
-module.exports._createIframe = createIframe;
+export const _createIframe = createIframe;
+
 function createIframe(src, overrides = {}) {
     const {
         createElement = _createElement,
@@ -178,7 +171,8 @@ function createIframe(src, overrides = {}) {
     return element;
 }
 
-module.exports._viewHtml = viewHtml;
+export const _viewHtml = viewHtml;
+
 function viewHtml(src, overrides = {}) {
     const {modal = _modal} = overrides;
     modal.open(createIframe(src), Config);
@@ -234,7 +228,8 @@ async function viewFile() {
 
 const copy = (a) => assign({}, a);
 
-module.exports._initConfig = initConfig;
+export const _initConfig = initConfig;
+
 function initConfig(options) {
     const config = copy(Config);
     
@@ -260,7 +255,7 @@ function initConfig(options) {
     return config;
 }
 
-function hide() {
+export function hide() {
     _modal.close();
 }
 

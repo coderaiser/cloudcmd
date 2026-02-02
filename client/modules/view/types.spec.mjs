@@ -1,7 +1,5 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-const {isAudio, _detectType} = require('./types');
+import {test, stub} from 'supertape';
+import {isAudio, _detectType} from './types.mjs';
 
 test('cloudcmd: client: view: types: isAudio', (t) => {
     const result = isAudio('hello.mp3');

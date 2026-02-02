@@ -1,18 +1,14 @@
-'use strict';
-
-require('css-modules-require-hook/preset');
-
-const autoGlobals = require('auto-globals');
-const {stub} = require('@cloudcmd/stub');
-const {test: tape} = require('supertape');
-const test = autoGlobals(tape);
-
-const {
+import autoGlobals from 'auto-globals';
+import {stub} from '@cloudcmd/stub';
+import {test as tape} from 'supertape';
+import {
     _initConfig,
     _viewHtml,
     _Config,
     _createIframe,
-} = require('.');
+} from './index.mjs';
+
+const test = autoGlobals(tape);
 
 test('cloudcmd: client: view: initConfig', (t) => {
     let config;
