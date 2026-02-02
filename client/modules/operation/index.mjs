@@ -51,19 +51,19 @@ export const init = promisify((callback) => {
     exec.series([
         DOM.loadSocket,
         async (callback) => {
-        if (config('dropbox'))
-            return callback();
-        
-        const {prefix, prefixSocket} = CloudCmd;
-        
-        await loadAll();
-        await initOperations(prefix, prefixSocket, callback);
-    },
+            if (config('dropbox'))
+                return callback();
+            
+            const {prefix, prefixSocket} = CloudCmd;
+            
+            await loadAll();
+            await initOperations(prefix, prefixSocket, callback);
+        },
         (callback) => {
-        Loaded = true;
-        Images.hide();
-        callback();
-    },
+            Loaded = true;
+            Images.hide();
+            callback();
+        },
     ], callback);
 });
 

@@ -119,7 +119,7 @@ export default {
         'user-menu': `${dirCss}/user-menu.css`,
         'sw': `${dir}/sw/sw.mjs`,
         'cloudcmd': `${dir}/cloudcmd.mjs`,
-        [`${modules}/edit`]: `${dirModules}/edit.js`,
+        [`${modules}/edit`]: `${dirModules}/edit.mjs`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.js`,
         [`${modules}/edit-file-vim`]: `${dirModules}/edit-file-vim.js`,
         [`${modules}/edit-names`]: `${dirModules}/edit-names.js`,

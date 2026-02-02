@@ -1,23 +1,28 @@
 /* global CloudCmd */
+import montag from 'montag';
+import {promisify} from 'es6-promisify';
+import {tryToCatch} from 'try-to-catch';
+import createElement from '@cloudcmd/create-element';
+import load from 'load.js';
+import {MAX_FILE_SIZE as maxSize} from '#common/cloudfunc';
+import {time, timeEnd} from '#common/util';
 
-'use strict';
+export function getEditor() {
+    return editor;
+}
 
-const montag = require('montag');
-
-const {promisify} = require('es6-promisify');
-const {tryToCatch} = require('try-to-catch');
-const createElement = require('@cloudcmd/create-element');
-const load = require('load.js');
-const {MAX_FILE_SIZE: maxSize} = require('#common/cloudfunc');
-
-const {time, timeEnd} = require('#common/util');
-const getEditor = () => editor;
 const isFn = (a) => typeof a === 'function';
 const loadJS = load.js;
 
 const Name = 'Edit';
 
-CloudCmd[Name] = exports;
+CloudCmd[Name] = {
+    init,
+    show,
+    hide,
+    getEditor,
+    getElement,
+};
 
 const EditorName = CloudCmd.config('editor');
 
@@ -33,12 +38,12 @@ const ConfigView = {
     },
 };
 
-module.exports.init = async () => {
+export async function init() {
     const element = create();
     
     await CloudCmd.View();
     await loadFiles(element);
-};
+}
 
 function create() {
     const element = createElement('div', {
@@ -79,7 +84,7 @@ function initConfig(options = {}) {
     return config;
 }
 
-module.exports.show = (options) => {
+export function show(options) {
     if (Loading)
         return;
     
@@ -88,15 +93,15 @@ module.exports.show = (options) => {
     getEditor().setOptions({
         fontSize: 16,
     });
-};
+}
 
-module.exports.getEditor = getEditor;
+export function getElement() {
+    return Element;
+}
 
-module.exports.getElement = () => Element;
-
-module.exports.hide = () => {
+export function hide() {
     CloudCmd.View.hide();
-};
+}
 
 const loadFiles = async (element) => {
     const prefix = `${CloudCmd.prefix}/${EditorName}`;

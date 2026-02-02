@@ -11,12 +11,12 @@ import * as Files from '#dom/files';
 import * as Events from '#dom/events';
 import {FS} from '#common/cloudfunc';
 import * as Images from '#dom/images';
+import {encode} from '#common/entity';
 import {
     isImage,
     isAudio,
     getType,
 } from './types.mjs';
-import {encode} from '#common/entity';
 
 const CloudCmd = globalThis.CloudCmd || {};
 const DOM = globalThis.DOM || {};
