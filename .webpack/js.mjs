@@ -126,7 +126,7 @@ export default {
         [`${modules}/edit-names-vim`]: `${dirModules}/edit-names-vim.mjs`,
         [`${modules}/menu`]: `${dirModules}/menu/index.mjs`,
         [`${modules}/view`]: `${dirModules}/view/index.mjs`,
-        [`${modules}/help`]: `${dirModules}/help.js`,
+        [`${modules}/help`]: `${dirModules}/help.mjs`,
         [`${modules}/markdown`]: `${dirModules}/markdown.js`,
         [`${modules}/config`]: `${dirModules}/config/index.mjs`,
         [`${modules}/contact`]: `${dirModules}/contact.js`,

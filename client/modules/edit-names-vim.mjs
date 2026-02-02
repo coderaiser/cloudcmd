@@ -1,4 +1,4 @@
-import Events from '#dom/events';
+import * as Events from '#dom/events';
 
 const {CloudCmd} = globalThis;
 
@@ -42,4 +42,3 @@ function listener(event) {
         hide();
     }
 }
-
