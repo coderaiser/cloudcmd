@@ -1,22 +1,22 @@
-'use strict';
-
-/* global CloudCmd */
-/* global gritty */
-const {tryToCatch} = require('try-to-catch');
-
-require('../../css/terminal.css');
-
-const exec = require('execon');
-const load = require('load.js');
-const DOM = require('../dom/index.mjs');
-const Images = require('#dom/images');
+import '#css/terminal.css';
+import {tryToCatch} from 'try-to-catch';
+import exec from 'execon';
+import load from 'load.js';
+import * as Images from '#dom/images';
+import DOM from '#dom';
 
 const loadParallel = load.parallel;
 
-const {Dialog} = DOM;
-const {Key, config} = CloudCmd;
+const {CloudCmd} = globalThis;
 
-CloudCmd.Terminal = exports;
+const {Dialog} = DOM;
+const {Key, config} = globalThis.CloudCmd;
+
+CloudCmd.Terminal = {
+    init,
+    show,
+    hide,
+};
 
 let Loaded;
 let Terminal;
@@ -39,7 +39,7 @@ const loadAll = async () => {
     Loaded = true;
 };
 
-module.exports.init = async () => {
+export async function init() {
     if (!config('terminal'))
         return;
     
@@ -48,12 +48,9 @@ module.exports.init = async () => {
     await CloudCmd.View();
     await loadAll();
     create();
-};
+}
 
-module.exports.show = show;
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 
@@ -78,7 +75,7 @@ function create() {
         fontFamily: 'Droid Sans Mono',
     };
     
-    const {socket, terminal} = gritty(document.body, options);
+    const {socket, terminal} = globalThis.gritty(document.body, options);
     
     Socket = socket;
     Terminal = terminal;
@@ -101,7 +98,7 @@ function authCheck(spawn) {
     });
 }
 
-function show() {
+export function show() {
     if (!Loaded)
         return;
     

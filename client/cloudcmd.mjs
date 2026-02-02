@@ -6,7 +6,7 @@ import * as Util from '#common/util';
 import * as CloudFunc from '#common/cloudfunc';
 import {registerSW, listenSW} from './sw/register.mjs';
 import {initSortPanel, sortPanel} from './sort.mjs';
-import DOM from './dom/index.mjs';
+import DOM from '#dom';
 import {createCloudCmd} from './client.mjs';
 import * as Listeners from './listeners/index.mjs';
 

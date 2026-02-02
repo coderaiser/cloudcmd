@@ -1,5 +1,5 @@
 import {test, stub} from 'supertape';
-import {getCSSVar, goToDirectory} from './index.mjs';
+import {getCSSVar, goToDirectory} from '#dom';
 
 globalThis.CloudCmd = {};
 

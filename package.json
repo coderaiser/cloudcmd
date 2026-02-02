@@ -221,6 +221,7 @@
   },
   "imports": {
     "#css/": "./css/",
+    "#dom": "./client/dom/index.mjs",
     "#dom/events": "./client/dom/events/index.mjs",
     "#dom/load": "./client/dom/load.mjs",
     "#dom/dialog": "./client/dom/dialog.mjs",

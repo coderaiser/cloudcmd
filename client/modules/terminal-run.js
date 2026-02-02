@@ -9,7 +9,7 @@ require('../../css/terminal.css');
 
 const exec = require('execon');
 const load = require('load.js');
-const DOM = require('../dom/index.mjs');
+const DOM = require('#dom');
 const Images = require('#dom/images');
 
 const {Dialog} = DOM;

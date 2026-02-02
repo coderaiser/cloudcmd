@@ -1,6 +1,6 @@
 /* global CloudCmd */
 import {fullstore} from 'fullstore';
-import DOM from './dom/index.mjs';
+import DOM from '#dom';
 
 const sortPrevious = fullstore();
 
