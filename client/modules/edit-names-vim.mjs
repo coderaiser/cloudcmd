@@ -1,9 +1,12 @@
-'use strict';
+import Events from '#dom/events';
 
-/* global CloudCmd */
-CloudCmd.EditNamesVim = exports;
+const {CloudCmd} = globalThis;
 
-const Events = require('#dom/events');
+CloudCmd.EditNamesVim = {
+    init,
+    show,
+    hide,
+};
 const {Key} = CloudCmd;
 
 const ConfigView = {
@@ -14,22 +17,20 @@ const ConfigView = {
     },
 };
 
-module.exports.init = async () => {
+export async function init() {
     await CloudCmd.EditNames();
-};
+}
 
-module.exports.show = () => {
+export function show() {
     Events.addKey(listener);
     
     CloudCmd.EditNames
         .show(ConfigView)
         .getEditor()
         .setKeyMap('vim');
-};
+}
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.Edit.hide();
 }
 
@@ -41,3 +42,4 @@ function listener(event) {
         hide();
     }
 }
+
