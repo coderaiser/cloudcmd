@@ -1,5 +1,5 @@
 import {tryToCatch} from 'try-to-catch';
-import smalltalk from 'smalltalk';
+import * as smalltalk from 'smalltalk';
 
 const title = 'Cloud Commander';
 
