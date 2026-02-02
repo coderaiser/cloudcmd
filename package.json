@@ -160,7 +160,7 @@
     "@cloudcmd/stub": "^5.0.0",
     "@iocmd/wait": "^2.1.0",
     "@putout/eslint-flat": "^4.0.0",
-    "@putout/plugin-cloudcmd": "^4.0.0",
+    "@putout/plugin-cloudcmd": "^5.0.0",
     "@types/node-fetch": "^2.6.11",
     "auto-globals": "^4.0.0",
     "babel-loader": "^10.0.0",
