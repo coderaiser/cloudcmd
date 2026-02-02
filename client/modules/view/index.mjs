@@ -15,7 +15,7 @@ import {
     isAudio,
     getType,
 } from './types.mjs';
-import * as Images from '../../dom/images.mjs';
+import * as Images from '#dom/images';
 import {encode} from '../../../common/entity.js';
 
 const CloudCmd = globalThis.CloudCmd || {};

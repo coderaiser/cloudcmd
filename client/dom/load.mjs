@@ -2,7 +2,7 @@ import itype from 'itype';
 import jonny from 'jonny';
 import Emitify from 'emitify';
 import exec from 'execon';
-import * as Images from './images.mjs';
+import * as Images from '#dom/images';
 
 /**
  * Function gets id by src

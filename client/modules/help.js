@@ -3,7 +3,7 @@
 /* global CloudCmd */
 CloudCmd.Help = exports;
 
-const Images = require('../dom/images.mjs');
+const Images = require('#dom/images');
 
 module.exports.init = () => {
     Images.show.load('top');

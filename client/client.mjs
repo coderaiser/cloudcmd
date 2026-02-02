@@ -1,6 +1,4 @@
 import process from 'node:process';
-
-/* global DOM */
 import Emitify from 'emitify';
 import inherits from 'inherits';
 import rendy from 'rendy';
@@ -9,15 +7,15 @@ import {tryToCatch} from 'try-to-catch';
 import {addSlashToEnd} from 'format-io';
 import pascalCase from 'just-pascal-case';
 import currify from 'currify';
-import * as Images from './dom/images.mjs';
-import {unregisterSW} from './sw/register.mjs';
-import {getJsonFromFileTable} from './get-json-from-file-table.mjs';
-import {Key} from './key/index.mjs';
 import {
     apiURL,
     formatMsg,
     buildFromJSON,
 } from '#common/cloudfunc';
+import * as Images from '#dom/images';
+import {unregisterSW} from './sw/register.mjs';
+import {getJsonFromFileTable} from './get-json-from-file-table.mjs';
+import {Key} from './key/index.mjs';
 import {loadModule} from './load-module.mjs';
 
 const noJS = (a) => a.replace(/.js$/, '');

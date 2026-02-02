@@ -224,6 +224,7 @@
     "#dom/events": "./client/dom/events/index.mjs",
     "#dom/load": "./client/dom/load.mjs",
     "#dom/dialog": "./client/dom/dialog.mjs",
+    "#dom/images": "./client/dom/images.mjs",
     "#dom/files": "./client/dom/files.mjs",
     "#dom/upload-files": "./client/dom/upload-files.mjs",
     "#dom/storage": "./client/dom/storage.mjs",

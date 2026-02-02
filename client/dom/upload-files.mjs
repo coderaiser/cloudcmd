@@ -3,8 +3,8 @@ import {eachSeries} from 'execon';
 import wraptile from 'wraptile';
 import * as load from '#dom/load';
 import {alert} from '#dom/dialog';
-import * as Images from './images.mjs';
 import {FS} from '#common/cloudfunc';
+import * as Images from '#dom/images';
 import {getCurrentDirPath} from './current-file.mjs';
 
 const loadFile = wraptile(_loadFile);

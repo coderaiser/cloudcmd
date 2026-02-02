@@ -6,8 +6,8 @@ import {tryToCatch} from 'try-to-catch';
 import clipboard from '@cloudcmd/clipboard';
 import * as Events from '#dom/events';
 import {uploadFiles} from '#dom/upload-files';
-import {getRange} from './get-range.mjs';
 import {FS} from '#common/cloudfunc';
+import {getRange} from './get-range.mjs';
 import {getIndex} from './get-index.mjs';
 
 const NBSP_REG = RegExp(String.fromCharCode(160), 'g');

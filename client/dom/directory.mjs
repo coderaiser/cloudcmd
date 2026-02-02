@@ -1,8 +1,8 @@
 /* global DOM, CloudCmd */
 import philip from 'philip';
 import * as Dialog from '#dom/dialog';
-import * as Images from './images.mjs';
 import {FS} from '#common/cloudfunc';
+import * as Images from '#dom/images';
 
 export const uploadDirectory = (items) => {
     if (items.length)

@@ -2,7 +2,7 @@
 import createElement from '@cloudcmd/create-element';
 import * as Files from '#dom/files';
 import {uploadFiles} from '#dom/upload-files';
-import * as Images from '../dom/images.mjs';
+import * as Images from '#dom/images';
 
 CloudCmd.Upload = {
     init,

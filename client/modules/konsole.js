@@ -12,7 +12,7 @@ const {tryToCatch} = require('try-to-catch');
 const loadJS = require('load.js').js;
 const createElement = require('@cloudcmd/create-element');
 
-const Images = require('../dom/images.mjs');
+const Images = require('#dom/images');
 const {Dialog, CurrentInfo: Info} = DOM;
 
 const rmLastSlash = (a) => a.replace(/\/$/, '') || '/';

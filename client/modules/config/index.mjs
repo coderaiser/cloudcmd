@@ -1,4 +1,5 @@
 /* global CloudCmd, DOM, io */
+import '../../../css/config.css';
 import rendy from 'rendy';
 import currify from 'currify';
 import wraptile from 'wraptile';
@@ -9,10 +10,9 @@ import load from 'load.js';
 import createElement from '@cloudcmd/create-element';
 import * as Events from '#dom/events';
 import * as Files from '#dom/files';
-import '../../../css/config.css';
-import * as input from './input.mjs';
-import * as Images from '../../dom/images.mjs';
 import {getTitle} from '#common/cloudfunc';
+import * as input from './input.mjs';
+import * as Images from '#dom/images';
 
 const {Dialog, setTitle} = DOM;
 

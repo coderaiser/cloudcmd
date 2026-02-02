@@ -4,7 +4,7 @@ import currify from 'currify';
 import load from 'load.js';
 import {ajax} from '#dom/load';
 import * as Files from '#dom/files';
-import * as Images from '../dom/images.mjs';
+import * as Images from '#dom/images';
 
 const {log} = CloudCmd;
 

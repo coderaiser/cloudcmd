@@ -6,7 +6,7 @@ import * as Events from '#dom/events';
 import {getExt} from '#common/util';
 import * as Storage from '#dom/storage';
 import * as RESTful from '#dom/rest';
-import * as Images from './images.mjs';
+import * as Images from '#dom/images';
 import renameCurrent from './operations/rename-current.mjs';
 import * as CurrentFile from './current-file.mjs';
 import * as DOMTree from './dom-tree.mjs';

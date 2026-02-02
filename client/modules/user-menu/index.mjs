@@ -9,7 +9,7 @@ import {tryToCatch} from 'try-to-catch';
 import {codeFrameColumns} from '@babel/code-frame';
 import * as Dialog from '#dom/dialog';
 import '../../../css/user-menu.css';
-import * as Images from '../../dom/images.mjs';
+import * as Images from '#dom/images';
 import {getUserMenu} from './get-user-menu.mjs';
 import {navigate} from './navigate.mjs';
 import {parseError} from './parse-error.mjs';

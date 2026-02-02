@@ -10,7 +10,7 @@ require('../../css/terminal.css');
 const exec = require('execon');
 const load = require('load.js');
 const DOM = require('../dom/index.mjs');
-const Images = require('../dom/images.mjs');
+const Images = require('#dom/images');
 
 const {Dialog} = DOM;
 const {Key, config} = CloudCmd;
