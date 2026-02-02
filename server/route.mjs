@@ -12,7 +12,7 @@ import pipe from 'pipe-io';
 import {contentType} from 'mime-types';
 import root from './root.js';
 import prefixer from './prefixer.js';
-import * as CloudFunc from '../common/cloudfunc.mjs';
+import * as CloudFunc from '#common/cloudfunc';
 import Template from './template.js';
 import {getColumns} from './columns.mjs';
 import {getThemes} from './theme.mjs';

@@ -2,7 +2,7 @@
 /* global CloudCmd */
 import createElement from '@cloudcmd/create-element';
 import {encode, decode} from '../../common/entity.js';
-import {getTitle, FS} from '../../common/cloudfunc.mjs';
+import {getTitle, FS} from '#common/cloudfunc';
 
 let Title;
 

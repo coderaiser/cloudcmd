@@ -7,7 +7,7 @@ import {
     getPathLink,
     buildFromJSON,
     _getDataName,
-} from './cloudfunc.mjs';
+} from '#common/cloudfunc';
 
 const templatePath = new URL('../tmpl/fs', import.meta.url).pathname;
 

@@ -5,7 +5,7 @@ import * as Util from '#common/util';
 import '../css/main.css';
 import {registerSW, listenSW} from './sw/register.mjs';
 import {initSortPanel, sortPanel} from './sort.mjs';
-import * as CloudFunc from '../common/cloudfunc.mjs';
+import * as CloudFunc from '#common/cloudfunc';
 import DOM from './dom/index.mjs';
 import {createCloudCmd} from './client.mjs';
 import * as Listeners from './listeners/index.mjs';

@@ -12,7 +12,7 @@ import ponse from 'ponse';
 import copymitter from 'copymitter';
 import _moveFiles from '@cloudcmd/move-files';
 import root from '../root.js';
-import * as CloudFunc from '../../common/cloudfunc.mjs';
+import * as CloudFunc from '#common/cloudfunc';
 import markdown from '../markdown/index.js';
 import info from './info.js';
 

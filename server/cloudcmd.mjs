@@ -14,7 +14,7 @@ import dword from 'dword';
 import deepword from 'deepword';
 import nomine from 'nomine';
 import fileop from '@cloudcmd/fileop';
-import * as cloudfunc from '../common/cloudfunc.mjs';
+import * as cloudfunc from '#common/cloudfunc';
 import authentication from './auth.js';
 import {createConfig, configPath} from './config.mjs';
 import modulas from './modulas.mjs';

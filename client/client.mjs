@@ -17,7 +17,7 @@ import {
     apiURL,
     formatMsg,
     buildFromJSON,
-} from '../common/cloudfunc.mjs';
+} from '#common/cloudfunc';
 import {loadModule} from './load-module.mjs';
 
 const noJS = (a) => a.replace(/.js$/, '');

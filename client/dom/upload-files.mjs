@@ -4,7 +4,7 @@ import wraptile from 'wraptile';
 import * as load from '#dom/load';
 import {alert} from '#dom/dialog';
 import * as Images from './images.mjs';
-import {FS} from '../../common/cloudfunc.mjs';
+import {FS} from '#common/cloudfunc';
 import {getCurrentDirPath} from './current-file.mjs';
 
 const loadFile = wraptile(_loadFile);

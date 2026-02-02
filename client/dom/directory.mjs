@@ -2,7 +2,7 @@
 import philip from 'philip';
 import * as Dialog from '#dom/dialog';
 import * as Images from './images.mjs';
-import {FS} from '../../common/cloudfunc.mjs';
+import {FS} from '#common/cloudfunc';
 
 export const uploadDirectory = (items) => {
     if (items.length)

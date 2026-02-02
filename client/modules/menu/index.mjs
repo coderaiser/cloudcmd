@@ -4,7 +4,7 @@ import wrap from 'wraptile';
 import createElement from '@cloudcmd/create-element';
 import {getIdBySrc} from '#dom/load';
 import * as RESTful from '#dom/rest';
-import {FS} from '../../../common/cloudfunc.mjs';
+import {FS} from '#common/cloudfunc';
 
 const {config, Key} = CloudCmd;
 

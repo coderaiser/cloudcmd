@@ -12,7 +12,7 @@ import * as Files from '#dom/files';
 import '../../../css/config.css';
 import * as input from './input.mjs';
 import * as Images from '../../dom/images.mjs';
-import {getTitle} from '../../../common/cloudfunc.mjs';
+import {getTitle} from '#common/cloudfunc';
 
 const {Dialog, setTitle} = DOM;
 

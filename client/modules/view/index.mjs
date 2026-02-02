@@ -1,4 +1,4 @@
-/* global CloudCmd, DOM */
+import '#css/view.css';
 import rendy from 'rendy';
 import currify from 'currify';
 import wraptile from 'wraptile';
@@ -9,8 +9,7 @@ import _createElement from '@cloudcmd/create-element';
 import {time} from '#common/util';
 import * as Files from '#dom/files';
 import * as Events from '#dom/events';
-import '../../../css/view.css';
-import {FS} from '../../../common/cloudfunc.mjs';
+import {FS} from '#common/cloudfunc';
 import {
     isImage,
     isAudio,
