@@ -1,7 +1,5 @@
-'use strict';
-
-const {test} = require('supertape');
-const entity = require('./entity');
+import {test} from 'supertape';
+import * as entity from '#common/entity';
 
 test('cloudcmd: entity: encode', (t) => {
     const result = entity.encode('<hello> ');

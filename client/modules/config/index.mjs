@@ -11,8 +11,8 @@ import createElement from '@cloudcmd/create-element';
 import * as Events from '#dom/events';
 import * as Files from '#dom/files';
 import {getTitle} from '#common/cloudfunc';
-import * as input from './input.mjs';
 import * as Images from '#dom/images';
+import * as input from './input.mjs';
 
 const {Dialog, setTitle} = DOM;
 

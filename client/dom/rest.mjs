@@ -1,7 +1,7 @@
 import {tryToCatch} from 'try-to-catch';
 import * as Dialog from '#dom/dialog';
-import {encode} from '../../common/entity.js';
 import * as Images from '#dom/images';
+import {encode} from '#common/entity';
 import IO from './io/index.js';
 
 const handleError = (promise) => async (...args) => {

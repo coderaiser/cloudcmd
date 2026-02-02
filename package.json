@@ -230,7 +230,8 @@
     "#dom/storage": "./client/dom/storage.mjs",
     "#dom/rest": "./client/dom/rest.mjs",
     "#common/util": "./common/util.mjs",
-    "#common/cloudfunc": "./common/cloudfunc.mjs"
+    "#common/cloudfunc": "./common/cloudfunc.mjs",
+    "#common/entity": "./common/entity.mjs"
   },
   "engines": {
     "node": ">=22"

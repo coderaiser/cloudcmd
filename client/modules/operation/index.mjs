@@ -4,7 +4,7 @@ import {promisify} from 'es6-promisify';
 import exec from 'execon';
 import load from 'load.js';
 import {tryToCatch} from 'try-to-catch';
-import {encode} from '../../../common/entity.js';
+import {encode} from '#common/entity';
 import {removeExtension} from './remove-extension.mjs';
 import {setListeners} from './set-listeners.mjs';
 import {getNextCurrentName} from './get-next-current-name.mjs';
@@ -51,19 +51,19 @@ export const init = promisify((callback) => {
     exec.series([
         DOM.loadSocket,
         async (callback) => {
-            if (config('dropbox'))
-                return callback();
-            
-            const {prefix, prefixSocket} = CloudCmd;
-            
-            await loadAll();
-            await initOperations(prefix, prefixSocket, callback);
-        },
+        if (config('dropbox'))
+            return callback();
+        
+        const {prefix, prefixSocket} = CloudCmd;
+        
+        await loadAll();
+        await initOperations(prefix, prefixSocket, callback);
+    },
         (callback) => {
-            Loaded = true;
-            Images.hide();
-            callback();
-        },
+        Loaded = true;
+        Images.hide();
+        callback();
+    },
     ], callback);
 });
 

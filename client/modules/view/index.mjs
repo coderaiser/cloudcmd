@@ -10,13 +10,13 @@ import {time} from '#common/util';
 import * as Files from '#dom/files';
 import * as Events from '#dom/events';
 import {FS} from '#common/cloudfunc';
+import * as Images from '#dom/images';
 import {
     isImage,
     isAudio,
     getType,
 } from './types.mjs';
-import * as Images from '#dom/images';
-import {encode} from '../../../common/entity.js';
+import {encode} from '#common/entity';
 
 const CloudCmd = globalThis.CloudCmd || {};
 const DOM = globalThis.DOM || {};

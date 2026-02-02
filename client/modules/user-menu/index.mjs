@@ -1,4 +1,5 @@
 /* global CloudCmd, DOM */
+import '../../../css/user-menu.css';
 import currify from 'currify';
 import wraptile from 'wraptile';
 import {fullstore} from 'fullstore';
@@ -8,7 +9,6 @@ import {tryCatch} from 'try-catch';
 import {tryToCatch} from 'try-to-catch';
 import {codeFrameColumns} from '@babel/code-frame';
 import * as Dialog from '#dom/dialog';
-import '../../../css/user-menu.css';
 import * as Images from '#dom/images';
 import {getUserMenu} from './get-user-menu.mjs';
 import {navigate} from './navigate.mjs';
