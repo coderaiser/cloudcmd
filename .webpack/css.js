@@ -22,7 +22,7 @@ const rules = [{
         },
     }],
 }, {
-    test: /\.(png|gif|woff|woff2|eot|ttf)$/,
+    test: /\.(png|gif|svg|woff|woff2|eot|ttf)$/,
     type: 'asset/inline',
 }];
 
