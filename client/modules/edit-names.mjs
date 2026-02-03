@@ -1,13 +1,16 @@
-'use strict';
+import {tryToCatch} from 'try-to-catch';
+import exec from 'execon';
+import supermenu from 'supermenu';
+import {multiRename} from 'multi-rename';
 
-const {tryToCatch} = require('try-to-catch');
+const {CloudCmd, DOM} = globalThis;
 
-/* global CloudCmd, DOM */
-CloudCmd.EditNames = exports;
-
-const exec = require('execon');
-const supermenu = require('supermenu');
-const {multiRename} = require('multi-rename');
+CloudCmd.EditNames = {
+    init,
+    show,
+    hide,
+    isChanged,
+};
 
 const Info = DOM.CurrentInfo;
 const {Dialog} = DOM;
@@ -22,13 +25,13 @@ const ConfigView = {
     },
 };
 
-module.exports.init = async () => {
+export async function init() {
     await CloudCmd.Edit();
     
     setListeners();
-};
+}
 
-module.exports.show = (options) => {
+export function show(options) {
     const names = getActiveNames().join('\n');
     const config = {
         ...ConfigView,
@@ -50,7 +53,7 @@ module.exports.show = (options) => {
     CloudCmd.Edit.show(config);
     
     return CloudCmd.Edit;
-};
+}
 
 async function keyListener(event) {
     const ctrl = event.ctrlKey;
@@ -77,9 +80,7 @@ function getActiveNames() {
     return DOM.getFilenames(DOM.getActiveFiles());
 }
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.Edit.hide();
 }
 
@@ -201,9 +202,7 @@ function setMenu(event) {
     Menu.show(position.x, position.y);
 }
 
-module.exports.isChanged = isChanged;
-
-async function isChanged() {
+export async function isChanged() {
     const editor = CloudCmd.Edit.getEditor();
     const msg = 'Apply new names?';
     
@@ -214,3 +213,4 @@ async function isChanged() {
     
     !cancel && await applyNames();
 }
+

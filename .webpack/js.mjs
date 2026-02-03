@@ -122,7 +122,7 @@ export default {
         [`${modules}/edit`]: `${dirModules}/edit.mjs`,
         [`${modules}/edit-file`]: `${dirModules}/edit-file.mjs`,
         [`${modules}/edit-file-vim`]: `${dirModules}/edit-file-vim.mjs`,
-        [`${modules}/edit-names`]: `${dirModules}/edit-names.js`,
+        [`${modules}/edit-names`]: `${dirModules}/edit-names.mjs`,
         [`${modules}/edit-names-vim`]: `${dirModules}/edit-names-vim.mjs`,
         [`${modules}/menu`]: `${dirModules}/menu/index.mjs`,
         [`${modules}/view`]: `${dirModules}/view/index.mjs`,
