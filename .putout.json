@@ -8,7 +8,8 @@
         "*.md"
     ],
     "rules": {
-        "package-json/add-type": "off"
+        "package-json/add-type": "off",
+        "esm/add-index-to-import": "off"
     },
     "match": {
         ".filesystem.json": {

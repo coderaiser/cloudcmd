@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = {
+export default {
     'F2 - Rename file': async ({DOM}) => {
         await DOM.renameCurrent();
     },

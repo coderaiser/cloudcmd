@@ -1,11 +1,7 @@
-'use strict';
-
-const {promisify} = require('node:util');
-const {tryToCatch} = require('try-to-catch');
-
-const {test, stub} = require('supertape');
-
-const callbackify = require('./callbackify');
+import {promisify} from 'node:util';
+import {tryToCatch} from 'try-to-catch';
+import {test, stub} from 'supertape';
+import callbackify from './callbackify.js';
 
 test('cloudcmd: common: callbackify: error', async (t) => {
     const promise = stub().rejects(Error('hello'));

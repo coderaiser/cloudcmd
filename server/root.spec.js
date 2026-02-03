@@ -1,8 +1,5 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-
-const root = require('./root');
+import {test, stub} from 'supertape';
+import root from './root.js';
 
 test('cloudcmd: root: mellow', (t) => {
     const webToWin = stub();

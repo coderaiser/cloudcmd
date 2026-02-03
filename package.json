@@ -1,7 +1,7 @@
 {
   "name": "cloudcmd",
   "version": "19.2.0",
-  "type": "commonjs",
+  "type": "module",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "File manager for the web with console and editor",
   "homepage": "http://cloudcmd.io",
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/coderaiser/cloudcmd.git"
   },
-  "main": "server/cloudcmd.mjs",
+  "main": "server/cloudcmd.js",
   "keywords": [
     "console",
     "terminal",
@@ -39,7 +39,7 @@
     "server"
   ],
   "bin": {
-    "cloudcmd": "bin/cloudcmd.mjs"
+    "cloudcmd": "bin/cloudcmd.js"
   },
   "scripts": {
     "start": "madrun start",
@@ -221,18 +221,18 @@
   },
   "imports": {
     "#css/": "./css/",
-    "#dom": "./client/dom/index.mjs",
-    "#dom/events": "./client/dom/events/index.mjs",
-    "#dom/load": "./client/dom/load.mjs",
-    "#dom/dialog": "./client/dom/dialog.mjs",
-    "#dom/images": "./client/dom/images.mjs",
-    "#dom/files": "./client/dom/files.mjs",
-    "#dom/upload-files": "./client/dom/upload-files.mjs",
-    "#dom/storage": "./client/dom/storage.mjs",
-    "#dom/rest": "./client/dom/rest.mjs",
-    "#common/util": "./common/util.mjs",
-    "#common/cloudfunc": "./common/cloudfunc.mjs",
-    "#common/entity": "./common/entity.mjs"
+    "#dom": "./client/dom/index.js",
+    "#dom/events": "./client/dom/events/index.js",
+    "#dom/load": "./client/dom/load.js",
+    "#dom/dialog": "./client/dom/dialog.js",
+    "#dom/images": "./client/dom/images.js",
+    "#dom/files": "./client/dom/files.js",
+    "#dom/upload-files": "./client/dom/upload-files.js",
+    "#dom/storage": "./client/dom/storage.js",
+    "#dom/rest": "./client/dom/rest.js",
+    "#common/util": "./common/util.js",
+    "#common/cloudfunc": "./common/cloudfunc.js",
+    "#common/entity": "./common/entity.js"
   },
   "engines": {
     "node": ">=22"

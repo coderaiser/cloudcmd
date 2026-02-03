@@ -1,12 +1,11 @@
-'use strict';
+import httpAuth from 'http-auth';
+import criton from 'criton';
+import currify from 'currify';
 
-const httpAuth = require('http-auth');
-const criton = require('criton');
-const currify = require('currify');
 const middle = currify(_middle);
 const check = currify(_check);
 
-module.exports = (config) => {
+export default (config) => {
     const auth = httpAuth.basic({
         realm: 'Cloud Commander',
     }, check(config));

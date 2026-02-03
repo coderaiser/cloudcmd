@@ -1,5 +1,5 @@
-'use strict';
+import createMarkdownIt from 'markdown-it';
 
-const markdownIt = require('markdown-it')();
+const markdownIt = createMarkdownIt();
 
-module.exports = (a) => markdownIt.render(a);
+export default (a) => markdownIt.render(a);

@@ -1,14 +1,14 @@
-'use strict';
+import {callbackify} from 'node:util';
+import {fileURLToPath} from 'node:url';
+import {dirname} from 'node:path';
+import pullout from 'pullout';
+import ponse from 'ponse';
+import {read} from 'redzip';
+import root from '../root.js';
+import parse from './worker.js';
 
-const {callbackify} = require('node:util');
-
-const pullout = require('pullout');
-const ponse = require('ponse');
-const {read} = require('redzip');
-
-const root = require('../root');
-
-const parse = require('./worker');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const isString = (a) => typeof a === 'string';
 
 // warm up
@@ -16,7 +16,7 @@ parse('');
 
 const DIR_ROOT = `${__dirname}/../../`;
 
-module.exports = callbackify(async (name, rootDir, request) => {
+export default callbackify(async (name, rootDir, request) => {
     check(name, request);
     
     const {method} = request;

@@ -1,9 +1,8 @@
-'use strict';
+import process from 'node:process';
 
-const process = require('node:process');
 const getMessage = (a) => a?.message || a;
 
-module.exports = (...args) => {
+export default (...args) => {
     const messages = args.map(getMessage);
     
     console.error(...messages);

@@ -1,14 +1,15 @@
-'use strict';
+import fs from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {dirname} from 'node:path';
+import {tryCatch} from 'try-catch';
+import {test} from 'supertape';
+import readFilesSync from '@cloudcmd/read-files-sync';
+import * as CloudFunc from '#common/cloudfunc';
+import {time, timeEnd} from '#common/util';
 
-const fs = require('node:fs');
+const __filename = fileURLToPath(import.meta.url);
 
-const {tryCatch} = require('try-catch');
-const {test} = require('supertape');
-const readFilesSync = require('@cloudcmd/read-files-sync');
-
-const CloudFunc = require('#common/cloudfunc');
-const {time, timeEnd} = require(`../../common/util.mjs`);
-
+const __dirname = dirname(__filename);
 const DIR = `${__dirname}/../../`;
 
 const TMPLDIR = `${DIR}tmpl/`;

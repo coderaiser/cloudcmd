@@ -20,7 +20,7 @@ bower.json
 manifest.yml
 deno.json
 
-bin/release.mjs
+bin/release.*
 
 client
 img/logo/cloudcmd-hq.png

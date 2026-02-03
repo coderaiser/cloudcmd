@@ -1,9 +1,6 @@
-'use strict';
-
-const process = require('node:process');
-const {test, stub} = require('supertape');
-
-const info = require('./info');
+import process from 'node:process';
+import {test, stub} from 'supertape';
+import info from './info.js';
 
 test('cloudcmd: rest: info', (t) => {
     const {memoryUsage} = process;

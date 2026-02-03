@@ -1,6 +1,7 @@
-'use strict';
+import {createRequire} from 'node:module';
+import {tryCatch} from 'try-catch';
 
-const {tryCatch} = require('try-catch');
+const require = createRequire(import.meta.url);
 
 const noop = (req, res, next) => {
     next && next();
@@ -10,7 +11,7 @@ noop.listen = noop;
 
 const _getModule = (a) => require(a);
 
-module.exports = (config, arg, overrides = {}) => {
+export default (config, arg, overrides = {}) => {
     const {
         getModule = _getModule,
     } = overrides;

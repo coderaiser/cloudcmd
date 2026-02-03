@@ -1,8 +1,6 @@
-'use strict';
-
-const process = require('node:process');
-const {test} = require('supertape');
-const env = require('./env.mjs');
+import process from 'node:process';
+import {test} from 'supertape';
+import * as env from './env.js';
 
 test('cloudcmd: server: env: bool: upper case first', (t) => {
     const {

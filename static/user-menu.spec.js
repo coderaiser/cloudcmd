@@ -1,11 +1,10 @@
-'use strict';
+import {stub} from '@cloudcmd/stub';
+import {tryToCatch} from 'try-to-catch';
+import wraptile from 'wraptile';
+import {test as tape} from 'supertape';
+import autoGlobals from 'auto-globals';
+import defaultMenu, {_selectNames, _compare} from './user-menu.js';
 
-const {stub} = require('@cloudcmd/stub');
-const {tryToCatch} = require('try-to-catch');
-const wraptile = require('wraptile');
-const {test: tape} = require('supertape');
-const autoGlobals = require('auto-globals');
-const defaultMenu = require('./user-menu');
 const test = autoGlobals(tape);
 const {create} = autoGlobals;
 const {_data} = defaultMenu;
@@ -261,7 +260,6 @@ test('cloudcmd: static: user menu: compare directories', async (t) => {
 });
 
 test('cloudcmd: static: user menu: compare directories: select names', (t) => {
-    const {_selectNames} = defaultMenu;
     const selectFile = stub();
     const file = {};
     const getCurrentByName = stub().returns(file);
@@ -279,7 +277,6 @@ test('cloudcmd: static: user menu: compare directories: select names', (t) => {
 });
 
 test('cloudcmd: static: user menu: compare directories: select names: getCurrentByName', (t) => {
-    const {_selectNames} = defaultMenu;
     const selectFile = stub();
     const getCurrentByName = stub();
     
@@ -297,7 +294,6 @@ test('cloudcmd: static: user menu: compare directories: select names: getCurrent
 });
 
 test('cloudcmd: static: user menu: compare directories: select names: compare', (t) => {
-    const {_compare} = defaultMenu;
     const a = [1, 2];
     const b = [1, 3];
     

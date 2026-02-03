@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports.createDepStore = () => {
+export const createDepStore = () => {
     const deps = {};
     
     return (name, value) => {

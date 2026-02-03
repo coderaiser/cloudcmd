@@ -1,16 +1,17 @@
-'use strict';
+import process from 'node:process';
+import format from 'format-io';
+import info from '../../package.json' with {
+    type: 'json',
+};
 
-const process = require('node:process');
-const format = require('format-io');
-
-const {version} = require('../../package');
+const {version} = info;
 
 const getMemory = () => {
     const {rss} = process.memoryUsage();
     return format.size(rss);
 };
 
-module.exports = (prefix) => ({
+export default (prefix) => ({
     version,
     prefix,
     memory: getMemory(),

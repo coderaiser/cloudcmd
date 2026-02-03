@@ -1,9 +1,7 @@
-'use strict';
-
 const RENAME_FILE = 'Rename file';
 const CDN = 'https://cdn.jsdelivr.net/gh/cloudcmd/user-menu@1.2.4';
 
-module.exports = {
+export default {
     '__settings': {
         select: [RENAME_FILE],
         run: false,
@@ -135,7 +133,8 @@ async function readDefaultMenu({prefix}) {
     return await res.text();
 }
 
-module.exports._selectNames = selectNames;
+export const _selectNames = selectNames;
+
 function selectNames(names, panel, {selectFile, getCurrentByName}) {
     for (const name of names) {
         const file = getCurrentByName(name, panel);
@@ -143,7 +142,8 @@ function selectNames(names, panel, {selectFile, getCurrentByName}) {
     }
 }
 
-module.exports._compare = compare;
+export const _compare = compare;
+
 function compare(a, b) {
     const result = [];
     

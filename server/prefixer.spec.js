@@ -1,8 +1,5 @@
-'use strict';
-
-const {test} = require('supertape');
-
-const prefixer = require('./prefixer');
+import {test} from 'supertape';
+import prefixer from './prefixer.js';
 
 test('prefixer: prefix without a slash', (t) => {
     t.equal(prefixer('hello'), '/hello', 'should add slash');

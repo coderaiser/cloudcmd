@@ -1,8 +1,6 @@
-'use strict';
-
 const isString = (a) => typeof a === 'string';
 
-module.exports = (value) => {
+export default (value) => {
     if (!isString(value))
         return '';
     

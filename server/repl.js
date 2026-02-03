@@ -1,10 +1,8 @@
-'use strict';
+import process from 'node:process';
+import net from 'node:net';
+import repl from 'node:repl';
 
-const process = require('node:process');
-const net = require('node:net');
-const repl = require('node:repl');
-
-module.exports = net
+export default net
     .createServer((socket) => {
         const {pid} = process;
         const addr = socket.remoteAddress;
