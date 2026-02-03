@@ -1,5 +1,5 @@
 import itype from 'itype';
-import EventStore from './event-store.js';
+import * as EventStore from './event-store.mjs';
 
 /**
  * safe add event listener
