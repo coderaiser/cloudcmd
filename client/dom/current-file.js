@@ -153,7 +153,7 @@ export const getCurrentByName = (name, panel = DOM.CurrentInfo.panel) => {
 };
 
 /**
- * private function thet unset currentFile
+ * private function that unset currentFile
  *
  * @currentFile
  */
