@@ -101,7 +101,7 @@
     "deepmerge": "^4.0.0",
     "deepword": "^10.0.0",
     "dword": "^15.0.0",
-    "edward": "^15.0.0",
+    "edward": "^16.0.0",
     "es6-promisify": "^7.0.0",
     "execon": "^1.2.0",
     "express": "^5.1.0",

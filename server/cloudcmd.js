@@ -9,7 +9,7 @@ import ponse from 'ponse';
 import restafary from 'restafary';
 import restbox from 'restbox';
 import konsole from 'console-io';
-import edward from 'edward';
+import {edward} from 'edward';
 import dword from 'dword';
 import deepword from 'deepword';
 import nomine from 'nomine';
