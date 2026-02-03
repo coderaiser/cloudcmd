@@ -1,12 +1,8 @@
-'use strict';
-
-require('domtokenlist-shim');
-
-const _scrollIntoViewIfNeeded = require('scroll-into-view-if-needed');
+import _scrollIntoViewIfNeeded from 'scroll-into-view-if-needed';
 
 globalThis.DOM = globalThis.DOM || {};
 
-const scrollIntoViewIfNeeded = (el, overrides = {}) => {
+export const scrollIntoViewIfNeeded = (el, overrides = {}) => {
     const {
         scroll = _scrollIntoViewIfNeeded,
     } = overrides;
@@ -17,4 +13,3 @@ const scrollIntoViewIfNeeded = (el, overrides = {}) => {
 };
 
 globalThis.DOM.scrollIntoViewIfNeeded = scrollIntoViewIfNeeded;
-module.exports.scrollIntoViewIfNeeded = scrollIntoViewIfNeeded;
