@@ -338,4 +338,3 @@ const getCloudCmd = () => ({
         show: stub(),
     },
 });
-
