@@ -1,26 +1,25 @@
-'use strict';
+import createElement from '@cloudcmd/create-element';
+import * as Images from '#dom/images';
+import {Markdown} from '#dom/rest';
+import {alert} from '#dom/dialog';
 
-/* global CloudCmd */
-CloudCmd.Markdown = exports;
+const {CloudCmd} = globalThis;
+CloudCmd.Markdown = {
+    init,
+    show,
+    hide,
+};
 
-const createElement = require('@cloudcmd/create-element');
-
-const Images = require('#dom/images');
-const {Markdown} = require('#dom/rest');
-const {alert} = require('#dom/dialog');
-
-module.exports.init = async () => {
+export async function init() {
     Images.show.load('top');
     await CloudCmd.View();
-};
+}
 
-module.exports.show = show;
-
-module.exports.hide = () => {
+export function hide() {
     CloudCmd.View.hide();
-};
+}
 
-async function show(name, options = {}) {
+export async function show(name, options = {}) {
     const {positionLoad, relative} = options;
     
     Images.show.load(positionLoad);

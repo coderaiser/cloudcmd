@@ -127,7 +127,7 @@ export default {
         [`${modules}/menu`]: `${dirModules}/menu/index.mjs`,
         [`${modules}/view`]: `${dirModules}/view/index.mjs`,
         [`${modules}/help`]: `${dirModules}/help.mjs`,
-        [`${modules}/markdown`]: `${dirModules}/markdown.js`,
+        [`${modules}/markdown`]: `${dirModules}/markdown.mjs`,
         [`${modules}/config`]: `${dirModules}/config/index.mjs`,
         [`${modules}/contact`]: `${dirModules}/contact.js`,
         [`${modules}/upload`]: `${dirModules}/upload.mjs`,
@@ -137,7 +137,7 @@ export default {
         [`${modules}/terminal-run`]: `${dirModules}/terminal-run.js`,
         [`${modules}/cloud`]: `${dirModules}/cloud.mjs`,
         [`${modules}/user-menu`]: `${dirModules}/user-menu/index.mjs`,
-        [`${modules}/polyfill`]: `${dirModules}/polyfill.js`,
+        [`${modules}/polyfill`]: `${dirModules}/polyfill.mjs`,
         [`${modules}/command-line`]: `${dirModules}/command-line.mjs`,
     },
     output: {
