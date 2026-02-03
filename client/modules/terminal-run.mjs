@@ -1,21 +1,21 @@
-'use strict';
-
-/* global CloudCmd, gritty */
-const {promisify} = require('es6-promisify');
-const {tryToCatch} = require('try-to-catch');
-const {fullstore} = require('fullstore');
-
-require('../../css/terminal.css');
-
-const exec = require('execon');
-const load = require('load.js');
-const DOM = require('#dom');
-const Images = require('#dom/images');
+import '../../css/terminal.css';
+import {promisify} from 'es6-promisify';
+import {tryToCatch} from 'try-to-catch';
+import {fullstore} from 'fullstore';
+import exec from 'execon';
+import load from 'load.js';
+import DOM from '#dom';
+import * as Images from '#dom/images';
 
 const {Dialog} = DOM;
+const {CloudCmd} = globalThis;
 const {Key, config} = CloudCmd;
 
-CloudCmd.TerminalRun = exports;
+CloudCmd.TerminalRun = {
+    init,
+    show,
+    hide,
+};
 
 let Loaded;
 let Terminal;
@@ -40,7 +40,7 @@ const loadAll = async () => {
     Loaded = true;
 };
 
-module.exports.init = async () => {
+export async function init() {
     if (!config('terminal'))
         return;
     
@@ -48,9 +48,13 @@ module.exports.init = async () => {
     
     await CloudCmd.View();
     await loadAll();
-};
+}
 
-module.exports.show = promisify((options = {}, fn) => {
+export async function show(options = {}) {
+    await runTerminal(options);
+}
+
+const runTerminal = promisify((options, fn) => {
     if (!Loaded)
         return fn(null, -1);
     
@@ -69,9 +73,7 @@ module.exports.show = promisify((options = {}, fn) => {
     });
 });
 
-module.exports.hide = hide;
-
-function hide() {
+export function hide() {
     CloudCmd.View.hide();
 }
 
@@ -108,7 +110,7 @@ function create(createOptions) {
     
     let commandExit = false;
     
-    const {socket, terminal} = gritty(document.body, options);
+    const {socket, terminal} = globalThis.gritty(document.body, options);
     
     Socket = socket;
     Terminal = terminal;

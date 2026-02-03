@@ -134,7 +134,7 @@ export default {
         [`${modules}/operation`]: `${dirModules}/operation/index.mjs`,
         [`${modules}/konsole`]: `${dirModules}/konsole.mjs`,
         [`${modules}/terminal`]: `${dirModules}/terminal.mjs`,
-        [`${modules}/terminal-run`]: `${dirModules}/terminal-run.js`,
+        [`${modules}/terminal-run`]: `${dirModules}/terminal-run.mjs`,
         [`${modules}/cloud`]: `${dirModules}/cloud.mjs`,
         [`${modules}/user-menu`]: `${dirModules}/user-menu/index.mjs`,
         [`${modules}/polyfill`]: `${dirModules}/polyfill.mjs`,
