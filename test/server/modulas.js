@@ -3,7 +3,7 @@ import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import serveOnce from 'serve-once';
 import {test, stub} from 'supertape';
-import cloudcmd from '../../server/cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 import modulas from '../../server/modulas.js';
 
 const __filename = fileURLToPath(import.meta.url);

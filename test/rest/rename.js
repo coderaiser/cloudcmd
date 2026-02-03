@@ -3,7 +3,7 @@ import test from 'supertape';
 import {Volume} from 'memfs';
 import {ufs} from 'unionfs';
 import serveOnce from 'serve-once';
-import cloudcmd from '../../server/cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 
 test('cloudcmd: rest: rename', async (t) => {
     const volume = {

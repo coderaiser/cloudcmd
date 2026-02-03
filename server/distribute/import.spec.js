@@ -2,8 +2,8 @@ import process from 'node:process';
 import {promisify} from 'node:util';
 import test from 'supertape';
 import {tryToCatch} from 'try-to-catch';
+import {createConfigManager} from '#server/cloudcmd';
 import {connect} from '../../test/before.js';
-import {createConfigManager} from '../cloudcmd.js';
 import {distributeImport} from './import.js';
 
 const distribute = {

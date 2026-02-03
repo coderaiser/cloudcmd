@@ -8,7 +8,7 @@ import express from 'express';
 import {Server} from 'socket.io';
 import writejson from 'writejson';
 import readjson from 'readjson';
-import cloudcmd from '../server/cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

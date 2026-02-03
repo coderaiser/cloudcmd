@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import {tryToCatch} from 'try-to-catch';
 import {test, stub} from 'supertape';
 import serveOnce from 'serve-once';
-import cloudcmd from './cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 import {_getReadDir} from './route.js';
 
 const __filename = fileURLToPath(import.meta.url);

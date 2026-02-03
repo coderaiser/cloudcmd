@@ -10,8 +10,8 @@ import {Server} from 'socket.io';
 import tryRequire from 'tryrequire';
 import wraptile from 'wraptile';
 import compression from 'compression';
+import {cloudcmd} from '#server/cloudcmd';
 import exit from './exit.js';
-import cloudcmd from './cloudcmd.js';
 
 const bind = (f, self) => f.bind(self);
 

@@ -9,7 +9,7 @@ import cloudcmd, {
     _getPrefix,
     _initAuth,
     _getIndexPath,
-} from './cloudcmd.js';
+} from '#server/cloudcmd';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

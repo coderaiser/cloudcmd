@@ -7,7 +7,7 @@ import tar from 'tar-stream';
 import gunzip from 'gunzip-maybe';
 import pullout from 'pullout';
 import serveOnce from 'serve-once';
-import cloudcmd from '../../server/cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

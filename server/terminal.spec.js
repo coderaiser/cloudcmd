@@ -1,6 +1,6 @@
 import {test, stub} from 'supertape';
+import {createConfigManager} from '#server/cloudcmd';
 import terminal from './terminal.js';
-import {createConfigManager} from './cloudcmd.js';
 
 test('cloudcmd: terminal: disabled', (t) => {
     const config = createConfigManager();

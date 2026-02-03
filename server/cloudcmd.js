@@ -46,9 +46,7 @@ const clean = (a) => a.filter(notEmpty);
 const isUndefined = (a) => typeof a === 'undefined';
 const isFn = (a) => typeof a === 'function';
 
-export default cloudcmd;
-
-function cloudcmd(params) {
+export function cloudcmd(params) {
     const p = params || {};
     const options = p.config || {};
     const config = p.configManager || createConfig({

@@ -232,7 +232,8 @@
     "#dom/rest": "./client/dom/rest.js",
     "#common/util": "./common/util.js",
     "#common/cloudfunc": "./common/cloudfunc.js",
-    "#common/entity": "./common/entity.js"
+    "#common/entity": "./common/entity.js",
+    "#server/cloudcmd": "./server/cloudcmd.js"
   },
   "engines": {
     "node": ">=22"

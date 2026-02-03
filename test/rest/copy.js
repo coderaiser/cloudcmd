@@ -4,7 +4,7 @@ import {mkdirSync} from 'node:fs';
 import serveOnce from 'serve-once';
 import test from 'supertape';
 import {rimraf} from 'rimraf';
-import cloudcmd from '../../server/cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -2,7 +2,7 @@ import {EventEmitter} from 'node:events';
 import wait from '@iocmd/wait';
 import {test, stub} from 'supertape';
 import serveOnce from 'serve-once';
-import cloudcmd from '../../server/cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 
 test('cloudcmd: rest: move', async (t) => {
     const move = new EventEmitter();

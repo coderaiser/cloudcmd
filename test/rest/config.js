@@ -1,6 +1,6 @@
 import serveOnce from 'serve-once';
 import test from 'supertape';
-import cloudcmd from '../../server/cloudcmd.js';
+import {cloudcmd} from '#server/cloudcmd';
 
 const configManager = cloudcmd.createConfigManager();
 const {request} = serveOnce(cloudcmd, {

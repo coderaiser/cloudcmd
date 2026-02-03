@@ -1,7 +1,7 @@
 import {test, stub} from 'supertape';
 import {tryCatch} from 'try-catch';
+import {cloudcmd} from '#server/cloudcmd';
 import * as validate from './validate.js';
-import cloudcmd from './cloudcmd.js';
 
 test('validate: root: bad', (t) => {
     const config = {
