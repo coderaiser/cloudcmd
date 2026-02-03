@@ -1,6 +1,8 @@
 import {homedir} from 'node:os';
 import {readFile as _readFile} from 'node:fs/promises';
 import {join} from 'node:path';
+import {readFileSync} from 'node:fs';
+// warm up worker cache
 import montag from 'montag';
 import {tryToCatch} from 'try-to-catch';
 import currify from 'currify';
@@ -10,9 +12,8 @@ import {putout, codeframe} from 'putout';
 transpile('');
 
 const PREFIX = '/api/v1/user-menu';
-const DEFAULT_MENU_PATH = new URL('../static/user-menu.js', import.meta.url).pathname;
 
-export default currify(async ({menuName, readFile = _readFile}, req, res, next) => {
+export const userMenu = currify(async ({menuName, readFile = _readFile}, req, res, next) => {
     if (!req.url.startsWith(PREFIX))
         return next();
     
@@ -34,7 +35,7 @@ async function onGET({req, res, menuName, readFile}) {
     const url = req.url.replace(PREFIX, '');
     
     if (url === '/default')
-        return sendDefaultMenu(res);
+        return await sendDefaultMenu(res);
     
     const {findUp} = await import('find-up');
     
@@ -57,7 +58,7 @@ async function onGET({req, res, menuName, readFile}) {
             .send(e.message);
     
     if (e)
-        return sendDefaultMenu(res);
+        return await sendDefaultMenu(res);
     
     const [parseError, result] = await transpile(source);
     
@@ -85,10 +86,12 @@ function getError(error, source) {
     `;
 }
 
-function sendDefaultMenu(res) {
-    res.sendFile(DEFAULT_MENU_PATH, {
-        cacheControl: false,
-    });
+async function sendDefaultMenu(res) {
+    const menu = await getDefaultMenu();
+    
+    res
+        .type('js')
+        .send(menu);
 }
 
 async function transpile(source) {
@@ -101,4 +104,12 @@ async function transpile(source) {
             'cloudcmd',
         ],
     });
+}
+
+async function getDefaultMenu() {
+    const DEFAULT_MENU_PATH = new URL('../static/user-menu.js', import.meta.url).pathname;
+    const menu = readFileSync(DEFAULT_MENU_PATH, 'utf8');
+    const [, result] = await transpile(menu);
+    
+    return result.code;
 }

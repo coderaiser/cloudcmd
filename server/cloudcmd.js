@@ -18,7 +18,7 @@ import * as cloudfunc from '#common/cloudfunc';
 import authentication from './auth.js';
 import {createConfig, configPath} from './config.js';
 import modulas from './modulas.js';
-import userMenu from './user-menu.js';
+import {userMenu} from './user-menu.js';
 import rest from './rest/index.js';
 import route from './route.js';
 import * as validate from './validate.js';

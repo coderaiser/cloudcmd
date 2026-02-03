@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {test, stub} from 'supertape';
 import serveOnce from 'serve-once';
 import {putout} from 'putout';
-import userMenu from './user-menu.js';
+import {userMenu} from './user-menu.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -51,6 +51,21 @@ test('cloudcmd: user menu: io.mv', async (t) => {
     });
     
     t.equal(body, fixtureMoveFix);
+    t.end();
+});
+
+test('cloudcmd: user menu: default menu', async (t) => {
+    const options = {
+        menuName: '111.cloudcmd.menu.js',
+    };
+    
+    const {request} = serveOnce(userMenu);
+    
+    const {body} = await request.get(`/api/v1/user-menu?dir=abcd`, {
+        options,
+    });
+    
+    t.match(body, 'module.exports');
     t.end();
 });
 

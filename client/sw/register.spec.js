@@ -84,7 +84,7 @@ test('sw: register: registerSW', async (t, {location, navigator}) => {
     const {register} = navigator.serviceWorker;
     await registerSW('/hello');
     
-    t.calledWith(register, ['/hello/sw.mjs'], 'should call register');
+    t.calledWith(register, ['/hello/sw.js'], 'should call register');
     t.end();
 });
 
@@ -98,6 +98,6 @@ test('sw: register: unregisterSW', async (t, {location, navigator}) => {
     
     await unregisterSW('/hello');
     
-    t.calledWith(register, ['/hello/sw.mjs'], 'should call register');
+    t.calledWith(register, ['/hello/sw.js'], 'should call register');
     t.end();
 });
