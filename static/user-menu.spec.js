@@ -243,17 +243,17 @@ test('cloudcmd: static: user menu: no EditFile.show', async (t) => {
     t.end();
 });
 
-test('cloudcmd: static: user menu: compare directories', async (t) => {
+test('cloudcmd: static: user menu: compare directories', (t) => {
     const name = 'D - Compare directories';
     const DOM = getDOM();
     const CloudCmd = getCloudCmd();
     
-    await defaultMenu[name]({
+    defaultMenu[name]({
         DOM,
         CloudCmd,
     });
     
-    const {files} = DOM.CurrentInfo.files;
+    const {files} = DOM.CurrentInfo;
     
     t.calledWith(DOM.getFilenames, [files], 'should call getFilenames');
     t.end();
@@ -338,3 +338,4 @@ const getCloudCmd = () => ({
         show: stub(),
     },
 });
+
