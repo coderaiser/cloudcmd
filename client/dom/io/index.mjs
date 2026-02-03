@@ -1,19 +1,32 @@
 import {FS} from '#common/cloudfunc';
 import {sendRequest as _sendRequest} from './send-request.mjs';
 
+const {assign} = Object;
+
 const imgPosition = {
     top: true,
 };
 
-export const remove = async (url, data) => {
-    return await _sendRequest({
+export const remove = async (url, data, overrides = {}) => {
+    const {
+        sendRequest = _sendRequest,
+    } = overrides;
+    
+    const request = {
         method: 'DELETE',
         url: FS + url,
-        data,
         imgPosition: {
             top: Boolean(data),
         },
-    });
+    };
+    
+    if (data)
+        assign(request, {
+            data,
+            url: `${request.url}?files`,
+        });
+    
+    return await sendRequest(request);
 };
 
 export const patch = async (url, data) => {
