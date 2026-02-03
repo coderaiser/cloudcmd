@@ -1,3 +1,18 @@
+2026.02.03, v19.2.0
+
+feature:
+- bb32f7c4 client: dom: migrate to ESM
+- 457c83db client: migrate to ESM
+- f8a941bd client: modules: markdown: migrate to ESM
+- 9d6cffaf client: polifyll: migrate to ESM
+- 5b704d06 client: edit-names: migrate to ESM
+- 2c2ca8eb client: edit-file: migrate to ESM
+- c9f57c5f client: modules: edit-file-vim: migrate to ESM
+- 327ac9de client: modules: help: migrate to ESM
+- dc34ee87 cloudcmd: @putout/plugin-cloudcmd v5.0.0
+- 3cd3695b client: modules: edit-names-vim: migrate to ESM
+- dfcbfd63 client: modules: terminal: migrate to ESM
+
 2026.02.02, v19.1.21
 
 feature:
