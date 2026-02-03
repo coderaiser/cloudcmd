@@ -77,7 +77,7 @@ const parseHrefAttribute = (prefix, attribute) => {
 export const _parseHrefAttribute = parseHrefAttribute;
 
 /**
- * get current direcotory path
+ * get current directory path
  */
 export const getCurrentDirPath = (panel = DOM.getPanel()) => {
     const path = DOM.getByDataName('js-path', panel);
@@ -98,7 +98,7 @@ export const getCurrentPath = (currentFile) => {
 };
 
 /**
- * get current direcotory name
+ * get current directory name
  */
 export const getCurrentDirName = () => {
     const href = DOM
@@ -111,7 +111,7 @@ export const getCurrentDirName = () => {
 };
 
 /**
- * get current direcotory path
+ * get current directory path
  */
 export const getParentDirPath = (panel) => {
     const path = DOM.getCurrentDirPath(panel);
@@ -125,7 +125,7 @@ export const getParentDirPath = (panel) => {
 };
 
 /**
- * get not current direcotory path
+ * get not current directory path
  */
 export const getNotCurrentDirPath = () => {
     const panel = DOM.getPanel({

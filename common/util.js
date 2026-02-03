@@ -45,7 +45,7 @@ export const getExt = (name) => {
 };
 
 /**
- * find object by name in arrray
+ * find object by name in array
  *
  * @param array
  * @param name

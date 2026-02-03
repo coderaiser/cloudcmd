@@ -316,7 +316,7 @@ function getDOM() {
     const CurrentInfo = {
         dirPath: '/',
         files: [],
-        filesPasive: [],
+        filesPassive: [],
         panel: create(),
         panelPassive: create(),
     };
