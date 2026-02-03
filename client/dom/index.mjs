@@ -11,7 +11,7 @@ import renameCurrent from './operations/rename-current.mjs';
 import * as CurrentFile from './current-file.mjs';
 import * as DOMTree from './dom-tree.mjs';
 import * as Cmd from './cmd.mjs';
-import IO from './io/index.js';
+import * as IO from './io/index.mjs';
 import {uploadDirectory} from './directory.mjs';
 import * as Buffer from './buffer.mjs';
 import {loadRemote as _loadRemote} from './load-remote.mjs';

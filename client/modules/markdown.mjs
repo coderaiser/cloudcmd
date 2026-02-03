@@ -4,6 +4,7 @@ import {Markdown} from '#dom/rest';
 import {alert} from '#dom/dialog';
 
 const {CloudCmd} = globalThis;
+
 CloudCmd.Markdown = {
     init,
     show,

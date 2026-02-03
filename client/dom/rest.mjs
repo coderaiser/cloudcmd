@@ -2,7 +2,7 @@ import {tryToCatch} from 'try-to-catch';
 import * as Dialog from '#dom/dialog';
 import * as Images from '#dom/images';
 import {encode} from '#common/entity';
-import IO from './io/index.js';
+import * as IO from './io/index.mjs';
 
 const handleError = (promise) => async (...args) => {
     const [e, data] = await tryToCatch(promise, ...args);
@@ -18,7 +18,7 @@ const handleError = (promise) => async (...args) => {
     return [e, data];
 };
 
-export const remove = handleError(IO.delete);
+export const remove = handleError(IO.remove);
 export const patch = handleError(IO.patch);
 export const write = handleError(IO.write);
 export const createDirectory = handleError(IO.createDirectory);

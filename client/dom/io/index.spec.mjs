@@ -1,7 +1,5 @@
-'use strict';
-
-const {test, stub} = require('supertape');
-const io = require('.');
+import {test, stub} from 'supertape';
+import * as io from './index.mjs';
 
 test('client: dom: io', (t) => {
     const sendRequest = stub();
