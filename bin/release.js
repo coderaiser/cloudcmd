@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import {promisify} from 'node:util';
 import process from 'node:process';
 import {tryToCatch} from 'try-to-catch';

@@ -5,7 +5,7 @@ import globals from 'globals';
 import {matchToFlat} from '@putout/eslint-flat';
 
 export const match = {
-    'bin/release.mjs': {
+    'bin/release.js': {
         'no-console': 'off',
         'n/hashbang': 'off',
     },
