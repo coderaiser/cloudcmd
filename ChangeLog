@@ -1,3 +1,14 @@
+2026.02.04, v19.3.2
+
+fix:
+- 99d8435e cloudcmd: exports
+- a266c145 cloudcmd: default -> named
+- 6e3ba271 Closing X in editor disappeared (#455)
+
+feature:
+- 30f42e94 cloudcmd: restafary v13.0.1
+- f84ce853 cloudcmd: edward v16.0.0
+
 2026.02.03, v19.3.1
 
 fix:
