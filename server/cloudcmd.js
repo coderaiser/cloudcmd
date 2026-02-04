@@ -6,7 +6,7 @@ import {fullstore} from 'fullstore';
 import currify from 'currify';
 import apart from 'apart';
 import ponse from 'ponse';
-import restafary from 'restafary';
+import {restafary} from 'restafary';
 import restbox from 'restbox';
 import konsole from 'console-io';
 import {edward} from 'edward';
@@ -45,6 +45,8 @@ const clean = (a) => a.filter(notEmpty);
 
 const isUndefined = (a) => typeof a === 'undefined';
 const isFn = (a) => typeof a === 'function';
+
+export default cloudcmd;
 
 export function cloudcmd(params) {
     const p = params || {};
