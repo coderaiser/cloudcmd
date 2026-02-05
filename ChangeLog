@@ -1,3 +1,8 @@
+2026.02.05, v19.3.3
+
+feature:
+- 4a5a56f4 cloudcmd: dword v16.0.0
+
 2026.02.04, v19.3.2
 
 fix:
