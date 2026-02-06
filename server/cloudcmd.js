@@ -11,7 +11,7 @@ import restbox from 'restbox';
 import konsole from 'console-io';
 import {edward} from 'edward';
 import {dword} from 'dword';
-import deepword from 'deepword';
+import {deepword} from 'deepword';
 import nomine from 'nomine';
 import fileop from '@cloudcmd/fileop';
 import * as cloudfunc from '#common/cloudfunc';
