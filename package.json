@@ -174,7 +174,7 @@
     "cssnano-preset-default": "^7.0.10",
     "domtokenlist-shim": "^1.2.0",
     "emitify": "^4.0.1",
-    "eslint": "^9.23.0",
+    "eslint": "^10.0.0",
     "eslint-plugin-n": "^17.0.0-4",
     "eslint-plugin-putout": "^30.0.0",
     "globals": "^17.0.0",
