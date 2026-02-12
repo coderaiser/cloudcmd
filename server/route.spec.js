@@ -366,7 +366,7 @@ test('cloudcmd: route: buttons: terminal: can not load', async (t) => {
 test('cloudcmd: route: buttons: terminal', async (t) => {
     const config = {
         terminal: true,
-        terminalPath: 'console-io',
+        terminalPath: 'gritty',
     };
     
     const options = {
