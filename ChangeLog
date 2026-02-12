@@ -1,3 +1,10 @@
+2026.02.12, v19.3.6
+
+feature:
+- ac94eccd cloudcmd: konsole: named
+- 144e4a34 cloudcmd: gritty v10.0.0
+- 938f9e76 cloudcmd: console-io v15.0.1
+
 2026.02.08, v19.3.5
 
 feature:
