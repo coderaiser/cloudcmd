@@ -9,7 +9,8 @@ const noop = (req, res, next) => {
 
 noop.listen = noop;
 
-const _getModule = (a) => require(a);
+const parseDefault = (a) => a.default || a;
+const _getModule = (a) => parseDefault(require(a));
 
 export default (config, arg, overrides = {}) => {
     const {
