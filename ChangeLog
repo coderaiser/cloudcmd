@@ -1,3 +1,8 @@
+2026.02.13, v19.3.7
+
+feature:
+- 8fd79a27 cloudcmd: win32 v8.0.0
+
 2026.02.12, v19.3.6
 
 feature:
