@@ -9,7 +9,7 @@ import currify from 'currify';
 import pullout from 'pullout';
 import json from 'jonny';
 import ponse from 'ponse';
-import copymitter from 'copymitter';
+import {copymitter} from 'copymitter';
 import _moveFiles from '@cloudcmd/move-files';
 import * as CloudFunc from '#common/cloudfunc';
 import root from '../root.js';
