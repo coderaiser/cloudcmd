@@ -1,19 +1,17 @@
-package-lock.json
-yarn.lock
-yarn-error.log
-node_modules
-npm-debug.log*
-coverage
-
-modules/execon
-modules/emitify
+*.swp
+*.log
+*.lock
 
 .nyc_output
-
-*.swp
 .DS_Store
+.idea
 
+package-lock.json
+npm-debug.log*
+
+node_modules
+coverage
+modules/execon
+modules/emitify
 dist
 dist-dev
-
-.idea

@@ -1,11 +1,11 @@
 {
     "plugins": ["cloudcmd"],
     "ignore": [
-        "html",
-        "fixture*",
+        "*.md",
         "app.json",
         "fontello.json",
-        "*.md"
+        "html",
+        "fixture*"
     ],
     "rules": {
         "package-json/add-type": "off",

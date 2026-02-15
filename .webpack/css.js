@@ -1,8 +1,4 @@
-import {env} from 'node:process';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import cssnano from 'cssnano';
-
-const isDev = env.NODE_ENV === 'development';
 
 const clean = (a) => a.filter(Boolean);
 
