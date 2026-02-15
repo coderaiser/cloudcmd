@@ -1,5 +1,8 @@
+import {env} from 'node:process';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const isDev = env.NODE_ENV === 'development';
 const clean = (a) => a.filter(Boolean);
 
 const plugins = clean([
@@ -22,8 +25,21 @@ const rules = [{
 }];
 
 export default {
+    mode: isDev ? 'development' : 'production',
     plugins,
     module: {
         rules,
+    },
+    optimization: {
+        minimize: !isDev,
+        minimizer: [
+            new CssMinimizerPlugin({
+                minimizerOptions: {
+                    preset: ['default', {
+                        svgo: false,
+                    }],
+                },
+            }),
+        ],
     },
 };
