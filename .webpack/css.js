@@ -1,6 +1,6 @@
 import {env} from 'node:process';
-import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import cssnano from 'cssnano';
 
 const isDev = env.NODE_ENV === 'development';
 
@@ -10,7 +10,6 @@ const plugins = clean([
     new MiniCssExtractPlugin({
         filename: '[name].css',
     }),
-    !isDev && new OptimizeCssAssetsPlugin(),
 ]);
 
 const rules = [{
