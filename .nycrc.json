@@ -3,9 +3,9 @@
     "all": false,
     "exclude": [
         "**/*.spec.js",
-        "**/fixture",
         "**/*.*.js",
         "**/*.config.*",
+        "**/fixture",
         "**/test/**"
     ],
     "branches": 100,
