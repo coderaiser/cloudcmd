@@ -172,6 +172,39 @@ test('cloudfunc: buildFromJSON: showDotFiles: false', (t) => {
     t.end();
 });
 
+test('cloudfunc: buildFromJSON: showDotFiles: false', (t) => {
+    const data = {
+        path: '/media/',
+        files: [{
+            date: '30.08.2016',
+            mode: 'rwx rwx rwx',
+            name: '{{}}',
+            owner: 'root',
+            size: '7b',
+            type: 'file',
+        }],
+    };
+    
+    const html = buildFromJSON({
+        prefix: '',
+        template,
+        data,
+        showDotFiles: false,
+    });
+    
+    const $ = cheerio.load(html);
+    const el = $('[data-name="js-file-JTdCJTdCJTdEJTdE"]');
+    
+    const result = el
+        .find('[data-name="js-name"]')
+        .text();
+    
+    const expected = '{{}}';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
 test('cloudfunc: _getDataName', (t) => {
     const result = _getDataName('s');
     const expected = 'data-name="js-file-cw==" ';

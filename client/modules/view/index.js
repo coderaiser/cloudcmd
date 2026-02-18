@@ -1,5 +1,5 @@
 import '#css/view.css';
-import rendy from 'rendy';
+import {rendy} from 'rendy';
 import currify from 'currify';
 import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';

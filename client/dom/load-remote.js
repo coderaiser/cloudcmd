@@ -1,6 +1,6 @@
 /* global CloudCmd */
 import {callbackify} from 'node:util';
-import rendy from 'rendy';
+import {rendy} from 'rendy';
 import itype from 'itype';
 import * as load from 'load.js';
 import {tryToCatch} from 'try-to-catch';

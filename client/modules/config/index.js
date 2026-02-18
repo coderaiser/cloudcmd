@@ -1,6 +1,6 @@
 /* global CloudCmd, DOM, io */
 import '../../../css/config.css';
-import rendy from 'rendy';
+import {rendy} from 'rendy';
 import currify from 'currify';
 import wraptile from 'wraptile';
 import squad from 'squad';

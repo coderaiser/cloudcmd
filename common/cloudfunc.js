@@ -1,4 +1,4 @@
-import rendy from 'rendy';
+import {rendy} from 'rendy';
 import currify from 'currify';
 import store from 'fullstore';
 import {encode} from '#common/entity';
@@ -128,7 +128,6 @@ export const buildFromJSON = (params) => {
     const json = params.data;
     
     const path = encode(json.path);
-    
     const {files} = json;
     
     /*
