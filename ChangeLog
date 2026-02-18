@@ -1,3 +1,9 @@
+2026.02.18, v19.5.0
+
+feature:
+- b20539ef common: entity: encode {,}
+- 7ef134f4 cloudcmd: rendy v5.0.0
+
 2026.02.18, v19.4.1
 
 feature:
