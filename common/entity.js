@@ -2,6 +2,8 @@ const Entities = {
     '&lt;': '<',
     '&gt;': '>',
     '&quot;': '"',
+    '&lcub;': '{',
+    '&rcub;': '}',
 };
 
 const keys = Object.keys(Entities);

@@ -172,7 +172,7 @@ test('cloudfunc: buildFromJSON: showDotFiles: false', (t) => {
     t.end();
 });
 
-test('cloudfunc: buildFromJSON: showDotFiles: false', (t) => {
+test('cloudfunc: buildFromJSON: name: {{ }}', (t) => {
     const data = {
         path: '/media/',
         files: [{

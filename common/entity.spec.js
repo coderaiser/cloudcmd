@@ -9,6 +9,14 @@ test('cloudcmd: entity: encode', (t) => {
     t.end();
 });
 
+test('cloudcmd: entity: {{}}', (t) => {
+    const result = entity.encode('{{}}');
+    const expected = '&lcub;&lcub;&rcub;&rcub;';
+
+    t.equal(result, expected, 'should encode entity');
+    t.end();
+});
+
 test('cloudcmd: entity: decode', (t) => {
     const result = entity.decode('&lt;hello&gt; ');
     const expected = '<hello> ';
