@@ -12,7 +12,7 @@ test('cloudcmd: entity: encode', (t) => {
 test('cloudcmd: entity: {{}}', (t) => {
     const result = entity.encode('{{}}');
     const expected = '&lcub;&lcub;&rcub;&rcub;';
-
+    
     t.equal(result, expected, 'should encode entity');
     t.end();
 });
