@@ -1,4 +1,4 @@
-import supermenu from 'supermenu';
+import {supermenu} from 'supermenu';
 
 const noop = () => {};
 const {CloudCmd} = globalThis;

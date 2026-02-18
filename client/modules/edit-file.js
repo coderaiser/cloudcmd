@@ -2,7 +2,7 @@
 import Format from 'format-io';
 import {fullstore} from 'fullstore';
 import exec from 'execon';
-import supermenu from 'supermenu';
+import {supermenu} from 'supermenu';
 
 CloudCmd.EditFile = {
     init,

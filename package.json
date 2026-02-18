@@ -209,7 +209,7 @@
     "serve-once": "^3.0.1",
     "smalltalk": "^5.0.0",
     "style-loader": "^4.0.0",
-    "supermenu": "^4.0.1",
+    "supermenu": "^5.0.0",
     "supertape": "^12.0.0",
     "tar-stream": "^3.0.0",
     "unionfs": "^4.0.0",

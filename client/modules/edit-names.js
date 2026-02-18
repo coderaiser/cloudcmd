@@ -1,6 +1,6 @@
 import {tryToCatch} from 'try-to-catch';
 import exec from 'execon';
-import supermenu from 'supermenu';
+import {supermenu} from 'supermenu';
 import {multiRename} from 'multi-rename';
 
 const {CloudCmd, DOM} = globalThis;
