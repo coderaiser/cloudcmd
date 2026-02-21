@@ -1,3 +1,8 @@
+2026.02.21, v19.6.0
+
+feature:
+- 6d19bf2e common: object.omit -> omit
+
 2026.02.18, v19.5.1
 
 feature:
