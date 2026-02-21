@@ -8,8 +8,7 @@
         "fixture*"
     ],
     "rules": {
-        "package-json/add-type": "off",
-        "esm/add-index-to-import": "off"
+        "package-json/add-type": "off"
     },
     "match": {
         ".filesystem.json": {

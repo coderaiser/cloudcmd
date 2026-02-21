@@ -1,7 +1,7 @@
 import currify from 'currify';
 import wraptile from 'wraptile';
 import squad from 'squad';
-import omit from 'object.omit';
+import {omit} from '#common/omit';
 import log, {
     exportStr,
     connectedStr,
