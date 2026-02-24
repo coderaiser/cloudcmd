@@ -86,7 +86,7 @@
   "dependencies": {
     "@babel/plugin-transform-optional-chaining": "^7.21.0",
     "@cloudcmd/dropbox": "^5.0.1",
-    "@cloudcmd/fileop": "^9.0.0",
+    "@cloudcmd/fileop": "^9.0.1",
     "@cloudcmd/move-files": "^8.0.0",
     "@cloudcmd/read-files-sync": "^2.0.0",
     "@putout/cli-validate-args": "^2.0.0",
