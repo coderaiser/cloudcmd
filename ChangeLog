@@ -1,3 +1,10 @@
+2026.02.25, v19.6.4
+
+feature:
+- a66eeda3 cloudcmd: copymitter v10.2.0 (coderaiser/cloudcmd#457)
+- 4340533a cloudcmd: c8 v11.0.0
+- 0857711f cloudcmd: redzip v4.2.0 (#457)
+
 2026.02.24, v19.6.3
 
 feature:
