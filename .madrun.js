@@ -1,4 +1,3 @@
-import process from 'node:process';
 import {run, cutEnv} from 'madrun';
 import {defineEnv} from 'supertape/env';
 
