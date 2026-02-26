@@ -1,3 +1,8 @@
+2026.02.26, v19.6.7
+
+feature:
+- 68c7d0be cloudcmd: onezip v7.0.0
+
 2026.02.26, v19.6.6
 
 feature:
