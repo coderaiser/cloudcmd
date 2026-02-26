@@ -1,3 +1,8 @@
+2026.02.27, v19.6.8
+
+feature:
+- 15fab514 cloudcmd: copymitter v10.3.0 (#458)
+
 2026.02.26, v19.6.7
 
 feature:
