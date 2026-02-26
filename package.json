@@ -123,7 +123,7 @@
     "nano-memoize": "^3.0.16",
     "nomine": "^4.0.0",
     "once": "^1.4.0",
-    "onezip": "^6.0.1",
+    "onezip": "^7.0.0",
     "open": "^11.0.0",
     "package-json": "^10.0.0",
     "pipe-io": "^4.0.1",

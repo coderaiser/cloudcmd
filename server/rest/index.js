@@ -2,7 +2,7 @@ import path from 'node:path';
 import _fs from 'node:fs';
 import process from 'node:process';
 import jaguar from 'jaguar';
-import onezip from 'onezip';
+import {onezip} from 'onezip';
 import inly from 'inly';
 import wraptile from 'wraptile';
 import currify from 'currify';
