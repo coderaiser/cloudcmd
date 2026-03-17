@@ -1,3 +1,12 @@
+2026.03.17, v19.6.9
+
+feature:
+- b28a070a cloudcmd: redzip v4.6.1
+- 43c5a011 cloudcmd: css-minimizer-webpack-plugin v8.0.0
+- 15dcae5c cloudcmd: webpack-cli v7.0.2
+- 5976da81 cloudcmd: @cloudcmd/fileop v9.0.5
+- 37cb83f2 cloudcmd: redzip v4.6.0
+
 2026.02.27, v19.6.8
 
 feature:
