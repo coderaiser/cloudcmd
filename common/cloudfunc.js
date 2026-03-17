@@ -1,17 +1,19 @@
 import {rendy} from 'rendy';
 import currify from 'currify';
-import store from 'fullstore';
+import {fullstore} from 'fullstore';
 import {encode} from '#common/entity';
+
+const id = (a) => a;
+
+export const dateFormatter = fullstore(id);
 
 export const getHeaderField = currify(_getHeaderField);
 
-/* КОНСТАНТЫ (общие для клиента и сервера)*/
-/* название программы */
 const NAME = 'Cloud Commander';
 
 export const FS = '/fs';
 
-const Path = store();
+const Path = fullstore();
 
 Path('/');
 
@@ -123,6 +125,8 @@ export const buildFromJSON = (params) => {
         showDotFiles,
     } = params;
     
+    const formatDate = dateFormatter();
+    
     const templateFile = template.file;
     const templateLink = template.link;
     const json = params.data;
@@ -230,7 +234,7 @@ export const buildFromJSON = (params) => {
                 type,
                 name: linkResult,
                 size,
-                date,
+                date: formatDate(date),
                 owner,
                 mode,
             });
@@ -290,3 +294,4 @@ export function getDotDot(path) {
     
     return dotDot;
 }
+

@@ -7,6 +7,7 @@ import {
     getPathLink,
     buildFromJSON,
     _getDataName,
+    dateFormatter,
 } from '#common/cloudfunc';
 
 const templatePath = new URL('../tmpl/fs', import.meta.url).pathname;
@@ -215,6 +216,52 @@ test('cloudfunc: buildFromJSON: name: {{ }}', (t) => {
 test('cloudfunc: _getDataName', (t) => {
     const result = _getDataName('s');
     const expected = 'data-name="js-file-cw==" ';
+    
+    t.equal(result, expected);
+    t.end();
+});
+
+test('cloudfunc: buildFromJSON: formatDate', (t) => {
+    const data = {
+        path: '/media/',
+        files: [{
+            date: '30.08.2016',
+            mode: 'rwx rwx rwx',
+            name: '{{}}',
+            owner: 'root',
+            size: '7b',
+            type: 'file',
+        }],
+    };
+    
+    const oldFormatter = dateFormatter();
+    
+    const formatDate = (str) => {
+        const [day, month, year] = str.split('.');
+        const date = new Date(year, month - 1, day);
+        
+        return date.toLocaleDateString();
+    };
+    
+    dateFormatter(formatDate);
+    
+    const html = buildFromJSON({
+        prefix: '',
+        template,
+        data,
+        showDotFiles: false,
+    });
+    
+    dateFormatter(oldFormatter);
+    
+    const $ = cheerio.load(html);
+    const el = $('[data-name="js-file-JTdCJTdCJTdEJTdE"]');
+    
+    const result = el
+        .find('[data-name="js-date"]')
+        .text();
+    
+    const expected = '8/30/2016';
     
     t.equal(result, expected);
     t.end();

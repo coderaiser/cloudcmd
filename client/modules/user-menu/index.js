@@ -1,4 +1,3 @@
-/* global CloudCmd, DOM */
 import '../../../css/user-menu.css';
 import currify from 'currify';
 import wraptile from 'wraptile';
@@ -19,6 +18,11 @@ import {runSelected} from './run.js';
 const loadCSS = load.css;
 const sourceStore = fullstore();
 
+const {
+    CloudCmd,
+    DOM,
+    CloudFunc,
+} = globalThis;
 const Name = 'UserMenu';
 
 CloudCmd[Name] = {
@@ -146,6 +150,7 @@ const runUserMenu = async (fn) => {
     const [error] = await tryToCatch(fn, {
         DOM,
         CloudCmd,
+        CloudFunc,
         tryToCatch,
     });
     
