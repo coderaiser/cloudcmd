@@ -37,6 +37,7 @@ test('cloudcmd: client: key: enable vim', async (t) => {
 test('cloudcmd: client: key: disable vim', async (t) => {
     const _config = stub();
     const config = stub();
+    
     const event = {
         keyCode: ESC,
         key: 'Escape',

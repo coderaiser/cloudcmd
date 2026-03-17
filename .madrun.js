@@ -16,7 +16,10 @@ export default {
         NODE_ENV: 'development',
     }),
     'build:start': () => run(['build:client', 'start']),
-    'build:start:dev': () => run(['build:client:dev', 'start:dev']),
+    'build:start:dev': () => run([
+        'build:client:dev',
+        'start:dev',
+    ]),
     'lint:all': () => run('lint:progress'),
     'lint': () => 'redlint fix; putout . --rulesdir rules',
     'lint:progress': () => run('lint', '-f progress'),

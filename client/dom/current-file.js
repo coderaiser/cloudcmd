@@ -302,6 +302,7 @@ export const isCurrentIsDir = (currentFile) => {
 export const getCurrentType = (currentFile) => {
     const current = currentFile || DOM.getCurrentFile();
     const el = DOM.getByDataName('js-type', current);
+    
     const type = el.className
         .split(' ')
         .pop();

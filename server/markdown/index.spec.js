@@ -90,6 +90,7 @@ test('cloudcmd: markdown: no request', async (t) => {
 test('cloudcmd: markdown', async (t) => {
     const configManager = cloudcmd.createConfigManager();
     const fixtureDir = new URL('fixture', import.meta.url).pathname;
+    
     const config = {
         auth: false,
         root: fixtureDir,
@@ -109,6 +110,7 @@ test('cloudcmd: markdown', async (t) => {
 test('cloudcmd: markdown: zip', async (t) => {
     const configManager = cloudcmd.createConfigManager();
     const fixtureDir = new URL('fixture', import.meta.url).pathname;
+    
     const config = {
         auth: false,
         root: fixtureDir,

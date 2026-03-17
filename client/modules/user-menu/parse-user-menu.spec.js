@@ -4,6 +4,7 @@ import {parseUserMenu} from './parse-user-menu.js';
 test('cloudcmd: user menu: parse', (t) => {
     const fn = stub();
     const __settings = {};
+    
     const result = parseUserMenu({
         __settings,
         'F2 - Rename file': fn,

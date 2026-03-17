@@ -55,6 +55,7 @@ let EXT;
 function header() {
     const fm = DOM.getFM();
     const isDataset = (el) => el.dataset;
+    
     const isPanel = (el) => {
         return /^js-(left|right)$/.test(el.dataset.name);
     };
@@ -309,8 +310,12 @@ function onDragStart(event) {
         link.href = prefixURL + '/pack' + Info.path + EXT;
     }
     
-    event.dataTransfer.setData('DownloadURL', 'application/octet-stream' + ':' + name +
-    ':' + link);
+    event.dataTransfer.setData(
+        'DownloadURL',
+        'application/octet-stream' + ':' + name +
+        ':' +
+        link,
+    );
 }
 
 function getLIElement(element) {

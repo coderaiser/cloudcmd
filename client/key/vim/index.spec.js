@@ -447,6 +447,7 @@ test('cloudcmd: client: key: set first file current: ^', async (t) => {
 test('cloudcmd: client: key: visual', (t) => {
     const element = {};
     const toggleSelectedFile = stub();
+    
     const Info = {
         element,
     };
@@ -463,6 +464,7 @@ test('cloudcmd: client: key: visual', (t) => {
 test('cloudcmd: client: key: ESC', (t) => {
     const element = {};
     const unselectFiles = stub();
+    
     const Info = {
         element,
     };
@@ -508,6 +510,7 @@ test('cloudcmd: client: key: Enter', async (t) => {
 test('cloudcmd: client: key: /', (t) => {
     const preventDefault = stub();
     const element = {};
+    
     const Info = {
         element,
         files: [],
