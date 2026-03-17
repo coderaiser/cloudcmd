@@ -23,6 +23,7 @@ const {
     DOM,
     CloudFunc,
 } = globalThis;
+
 const Name = 'UserMenu';
 
 CloudCmd[Name] = {

@@ -294,4 +294,3 @@ export function getDotDot(path) {
     
     return dotDot;
 }
-
