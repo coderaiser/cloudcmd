@@ -63,7 +63,10 @@ async function keyListener(event) {
     
     if (ctrlMeta && event.keyCode === Key.S) {
         hide();
-    } else if (ctrlMeta && event.keyCode === Key.P) {
+        return;
+    }
+    
+    if (ctrlMeta && event.keyCode === Key.P) {
         const [, pattern] = await Dialog.prompt('Apply pattern:', '[n][e]');
         pattern && applyPattern(pattern);
     }

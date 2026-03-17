@@ -30,6 +30,7 @@ test('cloudcmd: static: user menu: Rename', async (t) => {
 test('cloudcmd: static: user menu: R', (t) => {
     const name = 'R - cd /';
     const changeDir = stub();
+    
     const CloudCmd = {
         changeDir,
     };

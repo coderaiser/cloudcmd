@@ -19,10 +19,12 @@ await main();
 async function main() {
     const history = '## Version history\n\n';
     const link = '//github.com/coderaiser/cloudcmd/releases/tag/';
+    
     const template = '- ' +
         '*{{ date }}*, ' +
         '**[v{{ version }}]' +
-        '(' + link +
+        '(' +
+        link +
         'v{{ version }})**\n';
     
     const {version} = Info;
@@ -35,10 +37,11 @@ async function main() {
     await replaceVersion('README.md', version, versionNew);
     await replaceVersion('HELP.md', version, versionNew);
     
-    const historyNew = history + rendy(template, {
-        date: shortdate(),
-        version: versionNew,
-    });
+    const historyNew = history +
+        rendy(template, {
+            date: shortdate(),
+            version: versionNew,
+        });
     
     await replaceVersion('HELP.md', history, historyNew);
 }

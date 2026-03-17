@@ -35,6 +35,7 @@ export const getColumns = ({isDev = _isDev()} = {}) => {
 const readFilesSyncMemo = nanomemoize((isDev) => {
     const dist = getDist(isDev);
     const columnsDir = path.join(__dirname, '..', dist, 'columns');
+    
     const names = fs
         .readdirSync(columnsDir)
         .filter(not(isMap));

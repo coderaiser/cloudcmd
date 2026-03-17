@@ -63,6 +63,7 @@ test('util: findObjByNameInArr: object', (t) => {
 test('util: findObjByNameInArr: array', (t) => {
     const name = 'hello';
     const data = 'abc';
+    
     const item = {
         name,
         data,

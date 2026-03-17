@@ -24,6 +24,7 @@ export const getThemes = ({isDev = _isDev()} = {}) => {
 const readFilesSyncMemo = nanomemoize((isDev) => {
     const dist = getDist(isDev);
     const themesDir = path.join(__dirname, '..', dist, 'themes');
+    
     const names = fs
         .readdirSync(themesDir)
         .filter(not(isMap));

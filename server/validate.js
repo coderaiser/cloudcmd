@@ -55,6 +55,7 @@ export const columns = (type, overrides = {}) => {
     } = overrides;
     
     const addQuotes = (a) => `"${a}"`;
+    
     const all = Object
         .keys(getColumns())
         .concat('');
@@ -75,6 +76,7 @@ export const theme = (type, overrides = {}) => {
     } = overrides;
     
     const addQuotes = (a) => `"${a}"`;
+    
     const all = Object
         .keys(getThemes())
         .concat('');

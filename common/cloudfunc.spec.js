@@ -53,6 +53,7 @@ test('cloudfunc: buildFromJSON: ..', (t) => {
 test('cloudfunc: getPathLink: /', (t) => {
     const {pathLink} = template;
     const result = getPathLink('/', '', pathLink);
+    
     const expected = montag`
         <a data-name="js-path-link" href="/fs/" title="/">/</a>
     `;
@@ -64,6 +65,7 @@ test('cloudfunc: getPathLink: /', (t) => {
 test('cloudfunc: getPathLink: /hello/world', (t) => {
     const {pathLink} = template;
     const result = getPathLink('/hello/world', '', pathLink);
+    
     const expected = montag`
         <a data-name="js-path-link" href="/fs/" title="/">/</a>hello/
     `;
@@ -75,6 +77,7 @@ test('cloudfunc: getPathLink: /hello/world', (t) => {
 test('cloudfunc: getPathLink: prefix', (t) => {
     const {pathLink} = template;
     const result = getPathLink('/hello/world', '/cloudcmd', pathLink);
+    
     const expected = montag`
         <a data-name="js-path-link" href="/cloudcmd/fs/" title="/">/</a>hello/
     `;
@@ -86,6 +89,7 @@ test('cloudfunc: getPathLink: prefix', (t) => {
 test('cloudfunc: getSize: dir', (t) => {
     const type = 'directory';
     const size = 0;
+    
     const result = _getSize({
         type,
         size,
@@ -100,6 +104,7 @@ test('cloudfunc: getSize: dir', (t) => {
 test('cloudfunc: getSize: link: dir', (t) => {
     const type = 'directory-link';
     const size = 0;
+    
     const result = _getSize({
         type,
         size,
@@ -114,6 +119,7 @@ test('cloudfunc: getSize: link: dir', (t) => {
 test('cloudfunc: getSize: link: file', (t) => {
     const type = 'file-link';
     const size = 0;
+    
     const result = _getSize({
         type,
         size,
@@ -128,6 +134,7 @@ test('cloudfunc: getSize: link: file', (t) => {
 test('cloudfunc: getSize: file', (t) => {
     const type = 'file';
     const size = '100.00kb';
+    
     const result = _getSize({
         type,
         size,

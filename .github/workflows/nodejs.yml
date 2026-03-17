@@ -11,7 +11,7 @@ jobs:
         node-version:
           - 22.x
           - 24.x
-          - 25.6.1
+          - 25.x
     steps:
       - uses: actions/checkout@v5
       - uses: oven-sh/setup-bun@v2
@@ -27,7 +27,7 @@ jobs:
         run: bun i --no-save
       - name: Lint
         run: redrun fix:lint
-      - uses: actions/cache@v4
+      - uses: actions/cache@v5
         with:
           path: |
             ~/.cargo/bin/

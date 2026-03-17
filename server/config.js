@@ -197,6 +197,7 @@ function get(manage, request, response) {
 async function patch(manage, request, response) {
     const name = 'config.json';
     const cache = false;
+    
     const options = {
         name,
         request,

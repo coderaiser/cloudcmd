@@ -65,6 +65,7 @@ export const _getReadDir = getReadDir;
 async function route({config, options, request, response}) {
     const name = ponse.getPathName(request);
     const gzip = true;
+    
     const p = {
         request,
         response,

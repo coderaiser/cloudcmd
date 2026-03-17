@@ -243,6 +243,7 @@ test('cloudcmd: route: sendIndex: encode', async (t) => {
 test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
     const name = '"><svg onload=alert(3);>';
     const path = '/';
+    
     const files = [{
         name,
     }];
@@ -276,6 +277,7 @@ test('cloudcmd: route: sendIndex: encode: not encoded', async (t) => {
 test('cloudcmd: route: sendIndex: ddos: render', async (t) => {
     const name = `$$$'&quot;`;
     const path = '/';
+    
     const files = [{
         name,
     }];

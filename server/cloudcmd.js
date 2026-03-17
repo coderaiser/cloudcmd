@@ -51,6 +51,7 @@ export default cloudcmd;
 export function cloudcmd(params) {
     const p = params || {};
     const options = p.config || {};
+    
     const config = p.configManager || createConfig({
         configPath,
     });

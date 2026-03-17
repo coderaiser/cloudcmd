@@ -83,6 +83,7 @@ test('cloudcmd: /cloudcmd.js: auth: access denied', async (t) => {
 test('cloudcmd: /cloudcmd.js: auth: no password', async (t) => {
     const name = 'cloudcmd.js';
     const username = 'hello';
+    
     const config = {
         auth: true,
         username,
