@@ -1,3 +1,8 @@
+2026.03.18, v19.7.1
+
+feature:
+- b0c1d36c cloudcmd: @cloudcmd/fileop v9.0.7 (#460)
+
 2026.03.17, v19.7.0
 
 feature:
