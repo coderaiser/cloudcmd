@@ -13,10 +13,8 @@ import {getTitle} from '#common/cloudfunc';
 import * as Images from '#dom/images';
 import * as input from './input.js';
 
-const {
-    CloudCmd,
-    DOM,
-} = globalThis;
+const {CloudCmd, DOM} = globalThis;
+
 const {Dialog, setTitle} = DOM;
 
 const Name = 'Config';
