@@ -1,3 +1,11 @@
+2026.03.20, v19.8.0
+
+fix:
+- 59037f2c cloudcmd: bin: --show-config
+
+feature:
+- 10934b3a cloudcmd: add ability to show modification time (#230)
+
 2026.03.18, v19.7.1
 
 feature:
