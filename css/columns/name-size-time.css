@@ -15,11 +15,10 @@
 }
 
 .date {
-    float: right;
-    width: 19%;
-}
-
-.time {
     display: none;
 }
 
+.time {
+    float: right;
+    width: 19%;
+}

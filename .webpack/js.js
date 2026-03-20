@@ -77,6 +77,8 @@ const splitChunks = {
                     'themes/light',
                     'columns/name-size',
                     'columns/name-size-date',
+                    'columns/name-size-time',
+                    'columns/name-size-date-time',
                 ];
                 
                 return !lazyChunks.includes(chunk.name);
@@ -111,6 +113,7 @@ export default {
         'themes/light': `${dirThemes}/light.css`,
         'columns/name-size': `${dirColumns}/name-size.css`,
         'columns/name-size-date': `${dirColumns}/name-size-date.css`,
+        'columns/name-size-date-time': `${dirColumns}/name-size-date-time.css`,
         'nojs': `${dirCss}/nojs.css`,
         'help': `${dirCss}/help.css`,
         'view': `${dirCss}/view.css`,

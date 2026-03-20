@@ -228,6 +228,11 @@ a:active {
     color: var(--column-color);
 }
 
+.time {
+    color: var(--column-color);
+    display: none;
+}
+
 .owner {
     display: inline-block;
     width: 13%;

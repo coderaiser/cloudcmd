@@ -154,6 +154,7 @@ export const buildFromJSON = (params) => {
     const name = getFieldName('name');
     const size = getFieldName('size');
     const date = getFieldName('date');
+    const time = getFieldName('time');
     
     const header = rendy(templateFile, {
         tag: 'div',
@@ -163,6 +164,7 @@ export const buildFromJSON = (params) => {
         name,
         size,
         date,
+        time,
         owner,
         mode,
     });
@@ -195,6 +197,7 @@ export const buildFromJSON = (params) => {
             name: linkResult,
             size: '&lt;dir&gt;',
             date: '--.--.----',
+            time: '--.--.----',
             owner: '.',
             mode: '--- --- ---',
         });
@@ -213,6 +216,7 @@ export const buildFromJSON = (params) => {
                 type,
                 mode,
                 date,
+                time,
                 owner,
                 size,
             } = file;
@@ -235,6 +239,7 @@ export const buildFromJSON = (params) => {
                 name: linkResult,
                 size,
                 date: formatDate(date),
+                time,
                 owner,
                 mode,
             });
@@ -249,6 +254,7 @@ export const buildFromJSON = (params) => {
 const updateField = (file) => ({
     ...file,
     date: file.date || '--.--.----',
+    time: file.time || '--.--.----',
     owner: file.owner || 'root',
     size: getSize(file),
 });

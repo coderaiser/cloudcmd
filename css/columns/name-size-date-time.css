@@ -1,5 +1,5 @@
 .name {
-    width: 55%;
+    width: 40%;
 }
 
 .size {
@@ -16,10 +16,11 @@
 
 .date {
     float: right;
-    width: 19%;
+    width: 20%;
 }
 
 .time {
-    display: none;
+    display: inline;
+    float: right;
+    width: 20%;
 }
-

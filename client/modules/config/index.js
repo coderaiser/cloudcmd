@@ -1,4 +1,3 @@
-/* global CloudCmd, DOM, io */
 import '../../../css/config.css';
 import {rendy} from 'rendy';
 import currify from 'currify';
@@ -14,6 +13,10 @@ import {getTitle} from '#common/cloudfunc';
 import * as Images from '#dom/images';
 import * as input from './input.js';
 
+const {
+    CloudCmd,
+    DOM,
+} = globalThis;
 const {Dialog, setTitle} = DOM;
 
 const Name = 'Config';
@@ -78,7 +81,7 @@ function initSocket() {
     
     const ONE_MINUTE = 60 * 1000;
     
-    const socket = io.connect(href + prefixSocket + '/config', {
+    const socket = globalThis.io.connect(href + prefixSocket + '/config', {
         reconnectionAttempts: Infinity,
         reconnectionDelay: ONE_MINUTE,
         path: `${prefix}/socket.io`,

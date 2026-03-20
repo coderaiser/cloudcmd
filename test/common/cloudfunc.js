@@ -68,7 +68,7 @@ test('cloudfunc: render', (t) => {
         template,
     });
     
-    Expect += fs.readFileSync(EXPECT_PATH, 'utf8');
+    Expect += fs.readFileSync(EXPECT_PATH, 'utf8').slice(0, -1);
     
     let i;
     const isNotOk = Expect
