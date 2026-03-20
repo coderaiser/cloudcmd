@@ -36,7 +36,6 @@ const getOperations = (event, deps) => {
         preventDefault = event?.preventDefault?.bind(event),
         stopImmediatePropagation = event?.preventDefault?.bind(event),
         promptNewFile = DOM.promptNewFile,
-        
         toggleSelectedFile,
         Buffer = {},
         createFindNext = _createFindNext,

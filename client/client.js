@@ -348,7 +348,12 @@ function CloudCmdProto({DOM, Listeners}) {
             'pathLink',
         ];
         
-        const [error, [file, path, link, pathLink]] = await tryToCatch(Files.get, names);
+        const [error, [
+            file,
+            path,
+            link,
+            pathLink,
+        ]] = await tryToCatch(Files.get, names);
         
         if (error)
             return DOM.Dialog.alert(error.responseText);

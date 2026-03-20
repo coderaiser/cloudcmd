@@ -19,7 +19,10 @@ test('current-file: setCurrentName: setAttribute', (t) => {
     
     currentFile.setCurrentName('hello', current);
     
-    t.calledWith(setAttribute, ['data-name', 'js-file-aGVsbG8='], 'should call setAttribute');
+    t.calledWith(setAttribute, [
+        'data-name',
+        'js-file-aGVsbG8=',
+    ], 'should call setAttribute');
     
     globalThis.DOM = DOM;
     globalThis.CloudCmd = CloudCmd;
@@ -38,7 +41,10 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     
     currentFile.setCurrentName('ай', current);
     
-    t.calledWith(setAttribute, ['data-name', 'js-file-JUQwJUIwJUQwJUI5'], 'should call setAttribute');
+    t.calledWith(setAttribute, [
+        'data-name',
+        'js-file-JUQwJUIwJUQwJUI5',
+    ], 'should call setAttribute');
     
     globalThis.DOM = DOM;
     globalThis.CloudCmd = CloudCmd;
