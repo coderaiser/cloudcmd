@@ -298,8 +298,8 @@ function port(arg) {
 }
 
 async function showConfig() {
-    const show = await simport('../server/show-config');
-    const data = show(config('*'));
+    const {showConfig} = await import('../server/show-config.js');
+    const data = showConfig(config('*'));
     
     console.log(data);
 }
