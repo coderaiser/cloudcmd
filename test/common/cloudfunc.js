@@ -73,6 +73,7 @@ test('cloudfunc: render', (t) => {
         .slice(0, -1);
     
     let i;
+    
     const isNotOk = Expect
         .split('')
         .some((item, number) => {
