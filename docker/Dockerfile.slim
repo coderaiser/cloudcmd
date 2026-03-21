@@ -1,24 +1,35 @@
-FROM node
-LABEL maintainer="Coderaiser"
-LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
+FROM node:slim AS build
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
 
-RUN curl -fsSL https://bun.com/install | bash && \
-    ~/.bun/bin/bun i --production --no-save && \
-    PATH=$PATH:~/.bun/bin bun i gritty --no-save && \
-    ~/.bun/bin/bun pm cache rm
+RUN apt-get update && \
+    apt-get install -y build-essential python3 libncurses5-dev pkg-config && \
+    apt-get install -y --no-install-recommends curl ca-certificates unzip && \
+    curl -fsSL https://bun.com/install | bash && \
+    ~/.bun/bin/bun i --production && \
+    ~/.bun/bin/bun add --no-save gritty && \
+    ~/.bun/bin/bun pm cache rm && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY . /usr/src/app
+
+FROM node:slim AS runtime
+
+COPY --from=build /usr/src/app /usr/src/app
+COPY --from=build /root/.bun /root/.bun
+
+LABEL maintainer="Coderaiser"
+LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
 
 WORKDIR /
 
 ENV cloudcmd_terminal=true
 ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
+ENV PATH="/root/.bun/bin:$PATH"
 
 EXPOSE 8000
 

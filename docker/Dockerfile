@@ -8,8 +8,8 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 
 RUN curl -fsSL https://bun.com/install | bash && \
-    ~/.bun/bin/bun i --production --no-save && \
-    PATH=$PATH:~/.bun/bin bun i --production gritty --no-save && \
+    ~/.bun/bin/bun i --production && \
+    ~/.bun/bin/bun add --no-save gritty && \
     ~/.bun/bin/bun pm cache rm
 
 COPY . /usr/src/app
@@ -19,6 +19,7 @@ WORKDIR /
 ENV cloudcmd_terminal=true
 ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
+ENV PATH="/root/.bun/bin:$PATH"
 
 EXPOSE 8000
 
