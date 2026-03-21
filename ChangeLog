@@ -1,3 +1,9 @@
+2026.03.22, v19.8.1
+
+feature:
+- 708a4c6b docker: slim: add
+- 80613f46 docker: slim: add
+
 2026.03.20, v19.8.0
 
 fix:
