@@ -65,7 +65,21 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
+            coderaiser/cloudcmd:alpine
             coderaiser/cloudcmd:latest-alpine
             coderaiser/cloudcmd:${{ steps.build.outputs.version }}-alpine
             ghcr.io/${{ github.repository }}:latest-alpine
             ghcr.io/${{ github.repository }}:${{ steps.build.outputs.version }}-alpine
+      - name: Build and push slim-image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/Dockerfile.slim
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            coderaiser/cloudcmd:slim
+            coderaiser/cloudcmd:latest-slim
+            coderaiser/cloudcmd:${{ steps.build.outputs.version }}-slim
+            ghcr.io/${{ github.repository }}-slim
+            ghcr.io/${{ github.repository }}:${{ steps.build.outputs.version }}-slim
