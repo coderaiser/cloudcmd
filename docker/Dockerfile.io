@@ -8,9 +8,10 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
-    apt-get install nc mc && \
-    npm i wisdom nupdate version-io redrun putout -g
+    apt-get install nc mc iputils-ping && \
+    npm i wisdom nupdate version-io redrun madrun redlint putout -g
     curl -fsSL https://bun.com/install | bash && \
+    curl -fsSL https://deno.land/install.sh | sh
     ~/.bun/bin/bun i --production && \
     ~/.bun/bin/bun add --no-save gritty && \
     ~/.bun/bin/bun pm cache rm && \

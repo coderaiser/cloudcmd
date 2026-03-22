@@ -87,7 +87,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: docker/Dockerfile.slim
+          file: docker/Dockerfile.io
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
