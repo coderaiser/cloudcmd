@@ -1,9 +1,9 @@
 FROM node:slim AS build
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /usr/src/cloudcmd/
+WORKDIR /usr/src/cloudcmd
 
-COPY package.json /usr/src/app/
+COPY package.json /usr/src/cloudcmd/
 
 RUN apt-get update && \
     apt-get install -y build-essential python3 libncurses5-dev pkg-config && \
@@ -16,11 +16,11 @@ RUN apt-get update && \
     ~/.bun/bin/bun pm cache rm && \
     rm -rf /var/lib/apt/lists/*
 
-COPY . /usr/src/app
+COPY . /usr/src/cloudcmd
 
 FROM node:slim AS runtime
 
-COPY --from=build /usr/src/app /usr/src/app
+COPY --from=build /usr/src/cloudcmd /usr/src/cloudcmd
 COPY --from=build /root/.bun /root/.bun
 
 LABEL maintainer="Coderaiser"
@@ -35,4 +35,4 @@ ENV PATH="/root/.bun/bin:$PATH"
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/src/app/bin/cloudcmd.js"]
+ENTRYPOINT ["/usr/src/cloudcmd/bin/cloudcmd.js"]

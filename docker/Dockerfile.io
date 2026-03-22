@@ -2,10 +2,10 @@ FROM node
 LABEL maintainer="Coderaiser"
 LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /usr/src/cloudcmd
+WORKDIR /usr/src/cloudcmd
 
-COPY package.json /usr/src/app/
+COPY package.json /usr/src/cloudcmd/
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     apt-get install -y netcat-openbsd mc iputils-ping vim neovim sudo && \
@@ -24,7 +24,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc
 
-COPY . /usr/src/app
+COPY . /usr/src/cloudcmd
 
 WORKDIR /
 
@@ -35,4 +35,4 @@ ENV PATH=node_modules/.bin:$PATH
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/src/app/bin/cloudcmd.js"]
+ENTRYPOINT ["/usr/src/cloudcmd/bin/cloudcmd.js"]
