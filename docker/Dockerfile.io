@@ -8,15 +8,17 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
-    apt-get install nc mc iputils-ping && \
-    npm i wisdom nupdate version-io redrun madrun redlint putout -g
+    apt-get install -y netcat-openbsd mc iputils-ping vim neovim && \
+    npm i wisdom nupdate version-io redrun madrun redlint putout -g && \
     curl -fsSL https://bun.com/install | bash && \
-    curl -fsSL https://deno.land/install.sh | sh
+    curl -fsSL https://deno.land/install.sh | sh && \
     ~/.bun/bin/bun i --production && \
     ~/.bun/bin/bun add --no-save gritty && \
     ~/.bun/bin/bun pm cache rm && \
     echo "ALL ALL=(ALL) NOPASSWD: /usr/bin/apt-get install *" > /etc/sudoers.d/apt-install && \
-    chmod 0440 /etc/sudoers.d/apt-install
+    chmod 0440 /etc/sudoers.d/apt-install && \
+    echo "set editing-mode vi" >> /etc/inputrc && \
+    echo "TAB: menu-complete" >> /etc/inputrc
 
 COPY . /usr/src/app
 
