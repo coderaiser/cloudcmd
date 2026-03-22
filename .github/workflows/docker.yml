@@ -83,3 +83,15 @@ jobs:
             coderaiser/cloudcmd:${{ steps.build.outputs.version }}-slim
             ghcr.io/${{ github.repository }}-slim
             ghcr.io/${{ github.repository }}:${{ steps.build.outputs.version }}-slim
+      - name: Build and push io-image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/Dockerfile.slim
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            coderaiser/cloudcmd:io
+            coderaiser/cloudcmd:${{ steps.build.outputs.version }}-io
+            ghcr.io/${{ github.repository }}-io
+            ghcr.io/${{ github.repository }}:${{ steps.build.outputs.version }}-io
