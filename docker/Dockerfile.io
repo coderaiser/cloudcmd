@@ -9,6 +9,7 @@ COPY package.json /usr/src/app/
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     apt-get install nc mc && \
+    npm i wisdom nupdate version-io redrun putout -g
     curl -fsSL https://bun.com/install | bash && \
     ~/.bun/bin/bun i --production && \
     ~/.bun/bin/bun add --no-save gritty && \
@@ -23,7 +24,7 @@ WORKDIR /
 ENV cloudcmd_terminal=true
 ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
-ENV PATH="/root/.bun/bin:$PATH"
+ENV PATH="node_modules/.bin:~/.bun/bin:$PATH"
 
 EXPOSE 8000
 
