@@ -47,7 +47,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and push base-image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: docker/Dockerfile
@@ -59,7 +59,7 @@ jobs:
             ghcr.io/${{ github.repository }}:latest
             ghcr.io/${{ github.repository }}:${{ steps.build.outputs.version }}
       - name: Build and push alpine-image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: docker/Dockerfile.alpine
@@ -72,7 +72,7 @@ jobs:
             ghcr.io/${{ github.repository }}:latest-alpine
             ghcr.io/${{ github.repository }}:${{ steps.build.outputs.version }}-alpine
       - name: Build and push slim-image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: docker/Dockerfile.slim
@@ -85,7 +85,7 @@ jobs:
             ghcr.io/${{ github.repository }}-slim
             ghcr.io/${{ github.repository }}:${{ steps.build.outputs.version }}-slim
       - name: Build and push io-image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           file: docker/Dockerfile.io
