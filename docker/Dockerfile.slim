@@ -8,8 +8,12 @@ COPY package.json /usr/src/app/
 RUN apt-get update && \
     apt-get install -y build-essential python3 libncurses5-dev pkg-config && \
     apt-get install -y --no-install-recommends curl ca-certificates unzip && \
-    curl -fsSL https://bun.com/install | bash && \
-    ~/.bun/bin/bun i --production && \
+    curl -fsSL https://bun.sh/install | bash && \
+    ln -s ~/.bun/bin/bun /usr/local/bin/bun && \
+    chmod +x /usr/local/bin/bun && \
+    bun i --production --no-save && \
+    bun i gritty --production --no-save && \
+    ~/.bun/bin/bun i --production --no-save && \
     ~/.bun/bin/bun add --no-save gritty && \
     ~/.bun/bin/bun pm cache rm && \
     rm -rf /var/lib/apt/lists/*

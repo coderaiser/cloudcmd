@@ -9,17 +9,18 @@ COPY package.json /usr/src/app/
 
 RUN apk update && \
     apk add --no-cache curl bash make g++ python3 && \
-    curl -fsSL https://bun.com/install | bash && \
-    ~/.bun/bin/bun i --production --no-save && \
-    PATH=$PATH:~/.bun/bin bun i gritty --no-save && \
-    ~/.bun/bin/bun pm cache rm && \
+    curl -fsSL https://bun.sh/install | bash && \
+    ln -s ~/.bun/bin/bun /usr/local/bin/bun && \
+    chmod +x /usr/local/bin/bun && \
+    bun i --production --no-save && \
+    bun i gritty --production --no-save && \
+    bun pm cache rm && \
     apk del make g++ python3 && \
     rm -rf /usr/include /tmp/* /var/cache/apk/*
 
 COPY . /usr/src/app
 
 WORKDIR /
-
 ENV cloudcmd_terminal true
 ENV cloudcmd_terminal_path gritty
 ENV cloudcmd_open false
