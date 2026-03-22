@@ -1,3 +1,8 @@
+2026.03.22, v19.8.2
+
+feature:
+- e5b221f7 docker: io: add
+
 2026.03.22, v19.8.1
 
 feature:
