@@ -12,8 +12,8 @@ RUN apk update && \
     curl -fsSL https://bun.sh/install | bash && \
     ln -s ~/.bun/bin/bun /usr/local/bin/bun && \
     chmod +x /usr/local/bin/bun && \
-    bun i --production --no-save && \
-    bun i gritty --production --no-save && \
+    bun r gritty --omit dev && \
+    bun i gritty --omit dev && \
     bun pm cache rm && \
     apk del make g++ python3 && \
     rm -rf /usr/include /tmp/* /var/cache/apk/*

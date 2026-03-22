@@ -10,8 +10,8 @@ COPY package.json /usr/src/app/
 RUN curl -fsSL https://bun.com/install | bash && \
     ln -s /root/.bun/bin/bun /usr/local/bin/bun && \
     chmod +x /usr/local/bin/bun && \
-    bun i --production --no-save && \
-    bun i gritty --production --no-save && \
+    bun r gritty --omit dev && \
+    bun i gritty --omit dev && \
     bun pm cache rm
 
 COPY . /usr/src/app

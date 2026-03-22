@@ -12,12 +12,12 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     npm i wisdom nupdate version-io redrun madrun redlint putout -g && \
     curl -fsSL https://bun.sh/install | bash && \
     ln -s ~/.bun/bin/bun /usr/local/bin/bun && \
-    chmod +x /usr/local/bin/bun && \
+    chmod a+x /usr/local/bin/bun && \
     curl -fsSL https://deno.land/install.sh | sh && \
     ln -s ~/.deno/bin/deno /usr/local/bin/deno && \
-    chmod +x /usr/local/bin/deno && \
-    bun i --production && \
-    bun i gritty --production && \
+    chmod a+x /usr/local/bin/deno && \
+    bun r gritty --omit dev && \
+    bun i gritty --omit dev && \
     bun pm cache rm && \
     echo "ALL ALL=(ALL) NOPASSWD: /usr/bin/apt-get install *" > /etc/sudoers.d/apt-install && \
     chmod 0440 /etc/sudoers.d/apt-install && \

@@ -11,10 +11,8 @@ RUN apt-get update && \
     curl -fsSL https://bun.sh/install | bash && \
     ln -s ~/.bun/bin/bun /usr/local/bin/bun && \
     chmod +x /usr/local/bin/bun && \
-    bun i --production --no-save && \
-    bun i gritty --production --no-save && \
-    ~/.bun/bin/bun i --production --no-save && \
-    ~/.bun/bin/bun add --no-save gritty && \
+    bun r gritty --omit dev && \
+    bun i gritty --omit dev && \
     ~/.bun/bin/bun pm cache rm && \
     rm -rf /var/lib/apt/lists/*
 
