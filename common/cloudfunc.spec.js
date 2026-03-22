@@ -240,7 +240,7 @@ test('cloudfunc: buildFromJSON: formatDate', (t) => {
         const [day, month, year] = str.split('.');
         const date = new Date(year, month - 1, day);
         
-        return date.toLocaleDateString();
+        return date.toLocaleDateString('en-US');
     };
     
     dateFormatter(formatDate);

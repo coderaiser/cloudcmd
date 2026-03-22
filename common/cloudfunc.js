@@ -4,13 +4,10 @@ import {fullstore} from 'fullstore';
 import {encode} from '#common/entity';
 
 const id = (a) => a;
-
-export const dateFormatter = fullstore(id);
-
-export const getHeaderField = currify(_getHeaderField);
-
 const NAME = 'Cloud Commander';
 
+export const dateFormatter = fullstore(id);
+export const getHeaderField = currify(_getHeaderField);
 export const FS = '/fs';
 
 const Path = fullstore();
