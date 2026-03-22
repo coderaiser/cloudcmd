@@ -1,3 +1,11 @@
+2026.03.23, v19.8.6
+
+fix:
+- 53c072ab @putout/plugin-cloudcmd: devDependencies -> dependnecies
+
+feature:
+- 4b9922bf docker: /usr/src: app -> cloudcmd
+
 2026.03.23, v19.8.5
 
 fix:
