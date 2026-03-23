@@ -1,3 +1,8 @@
+2026.03.23, v19.9.0
+
+feature:
+- a1216cdd cloudcmd: add ability to hide port configuration
+
 2026.03.23, v19.8.15
 
 feature:
