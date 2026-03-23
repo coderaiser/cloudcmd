@@ -29,6 +29,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     chmod 0440 /etc/sudoers.d/apt-install && \
     echo "> configure bash" && \
     echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc && \
+    echo "alias buni='bun i --no-save'" >> /etc/bash.bashrc && \
     echo "PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> /etc/bash.bashrc && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc
