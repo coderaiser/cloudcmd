@@ -11,12 +11,16 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     apt-get install -y netcat-openbsd mc iputils-ping vim neovim sudo && \
     npm i wisdom nupdate version-io redrun superc8 \
     supertape madrun redlint putout renamify-cli runny redfork -g && \
+    echo "install bun" && \
     curl -fsSL https://bun.sh/install | bash && \
-    ln -s ~/.bun/bin/bun /usr/local/bin/bun && \
-    chmod a+x /usr/local/bin/bun && \
+    mv ~/.bun /usr/local/src/bun && \
+    chmod a+rwx /usr/local/src/bun && \
+    ln -s /usr/local/src/bun/bin/bun /usr/local/bin/bun && \
+    echo "install deno" && \
     curl -fsSL https://deno.land/install.sh | sh && \
-    ln -s ~/.deno/bin/deno /usr/local/bin/deno && \
-    chmod a+x /usr/local/bin/deno && \
+    mv ~/.bun /usr/local/src/deno && \
+    chmod a+rwx /usr/local/src/deno && \
+    ln -s /usr/local/src/deno/bin/deno /usr/local/bin/deno && \
     bun r gritty --omit dev && \
     bun i gritty --omit dev && \
     bun pm cache rm && \
