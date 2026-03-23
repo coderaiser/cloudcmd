@@ -33,6 +33,7 @@ ENV cloudcmd_terminal=true
 ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
 ENV PATH=node_modules/.bin:$PATH
+ENV PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 
 EXPOSE 8000
 
