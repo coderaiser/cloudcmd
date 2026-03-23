@@ -13,4 +13,3 @@ test('cloudcmd: client: config: input: convert', (t) => {
     t.deepEqual(result, expected);
     t.end();
 });
-
