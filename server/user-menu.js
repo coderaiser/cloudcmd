@@ -1,7 +1,6 @@
 import {homedir} from 'node:os';
 import {readFile as _readFile} from 'node:fs/promises';
 import {join} from 'node:path';
-import {readFileSync} from 'node:fs';
 // warm up worker cache
 import montag from 'montag';
 import {tryToCatch} from 'try-to-catch';
@@ -35,7 +34,9 @@ async function onGET({req, res, menuName, readFile}) {
     const url = req.url.replace(PREFIX, '');
     
     if (url === '/default')
-        return await sendDefaultMenu(res);
+        return await sendDefaultMenu(res, {
+            readFile,
+        });
     
     const {findUp} = await import('find-up');
     
@@ -58,7 +59,9 @@ async function onGET({req, res, menuName, readFile}) {
             .send(e.message);
     
     if (e)
-        return await sendDefaultMenu(res);
+        return await sendDefaultMenu(res, {
+            readFile,
+        });
     
     const [parseError, result] = await transpile(source);
     
@@ -86,8 +89,10 @@ function getError(error, source) {
     `;
 }
 
-async function sendDefaultMenu(res) {
-    const menu = await getDefaultMenu();
+async function sendDefaultMenu(res, {readFile}) {
+    const menu = await getDefaultMenu({
+        readFile,
+    });
     
     res
         .type('js')
@@ -106,10 +111,13 @@ async function transpile(source) {
     });
 }
 
-async function getDefaultMenu() {
+async function getDefaultMenu({readFile}) {
     const DEFAULT_MENU_PATH = new URL('../static/user-menu.js', import.meta.url).pathname;
-    const menu = readFileSync(DEFAULT_MENU_PATH, 'utf8');
-    const [, result] = await transpile(menu);
+    const menu = await readFile(DEFAULT_MENU_PATH, 'utf8');
+    const [error, result] = await transpile(menu);
+    
+    if (error)
+        return String(error);
     
     return result.code;
 }

@@ -86,6 +86,25 @@ test('cloudcmd: user menu: io.cp', async (t) => {
     t.end();
 });
 
+test('cloudcmd: user menu: broken file', async (t) => {
+    const readFile = stub().returns('sdfsdf /; s');
+    const options = {
+        menuName: '.cloudcmd.menu.js',
+        readFile,
+    };
+    
+    const {request} = serveOnce(userMenu);
+    
+    const {body} = await request.get(`/api/v1/user-menu/default`, {
+        options,
+    });
+    
+    const expected = 'SyntaxError: Unexpected token (1:8)';
+    
+    t.equal(body, expected);
+    t.end();
+});
+
 function getUserMenuFile() {
     const userMenuFile = readFileSync(userMenuPath, 'utf8');
     const {code} = putout(userMenuFile, {
