@@ -1,3 +1,8 @@
+2026.03.23, v19.8.15
+
+feature:
+- 68b2aa78 docker: io: cloudcmd_vim
+
 2026.03.23, v19.8.14
 
 fix:
