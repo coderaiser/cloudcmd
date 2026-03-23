@@ -9,7 +9,7 @@ COPY package.json /usr/src/cloudcmd/
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     apt-get install -y netcat-openbsd mc iputils-ping vim neovim sudo && \
-    npm i wisdom nupdate version-io redrun madrun redlint putout -g && \
+    npm i wisdom nupdate version-io redrun madrun redlint putout renamify-cli runny redfork -g && \
     curl -fsSL https://bun.sh/install | bash && \
     ln -s ~/.bun/bin/bun /usr/local/bin/bun && \
     chmod a+x /usr/local/bin/bun && \
