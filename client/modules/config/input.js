@@ -1,7 +1,9 @@
-import currify from 'currify';
+import {encode} from '#common/entity';
 
-const isType = currify((type, object, name) => type === typeof object[name]);
-const isBool = isType('boolean');
+const isBool = (a) => typeof a === 'boolean';
+const isString = (a) => typeof a === 'string';
+
+const {keys} = Object;
 
 export function getElementByName(selector, element) {
     const str = `[data-name="js-${selector}"]`;
@@ -19,13 +21,19 @@ export const getName = (element) => {
 
 export const convert = (config) => {
     const result = config;
-    const array = Object.keys(config);
     
-    const filtered = array.filter(isBool(config));
-    
-    for (const name of filtered) {
+    for (const name of keys(config)) {
         const item = config[name];
-        result[name] = setState(item);
+        
+        if (isBool(item)) {
+            result[name] = setState(item);
+            continue;
+        }
+        
+        if (isString(item)) {
+            result[name] = encode(item);
+            continue;
+        }
     }
     
     return result;
