@@ -133,6 +133,7 @@ async function fillTemplate() {
         columns,
         theme,
         configAuth,
+        configPort,
         ...obj
     } = input.convert(config);
     
@@ -142,6 +143,7 @@ async function fillTemplate() {
     obj[`${columns}-selected`] = 'selected';
     obj[`${theme}-selected`] = 'selected';
     obj.configAuth = configAuth ? '' : 'hidden';
+    obj.configPort = configPort ? '' : 'hidden';
     
     const innerHTML = rendy(Template, obj);
     

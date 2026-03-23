@@ -78,6 +78,7 @@ const yargsOptions = {
         'open',
         'config-dialog',
         'config-auth',
+        'config-port',
         'console',
         'sync-console-path',
         'contact',
@@ -132,6 +133,7 @@ const yargsOptions = {
         'sync-console-path': choose(env.bool('sync_console_path'), config('syncConsolePath')),
         'config-dialog': choose(env.bool('config_dialog'), config('configDialog')),
         'config-auth': choose(env.bool('config_auth'), config('configAuth')),
+        'config-port': choose(env.bool('config_port'), config('configPort')),
         'terminal-path': env.parse('terminal_path') || config('terminalPath'),
         'terminal-command': env.parse('terminal_command') || config('terminalCommand'),
         'terminal-auto-restart': choose(env.bool('terminal_auto_restart'), config('terminalAutoRestart')),
@@ -214,6 +216,7 @@ async function main() {
     config('oneFilePanel', args.oneFilePanel);
     config('configDialog', args.configDialog);
     config('configAuth', args.configAuth);
+    config('configPort', args.configPort);
     config('keysPanel', args.keysPanel);
     config('export', args.export);
     config('exportToken', args.exportToken);

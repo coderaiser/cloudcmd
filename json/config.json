@@ -24,6 +24,7 @@
     "confirmMove": true,
     "configDialog": true,
     "configAuth": true,
+    "configPort": true,
     "oneFilePanel": false,
     "console": true,
     "syncConsolePath": false,
