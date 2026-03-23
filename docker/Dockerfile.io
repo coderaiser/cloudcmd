@@ -24,6 +24,8 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     bun r gritty --omit dev && \
     bun i gritty --omit dev && \
     bun pm cache rm && \
+    echo "setup git" && \
+    git config --global core.whitespace -trailing-space && \
     echo "> allow sudo apt-get install for everybody" && \
     echo "ALL ALL=(ALL) NOPASSWD: /usr/bin/apt-get *" > /etc/sudoers.d/apt-install && \
     chmod 0440 /etc/sudoers.d/apt-install && \
