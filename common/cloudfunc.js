@@ -194,7 +194,7 @@ export const buildFromJSON = (params) => {
             name: linkResult,
             size: '&lt;dir&gt;',
             date: '--.--.----',
-            time: '--.--.----',
+            time: '--:--:--',
             owner: '.',
             mode: '--- --- ---',
         });
@@ -251,7 +251,7 @@ export const buildFromJSON = (params) => {
 const updateField = (file) => ({
     ...file,
     date: file.date || '--.--.----',
-    time: file.time || '--.--.----',
+    time: file.time || '--:--:--',
     owner: file.owner || 'root',
     size: getSize(file),
 });
