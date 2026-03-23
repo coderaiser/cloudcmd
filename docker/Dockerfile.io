@@ -41,6 +41,7 @@ ENV cloudcmd_terminal=true
 ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
 ENV PATH=node_modules/.bin:$PATH
+ENV PORT=1337
 
 EXPOSE 1337
 
