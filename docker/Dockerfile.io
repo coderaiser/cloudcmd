@@ -21,6 +21,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     bun i gritty --omit dev && \
     bun pm cache rm && \
     echo "ALL ALL=(ALL) NOPASSWD: /usr/bin/apt-get install *" > /etc/sudoers.d/apt-install && \
+    echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc && \
     chmod 0440 /etc/sudoers.d/apt-install && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc
