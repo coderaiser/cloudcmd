@@ -1,3 +1,8 @@
+2026.03.23, v19.9.1
+
+fix:
+- 6e5318fa client: modules: config: input: quote
+
 2026.03.23, v19.9.0
 
 feature:
