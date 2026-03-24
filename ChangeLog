@@ -1,3 +1,8 @@
+2026.03.24, v19.9.3
+
+feature:
+- 8763788b docker: io: healthcheck
+
 2026.03.23, v19.9.2
 
 feature:
