@@ -28,12 +28,5 @@ ENV cloudcmd_vim=true
 
 EXPOSE 8000
 
-HEALTHCHECK \
-  --interval=2s \
-  --timeout 2s \
-  --retries=20 \
-  --start-period=30s \
-  CMD curl -f localhost:8000
-
 ENTRYPOINT ["/usr/src/cloudcmd/bin/cloudcmd.js"]
 
