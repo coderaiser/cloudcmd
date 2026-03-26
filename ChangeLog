@@ -1,3 +1,8 @@
+2026.03.26, v19.9.6
+
+feature:
+- 6450a2f8 docker: io: add UTF-8
+
 2026.03.26, v19.9.5
 
 fix:
