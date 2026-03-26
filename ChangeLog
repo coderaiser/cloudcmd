@@ -1,3 +1,8 @@
+2026.03.26, v19.9.5
+
+fix:
+- e761cacb columns: name-size-date-time: 20% -> 19%
+
 2026.03.26, v19.9.4
 
 feature:
