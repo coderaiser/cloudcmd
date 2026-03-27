@@ -26,16 +26,18 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     bun r gritty --omit dev && \
     bun i gritty --omit dev && \
     bun pm cache rm && \
-    echo "setup git" && \
+    echo "> setup git" && \
     git config --global core.whitespace -trailing-space && \
     git config --global pull.rebase true && \
     echo "> configure bash" && \
     echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc && \
     echo "alias buni='bun i --no-save'" >> /etc/bash.bashrc && \
     echo "PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '" >> /etc/bash.bashrc && \
+    echo "> setup inputrc" && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc && \
     echo "set UTF-8" && \
+    echo" > configure languages" && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen && \
     echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen && \
