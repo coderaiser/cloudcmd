@@ -1,3 +1,8 @@
+2026.03.29, v19.9.10
+
+feature:
+- f0deb323 docker: io: add ja_JP.UTF-8
+
 2026.03.29, v19.9.9
 
 fix:
