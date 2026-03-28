@@ -7,6 +7,8 @@ import _forEachKey from 'for-each-key';
 import log from './log.js';
 import * as env from '../env.js';
 
+const isUndefined = (a) => typeof a === 'undefined';
+
 const noop = () => {};
 const forEachKey = currify(_forEachKey);
 
@@ -58,7 +60,7 @@ const emitAuth = wraptile((importUrl, config, socket) => {
 
 const updateConfig = currify((config, data) => {
     for (const [key, value] of entries(data)) {
-        if (typeof env.parse(key) !== 'undefined')
+        if (!isUndefined(env.parse(key)))
             continue;
         
         config(key, value);
