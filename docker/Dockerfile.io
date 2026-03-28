@@ -10,7 +10,8 @@ COPY package.json /usr/src/cloudcmd/
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
-    apt-get install -y netcat-openbsd mc iputils-ping vim neovim sudo locales && \
+    apt-get install -y ffmpeg netcat-openbsd mc iputils-ping vim neovim sudo locales && \
+    apt-get clean && \
     npm i wisdom nupdate version-io redrun superc8 \
     supertape madrun redlint putout renamify-cli runny redfork -g && \
     echo "> install bun" && \
