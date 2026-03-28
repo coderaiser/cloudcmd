@@ -1,3 +1,9 @@
+2026.03.28, v19.9.8
+
+feature:
+- 4d1cd8cd docker: io: ffmpeg
+- 54b56fdc cloudcmd: vim: ESC: use only to enable, do not use to disable
+
 2026.03.27, v19.9.7
 
 feature:
