@@ -42,6 +42,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen && \
     echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen && \
     echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen && \
+    echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen
 
 COPY . /usr/src/cloudcmd
