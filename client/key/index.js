@@ -13,8 +13,8 @@ const Chars = fullstore();
 const toggleVim = (keyCode, overrides = {}) => {
     const {_config, config} = overrides;
     
-    if (keyCode === KEY.ESC)
-        _config('vim', !config('vim'));
+    if (!config('vim') && keyCode === KEY.ESC)
+        _config('vim', true);
 };
 
 const isUndefined = (a) => typeof a === 'undefined';
