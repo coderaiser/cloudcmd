@@ -323,7 +323,7 @@ async function help() {
     });
     
     const {default: forEachKey} = await import('for-each-key');
-    const {currify} = await import('currify');
+    const {default: currify} = await import('currify');
     
     const usage = 'Usage: cloudcmd [options]';
     const url = Info.homepage;
