@@ -12,6 +12,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     apt-get install -y ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim \
     sudo locales command-not-found && \
+    echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
+    apt-get update && \
     apt-get autoremove && apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     echo "> install nvm" && \
