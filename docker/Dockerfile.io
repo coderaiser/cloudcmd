@@ -37,7 +37,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc && \
     echo "set UTF-8" && \
-    echo" > configure languages" && \
+    echo " > configure languages" && \
     echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
     echo "ru_RU.UTF-8 UTF-8" >> /etc/locale.gen && \
     echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen && \
