@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import process from 'node:process';
-import {createRequire} from 'node:module';
 import {promisify} from 'node:util';
 import {tryToCatch} from 'try-to-catch';
 import parse from 'yargs-parser';
@@ -15,7 +14,6 @@ import Info from '../package.json' with {
 };
 
 process.on('unhandledRejection', exit);
-const require = createRequire(import.meta.url);
 
 const isUndefined = (a) => typeof a === 'undefined';
 
@@ -29,8 +27,6 @@ const choose = (a, b) => {
 const config = createConfig({
     configPath,
 });
-
-const DIR_SERVER = '../server/';
 
 const maybeRoot = (a) => {
     if (a === '.')
@@ -180,7 +176,7 @@ async function main() {
         return exit(error);
     
     if (args.repl)
-        repl();
+        await repl();
     
     validate.columns(args.columns);
     validate.theme(args.theme);
@@ -339,9 +335,9 @@ async function help() {
     console.log('\nGeneral help using Cloud Commander: <%s>', url);
 }
 
-function repl() {
+async function repl() {
     console.log('REPL mode enabled (telnet localhost 1337)');
-    require(`${DIR_SERVER}repl`);
+    await import('../server/repl.js');
 }
 
 async function checkUpdate() {
