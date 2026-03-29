@@ -1,4 +1,4 @@
-FROM node:24.14-ubuntu24.04
+FROM node
 LABEL maintainer="Coderaiser"
 LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
 
