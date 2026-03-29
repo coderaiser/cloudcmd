@@ -33,6 +33,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     echo "> configure bash" && \
     echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc && \
     echo "alias buni='bun i --no-save'" >> /etc/bash.bashrc && \
+    echo 'PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> /etc/bash.bashrc && \
     echo "> setup inputrc" && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc && \
@@ -58,7 +59,6 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
-ENV PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "
 ENV TERM=xterm-256color
 
 EXPOSE 8000
