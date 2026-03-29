@@ -1,13 +1,12 @@
 import {spawnSync} from 'node:child_process';
 import {test} from 'supertape';
-
-const cliPath = new URL('cloudcmd.js', import.meta.url).pathname;
 import info from '../package.json' with {
     type: 'json',
-}
+};
+
+const cliPath = new URL('cloudcmd.js', import.meta.url).pathname;
 
 test('cloudcmd: bin: cli: -h', (t) => {
-    const {version} = info;
     const {stdout} = spawnSync(cliPath, ['-h'], {
         encoding: 'utf8',
     });
