@@ -1,8 +1,7 @@
-import path, {dirname} from 'node:path';
+import path from 'node:path';
 import fs from 'node:fs';
 import Emitter from 'node:events';
 import {homedir} from 'node:os';
-import {fileURLToPath} from 'node:url';
 import currify from 'currify';
 import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';
@@ -15,15 +14,16 @@ import {tryCatch} from 'try-catch';
 import criton from 'criton';
 import * as CloudFunc from '#common/cloudfunc';
 import exit from './exit.js';
+import rootConfig from '../json/config.json' with {
+    type: 'json',
+};
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const DIR_SERVER = `${__dirname}/`;
 const isUndefined = (a) => typeof a === 'undefined';
-const DIR = `${DIR_SERVER}../`;
+
 const HOME = homedir();
 
 const resolve = Promise.resolve.bind(Promise);
+
 const formatMsg = currify((a, b) => CloudFunc.formatMsg(a, b));
 
 const {apiURL} = CloudFunc;
@@ -32,10 +32,10 @@ const key = (a) => Object
     .keys(a)
     .pop();
 
-const ConfigPath = path.join(DIR, 'json/config.json');
-
 const connection = currify(_connection);
+
 const connectionWrapped = wraptile(_connection);
+
 const middle = currify(_middle);
 
 const readjsonSync = (name) => {
@@ -43,8 +43,6 @@ const readjsonSync = (name) => {
         mode: 'json',
     });
 };
-
-const rootConfig = readjsonSync(ConfigPath);
 
 function read(filename) {
     if (!filename)

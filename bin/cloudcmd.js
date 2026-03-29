@@ -4,21 +4,20 @@ import process from 'node:process';
 import {createRequire} from 'node:module';
 import {promisify} from 'node:util';
 import {tryToCatch} from 'try-to-catch';
-import {createSimport} from 'simport';
 import parse from 'yargs-parser';
 import exit from '../server/exit.js';
 import {createConfig, configPath} from '../server/config.js';
 import * as env from '../server/env.js';
 import prefixer from '../server/prefixer.js';
 import * as validate from '../server/validate.js';
+import Info from '../package.json' with {
+    type: 'json',
+};
 
 process.on('unhandledRejection', exit);
-
 const require = createRequire(import.meta.url);
 
-const Info = require('../package.json');
 const isUndefined = (a) => typeof a === 'undefined';
-const simport = createSimport(import.meta.url);
 
 const choose = (a, b) => {
     if (isUndefined(a))
@@ -170,7 +169,7 @@ else
     main();
 
 async function main() {
-    const {validateArgs} = await simport('@putout/cli-validate-args');
+    const {validateArgs} = await import('@putout/cli-validate-args');
     
     const error = await validateArgs(args, [
         ...yargsOptions.boolean,
@@ -251,7 +250,7 @@ async function main() {
     if (args.showConfig)
         await showConfig();
     
-    const {distributeImport} = await simport('../server/distribute/import.js');
+    const {distributeImport} = await import('../server/distribute/import.js');
     const importConfig = promisify(distributeImport);
     
     await start(options, config);
@@ -273,7 +272,7 @@ function validateRoot(root, config) {
 }
 
 async function getPassword(password) {
-    const criton = await simport('criton');
+    const {default: criton} = await import('criton');
     return criton(password, config('algo'));
 }
 
@@ -282,12 +281,10 @@ function version() {
 }
 
 async function start(options, config) {
-    const SERVER = `../server/server.js`;
-    
     if (!args.server)
         return;
     
-    const server = await simport(SERVER);
+    const {default: server} = await import('../server/server.js');
     server(options, config);
 }
 
@@ -311,13 +308,13 @@ async function readConfig(name) {
     if (!name)
         return;
     
-    const tryToCatch = await simport('try-to-catch');
-    const forEachKey = await simport('for-each-key');
+    const {default: forEachKey} = await import('for-each-key');
     
-    const [error, data] = await tryToCatch(simport, name);
-    
-    if (error)
-        return exit(error.message);
+    const data = await import(name, {
+        with: {
+            type: 'json',
+        },
+    });
     
     forEachKey(config, data);
 }
@@ -329,8 +326,8 @@ async function help() {
         },
     });
     
-    const forEachKey = await simport('for-each-key');
-    const currify = await simport('currify');
+    const {default: forEachKey} = await import('for-each-key');
+    const {currify} = await import('currify');
     
     const usage = 'Usage: cloudcmd [options]';
     const url = Info.homepage;
@@ -348,9 +345,9 @@ function repl() {
 }
 
 async function checkUpdate() {
-    const load = await simport('package-json');
-    
+    const {default: load} = await import('package-json');
     const {version} = await load(Info.name, 'latest');
+    
     await showUpdateInfo(version);
 }
 
@@ -358,7 +355,7 @@ async function showUpdateInfo(version) {
     if (version === Info.version)
         return;
     
-    const chalk = await simport('chalk');
+    const {default: chalk} = await import('chalk');
     
     const latestVersion = chalk.green.bold(`v${version}`);
     const latest = `update available: ${latestVersion}`;

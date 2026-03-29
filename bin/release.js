@@ -3,16 +3,15 @@
 import {promisify} from 'node:util';
 import process from 'node:process';
 import {tryToCatch} from 'try-to-catch';
-import {createSimport} from 'simport';
 import minor from 'minor';
 import _place from 'place';
 import {rendy} from 'rendy';
 import shortdate from 'shortdate';
+import Info from '../package.json' with {
+    type: 'json',
+};
 
-const simport = createSimport(import.meta.url);
 const place = promisify(_place);
-
-const Info = await simport('../package.json');
 
 await main();
 
