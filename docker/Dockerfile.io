@@ -13,6 +13,7 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get install -y curl git ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim sudo locales \
     build-essential \
     libatomic1 \
+    command-not-found \
     ca-certificates && \
     apt-get autoremove && apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
