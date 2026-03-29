@@ -1,3 +1,8 @@
+2026.03.29, v19.9.12
+
+feature:
+- 811a47fd cloudcmd: bin: get rid of require
+
 2026.03.29, v19.9.11
 
 feature:
