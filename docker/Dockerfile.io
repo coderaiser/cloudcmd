@@ -1,4 +1,4 @@
-FROM node
+FROM ubuntu
 LABEL maintainer="Coderaiser"
 LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
 
@@ -9,9 +9,20 @@ COPY package.json /usr/src/cloudcmd/
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get upgrade && apt-get autoremove && \
-    apt-get install -y ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim sudo locales && \
-    apt-get clean && \
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y curl git ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim sudo locales \
+    build-essential \
+    libatomic1 \
+    ca-certificates && \
+    apt-get autoremove && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "> install node" && \
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
+    mv ~/.nvm /usr/local/src/nvm && \
+    chmod a+rwx /usr/local/src/nvm && \
+    . /usr/local/src/nvm/nvm.sh && \
+    nvm i node && \
+    echo "> install npm globals" && \
     npm i wisdom nupdate version-io redrun superc8 \
     supertape madrun redlint putout renamify-cli runny redfork -g && \
     echo "> install bun" && \
