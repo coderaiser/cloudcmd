@@ -43,6 +43,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
     mv ~/.cargo /usr/local/src/cargo && \
     rustup default stable && \
+    mv ~/.rustup /usr/local/src/rustup && \
     echo "> install gritty" && \
     bun r gritty --omit dev && \
     bun i gritty --omit dev && \
