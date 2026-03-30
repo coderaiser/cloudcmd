@@ -1,3 +1,8 @@
+2026.03.30, v19.9.19
+
+feature:
+- 6a52b11e docker: io: go, rust
+
 2026.03.30, v19.9.18
 
 feature:
