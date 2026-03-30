@@ -10,7 +10,7 @@ COPY package.json /usr/src/cloudcmd/
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
-    apt-get install -y ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim \
+    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim \
     sudo locales command-not-found && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
@@ -54,6 +54,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     echo "uk_UA.UTF-8 UTF-8" >> /etc/locale.gen && \
     echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen && \
     echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen && \
+    echo "el_GR.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen
 
 COPY . /usr/src/cloudcmd
