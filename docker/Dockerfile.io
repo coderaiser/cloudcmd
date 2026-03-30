@@ -10,7 +10,7 @@ COPY package.json /usr/src/cloudcmd/
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
-    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim \
+    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf && \ 
     sudo locales command-not-found && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
@@ -43,6 +43,7 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     echo "> configure bash" && \
     echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc && \
     echo "alias buni='bun i --no-save'" >> /etc/bash.bashrc && \
+    echo "alias bat='batcat'" >> /etc/bash.bashrc && \
     echo 'PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> /etc/bash.bashrc && \
     echo "> setup inputrc" && \
     echo "set editing-mode vi" >> /etc/inputrc && \
