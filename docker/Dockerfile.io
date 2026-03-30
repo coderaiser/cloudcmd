@@ -81,6 +81,7 @@ ENV cloudcmd_open=false
 ENV PATH=node_modules/.bin:$PATH
 
 ENV BUN_INSTALL_CACHE_DIR=/tmp/bun-cache
+ENV DENO_DIR=/tmp/deno-cache
 
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
