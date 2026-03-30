@@ -4,7 +4,6 @@
 *.ai
 *.cdr
 *.eps
-*.config.*
 *.log
 *.loc
 
@@ -16,7 +15,6 @@ yarn.lock
 now.json
 app.json
 bower.json
-manifest.yml
 deno.json
 bin/release.*
 img/logo/cloudcmd-hq.png

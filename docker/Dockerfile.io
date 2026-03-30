@@ -10,8 +10,8 @@ COPY package.json /usr/src/cloudcmd/
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
-    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf && \ 
-    sudo locales command-not-found && \
+    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf \
+    locales sudo command-not-found && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
     apt-get autoremove && apt-get clean && \
