@@ -8,6 +8,7 @@ WORKDIR /usr/src/cloudcmd
 COPY package.json /usr/src/cloudcmd/
 
 ENV DEBIAN_FRONTEND=noninteractive
+ARG GO_VERSION=1.21.2
 
 RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf \
@@ -34,6 +35,17 @@ RUN apt-get update && apt-get upgrade && apt-get autoremove && \
     mv ~/.deno /usr/local/src/deno && \
     chmod a+rwx /usr/local/src/deno && \
     ln -s /usr/local/src/deno/bin/deno /usr/local/bin/deno && \
+    echo "> install golang" && \
+    curl -fsSL https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz -o go.tar.gz && \
+    tar -C /usr/local -xzf go.tar.gz && \
+    rm go.tar.gz && \
+    ln -s /usr/local/go/bin/go /usr/local/bin/go && \
+    ln -s /usr/local/go/bin/gofmt /usr/local/bin/gofmt && \
+    echo "> install rust" && \
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+    mv ~/.cargo /usr/local/src/cargo && \
+    chmod a+rwx /usr/local/src/cargo && \
+    echo "> install gritty" && \
     bun r gritty --omit dev && \
     bun i gritty --omit dev && \
     bun pm cache rm && \
@@ -67,6 +79,8 @@ ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
 
 ENV PATH=node_modules/.bin:$PATH
+ENV PATH=/usr/local/src/cargo/bin:$PATH
+
 ENV BUN_INSTALL_CACHE_DIR=/tmp/bun-cache
 
 ENV LANG=en_US.UTF-8
