@@ -1,3 +1,10 @@
+2026.04.02, v19.9.24
+
+feature:
+- c4d26c6a docker: io: apt-get upgrade
+- 9ddb8c29 docker: io: get rid of nix
+- e4d7d441 docker: io: nix
+
 2026.04.01, v19.9.23
 
 feature:
