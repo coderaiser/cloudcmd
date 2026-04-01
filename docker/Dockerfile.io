@@ -9,6 +9,7 @@ COPY package.json /usr/src/cloudcmd/
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH=/usr/local/src/cargo/bin:$PATH
+ENV NIX_NO_SANDBOX=1
 
 ARG GO_VERSION=1.21.2
 
@@ -21,12 +22,15 @@ RUN apt-get update && apt-get upgrade -y && apt-get autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     echo "> install nix" && \
     useradd -m -s /bin/bash nixuser && \
-    echo "nixuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nixuser && \
-    chmod 0440 /etc/sudoers.d/nixuser && \
-    su - nixuser -c "curl -L https://nixos.org/nix/install | sh -s -- --no-daemon --no-sendbox" && \
+    mkdir /nix && \
+    chown nixuser /nix && \
+    su - nixuser && \
+    mkdir -p ~/.config/nix && \
+    echo "sandbox = false" > ~/.config/nix/nix.conf && \
+    sh <(curl -L https://nixos.org/nix/install) --no-daemon && \
+    exit && \
     mv /home/nixuser/.nix-profile /usr/local/src/nix-profile && \
     mv /home/nixuser/.nix-defexpr /usr/local/src/nix-defexpr && \
-    rm -rf /etc/sudoers.d/nixuser && \
     userdel -r nixuser && \
     echo "> install nvm" && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
