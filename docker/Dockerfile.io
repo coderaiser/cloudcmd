@@ -12,13 +12,22 @@ ENV PATH=/usr/local/src/cargo/bin:$PATH
 
 ARG GO_VERSION=1.21.2
 
-RUN apt-get update && apt-get upgrade && apt-get autoremove && \
+RUN apt-get update && apt-get upgrade -y && apt-get autoremove && \
     apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf \
     locales sudo command-not-found && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
     apt-get autoremove && apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
+    echo "> install nix" && \
+    useradd -m -s /bin/bash nixuser && \
+    echo "nixuser ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/nixuser && \
+    chmod 0440 /etc/sudoers.d/nixuser && \
+    su - nixuser -c "curl -L https://nixos.org/nix/install | sh -s -- --no-daemon --no-sendbox" && \
+    mv /home/nixuser/.nix-profile /usr/local/src/nix-profile && \
+    mv /home/nixuser/.nix-defexpr /usr/local/src/nix-defexpr && \
+    rm -rf /etc/sudoers.d/nixuser && \
+    userdel -r nixuser && \
     echo "> install nvm" && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
     mv ~/.nvm /usr/local/src/nvm && \
@@ -79,6 +88,8 @@ ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
 
 ENV PATH=node_modules/.bin:$PATH
+ENV PATH=/usr/local/src/nix/profile/bin:$PATH
+ENV NIX_PATH=/usr/local/src/nix/defexpr/channels
 
 ENV BUN_INSTALL_CACHE_DIR=/tmp/bun-cache
 ENV DENO_DIR=/tmp/deno-cache
