@@ -1,8 +1,10 @@
 FROM node
+
 LABEL maintainer="Coderaiser"
 LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
 
 RUN mkdir -p /usr/src/cloudcmd
+
 WORKDIR /usr/src/cloudcmd
 
 COPY package.json /usr/src/cloudcmd/
@@ -12,12 +14,14 @@ ENV PATH=/usr/local/src/cargo/bin:$PATH
 
 ARG GO_VERSION=1.21.2
 
-RUN apt-get update && apt-get upgrade -y && apt-get autoremove && \
-    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf \
-    locales sudo command-not-found && \
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get autoremove && \
+    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf locales sudo command-not-found && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
-    apt-get autoremove && apt-get clean && \
+    apt-get autoremove && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     echo "> install nix" && \
     useradd -m -s /bin/bash nixuser && \
@@ -31,8 +35,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get autoremove && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
     mv ~/.nvm /usr/local/src/nvm && \
     echo "> install npm globals" && \
-    npm i wisdom nupdate version-io redrun superc8 \
-    supertape madrun redlint putout renamify-cli runny redfork -g && \
+    npm i wisdom nupdate version-io redrun superc8 supertape madrun redlint putout renamify-cli runny redfork -g && \
     echo "> install bun" && \
     curl -fsSL https://bun.sh/install | bash && \
     mv ~/.bun /usr/local/src/bun && \
@@ -64,7 +67,7 @@ RUN apt-get update && apt-get upgrade -y && apt-get autoremove && \
     echo "alias buni='bun i --no-save'" >> /etc/bash.bashrc && \
     echo "alias bat='batcat'" >> /etc/bash.bashrc && \
     echo ". /usr/local/src/nvm/nvm.sh" >> /etc/bash.bashrc && \
-    echo 'PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> /etc/bash.bashrc && \
+    echo 'PS1="[033[01;32m]u@h[033[00m]:[033[01;34m]w[033[00m]\$ "' >> /etc/bash.bashrc && \
     echo "> setup inputrc" && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc && \
@@ -85,18 +88,16 @@ WORKDIR /
 ENV cloudcmd_terminal=true
 ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
-
 ENV PATH=node_modules/.bin:$PATH
+
 ENV PATH=/usr/local/src/nix/profile/bin:$PATH
 ENV NIX_PATH=/usr/local/src/nix/defexpr/channels
 
 ENV BUN_INSTALL_CACHE_DIR=/tmp/bun-cache
 ENV DENO_DIR=/tmp/deno-cache
-
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
-
 ENV TERM=xterm-256color
 
 EXPOSE 8000

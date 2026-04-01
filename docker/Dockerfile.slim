@@ -1,6 +1,7 @@
 FROM node:slim AS build
 
 RUN mkdir -p /usr/src/cloudcmd/
+
 WORKDIR /usr/src/cloudcmd
 
 COPY package.json /usr/src/cloudcmd/
@@ -20,8 +21,8 @@ COPY . /usr/src/cloudcmd
 
 FROM node:slim AS runtime
 
-COPY --from=build /usr/src/cloudcmd /usr/src/cloudcmd
-COPY --from=build /root/.bun /root/.bun
+COPY /usr/src/cloudcmd /usr/src/cloudcmd
+COPY /root/.bun /root/.bun
 
 LABEL maintainer="Coderaiser"
 LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
