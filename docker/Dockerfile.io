@@ -12,7 +12,7 @@ ENV PATH=/usr/local/src/cargo/bin:$PATH
 
 ARG GO_VERSION=1.21.2
 
-RUN apt-get update && apt-get upgrade && apt-get autoremove && \
+RUN apt-get update && apt-get upgrade -y && apt-get autoremove && \
     apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf \
     locales sudo command-not-found && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
