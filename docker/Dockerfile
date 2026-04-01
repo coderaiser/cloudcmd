@@ -1,8 +1,10 @@
 FROM node
+
 LABEL maintainer="Coderaiser"
 LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
 
 RUN mkdir -p /usr/src/cloudcmd
+
 WORKDIR /usr/src/cloudcmd
 
 COPY package.json /usr/src/cloudcmd/
