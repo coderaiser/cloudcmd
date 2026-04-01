@@ -1,6 +1,7 @@
 FROM node:slim AS build
 
 RUN mkdir -p /usr/src/cloudcmd/
+
 WORKDIR /usr/src/cloudcmd
 
 COPY package.json /usr/src/cloudcmd/
