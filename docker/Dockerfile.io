@@ -27,7 +27,8 @@ RUN apt-get update && \
     useradd -m -s /bin/bash nixuser && \
     mkdir /nix && \
     chown nixuser /nix
-    su - nixuser -c "curl -L https://nixos.org/nix/install | sh -s -- --no-daemon" && \
+
+su - nixuser -c "curl -L https://nixos.org/nix/install | sh -s -- --no-daemon" && \
     mv /home/nixuser/.nix-profile /usr/local/src/nix-profile && \
     mv /home/nixuser/.nix-defexpr /usr/local/src/nix-defexpr && \
     userdel -r nixuser && \
@@ -89,10 +90,8 @@ ENV cloudcmd_terminal=true
 ENV cloudcmd_terminal_path=gritty
 ENV cloudcmd_open=false
 ENV PATH=node_modules/.bin:$PATH
-
 ENV PATH=/usr/local/src/nix/profile/bin:$PATH
 ENV NIX_PATH=/usr/local/src/nix/defexpr/channels
-
 ENV BUN_INSTALL_CACHE_DIR=/tmp/bun-cache
 ENV DENO_DIR=/tmp/deno-cache
 ENV LANG=en_US.UTF-8
