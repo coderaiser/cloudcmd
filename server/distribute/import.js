@@ -38,9 +38,14 @@ const addUrl = currify((url, a) => `${url}: ${a}`);
 
 const rmListeners = wraptile((socket, listeners) => {
     socket.removeListener('connect', listeners.onConnect);
+    socket.removeListener('accept', listeners.onAccept);
     socket.removeListener('config', listeners.onConfig);
     socket.removeListener('error', listeners.onError);
-    socket.removeListener('connection_error', listeners.onError);
+    socket.removeListener('connect_error', listeners.onConnectError);
+    socket.removeListener('reject', listeners.onReject);
+    
+    if (listeners.onChange)
+        socket.removeListener('change', listeners.onChange);
 });
 
 const canceled = (f) => f(null, {
@@ -106,17 +111,6 @@ export const distributeImport = (config, options, fn) => {
     
     const onConnect = emitAuth(importUrl, config, socket);
     const onAccept = logWrapped(isLog, importStr, `${connectedStr} to ${colorUrl}`);
-    
-    const onDisconnect = squad(...[
-        done(fn, statusStore),
-        logWrapped(isLog, importStr, `${disconnectedStr} from ${colorUrl}`),
-        rmListeners(socket, {
-            onError,
-            onConnect,
-            onConfig,
-        }),
-    ]);
-    
     const onChange = squad(logWrapped(isLog, importStr), config);
     
     const onReject = squad(superFn('reject'), logWrapped(
@@ -124,6 +118,20 @@ export const distributeImport = (config, options, fn) => {
         importStr,
         tokenRejectedStr,
     ));
+    
+    const onDisconnect = squad(...[
+        done(fn, statusStore),
+        logWrapped(isLog, importStr, `${disconnectedStr} from ${colorUrl}`),
+        rmListeners(socket, {
+            onConnect,
+            onAccept,
+            onConfig,
+            onError,
+            onConnectError,
+            onReject,
+            onChange,
+        }),
+    ]);
     
     socket.on('connect', onConnect);
     socket.on('accept', onAccept);
