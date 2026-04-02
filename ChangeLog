@@ -1,3 +1,8 @@
+2026.04.02, v19.10.0
+
+fix:
+- d12e7bd0 distribute: fix event listener leak on socket disconnect (#462)
+
 2026.04.02, v19.9.24
 
 feature:
