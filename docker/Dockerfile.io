@@ -27,7 +27,7 @@ RUN apt-get update && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
     mv ~/.nvm /usr/local/src/nvm && \
     echo "> install npm globals" && \
-    npm i wisdom nupdate version-io redrun superc8 supertape madrun redlint putout renamify-cli runny redfork -g && \
+    npm i wisdom nupdate version-io redrun superc8     supertape madrun redlint putout renamify-cli runny redfork -g && \
     echo "> install bun" && \
     curl -fsSL https://bun.sh/install | bash && \
     mv ~/.bun /usr/local/src/bun && \
@@ -59,7 +59,7 @@ RUN apt-get update && \
     echo "alias buni='bun i --no-save'" >> /etc/bash.bashrc && \
     echo "alias bat='batcat'" >> /etc/bash.bashrc && \
     echo ". /usr/local/src/nvm/nvm.sh" >> /etc/bash.bashrc && \
-    echo 'PS1="[033[01;32m]u@h[033[00m]:[033[01;34m]w[033[00m]\$ "' >> /etc/bash.bashrc && \
+    echo 'PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ "' >> /etc/bash.bashrc && \
     echo "> setup inputrc" && \
     echo "set editing-mode vi" >> /etc/inputrc && \
     echo "TAB: menu-complete" >> /etc/inputrc && \
