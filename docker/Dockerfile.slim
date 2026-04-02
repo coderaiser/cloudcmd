@@ -21,8 +21,8 @@ COPY . /usr/src/cloudcmd
 
 FROM node:slim AS runtime
 
-COPY /usr/src/cloudcmd /usr/src/cloudcmd
-COPY /root/.bun /root/.bun
+COPY --from=build /usr/src/cloudcmd /usr/src/cloudcmd
+COPY --from=build /root/.bun /root/.bun
 
 LABEL maintainer="Coderaiser"
 LABEL org.opencontainers.image.source="https://github.com/coderaiser/cloudcmd"
