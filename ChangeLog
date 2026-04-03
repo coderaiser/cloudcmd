@@ -1,3 +1,8 @@
+2026.04.04, v19.11.0
+
+feature:
+- 32f89d38 cloudcmd: user-menu: root
+
 2026.04.04, v19.10.2
 
 feature:
