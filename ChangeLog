@@ -1,3 +1,8 @@
+2026.04.04, v19.10.2
+
+feature:
+- df4fb517 cloudcmd: aleman v2.0.1
+
 2026.04.03, v19.10.1
 
 feature:
