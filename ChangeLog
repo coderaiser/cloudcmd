@@ -1,3 +1,8 @@
+2026.04.03, v19.10.1
+
+feature:
+- ceb7ef4f docker: io: keep /var/lib/apt/lists
+
 2026.04.02, v19.10.0
 
 fix:
