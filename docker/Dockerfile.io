@@ -22,7 +22,6 @@ RUN apt-get update && \
     apt-get update && \
     apt-get autoremove && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
     echo "> install nvm" && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
     mv ~/.nvm /usr/local/src/nvm && \
