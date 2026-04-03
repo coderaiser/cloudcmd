@@ -242,6 +242,7 @@ function cloudcmdMiddle({modules, config}) {
         }),
         userMenu({
             menuName: '.cloudcmd.menu.js',
+            config,
         }),
         rest({
             config,

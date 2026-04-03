@@ -51,7 +51,7 @@ export async function init() {
 }
 
 export async function show(options = {}) {
-    await runTerminal(options);
+    return await runTerminal(options);
 }
 
 const runTerminal = promisify((options, fn) => {

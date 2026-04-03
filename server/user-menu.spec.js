@@ -24,8 +24,11 @@ const fixtureCopy = readFileSync(fixtureCopyName, 'utf8');
 const fixtureCopyFix = readFileSync(fixtureCopyFixName, 'utf8');
 
 test('cloudcmd: user menu', async (t) => {
+    const config = stub().returns('');
     const userMenuFile = getUserMenuFile();
+    
     const options = {
+        config,
         menuName: '.cloudcmd.menu.js',
     };
     
@@ -38,10 +41,13 @@ test('cloudcmd: user menu', async (t) => {
 });
 
 test('cloudcmd: user menu: io.mv', async (t) => {
+    const config = stub().returns('');
     const readFile = stub().returns(fixtureMove);
+    
     const options = {
         menuName: '.cloudcmd.menu.js',
         readFile,
+        config,
     };
     
     const {request} = serveOnce(userMenu);
@@ -55,8 +61,10 @@ test('cloudcmd: user menu: io.mv', async (t) => {
 });
 
 test('cloudcmd: user menu: default menu', async (t) => {
+    const config = stub().returns('');
     const options = {
         menuName: '111.cloudcmd.menu.js',
+        config,
     };
     
     const {request} = serveOnce(userMenu);
@@ -70,10 +78,13 @@ test('cloudcmd: user menu: default menu', async (t) => {
 });
 
 test('cloudcmd: user menu: io.cp', async (t) => {
+    const config = stub().returns('');
     const readFile = stub().returns(fixtureCopy);
+    
     const options = {
         menuName: '.cloudcmd.menu.js',
         readFile,
+        config,
     };
     
     const {request} = serveOnce(userMenu);

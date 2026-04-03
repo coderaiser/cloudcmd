@@ -12,7 +12,7 @@ transpile('');
 
 const PREFIX = '/api/v1/user-menu';
 
-export const userMenu = currify(async ({menuName, readFile = _readFile}, req, res, next) => {
+export const userMenu = currify(async ({menuName, readFile = _readFile, config}, req, res, next) => {
     if (!req.url.startsWith(PREFIX))
         return next();
     
@@ -24,12 +24,13 @@ export const userMenu = currify(async ({menuName, readFile = _readFile}, req, re
             res,
             menuName,
             readFile,
+            config,
         });
     
     next();
 });
 
-async function onGET({req, res, menuName, readFile}) {
+async function onGET({req, res, menuName, readFile, config}) {
     const {dir} = req.query;
     const url = req.url.replace(PREFIX, '');
     
@@ -40,8 +41,9 @@ async function onGET({req, res, menuName, readFile}) {
     
     const {findUp} = await import('find-up');
     
+    const cwd = join(config('root'), dir);
     const [errorFind, currentMenuPath] = await tryToCatch(findUp, [menuName], {
-        cwd: dir,
+        cwd,
     });
     
     if (errorFind && errorFind.code !== 'ENOENT')
