@@ -1,3 +1,9 @@
+2026.04.04, v19.11.3
+
+feature:
+- 9970ff76 docker: io: btop
+- 4395a471 docker: io: $PATH: add $HOME/.local/bin
+
 2026.04.04, v19.11.2
 
 feature:
