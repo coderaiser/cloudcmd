@@ -1,3 +1,8 @@
+2026.04.04, v19.11.1
+
+feature:
+- 7787bfc2 cloudcmd: user-menu: runFromCDN
+
 2026.04.04, v19.11.0
 
 feature:
