@@ -1,3 +1,8 @@
+2026.04.05, v19.11.5
+
+feature:
+- f9c513cc docker: io: hexyl: add
+
 2026.04.04, v19.11.4
 
 feature:
