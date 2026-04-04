@@ -18,7 +18,7 @@ ARG NVIM_VERSION=0.12.0
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get autoremove && \
-    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim bat fzf locales sudo command-not-found ncdu aptitude htop btop && \
+    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim bat fzf locales sudo command-not-found ncdu aptitude htop btop hexyl && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
     apt-get autoremove && \
