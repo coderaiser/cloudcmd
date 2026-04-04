@@ -13,22 +13,26 @@ ENV DEBIAN_FRONTEND=noninteractive \
     PATH=/usr/local/src/cargo/bin:$PATH
 
 ARG GO_VERSION=1.21.2
+ARG NVIM_VERSION=0.12.0
 
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get autoremove && \
-    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf locales sudo command-not-found ncdu aptitude htop btop && \
-    echo "> remove unused packages" && \
-    apt-get remove mercurial subversion -y && \
+    apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim bat fzf locales sudo command-not-found ncdu aptitude htop btop && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
     apt-get autoremove && \
     apt-get clean && \
+    echo "> install neovim" && \
+    wget https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-linux-x86_64.tar.gz && \
+    tar zxf nvim-linux-x86_64.tar.gz && \
+    mv nvim-linux-x86_64 /usr/local/src/nvim && \
+    ln -s /usr/local/src/nvim/bin/nvim /usr/local/bin/nvim && \
     echo "> install nvm" && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash && \
     mv ~/.nvm /usr/local/src/nvm && \
     echo "> install npm globals" && \
-    npm i wisdom nupdate version-io redrun superc8     supertape madrun redlint putout renamify-cli runny redfork -g && \
+    npm i wisdom nupdate version-io redrun superc8 supertape madrun redlint putout renamify-cli runny redfork -g && \
     echo "> install bun" && \
     curl -fsSL https://bun.sh/install | bash && \
     mv ~/.bun /usr/local/src/bun && \
