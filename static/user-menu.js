@@ -1,5 +1,6 @@
 const RENAME_FILE = 'Rename file';
-const CDN = 'https://cdn.jsdelivr.net/gh/cloudcmd/user-menu@1.2.4';
+const CDN = 'https://cdn.jsdelivr.net';
+const CDN_GH = `${CDN}/gh/cloudcmd/user-menu@1.2.4`;
 
 export default {
     '__settings': {
@@ -10,13 +11,7 @@ export default {
         await DOM.renameCurrent();
     },
     
-    'F6 - Copy URL to current file': async ({DOM}) => {
-        const {copyURLToCurrentFile} = await import(`${CDN}/menu/copy-url-to-current-file.js`);
-        
-        await copyURLToCurrentFile({
-            DOM,
-        });
-    },
+    'F6 - Copy URL to current file': runFromCDN('copy-url-to-current-file'),
     
     'R - cd /': async ({CloudCmd}) => {
         await CloudCmd.changeDir('/');
@@ -155,4 +150,19 @@ function compare(a, b) {
     }
     
     return result;
+}
+
+const MAP = {
+    'copy-url-to-current-file': 'copyURLToCurrentFile',
+};
+
+function runFromCDN(name) {
+    return async (...a) => {
+        const fnName = MAP[name];
+        const {
+            [fnName]: fn,
+        } = await import(`${CDN_GH}/menu/${name}.js`);
+        
+        await fn(...a);
+    };
 }
