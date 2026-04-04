@@ -18,6 +18,8 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get autoremove && \
     apt-get install -y less ffmpeg net-tools netcat-openbsd mc iputils-ping vim neovim bat fzf locales sudo command-not-found ncdu && \
+    echo "> remove unused packages" && \
+    apt-get remove mercurial subversion -y && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
     apt-get autoremove && \
