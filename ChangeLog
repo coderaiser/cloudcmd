@@ -1,3 +1,8 @@
+2026.04.04, v19.11.4
+
+feature:
+- e7347d25 docker: io: neovim: apt -> github
+
 2026.04.04, v19.11.3
 
 feature:
