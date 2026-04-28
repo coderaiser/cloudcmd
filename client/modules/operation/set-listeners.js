@@ -15,14 +15,11 @@ export const setListeners = (options) => (emitter) => {
     } = options;
     
     let done;
-    let lastError;
     
     const onAbort = wraptile(({emitter, operation}) => {
         emitter.abort();
         
         const msg = `${operation} aborted`;
-        
-        lastError = true;
         
         Dialog.alert(msg, {
             cancel: false,
@@ -40,13 +37,10 @@ export const setListeners = (options) => (emitter) => {
         operation,
     }));
     
-    let noProgress = true;
-    
     const listeners = {
         progress: (value) => {
             done = value === 100;
             progress.setProgress(value);
-            noProgress = false;
         },
         
         end: () => {
@@ -54,13 +48,10 @@ export const setListeners = (options) => (emitter) => {
             forEachKey(removeListener, listeners);
             progress.remove();
             
-            if (lastError || done || noProgress)
-                callback();
+            callback();
         },
         
         error: async (error) => {
-            lastError = error;
-            
             if (noContinue) {
                 listeners.end(error);
                 Dialog.alert(error);
