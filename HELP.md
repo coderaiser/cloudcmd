@@ -232,6 +232,8 @@ When the `--vim` option is provided, or the configuration parameter `vim` is set
 | `mf`                  | make file
 | `tt`                  | show terminal
 | `e`                   | edit file
+| `cc`                  | copy
+| `mm`                  | move
 
 Commands can be joined, for example:
 

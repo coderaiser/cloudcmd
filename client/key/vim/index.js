@@ -60,6 +60,14 @@ const getOperations = (event, deps) => {
         remove: () => {
             Operation.show('delete');
         },
+        operationCopy: () => {
+            event.preventDefault();
+            Operation.show('copy');
+        },
+        operationMove: () => {
+            event.preventDefault();
+            Operation.show('move');
+        },
         
         makeDirectory: () => {
             event.stopImmediatePropagation();

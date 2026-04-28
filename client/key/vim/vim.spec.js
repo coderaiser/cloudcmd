@@ -43,6 +43,28 @@ test('vim: ^', (t) => {
     t.end();
 });
 
+test('vim: cc', (t) => {
+    const operationCopy = stub();
+    
+    vim('cc', {
+        operationCopy,
+    });
+    
+    t.calledWithNoArgs(operationCopy);
+    t.end();
+});
+
+test('vim: mm', (t) => {
+    const operationMove = stub();
+    
+    vim('mm', {
+        operationMove,
+    });
+    
+    t.calledWithNoArgs(operationMove);
+    t.end();
+});
+
 test('vim: w', (t) => {
     const moveNext = stub();
     

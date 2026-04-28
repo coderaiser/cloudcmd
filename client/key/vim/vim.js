@@ -40,6 +40,8 @@ export default (key, operations = {}) => {
         makeDirectory = noop,
         terminal = noop,
         edit = noop,
+        operationCopy = noop,
+        operationMove = noop,
     } = operations;
     
     if (key === 'Enter')
@@ -108,6 +110,16 @@ export default (key, operations = {}) => {
     
     if (value === 'e') {
         edit();
+        return end();
+    }
+    
+    if (value === 'cc') {
+        operationCopy();
+        return end();
+    }
+    
+    if (value === 'mm') {
+        operationMove();
         return end();
     }
     
