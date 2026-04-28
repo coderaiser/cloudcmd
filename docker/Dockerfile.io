@@ -100,8 +100,6 @@ ENV cloudcmd_terminal=true \
     LC_ALL=en_US.UTF-8 \
     TERM=xterm-256color \
     XDG_CACHE_HOME=/tmp \
-    XDG_DATA_HOME=/usr/local/share \
-
-EXPOSE 8000
+    XDG_DATA_HOME=/usr/local/share EXPOSE 8000
 
 ENTRYPOINT ["/usr/local/share/cloudcmd/bin/cloudcmd.js"]
