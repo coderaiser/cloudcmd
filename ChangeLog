@@ -1,3 +1,9 @@
+2026.04.28, v19.15.0
+
+feature:
+- 9d97343b cloudcmd: operation: rm useless checks
+- 46a88cfa cloudcmd: client: key: vim: cc, mm
+
 2026.04.28, v19.14.0
 
 feature:
