@@ -2,7 +2,7 @@ import {callbackify} from 'node:util';
 import {fileURLToPath} from 'node:url';
 import {dirname} from 'node:path';
 import pullout from 'pullout';
-import ponse from 'ponse';
+import {getQuery} from 'ponse';
 import {read} from 'redzip';
 import root from '../root.js';
 import parse from './worker.js';
@@ -40,7 +40,7 @@ function parseName(query, name, rootDir) {
 }
 
 async function onGET(request, name, root) {
-    const query = ponse.getQuery(request);
+    const query = getQuery(request);
     const fileName = parseName(query, name, root);
     const stream = await read(fileName);
     const data = await pullout(stream);

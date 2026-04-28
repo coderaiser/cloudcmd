@@ -6,7 +6,7 @@ import currify from 'currify';
 import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';
 import pullout from 'pullout';
-import ponse from 'ponse';
+import * as ponse from 'ponse';
 import jonny from 'jonny';
 import jju from 'jju';
 import writejson from 'writejson';

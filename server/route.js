@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module';
 import {extname} from 'node:path';
 import * as _win32 from 'win32';
-import ponse from 'ponse';
+import * as ponse from 'ponse';
 import {rendy} from 'rendy';
 import format from 'format-io';
 import currify from 'currify';

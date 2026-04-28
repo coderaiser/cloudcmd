@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import {fullstore} from 'fullstore';
 import currify from 'currify';
 import apart from 'apart';
-import ponse from 'ponse';
+import * as ponse from 'ponse';
 import {restafary} from 'restafary';
 import restbox from 'restbox';
 import {konsole} from 'console-io';
@@ -186,7 +186,7 @@ function cloudcmdMiddle({modules, config}) {
     const zip = apart(config, 'zip');
     const root = apart(config, 'root');
     
-    const ponseStatic = ponse.static({
+    const ponseStatic = ponse.createStatic({
         cache,
         root: DIR_ROOT,
     });
