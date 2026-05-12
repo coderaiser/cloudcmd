@@ -28,10 +28,10 @@ export const root = (dir, config, overrides = {}) => {
 };
 
 export const editor = (name, {exit = _exit} = {}) => {
-    const reg = /^(dword|edward|deepword)$/;
+    const reg = /^(dword|edward|deepword|qword)$/;
     
     if (!reg.test(name))
-        exit('cloudcmd --editor: could be "dword", "edward" or "deepword" only');
+        exit(`cloudcmd --editor: could be "dword", "edward", "deepword" or "qword" only, recieved: "${name}"`);
 };
 
 export const menu = (name, {exit = _exit} = {}) => {

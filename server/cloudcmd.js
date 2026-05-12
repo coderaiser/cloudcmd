@@ -12,6 +12,7 @@ import {konsole} from 'console-io';
 import {edward} from 'edward';
 import {dword} from 'dword';
 import {deepword} from 'deepword';
+import {qword} from 'qword';
 import nomine from 'nomine';
 import {fileop} from '@cloudcmd/fileop';
 import * as cloudfunc from '#common/cloudfunc';
@@ -152,6 +153,12 @@ function listen({prefixSocket, socket, config}) {
         prefixSocket: `${prefixSocket}/dword`,
     });
     
+    qword.listen(socket, {
+        root,
+        auth,
+        prefixSocket: `${prefixSocket}/qword`,
+    });
+    
     deepword.listen(socket, {
         root,
         auth,
@@ -208,6 +215,14 @@ function cloudcmdMiddle({modules, config}) {
             dropboxToken,
         }),
         dword({
+            root,
+            online,
+            diff,
+            zip,
+            dropbox,
+            dropboxToken,
+        }),
+        qword({
             root,
             online,
             diff,

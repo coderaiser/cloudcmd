@@ -9,6 +9,7 @@
 [DWORD]: https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]: https://github.com/cloudcmd/edward "Editor based on Ace"
 [DEEPWORD]: https://github.com/cloudcmd/deepword "Editor based on Monaco"
+[QWORD]: https://github.com/cloudcmd/qword "Editor based on CodeMirror 6"
 [EDWARD_KEYS]: https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
 [TERMUX]: https://termux.com "Termux"
 [INLY]: https://github.com/coderaiser/node-inly "Extract archive"
@@ -26,7 +27,7 @@
 - Server works on **Windows**, **Linux**, **Mac OS** and **Android** (with help of [Termux][TERMUX]).
 - Can be used local or remotely.
 - Adapts to screen size.
-- **3 built-in editors** with support of **syntax highlighting**: [Dword][DWORD], [Edward][EDWARD] and [Deepword][DEEPWORD].
+- **3 built-in editors** with support of **syntax highlighting**: [Dword][DWORD], [Edward][EDWARD] [Deepword][DEEPWORD] and [Qword][QWORD].
 - [Console](https://github.com/cloudcmd/console "Console") with support of the default OS command line.
 - Written in **JavaScript/Node.js**.
 - Built-in archives pack: **zip** and **tar.gz**.
