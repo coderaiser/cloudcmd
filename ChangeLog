@@ -1,3 +1,21 @@
+2026.05.17, v19.17.0
+
+fix:
+- d96f6c46 css: query: hide time on mobile
+- e7c55e05 docker: io: XDG_CONFIG_HOME
+
+feature:
+- ae1ca0f8 cloudcmd: cssnano-preset-default v8.0.1
+- 94d5096a style: owner, mode: improve
+- 807f8346 cloudcmd: superc8 v12.6.0
+- 67a95722 docker: io: cline: add
+- 68eacb91 qword: add
+- 4acd294b docker: io: tmux
+- 05c80043 cloudcmd: @supertape/loader-css v1.0.0
+- 800a6545 cloudcmd: eslint-plugin-n v18.0.1
+- a985bb36 cloudcmd: supertape v13.0.0
+- 4315ec61 docker: io XDG_CONFIG_HOME: /etc -> /usr/local/etc
+
 2026.05.03, v19.16.0
 
 feature:
