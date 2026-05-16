@@ -11,6 +11,9 @@ export const match = {
     'client/dom/index.*': {
         'no-multi-spaces': 'off',
     },
+    'client/**': {
+        'n/no-unsupported-features/node-builtins': 'off',
+    },
 };
 export default defineConfig([
     safeAlign, {
