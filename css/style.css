@@ -235,7 +235,8 @@ a:active {
 
 .owner {
     display: inline-block;
-    width: 13%;
+    width: 12%;
+    
     /* when inline-block
      * vertical align should be
      * set top to prevent additional
@@ -247,7 +248,7 @@ a:active {
 
 .mode {
     float: right;
-    width: 18%;
+    width: 22%;
     color: var(--column-color);
 }
 
