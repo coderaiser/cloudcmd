@@ -161,8 +161,9 @@
     .size,
     .date,
     .owner,
+    .time,
     .mode {
-        display: none;
+        display: none !important;
     }
     
     .name {
