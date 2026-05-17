@@ -31,7 +31,7 @@ export const editor = (name, {exit = _exit} = {}) => {
     const reg = /^(dword|edward|deepword|qword)$/;
     
     if (!reg.test(name))
-        exit(`cloudcmd --editor: could be "dword", "edward", "deepword" or "qword" only, recieved: "${name}"`);
+        exit(`cloudcmd --editor: could be "dword", "edward", "deepword" or "qword" only, received: "${name}"`);
 };
 
 export const menu = (name, {exit = _exit} = {}) => {

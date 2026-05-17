@@ -64,7 +64,7 @@ test('validate: packer: not valid', (t) => {
 
 test('validate: editor: not valid', (t) => {
     const exit = stub();
-    const msg = 'cloudcmd --editor: could be "dword", "edward", "deepword" or "qword" only, recieved: "hello"';
+    const msg = 'cloudcmd --editor: could be "dword", "edward", "deepword" or "qword" only, received: "hello"';
     
     validate.editor('hello', {
         exit,
