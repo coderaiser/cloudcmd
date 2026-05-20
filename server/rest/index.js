@@ -72,7 +72,7 @@ function rest({fs, config, moveFiles}, request, response) {
             return ponse.sendError(error, params);
         
         if (error)
-            return ponse.sendError(error.stack, params);
+            return ponse.sendError(error, params);
         
         ponse.send(data, params);
     });
