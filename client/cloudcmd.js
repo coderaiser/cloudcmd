@@ -36,7 +36,7 @@ async function init(config) {
     if (globalThis.CloudCmd.config('menu') === 'aleman')
         setTimeout(() => {
             import('https://esm.sh/@putout/processor-html');
-            import('https://esm.sh/@putout/bundle');
+            import('https://esm.sh/@putout/bundle@5.5');
         }, 100);
 }
 
