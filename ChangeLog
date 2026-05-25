@@ -1,3 +1,13 @@
+2026.05.26, v19.18.0
+
+fix:
+- 161bede8 client: menu: @putout/bundle@5.5.
+- 447d990f cloudcmd: server: rest: sendError
+
+feature:
+- 5d9628ce cloudcmd: rate limit: add support (#437)
+- 2be395e6 cloudcmd: get rid of manifest: 401 basic auth
+
 2026.05.17, v19.17.0
 
 fix:
