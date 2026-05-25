@@ -115,7 +115,7 @@ const yargsOptions = {
         'columns': env.parse('columns') || config('columns') || '',
         'theme': env.parse('theme') || config('theme') || '',
         'vim': choose(env.bool('vim'), config('vim')),
-        'log': config('log'),
+        'log': choose(env.bool('log'), config('log')),
         
         'import-url': env.parse('import_url') || config('importUrl'),
         'import-listen': choose(env.bool('import_listen'), config('importListen')),

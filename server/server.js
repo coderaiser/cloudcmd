@@ -1,17 +1,21 @@
 import http from 'node:http';
 import {promisify} from 'node:util';
 import process from 'node:process';
+import {rateLimit} from 'express-rate-limit';
 import currify from 'currify';
 import squad from 'squad';
 import {tryToCatch} from 'try-to-catch';
 import opn from 'open';
 import express from 'express';
 import {Server} from 'socket.io';
-import tryRequire from 'tryrequire';
 import wraptile from 'wraptile';
 import compression from 'compression';
+import tryRequire from 'tryrequire';
 import {cloudcmd} from '#server/cloudcmd';
 import exit from './exit.js';
+
+const RATE_LIMIT = 1000;
+const RATE_WINDOW = 15 * 60 * 1000;
 
 const bind = (f, self) => f.bind(self);
 
@@ -25,6 +29,7 @@ const shutdown = wraptile(async (promises) => {
 const promisifySelf = squad(promisify, bind);
 
 const exitPort = two(exit, 'cloudcmd --port: %s');
+
 const logger = tryRequire('morgan');
 
 export default async (options, config) => {
@@ -46,8 +51,13 @@ export default async (options, config) => {
         path: `${prefix}/socket.io`,
     });
     
-    app.use(compression());
+    const limiter = rateLimit({
+        windowMs: RATE_WINDOW,
+        limit: RATE_LIMIT,
+    });
     
+    app.use(compression());
+    app.use(limiter);
     app.use(prefix, cloudcmd({
         config: options,
         socket: socketServer,
@@ -65,7 +75,9 @@ export default async (options, config) => {
     await listen(port, ip);
     
     const close = shutdown([closeServer, closeSocket]);
+    
     process.on('SIGINT', close);
+    process.on('SIUSR1', close);
     
     const host = config('ip') || 'localhost';
     const port0 = port || server.address().port;
