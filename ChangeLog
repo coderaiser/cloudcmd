@@ -1,3 +1,8 @@
+2026.05.26, v19.18.1
+
+feature:
+- 40ecef5e cloudcmd: ratelimit: X-Forwarded-For (#437)
+
 2026.05.26, v19.18.0
 
 fix:
