@@ -264,7 +264,8 @@ function validateRoot(root, config) {
     if (root === '/')
         return;
     
-    console.log(`root: ${root}`);
+    if (config('log'))
+        console.log(`root: ${root}`);
 }
 
 async function getPassword(password) {

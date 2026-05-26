@@ -55,6 +55,7 @@
     "fix:lint": "madrun fix:lint",
     "lint:stream": "madrun lint:stream",
     "test": "madrun test",
+    "test:e2e": "madrun test:e2e",
     "test:client": "madrun test:client",
     "test:server": "madrun test:server",
     "wisdom": "madrun wisdom",

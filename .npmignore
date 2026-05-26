@@ -20,7 +20,7 @@ img/logo/cloudcmd-hq.png
 webpack.config.js
 
 docker
-test
+test*
 fixture
 fixture-*
 coverage

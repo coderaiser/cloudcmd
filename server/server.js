@@ -20,8 +20,10 @@ const RATE_WINDOW = 15 * 60 * 1000;
 const bind = (f, self) => f.bind(self);
 
 const two = currify((f, a, b) => f(a, b));
-const shutdown = wraptile(async (promises) => {
-    console.log('closing cloudcmd...');
+const shutdown = wraptile(async (config, promises) => {
+    if (config('log'))
+        console.log('closing cloudcmd...');
+    
     await Promise.all(promises);
     process.exit(0);
 });
@@ -41,7 +43,7 @@ export default async (options, config) => {
     const app = express();
     const server = http.createServer(app);
     
-    if (logger)
+    if (config('log') && logger)
         app.use(logger('dev'));
     
     if (prefix)
@@ -55,6 +57,8 @@ export default async (options, config) => {
         windowMs: RATE_WINDOW,
         limit: RATE_LIMIT,
     });
+    
+    app.set('trust proxy', 1);
     
     app.use(compression());
     app.use(limiter);
@@ -74,16 +78,17 @@ export default async (options, config) => {
     server.on('error', exitPort);
     await listen(port, ip);
     
-    const close = shutdown([closeServer, closeSocket]);
+    const close = shutdown(config, [closeServer, closeSocket]);
     
     process.on('SIGINT', close);
-    process.on('SIUSR1', close);
+    process.on('SIGUSR1', close);
     
     const host = config('ip') || 'localhost';
     const port0 = port || server.address().port;
     const url = `http://${host}:${port0}${prefix}/`;
     
-    console.log(`url: ${url}`);
+    if (config('log'))
+        console.log(`url: ${url}`);
     
     if (!config('open'))
         return;
