@@ -8,6 +8,13 @@ test('cloudcmd: client: view: types: isAudio', (t) => {
     t.end();
 });
 
+test('cloudcmd: client: view: types: isAudio: flac', (t) => {
+    const result = isAudio('hello.flac');
+    
+    t.ok(result);
+    t.end();
+});
+
 test('cloudcmd: client: view: types: isAudio: no', (t) => {
     const result = isAudio('hello');
     

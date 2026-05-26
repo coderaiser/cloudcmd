@@ -1,7 +1,7 @@
 import {extname} from 'node:path';
 import currify from 'currify';
 
-export const isAudio = (name) => /\.(mp3|ogg|m4a)$/i.test(name);
+export const isAudio = (name) => /\.(mp3|ogg|m4a|flac)$/i.test(name);
 
 const testRegExp = currify((name, reg) => reg.test(name));
 const getRegExp = (ext) => RegExp(`\\.${ext}$`, 'i');
