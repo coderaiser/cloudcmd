@@ -1,4 +1,3 @@
-/* global CloudCmd, DOM */
 import exec from 'execon';
 import wrap from 'wraptile';
 import createElement from '@cloudcmd/create-element';
@@ -6,6 +5,7 @@ import {getIdBySrc} from '#dom/load';
 import * as RESTful from '#dom/rest';
 import {FS} from '#common/cloudfunc';
 
+const {CloudCmd, DOM} = globalThis;
 const {config, Key} = CloudCmd;
 
 const {
