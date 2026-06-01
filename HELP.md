@@ -1,6 +1,6 @@
 # Cloud Commander v19.19.0
 
-### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL] [Demo][DemoURL]
+### [Main][MainURL] [Blog][BlogURL] [Demo][DemoURL] [Deploy](#deploy)
 
 [MainURL]: https://cloudcmd.io "Main"
 [BlogURL]: https://blog.cloudcmd.io "Blog"
@@ -13,6 +13,9 @@
 [EDWARD_KEYS]: https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
 [TERMUX]: https://termux.com "Termux"
 [INLY]: https://github.com/coderaiser/node-inly "Extract archive"
+
+[DeployInstaPodsIMG]: https://img.shields.io/badge/deploy%20on-InstaPods-blue
+[DeployInstaPodsURL]: https://app.instapods.com/dashboard/pods/create?app=cloudcmd&ref=cloudcmd
 
 **Cloud Commander** is a file manager for the web. It includes a command-line console and a text editor. Cloud Commander helps you manage your server and work with files, directories and programs in a web browser from any computer, mobile or tablet.
 
@@ -930,9 +933,9 @@ ln -s ./sites-available/io.cloudcmd.io ./sites-enabled
 
 ## Deploy
 
-`Cloud Commander` can be easily deployed to [Heroku](https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy to Heroku").
+`Cloud Commander` can be easily deployed to [InstaPods][DeployInstaPodsURL]. After deploy you receive email with credentials.
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png "Deploy to Heroku")](https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd)
+[![Deploy on InstaPods](https://instapods.com/deploy-button.svg)](https://app.instapods.com/dashboard/pods/create?app=cloudcmd&ref=cloudcmd)
 
 ## Docker
 
