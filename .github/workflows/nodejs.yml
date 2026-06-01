@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAME: cloudcmd
+      API_KEY: ${{ secrets.API_KEY }}
     strategy:
       matrix:
         node-version:
