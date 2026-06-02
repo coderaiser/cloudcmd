@@ -23,7 +23,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
 ARG UBUNTU_DEPS="libatomic1 curl wget git net-tools iproute2 software-properties-common"
 ARG RUST_DEPS="build-essential"
 ARG DEPS="pv gcc gdb strace upx-ucl less ffmpeg net-tools netcat-openbsd mc far2l iputils-ping vim bat fzf locales sudo command-not-found ncdu aptitude htop btop hexyl tmux"
-ARG PALABRA_DEPS="nvm node rust go deno fasm nvchad rizin yara gdu f4"
+ARG PALABRA_DEPS="nvm node rust go deno fasm nvchad rizin yara gdu f4 typos shellcheck"
 ARG BUN_DEPS="palabra wisdom nupdate version-io redrun superc8 supertape madrun redlint putout renamify-cli runny redfork cline"
 
 RUN apt-get update && \
