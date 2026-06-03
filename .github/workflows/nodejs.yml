@@ -6,7 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAME: cloudcmd
-      API_KEY: ${{ secrets.API_KEY }}
+      TYPOS_AI_KEY: ${{ secrets.TYPOS_AI_KEY }}
+      TYPOS_AI_RUN: 1
     strategy:
       matrix:
         node-version:
@@ -23,7 +24,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Redrun
-        run: bun i redrun typos.ai -g --no-save
+        run: bun i redrun typos.ai palabra -g --no-save
       - name: Install
         run: bun i --no-save
       - name: Lint
@@ -38,9 +39,9 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: Typos Install
-        run: cargo install typos-cli || echo 'already installed'
+        run: palabra i typos
       - name: Typos
-        run: typos --write-changes --format json | typos.ai
+        run: typos.ai
       - name: Commit fixes
         uses: EndBug/add-and-commit@v10
         continue-on-error: true
