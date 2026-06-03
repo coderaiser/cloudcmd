@@ -17,6 +17,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     BUN_INSTALL=/usr/local/share/bun \
     NPM_CONFIG_CACHE=/tmp/.npm \
     NPM_CONFIG_PREFIX=/usr/local \
+    NPM_CONFIG_PACKAGE_LOCK=false \
     PALABRA_DIR=/usr/local/share \
     XDG_CONFIG_HOME=/usr/local/etc
 
