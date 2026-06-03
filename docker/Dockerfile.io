@@ -32,7 +32,7 @@ RUN apt-get update && \
     apt-get autoremove && \
     apt-get install -y ${UBUNTU_DEPS} ${RUST_DEPES} ${DEPS} && \
     echo "> Install git" && \
-    #add-apt-repository ppa:git-core/ppa -y && \
+    add-apt-repository ppa:git-core/ppa -y && \
     echo "> Update command-not-found database. Run 'sudo apt update' to populate it." && \
     apt-get update && \
     apt-get upgrade -y && \
