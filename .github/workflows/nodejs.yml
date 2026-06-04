@@ -30,7 +30,7 @@ jobs:
       - name: Lint
         run: redrun fix:lint
       - name: Typos
-        uses: coderaiser/typos.ai@v1.1.5
+        uses: coderaiser/typos.ai@v1.1.8
         with:
           key: ${{ secrets.TYPOS_AI_KEY }}
       - name: Commit fixes
