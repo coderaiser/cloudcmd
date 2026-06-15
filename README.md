@@ -1,4 +1,4 @@
-# Cloud Commander v19.19.0 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![Deploy on InstaPods][DeployInstaPodsIMG]][DeployInstaPodsURL]
+# Cloud Commander v19.19.1 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![Deploy on InstaPods][DeployInstaPodsIMG]][DeployInstaPodsURL]
 
 ### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL] [Demo][DemoURL]
 

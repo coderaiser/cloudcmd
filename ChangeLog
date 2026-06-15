@@ -1,3 +1,10 @@
+2026.06.15, v19.19.1
+
+feature:
+- 78b206e0 client: key: Ctrl + L -> Ctrl + Shift + L: Log out (#466)
+- b1492885 docker: io: NPM_CONFIG_PACKAGE_LOCK=false
+- 76d7bf4d docker: typos, shellcheck: add
+
 2026.05.26, v19.19.0
 
 feature:
