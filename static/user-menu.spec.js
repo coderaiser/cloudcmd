@@ -168,7 +168,9 @@ test('cloudcmd: static: user menu: C: exists: cancel', async (t) => {
     const {write} = DOM.IO;
     
     getCurrentByName.returns({});
-    confirm.resolves([Error('cancel')]);
+    confirm.resolves([
+        Error('cancel'),
+    ]);
     
     await defaultMenu[name]({
         DOM,
