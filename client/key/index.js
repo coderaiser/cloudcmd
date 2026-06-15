@@ -443,7 +443,7 @@ async function _switchKey(event) {
         break;
     
     case KEY.L:
-        if (ctrlMeta) {
+        if (ctrlMeta && shift) {
             CloudCmd.logOut();
             event.preventDefault();
         }
