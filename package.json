@@ -205,7 +205,7 @@
     "request": "^2.76.0",
     "rimraf": "^6.0.1",
     "scroll-into-view-if-needed": "^3.0.4",
-    "serve-once": "^3.0.1",
+    "serve-once": "^4.0.1",
     "smalltalk": "^5.0.0",
     "style-loader": "^4.0.0",
     "superc8": "^12.6.0",
