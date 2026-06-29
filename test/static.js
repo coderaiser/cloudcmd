@@ -1,5 +1,5 @@
 import {Buffer} from 'node:buffer';
-import serveOnce from 'serve-once';
+import {serveOnce} from 'serve-once';
 import test from 'supertape';
 import criton from 'criton';
 import {cloudcmd} from '#server/cloudcmd';

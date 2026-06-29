@@ -1,6 +1,6 @@
 import path, {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import serveOnce from 'serve-once';
+import {serveOnce} from 'serve-once';
 import {test, stub} from 'supertape';
 import cloudcmd, {
     _isDev,

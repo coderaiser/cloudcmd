@@ -4,7 +4,7 @@ import {Readable} from 'node:stream';
 import fs from 'node:fs';
 import {tryToCatch} from 'try-to-catch';
 import {test, stub} from 'supertape';
-import serveOnce from 'serve-once';
+import {serveOnce} from 'serve-once';
 import {cloudcmd} from '#server/cloudcmd';
 import {_getReadDir} from './route.js';
 

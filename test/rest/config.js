@@ -1,4 +1,4 @@
-import serveOnce from 'serve-once';
+import {serveOnce} from 'serve-once';
 import test from 'supertape';
 import {cloudcmd} from '#server/cloudcmd';
 

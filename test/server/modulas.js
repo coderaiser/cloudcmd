@@ -1,7 +1,7 @@
 import {createRequire} from 'node:module';
 import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import serveOnce from 'serve-once';
+import {serveOnce} from 'serve-once';
 import {test, stub} from 'supertape';
 import {cloudcmd} from '#server/cloudcmd';
 import modulas from '../../server/modulas.js';

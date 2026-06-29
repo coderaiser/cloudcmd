@@ -3,7 +3,7 @@ import {join} from 'node:path';
 import {promisify} from 'node:util';
 import {tryToCatch} from 'try-to-catch';
 import test from 'supertape';
-import serveOnce from 'serve-once';
+import {serveOnce} from 'serve-once';
 import {cloudcmd} from '#server/cloudcmd';
 import markdown from './index.js';
 

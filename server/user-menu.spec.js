@@ -2,7 +2,7 @@ import {dirname, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {readFileSync} from 'node:fs';
 import {test, stub} from 'supertape';
-import serveOnce from 'serve-once';
+import {serveOnce} from 'serve-once';
 import {putout} from 'putout';
 import {userMenu} from './user-menu.js';
 

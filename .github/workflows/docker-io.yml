@@ -1,4 +1,6 @@
 name: Docker IO
+permissions:
+  contents: write
 on:
   - push
 jobs:
