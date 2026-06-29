@@ -152,7 +152,7 @@
   },
   "devDependencies": {
     "@babel/code-frame": "^8.0.0",
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^8.0.1",
     "@babel/plugin-transform-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.0.0",
     "@cloudcmd/clipboard": "^2.0.0",
