@@ -151,7 +151,7 @@
     "yargs-parser": "^22.0.0"
   },
   "devDependencies": {
-    "@babel/code-frame": "^7.22.5",
+    "@babel/code-frame": "^8.0.0",
     "@babel/core": "^7.22.5",
     "@babel/plugin-transform-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.0.0",
