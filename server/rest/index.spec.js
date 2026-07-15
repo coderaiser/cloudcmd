@@ -10,8 +10,6 @@ import {
     _getPackReg,
     _getCMD,
     _rename,
-    _pack,
-    _extract,
     _getPacker,
 } from './index.js';
 
@@ -78,7 +76,6 @@ test('rest: onPUT: no callback', async (t) => {
     t.end();
 });
 
-
 test('rest: UserError: message', (t) => {
     const result = _UserError('hello');
     
@@ -96,14 +93,14 @@ test('rest: UserError: code', (t) => {
 test('rest: getPackReg: zip', (t) => {
     const result = _getPackReg('zip');
     
-    t.ok(result.test('file.zip'), 'should match .zip');
+    t.match('file.zip', result, 'should match .zip');
     t.end();
 });
 
 test('rest: getPackReg: tar', (t) => {
     const result = _getPackReg('tar');
     
-    t.ok(result.test('file.tar.gz'), 'should match .tar.gz');
+    t.match('file.tar.gz', result, 'should match .tar.gz');
     t.end();
 });
 
@@ -121,25 +118,29 @@ test('rest: getCMD: no slash', (t) => {
     t.end();
 });
 
-test('rest: rename: no from', async (t) => {
+test('rest: rename: no from', (t) => {
     const callback = stub();
     
     _rename('/', null, 'to', null, callback);
     
     const msg = '"from" should be filled';
     
-    t.calledWith(callback, [_UserError(msg)], 'should return UserError');
+    t.calledWith(callback, [
+        _UserError(msg),
+    ], 'should return UserError');
     t.end();
 });
 
-test('rest: rename: no to', async (t) => {
+test('rest: rename: no to', (t) => {
     const callback = stub();
     
     _rename('/', 'from', null, null, callback);
     
     const msg = '"to" should be filled';
     
-    t.calledWith(callback, [_UserError(msg)], 'should return UserError');
+    t.calledWith(callback, [
+        _UserError(msg),
+    ], 'should return UserError');
     t.end();
 });
 

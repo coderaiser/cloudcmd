@@ -754,4 +754,3 @@ test('cloudcmd: client: key: N: findPrevious: real', (t) => {
     t.calledWith(setCurrentByName, ['apple'], 'should set current by previous found name');
     t.end();
 });
-

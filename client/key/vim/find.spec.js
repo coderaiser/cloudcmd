@@ -1,6 +1,12 @@
 import test from 'supertape';
 import {getDOM} from './globals.fixture.js';
-import {_next, _previous, find, findNext, findPrevious} from './find.js';
+import {
+    _next,
+    _previous,
+    find,
+    findNext,
+    findPrevious,
+} from './find.js';
 
 globalThis.DOM = getDOM();
 

@@ -12,6 +12,8 @@ import cloudcmd, {
 } from '#server/cloudcmd';
 import {connect} from '../test/before.js';
 
+const noop = () => {};
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -159,17 +161,20 @@ test('cloudcmd: auth: accept: no auth', (t) => {
 
 test('cloudcmd: getIndexPath: production', (t) => {
     const isDev = false;
-    const name = path.join(__dirname, '..', 'dist', 'index.html');
     
-    t.equal(_getIndexPath(isDev), name);
+    const result = _getIndexPath(isDev);
+    const expected = path.join(__dirname, '..', 'dist', 'index.html');
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('cloudcmd: getIndexPath: development', (t) => {
     const isDev = true;
-    const name = path.join(__dirname, '..', 'dist-dev', 'index.html');
+    const result = _getIndexPath(isDev);
+    const expected = path.join(__dirname, '..', 'dist-dev', 'index.html');
     
-    t.equal(_getIndexPath(isDev), name);
+    t.equal(result, expected);
     t.end();
 });
 
@@ -216,7 +221,6 @@ test('cloudcmd: middle: dropbox', async (t) => {
     t.end();
 });
 
-
 test('cloudcmd: logout', async (t) => {
     const {status} = await request.get('/logout');
     
@@ -227,7 +231,7 @@ test('cloudcmd: logout', async (t) => {
 test('cloudcmd: modules', (t) => {
     const middle = cloudcmd({
         modules: {
-            hello: () => {},
+            hello: noop,
         },
     });
     
@@ -241,5 +245,3 @@ test('cloudcmd: setUrl: cloudcmd.js', async (t) => {
     t.equal(status, 200, 'should serve cloudcmd.js');
     t.end();
 });
-
-

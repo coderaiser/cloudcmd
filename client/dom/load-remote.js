@@ -33,13 +33,19 @@ export const loadRemote = callbackify(async (name, options) => {
         local = [module.local];
     }
     
-    const localURL = local.map((url) => prefix + url);
+    const localURL = [];
     
-    const remoteURL = remoteTmpls.map((tmpl) => {
-        return rendy(tmpl, {
+    for (const url of local) {
+        localURL.push(prefix + url);
+    }
+    
+    const remoteURL = [];
+    
+    for (const tmpl of remoteTmpls) {
+        remoteURL.push(rendy(tmpl, {
             version,
-        });
-    });
+        }));
+    }
     
     if (online) {
         const [e] = await tryToCatch(load.parallel, remoteURL);

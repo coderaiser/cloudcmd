@@ -442,11 +442,7 @@ export function getFilenames(files) {
     if (name === '..')
         allFiles.shift();
     
-    const names = allFiles.map((current) => {
-        return DOM.getCurrentName(current);
-    });
-    
-    return names;
+    return allFiles.map(DOM.getCurrentName);
 }
 
 /**

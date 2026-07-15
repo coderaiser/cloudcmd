@@ -19,14 +19,13 @@ test('current-file: setCurrentName: setAttribute', (t) => {
     
     currentFile.setCurrentName('hello', current);
     
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
+    
     t.calledWith(setAttribute, [
         'data-name',
         'js-file-aGVsbG8=',
     ], 'should call setAttribute');
-    
-    globalThis.DOM = DOM;
-    globalThis.CloudCmd = CloudCmd;
-    
     t.end();
 });
 
@@ -41,14 +40,13 @@ test('current-file: setCurrentName: setAttribute: cyrillic', (t) => {
     
     currentFile.setCurrentName('ай', current);
     
+    globalThis.DOM = DOM;
+    globalThis.CloudCmd = CloudCmd;
+    
     t.calledWith(setAttribute, [
         'data-name',
         'js-file-JUQwJUIwJUQwJUI5',
     ], 'should call setAttribute');
-    
-    globalThis.DOM = DOM;
-    globalThis.CloudCmd = CloudCmd;
-    
     t.end();
 });
 
@@ -76,11 +74,10 @@ test('current-file: emit', (t) => {
     
     currentFile.setCurrentName('hello', current);
     
-    t.calledWith(emit, ['current-file', current], 'should call emit');
-    
     globalThis.DOM = DOM;
     globalThis.CloudCmd = CloudCmd;
     
+    t.calledWith(emit, ['current-file', current], 'should call emit');
     t.end();
 });
 
@@ -96,14 +93,12 @@ test('current-file: setCurrentName: return', (t) => {
     globalThis.CloudCmd = getCloudCmd();
     
     const current = create();
-    
     const result = currentFile.setCurrentName('hello', current);
-    
-    t.equal(result, link, 'should return link');
     
     globalThis.DOM = DOM;
     globalThis.CloudCmd = CloudCmd;
     
+    t.equal(result, link, 'should return link');
     t.end();
 });
 

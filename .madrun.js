@@ -21,7 +21,7 @@ export default {
         'start:dev',
     ]),
     'lint:all': () => run('lint:progress'),
-    'lint': () => 'redlint fix; putout . --rulesdir rules',
+    'lint': () => 'redlint fix; putout .',
     'lint:progress': () => run('lint', '-f progress'),
     'watch:lint': () => 'nodemon -w client -w server -w test -w common -w .webpack -x "putout -s"',
     'fresh:lint': () => run('lint', '--fresh'),

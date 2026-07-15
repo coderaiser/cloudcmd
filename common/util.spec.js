@@ -106,11 +106,18 @@ test('util: getRegExp: no', (t) => {
 });
 
 test('util: escapeRegExp: no str', (t) => {
-    t.equal(escapeRegExp(1), 1);
+    const result = escapeRegExp(1);
+    const expected = 1;
+    
+    t.equal(result, expected);
     t.end();
 });
 
 test('util: escapeRegExp', (t) => {
-    t.equal(escapeRegExp('#hello'), '\\#hello');
+    const result = escapeRegExp('#hello');
+    const expected = '\\#hello';
+    
+    t.equal(result, expected);
     t.end();
 });
+

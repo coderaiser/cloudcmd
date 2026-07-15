@@ -31,8 +31,10 @@ test('cloudcmd: client: view: initConfig', (t) => {
 
 test('cloudcmd: client: view: initConfig: no options', (t) => {
     const config = _initConfig();
+    const result = typeof config;
+    const expected = 'object';
     
-    t.equal(typeof config, 'object');
+    t.equal(result, expected);
     t.end();
 });
 

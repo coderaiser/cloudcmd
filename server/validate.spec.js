@@ -132,7 +132,6 @@ test('validate: theme: wrong', (t) => {
     t.end();
 });
 
-
 test('validate: menu: not valid', (t) => {
     const exit = stub();
     const msg = 'cloudcmd --menu: could be "supermenu" or "aleman" only';

@@ -4,44 +4,47 @@ import exit from './exit.js';
 
 test('cloudcmd: exit: process.exit', (t) => {
     const {exit: exitOriginal} = process;
+    const exitStub = stub();
     
-    process.exit = stub();
+    process.exit = exitStub;
     
     exit();
-    t.calledWith(process.exit, [1], 'should call process.exit');
     process.exit = exitOriginal;
     
+    t.calledWith(exitStub, [1], 'should call process.exit');
     t.end();
 });
 
 test('cloudcmd: exit: console.error', (t) => {
     const {exit: exitOriginal} = process;
     const {error} = console;
+    const errorStub = stub();
     
-    console.error = stub();
+    console.error = errorStub;
     process.exit = stub();
     
     exit('hello world');
-    t.calledWith(console.error, ['hello world'], 'should call console.error');
     
     process.exit = exitOriginal;
     console.error = error;
     
+    t.calledWith(errorStub, ['hello world'], 'should call console.error');
     t.end();
 });
 
 test('cloudcmd: exit.error: console.error: error', (t) => {
     const {exit: exitOriginal} = process;
     const {error} = console;
+    const errorStub = stub();
     
-    console.error = stub();
+    console.error = errorStub;
     process.exit = stub();
     
     exit(Error('hello world'));
-    t.calledWith(console.error, ['hello world'], 'should call console.error');
-    
     process.exit = exitOriginal;
     console.error = error;
     
+    t.calledWith(errorStub, ['hello world'], 'should call console.error');
     t.end();
 });
+
