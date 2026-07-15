@@ -32,6 +32,8 @@ const UserError = (msg) => {
     return error;
 };
 
+export const _UserError = UserError;
+
 export default currify(({config, fs = _fs, moveFiles = _moveFiles}, request, response, next) => {
     const name = ponse.getPathName(request);
     const regExp = RegExp(`^${apiURL}`);
@@ -153,6 +155,8 @@ function getPackReg(packer) {
     return /\.tar\.gz$/;
 }
 
+export const _getPackReg = getPackReg;
+
 function streamPack(cmd, response, packer) {
     const noop = () => {};
     const filename = cmd.replace(getPackReg(packer), '');
@@ -171,6 +175,8 @@ function getCMD(cmd) {
     
     return cmd;
 }
+
+export const _getCMD = getCMD;
 
 const getMoveMsg = (names) => formatMsg('move', names);
 
@@ -276,6 +282,8 @@ function rename(rootDir, from, to, fs, callback) {
     return fs.rename(fromRooted, toRooted, fn);
 }
 
+export const _rename = rename;
+
 function pack(from, to, names, config, fn) {
     const rootDir = config('root');
     const packer = config('packer');
@@ -294,6 +302,8 @@ function pack(from, to, names, config, fn) {
     operation('pack', packer, from, to, names, fn);
 }
 
+export const _pack = pack;
+
 function extract(from, to, config, fn) {
     const rootDir = config('root');
     
@@ -307,6 +317,8 @@ function extract(from, to, config, fn) {
     operation('extract', config('packer'), from, to, fn);
 }
 
+export const _extract = extract;
+
 function getPacker(operation, packer) {
     if (operation === 'extract')
         return inly;
@@ -316,6 +328,8 @@ function getPacker(operation, packer) {
     
     return jaguar.pack;
 }
+
+export const _getPacker = getPacker;
 
 function operation(op, packer, from, to, names, fn) {
     if (!fn) {
@@ -344,6 +358,8 @@ function operation(op, packer, from, to, names, fn) {
         fn(null, msg);
     });
 }
+
+export const _operation = operation;
 
 function copy(from, to, names, fn) {
     copymitter(from, to, names)
