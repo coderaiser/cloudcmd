@@ -120,4 +120,3 @@ test('util: escapeRegExp', (t) => {
     t.equal(result, expected);
     t.end();
 });
-

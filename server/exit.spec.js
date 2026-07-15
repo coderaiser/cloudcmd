@@ -47,4 +47,3 @@ test('cloudcmd: exit.error: console.error: error', (t) => {
     t.calledWith(errorStub, ['hello world'], 'should call console.error');
     t.end();
 });
-
