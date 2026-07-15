@@ -28,7 +28,7 @@ export default {
     'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': async () => `putout --rulesdir rules --fix . && redlint fix`,
     'lint:stream': () => run('lint', '-f stream'),
-    'test': () => [testEnv, `tape '{test,test-e2e}/**/*.js' '{bin,client,static,common,server}/**/*.spec.js' -f fail`],
+    'test': () => [testEnv, `tape '{test}/**/*.js' '{bin,client,static,common,server}/**/*.spec.js' -f fail`],
     'test:e2e': () => `tape 'test-e2e/**/*.js'`,
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
