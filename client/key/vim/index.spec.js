@@ -1,6 +1,7 @@
 import {test, stub} from 'supertape';
 import {getDOM, getCloudCmd} from './globals.fixture.js';
 import vim, {selectFile as vimSelectFile} from './index.js';
+import * as finder from './find.js';
 
 globalThis.DOM = getDOM();
 globalThis.CloudCmd = getCloudCmd();
@@ -675,3 +676,82 @@ test('cloudcmd: client: vim: rename', async (t) => {
     t.calledWithNoArgs(renameCurrent);
     t.end();
 });
+
+test('cloudcmd: client: key: cc: operationCopy', (t) => {
+    const show = stub();
+    const preventDefault = stub();
+    
+    const Operation = {
+        show,
+    };
+    
+    const event = {
+        preventDefault,
+    };
+    
+    vim('c', event, {
+        Operation,
+    });
+    
+    vim('c', event, {
+        Operation,
+    });
+    
+    t.calledWith(show, ['copy'], 'should show copy operation');
+    t.end();
+});
+
+test('cloudcmd: client: key: mm: operationMove', (t) => {
+    const show = stub();
+    const preventDefault = stub();
+    
+    const Operation = {
+        show,
+    };
+    
+    const event = {
+        preventDefault,
+    };
+    
+    vim('m', event, {
+        Operation,
+    });
+    
+    vim('m', event, {
+        Operation,
+    });
+    
+    t.calledWith(show, ['move'], 'should show move operation');
+    t.end();
+});
+
+test('cloudcmd: client: key: n: findNext: real', (t) => {
+    const setCurrentByName = stub();
+    
+    finder.find('a', ['alpha', 'beta', 'apple']);
+    
+    const event = {};
+    
+    vim('n', event, {
+        setCurrentByName,
+    });
+    
+    t.calledWith(setCurrentByName, ['beta'], 'should set current by next found name');
+    t.end();
+});
+
+test('cloudcmd: client: key: N: findPrevious: real', (t) => {
+    const setCurrentByName = stub();
+    
+    finder.find('a', ['alpha', 'beta', 'apple']);
+    
+    const event = {};
+    
+    vim('N', event, {
+        setCurrentByName,
+    });
+    
+    t.calledWith(setCurrentByName, ['apple'], 'should set current by previous found name');
+    t.end();
+});
+

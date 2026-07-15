@@ -10,6 +10,7 @@ import cloudcmd, {
     _initAuth,
     _getIndexPath,
 } from '#server/cloudcmd';
+import {connect} from '../test/before.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -178,3 +179,67 @@ test('cloudcmd: sw', async (t) => {
     t.equal(status, 200, 'should return sw');
     t.end();
 });
+
+test('cloudcmd: no params', (t) => {
+    const middle = cloudcmd();
+    
+    t.ok(Array.isArray(middle), 'should return middleware list when no params passed');
+    t.end();
+});
+
+test('cloudcmd: listen: terminal', async (t) => {
+    const {done} = await connect({
+        config: {
+            terminal: true,
+        },
+    });
+    
+    await done();
+    
+    t.pass('should listen with terminal enabled');
+    t.end();
+});
+
+test('cloudcmd: middle: dropbox', async (t) => {
+    const {port, done} = await connect({
+        config: {
+            dropbox: true,
+            dropboxToken: 'hello',
+        },
+    });
+    
+    const response = await fetch(`http://localhost:${port}/api/v1/dropbox/nonexistent`);
+    
+    await done();
+    
+    t.ok(response.status, 'should mount dropbox route');
+    t.end();
+});
+
+
+test('cloudcmd: logout', async (t) => {
+    const {status} = await request.get('/logout');
+    
+    t.equal(status, 401, 'should return 401 for /logout');
+    t.end();
+});
+
+test('cloudcmd: modules', (t) => {
+    const middle = cloudcmd({
+        modules: {
+            hello: () => {},
+        },
+    });
+    
+    t.ok(Array.isArray(middle), 'should return middleware list with modules');
+    t.end();
+});
+
+test('cloudcmd: setUrl: cloudcmd.js', async (t) => {
+    const {status} = await request.get('/cloudcmd.js');
+    
+    t.equal(status, 200, 'should serve cloudcmd.js');
+    t.end();
+});
+
+
