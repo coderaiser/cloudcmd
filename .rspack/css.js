@@ -1,19 +1,18 @@
 import {env} from 'node:process';
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import {rspack} from '@rspack/core';
 
+const {CssExtractRspackPlugin} = rspack;
 const isDev = env.NODE_ENV === 'development';
-const clean = (a) => a.filter(Boolean);
 
-const plugins = clean([
-    new MiniCssExtractPlugin({
+const plugins = [
+    new CssExtractRspackPlugin({
         filename: '[name].css',
     }),
-]);
+];
 
 const rules = [{
     test: /\.css$/i,
-    use: [MiniCssExtractPlugin.loader, {
+    use: [CssExtractRspackPlugin.loader, {
         loader: 'css-loader',
         options: {
             url: true,
@@ -33,13 +32,7 @@ export default {
     optimization: {
         minimize: !isDev,
         minimizer: [
-            new CssMinimizerPlugin({
-                minimizerOptions: {
-                    preset: ['default', {
-                        svgo: false,
-                    }],
-                },
-            }),
+            new rspack.LightningCssMinimizerRspackPlugin(),
         ],
     },
 };

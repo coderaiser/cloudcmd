@@ -162,6 +162,8 @@
     "@cloudcmd/stub": "^5.0.0",
     "@iocmd/wait": "^2.1.0",
     "@putout/eslint-flat": "^4.0.0",
+    "@rspack/cli": "^2.1.4",
+    "@rspack/core": "^2.1.4",
     "@supertape/loader-css": "^1.0.0",
     "@types/node-fetch": "^2.6.11",
     "auto-globals": "^4.0.0",
@@ -171,7 +173,6 @@
     "clean-css-loader": "^4.2.1",
     "codegen.macro": "^4.0.0",
     "css-loader": "^7.1.2",
-    "css-minimizer-webpack-plugin": "^8.0.0",
     "css-modules-require-hook": "^4.2.3",
     "cssnano-preset-default": "^8.0.1",
     "domtokenlist-shim": "^1.2.0",
@@ -190,7 +191,6 @@
     "load.js": "^3.0.0",
     "madrun": "^13.0.0",
     "memfs": "^4.2.0",
-    "mini-css-extract-plugin": "^2.9.2",
     "minor": "^1.2.2",
     "morgan": "^1.6.1",
     "multi-rename": "^3.0.0",
@@ -215,10 +215,7 @@
     "unionfs": "^4.0.0",
     "url-loader": "^4.0.0",
     "util": "^0.12.5",
-    "webpack": "^5.99.9",
-    "webpack-cli": "^7.0.2",
-    "webpack-merge": "^6.0.1",
-    "webpackbar": "^7.0.0"
+    "webpack-merge": "^6.0.1"
   },
   "imports": {
     "#css/": "./css/",

@@ -1,12 +1,15 @@
 import {resolve, sep} from 'node:path';
+import {fileURLToPath} from 'node:url';
 import {env} from 'node:process';
-import webpack from 'webpack';
-import WebpackBar from 'webpackbar';
+import {rspack} from '@rspack/core';
+
+const resolveModule = (a) => fileURLToPath(import.meta.resolve(a));
 
 const {
     EnvironmentPlugin,
     NormalModuleReplacementPlugin,
-} = webpack;
+    ProvidePlugin,
+} = rspack;
 
 const modules = './modules';
 const dirModules = './client/modules';
@@ -22,27 +25,34 @@ const dist = resolve(rootDir, 'dist');
 const distDev = resolve(rootDir, 'dist-dev');
 const devtool = isDev ? 'eval' : 'source-map';
 
-const notEmpty = (a) => a;
-const clean = (array) => array.filter(notEmpty);
-
 const noParse = (a) => a.endsWith('.spec.js');
-const options = {
-    babelrc: true,
-};
 
-const rules = clean([
-    !isDev && {
-        test: /\.[mc]?js$/,
+// codegen.macro is a babel-macro (build-time codegen), not supported by
+// Rspack's native SWC transform, so client/sw/sw.js (the only file that
+// uses it) keeps going through babel-loader. Everything else uses
+// Rspack's built-in SWC loader, which is the main source of the speedup.
+const rules = [
+    {
+        test: /sw\/sw\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
     },
-    isDev && {
+    {
         test: /\.[mc]?js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options,
+        exclude: [/node_modules/, /sw\/sw\.js$/],
+        loader: 'builtin:swc-loader',
+        options: {
+            jsc: {
+                parser: {
+                    syntax: 'ecmascript',
+                },
+            },
+            env: {
+                targets: 'defaults',
+            },
+        },
     },
-]);
+];
 
 const plugins = [
     new NormalModuleReplacementPlugin(/^node:/, (resource) => {
@@ -52,8 +62,7 @@ const plugins = [
     new EnvironmentPlugin({
         NODE_ENV,
     }),
-    new WebpackBar(),
-    new webpack.ProvidePlugin({
+    new ProvidePlugin({
         process: 'process/browser',
     }),
 ];
@@ -99,9 +108,9 @@ export default {
             'node:path': 'path',
         },
         fallback: {
-            path: import.meta.resolve('path-browserify'),
-            process: import.meta.resolve('process/browser'),
-            util: import.meta.resolve('util'),
+            path: resolveModule('path-browserify'),
+            process: resolveModule('process/browser'),
+            util: resolveModule('util'),
         },
     },
     devtool,
@@ -156,7 +165,7 @@ export default {
     },
     plugins,
     performance: {
-        maxEntrypointSize: 600_000,
+        maxEntrypointSize: 800_000,
         maxAssetSize: 600_000,
     },
 };

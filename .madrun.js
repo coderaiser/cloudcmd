@@ -39,7 +39,7 @@ export default {
     'coverage': async () => [testEnv, `c8 ${await cutEnv('test')}`],
     'coverage:report': () => 'c8 report --reporter=lcov',
     'report': () => 'c8 report --reporter=lcov',
-    '6to5': () => [buildEnv, 'webpack --progress'],
+    '6to5': () => [buildEnv, 'rspack build --config rspack.config.js'],
     '6to5:client': () => run('6to5', '--mode production'),
     '6to5:client:dev': async () => await run('6to5', '--mode development', {
         NODE_ENV: 'development',
