@@ -1,5 +1,10 @@
 import {test, stub} from 'supertape';
-import {convert, getName, getValue, setValue} from './input.js';
+import {
+    convert,
+    getName,
+    getValue,
+    setValue,
+} from './input.js';
 
 test('cloudcmd: client: config: input: convert', (t) => {
     const result = convert({
@@ -42,7 +47,9 @@ test('cloudcmd: client: config: input: convert: bool false', (t) => {
 
 test('cloudcmd: client: config: input: getName', (t) => {
     const getAttribute = stub().returns('js-hello');
-    const element = {getAttribute};
+    const element = {
+        getAttribute,
+    };
     
     const result = getName(element);
     
@@ -55,7 +62,10 @@ test('cloudcmd: client: config: input: getValue: checkbox', (t) => {
         type: 'checkbox',
         checked: true,
     });
-    const element = {querySelector};
+    
+    const element = {
+        querySelector,
+    };
     
     const result = getValue('auth', element);
     
@@ -68,7 +78,10 @@ test('cloudcmd: client: config: input: getValue: number', (t) => {
         type: 'number',
         value: '42',
     });
-    const element = {querySelector};
+    
+    const element = {
+        querySelector,
+    };
     
     const result = getValue('port', element);
     
@@ -81,7 +94,10 @@ test('cloudcmd: client: config: input: getValue: default', (t) => {
         type: 'text',
         value: 'hello',
     });
-    const element = {querySelector};
+    
+    const element = {
+        querySelector,
+    };
     
     const result = getValue('name', element);
     
@@ -94,8 +110,11 @@ test('cloudcmd: client: config: input: setValue: checkbox', (t) => {
         type: 'checkbox',
         checked: false,
     };
+    
     const querySelector = stub().returns(el);
-    const element = {querySelector};
+    const element = {
+        querySelector,
+    };
     
     setValue('auth', true, element);
     
@@ -108,8 +127,11 @@ test('cloudcmd: client: config: input: setValue: default', (t) => {
         type: 'text',
         value: 'old',
     };
+    
     const querySelector = stub().returns(el);
-    const element = {querySelector};
+    const element = {
+        querySelector,
+    };
     
     setValue('name', 'new', element);
     

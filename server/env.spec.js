@@ -67,4 +67,3 @@ test('cloudcmd: server: env: bool: zero uppercase', (t) => {
     t.notOk(result);
     t.end();
 });
-
