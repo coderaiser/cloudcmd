@@ -54,3 +54,17 @@ test('cloudcmd: server: env: bool: number: 0', (t) => {
     t.notOk(result);
     t.end();
 });
+
+test('cloudcmd: server: env: bool: zero uppercase', (t) => {
+    const {CLOUDCMD_TERMINAL} = process.env;
+    
+    process.env.CLOUDCMD_TERMINAL = '0';
+    
+    const result = env.bool('terminal');
+    
+    process.env.CLOUDCMD_TERMINAL = CLOUDCMD_TERMINAL;
+    
+    t.notOk(result);
+    t.end();
+});
+

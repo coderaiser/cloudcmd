@@ -30,3 +30,22 @@ test('themes: no args', (t) => {
     t.match(themes.light, css);
     t.end();
 });
+
+test('themes: production', (t) => {
+    const themes = getThemes({
+        isDev: false,
+    });
+    
+    t.ok(themes.dark, 'should have dark theme');
+    t.end();
+});
+
+test('themes: production: light', (t) => {
+    const themes = getThemes({
+        isDev: false,
+    });
+    
+    t.ok(themes.light, 'should have light theme');
+    t.end();
+});
+

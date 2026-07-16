@@ -65,7 +65,7 @@ test('sw: register: registerSW: http', async (t, {location, navigator}) => {
 
 test('sw: register: registerSW: https self-signed', async (t, {location, navigator}) => {
     Object.assign(location, {
-        protocol: 'https',
+        protocol: 'https:',
         hostname: 'self-signed.badssl.com',
     });
     
