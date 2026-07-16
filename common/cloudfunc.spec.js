@@ -250,9 +250,11 @@ test('cloudfunc: getTitle: no options', (t) => {
 });
 
 test('cloudfunc: getTitle: with name', (t) => {
-    const result = getTitle({name: 'MyName'});
+    const result = getTitle({
+        name: 'MyName',
+    });
     
-    t.ok(result.includes('MyName'), 'should return title with name');
+    t.match(result, 'MyName', 'should return title with name');
     t.end();
 });
 
