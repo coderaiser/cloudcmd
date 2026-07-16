@@ -31,28 +31,25 @@ const noParse = (a) => a.endsWith('.spec.js');
 // Rspack's native SWC transform, so client/sw/sw.js (the only file that
 // uses it) keeps going through babel-loader. Everything else uses
 // Rspack's built-in SWC loader, which is the main source of the speedup.
-const rules = [
-    {
-        test: /sw\/sw\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-    },
-    {
-        test: /\.[mc]?js$/,
-        exclude: [/node_modules/, /sw\/sw\.js$/],
-        loader: 'builtin:swc-loader',
-        options: {
-            jsc: {
-                parser: {
-                    syntax: 'ecmascript',
-                },
-            },
-            env: {
-                targets: 'defaults',
+const rules = [{
+    test: /sw\/sw\.js$/,
+    exclude: /node_modules/,
+    loader: 'babel-loader',
+}, {
+    test: /\.[mc]?js$/,
+    exclude: [/node_modules/, /sw\/sw\.js$/],
+    loader: 'builtin:swc-loader',
+    options: {
+        jsc: {
+            parser: {
+                syntax: 'ecmascript',
             },
         },
+        env: {
+            targets: 'defaults',
+        },
     },
-];
+}];
 
 const plugins = [
     new NormalModuleReplacementPlugin(/^node:/, (resource) => {
