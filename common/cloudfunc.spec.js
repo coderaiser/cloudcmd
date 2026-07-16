@@ -2,12 +2,17 @@ import {readFileSync} from 'node:fs';
 import test from 'supertape';
 import {montag} from 'montag';
 import * as cheerio from 'cheerio';
+import {tryCatch} from 'try-catch';
 import {
     _getSize,
     getPathLink,
     buildFromJSON,
     _getDataName,
     dateFormatter,
+    formatMsg,
+    getTitle,
+    getDotDot,
+    getHeaderField,
 } from '#common/cloudfunc';
 
 const templatePath = new URL('../tmpl/fs', import.meta.url).pathname;
@@ -218,6 +223,95 @@ test('cloudfunc: _getDataName', (t) => {
     const expected = 'data-name="js-file-cw==" ';
     
     t.equal(result, expected);
+    t.end();
+});
+
+test('cloudfunc: formatMsg: name', (t) => {
+    const result = formatMsg('hello', 'world');
+    const expected = 'hello: ok("world")';
+    
+    t.equal(result, expected, 'should format message with name');
+    t.end();
+});
+
+test('cloudfunc: formatMsg: no name', (t) => {
+    const result = formatMsg('hello');
+    const expected = 'hello: ok';
+    
+    t.equal(result, expected, 'should format message without name');
+    t.end();
+});
+
+test('cloudfunc: getTitle: no options', (t) => {
+    const result = getTitle();
+    
+    t.ok(result, 'should return a title string even without options');
+    t.end();
+});
+
+test('cloudfunc: getTitle: with name', (t) => {
+    const result = getTitle({name: 'MyName'});
+    
+    t.ok(result.includes('MyName'), 'should return title with name');
+    t.end();
+});
+
+test('cloudfunc: getHeaderField: sort not name', (t) => {
+    const result = getHeaderField('size', 'asc', 'name');
+    
+    t.equal(result, 'name', 'should return plain name when sort does not match');
+    t.end();
+});
+
+test('cloudfunc: getHeaderField: sort name asc', (t) => {
+    const result = getHeaderField('name', 'asc', 'name');
+    
+    t.equal(result, 'name', 'should return plain name when name asc');
+    t.end();
+});
+
+test('cloudfunc: getDotDot: root', (t) => {
+    const result = getDotDot('/');
+    
+    t.equal(result, '/', 'should return / for root path');
+    t.end();
+});
+
+test('cloudfunc: getPathLink: /a/b/c', (t) => {
+    const {pathLink} = template;
+    const result = getPathLink('/a/b/c/', '', pathLink);
+    
+    t.ok(result, 'should build path link for 3-segment path');
+    t.end();
+});
+
+test('cloudfunc: getPathLink: no url', (t) => {
+    const [error] = tryCatch(getPathLink);
+    
+    t.equal(error.message, 'url could not be empty!', 'should throw when url is empty');
+    t.end();
+});
+
+test('cloudfunc: getPathLink: no template', (t) => {
+    const [error] = tryCatch(getPathLink, '/');
+    
+    t.equal(error.message, 'template could not be empty!', 'should throw when template is empty');
+    t.end();
+});
+
+test('cloudfunc: getHeaderField: sort name desc', (t) => {
+    const result = getHeaderField('name', 'desc', 'name');
+    const expected = 'name↓';
+    
+    t.equal(result, expected, 'should return name with down arrow');
+    t.end();
+});
+
+test('cloudfunc: getDotDot: normal path', (t) => {
+    const result = getDotDot('/hello/world/');
+    const expected = '/hello';
+    
+    t.equal(result, expected, 'should return parent directory');
     t.end();
 });
 
