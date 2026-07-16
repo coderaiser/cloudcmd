@@ -5,6 +5,8 @@ import {
     getRegExp,
     escapeRegExp,
     getExt,
+    time,
+    timeEnd,
 } from '#common/util';
 
 test('getExt: no extension', (t) => {
@@ -118,5 +120,19 @@ test('util: escapeRegExp', (t) => {
     const expected = '\\#hello';
     
     t.equal(result, expected);
+    t.end();
+});
+
+test('util: time', (t) => {
+    const [error] = tryCatch(time, 'test');
+    
+    t.notOk(error, 'should not throw');
+    t.end();
+});
+
+test('util: timeEnd', (t) => {
+    const [error] = tryCatch(timeEnd, 'test');
+    
+    t.notOk(error, 'should not throw');
     t.end();
 });
