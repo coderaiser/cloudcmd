@@ -14,10 +14,10 @@ export const createCloudMenu = async (fm, options, menuData) => {
 
 async function loadMenu() {
     if (CloudCmd.config('menu') === 'aleman') {
-        const {prefix} = CloudCmd;
-        const {host, protocol} = globalThis.location;
-        const url = `${protocol}//${host}${prefix}/node_modules/aleman/menu/menu.js`;
-        const {createMenu} = await import(/* webpackIgnore: true */url);
+        const {createMenu} = await import(
+            /* webpackChunkName: 'aleman' */
+            'aleman/menu',
+        );
         
         return createMenu;
     }
@@ -27,5 +27,6 @@ async function loadMenu() {
 
 function createSupermenu(name, options, menuData) {
     const element = document.querySelector('[data-name="js-fm"]');
+    
     return supermenu(element, options, menuData);
 }

@@ -56,6 +56,19 @@ const plugins = [
         resource.request = resource.request.replace(/^node:/, '');
     }),
     new NormalModuleReplacementPlugin(/^putout$/, '@putout/bundle'),
+    
+    new NormalModuleReplacementPlugin(
+        /^\.\/importmap\.js$/,
+        (resource) => {
+            if (!resource.context.endsWith('/node_modules/aleman/menu'))
+                return;
+            
+            resource.request = resolve(
+                rootDir,
+                'client/modules/menu/aleman-importmap.js',
+            );
+        },
+    ),
     new EnvironmentPlugin({
         NODE_ENV,
     }),
@@ -67,6 +80,13 @@ const plugins = [
 const splitChunks = {
     chunks: 'all',
     cacheGroups: {
+        alemanVendor: {
+            name: 'aleman-vendor',
+            test: /[\\/]node_modules[\\/](aleman|@putout[\\/](bundle|processor-html)|fullstore|jessy)[\\/]/,
+            chunks: 'async',
+            enforce: true,
+            priority: 20,
+        },
         abcCommon: {
             name: 'cloudcmd.common',
             chunks: (chunk) => {
@@ -80,6 +100,7 @@ const splitChunks = {
                     'user-menu',
                     'help',
                     'themes/dark',
+                    'aleman',
                     'themes/light',
                     'columns/name-size',
                     'columns/name-size-date',

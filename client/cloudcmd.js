@@ -32,12 +32,6 @@ async function init(config) {
     const prefix = getPrefix(config.prefix);
     
     globalThis.CloudCmd.init(prefix, config);
-    
-    if (globalThis.CloudCmd.config('menu') === 'aleman')
-        setTimeout(() => {
-            import('https://esm.sh/@putout/processor-html');
-            import('https://esm.sh/@putout/bundle@5.5');
-        }, 100);
 }
 
 function getPrefix(prefix) {
