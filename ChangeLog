@@ -1,3 +1,16 @@
+2026.08.06, v19.20.0
+
+feature:
+- bd3e8fa2 cloudcmd: markdown-it v15.0.0
+- a489bb18 cloudcmd: chalk v6.0.0
+- 0638ca32 migrate from webpack to rspack
+- 8629f679 cloudcmd: docker: io: arm
+- 579c9e41 cloudcmd: serve-once v4.0.1
+- 60148986 cloudcmd: @babel/preset-env v8.0.2
+- ad3bf95e cloudcmd: @babel/plugin-transform-optional-chaining v8.0.1
+- 4e22a4ed cloudcmd: @babel/core v8.0.1
+- 9c50fe53 cloudcmd: @babel/code-frame v8.0.0
+
 2026.06.15, v19.19.1
 
 feature:
