@@ -48,4 +48,3 @@ test('themes: production: light', (t) => {
     t.ok(themes.light, 'should have light theme');
     t.end();
 });
-

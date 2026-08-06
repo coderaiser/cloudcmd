@@ -52,8 +52,10 @@ test('cloudcmd: client: view: html', (t) => {
     
     const [first] = open.args;
     const [arg] = first;
+    const result = first;
+    const expected = [arg, _Config];
     
-    t.deepEqual(first, [arg, _Config]);
+    t.deepEqual(result, expected);
     t.end();
 });
 

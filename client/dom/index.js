@@ -375,7 +375,7 @@ export function getAllFiles() {
     const files = DOM.getFiles(panel);
     const name = DOM.getCurrentName(files[0]);
     
-    const from = (a) => a === '..' ? 1 : 0;
+    const from = (a) => Number(a === '..');
     const i = from(name);
     
     return Array

@@ -33,7 +33,6 @@ test('distribute: log: config', (t) => {
     checkAssertionsCount: false,
 });
 
-
 test('distribute: log: stringToRGB', (t) => {
     const result = log.stringToRGB('abc');
     
@@ -44,10 +43,9 @@ test('distribute: log: stringToRGB', (t) => {
 test('distribute: log: makeColor', (t) => {
     const result = log.makeColor('hello');
     
-    t.ok(result.includes('hello'), 'should return colored string containing the input');
+    t.match(result, 'hello', 'should return colored string containing the input');
     t.end();
 });
-
 
 test('distribute: log: getDescription', (t) => {
     const message = 'some error';

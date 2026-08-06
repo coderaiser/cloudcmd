@@ -50,7 +50,9 @@ test('dom: isContainClass: contains: array', (t) => {
 
 test('dom: getByTag', (t) => {
     const getElementsByTagName = stub();
-    const element = {getElementsByTagName};
+    const element = {
+        getElementsByTagName,
+    };
     
     getByTag('div', element);
     
@@ -60,7 +62,9 @@ test('dom: getByTag', (t) => {
 
 test('dom: getById', (t) => {
     const querySelector = stub();
-    const element = {querySelector};
+    const element = {
+        querySelector,
+    };
     
     getById('my-id', element);
     
@@ -70,7 +74,9 @@ test('dom: getById', (t) => {
 
 test('dom: getByClassAll', (t) => {
     const getElementsByClassName = stub();
-    const element = {getElementsByClassName};
+    const element = {
+        getElementsByClassName,
+    };
     
     getByClassAll('my-class', element);
     
@@ -91,7 +97,9 @@ test('dom: getByClass: calls getByClassAll', (t) => {
 
 test('dom: getByDataName', (t) => {
     const querySelector = stub();
-    const element = {querySelector};
+    const element = {
+        querySelector,
+    };
     
     getByDataName('hello', element);
     
@@ -102,7 +110,9 @@ test('dom: getByDataName', (t) => {
 test('dom: hide', (t) => {
     const add = stub();
     const element = {
-        classList: {add},
+        classList: {
+            add,
+        },
     };
     
     hide(element);
@@ -114,7 +124,9 @@ test('dom: hide', (t) => {
 test('dom: show', (t) => {
     const remove = stub();
     const element = {
-        classList: {remove},
+        classList: {
+            remove,
+        },
     };
     
     show(element);
@@ -127,7 +139,9 @@ test('dom: getByClassAll: without element uses document', (t) => {
     const getElementsByClassName = stub();
     const prevDocument = globalThis.document;
     
-    globalThis.document = {getElementsByClassName};
+    globalThis.document = {
+        getElementsByClassName,
+    };
     
     getByClassAll('my-class');
     
@@ -136,4 +150,3 @@ test('dom: getByClassAll: without element uses document', (t) => {
     t.calledWith(getElementsByClassName, ['my-class'], 'should fallback to document when no element');
     t.end();
 });
-
