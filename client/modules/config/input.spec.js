@@ -112,6 +112,7 @@ test('cloudcmd: client: config: input: setValue: checkbox', (t) => {
     };
     
     const querySelector = stub().returns(el);
+    
     const element = {
         querySelector,
     };
@@ -129,6 +130,7 @@ test('cloudcmd: client: config: input: setValue: default', (t) => {
     };
     
     const querySelector = stub().returns(el);
+    
     const element = {
         querySelector,
     };
