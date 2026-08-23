@@ -1,3 +1,8 @@
+2026.08.23, v19.20.1
+
+feature:
+- 4ec15a7d cloudcmd: @cloudcmd/move-files v9.0.0 (#472)
+
 2026.08.06, v19.20.0
 
 feature:
