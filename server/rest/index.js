@@ -10,7 +10,7 @@ import pullout from 'pullout';
 import json from 'jonny';
 import * as ponse from 'ponse';
 import {copymitter} from 'copymitter';
-import _moveFiles from '@cloudcmd/move-files';
+import {moveFiles as _moveFiles} from '@cloudcmd/move-files';
 import * as CloudFunc from '#common/cloudfunc';
 import root from '../root.js';
 import markdown from '../markdown/index.js';
