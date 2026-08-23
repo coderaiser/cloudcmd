@@ -231,13 +231,11 @@ function onNameChange(name) {
 }
 
 async function onKey({keyCode, target}) {
-    switch(keyCode) {
-    case Key.ESC:
+    if (keyCode === Key.ESC)
         return hide();
     
-    case Key.ENTER:
+    if (keyCode === Key.ENTER)
         return await onChange(target);
-    }
 }
 
 CloudCmd[Name] = {

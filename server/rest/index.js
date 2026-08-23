@@ -97,11 +97,10 @@ function sendData(params, {fs, config, moveFiles}, callback) {
     
     const {method} = p.request;
     
-    switch(method) {
-    case 'GET':
+    if (method === 'GET')
         return onGET(params, config, callback);
     
-    case 'PUT':
+    if (method === 'PUT')
         return pullout(p.request)
             .then((body) => {
                 onPUT({
@@ -113,7 +112,6 @@ function sendData(params, {fs, config, moveFiles}, callback) {
                 }, callback);
             })
             .catch(callback);
-    }
 }
 
 function onGET(params, config, callback) {

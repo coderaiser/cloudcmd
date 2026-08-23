@@ -100,16 +100,14 @@ async function listener(event, overrides = {}) {
 }
 
 function getSymbol(shift, keyCode) {
-    switch(keyCode) {
-    case KEY.DOT:
+    if (keyCode === KEY.DOT)
         return '.';
     
-    case KEY.HYPHEN:
+    if (keyCode === KEY.HYPHEN)
         return shift ? '_' : '-';
     
-    case KEY.EQUAL:
+    if (keyCode === KEY.EQUAL)
         return shift ? '+' : '=';
-    }
     
     return '';
 }

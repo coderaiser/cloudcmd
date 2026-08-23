@@ -21,13 +21,11 @@ export default callbackify(async (name, rootDir, request) => {
     
     const {method} = request;
     
-    switch(method) {
-    case 'GET':
+    if (method === 'GET')
         return await onGET(request, name, rootDir);
     
-    case 'PUT':
+    if (method === 'PUT')
         return await onPUT(request);
-    }
 });
 
 function parseName(query, name, rootDir) {
