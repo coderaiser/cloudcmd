@@ -99,11 +99,13 @@ test('cloudcmd: rest: rename: path traversal: to', async (t) => {
     };
     
     const vol = Volume.fromJSON(volume, '/');
+    
     const unionFS = ufs
         .use(vol)
         .use(fs);
     
     const configManager = cloudcmd.createConfigManager();
+    
     configManager('auth', false);
     configManager('root', '/sandbox');
     
@@ -131,11 +133,13 @@ test('cloudcmd: rest: rename: path traversal: from', async (t) => {
     };
     
     const vol = Volume.fromJSON(volume, '/');
+    
     const unionFS = ufs
         .use(vol)
         .use(fs);
     
     const configManager = cloudcmd.createConfigManager();
+    
     configManager('auth', false);
     configManager('root', '/sandbox');
     
