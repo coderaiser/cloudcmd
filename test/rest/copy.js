@@ -42,3 +42,45 @@ test('cloudcmd: rest: copy', async (t) => {
     t.equal(body, 'copy: ok("["copy.txt"]")', 'should return result');
     t.end();
 });
+
+test('cloudcmd: rest: copy: path traversal: from', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const {body} = await request.put('/api/v1/copy', {
+        body: {
+            from: '../../../../etc/passwd',
+            to: '/file.txt',
+            names: ['copy.txt'],
+        },
+    });
+    
+    t.equal(body, 'Path /etc/passwd beyond root /sandbox!', 'should reject traversal in from');
+    t.end();
+});
+
+test('cloudcmd: rest: copy: path traversal: to', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const {body} = await request.put('/api/v1/copy', {
+        body: {
+            from: '/file.txt',
+            to: '../../../../etc/cron.d/evil',
+            names: ['copy.txt'],
+        },
+    });
+    
+    t.equal(body, 'Path /etc/cron.d/evil beyond root /sandbox!', 'should reject traversal in to');
+    t.end();
+});

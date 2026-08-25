@@ -32,9 +32,9 @@ function parseName(query, name, rootDir) {
     const shortName = name.replace('/markdown', '');
     
     if (query === 'relative')
-        return DIR_ROOT + shortName;
+        return root.resolve(shortName, DIR_ROOT);
     
-    return root(shortName, rootDir);
+    return root.resolve(shortName, rootDir);
 }
 
 async function onGET(request, name, root) {

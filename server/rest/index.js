@@ -11,6 +11,7 @@ import json from 'jonny';
 import * as ponse from 'ponse';
 import {copymitter} from 'copymitter';
 import {moveFiles as _moveFiles} from '@cloudcmd/move-files';
+import {tryCatch} from 'try-catch';
 import * as CloudFunc from '#common/cloudfunc';
 import root from '../root.js';
 import markdown from '../markdown/index.js';
@@ -216,8 +217,15 @@ function onPUT({name, fs, moveFiles, config, body}, callback) {
         const msg = getMoveMsg(names);
         const fn = swap(callback, msg);
         
-        const fromRooted = root(from, rootDir);
-        const toRooted = root(to, rootDir);
+        const [errorFrom, fromRooted] = tryCatch(root.resolve, from, rootDir);
+        
+        if (errorFrom)
+            return callback(errorFrom);
+        
+        const [errorTo, toRooted] = tryCatch(root.resolve, to, rootDir);
+        
+        if (errorTo)
+            return callback(errorTo);
         
         return moveFiles(fromRooted, toRooted, names)
             .on('error', fn)
@@ -227,21 +235,32 @@ function onPUT({name, fs, moveFiles, config, body}, callback) {
     case 'rename':
         return rename(rootDir, files.from, files.to, fs, callback);
     
-    case 'copy':
+    case 'copy': {
         if (!files.from || !files.names || !files.to)
             return callback(body);
         
         if (isRootAll(rootDir, [files.to, files.from]))
             return callback(getWin32RootMsg());
         
-        files.from = root(files.from, rootDir);
-        files.to = root(files.to, rootDir);
+        const [errorFrom, resolvedFrom] = tryCatch(root.resolve, files.from, rootDir);
+        
+        if (errorFrom)
+            return callback(errorFrom);
+        
+        const [errorTo, resolvedTo] = tryCatch(root.resolve, files.to, rootDir);
+        
+        if (errorTo)
+            return callback(errorTo);
+        
+        files.from = resolvedFrom;
+        files.to = resolvedTo;
         
         copy(files.from, files.to, files.names, (error) => {
             const msg = formatMsg('copy', files.names);
             callback(error, msg);
         });
         break;
+    }
     
     case 'pack':
         if (!files.from)
@@ -274,8 +293,15 @@ function rename(rootDir, from, to, fs, callback) {
     const msg = getRenameMsg(from, to);
     const fn = swap(callback, msg);
     
-    const fromRooted = root(from, rootDir);
-    const toRooted = root(to, rootDir);
+    const [errorFrom, fromRooted] = tryCatch(root.resolve, from, rootDir);
+    
+    if (errorFrom)
+        return callback(errorFrom);
+    
+    const [errorTo, toRooted] = tryCatch(root.resolve, to, rootDir);
+    
+    if (errorTo)
+        return callback(errorTo);
     
     return fs.rename(fromRooted, toRooted, fn);
 }
@@ -286,8 +312,18 @@ function pack(from, to, names, config, fn) {
     const rootDir = config('root');
     const packer = config('packer');
     
-    from = root(from, rootDir);
-    to = root(to, rootDir);
+    const [errorFrom, resolvedFrom] = tryCatch(root.resolve, from, rootDir);
+    
+    if (errorFrom)
+        return fn(errorFrom);
+    
+    const [errorTo, resolvedTo] = tryCatch(root.resolve, to, rootDir);
+    
+    if (errorTo)
+        return fn(errorTo);
+    
+    from = resolvedFrom;
+    to = resolvedTo;
     
     if (!names) {
         names = [
@@ -305,12 +341,23 @@ export const _pack = pack;
 function extract(from, to, config, fn) {
     const rootDir = config('root');
     
-    from = root(from, rootDir);
+    const [errorFrom, resolvedFrom] = tryCatch(root.resolve, from, rootDir);
     
-    if (to)
-        to = root(to, rootDir);
-    else
+    if (errorFrom)
+        return fn(errorFrom);
+    
+    from = resolvedFrom;
+    
+    if (to) {
+        const [errorTo, resolvedTo] = tryCatch(root.resolve, to, rootDir);
+        
+        if (errorTo)
+            return fn(errorTo);
+        
+        to = resolvedTo;
+    } else {
         to = from.replace(/\.tar\.gz$/, '');
+    }
     
     operation('extract', config('packer'), from, to, fn);
 }

@@ -85,3 +85,45 @@ test('cloudcmd: rest: move: no to', async (t) => {
     t.equal(body, expected);
     t.end();
 });
+
+test('cloudcmd: rest: move: path traversal: from', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const {body} = await request.put('/api/v1/move', {
+        body: {
+            from: '../../../../etc/passwd',
+            to: '/file.txt',
+            names: ['move.txt'],
+        },
+    });
+    
+    t.equal(body, 'Path /etc/passwd beyond root /sandbox!', 'should reject traversal in from');
+    t.end();
+});
+
+test('cloudcmd: rest: move: path traversal: to', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const {body} = await request.put('/api/v1/move', {
+        body: {
+            from: '/file.txt',
+            to: '../../../../etc/cron.d/evil',
+            names: ['move.txt'],
+        },
+    });
+    
+    t.equal(body, 'Path /etc/cron.d/evil beyond root /sandbox!', 'should reject traversal in to');
+    t.end();
+});

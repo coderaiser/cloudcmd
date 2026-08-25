@@ -229,3 +229,45 @@ const getPackOptions = (to, names = ['pack']) => ({
     names,
     from: '/fixture',
 });
+
+test('cloudcmd: rest: pack: path traversal: from', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const {body} = await request.put('/api/v1/pack', {
+        body: {
+            from: '../../../../etc',
+            to: '/archive.zip',
+            names: ['passwd'],
+        },
+    });
+    
+    t.equal(body, 'Path /etc beyond root /sandbox!', 'should reject traversal in from');
+    t.end();
+});
+
+test('cloudcmd: rest: pack: path traversal: to', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const {body} = await request.put('/api/v1/pack', {
+        body: {
+            from: '/files',
+            to: '../../../../tmp/cc-outside/evil.zip',
+            names: ['file.txt'],
+        },
+    });
+    
+    t.equal(body, 'Path /tmp/cc-outside/evil.zip beyond root /sandbox!', 'should reject traversal in to');
+    t.end();
+});

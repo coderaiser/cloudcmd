@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import {join} from 'node:path';
+import {tmpdir} from 'node:os';
 import {promisify} from 'node:util';
 import {tryToCatch} from 'try-to-catch';
 import test from 'supertape';
@@ -124,5 +125,27 @@ test('cloudcmd: markdown: zip', async (t) => {
     const {body} = await request.get('/api/v1/markdown/markdown.zip/markdown.md');
     
     t.equal(body, '<h1>hello</h1>\n');
+    t.end();
+});
+
+test('cloudcmd: markdown: relative: path traversal', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    const sandboxDir = fs.mkdtempSync(join(tmpdir(), 'cloudcmd-test-'));
+    
+    const config = {
+        auth: false,
+        root: sandboxDir,
+    };
+    
+    const {request} = serveOnce(cloudcmd, {
+        config,
+        configManager,
+    });
+    
+    const {body} = await request.get('/api/v1/markdown/..%2f..%2f..%2fetc%2fpasswd?relative');
+    
+    fs.rmdirSync(sandboxDir);
+    
+    t.match(body, 'beyond root', 'should reject url-encoded traversal');
     t.end();
 });
