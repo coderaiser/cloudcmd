@@ -1,3 +1,8 @@
+2026.08.25, v19.20.2
+
+fix:
+- b9bdc9ed path traversal (#474)
+
 2026.08.23, v19.20.1
 
 feature:
