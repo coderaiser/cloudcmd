@@ -1,3 +1,11 @@
+2026.09.04, v19.20.5
+
+fix:
+- 05fa6499 path traversal
+
+feature:
+- d25108ff cloudcmd: cssnano-preset-default v9.0.1
+
 2026.08.26, v19.20.4
 
 feature:
