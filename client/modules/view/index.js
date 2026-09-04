@@ -1,26 +1,16 @@
 import '#css/view.css';
-import {rendy} from 'rendy';
 import currify from 'currify';
 import wraptile from 'wraptile';
-import {tryToCatch} from 'try-to-catch';
 import load from 'load.js';
 import * as _modal from '@cloudcmd/modal';
 import _createElement from '@cloudcmd/create-element';
 import {time} from '#common/util';
-import * as Files from '#dom/files';
 import * as Events from '#dom/events';
-import {FS} from '#common/cloudfunc';
 import * as Images from '#dom/images';
-import {encode} from '#common/entity';
-import {
-    isImage,
-    isAudio,
-    getType,
-} from './types.js';
 
 const CloudCmd = globalThis.CloudCmd || {};
 const DOM = globalThis.DOM || {};
-const isString = (a) => typeof a === 'string';
+
 const {assign} = Object;
 const {isArray} = Array;
 
@@ -50,12 +40,8 @@ CloudCmd[Name] = {
 const Info = DOM.CurrentInfo;
 const {Key} = CloudCmd;
 
-const basename = (a) => a
-    .split('/')
-    .pop();
-
 let El;
-let TemplateAudio;
+
 let Overlay;
 
 const Config = {
@@ -99,8 +85,6 @@ export async function init() {
 }
 
 export async function show(data, options = {}) {
-    const prefixURL = CloudCmd.prefixURL + FS;
-    
     if (Loading)
         return;
     
@@ -126,28 +110,7 @@ export async function show(data, options = {}) {
     
     Images.show.load();
     
-    const path = prefixURL + Info.path;
-    const type = options.raw ? '' : await getType(path);
-    
-    switch(type) {
-    default:
-        return await viewFile();
-    
-    case 'markdown':
-        return await CloudCmd.Markdown.show(Info.path);
-    
-    case 'html':
-        return viewHtml(path);
-    
-    case 'image':
-        return viewImage(Info.path, prefixURL);
-    
-    case 'media':
-        return await viewMedia(path);
-    
-    case 'pdf':
-        return viewPDF(path);
-    }
+    return await viewFile();
 }
 
 export const _createIframe = createIframe;
@@ -175,38 +138,6 @@ export const _viewHtml = viewHtml;
 function viewHtml(src, overrides = {}) {
     const {modal = _modal} = overrides;
     modal.open(createIframe(src), Config);
-}
-
-function viewPDF(src) {
-    const element = createIframe(src);
-    
-    const options = assign({}, Config);
-    
-    if (CloudCmd.config('showFileName'))
-        options.title = Info.name;
-    
-    _modal.open(element, options);
-}
-
-async function viewMedia(path) {
-    const [e, element] = await getMediaElement(path);
-    
-    if (e)
-        return alert(e);
-    
-    const allConfig = {
-        ...Config,
-        ...{
-            autoSize: true,
-            afterShow: () => {
-                element
-                    .querySelector('audio, video')
-                    .focus();
-            },
-        },
-    };
-    
-    _modal.open(element, allConfig);
 }
 
 async function viewFile() {
@@ -256,73 +187,6 @@ function initConfig(options) {
 
 export function hide() {
     _modal.close();
-}
-
-function viewImage(path, prefixURL) {
-    const isSupportedImage = (a) => isImage(a) || a === path;
-    const makeTitle = (path) => ({
-        href: `${prefixURL}${path}`,
-        title: encode(basename(path)),
-    });
-    
-    const names = Info.files
-        .map(DOM.getCurrentPath)
-        .filter(isSupportedImage);
-    
-    const titles = names.map(makeTitle);
-    
-    const index = names.indexOf(Info.path);
-    
-    const imageConfig = {
-        index,
-        autoSize: true,
-        arrows: true,
-        keys: true,
-        helpers: {
-            title: {},
-        },
-    };
-    
-    const config = {
-        ...Config,
-        ...imageConfig,
-    };
-    
-    _modal.open(titles, config);
-}
-
-async function getMediaElement(src) {
-    check(src);
-    
-    const [error, template] = await tryToCatch(Files.get, 'view/media-tmpl');
-    
-    if (error)
-        return [error];
-    
-    const {name} = Info;
-    
-    if (!TemplateAudio)
-        TemplateAudio = template;
-    
-    const is = isAudio(name);
-    const type = is ? 'audio' : 'video';
-    
-    const innerHTML = rendy(TemplateAudio, {
-        src,
-        type,
-        name,
-    });
-    
-    const element = _createElement('div', {
-        innerHTML,
-    });
-    
-    return [null, element];
-}
-
-function check(src) {
-    if (!isString(src))
-        throw Error('src should be a string!');
 }
 
 async function loadAll() {
