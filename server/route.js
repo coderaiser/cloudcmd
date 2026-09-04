@@ -7,6 +7,7 @@ import format from 'format-io';
 import currify from 'currify';
 import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';
+import {tryCatch} from 'try-catch';
 import once from 'once';
 import pipe from 'pipe-io';
 import {contentType} from 'mime-types';
@@ -76,10 +77,10 @@ async function route({config, options, request, response}) {
     config('prefix', prefixer(request.baseUrl));
     
     const rootName = name.replace(CloudFunc.FS, '') || '/';
-    const fullPath = root(rootName, config('root'));
+    const [resolveError, fullPath] = tryCatch(root.resolve, rootName, config('root'));
     
-    if (fullPath.indexOf(config('root')))
-        return ponse.sendError(Error(`Path '${fullPath}' beyond root '${config('root')}'`), p);
+    if (resolveError)
+        return ponse.sendError(resolveError, p);
     
     const {html, win32} = options;
     

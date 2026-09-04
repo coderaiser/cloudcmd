@@ -25,3 +25,20 @@ test('cloudcmd: path traversal beyond root', async (t) => {
     t.match(body, 'beyond root', 'should return beyond root message');
     t.end();
 });
+
+test('cloudcmd: path traversal: sibling directory', async (t) => {
+    const {createConfigManager} = cloudcmd;
+    const configManager = createConfigManager();
+    
+    configManager('auth', false);
+    configManager('root', '/tmp/root');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    const {body} = await request.get('/fs..%2Froot-sibling%2Fsecret.txt');
+    
+    t.match(body, 'beyond root', 'should reject sibling path that starts with root name');
+    t.end();
+});
