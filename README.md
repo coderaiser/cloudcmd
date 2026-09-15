@@ -51,6 +51,13 @@ You will see something similar to this.
 
 [![Deploy][DeployIMG]][DeployURL]
 
+It can also be deployed with one click using the official [Easypanel](https://easypanel.io) template:
+
+[![Deploy on Easypanel][easypanel-btn]][easypanel-deploy]
+
+[easypanel-btn]: https://easypanel.io/img/deploy-on-easypanel-40.svg
+[easypanel-deploy]: https://easypanel.io/templates/cloudcommander
+
 ## Using as Middleware
 
 Cloud Commander could be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
