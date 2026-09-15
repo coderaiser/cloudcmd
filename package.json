@@ -56,6 +56,7 @@
     "lint:stream": "madrun lint:stream",
     "test": "madrun test",
     "test:e2e": "madrun test:e2e",
+    "test:e2e:client": "madrun test:e2e:client",
     "test:client": "madrun test:client",
     "test:server": "madrun test:server",
     "wisdom": "madrun wisdom",
