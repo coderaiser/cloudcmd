@@ -34,7 +34,6 @@ export const Key = assign(binder, KEY, {
 });
 
 export const _listener = listener;
-export {_switchKey};
 
 function getChar(event) {
     /*
@@ -120,7 +119,7 @@ function fromCharCode(keyIdentifier) {
     return String.fromCharCode(hex);
 }
 
-async function _switchKey(event) {
+export async function _switchKey(event) {
     const Info = DOM.CurrentInfo;
     let i;
     let isSelected;

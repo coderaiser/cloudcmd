@@ -6,7 +6,8 @@ test('Insert selects the current file', async ({page}) => {
     await page.goto('/');
     
     const rows = getRows(page);
-    const first = rows.nth(1); // nth(0) is '..'
+    const first = rows.nth(1);
+    // nth(0) is '..'
     await first.click();
     await page.keyboard.press('Insert');
     
@@ -19,6 +20,7 @@ test('Insert moves the cursor to the next file', async ({page}) => {
     const rows = getRows(page);
     const first = rows.nth(1);
     const second = rows.nth(2);
+    
     await first.click();
     await page.keyboard.press('Insert');
     
@@ -30,6 +32,7 @@ test('Insert does not leave the cursor on the first file', async ({page}) => {
     
     const rows = getRows(page);
     const first = rows.nth(1);
+    
     await first.click();
     await page.keyboard.press('Insert');
     
@@ -42,6 +45,7 @@ test('pressing Insert twice selects two consecutive files', async ({page}) => {
     const rows = getRows(page);
     const first = rows.nth(1);
     const second = rows.nth(2);
+    
     await first.click();
     await page.keyboard.press('Insert');
     await page.keyboard.press('Insert');
@@ -55,7 +59,10 @@ test('pressing Insert twice leaves cursor on the third file', async ({page}) => 
     
     const rows = getRows(page);
     const third = rows.nth(3);
-    await rows.nth(1).click();
+    
+    await rows
+        .nth(1)
+        .click();
     await page.keyboard.press('Insert');
     await page.keyboard.press('Insert');
     

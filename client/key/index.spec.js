@@ -1,7 +1,11 @@
 import autoGlobals from 'auto-globals';
 import supertape from 'supertape';
 import {ESC, INSERT} from './key.js';
-import {Key, _listener, _switchKey} from './index.js';
+import {
+    Key,
+    _listener,
+    _switchKey,
+} from './index.js';
 import {getDOM, getCloudCmd} from './vim/globals.fixture.js';
 
 const test = autoGlobals(supertape);
@@ -64,7 +68,9 @@ test('cloudcmd: key: Insert: toggles selection of current file', async (t) => {
     globalThis.DOM = {
         ...getDOM(),
         CurrentInfo: {
-            element: {nextSibling: next},
+            element: {
+                nextSibling: next,
+            },
             name: 'a.txt',
             isDir: false,
             panel: {},
@@ -74,7 +80,10 @@ test('cloudcmd: key: Insert: toggles selection of current file', async (t) => {
         setCurrentFile,
     };
     
-    await _switchKey({keyCode: INSERT, preventDefault: noop});
+    await _switchKey({
+        keyCode: INSERT,
+        preventDefault: noop,
+    });
     
     t.calledOnce(toggleSelectedFile, 'should toggle selection');
     t.end();
@@ -87,7 +96,9 @@ test('cloudcmd: key: Insert: moves cursor to next file', async (t) => {
     globalThis.DOM = {
         ...getDOM(),
         CurrentInfo: {
-            element: {nextSibling: next},
+            element: {
+                nextSibling: next,
+            },
             name: 'a.txt',
             isDir: false,
             panel: {},
@@ -97,7 +108,10 @@ test('cloudcmd: key: Insert: moves cursor to next file', async (t) => {
         setCurrentFile,
     };
     
-    await _switchKey({keyCode: INSERT, preventDefault: noop});
+    await _switchKey({
+        keyCode: INSERT,
+        preventDefault: noop,
+    });
     
     t.calledWith(setCurrentFile, [next], 'should move cursor to next');
     t.end();
