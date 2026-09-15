@@ -50,13 +50,16 @@ export const getValue = (name, element) => {
     const el = getElementByName(name, element);
     const {type} = el;
     
-    if (type === 'checkbox')
+    switch(type) {
+    case 'checkbox':
         return el.checked;
     
-    if (type === 'number')
+    case 'number':
         return Number(el.value);
     
-    return el.value;
+    default:
+        return el.value;
+    }
 };
 
 export const setValue = (name, value, element) => {
