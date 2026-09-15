@@ -13,8 +13,6 @@
 [CodacyIMG]: https://api.codacy.com/project/badge/Grade/ddda78be780549ce8754f8d47a8c0e36
 [GitterURL]: https://gitter.im/cloudcmd/hello
 [GitterIMGURL]: https://img.shields.io/gitter/room/coderaiser/cloudcmd.js.svg
-[DeployURL]: https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy"
-[DeployIMG]: https://www.herokucdn.com/deploy/button.png
 [DeployInstaPodsIMG]: https://img.shields.io/badge/deploy%20on-InstaPods-blue
 [DeployInstaPodsURL]: https://app.instapods.com/dashboard/pods/create?app=cloudcmd&ref=cloudcmd
 
@@ -44,12 +42,6 @@ Open url `http://localhost:8000` in browser.
 
 You will see something similar to this.
 ![View](https://cloudcmd.io/img/screen/view.png "View")
-
-## Deploy
-
-`Cloud Commander` could be easily deployed to [Heroku][DeployURL].
-
-[![Deploy][DeployIMG]][DeployURL]
 
 ## Using as Middleware
 
