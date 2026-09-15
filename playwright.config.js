@@ -9,7 +9,7 @@ export default defineConfig({
         headless: true,
     },
     webServer: {
-        command: 'node bin/cloudcmd.js --port 3002 --root test-e2e/fixture --no-open',
+        command: 'node bin/cloudcmd.js --no-auth --port 3002 --root test-e2e/fixture --no-open',
         url: 'http://localhost:3002',
         reuseExistingServer: false,
         timeout: 15_000,

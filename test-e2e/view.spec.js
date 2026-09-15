@@ -1,7 +1,7 @@
 import {test, expect} from '@playwright/test';
 
 const getModal = (page) => page.locator('[data-name="modal-main"]');
-const getFile = (page, name) => page.locator(`[data-name="js-file-${btoa(name)}"]`);
+const getFile = (page, name) => page.locator(`[data-name="js-file-${btoa(name)}"]`).first();
 
 test('F3 on a .png file opens the image viewer', async ({page}) => {
     await page.goto('/');
