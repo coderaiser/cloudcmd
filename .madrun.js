@@ -4,6 +4,10 @@ import {defineEnv} from 'supertape/env';
 const testEnv = defineEnv({
     timeout: 7000,
     css: true,
+}, {
+    env: {
+        NODE_OPTIONS: '--localstorage-file /tmp/cloudcmd-localstorage',
+    },
 });
 
 const buildEnv = {

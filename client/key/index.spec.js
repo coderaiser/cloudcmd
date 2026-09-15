@@ -61,9 +61,13 @@ test('cloudcmd: client: key: disable vim', async (t) => {
 });
 
 test('cloudcmd: key: Insert: toggles selection of current file', async (t) => {
-    const toggleSelectedFile = stub().returns({});
     const setCurrentFile = stub();
+    const toggleSelectedFile = stub().returns({
+        setCurrentFile,
+    });
+    
     const next = {};
+    const {DOM} = globalThis;
     
     globalThis.DOM = {
         ...getDOM(),
@@ -85,6 +89,8 @@ test('cloudcmd: key: Insert: toggles selection of current file', async (t) => {
         preventDefault: noop,
     });
     
+    globalThis.DOM = DOM;
+    
     t.calledOnce(toggleSelectedFile, 'should toggle selection');
     t.end();
 });
@@ -92,6 +98,7 @@ test('cloudcmd: key: Insert: toggles selection of current file', async (t) => {
 test('cloudcmd: key: Insert: moves cursor to next file', async (t) => {
     const next = {};
     const setCurrentFile = stub();
+    const {DOM} = globalThis;
     
     globalThis.DOM = {
         ...getDOM(),
@@ -104,14 +111,17 @@ test('cloudcmd: key: Insert: moves cursor to next file', async (t) => {
             panel: {},
             path: '/a.txt',
         },
-        toggleSelectedFile: stub().returns({}),
-        setCurrentFile,
+        toggleSelectedFile: stub().returns({
+            setCurrentFile,
+        }),
     };
     
     await _switchKey({
         keyCode: INSERT,
         preventDefault: noop,
     });
+    
+    globalThis.DOM = DOM;
     
     t.calledWith(setCurrentFile, [next], 'should move cursor to next');
     t.end();
