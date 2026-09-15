@@ -161,12 +161,14 @@ export async function _switchKey(event) {
         break;
     
     case KEY.INSERT:
-        DOM.toggleSelectedFile(current)
+        DOM
+            .toggleSelectedFile(current)
             .setCurrentFile(next);
         break;
     
     case KEY.INSERT_MAC:
-        DOM.toggleSelectedFile(current)
+        DOM
+            .toggleSelectedFile(current)
             .setCurrentFile(next);
         break;
     
