@@ -34,6 +34,7 @@ export const Key = assign(binder, KEY, {
 });
 
 export const _listener = listener;
+export {_switchKey};
 
 function getChar(event) {
     /*
@@ -161,15 +162,13 @@ async function _switchKey(event) {
         break;
     
     case KEY.INSERT:
-        DOM
-            .toggleSelectedFile(current)
-            .setCurrentFile(next);
+        DOM.toggleSelectedFile(current);
+        DOM.setCurrentFile(next);
         break;
     
     case KEY.INSERT_MAC:
-        DOM
-            .toggleSelectedFile(current)
-            .setCurrentFile(next);
+        DOM.toggleSelectedFile(current);
+        DOM.setCurrentFile(next);
         break;
     
     case KEY.DELETE:
