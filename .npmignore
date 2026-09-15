@@ -27,3 +27,4 @@ coverage
 css
 html
 client
+playwright.config.*

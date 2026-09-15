@@ -30,6 +30,7 @@ export default {
     'lint:stream': () => run('lint', '-f stream'),
     'test': () => [testEnv, `tape '{test}/**/*.js' '{bin,client,static,common,server}/**/*.spec.js' -f fail`],
     'test:e2e': () => `tape 'test-e2e/**/*.js'`,
+    'test:e2e:client': () => 'playwright test',
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
     'wisdom': async () => await run(['lint:all', 'build', 'test'], null, {

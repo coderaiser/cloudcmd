@@ -162,6 +162,7 @@
     "@cloudcmd/stub": "^5.0.0",
     "@iocmd/wait": "^2.1.0",
     "@putout/eslint-flat": "^4.0.0",
+    "@playwright/test": "^1.63.0",
     "@rspack/cli": "^2.1.4",
     "@rspack/core": "^2.1.4",
     "@supertape/loader-css": "^1.0.0",
