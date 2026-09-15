@@ -7,6 +7,7 @@ test('Insert selects the current file', async ({page}) => {
     
     const rows = getRows(page);
     const first = rows.nth(1);
+    
     // nth(0) is '..'
     await first.click();
     await page.keyboard.press('Insert');
