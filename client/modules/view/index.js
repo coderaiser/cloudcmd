@@ -129,25 +129,22 @@ export async function show(data, options = {}) {
     const path = prefixURL + Info.path;
     const type = options.raw ? '' : await getType(path);
     
-    switch(type) {
-    default:
-        return await viewFile();
-    
-    case 'markdown':
+    if (type === 'markdown')
         return await CloudCmd.Markdown.show(Info.path);
     
-    case 'html':
+    if (type === 'html')
         return viewHtml(path);
     
-    case 'image':
+    if (type === 'image')
         return viewImage(Info.path, prefixURL);
     
-    case 'media':
+    if (type === 'media')
         return await viewMedia(path);
     
-    case 'pdf':
+    if (type === 'pdf')
         return viewPDF(path);
-    }
+    
+    return await viewFile();
 }
 
 export const _createIframe = createIframe;

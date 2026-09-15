@@ -22,7 +22,9 @@ export default function setCurrentByChar(char, charStore) {
     
     const skipN = skipCount = i;
     
-    charStore(charStore().concat(char));
+    charStore(
+        charStore().concat(char),
+    );
     
     const names = DOM.getFilenames(files);
     const isTest = (a) => regExp.test(a);
