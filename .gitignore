@@ -10,6 +10,7 @@ package-lock.json
 npm-debug.log*
 
 node_modules
+test-results
 coverage
 modules/execon
 modules/emitify
