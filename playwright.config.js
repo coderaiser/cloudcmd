@@ -5,7 +5,7 @@ export default defineConfig({
     testMatch: 'client/**/*.js',
     timeout: 30_000,
     workers: 1,
-    testDir: './e2e',
+    testDir: './test-e2e',
     fullyParallel: true,
     forbidOnly: Boolean(process.env.CI),
     reporter: 'list',
