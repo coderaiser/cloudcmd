@@ -1,3 +1,8 @@
+2026.09.16, v19.20.8
+
+fix:
+- cb132c90 cloudcmd: client: cmd:  everything activates with a single click instead of two (#479)
+
 2026.09.16, v19.20.7
 
 fix:
