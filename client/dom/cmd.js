@@ -1,5 +1,6 @@
+/* global DOM */
+
 const SELECTED_FILE = 'selected-file';
-const {DOM} = globalThis;
 
 /**
  * selected file check
