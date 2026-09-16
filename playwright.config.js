@@ -4,7 +4,11 @@ export default defineConfig({
     testDir: './test-e2e',
     testMatch: 'client/**/*.js',
     timeout: 30_000,
-    
+    workers: 1,
+    testDir: './e2e',
+    fullyParallel: true,
+    forbidOnly: Boolean(process.env.CI),
+    reporter: 'list',
     use: {
         baseURL: 'http://localhost:3002',
         headless: true,
