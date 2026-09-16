@@ -6,6 +6,9 @@ test('Insert selects the current file', async ({page}) => {
     await page.goto('/');
     
     const rows = getRows(page);
+    const dotdot = rows.nth(0);
+    await expect(dotdot).toHaveClass(/current-file/);
+    
     const first = rows.nth(1);
     
     await first.click();
@@ -21,6 +24,8 @@ test('Insert moves the cursor to the next file', async ({page}) => {
     const first = rows.nth(0);
     const second = rows.nth(1);
     
+    await expect(first).toHaveClass(/current-file/);
+    
     await first.click();
     await page.keyboard.press('Insert');
     
@@ -32,6 +37,8 @@ test('Insert does not leave the cursor on the last file', async ({page}) => {
     
     const rows = getRows(page);
     const first = rows.nth(0);
+    
+    await expect(first).toHaveClass(/current-file/);
     
     await first.click();
     await page.keyboard.press('Insert');
