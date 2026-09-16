@@ -1,5 +1,4 @@
 /* global DOM */
-
 const SELECTED_FILE = 'selected-file';
 
 /**
