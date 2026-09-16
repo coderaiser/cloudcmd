@@ -4,11 +4,7 @@ export default defineConfig({
     testDir: './test-e2e',
     testMatch: 'client/**/*.js',
     timeout: 30_000,
-    use: {
-        trace: 'retain-on-failure',
-        screenshot: 'only-on-failure',
-        video: 'retain-on-failure',
-    },
+    
     use: {
         baseURL: 'http://localhost:3002',
         headless: true,
