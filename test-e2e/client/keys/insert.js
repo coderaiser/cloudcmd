@@ -7,6 +7,7 @@ test('Insert selects the current file', async ({page}) => {
     
     const rows = getRows(page);
     const dotdot = rows.nth(0);
+    
     await expect(dotdot).toHaveClass(/current-file/);
     
     const first = rows.nth(1);
