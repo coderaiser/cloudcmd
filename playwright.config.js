@@ -1,7 +1,7 @@
+import process from 'node:process';
 import {defineConfig} from '@playwright/test';
 
 export default defineConfig({
-    testDir: './test-e2e',
     testMatch: 'client/**/*.js',
     timeout: 30_000,
     workers: 1,
