@@ -45,7 +45,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install chromium --with-deps
       - name: Test E2E Client
-        run: redrun test:e2e:client || redrun test:e2e:client
+        run: redrun test:e2e:client -- --workers=1
       - name: Test
         run: redrun test
       - name: Coverage
