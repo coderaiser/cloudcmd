@@ -147,6 +147,10 @@ export async function show(data, options = {}) {
     return await viewFile();
 }
 
+export {
+    show as _show,
+};
+
 export const _createIframe = createIframe;
 
 function createIframe(src, overrides = {}) {

@@ -42,6 +42,10 @@ jobs:
           message: "chore: ${{ env.NAME }}: actions: lint ☘️"
       - name: Build
         run: redrun build
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+      - name: Test E2E Client
+        run: redrun test:e2e:client
       - name: Test
         run: redrun test
       - name: Coverage

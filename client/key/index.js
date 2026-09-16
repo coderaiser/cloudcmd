@@ -119,7 +119,7 @@ function fromCharCode(keyIdentifier) {
     return String.fromCharCode(hex);
 }
 
-async function _switchKey(event) {
+export async function _switchKey(event) {
     const Info = DOM.CurrentInfo;
     let i;
     let isSelected;

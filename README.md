@@ -1,4 +1,4 @@
-# Cloud Commander v19.20.6 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![Deploy on InstaPods][DeployInstaPodsIMG]][DeployInstaPodsURL]
+# Cloud Commander v19.20.7 [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Codacy][CodacyIMG]][CodacyURL] [![Gitter][GitterIMGURL]][GitterURL] [![Deploy on InstaPods][DeployInstaPodsIMG]][DeployInstaPodsURL]
 
 ### [Main][MainURL] [Blog][BlogURL] [Support][SupportURL] [Demo][DemoURL]
 
@@ -13,8 +13,6 @@
 [CodacyIMG]: https://api.codacy.com/project/badge/Grade/ddda78be780549ce8754f8d47a8c0e36
 [GitterURL]: https://gitter.im/cloudcmd/hello
 [GitterIMGURL]: https://img.shields.io/gitter/room/coderaiser/cloudcmd.js.svg
-[DeployURL]: https://heroku.com/deploy?template=https://github.com/coderaiser/cloudcmd "Deploy"
-[DeployIMG]: https://www.herokucdn.com/deploy/button.png
 [DeployInstaPodsIMG]: https://img.shields.io/badge/deploy%20on-InstaPods-blue
 [DeployInstaPodsURL]: https://app.instapods.com/dashboard/pods/create?app=cloudcmd&ref=cloudcmd
 

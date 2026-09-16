@@ -8,7 +8,7 @@ export default {
     'P - Build Prod': run('npm run build:client'),
 };
 
-async function renameCurrent(DOM) {
+async function renameCurrent({DOM}) {
     await DOM.renameCurrent();
 }
 

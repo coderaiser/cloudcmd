@@ -18,6 +18,7 @@ deno.json
 bin/release.*
 img/logo/cloudcmd-hq.png
 webpack.config.js
+playwright.config.*
 
 docker
 test*

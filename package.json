@@ -1,6 +1,6 @@
 {
   "name": "cloudcmd",
-  "version": "19.20.6",
+  "version": "19.20.7",
   "type": "module",
   "author": "coderaiser <mnemonic.enemy@gmail.com> (https://github.com/coderaiser)",
   "description": "File manager for the web with console and editor",
@@ -56,6 +56,7 @@
     "lint:stream": "madrun lint:stream",
     "test": "madrun test",
     "test:e2e": "madrun test:e2e",
+    "test:e2e:client": "madrun test:e2e:client",
     "test:client": "madrun test:client",
     "test:server": "madrun test:server",
     "wisdom": "madrun wisdom",
@@ -162,6 +163,7 @@
     "@cloudcmd/stub": "^5.0.0",
     "@iocmd/wait": "^2.1.0",
     "@putout/eslint-flat": "^4.0.0",
+    "@playwright/test": "^1.63.0",
     "@rspack/cli": "^2.1.4",
     "@rspack/core": "^2.1.4",
     "@supertape/loader-css": "^1.0.0",

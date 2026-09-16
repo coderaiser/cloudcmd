@@ -11,6 +11,9 @@
         "package-json/add-type": "off"
     },
     "match": {
+        "test-e2e": {
+            "tape": "on"
+        },
         ".filesystem.json": {
             "nodejs/rename-file-cjs-to-js": "off"
         },

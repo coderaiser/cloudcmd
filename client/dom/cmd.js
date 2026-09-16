@@ -1,14 +1,5 @@
-/* global DOM */
 const SELECTED_FILE = 'selected-file';
-const Cmd = {
-    getSelectedFiles,
-    isSelected,
-    unselectFile,
-    selectFile,
-    selectAllFiles,
-    toggleSelectedFile,
-    toggleAllSelectedFiles,
-};
+const {DOM} = globalThis;
 
 /**
  * selected file check
@@ -31,7 +22,7 @@ export function selectFile(currentFile) {
     
     current.classList.add(SELECTED_FILE);
     
-    return Cmd;
+    return DOM;
 }
 
 export function unselectFile(currentFile) {
@@ -39,7 +30,7 @@ export function unselectFile(currentFile) {
     
     current.classList.remove(SELECTED_FILE);
     
-    return Cmd;
+    return DOM;
 }
 
 export function toggleSelectedFile(currentFile) {
@@ -47,11 +38,11 @@ export function toggleSelectedFile(currentFile) {
     const name = DOM.getCurrentName(current);
     
     if (name === '..')
-        return Cmd;
+        return DOM;
     
     current.classList.toggle(SELECTED_FILE);
     
-    return Cmd;
+    return DOM;
 }
 
 export function toggleAllSelectedFiles() {
@@ -59,7 +50,7 @@ export function toggleAllSelectedFiles() {
         .getAllFiles()
         .map(DOM.toggleSelectedFile);
     
-    return Cmd;
+    return DOM;
 }
 
 export function selectAllFiles() {
@@ -67,7 +58,7 @@ export function selectAllFiles() {
         .getAllFiles()
         .map(DOM.selectFile);
     
-    return Cmd;
+    return DOM;
 }
 
 /**
