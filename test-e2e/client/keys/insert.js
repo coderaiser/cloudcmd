@@ -1,7 +1,10 @@
 import {test, expect} from '@playwright/test';
 
 const getRows = (page) => page.locator('.files li');
-const waitForPanel = (page) => page.locator('.files li').first().waitFor();
+const waitForPanel = (page) => page
+    .locator('.files li')
+    .first()
+    .waitFor();
 
 test('Insert selects the current file', async ({page}) => {
     await page.goto('/');
