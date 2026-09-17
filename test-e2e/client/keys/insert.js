@@ -7,7 +7,7 @@ const waitForPanel = (page) => page
     .waitFor();
 
 test('Insert selects the current file', async ({page}) => {
-    await page.goto('/');
+    await page.goto('/', {waitUntil: 'networkidle'});
     await waitForPanel(page);
     
     const rows = getRows(page);
@@ -22,7 +22,7 @@ test('Insert selects the current file', async ({page}) => {
 });
 
 test('Insert moves the cursor to the next file', async ({page}) => {
-    await page.goto('/');
+    await page.goto('/', {waitUntil: 'networkidle'});
     await waitForPanel(page);
     
     const rows = getRows(page);
@@ -38,7 +38,7 @@ test('Insert moves the cursor to the next file', async ({page}) => {
 });
 
 test('Insert does not leave the cursor on the first file', async ({page}) => {
-    await page.goto('/');
+    await page.goto('/', {waitUntil: 'networkidle'});
     await waitForPanel(page);
     
     const rows = getRows(page);
@@ -53,7 +53,7 @@ test('Insert does not leave the cursor on the first file', async ({page}) => {
 });
 
 test('pressing Insert twice selects two consecutive files: first selected', async ({page}) => {
-    await page.goto('/');
+    await page.goto('/', {waitUntil: 'networkidle'});
     await waitForPanel(page);
     
     const rows = getRows(page);
@@ -71,7 +71,7 @@ test('pressing Insert twice selects two consecutive files: first selected', asyn
 });
 
 test('pressing Insert twice selects two consecutive files: second selected', async ({page}) => {
-    await page.goto('/');
+    await page.goto('/', {waitUntil: 'networkidle'});
     await waitForPanel(page);
     
     const rows = getRows(page);
@@ -89,7 +89,7 @@ test('pressing Insert twice selects two consecutive files: second selected', asy
 });
 
 test('pressing Insert twice leaves cursor on the third file', async ({page}) => {
-    await page.goto('/');
+    await page.goto('/', {waitUntil: 'networkidle'});
     await waitForPanel(page);
     
     const rows = getRows(page);

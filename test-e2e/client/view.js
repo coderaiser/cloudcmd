@@ -11,7 +11,9 @@ const waitForPanel = (page) => page
     .waitFor();
 
 test('F3 on a .png file opens the image viewer', async ({page}) => {
-    await page.goto('/', {waitUntil: 'networkidle'});
+    await page.goto('/', {
+        waitUntil: 'networkidle',
+    });
     await waitForPanel(page);
     await getFile(page, 'view.png').click();
     await page.keyboard.press('F3');
@@ -21,7 +23,9 @@ test('F3 on a .png file opens the image viewer', async ({page}) => {
 });
 
 test('F3 on a .png file does not open the text viewer', async ({page}) => {
-    await page.goto('/', {waitUntil: 'networkidle'});
+    await page.goto('/', {
+        waitUntil: 'networkidle',
+    });
     await waitForPanel(page);
     await getFile(page, 'view.png').click();
     await page.keyboard.press('F3');
@@ -33,7 +37,9 @@ test('F3 on a .png file does not open the text viewer', async ({page}) => {
 });
 
 test('double-click on a .png file opens the image viewer', async ({page}) => {
-    await page.goto('/', {waitUntil: 'networkidle'});
+    await page.goto('/', {
+        waitUntil: 'networkidle',
+    });
     await waitForPanel(page);
     await getFile(page, 'view.png').dblclick();
     
@@ -42,7 +48,9 @@ test('double-click on a .png file opens the image viewer', async ({page}) => {
 });
 
 test('double-click on a .png file does not open the text viewer', async ({page}) => {
-    await page.goto('/', {waitUntil: 'networkidle'});
+    await page.goto('/', {
+        waitUntil: 'networkidle',
+    });
     await waitForPanel(page);
     await getFile(page, 'view.png').dblclick();
     
@@ -53,7 +61,9 @@ test('double-click on a .png file does not open the text viewer', async ({page})
 });
 
 test('F3 on a .txt file opens the text viewer', async ({page}) => {
-    await page.goto('/', {waitUntil: 'networkidle'});
+    await page.goto('/', {
+        waitUntil: 'networkidle',
+    });
     await waitForPanel(page);
     await getFile(page, 'copy.txt').click();
     await page.keyboard.press('F3');
@@ -63,7 +73,9 @@ test('F3 on a .txt file opens the text viewer', async ({page}) => {
 });
 
 test('F3 on a .txt file shows file content', async ({page}) => {
-    await page.goto('/', {waitUntil: 'networkidle'});
+    await page.goto('/', {
+        waitUntil: 'networkidle',
+    });
     await waitForPanel(page);
     await getFile(page, 'copy.txt').click();
     await page.keyboard.press('F3');
