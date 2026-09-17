@@ -6,11 +6,9 @@ test('Insert selects the current file', async ({page}) => {
     await page.goto('/');
     
     const rows = getRows(page);
-    const dotdot = rows.nth(0);
+    const first = rows.nth(0);
     
-    await expect(dotdot).toHaveClass(/current-file/);
-    
-    const first = rows.nth(1);
+    await expect(first).toHaveClass(/current-file/);
     
     await first.click();
     await page.keyboard.press('Insert');
@@ -33,7 +31,7 @@ test('Insert moves the cursor to the next file', async ({page}) => {
     await expect(second).toHaveClass(/current-file/);
 });
 
-test('Insert does not leave the cursor on the last file', async ({page}) => {
+test('Insert does not leave the cursor on the first file', async ({page}) => {
     await page.goto('/');
     
     const rows = getRows(page);
@@ -51,12 +49,14 @@ test('pressing Insert twice selects two consecutive files: first selected', asyn
     await page.goto('/');
     
     const rows = getRows(page);
-    const first = rows.nth(1);
-    const second = rows.nth(2);
+    const first = rows.nth(0);
+    const second = rows.nth(1);
     
     await first.click();
     await page.keyboard.press('Insert');
+    
     await expect(second).toHaveClass(/current-file/);
+    
     await page.keyboard.press('Insert');
     
     await expect(first).toHaveClass(/selected-file/);
@@ -71,23 +71,28 @@ test('pressing Insert twice selects two consecutive files: second selected', asy
     
     await first.click();
     await page.keyboard.press('Insert');
+    
+    await expect(second).toHaveClass(/current-file/);
+    
     await page.keyboard.press('Insert');
     
     await expect(second).toHaveClass(/selected-file/);
 });
 
-test('pressing Insert twice leaves cursor on the second file', async ({page}) => {
+test('pressing Insert twice leaves cursor on the third file', async ({page}) => {
     await page.goto('/');
     
     const rows = getRows(page);
+    const first = rows.nth(0);
     const second = rows.nth(1);
+    const third = rows.nth(2);
     
-    await rows
-        .nth(1)
-        .click();
-    
-    await page.keyboard.press('Insert');
+    await first.click();
     await page.keyboard.press('Insert');
     
     await expect(second).toHaveClass(/current-file/);
+    
+    await page.keyboard.press('Insert');
+    
+    await expect(third).toHaveClass(/current-file/);
 });

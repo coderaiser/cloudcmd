@@ -20,9 +20,9 @@ test('F3 on a .png file does not open the text viewer', async ({page}) => {
     await page.keyboard.press('F3');
     
     const modal = getModal(page);
-    const modalText = await modal.textContent();
+    await expect(modal).toBeVisible();
     
-    await expect(modalText).not.toContain('PNG');
+    await expect(modal).not.toContainText('PNG');
 });
 
 test('double-click on a .png file opens the image viewer', async ({page}) => {
@@ -38,9 +38,9 @@ test('double-click on a .png file does not open the text viewer', async ({page})
     await getFile(page, 'view.png').dblclick();
     
     const modal = getModal(page);
-    const modalText = await modal.textContent();
+    await expect(modal).toBeVisible();
     
-    await expect(modalText).not.toContain('PNG');
+    await expect(modal).not.toContainText('PNG');
 });
 
 test('F3 on a .txt file opens the text viewer', async ({page}) => {
@@ -59,5 +59,6 @@ test('F3 on a .txt file shows file content', async ({page}) => {
     
     const modal = getModal(page);
     await expect(modal).toBeVisible();
+    
     await expect(modal).not.toHaveText('');
 });
