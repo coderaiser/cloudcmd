@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install Redrun
-        run: bun i redrun madrun -g --no-save
+        run: bun i playwright redrun madrun -g --no-save
       - name: Install
         run: bun i --no-save
       - name: Init Madrun
@@ -43,8 +43,13 @@ jobs:
           message: "chore: ${{ env.NAME }}: actions: lint ☘️"
       - name: Build
         run: redrun build
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('**/package.json') }}
       - name: Install Playwright browsers
-        run: npx playwright install chromium --with-deps
+        run: playwright install chromium --with-deps
       - name: Test E2E Client
         run: redrun test:e2e:client
       - name: Test
