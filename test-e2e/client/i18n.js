@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import createServer from './createServer.js';
+import createServer from '../server/createServer.js';
 
 test.describe('Cloud Commander i18n Server E2E Tests', () => {
     test('should inject __CLOUDCMD_I18N_PACK__ into index.html during bootstrap', async ({ page }) => {
