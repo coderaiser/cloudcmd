@@ -5,7 +5,10 @@ const getFile = (page, name) => page
     .locator(`[data-name="js-file-${btoa(name)}"]`)
     .first();
 
-const goto = (page) => page.goto('/', {waitUntil: 'networkidle'});
+const goto = (page) => page.goto('/', {
+    waitUntil: 'networkidle',
+});
+
 const waitForPanel = (page) => page
     .locator('.files li')
     .first()

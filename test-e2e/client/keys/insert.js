@@ -1,7 +1,10 @@
 import {test, expect} from '@playwright/test';
 
 const getRows = (page) => page.locator('.files li');
-const goto = (page) => page.goto('/', {waitUntil: 'networkidle'});
+const goto = (page) => page.goto('/', {
+    waitUntil: 'networkidle',
+});
+
 const waitForPanel = (page) => page
     .locator('.files li')
     .first()
