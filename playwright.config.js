@@ -12,6 +12,7 @@ export default defineConfig({
     use: {
         baseURL: 'http://localhost:3002',
         headless: true,
+        video: 'retain-on-failure',
     },
     webServer: {
         command: 'node bin/cloudcmd.js --no-auth --port 3002 --root test-e2e/client/fixture --no-open',

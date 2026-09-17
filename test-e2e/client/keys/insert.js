@@ -51,10 +51,12 @@ test('pressing Insert twice selects two consecutive files: first selected', asyn
     await page.goto('/');
     
     const rows = getRows(page);
-    const first = rows.nth(0);
+    const first = rows.nth(1);
+    const second = rows.nth(2);
     
     await first.click();
     await page.keyboard.press('Insert');
+    await expect(second).toHaveClass(/current-file/);
     await page.keyboard.press('Insert');
     
     await expect(first).toHaveClass(/selected-file/);

@@ -58,7 +58,6 @@ test('F3 on a .txt file shows file content', async ({page}) => {
     await page.keyboard.press('F3');
     
     const modal = getModal(page);
-    const modalText = await modal.textContent();
-    
-    await expect(modalText.length).toBeGreaterThan(0);
+    await expect(modal).toBeVisible();
+    await expect(modal).not.toHaveText('');
 });
