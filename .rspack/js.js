@@ -59,7 +59,6 @@ const plugins = [
     new NormalModuleReplacementPlugin(/^node:/, (resource) => {
         resource.request = resource.request.replace(/^node:/, '');
     }),
-    new NormalModuleReplacementPlugin(/^putout$/, '@putout/bundle'),
     new EnvironmentPlugin({
         NODE_ENV,
     }),
