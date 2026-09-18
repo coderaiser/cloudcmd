@@ -17,6 +17,9 @@ import prefixer from './prefixer.js';
 import Template from './template.js';
 import {getColumns} from './columns.js';
 import {getThemes} from './theme.js';
+import {readFileSync} from 'node:fs';
+import {join, dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 const require = createRequire(import.meta.url);
 const {stringify} = JSON;
@@ -163,6 +166,13 @@ function indexProcessing(config, options) {
     
     const name = config('name');
     
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const lang = config('lang') || 'en';
+    const dictPath = join(__dirname, '..', 'json', 'i18n', `${lang}.json`);
+
+    const [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
+    const i18nPack = readError ? {} : JSON.parse(jsonString);
+
     data = rendy(data, {
         title: CloudFunc.getTitle({
             name,
@@ -173,8 +183,12 @@ function indexProcessing(config, options) {
         columns: getColumns()[config('columns')],
         themes: getThemes()[config('theme')],
     });
-    
+
+    const i18nScript = `<script>window.__CLOUDCMD_I18N_PACK__ = ${stringify(i18nPack)};</script>`;
+    data = data.replace('<head>', `<head>${i18nScript}`);
+
     return data;
+
 }
 
 function buildIndex(config, html, data) {
