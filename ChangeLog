@@ -1,3 +1,11 @@
+2026.09.18, v19.21.0
+
+feature:
+- 7d3b6456 cloudcmd: aleman: bundle menu (#468)
+- dc32d129 menu: rspack bundle + static import, move aleman to devDependencies
+- b76d582b menu: remove esm.sh prefetch
+- 21cdb18f menu: static import aleman/menu/bundle via rspack
+
 2026.09.16, v19.20.8
 
 fix:
