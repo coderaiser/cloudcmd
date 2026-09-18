@@ -167,12 +167,28 @@ function indexProcessing(config, options) {
     const name = config('name');
     
     const __dirname = dirname(fileURLToPath(import.meta.url));
-    const lang = config('lang') || 'en';
-    const dictPath = join(__dirname, '..', 'json', 'i18n', `${lang}.json`);
-
-    const [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
+    let lang = config('lang');
+    if (!lang || lang === 'undefined') {
+        lang = 'en';
+    }
+    
+    let dictPath = join(__dirname, '..', 'json', 'i18n', `${lang}.json`);
+    let [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
+    
+    // Fallback 1: Jeśli testy CI szukają folder wyżej w strukturze dystrybucyjnej
+    if (readError) {
+        dictPath = join(__dirname, '..', '..', 'json', 'i18n', `${lang}.json`);
+        [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
+    }
+    
+    // Fallback 2: Bezwzględne bezpieczeństwo - powrót do angielskiego en.json
+    if (readError) {
+        dictPath = join(__dirname, '..', 'json', 'i18n', 'en.json');
+        [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
+    }
+    
     const i18nPack = readError ? {} : JSON.parse(jsonString);
-
+    
     data = rendy(data, {
         title: CloudFunc.getTitle({
             name,
@@ -183,10 +199,10 @@ function indexProcessing(config, options) {
         columns: getColumns()[config('columns')],
         themes: getThemes()[config('theme')],
     });
-
+    
     const i18nScript = `<script>window.__CLOUDCMD_I18N_PACK__ = ${stringify(i18nPack)};</script>`;
     data = data.replace('<head>', `<head>${i18nScript}`);
-
+    
     return data;
 
 }
