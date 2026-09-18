@@ -176,14 +176,7 @@ function indexProcessing(config, options) {
     let [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
     
     if (readError) {
-        // Diagnostyka dla GitHub Actions - wypisujemy gdzie dokładnie szuka serwer
-        console.error('=== I18N DEBUG INFO ===');
-        console.error('Current __dirname:', __dirname);
-        console.error('Attempted dictPath 1:', dictPath);
-        console.error('Error Message:', readError.message);
-        
         dictPath = join(__dirname, '..', '..', 'json', 'i18n', `${lang}.json`);
-        console.error('Attempted dictPath 2:', dictPath);
         [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
     }
     
@@ -209,7 +202,6 @@ function indexProcessing(config, options) {
     data = data.replace('<head>', `<head>${i18nScript}`);
     
     return data;
-
 
 }
 
