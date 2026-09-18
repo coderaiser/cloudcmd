@@ -1,6 +1,7 @@
 const goto = (page) => page.goto('/', {
     waitUntil: 'networkidle',
 });
+
 const waitForPanel = (page) => page
     .locator('.files li')
     .first()
@@ -10,9 +11,11 @@ export const createMenuHelper = (page) => ({
     async open() {
         await goto(page);
         await waitForPanel(page);
-        await page.locator('[data-name="js-left"]').click({
-            button: 'right',
-        });
+        await page
+            .locator('[data-name="js-left"]')
+            .click({
+                button: 'right',
+            });
     },
     async pressKey(key) {
         await page.keyboard.press(key);
@@ -35,5 +38,7 @@ export const createMenuHelper = (page) => ({
         .locator('.menu-item-selected label')
         .first()
         .textContent(),
-    itemTexts: () => page.locator('.menu > .menu-item > label').allTextContents(),
+    itemTexts: () => page
+        .locator('.menu > .menu-item > label')
+        .allTextContents(),
 });

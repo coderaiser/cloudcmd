@@ -32,7 +32,6 @@ async function init(config) {
     const prefix = getPrefix(config.prefix);
     
     globalThis.CloudCmd.init(prefix, config);
-
 }
 
 function getPrefix(prefix) {

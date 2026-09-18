@@ -56,6 +56,7 @@ test('menu: contains Upload item', async ({page}) => {
 
 test('menu: F9 opens menu', async ({page}) => {
     const menu = createMenuHelper(page);
+    
     await page.goto('/', {
         waitUntil: 'networkidle',
     });
@@ -68,4 +69,3 @@ test('menu: F9 opens menu', async ({page}) => {
     
     await expect(await menu.isVisible()).toBe(true);
 });
-
