@@ -14,6 +14,7 @@ import {contentType} from 'mime-types';
 import * as CloudFunc from '#common/cloudfunc';
 import root from './root.js';
 import prefixer from './prefixer.js';
+import {readTranslations} from './i18n.js';
 import Template from './template.js';
 import {getColumns} from './columns.js';
 import {getThemes} from './theme.js';
@@ -167,32 +168,8 @@ function indexProcessing(config, options) {
     const name = config('name');
     
     const __dirname = dirname(fileURLToPath(import.meta.url));
-    let lang = config('lang');
-    if (!lang || lang === 'undefined') {
-        lang = 'en';
-    }
-    
-    let dictPath = join(__dirname, '..', 'json', 'i18n', `${lang}.json`);
-    let [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
-    
-    if (readError) {
-        // Diagnostyka dla GitHub Actions - wypisujemy gdzie dokładnie szuka serwer
-        console.error('=== I18N DEBUG INFO ===');
-        console.error('Current __dirname:', __dirname);
-        console.error('Attempted dictPath 1:', dictPath);
-        console.error('Error Message:', readError.message);
-        
-        dictPath = join(__dirname, '..', '..', 'json', 'i18n', `${lang}.json`);
-        console.error('Attempted dictPath 2:', dictPath);
-        [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
-    }
-    
-    if (readError) {
-        dictPath = join(__dirname, '..', 'json', 'i18n', 'en.json');
-        [readError, jsonString] = tryCatch(readFileSync, dictPath, 'utf8');
-    }
-    
-    const i18nPack = readError ? {} : JSON.parse(jsonString);
+    const lang = config('lang') || 'en';
+    const i18nPack = readTranslations(lang);
     
     data = rendy(data, {
         title: CloudFunc.getTitle({
@@ -203,13 +180,10 @@ function indexProcessing(config, options) {
         config: stringify(config('*')),
         columns: getColumns()[config('columns')],
         themes: getThemes()[config('theme')],
+        i18n: stringify(i18nPack) || '{}', // <-- Przywrócono czysty stringify
     });
     
-    const i18nScript = `<script>window.__CLOUDCMD_I18N_PACK__ = ${stringify(i18nPack)};</script>`;
-    data = data.replace('<head>', `<head>${i18nScript}`);
-    
     return data;
-
 
 }
 

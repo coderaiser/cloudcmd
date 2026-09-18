@@ -1,26 +1,24 @@
-import { test, expect } from '@playwright/test';
+import {test} from '@cloudcmd/test-e2e';
 
-test.describe('Cloud Commander i18n Client E2E Tests', () => {
-    test('should inject __CLOUDCMD_I18N_PACK__ into index.html during bootstrap', async ({ page }) => {
-        await page.goto('/');
+test('should inject i18n into index.html during bootstrap', async ({page}) => {
+    const i18nPack = await page.evaluate(() => globalThis.i18n);
+    
+    const isObject = typeof i18nPack === 'object' && i18nPack !== null;
+    if (!isObject)
+        throw Error('i18n is not an object');
+});
 
-        const i18nPack = await page.evaluate(() => window.__CLOUDCMD_I18N_PACK__);
-        expect(i18nPack).toBeDefined();
+test('should use injected i18n translations on client-side', async ({page}) => {
+    await page.evaluate(() => {
+        globalThis.i18n = {
+            'F2 - Rename': 'F2 - Zmień nazwę',
+        };
     });
-
-    test('should render translated text tokens visible in the user interface context', async ({ page }) => {
-        await page.goto('/');
-
-        await page.evaluate(() => {
-            window.__CLOUDCMD_I18N_PACK__ = {
-                "F2 - Rename": "F2 - Zmień nazwę"
-            };
-        });
-
-        const testToken = await page.evaluate(() => {
-            return window.__CLOUDCMD_I18N_PACK__["F2 - Rename"];
-        });
-
-        expect(testToken).toBe('F2 - Zmień nazwę');
+    
+    const translation = await page.evaluate(() => {
+        return globalThis.i18n['F2 - Rename'];
     });
+    
+    if (translation !== 'F2 - Zmień nazwę')
+        throw Error('Client-side translation fallback failed');
 });
