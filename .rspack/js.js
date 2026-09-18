@@ -49,6 +49,10 @@ const rules = [{
             targets: 'defaults',
         },
     },
+}, {
+    test: /\.css$/,
+    include: /node_modules\/aleman/,
+    type: 'asset/source',
 }];
 
 const plugins = [
@@ -65,12 +69,20 @@ const plugins = [
 ];
 
 const splitChunks = {
-    chunks: 'all',
+    chunks: (chunk) => chunk.name !== './modules/menu',
     cacheGroups: {
+        menuStyles: {
+            name: 'cloudcmd.common',
+            type: 'css/mini-extract',
+            chunks: (chunk) => chunk.name === './modules/menu',
+            enforce: true,
+            priority: 1,
+        },
         abcCommon: {
             name: 'cloudcmd.common',
             chunks: (chunk) => {
                 const lazyChunks = [
+                    './modules/menu',
                     'sw',
                     'nojs',
                     'view',
@@ -162,8 +174,9 @@ export default {
     },
     plugins,
     performance: {
-        maxEntrypointSize: 800_000,
-        maxAssetSize: 600_000,
+        maxEntrypointSize: 1_600_000,
+        // The lazy menu includes Putout; splitting it for caching is a future optimization.
+        maxAssetSize: 1_500_000,
     },
 };
 

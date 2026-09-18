@@ -1,3 +1,4 @@
+import {createCloudMenu} from './cloudmenu.js';
 import exec from 'execon';
 import wrap from 'wraptile';
 import createElement from '@cloudcmd/create-element';
@@ -44,8 +45,6 @@ export async function init() {
     const optionsFile = getOptions({
         type: 'file',
     });
-    
-    const {createCloudMenu} = await import('./cloudmenu.js');
     
     const {name} = fm.dataset;
     
