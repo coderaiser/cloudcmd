@@ -52,6 +52,8 @@ jobs:
         run: playwright install chromium --with-deps
       - name: Test E2E Client
         run: redrun test:e2e:client
+      - name: Test E2E Menu
+        run: redrun test:e2e:menu
       - name: Test
         run: redrun test
       - name: Coverage

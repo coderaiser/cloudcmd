@@ -12,6 +12,7 @@ const plugins = [
 
 const rules = [{
     test: /\.css$/i,
+    exclude: /node_modules\/aleman/,
     use: [CssExtractRspackPlugin.loader, {
         loader: 'css-loader',
         options: {
@@ -32,6 +33,7 @@ export default {
     optimization: {
         minimize: !isDev,
         minimizer: [
+            new rspack.SwcJsMinimizerRspackPlugin(),
             new rspack.LightningCssMinimizerRspackPlugin(),
         ],
     },
