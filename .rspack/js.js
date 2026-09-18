@@ -65,7 +65,9 @@ const plugins = [
         resource.request = resource.request.replace(/^node:/, '');
     }),
     new ContextReplacementPlugin(/@putout\/engine-loader/, /NEVER_MATCH^/),
-    new IgnorePlugin({resourceRegExp: /hermes-parser/}),
+    new IgnorePlugin({
+        resourceRegExp: /hermes-parser/,
+    }),
     new NormalModuleReplacementPlugin(/esprima/, `${rootDir}.rspack/empty.js`),
     new NormalModuleReplacementPlugin(/acorn-stage3/, `${rootDir}.rspack/empty.js`),
     new NormalModuleReplacementPlugin(/tenko/, `${rootDir}.rspack/empty.js`),
@@ -126,11 +128,11 @@ export default {
             'node:path': 'path',
         },
         fallback: {
-            path: resolveModule('path-browserify'),
-            process: resolveModule('process/browser'),
+            'path': resolveModule('path-browserify'),
+            'process': resolveModule('process/browser'),
             'process/browser': resolveModule('process/browser'),
-            util: resolveModule('util'),
-            module: false,
+            'util': resolveModule('util'),
+            'module': false,
         },
     },
     devtool,
