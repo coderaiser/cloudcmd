@@ -34,6 +34,7 @@ export default {
     'lint:stream': () => run('lint', '-f stream'),
     'test': () => [testEnv, `tape '{test}/**/*.js' '{bin,client,static,common,server}/**/*.spec.js' -f fail`],
     'test:e2e': () => `tape 'test-e2e/server/**/*.js'`,
+    'test:e2e:menu': () => 'playwright test --project=menu',
     'test:e2e:client': () => 'playwright test',
     'test:client': () => `tape 'test/client/**/*.js'`,
     'test:server': () => `tape 'test/**/*.js' 'server/**/*.spec.js' 'common/**/*.spec.js'`,
