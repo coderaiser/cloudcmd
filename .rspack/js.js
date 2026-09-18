@@ -6,7 +6,9 @@ import {rspack} from '@rspack/core';
 const resolveModule = (a) => fileURLToPath(import.meta.resolve(a));
 
 const {
+    ContextReplacementPlugin,
     EnvironmentPlugin,
+    IgnorePlugin,
     NormalModuleReplacementPlugin,
     ProvidePlugin,
 } = rspack;
@@ -37,6 +39,9 @@ const rules = [{
     loader: 'babel-loader',
 }, {
     test: /\.[mc]?js$/,
+    resolve: {
+        fullySpecified: false,
+    },
     exclude: [/node_modules/, /sw\/sw\.js$/],
     loader: 'builtin:swc-loader',
     options: {
@@ -59,6 +64,11 @@ const plugins = [
     new NormalModuleReplacementPlugin(/^node:/, (resource) => {
         resource.request = resource.request.replace(/^node:/, '');
     }),
+    new ContextReplacementPlugin(/@putout\/engine-loader/, /NEVER_MATCH^/),
+    new IgnorePlugin({resourceRegExp: /hermes-parser/}),
+    new NormalModuleReplacementPlugin(/esprima/, `${rootDir}.rspack/empty.js`),
+    new NormalModuleReplacementPlugin(/acorn-stage3/, `${rootDir}.rspack/empty.js`),
+    new NormalModuleReplacementPlugin(/tenko/, `${rootDir}.rspack/empty.js`),
     new EnvironmentPlugin({
         NODE_ENV,
     }),
@@ -118,7 +128,9 @@ export default {
         fallback: {
             path: resolveModule('path-browserify'),
             process: resolveModule('process/browser'),
+            'process/browser': resolveModule('process/browser'),
             util: resolveModule('util'),
+            module: false,
         },
     },
     devtool,
@@ -173,9 +185,9 @@ export default {
     },
     plugins,
     performance: {
-        maxEntrypointSize: 1_600_000,
+        maxEntrypointSize: 2_200_000,
         // The lazy menu includes Putout; splitting it for caching is a future optimization.
-        maxAssetSize: 1_500_000,
+        maxAssetSize: 1_600_000,
     },
 };
 
