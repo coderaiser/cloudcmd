@@ -193,7 +193,8 @@ function cloudcmdMiddle({modules, config}) {
     const zip = apart(config, 'zip');
     const root = apart(config, 'root');
 	const prefix = config('prefix'); // <-- DODAJ TĘ LINIĘ
-    
+    const dropboxToken = config('dropboxToken');
+	
     const ponseStatic = ponse.createStatic({
         cache,
         root: DIR_ROOT,
