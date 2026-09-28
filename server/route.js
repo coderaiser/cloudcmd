@@ -14,9 +14,13 @@ import {contentType} from 'mime-types';
 import * as CloudFunc from '#common/cloudfunc';
 import root from './root.js';
 import prefixer from './prefixer.js';
+import {readTranslations} from './i18n.js';
 import Template from './template.js';
 import {getColumns} from './columns.js';
 import {getThemes} from './theme.js';
+import {readFileSync} from 'node:fs';
+import {join, dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 const require = createRequire(import.meta.url);
 const {stringify} = JSON;
@@ -163,6 +167,10 @@ function indexProcessing(config, options) {
     
     const name = config('name');
     
+    const __dirname = dirname(fileURLToPath(import.meta.url));
+    const lang = config('lang') || 'en';
+    const i18nPack = readTranslations(lang);
+    
     data = rendy(data, {
         title: CloudFunc.getTitle({
             name,
@@ -172,9 +180,11 @@ function indexProcessing(config, options) {
         config: stringify(config('*')),
         columns: getColumns()[config('columns')],
         themes: getThemes()[config('theme')],
+        i18n: stringify(i18nPack) || '{}', // <-- Przywrócono czysty stringify
     });
     
     return data;
+
 }
 
 function buildIndex(config, html, data) {
