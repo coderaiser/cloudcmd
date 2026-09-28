@@ -192,6 +192,7 @@ function cloudcmdMiddle({modules, config}) {
     const diff = apart(config, 'diff');
     const zip = apart(config, 'zip');
     const root = apart(config, 'root');
+	const prefix = config('prefix'); // <-- DODAJ TĘ LINIĘ
     
     const ponseStatic = ponse.createStatic({
         cache,
@@ -199,45 +200,50 @@ function cloudcmdMiddle({modules, config}) {
     });
     
     const dropbox = config('dropbox');
-    const dropboxToken = config('dropboxToken');
-    
+    const cutPrefix = (middleware) => (req, res, next) => {
+        if (prefix && req.url.startsWith(prefix)) {
+            req.url = req.url.replace(prefix, '') || '/';
+        }
+        middleware(req, res, next);
+    };
+
     const funcs = clean([
         config('console') && konsole({
             online,
         }),
         config('terminal') && terminal(config, {}),
-        edward({
+        cutPrefix(edward({
             root,
             online,
             diff,
             zip,
             dropbox,
             dropboxToken,
-        }),
-        dword({
+        })),
+        cutPrefix(dword({
             root,
             online,
             diff,
             zip,
             dropbox,
             dropboxToken,
-        }),
-        qword({
+        })),
+        cutPrefix(qword({
             root,
             online,
             diff,
             zip,
             dropbox,
             dropboxToken,
-        }),
-        deepword({
+        })),
+        cutPrefix(deepword({
             root,
             online,
             diff,
             zip,
             dropbox,
             dropboxToken,
-        }),
+        })),
         fileop(),
         nomine(),
         setUrl,
