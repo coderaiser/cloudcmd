@@ -186,7 +186,7 @@ function listen({prefixSocket, socket, config}) {
     distributeExport(config, socket);
 }
 
-function cutPrefix(prefix, req, res, next) {
+function cutPrefix(prefix, req, next) {
     req.url = req.url.replace(prefix, '') || '/';
     next();
 }
@@ -212,7 +212,7 @@ function cloudcmdMiddle({modules, config}) {
             if (!req.url.startsWith(prefix))
                 return next();
             
-            cutPrefix(prefix, req, res, next);
+            cutPrefix(prefix, req, next);
         }),
         config('console') && konsole({
             online,
