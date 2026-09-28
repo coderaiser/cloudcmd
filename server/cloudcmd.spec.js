@@ -245,3 +245,32 @@ test('cloudcmd: setUrl: cloudcmd.js', async (t) => {
     t.equal(status, 200, 'should serve cloudcmd.js');
     t.end();
 });
+
+test('cloudcmd: prefix: serve cloudcmd.js', async (t) => {
+    const {request} = serveOnce(cloudcmd, {
+        config: {
+            auth: false,
+            prefix: '/cmd',
+        },
+    });
+    
+    const {status} = await request.get('/cmd/cloudcmd.js');
+    
+    t.equal(status, 200, 'should serve cloudcmd.js under prefix');
+    t.end();
+});
+
+test('cloudcmd: prefix: serve edward.js', async (t) => {
+    const {request} = serveOnce(cloudcmd, {
+        config: {
+            auth: false,
+            prefix: '/cmd',
+            editor: 'edward',
+        },
+    });
+    
+    const {status} = await request.get('/cmd/edward/edward.js');
+    
+    t.equal(status, 200, 'should serve edward.js under prefix');
+    t.end();
+});

@@ -186,6 +186,11 @@ function listen({prefixSocket, socket, config}) {
     distributeExport(config, socket);
 }
 
+function cutPrefix(prefix, req, res, next) {
+    req.url = req.url.replace(prefix, '') || '/';
+    next();
+}
+
 function cloudcmdMiddle({modules, config}) {
     const online = apart(config, 'online');
     const cache = false;
@@ -200,8 +205,15 @@ function cloudcmdMiddle({modules, config}) {
     
     const dropbox = config('dropbox');
     const dropboxToken = config('dropboxToken');
+    const prefix = prefixer(config('prefix'));
     
     const funcs = clean([
+        prefix && ((req, res, next) => {
+            if (!req.url.startsWith(prefix))
+                return next();
+            
+            cutPrefix(prefix, req, res, next);
+        }),
         config('console') && konsole({
             online,
         }),
