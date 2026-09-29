@@ -219,6 +219,7 @@ function cloudcmdMiddle({modules, config}) {
         }),
         config('terminal') && terminal(config, {}),
         edward({
+			prefix,
             root,
             online,
             diff,
@@ -227,6 +228,7 @@ function cloudcmdMiddle({modules, config}) {
             dropboxToken,
         }),
         dword({
+			prefix,
             root,
             online,
             diff,
@@ -235,6 +237,7 @@ function cloudcmdMiddle({modules, config}) {
             dropboxToken,
         }),
         qword({
+			prefix,
             root,
             online,
             diff,
@@ -243,6 +246,7 @@ function cloudcmdMiddle({modules, config}) {
             dropboxToken,
         }),
         deepword({
+			prefix,
             root,
             online,
             diff,
