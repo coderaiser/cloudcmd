@@ -127,7 +127,13 @@ function onGET(params, config, callback) {
     
     if (cmd.startsWith('pack')) {
         cmd = cmd.replace(/^pack/, '');
-        streamPack(root(cmd, rootDir), p.response, packer);
+        
+        const [error, rooted] = tryCatch(root.resolve, cmd, rootDir);
+        
+        if (error)
+            return callback(error);
+        
+        streamPack(rooted, p.response, packer);
         
         return;
     }

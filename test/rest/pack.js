@@ -271,3 +271,37 @@ test('cloudcmd: rest: pack: path traversal: to', async (t) => {
     t.equal(body, 'Path /tmp/cc-outside/evil.zip beyond root /sandbox!', 'should reject traversal in to');
     t.end();
 });
+
+test('cloudcmd: rest: pack: get: path traversal', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/tmp/cc-sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    // %2f-encoded slashes bypass URL normalisation; this is the exact PoC vector
+    const {body} = await request.get('/api/v1/pack..%2f..%2f..%2ftmp%2fcc-outside%2fsecret.txt.tar.gz', {
+        type: 'buffer',
+    });
+    
+    t.notOk(body.toString().includes('CANARY'), 'should not serve file outside root');
+    t.end();
+});
+
+test('cloudcmd: rest: pack: get: path traversal: error message', async (t) => {
+    const configManager = cloudcmd.createConfigManager();
+    configManager('auth', false);
+    configManager('root', '/tmp/cc-sandbox');
+    
+    const {request} = serveOnce(cloudcmd, {
+        configManager,
+    });
+    
+    // %2f-encoded slashes bypass URL normalisation; this is the exact PoC vector
+    const {body} = await request.get('/api/v1/pack..%2f..%2f..%2ftmp%2fcc-outside%2fsecret.txt.tar.gz');
+    
+    t.match(body, /beyond root/, 'should return beyond root error');
+    t.end();
+});
