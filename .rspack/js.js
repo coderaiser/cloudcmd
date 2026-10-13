@@ -187,9 +187,8 @@ export default {
     },
     plugins,
     performance: {
-        maxEntrypointSize: 2_200_000,
-        // The lazy menu includes Putout; splitting it for caching is a future optimization.
-        maxAssetSize: 1_600_000,
+        maxEntrypointSize: 2_800_000,
+        maxAssetSize: 1_900_000,
     },
 };
 

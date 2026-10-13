@@ -27,7 +27,7 @@ export default {
     'lint:all': () => run('lint:progress'),
     'lint': () => 'redlint fix; putout .',
     'lint:progress': () => run('lint', '-f progress'),
-    'watch:lint': () => 'nodemon -w client -w server -w test -w common -w .webpack -x "putout -s"',
+    'watch:lint': () => 'nodemon -w client -w server -w test -w common -w .rspack -x "putout -s"',
     'fresh:lint': () => run('lint', '--fresh'),
     'lint:fresh': () => run('lint', '--fresh'),
     'fix:lint': async () => `putout --fix . && redlint fix`,
