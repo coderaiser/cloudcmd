@@ -1,3 +1,8 @@
+2026.10.13, v19.21.2
+
+fix:
+- 91c02459 server: pack: path traverse
+
 2026.09.29, v19.21.1
 
 fix:
