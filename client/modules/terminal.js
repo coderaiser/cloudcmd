@@ -107,7 +107,12 @@ export function show() {
     
     CloudCmd.View.show(Terminal.element, {
         afterShow: () => {
+            refit();
             Terminal.focus();
         },
     });
 }
+
+// gritty fits the terminal to document.body on create,
+// and refits on window resize only
+const refit = () => globalThis.dispatchEvent(new Event('resize'));

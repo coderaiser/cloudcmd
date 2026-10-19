@@ -65,6 +65,7 @@ const runTerminal = promisify((options, fn) => {
     
     CloudCmd.View.show(Terminal.element, {
         afterShow: () => {
+            refit();
             Terminal.focus();
         },
         afterClose: (/* exec.series args */) => {
@@ -76,6 +77,10 @@ const runTerminal = promisify((options, fn) => {
 export function hide() {
     CloudCmd.View.hide();
 }
+
+// gritty fits the terminal to document.body on create,
+// and refits on window resize only
+const refit = () => globalThis.dispatchEvent(new Event('resize'));
 
 const getPrefix = () => CloudCmd.prefix + '/gritty';
 
