@@ -13,7 +13,7 @@ import {edward} from 'edward';
 import {dword} from 'dword';
 import {deepword} from 'deepword';
 import {qword} from 'qword';
-import nomine from 'nomine';
+import {nomine} from 'nomine';
 import {fileop} from '@cloudcmd/fileop';
 import * as cloudfunc from '#common/cloudfunc';
 import authentication from './auth.js';

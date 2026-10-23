@@ -124,7 +124,7 @@
     "mime-types": "^3.0.1",
     "montag": "^2.0.1",
     "nano-memoize": "^3.0.16",
-    "nomine": "^4.0.0",
+    "nomine": "^5.0.2",
     "once": "^1.4.0",
     "onezip": "^7.0.0",
     "open": "^11.0.0",
