@@ -101,7 +101,7 @@ Cloud Commander supports the following command-line parameters:
 | `--terminal-auto-restart`    | restart command on exit
 | `--vim`                      | enable vim hot keys
 | `--columns`                  | set visible columns
-| `--theme`                    | set theme 'light' or 'dark'"
+| `--theme`                    | set theme 'light', 'dark', or 'cyan-sinko'"
 | `--export`                   | enable export of config through a server
 | `--export-token`             | authorization token used by export server
 | `--import`                   | enable import of config
@@ -445,7 +445,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_OPEN` - open web browser when server started
 - `CLOUDCMD_EDITOR` - set editor
 - `CLOUDCMD_COLUMNS` - set visible themes
-- `CLOUDCMD_THEME` - set themes "light" or "dark"
+- `CLOUDCMD_THEME` - set themes "light", "dark", or "cyan-sinko"
 - `CLOUDCMD_MENU` - set menu "supermenu" or "aleman"
 - `CLOUDCMD_CONTACT` - enable contact
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
