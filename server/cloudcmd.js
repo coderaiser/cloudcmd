@@ -251,11 +251,11 @@ function cloudcmdMiddle({modules, config}) {
             dropboxToken,
         }),
         fileop(),
-        nomine(),
         setUrl,
         setSW,
         logout,
         authentication(config),
+        nomine({root: root()}),
         config.middle,
         modules && modulas(modules),
         config('dropbox') && restbox({
