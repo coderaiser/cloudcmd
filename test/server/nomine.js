@@ -1,7 +1,7 @@
 import fs from 'node:fs';
-import path from 'node:path';
+import path, {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {dirname} from 'node:path';
+import {Buffer} from 'node:buffer';
 import test from 'supertape';
 import criton from 'criton';
 import {connect} from '../before.js';
@@ -15,13 +15,17 @@ const algo = configFn('algo');
 
 const USERNAME = 'admin';
 const PASSWORD = 'hunter2';
-const BASIC = Buffer.from(`${USERNAME}:${PASSWORD}`).toString('base64');
+const BASIC = Buffer
+    .from(`${USERNAME}:${PASSWORD}`)
+    .toString('base64');
 
 const fixtureDir = path.join(__dirname, '..', 'fixture');
 
 const put = (port, body) => fetch(`http://localhost:${port}/rename`, {
     method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
+    headers: {
+        'Content-Type': 'application/json',
+    },
     body: JSON.stringify(body),
 });
 
@@ -35,7 +39,6 @@ const putAuth = (port, body) => fetch(`http://localhost:${port}/rename`, {
 });
 
 // ── auth bypass (CWE-862) ─────────────────────────────────────────────────────
-
 test('cloudcmd: nomine: unauthenticated PUT /rename: 401', async (t) => {
     const {port, done} = await connect({
         config: {
@@ -46,7 +49,12 @@ test('cloudcmd: nomine: unauthenticated PUT /rename: 401', async (t) => {
         },
     });
     
-    const {status} = await put(port, {dir: fixtureDir, from: ['a.txt'], to: ['b.txt']});
+    const {status} = await put(port, {
+        dir: fixtureDir,
+        from: ['a.txt'],
+        to: ['b.txt'],
+    });
+    
     await done();
     
     t.equal(status, 401);
@@ -66,22 +74,36 @@ test('cloudcmd: nomine: authenticated PUT /rename: 200', async (t) => {
         },
     });
     
-    const {status} = await putAuth(port, {dir: tmpDir, from: ['src.txt'], to: ['dst.txt']});
+    const {status} = await putAuth(port, {
+        dir: tmpDir,
+        from: ['src.txt'],
+        to: ['dst.txt'],
+    });
+    
     await done();
-    fs.rmSync(tmpDir, {recursive: true});
+    fs.rmSync(tmpDir, {
+        recursive: true,
+    });
     
     t.equal(status, 200);
     t.end();
 });
 
 // ── path traversal (CWE-22) ───────────────────────────────────────────────────
-
 test('cloudcmd: nomine: traversal in from: 404', async (t) => {
     const {port, done} = await connect({
-        config: {auth: false, root: fixtureDir},
+        config: {
+            auth: false,
+            root: fixtureDir,
+        },
     });
     
-    const {status} = await put(port, {dir: fixtureDir, from: ['../outside.txt'], to: ['a.txt']});
+    const {status} = await put(port, {
+        dir: fixtureDir,
+        from: ['../outside.txt'],
+        to: ['a.txt'],
+    });
+    
     await done();
     
     t.equal(status, 404);
@@ -90,23 +112,39 @@ test('cloudcmd: nomine: traversal in from: 404', async (t) => {
 
 test('cloudcmd: nomine: traversal in from: body contains beyond root', async (t) => {
     const {port, done} = await connect({
-        config: {auth: false, root: fixtureDir},
+        config: {
+            auth: false,
+            root: fixtureDir,
+        },
     });
     
-    const res = await put(port, {dir: fixtureDir, from: ['../outside.txt'], to: ['a.txt']});
+    const res = await put(port, {
+        dir: fixtureDir,
+        from: ['../outside.txt'],
+        to: ['a.txt'],
+    });
     const body = await res.text();
+    
     await done();
     
-    t.ok(body.includes('beyond root'), `got: ${body}`);
+    t.match(body, 'beyond root', `got: ${body}`);
     t.end();
 });
 
 test('cloudcmd: nomine: traversal in to: 404', async (t) => {
     const {port, done} = await connect({
-        config: {auth: false, root: fixtureDir},
+        config: {
+            auth: false,
+            root: fixtureDir,
+        },
     });
     
-    const {status} = await put(port, {dir: fixtureDir, from: ['a.txt'], to: ['../escaped.txt']});
+    const {status} = await put(port, {
+        dir: fixtureDir,
+        from: ['a.txt'],
+        to: ['../escaped.txt'],
+    });
+    
     await done();
     
     t.equal(status, 404);
@@ -115,23 +153,39 @@ test('cloudcmd: nomine: traversal in to: 404', async (t) => {
 
 test('cloudcmd: nomine: traversal in to: body contains beyond root', async (t) => {
     const {port, done} = await connect({
-        config: {auth: false, root: fixtureDir},
+        config: {
+            auth: false,
+            root: fixtureDir,
+        },
     });
     
-    const res = await put(port, {dir: fixtureDir, from: ['a.txt'], to: ['../escaped.txt']});
+    const res = await put(port, {
+        dir: fixtureDir,
+        from: ['a.txt'],
+        to: ['../escaped.txt'],
+    });
     const body = await res.text();
+    
     await done();
     
-    t.ok(body.includes('beyond root'), `got: ${body}`);
+    t.match(body, 'beyond root', `got: ${body}`);
     t.end();
 });
 
 test('cloudcmd: nomine: absolute path outside root: 404', async (t) => {
     const {port, done} = await connect({
-        config: {auth: false, root: fixtureDir},
+        config: {
+            auth: false,
+            root: fixtureDir,
+        },
     });
     
-    const {status} = await put(port, {dir: fixtureDir, from: ['/etc/passwd'], to: ['/tmp/stolen']});
+    const {status} = await put(port, {
+        dir: fixtureDir,
+        from: ['/etc/passwd'],
+        to: ['/tmp/stolen'],
+    });
+    
     await done();
     
     t.equal(status, 404);
@@ -140,13 +194,21 @@ test('cloudcmd: nomine: absolute path outside root: 404', async (t) => {
 
 test('cloudcmd: nomine: absolute path outside root: body contains beyond root', async (t) => {
     const {port, done} = await connect({
-        config: {auth: false, root: fixtureDir},
+        config: {
+            auth: false,
+            root: fixtureDir,
+        },
     });
     
-    const res = await put(port, {dir: fixtureDir, from: ['/etc/passwd'], to: ['/tmp/stolen']});
+    const res = await put(port, {
+        dir: fixtureDir,
+        from: ['/etc/passwd'],
+        to: ['/tmp/stolen'],
+    });
     const body = await res.text();
+    
     await done();
     
-    t.ok(body.includes('beyond root'), `got: ${body}`);
+    t.match(body, 'beyond root', `got: ${body}`);
     t.end();
 });

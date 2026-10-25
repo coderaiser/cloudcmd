@@ -255,7 +255,9 @@ function cloudcmdMiddle({modules, config}) {
         setSW,
         logout,
         authentication(config),
-        nomine({root: root()}),
+        nomine({
+            root: root(),
+        }),
         config.middle,
         modules && modulas(modules),
         config('dropbox') && restbox({
