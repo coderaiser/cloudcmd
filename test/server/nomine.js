@@ -15,6 +15,7 @@ const algo = configFn('algo');
 
 const USERNAME = 'admin';
 const PASSWORD = 'hunter2';
+
 const BASIC = Buffer
     .from(`${USERNAME}:${PASSWORD}`)
     .toString('base64');
@@ -123,6 +124,7 @@ test('cloudcmd: nomine: traversal in from: body contains beyond root', async (t)
         from: ['../outside.txt'],
         to: ['a.txt'],
     });
+    
     const body = await res.text();
     
     await done();
@@ -164,6 +166,7 @@ test('cloudcmd: nomine: traversal in to: body contains beyond root', async (t) =
         from: ['a.txt'],
         to: ['../escaped.txt'],
     });
+    
     const body = await res.text();
     
     await done();
@@ -205,6 +208,7 @@ test('cloudcmd: nomine: absolute path outside root: body contains beyond root', 
         from: ['/etc/passwd'],
         to: ['/tmp/stolen'],
     });
+    
     const body = await res.text();
     
     await done();
