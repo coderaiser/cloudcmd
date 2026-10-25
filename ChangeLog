@@ -1,3 +1,8 @@
+2026.10.25, v19.21.4
+
+fix:
+- 25f496ff rename bypass auth (#486)
+
 2026.10.24, v19.21.3
 
 feature:
