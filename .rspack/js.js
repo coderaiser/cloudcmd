@@ -103,6 +103,7 @@ const splitChunks = {
                     'user-menu',
                     'help',
                     'themes/dark',
+                    'themes/cyan-sinko',
                     'themes/light',
                     'columns/name-size',
                     'columns/name-size-date',
@@ -141,6 +142,7 @@ export default {
     },
     entry: {
         'themes/dark': `${dirThemes}/dark.css`,
+        'themes/cyan-sinko': `${dirThemes}/cyan-sinko.css`,
         'themes/light': `${dirThemes}/light.css`,
         'columns/name-size': `${dirColumns}/name-size.css`,
         'columns/name-size-date': `${dirColumns}/name-size-date.css`,

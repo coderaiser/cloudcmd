@@ -6,6 +6,7 @@ import {getThemes, isDev} from './theme.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+const removeQuotes = (a) => a.replace(/['"]/g, '');
 
 test('themes: dev', (t) => {
     const themes = getThemes({
@@ -14,6 +15,18 @@ test('themes: dev', (t) => {
     
     const css = fs.readFileSync(`${__dirname}/../css/themes/dark.css`, 'utf8');
     const result = themes.dark.includes(css);
+    
+    t.ok(result);
+    t.end();
+});
+
+test('themes: dev: cyan-sinko', (t) => {
+    const themes = getThemes({
+        isDev: true,
+    });
+    
+    const css = fs.readFileSync(`${__dirname}/../css/themes/cyan-sinko.css`, 'utf8');
+    const result = removeQuotes(themes['cyan-sinko']).includes(removeQuotes(css));
     
     t.ok(result);
     t.end();
