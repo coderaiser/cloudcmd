@@ -1,9 +1,10 @@
 import {test, expect} from './fixtures.js';
 import {open, getRows} from './helper.js';
 
-const basic = (user, password) => 'Basic ' + Buffer
-    .from(`${user}:${password}`)
-    .toString('base64');
+const basic = (user, password) => 'Basic ' +
+    Buffer
+        .from(`${user}:${password}`)
+        .toString('base64');
 
 test.use({
     flags: [

@@ -4,6 +4,7 @@ import {pickMenu} from './pick-menu.js';
 const supermenu = () => 'supermenu';
 const aleman = () => 'aleman';
 const lunes = () => 'lunes';
+
 const menus = {
     supermenu,
     aleman,

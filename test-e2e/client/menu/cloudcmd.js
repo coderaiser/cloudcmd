@@ -35,7 +35,14 @@ test('menu: cloudcmd: right click on a file shows the file menu', async ({page})
     
     const labels = await visibleLabels(page);
     
-    for (const label of ['View', 'Edit', 'Upload To Cloud', 'Cut', 'Copy', 'Paste'])
+    for (const label of [
+        'View',
+        'Edit',
+        'Upload To Cloud',
+        'Cut',
+        'Copy',
+        'Paste',
+    ])
         expect(labels).toContain(label);
 });
 

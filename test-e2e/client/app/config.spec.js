@@ -43,7 +43,9 @@ test('CFG-04: the menu list has aleman, supermenu and lunes', async ({page}) => 
     await open(page);
     await page.keyboard.press('F10');
     
-    await expect(getModal(page).locator('[data-name="js-menu"] option')).toHaveText([
+    await expect(
+        getModal(page).locator('[data-name="js-menu"] option'),
+    ).toHaveText([
         'aleman',
         'supermenu',
         'lunes',
@@ -72,6 +74,8 @@ test.describe('--menu lunes', () => {
         await open(page);
         await page.keyboard.press('F10');
         
-        await expect(getModal(page).locator('[data-name="js-menu"]')).toHaveValue('lunes');
+        await expect(
+            getModal(page).locator('[data-name="js-menu"]'),
+        ).toHaveValue('lunes');
     });
 });

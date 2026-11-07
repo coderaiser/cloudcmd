@@ -7,10 +7,9 @@ const file = (page, index = 1) => page
     .locator('.files li[data-name^="js-file-"]')
     .nth(index);
 
-const label = (page, text) => page
-    .locator('ul.menu:not(.menu-hidden) > li > label', {
-        hasText: RegExp(`^${text}$`),
-    });
+const label = (page, text) => page.locator('ul.menu:not(.menu-hidden) > li > label', {
+    hasText: RegExp(`^${text}$`),
+});
 
 const VISIBLE = 'ul.menu:not(.menu-hidden)';
 
@@ -38,7 +37,12 @@ const rightClickEmpty = (page) => rightClick(page, page.locator('[data-name="js-
 
 const scenarios = {
     'right click on the path bar': async (page) => {
-        await rightClick(page, page.locator('[data-name="js-path"]').first());
+        await rightClick(
+            page,
+            page
+                .locator('[data-name="js-path"]')
+                .first(),
+        );
     },
     'file, then empty panel': async (page) => {
         await rightClick(page, file(page));
