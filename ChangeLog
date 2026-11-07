@@ -1,3 +1,16 @@
+2026.11.08, v19.22.0
+
+fix:
+- 95b11e44 bin: config: CLOUDCMD_KEYS_PANEL
+
+feature:
+- 746e4a77 cloudcmd: config: add lunes to the menu list
+- be32aac2 cloudcmd: e2e: menu: compare the behavior of menu and lunes
+- 71bf31e7 cloudcmd: e2e: menu: run the menu tests for lunes and compare the look
+- 4e4985c3 cloudcmd: menu: add lunes to the menu choice
+- 4e27fb0d cloudcmd: aleman: v2.2.1
+- 08cd6774 cloudcmd: menu: add lunes to the --menu validation and help
+
 2026.10.25, v19.21.4
 
 fix:
