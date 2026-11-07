@@ -35,10 +35,10 @@ export const editor = (name, {exit = _exit} = {}) => {
 };
 
 export const menu = (name, {exit = _exit} = {}) => {
-    const reg = /^(supermenu|aleman)$/;
+    const reg = /^(supermenu|aleman|lunes)$/;
     
     if (!reg.test(name))
-        exit('cloudcmd --menu: could be "supermenu" or "aleman" only');
+        exit('cloudcmd --menu: could be "supermenu", "aleman" or "lunes" only');
 };
 
 export const packer = (name, {exit = _exit} = {}) => {

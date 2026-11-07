@@ -134,7 +134,7 @@ test('validate: theme: wrong', (t) => {
 
 test('validate: menu: not valid', (t) => {
     const exit = stub();
-    const msg = 'cloudcmd --menu: could be "supermenu" or "aleman" only';
+    const msg = 'cloudcmd --menu: could be "supermenu", "aleman" or "lunes" only';
     
     validate.menu('hello', {
         exit,
@@ -148,6 +148,17 @@ test('validate: menu: valid', (t) => {
     const exit = stub();
     
     validate.menu('supermenu', {
+        exit,
+    });
+    
+    t.notCalled(exit, 'should not call fn');
+    t.end();
+});
+
+test('validate: menu: valid: lunes', (t) => {
+    const exit = stub();
+    
+    validate.menu('lunes', {
         exit,
     });
     
