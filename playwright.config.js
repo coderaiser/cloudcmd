@@ -35,6 +35,22 @@ export default defineConfig({
             headless: true,
             video: 'retain-on-failure',
         },
+    }, {
+        name: 'menu-lunes',
+        testMatch: 'client/menu/**/*.js',
+        testIgnore: 'client/menu/helper.js',
+        use: {
+            baseURL: 'http://localhost:3004',
+            headless: true,
+            video: 'retain-on-failure',
+        },
+    }, {
+        name: 'menu-look',
+        testMatch: 'client/menu-look/**/*.js',
+        use: {
+            headless: true,
+            video: 'retain-on-failure',
+        },
     }],
     webServer: [{
         command: 'node bin/cloudcmd.js --no-auth --port 3002 --root test-e2e/client/fixture --no-open',
@@ -44,6 +60,11 @@ export default defineConfig({
     }, {
         command: 'node bin/cloudcmd.js --no-auth --port 3003 --root test-e2e/client/fixture --no-open --menu aleman',
         url: 'http://localhost:3003',
+        reuseExistingServer: false,
+        timeout: 15_000,
+    }, {
+        command: 'node bin/cloudcmd.js --no-auth --port 3004 --root test-e2e/client/fixture --no-open --menu lunes',
+        url: 'http://localhost:3004',
         reuseExistingServer: false,
         timeout: 15_000,
     }],
