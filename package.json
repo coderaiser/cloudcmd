@@ -168,7 +168,7 @@
     "@rspack/core": "^2.1.4",
     "@supertape/loader-css": "^1.0.0",
     "@types/node-fetch": "^2.6.11",
-    "aleman": "^2.0.4",
+    "aleman": "^2.2.1",
     "auto-globals": "^4.0.0",
     "babel-loader": "^10.0.0",
     "babel-plugin-macros": "^3.0.0",
