@@ -4,7 +4,7 @@ import {defineConfig} from '@playwright/test';
 export default defineConfig({
     testDir: './test-e2e',
     timeout: 30_000,
-    workers: 1,
+    workers: 2,
     fullyParallel: true,
     forbidOnly: Boolean(process.env.CI),
     reporter: 'list',
@@ -13,7 +13,7 @@ export default defineConfig({
     },
     projects: [{
         name: 'default',
-        testMatch: 'client/keys/**/*.js',
+        testMatch: ['client/keys/**/*.js', 'client/view.js'],
         use: {
             baseURL: 'http://localhost:3002',
             headless: true,
@@ -25,6 +25,13 @@ export default defineConfig({
         testIgnore: 'client/menu/helper.js',
         use: {
             baseURL: 'http://localhost:3003',
+            headless: true,
+            video: 'retain-on-failure',
+        },
+    }, {
+        name: 'app',
+        testMatch: 'client/app/**/*.spec.js',
+        use: {
             headless: true,
             video: 'retain-on-failure',
         },
