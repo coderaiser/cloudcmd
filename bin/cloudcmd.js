@@ -135,7 +135,7 @@ const yargsOptions = {
         'one-file-panel': choose(env.bool('one_file_panel'), config('oneFilePanel')),
         'confirm-copy': choose(env.bool('confirm_copy'), config('confirmCopy')),
         'confirm-move': choose(env.bool('confirm_move'), config('confirmMove')),
-        'keys-panel': env.bool('keys_panel') || config('keysPanel'),
+        'keys-panel': choose(env.bool('keys_panel'), config('keysPanel')),
         'import-token': env.parse('import_token') || config('importToken'),
         'export-token': env.parse('export_token') || config('exportToken'),
         
@@ -198,6 +198,8 @@ async function main() {
     config('terminalCommand', args.terminalCommand);
     config('terminalAutoRestart', args.terminalAutoRestart);
     config('editor', args.editor);
+    config('packer', args.packer);
+    config('zip', args.zip);
     config('menu', args.menu);
     config('prefix', prefixer(args.prefix));
     config('prefixSocket', prefixer(args.prefixSocket));
