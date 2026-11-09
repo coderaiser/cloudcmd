@@ -238,6 +238,31 @@ test('CFG-20: the default engine does not change the markup after the change', a
     await expect(name).toHaveAttribute('value', before);
 });
 
+test('CFG-21: the default engine: the fields follow the auth checkbox', async ({page}) => {
+    await open(page);
+    await page.keyboard.press('F10');
+    
+    const modal = getModal(page);
+    const username = modal.locator('[data-name="js-username"]');
+    const password = modal.locator('[data-name="js-password"]');
+    
+    await expect(username).toBeDisabled();
+    await expect(password).toBeDisabled();
+    
+    await modal
+        .locator('[data-name="js-auth"]')
+        .check();
+    
+    await expect(username).toBeEnabled();
+    await expect(password).toBeEnabled();
+    
+    await modal
+        .locator('[data-name="js-auth"]')
+        .uncheck();
+    
+    await expect(username).toBeDisabled();
+});
+
 test.describe('--engine putout --no-config-auth --no-config-port', () => {
     test.use({
         flags: [

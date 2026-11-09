@@ -12,6 +12,7 @@ import {getTitle} from '#common/cloudfunc';
 import * as Images from '#dom/images';
 import * as input from './input.js';
 import {pickRenderer} from './pick-renderer.js';
+import {syncEnabled} from './sync-enabled.js';
 import {render as renderRendy} from './rendy/render.js';
 
 const {CloudCmd, DOM} = globalThis;
@@ -169,7 +170,7 @@ async function fillTemplate() {
     let afterShow;
     
     if (inputFirst) {
-        onAuthChange(inputFirst.checked);
+        syncEnabled(Element);
         afterShow = inputFirst.focus.bind(inputFirst);
     }
     
@@ -200,8 +201,8 @@ async function onChange(el) {
     
     if (name === 'name')
         onNameChange(data);
-    else if (name === 'auth')
-        onAuthChange(data);
+    
+    syncEnabled(Element);
     
     obj[name] = data;
     
@@ -226,14 +227,6 @@ async function saveHttp(obj) {
         return;
     
     onSave(obj);
-}
-
-function onAuthChange(checked) {
-    const elUsername = input.getElementByName('username', Element);
-    const elPassword = input.getElementByName('password', Element);
-    
-    elUsername.disabled = !checked;
-    elPassword.disabled = !checked;
 }
 
 function onNameChange(name) {
