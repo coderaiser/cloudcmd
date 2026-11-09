@@ -1,5 +1,4 @@
 import '../../../css/config.css';
-import {rendy} from 'rendy';
 import currify from 'currify';
 import wraptile from 'wraptile';
 import squad from 'squad';
@@ -12,6 +11,8 @@ import * as Files from '#dom/files';
 import {getTitle} from '#common/cloudfunc';
 import * as Images from '#dom/images';
 import * as input from './input.js';
+import {pickRenderer} from './pick-renderer.js';
+import {render as renderRendy} from './rendy/render.js';
 
 const {CloudCmd, DOM} = globalThis;
 
@@ -40,6 +41,10 @@ const Config = {};
 let Template;
 
 const loadCSS = load.css;
+
+const renderers = {
+    rendy: renderRendy,
+};
 
 export async function init() {
     if (!CloudCmd.config('configDialog'))
@@ -126,26 +131,8 @@ async function fillTemplate() {
     if (error)
         return Dialog.alert('Could not load config!');
     
-    const {
-        editor,
-        menu,
-        packer,
-        columns,
-        theme,
-        configAuth,
-        configPort,
-        ...obj
-    } = input.convert(config);
-    
-    obj[`${menu}-selected`] = 'selected';
-    obj[`${editor}-selected`] = 'selected';
-    obj[`${packer}-selected`] = 'selected';
-    obj[`${columns}-selected`] = 'selected';
-    obj[`${theme}-selected`] = 'selected';
-    obj.configAuth = configAuth ? '' : 'hidden';
-    obj.configPort = configPort ? '' : 'hidden';
-    
-    const innerHTML = rendy(Template, obj);
+    const render = pickRenderer(CloudCmd.config('engine'), renderers);
+    const innerHTML = await render(config, Template);
     
     Element = createElement('form', {
         className: 'config',

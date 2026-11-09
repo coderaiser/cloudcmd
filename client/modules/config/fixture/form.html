@@ -1,0 +1,177 @@
+<ul class="list">
+    <li  title="Authentication">
+        <label>
+            <input data-name="js-auth" type="checkbox"  checked >
+            Auth
+        </label>
+    </li>
+    <li >
+        <input
+            data-name="js-username"
+            type="text"
+            class="form-control"
+            placeholder="username"
+            value="root"
+            title="Username"
+            autocomplete="username">
+    </li>
+    <li >
+        <input
+            data-name="js-password"
+            type="password"
+            class="form-control"
+            placeholder="password"
+            value="2b64f2e3"
+            title="Password"
+            autocomplete="current-password">
+    </li>
+    <li title="Should an Editor send patches to server (speed up data transfer)">
+        <label>
+            <input
+                data-name="js-diff"
+                type="checkbox"
+                 checked>
+            Diff
+        </label>
+    </li>
+    <li title="Pack text data transferred by an Editor">
+        <label>
+            <input
+                data-name="js-zip"
+                type="checkbox"
+                >
+            Zip
+         </label>
+    </li>
+    <li title="Theme">
+        <select data-name="js-theme" class="form-control full-width" title="Theme">
+            <option >light</option>
+            <option selected>dark</option>
+        </select>
+    </li>
+    <li title="Visible Columns">
+        <select data-name="js-columns" class="form-control full-width" title="Visible Columns">
+            <option >name-size-date-owner-mode</option>
+            <option >name-size-date-time</option>
+            <option selected>name-size-date</option>
+            <option >name-size</option>
+        </select>
+    </li>
+    <li title="Editor: Edward(Ace-based), Dword(Codemirror-based), Deepword(Monaco-based), Qword(Codemirror6-based)">
+        <select data-name="js-editor" class="form-control full-width" title="Editor">
+            <option >edward</option>
+            <option selected>dword</option>
+            <option >deepword</option>
+            <option >qword</option>
+        </select>
+    </li>
+    <li title="Navigate and edit files using hotkeys of legendary editor">
+        <label>
+            <input
+                data-name="js-vim"
+                type="checkbox"
+                 checked>
+            Vim
+        </label>
+    </li>
+    <li title="Menu: supermenu, aleman, lunes">
+        <select data-name="js-menu" class="form-control full-width" title="Menu">
+            <option >aleman</option>
+            <option >supermenu</option>
+            <option selected>lunes</option>
+        </select>
+    </li>
+    <li title="Inner buffer used to copy files">
+        <label>
+            <input data-name="js-buffer" type="checkbox"  checked>
+            Buffer
+        </label>
+    </li>
+    <li title="Store filenames of directories (can be cleared with Ctrl+D and refreshed with Ctr+R)">
+        <label>
+            <input data-name="js-dirStorage" type="checkbox"  >
+            Directory Storage
+        </label>
+    </li>
+    <li title="Load dependencies from CDN (faster, but requires internet)">
+        <label>
+            <input data-name="js-online" type="checkbox"  checked>
+            Online
+        </label>
+    </li>
+    <li title="Packer support for pack operations">
+        <select data-name="js-packer" class="form-control full-width" title="Packer">
+            <option >tar</option>
+            <option selected>zip</option>
+        </select>
+    </li>
+    <li title="Show only one panel (when two is to many)">
+        <label>
+            <input data-name="js-oneFilePanel" type="checkbox" >
+            One File Panel
+        </label>
+    </li>
+    <li title="Show bottom keys panel">
+        <label>
+            <input data-name="js-keysPanel" type="checkbox"  checked>
+            Keys panel
+        </label>
+    </li>
+     <li title="Name of Cloud Commander instance">
+        <input
+            data-name="js-name"
+            title="Name"
+            value="my &lt;cloud&gt;"
+            placeholder="name"
+            class="form-control">
+    </li>
+     <li title="Root directory">
+        <input
+            data-name="js-root"
+            title="Root"
+            value="/home/&lcub;user&rcub;"
+            placeholder="root"
+            class="form-control">
+    </li>
+    <li  title="Port used by server">
+        <input
+            data-name="js-port"
+            min="0"
+            max="65535"
+            title="Port"
+            type="number"
+            value="8000"
+            placeholder="Port"
+            class="form-control">
+    </li>
+    <li title="Show DotFiles">
+        <label>
+            <input data-name="js-showDotFiles" type="checkbox"  checked>
+            Show DotFiles
+        </label>
+    </li>
+    <li title="Show file name while Viewing a file">
+        <label>
+            <input data-name="js-showFileName" type="checkbox" >
+            Show File Name
+        </label>
+    </li>
+    <li title="Confirm copy in Copy Dialog">
+        <label>
+            <input data-name="js-confirmCopy" type="checkbox"  checked>
+            Confirm Copy
+        </label>
+    </li>
+    <li title="Confirm move in Move Dialog">
+        <label>
+            <input data-name="js-confirmMove" type="checkbox" >
+            Confirm Move
+        </label>
+    </li>
+    <li title="Synchronize path of current directory with Console">
+        <label>
+            <input data-name="js-syncConsolePath" type="checkbox"  checked>
+            Sync Console Path
+        </label>
+    </li>
+</ul>
