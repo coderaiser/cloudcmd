@@ -1,0 +1,7 @@
+[{
+    "event": "input",
+    "render": false
+}, {
+    "event": "change",
+    "render": true
+}]
