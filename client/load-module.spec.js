@@ -1,6 +1,8 @@
 import {test, stub} from 'supertape';
 import {loadModule} from './load-module.js';
 
+const isPutout = (path) => path.includes('putout');
+
 const createCloudCmd = () => {
     const loaded = [];
     
@@ -99,7 +101,7 @@ test('cloudcmd: client: loadModule: requires: loaded once', async (t) => {
         CloudCmd.Config(),
     ]);
     
-    const result = loaded.filter((path) => path.includes('putout'));
+    const result = loaded.filter(isPutout);
     const expected = ['/dist/modules/putout.js'];
     
     t.deepEqual(result, expected);

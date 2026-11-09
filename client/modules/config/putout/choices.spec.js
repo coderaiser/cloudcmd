@@ -8,6 +8,12 @@ import choices from './choices.json' with {
     type: 'json',
 };
 
+const isTheme = (a) => a === config.theme;
+const isColumns = (a) => a === config.columns;
+const isEditor = (a) => a === config.editor;
+const isMenu = (a) => a === config.menu;
+const isPacker = (a) => a === config.packer;
+
 const read = (name) => readFileSync(new URL(name, import.meta.url), 'utf8');
 const template = read('../../../../tmpl/config.hbs');
 const golden = read('../fixture/form.html');
@@ -68,7 +74,7 @@ test('cloudcmd: client: config: putout: choices: theme: same as in the template'
 
 test('cloudcmd: client: config: putout: choices: theme: default is one of the choices', (t) => {
     const result = choices.theme
-        .filter((a) => a === config.theme)
+        .filter(isTheme)
         .join();
     
     t.equal(result, config.theme);
@@ -94,7 +100,7 @@ test('cloudcmd: client: config: putout: choices: columns: same as in the templat
 
 test('cloudcmd: client: config: putout: choices: columns: default is one of the choices', (t) => {
     const result = choices.columns
-        .filter((a) => a === config.columns)
+        .filter(isColumns)
         .join();
     
     t.equal(result, config.columns);
@@ -120,7 +126,7 @@ test('cloudcmd: client: config: putout: choices: editor: same as in the template
 
 test('cloudcmd: client: config: putout: choices: editor: default is one of the choices', (t) => {
     const result = choices.editor
-        .filter((a) => a === config.editor)
+        .filter(isEditor)
         .join();
     
     t.equal(result, config.editor);
@@ -146,7 +152,7 @@ test('cloudcmd: client: config: putout: choices: menu: same as in the template',
 
 test('cloudcmd: client: config: putout: choices: menu: default is one of the choices', (t) => {
     const result = choices.menu
-        .filter((a) => a === config.menu)
+        .filter(isMenu)
         .join();
     
     t.equal(result, config.menu);
@@ -172,7 +178,7 @@ test('cloudcmd: client: config: putout: choices: packer: same as in the template
 
 test('cloudcmd: client: config: putout: choices: packer: default is one of the choices', (t) => {
     const result = choices.packer
-        .filter((a) => a === config.packer)
+        .filter(isPacker)
         .join();
     
     t.equal(result, config.packer);

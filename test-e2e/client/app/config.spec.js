@@ -6,6 +6,8 @@ import {
     p,
 } from './helper.js';
 
+const isPutoutModule = (url) => url.endsWith('/modules/putout.js');
+
 // The server uses a temporary HOME. The config file is in server.home.
 test('CFG-01: F10 opens the config window', async ({page}) => {
     await open(page);
@@ -181,7 +183,7 @@ test.describe('--engine putout', () => {
         await page.keyboard.press('F10');
         await expect(getModal(page).locator('form.config')).toBeVisible();
         
-        expect(urls.filter((url) => url.endsWith('/modules/putout.js'))).toHaveLength(1);
+        expect(urls.filter(isPutoutModule)).toHaveLength(1);
     });
 });
 
@@ -228,6 +230,6 @@ test.describe('--engine putout --menu supermenu', () => {
         await page.keyboard.press('F10');
         await expect(getModal(page).locator('form.config')).toBeVisible();
         
-        expect(urls.filter((url) => url.endsWith('/modules/putout.js'))).toHaveLength(1);
+        expect(urls.filter(isPutoutModule)).toHaveLength(1);
     });
 });
