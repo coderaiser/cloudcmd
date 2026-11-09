@@ -1,3 +1,20 @@
+2026.11.09, v19.23.0
+
+feature:
+- e980dc7c cloudcmd: Config: engine
+- e4cf801b cloudcmd: config: use apply-enabled and not syncEnabled in the putout engine
+- 9b24dd04 cloudcmd: config: set disabled by data-enabled-by in both engines
+- df2cef40 cloudcmd: config: use the form in the putout engine
+- 60441dcf cloudcmd: config: attach the form to the rendered window
+- 2e497bac cloudcmd: config: add the patch of the form
+- d2f5ef63 cloudcmd: config: add the state and the listener of the form
+- 2642d2ac cloudcmd: config: add the rule apply-enabled
+- 1a53bc01 cloudcmd: config: add the putout engine
+- f4877064 cloudcmd: client: load Putout once as a shared module
+- 1ef27c51 cloudcmd: config: pick the renderer by engine
+- cbf669d4 cloudcmd: config: add the engine option
+- ba98132d cloudcmd: package: add @putout/bundle, @putout/printer, @putout/processor-html and @putout/test
+
 2026.11.08, v19.22.0
 
 fix:
