@@ -4,6 +4,7 @@
     "username": "root",
     "password": "2b64f2e3",
     "editor": "edward",
+    "engine": "rendy",
     "menu": "aleman",
     "packer": "tar",
     "diff": false,

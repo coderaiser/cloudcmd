@@ -11,6 +11,7 @@ import choices from './choices.json' with {
 const isTheme = (a) => a === config.theme;
 const isColumns = (a) => a === config.columns;
 const isEditor = (a) => a === config.editor;
+const isEngine = (a) => a === config.engine;
 const isMenu = (a) => a === config.menu;
 const isPacker = (a) => a === config.packer;
 
@@ -188,6 +189,32 @@ test('cloudcmd: client: config: putout: choices: packer: default is one of the c
 test('cloudcmd: client: config: putout: choices: packer: accepted by validate', (t) => {
     const result = choices.packer
         .filter(isRejected('packer'))
+        .join();
+    
+    t.equal(result, '');
+    t.end();
+});
+
+test('cloudcmd: client: config: putout: choices: engine: same as in the template', (t) => {
+    const result = choices.engine;
+    const expected = getOptions('engine');
+    
+    t.deepEqual(result, expected);
+    t.end();
+});
+
+test('cloudcmd: client: config: putout: choices: engine: default is one of the choices', (t) => {
+    const result = choices.engine
+        .filter(isEngine)
+        .join();
+    
+    t.equal(result, config.engine);
+    t.end();
+});
+
+test('cloudcmd: client: config: putout: choices: engine: accepted by validate', (t) => {
+    const result = choices.engine
+        .filter(isRejected('engine'))
         .join();
     
     t.equal(result, '');

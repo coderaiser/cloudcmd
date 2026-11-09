@@ -7,6 +7,20 @@ import {
 } from './helper.js';
 
 const isPutoutModule = (url) => url.endsWith('/modules/putout.js');
+const getEngine = (page) => page.evaluate(() => globalThis.CloudCmd.config('engine'));
+const getEngineSelect = (page) => getModal(page).locator('[data-name="js-engine"]');
+
+const selectEngine = async (page, name) => {
+    await getEngineSelect(page).selectOption(name);
+    await expect.poll(() => getEngine(page)).toBe(name);
+};
+
+const reopen = async (page) => {
+    await page.keyboard.press('Escape');
+    await expect(getModal(page)).toHaveCount(0);
+    await page.keyboard.press('F10');
+    await expect(getModal(page).locator('form.config')).toBeVisible();
+};
 
 // The server uses a temporary HOME. The config file is in server.home.
 test('CFG-01: F10 opens the config window', async ({page}) => {
@@ -130,11 +144,11 @@ test.describe('--engine putout', () => {
         await expect(username).toBeEnabled();
     });
     
-    test('CFG-10: the window has 24 fields', async ({page}) => {
+    test('CFG-10: the window has 25 fields', async ({page}) => {
         await open(page);
         await page.keyboard.press('F10');
         
-        await expect(getModal(page).locator('form.config [data-name]')).toHaveCount(24);
+        await expect(getModal(page).locator('form.config [data-name]')).toHaveCount(25);
     });
     
     test('CFG-11: a changed checkbox is saved to the config file', async ({page, server}) => {
@@ -239,6 +253,28 @@ test.describe('--engine putout', () => {
         await expect(password).toBeDisabled();
     });
     
+    test('CFG-26: the select shows the engine putout', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        await expect(getEngineSelect(page)).toHaveValue('putout');
+    });
+    
+    test('CFG-27: the engine rendy works when the window opens again', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        await selectEngine(page, 'rendy');
+        await reopen(page);
+        
+        const name = getModal(page).locator('[data-name="js-name"]');
+        const before = await name.getAttribute('value');
+        
+        await name.fill('hello');
+        await page.keyboard.press('Tab');
+        
+        await expect(name).toHaveAttribute('value', before);
+    });
+    
     test('CFG-14: putout.js is requested one time', async ({page}) => {
         const urls = trackRequests(page, 'putout.js');
         
@@ -286,6 +322,41 @@ test('CFG-21: the default engine: the fields follow the auth checkbox', async ({
         .uncheck();
     
     await expect(username).toBeDisabled();
+});
+
+test('CFG-23: the window has the select of the engine with two choices', async ({page}) => {
+    await open(page);
+    await page.keyboard.press('F10');
+    
+    await expect(getEngineSelect(page)).toHaveValue('rendy');
+    await expect(getEngineSelect(page).locator('option')).toHaveText(['rendy', 'putout']);
+});
+
+test('CFG-24: a chosen engine is saved to the config file', async ({page, server}) => {
+    await open(page);
+    await page.keyboard.press('F10');
+    await selectEngine(page, 'putout');
+    
+    await expect
+        .poll(() => read(p(server.home, '.cloudcmd.json')).catch(() => ''))
+        .toContain('"engine": "putout"');
+});
+
+test('CFG-25: the engine putout works when the window opens again', async ({page}) => {
+    const urls = trackRequests(page, 'putout.js');
+    
+    await open(page);
+    await page.keyboard.press('F10');
+    await selectEngine(page, 'putout');
+    await reopen(page);
+    
+    const name = getModal(page).locator('[data-name="js-name"]');
+    
+    await name.fill('hello');
+    await page.keyboard.press('Tab');
+    
+    await expect(name).toHaveAttribute('value', 'hello');
+    expect(urls.filter(isPutoutModule)).toHaveLength(1);
 });
 
 test.describe('--engine putout --no-config-auth --no-config-port', () => {

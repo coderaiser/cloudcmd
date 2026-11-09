@@ -4,6 +4,7 @@
     "username": "root",
     "password": "2b64f2e3",
     "editor": "dword",
+    "engine": "putout",
     "menu": "lunes",
     "packer": "zip",
     "diff": true,

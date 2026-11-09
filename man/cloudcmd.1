@@ -35,7 +35,7 @@ programs in browser from any computer, mobile or tablet device.
   --show-file-name              show file name in view and edit modes
   --editor                      set editor: "dword", "edward", "deepword" or "qword"
   --menu                        set menu: "supermenu", "aleman" or "lunes"
-  --engine                      set engine of the interface: "rendy" or "putout"
+  --engine                      set engine of the interface: "rendy" (default) or "putout"
   --packer                      set packer: "tar" or "zip"
   --root                        set root directory
   --prefix                      set url prefix
@@ -99,6 +99,12 @@ programs in browser from any computer, mobile or tablet device.
   --no-dropbox                  disable dropbox integration
   --no-dropbox-token            unset dropbox token
   --no-log                      disable logging
+
+.SH ENVIRONMENT
+
+.TP
+.B CLOUDCMD_ENGINE
+set engine of the interface: "rendy" or "putout". Command-line option --engine wins over it, it wins over ~/.cloudcmd.json. The engine can also be chosen in the config dialog (F10) and works when the dialog opens again.
 
 .SH RESOURCES AND DOCUMENTATION
 

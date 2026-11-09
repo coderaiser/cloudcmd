@@ -4,6 +4,7 @@ import * as input from '../input.js';
 export const render = (config, template) => {
     const {
         editor,
+        engine,
         menu,
         packer,
         columns,
@@ -15,6 +16,7 @@ export const render = (config, template) => {
     
     obj[`${menu}-selected`] = 'selected';
     obj[`${editor}-selected`] = 'selected';
+    obj[`${engine}-selected`] = 'selected';
     obj[`${packer}-selected`] = 'selected';
     obj[`${columns}-selected`] = 'selected';
     obj[`${theme}-selected`] = 'selected';
