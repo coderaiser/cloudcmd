@@ -176,6 +176,44 @@ test.describe('--engine putout', () => {
         await expect(getModal(page).locator('form.config')).toBeVisible();
     });
     
+    test('CFG-18: the markup has the value after the change', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        const name = getModal(page).locator('[data-name="js-name"]');
+        
+        await name.fill('hello');
+        await page.keyboard.press('Tab');
+        
+        await expect(name).toHaveAttribute('value', 'hello');
+    });
+    
+    test('CFG-19: the focus and the typed text stay when another field changes', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        const modal = getModal(page);
+        const name = modal.locator('[data-name="js-name"]');
+        
+        await name.focus();
+        await page.keyboard.press('End');
+        await page.keyboard.type('abc');
+        
+        const before = await name.inputValue();
+        
+        await modal
+            .locator('[data-name="js-vim"]')
+            .evaluate((element) => {
+                element.checked = !element.checked;
+                element.dispatchEvent(new Event('change', {
+                    bubbles: true,
+                }));
+            });
+        
+        await expect(name).toBeFocused();
+        await expect(name).toHaveValue(before);
+    });
+    
     test('CFG-14: putout.js is requested one time', async ({page}) => {
         const urls = trackRequests(page, 'putout.js');
         
@@ -185,6 +223,19 @@ test.describe('--engine putout', () => {
         
         expect(urls.filter(isPutoutModule)).toHaveLength(1);
     });
+});
+
+test('CFG-20: the default engine does not change the markup after the change', async ({page}) => {
+    await open(page);
+    await page.keyboard.press('F10');
+    
+    const name = getModal(page).locator('[data-name="js-name"]');
+    const before = await name.getAttribute('value');
+    
+    await name.fill('hello');
+    await page.keyboard.press('Tab');
+    
+    await expect(name).toHaveAttribute('value', before);
 });
 
 test.describe('--engine putout --no-config-auth --no-config-port', () => {

@@ -53,6 +53,15 @@ const renderers = {
     putout: renderPutout,
 };
 
+const noop = () => {};
+
+const attachPutout = (element, options) => CloudCmd.ConfigPutout.attach(element, options);
+
+const attachers = {
+    rendy: noop,
+    putout: attachPutout,
+};
+
 export async function init() {
     if (!CloudCmd.config('configDialog'))
         return;
@@ -74,6 +83,7 @@ export async function init() {
 const {config, Key} = CloudCmd;
 
 let Element;
+let Form;
 
 function getHost() {
     const {
@@ -138,12 +148,19 @@ async function fillTemplate() {
     if (error)
         return Dialog.alert('Could not load config!');
     
-    const render = pickRenderer(CloudCmd.config('engine'), renderers);
+    const engine = CloudCmd.config('engine');
+    const render = pickRenderer(engine, renderers);
+    const attach = pickRenderer(engine, attachers);
     const innerHTML = await render(config, Template);
     
     Element = createElement('form', {
         className: 'config',
         innerHTML,
+    });
+    
+    Form = attach(Element, {
+        config,
+        template: Template,
     });
     
     const inputs = document.querySelectorAll('input, select', Element);
@@ -197,6 +214,7 @@ function onSave(obj) {
         
         CloudCmd._config(name, data);
         input.setValue(name, data, Element);
+        Form?.set(name, data);
     }
 }
 
