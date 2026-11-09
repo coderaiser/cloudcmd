@@ -6,6 +6,7 @@
     "algo": "sha512WithRSAEncryption",
     "editor": "edward",
     "menu": "aleman",
+    "engine": "rendy",
     "packer": "tar",
     "diff": true,
     "zip": true,

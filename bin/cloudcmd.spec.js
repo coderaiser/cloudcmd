@@ -70,3 +70,26 @@ test('cloudcmd: bin: cli: env: CLOUDCMD_KEYS_PANEL=false', (t) => {
     t.match(stdout, /keysPanel\s+\| false/);
     t.end();
 });
+
+test('cloudcmd: bin: cli: --engine: default', (t) => {
+    const stdout = readConfig([]);
+    
+    t.match(stdout, /engine\s+\| rendy/);
+    t.end();
+});
+
+test('cloudcmd: bin: cli: --engine putout', (t) => {
+    const stdout = readConfig(['--engine', 'putout']);
+    
+    t.match(stdout, /engine\s+\| putout/);
+    t.end();
+});
+
+test('cloudcmd: bin: cli: env: CLOUDCMD_ENGINE=putout', (t) => {
+    const stdout = readConfig([], {
+        CLOUDCMD_ENGINE: 'putout',
+    });
+    
+    t.match(stdout, /engine\s+\| putout/);
+    t.end();
+});

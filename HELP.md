@@ -87,6 +87,7 @@ Cloud Commander supports the following command-line parameters:
 | `--open`                     | open web browser when server starts
 | `--name`                     | set tab name in web browser
 | `--menu`                     | set menu: "supermenu", "aleman" or "lunes"
+| `--engine`                   | set engine of the interface: "rendy" or "putout"
 | `--one-file-panel`           | show one file panel
 | `--keys-panel`               | show keys panel
 | `--contact`                  | enable contact
@@ -447,6 +448,7 @@ Some config options can be overridden with environment variables, such as:
 - `CLOUDCMD_COLUMNS` - set visible themes
 - `CLOUDCMD_THEME` - set themes "light" or "dark"
 - `CLOUDCMD_MENU` - set menu "supermenu", "aleman" or "lunes"
+- `CLOUDCMD_ENGINE` - set engine of the interface "rendy" or "putout"
 - `CLOUDCMD_CONTACT` - enable contact
 - `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
 - `CLOUDCMD_CONFIG_AUTH` - enable auth change in config dialog

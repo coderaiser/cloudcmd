@@ -66,7 +66,7 @@ export function cloudcmd(params) {
         if (/root/.test(name))
             validate.root(value, config);
         
-        if (/editor|packer|themes|menu/.test(name))
+        if (/editor|packer|themes|menu|engine/.test(name))
             validate[name](value);
         
         if (/prefix/.test(name))

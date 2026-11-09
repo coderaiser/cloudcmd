@@ -155,6 +155,40 @@ test('validate: menu: valid', (t) => {
     t.end();
 });
 
+test('validate: engine: not valid', (t) => {
+    const exit = stub();
+    const msg = 'cloudcmd --engine: could be "rendy" or "putout" only';
+    
+    validate.engine('hello', {
+        exit,
+    });
+    
+    t.calledWith(exit, [msg], 'should call fn');
+    t.end();
+});
+
+test('validate: engine: valid: rendy', (t) => {
+    const exit = stub();
+    
+    validate.engine('rendy', {
+        exit,
+    });
+    
+    t.notCalled(exit, 'should not call fn');
+    t.end();
+});
+
+test('validate: engine: valid: putout', (t) => {
+    const exit = stub();
+    
+    validate.engine('putout', {
+        exit,
+    });
+    
+    t.notCalled(exit, 'should not call fn');
+    t.end();
+});
+
 test('validate: menu: valid: lunes', (t) => {
     const exit = stub();
     

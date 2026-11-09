@@ -41,6 +41,13 @@ export const menu = (name, {exit = _exit} = {}) => {
         exit('cloudcmd --menu: could be "supermenu", "aleman" or "lunes" only');
 };
 
+export const engine = (name, {exit = _exit} = {}) => {
+    const reg = /^(rendy|putout)$/;
+    
+    if (!reg.test(name))
+        exit('cloudcmd --engine: could be "rendy" or "putout" only');
+};
+
 export const packer = (name, {exit = _exit} = {}) => {
     const reg = /^(tar|zip)$/;
     
