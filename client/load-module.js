@@ -1,29 +1,44 @@
 /* global CloudCmd */
 import exec from 'execon';
 import {tryToCatch} from 'try-to-catch';
-import {js as loadJS} from 'load.js';
+import load from 'load.js';
 import pascalCase from 'just-pascal-case';
 
 const noJS = (a) => a.replace(/.js$/, '');
 
-/**
- * function load modules
- * @params = {name, path, func, dobefore, arg}
- */
-export const loadModule = (params) => {
+const getName = (path) => noJS(pascalCase(path));
+
+const registries = new WeakMap();
+
+const getRegistry = () => {
+    if (!registries.has(CloudCmd))
+        registries.set(CloudCmd, new Map());
+    
+    return registries.get(CloudCmd);
+};
+
+export const loadModule = (params, overrides = {}) => {
     if (!params)
         return;
     
-    const {path} = params;
+    const {loadJS = load.js} = overrides;
+    const {path, requires = () => []} = params;
     
-    const name = path && noJS(pascalCase(path));
+    const name = path && getName(path);
     const doBefore = params.dobefore;
     
     if (CloudCmd[name])
         return;
     
-    CloudCmd[name] = async () => {
+    const registry = getRegistry();
+    
+    let loading;
+    
+    const loadOnce = async () => {
         exec(doBefore);
+        
+        for (const dependency of requires())
+            await registry.get(getName(dependency))();
         
         const {DIR_MODULES} = CloudCmd;
         const pathFull = `${DIR_MODULES}/${path}.js`;
@@ -41,6 +56,15 @@ export const loadModule = (params) => {
         
         return newModule;
     };
+    
+    const loadModuleOnce = () => {
+        loading = loading || loadOnce();
+        
+        return loading;
+    };
+    
+    registry.set(name, loadModuleOnce);
+    CloudCmd[name] = loadModuleOnce;
     
     CloudCmd[name].show = async (...args) => {
         CloudCmd.log('show', name, args);

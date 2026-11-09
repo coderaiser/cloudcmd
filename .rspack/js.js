@@ -79,8 +79,30 @@ const plugins = [
     }),
 ];
 
+const EXTERNALS = {
+    'putout': 'var CloudCmdPutout.putout',
+    '@putout/processor-html': 'var CloudCmdPutout.processorHtml',
+};
+
+const isUser = (issuer) => /\/node_modules\/aleman\/|\/client\/|\/common\//.test(issuer);
+const isPutoutModule = (issuer) => issuer.endsWith('/client/modules/putout.js');
+
+function putoutExternal({request, contextInfo}, callback) {
+    const {issuer} = contextInfo;
+    
+    if (!EXTERNALS[request] || !isUser(issuer) || isPutoutModule(issuer))
+        return callback();
+    
+    callback(null, EXTERNALS[request]);
+}
+
+const SELF_CONTAINED = [
+    './modules/menu',
+    './modules/putout',
+];
+
 const splitChunks = {
-    chunks: (chunk) => chunk.name !== './modules/menu',
+    chunks: (chunk) => !SELF_CONTAINED.includes(chunk.name),
     cacheGroups: {
         menuStyles: {
             name: 'cloudcmd.common',
@@ -94,6 +116,7 @@ const splitChunks = {
             chunks: (chunk) => {
                 const lazyChunks = [
                     './modules/menu',
+                    './modules/putout',
                     'sw',
                     'nojs',
                     'view',
@@ -136,6 +159,11 @@ export default {
         },
     },
     devtool,
+    externals: [putoutExternal],
+    ignoreWarnings: [{
+        module: /@putout\/bundle/,
+        message: /the request of a dependency is an expression/,
+    }],
     optimization: {
         splitChunks,
     },
@@ -173,6 +201,7 @@ export default {
         [`${modules}/user-menu`]: `${dirModules}/user-menu/index.js`,
         [`${modules}/polyfill`]: `${dirModules}/polyfill.js`,
         [`${modules}/command-line`]: `${dirModules}/command-line.js`,
+        [`${modules}/putout`]: `${dirModules}/putout.js`,
     },
     output: {
         filename: '[name].js',
