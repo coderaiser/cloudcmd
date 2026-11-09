@@ -5,6 +5,7 @@ import * as applyValue from './rules/apply-value/index.js';
 import * as applySelected from './rules/apply-selected/index.js';
 import * as applyVisibility from './rules/apply-visibility/index.js';
 import * as applyChoices from './rules/apply-choices/index.js';
+import * as applyEnabled from './rules/apply-enabled/index.js';
 import choices from './choices.json' with {
     type: 'json',
 };
@@ -23,6 +24,7 @@ export const render = (config, template) => {
             'config-form/apply-value': options,
             'config-form/apply-selected': options,
             'config-form/apply-visibility': options,
+            'config-form/apply-enabled': options,
         },
         plugins: [
             ['config-form/apply-choices', applyChoices],
@@ -30,6 +32,7 @@ export const render = (config, template) => {
             ['config-form/apply-value', applyValue],
             ['config-form/apply-selected', applySelected],
             ['config-form/apply-visibility', applyVisibility],
+            ['config-form/apply-enabled', applyEnabled],
         ],
     });
     
