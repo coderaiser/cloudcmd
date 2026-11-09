@@ -214,6 +214,31 @@ test.describe('--engine putout', () => {
         await expect(name).toHaveValue(before);
     });
     
+    test('CFG-22: both fields follow the auth checkbox in both directions', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        const modal = getModal(page);
+        const username = modal.locator('[data-name="js-username"]');
+        const password = modal.locator('[data-name="js-password"]');
+        
+        await expect(password).toBeDisabled();
+        
+        await modal
+            .locator('[data-name="js-auth"]')
+            .check();
+        
+        await expect(username).toBeEnabled();
+        await expect(password).toBeEnabled();
+        
+        await modal
+            .locator('[data-name="js-auth"]')
+            .uncheck();
+        
+        await expect(username).toBeDisabled();
+        await expect(password).toBeDisabled();
+    });
+    
     test('CFG-14: putout.js is requested one time', async ({page}) => {
         const urls = trackRequests(page, 'putout.js');
         

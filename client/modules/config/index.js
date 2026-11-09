@@ -63,6 +63,11 @@ const attachers = {
     putout: attachPutout,
 };
 
+const enablers = {
+    rendy: syncEnabled,
+    putout: noop,
+};
+
 export async function init() {
     if (!CloudCmd.config('configDialog'))
         return;
@@ -85,6 +90,7 @@ const {config, Key} = CloudCmd;
 
 let Element;
 let Form;
+let enable = noop;
 
 function getHost() {
     const {
@@ -154,6 +160,8 @@ async function fillTemplate() {
     const attach = pickRenderer(engine, attachers);
     const innerHTML = await render(config, Template);
     
+    enable = pickRenderer(engine, enablers);
+    
     Element = createElement('form', {
         className: 'config',
         innerHTML,
@@ -170,7 +178,7 @@ async function fillTemplate() {
     let afterShow;
     
     if (inputFirst) {
-        syncEnabled(Element);
+        enable(Element);
         afterShow = inputFirst.focus.bind(inputFirst);
     }
     
@@ -202,7 +210,7 @@ async function onChange(el) {
     if (name === 'name')
         onNameChange(data);
     
-    syncEnabled(Element);
+    enable(Element);
     
     obj[name] = data;
     
