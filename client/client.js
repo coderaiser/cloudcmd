@@ -192,7 +192,8 @@ function CloudCmdProto({DOM, Listeners}) {
         };
         
         const requires = {
-            menu: usesMenuPutout,
+            'menu': usesMenuPutout,
+            'config-putout': usesPutout,
         };
         
         const load = (name, path, dobefore) => {

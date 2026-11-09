@@ -42,8 +42,15 @@ let Template;
 
 const loadCSS = load.css;
 
+const renderPutout = async (config, template) => {
+    await CloudCmd.ConfigPutout();
+    
+    return CloudCmd.ConfigPutout.render(config, template);
+};
+
 const renderers = {
     rendy: renderRendy,
+    putout: renderPutout,
 };
 
 export async function init() {

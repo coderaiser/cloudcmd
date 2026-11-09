@@ -1,0 +1,27 @@
+{
+    "theme": [
+        "light",
+        "dark"
+    ],
+    "columns": [
+        "name-size-date-owner-mode",
+        "name-size-date-time",
+        "name-size-date",
+        "name-size"
+    ],
+    "editor": [
+        "edward",
+        "dword",
+        "deepword",
+        "qword"
+    ],
+    "menu": [
+        "aleman",
+        "supermenu",
+        "lunes"
+    ],
+    "packer": [
+        "tar",
+        "zip"
+    ]
+}

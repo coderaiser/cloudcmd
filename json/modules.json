@@ -19,7 +19,8 @@
         "terminal-run",
         "cloud",
         "user-menu",
-        "putout"
+        "putout",
+        "config-putout"
     ],
     "remote": [{
         "name": "socket",

@@ -99,6 +99,7 @@ function putoutExternal({request, contextInfo}, callback) {
 const SELF_CONTAINED = [
     './modules/menu',
     './modules/putout',
+    './modules/config-putout',
 ];
 
 const splitChunks = {
@@ -202,6 +203,7 @@ export default {
         [`${modules}/polyfill`]: `${dirModules}/polyfill.js`,
         [`${modules}/command-line`]: `${dirModules}/command-line.js`,
         [`${modules}/putout`]: `${dirModules}/putout.js`,
+        [`${modules}/config-putout`]: `${dirModules}/config/putout/index.js`,
     },
     output: {
         filename: '[name].js',

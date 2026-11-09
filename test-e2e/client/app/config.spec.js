@@ -79,3 +79,155 @@ test.describe('--menu lunes', () => {
         ).toHaveValue('lunes');
     });
 });
+
+const trackRequests = (page, name) => {
+    const urls = [];
+    
+    page.on('request', (request) => {
+        if (request.url().includes(name))
+            urls.push(request.url());
+    });
+    
+    return urls;
+};
+
+test('CFG-07: the default engine does not request putout.js', async ({page}) => {
+    const urls = trackRequests(page, 'putout.js');
+    
+    await open(page);
+    await page.keyboard.press('F10');
+    await expect(getModal(page).locator('form.config')).toBeVisible();
+    
+    expect(urls).toHaveLength(0);
+});
+
+test.describe('--engine putout', () => {
+    test.use({
+        flags: ['--engine', 'putout'],
+    });
+    
+    test('CFG-08: F10 opens the config window', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        await expect(getModal(page).locator('form.config')).toBeVisible();
+    });
+    
+    test('CFG-09: the username field follows the auth checkbox', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        const username = getModal(page).locator('[data-name="js-username"]');
+        
+        await expect(username).toBeDisabled();
+        
+        await getModal(page)
+            .locator('[data-name="js-auth"]')
+            .check();
+        
+        await expect(username).toBeEnabled();
+    });
+    
+    test('CFG-10: the window has 24 fields', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        await expect(getModal(page).locator('form.config [data-name]')).toHaveCount(24);
+    });
+    
+    test('CFG-11: a changed checkbox is saved to the config file', async ({page, server}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        await getModal(page)
+            .locator('[data-name="js-vim"]')
+            .check();
+        
+        await expect
+            .poll(() => read(p(server.home, '.cloudcmd.json')).catch(() => ''))
+            .toContain('"vim": true');
+    });
+    
+    test('CFG-12: a changed text field is saved to the config file', async ({page, server}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        const name = getModal(page).locator('[data-name="js-name"]');
+        
+        await name.fill('hello');
+        await name.blur();
+        
+        await expect
+            .poll(() => read(p(server.home, '.cloudcmd.json')).catch(() => ''))
+            .toContain('"name": "hello"');
+    });
+    
+    test('CFG-17: the config window opens again after Escape', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        await expect(getModal(page).locator('form.config')).toBeVisible();
+        await page.keyboard.press('Escape');
+        await expect(getModal(page)).toHaveCount(0);
+        
+        await page.keyboard.press('F10');
+        
+        await expect(getModal(page).locator('form.config')).toBeVisible();
+    });
+    
+    test('CFG-14: putout.js is requested one time', async ({page}) => {
+        const urls = trackRequests(page, 'putout.js');
+        
+        await open(page);
+        await page.keyboard.press('F10');
+        await expect(getModal(page).locator('form.config')).toBeVisible();
+        
+        expect(urls.filter((url) => url.endsWith('/modules/putout.js'))).toHaveLength(1);
+    });
+});
+
+test.describe('--engine putout --no-config-auth --no-config-port', () => {
+    test.use({
+        flags: [
+            '--engine',
+            'putout',
+            '--no-config-auth',
+            '--no-config-port',
+        ],
+    });
+    
+    test('CFG-13: 4 items are hidden', async ({page}) => {
+        await open(page);
+        await page.keyboard.press('F10');
+        
+        await expect(getModal(page).locator('form.config li[hidden]')).toHaveCount(4);
+    });
+});
+
+test.describe('--engine putout --menu supermenu', () => {
+    test.use({
+        flags: [
+            '--engine',
+            'putout',
+            '--menu',
+            'supermenu',
+        ],
+    });
+    
+    test('CFG-15: putout.js is not requested until the config window opens', async ({page}) => {
+        const urls = trackRequests(page, 'putout.js');
+        
+        await open(page);
+        
+        expect(urls).toHaveLength(0);
+    });
+    
+    test('CFG-16: putout.js is requested one time when the config window opens', async ({page}) => {
+        const urls = trackRequests(page, 'putout.js');
+        
+        await open(page);
+        await page.keyboard.press('F10');
+        await expect(getModal(page).locator('form.config')).toBeVisible();
+        
+        expect(urls.filter((url) => url.endsWith('/modules/putout.js'))).toHaveLength(1);
+    });
+});
