@@ -1,3 +1,8 @@
+2026.11.14, v19.23.1
+
+fix:
+- 59156bd1 apply authentication middleware before console and editor routes
+
 2026.11.09, v19.23.0
 
 feature:
