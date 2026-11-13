@@ -20,9 +20,11 @@ export const include = () => [
 ];
 
 const isOption = ({type, openingElement}) => type === 'JSXElement' && openingElement.name.name === 'option';
+
 const toText = (node) => getText({
     node,
 });
+
 const getChoices = (path, {options}) => options.choices[toOptionName(getAttribute(path, 'data-name'))];
 
 const getCurrent = ({node}) => node.children
