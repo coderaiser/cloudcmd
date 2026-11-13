@@ -183,7 +183,10 @@ function CloudCmdProto({DOM, Listeners}) {
             menu: showLoad,
         };
         
-        const usesPutout = () => ['putout'];
+        const usesPutout = () => [
+            'putout',
+        ];
+        
         const usesMenuPutout = () => {
             if (CloudCmd.config('menu') === 'supermenu')
                 return [];

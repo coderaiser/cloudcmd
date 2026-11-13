@@ -38,6 +38,7 @@ test('cloudcmd: client: config: putout: form: patch: set a changed attribute', (
     const live = createFake({
         title: 'old',
     });
+    
     const next = createFake({
         title: 'new',
     });
@@ -75,6 +76,7 @@ test('cloudcmd: client: config: putout: form: patch: remove a missing attribute'
         disabled: '',
         title: 'same',
     });
+    
     const next = createFake({
         title: 'same',
     });
@@ -94,6 +96,7 @@ test('cloudcmd: client: config: putout: form: patch: the same attribute', (t) =>
     const live = createFake({
         title: 'same',
     });
+    
     const next = createFake({
         title: 'same',
     });
@@ -116,6 +119,7 @@ test('cloudcmd: client: config: putout: form: patch: value of the active element
     const live = createFake({
         value: 'typed',
     });
+    
     const next = createFake({
         value: 'state',
     });
@@ -125,6 +129,7 @@ test('cloudcmd: client: config: putout: form: patch: value of the active element
     });
     
     const result = read(live);
+    
     const expected = {
         value: 'typed',
     };
@@ -137,6 +142,7 @@ test('cloudcmd: client: config: putout: form: patch: value of another element', 
     const live = createFake({
         value: 'old',
     });
+    
     const next = createFake({
         value: 'state',
     });
@@ -146,6 +152,7 @@ test('cloudcmd: client: config: putout: form: patch: value of another element', 
     });
     
     const result = read(live);
+    
     const expected = {
         value: 'state',
     };
@@ -158,6 +165,7 @@ test('cloudcmd: client: config: putout: form: patch: other attribute of the acti
     const live = createFake({
         title: 'old',
     });
+    
     const next = createFake({
         title: 'new',
     });
@@ -167,6 +175,7 @@ test('cloudcmd: client: config: putout: form: patch: other attribute of the acti
     });
     
     const result = read(live);
+    
     const expected = {
         title: 'new',
     };
@@ -180,6 +189,7 @@ test('cloudcmd: client: config: putout: form: patch: checkbox: on', (t) => {
         type: 'checkbox',
         checked: false,
     });
+    
     const next = createFake({
         checked: '',
     });
@@ -197,6 +207,7 @@ test('cloudcmd: client: config: putout: form: patch: checkbox: off', (t) => {
         type: 'checkbox',
         checked: true,
     });
+    
     const next = createFake();
     
     patch(createRoot(live), createRoot(next), {});
@@ -209,6 +220,7 @@ test('cloudcmd: client: config: putout: form: patch: not a checkbox', (t) => {
     const live = createFake({}, {
         type: 'text',
     });
+    
     const next = createFake({
         checked: '',
     });

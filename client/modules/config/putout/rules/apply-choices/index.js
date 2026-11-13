@@ -20,18 +20,18 @@ export const include = () => [
 ];
 
 const isOption = ({type, openingElement}) => type === 'JSXElement' && openingElement.name.name === 'option';
-const toText = (node) => getText({node});
+const toText = (node) => getText({
+    node,
+});
 const getChoices = (path, {options}) => options.choices[toOptionName(getAttribute(path, 'data-name'))];
 
 const getCurrent = ({node}) => node.children
     .filter(isOption)
     .map(toText);
 
-const createOption = (value) => jsxElement(
-    jsxOpeningElement(jsxIdentifier('option'), []),
-    jsxClosingElement(jsxIdentifier('option')),
-    [jsxText(value)],
-);
+const createOption = (value) => jsxElement(jsxOpeningElement(jsxIdentifier('option'), []), jsxClosingElement(jsxIdentifier('option')), [
+    jsxText(value),
+]);
 
 export const filter = (path, {options}) => {
     if (getName(path) !== 'select')

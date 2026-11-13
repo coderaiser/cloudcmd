@@ -303,7 +303,11 @@ test('cloudcmd: auth: should require authentication before editor and console ro
         statuses.push([url, status]);
     }
     
-    const expected = urls.map((url) => [url, 401]);
+    const expected = [];
+    
+    for (const url of urls) {
+        expected.push([url, 401]);
+    }
     
     t.deepEqual(statuses, expected);
     t.end();

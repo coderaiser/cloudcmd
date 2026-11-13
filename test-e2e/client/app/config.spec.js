@@ -12,14 +12,18 @@ const getEngineSelect = (page) => getModal(page).locator('[data-name="js-engine"
 
 const selectEngine = async (page, name) => {
     await getEngineSelect(page).selectOption(name);
-    await expect.poll(() => getEngine(page)).toBe(name);
+    await expect
+        .poll(() => getEngine(page))
+        .toBe(name);
 };
 
 const reopen = async (page) => {
     await page.keyboard.press('Escape');
     await expect(getModal(page)).toHaveCount(0);
     await page.keyboard.press('F10');
-    await expect(getModal(page).locator('form.config')).toBeVisible();
+    await expect(
+        getModal(page).locator('form.config'),
+    ).toBeVisible();
 };
 
 // The server uses a temporary HOME. The config file is in server.home.
@@ -112,7 +116,9 @@ test('CFG-07: the default engine does not request putout.js', async ({page}) => 
     
     await open(page);
     await page.keyboard.press('F10');
-    await expect(getModal(page).locator('form.config')).toBeVisible();
+    await expect(
+        getModal(page).locator('form.config'),
+    ).toBeVisible();
     
     expect(urls).toHaveLength(0);
 });
@@ -126,7 +132,9 @@ test.describe('--engine putout', () => {
         await open(page);
         await page.keyboard.press('F10');
         
-        await expect(getModal(page).locator('form.config')).toBeVisible();
+        await expect(
+            getModal(page).locator('form.config'),
+        ).toBeVisible();
     });
     
     test('CFG-09: the username field follows the auth checkbox', async ({page}) => {
@@ -148,7 +156,9 @@ test.describe('--engine putout', () => {
         await open(page);
         await page.keyboard.press('F10');
         
-        await expect(getModal(page).locator('form.config [data-name]')).toHaveCount(25);
+        await expect(
+            getModal(page).locator('form.config [data-name]'),
+        ).toHaveCount(25);
     });
     
     test('CFG-11: a changed checkbox is saved to the config file', async ({page, server}) => {
@@ -181,13 +191,17 @@ test.describe('--engine putout', () => {
     test('CFG-17: the config window opens again after Escape', async ({page}) => {
         await open(page);
         await page.keyboard.press('F10');
-        await expect(getModal(page).locator('form.config')).toBeVisible();
+        await expect(
+            getModal(page).locator('form.config'),
+        ).toBeVisible();
         await page.keyboard.press('Escape');
         await expect(getModal(page)).toHaveCount(0);
         
         await page.keyboard.press('F10');
         
-        await expect(getModal(page).locator('form.config')).toBeVisible();
+        await expect(
+            getModal(page).locator('form.config'),
+        ).toBeVisible();
     });
     
     test('CFG-18: the markup has the value after the change', async ({page}) => {
@@ -280,7 +294,9 @@ test.describe('--engine putout', () => {
         
         await open(page);
         await page.keyboard.press('F10');
-        await expect(getModal(page).locator('form.config')).toBeVisible();
+        await expect(
+            getModal(page).locator('form.config'),
+        ).toBeVisible();
         
         expect(urls.filter(isPutoutModule)).toHaveLength(1);
     });
@@ -329,7 +345,9 @@ test('CFG-23: the window has the select of the engine with two choices', async (
     await page.keyboard.press('F10');
     
     await expect(getEngineSelect(page)).toHaveValue('rendy');
-    await expect(getEngineSelect(page).locator('option')).toHaveText(['rendy', 'putout']);
+    await expect(
+        getEngineSelect(page).locator('option'),
+    ).toHaveText(['rendy', 'putout']);
 });
 
 test('CFG-24: a chosen engine is saved to the config file', async ({page, server}) => {
@@ -373,7 +391,9 @@ test.describe('--engine putout --no-config-auth --no-config-port', () => {
         await open(page);
         await page.keyboard.press('F10');
         
-        await expect(getModal(page).locator('form.config li[hidden]')).toHaveCount(4);
+        await expect(
+            getModal(page).locator('form.config li[hidden]'),
+        ).toHaveCount(4);
     });
 });
 
@@ -400,7 +420,9 @@ test.describe('--engine putout --menu supermenu', () => {
         
         await open(page);
         await page.keyboard.press('F10');
-        await expect(getModal(page).locator('form.config')).toBeVisible();
+        await expect(
+            getModal(page).locator('form.config'),
+        ).toBeVisible();
         
         expect(urls.filter(isPutoutModule)).toHaveLength(1);
     });

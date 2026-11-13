@@ -28,6 +28,7 @@ test('cloudcmd: client: config: putout: form: listen: add listeners', (t) => {
     
     const [[first], [second]] = root.addEventListener.args;
     const result = [first, second];
+    
     const expected = [
         'input',
         'change',
@@ -40,6 +41,7 @@ test('cloudcmd: client: config: putout: form: listen: add listeners', (t) => {
 test('cloudcmd: client: config: putout: form: listen: target with name', (t) => {
     const root = createRoot();
     const onAction = stub();
+    
     const target = {
         dataset: {
             name: 'js-port',
@@ -63,6 +65,7 @@ test('cloudcmd: client: config: putout: form: listen: target with name', (t) => 
 test('cloudcmd: client: config: putout: form: listen: input: no render', (t) => {
     const root = createRoot();
     const onAction = stub();
+    
     const target = {
         dataset: {
             name: 'js-port',
@@ -121,6 +124,7 @@ test('cloudcmd: client: config: putout: form: listen: stop', (t) => {
         changeEvent,
         changeHandler === root.handlers.change,
     ];
+    
     const expected = [
         'input',
         true,

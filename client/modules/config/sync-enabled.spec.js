@@ -57,6 +57,7 @@ test('cloudcmd: client: config: sync-enabled: checkbox is on', (t) => {
 test('cloudcmd: client: config: sync-enabled: each dependent follows its checkbox', (t) => {
     const username = createDependent('auth');
     const token = createDependent('oneFilePanel');
+    
     const root = createRoot({
         checkboxes: {
             auth: {
