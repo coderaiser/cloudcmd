@@ -214,6 +214,7 @@ function cloudcmdMiddle({modules, config}) {
             
             cutPrefix(prefix, req, next);
         }),
+        authentication(config),
         config('console') && konsole({
             online,
         }),
@@ -254,7 +255,6 @@ function cloudcmdMiddle({modules, config}) {
         setUrl,
         setSW,
         logout,
-        authentication(config),
         nomine({
             root: root(),
         }),
