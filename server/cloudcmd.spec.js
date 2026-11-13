@@ -274,3 +274,37 @@ test('cloudcmd: prefix: serve edward.js', async (t) => {
     t.equal(status, 200, 'should serve edward.js under prefix');
     t.end();
 });
+
+const {request: requestAuth} = serveOnce(cloudcmd, {
+    config: {
+        auth: true,
+        username: 'root',
+        password: 'secret',
+        dropbox: false,
+        console: true,
+        terminal: false,
+    },
+});
+
+test('cloudcmd: auth: should require authentication before editor and console routes', async (t) => {
+    const urls = [
+        '/edward/edward.js',
+        '/edward/edit.json',
+        '/dword/dword.js',
+        '/deepword/deepword.js',
+        '/console/console.js',
+        '/fileop/fileop.js',
+    ];
+    
+    const statuses = [];
+    
+    for (const url of urls) {
+        const {status} = await requestAuth.get(url);
+        statuses.push([url, status]);
+    }
+    
+    const expected = urls.map((url) => [url, 401]);
+    
+    t.deepEqual(statuses, expected);
+    t.end();
+});
