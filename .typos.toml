@@ -1,5 +1,5 @@
 [files]
 extend-exclude = ["ChangeLog"]
 
-[default.extend-words]
-cpy = "cpy"
+[default]
+extend-words = {cpy = "cpy"}
