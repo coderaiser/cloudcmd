@@ -269,4 +269,3 @@ test('rest: onPUT: copy: should reject unsafe name', async (t) => {
     t.ok(error, 'should call callback with error');
     t.end();
 });
-

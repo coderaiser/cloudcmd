@@ -498,4 +498,3 @@ function checkPut(name, body, callback) {
     if (!isFn(callback))
         throw Error('callback should be a function!');
 }
-
