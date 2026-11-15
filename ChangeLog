@@ -1,3 +1,8 @@
+2026.11.15, v19.23.2
+
+fix:
+- 4795cd07 server: reject path traversal in move and copy names
+
 2026.11.14, v19.23.1
 
 fix:
