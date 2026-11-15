@@ -220,6 +220,11 @@ function onPUT({name, fs, moveFiles, config, body}, callback) {
         if (isRootAll(rootDir, [to, from]))
             return callback(getWin32RootMsg());
         
+        const errorNames = checkNames(names);
+        
+        if (errorNames)
+            return callback(errorNames);
+        
         const msg = getMoveMsg(names);
         const fn = swap(callback, msg);
         
@@ -247,6 +252,11 @@ function onPUT({name, fs, moveFiles, config, body}, callback) {
         
         if (isRootAll(rootDir, [files.to, files.from]))
             return callback(getWin32RootMsg());
+        
+        const errorNames = checkNames(files.names);
+        
+        if (errorNames)
+            return callback(errorNames);
         
         const [errorFrom, resolvedFrom] = tryCatch(root.resolve, files.from, rootDir);
         
@@ -287,6 +297,26 @@ function onPUT({name, fs, moveFiles, config, body}, callback) {
         callback();
         break;
     }
+}
+
+function isSafeName(name) {
+    if (!isString(name) || !name)
+        return false;
+    
+    if (name === '.' || name === '..')
+        return false;
+    
+    return !/[/\\\0]/.test(name);
+}
+
+function checkNames(names) {
+    if (!Array.isArray(names))
+        return UserError('"names" should be an array');
+    
+    if (names.every(isSafeName))
+        return null;
+    
+    return UserError('"names" should contain only file names without path separators');
 }
 
 function rename(rootDir, from, to, fs, callback) {
@@ -468,3 +498,4 @@ function checkPut(name, body, callback) {
     if (!isFn(callback))
         throw Error('callback should be a function!');
 }
+

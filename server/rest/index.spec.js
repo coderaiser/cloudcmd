@@ -176,3 +176,97 @@ test('rest: getPacker: pack tar', (t) => {
     t.equal(typeof result, 'function', 'should return function');
     t.end();
 });
+
+const unsafeNames = [
+    '../outside/secret.txt',
+    '..',
+    '.',
+    '',
+    'a/b',
+    'a\\b',
+    '/etc/passwd',
+    'a\0b',
+];
+
+for (const unsafe of unsafeNames) {
+    test(`rest: onPUT: move: should reject unsafe name ${JSON.stringify(unsafe)}`, async (t) => {
+        const moveFiles = stub();
+        const callback = stub();
+        
+        await _onPUT({
+            name: '/move',
+            body: JSON.stringify({
+                from: '/source/nested',
+                to: '/',
+                names: [unsafe],
+            }),
+            config: () => '/root',
+            moveFiles,
+        }, callback);
+        
+        t.notCalled(moveFiles, 'should not move files');
+        t.end();
+    });
+}
+
+test('rest: onPUT: move: should reject non-array names', async (t) => {
+    const moveFiles = stub();
+    const callback = stub();
+    
+    await _onPUT({
+        name: '/move',
+        body: JSON.stringify({
+            from: '/a',
+            to: '/b',
+            names: '../x',
+        }),
+        config: () => '/root',
+        moveFiles,
+    }, callback);
+    
+    t.notCalled(moveFiles, 'should not move files');
+    t.end();
+});
+
+test('rest: onPUT: move: should pass safe names', async (t) => {
+    const emitter = {
+        on: () => emitter,
+    };
+    
+    const moveFiles = stub().returns(emitter);
+    const callback = stub();
+    
+    await _onPUT({
+        name: '/move',
+        body: JSON.stringify({
+            from: '/a',
+            to: '/b',
+            names: ['file.txt', '..hidden', 'my file'],
+        }),
+        config: () => '/root',
+        moveFiles,
+    }, callback);
+    
+    t.ok(moveFiles.called, 'should move files');
+    t.end();
+});
+
+test('rest: onPUT: copy: should reject unsafe name', async (t) => {
+    const callback = stub();
+    
+    await _onPUT({
+        name: '/copy',
+        body: JSON.stringify({
+            from: '/a',
+            to: '/b',
+            names: ['../x'],
+        }),
+        config: () => '/root',
+    }, callback);
+    
+    const [error] = callback.args[0];
+    
+    t.ok(error, 'should call callback with error');
+    t.end();
+});
+
