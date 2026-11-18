@@ -317,8 +317,10 @@ test('cloudcmd: auth: edward: fs api: should require authentication', async (t) 
     const {status: read} = await requestAuth.get('/edward/api/v1/fs/package.json');
     const {status: list} = await requestAuth.get('/edward/api/v1/fs/');
     const {status: write} = await requestAuth.put('/edward/api/v1/fs/pwned.txt', 'HACKED');
+    const result = [read, list, write];
+    const expected = [401, 401, 401];
     
-    t.deepEqual([read, list, write], [401, 401, 401]);
+    t.deepEqual(result, expected);
     t.end();
 });
 
@@ -326,8 +328,10 @@ test('cloudcmd: auth: dword: fs api: should require authentication', async (t) =
     const {status: read} = await requestAuth.get('/dword/api/v1/fs/package.json');
     const {status: list} = await requestAuth.get('/dword/api/v1/fs/');
     const {status: write} = await requestAuth.put('/dword/api/v1/fs/pwned.txt', 'HACKED');
+    const result = [read, list, write];
+    const expected = [401, 401, 401];
     
-    t.deepEqual([read, list, write], [401, 401, 401]);
+    t.deepEqual(result, expected);
     t.end();
 });
 
@@ -335,8 +339,10 @@ test('cloudcmd: auth: qword: fs api: should require authentication', async (t) =
     const {status: read} = await requestAuth.get('/qword/api/v1/fs/package.json');
     const {status: list} = await requestAuth.get('/qword/api/v1/fs/');
     const {status: write} = await requestAuth.put('/qword/api/v1/fs/pwned.txt', 'HACKED');
+    const result = [read, list, write];
+    const expected = [401, 401, 401];
     
-    t.deepEqual([read, list, write], [401, 401, 401]);
+    t.deepEqual(result, expected);
     t.end();
 });
 
@@ -344,7 +350,9 @@ test('cloudcmd: auth: deepword: fs api: should require authentication', async (t
     const {status: read} = await requestAuth.get('/deepword/api/v1/fs/package.json');
     const {status: list} = await requestAuth.get('/deepword/api/v1/fs/');
     const {status: write} = await requestAuth.put('/deepword/api/v1/fs/pwned.txt', 'HACKED');
+    const result = [read, list, write];
+    const expected = [401, 401, 401];
     
-    t.deepEqual([read, list, write], [401, 401, 401]);
+    t.deepEqual(result, expected);
     t.end();
 });
