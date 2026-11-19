@@ -141,4 +141,3 @@ test('cloudcmd: socket: auth toggled on at runtime: should reject without creden
     t.notOk(result);
     t.end();
 });
-
