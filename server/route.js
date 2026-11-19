@@ -17,6 +17,7 @@ import prefixer from './prefixer.js';
 import Template from './template.js';
 import {getColumns} from './columns.js';
 import {getThemes} from './theme.js';
+import {render} from './markup/render.js';
 
 const require = createRequire(import.meta.url);
 const {stringify} = JSON;
@@ -117,34 +118,7 @@ async function route({config, options, request, response}) {
  */
 function indexProcessing(config, options) {
     const oneFilePanel = config('oneFilePanel');
-    const noKeysPanel = !config('keysPanel');
-    const noContact = !config('contact');
-    const noConfig = !config('configDialog');
-    const noConsole = !config('console');
-    const noTerminal = !config('terminal');
     const {panel} = options;
-    
-    let {data} = options;
-    
-    if (noKeysPanel)
-        data = hideKeysPanel(data);
-    
-    if (oneFilePanel)
-        data = data
-            .replace('icon-move', 'icon-move none')
-            .replace('icon-copy', 'icon-copy none');
-    
-    if (noContact)
-        data = data.replace('icon-contact', 'icon-contact none');
-    
-    if (noConfig)
-        data = data.replace('icon-config', 'icon-config none');
-    
-    if (noConsole)
-        data = data.replace('icon-console', 'icon-console none');
-    
-    if (noTerminal)
-        data = data.replace('icon-terminal', 'icon-terminal none');
     
     const left = rendy(Template.panel, {
         side: 'left',
@@ -161,20 +135,13 @@ function indexProcessing(config, options) {
             className: '',
         });
     
-    const name = config('name');
-    
-    data = rendy(data, {
-        title: CloudFunc.getTitle({
-            name,
-        }),
+    return render(config('*'), options.data, {
         fm: left + right,
         prefix: getPrefix(config),
         config: stringify(config('*')),
         columns: getColumns()[config('columns')],
         themes: getThemes()[config('theme')],
     });
-    
-    return data;
 }
 
 function buildIndex(config, html, data) {
@@ -189,21 +156,4 @@ function buildIndex(config, html, data) {
         panel,
         data: html,
     });
-}
-
-export const _hideKeysPanel = hideKeysPanel;
-
-function hideKeysPanel(html) {
-    const keysPanel = '<div id="js-keyspanel" class="{{ className }}"';
-    const keysPanelRegExp = '<div id="?js-keyspanel"? class="?{{ className }}"?';
-    
-    const from = rendy(keysPanelRegExp, {
-        className: 'keyspanel',
-    });
-    
-    const to = rendy(keysPanel, {
-        className: 'keyspanel hidden',
-    });
-    
-    return html.replace(RegExp(from), to);
 }

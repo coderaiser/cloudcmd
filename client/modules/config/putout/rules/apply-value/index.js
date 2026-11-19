@@ -4,7 +4,7 @@ import {
     getName,
     setAttribute,
     toOptionName,
-} from '../../jsx.js';
+} from '#common/render/jsx';
 
 const isUndefined = (a) => typeof a === 'undefined';
 

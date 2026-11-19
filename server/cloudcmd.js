@@ -33,12 +33,11 @@ const __dirname = dirname(__filename);
 const {assign} = Object;
 const DIR = `${__dirname}/`;
 const DIR_ROOT = join(DIR, '..');
-const getDist = (isDev) => isDev ? 'dist-dev' : 'dist';
 
 const isDev = fullstore(process.env.NODE_ENV === 'development');
 
-const getIndexPath = (isDev) => path.join(DIR, '..', `${getDist(isDev)}/index.html`);
-const html = fs.readFileSync(getIndexPath(isDev()), 'utf8');
+const getIndexPath = () => path.join(DIR_ROOT, 'tmpl', 'index.hbs');
+const html = fs.readFileSync(getIndexPath(), 'utf8');
 
 const initAuth = currify(_initAuth);
 const notEmpty = (a) => a;

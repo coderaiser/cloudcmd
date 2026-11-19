@@ -159,20 +159,9 @@ test('cloudcmd: auth: accept: no auth', (t) => {
     t.end();
 });
 
-test('cloudcmd: getIndexPath: production', (t) => {
-    const isDev = false;
-    
-    const result = _getIndexPath(isDev);
-    const expected = path.join(__dirname, '..', 'dist', 'index.html');
-    
-    t.equal(result, expected);
-    t.end();
-});
-
-test('cloudcmd: getIndexPath: development', (t) => {
-    const isDev = true;
-    const result = _getIndexPath(isDev);
-    const expected = path.join(__dirname, '..', 'dist-dev', 'index.html');
+test('cloudcmd: getIndexPath', (t) => {
+    const result = _getIndexPath();
+    const expected = path.join(__dirname, '..', 'tmpl', 'index.hbs');
     
     t.equal(result, expected);
     t.end();

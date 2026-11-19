@@ -4,7 +4,6 @@
         "*.md",
         "app.json",
         "fontello.json",
-        "html",
         "fixture*"
     ],
     "rules": {

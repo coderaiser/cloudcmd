@@ -2,7 +2,7 @@ import {
     addFlag,
     getAttribute,
     hasAttribute,
-} from '../../jsx.js';
+} from '#common/render/jsx';
 
 export const report = () => 'Disable the control when the checkbox it depends on is off';
 export const include = () => [

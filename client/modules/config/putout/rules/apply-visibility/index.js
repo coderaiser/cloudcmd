@@ -3,7 +3,7 @@ import {
     getAttribute,
     hasAttribute,
     removeAttribute,
-} from '../../jsx.js';
+} from '#common/render/jsx';
 
 export const report = () => 'Hide the item when its option is off';
 export const include = () => [

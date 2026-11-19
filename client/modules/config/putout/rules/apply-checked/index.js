@@ -4,7 +4,7 @@ import {
     getName,
     hasAttribute,
     toOptionName,
-} from '../../jsx.js';
+} from '#common/render/jsx';
 
 export const report = () => 'Check the checkbox of an option that is on';
 export const include = () => [

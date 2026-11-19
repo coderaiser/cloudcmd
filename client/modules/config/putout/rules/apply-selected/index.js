@@ -5,7 +5,7 @@ import {
     getText,
     hasAttribute,
     toOptionName,
-} from '../../jsx.js';
+} from '#common/render/jsx';
 
 export const report = () => 'Select the option that is the value of the option of the config';
 export const include = () => [

@@ -4,7 +4,7 @@ import {
     getName,
     getText,
     toOptionName,
-} from '../../jsx.js';
+} from '#common/render/jsx';
 
 const {
     jsxClosingElement,
