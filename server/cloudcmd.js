@@ -137,6 +137,8 @@ function listen({prefixSocket, socket, config}) {
     const root = apart(config, 'root');
     const auth = initAuth(config);
     
+    socket.engine.use(authentication(config));
+    
     prefixSocket = getPrefix(prefixSocket);
     config.listen(socket, auth);
     

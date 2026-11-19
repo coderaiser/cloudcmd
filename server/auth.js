@@ -15,7 +15,7 @@ export default (config) => {
 
 function _middle(config, authentication, req, res, next) {
     const is = config('auth');
-    const {originalUrl} = req;
+    const originalUrl = req.originalUrl || req.url;
     
     if (!is || originalUrl.startsWith('/public/'))
         return next();
