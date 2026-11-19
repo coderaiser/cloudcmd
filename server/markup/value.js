@@ -2,8 +2,8 @@ import {escape} from '#common/render/jsx';
 
 const BACKSLASH = '\\';
 const CLASS_NAME = 'className';
-const IN_MARKUP = 'classNam&#101;';
-const IN_SCRIPT = `classNam${BACKSLASH}u0065`;
+const IN_MARKUP = 'className&#101;';
+const IN_SCRIPT = `className${BACKSLASH}u0065`;
 
 export const has = (data, name) => Object.hasOwn(data, name);
 

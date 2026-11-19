@@ -14,7 +14,7 @@ import {
     removeAttribute,
     setAttribute,
     toOptionName,
-} from './jsx.js';
+} from '#common/render/jsx';
 
 const parseFirst = (source) => {
     const ast = parse(source);

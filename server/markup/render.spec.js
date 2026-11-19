@@ -79,7 +79,7 @@ test('cloudcmd: server: markup: render: data: class name: file name', (t) => {
         fm: '<li>classNames.js</li>',
     });
     
-    t.match(result, '<li>classNam&#101;s.js</li>');
+    t.match(result, '<li>className&#101;s.js</li>');
     t.end();
 });
 
@@ -91,7 +91,7 @@ test('cloudcmd: server: markup: render: data: class name: config', (t) => {
     
     const [, argument] = result.match(/CloudCmd\((.*)\);/);
     
-    t.equal(argument, `{"a":"classNam${BACKSLASH}u0065"}`);
+    t.equal(argument, `{"a":"className${BACKSLASH}u0065"}`);
     t.end();
 });
 

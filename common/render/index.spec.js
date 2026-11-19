@@ -2,7 +2,7 @@ import {operator} from 'putout';
 import currify from 'currify';
 import {tryToCatch} from 'try-to-catch';
 import {test} from 'supertape';
-import {render} from './index.js';
+import {render} from '#common/render';
 
 const {addClassName} = operator;
 
@@ -10,6 +10,7 @@ const report = () => 'Add a class';
 const include = () => [
     'JSXElement',
 ];
+
 const isTag = currify((tag, path) => path.node.openingElement.name.name === tag);
 
 const addClass = currify((name, path) => {
