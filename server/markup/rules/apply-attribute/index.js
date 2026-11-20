@@ -7,10 +7,7 @@ const {
     stringLiteral,
 } = types;
 
-const PLACEHOLDER = /\{([\w-]+)\}/g;
-
 const isKnown = currify((data, [, name]) => has(data, name));
-const hasKnown = (text, data) => [...text.matchAll(PLACEHOLDER)].some(isKnown(data));
 const replace = currify((data, match, name) => has(data, name) ? toMarkup(data[name]) : match);
 
 export const report = () => 'Put the data into the value of the attribute';
@@ -30,4 +27,14 @@ export const fix = ({node}, {options}) => {
     const value = node.value.value.replace(PLACEHOLDER, replace(options.data));
     
     node.value = stringLiteral(value);
+};
+
+const PLACEHOLDER = /\{([\w-]+)\}/g;
+const hasKnown = (text, data) => {
+    for (const [, name] of text.matchAll(PLACEHOLDER)) {
+        if (has(data, name))
+            return true;
+    }
+    
+    return false;
 };
