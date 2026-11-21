@@ -1,3 +1,9 @@
+2026.11.21, v19.24.0
+
+feature:
+- 939d4231 server: socket: basic auth (close #488)
+- d956c33a cloudcmd: render: putout layer
+
 2026.11.15, v19.23.2
 
 fix:
