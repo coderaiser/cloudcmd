@@ -67,7 +67,7 @@ export const test = base.extend({
     // Extra files. Override with test.use({extraFiles: {'name': 'content'}}).
     extraFiles: [{}, {option: true}],
     
-    server: async ({flags, extraFiles}, use) => {
+    server: async ({flags, extraFiles}, use, testInfo) => {
         const dir = await mkdtemp(path.join(tmpdir(), 'cloudcmd-e2e-'));
         const root = path.join(dir, 'root');
         const home = path.join(dir, 'home');
@@ -95,14 +95,29 @@ export const test = base.extend({
                 ...process.env,
                 HOME: home,
             },
-            stdio: 'ignore',
+            stdio: ['ignore', 'pipe', 'pipe'],
         });
+        
+        let log = '';
+        const onData = (data) => {
+            log += data;
+        };
+        
+        child.stdout.on('data', onData);
+        child.stderr.on('data', onData);
         
         try {
             await waitForServer(url, child);
             await use({root, url, home});
         } finally {
             child.kill();
+            
+            if (testInfo.status !== testInfo.expectedStatus)
+                await testInfo.attach('server.log', {
+                    body: log || 'no output',
+                    contentType: 'text/plain',
+                });
+            
             await rm(dir, {
                 recursive: true,
                 force: true,

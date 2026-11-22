@@ -53,6 +53,13 @@ jobs:
         run: redrun test:e2e:client
       - name: Test E2E Menu
         run: redrun test:e2e:menu
+      - name: Upload E2E logs on failure
+        uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: e2e-test-results-node-${{ matrix.node-version }}
+          path: test-results/
+          retention-days: 14
       - name: Test
         run: redrun test
       - name: Coverage
