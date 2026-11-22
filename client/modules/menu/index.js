@@ -291,10 +291,10 @@ function download(type) {
         CloudCmd.log(`downloading file ${path}...`);
         
         /*
-          * if we send ajax request -
-          * no need in hash so we escape #
-          * and all other characters, like "%"
-          */
+         * if we send ajax request -
+         * no need in hash so we escape #
+         * and all other characters, like "%"
+         */
         const encodedPath = encodeURI(path).replace(/#/g, '#');
         const id = getIdBySrc(path);
         
