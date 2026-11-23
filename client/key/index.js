@@ -37,9 +37,9 @@ export const _listener = listener;
 
 function getChar(event) {
     /*
-      * event.keyIdentifier deprecated in chrome v51
-      * but event.key is absent in chrome <= v51
-      */
+     * event.keyIdentifier deprecated in chrome v51
+     * but event.key is absent in chrome <= v51
+     */
     const {
         key,
         shift,
