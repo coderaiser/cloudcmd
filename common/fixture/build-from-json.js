@@ -1,0 +1,30 @@
+export const files = [{
+    name: 'src',
+    size: '',
+    date: '01.01.2026',
+    time: '10:00:00',
+    owner: 'root',
+    mode: 'rwx r-x r-x',
+    type: 'directory',
+}, {
+    name: 'a.txt',
+    size: '1.00kb',
+    date: '02.01.2026',
+    time: '11:30:00',
+    owner: 'coderaiser',
+    mode: 'rw- r-- r--',
+    type: 'file',
+}, {
+    name: 'l',
+    size: '7b',
+    date: '03.01.2026',
+    time: '12:45:10',
+    owner: 'root',
+    mode: 'rwx rwx rwx',
+    type: 'file-link',
+}, {
+    name: 'b',
+    size: '0b',
+    mode: 'rw- r-- r--',
+    type: 'file',
+}];

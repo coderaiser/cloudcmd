@@ -235,6 +235,7 @@
     "#dom/storage": "./client/dom/storage.js",
     "#dom/rest": "./client/dom/rest.js",
     "#common/util": "./common/util.js",
+    "#common/fields": "./common/fields.js",
     "#common/omit": "./common/omit.js",
     "#common/cloudfunc": "./common/cloudfunc.js",
     "#common/entity": "./common/entity.js",

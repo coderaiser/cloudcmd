@@ -2,6 +2,12 @@ import {rendy} from 'rendy';
 import currify from 'currify';
 import {fullstore} from 'fullstore';
 import {encode} from '#common/entity';
+import {
+    getDotDotValues,
+    getFileValues,
+    getHeaderValues,
+    getSize,
+} from '#common/fields';
 
 const id = (a) => a;
 const NAME = 'Cloud Commander';
@@ -143,27 +149,14 @@ export const buildFromJSON = (params) => {
         path: htmlPath,
     });
     
-    const owner = 'owner';
-    const mode = 'mode';
-    
     const getFieldName = getHeaderField(sort, order);
-    
-    const name = getFieldName('name');
-    const size = getFieldName('size');
-    const date = getFieldName('date');
-    const time = getFieldName('time');
     
     const header = rendy(templateFile, {
         tag: 'div',
         attribute: 'data-name="js-fm-header" ',
         className: 'fm-header',
         type: '',
-        name,
-        size,
-        date,
-        time,
-        owner,
-        mode,
+        ...getHeaderValues(getFieldName),
     });
     
     /* сохраняем путь */
@@ -191,12 +184,9 @@ export const buildFromJSON = (params) => {
             attribute,
             className: '',
             type: 'directory',
-            name: linkResult,
-            size: '&lt;dir&gt;',
-            date: '--.--.----',
-            time: '--:--:--',
-            owner: '.',
-            mode: '--- --- ---',
+            ...getDotDotValues({
+                link: linkResult,
+            }),
         });
     }
     
@@ -204,19 +194,9 @@ export const buildFromJSON = (params) => {
         .filter(filterOutDotFiles({
             showDotFiles,
         }))
-        .map(updateField)
         .map((file) => {
             const name = encode(file.name);
             const link = prefix + FS + path + name;
-            
-            const {
-                type,
-                mode,
-                date,
-                time,
-                owner,
-                size,
-            } = file;
             
             const linkResult = rendy(templateLink, {
                 link,
@@ -232,13 +212,11 @@ export const buildFromJSON = (params) => {
                 tag: 'li',
                 attribute,
                 className: '',
-                type,
-                name: linkResult,
-                size,
-                date: formatDate(date),
-                time,
-                owner,
-                mode,
+                type: file.type,
+                ...getFileValues(file, {
+                    link: linkResult,
+                    formatDate,
+                }),
             });
         })
         .join('');
@@ -248,14 +226,6 @@ export const buildFromJSON = (params) => {
     return fileTable;
 };
 
-const updateField = (file) => ({
-    ...file,
-    date: file.date || '--.--.----',
-    time: file.time || '--:--:--',
-    owner: file.owner || 'root',
-    size: getSize(file),
-});
-
 function getAttribute(type) {
     if (type === 'directory')
         return '';
@@ -264,16 +234,6 @@ function getAttribute(type) {
 }
 
 export const _getSize = getSize;
-
-function getSize({size, type}) {
-    if (type === 'directory')
-        return '&lt;dir&gt;';
-    
-    if (/link/.test(type))
-        return '&lt;link&gt;';
-    
-    return size;
-}
 
 function _getHeaderField(sort, order, name) {
     const arrow = order === 'asc' ? '↑' : '↓';
