@@ -4,7 +4,7 @@ import {
     getFileValues,
     getHeaderValues,
     getSize,
-} from './fields.js';
+} from '#common/fields';
 
 const formatDate = (date) => `[${date}]`;
 const mark = (name) => `${name}!`;
