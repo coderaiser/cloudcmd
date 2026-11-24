@@ -1,5 +1,6 @@
 /* global DOM */
 import {getFields} from './get-fields.js';
+
 /**
  * Функция генерирует JSON из html-таблицы файлов и
  * используеться при первом заходе в корень
