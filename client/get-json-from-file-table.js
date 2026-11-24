@@ -1,4 +1,5 @@
 /* global DOM */
+import {getFields} from './get-fields.js';
 /**
  * Функция генерирует JSON из html-таблицы файлов и
  * используеться при первом заходе в корень
@@ -26,19 +27,10 @@ const notParent = (current) => {
 };
 
 const parse = (current) => {
-    const name = DOM.getCurrentName(current);
-    const size = DOM.getCurrentSize(current);
-    const owner = DOM.getCurrentOwner(current);
-    const mode = DOM.getCurrentMode(current);
-    const date = DOM.getCurrentDate(current);
     const type = DOM.getCurrentType(current);
     
     return {
-        name,
-        size,
-        mode,
-        owner,
-        date,
+        ...getFields(DOM, current),
         type,
     };
 };
