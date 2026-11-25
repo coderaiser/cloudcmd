@@ -163,7 +163,7 @@ export default {
     externals: [putoutExternal],
     ignoreWarnings: [{
         module: /@putout\/bundle/,
-        message: /the request of a dependency is an expression/,
+        message: /Dynamic module path|the request of a dependency is an expression/,
     }],
     optimization: {
         splitChunks,
