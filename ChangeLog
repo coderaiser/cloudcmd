@@ -1,3 +1,9 @@
+2026.11.25, v19.24.5
+
+feature:
+- 32b3aba5 cloudcmd: dword v16.0.6
+- 34e59ee4 cloudcmd: edward v16.0.6
+
 2026.11.25, v19.24.4
 
 fix:
