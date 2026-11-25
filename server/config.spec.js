@@ -1,7 +1,11 @@
 import {createRequire} from 'node:module';
 import {test, stub} from 'supertape';
 import {apiURL} from '#common/cloudfunc';
-import {createConfig, _cryptoPass} from './config.js';
+import {
+    createConfig,
+    _cryptoPass,
+    _connectionHandler,
+} from './config.js';
 import {connect} from '../test/before.js';
 
 const require = createRequire(import.meta.url);
@@ -101,5 +105,72 @@ test('config: middle: no', (t) => {
     middle(req, res, next);
     
     t.calledWithNoArgs(next, 'should call next');
+    t.end();
+});
+
+const getMessageListener = (manage) => {
+    const listeners = {};
+    const socket = {
+        emit: stub(),
+        send: stub(),
+        on: (name, fn) => {
+            listeners[name] = fn;
+        },
+    };
+    
+    _connectionHandler(manage, socket);
+    
+    return {
+        socket,
+        message: listeners.message,
+    };
+};
+
+const emitMessage = (payload) => {
+    const manage = createConfig();
+    const {socket, message} = getMessageListener(manage);
+    
+    message(payload);
+    
+    return socket;
+};
+
+const wrongType = [
+    'err',
+    'Error: Wrong data type!',
+];
+
+test('config: connection: message: null', (t) => {
+    const socket = emitMessage(null);
+    
+    t.calledWith(socket.emit, wrongType, 'should emit error');
+    t.end();
+});
+
+test('config: connection: message: array', (t) => {
+    const socket = emitMessage([]);
+    
+    t.calledWith(socket.emit, wrongType, 'should emit error');
+    t.end();
+});
+
+test('config: connection: message: string', (t) => {
+    const socket = emitMessage('hello');
+    
+    t.calledWith(socket.emit, wrongType, 'should emit error');
+    t.end();
+});
+
+test('config: connection: message: number', (t) => {
+    const socket = emitMessage(5);
+    
+    t.calledWith(socket.emit, wrongType, 'should emit error');
+    t.end();
+});
+
+test('config: connection: message: boolean', (t) => {
+    const socket = emitMessage(true);
+    
+    t.calledWith(socket.emit, wrongType, 'should emit error');
     t.end();
 });
