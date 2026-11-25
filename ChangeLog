@@ -1,3 +1,12 @@
+2026.11.25, v19.24.4
+
+fix:
+- 07b8f2a0 server: limit request body size to 1 MiB
+- 68f155de server: config: reject null payload in socket message
+
+feature:
+- d35f84b0 cloudcmd: pullout v5.0.1
+
 2026.11.25, v19.24.3
 
 fix:
