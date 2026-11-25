@@ -5,7 +5,7 @@ import {homedir} from 'node:os';
 import currify from 'currify';
 import wraptile from 'wraptile';
 import {tryToCatch} from 'try-to-catch';
-import pullout from 'pullout';
+import {pullout} from 'pullout';
 import * as ponse from 'ponse';
 import jonny from 'jonny';
 import jju from 'jju';

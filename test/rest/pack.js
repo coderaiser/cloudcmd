@@ -5,7 +5,7 @@ import {fileURLToPath} from 'node:url';
 import test from 'supertape';
 import tar from 'tar-stream';
 import gunzip from 'gunzip-maybe';
-import pullout from 'pullout';
+import {pullout} from 'pullout';
 import {serveOnce} from 'serve-once';
 import {cloudcmd} from '#server/cloudcmd';
 

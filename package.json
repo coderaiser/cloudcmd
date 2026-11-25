@@ -134,7 +134,7 @@
     "package-json": "^10.0.0",
     "pipe-io": "^4.0.1",
     "ponse": "^8.0.0",
-    "pullout": "^5.0.0",
+    "pullout": "^6.0.0",
     "putout": "^42.0.5",
     "qword": "^1.1.22",
     "redzip": "^4.6.1",

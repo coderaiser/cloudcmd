@@ -6,7 +6,7 @@ import {onezip} from 'onezip';
 import inly from 'inly';
 import wraptile from 'wraptile';
 import currify from 'currify';
-import pullout from 'pullout';
+import {pullout} from 'pullout';
 import json from 'jonny';
 import * as ponse from 'ponse';
 import {copymitter} from 'copymitter';
