@@ -7,7 +7,7 @@ import currify from 'currify';
 import apart from 'apart';
 import * as ponse from 'ponse';
 import {restafary} from 'restafary';
-import restbox from 'restbox';
+import {restbox} from 'restbox';
 import {konsole} from 'console-io';
 import {edward} from 'edward';
 import {dword} from 'dword';

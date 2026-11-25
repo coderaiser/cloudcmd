@@ -140,7 +140,7 @@
     "redzip": "^4.6.1",
     "rendy": "^5.0.0",
     "restafary": "^13.0.1",
-    "restbox": "^4.0.0",
+    "restbox": "^5.0.1",
     "shortdate": "^2.0.0",
     "socket.io": "^4.0.0",
     "socket.io-client": "^4.0.1",
