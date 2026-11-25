@@ -1,3 +1,10 @@
+2026.11.25, v19.24.2
+
+feature:
+- 54e5570f cloudcmd: restbox: v5.0.1
+- 20e6aac7 get-json-from-file-table: use fields
+- c44de9df common: fields: add
+
 2026.11.23, v19.24.1
 
 feature:
