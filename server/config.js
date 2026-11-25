@@ -18,6 +18,8 @@ import rootConfig from '../json/config.json' with {
     type: 'json',
 };
 
+const isPlainObject = (a) => a && typeof a === 'object' && !Array.isArray(a);
+
 const isUndefined = (a) => typeof a === 'undefined';
 
 const HOME = homedir();
@@ -116,6 +118,8 @@ const write = (filename, config) => {
     });
 };
 
+export const _connectionHandler = _connection;
+
 function _connection(manage, socket) {
     socket.emit('config', manage('*'));
     
@@ -124,7 +128,7 @@ function _connection(manage, socket) {
     });
     
     socket.on('message', (json) => {
-        if (typeof json !== 'object')
+        if (!isPlainObject(json))
             return socket.emit('err', 'Error: Wrong data type!');
         
         traverse(cryptoPass(manage, json));
