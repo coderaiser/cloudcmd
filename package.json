@@ -104,7 +104,7 @@
     "criton": "^2.0.0",
     "currify": "^4.0.0",
     "deepmerge": "^4.0.0",
-    "deepword": "^11.0.0",
+    "deepword": "^11.0.2",
     "dword": "^16.0.5",
     "edward": "^16.0.4",
     "es6-promisify": "^7.0.0",
