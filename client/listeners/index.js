@@ -69,7 +69,7 @@ function header() {
         
         const name = (el.dataset.name || '').replace('js-', '');
         
-        if (!/^(name|size|date)$/.test(name))
+        if (!/^(name|size|date|time)$/.test(name))
             return;
         
         const panel = getPath(el)
