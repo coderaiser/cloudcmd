@@ -1,3 +1,14 @@
+2026.11.25, v19.24.3
+
+fix:
+- 6bbe5811 server: config: reject null payload in socket message (https://github.com/coderaiser/cloudcmd/security/advisories/GHSA-3mph-4rv3-m93q)
+
+feature:
+- a9bed3ab cloudcmd: qword v1.1.22
+- 9517d45d cloudcmd: deepword v11.0.2
+- 18f3d429 cloudcmd: dword v16.0.5
+- 75799337 cloudcmd: edward v16.0.4 (#491)
+
 2026.11.25, v19.24.2
 
 feature:
