@@ -4,6 +4,7 @@ import {dirname} from 'node:path';
 import {pullout} from 'pullout';
 import {getQuery} from 'ponse';
 import {read} from 'redzip';
+import {MAX_BODY_SIZE} from '../limits.js';
 import root from '../root.js';
 import parse from './worker.js';
 
@@ -47,7 +48,10 @@ async function onGET(request, name, root) {
 }
 
 async function onPUT(request) {
-    const data = await pullout(request);
+    const data = await pullout(request, 'string', {
+        limit: MAX_BODY_SIZE,
+    });
+    
     return parse(data);
 }
 

@@ -149,3 +149,13 @@ test('cloudcmd: markdown: relative: path traversal', async (t) => {
     t.match(body, 'beyond root', 'should reject url-encoded traversal');
     t.end();
 });
+
+test('cloudcmd: markdown: put: too large', async (t) => {
+    const body = 'a'.repeat(1024 ** 2 + 1);
+    const {body: result} = await request.put('/api/v1/markdown', {
+        body,
+    });
+    
+    t.equal(result, 'stream is larger than 1048576 bytes!');
+    t.end();
+});

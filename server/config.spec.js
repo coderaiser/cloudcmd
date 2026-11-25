@@ -174,3 +174,25 @@ test('config: connection: message: boolean', (t) => {
     t.calledWith(socket.emit, wrongType, 'should emit error');
     t.end();
 });
+
+test('config: patch: too large', async (t) => {
+    const {port, done} = await connect({
+        configManager: createConfig(),
+    });
+    
+    const body = JSON.stringify({
+        name: 'a'.repeat(1024 ** 2 + 1),
+    });
+    
+    const response = await fetch(`http://127.0.0.1:${port}/api/v1/config`, {
+        method: 'PATCH',
+        body,
+    });
+    
+    const result = await response.text();
+    
+    await done();
+    
+    t.equal(result, 'stream is larger than 1048576 bytes!');
+    t.end();
+});

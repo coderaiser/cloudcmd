@@ -14,6 +14,7 @@ import {tryCatch} from 'try-catch';
 import criton from 'criton';
 import * as CloudFunc from '#common/cloudfunc';
 import exit from './exit.js';
+import {MAX_BODY_SIZE} from './limits.js';
 import rootConfig from '../json/config.json' with {
     type: 'json',
 };
@@ -214,7 +215,10 @@ async function patch(manage, request, response) {
 }
 
 async function patchConfig(manage, {name, request, response, cache}) {
-    const str = await pullout(request);
+    const str = await pullout(request, 'string', {
+        limit: MAX_BODY_SIZE,
+    });
+    
     const json = jonny.parse(str);
     
     traverse(cryptoPass(manage, json));

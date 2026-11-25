@@ -13,6 +13,7 @@ import {copymitter} from 'copymitter';
 import {moveFiles as _moveFiles} from '@cloudcmd/move-files';
 import {tryCatch} from 'try-catch';
 import * as CloudFunc from '#common/cloudfunc';
+import {MAX_BODY_SIZE} from '../limits.js';
 import root from '../root.js';
 import markdown from '../markdown/index.js';
 import info from './info.js';
@@ -102,7 +103,9 @@ function sendData(params, {fs, config, moveFiles}, callback) {
         return onGET(params, config, callback);
     
     if (method === 'PUT')
-        return pullout(p.request)
+        return pullout(p.request, 'string', {
+            limit: MAX_BODY_SIZE,
+        })
             .then((body) => {
                 onPUT({
                     name: p.name,

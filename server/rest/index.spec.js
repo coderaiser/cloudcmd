@@ -1,5 +1,7 @@
 import {test, stub} from 'supertape';
 import {tryToCatch} from 'try-to-catch';
+import {serveOnce} from 'serve-once';
+import {cloudcmd} from '#server/cloudcmd';
 import {
     _formatMsg,
     _getWin32RootMsg,
@@ -267,5 +269,27 @@ test('rest: onPUT: copy: should reject unsafe name', async (t) => {
     const [error] = callback.args[0];
     
     t.ok(error, 'should call callback with error');
+    t.end();
+});
+
+const {request} = serveOnce(cloudcmd, {
+    config: {
+        auth: false,
+    },
+    configManager: cloudcmd.createConfigManager(),
+});
+
+test('cloudcmd: rest: put: too large', async (t) => {
+    const body = JSON.stringify({
+        names: [
+            'a'.repeat(1024 ** 2 + 1),
+        ],
+    });
+    
+    const {body: result} = await request.put('/api/v1/copy', {
+        body,
+    });
+    
+    t.equal(result, 'stream is larger than 1048576 bytes!');
     t.end();
 });
