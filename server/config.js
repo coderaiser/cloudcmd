@@ -265,4 +265,3 @@ function cryptoPass(manage, json) {
         },
     ];
 }
-

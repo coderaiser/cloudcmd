@@ -139,4 +139,3 @@ test('cloudcmd: config socket: boolean password: should emit error and stay aliv
     t.deepEqual(result, expected);
     t.end();
 });
-
