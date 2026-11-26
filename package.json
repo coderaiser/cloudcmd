@@ -208,7 +208,6 @@
     "process": "^0.11.10",
     "readjson": "^2.0.1",
     "redlint": "^6.0.0",
-    "request": "^2.76.0",
     "rimraf": "^6.0.1",
     "scroll-into-view-if-needed": "^3.0.4",
     "serve-once": "^4.0.1",
