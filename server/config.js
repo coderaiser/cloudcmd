@@ -19,7 +19,13 @@ import rootConfig from '../json/config.json' with {
     type: 'json',
 };
 
+const isString = (a) => typeof a === 'string';
+
 const isPlainObject = (a) => a && typeof a === 'object' && !Array.isArray(a);
+
+const isValidPassword = ({password}) => {
+    return isUndefined(password) || isString(password);
+};
 
 const isUndefined = (a) => typeof a === 'undefined';
 
@@ -129,10 +135,13 @@ function _connection(manage, socket) {
     });
     
     socket.on('message', (json) => {
-        if (!isPlainObject(json))
+        if (!isPlainObject(json) || !isValidPassword(json))
             return socket.emit('err', 'Error: Wrong data type!');
         
-        traverse(cryptoPass(manage, json));
+        const [error] = tryCatch(() => traverse(cryptoPass(manage, json)));
+        
+        if (error)
+            return emit(socket, 'err', error);
         
         const send = () => {
             const data = CloudFunc.formatMsg('config', key(json));
@@ -256,3 +265,4 @@ function cryptoPass(manage, json) {
         },
     ];
 }
+
