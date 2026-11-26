@@ -1,3 +1,8 @@
+2026.11.26, v19.24.6
+
+fix:
+- e2b5085f cloudcmd: config socket: crash on non-string password
+
 2026.11.25, v19.24.5
 
 feature:
